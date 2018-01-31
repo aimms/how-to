@@ -1,0 +1,154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>How do I generate random numbers ? &#8212; How Do I in AIMMS 0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/Hacks.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="How do I use this, man ??" href="How do I use this, man.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="How do I use this, man.html" title="How do I use this, man ??"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="ContentIndex.html">How Do I in AIMMS 0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="figure align-center">
+<a class="reference external image-reference" href="https://aimms.com/"><img alt="_images/aimms-logo-s-rgb.png" src="_images/aimms-logo-s-rgb.png" style="width: 420.0px; height: 218.4px;" /></a>
+</div>
+<div class="section" id="how-do-i-generate-random-numbers">
+<h1>How do I generate random numbers ?<a class="headerlink" href="#how-do-i-generate-random-numbers" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://aimms.com/"><img alt="aimms" src="_images/aimms-logo-s-rgb.png" style="width: 60.0px; height: 31.2px;" /></a> has a number of distribution functions included, in order for you to be able to generate random numbers very efficiently. This capability might be extremely useful when you want to quickly populate a multidimensoionnal parameter.</p>
+<div class="section" id="generate-a-sequence-of-random-numbers-from-scratch">
+<h2>1/ Generate a sequence of random numbers from scratch<a class="headerlink" href="#generate-a-sequence-of-random-numbers-from-scratch" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Say I declare a parameter <img alt="par" src="_images/parameter.png" /> called “Traffic”, over 2 <img alt="index" src="_images/index.png" /> indices from the same set <img alt="set" src="_images/set.png" /> “Locations” with a size of 200 elements. That’s pretty much <code class="docutils literal"><span class="pre">200*200</span> <span class="pre">=</span> <span class="pre">40.000</span> <span class="pre">numbers</span></code> that you want to generate roughly between 0 and 200 vehicules.</p>
+<p>Alright, let’s create a set <img alt="set" src="_images/set.png" /> “Locations” in AIMMS, specify 2 indices “l1” and “l2”, and define it as <code class="docutils literal"><span class="pre">elementrange(1,201,1,&quot;Location-&quot;)</span></code>.</p>
+<a class="reference internal image-reference" href="_images/Locations.png"><img alt="_images/Locations.png" src="_images/Locations.png" style="width: 501.0px; height: 343.0px;" /></a>
+<p>Then let’s create the new parameter that we want to populate with data, over those 2 indices. To do so, just index this parameter over <cite>l1</cite> and <cite>l2</cite>, and put <code class="docutils literal"><span class="pre">uniform(0,200)</span></code> in his definition. Check the data of this parameter ( <strong>CTRL + D</strong> ), and see the result:</p>
+<a class="reference internal image-reference" href="_images/Data.png"><img alt="_images/Data.png" src="_images/Data.png" style="width: 801.6px; height: 441.2px;" /></a>
+<p>That’s good. But if we would plot our parameter distribution we would end up with a uniform distribution. <a class="reference external" href="https://aimms.com/"><img alt="aimms" src="_images/aimms-logo-s-rgb.png" style="width: 60.0px; height: 31.2px;" /></a> propose a lot of other different distributions:</p>
+</div></blockquote>
+<div class="sidebar">
+<p class="first sidebar-title">Normal and Log Normal Distributions</p>
+<img alt="http://mathworld.wolfram.com/images/eps-gif/NormalDistribution_651.gif" src="http://mathworld.wolfram.com/images/eps-gif/NormalDistribution_651.gif" />
+<img alt="http://mathworld.wolfram.com/images/eps-gif/LogNormalDistribution_800.gif" class="last" src="http://mathworld.wolfram.com/images/eps-gif/LogNormalDistribution_800.gif" />
+</div>
+<div class="topic">
+<p class="topic-title first">Normal Distribution</p>
+<p><span class="math">\(f(x)={\tfrac  {1}{\sigma {\sqrt  {2\pi }}}}\;\;{\mathrm  {e}}^{{-{\frac  {1}{2}}\left({\frac  {x-\mu }{\sigma }}\right)^{2}}}\)</span></p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Log-normal_distribution">https://en.wikipedia.org/wiki/Log-normal_distribution</a></p>
+</div>
+<div class="topic">
+<p class="topic-title first">Log Normal Distribution</p>
+<p><span class="math">\({\displaystyle f(x;\mu ,\sigma )={\frac {1}{x\sigma {\sqrt {2\pi }}}}\exp \left(-{\frac {(\ln x-\mu )^{2}}{2\sigma ^{2}}}\right)={\frac {1}{x}}f_{X}(\ln(x);\mu ,\sigma )}\)</span></p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Log-normal_distribution">https://en.wikipedia.org/wiki/Log-normal_distribution</a></p>
+</div>
+<p>This is <span class="red">red !</span> And <span class="blue">this part is blue</span>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Chris, isn’t it wonderful ?</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><img alt="doc" src="_images/Documentation.png" /> <a class="reference external" href="http://images.aimms.com/aimms/download/manuals/aimms3fr_distributionandcombinatoric.pdf">http://images.aimms.com/aimms/download/manuals/aimms3fr_distributionandcombinatoric.pdf</a></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can also develop your own <a class="reference internal" href="_images/favicon.png"><img alt="aimmsIcon" src="_images/favicon.png" style="width: 30.9px; height: 25.05px;" /></a> color box of course, with css… once again, but now we are prepared :)</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="ContentIndex.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">How do I generate random numbers ?</a><ul>
+<li><a class="reference internal" href="#generate-a-sequence-of-random-numbers-from-scratch">1/ Generate a sequence of random numbers from scratch</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="How do I use this, man.html"
+                        title="previous chapter">How do I use this, man ??</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Generate Random Numbers.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="How do I use this, man.html" title="How do I use this, man ??"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="ContentIndex.html">How Do I in AIMMS 0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, AIMMS Costumer Support Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+  </body>
+</html>

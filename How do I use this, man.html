@@ -1,0 +1,154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>How do I use this, man ?? &#8212; How Do I in AIMMS 0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/Hacks.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How do I generate random numbers ?" href="Generate Random Numbers.html" />
+    <link rel="prev" title="Welcome to How Do I in AIMMS !" href="ContentIndex.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Generate Random Numbers.html" title="How do I generate random numbers ?"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ContentIndex.html" title="Welcome to How Do I in AIMMS !"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="ContentIndex.html">How Do I in AIMMS 0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="how-do-i-use-this-man">
+<h1>How do I use this, man ??<a class="headerlink" href="#how-do-i-use-this-man" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-python-2-7-because-python-is-life">
+<h2>1/ Install Python 2.7, because Python is life<a class="headerlink" href="#install-python-2-7-because-python-is-life" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Double click the <code class="docutils literal"><span class="pre">python-2.7.14.msi</span></code> file In the folder <strong>Documentation Tools</strong> ,</li>
+<li>Python 2.7 will be installed in <code class="docutils literal"><span class="pre">C:\Python27</span></code>, because Python is life</li>
+<li>Install the Sphinx package (+ all depedencies) using the command “<code class="docutils literal"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sphinx</span></code>” from the <code class="docutils literal"><span class="pre">C:\Python27\Scripts</span></code> path (using a command prompt, we are a software company)</li>
+</ol>
+<div class="highlight-c"><div class="highlight"><pre><span></span>     <span class="cp">#include</span> <span class="cpf">&lt;windows.h&gt;</span><span class="cp"></span>
+     <span class="cp">#include</span> <span class="cpf">&lt;math.h&gt;</span><span class="cp"></span>
+<span class="hll">     <span class="cp">#define DLL_EXPORT(type) __declspec(dllexport) type WINAPI</span>
+</span>     <span class="cp">#define DLL_EXPORT_PROTO(type) extern &quot;C&quot; __declspec(dllexport) type WINAPI</span>
+<span class="hll">
+</span>     <span class="n">DLL_EXPORT_PROTO</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="n">Square</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">,</span> <span class="kt">double</span> <span class="n">b</span><span class="p">,</span> <span class="kt">double</span> <span class="n">c</span><span class="p">,</span> <span class="kt">double</span> <span class="n">x</span><span class="p">)</span>
+     <span class="p">{</span>
+             <span class="kt">double</span> <span class="n">Result</span> <span class="p">;</span>
+             <span class="n">Result</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">;</span>
+             <span class="k">return</span>  <span class="n">Result</span><span class="p">;</span>
+     <span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Chris, isn’t it wonderful ?</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li>well, this <a class="reference external" href="http://example.com/">http://example.com/</a></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can also develop your own color box of course, with css… once again, but now we are prepared :)</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="ContentIndex.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">How do I use this, man ??</a><ul>
+<li><a class="reference internal" href="#install-python-2-7-because-python-is-life">1/ Install Python 2.7, because Python is life</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ContentIndex.html"
+                        title="previous chapter">Welcome to How Do I in AIMMS !</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Generate Random Numbers.html"
+                        title="next chapter">How do I generate random numbers ?</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/How do I use this, man.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Generate Random Numbers.html" title="How do I generate random numbers ?"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ContentIndex.html" title="Welcome to How Do I in AIMMS !"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="ContentIndex.html">How Do I in AIMMS 0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, AIMMS Costumer Support Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+    </div>
+  </body>
+</html>

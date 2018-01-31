@@ -1,0 +1,11 @@
+How do I use this, man ??
+=============================
+
+1/ Install Python 2.7, because Python is life
+
+* Double click the "python-2.7.14.msi" file In the folder **Documentation Tools** , 
+* Python 2.7 will be installed in C:\Python27, because Python is life
+
+note.. 
+
+	Chris, isn't it wonderful ?
