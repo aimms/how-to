@@ -14,11 +14,11 @@
 
 				
 				
-				
-.. figure:: Images/aimms-logo-s-rgb.png
-				:scale: 70 %
-				:align: center
-				:target: https://aimms.com/
+.. This text will not be shown 				
+	.. figure:: Images/aimms-logo-s-rgb.png
+					:scale: 70 %
+					:align: center
+					:target: https://aimms.com/
 
 How do I generate random numbers ?
 =====================================
@@ -62,6 +62,37 @@ How do I generate random numbers ?
 	https://en.wikipedia.org/wiki/Log-normal_distribution
 	
 This is :red:`red !` And :blue:`this part is blue`.
+
+Code example (javascript):
+
+.. code-block:: javascript
+
+   // factory.js
+	AWF.Bus.subscribe({
+		onCollectTypes: function(collectedTypes, contextElQ) {
+			if(!contextElQ || contextElQ.awf.tags("placeable-widget-container")) {
+				collectedTypes.push("my-widget2");
+			}
+		},
+
+		onInitializeTags: function(elQ, type) {
+			if (type === "my-widget2") {
+				elQ.awf.tags(["placeable"], 'add');
+			}
+		},
+
+		onDecorateElement: function(elQ, type) {
+			if(type === "my-widget2") {
+				elQ.aimms_my_widget2();
+			}
+		},
+
+		onInitializeOptionTypes: function(elQ, type) {
+			if (type === "my-widget2") {
+				elQ.awf.optionTypes("contents", AWF.OptionUtil.createOptionType("string"));
+			}
+		},
+	});
 
    
 .. warning::

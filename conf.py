@@ -85,16 +85,30 @@ todo_include_todos = True
 # a list of builtin themes.
 #
 #html_theme = 'alabaster'
-html_theme = 'classic'
+html_theme = 'alabaster'
 html_theme_options = {
-    "stickysidebar": "true",
-    "rightsidebar": "false",
-    "collapsiblesidebar": "true",
-    "sidebarbtncolor": "black",
-    "sidebarlinkcolor": "black",
-    "sidebartextcolor": "#4D4D4D",
-    "sidebarbgcolor": "#dfdfdf",
-    "relbarbgcolor": "#4D4D4D"
+    "show_related" : "True",
+    "fixed_sidebar" : "true",
+    "sidebar_link": "black",
+    "sidebar_text": "#4D4D4D",
+    ## Page
+    "page_width" : "1400px",
+    "logo" : "aimms-logo-s-rgb.png",
+    "touch_icon" : "favicon.png",
+    "logo_name" : "How Do I ...",
+    #"logo_text_align" : "center",
+    "description" : "AIMMS Doc to the next level",
+    "description_font_style" : "oblique",
+    "font_family" : "'Kameron', serif;"
+
+##    "stickysidebar": "false",
+##    "rightsidebar": "false",
+##    "collapsiblesidebar": "false",
+##    "sidebarbtncolor": "black",
+##    "sidebarlinkcolor": "black",
+##    "sidebartextcolor": "#4D4D4D",
+##    "sidebarbgcolor": "#dfdfdf",
+##    "relbarbgcolor": "#4D4D4D"
 }
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -115,12 +129,16 @@ html_context = {
 #
 # This is required for the alabaster theme
 # refs: http://alabaster.readthedocs.io/en/latest/installation.html#sidebars
-#html_sidebars = {
-#    '**': [
-#        'relations.html',  # needs 'show_related': True theme option to display
-#        'searchbox.html',
-#    ]
-#}
+html_sidebars = {
+    '**': [
+        'about.html',
+        'localtoc.html',
+        'relations.html',  # needs 'show_related': True theme option to display
+        'sourcelink.html',
+        'searchbox.html'
+    ]
+}
+
 rst_prolog = "\n.. include:: .special.rst\n"
 
 # -- Options for HTMLHelp output ------------------------------------------
