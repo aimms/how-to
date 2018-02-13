@@ -99,7 +99,8 @@ html_theme_options = {
     #"logo_text_align" : "center",
     "description" : "AIMMS Doc to the next level",
     "description_font_style" : "oblique",
-    "font_family" : "'Kameron', serif;"
+    "font_family" : "'Kameron', serif;",
+    "show_powered_by" : "false"
 
 ##    "stickysidebar": "false",
 ##    "rightsidebar": "false",
@@ -132,9 +133,10 @@ html_context = {
 html_sidebars = {
     '**': [
         'about.html',
+        'navigation.html',
         'localtoc.html',
-        'relations.html',  # needs 'show_related': True theme option to display
-        'sourcelink.html',
+        #'relations.html',  # needs 'show_related': True theme option to display
+        #'sourcelink.html',
         'searchbox.html'
     ]
 }
