@@ -103,6 +103,7 @@ Code example (javascript):
 
    
 	* |doc| http://images.aimms.com/aimms/download/manuals/aimms3fr_distributionandcombinatoric.pdf 
+	* |aimms| htt
 
 .. note::
 
