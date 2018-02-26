@@ -97,7 +97,7 @@
 .. toctree::
    
    Generate Random Numbers
-
+   RemoveVeil 
 
 
 Indices and tables
