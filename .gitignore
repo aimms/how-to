@@ -1,0 +1,8 @@
+*.log
+*.lis
+*.err
+*.bak
+*.dmp
+*.dmp
+Musterlösung
+_build
