@@ -103,9 +103,74 @@ Code example (javascript):
 
    
 	* |doc| http://images.aimms.com/aimms/download/manuals/aimms3fr_distributionandcombinatoric.pdf 
-	* |aimms| htt
+
+.. only:: builder_html
+
+   See :download:`↓ this example AIMMS project <_AIMMSProjects/GenerateRandomNumbers.zip>`.
 
 .. note::
 
 		You can also develop your own |aimmsIcon| color box of course, with css... once again, but now we are prepared :)
 
+_______________________________________________________________________________
+
+
+.. raw:: html
+
+	<style>
+	.whatever input[type=text], select {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
+	.whatever input[type=email], select {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
+	.whatever textarea {
+		width: 100%;
+
+	}
+	
+	.whatever input[type=submit] {
+		width: 100%;
+		background-color: #4CAF50;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	.whatever input[type=submit]:hover {
+		background-color: #45a049;
+	}
+
+	div .whatever {
+		border-radius: 5px;
+		background-color: #f2f2f2;
+		padding: 20px;
+	}
+	</style>
+	<div class="whatever">
+		<h1> My bro, tell me your thoughts </h1>
+		<form action="https://formspree.io/arthur.dherbemont@aimms.com" method="POST">
+			<label>Email</label>
+			<input type="email" name="_replyto" size="50" placeholder="you@yourorganization.com" required>
+			<label>How Do I..</label>
+			<input type="text" name="company" cols="40" rows="5" size="50" placeholder="... tell you AIMMS drives me crazy ?" required>
+			<label>How Do AIMMS..</label>
+			<textarea cols="40" rows="5" size="50" placeholder="... could improve ?"></textarea>
+			<input type="submit" value="Send">
+		</form>
+	</div>
