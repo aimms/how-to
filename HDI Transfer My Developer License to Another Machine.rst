@@ -25,12 +25,12 @@
 					:target: https://aimms.com/
 
 How Do I Transfer My Developer License to Another Machine?
-=====================================
+==========================================================
 
-There may be situations where you will need to use |aimms| on a different machine but you only have one license. An AIMMS developer license can only be used on one machine at a time and this guide demonstrates how to transfer an AIMMS license such that it can be used on a different computer. [#]_
+There may be situations where you will need to use |aimms| on a different machine but you only have one license. An AIMMS developer license can only be used on one machine at a time and this guide demonstrates how to transfer an AIMMS license such that it can be used on a different computer. [#]_ [#]_
 
-1.	First deactivate your license from the machine it is currently installed on.
-------------------------------------------------------
+1.	First deactivate your license from the machine it is currently installed on
+-------------------------------------------------------------------------------------
 	
 	a. In AIMMS head to Tools –> License -> License Configuration…
 	
@@ -46,8 +46,10 @@ There may be situations where you will need to use |aimms| on a different machin
 
 
 	.. [#] *This applies to Personal Nodelock activated licenses as AIMMS Developer Licenses are typically installed through the Personal Nodelock method.*
-2.  Install your AIMMS license on the other machine.
-------------------------------------------------------	
+	.. [#] *For Free Academic license users make sure the license activation process is done within your university network*
+	
+2.  Install your AIMMS license on the other machine
+----------------------------------------------------	
 	a.  Open AIMMS and if no licenses have already been installed, the prompt for configuring a license will appear. Click 'Continue...'
 	
 		|NoValidLicense|
@@ -67,7 +69,7 @@ There may be situations where you will need to use |aimms| on a different machin
 		
 		iv.	 Input your Activation Code.  Choosing to save the activation code within your registry makes it easier to move the license back and forth.
 		
-			|InputActivationCode|
+				|InputActivationCode|
 		
 		v.  Choose the Personal Nodelock method if this license was activated as one before. If the license was activated as a Machine Nodelock, you can only choose that option for future activations.
 		
@@ -75,15 +77,10 @@ There may be situations where you will need to use |aimms| on a different machin
 			
 		vi.	If successful you will receive the following message:
 		
-			|SuccessfulActivation|
+			 |SuccessfulActivation|
 
    
 .. note::
 
 	If you encounter any issues with the license transfer process please contact support at support@aimms.com
-	
-.. seealso::
-
-   
-	* |doc| https://aimms.com/english/developers/resources/knowledge-base/kb00017 
 
