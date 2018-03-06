@@ -97,6 +97,7 @@
 .. toctree::
    
    Generate Random Numbers
+   How To Transfer My Developer License to Another Machine
 
 
 
