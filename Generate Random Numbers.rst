@@ -163,14 +163,15 @@ _______________________________________________________________________________
 	}
 	</style>
 	<div class="whatever">
-		<h1> My bro, tell me your thoughts </h1>
+		<h1> Is your question answered ? Please reach out to us</h1>
 		<form action="https://formspree.io/arthur.dherbemont@aimms.com" method="POST">
-			<label>Email</label>
+			<label>Your Email</label>
 			<input type="email" name="_replyto" size="50" placeholder="you@yourorganization.com" required>
-			<label>How Do I..</label>
-			<input type="text" name="company" cols="40" rows="5" size="50" placeholder="... tell you AIMMS drives me crazy ?" required>
-			<label>How Do AIMMS..</label>
-			<textarea cols="40" rows="5" size="50" placeholder="... could improve ?"></textarea>
+			<label>My whishlist to this documentation</label>
+			<textarea name="MessageText" cols="40" rows="5" size="50" placeholder="Type your message here..."></textarea>
+			<input type="checkbox" name="WebUI" value="WebUI"> I use the AIMMS WebUI<br>
+			<input type="checkbox" name="WinUI" value="WinUI"> I use the AIMMS WinUI<br>
 			<input type="submit" value="Send">
+			<input type="hidden" name="_next" value="how-to.aimms.com/FormThanksPage.html" />
 		</form>
 	</div>
