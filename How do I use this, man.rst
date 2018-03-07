@@ -10,8 +10,8 @@
 .. warning::
 	This page is hidden, so nobody can access it except if one knows the url. You are a lucky one.
 
-How do I use this, man ??
-==============================
+How to use this, man ?
+======================
 
 1/ Install Python 2.7, because Python is life
 --------------------------------------------------

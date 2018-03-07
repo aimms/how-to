@@ -20,8 +20,8 @@
 					:align: center
 					:target: https://aimms.com/
 
-How do I generate random numbers ?
-=====================================
+How to generate random numbers ?
+================================
 
 |aimms| has a number of distribution functions included, in order for you to be able to generate random numbers very efficiently. This capability might be extremely useful when you want to quickly populate a multidimensoionnal parameter.
 
