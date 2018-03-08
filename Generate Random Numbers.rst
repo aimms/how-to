@@ -30,7 +30,7 @@ How do I generate random numbers ?
 
  Say I declare a parameter |par| called "Traffic", over 2 |index| indices from the same set |set| "Locations" with a size of 200 elements. That's pretty much ``200*200 = 40.000 numbers`` that you want to generate roughly between 0 and 200 vehicules.
 
- Alright, let's create a set |set| "Locations" in AIMMS, specify 2 indices "l1" and "l2", and define it as ``elementrange(1,201,1,"Location-")``. 
+ Let's create a set |set| "Locations" in AIMMS, specify 2 indices "l1" and "l2", and define it as ``elementrange(1,201,1,"Location-")``. 
 
  .. image:: Images/Locations.png
 			:scale: 50 %
@@ -40,7 +40,9 @@ How do I generate random numbers ?
  .. image:: Images/Data.png
 			:scale: 40 %
 
- That's good. But if we would plot our parameter distribution we would end up with a uniform distribution. |aimms| propose a lot of other different distributions:
+ That's good. But if we would plot our parameter distribution we would end up with a uniform distribution. 
+ 
+ |aimms| propose a lot of other different distributions. Help yourself!
 
 
 .. sidebar:: Normal and Log Normal Distributions
@@ -61,44 +63,6 @@ How do I generate random numbers ?
 	
 	https://en.wikipedia.org/wiki/Log-normal_distribution
 	
-This is :red:`red !` And :blue:`this part is blue`.
-
-Code example (javascript):
-
-.. code-block:: javascript
-
-   // factory.js
-	AWF.Bus.subscribe({
-		onCollectTypes: function(collectedTypes, contextElQ) {
-			if(!contextElQ || contextElQ.awf.tags("placeable-widget-container")) {
-				collectedTypes.push("my-widget2");
-			}
-		},
-
-		onInitializeTags: function(elQ, type) {
-			if (type === "my-widget2") {
-				elQ.awf.tags(["placeable"], 'add');
-			}
-		},
-
-		onDecorateElement: function(elQ, type) {
-			if(type === "my-widget2") {
-				elQ.aimms_my_widget2();
-			}
-		},
-
-		onInitializeOptionTypes: function(elQ, type) {
-			if (type === "my-widget2") {
-				elQ.awf.optionTypes("contents", AWF.OptionUtil.createOptionType("string"));
-			}
-		},
-	});
-
-   
-.. warning::
-
-	Chris, isn't it wonderful ?
-	
 .. seealso::
 
    
@@ -107,10 +71,6 @@ Code example (javascript):
 .. only:: builder_html
 
    See :download:`↓ this example AIMMS project <_AIMMSProjects/GenerateRandomNumbers.zip>`.
-
-.. note::
-
-		You can also develop your own |aimmsIcon| color box of course, with css... once again, but now we are prepared :)
 
 _______________________________________________________________________________
 
@@ -164,14 +124,16 @@ _______________________________________________________________________________
 	</style>
 	<div class="whatever">
 		<h1> Is your question answered ? Please reach out to us</h1>
-		<form action="https://formspree.io/arthur.dherbemont@aimms.com" method="POST">
+		<form action="https://formspree.io/howto@aimms.com" method="POST">
 			<label>Your Email</label>
 			<input type="email" name="_replyto" size="50" placeholder="you@yourorganization.com" required>
-			<label>My whishlist to this documentation</label>
+			<label>Your whishlist to this documentation</label>
 			<textarea name="MessageText" cols="40" rows="5" size="50" placeholder="Type your message here..."></textarea>
-			<input type="checkbox" name="WebUI" value="WebUI"> I use the AIMMS WebUI<br>
-			<input type="checkbox" name="WinUI" value="WinUI"> I use the AIMMS WinUI<br>
+			<input type="checkbox" name="WebUI" value="Yes"> I use the AIMMS WebUI<br>
+			<input type="checkbox" name="WinUI" value="Yes"> I use the AIMMS WinUI<br>
 			<input type="submit" value="Send">
-			<input type="hidden" name="_next" value="how-to.aimms.com/FormThanksPage.html" />
+			<input type="hidden" name="_next" value="https://how-to.aimms.com/FormThanksPage.html" />
+			<input type="hidden" name="_cc" value="arthur.dherbemont@aimms.com" />
+
 		</form>
 	</div>
