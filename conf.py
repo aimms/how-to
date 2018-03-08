@@ -83,39 +83,32 @@ todo_include_todos = True
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
-#html_theme = 'alabaster'
+
 html_theme = 'alabaster'
+
+# Theme options are theme-specific and customize the look and feel of a theme
+# further.  For a list of options available for each theme, see the
+# documentation.
 html_theme_options = {
     "show_related" : "True",
     "fixed_sidebar" : "true",
     "sidebar_link": "black",
-    "sidebar_text": "#4D4D4D",
+    "sidebar_text": "#000081",
+	"sidebar_list": "blue",
     ## Page
     "page_width" : "1400px",
     "logo" : "aimms-logo-s-rgb.png",
     "touch_icon" : "favicon.png",
     "logo_name" : "How to ...",
     #"logo_text_align" : "center",
-    "description" : "AIMMS Doc to the next level",
+    "description" : "How-To: A Practical User Guide",
     "description_font_style" : "oblique",
     "font_family" : "'Kameron', serif;",
-    "show_powered_by" : "false"
+    "show_powered_by" : "false",
+	"note_bg" : "#fce7a4",
+	"note_border" : "grey"
 
-##    "stickysidebar": "false",
-##    "rightsidebar": "false",
-##    "collapsiblesidebar": "false",
-##    "sidebarbtncolor": "black",
-##    "sidebarlinkcolor": "black",
-##    "sidebartextcolor": "#4D4D4D",
-##    "sidebarbgcolor": "#dfdfdf",
-##    "relbarbgcolor": "#4D4D4D"
 }
-# Theme options are theme-specific and customize the look and feel of a theme
-# further.  For a list of options available for each theme, see the
-# documentation.
-#
-# html_theme_options = {}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
