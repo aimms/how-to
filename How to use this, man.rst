@@ -1,6 +1,6 @@
 .. |GitFolder| image:: Images/GitFolder.png
 				:scale: 70 %
-				:target: https://gitlab.aimms.com/Chris/aimms-how-do-i
+				:target: https://gitlab.aimms.com/Chris/aimms-how-to
 .. |PythonPath| image:: Images/PythonPath.png
 				:scale: 70 %
 .. |SphinxBuild| image:: Images/SphinxBuild.png
@@ -18,7 +18,7 @@ How to use this, man ?
 
 1. Double click the ``python-2.7.14.msi`` file  from here : https://www.python.org/downloads/release/python-2714/, 
 2. Python 2.7 will be installed in ``C:\Python27``, because Python is life
-3. Add python to your environment variables (thus you will be able to access it directly in the command prompt) by using https://superuser.com/questions/143119/how-do-i-add-python-to-the-windows-path (first answer)
+3. Add python to your environment variables (thus you will be able to access it directly in the command prompt) by using https://superuser.com/questions/143119/how-to-add-python-to-the-windows-path (first answer)
 
 .. note::
 	
@@ -37,7 +37,7 @@ How to use this, man ?
 
 3/ Get the Git folder source code
 --------------------------------------------------	
-* Now, synchronise the git we've already created. ``git@gitlab.aimms.com:Chris/aimms-how-do-i.git`` . you should end up with a bunch of files. If you can't access it, please reach out.
+* Now, synchronise the git we've already created. ``git@gitlab.aimms.com:Chris/aimms-how-to.git`` . you should end up with a bunch of files. If you can't access it, please reach out.
 * Here is what the folder looks like (without the non green-synchronised file): 
 	|GitFolder|
 
@@ -49,22 +49,22 @@ How to use this, man ?
 	3. run ``make html`` command. Voila:
 		|SphinxBuild|
 	4. find the HTML files in `_build\\html` (from this folder)
-	5. those should be exactly the same than those on https://how-do-i.aimms.com/ 
+	5. those should be exactly the same than those on https://how-to.aimms.com/ 
 
 .. note::
 	
 		Don't bother about the warning in red.. If however you have other red text in the console, please bother.
 
-5/ Create your own How-do-I
+5/ Create your own How-to
 ---------------------------
 
-The best way to create your own HowDoI is by far to check the source (.rst file) from this doc, or any doc found online. However, here are some very small stuff to get you onboard:
+The best way to create your own HowTo is by far to check the source (.rst file) from this doc, or any doc found online. However, here are some very small stuff to get you onboard:
 
-* In the git folder, copy-paste the :blue:`Generate Random Numbers.rst` , and rename it :red:`MyHowDoI.rst`
+* In the git folder, copy-paste the :blue:`Generate Random Numbers.rst` , and rename it :red:`MyHowTo.rst`
 * Open this file in notepad++, and start reading/modifing it
 * Open a command prompt from the current folder (containing the **make** files)
 * run ``make html``
-* Go to `_build\\html` : you should have a new html called `MyHowDoI.html` in there
+* Go to `_build\\html` : you should have a new html called `MyHowTo.html` in there
 
 6/ Protocol development work on HDI
 -----------------------------------
@@ -94,21 +94,21 @@ This section has a dual purpose.
 	
 		#. Fill it in as follows: 
 		
-			.. image:: Resources/Other/HowDoIMan/Images/HowDoIManCreateBranchNeedsClarification.PNG
+			.. image:: Resources/Other/HowToMan/Images/HowToManCreateBranchNeedsClarification.PNG
 		
 		#. Switch to this branch:
 	
-			.. image:: Resources/Other/HowDoIMan/Images/HowDoIManSwitchToBranchNeedsClarification.PNG
+			.. image:: Resources/Other/HowToMan/Images/HowToManSwitchToBranchNeedsClarification.PNG
 
 		#. Add a empty text file in the git root: ``NeedsClarification.rst`` (git add).
 
 		#. Commit and push using tortoise git.  The commit line in the context menu should include the name of your branch and your commit dialog should look like this:
 		
-			.. image:: Resources/Other/HowDoIMan/Images/HowDoIManFirstCommitNeedsClarification.PNG
+			.. image:: Resources/Other/HowToMan/Images/HowToManFirstCommitNeedsClarification.PNG
 			
 		   Your git log should look something like:
 			
-			.. image:: Resources/Other/HowDoIMan/Images/HowDoIManGitLogAfterFirstCommitNeedsClarification.PNG
+			.. image:: Resources/Other/HowToMan/Images/HowToManGitLogAfterFirstCommitNeedsClarification.PNG
 
 	#. Integrate with the other answer by editing ContentIndex.rst, section toctree.
 

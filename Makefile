@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = C:\Python27\Scripts\sphinx-build
-SPHINXPROJ    = HowDoIinAIMMS
+SPHINXPROJ    = HowToinAIMMS
 SOURCEDIR     = .
 BUILDDIR      = _build
 

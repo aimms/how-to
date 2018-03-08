@@ -5,7 +5,7 @@
 
 .. raw:: html
 	
-		<h1 align="center">Welcome to How-Do-I AIMMS documentation !</h1>
+		<h1 align="center">Welcome to How-To AIMMS documentation !</h1>
 
 		<div>
 		  <title>Bootstrap Example</title>
