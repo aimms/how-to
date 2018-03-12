@@ -38,7 +38,7 @@ This modification in the waitForCompletion argument reduces the inactive time of
 
 The example AIMMS project can be downloaded from :download:`Flow Shop - No Veil <Resources/AIMMSPRO/RemoveVeil/Downloads/4. Flow Shop - No Veil.zip>`
 
-.. Insert link to next article - click hear for if you want to have control on when to load results after a solve session. 
+.. Insert link to next article - click here for if you want to have control on when to load results after a solve session. 
  
 
 
