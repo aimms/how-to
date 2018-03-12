@@ -115,8 +115,8 @@ Table Of Content
    :titlesonly:
    
    Generate Random Numbers
+   RemoveVeil 
    How To Transfer My Developer License to Another Machine
-
 
 
 Indices and tables
