@@ -1,0 +1,21 @@
+.. |doc| image:: Images/icons/Documentation.png
+.. |aimmsIcon| image:: Images/icons/favicon.png
+			:scale: 15 %
+
+.. |aimms| image:: Images/aimms-logo-s-rgb.png
+				:scale: 10 %
+				:target: https://aimms.com/
+.. |set| image:: Images/icons/set.png
+.. |par| image:: Images/icons/parameter.png
+.. |var| image:: Images/icons/variable.png
+.. |cons| image:: Images/icons/constraint.png
+.. |index| image:: Images/icons/index.png
+.. |sp| image:: Images/icons/StringParameter.png
+
+				
+				
+.. This text will not be shown 				
+	.. figure:: Images/aimms-logo-s-rgb.png
+					:scale: 70 %
+					:align: center
+					:target: https://aimms.com/

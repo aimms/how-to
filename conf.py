@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# How Do I in AIMMS documentation build configuration file, created by
+# How to in AIMMS documentation build configuration file, created by
 # sphinx-quickstart on Wed Dec 13 15:09:51 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -47,7 +47,7 @@ source_suffix = '.rst'
 master_doc = 'ContentIndex'
 
 # General information about the project.
-project = u'How Do I in AIMMS'
+project = u'How to in AIMMS'
 copyright = u'2018, AIMMS Costumer Support Team'
 author = u'AIMMS Costumer Support Team'
 
@@ -83,39 +83,32 @@ todo_include_todos = True
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
-#html_theme = 'alabaster'
+
 html_theme = 'alabaster'
+
+# Theme options are theme-specific and customize the look and feel of a theme
+# further.  For a list of options available for each theme, see the
+# documentation.
 html_theme_options = {
     "show_related" : "True",
     "fixed_sidebar" : "true",
     "sidebar_link": "black",
-    "sidebar_text": "#4D4D4D",
+    "sidebar_text": "#000081",
+	"sidebar_list": "blue",
     ## Page
     "page_width" : "1400px",
     "logo" : "aimms-logo-s-rgb.png",
     "touch_icon" : "favicon.png",
-    "logo_name" : "How Do I ...",
+    "logo_name" : "How to ...",
     #"logo_text_align" : "center",
-    "description" : "AIMMS Doc to the next level",
+    "description" : "How-To: A Practical User Guide",
     "description_font_style" : "oblique",
     "font_family" : "'Kameron', serif;",
-    "show_powered_by" : "false"
+    "show_powered_by" : "false",
+	"note_bg" : "#fce7a4",
+	"note_border" : "grey"
 
-##    "stickysidebar": "false",
-##    "rightsidebar": "false",
-##    "collapsiblesidebar": "false",
-##    "sidebarbtncolor": "black",
-##    "sidebarlinkcolor": "black",
-##    "sidebartextcolor": "#4D4D4D",
-##    "sidebarbgcolor": "#dfdfdf",
-##    "relbarbgcolor": "#4D4D4D"
 }
-# Theme options are theme-specific and customize the look and feel of a theme
-# further.  For a list of options available for each theme, see the
-# documentation.
-#
-# html_theme_options = {}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -146,7 +139,7 @@ rst_prolog = "\n.. include:: .special.rst\n"
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'HowDoIinAIMMSdoc'
+htmlhelp_basename = 'HowToinAIMMSdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -173,7 +166,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'HowDoIinAIMMS.tex', u'How Do I in AIMMS Documentation',
+    (master_doc, 'HowToinAIMMS.tex', u'How to in AIMMS Documentation',
      u'AIMMS Costumer Support Team', 'manual'),
 ]
 
@@ -183,7 +176,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'howdoiinaimms', u'How Do I in AIMMS Documentation',
+    (master_doc, 'howtoinaimms', u'How to in AIMMS Documentation',
      [author], 1)
 ]
 
@@ -194,8 +187,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'HowDoIinAIMMS', u'How Do I in AIMMS Documentation',
-     author, 'HowDoIinAIMMS', 'One line description of project.',
+    (master_doc, 'HowToinAIMMS', u'How to in AIMMS Documentation',
+     author, 'HowToinAIMMS', 'One line description of project.',
      'Miscellaneous'),
 ]
 
