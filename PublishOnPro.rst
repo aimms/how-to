@@ -7,7 +7,7 @@ When you want to share the AIMMS application you developed with your colleagues,
 
 Running Example
 
-We choose the popular flowshop problem as an illustrative example because the time required to solve this problem depends on the number of machines and the number of jobs. This enables us to have longer solving times as reqiored, and thereby illustrate keeping the WebUI window interative for the user. The question is how to order the machines and how to order the jobs such that the total time required to process all jobs is minimal. More details about the problem can be found here, https://en.wikipedia.org/wiki/Flow_shop_scheduling. 
+We choose the popular flowshop problem as an illustrative example because the time required to solve this problem depends on the number of machines and the number of jobs. This enables us to have longer solving times as reqiored, and thereby illustrate keeping the WebUI window interactive for the user. The question is how to order the machines and how to order the jobs such that the total time required to process all jobs is minimal. More details about the problem can be found here, https://en.wikipedia.org/wiki/Flow_shop_scheduling. 
 
 The example AIMMS project can be downloaded from :download:`1. Flow Shop – WebUI – Dev version <Resources/AIMMSPRO/RemoveVeil/Downloads/1. Flow Shop - WebUI - Dev version.zip>`.
 
@@ -15,14 +15,14 @@ You can open this project in the AIMMS Development environment, open the WebUI, 
 
 Publishing on the AIMMS PRO platform
 
-To publish an application on the AIMMS PRO platform, the procedure containing the Solve statement in the model needs to be modified. In our exammple, the "Start solving the problem" button is linked to the procedure "prDoSOlve".
+To publish an application on the AIMMS PRO platform, the procedure containing the Solve statement in the model needs to be modified first. In our example, the "Start solving the problem" button is linked to the procedure "prDoSOlve".
 
 Perform the following steps:
 
 #.	In the model: create a new procedure, named: ``prSolve``
 #.	Give it the following body:
 
-	.. code-block:: C
+	.. code-block:: None
 
 		if pro::DelegateToServer( waitForCompletion: 1,
 			  completionCallback: 'pro::session::LoadResultsCallBack' )
