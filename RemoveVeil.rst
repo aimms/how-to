@@ -41,8 +41,6 @@ This modification in the waitForCompletion argument reduces the inactive time of
 
 The example AIMMS project can be downloaded from :download:`Flow Shop - No Veil <Resources/AIMMSPRO/RemoveVeil/Downloads/4. Flow Shop - No Veil.zip>`
 
- 
- 
 Summary
 -------
 
@@ -50,7 +48,7 @@ Perhaps a lot to do about almost nothing; but by simply changing the argument wa
 
 Next reading
 ------------
- 
+
 **Oops, I see a problem.**  The results are pushed back without any notification – suddenly data is changed on screen.  How can we give control back to the end-users, such that they can determine themselves when the results are shown? See `How to load the results of a server session at a convenient moment <https://how-to.aimms.com/LoadResultsSolverSession.html>
 
  
