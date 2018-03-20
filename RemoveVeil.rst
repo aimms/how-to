@@ -25,10 +25,11 @@ Keep WebUI Session Active
 
 We can keep the WebUI session active, or in other words - remove the veil by simply modifying the waitForCompletion argument in the pro::DelegateToServer statement. It can either be removed or the value set to 0. The code will look something like the following;
 
-	.. code-block:: C
+	.. code-block:: none
 
 		if pro::GetPROEndPoint() then
 			if pro::DelegateToServer(  
+				waitForCompletion  :  0,
 				completionCallback :  'pro::session::LoadResultsCallBack' )  
 			then return 1;
 			endif ;
