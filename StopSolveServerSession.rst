@@ -1,29 +1,39 @@
-Section 7 Let the end user interrupt
-------------------------------------
+How to stop the solver or server session?
+=========================================
 
-Interrupting the server process is easy; that can be done by calling the procedure ``pro::client::StopExecution`` in the PRO library; you’ll only need to know to:
+Introduction
+------------
 
-#.	which message queue the server process is listening. In our example, we only have one server session, and the message queue, a string, can be obtained by ``pro::session::CurrentSessionQueue()``. 
+Assuming we have full visibility of the server session via `progress <https://how-to.aimms.com/ProgressWindowServerSession.html>`_ or `intermediate results <https://how-to.aimms.com/RetrieveIntermediateResults.html>`_ , we may decide to stop a solver running in a server session, or to stop the server session entirely. This raises the question: "How to stop the solver or server session?".
 
-#.	Whether you want to interrupt execution of the procedure, or just of a currently executing solve statement (if any).
+Implementation
+--------------
 
-The mechanism is illustrated in the procedure below. In our example we only interrupt the solve.
+Interrupting the server session is easy as the support for this question is quite direct by calling the procedure ``pro::client::StopExecution`` in the AIMMS PRO library; you’ll only need to know:
 
-	.. code-block:: None
+#.	to which message queue the server process is listening. In our example, we only have one server session, and the message queue, a string, can be obtained by ``pro::session::CurrentSessionQueue()``. 
+
+#.	whether you want to interrupt execution of the procedure, or just of a currently executing solve statement (if any).
+
+The mechanism is illustrated in the code snippet below. Here we only interrupt a solve statement.
+
+	.. code-block:: none
 
 		Procedure prInterruptSolve {
 			Body: {
 				if pro::GetPROEndPoint() then
 					locSessionQueue := pro::session::CurrentSessionQueue();
 					pro::client::StopExecution( locSessionQueue,
-										  pro::AIMMSAPI_INTERRUPT_SOLVE );
+							 pro::AIMMSAPI_INTERRUPT_SOLVE );
 				endif ;
 				pSolveInterruptable := 0 ;
 			}
 			StringParameter locSessionQueue;
 		}
 
-You’ll only need to link this procedure to a button widget, such as ``BtnInterruptSolve`` in our example.
+You can do this from within a data session by linking this procedure to a button widget, such as ``BtnInterruptSolve`` in our example.
+
+.. note:: if you want to stop the server session instead of just the solver, you'll need to replace the ``pro::AIMMSAPI_INTERRUPT_SOLVE`` with ``pro::AIMMSAPI_INTERRUPT_EXECUTE`` in the above example.
 
 The user interface when the problem is being solved now looks as follows:
 
@@ -31,40 +41,13 @@ The user interface when the problem is being solved now looks as follows:
 
 The AIMMS project that does just this, can be downloaded from: :download:`7. Flow Shop - Interrupt <Resources/AIMMSPRO/RemoveVeil/Downloads/7. Flow Shop - Interrupt.zip>`.
 
-**Oops, I see a problem.**  We did a lot of work in communicating information between client and server session above. This will introduce overhead. This overhead is worthwhile if there is someone watching and interacting with the solver, but if no one bothers; then why do it? 
+Summary
+-------
 
-Section 8 communicate control changes to the server session
------------------------------------------------------------
+The direct support for interrupts makes interrupting a solver or a server session in AIMMS PRO quite easy.
 
-Once a solver session is started, you can send additional information using ``pro::DelegateToServer()``, provided you pass it the queue it already is listening to in the call; when ``pro::DelegateToServer`` is passed a message queue it will not start a new job, but add the enclosing procedure as a message to the existing queue. This is illustrated in the following code of ``prPassProgressSupplied``. 
+Further reading
+---------------
 
-	.. code-block:: None
-
-		Procedure prPassProgressSupplied {
-			Arguments: (pwbs);
-			Body: {
-				if pro::GetPROEndPoint() then
-					locSessionQueue := pro::session::CurrentSessionQueue();
-					if pro::DelegateToServer(requestQueue: locSessionQueue,
-							flags: pro::PROMFLAG_LIVE + 
-									 pro::PROMFLAG_PRIORITY) then
-						return 1;
-					endif ;
-				endif ;
-				pProgressWillBeSupplied := pwbs ;
-			}
-			StringParameter locSessionQueue;
-			Parameter pwbs {
-				Property: Input;
-			}
-		}
-		
-Note the use of the flag ``pro::PROMFLAG_PRIORITY`` ; this flag indicates that this procedure call should be executed during the running of the existing procedure.
-
-The user interface when the problem is being solved now looks as follows:
-
-.. image::  Resources/AIMMSPRO/RemoveVeil/Images/BB08_WebUI_screen.png 
-
-The AIMMS project that does just this, can be downloaded from: :download:`8. Flow Shop - Control <Resources/AIMMSPRO/RemoveVeil/Downloads/8. Flow Shop - Control.zip>`.
-
-**Oops, I see a problem.**  They are selling my favorite ice cream over there. I cannot resist...
+An interrupt is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided 
+`here <https://how-to.aimms.com/CommunicateDataChangesToServerSession.html>`_ .
