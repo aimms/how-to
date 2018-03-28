@@ -95,6 +95,7 @@ html_theme_options = {
     "sidebar_link": "black",
     "sidebar_text": "#000081",
 	"sidebar_list": "blue",
+    "sidebar_width": "300px",
     ## Page
     "page_width" : "1400px",
     "logo" : "aimms-logo-s-rgb.png",
@@ -103,7 +104,9 @@ html_theme_options = {
     #"logo_text_align" : "center",
     "description" : "How-To: A Practical User Guide",
     "description_font_style" : "oblique",
-    "font_family" : "'Kameron', serif;",
+    "font_family" : "'Arial', serif;",
+    "head_font_family": "'Arial', serif;",
+    "font_size": "14px",
     "show_powered_by" : "false",
 	"note_bg" : "#fce7a4",
 	"note_border" : "grey"
