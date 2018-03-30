@@ -1,10 +1,10 @@
 .. raw:: html
 
 		<div class="navbar">
-		  	<a href="http://aimms.com/english/about-us">About US</a>
+		  	<a href="http://aimms.com/english/about-us">About Us</a>
 		  	<a href="http://aimms.com/english/developers">Developers</a>
 		  	<a href="http://aimms.com/english/customers">Customers</a>
-		  	<a href="http://aimms.com/english/resources">Reources</a>
+		  	<a href="http://aimms.com/english/resources">Resources</a>
 		  	<a href="http://aimms.com/english/software-solutions/software">Software & Solutions</a>
   			<a class="navbarimg" href="http://www.aimms.com">
   			<img src="_images/favicon.png"  width="80" height="63" border="0"></a>
@@ -128,6 +128,7 @@ Table Of Content
    
    Generate Random Numbers
    PublishOnPro
+   AIMMSPROAppAvailbleOnPROandUsableInIDE
    RemoveVeil 
    How To Transfer My Developer License to Another Machine
 

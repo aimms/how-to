@@ -44,7 +44,7 @@ Perform the following steps:
 
 #.	Give it the following body:
 
-	.. code-block:: None
+	.. code-block:: none
 
 		if pro::DelegateToServer( waitForCompletion: 1,
 			  completionCallback: 'pro::session::LoadResultsCallBack' )
