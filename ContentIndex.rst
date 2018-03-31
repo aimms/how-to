@@ -213,12 +213,13 @@ Table Of Content
 .. toctree::
    :maxdepth: 2
    :titlesonly:
-   
-   Generate Random Numbers
-   PublishOnPro
-   AIMMSPROAppAvailbleOnPROandUsableInIDE
-   RemoveVeil 
-   How To Transfer My Developer License to Another Machine
+
+   C_Deployment
+   C_Language
+   C_UI
+   C_Mathematical Modeling
+   C_Other
+   C_Solvers
 
 
 Indices and tables
