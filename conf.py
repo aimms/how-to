@@ -90,9 +90,9 @@ html_theme = 'alabaster'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    "show_related" : "True",
-    "fixed_sidebar" : "true",
-    "sidebar_link": "black",
+    "show_related" : "False",
+    "fixed_sidebar" : "True",
+    "sidebar_link": "Black",
     "sidebar_text": "#000081",
 	"sidebar_list": "blue",
     "sidebar_width": "300px",
