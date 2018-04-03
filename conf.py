@@ -118,7 +118,7 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 html_context = {
-    'css_files': ['_static/Hacks.css'],
+    'css_files': ['_static/Hacks.css', '_static/custom.css'],
 }
 
 # Custom sidebar templates, must be a dictionary that maps document names
