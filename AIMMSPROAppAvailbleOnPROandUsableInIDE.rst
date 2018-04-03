@@ -48,4 +48,5 @@ The ``pro::DelegateToServer`` statement is executed only if the current AIMMS in
 The AIMMS project for running Flowshop example can be downloaded from: :download:`3. Flow Shop - Enable development testing <Resources/AIMMSPRO/RemoveVeil/Downloads/3. Flow Shop - Enable development testing.zip>`.
 
 The next article in this AIMMS PRO series shows how to keep the end user interface active while a solve procedure is in process. Read `How to keep the AIMMS WebUI interactive while a solve process is running in the background?  <https://how-to.aimms.com/RemoveVeil.html>`_
- 
+
+.. include:: includes/form.def
