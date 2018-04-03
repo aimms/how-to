@@ -4,18 +4,24 @@ How to stop the solver or server session?
 Introduction
 ------------
 
-Assuming we have full visibility of the server session via `progress <https://how-to.aimms.com/ProgressWindowServerSession.html>`_ or `intermediate results <https://how-to.aimms.com/RetrieveIntermediateResults.html>`_ , we may decide to stop a solver running in a server session, or to stop the server session entirely. This raises the question: "How to stop the solver or server session?".
+Assuming we have full control of the server session via `progress <https://how-to.aimms.com/ProgressWindowServerSession.html>`_ or `intermediate results <https://how-to.aimms.com/RetrieveIntermediateResults.html>`_, we may decide to stop a solve process running in the server session, or to entirely kill the server session. This article takes you through the steps to stop a solve process or a server session from the client side. 
+
+.. the actual difference between the solver and the server session is not clear. 
+
+.. Changed the last sentence from "This raises the question "How to stop the solver or server session?" to avoid repitition as the question is already the title of the page.
 
 Implementation
 --------------
 
-Interrupting the server session is easy as the support for this question is quite direct by calling the procedure ``pro::client::StopExecution`` in the AIMMS PRO library; you’ll only need to know:
+Interrupting the server session is very direct and can be done by simply calling the AIMMS PRO library procedure, ``pro::client::StopExecution`` . However,  you will need to know
 
-#.	to which message queue the server process is listening. In our example, we only have one server session, and the message queue, a string, can be obtained by ``pro::session::CurrentSessionQueue()``. 
+#.	to which message queue is the server process listening? In our example, we have only one server session, and the message queue - a string, can be obtained by using ``pro::session::CurrentSessionQueue()``. 
+
+.. please explain what are the different message queues, and what should the user know about them ? 
 
 #.	whether you want to interrupt execution of the procedure, or just of a currently executing solve statement (if any).
 
-The mechanism is illustrated in the code snippet below. Here we only interrupt a solve statement.
+The mechanism is illustrated in the code snippet below. Here we interrupt only a solve statement.
 
 	.. code-block:: none
 
@@ -31,23 +37,25 @@ The mechanism is illustrated in the code snippet below. Here we only interrupt a
 			StringParameter locSessionQueue;
 		}
 
+
+.. a brief explanation in words for the procedure would be good. This is only giving a copy - paste example and not teaching me anything
+
 You can do this from within a data session by linking this procedure to a button widget, such as ``BtnInterruptSolve`` in our example.
 
-.. note:: if you want to stop the server session instead of just the solver, you'll need to replace the ``pro::AIMMSAPI_INTERRUPT_SOLVE`` with ``pro::AIMMSAPI_INTERRUPT_EXECUTE`` in the above example.
+.. note:: If you want to stop the server session instead of the solver, you will need to replace ``pro::AIMMSAPI_INTERRUPT_SOLVE`` with ``pro::AIMMSAPI_INTERRUPT_EXECUTE`` in the above code.
 
-The user interface when the problem is being solved now looks as follows:
+Now, the user interface when the problem is being solved looks as follows.
 
 .. image::  Resources/AIMMSPRO/RemoveVeil/Images/BB07_WebUI_screen.png 
 
-The AIMMS project that does just this, can be downloaded from: :download:`7. Flow Shop - Interrupt <Resources/AIMMSPRO/RemoveVeil/Downloads/7. Flow Shop - Interrupt.zip>`.
+The example AIMMS project with the above demonstrated procedures can be downloaded from :download:`7. Flow Shop - Interrupt <Resources/AIMMSPRO/RemoveVeil/Downloads/7. Flow Shop - Interrupt.zip>`.
 
 Summary
 -------
 
-The direct support for interrupts makes interrupting a solver or a server session in AIMMS PRO quite easy.
+The direct support for interruptions makes interrupting a solver or a server session in AIMMS PRO very easy.
 
 Further reading
 ---------------
 
-An interrupt is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided 
-`here <https://how-to.aimms.com/CommunicateDataChangesToServerSession.html>`_ .
+An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided `here <https://how-to.aimms.com/CommunicateDataChangesToServerSession.html>`_ .
