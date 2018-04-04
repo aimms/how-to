@@ -9,18 +9,16 @@
 .. |space| image:: Images/ThanksSmileySpace.gif
 
 			
-				
-.. This text will not be shown 				
-	.. figure:: Images/aimms-logo-s-rgb.png
-					:scale: 70 %
-					:align: center
-					:target: https://aimms.com/
-
+		
+Thanks You!
+-------------
+		
 .. raw:: html
 
-	<h1 class="thanks" align=center style=" font-size:  500%; font-weight: bold; "> Thank you AIMMSian for making this doc better !</h1>
-
-.. kcskcjn
+	<h1 class="thanks" align=center style=" font-size:  500%; font-weight: bold; "> Thank you AIMMSian for making this documentation better !</h1>
+	<br>
+	<br>
+	
 
 	
 |space|

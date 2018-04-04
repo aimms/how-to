@@ -90,11 +90,12 @@ html_theme = 'alabaster'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    "show_related" : "True",
-    "fixed_sidebar" : "true",
-    "sidebar_link": "black",
+    "show_related" : "False",
+    "fixed_sidebar" : "True",
+    "sidebar_link": "Black",
     "sidebar_text": "#000081",
 	"sidebar_list": "blue",
+    "sidebar_width": "300px",
     ## Page
     "page_width" : "1400px",
     "logo" : "aimms-logo-s-rgb.png",
@@ -103,7 +104,9 @@ html_theme_options = {
     #"logo_text_align" : "center",
     "description" : "How-To: A Practical User Guide",
     "description_font_style" : "oblique",
-    "font_family" : "'Kameron', serif;",
+    "font_family" : "'Arial', serif;",
+    "head_font_family": "'Arial', serif;",
+    "font_size": "14px",
     "show_powered_by" : "false",
 	"note_bg" : "#fce7a4",
 	"note_border" : "grey"
@@ -115,7 +118,7 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 html_context = {
-    'css_files': ['_static/Hacks.css'],
+    'css_files': ['_static/Hacks.css', '_static/custom.css'],
 }
 
 # Custom sidebar templates, must be a dictionary that maps document names
