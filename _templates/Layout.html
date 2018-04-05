@@ -1,0 +1,11 @@
+{# Import the theme's layout. #}
+{% extends "!layout.html" %}
+
+{% block sidebartitle %}
+
+ <a href="{{ pathto(master_doc) }}">
+	<img src="{{ pathto('_static/AIMMS_logo_H_RGB_rev.png', 1) }}" class="logo" alt="Logo"/></a>
+
+{% include "searchbox.html" %}
+
+{% endblock %}

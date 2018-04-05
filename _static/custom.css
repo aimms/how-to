@@ -1,11 +1,16 @@
+h1, h2, h3 p{
+  font-family:Arial,sans-serif;
+}
 .navbar {
   overflow: hidden;
-  background-color: #213069;
+  background-color: #000081;
   position: fixed !important;
   height: 70px;
   top: 0;
   width: 100%;
   left:-1px;
+  max-width: 1500px
+  color:white;
 }
 
 .navbar a {
@@ -14,7 +19,8 @@
   color: white;
   font-weight:bold;
   text-align: center;
-  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-top: 25px;
   padding-left:15px;
   padding-right:15px;
   text-decoration: none;
@@ -31,7 +37,8 @@
 
 .navbar a:hover {
   color: #F7F8F9;
-  text-decoration: underline;
+  #text-decoration: underline;
+  background: rgba(255,255,255,0.1);
 }
 
 
@@ -85,4 +92,12 @@ div.body p{
   margin-top: 30px;
   height: 1500px; /* Used in this example to enable scrolling */
   width:800px;
+}
+
+div.box h1, .wy-breadcrumbs li a{
+  color:royalblue;
+}
+
+.wy-side-nav-search, .wy-menu-vertical a:active{
+  background-color: royalblue
 }
