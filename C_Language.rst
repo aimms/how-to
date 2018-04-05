@@ -24,4 +24,3 @@ AIMMS Language
 .. toctree::
 	
 	Generate Random Numbers
-	AIMMSPROAppAvailbleOnPROandUsableInIDE
