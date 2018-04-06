@@ -4,12 +4,12 @@ How to load the results of a server session at a convenient moment?
 Introduction
 ------------
 
-When the ``waitForCompletion`` argument of ``pro::DelegateToServer`` is 0, both the data session and the server session run in parallel. This allows the end user to browse and modify data while the server session is running. However, at the end of the server session, the results are stored back in the data session. This may happen at an akward moment. This raises the question: "How to load the results of a server session at a convenient moment?".
+When the ``waitForCompletion`` argument of ``pro::DelegateToServer`` is 0, both the data session and the server session run in parallel. This allows the end user to browse and modify data while the server session is running in the background. However, at the end of the server session, the results are loaded back in to the data session. This may happen unannounced which is not a good user interface design. This article shows you how to control the loading back of server session results manually. 
 
 Why is this happening?
 ----------------------
 
-Let's take a look at a typical ``pro::DelegateToServer`` call:
+Let's take a look at the typical ``pro::DelegateToServer`` call:
 
 	.. code-block:: none
 
@@ -20,12 +20,14 @@ Let's take a look at a typical ``pro::DelegateToServer`` call:
 			endif ;
 		endif ;
 
-So what is actually happening at the end of ``pro::DelegateToServer(...)`` server session side? Then the callback procedure, here ``pro::session::LoadResultsCallBack``, is called data session side. This procedure just loads the data from the output case created by the server session, identified by its argument ``requestId``. 
+So what is actually happening at the end of ``pro::DelegateToServer(...)`` on server session side? Then the callback procedure, here ``pro::session::LoadResultsCallBack``, is called data session side. This procedure just loads the data from the output case created by the server session,identified by its argument ``requestId``. 
+
+.. The above paragraph seems incomplete, especially the first sentence. It is not clearly explaining the backgroun process in words. Also, requestId is not mentioned anywhere before, and is used in an explanation
 
 Approach taken
 --------------
 
-So if we capture this ``requestId``, we can let the user select the moment of that case load. Our implementation consists of the following small steps:
+If we capture this ``requestId``, we can let the user control when to load the data of that particular case file. To do this, follow the below steps
 
 #. Stash the ``requestId`` in a string parameter via a simple administration procedure
 
