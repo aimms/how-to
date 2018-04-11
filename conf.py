@@ -153,7 +153,7 @@ html_sidebars = {
     ]
 }
 
-rst_prolog = "\n.. include:: .special.rst\n"
+rst_prolog = "\n.. include:: special.rst\n"
 
 # -- Options for HTMLHelp output ------------------------------------------
 
