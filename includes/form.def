@@ -57,7 +57,7 @@ _______________________________________________________________________________
 	</style>
 	<div class="whatever">
 		<form action="https://formspree.io/howto@aimms.com" method="POST">
-			<h4 style=" font-weight: bold; margin-top: 4px;">Was this answer usefull ? (*)</h4>
+			<h4 style=" font-weight: bold; margin-top: 4px;">Was this answer useful ? (*)</h4>
 			<input type="radio" name="Usefull" value="Yes" required> Yes<br>
 			<input type="radio" name="Usefull" value="No" required> No<br><br>
 			<label>Your e-mail (optional)</label>
