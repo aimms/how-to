@@ -4,12 +4,12 @@ How to load the results of a server session at a convenient moment?
 Introduction
 ------------
 
-When the ``waitForCompletion`` argument of ``pro::DelegateToServer`` is 0, both the data session and the server session run in parallel. This allows the end user to browse and modify data while the server session is running in the background. However, at the end of the server session, the results are loaded back in to the data session. This may happen unannounced which is not a good user interface design. This article shows you how to control the loading back of server session results manually. 
+If the ``waitForCompletion`` argument of ``pro::DelegateToServer`` is 0, both the data session and the server session run in parallel. This allows the end user to browse and modify data while a delegated procedure is executed on the server session in the background. However, at the end of execution, the results are loaded back in to the data session without any warning. This unannounced loading of data is not a good UI design and this article presents the approach to manually control this data transfer between the data and server sessions. 
 
-Why is this happening?
+What is happening here?
 ----------------------
 
-Let's take a look at the typical ``pro::DelegateToServer`` call:
+A typical ``pro::DelegateToServer`` call looks as below:
 
 	.. code-block:: none
 
@@ -20,29 +20,20 @@ Let's take a look at the typical ``pro::DelegateToServer`` call:
 			endif ;
 		endif ;
 
-So what is actually happening at the end of ``pro::DelegateToServer(...)`` on server session side? Then the callback procedure, here ``pro::session::LoadResultsCallBack``, is called data session side. This procedure just loads the data from the output case created by the server session,identified by its argument ``requestId``. 
+Any procedure written after the above call will be executed on the server session and the results are stored as a data casefile with a certain ``RequestID``, a predefined AIMMS identifier. If the `completionCallback` argument is the predefined  procedure ``pro::session::LoadResultsCallBack``, the aforementioned casefile is loaded onto the data session automatically. ``pro::session::LoadResultsCallBack`` has ``RequestID`` as a local input argument.
 
-.. The above paragraph seems incomplete, especially the first sentence. It is not clearly explaining the backgroun process in words. Also, requestId is not mentioned anywhere before, and is used in an explanation
+If you want to manually trigger this loading of results, you need to know the ``RequestID`` of the casefile you want to load, a procedure to load this casefile, and a button to run this procedure. The appraoch needed is summarized below:
 
-Approach taken
+#. Retrieve the ``RequestID`` in a string parameter using a simple assignment procedure.
+
+#. Define the `completionCallback` argument of ``pro::DelegateToServer`` call as this procedure to trigger the retrieval. 
+
+#. Create a procedure to load the casefile corresponding to the retrieved ``RequestID`` and link it to a button on the user interface. 
+
+Step 1.  Retrieving the ``RequestID``
 --------------
 
-If we capture this ``requestId``, we can let the user control when to load the data of that particular case file. To do this, follow the below steps
-
-#. Stash the ``requestId`` in a string parameter via a simple administration procedure
-
-#. Ensure that this administration procedure is invoked by ``pro::DelegateToServer(...)``
-
-#. Create a procedure that loads the data
-
-#. Link that procedure to a button.
-
-In more detail, the steps are as follows:
-
-Step 1. Stash the ``requestID``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This is achieved by writing our own callback procedure for ``pro::DelegateToServer(...)``. Let's call this callback procedure: ``myLoadResultsCallback`` and implement it as follows:
+Create a string parameter ``spSavedRequestID`` to store the ``requestId`` and a binary parameter ``bpResultsAvailable`` to control the visibility of the load button in the user interface. 
  
 	.. code-block:: none
 
@@ -53,41 +44,46 @@ This is achieved by writing our own callback procedure for ``pro::DelegateToServ
 			Range: binary;
 			InitialData: 0;
 		}
+
+Now, create an assignment procedure ``myLoadResultsCallback`` with a local input argument ``RequestID`` to update the values of these identifiers. 
+
+	.. code-block:: none
+
 		Procedure myLoadResultsCallback {
 			Arguments: (RequestID);
 			Body: {
 				spSavedRequestID := RequestID;
-				pResultsAvailable := 1;
+				bpResultsAvailable := 1;
 			}
 			StringParameter RequestID {
 				Property: Input;
 			}
 		}
 
-Note that is a very quick procedure; just some administration. This administration should not be confused by the load itself, that is why a ``NoSave`` property is set on the enclosing section. 
+When run, this procedure simply stores ``RequestID`` in ``spSavedRequestID`` and updates ``bpResultsAvailable`` to 1. This should not be mistaken with the actual loading procedure.
 
-Step 2. Ensure that this administration procedure is invoked by ``pro::DelegateToServer(...)``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. Note that is a very quick procedure; just some administration. This administration should not be confused by the load itself, that is why a ``NoSave`` property is set on the enclosing section. 
 
-And then change the call to ``pro::DelegateToServer`` by using the above callback procedure.
+Step 2. Provide `completionCallback` argument of the ``pro::DelegateToServer`` call
+--------
+
+Now, we need to trigger the assignment procedure ``myLoadResultsCallback`` when a solved casefile is available on the server session. This is done by providing ``myLoadResultsCallback`` as the `completionCallback` argument.
 
 	.. code-block:: none
 
 		if pro::GetPROEndPoint() then
 			if pro::DelegateToServer(  
-				completionCallback :  'myLoadResultsCallback' )  
+				completionCallback :  'myLoadResultsCallback',
+				waitForCompletion : 0 )  
 			then return 1;
 			endif ;
 		endif ;
 		
 		
-Now that we’ve saved the ``requestId``, we need to use it when the user presses the button to load the case.
+Step 3. Create a procedure and a button to load the data
+-------
 
-
-Step 3. Create a procedure that loads the data
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Create a button widget, say ``BtnLoadResults``, and put the procedure ``prLoadResults`` behind it.
+Create a procedure ``prLoadResults`` and link it to a button widget, say ``BtnLoadResults``. The body of ``prLoadResults`` is as follows;
 
 	.. code-block:: none
 
@@ -98,16 +94,10 @@ Create a button widget, say ``BtnLoadResults``, and put the procedure ``prLoadRe
 				bpResultsAvailable := 0 ;
 			}
 		}
-		
-Step 4. Link that procedure to a button
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As this button only makes sense when results are available, but not downloaded yet, we control it's visibility via ``bpResultsAvailable``. The user interface when the results are available, but not yet downloaded looks as follows:
+We are executing the predefined procedure ``pro::session::LoadResultsCallBack`` to load the casefile on the data session, but with our own argument ``spSavedRequestID`` instead of the default argument. After the results are loaded, we also empty the ``spSavedRequestID`` and ``bpResultsAvailable`` to hide the load results button. This last emptying step is optional.
 
-Resulting app
--------------
-
-The inferface of the resulting app now looks as follows on AIMMS PRO:
+We want to control the visibility of ``BtnLoadResults`` because it makes sense for it to show up only when results are available to load. This appearance acts as a notification for the end user that results are available. The user interface when the results are available, but not yet downloaded looks as follows:
 
 .. image::  Resources/AIMMSPRO/RemoveVeil/Images/BB05_WebUI_screen.png 
 
@@ -116,7 +106,7 @@ The AIMMS project that does just this, can be downloaded from: :download:`5. Flo
 Summary
 -------
 
-The answer provided by the server session, via the solution case, can be loaded at a moment convenient to the end user. This just requires a bit of administration and an additional button. 
+By following the above steps, the end user can control when the casefile resulting from an execution on the server session is loaded onto the data session (or available to view by the end user).
 
 Further opportunities
 ---------------------
