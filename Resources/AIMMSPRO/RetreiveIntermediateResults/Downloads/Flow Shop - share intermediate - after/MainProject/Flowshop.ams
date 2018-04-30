@@ -70,19 +70,55 @@ Model Main_Flow_Shop {
         }
         Section GapCurves {
             Property: NoSave;
-            Set Observations {
+            Parameter pSolveInterruptable {
+                Range: binary;
+                InitialData: 1;
+            }
+            Set sObservations {
                 Index: iObs;
                 Parameter: epLastObservation;
             }
+            Set sShownObservations {
+                SubsetOf: sObservations;
+                Index: iSobs;
+                Definition: {
+                    { iobs | ( pNoObservations <= ( 2 * pPointsShownInCurve ) ) or 
+                             ( mod(ord(iobs), pDividerForPointSelection ) = 1 ) or 
+                             ( iobs = last(sObservations)                     )    }
+                }
+            }
             Parameter pBestBound {
-                IndexDomain: iObs;
+                IndexDomain: (iObs);
             }
             Parameter pIncumbent {
-                IndexDomain: iObs;
+                IndexDomain: (iObs);
+            }
+            Parameter pPointsShownInCurve {
+                InitialData: 30;
+            }
+            Parameter pDividerForPointSelection {
+                Definition: {
+                    if pNoObservations <= ( 2 * pPointsShownInCurve ) then
+                    	1
+                    else
+                    	div( pNoObservations, pPointsShownInCurve )
+                    endif
+                }
+            }
+            Parameter pNoObservations {
+                Definition: card(sObservations);
+            }
+            Parameter pProgressWillBeSupplied {
+                InitialData: 1;
+            }
+            StringParameter spTitleGapCurve {
+                InitialData: "Gap curve";
             }
             Procedure NewTimeCallback {
                 Body: {
-                    UpdateGapToClient(FlowShopModel.bestbound,FlowShopModel.Incumbent);
+                    if pProgressWillBeSupplied then
+                    	UpdateGapToClient(FlowShopModel.bestbound,FlowShopModel.Incumbent);
+                    endif ;
                 }
             }
             Procedure UpdateGapToClient {
@@ -93,9 +129,22 @@ Model Main_Flow_Shop {
                     		return 1; 
                     	endif ;
                     endif ;
-                    SetElementAdd( Observations, epLastObservation, FormatString("%i", card(Observations)+1) );
-                    pBestBound(epLastObservation) := if mapval(bb) then 0 else bb endif ;
-                    pIncumbent(epLastObservation) := if mapval(icb) then 0 else icb endif ;
+                    if pSolveInterruptable then
+                    	SetElementAdd( sObservations, epLastObservation, FormatString("%i", pNoObservations+1) );
+                    	pBestBound(epLastObservation) := if mapval(bb ) then 0 else bb  endif ;
+                    	pIncumbent(epLastObservation) := if mapval(icb) then 0 else icb endif ;
+                    	if mapval(bb) or mapval(icb) then 
+                    		gap := 100  ;
+                    	else
+                    		if bb then
+                    			gap := ( ( icb - bb  ) / bb ) * 100 ;
+                    		else
+                    			gap := 0 ;
+                    		endif ;
+                    	endif ;
+                    	spTitleGapCurve := FormatString("Gap curve: best: %n, incumbent: %n, gap: %n%%",
+                    		bb, icb, gap );
+                    endif ;
                 }
                 Parameter bb {
                     Property: Input;
@@ -103,6 +152,7 @@ Model Main_Flow_Shop {
                 Parameter icb {
                     Property: Input;
                 }
+                Parameter gap;
             }
         }
         Section Progress_Updating {
@@ -156,7 +206,7 @@ Model Main_Flow_Shop {
                 Arguments: (spArgFullCaseFileName,spArgFullProStorageName);
                 Body: {
                     if pro::GetPROEndPoint() then
-                    	if pro::DelegateToClient(flags: pro::PROMFLAG_LIVE) then
+                    	if pro::DelegateToClient(flags: 0) then
                     		return 1; 
                     	endif ;
                     endif ;
@@ -285,7 +335,7 @@ Model Main_Flow_Shop {
     }
     Procedure prSolve {
         Body: {
-            Empty Observations ;
+            Empty sObservations ;
             noIncumbents := 0 ;
             prDelegateSolve();
         }

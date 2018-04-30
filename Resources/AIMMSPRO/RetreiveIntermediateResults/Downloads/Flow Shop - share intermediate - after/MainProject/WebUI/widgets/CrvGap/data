@@ -6,7 +6,7 @@
 	"slot1": "",
 	"slot2": "",
 	"------------------------------------------------------------------<<<<-contents-": "",
-	"contents": "aimms:{\"contents\":[\"pBestBound\",\"pIncumbent\"]}",
+	"contents": "aimms:{\"contents\":[\"pBestBound\",\"pIncumbent\"],\"prefix\":\"aimms\",\"slices\":[{\"identifier\":\"pBestBound\",\"slice\":[{\"index\":\"iObs\",\"type\":\"subset\",\"value\":\"iSobs\"}]},{\"identifier\":\"pIncumbent\",\"slice\":[{\"index\":\"iObs\",\"type\":\"subset\",\"value\":\"iSobs\"}]}]}",
 	"------------------------------------------------------------------>>>>-contents-": "",
 	"slot3": "",
 	"------------------------------------------------------------------<<<<-title-": "",
