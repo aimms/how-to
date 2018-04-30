@@ -7,7 +7,7 @@ Introduction
 If the ``waitForCompletion`` argument of ``pro::DelegateToServer`` is 0, both the data session and the server session run in parallel. This allows the end user to browse and modify data while a delegated procedure is executed on the server session in the background. However, at the end of execution, the results are loaded back in to the data session without any warning. This unannounced loading of data is not a good UI design and this article presents the approach to manually control this data transfer between the data and server sessions. 
 
 What is happening here?
-----------------------
+-----------------------
 
 A typical ``pro::DelegateToServer`` call looks as below:
 
@@ -31,7 +31,7 @@ If you want to manually trigger this loading of results, you need to know the ``
 #. Create a procedure to load the casefile corresponding to the retrieved ``RequestID`` and link it to a button on the user interface. 
 
 Step 1.  Retrieving the ``RequestID``
---------------
+-------------------------------------
 
 Create a string parameter ``spSavedRequestID`` to store the ``requestId`` and a binary parameter ``bpResultsAvailable`` to control the visibility of the load button in the user interface. 
  
@@ -65,7 +65,7 @@ When run, this procedure simply stores ``RequestID`` in ``spSavedRequestID`` and
 .. Note that is a very quick procedure; just some administration. This administration should not be confused by the load itself, that is why a ``NoSave`` property is set on the enclosing section. 
 
 Step 2. Provide `completionCallback` argument of the ``pro::DelegateToServer`` call
---------
+------------------------------------------------------------------------------------
 
 Now, we need to trigger the assignment procedure ``myLoadResultsCallback`` when a solved casefile is available on the server session. This is done by providing ``myLoadResultsCallback`` as the `completionCallback` argument.
 
@@ -81,7 +81,7 @@ Now, we need to trigger the assignment procedure ``myLoadResultsCallback`` when 
 		
 		
 Step 3. Create a procedure and a button to load the data
--------
+---------------------------------------------------------
 
 Create a procedure ``prLoadResults`` and link it to a button widget, say ``BtnLoadResults``. The body of ``prLoadResults`` is as follows;
 
@@ -95,7 +95,7 @@ Create a procedure ``prLoadResults`` and link it to a button widget, say ``BtnLo
 			}
 		}
 
-We are executing the predefined procedure ``pro::session::LoadResultsCallBack`` to load the casefile on the data session, but with our own argument ``spSavedRequestID`` instead of the default argument. After the results are loaded, we also empty the ``spSavedRequestID`` and ``bpResultsAvailable`` to hide the load results button. This last emptying step is optional.
+We are executing the predefined procedure ``pro::session::LoadResultsCallBack`` to load the casefile on the data session, but with our own argument ``spSavedRequestID`` instead of the default argument. After the results are loaded, we also empty the ``spSavedRequestID`` and ``bpResultsAvailable`` to hide the load results button. This last emptying step is not necessary; but best practice - do not show buttons that are not available anyway.
 
 We want to control the visibility of ``BtnLoadResults`` because it makes sense for it to show up only when results are available to load. This appearance acts as a notification for the end user that results are available. The user interface when the results are available, but not yet downloaded looks as follows:
 
