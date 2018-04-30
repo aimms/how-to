@@ -22,5 +22,7 @@ AIMMS Language
 |
 	
 .. toctree::
+
+    How to model categorization of objects
 	
-	Generate Random Numbers
+..	Generate Random Numbers
