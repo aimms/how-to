@@ -1,0 +1,71 @@
+.. comments for developers
+	- By including this file in your article, a form will be displayed. we are using https://formspree.io/ webservice to send the form automatically to howto@aimms.com address. 
+	- This webservice allows for 1000 request per day (until we have to pay for it 10eur/month)
+	- When you include this form, we have to activate it (specify the new howto URL to formspree.io webservice). In order to activate it, we have to publish it on the howto.aimms.com domain. Thus, the publisher (Arthur) has to be aware about your included form, to be able to activate it. Please mention it somewhere in Gitlab.
+
+
+_______________________________________________________________________________
+
+
+.. raw:: html
+
+	<style>
+	.whatever input[type=text], select {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
+	.whatever input[type=email], select {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
+	.whatever textarea {
+		width: 100%;
+
+	}
+	
+	.whatever input[type=submit] {
+		width: 100%;
+		background-color: #213069;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	.whatever input[type=submit]:hover {
+		#background-color: #45a049;
+		opacity: 0.7;
+	}
+
+	div .whatever {
+		border-radius: 5px;
+		background-color: #f2f2f2; 
+		padding: 20px;
+	}
+	</style>
+	<div class="whatever">
+		<form action="https://formspree.io/howto@aimms.com" method="POST">
+			<h4 style=" font-weight: bold; margin-top: 4px;">Was this answer useful ? (*)</h4>
+			<input type="radio" name="Usefull" value="Yes" required> Yes<br>
+			<input type="radio" name="Usefull" value="No" required> No<br><br>
+			<label>Your e-mail (optional)</label>
+			<input type="email" name="_replyto" size="50" placeholder="you@yourorganization.com">
+			<label>Please provide us with your comments and unanswered questions (optional)</label>
+			<textarea style="margin-top: 8px;" name="MessageText" cols="40" rows="5" size="50" placeholder="Type your message here..."></textarea>
+			<input type="submit" value="Send">
+			<input type="hidden" name="_next" value="https://how-to.aimms.com/FormThanksPage.html" />
+			<input type="hidden" name="_cc" value="arthur.dherbemont@aimms.com" />
+		</form>
+	</div>

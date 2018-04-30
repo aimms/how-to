@@ -1,0 +1,64 @@
+{# Import the theme's layout. #}
+{% extends "!layout.html" %}
+
+{% block header %}
+
+{% if pagename == "ContentIndex" %}
+	
+	<style> 
+		.wy-nav-content {
+			max-width: none; !important
+		}
+	</style>
+{% else %}
+	<style> 
+		.wy-nav-content {
+			max-width: 1200px; !important
+		}
+	</style>
+{% endif %}
+{% endblock %}
+
+
+{% block sidebartitle %}
+
+{% if pagename == "ContentIndex" %}
+	
+	<style> 
+		.wy-nav-content {
+			max-width: none; !important
+		}
+	</style>
+{% else %}
+	<style> 
+		.wy-nav-content {
+			max-width: 1100px; !important
+		}
+	</style>
+{% endif %}
+
+ <a href="{{ pathto(master_doc) }}">
+	<img src="{{ pathto('_static/AIMMS_logo_H_RGB_rev.png', 1) }}" class="logo" alt="Logo"/></a>
+
+{% include "searchbox.html" %}
+
+{% endblock %}
+
+{% block body %}
+
+{% if pagename == "ContentIndex" %}
+ 
+	<style> 
+		.wy-nav-content {
+			max-width: none; !important
+		}
+	</style>
+{% else %}
+	<style> 
+		.wy-nav-content {
+			max-width: 1200px; !important
+		}
+	</style>
+{% endif %}
+
+{% endblock %}
