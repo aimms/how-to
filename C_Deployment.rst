@@ -25,4 +25,6 @@ Deployment
 
 	PublishOnPro
 	AIMMSPROAppAvailbleOnPROandUsableInIDE
-	RemoveVeil 
+	RemoveVeil
+	LoadResultsSolverSession
+	
