@@ -1,0 +1,32 @@
+{# Import the theme's breadcrumbs. #}
+
+{%- extends "!breadcrumbs.html" %}
+
+{% block breadcrumbs %}
+	
+	{% if pagename == "ContentIndex" %}
+		<div class="navbar">
+			<a href="http://aimms.com/english/about-us" target="_blank" ><i class="fa fa-info-circle"></i> About Us</a>
+			<a href="http://aimms.com/english/developers" target="_blank"><i class="fa fa-connectdevelop"></i> Developers</a>
+			<a href="http://aimms.com/english/customers" target="_blank"><i class="fa fa-users"></i> Customers</a>
+			<a href="http://aimms.com/english/resources" target="_blank"><i class="fa fa-book"></i> Resources</a>
+			<a href="http://aimms.com/english/software-solutions/software" target="_blank"><i class="fa fa-laptop"></i> Software & Solutions</a>
+			<a class="navbarimg" href="http://www.aimms.com" target="_blank">
+			<img src="_images/favicon.png"  width="80" height="63" border="0"></a>
+		</div>
+	{% else %}
+      <li><a href="{{ pathto(master_doc) }}">{{ _('How To AIMMS') }}</a> &raquo;</li>
+        {% for doc in parents %}
+          <li><a href="{{ doc.link|e }}">{{ doc.title }}</a> &raquo;</li>
+        {% endfor %}
+      <li>{{ title }}</li>
+	{% endif %}
+	
+{% endblock %}
+
+{% block breadcrumbs_aside %}
+
+	<li class="wy-breadcrumbs-aside">
+	</li>
+
+{% endblock %}
