@@ -199,11 +199,11 @@ Model Main_Flow_Shop {
                     
                     
                     ! Notify the data session that a 
-                    UpdateIncumbentToClient(spFullCaseFileName, spFullProStorageName);
+                    UpdateIncumbentToClient(spFullProStorageName);
                 }
             }
             Procedure UpdateIncumbentToClient {
-                Arguments: (spArgFullCaseFileName,spArgFullProStorageName);
+                Arguments: (spArgFullProStorageName);
                 Body: {
                     if pro::GetPROEndPoint() then
                     	if pro::DelegateToClient(flags: 0) then
@@ -211,13 +211,14 @@ Model Main_Flow_Shop {
                     	endif ;
                     endif ;
                     
-                    pro::RetrieveFileFromCentralStorage( spArgFullProStorageName, spArgFullCaseFileName );
-                    CaseFileLoad( spArgFullCaseFileName );
+                    ! From here on, only the client (data) session is running.
+                    
+                    CaseFileLoad( spArgFullProStorageName );
+                    
+                    ! Comment out the next line if you want to retain intermediate solutions.
+                    pro::DeleteStorageFile( spArgFullProStorageName );
                     
                     noIncumbents+=1 ;
-                }
-                StringParameter spArgFullCaseFileName {
-                    Property: Input;
                 }
                 StringParameter spArgFullProStorageName {
                     Property: Input;

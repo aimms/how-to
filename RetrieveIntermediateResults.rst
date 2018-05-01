@@ -141,16 +141,28 @@ Step 2. From server session (level 2) to data session (level 3)
 
 	.. code-block:: none	
 
-		if pro::GetPROEndPoint() then
-			if pro::DelegateToClient(flags: pro::PROMFLAG_LIVE) then
-				return 1; 
-			endif ;
-		endif ;
-
-		pro::RetrieveFileFromCentralStorage( spArgFullProStorageName, spArgFullCaseFileName );
-		CaseFileLoad( spArgFullCaseFileName );
-
-		noIncumbents+=1 ;
+		Procedure UpdateIncumbentToClient {
+			Arguments: (spArgFullProStorageName);
+			Body: {
+				if pro::GetPROEndPoint() then
+					if pro::DelegateToClient(flags: 0) then
+						return 1; 
+					endif ;
+				endif ;
+				
+				! From here on, only the client (data) session is running.
+				
+				CaseFileLoad( spArgFullProStorageName );
+				
+				! Comment out the next line if you want to retain intermediate solutions.
+				pro::DeleteStorageFile( spArgFullProStorageName );
+				
+				noIncumbents+=1 ;
+			}
+			StringParameter spArgFullProStorageName {
+				Property: Input;
+			}
+		}
 
 
 A copy of the flowshop model that is the result of this answer: :download:`Flow Shop - share intermediate <Resources/AIMMSPRO/RetreiveIntermediateResults/Downloads/Flow Shop - share intermediate - after.zip>`.
@@ -162,7 +174,7 @@ A copy of the flowshop model that is the result of this answer: :download:`Flow 
 .. comment:: Flow Shop - share intermediate - after
 .. comment:: Flow Shop - share intermediate - before
 
- .. image:: Resources/AIMMSPRO/RemoveVeil/Images/BB07_WebUI_screen.PNG
+.. image:: Resources/AIMMSPRO/RemoveVeil/Images/BB07_WebUI_screen.PNG
 
 
 Summary
