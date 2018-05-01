@@ -1,15 +1,15 @@
 How to communicate progress info from the server session to the data session?
-=============================================================================
+================================================================================
 
 Introduction
 ------------
 
-In the presence of a long running solution procedures, we're curious how far that procedure is - can we expect the solution soon or should we get a cup of coffee instead? In essence, we're keeping track of regularly changing status information of the solution process. 
+In the presence of a long running solution procedure, we're curious how far that long running procedure is - can we expect the solution soon or should we get a cup of coffee instead? In essence, we're keeping track of regularly changing status information of the solution process. 
 
 Analysis
 --------
 
-In the context of the running example: the flowshop model, we are passing information through three levels of execution:
+In the context of the running example: the Flowshop model, we are passing information through three levels of execution:
 
 #. The solver execution, as part of the server session. The solver passes status information on, on a regular basis, as part of the time callback mechanism.
 
@@ -17,15 +17,19 @@ In the context of the running example: the flowshop model, we are passing inform
 
 #. The AIMMS execution as part of the data session. Here a procedure is called, and information passed via arguments, from the server session to the data session.
 
-	
+.. image:: Resources/AIMMSPRO/RemoveVeil/Images/ThreeLevelsOfExecution.png
+
+The implementation of the information stream represented by the two upper arrows will be discussed in the next section. 
+The bottom two arrows (Incumbent Callback and Intermediate Solution) will be discussed in a next answer.
+
 Implementation
 --------------
 
 There are two steps to communicate the information from the first to the third level. 
-Let's discuss each of thes two steps in more detail.
+Let's discuss each of these two steps in more detail.
 
-Step 1. From Solver (level 1) to server session (level 2)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+Step 1. (Time callback) From Solver (level 1) to server session (level 2)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Step 1A illustrates how to prepare the mathematical program FlowShopModel, such that the MIP solver will pass progress information on a regular basis to the model.
 
@@ -44,8 +48,8 @@ The body simply passes the best bound and incumbent to the actual working proced
 
 		UpdateGapToClient(FlowShopModel.bestbound,FlowShopModel.Incumbent);
 		
-Step 2. From server session (level 2) to data session (level 3)	
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Step 2. (Progress Update) From server session (level 2) to data session (level 3)	
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To give this answer an extra dimension, we are storing each of the observations in the following data structure 
 
@@ -61,7 +65,7 @@ To give this answer an extra dimension, we are storing each of the observations 
 		Parameter pIncumbent {
 			IndexDomain: iObs;
 		}
-
+		
 and visualize that in the following curve widget:
 
  .. image:: Resources/AIMMSPRO/ProgressWindowServerSession/Images/CurveMIP_GAP.PNG
