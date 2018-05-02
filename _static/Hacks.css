@@ -238,3 +238,16 @@ div.box h1, .wy-breadcrumbs li a{
 .wy-side-nav-search, .wy-menu-vertical a:active{
   background-color: royalblue
 }
+
+/*Color seealso blocks */
+
+.admonition.seealso .admonition-title {
+	
+	background: #329932;
+}
+
+.admonition.seealso {
+	
+	background: #cce5cc;
+	
+}

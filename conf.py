@@ -152,7 +152,7 @@ html_sidebars = {
         'searchbox.html'
     ]
 }
-
+html_favicon = "_static/favicon.png"
 rst_prolog = "\n.. include:: special.rst\n"
 
 # -- Options for HTMLHelp output ------------------------------------------
