@@ -251,3 +251,15 @@ div.box h1, .wy-breadcrumbs li a{
 	background: #cce5cc;
 	
 }
+
+/*Color any Topic block */
+.topic {
+	
+	background:#cce5cc;
+	padding: 10px;
+}
+
+.topic.contents {
+
+	background:inherit;
+}
