@@ -232,11 +232,11 @@ div.body p{
 }
 
 div.box h1, .wy-breadcrumbs li a{
-  color:royalblue;
+  /*color:royalblue;*/
 }
 
 .wy-side-nav-search, .wy-menu-vertical a:active{
-  background-color: royalblue
+  /*background-color: royalblue*/
 }
 
 /*Color seealso blocks */
@@ -255,11 +255,58 @@ div.box h1, .wy-breadcrumbs li a{
 /*Color any Topic block */
 .topic {
 	
-	background:#cce5cc;
-	padding: 10px;
+	background: lightgrey;
+	padding: 10px 10px 0px 10px;
+	border: 1px solid lightgrey;
 }
 
 .topic.contents {
 
 	background:inherit;
+}
+
+.code-block-caption .caption-text {
+
+	font-family: courier new;
+}
+
+/*Color + trophy icon for congrats blocks*/
+.congrats .topic-title:before {
+
+	content: "\f091"; /*code for the "trophy" icon. please refer to https://fontawesome.com/cheatsheet*/
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: darkgreen;
+    font-size: 18px;
+    padding-right: 0.5em;
+
+}
+
+.congrats {
+
+	background:none;
+	border:1px solid green;
+	margin-bottom:10px
+}
+
+.technical .topic-title:before {
+
+	content: "\f085"; /*please refer to https://fontawesome.com/cheatsheet*/
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: darkgreen;
+    font-size: 18px;
+    padding-right: 0.5em;
+
+}
+
+.technical {
+	
+	
+	border:1px solid grey;
+	margin-bottom:10px
 }
