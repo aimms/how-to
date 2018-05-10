@@ -4,7 +4,11 @@ How to communicate progress info from the server session to the data session?
 Introduction
 ------------
 
+<<<<<<< HEAD
 While a solve procedure is running, we are curious about the estimated time left for completion - are we going to get the results back soon or is there enough time to go grab a cup of coffee ? In essence, we want to keep track of the progress of the solve procedure. We can do this by using the Progress Window (Ctrl + P) in the Developer mode, and this article will show you how to present this progress information to the end user of a WebUI application.
+=======
+In the presence of a long running solve procedure, we're curious how far that long running procedure is - can we expect the solution soon or should we get a cup of coffee instead? In essence, we're keeping track of regularly changing status information of the solution process. 
+>>>>>>> 596ebb455206f0a90069ff130f491129cc20c271
 
 Analysis
 --------
