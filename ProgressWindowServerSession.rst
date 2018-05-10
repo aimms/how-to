@@ -4,7 +4,7 @@ How to communicate progress info from the server session to the data session?
 Introduction
 ------------
 
-In the presence of a long running solution procedure, we're curious how far that long running procedure is - can we expect the solution soon or should we get a cup of coffee instead? In essence, we're keeping track of regularly changing status information of the solution process. 
+In the presence of a long running solve procedure, we're curious how far that long running procedure is - can we expect the solution soon or should we get a cup of coffee instead? In essence, we're keeping track of regularly changing status information of the solution process. 
 
 Analysis
 --------
