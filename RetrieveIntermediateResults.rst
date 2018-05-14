@@ -53,6 +53,8 @@ Method used
 
 In the context of the running example: the flowshop model, we are passing information through three levels of execution:
 
+.. image:: Resources/AIMMSPRO/RemoveVeil/Images/ThreeLevelsOfExecution.png
+
 #. The solver execution, as part of the server session. The solver passes the entire solution that constructs a new incumbent, as part of the incumbent callback mechanism.
 
 #. The AIMMS execution as part of the server session, called via the incumbent callback mechanism of the solver, and retrieves the solution information.
