@@ -1,23 +1,30 @@
-How to stop the solver or server session?
-=========================================
+How to interrupt the server session?
+==================================== 
 
 Introduction
 ------------
 
-Assuming we have full control of the server session via `progress <https://how-to.aimms.com/ProgressWindowServerSession.html>`_ or `intermediate results <https://how-to.aimms.com/RetrieveIntermediateResults.html>`_, we may decide to stop a solve process running in the server session, or to entirely kill the server session. This article takes you through the steps to stop a solve process or a server session from the client side. 
+Assuming we have visibility of the server session via `progress <https://how-to.aimms.com/ProgressWindowServerSession.html>`_ or `intermediate results <https://how-to.aimms.com/RetrieveIntermediateResults.html>`_, we may decide to interrupt the server session. This answer takes you through the steps to interrupt a solve process or to interrupt a server session from the client side. 
 
 .. the actual difference between the solver and the server session is not clear. 
+.. Handled, distinction made later.
 
-.. Changed the last sentence from "This raises the question "How to stop the solver or server session?" to avoid repitition as the question is already the title of the page.
+.. Changed the last sentence from "This raises the question "How to stop the solver or server session?" to avoid repetition as the question is already the title of the page.
+
+Background
+-----------
+
+
 
 Implementation
 --------------
 
 Interrupting the server session is very direct and can be done by simply calling the AIMMS PRO library procedure, ``pro::client::StopExecution`` . However,  you will need to know
 
-#.	to which message queue is the server process listening? In our example, we have only one server session, and the message queue - a string, can be obtained by using ``pro::session::CurrentSessionQueue()``. 
-
 .. please explain what are the different message queues, and what should the user know about them ? 
+
+
+#.	to which message queue is the server process listening? In our example, we have only one server session, and the message queue - a string, can be obtained by using ``pro::session::CurrentSessionQueue()``. 
 
 #.	whether you want to interrupt execution of the procedure, or just of a currently executing solve statement (if any).
 
