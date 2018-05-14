@@ -1,7 +1,6 @@
+
 .. image:: Images/aimms-logo-s-rgb.png
-				:scale: 70 %
 				:align: center
-					
 
 .. raw:: html
 

@@ -76,7 +76,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
-todo_include_todos = True
+todo_include_todos = False
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -134,7 +134,7 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 html_context = {
-    'css_files': ['_static/Hacks.css','_static/custom.css'],
+    'css_files': ['_static/Hacks.css'],
 }
 
 # Custom sidebar templates, must be a dictionary that maps document names
@@ -152,7 +152,7 @@ html_sidebars = {
         'searchbox.html'
     ]
 }
-
+html_favicon = "_static/favicon.png"
 rst_prolog = "\n.. include:: special.rst\n"
 
 # -- Options for HTMLHelp output ------------------------------------------
