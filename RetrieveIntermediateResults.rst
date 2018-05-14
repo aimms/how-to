@@ -184,7 +184,10 @@ Summary
 
 By providing the intermediate answers via AIMMS cases, we can retain those answers and allow the end user to select the ones he actually wants to view.
 
+Further reading
+---------------
 
+Now that end users know the state of the solution process, they also want to interrupt it when they see that further improvements are not worth waiting for. This is handled in `How to interrupt a solve while WebUI is active during a solve <https://how-to.aimms.com/StopSolveWithoutVeil.html>`_ .
 
 
 
