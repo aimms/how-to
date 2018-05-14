@@ -138,5 +138,5 @@ Oops, I see several problems that we can work on. Oh, jeah, they are not problem
 #. I want to remove the veil that drops down when a procedure of the data session runs for more than a few seconds. See topic `Remove the veil for long running procedures <https://how-to.aimms.com/RemoveVeil2.html>`_
 
 
-
+.. include:: includes/form.def
  

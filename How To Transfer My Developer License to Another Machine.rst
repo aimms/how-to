@@ -32,7 +32,7 @@ There may be situations where you will need to use |aimms| on a different machin
 1.	First deactivate your license from the machine it is currently installed on
 -------------------------------------------------------------------------------------
 	
-	a. In AIMMS head to Tools –> License -> License Configuration…
+	a. In AIMMS, head to Tools –> License -> License Configuration…
 	
 		|LicenseConfigurationLocation|
 	
@@ -40,13 +40,13 @@ There may be situations where you will need to use |aimms| on a different machin
 	
 		|LicenseDeactivation|
 	
-	c. Follow the Deactivation wizard and if successful the following message will be received:
+	c. Follow the Deactivation wizard and if successful, the following message will be displayed:
 	
 		|SuccessfulDeactivation|
 
 
 	.. [#] *This applies to Personal Nodelock activated licenses as AIMMS Developer Licenses are typically installed through the Personal Nodelock method.*
-	.. [#] *For Free Academic license users make sure the license activation process is done within your university network*
+	.. [#] *For Free Academic license users, make sure that the license activation process is done within your university network*
 	
 2.  Install your AIMMS license on the other machine
 ----------------------------------------------------	
@@ -75,15 +75,16 @@ There may be situations where you will need to use |aimms| on a different machin
 		
 			|NodelockProtection|
 			
-		vi.	If successful you will receive the following message:
+		vi.	If successful, you will receive the following message:
 		
 			 |SuccessfulActivation|
 
    
 .. note::
 
-	If you encounter any issues with the license transfer process please contact support at support@aimms.com
+	If you encounter any issues with the license transfer process, please contact support at support@aimms.com
 
 :Author: Khang Bui
 :Version: Last Updated March 04,2018
 
+.. include:: includes/form.def
