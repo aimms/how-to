@@ -19,13 +19,13 @@ Model Main_DeprecateCompoundSets {
         }
     }
     Set R {
-        SubsetOf: (S, T, U);
+        SubsetOf: (S,T,U);
         Definition: {
             { (i,j,k) | mod( ord(i) + ord(j) + ord(k), 4 ) = 0 }
         }
     }
     Set C {
-        SubsetOf: (R);
+        SubsetOf: (S,T,U);
         Index: h;
         Definition: {
             { (i,j,k) | (i,j,k) in R }
