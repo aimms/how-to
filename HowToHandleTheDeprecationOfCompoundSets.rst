@@ -67,6 +67,8 @@ In the remainder we will use a running example that contains:
 
 #. A compound set :math:`C` with index :math:`h` defined as :math:`\{ (i, j, k) | (i, j, k) \in R \}`.
 
+#. A compound subset :math:`D \subset C` with index :math:`g`.  
+
 #. A parameter :math:`P` declared over the index for the compound set: :math:`P_h`
 
 #. A parameter :math:`Q` declared over the indices for the one dimensional sets: :math:`Q_{i,j,k}`
@@ -83,9 +85,10 @@ A compound set is
 
 #. a subset of another compound set.
 
-To test for the first type of compound set, we test as follows:
+To test for the first type of compound set, we test whether the subset of string has a komma, and whether the index or parameter attribute is filled.
+To test for the second type of compound set, we check for each set whether its domain set is a compound set.
 
-
+Details of this procedure can be found in ``dscu::prIdentifyCompoundSets``.
 
 
 The attribute ``subset of`` of a compound set contains either another compound set or  

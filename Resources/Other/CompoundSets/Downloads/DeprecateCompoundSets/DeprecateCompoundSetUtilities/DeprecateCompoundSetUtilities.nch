@@ -1,1 +1,4 @@
 * The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"dcsu::sCompoundSets" "dcsu::sCompoundRootSets" "2018-05-16 14:18:26"
+"dcsu::Copy_sCompoundRootSets" "dcsu::sCompoundRootAndSubSets" "2018-05-16 14:18:38"
+"dcsu::sCompoundRootAndSubSets" "dcsu::sCompoundSets" "2018-05-16 14:26:52"

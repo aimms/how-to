@@ -25,12 +25,20 @@ Model Main_DeprecateCompoundSets {
         }
     }
     Set C {
-        SubsetOf: (S,T,U);
+        SubsetOf: (S, T, U);
         Index: h;
         Definition: {
             { (i,j,k) | (i,j,k) in R }
         }
     }
+    Set D {
+        SubsetOf: C;
+        Index: g;
+        Definition: {
+            { h | mod( ord(h), 2 ) = 0 }
+        }
+    }
+    Procedure prFindCompoundSets;
     Procedure MainInitialization {
         Comment: "Add initialization statements here that do NOT require any library being initialized already.";
     }

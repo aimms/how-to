@@ -2,34 +2,103 @@
 
 LibraryModule DeprecateCompoundSetUtilities {
     Prefix: dcsu;
-    Procedure LibraryInitialization {
-        Comment: "Add initialization statements here that do not require any other library being initialized already.";
-    }
-    Procedure PostLibraryInitialization {
-        Comment: {
-            "Add initialization statements here that require another library to be initialized already,
-            or add statements that require the Data Management module to be initialized."
+    Interface: PublicSection;
+    Section PublicSection {
+        Set sCompoundRootSets {
+            SubsetOf: AllSets;
+            Index: iCompoundRootSet;
+        }
+        Set sCompoundSets {
+            SubsetOf: AllSets;
+            Index: iCompoundSet;
+        }
+        Procedure prIdentifyCompoundSets {
+            Body: {
+                sCompoundRootSets := {} ;
+                for IndexSets do
+                	pSubsetOfStr := AttributeToString( IndexSets, 'subset of' );	
+                	if StringOccurrences( pSubsetOfStr, "," ) then
+                		if AttributeToString( IndexSets, 'index'     ) or
+                		   AttributeToString( IndexSets, 'parameter' )    then
+                		   	sCompoundRootSets += IndexSets ;
+                		endif ;
+                	endif ;
+                endfor ;
+                
+                sCompoundSets := sCompoundRootSets ;
+                p01AdditionMade := Card( sCompoundRootSets ) <> 0 ;
+                while p01AdditionMade do
+                	p01AdditionMade := 0;
+                	for IndexSets do
+                		if not ( IndexSets in sCompoundSets ) then
+                
+                			pSubsetOfstr := AttributeToString( IndexSets, 'subset of' );
+                
+                			! Eat away the ( and ) possibly surrounding the domain identifier.
+                			if pSubsetOfStr then 
+                				if substring(pSubsetOfStr,1,1) = "(" then
+                					pSubsetOfStr := substring(pSubsetOfStr,2,StringLength(pSubsetOfStr)-1);
+                				endif ;
+                			endif ;
+                
+                			! Check if the domain set of this IndexSet is a compound set.
+                			if pSubsetOfStr and not StringOccurrences( pSubsetOfStr, "," ) then
+                				epDomainSet := StringToElement(AllIdentifiers, pSubsetOfStr, create:0);
+                				if epDomainSet and epDomainSet in sCompoundSets then
+                					sCompoundSets += IndexSets;
+                					p01AdditionMade := 1;
+                				endif ;
+                			endif ;
+                
+                		endif ;
+                	endfor ;
+                endwhile ;
+            }
+            Comment: {
+                "This procedure will search the application for compound sets and put the names in the set dcsu::sCompoundSets.
+                In addition, the compound root sets will be placed in the set dcsu::sCompoundRootSets."
+            }
+            StringParameter pSubsetOfStr;
+            Parameter p01AdditionMade {
+                Range: binary;
+            }
+            ElementParameter epDomainSet {
+                Range: AllSets;
+            }
         }
     }
-    Procedure PreLibraryTermination {
-        Body: {
-            return 1;
-        }
-        Comment: {
-            "Add termination statements here that require all other libraries to be still alive.
-            Return 1 if you allow the termination sequence to continue.
-            Return 0 if you want to cancel the termination sequence."
-        }
-    }
-    Procedure LibraryTermination {
-        Body: {
-            return 1;
-        }
-        Comment: {
-            "Add termination statements here that do not require other libraries to be still alive.
-            Return 1 to allow the termination sequence to continue.
-            Return 0 if you want to cancel the termination sequence.
-            It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+    Section PrivateSection {
+        Section Attic {
+            Procedure LibraryInitialization {
+                Comment: "Add initialization statements here that do not require any other library being initialized already.";
+            }
+            Procedure PostLibraryInitialization {
+                Comment: {
+                    "Add initialization statements here that require another library to be initialized already,
+                    or add statements that require the Data Management module to be initialized."
+                }
+            }
+            Procedure PreLibraryTermination {
+                Body: {
+                    return 1;
+                }
+                Comment: {
+                    "Add termination statements here that require all other libraries to be still alive.
+                    Return 1 if you allow the termination sequence to continue.
+                    Return 0 if you want to cancel the termination sequence."
+                }
+            }
+            Procedure LibraryTermination {
+                Body: {
+                    return 1;
+                }
+                Comment: {
+                    "Add termination statements here that do not require other libraries to be still alive.
+                    Return 1 to allow the termination sequence to continue.
+                    Return 0 if you want to cancel the termination sequence.
+                    It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+                }
+            }
         }
     }
 }
