@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<LibraryProject AimmsVersion="4.53.2.1 unicode x64" ProjectUUID="F3F67761-AA1A-4791-9AF2-E04C1E9993DB">
+	<ModelFileName>DeprecateCompoundSetUnitTests.ams</ModelFileName>
+	<Prefix>dcsut</Prefix>
+	<DisplayName>DeprecateCompoundSetUnitTests</DisplayName>
+</LibraryProject>
