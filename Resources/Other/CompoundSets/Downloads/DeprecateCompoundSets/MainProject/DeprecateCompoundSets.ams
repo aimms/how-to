@@ -34,7 +34,7 @@ Model Main_DeprecateCompoundSets {
             }
         }
         Set D {
-            SubsetOf: (C);
+            SubsetOf: C;
             Index: g;
             Definition: {
                 { h | mod( ord(h), 2 ) = 0 }
@@ -43,6 +43,12 @@ Model Main_DeprecateCompoundSets {
         Parameter P {
             IndexDomain: h;
             Definition: ord(h);
+        }
+        Parameter PD {
+            IndexDomain: g;
+        }
+        Parameter Q {
+            IndexDomain: (i,j,k);
         }
         Parameter V1 {
             Definition: sum( h, P(h) );
