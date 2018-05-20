@@ -4,70 +4,296 @@ LibraryModule DeprecateCompoundSetUtilities {
     Prefix: dcsu;
     Interface: PublicSection;
     Section PublicSection {
-        Set sCompoundRootSets {
-            SubsetOf: AllSets;
-            Index: iCompoundRootSet;
-        }
-        Set sCompoundSets {
-            SubsetOf: AllSets;
-            Index: iCompoundSet;
-        }
-        Procedure prIdentifyCompoundSets {
-            Body: {
-                sCompoundRootSets := {} ;
-                for IndexSets do
-                	pSubsetOfStr := AttributeToString( IndexSets, 'subset of' );	
-                	if StringOccurrences( pSubsetOfStr, "," ) then
-                		if AttributeToString( IndexSets, 'index'     ) or
-                		   AttributeToString( IndexSets, 'parameter' )    then
-                		   	sCompoundRootSets += IndexSets ;
-                		endif ;
-                	endif ;
-                endfor ;
-                
-                sCompoundSets := sCompoundRootSets ;
-                p01AdditionMade := Card( sCompoundRootSets ) <> 0 ;
-                while p01AdditionMade do
-                	p01AdditionMade := 0;
-                	for IndexSets do
-                		if not ( IndexSets in sCompoundSets ) then
-                
-                			pSubsetOfstr := AttributeToString( IndexSets, 'subset of' );
-                
-                			! Eat away the ( and ) possibly surrounding the domain identifier.
-                			if pSubsetOfStr then 
-                				if substring(pSubsetOfStr,1,1) = "(" then
-                					pSubsetOfStr := substring(pSubsetOfStr,2,StringLength(pSubsetOfStr)-1);
-                				endif ;
-                			endif ;
-                
-                			! Check if the domain set of this IndexSet is a compound set.
-                			if pSubsetOfStr and not StringOccurrences( pSubsetOfStr, "," ) then
-                				epDomainSet := StringToElement(AllIdentifiers, pSubsetOfStr, create:0);
-                				if epDomainSet and epDomainSet in sCompoundSets then
-                					sCompoundSets += IndexSets;
-                					p01AdditionMade := 1;
-                				endif ;
-                			endif ;
-                
-                		endif ;
-                	endfor ;
-                endwhile ;
+        Section Identify_compound_sets {
+            Set sCompoundRootSets {
+                SubsetOf: AllSets;
+                Index: iCompoundRootSet;
+                Parameter: eCompoundRootSet;
             }
-            Comment: {
-                "This procedure will search the application for compound sets and put the names in the set dcsu::sCompoundSets.
-                In addition, the compound root sets will be placed in the set dcsu::sCompoundRootSets."
+            Set sCompoundSets {
+                SubsetOf: AllSets;
+                Index: iCompoundSet;
+                Parameter: eCompoundSet;
             }
-            StringParameter pSubsetOfStr;
-            Parameter p01AdditionMade {
-                Range: binary;
+            Set sCompoundSetsThatAreNotRootSets {
+                SubsetOf: AllSets;
+                Index: iCompoundSetNotRootSet;
+                Parameter: eCompoundSetNotRootSet;
+                Definition: sCompoundSets - sCompoundRootSets;
             }
-            ElementParameter epDomainSet {
+            Set sFoundCompoundSetNumbers {
+                SubsetOf: Integers;
+                Index: iCompoundSetNo;
+                Parameter: eCompoundSetNo;
+            }
+            ElementParameter epFoundCompoundSets {
+                IndexDomain: iCompoundSetNo;
                 Range: AllSets;
+            }
+            Procedure prIdentifyCompoundSets {
+                Body: {
+                    sCompoundRootSets := {} ;
+                    pCompoundSetNo := 0;
+                    for IndexSets do
+                    	pSubsetOfStr := AttributeToString( IndexSets, 'subset of' );	
+                    	if StringOccurrences( pSubsetOfStr, "," ) then
+                    		if AttributeToString( IndexSets, 'index'     ) or
+                    		   AttributeToString( IndexSets, 'parameter' )    then
+                    		   	sCompoundRootSets += IndexSets ;
+                    		   	! Add the compound set referenced by IndexSets to the collection of compound sets.
+                    		   	pCompoundSetNo += 1 ;
+                    		   	sFoundCompoundSetNumbers += pCompoundSetNo ;
+                    		   	eCompoundSetNo := pCompoundSetNo ;
+                    		   	epFoundCompoundSets( eCompoundSetNo ) := IndexSets ;
+                    		endif ;
+                    	endif ;
+                    endfor ;
+                    
+                    sCompoundSets := sCompoundRootSets ;
+                    p01AdditionMade := Card( sCompoundRootSets ) <> 0 ;
+                    while p01AdditionMade do
+                    	p01AdditionMade := 0;
+                    	for IndexSets do
+                    		if not ( IndexSets in sCompoundSets ) then
+                    
+                    			pSubsetOfstr := AttributeToString( IndexSets, 'subset of' );
+                    
+                    			! Eat away the parentheses '(' and ')' possibly surrounding the domain identifier.
+                    			if pSubsetOfStr then 
+                    				if substring(pSubsetOfStr,1,1) = "(" then
+                    					pSubsetOfStr := substring(pSubsetOfStr,2,StringLength(pSubsetOfStr)-1);
+                    				endif ;
+                    			endif ;
+                    
+                    			! Check if the domain set of this IndexSet is a compound set.
+                    			if pSubsetOfStr and not StringOccurrences( pSubsetOfStr, "," ) then
+                    				epDomainSet := StringToElement(AllIdentifiers, pSubsetOfStr, create:0);
+                    				if epDomainSet and epDomainSet in sCompoundSets then
+                    					sCompoundSets += IndexSets;
+                    					p01AdditionMade := 1;
+                    					! Add the compound set referenced by IndexSets to the collection of compound sets.
+                    					pCompoundSetNo += 1 ;
+                    					sFoundCompoundSetNumbers += pCompoundSetNo ;
+                    					eCompoundSetNo := pCompoundSetNo ;
+                    					epFoundCompoundSets( eCompoundSetNo ) := IndexSets ;
+                    				endif ;
+                    			endif ;
+                    
+                    		endif ;
+                    	endfor ;
+                    endwhile ;
+                }
+                Comment: {
+                    "This procedure will search the application for compound sets and put the names in the set dcsu::sCompoundSets.
+                    In addition, the compound root sets will be placed in the set dcsu::sCompoundRootSets."
+                }
+                StringParameter pSubsetOfStr;
+                Parameter p01AdditionMade {
+                    Range: binary;
+                }
+                ElementParameter epDomainSet {
+                    Range: AllSets;
+                }
+                Parameter pCompoundSetNo;
+            }
+        }
+        Section create_compound_set_mappings {
+            Procedure prCreateSetMappingsCompoundSet {
+                Body: {
+                    block
+                    	prIdentifyCompoundSets();
+                    	prWorkCreateSetMappingsCompoundSet();
+                    onerror err do
+                    	DialogMessage( errh::Message( err ));
+                    	errh::MarkAsHandled(err);
+                    endblock ;
+                }
+                ElementParameter err {
+                    Range: errh::PendingErrors;
+                }
             }
         }
     }
     Section PrivateSection {
+        DeclarationSection runtime_library_adminstration {
+            StringParameter spCompoundSetMappingRuntimeLibraryName {
+                Definition: "CompoundSetMappingRuntimeLibrary";
+            }
+            StringParameter spCompoundSetMappingRuntimePrefixName {
+                Definition: "csmrl";
+            }
+            ElementParameter epCompoundSetMappingRuntimeLibrary {
+                Range: AllIdentifiers;
+            }
+            ElementParameter epSectionCompoundSetMappingDeclarations {
+                Range: AllIdentifiers;
+            }
+            ElementParameter epSectionDataShadowDeclarations {
+                Range: AllIdentifiers;
+            }
+            ElementParameter epSectionForwardCopyProcedures {
+                Range: AllIdentifiers;
+            }
+            ElementParameter epSectionBacwardCopyProcedures {
+                Range: AllIdentifiers;
+            }
+        }
+        Section Private_Identify_Compound_Sets;
+        Section Creating_compound_set_mappings {
+            Section Internal_utilities {
+                Procedure prRemoveSpaces {
+                    Arguments: (spStr);
+                    Body: {
+                        pSpacePos := FindString( spStr, " " );
+                        while pSpacePos do
+                        	if pSpacePos = 1 then
+                        		spStr := substring( spStr, 2, StringLength( spStr ) );
+                        	elseif pSpacePos = StringLength( spStr ) then
+                        		spStr := substring( spStr, 1, StringLength( spStr ) - 1 );	
+                        	else
+                        		spStr := 
+                        			substring( spStr, 1, pSpacePos - 1 ) + 
+                        			substring( spStr, pSpacePos + 1, StringLength( spStr ) );
+                        	endif ;
+                        	pSpacePos := FindString( spStr, " " );
+                        endwhile ;
+                    }
+                    StringParameter spStr {
+                        Property: InOut;
+                    }
+                    Parameter pSpacePos;
+                }
+            }
+            DeclarationSection Declarations_for_creating_compound_set_mappings;
+            Procedure prWorkCreateSetMappingsCompoundSet {
+                Body: {
+                    ! 0. Ensure there is no previous library with that name.
+                    epCompoundSetMappingRuntimeLibrary := StringToElement( AllIdentifiers, spCompoundSetMappingRuntimeLibraryName, create: 0);
+                    if epCompoundSetMappingRuntimeLibrary then
+                    	me::Delete( epCompoundSetMappingRuntimeLibrary );
+                    endif ;
+                    
+                    ! 1. Create a runtime library and a procedure to be filled with assignment statements.
+                    epCompoundSetMappingRuntimeLibrary  := me::CreateLibrary(spCompoundSetMappingRuntimeLibraryName, spCompoundSetMappingRuntimePrefixName );
+                    !e_proc := me::Create( "WorkCreateCopyOfElement", 'procedure', e_lib );
+                    epSectionCompoundSetMappingDeclarations := me::Create( "Mapping_Set_Declarations", 'section', epCompoundSetMappingRuntimeLibrary );
+                    epSectionDataShadowDeclarations := me::Create( "Data_Shadow_Declarations", 'section', epCompoundSetMappingRuntimeLibrary );
+                    epSectionForwardCopyProcedures := me::Create( "Forward_Copy_Procedures", 'section', epCompoundSetMappingRuntimeLibrary );
+                    epSectionBacwardCopyProcedures := me::Create( "Backward_Copy_Procedures", 'section', epCompoundSetMappingRuntimeLibrary );
+                    
+                    for iCompoundSetNo do
+                    	eCompoundSet := epFoundCompoundSets(iCompoundSetNo);
+                    	prWorkCreateMappingSet(eCompoundSet);
+                    endfor ;
+                }
+            }
+            Procedure prWorkCreateMappingSet {
+                Arguments: (eCompoundSet);
+                Body: {
+                    block ! Check for erreneous input
+                    	if not eCompoundSet then
+                    		! Probably the button is pressed before selecting a specific compound root set.
+                    		dialogMessage("No compound root set selected");
+                    		return ;
+                    	endif ;
+                    	if not ( eCompoundSet in sCompoundSets ) then
+                    		! Shouldn't be possible, but alas, no harm in checking.
+                    		dialogMessage("The " + eCompoundSet + " is not a compound set");
+                    		return ;
+                    	endif ;
+                    endblock ;
+                    
+                    block ! Parse structure of Compound Set
+                    
+                    	block  ! Get domain string with kommas
+                    		spSubsetOfString := AttributeToString( eCompoundSet, 'subset of' );
+                     		pNoKommas := StringOccurrences( spSubsetOfString, "," );
+                    		while not pNoKommas do
+                    			! Go find the root set.
+                    			if SubString( spSubsetOfString, 1, 1 ) = "("  then
+                    				spSubsetOfString := SubString( spSubsetOfString, 2, StringLength( spSubsetOfString ) -1 );
+                    			endif ;
+                    			epDomainSet := StringToElement( AllSets, spSubsetOfString, create:0);
+                    			if not epDomainSet then
+                    				raise error "bug" ;
+                    			endif ;
+                    			spSubsetOfString := AttributeToString( epDomainSet, 'subset of' );
+                    			pNoKommas := StringOccurrences( spSubsetOfString, "," );
+                    		endwhile ;
+                    	endblock ;
+                    
+                    	block ! Parse the subset of string into atomic domain sets.
+                    		prRemoveSpaces( spSubsetOfString );
+                    		pCompoundDimension := pNoKommas + 1 ;
+                    		sIndexDomainPositions := ElementRange(1,pCompoundDimension);
+                    		for iIDP do
+                    			if iIDP = first( sIndexDomainPositions ) then
+                    				pBegPos := 2 ;
+                    				pEndPos := FindNthString( spSubsetOfString, ",", 1 ) - 1 ;
+                    			elseif iIDP = last( sIndexDomainPositions ) then
+                    				pBegPos := FindNthString( spSubsetOfString, ",", pNoKommas ) + 1 ;
+                    				pEndPos := StringLength( spSubsetOfString  ) - 1 ;
+                    			else
+                    				pIndexNo := iIDP ;
+                    				pBegPos := FindNthString( spSubsetOfString, ",", pIndexNo - 1 ) + 1 ;
+                    				pEndPos := FindNthString( spSubsetOfString, ",", pIndexNo     ) - 1 ;
+                    			endif ;
+                    			spAtomicDomainSetName := SubString( spSubsetOfString, pBegPos, pEndPos );
+                    			epIndexDomainSets( iIDP ) := StringToElement( AllSets, spAtomicDomainSetName, create:0);
+                    			if not epIndexDomainSets( iIDP ) then raise error "bug" ; endif ;
+                    		endfor ;
+                    	endblock ;
+                    
+                    	display "-----------------------", eCompoundSet, epIndexDomainSets ;
+                    
+                    endblock ;
+                    
+                    
+                    ! C below is the name of the compound set.
+                    ! Actual Mapping Set:
+                    ! CM --> sMappingSetCSet with index iMS_C
+                    ! RM --> sMappingSetCRelation
+                    ! Element parameters for tags
+                    ! EPTS(i_cm) --> epTag_C_S(iMS_C)
+                    ! ...
+                    ! Element parameter for caching
+                    ! EPHS --> epHelper_C_S
+                    ! ...
+                }
+                DeclarationSection Argument_Declaration {
+                    ElementParameter eCompoundSet {
+                        Range: sCompoundSets;
+                        Property: Input;
+                    }
+                }
+                DeclarationSection Local_Declarations {
+                    StringParameter spSubsetOfString;
+                    Set sIndexDomainPositions {
+                        SubsetOf: Integers;
+                        Index: iIDP;
+                    }
+                    ElementParameter epIndexDomainSets {
+                        IndexDomain: iIDP;
+                        Range: AllSets;
+                    }
+                    StringParameter spIndexDomainTags {
+                        IndexDomain: iIDP;
+                    }
+                    ElementParameter epDomainSet {
+                        Range: AllIdentifiers;
+                    }
+                    Parameter pNoKommas;
+                    Parameter pCompoundDimension {
+                        InitialData: 2;
+                    }
+                    StringParameter spAtomicDomainSetName;
+                    Parameter pSpacePos;
+                    Parameter pBegPos;
+                    Parameter pEndPos;
+                    Parameter pIndexNo;
+                }
+            }
+        }
         Section Attic {
             Procedure LibraryInitialization {
                 Comment: "Add initialization statements here that do not require any other library being initialized already.";

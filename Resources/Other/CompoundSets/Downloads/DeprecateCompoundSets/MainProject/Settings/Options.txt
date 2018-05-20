@@ -17,4 +17,3 @@
 * XA 16
 * NETSOL
 * Environment
-Default_UI 0

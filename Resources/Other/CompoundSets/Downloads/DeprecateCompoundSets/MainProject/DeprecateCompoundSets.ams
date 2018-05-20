@@ -2,43 +2,119 @@
 
 Model Main_DeprecateCompoundSets {
     DeclarationSection How_to_update_set_mapping_for_defined_compound_set_with_new_contents;
-    Set S {
-        Index: i;
-        Definition: ElementRange(1,5,prefix:"s");
-    }
-    Set T {
-        Index: j;
-        Definition: {
-            ElementRange(1,4,prefix:"t");
+    DeclarationSection Running_example_input_declarations {
+        Set S {
+            Index: i;
+            Definition: ElementRange(1,5,prefix:"s");
+        }
+        Set T {
+            Index: j;
+            Definition: {
+                ElementRange(1,4,prefix:"t");
+            }
+        }
+        Set U {
+            Index: k;
+            Definition: {
+                ElementRange(1,3,prefix:"u");
+            }
+        }
+        Set R {
+            SubsetOf: (S,T,U);
+            Definition: {
+                { (i,j,k) | mod( ord(i) + ord(j) + ord(k), 4 ) = 0 }
+            }
+        }
+        Set C {
+            SubsetOf: (S, T, U);
+            Tags: (TS, TT, TU);
+            Index: htemp, h;
+            Definition: {
+                { (i,j,k) | (i,j,k) in R }
+            }
+        }
+        Set D {
+            SubsetOf: (C);
+            Index: g;
+            Definition: {
+                { h | mod( ord(h), 2 ) = 0 }
+            }
+        }
+        Parameter P {
+            IndexDomain: h;
+            Definition: ord(h);
+        }
+        Parameter V1 {
+            Definition: sum( h, P(h) );
         }
     }
-    Set U {
-        Index: k;
-        Definition: {
-            ElementRange(1,3,prefix:"u");
+    DeclarationSection Set_Mapping_declarations {
+        Set CM {
+            Index: i_cm;
+            Parameter: ep_cm;
+        }
+        Set RM {
+            SubsetOf: (S,T,U,CM);
+        }
+        ElementParameter EPTS {
+            IndexDomain: i_cm;
+            Range: S;
+        }
+        ElementParameter EPTT {
+            IndexDomain: i_cm;
+            Range: T;
+        }
+        ElementParameter EPTU {
+            IndexDomain: i_cm;
+            Range: U;
+        }
+        ElementParameter EPHS {
+            Range: S;
+        }
+        ElementParameter EPHT {
+            Range: T;
+        }
+        ElementParameter EPHU {
+            Range: U;
         }
     }
-    Set R {
-        SubsetOf: (S,T,U);
-        Definition: {
-            { (i,j,k) | mod( ord(i) + ord(j) + ord(k), 4 ) = 0 }
+    Section Set_Mapping_Data_C {
+        DeclarationSection prSetMappingDataCSupportDeclarations {
+            Index i_C_temp {
+                Range: C;
+            }
+        }
+        Procedure prSetMappingDataC {
+            Body: {
+                for (i,j,k) | (i,j,k) in C do
+                
+                	! Cache the components of tuple h in element parameters.
+                	EPHS := i ;
+                	EPHT := j ;
+                	EPHU := k ;
+                
+                	! Create an element that looks like a tuple, but is just a string and 
+                	! add this element to the set mapping set CM.
+                	SetElementAdd(CM,ep_cm,formatString("(%e,%e,%e)",EPHS,EPHT,EPHU));
+                
+                	! Create a N+1 dim tuple and add this to the set mapping relation RM.
+                	RM += {(EPHS,EPHT,EPHU,ep_cm)};
+                
+                	! Fill in the element parameters that map the tags.
+                	EPTS(ep_cm) := EPHS ;
+                	EPTT(ep_cm) := EPHT ;
+                	EPTU(ep_cm) := EPHU ;
+                
+                endfor ;
+                
+                !block where single_column_display := 1 ;
+                !	display RM ;
+                !endblock ;
+                !display { EPTS, EPTT, EPTU } ;
+            }
         }
     }
-    Set C {
-        SubsetOf: (S, T, U);
-        Index: h;
-        Definition: {
-            { (i,j,k) | (i,j,k) in R }
-        }
-    }
-    Set D {
-        SubsetOf: C;
-        Index: g;
-        Definition: {
-            { h | mod( ord(h), 2 ) = 0 }
-        }
-    }
-    Procedure prFindCompoundSets;
+    DeclarationSection Test_declarations;
     Procedure MainInitialization {
         Comment: "Add initialization statements here that do NOT require any library being initialized already.";
     }

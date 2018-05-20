@@ -1,0 +1,147 @@
+## ams_version=1.0
+
+LibraryModule DataDuplicator {
+    Prefix: dd;
+    Interface: DataDuplicator;
+    Procedure CopySelectedData {
+        Arguments: (existingElement,newElement,eElemRange,processedIdentifiers);
+        Body: {
+            ! 0. Ensure there is no previous library with that name.
+            e_lib := StringToElement( AllIdentifiers, "CreateCopyOfElement", create: 0);
+            if e_lib then
+            	me::Delete( e_lib );
+            endif ;
+            
+            ! 1. Create a runtime library and a procedure to be filled with assignment statements.
+            e_lib  := me::CreateLibrary("CreateCopyOfElement", "cce" );
+            e_proc := me::Create( "WorkCreateCopyOfElement", 'procedure', e_lib );
+            
+            s_textOfProcBody := "" ;
+            
+            for someIdent do ! For each identifier to be processed:
+            
+              dim := IdentifierDimension( someIdent );
+              outerArgPos := 1;
+              while outerArgPos <= dim do ! Consider each argument
+                domInd := DomainIndex( someIdent, outerArgPos );
+                domSet := IndexRange( domInd );
+                if domSet = eElemRange then ! If the argument range matches the set
+            
+                  ! Actually create a line of the form:
+                  !       idName(index1,'newElement',index2) := idName(index1,'existingElement',index2);
+                  ! to the body of the procedure we are going to run.
+            
+                  bodyLine := someIdent + "(";
+                  innerArgPos := 1 ;
+                  while innerArgPos < outerArgPos do
+                    domIndInner := DomainIndex( someIdent, innerArgPos );
+                    bodyLine += domIndInner + "," ;
+                    innerArgPos += 1;
+                  endwhile ;
+            
+                  bodyLine += "'" + newElement + "'"   ;
+            
+                  innerArgPos := outerArgPos + 1 ;
+                  while innerArgPos <= dim do
+                    domIndInner := DomainIndex( someIdent, innerArgPos );
+                    bodyLine += "," + domIndInner ;
+                    innerArgPos += 1;
+                  endwhile ;
+                  bodyLine += ")" ;
+            
+                  bodyLine += " := " ;
+            
+                  bodyLine += someIdent + "(";
+                  innerArgPos := 1 ;
+                  while innerArgPos < outerArgPos do
+                    domIndInner := DomainIndex( someIdent, innerArgPos );
+                    bodyLine += domIndInner + "," ;
+                    innerArgPos += 1;
+                  endwhile ;
+            
+                  bodyLine += "'" + existingElement + "'" ;
+            
+                  innerArgPos := outerArgPos + 1 ;
+                  while innerArgPos <= dim do
+                    domIndInner := DomainIndex( someIdent, innerArgPos );
+                    bodyLine += "," + domIndInner ;
+                    innerArgPos += 1;
+                  endwhile ;
+                  bodyLine += ");" ;
+            
+                  ! Add the assignment statement to the procedure body.
+                  s_textOfProcBody += bodyLine + "\n" ;
+            
+                endif ;
+                outerArgPos += 1 ;
+              endwhile ;
+            
+            endfor ;
+            
+            ok := me::SetAttribute( e_proc, 'body', s_textOfProcBody );
+            
+            ok := me::compile( e_lib );
+            apply( e_proc );
+        }
+        DeclarationSection Argument_declarations {
+            Set elemRange {
+                Index: er;
+            }
+            ElementParameter existingElement {
+                Range: elemRange;
+                Property: Input;
+            }
+            ElementParameter newElement {
+                Range: elemRange;
+                Property: Input;
+            }
+            Set processedIdentifiers {
+                SubsetOf: AllIdentifiers;
+                Index: someIdent;
+                Property: Input;
+            }
+            ElementParameter eElemRange {
+                Range: AllIdentifiers;
+                Property: Input;
+            }
+        }
+        DeclarationSection Local_declarations {
+            Parameter dim;
+            Parameter outerArgPos;
+            Parameter innerArgPos;
+            Parameter ok;
+            ElementParameter domInd {
+                Range: AllIdentifiers;
+            }
+            ElementParameter domIndInner {
+                Range: AllIdentifiers;
+            }
+            ElementParameter domSet {
+                Range: AllIdentifiers;
+            }
+            StringParameter bodyLine;
+        }
+        DeclarationSection mef_declarations {
+            ElementParameter e_lib {
+                Range: AllIdentifiers;
+            }
+            ElementParameter e_sec {
+                Range: AllIdentifiers;
+            }
+            ElementParameter e_decl {
+                Range: AllIdentifiers;
+            }
+            ElementParameter e_proc {
+                Range: AllIdentifiers;
+                Default: 'MainExecution';
+            }
+            StringParameter s_textOfProcBody;
+        }
+    }
+    Procedure LibraryInitialization;
+    Procedure LibraryTermination {
+        Body: {
+            return 1 ;
+        }
+    }
+}
