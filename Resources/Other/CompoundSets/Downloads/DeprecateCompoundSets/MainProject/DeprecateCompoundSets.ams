@@ -20,7 +20,7 @@ Model Main_DeprecateCompoundSets {
             Index: h, htemp;
         }
         Set D {
-            SubsetOf: (C);
+            SubsetOf: C;
             Index: g, gtemp;
         }
         Parameter P {

@@ -113,6 +113,25 @@ LibraryModule DeprecateCompoundSetUtilities {
                     Range: errh::PendingErrors;
                 }
             }
+            Procedure prDeleteMappingSetRLDeclaration {
+                Body: {
+                    me::Delete( epSectionCompoundSetMappingDeclarations );
+                    sRuntimeIds := SectionIdentifiers( epCompoundSetMappingRuntimeLibrary );
+                    for iRuntimeId do
+                    	spRange := AttributeToString( iRuntimeId, 'range' );
+                    	if spRange and StringOccurrences( spRange, "," ) then
+                    		spRange := FindReplaceStrings( spRange, "~", "" );
+                    		me::SetAttribute( iRuntimeId, 'range', spRange );
+                    	endif ;
+                    endfor ;
+                    me::Compile( epCompoundSetMappingRuntimeLibrary );
+                }
+                Set sRuntimeIds {
+                    SubsetOf: AllIdentifiers;
+                    Index: iRuntimeId;
+                }
+                StringParameter spRange;
+            }
         }
     }
     Section PrivateSection {
