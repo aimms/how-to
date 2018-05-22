@@ -23,5 +23,5 @@ Other
 |
 
 .. toctree::
-	
-	HowToHandleTheDeprecationOfCompoundSets
+		
+	How To Transfer My Developer License to Another Machine

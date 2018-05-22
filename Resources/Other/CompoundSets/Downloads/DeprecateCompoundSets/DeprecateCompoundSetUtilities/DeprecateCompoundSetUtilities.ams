@@ -3,6 +3,7 @@
 LibraryModule DeprecateCompoundSetUtilities {
     Prefix: dcsu;
     Interface: PublicSection;
+    Property: NoSave;
     Section PublicSection {
         Section Identify_compound_sets {
             Set sCompoundRootSets {
@@ -128,6 +129,12 @@ LibraryModule DeprecateCompoundSetUtilities {
             ElementParameter epSectionCompoundSetMappingDeclarations {
                 Range: AllIdentifiers;
             }
+            ElementParameter epSectionRelationCompoundSetSetMappingSetDeclarations {
+                Range: AllIdentifiers;
+            }
+            ElementParameter epSectionRelationCompoundSetSetMappingSetDeclarationsDeclarations {
+                Range: AllIdentifiers;
+            }
             ElementParameter epSectionDataShadowDeclarations {
                 Range: AllIdentifiers;
             }
@@ -144,6 +151,14 @@ LibraryModule DeprecateCompoundSetUtilities {
             Set sDataIdentifiersRequiringShadow {
                 SubsetOf: AllIdentifiers;
                 Index: iDataIdentifierRequiringDataShadow;
+            }
+            ElementParameter epShadowsDataIdentifiers {
+                IndexDomain: IndexIdentifiers;
+                Range: AllIdentifiers;
+            }
+            ElementParameter epCompoundSetMappedIndex {
+                IndexDomain: IndexIdentifiers;
+                Range: AllIdentifiers;
             }
         }
         Section Private_Identify_Compound_Sets;
@@ -192,9 +207,11 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		spCompoundSetMappingRuntimePrefixName );
                     !e_proc := me::Create( "WorkCreateCopyOfElement", 'procedure', e_lib );
                     epSectionCompoundSetMappingDeclarations := me::Create( "Mapping_Set_Declarations", 'section', epCompoundSetMappingRuntimeLibrary );
+                    epSectionRelationCompoundSetSetMappingSetDeclarations := me::Create( "Relation_Compound_Set_Set_Mapping_Set_Declarations", 'section', epCompoundSetMappingRuntimeLibrary );
                     epSectionDataShadowDeclarations := me::Create( "Data_Shadow_Declarations", 'section', epCompoundSetMappingRuntimeLibrary );
                     epSectionForwardCopyProcedures := me::Create( "Forward_Copy_Procedures", 'section', epCompoundSetMappingRuntimeLibrary );
                     epSectionBacwardCopyProcedures := me::Create( "Backward_Copy_Procedures", 'section', epCompoundSetMappingRuntimeLibrary );
+                    epSectionRelationCompoundSetSetMappingSetDeclarationsDeclarations := me::Create( "Relation_Compound_Set_Set_Mapping_Set_Declarations_Declarations", 'declaration', epSectionRelationCompoundSetSetMappingSetDeclarations );
                     
                     for iCompoundSetNo do
                     	prWorkCreateMappingSet(epFoundCompoundSets(iCompoundSetNo));
@@ -202,9 +219,12 @@ LibraryModule DeprecateCompoundSetUtilities {
                     
                     block ! Determine set of identifiers that require a data shadow
                     	empty sDataIdentifiersRequiringShadow ;
+                    	empty epShadowsDataIdentifiers ;
                     	for iDataIdentifier do 
                     		if fncRequiresDataShadow( iDataIdentifier ) then
                     			sDataIdentifiersRequiringShadow += iDataIdentifier;
+                    			epShadowsDataIdentifiers(iDataIdentifier) := me::Create( epSectionDataShadowDeclarations,
+                    				IdentifierType(iDataIdentifier), epSectionDataShadowDeclarations);
                     		endif ;
                     	endfor ;
                     	!display "------------DEBUG---------", sDataIdentifiersRequiringShadow ;
@@ -313,7 +333,19 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	! EPHS --> epHelper_<CName>_pos
                     	! ...
                     
-                    	spCompoundSetName := FormatString("%e", eCompoundSet );
+                    	block ! Determine name of compound set and compound index.
+                    		spCompoundSetName := FormatString("%e", eCompoundSet );
+                    		spCompoundIndexName := AttributeToString( eCompoundSet, 'index' );
+                    		if spCompoundIndexName then ! if there are multiple indices take the first one.
+                    			pBegPos := FindString( spCompoundIndexName, "," );
+                    			if pBegPos then
+                    				spCompoundIndexName := SubString( spCompoundIndexName, 1, pBegPos -1 );
+                    			endif ;
+                    		else ! Require an index, it is needed later on.
+                    			raise error "Compound set " + spCompoundSetName + " does not have an index.  " +
+                    			            "Perhaps the set can be deleted anyway, or perhaps you can give this se an index." ;
+                    		endif ;
+                    	endblock ;
                     
                     	epDeclarationSectionMappingSet :=  me::Create( "Mapping_Set_Declarations_" + spCompoundSetName, 
                     		'declaration', epSectionCompoundSetMappingDeclarations );
@@ -357,6 +389,15 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		endfor ;
                     	endblock ;
                     
+                    	block ! Relate the compound set index and the set mapping set index
+                    		epElementParameterRelateCompoundSetMappingSetSet := me::Create(
+                    			formatString( "p01CompoundSetMappingSet_%s", spCompoundSetName), 'parameter',
+                    				epSectionRelationCompoundSetSetMappingSetDeclarationsDeclarations );
+                    		me::SetAttribute( epElementParameterRelateCompoundSetMappingSetSet, 'index domain', 
+                    			formatString( "(%s,%s)",spCompoundIndexName, spMappingSetIndex));
+                    		me::SetAttribute( epElementParameterRelateCompoundSetMappingSetSet, 'range', "binary" );
+                    	endblock ;
+                    
                     endblock ;
                 }
                 DeclarationSection Argument_Declaration {
@@ -367,6 +408,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                 }
                 DeclarationSection Local_Declarations {
                     StringParameter spCompoundSetName;
+                    StringParameter spCompoundIndexName;
                     StringParameter spSubsetOfString;
                     Set sIndexDomainPositions {
                         SubsetOf: Integers;
@@ -403,6 +445,9 @@ LibraryModule DeprecateCompoundSetUtilities {
                         IndexDomain: iIDP;
                         Range: AllIdentifiers;
                     }
+                    ElementParameter epElementParameterRelateCompoundSetMappingSetSet {
+                        Range: AllIdentifiers;
+                    }
                     ElementParameter epDeclarationSectionMappingSet {
                         Range: AllIdentifiers;
                     }
@@ -437,6 +482,51 @@ LibraryModule DeprecateCompoundSetUtilities {
                 }
                 ElementParameter epIndex {
                     Range: AllSymbols;
+                }
+                ElementParameter epSet {
+                    Range: AllSymbols;
+                }
+                Parameter pDim;
+            }
+            Function fncIndexDomainString {
+                Arguments: (epId,p01MappedIndex);
+                Range: string;
+                Body: {
+                    fncIndexDomainString := "(" ;
+                    pDim := IdentifierDimension( epId );
+                    while loopCount <= pDim do
+                    	epIndex := DomainIndex( epId, loopCount );
+                    	epSet := IndexRange( epIndex );
+                    	if p01MappedIndex and ( epSet in sCompoundSets ) then
+                    		epMappedIndex := epCompoundSetMappedIndex( epSet );
+                    		fncIndexDomainString += formatString("%e", epMappedIndex); ;
+                    	else
+                    		fncIndexDomainString += formatString("%e", epIndex); ;
+                    	endif ;
+                    	if loopCount < pDim then
+                    		fncIndexDomainString += ", " ;
+                    	endif ;
+                    endwhile ;
+                    fncIndexDomainString += ")" ;
+                }
+                ElementParameter epId {
+                    Range: AllIdentifiers;
+                    Property: Input;
+                }
+                ElementParameter epIndex {
+                    Range: AllSymbols;
+                }
+                ElementParameter epMappedIndex {
+                    Range: AllSymbols;
+                }
+                Parameter p01MappedIndex {
+                    Range: binary;
+                    Property: Input;
+                    Comment: {
+                        "When this argument is
+                        0, then use original compound index
+                        1, then for each compound index, find its set mapped set index and use that."
+                    }
                 }
                 ElementParameter epSet {
                     Range: AllSymbols;

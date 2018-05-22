@@ -64,7 +64,7 @@ This rewrite procedure is designed to make minimal changes to your application a
 
 #. Allow to deploy the efficiency improvements already implemented in the new parallel execution engine.
 
-Before we continue, let's determine the scope of our work first.  Compound set data is present in:
+Before we continue, let's determine the scope of the work first.  Compound set data is present in:
 
 #. The model itself, obviously.
 

@@ -28,13 +28,13 @@ Model Main_DeprecateCompoundSets {
         Set C {
             SubsetOf: (S, T, U);
             Tags: (TS, TT, TU);
-            Index: htemp, h;
+            Index: h, htemp;
             Definition: {
                 { (i,j,k) | (i,j,k) in R }
             }
         }
         Set D {
-            SubsetOf: C;
+            SubsetOf: (C);
             Index: g;
             Definition: {
                 { h | mod( ord(h), 2 ) = 0 }
