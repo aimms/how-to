@@ -113,6 +113,10 @@ LibraryModule DeprecateCompoundSetUtilities {
                     Range: errh::PendingErrors;
                 }
             }
+            Set sRuntimeIds {
+                SubsetOf: AllIdentifiers;
+                Index: iRuntimeId;
+            }
             Procedure prDeleteMappingSetRLDeclaration {
                 Body: {
                     me::Delete( epSectionCompoundSetMappingDeclarations );
@@ -124,18 +128,25 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		me::SetAttribute( iRuntimeId, 'range', spRange );
                     	endif ;
                     endfor ;
+                    me::ExportNode( epCompoundSetMappingRuntimeLibrary, "RL.ams" );
+                    me::Delete( epCompoundSetMappingRuntimeLibrary );
+                    empty secundary_runtime_library_administration ;
+                    epCompoundSetMappingRuntimeLibrary := me::ImportLibrary( "RL.ams" );
+                    block 
                     me::Compile( epCompoundSetMappingRuntimeLibrary );
-                }
-                Set sRuntimeIds {
-                    SubsetOf: AllIdentifiers;
-                    Index: iRuntimeId;
+                    endblock ;
                 }
                 StringParameter spRange;
+            }
+            Procedure prWriteRuntimeLibrary {
+                Body: {
+                    me::ExportNode( epCompoundSetMappingRuntimeLibrary, "RL.ams" );
+                }
             }
         }
     }
     Section PrivateSection {
-        DeclarationSection runtime_library_adminstration {
+        DeclarationSection primary_runtime_library_adminstration {
             StringParameter spCompoundSetMappingRuntimeLibraryName {
                 Definition: "CompoundSetMappingRuntimeLibrary";
             }
@@ -145,6 +156,8 @@ LibraryModule DeprecateCompoundSetUtilities {
             ElementParameter epCompoundSetMappingRuntimeLibrary {
                 Range: AllIdentifiers;
             }
+        }
+        DeclarationSection secundary_runtime_library_administration {
             ElementParameter epSectionCompoundSetMappingDeclarations {
                 Range: AllIdentifiers;
             }
