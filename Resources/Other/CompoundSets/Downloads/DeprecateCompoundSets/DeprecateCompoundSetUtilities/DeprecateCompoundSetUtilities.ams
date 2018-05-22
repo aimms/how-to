@@ -120,6 +120,11 @@ LibraryModule DeprecateCompoundSetUtilities {
             Procedure prDeleteMappingSetRLDeclaration {
                 Body: {
                     me::Delete( epSectionCompoundSetMappingDeclarations );
+                }
+                StringParameter spRange;
+            }
+            Procedure prRestoreDeletedIdentifiers {
+                Body: {
                     sRuntimeIds := SectionIdentifiers( epCompoundSetMappingRuntimeLibrary );
                     for iRuntimeId do
                     	spRange := AttributeToString( iRuntimeId, 'range' );
@@ -133,7 +138,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     empty secundary_runtime_library_administration ;
                     epCompoundSetMappingRuntimeLibrary := me::ImportLibrary( "RL.ams" );
                     block 
-                    me::Compile( epCompoundSetMappingRuntimeLibrary );
+                    	me::Compile( epCompoundSetMappingRuntimeLibrary );
                     endblock ;
                 }
                 StringParameter spRange;
