@@ -206,7 +206,6 @@ LibraryModule DeprecateCompoundSetUtilities {
                 Range: AllIdentifiers;
             }
         }
-        Section Private_Identify_Compound_Sets;
         Section Creating_compound_set_mappings {
             Section Internal_utilities {
                 Procedure prRemoveSpaces {
@@ -230,6 +229,156 @@ LibraryModule DeprecateCompoundSetUtilities {
                         Property: InOut;
                     }
                     Parameter pSpacePos;
+                }
+                Function fncRequiresDataShadow {
+                    Arguments: (epId);
+                    Range: binary;
+                    Body: {
+                        fncRequiresDataShadow := 0 ;
+                        pDim := IdentifierDimension( epId );
+                        while loopCount <= pDim do
+                        	epIndex := DomainIndex( epId, loopCount );
+                        	epSet := IndexRange( epIndex );
+                        	if epSet in sCompoundSets then
+                        		fncRequiresDataShadow := 1 ;
+                        		break ;
+                        	endif ;
+                        endwhile ;
+                    }
+                    ElementParameter epId {
+                        Range: AllIdentifiers;
+                        Property: Input;
+                    }
+                    ElementParameter epIndex {
+                        Range: AllSymbols;
+                    }
+                    ElementParameter epSet {
+                        Range: AllSymbols;
+                    }
+                    Parameter pDim;
+                }
+                Function fncIndexDomainString {
+                    Arguments: (epId,p01MappedIndex);
+                    Range: string;
+                    Body: {
+                        fncIndexDomainString := "(" ;
+                        pDim := IdentifierDimension( epId );
+                        while loopCount <= pDim do
+                        	epIndex := DomainIndex( epId, loopCount );
+                        	epSet := IndexRange( epIndex );
+                        	if p01MappedIndex and ( epSet in sCompoundSets ) then
+                        		spMappedIndex := spCompoundSetMappedIndex( epSet );
+                        		fncIndexDomainString += spMappedIndex ;
+                        	else
+                        		fncIndexDomainString += formatString("%e", epIndex); ;
+                        	endif ;
+                        	if loopCount < pDim then
+                        		fncIndexDomainString += ", " ;
+                        	endif ;
+                        endwhile ;
+                        fncIndexDomainString += ")" ;
+                    }
+                    ElementParameter epId {
+                        Range: AllIdentifiers;
+                        Property: Input;
+                    }
+                    ElementParameter epIndex {
+                        Range: AllSymbols;
+                    }
+                    StringParameter spMappedIndex;
+                    Parameter p01MappedIndex {
+                        Range: binary;
+                        Property: Input;
+                        Comment: {
+                            "When this argument is
+                            0, then use original compound index
+                            1, then for each compound index, find its set mapped set index and use that."
+                        }
+                    }
+                    ElementParameter epSet {
+                        Range: AllSymbols;
+                    }
+                    Parameter pDim;
+                }
+                Function fncNoCompoundIndices {
+                    Arguments: (epId);
+                    Body: {
+                        fncNoCompoundIndices := 0 ;
+                        pDim := IdentifierDimension( epId );
+                        while loopCount <= pDim do
+                        	epIndex := DomainIndex( epId, loopCount );
+                        	epSet := IndexRange( epIndex );
+                        	if epSet in sCompoundSets then
+                        		fncNoCompoundIndices += 1 ;
+                        	endif ;
+                        endwhile ;
+                    }
+                    ElementParameter epId {
+                        Range: AllIdentifiers;
+                        Property: Input;
+                    }
+                    ElementParameter epIndex {
+                        Range: AllSymbols;
+                    }
+                    ElementParameter epSet {
+                        Range: AllSymbols;
+                    }
+                    Parameter pDim;
+                }
+                Function fncCompoundIndex {
+                    Arguments: (epId,pCompoundIndexNo);
+                    Range: AllIdentifiers;
+                    Body: {
+                        fncCompoundIndex := '' ;
+                        pPos := 0 ;
+                        pDim := IdentifierDimension( epId );
+                        while loopCount <= pDim do
+                        	epIndex := DomainIndex( epId, loopCount );
+                        	epSet := IndexRange( epIndex );
+                        	if epSet in sCompoundSets then
+                        		pPos += 1 ;
+                        		if pPos = pCompoundIndexNo then
+                        			fncCompoundIndex := epIndex ;
+                        		endif ;
+                        	endif ;
+                        endwhile ;
+                    }
+                    ElementParameter epId {
+                        Range: AllIdentifiers;
+                        Property: Input;
+                    }
+                    ElementParameter epIndex {
+                        Range: AllSymbols;
+                    }
+                    ElementParameter epSet {
+                        Range: AllSymbols;
+                    }
+                    Parameter pDim;
+                    Parameter pCompoundIndexNo {
+                        Property: Input;
+                    }
+                    Parameter pPos;
+                }
+                Function fncCompoundIterateCondition {
+                    Arguments: (epCompoundIndex);
+                    Range: string;
+                    Body: {
+                        ! epElementParameterRelationCompoundSet
+                        epSet := IndexRange( epCompoundIndex );
+                        epP01 := epElementParameterRelationCompoundSet( epSet );
+                        fncCompoundIterateCondition := formatString( "%e(%e,%s)", 
+                        	epP01, epCompoundIndex,  spCompoundSetMappedIndex(epSet) );
+                    }
+                    ElementParameter epCompoundIndex {
+                        Range: AllIdentifiers;
+                        Property: Input;
+                    }
+                    ElementParameter epSet {
+                        Range: AllIdentifiers;
+                    }
+                    ElementParameter epP01 {
+                        Range: AllIdentifiers;
+                    }
                 }
             }
             DeclarationSection Declarations_for_creating_compound_set_mappings;
@@ -260,7 +409,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     epSectionRelationCompoundSetSetMappingSetDeclarationsDeclarations := me::Create( "Relation_Compound_Set_Set_Mapping_Set_Declarations_Declarations", 'declaration', epSectionRelationCompoundSetSetMappingSetDeclarations );
                     
                     for iCompoundSetNo do
-                    	prWorkCreateMappingSet(epFoundCompoundSets(iCompoundSetNo));
+                    	prWorkCreateMappingSet1(epFoundCompoundSets(iCompoundSetNo));
                     endfor ;
                     
                     block ! Determine set of identifiers that require a data shadow
@@ -321,7 +470,45 @@ LibraryModule DeprecateCompoundSetUtilities {
                 }
                 StringParameter spCompoundSetName;
             }
-            Procedure prWorkCreateMappingSet {
+            StringParameter spCompoundSetName;
+            StringParameter spCompoundIndexName;
+            Parameter pCompoundDimension {
+                InitialData: 2;
+            }
+            Set sIndexDomainPositions {
+                SubsetOf: Integers;
+                Index: iIDP;
+            }
+            ElementParameter epIndexDomainSets {
+                IndexDomain: iIDP;
+                Range: AllSets;
+            }
+            StringParameter spIndexDomainTags {
+                IndexDomain: iIDP;
+            }
+            StringParameter spTag {
+                IndexDomain: iIDP;
+            }
+            ElementParameter epElementParameterForTag {
+                IndexDomain: iIDP;
+                Range: AllIdentifiers;
+            }
+            ElementParameter epElementParameterHelp {
+                IndexDomain: iIDP;
+                Range: AllIdentifiers;
+            }
+            ElementParameter epMappingSetSet {
+                Range: AllIdentifiers;
+            }
+            StringParameter spMappingSetIndex;
+            StringParameter spMappingSetParameter;
+            ElementParameter epElementParameterRelateCompoundSetMappingSetSet {
+                Range: AllIdentifiers;
+            }
+            ElementParameter epMappingSetRelation {
+                Range: AllIdentifiers;
+            }
+            Procedure prWorkCreateMappingSet1 {
                 Arguments: (eCompoundSet);
                 Body: {
                     block ! Check for erreneous input
@@ -336,6 +523,8 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		return ;
                     	endif ;
                     endblock ;
+                    
+                    empty sIndexDomainPositions ;
                     
                     block ! Parse structure of Compound Set
                     
@@ -452,7 +641,8 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	endblock ;
                     
                     	block ! Declare set mapping relation.
-                    		epMappingSetRelation := me::Create( "sMappingSet_"+ spCompoundSetName+"_Relation" , 'set', epDeclarationSectionMappingSet );
+                    		epMappingSetRelation := me::Create( "sMappingSet_"+ spCompoundSetName+"_Relation" , 
+                    			'set', epDeclarationSectionMappingSet );
                     		spMappingSetRelationSubsetOf := "(";
                     		for iIDP do
                     			spMappingSetRelationSubsetOf += formatString("%e,", epIndexDomainSets(iIDP) );
@@ -495,6 +685,39 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	endblock ;
                     
                     endblock ;
+                }
+                DeclarationSection Argument_Declaration {
+                    ElementParameter eCompoundSet {
+                        Range: sCompoundSets;
+                        Property: Input;
+                    }
+                }
+                DeclarationSection Local_Declarations {
+                    StringParameter spSubsetOfString;
+                    ElementParameter epDomainSet {
+                        Range: AllIdentifiers;
+                    }
+                    Parameter pNoKommas;
+                    StringParameter spAtomicDomainSetName;
+                    Parameter pBegPos;
+                    Parameter pEndPos;
+                    Parameter pIndexNo;
+                    StringParameter spTagsString;
+                    ElementParameter epDeclarationSectionMappingSet {
+                        Range: AllIdentifiers;
+                    }
+                    ElementParameter epMappingSetRelation {
+                        Range: AllIdentifiers;
+                    }
+                    StringParameter spMappingSetRelationSubsetOf;
+                    ElementParameter epProcFillSetMapping {
+                        Range: AllIdentifiers;
+                    }
+                }
+            }
+            Procedure prWorkCreateMappingSet2 {
+                Arguments: (eCompoundSet);
+                Body: {
                     
                     block ! Create procedure to fill the data of all the set mapping identifiers 
                     	epProcFillSetMapping := me::Create( "prProcFillSetMapping" + spCompoundSetName,
@@ -579,214 +802,11 @@ LibraryModule DeprecateCompoundSetUtilities {
                     }
                 }
                 DeclarationSection Local_Declarations {
-                    StringParameter spCompoundSetName;
-                    StringParameter spCompoundIndexName;
-                    StringParameter spSubsetOfString;
-                    Set sIndexDomainPositions {
-                        SubsetOf: Integers;
-                        Index: iIDP;
-                    }
-                    ElementParameter epIndexDomainSets {
-                        IndexDomain: iIDP;
-                        Range: AllSets;
-                    }
-                    StringParameter spIndexDomainTags {
-                        IndexDomain: iIDP;
-                    }
-                    ElementParameter epDomainSet {
-                        Range: AllIdentifiers;
-                    }
-                    Parameter pNoKommas;
-                    Parameter pCompoundDimension {
-                        InitialData: 2;
-                    }
-                    StringParameter spAtomicDomainSetName;
-                    Parameter pSpacePos;
-                    Parameter pBegPos;
-                    Parameter pEndPos;
-                    Parameter pIndexNo;
-                    StringParameter spTagsString;
-                    StringParameter spTag {
-                        IndexDomain: iIDP;
-                    }
-                    ElementParameter epElementParameterForTag {
-                        IndexDomain: iIDP;
-                        Range: AllIdentifiers;
-                    }
-                    ElementParameter epElementParameterHelp {
-                        IndexDomain: iIDP;
-                        Range: AllIdentifiers;
-                    }
-                    ElementParameter epElementParameterRelateCompoundSetMappingSetSet {
-                        Range: AllIdentifiers;
-                    }
-                    ElementParameter epDeclarationSectionMappingSet {
-                        Range: AllIdentifiers;
-                    }
-                    ElementParameter epMappingSetSet {
-                        Range: AllIdentifiers;
-                    }
-                    StringParameter spMappingSetIndex;
-                    StringParameter spMappingSetParameter;
-                    ElementParameter epMappingSetRelation {
-                        Range: AllIdentifiers;
-                    }
-                    StringParameter spMappingSetRelationSubsetOf;
                     ElementParameter epProcFillSetMapping {
                         Range: AllIdentifiers;
                     }
                     StringParameter spBody;
                     StringParameter spBodyLine;
-                }
-            }
-            Function fncRequiresDataShadow {
-                Arguments: (epId);
-                Range: binary;
-                Body: {
-                    fncRequiresDataShadow := 0 ;
-                    pDim := IdentifierDimension( epId );
-                    while loopCount <= pDim do
-                    	epIndex := DomainIndex( epId, loopCount );
-                    	epSet := IndexRange( epIndex );
-                    	if epSet in sCompoundSets then
-                    		fncRequiresDataShadow := 1 ;
-                    		break ;
-                    	endif ;
-                    endwhile ;
-                }
-                ElementParameter epId {
-                    Range: AllIdentifiers;
-                    Property: Input;
-                }
-                ElementParameter epIndex {
-                    Range: AllSymbols;
-                }
-                ElementParameter epSet {
-                    Range: AllSymbols;
-                }
-                Parameter pDim;
-            }
-            Function fncIndexDomainString {
-                Arguments: (epId,p01MappedIndex);
-                Range: string;
-                Body: {
-                    fncIndexDomainString := "(" ;
-                    pDim := IdentifierDimension( epId );
-                    while loopCount <= pDim do
-                    	epIndex := DomainIndex( epId, loopCount );
-                    	epSet := IndexRange( epIndex );
-                    	if p01MappedIndex and ( epSet in sCompoundSets ) then
-                    		spMappedIndex := spCompoundSetMappedIndex( epSet );
-                    		fncIndexDomainString += spMappedIndex ;
-                    	else
-                    		fncIndexDomainString += formatString("%e", epIndex); ;
-                    	endif ;
-                    	if loopCount < pDim then
-                    		fncIndexDomainString += ", " ;
-                    	endif ;
-                    endwhile ;
-                    fncIndexDomainString += ")" ;
-                }
-                ElementParameter epId {
-                    Range: AllIdentifiers;
-                    Property: Input;
-                }
-                ElementParameter epIndex {
-                    Range: AllSymbols;
-                }
-                StringParameter spMappedIndex;
-                Parameter p01MappedIndex {
-                    Range: binary;
-                    Property: Input;
-                    Comment: {
-                        "When this argument is
-                        0, then use original compound index
-                        1, then for each compound index, find its set mapped set index and use that."
-                    }
-                }
-                ElementParameter epSet {
-                    Range: AllSymbols;
-                }
-                Parameter pDim;
-            }
-            Function fncNoCompoundIndices {
-                Arguments: (epId);
-                Body: {
-                    fncNoCompoundIndices := 0 ;
-                    pDim := IdentifierDimension( epId );
-                    while loopCount <= pDim do
-                    	epIndex := DomainIndex( epId, loopCount );
-                    	epSet := IndexRange( epIndex );
-                    	if epSet in sCompoundSets then
-                    		fncNoCompoundIndices += 1 ;
-                    	endif ;
-                    endwhile ;
-                }
-                ElementParameter epId {
-                    Range: AllIdentifiers;
-                    Property: Input;
-                }
-                ElementParameter epIndex {
-                    Range: AllSymbols;
-                }
-                ElementParameter epSet {
-                    Range: AllSymbols;
-                }
-                Parameter pDim;
-            }
-            Function fncCompoundIndex {
-                Arguments: (epId,pCompoundIndexNo);
-                Range: AllIdentifiers;
-                Body: {
-                    fncCompoundIndex := '' ;
-                    pPos := 0 ;
-                    pDim := IdentifierDimension( epId );
-                    while loopCount <= pDim do
-                    	epIndex := DomainIndex( epId, loopCount );
-                    	epSet := IndexRange( epIndex );
-                    	if epSet in sCompoundSets then
-                    		pPos += 1 ;
-                    		if pPos = pCompoundIndexNo then
-                    			fncCompoundIndex := epIndex ;
-                    		endif ;
-                    	endif ;
-                    endwhile ;
-                }
-                ElementParameter epId {
-                    Range: AllIdentifiers;
-                    Property: Input;
-                }
-                ElementParameter epIndex {
-                    Range: AllSymbols;
-                }
-                ElementParameter epSet {
-                    Range: AllSymbols;
-                }
-                Parameter pDim;
-                Parameter pCompoundIndexNo {
-                    Property: Input;
-                }
-                Parameter pPos;
-            }
-            Function fncCompoundIterateCondition {
-                Arguments: (epCompoundIndex);
-                Range: string;
-                Body: {
-                    ! epElementParameterRelationCompoundSet
-                    epSet := IndexRange( epCompoundIndex );
-                    epP01 := epElementParameterRelationCompoundSet( epSet );
-                    fncCompoundIterateCondition := formatString( "%e(%e,%s)", 
-                    	epP01, epCompoundIndex,  spCompoundSetMappedIndex(epSet) );
-                }
-                ElementParameter epCompoundIndex {
-                    Range: AllIdentifiers;
-                    Property: Input;
-                }
-                ElementParameter epSet {
-                    Range: AllIdentifiers;
-                }
-                ElementParameter epP01 {
-                    Range: AllIdentifiers;
                 }
             }
         }

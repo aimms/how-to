@@ -17,3 +17,5 @@
 "dcsu::epCompoundSetMappedIndex" "dcsu::spCompoundSetMappedIndex" "2018-05-22 06:48:35"
 "dcsu::Copy_fncNoCompoundIndices" "dcsu::fncCompoundIndex" "2018-05-22 07:00:20"
 "dcsu::Copy_prDeleteMappingSetRLDeclaration" "dcsu::prRestoreDeletedIdentifiers" "2018-05-22 10:19:46"
+"dcsu::Copy_prWorkCreateMappingSet" "dcsu::prWorkCreateMappingSet2" "2018-05-22 11:03:47"
+"dcsu::prWorkCreateMappingSet" "dcsu::prWorkCreateMappingSet1" "2018-05-22 11:03:53"
