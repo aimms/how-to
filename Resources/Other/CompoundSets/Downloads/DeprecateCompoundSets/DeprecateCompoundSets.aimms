@@ -2,7 +2,4 @@
 <References AIMMS_Version="4.53.3.1 (x64)">
 	<MainProject Path="MainProject" />
 	<Library Path="DeprecateCompoundSetUtilities" />
-	<RepositoryLibrary UUID="7A2E765C-2A09-4456-8583-C7AF9DE0484D" Name="AIMMSUnitTest" Version="1.0.0.40" />
-	<Library System="true" Path="AimmsPro" />
-	<Library System="true" Path="AimmsWebUI" />
 </References>

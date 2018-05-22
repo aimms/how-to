@@ -34,7 +34,7 @@ Model Main_DeprecateCompoundSets {
             }
         }
         Set D {
-            SubsetOf: (C);
+            SubsetOf: C;
             Index: g;
             Definition: {
                 { h | mod( ord(h), 2 ) = 0 }
@@ -130,7 +130,11 @@ Model Main_DeprecateCompoundSets {
             or add statements that require the Data Management module to be initialized."
         }
     }
-    Procedure MainExecution;
+    Procedure MainExecution {
+        Body: {
+            dcsu::prCreateSetMappingsCompoundSet();
+        }
+    }
     Procedure PreMainTermination {
         Body: {
             return  1;

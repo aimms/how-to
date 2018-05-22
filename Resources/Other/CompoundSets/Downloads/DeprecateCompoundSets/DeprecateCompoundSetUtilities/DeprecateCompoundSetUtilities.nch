@@ -16,3 +16,6 @@
 "dcsu::Copy_epSectionDataShadowDeclarations" "dcsu::epSectionForwardCopyProcedures" "2018-05-20 08:07:03"
 "dcsu::Copy_epSectionForwardCopyProcedures" "dcsu::epSectionBacwardCopyProcedures" "2018-05-20 08:07:23"
 "dcsu::Copy_epSectionRelationCompoundSetSetMappingSetDeclarations" "dcsu::epSectionRelationCompoundSetSetMappingSetDeclarationsDeclarations" "2018-05-22 05:38:48"
+"dcsu::Copy_epSectionForwardCopyProcedures" "dcsu::epProcForwardCopyProcedure" "2018-05-22 06:37:36"
+"dcsu::epCompoundSetMappedIndex" "dcsu::spCompoundSetMappedIndex" "2018-05-22 06:48:35"
+"dcsu::Copy_fncNoCompoundIndices" "dcsu::fncCompoundIndex" "2018-05-22 07:00:20"
