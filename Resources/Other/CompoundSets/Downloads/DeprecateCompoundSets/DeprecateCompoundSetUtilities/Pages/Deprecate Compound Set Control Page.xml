@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
-<Page Version="4000" TimeStamp="2018-05-22 13:34:47">
+<Page Version="4000" TimeStamp="2018-05-22 11:48:28">
 	<PageEditSize Type="Inherited" />
 	<ProjectUUID>20FA164F-37C1-49B1-AB6C-A8AF79AF40F1</ProjectUUID>
 	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
 	<Background Inherited="true" />
 	<PageObject Type="Button">
 		<Location top="30" left="60" bottom="108" right="594" />
-		<TabOrder>3</TabOrder>
+		<TabOrder>4</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Step 1: Create Mapping Set and Relation"</Title>
@@ -49,11 +49,43 @@
 			</Action>
 		</ActionSequence>
 	</PageObject>
+	<PageObject Type="Button">
+		<Location top="324" left="60" bottom="402" right="594" />
+		<TabOrder>3</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Step 4:Copy the current case to forward case"</Title>
+		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>dcsu::prForwardDataToShadow</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="420" left="60" bottom="498" right="594" />
+		<TabOrder>3</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Step 5: Store forward case on disk"</Title>
+		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>dcsu::prForwardShadowToCase</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
 	<UsedReferences>
 		<Model>
 			<Symbol>dcsu::prCreateSetMappingsCompoundSet</Symbol>
 			<Symbol>dcsu::prEnourageToCopySection</Symbol>
 			<Symbol>dcsu::prCreateShadowCompoundSet</Symbol>
+			<Symbol>dcsu::prForwardDataToShadow</Symbol>
+			<Symbol>dcsu::prForwardShadowToCase</Symbol>
 		</Model>
 	</UsedReferences>
 </Page>

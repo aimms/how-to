@@ -101,6 +101,9 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
             Procedure prForwardDataToShadow {
                 Body: {
+                    if not epCompoundSetShadowRuntimeLibrary then
+                    	prCreateShadowCompoundSet();
+                    endif ;
                     me::Compile( epCompoundSetShadowRuntimeLibrary  );
                     Apply( epProcForwardCopyProcedure );
                 }
@@ -110,7 +113,11 @@ LibraryModule DeprecateCompoundSetUtilities {
                     prWorkSaveShadowToCase();
                 }
             }
-            Procedure prGenerateBackward;
+            Procedure prGenerateBackward {
+                Body: {
+                    prWorkGenerateBackward();
+                }
+            }
             Set sRuntimeIds {
                 SubsetOf: AllIdentifiers;
                 Index: iRuntimeId;
@@ -350,6 +357,10 @@ LibraryModule DeprecateCompoundSetUtilities {
                 Range: AllIdentifiers;
             }
             ElementParameter epProcForwardCopyProcedure {
+                Range: AllIdentifiers;
+                Default: 'MainExecution';
+            }
+            ElementParameter epProcBackwardCopyProcedure {
                 Range: AllIdentifiers;
                 Default: 'MainExecution';
             }
@@ -689,10 +700,6 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
             Procedure prWorkCreateShadowCompoundSet {
                 Body: {
-                    !sDataIdentifiers := 
-                    !	{ IndexIdentifiers | IndexIdentifiers in ( AllSets + AllParameters + AllVariables + AllConstraints ) and 
-                    !	                     ( not ( isRuntimeIdentifier( IndexIdentifiers ) ) ) and 
-                    !	                     ( not ( IndexIdentifiers in DeprecateCompoundSetUtilities ) ) } ;
                     
                     Read from file "sDataIdentifiers.txt" ;
                     Read from file "secundary.txt" ;
@@ -801,22 +808,42 @@ LibraryModule DeprecateCompoundSetUtilities {
                 Arguments: (eCompoundSet);
                 Body: {
                     
+                    prWorkCreateBinaryRelatingCompoundIndexMappingIndex(eCompoundSet);
                     
-                    	block ! Relate the compound set index and the set mapping set index
-                    		spCompoundSetName(eCompoundSet) := FormatString( "%e", eCompoundSet );
-                    		epElementParameterRelateCompoundSetMappingSetSet := me::Create(
-                    			formatString( "p01CompoundSetMappingSet_%s", spCompoundSetName(eCompoundSet)), 'parameter',
-                    				epSectionRelationCompoundSetSetMappingSetDeclarationsDeclarations );
-                    		me::SetAttribute( epElementParameterRelateCompoundSetMappingSetSet, 'index domain', 
-                    			formatString( "(%s,%s)",spCompoundIndexName(eCompoundSet), spMappingSetIndex(eCompoundSet)));
-                    		me::SetAttribute( epElementParameterRelateCompoundSetMappingSetSet, 'range', "binary" );
-                    		epElementParameterRelationCompoundSet(eCompoundSet) := epElementParameterRelateCompoundSetMappingSetSet;
-                    	endblock ;
-                    
-                    
+                    prWorkCreateFillSetMappingProcedure(eCompoundSet);
+                }
+                DeclarationSection Argument_Declaration {
+                    ElementParameter eCompoundSet {
+                        Range: sCompoundSets;
+                        Property: Input;
+                    }
+                }
+            }
+            Procedure prWorkCreateBinaryRelatingCompoundIndexMappingIndex {
+                Arguments: (eCompoundSet);
+                Body: {
+                    block ! Relate the compound set index and the set mapping set index
+                    	spCompoundSetName(eCompoundSet) := FormatString( "%e", eCompoundSet );
+                    	epElementParameterRelateCompoundSetMappingSetSet := me::Create(
+                    		formatString( "p01CompoundSetMappingSet_%s", spCompoundSetName(eCompoundSet)), 'parameter',
+                    			epSectionRelationCompoundSetSetMappingSetDeclarationsDeclarations );
+                    	me::SetAttribute( epElementParameterRelateCompoundSetMappingSetSet, 'index domain', 
+                    		formatString( "(%s,%s)",spCompoundIndexName(eCompoundSet), spMappingSetIndex(eCompoundSet)));
+                    	me::SetAttribute( epElementParameterRelateCompoundSetMappingSetSet, 'range', "binary" );
+                    	epElementParameterRelationCompoundSet(eCompoundSet) := epElementParameterRelateCompoundSetMappingSetSet;
+                    endblock ;
+                }
+                ElementParameter eCompoundSet {
+                    Range: sCompoundSets;
+                    Property: Input;
+                }
+            }
+            Procedure prWorkCreateFillSetMappingProcedure {
+                Arguments: (eCompoundSet);
+                Body: {
                     block ! Create procedure to fill the data of all the set mapping identifiers 
                     	epProcFillSetMapping := me::Create( "prProcFillSetMapping" + spCompoundSetName(eCompoundSet),
-                    		'procedure', epSectionDataShadowDeclarations );
+                    		'procedure', epSectionForwardCopyProcedures );
                     	spBody := "" ;
                     
                     	spBodyLine := FormatString( "for %s do \n\n", spCompoundIndexName(eCompoundSet) ); 
@@ -892,11 +919,9 @@ LibraryModule DeprecateCompoundSetUtilities {
                     
                     endblock ;
                 }
-                DeclarationSection Argument_Declaration {
-                    ElementParameter eCompoundSet {
-                        Range: sCompoundSets;
-                        Property: Input;
-                    }
+                ElementParameter eCompoundSet {
+                    Range: sCompoundSets;
+                    Property: Input;
                 }
                 DeclarationSection Local_Declarations {
                     ElementParameter epProcFillSetMapping {
@@ -914,8 +939,6 @@ LibraryModule DeprecateCompoundSetUtilities {
             Procedure prWorkSaveShadowToCase {
                 Body: {
                     sContentTypeForward := { IndexIdentifiers | not epShadowsDataIdentifiers( IndexIdentifiers ) } ;
-                    !sTemp := AllIdentifiers - sContentTypeForward ;
-                    !display sTemp ;
                     AllCaseFileContentTypes += data { 'dcsu::sContentTypeForward' } ;
                     CurrentCaseFileContentType := 'dcsu::sContentTypeForward' ;
                     CaseFileSave( "forward/example.data", CurrentCaseFileContentType );
@@ -929,8 +952,30 @@ LibraryModule DeprecateCompoundSetUtilities {
             Procedure prWorkGenerateBackward {
                 Body: {
                     read from file "IdentifiersWithShadows.txt" ;
+                    if epProcBackwardCopyProcedure then
+                    	me::Delete( epProcBackwardCopyProcedure );
+                    endif ;
+                    epProcBackwardCopyProcedure := StringToElement( AllIdentifiers, "cssrl::prProcBackwardCopyProcedure", create:0);
+                    if epProcBackwardCopyProcedure then
+                    	me::Delete( epProcBackwardCopyProcedure );
+                    endif ;
+                    epProcBackwardCopyProcedure := me::Create( "prProcBackwardCopyProcedure", 'procedure', epSectionBacwardCopyProcedures );
+                    spBody := "";
+                    spBodyLine := "";
+                    for IndexIdentifiers | dcsu::epShadowsDataIdentifiers(IndexIdentifiers) do
+                    	spIndexDomain := fncIndexDomainString(IndexIdentifiers,0);
+                    	spBodyLine := FormatString( "%s%s := %s%s;\n", 
+                    		IndexIdentifiers, spIndexDomain,
+                    		dcsu::epShadowsDataIdentifiers(IndexIdentifiers), fncIndexDomainString(IndexIdentifiers,0) );
+                    	spBody += spBodyLine ;
+                    endfor ;
+                    me::SetAttribute( epProcBackwardCopyProcedure, 'body', spBody);
+                    me::Compile( epCompoundSetShadowRuntimeLibrary  );
                 }
                 Comment: "This procedure copies the data in the shadow identifiers, as read in from the forwarded case, to the original identifiers.";
+                StringParameter spBody;
+                StringParameter spBodyLine;
+                StringParameter spIndexDomain;
             }
         }
         Section Attic {
