@@ -22,13 +22,13 @@ Model Main_DeprecateCompoundSets {
                 IndexDomain: iMS_C;
                 Range: U;
             }
-            ElementParameter epTag_C_1 {
+            ElementParameter epHelp_C_1 {
                 Range: S;
             }
-            ElementParameter epTag_C_2 {
+            ElementParameter epHelp_C_2 {
                 Range: T;
             }
-            ElementParameter epTag_C_3 {
+            ElementParameter epHelp_C_3 {
                 Range: U;
             }
         }
@@ -52,13 +52,13 @@ Model Main_DeprecateCompoundSets {
                 IndexDomain: iMS_D;
                 Range: U;
             }
-            ElementParameter epTag_D_1 {
+            ElementParameter epHelp_D_1 {
                 Range: S;
             }
-            ElementParameter epTag_D_2 {
+            ElementParameter epHelp_D_2 {
                 Range: T;
             }
-            ElementParameter epTag_D_3 {
+            ElementParameter epHelp_D_3 {
                 Range: U;
             }
         }
@@ -104,12 +104,7 @@ Model Main_DeprecateCompoundSets {
             or add statements that require the Data Management module to be initialized."
         }
     }
-    Procedure MainExecution {
-        Body: {
-            !dcsu::prCreateSetMappingsCompoundSet();
-            dcsu::prCreateShadowCompoundSet();
-        }
-    }
+    Procedure MainExecution;
     Procedure PreMainTermination {
         Body: {
             return  1;

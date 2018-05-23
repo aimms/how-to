@@ -17,3 +17,4 @@
 * XA 16
 * NETSOL
 * Environment
+Startup_Page "dcsu::Deprecate Compound Set Control Page"
