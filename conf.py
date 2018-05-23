@@ -49,7 +49,7 @@ master_doc = 'ContentIndex'
 # General information about the project.
 project = u'How to in AIMMS'
 copyright = u'2018, AIMMS Costumer Support Team'
-author = u'AIMMS Costumer Support Team'
+author = u'AIMMS Customer Support Team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
