@@ -203,9 +203,13 @@ LibraryModule DeprecateCompoundSetUtilities {
                     while loopCount <= pDim do
                     	epIndex := DomainIndex( epId, loopCount );
                     	epSet := IndexRange( epIndex );
-                    	if p01MappedIndex and ( epSet in sCompoundSets ) then
-                    		spMappedIndex := spCompoundSetMappedIndex( epSet );
-                    		fncIndexDomainString += spMappedIndex ;
+                    	if p01MappedIndex then
+                    		if ( epSet in sCompoundSets ) then
+                    			spMappedIndex := spCompoundSetMappedIndex( epSet );
+                    			fncIndexDomainString += spMappedIndex ;
+                    		else
+                    			fncIndexDomainString += formatString("%e", epIndex); ;
+                    		endif ;
                     	else
                     		fncIndexDomainString += formatString("%e", epIndex); ;
                     	endif ;
@@ -432,6 +436,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                 }
                 ElementParameter epCompoundSetMappingRuntimeLibrary {
                     Range: AllIdentifiers;
+                    InitialData: '';
                 }
             }
             Procedure prWorkCreateSetMappingsCompoundSet {
@@ -696,6 +701,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                 }
                 ElementParameter epCompoundSetShadowRuntimeLibrary {
                     Range: AllIdentifiers;
+                    InitialData: '';
                 }
             }
             Procedure prWorkCreateShadowCompoundSet {
@@ -938,6 +944,10 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
             Procedure prWorkSaveShadowToCase {
                 Body: {
+                    if epSectionForwardCopyProcedures then
+                    	me::Delete( epSectionForwardCopyProcedures );
+                    	epSectionForwardCopyProcedures := '' ;
+                    endif ;
                     sContentTypeForward := { IndexIdentifiers | not epShadowsDataIdentifiers( IndexIdentifiers ) } ;
                     AllCaseFileContentTypes += data { 'dcsu::sContentTypeForward' } ;
                     CurrentCaseFileContentType := 'dcsu::sContentTypeForward' ;
@@ -952,25 +962,34 @@ LibraryModule DeprecateCompoundSetUtilities {
             Procedure prWorkGenerateBackward {
                 Body: {
                     read from file "IdentifiersWithShadows.txt" ;
-                    if epProcBackwardCopyProcedure then
+                    if not epCompoundSetShadowRuntimeLibrary then
+                    	epCompoundSetShadowRuntimeLibrary := StringToElement( AllIdentifiers, "CompoundSetShadowRuntimeLibrary", create:0);
+                    endif ;
+                    if epProcBackwardCopyProcedure and (epProcBackwardCopyProcedure<>'MainExecution') then
                     	me::Delete( epProcBackwardCopyProcedure );
+                    	epProcBackwardCopyProcedure := ''  ;
                     endif ;
                     epProcBackwardCopyProcedure := StringToElement( AllIdentifiers, "cssrl::prProcBackwardCopyProcedure", create:0);
                     if epProcBackwardCopyProcedure then
                     	me::Delete( epProcBackwardCopyProcedure );
+                    endif ;
+                    epSectionBacwardCopyProcedures := StringToElement( AllIdentifiers, "cssrl::Backward_Copy_Procedures", create:0);
+                    if not epSectionBacwardCopyProcedures then
+                    	epSectionBacwardCopyProcedures := me::Create( "Backward_Copy_Procedures", 'section', epCompoundSetShadowRuntimeLibrary);
                     endif ;
                     epProcBackwardCopyProcedure := me::Create( "prProcBackwardCopyProcedure", 'procedure', epSectionBacwardCopyProcedures );
                     spBody := "";
                     spBodyLine := "";
                     for IndexIdentifiers | dcsu::epShadowsDataIdentifiers(IndexIdentifiers) do
                     	spIndexDomain := fncIndexDomainString(IndexIdentifiers,0);
-                    	spBodyLine := FormatString( "%s%s := %s%s;\n", 
+                    	spBodyLine := FormatString( "::%s%s := %s%s;\n", 
                     		IndexIdentifiers, spIndexDomain,
                     		dcsu::epShadowsDataIdentifiers(IndexIdentifiers), fncIndexDomainString(IndexIdentifiers,0) );
                     	spBody += spBodyLine ;
                     endfor ;
                     me::SetAttribute( epProcBackwardCopyProcedure, 'body', spBody);
                     me::Compile( epCompoundSetShadowRuntimeLibrary  );
+                    apply( epProcBackwardCopyProcedure );
                 }
                 Comment: "This procedure copies the data in the shadow identifiers, as read in from the forwarded case, to the original identifiers.";
                 StringParameter spBody;
