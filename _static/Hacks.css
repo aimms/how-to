@@ -138,6 +138,11 @@
 h1, h2, h3 p{
   font-family:Arial,sans-serif;
 }
+
+h2 {
+	
+	border-bottom: 1px solid lightgrey;
+}
 .navbar {
   overflow: hidden;
   background-color: #000081;
