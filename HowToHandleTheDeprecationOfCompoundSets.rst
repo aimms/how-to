@@ -25,7 +25,7 @@ This announcement raised several questions.  For instance:
 
 This document attempts to answer these questions.
 
-.. Ask Kim: should people be offered to register for the AIMMS news letter here? If so, is there a standard page for this?
+.. Ask Kim: should people be offered to register for the AIMMS news letter here? If so, is there a standard page for this? Same for old versions of the news letter.
 
 
 
@@ -99,7 +99,7 @@ Some terminology is introduced in this section that will be used in this article
     
     * A **set mapping set** is an atomic set with elements that look like elements from a compound set. 
 
-    * A **set mapping index** is an atomic index in a set mapping set. 
+    * A **set mapping index** is an index in a set mapping set. Note that a set mapping index is an atomic index.
 
     * A **set mapping relation** is a relation that contains the same set of tuples as a compound set.
 
@@ -111,7 +111,7 @@ Some terminology is introduced in this section that will be used in this article
 
 *   Consider a parameter ``A``, then a **shadow** parameter, say ``A_Shadow``, is a parameter that holds the same data as ``A``.
     Here, *same data* should be interpreted as, that there is a clear one-to-one correspondence between the elements of ``A`` and ``A_Shadow`` such that the values of the corresponding elements are the same. 
-    As an example, consider a compound data identifier ``P`` having compound indexes in its index domain, and a shadow ``PS`` having the corresponding set mapping indexes in its index domain.
+    The use here is compound data identifier ``P``, ie having compound indexes in its index domain, and a shadow ``PS`` having the corresponding set mapping indexes in its index domain. Such a shadow is also called an **atomic shadow identifier** as it has only atomic indexes, some of which are set mapping indexes.
 
 *   A **screen definition** is a serialized representation of a screen. 
     The point and click types of UI provided by AIMMS, both WinUI and WebUI, store these **screen definitions** as text files within an AIMMS project.
@@ -209,15 +209,11 @@ The model explorer should now look something like this:
 Conversion step 4: Copy the input cases
 ---------------------------------------
 
-Explain what shadow cases are.
+Shadow cases are cases whereby the compound data is replaced by atomic shadow data.
 
-The page ... offers two methods for copying original cases to shadow cases.
+On the page ``Deprecate Compound Set Control Page`` of the library ``DeprecateCompoundSetUtilities``, there is an area that is designated for copying case files with compound data to shadow cases.
 
-Method 1: single case after single case
-
-Method 2: directory full of cases copied in one go.
-
-
+You can either choose to do all cases in one go, or do case by case. Either way, please make sure that the names of the input file / folder and the output file/folder is determined before the button to do the actual conversion.
 
 
 .. _Section_Conversion_Adapt_Model:
@@ -249,17 +245,28 @@ In the remainder we will use a running example that contains:
 #. A parameter :math:`Q1` declared over the index :math:`i`: :math:`Q1_i`
 
 
+
+.. _Section_Conversion_Move_Indexes:
+
+
 Conversion step 6: Move the compound indexes to the corresponding set mapping sets.
 -----------------------------------------------------------------------------------
 
 This step is essential such that screen definitions can be retained unaltered. 
+
 This step may be combined with the previous step; in so doing, the AIMMS compiler will notify you of any compound set syntax on an atomic set in the form of a compilation error.
+
+
+
+.. _Section_Conversion_Backward_Copy:
 
 Conversion step 7: For each shadow case, copy that shadow case back to the original case.
 -----------------------------------------------------------------------------------------
 
-Again select folders.
+This section is similar to :ref:`Section_Conversion_Copy_Input_Cases`, except the area of the screen to use is ``Backward - creating cases with original identifiers without compound data``.
 
+
+.. _Section-Tech-trick-explained: 
 
 Tech trick explained: How to find the compound sets already created in your application?
 ----------------------------------------------------------------------------------------
@@ -301,6 +308,9 @@ This rewrite procedure is designed to make minimal changes to your application a
 
 #. Allow to deploy the efficiency improvements already implemented in the new parallel execution engine.
 
+
+
+.. _Section-Further-Information:
 
 Further information
 -------------------

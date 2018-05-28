@@ -130,6 +130,14 @@ LibraryModule DeprecateCompoundSetUtilities {
                 Index: iRuntimeId;
             }
         }
+        Section Section_1 {
+            StringParameter spCurDir;
+            Procedure GetCurDir {
+                Body: {
+                    DirectoryGetCurrent(spCurDir);
+                }
+            }
+        }
     }
     Section PrivateSection {
         Procedure prPageOpenDeprecateCompoundSetUtilities {
@@ -1123,8 +1131,22 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
         }
         Section Shadow_To_Case {
-            Set sContentTypeForward {
-                SubsetOf: AllIdentifiers;
+            DeclarationSection Shadow_to_case_administration_Declaration {
+                Property: NoSave;
+                Set sIdentifiersStartup {
+                    SubsetOf: AllIdentifiers;
+                }
+                Set sContentTypeForward {
+                    SubsetOf: AllIdentifiers;
+                }
+                StringParameter spShadowCase;
+                StringParameter spAtomicCase;
+                StringParameter spShadowFolder {
+                    InitialData: "shadowData";
+                }
+                StringParameter spAtomicFolder {
+                    InitialData: "atomicData";
+                }
             }
             Procedure prWorkSaveShadowToCase {
                 Arguments: (spOutputCaseFilename);
@@ -1144,6 +1166,95 @@ LibraryModule DeprecateCompoundSetUtilities {
                 StringParameter spOutputCaseFilename {
                     Property: Input;
                 }
+            }
+            Procedure prSelectInputShadowCase {
+                Body: {
+                    !DebuggerBreakpoint();
+                    FileSelect(
+                    	filename  :  spShadowCase, 
+                    	directory :  spShadowFolder, 
+                    	extension :  ".data", 
+                    	title     :  "Please select a case file to create a shadow case fle for.");
+                    ! Adapt spOutputCaseFilename upon selection.
+                    if FindString( spShadowCase, spShadowFolder ) = 1 then
+                    	spAtomicCase := 
+                    		spAtomicFolder  +  
+                    		substring( spShadowCase,
+                    			StringLength( spShadowFolder ) + 1,
+                    			StringLength( spShadowCase ) );
+                    else
+                    	spAtomicCase := spAtomicFolder + spShadowCase ;
+                    endif ;
+                }
+                StringParameter spSuggestedOutputCaseFilename;
+            }
+            Procedure prSelectOutputAtomicCase {
+                Body: {
+                    FileSelectNew(
+                    	filename  :  spAtomicCase, 
+                    	directory :  spAtomicFolder, 
+                    	extension :  ".data", 
+                    	title     :  "Please select a case file to create a case with atomic data only.");
+                }
+            }
+            Procedure prSelectInputShadowFolder {
+                Body: {
+                    DirectorySelect(
+                    	directoryname :  spShadowFolder, 
+                    	directory     :  spShadowFolder, 
+                    	title         :  "Please select folder to load cases with shadow data.");
+                }
+            }
+            Procedure prSelectOutputAtomicFolder {
+                Body: {
+                    DirectorySelect(
+                    	directoryname :  spAtomicFolder, 
+                    	directory     :  spAtomicFolder, 
+                    	title         :  "Please select folder to store your cases with atomic data only.");
+                }
+            }
+            Procedure prCopySingleShadowToAtomic {
+                Body: {
+                    prWorkCopySingleShadowToAtomic( spShadowCase, spAtomicCase );
+                }
+            }
+            Procedure prWorkCopySingleShadowToAtomic {
+                Arguments: (spShadowCase,spAtomicCase);
+                Body: {
+                    CaseFileLoad( spShadowCase );
+                    
+                    prWorkGenerateBackward();
+                    
+                    CurrentCaseFileContentType := 'dcsu::sIdentifiersStartup' ;
+                    CaseFileSave( spAtomicCase, CurrentCaseFileContentType );
+                }
+                StringParameter spShadowCase {
+                    Property: Input;
+                }
+                StringParameter spAtomicCase {
+                    Property: Input;
+                }
+            }
+            Procedure prCopyFolderShadowToAtomic {
+                Body: {
+                    DirectoryGetFiles(
+                    	directory :  spShadowFolder, 
+                    	filter    :  "*.data", 
+                    	filenames :  spCaseFilenames, 
+                    	recursive :  1 );
+                    
+                    if card( sCaseFileNumbers ) then
+                    	for iCaseNo do
+                    		spInputFilename := spShadowFolder + spCaseFilenames( iCaseNo );
+                    		spOutputFilename := spAtomicFolder + spCaseFilenames( iCaseNo );
+                    		prWorkCopySingleShadowToAtomic( spInputFilename, spOutputFilename );	
+                    	endfor ;
+                    else
+                    	raise warning formatString("No cases found in folder %s.", spDataFolderName );
+                    endif ;
+                }
+                StringParameter spInputfilename;
+                StringParameter spOutputfilename;
             }
         }
         Section Case_to_Original {
@@ -1187,9 +1298,15 @@ LibraryModule DeprecateCompoundSetUtilities {
         }
         Section Attic {
             Procedure LibraryInitialization {
+                Body: {
+                    sIdentifiersStartup := AllIdentifiers ; ! before creating any runtime libraries.
+                }
                 Comment: "Add initialization statements here that do not require any other library being initialized already.";
             }
             Procedure PostLibraryInitialization {
+                Body: {
+                    AllCasefileContentTypes += 'dcsu::sIdentifiersStartup' ;
+                }
                 Comment: {
                     "Add initialization statements here that require another library to be initialized already,
                     or add statements that require the Data Management module to be initialized."
