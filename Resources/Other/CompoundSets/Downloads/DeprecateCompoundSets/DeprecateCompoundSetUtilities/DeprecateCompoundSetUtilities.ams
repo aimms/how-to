@@ -463,7 +463,8 @@ LibraryModule DeprecateCompoundSetUtilities {
                     epCompoundSetMappingRuntimeLibrary  := 
                     	me::CreateLibrary(spCompoundSetMappingRuntimeLibraryName, 
                     		spCompoundSetMappingRuntimePrefixName );
-                    epSectionCompoundSetMappingDeclarations := me::Create( "Mapping_Set_Declarations", 'section', epCompoundSetMappingRuntimeLibrary );
+                    epSectionCompoundSetMappingDeclarations := me::Create( "Set_Mapping_Declarations", 
+                    	'section', epCompoundSetMappingRuntimeLibrary );
                     
                     for iCompoundSetNo do
                     	prWorkCreateMappingSet1(epFoundCompoundSets(iCompoundSetNo));
@@ -615,7 +616,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		endif ;
                     	endblock ;
                     
-                    	epDeclarationSectionMappingSet :=  me::Create( "Mapping_Set_Declarations_" + spCompoundSetName(eCompoundSet), 
+                    	epDeclarationSectionMappingSet :=  me::Create( "Set_Mapping_Declarations_for_Compound_Set_" + spCompoundSetName(eCompoundSet), 
                     		'declaration', epSectionCompoundSetMappingDeclarations );
                     
                     	block ! Declare Set Mapping Set.

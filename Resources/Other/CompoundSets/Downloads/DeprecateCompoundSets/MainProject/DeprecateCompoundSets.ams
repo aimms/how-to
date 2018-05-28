@@ -1,10 +1,10 @@
 ## ams_version=1.0
 
 Model Main_DeprecateCompoundSets {
-    Section Mapping_Set_Declarations {
-        DeclarationSection Mapping_Set_Declarations_C {
+    Section Set_Mapping_Declarations {
+        DeclarationSection Set_Mapping_Declarations_for_Compound_Set_C {
             Set sMappingSet_C_Set {
-                Index: iMS_C, h;
+                Index: iMS_C;
                 Parameter: epMS_C;
             }
             Set sMappingSet_C_Relation {
@@ -32,9 +32,9 @@ Model Main_DeprecateCompoundSets {
                 Range: U;
             }
         }
-        DeclarationSection Mapping_Set_Declarations_D {
+        DeclarationSection Set_Mapping_Declarations_for_Compound_Set_D {
             Set sMappingSet_D_Set {
-                Index: iMS_D, g;
+                Index: iMS_D;
                 Parameter: epMS_D;
             }
             Set sMappingSet_D_Relation {
@@ -79,11 +79,11 @@ Model Main_DeprecateCompoundSets {
         Set C {
             SubsetOf: (S, T, U);
             Tags: (TS, TT, TU);
-            Index: htemp;
+            Index: htemp, h;
         }
         Set D {
-            SubsetOf: (C);
-            Index: gtemp;
+            SubsetOf: C;
+            Index: gtemp, g;
         }
         Parameter P {
             IndexDomain: h;
