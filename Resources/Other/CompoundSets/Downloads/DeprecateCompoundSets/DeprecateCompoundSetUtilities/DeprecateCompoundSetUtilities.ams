@@ -5,6 +5,27 @@ LibraryModule DeprecateCompoundSetUtilities {
     Interface: PublicSection;
     Property: NoSave;
     Section PublicSection {
+        Section Major_conversion_steps {
+            Procedure prCreateSetMappingsCompoundSet {
+                Body: {
+                    !block
+                    	prIdentifyCompoundSets();
+                    	prWorkCreateSetMappingsCompoundSet();
+                    !onerror err do
+                    !	DialogMessage( errh::Message( err ));
+                    !	errh::MarkAsHandled(err);
+                    !endblock ;
+                }
+                ElementParameter err {
+                    Range: errh::PendingErrors;
+                }
+            }
+            Procedure prCopyDataFolderToShadowFolder {
+                Body: {
+                    prWorkCopyDataFolderToShadowFolder();
+                }
+            }
+        }
         Section Identify_compound_sets {
             Procedure prIdentifyCompoundSets {
                 Body: {
@@ -74,20 +95,6 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
         }
         Section create_compound_set_mappings {
-            Procedure prCreateSetMappingsCompoundSet {
-                Body: {
-                    !block
-                    	prIdentifyCompoundSets();
-                    	prWorkCreateSetMappingsCompoundSet();
-                    !onerror err do
-                    !	DialogMessage( errh::Message( err ));
-                    !	errh::MarkAsHandled(err);
-                    !endblock ;
-                }
-                ElementParameter err {
-                    Range: errh::PendingErrors;
-                }
-            }
             Procedure prEnourageToCopySection {
                 Body: {
                     DialogMessage("Pleae use AIMMS - Edit - Export Section ; AIMMS Edit Import Section for \"Mapping Set Declarations\"");
@@ -110,7 +117,7 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
             Procedure prForwardShadowToCase {
                 Body: {
-                    prWorkSaveShadowToCase();
+                    prWorkSaveShadowToCase("forward/example.data");
                 }
             }
             Procedure prGenerateBackward {
@@ -125,6 +132,11 @@ LibraryModule DeprecateCompoundSetUtilities {
         }
     }
     Section PrivateSection {
+        Procedure prPageOpenDeprecateCompoundSetUtilities {
+            Body: {
+                prPageOpenCopyDataFolderArea();
+            }
+        }
         Section Internal_utilities {
             ElementParameter epSectionCompoundSetMappingDeclarations {
                 Range: AllIdentifiers;
@@ -939,11 +951,139 @@ LibraryModule DeprecateCompoundSetUtilities {
                 }
             }
         }
+        Section Creating_Shadow_data_folder {
+            Procedure prPageOpenCopyDataFolderArea;
+            StringParameter spDataFolderName {
+                InitialData: "data";
+            }
+            StringParameter spShadowDataFolderName {
+                InitialData: "shadowData";
+            }
+            Set sCaseFileNumbers {
+                SubsetOf: Integers;
+                Index: iCaseNo;
+            }
+            StringParameter spCaseFilenames {
+                IndexDomain: iCaseNo;
+            }
+            Procedure prSelectFromDataFolder {
+                Body: {
+                    DirectorySelect(
+                    	directoryname :  spDataFolderName, 
+                    	directory     :  spDataFolderName, 
+                    	title         :  "Please select folder to select your case files from");
+                }
+            }
+            Procedure prSelectToShadowDataFolder {
+                Body: {
+                    DialogGetString(
+                    	message   :  "Select a (new) folder to place shadow cases in.", 
+                    	reference :  spShadowDataFolderName, 
+                    	title     :  "Note: an existing folder will be emptied first!");
+                }
+            }
+            Procedure prWorkCopyDataFolderToShadowFolder {
+                Body: {
+                    block ! Get a default data folder name, if there is none.
+                    	if not spDataFolderName then
+                    		spDataFolderName := "data";
+                    		if not DirectoryExists( spDataFolderName ) then
+                    			spDataFolderName := "Data" ;
+                    		endif ;
+                    		if not DirectoryExists( spDataFolderName ) then
+                    			spDataFolderName := "" ;
+                    		endif ;
+                    	endif ;
+                    endblock ;
+                    
+                    block ! Check for data folder.
+                    	if not spDataFolderName then
+                    		raise warning "The \"from\" folder is not selected.";
+                    		return ;
+                    	endif ;
+                    	if not DirectoryExists(spDataFolderName) then
+                    		raise warning formatString( "The folder %s does not exist", spDataFolderName);
+                    		return ;
+                    	endif ;
+                    endblock ;
+                    
+                    block ! Handle non-empty shadow folder
+                    	if DirectoryExists( spShadowDataFolderName ) then
+                    		DirectoryDelete( spShadowDataFolderName );
+                    	endif ;
+                    	if DirectoryExists( spShadowDataFolderName ) then
+                    		raise error formatString( "Unable to empty folder %s to create shadow cases in, perhaps it contains read-only files?", spShadowDataFolderName );
+                    		return ;
+                    	endif ;
+                    endblock ;
+                    
+                    block ! Get files and convert them!
+                    	DirectoryGetFiles(
+                    		directory :  spDataFolderName, 
+                    		filter    :  "*.data", 
+                    		filenames :  spCaseFilenames, 
+                    		recursive :  1 );
+                    
+                    	if card( sCaseFileNumbers ) then
+                    		for iCaseNo do
+                    			prWorkSaveShadowToCase( spCaseFilenames( iCaseNo ) );	
+                    		endfor ;
+                    	else
+                    		raise warning formatString("No cases found in folder %s.", spDataFolderName );
+                    	endif ;
+                    endblock ;
+                }
+            }
+            Procedure prCopyInputCaseToShadowCase {
+                Arguments: (spInputCaseFilename);
+                Body: {
+                    block ! Check input
+                    	if FindString( spInputCaseFilename, spDataFolderName ) <> 1 then
+                    		raise error "Internal error; expected an input filename from the data folder." ;
+                    		return ;
+                    	endif ;
+                    endblock ;
+                    
+                    spOutputCaseFileName := 
+                    	spShadowDataFolderName + 
+                    	Substring( spInputCaseFilename, 
+                    		StringLength( spDataFolderName ) + 1, 
+                    		StringLength( spInputCaseFilename ) );
+                    
+                    prWorkCopyInputCaseToShadowCase( spInputCaseFilename, spOutputCaseFilename );
+                }
+                StringParameter spInputCaseFilename {
+                    Property: Input;
+                }
+                StringParameter spOutputCaseFilename;
+            }
+            Procedure prWorkCopyInputCaseToShadowCase {
+                Arguments: (spInputCaseFilename,spOutputCaseFilename);
+                Body: {
+                    DebuggerBreakpoint();
+                    
+                    prWorkCreateShadowCompoundSet();
+                    
+                    CaseFileLoad( spInputCaseFilename );
+                    
+                    apply( epProcForwardCopyProcedure );
+                    
+                    prWorkSaveShadowToCase(spOutputCaseFilename);
+                }
+                StringParameter spInputCaseFilename {
+                    Property: Input;
+                }
+                StringParameter spOutputCaseFilename {
+                    Property: Input;
+                }
+            }
+        }
         Section Shadow_To_Case {
             Set sContentTypeForward {
                 SubsetOf: AllIdentifiers;
             }
             Procedure prWorkSaveShadowToCase {
+                Arguments: (spOutputCaseFilename);
                 Body: {
                     if epSectionForwardCopyProcedures then
                     	me::Delete( epSectionForwardCopyProcedures );
@@ -952,10 +1092,13 @@ LibraryModule DeprecateCompoundSetUtilities {
                     sContentTypeForward := { IndexIdentifiers | not epShadowsDataIdentifiers( IndexIdentifiers ) } ;
                     AllCaseFileContentTypes += data { 'dcsu::sContentTypeForward' } ;
                     CurrentCaseFileContentType := 'dcsu::sContentTypeForward' ;
-                    CaseFileSave( "forward/example.data", CurrentCaseFileContentType );
+                    CaseFileSave( spOutputCaseFilename, CurrentCaseFileContentType );
                 }
                 Set sTemp {
                     SubsetOf: AllIdentifiers;
+                }
+                StringParameter spOutputCaseFilename {
+                    Property: Input;
                 }
             }
         }

@@ -1,12 +1,15 @@
 <?xml version="1.0"?>
-<Page Version="4000" TimeStamp="2018-05-23 14:16:38">
+<Page Version="4000" TimeStamp="2018-05-28 07:46:47">
 	<PageEditSize Type="Inherited" />
 	<ProjectUUID>20FA164F-37C1-49B1-AB6C-A8AF79AF40F1</ProjectUUID>
 	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
 	<Background Inherited="true" />
+	<Action>
+		<EntryProcedure>dcsu::prPageOpenDeprecateCompoundSetUtilities</EntryProcedure>
+	</Action>
 	<PageObject Type="Button">
-		<Location top="30" left="60" bottom="108" right="594" />
-		<TabOrder>5</TabOrder>
+		<Location top="36" left="420" bottom="84" right="624" />
+		<TabOrder>2</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Create Set Mapping Declarations"</Title>
@@ -20,72 +23,91 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="126" left="60" bottom="204" right="594" />
+		<Location top="258" left="402" bottom="336" right="642" />
 		<TabOrder>1</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
-		<Title>"Step 2: Manually export / import  section Mapping Set Declarations"</Title>
+		<Title>"Copy a folder contain cases"</Title>
 		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
 		<ActionSequence>
 			<Action Type="Run">
 				<RunWhat>SpecificProcecure</RunWhat>
-				<Procedure>dcsu::prEnourageToCopySection</Procedure>
+				<Procedure>dcsu::prCopyDataFolderToShadowFolder</Procedure>
 				<AbortOnError>true</AbortOnError>
 			</Action>
 		</ActionSequence>
 	</PageObject>
-	<PageObject Type="Button">
-		<Location top="228" left="60" bottom="306" right="594" />
-		<TabOrder>2</TabOrder>
-		<LeaveOnEnter>false</LeaveOnEnter>
-		<ButtonType>Text</ButtonType>
-		<Title>"Step 3:Create the shadow identifiers in the runtime library"</Title>
-		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
-		<ActionSequence>
-			<Action Type="Run">
-				<RunWhat>SpecificProcecure</RunWhat>
-				<Procedure>dcsu::prCreateShadowCompoundSet</Procedure>
-				<AbortOnError>true</AbortOnError>
-			</Action>
-		</ActionSequence>
+	<PageObject Type="Rectangle">
+		<Location top="114" left="54" bottom="354" right="972" />
+		<Shape>Open</Shape>
+		<FillColor RGB="#ffffff" />
+		<LineColor RGB="#000000" />
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="324" left="60" bottom="402" right="594" />
+		<Location top="126" left="66" bottom="180" right="330" />
 		<TabOrder>3</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
-		<Title>"Step 4:Copy the current case to forward case"</Title>
+		<Title>"Select 'from' data folder"</Title>
 		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
 		<ActionSequence>
 			<Action Type="Run">
 				<RunWhat>SpecificProcecure</RunWhat>
-				<Procedure>dcsu::prForwardDataToShadow</Procedure>
+				<Procedure>dcsu::prSelectFromDataFolder</Procedure>
 				<AbortOnError>true</AbortOnError>
 			</Action>
 		</ActionSequence>
 	</PageObject>
-	<PageObject Type="Button">
-		<Location top="420" left="60" bottom="498" right="594" />
+	<PageObject Type="Scalar">
+		<Location top="186" left="66" bottom="246" right="330" />
 		<TabOrder>4</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>dcsu::spDataFolderName</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="126" left="690" bottom="180" right="954" />
+		<TabOrder>5</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
-		<Title>"Step 5: Store forward case on disk"</Title>
+		<Title>"Select 'to' shadow data folder"</Title>
 		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
 		<ActionSequence>
 			<Action Type="Run">
 				<RunWhat>SpecificProcecure</RunWhat>
-				<Procedure>dcsu::prForwardShadowToCase</Procedure>
+				<Procedure>dcsu::prSelectToShadowDataFolder</Procedure>
 				<AbortOnError>true</AbortOnError>
 			</Action>
 		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="186" left="690" bottom="246" right="954" />
+		<TabOrder>6</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>dcsu::spShadowDataFolderName</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
 	</PageObject>
 	<UsedReferences>
 		<Model>
 			<Symbol>dcsu::prCreateSetMappingsCompoundSet</Symbol>
-			<Symbol>dcsu::prEnourageToCopySection</Symbol>
-			<Symbol>dcsu::prCreateShadowCompoundSet</Symbol>
-			<Symbol>dcsu::prForwardDataToShadow</Symbol>
-			<Symbol>dcsu::prForwardShadowToCase</Symbol>
+			<Symbol>dcsu::prCopyDataFolderToShadowFolder</Symbol>
+			<Symbol>dcsu::prPageOpenDeprecateCompoundSetUtilities</Symbol>
+			<Symbol>dcsu::spDataFolderName</Symbol>
+			<Symbol>dcsu::spShadowDataFolderName</Symbol>
+			<Symbol>dcsu::prSelectFromDataFolder</Symbol>
+			<Symbol>dcsu::prSelectToShadowDataFolder</Symbol>
 		</Model>
 	</UsedReferences>
 </Page>
