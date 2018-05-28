@@ -200,7 +200,7 @@ The model explorer should now look something like this:
 
 .. image::  Resources/Other/CompoundSets/Images/SetMappingDeclarations.png 
 
-.. caution:: Using Copy/Paste on the section ``Set Mapping Declarations`` of the runtime library might seem simpler than the sub steps 2 - 4 above. However, when you do that, the copied section will still contain references to the runtime indexes. A subsequent restart of your application will have compilation errors as the compound indexes still referencing the runtime library are not present upon first compilation.
+.. caution:: Using Copy/Paste on the section ``Set Mapping Declarations`` of the runtime library might seem simpler than the sub steps 2 - 4 above. However, when you use copy/paste, the copied section will still contain references to the runtime indexes. A subsequent restart of your application will have compilation errors as the compound indexes still referencing the runtime library are not present upon first compilation.
 
 
 
@@ -214,6 +214,7 @@ Shadow cases are cases whereby the compound data is replaced by atomic shadow da
 On the page ``Deprecate Compound Set Control Page`` of the library ``DeprecateCompoundSetUtilities``, there is an area that is designated for copying case files with compound data to shadow cases.
 
 You can either choose to do all cases in one go, or do case by case. Either way, please make sure that the names of the input file / folder and the output file/folder is determined before the button to do the actual conversion.
+
 
 
 .. _Section_Conversion_Adapt_Model:
@@ -245,6 +246,58 @@ In the remainder we will use a running example that contains:
 #. A parameter :math:`Q1` declared over the index :math:`i`: :math:`Q1_i`
 
 
+Replace use of tags
+^^^^^^^^^^^^^^^^^^^
+
+    .. code-block:: none
+
+        Parameter p1 {
+            IndexDomain: h;
+            Definition: A(h.ts);
+        }
+        
+Will give the error message: ``The "TS" is not a tag that can be associated with index "h".`` You can replace it by
+
+    .. code-block:: none
+
+        Parameter p1 {
+            IndexDomain: h;
+            Definition: A(epTag_C_TS(h));
+        }
+        
+
+
+Replace use of atomic indexes with set mapping index
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Consider the declaration of compound data parameter ``P``:
+
+    .. code-block:: none
+
+        Parameter P {
+            IndexDomain: h;
+        }
+
+Then using ``P`` in an expression such as:
+
+    .. code-block:: none
+
+        Parameter PS {
+            IndexDomain: (i,j,k);
+            Definition: p(i,j,k);
+        }
+
+will lead to a compilation error such as ``The number of arguments in the parameter "P" is not correct.`` 
+You can replace this definition by: 
+        
+    .. code-block:: none
+
+        Parameter PS {
+            IndexDomain: (i,j,k);
+            Definition: sum(h|(i,j,k,h) in sMappingSet_C_Relation,p(h));
+        }
+
+
 
 .. _Section_Conversion_Move_Indexes:
 
@@ -264,6 +317,14 @@ Conversion step 7: For each shadow case, copy that shadow case back to the origi
 -----------------------------------------------------------------------------------------
 
 This section is similar to :ref:`Section_Conversion_Copy_Input_Cases`, except the area of the screen to use is ``Backward - creating cases with original identifiers without compound data``.
+
+
+.. _Section_Conversion_Final:
+
+Conversion step 8: Remove the library Deprecate Compound Set Utilities.
+-----------------------------------------------------------------------
+
+As your project no longer depends on compound sets, this library is no longer needed and can be removed.
 
 
 .. _Section-Tech-trick-explained: 
@@ -304,10 +365,17 @@ Collateral benefits
 Instead of continuing to let applications deploying compound sets suffer from the above disadvantages, this article describes a rewrite procedure.
 This rewrite procedure is designed to make minimal changes to your application and at the same time:
 
-#. Avoid the pitfalls due to the "automagic" design of compound sets (mentioned in point 3 above).
+#. Avoid the pitfalls due to the "automagic" design of compound sets (mentioned in :ref:`Section-Why` point 3 above.
 
 #. Allow to deploy the efficiency improvements already implemented in the new parallel execution engine.
 
+
+TODO
+----
+
+#. Develop and test with compound set declared in library
+
+#. Defined compound sets, can set mappings also be defined definitions?
 
 
 .. _Section-Further-Information:
