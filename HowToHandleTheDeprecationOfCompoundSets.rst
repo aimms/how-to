@@ -5,53 +5,47 @@ How to Handle the Deprecation of Compound sets
 
 .. note:: This document and corresponding AIMMS :download:`project <Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` with running example and utility library (prefix dcsu) is actively being worked on. Your timely feedback is much appreciated as working your feedback may help others facing the same problem. Thanks, Chris.
 
+
+
 .. _Section-Announcement:
 
 Announcement
 ------------ 
 
-The AIMMS Product owner announced the deprecation of compound sets in the AIMMS Newsletter of May 2018.
-This document provides clarity of the why and when. More importantly, it hopes to help with the how of deprecating compound sets from your application. 
+In the AIMMS Newsletter of May 2018, the deprecation of compound sets was announced by the AIMMS Product owner. 
+This announcement raised several questions.  For instance: 
 
-.. Kim: should people be offered to register for the AIMMS news letter here?
+* What?
 
-.. _Section-Def-Compound:
+* Why?
+
+* When?
+
+* How? 
+
+This document attempts to answer these questions.
+
+.. Ask Kim: should people be offered to register for the AIMMS news letter here? If so, is there a standard page for this?
+
+
+
+.. _Section-What:
 
 What are compound sets in AIMMS?
 --------------------------------
 
 Consider several one dimensional sets: :math:`S_1, S_2, ..., S_n`. As you know, a relation :math:`R` is a subset of a Cartesian product: :math:`S_1 \times S_2 \times ... \times S_n` with :math:`n \geq 2`.
 
-In AIMMS, a relation :math:`R` is **transformed** to a compound set, say :math:`C`, when its attribute form contains the declaration of an index, say :math:`c` or an element parameter, say :math:`e`
+In AIMMS, a relation :math:`R` is **transformed** to a compound set, say :math:`C`, when its attribute form contains the declaration of an index, say :math:`c` or an element parameter, say :math:`e`. As such a compound set is a one-dimensional set, and like other one-dimensional sets it can have an ordering.
 
 Once a compound set is formed, it allows for the selection of components in tuples via tags. Let's assume :math:`C` is declared with the tags :math:`(T_1, T_2, ..., T_n)`, then selecting component :math:`i` of tuple :math:`c` is obtained by the notation :math:`c.T_i`.
 
-..Section-When:
-
-How to plan for the adaptation of your model?
----------------------------------------------
-
-.. Aka the "when" of this article. 
-
-In order to plan the adaptation of your projects, we provide the following time line:
-
-#. The first release of AIMMS IDE after July 1, 2018, does not provide the attributes 'index' or 'parameter' in the attribute form of relations. This step prevents the creation of new compound sets.
-
-#. The first release of AIMMS IDE after January 1, 2019, (6 months later) warns the model builder against existing compound sets.  
-
-#. The first release of AIMMS IDE after July 1, 2019 (again 6 months later) issues a non-critical error message in developer mode for compound sets created. (Nb. Here a non-critical error is an error message after which AIMMS is still able to present data and execute procedures).  
-
-#. The first release of AIMMS IDE after January 1, 2020 (again 6 months later), will definitely not be able to work when compound sets are present in the application.
-
-This timeline increases the urgency for adaptation slowly when the time nears that AIMMS is no longer able to support compound sets.
 
 
 .. _Section-Why:
 
 Why deprecate compound sets?
 ----------------------------
-
-.. Aka the "why" of this article. 
 
 There are several technical reasons to deprecate compound sets:
 
@@ -67,6 +61,26 @@ There are several technical reasons to deprecate compound sets:
 
 #. Last but not least is that the present implementation of compound sets is outdated. As you may know, at AIMMS, the execution engine is rewritten to allow for parallel execution of multi-dimensional statements but this parallel engine does not handle compound sets. The vintage implementation of compound sets, also dating back to the late 90's, suffers from some serious efficiency pitfalls. 
 
+
+
+.. _Section-When:
+
+How to plan for the adaptation of your model?
+---------------------------------------------
+
+The deprecation of compound sets will only be definite after January 1, 2020, giving AIMMS modelers more than one and a half year between the announcement and the definite deprecation. With the nearing of this deadline, the urgency to do something about it also increases. That is why the following timeline is provided:
+
+#. The first release of AIMMS IDE after July 1, 2018, does not provide the attributes 'index' or 'parameter' in the attribute form of relations. This step prevents the creation of new compound sets.
+
+#. The first release of AIMMS IDE after January 1, 2019, (6 months later) warns the model builder against existing compound sets.  
+
+#. The first release of AIMMS IDE after July 1, 2019 (again 6 months later) issues a non-critical error message in developer mode for compound sets created. (Nb. Here a non-critical error is an error message after which AIMMS is still able to present data and execute procedures).  
+
+#. The first release of AIMMS IDE after January 1, 2020 (again 6 months later), will definitely not be able to work when compound sets are present in the application.
+
+
+
+
 .. _Section-Terminology:
 
 Terminology
@@ -76,11 +90,12 @@ Some terminology is introduced in this section that will be used in this article
 
 *   One-dimensional sets that are not compound sets are called **atomic** sets. 
     Examples of atomic sets are sets containing names, calendars and subsets of the set Integers. 
-    To declare a relation, only atomic sets are allowed in the subset of attribute of that relation.
+    To declare a relation, AIMMS only allows atomic sets in the ``subset of`` attribute of that relation.
+
+*   An **atomic index** is an index in an atomic set. A **compound index** is an index in a compound set.   
     
-*   An **atomic** index is an index in an atomic set. A **compound** index is an index in a compound set.   
-    
-*   A **set mapping** is a collection of identifiers that together mimic a single compound set. Set mappings are introduced in this article to replace compound sets. A set mapping consists of:
+*   A **set mapping** is a collection of identifiers that together provide an alternative for the functionality of a single compound set. 
+    A set mapping consists of:
     
     * A **set mapping set** is an atomic set with elements that look like elements from a compound set. 
 
@@ -88,23 +103,27 @@ Some terminology is introduced in this section that will be used in this article
 
     * A **set mapping relation** is a relation that contains the same set of tuples as a compound set.
 
-    * A **set mapping parameter** is an parameter that contains the data to handle the "tags" functionality of a compound set.
+    * A **set mapping parameter** is an element parameter that contains the data to handle the "tags" functionality of a compound set.
         
-*   The parameters, variables and constrains of an application contain the data of that application. A **compound data identifier** is a parameter, variable or constraint, such that at least one index in the index domain of that identifier is a compound index. For the purposes of this article, **compound data** is the data of a compound data identifier.
+*   The parameters, variables and constrains of an application contain the data of that application. 
+    A **compound data identifier** is a parameter, variable or constraint, such that at least one index in the index domain of that identifier is a compound index. 
+    As a shorthand, **compound data** is the data of a compound data identifier.
 
 *   Consider a parameter ``A``, then a **shadow** parameter, say ``A_Shadow``, is a parameter that holds the same data as ``A``.
-    In the context of this article, *same data* should be interpreted as, that there is a clear one-to-one correspondence between the elements of ``A`` and ``A_Shadow`` such that the values of the corresponding elements are the same. 
-    As an example, consider a compound data identifier ``P`` having compound indices in its index domain, and a shadow ``PS`` having the corresponding set mapping indices in its index domain.
+    Here, *same data* should be interpreted as, that there is a clear one-to-one correspondence between the elements of ``A`` and ``A_Shadow`` such that the values of the corresponding elements are the same. 
+    As an example, consider a compound data identifier ``P`` having compound indexes in its index domain, and a shadow ``PS`` having the corresponding set mapping indexes in its index domain.
 
 *   A **screen definition** is a serialized representation of a screen. 
     The point and click types of UI provided by AIMMS, both WinUI and WebUI, store these **screen definitions** as text files within an AIMMS project.
-    
+
+
+
 .. _Section-Scope:
 
 Scope of the work
 -----------------
 
-To determine the scope of the work involved in adapting an AIMMS application, note that compound data is present in **AIMMS Cases** and compound data identifiers are present in the **AIMMS Screen definitions** of that AIMMS application. As you know AIMMS cases cannot be edited manually.  In addition, the format of screen definitions is designed for fast serialization instead of for human editing. In addition, the model needs to be adapted such that compound sets are no longer used. 
+To determine the scope of the work involved in adapting an AIMMS application, note that compound data is present in **AIMMS Cases** and compound data identifiers are present in the **AIMMS Screen definitions** of that AIMMS application. As you know AIMMS cases cannot be edited manually.In addition, the format of screen definitions is designed for fast serialization instead of for human editing. In addition, the model needs to be adapted such that compound sets are no longer used.
 
 The overall deprecation procedure is depicted below:
 
@@ -129,52 +148,47 @@ The conversion procedure consists of the following conversion steps:
 
 #. Adapt the model such that compound sets are no longer needed. 
 
-#. Move the compound indices to the corresponding set mapping sets. This step is essential such that screen definitions can be retained unaltered.
+#. Move the compound indexes to the corresponding set mapping sets. 
 
 #. For each shadow case, copy that shadow case back to the original case.
 
 #. Remove the library ``DeprecateCompoundSetUtilities`` from your application.
 
+These step are elaborated in the next sections.
 
-Running example
----------------
 
-In the remainder we will use a running example that contains:
 
-#. One dimensional sets :math:`S, T, U`, with indices respectively :math:`i, j, k`.
+.. _Section_conversion_Backup:
 
-#. A relation :math:`R` that is subset of the Cartesian product :math:`S \times T \times U`.
+Conversion step 1: Make a backup.
+---------------------------------
 
-#. A compound set :math:`C` with index :math:`h` defined as :math:`\{ (i, j, k) | (i, j, k) \in R \}`. The tags of this compound set are :math:`(TS,TT,TU)`
+The importance of creating backups cannot be overemphasized as it is easily overlooked. The "how to" of making a backup is beyond the scope of this document.
 
-#. A compound subset :math:`D \subset C` with index :math:`g`. Note that :math:`D` inherits its tags from :math:`C`.
 
-#. A parameter :math:`P` declared over the index for the compound set: :math:`P_h`
 
-#. A parameter :math:`P1` declared over the index for the compound subset: :math:`P1_g`
-
-#. A parameter :math:`Q` declared over the indices for the one dimensional sets: :math:`Q_{i,j,k}`
-
-#. A parameter :math:`Q1` declared over the index :math:`i`: :math:`Q1_i`
-
-In the following sections, some of these steps will be discussed in more detail:
-
-Conversion step 1: Make a backup
---------------------------------
-
-The importance of creating backups cannot be overemphasized as it is easily overlooked.
+.. _Section_conversion_use_Utility:
 
 Conversion step 2: Copy the utility library
 -------------------------------------------
 
-For now: the download provides an example app, mimicking the running example used in this article. This example app also contains the utility library ``DeprecateCompoundSetUtilities``. Please copy the library from that example and use it in your application.
+For now: the download provides an example app, mimicking the running example used in this article. 
+This example app also contains the utility library ``DeprecateCompoundSetUtilities``. 
+Please copy the library from that example and use it in your application.
+
+
+
+.. _Section_conversion_Create_Set_Mapping:
 
 Conversion step 3: Create Set Mapping
 -------------------------------------
 
-In this conversion step a set mapping is created for each compound set in your model.
+In this conversion step a set mapping is created for each compound set in your model. This conversion step consists of the following sub steps:
 
-#. Please open the WinUI page: ``Deprecate Compound Set Control Page`` of the library ``DeprecateCompoundSetUtilities``, and press button ``Create Set Mapping Declarations``. This action will create a section named ``set mapping declarations``.  This section is created at the wrong place in the model tree, namely in the runtime library ``CompoundSetMappingRuntimeLibrary``. You should copy this section to your main model in the following steps:
+#. Please open the WinUI page: ``Deprecate Compound Set Control Page`` of the library ``DeprecateCompoundSetUtilities``, and press button ``Create Set Mapping Declarations``. 
+   This action will create a section named ``set mapping declarations`` in the runtime library ``CompoundSetMappingRuntimeLibrary`` as runtime libraries are the only place where a library or main model may create new AIMMS code.
+   The section ``set mapping declarations`` should be in the main model, however. 
+   The subsequent sub steps in this conversion step will move this section to your main model:
 
 #. AIMMS Menu - Edit - Export - to a file, say ``smd.ams``.
 
@@ -186,7 +200,11 @@ The model explorer should now look something like this:
 
 .. image::  Resources/Other/CompoundSets/Images/SetMappingDeclarations.png 
 
-.. caution:: When you use copy and paste on the section ``Set Mapping Declarations`` of the runtime library, the copied section will still contain references to the runtime indices. A subsequent restart of your application will have compilation errors.
+.. caution:: Using Copy/Paste on the section ``Set Mapping Declarations`` of the runtime library might seem simpler than the sub steps 2 - 4 above. However, when you do that, the copied section will still contain references to the runtime indexes. A subsequent restart of your application will have compilation errors as the compound indexes still referencing the runtime library are not present upon first compilation.
+
+
+
+.. _Section_Conversion_Copy_Input_Cases:
 
 Conversion step 4: Copy the input cases
 ---------------------------------------
@@ -195,8 +213,49 @@ For each case, you will need to press the button:
 
 
 
-How to find the compound sets already created in your application?
-------------------------------------------------------------------
+.. _Section_Conversion_Adapt_Model:
+
+Conversion step 5: Adapt the model such that compound sets are no longer needed.
+--------------------------------------------------------------------------------
+
+In this section, we will discuss several examples of how compound sets are used in your model and provide alternatives using the set mappings created in :ref:`Section_conversion_Create_Set_Mapping`.
+
+Running example
+^^^^^^^^^^^^^^^
+
+In the remainder we will use a running example that contains:
+
+#. One dimensional sets :math:`S, T, U`, with indexes respectively :math:`i, j, k`.
+
+#. A relation :math:`R` that is subset of the Cartesian product :math:`S \times T \times U`.
+
+#. A compound set :math:`C` with index :math:`h` defined as :math:`\{ (i, j, k) | (i, j, k) \in R \}`. The tags of this compound set are :math:`(TS,TT,TU)`
+
+#. A compound subset :math:`D \subset C` with index :math:`g`. Note that :math:`D` inherits its tags from :math:`C`.
+
+#. A parameter :math:`P` declared over the index for the compound set: :math:`P_h`
+
+#. A parameter :math:`P1` declared over the index for the compound subset: :math:`P1_g`
+
+#. A parameter :math:`Q` declared over the indexes for the one dimensional sets: :math:`Q_{i,j,k}`
+
+#. A parameter :math:`Q1` declared over the index :math:`i`: :math:`Q1_i`
+
+
+Conversion step 6: Move the compound indexes to the corresponding set mapping sets.
+-----------------------------------------------------------------------------------
+
+This step is essential such that screen definitions can be retained unaltered. 
+This step may be combined with the previous step; in so doing, the AIMMS compiler will notify you of any compound set syntax on an atomic set in the form of a compilation error.
+
+Conversion step 7: For each shadow case, copy that shadow case back to the original case.
+-----------------------------------------------------------------------------------------
+
+Again select folders.
+
+
+Tech trick explained: How to find the compound sets already created in your application?
+----------------------------------------------------------------------------------------
 
 Repeating the above, a compound set has one of the following two characteristics:
 
@@ -210,47 +269,20 @@ To test for a compound set with the second characteristic, we check for each set
 
 The procedure ``dcsu::prIdentifyCompoundSets`` that does just this, and fills the sets ``dcsu::sCompoundRootSets``, ``dcsu::sCompoundSets``, and ``dcsu::sCompoundSetsThatAreNotRootSets``.
 
-Now that we have compound sets, and divided them in compound root sets and compound subsets, we need to start adapting our application. As compound subsets depend on compound root sets, we cannot start with the root sets.  So let's start providing alternatives for compound subsets first.
-
-How to create a so-called subset compound set mapping with which you can adapt your model?
-------------------------------------------------------------------------------------------
 
 
-How to create a so-called root compound set mapping with which you can adapt your model?
-----------------------------------------------------------------------------------------
 
-We will create a set mapping on our running example, with the following steps:
-
-#. We create several identifiers:
-
-    #. We create a one-dimensional set :math:`CM` and give it an index :math:`i_{cm}` and an element parameter :math:`ep_{cm}`.
-
-    #. We create a :math:`3+1` dimensional relation :math:`RM \subset S \times T \times U \times CM`.
-
-    #. We create three element parameters EPTS(i_cm) in S, EPTT(i_cm) in T, and EPTU(i_cm) in U.
+.. _Section_Summary:
     
-    #. We create three helper scalar element parameters EPHS in S, EPHT in T, and EPHU in H.
-    
-#. We copy the data, following steps are parallel per element :math:`h=(h.TS,h.TT,h.TU) \in C`:
-
-    #. Let EPHS be h.TS, EPHT be h.TT, and EPHU be h.TU.
-
-    #. We "copy" the element :math:`h` to :math:`CM` as follows: ``SetElementAdd(CM,ep_cm,formatString("(%e,%e,%e)",EPHS,EPHT,EPHU))``
-
-    #. We copy the corresponding element from :math:`R` to :math:`RM` as follows: add :math:`(EPHS,EPHT,EPHU,ep_{cm})` to :math:`RM`.
-
-    #. We fill :math:`EPTS(ep_{cm})` with :math:`EPHS`, :math:`EPTT(ep_{cm})` with :math:`EPHT`, and :math:`EPTU(ep_{cm})` with :math:`EPHU`.
-
-    
-A lot of work needs to be written.  
-    
-
-
 Summary
 -------
 
 The functionality of compound sets described in the overview "Summary of what you can do with compound sets" can be achieved with a set mapping. 
 In this "How to" article, we've described how you can replace the compound sets with a set mapping. As a set mapping is in essence no more than a normal one-dimensional root set and a relation, existing parallelized technology can be deployed to efficiently handle the statements involved. 
+
+
+
+.. _Section_Collateral:
 
 Collateral benefits
 -------------------
