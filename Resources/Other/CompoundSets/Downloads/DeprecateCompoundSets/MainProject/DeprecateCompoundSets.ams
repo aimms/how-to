@@ -1,68 +1,6 @@
 ## ams_version=1.0
 
 Model Main_DeprecateCompoundSets {
-    Section Set_Mapping_Declarations {
-        DeclarationSection Set_Mapping_Declarations_for_Compound_Set_C {
-            Set sMappingSet_C_Set {
-                Index: iMS_C;
-                Parameter: epMS_C;
-            }
-            Set sMappingSet_C_Relation {
-                SubsetOf: (S,T,U,sMappingSet_C_Set);
-            }
-            ElementParameter epTag_C_TS {
-                IndexDomain: iMS_C;
-                Range: S;
-            }
-            ElementParameter epTag_C_TT {
-                IndexDomain: iMS_C;
-                Range: T;
-            }
-            ElementParameter epTag_C_TU {
-                IndexDomain: iMS_C;
-                Range: U;
-            }
-            ElementParameter epHelp_C_1 {
-                Range: S;
-            }
-            ElementParameter epHelp_C_2 {
-                Range: T;
-            }
-            ElementParameter epHelp_C_3 {
-                Range: U;
-            }
-        }
-        DeclarationSection Set_Mapping_Declarations_for_Compound_Set_D {
-            Set sMappingSet_D_Set {
-                Index: iMS_D;
-                Parameter: epMS_D;
-            }
-            Set sMappingSet_D_Relation {
-                SubsetOf: (S,T,U,sMappingSet_D_Set);
-            }
-            ElementParameter epTag_D_TS {
-                IndexDomain: iMS_D;
-                Range: S;
-            }
-            ElementParameter epTag_D_TT {
-                IndexDomain: iMS_D;
-                Range: T;
-            }
-            ElementParameter epTag_D_TU {
-                IndexDomain: iMS_D;
-                Range: U;
-            }
-            ElementParameter epHelp_D_1 {
-                Range: S;
-            }
-            ElementParameter epHelp_D_2 {
-                Range: T;
-            }
-            ElementParameter epHelp_D_3 {
-                Range: U;
-            }
-        }
-    }
     DeclarationSection Running_example_input_declarations {
         Set S {
             Index: i;
@@ -82,7 +20,7 @@ Model Main_DeprecateCompoundSets {
             Index: htemp, h;
         }
         Set D {
-            SubsetOf: (C);
+            SubsetOf: C;
             Index: gtemp, g;
         }
         Parameter A {
