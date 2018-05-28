@@ -723,9 +723,9 @@ LibraryModule DeprecateCompoundSetUtilities {
                     Read from file "sDataIdentifiers.txt" ;
                     Read from file "secundary.txt" ;
                     
-                    epSectionCompoundSetMappingDeclarations := StringToElement( AllIdentifiers, "Mapping_Set_Declarations" );
+                    epSectionCompoundSetMappingDeclarations := StringToElement( AllIdentifiers, "Set_Mapping_Declarations" );
                     if not epSectionCompoundSetMappingDeclarations then
-                    	raise error "Please ensure that the section you just imported in the main model is named \"Mapping_Set_Declarations\"" ;
+                    	raise error "Please ensure that the section you just imported in the main model is named \"Set_Mapping_Declarations\"" ;
                     endif ; 
                     
                     
@@ -844,11 +844,12 @@ LibraryModule DeprecateCompoundSetUtilities {
                     block ! Relate the compound set index and the set mapping set index
                     	spCompoundSetName(eCompoundSet) := FormatString( "%e", eCompoundSet );
                     	epElementParameterRelateCompoundSetMappingSetSet := me::Create(
-                    		formatString( "p01CompoundSetMappingSet_%s", spCompoundSetName(eCompoundSet)), 'parameter',
+                    		formatString( "w_%s", spCompoundSetName(eCompoundSet)), 'parameter',
                     			epSectionRelationCompoundSetSetMappingSetDeclarationsDeclarations );
                     	me::SetAttribute( epElementParameterRelateCompoundSetMappingSetSet, 'index domain', 
                     		formatString( "(%s,%s)",spCompoundIndexName(eCompoundSet), spMappingSetIndex(eCompoundSet)));
                     	me::SetAttribute( epElementParameterRelateCompoundSetMappingSetSet, 'range', "binary" );
+                    	me::SetAttribute( epElementParameterRelateCompoundSetMappingSetSet, 'property', "nosave" );
                     	epElementParameterRelationCompoundSet(eCompoundSet) := epElementParameterRelateCompoundSetMappingSetSet;
                     endblock ;
                 }
@@ -952,7 +953,27 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
         }
         Section Creating_Shadow_data_folder {
-            Procedure prPageOpenCopyDataFolderArea;
+            Procedure prPageOpenCopyDataFolderArea {
+                Body: {
+                    block ! Get a default data folder name, if there is none.
+                    	if not spDataFolderName then
+                    		spDataFolderName := "data";
+                    		if not DirectoryExists( spDataFolderName ) then
+                    			spDataFolderName := "Data" ;
+                    		endif ;
+                    		if not DirectoryExists( spDataFolderName ) then
+                    			spDataFolderName := "" ;
+                    		endif ;
+                    	endif ;
+                    endblock ;
+                }
+            }
+            StringParameter spInputCaseFilename {
+                InitialData: "";
+            }
+            StringParameter spOutputCaseFilename {
+                InitialData: "";
+            }
             StringParameter spDataFolderName {
                 InitialData: "data";
             }
@@ -965,6 +986,43 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
             StringParameter spCaseFilenames {
                 IndexDomain: iCaseNo;
+            }
+            Procedure prSelectSingleInputCase {
+                Body: {
+                    FileSelect(
+                    	filename  :  spInputCaseFilename, 
+                    	directory :  spDataFolderName, 
+                    	extension :  ".data", 
+                    	title     :  "Please select a case file to create a shadow case fle for.");
+                    ! Adapt spOutputCaseFilename upon selection.
+                    if FindString( spInputCaseFilename, spDataFolderName ) = 1 then
+                    	spSuggestedOutputCaseFilename := 
+                    		spShadowDataFolderName +  
+                    		substring( spInputCaseFilename,
+                    			StringLength( spDataFolderName ) + 1,
+                    			StringLength( spInputCaseFilename ) );
+                    else
+                    	spSuggestedOutputCaseFilename := spShadowDataFolderName + spInputCaseFilename ;
+                    endif ;
+                    spOutputCaseFilename := spSuggestedOutputCaseFilename ;
+                }
+                StringParameter spSuggestedOutputCaseFilename;
+            }
+            Procedure prSelectSingleOutputCase {
+                Body: {
+                    FileSelectNew(
+                    	filename  :  spOutputCaseFilename, 
+                    	directory :  spShadowDataFolderName, 
+                    	extension :  ".data", 
+                    	title     :  "Please select a filename for the new shadow case.");
+                }
+            }
+            Procedure prCopySingleInputCaseToShadowCase {
+                Body: {
+                    prWorkCopyInputCaseToShadowCase(
+                    	spInputCaseFilename  :  spInputCaseFilename, 
+                    	spOutputCaseFilename :  spOutputCaseFilename);
+                }
             }
             Procedure prSelectFromDataFolder {
                 Body: {
@@ -984,18 +1042,6 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
             Procedure prWorkCopyDataFolderToShadowFolder {
                 Body: {
-                    block ! Get a default data folder name, if there is none.
-                    	if not spDataFolderName then
-                    		spDataFolderName := "data";
-                    		if not DirectoryExists( spDataFolderName ) then
-                    			spDataFolderName := "Data" ;
-                    		endif ;
-                    		if not DirectoryExists( spDataFolderName ) then
-                    			spDataFolderName := "" ;
-                    		endif ;
-                    	endif ;
-                    endblock ;
-                    
                     block ! Check for data folder.
                     	if not spDataFolderName then
                     		raise warning "The \"from\" folder is not selected.";
@@ -1015,6 +1061,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		raise error formatString( "Unable to empty folder %s to create shadow cases in, perhaps it contains read-only files?", spShadowDataFolderName );
                     		return ;
                     	endif ;
+                    	DirectoryCreate( spShadowDataFolderName );
                     endblock ;
                     
                     block ! Get files and convert them!
@@ -1026,7 +1073,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     
                     	if card( sCaseFileNumbers ) then
                     		for iCaseNo do
-                    			prWorkSaveShadowToCase( spCaseFilenames( iCaseNo ) );	
+                    			 prCopyInputCaseToShadowCase( spCaseFilenames( iCaseNo ) );	
                     		endfor ;
                     	else
                     		raise warning formatString("No cases found in folder %s.", spDataFolderName );
@@ -1035,33 +1082,30 @@ LibraryModule DeprecateCompoundSetUtilities {
                 }
             }
             Procedure prCopyInputCaseToShadowCase {
-                Arguments: (spInputCaseFilename);
+                Arguments: (spInputname);
                 Body: {
-                    block ! Check input
-                    	if FindString( spInputCaseFilename, spDataFolderName ) <> 1 then
-                    		raise error "Internal error; expected an input filename from the data folder." ;
-                    		return ;
-                    	endif ;
-                    endblock ;
+                    !block ! Check input
+                    !	if FindString( spInputCaseFilename, spDataFolderName ) <> 1 then
+                    !		raise error "Internal error; expected an input filename from the data folder." ;
+                    !		return ;
+                    !	endif ;
+                    !endblock ;
                     
-                    spOutputCaseFileName := 
-                    	spShadowDataFolderName + 
-                    	Substring( spInputCaseFilename, 
-                    		StringLength( spDataFolderName ) + 1, 
-                    		StringLength( spInputCaseFilename ) );
+                    spInputCaseFilename := spDataFolderName + "/" + spInputname ;
+                    
+                    spOutputCaseFileName := spShadowDataFolderName + "/" + spInputname ;
                     
                     prWorkCopyInputCaseToShadowCase( spInputCaseFilename, spOutputCaseFilename );
                 }
-                StringParameter spInputCaseFilename {
+                StringParameter spInputCaseFilename;
+                StringParameter spOutputCaseFilename;
+                StringParameter spInputname {
                     Property: Input;
                 }
-                StringParameter spOutputCaseFilename;
             }
             Procedure prWorkCopyInputCaseToShadowCase {
                 Arguments: (spInputCaseFilename,spOutputCaseFilename);
                 Body: {
-                    DebuggerBreakpoint();
-                    
                     prWorkCreateShadowCompoundSet();
                     
                     CaseFileLoad( spInputCaseFilename );

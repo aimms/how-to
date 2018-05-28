@@ -209,7 +209,14 @@ The model explorer should now look something like this:
 Conversion step 4: Copy the input cases
 ---------------------------------------
 
-For each case, you will need to press the button: 
+Explain what shadow cases are.
+
+The page ... offers two methods for copying original cases to shadow cases.
+
+Method 1: single case after single case
+
+Method 2: directory full of cases copied in one go.
+
 
 
 

@@ -24,3 +24,5 @@
 "dcsu::Copy_prWorkCreateSetMappingsCompoundSet" "dcsu::prWorkCreateShadowCompoundSet" "2018-05-22 11:48:26"
 "dcsu::Copy_epProcForwardCopyProcedure" "dcsu::epProcBackwardCopyProcedure" "2018-05-23 14:16:36"
 "dcsu::prPageOpenCopyDataFolderSection" "dcsu::prPageOpenCopyDataFolderArea" "2018-05-28 07:46:45"
+"dcsu::Copy_spInputCaseFilename" "dcsu::spOutputCaseFilename" "2018-05-28 09:58:31"
+"dcsu::Copy_prSelectSingleInputCase" "dcsu::prSelectSingleOutputCase" "2018-05-28 10:03:16"

@@ -6,6 +6,7 @@
 *.dmp
 Musterlösung
 _build
+shadowData
 Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets/IdentifiersWithShadows.txt
 Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets/forward/example.data
 Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets/msd.ams

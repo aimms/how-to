@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Page Version="4000" TimeStamp="2018-05-28 07:46:47">
+<Page Version="4000" TimeStamp="2018-05-28 10:03:18">
 	<PageEditSize Type="Inherited" />
 	<ProjectUUID>20FA164F-37C1-49B1-AB6C-A8AF79AF40F1</ProjectUUID>
 	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
@@ -8,8 +8,8 @@
 		<EntryProcedure>dcsu::prPageOpenDeprecateCompoundSetUtilities</EntryProcedure>
 	</Action>
 	<PageObject Type="Button">
-		<Location top="36" left="420" bottom="84" right="624" />
-		<TabOrder>2</TabOrder>
+		<Location top="18" left="390" bottom="72" right="600" />
+		<TabOrder>3</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Create Set Mapping Declarations"</Title>
@@ -23,7 +23,7 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="258" left="402" bottom="336" right="642" />
+		<Location top="372" left="396" bottom="450" right="636" />
 		<TabOrder>1</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
@@ -38,14 +38,14 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Rectangle">
-		<Location top="114" left="54" bottom="354" right="972" />
+		<Location top="306" left="66" bottom="456" right="978" />
 		<Shape>Open</Shape>
 		<FillColor RGB="#ffffff" />
 		<LineColor RGB="#000000" />
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="126" left="66" bottom="180" right="330" />
-		<TabOrder>3</TabOrder>
+		<Location top="312" left="78" bottom="366" right="342" />
+		<TabOrder>4</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Select 'from' data folder"</Title>
@@ -59,8 +59,8 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="186" left="66" bottom="246" right="330" />
-		<TabOrder>4</TabOrder>
+		<Location top="378" left="78" bottom="438" right="342" />
+		<TabOrder>7</TabOrder>
 		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
@@ -72,8 +72,8 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="126" left="690" bottom="180" right="954" />
-		<TabOrder>5</TabOrder>
+		<Location top="318" left="690" bottom="372" right="954" />
+		<TabOrder>9</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Select 'to' shadow data folder"</Title>
@@ -87,8 +87,8 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="186" left="690" bottom="246" right="954" />
-		<TabOrder>6</TabOrder>
+		<Location top="378" left="690" bottom="438" right="954" />
+		<TabOrder>10</TabOrder>
 		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
@@ -99,13 +99,105 @@
 			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
 		</ExplicitIdentifier>
 	</PageObject>
+	<PageObject Type="Button">
+		<Location top="156" left="72" bottom="210" right="336" />
+		<TabOrder>5</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Select a single input case"</Title>
+		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>dcsu::prSelectSingleInputCase</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="156" left="690" bottom="210" right="954" />
+		<TabOrder>8</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Output case file name"</Title>
+		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>dcsu::prSelectToShadowDataFolder</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="222" left="72" bottom="282" right="336" />
+		<TabOrder>6</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>dcsu::spInputCaseFilename</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="228" left="690" bottom="288" right="954" />
+		<TabOrder>11</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>dcsu::spOutputCaseFilename</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="198" left="384" bottom="276" right="624" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Copy a single case"</Title>
+		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>dcsu::prCopyDataFolderToShadowFolder</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Rectangle">
+		<Location top="144" left="66" bottom="294" right="978" />
+		<Shape>Open</Shape>
+		<FillColor RGB="#ffffff" />
+		<LineColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Rectangle">
+		<Location top="96" left="54" bottom="468" right="1050" />
+		<Shape>Open</Shape>
+		<FillColor RGB="#ffffff" />
+		<LineColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="108" left="72" bottom="138" right="336" />
+		<StaticText>Forward - creating shadow cases.</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
 	<UsedReferences>
 		<Model>
 			<Symbol>dcsu::prCreateSetMappingsCompoundSet</Symbol>
 			<Symbol>dcsu::prCopyDataFolderToShadowFolder</Symbol>
 			<Symbol>dcsu::prPageOpenDeprecateCompoundSetUtilities</Symbol>
+			<Symbol>dcsu::spInputCaseFilename</Symbol>
+			<Symbol>dcsu::spOutputCaseFilename</Symbol>
 			<Symbol>dcsu::spDataFolderName</Symbol>
 			<Symbol>dcsu::spShadowDataFolderName</Symbol>
+			<Symbol>dcsu::prSelectSingleInputCase</Symbol>
 			<Symbol>dcsu::prSelectFromDataFolder</Symbol>
 			<Symbol>dcsu::prSelectToShadowDataFolder</Symbol>
 		</Model>
