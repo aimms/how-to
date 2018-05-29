@@ -4,6 +4,7 @@
 
 .. raw:: html
 
+			<br>
 			<h1 align="center">Welcome to How-To AIMMS documentation !</h1>
 			<br>
 			<br>
