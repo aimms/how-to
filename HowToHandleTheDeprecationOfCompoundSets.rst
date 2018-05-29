@@ -49,17 +49,17 @@ Why deprecate compound sets?
 
 There are several technical reasons to deprecate compound sets:
 
-#. Most AIMMS applications used in production read data from relational databases. The compound set concept is not present in relational databases. So by creating a model based on compound sets, you will have to create additional code that converts the current identifiers in your model to identifiers that can be used to exchange data with relational databases.
+#. **Most AIMMS applications** used in production **read data from** `relational databases <https://en.wikipedia.org/wiki/Relational_database>`_. The compound set concept is not present in relational databases. So by creating a model based on compound sets, you will have to create additional code that converts the current identifiers in your model to identifiers that can be used to exchange data with relational databases.
 
-#. At AIMMS, by maintaining support of compound sets, we would hinder the innovation of other new components of AIMMS, including CDM and WebUI.
+#. At AIMMS, by maintaining support of compound sets, **we would hinder the innovation of other new components of AIMMS**, including `CDM <https://documentation.aimms.com/cdm/index.html>`_ (Collaborative Data Management) and `WebUI <https://documentation.aimms.com/webui/index.html>`_.
 
-#. The initial design of compound sets dates back to the late 90's. At the time it was deemed that compound sets should be created automagically based on root sets and the use of an index or parameter in the set declaration. This may give an application a 'surprising' behavior: 
+#. The initial design of compound sets dates back to the late 90's. At the time it was deemed that compound sets should be created '*automagically*' based on root sets and the use of an index or parameter in the set declaration. **This may give an application a 'surprising' behaviour**: 
 
     #. when the root sets of two conceptually different compound sets collide, then numbering and ordering of elements is different from the numbering and ordering of elements expected.
     
     #. when an index or element parameter is added to the declaration of a relation, suddenly the performance of the application may degrade (see also next point).
 
-#. Last but not least is that the present implementation of compound sets is outdated. As you may know, at AIMMS, the execution engine is rewritten to allow for parallel execution of multi-dimensional statements but this parallel engine does not handle compound sets. The vintage implementation of compound sets, also dating back to the late 90's, suffers from some serious efficiency pitfalls. 
+#. Last but not least is that **the present implementation of compound sets is outdated**. As you may know, at AIMMS, the execution engine is rewritten to allow for parallel execution of multi-dimensional statements but this parallel engine does not handle compound sets. The vintage implementation of compound sets, also dating back to the late 90's, suffers from some serious efficiency pitfalls. 
 
 
 
@@ -68,7 +68,7 @@ There are several technical reasons to deprecate compound sets:
 How to plan for the adaptation of your model?
 ---------------------------------------------
 
-The deprecation of compound sets will only be definite after January 1, 2020, giving AIMMS modelers more than one and a half year between the announcement and the definite deprecation. With the nearing of this deadline, the urgency to do something about it also increases. That is why the following timeline is provided:
+**The deprecation of compound sets will only be definite after January 1, 2020**, giving AIMMS modellers more than one and a half year between the announcement and the definite deprecation. With the nearing of this deadline, the urgency to do something about it also increases. That is why the following timeline is provided:
 
 #. The first release of AIMMS IDE after July 1, 2018, does not provide the attributes 'index' or 'parameter' in the attribute form of relations. This step prevents the creation of new compound sets.
 
@@ -113,6 +113,10 @@ Some terminology is introduced in this section that will be used in this article
     Here, *same data* should be interpreted as, that there is a clear one-to-one correspondence between the elements of ``A`` and ``A_Shadow`` such that the values of the corresponding elements are the same. 
     The use here is compound data identifier ``P``, ie having compound indexes in its index domain, and a shadow ``PS`` having the corresponding set mapping indexes in its index domain. Such a shadow is also called an **atomic shadow identifier** as it has only atomic indexes, some of which are set mapping indexes.
 
+.. todo::
+	
+	Does this mean ``A_Shadow`` has ``A`` as a definition ?
+	
 *   A **screen definition** is a serialized representation of a screen. 
     The point and click types of UI provided by AIMMS, both WinUI and WebUI, store these **screen definitions** as text files within an AIMMS project.
 
@@ -161,7 +165,7 @@ These step are elaborated in the next sections.
 .. _Section_conversion_Backup:
 
 Conversion step 1: Make a backup.
----------------------------------
+++++++++++++++++++++++++++++++++++
 
 The importance of creating backups cannot be overemphasized as it is easily overlooked. The "how to" of making a backup is beyond the scope of this document.
 
@@ -170,7 +174,7 @@ The importance of creating backups cannot be overemphasized as it is easily over
 .. _Section_conversion_use_Utility:
 
 Conversion step 2: Copy the utility library
--------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++
 
 For now: the download provides an example app, mimicking the running example used in this article. 
 This example app also contains the utility library ``DeprecateCompoundSetUtilities``. 
@@ -181,7 +185,7 @@ Please copy the library from that example and use it in your application.
 .. _Section_conversion_Create_Set_Mapping:
 
 Conversion step 3: Create Set Mapping
--------------------------------------
+++++++++++++++++++++++++++++++++++++++++
 
 In this conversion step a set mapping is created for each compound set in your model. This conversion step consists of the following sub steps:
 
@@ -207,7 +211,7 @@ The model explorer should now look something like this:
 .. _Section_Conversion_Copy_Input_Cases:
 
 Conversion step 4: Copy the input cases
----------------------------------------
+++++++++++++++++++++++++++++++++++++++++
 
 Shadow cases are cases whereby the compound data is replaced by atomic shadow data.
 
@@ -220,7 +224,7 @@ You can either choose to do all cases in one go, or do case by case. Either way,
 .. _Section_Conversion_Adapt_Model:
 
 Conversion step 5: Adapt the model such that compound sets are no longer needed.
---------------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 In this section, we will discuss several examples of how compound sets are used in your model and provide alternatives using the set mappings created in :ref:`Section_conversion_Create_Set_Mapping`.
 
@@ -303,7 +307,7 @@ You can replace this definition by:
 
 
 Conversion step 6: Move the compound indexes to the corresponding set mapping sets.
------------------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 This step is essential such that screen definitions can be retained unaltered. 
 
@@ -314,7 +318,7 @@ This step may be combined with the previous step; in so doing, the AIMMS compile
 .. _Section_Conversion_Backward_Copy:
 
 Conversion step 7: For each shadow case, copy that shadow case back to the original case.
------------------------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 This section is similar to :ref:`Section_Conversion_Copy_Input_Cases`, except the area of the screen to use is ``Backward - creating cases with original identifiers without compound data``.
 
@@ -322,30 +326,28 @@ This section is similar to :ref:`Section_Conversion_Copy_Input_Cases`, except th
 .. _Section_Conversion_Final:
 
 Conversion step 8: Remove the library Deprecate Compound Set Utilities.
------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 As your project no longer depends on compound sets, this library is no longer needed and can be removed.
 
 
 .. _Section-Tech-trick-explained: 
 
-Tech trick explained: How to find the compound sets already created in your application?
-----------------------------------------------------------------------------------------
+.. topic:: **Tech trick explained**: *How to find the compound sets already created in your application?*
+	
+	Repeating the above, a compound set has one of the following two characteristics:
 
-Repeating the above, a compound set has one of the following two characteristics:
+	#. it is a subset of a Cartesian product in conjunction with an index or element parameter declared in its attribute form, or
 
-#. it is a subset of a Cartesian product in conjunction with an index or element parameter declared in its attribute form, or
+	#. a subset of another compound set.
 
-#. a subset of another compound set.
+	We can use these characteristics to identify the compound sets. 
+	To test for a compound set with the first characteristic, we test whether the string in the ``subset of`` attribute has a comma, and whether the attribute ``index`` or the attribute ``parameter`` has content. The sets that have this characteristic are also called compound root sets.
+	To test for a compound set with the second characteristic, we check for each set whether its domain set is a compound set.
 
-We can use these characteristics to identify the compound sets. 
-To test for a compound set with the first characteristic, we test whether the string in the ``subset of`` attribute has a komma, and whether the attribute ``index`` or the attribute ``parameter`` has content. The sets that have this characteristic are also called compound root sets.
-To test for a compound set with the second characteristic, we check for each set whether its domain set is a compound set.
+	The procedure ``dcsu::prIdentifyCompoundSets`` that does just this, and fills the sets ``dcsu::sCompoundRootSets``, ``dcsu::sCompoundSets``, and ``dcsu::sCompoundSetsThatAreNotRootSets``.
 
-The procedure ``dcsu::prIdentifyCompoundSets`` that does just this, and fills the sets ``dcsu::sCompoundRootSets``, ``dcsu::sCompoundSets``, and ``dcsu::sCompoundSetsThatAreNotRootSets``.
-
-
-
+|
 
 .. _Section_Summary:
     
@@ -369,13 +371,11 @@ This rewrite procedure is designed to make minimal changes to your application a
 
 #. Allow to deploy the efficiency improvements already implemented in the new parallel execution engine.
 
+.. todo::
 
-TODO
-----
+	#. Develop and test with compound set declared in library
 
-#. Develop and test with compound set declared in library
-
-#. Defined compound sets, can set mappings also be defined definitions?
+	#. Defined compound sets, can set mappings also be defined definitions?
 
 
 .. _Section-Further-Information:
