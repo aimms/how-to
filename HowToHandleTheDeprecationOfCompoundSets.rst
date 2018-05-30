@@ -40,7 +40,9 @@ In AIMMS, a relation :math:`R` is **transformed** to a compound set, say :math:`
 
 Once a compound set is formed, it allows for the selection of components in tuples via tags. Let's assume :math:`C` is declared with the tags :math:`(T_1, T_2, ..., T_n)`, then selecting component :math:`i` of tuple :math:`c` is obtained by the notation :math:`c.T_i`.
 
-
+.. seealso::
+	
+	https://download.aimms.com/aimms/download/manuals/AIMMS3LR_SetDeclaration.pdf
 
 .. _Section-Why:
 
