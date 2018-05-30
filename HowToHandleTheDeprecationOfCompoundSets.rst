@@ -1,9 +1,9 @@
 How to Handle the Deprecation of Compound sets
 ==============================================
 
-:author: Chris Kuip
+:author: AIMMS Customer Support Team.
 
-.. note:: This document and corresponding AIMMS :download:`project <Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` with running example and utility library (prefix dcsu) is actively being worked on. Your timely feedback is much appreciated as working your feedback may help others facing the same problem. Thanks, Chris.
+.. note:: This document and corresponding AIMMS :download:`project <Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` with running example and utility library (prefix dcsu) is actively being worked on. Your timely feedback is much appreciated as working your feedback may help others facing the same problem.  Thanks, AIMMS Customer Support Team.
 
 
 
@@ -25,7 +25,7 @@ This announcement raised several questions.  For instance:
 
 This document attempts to answer these questions.
 
-.. Ask Kim: should people be offered to register for the AIMMS news letter here? If so, is there a standard page for this? Same for old versions of the news letter.
+.. todo:: Ask Kim: should people be offered to register for the AIMMS news letter here? If so, is there a standard page for this? Same for old versions of the news letter.
 
 
 
@@ -86,7 +86,7 @@ How to plan for the adaptation of your model?
 Terminology
 -----------
 
-Some terminology is introduced in this section that will be used in this article to clarify the work that needs to be done.
+Some terminology is introduced in this section that will be used in this document to clarify the work that needs to be done.
 
 *   One-dimensional sets that are not compound sets are called **atomic** sets. 
     Examples of atomic sets are sets containing names, calendars and subsets of the set Integers. 
@@ -123,14 +123,15 @@ Some terminology is introduced in this section that will be used in this article
 
 .. _Section-Conversion-Procedure:
 
-The conversion procedure proposed in this article
--------------------------------------------------
+The conversion procedure proposed in this document
+--------------------------------------------------
 
 In this section a conversion procedure is proposed.  
 First and foremost, this conversion procedure explains the manual actions that needs to be done by a modeller 
 to handle the deprecation of compound sets. 
 Second this conversion procedure explains the utilities that can be used from the 
 AIMMS Utility library ``DeprecateCompoundSetUtilities`` to support these manual actions.
+
 To determine the **scope** that this conversion procedure needs to handle, 
 note that compound data is present in AIMMS Cases and compound data identifiers 
 are present in the **AIMMS Screen definitions** of that AIMMS application. 
@@ -181,7 +182,7 @@ The importance of creating backups cannot be overemphasized as it is easily over
 Conversion step 2: Copy the utility library
 +++++++++++++++++++++++++++++++++++++++++++++++
 
-For now: the download provides an example app, mimicking the running example used in this article. 
+For now: the download provides an example app, mimicking the running example used in this document. 
 This example app also contains the utility library ``DeprecateCompoundSetUtilities``. 
 Please copy the library from that example and use it in your application.
 
@@ -360,7 +361,7 @@ Summary
 -------
 
 The functionality of compound sets described in the overview "Summary of what you can do with compound sets" can be achieved with a set mapping. 
-In this "How to" article, we've described how you can replace the compound sets with a set mapping. As a set mapping is in essence no more than a normal one-dimensional root set and a relation, existing parallelized technology can be deployed to efficiently handle the statements involved. 
+In this "How to" document, we've described how you can replace the compound sets with a set mapping. As a set mapping is in essence no more than a normal one-dimensional root set and a relation, existing parallelized technology can be deployed to efficiently handle the statements involved. 
 
 
 
@@ -369,7 +370,7 @@ In this "How to" article, we've described how you can replace the compound sets 
 Collateral benefits
 -------------------
 
-Instead of continuing to let applications deploying compound sets suffer from the above disadvantages, this article describes a rewrite procedure.
+Instead of continuing to let applications deploying compound sets suffer from the above disadvantages, this document describes a rewrite procedure.
 This rewrite procedure is designed to make minimal changes to your application and at the same time:
 
 #. Avoid the pitfalls due to the "automagic" design of compound sets (mentioned in :ref:`Section-Why` point 3 above).
