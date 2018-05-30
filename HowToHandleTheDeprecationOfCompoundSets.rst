@@ -106,37 +106,44 @@ Some terminology is introduced in this section that will be used in this article
     * A **set mapping parameter** is an element parameter that contains the data to handle the "tags" functionality of a compound set.
 
 *   The parameters, variables and constrains of an application contain the data of that application. 
-    A **compound data identifier** is a parameter, variable or constraint, such that at least one index in the index domain of that identifier is a compound index. 
-    As a shorthand, **compound data** is the data of a compound data identifier.
+    A **compound data identifier** is a parameter, variable or constraint, 
+    such that at least one index in the index domain of that identifier is a compound index. 
+    As a shorthand, **compound data** is the data of a compound data identifier.   
+
+*   A **screen definition** is a serialized representation of a screen. 
+    The point and click types of UI provided by AIMMS, both WinUI and WebUI, 
+    store these **screen definitions** as text files within an AIMMS project.
 
 *   Consider a parameter ``A``, then a **shadow** parameter, say ``A_Shadow``, is a parameter that holds the same data as ``A``.
     Here, *same data* should be interpreted as, that there is a clear one-to-one correspondence between the elements of ``A`` and ``A_Shadow`` such that the values of the corresponding elements are the same. 
     The use here is compound data identifier ``P``, ie having compound indexes in its index domain, and a shadow ``PS`` having the corresponding set mapping indexes in its index domain. Such a shadow is also called an **atomic shadow identifier** as it has only atomic indexes, some of which are set mapping indexes.
     The ``dcsu`` AIMMS utility library creates atomic shadow parameters in a runtime library and subsequently use them as a stash to store data while the compound data identifiers are transformed to atomic data identifiers.
-    Additionally, there are temporary procedures in that runtime library to copy the data from the compound data identifiers to the atomic shadow parameters.
+    Additionally, there are temporary procedures in that runtime library to copy the data from the compound data identifiers to the atomic shadow parameters and later from the atomic shadow parameters to the transformed atomic data identifiers.
+    
 
-*   A **screen definition** is a serialized representation of a screen. 
-    The point and click types of UI provided by AIMMS, both WinUI and WebUI, store these **screen definitions** as text files within an AIMMS project.
+.. _Section-Conversion-Procedure:
 
+The conversion procedure proposed in this article
+-------------------------------------------------
 
+In this section a conversion procedure is proposed.  
+First and foremost, this conversion procedure explains the manual actions that needs to be done by a modeller 
+to handle the deprecation of compound sets. 
+Second this conversion procedure explains the utilities that can be used from the 
+AIMMS Utility library ``DeprecateCompoundSetUtilities`` to support these manual actions.
+To determine the **scope** that this conversion procedure needs to handle, 
+note that compound data is present in AIMMS Cases and compound data identifiers 
+are present in the **AIMMS Screen definitions** of that AIMMS application. 
+As you know AIMMS cases cannot be edited manually.
+In addition, the format of screen definitions is designed for fast serialization instead of for human editing. 
+Obviously, this conversion procedure should not overlook the need to adapt the model itself.
 
-.. _Section-Scope:
-
-Scope of the work
------------------
-
-To determine the scope of the work involved in adapting an AIMMS application, note that compound data is present in **AIMMS Cases** and compound data identifiers are present in the **AIMMS Screen definitions** of that AIMMS application. As you know AIMMS cases cannot be edited manually.In addition, the format of screen definitions is designed for fast serialization instead of for human editing. In addition, the model needs to be adapted such that compound sets are no longer used.
 
 The overall deprecation procedure is depicted below:
 
 .. image::  Resources/Other/CompoundSets/Images/DeprecateCompoundSets.png 
 
 
-
-.. _Section-Conversion-Procedure:
-
-The conversion procedure proposed in this article
--------------------------------------------------
 
 The conversion procedure consists of the following conversion steps:
 
@@ -229,7 +236,7 @@ In this section, we will discuss several examples of how compound sets are used 
 Running example
 ^^^^^^^^^^^^^^^
 
-In the remainder we will use a running example that contains:
+In this conversion step we will use a running example that contains:
 
 #. One dimensional sets :math:`S, T, U`, with indexes respectively :math:`i, j, k`.
 
