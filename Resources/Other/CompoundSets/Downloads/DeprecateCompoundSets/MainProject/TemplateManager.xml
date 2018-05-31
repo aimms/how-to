@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<TemplateManager>
+	<Page Name="All Data Pages" PageGUID="4580CD99-439D-4A70-BF39-B76AA6EF6CEC" />
+	<Page Name="[Data Page] R" PageGUID="AAA9CB01-7627-4A25-8441-DAB96F30A43A" />
+	<Page Name="[Data Page] C" PageGUID="AC9C71E3-FD0C-435B-9C34-C32A92E8BF6F" />
+	<Page Name="Running Example" PageGUID="2E081EDE-5031-4B43-BCBE-B4A970DA7AF7" />
+</TemplateManager>

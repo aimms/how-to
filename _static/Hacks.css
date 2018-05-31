@@ -138,6 +138,11 @@
 h1, h2, h3 p{
   font-family:Arial,sans-serif;
 }
+
+h2 {
+	
+	border-bottom: 1px solid lightgrey;
+}
 .navbar {
   overflow: hidden;
   background-color: #000081;
@@ -156,7 +161,7 @@ h1, h2, h3 p{
   color: white;
   font-weight:bold;
   text-align: center;
-  padding-bottom: 30px;
+  padding-bottom: 25px;
   padding-top: 25px;
   padding-left:15px;
   padding-right:15px;
@@ -164,12 +169,10 @@ h1, h2, h3 p{
   font-size: 15px;
 }
 
-.navbar a.navbarimg {
-  padding-top: 5px;
-  padding-left:15px;
-  padding-right:15px;
-  text-decoration: none;
-  font-size: 15px;
+.navbar a.navbarimg img{
+
+  padding-bottom: 2px;
+
 }
 
 .navbar a:hover {
@@ -232,9 +235,81 @@ div.body p{
 }
 
 div.box h1, .wy-breadcrumbs li a{
-  color:royalblue;
+  /*color:royalblue;*/
 }
 
 .wy-side-nav-search, .wy-menu-vertical a:active{
-  background-color: royalblue
+  /*background-color: royalblue*/
+}
+
+/*Color seealso blocks */
+
+.admonition.seealso .admonition-title {
+	
+	background: #329932;
+}
+
+.admonition.seealso {
+	
+	background: #cce5cc;
+	
+}
+
+/*Color any Topic block */
+.topic {
+	
+	background: lightgrey;
+	padding: 10px 10px 0px 10px;
+	border: 1px solid lightgrey;
+}
+
+.topic.contents {
+
+	background:inherit;
+}
+
+.code-block-caption .caption-text {
+
+	font-family: courier new;
+}
+
+/*Color + trophy icon for congrats blocks*/
+.congrats .topic-title:before {
+
+	content: "\f091"; /*code for the "trophy" icon. please refer to https://fontawesome.com/cheatsheet*/
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: darkgreen;
+    font-size: 18px;
+    padding-right: 0.5em;
+
+}
+
+.congrats {
+
+	background:none;
+	border:1px solid green;
+	margin-bottom:10px
+}
+
+.technical .topic-title:before {
+
+	content: "\f085"; /*please refer to https://fontawesome.com/cheatsheet*/
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: darkgreen;
+    font-size: 18px;
+    padding-right: 0.5em;
+
+}
+
+.technical {
+	
+	
+	border:1px solid grey;
+	margin-bottom:10px
 }

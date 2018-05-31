@@ -48,8 +48,8 @@ master_doc = 'ContentIndex'
 
 # General information about the project.
 project = u'How to in AIMMS'
-copyright = u'2018, AIMMS Costumer Support Team'
-author = u'AIMMS Costumer Support Team'
+copyright = u'2018, AIMMS Customer Support Team'
+author = u'AIMMS Customer Support Team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -76,7 +76,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
-todo_include_todos = False
+todo_include_todos = True
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -134,7 +134,7 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 html_context = {
-    'css_files': ['_static/Hacks.css','_static/custom.css'],
+    'css_files': ['_static/Hacks.css'],
 }
 
 # Custom sidebar templates, must be a dictionary that maps document names
@@ -152,7 +152,7 @@ html_sidebars = {
         'searchbox.html'
     ]
 }
-
+html_favicon = "_static/favicon.png"
 rst_prolog = "\n.. include:: special.rst\n"
 
 # -- Options for HTMLHelp output ------------------------------------------
@@ -186,7 +186,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'HowToinAIMMS.tex', u'How to in AIMMS Documentation',
-     u'AIMMS Costumer Support Team', 'manual'),
+     u'AIMMS Customer Support Team', 'manual'),
 ]
 
 
