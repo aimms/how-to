@@ -12,7 +12,7 @@ How to Handle the Deprecation of Compound sets
 Announcement
 ------------ 
 
-In the AIMMS Newsletter of May 2018, the deprecation of compound sets was announced by the AIMMS Product owner. 
+In the AIMMS Newsletter of May 2018, the deprecation of compound sets was announced. 
 This announcement raised several questions.  For instance: 
 
 * What?
