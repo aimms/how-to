@@ -49,9 +49,15 @@ Why deprecate compound sets?
 
 There are several technical reasons to deprecate compound sets:
 
-#. **Most AIMMS applications** used in production **read data from** `relational databases <https://en.wikipedia.org/wiki/Relational_database>`_. The compound set concept is not present in relational databases. So by creating a model based on compound sets, you will have to create additional code that converts the current identifiers in your model to identifiers that can be used to exchange data with relational databases.
+#. Many existing components do not support compound sets. Because compound sets are implemented in AIMMS in a manner that sets them apart from all other sets and indexing mechanisms, adding support for compound sets to such components is relatively expensive. These components include
 
-#. At AIMMS, by maintaining support of compound sets, **we would hinder the innovation of other new components of AIMMS**, including `CDM <https://documentation.aimms.com/cdm/index.html>`_ (Collaborative Data Management) and `WebUI <https://documentation.aimms.com/webui/index.html>`_.
+    #. Database tables and procedures exchanging data with `relational databases <https://en.wikipedia.org/wiki/Relational_database>`_. Anyway, there is no concept corresponding to compound sets in relational databases.
+    
+    #. `WebUI <https://documentation.aimms.com/webui/index.html>`_
+
+    #. `Datalink <https://documentation.aimms.com/datalink/index.html>`_
+    
+    #. `CDM <https://documentation.aimms.com/cdm/index.html>`_
 
 #. The initial design of compound sets dates back to the late 90's. At the time it was deemed that compound sets should be created '*automagically*' based on root sets and the use of an index or parameter in the set declaration. **This may give an application a 'surprising' behaviour**: 
 
@@ -59,7 +65,7 @@ There are several technical reasons to deprecate compound sets:
     
     #. when an index or element parameter is added to the declaration of a relation, suddenly the performance of the application may degrade (see also next point).
 
-#. Last but not least is that **the present implementation of compound sets is outdated**. As you may know, at AIMMS, the execution engine is rewritten to allow for parallel execution of multi-dimensional statements but this parallel engine does not handle compound sets. The vintage implementation of compound sets, also dating back to the late 90's, suffers from some serious efficiency pitfalls. 
+#.  The implementation of some indexing constructs involving compound sets exposes performance issues, which caused customers to abandon compound sets, and replace them by alternative approaches. The alternative formulations presented in this document do not suffer from these performance issues.
 
 
 
