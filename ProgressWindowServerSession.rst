@@ -41,7 +41,7 @@ Step 1A, before the solve:
 		option progress_time_interval := 1 ;
 
 Step 1B, during the solve, the procedure ``NewTimeCallback`` is called. 
-In our example, the progress information consists of the typical MIP KPI's: bestbound and incumbent.
+In our example, the progress information consists of the MIP solution progress information: best bound and incumbent.
 The body simply passes the best bound and incumbent to the actual working procedure:
 
 	.. code-block:: none
