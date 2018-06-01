@@ -19,30 +19,30 @@ Once a solver session is started, you can send additional information using ``pr
 
 This is illustrated in the following code of ``prPassProgressSupplied``. 
 
-	.. code-block:: none
+    .. code-block:: none
 
-		Procedure prPassProgressSupplied {
-			Arguments: (pwbs);
-			Body: {
-				if pro::GetPROEndPoint() then
-					locSessionQueue := pro::session::CurrentSessionQueue();
-					if pro::DelegateToServer(requestQueue: locSessionQueue,
-							flags: pro::PROMFLAG_LIVE + 
-									 pro::PROMFLAG_PRIORITY) then
-						return 1;
-					endif ;
-				endif ;
+        Procedure prPassProgressSupplied {
+            Arguments: (pwbs);
+            Body: {
+                if pro::GetPROEndPoint() then
+                    locSessionQueue := pro::session::CurrentSessionQueue();
+                    if pro::DelegateToServer(requestQueue: locSessionQueue,
+                            flags: pro::PROMFLAG_LIVE + 
+                                     pro::PROMFLAG_PRIORITY) then
+                        return 1;
+                    endif ;
+                endif ;
                 
                 ! The following code will only be executed server side.
-				pProgressWillBeSupplied := pwbs ;
+                pProgressWillBeSupplied := pwbs ;
                                 
-			}
-			StringParameter locSessionQueue;
-			Parameter pwbs {
-				Property: Input;
-			}
-		}
-		
+            }
+            StringParameter locSessionQueue;
+            Parameter pwbs {
+                Property: Input;
+            }
+        }
+        
 Note the use of the flag ``pro::PROMFLAG_PRIORITY`` ; this flag indicates that this procedure call should be executed now, and the execution of the running procedure is temporarily suspended.
 
 The user interface when the problem is being solved now looks as follows:
