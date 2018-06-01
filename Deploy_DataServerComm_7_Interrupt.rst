@@ -4,13 +4,13 @@ How to interrupt the server session?
 Introduction
 ------------
 
-Assuming we have visibility of the server session via `progress <https://how-to.aimms.com/ProgressWindowServerSession.html>`_ or `intermediate results <https://how-to.aimms.com/RetrieveIntermediateResults.html>`_, we may decide to interrupt the server session. 
+Assuming we have visibility of the server session via `progress <https://how-to.aimms.com/Deploy_DataServerComm_5_Progress.html>`_ or `intermediate results <https://how-to.aimms.com/RetrieveIntermediateResults.html>`_, we may decide to interrupt the server session. 
 This answer takes you through the steps to interrupt a solve process or to interrupt a server session from the client side. 
 
 Implementation
 --------------
 
-.. image::  Resources/AIMMSPRO/StopSolveServerSession/Images/QueuesBetweenDataAndServerSession.png
+.. image::  Resources/AIMMSPRO/Deploy_DataServerComm_7_Interrupt/Images/QueuesBetweenDataAndServerSession.png
 
 Interrupting the server session is very direct and can be done by simply calling the AIMMS PRO library procedure, ``pro::client::StopExecution`` . However, you will need to know:
 
@@ -39,9 +39,9 @@ Finally, to allow activate this procedure, we link this procedure to a new butto
 
 Now, the user interface when the problem is being solved looks as follows.
 
-.. image::  Resources/AIMMSPRO/RemoveVeil/Images/BB07_WebUI_screen.png 
+.. image::  Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB07_WebUI_screen.png 
 
-The example AIMMS project with the above demonstrated procedures can be downloaded from :download:`8. Flow Shop - Interrupt <Resources/AIMMSPRO/RemoveVeil/Downloads/7. Flow Shop - Interrupt.zip>`.
+The example AIMMS project with the above demonstrated procedures can be downloaded from :download:`8. Flow Shop - Interrupt <Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/8. Flow Shop - Interrupt.zip>`.
 
 Summary
 -------
@@ -51,4 +51,7 @@ The direct support for interruptions makes interrupting a solver or a server ses
 Further reading
 ---------------
 
-An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided `here <https://how-to.aimms.com/CommunicateDataChangesToServerSession.html>`_ .
+An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided `here <https://how-to.aimms.com/Deploy_DataServerComm_8_PassNewData.html>`_ .
+
+
+.. include:: includes/form.def

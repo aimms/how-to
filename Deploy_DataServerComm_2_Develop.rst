@@ -45,8 +45,8 @@ We change the body of the ``prSolve`` procedure by replacing the test ``not Proj
 		
 The ``pro::DelegateToServer`` statement is executed only if the current AIMMS instance is connected to an AIMMS PRO server. If not, it is skipped and the remaining procedure is executed in the AIMMS IDE. This way, we avoid the annoying dialog mentioned above, but still enable `AIMMS PRO debugging <https://manual.aimms.com/pro/2/en/topic/debugging-pro-enabled-projects>`_ when needed.
 
-The AIMMS project for running Flowshop example can be downloaded from: :download:`3. Flow Shop - Enable development testing <Resources/AIMMSPRO/RemoveVeil/Downloads/3. Flow Shop - Enable development testing.zip>`.
+The AIMMS project for running Flowshop example can be downloaded from: :download:`3. Flow Shop - Enable development testing <Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/3. Flow Shop - Enable development testing.zip>`.
 
-The next article in this AIMMS PRO series shows how to keep the end user interface active while a solve procedure is in process. Read `How to keep the AIMMS WebUI interactive while a solve process is running in the background?  <https://how-to.aimms.com/RemoveVeil.html>`_
+The next article in this AIMMS PRO series shows how to keep the end user interface active while a solve procedure is in process. Read `How to keep the AIMMS WebUI interactive while a solve process is running in the background?  <https://how-to.aimms.com/Deploy_DataServerComm_3_RemoveVeil.html>`_
 
 .. include:: includes/form.def

@@ -17,7 +17,7 @@ In the context of the running example: the Flowshop model, we are passing inform
 
 #. The AIMMS execution as part of the data session. Here a procedure is called, and information passed via arguments, from the server session to the data session.
 
-.. image:: Resources/AIMMSPRO/RemoveVeil/Images/ThreeLevelsOfExecution.png
+.. image:: Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/ThreeLevelsOfExecution.png
 
 The implementation of the information stream represented by the two upper arrows will be discussed in the next section. 
 The bottom two arrows (Incumbent Callback and Intermediate Solution) will be discussed in a separate article.
@@ -68,7 +68,7 @@ To give this answer an extra dimension, we are storing each of the observations 
 		
 and visualize that in the following curve widget:
 
- .. image:: Resources/AIMMSPRO/ProgressWindowServerSession/Images/CurveMIP_GAP.PNG
+ .. image:: Resources/AIMMSPRO/Deploy_DataServerComm_5_Progress/Images/CurveMIP_GAP.PNG
 
 To implement the communication from the server session to the data session, the server session uses a call similar to ``pro::DelegateToServer``, but one that goes in the other direction, namely to the client: ``pro::DelegateToClient()``.
 The procedure that contains the actual work, namely ``UpdateGapToClient``, is specified as follows:
@@ -121,9 +121,9 @@ There are several remarks regarding the above code:
 	
 The user interface when the results are downloaded now looks as follows:
 
-.. image:: Resources/AIMMSPRO/RemoveVeil/Images/BB06_WebUI_screen.png 
+.. image:: Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB06_WebUI_screen.png 
 
-The AIMMS project that does just this, can be downloaded from: :download:`6. Flow Shop - Progress Communication <Resources/AIMMSPRO/RemoveVeil/Downloads/6. Flow Shop - Progress Communication.zip>`.
+The AIMMS project that does just this, can be downloaded from: :download:`6. Flow Shop - Progress Communication <Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/6. Flow Shop - Progress Communication.zip>`.
 
 Summary
 -------
@@ -133,4 +133,9 @@ By using the procedure ``pro::DelegateToClient`` we can set up communicating inf
 Continued reading
 -----------------
 
-Now that end users know the state of the solution process, they also want to interrupt it when they see that further improvements are not worth waiting for. This is handled in `How to interrupt a solve while WebUI is active during a solve <https://how-to.aimms.com/StopSolveWithoutVeil.html>`_ .
+Now that end users know the state of the solution process, they also want to interrupt it when they see that further improvements are not worth waiting for. This is handled in `How to interrupt a solve while WebUI is active during a solve <https://how-to.aimms.com/Deploy_DataServerComm_7_Interrupt.html>`_ .
+
+
+
+.. include:: includes/form.def
+ 
