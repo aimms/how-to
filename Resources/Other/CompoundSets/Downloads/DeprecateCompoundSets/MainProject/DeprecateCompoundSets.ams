@@ -40,6 +40,9 @@ Model Main_DeprecateCompoundSets {
         Parameter V1 {
             Definition: sum( h, P(h) );
         }
+        ElementParameter epC {
+            Range: C;
+        }
     }
     Procedure MainInitialization {
         Comment: "Add initialization statements here that do NOT require any library being initialized already.";

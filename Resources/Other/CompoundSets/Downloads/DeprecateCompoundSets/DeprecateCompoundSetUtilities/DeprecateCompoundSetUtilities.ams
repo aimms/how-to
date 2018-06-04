@@ -4,6 +4,10 @@ LibraryModule DeprecateCompoundSetUtilities {
     Prefix: dcsu;
     Interface: PublicSection;
     Property: NoSave;
+    Comment: {
+        "Work in document:
+        - index domain of sets: no compound set."
+    }
     Section PublicSection {
         Section Major_conversion_steps {
             Procedure prCreateSetMappingsCompoundSet {
@@ -66,16 +70,23 @@ LibraryModule DeprecateCompoundSetUtilities {
                     			if pSubsetOfStr and not StringOccurrences( pSubsetOfStr, "," ) then
                     				epDomainSet := StringToElement(AllIdentifiers, pSubsetOfStr, create:0);
                     				if epDomainSet and epDomainSet in sCompoundSets then
-                    					sCompoundSets += IndexSets;
-                    					p01AdditionMade := 1;
-                    					! Add the compound set referenced by IndexSets to the collection of compound sets.
-                    					pCompoundSetNo += 1 ;
-                    					sFoundCompoundSetNumbers += pCompoundSetNo ;
-                    					eCompoundSetNo := pCompoundSetNo ;
-                    					epFoundCompoundSets( eCompoundSetNo ) := IndexSets ;
+                    					spIndexDomainStr := AttributeToString( IndexSets, 'index domain' );
+                    					! when a set has a index domain, then it is an indexed set.
+                    					! We do not create set mappings for indexed sets.
+                    					if not spIndexDomainStr then
+                    						if AttributeToString( IndexSets, 'index'     ) or
+                    						   AttributeToString( IndexSets, 'parameter' )    then	
+                    							sCompoundSets += IndexSets;
+                    							p01AdditionMade := 1;
+                    							! Add the compound set referenced by IndexSets to the collection of compound sets.
+                    							pCompoundSetNo += 1 ;
+                    							sFoundCompoundSetNumbers += pCompoundSetNo ;
+                    							eCompoundSetNo := pCompoundSetNo ;
+                    							epFoundCompoundSets( eCompoundSetNo ) := IndexSets ;
+                    						endif ;
+                    					endif ;
                     				endif ;
                     			endif ;
-                    
                     		endif ;
                     	endfor ;
                     endwhile ;
@@ -85,6 +96,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     In addition, the compound root sets will be placed in the set dcsu::sCompoundRootSets."
                 }
                 StringParameter pSubsetOfStr;
+                StringParameter spIndexDomainStr;
                 Parameter p01AdditionMade {
                     Range: binary;
                 }
@@ -466,7 +478,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	{ IndexIdentifiers | IndexIdentifiers in ( AllSets + AllParameters + AllVariables + AllConstraints ) and 
                     	                     ( not ( isRuntimeIdentifier( IndexIdentifiers ) ) ) and 
                     	                     ( not ( IndexIdentifiers in DeprecateCompoundSetUtilities ) ) } ;
-                    block where single_column_display := 1 ;
+                    block where single_column_display := 1, listing_page_width := 511 ;
                     	put outf ;
                     	display sDataIdentifiers ;
                     	putclose ;
@@ -575,6 +587,8 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		endfor ;
                     	endblock ;
                     
+                    	spCompoundSetName(eCompoundSet) := FormatString("%e", eCompoundSet );
+                    
                     	block ! Parse the tags string into atomic tag strings
                     		spTagsString := AttributeToString( eCompoundSet, 'tags' );
                     		if spTagsString then
@@ -623,7 +637,6 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	endblock ;
                     
                     	block ! Determine name of compound set and compound index.
-                    		spCompoundSetName(eCompoundSet) := FormatString("%e", eCompoundSet );
                     		spCompoundIndexName(eCompoundSet) := AttributeToString( eCompoundSet, 'index' );
                     		if spCompoundIndexName(eCompoundSet) then ! if there are multiple indices take the first one.
                     			pBegPos := FindString( spCompoundIndexName(eCompoundSet), "," );
@@ -1158,7 +1171,9 @@ LibraryModule DeprecateCompoundSetUtilities {
                     sContentTypeForward := { IndexIdentifiers | not epShadowsDataIdentifiers( IndexIdentifiers ) } ;
                     AllCaseFileContentTypes += data { 'dcsu::sContentTypeForward' } ;
                     CurrentCaseFileContentType := 'dcsu::sContentTypeForward' ;
-                    CaseFileSave( spOutputCaseFilename, CurrentCaseFileContentType );
+                    block where case_contains_runtime_libraries := 1 ;
+                    	CaseFileSave( spOutputCaseFilename, CurrentCaseFileContentType );
+                    endblock ;
                 }
                 Set sTemp {
                     SubsetOf: AllIdentifiers;

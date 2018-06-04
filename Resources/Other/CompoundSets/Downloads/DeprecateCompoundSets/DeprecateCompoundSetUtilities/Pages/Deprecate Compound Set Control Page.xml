@@ -8,7 +8,7 @@
 		<EntryProcedure>dcsu::prPageOpenDeprecateCompoundSetUtilities</EntryProcedure>
 	</Action>
 	<PageObject Type="Button">
-		<Location top="24" left="396" bottom="78" right="606" />
+		<Location top="24" left="54" bottom="78" right="264" />
 		<TabOrder>5</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
@@ -61,7 +61,7 @@
 	<PageObject Type="Scalar">
 		<Location top="378" left="78" bottom="438" right="342" />
 		<TabOrder>12</TabOrder>
-		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -89,7 +89,7 @@
 	<PageObject Type="Scalar">
 		<Location top="378" left="690" bottom="438" right="954" />
 		<TabOrder>18</TabOrder>
-		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -132,7 +132,7 @@
 	<PageObject Type="Scalar">
 		<Location top="222" left="72" bottom="282" right="336" />
 		<TabOrder>11</TabOrder>
-		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -145,7 +145,7 @@
 	<PageObject Type="Scalar">
 		<Location top="228" left="690" bottom="288" right="954" />
 		<TabOrder>20</TabOrder>
-		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -227,7 +227,7 @@
 	<PageObject Type="Scalar">
 		<Location top="762" left="78" bottom="822" right="342" />
 		<TabOrder>13</TabOrder>
-		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -255,7 +255,7 @@
 	<PageObject Type="Scalar">
 		<Location top="762" left="690" bottom="822" right="954" />
 		<TabOrder>19</TabOrder>
-		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -298,7 +298,7 @@
 	<PageObject Type="Scalar">
 		<Location top="606" left="72" bottom="666" right="336" />
 		<TabOrder>10</TabOrder>
-		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -310,8 +310,8 @@
 	</PageObject>
 	<PageObject Type="Scalar">
 		<Location top="612" left="690" bottom="672" right="954" />
-		<TabOrder>22</TabOrder>
-		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TabOrder>21</TabOrder>
+		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -354,11 +354,26 @@
 		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
 		<TextColor RGB="#000000" />
 	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>ListBox</SelectionType>
+		<Location top="24" left="294" bottom="72" right="1050" />
+		<TabOrder>8</TabOrder>
+		<UseTabInObject>true</UseTabInObject>
+		<Font GUID="62A6991F-92A7-4A79-93EE-28097D0767CA" Name="Ariel10" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="InShadow" Width="2" MarginTop="3" MarginLeft="3" />
+		<BackgroundColor RGB="#ffffff" />
+		<MultipleColumns>true</MultipleColumns>
+		<ExplicitIdentifier>
+			<Identifier>dcsu::sCompoundSets(dcsu::sCompoundSets)</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
 	<UsedReferences>
 		<Model>
 			<Symbol>dcsu::prCreateSetMappingsCompoundSet</Symbol>
 			<Symbol>dcsu::prCopyDataFolderToShadowFolder</Symbol>
 			<Symbol>dcsu::prPageOpenDeprecateCompoundSetUtilities</Symbol>
+			<Symbol>dcsu::sCompoundSets</Symbol>
 			<Symbol>dcsu::spInputCaseFilename</Symbol>
 			<Symbol>dcsu::spOutputCaseFilename</Symbol>
 			<Symbol>dcsu::spDataFolderName</Symbol>
