@@ -1,6 +1,68 @@
 ## ams_version=1.0
 
 Model Main_DeprecateCompoundSets {
+    Section Set_Mapping_Declarations {
+        DeclarationSection Set_Mapping_Declarations_for_Compound_Set_C {
+            Set sSetMappingSet_C {
+                Index: iMS_C, h;
+                Parameter: epMS_C;
+            }
+            Set sSetMappingRelation_C {
+                SubsetOf: (S,T,U,sSetMappingSet_C);
+            }
+            ElementParameter epTag_C_TS {
+                IndexDomain: iMS_C;
+                Range: S;
+            }
+            ElementParameter epTag_C_TT {
+                IndexDomain: iMS_C;
+                Range: T;
+            }
+            ElementParameter epTag_C_TU {
+                IndexDomain: iMS_C;
+                Range: U;
+            }
+            ElementParameter epHelp_C_1 {
+                Range: S;
+            }
+            ElementParameter epHelp_C_2 {
+                Range: T;
+            }
+            ElementParameter epHelp_C_3 {
+                Range: U;
+            }
+        }
+        DeclarationSection Set_Mapping_Declarations_for_Compound_Set_D {
+            Set sSetMappingSet_D {
+                Index: iMS_D, g;
+                Parameter: epMS_D;
+            }
+            Set sSetMappingRelation_D {
+                SubsetOf: (S,T,U,sSetMappingSet_D);
+            }
+            ElementParameter epTag_D_TS {
+                IndexDomain: iMS_D;
+                Range: S;
+            }
+            ElementParameter epTag_D_TT {
+                IndexDomain: iMS_D;
+                Range: T;
+            }
+            ElementParameter epTag_D_TU {
+                IndexDomain: iMS_D;
+                Range: U;
+            }
+            ElementParameter epHelp_D_1 {
+                Range: S;
+            }
+            ElementParameter epHelp_D_2 {
+                Range: T;
+            }
+            ElementParameter epHelp_D_3 {
+                Range: U;
+            }
+        }
+    }
     DeclarationSection Running_example_input_declarations {
         Set S {
             Index: i;
@@ -14,17 +76,8 @@ Model Main_DeprecateCompoundSets {
         Set R {
             SubsetOf: (S,T,U);
         }
-        Set C {
-            SubsetOf: (S, T, U);
-            Tags: (TS, TT, TU);
-            Index: h, htemp;
-        }
-        Set D {
-            SubsetOf: C;
-            Index: g, gtemp;
-        }
         Set DD {
-            SubsetOf: C;
+            SubsetOf: sSetMappingSet_C;
         }
         Parameter A {
             IndexDomain: i;
@@ -35,7 +88,7 @@ Model Main_DeprecateCompoundSets {
         }
         Parameter p1 {
             IndexDomain: h;
-            Definition: A(h.ts);
+            Definition: A(epTag_C_TS(h));
             Comment: {
                 "A(h.ts)
                 A(epTag_C_TS(h))"
@@ -48,7 +101,7 @@ Model Main_DeprecateCompoundSets {
             Definition: sum( h, P(h) );
         }
         ElementParameter epC {
-            Range: C;
+            Range: sSetMappingSet_C;
             Comment: {
                 "\"shadow_epC := first( iMS2_C2 | cssrl::w_C(epC,iMS_C2) )
                 range C --> sSetMappingSet_C\";"
@@ -56,7 +109,7 @@ Model Main_DeprecateCompoundSets {
         }
         ElementParameter epC2 {
             IndexDomain: i;
-            Range: C;
+            Range: sSetMappingSet_C;
             Comment: {
                 "cssrl::Shadow_P(iMS_C) := sum( h | cssrl::w_C(h,iMS_C), ::P(h) );
                 shadow_epC2(i) := first( iMS2_C2 | cssrl::w_C( ::epC2(i), iMS_C2) )
@@ -65,7 +118,7 @@ Model Main_DeprecateCompoundSets {
         }
         ElementParameter epC3 {
             IndexDomain: (h);
-            Range: C;
+            Range: sSetMappingSet_C;
             Comment: {
                 "cssrl::Shadow_P(iMS_C) := sum( h | cssrl::w_C(h,iMS_C), ::P(h) );
                 shadow_epC3(iMS_C) := first( iMS2_C2 | cssrl::w_C(epC3(h),iMS_C2) );
@@ -82,7 +135,7 @@ Model Main_DeprecateCompoundSets {
         }
         Set sIC {
             IndexDomain: i;
-            SubsetOf: C;
+            SubsetOf: sSetMappingSet_C;
             Comment: "subset of: C --> sSetMappingSet_C";
         }
     }
