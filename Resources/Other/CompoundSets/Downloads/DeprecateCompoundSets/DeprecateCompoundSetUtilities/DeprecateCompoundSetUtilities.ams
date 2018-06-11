@@ -264,8 +264,13 @@ LibraryModule DeprecateCompoundSetUtilities {
                 Range: string;
                 Body: {
                     pDim := IdentifierDimension( epId );
+                    if identifierType( epID ) = 'set' then
+                    	if AttributeToString( epID, 'index domain' ) = "" then
+                    		pDim := 0 ;
+                    	endif ;
+                    endif ;
                     if pDim then
-                    fncIndexDomainString := "(" ;
+                    	fncIndexDomainString := "(" ;
                     	while loopCount <= pDim do
                     		epIndex := DomainIndex( epId, loopCount );
                     		epSet := IndexRange( epIndex );
@@ -278,10 +283,8 @@ LibraryModule DeprecateCompoundSetUtilities {
                     			endif ;
                     		elseif p02MappedIndex = 2 then
                     			if ( epSet in sCompoundSets ) then
-                    				spMappedIndex := 
-                    					formatSTring("%e(%s)",
-                    						epElementParameterBackMaps( epSet ), 
-                    						spCompoundSetMappedIndex( epSet ));
+                    				spMappedIndex :=  formatSTring("%e(%s)",
+                    					epElementParameterBackMaps( epSet ), spCompoundSetMappedIndex( epSet ));
                     				fncIndexDomainString += spMappedIndex ;
                     			else
                     				fncIndexDomainString += formatString("%e", epIndex); ;
@@ -558,7 +561,9 @@ LibraryModule DeprecateCompoundSetUtilities {
                     empty pCompoundDimension ;
                     sDataIdentifiers := 
                     	{ IndexIdentifiers | ( IndexIdentifiers in ( AllSets + AllParameters + AllVariables + AllConstraints ) ) and 
-                    			     ( not ( IndexIdentifiers in sCompoundSets       )                                 ) and 
+                    	                     ( not ( IndexIdentifiers in AllDefinedSets )                                      ) and
+                    	                     ( not ( IndexIdentifiers in AllDefinedParameters )                                ) and
+                    			     ( not ( IndexIdentifiers in sCompoundSets )                                       ) and 
                     	                     ( not ( isRuntimeIdentifier( IndexIdentifiers ) )                                 ) and 
                     	                     ( not ( IndexIdentifiers in DeprecateCompoundSetUtilities )                       )     } ;
                     block where single_column_display := 1, listing_page_width := 511 ;
@@ -821,6 +826,9 @@ LibraryModule DeprecateCompoundSetUtilities {
             Procedure prCreateAssignmentTextCopyToShadow {
                 Arguments: (iDataIdentifier,spBodyLineForwardCopyProcedure);
                 Body: {
+                    !if iDataIdentifier = 'sIC' then
+                    !	DebuggerBreakpoint();
+                    !endif ;
                     sDataIdentifiersRequiringShadow += iDataIdentifier;
                     epShadowsDataIdentifiers(iDataIdentifier) := me::Create( 
                     	fncShadowName( iDataIdentifier ),
@@ -1441,10 +1449,13 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	me::Delete( epSectionRelationCompoundSetSetMappingSetDeclarationsDeclarations );
                     	epSectionRelationCompoundSetSetMappingSetDeclarationsDeclarations := '' ;
                     endif ;
-                    sContentTypeForward := { IndexIdentifiers | not epShadowsDataIdentifiers( IndexIdentifiers ) } ;
+                    sContentTypeForward := { IndexIdentifiers | 
+                    				( not epShadowsDataIdentifiers( IndexIdentifiers ) ) and 
+                    				( not ( IndexIdentifiers in AllDefinedParameters ) ) and 
+                    				( not ( IndexIdentifiers in AllDefinedSets       ) )     } ;
                     AllCaseFileContentTypes += data { 'dcsu::sContentTypeForward' } ;
                     CurrentCaseFileContentType := 'dcsu::sContentTypeForward' ;
-                    block where case_contains_runtime_libraries := 1 ;
+                    block where case_contains_runtime_libraries := 1, save_data_update_definitions := 0 ;
                     	CaseFileSave( spOutputCaseFilename, CurrentCaseFileContentType );
                     endblock ;
                 }
