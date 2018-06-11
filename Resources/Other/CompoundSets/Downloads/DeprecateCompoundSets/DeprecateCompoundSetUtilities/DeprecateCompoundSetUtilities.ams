@@ -1437,6 +1437,10 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	me::Delete( epSectionForwardCopyProcedures );
                     	epSectionForwardCopyProcedures := '' ;
                     endif ;
+                    if epSectionRelationCompoundSetSetMappingSetDeclarationsDeclarations then
+                    	me::Delete( epSectionRelationCompoundSetSetMappingSetDeclarationsDeclarations );
+                    	epSectionRelationCompoundSetSetMappingSetDeclarationsDeclarations := '' ;
+                    endif ;
                     sContentTypeForward := { IndexIdentifiers | not epShadowsDataIdentifiers( IndexIdentifiers ) } ;
                     AllCaseFileContentTypes += data { 'dcsu::sContentTypeForward' } ;
                     CurrentCaseFileContentType := 'dcsu::sContentTypeForward' ;

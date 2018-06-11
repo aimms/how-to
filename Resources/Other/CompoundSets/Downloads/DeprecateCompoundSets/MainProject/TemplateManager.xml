@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <TemplateManager>
 	<Page Name="All Data Pages" PageGUID="4580CD99-439D-4A70-BF39-B76AA6EF6CEC" />
-	<Page Name="Running Example" PageGUID="2E081EDE-5031-4B43-BCBE-B4A970DA7AF7" />
+	<Page Name="Running Example" PageGUID="2E081EDE-5031-4B43-BCBE-B4A970DA7AF7" Marked="true" />
 </TemplateManager>

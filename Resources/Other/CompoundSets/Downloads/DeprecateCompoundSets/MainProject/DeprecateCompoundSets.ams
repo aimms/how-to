@@ -17,14 +17,14 @@ Model Main_DeprecateCompoundSets {
         Set C {
             SubsetOf: (S, T, U);
             Tags: (TS, TT, TU);
-            Index: htemp, h;
+            Index: h, htemp;
         }
         Set D {
-            SubsetOf: (C);
-            Index: gtemp, g;
+            SubsetOf: C;
+            Index: g, gtemp;
         }
         Set DD {
-            SubsetOf: (C);
+            SubsetOf: C;
         }
         Parameter A {
             IndexDomain: i;
@@ -36,6 +36,10 @@ Model Main_DeprecateCompoundSets {
         Parameter p1 {
             IndexDomain: h;
             Definition: A(h.ts);
+            Comment: {
+                "A(h.ts)
+                A(epTag_C_TS(h))"
+            }
         }
         Parameter PD {
             IndexDomain: g;
@@ -45,14 +49,18 @@ Model Main_DeprecateCompoundSets {
         }
         ElementParameter epC {
             Range: C;
-            Comment: "shadow_epC := first( iMS2_C2 | cssrl::w_C(epC,iMS_C2) )";
+            Comment: {
+                "\"shadow_epC := first( iMS2_C2 | cssrl::w_C(epC,iMS_C2) )
+                range C --> sSetMappingSet_C\";"
+            }
         }
         ElementParameter epC2 {
             IndexDomain: i;
             Range: C;
             Comment: {
                 "cssrl::Shadow_P(iMS_C) := sum( h | cssrl::w_C(h,iMS_C), ::P(h) );
-                shadow_epC2(i) := first( iMS2_C2 | cssrl::w_C( ::epC2(i), iMS_C2) )"
+                shadow_epC2(i) := first( iMS2_C2 | cssrl::w_C( ::epC2(i), iMS_C2) )
+                range: C --> sSetMappingSet_C"
             }
         }
         ElementParameter epC3 {
@@ -60,7 +68,8 @@ Model Main_DeprecateCompoundSets {
             Range: C;
             Comment: {
                 "cssrl::Shadow_P(iMS_C) := sum( h | cssrl::w_C(h,iMS_C), ::P(h) );
-                shadow_epC3(iMS_C) := first( iMS2_C2 | cssrl::w_C(epC3(h),iMS_C2) )"
+                shadow_epC3(iMS_C) := first( iMS2_C2 | cssrl::w_C(epC3(h),iMS_C2) );
+                range: C --> sSetMappingSet_C"
             }
         }
         ElementParameter epC4 {
@@ -74,6 +83,7 @@ Model Main_DeprecateCompoundSets {
         Set sIC {
             IndexDomain: i;
             SubsetOf: C;
+            Comment: "subset of: C --> sSetMappingSet_C";
         }
     }
     Procedure generateInputcase {
