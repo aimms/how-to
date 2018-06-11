@@ -20,8 +20,11 @@ Model Main_DeprecateCompoundSets {
             Index: htemp, h;
         }
         Set D {
-            SubsetOf: C;
+            SubsetOf: (C);
             Index: gtemp, g;
+        }
+        Set DD {
+            SubsetOf: (C);
         }
         Parameter A {
             IndexDomain: i;
@@ -42,6 +45,55 @@ Model Main_DeprecateCompoundSets {
         }
         ElementParameter epC {
             Range: C;
+            Comment: "shadow_epC := first( iMS2_C2 | cssrl::w_C(epC,iMS_C2) )";
+        }
+        ElementParameter epC2 {
+            IndexDomain: i;
+            Range: C;
+            Comment: {
+                "cssrl::Shadow_P(iMS_C) := sum( h | cssrl::w_C(h,iMS_C), ::P(h) );
+                shadow_epC2(i) := first( iMS2_C2 | cssrl::w_C( ::epC2(i), iMS_C2) )"
+            }
+        }
+        ElementParameter epC3 {
+            IndexDomain: (h);
+            Range: C;
+            Comment: {
+                "cssrl::Shadow_P(iMS_C) := sum( h | cssrl::w_C(h,iMS_C), ::P(h) );
+                shadow_epC3(iMS_C) := first( iMS2_C2 | cssrl::w_C(epC3(h),iMS_C2) )"
+            }
+        }
+        ElementParameter epC4 {
+            IndexDomain: (h);
+            Range: S;
+            Comment: {
+                "cssrl::Shadow_P(iMS_C) :=  ::P(    epMapBack( ims_C ) );
+                shadow_epC4(ims_C)     :=  ::epC4( epMapBack( ims_C ) );"
+            }
+        }
+        Set sIC {
+            IndexDomain: i;
+            SubsetOf: C;
+        }
+    }
+    Procedure generateInputcase {
+        Body: {
+            !S := ElementRange( 1, 5, prefix:"s" );
+            !T := ElementRange( 1, 4, prefix:"t" );
+            !U := ElementRange( 1, 3, prefix:"u" );
+            !R := { (i,j,k) | mod(ord(i)+ord(j)+ord(k),3) = 1 };
+            !C := { (i,j,k) | (i,j,k) in R };
+            !D := { h | mod(ord(h),3) = 0 } ;
+            !DD := { h | mod(ord(h),3) = 1 } ;
+            !P(h) := ord(h);
+            !PD(g) := ord(g);
+            !epC := Element(C,5);
+            !epC2(i) := Element(C,ord(i)+3);
+            !siC(i) := { Element(c,ord(i)+5), Element(c,ord(i)) } ;
+            !block where single_column_display := 1 ;
+            !	write Running_example_input_declarations to file "inputval.txt" ;
+            !endblock ;
+            !
         }
     }
     Procedure MainInitialization {
