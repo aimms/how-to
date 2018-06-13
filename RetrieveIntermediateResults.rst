@@ -6,21 +6,21 @@ How to retrieve intermediate results from a server session to the data session?
 Introduction
 ------------
 
-During a long running solver session (job), we may compute intermediate results that we want to show to the end user as soon as they are available. Consider the following use cases:
+During a long running solver session (job), we may want to compute intermediate results and show them to the end user as soon as they are available. Consider the following use cases:
 
-#. Actually, the job submitted contains multiple decision problems, all of which are solved in one batch. Why wait for providing the solution of the first decision problem, while the job is already working on the second decision problem?
+#. The submitted job contains multiple decision subproblems, all of which are solved in one batch. Why wait for providing the solution of the first subproblem, while the job is already working on the second subproblem?
 
-#. The optimization of a significant Mixed Integer Problem will compute several intermediate incumbents, and perhaps these incumbents are worth visualizing and further study.
+#. The optimization of a significant Mixed Integer Problem will compute several intermediate incumbents, and perhaps these incumbents are worth visualizing and studying further.
 
-#. By showing intermediate solutions, the end user may decide that the last shown solution is sufficient and the search in the job can be stopped.
+#. By showing intermediate solutions, the end user may decide that the last shown solution is good enough and decide to terminate the job.
 
 The AIMMS Pro system allows the solver session to call back to the data session to pass progress information, as presented in `How to display solve progress info in WebUI  <https://how-to.aimms.com/ProgressWindowServerSession.html>`_. There are two important differences with progress information:
 
 #. In the callbacks, there is a limit on the amount of data that can be passed over the arguments back to the data session in one call. This limit is too small to pass any solution of significant size.
 
-#. In the above presented use cases, we typically like to retain these intermediate results for later viewing as well. 
+#. In the above discussed use cases, we typically would like to retain these intermediate results for later viewing. 
 
-Therefore we have the question: "How to retrieve intermediate results from a server session to the data session?".
+Therefore we have the question: "How to retrieve intermediate results from a server session to the data session?"
 
 Difference with passing progress information
 --------------------------------------------
@@ -29,7 +29,7 @@ The answer to the above question, will be discussed here as a variation to the  
 
 #. The intermediate solutions will be stored such that they can be retrieved upon demand.
 
-#. There is no limit to the amount of information passed back to the data session.
+#. There is no limit to the amount of information that can be passed back to the data session.
 
 #. The messages about the presence of the intermediate solutions are guaranteed to arrive at the data session; even if the data session is temporarily unavailable.
 
@@ -37,19 +37,16 @@ The answer to the above question, will be discussed here as a variation to the  
 Approach
 --------
 
-The approach taken here is to share each intermediate result as a single case on AIMMS PRO storage, and message the filename from the server session to the data session.
+The approach taken here is to save each intermediate result as a single case on the AIMMS PRO storage, and pass on that filename from the server session to the data session.
 
-Both the data session and the server session have access to AIMMS PRO storage. The following image illustrates how AIMMS PRO storage is organized:
+Both the data session and the server session have access to the AIMMS PRO storage. The following image illustrates how AIMMS PRO storage is organized:
 
 .. image:: Resources/AIMMSPRO/RetreiveIntermediateResults/Images/Default-folder-layout-of-AIMMS-PRO-Storage.png
 	:align: center
 
 We will use the folder ``pro:/UserData/<environment>/<User>/Cases/<app>/`` on AIMMS PRO storage. 
 
-In the remainder of this answer, we follow here more or less the flow as the "progress" answer:
-
-Method used
------------
+In the remainder of this answer, we follow more or less the same flow as in the aforementioned `"progress" answer <https:://how-to.aimms.com/ProgressWindowServerSession.html>`_.
 
 In the context of the running example: the flowshop model, we are passing information through three levels of execution:
 
@@ -59,27 +56,23 @@ In the context of the running example: the flowshop model, we are passing inform
 
 #. The AIMMS execution as part of the server session, called via the incumbent callback mechanism of the solver, and retrieves the solution information.
 
-#. The AIMMS execution as part of the data session. Here a procedure is called, and information passed via a case file, from the server session to the data session. On the arguments of the procedure are the relevant filenames only.
+#. The AIMMS execution as part of the data session. Here a procedure is called, and information is passed from the server session to the data session via a case file. The arguments of this procedure contain only the relevant filenames.
 
 Implementation
 --------------
 
 There are two steps to communicate the information from the first to the third level. 
-Let's discuss each of thes two steps in more detail.
 
 Step 1. From Solver (level 1) to server session (level 2)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
-Step 1A illustrates how to prepare the mathematical program FlowShopModel, such that the MIP solver will pass solution information on availability basis to the model.
-
-Step 1A, before the solve:
+* Step 1A illustrates how to prepare the mathematical program FlowShopModel, such that the MIP solver will pass solution information on availability basis to the model.
 
 	.. code-block:: none
-
+		
 		FlowShopModel.CallbackNewIncumbent := 'NewIncumbentCallback';
 
-Step 1B, during the solve, the procedure ``NewIncumbentCallback`` is called. 
-In our example, the solution information consists of all variables.
+* Step 1B, during the solve, the procedure ``NewIncumbentCallback`` is called. In our example, the solution information consists of all variables.
 
 	.. code-block:: none
 
