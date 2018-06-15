@@ -67,7 +67,7 @@ Step 1. From Solver (level 1) to server session (level 2)
 
 Step 1A Construct the incumbent solution on the solver session. 
 	
-	As we want to display/update a new incumbent solution as it becomes available, we use the mathematical program suffix ``CallbackNewIncumbent``. A callback procedure is assigned to this suffix as below, and this executes the assigned procedure whenever a new incumbent solution is found by the solver. Include the below statement before the solve statement in your project. 
+As we want to display/update a new incumbent solution as it becomes available, we use the mathematical program suffix ``CallbackNewIncumbent``. A callback procedure is assigned to this suffix as below, and this executes the assigned procedure whenever a new incumbent solution is found by the solver. Include the below statement before the solve statement in your project. 
 
 	.. code-block:: none
 		
