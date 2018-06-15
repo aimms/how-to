@@ -23,8 +23,8 @@ Deployment
 
 .. toctree::
 
-	PublishOnPro
-	AIMMSPROAppAvailbleOnPROandUsableInIDE
-	RemoveVeil
-	LoadResultsSolverSession
+	Deploy_DataServerComm_1_Publish
+	Deploy_DataServerComm_2_Develop
+	Deploy_DataServerComm_3_RemoveVeil
+	Deploy_DataServerComm_4_LoadResults
 	
