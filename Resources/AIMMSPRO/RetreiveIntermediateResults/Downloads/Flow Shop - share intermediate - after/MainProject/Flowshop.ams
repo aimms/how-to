@@ -198,7 +198,7 @@ Model Main_Flow_Shop {
                      Endblock ;
                     
                     
-                    ! Notify the data session that a 
+                    ! Run the AIMMS execution on the data session
                     UpdateIncumbentToClient(spFullProStorageName);
                 }
             }
