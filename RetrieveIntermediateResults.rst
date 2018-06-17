@@ -3,6 +3,11 @@
 How to retrieve intermediate results from a server session to the data session?
 ===============================================================================
 
+.. todo:: Ik vind het lastig dat ik eerst het 'How to display solve progress info in WebUI' 
+               article moet lezen; het gaat ineens over een gant chart. 
+          Waar is de error handling? 
+          Terminologie: WebUI session vs. server session vs. solver session komt niet overeen met die door het backend/webui team gebezigd wordt. 
+
 Introduction
 ------------
 
@@ -14,7 +19,7 @@ During a long running solver session (job), we may compute intermediate results 
 
 #. By showing intermediate solutions, the end user may decide that the last shown solution is sufficient and the search in the job can be stopped.
 
-The AIMMS Pro system allows the solver session to call back to the data session to pass progress information, as presented in `How to display solve progress info in WebUI  <https://how-to.aimms.com/ProgressWindowServerSession.html>`_. There are two important differences with progress information:
+The AIMMS PRO system allows the solver session to call back to the data session to pass progress information, as presented in `How to display solve progress info in WebUI  <https://how-to.aimms.com/Deploy_DataServerComm_5_Progress.html>`_. There are two important differences with progress information:
 
 #. In the callbacks, there is a limit on the amount of data that can be passed over the arguments back to the data session in one call. This limit is too small to pass any solution of significant size.
 
@@ -25,7 +30,7 @@ Therefore we have the question: "How to retrieve intermediate results from a ser
 Difference with passing progress information
 --------------------------------------------
 
-The answer to the above question, will be discussed here as a variation to the  `How to display solve progress info in WebUI  <https://how-to.aimms.com/ProgressWindowServerSession.html>`_ answer; the differences are:
+The answer to the above question, will be discussed here as a variation to the  `How to display solve progress info in WebUI  <https://how-to.aimms.com/Deploy_DataServerComm_5_Progress.html>`_ answer; the differences are:
 
 #. The intermediate solutions will be stored such that they can be retrieved upon demand.
 
@@ -135,7 +140,7 @@ The body simply passes the filenames where the solution is stored to the actual 
 	.. code-block:: none
 
 		! Notify the data session that a 
-		UpdateIncumbentToClient(spFullCaseFileName, spFullProStorageName);
+		UpdateIncumbentToClient(spFullProStorageName);
 		
 		
 Step 2. From server session (level 2) to data session (level 3)	
@@ -190,5 +195,5 @@ Further reading
 Now that end users know the state of the solution process, they also want to interrupt it when they see that further improvements are not worth waiting for. This is handled in `How to interrupt a solve while WebUI is active during a solve <https://how-to.aimms.com/StopSolveWithoutVeil.html>`_ .
 
 
-
+.. include:: includes/form.def
 
