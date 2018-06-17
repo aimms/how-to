@@ -36,6 +36,8 @@ The Gap curve linechart widget in the below image is updated every second with t
 
 You can implement the same in your project by communicating the data from the solver (level 1) to the data session (level 2), which is done in two steps as explained in detail below. 
 
+
+
 Step 1. From Solver (level 1) to server session (level 2)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -54,11 +56,23 @@ If included before the solve statement in your project, the procedure ``NewTimeC
 
 Step 1B Retrieve the information passed on by the solver to the AIMMS server session.
 
-In our example, we want to display only the best bound and incumbent objective value of the MIP. So, the body of ``NewTimeCallback`` consists of a procedure with two arguments - FlowShopModel.bestbound and FlowShopModel.Incumbent. You can retrieve values of any of the mathematical program suffices which are listed and explained `here in detail <http://images.aimms.com/aimms/download/manuals/aimms3fr_mathematicalprogramsuffices.pdf>`_. 
+In our example, we want to display only the best bound and incumbent objective value of the MIP. So, the body of ``NewTimeCallback`` consists of a procedure with two arguments - FlowShopModel.bestbound and FlowShopModel.Incumbent. You can retrieve values of any of the mathematical program suffices which are listed and explained in chapter "Mathematical Program Suffices" of `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_.
 
     .. code-block:: none
 
         UpdateGapToClient(FlowShopModel.bestbound,FlowShopModel.Incumbent);
+        
+.. sidebar:: How flags affect the messages between AIMMS Sessions
+
+    An AIMMS Session processes the messages on its queue one after another, typically by executing the procedure that is contained in the message. These queues are stored in the AIMMS PRO database. The ``delegate`` family of functions, including ``pro::DelegateToServer`` and ``pro::DelegateToClient``, place messages at the end of the queues of other sessions. The flags argument of these functions alter the default behaviour of these messages. There are two possible flags and they can be used independent of each other:
+    
+    ``**pro::PROMFLAG_LIVE**``
+     
+    The message is not stored in the database. As such it more efficient and lighter than ordinary messages. When an AIMMS Session connects to a queue after a live message is invoked, it will not see that live message; which is desired for progress and status updates. In addition, there can only be one LIVE message at any one time.
+    
+    ``**pro::PROMFLAG_PRIORITY**``
+    
+    The message gets priority over the other messages in the message queue. Also, when a procedure is running in the receiving process, the message invokes a procedure that is ran in between statements of the current procedure.
         
 Step 2. From server session (level 2) to data session (level 3)   
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -86,6 +100,7 @@ This procedure contains two arguments as input parameters, bb and icb which take
                 Property: Input;
             }
         }
+
 In our running example, the body of this procedure contains other data manipulation statements to update a set of observations and calculate the gap percentage between the bestbound and incumbent objective value. These statements are not discussed in this article.
 
 Further reading
