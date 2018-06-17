@@ -1,23 +1,26 @@
-How to communicate progress info from the server session to the data session?
-================================================================================
+How to display progress information in the WebUI?
+=================================================
 
 Introduction
 ------------
 
 While a solve procedure is running, we are curious about the estimated time left for completion - are we going to get the results back soon or is there enough time to go grab a cup of coffee? In essence, we want to keep track of the progress of the solve procedure. We can do this by using the Progress Window (Ctrl + P) in the Developer mode, and this article will show you how to present this progress information to the end user of a WebUI application.
 
-Analysis
+Approach
 --------
 
-In the context of the running example: the Flowshop model, we are passing information through three levels of execution:
-
-#. The solver execution, as part of the server session. The solver passes status information on, on a regular basis, as part of the time callback mechanism.
-
-#. The AIMMS execution as part of the server session, called via the time callback mechanism of the solver, and retrieves relevant information.
-
-#. The AIMMS execution as part of the data session. Here a procedure is called, and information passed via arguments, from the server session to the data session.
+The approach we take here involves passing information through three levels of execution.
 
 .. image:: Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/ThreeLevelsOfExecution.png
+
+#. The solver execution on the server session. 
+    The solver passes on status information periodically, as part of the time callback mechanism.
+
+#. The AIMMS execution on the server session.
+    Retrieves the information provided by the solver in the previous step, also as part of the time callback mechanism.
+
+#. The AIMMS execution on the data session. 
+    Execute a procedure to retrieve the information from the server session to the data session and display it in the WebUI widgets.
 
 The implementation of the information stream represented by the two upper arrows will be discussed in the next section. 
 The bottom two arrows (Incumbent Callback and Intermediate Solution) will be discussed in a separate article.
@@ -25,53 +28,58 @@ The bottom two arrows (Incumbent Callback and Intermediate Solution) will be dis
 Implementation
 --------------
 
-There are two steps to communicate the information from the first to the third level. 
-Let's discuss each of these two steps in more detail.
+The AIMMS project for the current running example with the steps implemented can be downloaded from: :download:`6. Flow Shop - Progress Communication <Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/6. Flow Shop - Progress Communication.zip>`.
 
-Step 1. (Time callback) From Solver (level 1) to server session (level 2)
+The Gap curve linechart widget in the below image is updated every second with the gap between the bestbound and incumbent objective value of the mathematical program in the project. 
+
+.. image:: Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB06_WebUI_screen.png 
+
+You can implement the same in your project by communicating the data from the solver (level 1) to the data session (level 2), which is done in two steps as explained in detail below. 
+
+
+
+Step 1. From Solver (level 1) to server session (level 2)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Step 1A illustrates how to prepare the mathematical program FlowShopModel, such that the MIP solver will pass progress information on a regular basis to the model.
+Step 1A Instruct the solver to provide the progress information periodically. 
 
-Step 1A, before the solve:
+We use the mathematical program suffix ``CallbackTime`` for this purpose. In the context of the current running example, the mathematical program is FlowShopModel and the user defined procedure, ``NewTimeCallback`` is assigned to the ``CallbackTime``.
+
+The predefined ``option`` statement lets you alter the project options in a procedure. We set the interval to update the progress information as 1 second by referring to the ``progress_time_interval`` option. You can also change this option by, Settings -> Project Options -> AIMMS -> Progress Options
+
+If included before the solve statement in your project, the procedure ``NewTimeCallback`` is executed every 1 second. 
 
     .. code-block:: none
 
         FlowShopModel.CallbackTime := 'NewTimeCallback';
         option progress_time_interval := 1 ;
 
-Step 1B, during the solve, the procedure ``NewTimeCallback`` is called. 
-In our example, the progress information consists of the MIP solution progress information: best bound and incumbent.
-The body simply passes the best bound and incumbent to the actual working procedure:
+Step 1B Retrieve the information passed on by the solver to the AIMMS server session.
+
+In our example, we want to display only the best bound and incumbent objective value of the MIP. So, the body of ``NewTimeCallback`` consists of a procedure with two arguments - FlowShopModel.bestbound and FlowShopModel.Incumbent. You can retrieve values of any of the mathematical program suffices which are listed and explained in chapter "Mathematical Program Suffices" of `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_.
 
     .. code-block:: none
 
         UpdateGapToClient(FlowShopModel.bestbound,FlowShopModel.Incumbent);
         
-Step 2. (Progress Update) From server session (level 2) to data session (level 3)   
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. sidebar:: How flags affect the messages between AIMMS Sessions
 
-To give this answer an extra dimension, we are storing each of the observations in the following data structure 
-
-    .. code-block:: none
-
-        Set Observations {
-            Index: iObs;
-            Parameter: epLastObservation;
-        }
-        Parameter pBestBound {
-            IndexDomain: iObs;
-        }
-        Parameter pIncumbent {
-            IndexDomain: iObs;
-        }
+    An AIMMS Session processes the messages on its queue one after another, typically by executing the procedure that is contained in the message. These queues are stored in the AIMMS PRO database. The ``delegate`` family of functions, including ``pro::DelegateToServer`` and ``pro::DelegateToClient``, place messages at the end of the queues of other sessions. The flags argument of these functions alter the default behaviour of these messages. There are two possible flags and they can be used independent of each other:
+    
+    ``**pro::PROMFLAG_LIVE**``
+     
+    The message is not stored in the database. As such it more efficient and lighter than ordinary messages. When an AIMMS Session connects to a queue after a live message is invoked, it will not see that live message; which is desired for progress and status updates. In addition, there can only be one LIVE message at any one time.
+    
+    ``**pro::PROMFLAG_PRIORITY**``
+    
+    The message gets priority over the other messages in the message queue. Also, when a procedure is running in the receiving process, the message invokes a procedure that is ran in between statements of the current procedure.
         
-and visualize that in the following curve widget:
+Step 2. From server session (level 2) to data session (level 3)   
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
- .. image:: Resources/AIMMSPRO/Deploy_DataServerComm_5_Progress/Images/CurveMIP_GAP.PNG
+As we are only passing small amounts of data and executing some simple arithmetic, the procedure ``UpdateGapToClient`` can be executed on the data session i.e., on the end user's browser. To do this, we use the call ``pro::DelegateToClient``. This is very similar to the earlier used call, ``pro::DelegateToServer`` and the difference is evident as their names suggest - in ``pro::DelegateToClient``, we are delegating a procedure to the client (or data) session and in the other one, we are delegating a procedure to the server session.
 
-To implement the communication from the server session to the data session, the server session uses a call similar to ``pro::DelegateToServer``, but one that goes in the other direction, namely to the client: ``pro::DelegateToClient()``.
-The procedure that contains the actual work, namely ``UpdateGapToClient``, is specified as follows:
+This procedure contains two arguments as input parameters, bb and icb which take on the values of the bestbound and Incumbent suffices specified in the previous step.
 
     .. code-block:: none
 
@@ -83,9 +91,7 @@ The procedure that contains the actual work, namely ``UpdateGapToClient``, is sp
                         return 1; 
                     endif ;
                 endif ;
-                SetElementAdd( Observations, epLastObservation, FormatString("%i", card(Observations)+1) );
-                pBestBound(epLastObservation) := if mapval(bb)  then 0 else bb  endif ;
-                pIncumbent(epLastObservation) := if mapval(icb) then 0 else icb endif ;
+                
             }
             Parameter bb {
                 Property: Input;
@@ -95,47 +101,21 @@ The procedure that contains the actual work, namely ``UpdateGapToClient``, is sp
             }
         }
 
-There are several remarks regarding the above code:
+In our running example, the body of this procedure contains other data manipulation statements to update a set of observations and calculate the gap percentage between the bestbound and incumbent objective value. These statements are not discussed in this article.
 
-#.  The ``pro::DelegateToClient`` code is protected by ``pro::GetPROEndPoint()``; even in developer mode, we observe the gap reduction. 
+Further reading
+---------------
+Some closing remarks about the ``UpdateGapToClient`` procedure to give you a better understanding of what is happening. 
 
-#.  On line 2, there is the call ``pro::DelegateToClient`` that transfers execution of the currently running procedure from the server session to the client session. 
+#.  The ``pro::DelegateToClient`` code is protected by ``pro::GetPROEndPoint()`` to make the procedure executable on Developer mode too. This IF statement is optional but is generally recommended as it allows for a smooth development and debugging workflow.
 
-#.  When this procedure returns:
+#.  The second IF statement containing ``pro::DelegateToClient`` checks and returns if there is an active data session available. The statements in the body of the procedure are executed on the data session only if this IF statement returns a TRUE or 1 status. 
 
-    #. the execution is in the client process – we can use the values of the arguments for our progress reporting purposes.
-    
-    #. the execution is in the server process – we might as well stop, progress info is not relevant as this process doesn’t have a UI to the user.
+You can read more about the ``pro::PROMFLAG_LIVE`` and other flag arguments in a separate article
 
-#.  On line 2 as well, we see the argument flags: ``pro::PROMFLAG_LIVE``. ``Pro::DelegateToClient`` is part of the family of procedures all starting with ``pro::DelegateTo``.  These procedures all have a flags argument, and this argument modifies the way messages are treated. The default way of message treatment is to store the message in the database of AIMMS PRO, and re-transmit the message when the receiving process connects again. The advantage is here that the message is guaranteed to arrive, provided the limits on the queue are respected. The queue has the following limits: there are at most three messages per second, and the queue length stores at most three messages. There are functions that can increase these limits to 20 messages per second and storing a hundred messages in the queue. The disadvantage is that the message takes memory space and for progress type of messages, it might be superfluous or confusing to retransmit the message. Messages are not handled before previously sent messages are handled or canceled; the message queue is a FIFO (First In First Out). The flags argument of ``PRO::DelegateToClient`` modifies this message behavior as follows:
+.. here, `What are the pro flag arguments and why use them? <Insert article link here>`_.
 
-    #.  ``pro::PROMFLAG_LIVE``. The message is not stored in the database and there can only be one LIVE message at any one time.
-    
-    #.  ``pro::PROMFLAG_PRIORITY``. The message gets priority over the other messages in the message queue. Also, when a procedure is running in the receiving process, the message invokes a procedure that is ran in between statements of the current procedure.
-
-#.  The remaining code, the last three lines of ``UpdateGapToClient`` is only executed in the data session. In our example, this code just registers another data point in the gap curve. Caveats:
-
-    #. Calling ``pro::DelegateToClient`` frequently will consume significant resources of the PRO platform. That is why there is a limit and the number of calls per second. This limit is by default 3 but can be altered in the server session via the function ``pro::messaging::SetMaxMessagesPerSecond``.
-    
-    #. Passing large data structures via the messaging mechanism also consumes significant resources. That is why the array size of these arguments is limited to 1000 elements. If you need to pass a significant amount of information back to the client process, you are advised to store this information in a case saved on ``pro::storage`` and pass the name of that case to the client process instead of passing it via the arguments. This is illustrated in `How to retrieve intermediate results from a server session to the data session <https://how-to.aimms.com/RetrieveIntermediateResults.html>`_ .
-    
-The user interface when the results are downloaded now looks as follows:
-
-.. image:: Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB06_WebUI_screen.png 
-
-The AIMMS project that does just this, can be downloaded from: :download:`6. Flow Shop - Progress Communication <Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/6. Flow Shop - Progress Communication.zip>`.
-
-Summary
--------
-
-By using the procedure ``pro::DelegateToClient`` we can set up communicating information from the server session to the data session. The usual use case of passing progress information is illustrated in this answer.
-
-Continued reading
------------------
-
-Now that end users know the state of the solution process, they also want to interrupt it when they see that further improvements are not worth waiting for. This is handled in `How to interrupt a solve while WebUI is active during a solve <https://how-to.aimms.com/Deploy_DataServerComm_7_Interrupt.html>`_ .
-
-
+Now that end users know the state of the solution process, they might want to interrupt it when they see that further improvements are not worth waiting for. The article `How to interrupt a solve while WebUI is active during a solve <https://how-to.aimms.com/Deploy_DataServerComm_7_Interrupt.html>`_ shows you how to do it. 
 
 .. include:: includes/form.def
  
