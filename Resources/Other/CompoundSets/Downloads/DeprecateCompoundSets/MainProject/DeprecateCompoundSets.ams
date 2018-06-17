@@ -1,0 +1,193 @@
+## ams_version=1.0
+
+Model Main_DeprecateCompoundSets {
+    Section Set_Mapping_Declarations {
+        DeclarationSection Set_Mapping_Declarations_for_Compound_Set_C {
+            Set sSetMappingSet_C {
+                Index: iMS_C, h;
+                Parameter: epMS_C;
+            }
+            Set sSetMappingRelation_C {
+                SubsetOf: (S,T,U,sSetMappingSet_C);
+            }
+            ElementParameter epTag_C_TS {
+                IndexDomain: iMS_C;
+                Range: S;
+            }
+            ElementParameter epTag_C_TT {
+                IndexDomain: iMS_C;
+                Range: T;
+            }
+            ElementParameter epTag_C_TU {
+                IndexDomain: iMS_C;
+                Range: U;
+            }
+            ElementParameter epHelp_C_1 {
+                Range: S;
+            }
+            ElementParameter epHelp_C_2 {
+                Range: T;
+            }
+            ElementParameter epHelp_C_3 {
+                Range: U;
+            }
+        }
+        DeclarationSection Set_Mapping_Declarations_for_Compound_Set_D {
+            Set sSetMappingSet_D {
+                Index: iMS_D, g;
+                Parameter: epMS_D;
+            }
+            Set sSetMappingRelation_D {
+                SubsetOf: (S,T,U,sSetMappingSet_D);
+            }
+            ElementParameter epTag_D_TS {
+                IndexDomain: iMS_D;
+                Range: S;
+            }
+            ElementParameter epTag_D_TT {
+                IndexDomain: iMS_D;
+                Range: T;
+            }
+            ElementParameter epTag_D_TU {
+                IndexDomain: iMS_D;
+                Range: U;
+            }
+            ElementParameter epHelp_D_1 {
+                Range: S;
+            }
+            ElementParameter epHelp_D_2 {
+                Range: T;
+            }
+            ElementParameter epHelp_D_3 {
+                Range: U;
+            }
+        }
+    }
+    DeclarationSection Running_example_input_declarations {
+        Set S {
+            Index: i;
+        }
+        Set T {
+            Index: j;
+        }
+        Set U {
+            Index: k;
+        }
+        Set R {
+            SubsetOf: (S,T,U);
+        }
+        Set DD {
+            SubsetOf: sSetMappingSet_C;
+        }
+        Parameter A {
+            IndexDomain: i;
+            Definition: ord(i);
+        }
+        Parameter P {
+            IndexDomain: h;
+        }
+        Parameter p1 {
+            IndexDomain: h;
+            Definition: A(epTag_C_TS(h));
+            Comment: {
+                "A(h.ts)
+                A(epTag_C_TS(h))"
+            }
+        }
+        Parameter PD {
+            IndexDomain: g;
+        }
+        Parameter V1 {
+            Definition: sum( h, P(h) );
+        }
+        ElementParameter epC {
+            Range: sSetMappingSet_C;
+            Comment: {
+                "\"shadow_epC := first( iMS2_C2 | cssrl::w_C(epC,iMS_C2) )
+                range C --> sSetMappingSet_C\";"
+            }
+        }
+        ElementParameter epC2 {
+            IndexDomain: i;
+            Range: sSetMappingSet_C;
+            Comment: {
+                "cssrl::Shadow_P(iMS_C) := sum( h | cssrl::w_C(h,iMS_C), ::P(h) );
+                shadow_epC2(i) := first( iMS2_C2 | cssrl::w_C( ::epC2(i), iMS_C2) )
+                range: C --> sSetMappingSet_C"
+            }
+        }
+        ElementParameter epC3 {
+            IndexDomain: (h);
+            Range: sSetMappingSet_C;
+            Comment: {
+                "cssrl::Shadow_P(iMS_C) := sum( h | cssrl::w_C(h,iMS_C), ::P(h) );
+                shadow_epC3(iMS_C) := first( iMS2_C2 | cssrl::w_C(epC3(h),iMS_C2) );
+                range: C --> sSetMappingSet_C"
+            }
+        }
+        ElementParameter epC4 {
+            IndexDomain: (h);
+            Range: S;
+            Comment: {
+                "cssrl::Shadow_P(iMS_C) :=  ::P(    epMapBack( ims_C ) );
+                shadow_epC4(ims_C)     :=  ::epC4( epMapBack( ims_C ) );"
+            }
+        }
+        Set sIC {
+            IndexDomain: i;
+            SubsetOf: sSetMappingSet_C;
+            Comment: "subset of: C --> sSetMappingSet_C";
+        }
+    }
+    Procedure generateInputcase {
+        Body: {
+            !S := ElementRange( 1, 5, prefix:"s" );
+            !T := ElementRange( 1, 4, prefix:"t" );
+            !U := ElementRange( 1, 3, prefix:"u" );
+            !R := { (i,j,k) | mod(ord(i)+ord(j)+ord(k),3) = 1 };
+            !C := { (i,j,k) | (i,j,k) in R };
+            !D := { h | mod(ord(h),3) = 0 } ;
+            !DD := { h | mod(ord(h),3) = 1 } ;
+            !P(h) := ord(h);
+            !PD(g) := ord(g);
+            !epC := Element(C,5);
+            !epC2(i) := Element(C,ord(i)+3);
+            !siC(i) := { Element(c,ord(i)+5), Element(c,ord(i)) } ;
+            !block where single_column_display := 1 ;
+            !	write Running_example_input_declarations to file "inputval.txt" ;
+            !endblock ;
+            !
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return  1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}
