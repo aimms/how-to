@@ -484,6 +484,10 @@ LibraryModule DeprecateCompoundSetUtilities {
                 IndexDomain: IndexIdentifiers;
                 Range: AllIdentifiers;
             }
+            ElementParameter epCompoundDomainSets {
+                IndexDomain: IndexIdentifiers;
+                Range: AllIdentifiers;
+            }
             StringParameter spCompoundSetMappedIndex {
                 IndexDomain: IndexIdentifiers;
             }
@@ -638,6 +642,15 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	block  ! Get domain string with kommas
                     		spSubsetOfString := AttributeToString( eCompoundSet, 'subset of' );
                      		pNoKommas := StringOccurrences( spSubsetOfString, "," );
+                     		if not pNoKommas then
+                    			if SubString( spSubsetOfString, 1, 1 ) = "("  then
+                    				spSubsetOfString := SubString( spSubsetOfString, 2, StringLength( spSubsetOfString ) -1 );
+                    			endif ;
+                    			epDomainSet := StringToElement( AllSets, spSubsetOfString, create:0);
+                    			if epDomainSet then
+                    				epCompoundDomainSets( eCompoundSet ) := epDomainSet ;
+                    			endif ;
+                     		endif ;
                     		while not pNoKommas do
                     			! Go find the root set.
                     			if SubString( spSubsetOfString, 1, 1 ) = "("  then
@@ -740,6 +753,14 @@ LibraryModule DeprecateCompoundSetUtilities {
                     
                     	block ! Declare Set Mapping Set.
                     		epMappingSetSet(eCompoundSet) := me::Create( "sSetMappingSet_"+ spCompoundSetName(eCompoundSet), 'set', epDeclarationSectionMappingSet );
+                    		if epCompoundDomainSets( eCompoundSet ) then
+                    			if epMappingSetSet(epCompoundDomainSets( eCompoundSet )) then
+                    				me::SetAttribute( epMappingSetSet(eCompoundSet), 'subset of',  
+                    					formatString("%e",epMappingSetSet(epCompoundDomainSets( eCompoundSet ))));
+                    			else
+                    				raise error "error in order of compound sets, subset of relation not mapped." ;
+                    			endif ;
+                    		endif ;
                     		spMappingSetIndex(eCompoundSet) := "iMS_"+ spCompoundSetName(eCompoundset) ;
                     		me::SetAttribute( epMappingSetSet(eCompoundSet), 'index', spMappingSetIndex(eCompoundSet));
                     		spMappingSetParameter(eCompoundSet) := "epMS_"+ spCompoundSetName(eCompoundset) ;
