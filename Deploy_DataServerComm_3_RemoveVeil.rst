@@ -1,7 +1,6 @@
 How to keep the AIMMS WebUI interactive while a solve process is running in the background?
 ===========================================================================================
 
-:author: Mohan Chiriki, Chris Kuip
 
 Introduction
 ------------

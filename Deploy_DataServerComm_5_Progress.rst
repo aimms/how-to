@@ -11,7 +11,7 @@ Approach
 
 The approach we take here involves passing information through three levels of execution.
 
-.. image:: Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/ThreeLevelsOfExecution.png
+.. image:: Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/ThreeLevelsOfExecutionTimeCB.png
 
 #. The solver execution on the server session. 
     The solver passes on status information periodically, as part of the time callback mechanism.
@@ -22,9 +22,8 @@ The approach we take here involves passing information through three levels of e
 #. The AIMMS execution on the data session. 
     Execute a procedure to retrieve the information from the server session to the data session and display it in the WebUI widgets.
 
-The implementation of the information stream represented by the two upper arrows will be discussed in the next section. 
-The bottom two arrows (Incumbent Callback and Intermediate Solution) will be discussed in a separate article.
-
+The implementation of the information stream represented by the two arrows will be discussed in the next section. 
+ 
 Implementation
 --------------
 
