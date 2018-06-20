@@ -63,13 +63,13 @@ In our example, we want to display only the best bound and incumbent objective v
         
 .. sidebar:: How flags affect the messages between AIMMS Sessions
 
-    An AIMMS Session processes the messages on its queue one after another, typically by executing the procedure that is contained in the message. These queues are stored in the AIMMS PRO database. The ``delegate`` family of functions, including ``pro::DelegateToServer`` and ``pro::DelegateToClient``, place messages at the end of the queues of other sessions. The flags argument of these functions alter the default behaviour of these messages. There are two possible flags and they can be used independent of each other:
+    An AIMMS Session processes the messages on its queue one after another, typically by executing the procedure that is contained in the message. These queues are stored in the AIMMS PRO database. The ``delegate`` family of functions, including ``pro::DelegateToServer`` and ``pro::DelegateToClient``, place messages at the end of the queues of other sessions. The flags argument of these functions alter the behavior of these messages. The flags used most often are:
     
-    ``**pro::PROMFLAG_LIVE**``
+    ``pro::PROMFLAG_LIVE``
      
-    The message is not stored in the database. As such it more efficient and lighter than ordinary messages. When an AIMMS Session connects to a queue after a live message is invoked, it will not see that live message; which is desired for progress and status updates. In addition, there can only be one LIVE message at any one time.
+    The message is not stored in the database. As such it more efficient and lighter than ordinary messages. When an AIMMS Session connects to a queue after a live message is invoked, it will not see that live message; which is desired for progress and status updates.  
     
-    ``**pro::PROMFLAG_PRIORITY**``
+    ``pro::PROMFLAG_PRIORITY``
     
     The message gets priority over the other messages in the message queue. Also, when a procedure is running in the receiving process, the message invokes a procedure that is ran in between statements of the current procedure.
         

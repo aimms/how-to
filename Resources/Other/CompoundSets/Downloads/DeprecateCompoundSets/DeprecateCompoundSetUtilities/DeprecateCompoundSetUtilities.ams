@@ -420,6 +420,17 @@ LibraryModule DeprecateCompoundSetUtilities {
                 }
                 StringParameter spName;
             }
+            Procedure prEnsureFolder {
+                Arguments: (spFolderName);
+                Body: {
+                    if not DirectoryExists( spFolderName ) then
+                    	DirectoryCreate( spFolderName );
+                    endif ;
+                }
+                StringParameter spFolderName {
+                    Property: Input;
+                }
+            }
         }
         DeclarationSection secundary_runtime_library_administration {
             Set sCompoundRootSets {
@@ -844,6 +855,22 @@ LibraryModule DeprecateCompoundSetUtilities {
                     InitialData: '';
                 }
             }
+            Function fncBodyLineForward {
+                Arguments: (iDataIdentifier,spSuffix,spIndexDomainStr1,spIndexDomainStr2);
+                ElementParameter iDataIdentifier {
+                    Range: AllIdentifiers;
+                    Property: Input;
+                }
+                StringParameter spSuffix {
+                    Property: Input;
+                }
+                StringParameter spIndexDomainStr1 {
+                    Property: Input;
+                }
+                StringParameter spIndexDomainStr2 {
+                    Property: Input;
+                }
+            }
             Procedure prCreateAssignmentTextCopyToShadow {
                 Arguments: (iDataIdentifier,spBodyLineForwardCopyProcedure);
                 Body: {
@@ -892,6 +919,10 @@ LibraryModule DeprecateCompoundSetUtilities {
                     			if epMappingSetSet(epSubsetOf) then epMappingSetSet(epSubsetOf) else epSubsetOf endif
                     			));
                     endif ;
+                    if epType = 'constraint' then
+                    	me::SetAttribute( epShadowsDataIdentifiers(iDataIdentifier), 'definition', "0=0" );
+                    endif ;
+                    
                     !pNoCompoundIndices := fncNoCompoundIndices( iDataIdentifier );
                     !if pNoCompoundIndices = 1 then
                     !	epCompoundIndex := fncCompoundIndex( iDataIdentifier, 1 );
@@ -975,10 +1006,33 @@ LibraryModule DeprecateCompoundSetUtilities {
                     			iDataIdentifier, spIndexDomainStr2);
                     	endif ;
                     	! debuggerBreakpoint; ! need to develop actual code.
+                    elseif ( epType = 'variable' ) then
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".basic", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".level", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".lower", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".upper", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".reducedCost", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".nonvar", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".relax", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".priority", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".smallestCoefficient", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".NominalCoefficient", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".largestCoefficient", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".SmallestValue", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".LargestValue", spIndexDomainStr1, spIndexDomainStr2 );
+                    elseif ( epType = 'constraint' ) then
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".basic", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".level", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".lower", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".upper", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".ShadowPrice", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".SmallestShadowPrice", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".LargestShadowPrice", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".SmallestRightHandSide", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".NominalRightHandSide", spIndexDomainStr1, spIndexDomainStr2 );
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".LargestRightHandSide", spIndexDomainStr1, spIndexDomainStr2 );
                     else
-                    	spBodyLineForwardCopyProcedure := formatString( "%e%s := ::%e%s ;\n", 
-                    		epShadowsDataIdentifiers(iDataIdentifier), spIndexDomainStr1,  			
-                    		iDataIdentifier, spIndexDomainStr2);
+                    	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, "", spIndexDomainStr1, spIndexDomainStr2 );
                     endif ;
                 }
                 ElementParameter iDataIdentifier {
@@ -1425,6 +1479,8 @@ LibraryModule DeprecateCompoundSetUtilities {
             Procedure prWorkCopyInputCaseToShadowCase {
                 Arguments: (spInputCaseFilename,spOutputCaseFilename);
                 Body: {
+                    prEnsureFolder( spShadowDataFolderName );
+                    
                     prWorkCreateShadowCompoundSet();
                     
                     CaseFileLoad( spInputCaseFilename );
@@ -1541,6 +1597,7 @@ LibraryModule DeprecateCompoundSetUtilities {
             Procedure prWorkCopySingleShadowToAtomic {
                 Arguments: (spShadowCase,spAtomicCase);
                 Body: {
+                    prEnsureFolder( spAtomicFolder );
                     prIdentifyCompoundSets();
                     if card( sCompoundRootSets ) then
                     	raise error "There are still compound root sets in your model - you cannot copy your data back yet." ;
