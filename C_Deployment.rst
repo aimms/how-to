@@ -27,4 +27,6 @@ Deployment
 	Deploy_DataServerComm_2_Develop
 	Deploy_DataServerComm_3_RemoveVeil
 	Deploy_DataServerComm_4_LoadResults
+	Deploy_DataServerComm_5_Progress
+	Deploy_DataServerComm_6_Retrieve
 	
