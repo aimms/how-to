@@ -325,6 +325,103 @@ LibraryModule DeprecateCompoundSetUtilities {
                 }
                 Parameter pDim;
             }
+            Function fncGetPrefixForIdentifier {
+                Arguments: (epId);
+                Range: string;
+                Body: {
+                    rval := "" ;
+                    epWorkId := epId ;
+                    while epWorkId do
+                    	if IdentifierType( epWorkId ) = 'libraryModule' or IdentifierType( epWorkId ) = 'module' then
+                    		rval := AttributeToString( epWorkId, 'prefix' ) + "::" + rval ;
+                    	endif ;
+                    	epWorkId := me::Parent( epWorkId );
+                    endwhile ;
+                    
+                    fncGetPrefixForIdentifier := rval ;
+                }
+                ElementParameter epId {
+                    Range: AllIdentifiers;
+                    Property: Input;
+                }
+                ElementParameter epWorkId {
+                    Range: AllIdentifiers;
+                }
+                StringParameter rval;
+            }
+            Function fncDetermineIdentifier {
+                Arguments: (spIdName,epSameContext);
+                Range: AllIdentifiers;
+                Body: {
+                    rval := '' ;
+                    if epSameContext then
+                    	spPrefix := fncGetPrefixForIdentifier( epSameContext );
+                    	rval := StringToElement( AllIdentifiers, spPrefix+spIdName, create:0 );
+                    endif ;
+                    if not rval then
+                    	rval := StringToElement( AllIdentifiers, spIdName, create:0 );
+                    endif ;
+                    if not rval then
+                    	raise error 
+                    		formatString("fncDetermineIdentifier(%s,%e): unable to determine element in AllIdentifiers",
+                    			spIdName, epSameContext );
+                    endif ;
+                    fncDetermineIdentifier := rval ;
+                }
+                StringParameter spIdName {
+                    Property: Input;
+                }
+                ElementParameter epSameContext {
+                    Range: AllIdentifiers;
+                    Property: Optional;
+                }
+                ElementParameter rval {
+                    Range: AllIdentifiers;
+                }
+                StringParameter spPrefix;
+            }
+            Function fncIndexForSet {
+                Arguments: (epSet);
+                Range: AllIdentifiers;
+                Body: {
+                    rval := '';
+                    
+                    ! Input checking.
+                    if not epSet then
+                    	raise error "fncIndexForSet(): Identifier for which to find an index is not specified." ;
+                    endif ;
+                    if identifierType(epSet) <> 'set' then
+                    	raise error formatString("fncIndexForSet(): the %e is not a set for which an index can be found", epset) ;
+                    endif ;
+                    
+                    ! Actual search for index as an element in AllIdentifiers.
+                    spIndexStr := AttributeToSTring( epSet, 'index' );
+                    if spIndexStr then
+                    	pKommaPos := FindString(spIndexStr,",");
+                    	if pKommaPos then
+                    		spIndexStr := SubString(spIndexStr,1,pKommaPos-1);
+                    	endif ;
+                    	rval := fncDetermineIdentifier(spIndexStr,epSameContext: epSet);
+                    endif ;
+                    
+                    ! Do we deliver what we promise
+                    if not rval then
+                    	raise error formatString("fncIndexForSet(): Unable to find index for set %e", epSet);
+                    endif ;
+                    
+                    ! Returning.
+                    fncIndexForSet := rval ;
+                }
+                ElementParameter epSet {
+                    Range: AllIdentifiers;
+                    Property: Input;
+                }
+                ElementParameter rval {
+                    Range: AllIdentifiers;
+                }
+                StringParameter spIndexStr;
+                Parameter pKommaPos;
+            }
             Function fncNoCompoundIndices {
                 Arguments: (epId);
                 Body: {
@@ -530,11 +627,15 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
             Set sIndexDomainPositions {
                 SubsetOf: Integers;
-                Index: iIDP;
+                Index: iIDP, iIDP2;
             }
             ElementParameter epIndexDomainSets {
                 IndexDomain: (IndexIdentifiers,iIDP);
                 Range: AllSets;
+            }
+            ElementParameter epDomainIndices {
+                IndexDomain: (IndexIdentifiers,iIDP);
+                Range: AllIndices;
             }
             StringParameter spIndexDomainTags {
                 IndexDomain: iIDP;
@@ -574,12 +675,17 @@ LibraryModule DeprecateCompoundSetUtilities {
             Procedure prWorkCreateSetMappingsCompoundSet {
                 Body: {
                     empty pCompoundDimension ;
+                    sExcl := {};
+                    if epCompoundSetMappingRuntimeLibrary then
+                    	sExcl := SectionIdentifiers( epCompoundSetMappingRuntimeLibrary );
+                    endif ;
                     sDataIdentifiers := 
                     	{ IndexIdentifiers | ( IndexIdentifiers in ( AllSets + AllParameters + AllVariables + AllConstraints ) ) and 
                     	                     ( not ( IndexIdentifiers in AllDefinedSets )                                      ) and
                     	                     ( not ( IndexIdentifiers in AllDefinedParameters )                                ) and
                     			     ( not ( IndexIdentifiers in sCompoundSets )                                       ) and 
                     	                     ( not ( isRuntimeIdentifier( IndexIdentifiers ) )                                 ) and 
+                    	                     ( not ( IndexIdentifiers in sExcl             )                                   ) and 
                     	                     ( not ( IndexIdentifiers in DeprecateCompoundSetUtilities )                       )     } ;
                     block where single_column_display := 1, listing_page_width := 511 ;
                     	put outf ;
@@ -625,6 +731,9 @@ LibraryModule DeprecateCompoundSetUtilities {
                     Range: AllIdentifiers;
                 }
                 StringParameter spCompoundSetName;
+                Set sExcl {
+                    SubsetOf: AllIdentifiers;
+                }
                 File outf {
                     Name: "sDataIdentifiers.txt";
                     Device: Disk;
@@ -694,8 +803,11 @@ LibraryModule DeprecateCompoundSetUtilities {
                     			endif ;
                     			spAtomicDomainSetName := SubString( spSubsetOfString, pBegPos, pEndPos );
                     			epIndexDomainSets(eCompoundSet, iIDP ) := 
-                    				StringToElement( AllSets, spAtomicDomainSetName, create:0);
+                    				fncDetermineIdentifier( spAtomicDomainSetName, epSameContext: eCompoundSet);
+                    				!StringToElement( AllSets, spAtomicDomainSetName, create:0);
+                    
                     			if not epIndexDomainSets(eCompoundSet, iIDP ) then raise error "bug" ; endif ;
+                    			epDomainIndices(eCompoundSet,iIDP) := fncIndexForSet( epIndexDomainSets(eCompoundSet, iIDP ) );
                     		endfor ;
                     	endblock ;
                     
@@ -772,9 +884,9 @@ LibraryModule DeprecateCompoundSetUtilities {
                     				raise error "error in order of compound sets, subset of relation not mapped." ;
                     			endif ;
                     		endif ;
-                    		spMappingSetIndex(eCompoundSet) := "iMS_"+ spCompoundSetName(eCompoundset) ;
+                    		spMappingSetIndex(eCompoundSet) := "iSMI_"+ spCompoundSetName(eCompoundset) ;
                     		me::SetAttribute( epMappingSetSet(eCompoundSet), 'index', spMappingSetIndex(eCompoundSet));
-                    		spMappingSetParameter(eCompoundSet) := "epMS_"+ spCompoundSetName(eCompoundset) ;
+                    		spMappingSetParameter(eCompoundSet) := "epSM_"+ spCompoundSetName(eCompoundset) ;
                     		me::SetAttribute( epMappingSetSet(eCompoundSet), 'parameter', spMappingSetParameter(eCompoundSet));
                     		spCompoundSetMappedIndex( eCompoundSet ) := spMappingSetIndex(eCompoundSet) ;
                     	endblock ;
@@ -796,9 +908,15 @@ LibraryModule DeprecateCompoundSetUtilities {
                     				epElementParameterForTag(eCompoundSet,iIDP) := 
                     					me::Create( "epTag_"+ spCompoundSetName(eCompoundset)+"_"+spTag(eCompoundSet,iIDP), 
                     						'element parameter', epDeclarationSectionMappingSet );
-                    				me::SetAttribute( epElementParameterForTag(eCompoundSet,iIDP), 'index domain', spMappingSetIndex(eCompoundSet) );
+                    				me::SetAttribute( epElementParameterForTag(eCompoundSet,iIDP), 'index domain', 
+                    					spMappingSetIndex(eCompoundSet) );
                     				me::SetAttribute( epElementParameterForTag(eCompoundSet,iIDP), 'range',
                     					formatString("%e",epIndexDomainSets(eCompoundSet,iIDP)) );
+                    
+                    				! Example of a definition for a epElementParameterForTag:
+                    				! first( j | exists( i, k ) | ( i, j, k, ims_c ) in sSetMappingRelation_C )
+                    				me::SetAttribute( epElementParameterForTag(eCompoundSet,iIDP), 'definition',
+                    					fncElementParameterForTagDefinition( eCompoundSet, iIDP ) );
                     			endfor ;
                     		endif ;
                     	endblock ;
@@ -841,6 +959,61 @@ LibraryModule DeprecateCompoundSetUtilities {
                     }
                 }
             }
+            Function fncElementParameterForTagDefinition {
+                Arguments: (eCompoundSet,iIDP);
+                Range: string;
+                Body: {
+                    ! Example of a definition for a epElementParameterForTag:
+                    ! first( j | exists( ( i, k ) | ( i, j, k, ims_c ) in sSetMappingRelation_C )
+                    pAtomicDim := pCompoundDimension( eCompoundSet ) ;
+                    rval := formatString( "first( %e | exists( ", epDomainIndices( eCompoundSet, iIDP ) );
+                    if pAtomicDim > 2 then
+                    	rval += "( " ;
+                    endif ;
+                    pFoundFree := 0 ;
+                    for iIDP2 | iIDP2 <= pAtomicDim do
+                    	if ( iIDP2 <> iIDP ) then
+                    		if pFoundFree then
+                    			rval += ", " ;
+                    		else
+                    			pFoundFree := 1 ;
+                    		endif ;
+                    		rval += epDomainIndices( eCompoundSet, iIDP2 );
+                    	endif ;
+                    endfor ;
+                    if pAtomicDim > 2 then
+                    	rval += " )" ;
+                    endif ;
+                    rval +=  " | ( " ;  
+                    pFoundFree := 0 ;
+                    for iIDP2 | iIDP2 <= pAtomicDim do
+                    	if pFoundFree then
+                    		rval += ", " ;
+                    	else
+                    		pFoundFree := 1 ;
+                    	endif ;
+                    	rval += epDomainIndices( eCompoundSet, iIDP2 );
+                    endfor ;
+                    rval += ", " ;
+                    rval += spMappingSetIndex(eCompoundSet) ;
+                    rval += " ) in ";
+                    rval += "sSetMappingRelation_"+ spCompoundSetName(eCompoundSet);!epMappingSetRelation( eCompoundSet );
+                    rval += " ) )" ;
+                    
+                    fncElementParameterForTagDefinition := rval ;
+                }
+                ElementParameter eCompoundSet {
+                    Range: AllIdentifiers;
+                    Property: Input;
+                }
+                ElementParameter iIDP {
+                    Range: sIndexDomainPositions;
+                    Property: Input;
+                }
+                StringParameter rval;
+                Parameter pAtomicDim;
+                Parameter pFoundFree;
+            }
         }
         Section Compound_set_shadow {
             DeclarationSection shadow_runtime_library_adminstration {
@@ -857,6 +1030,12 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
             Function fncBodyLineForward {
                 Arguments: (iDataIdentifier,spSuffix,spIndexDomainStr1,spIndexDomainStr2);
+                Range: string;
+                Body: {
+                    fncBodyLineForward := formatString( "%e%s%s := ::%e%s%s ;\n", 
+                    	epShadowsDataIdentifiers(iDataIdentifier), spIndexDomainStr1, spSuffix,			
+                    	iDataIdentifier, spIndexDomainStr2, spSuffix);
+                }
                 ElementParameter iDataIdentifier {
                     Range: AllIdentifiers;
                     Property: Input;
@@ -877,6 +1056,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     !if iDataIdentifier = 'sIC' then
                     !	DebuggerBreakpoint();
                     !endif ;
+                    spBodyLineForwardCopyProcedure := "" ;
                     sDataIdentifiersRequiringShadow += iDataIdentifier;
                     epShadowsDataIdentifiers(iDataIdentifier) := me::Create( 
                     	fncShadowName( iDataIdentifier ),
@@ -1268,10 +1448,10 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	endblock ;
                     
                     	block ! Fill in the element parameters that map the tags.
-                    		spBodyLine := "        ! Fill in the element parameters that map the tags.\n" ;
+                    		spBodyLine := "        ! Fill in the element parameters that map the tags - commented out, for the time being we are using definitions for these element parameters.\n" ;
                     		spBody += spBodyLine ;
                     		for iIDP do
-                    			spBodyLine := formatString("        %e(%s) := %s ;\n",
+                    			spBodyLine := formatString("!        %e(%s) := %s ;\n",
                     				epElementParameterForTag(eCompoundSet,iIDP), 
                     				spMappingSetParameter(eCompoundSet), epElementParameterHelp(eCompoundSet,iIDP) );
                     			spBody += spBodyLine ;
