@@ -1,0 +1,16 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+  - build
+  
+build_and_install:
+  stage: build
+  script:
+    - sphinx-build -M html . _build 
+    - rsync -rt _build/html/ support@data.aimms.com:/home/aimms/www/how-to.aimms.com
+  tags: 
+    - ubuntu
+  only:
+    - master
+  
