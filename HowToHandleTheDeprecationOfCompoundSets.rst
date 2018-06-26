@@ -315,12 +315,6 @@ You can replace this definition by:
             Definition: sum(h|(i,j,k,h) in sMappingSet_C_Relation,p(h));
         }
 
-.. _MyR := tuple(_MySpg,_MyGpr); 
-.. leads to
-.. A compound root set for (TreeSpeciesGroups,ProductGroups) cannot be found.
-.. rewrite to
-.. first( h | sSetMappingRelation_ValidRecipes( _MySpg,_MyGpr, h ) );
-
 .. _Section_Conversion_Move_Indexes:
 
 

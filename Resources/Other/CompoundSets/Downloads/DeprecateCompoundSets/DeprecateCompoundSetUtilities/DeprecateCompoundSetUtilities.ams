@@ -177,6 +177,10 @@ LibraryModule DeprecateCompoundSetUtilities {
                 IndexDomain: IndexIdentifiers;
                 Range: AllIdentifiers;
             }
+            ElementParameter epMappingSetBaseRelation {
+                IndexDomain: IndexIdentifiers;
+                Range: AllIdentifiers;
+            }
             Procedure prRemoveSpaces {
                 Arguments: (spStr);
                 Body: {
@@ -891,8 +895,27 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		spCompoundSetMappedIndex( eCompoundSet ) := spMappingSetIndex(eCompoundSet) ;
                     	endblock ;
                     
+                    	block ! Declare set mapping base relation if the compound set has a definition.
+                    		if attributeToString( eCompoundset, 'definition' ) then
+                    			epMappingSetBaseRelation(eCompoundSet) := me::Create( "sSetMappingBaseRelation_" + spCompoundSetName(eCompoundset), 
+                    				'set', epDeclarationSectionMappingSet );
+                    			spMappingSetRelationSubsetOf := "(";
+                    			for iIDP | iIDP <= pCompoundDimension( eCompoundSet ) do
+                    				spMappingSetRelationSubsetOf += formatString("%e", epIndexDomainSets(eCompoundSet,iIDP) );
+                    				if iIDP = pCompoundDimension( eCompoundSet ) then
+                    					spMappingSetRelationSubsetOf += ")";
+                    				else
+                    					spMappingSetRelationSubsetOf += ",";
+                    				endif ;
+                    			endfor ;
+                     			me::SetAttribute( epMappingSetBaseRelation(eCompoundSet), 'subset of', spMappingSetRelationSubsetOf);
+                     			me::SetAttribute( epMappingSetBaseRelation(eCompoundSet), 'definition',
+                     				attributeToString( eCompoundset, 'definition' ) );
+                    		endif ;
+                    	endblock ;
+                    
                     	block ! Declare set mapping relation.
-                    		epMappingSetRelation(eCompoundSet) := me::Create( "sSetMappingRelation_"+ spCompoundSetName(eCompoundset), 
+                    		epMappingSetRelation(eCompoundSet) := me::Create( "sSetMappingRelation_" + spCompoundSetName(eCompoundset), 
                     			'set', epDeclarationSectionMappingSet );
                     		spMappingSetRelationSubsetOf := "(";
                     		for iIDP do
@@ -932,6 +955,65 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	endblock ;
                     
                     endblock ;
+                    
+                    if attributeToString( eCompoundset, 'definition' ) then
+                    	/* Example code for a compound set C.
+                    	Set sSetMappingSet_C {
+                    		Index: iSMI_C;
+                    		Parameter: epSM_C;
+                    		Definition: {
+                    			prDef_sSetMappingSet_C();
+                    		}
+                    	}
+                    	Procedure prDef_sSetMappingSet_C {
+                    		Body: {
+                    			sSetMappingSet_C := {} ;
+                    			for ( ia, ib ) | (ia, ib) in sSetMappingBaseRelation_C do
+                    				sSetMappingSet_C += StringToElement( sSetMappingSet_C, formatString("(%e,%e)", ia, ib ), create:1);
+                    			endfor ;
+                    		}
+                    	}
+                    	*/
+                    	block ! Define the procedure to be used as a definition for the set mapping set.
+                    		epProcDef_SetMappingSet := me::Create( "prDef_SetMappingSet_" + spCompoundSetName(eCompoundSet), 
+                    			'procedure', epSectionCompoundSetMappingDeclarations );
+                    		spBody := "" ;
+                    
+                    		spBodyLine := formatString( "sSetMappingSet_%e := {}; \n", spCompoundSetName(eCompoundSet) );
+                    		spBody += spBodyLine ;
+                    
+                    		spBodyLine := "for ( ";
+                    		for iIDP | iIDP <= pCompoundDimension(eCompoundSet) do
+                    			spBodyLine += epDomainIndices( eCompoundSet, iIDP);
+                    			if iIDP = pCompoundDimension(eCompoundSet) then
+                    				spBodyLine += " )";
+                    			else
+                    				spBodyLine += ", ";
+                    			endif ;
+                    		endfor ;
+                    		spBodyLine += " | ( ";
+                    		for iIDP | iIDP <= pCompoundDimension(eCompoundSet) do
+                    			spBodyLine += epDomainIndices( eCompoundSet, iIDP);
+                    			if iIDP = pCompoundDimension(eCompoundSet) then
+                    				spBodyLine += " )";
+                    			else
+                    				spBodyLine += ", ";
+                    			endif ;
+                    		endfor ;
+                    		spBodyLine += formatString(" in sSetMappingBaseRelation_%s do\n", spCompoundSetName(eCompoundSet));
+                    		spBody += spBodyLine ;
+                    
+                    		raise error "TODO: sSetMappingSet_C += StringToElement( sSetMappingSet_C, formatString(\"(%e,%e)\", ia, ib ), create:1);";
+                    
+                    		spBodyLine += "endfor ; \n";
+                    		spBody += spBodyLine ;
+                    
+                    	endblock ;
+                    	block ! Define the procedure to be used as a definition for the set mapping relation.
+                    		epProcDef_SetMappingRelation := me::Create( "prDef_SetMappingRelation_" + spCompoundSetName(eCompoundSet), 
+                    			'procedure', epSectionCompoundSetMappingDeclarations );
+                    	endblock ;
+                    endif ;
                 }
                 DeclarationSection Argument_Declaration {
                     ElementParameter eCompoundSet {
@@ -953,10 +1035,18 @@ LibraryModule DeprecateCompoundSetUtilities {
                     ElementParameter epDeclarationSectionMappingSet {
                         Range: AllIdentifiers;
                     }
+                    ElementParameter epProcDef_SetMappingSet {
+                        Range: AllIdentifiers;
+                    }
+                    ElementParameter epProcDef_SetMappingRelation {
+                        Range: AllIdentifiers;
+                    }
                     StringParameter spMappingSetRelationSubsetOf;
                     ElementParameter epProcFillSetMapping {
                         Range: AllIdentifiers;
                     }
+                    StringParameter spBodyLine;
+                    StringParameter spBody;
                 }
             }
             Function fncElementParameterForTagDefinition {
