@@ -1839,6 +1839,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     prWorkCreateShadowCompoundSet();
                     
                     CaseFileLoad( spInputCaseFilename );
+                    update ;
                     
                     apply( epProcForwardCopyProcedure );
                     
@@ -1959,6 +1960,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     endif ;
                     
                     CaseFileLoad( spShadowCase );
+                    update ;
                     
                     prWorkGenerateBackward();
                     
