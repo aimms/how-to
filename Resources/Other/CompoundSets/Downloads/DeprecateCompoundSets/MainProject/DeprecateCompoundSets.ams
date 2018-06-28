@@ -23,11 +23,11 @@ Model Main_DeprecateCompoundSets {
             }
         }
         Set D {
-            SubsetOf: C;
+            SubsetOf: (C);
             Index: g, gtemp;
         }
         Set DD {
-            SubsetOf: C;
+            SubsetOf: (C);
         }
         Parameter A {
             IndexDomain: i;
