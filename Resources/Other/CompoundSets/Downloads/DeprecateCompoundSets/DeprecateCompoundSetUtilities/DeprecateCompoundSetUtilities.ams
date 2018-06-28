@@ -1839,6 +1839,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     prWorkCreateShadowCompoundSet();
                     
                     CaseFileLoad( spInputCaseFilename );
+                    DebuggerBreakpoint();
                     block where warning_not_initialized := off ;
                     	update ;
                     endblock ;
@@ -1878,6 +1879,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                 Arguments: (spOutputCaseFilename);
                 Body: {
                     if epSectionForwardCopyProcedures then
+                    	DebuggerBreakpoint();
                     	me::Delete( epSectionForwardCopyProcedures );
                     	epSectionForwardCopyProcedures := '' ;
                     endif ;
@@ -1964,7 +1966,9 @@ LibraryModule DeprecateCompoundSetUtilities {
                     endif ;
                     
                     CaseFileLoad( spShadowCase );
-                    update ;
+                    block where warning_not_initialized := off ;
+                    	update ;
+                    endblock ;
                     
                     prWorkGenerateBackward();
                     
