@@ -1839,9 +1839,12 @@ LibraryModule DeprecateCompoundSetUtilities {
                     prWorkCreateShadowCompoundSet();
                     
                     CaseFileLoad( spInputCaseFilename );
-                    update ;
+                    block where warning_not_initialized := off ;
+                    	update ;
+                    endblock ;
                     
                     apply( epProcForwardCopyProcedure );
+                    update ;
                     
                     prWorkSaveShadowToCase(spOutputCaseFilename);
                 }
@@ -1883,9 +1886,10 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	epSectionRelationCompoundSetSetMappingSetDeclarationsDeclarations := '' ;
                     endif ;
                     sContentTypeForward := { IndexIdentifiers | 
-                    				( not epShadowsDataIdentifiers( IndexIdentifiers ) ) and 
-                    				( not ( IndexIdentifiers in AllDefinedParameters ) ) and 
-                    				( not ( IndexIdentifiers in AllDefinedSets       ) )     } ;
+                    				( not epShadowsDataIdentifiers( IndexIdentifiers ) ) };
+                    !				and 
+                    !				( not ( IndexIdentifiers in AllDefinedParameters ) ) and 
+                    !				( not ( IndexIdentifiers in AllDefinedSets       ) )     } ;
                     AllCaseFileContentTypes += data { 'dcsu::sContentTypeForward' } ;
                     CurrentCaseFileContentType := 'dcsu::sContentTypeForward' ;
                     block where case_contains_runtime_libraries := 1, save_data_update_definitions := 'off' ;
