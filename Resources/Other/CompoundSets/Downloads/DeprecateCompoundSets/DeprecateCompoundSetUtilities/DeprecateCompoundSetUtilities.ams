@@ -1211,9 +1211,6 @@ LibraryModule DeprecateCompoundSetUtilities {
             Procedure prCreateAssignmentTextCopyToShadow {
                 Arguments: (iDataIdentifier,spBodyLineForwardCopyProcedure);
                 Body: {
-                    !if iDataIdentifier = 'sIC' then
-                    !	DebuggerBreakpoint();
-                    !endif ;
                     spBodyLineForwardCopyProcedure := "" ;
                     sDataIdentifiersRequiringShadow += iDataIdentifier;
                     epShadowsDataIdentifiers(iDataIdentifier) := me::Create( 
@@ -1261,30 +1258,6 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	me::SetAttribute( epShadowsDataIdentifiers(iDataIdentifier), 'definition', "0=0" );
                     endif ;
                     
-                    !pNoCompoundIndices := fncNoCompoundIndices( iDataIdentifier );
-                    !if pNoCompoundIndices = 1 then
-                    !	epCompoundIndex := fncCompoundIndex( iDataIdentifier, 1 );
-                    !	spIterate := formatString("%e", epCompoundIndex );
-                    !	spIterCond := fncCompoundIterateCondition( epCompoundIndex );
-                    !else
-                    !	spIterate := "(";
-                    !	while loopCount <= pNoCompoundIndices do
-                    !		epCompoundIndex := fncCompoundIndex( iDataIdentifier, loopCount );
-                    !		if loopCount = pNoCompoundIndices then
-                    !			spIterate += formatString("%e,", epCompoundIndex );
-                    !		else
-                    !			spIterate += formatString("%e)", epCompoundIndex );
-                    !		endif ;
-                    !		if loopCount = 1 then
-                    !			spIterCond := fncCompoundIterateCondition( epCompoundIndex );
-                    !		else
-                    !			spIterCond += " and " + fncCompoundIterateCondition( epCompoundIndex );
-                    !		endif ;
-                    !	endwhile ;
-                    !	debuggerBreakpoint;
-                    !	raise error "NIY" ; ! Todo 
-                    !endif ;
-                    !spIterFull := spIterate + " | " + spIterCond ;
                     spBodyLineForwardCopyProcedure := "" ;
                     if epType = 'element parameter' then
                     	epFW := epElementParameterForwardMaps(IdentifierElementRange(iDataIdentifier));
@@ -1310,7 +1283,6 @@ LibraryModule DeprecateCompoundSetUtilities {
                     			! 	Endfor ;
                     			!       Shadow_indexed_set( indexedSet_2_indices ) := Shadow_help_subset;
                     			! endfor ;
-                    			!debuggerBreakpoint; ! need to develop actual code.
                     			spBodyLineForwardCopyProcedure := formatString("for %s do \n", spIndexDomainStr0 );
                     			spBodyLineForwardCopyProcedure += formatString("        empty %s ; \n",
                     				epHelperSubset( epSubsetOf ) );
@@ -1343,7 +1315,6 @@ LibraryModule DeprecateCompoundSetUtilities {
                     			epShadowsDataIdentifiers(iDataIdentifier), spIndexDomainStr1,  			
                     			iDataIdentifier, spIndexDomainStr2);
                     	endif ;
-                    	! debuggerBreakpoint; ! need to develop actual code.
                     elseif ( epType = 'variable' ) then
                     	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".basic", spIndexDomainStr1, spIndexDomainStr2 );
                     	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".level", spIndexDomainStr1, spIndexDomainStr2 );
@@ -1467,9 +1438,6 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	spBodyForwardCopyProcedure += "! Copy compound data to Shadow data\n" ;
                     
                     	for iDataIdentifier do 
-                    !		if iDataIdentifier = 'DD' then
-                    !			DebuggerBreakpoint();
-                    !		endif ;
                     		if fncRequiresDataShadow( iDataIdentifier ) then
                     			prCreateAssignmentTextCopyToShadow( iDataIdentifier, spBodyLineForwardCopyProcedure );
                     			spBodyForwardCopyProcedure += spBodyLineForwardCopyProcedure ;
@@ -1839,7 +1807,6 @@ LibraryModule DeprecateCompoundSetUtilities {
                     prWorkCreateShadowCompoundSet();
                     
                     CaseFileLoad( spInputCaseFilename );
-                    DebuggerBreakpoint();
                     block where warning_not_initialized := off ;
                     	update ;
                     endblock ;
@@ -1879,7 +1846,6 @@ LibraryModule DeprecateCompoundSetUtilities {
                 Arguments: (spOutputCaseFilename);
                 Body: {
                     if epSectionForwardCopyProcedures then
-                    	DebuggerBreakpoint();
                     	me::Delete( epSectionForwardCopyProcedures );
                     	epSectionForwardCopyProcedures := '' ;
                     endif ;
@@ -1907,7 +1873,6 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
             Procedure prSelectInputShadowCase {
                 Body: {
-                    !DebuggerBreakpoint();
                     FileSelect(
                     	filename  :  spShadowCase, 
                     	directory :  spShadowFolder, 
