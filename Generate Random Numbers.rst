@@ -52,6 +52,10 @@ How to generate random numbers ?
 
    See :download:`↓ this example AIMMS project <_AIMMSProjects/GenerateRandomNumbers.zip>`.
 
+.. note::
+	
+	See me, feel me
+   
 .. todo::
   
    Test
