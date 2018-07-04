@@ -143,7 +143,7 @@ A copy of the flowshop model that is the result of this answer: :download:`Flow 
 Further reading
 ---------------
 
-Now that end users know the state of the solution process, they also want to interrupt it when they see that further improvements are not worth waiting for. This is handled in `How to interrupt a solve while WebUI is active during a solve <https://how-to.aimms.com/Deploy_DataServerComm_7_Interrupt.html>`_ .
+Now that end users know the state of the solution process, they also want to interrupt it when they see that further improvements are not worth waiting for. This is handled in :doc:`Deploy_DataServerComm_7_Interrupt`.
 
 
 .. include:: ../includes/form.def

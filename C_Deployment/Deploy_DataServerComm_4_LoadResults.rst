@@ -113,12 +113,11 @@ Further opportunities
 
 There are now several opportunities for further improvement:
 
-#. End users may want to keep track of the progress of the solution process, especially the gap is interesting. In `How to display solve progress info in WebUI  <https://how-to.aimms.com/C_Deployement/Deploy_DataServerComm_5_Progress.html>`_ we show how to do this.
+#. End users may want to keep track of the progress of the solution process, especially the gap is interesting. In :doc:`Deploy_DataServerComm_5_Progress` we show how to do this.
    
-#. The contents of intermediate solutions can be interesting for the data session at hand. In `How to retrieve intermediate results from a server session to the data session <https://how-to.aimms.com/RetrieveIntermediateResults.html>`_ we show how to copy selected intermediate results from the server session to the data session.
+#. The contents of intermediate solutions can be interesting for the data session at hand. In :doc:`Deploy_DataServerComm_6_Retrieve` we show how to copy selected intermediate results from the server session to the data session.
 
-#. Once the solution is "good enough for now", the end user may want to abort the server session.  In `How to interrupt a solve while WebUI is active during a solve <https://how-to.aimms.com/StopSolveWithoutVeil.html>`_ we will show how to interrupt the server session.
-
+#. Once the solution is "good enough for now", the end user may want to abort the server session.  In :doc:`Deploy_DataServerComm_7_Interrupt` we will show how to interrupt the server session.
 
 
 .. include:: ../includes/form.def

@@ -4,7 +4,7 @@ How to interrupt the server session?
 Introduction
 ------------
 
-Assuming we have visibility of the server session via `progress <https://how-to.aimms.com/Deploy_DataServerComm_5_Progress.html>`_ or `intermediate results <https://how-to.aimms.com/RetrieveIntermediateResults.html>`_, we may decide to interrupt the server session. 
+Assuming we have visibility of the server session via :doc:`progress <Deploy_DataServerComm_5_Progress>` or :doc:`intermediate results <Deploy_DataServerComm_6_Retrieve>`, we may decide to interrupt the server session. 
 This answer takes you through the steps to interrupt a solve process or to interrupt a server session from the client side. 
 
 Implementation
@@ -53,7 +53,7 @@ The direct support for interruptions makes interrupting a solver or a server ses
 Further reading
 ---------------
 
-An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided `here <https://how-to.aimms.com/Deploy_DataServerComm_8_PassNewData.html>`_ .
+An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided in next :doc:`Deploy_DataServerComm_8_PassNewData`.
 
 
 .. include:: ../includes/form.def

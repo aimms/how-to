@@ -133,9 +133,9 @@ Further study
 
 Oops, I see several problems that we can work on.  
 
-#. I want to continue working on the app itself using my development environment. Now, the system asks whether I want to solve on a PRO system, while I am clearly not connected to that PRO system – I just want to be able to `test and debug <https://how-to.aimms.com/Deploy_DataServerComm_2_Develop.html>`_  my application.  
+#. I want to continue working on the app itself using my development environment. Now, the system asks whether I want to solve on a PRO system, while I am clearly not connected to that PRO system – I just want to be able to :doc:`test and debug <Deploy_DataServerComm_2_Develop>` my application.  
 
-#. I want to remove the veil that drops down when a procedure of the data session runs for more than a few seconds. See topic `Remove the veil for long running procedures <https://how-to.aimms.com/Deploy_DataServerComm_3_RemoveVeil.html>`_
+#. I want to remove the veil that drops down when a procedure of the data session runs for more than a few seconds. See topic :doc:`Deploy_DataServerComm_3_RemoveVeil`
 
 
 .. include:: ../includes/form.def

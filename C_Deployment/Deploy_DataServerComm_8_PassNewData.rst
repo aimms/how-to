@@ -6,7 +6,7 @@ Communicate data changes from the data session to the server session
 Introduction
 ------------
 
-In previous articles it was shown how to communicate `progress <https://how-to.aimms.com/C_Deployment/Deploy_DataServerComm_5_Progress.html>`_ and `data <https://how-to.aimms.com/RetrieveIntermediateResults.html>`_, from the server session to the data session. In addition, we can `interrupt <https://how-to.aimms.com/Deploy_DataServerComm_7_Interrupt.html>`_ by sending a signal from the data session to the server session.  In this article we will send data from the data session to a running server session. 
+In previous articles it was shown how to communicate :doc:`progress <Deploy_DataServerComm_5_Progress>` and :doc:`data <Deploy_DataServerComm_6_Retrieve>`, from the server session to the data session. In addition, we can :doc:`interrupt <Deploy_DataServerComm_7_Interrupt>` by sending a signal from the data session to the server session.  In this article we will send data from the data session to a running server session. 
 
 Use case: We continue the Flowshop application. Though, the progress information obtained from the server is very interesting, we decide to await for a long period the solve and do not want to waste computation time with progress or incumbent updates, as we do not view them anyway. Therefore, we switch the progress and incumbent updates off in the server session.
 
