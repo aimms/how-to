@@ -195,7 +195,7 @@ This example app also contains the utility library ``DeprecateCompoundSetUtiliti
 Please copy the library from that example and use it in your application.
 
 
-Conversion step 4: Rewrite selected compound set definitions
+Conversion step 3: Rewrite selected compound set definitions
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 In the conversion steps after this one, we still want to use the data of compound sets. 
