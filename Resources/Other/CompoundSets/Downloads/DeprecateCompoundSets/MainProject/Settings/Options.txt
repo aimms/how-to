@@ -1,4 +1,6 @@
 ﻿* AIMMS
+case_size_overview 1
+case_size_overview_threshold 0
 * AOA
 * BARON 15
 * CBC 2.9
@@ -9,6 +11,7 @@
 * CPOptimizer 12.6.3
 * CPOptimizer 12.7
 * GUROBI 7.5
+* GUROBI 8.0
 * IPOPT 3.11
 * Knitro 10.3
 * MINOS
