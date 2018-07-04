@@ -142,6 +142,66 @@ LibraryModule DeprecateCompoundSetUtilities {
                 Index: iRuntimeId;
             }
         }
+        Section Selected_utilities {
+            Function fncMeParent {
+                Arguments: (epID);
+                Range: AllIdentifiers;
+                Body: {
+                    epParent := me::Parent(epID);
+                    if not epParent then
+                    	if IdentifierType(epID) = 'index' then
+                    		epSet := IndexRange( epID );
+                    		epParent := me::Parent( epSet );
+                    	elseif IdentifierType(epID)= 'element parameter' then
+                    		epSet := IdentifierElementRange( epID );
+                    		epParent := me::Parent( epSet );
+                    	endif ;
+                    endif ;
+                    
+                    
+                    if not epParent then
+                    	if epID in ( AllSets + AllIndices + AllParameters + AllVariables + AllConstraints) then
+                    		raise warning "unable to determine parent identifier of " + epID ;
+                    	endif ;
+                    endif ;
+                    fncMeParent := epParent ;
+                }
+                ElementParameter epID {
+                    Range: AllIdentifiers;
+                    Property: Input;
+                }
+                ElementParameter epParent {
+                    Range: AllIdentifiers;
+                }
+                ElementParameter epSet {
+                    Range: AllIdentifiers;
+                }
+            }
+            Function fncGetPrefixForIdentifier {
+                Arguments: (epId);
+                Range: string;
+                Body: {
+                    rval := "" ;
+                    epWorkId := fncMeParent( epId );
+                    while epWorkId do
+                    	if IdentifierType( epWorkId ) = 'libraryModule' or IdentifierType( epWorkId ) = 'module' then
+                    		rval := AttributeToString( epWorkId, 'prefix' ) + "::" + rval ;
+                    	endif ;
+                    	epWorkId := fncMeParent( epWorkId );
+                    endwhile ;
+                    
+                    fncGetPrefixForIdentifier := rval ;
+                }
+                ElementParameter epId {
+                    Range: AllIdentifiers;
+                    Property: Input;
+                }
+                ElementParameter epWorkId {
+                    Range: AllIdentifiers;
+                }
+                StringParameter rval;
+            }
+        }
         Section Section_1 {
             StringParameter spCurDir;
             Procedure GetCurDir {
@@ -328,30 +388,6 @@ LibraryModule DeprecateCompoundSetUtilities {
                     Range: AllSymbols;
                 }
                 Parameter pDim;
-            }
-            Function fncGetPrefixForIdentifier {
-                Arguments: (epId);
-                Range: string;
-                Body: {
-                    rval := "" ;
-                    epWorkId := epId ;
-                    while epWorkId do
-                    	if IdentifierType( epWorkId ) = 'libraryModule' or IdentifierType( epWorkId ) = 'module' then
-                    		rval := AttributeToString( epWorkId, 'prefix' ) + "::" + rval ;
-                    	endif ;
-                    	epWorkId := me::Parent( epWorkId );
-                    endwhile ;
-                    
-                    fncGetPrefixForIdentifier := rval ;
-                }
-                ElementParameter epId {
-                    Range: AllIdentifiers;
-                    Property: Input;
-                }
-                ElementParameter epWorkId {
-                    Range: AllIdentifiers;
-                }
-                StringParameter rval;
             }
             Function fncDetermineIdentifier {
                 Arguments: (spIdName,epSameContext);

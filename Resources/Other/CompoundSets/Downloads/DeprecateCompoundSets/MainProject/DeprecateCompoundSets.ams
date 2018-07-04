@@ -23,11 +23,11 @@ Model Main_DeprecateCompoundSets {
             }
         }
         Set D {
-            SubsetOf: (C);
+            SubsetOf: C;
             Index: g, gtemp;
         }
         Set DD {
-            SubsetOf: (C);
+            SubsetOf: C;
         }
         Parameter A {
             IndexDomain: i;
@@ -118,7 +118,15 @@ Model Main_DeprecateCompoundSets {
             or add statements that require the Data Management module to be initialized."
         }
     }
-    Procedure MainExecution;
+    Procedure MainExecution {
+        Body: {
+            for IndexIdentifiers | IndexIdentifiers in Library_MoreData do
+            	spPre := dcsu::fncGetPrefixForIdentifier( IndexIdentifiers );
+            	display IndexIdentifiers, spPre, "-----------" ;
+            endfor ;
+        }
+        StringParameter spPre;
+    }
     Procedure PreMainTermination {
         Body: {
             return  1;
