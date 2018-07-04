@@ -34,15 +34,13 @@ This document attempts to answer these questions.
 What are compound sets in AIMMS?
 --------------------------------
 
-Consider several one dimensional sets: :math:`S_1, S_2, ..., S_n`. As you know, a relation :math:`R` is a subset of a Cartesian product: :math:`S_1 \times S_2 \times ... \times S_n` with :math:`n \geq 2`.
+Consider several one dimensional sets: :math:`S_1, S_2, ..., S_n`. As you may know, a relation :math:`R` is a subset of a Cartesian product: :math:`S_1 \times S_2 \times ... \times S_n` with :math:`n \geq 2`.
 
 In AIMMS, a relation :math:`R` is **transformed** to a compound set, say :math:`C`, when its attribute form contains the declaration of an index, say :math:`c` or an element parameter, say :math:`e`. As such a compound set is a one-dimensional set, and like other one-dimensional sets it can have an ordering.
 
 Once a compound set is formed, it allows for the selection of components in tuples via tags. Let's assume :math:`C` is declared with the tags :math:`(T_1, T_2, ..., T_n)`, then selecting component :math:`i` of tuple :math:`c` is obtained by the notation :math:`c.T_i`.
 
-.. seealso::
-	
-	https://download.aimms.com/aimms/download/manuals/AIMMS3LR_SetDeclaration.pdf
+
 
 .. _Section-Why:
 
@@ -78,7 +76,7 @@ How to plan for the adaptation of your model?
 
 **The deprecation of compound sets will only be definite after January 1, 2020**, giving AIMMS modellers more than one and a half year between the announcement and the definite deprecation. With the nearing of this deadline, the urgency to do something about it also increases. That is why the following timeline is provided:
 
-#. The first release of AIMMS IDE after July 1, 2018, does not provide the attributes 'index' or 'parameter' in the attribute form of relations. This step prevents the creation of new compound sets.
+#. The first release of AIMMS IDE after July 1, 2018, being AIMMS 4.56, does not provide the attributes 'index' or 'parameter' in the attribute form of relations. This step prevents the creation of new compound sets.
 
 #. The first release of AIMMS IDE after January 1, 2019, (6 months later) warns the model builder against existing compound sets.  
 
@@ -160,6 +158,8 @@ The conversion procedure consists of the following conversion steps:
 
 #. Start with adding the library ``DeprecateCompoundSetUtilities`` to your application.
 
+#. Check all definitions of compound sets; rewrite those definitions that cannot be used to define a relation as well.
+
 #. Create the Set Mapping declarations and copy these declarations to your main model.
 
 #. For each case: create a new case without compound data but with shadow data for the compound data identifiers. We call these cases, the shadow cases.
@@ -195,10 +195,50 @@ This example app also contains the utility library ``DeprecateCompoundSetUtiliti
 Please copy the library from that example and use it in your application.
 
 
+Conversion step 4: Rewrite selected compound set definitions
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+In the conversion steps after this one, we still want to use the data of compound sets. 
+This data will be stored primarily in a relation.  This is why we want the definition, if any, of a compound set to be suited for a relation as well. 
+
+Consider the following example:
+
+    .. code-block:: none
+
+        Set C {
+            SubsetOf: (S, T, U);
+            Tags: (TS, TT, TU);
+            Index: h ;
+            Definition: {
+                { (i,j,k) | pAllowedElementsC(i,j,k) = 1 }
+            }
+        }
+        Set D {
+            SubsetOf: C;
+            Index: g ;
+            definition: {
+                { h | pAllowedElementsD(h.TS, h.TT, h.TU) = 1 }
+            }
+        }
+ 
+In the above example, the definition of C is a definition that can also be used for a relation, say :math:`R`, that is a subset of the cartesian product :math:`S \times T \times U`. In contrast, the definition of D cannot be used directly as the definition for a relation; we need to rewrite it first. For instance as follows:
+
+    .. code-block:: none
+
+        Set D {
+            SubsetOf: C;
+            Index: g ;
+            definition: {
+                { (i,j,k) | pAllowedElementsC(i,j,k) = 1 and pAllowedElementsD(i, j, k) = 1 }
+            }
+        }
+ 
+As you can see, the definition of ``D`` is now based on tuples instead of individual elements.
+
 
 .. _Section_conversion_Create_Set_Mapping:
 
-Conversion step 3: Create Set Mapping
+Conversion step 4: Create Set Mapping
 ++++++++++++++++++++++++++++++++++++++++
 
 In this conversion step a set mapping is created for each compound set in your model. This conversion step consists of the following sub steps:
@@ -224,7 +264,7 @@ The model explorer should now look something like this:
 
 .. _Section_Conversion_Copy_Input_Cases:
 
-Conversion step 4: Copy the input cases
+Conversion step 5: Copy the input cases
 ++++++++++++++++++++++++++++++++++++++++
 
 Shadow cases are cases whereby the compound data is replaced by atomic shadow data.
@@ -237,7 +277,7 @@ You can either choose to do all cases in one go, or do case by case. Either way,
 
 .. _Section_Conversion_Adapt_Model:
 
-Conversion step 5: Adapt the model such that compound sets are no longer needed.
+Conversion step 6: Adapt the model such that compound sets are no longer needed.
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 In this section, we will discuss several examples of how compound sets are used in your model and provide alternatives using the set mappings created in :ref:`Section_conversion_Create_Set_Mapping`.
@@ -318,7 +358,7 @@ You can replace this definition by:
 .. _Section_Conversion_Move_Indexes:
 
 
-Conversion step 6: Move the compound indexes to the corresponding set mapping sets.
+Conversion step 7: Move the compound indexes to the corresponding set mapping sets.
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 This step is essential such that screen definitions can be retained unaltered. 
@@ -329,7 +369,7 @@ This step may be combined with the previous step; in so doing, the AIMMS compile
 
 .. _Section_Conversion_Backward_Copy:
 
-Conversion step 7: For each shadow case, copy that shadow case back to the original case.
+Conversion step 8: For each shadow case, copy that shadow case back to the original case.
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 This section is similar to :ref:`Section_Conversion_Copy_Input_Cases`, except the area of the screen to use is ``Backward - creating cases with original identifiers without compound data``.
@@ -337,7 +377,7 @@ This section is similar to :ref:`Section_Conversion_Copy_Input_Cases`, except th
 
 .. _Section_Conversion_Final:
 
-Conversion step 8: Remove the library Deprecate Compound Set Utilities.
+Conversion step 9: Remove the library Deprecate Compound Set Utilities.
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 As your project no longer depends on compound sets, this library is no longer needed and can be removed.
