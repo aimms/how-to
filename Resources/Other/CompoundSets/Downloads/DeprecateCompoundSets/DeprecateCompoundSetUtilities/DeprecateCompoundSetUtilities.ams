@@ -896,19 +896,19 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	endblock ;
                     
                     	block ! Declare set mapping base relation if the compound set has a definition.
+                    		epMappingSetBaseRelation(eCompoundSet) := me::Create( "sSetMappingBaseRelation_" + spCompoundSetName(eCompoundset), 
+                    			'set', epDeclarationSectionMappingSet );
+                    		spMappingSetRelationSubsetOf := "(";
+                    		for iIDP | iIDP <= pCompoundDimension( eCompoundSet ) do
+                    			spMappingSetRelationSubsetOf += formatString("%e", epIndexDomainSets(eCompoundSet,iIDP) );
+                    			if iIDP = pCompoundDimension( eCompoundSet ) then
+                    				spMappingSetRelationSubsetOf += ")";
+                    			else
+                    				spMappingSetRelationSubsetOf += ",";
+                    			endif ;
+                    		endfor ;
+                    		me::SetAttribute( epMappingSetBaseRelation(eCompoundSet), 'subset of', spMappingSetRelationSubsetOf);
                     		if attributeToString( eCompoundset, 'definition' ) then
-                    			epMappingSetBaseRelation(eCompoundSet) := me::Create( "sSetMappingBaseRelation_" + spCompoundSetName(eCompoundset), 
-                    				'set', epDeclarationSectionMappingSet );
-                    			spMappingSetRelationSubsetOf := "(";
-                    			for iIDP | iIDP <= pCompoundDimension( eCompoundSet ) do
-                    				spMappingSetRelationSubsetOf += formatString("%e", epIndexDomainSets(eCompoundSet,iIDP) );
-                    				if iIDP = pCompoundDimension( eCompoundSet ) then
-                    					spMappingSetRelationSubsetOf += ")";
-                    				else
-                    					spMappingSetRelationSubsetOf += ",";
-                    				endif ;
-                    			endfor ;
-                     			me::SetAttribute( epMappingSetBaseRelation(eCompoundSet), 'subset of', spMappingSetRelationSubsetOf);
                      			me::SetAttribute( epMappingSetBaseRelation(eCompoundSet), 'definition',
                      				attributeToString( eCompoundset, 'definition' ) );
                     		endif ;
@@ -956,7 +956,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     
                     endblock ;
                     
-                    if attributeToString( eCompoundset, 'definition' ) then
+                    !if attributeToString( eCompoundset, 'definition' ) then
                     	/* Example code for a compound set C.
                     	Set sSetMappingSet_C {
                     		Index: iSMI_C;
@@ -974,12 +974,13 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		}
                     	}
                     	*/
+                    
                     	block ! Define the procedure to be used as a definition for the set mapping set.
                     		epProcDef_SetMappingSet := me::Create( "prDef_SetMappingSet_" + spCompoundSetName(eCompoundSet), 
                     			'procedure', epSectionCompoundSetMappingDeclarations );
                     		spBody := "" ;
                     
-                    		spBodyLine := formatString( "sSetMappingSet_%e := {}; \n", spCompoundSetName(eCompoundSet) );
+                    		spBodyLine := formatString( "sSetMappingSet_%s := {}; \n", spCompoundSetName(eCompoundSet) );
                     		spBody += spBodyLine ;
                     
                     		spBodyLine := "for ( ";
@@ -1003,17 +1004,84 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		spBodyLine += formatString(" in sSetMappingBaseRelation_%s do\n", spCompoundSetName(eCompoundSet));
                     		spBody += spBodyLine ;
                     
-                    		raise error "TODO: sSetMappingSet_C += StringToElement( sSetMappingSet_C, formatString(\"(%e,%e)\", ia, ib ), create:1);";
-                    
-                    		spBodyLine += "endfor ; \n";
+                    		!raise error "TODO: sSetMappingSet_C += StringToElement( sSetMappingSet_C, formatString(\"(%e,%e)\", ia, ib ), create:1);";
+                    		spBodyLine := formatString("        sSetMappingSet_%s += StringToElement( sSetMappingSet_%s, ",
+                    			spCompoundSetName(eCompoundSet), spCompoundSetName(eCompoundSet) );
+                    		spBodyLine += "formatString(\"(%e" ;
+                    		for iIDP | iIDP <> '1' and iIDP <= pCompoundDimension(eCompoundSet) do
+                    			spBodyLine += ", %e" ;
+                    		endfor ;
+                    		spBodyLine += ")\"" ;
+                    		for iIDP | iIDP <= pCompoundDimension(eCompoundSet) do
+                    			spBodyLine += formatString(", %e", epDomainIndices( eCompoundSet, iIDP) );
+                    		endfor ;
+                    		spBodyLine += "), create: 1 );\n" ;
                     		spBody += spBodyLine ;
                     
+                    		spBodyLine := "endfor ; \n";
+                    		spBody += spBodyLine ;
+                    
+                    		me::SetAttribute( epProcDef_SetMappingSet, 'body', spBody );
+                    		me::SetAttribute( epMappingSetSet(eCompoundSet), 'definition', "prDef_SetMappingSet_" + spCompoundSetName(eCompoundSet) );
                     	endblock ;
+                    
                     	block ! Define the procedure to be used as a definition for the set mapping relation.
                     		epProcDef_SetMappingRelation := me::Create( "prDef_SetMappingRelation_" + spCompoundSetName(eCompoundSet), 
                     			'procedure', epSectionCompoundSetMappingDeclarations );
+                    		spBody := "" ;
+                    
+                    		spBodyLine := formatString( "sSetMappingRelation_%s := {}; \n", spCompoundSetName(eCompoundSet) );
+                    		spBody += spBodyLine ;
+                    
+                    		spBodyLine := "for ( ";
+                    		for iIDP | iIDP <= pCompoundDimension(eCompoundSet) do
+                    			spBodyLine += epDomainIndices( eCompoundSet, iIDP);
+                    			if iIDP = pCompoundDimension(eCompoundSet) then
+                    				spBodyLine += " )";
+                    			else
+                    				spBodyLine += ", ";
+                    			endif ;
+                    		endfor ;
+                    		spBodyLine += " | ( ";
+                    		for iIDP | iIDP <= pCompoundDimension(eCompoundSet) do
+                    			spBodyLine += epDomainIndices( eCompoundSet, iIDP);
+                    			if iIDP = pCompoundDimension(eCompoundSet) then
+                    				spBodyLine += " )";
+                    			else
+                    				spBodyLine += ", ";
+                    			endif ;
+                    		endfor ;
+                    		spBodyLine += formatString(" in sSetMappingBaseRelation_%s do\n", spCompoundSetName(eCompoundSet));
+                    		spBody += spBodyLine ;
+                    
+                    
+                    		! sSetMappingRelation_C += {( i, j, k, iSMI_C) | iSMI_C = StringToElement(sSetMappingSet_C, formatString("(%e, %e, %e)", i, j, k), create: 0 ) };
+                    		spBodyLine := formatString("        sSetMappingRelation_%s += {( ", spCompoundSetName(eCompoundSet) );
+                    		for iIDP | iIDP <= pCompoundDimension(eCompoundSet) do
+                    			spBodyLine += formatString("%e, ", epDomainIndices(eCompoundSet, iIDP) );
+                    		endfor ;
+                    		spBodyLine += formatString( " %s ) | %s = StringToElement(sSetMappingSet_%s, ",	
+                    			spMappingSetIndex(eCompoundSet), spMappingSetIndex(eCompoundSet), spCompoundSetName(eCompoundSet) );
+                    		spBodyLine += "formatString(\"(%e" ;
+                    		for iIDP | iIDP <> '1' and iIDP <= pCompoundDimension(eCompoundSet) do
+                    			spBodyLine += ", %e" ;
+                    		endfor ;
+                    		spBodyLine += ")\"" ;
+                    		for iIDP | iIDP <= pCompoundDimension(eCompoundSet) do
+                    			spBodyLine += formatString(", %e", epDomainIndices( eCompoundSet, iIDP) );
+                    		endfor ;
+                    		spBodyLine += "), create: 0 ) } ;\n" ;
+                    		spBody += spBodyLine ;
+                    
+                    		spBodyLine := "endfor ; \n";
+                    		spBody += spBodyLine ;
+                    
+                    		me::SetAttribute( epProcDef_SetMappingRelation, 'body', spBody );
+                    		me::SetAttribute( epMappingSetRelation(eCompoundSet), 'definition', 
+                    			"prDef_SetMappingRelation_" + spCompoundSetName(eCompoundSet) );
                     	endblock ;
-                    endif ;
+                    !endif ;
+                    !
                 }
                 DeclarationSection Argument_Declaration {
                     ElementParameter eCompoundSet {
@@ -1143,9 +1211,6 @@ LibraryModule DeprecateCompoundSetUtilities {
             Procedure prCreateAssignmentTextCopyToShadow {
                 Arguments: (iDataIdentifier,spBodyLineForwardCopyProcedure);
                 Body: {
-                    !if iDataIdentifier = 'sIC' then
-                    !	DebuggerBreakpoint();
-                    !endif ;
                     spBodyLineForwardCopyProcedure := "" ;
                     sDataIdentifiersRequiringShadow += iDataIdentifier;
                     epShadowsDataIdentifiers(iDataIdentifier) := me::Create( 
@@ -1193,30 +1258,6 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	me::SetAttribute( epShadowsDataIdentifiers(iDataIdentifier), 'definition', "0=0" );
                     endif ;
                     
-                    !pNoCompoundIndices := fncNoCompoundIndices( iDataIdentifier );
-                    !if pNoCompoundIndices = 1 then
-                    !	epCompoundIndex := fncCompoundIndex( iDataIdentifier, 1 );
-                    !	spIterate := formatString("%e", epCompoundIndex );
-                    !	spIterCond := fncCompoundIterateCondition( epCompoundIndex );
-                    !else
-                    !	spIterate := "(";
-                    !	while loopCount <= pNoCompoundIndices do
-                    !		epCompoundIndex := fncCompoundIndex( iDataIdentifier, loopCount );
-                    !		if loopCount = pNoCompoundIndices then
-                    !			spIterate += formatString("%e,", epCompoundIndex );
-                    !		else
-                    !			spIterate += formatString("%e)", epCompoundIndex );
-                    !		endif ;
-                    !		if loopCount = 1 then
-                    !			spIterCond := fncCompoundIterateCondition( epCompoundIndex );
-                    !		else
-                    !			spIterCond += " and " + fncCompoundIterateCondition( epCompoundIndex );
-                    !		endif ;
-                    !	endwhile ;
-                    !	debuggerBreakpoint;
-                    !	raise error "NIY" ; ! Todo 
-                    !endif ;
-                    !spIterFull := spIterate + " | " + spIterCond ;
                     spBodyLineForwardCopyProcedure := "" ;
                     if epType = 'element parameter' then
                     	epFW := epElementParameterForwardMaps(IdentifierElementRange(iDataIdentifier));
@@ -1242,7 +1283,6 @@ LibraryModule DeprecateCompoundSetUtilities {
                     			! 	Endfor ;
                     			!       Shadow_indexed_set( indexedSet_2_indices ) := Shadow_help_subset;
                     			! endfor ;
-                    			!debuggerBreakpoint; ! need to develop actual code.
                     			spBodyLineForwardCopyProcedure := formatString("for %s do \n", spIndexDomainStr0 );
                     			spBodyLineForwardCopyProcedure += formatString("        empty %s ; \n",
                     				epHelperSubset( epSubsetOf ) );
@@ -1275,7 +1315,6 @@ LibraryModule DeprecateCompoundSetUtilities {
                     			epShadowsDataIdentifiers(iDataIdentifier), spIndexDomainStr1,  			
                     			iDataIdentifier, spIndexDomainStr2);
                     	endif ;
-                    	! debuggerBreakpoint; ! need to develop actual code.
                     elseif ( epType = 'variable' ) then
                     	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".basic", spIndexDomainStr1, spIndexDomainStr2 );
                     	spBodyLineForwardCopyProcedure := fncBodyLineForward( iDataIdentifier, ".level", spIndexDomainStr1, spIndexDomainStr2 );
@@ -1378,6 +1417,8 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		formatSTring("sSetMappingSet_%s", spCompoundSetName(eCompoundSet) ) );
                     	epMappingSetRelation( eCompoundSet ) := StringToElement( AllIdentifiers,
                     		formatSTring("sSetMappingRelation_%s", spCompoundSetName(eCompoundSet) ) );
+                    	epMappingSetBaseRelation( eCompoundSet ) := StringToElement( AllIdentifiers,
+                    		formatSTring("sSetMappingBaseRelation_%s", spCompoundSetName(eCompoundSet) ) );
                     	prWorkCreateMappingSet2(eCompoundSet);
                     endfor ;
                     
@@ -1397,9 +1438,6 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	spBodyForwardCopyProcedure += "! Copy compound data to Shadow data\n" ;
                     
                     	for iDataIdentifier do 
-                    !		if iDataIdentifier = 'DD' then
-                    !			DebuggerBreakpoint();
-                    !		endif ;
                     		if fncRequiresDataShadow( iDataIdentifier ) then
                     			prCreateAssignmentTextCopyToShadow( iDataIdentifier, spBodyLineForwardCopyProcedure );
                     			spBodyForwardCopyProcedure += spBodyLineForwardCopyProcedure ;
@@ -1490,31 +1528,68 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		'procedure', epSectionForwardCopyProcedures );
                     	spBody := "" ;
                     
-                    	spBodyLine := FormatString( "for %s do \n\n", spCompoundIndexName(eCompoundSet) ); 
-                    	spBody += spBodyLine ;
+                    	! When the compound set has a definition, then this definition is copied to the 
+                    	! base relation. So only if the compound set has no definition, we need a copy 
+                    	! procedure to fill the base relation.
+                    	if not attributeToString( eCompoundSet, 'definition' ) then
                     
-                    	block ! Assign values to the cache element parameters.
-                    		spBodyLine := "        ! Cache the components of tuple h in element parameters.\n" ; 
+                    		spBodyLine := formatString("sSetMappingBaseRelation_%s := {} ;\n", spCompoundSetName( eCompoundSet ) );
                     		spBody += spBodyLine ;
-                    		for iIDP do
-                    			spBodyLine := FormatString( "       %e := %s.%s ;\n", 
-                    				epElementParameterHelp(eCompoundSet,iIDP), 
-                    				spCompoundIndexName(eCompoundSet), spTag(eCompoundSet,iIDP) );			
+                    
+                    		spBodyLine := FormatString( "for %s do \n\n", spCompoundIndexName(eCompoundSet) ); 
+                    		spBody += spBodyLine ;
+                    
+                    		block ! Assign values to the cache element parameters.
+                    			spBodyLine := "        ! Cache the components of tuple h in element parameters.\n" ; 
                     			spBody += spBodyLine ;
+                    			for iIDP | iIDP <= pCompoundDimension(eCompoundSet) do
+                    				spBodyLine := FormatString( "        %e := %s.%s ;\n", 
+                    					epElementParameterHelp(eCompoundSet,iIDP), 
+                    					spCompoundIndexName(eCompoundSet), spTag(eCompoundSet,iIDP) );			
+                    				spBody += spBodyLine ;
+                    			endfor ;
+                    		endblock ;
+                    		spBodyLine := formatString("\n        sSetMappingBaseRelation_%s += { ( ", spCompoundSetName( eCompoundSet ) );
+                    		for iIDP | iIDP <= pCompoundDimension(eCompoundSet) do
+                    			spBodyLine += formatString("%e", epElementParameterHelp(eCompoundSet,iIDP) );
+                    			if iIDP = pCompoundDimension(eCompoundSet) then
+                    				spBodyLine += " ) } ; \n\n";
+                    			else
+                    				spBodyLine += ", ";
+                    			endif ;
                     		endfor ;
+                    		spBody += spBodyLine ;
+                    
+                    		spBodyLine := "endfor ;\n\n" ; 
+                    		spBody += spBodyLine ;
+                    
+                    	endif ;
+                    
+                    	block ! Start the second for loop.	
+                    		spBodyLine := FormatString( "for %s do \n\n", spCompoundIndexName(eCompoundSet) ); 
+                    		spBody += spBodyLine ;
+                    
+                    		block ! Assign values to the cache element parameters.
+                    			spBodyLine := "        ! Cache the components of tuple h in element parameters.\n" ; 
+                    			spBody += spBodyLine ;
+                    			for iIDP | iIDP <= pCompoundDimension(eCompoundSet) do
+                    				spBodyLine := FormatString( "        %e := %s.%s ;\n", 
+                    					epElementParameterHelp(eCompoundSet,iIDP), 
+                    					spCompoundIndexName(eCompoundSet), spTag(eCompoundSet,iIDP) );			
+                    				spBody += spBodyLine ;
+                    			endfor ;
+                    		endblock ;
                     	endblock ;
                     
                     	block ! Create the look alike element.
-                    		spBodyLine := "\n        ! Create an element that looks like a tuple, but is just a string and\n" ; 
+                    		spBodyLine := "\n        ! find the element that looks like a tuple, but is just a string.\n" ; 
                     		spBody += spBodyLine ;
-                    		spBodyLine := "        ! add this element to the set mapping set " + spCompoundSetName(eCompoundSet) + "\n"; 
-                    		spBody += spBodyLine ;
-                    		spBodyLine := formatString("        SetElementAdd(%e,%s,\n                formatString(\"(", 
-                    			epMappingSetSet(eCompoundSet),spMappingSetParameter(eCompoundSEt));
-                    		for iIDP do
+                    		spBodyLine := formatString("        epSM_%s := StringToElement( sSetMappingSet_%s, formatString(\"(", 
+                    			spCompoundSetName(eCompoundSet), spCompoundSetName(eCompoundSet) );
+                    		for iIDP | iIDP <= pCompoundDimension(eCompoundSet) do
                     			spBodyLine += "%e" ;
-                    			if iIDP = last(sIndexDomainPositions) then
-                    				spBodyLine += ")\"\n                        " ;
+                    			if iIDP = pCompoundDimension(eCompoundSet) then
+                    				spBodyLine += ")\"" ;
                     			else
                     				spBodyLine += ", " ;
                     			endif ;
@@ -1522,30 +1597,8 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		for iIDP do
                     			spBodyLine += formatString(", %e", epElementParameterHelp(eCompoundSet,iIDP));
                     		endfor ;
-                    		spBodyLine += "));\n\n" ;
+                    		spBodyLine += "), create: 0 );\n" ;
                     		spBody += spBodyLine ;
-                    	endblock ;
-                    
-                    	block ! Add N+1 dim tuple to the relation.
-                    		spBodyLine := "        ! Create a N+1 dim tuple and add this to the set mapping relation\n" ;
-                    		spBody += spBodyLine ;
-                    		spBodyLine := formatString("        %e += {(", epMappingSetRelation(eCompoundSet) );
-                    		for iIDP do
-                    			spBodyLine += formatString("%e,",epElementParameterHelp(eCompoundSet,iIDP));
-                    		endfor ;
-                    		spBodyLine += spMappingSetParameter(eCompoundSet) + ")};\n\n";
-                    		spBody += spBodyLine ;
-                    	endblock ;
-                    
-                    	block ! Fill in the element parameters that map the tags.
-                    		spBodyLine := "        ! Fill in the element parameters that map the tags - commented out, for the time being we are using definitions for these element parameters.\n" ;
-                    		spBody += spBodyLine ;
-                    		for iIDP do
-                    			spBodyLine := formatString("!        %e(%s) := %s ;\n",
-                    				epElementParameterForTag(eCompoundSet,iIDP), 
-                    				spMappingSetParameter(eCompoundSet), epElementParameterHelp(eCompoundSet,iIDP) );
-                    			spBody += spBodyLine ;
-                    		endfor ;
                     	endblock ;
                     
                     	block ! fill the relation between compound element and look alike element.
@@ -1753,9 +1806,15 @@ LibraryModule DeprecateCompoundSetUtilities {
                     
                     prWorkCreateShadowCompoundSet();
                     
-                    CaseFileLoad( spInputCaseFilename );
+                    block where case_contains_runtime_libraries := 1 ;
+                    	CaseFileLoad( spInputCaseFilename );
+                    endblock ;
+                    block where warning_not_initialized := off ;
+                    	update ;
+                    endblock ;
                     
                     apply( epProcForwardCopyProcedure );
+                    update ;
                     
                     prWorkSaveShadowToCase(spOutputCaseFilename);
                 }
@@ -1800,8 +1859,11 @@ LibraryModule DeprecateCompoundSetUtilities {
                     				( not epShadowsDataIdentifiers( IndexIdentifiers ) ) and 
                     				( not ( IndexIdentifiers in AllDefinedParameters ) ) and 
                     				( not ( IndexIdentifiers in AllDefinedSets       ) )     } ;
+                    sContentTypeForward += SectionIdentifiers( 'Set_Mapping_Declarations' );
                     AllCaseFileContentTypes += data { 'dcsu::sContentTypeForward' } ;
                     CurrentCaseFileContentType := 'dcsu::sContentTypeForward' ;
+                    !update Set_Mapping_Declarations ;
+                    !display sContentTypeForward ;
                     block where case_contains_runtime_libraries := 1, save_data_update_definitions := 'off' ;
                     	CaseFileSave( spOutputCaseFilename, CurrentCaseFileContentType );
                     endblock ;
@@ -1815,7 +1877,6 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
             Procedure prSelectInputShadowCase {
                 Body: {
-                    !DebuggerBreakpoint();
                     FileSelect(
                     	filename  :  spShadowCase, 
                     	directory :  spShadowFolder, 
@@ -1873,7 +1934,13 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	raise error "There are still compound root sets in your model - you cannot copy your data back yet." ;
                     endif ;
                     
-                    CaseFileLoad( spShadowCase );
+                    block where case_contains_runtime_libraries := 1;
+                    	CaseFileLoad( spShadowCase );
+                    endblock ;
+                    
+                    block where warning_not_initialized := off ;
+                    	update ;
+                    endblock ;
                     
                     prWorkGenerateBackward();
                     
