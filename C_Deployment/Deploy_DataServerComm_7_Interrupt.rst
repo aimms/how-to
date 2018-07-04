@@ -10,7 +10,7 @@ This answer takes you through the steps to interrupt a solve process or to inter
 Implementation
 --------------
 
-.. image::  Resources/AIMMSPRO/Deploy_DataServerComm_7_Interrupt/Images/QueuesBetweenDataAndServerSession.png
+.. image::  ../Resources/AIMMSPRO/Deploy_DataServerComm_7_Interrupt/Images/QueuesBetweenDataAndServerSession.png
 
 Interrupting the server session is very direct and can be done by simply calling the AIMMS PRO library procedure, ``pro::client::StopExecution`` . However, you will need to know:
 
@@ -39,11 +39,11 @@ Finally, to allow activate this procedure, we link this procedure to a new butto
 
 Now, the user interface when the problem is being solved looks as follows.
 
-.. image::  Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB07_WebUI_screen.PNG 
+.. image::  ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB07_WebUI_screen.PNG 
             
-..            Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB07_WebUI_screen.PNG
+..            ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB07_WebUI_screen.PNG
 
-The example AIMMS project with the above demonstrated procedures can be downloaded from :download:`8. Flow Shop - Interrupt <Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/8. Flow Shop - Interrupt.zip>`.
+The example AIMMS project with the above demonstrated procedures can be downloaded from :download:`8. Flow Shop - Interrupt <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/8. Flow Shop - Interrupt.zip>`.
 
 Summary
 -------
@@ -56,4 +56,4 @@ Further reading
 An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided `here <https://how-to.aimms.com/Deploy_DataServerComm_8_PassNewData.html>`_ .
 
 
-.. include:: includes/form.def
+.. include:: ../includes/form.def

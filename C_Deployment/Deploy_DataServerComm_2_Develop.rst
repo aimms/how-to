@@ -4,7 +4,7 @@ How to make an AIMMS project flexible to be used in both the AIMMS IDE and on AI
 After publishing an app on the AIMMS PRO server, it is common to continue development of that application for updates using the AIMMS IDE. 
 When we test our app from within the AIMMS IDE, we get the following dialog:
 
-.. image:: Resources/AIMMSPRO/FlexibleDevelopment/Images/useprosession.PNG
+.. image:: ../Resources/AIMMSPRO/FlexibleDevelopment/Images/useprosession.PNG
 	:align: center
 
 .. this image should be centered, but that is CSS properties for now. 
@@ -43,8 +43,8 @@ We change the body of the ``prSolve`` procedure by replacing the test ``not Proj
 		
 The ``pro::DelegateToServer`` statement is executed only if the current AIMMS instance is connected to an AIMMS PRO server. If not, it is skipped and the remaining procedure is executed in the AIMMS IDE. This way, we avoid the annoying dialog mentioned above, but still enable `AIMMS PRO debugging <https://manual.aimms.com/pro/2/en/topic/debugging-pro-enabled-projects>`_ when needed.
 
-The AIMMS project for running Flowshop example can be downloaded from: :download:`3. Flow Shop - Enable development testing <Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/3. Flow Shop - Enable development testing.zip>`.
+The AIMMS project for running Flowshop example can be downloaded from: :download:`3. Flow Shop - Enable development testing <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/3. Flow Shop - Enable development testing.zip>`.
 
-The next article in this AIMMS PRO series shows how to keep the end user interface active while a solve procedure is in process. Read `How to keep the AIMMS WebUI interactive while a solve process is running in the background?  <https://how-to.aimms.com/Deploy_DataServerComm_3_RemoveVeil.html>`_
+The next article in this AIMMS PRO series shows how to keep the end user interface active while a solve procedure is in process. Read `How to keep the AIMMS WebUI interactive while a solve process is running in the background?  <https://how-to.aimms.com/C_Deployement/Deploy_DataServerComm_3_RemoveVeil.html>`_
 
-.. include:: includes/form.def
+.. include:: ../includes/form.def

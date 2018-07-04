@@ -3,7 +3,7 @@ How to Handle the Deprecation of Compound sets
 
 :author: AIMMS Customer Support Team.
 
-.. note:: This document and corresponding AIMMS :download:`project <Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` with running example and utility library (prefix dcsu) is actively being worked on. Your timely feedback is much appreciated as working your feedback may help others facing the same problem.  Thanks, AIMMS Customer Support Team.
+.. note:: This document and corresponding AIMMS :download:`project <../Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` with running example and utility library (prefix dcsu) is actively being worked on. Your timely feedback is much appreciated as working your feedback may help others facing the same problem.  Thanks, AIMMS Customer Support Team.
 
 
 
@@ -150,7 +150,7 @@ Obviously, this conversion procedure should not overlook the need to adapt the m
 
 The overall deprecation procedure is depicted below:
 
-.. image::  Resources/Other/CompoundSets/Images/DeprecateCompoundSets.png 
+.. image::  ../Resources/Other/CompoundSets/Images/DeprecateCompoundSets.png 
 
 
 
@@ -216,7 +216,7 @@ In this conversion step a set mapping is created for each compound set in your m
 
 The model explorer should now look something like this:
 
-.. image::  Resources/Other/CompoundSets/Images/SetMappingDeclarations.png 
+.. image::  ../Resources/Other/CompoundSets/Images/SetMappingDeclarations.png 
 
 .. caution:: Using Copy/Paste on the section ``Set Mapping Declarations`` of the runtime library might seem simpler than the sub steps 2 - 4 above. However, when you use copy/paste, the copied section will still contain references to the runtime indexes. A subsequent restart of your application will have compilation errors as the compound indexes still referencing the runtime library are not present upon first compilation.
 
@@ -397,4 +397,4 @@ Further information
 
 To obtain further information on the deprecation of compound sets, please send an e-mail to support@aimms.com or fill in the form, including your e-mail address, below:
 
-.. include:: includes/form.def
+.. include:: ../includes/form.def

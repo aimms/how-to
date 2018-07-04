@@ -32,7 +32,8 @@ import os
 extensions = ['sphinx.ext.doctest',
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
-    'sphinx.ext.githubpages']
+    'sphinx.ext.githubpages',
+	'sphinx.builders.linkcheck']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -153,7 +154,7 @@ html_sidebars = {
     ]
 }
 html_favicon = "_static/favicon.png"
-rst_prolog = "\n.. include:: special.rst\n"
+#rst_prolog = "\n.. include:: ../special.rst\n"
 
 # -- Options for HTMLHelp output ------------------------------------------
 
@@ -214,5 +215,6 @@ texinfo_documents = [
 # if builds on GitLab (a Linux machine), force todos not to be shown :)
 if os.name != 'nt':
 	todo_include_todos = False
-
-
+else:
+	#To check any broken links 
+	nitpicky = True

@@ -63,37 +63,37 @@
 	</style>
 	
 	<div id="content">
-		<a href="C_Language.html">
+		<a href="C_Language/index.html">
 			<div class="box">
 				<h1 align="center">Language</h1>
 				<p>The AIMMS programming Language in details</p>
 			</div>
 		</a>
-		<a href="C_Deployment.html">
+		<a href="C_Deployment/index.html">
 			<div class="box">
 				<h1 align="center">Deployment</h1>
 				<p>PRO and Cloud</p>
 			</div>
 		</a>
-		<a href="C_Mathematical Modeling.html">
+		<a href="C_Mathematical_Modeling/index.html">
 			<div class="box">
 				<h1 align="center">Modeling</h1>
 				<p>Mathematical modeling and major Optimization problems solved in AIMMS</p>
 			</div>
 		</a>
-		<a href="C_Solvers.html">
+		<a href="C_Solvers/index.html">
 			<div class="box">
 				<h1 align="center">Solvers</h1>
 				<p>What you always wanted about solvers in AIMMS</p>
 			</div>
 		</a>
-		<a href="C_UI.html">
+		<a href="C_UI/index.html">
 			<div class="box">
 				<h1 align="center">UI</h1>
 				<p>From WebUI to WinUI</p>
 			</div>
 		</a>
-		<a href="C_Other.html">
+		<a href="C_Other/index.html">
 			<div class="box">
 				<h1 align="center">Other</h1>
 				<p>Licensing, connectivity, AIMMS policies...</p>
@@ -110,9 +110,9 @@ Table Of Content
    :maxdepth: 2
    :titlesonly:
 
-   C_Language
-   C_Deployment
-   C_Mathematical Modeling
-   C_Solvers
-   C_UI
-   C_Other
+   C_Language/index
+   C_Deployment/index
+   C_Mathematical_Modeling/index
+   C_Solvers/index
+   C_UI/index
+   C_Other/index

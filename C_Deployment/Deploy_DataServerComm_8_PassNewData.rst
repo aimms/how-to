@@ -6,14 +6,14 @@ Communicate data changes from the data session to the server session
 Introduction
 ------------
 
-In previous articles it was shown how to communicate `progress <https://how-to.aimms.com/Deploy_DataServerComm_5_Progress.html>`_ and `data <https://how-to.aimms.com/RetrieveIntermediateResults.html>`_, from the server session to the data session. In addition, we can `interrupt <https://how-to.aimms.com/Deploy_DataServerComm_7_Interrupt.html>`_ by sending a signal from the data session to the server session.  In this article we will send data from the data session to a running server session. 
+In previous articles it was shown how to communicate `progress <https://how-to.aimms.com/C_Deployment/Deploy_DataServerComm_5_Progress.html>`_ and `data <https://how-to.aimms.com/RetrieveIntermediateResults.html>`_, from the server session to the data session. In addition, we can `interrupt <https://how-to.aimms.com/Deploy_DataServerComm_7_Interrupt.html>`_ by sending a signal from the data session to the server session.  In this article we will send data from the data session to a running server session. 
 
 Use case: We continue the Flowshop application. Though, the progress information obtained from the server is very interesting, we decide to await for a long period the solve and do not want to waste computation time with progress or incumbent updates, as we do not view them anyway. Therefore, we switch the progress and incumbent updates off in the server session.
 
 Implementation
 --------------
 
-.. image:: Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/DataChangesToServerSession.png
+.. image:: ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/DataChangesToServerSession.png
 
 Once a solver session is started, you can send additional information using ``pro::DelegateToServer()``, provided you pass it the queue it already is listening to in the call. When ``pro::DelegateToServer`` is passed a message queue it will not start a new job, but add the enclosing procedure, here ``prPassProgressSupplied``, as a message to the existing queue. This lets the indicated procedure be run as part of the current job.  As you know, a job running on a server is essentially an AIMMS procedure running. In order to let the message start immediately, it should be given priority.
 
@@ -47,9 +47,9 @@ Note the use of the flag ``pro::PROMFLAG_PRIORITY`` ; this flag indicates that t
 
 The user interface when the problem is being solved now looks as follows:
 
-.. image::  Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB08_WebUI_screen.png 
+.. image::  ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB08_WebUI_screen.png 
 
-The AIMMS project that does just this, can be downloaded from: :download:`9. Flow Shop - Control <Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/9. Flow Shop - Control.zip>`.
+The AIMMS project that does just this, can be downloaded from: :download:`9. Flow Shop - Control <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/9. Flow Shop - Control.zip>`.
 
 Summary
 -------
@@ -67,5 +67,5 @@ Further reading
 Information about `AIMMS PRO <https://documentation.aimms.com/pro/index.html>`_
 
 
-.. include:: includes/form.def
+.. include:: ../includes/form.def
  
