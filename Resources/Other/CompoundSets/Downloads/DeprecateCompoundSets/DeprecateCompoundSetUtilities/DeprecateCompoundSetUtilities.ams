@@ -1806,7 +1806,9 @@ LibraryModule DeprecateCompoundSetUtilities {
                     
                     prWorkCreateShadowCompoundSet();
                     
-                    CaseFileLoad( spInputCaseFilename );
+                    block where case_contains_runtime_libraries := 1 ;
+                    	CaseFileLoad( spInputCaseFilename );
+                    endblock ;
                     block where warning_not_initialized := off ;
                     	update ;
                     endblock ;
@@ -1860,6 +1862,8 @@ LibraryModule DeprecateCompoundSetUtilities {
                     sContentTypeForward += SectionIdentifiers( 'Set_Mapping_Declarations' );
                     AllCaseFileContentTypes += data { 'dcsu::sContentTypeForward' } ;
                     CurrentCaseFileContentType := 'dcsu::sContentTypeForward' ;
+                    !update Set_Mapping_Declarations ;
+                    !display sContentTypeForward ;
                     block where case_contains_runtime_libraries := 1, save_data_update_definitions := 'off' ;
                     	CaseFileSave( spOutputCaseFilename, CurrentCaseFileContentType );
                     endblock ;
@@ -1930,7 +1934,10 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	raise error "There are still compound root sets in your model - you cannot copy your data back yet." ;
                     endif ;
                     
-                    CaseFileLoad( spShadowCase );
+                    block where case_contains_runtime_libraries := 1;
+                    	CaseFileLoad( spShadowCase );
+                    endblock ;
+                    
                     block where warning_not_initialized := off ;
                     	update ;
                     endblock ;
