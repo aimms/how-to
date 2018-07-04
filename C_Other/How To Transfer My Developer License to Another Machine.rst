@@ -1,25 +1,25 @@
-.. |doc| image:: Images/icons/Documentation.png
-.. |aimmsIcon| image:: Images/icons/favicon.png
+.. |doc| image:: ../Images/icons/Documentation.png
+.. |aimmsIcon| image:: ../Images/icons/favicon.png
 			:scale: 15 %
 
-.. |aimms| image:: Images/aimms-logo-s-rgb.png
+.. |aimms| image:: ../Images/aimms-logo-s-rgb.png
 				:scale: 10 %
 				:target: https://aimms.com/
-.. |LicenseConfigurationLocation| image:: Images/LicenseConfigurationLocation.png
-.. |LicenseDeactivation| image:: Images/LicenseDeactivation.png
-.. |SuccessfulDeactivation| image:: Images/SuccessfulDeactivation.png
-.. |NoValidLicense| image:: Images/NoValidLicense.png
-.. |InstallAimmsLicense| image:: Images/InstallAimmsLicense.png
-.. |InputLicense| image:: Images/InputLicense.png
-.. |LicenseProtection| image:: Images/LicenseProtection.png
-.. |InputActivationCode| image:: Images/InputActivationCode.png
-.. |NodelockProtection| image:: Images/NodelockProtection.png
-.. |SuccessfulActivation| image:: Images/SuccessfulActivation.png
+.. |LicenseConfigurationLocation| image:: ../Images/LicenseConfigurationLocation.png
+.. |LicenseDeactivation| image:: ../Images/LicenseDeactivation.png
+.. |SuccessfulDeactivation| image:: ../Images/SuccessfulDeactivation.png
+.. |NoValidLicense| image:: ../Images/NoValidLicense.png
+.. |InstallAimmsLicense| image:: ../Images/InstallAimmsLicense.png
+.. |InputLicense| image:: ../Images/InputLicense.png
+.. |LicenseProtection| image:: ../Images/LicenseProtection.png
+.. |InputActivationCode| image:: ../Images/InputActivationCode.png
+.. |NodelockProtection| image:: ../Images/NodelockProtection.png
+.. |SuccessfulActivation| image:: ../Images/SuccessfulActivation.png
 
 				
 				
 .. This text will not be shown 				
-	.. figure:: Images/aimms-logo-s-rgb.png
+	.. figure:: ../Images/aimms-logo-s-rgb.png
 					:scale: 70 %
 					:align: center
 					:target: https://aimms.com/
@@ -87,4 +87,4 @@ There may be situations where you will need to use |aimms| on a different machin
 :Author: Khang Bui
 :Version: Last Updated March 04,2018
 
-.. include:: includes/form.def
+.. include:: ../includes/form.def

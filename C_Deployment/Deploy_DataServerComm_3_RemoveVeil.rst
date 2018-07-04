@@ -9,7 +9,7 @@ While solving decision problems using the AIMMS WebUI and PRO platform, the brow
 
 .. Please review the last line of the above paragraph
 
-.. image:: Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/Solve.gif
+.. image:: ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/Solve.gif
 
 The Flowshop Problem As Running Example
 ---------------------------------------
@@ -36,9 +36,9 @@ We can keep the WebUI session active, or in other words - remove the veil by sim
 
 This modification in the waitForCompletion argument reduces the inactive time of the browser window during a solve session drastically. There still could be inactive periods, especially during the initialization of the background procedures. The previously illustrated example will now look as follows. 
 
-.. image:: Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/NoVeil.gif
+.. image:: ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/NoVeil.gif
 
-The example AIMMS project can be downloaded from :download:`Flow Shop - No Veil <Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/4. Flow Shop - No Veil.zip>`
+The example AIMMS project can be downloaded from :download:`Flow Shop - No Veil <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/4. Flow Shop - No Veil.zip>`
 
 Summary
 -------
@@ -48,13 +48,13 @@ Perhaps a lot to do about almost nothing; but by simply changing the argument wa
 Next reading
 ------------
 
-**Oops, I see a problem.**  The results are pushed back without any notification – suddenly data is changed on screen.  How can we give control back to the end-users, such that they can determine themselves when the results are shown? See `How to load the results of a server session at a convenient moment <https://how-to.aimms.com/Deploy_DataServerComm_4_LoadResults.html>`_ 
+**Oops, I see a problem.**  The results are pushed back without any notification – suddenly data is changed on screen.  How can we give control back to the end-users, such that they can determine themselves when the results are shown? See :doc:`Deploy_DataServerComm_4_LoadResults`
 
  
 
 
 
-.. include:: includes/form.def
+.. include:: ../includes/form.def
 
 
 

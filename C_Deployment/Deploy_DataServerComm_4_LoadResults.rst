@@ -99,9 +99,9 @@ We are executing the predefined procedure ``pro::session::LoadResultsCallBack`` 
 
 We want to control the visibility of ``BtnLoadResults`` because it makes sense for it to show up only when results are available to load. This appearance acts as a notification for the end user that results are available. The user interface when the results are available, but not yet downloaded looks as follows:
 
-.. image::  Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB05_WebUI_screen.png 
+.. image::  ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB05_WebUI_screen.png 
 
-The AIMMS project that does just this, can be downloaded from: :download:`5. Flow Shop - Load Results <Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/5. Flow Shop - Load Results.zip>`.
+The AIMMS project that does just this, can be downloaded from: :download:`5. Flow Shop - Load Results <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/5. Flow Shop - Load Results.zip>`.
 
 Summary
 -------
@@ -113,13 +113,12 @@ Further opportunities
 
 There are now several opportunities for further improvement:
 
-#. End users may want to keep track of the progress of the solution process, especially the gap is interesting. In `How to display solve progress info in WebUI  <https://how-to.aimms.com/Deploy_DataServerComm_5_Progress.html>`_ we show how to do this.
+#. End users may want to keep track of the progress of the solution process, especially the gap is interesting. In :doc:`Deploy_DataServerComm_5_Progress` we show how to do this.
    
-#. The contents of intermediate solutions can be interesting for the data session at hand. In `How to retrieve intermediate results from a server session to the data session <https://how-to.aimms.com/RetrieveIntermediateResults.html>`_ we show how to copy selected intermediate results from the server session to the data session.
+#. The contents of intermediate solutions can be interesting for the data session at hand. In :doc:`Deploy_DataServerComm_6_Retrieve` we show how to copy selected intermediate results from the server session to the data session.
 
-#. Once the solution is "good enough for now", the end user may want to abort the server session.  In `How to interrupt a solve while WebUI is active during a solve <https://how-to.aimms.com/StopSolveWithoutVeil.html>`_ we will show how to interrupt the server session.
+#. Once the solution is "good enough for now", the end user may want to abort the server session.  In :doc:`Deploy_DataServerComm_7_Interrupt` we will show how to interrupt the server session.
 
 
-
-.. include:: includes/form.def
+.. include:: ../includes/form.def
  
