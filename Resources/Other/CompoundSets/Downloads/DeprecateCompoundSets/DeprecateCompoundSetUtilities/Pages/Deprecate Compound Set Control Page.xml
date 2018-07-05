@@ -177,7 +177,7 @@
 		<LineColor RGB="#000000" />
 	</PageObject>
 	<PageObject Type="Rectangle">
-		<Location top="204" left="54" bottom="534" right="1050" />
+		<Location top="204" left="54" bottom="534" right="990" />
 		<Shape>Open</Shape>
 		<FillColor RGB="#ffffff" />
 		<LineColor RGB="#000000" />
@@ -343,7 +343,7 @@
 		<LineColor RGB="#000000" />
 	</PageObject>
 	<PageObject Type="Rectangle">
-		<Location top="546" left="54" bottom="852" right="1050" />
+		<Location top="546" left="54" bottom="858" right="990" />
 		<Shape>Open</Shape>
 		<FillColor RGB="#ffffff" />
 		<LineColor RGB="#000000" />
@@ -356,7 +356,7 @@
 	</PageObject>
 	<PageObject Type="Selection Object">
 		<SelectionType>ListBox</SelectionType>
-		<Location top="60" left="54" bottom="114" right="1044" />
+		<Location top="60" left="54" bottom="120" right="990" />
 		<TabOrder>10</TabOrder>
 		<UseTabInObject>true</UseTabInObject>
 		<Font GUID="62A6991F-92A7-4A79-93EE-28097D0767CA" Name="Ariel10" />

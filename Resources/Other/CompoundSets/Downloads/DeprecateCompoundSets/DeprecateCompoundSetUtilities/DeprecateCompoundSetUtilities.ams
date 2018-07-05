@@ -12,13 +12,7 @@ LibraryModule DeprecateCompoundSetUtilities {
         Section Major_conversion_steps {
             Procedure prCreateSetMappingsCompoundSet {
                 Body: {
-                    !block
-                    	prIdentifyCompoundSets();
-                    	prWorkCreateSetMappingsCompoundSet();
-                    !onerror err do
-                    !	DialogMessage( errh::Message( err ));
-                    !	errh::MarkAsHandled(err);
-                    !endblock ;
+                    prWorkCreateSetMappingsCompoundSet();
                 }
                 ElementParameter err {
                     Range: errh::PendingErrors;

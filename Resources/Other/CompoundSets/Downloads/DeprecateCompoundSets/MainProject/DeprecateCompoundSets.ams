@@ -103,57 +103,64 @@ Model Main_DeprecateCompoundSets {
             epC := Element(C,5);
             epC2(i) := Element(C,ord(i)+3);
             siC(i) := { Element(c,ord(i)+5), Element(c,ord(i)) } ;
-            block where single_column_display := 1 ;
-            	write Running_example_input_declarations to file "inputval.txt" ;
-            	write md::Running_example_library_input_declarations to file "inputval.txt" in merge mode ;
-            	write md::EvenMoreIdentifiers to file "inputval.txt" in merge mode ;
-            endblock ;
-            !
+            
             md::p01(md::ie, md::i_f) := 1 onlyif ( uniform(11,19) > 16 );
             md::pcd(md::iEF) := round(uniform(11,19));
             
             md::emi::sAnimals := data { Monkey, Sparrow } ;
             md::emi::sFruits := data { Banana, Strawberry } ;
             md::emi::sFood := data { (Monkey, Banana), (Monkey, Strawberry), (Sparrow, Strawberry) };
+            
+            
+            
+            
+            
+            block where single_column_display := 1 ;
+            	write Running_example_input_declarations to file "inputval.txt" ;
+            	write md::Running_example_library_input_declarations to file "inputval.txt" in merge mode ;
+            	write md::EvenMoreIdentifiers to file "inputval.txt" in merge mode ;
+            endblock ;
         }
     }
-    Procedure MainInitialization {
-        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
-    }
-    Procedure PostMainInitialization {
-        Comment: {
-            "Add initialization statements here that require that the libraries are already initialized properly,
-            or add statements that require the Data Management module to be initialized."
+    Section Attic {
+        Procedure MainInitialization {
+            Comment: "Add initialization statements here that do NOT require any library being initialized already.";
         }
-    }
-    Procedure MainExecution {
-        Body: {
-            for IndexIdentifiers | IndexIdentifiers in Library_MoreData do
-            	spPre := dcsu::fncGetPrefixForIdentifier( IndexIdentifiers );
-            	display IndexIdentifiers, spPre, "-----------" ;
-            endfor ;
+        Procedure PostMainInitialization {
+            Comment: {
+                "Add initialization statements here that require that the libraries are already initialized properly,
+                or add statements that require the Data Management module to be initialized."
+            }
         }
-        StringParameter spPre;
-    }
-    Procedure PreMainTermination {
-        Body: {
-            return  1;
+        Procedure MainExecution {
+            Body: {
+                for IndexIdentifiers | IndexIdentifiers in Library_MoreData do
+                	spPre := dcsu::fncGetPrefixForIdentifier( IndexIdentifiers );
+                	display IndexIdentifiers, spPre, "-----------" ;
+                endfor ;
+            }
+            StringParameter spPre;
         }
-        Comment: {
-            "Add termination statements here that require all libraries to be still alive.
-            Return 1 if you allow the termination sequence to continue.
-            Return 0 if you want to cancel the termination sequence."
+        Procedure PreMainTermination {
+            Body: {
+                return  1;
+            }
+            Comment: {
+                "Add termination statements here that require all libraries to be still alive.
+                Return 1 if you allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence."
+            }
         }
-    }
-    Procedure MainTermination {
-        Body: {
-            return 1;
-        }
-        Comment: {
-            "Add termination statements here that do not require all libraries to be still alive.
-            Return 1 to allow the termination sequence to continue.
-            Return 0 if you want to cancel the termination sequence.
-            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        Procedure MainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that do not require all libraries to be still alive.
+                Return 1 to allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence.
+                It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+            }
         }
     }
 }
