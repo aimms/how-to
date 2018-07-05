@@ -105,6 +105,15 @@ LibraryModule DeprecateCompoundSetUtilities {
                 }
                 Parameter pCompoundSetNo;
             }
+            Procedure prCheckFormatDefinitionsCompoundSets {
+                Body: {
+                    for iCompoundSetNo do
+                    	if attributeToString( epFoundCompoundSets(iCompoundSetNo), 'definition' ) then
+                    		IdentifierShowAttributes(epFoundCompoundSets(iCompoundSetNo));
+                    	endif ;
+                    endfor ;
+                }
+            }
         }
         Section create_compound_set_mappings {
             Procedure prEnourageToCopySection {
@@ -160,7 +169,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     
                     
                     if not epParent then
-                    	if epID in ( AllSets + AllIndices + AllParameters + AllVariables + AllConstraints) then
+                    	if epID in ( AllSets + AllIndices + AllParameters + AllVariables + AllConstraints ) then
                     		raise warning "unable to determine parent identifier of " + epID ;
                     	endif ;
                     endif ;
@@ -212,11 +221,6 @@ LibraryModule DeprecateCompoundSetUtilities {
         }
     }
     Section PrivateSection {
-        Procedure prPageOpenDeprecateCompoundSetUtilities {
-            Body: {
-                prPageOpenCopyDataFolderArea();
-            }
-        }
         Section Internal_utilities {
             ElementParameter epSectionCompoundSetMappingDeclarations {
                 Range: AllIdentifiers;
@@ -1153,6 +1157,11 @@ LibraryModule DeprecateCompoundSetUtilities {
                     StringParameter spBody;
                 }
             }
+            Procedure prPageOpenDeprecateCompoundSetUtilities {
+                Body: {
+                    prPageOpenCopyDataFolderArea();
+                }
+            }
             Function fncElementParameterForTagDefinition {
                 Arguments: (eCompoundSet,iIDP);
                 Range: string;
@@ -1220,6 +1229,10 @@ LibraryModule DeprecateCompoundSetUtilities {
                 ElementParameter epCompoundSetShadowRuntimeLibrary {
                     Range: AllIdentifiers;
                     InitialData: '';
+                }
+                StringParameter spShadowName {
+                    IndexDomain: IndexIdentifiers;
+                    Property: NoSave;
                 }
             }
             Function fncBodyLineForward {
@@ -1698,6 +1711,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		endif ;
                     	endif ;
                     endblock ;
+                    prIdentifyCompoundSets();
                 }
             }
             StringParameter spInputCaseFilename {
@@ -2066,6 +2080,9 @@ LibraryModule DeprecateCompoundSetUtilities {
             Procedure PostLibraryInitialization {
                 Body: {
                     AllCasefileContentTypes += 'dcsu::sIdentifiersStartup' ;
+                    
+                    !spShadowName(IndexIdentifiers) := 
+                    !	FindReplaceStrings( FormatString("%e", IndexIdentifiers), "::", "_" );
                 }
                 Comment: {
                     "Add initialization statements here that require another library to be initialized already,

@@ -91,22 +91,30 @@ Model Main_DeprecateCompoundSets {
     }
     Procedure generateInputcase {
         Body: {
-            !S := ElementRange( 1, 5, prefix:"s" );
-            !T := ElementRange( 1, 4, prefix:"t" );
-            !U := ElementRange( 1, 3, prefix:"u" );
-            !R := { (i,j,k) | mod(ord(i)+ord(j)+ord(k),3) = 1 };
-            !!!C := { (i,j,k) | (i,j,k) in R };
-            !D := { h | mod(ord(h),3) = 0 } ;
-            !DD := { h | mod(ord(h),3) = 1 } ;
-            !P(h) := ord(h);
-            !PD(g) := ord(g);
-            !epC := Element(C,5);
-            !epC2(i) := Element(C,ord(i)+3);
-            !siC(i) := { Element(c,ord(i)+5), Element(c,ord(i)) } ;
-            !block where single_column_display := 1 ;
-            !	write Running_example_input_declarations to file "inputval.txt" ;
-            !endblock ;
+            S := ElementRange( 1, 5, prefix:"s" );
+            T := ElementRange( 1, 4, prefix:"t" );
+            U := ElementRange( 1, 3, prefix:"u" );
+            R := { (i,j,k) | mod(ord(i)+ord(j)+ord(k),3) = 1 };
+            !!C := { (i,j,k) | (i,j,k) in R };
+            D := { h | mod(ord(h),3) = 0 } ;
+            DD := { h | mod(ord(h),3) = 1 } ;
+            P(h) := ord(h);
+            PD(g) := ord(g);
+            epC := Element(C,5);
+            epC2(i) := Element(C,ord(i)+3);
+            siC(i) := { Element(c,ord(i)+5), Element(c,ord(i)) } ;
+            block where single_column_display := 1 ;
+            	write Running_example_input_declarations to file "inputval.txt" ;
+            	write md::Running_example_library_input_declarations to file "inputval.txt" in merge mode ;
+            	write md::EvenMoreIdentifiers to file "inputval.txt" in merge mode ;
+            endblock ;
             !
+            md::p01(md::ie, md::i_f) := 1 onlyif ( uniform(11,19) > 16 );
+            md::pcd(md::iEF) := round(uniform(11,19));
+            
+            md::emi::sAnimals := data { Monkey, Sparrow } ;
+            md::emi::sFruits := data { Banana, Strawberry } ;
+            md::emi::sFood := data { (Monkey, Banana), (Monkey, Strawberry), (Sparrow, Strawberry) };
         }
     }
     Procedure MainInitialization {
