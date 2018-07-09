@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Page Version="4000" TimeStamp="2018-05-28 13:23:26">
+<Page Version="4000" TimeStamp="2018-07-05 08:07:23">
 	<PageEditSize Type="Inherited" />
 	<ProjectUUID>20FA164F-37C1-49B1-AB6C-A8AF79AF40F1</ProjectUUID>
 	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
@@ -8,8 +8,8 @@
 		<EntryProcedure>dcsu::prPageOpenDeprecateCompoundSetUtilities</EntryProcedure>
 	</Action>
 	<PageObject Type="Button">
-		<Location top="24" left="54" bottom="78" right="264" />
-		<TabOrder>5</TabOrder>
+		<Location top="132" left="402" bottom="186" right="612" />
+		<TabOrder>6</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Create Set Mapping Declarations"</Title>
@@ -23,7 +23,7 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="372" left="384" bottom="450" right="624" />
+		<Location top="474" left="396" bottom="504" right="636" />
 		<TabOrder>1</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
@@ -38,14 +38,14 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Rectangle">
-		<Location top="306" left="66" bottom="456" right="978" />
+		<Location top="402" left="66" bottom="516" right="978" />
 		<Shape>Open</Shape>
 		<FillColor RGB="#ffffff" />
 		<LineColor RGB="#000000" />
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="312" left="78" bottom="366" right="342" />
-		<TabOrder>7</TabOrder>
+		<Location top="432" left="84" bottom="462" right="348" />
+		<TabOrder>8</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Select 'from' data folder"</Title>
@@ -59,9 +59,9 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="378" left="78" bottom="438" right="342" />
-		<TabOrder>12</TabOrder>
-		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
+		<Location top="474" left="84" bottom="504" right="348" />
+		<TabOrder>14</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -72,8 +72,8 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="318" left="690" bottom="372" right="954" />
-		<TabOrder>17</TabOrder>
+		<Location top="426" left="690" bottom="456" right="954" />
+		<TabOrder>19</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Select 'to' shadow data folder"</Title>
@@ -87,9 +87,9 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="378" left="690" bottom="438" right="954" />
-		<TabOrder>18</TabOrder>
-		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
+		<Location top="474" left="690" bottom="504" right="954" />
+		<TabOrder>20</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -100,8 +100,8 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="156" left="72" bottom="210" right="336" />
-		<TabOrder>8</TabOrder>
+		<Location top="300" left="84" bottom="330" right="348" />
+		<TabOrder>9</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Select a single input case"</Title>
@@ -115,8 +115,8 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="156" left="690" bottom="210" right="954" />
-		<TabOrder>15</TabOrder>
+		<Location top="300" left="690" bottom="330" right="954" />
+		<TabOrder>17</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Output case file name"</Title>
@@ -130,9 +130,9 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="222" left="72" bottom="282" right="336" />
-		<TabOrder>11</TabOrder>
-		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
+		<Location top="342" left="84" bottom="372" right="348" />
+		<TabOrder>13</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -143,9 +143,9 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="228" left="690" bottom="288" right="954" />
-		<TabOrder>20</TabOrder>
-		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
+		<Location top="342" left="690" bottom="372" right="954" />
+		<TabOrder>22</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -156,7 +156,7 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="198" left="384" bottom="276" right="624" />
+		<Location top="342" left="396" bottom="372" right="636" />
 		<TabOrder>3</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
@@ -171,25 +171,25 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Rectangle">
-		<Location top="144" left="66" bottom="294" right="978" />
+		<Location top="276" left="66" bottom="390" right="978" />
 		<Shape>Open</Shape>
 		<FillColor RGB="#ffffff" />
 		<LineColor RGB="#000000" />
 	</PageObject>
 	<PageObject Type="Rectangle">
-		<Location top="96" left="54" bottom="468" right="1050" />
+		<Location top="204" left="54" bottom="534" right="990" />
 		<Shape>Open</Shape>
 		<FillColor RGB="#ffffff" />
 		<LineColor RGB="#000000" />
 	</PageObject>
 	<PageObject Type="Text">
-		<Location top="108" left="72" bottom="138" right="336" />
+		<Location top="228" left="66" bottom="258" right="330" />
 		<StaticText>Forward - creating shadow cases.</StaticText>
 		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
 		<TextColor RGB="#000000" />
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="756" left="384" bottom="834" right="624" />
+		<Location top="792" left="396" bottom="822" right="636" />
 		<TabOrder>2</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
@@ -204,14 +204,14 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Rectangle">
-		<Location top="690" left="66" bottom="840" right="978" />
+		<Location top="726" left="66" bottom="840" right="978" />
 		<Shape>Open</Shape>
 		<FillColor RGB="#ffffff" />
 		<LineColor RGB="#000000" />
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="696" left="78" bottom="750" right="342" />
-		<TabOrder>6</TabOrder>
+		<Location top="744" left="84" bottom="774" right="348" />
+		<TabOrder>7</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Select 'from' shadow folder"</Title>
@@ -225,9 +225,9 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="762" left="78" bottom="822" right="342" />
-		<TabOrder>13</TabOrder>
-		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
+		<Location top="792" left="84" bottom="822" right="348" />
+		<TabOrder>15</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -238,8 +238,8 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="702" left="690" bottom="756" right="954" />
-		<TabOrder>16</TabOrder>
+		<Location top="744" left="690" bottom="774" right="954" />
+		<TabOrder>18</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Select 'to' atomic data folder"</Title>
@@ -253,9 +253,9 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="762" left="690" bottom="822" right="954" />
-		<TabOrder>19</TabOrder>
-		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
+		<Location top="792" left="690" bottom="822" right="954" />
+		<TabOrder>21</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -266,8 +266,8 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="540" left="72" bottom="594" right="336" />
-		<TabOrder>9</TabOrder>
+		<Location top="624" left="84" bottom="654" right="348" />
+		<TabOrder>11</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Select a single input shadow case"</Title>
@@ -281,8 +281,8 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="540" left="690" bottom="594" right="954" />
-		<TabOrder>14</TabOrder>
+		<Location top="624" left="690" bottom="654" right="954" />
+		<TabOrder>16</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Output atomic case file name"</Title>
@@ -296,9 +296,9 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="606" left="72" bottom="666" right="336" />
-		<TabOrder>10</TabOrder>
-		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
+		<Location top="666" left="84" bottom="696" right="348" />
+		<TabOrder>12</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -309,9 +309,9 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="612" left="690" bottom="672" right="954" />
-		<TabOrder>21</TabOrder>
-		<Font GUID="E5BE1C81-E06D-4CC4-9F6D-4812F2203529" Name="default normal" />
+		<Location top="666" left="690" bottom="696" right="954" />
+		<TabOrder>23</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Value</Layout>
@@ -322,7 +322,7 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="582" left="384" bottom="660" right="624" />
+		<Location top="666" left="396" bottom="696" right="636" />
 		<TabOrder>4</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
@@ -337,27 +337,27 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Rectangle">
-		<Location top="528" left="66" bottom="678" right="978" />
+		<Location top="606" left="66" bottom="708" right="978" />
 		<Shape>Open</Shape>
 		<FillColor RGB="#ffffff" />
 		<LineColor RGB="#000000" />
 	</PageObject>
 	<PageObject Type="Rectangle">
-		<Location top="480" left="54" bottom="852" right="1050" />
+		<Location top="546" left="54" bottom="858" right="990" />
 		<Shape>Open</Shape>
 		<FillColor RGB="#ffffff" />
 		<LineColor RGB="#000000" />
 	</PageObject>
 	<PageObject Type="Text">
-		<Location top="492" left="72" bottom="522" right="594" />
+		<Location top="564" left="66" bottom="594" right="588" />
 		<StaticText>Backward - creating cases with original identifiers without compound data</StaticText>
 		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
 		<TextColor RGB="#000000" />
 	</PageObject>
 	<PageObject Type="Selection Object">
 		<SelectionType>ListBox</SelectionType>
-		<Location top="24" left="294" bottom="72" right="1050" />
-		<TabOrder>8</TabOrder>
+		<Location top="60" left="54" bottom="120" right="990" />
+		<TabOrder>10</TabOrder>
 		<UseTabInObject>true</UseTabInObject>
 		<Font GUID="62A6991F-92A7-4A79-93EE-28097D0767CA" Name="Ariel10" />
 		<TextShown>ElementName</TextShown>
@@ -368,12 +368,34 @@
 			<Identifier>dcsu::sCompoundSets(dcsu::sCompoundSets)</Identifier>
 		</ExplicitIdentifier>
 	</PageObject>
+	<PageObject Type="Text">
+		<Location top="42" left="54" bottom="60" right="318" />
+		<StaticText>Existing compound sets:</StaticText>
+		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="132" left="54" bottom="186" right="264" />
+		<TabOrder>5</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Show attribute window of defined compound sets"</Title>
+		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>dcsu::prCheckFormatDefinitionsCompoundSets</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
 	<UsedReferences>
 		<Model>
 			<Symbol>dcsu::prCreateSetMappingsCompoundSet</Symbol>
 			<Symbol>dcsu::prCopyDataFolderToShadowFolder</Symbol>
-			<Symbol>dcsu::prPageOpenDeprecateCompoundSetUtilities</Symbol>
+			<Symbol>dcsu::prCheckFormatDefinitionsCompoundSets</Symbol>
 			<Symbol>dcsu::sCompoundSets</Symbol>
+			<Symbol>dcsu::prPageOpenDeprecateCompoundSetUtilities</Symbol>
 			<Symbol>dcsu::spInputCaseFilename</Symbol>
 			<Symbol>dcsu::spOutputCaseFilename</Symbol>
 			<Symbol>dcsu::spDataFolderName</Symbol>

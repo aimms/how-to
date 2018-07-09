@@ -16,7 +16,7 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
+import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
@@ -32,7 +32,8 @@
 extensions = ['sphinx.ext.doctest',
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
-    'sphinx.ext.githubpages']
+    'sphinx.ext.githubpages',
+	'sphinx.builders.linkcheck']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -76,7 +77,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
-todo_include_todos = False
+todo_include_todos = True
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -153,7 +154,7 @@ html_sidebars = {
     ]
 }
 html_favicon = "_static/favicon.png"
-rst_prolog = "\n.. include:: special.rst\n"
+#rst_prolog = "\n.. include:: ../special.rst\n"
 
 # -- Options for HTMLHelp output ------------------------------------------
 
@@ -211,6 +212,9 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
-
-
-
+# if builds on GitLab (a Linux machine), force todos not to be shown :)
+if os.name != 'nt':
+	todo_include_todos = False
+else:
+	#To check any broken links 
+	nitpicky = True

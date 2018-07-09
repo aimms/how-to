@@ -26,7 +26,7 @@ How to generate random numbers ?
 
 
 .. sidebar:: Normal and Log Normal Distributions
-		
+
 		.. image:: http://mathworld.wolfram.com/images/eps-gif/NormalDistribution_651.gif
 		.. image:: http://mathworld.wolfram.com/images/eps-gif/LogNormalDistribution_800.gif
 	
@@ -50,6 +50,14 @@ How to generate random numbers ?
 
 .. only:: builder_html
 
-   See :download:`↓ this example AIMMS project <_AIMMSProjects/GenerateRandomNumbers.zip>`.
+   See :download:`this example AIMMS project <Resources/Other/GenerateRandomNumbers/GenerateRandomNumbers.zip>`.
 
+.. note::
+	
+	See me, feel me
+   
+.. todo::
+  
+   Test
+   
 .. include:: includes/form.def

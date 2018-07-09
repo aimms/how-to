@@ -1,6 +1,4 @@
 ﻿* AIMMS
-case_size_overview 1
-case_size_overview_threshold 0
 * AOA
 * BARON 15
 * CBC 2.9
@@ -20,4 +18,4 @@ case_size_overview_threshold 0
 * XA 16
 * NETSOL
 * Environment
-Startup_Page "dcsu::Deprecate Compound Set Control Page"
+Default_UI 0
