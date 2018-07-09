@@ -1,10 +1,10 @@
 {
 	"------------------------------------------------------------------<<<<-custom.column.widths-": "",
-	"custom.column.widths": "literal:[{\"type\":\"colHeader\",\"colKey\":{\"<IDENTIFIER-SET>\":\"s1_Rank\"},\"width\":16.4},{\"type\":\"colHeader\",\"colKey\":{\"<IDENTIFIER-SET>\":\"sp1_Country\"},\"width\":21.8},{\"type\":\"colHeader\",\"colKey\":{\"<IDENTIFIER-SET>\":\"p1_Points\"},\"width\":14.399999999999999}]",
+	"custom.column.widths": "literal:[{\"type\":\"colHeader\",\"colKey\":{\"<IDENTIFIER-SET>\":\"s1_Rank\"},\"width\":16.4},{\"type\":\"colHeader\",\"colKey\":{\"<IDENTIFIER-SET>\":\"sp1_Country\"},\"width\":21.8},{\"type\":\"colHeader\",\"colKey\":{\"<IDENTIFIER-SET>\":\"p1_Points\"},\"width\":14.399999999999999},{\"type\":\"colHeader\",\"colKey\":{\"<IDENTIFIER-SET>\":\"p_Points\"},\"width\":14.6}]",
 	"------------------------------------------------------------------>>>>-custom.column.widths-": "",
 	"slot0": "",
 	"------------------------------------------------------------------<<<<-contents-": "",
-	"contents": "aimms:{\"contents\":[\"sp1_Country\",\"p1_Points\"]}",
+	"contents": "aimms:{\"contents\":[\"sp_Country\",\"p_Points\"]}",
 	"------------------------------------------------------------------>>>>-contents-": "",
 	"slot1": "",
 	"------------------------------------------------------------------<<<<-awf.persistence.version-": "",

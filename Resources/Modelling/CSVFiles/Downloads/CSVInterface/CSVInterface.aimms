@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
-<References AIMMS_Version="4.54.1.2 (x64)">
+<References AIMMS_Version="4.54.2.16 (x64)">
 	<MainProject Path="MainProject" />
 	<Library System="true" Path="AimmsPro" />
 	<Library System="true" Path="AimmsWebUI" />
 	<RepositoryLibrary UUID="2A0BB6B2-D999-41B4-A0DD-71100DA17577" Name="DataLink" Version="1.0.1.37" />
 	<RepositoryLibrary UUID="BE67716B-235F-471A-9360-487BACF9995A" Name="CSVProvider" Version="1.0.1.37" />
+	<Library System="true" Path="AIMMSXLLibrary" />
 </References>

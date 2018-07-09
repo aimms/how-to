@@ -5,7 +5,7 @@ How to interface with CSV files?
 
 Introduction
 ------------
-The introduction / background of your answer. Try to limit this block to a single paragraph of max 4-5 lines. 
+AIMMS supports exchanging data with text files formatted as comma-separated values, or simply CSV files. There are two methods to 
 
 Solution
 --------
