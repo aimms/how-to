@@ -67,7 +67,7 @@ We do this using the following 4-dimensional table:
         DataMap(
                     dl::dt,    ! Table name, should be present in dl::DataTables.
                     dl::idn,   ! Full AIMMS identifier name, enclose in '' iff it is declared in a library or module.
-                    dl::cn,    ! Column number, the column number in the CSV file
+                    dl::cn,    ! Column number
                     dl::dn     ! Domain number
                                !     For domain sets: equal to the Column number
                                !     For parameters : equal to 0.
@@ -79,6 +79,11 @@ We do this using the following 4-dimensional table:
             ( fourRows, spCmt, 4, 0 ) : "comment"
         };
 
+As you can see from the above example, the column numbers are increasing and correspond to the *column number in the DataLink view*. 
+
+#. When reading a .csv file, the header line of the .csv file, in combination with the value of each element in the DataMap, is used to determine the column numbers in the CSV Provider view. Thus the column numbers in the DataMap are not necessarily the same as the column numbers in the CSVProvider view. 
+
+#. When writing a .csv file, these two column numberings happen to be same.
         
 Detail specification File convention
 ++++++++++++++++++++++++++++++++++++
