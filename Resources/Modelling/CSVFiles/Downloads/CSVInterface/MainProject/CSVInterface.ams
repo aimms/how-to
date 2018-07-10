@@ -1,0 +1,261 @@
+## ams_version=1.0
+
+Model Main_CSVInterface {
+    DeclarationSection Football_Ranking {
+        Set s_Rank {
+            Index: i_Rank;
+        }
+        StringParameter sp_Country {
+            IndexDomain: i_Rank;
+        }
+        Parameter p_Points {
+            IndexDomain: i_Rank;
+        }
+    }
+    DeclarationSection File_Information {
+        StringParameter sp_FileName;
+        StringParameter sp_SheetName;
+        StringParameter sp_DataSource {
+            InitialData: "data//";
+        }
+        StringParameter sp_OutPutFileName;
+    }
+    Section CSVLinkSetup {
+        StringParameter ReadWriteAttributes {
+            IndexDomain: dl::rwattr;
+        }
+        StringParameter DataMap {
+            IndexDomain: (dl::dt, dl::idn, dl::cn, dl::dn);
+        }
+        StringParameter MapName {
+            InitialData: "TheMapping";
+        }
+        Procedure Read_DataMapping {
+            Body: {
+                dl::DataTables += {'FootballRanking'};
+                !Enter the name of the CSV file without the CSV extension
+                
+                DataMap(dl::dt, dl::idn, dl::cn, dl::dn) := data {
+                	!('CSV File name, same as above', 'AIMMS Identifier', 1, 1) : "Column name in CSV file")	
+                	('FootballRanking', 's_Rank', 1, 1) 		: "Rank",
+                	('FootballRanking', 'sp_Country', 2, 0)		: "Country",
+                	('FootballRanking', 'p_Points', 3, 0)		: "Points"} ;
+                
+                !Creating the data map between your CSV file and AIMMS Data Link
+                
+                MapName := "FootballRanking";
+                
+                !Give a name to your data map
+                
+                dl::RemoveDataSourceMapping(MapName : MapName );
+                
+                !Clearing any previously existing data maps with the same name
+                
+                dl::AddDataSourceMapping(
+                	MapName        : MapName , 
+                	DataMap        : DataMap , 
+                	ColDepend      : dl::DependEmpty , 
+                	TableAttribute : dl::TableAttributesEmpty , 
+                	ColAttribute   : dl::ColAttributeEmpty );
+                
+                !Creating the new data map specified in this procedure
+            }
+        }
+        Procedure ReadData {
+            Body: {
+                Read_DataMapping;
+                
+                !Making sure that the data map is added
+                
+                ReadWriteAttributes(dl::rwattr) :=     {'DataProvider' 	: csvprovider::DataLink	,
+                					'Separator'	: ","			};
+                
+                !Calling the CSV provider and specifying that the separator is , in the file.
+                
+                sp_DataSource := "data//";
+                
+                !For the CSV provider, the Data Source is the folder in which the csv file is stored.
+                
+                dl::DataRead(
+                	DataSource     : sp_DataSource , 
+                	MapName        : MapName , 
+                	ReadAttributes : ReadWriteAttributes );
+                
+                !Reading the data from the provided data source and map name information
+            }
+        }
+        Procedure Write_DataMapping {
+            Body: {
+                dl::DataTables += {'OutPutFile'};
+                !Enter the name of the CSV file without the CSV extension
+                
+                DataMap(dl::dt, dl::idn, dl::cn, dl::dn) := data {
+                	!('CSV File name, same as above', 'AIMMS Identifier', 1, 1) : "Column name in CSV file")	
+                	('OutPutFile', 's_Rank', 1, 1) 			: "Rank",
+                	('OutPutFile', 'sp_Country', 2, 0)		: "Country",
+                	('OutPutFile', 'p_Points', 3, 0)		: "Points"} ;
+                
+                !Creating the data map between your CSV file and AIMMS Data Link
+                
+                MapName := "FootballRanking";
+                
+                !Give a name to your data map
+                
+                dl::RemoveDataSourceMapping(MapName : MapName );
+                
+                !Clearing any previously existing data maps with the same name
+                
+                dl::AddDataSourceMapping(
+                	MapName        : MapName , 
+                	DataMap        : DataMap , 
+                	ColDepend      : dl::DependEmpty , 
+                	TableAttribute : dl::TableAttributesEmpty , 
+                	ColAttribute   : dl::ColAttributeEmpty );
+                
+                !Creating the new data map specified in this procedure
+            }
+        }
+        Procedure WriteData {
+            Body: {
+                Write_DataMapping;
+                
+                !Making sure that the data map is added
+                
+                ReadWriteAttributes(dl::rwattr) :=     {'DataProvider' 		: csvprovider::DataLink	,
+                					'ContainsHeaders'	: "yes"			,
+                					'Separator'		: ","};
+                
+                !Calling the CSV provider
+                
+                sp_DataSource := ".";
+                
+                !For the CSV provider, the Data Source is the folder in which the csv file is stored.
+                
+                dl::DataWrite(
+                	DataSource      : sp_DataSource , 
+                	MapName         : MapName , 
+                	WriteAttributes : ReadWriteAttributes);
+                
+                !Reading the data from the provided data source and map name information
+            }
+        }
+    }
+    Procedure SpreadSheetCSVRead {
+        Body: {
+            !specifying which file we want to interface with
+            sp_FileName := "data//FootballRanking.csv";
+            
+            !specifying which sheet the contains the current data
+            sp_SheetName := "FootballRanking";
+            
+            !Setting the specified sheet in the specified file as the active sheet
+            SpreadSheet::SetActiveSheet(
+            	workbook : sp_FileName , 
+            	Name     : sp_SheetName );
+            
+            !Reading in the set of ranks
+            SpreadSheet::RetrieveSet(
+            	workbook : sp_FileName , 
+            	Set      : s_Rank , 
+            	Range    : "A2:A51" , 
+            	Sheet    : sp_SheetName , !optional if you aleady used the SetActiveSheet statement before this statemnet
+            	Mode     : 'replace' );   !optional and default 'replace' is used if nothing specified. Use 'replace' to clear set and load data and 'merge' to add new elements to set.
+            
+            SpreadSheet::RetrieveParameter(
+            	workbook                         : sp_FileName , 
+            	Parameter                        : sp_Country(i_Rank) , 
+            	Range                            : "B2:B51" , 
+            	Sheet                            : sp_SheetName , 
+            	Transposed                       :  0, 
+            	AutomaticallyRoundToIntegerRange :  0);
+            
+            SpreadSheet::RetrieveParameter(
+            	workbook                         : sp_FileName , 
+            	Parameter                        : p_Points(i_Rank) , 
+            	Range                            : "C2:C51" , 
+            	Sheet                            : sp_SheetName , 
+            	Transposed                       :  0, 
+            	AutomaticallyRoundToIntegerRange :  0);
+            
+            SpreadSheet::CloseWorkbook(
+            	workbook        : sp_FileName , 
+            	SaveBeforeClose : 1 );
+        }
+    }
+    Procedure SpreadSheetCSVWrite {
+        Body: {
+            !specifying which file we want to interface with
+            sp_OutPutFileName := "OutPut.csv";
+            
+            !specifying which sheet the contains the current data
+            sp_SheetName := "OutPut";
+            
+            SpreadSheet::CreateWorkbook(
+            	WorkbookName : sp_OutPutFileName , 
+            	SheetName    : sp_SheetName );
+            
+            !Setting the specified sheet in the specified file as the active sheet
+            SpreadSheet::SetActiveSheet(
+            	workbook : sp_OutPutFileName , 
+            	Name     : sp_SheetName );
+            
+            !Reading in the set of ranks
+            SpreadSheet::AssignSet(
+            	workbook : sp_OutPutFileName , 
+            	Set      : s_Rank , 
+            	Range    : "A2:A51" , 
+            	Sheet    : sp_SheetName );
+            
+            SpreadSheet::AssignParameter(
+            	workbook   : sp_OutPutFileName , 
+            	Parameter  : sp_Country , 
+            	Range      : "B2:B51" , 
+            	Sheet      : sp_SheetName , 
+            	Sparse     :  1, 
+            	Transposed :  0);
+            
+            SpreadSheet::AssignParameter(
+            	workbook   : sp_OutPutFileName , 
+            	Parameter  : p_Points , 
+            	Range      : "C2:C51" , 
+            	Sheet      : sp_SheetName , 
+            	Sparse     :  1, 
+            	Transposed :  0);
+            
+            SpreadSheet::CloseWorkbook(
+            	workbook        : sp_OutPutFileName , 
+            	SaveBeforeClose : 1 );
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return DataManagementExit();
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

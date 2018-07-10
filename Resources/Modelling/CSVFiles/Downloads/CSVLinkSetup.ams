@@ -1,0 +1,9 @@
+## ams_version=1.0
+
+Section Using_CSVLink {
+    StringParameter ReadWriteAttributes {
+        Definition: {
+            {'Provider' : csvprov::DataLink }
+        }
+    }
+}
