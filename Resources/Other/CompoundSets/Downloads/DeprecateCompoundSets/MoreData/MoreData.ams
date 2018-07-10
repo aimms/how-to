@@ -16,7 +16,7 @@ LibraryModule Library_MoreData {
         }
         Set EF {
             SubsetOf: (E, F);
-            Tags: (TE, TF);
+            Tags: (EFTE, EFTF);
             Index: iEF;
             Parameter: eEF;
             Definition: {
@@ -47,7 +47,7 @@ LibraryModule Library_MoreData {
         }
         Set sFood {
             SubsetOf: (sAnimals, sFruits);
-            Tags: (Tan, TFr);
+            Tags: (FTan, FTFr);
             Index: iFood;
             Parameter: eFood;
         }

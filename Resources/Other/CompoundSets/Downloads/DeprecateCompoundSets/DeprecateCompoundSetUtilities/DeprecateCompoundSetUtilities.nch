@@ -42,3 +42,6 @@
 "dcsu::epCompoundSetPrefix2" "dcsu::epCompoundSetPrefix" "2018-07-05 09:17:44"
 "dcsu::epCompoundSetPrefix" "dcsu::epCompoundSetPrefixes" "2018-07-05 09:23:51"
 "dcsu::Copy_prCreateSetMappingsCompoundSet" "dcsu::prDeleteRuntimeSetMappingsCompoundSet" "2018-07-10 07:38:07"
+"dcsu::Copy_spCompoundIndexName" "dcsu::spQualifiedCompoundIndexName" "2018-07-10 08:28:55"
+"dcsu::Copy_spMappingSetIndex" "dcsu::spQualifiedMappingSetIndex" "2018-07-10 08:41:59"
+"dcsu::Copy_epElementParameterForwardMaps" "dcsu::epHelperForwardElementParameter" "2018-07-10 11:22:22"
