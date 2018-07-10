@@ -18,6 +18,18 @@ LibraryModule DeprecateCompoundSetUtilities {
                     Range: errh::PendingErrors;
                 }
             }
+            Procedure prDeleteRuntimeSetMappingsCompoundSet {
+                Body: {
+                    epCompoundSetMappingRuntimeLibrary := StringToElement( AllIdentifiers,  spCompoundSetMappingRuntimeLibraryName, create: 0);
+                    if epCompoundSetMappingRuntimeLibrary then
+                    	me::Delete( epCompoundSetMappingRuntimeLibrary );
+                    	epCompoundSetMappingRuntimeLibrary := '' ;
+                    endif ;
+                }
+                ElementParameter err {
+                    Range: errh::PendingErrors;
+                }
+            }
             Procedure prCopyDataFolderToShadowFolder {
                 Body: {
                     prWorkCopyDataFolderToShadowFolder();
@@ -217,6 +229,7 @@ LibraryModule DeprecateCompoundSetUtilities {
     Section PrivateSection {
         Section Internal_utilities {
             ElementParameter epSectionCompoundSetMappingDeclarations {
+                IndexDomain: iCompoundSetPrefix;
                 Range: AllIdentifiers;
             }
             ElementParameter epElementParameterForTag {
@@ -238,6 +251,25 @@ LibraryModule DeprecateCompoundSetUtilities {
             ElementParameter epMappingSetBaseRelation {
                 IndexDomain: IndexIdentifiers;
                 Range: AllIdentifiers;
+            }
+            Function fncCreateUnqualifiedName {
+                Arguments: (epID);
+                Range: string;
+                Body: {
+                    rval := formatString("%e",epID);
+                    pNSpos := FindString(rval,"::");
+                    while pNSpos do
+                    	rval := substring( rval, pNSpos + 2, StringLength( rval ) );
+                    	pNSpos := FindString(rval,"::");
+                    endwhile ;
+                    fncCreateUnqualifiedName := rval ;
+                }
+                ElementParameter epID {
+                    Range: AllIdentifiers;
+                    Property: Input;
+                }
+                StringParameter rval;
+                Parameter pNSpos;
             }
             Procedure prRemoveSpaces {
                 Arguments: (spStr);
@@ -589,6 +621,24 @@ LibraryModule DeprecateCompoundSetUtilities {
                 Index: iCompoundSetNo;
                 Parameter: eCompoundSetNo;
             }
+            Set sCompoundSetPrefixes {
+                Index: iCompoundSetPrefix;
+                Parameter: epCompoundSetPrefix;
+            }
+            StringParameter spCompoundSetPrefixString {
+                IndexDomain: iCompoundSetPrefix;
+                Definition: {
+                    if iCompoundSetPrefix = '::' then
+                    	""
+                    else
+                    	FindReplaceStrings(formatString("%e",iCompoundSetPrefix),"::","_")
+                    endif
+                }
+            }
+            ElementParameter epCompoundSetPrefixes {
+                IndexDomain: IndexIdentifiers;
+                Range: sCompoundSetPrefixes;
+            }
             ElementParameter epFoundCompoundSets {
                 IndexDomain: iCompoundSetNo;
                 Range: AllSets;
@@ -710,6 +760,23 @@ LibraryModule DeprecateCompoundSetUtilities {
                     InitialData: '';
                 }
             }
+            Procedure prAssignCompoundSetToSetMappingSection {
+                Arguments: (eCompoundSet);
+                Body: {
+                    spPrefix := fncGetPrefixForIdentifier(eCompoundSet);
+                    if spPrefix = "" then
+                    	! Declared in the main model, use "::" instead.
+                    	spPrefix := "::" ;
+                    endif ;
+                    setElementAdd( sCompoundSetPrefixes, epCompoundSetPrefix, spPrefix );
+                    epCompoundSetPrefixes(eCompoundSet) := epCompoundSetPrefix ;
+                }
+                ElementParameter eCompoundSet {
+                    Range: AllIdentifiers;
+                    Property: Input;
+                }
+                StringParameter spPrefix;
+            }
             Procedure prWorkCreateSetMappingsCompoundSet {
                 Body: {
                     empty pCompoundDimension ;
@@ -732,24 +799,29 @@ LibraryModule DeprecateCompoundSetUtilities {
                     endblock ;	                     
                     
                     ! 0. Ensure there is no previous library with that name.
-                    epCompoundSetMappingRuntimeLibrary := StringToElement( AllIdentifiers, 
-                    	spCompoundSetMappingRuntimeLibraryName, create: 0);
+                    epCompoundSetMappingRuntimeLibrary := StringToElement( AllIdentifiers,  spCompoundSetMappingRuntimeLibraryName, create: 0);
                     if epCompoundSetMappingRuntimeLibrary then
                     	me::Delete( epCompoundSetMappingRuntimeLibrary );
+                    	epCompoundSetMappingRuntimeLibrary := '' ;
                     endif ;
                     
                     ! 1. Create a runtime library and a procedure to be filled with assignment statements.
                     epCompoundSetMappingRuntimeLibrary  := 
-                    	me::CreateLibrary(spCompoundSetMappingRuntimeLibraryName, 
-                    		spCompoundSetMappingRuntimePrefixName );
-                    epSectionCompoundSetMappingDeclarations := me::Create( "Set_Mapping_Declarations", 
+                    	me::CreateLibrary(spCompoundSetMappingRuntimeLibraryName,  spCompoundSetMappingRuntimePrefixName );
+                    
+                    for iCompoundSetNo do
+                    	prAssignCompoundSetToSetMappingSection(epFoundCompoundSets(iCompoundSetNo));
+                    endfor ;
+                    epSectionCompoundSetMappingDeclarations(iCompoundSetPrefix) := me::Create( spCompoundSetPrefixString(iCompoundSetPrefix)+"Set_Mapping_Declarations", 
                     	'section', epCompoundSetMappingRuntimeLibrary );
                     
                     for iCompoundSetNo do
                     	prWorkCreateMappingSet1(epFoundCompoundSets(iCompoundSetNo));
                     endfor ;
                     
-                    me::Compile( epCompoundSetMappingRuntimeLibrary );
+                    ! The following compile will fail when there are defined compound sets in runtime libraries;
+                    ! The equivalent set mapping uses names from the origin namespace.
+                    ! me::Compile( epCompoundSetMappingRuntimeLibrary );
                     
                     block where single_column_display := 1 ;
                     	write secundary_runtime_library_administration to file "secundary.txt" ;
@@ -849,7 +921,8 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		endfor ;
                     	endblock ;
                     
-                    	spCompoundSetName(eCompoundSet) := FormatString("%e", eCompoundSet );
+                    	!DebuggerBreakpoint();
+                    	spCompoundSetName(eCompoundSet) := fncCreateUnqualifiedName( eCompoundSet );
                     
                     	block ! Parse the tags string into atomic tag strings
                     		spTagsString := AttributeToString( eCompoundSet, 'tags' );
@@ -910,7 +983,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	endblock ;
                     
                     	epDeclarationSectionMappingSet :=  me::Create( "Set_Mapping_Declarations_for_Compound_Set_" + spCompoundSetName(eCompoundSet), 
-                    		'declaration', epSectionCompoundSetMappingDeclarations );
+                    		'declaration', epSectionCompoundSetMappingDeclarations(epCompoundSetPrefixes(eCompoundSet) ) );
                     
                     	block ! Declare Set Mapping Set.
                     		epMappingSetSet(eCompoundSet) := me::Create( "sSetMappingSet_"+ spCompoundSetName(eCompoundSet), 'set', epDeclarationSectionMappingSet );
@@ -1011,7 +1084,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     
                     	block ! Define the procedure to be used as a definition for the set mapping set.
                     		epProcDef_SetMappingSet := me::Create( "prDef_SetMappingSet_" + spCompoundSetName(eCompoundSet), 
-                    			'procedure', epSectionCompoundSetMappingDeclarations );
+                    			'procedure', epSectionCompoundSetMappingDeclarations(epCompoundSetPrefixes(eCompoundSet)) );
                     		spBody := "" ;
                     
                     		spBodyLine := formatString( "sSetMappingSet_%s := {}; \n", spCompoundSetName(eCompoundSet) );
@@ -1061,7 +1134,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     
                     	block ! Define the procedure to be used as a definition for the set mapping relation.
                     		epProcDef_SetMappingRelation := me::Create( "prDef_SetMappingRelation_" + spCompoundSetName(eCompoundSet), 
-                    			'procedure', epSectionCompoundSetMappingDeclarations );
+                    			'procedure', epSectionCompoundSetMappingDeclarations(epCompoundSetPrefixes(eCompoundSet)) );
                     		spBody := "" ;
                     
                     		spBodyLine := formatString( "sSetMappingRelation_%s := {}; \n", spCompoundSetName(eCompoundSet) );
@@ -1424,8 +1497,8 @@ LibraryModule DeprecateCompoundSetUtilities {
                     Read from file "sDataIdentifiers.txt" ;
                     Read from file "secundary.txt" ;
                     
-                    epSectionCompoundSetMappingDeclarations := StringToElement( AllIdentifiers, "Set_Mapping_Declarations" );
-                    if not epSectionCompoundSetMappingDeclarations then
+                    epSectionCompoundSetMappingDeclarations('::') := StringToElement( AllIdentifiers, "Set_Mapping_Declarations" );
+                    if not epSectionCompoundSetMappingDeclarations('::') then
                     	raise error "Please ensure that the section you just imported in the main model is named \"Set_Mapping_Declarations\"" ;
                     endif ; 
                     
@@ -1438,8 +1511,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     
                     ! 1. Create a runtime library and a procedure to be filled with assignment statements.
                     epCompoundSetShadowRuntimeLibrary  := 
-                    	me::CreateLibrary(spCompoundSetShadowRuntimeLibraryName, 
-                    		spCompoundSetShadowRuntimePrefixName );
+                    	me::CreateLibrary(spCompoundSetShadowRuntimeLibraryName,  spCompoundSetShadowRuntimePrefixName );
                     epSectionRelationCompoundSetSetMappingSetDeclarations := me::Create( "Relation_Compound_Set_Set_Mapping_Set_Declarations", 'section', epCompoundSetShadowRuntimeLibrary );
                     epSectionDataShadowDeclarations := me::Create( "Data_Shadow_Declarations", 'section', epCompoundSetShadowRuntimeLibrary );
                     epSectionForwardCopyProcedures := me::Create( "Forward_Copy_Procedures", 'section', epCompoundSetShadowRuntimeLibrary );

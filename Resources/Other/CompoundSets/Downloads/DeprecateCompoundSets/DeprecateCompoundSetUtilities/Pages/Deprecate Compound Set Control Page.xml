@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Page Version="4000" TimeStamp="2018-07-05 08:07:23">
+<Page Version="4000" TimeStamp="2018-07-10 07:38:09">
 	<PageEditSize Type="Inherited" />
 	<ProjectUUID>20FA164F-37C1-49B1-AB6C-A8AF79AF40F1</ProjectUUID>
 	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
@@ -389,6 +389,21 @@
 			</Action>
 		</ActionSequence>
 	</PageObject>
+	<PageObject Type="Button">
+		<Location top="132" left="624" bottom="186" right="834" />
+		<TabOrder>6</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Delete Set Mapping Declarations"</Title>
+		<Font GUID="63AD267B-3D90-40EE-BBB1-19B7896B3401" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>dcsu::prDeleteRuntimeSetMappingsCompoundSet</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
 	<UsedReferences>
 		<Model>
 			<Symbol>dcsu::prCreateSetMappingsCompoundSet</Symbol>
@@ -414,6 +429,7 @@
 			<Symbol>dcsu::prSelectOutputAtomicFolder</Symbol>
 			<Symbol>dcsu::prCopySingleShadowToAtomic</Symbol>
 			<Symbol>dcsu::prCopyFolderShadowToAtomic</Symbol>
+			<Symbol>dcsu::prDeleteRuntimeSetMappingsCompoundSet</Symbol>
 		</Model>
 	</UsedReferences>
 </Page>

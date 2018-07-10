@@ -241,25 +241,25 @@ As you can see, the definition of ``D`` is now based on tuples instead of indivi
 Conversion step 4: Create Set Mapping
 ++++++++++++++++++++++++++++++++++++++++
 
-In this conversion step a set mapping is created for each compound set in your model. This conversion step consists of the following sub steps:
+In this conversion step a set mapping is created for each compound set in your model.  These set mappings are grouped per namespace (main model, library or module).
 
-#. Please open the WinUI page: ``Deprecate Compound Set Control Page`` of the library ``DeprecateCompoundSetUtilities``, and press button ``Create Set Mapping Declarations``. 
-   This action will create a section named ``set mapping declarations`` in the runtime library ``CompoundSetMappingRuntimeLibrary`` as runtime libraries are the only place where a library or main model may create new AIMMS code.
-   The section ``set mapping declarations`` should be in the main model, however. 
-   The subsequent sub steps in this conversion step will move this section to your main model:
-
-#. AIMMS Menu - Edit - Export - to a file, say ``smd.ams``.
-
-#. Select focus on the main model, create a section named ``Set Mapping Declarations``.
-
-#. Select that newly created section and via the AIMMS Menu - Edit - Import - the file created in the first step of this section.
-
-The model explorer should now look something like this:
+Please open the WinUI page: ``Deprecate Compound Set Control Page`` of the library ``DeprecateCompoundSetUtilities``, and press button ``Create Set Mapping Declarations``.  This action will create a section named ``set mapping declarations`` and sections named ``<prefix> set mapping declarations`` for each library / module where compound sets are defined. The model explorer should now look something like this:
 
 .. image::  ../Resources/Other/CompoundSets/Images/SetMappingDeclarations.png 
 
+These sections are created in the runtime library ``CompoundSetMappingRuntimeLibrary`` as runtime libraries are the only place where a library or main model may create new AIMMS code.  The section ``set mapping declarations`` should be in the main model, however. Similarly, the sections ``<prefix> set mapping declarations`` should be in the corresponding libraries / modules.
+
+The subsequent sub steps in this conversion step need to be done for each such ``set mapping declarations`` section.
+
+#. AIMMS Menu - Edit - Export - to a file, say ``smd.ams``.
+
+#. Select focus on the main model, library or module and create a section named ``Set Mapping Declarations``.
+
+#. Select that newly created section and via the AIMMS Menu - Edit - Import - the file created in the first step of this section.
+
 .. caution:: Using Copy/Paste on the section ``Set Mapping Declarations`` of the runtime library might seem simpler than the sub steps 2 - 4 above. However, when you use copy/paste, the copied section will still contain references to the runtime indexes. A subsequent restart of your application will have compilation errors as the compound indexes still referencing the runtime library are not present upon first compilation.
 
+After successfully completing this step, it is practical to save the project, exit AIMMS and set a copy of your project aside.
 
 
 .. _Section_Conversion_Copy_Input_Cases:

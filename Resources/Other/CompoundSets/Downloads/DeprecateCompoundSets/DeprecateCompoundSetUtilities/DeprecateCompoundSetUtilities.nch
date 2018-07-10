@@ -39,3 +39,6 @@
 "dcsu::fncGetLibrary" "dcsu::fncGetPrefixForIdentifier" "2018-06-24 10:45:13"
 "dcsu::Copy_epIndexDomainSets" "dcsu::epDomainIndices" "2018-06-24 11:25:23"
 "dcsu::Copy_epMappingSetRelation" "dcsu::epMappingSetBaseRelation" "2018-06-25 07:18:28"
+"dcsu::epCompoundSetPrefix2" "dcsu::epCompoundSetPrefix" "2018-07-05 09:17:44"
+"dcsu::epCompoundSetPrefix" "dcsu::epCompoundSetPrefixes" "2018-07-05 09:23:51"
+"dcsu::Copy_prCreateSetMappingsCompoundSet" "dcsu::prDeleteRuntimeSetMappingsCompoundSet" "2018-07-10 07:38:07"
