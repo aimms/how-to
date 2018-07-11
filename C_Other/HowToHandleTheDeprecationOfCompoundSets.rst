@@ -355,9 +355,25 @@ You can replace this definition by:
             Definition: sum(h|(i,j,k,h) in sMappingSet_C_Relation,p(h));
         }
 
+Replace use of the function TUPLE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Consider: 
+
+    .. code-block:: none
+    
+        epC := Tuple( epS, epT, epU );
+        
+This should be replaced by:
+
+    .. code-block:: none
+    
+        epC := first( iSMI_C | ( epS, epT, epU, iSMI_C ) in sSetMappingRelation_C );
+        
+
+        
+        
 .. _Section_Conversion_Move_Indexes:
-
-
 Conversion step 7: Move the compound indexes to the corresponding set mapping sets.
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -422,12 +438,6 @@ This rewrite procedure is designed to make minimal changes to your application a
 #. Avoid the pitfalls due to the "automagic" design of compound sets (mentioned in :ref:`Section-Why` point 3 above).
 
 #. Allow to deploy the efficiency improvements already implemented in the new parallel execution engine.
-
-.. todo::
-
-	#. Develop and test with compound set declared in library
-
-	#. Defined compound sets, can set mappings also be defined definitions?
 
 
 .. _Section-Further-Information:
