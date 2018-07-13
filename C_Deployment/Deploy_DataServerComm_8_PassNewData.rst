@@ -8,14 +8,14 @@ Introduction
 
 In previous articles it was shown how to communicate :doc:`progress <Deploy_DataServerComm_5_Progress>` and :doc:`data <Deploy_DataServerComm_6_Retrieve>`, from the server session to the data session. In addition, we can :doc:`interrupt <Deploy_DataServerComm_7_Interrupt>` by sending a signal from the data session to the server session.  In this article we will send data from the data session to a running server session. 
 
-Use case: We continue the Flowshop application. Though, the progress information obtained from the server is very interesting, we decide to await for a long period the solve and do not want to waste computation time with progress or incumbent updates, as we do not view them anyway. Therefore, we switch the progress and incumbent updates off in the server session.
+Use case: We continue with the Flowshop application. Even though the progress information obtained from the server is very interesting, we decide to wait for a longer period the solve and do not want to waste computation time with progress or incumbent updates. Therefore, we switch the progress and incumbent updates off in the server session.
 
 Implementation
 --------------
 
 .. image:: ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/DataChangesToServerSession.png
 
-Once a solver session is started, you can send additional information using ``pro::DelegateToServer()``, provided you pass it the queue it already is listening to in the call. When ``pro::DelegateToServer`` is passed a message queue it will not start a new job, but add the enclosing procedure, here ``prPassProgressSupplied``, as a message to the existing queue. This lets the indicated procedure be run as part of the current job.  As you know, a job running on a server is essentially an AIMMS procedure running. In order to let the message start immediately, it should be given priority.
+Once a solver session is started, you can send additional information using the predefined procedure ``pro::DelegateToServer()``, provided you pass it the queue it already is listening to in the call. When ``pro::DelegateToServer`` is passed a message queue it will not start a new job, but add the enclosing procedure, here ``prPassProgressSupplied``, as a message to the existing queue. This lets the indicated procedure be run as part of the current job.  As you know, a job running on a server is essentially an AIMMS procedure running. In order to let the message start immediately, it should be given priority.
 
 This is illustrated in the following code of ``prPassProgressSupplied``. 
 
