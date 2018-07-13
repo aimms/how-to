@@ -4,6 +4,7 @@
 *.bak
 *.dmp
 *.dmp
+*.aimmslockfile
 Musterlösung
 _build
 shadowData

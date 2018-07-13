@@ -5,6 +5,7 @@ How to Handle the Deprecation of Compound sets
 
 .. note:: This document and corresponding AIMMS :download:`project <../Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` with running example and utility library (prefix dcsu) is actively being worked on. Your timely feedback is much appreciated as working your feedback may help others facing the same problem.  Thanks, AIMMS Customer Support Team.
 
+.. todo:: Known limitation: Name clashes (same name for compound sets in different libraries) cannot be handled. Please rename one of the compound sets before apply dclu.
 
 
 .. _Section-Announcement:

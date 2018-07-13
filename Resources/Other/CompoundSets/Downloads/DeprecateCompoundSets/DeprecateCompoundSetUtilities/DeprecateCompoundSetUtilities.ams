@@ -160,17 +160,21 @@ LibraryModule DeprecateCompoundSetUtilities {
         Section Selected_utilities {
             Function fncMeParent {
                 Arguments: (epID);
-                Range: AllIdentifiers;
+                Range: AllSymbols;
                 Body: {
-                    epParent := me::Parent(epID);
-                    if not epParent then
-                    	if IdentifierType(epID) = 'index' then
-                    		epSet := IndexRange( epID );
-                    		epParent := me::Parent( epSet );
-                    	elseif IdentifierType(epID)= 'element parameter' then
-                    		epSet := IdentifierElementRange( epID );
-                    		epParent := me::Parent( epSet );
+                    if epID in AllIdentifiers then 
+                    	epParent := me::Parent(epID);
+                    	if not epParent then
+                    		if IdentifierType(epID) = 'index' then
+                    			epSet := IndexRange( epID );
+                    			epParent := me::Parent( epSet );
+                    		elseif IdentifierType(epID)= 'element parameter' then
+                    			epSet := IdentifierElementRange( epID );
+                    			epParent := me::Parent( epSet );
+                    		endif ;
                     	endif ;
+                    else
+                    	epParent := '' ;
                     endif ;
                     
                     
@@ -182,7 +186,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     fncMeParent := epParent ;
                 }
                 ElementParameter epID {
-                    Range: AllIdentifiers;
+                    Range: AllSymbols;
                     Property: Input;
                 }
                 ElementParameter epParent {
@@ -199,7 +203,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     rval := "" ;
                     epWorkId := fncMeParent( epId );
                     while epWorkId do
-                    	if IdentifierType( epWorkId ) = 'libraryModule' or IdentifierType( epWorkId ) = 'module' then
+                    	if fncIdentifierType( epWorkId ) = 'libraryModule' or fncIdentifierType( epWorkId ) = 'module' then
                     		rval := AttributeToString( epWorkId, 'prefix' ) + "::" + rval ;
                     	endif ;
                     	epWorkId := fncMeParent( epWorkId );
@@ -208,11 +212,11 @@ LibraryModule DeprecateCompoundSetUtilities {
                     fncGetPrefixForIdentifier := rval ;
                 }
                 ElementParameter epId {
-                    Range: AllIdentifiers;
+                    Range: AllSymbols;
                     Property: Input;
                 }
                 ElementParameter epWorkId {
-                    Range: AllIdentifiers;
+                    Range: AllSymbols;
                 }
                 StringParameter rval;
             }
@@ -255,11 +259,35 @@ LibraryModule DeprecateCompoundSetUtilities {
             StringParameter spCompoundSetPrefixString {
                 IndexDomain: iCompoundSetPrefix;
                 Definition: {
-                    if iCompoundSetPrefix = '::' then
+                    if formatString("%e",iCompoundSetPrefix) = "::" then
                     	""
                     else
                     	FindReplaceStrings(formatString("%e",iCompoundSetPrefix),"::","_")
                     endif
+                }
+            }
+            Function fncIdentifierType {
+                Arguments: (epId);
+                Range: AllIdentifierTypes;
+                Body: {
+                    if epID in Allidentifiers then
+                    	rval := IdentifierType( epID );
+                    else 
+                    	if epID = 'Integers' then
+                    		rval := 'set';
+                    	else
+                    		rval := '' ;
+                    		raise warning formatString("fncIdentifierType(): The %e is not a symbol catered for", epID );
+                    	endif ;
+                    endif ;
+                    fncIdentifierType := rval ;
+                }
+                ElementParameter epId {
+                    Range: AllSymbols;
+                    Property: Input;
+                }
+                ElementParameter rval {
+                    Range: AllIdentifierTypes;
                 }
             }
             Function fncCreateUnqualifiedName {
@@ -431,15 +459,15 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
             Function fncDetermineIdentifier {
                 Arguments: (spIdName,epSameContext);
-                Range: AllIdentifiers;
+                Range: AllSymbols;
                 Body: {
                     rval := '' ;
                     if epSameContext then
                     	spPrefix := fncGetPrefixForIdentifier( epSameContext );
-                    	rval := StringToElement( AllIdentifiers, spPrefix+spIdName, create:0 );
+                    	rval := StringToElement( AllSymbols, spPrefix+spIdName, create:0 );
                     endif ;
                     if not rval then
-                    	rval := StringToElement( AllIdentifiers, spIdName, create:0 );
+                    	rval := StringToElement( AllSymbols, spIdName, create:0 );
                     endif ;
                     if not rval then
                     	raise error 
@@ -452,17 +480,17 @@ LibraryModule DeprecateCompoundSetUtilities {
                     Property: Input;
                 }
                 ElementParameter epSameContext {
-                    Range: AllIdentifiers;
+                    Range: AllSymbols;
                     Property: Optional;
                 }
                 ElementParameter rval {
-                    Range: AllIdentifiers;
+                    Range: AllSymbols;
                 }
                 StringParameter spPrefix;
             }
             Function fncIndexForSet {
                 Arguments: (epSet);
-                Range: AllIdentifiers;
+                Range: AllSymbols;
                 Body: {
                     rval := '';
                     
@@ -470,7 +498,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     if not epSet then
                     	raise error "fncIndexForSet(): Identifier for which to find an index is not specified." ;
                     endif ;
-                    if identifierType(epSet) <> 'set' then
+                    if fncIdentifierType(epSet) <> 'set' then
                     	raise error formatString("fncIndexForSet(): the %e is not a set for which an index can be found", epset) ;
                     endif ;
                     
@@ -493,11 +521,11 @@ LibraryModule DeprecateCompoundSetUtilities {
                     fncIndexForSet := rval ;
                 }
                 ElementParameter epSet {
-                    Range: AllIdentifiers;
+                    Range: AllSymbols;
                     Property: Input;
                 }
                 ElementParameter rval {
-                    Range: AllIdentifiers;
+                    Range: AllSymbols;
                 }
                 StringParameter spIndexStr;
                 Parameter pKommaPos;
@@ -729,11 +757,11 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
             ElementParameter epIndexDomainSets {
                 IndexDomain: (IndexIdentifiers,iIDP);
-                Range: AllSets;
+                Range: AllSymbols;
             }
             ElementParameter epDomainIndices {
                 IndexDomain: (IndexIdentifiers,iIDP);
-                Range: AllIndices;
+                Range: AllSymbols;
             }
             StringParameter spIndexDomainTags {
                 IndexDomain: iIDP;
@@ -825,8 +853,19 @@ LibraryModule DeprecateCompoundSetUtilities {
                     for iCompoundSetNo do
                     	prAssignCompoundSetToSetMappingSection(epFoundCompoundSets(iCompoundSetNo));
                     endfor ;
-                    epSectionCompoundSetMappingDeclarations(iCompoundSetPrefix) := me::Create( spCompoundSetPrefixString(iCompoundSetPrefix)+"Set_Mapping_Declarations", 
-                    	'section', epCompoundSetMappingRuntimeLibrary );
+                    for iCompoundSetPrefix do
+                    	epSectionCompoundSetMappingDeclarations(iCompoundSetPrefix) := 
+                    		me::Create( spCompoundSetPrefixString(iCompoundSetPrefix)+"Set_Mapping_Declarations", 
+                    			'section', epCompoundSetMappingRuntimeLibrary );
+                    	if spCompoundSetPrefixString(iCompoundSetPrefix) then
+                    		me::SetAttribute( epSectionCompoundSetMappingDeclarations(iCompoundSetPrefix), 'comment',
+                    			formatString("This section belongs to the library or module with prefix: %s",
+                    				spCompoundSetPrefixString(iCompoundSetPrefix)));
+                    	else
+                    		me::SetAttribute( epSectionCompoundSetMappingDeclarations(iCompoundSetPrefix), 'comment',
+                    			"This section belongs to the main model" );
+                    	endif ;
+                    endfor ;
                     
                     for iCompoundSetNo do
                     	prWorkCreateMappingSet1(epFoundCompoundSets(iCompoundSetNo));
@@ -993,7 +1032,6 @@ LibraryModule DeprecateCompoundSetUtilities {
                     			raise error "Compound set " + spCompoundSetName(eCompoundSet) + " does not have an index.  " +
                     			            "Perhaps the set can be deleted anyway, or perhaps you can give this se an index." ;
                     		endif ;
-                    		!DebuggerBreakpoint();
                     		spQualifiedCompoundIndexName(eCompoundSet) := fncGetPrefixForIdentifier(eCompoundSet) + spCompoundIndexName(eCompoundSet);
                     	endblock ;
                     

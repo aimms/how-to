@@ -57,7 +57,7 @@ Perform the following steps:
 
 The AIMMS project that does just this, can be downloaded from: :download:`2. Flow Shop - Delegated <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/2. Flow Shop - Delegated.zip>`.
 
-.. note:: Please do not use the "if pro::DelegateToServer" somewhere in the middle of a procedure; the calling procedure will start from the **beginning** on the server session thus repeating execution steps and this may lead to confusion.
+.. caution:: Please do not use the "if pro::DelegateToServer" somewhere in the middle of a procedure; on the server the calling procedure will start from the **beginning**, thus repeating execution steps and this easily leads to confusion.
 
 Now that we have an application developed that is ready to be published, we need to actually publish it. This is discussed next.
 
