@@ -4,7 +4,7 @@ How to interrupt the server session?
 Introduction
 ------------
 
-We saw how to remove the "Busy" veil during a solve process in a :doc:`previous article<Deploy_DataServerComm_3_RemoveVeil>` to let the user be in control of the application while a procedure execution is running in the background. However, we also lose the ability to interrup this background process which was available as a "Cancel" button on the veil. This article will guide you on how to interrupt a procedure executing in the server session when the veil has been disabled.
+We saw how to remove the "Busy" veil :doc:`previous article<Deploy_DataServerComm_3_RemoveVeil>` to let the user be in control of the application while a procedure execution is running in the background. However, we also lose the ability to interrupt this background process which was available as a "Cancel" button on the veil. This article will guide you on how to interrupt this procedure executing in the server session when the veil has been disabled.
 
 Implementation
 --------------
@@ -17,7 +17,7 @@ Interrupting the server session is very direct and can be done by using the AIMM
 
 #. ``intType`` short for interruption type, to specify whether you want to interrupt the execution of the entire procedure, or just a currently executing solve statement (if any). The difference between these two is that with a solve statement, the solver session is also invoked by the server session. If there is no solve statement in a procedure, it is executed only on the AIMMS server in the background. 
 
-This mechanism is illustrated in the code snippet below. Here we interrupt only a solve statement by using the predefined identifier ``pro::AIMMSAPI_INTERRUPT_SOLVE``. To interrupt the entire procedure execution, simply replace ``pro::AIMMSAPI_INTERRUPT_SOLVE`` with ``pro::AIMMSAPI_INTERRUPT_EXECUTE`` in the below code. 
+This mechanism is illustrated in the code snippet below. Here, we interrupt only a solve statement by using the predefined identifier ``pro::AIMMSAPI_INTERRUPT_SOLVE``. To interrupt the entire procedure execution, simply replace ``pro::AIMMSAPI_INTERRUPT_SOLVE`` with ``pro::AIMMSAPI_INTERRUPT_EXECUTE`` in the below code. 
 
     .. code-block:: none
 
