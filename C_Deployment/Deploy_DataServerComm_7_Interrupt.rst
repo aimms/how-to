@@ -17,7 +17,7 @@ Interrupting the server session is very direct and can be done by using the AIMM
 
 #. ``intType`` short for interruption type, to specify whether you want to interrupt the execution of the entire procedure, or just a currently executing solve statement (if any). The difference between these two is that with a solve statement, the solver session is also invoked by the server session. If there is no solve statement in a procedure, it is executed only on the AIMMS server in the background. 
 
-This mechanism is illustrated in the code snippet below. Here we interrupt only a solve statement by using the predefined identifier ``pro::AIMMSAPI_INTERRUPT_SOLVE``. To interrupt the entire procedure execution, simply replace ``pro::AIMMSAPI_INTERRUPT_SOLVE`` with ``pro::AIMMSAPI_INTERRUPT_EXECUTE`` in the below code. 
+This mechanism is illustrated in the code snippet below. Here, we interrupt only a solve statement by using the predefined identifier ``pro::AIMMSAPI_INTERRUPT_SOLVE``. To interrupt the entire procedure execution, simply replace ``pro::AIMMSAPI_INTERRUPT_SOLVE`` with ``pro::AIMMSAPI_INTERRUPT_EXECUTE`` in the below code. 
 
     .. code-block:: none
 
