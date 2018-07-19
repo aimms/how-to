@@ -4,7 +4,7 @@ How to interrupt the server session?
 Introduction
 ------------
 
-We saw how to remove the "Busy" veil during a solve process in a :doc:`previous article<Deploy_DataServerComm_3_RemoveVeil>` to let the user be in control of the application while a procedure execution is running in the background. However, we also lose the ability to interrup this background process which was available as a "Cancel" button on the veil. This article will guide you on how to interrupt a procedure executing in the server session when the veil has been disabled.
+We saw how to remove the "Busy" veil during a solve process in a :doc:`previous article<Deploy_DataServerComm_3_RemoveVeil>` to let the user be in control of the application while a procedure execution is running in the background. However, we also lose the ability to interrupt this background process which was available as a "Cancel" button on the veil. This article will guide you on how to interrupt a procedure executing in the server session when the veil has been disabled.
 
 Implementation
 --------------

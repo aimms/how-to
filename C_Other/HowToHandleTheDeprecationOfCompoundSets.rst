@@ -378,6 +378,7 @@ This should be replaced by:
         
         
 .. _Section_Conversion_Move_Indexes:
+
 Conversion step 7: Move the compound indexes to the corresponding set mapping sets.
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
