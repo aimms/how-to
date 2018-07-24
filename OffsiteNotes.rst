@@ -4,7 +4,7 @@
 
 .. warning::
 
-    Nobody can reach this article, unless they know the URL. We are a transparent company, but there is some limits.
+    Nobody can reach this article, unless they know the URL. We are a transparent company, but there is some limits :)
 
 Offsite Notes and remarks
 ++++++++++++++++++++++++++++
