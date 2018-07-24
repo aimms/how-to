@@ -183,7 +183,7 @@ R&D
 
 .. note::
 
-    That's a bummer, in a computer science company supposed to deliver a programming language...
+    That's a bummer, in a software company supposed to deliver a programming language...
     
 * They are working on making more logging and info, for people to analyse and help costumer (support).
 
