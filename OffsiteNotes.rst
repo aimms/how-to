@@ -211,6 +211,7 @@ UX 2.0 (Gertjan)
 .. note:: interestingly, nothing emerged about the stability that needed to needed to be fixed as well, before releasing new stuff.
 
 Thus, the question turned into:
+
 * How to improve SCNav and S&OP app with the current tech available ?
 * Gertjan would like (already did ) to ask Heineken, Ecolab, etc. to fund UX 2.0
 
@@ -243,12 +244,14 @@ BSS Circle
 
 **Jolanda's Business App**
 Jolanda is moving her "Business app"(financial planning) from an Excel to AIMMS. It is not yet complete. Data is there but the multi year layer not yet
+
 * What about using SC Navigator S&OP ??=> Jolanda will contact ChrisG
 
 **Recruitment procedure**
 Everybody more or less agreed that we had several miss hired people. Notably Ted Francisco, that was supposed to help Christophe on Supply Chain knowledge and sales, and that finally end-up leaving after realizing he had (also) poor skills.
 It turned out several alert signals were raised by many people about Ted Francisco, but they were lost in the procedure, or not integrated unfortunately. 
 "We didn't stick to the process" as Pauline and Megan agreed upon. 
+
 * => no references
 * => no consensus/feedback around the office, but
 * => "he could bridge the gap"  Simulation vs Optimisation 
