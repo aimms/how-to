@@ -179,7 +179,7 @@ Marketing
 R&D
 ======
 
-* R&D is doing Holacracy because of holacracy, they nobody really believes in it. Neither in their Scrum process and agile methodology.
+* R&D is doing Holacracy because of holacracy, nobody really believes in it. Neither in their Scrum process and agile methodology.
 
 .. note::
 
