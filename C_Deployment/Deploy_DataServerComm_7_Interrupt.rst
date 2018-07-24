@@ -4,21 +4,20 @@ How to interrupt the server session?
 Introduction
 ------------
 
-Assuming we have visibility of the server session via :doc:`progress <Deploy_DataServerComm_5_Progress>` or :doc:`intermediate results <Deploy_DataServerComm_6_Retrieve>`, we may decide to interrupt the server session. 
-This answer takes you through the steps to interrupt a solve process or to interrupt a server session from the client side. 
+We saw how to remove the "Busy" veil during a solve process in a :doc:`previous article<Deploy_DataServerComm_3_RemoveVeil>` to let the user be in control of the application while a procedure execution is running in the background. However, we also lose the ability to interrupt this background process which was available as a "Cancel" button on the veil. This article will guide you on how to interrupt a procedure executing in the server session when the veil has been disabled.
 
 Implementation
 --------------
 
 .. image::  ../Resources/AIMMSPRO/Deploy_DataServerComm_7_Interrupt/Images/QueuesBetweenDataAndServerSession.png
 
-Interrupting the server session is very direct and can be done by simply calling the AIMMS PRO library procedure, ``pro::client::StopExecution`` . However, you will need to know:
+Interrupting the server session is very direct and can be done by using the AIMMS PRO library procedure, ``pro::client::StopExecution`` which requires you to specify two input arguments.  
 
-#.  to which message queue is the server process listening? In our example, we have only one server session, and the message queue - a string, can be obtained by using ``pro::session::CurrentSessionQueue()``.  
+#. ``queueID`` to which message queue is the server process listening? As we have only one server session in our example, the current server session queue can be obtained as a string parameter by using ``pro::session::CurrentSessionQueue()``.  
 
-#.  whether you want to interrupt execution of the procedure, or just interrupt a currently executing solve statement (if any).
+#. ``intType`` short for interruption type, to specify whether you want to interrupt the execution of the entire procedure, or just a currently executing solve statement (if any). The difference between these two is that with a solve statement, the solver session is also invoked by the server session. If there is no solve statement in a procedure, it is executed only on the AIMMS server in the background. 
 
-The mechanism is illustrated in the code snippet below. Here we interrupt only a solve statement.
+This mechanism is illustrated in the code snippet below. Here, we interrupt only a solve statement by using the predefined identifier ``pro::AIMMSAPI_INTERRUPT_SOLVE``. To interrupt the entire procedure execution, simply replace ``pro::AIMMSAPI_INTERRUPT_SOLVE`` with ``pro::AIMMSAPI_INTERRUPT_EXECUTE`` in the below code. 
 
     .. code-block:: none
 
@@ -33,22 +32,9 @@ The mechanism is illustrated in the code snippet below. Here we interrupt only a
             }
         }
 
-Finally, to allow activate this procedure, we link this procedure to a new button widget, named ``BtnInterruptSolve`` in our example.
+Now, you can link this procedure to a button in your WebUI application to be able to interrupt a solve procedure running in the backround.
 
-.. note:: If you want to stop the server session instead of the solver, you will need to replace ``pro::AIMMSAPI_INTERRUPT_SOLVE`` with ``pro::AIMMSAPI_INTERRUPT_EXECUTE`` in the above code.
-
-Now, the user interface when the problem is being solved looks as follows.
-
-.. image::  ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB07_WebUI_screen.PNG 
-            
-..            ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB07_WebUI_screen.PNG
-
-The example AIMMS project with the above demonstrated procedures can be downloaded from :download:`8. Flow Shop - Interrupt <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/8. Flow Shop - Interrupt.zip>`.
-
-Summary
--------
-
-The direct support for interruptions makes interrupting a solver or a server session in AIMMS PRO very easy.
+The example AIMMS project with the above demonstrated procedure implemented can be downloaded from :download:`8. Flow Shop - Interrupt <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/8. Flow Shop - Interrupt.zip>`.
 
 Further reading
 ---------------
