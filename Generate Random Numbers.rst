@@ -20,6 +20,7 @@ How to generate random numbers ?
  .. image:: Images/Data.png
 			:scale: 40 %
 
+
  That's good. But if we would plot our parameter distribution we would end up with a uniform distribution. 
  
  |aimms| propose a lot of other different distributions. Help yourself!
