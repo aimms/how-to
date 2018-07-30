@@ -40,20 +40,20 @@ To publish an application on the AIMMS PRO platform, the procedure containing th
 
 Perform the following steps:
 
-#.	In the model: create a new procedure, named: ``prSolve``
+#.  In the model: create a new procedure, named: ``prSolve``
 
-#.	Give it the following body:
+#.  Give it the following body:
 
-	.. code-block:: none
+    .. code-block:: aimms
+    
+        if pro::DelegateToServer( waitForCompletion: 1,
+              completionCallback: 'pro::session::LoadResultsCallBack' )
+            then return 1;
+        endif;
+        prDoSolve();
 
-		if pro::DelegateToServer( waitForCompletion: 1,
-			  completionCallback: 'pro::session::LoadResultsCallBack' )
-			then return 1;
-		endif;
-		prDoSolve();
 
-
-#.	Link the widget ``BtnSolve`` in the WebUI to the new procedure ``prSolve``.
+#.  Link the widget ``BtnSolve`` in the WebUI to the new procedure ``prSolve``.
 
 The AIMMS project that does just this, can be downloaded from: :download:`2. Flow Shop - Delegated <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/2. Flow Shop - Delegated.zip>`.
 
