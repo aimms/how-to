@@ -1,11 +1,8 @@
 How to download multiple files ?
 =========================================================================
 
-A download widget in the WebUI is able to point only a unique file name. Thus if you need to download multiple different files, you would need multiple download widgets. However, you may use ZIP files (or equivalent compressed format, such as TAR files on Linux). The question is, how to automatically generate a zip file out of several files thanks to AIMMS, such that your end user would be able to download it from the End user mode (WebUI) ? In developer mode, on PRO or on the AIMMS Cloud ?
+A download widget in the WebUI is able to point only a unique file name. Thus if you need to download multiple different files, you would need multiple download widgets. However, you may use ZIP files (or equivalent compressed format, such as TAR files on Linux). The question is, how to automatically generate a zip file out of several files thanks to AIMMS, such that your end-user would be able to download it from the End-user mode (WebUI) in one click? In developer mode, on PRO or on the AIMMS Cloud ?
 
-.. seealso::
-    
-    https://techblog.aimms.com/2017/02/22/execute-a-handy-function-to-run-an-executable-program-from-aimms/
 
 .. contents:: Steps we will take
     :local:
@@ -60,7 +57,11 @@ You may verify that the archive was created in the project folder.
     
     * On Linux, you may also directly use ``Execute("tar", "cvf archivedossier.tar FilesToDownload/", wait: 1);``
     
+.. seealso::
+    
+    https://techblog.aimms.com/2017/02/22/execute-a-handy-function-to-run-an-executable-program-from-aimms/
 
+    
 Configure WebUI download widget
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
