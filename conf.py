@@ -17,7 +17,7 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
-# import sys
+import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
 # -- General configuration ------------------------------------------------
@@ -218,3 +218,13 @@ if os.name != 'nt':
 else:
 	#To check any broken links 
 	nitpicky = True
+
+# Import the AIMMSLexer into local Pygments module (syntax highlighting). The styling is made with Hacks.css in the _static folder
+def setup(sphinx):
+	
+    sys.path.insert(0, os.path.abspath("./includes/AIMMSLexer/Lexer"))
+    from aimms import AIMMSLexer
+    from pygments.formatters import HtmlFormatter
+    sphinx.add_lexer("aimms", AIMMSLexer())
+    
+#pygments_style = 'AIMMSLexerStyle'

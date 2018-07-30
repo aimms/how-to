@@ -313,3 +313,39 @@ div.box h1, .wy-breadcrumbs li a{
 	border:1px solid grey;
 	margin-bottom:10px
 }
+
+
+div.highlight-aimms div.highlight{
+
+	background-color:white;
+	font-family: "Courier New";
+	color:black;
+}
+
+div.highlight-aimms span.kr {
+
+	color:blue;
+}
+
+div.highlight-aimms span.nb {
+
+	color:#a52a2a;
+}
+
+div.highlight-aimms span.na,span.o,span.p {
+
+	color:black;
+	font-weight:bold;
+}
+
+div.highlight-aimms span.cm {
+
+	color:#008000;
+	font-style:italic;
+}
+
+div.highlight-aimms span.s1 {
+
+	color:#808080;
+	font-style:italic;
+}
