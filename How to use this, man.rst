@@ -1,3 +1,5 @@
+:orphan:
+
 .. |GitFolder| image:: Images/GitFolder.png
 				:scale: 70 %
 				:target: https://gitlab.aimms.com/Chris/aimms-how-to
@@ -60,7 +62,7 @@ How to use this, man ?
 
 The best way to create your own HowTo is by far to check the source (.rst file) from this doc, or any doc found online. However, here are some very small stuff to get you onboard:
 
-* In the git folder, copy-paste the :blue:`Generate Random Numbers.rst` , and rename it :red:`MyHowTo.rst`
+* In the git folder, copy-paste the :code:`Generate Random Numbers.rst` , and rename it :code:`MyHowTo.rst`
 * Open this file in notepad++, and start reading/modifing it
 * Open a command prompt from the current folder (containing the **make** files)
 * run ``make html``

@@ -1,3 +1,5 @@
+:orphan:
+
 .. include:: includes/icons.def
 
 How to generate random numbers ?
