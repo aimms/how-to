@@ -45,7 +45,7 @@ As you may see, we asked AIMMS to execute a program called "7za.exe" located in 
     * ``archive2.zip`` = the archive path. This will create the archive file in the project folder
     * ``.\FilesToDownload\*`` = the folder to add (any files or sub folder) regardless of their name (because we specified ``*`` at the end)
 
-* As a 3rd argument of the ``Execute`` function, we asked AIMMS to wait until the called program, ``7za.exe``, as finished his job.
+* As a 3rd argument of the ``Execute`` function, we asked AIMMS to wait until the called program ``7za.exe`` has finished his job.
 
 * We finished by assigning a string parameter to `"Ready to test Existence"`, notifying us about the end of the zipping process.
 
@@ -129,13 +129,14 @@ As well as my **Download** procedure:
     StatusCode := webui::ReturnStatusCode('CREATED');
     StatusDescription := "Nice.";
 
-As you may have noticed, when on PRO server, we took care to copy the archive file created in the project folder in the "PRO-temp" folder, where the download widget will be able to access the file and make the EndUser download it in his browser.
+As you may have noticed, when on PRO server, we took care to copy the archive file created in the project folder in the "PRO-temp" folder by using ``webui::GetIOFilePath``, where the download widget will be able to access the file and make the End-User download it in his browser.
 
 Et voila! 
 
 .. note::
 
-    You may use this implementation also on AIMMS Cloud, since AIMMS Cloud computers are operating on Linux.
+    * You may use this implementation also on AIMMS Cloud, since AIMMS Cloud computers are operating on Linux.
+    * You may use the AIMMS intrinsic function ``AimmsStringConstants()`` to know on which platform (Linux or windows) your AIMMS application is currently running on. Please refer to the `Function Reference <https://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_ for further details.
 
 Downloadable example
 +++++++++++++++++++++
