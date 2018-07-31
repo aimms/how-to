@@ -18,7 +18,7 @@ __all__ = ['AIMMSLexer']
 
 
 # Here is the regex to find every identifier declaration, used later on the get_tokens_unprocessed
-id_re = re.compile(r'(?i)(Set|Calendar|Horizon|index|Parameter|ElementParameter|StringParameter|UnitParameter|Variable|elementvariable|complementarityvariable|Constraint|Arc|Node|uncertaintyvariable|uncertaintyconstraint|Activity|Resource|MathematicalProgram|Macro|Model|Assertion|DatabaseTable|DatabaseProcedure|File|Procedure|Function|Quantity|Convention|LibraryModule|Module|Section|Declaration|ExternalProcedure|File)(?:\s+)(\w+)(\s*\{|\s*;|\s*:)')
+id_re = re.compile(r'(?i)(Set|Calendar|Horizon|index|Parameter|ElementParameter|StringParameter|UnitParameter|Variable|elementvariable|complementarityvariable|Constraint|Arc|Node|uncertaintyvariable|uncertaintyconstraint|Activity|Resource|MathematicalProgram|Macro|Model|Assertion|DatabaseTable|DatabaseProcedure|File|Procedure|Function|Quantity|Convention|LibraryModule|Module|Section|Declaration|ExternalProcedure|File|DeclarationSection)(?:\s+)(\w+)(\s*\{|\s*;|\s*:)')
 
 # Create new Tokens for main identifier types (Parameters,EP,SP,Set, Variable, Constraint)
 # TODO
