@@ -344,7 +344,7 @@ div.highlight-aimms span.cm {
 	font-style:italic;
 }
 
-div.highlight-aimms span.s1 {
+div.highlight-aimms span.s1,span.s2 {
 
 	color:#808080;
 	font-style:italic;
