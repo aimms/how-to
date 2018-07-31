@@ -48,7 +48,7 @@ The predefined ``option`` statement lets you alter the project options in a proc
 
 If included before the solve statement in your project, the procedure ``NewTimeCallback`` is executed every 1 second. 
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         FlowShopModel.CallbackTime := 'NewTimeCallback';
         option progress_time_interval := 1 ;
@@ -57,7 +57,7 @@ Step 1B Retrieve the information passed on by the solver to the AIMMS server ses
 
 In our example, we want to display only the best bound and incumbent objective value of the MIP. So, the body of ``NewTimeCallback`` consists of a procedure with two arguments - FlowShopModel.bestbound and FlowShopModel.Incumbent. You can retrieve values of any of the mathematical program suffices which are listed and explained in chapter "Mathematical Program Suffices" of `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_.
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         UpdateGapToClient(FlowShopModel.bestbound,FlowShopModel.Incumbent);
         
@@ -80,7 +80,7 @@ As we are only passing small amounts of data and executing some simple arithmeti
 
 This procedure contains two arguments as input parameters, bb and icb which take on the values of the bestbound and Incumbent suffices specified in the previous step.
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         Procedure UpdateGapToClient {
             Arguments: (bb,icb);

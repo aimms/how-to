@@ -227,4 +227,4 @@ def setup(sphinx):
     from pygments.formatters import HtmlFormatter
     sphinx.add_lexer("aimms", AIMMSLexer())
     
-highlight_language = 'AIMMSLexer'
+highlight_language = 'aimms'

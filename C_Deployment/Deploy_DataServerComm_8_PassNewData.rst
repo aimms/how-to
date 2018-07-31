@@ -19,7 +19,7 @@ Once a solver session is started, you can send additional information using the 
 
 This is illustrated in the following code of ``prPassProgressSupplied``. 
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         Procedure prPassProgressSupplied {
             Arguments: (pwbs);

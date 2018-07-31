@@ -46,7 +46,7 @@ class AIMMSLexer(RegexLexer):
             (r'(Comment:\s+{?)((.|\n)+?)([};])',bygroups(Name.Attribute, Comment.Multiline, Name.Attribute)),
 
             #For AMS files, matches all Attributes from any declaration
-            (r'(\w+)(:)\s+', bygroups(Name.Attribute,Operator)),
+            (r'(\w+)(:)(\s+)', bygroups(Name.Attribute,Operator,Text.Whitespace)),
                       
             
             # AllKeywords: to be blue! # TODO: put this list outside
@@ -91,13 +91,10 @@ class AIMMSLexer(RegexLexer):
         id_types = [row[0] for row in m]
         id_names = [row[1] for row in m]
         id_op = [row[2] for row in m]
-        
-        print "I'm in get_tokens_unprocessed"
-        
-            
+          
         for index, token, value in RegexLexer.get_tokens_unprocessed(self, text):
             
-            if token is Token.Name.Argument: print token
+            #if token is Token.Name.Argument: print token
             
             if any(item == value for item in id_types):
                 yield index, Keyword.Declaration, value

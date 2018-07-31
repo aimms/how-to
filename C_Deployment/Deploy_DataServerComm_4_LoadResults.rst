@@ -11,7 +11,7 @@ What is happening here?
 
 A typical ``pro::DelegateToServer`` call looks as below:
 
-	.. code-block:: none
+	.. code-block:: aimms
 
 		if pro::GetPROEndPoint() then
 			if pro::DelegateToServer(  
@@ -35,7 +35,7 @@ Step 1.  Retrieving the ``RequestID``
 
 Create a string parameter ``spSavedRequestID`` to store the ``requestId`` and a binary parameter ``bpResultsAvailable`` to control the visibility of the load button in the user interface. 
  
-	.. code-block:: none
+	.. code-block:: aimms
 
 		StringParameter spSavedRequestID {
 			InitialData: "";
@@ -47,7 +47,7 @@ Create a string parameter ``spSavedRequestID`` to store the ``requestId`` and a 
 
 Now, create an assignment procedure ``myLoadResultsCallback`` with a local input argument ``RequestID`` to update the values of these identifiers. 
 
-	.. code-block:: none
+	.. code-block:: aimms
 
 		Procedure myLoadResultsCallback {
 			Arguments: (RequestID);
@@ -69,7 +69,7 @@ Step 2. Provide `completionCallback` argument of the ``pro::DelegateToServer`` c
 
 Now, we need to trigger the assignment procedure ``myLoadResultsCallback`` when a solved casefile is available on the server session. This is done by providing ``myLoadResultsCallback`` as the `completionCallback` argument.
 
-	.. code-block:: none
+	.. code-block:: aimms
 
 		if pro::GetPROEndPoint() then
 			if pro::DelegateToServer(  
@@ -85,7 +85,7 @@ Step 3. Create a procedure and a button to load the data
 
 Create a procedure ``prLoadResults`` and link it to a button widget, say ``BtnLoadResults``. The body of ``prLoadResults`` is as follows;
 
-	.. code-block:: none
+	.. code-block:: aimms
 
 		Procedure prLoadResults {
 			Body: {

@@ -315,6 +315,7 @@ div.box h1, .wy-breadcrumbs li a{
 }
 
 
+/*Default styling for any AIMMS code*/
 div.highlight-aimms div.highlight{
 
 	background-color:white;
@@ -322,30 +323,57 @@ div.highlight-aimms div.highlight{
 	color:black;
 }
 
+/*Styling for AIMMS blue built-in keywords, like if-then-else*/
 div.highlight-aimms span.kr {
 
 	color:blue;
 }
 
+/*Styling for AIMMS intrinsic red function, like Execute()*/
 div.highlight-aimms span.nb {
 
 	color:#a52a2a;
 }
 
-div.highlight-aimms span.na,span.o,span.p {
+/*Styling for AIMMS Named attributes (ex: SubsetOf, indexDomain, etc.), operators(ex: =) and punctuation (ex: ; or ,)*/
+div.highlight-aimms span.na {
+	
+    color:rgb(88,88,88);
+	font-weight:bold;    
+} 
+div.highlight-aimms span.o, 
+div.highlight-aimms span.p {
 
 	color:black;
 	font-weight:bold;
 }
 
-div.highlight-aimms span.cm {
+/*Styling for AIMMS comments*/
+div.highlight-aimms span.cm, 
+div.highlight-aimms span.c1,
+div.highlight-aimms span.c2 {
 
 	color:#008000;
 	font-style:italic;
 }
 
-div.highlight-aimms span.s1,span.s2 {
+/*Styling for AIMMS Strings + set elements*/
+div.highlight-aimms span.s1,
+div.highlight-aimms span.s2 {
 
 	color:#808080;
 	font-style:italic;
+}
+
+/*Styling for AIMMS declared identifier.. default is purple*/
+div.highlight-aimms span.nv {
+    
+    color:rgb(200,130,0);
+}
+
+/*Styling for AIMMS declaration identifier (Parameter, Variable, etc.). Default is green bold*/
+div.highlight-aimms span.kd {
+    
+    color: black;
+    font-weight: bold;
 }

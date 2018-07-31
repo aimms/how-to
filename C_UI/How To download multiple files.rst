@@ -23,7 +23,7 @@ Calling the ``Execute`` intrinsic function
 
 You may download the ``7za.exe`` executable from https://www.7-zip.org/download.html, and put it in your project folder. Say you have several files to download in a folder ``FilesToDownload`` in your project folder. As described in https://sevenzip.osdn.jp/chm/cmdline/syntax.htm, you may use the ``Execute`` function as follows. 
 
-.. code-block:: none
+.. code-block:: aimms
 
     Model Main_TarFiles {
         
@@ -66,7 +66,7 @@ Configure WebUI download widget
 
 You may now open your WebUI, and insert a download widget that you will link with the following typical download procedure, pointing at your newly created ``archive2.zip`` file:
 
-.. code-block:: none
+.. code-block:: aimms
 
     Procedure DownloadTarArchive {
         Arguments: (FileLocation,StatusCode,StatusDescription);
@@ -100,7 +100,7 @@ Knowing how works the ``Execute`` function, you may call any executable program 
 
 I will thus simply improve my **MainExecution** procedure as follows:
 
-.. code-block:: none
+.. code-block:: aimms
 
     if ProjectDevelopermode then
         execute("7za.exe", "a archive2.zip .\FilesToDownload\*", wait: 1); !On windows
@@ -116,7 +116,7 @@ I will thus simply improve my **MainExecution** procedure as follows:
     
 As well as my **Download** procedure:
 
-.. code-block:: none
+.. code-block:: aimms
 
     if projectDeveloperMode then
         FileLocation := "archive2.zip";

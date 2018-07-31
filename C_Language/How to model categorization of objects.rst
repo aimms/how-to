@@ -51,7 +51,7 @@ Order size for each order is stored in an element parameter `epOrderSize(o)` whi
 Now, the cost of each order `pOrderCost(o)` can be calculated using the following definition. 
 
 
-.. code-block:: none
+.. code-block:: aimms
 
 		pPrice(epOrderSize(o))
 

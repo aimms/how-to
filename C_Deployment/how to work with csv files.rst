@@ -51,7 +51,7 @@ Detail specification tables and files
 The table names in the DataLink view are the same as the filenames in the CSVProvider view, with the note that these files have suffix ``.csv``.
 The AIMMS set ``dl::DataTables`` contains a list of these table names. For instance, adding the table ``fourRows`` to the list of tables is done as follows:
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         dl::DataTables += {'fourRows'} ; ! komma/fourRows.csv is the file we're gonna read from.
 
@@ -62,7 +62,7 @@ Detail specification identifiers and columns
 For each set and parameter in the AIMMS model, we need to specify in which DataLink table aka CSV file it corresponds and to which column in that table.
 We do this using the following 4-dimensional table:
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         DataMap(
                     dl::dt,    ! Table name, should be present in dl::DataTables.
@@ -103,7 +103,7 @@ The following attributes are supported:
 
 Example:
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         spCommunicationAttributes := 
               { 'DataProvider' : csvprov::DataLink , 
@@ -117,7 +117,7 @@ Detail specification for actual read and write calls
 using the above detail specifications, we are now ready to actually read from or write to CSV files. 
 The following example is hopefully self-explanatory.
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         dl::DataRead("semi",                  ! reading from data source "semi" - because we use CSVProvider this data source is a folder.
                 "TheMapping" ,                ! using relation "TheMapping" between folder "semi" and AIMMS identifiers.

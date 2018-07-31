@@ -31,7 +31,7 @@ There are three groups of identifiers needed by the server session that can be p
 
 In the declaration below, the variables and constraints that make up the mathematical program ``FlowShopModel`` are the sets ``sFlowshopConstraints`` and ``sFlowshopVariables``. 
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         MathematicalProgram FlowShopModel {
             Objective: TimeSpan;
@@ -50,7 +50,7 @@ In the declaration below, the variables and constraints that make up the mathema
 
 To determine which identifiers make up the mathematical program instance we need to know which identifiers are referenced in the variable and constraint definitions. We use the function ``ReferencedIdentifiers`` for this as follows:
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         sInputIds := 
             ! Identifiers from mathematical program:
@@ -68,7 +68,7 @@ To determine which identifiers make up the mathematical program instance we need
 
 Now we only to construct the set of output identifiers, ie those identifiers that should be in the case send from the server session to the client session.  The client session only needs the Gantt Chart starts and durations. So that is simply:
 
-    .. code-block:: none
+    .. code-block:: aimms
      
         sOutputIds := data { pGCJobStart, pGCJobDuration };
   
@@ -76,13 +76,13 @@ Now we have constructed the sets of identifiers that need to be passed from the 
 
 #. The ``pro::ManagedSessionInputCaseIdentifierSet`` needs to be assigned **before** calling the procedure ``pro::DelegateToServer``, for instance as follows:
 
-    .. code-block:: none
+    .. code-block:: aimms
      
         pro::ManagedSessionInputCaseIdentifierSet := sInputIds ;
 
 #. The ``pro::ManagedSessionOutputCaseIdentifierSet`` needs to be assigned **during** the execution of the server session. For instance as follows:
 
-    .. code-block:: none
+    .. code-block:: aimms
      
         if pro::DelegateToServer( waitForCompletion: 1, 
             completionCallback: 'pro::session::LoadResultsCallBack' ) then  

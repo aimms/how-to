@@ -207,7 +207,7 @@ This data will be stored primarily in a relation.  This is why we want the defin
 
 Consider the following example:
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         Set C {
             SubsetOf: (S, T, U);
@@ -227,7 +227,7 @@ Consider the following example:
  
 In the above example, the definition of C is a definition that can also be used for a relation, say :math:`R`, that is a subset of the cartesian product :math:`S \times T \times U`. In contrast, the definition of D cannot be used directly as the definition for a relation; we need to rewrite it first. For instance as follows:
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         Set D {
             SubsetOf: C;
@@ -311,7 +311,7 @@ In this conversion step we will use a running example that contains:
 Replace use of tags
 ^^^^^^^^^^^^^^^^^^^
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         Parameter p1 {
             IndexDomain: h;
@@ -320,7 +320,7 @@ Replace use of tags
         
 Will give the error message: ``The "TS" is not a tag that can be associated with index "h".`` You can replace it by
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         Parameter p1 {
             IndexDomain: h;
@@ -334,7 +334,7 @@ Replace use of atomic indexes with set mapping index
 
 Consider the declaration of compound data parameter ``P``:
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         Parameter P {
             IndexDomain: h;
@@ -342,7 +342,7 @@ Consider the declaration of compound data parameter ``P``:
 
 Then using ``P`` in an expression such as:
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         Parameter PS {
             IndexDomain: (i,j,k);
@@ -352,7 +352,7 @@ Then using ``P`` in an expression such as:
 will lead to a compilation error such as ``The number of arguments in the parameter "P" is not correct.`` 
 You can replace this definition by: 
         
-    .. code-block:: none
+    .. code-block:: aimms
 
         Parameter PS {
             IndexDomain: (i,j,k);
@@ -364,13 +364,13 @@ Replace use of the function TUPLE
 
 Consider: 
 
-    .. code-block:: none
+    .. code-block:: aimms
     
         epC := Tuple( epS, epT, epU );
         
 This should be replaced by:
 
-    .. code-block:: none
+    .. code-block:: aimms
     
         epC := first( iSMI_C | ( epS, epT, epU, iSMI_C ) in sSetMappingRelation_C );
         

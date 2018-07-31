@@ -19,7 +19,7 @@ Interrupting the server session is very direct and can be done by using the AIMM
 
 This mechanism is illustrated in the code snippet below. Here, we interrupt only a solve statement by using the predefined identifier ``pro::AIMMSAPI_INTERRUPT_SOLVE``. To interrupt the entire procedure execution, simply replace ``pro::AIMMSAPI_INTERRUPT_SOLVE`` with ``pro::AIMMSAPI_INTERRUPT_EXECUTE`` in the below code. 
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         Procedure prInterruptSolve {
             Body: {

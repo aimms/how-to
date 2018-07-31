@@ -11,7 +11,7 @@ When we test our app from within the AIMMS IDE, we get the following dialog:
 
 Clicking ``No`` avoids AIMMS PRO, but this soon becomes annoying. To avoid this dialog, many developers use the function ``ProjectDeveloperMode()``. This function returns a 0 (false) or 1 (true) for the question - "Is the current instance in developer mode (AIMMS IDE) or in end user mode?"   You can read more on ``ProjectDeveloperMode`` `here <http://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_.
 
-	.. code-block:: none
+	.. code-block:: aimms
 
 		if not ProjectDeveloperMode() then
 			if pro::DelegateToServer( waitForCompletion  :  1,
@@ -29,7 +29,7 @@ To check whether we are connected to an AIMMS PRO session or not, we use the fun
 We change the body of the ``prSolve`` procedure by replacing the test ``not ProjectDeveloperMode()`` with the test ``PRO::GetPROEndPoint()`` below.
 
 
-	.. code-block:: none
+	.. code-block:: aimms
 
 		if pro::GetPROEndPoint() then
 			if pro::DelegateToServer( waitForCompletion  :  1,

@@ -63,7 +63,7 @@ Step 1A Construct the incumbent solution on the solver session.
     
 As we want to display/update a new incumbent solution as it becomes available, we use the mathematical program suffix ``CallbackNewIncumbent``. A callback procedure is assigned to this suffix as below, and this executes the assigned procedure whenever a new incumbent solution is found by the solver. Include the below statement before the solve statement in your project. 
 
-    .. code-block:: none
+    .. code-block:: aimms
         
         FlowShopModel.CallbackNewIncumbent := 'NewIncumbentCallback';
 
@@ -73,7 +73,7 @@ In the running example, the procedure ``NewIncumbentCallback`` first retrieves t
 
 The predefined procedure ``RetrieveCurrentVariableValues`` retrieves the current values of the variables as the name suggests. It takes an argument specifying which variable values are to be retrieved and we use the predefined set ``AllVariables`` to get the values of all the variables in the model. TimeSpan is the objective function of the model and we are storing the current incumbent value with the assignment statement. 
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         ! Transfer the solution from the solver to AIMMS
         empty JobSchedule;
@@ -83,7 +83,7 @@ The predefined procedure ``RetrieveCurrentVariableValues`` retrieves the current
         
 Create a case file containing this solution.    
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         AllCaseFileContentTypes += 'sIncumbentSolutionIdentifiers' ;
         CurrentCaseFileContentType := 'sIncumbentSolutionIdentifiers' ;
@@ -94,7 +94,7 @@ Create a case file containing this solution.
 
 Now, save the case file on PRO storage and store the name of the case file (including location path) in a string parameter.
 
-    .. code-block:: none    
+    .. code-block:: aimms    
 
         ! Transfer the case from the data folder of the server session to the AIMMS PRO storage user data folder.
         ! Transfer the GC solution from AIMMS to a case.
@@ -104,7 +104,7 @@ Now, save the case file on PRO storage and store the name of the case file (incl
 
 The AIMMS execution side is now triggered using the previously updated string parameters as arguments. 
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         ! Run the AIMMS execution on the data session
         UpdateIncumbentToClient(spFullProStorageName);
@@ -115,7 +115,7 @@ Step 2. From server session (level 2) to data session (level 3)
 
 The procedure ``UpdateIncumbentToClient`` is a simple loading case file execution using the predefined procedure, ``CaseFileLoad``.
 
-    .. code-block:: none
+    .. code-block:: aimms
 
         if pro::DelegateToClient(flags: 0) then
             return 1; 
