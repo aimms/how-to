@@ -249,7 +249,7 @@ In this conversion step a set mapping is created for each compound set in your m
 
 Please open the WinUI page: ``Deprecate Compound Set Control Page`` of the library ``DeprecateCompoundSetUtilities``, and press button ``Create Set Mapping Declarations``.  This action will create a section named ``set mapping declarations`` and sections named ``<prefix> set mapping declarations`` for each library / module where compound sets are defined. The model explorer should now look something like this:
 
-.. image::  ../Resources/Other/CompoundSets/Images/SetMappingDeclarations.png 
+.. image::  ../Resources/Other/CompoundSets/Images/SetMappingDeclarations.PNG
 
 These sections are created in the runtime library ``CompoundSetMappingRuntimeLibrary`` as runtime libraries are the only place where a library or main model may create new AIMMS code.  The section ``set mapping declarations`` should be in the main model, however. Similarly, the sections ``<prefix> set mapping declarations`` should be in the corresponding libraries / modules.
 
