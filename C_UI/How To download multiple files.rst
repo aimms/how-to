@@ -10,8 +10,8 @@ A download widget in the WebUI is able to point only a unique file name. Thus if
     
 |
 
-In developer mode
-++++++++++++++++++
+Start in developer mode
+++++++++++++++++++++++++
 
 As you may know, AIMMS is capable of executing any executable program available on its running environment through the :code:`Execute` function. AIMMS running environment may refer to your computer when using AIMMS in developer mode, your server computers when you are using AIMMS PRO and AIMMS computers when you are on the AIMMS Cloud. 
 
@@ -51,9 +51,11 @@ As you may see, we asked AIMMS to execute a program called "7za.exe" located in 
 
 You may verify that the archive was created in the project folder.
 
-.. note::
+.. warning::
 
-    * If you are running on Windows 10, you may directly use the zip program already installed. Since this zip program is in your PATH, you may access it by calling "zip" in the ``Execute`` function. Thus the ``Execute`` call will look like ``Execute("zip", "archive2.zip .\FilesToDownload\*", wait: 1);`` 
+    Please mind to include the ``7za.exe`` in your project folder for this code to work. 
+
+.. note::
     
     * On Linux, you may also directly use ``Execute("tar", "cvf archivedossier.tar FilesToDownload/", wait: 1);``
     
@@ -94,42 +96,52 @@ You may now open your WebUI, and insert a download widget that you will link wit
     https://manual.aimms.com/webui/download-widget.html
 
 
-If my project is on PRO
-++++++++++++++++++++++++
+Elevate your formulation to PRO
++++++++++++++++++++++++++++++++
 
-Knowing how works the ``Execute`` function, you may call any executable program in your system PATH, or by specifying the absolute path on your server, such as: ``C:\Program Files (x86)\MyProgram\MyProgram.exe``. However, mind to create the archive somewhere the download procedure may access. in the following example, my PRO server is a Linux machine.
+Knowing how works the ``Execute`` function, you may call any executable program in your system PATH, or by specifying the absolute path on your server, such as: ``C:\Program Files (x86)\MyProgram\MyProgram.exe``. However, mind to create the archive somewhere the download procedure may access. In the following example, I take into account both situation, PRO on Windows or PRO on Linux. 
 
 I will thus simply improve my **MainExecution** procedure as follows:
 
 .. code-block:: none
 
-    if ProjectDevelopermode then
-        execute("7za.exe", "a archive2.zip .\FilesToDownload\*", wait: 1); !On windows
+    if not AimmsStringConstants('platform')='Linux' then
+        execute("7za.exe", "a archive2.zip .\FilesToDownload\*", wait: 1); !On windows, nothing has changed here. (I considered you bundled the 7za.exe program with your AIMMS project in the aimmspack.)
         TestPara := "Ready to test Existence";
-    else
-        execute("tar", "cvf archivedossier.tar FilesToDownload/", wait: 1); !On Linux
+    else 
+        execute("tar", "cvf archive2.tar FilesToDownload/", wait: 1); !On Linux
         TestPara := "Ready to test Existence";
     endif;
 
 .. note:: 
 
-    The ``ProjectDeveloperMode`` intrinsic function detects if a project is in developer or end-user mode (when opened on PRO, a project is automatically in end-user mode)
+    * For windows, I considered you bundled the 7za.exe program with your AIMMS project in the aimmspack. As explained above, an alternative would be to install a zip program on your Windows Server accessible from the PATH, or  
+    * The ``AimmsStringConstants`` intrinsic string parameter provides a list of system constants, such as ``'platform'`` (windows, linux) or ``'architecture'`` (x64, x86)
     
-As well as my **Download** procedure:
+And I will improve my **Download** procedure as well:
 
 .. code-block:: none
 
-    if projectDeveloperMode then
+    if ProjectDeveloperMode then
         FileLocation := "archive2.zip";
-    else
-        FileCopy("archivedossier.tar", webui::GetIOFilePath("archivedossier.tar"));
-        FileLocation := webui::GetIOFilePath("archivedossier.tar");
+        
+    elseif AimmsStringConstants('platform')='Linux' then
+        FileCopy("archive2.tar", webui::GetIOFilePath("archive2.tar"));
+        FileLocation := webui::GetIOFilePath("archive2.tar");
+        
+    elseif AimmsStringConstants('platform')='Linux' then
+        FileCopy("archive2.tar", webui::GetIOFilePath("archive2.tar"));
+        FileLocation := webui::GetIOFilePath("archive2.tar");
     endif;
 
     StatusCode := webui::ReturnStatusCode('CREATED');
     StatusDescription := "Nice.";
 
-As you may have noticed, when on PRO server, we took care to copy the archive file created in the project folder in the "PRO-temp" folder by using ``webui::GetIOFilePath``, where the download widget will be able to access the file and make the End-User download it in his browser.
+As you may have noticed, when running on PRO server, we took care to copy the archive file created in the project folder in the "PRO-temp" folder by using ``webui::GetIOFilePath``, where the download widget will be able to access the file and make the End-User download it in his browser.
+
+.. note::
+
+    The ``ProjectDeveloperMode`` intrinsic function detects if a project is in developer or end-user mode (when opened on PRO, a project is automatically in end-user mode)
 
 Et voila! 
 
