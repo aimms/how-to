@@ -143,7 +143,7 @@ As you may have noticed, when running on PRO server, we took care to copy the ar
 
     The ``ProjectDeveloperMode`` intrinsic function detects if a project is in developer or end-user mode (when opened on PRO, a project is automatically in end-user mode)
 
-Et voila! 
+Et voilà! 
 
 .. note::
 
