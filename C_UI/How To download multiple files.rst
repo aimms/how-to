@@ -129,9 +129,9 @@ And I will improve my **Download** procedure as well:
         FileCopy("archive2.tar", webui::GetIOFilePath("archive2.tar"));
         FileLocation := webui::GetIOFilePath("archive2.tar");
         
-    elseif AimmsStringConstants('platform')='Linux' then
-        FileCopy("archive2.tar", webui::GetIOFilePath("archive2.tar"));
-        FileLocation := webui::GetIOFilePath("archive2.tar");
+    else 
+        execute("tar", "cvf archive2.tar FilesToDownload/", wait: 1); !On Linux
+        TestPara := "Ready to test Existence";
     endif;
 
     StatusCode := webui::ReturnStatusCode('CREATED');
