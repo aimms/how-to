@@ -1,3 +1,5 @@
+:orphan:
+
 Reducing the communication requirements between the client session and the server session
 ==========================================================================================
 
