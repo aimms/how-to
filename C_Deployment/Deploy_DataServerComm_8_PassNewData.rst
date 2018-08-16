@@ -1,4 +1,3 @@
-:orphan:
 
 .. Deploy_DataServerComm_8_PassNewData.rst
 
