@@ -5,10 +5,10 @@
 .. |aimms| image:: Images/aimms-logo-s-rgb.png
 				:scale: 10 %
 				:target: https://aimms.com/
-.. |set| image:: Images/icons/set.png
-.. |par| image:: Images/icons/parameter.png
-.. |var| image:: Images/icons/variable.png
-.. |cons| image:: Images/icons/constraint.png
+.. |set| image:: Images/icons/Set.png
+.. |par| image:: Images/icons/Parameter.png
+.. |var| image:: Images/icons/Variable.png
+.. |cons| image:: Images/icons/Constraint.png
 .. |index| image:: Images/icons/index.png
 .. |sp| image:: Images/icons/StringParameter.png
 
