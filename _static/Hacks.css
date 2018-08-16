@@ -365,15 +365,66 @@ div.highlight-aimms span.s2 {
 	font-style:italic;
 }
 
-/*Styling for AIMMS declared identifier.. default is purple*/
-div.highlight-aimms span.nv {
-    
-    color:rgb(200,130,0);
-}
 
-/*Styling for AIMMS declaration identifier (Parameter, Variable, etc.). Default is green bold*/
+/*Styling for AIMMS declaration identifier type (Parameter, Variable, etc.)*/
 div.highlight-aimms span.kd {
     
     color: black;
     font-weight: bold;
 }
+
+/*Styling for AIMMS declared identifier name by default, if not part of the general list below*/
+div.highlight-aimms span.nv {
+    
+    color:rgb(200,130,0);
+}
+
+/*--------  Styling for AIMMS declared identifier name by type (see AIMMS PowerPoint colour palette) --------------*/
+
+/*Set*/
+div.highlight-aimms span.n.n-Set {
+    
+    color:rgb(0,0,129);
+}
+/*Parameter*/
+div.highlight-aimms span.n.n-Parameter {
+    
+    color:rgb(0,150,0);
+}
+/*Variable*/
+div.highlight-aimms span.n.n-Variable {
+    
+    color:rgb(207,0,15);
+}
+/*Constraint*/
+div.highlight-aimms span.n.n-Constraint {
+    
+    color:rgb(0,75,255);
+}
+/*MathematicalProgram*/
+div.highlight-aimms span.n.n-MathematicalProgram {
+    
+    color:rgb(0,0,0);
+}
+/*Element Parameter*/
+div.highlight-aimms span.n.n-ElementParameter {
+    
+    color:rgb(0,0,129);
+}
+/*String Parameter*/
+div.highlight-aimms span.n.n-StringParameter {
+    
+    color:rgb(0,0,0); /*grey*/
+}
+/*Quantity*/
+div.highlight-aimms span.n.n-Quantity {
+    
+    color:rgb(95, 2, 31);
+}
+/*DatabaseTable*/
+div.highlight-aimms span.n.n-DatabaseTable {
+    
+    color:purple;
+}
+
+

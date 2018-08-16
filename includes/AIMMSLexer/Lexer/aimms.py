@@ -3,7 +3,7 @@
     pygments.lexers.aimms
     ~~~~~~~~~~~~~~~~~~~~
 
-    Lexers for the AIMMS language. <http://aimms.com/>
+    Lexers for the AIMMS language. <https://aimms.com/>
 
     :copyright: Copyright 2006-2017 by the Pygments team, see AUTHORS.
     :license: BSD, see LICENSE for details.
@@ -13,15 +13,37 @@ from pygments.lexer import RegexLexer, bygroups, using, this, words
 from pygments.token import Text, Comment, Operator, Keyword, Name, String, \
     Number, Punctuation, Token, Whitespace, Error
 
-    
 __all__ = ['AIMMSLexer']    
 
 
 # Here is the regex to find every identifier declaration, used later on the get_tokens_unprocessed
-id_re = re.compile(r'(?i)(Set|Calendar|Horizon|index|Parameter|ElementParameter|StringParameter|UnitParameter|Variable|elementvariable|complementarityvariable|Constraint|Arc|Node|uncertaintyvariable|uncertaintyconstraint|Activity|Resource|MathematicalProgram|Macro|Model|Assertion|DatabaseTable|DatabaseProcedure|File|Procedure|Function|Quantity|Convention|LibraryModule|Module|Section|Declaration|ExternalProcedure|File|DeclarationSection)(?:\s+)(\w+)(\s*\{|\s*;|\s*:)')
+id_re = re.compile(r'(?i)(Set|Calendar|Horizon|index|Parameter|ElementParameter|StringParameter|UnitParameter|Variable|elementvariable|complementarityvariable|Constraint|Arc|Node|uncertaintyvariable|uncertaintyconstraint|Activity|Resource|MathematicalProgram|Macro|Model|Assertion|DatabaseTable|DatabaseProcedure|File|Procedure|Function|Quantity|Convention|LibraryModule|Module|Section|Declaration|ExternalProcedure|File)(?:\s+)(\w+)(\s*\{|\s*;|\s*:)')
 
-# Create new Tokens for main identifier types (Parameters,EP,SP,Set, Variable, Constraint)
-# TODO
+# Create new Tokens for main identifier types (Parameters,EP,SP,Set, Variable, Constraint, etc.)
+Token.Name.Set
+Token.Name.Parameter
+Token.Name.StringParameter
+Token.Name.ElementParameter
+Token.Name.Variable
+Token.Name.Constraint
+Token.Name.MathematicalProgram
+Token.Name.Quantity
+Token.Name.DatabaseTable
+
+def switcher(argument):
+    Types = {
+        "Set":Name.Set,
+        "Parameter":Name.Parameter,
+        "StringParameter":Name.StringParameter,
+        "ElementParameter":Name.ElementParameter,
+        "Variable":Name.Variable,
+        "Constraint":Name.Constraint,
+        "MathematicalProgram":Name.MathematicalProgram,
+        "Quantity":Name.Quantity,
+        "DatabaseTable":Name.DatabaseTable}
+
+    return Types.get(argument, Name.Variable)
+
 
 class AIMMSLexer(RegexLexer):
     """
@@ -72,6 +94,9 @@ class AIMMSLexer(RegexLexer):
             #For AMS files, matches all function arguments
             #(r'(\w+\s+)(:)([^=:].*,|[^=:].*;|,|;|\n.*})', bygroups(Name.Argument,Operator,Text)),
             
+            #For AMS Files, matches all function arguments pre formatted
+            (r'(\b\w+)(\s+:\s+\b)', bygroups(Name.Argument, Text)),
+            
             #Clean every unmatched # character, after everything is matched
             (r'#',Text),
             (r'(\w+|(\.(?!\.)))', Text)
@@ -79,28 +104,38 @@ class AIMMSLexer(RegexLexer):
         
     }
 
-    
+        
     def get_tokens_unprocessed(self,text):
         
         # for AMS files: catch any identifier declaration, and highlight every reference in the rest of the file. In other words, every user defined identifier is bold blue :) Because I can.
         
         m = id_re.findall(text)
         # Ok, we found all matches from the big identifiers list. thus we end up with a list like this: 
-        # m = [first_match, second_match, ...] and Nth_match = (id_type,id_name,id_operator) = ('Parameter', 'OD', ';')
+        # m = [first_match, second_match, ...] and nth_match = (id_type,id_name,id_operator) = ('Parameter', 'OD', ';')
+               
+        # id_types = [row[0] for row in m]
+        # id_names = [row[1] for row in m]
+        # id_op = [row[2] for row in m]
         
-        id_types = [row[0] for row in m]
-        id_names = [row[1] for row in m]
-        id_op = [row[2] for row in m]
-          
+        id_nametype = {}
+        
+        for i in m:
+        
+            id_nametype[i[1]] = i[0]
+        
+                
+        print "I'm in get_tokens_unprocessed"
+        
+            
         for index, token, value in RegexLexer.get_tokens_unprocessed(self, text):
             
-            #if token is Token.Name.Argument: print token
+            #if token is Token.Name.Set: print token
             
-            if any(item == value for item in id_types):
+            if any(item == value for item in id_nametype.keys()):
+                yield index, switcher(id_nametype[value]), value
+            elif any(item == value for item in id_nametype.values()):
                 yield index, Keyword.Declaration, value
-            elif any(item == value for item in id_names):
-                yield index, Name.Variable, value
-            elif any(item == value for item in id_op):
-                yield index, Operator, value
+            # elif any(item == value for item in id_op):
+                # yield index, Operator, value
             else:
                 yield index, token ,value              
