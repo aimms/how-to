@@ -332,7 +332,7 @@ div.highlight-aimms span.kr {
 /*Styling for AIMMS intrinsic red function, like Execute()*/
 div.highlight-aimms span.nb {
 
-	color:#a52a2a;
+	color:brown;
 }
 
 /*Styling for AIMMS Named attributes (ex: SubsetOf, indexDomain, etc.), operators(ex: =) and punctuation (ex: ; or ,)*/
@@ -353,7 +353,7 @@ div.highlight-aimms span.cm,
 div.highlight-aimms span.c1,
 div.highlight-aimms span.c2 {
 
-	color:#008000;
+	color:green;
 	font-style:italic;
 }
 
@@ -361,7 +361,7 @@ div.highlight-aimms span.c2 {
 div.highlight-aimms span.s1,
 div.highlight-aimms span.s2 {
 
-	color:#808080;
+	color:gray;
 	font-style:italic;
 }
 
@@ -384,13 +384,19 @@ div.highlight-aimms span.nv {
 /*Set*/
 div.highlight-aimms span.n.n-Set {
     
-    color:rgb(0,0,129);
+    color:black;
 }
 /*Parameter*/
 div.highlight-aimms span.n.n-Parameter {
     
     color:DarkCyan;
 }
+/*Element Parameter*/
+div.highlight-aimms span.n.n-ElementParameter {
+    
+    color:DarkCyan;
+}
+
 /*Variable*/
 div.highlight-aimms span.n.n-Variable {
     
@@ -399,32 +405,37 @@ div.highlight-aimms span.n.n-Variable {
 /*Constraint*/
 div.highlight-aimms span.n.n-Constraint {
     
-    color:rgb(0,75,255);
+    color:black;
 }
 /*MathematicalProgram*/
 div.highlight-aimms span.n.n-MathematicalProgram {
     
-    color:rgb(0,0,0);
+    color:black;
 }
-/*Element Parameter*/
-div.highlight-aimms span.n.n-ElementParameter {
-    
-    color:rgb(0,0,129);
-}
+
 /*String Parameter*/
 div.highlight-aimms span.n.n-StringParameter {
     
-    color:rgb(0,0,0); /*grey*/
+    color:black;  
 }
 /*Quantity*/
 div.highlight-aimms span.n.n-Quantity {
     
-    color:rgb(95, 2, 31);
+    color:black;
 }
 /*DatabaseTable*/
 div.highlight-aimms span.n.n-DatabaseTable {
     
     color:purple;
 }
-
+/*Index*/
+div.highlight-aimms span.n.n-Index {
+    
+    color:black;
+}
+/*Convention*/
+div.highlight-aimms span.n.n-Convention {
+    
+    color:black;
+}
 

@@ -43,7 +43,9 @@ def switcher(argument):
         "Constraint":Name.Constraint,
         "MathematicalProgram":Name.MathematicalProgram,
         "Quantity":Name.Quantity,
-        "DatabaseTable":Name.DatabaseTable}
+        "DatabaseTable":Name.DatabaseTable,
+        "Convention":Name.Convention,
+        "Index":Name.Index}
 
     return Types.get(argument, Name.Variable)
 
