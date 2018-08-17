@@ -124,19 +124,18 @@ I will thus simply improve my **MainExecution** procedure as follows:
     
 And I will improve my **Download** procedure as well:
 
-.. code-block::
+.. code-block:: aimms
 
-    if ProjectDeveloperMode then
+    if projectDeveloperMode then
         FileLocation := "archive2.zip";
         
     elseif AimmsStringConstants('platform')='Linux' then
         FileCopy("archive2.tar", webui::GetIOFilePath("archive2.tar"));
         FileLocation := webui::GetIOFilePath("archive2.tar");
         
-    else 
-        execute("tar", "cvf archive2.tar FilesToDownload/", wait: 1); !On Linux
-        TestPara := "Ready to test Existence";
-
+    else
+        FileCopy("archive2.zip", webui::GetIOFilePath("archive2.zip"));
+        FileLocation := webui::GetIOFilePath("archive2.zip");
     endif;
 
     StatusCode := webui::ReturnStatusCode('CREATED');
