@@ -389,12 +389,12 @@ div.highlight-aimms span.n.n-Set {
 /*Parameter*/
 div.highlight-aimms span.n.n-Parameter {
     
-    color:rgb(0,150,0);
+    color:DarkCyan;
 }
 /*Variable*/
 div.highlight-aimms span.n.n-Variable {
     
-    color:rgb(207,0,15);
+    color:PaleVioletRed;
 }
 /*Constraint*/
 div.highlight-aimms span.n.n-Constraint {

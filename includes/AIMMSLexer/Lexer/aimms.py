@@ -29,6 +29,9 @@ Token.Name.Constraint
 Token.Name.MathematicalProgram
 Token.Name.Quantity
 Token.Name.DatabaseTable
+Token.Name.Convention
+Token.Name.Index
+
 
 def switcher(argument):
     Types = {
@@ -67,7 +70,7 @@ class AIMMSLexer(RegexLexer):
             #For AMS files, forces a Comment attribute block to be just a comment, nothing else, weather it is Comment: ... or Comment: {...}
             (r'(Comment:\s+{?)((.|\n)+?)([};])',bygroups(Name.Attribute, Comment.Multiline, Name.Attribute)),
 
-            #For AMS files, matches all Attributes from any declaration
+            #For AMS files, matches all Attributes from any Identifier declaration
             (r'(\w+)(:)(\s+)', bygroups(Name.Attribute,Operator,Text.Whitespace)),
                       
             
@@ -93,6 +96,23 @@ class AIMMSLexer(RegexLexer):
             
             #For AMS files, matches all function arguments
             #(r'(\w+\s+)(:)([^=:].*,|[^=:].*;|,|;|\n.*})', bygroups(Name.Argument,Operator,Text)),
+            
+            #Identifiers prefix match: if ANYTHING starts with a EP_ or P_ or ... it is parameter(green) or element parameter (blue), etc.
+            (r'(?i)(\bP_\w+\b)', bygroups(Name.Parameter)),
+            (r'(?i)(\bP01_\w+\b)', bygroups(Name.Parameter)),
+            (r'(?i)(\bEP_\w+\b)', bygroups(Name.ElementParameter)),
+            (r'(?i)(\bS_\w+\b)', bygroups(Name.Set)),
+            (r'(?i)(\bCal_\w+\b)', bygroups(Name.Set)),
+            (r'(?i)(\bSP_\w+\b)', bygroups(Name.StringParameter)),
+            (r'(?i)(\bV_\w+\b)', bygroups(Name.Variable)),
+            (r'(?i)(\bV01_\w+\b)', bygroups(Name.Variable)),
+            (r'(?i)(\bEV_\w+\b)', bygroups(Name.Variable)),
+            (r'(?i)(\bC_\w+\b)', bygroups(Name.Constraint)),
+            (r'(?i)(\bMP_\w+\b)', bygroups(Name.MathematicalProgram)),
+            (r'(?i)(\bDBT_\w+\b)', bygroups(Name.DatabaseTable)),
+            (r'(?i)(\bPR_\w+\b)', bygroups(Name.Variable)),
+            (r'(?i)(\bCNV_\w+\b)', bygroups(Name.Convention)),
+            (r'(?i)(\bI_\w+\b)', bygroups(Name.Index)),
             
             #For AMS Files, matches all function arguments pre formatted
             (r'(\b\w+)(\s+:\s+\b)', bygroups(Name.Argument, Text)),
@@ -133,6 +153,7 @@ class AIMMSLexer(RegexLexer):
             
             if any(item == value for item in id_nametype.keys()):
                 yield index, switcher(id_nametype[value]), value
+                #print value
             elif any(item == value for item in id_nametype.values()):
                 yield index, Keyword.Declaration, value
             # elif any(item == value for item in id_op):
