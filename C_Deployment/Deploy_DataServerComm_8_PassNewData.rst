@@ -47,7 +47,7 @@ Note the use of the flag ``pro::PROMFLAG_PRIORITY`` ; this flag indicates that t
 
 The user interface when the problem is being solved now looks as follows:
 
-.. image::  ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB08_WebUI_screen.png 
+.. image::  ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB08_WebUI_screen.PNG 
 
 The AIMMS project that does just this, can be downloaded from: :download:`9. Flow Shop - Control <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/9. Flow Shop - Control.zip>`.
 
