@@ -20,7 +20,8 @@ Calling the ``Execute`` intrinsic function
 
 You may download the ``7za.exe`` executable from https://www.7-zip.org/download.html, and put it in your project folder. Say you have several files to download in a folder ``FilesToDownload`` in your project folder. As described in https://sevenzip.osdn.jp/chm/cmdline/syntax.htm, you may use the ``Execute`` function as follows. 
 
-.. code-block:: none
+
+.. code-block:: aimms
 
     Model Main_TarFiles {
         
@@ -45,11 +46,13 @@ As you may see, we asked AIMMS to execute a program called "7za.exe" located in 
     * ``archive2.zip`` = the archive path. This will create the archive file in the project folder
     * ``.\FilesToDownload\*`` = the folder to add (any files or sub folder) regardless of their name (because we specified ``*`` at the end)
 
-* As a 3rd argument of the ``Execute`` function, we asked AIMMS to wait until the called program ``7za.exe`` has finished his job.
+* As a 3rd argument of the ``Execute`` function, we asked AIMMS to wait until the called program, ``7za.exe``, as finished his job.
+
 
 * We finished by assigning a string parameter to `"Ready to test Existence"`, notifying us about the end of the zipping process.
 
 You may verify that the archive was created in the project folder.
+
 
 .. warning::
 
@@ -69,7 +72,8 @@ Configure WebUI download widget
 
 You may now open your WebUI, and insert a download widget that you will link with the following typical download procedure, pointing at your newly created ``archive2.zip`` file:
 
-.. code-block:: none
+.. code-block:: aimms
+
 
     Procedure DownloadTarArchive {
         Arguments: (FileLocation,StatusCode,StatusDescription);
@@ -103,7 +107,7 @@ Knowing how works the ``Execute`` function, you may call any executable program 
 
 I will thus simply improve my **MainExecution** procedure as follows:
 
-.. code-block:: none
+.. code-block:: aimms
 
     if not AimmsStringConstants('platform')='Linux' then
         execute("7za.exe", "a archive2.zip .\FilesToDownload\*", wait: 1); !On windows, nothing has changed here. (I considered you bundled the 7za.exe program with your AIMMS project in the aimmspack.)
@@ -115,23 +119,23 @@ I will thus simply improve my **MainExecution** procedure as follows:
 
 .. note:: 
 
-    * For windows, I considered you bundled the 7za.exe program with your AIMMS project in the aimmspack. As explained above, an alternative would be to install a zip program on your Windows Server accessible from the PATH, or  
+    * For windows, I assumed you bundled the 7za.exe program with your AIMMS project in the aimmspack. As explained above, an alternative would be to install a zip program on your Windows Server accessible from the PATH, or  
     * The ``AimmsStringConstants`` intrinsic string parameter provides a list of system constants, such as ``'platform'`` (windows, linux) or ``'architecture'`` (x64, x86). Please refer to the `Function Reference <https://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_ for further details.
     
 And I will improve my **Download** procedure as well:
 
-.. code-block:: none
+.. code-block:: aimms
 
-    if ProjectDeveloperMode then
+    if projectDeveloperMode then
         FileLocation := "archive2.zip";
         
     elseif AimmsStringConstants('platform')='Linux' then
         FileCopy("archive2.tar", webui::GetIOFilePath("archive2.tar"));
         FileLocation := webui::GetIOFilePath("archive2.tar");
         
-    elseif AimmsStringConstants('platform')='Linux' then
-        FileCopy("archive2.tar", webui::GetIOFilePath("archive2.tar"));
-        FileLocation := webui::GetIOFilePath("archive2.tar");
+    else
+        FileCopy("archive2.zip", webui::GetIOFilePath("archive2.zip"));
+        FileLocation := webui::GetIOFilePath("archive2.zip");
     endif;
 
     StatusCode := webui::ReturnStatusCode('CREATED');
