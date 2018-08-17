@@ -31,6 +31,7 @@ Token.Name.Quantity
 Token.Name.DatabaseTable
 Token.Name.Convention
 Token.Name.Index
+Token.Name.Procedure
 
 
 def switcher(argument):
@@ -45,6 +46,7 @@ def switcher(argument):
         "Quantity":Name.Quantity,
         "DatabaseTable":Name.DatabaseTable,
         "Convention":Name.Convention,
+        "Procedure":Name.Procedure,
         "Index":Name.Index}
 
     return Types.get(argument, Name.Variable)
