@@ -63,10 +63,11 @@ There may be situations where you will need to use |aimms| on a different machin
 		
 			|InputLicense|
 
-            .. note::
-                
-                If your received a license file from us, you may actually use the file name, which should consist of a 12 digit number.
+                .. note::
+                                
+                    If your received a license file from us, you may actually use the file name, which should consist of a 12 digit number.
             
+
 		iii.  Choose the activation code option unless an AIMMS dongle was provided for your license.
 		
 			|LicenseProtection|
