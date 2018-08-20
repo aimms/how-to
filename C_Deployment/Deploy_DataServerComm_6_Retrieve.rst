@@ -87,9 +87,9 @@ Create a case file containing this solution.
 
         AllCaseFileContentTypes += 'sIncumbentSolutionIdentifiers' ;
         CurrentCaseFileContentType := 'sIncumbentSolutionIdentifiers' ;
-        spCaseFileName := FormatString( "Incumbent%i.data", pIncumbentNumber );
-        pIncumbentNumber += 1 ;
-        spFullCaseFileName := "data/" + spCaseFileName ;
+        sp_CaseFileName := FormatString( "Incumbent%i.data", pIncumbentNumber );
+        P_IncumbentNumber += 1 ;
+        sp_FullCaseFileName := "data/" + spCaseFileName ;
         CaseFileSave( spCaseFileName, sIncumbentSolutionIdentifiers );
 
 Now, save the case file on PRO storage and store the name of the case file (including location path) in a string parameter.

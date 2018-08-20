@@ -332,7 +332,7 @@ div.highlight-aimms span.kr {
 /*Styling for AIMMS intrinsic red function, like Execute()*/
 div.highlight-aimms span.nb {
 
-	color:#a52a2a;
+	color:brown;
 }
 
 /*Styling for AIMMS Named attributes (ex: SubsetOf, indexDomain, etc.), operators(ex: =) and punctuation (ex: ; or ,)*/
@@ -353,7 +353,7 @@ div.highlight-aimms span.cm,
 div.highlight-aimms span.c1,
 div.highlight-aimms span.c2 {
 
-	color:#008000;
+	color:green;
 	font-style:italic;
 }
 
@@ -361,19 +361,85 @@ div.highlight-aimms span.c2 {
 div.highlight-aimms span.s1,
 div.highlight-aimms span.s2 {
 
-	color:#808080;
+	color:gray;
 	font-style:italic;
 }
 
-/*Styling for AIMMS declared identifier.. default is purple*/
-div.highlight-aimms span.nv {
-    
-    color:rgb(200,130,0);
-}
 
-/*Styling for AIMMS declaration identifier (Parameter, Variable, etc.). Default is green bold*/
+/*Styling for AIMMS declaration identifier type (Parameter, Variable, etc.)*/
 div.highlight-aimms span.kd {
     
     color: black;
     font-weight: bold;
 }
+
+/*Styling for AIMMS declared identifier name by default, if not part of the general list below*/
+div.highlight-aimms span.nv {
+    
+    color:rgb(200,130,0);
+}
+
+/*--------  Styling for AIMMS declared identifier name by type (see AIMMS PowerPoint colour palette) --------------*/
+
+/*Set*/
+div.highlight-aimms span.n.n-Set {
+    
+    color:black;
+}
+/*Parameter*/
+div.highlight-aimms span.n.n-Parameter {
+    
+    color:DarkCyan;
+}
+/*Element Parameter*/
+div.highlight-aimms span.n.n-ElementParameter {
+    
+    color:DarkCyan;
+}
+
+/*Variable*/
+div.highlight-aimms span.n.n-Variable {
+    
+    color:PaleVioletRed;
+}
+/*Constraint*/
+div.highlight-aimms span.n.n-Constraint {
+    
+    color:black;
+}
+/*MathematicalProgram*/
+div.highlight-aimms span.n.n-MathematicalProgram {
+    
+    color:black;
+}
+
+/*String Parameter*/
+div.highlight-aimms span.n.n-StringParameter {
+    
+    color:black;  
+}
+/*Quantity*/
+div.highlight-aimms span.n.n-Quantity {
+    
+    color:black;
+}
+/*DatabaseTable*/
+div.highlight-aimms span.n.n-DatabaseTable {
+    
+    color:purple;
+}
+/*Index*/
+div.highlight-aimms span.n.n-Index {
+    
+    color:black;
+}
+div.highlight-aimms span.n.n-Procedure {
+    
+    color:black;
+}
+/*Convention*/
+div.highlight-aimms span.n.n-Convention {
+    
+    color:black;
+}
+
