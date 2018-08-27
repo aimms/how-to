@@ -135,6 +135,10 @@
     max-width: 100% !important;
 } 
 
+.rst-content blockquote {
+    margin-right: 24px;
+}
+
 h1, h2, h3 p{
   font-family:Arial,sans-serif;
 }
@@ -329,7 +333,7 @@ div.highlight-aimms span.kr {
 	color:blue;
 }
 
-/*Styling for AIMMS intrinsic red function, like Execute()*/
+/*Styling for AIMMS intrinsic red function and Predeclared Identifiers, like Execute()*/
 div.highlight-aimms span.nb {
 
 	color:brown;
