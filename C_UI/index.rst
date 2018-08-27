@@ -13,3 +13,6 @@ User Interface
 ========================
 
 	
+.. toctree::
+    
+    How To download multiple files
