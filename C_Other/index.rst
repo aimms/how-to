@@ -11,16 +11,7 @@
 
 Other
 ========================
-|
-|
 
-.. raw:: html
-
-    <h1 class="thanks" align=center style=" font-size:  500%; font-weight: bold; ">Mathematical Modeling</h1>
-    
-
-|
-|
 
 .. toctree::
         

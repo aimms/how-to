@@ -11,15 +11,7 @@
 
 AIMMS Language
 ========================
-|
-|
 
-.. raw:: html
-
-	<h1 class="thanks" align=center style=" font-size:  500%; font-weight: bold; ">AIMMS Language</h1>
-	
-|
-|
 	
 .. toctree::
 

@@ -8,15 +8,6 @@
 
 Deployment
 ========================
-|
-|
-
-.. raw:: html
-
-	<h1 class="thanks" align=center style=" font-size:  500%; font-weight: bold; ">Deployment</h1>
-	
-|
-|
 
 .. toctree::
 

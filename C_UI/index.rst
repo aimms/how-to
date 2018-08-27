@@ -11,12 +11,5 @@
 
 User Interface
 ========================
-|
-|
-
-.. raw:: html
-
-	<h1 class="thanks" align=center style=" font-size:  500%; font-weight: bold; ">User Interface</h1>
-	
 
 	
