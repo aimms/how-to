@@ -318,6 +318,7 @@ div.box h1, .wy-breadcrumbs li a{
 	margin-bottom:10px
 }
 
+/* --------------     Styling for AIMMS Syntax highlighter -------------------------------- */
 
 /*Default styling for any AIMMS code*/
 div.highlight-aimms div.highlight{
