@@ -1,6 +1,6 @@
 ## ams_version=1.0
 
-Model Main_JobRepetition {
+Model Main_ReceiveMessages {
     DeclarationSection Global_identifiers_not_saved_in_case {
         Property: NoSave;
         Quantity SI_Time_Duration {
@@ -18,6 +18,17 @@ Model Main_JobRepetition {
         StringParameter sp_UtcTimFmt {
             Definition: "%c%y-%m-%d %H:%M:%S%TZ('UTC')";
         }
+        StringParameter sp_DataSessionMessageQueue {
+            InitialData: "";
+        }
+        Set s_MsgNos {
+            SubsetOf: Integers;
+            Index: i_MsgNo;
+            Parameter: e_MsgNo;
+        }
+        StringParameter sp_Msgs {
+            IndexDomain: i_MsgNo;
+        }
         ElementParameter ep_PayloadProcedure {
             Range: AllProcedures;
             Default: 'MainExecution';
@@ -29,6 +40,7 @@ Model Main_JobRepetition {
                 sp_Msg := FormatString("pr_Friesian(): At %s (UTC) delegation level is %i",
                 	CurrentToString(sp_UtcTimFmt), pro::CurrentDelegationLevel() );
                 pro::management::LocalLogInfo(sp_Msg);
+                pr_NotifyDataSession(sp_DataSessionMessageQueue,sp_Msg);
             }
             Comment: {
                 "Frisians are excellent work horses.
@@ -36,20 +48,67 @@ Model Main_JobRepetition {
             }
             StringParameter sp_Msg;
         }
+        Procedure pr_NotifyDataSession {
+            Arguments: (sp_DataSessionQueue,sp_Msg);
+            Body: {
+                if pro::DelegateToPeer(
+                	requestQueue  :  sp_DataSessionQueue, 
+                	flags         :  pro::PROMFLAG_LIVE) then
+                	return ;
+                endif ;
+                pr_ReceiveNotification(sp_Msg);
+            }
+            StringParameter sp_DataSessionQueue {
+                Property: Input;
+            }
+            StringParameter sp_Msg {
+                Property: Input;
+            }
+        }
+        Procedure pr_ReceiveNotification {
+            Arguments: (sp_Msg);
+            Body: {
+                s_MsgNos += card( s_MsgNos )+1;
+                e_MsgNo := last( s_MsgNos );
+                sp_Msgs( e_MsgNo ) := sp_Msg ;
+            }
+            StringParameter sp_Msg {
+                Property: Input;
+            }
+        }
+        Procedure pr_DataSessionCreateQueueStartListening {
+            Body: {
+                ! Create a new queue, with full access for everyone.
+                if not sp_DataSessionMessageQueue then
+                
+                	! Create the queue
+                	sp_AuthorizationString := "#7+16777087";
+                	pro::messaging::CreateQueue(sp_AuthorizationString,sp_DataSessionMessageQueue);
+                
+                	! ... and start listening to it.
+                	pro::messaging::AddQueueToConnection(sp_DataSessionMessageQueue, pro::ListeningConnectionId);
+                endif ;
+            }
+            Comment: "This procedure should be called directly by the button procedures.";
+            StringParameter sp_AuthorizationString;
+        }
     }
     Section Server_session_sequence_generation {
         Procedure pr_OnButtonStartServerSessions {
             Body: {
+                pr_DataSessionCreateQueueStartListening();
                 ep_PayloadProcedure := StringToElement( AllProcedures, "pr_Friesian", create: 0 );
                 pr_IterativeJobScheduling(
                 	delegateLevel      :  0, 
                 	maxDelegateLevel   :  4,
                 	timeIncrement      :  2[second], 
-                	epPayloadProcedure :  ep_PayloadProcedure);
+                	epPayloadProcedure :  ep_PayloadProcedure, 
+                	spDataSessionQueue :  sp_DataSessionMessageQueue);
             }
+            Comment: "The place to put zebras and other horses in.";
         }
         Procedure pr_IterativeJobScheduling {
-            Arguments: (delegateLevel,maxDelegateLevel,timeIncrement,epPayloadProcedure);
+            Arguments: (delegateLevel,maxDelegateLevel,timeIncrement,epPayloadProcedure,spDataSessionQueue);
             Body: {
                 ! pro::DelegateToServer uses the *current* values of local arguments to create a call for a new server session.
                 ! We modify the values of these arguments before calling pro::DelegateToServer
@@ -76,6 +135,9 @@ Model Main_JobRepetition {
                 		scheduledAt        :  sp_jobTime );
                 endif ;
                 
+                ! Selected initializations from arguments
+                sp_DataSessionMessageQueue := spDataSessionQueue ;
+                
                 Apply( epPayloadProcedure );
             }
             Parameter delegateLevel {
@@ -95,6 +157,10 @@ Model Main_JobRepetition {
             }
             StringParameter sp_jobTime;
             StringParameter spRequestDescription;
+            StringParameter spDataSessionQueue {
+                Property: Input;
+            }
+            StringParameter sp_Msg;
         }
     }
     Section MainModelProcedures {

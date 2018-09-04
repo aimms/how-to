@@ -1,7 +1,7 @@
 {
 	"slot0": "",
 	"------------------------------------------------------------------<<<<-widgets-": "",
-	"widgets": "literal:[{\"uri\":\"StartProcess\",\"layoutInfo\":{\"width\":\"2\",\"height\":\"1\"}}]",
+	"widgets": "literal:[{\"uri\":\"tabMsgs\",\"layoutInfo\":{\"width\":\"8\",\"height\":\"2\",\"customPosition\":\"\"}},{\"uri\":\"StartProcess\",\"layoutInfo\":{\"width\":\"2\",\"height\":\"1\"}}]",
 	"------------------------------------------------------------------>>>>-widgets-": "",
 	"slot1": "",
 	"slot2": "",

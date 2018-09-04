@@ -1,63 +1,117 @@
 How To Schedule a Job regularly?
 ==================================
 
-Some use cases of jobs executed regularly are:
 
-#. Every night we want to make a plan, to be used the next day.
+.. https://gitlab.aimms.com/Chris/aimms-how-to/issues/80
+.. Nirvana project 0006
 
-#. Every ten minutes, we want to reconcile our measurement data.
 
-And I'm sure you can create more examples.
-
-In this How To article, we'll discuss how an AIMMS job can reschedule itself, thus realizing a job scheduled regularly. 
-
-The control we need is the delegation level:
-
-#0. The WebUI session you start via AIMMS PRO has an associated AIMMS data session. This data session has a ``pro::CurrentDelegationLevel()`` of 0; there is no delegation of work yet.
-
-#1. The AIMMS server session started from this AIMMS Data Session has a ``pro::CurrentDelegationLevel()`` of 1; it is the consequence of one delegation.
-
-#2. The AIMMS server session started from the above AIMMS Server session has a ``pro::CurrentDelegationLevel()`` of 1 higher than its predecessor.
-
-This is depicted in 
+Some applications involve solving a mathematical program regularly, for instance every night or every ten minutes. 
+In this article, we'll discuss how an AIMMS job can reschedule itself, as depicted in the next picture.
 
 .. image:: ../Resources/C_Deployment/RegularJob/Images/DelegationLevel.png
 
+Effectively, this realizes that the job at hand is solved regularly. As you can see from this image:
 
-The current delegation level for the AIMMS Data session, as you know automatically started with your WebUI session, 
+* The WebUI session you start via AIMMS PRO has an associated AIMMS data session. This data session has a ``pro::CurrentDelegationLevel()`` of 0; there is no delegation of work yet.
 
-Hi, 
+* The AIMMS server session started from this AIMMS Data Session has a ``pro::CurrentDelegationLevel()`` of 1; it is the consequence of one delegation.
 
-Many a client has asked me how to schedule a job regularly, for instance each night.
-They are usually surprised that this is not a standard feature of AIMMS PRO and grind their teeth when I explain they can use the AIMMS PRO api to do this.
-Thanks to Marcel Roelofs, I've been able to construct a small example on how to do this from within the AIMMS language instead.
+* The AIMMS server session started from the above AIMMS Server session has a ``pro::CurrentDelegationLevel()`` of 1 higher than its predecessor.
 
-Selected remarks about this approach:
-* Advantage: modelers stay inside their comfort zone: the AIMMS language
-* Advantage: by having an example, it is easy to tune to needs
+.. Note: The WebUI session can be closed as soon as the sequence is started; each server job schedules the next before doing its actual work. The WebUI session is only used to start the sequence.
 
-.. Caution: 
+To start this sequence, the following code is used.
 
-#. Beware: AIMMS PRO scans every minute for scheduled jobs; so if you have as waiting time two minutes exactly, it will be scheduled with three minutes in between
+.. image:: ../Resources/C_Deployment/RegularJob/Images/pr_OnButtonStartServerSessions.PNG
 
-#. Beware: Once a job is terminated before it actually started; the sequence is broken.
+Each line is explained as follows:
 
+#. Determine the payload procedure that should be executed by each server session.  Here it is the ``pr_Friesian``, as Friesians are excellent workhorses.
 
-To operate the enclosed example:
+#. A call to the procedure that actually starts each server session.
+
+#. When ``pr_IterativeJobScheduling`` is called by another procedure, then the argument ``delegateLevel`` should be 0.
+
+#. The number of server sessions started is controlled by ``maxDelegateLevel``
+
+#. The argument ``timeIncrement``, is the time between sessions measured in seconds. 
+
+#. The procedure to be executed regularly passed via the arguments.
+
+The center piece of the project is the procedure ``pr_IterativeJobScheduling``:
+
+    .. code-block:: aimms
+
+        ! pro::DelegateToServer uses the *current* values of local arguments to create a call for a new server session.
+        ! We modify the values of these arguments before calling pro::DelegateToServer
+        delegateLevel += 1 ;                                                       ! 1)
+        
+        spRequestDescription :=                                                    ! 2)
+            formatString("Start %i'th iteration of %e at %s", 
+            delegateLevel, epPayloadProcedure, sp_jobTime );
+
+        ! Switch to server sessions.
+        if delegateLevel = 1 then
+
+            if pro::DelegateToServer(                                              ! 3)
+                    requestDescription :  spRequestDescription,
+                    waitForCompletion  :  0, 
+                    completionCallback :  'pro::session::EmptyCallback',
+                    delegationOverride :  delegateLevel  ) then
+                return 1 ;
+            endif ;
+
+        elseif delegateLevel <= maxDelegateLevel then   ! Schedule the next job.
+        
+            sp_jobTime := MomentToString( sp_UtcTimFmt, [second],                 ! 4)
+                                CurrentToString(sp_UtcTimFmt), timeIncrement );
+                                
+            pro::DelegateToServer(                                                ! 5)
+                requestDescription :  spRequestDescription,
+                waitForCompletion  :  0, 
+                completionCallback :  'pro::session::EmptyCallback',
+                delegationOverride :  delegateLevel,
+                scheduledAt        :  sp_jobTime );
+
+        endif ;
+
+        Apply( epPayloadProcedure );                                              ! 6)
+
+Each portion of the code is explained below:
+        
+#. DelegateLevel increased, to indicate to AIMMS PRO that this is a valid iterative call.
+        
+#. Job description, to properly identify each job in the session logs.
+        
+#. The first job starts immediately, but is started from the WebUI session. The WebUI session should NOT execute the payload, that is why we have a test on the return of ``pro::DelegateToServer``
+
+#. Construct the next time the job is to be executed. By using the UTC timezone, we avoid any ambiguities regarding daylight saving time.
+
+#. The iterative call, that might looks like a recursive call.
+
+#. This will execute the payload for each of the server sessions started.
+
+To operate the example that can be :download:`downloaded <../Resources/C_Deployment/RegularJob/JobRepetition.zip>`
 
 #. Create an .aimmspack, publish on your favorite AIMMS PRO system.
 
-#. Launch it 
+#. Launch it and press the only button
 
-#. Press the only button
+#. Close the app. Yes, once the sequence of server sessions is started, the WebUI of the enclosed example is no longer of use - it can be closed.
 
-#. Close it.
+#. Go to job tab in the AIMMS PRO portal and watch new jobs being created, queued, running, and finished.
 
-#. Go to the portal and the jobs tab.
 
-#. Wait for about 10 minutes and refresh screen in between and afterwards.
-You'll see the jobs created, started and finished one at a time.
+When you check the session.log files, you may encounter a line like:
 
-With kind regards,
+    .. code-block:: none
 
-Chris.
+        12:10:46,186 0x7f6389d90700 [INFO] {PRO.Client.Library} pr_Friesian(): At 2018-09-04 12:10:46 (UTC) delegation level is 3
+
+That is because the procedure ``pr_Friesian`` uses the procedure call ``pro::management::LocalLogInfo(...);`` to log some information about current server session.
+
+When you want to interrupt a sequence of server jobs, please terminate the scheduled session before terminating the running session.
+        
+
+.. include:: ../includes/form.def
