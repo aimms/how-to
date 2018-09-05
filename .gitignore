@@ -3,10 +3,11 @@
 *.err
 *.bak
 *.dmp
-*.dmp
+*.put
 *.aimmslockfile
 Musterlösung
 _build
+backup
 shadowData
 atomicData
 Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets/IdentifiersWithShadows.txt
