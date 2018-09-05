@@ -154,7 +154,7 @@ class AIMMSLexer(RegexLexer):
                 yield index, switcher(id_nametype[value]), value
             
             # if the item is not detected as an function argument and is part of the Identifier type list, attach a 'kd' token 
-            elif (not token is Name.Argument and any(item == value for item in id_nametype.values())): 
+            elif (not (token is Name.Argument) and any(item == value for item in id_nametype.values())): 
                 yield index, Keyword.Declaration, value
 
             else:
