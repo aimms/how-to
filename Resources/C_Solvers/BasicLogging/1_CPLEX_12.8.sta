@@ -1,0 +1,95 @@
+
+Solve problem 'FlowShopModel' with 554 rows, 476 columns (196 binaries, 0 generals), and 8808 nonzeros.
+Tried aggregator 3 times.
+MIP Presolve eliminated 0 rows and 1 columns.
+MIP Presolve modified 7561 coefficients.
+Aggregator did 25 substitutions.
+Reduced MIP has 529 rows, 450 columns, and 7264 nonzeros.
+Reduced MIP has 196 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.02 sec. (15.32 ticks)
+Found incumbent of value 2662.000000 after 0.02 sec. (16.99 ticks)
+Probing fixed 0 vars, tightened 699 bounds.
+Probing time = 0.02 sec. (15.43 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 529 rows, 450 columns, and 7264 nonzeros.
+Reduced MIP has 196 binaries, 21 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (6.33 ticks)
+Probing fixed 0 vars, tightened 235 bounds.
+Probing time = 0.02 sec. (13.00 ticks)
+Clique table members: 28.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.06 sec. (90.92 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+
+*     0+    0                         2662.0000      125.9999            95.27%
+
+      0     0      337.2412   119     2662.0000      337.2412     1299   87.33%
+
+*     0+    0                          433.0000      337.2412            22.12%
+
+      0     0      338.0245   111      433.0000     Cuts: 105     1884   21.93%
+
+*     0+    0                          415.0000      338.0245            18.55%
+
+      0     0      338.0418   126      415.0000       Cuts: 2     1951   18.54%
+
+*     0+    0                          409.0000      338.0418            17.35%
+
+      0     0      338.0524   128      409.0000       Cuts: 3     1974   17.35%
+
+      0     0      338.0525   129      409.0000    MIRcuts: 2     1977   17.35%
+
+*     0+    0                          403.0000      338.0525            16.12%
+
+*     0+    0                          401.0000      338.0525            15.70%
+
+      0     2      338.0525   129      401.0000      338.0525     1977   15.70%
+
+Elapsed time = 0.99 sec. (814.86 ticks, tree = 0.01 MB
+, solutions = 6
+)
+    858   594      393.0000    34      397.0000      339.1131    81755   14.58%
+
+   3151  2347      392.6942    33      397.0000      354.0000   268680   10.83%
+
+   3361  2582      338.1189   129      397.0000      354.7589   295601   10.64%
+
+Elapsed time = 5.22 sec. (4126.91 ticks, tree = 17.32 MB
+, solutions = 7
+)
+  10007  5054      396.7069    40      397.0000      362.0000   945667    8.82%
+
+  11879  6178        cutoff            397.0000      364.0000  1102236    8.31%
+
+* 34906+16437                          392.0000      380.0000             3.06%
+
+  56484 22184      390.0760    35      391.0000      383.0000  4114064    2.05%
+
+  58017 22639      389.8188    46      391.0000      383.1632  4194742    2.00%
+
+  63897 16557      386.8654    43      389.0000      383.5179  4497164    1.41%
+
+  75029 15522      387.3205    25      389.0000      385.0761  5121793    1.01%
+
+
+Mixed integer rounding cuts applied:  150
+Lift and project cuts applied:  1
+Gomory fractional cuts applied:  2
+
+Root node processing (before b&c):
+  Real time             =    0.99 sec. (803.58 ticks)
+Parallel b&c, 8 threads:
+  Real time             =   71.73 sec. (44730.80 ticks)
+  Sync time (average)   =    8.92 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =   72.72 sec. (45534.38 ticks)
+
+MIP - Integer optimal solution:  Objective = 3.8900000000e+002
+Solution time = 72.72 sec.  Iterations = 6163443  Nodes = 101990
+

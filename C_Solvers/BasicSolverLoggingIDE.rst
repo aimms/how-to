@@ -1,60 +1,112 @@
-How to obtain information from the solver within the AIMMS IDE?
-=====================================================================
+How to get solver log files while using the AIMMS IDE
+======================================================
 
-Solvers can share information about the solution process up to a very detailed level. It is up to you, to ask for the level of detail.
-To avoid overhead in generating information that is not inspected anyway, AIMMS IDE defaults to not asking for any information.
-This article details how to get some information, and provides cues to get very detailed information. 
-It is up to you, as a model developer, using the AIMMS IDE, to limit the information provided to a level of detail that suits you.
+Solvers can share information about the solution process up to a very detailed level.
+To avoid overhead in generating information that is not inspected anyway, the AIMMS IDE defaults to not sharing any information.
 
-AIMMS' generic information
---------------------------
+Get started with log files
+---------------------------
+The first option is to set the option ``solver_listing_messages`` to ``all``. 
+By just setting this option, a solver will generate a small log file with the name ``<solver name>.sta`` in the folder ``log``.
+The first solve of an AIMMS session will create the file, subsequent solves will append to the file. 
+To generate a log file, I used the Flow Shop problem with 14 jobs and 20 machines and solved it in 71 seconds using CPLEX 12.8 on my desktop.
 
-To obtain AIMMS' generic information, please set the options ``major_messages`` and ``time_messages`` both to ``on``.
+.. literalinclude:: ../Resources/C_Solvers/BasicLogging/0_CPLEX_12.8.sta 
+    :name: cplex 12.8.sta
+    :language: none
+    :linenos: 
+    
+Remarks:
 
-    .. code-block:: none
+* CBC requires the CBC specific option "status file"?
+    
+Additional information and example
+----------------------------------
 
-        Calling CPLEX 12.8 for MIP of 138 rows, 120 columns (49 integer) and 1214 non-zeros.
-        Calling CPLEX 12.8 to solve MIP FlowShopModel minimize TimeSpan.
-        There is 0 Kb in use by CPLEX 12.8.
-        After 224 iterations the minimum found for TimeSpan is 181.
-        Solving the problem required 0.156 seconds.
-        
-        
-Solver extended information in the message window:
---------------------------------------------------
+For a MIP problem, a typical first setting to add is the option ``MIP display`` to ``Display each nth node``.
+Thus I obtained a 95 line log file ``log\cplex 12.8.sta``.
+For the sake of brevity, I only show the first and last five lines here.
 
-This can be obtaine by sbsequently setting the option ``solver_window_messages`` to ``all``, and you'll get
+.. literalinclude:: ../Resources/C_Solvers/BasicLogging/1_CPLEX_12.8.sta 
+    :name: cplex 12.8.sta
+    :language: none
+    :linenos: 
+    :lines: 2-6
+    
+Last five lines:
+    
+.. literalinclude:: ../Resources/C_Solvers/BasicLogging/1_CPLEX_12.8.sta 
+    :name: cplex 12.8.sta
+    :language: none
+    :linenos: 
+    :lines: 90-94
+    
 
-    .. code-block:: none
+Overview of options to try out first for logging
+------------------------------------------------
 
-        Calling CPLEX 12.8 for MIP of 138 rows, 120 columns (49 integer) and 1214 non-zeros.
-        Calling CPLEX 12.8 to solve MIP FlowShopModel minimize TimeSpan.
-        Generation required 0.016 seconds.
+This section presents, based on problem type and solver, a list of first options to be set for more information. 
+This is not a list of options to improve performance, but a first step to obtain more information about the solution process so analysis of the solution process can be started.
+    
+LP Problems solved using Barrier
+++++++++++++++++++++++++++++++++
 
-        Solve problem 'FlowShopModel' with 137 rows, 119 columns (49 binaries, 0 generals), and 1205 nonzeros.
++------------+------------------------------+-----------------------+
+| Solver     | Option                       | Value                 |
++============+==============================+=======================+
+| CPLEX      | Barrier display              | Normal                |
++------------+------------------------------+-----------------------+
+| GUROBI     | Output file display interval | 1                     |
++------------+------------------------------+-----------------------+
+| CBC        | ?                            | ?                     |
++------------+------------------------------+-----------------------+
 
-        MIP - Integer optimal solution:  Objective = 1.8100000000e+002
-        Solution time = 0.06 sec.  Iterations = 224  Nodes = 0
+LP Problems solved using SIMPLEX
+++++++++++++++++++++++++++++++++
 
-        Memory in use by CPLEX 12.8.0.0: 0 bytes.
-        There is 0 Kb in use by CPLEX 12.8.
-        After 224 iterations the minimum found for TimeSpan is 181.
-        Solving the problem required 0.063 seconds.
++------------+------------------------------+-----------------------+
+| Solver     | Option                       | Value                 |
++============+==============================+=======================+
+| CPLEX      | Simplex display              | At refactorizations   |
++------------+------------------------------+-----------------------+
+| GUROBI     | Output file display interval | 1                     |
++------------+------------------------------+-----------------------+
+| CBC        | ?                            | ?                     |
++------------+------------------------------+-----------------------+
 
-Solver information in a file:
------------------------------        
-        
-If you prefer to have the solver output in a file, please set the option ``solver_listing_messages`` to ``all``. 
-In our example the output is written to the file ``log\cplex 12.8.sta`` with the following contents:
+MIP Problems
+++++++++++++
 
-    .. code-block:: none
++------------+------------------------------+-----------------------+
+| Solver     | Option                       | Value                 |
++============+==============================+=======================+
+| CPLEX      | MIP display                  | Display each nth node |
++------------+------------------------------+-----------------------+
+| GUROBI     | Output file display interval | 1                     |
++------------+------------------------------+-----------------------+
+| CBC        | MIP print frequency          | 1                     |
++------------+------------------------------+-----------------------+
 
-        Solve problem 'FlowShopModel' with 137 rows, 119 columns (49 binaries, 0 generals), and 1205 nonzeros.
+NLP Problems
+++++++++++++
 
-        MIP - Integer optimal solution:  Objective = 1.8100000000e+002
-        Solution time = 0.07 sec.  Iterations = 224  Nodes = 0
-
-Note that each specific solver has logging options to provide more detailed information; just check out the various option settings in the specific solver categories. Typical categories are Logging and Reporting.
-
-        
++------------+--------------------------------+-----------------------+
+| Solver     | Option                         | Value                 |
++============+================================+=======================+
+| BARON      | Keep results file              | On                    |
++------------+--------------------------------+-----------------------+
+|            | Print local search information | Display each nth node |
++------------+--------------------------------+-----------------------+
+| CONOPT     | Status file display            | Iteration log         |
++------------+--------------------------------+-----------------------+
+| IPOPT      | Output verbosity level         | 6 or higher           |
++------------+--------------------------------+-----------------------+
+| KNITRO     | Status file display            | Summary               |
++------------+--------------------------------+-----------------------+
+| MINOS      | Print to log file              | On                    |
++------------+--------------------------------+-----------------------+
+| SNOPT      | Print output file              | On                    |
++------------+--------------------------------+-----------------------+
+  
+    
 .. include:: ../includes/form.def
