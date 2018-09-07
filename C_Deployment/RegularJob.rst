@@ -42,43 +42,68 @@ Each line is explained as follows:
 The center piece of the project is the procedure ``pr_IterativeJobScheduling``:
 
     .. code-block:: aimms
+    
+        Procedure pr_IterativeJobScheduling {
+            Arguments: (delegateLevel,maxDelegateLevel,timeIncrement,epPayloadProcedure);
+            Body: {
+                ! pro::DelegateToServer uses the *current* values of local arguments to create a call for a new server session.
+                ! We modify the values of these arguments before calling pro::DelegateToServer
+                delegateLevel += 1 ;                                                       ! 1)
+                
+                spRequestDescription :=                                                    ! 2)
+                    formatString("Start %i'th iteration of %e at %s", 
+                    delegateLevel, epPayloadProcedure, sp_jobTime );
 
-        ! pro::DelegateToServer uses the *current* values of local arguments to create a call for a new server session.
-        ! We modify the values of these arguments before calling pro::DelegateToServer
-        delegateLevel += 1 ;                                                       ! 1)
-        
-        spRequestDescription :=                                                    ! 2)
-            formatString("Start %i'th iteration of %e at %s", 
-            delegateLevel, epPayloadProcedure, sp_jobTime );
+                ! Switch to server sessions.
+                if delegateLevel = 1 then
 
-        ! Switch to server sessions.
-        if delegateLevel = 1 then
+                    if pro::DelegateToServer(                                              ! 3)
+                            requestDescription :  spRequestDescription,
+                            waitForCompletion  :  0, 
+                            completionCallback :  'pro::session::EmptyCallback',
+                            delegationOverride :  delegateLevel  ) then
+                        return 1 ;
+                    endif ;
 
-            if pro::DelegateToServer(                                              ! 3)
-                    requestDescription :  spRequestDescription,
-                    waitForCompletion  :  0, 
-                    completionCallback :  'pro::session::EmptyCallback',
-                    delegationOverride :  delegateLevel  ) then
-                return 1 ;
-            endif ;
+                elseif delegateLevel <= maxDelegateLevel then   ! Schedule the next job.
+                
+                    sp_jobTime := MomentToString( sp_UtcTimFmt, [second],                 ! 4)
+                                        CurrentToString(sp_UtcTimFmt), timeIncrement );
+                                        
+                    pro::DelegateToServer(                                                ! 5)
+                        requestDescription :  spRequestDescription,
+                        waitForCompletion  :  0, 
+                        completionCallback :  'pro::session::EmptyCallback',
+                        delegationOverride :  delegateLevel,
+                        scheduledAt        :  sp_jobTime );
 
-        elseif delegateLevel <= maxDelegateLevel then   ! Schedule the next job.
-        
-            sp_jobTime := MomentToString( sp_UtcTimFmt, [second],                 ! 4)
-                                CurrentToString(sp_UtcTimFmt), timeIncrement );
-                                
-            pro::DelegateToServer(                                                ! 5)
-                requestDescription :  spRequestDescription,
-                waitForCompletion  :  0, 
-                completionCallback :  'pro::session::EmptyCallback',
-                delegationOverride :  delegateLevel,
-                scheduledAt        :  sp_jobTime );
+                endif ;
 
-        endif ;
+                Apply( epPayloadProcedure );                                              ! 6)
+            
+                }
+                
+            Parameter delegateLevel {
+                Property: Input;
+            }
+            Parameter maxDelegateLevel {
+                Property: Input;
+            }
+            Parameter timeIncrement {
+                Unit: second;
+                Property: Input;
+            }
+            ElementParameter epPayloadProcedure {
+                Range: AllProcedures;
+                Default: 'MainExecution';
+                Property: Input;
+            }
+            StringParameter sp_jobTime;
+            StringParameter spRequestDescription;
+        }
 
-        Apply( epPayloadProcedure );                                              ! 6)
-
-Each portion of the code is explained below:
+    
+Each portion of the procedure code is explained below:
         
 #. DelegateLevel increased, to indicate to AIMMS PRO that this is a valid iterative call.
         
@@ -92,7 +117,7 @@ Each portion of the code is explained below:
 
 #. This will execute the payload for each of the server sessions started.
 
-To operate the example that can be :download:`downloaded <../Resources/C_Deployment/RegularJob/JobRepetition.zip>`
+To operate, the example that can be downloaded :download:`here <../Resources/C_Deployment/RegularJob/JobRepetition.zip>`.
 
 #. Create an .aimmspack, publish on your favorite AIMMS PRO system.
 
@@ -102,16 +127,20 @@ To operate the example that can be :download:`downloaded <../Resources/C_Deploym
 
 #. Go to job tab in the AIMMS PRO portal and watch new jobs being created, queued, running, and finished.
 
+.. image:: ../Resources/C_Deployment/RegularJob/Images/PROJobs.png
 
-When you check the session.log files, you may encounter a line like:
 
-    .. code-block:: none
+.. note::
 
-        12:10:46,186 0x7f6389d90700 [INFO] {PRO.Client.Library} pr_Friesian(): At 2018-09-04 12:10:46 (UTC) delegation level is 3
+    * When you check the session.log files, you may encounter a line like:
 
-That is because the procedure ``pr_Friesian`` uses the procedure call ``pro::management::LocalLogInfo(...);`` to log some information about current server session.
+        .. code-block:: none
 
-When you want to interrupt a sequence of server jobs, please terminate the scheduled session before terminating the running session.
+            12:10:46,186 0x7f6389d90700 [INFO] {PRO.Client.Library} pr_Friesian(): At 2018-09-04 12:10:46 (UTC) delegation level is 3
+
+        That is because the procedure ``pr_Friesian`` uses the procedure call ``pro::management::LocalLogInfo(...);`` to log some information about current server session.
+
+    * When you want to interrupt a sequence of server jobs, please terminate the scheduled session before terminating the running session.
         
 
 .. include:: ../includes/form.def
