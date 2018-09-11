@@ -56,9 +56,9 @@ LP Problems solved using Barrier
 +============+==============================+=======================+
 | CPLEX      | Barrier display              | Normal                |
 +------------+------------------------------+-----------------------+
-| GUROBI     | Output file display interval | 1                     |
+| GUROBI     | Output file                  | 1                     |
 +------------+------------------------------+-----------------------+
-| CBC        | ?                            | ?                     |
+| CBC        | Status File                  | File                  |
 +------------+------------------------------+-----------------------+
 
 LP Problems solved using SIMPLEX
@@ -69,9 +69,9 @@ LP Problems solved using SIMPLEX
 +============+==============================+=======================+
 | CPLEX      | Simplex display              | At refactorizations   |
 +------------+------------------------------+-----------------------+
-| GUROBI     | Output file display interval | 1                     |
+| GUROBI     | Output file                  | 1                     |
 +------------+------------------------------+-----------------------+
-| CBC        | ?                            | ?                     |
+| CBC        | Status File                  | File                  |
 +------------+------------------------------+-----------------------+
 
 MIP Problems
@@ -82,9 +82,9 @@ MIP Problems
 +============+==============================+=======================+
 | CPLEX      | MIP display                  | Display each nth node |
 +------------+------------------------------+-----------------------+
-| GUROBI     | Output file display interval | 1                     |
+| GUROBI     | Output file                  | 1                     |
 +------------+------------------------------+-----------------------+
-| CBC        | MIP print frequency          | 1                     |
+| CBC        | Status File                  | File                  |
 +------------+------------------------------+-----------------------+
 
 NLP Problems
@@ -95,18 +95,14 @@ NLP Problems
 +============+================================+=======================+
 | BARON      | Keep results file              | On                    |
 +------------+--------------------------------+-----------------------+
-|            | Print local search information | Display each nth node |
-+------------+--------------------------------+-----------------------+
 | CONOPT     | Status file display            | Iteration log         |
 +------------+--------------------------------+-----------------------+
-| IPOPT      | Output verbosity level         | 6 or higher           |
+| IPOPT      | Status file                    | Yes                   |
 +------------+--------------------------------+-----------------------+
 | KNITRO     | Status file display            | Summary               |
 +------------+--------------------------------+-----------------------+
-| MINOS      | Print to log file              | On                    |
-+------------+--------------------------------+-----------------------+
 | SNOPT      | Print output file              | On                    |
 +------------+--------------------------------+-----------------------+
-  
+
     
 .. include:: ../includes/form.def
