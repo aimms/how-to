@@ -1,4 +1,4 @@
-How to get solver log files using the AIMMS IDE
+How to get solver log files using the AIMMS IDE?
 ======================================================
 
 Solvers can share information about the solution process up to a very detailed level.
@@ -39,6 +39,7 @@ Last five lines:
     :name: cplex 12.8.sta
     :language: none
     :linenos: 
+    :lineno-start: 90
     :lines: 90-94
     
 
