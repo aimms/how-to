@@ -1,8 +1,9 @@
 How to get solver log files using AIMMS PRO?
 ======================================================
 
-With :doc:`AIMMS IDE<BasicSolverLoggingIDE>`, the log files from solvers are obtained directly.
-Obtaining these log files when the solve is executed on AIMMS PRO is less direct; it takes the following steps:
+In :doc:`BasicSolverLoggingIDE`, we explain how to adapt the project such that solver log files are available for inspection. 
+A solver session runs somewhere on an AIMMS PRO server, and as a user, you do not have direct access to those files. 
+However, with a few small steps, which are explained in this article, you can access these files as well.
 
 #. Clarify the solver used in a AIMMS PRO server session (job).
 
@@ -15,8 +16,9 @@ Each of these steps are discussed in some more detail below:
 Clarify the solver used in an AIMMS PRO server session
 ------------------------------------------------------
 
-As an AIMMS PRO server session doesn't have a UI, it doesn't have a progress window either. 
-However, by setting the option ``major_messages`` to ``on``, the ``session.log`` file will contain lines like:
+As an AIMMS PRO server session doesn't have a UI, it doesn't have a progress window either. For apps published using a WinUI, you can still use the request manager to obtain progress information. Something similar is not available for WebUI applications (yet).
+
+Some progress information can be obtained via setting the option ``major_messages`` to ``on``, the ``session.log`` file will contain lines like:
 
     .. code-block:: none
 
@@ -24,8 +26,8 @@ However, by setting the option ``major_messages`` to ``on``, the ``session.log``
         09:21:47,138 0x7f55877fe700 [ERROR] {AIMMS.ProgressSupport} Calling CPLEX 12.8 to solve MIP FlowShopModel minimize TimeSpan.
         09:21:47,169 0x7f55877fe700 [ERROR] {AIMMS.ProgressSupport} There is 0 Kb in use by CPLEX 12.8.
 
-The solver used, determines the name of the solver log file.  Now let's get that solver log file saved directly after a solve.        
-        
+The solver used, determines the name of the solver log file. Now let's get that solver log file saved directly after a solve.        
+
 Copy the solver log file to a place on AIMMS PRO Storage
 --------------------------------------------------------
 
@@ -106,8 +108,7 @@ Summary
 -------
 With a few easy to copy extensions to your model, it becomes easy to get an overview of the solution process that takes place on the AIMMS PRO server.
 
-.. "D:\u\s\How to\gitlab\master\Resources\C_Solvers\BasicLogging\FlowShop with Download log file.zip"
-
+The example used to construct this article: 
 :download:`Flow Shop – with download log file <../Resources/C_Solvers/BasicLogging/FlowShop with Download log file.zip>`.
 
 .. include:: ../includes/form.def
