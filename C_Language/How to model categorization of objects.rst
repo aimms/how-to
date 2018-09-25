@@ -69,7 +69,11 @@ The resulting data page of the parameter `pOrderCost(o)` will look as below, wit
 .. Another method to model category mapping is to use a binary parameter indexed over the orders and sizes. A binary parameter is a regular `parameter` with range set as binary, meaning that only the values 0 or 1 are allowed. 
 .. Should I write this part too ? 
 
-.. To know more about the usage of element parameters, read ...... Will update this article when the article about element parameter usage is completed. Just a dummy edit. I do not want to publish this. 
+.. To know more about the usage of element parameters, read ...... Will update this article when the article about element parameter usage is completed. 
+
+.. Just a dummy edit. I do not want to publish this. 
+
+.. one more just for the sake of it.
 
 
 .. include:: ../includes/form.def
