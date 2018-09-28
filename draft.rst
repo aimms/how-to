@@ -1,66 +1,33 @@
-Add a library to your project help
-===========================
+Add a library to your project
+=============================
 
-Conditions
-----------
+.. Definition
 
-Overview
---------
+In the context of the AIMMS environment, a library is a project that is structured to be invoked from other AIMMS projects. 
 
-This article describes:
+Each library project in AIMMS contains a subset of project files. You can divide a large project into smaller sub-projects, enabling multiple developers to collaborate easily by sharing parts which are relevant to the entire project.
 
-* How to add a new library to your project
-* What library types are available
-* Best practices for setting up libraries
+Read more about libraries in the `AIMMS User Manual <https://download.aimms.com/aimms/download/manuals/AIMMS3UG_OrganizingProjectInLibraries.pdf>`_.
 
-Definition
-----------
+.. Procedure
 
-In the context of AIMMS,
+To add a new libary within a project, go to ``File > Library manager``.
 
-Benefit:
-library projects divide a large Aimms project into smaller sub-projects
-useful for sharing parts of an application between multiple projects
-enabling multiple developers to work in a single project
+Select a library type:
 
-Prefixes:
-a default library prefix is assigned When you create a new library project 
-the prefix has to be used to access the library objects
-you can view and edit a library's prefix in the library manager
-.. How is a library project different from project calling on libraries?
-.. What does this look like?
+    * New library
+        Name your library and specify location in the *Library* tab. Customize subfolder or model name in the *Optional Naming* tab.
 
-Pages:
-Pages defined in a library can access the library’s private identifiers
-paged defined outside of the library only have access to identifiers in the interface of the library.
-Pages outside of the library are not affected by changes to the library’s internal implementation
-.. what are pages in this context?
+    * Existing library
+        Browse to select a saved library folder.
 
-Procedure
----------
+    * System library
+        Browse pre-installed AIMMS libraries.
 
-To add a new libary:
+    * Repository library
+        Browse existing AIMMS libraries on the cloud. (Requires internet connection.)
 
-#. Within a project, go to File > Library manager
-#. Select which library to add
 
-Library types available:
-
-* New library
-* System library
-* 
-
-Using the library manager Aimms allows you to
-* create new libraries,
-* add existing libraries to your project,
-* edit library properties, and
-* remove libraries from your project.
-
-Each library project in Aimms contains:
-* the Project.xml file holding a reference to the project’s main model source
-file (with an .ams extension), and additional model source files containing all relevant identifier declarations, procedures and functions
-* PageManager.xml, TemplateManager.xml and MenuBuilder.xml files describing the page, template and menu tree defined in the project, with pages and templates being stored in subfolders,
-* Settings and Tools subfolders containing the saved settings for appearance and tools in the Aimms IDE, and
-* User Files folder for storing all user files within the project.
+.. note:: AIMMS assigns a default library prefix when you create a new library project. To view and edit a library's prefix, open the library manager. Use the prefix to identify the library when accessing the library objects.
 
 .. END DOCUMENT
