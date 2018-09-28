@@ -11,23 +11,27 @@ Read more about libraries in the `AIMMS User Manual <https://download.aimms.com/
 
 .. Procedure
 
-To add a new libary within a project, go to ``File > Library manager``.
+To add a new libary within the current project, go to ``File > Library manager``.
 
 Select a library type:
 
     * New library
-        Name your library and specify location in the *Library* tab. Customize subfolder or model name in the *Optional Naming* tab.
+        Create a new library. Name your library and specify location in the *Library* tab. Customize subfolder or model name in the *Optional Naming* tab.
 
     * Existing library
-        Browse to select a saved library folder.
+        Select a saved library folder. You may select from shared libraries of other users in your organization.
 
     * System library
-        Browse pre-installed AIMMS libraries.
+        Select a pre-installed AIMMS library. (These are read-only.)
 
-    * Repository library
-        Browse existing AIMMS libraries on the cloud. (Requires internet connection.)
+    * Library from repository
+        Import an AIMMS library from the cloud. (Requires internet connection to import.)
 
+Libraries have a bi-directional relationship with your project, unless encrypted as read-only. You can use identifiers and pages included with the library in other projects, and you can also modify the library identifiers and pages when you link them to your own project.
 
-.. note:: AIMMS assigns a default library prefix when you create a new library project. To view and edit a library's prefix, open the library manager. Use the prefix to identify the library when accessing the library objects.
+.. note:: 
+    AIMMS assigns a default library prefix when you create a new library project. To view and edit a library's prefix, open the library manager. Use the prefix to identify the library when accessing the library objects.
+
+    For example, if you add the AXLL library which has a prefix ``axll``, you invoke functions of this library in your code with ``axll::``. A drop-down list of available functions appears.
 
 .. END DOCUMENT
