@@ -3,7 +3,7 @@ Using AIMMS Libraries
 
 .. Definition
 
-In the context of the AIMMS environment, a library is an AIMMS project that can be included in/added to other AIMMS projects.  They are the AIMMS equivalent to Python or R packages. 
+In the context of the AIMMS environment, a library is an AIMMS project that can be included in/added to other AIMMS projects.  
 
 Each library in AIMMS contains a subset of project files. You can divide a large project into smaller sub-projects, enabling multiple developers to collaborate easily by sharing parts which are relevant to the entire project.
 
@@ -22,7 +22,7 @@ Select a library type:
         Selects a saved library folder. You may select from libraries shared with you.
 
     * System library
-        Selects a pre-installed AIMMS library. (These are read-only.)
+        Selects a pre-installed AIMMS library. (These libraries are read-only.)
 
     * Library from repository
         Imports an AIMMS library from the cloud. (Requires internet connection to import.)
