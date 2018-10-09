@@ -1,5 +1,7 @@
 .. IMAGES
 
+.. |nodelock-readonly| image:: /Images/89-academic-license/nodelock-readonly.png
+.. |uncheck-read-only| image:: /Images/89-academic-license/uncheck-read-only.png
 .. |license-config| image:: /Images/89-academic-license/license-config.png
 .. |deactivate| image:: /Images/89-academic-license/deactivate.png
 .. |deactivate-yes| image:: /Images/89-academic-license/deactivate-yes.png
@@ -35,6 +37,8 @@ Issue:
 ^^^^^^
 You are unable to update your license because the nodelock file is read-only. 
 
+|nodelock-readonly|
+
 Cause:
 ^^^^^^^
 Windows has locked the file as read-only, blocking the update process. 
@@ -42,9 +46,15 @@ Windows has locked the file as read-only, blocking the update process.
 Solution:
 ^^^^^^^^^^
 In Windows File Explorer, navigate to ``C:\ProgramData\AIMMS\Nodelocks``.
-Right-click the ``.lock`` file for the relevant license number and select *Properties*. Uncheck the box *read-only* and click *OK*. 
+
+Right-click the ``.lock`` file for the relevant license number and select *Properties*. 
+
+Uncheck the box *read-only* and click *OK*. 
+
+|uncheck-read-only|
 
 If the error occurs again, follow the steps below to completely reset the license activation.
+
 #. 
     In AIMMS, go to *Tools > License > License configuration* and click *Deactivate*.
 
