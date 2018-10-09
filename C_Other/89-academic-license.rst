@@ -41,6 +41,10 @@ Windows has locked the file as read-only, blocking the update process.
 
 Solution:
 ^^^^^^^^^^
+In Windows File Explorer, navigate to ``C:\ProgramData\AIMMS\Nodelocks``.
+Right-click the ``.lock`` file for the relevant license number and select *Properties*. Uncheck the box *read-only* and click *OK*. 
+
+If the error occurs again, follow the steps below to completely reset the license activation.
 #. 
     In AIMMS, go to *Tools > License > License configuration* and click *Deactivate*.
 
