@@ -17,3 +17,5 @@ Other
         
     How To Transfer My Developer License to Another Machine
     HowToHandleTheDeprecationOfCompoundSets
+    89-license-nodelock-error
+    89-academic-license
