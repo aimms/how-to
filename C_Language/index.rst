@@ -1,4 +1,3 @@
-
 .. |aimmsIcon| image:: ../Images/icons/favicon.png
 			:scale: 15 %
 
@@ -16,5 +15,6 @@ AIMMS Language
 .. toctree::
 
     How to model categorization of objects
+    Using AIMMS Libraries
 	
 ..	Generate Random Numbers
