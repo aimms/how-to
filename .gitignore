@@ -1,10 +1,11 @@
-*.log
+﻿*.log
 *.lis
 *.err
 *.bak
 *.dmp
 *.put
 *.aimmslockfile
+*.pyc
 Musterlösung
 _build
 backup
