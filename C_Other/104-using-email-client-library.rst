@@ -9,6 +9,7 @@
 Using the Email Client Library
 ==============================
 
+An overview and basic use of the Email Client library, including an example project.
 
 .. Part 1
 
@@ -65,18 +66,20 @@ Set the SMTP server and create the email message with recipients::
 
 Specify an STMP server which you are allowed to access (i.e., your corporate mail server, or an SMTP server associated with an e-mail account you hold).
 
-Define values for placeholders to replace in the templates used to create the actual email message::
+Define values for placeholders to replace in the templates used to create the body of the email message::
 
     ! Define values for placeholders to replace in the templates used to create the actual email message referring to values defined in Declaration and use for loop if needed for set of data
     PlaceHolderValues := data { CUSTOMERNAME(c), CUSTOMERNUMBER(c), INVOICENUMBER(c)};
 
 .. note::
 
-    Replacements are done one-by-one, in order. Avoid using a place holder value that contains the entire name of another value. For example, ``CUSTOMER, CUSTOMERNAME`` Would result in ``123, 123NAME`` and no replacements would occur for ``CUSTOMERNAME``.
+    Replacements are done one-by-one, in order. Avoid using a place holder value that contains the entire name of another value. For example, using the place holders ``CUSTOMER, CUSTOMERNAME`` would result in the replacement ``123, 123NAME`` and no replacements would occur for ``CUSTOMERNAME``.
+
+.. this should probably be explained rather in the templates topic
 
 The ``PlaceHolderValues`` must be defined in the declaration if using a set. Otherwise you can define the data in strings here.
 
-(show an example of the loop)
+.. show an example of the loop here?
 
 Create the body of the email message from text and HTML templates and placeholder values, and add any images contained in the HTML body as related attachments::
 
@@ -87,7 +90,9 @@ Create the body of the email message from text and HTML templates and placeholde
     email::AddRelatedAttachment(messageId, "EmailTemplate_files/image001.jpg", "image001.jpg");
     email::AddRelatedAttachment(messageId, "EmailTemplate_files/image002.png", "image002.png");
 
-If you are using an HTML template, it's best to include the txt file as a backup because HTML is not supported by all email clients. (Read more about using templates in your message in :ref:`ref-x`.)
+If you are using an HTML template, it's best to include the txt file as a backup because HTML is not supported by all email clients. (Read more about using templates in your message in `AIMMS Knowledge: Creating Email Templates <C_Other/104-creating-email-templates.html>`_.)
+
+.. this should probably be explained rather in the templates topic
 
 Specify any other file attachments::
 
@@ -103,14 +108,14 @@ Send the email and close the message::
     email::CloseMail(messageId);
 
 
-For a full list of commands available, read the `Email Client API <https://manual.aimms.com/emailclient/index.html>`_.
+For a full list of commands available, read `AIMMS Documentation: Email Client API <https://manual.aimms.com/emailclient/index.html>`_.
 
 .. End Part 3
 
 Related issues:
 ---------------
 
-* :ref:`ref-x` (Templates article)
+*  `AIMMS Knowledge: Creating Email Templates <C_Other/104-creating-email-templates.html>`_
 *  `AIMMS Documentation: Email Client Library <https://manual.aimms.com/emailclient/index.html>`_ 
 
 .. END CONTENT
