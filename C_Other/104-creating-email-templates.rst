@@ -43,7 +43,7 @@ To create a formatted HTML template, optionally with images, you can use a word 
 You are now ready to send an email using your template. For instructions, read `AIMMS Knowledge: Using the Email Client Library <C_Other/104-using-email-client-lib.html>`_.
 
 
-Related issues:
+Related topics:
 ---------------
 
 *  `AIMMS Knowledge: Using the Email Client Library <C_Other/104-using-email-client-lib.html>`_

@@ -9,7 +9,7 @@
 Using the Email Client Library
 ==============================
 
-An overview and basic use of the Email Client library, including an example project.
+An overview of the Email Client library.
 
 .. Part 1
 
@@ -64,7 +64,9 @@ Set the SMTP server and create the email message with recipients::
     ! Add recipients
     email::AddRecipientTo(messageId, "Test Recipient", "testrecipient@example.com");
 
-Specify an STMP server which you are allowed to access (i.e., your corporate mail server, or an SMTP server associated with an e-mail account you hold).
+Specify an STMP server which you are allowed to access (i.e., your corporate mail server, or an SMTP server associated with an e-mail account you hold). If the mailing procedure will run while you are not logged into the SMTP server, you can also set authentication with ``email::SetServer``. 
+
+See details in `AIMMS Documentation: Email Client API <https://manual.aimms.com/emailclient/index.html>`_.
 
 Define values for placeholders to replace in the templates used to create the body of the email message::
 
@@ -75,9 +77,9 @@ Define values for placeholders to replace in the templates used to create the bo
 
     Replacements are done one-by-one, in order. Avoid using a place holder value that contains the entire name of another value. For example, using the place holders ``CUSTOMER, CUSTOMERNAME`` would result in the replacement ``123, 123NAME`` and no replacements would occur for ``CUSTOMERNAME``.
 
-.. this should probably be explained rather in the templates topic
+.. this ^ could be explained in the templates topic instead
 
-The ``PlaceHolderValues`` must be defined in the declaration if using a set. Otherwise you can define the data in strings here.
+You must define ``PlaceHolderValues`` in the declaration if using a set to pull replacement values from. Otherwise you can define the data in strings here.
 
 .. show an example of the loop here?
 
@@ -90,9 +92,9 @@ Create the body of the email message from text and HTML templates and placeholde
     email::AddRelatedAttachment(messageId, "EmailTemplate_files/image001.jpg", "image001.jpg");
     email::AddRelatedAttachment(messageId, "EmailTemplate_files/image002.png", "image002.png");
 
-If you are using an HTML template, it's best to include the txt file as a backup because HTML is not supported by all email clients. (Read more about using templates in your message in `AIMMS Knowledge: Creating Email Templates <C_Other/104-creating-email-templates.html>`_.)
+Read more about using templates in your message in `AIMMS Knowledge: Creating Email Templates <C_Other/104-creating-email-templates.html>`_.
 
-.. this should probably be explained rather in the templates topic
+.. this ^ could be explained in the templates topic instead
 
 Specify any other file attachments::
 
@@ -107,12 +109,13 @@ Send the email and close the message::
     ! Close the email message
     email::CloseMail(messageId);
 
+The path specified here is relative to the project files.
 
 For a full list of commands available, read `AIMMS Documentation: Email Client API <https://manual.aimms.com/emailclient/index.html>`_.
 
 .. End Part 3
 
-Related issues:
+Related topics:
 ---------------
 
 *  `AIMMS Knowledge: Creating Email Templates <C_Other/104-creating-email-templates.html>`_
