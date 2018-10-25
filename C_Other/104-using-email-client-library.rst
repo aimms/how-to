@@ -10,7 +10,7 @@
 
 .. * :ref:`ref-add-email-lib`
 .. * :ref:`ref-create-email`
-.. * :ref:`ref-use-place-holders`
+.. * :ref:`ref-use-placeholders`
 .. * :ref:`ref-add-attachment`
 
 .. End TOC
@@ -79,7 +79,7 @@ Specify an SMTP server which you are allowed to access (i.e., your corporate mai
 
 You can add multiple recipients to the same email by repeating the ``email::AddRecipientTo`` statement, or use ``email::AddRecipientCC`` or ``email::AddRecipientBCC`` to CC or BCC additional recipients. 
 
-See details in `AIMMS Documentation: Email Client API <https://manual.aimms.com/emailclient/index.html>`_.
+See details in AIMMS Documentation: `Email Client API <https://manual.aimms.com/emailclient/api.html>`_.
 
 .. End create email
 
@@ -130,9 +130,9 @@ To specify any other file attachments::
     email::AddFileAttachment(messageID,"EmailTemplate_files/document.pdf");
 
 
-Read more about creating templates for your message in `AIMMS Knowledge: Creating Email Templates <C_Other/104-creating-email-templates.html>`_.
+Read more about creating templates for your message in AIMMS Knowledge: :doc:`104-creating-email-templates`.
 
-For a full list of functions available, read `AIMMS Documentation: Email Client API <https://manual.aimms.com/emailclient/index.html>`_.
+For a full list of functions available, read AIMMS Documentation: `Email Client API <https://manual.aimms.com/emailclient/api.html>`_.
 
 .. End images and attachments
 
