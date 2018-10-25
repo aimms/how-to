@@ -8,13 +8,7 @@
 Creating Email Templates
 ==============================
 
-How to create email templates to send emails from AIMMS using the Email Client library.
-
-
-Overview
----------
-
-The Email Client library supports the use of template files in HTML and TXT formats. You can set up templates with placeholders to be replaced by variable strings specified in your project. 
+The Email Client library supports the use of template files in HTML and TXT formats. You can set up templates with placeholders to be replaced by values from identifiers in your AIMMS project. 
 
 
 Creating the template
@@ -30,13 +24,15 @@ To create a formatted HTML template, optionally with images, you can use a word 
 #. Save the document as ``.html (filtered)``, and save it again as ``.txt``.
 
 #. 
-    If you included images, edit image reference in the HTML file.
+    If you included images, edit the image references in the HTML file.
 
-    Using MS Word, your ``*.html`` will be saved with a ``*_files`` folder containing any images you have included. For these images to render in your email sent from AIMMS, you must replace the reference to this folder with ``cid:`` in the HTML source code. ::
+    If you use MS Word to create the template, your ``*.html`` will be saved with a ``*_files`` folder containing the images you have included. For these images to render in your email sent from AIMMS, you must replace the reference to this folder with ``cid:`` in the HTML source code. 
+    
+    Change ::
 
         <img src="document_files/image001.jpg">
 
-    change to ::
+    to ::
 
         <img src="cid:image001.jpg">
 
