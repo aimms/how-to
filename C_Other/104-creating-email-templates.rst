@@ -31,13 +31,13 @@ To create a formatted HTML template, optionally with images, you can use a word 
 
         <img src="cid:image001.jpg">
 
-You are now ready to send an email using your template. For instructions, read `AIMMS Knowledge: Using the Email Client Library <C_Other/104-using-email-client-lib.html>`_.
+You are now ready to send an email using your template. For instructions, read `AIMMS Knowledge: Using the Email Client Library </104-using-email-client-library.html>`_.
 
 
 Related topics:
 ---------------
 
-*  `AIMMS Knowledge: Using the Email Client Library <C_Other/104-using-email-client-lib.html>`_
+*  `AIMMS Knowledge: Using the Email Client Library </104-using-email-client-library.html>`_
 *  `AIMMS Documentation: Email Client Library <https://manual.aimms.com/emailclient/index.html>`_ 
 
 .. END CONTENT

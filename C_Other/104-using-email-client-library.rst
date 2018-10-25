@@ -83,13 +83,13 @@ See details in `AIMMS Documentation: Email Client API <https://manual.aimms.com/
 
 .. End create email
 
-.. _ref-use-place-holders:
+.. _ref-use-placeholders:
 
-Using Place Holders in an Email Message Template
+Using Placeholders in an Email Message Template
 -------------------------------------------------
 .. For instructions to create a template, read `AIMMS Knowledge: Creating Email Templates <C_Other/104-creating-email-templates.html>`_.
 
-You can replace predefined strings in your template with data from AIMMS identifiers. These replaceable strings are called `Place holders`. You need to declare a set whose elements are the place holders that you want to replace and declare a parameter indexed over this set. The values from this indexed parameter will replace the placeholder strings in the email body. 
+You can replace predefined strings in your template with data from AIMMS identifiers. These replaceable strings are called *Placeholders*. You need to declare a set whose elements are the placeholders that you want to replace and declare a parameter indexed over this set. The values from this indexed parameter will replace the placeholder strings in the email body. 
 
 ::
 
@@ -102,14 +102,14 @@ You can replace predefined strings in your template with data from AIMMS identif
         IndexDomain: i;
     }
 
-The function ``email::SetMessageFromFile`` creates the body of the email from the templates you specify and replaces the place holders with the values specified in `PlaceholderValues`::
+The function ``email::SetMessageFromFile`` creates the body of the email from the templates you specify and replaces the placeholders with the values specified in `PlaceholderValues`::
 
     ! Create the body of the email message from text and HTML templates and placeholder values
     email::SetMessageFromFile(messageId, "EmailTemplate.txt", "EmailTemplate.html", PlaceholderValues);
 
 .. note::
 
-    Replacements are done one-by-one, in order. Avoid using a place holder value that contains the entire name of another value. For example, using the place holders ``CUSTOMER, CUSTOMERNAME`` would result in the replacement (e.g.) ``123, 123NAME`` and no replacements would occur for ``CUSTOMERNAME``.
+    Replacements are done one-by-one, in order. Avoid using a placeholder value that contains the entire name of another value. For example, using the placeholders ``CUSTOMER, CUSTOMERNAME`` would result in the replacement (e.g.) ``123, 123NAME`` and no replacements would occur for ``CUSTOMERNAME``.
 
 .. End place holders
 
@@ -139,8 +139,8 @@ For a full list of functions available, read `AIMMS Documentation: Email Client 
 Related topics:
 ---------------
 
-*  `AIMMS Knowledge: Creating Email Templates <C_Other/104-creating-email-templates.html>`_
-*  `AIMMS Documentation: Email Client Library <https://manual.aimms.com/emailclient/index.html>`_ 
+*  AIMMS Knowledge: :doc:`104-creating-email-templates`
+*  AIMMS Documentation: `Email Client Library <https://manual.aimms.com/emailclient/index.html>`_ 
 
 .. END CONTENT
 
