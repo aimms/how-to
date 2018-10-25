@@ -1,22 +1,19 @@
 .. IMAGES
 
-
 .. |add-email-client-lib| image:: /Images/104-using-email-client-library/add-email-client-lib.png
+
+.. FILES ATTACHED
 
 
 .. BEGIN CONTENT
 
-.. TOC
-
-.. * :ref:`ref-add-email-lib`
-.. * :ref:`ref-create-email`
-.. * :ref:`ref-use-placeholders`
-.. * :ref:`ref-add-attachment`
-
-.. End TOC
-
 Using the Email Client Library
 ==============================
+
+An introduction to the Email Client library with an example project.
+
+Overview
+--------
 
 The Email Client library provides you with an API to create and send emails from within your AIMMS project. The library does not require any external programs to be installed and can be used from both AIMMS Developer and AIMMS PRO. It is also available on AIMMS Cloud.
 
@@ -33,7 +30,7 @@ Supported features:
 Adding the library
 --------------------
 
-You can add the *EmailClient* to your project from the library repository using the *Library Manager*. For more details, see AIMMS Knowledge: :doc:`../C_Language/Using_AIMMS_Libraries`.
+Add *EmailClient* to your project from the library repository using the *Library Manager*. For more details, see AIMMS Knowledge: :doc:`../C_Language/Using_AIMMS_Libraries`.
 
 |add-email-client-lib|
 
@@ -87,7 +84,6 @@ See details in AIMMS Documentation: `Email Client API <https://manual.aimms.com/
 
 Using Placeholders in an Email Message Template
 -------------------------------------------------
-.. For instructions to create a template, read `AIMMS Knowledge: Creating Email Templates <C_Other/104-creating-email-templates.html>`_.
 
 You can replace predefined strings in your template with data from AIMMS identifiers. These replaceable strings are called *Placeholders*. You need to declare a set whose elements are the placeholders that you want to replace and declare a parameter indexed over this set. The values from this indexed parameter will replace the placeholder strings in the email body. 
 
@@ -136,7 +132,14 @@ For a full list of functions available, read AIMMS Documentation: `Email Client 
 
 .. End images and attachments
 
-Related topics:
+Example
+-------
+
+Download an example AIMMS project containing an email procedure:
+
+:download:`EmailLibraryDemo.zip <..Resources/Other/104-using-email-client-library/EmailLibraryDemo.zip>`
+
+Related topics
 ---------------
 
 *  AIMMS Knowledge: :doc:`104-creating-email-templates`
