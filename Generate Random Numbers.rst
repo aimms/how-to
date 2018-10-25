@@ -63,6 +63,21 @@ How to generate random numbers ?
   
    Test
 
+.. productionlist::
+   try_stmt: try1_stmt | try2_stmt
+   try1_stmt: "try" ":" `suite`
+            : ("except" [`expression` ["," `target`]] ":" `suite`)+
+            : ["else" ":" `suite`]
+            : ["finally" ":" `suite`]
+   try2_stmt: "try" ":" `suite`
+            : "finally" ":" `suite`
+
+:menuselection:`Start --> Programs --> Execute`
+
+:token:`expression`
+
+:samp:`{variable = 2} print 1+{variable}`
+
 .. literalinclude:: ./Resources/Modelling/CSVFiles/Downloads/CSVInterface/MainProject/CSVInterface.ams
     :caption: CSVInterface.ams
     :name: CSVInterface.ams
