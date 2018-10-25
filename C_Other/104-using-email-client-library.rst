@@ -8,10 +8,10 @@
 
 .. TOC
 
-* :ref:`ref-add-email-lib`
-* :ref:`ref-create-email`
-* :ref:`ref-use-place-holders`
-* :ref:`ref-add-attachment`
+.. * :ref:`ref-add-email-lib`
+.. * :ref:`ref-create-email`
+.. * :ref:`ref-use-place-holders`
+.. * :ref:`ref-add-attachment`
 
 .. End TOC
 
@@ -87,9 +87,9 @@ See details in `AIMMS Documentation: Email Client API <https://manual.aimms.com/
 
 Using Place Holders in an Email Message Template
 -------------------------------------------------
-For instructions to create a template, read `AIMMS Knowledge: Creating Email Templates <C_Other/104-creating-email-templates.html>`_.
+.. For instructions to create a template, read `AIMMS Knowledge: Creating Email Templates <C_Other/104-creating-email-templates.html>`_.
 
-You can replace predefined strings in your template with data from AIMMS identifiers. These replaceable strings are called `Placeholders`. You need to declare a set whose elements are the placeholders that you want to replace and declare a parameter indexed over this set. The values from this indexed parameter will replace the placeholder strings in the email body. 
+You can replace predefined strings in your template with data from AIMMS identifiers. These replaceable strings are called `Place holders`. You need to declare a set whose elements are the place holders that you want to replace and declare a parameter indexed over this set. The values from this indexed parameter will replace the placeholder strings in the email body. 
 
 ::
 
@@ -102,7 +102,7 @@ You can replace predefined strings in your template with data from AIMMS identif
         IndexDomain: i;
     }
 
-The function ``email::SetMessageFromFile`` creates the body of the email from the templates you specify and replaces the `Placeholders` with the values specified in `PlaceholderValues`::
+The function ``email::SetMessageFromFile`` creates the body of the email from the templates you specify and replaces the place holders with the values specified in `PlaceholderValues`::
 
     ! Create the body of the email message from text and HTML templates and placeholder values
     email::SetMessageFromFile(messageId, "EmailTemplate.txt", "EmailTemplate.html", PlaceholderValues);
