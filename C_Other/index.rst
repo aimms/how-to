@@ -20,3 +20,4 @@ Other
     89-license-nodelock-error
     89-academic-license
     104-using-email-client-library
+    104-creating-email-templates
