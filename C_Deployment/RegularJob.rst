@@ -111,7 +111,7 @@ Each portion of the procedure code is explained below:
         
 #. The first job starts immediately, but is started from the WebUI session. The WebUI session should NOT execute the payload, that is why we have a test on the return of ``pro::DelegateToServer``
 
-#. Construct the next time the job is to be executed. By using the Local timezone, we avoid any ambiguities regarding daylight saving time.
+#. Construct the next time the job is to be executed. By using the Local timezone, we avoid any ambiguities regarding daylight saving time; ``sp_LocalTimFmt = "%c%y-%m-%d %H:%M:%S%TZ('Local')"``
 
 #. The iterative call, that might looks like a recursive call.
 
