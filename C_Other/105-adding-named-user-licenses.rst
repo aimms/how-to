@@ -19,27 +19,38 @@ Adding named users
 
 .. Need a sentence explaining why you need to do this - encountering an error? Required for certain kinds of setup?
 
-1. In AIMMS Network License Manager, go to *Maintenance > Maintenance mode*.
+1. 
+    In AIMMS Network License Manager, go to *Maintenance > Maintenance mode*.
 
-|maintenance-mode|
+    |maintenance-mode|
 
-2. Click to select your license in the License window, and go to *Maintenance > License > Registered Users*.
+    |
 
-|registered-users-menu|
+2. 
+    Click to select your license in the License window, and go to *Maintenance > License > Registered Users*.
 
-3. A Registered License Users dialog appears. Enter new user information and click *Add*.
+    |registered-users-menu|
 
-|add-new-users|
+    |
 
-The username should match the user's Windows or Linux username.
+3. 
+    A Registered License Users dialog appears. Enter new user information and click *Add*.
+
+    |add-new-users|
+
+    The username should match the user's Windows or Linux username.
+
+    |
 
 4. Go to *Maintenance > Maintenance mode* to exit *Maintenance mode*.
 
+|
+    
 Your new user(s) can now connect to the license server.
 
 When connected, their details will appear in the *Client* section of the Network License Manager.
 
-|client-section|
+    |client-section|
 
 
 Related topics
