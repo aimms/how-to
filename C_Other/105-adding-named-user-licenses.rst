@@ -1,0 +1,58 @@
+
+.. IMAGES
+
+.. |maintenance-mode| image:: /Images/105-adding-named-user-licenses/maintenance-mode.png
+.. |registered-users-menu| image:: /Images/105-adding-named-user-licenses/registered-users-menu.png
+.. |add-new-users| image:: /Images/105-adding-named-user-licenses/add-new-users.png
+.. |client-section| image:: /Images/105-adding-named-user-licenses/client-section.png
+
+
+.. BEGIN CONTENT
+
+Registering Named Users in Network License Manager
+==================================================
+
+How to register named users for a license in the Network License Manager.
+
+Adding named users
+--------------------
+
+.. Need a sentence explaining why you need to do this - encountering an error? Required for certain kinds of setup?
+
+#. In AIMMS Network License Manager, go to *Maintenance > Maintenance mode*.
+
+|maintenance-mode|
+
+#. Click to select your license in the License window, and go to *Maintenance > License > Registered Users*.
+
+|registered-users-menu|
+
+#. A Registered License Users dialog appears. Enter new user information and click *Add*.
+
+|add-new-users|
+
+The username should match the user's Windows or Linux username.
+
+#. Go to *Maintenance > Maintenance mode* to exit *Maintenance mode*.
+
+Your new user(s) can now connect to the license server.
+
+When connected, their details will appear in the *Client* section of the Network License Manager.
+
+|client-section|
+
+
+Related topics
+---------------
+
+*  AIMMS Knowledge: :doc:`How To Transfer My Developer License to Another Machine`
+*  AIMMS Documentation: `PRO User Management <https://documentation.aimms.com/pro/user-man.html>`_ 
+*  AIMMS Documentation: `Cloud Server Administration <https://documentation.aimms.com/cloud/admin.html>`_ 
+*  AIMMS Documentation: `Network License Server Manual <https://download.aimms.com/aimms/download/data/LicenseServer/AIMMS_net.pdf>`_ 
+.. END CONTENT
+
+.. include:: ../includes/form.def
+
+.. author: Jessica Valasek Estenssoro
+.. checked by: -Khang Bui
+.. updated: October 26, 2018
