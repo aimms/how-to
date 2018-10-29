@@ -17,7 +17,7 @@ How to register named users for a license in the Network License Manager.
 Adding named users
 --------------------
 
-.. Need a sentence explaining why you need to do this - encountering an error? Required for certain kinds of setup?
+When using a network license, an administrator must add them as registered (named) users in the Network License Manager.
 
 1. 
     In AIMMS Network License Manager, go to *Maintenance > Maintenance mode*.
@@ -57,8 +57,7 @@ Related topics
 ---------------
 
 *  AIMMS Knowledge: :doc:`How To Transfer My Developer License to Another Machine`
-*  AIMMS Documentation: `PRO User Management <https://documentation.aimms.com/pro/user-man.html>`_ 
-*  AIMMS Documentation: `Cloud Server Administration <https://documentation.aimms.com/cloud/admin.html>`_ 
+*  AIMMS Documentation: `License Server Installation and Configuration <https://manual.aimms.com/pro/license-server.html>`_ 
 *  AIMMS Documentation: `Network License Server Manual <https://download.aimms.com/aimms/download/data/LicenseServer/AIMMS_net.pdf>`_ 
 .. END CONTENT
 
