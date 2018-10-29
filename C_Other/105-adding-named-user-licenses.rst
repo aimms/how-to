@@ -5,6 +5,7 @@
 .. |registered-users-menu| image:: /Images/105-adding-named-user-licenses/registered-users-menu.png
 .. |add-new-users| image:: /Images/105-adding-named-user-licenses/add-new-users.png
 .. |client-section| image:: /Images/105-adding-named-user-licenses/client-section.png
+    :scale: 60 %
 
 
 .. BEGIN CONTENT
