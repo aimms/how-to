@@ -22,3 +22,4 @@ Other
     104-using-email-client-library
     104-creating-email-templates
     105-adding-named-user-licenses
+    106-install-network-license
