@@ -2,13 +2,19 @@
 .. IMAGES
 
 .. |license-mgr-icon| image:: /Images/106-install-network-license/license-mgr-icon.png
-    :scale: 200 %
+    :scale: 150 %
 .. |maintenance-mode| image:: /Images/106-install-network-license/maintenance-mode.png
+    :scale: 100 %
 .. |license-config| image:: /Images/106-install-network-license/license-config.png
+    :scale: 100 %
 .. |service-running| image:: /Images/106-install-network-license/service-running.png
+    :scale: 100 %
 .. |no-license| image:: /Images/106-install-network-license/no-license.png
+    :scale: 100 %
 .. |license-config-done| image:: /Images/106-install-network-license/license-config-done.png
+    :scale: 100 %
 .. |service-running| image:: /Images/106-install-network-license/service-running.png
+    :scale: 100 %
 
 
 .. BEGIN CONTENT
