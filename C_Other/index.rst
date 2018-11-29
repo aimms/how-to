@@ -23,3 +23,4 @@ Other
     104-creating-email-templates
     105-adding-named-user-licenses
     106-install-network-license
+    Test
