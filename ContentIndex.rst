@@ -5,7 +5,7 @@
 .. raw:: html
 
 			<br>
-			<h1 align="center">Welcome to How-To AIMMS documentation !</h1>
+			<h1 align="center">Welcome to AIMMS Knowledge Center!</h1>
 			<br>
 			<br>
 
@@ -66,44 +66,44 @@
 		<a href="C_Language/index.html">
 			<div class="box">
 				<h1 align="center">Language</h1>
-				<p>The AIMMS programming Language in details</p>
+				<p>AIMMS programming language</p>
 			</div>
 		</a>
 		<a href="C_Deployment/index.html">
 			<div class="box">
 				<h1 align="center">Deployment</h1>
-				<p>PRO and Cloud</p>
+				<p>PRO and Cloud platforms</p>
 			</div>
 		</a>
 		<a href="C_Mathematical_Modeling/index.html">
 			<div class="box">
 				<h1 align="center">Modeling</h1>
-				<p>Mathematical modeling and major Optimization problems solved in AIMMS</p>
+				<p>Mathematical modeling and optimization</p>
 			</div>
 		</a>
 		<a href="C_Solvers/index.html">
 			<div class="box">
 				<h1 align="center">Solvers</h1>
-				<p>What you always wanted about solvers in AIMMS</p>
+				<p>Solvers in AIMMS</p>
 			</div>
 		</a>
 		<a href="C_UI/index.html">
 			<div class="box">
 				<h1 align="center">UI</h1>
-				<p>From WebUI to WinUI</p>
+				<p>WebUI and WinUI apps</p>
 			</div>
 		</a>
-		<a href="C_Other/index.html">
+		<a href="C_Licensing/index.html">
 			<div class="box">
-				<h1 align="center">Other</h1>
-				<p>Licensing, connectivity, AIMMS policies...</p>
+				<h1 align="center">Licensing</h1>
+				<p>Licensing setup</p>
 			</div>
 		</a>
 	</div>
 
 -----------------------------------------------------------
 
-Table Of Content
+Table Of Contents
 =================
 
 .. toctree::
@@ -115,4 +115,4 @@ Table Of Content
    C_Mathematical_Modeling/index
    C_Solvers/index
    C_UI/index
-   C_Other/index
+   C_Licensing/index

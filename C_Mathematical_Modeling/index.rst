@@ -13,5 +13,7 @@ Mathematical Modeling
 ========================
 
 	
+.. toctree::
 
+    HowToHandleTheDeprecationOfCompoundSets
 	

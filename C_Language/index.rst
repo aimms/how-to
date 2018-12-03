@@ -16,5 +16,7 @@ AIMMS Language
 
     How to model categorization of objects
     Using_AIMMS_Libraries
+    104-creating-email-templates
+    104-using-email-client-library
 	
 ..	Generate Random Numbers
