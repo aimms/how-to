@@ -1,6 +1,10 @@
 
-|axll-workflow| image:: ../resources/images/85-using-axll-library/axll-workflow.png
+.. IMAGES
+
+|axll-workflow| image:: ../Images/85-using-axll-library/axll-workflow.png
     :align: center
+
+.. CONTENT
 
 Using the AIMMS Excel Library
 ===================================
@@ -108,3 +112,8 @@ Practical Example
 
 For a practical example, read **AIMMS Tech Blog:** `How to use the AIMMS Excel Library <https://techblog.aimms.com/2016/06/07/how-to-use-the-aimms-excel-library/>`_
 
+.. END CONTENT
+
+
+
+.. include:: ../includes/form.def
