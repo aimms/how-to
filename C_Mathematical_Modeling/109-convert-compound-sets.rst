@@ -418,11 +418,12 @@ Glossary of Terms Used
         The ``dcsu`` AIMMS utility library creates atomic shadow parameters in a runtime library and subsequently use them as a stash to store data while the compound data identifiers are transformed to atomic data identifiers.
         Additionally, there are temporary procedures in that runtime library to copy the data from the compound data identifiers to the atomic shadow parameters and later from the atomic shadow parameters to the transformed atomic data identifiers.
 
-.. _Section-Further-Information:
 
-Further support
-----------------
 
-For further information on the deprecation of compound sets, contact `AIMMS Support Team <mailto:support@aimms.com>`_.
+.. topic:: Further support
+
+    For further information on the deprecation of compound sets, contact `AIMMS Support Team <mailto:support@aimms.com>`_.
+
+.. END CONTENT
 
 .. include:: ../includes/form.def
