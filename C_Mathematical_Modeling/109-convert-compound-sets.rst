@@ -28,7 +28,7 @@ This document provides a process to replace the compound sets with a set mapping
 
 * :ref:`Section-Terminology`
 
-For an overview of the rationale and timeline for deprecating compound sets, read **AIMMS Knowledge:** :ref:`109-compound-sets-overview`
+For an overview of the rationale and timeline for deprecating compound sets, read **AIMMS Knowledge:** :doc:`109-compound-sets-overview`
 
 .. note:: This document is actively updated during the staged deprecation. Your feedback is welcome and appreciated.
 
@@ -218,7 +218,7 @@ You can either choose to do all cases using the folder option, or do case by cas
 
 #. Go to ``Deprecate Compound Set Control Page`` of the ``DeprecateCompoundSetUtilities`` library.
 #. In the section labeled *Forward - creating shadow cases*
-    a. Specify the input file / folder (with original cases containing compound data).
+    a. Specify the input file/folder (with original cases containing compound data).
     #. Specify the output file/folder (to populate with cases containing atomic data). 
     #. Then click the *Copy* button to convert.
 
