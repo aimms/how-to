@@ -17,5 +17,5 @@ Mathematical Modeling
 
     HowToHandleTheDeprecationOfCompoundSets
     109-convert-compound-sets
-    109-deprecate-compound-sets
+    109-deprecate-compound-sets-overview
 	
