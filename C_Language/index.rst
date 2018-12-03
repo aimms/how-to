@@ -18,5 +18,6 @@ AIMMS Language
     Using_AIMMS_Libraries
     104-creating-email-templates
     104-using-email-client-library
+    85-using-axll-library
 	
 ..	Generate Random Numbers
