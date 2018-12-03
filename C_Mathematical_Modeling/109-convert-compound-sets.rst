@@ -1,6 +1,6 @@
 .. IMAGES
 
-|SetMappingDeclarations| image::  ../Images/109-convert-compound-sets/SetMappingDeclarations.png
+|SetMappingDeclarations| image:: /Images/109-convert-compound-sets/SetMappingDeclarations.png
 
 
 Preparing for the Deprecation of Compound Sets
@@ -81,34 +81,33 @@ This conversion procedure explains how to convert compound sets to set mappings 
 
 
 The conversion procedure:
-+-------------------------------------------------------------------------------------------------------------+
-|:ref:`Step 1 <Step_conversion_Backup>`                                                                       |
-|Create backups of your application and cases.                                                                |
-+-------------------------------------------------------------------------------------------------------------+
-|:ref:`Step 2 <Step_conversion_use_Utility>`                                                                  |
-|Add ``DeprecateCompoundSetUtilities`` library to your application.                                           |
-+-------------------------------------------------------------------------------------------------------------+
-|:ref:`Step 3 <Step_conversion_Create_Set_Mapping>`                                                           |
-|Create :term:`Set Mapping<Set mapping>` with data of compound sets.                                          |
-+-------------------------------------------------------------------------------------------------------------+
-|:ref:`Step 4 <Step_conversion_Create_Set_Mapping_declarations>`                                              |
-|Create :term:`Set Mapping<Set mapping>` declarations and copy them to your main model.                       |
-+-------------------------------------------------------------------------------------------------------------+
-|:ref:`Step 5 <Step_Conversion_Copy_Input_Cases>`                                                             |
-|Create a :term:`shadow case<Shadow case>` for each case with shadow data for the compound data identifiers.  |
-+-------------------------------------------------------------------------------------------------------------+
-|:ref:`Step 6 <Step_Conversion_Adapt_Model>`                                                                  |
-|Adapt the model to remove compound sets.                                                                     |
-+-------------------------------------------------------------------------------------------------------------+
-|:ref:`Step 7 <Step_Conversion_Move_Indexes>`                                                                 |
-|Move compound indexes to the corresponding set mapping sets.                                                 |
-+-------------------------------------------------------------------------------------------------------------+
-|:ref:`Step 8 <Step_Conversion_Backward_Copy>`                                                                |
-|Copy each :term:`shadow case<Shadow case>` back to its corresponding original case.                          |
-+-------------------------------------------------------------------------------------------------------------+
-|:ref:`Step 9 <Step_Conversion_Final>`                                                                        |
-|Remove ``DeprecateCompoundSetUtilities`` library from your application.                                      |
-+-------------------------------------------------------------------------------------------------------------+
+
+    :ref:`Step 1 <Step_conversion_Backup>`
+    Create backups of your application and cases.
+
+    :ref:`Step 2 <Step_conversion_use_Utility>` 
+    Add ``DeprecateCompoundSetUtilities`` library to your application.
+
+    :ref:`Step 3 <Step_conversion_Create_Set_Mapping>` 
+    Create :term:`Set Mapping<Set mapping>` with data of compound sets.
+
+    :ref:`Step 4 <Step_conversion_Create_Set_Mapping_declarations>` 
+    Create :term:`Set Mapping<Set mapping>` declarations and copy them to your main model.
+
+    :ref:`Step 5 <Step_Conversion_Copy_Input_Cases>` 
+    Create a :term:`shadow case<Shadow case>` for each case with shadow data for the compound data identifiers.
+
+    :ref:`Step 6 <Step_Conversion_Adapt_Model>` 
+    Adapt the model to remove compound sets.
+
+    :ref:`Step 7 <Step_Conversion_Move_Indexes>` 
+    Move compound indexes to the corresponding set mapping sets.
+
+    :ref:`Step 8 <Step_Conversion_Backward_Copy>` 
+    Copy each :term:`shadow case<Shadow case>` back to its corresponding original case. 
+
+    :ref:`Step 9 <Step_Conversion_Final>` 
+    Remove ``DeprecateCompoundSetUtilities`` library from your application.
 
 
 .. _Step_conversion_Backup:
@@ -123,7 +122,7 @@ You can create a Data Backup from the *File > Data Backups* menu, or simply save
 
 .. _Step_conversion_use_Utility:
 
-Step 2: Add ``DeprecateCompoundSetUtilities`` library
+Step 2: Add library DeprecateCompoundSetUtilities
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The :download:`AIMMS project download <../Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` provides an example app and utility library ``DeprecateCompoundSetUtilities``. 
@@ -193,11 +192,11 @@ The model explorer should now look something like this:
 
 Perform the following sequence for each ``set mapping declarations`` section.
 
-#. AIMMS Menu - Edit - Export - to a file, say ``smd.ams``.
+#. Go to *Edit > Export* to save a file, say ``smd.ams``.
 
 #. Select focus on the main model, library or module and create a section named ``Set Mapping Declarations``.
 
-#. Select that newly created section and via the AIMMS Menu - Edit - Import - the file created in the first step of this section.
+#. Select that newly created section and go to *Edit > Import* to select the file created in the first step of this section.
 
 Repeat this sequence for each set mapping.
 
@@ -225,7 +224,7 @@ You can either choose to do all cases using the folder option, or do case by cas
 
 .. _Step_Conversion_Adapt_Model:
 
-Step 6: Adapt the model to remove compound sets
+Step 6: Adapt model to remove compound sets
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. CHRIS - is this a good place to mention the button 'show attribute window of defined compound sets'?
@@ -332,7 +331,7 @@ This should be replaced by:
         
 .. _Step_Conversion_Move_Indexes:
 
-Step 7: Move the compound indexes to the corresponding set mapping sets
+Step 7: Move compound indexes to the corresponding set mapping sets
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 To ensure :term:`screen definitions<Screen definition>` are not broken, you must move indexes from the declarations of compound sets to the declaration of the corresponding set mapping set.
@@ -351,7 +350,7 @@ To move an index that is declared as part of a set declaration:
 
 .. _Step_Conversion_Backward_Copy:
 
-Step 8: For each shadow case, copy that shadow case back to the original case.
+Step 8: Move shadow cases back to the original cases
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 You can convert shadow cases created in `step 5 <Step_Conversion_Copy_Input_Case>`_ back to the original case locations using the same tool in the ``DeprecateCompoundSetUtilities`` library.
@@ -367,7 +366,7 @@ You can either choose to do all cases using the folder option, or do case by cas
 
 .. _Step_Conversion_Final:
 
-Step 9: Remove the library Deprecate Compound Set Utilities.
+Step 9: Remove the library DeprecateCompoundSetUtilities
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Now that you have removed compound sets from your project, you can remove the library ``DeprecateCompoundSetUtililities``.
