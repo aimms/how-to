@@ -57,13 +57,13 @@ _______________________________________________________________________________
 	</style>
 	<div class="whatever">
 		<form action="https://formspree.io/howto@aimms.com" method="POST">
-			<h4 style=" font-weight: bold; margin-top: 4px;">Was this answer useful ? (*)</h4>
+			<h4 style=" font-weight: bold; margin-top: 4px;">Was this answer useful?</h4>
 			<input type="radio" name="Usefull" value="Yes" required> Yes<br>
-			<input type="radio" name="Usefull" value="No" required> No<br><br>
-			<label>Your e-mail (optional)</label>
-			<input type="email" name="_replyto" size="50" placeholder="you@yourorganization.com">
-			<label>Please provide us with your comments and unanswered questions (optional)</label>
+			<input type="radio" name="Usefull" value="No" required> No<br><br>			
+			<label>Comments (optional)</label>
 			<textarea style="margin-top: 8px;" name="MessageText" cols="40" rows="5" size="50" placeholder="Type your message here..."></textarea>
+			<label>Your email (optional)</label>
+			<input type="email" name="_replyto" size="50" placeholder="you@yourorganization.com">
 			<input type="submit" value="Send">
 			<input type="hidden" name="_next" value="https://how-to.aimms.com/FormThanksPage.html" />
 			<input type="hidden" name="_cc" value="arthur.dherbemont@aimms.com" />
