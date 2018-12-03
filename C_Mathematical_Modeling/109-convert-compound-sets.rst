@@ -1,3 +1,8 @@
+.. IMAGES
+
+|SetMappingDeclarations| image::  ../Resources/Images/109-convert-compound-sets/SetMappingDeclarations.png
+
+
 Preparing for the Deprecation of Compound Sets
 ==============================================
 
@@ -17,15 +22,15 @@ The functionality of compound sets can be achieved with a *set mapping*.
 
 This document provides a process to replace the compound sets with a set mapping.
 
-* Section-Identify-Compound-Set_
+* :ref:`Section-Identify-Compound-Set`
 
-* Section-Conversion-Procedure_
+* :ref:`Section-Conversion-Procedure`
 
-* Section-Terminology_
+* :ref:`Section-Terminology`
 
-For an overview of the rationale and timeline for deprecating compound sets, read **AIMMS Knowledge:** :ref:`compound-sets-overview`
+For an overview of the rationale and timeline for deprecating compound sets, read **AIMMS Knowledge:** :ref:`109-compound-sets-overview`
 
-.. note:: This document and corresponding :download:`AIMMS project download <../Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` with example case and utility library (prefix dcsu) is actively updated. Your feedback is appreciated as it may help others facing the same problem.
+.. note:: This document is actively updated during the staged deprecation. Your feedback is welcome and appreciated.
 
 .. OVERVIEW WOULD GO HERE
 
@@ -77,23 +82,23 @@ This conversion procedure explains how to convert compound sets to set mappings 
 
 The conversion procedure:
 
-#. Create backups of your application and cases. Section_conversion_Backup_
+#. Create backups of your application and cases. :ref:`Go there <Section_conversion_Backup>`
 
-#. Add ``DeprecateCompoundSetUtilities`` library to your application. Section_conversion_use_Utility_
+#. Add ``DeprecateCompoundSetUtilities`` library to your application. :ref:`Go there <Section_conversion_use_Utility>`
 
-#. Create :term:`Set Mapping<Set mapping>` with data of compound sets. Section_conversion_Create_Set_Mapping_
+#. Create :term:`Set Mapping<Set mapping>` with data of compound sets. :ref:`Go there <Section_conversion_Create_Set_Mapping>`
 
-#. Create :term:`Set Mapping<Set mapping>` declarations and copy them to your main model. Section_conversion_Create_Set_Mapping_declarations_
+#. Create :term:`Set Mapping<Set mapping>` declarations and copy them to your main model. :ref:`Go there <Section_conversion_Create_Set_Mapping_declarations>`
 
-#. Create a :term:`shadow case<Shadow case>` for each case with shadow data for the compound data identifiers. Section_Conversion_Copy_Input_Cases_
+#. Create a :term:`shadow case<Shadow case>` for each case with shadow data for the compound data identifiers. :ref:`Go there <Section_Conversion_Copy_Input_Cases>`
 
-#. Adapt the model to remove compound sets. Section_Conversion_Adapt_Model_
+#. Adapt the model to remove compound sets. :ref:`Go there <Section_Conversion_Adapt_Model>`
 
-#. Move compound indexes to the corresponding set mapping sets. Section_Conversion_Move_Indexes_
+#. Move compound indexes to the corresponding set mapping sets. :ref:`Go there <Section_Conversion_Move_Indexes>`
 
-#. Copy each :term:`shadow case<Shadow case>` back to its corresponding original case. Section_Conversion_Backward_Copy_
+#. Copy each :term:`shadow case<Shadow case>` back to its corresponding original case. :ref:`Go there <Section_Conversion_Backward_Copy>`
 
-#. Remove ``DeprecateCompoundSetUtilities`` library from your application. Section_Conversion_Final_
+#. Remove ``DeprecateCompoundSetUtilities`` library from your application. :ref:`Go there <Section_Conversion_Final>`
 
 
 
@@ -175,7 +180,7 @@ Sections named ``<prefix> set mapping declarations`` appear in each library / mo
 
 The model explorer should now look something like this:
 
-.. image::  ../Resources/Other/CompoundSets/Images/SetMappingDeclarations.PNG
+|SetMappingDeclarations|
 
 Perform the following sequence for each ``set mapping declarations`` section.
 

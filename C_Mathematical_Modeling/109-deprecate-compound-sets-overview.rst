@@ -8,15 +8,15 @@ Overview
 
 In May 2018 AIMMS announced a plan to deprecate compound sets in stages. Support for compound sets will be fully deprecated **after January 1, 2020**. 
 
-To find out how to identify and remove compound sets from your model without losing functionality, read **AIMMS Knowledge:** :ref:`convert-compound-sets`.
+To find out how to identify and remove compound sets from your model without losing functionality, read **AIMMS Knowledge:** :ref:`109-convert-compound-sets`.
 
 This article provides the following background information: 
 
-* Section-What_
+* :ref:`Section-What`
 
-* Section-Why_
+* :ref:`Section-Why`
 
-* Section-When_
+* :ref:`Section-When`
 
 
 .. _Section-What:
