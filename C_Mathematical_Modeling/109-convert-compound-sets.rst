@@ -28,7 +28,7 @@ This document provides a process to replace the compound sets with a set mapping
 
 * :ref:`Section-Terminology`
 
-For an overview of the rationale and timeline for deprecating compound sets, read **AIMMS Knowledge:** :doc:`109-compound-sets-overview`
+For an overview of the rationale and timeline for deprecating compound sets, read **AIMMS Knowledge:** :doc:`109-deprecate-compound-sets-overview`
 
 .. note:: This document is actively updated during the staged deprecation. Your feedback is welcome and appreciated.
 
