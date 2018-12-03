@@ -1,6 +1,6 @@
 .. IMAGES
 
-|SetMappingDeclarations| image::  ../Resources/Images/109-convert-compound-sets/SetMappingDeclarations.png
+|SetMappingDeclarations| image::  ../Images/109-convert-compound-sets/SetMappingDeclarations.png
 
 
 Preparing for the Deprecation of Compound Sets
@@ -81,25 +81,34 @@ This conversion procedure explains how to convert compound sets to set mappings 
 
 
 The conversion procedure:
-
-#. Create backups of your application and cases. :ref:`Go there <Section_conversion_Backup>`
-
-#. Add ``DeprecateCompoundSetUtilities`` library to your application. :ref:`Go there <Section_conversion_use_Utility>`
-
-#. Create :term:`Set Mapping<Set mapping>` with data of compound sets. :ref:`Go there <Section_conversion_Create_Set_Mapping>`
-
-#. Create :term:`Set Mapping<Set mapping>` declarations and copy them to your main model. :ref:`Go there <Section_conversion_Create_Set_Mapping_declarations>`
-
-#. Create a :term:`shadow case<Shadow case>` for each case with shadow data for the compound data identifiers. :ref:`Go there <Section_Conversion_Copy_Input_Cases>`
-
-#. Adapt the model to remove compound sets. :ref:`Go there <Section_Conversion_Adapt_Model>`
-
-#. Move compound indexes to the corresponding set mapping sets. :ref:`Go there <Section_Conversion_Move_Indexes>`
-
-#. Copy each :term:`shadow case<Shadow case>` back to its corresponding original case. :ref:`Go there <Section_Conversion_Backward_Copy>`
-
-#. Remove ``DeprecateCompoundSetUtilities`` library from your application. :ref:`Go there <Section_Conversion_Final>`
-
++-------------------------------------------------------------------------------------------------------------+
+|:ref:`Step 1 <Step_conversion_Backup>`                                                                       |
+|Create backups of your application and cases.                                                                |
++-------------------------------------------------------------------------------------------------------------+
+|:ref:`Step 2 <Step_conversion_use_Utility>`                                                                  |
+|Add ``DeprecateCompoundSetUtilities`` library to your application.                                           |
++-------------------------------------------------------------------------------------------------------------+
+|:ref:`Step 3 <Step_conversion_Create_Set_Mapping>`                                                           |
+|Create :term:`Set Mapping<Set mapping>` with data of compound sets.                                          |
++-------------------------------------------------------------------------------------------------------------+
+|:ref:`Step 4 <Step_conversion_Create_Set_Mapping_declarations>`                                              |
+|Create :term:`Set Mapping<Set mapping>` declarations and copy them to your main model.                       |
++-------------------------------------------------------------------------------------------------------------+
+|:ref:`Step 5 <Step_Conversion_Copy_Input_Cases>`                                                             |
+|Create a :term:`shadow case<Shadow case>` for each case with shadow data for the compound data identifiers.  |
++-------------------------------------------------------------------------------------------------------------+
+|:ref:`Step 6 <Step_Conversion_Adapt_Model>`                                                                  |
+|Adapt the model to remove compound sets.                                                                     |
++-------------------------------------------------------------------------------------------------------------+
+|:ref:`Step 7 <Step_Conversion_Move_Indexes>`                                                                 |
+|Move compound indexes to the corresponding set mapping sets.                                                 |
++-------------------------------------------------------------------------------------------------------------+
+|:ref:`Step 8 <Step_Conversion_Backward_Copy>`                                                                |
+|Copy each :term:`shadow case<Shadow case>` back to its corresponding original case.                          |
++-------------------------------------------------------------------------------------------------------------+
+|:ref:`Step 9 <Step_Conversion_Final>`                                                                        |
+|Remove ``DeprecateCompoundSetUtilities`` library from your application.                                      |
++-------------------------------------------------------------------------------------------------------------+
 
 
 .. _Step_conversion_Backup:
@@ -228,21 +237,21 @@ Example case
 
 In this conversion step we will use a running example that contains:
 
-#. One dimensional sets :math:`S, T, U`, with indexes respectively :math:`i, j, k`.
+* One dimensional sets :math:`S, T, U`, with indexes respectively :math:`i, j, k`.
 
-#. A relation :math:`R` that is subset of the Cartesian product :math:`S \times T \times U`.
+* A relation :math:`R` that is subset of the Cartesian product :math:`S \times T \times U`.
 
-#. A compound set :math:`C` with index :math:`h` defined as :math:`\{ (i, j, k) | (i, j, k) \in R \}`. The tags of this compound set are :math:`(TS,TT,TU)`
+* A compound set :math:`C` with index :math:`h` defined as :math:`\{ (i, j, k) | (i, j, k) \in R \}`. The tags of this compound set are :math:`(TS,TT,TU)`
 
-#. A compound subset :math:`D \subset C` with index :math:`g`. Note that :math:`D` inherits its tags from :math:`C`.
+* A compound subset :math:`D \subset C` with index :math:`g`. Note that :math:`D` inherits its tags from :math:`C`.
 
-#. A parameter :math:`P` declared over the index for the compound set: :math:`P_h`
+* A parameter :math:`P` declared over the index for the compound set: :math:`P_h`
 
-#. A parameter :math:`P1` declared over the index for the compound subset: :math:`P1_g`
+* A parameter :math:`P1` declared over the index for the compound subset: :math:`P1_g`
 
-#. A parameter :math:`Q` declared over the indexes for the one dimensional sets: :math:`Q_{i,j,k}`
+* A parameter :math:`Q` declared over the indexes for the one dimensional sets: :math:`Q_{i,j,k}`
 
-#. A parameter :math:`Q1` declared over the index :math:`i`: :math:`Q1_i`
+* A parameter :math:`Q1` declared over the index :math:`i`: :math:`Q1_i`
 
 
 Replace use of tags
@@ -351,7 +360,7 @@ You can either choose to do all cases using the folder option, or do case by cas
 
 #. Go to ``Deprecate Compound Set Control Page`` of the ``DeprecateCompoundSetUtilities`` library.
 #. In the section labeled *Backward - creating cases with original identifiers without compound data*
-    #. Specify the input file / folder (with cases containing converted data).
+    a. Specify the input file / folder (with cases containing converted data).
     #. Specify the output file/folder (to return to the original case folder location). 
     #. Then click the *Copy* button to convert.
 
