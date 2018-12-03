@@ -1,8 +1,7 @@
 
 .. IMAGES
 
-|axll-workflow| image:: /Images/85-using-axll-library/axll-workflow.png
-    :align: center
+.. |axll-workflow| image:: /Images/85-using-axll-library/axll-workflow.png
 
 .. CONTENT
 

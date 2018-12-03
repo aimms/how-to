@@ -1,6 +1,6 @@
 .. IMAGES
 
-|SetMappingDeclarations| image:: /Images/109-convert-compound-sets/SetMappingDeclarations.png
+.. |SetMappingDeclarations| image:: /Images/109-convert-compound-sets/SetMappingDeclarations.png
 
 
 Preparing for the Deprecation of Compound Sets
@@ -218,7 +218,7 @@ You can either choose to do all cases using the folder option, or do case by cas
 
 #. Go to ``Deprecate Compound Set Control Page`` of the ``DeprecateCompoundSetUtilities`` library.
 #. In the section labeled *Forward - creating shadow cases*
-    #. Specify the input file / folder (with original cases containing compound data).
+    a. Specify the input file / folder (with original cases containing compound data).
     #. Specify the output file/folder (to populate with cases containing atomic data). 
     #. Then click the *Copy* button to convert.
 
@@ -342,9 +342,7 @@ To move an index that is declared as part of a set declaration:
 
 #. Re-create it in the destination set.
 
-.. note::
-
-    This step may be combined with the previous step (`step 6 <Step_Conversion_Adapt_Model>`_). However, the AIMMS compiler will display complilation errors for any compound set syntax on an atomic set.
+.. This step may be combined with the previous step (`step 6 <Step_Conversion_Adapt_Model>`_). However, the AIMMS compiler will display complilation errors for any compound set syntax on an atomic set.
 
 
 
