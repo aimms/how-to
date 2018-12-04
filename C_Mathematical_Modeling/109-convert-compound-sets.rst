@@ -68,7 +68,7 @@ Replacing compound sets with set mapping
 
 This conversion procedure explains how to convert compound sets to set mappings in your application. This ensures that your model will function in the same way but without compound sets.
 
-.. CHRIS - is this note about screen definitions needed?
+.. CHRIS - does this note about screen definitions help with the process? If not let's remove it.
 
 .. note
     To determine the **scope** that this conversion procedure needs to handle, 
