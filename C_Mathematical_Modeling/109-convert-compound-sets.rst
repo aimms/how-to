@@ -11,6 +11,7 @@ Preparing for the Deprecation of Compound Sets
 
 .. todo:: Add Set_Mapping_Declarations to the interface of libraries.
 
+.. note:: We are actively updating this topic during the deprecation stages. Your feedback is welcome and appreciated, as it may help others facing the same issue.
 
 .. _Section_Summary:
     
@@ -18,7 +19,7 @@ Summary
 -------
 AIMMS will deprecate compound sets **after January 1, 2020**.
 
-The functionality of compound sets can be achieved with a *set mapping*. 
+The functionality of compound sets can be achieved with a :term:`set mapping<Set mapping>`. 
 
 This document provides a process to replace the compound sets with a set mapping.
 
@@ -29,8 +30,6 @@ This document provides a process to replace the compound sets with a set mapping
 * :ref:`Section-Terminology`
 
 For an overview of the rationale and timeline for deprecating compound sets, read **AIMMS Knowledge:** :doc:`109-deprecate-compound-sets-overview`
-
-.. note:: This document is actively updated during the staged deprecation. Your feedback is welcome and appreciated.
 
 .. OVERVIEW WOULD GO HERE
 
@@ -55,9 +54,9 @@ To identify compound sets in your application,
 
 #. Run the procedure ``dcsu::prIdentifyCompoundSets``. This tests for compound sets, according to the following rules:
 
-    * A set whose string in the ``subset of`` attribute has a comma, and has defined the attribute ``index`` or the attribute ``parameter`` (These are compound root sets.)
+    * A set whose string in the ``subset of`` attribute has a comma, and has defined the attribute ``index`` or the attribute ``parameter``. (These are compound root sets.)
 
-    * A set with a compound set as its domain set (These are not compound root sets.)
+    * A set with a compound set as its domain set. (These are not compound root sets.)
 
 #. The procedure fills the sets ``dcsu::sCompoundRootSets``, ``dcsu::sCompoundSets``, and ``dcsu::sCompoundSetsThatAreNotRootSets``. Using these results, you may continue to the conversion procedure below.
 
@@ -71,7 +70,7 @@ This conversion procedure explains how to convert compound sets to set mappings 
 
 .. CHRIS - is this note about screen definitions needed?
 
-.. note::
+.. note
     To determine the **scope** that this conversion procedure needs to handle, 
     note that compound data is present in AIMMS Cases and compound data identifiers 
     are present in the **AIMMS Screen definitions** of that AIMMS application. 
@@ -80,33 +79,33 @@ This conversion procedure explains how to convert compound sets to set mappings 
     Obviously, this conversion procedure should not overlook the need to adapt the model itself.
 
 
-The conversion procedure:
+.. topic:: Overview of the conversion procedure
 
-    :ref:`Step 1 <Step_conversion_Backup>`
+    :ref:`Step 1: <Step_conversion_Backup>`
     Create backups of your application and cases.
 
-    :ref:`Step 2 <Step_conversion_use_Utility>` 
+    :ref:`Step 2: <Step_conversion_use_Utility>` 
     Add ``DeprecateCompoundSetUtilities`` library to your application.
 
-    :ref:`Step 3 <Step_conversion_Create_Set_Mapping>` 
+    :ref:`Step 3: <Step_conversion_Create_Set_Mapping>` 
     Create :term:`Set Mapping<Set mapping>` with data of compound sets.
 
-    :ref:`Step 4 <Step_conversion_Create_Set_Mapping_declarations>` 
+    :ref:`Step 4: <Step_conversion_Create_Set_Mapping_declarations>` 
     Create :term:`Set Mapping<Set mapping>` declarations and copy them to your main model.
 
-    :ref:`Step 5 <Step_Conversion_Copy_Input_Cases>` 
+    :ref:`Step 5: <Step_Conversion_Copy_Input_Cases>` 
     Create a :term:`shadow case<Shadow case>` for each case with shadow data for the compound data identifiers.
 
-    :ref:`Step 6 <Step_Conversion_Adapt_Model>` 
+    :ref:`Step 6: <Step_Conversion_Adapt_Model>` 
     Adapt the model to remove compound sets.
 
     :ref:`Step 7 <Step_Conversion_Move_Indexes>` 
     Move compound indexes to the corresponding set mapping sets.
 
-    :ref:`Step 8 <Step_Conversion_Backward_Copy>` 
+    :ref:`Step 8: <Step_Conversion_Backward_Copy>` 
     Copy each :term:`shadow case<Shadow case>` back to its corresponding original case. 
 
-    :ref:`Step 9 <Step_Conversion_Final>` 
+    :ref:`Step 9: <Step_Conversion_Final>` 
     Remove ``DeprecateCompoundSetUtilities`` library from your application.
 
 
@@ -136,7 +135,7 @@ Step 3: Create Set Mapping
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Use the data from compound sets in your project to create corresponding relations. 
-The definition, if any, of a compound set must be suitable for a relation as well. 
+The definition (if any) of a compound set must be suitable for a relation as well. 
 
 Consider the following example:
 
@@ -158,7 +157,7 @@ Consider the following example:
             }
         }
  
-In the above example, the definition of C can also be used for a relation, :math:`R`, that is a subset of the Cartesian product :math:`S \times T \times U`. The definition of D cannot be used for a relation, so it must be rewritten:
+In the example above, the definition of ``C`` can also be used for a relation, :math:`R`, that is a subset of the Cartesian product :math:`S \times T \times U`. The definition of ``D`` cannot be used for a relation, so it must be rewritten:
 
     .. code-block:: aimms
 
@@ -182,7 +181,7 @@ Now let's create a :term:`set mapping<Set mapping>` for each compound set in you
 
 Open the WinUI page: ``Deprecate Compound Set Control Page`` of the library ``DeprecateCompoundSetUtilities``, and press the button ``Create Set Mapping Declarations``.  A section named ``set mapping declarations`` appears in the main model. 
 
-Sections named ``<prefix> set mapping declarations`` appear in each library / module where compound sets are defined. These sections are created in the runtime library ``CompoundSetMappingRuntimeLibrary`` as runtime libraries are the only place where a library or main model may create new AIMMS code. 
+Sections named ``<prefix> set mapping declarations`` appear in each library/module where compound sets are defined. These sections are created in the runtime library ``CompoundSetMappingRuntimeLibrary`` as runtime libraries are the only place where a library or main model may create new AIMMS code. 
 
 .. CHRIS - Should the 'Delete Set Mapping Declarations' button be mentioned?
 
@@ -190,17 +189,15 @@ The model explorer should now look something like this:
 
 |SetMappingDeclarations|
 
-Perform the following sequence for each ``set mapping declarations`` section.
+Perform the following sequence for **each** ``set mapping declarations`` section.
 
-#. Go to *Edit > Export* to save a file, say ``smd.ams``.
+#. Go to *Edit > Export* to save a file (e.g., ``smd.ams``).
 
 #. Select focus on the main model, library or module and create a section named ``Set Mapping Declarations``.
 
-#. Select that newly created section and go to *Edit > Import* to select the file created in the first step of this section.
+#. Select that newly created section and go to *Edit > Import* to select the file you saved (e.g., ``smd.ams``).
 
-Repeat this sequence for each set mapping.
-
-.. caution:: Do not Copy/Paste the section ``Set Mapping Declarations`` of the runtime library! When you use copy/paste, the copied section still contains references to the runtime indexes. Upon restart, your application will have compilation errors as the compound indexes still referencing the runtime library are not present upon first compilation.
+.. caution:: Do not Copy/Paste the section ``Set Mapping Declarations`` of the runtime library! When you Copy/Paste, the copied section still contains references to the runtime indexes. This causes compilation errors upon restart.
 
 Now is a good time to save the project, exit AIMMS, and create a backup copy of your project.
 
@@ -214,12 +211,14 @@ Step 5: Create shadow cases
 
 You can convert cases with compound data to shadow cases using a tool in the ``DeprecateCompoundSetUtilities`` library.
 
-You can either choose to do all cases using the folder option, or do case by case using the file option. If copying multiple cases at once, all the cases must be contained in one folder.
+You can convert multiple cases contained in one folder using the *Folder* option, or convert each case separately using the *File* option.
 
 #. Go to ``Deprecate Compound Set Control Page`` of the ``DeprecateCompoundSetUtilities`` library.
-#. In the section labeled *Forward - creating shadow cases*
-    a. Specify the input file/folder (with original cases containing compound data).
-    #. Specify the output file/folder (to populate with cases containing atomic data). 
+
+#. In the section labeled *Forward - creating shadow cases*:
+
+    a. Specify the input file/folder (to pull original cases containing compound data).
+    #. Specify the output file/folder (to push converted cases containing atomic data). 
     #. Then click the *Copy* button to convert.
 
 .. _Step_Conversion_Adapt_Model:
@@ -229,7 +228,7 @@ Step 6: Adapt model to remove compound sets
 
 .. CHRIS - is this a good place to mention the button 'show attribute window of defined compound sets'?
 
-This section shows how to convert models using compound sets to use the set mappings created in `step 3 <Step_conversion_Create_Set_Mapping>`_ above. 
+This section shows how to convert models using compound sets to use the set mappings created in :ref:`step 3 <Step_conversion_Create_Set_Mapping>` above.
 
 Example case
 ^^^^^^^^^^^^^^^
@@ -275,10 +274,10 @@ You can replace it with a tag referencing a set mapping:
             Definition: A(epTag_C_TS(h));
         }
 
-.. CHRIS - can we say here, This no longer contains compound data and is allowed(?)        
+.. CHRIS - can we conclude here, "This no longer contains compound data and is allowed"(?)        
 
 
-Replace use of atomic indexes with set mapping index
+Replace atomic indexes with set mapping index
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Consider the declaration of compound data parameter ``P``:
@@ -289,7 +288,7 @@ Consider the declaration of compound data parameter ``P``:
             IndexDomain: h;
         }
 
-.. CHRIS - which part is not allowed, and why?
+.. CHRIS - I don't follow here. Which part is not allowed, and why?
 
 Then using ``P`` is not allowed in an expression such as:
 
@@ -311,7 +310,7 @@ You can replace this definition by:
             Definition: sum(h|(i,j,k,h) in sMappingSet_C_Relation,p(h));
         }
 
-Replace use of the function TUPLE
+Replace the function Tuple
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Consider the function: 
@@ -326,12 +325,12 @@ This should be replaced by:
     
         epC := first( iSMI_C | ( epS, epT, epU, iSMI_C ) in sSetMappingRelation_C );
         
-.. CHRIS - this one needs some commentary to explain what is happening
+.. CHRIS - this one needs some commentary to explain what is replaced with what.
         
         
 .. _Step_Conversion_Move_Indexes:
 
-Step 7: Move compound indexes to the corresponding set mapping sets
+Step 7: Move compound indexes to set mapping sets
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 To ensure :term:`screen definitions<Screen definition>` are not broken, you must move indexes from the declarations of compound sets to the declaration of the corresponding set mapping set.
@@ -342,23 +341,22 @@ To move an index that is declared as part of a set declaration:
 
 #. Re-create it in the destination set.
 
-.. This step may be combined with the previous step (`step 6 <Step_Conversion_Adapt_Model>`_). However, the AIMMS compiler will display complilation errors for any compound set syntax on an atomic set.
-
-
 
 .. _Step_Conversion_Backward_Copy:
 
-Step 8: Move shadow cases back to the original cases
+Step 8: Move shadow cases back to original cases
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-You can convert shadow cases created in `step 5 <Step_Conversion_Copy_Input_Case>`_ back to the original case locations using the same tool in the ``DeprecateCompoundSetUtilities`` library.
+You can convert shadow cases created in :ref:`step 5 <Step_Conversion_Copy_Input_Cases>` back to the original case locations using the same tool in the ``DeprecateCompoundSetUtilities`` library.
 
-You can either choose to do all cases using the folder option, or do case by case using the file option. If copying multiple cases at once, all the cases must be contained in one folder.
+You can convert multiple cases contained in one folder using the *Folder* option, or convert each case separately using the *File* option.
 
 #. Go to ``Deprecate Compound Set Control Page`` of the ``DeprecateCompoundSetUtilities`` library.
-#. In the section labeled *Backward - creating cases with original identifiers without compound data*
-    a. Specify the input file / folder (with cases containing converted data).
-    #. Specify the output file/folder (to return to the original case folder location). 
+
+#. In the section labeled *Backward - creating cases with original identifiers without compound data*:
+
+    a. Specify the input file/folder (to pull cases containing converted data).
+    #. Specify the output file/folder (to push to the original case folder location). 
     #. Then click the *Copy* button to convert.
 
 
@@ -398,9 +396,9 @@ Glossary of Terms Used
         * A **set mapping parameter** is an element parameter that contains the data to handle the "tags" functionality of a compound set.
 
     Compound data         
-        A **compound data identifier** is a parameter, variable or constraint, 
-        such that at least one index in the index domain of that identifier is a compound index. 
-        As a shorthand, **compound data** is the data of a compound data identifier.   
+        A **compound data identifier** is a parameter, variable, or constraint 
+        with at least one compound index in its index domain. 
+        Thus, **compound data** is the data of a compound data identifier.   
 
     Screen definition
         A **screen definition** is a serialized representation of a screen. 
@@ -408,17 +406,19 @@ Glossary of Terms Used
         store these **screen definitions** as text files within an AIMMS project.
 
     Shadow case
-        A case containing the same data references to its corresponding namesake but replacing compound data with atomic set mapping data to allow for the removal of compound sets. (??)
+        A case containing the same data references to its corresponding namesake but replacing compound data with atomic set mapping data to allow for the removal of compound sets.
 
     Shadow parameter
-        Consider a parameter ``A``, then a **shadow parameter**, say ``A_Shadow``, is a parameter that holds the same data as ``A``.
-        
-        Here, *same data* should be interpreted as, that there is a clear one-to-one correspondence between the elements of ``A`` and ``A_Shadow`` such that the values of the corresponding elements are the same. 
-        The use here is compound data identifier ``P``, ie having compound indexes in its index domain, and a shadow ``PS`` having the corresponding set mapping indexes in its index domain. Such a shadow is also called an **atomic shadow identifier** as it has only atomic indexes, some of which are set mapping indexes.
-        The ``dcsu`` AIMMS utility library creates atomic shadow parameters in a runtime library and subsequently use them as a stash to store data while the compound data identifiers are transformed to atomic data identifiers.
-        Additionally, there are temporary procedures in that runtime library to copy the data from the compound data identifiers to the atomic shadow parameters and later from the atomic shadow parameters to the transformed atomic data identifiers.
+        Consider a parameter ``A``, then a **shadow parameter**, say ``A_Shadow``, is a parameter with the same element values. 
 
+        In the conversion process, compound data identifier ``P`` has compound indexes in its index domain, while its shadow ``P_Shadow`` has the corresponding set mapping indexes in its index domain. This is an **atomic shadow identifier** as it has only atomic indexes, some of which are set mapping indexes.
 
+.. The ``dcsu`` library caches atomic shadow parameters in a runtime library while the compound data identifiers are transformed to atomic data identifiers.
+Additionally, there are temporary procedures in that runtime library to copy the data from the compound data identifiers to the atomic shadow parameters and later from the atomic shadow parameters to the transformed atomic data identifiers.
+
+.. CHRIS - Does the explanation about the runtime library help the user with any part of the process? Otherwise let's remove it.
+
+.. CHRIS - Please check the definition of "Shadow case" (I made it up).
 
 .. topic:: Further support
 

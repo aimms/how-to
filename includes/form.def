@@ -11,7 +11,7 @@ _______________________________________________________________________________
 
 	<style>
 	.whatever input[type=text], select {
-		width: 100%;
+		width: 50%;
 		padding: 12px 20px;
 		margin: 8px 0;
 		display: inline-block;
@@ -20,7 +20,7 @@ _______________________________________________________________________________
 		box-sizing: border-box;
 	}
 	.whatever input[type=email], select {
-		width: 100%;
+		width: 50%;
 		padding: 12px 20px;
 		margin: 8px 0;
 		display: inline-block;
@@ -29,12 +29,12 @@ _______________________________________________________________________________
 		box-sizing: border-box;
 	}
 	.whatever textarea {
-		width: 100%;
+		width: 50%;
 
 	}
 	
 	.whatever input[type=submit] {
-		width: 100%;
+		width: 50%;
 		background-color: #213069;
 		color: white;
 		padding: 14px 20px;
@@ -42,6 +42,7 @@ _______________________________________________________________________________
 		border: none;
 		border-radius: 4px;
 		cursor: pointer;
+		align: center;
 	}
 
 	.whatever input[type=submit]:hover {
@@ -57,13 +58,13 @@ _______________________________________________________________________________
 	</style>
 	<div class="whatever">
 		<form action="https://formspree.io/howto@aimms.com" method="POST">
-			<h4 style=" font-weight: bold; margin-top: 4px;">Was this answer useful?</h4>
+			<h4 style=" font-weight: bold; margin-top: 4px;">Was this topic useful?</h4>
 			<input type="radio" name="Usefull" value="Yes" required> Yes<br>
 			<input type="radio" name="Usefull" value="No" required> No<br><br>			
-			<label>Comments (optional)</label>
-			<textarea style="margin-top: 8px;" name="MessageText" cols="40" rows="5" size="50" placeholder="Type your message here..."></textarea>
-			<label>Your email (optional)</label>
-			<input type="email" name="_replyto" size="50" placeholder="you@yourorganization.com">
+			<!--<label>Comments (optional)</label>-->
+			<textarea style="margin-top: 8px;" name="MessageText" cols="40" rows="5" size="50" placeholder="Your comments (optional)"></textarea>
+			<!--<label>Your email (optional)</label>-->
+			<input type="email" name="_replyto" size="50" placeholder="Your email address (optional)">
 			<input type="submit" value="Send">
 			<input type="hidden" name="_next" value="https://how-to.aimms.com/FormThanksPage.html" />
 			<input type="hidden" name="_cc" value="arthur.dherbemont@aimms.com" />
