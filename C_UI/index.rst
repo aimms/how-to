@@ -16,3 +16,4 @@ User Interface
 .. toctree::
     
     How To download multiple files
+    95-change-default-ui
