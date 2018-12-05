@@ -1,12 +1,9 @@
 
 .. IMAGES
 
-.. |project-options| image:: /Images/95-change-default-ui/project-options.png
-    :scale: 100 %
-.. |appearance-options| image:: /Images/95-change-default-ui/appearance-options.png
-    :scale: 100 %
-.. |change-ui| image:: /Images/95-change-default-ui/change-ui.png
-    :scale: 100 %
+.. |project-options| image:: /Images/95-change-default-ui/project-options.jpg
+.. |appearance-options| image:: /Images/95-change-default-ui/appearance-options.jpg
+.. |change-ui| image:: /Images/95-change-default-ui/change-ui.jpg
 
 
 
