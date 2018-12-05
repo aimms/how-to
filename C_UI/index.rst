@@ -17,3 +17,4 @@ User Interface
     
     How To download multiple files
     95-change-default-ui
+    94-using-the-scalar-switch-css
