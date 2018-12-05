@@ -23,13 +23,19 @@ The widget needs to contain ``Switch`` in the name.
 The condition on the name of the widget allows you to control if a binary identifier should be shown as a switch or a checkbox.
  
 From a UI design perspective, they are not equivalent. 
-Where they state: Tapping a toggle switch is a double-duty action: selection and (instant) execution, whereas checkbox is just selection of an option and its (pending) execution usually requires another control.
+Tapping a toggle switch is a double-duty action: selection and (instant) execution. 
+A checkbox is just selection of an option, and its (pending) execution requires another control (i.e., clicking a button) to verify.
 
 The CSS code can be found in the folder "MainProject\WebUI\resources\css" of the enclosed example project.
 
 
 :download: /Resources/UI/Downloads/ScalarSwitchExample.zip
 :download: /Resources/UI/Downloads/scalar-switch.css
+
+Related topics
+-----------------
+* **AIMMS Documentation:** `Widget Options <https://manual.aimms.com/webui/widget-options.html>`_
+* **AIMMS Documentation:** `Scalar Widget <https://manual.aimms.com/webui/scalar-widget.html>`_
 
 .. END CONTENT
 
