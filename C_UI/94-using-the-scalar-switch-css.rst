@@ -10,27 +10,29 @@
 Make an On/Off Switch for Widgets
 =================================
 
-How to create an on/off toggle switch for widgets in your AIMMS project.
+How to create an on/off toggle switch for WebUI widgets in your AIMMS project.
 
 Creating an On/Off switch using CSS
 -----------------------------------------------
+Table or scalar widgets with a binary range appear in WebUI as checkbox options by default.
+To render on/off switches instead, you can use CSS. 
+It can be used for both table and scalar widgets.
 
-To use on/off switches we developed CSS code, both for the table widget and for the scalar widget.
+:download: /Resources/UI/Downloads/scalar-switch.css
 
+Save the CSS file in the folder "MainProject\WebUI\resources\css" of your project.
 A checkbox will become a switch under the following conditions:
-The identifier needs to be an identifier with ``Binary`` as range.
-The widget needs to contain ``Switch`` in the name.
-The condition on the name of the widget allows you to control if a binary identifier should be shown as a switch or a checkbox.
- 
-From a UI design perspective, they are not equivalent. 
-Tapping a toggle switch is a double-duty action: selection and (instant) execution. 
-A checkbox is just selection of an option, and its (pending) execution requires another control (i.e., clicking a button) to verify.
+* The identifier needs to be an identifier with ``Binary`` as range.
+* The widget needs to contain ``Switch`` in the name.
+* The condition on the name of the widget allows you to control if a binary identifier should be shown as a switch or a checkbox.
 
-The CSS code can be found in the folder "MainProject\WebUI\resources\css" of the enclosed example project.
+
+
+show css snippet where "switch" is identified - that could be changed to something else, it's just how we wrote it
+.. code-block:: css
 
 
 :download: /Resources/UI/Downloads/ScalarSwitchExample.zip
-:download: /Resources/UI/Downloads/scalar-switch.css
 
 Related topics
 -----------------
