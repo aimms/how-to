@@ -1,0 +1,56 @@
+/* This will replace all the checkboxes in tables with 'Switch' in the name with an on-off switch. */
+
+.tag-table[data-widget\.uri*=Switch] input.boolean-cell-editor-contents {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    position: absolute;
+}
+
+.tag-table[data-widget\.uri*=Switch] input.boolean-cell-editor-contents+span {
+    margin: -18px auto;
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 40px;
+    height: 20px;
+    background: grey;
+    display: block;
+    border-radius: 20px;
+    position: relative!important;
+    animation-name: none;
+    font-size: 0;
+}
+
+.tag-table[data-widget\.uri*=Switch] input.boolean-cell-editor-contents+span:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-radius: 16px;
+    transition: 0.3s;
+}
+
+.tag-table[data-widget\.uri*=Switch] input.boolean-cell-editor-contents:checked+span {
+    background: #004bff;
+}
+
+.tag-table[data-widget\.uri*=Switch] input.boolean-cell-editor-contents:disabled+span {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.tag-table[data-widget\.uri*=Switch] input.boolean-cell-editor-contents:checked+span:after {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+}
+
+.tag-table[data-widget\.uri*=Switch] input.boolean-cell-editor-contents+span:active:after {
+    width: 26px;
+}
+
+.tag-table[data-widget\.uri*="Switch"] .checkbox-wrapper label {
+    margin: 0 !important;
+}
