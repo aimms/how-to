@@ -1,9 +1,3 @@
-.. IMAGES
-
-.. |project-options| image:: /Images/95-change-default-ui/project-options.jpg
-.. |appearance-options| image:: /Images/95-change-default-ui/appearance-options.jpg
-.. |change-ui| image:: /Images/95-change-default-ui/change-ui.jpg
-
 
 .. BEGIN CONTENT
 
@@ -14,31 +8,33 @@ How to create an on/off toggle switch for WebUI widgets in your AIMMS project.
 
 Creating an On/Off switch using CSS
 -----------------------------------------------
-Table or scalar widgets with a binary range appear in WebUI as checkbox options by default.
-To render on/off switches instead, you can use CSS. 
-It can be used for both table and scalar widgets.
+Identifiers with a binary range appear as check box options in table or scalar widgets of AIMMS WebUI, by default.
 
-:download: /Resources/UI/Downloads/scalar-switch.css
+To render on/off switches instead of check boxes, you can use CSS snippets.
 
-Save the CSS file in the folder "MainProject\WebUI\resources\css" of your project.
-A checkbox will become a switch under the following conditions:
-* The identifier needs to be an identifier with ``Binary`` as range.
-* The widget needs to contain ``Switch`` in the name.
-* The condition on the name of the widget allows you to control if a binary identifier should be shown as a switch or a checkbox.
+We have created CSS code snippets to provide this functionality.
 
+1. Download the example project containing CSS files:
+    :download: /Resources/UI/Downloads/ScalarSwitchExample.zip
 
+2. Save the CSS files in the folder ``MainProject\WebUI\resources\css`` to the same location in your project. If the location does not exist, create the folders manually.
 
-show css snippet where "switch" is identified - that could be changed to something else, it's just how we wrote it
-.. code-block:: css
+Based on the CSS code snippets (contained in the attached files), WebUI renders a switch in a table or pivot table widget under these conditions:
+* The identifier range is binary.
+* The name contains ``Switch`` in the string.
 
+.. note::
 
-:download: /Resources/UI/Downloads/ScalarSwitchExample.zip
+    In the CSS code snippets contained in the attached files, ``[data-widget\.uri*="Switch"]`` and identifies the string ``Switch`` in the name of the widgets.
+    
+    This could be changed if you prefer, but must be changed in all instances of ``[data-widget\.uri*="Switch"]``.
+
 
 Related topics
 -----------------
 * **AIMMS Documentation:** `Widget Options <https://manual.aimms.com/webui/widget-options.html>`_
 * **AIMMS Documentation:** `Scalar Widget <https://manual.aimms.com/webui/scalar-widget.html>`_
-
+* **AIMMS Documentation:** `Developing Custom Widgets <https://manual.aimms.com/webui/own-widgets.html>`_
 .. END CONTENT
 
 .. include:: ../includes/form.def
