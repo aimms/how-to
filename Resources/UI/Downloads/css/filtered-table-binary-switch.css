@@ -1,0 +1,85 @@
+/* This will replace all the checkboxes in tables with 'Switch' in the name with an on-off switch. */
+
+
+/* Hide the checkbox*/
+
+.tag-table[data-widget\.uri*="Switch"] input.boolean-cell-editor-contents {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    position: absolute;
+}
+
+
+/* Add the Slider area (outer rounded rectangle)*/
+
+.tag-table[data-widget\.uri*="Switch"] input.boolean-cell-editor-contents+span {
+    margin: -18px auto;
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 40px;
+    height: 20px;
+    background: grey;
+    display: block;
+    border-radius: 20px;
+    position: relative!important;
+    animation-name: none;
+    font-size: 0;
+}
+
+
+/* Add the Switch (inner circle)*/
+
+.tag-table[data-widget\.uri*="Switch"] input.boolean-cell-editor-contents+span:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-radius: 16px;
+    transition: 0.3s;
+}
+
+
+/* Change the background color when the switch is turned on.*/
+
+.tag-table[data-widget\.uri*="Switch"] input.boolean-cell-editor-contents:checked+span {
+    background: #004bff;
+}
+
+
+/* Change the opacity and mouse cursor when the switch is read-only.*/
+
+.tag-table[data-widget\.uri*="Switch"] input.boolean-cell-editor-contents:disabled+span {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+
+/* Move the switch circle to the right when turned on.*/
+
+.tag-table[data-widget\.uri*="Switch"] input.boolean-cell-editor-contents:checked+span:after {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+}
+
+
+/* Stretch the switch (increase the length of the inner circle) at the moment
+   that you click on it (holding your mouse down) to create animation effect.*/
+
+.tag-table[data-widget\.uri*="Switch"] .boolean-value-editor input+span:active:after {
+    width: 26px;
+}
+
+
+/* placement within table cells */
+
+.tag-table[data-widget\.uri*="Switch"] input.boolean-cell-editor-contents+span:active:after {
+    width: 26px;
+}
+
+.tag-table[data-widget\.uri*="Switch"] .checkbox-wrapper label {
+    margin: 0 !important;
+}
