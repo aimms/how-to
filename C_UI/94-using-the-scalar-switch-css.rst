@@ -18,14 +18,14 @@ To render on/off switches in your AIMMS project, follow the steps below.
 
    1.  Create the location ``MainProject\WebUI\resources\css`` in your project. You need to create the folders ``resources`` and ``css`` manually.
    
-   2. Download the example CSS file:
+   2. Download the example CSS file for the appropriate widget type:
    
-		 :download: `scalar-binary-switch.css<../Resources/UI/Downloads/css/scalar-binary-switch.css>`
+		 :download:`scalar-binary-switch.css <../Resources/UI/Downloads/css/scalar-binary-switch.css>`
+		 :download:`table-binary-switch.css <../Resources/UI/Downloads/css/table-binary-switch.css>`
 		    
-   3. Copy the downloaded CSS file to ``MainProject\WebUI\resources\css`` in your project.
+   3. Copy the downloaded CSS file(s) to ``MainProject\WebUI\resources\css`` in your project.
    
-Based on the CSS files, WebUI renders a switch for all identifiers with a binary range in a scalar widget.
-
+Based on the code contained in the CSS file(s), WebUI renders a switch for all identifiers with a binary range in a scalar and/or pivot table widget.
 
 
 Customizing the binary switch
@@ -34,16 +34,18 @@ You can modify the CSS used to make the switch in many ways. For example, to cre
 
 To customize the behavior of the CSS for the switch, follow the guidelines below.
 
-Table widget
-^^^^^^^^^^^^
-In the ``binary-switch.css`` file, ``.tag-scalar .boolean-value-editor`` identifies all scalar widgets with a binary range. This instructs AIMMS WebUI to modify the default appearance of all scalar widgets with ``binary`` range. 
+Table vs. scalar widget
+^^^^^^^^^^^^^^^^^^^^^^^
+In the ``scalar-binary-switch.css`` file, ``.tag-scalar .boolean-value-editor`` identifies all scalar widgets with a binary range. 
 
-You can extend this to identifiers in pivot table widgets by duplicating the ``binary-switch.css`` file and replacing ``.tag-scalar`` with ``.tag-table``.
+:download:`scalar-binary-switch.css <../Resources/UI/Downloads/css/scalar-binary-switch.css>`
 
-:download: `table-binary-switch.css<../Resources/UI/Downloads/css/table-binary-switch.css>`
+In the ``table-binary-switch.css`` file, ``.tag-table .boolean-value-editor`` identifies all scalar widgets with a binary range. 
 
-Switch color
-^^^^^^^^^^^^
+:download:`table-binary-switch.css <../Resources/UI/Downloads/css/table-binary-switch.css>`
+
+Color of switch
+^^^^^^^^^^^^^^^^^^^^^
 The color of the switch can be modified by editing the background color defined in the CSS snippet below. 
 
 .. code-block:: css
@@ -52,26 +54,25 @@ The color of the switch can be modified by editing the background color defined 
 	    background: #004bff !important;
     }
 
-The default AIMMS blue color is #004bff. You can replace this color code in the CSS.
+The default AIMMS blue color is #004bff. You can replace this color code in the CSS snippet.
 
-Conditional on name
-^^^^^^^^^^^^^^^^^^^
-If you want to display checkboxes in some cases and switches in others, you can define rules for that behavior based on the widget name. Add an additional tag ``[data-widget\.uri*="Switch"]`` in all snippets, as shown in the example below.
+Filter based on name
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To display checkboxes in some cases and switches in others, you can define rules for that behavior based on the widget name. Add an additional tag ``[data-widget\.uri*="Switch"]`` in all snippets, as shown in the example below.
 
 .. code-block:: css
 
     .tag-scalar[data-widget\.uri*="Switch"] .boolean-value-editor input {
     }
 
-This replaces the checkboxes with switches only in scalar widgets that contain ``Switch`` in their names.
+This "filter" replaces the checkboxes with switches only in scalar widgets that contain ``Switch`` in their names.
 
-.. Note:: 
+:download:`filtered-binary-switch-example <../Resources/UI/Downloads/filtered-binary-switch.zip>`
 
-    The filter is case sensitive. If the filter name contains a space use .uri^=
+The filter is case sensitive.
 	
-:download: `filtered-binary-switch-example<../Resources/UI/Downloads/filtered-binary-switch.zip>`
 
-Last Updated: December, 2018 in AIMMS Version 4.61.3.0
+Last Updated: December 11, 2018 in AIMMS Version 4.61.3.0
 
 Related topics
 -----------------
