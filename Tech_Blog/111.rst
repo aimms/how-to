@@ -1,0 +1,65 @@
+.. IMAGES Location
+.. </Images/111/...>
+
+Creating Templates for the Email Client Library
+===============================================
+
+.. raw:: html
+
+    <strong>Introducing the Email Client Library</strong>
+
+    <a href="/Images/111/add-email-client-lib.png"><img class="alignnone size-full wp-image-5232" src="/Images/111/add-email-client-lib.png" alt="add-email-client-lib" width="940" height="738" /></a>
+
+    In case you missed the news, now you can easily email optimization results from your AIMMS project using the Email Client Library.
+
+    The Email Client Library allows you to send email directly from AIMMS. This feature replaces the previous AIMMSMapi solution and offers more flexibility and compatibility.
+
+    It supports attachments and templates for the body of the email.
+
+    Since it does not require Outlook to be installed, the library can be used both client- and server-side. And, it is compatible with the cloud platform.
+
+    <strong>Creating Email Templates</strong>
+
+    The Email Client Library supports HTML emails, and templates in both HTML and TXT format.
+
+    Let's say you want to automate an email to your colleagues, or customers, attaching some data connected to your AIMMS project. You want to make an email template that has some styling and maybe an image, but you don't want to code it in HTML. Good news, we have a hack for you -- let MS Word do the work!
+
+    Go to your old friend MS Word and write up your email body template with whatever fonts and alignment and images you want.
+
+    If you're planning on sending out a group of emails, you can use place holder values in your template and set up your AIMMS procedure to replace the place holders with the correct entries (such as recipient names) while generating the mailing. (Learn more about that in our How-to topics: <a title="Using the Email Client Library" href="https://how-to.aimms.com/C_Other/104-using-email-client-library.html">Using the Email Client Library</a> and <a title="AIMMS How-to: Using templates with the Email Client Library" href="https://how-to.aimms.com/C_Other/104-creating-email-templates.html">Using templates with the Email Client Library</a> .)
+
+    <a href="/Images/111/word-template-place-holders.png"><img class="alignnone size-full wp-image-5237" src="/Images/111/word-template-place-holders.png" alt="word-template-place-holders" width="925" height="808" /></a>
+
+    &nbsp;
+
+    Click "Save as..." and select ".txt". (You'll want to save this in your AIMMS project files.)
+
+    <a href="/Images/111/save-as-txt.png"><img class="alignnone size-full wp-image-5235" src="/Images/111/save-as-txt.png" alt="save-as-txt" width="789" height="489" /></a>
+
+    &nbsp;
+
+    Click "Save as...", again, and select ".html (filtered)".
+
+    <a href="/Images/111/save-as-htm.png"><img class="alignnone size-full wp-image-5234" src="/Images/111/save-as-htm.png" alt="save-as-htm" width="789" height="550" /></a>
+
+    &nbsp;
+
+    If you used images, they will appear in a folder in the same destination as your HTML file.
+
+    <a href="/Images/111/attachments-folder.png"><img class="alignnone size-full wp-image-5236" src="/Images/111/attachments-folder.png" alt="attachments-folder" width="375" height="178" /></a>
+
+    Open up the .html file in your favorite text editor and find your image in the code.
+
+    Change the relative file path to "cid:" so that it will be referenced correctly from your AIMMS project.
+
+    <a href="/Images/111/change-image-path.png"><img class="alignnone size-full wp-image-5233" src="/Images/111/change-image-path.png" alt="change-image-path" width="1087" height="602" /></a>
+
+    &nbsp;
+
+    Now your templates are ready to use.
+
+    <strong> </strong>
+
+    <strong>Further Reading</strong>
+
+    Learn more about the Email Client Library in <a title="AIMMS Documentation: Email Client Library" href="https://manual.aimms.com/emailclient/index.html">AIMMS Documentation</a> .

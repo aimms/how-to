@@ -99,6 +99,12 @@
 				<p>Licensing setup</p>
 			</div>
 		</a>
+		<a href="Tech_Blog/index.html">
+			<div class="box">
+				<h1 align="center">Tech Blog Archives</h1>
+				<p>Popular topics from our blog</p>
+			</div>
+		</a>
 	</div>
 
 -----------------------------------------------------------
@@ -116,3 +122,4 @@ Table Of Contents
    C_Solvers/index
    C_UI/index
    C_Licensing/index
+   Tech_Blog/index
