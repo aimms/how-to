@@ -39,11 +39,7 @@ Table vs. scalar widget
 ^^^^^^^^^^^^^^^^^^^^^^^
 In the ``scalar-binary-switch.css`` file, ``.tag-scalar .boolean-value-editor`` identifies all scalar widgets with a binary range. 
 
-:download:`scalar-binary-switch.css <../Resources/UI/Downloads/css/scalar-binary-switch.css>`
-
 In the ``table-binary-switch.css`` file, ``.tag-table .boolean-value-editor`` identifies all scalar widgets with a binary range. 
-
-:download:`table-binary-switch.css <../Resources/UI/Downloads/css/table-binary-switch.css>`
 
 Color of switch
 ^^^^^^^^^^^^^^^^^^^^^
@@ -61,9 +57,9 @@ Filter based on name
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 To display checkboxes in some cases and switches in others, you can define rules for that behavior based on the widget name. 
 
-:download:`table-binary-switch.css <../Resources/UI/Downloads/css/filtered-scalar-binary-switch.css>`
+The AIMMS project attached below contains CSS files with filters for both types of widgets.
 
-:download:`table-binary-switch.css <../Resources/UI/Downloads/css/filtered-table-binary-switch.css>`
+:download:`filtered-binary-switch-example.zip <../Resources/UI/Downloads/filtered-binary-switch.zip>`
 
 The additional tag ``[data-widget\.uri*="Switch"]`` in all snippets identifies widgets containing "Switch" in their names, as shown in the example below.
 
@@ -72,16 +68,9 @@ The additional tag ``[data-widget\.uri*="Switch"]`` in all snippets identifies w
     .tag-scalar[data-widget\.uri*="Switch"] .boolean-value-editor input {
     }
 
-This "filter" replaces the checkboxes with switches only when ``Switch`` is in the widget name.
+This "filter" replaces the checkboxes with switches only when ``Switch`` is in the widget name. The filter is **case sensitive**.
 
-The filter is case sensitive.
 
-Example project
-^^^^^^^^^^^^^^^
-
-The AIMMS project attached below contains CSS files with filters for both types of widgets.
-
-:download:`filtered-binary-switch-example.zip <../Resources/UI/Downloads/filtered-binary-switch.zip>`
 
 Last Updated: December 11, 2018 in AIMMS Version 4.61.3.0
 
