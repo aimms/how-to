@@ -14,7 +14,7 @@ WinUI vs. WebUI
 Although the names are pretty self-explanatory, let me quickly elaborate on the differences. The WinUI is a Windows native GUI, while the WebUI works in a browser. As both UIs have advantages and disadvantages, I’ll try to outline the differences in the following paragraphs.
 
 .. image:: /Images/113/image001.png
-    :alt:Figure 1-A pie chart in the WebUI
+    :alt: Figure 1-A pie chart in the WebUI
 
 Graphical presentation
 -----------------------
@@ -22,7 +22,7 @@ Graphical presentation
 Two big improvements in the WebUI, compared to the WinUI, stood out almost immediately. The first, is the new graphical presentation in the WebUI (Figure 1). With the WebUI, interface tables, graphs, maps and buttons look fresh and self-explanatory. In Figure 1, the tea consumption of a number of countries is shown for the period 1987-1989. Here, no legend is needed to clarify what the different colors communicate and when the mouse arrow is hovered over a certain pie part, the necessary information is shown in the black rectangle. In Figure 2, the same information is displayed, but due to the separate legend and the percentages displayed in the graphs, this results in more clouded data presentation. I believe the WebUI has clear visualization advantages.
 
 .. image:: /Images/113/image002.png
-    :alt:Figure 2-The same pie chart in the WinUI
+    :alt: Figure 2-The same pie chart in the WinUI
 
 Repositioning of Widgets
 ------------------------
@@ -33,13 +33,13 @@ WebUI is still evolving. Some features of the WinUI are not yet available in th
 
 
 
-.. image:: /Images/113/image003-300x127.png
-    :alt:Figure 3-Data presentation in WinUI
+.. image:: /Images/113/image003.png
+    :alt: Figure 3-Data presentation in WinUI
 
 
 
-.. image:: /Images/113/image004-300x112.png
-    :alt:Figure 4- Data presentation in WebUI
+.. image:: /Images/113/image004.png
+    :alt: Figure 4- Data presentation in WebUI
 
 
 
