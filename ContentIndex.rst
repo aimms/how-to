@@ -101,7 +101,7 @@
 		</a>
 		<a href="Tech_Blog/index.html">
 			<div class="box">
-				<h1 align="center">Tech Blog Archives</h1>
+				<h1 align="center">Tech Blog Archive</h1>
 				<p>Popular topics from our blog</p>
 			</div>
 		</a>

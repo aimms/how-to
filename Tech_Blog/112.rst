@@ -1,0 +1,45 @@
+.. IMAGES
+.. </Images/112/...>
+
+Integer set expressions: 2 new properties
+==========================================
+
+.. image:: /Images/112/subsetintegers.jpg
+
+.. raw:: html
+
+    <p>For the past couple of years, we have worked on improving the compiler and execution engine in AIMMS. We’ve done this in a way that minimizes problems in existing models. </span></p>
+    <p class="p1"><span class="s1">During this process, we have encountered issues in the existing code that are not in line with the Language Reference. We struggled with the handling of subsets of integers in an expression in particular.</span></p>
+    <p class="p1"><!--more--></p>
+    <p class="p1"><span class="s1">For example, consider this set:</span></p>
+
+    <pre class="p1"><span class="s1">Set subSetIntegers {</span></pre>
+    <pre class="p1"><span class="s1"> SubsetOf: Integers;</span></pre>
+    <pre class="p1"><span class="s1"> Parameter: anInteger;</span></pre>
+    <pre class="p1"><span class="s1"> InitialData: data { 0, 1, 4, 7, 8 };</span></pre>
+    <p class="p1"><span class="s1">}</span></p>
+    And these two statements:
+    <pre class="p1"><span class="s1">anInteger := 1;</span></pre>
+    <pre class="p1">anInteger := anInteger + 3;</pre>
+    <p class="p1"><strong><span class="s1">What kind of operator is the + is this situation? </span></strong></p>
+    <p class="p1"><span class="s1">If we refer to the Language Reference, it seems pretty simple: the left hand side is element-valued and the right hand side is numerical, so the + is a lead operator. Hence, the value of anInteger should become 8.</span></p>
+    <p class="p1"><span class="s1">But, the Language Reference also states that elements in a subset of integers are treated as numerical when needed, as if it was surrounded by the Val() operator. If that would be the rule, then the value of anInteger should become 4.</span></p>
+    <p class="p1"><span class="s1">In the past, AIMMS has tried to be smart in these situations and applied either the lead or the numerical plus depending on the context of the expression in which the + appeared.</span></p>
+    <p class="p1"><span class="s1">Now look at these two statements:</span></p>
+
+    <pre class="p1"><span class="s1">anInteger := 0;</span></pre>
+    <pre class="p1"><span class="s1">if anInteger then DialogMessage(“It is true!”) endif;</span></pre>
+    <p class="p1"><span class="s1">Will the dialog<span class="Apple-converted-space"> </span>be shown or not? Again, if we refer to the Language Reference,  it states that the logical value of an element parameter is true if it is not empty. That is, if its current value is not the empty element.<span class="Apple-converted-space">  </span>Here anInteger has the value ‘0’, so it should be true and the dialog is shown. But, I think that many of us would have expected that the dialog would not be shown in this situation. </span></p>
+    <p class="p1"><strong><span class="s1">So what can the modeler do to write exactly what they want?</span></strong></p>
+    <p class="p1"><span class="s1">For this, we introduced two new properties that you can specify for each subset of integers in your model: ElementsAreNumerical and ElementsAreLabels.</span></p>
+    <p class="p1"><span class="s1">If ElementsAreNumerical is specified, then in every situation where either of the two described ambiguities arise, the element expression is automatically surrounded by the Val() operator. So the statements in the example will be interpreted as:</span></p>
+
+    <pre class="p1"><span class="s1">anInteger := val(anInteger) + 3;</span></pre>
+    <p class="p2"><span class="s1">and</span></p>
+
+    <pre class="p1"><span class="s1">if val(anInteger) then DialogMessage(“It is true!”) endif;</span></pre>
+    <p class="p1"><span class="s1">If ElementsAreLabels is specified, then the fact that an element can be treated as a numerical value will only apply when there is no ambiguity. In the first statement this means that the + is interpreted as a lead, and in the second statement the condition will be true.</span></p>
+    <p class="p1"><span class="s1">If neither of the two properties are set, then you will get a warning whenever the new compiler encounters an ambiguity. We recommended that you then make the proper choice between the two properties. If you ignore the warnings, your statement may behave differently in new AIMMS versions, because the coverage of the new compiler increases and a statement that was previously handled by the old compiler is now handled by the new compiler.</span></p>
+    <p class="p1"><span class="s1">We do know that some time ago, AIMMS generated a similar warning for these situations. However, with these two new properties we can now replace the warning with a more scalable solution. Contact <a href="mailto:support@aimms.com"><span class="s2">support@aimms.com</span></a> if you have any questions. </span></p>
+
+    <pre class="p1"><span class="s1"> </span></pre>
