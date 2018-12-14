@@ -1,0 +1,52 @@
+Tricks to Improve AIMMS Execution Time
+=======================================
+
+.. raw:: html
+
+
+    <div>The time spent by AIMMS applications can be divided into AIMMS execution time ( including evaluation parameters with definition, executing procedures, generate matrix for solvers, etc), the time spent by solvers, and the I/O time.  Here are some coding tricks that help you improve AIMMS execution time.</div>
+    <div></div>
+    <div></div>
+    <h3>1. Avoid 'For' Loop</h3>
+    <div>Use bulk execution of assignment as much as possible. If a 'for' loop is necessary, try to minimize calculation inside the loop. For example,</div>
+    <div></div>
+    <pre lang="aim">for (i,j) do
+            A(i,j) := B(i,j) + C(i,j)
+    endfor;</pre>
+    <div>can be written as the following bulk statement</div>
+    <div></div>
+    <pre lang="aim">A(i,j) := B(i,j) + C(i,j);</pre>
+    <div>
+    <h3>2. Pay attention to index order</h3>
+    When declaring a parameter with multiple indices, usually index with small cardinality goes first and running index goes last. For example, in the following statement, k is used as running index:
+
+    </div>
+    <div></div>
+    <pre lang="aim"> A(i,j) := Sum[(k), D(i,j,k)];</pre>
+    Another thing to keep in mind is to put the indices in same order. For example the following statement
+    <pre lang="aim">isActive(p,t,s):= 1 $ (t  &gt;= Begin(p,s) and t &lt; (Begin(p,s)+Duration(t,s)));</pre>
+    runs much faster than
+    <pre lang="aim">isActive(p,s,t):= 1 $ (t &gt;= Begin(p,s) and t &lt; (Begin(p,s)+Duration(t,s)));</pre>
+    <div>
+    <h3>3. Use index domain condition</h3>
+    Domain condition puts restriction on the indices and thus reduces memory and time consumption. Use it whenever possible. The usage of index domain can be found on related posts. One thing to be careful when using domain condition is to avoid sub index expression.
+
+    </div>
+    <div>
+
+    A sub index expression is the expression depend on fewer indices than the entire expression. For example, in the following statement,
+    <pre lang="aim">F(i,k) := G(i,k) * Sum[j | A(i,j) = B(i,j), H(j)]</pre>
+    <div>the entire expression depends on indices (i,j,k), but expression Sum[j | A(i,j) = B(i,j), H(j)] only has (i,j). During calculating the value of F(i,k),  AIMMS will evaluate the result of sum term for each combination of (i,k), although the its result will be the same of all k. To avoid unnecessary evaluation for k, the one statement can be separated into two statements:</div>
+    <pre lang="aim">FP(i) := Sum[j | A(i,j) = B(i,j), H(j)] ;
+    F(i,k) := G(i,k) * FP(i) ;</pre>
+    <div>Another example, although domain condition is added, the following statement is still inefficient:</div>
+    <pre lang="aim">sum[(t,s,i,j,k) | ElementPara(i,j) = k, …]</pre>
+    <div>Since ElementPara(i,j) = k is a sub index expression, AIMMS will create a temporary identifier index over (t,s,i,j,k) to evaluate the condition over the full domain. And comparison operation is a dense operation, thus the calculation needs to go over every (t,s,i,j,k). The result will be time and memory consuming.</div>
+    <div></div>
+    <div>The problem can be solved by introducing a new parameter SumCondition(i,j,k) and having</div>
+    <pre lang="aim">SumCondition(i,j,k) := (ElementPara(i,j) = k);
+    sum[(t,sc,i,j,k) | SumCondition(i,j,k), …];</pre>
+    <div>These are some general rules. In practice, lots of the performance improvements are done on by trials and errors.  And AIMMS diagnostic tools, such as Debugger, Profiler, and Identifier Cardinalities Viewer can help with identifying the performance bottleneck. You can refer to <a href="http://www.aimms.com/aimms/download/manuals/aimms3ug_debuggingandprofiling.pdf">AIMMS User's Guide</a> for how to use them. And more insights of AIMMS execution engine can be found in chapter <a href="http://www.aimms.com/aimms/download/manuals/aimms3lr_spareexecutionengine.pdf">Sparse Execution Engine</a> in AIMMS Language References.</div>
+    <div></div>
+    <div></div>
+    </div>

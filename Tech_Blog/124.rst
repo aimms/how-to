@@ -2,11 +2,13 @@ How to integrate AIMMS with Tableau
 ====================================
 
 .. image:: /Images/124/tableau.logo_.png
+	:scale: 50
 
 Although both the traditional AIMMS Windows UI and the new AIMMS Web UI offer excellent data visualization capabilities to view the data present *within *an AIMMS application, many of our customers have expressed the wish to be able to view and work with AIMMS data in Tableau (and other BI tools such as
 
 .. image:: /Images/124/AIMMS.Data_.For_.Tableau.TDE_.png
 	:alt: Data in Various AIMMS WebUI Views
+	:scale: 50
 
 QlikView, or Spotfire). This allows a much wider audience within a company to track KPIs on dashboards based on the results from an AIMMS application, using a wider range of graphical capabilities to drill down into the data presented, and to cross analyze these results against data from various other corporate data sources.
 
@@ -20,6 +22,7 @@ However, *flexibility* is also a key concept for both AIMMS and Tableau . The
 
 .. image:: /Images/124/Tableau.Desktop.with_.AIMMS_.Data_.png
 	:alt: The AIMMS-generated TDE File in Tableau Desktop
+	:scale: 50
 
 The DataLink library
 -------------------------
@@ -27,7 +30,7 @@ Thus, with ease-of-use and flexibility in mind, we have created an AIMMS DataLin
 
 .. image:: /Images/124/Tableau.Server.with_.AIMMS_.Data_.png
 	:alt: The AIMMS-generated & published TDE File to Tableau Server
-
+	:scale: 50
 
 You can also imagine looking at the same data from within AIMMS while doing some further exploration in Tableau so you can combine the best of both world.
 
@@ -51,11 +54,13 @@ The DataLink library is an example of such a generic library: by adding it to a 
 
 .. image:: /Images/124/annotations.png
 	:alt: DataLink annotations set on a declaration section
+	:scale: 50
 
 By specifying the ``dl::Table`` annotation for a specific identifier in a model, you indicate that you want to store the content of that identifier in the table with the name specified through the annotation, along with all other identifiers that hold the same ``dl::Table`` value.  All identifiers exported to the same TDE table should have the identical index domain. If a section in your model contains a set of identifiers with the same domain that all need to be exported to the same TDE file, you can simply set the ``dl::Table`` annotation on the section, after which the value will be inherited by all identifiers in that section. Identifiers for which the ``dl::Table`` annotation is not set will not be exported to a TDE file. Through the ``dl::Category`` annotation, you can specify one or more categories of identifiers that you want to selectively export to a TDE file.
 
 .. image:: /Images/124/tableau-control.png
 	:alt: Main window to Tableau example project
+	:scale: 50
 
 Creating a TDE file
 ^^^^^^^^^^^^^^^^^^^
@@ -70,7 +75,8 @@ Embedding Tableau in the AIMMS Web UI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. image:: /Images/124/AIMMS.WebUI_.TableauWidget.png
 	:alt: Example of an AIMMS WebUI with a Graph widget and a custom Embedded Tableau View widget
-
+	:scale: 50
+	
 If you are using the AIMMS Web UI, you can also display the contents of a Tableau Server workspace in a frame widget within a page in your Web UI. Note the library procedures to create and upload TDE files can also be executed from within a server-side data or optimization session. In this way you can easily integrate the AIMMS Apps published on AIMMS PRO and Tableau browser interfaces, offering a unified experience and user interface to your end-users.
 
 Support for other BI tools
