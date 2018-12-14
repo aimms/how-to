@@ -63,7 +63,7 @@ Fantasy Football is a game where people can choose their team rosters by partici
 	</table>
 	&nbsp;
 
-We can see the information of each player. For example, Russel Wilson, the Quarterback(QB) from my favorite team Seattle Seahawks (SEA), has fantasy points of 336.26. In order to get his points in, it is natural to create a parameter to hold Russel Wilson’s point.
+We can see the information of each player. For example, Russell Wilson, the Quarterback(QB) from my favorite team Seattle Seahawks (SEA), has fantasy points of 336.26. In order to get his points in, it is natural to create a parameter to hold Russell Wilson’s point.
 
 	.. image:: /Images/121/Screenshot_13.png
 

@@ -1,0 +1,75 @@
+The AimmsXLLibrary was introduced in AIMMS 4.20. The new library can communicate with Excel files in server environments, where Excel is not installed. For instance, while running AIMMS through a WebUI on PRO or on Linux. Excel is usually not installed in such environments. However, this isn’t a problem. The AimmsXLLibrary doesn’t require Excel to be installed in order to read from or write to an Excel (.xls/.xlsx) file. By using this library, you can deploy your AIMMS project to more platforms with less restrictions.
+
+In order to use the library, you first need to add the system library ‘AIMMSXLLibrary’ to your model. Then, you can use the functions, which start with prefix “axll”(Aimms eXeL Library), provided in the library. This blog post illustrates how these functions work. Let’s take a look.
+
+<!--more-->
+
+<img class="aligncenter wp-image-4842 size-full" src="http://techblog.aimms.com/wp-content/uploads/sites/5/2016/06/XLLibrary.png" alt="XLLibrary" width="497" height="417" />
+
+<strong>Reading your Excel File in AIMMS</strong>
+
+I needed some geographical information about the US for an application I was building. The information was easy to find online. I downloaded the file below, titled “free-zipcode-database-Primary.xlsx." It provided the Zipcode, State, Latitude, and Longitude columns I needed.
+
+<img class="aligncenter wp-image-4845 size-full" src="http://techblog.aimms.com/wp-content/uploads/sites/5/2016/06/Excel-e1465306005168.png" alt="Excel" width="500" height="333" />
+
+Next, I created a procedure in my AIMMS project, called “ReadFromExcel.” In the procedure, first I would like to have AIMMS point to the file so I can read it. Here is the code:
+<pre style="padding-left: 30px;">WorkBookName := <em>"free-zipcode-database-Primary.xlsx"</em>;</pre>
+<pre style="padding-left: 30px;"></pre>
+<pre style="padding-left: 30px;">if axll::WorkBookIsOpen(WorkBookName) then</pre>
+<pre style="padding-left: 30px;">       axll::SelectWorkBook(WorkBookName);</pre>
+<pre style="padding-left: 30px;">else</pre>
+<pre style="padding-left: 30px;">       axll::OpenWorkBook(WorkBookName);</pre>
+<pre style="padding-left: 30px;">endif;</pre>
+I used a String Parameter “WorkBookName” to take the file name. The code in the “if-else” statement is to avoid opening the workbook again if it is already opened. If it was already opened, I would just select it by calling <code>axll::SelectWorkBook</code> function; otherwise, I would open the file by the <code>axll::OpenWorkBook</code> function.
+
+The next thing is to use <code>axll::SelectSheet</code> to set the sheet I am going to use.
+<pre style="padding-left: 30px;">axll::SelectSheet(<em>"free-zipcode-database-Primary"</em>);</pre>
+Then I used <code>axll::ReadSet</code> function to read value for set “sZipCode”.
+<pre style="padding-left: 30px;">axll::ReadSet(</pre>
+<pre style="padding-left: 30px;">       SetReference    :  sZipCode,</pre>
+<pre style="padding-left: 30px;">       SetRange        :  <em>"A2:A42523"</em>,</pre>
+<pre style="padding-left: 30px;">       ExtendSuperSets :  1);</pre>
+The first argument, “SetReference,” is the set name. The second argument, “SetRange,” is the range in Excel. The third argument, “ExtendSuperSets,” is telling AIMMS to extend this set’s super set when applicable.
+
+<strong>Adding Parameters</strong>
+
+Next, I want to make sure I can read the following data in two dimensional parameters Coordnates(z,iLonLat), by using <code>axll::ReadTable</code>.
+<pre style="padding-left: 30px;">axll::ReadTable(</pre>
+<pre style="padding-left: 30px;">       IdentifierReference :  Coordinates,</pre>
+<pre style="padding-left: 30px;">       RowHeaderRange      :  <em>"A2:A42523"</em>,</pre>
+<pre style="padding-left: 30px;">       ColumnHeaderRange   :  <em>"F1:G1"</em>,</pre>
+<pre style="padding-left: 30px;">       DataRange           :  <em>"F2:G42523”</em>);</pre>
+The first argument, “IdentifierReference”, is the name of the parameter. The second argument, “RowHeaderRange”, is the range for first index “z”, which is represented as row range “A2:A42523” in Excel. The third argument, “ColumnHeaderRange”, is the range for second index “iLonLat”, which is represented as column range “F1:G1” in Excel. The forth argument, “DataRange”, is the range for the actual data.
+
+In case you have an identifier with more dimensions, “RowHeaderRange” is the range where the starting indices reside, and “ColumnHeaderRange”, is the range where the ending indices reside. For example, identifier <code>MyValue(r1, r2, r3, r4,c1,c2,c3,c4)</code> has 8 indices, and the data in Excel looks like this:
+
+<img class="aligncenter wp-image-4844 size-full" src="http://techblog.aimms.com/wp-content/uploads/sites/5/2016/06/Excel3-e1465306679329.png" alt="Excel3" width="500" height="369" />
+
+Then the ReadTable statement will be:
+<pre style="padding-left: 30px;">axll::ReadTable(</pre>
+<pre style="padding-left: 30px;">       IdentifierReference :  MyValue,</pre>
+<pre style="padding-left: 30px;">       RowHeaderRange      :  <em>"A8:D18"</em>,</pre>
+<pre style="padding-left: 30px;">       ColumnHeaderRange   :  <em>"E4:K7"</em>,</pre>
+<p style="padding-left: 30px;">DataRange           :  <em>"E8:K18”</em>);</p>
+Continuing with the zip code example. I then use <code>axll::ReadSet</code> to read in data for set <code>sState</code>.
+<pre style="padding-left: 30px;">axll::ReadSet(</pre>
+<pre style="padding-left: 30px;">       SetReference    :  sStates,</pre>
+<pre style="padding-left: 30px;">       SetRange        :  <em>"D2:D42523"</em>,</pre>
+<pre>       ExtendSuperSets :  1);
+
+And <code>axll::ReadList</code> to read in data “ZipCodeState(z),” which holds the state name that each zip code belongs to.</pre>
+<pre style="padding-left: 30px;">axll::ReadList(</pre>
+<pre style="padding-left: 30px;">       IdentifierReference :  ZipCodeState(z),</pre>
+<pre style="padding-left: 30px;">       RowHeaderRange      :  <em>"A2:A42523"</em>,</pre>
+<pre style="padding-left: 30px;">       DataRange           :  <em>"D2:D42523"</em>);</pre>
+<code>axll::ReadList</code> is designed for reading in data which is represented as lists in Excel. So it is only with RowHeaderRange.  The following Excel Sheet is an example with “A8:D17” as RowHeaderRange and “E8:E17” as DataRange.
+
+<img class="aligncenter wp-image-4843 size-full" src="http://techblog.aimms.com/wp-content/uploads/sites/5/2016/06/Excel4-e1465308154550.png" alt="Excel4" width="500" height="369" />
+
+At this point, everything I need to use in my model is in there, so I use <code>axll::CloseWorkBook</code> to close the workbook.
+<pre style="padding-left: 30px;">axll::CloseWorkBook(WorkBookName);</pre>
+With the data I just imported from Excel, I can do further analyses. For example, I can calculate the distance between zip codes based on the latitude and longitude, and show it in AIMMS WebUI.
+
+<img class="aligncenter wp-image-4846 size-full" src="http://techblog.aimms.com/wp-content/uploads/sites/5/2016/06/Distance-e1465308283102.png" alt="Distance" width="500" height="400" />
+
+Similarly, you can use the AIMMSXLLibrary to write to Excel. You can see the comments in the library for further reference.
