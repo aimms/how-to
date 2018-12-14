@@ -1,7 +1,7 @@
 AIMMS PRO User Groups
 =====================
 
-.. note:: Under Construction - please do not hesitate to use the form at the end to ask for clarification where needed.
+.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end to ask for clarification where needed.
 
 AIMMS PRO is a multi-user environment, designed to host several Apps used by several end-users. Information is shared by these users via these applications. Depending on the role of the app user in the organization, selected information may or may not be accessible. For instance, a planner may change the production plan, that plan can be inspected by management, but is not accessible to the HRM staff.
 
