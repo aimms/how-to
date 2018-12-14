@@ -6,11 +6,6 @@
 Preparing for the Deprecation of Compound Sets
 ==============================================
 
-
-.. todo:: Known limitation: Name clashes (same name for compound sets in different libraries) cannot be handled. Please rename one of the compound sets before apply dclu.
-
-.. todo:: Add Set_Mapping_Declarations to the interface of libraries.
-
 .. note:: We are actively updating this topic during the deprecation stages. Your feedback is welcome and appreciated, as it may help others facing the same issue.
 
 .. _Section_Summary:

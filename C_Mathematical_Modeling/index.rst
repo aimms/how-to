@@ -14,8 +14,7 @@ Mathematical Modeling
 
 	
 .. toctree::
-
-    HowToHandleTheDeprecationOfCompoundSets
-    109-convert-compound-sets
+    
     109-deprecate-compound-sets-overview
+    109-convert-compound-sets
 	
