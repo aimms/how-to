@@ -110,8 +110,7 @@ A third and last check we demonstrate is that the stock available is should be a
 
 Note the use of error handling here, as the AIMMS intrinsic functions Val and Mod may throw an error upon invalid input.
 
-More on error handling:
-
+.. More on error handling:
 	* <a title="Catching errors and warnings in AIMMS" href="http://techblog.aimms.com/2012/11/08/catching-errors-and-warnings-in-aimms/">http://techblog.aimms.com/2012/11/08/catching-errors-and-warnings-in-aimms/</a>
 	* <a title="Managing errors and warnings within AIMMS" href="http://techblog.aimms.com/2014/11/24/under-control-managing-errors-and-warnings-within-aimms/">http://techblog.aimms.com/2014/11/24/under-control-managing-errors-and-warnings-within-aimms/</a>
 	* <a title="Webinar Catching errors AIMMS error handler" href="http://www.aimms.com/english/community/customers/training/webinars-demand/catching-errors-aimms-error-handler/">http://www.aimms.com/english/community/customers/training/webinars-demand/catching-errors-aimms-error-handler/</a>
