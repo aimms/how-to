@@ -96,12 +96,12 @@ The picture above illustrates the file communication architecture for a WebUI AI
 
 3.     The AIMMS PRO storage, disk space available to exchange files.
 
-The AIMMS WebUI provides the `Upload Widget <http://manual.aimms.com/webui/aimms4/en/topic/upload-widget%20>`_ to transfer files from your device to the folder in which the AIMMS client session runs. In addition, it provides the ` Download Widget <http://manual.aimms.com/webui/aimms4/en/topic/download-widget>`_ to transfer files the other way around.
+The AIMMS WebUI provides the `Upload Widget <http://manual.aimms.com/webui/aimms4/en/topic/upload-widget%20>`_ to transfer files from your device to the folder in which the AIMMS client session runs. In addition, it provides the `Download Widget <http://manual.aimms.com/webui/aimms4/en/topic/download-widget>`_ to transfer files the other way around.
 
 Now that we discussed file exchanges between the user device and AIMMS PRO storage, thus allowing for file sharing between AIMMS app users, we want to be able to arrange file sharing in a secure manner. This is the topic for the last blog post in this series.
 
 Further reading
 
--        <http://manual.aimms.com/webui/>
+        http://manual.aimms.com/webui/
 
--        <http://manual.aimms.com/pro/">http://manual.aimms.com/pro/>
+        http://manual.aimms.com/pro/

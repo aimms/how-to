@@ -1,0 +1,204 @@
+.. IMAGES
+.. </Images/118/...>
+
+|Ps| .. image:: /Images/118/Ps.png
+|P| .. image:: /Images/118/P.png
+|database| .. image:: /Images/118/database.png
+
+
+How to link AIMMS with an SQLite database (in Windows 10)
+=========================================================
+
+Say you have a wonderful AIMMS application, that needs to link a Database Table identifier 
+|database| (an AIMMS identifier) to one SQL data base of yours. Your amazing SQL data base is, however, an SQLite database. Thus, to be able to read it, AIMMS needs the appropriate “driver”, which enables him to read your SQLite database. This blogpost presents how to:
+
+* Install the SQLite driver
+* Connect your SQLite database
+* Verify that you can access it through AIMMS
+
+
+1 – Installation of the SQLite driver
+---------------------------------------
+SQLite driver
+^^^^^^^^^^^^^^^^^^^^^^^^
+To install SQLite ODBC driver, please refer to the following website, and download <em>sqliteodbc.exe</em> or <em>sqliteodbc_w64.exe</em>, depending on your AIMMS’ configuration (and NOT your computer’s configuration):
+
+http://www.ch-werner.de/sqliteodbc/
+
+Then just run the .exe and follow the instructions.
+
+Note : This driver is open source, you may read the license terms: http://www.ch-werner.de/sqliteodbc/license.terms
+
+Verification of the installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To verify that the driver is well installed, please open the “Administrative Tools” of your computer (type “administrative tools“ in windows search bar). You should see a window like this :
+
+.. image:: /Images/118/2odbc.png
+
+Then open the “ODBC Data Sources (64-bit)” (or 32-bit) and reach the “Drivers” tab. Normally, you should find 3 new drivers, named **SQLite ODBC (UTF-8)**, **SQLite ODBC** and **SQLite3 ODBC**. The window may include other drivers (as Microsoft Access for example) :
+
+.. image:: /Images/118/3odbc.png
+
+Congrats! The installation is successful.
+
+Download an SQLite database sample to test
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+In order to test our installation, you could use your own generated SQLite database, or download a sample on this website: http://www.sqlitetutorial.net/download/sqlite-sample-database/
+
+(click on the “SQLite Sample Database” download link). The downloaded database is named `chinook.db`, and we will use it in the rest of the tutorials.
+
+2 – Connect your SQLite database to an AIMMS identifier
+--------------------------------------------------------
+
+Generate the connection file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+As you may already know, to read one database AIMMS needs to know, among others, the name of the driver it should use and the location of your SQLite database. There are 3 different ways to give those indications to an AIMMS database identifier:
+
+#. By generating a **.dsn file**, that you will store somewhere on your computer (almost equivalent to a text file .txt) and link it to your AIMMS identifier,
+#. By generating a **system .dsn file**, that your computer will store for you in a specific place
+#. By creating a ** connection string**, that will have the same role as a .dsn file, but directly written into the AIMMS application. This appears to be particularly useful when, for instance, a password is needed to read a certain database, and you don’t want to re-write it each time you open your application or the database.
+
+1. Generate a .dsn file connected to your SQLite database
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Every database has its own .dsn file, that’s why you need to generate it for each of your database. In addition to that, every ODBC driver has a different .dsn file structure.
+
+To generate the appropriate .dsn file from your SQLite ODBC driver, please select the tab “File DSN” from the ODBC Data Sources administrator (the one that we opened just before to check that the installation was completed). Then click the “Add” button in the upper right of the window. You should see this pop up window:
+
+.. image:: /Images/118/4odbc.png
+
+Select the driver you want to use (in our case, SQLite3 ODBC Driver) and click “Next”.
+
+At this point, the computer is asking you the name of the .dsn file you want to create. Name it as you wish. As you may see below, I choose to name it “test”.
+
+.. image:: /Images/118/5odbc.png
+
+After that, you will have access to the ‘SQLite ODBC Driver Connect’, which finally ask you to browse and select your SQLite database. As explained in *Download an SQLite database sample to test*, my database is named `chinook.db`, you just need to browse and select it.
+
+.. image:: /Images/118/8odbc.png
+
+After clicking the OK button, you should see a new .dsn file (named `test` in my case) in the file explorer of your ODBC Data Source Administrator.
+
+Then you may go directly to the *Fill out AIMMS Database Table identifier* in order to complete the connection with your AIMMS database.
+
+2. Generate a .dsn system file connected to your SQLite database
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To generate the appropriate .dsn System file from your SQLite ODBC driver, please reach the tab “System DSN” from the ODBC Data Sources administrator (the one that we’ve opened just before to check that the installation was completed).
+	* click the “Add” button in the upper right of the window.
+	* Select SQLite3 ODBC Driver as shown below.
+
+.. image:: /Images/118/7odbc.png
+
+When the SQLite3 configuration window pops up :
+	* define the System DSN file name (I choose to name it `chinook SQLite3`),
+	* define the location of your SQLite database (`db` in my case) :
+	* Click OK
+
+.. image:: /Images/118/8odbc.png
+
+You should now see that there is a new System DSN file in the System DSN tab :
+
+.. image:: /Images/118/9odbc.png
+
+Congrats! You may go directly to the *Fill out AIMMS Database Table identifier* in order to complete the connection with your AIMMS database.
+
+3. Create a connection string
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A connection string is an AIMMS string parameter |Ps| that you could fill out thanks to a procedure. This procedure should use the `SQLCreateConnectionString` function. Let’s build that connection string as follows :
+
+* Create an AIMMS string parameter |Ps| named `ConnectionString`.
+* Check, Commit and Close.</li>
+* Create a new procedure |P| named `WriteTheConnectionString` (the name is not important)
+* Double click on procedure’s icon and write the following code in its body field:
+
+.. raw:: html
+
+	<pre>ConnectionString := <span style="color: #ff0000;">SQLCreateConnectionString</span>(
+	DatabaseInterface              :  <em>'odbc'</em>,
+	DriverName                     :  <em>"SQLite3 ODBC Driver"</em>,
+	DatabaseName                   :  <em>"C:\\Users\\Arthur.AIMMS\\Documents\\SQLite\\sqlite-dll-win64-x64-3150000\\chinook.db"</em>, <span style="color: #339966;"><em>!The path of your database
+	</em></span>AdditionalConnectionParameters:<em>""</em>) ;</pre>
+
+As you may see, this function fills out your string parameter with a “coded” string that will be read by your AIMMS datasource table identifier. This function allows you to define a user name and a password as well, by default empty, to access your SQLite database.
+
+.. raw:: html
+
+	For more details on <em>SQLCreateConnectionString</em> function syntax, please right click on <span style="color: #ff0000;"><em>SQLCreateConnectionString</em> </span>in the body field and select the ‘help on’ item (or refer to the <a href="http://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf">AIMMS Function reference</a>).
+	<ul>
+		<li>Finally, you should run the procedure ‘<em>WriteTheConnectionString</em>’, in order to fill out your String parameter.</li>
+	</ul>
+
+Fill out an AIMMS Database Table identifier
+--------------------------------------------
+Let’s start a super simple new AIMMS project, containing only one Database Table  named “Table1” :
+
+.. image:: /Images/118/10aimms.png
+
+.. raw:: html
+
+	<ul>
+		<li>Create a new Database Table ,</li>
+		<li>Specify ‘Table1’,</li>
+		<li>Activate the <strong>Data Source</strong> wizard,</li>
+	</ul>
+	<h3>Link with a .dsn file</h3>
+	<ul>
+		<li>Choose the <strong>Select File Data Source… </strong>command in the menu that pops up,</li>
+		<li>Select your DSN file (“<em>dsn</em>” in our case).</li>
+		<li>Press the <strong>Save</strong></li>
+	</ul>
+	<h3>Link with a System .dsn file</h3>
+	<ul>
+		<li>Choose the <strong>Select User/System Data Source… </strong>command in the menu that pops up,</li>
+		<li>Select your DSN System file (“<em>chinook SQLite3</em>” in our case).</li>
+		<li>Press the <strong>Save</strong></li>
+	</ul>
+	<h3>Link with a connection string</h3>
+	<ul>
+		<li>Choose the <strong>Select String Parameter/Connection String… </strong>command in the menu that pops up,</li>
+		<li>Select the String Parameter |Ps| you’ve just created (named ‘<em>ConnectionString’</em> in our case).</li>
+	</ul>
+	<h1><a name="_3_–_Verify"></a>3 – Verify the database link</h1>
+	Once you have linked the data source, you are now ready and able to select a table from this source. Please, execute the following steps:
+
+	<ul>
+		<li>Activate the <strong>Table Name</strong> wizard,</li>
+		<li>Choose the <strong>Select Table/Query Name...</strong> command from the pop-up menu,</li>
+		<li>You should see table names from your database… if not, please see the instructions bellow.</li>
+	</ul>
+
+.. warning::
+
+	If you receive this error message
+
+	.. image:: /Images/118/11aimms.png
+
+	And if you tried the connection String :
+
+	Your connection string might be empty. Please check if `ConnectionString` parameter is empty by accessing its data (right click on its icon and choose *Data*). It should be filled out with the following string ::
+
+		DRIVER={SQLite3 ODBC Driver};DATABASE=C:\Users\Arthur.AIMMS\Documents\SQLite\sqlite-dll-win64-x64-3150000\chinook.db;
+
+Summary
+--------
+During this blogpost we installed the SQLite driver, and linked our SQLite database to an AIMMS database table identifier  |database| that we now may further use in our AIMMS application. We presented 3 different ways to link the database, namely the .dsn file, the system .dsn file and the connection string. We finally concluded by verifying that we were able to read our SQLite database through our AIMMS  database table identifier.
+
+For further reading, please refer to the following related links :
+
+.. raw:: html
+
+	<strong>AIMMS materials</strong>
+	<ul>
+		<li><a href="http://download.aimms.com/aimms/download/manuals/AIMMS3_LRB.pdf">AIMMS Language Reference</a>: Chapter 27 - <em>Communicating With Databases</em></li>
+		<li><a href="http://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf">AIMMS Function Reference</a>: <em>SQLCreateConnectionString</em></li>
+	</ul>
+	<!--strong>Related Blogposts </strong>
+	<ul>
+		<li><a href="http://techblog.aimms.com/2012/08/28/connect-to-access-database-file-via-odbc-connection-string/">Connect to Access database file via ODBC connection string</a></li>
+		<li><a href="http://techblog.aimms.com/2014/10/27/installing-32-bit-and-64-bit-microsoft-access-drivers-next-to-each-other/">Installing 32-bit and 64-bit Microsoft Access Drivers next to each other</a></li>
+	</ul-->
+	<strong>Other related websites</strong>
+	<ul>
+		<li><a href="http://www.ch-werner.de/sqliteodbc/">SQLite ODBC Driver</a></li>
+		<li><a href="https://sqlite.org/">SQLite Website</a></li>
+	</ul>
