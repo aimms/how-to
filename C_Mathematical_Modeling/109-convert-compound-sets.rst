@@ -32,7 +32,7 @@ For an overview of the rationale and timeline for deprecating compound sets, rea
 
 Identifying compound sets in your application
 ---------------------------------------------
-	
+
 A compound set is defined as one of these:
 
 * It is a subset of a Cartesian product with an index or element parameter declared in its attribute form.
