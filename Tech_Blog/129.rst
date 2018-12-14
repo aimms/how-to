@@ -87,7 +87,7 @@ For the new driver this should be changed to look like (where the changes are hi
 Please note that the above is applicable to Office 2010 as well as to Office 2013. In case of Office 2013, the installation steps above should suffice. However, when Office 2010 32-bit is natively installed and the user tries to install the 64-bit version of the Microsoft Access Database Engine, he or she might still get an error regarding the registration of the proper drivers on the local machine. Should such a situation occur, please try the following workaround:
 
 	* Check the 64-bit registry key "HKEY_LOCAL_MACHINESOFTWAREMicrosoftOffice14.0CommonFilesPaths"
-**before **installing the 64-bit version of the Microsoft Access Database Engine 2010 redistributable.
+**before** installing the 64-bit version of the Microsoft Access Database Engine 2010 redistributable.
 	* If it does not contain the "mso.dll" registry value, then you will need to rename or delete the value **after** installing the 64-bit version of the Microsoft Access Database Engine 2010 redistributable on a system with a 32-bit version of MS Office installed.
 	* Use the "/passive" command line parameter to install the redistributable, e.g. "C:directory pathAccessDatabaseEngine_x64.exe" /passive
 	* Delete or rename the "mso.dll" registry value, which contains the path to the 64-bit version of MSO.DLL (and should not be used by 32-bit MS Office versions).
