@@ -18,6 +18,11 @@ Deployment
     Deploy_DataServerComm_5_Progress
     Deploy_DataServerComm_6_Retrieve
     Deploy_DataServerComm_7_Interrupt
+    Deploy_DataServerComm_8_PassNewData
+    Deploy_DataServerComm_2a_ReducedCases
     120-pro-user-groups
     117-Uploading-and-Downloading-files
     115-Securing-File-Access
+    RegularJob
+    ReceiveMessages
+    how to work with csv files

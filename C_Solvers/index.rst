@@ -12,4 +12,9 @@
 Solvers
 ========================
 
-	
+.. toctree::
+        
+    BasicSolverLoggingIDE
+    BasicSolverLoggingPRO
+
+

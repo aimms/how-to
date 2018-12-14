@@ -2,6 +2,9 @@
 Reducing the communication requirements between the client session and the server session
 ==========================================================================================
 
+.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+
+
 As shown in :doc:`Deploy_DataServerComm_1_Publish`, part of the overhead in solving is creating a case and transferring it, once from the client session to the server session and once back.
 Especially, for short solves, the overhead can be relatively large.
 To reduce this overhead, we'll reduce the number of identifiers that need to be passed between these sessions.

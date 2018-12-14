@@ -11,7 +11,6 @@
 AIMMS Language
 ========================
 
-	
 .. toctree::
 
     How to model categorization of objects
@@ -19,5 +18,5 @@ AIMMS Language
     104-creating-email-templates
     104-using-email-client-library
     85-using-axll-library
-	
-..	Generate Random Numbers
+
+.. Generate Random Numbers
