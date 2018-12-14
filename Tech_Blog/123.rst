@@ -1,0 +1,199 @@
+Using AIMMS WebUI Forms to Create and Edit Data
+===============================================
+
+The AIMMS WebUI is well known for its capability to create a UI for inspecting and analyzing data in a browser and for modifying existing data. However, as a model developer, you also want your users to be able to:
+
+	* Create new data,
+	* Modify existing data, and
+	* Detect invalid data as soon as possible
+
+Consider the picture below:
+
+.. image:: /Images/123/FormData-ModelIdentifiersExchange.png
+
+This picture illustrates a form in the AIMMS WebUI in which new or modified data is entered (red rectangle), and once it passes the checks, copied to the actual model identifiers as if it were a single transaction. You might be asking yourself how this can be done and what the required effort is. To properly implement such a form, several identifiers are needed in addition to the model identifiers, whereby each of them inherits some properties from the corresponding model identifier. In addition, AIMMS code is needed for checking and for copying/deleting. The AIMMS WebUI Forms framework minimizes effort for developers by creating the needed additional identifiers, and generating code for copying, deleting and the repetitive part of checking. Deploying this framework in order to create an advanced form is the topic for the remainder of this blog post.
+
+The AIMMS WebUI Forms framework adheres to the CRUD metaphor (`Create, Update, Delete <https://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_). This metaphor is well-known in the area of persistent storage.
+
+This blog post will illustrate the entire process in detail via a running example. This example is part of an inventory management application, whereby data of a `Stock Keeping Unit <http://en.wikipedia.org/wiki/Stock_keeping_unit>`_ is entered and maintained.
+
+**Step 1. Project preparation for AIMMS in combination with WebUI**
+
+In order to add forms to your application, you will need to prepare your application for the WebUI by adding the system libraries ``AimmsProLibrary`` and ``AimmsWebUI`` to your application. This can be done using the AIMMS Library manager. This action needs to be done only once per application.
+
+.. image:: /Images/123/1-New-project-with-system-libraries.png
+
+You may note the additional libraries. An application started with the ``AimmsWebUI`` system library, will also create the libraries ``AimmsWebUIRuntime`` and ``DataChangeMonitorRuntime``. These two libraries are created and maintained by the library ``AimmsWebUI``.
+
+The targets of the form to be created are the model identifiers in which we want to store valid data. We continue by declaring such identifiers. In our running example, stock keeping unit (SKU) data is maintained. In order to limit the size of the example, per SKU we only maintain the following properties:
+
+	* manufacturer (name),
+	* volume (liter),
+	* color (in color set), and
+	* stock (non-negative integer).
+
+Thus we declare the corresponding model identifiers as follows:
+
+.. image:: /Images/123/2-sets-and-parameters-for-model.png
+
+**Step 2. We create the declarations and procedures in the model to support the form in the WebUI**
+
+We need the following extra declarations in order to work with the forms:
+
+	* When we are editing existing data, we want to know for which element that is. The WebUI forms uses a binary parameter for this. In our example we will call this binary parameter ``P_SKUFORM_Selection(sku)``.
+	* Each SKU needs a unique identification before it can be added to the set. This identification can simply be a unique (non-descriptive) number or a name. In our example we use a name. That is why we add an extra string parameter: ``SP_SKUFORM_InternalName(sku)``. Actually, this is just another property, modelled here via a string parameter.
+	* A procedure to create a new element. In our running example, this will be ``pr_SKUFORM_Create``. This is a callback procedure; it will be called by the AIMMS WebUI Forms framework.
+	* A procedure that validates the newly entered or modified data. In our running example, this will be ``pr_SKUFORM_Check``. This is also a callback procedure; it will be called by the AIMMS WebUI Forms framework.
+	* A procedure that links the above declarations and initializes a WebUI Form. In our running example, this will be ``pr_SKUFORM_Setup``. It needs to be called once by the application before the form is shown in the browser.
+
+From the AIMMS model explorer, the above declarations look as follows:
+
+.. image:: /Images/123/3-procedure-callback-declarations.png
+
+As you can see from this picture, both callbacks have an argument named ``formData``. This argument is used to communicate the strings actually entered by the application user. Formally, this argument is declared as follows::
+
+        StringParameter formData {
+            IndexDomain: webui::ffn;
+            Property: Input;
+        }
+
+Here the index ``webui::ffn`` is an index in the set ``webui::AllFormFieldNames``. This index and set are made available in the ``AimmsWebUI`` system library and will be linked to the model identifiers later on. The set ``webui::AllFormFieldNames`` is a subset of ``AllIdentifiers``, which allows us to link easily to the model identifiers at hand.
+
+In the following three steps we will discuss the selected details of these three procedures.
+
+**Step 3. The procedure to create a new element**
+
+This procedure is expected to create a new element in the set for which the form is setup. In our running example that is ``S_StockKeepingUnit``. Although it is possible to use element names different from the literal text entered by the user, in our running example we just take it over. Please note that, before this procedure is called, the name was already verified by the check procedure discussed in the next section. ::
+
+       SetElementAdd(S_StockKeepingUnit,anSKU,
+                     formData('SP_SKUFORM_InternalName'));
+        newSKUName := formData('SP_SKUFORM_InternalName');
+
+Here, ``anSKU`` is a local element parameter with range ``S_StockKeepingUnit``.
+
+**Step 4. The procedure to check data for an element**
+
+The check procedure is called as soon as we save the data. It has two arguments, an input argument that contains the strings entered by the user, and an output argument that contains corresponding error messages, if any, about these strings. Only when no error messages are created is the data accepted.
+Selected checks of this procedure are presented below.
+
+The first "if" in the code below, is about new element names. A new name does not exist; and this corresponds to an empty ``P_SKUFORM_Selection``. The second "if" in the code below checks whether the name already exists. ::
+
+	if ( not exists[ i_SKU | P_SKUFORM_Selection(i_SKU) ] ) then 
+		if ( StringToElement(S_StockKeepingUnit, formData('SP_SKUFORM_InternalName')) ) then
+			validationErrors('SP_SKUFORM_InternalName') :=                 
+						webui::CreateValidationError("validation-error-name-already-exists");
+		endif;
+	endif;
+
+If there is an error, this will be logged via the function webui::CreateValidationError.
+
+The second check we do is that the manufacturer is specified and the length is at least 3. ::
+
+	if (StringLength(formData('SP_Manufacturer')) &lt; 3) then
+		validationErrors('SP_Manufacturer') := 
+			webui::CreateValidationError("validation-error-not-a-valid-manufacturer-name");
+endif;
+
+A third and last check we demonstrate is that the stock available is should be a non-negative integer::
+
+	block
+		p_loc_Stock := Val(formData('P_Stock'));
+		if ( ( p_loc_Stock &lt; 0 ) or ( mod(p_loc_Stock,1)  0 ) ) then
+			validationErrors('P_Stock') := 
+			webui::CreateValidationError("validation-error-not-a-valid-availability");
+		endif;
+	onerror err do
+		validationErrors('P_Stock') :=
+			webui::CreateValidationError("validation-error-not-a-valid-availability");
+		errh::MarkAsHandled(err);
+	endblock;
+
+Note the use of error handling here, as the AIMMS intrinsic functions Val and Mod may throw an error upon invalid input.
+
+More on error handling:
+
+	* <a title="Catching errors and warnings in AIMMS" href="http://techblog.aimms.com/2012/11/08/catching-errors-and-warnings-in-aimms/">http://techblog.aimms.com/2012/11/08/catching-errors-and-warnings-in-aimms/</a>
+	* <a title="Managing errors and warnings within AIMMS" href="http://techblog.aimms.com/2014/11/24/under-control-managing-errors-and-warnings-within-aimms/">http://techblog.aimms.com/2014/11/24/under-control-managing-errors-and-warnings-within-aimms/</a>
+	* <a title="Webinar Catching errors AIMMS error handler" href="http://www.aimms.com/english/community/customers/training/webinars-demand/catching-errors-aimms-error-handler/">http://www.aimms.com/english/community/customers/training/webinars-demand/catching-errors-aimms-error-handler/</a>
+	* AIMMS The language reference, section "Raising and handling warnings and errors".
+
+The next step will be the last in the three steps specifying the procedures for the form; linking it all together.
+
+**Step 5. Linking the above callbacks to AIMMS WebUI Forms framework**
+
+In our running example, we use the procedure ``pr_SKUFORM_Setup`` as the procedure which links the model identifiers, ``SKUFORM`` procedures and the actual form in WebUI together. This procedure is called at the end of the StartupProcedure in order to make sure it is called before the form is opened for the first time.
+
+There are two steps in this procedure. In the first step we name the model identifiers that identify the fields in the form (here FormFields is a subset of ``AllIdentifiers``)::
+
+        FormFields := data {
+        	'SP_SKUFORM_InternalName',
+        	'SP_Manufacturer',
+        	'P_Volume',
+        	'EP_Color',
+        	'P_Stock'};
+
+In the second step, the actual linking is done::
+
+     
+        webui::SetupForm(
+        	formId             :  "SKUForm",
+        	selInMaster        :  'P_SKUFORM_Selection',
+        	detailsIdentifiers :  FormFields,
+        	validationHandler  :  'pr_SKUFORM_Check',
+        	newEntryCallback   :  'pr_SKUFORM_Create');
+
+**Step 6. Drawing the form on the WebUI canvas:**
+
+After starting the AIMMS WebUI (AIMMS Menu – Tools – Start WebUI) and opening the browser page localhost:12001/example, we can create the necessary widgets:
+
+	* A legend widget, contents: P_SKUFORM_Selection
+	* A scalar widget, contents: webui_runtime::SKUForm_P_Stock, webui_runtime::SKUForm_EP_Color, webui_runtime::SKUForm_P_Volume, webui_runtime::SKUForm_SP_Manufacturer, webui_runtime::SKUForm_SP_SKUFORM_InternalName
+	* Three button widgets linking to the procedures webui_runtime::SKUForm_SaveForm, webui_runtime::SKUForm_NewEntry, webui_runtime::SKUForm_DeleteEntry and name them Save, Create, and Delete respectively.
+
+This will result in the following form:
+
+.. image:: /Images/123/4-Basic-widget-placing.png
+
+As the names in this form are a bit nerdy, we will try to make them more appealing in the next step:
+
+**Step 7. Adapting the programmatic names to phrases inviting proper user entry**
+
+Phrase adapting in the WebUI is achieved via translation files. In our running example we adapt using ``InventoryManagement\WebUI\resources\languages\skuform-messages.properties``, with the following contents. ::
+
+	SKUForm_SP_SKUFORM_InternalName = Name
+	SKUForm_SP_Manufacturer = Manufacturer
+	SKUForm_P_Volume = Volume
+	SKUForm_EP_Color = Color
+	SKUForm_P_Stock = Stock
+
+	form-enter-SP_SKUFORM_InternalName = 
+	form-enter-SP_Manufacturer = 
+	form-enter-P_Volume = 
+	form-enter-EP_Color = 
+	form-enter-P_Stock = 
+
+	no-P_SKUFORM_Selection-selected = 
+
+	validation-error-min-length = A name must be at least two characters long.
+	validation-error-name-already-exists = A person with this name already exists.
+	validation-error-required-field = Required field.
+	validation-error-not-a-valid-Volume = Not a valid volume.
+	validation-error-not-a-valid-Stock = Not a valid stock.
+
+With this phrase adapting, the form now looks as follows:
+
+.. image:: /Images/123/4-Basic-widget-placing-translated-names.png
+
+**Step 8. Testing the example.**
+
+We leave this to the interested user. You can find this example in the AIMMS Example repository at `AIMMS Examples <https://github.com/aimms/examples/>`_
+
+**Summary**
+
+In this blog post we have shown that modern looking forms for data entry can easily be obtained via the AIMMS WebUI Forms framework. You can achieve this by following three basic actions:
+
+	* select the identifiers for which you want to provide data
+	* write the checking code
+	* draw the form on the screen by selecting a few widgets
+
+This makes the AIMMS WebUI Forms framework an efficient method to create forms from the model builder's perspective.
