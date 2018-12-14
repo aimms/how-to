@@ -1,0 +1,156 @@
+.. IMAGES
+.. </Images/121/...>
+
+Set, Subset, Index and Element Parameter in AIMMS
+=================================================
+
+.. raw:: html
+
+	<img class="alignright" src="/Images/121/2000px-Set.svg_-144x300.png" alt="2000px-Set.svg" width="144" height="300" align="right" />
+
+	Do you know Set is a god of the desert, storms, disorder, violence and foreigners in ancient Egyptian? So it is totally possible that his disturbance power influenced mathematical world, which is considered employing set theory as foundation system. From 5th century Greek in west India in the east to today’s modern society, there are struggles, debates, paradoxes around set theories. You can find lots of readings about them, or if reading history sounds boring, there will be a little fun video to watch at the end of this blog.
+
+	Set in AIMMS can also be confusing for new AIMMS users. We often get questions regarding how to use set, subset, indices, mappings, etc. While working on my own Fantasy Football project, I think it might be helpful to share how I started building one of my models to clarify some of the ambiguity by this example.
+
+	<!--more-->
+
+	Fantasy Football is a game where people can choose their team rosters by participating in a draft in which all players of a real football league are available. I participated this year. I named my team Naqada. As my team manager, I want to optimize my draft total fantasy points by the end of 2016 season, considering the projection of players and constraints in my team and in the league. Before I jump to my algorithm, first, I am going to acquire player’s information to my model. Fortunately, there are tons of data available at various sources. The following is a slice of 2015 historical data:
+	<table style="height: 204px;" width="660">
+	<tbody>
+	<tr>
+	<td width="200"><strong>Player</strong></td>
+	<td width="100"><strong>Pos</strong><strong>ition</strong></td>
+	<td width="100"><strong>Team</strong></td>
+	<td width="100"><strong>Fantasy Points</strong></td>
+	</tr>
+	<tr>
+	<td width="200"><strong>Cam Newton     </strong></td>
+	<td width="100">QB</td>
+	<td width="100">CAR</td>
+	<td width="100">389.08</td>
+	</tr>
+	<tr>
+	<td width="200"><strong>Tom Brady</strong></td>
+	<td width="100">QB</td>
+	<td width="100">NE</td>
+	<td width="100">343.7</td>
+	</tr>
+	<tr>
+	<td width="200"><strong>Russell Wilson</strong></td>
+	<td width="100">QB</td>
+	<td width="100">SEA</td>
+	<td width="100">336.26</td>
+	</tr>
+	<tr>
+	<td width="200"><strong>Devonta Freeman</strong></td>
+	<td width="100">RB</td>
+	<td width="100">ATL</td>
+	<td width="100">243.4</td>
+	</tr>
+	<tr>
+	<td width="200"><strong>Antonio Brown</strong></td>
+	<td width="100">WR</td>
+	<td width="100">PIT</td>
+	<td width="100">242.2</td>
+	</tr>
+	<tr>
+	<td width="200"><strong>Julio Jones</strong></td>
+	<td width="100">WR</td>
+	<td width="100">ATL</td>
+	<td width="100">239.1</td>
+	</tr>
+	</tbody>
+	</table>
+	&nbsp;
+
+	We can see the information of each player. For example, Russel Wilson, the Quarterback(QB) from my favorite team Seattle Seahawks (SEA), has fantasy points of 336.26. In order to get his points in, it is natural to create a parameter to hold Russel Wilson’s point.
+
+	<a href="/Images/121/Screenshot_13.png"><img class="aligncenter wp-image-4886 size-medium" src="/Images/121/Screenshot_13.png" alt="Screenshot_13" width="600" height="400" /></a>
+
+	And I also want to have fantasy points for each of the players, so I will create a list of parameters to hold each value.
+
+	<a href="/Images/121/Screenshot_14.png"><img class="size-full wp-image-4888 aligncenter" src="/Images/121/Screenshot_14.png" alt="Screenshot_14" width="600" height="400" /></a>
+
+	It will soon become too cumbersome to continue because there are hundreds players in the draft. We don’t want to repeat the same thing for each of the player. So here Set comes. Let’s create a set, called <strong>Players</strong>. It contains all the players I will consider in the draft. And I put <strong>p</strong> as index. An Index, or sometimes called running index, can refer to any element in the set.
+
+	<a href="/Images/121/Screenshot_15.png"><img class="aligncenter" src="/Images/121/Screenshot_15.png" alt="Screenshot_15" width="600" height="400" align="center" /></a>
+
+	Then I create a parameter called <strong>FantasyPoints(p)</strong>, "(p)" means FantasyPoints has index domain over p, representing fantasy points for each player.
+
+	<a href="/Images/121/Screenshot_16.png"><img class="aligncenter" src="/Images/121/Screenshot_16.png" alt="Screenshot_16" width="600" height="400" align="center" /></a>
+
+	With Set Players and Parameter FantasyPoints(p), we can easily hold the fantasy points for all players.
+
+	Next I want to have each player’s position in my model. In our sample data, we see Quarterbacks(QB), Running Backs(RB) and Wide Receivers(WR). So I will create a set, called <strong>Positions</strong>, with index <strong>ps</strong>.
+
+	<a href="/Images/121/Screenshot_17.png"><img class="aligncenter size-full wp-image-4891" src="/Images/121/Screenshot_17.png" alt="Screenshot_17" width="600" height="400" align="center" /></a>
+
+	&nbsp;
+
+	Each of the player is at one of the positions. In order to hold such information in AIMMS, there are two alternative ways
+	<ul>
+		<li>Using parameter mapping a player and his position</li>
+		<li>Using element parameter containing value of positions for each player</li>
+	</ul>
+	Let’s implement both. I name the parameter <strong>PlayerAtPosition(p,ps)</strong>, and specify <strong>binary</strong> in the range.
+
+	&nbsp;
+
+	<a href="/Images/121/Screenshot_20.png"><img class="aligncenter size-full wp-image-4892" src="/Images/121/Screenshot_20.png" alt="Screenshot_20" width="600" height="400" align="center" /></a>
+
+	And we will assign value 1 (box checked) if a player palys the position.
+
+	<a href="/Images/121/Screenshot_21.png"><img class="aligncenter size-full wp-image-4893" src="/Images/121/Screenshot_21.png" alt="Screenshot_21" width="600" height="400" /></a>
+
+	Now Parameter <strong>PlayerAtPosition</strong> use numerical value (0/1) to indicate if a player belongs to position. Next we will create an element parameter <strong>PositionOfPlayer</strong> to take value of the positions for each player.
+
+	<a href="/Images/121/Screenshot_22.png"><img class="aligncenter size-full wp-image-4894" src="/Images/121/Screenshot_22.png" alt="Screenshot_22" width="600" height="400" /></a>
+
+	A mandatory attribute of element parameter is the “<strong>Range</strong>”. It must be a set name in the model, because element parameter is defined as an element of a set. And you probably have already noticed, that parameter has "Range" attribute as well, but it is not mandatory to fill in. It is because Parameter in AIMMS has default range, which is the set of real numbers. And you can overwrite the range to a subset of real number, for example, binary for Parameter PlayerAtPosition as we did earlier.
+
+	Now we fill in the value of PositionOfPlayer.
+
+	<a href="/Images/121/Screenshot_23.png"><img class="aligncenter size-full wp-image-4895" src="/Images/121/Screenshot_23.png" alt="Screenshot_23" width="600" height="400" /></a>
+
+	&nbsp;
+
+	&nbsp;
+
+	You may wonder which option is better. It usually denpends on multiple things, for example, input file format, how this parameter or element parameter will be used in the model, and your modeling preferences. In general, making it an element parameter is easier for reading from Excel or Database, since there is usually no extra numerical column for the mapping value. Parameter, at the other hand, can be directly used as domain condition, which might reduce some computational run time. For example, if we want to calculate the average fantasy points for all Quarterbacks. I can have either
+
+	average(p|PlayerAtPosition(p, <em>'QB'</em>),FantasyPoints(p))
+
+	or
+
+	average(p|PositionOfPlayer(p) = <em>'QB'</em>,FantasyPoints(p))
+
+	When implementing with element parameter, there is an extra equal = operator involved (PositionOfPlayer(p) = <em>'QB'</em>). In this case, it is not a big deal, as the operator is fast, but for a large model, you would want to avoid doing the same operating again and again, by transfering the element parameter to parameter first, and using the parameter elsewhere. This can be done by the following statement.
+
+	PlayerAtPosition(p, ps) := (PositionOfPlayer(p)=ps);
+
+	Or in another case, you already have the Parameter but you would like to create the element parameter.
+
+	PositionOfPlayer(p) := First(ps|PlayerAtPosition(p, ps));
+
+	Here AIMMS operator "<strong>First</strong>" is used to find the first position the player plays at. This operator depends on the assumption that each player only plays at one position.  In another situation, where I want to know all the Quarterback players, statement First(p|PlayerAtPosition(p, ps)) won’t help me since there are more than one player plays Quarterback. In this case I need create a set <strong>AllQuarterbacks</strong>, make it a <strong>subset</strong> of Players, <strong>index</strong> allqb and define it as the following.
+
+	<a href="/Images/121/Screenshot_26.png"><img class="aligncenter size-full wp-image-4897" src="/Images/121/Screenshot_26.png" alt="Screenshot_26" width="600" height="400" /></a>
+
+	With this definition, AIMMS automatically pops the data.
+
+	<a href="/Images/121/Screenshot_27.png"><img class="aligncenter size-full wp-image-4898" src="/Images/121/Screenshot_27.png" alt="Screenshot_27" width="600" height="400" /></a>
+
+	&nbsp;
+
+	With this subset and its index allqb, it will be easier if I want to calculate the average fantasy points of all Quarterbacks:
+
+	average(allqb,FantasyPoints(allqb))
+
+	We briefly covered set, index, subset, element parameter and mapping in this post. AIMMS also supports set operations such as intersection and union, and there are other usage of set too. You can refer to AIMMS Language Reference for more information.
+
+	Thank you for reading this blog, and here is a video on some fun facts about set. What do you think?
+
+	&nbsp;
+
+	[embed]https://www.youtube.com/watch?v=UPA3bwVVzGI[/embed]
+
