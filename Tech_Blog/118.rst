@@ -1,9 +1,9 @@
 .. IMAGES
 .. </Images/118/...>
 
-|Ps| .. image:: /Images/118/Ps.png
-|P| .. image:: /Images/118/P.png
-|database| .. image:: /Images/118/database.png
+.. |Ps| image:: /Images/118/Ps.png
+.. |P| image:: /Images/118/P.png
+.. |database| image:: /Images/118/database.png
 
 
 How to link AIMMS with an SQLite database (in Windows 10)
@@ -21,7 +21,7 @@ Say you have a wonderful AIMMS application, that needs to link a Database Table 
 ---------------------------------------
 SQLite driver
 ^^^^^^^^^^^^^^^^^^^^^^^^
-To install SQLite ODBC driver, please refer to the following website, and download <em>sqliteodbc.exe</em> or <em>sqliteodbc_w64.exe</em>, depending on your AIMMS’ configuration (and NOT your computer’s configuration):
+To install SQLite ODBC driver, please refer to the following website, and download `sqliteodbc.exe` or `sqliteodbc_w64.exe`, depending on your AIMMS’ configuration (and NOT your computer’s configuration):
 
 http://www.ch-werner.de/sqliteodbc/
 
@@ -107,7 +107,7 @@ Congrats! You may go directly to the *Fill out AIMMS Database Table identifier* 
 A connection string is an AIMMS string parameter |Ps| that you could fill out thanks to a procedure. This procedure should use the `SQLCreateConnectionString` function. Let’s build that connection string as follows :
 
 * Create an AIMMS string parameter |Ps| named `ConnectionString`.
-* Check, Commit and Close.</li>
+* Check, Commit and Close.
 * Create a new procedure |P| named `WriteTheConnectionString` (the name is not important)
 * Double click on procedure’s icon and write the following code in its body field:
 
@@ -133,6 +133,7 @@ Fill out an AIMMS Database Table identifier
 Let’s start a super simple new AIMMS project, containing only one Database Table  named “Table1” :
 
 .. image:: /Images/118/10aimms.png
+	:scale: 50
 
 .. raw:: html
 
