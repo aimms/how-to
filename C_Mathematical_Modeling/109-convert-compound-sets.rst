@@ -55,7 +55,7 @@ To identify compound sets in your application,
 
 #. The procedure fills the sets ``dcsu::sCompoundRootSets``, ``dcsu::sCompoundSets``, and ``dcsu::sCompoundSetsThatAreNotRootSets``. Using these results, you may continue to the conversion procedure below.
 
-|
+
 .. _Section-Conversion-Procedure:
 
 Replacing compound sets with set mapping
@@ -408,8 +408,7 @@ Glossary of Terms Used
 
         In the conversion process, compound data identifier ``P`` has compound indexes in its index domain, while its shadow ``P_Shadow`` has the corresponding set mapping indexes in its index domain. This is an **atomic shadow identifier** as it has only atomic indexes, some of which are set mapping indexes.
 
-.. The ``dcsu`` library caches atomic shadow parameters in a runtime library while the compound data identifiers are transformed to atomic data identifiers.
-Additionally, there are temporary procedures in that runtime library to copy the data from the compound data identifiers to the atomic shadow parameters and later from the atomic shadow parameters to the transformed atomic data identifiers.
+.. The ``dcsu`` library caches atomic shadow parameters in a runtime library while the compound data identifiers are transformed to atomic data identifiers. Additionally, there are temporary procedures in that runtime library to copy the data from the compound data identifiers to the atomic shadow parameters and later from the atomic shadow parameters to the transformed atomic data identifiers.
 
 .. CHRIS - Does the explanation about the runtime library help the user with any part of the process? Otherwise let's remove it.
 

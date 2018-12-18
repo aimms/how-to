@@ -17,4 +17,7 @@ Mathematical Modeling
     
     109-deprecate-compound-sets-overview
     109-convert-compound-sets
-
+    138-ROGO
+    137-Small-Rostering
+    142-Narrowing-Time-Windows
+    140-Scheduling-Project-Planning

@@ -78,8 +78,7 @@ Solution:
 
     Ensure that you are connected to your university network. If working remotely, connect to a VPN service provided by your university (if available).
 
-.. note::
-If an IP subnet error occurs, see :ref:`ref-ip-subnet` below.
+.. note:: If an IP subnet error occurs, see :ref:`ref-ip-subnet` below.
 
 .. End Part 2
 

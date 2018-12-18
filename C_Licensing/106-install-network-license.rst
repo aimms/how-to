@@ -13,9 +13,10 @@
     :scale: 100 %
 .. |license-config-done| image:: /Images/106-install-network-license/license-config-done.png
     :scale: 100 %
-.. |service-running| image:: /Images/106-install-network-license/service-running.png
+.. |rename-profile| image:: /Images/106-install-network-license/rename-profile.png
     :scale: 100 %
 
+    
 
 .. BEGIN CONTENT
 

@@ -31,7 +31,7 @@ Thus I obtained a 95 line log file ``log\cplex 12.8.sta``.
 For the sake of brevity, I only show the first and last five lines here.
 
 .. literalinclude:: ../Resources/C_Solvers/BasicLogging/1_CPLEX_12.8.sta 
-    :name: cplex 12.8.sta
+    :name: cplex 12.8.sta (extended)
     :language: none
     :linenos: 
     :lines: 2-6
@@ -39,7 +39,7 @@ For the sake of brevity, I only show the first and last five lines here.
 Last five lines:
     
 .. literalinclude:: ../Resources/C_Solvers/BasicLogging/1_CPLEX_12.8.sta 
-    :name: cplex 12.8.sta
+    :name: cplex 12.8.sta (extended continued)
     :language: none
     :linenos: 
     :lineno-start: 90

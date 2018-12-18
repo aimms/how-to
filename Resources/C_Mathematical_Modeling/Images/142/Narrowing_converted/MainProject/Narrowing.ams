@@ -1,0 +1,133 @@
+## ams_version=1.0
+
+Model Narrowing {
+    DeclarationSection Interface_declarations {
+        ElementParameter LBlack {
+            IndexDomain: (j);
+            Range: TimeLine;
+            Definition: first(Timeline);
+        }
+        Parameter LBackLen {
+            IndexDomain: (j);
+            Definition: ord(StartTime(j))-1;
+        }
+        ElementParameter RBlack {
+            IndexDomain: (j);
+            Range: TimeLine;
+            Definition: EndTime(j);
+        }
+        Parameter RBlackLen {
+            IndexDomain: (j);
+            Unit: day;
+            Definition: last(TimeLine)-RBlack(j);
+        }
+        ElementParameter ACase {
+            Range: AllCases;
+        }
+    }
+    Quantity SI_Time_Duration {
+        BaseUnit: day;
+        Comment: "Expresses the value for the duration of periods.";
+    }
+    Calendar TimeLine {
+        Index: tl;
+        Unit: day;
+        BeginDate: "2011-03-31";
+        EndDate: "2011-06-30";
+        TimeslotFormat: "%c%y-%m-%d";
+    }
+    Set Jobs {
+        Index: j, k;
+        Definition: ElementRange(1,10,prefix:"Job",fill:1);
+    }
+    Set OrderedJobs {
+        SubsetOf: Jobs;
+        Index: oj;
+        OrderBy: Act(j).Begin;
+        Definition: Jobs;
+    }
+    ElementParameter StartTime {
+        IndexDomain: (j);
+        Range: TimeLine;
+        Definition: Element(TimeLine,2 + 6 * (ord(j)-1));
+    }
+    ElementParameter EndTime {
+        IndexDomain: (j);
+        Range: TimeLine;
+        Definition: Element(TimeLine,card(TimeLine)+2-3 * ord(j));
+    }
+    Parameter actLen {
+        IndexDomain: (j);
+        Unit: day;
+        Definition: (Ceil(1.3*(11-ord(j))))[day];
+    }
+    Activity Act {
+        IndexDomain: (j);
+        ScheduleDomain: {
+            {StartTime(j)..EndTime(j)}
+        }
+        Length: actLen(j);
+    }
+    Variable Obj {
+        Range: free;
+        Unit: day;
+        Definition: max(j,Act.end(j)-first(TimeLine));
+        Comment: "The \'-first(TimeLine)\' is needed to change the data type from element to numeric, which can actually be minimized";
+    }
+    Resource res {
+        Usage: sequential;
+        ScheduleDomain: TimeLine;
+        Activities: Act(j);
+        Transition: (act(j), act(k)) : JobChgOver(j, k);
+    }
+    MathematicalProgram mySched {
+        Objective: Obj;
+        Direction: minimize;
+    }
+    Parameter JobChgOver {
+        IndexDomain: (j,k);
+        Unit: day;
+        Definition: (ceil( abs(ord(j) - ord(k)) / 2 ))[day];
+    }
+    Parameter ChgOverUsed {
+        IndexDomain: (oj);
+        Unit: day;
+        Definition: JobChgOver(oj,oj+1);
+    }
+    ElementParameter ChgOverStart {
+        IndexDomain: (j);
+        Range: TimeLine;
+        Definition: Act.End(j);
+    }
+    Procedure InitializeActivities {
+        Body: {
+            act.Begin(j) := StartTime(j) ;
+            act.end(j) := StartTime(j) + actLen(j) ;
+        }
+    }
+    Procedure MainInitialization {
+        Body: {
+            InitializeActivities;
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            if not IsRunningAsViewer then
+            
+            	solve mySched where time_limit := 60 /* seconds */ ;
+            
+            else
+            
+            	DialogMessage("In AIMMS Viewer, the SOLVE statement is disabled. Therefore the output data is read from a case");
+            	CaseFind("Narrowing schedule",ACase);
+            	CaseLoadCurrent(ACase,0);
+            
+            endif;
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1 ;
+        }
+    }
+}

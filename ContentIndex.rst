@@ -75,6 +75,12 @@
                 <p>PRO and Cloud platforms</p>
             </div>
         </a>
+        <a href="C_Connectivity/index.html">
+            <div class="box">
+                <h1 align="center">Connectivity</h1>
+                <p>Connecting to other sources</p>
+            </div>
+        </a>
         <a href="C_Mathematical_Modeling/index.html">
             <div class="box">
                 <h1 align="center">Modeling</h1>
@@ -112,6 +118,7 @@ Table Of Contents
 
    C_Language/index
    C_Deployment/index
+   C_Connectivity/index
    C_Mathematical_Modeling/index
    C_Solvers/index
    C_UI/index

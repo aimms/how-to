@@ -66,7 +66,7 @@ This conversion procedure is designed to make minimal changes to your applicatio
 
 * Producing more predictable behavior
 
-Read **AIMMS Knowledge:** :ref:`109-convert-compound-sets` for the procedure to replace compound sets in your model.
+Read **AIMMS Knowledge:** :doc:`109-convert-compound-sets` for the procedure to replace compound sets in your model.
 
 
 .. _Section-When:
