@@ -8,7 +8,6 @@
 .. image:: ../Resources/C_Language/Images/131/mathematics-327488_150.jpg
 
 
-
 A mathematical formula is considered data within an application when it is read in as a string during the application's runtime, and subsequently used in the construction of selected assignments and constraints. The concept "Formulas as Data" can be applied to several optimization apps, for instance those that deal with "Blending on Specification" and "Asset Management." In these types of applications, the benefit of the end-users is that they do not have to share these formulas with anyone else, including the developers of the apps. For such apps, good formulas are expensive to develop and having good formulas provides a competitive edge to these end-users. In AIMMS, formulas can be used in the following way:
 
 * String parameters - a formula is a sequence of characters, and such sequences can be stored and manipulated via string parameters. Such manipulation is executed at AIMMS run time.
@@ -76,7 +75,7 @@ We need to:
     
         e_drawProc := me::Create( "drawProc", 'procedure', e_lib );
         ok := me::SetAttribute( e_drawProc, 'body',
-                  "Y(xp) := myFormula( X(xp) );n" );
+                  "Y(xp) := myFormula( X(xp) );\\n" );
 
 The procedure to create the curve is now as follows:
 
@@ -101,13 +100,10 @@ Here ``boundedVariable`` is declared in the main model. Because it is declared i
 
     Formulas as Data startup
 
-
-
 I invite you to play with this AIMMS application, changing the formula, argument and bounds. In addition, observe the curve and the result for ``boundedVariable`` after pressing the buttons labeled ``"Draw"`` and ``"Solve"``.  
 
 :download:`AIMMS project download <../Resources/C_Language/Images/131/FormulasAsData.zip>` 
 
-The AIMMS application mentioned above requires AIMMS 4.0 or higher to run. 
 
 Summary
 -------
@@ -117,7 +113,7 @@ AIMMS combines three features: string parameters, macros, and Model Edit Functio
 Related posts
 -------------
 
-This blog post is part of the series on Model Edit Functions. Other blog posts in this series can be found here:
+This article is part of the series on Model Edit Functions. Other articles in this series can be found here:
 
 
 #. :doc:`146-value-dynamic-identifier`

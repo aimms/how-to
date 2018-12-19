@@ -6,7 +6,7 @@
                 :scale: 10 %
                 :target: https://aimms.com/
 
-Deployment
+Connectivity
 ========================
 
 .. toctree::

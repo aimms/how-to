@@ -3,7 +3,9 @@
 
 .. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
 
-.. image:: ../Resources/C_Language/Images/121/2000px-Set.svg_.png
+.. sidebar:: The Egyptian god Set
+
+    .. image:: ../Resources/C_Language/Images/121/2000px-Set.svg_.png
 
 Do you know Set is a god of the desert, storms, disorder, violence and foreigners in ancient Egyptian? So it is totally possible that his disturbance power influenced mathematical world, which is considered employing set theory as foundation system. From 5th century Greek in west India in the east to today's modern society, there are struggles, debates, paradoxes around set theories. You can find lots of readings about them, or if reading history sounds boring, there will be a little fun video to watch at the end of this blog.
 
