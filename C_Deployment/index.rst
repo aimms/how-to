@@ -11,6 +11,8 @@ Deployment
 
 .. toctree::
 
+    151-version-control-aimmspack-backup
+    128-Intellectual-Property
     Deploy_DataServerComm_1_Publish
     Deploy_DataServerComm_2_Develop
     Deploy_DataServerComm_3_RemoveVeil
@@ -27,5 +29,4 @@ Deployment
     ReceiveMessages
     how to work with csv files
     114-execute
-    151-version-control-aimmspack-backup
-    128-Intellectual-Property
+    

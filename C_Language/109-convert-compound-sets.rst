@@ -12,7 +12,7 @@ Preparing for the Deprecation of Compound Sets
     
 Summary
 -------
-AIMMS will deprecate compound sets **after January 1, 2020**.
+AIMMS will deprecate compound sets **soon after January 1, 2020**.
 
 The functionality of compound sets can be achieved with a :term:`set mapping<Set mapping>`. 
 
@@ -25,8 +25,6 @@ This document provides a process to replace the compound sets with a set mapping
 * :ref:`Section-Terminology`
 
 For an overview of the rationale and timeline for deprecating compound sets, read **AIMMS Knowledge:** :doc:`109-deprecate-compound-sets-overview`
-
-.. OVERVIEW WOULD GO HERE
 
 .. _Section-Identify-Compound-Set: 
 
@@ -61,18 +59,25 @@ To identify compound sets in your application,
 Replacing compound sets with set mapping
 ---------------------------------------------------
 
+.. sidebar:: Background: Idea behind conversion procedure
+     
+    In the conversion process, :term:`compound data` identifier ``P`` has compound indexes in its index domain, while its shadow ``P_Shadow`` has the corresponding :term:`set mapping` indexes in its index domain. This is an **atomic shadow identifier** as it has only :term:`atomic index` es, some of which are set mapping indexes.
+
+    The ``dcsu`` library caches atomic :term:`shadow parameter` s in a runtime library while the compound data identifiers are transformed to atomic data identifiers. Additionally, there are temporary procedures in that runtime library to copy the data from the compound data identifiers to the atomic shadow parameters and later from the atomic shadow parameters to the transformed atomic data identifiers.
+
 This conversion procedure explains how to convert compound sets to set mappings in your application. This ensures that your model will function in the same way but without compound sets.
 
-.. CHRIS - does this note about screen definitions help with the process? If not let's remove it.
+.. note::
+    The conversion procedure contains a multitude of steps, and you may wonder whether this is necessary?
 
-.. note
     To determine the **scope** that this conversion procedure needs to handle, 
     note that compound data is present in AIMMS Cases and compound data identifiers 
-    are present in the **AIMMS Screen definitions** of that AIMMS application. 
+    are present in both WinUI and WebUI pages of that AIMMS application. 
     AIMMS cases cannot be edited manually.
-    The format of screen definitions is designed for fast serialization instead of for human editing. 
+    The format of both WinUI and WebUI pages are designed for fast serialization instead of for human editing. 
     Obviously, this conversion procedure should not overlook the need to adapt the model itself.
-
+    
+    The multitude of steps are too gradually transform the information in cases, pages, and model.
 
 .. topic:: Overview of the conversion procedure
 
@@ -107,17 +112,18 @@ This conversion procedure explains how to convert compound sets to set mappings 
 .. _Step_conversion_Backup:
 
 Step 1: Create backups of your data
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++
 
-Create backups of your application and cases before beginning this procedure. 
+The importance of creating backups before starting maintenance on your projects cannot be overemphasized.
 
-You can create a Data Backup from the *File > Data Backups* menu, or simply save a copy of the entire project folder.
+#. Simply create a physical copy of the project and cases and store this in a safe place.
 
+#. Consider putting the project in a Source Code Management system, if you haven't done so already.  
 
 .. _Step_conversion_use_Utility:
 
 Step 2: Add library DeprecateCompoundSetUtilities
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The :download:`AIMMS project download <../Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` provides an example app and utility library ``DeprecateCompoundSetUtilities``. 
 
@@ -134,35 +140,35 @@ The definition (if any) of a compound set must be suitable for a relation as wel
 
 Consider the following example:
 
-    .. code-block:: aimms
+.. code-block:: aimms
 
-        Set C {
-            SubsetOf: (S, T, U);
-            Tags: (TS, TT, TU);
-            Index: h ;
-            Definition: {
-                { (i,j,k) | pAllowedElementsC(i,j,k) = 1 }
-            }
+    Set C {
+        SubsetOf: (S, T, U);
+        Tags: (TS, TT, TU);
+        Index: h ;
+        Definition: {
+            { (i,j,k) | pAllowedElementsC(i,j,k) = 1 }
         }
-        Set D {
-            SubsetOf: C;
-            Index: g ;
-            definition: {
-                { h | pAllowedElementsD(h.TS, h.TT, h.TU) = 1 }
-            }
+    }
+    Set D {
+        SubsetOf: C;
+        Index: g ;
+        definition: {
+            { h | pAllowedElementsD(h.TS, h.TT, h.TU) = 1 }
         }
+    }
  
 In the example above, the definition of ``C`` can also be used for a relation, :math:`R`, that is a subset of the Cartesian product :math:`S \times T \times U`. The definition of ``D`` cannot be used for a relation, so it must be rewritten:
 
-    .. code-block:: aimms
+.. code-block:: aimms
 
-        Set D {
-            SubsetOf: C;
-            Index: g ;
-            definition: {
-                { (i,j,k) | pAllowedElementsC(i,j,k) = 1 and pAllowedElementsD(i, j, k) = 1 }
-            }
+    Set D {
+        SubsetOf: C;
+        Index: g ;
+        definition: {
+            { (i,j,k) | pAllowedElementsC(i,j,k) = 1 and pAllowedElementsD(i, j, k) = 1 }
         }
+    }
  
 The new definition of ``D`` is now based on tuples instead of individual elements and can be used for a relation.
 
@@ -178,8 +184,6 @@ Open the WinUI page: ``Deprecate Compound Set Control Page`` of the library ``De
 
 Sections named ``<prefix> set mapping declarations`` appear in each library/module where compound sets are defined. These sections are created in the runtime library ``CompoundSetMappingRuntimeLibrary`` as runtime libraries are the only place where a library or main model may create new AIMMS code. 
 
-.. CHRIS - Should the 'Delete Set Mapping Declarations' button be mentioned?
-
 The model explorer should now look something like this:
 
 |SetMappingDeclarations|
@@ -194,7 +198,7 @@ Perform the following sequence for **each** ``set mapping declarations`` section
 
 .. caution:: Do not Copy/Paste the section ``Set Mapping Declarations`` of the runtime library! When you Copy/Paste, the copied section still contains references to the runtime indexes. This causes compilation errors upon restart.
 
-Now is a good time to save the project, exit AIMMS, and create a backup copy of your project.
+Now is a good time to save the project, exit AIMMS, and create another backup copy of your project.
 
 
 .. _Step_Conversion_Copy_Input_Cases:
@@ -221,7 +225,6 @@ You can convert multiple cases contained in one folder using the *Folder* option
 Step 6: Adapt model to remove compound sets
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. CHRIS - is this a good place to mention the button 'show attribute window of defined compound sets'?
 
 This section shows how to convert models using compound sets to use the set mappings created in :ref:`step 3 <Step_conversion_Create_Set_Mapping>` above.
 
@@ -251,25 +254,24 @@ Replace use of tags
 ^^^^^^^^^^^^^^^^^^^
 The following Parameter contains a tag referencing a compound set:
 
-    .. code-block:: aimms
+.. code-block:: aimms
 
-        Parameter p1 {
-            IndexDomain: h;
-            Definition: A(h.ts);
-        }
+    Parameter p1 {
+        IndexDomain: h;
+        Definition: A(h.ts);
+    }
         
 AIMMS displays the error message: ``The "TS" is not a tag that can be associated with index "h".`` 
 
 You can replace it with a tag referencing a set mapping:
 
-    .. code-block:: aimms
+.. code-block:: aimms
 
-        Parameter p1 {
-            IndexDomain: h;
-            Definition: A(epTag_C_TS(h));
-        }
+    Parameter p1 {
+        IndexDomain: h;
+        Definition: A(epTag_C_TS(h));
+    }
 
-.. CHRIS - can we conclude here, "This no longer contains compound data and is allowed"(?)        
 
 
 Replace atomic indexes with set mapping index
@@ -277,50 +279,52 @@ Replace atomic indexes with set mapping index
 
 Consider the declaration of compound data parameter ``P``:
 
-    .. code-block:: aimms
+.. code-block:: aimms
 
-        Parameter P {
-            IndexDomain: h;
-        }
-
-.. CHRIS - I don't follow here. Which part is not allowed, and why?
+    Parameter P {
+        IndexDomain: h;
+    }
 
 Then using ``P`` is not allowed in an expression such as:
 
-    .. code-block:: aimms
+.. code-block:: aimms
 
-        Parameter PS {
-            IndexDomain: (i,j,k);
-            Definition: p(i,j,k);
-        }
+    Parameter PS {
+        IndexDomain: (i,j,k);
+        Definition: p(i,j,k);
+    }
+        
+It is not allowed, as the automatic mapping between ``h`` and ``(i,j,k)`` is no longer supported.
 
 AIMMS displays a compilation error ``The number of arguments in the parameter "P" is not correct.`` 
 
 You can replace this definition by: 
         
-    .. code-block:: aimms
+.. code-block:: aimms
 
-        Parameter PS {
-            IndexDomain: (i,j,k);
-            Definition: sum(h|(i,j,k,h) in sMappingSet_C_Relation,p(h));
-        }
+    Parameter PS {
+        IndexDomain: (i,j,k);
+        Definition: sum(h|(i,j,k,h) in sMappingSet_C_Relation,p(h));
+    }
 
 Replace the function Tuple
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+The function ```Tuple`` is a predeclared function to create an element in a compound set from elements in the atomic sets that together form the domain of that compound set.
+
 Consider the function: 
 
-    .. code-block:: aimms
-    
-        epC := Tuple( epS, epT, epU );
-        
-This should be replaced by:
+.. code-block:: aimms
 
-    .. code-block:: aimms
-    
-        epC := first( iSMI_C | ( epS, epT, epU, iSMI_C ) in sSetMappingRelation_C );
+    epC := Tuple( epS, epT, epU );
         
-.. CHRIS - this one needs some commentary to explain what is replaced with what.
+Here ``epS``, ``epT``, and ``epU`` contain the elements, and Tuple will create a corresponding element in the compound set ``C``, where ``C`` is the range of the element parameter ``epC``.
+        
+With the deprecation of compound sets, ``Tuple`` is no longer supported , and this should be replaced by:
+
+.. code-block:: aimms
+
+    epC := first( iSMI_C | ( epS, epT, epU, iSMI_C ) in sSetMappingRelation_C );
         
         
 .. _Step_Conversion_Move_Indexes:
@@ -406,18 +410,10 @@ Glossary of Terms Used
     Shadow parameter
         Consider a parameter ``A``, then a **shadow parameter**, say ``A_Shadow``, is a parameter with the same element values. 
 
-        In the conversion process, compound data identifier ``P`` has compound indexes in its index domain, while its shadow ``P_Shadow`` has the corresponding set mapping indexes in its index domain. This is an **atomic shadow identifier** as it has only atomic indexes, some of which are set mapping indexes.
 
-.. The ``dcsu`` library caches atomic shadow parameters in a runtime library while the compound data identifiers are transformed to atomic data identifiers. Additionally, there are temporary procedures in that runtime library to copy the data from the compound data identifiers to the atomic shadow parameters and later from the atomic shadow parameters to the transformed atomic data identifiers.
-
-.. CHRIS - Does the explanation about the runtime library help the user with any part of the process? Otherwise let's remove it.
-
-.. CHRIS - Please check the definition of "Shadow case" (I made it up).
 
 .. topic:: Further support
 
     For further information on the deprecation of compound sets, contact `AIMMS Support Team <mailto:support@aimms.com>`_.
-
-.. END CONTENT
 
 .. include:: ../includes/form.def

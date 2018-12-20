@@ -15,8 +15,6 @@ Mathematical Modeling
 
 .. toctree::
     
-    109-deprecate-compound-sets-overview
-    109-convert-compound-sets
     138-ROGO
     137-Small-Rostering
     142-Narrowing-Time-Windows
