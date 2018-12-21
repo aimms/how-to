@@ -1,0 +1,153 @@
+## ams_version=1.0
+
+LibraryModule SubsetBasedColoring {
+    Prefix: sbc;
+    Interface: PublicSection;
+    Section PublicSection {
+        Set s_Palets {
+            Index: i_Palet;
+            Definition: data { Default19, Qualitative11, Qualitative7 };
+        }
+        Set s_Widgets {
+            Index: i_widget;
+            Definition: data { Linechart };
+        }
+        Parameter p_NoColorsPerPalet {
+            IndexDomain: i_Palet;
+            Definition: max( i_ColorNo | sp_Colors(i_ColorNo, i_Palet), i_colorNo );
+        }
+        Procedure pr_GenerateCSSFile {
+            Arguments: (sp_Filename,sp_WidgetName,ep_WidgetType,ep_Palet);
+            Body: {
+                Block ! Sanity checking
+                	if not sp_Filename then
+                		raise error "No output CSS filename" ;
+                	endif ;
+                
+                	if not sp_WidgetName then
+                		raise error "No widget to target" ;
+                	endif ;
+                
+                	if not ep_WidgetType then
+                		raise error "No Widget type to target" ;
+                	endif ;
+                
+                	if not ep_Palet then
+                		raise error "No palet to use" ;
+                	endif ;
+                
+                	sp_CSS_FolderName := ".\\MainProject\\WebUI\\resources\\css" ; 
+                	if not directoryExists( sp_CSS_FolderName ) then
+                		raise error "Output will be generated in folder " + sp_CSS_FolderName + "; please make sure it exists." ;
+                	endif ;
+                
+                endblock ;
+                
+                sp_ActualFilename := sp_CSS_FolderName + "\\" + sp_Filename + ".css" ;
+                put f_outputFile ;
+                for i_ColorNo | sp_Colors( i_ColorNo, ep_Palet ) do
+                	if ep_WidgetType = 'Linechart' then
+                		! Color both lines and dots the same.
+                		!put ".widgetdiv .aimms-widget[data-widget\\.uri=" + sp_WidgetName+"] .linechart path.annotation-sbc-color"+i_ColorNo+" {", / ;
+                		put ".widgetdiv .aimms-widget[data-widget\\.uri=" + sp_WidgetName+"] .annotation-sbc-color" + i_ColorNo + " {", / ;
+                                put "   stroke: " + sp_Colors( i_ColorNo, ep_Palet ), " !important;", / ;
+                                put "   fill: " + sp_Colors( i_ColorNo, ep_Palet ), " !important;", / ;
+                                put "}", // ;
+                	else
+                		raise error "Widget type " + ep_WidgetType + " not yet supported." ;
+                	endif ;
+                endfor ;
+                putclose ;
+            }
+            DeclarationSection Local_decls {
+                StringParameter sp_CSS_FolderName;
+                StringParameter sp_ActualFilename;
+                File f_outputFile {
+                    Name: sp_ActualFilename;
+                    Device: Disk;
+                    Mode: replace;
+                }
+            }
+            DeclarationSection Arg_decls {
+                StringParameter sp_Filename {
+                    Property: Input;
+                }
+                StringParameter sp_WidgetName {
+                    Property: Input;
+                }
+                ElementParameter ep_WidgetType {
+                    Range: s_Widgets;
+                    Property: Input;
+                }
+                ElementParameter ep_Palet {
+                    Range: s_Palets;
+                    Property: Input;
+                }
+            }
+        }
+    }
+    Section PrivateSection {
+        Set s_ColorNumbers {
+            SubsetOf: Integers;
+            Index: i_ColorNo;
+            Definition: ElementRange(1,19);
+        }
+        StringParameter sp_Colors {
+            IndexDomain: (i_ColorNo, i_Palet);
+            Definition: {
+                data table
+                     Default19    Qualitative11    Qualitative7   
+                 1   "#726fb0"    "#8dd3c7"        "#a6cee3"         
+                 2   "#808dc2"    "#ffffb3"        "#1f78b4"         
+                 3   "#6096ce"    "#bebada"        "#b2df8a"         
+                 4   "#5daad7"    "#fb8072"        "#33a02c"         
+                 5   "#54bbbc"    "#80b1d3"        "#fb9a99"         
+                 6   "#a3c67b"    "#fdb462"        "#e31a1c"         
+                 7   "#93c262"    "#b3de69"        "#fdbf6f"         
+                 8   "#82be4a"    "#fccde5"                 
+                 9   "#a5a53b"    "#d9d9d9"                 
+                10   "#f59651"    "#bc80bd"                 
+                11   "#f38357"    "#ccebc5"                 
+                12   "#f0725e"             
+                13   "#ef6265"             
+                14   "#ed7d89"             
+                15   "#ea6f8e"             
+                16   "#e96193"             
+                17   "#d964a4"             
+                18   "#a36396"             
+                19   "#a06ca5"             
+                ;
+            }
+        }
+        Procedure LibraryInitialization {
+            Comment: "Add initialization statements here that do not require any other library being initialized already.";
+        }
+        Procedure PostLibraryInitialization {
+            Comment: {
+                "Add initialization statements here that require another library to be initialized already,
+                or add statements that require the Data Management module to be initialized."
+            }
+        }
+        Procedure PreLibraryTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that require all other libraries to be still alive.
+                Return 1 if you allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence."
+            }
+        }
+        Procedure LibraryTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that do not require other libraries to be still alive.
+                Return 1 to allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence.
+                It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+            }
+        }
+    }
+}
