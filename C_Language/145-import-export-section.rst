@@ -1,7 +1,6 @@
 ﻿Exporting a section and importing it in another AIMMS project
 =============================================================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
 
 .. sidebar:: Re-using AIMMS source code.
 
