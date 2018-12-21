@@ -8,6 +8,13 @@ Change Line Styles in Line Charts
 
 In Line Chart widgets for AIMMS WebUI, default styles are applied to data in your chart. You can customize each line separately using CSS. 
 
+The general rule is shown in the example below.
+
+.. image:: /Images/49-webui-css-color-for-line-chart/css-format.png
+
+Use as many of the selectors (such as ``.tag-barchart``, ``.point``, or ``.annotation-HomeSum``) as needed to identify which combination to apply the rule in the declaration (between curly brackets) to. Using more selectors makes the rule more specific. Using fewer selectors makes the rule more general.
+
+
 Identifying elements
 ----------------------
 
@@ -84,6 +91,7 @@ This defines the color for ``AwaySum`` in all of the widgets in your project as 
 
 This defines color of ```HomeSum`` as green in all the line chart widgets. If you have multiple line chart widgets containing ``HomeSum``, then all of them will be green. ::
 
+
     .tag-barchart[data-widget\.uri="BlueHomeSum"] .annotation-HomeSum{
 
         background: blue;
@@ -100,14 +108,10 @@ In the examples above, ``[data-widget\.uri="BlueHomeSum"]`` refers to the name o
 This snippet defines the color of the line ``HomeSum`` as blue only in the barchart widget with name ``BlueHomeSum``.
 
 
-So, general rule is as follows. (Replace the text in italics with your project data.) ::
+The general rule is shown in the example below.
 
-.tag-*widgettype*[data-widget\.uri="*WidgetName*"] .annotation-*IdentifierName*{
+.. image:: /Images/49-webui-css-color-for-line-chart/css-format.png
 
-    *attribute1*: *value1*;
+Use as many of the selectors (such as ``.tag-barchart``, ``.point``, or ``.annotation-HomeSum``) as needed to identify which combination to apply the rule in the declaration (between curly brackets) to. Using more selectors makes the rule more specific. Using fewer selectors makes the rule more specific.
 
-    *attribute2*: *value2*;
-
-}
-
-
+.. END CONTENT
