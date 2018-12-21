@@ -64,53 +64,49 @@ Here is an example with a line chart and a bar chart, each containing two parame
 
 With default styling, the WebUI page looks like this:
 
-.. image:: .. image:: /Images/49-webui-css-color-for-line-chart/css-default.png
+.. image:: /Images/49-webui-css-color-for-line-chart/css-default.png
 
-Below is an example of a general CSS rule that applies to all widget elements representing the ``AwaySum`` identifier. ::
+As you can see, ``HomeSum`` is represented in pink and ``AwaySum`` is represented in purple in both widget types.
+
+Let's say you prefer more contrast, and want to make the ``AwaySum`` green. You can apply a general rule::
 
     .annotation-AwaySum{
-
-        background:red;
-
-        stroke: red;
-
-        fill:red;        
-
-    }
-
-In the example above, ``.annotation-AwaySum`` refers to the name of the data identifier. 
-
-This snippet defines the color for ``AwaySum`` in all of the widgets in your project as red. If you have multiple widgets containing ``AwaySum``, then data for ``AwaySum`` will always be red regardless of the widget type. 
-
-.. image:: /Images/49-webui-css-color-for-line-chart/css-general.png
-
-The example below is more specific::
-
-    .tag-linechart .annotation-HomeSum{
 
         background: green;
 
         stroke: green;
 
-        fill: green;
+        fill: green;        
+
+    }
+
+In the example above, ``.annotation-AwaySum`` refers to the name of the data identifier. 
+
+This snippet defines the color for ``AwaySum`` in all of the widgets in your project as green. If you have multiple widgets containing ``AwaySum``, then data for ``AwaySum`` will always be green regardless of the widget type, as you can see in the image below. 
+
+.. image:: /Images/49-webui-css-color-for-line-chart/css-general.png
+
+Now you've decided that pink doesn't look good on a line chart. Now you can apply a specific rule::
+
+    .tag-linechart .annotation-HomeSum{
+
+        background: black;
+
+        stroke: black;
+
+        fill: black;
 
     }
 
 In the example above, ``.tag-linechart`` refers to the widget type and ``.annotation-HomeSum`` refers to the name of the data identifier.
 
-This snippet defines color of ``HomeSum`` as green in all the line chart widgets. If you have multiple line chart widgets containing ``HomeSum``, then all of them will be green. 
+This snippet defines color of ``HomeSum`` as black in all the line chart widgets.
 
 .. image:: /Images/49-webui-css-color-for-line-chart/css-specific.png
 
-The next example is even more specific::
+Now you'd like to make another line chart named ``DashHomeSum`` where there should be a dashed line. The next example is even more specific::
 
-    .tag-linechart[data-widget\.uri="BlueHomeSum"] .annotation-HomeSum{
-
-        background: blue;
-
-        stroke: blue;
-
-        fill: blue;
+    .tag-linechart[data-widget\.uri="DashHomeSum"] .annotation-HomeSum{
 
         stroke-dasharray: 4;
 
@@ -118,7 +114,7 @@ The next example is even more specific::
 
 In the example above, ``[data-widget\.uri="BlueHomeSum"]`` refers to the name of the widget and ``.annotation-HomeSum`` refers to the name of the data identifier. 
 
-This snippet defines the color of the line ``HomeSum`` as blue only in the barchart widget with name ``BlueHomeSum``.
+This snippet defines the line representing ``HomeSum`` as dashed only in the barchart widget with name ``DashHomeSum``.
 
 .. image:: /Images/49-webui-css-color-for-line-chart/css-more-specific.png
 
