@@ -2,6 +2,9 @@
 
 .. include:: includes/icons.def
 
+:abbr:`LIFO (last-in, first-out)`
+
+
 How to generate random numbers ?
 ================================
 
@@ -63,18 +66,28 @@ How to generate random numbers ?
   
    Test
 
-.. productionlist::
-   try_stmt: try1_stmt | try2_stmt
-   try1_stmt: "try" ":" `suite`
-            : ("except" [`expression` ["," `target`]] ":" `suite`)+
-            : ["else" ":" `suite`]
-            : ["finally" ":" `suite`]
-   try2_stmt: "try" ":" `suite`
-            : "finally" ":" `suite`
+.. raw:: html
+
+	<p>An <dfn title="onomasticon"><button disabled class="dfn-tooltip"><p>Another word for <strong>thesaurus</strong></p><p><img src="http://i.imgur.com/G0bl4k7.png/"></p></button></dfn> is not a dinosaur.</p>
+
+.. comment:
+	.. productionlist::
+
+	   try_stmt: try1_stmt | try2_stmt
+	   try1_stmt: "try" ":" `suite`
+	            : ("except" [`expression` ["," `target`]] ":" `suite`)+
+	            : ["else" ":" `suite`]
+	            : ["finally" ":" `suite`]
+	   try2_stmt: "try" ":" `suite`
+	            : "finally" ":" `suite`
 
 :menuselection:`Start --> Programs --> Execute`
 
 :token:`expression`
+
+.. code-block::
+    
+    P_demand :=$ 
 
 :samp:`{variable = 2} print 1+{variable}`
 

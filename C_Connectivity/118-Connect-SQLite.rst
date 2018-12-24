@@ -143,8 +143,6 @@ Let's start a super simple new AIMMS project, containing only one Database Table
 
 .. image:: ../Resources/C_Connectivity/Images/118/10aimms.png
 
-(click on the picture to zoom)
- 
 * Create a new Database Table ,
 * Specify 'Table1',
 * Activate the **Data Source** wizard,
@@ -178,23 +176,25 @@ Once you have linked the data source, you are now ready and able to select a tab
 * Choose the **Select Table/Query Name...** command from the pop-up menu,
 * You should see table names from your database… if not, please see the instructions bellow.
 
-Warning : if you receive this error message
+.. warning::
+	
+	if you receive this error message
 
-.. image:: ../Resources/C_Connectivity/Images/118/11aimms.png
+	.. image:: ../Resources/C_Connectivity/Images/118/11aimms.png
 
- 
-And if you tried the connection String :
+	 
+	And if you tried the connection String :
 
-Your connection string might be empty. Please check if '*ConnectionString*' parameter is empty by accessing its data (right click on its icon and choose **Data…**). It should be filled out with the following string :
+	Your connection string might be empty. Please check if '*ConnectionString*' parameter is empty by accessing its data (right click on its icon and choose **Data…**). It should be filled out with the following string :
 
-.. code-block:: none
+	.. code-block:: none
 
-    DRIVER={SQLite3 ODBC Driver};DATABASE=C:\Users\Arthur.AIMMS\Documents\SQLite\sqlite-dll-win64-x64-3150000\chinook.db;
+	    DRIVER={SQLite3 ODBC Driver};DATABASE=C:\Users\Arthur.AIMMS\Documents\SQLite\sqlite-dll-win64-x64-3150000\chinook.db;
 
 Summary
 ----------
 
-During this blogpost we installed the SQLite driver, and linked our SQLite database to an AIMMS database table identifier  |db| that we now may further use in our AIMMS application. We presented 3 different ways to link the database, namely the .dsn file, the system .dsn file and the connection string. We finally concluded by verifying that we were able to read our SQLite database through our AIMMS  database table identifier.
+In this article we installed the SQLite driver, and linked our SQLite database to an AIMMS database table identifier  |db| that we now may further use in our AIMMS application. We presented 3 different ways to link the database, namely the .dsn file, the system .dsn file and the connection string. We finally concluded by verifying that we were able to read our SQLite database through our AIMMS  database table identifier.
 
 For further reading, please refer to the following related links :
 
