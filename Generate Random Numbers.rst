@@ -83,9 +83,7 @@ How to generate random numbers ?
 
 :menuselection:`Start --> Programs --> Execute`
 
-:token:`expression`
-
-.. code-block::
+.. code-block:: aimms
     
     P_demand :=$ 
 
