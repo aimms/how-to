@@ -11,12 +11,12 @@
 
 			
 		
-Thanks You!
+Thank You!
 -------------
 		
 .. raw:: html
 
-	<h1 class="thanks" align=center style=" font-size:  500%; font-weight: bold; "> Thank you AIMMSian for making this documentation better !</h1>
+	<h1 class="thanks" align=center style=" font-size:  500%; font-weight: bold; "> Thank you for making this documentation better!</h1>
 	<br>
 	<br>
 	

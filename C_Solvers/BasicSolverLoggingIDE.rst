@@ -1,6 +1,9 @@
 How to get solver log files using the AIMMS IDE?
 ======================================================
 
+.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+
+
 Solvers can share information about the solution process up to a very detailed level.
 To avoid overhead in generating information that is not inspected anyway, the AIMMS IDE defaults to not sharing any information.
 
@@ -28,7 +31,7 @@ Thus I obtained a 95 line log file ``log\cplex 12.8.sta``.
 For the sake of brevity, I only show the first and last five lines here.
 
 .. literalinclude:: ../Resources/C_Solvers/BasicLogging/1_CPLEX_12.8.sta 
-    :name: cplex 12.8.sta
+    :name: cplex 12.8.sta (extended)
     :language: none
     :linenos: 
     :lines: 2-6
@@ -36,7 +39,7 @@ For the sake of brevity, I only show the first and last five lines here.
 Last five lines:
     
 .. literalinclude:: ../Resources/C_Solvers/BasicLogging/1_CPLEX_12.8.sta 
-    :name: cplex 12.8.sta
+    :name: cplex 12.8.sta (extended continued)
     :language: none
     :linenos: 
     :lineno-start: 90

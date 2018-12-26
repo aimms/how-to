@@ -1,0 +1,54 @@
+## ams_version=1.0
+
+Model Main_StockBalance {
+    Set s_Time {
+        Index: i_t;
+    }
+    Set s_Horizon {
+        SubsetOf: s_Time;
+    }
+    Variable v_Stock {
+        IndexDomain: i_t;
+    }
+    Variable v_Production {
+        IndexDomain: i_t;
+    }
+    Parameter p_Demand {
+        IndexDomain: i_t;
+    }
+    Constraint C_StockBalance {
+        IndexDomain: i_t | i_t < last( s_Horizon );
+        Definition: v_Stock(i_t+1) = v_Stock(i_t) + v_Production(i_t) - p_Demand(i_t);
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<PageManager>
+	<Page Name="AIMMS Demo" PageGUID="BD13EF95-9722-425C-A99D-4A47D183A62D">
+		<Page Name="Gantt Chart with narrowing time windows" PageGUID="C867E5C8-DC4D-4523-904E-4D6B870C4CCD" />
+	</Page>
+	<Page Name="All Data Pages" PageGUID="0AC239B5-F8AB-41F9-8460-3F056948AA98" />
+</PageManager>

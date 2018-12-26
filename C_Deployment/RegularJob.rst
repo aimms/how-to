@@ -67,8 +67,8 @@ The center piece of the project is the procedure ``pr_IterativeJobScheduling``:
 
                 elseif delegateLevel <= maxDelegateLevel then   ! Schedule the next job.
                 
-                    sp_jobTime := MomentToString( sp_UtcTimFmt, [second],                 ! 4)
-                                        CurrentToString(sp_UtcTimFmt), timeIncrement );
+                    sp_jobTime := MomentToString( sp_LocalTimFmt, [second],                 ! 4)
+                                        CurrentToString(sp_LocalTimFmt), timeIncrement );
                                         
                     pro::DelegateToServer(                                                ! 5)
                         requestDescription :  spRequestDescription,
@@ -111,7 +111,7 @@ Each portion of the procedure code is explained below:
         
 #. The first job starts immediately, but is started from the WebUI session. The WebUI session should NOT execute the payload, that is why we have a test on the return of ``pro::DelegateToServer``
 
-#. Construct the next time the job is to be executed. By using the UTC timezone, we avoid any ambiguities regarding daylight saving time.
+#. Construct the next time the job is to be executed. By using the Local timezone, we avoid any ambiguities regarding daylight saving time; ``sp_LocalTimFmt = "%c%y-%m-%d %H:%M:%S%TZ('Local')"``
 
 #. The iterative call, that might looks like a recursive call.
 
@@ -129,7 +129,6 @@ To operate, the example that can be downloaded :download:`here <../Resources/C_D
 
 .. image:: ../Resources/C_Deployment/RegularJob/Images/PROJobs.png
 
-
 .. note::
 
     * When you check the session.log files, you may encounter a line like:
@@ -141,6 +140,5 @@ To operate, the example that can be downloaded :download:`here <../Resources/C_D
         That is because the procedure ``pr_Friesian`` uses the procedure call ``pro::management::LocalLogInfo(...);`` to log some information about current server session.
 
     * When you want to interrupt a sequence of server jobs, please terminate the scheduled session before terminating the running session.
-        
 
 .. include:: ../includes/form.def

@@ -1,0 +1,18 @@
+﻿Converting Main project
+Converting NQueens.amb to new style model file: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\MainProject\NQueens.ams
+Writing: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\MainProject\Project.xml
+Writing: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\MainProject\Tools\IdentifierSelector.xml
+Writing: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\MainProject\Tools\ProjectExport.xml
+Writing: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\MainProject\Settings\Options.txt
+Writing: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\MainProject\Pages\NQueens.xml
+Writing: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\MainProject\PageManager.xml
+Writing: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\MainProject\TemplateManager.xml
+Writing: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\MainProject\DataManagementSetup.xml
+Creating folder: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\MainProject\User Files\bitmaps
+Writing: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\MainProject\User Files\bitmaps\totree.bmp
+Writing: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\MainProject\User Files\bitmaps\previous.bmp
+Writing: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\MainProject\User Files\bitmaps\next.bmp
+Writing: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\MainProject\User Files\bitmaps\construct.bmp
+Copying file: NQueens.dat to D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\NQueens.dat
+Writing file: D:\u\s\How to\gitlab\master\Resources\C_Solvers\Images\139\NQueens_converted\NQueens.aimms
+Finished the conversion of the project.

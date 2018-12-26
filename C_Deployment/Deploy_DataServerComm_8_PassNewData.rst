@@ -4,6 +4,9 @@
 Communicate data changes from the data session to the server session
 ====================================================================
 
+.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+
+
 Introduction
 ------------
 

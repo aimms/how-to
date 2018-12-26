@@ -1,6 +1,8 @@
 How to receive messages?
 ========================
 
+.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+
 .. https://gitlab.aimms.com/Chris/aimms-how-to/issues/80
 .. Nirvana project 0006
 

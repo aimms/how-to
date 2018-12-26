@@ -15,8 +15,8 @@ Model Main_JobRepetition {
         StringParameter sp_StdTimFmt {
             Definition: "%c%y-%m-%d %H:%M:%S";
         }
-        StringParameter sp_UtcTimFmt {
-            Definition: "%c%y-%m-%d %H:%M:%S%TZ('UTC')";
+        StringParameter sp_LocalTimFmt {
+            Definition: "%c%y-%m-%d %H:%M:%S%TZ('Local')";
         }
         ElementParameter ep_PayloadProcedure {
             Range: AllProcedures;
@@ -27,7 +27,7 @@ Model Main_JobRepetition {
         Procedure pr_Friesian {
             Body: {
                 sp_Msg := FormatString("pr_Friesian(): At %s (UTC) delegation level is %i",
-                	CurrentToString(sp_UtcTimFmt), pro::CurrentDelegationLevel() );
+                	CurrentToString(sp_LocalTimFmt), pro::CurrentDelegationLevel() );
                 pro::management::LocalLogInfo(sp_Msg);
             }
             Comment: {
@@ -67,7 +67,7 @@ Model Main_JobRepetition {
                 		return 1 ;
                 	endif ;
                 elseif delegateLevel <= maxDelegateLevel then	! Schedule the next job.
-                	sp_jobTime := MomentToString( sp_UtcTimFmt, [second], CurrentToString(sp_UtcTimFmt), timeIncrement );
+                	sp_jobTime := MomentToString( sp_LocalTimFmt, [second], CurrentToString(sp_LocalTimFmt), timeIncrement );
                 	pro::DelegateToServer( 
                 		requestDescription :  spRequestDescription,
                 		waitForCompletion  :  0, 

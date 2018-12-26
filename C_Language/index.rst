@@ -11,10 +11,27 @@
 AIMMS Language
 ========================
 
-	
 .. toctree::
 
+    121-set-index-element-parameter
     How to model categorization of objects
+    141-element-after-last
+    112-Integer-properties
+    145-import-export-section
     Using_AIMMS_Libraries
-	
-..	Generate Random Numbers
+    104-creating-email-templates
+    104-using-email-client-library
+    85-using-axll-library
+    119-Reproducible-Random-Sequence
+    144-Stopwatch
+    125-execution-efficiency
+    134-Monitoring-Memory-Use
+    135-UTF8-Encoding
+    133-External-Functions-InputData
+    146-value-dynamic-identifier
+    132-Repetive-Patterns-Model-Edit
+    131-Formulas-as-Data
+    109-deprecate-compound-sets-overview
+    109-convert-compound-sets
+
+.. Generate Random Numbers

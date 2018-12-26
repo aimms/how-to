@@ -49,8 +49,8 @@ master_doc = 'ContentIndex'
 
 # General information about the project.
 project = u'How to in AIMMS'
-copyright = u'2018, AIMMS Customer Support Team'
-author = u'AIMMS Customer Support Team'
+copyright = u'2018, AIMMS User Support Team'
+author = u'AIMMS User Support Team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -187,7 +187,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'HowToinAIMMS.tex', u'How to in AIMMS Documentation',
-     u'AIMMS Customer Support Team', 'manual'),
+     u'AIMMS User Support Team', 'manual'),
 ]
 
 

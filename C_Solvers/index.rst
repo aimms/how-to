@@ -12,4 +12,16 @@
 Solvers
 ========================
 
-	
+.. toctree::
+        
+    127-Progress-Window
+    BasicSolverLoggingIDE
+    BasicSolverLoggingPRO
+    147-GMP-Intro
+    139-Multiple-Solutions
+    116-Benders-CPLEX
+    126-TSP-Lazy-Constraints
+    136-Infeasible-Unbounded
+    130-Infeasible-Nonlinear-Problems
+
+

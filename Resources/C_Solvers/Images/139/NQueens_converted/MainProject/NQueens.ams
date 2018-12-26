@@ -1,0 +1,117 @@
+## ams_version=1.0
+
+Model Main_NQueens {
+    Parameter N {
+        InitialData: 8;
+    }
+    Set ii {
+        SubsetOf: Integers;
+        Index: i, j;
+        Definition: ElementRange(1, N);
+    }
+    Variable x {
+        IndexDomain: (i);
+        Range: {
+            {1..N}
+        }
+    }
+    Parameter TheSolutionQueenPosition {
+        IndexDomain: (i,j);
+        Range: binary;
+        Definition: x(i) = j;
+    }
+    Constraint C1 {
+        IndexDomain: (i,j);
+        Definition: {
+            (i < j) and x(i) <> x(j) ;
+        }
+    }
+    Constraint C2 {
+        IndexDomain: (i,j);
+        Definition: (i < j) and x(i) + i <> x(j) + j;
+    }
+    Constraint C3 {
+        IndexDomain: (i,j);
+        Definition: (i < j) and x(i) - i <> x(j) - j;
+    }
+    Constraint AllDiff {
+        Definition: cp::AllDifferent(i, x(i));
+    }
+    MathematicalProgram NQueensPlan {
+        Direction: minimize;
+        Constraints: AllConstraints;
+        Variables: AllVariables;
+        Type: CSP;
+    }
+    Set SolutionSet {
+        SubsetOf: Integers;
+        Index: solution;
+        Definition: {
+            if NumberOfSolutions then
+            	{1..NumberOfSolutions}
+            endif
+        }
+    }
+    Parameter NumberOfSolutions;
+    Parameter MaxNumberOfSolutions {
+        Text: "Max number of solutions to obtain";
+        Range: {
+            {1..1050000000}
+        }
+        InitialData: 1050000000;
+    }
+    Parameter XValueInSolution {
+        IndexDomain: (solution,i);
+    }
+    Parameter ASolutionQueenPosition {
+        IndexDomain: (solution,i,j);
+        Range: binary;
+        Definition: XValueInSolution(solution, i) = j;
+    }
+    ElementParameter SelectedSolution {
+        Range: SolutionSet;
+    }
+    Procedure MainInitialization;
+    Procedure MainExecution {
+        Body: {
+            ShowProgressWindow ;
+            
+            
+            block where solution_storage_limit := MaxNumberOfSolutions  ;
+            	solve NQueensPlan;
+            endblock ;
+            
+            if (NQueensPlan.ProgramStatus <> 'Optimal') then
+                empty x;
+            endif;
+            DialogMessage(GMP::Solution::Count('NQueensPlan'));
+            
+            !obtain values for x for all solutions and store this into
+            !the XValueInSolution parameter.
+            NumberOfSolutions := gmp::Solution::Count('NQueensPlan') ;
+            while LoopCount <= NumberOfSolutions do
+            	!For each solution that is stored in the GMP solution repository
+            	!
+            	gmp::Solution::SendToModel( 'NQueensPlan', LoopCount ) ;
+            
+            	XValueInSolution( LoopCount , i ) := x(i) ;
+            endwhile ;
+            
+            if NumberOfSolutions then
+            	SelectedSolution := first(SolutionSet) ;
+            endif ;
+            
+            
+            
+            
+            
+            
+            option solution_storage_limit := 1 ;
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+    }
+}
