@@ -28,15 +28,15 @@ A quick way to discover this is to right-click the widget in your web browser an
 
 You'll also need to assign *annotations* to data identifiers you want to style in the CSS.
 
-For every identifier specified in the Contents section of widget options, you can specify additional identifiers to certain properties. For identifier ``X`` you can specify a string parameter ``X_annotations`` to hold a name to be used as a CSS class on associated DOM elements in your model. 
-
-Add a string parameter with the desired name for its definition. Then, in the attribute form of the identifier, add an annotation with ``webui::AnnotationsIdentifier`` and reference the string parameter you created. 
-
 .. image:: /Images/49-webui-css-color/css-annotation.png
+
+#. Add a string parameter (``yourAnnotation``) to your declaration with the desired annotation name (``whatever``) for its definition. 
+#. Then, in the attribute form of the identifier, add an annotation with ``webui::AnnotationsIdentifier`` and reference the string parameter you created. 
+#. Reference the element in your stylesheet, with a selector (``.annotation-whatever``). 
 
 See `Data-Dependent Styling <https://manual.aimms.com/webui/folder.html#data-dependent-styling>`_ for more details.
 
-The tables below reference CSS selectors and properties that apply to Line Chart Widgets.
+The tables below reference some of the CSS selectors and properties that apply to Line Chart Widgets.
 
 +-------------------------------------------------+-------------------------------------------------+
 |CSS Selector                                     | Widget/Element Description                      |
@@ -53,20 +53,20 @@ The tables below reference CSS selectors and properties that apply to Line Chart
 +-------------------------------------------------+-------------------------------------------------+
 
 
-+-------------------------------------------+-------------------------------------------+
-|CSS Property                               | Element Description                       |
-+===========================================+===========================================+
-| background: *color*                       | controls the background color             |
-+-------------------------------------------+-------------------------------------------+
-| stroke: *color*                           | controls the stroke color                 |
-+-------------------------------------------+-------------------------------------------+
-| fill: *color*                             | controls the fill color                   |
-+-------------------------------------------+-------------------------------------------+
-| stroke-width: *line width in pixels*      | controls the line thickness               |
-+-------------------------------------------+-------------------------------------------+
-| stroke-dasharray: *dash length in pixels* | makes a dashed line, controls dash length |
-|                                           | (only applies to lines in a line chart)   |    
-+-------------------------------------------+-------------------------------------------+
++-------------------------------------------+-----------------------------------------------+
+|CSS Property                               | Element Description                           |
++===========================================+===============================================+
+| background: *color*                       | controls the background color of lines/points |
++-------------------------------------------+-----------------------------------------------+
+| stroke: *color*                           | controls the stroke color of lines/points     |
++-------------------------------------------+-----------------------------------------------+
+| fill: *color*                             | controls the fill color of lines/points       |
++-------------------------------------------+-----------------------------------------------+
+| stroke-width: *line width in pixels*      | controls the line thickness                   |
++-------------------------------------------+-----------------------------------------------+
+| stroke-dasharray: *dash length in pixels* | makes a dashed line, controls dash length     |
+|                                           | (only applies to lines in a line chart)       |    
++-------------------------------------------+-----------------------------------------------+
 
 
 Styling elements
@@ -80,7 +80,9 @@ With default styling, the WebUI page looks like this:
 
 As you can see, ``HomeSum`` is represented in pink and ``AwaySum`` is represented in purple in both widget types.
 
-Let's say you prefer more contrast, and want to make the ``AwaySum`` green. You can apply a general rule::
+Let's say you prefer more contrast, and want to make the ``AwaySum`` green. You can apply a general rule:
+
+.. code-block:: css
 
     .annotation-AwaySum{
 
@@ -98,7 +100,9 @@ This snippet defines the color for ``AwaySum`` in all of the widgets in your pro
 
 .. image:: /Images/49-webui-css-color/css-general.png
 
-Now you've decided that pink doesn't look good on a line chart. Now you can apply a specific rule::
+Now you've decided that pink doesn't look good on a line chart. Now you can apply a specific rule:
+
+.. code-block:: css
 
     .tag-linechart .annotation-HomeSum{
 
@@ -116,7 +120,9 @@ This snippet defines the color for ``HomeSum`` as black in all the line chart wi
 
 .. image:: /Images/49-webui-css-color/css-specific.png
 
-Now you'd like to make another line chart named ``DashHomeSum`` where there should be a dashed line. The next example is even more specific::
+Now you'd like to make another line chart named ``DashHomeSum`` where there should be a dashed line. The next example is even more specific:
+
+.. code-block:: css
 
     .tag-linechart[data-widget\.uri="DashHomeSum"] .annotation-HomeSum{
 
