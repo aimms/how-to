@@ -20,4 +20,4 @@ User Interface
     94-using-the-scalar-switch-css
     123-WebUI-FORMS
     124-tableau-integration
-    49-webui-css-color-for-line-chart
+    49-webui-css-color
