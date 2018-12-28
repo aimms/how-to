@@ -1,7 +1,6 @@
 ﻿Integer set expressions: 2 new properties
 =========================================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
 
 .. image:: ../Resources/C_Language/Images/112/BlogPicture.jpg
 

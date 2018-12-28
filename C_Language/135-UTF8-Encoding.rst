@@ -1,14 +1,9 @@
 ﻿Support of UTF8 and Other Encodings
 ======================================
 
+.. sidebar:: German Enigma Machine
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
-
-.. figure:: ../Resources/C_Language/Images/135/GermanEnigmaMachine.jpg
-
-    German Enigma Machine
-
-
+    .. image:: ../Resources/C_Language/Images/135/GermanEnigmaMachine.jpg
 
 A text is a sequence of characters. A text file contains such a text whereby the characters are represented by numbers. The mapping between these characters in a text and these numbers in a file is called an encoding. Confusion arises when people or programs communicate using different encodings :-(. For instance, a text file containing the following bytes (hexadecimal): "48 65 6c 6c 6f 20 57 6f 72 6c 64 2e", would be interpreted using the IBM284 encoding, a Spanish variant of EBCDIC, as: "çÁ%%?ï?Ê%À", but using UTF16LE encoding, it would be interpreted as "效汬⁯潗汲". Finally, using an ASCII encoding, it would be interpreted as: "Hello World".
 

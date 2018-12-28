@@ -1,7 +1,6 @@
 ﻿Set, Subset, Index and Element Parameter in AIMMS
 ====================================================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
 
 .. sidebar:: The Egyptian god Set
 

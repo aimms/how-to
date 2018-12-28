@@ -1,11 +1,9 @@
 ﻿Formulas as Data
 =================
 
+.. sidebar:: Mathematics as taught
 
-
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
-
-.. image:: ../Resources/C_Language/Images/131/mathematics-327488_150.jpg
+    .. image:: ../Resources/C_Language/Images/131/mathematics-327488_150.jpg
 
 
 A mathematical formula is considered data within an application when it is read in as a string during the application's runtime, and subsequently used in the construction of selected assignments and constraints. The concept "Formulas as Data" can be applied to several optimization apps, for instance those that deal with "Blending on Specification" and "Asset Management." In these types of applications, the benefit of the end-users is that they do not have to share these formulas with anyone else, including the developers of the apps. For such apps, good formulas are expensive to develop and having good formulas provides a competitive edge to these end-users. In AIMMS, formulas can be used in the following way:

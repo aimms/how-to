@@ -1,8 +1,6 @@
 ﻿What is the element after the last?
 ===================================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
-
 .. sidebar:: What is beyond the last element?
 
     .. image:: ../Resources/C_Language/Images/141/Cliff.jpg

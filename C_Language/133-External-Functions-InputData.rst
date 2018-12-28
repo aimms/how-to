@@ -1,14 +1,10 @@
 ﻿Using external functions for data input
 ========================================
 
+.. sidebar:: Make connection
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+    .. image:: ../Resources/C_Language/Images/133/5.10_Road_sign.gif
 
-
-
-.. figure:: ../Resources/C_Language/Images/133/5.10_Road_sign.gif
-
-    Make connection
 
 Data exchange is an essential part of every application. AIMMS supports various industry standards for data exchange, such as ODBC for databases, XML Files and spreadsheets. But what if the data is not stored according to one of these standards? In order to read data from an arbitrary data source, AIMMS offers access to self-developed or third party functions. This blog post provides an overview of the steps you need to take to create a data exchange link between a proprietary data format and AIMMS. The process is illustrated by using a concrete modeling exercise from the Constraint Programming example library CSPLIB.  
 

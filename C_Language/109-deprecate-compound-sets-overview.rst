@@ -1,6 +1,12 @@
 Overview of the Deprecation of Compound Sets
 ==============================================
 
+.. sidebar:: Announcing deprecation compound sets
+
+    .. image:: ../Resources/C_Language/Images/109/hoorn.png
+
+
+    
 .. _Section-Announcement:
 
 Overview

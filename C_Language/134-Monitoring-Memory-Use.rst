@@ -1,14 +1,9 @@
 ﻿Monitoring memory use
 ===========================
 
+.. sidebar:: Memory module
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
-
-.. figure:: ../Resources/C_Language/Images/134/Memory_module_DDRAM_20-03-2006.jpg
-
-    Memory module
-
- 
+    .. image:: ../Resources/C_Language/Images/134/Memory_module_DDRAM_20-03-2006.jpg
 
 Analytic applications may involve a lot of data and subsequently a lot of computer memory. AIMMS hides the technicalities related to memory management from the model developer. These technicalities include, for instance, the allocation and deallocation of memory for individual data items. Still, the memory usage of applications created with AIMMS grows as the amount of data related to these applications grows. At some point during model development, the memory usage of your application becomes interesting. AIMMS offers tools to monitor and investigate the memory usage of your application. This blog post will delve into some of these tools.  One of the tools you can use to monitor the memory usage of your application is the Identifier Cardinality tool (available via the AIMMS menu Tools - Diagnostic Tools - Identifier Cardinalities). Even with small sample data sets, this tool helps you identify candidates worthwhile of investigation; in particular those with:
 

@@ -1,13 +1,11 @@
 ﻿Repetitive Patterns captured by Model Query and Model Edit Functions
 ======================================================================
 
+.. sidebar:: Der Maler - Honoré Daumier - from Rheims Museum of Fine Arts
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+    .. image:: ../Resources/C_Language/Images/132/1280px-Honore_Daumier_008.jpg
 
-.. figure:: ../Resources/C_Language/Images/132/1280px-Honore_Daumier_008.jpg
-
-    Der Maler - Honoré Daumier - from Rheims Museum of Fine Arts
-
+    
 When constructing AIMMS models, we are usually able to handle repetition and structure by adding indexes. For instance, if we have built a model for the conversion process of a single machine, we do not have to duplicate the relevant model code when given an extra machine. Instead, we can use an extra index over a set of machines. However, there are situations where adding an extra index is not an option. This blog post will provide an example of such a situation, illustrating how the issue can be tackled using the AIMMS Model Query and Model Edit functions.  **Duplicating data with the AIMMS Model Edit and Model Query functions** The example discussed in this blog post deals with the specification of data maintained per product. Note the differences in dimension and index domain of the following identifiers containing the data of the products, ``pr`` is an index in the set ``Products``:
 
 * ``P1(pr)``
