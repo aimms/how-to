@@ -1,0 +1,69 @@
+## ams_version=1.0
+
+Model Main_tt {
+    Set s_A {
+        Index: i_a;
+        Definition: ElementRange(0,9,prefix:"a");
+    }
+    Set s_B {
+        Index: i_b;
+        Definition: ElementRange(0,9,prefix:"b");
+    }
+    Parameter p_Dat {
+        IndexDomain: (i_a,i_b);
+    }
+    StringParameter p_Dat_tooltips {
+        IndexDomain: (i_a,i_b);
+        Definition: {
+              "<div style=\"background-color:white;\">"
+            + "<div style=\"color:black;\">"
+            + "<div style=\"border-style:none;\">"
+            + "<div style=\"border-width: 0px;\">"
+            + "<div style=\"margin: 0px;\">"
+            + "<div style=\"padding: 0px;\">"
+            + "<div style=\"outline-style: none;\">"
+            + formatString("Some text before %i and some text after", p_Dat(i_a,i_b))
+            + "</div>"
+            + "</div>"
+            + "</div>"
+            + "</div>"
+            + "</div>"
+            + "</div>"
+            + "</div>"
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Body: {
+            p_Dat(i_a, i_b) := ord(i_a)+ord(i_b)-2;
+        }
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}
