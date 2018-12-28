@@ -4,6 +4,7 @@
 .. sidebar:: Golden Gate bridge by Guido Diepen
 
     .. image:: ../Resources/C_Mathematical_Modeling/Images/140/golden-gate.jpg
+        :scale: 150%
 
 The identifier types ACTIVITIES and RESOURCES, and the scheduling intrinsic functions as part of the AIMMS constraint programming component are very useful in modeling construction projects and optimizing the makespan of those projects.
 
