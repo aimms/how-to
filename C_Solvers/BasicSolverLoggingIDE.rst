@@ -1,14 +1,12 @@
 How to get solver log files using the AIMMS IDE?
 ======================================================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
-
-
 Solvers can share information about the solution process up to a very detailed level.
 To avoid overhead in generating information that is not inspected anyway, the AIMMS IDE defaults to not sharing any information.
 
 Get started with log files
 ---------------------------
+
 The first option is to set the option ``solver_listing_messages`` to ``all``. 
 By just setting this option, a solver will generate a small log file with the name ``<solver name>.sta`` in the folder ``log``.
 The first solve of an AIMMS session will create the file, subsequent solves will append to the file. 
@@ -108,5 +106,14 @@ NLP Problems
 | SNOPT      | Print output file              | On                    |
 +------------+--------------------------------+-----------------------+
 
-    
+
+Further reading
+---------------
+
+The interpretation of log files is discussed in:
+
+* `LP <https://pdfs.semanticscholar.org/b01f/ad44c20c372fdda95cbfb980c0d37302de07.pdf>`_
+* `MIP <https://pubsonline.informs.org/doi/10.1287/educ.2014.0130>`_ 
+
+
 .. include:: ../includes/form.def

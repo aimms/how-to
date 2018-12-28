@@ -1,8 +1,6 @@
 How to get solver log files using AIMMS PRO?
 ======================================================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
-
 In :doc:`BasicSolverLoggingIDE`, we explain how to adapt the project such that solver log files are available for inspection. 
 A solver session runs somewhere on an AIMMS PRO server, and as a user, you do not have direct access to those files. 
 However, with a few small steps, which are explained in this article, you can access these files as well.
@@ -24,9 +22,9 @@ Some progress information can be obtained via setting the option ``major_message
 
     .. code-block:: none
 
-        09:21:47,138 0x7f55877fe700 [ERROR] {AIMMS.ProgressSupport} Calling CPLEX 12.8 for MIP of 15 rows, 13 columns (4 integer) and 52 non-zeros.
-        09:21:47,138 0x7f55877fe700 [ERROR] {AIMMS.ProgressSupport} Calling CPLEX 12.8 to solve MIP FlowShopModel minimize TimeSpan.
-        09:21:47,169 0x7f55877fe700 [ERROR] {AIMMS.ProgressSupport} There is 0 Kb in use by CPLEX 12.8.
+        09:21:47,138 0x7f55877fe700 [INFO] {AIMMS.gui.vm-prog} Calling CPLEX 12.8 for MIP of 15 rows, 13 columns (4 integer) and 52 non-zeros.
+        09:21:47,138 0x7f55877fe700 [INFO] {AIMMS.gui.vm-prog} Calling CPLEX 12.8 to solve MIP FlowShopModel minimize TimeSpan.
+        09:21:47,169 0x7f55877fe700 [INFO] {AIMMS.gui.vm-prog} There is 0 Kb in use by CPLEX 12.8.
         
 Alternatively, you can obtain this information via ``AIMMS.solver`` logger by setting the log option of ``AIMMS Sessions`` to ``Debug`` in the ``log management`` page of tab ``configuration`` of the AIMMS PRO portal. If this option is even set trace, you will also get the "reason to interrupt" of a solve statement. Beware; setting this option to trace typically leads to large amounts of trace - in addition, changing this option also leads to increased tracing for other applications.
 

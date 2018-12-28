@@ -1,11 +1,9 @@
-﻿Multiple Solution
+﻿Multiple Solutions
 =====================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+.. sidebar:: 8 Queens Solution
 
-.. figure:: ../Resources/C_Solvers/Images/139/Eight-Queens-Solution.png
-
-    8 Queens Solution
+    .. image:: ../Resources/C_Solvers/Images/139/Eight-Queens-Solution.png
 
 Some of the solvers in AIMMS, including the CP Optimizer solver for Constraint Programming problems, support not only returning a single (optimal) solution, but also a pool of feasible solutions.
 

@@ -1,14 +1,12 @@
 ﻿Progress Window Updating Changes
 =================================
 
+.. sidebar:: Progress Window
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
-
-
-
-<a href="http://techblog.aimms.com/wp-content/uploads/sites/5/2015/03/pw1.png"><img class="alignright size-medium wp-image-4304" style="border: 1px solid #000000;" src="http://techblog.aimms.com/wp-content/uploads/sites/5/2015/03/pw1-228x300.png" alt="pw" width="228" height="300" /></a>The progress window, which can be opened by pressing CTRL-P, allows you to monitor AIMMS during compilation, execution and solving. For example, while solving a MIP problem, AIMMS will display the number of iterations and nodes, the best bound and the best solution in the progress window. So far, progress updates during a solve have been based on the number of iterations used by the solver. By default, the progress window is updated every 100 iterations. This frequency is controlled by the general solvers option **Progress Solution**.
+    .. image:: ../Resources/C_Solvers/Images/127/pw1.png
 
 
+The progress window, which can be opened by pressing CTRL-P, allows you to monitor AIMMS during compilation, execution and solving. For example, while solving a MIP problem, AIMMS will display the number of iterations and nodes, the best bound and the best solution in the progress window. So far, progress updates during a solve have been based on the number of iterations used by the solver. By default, the progress window is updated every 100 iterations. This frequency is controlled by the general solvers option **Progress Solution**.
 
 If progress updates are done very frequently then it can have a negative influence on the performance. If progress updates are rare, it can take minutes before the progress window is updated again. As a side effect, AIMMS can become seemingly non-responsive, as progress updates are often the only times during a solve in which the solver will give the control back to AIMMS for a brief moment, such that AIMMS can update pages, check for interrupts, etc. (The control is also given back to AIMMS if a callback procedure is called, or during function or derivative evaluations while solving a nonlinear problem.)
 

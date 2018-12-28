@@ -1,14 +1,11 @@
 ﻿Investigating infeasible nonlinear problems
 ============================================
 
+.. sidebar:: Sherlock
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+    .. image:: ../Resources/C_Solvers/Images/130/sherlock.png
 
-
-
-<a href="http://techblog.aimms.com/wp-content/uploads/sites/5/2014/10/sherlock.png"><img class="alignright size-medium wp-image-3721" src="http://techblog.aimms.com/wp-content/uploads/sites/5/2014/10/sherlock-197x300.png" alt="sherlock" width="131" height="200" /></a>The AIMMS webinar of August (2014) dealt with "Analyzing infeasible Problems in AIMMS". In case you missed it, the recording can be found <a href="https://aimms.com/english/developers/resources/webinars/webinars-demand/analyzing-infeasible-problems-aimms/">here</a>. As shown in the webinar, one way to investigate an infeasible problem is by calculating an **Irreducibly Inconsistent System** (IIS). An IIS is a subset of all constraints and variables that contains an infeasibility. The "Irreducibly" part implies that the subset is as small as possible. Unfortunately, the IIS could only be calculated for linear (and quadratic) problems. So how about nonlinear problems?
-
-
+The AIMMS webinar of August (2014) dealt with "Analyzing infeasible Problems in AIMMS". In case you missed it, the recording can be found `here <https://aimms.com/english/developers/resources/webinars/webinars-demand/analyzing-infeasible-problems-aimms/>`_. As shown in the webinar, one way to investigate an infeasible problem is by calculating an **Irreducibly Inconsistent System** (IIS). An IIS is a subset of all constraints and variables that contains an infeasibility. The "Irreducibly" part implies that the subset is as small as possible. Unfortunately, the IIS could only be calculated for linear (and quadratic) problems. So how about nonlinear problems?
 
 AIMMS 4.1 introduces version 14 of **BARON**. BARON is a solver for solving non-convex optimization problems to global optimality. Version 14 can calculate an IIS for infeasible nonlinear problems including problems with integer variables. To let BARON calculate an IIS, the option *Compute IIS* should be switched on. BARON offers several algorithms for calculating an IIS, the fastest being a heuristic that "only" calculates an IS (as the infeasible system found could possibly be reduced further). BARON 14 also brings significant improvements in the handling of integer problems. Note that finding a global optimum takes more time than finding a local optimum like most nonlinear solvers do.
 

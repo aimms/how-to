@@ -1,8 +1,6 @@
 ﻿Infeasible or Unbounded
 =======================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
-
 .. sidebar:: Infeasible triangle
 
     .. image:: ../Resources/C_Solvers/Images/136/infeasible-triangle.png
