@@ -1,9 +1,9 @@
 ﻿How to protect the Intellectual Property in your AIMMS 4 model
 ================================================================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+.. sidebar:: Protecting intellectual property through encryption
 
-.. image:: ../Resources/C_Deployment/Images/128/encryption2.png
+    .. image:: ../Resources/C_Deployment/Images/128/encryption2.png
 
 
 Encryption is typically used to protect the intellectual property (IP) in your AIMMS model and libraries. Access to your application can also be restricted in both AIMMS 3 and AIMMS 4; though the methods differ between the two AIMMS versions.
