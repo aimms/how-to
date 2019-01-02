@@ -1,0 +1,190 @@
+## ams_version=1.0
+
+Model Main_ROGO {
+    ElementParameter ep_CellColor {
+        IndexDomain: (r,c);
+        Range: AllColors;
+        Definition: {
+            if (p_CellValue(r, c)=-1) then 'black'
+            elseif p_VisitedSequence(r, c) then 'green'
+            endif;
+        }
+    }
+    Parameter p_nr {
+        Range: integer;
+        Comment: "Number of rows";
+    }
+    Parameter p_nc {
+        Range: integer;
+    }
+    Parameter p_PathLength {
+        Range: integer;
+    }
+    Parameter p_bestKnownSolution {
+        Range: integer;
+    }
+    Set s_Rows {
+        SubsetOf: Integers;
+        Index: r;
+        Parameter: epRow;
+        Property: ElementsAreLabels;
+        Definition: ElementRange(1,p_nr);
+    }
+    Set s_Columns {
+        SubsetOf: Integers;
+        Index: c;
+        Parameter: epColumn;
+        Property: ElementsAreLabels;
+        Definition: ElementRange(1,p_nc);
+    }
+    Set s_Cells {
+        SubsetOf: Integers;
+        Index: i;
+        Parameter: epCell;
+        Definition: ElementRange(0,p_nr*p_nc);
+    }
+    Set s_Steps {
+        SubsetOf: Integers;
+        Index: s;
+        Definition: ElementRange(1,p_PathLength);
+    }
+    Set s_Moves {
+        Index: m;
+        Definition: data { L, R, U, D };
+    }
+    Parameter p_CellValue {
+        IndexDomain: (r,c);
+    }
+    Parameter p_ValueCell {
+        IndexDomain: (i);
+    }
+    Parameter p_CellNoGo {
+        IndexDomain: (r,c);
+        Definition: 1 onlyif ( p_CellValue(r, c) = -1 );
+    }
+    ElementParameter ep_CellNumber {
+        IndexDomain: (r,c);
+        Range: s_Cells;
+        Definition: (r-1) * p_nc + c;
+    }
+    Set s_Transitions {
+        SubsetOf: (s_Cells,s_Cells);
+    }
+    Set s_AllowedCells {
+        SubsetOf: s_Cells;
+    }
+    Set s_CellsWithValues {
+        SubsetOf: s_Cells;
+    }
+    ElementVariable ev_evVisitCell {
+        IndexDomain: (s);
+        Range: s_Cells;
+    }
+    Constraint c_DoStep {
+        IndexDomain: s;
+        Definition: (ev_evVisitCell(s--1),  ev_evVisitCell(s)) in s_Transitions;
+        Comment: {
+            "Go from an allowed cell to an adjacent allowed cell.
+            The circular lag, denoted by \"--\", ensures that the
+            previous cell of the first is the last in the sequence."
+        }
+    }
+    Constraint c_DifferentCells {
+        Definition: cp::AllDifferent(s,ev_evVisitCell(s));
+        Comment: "This constraint ensures that we do not visit the same cell twice.";
+    }
+    Constraint c_StartInCellWithValue {
+        Definition: ev_evVisitCell(first(s)) in s_CellsWithValues;
+        Comment: {
+            "Symmetry reduction:
+            If we want to have the objective some value, at least one cell should have value.
+            As the sequence might begin at any place, we may as well start at least the first cell with value.
+            This reduces the search, as we do not try anymore the first cell without value."
+        }
+    }
+    Parameter p_TimeLimit {
+        InitialData: 2;
+    }
+    Variable v_obj {
+        Range: free;
+        Definition: sum(s,p_ValueCell(ev_evVisitCell(s)));
+    }
+    Constraint c_StopAtBestValue {
+        IndexDomain: |p_StopAtKnown;
+        Definition: v_obj <= p_bestKnownSolution;
+        Comment: {
+            "Artificial; stop the search if we are the best known solution."
+        }
+    }
+    Parameter p_StopAtKnown {
+        InitialData: 0;
+    }
+    MathematicalProgram mp_RogoProblemAsCP {
+        Objective: v_obj;
+        Direction: maximize;
+        Constraints: AllConstraints;
+        Variables: AllVariables;
+        Type: Automatic;
+    }
+    Parameter p_VisitedSequence {
+        IndexDomain: (r,c);
+        Definition: First(s|ep_CellNumber(r,c)=ev_evVisitCell(s));
+    }
+    Procedure MainInitialization {
+        Body: {
+            p_nr := 5 ;
+            p_nc := 9 ;
+        }
+    }
+    Procedure NewCase {
+        Body: {
+            Empty p_CellValue ;
+            Empty AllVariables ;
+        }
+    }
+    Procedure CreateTransitions {
+        Body: {
+            Empty s_Transitions, s_AllowedCells;
+            for (r,c,m) do
+            	epRow := r;
+            	epColumn := c;
+            	switch m do
+            	'L': epColumn -= 1;
+            	'R': epColumn += 1;
+            	'U': epRow += 1;
+            	'D': epRow -= 1;
+            	endswitch;
+            	if (epColumn <> '') and (epRow <> '') and (not p_CellNoGo(r, c)) and (not p_CellNoGo(epRow, epColumn)) then
+            		s_Transitions += {(ep_CellNumber(r, c), ep_CellNumber(epRow, epColumn))} ;
+            	endif;
+            endfor;
+            
+            for (r,c)|(not p_CellNoGo(r, c)) do
+            	epCell := ep_CellNumber(r, c);
+            	s_AllowedCells += {epCell};
+            	p_ValueCell(epCell) := p_CellValue(r,c);
+            	if ( p_CellValue(r,c)) then
+            		s_CellsWithValues += {epCell};
+            	endif ;
+            endfor;
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            CreateTransitions;
+            Empty AllVariables;
+            ShowProgressWindow();
+            solve mp_RogoProblemAsCP where time_limit := p_TimeLimit /* seconds */ ;
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+    }
+    Procedure OpenPuzzleSite {
+        Body: {
+            OpenDocument("http://www.rogopuzzle.co.nz");
+        }
+    }
+}
