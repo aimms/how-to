@@ -1,8 +1,6 @@
 Securing File Access
 ====================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
-
 This blog post is the last in a series of thee to enable AIMMS app developers to model file sharing in a secure manner.  
 In the :doc:`120-pro-user-groups`, we covered authorization of AIMMS PRO users, 
 and in the :doc:`117-Uploading-and-Downloading-files`, we covered transferring files. 
