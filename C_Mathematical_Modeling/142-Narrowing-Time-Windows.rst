@@ -1,7 +1,6 @@
 ﻿Scheduling example: Narrowing time window for smaller jobs
 ==========================================================
 
-
 .. sidebar:: Scheduling problem
 
     .. image:: ../Resources/C_Mathematical_Modeling/Images/142/small_schedule_example.png
