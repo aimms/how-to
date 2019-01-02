@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<TemplateManager>
+	<Template Name="Size Template" PageGUID="CC81AFE7-83F1-43A4-A347-67F7970057E2" CrossLibraryDuplicate="66E08D8C-5677-49B5-970F-BB85475A48BE|1162211862|&quot;Size Template&quot;">
+		<Template Name="Navigation Template" PageGUID="2860CCDB-2868-489F-87CA-F63679BE69ED" CrossLibraryDuplicate="66E08D8C-5677-49B5-970F-BB85475A48BE|1162212062|&quot;Navigation Template&quot;">
+			<Template Name="Background Info Template" PageGUID="EF8159AB-5653-4406-B705-4AE521F8B94D" CrossLibraryDuplicate="66E08D8C-5677-49B5-970F-BB85475A48BE|1162212262|&quot;Background Info Template&quot;" />
+		</Template>
+	</Template>
+	<Page Name="Page 1" PageGUID="EEFFDB41-C628-4426-BB70-3CE8F7EC01E0" />
+	<Page Name="rostering views" PageGUID="DB597FE3-5700-4FC6-9B88-A42A0A570B36" />
+</TemplateManager>

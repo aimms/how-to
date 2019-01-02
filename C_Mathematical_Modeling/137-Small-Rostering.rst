@@ -54,12 +54,11 @@ Inspecting the solution, we see that nurse C does the night shift on Wednesday a
 
 .. code-block:: aimms
 
-    CONSTRAINT:
-       identifier   :  SuccessorShiftRestriction
-       index domain :  (e,d,s) | card( permittedNextShifts(s) ) &lt; card(shifts)
-       definition   :  if Shift(e,d) = s then
-                           Shift(e,d++1) in permittedNextShifts( s )
-                       endif
+    Constraint SuccessorShiftRestriction {
+        IndexDomain: (e,d,s) | card( permittedNextShifts(s) ) < card(shifts);
+        Definition: if Shift(e,d) = s then Shift(e,d++1) in permittedNextShifts( s ) endif;
+        Comment: "For instance, it is not allowed to work a day shift right after a night shift.";
+    }
 
                       
 Here PermittedNextShifts is an Indexed Set with the following contents:

@@ -1,0 +1,31 @@
+﻿* AIMMS
+aim_character_encoding WINDOWS-1252
+ascii_case_character_encoding WINDOWS-1252
+datatable_character_encoding WINDOWS-1252
+default_input_character_encoding WINDOWS-1252
+default_output_character_encoding WINDOWS-1252
+external_dll_AIMMS_reference ASCII
+external_string_character_encoding WINDOWS-1252
+negate_objective_coefficient_modifications 1
+rounding_compatibility Aimms_3_7
+* AOA
+* BARON 14
+* CBC 2.8.0
+* CONOPT 3.14V
+* CPLEX 12.6
+* CPOptimizer 12.6
+* GUROBI 5.6
+* GUROBI 6.0
+* IPOPT 3.11
+* KNITRO 9.0
+* MINOS
+* SNOPT 7.2
+* XA 15
+* CPOptimizer 12.2
+"CPOptimizer 12.2".Mod_file 1
+"CPOptimizer 12.2".Cpo_file 1
+* NETSOL
+* Environment
+Project_Title "Employee rostering"
+Startup_Page "rostering views"
+Data_Management_Style 1
