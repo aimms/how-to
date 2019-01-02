@@ -3,8 +3,6 @@
 How to link AIMMS with an SQLite database
 =========================================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
-
 Say you have a wonderful AIMMS application, that needs to link a Database Table identifier |db|   (an AIMMS identifier) to one SQL data base of yours. Your amazing SQL data base is, however, an SQLite database. Thus, to be able to read it, AIMMS needs the appropriate "driver", which enables him to read your SQLite database. This blogpost presents how to:
 
 #. Install the SQLite driver,
