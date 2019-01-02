@@ -4,9 +4,9 @@
 
 .. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
 
+.. sidebar:: Well, we're using:
 
-
-.. image:: ../Resources/C_UI/Images/124/tableau.logo_.png
+    .. image:: ../Resources/C_UI/Images/124/tableau.logo_.png
 
 Although both the traditional AIMMS Windows UI and the new AIMMS Web UI offer excellent data visualization capabilities to view the data present *within* an AIMMS application, many of our customers have expressed the wish to be able to view and work with AIMMS data in Tableau (and other BI tools such as QlikView, or Spotfire). This allows a much wider audience within a company to track KPIs on dashboards based on the results from an AIMMS application, using a wider range of graphical capabilities to drill down into the data presented, and to cross analyze these results against data from various other corporate data sources.
 
