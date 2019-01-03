@@ -6,8 +6,6 @@
 
     .. image:: ../Resources/C_Connectivity/Images/122/782px-Microsoft_Excel_2013_logo.svg.png
 
-.. "D:\u\s\How to\gitlab\master\Resources\C_Connectivity\Images\122\782px-Microsoft_Excel_2013_logo.svg.png"
-
 The AimmsXLLibrary was introduced in AIMMS 4.20. The new library can communicate with Excel files in server environments, where Excel is not installed. For instance, while running AIMMS through a WebUI on PRO or on Linux. Excel is usually not installed in such environments. However, this isn't a problem. The AimmsXLLibrary doesn't require Excel to be installed in order to read from or write to an Excel (.xls/.xlsx) file. By using this library, you can deploy your AIMMS project to more platforms with less restrictions.
 
 In order to use the library, you first need to add the system library 'AIMMSXLLibrary' to your model. Then, you can use the functions, which start with prefix "axll"(Aimms eXeL Library), provided in the library. This blog post illustrates how these functions work. Let's take a look.

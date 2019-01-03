@@ -17,6 +17,7 @@ User Interface
     
     How To download multiple files
     95-change-default-ui
+    113-diff-WinUI-WebUI
     94-using-the-scalar-switch-css
     123-WebUI-FORMS
     124-tableau-integration
