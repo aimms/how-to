@@ -1,6 +1,13 @@
-﻿How to use the AIMMS Excel Library
+﻿Using the AIMMS Excel Library
 ==================================
 
+.. meta::
+   :description: How to use basic functions of the AIMMS Excel Library.
+   :keywords: excel, library, axll
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on July 6, 2016 by Deanne.
  
 .. sidebar:: Connecting to EXCEL
 
