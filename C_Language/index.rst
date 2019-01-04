@@ -22,6 +22,7 @@ AIMMS Language
     104-creating-email-templates
     104-using-email-client-library
     85-using-axll-library
+    150-solve-in-loop
     119-Reproducible-Random-Sequence
     144-Stopwatch
     125-execution-efficiency
