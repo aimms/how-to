@@ -1,7 +1,7 @@
 ﻿Installing Side-by-Side Drivers
 ================================
 .. meta::
-   :description: How to install and run 32-bit and 64-bit Microsoft Access Drivers in parallel for AIMMS applications.
+   :description: How to set up 32-bit and 64-bit Microsoft Access Drivers in parallel for AIMMS applications.
    :keywords: 32, 64, access, driver
 
 .. note::

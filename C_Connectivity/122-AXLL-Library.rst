@@ -2,7 +2,7 @@
 ==================================
 
 .. meta::
-   :description: How to use basic functions of the AIMMS Excel Library.
+   :description: How to link spreadsheet data to an AIMMS project with the AIMMS Excel Library.
    :keywords: excel, library, axll
 
 .. note::
