@@ -1,6 +1,10 @@
 
-Reducing the communication requirements between the client session and the server session
+Reducing Exchange Between Client Session and Server Session
 ==========================================================================================
+
+.. meta::
+   :description: How to reduce the overhead of creating and communicating cases between the client session and the server session.
+   :keywords: client, server, session
 
 .. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
 

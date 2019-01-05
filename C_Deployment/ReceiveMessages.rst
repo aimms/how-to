@@ -1,6 +1,9 @@
-How to receive messages?
-========================
+Sending and Receiving Messages
+==============================
 
+.. meta::
+   :description: How to use queues to pass messages from the server session to the data session.
+   :keywords:  queue, message
 
 .. https://gitlab.aimms.com/Chris/aimms-how-to/issues/80
 .. Nirvana project 0006
@@ -35,10 +38,10 @@ This article provides a simple example based on  :doc:`RegularJob`  The essence 
 
 #. The server sessions should pass messages to the data session.  Only for the first server session, `pro::clientQueueID` is valid reference to a queue for the data session. This is why all these server sessions post their messages on the queue created in the first step.
 
-#. When these server sessions pass their message, it should somehow be stored and displayed in the data session.  
+#. When these server sessions pass their message, it should be stored and displayed in the data session.  
 
 A potential implementation can be downloaded :download:`here <../Resources/C_Deployment/RegularJob/ReceiveMessages.zip>` .
 
-To operate this app, just press the button and watch messages appearing.
+To operate this app, just press the button and watch messages appear.
 
 .. include:: ../includes/form.def

@@ -1,5 +1,9 @@
-﻿Execute, a handy function to run an executable program from AIMMS
-=================================================================
+﻿Using the Execute Function
+============================
+
+.. meta::
+   :description: How to run executable files from AIMMS using the Execute function.
+   :keywords: execute, exe
 
 .. sidebar:: Executing another program
 

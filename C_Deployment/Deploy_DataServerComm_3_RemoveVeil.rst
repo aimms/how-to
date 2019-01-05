@@ -1,13 +1,17 @@
-How to keep the AIMMS WebUI interactive while a solve process is running in the background?
-===========================================================================================
+Keeping WebUI Interactive During Solve
+========================================
 
+.. meta::
+   :description: How to keep the AIMMS WebUI interactive while a solve process is running in the background.
+   :keywords: solve, webui, ui, veil
 
 Introduction
 ------------
 
-While solving decision problems using the AIMMS WebUI and PRO platform, the browser window is made inactive by default to represent a solve process running in the background. The window is active again when the results from the solve session are available for the user. However, for longer running procedures - the user might want to start a background procedure and continue working on other parts of the application. This next article in the series about AIMMS PRO will take you through the required steps to keep the AIMMS WebUI interactive while a solve session is going. 
+While solving decision problems using the AIMMS WebUI and PRO platform, the browser window is made inactive by default to represent a solve process running in the background. The window is active again when the results from the solve session are available for the user. However, for longer running procedures - the user might want to start a background procedure and continue working on other parts of the application. 
 
-.. Please review the last line of the above paragraph
+This article explains the required steps to keep the AIMMS WebUI interactive while a solve session is going. 
+
 
 .. image:: ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/Solve.gif
 

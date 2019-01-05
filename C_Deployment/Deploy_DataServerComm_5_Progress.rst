@@ -1,5 +1,9 @@
-How to display progress information in the WebUI?
-=================================================
+Using Progress Window in WebUI
+================================
+
+.. meta::
+   :description: How to track progress of a solve procedure in AIMMS WebUI.
+   :keywords: progress, solve, procedure
 
 Introduction
 ------------

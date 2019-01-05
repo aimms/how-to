@@ -1,6 +1,14 @@
 Uploading and Downloading files
 ================================
 
+.. meta::
+   :description: Modeling for secure apps deployed on AIMMS PRO – Part 2: Uploading and Downloading files.
+   :keywords: secure, upload, download
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on November 21, 2016 by Chris.
+
 This blog post is the second post in a series of three to enable AIMMS app developers to model necessary file sharing in a secure manner. In our 
 :doc:`120-pro-user-groups`, we covered AIMMS PRO User groups and how they can be used to authorize access to information within your AIMMS Apps. This blog post explains how you can upload and download files to and from AIMMS PRO Storage.
 

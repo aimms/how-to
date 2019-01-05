@@ -1,8 +1,12 @@
 
 .. Deploy_DataServerComm_8_PassNewData.rst
 
-Communicate data changes from the data session to the server session
-====================================================================
+Communicating Data Changes in WebUI
+====================================
+
+.. meta::
+   :description: How to communicate data changes from the data session to a running server session in WebUI.
+   :keywords:  webui, data, server
 
 .. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
 
