@@ -1,4 +1,4 @@
-﻿Solving with Benders Decomposition in CPLEX 
+﻿Solve with Benders Decomposition in CPLEX 
 =============================================
 
 .. meta::

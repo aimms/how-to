@@ -9,7 +9,7 @@
 
 .. BEGIN CONTENT
 
-Enabling Page Manager
+Enable Page Manager
 ======================
 
 .. meta::

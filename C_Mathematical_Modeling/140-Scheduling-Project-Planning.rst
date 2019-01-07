@@ -1,5 +1,5 @@
-﻿Scheduling for Project Planning
-================================
+﻿Optimize Scheduling for Project Planning
+========================================
 
 .. meta::
    :description: A construction scheduling example showing how to plan projects with AIMMS.

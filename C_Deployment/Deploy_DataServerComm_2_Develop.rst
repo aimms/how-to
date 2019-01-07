@@ -1,8 +1,8 @@
-Developing Applications for AIMMS IDE and AIMMS PRO
-=======================================================================================
+Develop Multi-Platform Applications
+====================================
 
 .. meta::
-   :description: Tips for developing flexible AIMMS applications for multi-platform use.
+   :description: Tips for developing flexible AIMMS applications for use on both AIMMS PRO and AIMMS IDE.
    :keywords: platform, pro
 
 

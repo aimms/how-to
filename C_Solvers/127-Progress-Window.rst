@@ -1,4 +1,4 @@
-﻿Changing the Frequency of Progress Updates 
+﻿Change the Frequency of Progress Updates 
 ================================================
 
 .. meta::

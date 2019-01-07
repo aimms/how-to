@@ -1,5 +1,5 @@
-﻿Multiple Solutions
-=====================
+﻿Generate Multiple Solutions
+===========================
 
 .. meta::
    :description: How to produce and retrieve multiple solutions in AIMMS.

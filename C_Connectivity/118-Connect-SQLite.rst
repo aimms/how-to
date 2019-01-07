@@ -1,6 +1,6 @@
 ﻿.. include:: ../includes/icons-sub.def
 
-Linking an SQLite Database to a Project
+Link an SQLite Database to a Project
 =========================================
 
 .. meta::

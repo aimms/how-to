@@ -1,4 +1,4 @@
-﻿Debugging Infeasible or Unbounded Results
+﻿Debug Infeasible or Unbounded Results
 ==========================================
 
 .. meta::

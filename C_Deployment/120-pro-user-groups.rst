@@ -1,4 +1,4 @@
-Creating PRO User Groups
+Create PRO User Groups
 ========================
 
 .. meta::

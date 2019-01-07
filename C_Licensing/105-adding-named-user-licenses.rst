@@ -10,7 +10,7 @@
 
 .. BEGIN CONTENT
 
-Registering Named Users in Network License Manager
+Register Named Users in Network License Manager
 ==================================================
 
 .. meta::

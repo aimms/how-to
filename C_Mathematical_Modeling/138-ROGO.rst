@@ -1,4 +1,4 @@
-﻿Using Constraint Programming to Solve ROGO Puzzle 
+﻿Use Constraint Programming to Solve ROGO Puzzle 
 =================================================
 
 .. meta::

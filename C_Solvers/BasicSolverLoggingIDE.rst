@@ -1,4 +1,4 @@
-Retrieving Solver Log Files in AIMMS Developer
+Retrieve Solver Log Files in AIMMS Developer
 ==============================================
 
 .. meta::

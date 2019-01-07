@@ -5,8 +5,8 @@
 
 .. CONTENT
 
-Using the AIMMS Excel Library
-===================================
+Overview: AIMMS Excel Library
+==============================
 
 .. Overview
 

@@ -1,6 +1,6 @@
 
-Reducing Exchange Between Client Session and Server Session
-==========================================================================================
+Reduce Exchange Between Client Session and Server Session
+==========================================================
 
 .. meta::
    :description: How to reduce the overhead of creating and communicating cases between the client session and the server session.

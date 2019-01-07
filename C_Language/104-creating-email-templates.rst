@@ -1,6 +1,6 @@
 .. BEGIN CONTENT
 
-Creating Email Templates
+Create Email Templates
 ==============================
 
 The Email Client library supports the use of template files in HTML and TXT formats. You can set up templates with placeholders to be replaced by values from identifiers in your AIMMS project. 

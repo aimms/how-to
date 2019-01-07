@@ -1,4 +1,4 @@
-Overview of the Deprecation of Compound Sets
+Overview: Deprecation of Compound Sets
 ==============================================
 
 .. sidebar:: Announcing deprecation compound sets

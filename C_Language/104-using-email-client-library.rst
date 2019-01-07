@@ -7,7 +7,7 @@
 
 .. BEGIN CONTENT
 
-Using the Email Client Library
+Overview: Email Client Library
 ==============================
 
 An introduction to the Email Client library with an example project.

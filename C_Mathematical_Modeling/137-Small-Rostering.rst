@@ -1,5 +1,5 @@
-﻿Optimizing Shift Schedules with AIMMS
-=============================================
+﻿Optimize Shift Schedules
+=========================
 
 .. meta::
    :description: How to develop a shift scheduling application in AIMMS.

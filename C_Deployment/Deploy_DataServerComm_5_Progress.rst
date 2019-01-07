@@ -1,4 +1,4 @@
-Using Progress Window in WebUI
+Use the Progress Window in WebUI
 ================================
 
 .. meta::

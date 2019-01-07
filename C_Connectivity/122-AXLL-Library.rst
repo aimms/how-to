@@ -1,5 +1,5 @@
-﻿Using the AIMMS Excel Library
-==================================
+﻿Link to Excel Files
+=======================
 
 .. meta::
    :description: How to link spreadsheet data to an AIMMS project with the AIMMS Excel Library.

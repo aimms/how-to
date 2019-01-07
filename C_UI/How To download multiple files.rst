@@ -1,4 +1,4 @@
-Adding Compressed Files for User Download
+Add Compressed Files for User Download
 ============================================
 
 .. meta::

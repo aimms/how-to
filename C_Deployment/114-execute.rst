@@ -1,4 +1,4 @@
-﻿Using the Execute Function
+﻿Run Executable Files
 ============================
 
 .. meta::

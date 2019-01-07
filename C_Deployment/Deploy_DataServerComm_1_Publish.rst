@@ -1,5 +1,5 @@
-Deploying an Application on the AIMMS PRO Platform 
-========================================================================
+Deploy an Application on AIMMS PRO 
+===================================
 
 .. meta::
    :description: Basic procedure to publish and share an AIMMS application with AIMMS PRO.

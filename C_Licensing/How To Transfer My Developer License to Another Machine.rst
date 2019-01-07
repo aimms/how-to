@@ -24,8 +24,8 @@
 					:align: center
 					:target: https://aimms.com/
 
-Transferring a Developer License to Another Machine
-==========================================================
+Transfer a Developer License to Another Machine
+================================================
 
 .. meta::
    :description: How to transfer an AIMMS license for use on a different computer.

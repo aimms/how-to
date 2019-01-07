@@ -1,4 +1,4 @@
-﻿Analyzing infeasible nonlinear problems
+﻿Analyze infeasible nonlinear problems
 ============================================
 
 .. meta::
