@@ -1,0 +1,102 @@
+## ams_version=1.0
+
+Model Main_CrowDistExternal {
+    StringParameter sp_dll {
+        Definition: "external\\Windows\\x64\\HaversineDLL.dll";
+    }
+    Set s_Locations {
+        Index: i_loc, i_locFrom, i_locTo;
+    }
+    Set s_SomeLocations {
+        SubsetOf: s_Locations;
+        Index: i_sLoc, i_sLocFrom, i_sLocTo;
+        Definition: {
+            !{ i_loc | ord(i_loc) <= 3 }
+            s_Locations
+        }
+    }
+    Parameter p_Latitude {
+        IndexDomain: i_loc;
+    }
+    Parameter p_Longitude {
+        IndexDomain: i_loc;
+    }
+    Parameter p_DistNashvilleLosAngeles;
+    Parameter p_dist1 {
+        IndexDomain: (i_locFrom,i_locTo);
+    }
+    Parameter p_dist2 {
+        IndexDomain: (i_locFrom,i_locTo);
+        Definition: {
+            if i_LocFrom = i_LocTo then
+            	0
+            else
+            	6371*(arccos[sin(radians(p_Latitude(i_locFrom)))*sin(radians(p_Latitude(i_locTo)))+cos(radians(p_Latitude(i_locFrom)))*cos(radians(p_Latitude(i_locTo)))*cos(radians(p_Longitude(i_locTo))-(radians(p_Longitude(i_locFrom))))])
+            endif
+        }
+    }
+    Parameter p_diff {
+        IndexDomain: (i_locFrom,i_locTo);
+        Definition: p_dist1(i_locFrom, i_locTo) - p_dist2(i_locFrom, i_locTo);
+    }
+    ExternalFunction fnc_Haversine {
+        Arguments: (latFrom,lonFrom,latTo,lonTo);
+        DllName: "external\\Windows\\x64\\HaversineDLL.dll";
+        ReturnType: double;
+        BodyCall: Haversine(scalar: latFrom, scalar: lonFrom, scalar: latTo, scalar: lonTo);
+        Parameter latFrom {
+            Property: Input;
+        }
+        Parameter lonFrom {
+            Property: Input;
+        }
+        Parameter latTo {
+            Property: Input;
+        }
+        Parameter lonTo {
+            Property: Input;
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Body: {
+            read from file "data\\locs.txt" ;
+        }
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            p_DistNashvilleLosAngeles := fnc_Haversine(36.12, -86.67, 33.94, -118.40);
+            
+            p_dist1(i_slocFrom, i_slocTo) := fnc_Haversine( p_Latitude(i_slocFrom), p_Longitude(i_slocFrom), p_Latitude(i_slocTo), p_Longitude(i_slocTo) );
+            
+            display p_DistNashvilleLosAngeles ;
+        }
+    }
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}
