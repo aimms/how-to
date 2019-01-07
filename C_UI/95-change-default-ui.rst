@@ -12,6 +12,10 @@
 Enabling Page Manager
 ======================
 
+.. meta::
+   :description: How to enable Page Manager for WinUI in your AIMMS project.
+   :keywords: winui, page, manager
+
 How to enable Page Manager for WinUI in your AIMMS project.
 
 Changing the default UI to enable Page Manager

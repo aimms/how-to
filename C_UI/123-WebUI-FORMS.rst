@@ -1,5 +1,13 @@
-﻿Using AIMMS WebUI Forms to Create and Edit Data
-================================================
+﻿Creating Forms in WebUI
+========================
+
+.. meta::
+   :description: Creating user forms in WebUI to create, update, and delete data.
+   :keywords: webform, form, webui
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on March 10, 2016 by Chris Kuip.
 
 The AIMMS WebUI is well known for its capability to create a UI for inspecting and analyzing data in a browser and for modifying existing data. However, as a model developer, you also want your users to be able to:
 

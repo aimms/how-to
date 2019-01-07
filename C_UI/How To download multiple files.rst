@@ -1,5 +1,11 @@
-How to download multiple files ?
-=========================================================================
+Adding Compressed Files for User Download
+============================================
+
+.. meta::
+   :description: How to add compressed files to AIMMS PRO applications.
+   :keywords: zip, compress, download
+
+
 
 A download widget in the WebUI is able to point only a unique file name. Thus if you need to download multiple different files, you would need multiple download widgets. However, you may use ZIP files (or equivalent compressed format, such as TAR files on Linux). The question is, how to automatically generate a zip file out of several files thanks to AIMMS, such that your end-user would be able to download it from the End-user mode (WebUI) in one click? In developer mode, on PRO or on the AIMMS Cloud ?
 
