@@ -1,5 +1,14 @@
-﻿Scheduling example: Narrowing time window for smaller jobs
+﻿Reducing the Time Window for Scheduling Small Jobs
 ==========================================================
+
+.. meta::
+   :description: A scheduling example showing how to reduce the time window for smaller jobs.
+   :keywords: scheduling, job, activities, resources
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog in 2012 by Chris Kuip.
+
 
 .. sidebar:: Scheduling problem
 

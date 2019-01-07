@@ -10,6 +10,10 @@
 Resolving License Issues
 =========================
 
+.. meta::
+   :description: Resolving AIMMS license issues regarding personal nodelock, pending activation, and IP subnet.
+   :keywords: license, error, nodelock, activation, ip, subnet
+
 .. TOC
 
 * :ref:`ref-personal-nodelock`

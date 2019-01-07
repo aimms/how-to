@@ -13,6 +13,10 @@
 Resolving License Error: Nodelock file is read-only
 ====================================================
 
+.. meta::
+   :description: Resolving AIMMS license update issue regarding the nodelock file.
+   :keywords: license, error, nodelock, update, read
+
 .. _ref-update-failed:
 
 Error: Update failed - The nodelock file is readonly

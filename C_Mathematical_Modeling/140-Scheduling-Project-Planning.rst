@@ -1,5 +1,14 @@
-﻿Scheduling for project planning
+﻿Scheduling for Project Planning
 ================================
+
+.. meta::
+   :description: A construction scheduling example showing how to plan projects with AIMMS.
+   :keywords: scheduling, project, activities, resources
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog in 2012 by Chris Kuip.
+
 
 .. sidebar:: Golden Gate bridge by Guido Diepen
 

@@ -13,6 +13,10 @@
 Registering Named Users in Network License Manager
 ==================================================
 
+.. meta::
+   :description: How to register users to access the AIMMS license server.
+   :keywords: license, network, user, name, register
+
 How to register Named Users for a Network License in the Network License Manager.
 
 Adding named users

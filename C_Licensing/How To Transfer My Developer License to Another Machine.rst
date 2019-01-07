@@ -24,10 +24,14 @@
 					:align: center
 					:target: https://aimms.com/
 
-How To Transfer My Developer License to Another Machine?
+Transferring a Developer License to Another Machine
 ==========================================================
 
-There may be situations where you will need to use |aimms| on a different machine but you only have one license. An AIMMS developer license can only be used on one machine at a time and this guide demonstrates how to transfer an AIMMS license such that it can be used on a different computer. [#]_ [#]_
+.. meta::
+   :description: How to transfer an AIMMS license for use on a different computer.
+   :keywords: license, transfer, move, switch
+
+An AIMMS developer license can only be used on one machine at a time. There may be situations where you need to use |aimms| on a different machine, either temporarily or permanently. This article explains how to transfer an AIMMS license for use on a different computer. [#]_ [#]_
 
 1.	First deactivate your license from the machine it is currently installed on
 -------------------------------------------------------------------------------------
