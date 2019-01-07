@@ -3,7 +3,6 @@ Haversine as external function
 
 .. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
 
-
 .. sidebar:: Crow in flight - Wikimedia Commons
 
     .. image:: ../Resources/C_Language/Images/153/Crow_in_flight.jpg
