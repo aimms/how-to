@@ -1,5 +1,13 @@
-﻿Benders Decomposition in CPLEX 
-================================
+﻿Solving with Benders Decomposition in CPLEX 
+=============================================
+
+.. meta::
+   :description: How to solve mathematical programming problems with Benders decomposition algorithm in CPLEX 12.7.
+   :keywords: benders, cplex
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on October 25, 2018 by Marcel Hunting.
 
 .. sidebar:: Network Ring Design
 

@@ -1,5 +1,13 @@
-﻿Infeasible or Unbounded
-=======================
+﻿Debugging Infeasible or Unbounded Results
+==========================================
+
+.. meta::
+   :description: How to analyze infeasible or unbounded solver results with constraints and presolve tools.
+   :keywords: infeasible, unbounded, debug, constraint, presolve
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog in March 2013 by Guido Diepen.
 
 .. sidebar:: Infeasible triangle
 

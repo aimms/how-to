@@ -1,5 +1,10 @@
-How to get solver log files using the AIMMS IDE?
-======================================================
+Retrieving Solver Log Files in AIMMS Developer
+==============================================
+
+.. meta::
+   :description: How to get log files for a particular solver in AIMMS IDE.
+   :keywords: log, logfile, solver
+
 
 Solvers can share information about the solution process up to a very detailed level.
 To avoid overhead in generating information that is not inspected anyway, the AIMMS IDE defaults to not sharing any information.

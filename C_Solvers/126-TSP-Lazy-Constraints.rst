@@ -1,5 +1,13 @@
-﻿Solving a TSP using lazy constraints
-====================================
+﻿Solving with Lazy Constraints
+==============================
+
+.. meta::
+   :description: An example solving a Traveling Salesman Problem using lazy constraints.
+   :keywords: lazy, constraints, salesman, tsp
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on May 26, 2015 by Marcel Hunting.
 
 The famous **travelling salesman problem** (TSP) deals with the following problem: given a list of cities and the distances between each pair of cities, a salesman has to find the shortest possible route to visit each city exactly once while returning to the origin city. One way to formulate the TSP is as follows:
 

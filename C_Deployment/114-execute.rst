@@ -5,6 +5,10 @@
    :description: How to run executable files from AIMMS using the Execute function.
    :keywords: execute, exe
 
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on October 25, 2018 by Deanne Zhang.
+
 .. sidebar:: Executing another program
 
     .. image:: ../Resources/C_Deployment/Images/114/exe-file-icon-68130.png

@@ -1,5 +1,13 @@
-﻿Investigating infeasible nonlinear problems
+﻿Analyzing infeasible nonlinear problems
 ============================================
+
+.. meta::
+   :description: How to evaluate infeasible results to nonlinear problems.
+   :keywords: infeasible, nonlinear, debug, iis, presolver
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog by Marcel Hunting.
 
 .. sidebar:: Sherlock
 

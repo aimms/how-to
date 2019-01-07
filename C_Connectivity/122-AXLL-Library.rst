@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on July 6, 2016 by Deanne.
+	This article was originally posted to the AIMMS Tech Blog on July 6, 2016 by Deanne Zhang.
  
 .. sidebar:: Connecting to EXCEL
 
