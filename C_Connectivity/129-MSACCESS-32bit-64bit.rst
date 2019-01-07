@@ -1,5 +1,15 @@
-﻿Installing 32-bit and 64-bit Microsoft Access Drivers next to each other
-========================================================================
+﻿Installing Side-by-Side Drivers
+================================
+
+.. meta::
+   :description: How to set up 32-bit and 64-bit Microsoft Access Drivers in parallel for AIMMS applications.
+   :keywords: 32, 64, access, driver
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on October 27, 2014 by Ovidiu.
+
+
 
 .. sidebar:: Connecting to 32 or 64 bit drivers
 

@@ -1,5 +1,10 @@
-How to make an AIMMS project flexible to be used in both the AIMMS IDE and on AIMMS PRO
+Developing Applications for AIMMS IDE and AIMMS PRO
 =======================================================================================
+
+.. meta::
+   :description: Tips for developing flexible AIMMS applications for multi-platform use.
+   :keywords: platform, pro
+
 
 After publishing an app on the AIMMS PRO server, it is common to continue development of that application for updates using the AIMMS IDE. 
 When we test our app from within the AIMMS IDE, we get the following dialog:
