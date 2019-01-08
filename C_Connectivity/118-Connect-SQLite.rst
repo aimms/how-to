@@ -28,7 +28,7 @@ SQLite driver
 
 To install SQLite ODBC driver, please refer to the following website, and download ``sqliteodbc.exe`` or ``sqliteodbc_w64.exe``, depending on your AIMMS' configuration (and NOT your computer's configuration):
 
-`here <http://www.ch-werner.de/sqliteodb>`_
+`here <http://www.ch-werner.de/sqliteodbc>`_
 
 Then just run the .exe and follow the instructions.
 

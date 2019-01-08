@@ -17,7 +17,7 @@
 
 The identifier types ACTIVITIES and RESOURCES, and the scheduling intrinsic functions as part of the AIMMS constraint programming component are very useful in modeling construction projects and optimizing the makespan of those projects.
 
-Several existing constraint programming languages use the Bridge Building example in the Ph.D Thesis of the late M. Bartusch to illustrate this, see for instance `mozart-oz <http://www.mozart-oz.org/documentation/fdt/node48.html#section.scheduling.bridge>`_ and `SAS <http://support.sas.com/documentation/cdl/en/orcpug/63973/HTML/default/viewer.htm#orcpug_clp_sect046.htm>`_.
+Several existing constraint programming languages use the Bridge Building example in the Ph.D Thesis of the late M. Bartusch to illustrate this, see for instance `mozart-oz <http://www.mozart-oz.org/documentation/fdt/node48.html>`_ and `SAS <http://support.sas.com/documentation/cdl/en/orcpug/63973/HTML/default/viewer.htm>`_.
 
 In such a construction project, there are construction activities related to each element of a structure, such as pillars, and to the activities to manage the project itself such as delivery of materials and the building of housing to shelter the construction equipment.
 
