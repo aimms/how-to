@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on October 25, 2018 by Deanne Zhang.
+	This article was originally posted to the AIMMS Tech Blog on February 22, 2017 by Deanne Zhang.
 
 .. sidebar:: Executing another program
 

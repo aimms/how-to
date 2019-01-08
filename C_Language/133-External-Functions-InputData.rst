@@ -1,5 +1,21 @@
-﻿Using external functions for data input
+﻿Exchange Data with External Source
 ========================================
+
+.. meta::
+   :description: How to link data from an external data source in AIMMS models.
+   :keywords: link, exchange, external, import, source
+
+      .. note::
+
+	This article was originally posted to the AIMMS Tech Blog on January 21, 2014 by Chris Kuip.
+
+.. meta::
+   :description: 
+   :keywords:
+
+      .. note::
+
+	This article was originally posted to the AIMMS Tech Blog on - by -.
 
 .. sidebar:: Make connection
 

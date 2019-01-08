@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog in March 2013 by Guido Diepen.
+	This article was originally posted to the AIMMS Tech Blog on March 12, 2013 by Guido Diepen.
 
 .. sidebar:: Infeasible triangle
 

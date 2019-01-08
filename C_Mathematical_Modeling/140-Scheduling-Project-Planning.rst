@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog in 2012 by Chris Kuip.
+	This article was originally posted to the AIMMS Tech Blog on November 29, 2012 by Chris Kuip.
 
 
 .. sidebar:: Golden Gate bridge by Guido Diepen

@@ -1,5 +1,13 @@
-﻿Getting reproducible results with distribution functions
-=========================================================
+﻿Standardize Random Data in Distribution Functions
+=================================================
+
+.. meta::
+   :description: How create a reproducible random sequence in distribution functions.
+   :keywords: seed, random, distribution, uniform, binomial, normal
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on October 20, 2016 by Peter Nieuwesteeg.
 
 .. sidebar:: Repeating seemingly random patterns
 

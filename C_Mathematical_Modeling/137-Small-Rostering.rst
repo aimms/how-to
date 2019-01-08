@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog by Chris Kuip.
+	This article was originally posted to the AIMMS Tech Blog on February 13, 2013 by Chris Kuip.
 
 
 .. sidebar:: Stock Exchange Dry Board.

@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog by Guido Diepen.
+	This article was originally posted to the AIMMS Tech Blog on November 10, 2011 by Guido Diepen.
 
 In the simplest form solving a Mathematical Program identifier is done by using the intrinsic **solve** statement of AIMMS:
 

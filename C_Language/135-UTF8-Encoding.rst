@@ -1,5 +1,13 @@
-﻿Support of UTF8 and Other Encodings
-======================================
+﻿Set Encoding Format
+====================
+
+.. meta::
+   :description: How to configure character encoding in your project such as UTF8 and ASCII.
+   :keywords: encode, character, format, UTF, ASCII, unicode
+
+      .. note::
+
+	This article was originally posted to the AIMMS Tech Blog on August 15, 2013 by Chris Kuip.
 
 .. sidebar:: German Enigma Machine
 

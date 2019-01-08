@@ -1,6 +1,13 @@
-﻿Exporting a section and importing it in another AIMMS project
-=============================================================
+﻿Export Code to Another Project
+==================================
 
+.. meta::
+   :description: How to reuse parts of your code in another AIMMS model.
+   :keywords: import, export, link, share, reuse, re-use
+
+      .. note::
+
+	This article was originally posted to the AIMMS Tech Blog on November 29, 2011 by Guido Diepen.
 
 .. sidebar:: Re-using AIMMS source code.
 

@@ -1,6 +1,13 @@
-﻿Set, Subset, Index and Element Parameter in AIMMS
+﻿Overview: Set, Subset, Index and Element Parameter
 ====================================================
 
+.. meta::
+   :description: How to use sets, subsets, indices, element parameters in AIMMS models.
+   :keywords: set, subset, index, element, parameter
+
+   .. note::
+
+	This article was originally posted to the AIMMS Tech Blog on September 23, 2016 by Deanne Zhang.
 
 .. sidebar:: The Egyptian god Set
 

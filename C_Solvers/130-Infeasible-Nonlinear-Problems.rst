@@ -1,5 +1,5 @@
-﻿Analyze infeasible nonlinear problems
-============================================
+﻿Analyze Infeasible Nonlinear Problems
+=======================================
 
 .. meta::
    :description: How to evaluate infeasible results to nonlinear problems.
@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog by Marcel Hunting.
+	This article was originally posted to the AIMMS Tech Blog on October 20, 2014 by Marcel Hunting.
 
 .. sidebar:: Sherlock
 

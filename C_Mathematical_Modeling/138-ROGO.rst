@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog by Chris Kuip.
+	This article was originally posted to the AIMMS Tech Blog on December 18, 2012 by Chris Kuip.
 
 
 .. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.

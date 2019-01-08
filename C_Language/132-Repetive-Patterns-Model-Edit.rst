@@ -1,5 +1,13 @@
-﻿Repetitive Patterns captured by Model Query and Model Edit Functions
-======================================================================
+﻿Repeat Data with Model Query and Model Edit
+===========================================
+
+.. meta::
+   :description: How to duplicate patterns with Model Query and Model Edit functions
+   :keywords: model, edit, query, structure, pattern
+
+      .. note::
+
+	This article was originally posted to the AIMMS Tech Blog on May 8, 2014 by Chris Kuip.
 
 .. sidebar:: Der Maler - Honoré Daumier - from Rheims Museum of Fine Arts
 

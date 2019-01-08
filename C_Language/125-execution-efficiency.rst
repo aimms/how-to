@@ -1,7 +1,13 @@
-﻿Tricks to Improve AIMMS Execution Time
-======================================
+﻿Optimize Execution Time
+=======================
 
+.. meta::
+   :description: How to improve efficiency of executing procedures in AIMMS projects.
+   :keywords: execute, solve, long, time, duration
 
+      .. note::
+
+	This article was originally posted to the AIMMS Tech Blog on December 21, 2011 by Deanne Zhang.
 
 The time spent by AIMMS applications can be divided into AIMMS execution time ( including evaluation parameters with definition, executing procedures, generate matrix for solvers, etc), the time spent by solvers, and the I/O time.  Here are some coding tricks that help you improve AIMMS execution time.
 

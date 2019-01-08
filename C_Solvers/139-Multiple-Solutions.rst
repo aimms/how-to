@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog by Guido Diepen.
+	This article was originally posted to the AIMMS Tech Blog on December 11, 2012 by Guido Diepen.
 
 .. sidebar:: 8 Queens Solution
 

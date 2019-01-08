@@ -1,5 +1,13 @@
-﻿Formulas as Data
-=================
+﻿Use Formulas as Data
+====================
+
+.. meta::
+   :description: How to enter formulas as data strings in AIMMS applications.
+   :keywords: formula, string, asset, blend
+
+      .. note::
+
+	This article was originally posted to the AIMMS Tech Blog on August 21, 2014 by Chris Kuip.
 
 .. sidebar:: Mathematics as taught
 

@@ -1,5 +1,13 @@
-﻿Monitoring memory use
-===========================
+﻿Monitoring Memory Usage
+=========================
+
+.. meta::
+   :description: How to analyze and monitor application memory usage.
+   :keywords: card, cardinality, memory
+
+      .. note::
+
+	This article was originally posted to the AIMMS Tech Blog on December 17, 2013 by Chris Kuip.
 
 .. sidebar:: Memory module
 
