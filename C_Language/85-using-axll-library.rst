@@ -8,6 +8,11 @@
 Overview: AIMMS Excel Library
 ==============================
 
+.. meta::
+   :description: How to import and export spreadsheet data using the AIMMS Excel Library.
+   :keywords: excel, spreadsheet, axll
+
+
 .. Overview
 
 The AimmsXLLibrary can communicate with Excel files in server environments where Excel is not installed.

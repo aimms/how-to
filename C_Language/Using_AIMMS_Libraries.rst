@@ -1,6 +1,10 @@
 Add AIMMS Libraries
 ====================
 
+.. meta::
+   :description: How to extend project functionality with libraries.
+   :keywords: library, system, repository
+
 .. Definition
 
 In the context of the AIMMS environment, a library is an AIMMS project that can be included in/added to other AIMMS projects.  

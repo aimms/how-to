@@ -1,6 +1,13 @@
 ﻿Integer set expressions: 2 new properties
 =========================================
 
+.. meta::
+   :description: 
+   :keywords: 
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on - by -.
 
 .. image:: ../Resources/C_Language/Images/112/BlogPicture.jpg
 

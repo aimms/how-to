@@ -1,7 +1,13 @@
 .. BEGIN CONTENT
 
 Create Email Templates
-==============================
+========================
+
+.. meta::
+   :description: How to create and send HTML email templates from AIMMS projects.
+   :keywords: email, e-mail, template, html
+
+
 
 The Email Client library supports the use of template files in HTML and TXT formats. You can set up templates with placeholders to be replaced by values from identifiers in your AIMMS project. 
 

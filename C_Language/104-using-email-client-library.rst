@@ -10,6 +10,11 @@
 Overview: Email Client Library
 ==============================
 
+.. meta::
+   :description: An introduction to the Email Client library with an example project.
+   :keywords: email, e-mail, template
+
+
 An introduction to the Email Client library with an example project.
 
 Overview

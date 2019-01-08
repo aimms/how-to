@@ -6,6 +6,10 @@
 Prepare for the Deprecation of Compound Sets
 ==============================================
 
+.. meta::
+   :description: Procedure for adapting projects to remove compound sets.
+   :keywords: compound, set, convert, adapt, deprecate
+
 .. note:: We are actively updating this topic during the deprecation stages. Your feedback is welcome and appreciated, as it may help others facing the same issue.
 
 .. _Section_Summary:
