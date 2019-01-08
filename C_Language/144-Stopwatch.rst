@@ -12,6 +12,8 @@
 .. sidebar:: Stopwatch
 
     .. image:: ../Resources/C_Language/Images/144/stopwatch-156008_960_720.png
+            :scale: 50 %
+            :align: center
 
 There are situations where you would like to know how long the execution of something in AIMMS took.
 

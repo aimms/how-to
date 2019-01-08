@@ -21,7 +21,7 @@ One particular error message I see appear quite often in questions on our `AIMMS
 
 .. code-block:: none
 
-    Warning: After zero iterations the preprocessor of CPLEX 12.4 concluded that MathProgramName is infeasible or unbounded</blockquote>
+    Warning: After zero iterations the preprocessor of CPLEX 12.4 concluded that MathProgramName is infeasible or unbounded
 
 where MathProgramName is the name of the mathematical program identifier in your model. Note that this error/warning is not specifically AIMMS related and has been discussed already also on the blogs of `disORiented blog of Bob Fourer <http://bob4er.blogspot.nl/2013/02/more-than-one-large-scale-solver-for.html>`_ and `Yet another math programming consultant blog of Erwin Kalvelagen <http://yetanothermathprogrammingconsultant.blogspot.nl/2012/04/model-is-infeasible-or-unbounded.html>`_. Furthermore, this status is not only returned by CPLEX, but also by GUROBI.
 

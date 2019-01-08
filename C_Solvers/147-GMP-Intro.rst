@@ -41,7 +41,7 @@ Mathematical Programs" in the `AIMMS The Language Reference <https://documentati
 Additional information
 ----------------------- 
 
-The exact workings of gmp::Instance::Solve statement can actually be emulated in a couple of lower-level GMP statements. 
+The exact workings of ``gmp::Instance::Solve`` statement can actually be emulated in a couple of lower-level GMP statements. 
 If you look at the Language Reference, you will see that you can emulate its behavior with the following calls:
 
 .. code-block:: aimms

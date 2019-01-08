@@ -200,7 +200,7 @@ Step 7. Adapting the programmatic names to phrases inviting proper user entry
 
 Phrase adapting in the WebUI is achieved via translation files. In our running example we adapt using ``InventoryManagement\WebUI\resources\languages\skuform-messages.properties``, with the following contents.
 
-.. code-block:: aimms
+.. code-block:: none
 
     SKUForm_SP_SKUFORM_InternalName = Name
     SKUForm_SP_Manufacturer = Manufacturer

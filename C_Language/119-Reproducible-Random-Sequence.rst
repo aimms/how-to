@@ -12,6 +12,7 @@
 .. sidebar:: Repeating seemingly random patterns
 
     .. image:: ../Resources/C_Language/Images/119/Random-Number-generator.png
+    		:align: center
 
 The other day I got a model from a user and every time that I solved the model the results were different. At first I thought that some of the outputs were used as input, but that wasn't the case. After some analysis I found out that this statement was the culprit: 
 

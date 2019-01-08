@@ -83,6 +83,8 @@ This conversion procedure explains how to convert compound sets to set mappings 
     
     The multitude of steps are too gradually transform the information in cases, pages, and model.
 
+|
+
 .. topic:: Overview of the conversion procedure
 
     :ref:`Step 1: <Step_conversion_Backup>`
@@ -112,6 +114,8 @@ This conversion procedure explains how to convert compound sets to set mappings 
     :ref:`Step 9: <Step_Conversion_Final>` 
     Remove ``DeprecateCompoundSetUtilities`` library from your application.
 
+
+|
 
 .. _Step_conversion_Backup:
 

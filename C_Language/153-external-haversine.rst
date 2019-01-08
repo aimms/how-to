@@ -167,7 +167,7 @@ Step 1: Copy the dll's into the AIMMS project:
 
 #. Copy the ``<HaversineDLL>\release\HaversineDLL.dll`` to the AIMMS project subfolder ``external\Windows\x86``
 
-#. COpy the ``<HaversineDLL>\x64\release\HaversineDLL.dll`` to the AIMMS project subfolder ``external\Windows\x64``
+#. Copy the ``<HaversineDLL>\x64\release\HaversineDLL.dll`` to the AIMMS project subfolder ``external\Windows\x64``
 
 
 Step 2: Declare the external function in AIMMS:

@@ -40,7 +40,7 @@ When declaring a parameter with multiple indices, usually index with small card
 
 Another thing to keep in mind is to put the indices in same order. For example the following statement
 
-.. code-block:: none
+.. code-block:: aimms
 
     isActive(p,t,s):= 1 $ (t >= Begin(p,s) and t < (Begin(p,s)+Duration(t,s)));
 
