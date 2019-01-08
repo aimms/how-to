@@ -4,6 +4,7 @@
 .. sidebar:: Make connection
 
     .. image:: ../Resources/C_Language/Images/133/5.10_Road_sign.gif
+        :align: center
 
 
 Data exchange is an essential part of every application. AIMMS supports various industry standards for data exchange, such as ODBC for databases, XML Files and spreadsheets. But what if the data is not stored according to one of these standards? In order to read data from an arbitrary data source, AIMMS offers access to self-developed or third party functions. This blog post provides an overview of the steps you need to take to create a data exchange link between a proprietary data format and AIMMS. The process is illustrated by using a concrete modeling exercise from the Constraint Programming example library CSPLIB.  
@@ -11,7 +12,7 @@ Data exchange is an essential part of every application. AIMMS supports various 
 The example
 -----------
 
-The constraint programming example library, <a href="http://www.csplib.org" target="_blank">CSPLIB</a>, provides several concrete constraint programming modeling exercises, where, given a particular exercise, several input files are provided. Each such input file is a sequence of numbers. Consider the first modeling exercise: the famous car sequencing problem. The input format for the car sequencing problem, quoting the CSPLIB, is defined as:
+The constraint programming example library, http://www.csplib.org, provides several concrete constraint programming modeling exercises, where, given a particular exercise, several input files are provided. Each such input file is a sequence of numbers. Consider the first modeling exercise: the famous car sequencing problem. The input format for the car sequencing problem, quoting the CSPLIB, is defined as:
 
 
 .. code-block:: none
@@ -47,7 +48,7 @@ Creating a DLL for external functions:
 
 To declare functions in the DLL as *callable*, you will need the following macro:
 
-.. code-block:: none
+.. code-block:: cpp
 
     #ifdef __cplusplus
     #define DLL_EXPORT_PROTO(type) extern "C" __declspec(dllexport) type WINAPI
@@ -58,7 +59,7 @@ To declare functions in the DLL as *callable*, you will need the following macro
 C++ Functions declared using this macro can be called from outside the DLL in which they are implemented. Just put this macro in a header file. For the getInt function, you can use this macro to declare it as follows:
 
 
-.. code-block:: none
+.. code-block:: cpp
 
     // Upon success, 0 is returned and the result is stored in i.
     // hndl is a file handle obtained via the function openFileHandle.
@@ -66,7 +67,7 @@ C++ Functions declared using this macro can be called from outside the DLL in wh
 
 and subsequently the implementation as follows:
 
-.. code-block:: none
+.. code-block:: cpp
 
     DLL_EXPORT_PROTO(int) getInt( int hndl, int *i )
     {
@@ -81,73 +82,51 @@ Step 1, the external procedure call
 
 .. code-block:: aimms
 
-    EXTERNAL PROCEDURE
-      identifier  :  getInt
-      arguments   :  (hndl,anint)
-      dll name    :  DLL_Filename
-      return type :  integer
-      encoding    :  DLL_Encoding
-      body call   :  getInt(integer : hndl,
-                           integer : anint
-                         )
-
-      DECLARATION SECTION
-
-        PARAMETER:
-           identifier :  hndl
-           property   :  Input ;
-
-        PARAMETER:
-           identifier :  anint
-           property   :  Output ;
-
-      ENDSECTION  ;
-
-    ENDPROCEDURE  ;
+    ExternalFunction getInt {
+        Arguments: (hndl,anint);
+        DllName: DLL_Filename;
+        ReturnType: integer;
+        BodyCall: getInt(integer : hndl,integer : anint);
+        Parameter hndl {
+            Property: Input;
+        }
+        Parameter anint {
+            Property: Output;
+        }
+    }
 
     
-    Let's check each of the attributes of this external function.
+Let's check each of the attributes of this external function.
 
-* First, the file in which the DLL is stored. Here, DLL_Filename is a string parameter that is defined based on the running platform, 32 or 64 bits (See also <a title="get-platformarchitecture-information-in-aimms" href="http://blog.aimms.com/2012/07/get-platformarchitecture-information-in-aimms/">get platformarchitecture information in aimms</a>)
-* Second, the return type, which is typically an int or a double.
-* Third, the character encoding - we compiled it using wide chars (by defining the preprocessor macro UNICODE) which corresponds to the UTF16-LE encoding on Windows. See also the <a title="Unicode organization" href="http://www.unicode.org/">Unicode organization</a>.
-* Fourth and most importantly, the body call. We know the name of the C++ function to be called, as we have developed the library ourselves. However, when a DLL is supplied to you, you can check the available functions using depends.exe from <a title="www.dependencywalker.com" href="http://www.dependencywalker.com">www.dependencywalker.com</a>. In addition, you will need to map the arguments. More information about this can be found in the AIMMS Language Reference (starting in the paragraph "The BODY CALL attribute").
+* First, the file in which the DLL is stored. Here, ``DLL_Filename`` is a string parameter that is defined based on the running platform, 32 or 64 bits (See also http://blog.aimms.com/2012/07/get-platformarchitecture-information-in-aimms/)
+* Second, the return type, which is typically an ``int`` or a ``double``.
+* Third, the character encoding - we compiled it using wide chars (by defining the preprocessor macro UNICODE) which corresponds to the UTF16-LE encoding on Windows. See also http://www.unicode.org/.
+* Fourth and most importantly, the body call. We know the name of the C++ function to be called, as we have developed the library ourselves. However, when a DLL is supplied to you, you can check the available functions using depends.exe from http://www.dependencywalker.com. In addition, you will need to map the arguments. More information about this can be found in the AIMMS Language Reference (starting in the paragraph "The BODY CALL attribute").
 
 Step 2, wrapping it in an AIMMS procedure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: aimms
 
-  PROCEDURE
-    identifier :  int
-    arguments  :  (hndl,anint)
+    Procedure int {
+        Arguments: (hndl,anint);
+        Body: {
+            rc := getInt(hndl,anint);
+            if not rc then
+                  ErrorMessage( msg );
+                  raise error msg ;
+            endif ;
+        }
+        Parameter hndl {
+            Property: Input;
+        }
+        Parameter anint {
+            Property: Output;
+        }
+        StringParameter msg;
+        Parameter rc;
+    }
 
-    DECLARATION SECTION
-
-      PARAMETER:
-         identifier :  rc ;
-
-      PARAMETER:
-         identifier :  hndl
-         property   :  Input ;
-
-      PARAMETER:
-         identifier :  anint
-         property   :  Output ;
-
-      STRING PARAMETER:
-         identifier :  msg ;
-
-    ENDSECTION  ;
-
-    body       :
-      rc := getInt(hndl,anint);
-      if not rc then
-              ErrorMessage( msg );
-              raise error msg ;
-      endif ;
-
-  ENDPROCEDURE  ;
 
 By wrapping the external procedure in an ordinary procedure, we are able to define the error handling as we see fit. Now this procedure can be used to input the data. The following code fragment is taken from the function ReadData of the accompanying example:
 

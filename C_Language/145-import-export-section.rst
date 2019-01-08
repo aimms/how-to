@@ -5,6 +5,7 @@
 .. sidebar:: Re-using AIMMS source code.
 
     .. image:: ../Resources/C_Language/Images/145/Copy_font_awesome_200_.svg.png
+    		    	:align: center
 
 
 Sometimes there are parts of a model that you would like to re-use in another AIMMS model. If it is a very generic component, you could choose to create an AIMMS library or an AIMMS module out of it. Please see the chapter "Organizing a Project Into Libraries" in the `AIMMS The User's Guide <https://documentation.aimms.com/_downloads/AIMMS_user.pdf>`_ for more information about this. In the cases that you only want to quickly export/import a set of identifiers once, you can also use the export/import functionality in AIMMS.
