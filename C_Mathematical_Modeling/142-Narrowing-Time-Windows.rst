@@ -1,11 +1,18 @@
-﻿Scheduling example: Narrowing time window for smaller jobs
-==========================================================
+﻿Reduce the Time Window for Scheduling Jobs
+===========================================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+.. meta::
+   :description: A scheduling example showing how to reduce the time window for smaller jobs.
+   :keywords: scheduling, job, activities, resources
 
-.. figure:: ../Resources/C_Mathematical_Modeling/Images/142/small_schedule_example.png
+.. note::
 
-    Scheduling problem
+	This article was originally posted to the AIMMS Tech Blog on November 13, 2012 by Chris Kuip.
+
+
+.. sidebar:: Scheduling problem
+
+    .. image:: ../Resources/C_Mathematical_Modeling/Images/142/small_schedule_example.png
 
 The purpose of this example is to illustrate a few features of the AIMMS identifier types *ACTIVITIES* and *RESOURCES*.
 
@@ -32,11 +39,14 @@ The AIMMS declarations for the involved activities is:
 
 .. code-block:: aimms
 
-    ACTIVITY:
-       identifier      :  Act
-       index domain    :  (j)
-       schedule domain :  {StartTime(j)..EndTime(j)}
-       length          :  actLen(j) ;
+    Activity Act {
+        IndexDomain: (j);
+        ScheduleDomain: {
+            {StartTime(j)..EndTime(j)}
+        }
+        Length: actLen(j);
+    }
+
 
 The time window is compactly represented here in the attribute *schedule domain* of activity ``ACT``. Here ``StartTime`` and ``EndTime`` are element parameters in the problem schedule domain.
 
@@ -44,12 +54,13 @@ The worker is represented by a single sequential resource:
 
 .. code-block:: aimms
 
-    RESOURCE:
-       identifier      :  res
-       usage           :  sequential
-       schedule domain :  TimeLine
-       activities      :  Act(j)
-       transition      :  (act(j), act(k)) : JobChgOver(j, k) ;
+    Resource res {
+        Usage: sequential;
+        ScheduleDomain: TimeLine;
+        Activities: Act(j);
+        Transition: (act(j), act(k)) : JobChgOver(j, k);
+    }
+
 
 This declaration states that it needs to execute all activities ``act(j)``, one at a time, and that there is a change over time between activities.
 

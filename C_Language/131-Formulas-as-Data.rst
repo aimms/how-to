@@ -1,11 +1,19 @@
-﻿Formulas as Data
-=================
+﻿Use Formulas as Data
+====================
 
+.. meta::
+   :description: How to enter formulas as data strings in AIMMS applications.
+   :keywords: formula, string, asset, blend
 
+      .. note::
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+	This article was originally posted to the AIMMS Tech Blog on August 21, 2014 by Chris Kuip.
 
-.. image:: ../Resources/C_Language/Images/131/mathematics-327488_150.jpg
+.. sidebar:: Mathematics as taught
+
+    .. image:: ../Resources/C_Language/Images/131/mathematics-327488_150.jpg
+            :align: center
+            :scale: 150 %
 
 
 A mathematical formula is considered data within an application when it is read in as a string during the application's runtime, and subsequently used in the construction of selected assignments and constraints. The concept "Formulas as Data" can be applied to several optimization apps, for instance those that deal with "Blending on Specification" and "Asset Management." In these types of applications, the benefit of the end-users is that they do not have to share these formulas with anyone else, including the developers of the apps. For such apps, good formulas are expensive to develop and having good formulas provides a competitive edge to these end-users. In AIMMS, formulas can be used in the following way:

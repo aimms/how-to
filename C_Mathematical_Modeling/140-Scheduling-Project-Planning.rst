@@ -1,18 +1,23 @@
-﻿Scheduling for project planning
-================================
+﻿Optimize Scheduling for Project Planning
+========================================
 
+.. meta::
+   :description: A construction scheduling example showing how to plan projects with AIMMS.
+   :keywords: scheduling, project, activities, resources
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on November 29, 2012 by Chris Kuip.
+
 
 .. sidebar:: Golden Gate bridge by Guido Diepen
 
     .. image:: ../Resources/C_Mathematical_Modeling/Images/140/golden-gate.jpg
-
-
+        :scale: 150%
 
 The identifier types ACTIVITIES and RESOURCES, and the scheduling intrinsic functions as part of the AIMMS constraint programming component are very useful in modeling construction projects and optimizing the makespan of those projects.
 
-Several existing constraint programming languages use the Bridge Building example in the Ph.D Thesis of the late M. Bartusch to illustrate this, see for instance `mozart-oz <http://www.mozart-oz.org/documentation/fdt/node48.html#section.scheduling.bridge>`_ and `SAS <http://support.sas.com/documentation/cdl/en/orcpug/63973/HTML/default/viewer.htm#orcpug_clp_sect046.htm>`_.
+Several existing constraint programming languages use the Bridge Building example in the Ph.D Thesis of the late M. Bartusch to illustrate this, see for instance `mozart-oz <http://www.mozart-oz.org/documentation/fdt/node48.html>`_ and `SAS <http://support.sas.com/documentation/cdl/en/orcpug/63973/HTML/default/viewer.htm>`_.
 
 In such a construction project, there are construction activities related to each element of a structure, such as pillars, and to the activities to manage the project itself such as delivery of materials and the building of housing to shelter the construction equipment.
 
@@ -25,43 +30,58 @@ A bridge consists of two abutments, several pillars in between, and bearers upon
 
 .. code-block:: aimms
 
-    ACTIVITY:
-       identifier      :  PillarActivity
-       index domain    :  (pbs,p)
-       schedule domain :  TimeLine
-       text            :  "Pillar building step pbs to build pillar p"
-       length          :  PillarDuration(pbs, p)
+    Activity v_PillarActivity {
+        IndexDomain: (epbs,ep);
+        ScheduleDomain: cal_TimeLine;
+        Length: p_PillarDuration(epbs, ep);
+    }
 
 Ensuring that two building steps pbs1 and pbs2 are taken in the correct order during the building of a pillar p is modeled in the following constraint:
 
 .. code-block:: aimms
 
-    CONSTRAINT:
-       identifier      :  pillarBuildingOrder
-       index domain    :  (pbs1, pbs2, p) | PillarDuration(pbs1,p) and
-                               PillarDuration(pbs2,p) and pbs1 < pbs2 and
-                                ( not exists( pbs3 | pbs1 < pbs3 and
-                                   pbs3 < pbs2 and PillarDuration(pbs3,p) ) )
-       definition      :  cp::EndBeforeBegin(PillarActivity(pbs1,p), PillarActivity(pbs2,p)) ;
+    Constraint c_pillarBuildingOrder {
+        IndexDomain: {
+            (i_pbs1, i_pbs2, i_p) | p_PillarDuration(i_pbs1,i_p)          and
+                              p_PillarDuration(i_pbs2,i_p)          and
+                              i_pbs1 < i_pbs2                  /*   and
+                              ( not exists( pbs3 | pbs1 < pbs3 and pbs3 < pbs2 and PillarDuration(pbs3,p) ) ) */
+        }
+        Definition: cp::EndBeforeBegin(v_PillarActivity(i_pbs1,i_p),v_PillarActivity(i_pbs2,i_p));
+    }
 
 Perhaps interesting is the last condition in the index domain: "*( not exists( pbs3 | pbs1 < pbs3 and pbs3 < pbs2 and PillarDuration(pbs3,p) ) )*". This condition states that we do not want to incorporate those individual restrictions that can be derived from two other individual restrictions; if the activity *PillarActivity(pbs1,p)* already takes place before activity *PillarActivity(pbs3,p)* and activity *PillarActivity(pbs3,p)* already takes places before *PillarActivity(pbs2,p)*; then this implies that activity *PillarActivity(pbs1,p)* takes places before activity *PillarActivity(pbs2,p)* and we do not have to enforce this explicitly. Adding this condition reduces the number of rows from 161 to 86 and improves the number of branches investigated per second by CP Optimizer by roughly 15%.
 
-Each building step pbs requires a corresponding resource, and of each resource we have only one. This can be modeled using the following sequential resource:
+Each building step i_pbs requires a corresponding resource, and of each resource we have only one. This can be modeled using the following sequential resource:
 
 .. code-block:: aimms
 
-    RESOURCE:
-       identifier      :  mach
-       usage           :  sequential
-       index domain    :  m
-       schedule domain :  Timeline
-       activities      :  PillarActivity(pbs, p):
-                              (requiredMachineForBuildingStep(pbs)=m) and
-                              PillarDuration(pbs, p) ;
+    Resource c_mach_seq {
+        Usage: sequential;
+        IndexDomain: i_mn | forall( i_mnp, p_NoAvailableMachines(i_mnp) = 1 );
+        ScheduleDomain: cal_TimeLine;
+        Activities: v_PillarActivity(i_pbs, i_p): (ep_requiredMachineForBuildingStep(i_pbs)=i_mn) and p_PillarDuration(i_pbs, i_p);
+    }
                           
-Additional constraints can be added to the model easily, for instance as presented in the following AIMMS model:
-[attachments include="4143"]
-This model requires AIMMS 3.13 FR1 or later.
+Having multiple machines of a certain type, we can generalize this to:
+
+.. code-block:: aimms
+
+    Resource c_mach_par {
+        Usage: parallel;
+        IndexDomain: i_mn | exists( i_mnp | p_NoAvailableMachines(i_mnp) <> 1 );
+        ScheduleDomain: cal_TimeLine;
+        Activities: v_PillarActivity(i_pbs, i_p): (ep_requiredMachineForBuildingStep(i_pbs)=i_mn) and p_PillarDuration(i_pbs, i_p);
+        LevelRange: {
+            {0..p_NoAvailableMachines(i_mn)}
+        }
+        LevelChange: {
+            v_PillarActivity(i_pbs, i_p) : 1 $ ( (ep_requiredMachineForBuildingStep(i_pbs)=i_mn)  and p_PillarDuration(i_pbs, i_p) );
+        }
+    }
+
+                          
+The entire example can be downloaded from: :download:`AIMMS project download <../Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>`
 
 Reference:
 Bartusch, M. (1983), Optimierung von Netzplänen mit Anordnungsbeziehungen bei knappen Betriebsmitteln, Ph.D. thesis, Universität Passau, Fakultät für Mathematik und Informatik.

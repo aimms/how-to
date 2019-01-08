@@ -1,6 +1,11 @@
 
-How to retrieve intermediate results from a server session to the data session?
-===============================================================================
+Show Intermediate Solutions
+===============================
+
+.. meta::
+   :description: How to retrieve intermediate results from a server session to the data session.
+   :keywords: intermediate, results, server, data, session
+
 
 .. todo  Work the following comments.
 .. todo  Terminologie: WebUI session vs. server session vs. solver session komt niet overeen met die door het backend/webui team gebezigd wordt. 

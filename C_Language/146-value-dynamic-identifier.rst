@@ -1,14 +1,17 @@
-﻿Getting value of a dynamic identifier
+﻿Retrieve Value of Dynamic Identifier
 ======================================
 
+.. meta::
+   :description: How to use Model Edit functions to retrieve the value of a dynamic identifier.
+   :keywords: model, edit, me
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+      .. note::
+
+	This article was originally posted to the AIMMS Tech Blog on November 1, 2011 by Guido Diepen.
 
 .. sidebar:: Pointing at something.
 
     .. image:: ../Resources/C_Language/Images/146/hand-pointing-right.png
-
-
 
 With the addition of Model Edit Functions (MEF), a lot of things that were previously impossible to do with AIMMS became possible.
 
@@ -55,22 +58,20 @@ Now we can create a procedure, say ``pr_GetValueOfIdentifer`` that will get two 
 
     !If there already exists an identifier with the name
     !RuntimeLibrary, we must delete it first
-    if 'RuntimeLibrary' in AllIdentifiers then
+    if "RuntimeLibrary" in AllIdentifiers then
         me::Delete('RuntimeLibrary') ;
     endif ;
-
+    
     !Now we create the runtime library
-    epRuntimeLibrary := me::CreateLibrary(
-        libraryName : "RuntimeLibrary" ,
-        prefixName  : "rtl") ;
-
+    ep_RuntimeLibrary := me::CreateLibrary( libraryName : "RuntimeLibrary" , prefixName  : "rtl") ;
+    
     !Now we create the runtime procedure
-    epRuntimeProcedure := me::Create(
+    ep_RuntimeProcedure := me::Create(
         name     : "prRuntimeProcedure" ,
         newType  : 'Procedure' ,
-        parentId : epRuntimeLibrary ,
+        parentId : ep_RuntimeLibrary ,
         pos      : 0 ) ;
-
+    
     !Now that we have the runtime procedure identifier, we can
     !create the body for this procedure
     !
@@ -78,19 +79,19 @@ Now we can create a procedure, say ``pr_GetValueOfIdentifer`` that will get two 
     !   ep_Target := ep_Source
     !In the current procedure we know the name of the identifier
     !denoted by epSource and epTarget, so we can create the body as follows:
-    sp_RuntimeProcedureBody := epTarget + " := " + epSource + " ; \n" ;
+    sp_RuntimeProcedureBody := ep_Target + " := " + ep_Source + " ; \n" ;
     
     !Now set the body of the runtime procedure
     me::SetAttribute(
-        runtimeId : epRuntimeProcedure ,
+        runtimeId : ep_RuntimeProcedure ,
         attr      : 'body' ,
-        txt       : psRuntimeProcedureBody ) ;
-
+        txt       : sp_RuntimeProcedureBody ) ;
+    
     !Now compile the runtime library
-    me::Compile( epRuntimeLibrary ) ;
-
+    me::Compile( ep_RuntimeLibrary ) ;
+    
     !And run the procedure via the apply statement
-    apply(epRuntimeProcedure) ;
+    apply(ep_RuntimeProcedure) ;
 
 Please note that this procedure has two arguments, ``ep_Source`` and ``ep_Target``, both of which are element parameters with range ``AllIdentifiers``. Also, the earlier mentioned additional element and string parameters for MEF could be local identifiers for this procedure.
 
@@ -106,7 +107,6 @@ The above procedure can now be called with the following example code:
     dialogmessage("Value = " + p_TargetValue) ;
 
 Keep in mind that the above code does not do any error checking. This means that you could try to assign the value of a string parameter to a numerical parameter, which would result in a runtime error. Other possibilities are that the body of the runtime procedure contains a syntax error, in which case the me::compile statement will result in an error. Please see the `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_ (section "Raising and handling warnings and errors") for more information on handling such errors with the AIMMS error handling.
-
 
 A complete project containing the above source can be :download:`downloaded <../Resources/C_Language/Images/146/ValueDynamicIdentifier.zip>` 
 

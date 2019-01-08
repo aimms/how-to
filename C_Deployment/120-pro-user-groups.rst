@@ -1,7 +1,14 @@
-AIMMS PRO User Groups
-=====================
+Create PRO User Groups
+========================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+.. meta::
+   :description: Modeling for secure multi-user AIMMS Apps deployed on AIMMS PRO – Part 1: User Groups.
+   :keywords: secure, upload, download
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on September 27, 2016 by Chris Kuip.
+
 
 AIMMS PRO is a multi-user environment, designed to host several Apps used by several end-users. Information is shared by these users via these applications. Depending on the role of the app user in the organization, selected information may or may not be accessible. For instance, a planner may change the production plan, that plan can be inspected by management, but is not accessible to the HRM staff.
 

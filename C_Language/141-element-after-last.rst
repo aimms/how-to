@@ -1,7 +1,13 @@
-﻿What is the element after the last?
-===================================
+﻿Create Infinite Set Values
+==========================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+.. meta::
+   :description: How to use lead and lag operations to create infinite sets.
+   :keywords: cycle, cyclic, empty, next, last
+
+      .. note::
+
+	This article was originally posted to the AIMMS Tech Blog on November 23, 2012 by Chris Kuip.
 
 .. sidebar:: What is beyond the last element?
 

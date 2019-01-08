@@ -1,0 +1,26 @@
+This AIMMS project is a simple example of rostering. 
+
+It has been adapted from "Integrated methods for Optimization" by John N. Hooker, section 2.2.5.
+
+Each day in the week is divided into three shifts and the extra shift "free". In addition there are four nurses available, each staffing a shift on her own.
+
+Rostering is really a two-sided problem.
+- The first side is to an assign employees to shifts; W(s,d)-->Employees.
+- The second side is the mirror of the first side: assign shifts to employees; Y(e,d)-->Shifts.
+Note that W, Y are each inverse and should have distinct values.  The description above captures the base problem.
+
+There are five improvements available to this base problem.
+
+The first improvement is that a solution to the above may lead to one nurse being free all the time and another nurse doing all night shifts.  This seems hardly fair.
+
+Outside observation/domain knowledge: It is reassuring for patients to know which nurse to expect at which time.
+
+The second improvement stems from the above observation and noting that one nurse staffing a single shift is infeasible; she would never be free.  Thus we limit the number of nurses per shift to two.
+
+The third improvement also stems from the above observation and noting that with the second improvement above two nurses can still be assigned alternatingly to a single shift. We would like to minimize the number of shift changes.
+
+The fourth improvement stems from the fact that it is enforced, union regulations, that a nurse is at least 16 hours free before working again. Thus the night shift is not followed by a day or evening shift and an evening shift is not followed by a day shift.
+
+The fifth improvement is not improving the qualitity of the solution but improving the speed at which this is obtained; symmetry reduction and a lower bound on the objective.
+
+Key words: Constraint Programming, Rostering, Channel constraint, Count constraint.

@@ -1,6 +1,9 @@
-How To Schedule a Job regularly?
-==================================
+Schedule Regular Jobs
+======================
 
+.. meta::
+   :description: How to schedule an AIMMS procedure to run regularly.
+   :keywords: schedule, job, regular, repeat, recur
 
 .. https://gitlab.aimms.com/Chris/aimms-how-to/issues/80
 .. Nirvana project 0006

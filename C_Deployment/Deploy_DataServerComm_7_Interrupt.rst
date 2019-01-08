@@ -1,5 +1,10 @@
-How to interrupt the server session?
-==================================== 
+Interrupt the Server Session
+=============================
+
+.. meta::
+   :description: A method for stopping a solve process when "cancel" is not available.
+   :keywords: solve, cancel, interrupt, webui, veil
+
 
 Introduction
 ------------
@@ -39,7 +44,7 @@ The example AIMMS project with the above demonstrated procedure implemented can 
 Further reading
 ---------------
 
-An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided in next :doc:`Deploy_DataServerComm_8_PassNewData`.
+An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided in :doc:`Deploy_DataServerComm_8_PassNewData`.
 
 
 .. include:: ../includes/form.def

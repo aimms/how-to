@@ -1,5 +1,10 @@
-How to make an AIMMS project flexible to be used in both the AIMMS IDE and on AIMMS PRO
-=======================================================================================
+Develop Multi-Platform Applications
+====================================
+
+.. meta::
+   :description: Tips for developing flexible AIMMS applications for use on both AIMMS PRO and AIMMS IDE.
+   :keywords: platform, pro
+
 
 After publishing an app on the AIMMS PRO server, it is common to continue development of that application for updates using the AIMMS IDE. 
 When we test our app from within the AIMMS IDE, we get the following dialog:
@@ -22,7 +27,7 @@ Clicking ``No`` avoids AIMMS PRO, but this soon becomes annoying. To avoid this 
 
 		prDoSolve();
 
-The disadvantage of using ``ProjectDeveloperMode()`` is that it disallows the combination of AIMMS PRO and the AIMMS IDE for `AIMMS PRO debugging <https://manual.aimms.com/pro/2/en/topic/debugging-pro-enabled-projects>`_. What we actually want, is to connect to AIMMS PRO, when a connection is available, and otherwise use our own machine to solve the mathematical program.
+The disadvantage of using ``ProjectDeveloperMode()`` is that it disallows the combination of AIMMS PRO and the AIMMS IDE for `AIMMS PRO debugging <https://manual.aimms.com/pro/debugging-pro.html>`_. What we actually want, is to connect to AIMMS PRO, when a connection is available, and otherwise use our own machine to solve the mathematical program.
  
 To check whether we are connected to an AIMMS PRO session or not, we use the function ``PRO::GetPROEndPoint()``. The function ``PRO::GetPROEndPoint()`` returns the URL, or the 'end point', of the AIMMS PRO server the AIMMS instance is running on. If the current AIMMS instance is not running on an AIMMS PRO server, an empty string is returned.
 
@@ -41,7 +46,7 @@ We change the body of the ``prSolve`` procedure by replacing the test ``not Proj
 		prDoSolve();
 
 		
-The ``pro::DelegateToServer`` statement is executed only if the current AIMMS instance is connected to an AIMMS PRO server. If not, it is skipped and the remaining procedure is executed in the AIMMS IDE. This way, we avoid the annoying dialog mentioned above, but still enable `AIMMS PRO debugging <https://manual.aimms.com/pro/2/en/topic/debugging-pro-enabled-projects>`_ when needed.
+The ``pro::DelegateToServer`` statement is executed only if the current AIMMS instance is connected to an AIMMS PRO server. If not, it is skipped and the remaining procedure is executed in the AIMMS IDE. This way, we avoid the annoying dialog mentioned above, but still enable `AIMMS PRO debugging <https://manual.aimms.com/pro/debugging-pro.html>`_ when needed.
 
 The AIMMS project for running Flowshop example can be downloaded from: :download:`3. Flow Shop - Enable development testing <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/3. Flow Shop - Enable development testing.zip>`.
 

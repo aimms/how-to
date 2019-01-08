@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<TemplateManager>
+	<Template Name="background" PageGUID="37B0C96B-760A-4824-802E-7B6C66767DFE">
+		<Page Name="Page 1" PageGUID="5FDE3112-7C37-4B46-8722-F3B228C17C02" />
+	</Template>
+</TemplateManager>

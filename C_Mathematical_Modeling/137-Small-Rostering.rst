@@ -1,7 +1,14 @@
-﻿Development of a Small Rostering Application
-=============================================
+﻿Optimize Shift Schedules
+=========================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+.. meta::
+   :description: How to develop a shift scheduling application in AIMMS.
+   :keywords: employee, roster, schedule, shift, staff
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on February 13, 2013 by Chris Kuip.
+
 
 .. sidebar:: Stock Exchange Dry Board.
 
@@ -54,12 +61,11 @@ Inspecting the solution, we see that nurse C does the night shift on Wednesday a
 
 .. code-block:: aimms
 
-    CONSTRAINT:
-       identifier   :  SuccessorShiftRestriction
-       index domain :  (e,d,s) | card( permittedNextShifts(s) ) &lt; card(shifts)
-       definition   :  if Shift(e,d) = s then
-                           Shift(e,d++1) in permittedNextShifts( s )
-                       endif
+    Constraint SuccessorShiftRestriction {
+        IndexDomain: (e,d,s) | card( permittedNextShifts(s) ) < card(shifts);
+        Definition: if Shift(e,d) = s then Shift(e,d++1) in permittedNextShifts( s ) endif;
+        Comment: "For instance, it is not allowed to work a day shift right after a night shift.";
+    }
 
                       
 Here PermittedNextShifts is an Indexed Set with the following contents:

@@ -1,10 +1,17 @@
-﻿Execute, a handy function to run an executable program from AIMMS
-=================================================================
+﻿Run Executable Files
+============================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+.. meta::
+   :description: How to run executable files from AIMMS using the Execute function.
+   :keywords: execute, exe
 
+.. note::
 
-.. image:: ../Resources/C_Deployment/Images/114/exe-file-icon-68130.png
+	This article was originally posted to the AIMMS Tech Blog on February 22, 2017 by Deanne Zhang.
+
+.. sidebar:: Executing another program
+
+    .. image:: ../Resources/C_Deployment/Images/114/exe-file-icon-68130.png
 
 AIMMS provides a good selection of functions, such as arithmetic functions, string manipulation functions, time functions, distribution functions, file functions, and more, for app developers to build prescriptive analytics applications.
 

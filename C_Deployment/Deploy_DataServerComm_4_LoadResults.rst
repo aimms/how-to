@@ -1,10 +1,14 @@
-How to load the results of a server session at a convenient moment?
-===================================================================
+Load Server Session Results Manually
+========================================
+
+.. meta::
+   :description: How to load results of a server session on demand in AIMMS PRO.
+   :keywords: server, session, results
 
 Introduction
 ------------
 
-If the ``waitForCompletion`` argument of ``pro::DelegateToServer`` is 0, both the data session and the server session run in parallel. This allows the end user to browse and modify data while a delegated procedure is executed on the server session in the background. However, at the end of execution, the results are loaded back in to the data session without any warning. This unannounced loading of data is not a good UI design and this article presents the approach to manually control this data transfer between the data and server sessions. 
+If the ``waitForCompletion`` argument of ``pro::DelegateToServer`` is 0, both the data session and the server session run in parallel. This allows the end user to browse and modify data while a delegated procedure is executed on the server session in the background. However, at the end of execution, the results are loaded back in to the data session without any warning. This unannounced loading of data is not a good UI design. This article presents the approach to manually control this data transfer between the data and server sessions. 
 
 What is happening here?
 -----------------------

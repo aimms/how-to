@@ -1,5 +1,10 @@
-How to publish and share an AIMMS application on the AIMMS PRO Platform? 
-========================================================================
+Deploy an Application on AIMMS PRO 
+===================================
+
+.. meta::
+   :description: Basic procedure to publish and share an AIMMS application with AIMMS PRO.
+   :keywords: deploy, pro
+
 
 Introduction
 ------------

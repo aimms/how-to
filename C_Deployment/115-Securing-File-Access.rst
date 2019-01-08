@@ -1,7 +1,13 @@
-Securing File Access
+Secure File Access
 ====================
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+.. meta::
+   :description: Modeling for secure apps deployed on AIMMS PRO – Part 3: securing file access in AIMMS PRO storage.
+   :keywords: secure, storage, access
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on December 20, 2016 by Chris Kuip.
 
 This blog post is the last in a series of thee to enable AIMMS app developers to model file sharing in a secure manner.  
 In the :doc:`120-pro-user-groups`, we covered authorization of AIMMS PRO users, 
@@ -16,16 +22,16 @@ This can be done via the following call to system library AimmsProGUI:
 
     guipro::PopulateEntitySets( addUniversalSets:1 ); 
 
-This call will fill the set ``guipro::PROEntity`` and the string parameters ``guipro::PROUserName`` and ``guipro::PROGroupName.``
+This call fills the set ``guipro::PROEntity`` and the string parameters ``guipro::PROUserName`` and ``guipro::PROGroupName.``
 
 AIMMS PRO storage regulates file access per entity by assigning authorization strings to files and folders. Here an entity is a user or a group.
 An authorization string is a sequence of atomic authorization strings. An atomic authorization strings has the following format:
 
 ``"#%i%s%e"`` whereby:
 
-* The ``%i`` is an integer code for the access type, which is a combination(addition) of the following values:
+* The ``%i`` is an integer code for the access type, which is a combination (addition) of the following values:
 
-    * 1 Execution access for objects(files/apps) and browse access for buckets(folders)
+    * 1 Execution access for objects (files/apps) and browse access for buckets (folders)
 
     * 2 Write access
 

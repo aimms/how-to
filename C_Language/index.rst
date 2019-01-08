@@ -22,12 +22,14 @@ AIMMS Language
     104-creating-email-templates
     104-using-email-client-library
     85-using-axll-library
+    150-solve-in-loop
     119-Reproducible-Random-Sequence
     144-Stopwatch
     125-execution-efficiency
     134-Monitoring-Memory-Use
     135-UTF8-Encoding
     133-External-Functions-InputData
+    153-external-haversine
     146-value-dynamic-identifier
     132-Repetive-Patterns-Model-Edit
     131-Formulas-as-Data

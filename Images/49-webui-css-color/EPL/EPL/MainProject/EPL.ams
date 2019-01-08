@@ -1,0 +1,118 @@
+## ams_version=1.0
+
+Model Main_EPL {
+    Set Seasons {
+        Index: s;
+    }
+    Set Teams {
+        Index: t, h, a;
+    }
+    Quantity SI_Time_Duration {
+        BaseUnit: year;
+    }
+    Parameter HomeGoals {
+        IndexDomain: (s, h, a);
+    }
+    Parameter HomeSum {
+        IndexDomain: s;
+        Definition: sum[(h,a), HomeGoals(s, h, a)];
+        webui::AnnotationsIdentifier: AnnotationForWebUI;
+    }
+    StringParameter AnnotationForWebUI;
+    Parameter AwaySum {
+        IndexDomain: s;
+        Definition: sum[(h,a), AwayGoals(s, h, a)];
+    }
+    Parameter AwayGoals {
+        IndexDomain: (s,h,a);
+    }
+    Parameter GoalDifference {
+        IndexDomain: (s,h,a);
+    }
+    StringParameter GameResult {
+        IndexDomain: (s,h,a);
+    }
+    Parameter PointsPerSeason {
+        IndexDomain: (s,h);
+    }
+    Procedure ReadFromExcel {
+        Body: {
+            axll::CloseAllWorkBooks;
+            
+            axll::OpenWorkBook(WorkbookFilename : "EPL Data.xlsx" );
+            
+            axll::SelectSheet(SheetName : "Sheet2" );
+            
+            axll::ReadList(
+            	IdentifierReference    : HomeGoals(s, h, a) , 
+            	RowHeaderRange         : "A2:C10000" , 
+            	DataRange              : "D2:D10000", 
+            	ModeForUnknownElements : 1 , 
+            	MergeWithExistingData  :  0);
+            
+            axll::ReadList(
+            	IdentifierReference    : AwayGoals(s, h, a) , 
+            	RowHeaderRange         : "A2:C10000" , 
+            	DataRange              : "E2:E10000", 
+            	ModeForUnknownElements : 1 , 
+            	MergeWithExistingData  :  0);
+            
+            axll::ReadList(
+            	IdentifierReference    : GoalDifference(s, h, a) , 
+            	RowHeaderRange         : "A2:C10000" , 
+            	DataRange              : "F2:F10000", 
+            	ModeForUnknownElements : 1 , 
+            	MergeWithExistingData  :  0);
+            
+            axll::ReadList(
+            	IdentifierReference    : GameResult(s, h, a) , 
+            	RowHeaderRange         : "A2:C10000" , 
+            	DataRange              : "G2:G10000", 
+            	ModeForUnknownElements : 1 , 
+            	MergeWithExistingData  :  0);
+            
+            axll::CloseAllWorkBooks;
+        }
+    }
+    Procedure wrt {
+        Body: {
+            block where single_column_display := 1, listing_number_precision := 12, listing_number_width := 20 ;
+            	write to file "data.txt" ;
+            endblock ;
+        }
+    }
+    Procedure MainInitialization {
+        Body: {
+            ReadFromExcel;
+        }
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return DataManagementExit();
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}
