@@ -389,7 +389,7 @@ Model Planning_the_building_of_a_bridge {
     }
     Procedure MainExecution {
         Body: {
-            pr_SolveCP_BridgeScheduling ;
+            pr_SolveCP_BridgeScheduling ; 
             
             sp_ViewPortBegin := MomentToString( "%c%y-%m-%d", [day], sp_CalBeginDate, -7[day] );
             sp_ViewportEnd := 	if mapval( v_MakeSpan ) or v_MakeSpan = 0[day] then
