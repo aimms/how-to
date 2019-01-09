@@ -31,25 +31,25 @@ After opening Visual Studio, in order:
 
 #. Specify destination folders
     
-.. image:: ../Resources/C_Language/Images/153/02NewProjectDLL.PNG
-
 #. Make sure we can change further settings
 
-.. image:: ../Resources/C_Language/Images/153/03NewProjectDLL.PNG
+    .. image:: ../Resources/C_Language/Images/153/02NewProjectDLL.PNG
 
 #. We want a DLL
 
-.. image:: ../Resources/C_Language/Images/153/04NewProjectDLL.PNG
+    .. image:: ../Resources/C_Language/Images/153/03NewProjectDLL.PNG
 
 #. The default configuration is not correct
 
-.. image:: ../Resources/C_Language/Images/153/05NewProjectDLL.PNG
+    .. image:: ../Resources/C_Language/Images/153/04NewProjectDLL.PNG
 
 #. We want a new configuration
 
-.. image:: ../Resources/C_Language/Images/153/06NewProjectDLL.PNG
+    .. image:: ../Resources/C_Language/Images/153/05NewProjectDLL.PNG
 
 #. Namely x64
+
+    .. image:: ../Resources/C_Language/Images/153/06NewProjectDLL.PNG
 
 Header code
 --------------------
@@ -132,10 +132,10 @@ Verifying that the exported functions are there
 -----------------------------------------------
 
 We need to verify that the .dll's built are valid 32 bit and 64 bit .dll's. 
-To do this, we use a nifty free of charge utility named depends.exe.  This can download the x86 and x64 from this `website <http://www.dependencywalker.com/>`_.
-Installing is just unzipping. Then start the executable and open the .dll
+To do this, we use a nifty free of charge utility named depends.exe.  You may download the x86 and x64 from this `website <http://www.dependencywalker.com/>`_.
+Installing is just unzipping. Then start the executable and browse the .dll
 
-#. ``depends22_x86\depends.exe`` for the 32 bit dll: ``<HaversineDLL>\release\HaversineDLL.dll``.  
+#. ``depends22_x86\depends.exe`` for the **32 bit** dll: ``<HaversineDLL>\release\HaversineDLL.dll``.  
 
     .. image:: ../Resources/C_Language/Images/153/32BitsDependsCheck.PNG
 
@@ -144,7 +144,7 @@ Installing is just unzipping. Then start the executable and open the .dll
     * Important are the functions exported, as highlighted in the red rectangle; at least Haversine needs to be there.  32 bits Win32 will prefix using an ``_`` and postfix using the @ sign and the number of bytes passed over the stack.  The Haversine functions passes four doubles, so the postfix @32 is to be expected.
 
     
-#. ``depends22_x64\depends.exe`` for the 64 bit dll: ``<HaversineDLL>\x64\release\HaversineDLL.dll``.  
+#. ``depends22_x64\depends.exe`` for the **64 bit** dll: ``<HaversineDLL>\x64\release\HaversineDLL.dll``.  
 
     .. image:: ../Resources/C_Language/Images/153/64BitsDependsCheck.PNG
 
@@ -207,13 +207,13 @@ Step 3: Test the external function in AIMMS:
         }
     }
 
-Listing file:
+The resulted Listing file:
             
 .. code-block:: none
 
     p_DistNashvilleLosAngeles := 2887.260 ; 
 
-which is the expected value.
+which is the expected value!
 
 
 Good performance; my desktop requires less than 0.3 seconds to fill a 274 X 274 distance matrix.
