@@ -1,13 +1,13 @@
-﻿Changing the Frequency of Progress Updates 
-================================================
+﻿Change the Frequency of Progress Updates 
+=========================================
 
 .. meta::
    :description: How to change the frequency of updates to the progress window.
-   :keywords: 
+   :keywords: progress, update, solve
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog by Marcel Hunting.
+	This article was originally posted to the AIMMS Tech Blog on April 1, 2015 by Marcel Hunting.
 
 .. sidebar:: Progress Window
 

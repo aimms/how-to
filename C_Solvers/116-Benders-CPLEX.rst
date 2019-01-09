@@ -1,4 +1,4 @@
-﻿Solving with Benders Decomposition in CPLEX 
+﻿Solve with Benders Decomposition in CPLEX 
 =============================================
 
 .. meta::
@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on October 25, 2018 by Marcel Hunting.
+	This article was originally posted to the AIMMS Tech Blog on December 13, 2016 by Marcel Hunting.
 
 .. sidebar:: Network Ring Design
 

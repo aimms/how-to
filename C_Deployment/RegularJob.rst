@@ -1,5 +1,5 @@
-Scheduling Jobs
-==================================
+Schedule Regular Jobs
+======================
 
 .. meta::
    :description: How to schedule an AIMMS procedure to run regularly.

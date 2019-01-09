@@ -5,8 +5,13 @@
 
 .. CONTENT
 
-Using the AIMMS Excel Library
-===================================
+Overview: AIMMS Excel Library
+==============================
+
+.. meta::
+   :description: How to import and export spreadsheet data using the AIMMS Excel Library.
+   :keywords: excel, spreadsheet, axll
+
 
 .. Overview
 

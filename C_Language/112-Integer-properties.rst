@@ -1,6 +1,13 @@
-﻿Integer set expressions: 2 new properties
-=========================================
+﻿Overview: New Handling of Integer Sets and Operators
+====================================================
 
+.. meta::
+   :description: Discussion of how AIMMS handles of subsets of integers in an expression.
+   :keywords: integer, set, subset, operator
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on July 27, 2018 by Richard Stegeman.
 
 .. image:: ../Resources/C_Language/Images/112/BlogPicture.jpg
 

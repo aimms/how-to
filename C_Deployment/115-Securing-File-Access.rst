@@ -1,4 +1,4 @@
-Securing File Access
+Secure File Access
 ====================
 
 .. meta::

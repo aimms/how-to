@@ -1,4 +1,4 @@
-﻿Creating Forms in WebUI
+﻿Create Forms in WebUI
 ========================
 
 .. meta::

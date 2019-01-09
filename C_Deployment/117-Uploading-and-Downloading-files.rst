@@ -1,4 +1,4 @@
-Uploading and Downloading files
+Upload and Download Files
 ================================
 
 .. meta::

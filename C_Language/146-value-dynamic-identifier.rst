@@ -1,6 +1,13 @@
-﻿Getting value of a dynamic identifier
+﻿Retrieve Value of Dynamic Identifier
 ======================================
 
+.. meta::
+   :description: How to use Model Edit functions to retrieve the value of a dynamic identifier.
+   :keywords: model, edit, me
+
+      .. note::
+
+	This article was originally posted to the AIMMS Tech Blog on November 1, 2011 by Guido Diepen.
 
 .. sidebar:: Pointing at something.
 

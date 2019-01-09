@@ -14,23 +14,7 @@ Model Main_tt {
     }
     StringParameter p_Dat_tooltips {
         IndexDomain: (i_a,i_b);
-        Definition: {
-              "<div style=\"background-color:white;\">"
-            + "<div style=\"color:black;\">"
-            + "<div style=\"border-style:none;\">"
-            + "<div style=\"border-width: 0px;\">"
-            + "<div style=\"margin: 0px;\">"
-            + "<div style=\"padding: 0px;\">"
-            + "<div style=\"outline-style: none;\">"
-            + formatString("Some text before %i and some text after", p_Dat(i_a,i_b))
-            + "</div>"
-            + "</div>"
-            + "</div>"
-            + "</div>"
-            + "</div>"
-            + "</div>"
-            + "</div>"
-        }
+        Definition: formatString("Some text before %i and some text after", p_Dat(i_a,i_b));
     }
     Procedure MainInitialization {
         Comment: "Add initialization statements here that do NOT require any library being initialized already.";

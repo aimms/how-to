@@ -7,7 +7,7 @@
 
 .. BEGIN CONTENT
 
-Resolving License Issues
+Resolve License Issues
 =========================
 
 .. meta::

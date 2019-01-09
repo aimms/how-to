@@ -1,5 +1,5 @@
-﻿Reducing the Time Window for Scheduling Small Jobs
-==========================================================
+﻿Reduce the Time Window for Scheduling Jobs
+===========================================
 
 .. meta::
    :description: A scheduling example showing how to reduce the time window for smaller jobs.
@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog in 2012 by Chris Kuip.
+	This article was originally posted to the AIMMS Tech Blog on November 13, 2012 by Chris Kuip.
 
 
 .. sidebar:: Scheduling problem

@@ -1,4 +1,4 @@
-﻿Installing Side-by-Side Drivers
+﻿Install Side-by-Side Drivers
 ================================
 
 .. meta::

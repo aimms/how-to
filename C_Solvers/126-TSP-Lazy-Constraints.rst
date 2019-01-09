@@ -1,4 +1,4 @@
-﻿Solving with Lazy Constraints
+﻿Solve with Lazy Constraints
 ==============================
 
 .. meta::

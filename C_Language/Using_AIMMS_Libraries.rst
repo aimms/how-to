@@ -1,5 +1,9 @@
-Using AIMMS Libraries
-=============================
+Add AIMMS Libraries
+====================
+
+.. meta::
+   :description: How to extend project functionality with libraries.
+   :keywords: library, system, repository
 
 .. Definition
 

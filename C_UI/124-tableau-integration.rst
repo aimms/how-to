@@ -1,4 +1,4 @@
-﻿Linking AIMMS with Tableau
+﻿Link AIMMS with Tableau
 ===========================
 
 .. meta::

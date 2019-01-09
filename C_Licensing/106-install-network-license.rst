@@ -20,7 +20,7 @@
 
 .. BEGIN CONTENT
 
-Installing and Configuring a Network License
+Install and Configure a Network License
 ============================================
 
 .. meta::

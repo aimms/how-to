@@ -10,7 +10,7 @@
 
 .. BEGIN CONTENT
 
-Resolving License Error: Nodelock file is read-only
+Resolve License Error: Nodelock file is read-only
 ====================================================
 
 .. meta::

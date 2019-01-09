@@ -1,5 +1,5 @@
 
-Showing Intermediate Solutions
+Show Intermediate Solutions
 ===============================
 
 .. meta::

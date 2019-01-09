@@ -1,5 +1,9 @@
-Solve in loop
+Solve in Loop
 ==============
+
+.. meta::
+   :description: How to solve several instances at once using a loop.
+   :keywords: loop, solve
 
 .. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
 

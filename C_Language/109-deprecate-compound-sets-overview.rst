@@ -1,5 +1,10 @@
-Overview of the Deprecation of Compound Sets
-==============================================
+Overview: Deprecation of Compound Sets
+========================================
+
+.. meta::
+   :description: An overview of the rationale and timeline for deprecating compound sets.
+   :keywords: compound, sets
+
 
 .. sidebar:: Announcing deprecation compound sets
 
