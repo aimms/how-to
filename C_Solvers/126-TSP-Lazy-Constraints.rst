@@ -1,5 +1,13 @@
-﻿Solving a TSP using lazy constraints
-====================================
+﻿Solve with Lazy Constraints
+==============================
+
+.. meta::
+   :description: An example solving a Traveling Salesman Problem using lazy constraints.
+   :keywords: lazy, constraints, salesman, tsp
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on May 26, 2015 by Marcel Hunting.
 
 The famous **travelling salesman problem** (TSP) deals with the following problem: given a list of cities and the distances between each pair of cities, a salesman has to find the shortest possible route to visit each city exactly once while returning to the origin city. One way to formulate the TSP is as follows:
 
@@ -27,7 +35,7 @@ Fortunately, we can use SECs as **lazy constraints**. Unlike normal constraints,
 
 The new AIMMS example `TSP <https://raw.githubusercontent.com/aimms/examples/master/Practical%20Examples/Routing/TSP/MainProject/TSP.ams>`_, which can be found on the `examples page <http://www.aimms.com/downloads/application-examples/>`_ on the AIMMS website, uses the above formulation. The SECs are added as lazy constraints inside a callback. This callback is called whenever the solver finds a new candidate incumbent solution, i.e., a solution that satisfies formulation (1) plus the SECs that have been added before as lazy constraints. The callback procedure checks whether the candidate solution forms one tour. If it does, the solver found a true solution for the TSP and the solution is accepted; otherwise a SEC is added for each subtour. Finding a violated SEC, the so-called separation problem, can be solved in polynomial time despite the exponential number of SECs. The separation algorithm implemented in this example (inside the procedure DetermineSubtours) has a worst-case running time of :math:`O(n^2)`.
 
-The example comes with several symmetric instances from `TSPLIB <http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/>`_. More information on the TSP can be found on `this <http://www.math.uwaterloo.ca/tsp/>`_ very nice page maintained by William Cook.
+The example comes with several symmetric instances from `TSPLIB <https://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/>`_. More information on the TSP can be found on `this <http://www.math.uwaterloo.ca/tsp/>`_ very nice page maintained by William Cook.
 
 **Remark**: SECs are often used as cutting planes in a branch-and-cut algorithm. In that case the separation problem is more difficult as it is applied to a fractional *x*. Currently its fastest separation algorithm has a worst-case running time of :math:`O(nm + n^2 \log n)` where ``m`` denotes the number of nonzero ``x`` in the fractional solution. In our case, using SECs as lazy constraints, the separation problem is applied to a binary ``x``. Although the separation problem becomes easier if SECs are used as lazy constraints, it does not mean that TSPs are solved more efficiently that way.
 

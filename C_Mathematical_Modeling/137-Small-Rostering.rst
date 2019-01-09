@@ -1,5 +1,14 @@
-﻿Development of a Small Rostering Application
-=============================================
+﻿Optimize Shift Schedules
+=========================
+
+.. meta::
+   :description: How to develop a shift scheduling application in AIMMS.
+   :keywords: employee, roster, schedule, shift, staff
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on February 13, 2013 by Chris Kuip.
+
 
 .. sidebar:: Stock Exchange Dry Board.
 

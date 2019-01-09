@@ -20,8 +20,12 @@
 
 .. BEGIN CONTENT
 
-Installing and Configuring a Network License
+Install and Configure a Network License
 ============================================
+
+.. meta::
+   :description: How to set up an AIMMS Network License with the Network License Server.
+   :keywords: license, network, install, setup
 
 How to install a Network License with the Network License Server.
 

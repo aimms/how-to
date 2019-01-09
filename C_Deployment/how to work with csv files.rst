@@ -1,6 +1,6 @@
 
-Reading and Writing CSV Files
-================================
+Read and Write CSV Files
+=========================
 
 .. meta::
    :description: How to link CSV files to an AIMMS project using DataLink and CSVProvider libraries.

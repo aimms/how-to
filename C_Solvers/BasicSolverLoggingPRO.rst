@@ -1,5 +1,10 @@
-How to get solver log files using AIMMS PRO?
-======================================================
+Retrieve Solver Log Files in AIMMS PRO
+==========================================
+
+.. meta::
+   :description: How to get log files from a particular solver in AIMMS PRO.
+   :keywords: log, logfile, solver
+
 
 In :doc:`BasicSolverLoggingIDE`, we explain how to adapt the project such that solver log files are available for inspection. 
 A solver session runs somewhere on an AIMMS PRO server, and as a user, you do not have direct access to those files. 

@@ -1,9 +1,19 @@
-﻿Investigating infeasible nonlinear problems
-============================================
+﻿Analyze Infeasible Nonlinear Problems
+=======================================
 
-.. sidebar:: Sherlock
+.. meta::
+   :description: How to evaluate infeasible results to nonlinear problems.
+   :keywords: infeasible, nonlinear, debug, iis, presolver
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on October 20, 2014 by Marcel Hunting.
+
+.. sidebar:: Sherlock Holmes
 
     .. image:: ../Resources/C_Solvers/Images/130/sherlock.png
+    	:scale: 50 %
+    	:align: center
 
 The AIMMS webinar of August (2014) dealt with "Analyzing infeasible Problems in AIMMS". In case you missed it, the recording can be found `here <https://aimms.com/english/developers/resources/webinars/webinars-demand/analyzing-infeasible-problems-aimms/>`_. As shown in the webinar, one way to investigate an infeasible problem is by calculating an **Irreducibly Inconsistent System** (IIS). An IIS is a subset of all constraints and variables that contains an infeasibility. The "Irreducibly" part implies that the subset is as small as possible. Unfortunately, the IIS could only be calculated for linear (and quadratic) problems. So how about nonlinear problems?
 

@@ -7,8 +7,12 @@
 
 .. BEGIN CONTENT
 
-Resolving License Issues
+Resolve License Issues
 =========================
+
+.. meta::
+   :description: Resolving AIMMS license issues regarding personal nodelock, pending activation, and IP subnet.
+   :keywords: license, error, nodelock, activation, ip, subnet
 
 .. TOC
 

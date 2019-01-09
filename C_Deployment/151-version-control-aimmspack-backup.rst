@@ -1,6 +1,6 @@
  
 Overview: Model Sources, Version Control and aimmspack Files
-===========================================================
+============================================================
 
 .. meta::
    :description: An overview of model sources and using version control in AIMMS 4 applications.
@@ -8,7 +8,7 @@ Overview: Model Sources, Version Control and aimmspack Files
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on September 18, 2014 by Marcel.
+	This article was originally posted to the AIMMS Tech Blog on September 18, 2014 by Marcel Roelofs.
 
 
 .. sidebar:: Don't be a git use Version Control

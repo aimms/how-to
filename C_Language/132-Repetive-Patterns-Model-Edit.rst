@@ -1,5 +1,13 @@
-﻿Repetitive Patterns captured by Model Query and Model Edit Functions
-======================================================================
+﻿Repeat Data with Model Query and Model Edit
+===========================================
+
+.. meta::
+   :description: How to duplicate patterns with Model Query and Model Edit functions
+   :keywords: model, edit, query, structure, pattern
+
+      .. note::
+
+	This article was originally posted to the AIMMS Tech Blog on May 8, 2014 by Chris Kuip.
 
 .. sidebar:: Der Maler - Honoré Daumier - from Rheims Museum of Fine Arts
 
@@ -17,7 +25,6 @@ We have the data for product 'pr1,' and we need to specify the data for product 
 
 .. code-block:: aimms
 
-    CopyProductDataProcedure body:
     P1(newPr) := P1(existingPr);
     P2(mat,newPr) := P2(mat,existingPr);
     P3(f,newPr,t) := P3(f,existingPr,t);
@@ -117,7 +124,7 @@ Finishing up the line, and adding it to the body text:
     ! Add the assignment statement to the procedure body.
     s_textOfProcBody += bodyLine ;
 
-    Now that we have the body text in ``s_textOfProcBody``, we actually want to assign this text to the procedure:
+Now that we have the body text in ``s_textOfProcBody``, we actually want to assign this text to the procedure:
 
 .. code-block:: aimms
 
@@ -143,7 +150,7 @@ This completes the data duplication example. It illustrates the use of Model Que
 * creating ad-hoc queries to explain model results, and
 * enabling modeler – end-user cooperative development.
 
-Moreover, Model Query and Model Edit functions form a major building block when treating formulas as data. This, however, is a topic for another blog post. More information about Runtime libraries and Model Edit functions can be found in the Language Reference of AIMMS, section "Runtime Libraries and the Model Edit Functions." Another example of the use of Model Edit functions was written in the post <a title="Getting value of a dynamic identifier" :doc:`146-value-dynamic-identifier`.
+Moreover, Model Query and Model Edit functions form a major building block when treating formulas as data. This, however, is a topic for another blog post. More information about Runtime libraries and Model Edit functions can be found in the Language Reference of AIMMS, section "Runtime Libraries and the Model Edit Functions." Another example of the use of Model Edit functions was written in the post :doc:`146-value-dynamic-identifier`.
 
 
 .. include:: ../includes/form.def

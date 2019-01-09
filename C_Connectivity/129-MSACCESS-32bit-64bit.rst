@@ -1,4 +1,4 @@
-﻿Installing Side-by-Side Drivers
+﻿Install Side-by-Side Drivers
 ================================
 
 .. meta::
@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on October 27, 2014 by Ovidiu.
+	This article was originally posted to the AIMMS Tech Blog on October 27, 2014 by Ovidiu Listes.
 
 
 

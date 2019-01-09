@@ -1,7 +1,10 @@
-How to model category mapping of items and use that in subsequent computations ?
-==================================================================================
-.. Edit the title of your article
-.. No need to extend/delete the = in the next line
+Model category mapping of items
+================================
+
+.. meta::
+   :description: How to model category mapping to define properties in AIMMS.
+   :keywords: category, map, mapping, lookup
+
 
 Introduction
 ------------

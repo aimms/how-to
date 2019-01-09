@@ -1,5 +1,9 @@
-Haversine as external function
-==============================
+Create an External Function with Visual Studio
+===============================================
+
+.. meta::
+   :description: Example using Haversine to create an external function with Microsoft Visual Studio.
+   :keywords: external, function, visual, studio, dll
 
 .. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
 
@@ -163,7 +167,7 @@ Step 1: Copy the dll's into the AIMMS project:
 
 #. Copy the ``<HaversineDLL>\release\HaversineDLL.dll`` to the AIMMS project subfolder ``external\Windows\x86``
 
-#. COpy the ``<HaversineDLL>\x64\release\HaversineDLL.dll`` to the AIMMS project subfolder ``external\Windows\x64``
+#. Copy the ``<HaversineDLL>\x64\release\HaversineDLL.dll`` to the AIMMS project subfolder ``external\Windows\x64``
 
 
 Step 2: Declare the external function in AIMMS:

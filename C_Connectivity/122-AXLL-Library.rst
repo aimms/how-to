@@ -1,5 +1,5 @@
-﻿Using the AIMMS Excel Library
-==================================
+﻿Link to Excel Files
+=======================
 
 .. meta::
    :description: How to link spreadsheet data to an AIMMS project with the AIMMS Excel Library.
@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on July 6, 2016 by Deanne.
+	This article was originally posted to the AIMMS Tech Blog on July 6, 2016 by Deanne Zhang.
  
 .. sidebar:: Connecting to EXCEL
 

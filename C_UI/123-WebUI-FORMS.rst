@@ -1,5 +1,13 @@
-﻿Using AIMMS WebUI Forms to Create and Edit Data
-================================================
+﻿Create Forms in WebUI
+========================
+
+.. meta::
+   :description: Creating user forms in WebUI to create, update, and delete data.
+   :keywords: webform, form, webui
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on March 10, 2016 by Chris Kuip.
 
 The AIMMS WebUI is well known for its capability to create a UI for inspecting and analyzing data in a browser and for modifying existing data. However, as a model developer, you also want your users to be able to:
 
@@ -192,7 +200,7 @@ Step 7. Adapting the programmatic names to phrases inviting proper user entry
 
 Phrase adapting in the WebUI is achieved via translation files. In our running example we adapt using ``InventoryManagement\WebUI\resources\languages\skuform-messages.properties``, with the following contents.
 
-.. code-block:: aimms
+.. code-block:: none
 
     SKUForm_SP_SKUFORM_InternalName = Name
     SKUForm_SP_Manufacturer = Manufacturer

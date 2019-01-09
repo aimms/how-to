@@ -1,5 +1,5 @@
-﻿Encrypting Projects to Protect Intellectual Property
-================================================================
+﻿Encrypt Projects to Protect Intellectual Property
+==================================================
 
 .. meta::
    :description: How to encrypt your project in AIMMS 4 applications.
@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on March 6, 2015 by Peter.
+	This article was originally posted to the AIMMS Tech Blog on March 6, 2015 by Peter Nieuwesteeg.
 
 
 .. sidebar:: Protecting intellectual property through encryption

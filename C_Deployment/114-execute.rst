@@ -1,9 +1,13 @@
-﻿Using the Execute Function
+﻿Run Executable Files
 ============================
 
 .. meta::
    :description: How to run executable files from AIMMS using the Execute function.
    :keywords: execute, exe
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on February 22, 2017 by Deanne Zhang.
 
 .. sidebar:: Executing another program
 

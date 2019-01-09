@@ -1,9 +1,19 @@
-﻿Creating StopWatch in AIMMS to time execution
-=============================================
+﻿Measure Execution Time
+=======================
+
+.. meta::
+   :description: How to measure efficiency of procedures with StopWatch function.
+   :keywords: efficient, time, execute, stopwatch, watch, clock
+
+      .. note::
+
+	This article was originally posted to the AIMMS Tech Blog on December 16, 2011 by Guido Diepen.
 
 .. sidebar:: Stopwatch
 
     .. image:: ../Resources/C_Language/Images/144/stopwatch-156008_960_720.png
+            :scale: 50 %
+            :align: center
 
 There are situations where you would like to know how long the execution of something in AIMMS took.
 

@@ -1,5 +1,13 @@
-﻿GMP Intro
-==============
+﻿Overview: Generated Mathematical Programs
+==========================================
+
+.. meta::
+   :description: Getting started with Generated Mathematical Programs (GMP) in AIMMS.
+   :keywords: gmp, mathematic, program
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on November 10, 2011 by Guido Diepen.
 
 In the simplest form solving a Mathematical Program identifier is done by using the intrinsic **solve** statement of AIMMS:
 
@@ -33,7 +41,7 @@ Mathematical Programs" in the `AIMMS The Language Reference <https://documentati
 Additional information
 ----------------------- 
 
-The exact workings of gmp::Instance::Solve statement can actually be emulated in a couple of lower-level GMP statements. 
+The exact workings of ``gmp::Instance::Solve`` statement can actually be emulated in a couple of lower-level GMP statements. 
 If you look at the Language Reference, you will see that you can emulate its behavior with the following calls:
 
 .. code-block:: aimms

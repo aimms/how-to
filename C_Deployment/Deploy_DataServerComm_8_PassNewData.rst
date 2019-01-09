@@ -1,7 +1,7 @@
 
 .. Deploy_DataServerComm_8_PassNewData.rst
 
-Communicating Data Changes in WebUI
+Communicate Data Changes in WebUI
 ====================================
 
 .. meta::

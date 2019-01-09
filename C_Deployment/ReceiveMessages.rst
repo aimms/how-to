@@ -1,4 +1,4 @@
-Sending and Receiving Messages
+Send and Receive Messages
 ==============================
 
 .. meta::

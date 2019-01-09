@@ -1,15 +1,15 @@
 ﻿.. include:: ../includes/icons-sub.def
 
-Linking an SQLite Database to a Project
+Link an SQLite Database to a Project
 =========================================
 
 .. meta::
    :description: Directions to link a project in AIMMS with an SQLite database in Windows 10.
-   :keywords: sql, sqlite, database
+   :keywords: sql, sqlite, database, link, connect
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on October 25, 2018 by Arthur.
+	This article was originally posted to the AIMMS Tech Blog on November 18, 2016 by Arthur d'Herbemont.
 
 Say you have a wonderful AIMMS application, that needs to link a Database Table identifier |db| (an AIMMS identifier) to one SQL data base of yours. Your amazing SQL data base is, however, an SQLite database. Thus, to be able to read it, AIMMS needs the appropriate "driver", which enables it to read your SQLite database. This blogpost presents how to:
 
@@ -28,11 +28,11 @@ SQLite driver
 
 To install SQLite ODBC driver, please refer to the following website, and download ``sqliteodbc.exe`` or ``sqliteodbc_w64.exe``, depending on your AIMMS' configuration (and NOT your computer's configuration):
 
-`here <http://www.ch-werner.de/sqliteodb>`_
+http://www.ch-werner.de/sqliteodbc
 
 Then just run the .exe and follow the instructions.
 
-Note : This driver is open source, you may read the `license terms <http://www.ch-werner.de/sqliteodbc/license.terms>`_ to be sure.
+.. note:: This driver is open source under a BSD-type license, you may read the `license terms <http://www.ch-werner.de/sqliteodbc/license.terms>`_ to be sure.
 
 Verification of the installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -153,25 +153,23 @@ Let's start a super simple new AIMMS project, containing only one Database Table
 * Specify 'Table1',
 * Activate the **Data Source** wizard,
 
-Link with a .dsn file
-^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Choose the **Select File Data Source…** command in the menu that pops up,
-* Select your DSN file ("*dsn*" in our case).
-* Press the **Save**
++-------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+| Link    Type                  |        Action                                                                                                                                 |
++===============================+===============================================================================================================================================+
+| Link with a .dsn file         | * Choose the **Select File Data Source…** command in the menu that pops up,                                                                   |
+|                               | * Select your DSN file ("*dsn*" in our case).                                                                                                 |
+|                               | * Press the **Save**                                                                                                                          |
++-------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+| Link with a System .dsn file  |  * Choose the **Select User/System Data Source…** command in the menu that pops up,                                                           |
+|                               |  * Select your DSN System file ("*chinook SQLite3*" in our case).                                                                             |
+|                               |  * Press the **Save**                                                                                                                         |
++-------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+| Link with a connection string |  * Choose the **Select String Parameter/Connection String…** command in the menu that pops up,                                                |
+|                               |  * Select the String Parameter |sp| you've just created (named '*ConnectionString'* in our case                                               |
++-------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
 
-Link with a System .dsn file
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Choose the **Select User/System Data Source…** command in the menu that pops up,
-* Select your DSN System file ("*chinook SQLite3*" in our case).
-* Press the **Save**
-
-Link with a connection string
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* Choose the **Select String Parameter/Connection String…** command in the menu that pops up,
-* Select the String Parameter |sp| you've just created (named '*ConnectionString'* in our case).
 
 Verify the database link
 -------------------------
@@ -183,19 +181,18 @@ Once you have linked the data source, you are now ready and able to select a tab
 * You should see table names from your database… if not, please see the instructions bellow.
 
 .. warning::
-	
-	if you receive this error message
+    
+    if you receive the following error message when trying to link with a connection string: 
 
-	.. image:: ../Resources/C_Connectivity/Images/118/11aimms.png
+    .. image:: ../Resources/C_Connectivity/Images/118/11aimms.png
 
-	 
-	And if you tried the connection String :
+    |
+     
+    Your connection string might be empty. Please check if '*ConnectionString*' parameter is empty by accessing its data (right click on its icon and choose **Data…**). It should be filled out with the following string :
 
-	Your connection string might be empty. Please check if '*ConnectionString*' parameter is empty by accessing its data (right click on its icon and choose **Data…**). It should be filled out with the following string :
+    .. code-block:: none
 
-	.. code-block:: none
-
-	    DRIVER={SQLite3 ODBC Driver};DATABASE=C:\Users\Arthur.AIMMS\Documents\SQLite\sqlite-dll-win64-x64-3150000\chinook.db;
+        DRIVER={SQLite3 ODBC Driver};DATABASE=C:\Users\Arthur.AIMMS\Documents\SQLite\sqlite-dll-win64-x64-3150000\chinook.db;
 
 Summary
 ----------

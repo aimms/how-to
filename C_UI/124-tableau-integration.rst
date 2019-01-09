@@ -1,5 +1,13 @@
-﻿How to integrate AIMMS with Tableau
-===================================
+﻿Link AIMMS with Tableau
+===========================
+
+.. meta::
+   :description: How to automate Tableau integration with the AIMMS DataLink library.
+   :keywords: tableau, datalink, link, integrate
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on November 1, 2015 by Marcel Roelofs.
 
 
 .. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.

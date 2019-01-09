@@ -1,5 +1,13 @@
-﻿ROGO solver using constraint programming
-========================================
+﻿Use Constraint Programming to Solve ROGO Puzzle 
+=================================================
+
+.. meta::
+   :description: A method for solving ROGO puzzles using constraint programming in AIMMS.
+   :keywords: ROGO, constraint
+
+.. note::
+
+	This article was originally posted to the AIMMS Tech Blog on December 18, 2012 by Chris Kuip.
 
 
 .. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.

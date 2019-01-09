@@ -1,5 +1,5 @@
-Interrupting the Server Session
-==================================== 
+Interrupt the Server Session
+=============================
 
 .. meta::
    :description: A method for stopping a solve process when "cancel" is not available.

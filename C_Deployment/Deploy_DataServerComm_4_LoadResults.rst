@@ -1,4 +1,4 @@
-Loading Server Session Results Manually
+Load Server Session Results Manually
 ========================================
 
 .. meta::
