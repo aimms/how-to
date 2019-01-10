@@ -148,7 +148,7 @@ The real meat of this article is in the following procedure, where we allow the 
 
 * The 01 parameters are there to ensure the proper execution flow through the procedure. 
 
-.. todo:: p01_errorHandled should not be needed. See https://gitlab.aimms.com/aimms/customer-tickets/issues/970
+.. todo:: p01_errorHandled should not be needed. See https://gitlab.aimms.com/aimms/customer-tickets/issues/970 Adapt article when issue is fixed.
 
 Summary
 -------

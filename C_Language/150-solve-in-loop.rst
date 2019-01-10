@@ -5,8 +5,6 @@ Solve in Loop
    :description: How to solve several instances at once using a loop.
    :keywords: loop, solve
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
-
 
 I often get the question how to solve several instances in one go.
 In this article I provide a simple example.
