@@ -5,7 +5,7 @@
    :description: How to use sets, subsets, indices, element parameters in AIMMS models.
    :keywords: set, subset, index, element, parameter
 
-   .. note::
+.. note::
 
 	This article was originally posted to the AIMMS Tech Blog on September 23, 2016 by Deanne Zhang.
 
