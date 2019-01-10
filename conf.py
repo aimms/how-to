@@ -47,8 +47,10 @@ source_suffix = '.rst'
 # The master toctree document.
 master_doc = 'ContentIndex'
 
+title = 'AIMMS Documentation'
+
 # General information about the project.
-project = u'How to in AIMMS'
+project = title
 copyright = u'2019, AIMMS'
 author = u'AIMMS'
 
@@ -64,7 +66,7 @@ release = u'0'
 # includes these texts at the end of all source .rsts, helpful for using repetitive replacements 
 
 rst_epilog = """
-.. |date| date:: %b, %Y
+.. |date| date:: %B, %Y
 
 .. |time| date:: %H:%M
 
@@ -125,11 +127,10 @@ html_theme = 'sphinx_materialdesign_theme'
 
 html_logo = 'resources\\images\\aimms-logo.png'
 
-html_title = 'How to in AIMMS'
+html_title = title
 
 html_use_index = True
 html_show_sourcelink = False
-html_add_permalinks = 'None'
 
 # html_theme_options = {
 #     'canonical_url': '',
@@ -257,7 +258,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'HowToinAIMMS.tex', u'How to in AIMMS Documentation',
+    (master_doc, 'HowToinAIMMS.tex', title,
      u'AIMMS User Support Team', 'manual'),
 ]
 
@@ -267,7 +268,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'howtoinaimms', u'How to in AIMMS Documentation',
+    (master_doc, 'howtoinaimms', title,
      [author], 1)
 ]
 
@@ -278,8 +279,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'HowToinAIMMS', u'How to in AIMMS Documentation',
-     author, 'HowToinAIMMS', 'One line description of project.',
+    (master_doc, title, title,
+     author, title, 'One line description of project.',
      'Miscellaneous'),
 ]
 
