@@ -9,7 +9,7 @@ Catering for unresponsive PRO server or unstable connection
 .. sidebar:: Made a mistake or just rest needed?
 
     .. image:: ../Resources/C_Deployment/Images/155/BenchTimedOut.jpg
-        :scale: 240%
+        :scale: 100%
 
 Executing a ``pro::DelegateToServer`` from a WinUI AIMMS app launched from a distant AIMMS PRO server may fail due to various causes. 
 In this article we discuss the cause that the server is needed but didn't respond for more than a minute.
