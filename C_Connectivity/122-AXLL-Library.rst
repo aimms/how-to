@@ -22,10 +22,10 @@ In order to use the library, you first need to add the system library 'AIMMSXLLi
 Reading your Excel File in AIMMS
 ---------------------------------
 
-I needed some geographical information about the US for an application I was building. The information was easy to find online. I downloaded the file below, titled "free-zipcode-database-Primary.xlsx". It provided the Zipcode, State, Latitude,andLongitude columns I needed.
+I needed some geographical information about the US for an application I was building. The information was easy to find online. I downloaded the file below, titled "free-zipcode-database-Primary.xlsx". It provided the Zipcode, State, Latitude and Longitude columns I needed.
 
 .. image:: ../Resources/C_Connectivity/Images/122/Excel-e1465306005168.png
-
+        :scale: 150 %
 
 Next, I created a procedure in my AIMMS project, called "ReadFromExcel." 
 In the procedure, first I would like to have AIMMS point to the file so I can read it. Here is the code:
@@ -45,8 +45,12 @@ The code in the "if-else" statement is to avoid opening the workbook again if it
 
 The next thing is to use ``axll::SelectSheet`` to set the sheet I am going to use.
 
-axll::SelectSheet(*"free-zipcode-database-Primary"*);
-Then I used ``axll::ReadSet`` function to read value for set "sZipCode".
+.. code-bock:: aimms
+
+    axll::SelectSheet(*"free-zipcode-database-Primary"*);
+
+    
+Then I use ``axll::ReadSet`` function to read value for set "sZipCode".
 
 .. code-block:: aimms
 
@@ -55,19 +59,19 @@ Then I used ``axll::ReadSet`` function to read value for set "sZipCode".
         SetRange        : "A2:A42523",
         ExtendSuperSets : 1);
 
-The first argument, "SetReference," is the set name. The second argument, "SetRange," is the range in Excel. The third argument, "ExtendSuperSets," is telling AIMMS to extend this set's super set when applicable.
+The first argument, "SetReference," is the set name. The second argument, "SetRange," is the range in Excel. The third argument, "ExtendSuperSets," is telling AIMMS to extend this set's super set when the elements read in this Excel are not part of the super set.
 
 Adding Parameters
 ------------------
 
-Next, I want to make sure I can read the following data in two dimensional parameters Coordnates(z,iLonLat), by using ``axll::ReadTable``.
+Next, I want to make sure I can read the following data in two dimensional parameters ``Coordinates(z,iLonLat)``, by using ``axll::ReadTable``.
 
 .. code-block:: aimms
 
     axll::ReadTable(
         IdentifierReference : Coordinates,
-        RowHeaderRange      : "A2:A42523"*,
-        ColumnHeaderRange   : "F1:G1"*,
+        RowHeaderRange      : "A2:A42523",
+        ColumnHeaderRange   : "F1:G1",
         DataRange           : "F2:G42523");
 
 The first argument, "IdentifierReference", is the name of the parameter. The second argument, "RowHeaderRange", is the range for first index "z", which is represented as row range "A2:A42523" in Excel. The third argument, "ColumnHeaderRange", is the range for second index "iLonLat", which is represented as column range "F1:G1" in Excel. The forth argument, "DataRange", is the range for the actual data. 
@@ -75,8 +79,10 @@ The first argument, "IdentifierReference", is the name of the parameter. The sec
 In case you have an identifier with more dimensions, "RowHeaderRange" is the range where the starting indices reside, and "ColumnHeaderRange", is the range where the ending indices reside. For example, identifier ``MyValue(r1, r2, r3, r4,c1,c2,c3,c4)`` has 8 indices, and the data in Excel looks like this:
 
 .. image:: ../Resources/C_Connectivity/Images/122/Excel3-e1465306679329.png
+        :scale: 150 %
+        
 
-Then the ReadTable statement will be:
+Then the ``axll::ReadTable`` statement will be:
 
 .. code-block:: aimms
 
