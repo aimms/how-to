@@ -10,23 +10,24 @@ Deployment
 ========================
 
 .. toctree::
+   :maxdepth: 1
 
-    151-version-control-aimmspack-backup
-    128-Intellectual-Property
-    Deploy_DataServerComm_1_Publish
-    Deploy_DataServerComm_2_Develop
-    Deploy_DataServerComm_3_RemoveVeil
-    Deploy_DataServerComm_4_LoadResults
-    Deploy_DataServerComm_5_Progress
-    Deploy_DataServerComm_6_Retrieve
-    Deploy_DataServerComm_7_Interrupt
-    Deploy_DataServerComm_8_PassNewData
-    Deploy_DataServerComm_2a_ReducedCases
-    120-pro-user-groups
-    117-Uploading-and-Downloading-files
-    115-Securing-File-Access
-    RegularJob
-    ReceiveMessages
-    how to work with csv files
-    114-execute
+   151-version-control-aimmspack-backup
+   128-Intellectual-Property
+   Deploy_DataServerComm_1_Publish
+   Deploy_DataServerComm_2_Develop
+   Deploy_DataServerComm_3_RemoveVeil
+   Deploy_DataServerComm_4_LoadResults
+   Deploy_DataServerComm_5_Progress
+   Deploy_DataServerComm_6_Retrieve
+   Deploy_DataServerComm_7_Interrupt
+   Deploy_DataServerComm_8_PassNewData
+   Deploy_DataServerComm_2a_ReducedCases
+   120-pro-user-groups
+   117-Uploading-and-Downloading-files
+   115-Securing-File-Access
+   RegularJob
+   ReceiveMessages
+   how to work with csv files
+   114-execute
     

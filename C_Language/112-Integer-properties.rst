@@ -10,6 +10,7 @@
 	This article was originally posted to the AIMMS Tech Blog on July 27, 2018 by Richard Stegeman.
 
 .. image:: ../Resources/C_Language/Images/112/BlogPicture.jpg
+   :align: right
 
 For the past couple of years, we have worked on improving the compiler and execution engine in AIMMS. We've done this in a way that minimizes problems in existing models.  
 During this process, we have encountered issues in the existing code that are not in line with the Language Reference. We struggled with the handling of subsets of integers in an expression in particular. 

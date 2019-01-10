@@ -14,10 +14,11 @@ User Interface
 
     
 .. toctree::
+   :maxdepth: 1
     
-    How To download multiple files
-    95-change-default-ui
-    94-using-the-scalar-switch-css
-    123-WebUI-FORMS
-    124-tableau-integration
-    49-webui-css-color
+   How To download multiple files
+   95-change-default-ui
+   94-using-the-scalar-switch-css
+   123-WebUI-FORMS
+   124-tableau-integration
+   49-webui-css-color

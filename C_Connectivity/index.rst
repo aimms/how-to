@@ -10,7 +10,8 @@ Connectivity
 ========================
 
 .. toctree::
+   :maxdepth: 1
 
-    118-Connect-SQLite
-    122-AXLL-Library
-    129-MSACCESS-32bit-64bit
+   118-Connect-SQLite
+   122-AXLL-Library
+   129-MSACCESS-32bit-64bit
