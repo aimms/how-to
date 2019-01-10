@@ -1,6 +1,11 @@
 Catering for unresponsive PRO server or unstable connection
 ============================================================
 
+.. meta::
+   :description: The AIMMS Error handling permits explicit recoveries, controlled by the end user, of abnormal environment and system conditions.
+   :keywords: error handling, time out, timed out, server session, AIMMS Deployment
+
+
 .. sidebar:: Made a mistake or just rest needed?
 
     .. image:: ../Resources/C_Deployment/Images/155/BenchTimedOut.jpg
@@ -149,6 +154,7 @@ The real meat of this article is in the following procedure, where we allow the 
 * The 01 parameters are there to ensure the proper execution flow through the procedure. 
 
 .. todo:: p01_errorHandled should not be needed. See https://gitlab.aimms.com/aimms/customer-tickets/issues/970 Adapt article when issue is fixed.
+          Fix should appear in AIMMS 4.62 :-)
 
 Summary
 -------
