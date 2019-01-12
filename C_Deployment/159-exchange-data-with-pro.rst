@@ -1,8 +1,8 @@
-.. |image11| image:: /Images/159-exchange-data-with-pro/image11.png
-.. |image13| image:: /Images/159-exchange-data-with-pro/image13.jpg
-.. |image14| image:: /Images/159-exchange-data-with-pro/image14.jpg
-.. |image15| image:: /Images/159-exchange-data-with-pro/image15.jpg
-.. |image16| image:: /Images/159-exchange-data-with-pro/image16.jpg
+.. |image1| image:: /Images/159-exchange-data-with-pro/image1.png
+.. |image2| image:: /Images/159-exchange-data-with-pro/image2.jpg
+.. |image3| image:: /Images/159-exchange-data-with-pro/image3.jpg
+.. |image4| image:: /Images/159-exchange-data-with-pro/image4.jpg
+.. |image5| image:: /Images/159-exchange-data-with-pro/image5.jpg
 
 Exchange data with AIMMS PRO
 ============================
@@ -22,7 +22,7 @@ custodians of that on-premise environment. This document describes the
 options for exchanging data between on-premise systems and AIMMS apps
 running on the AIMMS Cloud Platform.
 
-|image11|
+|image1|
 
 *Figure 1 – Exchanging data between on-premise systems and AIMMS apps
 running in the AIMMS Cloud Platform*
@@ -70,7 +70,7 @@ offer such components as there are many such components available both
 ommercially and as open-source.
 
 
-|image13|
+|image2|
 
 *Figure 2 – Exchanging data via the application database in the AIMMS
 Cloud Platform*
@@ -96,7 +96,7 @@ require a custom application (Java or .net) to access the AIMMS PRO API
 for this purpose.
 
 
-|image14|
+|image3|
 
 Figure 3 – Exchanging data via the AIMMS PRO API
 
@@ -122,7 +122,7 @@ needs to be extended with appropriate web services that are exposed to
 the internet, custom programmed for the application.
 
 
-|image15|
+|image4|
 
 *Figure 4 – Exchanging data via custom web services*
 
@@ -149,7 +149,7 @@ gateways to receive incoming VPN connections.
 
 
 
-|image16|
+|image5|
 
 *Figure 5 – Simplified diagram showing the relevant parts of the AIMMS
 Cloud Platform architecture*
