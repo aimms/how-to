@@ -1,6 +1,3 @@
-.. |image5| image:: Images/159-exchange-data-with-pro/image5.png
-.. |image7| image:: Images/159-exchange-data-with-pro/image7.png
-.. |image9| image:: Images/159-exchange-data-with-pro/image9.png
 .. |image11| image:: Images/159-exchange-data-with-pro/image11.png
 .. |image12| image:: Images/159-exchange-data-with-pro/image12.jpg
 .. |image13| image:: Images/159-exchange-data-with-pro/image13.jpg
@@ -26,7 +23,7 @@ custodians of that on-premise environment. This document describes the
 options for exchanging data between on-premise systems and AIMMS apps
 running on the AIMMS Cloud Platform.
 
-|image?|
+|image11|
 
 *Figure 1 – Exchanging data between on-premise systems and AIMMS apps
 running in the AIMMS Cloud Platform*
