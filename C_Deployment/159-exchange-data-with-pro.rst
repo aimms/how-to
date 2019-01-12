@@ -67,13 +67,17 @@ decoupling connection point. On-premise systems can exchange data with
 this database (currently MySQL only), for example via syncing or via
 import or export components. AIMMS does not
 offer such components as there are many such components available both
-ommercially and as open-source.
+commercially and as open-source.
 
 
 |image2|
 
 *Figure 2 – Exchanging data via the application database in the AIMMS
 Cloud Platform*
+
+.. note::
+
+   See https://dev.mysql.com/doc/index-connectors.html for details how to connect to MySQL databases.
 
 All traffic takes place via a VPN tunnel that is initiated from the
 on-premise environment, so there is no need to permit incoming
