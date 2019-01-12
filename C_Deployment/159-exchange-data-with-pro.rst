@@ -1,9 +1,8 @@
-.. |image11| image:: Images/159-exchange-data-with-pro/image11.png
-.. |image12| image:: Images/159-exchange-data-with-pro/image12.jpg
-.. |image13| image:: Images/159-exchange-data-with-pro/image13.jpg
-.. |image14| image:: Images/159-exchange-data-with-pro/image14.jpg
-.. |image15| image:: Images/159-exchange-data-with-pro/image15.jpg
-.. |image16| image:: Images/159-exchange-data-with-pro/image16.jpg
+.. |image11| image:: /Images/159-exchange-data-with-pro/image11.png
+.. |image13| image:: /Images/159-exchange-data-with-pro/image13.jpg
+.. |image14| image:: /Images/159-exchange-data-with-pro/image14.jpg
+.. |image15| image:: /Images/159-exchange-data-with-pro/image15.jpg
+.. |image16| image:: /Images/159-exchange-data-with-pro/image16.jpg
 
 Exchange data with AIMMS PRO
 ============================
@@ -84,7 +83,7 @@ virtual private connection by encapsulating and encrypting all data
 packets.
 
 More details of the relevant parts of the AIMMS Platform architecture
-can be found in `deployment-exchange-data-more-details`_.
+can be found in `More details on AIMMS PRO architecture <deployment-exchange-data-more-details>`_.
 
 Option 2: ‘Via the AIMMS PRO API’
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -140,8 +139,8 @@ platform.
 
 .. _deployment-exchange-data-more-details:
 
-More details on the relevant AIMMS Cloud Platform architecture
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+More details on AIMMS PRO architecture
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The following diagram depicts the part of the
 AIMMS Cloud Platform architecture relevant for exchanging data. The
@@ -155,10 +154,6 @@ gateways to receive incoming VPN connections.
 *Figure 5 – Simplified diagram showing the relevant parts of the AIMMS
 Cloud Platform architecture*
 
-Related topics
----------------
-*
-*
 
 .. include:: ../includes/form.def
 
