@@ -80,8 +80,7 @@ Having multiple machines of a certain type, we can generalize this to:
         }
     }
 
-                          
-The entire example can be downloaded from: :download:`AIMMS project download <../Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>`
+The entire example can be downloaded from: :download:`AIMMS project download <../Resources/C_Mathematical_Modeling/Images/140/BuildBridge.zip>`
 
 Reference:
 Bartusch, M. (1983), Optimierung von Netzplänen mit Anordnungsbeziehungen bei knappen Betriebsmitteln, Ph.D. thesis, Universität Passau, Fakultät für Mathematik und Informatik.

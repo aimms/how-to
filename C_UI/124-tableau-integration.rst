@@ -9,9 +9,6 @@
 
 	This article was originally posted to the AIMMS Tech Blog on November 1, 2015 by Marcel Roelofs.
 
-
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
-
 .. sidebar:: Well, we're using:
 
     .. image:: ../Resources/C_UI/Images/124/tableau.logo_.png
