@@ -1,8 +1,8 @@
 .. |image1| image:: /Images/159-exchange-data-with-pro/image1.png
-.. |image2| image:: /Images/159-exchange-data-with-pro/image2.jpg
-.. |image3| image:: /Images/159-exchange-data-with-pro/image3.jpg
-.. |image4| image:: /Images/159-exchange-data-with-pro/image4.jpg
-.. |image5| image:: /Images/159-exchange-data-with-pro/image5.jpg
+.. |image2| image:: /Images/159-exchange-data-with-pro/image2.png
+.. |image3| image:: /Images/159-exchange-data-with-pro/image3.png
+.. |image4| image:: /Images/159-exchange-data-with-pro/image4.png
+.. |image5| image:: /Images/159-exchange-data-with-pro/image5.png
 
 Exchange data with AIMMS PRO
 ============================
