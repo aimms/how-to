@@ -16,10 +16,11 @@ How to write a few database tables
    
 Writing to databases is tuned for performance. Even when writing just a few rows, there is some time needed to setup a connection, actually write and commit the transaction to the database. Applications keep acquiring functionality, and subsequently the number of database tables in large applications may become significant. Having worked on an application with more than 100 database tables, where saving the data often consisted of writing the same data for most of the tables, we sought a solution whereby the writing of database tables is skipped for those tables where the data is not changed. 
 
-The Essential AIMMS feature DatachangeMonitors
+Background: DatachangeMonitors
 -----------------------------------------------------
 
-AIMMS' Datachange monitors monitor the data changes to identifiers they monitor.
+Datachange monitors track whether or not the data of a selection of identifiers was changed, since the last time checked. So what is a datachange monitor?
+
 A datachange monitor consists of three components:
 
 #. A name - for sake of identification.

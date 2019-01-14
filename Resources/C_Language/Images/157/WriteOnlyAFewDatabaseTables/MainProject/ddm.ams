@@ -121,33 +121,51 @@ Model Main_ddm {
                 sp_bodyInitProc := "" ;
                 sp_bodyWriteProc := "" ;
                 for i_db do
+                
+                	! Initialization per table.
                 	sp_bodyLineWrite := "" ;
                 	sp_bodyLineInit := "" ;
+                
+                	! Determine the collection of identifiers referenced in the database table.
                 	s_singleTon := i_db ;
-                	s_RefdIds :=
-                		ReferencedIdentifiers(
+                	s_RefdIds := ReferencedIdentifiers(
                 			searchIdentSet :  s_singleTon, 
                 			searchAttrSet  :  AllAttributeNames, 
-                			recursive      :  1) * ( AllParameters + AllSets );
+                			recursive      :  1) 
+                		     * ( AllVariables + AllParameters + AllSets );
                 	s_ReferencedIdentifiersByDatabaseTables(i_db) := s_RefdIds ;
+                
                 	sp_set := "data " + s_RefdIds ;
+                
                 	ep_datachangeMonitorSet(i_db):= me::Create(FormatString("MonitorSet_%e", i_db), 'set', ep_runtimeDecl);
                 	me::SetAttribute(ep_datachangeMonitorSet(i_db),'subset of', "AllIdentifiers");
                 	me::SetAttribute(ep_datachangeMonitorSet(i_db),'definition', sp_set);
                 	sp_datachangeMonitorName( i_db ) := formatString( "DatachangeMonitor_%e", i_db );
+                
+                	! To initialize a datachange monitor, we'll only have to call DataChangeMonitorCreate.
                 	sp_bodyLineInit  := formatString("DataChangeMonitorCreate(\"DatachangeMonitor_%e\",MonitorSet_%e,1);\n",i_db,i_db);
+                	sp_bodyInitProc += sp_bodyLineInit ;
+                
+                	! To write to a database table, but only when data is changed, we need to 
+                	! 1) check DataChangeMonitorHasChanged, 
+                	! 2) actually write,
+                	! 3) register the writing, and 
+                	! 4) Reset the datachange monitor.
                 	sp_bodyLineWrite := formatString("if DataChangeMonitorHasChanged(\"DatachangeMonitor_%e\") then\n",i_db);
                 	sp_bodyLineWrite += formatString("          write to table %e;\n",i_db); ;
                 	sp_bodyLineWrite += formatString("          p01_dbWritten(\'%e\') := 1;\n",i_db); ;
                 	sp_bodyLineWrite += formatString("          DataChangeMonitorReset( \"DatachangeMonitor_%e\", MonitorSet_%e );\n",i_db,i_db) ;
-                	sp_bodyLineWrite += "endif;\n\n" ;
-                	sp_bodyInitProc += sp_bodyLineInit ;
+                	sp_bodyLineWrite += formatString("endif;\n\n") ;
                 	sp_bodyWriteProc += sp_bodyLineWrite ;
+                
                 endfor ;
+                
                 ep_InitProc := me::Create( "pr_InitDatachangeMonitors", 'procedure', ep_runtimeLib);
                 me::SetAttribute( ep_InitProc, 'body', sp_bodyInitProc);
+                
                 ep_WriteProc := me::Create( "pr_WriteTablesWhenDataChanged", 'procedure', ep_runtimeLib);
                 me::SetAttribute( ep_WriteProc, 'body', sp_bodyWriteProc);
+                
                 me::Compile(ep_runtimeLib);
                 apply(ep_InitProc);
             }
