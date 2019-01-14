@@ -87,7 +87,7 @@ virtual private connection by encapsulating and encrypting all data
 packets.
 
 More details of the relevant parts of the AIMMS Platform architecture
-can be found in `More details on AIMMS PRO architecture <deployment-exchange-data-more-details>`_.
+can be found in :ref:`deployment-exchange-data-more-details`.
 
 Option 2: Via the AIMMS PRO API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -161,7 +161,7 @@ Cloud Platform architecture*
 
 Related Topics
 ----------------
-* **AIMMS Documentation:** `AIMMS Cloud Platform <https://manual.aimms.com/cloud/>`
+* **AIMMS Documentation:** `AIMMS Cloud Platform <https://manual.aimms.com/cloud/>`_
 
 .. include:: ../includes/form.def
 
