@@ -42,6 +42,13 @@
 
 {% include "searchbox.html" %}
 
+<br>
+
+{% if display_gitlab %}
+    <a href="https://{{ gitlab_host|default("gitlab.aimms.com") }}/{{ gitlab_user }}/{{ gitlab_repo }}/blob/{{ gitlab_version }}{{ conf_py_path }}/{{ pagename }}{{ suffix }}" class="fa fa-gitlab">
+    Edit this page on GitLab</a>
+{% endif %}
+
 {% endblock %}
 
 {% block body %}
@@ -65,6 +72,7 @@
 
 {% block footer %}
 {{ super() }}
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1290545-14"></script>
 <script>
