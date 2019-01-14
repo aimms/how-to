@@ -114,9 +114,17 @@ html_theme_options = {
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown :)
+if os.name != 'nt':
+    Display_edit_on_gitlab = False
+else:   
+    Display_edit_on_gitlab = True
+
+    
 html_context = {
     'css_files': ['_static/Hacks.css'],
-    "display_gitlab": True, # Integrate Gitlab
+    "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
     "gitlab_user": "Chris", # Username
     "gitlab_repo": "aimms-how-to", # Repo name
     "gitlab_version": "master", # Version
