@@ -186,10 +186,10 @@ html_theme_options = {
     # Customize layout.
     # For details see link.
     # https://getmdl.io/components/index.html#layout-section
-    'fixed_drawer': True,
-    'fixed_header': True,
-    'header_waterfall': False,
-    'header_scroll': False,
+    'fixed_drawer': False,
+    'fixed_header': False,
+    'header_waterfall': True,
+    'header_scroll': True,
 
     # Render title in header.
     # Values: True, False (Default: False)

@@ -4,259 +4,44 @@
  * :license: GPLv3, see LICENSE for details.
  */
 
-/* Colors and text decoration.
- For example, :black:`text in black` or :blink:`text blinking` in rST. */
+ 
+/*Side Bar adjustments */
 
-.black {
-    color: black;
-}
-
-.gray {
-    color: gray;
-}
-
-.grey {
-    color: gray;
+/* makes concise tree (line height) */
+li.toctree-l2 span.link-wrapper a.reference.internal { 
+    
+    padding-bottom: 5px;
+    padding-top: 5px;
+    line-height: 1.3em;   
 }
 
-.silver {
-    color: silver;
+/* thin line btw Side Bar and content */
+
+header.mdl-layout__drawer {
+    
+    padding-right: 5px;
 }
 
-.white {
-    color: white;
+/* Logo centered and rescaled */
+
+a.title img.logo {
+    
+    margin: auto !important;
+    max-width: 75%;
+    display: block;
 }
 
-.maroon {
-    color: maroon;
+span.mdl-layout-title a.title {
+    
+    padding: 20px 0 20px 0;
 }
 
-.red {
-    color: red;
-}
+/*Images sizd like paragraphs*/
 
-.magenta {
-    color: magenta;
-}
+div.page-content div.section img {
+    
+    max-width: 100%;
 
-.fuchsia {
-    color: fuchsia;
-}
-
-.pink {
-    color: pink;
-}
-
-.orange {
-    color: orange;
-}
-
-.yellow {
-    color: yellow;
-}
-
-.lime {
-    color: lime;
-}
-
-.green {
-    color: green;
-}
-
-.olive {
-    color: olive;
-}
-
-.teal {
-    color: teal;
-}
-
-.cyan {
-    color: cyan;
-}
-
-.aqua {
-    color: aqua;
-}
-
-.blue {
-    color: blue;
-}
-
-.navy {
-    color: navy;
-}
-
-.purple {
-    color: purple;
-}
-
-.under {
-    text-decoration: underline;
-}
-
-.over {
-    text-decoration: overline;
-}
-
-.blink {
-    text-decoration: blink;
-}
-
-.line {
-    text-decoration: line-through;
-}
-
-.strike {
-    text-decoration: line-through;
-}
-
-.it {
-    font-style: italic;
-}
-
-.ob {
-    font-style: oblique;
-}
-
-.small {
-    font-size: small;
-}
-
-.large {
-    font-size: large;
-}
-
-.smallpar {
-    font-size: small;
-}
-
-.wy-nav-content {
-    max-width: 100% !important;
-} 
-
-.rst-content blockquote {
-    margin-right: 24px;
-}
-
-h1, h2, h3 p{
-  font-family:Arial,sans-serif;
-}
-
-h2 {
-	
-	border-bottom: 1px solid lightgrey;
-}
-.navbar {
-  overflow: hidden;
-  background-color: #000081;
-  position: fixed !important;
-  height: 70px;
-  top: 0;
-  width: 100%;
-  left:-1px;
-  max-width: 1500px
-  color:white;
-}
-
-.navbar a {
-  float: right;
-  display: block;
-  color: white;
-  font-weight:bold;
-  text-align: center;
-  padding-bottom: 25px;
-  padding-top: 25px;
-  padding-left:15px;
-  padding-right:15px;
-  text-decoration: none;
-  font-size: 15px;
-}
-
-.navbar a.navbarimg img{
-
-  padding-bottom: 2px;
-
-}
-
-.navbar a:hover {
-  color: #F7F8F9;
-  #text-decoration: underline;
-  background: rgba(255,255,255,0.1);
-}
-
-
-div.sphinxsidebar{
-	background-color: #F7F8F9;
-	padding-left: 50px;
-	left:-1px;
-	top:70px;
-	border-right: 1px inset;
-}
-
-div.sphinxsidebar h3{
-	font-size: 16px;
-	font-weight: bold;
-	margin-top:10px;
-}
-
-div.sphinxsidebar h3 a{
-	margin-top:10px;
-	color:#444
-}
-
-div.sphinxsidebar ul li.toctree-l1{
-	margin-bottom:20px;
-}
-div.document{
-  overflow-x:hidden;
-}
-div.body{
-	margin-left:40px;
-	padding-left:10px;
-	margin-top:60px;
-  overflow-x:hidden;
-  display:inline-block;
-}
-div.body h1{
-  font-size: 240%;
-  font-weight: bold;
-}
-
-div.body h2{
-  font-size: 150%;
-  font-weight: bold;
-}
-div.body p{
-  line-height:200%;
-}
-}
-.main {
-  padding: 16px;
-  margin-top: 30px;
-  height: 1500px; /* Used in this example to enable scrolling */
-  width:800px;
-}
-
-div.box h1, .wy-breadcrumbs li a{
-  /*color:royalblue;*/
-}
-
-.wy-side-nav-search, .wy-menu-vertical a:active{
-  /*background-color: royalblue*/
-}
-
-/*Color seealso blocks */
-
-.admonition.seealso .admonition-title {
-	
-	background: #329932;
-}
-
-.admonition.seealso {
-	
-	background: #cce5cc;
-	
 }
 
 /*Color any Topic block */
