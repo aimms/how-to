@@ -91,26 +91,6 @@ html_theme = 'sphinx_rtd_theme'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    # "show_related" : "False",
-    # "fixed_sidebar" : "True",
-    # "sidebar_link": "Black",
-    # "sidebar_text": "#000081",
-	# "sidebar_list": "blue",
-    # "sidebar_width": "300px",
-    # ## Page
-    # "page_width" : "1400px",
-    # "logo" : "aimms-logo-s-rgb.png",
-    # "touch_icon" : "favicon.png",
-    # "logo_name" : "How to ...",
-    # #"logo_text_align" : "center",
-    # "description" : "How-To: A Practical User Guide",
-    # "description_font_style" : "oblique",
-    # "font_family" : "'Arial', serif;",
-    # "head_font_family": "'Arial', serif;",
-    # "font_size": "14px",
-    # "show_powered_by" : "false",
-	# "note_bg" : "#fce7a4",
-	# "note_border" : "grey"
 
 	'canonical_url': '',
     'analytics_id': '',
@@ -134,8 +114,22 @@ html_theme_options = {
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown :)
+if os.name != 'nt':
+    Display_edit_on_gitlab = False
+else:   
+    Display_edit_on_gitlab = True
+
+    
 html_context = {
     'css_files': ['_static/Hacks.css'],
+    "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
+    "gitlab_user": "Chris", # Username
+    "gitlab_repo": "aimms-how-to", # Repo name
+    "gitlab_version": "master", # Version
+    "conf_py_path": "", # Path in the checkout to the docs root
+    "suffix": ".rst",
 }
 
 # Custom sidebar templates, must be a dictionary that maps document names
