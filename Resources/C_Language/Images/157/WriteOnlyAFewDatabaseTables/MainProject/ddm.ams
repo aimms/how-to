@@ -1,25 +1,7 @@
 ## ams_version=1.0
 
 Model Main_ddm {
-    DeclarationSection DataDeclarationsOfInterest {
-        Set s_A {
-            Index: i_a;
-        }
-        Set s_B {
-            Index: i_b;
-        }
-        Set s_C {
-            Index: i_c;
-        }
-        Parameter p_AB1 {
-            IndexDomain: (i_a,i_b);
-        }
-        Parameter p_AB2 {
-            IndexDomain: (i_a,i_b);
-        }
-        Parameter p_BC1 {
-            IndexDomain: (i_b,i_c);
-        }
+    DeclarationSection Database_table_declarations {
         DatabaseTable db_ab {
             DataSource: "data\\abc.dsn";
             TableName: "TableAB";
@@ -39,6 +21,32 @@ Model Main_ddm {
                 "Vals3"  -->p_BC1( i_b, i_c )
             }
         }
+    }
+    DeclarationSection Data_declarations {
+        Set s_A {
+            Index: i_a;
+        }
+        Set s_B {
+            Index: i_b;
+        }
+        Set s_C {
+            Index: i_c;
+        }
+        Parameter p_AB1 {
+            IndexDomain: (i_a,i_b);
+        }
+        Parameter p_AB2 {
+            IndexDomain: (i_a,i_b);
+        }
+        Parameter p_BC1 {
+            IndexDomain: (i_b,i_c);
+        }
+    }
+    DeclarationSection Helper_declaraitons {
+        Set s_ReferencedIdentifiersByDatabaseTables {
+            IndexDomain: i_db;
+            SubsetOf: AllIdentifiers;
+        }
         Set s_SelectedDatabaseTables {
             SubsetOf: AllIdentifiers;
             Index: i_db;
@@ -48,32 +56,11 @@ Model Main_ddm {
             IndexDomain: i_db;
             Range: binary;
         }
-        Set s_ReferencedIdentifiersByDatabaseTables {
-            IndexDomain: i_db;
-            SubsetOf: AllIdentifiers;
-        }
     }
-    Procedure MainInitialization {
+    Procedure pr_OriginalDatabaseWriteProcedure {
         Body: {
-            s_A := elementRange(0,2,prefix:"a");
-            s_B := elementRange(0,1,prefix:"b");
-            s_C := elementRange(0,2,prefix:"c");
-        }
-        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
-    }
-    Procedure PostMainInitialization {
-        Body: {
-            pr_CreateAndInitializeRuntimeLibraryForTableWriteManagement();
-        }
-        Comment: {
-            "Add initialization statements here that require that the libraries are already initialized properly,
-            or add statements that require the Data Management module to be initialized."
-        }
-        Set s_Singleton {
-            SubsetOf: AllIdentifiers;
-        }
-        Set s_RefdIds {
-            SubsetOf: AllIdentifiers;
+            write to table db_ab;
+            write to table db_bc;
         }
     }
     Section Table_Write_Management {
@@ -110,7 +97,7 @@ Model Main_ddm {
         }
         Procedure pr_CreateAndInitializeRuntimeLibraryForTableWriteManagement {
             Body: {
-                s_SelectedDatabaseTables := AllDatabaseTables * DataDeclarationsOfInterest ;
+                ! Initialize writing the library.
                 sp_runtimePrefix := "rldmfdttbw" ;
                 if ep_runtimeLib then
                 	me::Delete( ep_runtimeLib );
@@ -118,9 +105,14 @@ Model Main_ddm {
                 ep_runtimeLib := me::CreateLibrary( "RuntimeLibraryDatachangeMonitorsForDatabaseTablesToBeWritten", sp_runtimePrefix);
                 ep_runtimeDecl := me::Create("Datachange monitor names and sets",'declaration', ep_runtimeLib);
                 
+                ! The set of database tables that are to be managed via datachange monitors
+                s_SelectedDatabaseTables := AllDatabaseTables * Database_table_declarations ;
+                
+                ! initialize the text for the runtime procedures
                 sp_bodyInitProc := "" ;
                 sp_bodyWriteProc := "" ;
-                for i_db do
+                
+                for i_db do ! for each database table to be handled
                 
                 	! Initialization per table.
                 	sp_bodyLineWrite := "" ;
@@ -135,8 +127,8 @@ Model Main_ddm {
                 		     * ( AllVariables + AllParameters + AllSets );
                 	s_ReferencedIdentifiersByDatabaseTables(i_db) := s_RefdIds ;
                 
+                	! Create the datachange monitor code
                 	sp_set := "data " + s_RefdIds ;
-                
                 	ep_datachangeMonitorSet(i_db):= me::Create(FormatString("MonitorSet_%e", i_db), 'set', ep_runtimeDecl);
                 	me::SetAttribute(ep_datachangeMonitorSet(i_db),'subset of', "AllIdentifiers");
                 	me::SetAttribute(ep_datachangeMonitorSet(i_db),'definition', sp_set);
@@ -169,10 +161,6 @@ Model Main_ddm {
                 me::Compile(ep_runtimeLib);
                 apply(ep_InitProc);
             }
-            Comment: {
-                "Add initialization statements here that require that the libraries are already initialized properly,
-                or add statements that require the Data Management module to be initialized."
-            }
             Set s_Singleton {
                 SubsetOf: AllIdentifiers;
             }
@@ -185,13 +173,30 @@ Model Main_ddm {
                 p01_dbWritten(i_db) := 0 ;
                 apply( ep_writeProc);
             }
-            Comment: "Do a write to table for each database table, but only if one of the identifier changed.";
-            Set s_Singleton {
-                SubsetOf: AllIdentifiers;
-            }
-            Set s_RefdIds {
-                SubsetOf: AllIdentifiers;
-            }
+            Comment: "Write the database tables by calling a runtime created procedure.";
+        }
+    }
+    Procedure MainInitialization {
+        Body: {
+            s_A := elementRange(0,2,prefix:"a");
+            s_B := elementRange(0,1,prefix:"b");
+            s_C := elementRange(0,2,prefix:"c");
+        }
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Body: {
+            pr_CreateAndInitializeRuntimeLibraryForTableWriteManagement();
+        }
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+        Set s_Singleton {
+            SubsetOf: AllIdentifiers;
+        }
+        Set s_RefdIds {
+            SubsetOf: AllIdentifiers;
         }
     }
     Procedure MainExecution;

@@ -35,9 +35,10 @@ AIMMS Language
     131-Formulas-as-Data
     109-deprecate-compound-sets-overview
     109-convert-compound-sets
+    157-WriteFewTables
 
 .. Generate Random Numbers
-..    157-WriteFewTables
+..    
 
     
     
