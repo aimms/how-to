@@ -23,10 +23,26 @@ Model Main_tt {
     StringParameter sp_url {
         IndexDomain: i_tm;
         Definition: {
-            data { 
-            boat: "https://img.icons8.com/flat_round/1600/dive-boat.png",
-            car: "https://www.goodfreephotos.com/albums/vector-images/blue-car-vector-graphic.png",
-            plane: "https://upload.wikimedia.org/wikipedia/en/7/7b/Belly_of_the_plane.jpg" }
+            
+            ! Trials below don't work, even though the images are in the folder resources/images
+            formatString("/app-resources/resources/images/%e.jpg", i_tm)
+            !formatString("MainProject\\WebUI\\resources\\images\\%e.jpg", i_tm)
+            !formatString("WebUI\\resources\\images\\%e.jpg", i_tm)
+            !formatString("./resources/images/%e.jpg", i_tm)
+            !formatString("resources/images/%e.jpg", i_tm)
+            !formatString("resources\\images\\%e.jpg", i_tm)
+            !formatString("images\\%e.jpg", i_tm)
+            !formatString("images/%e.jpg", i_tm)
+            !formatString("%e.jpg", i_tm)
+            !formatString("%e", i_tm)
+            !"resources/images/" + i_tm + ".jpg"
+            
+            
+            ! Works but requires internet access:
+            !data { 
+            !boat: "https://img.icons8.com/flat_round/1600/dive-boat.png",
+            !car: "https://www.goodfreephotos.com/albums/vector-images/blue-car-vector-graphic.png",
+            !plane: "https://upload.wikimedia.org/wikipedia/en/7/7b/Belly_of_the_plane.jpg" }
         }
     }
     StringParameter ep_choice_tooltips {
@@ -36,7 +52,7 @@ Model Main_tt {
             !"<img src=\"https://img.icons8.com/flat_round/1600/dive-boat.png\" height=\"200\" width=\"200\">"
             !"<img src=\"https://www.goodfreephotos.com/albums/vector-images/blue-car-vector-graphic.png\" height=\"200\" width=\"200\">"
             !"<img src=\"https://upload.wikimedia.org/wikipedia/en/7/7b/Belly_of_the_plane.jpg\" height=\"200\" width=\"200\">"
-            formatString( "<img src=\"%s\" width=\"100\">", sp_url( ep_choice(i_a) ) )
+            sp_url( ep_choice(i_a) )+ "<br>" +formatString( "<img src=\"%s\" width=\"100\">", sp_url( ep_choice(i_a) ) )
         }
         Comment: {
             "height=\\\"200\\\" width=\\\"200\\\"
