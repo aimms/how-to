@@ -1,14 +1,14 @@
-.. |image1| image:: /Images/159-exchange-data-with-pro/image1.png
-.. |image2| image:: /Images/159-exchange-data-with-pro/image2.png
-.. |image3| image:: /Images/159-exchange-data-with-pro/image3.png
-.. |image4| image:: /Images/159-exchange-data-with-pro/image4.png
-.. |image5| image:: /Images/159-exchange-data-with-pro/image5.png
+.. |image1| image:: /Images/159-exchange-data-with-cloud/image1.png
+.. |image2| image:: /Images/159-exchange-data-with-cloud/image2.png
+.. |image3| image:: /Images/159-exchange-data-with-cloud/image3.png
+.. |image4| image:: /Images/159-exchange-data-with-cloud/image4.png
+.. |image5| image:: /Images/159-exchange-data-with-cloud/image5.png
 
-Exchange data with AIMMS PRO
-============================
+Exchange data with the AIMMS Cloud Platform
+===========================================
 
 .. meta::
-   :description: How to set up a framework for sending data via the AIMMS PRO platform.
+   :description: How to set up a framework for sending data via the AIMMS Cloud platform.
    :keywords: cloud, exchange, api, configure, network
 
 Introduction
@@ -59,7 +59,7 @@ proved too demanding for maintenance and support from both sides.
 
 
 
-Option 1: ‘Via a connection with the Application Database’
+Option 1: Via a connection with the Application Database
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Here the Application Database in the AIMMS Cloud Platform acts as
@@ -87,9 +87,9 @@ virtual private connection by encapsulating and encrypting all data
 packets.
 
 More details of the relevant parts of the AIMMS Platform architecture
-can be found in `More details on AIMMS PRO architecture <deployment-exchange-data-more-details>`_.
+can be found in :ref:`deployment-exchange-data-more-details`.
 
-Option 2: ‘Via the AIMMS PRO API’
+Option 2: Via the AIMMS PRO API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The AIMMS PRO API allows direct interaction with the PRO Back End and
@@ -116,7 +116,7 @@ optional IP range filtering and security event logging. In addition, the
 communications are secured by temporary tickets that can be seen as
 security tokens.
 
-Option 3: ‘Via a web-service’
+Option 3: Via a web-service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 With the HTTPS Client Library for AIMMS an app developer can add
@@ -143,11 +143,11 @@ platform.
 
 .. _deployment-exchange-data-more-details:
 
-More details on AIMMS PRO architecture
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+More details on AIMMS Cloud Platform architecture
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The following diagram depicts the part of the
-AIMMS Cloud Platform architecture relevant for exchanging data. The
+**AIMMS Cloud Platform** architecture relevant for exchanging data. The
 application databases are placed in customer-specific VPCs that include
 gateways to receive incoming VPN connections.
 
@@ -158,6 +158,10 @@ gateways to receive incoming VPN connections.
 *Figure 5 – Simplified diagram showing the relevant parts of the AIMMS
 Cloud Platform architecture*
 
+
+Related Topics
+----------------
+* **AIMMS Documentation:** `AIMMS Cloud Platform <https://manual.aimms.com/cloud/>`_
 
 .. include:: ../includes/form.def
 
