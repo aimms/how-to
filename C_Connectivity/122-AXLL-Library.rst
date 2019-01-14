@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on July 6, 2016 by Deanne Zhang.
+    This article was originally posted to the AIMMS Tech Blog on July 6, 2016 by Deanne Zhang.
  
 .. sidebar:: Connecting to EXCEL
 
@@ -45,9 +45,9 @@ The code in the "if-else" statement is to avoid opening the workbook again if it
 
 The next thing is to use ``axll::SelectSheet`` to set the sheet I am going to use.
 
-.. code-bock:: aimms
+.. code-block:: aimms
 
-    axll::SelectSheet(*"free-zipcode-database-Primary"*);
+    axll::SelectSheet("free-zipcode-database-Primary");
 
     
 Then I use ``axll::ReadSet`` function to read value for set "sZipCode".
