@@ -47,7 +47,7 @@ source_suffix = '.rst'
 # The master toctree document.
 master_doc = 'ContentIndex'
 
-title = 'AIMMS Documentation'
+title = 'AIMMS Knowledge Center'
 
 # General information about the project.
 project = title
@@ -122,6 +122,7 @@ todo_include_todos = True
 # a list of builtin themes.
 
 html_theme = 'sphinx_materialdesign_theme'
+html_theme_path = ["."]
 
 # html_theme = 'sphinx_rtd_theme'
 
