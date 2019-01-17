@@ -10,7 +10,7 @@
 	"------------------------------------------------------------------>>>>-widget.uri-": "",
 	"slot3": "",
 	"------------------------------------------------------------------<<<<-widgets-": "",
-	"widgets": "literal:[{\"uri\":\"Home_Table_Dat\",\"layoutInfo\":{\"width\":\"6\",\"height\":\"3\",\"customPosition\":\"\"}}]",
+	"widgets": "literal:[{\"uri\":\"Home_Table_Dat\",\"layoutInfo\":{\"width\":\"6\",\"height\":\"3\",\"customPosition\":\"\"}},{\"uri\":\"ep_choice\",\"layoutInfo\":{\"width\":\"2\",\"height\":\"3\"}}]",
 	"------------------------------------------------------------------>>>>-widgets-": "",
 	"slot4": "",
 	"slot5": "",

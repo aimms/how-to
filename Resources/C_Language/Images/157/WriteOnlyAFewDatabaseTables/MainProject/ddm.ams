@@ -1,0 +1,224 @@
+## ams_version=1.0
+
+Model Main_ddm {
+    DeclarationSection Database_table_declarations {
+        DatabaseTable db_ab {
+            DataSource: "data\\abc.dsn";
+            TableName: "TableAB";
+            Mapping: {
+                "NamesA" -->i_a,
+                "NamesB" -->i_b,
+                "Vals1"  -->p_AB1( i_a, i_b ),
+                "vals2"  -->p_AB2( i_a, i_b )
+            }
+        }
+        DatabaseTable db_bc {
+            DataSource: "data\\abc.dsn";
+            TableName: "TableBC";
+            Mapping: {
+                "NamesB" -->i_b,
+                "NamesC" -->i_c,
+                "Vals3"  -->p_BC1( i_b, i_c )
+            }
+        }
+    }
+    DeclarationSection Data_declarations {
+        Set s_A {
+            Index: i_a;
+        }
+        Set s_B {
+            Index: i_b;
+        }
+        Set s_C {
+            Index: i_c;
+        }
+        Parameter p_AB1 {
+            IndexDomain: (i_a,i_b);
+        }
+        Parameter p_AB2 {
+            IndexDomain: (i_a,i_b);
+        }
+        Parameter p_BC1 {
+            IndexDomain: (i_b,i_c);
+        }
+    }
+    DeclarationSection Helper_declaraitons {
+        Set s_ReferencedIdentifiersByDatabaseTables {
+            IndexDomain: i_db;
+            SubsetOf: AllIdentifiers;
+        }
+        Set s_SelectedDatabaseTables {
+            SubsetOf: AllIdentifiers;
+            Index: i_db;
+            Parameter: e_db;
+        }
+        Parameter p01_dbWritten {
+            IndexDomain: i_db;
+            Range: binary;
+        }
+    }
+    Procedure pr_OriginalDatabaseWriteProcedure {
+        Body: {
+            write to table db_ab;
+            write to table db_bc;
+        }
+    }
+    Section Table_Write_Management {
+        DeclarationSection runtime_library_creation {
+            StringParameter sp_datachangeMonitorName {
+                IndexDomain: i_db;
+            }
+            ElementParameter ep_datachangeMonitorSet {
+                IndexDomain: i_db;
+                Range: AllIdentifiers;
+            }
+            StringParameter sp_bodyLineInit;
+            StringParameter sp_bodyInitProc;
+            StringParameter sp_bodyWriteProc;
+            StringParameter sp_bodyLineWrite;
+            ElementParameter ep_runtimeLib {
+                Range: AllIdentifiers;
+                InitialData: '';
+            }
+            ElementParameter ep_InitProc {
+                Range: AllIdentifiers;
+                Default: 'MainExecution';
+            }
+            ElementParameter ep_writeProc {
+                Range: AllIdentifiers;
+                Default: 'MainExecution';
+            }
+            ElementParameter ep_runtimeDecl {
+                Range: AllIdentifiers;
+                Default: 'MainExecution';
+            }
+            StringParameter sp_runtimePrefix;
+            StringParameter sp_set;
+        }
+        Procedure pr_CreateAndInitializeRuntimeLibraryForTableWriteManagement {
+            Body: {
+                ! Initialize writing the library.
+                sp_runtimePrefix := "rldmfdttbw" ;
+                if ep_runtimeLib then
+                	me::Delete( ep_runtimeLib );
+                endif ;
+                ep_runtimeLib := me::CreateLibrary( "RuntimeLibraryDatachangeMonitorsForDatabaseTablesToBeWritten", sp_runtimePrefix);
+                ep_runtimeDecl := me::Create("Datachange monitor names and sets",'declaration', ep_runtimeLib);
+                
+                ! The set of database tables that are to be managed via datachange monitors
+                s_SelectedDatabaseTables := AllDatabaseTables * Database_table_declarations ;
+                
+                ! initialize the text for the runtime procedures
+                sp_bodyInitProc := "" ;
+                sp_bodyWriteProc := "" ;
+                
+                for i_db do ! for each database table to be handled
+                
+                	! Initialization per table.
+                	sp_bodyLineWrite := "" ;
+                	sp_bodyLineInit := "" ;
+                
+                	! Determine the collection of identifiers referenced in the database table.
+                	s_singleTon := i_db ;
+                	s_RefdIds := ReferencedIdentifiers(
+                			searchIdentSet :  s_singleTon, 
+                			searchAttrSet  :  AllAttributeNames, 
+                			recursive      :  1) 
+                		     * ( AllVariables + AllParameters + AllSets );
+                	s_ReferencedIdentifiersByDatabaseTables(i_db) := s_RefdIds ;
+                
+                	! Create the datachange monitor code
+                	sp_set := "data " + s_RefdIds ;
+                	ep_datachangeMonitorSet(i_db):= me::Create(FormatString("MonitorSet_%e", i_db), 'set', ep_runtimeDecl);
+                	me::SetAttribute(ep_datachangeMonitorSet(i_db),'subset of', "AllIdentifiers");
+                	me::SetAttribute(ep_datachangeMonitorSet(i_db),'definition', sp_set);
+                	sp_datachangeMonitorName( i_db ) := formatString( "DatachangeMonitor_%e", i_db );
+                
+                	! To initialize a datachange monitor, we'll only have to call DataChangeMonitorCreate.
+                	sp_bodyLineInit  := formatString("DataChangeMonitorCreate(\"DatachangeMonitor_%e\",MonitorSet_%e,1);\n",i_db,i_db);
+                	sp_bodyInitProc += sp_bodyLineInit ;
+                
+                	! To write to a database table, but only when data is changed, we need to 
+                	! 1) check DataChangeMonitorHasChanged, 
+                	! 2) actually write,
+                	! 3) register the writing, and 
+                	! 4) Reset the datachange monitor.
+                	sp_bodyLineWrite := formatString("if DataChangeMonitorHasChanged(\"DatachangeMonitor_%e\") then\n",i_db);
+                	sp_bodyLineWrite += formatString("          write to table %e;\n",i_db); ;
+                	sp_bodyLineWrite += formatString("          p01_dbWritten(\'%e\') := 1;\n",i_db); ;
+                	sp_bodyLineWrite += formatString("          DataChangeMonitorReset( \"DatachangeMonitor_%e\", MonitorSet_%e );\n",i_db,i_db) ;
+                	sp_bodyLineWrite += formatString("endif;\n\n") ;
+                	sp_bodyWriteProc += sp_bodyLineWrite ;
+                
+                endfor ;
+                
+                ep_InitProc := me::Create( "pr_InitDatachangeMonitors", 'procedure', ep_runtimeLib);
+                me::SetAttribute( ep_InitProc, 'body', sp_bodyInitProc);
+                
+                ep_WriteProc := me::Create( "pr_WriteTablesWhenDataChanged", 'procedure', ep_runtimeLib);
+                me::SetAttribute( ep_WriteProc, 'body', sp_bodyWriteProc);
+                
+                me::Compile(ep_runtimeLib);
+                apply(ep_InitProc);
+            }
+            Set s_Singleton {
+                SubsetOf: AllIdentifiers;
+            }
+            Set s_RefdIds {
+                SubsetOf: AllIdentifiers;
+            }
+        }
+        Procedure pr_SaveModifiedDatabaseTables {
+            Body: {
+                p01_dbWritten(i_db) := 0 ;
+                apply( ep_writeProc);
+            }
+            Comment: "Write the database tables by calling a runtime created procedure.";
+        }
+    }
+    Procedure MainInitialization {
+        Body: {
+            s_A := elementRange(0,2,prefix:"a");
+            s_B := elementRange(0,1,prefix:"b");
+            s_C := elementRange(0,2,prefix:"c");
+        }
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Body: {
+            pr_CreateAndInitializeRuntimeLibraryForTableWriteManagement();
+        }
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+        Set s_Singleton {
+            SubsetOf: AllIdentifiers;
+        }
+        Set s_RefdIds {
+            SubsetOf: AllIdentifiers;
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

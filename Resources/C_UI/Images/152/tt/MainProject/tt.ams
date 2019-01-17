@@ -16,12 +16,66 @@ Model Main_tt {
         IndexDomain: (i_a,i_b);
         Definition: formatString("Some text before %i and some text after", p_Dat(i_a,i_b));
     }
+    Set s_TransportMeans {
+        Index: i_tm;
+        Definition: data { boat, car, plane };
+    }
+    StringParameter sp_url {
+        IndexDomain: i_tm;
+        Definition: {
+            
+            ! Trials below don't work, even though the images are in the folder resources/images
+            formatString("/app-resources/resources/images/%e.jpg", i_tm)
+            !formatString("MainProject\\WebUI\\resources\\images\\%e.jpg", i_tm)
+            !formatString("WebUI\\resources\\images\\%e.jpg", i_tm)
+            !formatString("./resources/images/%e.jpg", i_tm)
+            !formatString("resources/images/%e.jpg", i_tm)
+            !formatString("resources\\images\\%e.jpg", i_tm)
+            !formatString("images\\%e.jpg", i_tm)
+            !formatString("images/%e.jpg", i_tm)
+            !formatString("%e.jpg", i_tm)
+            !formatString("%e", i_tm)
+            !"resources/images/" + i_tm + ".jpg"
+            
+            
+            ! Works but requires internet access:
+            !data { 
+            !boat: "https://img.icons8.com/flat_round/1600/dive-boat.png",
+            !car: "https://www.goodfreephotos.com/albums/vector-images/blue-car-vector-graphic.png",
+            !plane: "https://upload.wikimedia.org/wikipedia/en/7/7b/Belly_of_the_plane.jpg" }
+        }
+    }
+    StringParameter ep_choice_tooltips {
+        IndexDomain: i_a;
+        Definition: {
+            !formatString("john<br><img src=\"file:///d:/u/s/How%%20s/gitlab/master/Resources/C_UI/Images/152/tt/WebUI/MainProject/resources/images/boat.jpg\">")
+            !"<img src=\"https://img.icons8.com/flat_round/1600/dive-boat.png\" height=\"200\" width=\"200\">"
+            !"<img src=\"https://www.goodfreephotos.com/albums/vector-images/blue-car-vector-graphic.png\" height=\"200\" width=\"200\">"
+            !"<img src=\"https://upload.wikimedia.org/wikipedia/en/7/7b/Belly_of_the_plane.jpg\" height=\"200\" width=\"200\">"
+            sp_url( ep_choice(i_a) )+ "<br>" +formatString( "<img src=\"%s\" width=\"100\">", sp_url( ep_choice(i_a) ) )
+        }
+        Comment: {
+            "height=\\\"200\\\" width=\\\"200\\\"
+            \"D:\\u\\s\\How to\\gitlab\\master\\Resources\\C_UI\\Images\\152\\tt\\MainProject\\WebUI\\resources\\images\\boat.jpg\"
+            formatString(\"<img src=\\\".\\\\MainProject\\\\WebUI\\\\resources\\\\images\\\\%e.jpg\\\">\", ep_choice(i_a))
+            formatString(\"<img src=\\\"./MainProject/WebUI/resources/images/%e.jpg\\\">\", ep_choice(i_a))
+            https://img.icons8.com/flat_round/1600/dive-boat.png"
+        }
+    }
+    StringParameter sp {
+        Comment: "https://commons.wikimedia.org/wiki/File:Boat_icon.png";
+    }
+    ElementParameter ep_choice {
+        IndexDomain: i_a;
+        Range: s_TransportMeans;
+    }
     Procedure MainInitialization {
         Comment: "Add initialization statements here that do NOT require any library being initialized already.";
     }
     Procedure PostMainInitialization {
         Body: {
             p_Dat(i_a, i_b) := ord(i_a)+ord(i_b)-2;
+            ep_choice(i_a) := element( s_TransportMeans, 1 + mod( ord(i_a), card( s_TransportMeans ) ) );
         }
         Comment: {
             "Add initialization statements here that require that the libraries are already initialized properly,

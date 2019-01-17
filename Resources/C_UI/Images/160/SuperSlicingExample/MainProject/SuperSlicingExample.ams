@@ -1,0 +1,72 @@
+## ams_version=1.0
+
+Model Main_SuperSlicingExample {
+    Set s_L {
+        Index: i_L;
+        InitialData: data { a, b, c, d };
+    }
+    Set s_F {
+        SubsetOf: s_L;
+        Index: i_F;
+        Definition: data { a };
+    }
+    Set s_DC {
+        SubsetOf: s_L;
+        Index: i_DC;
+        Definition: data { b, c };
+    }
+    Set s_S {
+        SubsetOf: s_L;
+        Index: i_S;
+        Definition: data { d };
+    }
+    Parameter p_Lat {
+        IndexDomain: i_L;
+    }
+    Parameter p_Lon {
+        IndexDomain: i_L;
+    }
+    Parameter p_Storage {
+        IndexDomain: i_L;
+        InitialData: data { a : 10,  b : 11,  c : 12,  d : 13 };
+    }
+    Parameter p_ProductionCapacity {
+        IndexDomain: i_F;
+        InitialData: data { a : 10 };
+    }
+    Parameter p_Demand {
+        IndexDomain: i_S;
+        InitialData: data { d : 12 };
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

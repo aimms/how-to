@@ -10,8 +10,6 @@
 	This article was originally posted to the AIMMS Tech Blog on December 18, 2012 by Chris Kuip.
 
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
-
 .. .. sidebar:: ROGO Puzzle: avoid pitfalls, grab prizes within limit on steps
 
 .. figure:: ../Resources/C_Mathematical_Modeling/Images/138/ROGO.logo_.png
