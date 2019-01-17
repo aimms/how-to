@@ -10,6 +10,7 @@ Deployment
 ========================
 
 .. toctree::
+   :maxdepth: 1
 
     151-version-control-aimmspack-backup
     128-Intellectual-Property
@@ -31,4 +32,3 @@ Deployment
     114-execute
     159-exchange-data-with-cloud
     155-Catering-unresponsive-server-unstable-connection 
-

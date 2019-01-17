@@ -14,9 +14,10 @@ Licensing
 
 
 .. toctree::
+   :maxdepth: 1
         
-    How To Transfer My Developer License to Another Machine
-    89-license-nodelock-error
-    89-academic-license
-    105-adding-named-user-licenses
-    106-install-network-license
+   How To Transfer My Developer License to Another Machine
+   89-license-nodelock-error
+   89-academic-license
+   105-adding-named-user-licenses
+   106-install-network-license

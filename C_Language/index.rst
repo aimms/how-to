@@ -12,6 +12,7 @@ AIMMS Language
 ========================
 
 .. toctree::
+   :maxdepth: 1
 
     121-set-index-element-parameter
     How to model categorization of objects

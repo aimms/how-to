@@ -1,14 +1,6 @@
 
-.. image:: Images/aimms-logo-s-rgb.png
-                :align: center
-
-.. raw:: html
-
-            <br>
-            <h1 align="center">Welcome to AIMMS Knowledge Center!</h1>
-            <br>
-            <br>
-
+AIMMS Knowledge Center
+==========================
 
 .. raw:: html
 
@@ -109,12 +101,10 @@
 
 -----------------------------------------------------------
 
-Table Of Contents
-=================
-
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :titlesonly:
+   :hidden:
 
    C_Language/index
    C_Deployment/index
