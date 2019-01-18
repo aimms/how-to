@@ -9,7 +9,7 @@ How to Write a Few Database Tables
 
 ..     .. figure:: ../Resources/C_Language/Images/157/Billiard_hall.JPG
     
-..             Author: Dmitry G.
+            Picture by: Dmitry G.
 
 .. .. figure:: ../Resources/c_Language/Images/157/Billiard_hall.JPG
 ..    :scale: 75 %
