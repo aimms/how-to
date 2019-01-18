@@ -57,14 +57,14 @@ AIMMS Knowledge Center
     <div id="content">
         <a href="C_Language/index.html">
             <div class="box">
-                <h1 align="center">Language</h1>
+                <h1 align="center">Programming</h1>
                 <p>Expressing a model in the AIMMS programming language</p>
             </div>
         </a>
         <a href="C_Cloud_PRO/index.html">
             <div class="box">
                 <h1 align="center">Deployment</h1>
-                <p>Using the PRO and Cloud platforms and deploying your applications</p>
+                <p>Distributing your applications with AIMMS PRO, on-premise or with the Cloud platform</p>
             </div>
         </a>
         <a href="C_Connectivity/index.html">
@@ -81,7 +81,7 @@ AIMMS Knowledge Center
         </a>
         <a href="C_UI/index.html">
             <div class="box">
-                <h1 align="center">UI</h1>
+                <h1 align="center">Applications</h1>
                 <p>Building and styling applications in WebUI and WinUI</p>
             </div>
         </a>
@@ -101,7 +101,7 @@ AIMMS Knowledge Center
    :hidden:
 
    C_Language/index
-   C_Cloud_PRO/index
+   C_Deployment/index
    C_Connectivity/index
    C_Mathematical_Modeling/index
    C_UI/index

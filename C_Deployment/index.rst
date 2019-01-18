@@ -6,7 +6,7 @@
                 :scale: 10 %
                 :target: https://aimms.com/
 
-AIMMS Cloud & AIMMS PRO
+Deployment
 ========================
 
 .. toctree::
@@ -23,4 +23,4 @@ AIMMS Cloud & AIMMS PRO
    114-execute
    159-exchange-data-with-cloud
    155-Catering-unresponsive-server-unstable-connection 
-   Deployment/index
+   Best-Practices/index
