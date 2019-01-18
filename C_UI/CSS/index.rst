@@ -9,8 +9,8 @@
 .. |space| image:: ../Images/ThanksSmileySpace.gif
 
 
-User Interface
-========================
+CSS
+====
 
     
 .. toctree::
