@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ExportSettings>
+	<ExcludedFile>backup</ExcludedFile>
+	<ExcludedFile>log</ExcludedFile>
+	<ExcludedFile>PROTemp</ExcludedFile>
+	<ExcludedFile>info.txt</ExcludedFile>
+	<ExcludedFile>pro_arguments_.txt</ExcludedFile>
+	<ExcludedFile>PROLog.cfg</ExcludedFile>
+</ExportSettings>
