@@ -14,8 +14,9 @@ Mathematical Modeling
 
 
 .. toctree::
+   :maxdepth: 1
     
-    138-ROGO
-    137-Small-Rostering
-    142-Narrowing-Time-Windows
-    140-Scheduling-Project-Planning
+   138-ROGO
+   137-Small-Rostering
+   142-Narrowing-Time-Windows
+   140-Scheduling-Project-Planning

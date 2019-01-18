@@ -22,8 +22,9 @@ Several existing constraint programming languages use the Bridge Building exampl
 In such a construction project, there are construction activities related to each element of a structure, such as pillars, and to the activities to manage the project itself such as delivery of materials and the building of housing to shelter the construction equipment.
 
 .. figure:: ../Resources/C_Mathematical_Modeling/Images/140/Bridge-Building.jpg
-
-    Bridge Building
+   :align: center
+    
+   Bridge Building
     
 
 A bridge consists of two abutments, several pillars in between, and bearers upon those pillars and abutments. Erecting a pillar requires several steps: excavation, pile driving (if needed), form work, concrete filling and setting, and masonry work. For an abutment, the sand filling is an additional step. A construction step is modeled as:
