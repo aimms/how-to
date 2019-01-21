@@ -9,7 +9,7 @@ How to write a few database tables
 
     .. figure:: ../Resources/C_Language/Images/157/Billiard_hall.JPG
     
-            Author: Dmitry G.
+            Picture by: Dmitry G.
 
 .. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
 
