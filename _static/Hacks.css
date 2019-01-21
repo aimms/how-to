@@ -5,7 +5,7 @@
  */
 
  
-/*Side Bar adjustments */
+/*----------------   Side Bar adjustments ------------------------*/
 
 /* makes concise tree (line height) */
 li.toctree-l2 span.link-wrapper a.reference.internal { 
@@ -36,7 +36,12 @@ span.mdl-layout-title a.title {
     padding: 20px 0 20px 0;
 }
 
-/*Images sizd like paragraphs*/
+div.page-content {
+
+	box-sizing: border-box;
+}
+
+/*Images size like paragraphs*/
 
 div.page-content div.section img {
     
