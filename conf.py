@@ -126,7 +126,7 @@ html_theme = 'sphinx_materialdesign_theme'
 
 # html_theme = 'sphinx_rtd_theme'
 
-html_logo = 'resources\\images\\aimms-logo.png'
+html_logo = 'Resources\\images\\aimms-logo.png'
 
 html_title = title
 
