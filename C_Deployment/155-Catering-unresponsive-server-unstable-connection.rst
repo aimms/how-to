@@ -5,6 +5,7 @@ Catering for unresponsive PRO server or unstable connection
    :description: The AIMMS Error handling permits explicit recoveries, controlled by the end user, of abnormal environment and system conditions.
    :keywords: error handling, time out, timed out, server session, AIMMS Deployment
 
+.. index:: PRO, DelegateToServer, Error Handling
 
  
 Executing a ``pro::DelegateToServer`` from a WinUI AIMMS app launched from a distant AIMMS PRO server may fail due to various causes. 
