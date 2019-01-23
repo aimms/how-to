@@ -122,11 +122,11 @@ todo_include_todos = True
 # a list of builtin themes.
 
 html_theme = 'sphinx_materialdesign_theme'
-html_theme_path = ["."]
+#html_theme_path = ["."]
 
 # html_theme = 'sphinx_rtd_theme'
 
-html_logo = 'resources\\images\\aimms-logo.png'
+html_logo = 'Resources/images/aimms-logo.png' 
 
 html_title = title
 

@@ -47,9 +47,8 @@ Model Main_SharingIsRewarding {
             IndexDomain: pug;
         }
     }
-    Procedure StartupProcedure {
+    Procedure pr_StartupProcedure {
         Body: {
-            
             if pro::GetPROEndPoint() then ! Check if we're connected to an AIMMS PRO server.
             
             	! Ensure PRO connection is initialized
@@ -66,7 +65,6 @@ Model Main_SharingIsRewarding {
             	s_UserEntities :=  { guipro::PRO_ENT | 
             		( StringToLower( guipro::PROEntityName( guipro::PRO_ENT ) ) = "users"        ) or 
             		( StringToLower( guipro::PROEntityName( guipro::PRO_ENT ) ) = "domain users" )    } ;
-            
             
             	block ! Construct the protection string
             		sp_AuthUsersRWX := "" ;
@@ -129,23 +127,30 @@ Model Main_SharingIsRewarding {
     }
     Procedure pr_ReadFile {
         Body: {
-            sp_Folder := sp_DataRoot + pro::FileSeparator + sp_Level1; 
-            sp_Folder +=               pro::FileSeparator + sp_Level2; 
-            sp_Folder +=               pro::FileSeparator + sp_Level3; 
-            sp_folder +=               pro::FileSeparator + sp_Filename ;
+            Block ! Determine the complete path within AIMMS PRO storage of the file to be read in.
+            	sp_ProStorageFilename := sp_DataRoot + pro::FileSeparator + sp_Level1; 
+            	sp_ProStorageFilename +=               pro::FileSeparator + sp_Level2; 
+            	sp_ProStorageFilename +=               pro::FileSeparator + sp_Level3; 
+            	sp_ProStorageFilename +=               pro::FileSeparator + sp_Filename ;
+            Endblock ;
             
-            if FileExists( sp_Filename ) then
+            if FileExists( sp_Filename ) then ! Remove old copy if it's there.
             	FileDelete( sp_Filename );
             endif ;
-            pro::RetrieveFileFromCentralStorage(sp_folder, sp_Filename);
+            
+            ! Actually copy the file from AIMMS PRO storage to the project folder.
+            pro::RetrieveFileFromCentralStorage(sp_ProStorageFilename, sp_Filename);
             
             if FileExists( sp_Filename ) then
+            	! Read in the text of the file.
             	sp_Text := FileRead( sp_Filename );
             else
-            	sp_Text := FormatString("Sorry people, but I couldn't find %s from %s; %s", sp_Filename, sp_folder, CurrentErrorMessage );
+            	! Share a, hopefully informative', error message
+            	sp_Text := FormatString("Sorry people, but I couldn't find %s from %s; %s", 
+            		sp_Filename, sp_ProStorageFilename, CurrentErrorMessage );
             endif ;
         }
-        StringParameter sp_Folder;
+        StringParameter sp_ProStorageFilename;
     }
     Section MainProcs {
         Procedure MainInitialization {

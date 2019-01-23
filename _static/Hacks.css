@@ -5,7 +5,7 @@
  */
 
  
-/*Side Bar adjustments */
+/*----------------   Side Bar adjustments ------------------------*/
 
 /* makes concise tree (line height) */
 li.toctree-l2 span.link-wrapper a.reference.internal { 
@@ -35,14 +35,28 @@ span.mdl-layout-title a.title {
     
     padding: 20px 0 20px 0;
 }
+/*---------------------- Page content -----------------------------*/
 
-/*Images sizd like paragraphs*/
+/* Page content always responsive to the screen size*/
+div.page-content {
+
+	box-sizing: border-box;
+}
+
+div.page-content pre {
+    
+    white-space: pre;
+}
+
+/*Images size like paragraphs*/
 
 div.page-content div.section img {
     
     max-width: 100%;
 
 }
+
+/*---------------------- Sphinx Directives -----------------------------*/
 
 /*Color any Topic block */
 .topic {
