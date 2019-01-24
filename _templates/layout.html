@@ -1,34 +1,90 @@
 {# Import the theme's layout. #}
-{% extends "!layout.html" %} 
+{% extends "!layout.html" %}
+
+{% block header %}
+
+{% if pagename == "ContentIndex" %}
+
+	<style> 
+		.wy-nav-content {
+			max-width: none; !important
+		}
+	</style>
+{% else %}
+	<style> 
+		.wy-nav-content {
+			max-width: 1200px; !important
+		}
+	</style>
+{% endif %}
+{% endblock %}
 
 
-{%- block document %}
+{% block sidebartitle %}
 
-    {% if pagename == "ContentIndex" %}
+{% if pagename == "ContentIndex" %}
+	
+	<style> 
+		.wy-nav-content {
+			max-width: none; !important
+		}
+	</style>
+{% else %}
+	<style> 
+		.wy-nav-content {
+			max-width: 1100px; !important
+		}
+	</style>
+{% endif %}
 
-        
-        <div class="page-content" style="width: 100%;">
-            {% block body %} {% endblock %}
-        </div>
-    
-    {% else %}
-    
-        {{ super() }}
-    
-    {% endif %}
-    
+ <a href="{{ pathto(master_doc) }}">
+	<img src="{{ pathto('_static/AIMMS_logo_H_RGB_rev.png', 1) }}" class="logo" alt="Logo"/></a>
+
+{% include "searchbox.html" %}
+
+{% endblock %}
+
+{% block body %}
+
+{% if pagename == "ContentIndex" %}
+ 
+	<style> 
+		.wy-nav-content {
+			max-width: none; !important
+		}
+	</style>
+{% else %}
+	<style> 
+		.wy-nav-content {
+			max-width: 1200px; !important
+		}
+	</style>
+{% endif %}
+
+{% endblock %}
+
+{% block htmltitle %}
+	{% if pagename == "ContentIndex" %}
+		
+		<title>{{ _('AIMMS Knowledge Center') }}</title>
+
+	{% else %}
+		
+		<title>{{ title|striptags|e }} &mdash; AIMMS Knowledge Center</title>
+		
+	{% endif %}
+	
 {% endblock %}
 
 {% block footer %}
 {{ super() }}
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1290545-14"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1290545-13"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-1290545-14');
+  gtag('config', 'UA-1290545-13');
 </script>
 {% endblock %}

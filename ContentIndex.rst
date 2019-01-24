@@ -1,9 +1,5 @@
 
 
-AIMMS Knowledge Center
-==========================
-
-.. rst-class:: display
 
 .. raw:: html
 
