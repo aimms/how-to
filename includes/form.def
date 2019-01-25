@@ -30,7 +30,7 @@ _______________________________________________________________________________
 		box-sizing: border-box;
 	}
 	.whatever input[type=email], select {
-		width: 50%;
+		max-width: 100%;
 		padding: 12px 20px;
 		margin: 8px 0;
 		display: inline-block;
@@ -44,7 +44,7 @@ _______________________________________________________________________________
 	}
 	
 	.whatever input[type=submit] {
-		width: 50%;
+		max-width: 100%;
 		background-color: #213069;
 		color: white;
 		padding: 14px 20px;
@@ -64,8 +64,20 @@ _______________________________________________________________________________
 		border-radius: 5px;
 		background-color: #f2f2f2; 
 		padding: 20px;
-		width: 50%;
+		max-width: 50%;
+        padding-top: 0px;
 	}
+    
+    @media only screen and (max-width: 500px) {
+        div .whatever {
+
+            max-width: 100%;
+
+        }
+    
+    }
+    
+    
 	</style>
 	<div class="whatever">
 		<form action="https://formspree.io/howto@aimms.com" method="POST">
