@@ -31,4 +31,7 @@ Deployment
    ReceiveMessages
    114-execute
    159-exchange-data-with-cloud
-   155-Catering-unresponsive-server-unstable-connection 
+   155-Catering-unresponsive-server-unstable-connection
+   171-pro_system_requirements
+
+
