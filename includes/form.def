@@ -8,6 +8,16 @@ _______________________________________________________________________________
 
 
 .. raw:: html
+	
+	<h3 style=" display:inline; font-weight: bold; margin-top: 4px; padding-right: 10px">Was this helpful ?</h3>
+	
+	<!-- LikeBtn.com BEGIN -->
+	<span class="likebtn-wrapper" data-theme="elegant" data-white_label="true" data-show_like_label="false" data-popup_disabled="true" data-share_enabled="false" data-tooltip_enabled="false" data-site_id="5c3dded7fa8fdf9c6fcc026b"></span>
+	<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+	<!-- LikeBtn.com END -->
+
+	<br>
+	<br>
 
 	<style>
 	.whatever input[type=text], select {
@@ -54,18 +64,17 @@ _______________________________________________________________________________
 		border-radius: 5px;
 		background-color: #f2f2f2; 
 		padding: 20px;
+		width: 50%;
 	}
 	</style>
 	<div class="whatever">
 		<form action="https://formspree.io/howto@aimms.com" method="POST">
-			<h4 style=" font-weight: bold; margin-top: 4px;">Was this topic useful?</h4>
-			<input type="radio" name="Usefull" value="Yes" required> Yes<br>
-			<input type="radio" name="Usefull" value="No" required> No<br><br>			
+			<h4 style=" font-weight: bold; margin-top: 4px;">Send us your Feedback !</h4>		
 			<!--<label>Comments (optional)</label>-->
 			<textarea style="margin-top: 8px;" name="MessageText" cols="40" rows="5" size="50" placeholder="Your comments (optional)"></textarea>
 			<!--<label>Your email (optional)</label>-->
 			<input type="email" name="_replyto" size="50" placeholder="Your email address (optional)">
-			<input type="submit" value="Send">
+			<input type="submit" value="Send my feedback">
 			<input type="hidden" name="_next" value="https://how-to.aimms.com/FormThanksPage.html" />
 			<input type="hidden" name="_cc" value="arthur.dherbemont@aimms.com" />
 		</form>
