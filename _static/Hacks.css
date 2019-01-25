@@ -64,6 +64,8 @@ div.page-content div.section img {
 
 }
 
+
+
 /*---------------------- Sphinx Directives -----------------------------*/
 
 /*Color any Topic block */
@@ -133,6 +135,7 @@ div.highlight-aimms div.highlight{
 	background-color:white;
 	font-family: "Courier New";
 	color:black;
+    font-style: normal;
 }
 
 /*Styling for AIMMS blue built-in keywords, like if-then-else*/
