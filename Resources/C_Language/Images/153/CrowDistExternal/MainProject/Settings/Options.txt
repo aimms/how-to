@@ -8,7 +8,6 @@
 * CPLEX 12.8
 * CPOptimizer 12.8
 * GUROBI 7.5
-* GUROBI 8.0
 * GUROBI 8.1
 * IPOPT 3.11
 * Knitro 10.3
@@ -21,3 +20,4 @@
 * NETSOL
 * Environment
 Default_UI 0
+WebUI_Maximum_Number_Of_Entries_In_Widget 100000

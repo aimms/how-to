@@ -58,10 +58,12 @@ Model Main_SharingIsRewarding {
             	pro::GetCurrentUserInfo(pro_cur_env, pro_cur_user, pro_cur_Bucket, 
             		pro_usr_groups, pro_cur_GroupName);
             
-            	! Ensure all entities are known.
+            	! Ensure all AIMMS PRO entities are known.
+            	! Examples of AIMMS PRO entities are the users and the groups.
             	guipro::PopulateEntitySets( addUniversalSets:1 );
             
             	! Get the "users" group(s) and the "domain users" group(s).
+            	! Note that s_UserEntities is a subset of the set guipro::PROEntity 
             	s_UserEntities :=  { guipro::PRO_ENT | 
             		( StringToLower( guipro::PROEntityName( guipro::PRO_ENT ) ) = "users"        ) or 
             		( StringToLower( guipro::PROEntityName( guipro::PRO_ENT ) ) = "domain users" )    } ;
