@@ -1,5 +1,3 @@
-:orphan:
-
 How to change the default solver
 ===========================================================================
 
@@ -32,17 +30,17 @@ Changes made to this element parameter are not persistent, meaning you will loos
     
     Note that the element parameter ``CurrentSolver`` is not stored when saving a case. This might have an impact on your communication with the AIMMS PRO server.
 
-To change the default solver for LP problems to GUROBI 5.0 for all subsequent solve statements, you can use the following code in a procedure::
+To change the default solver for LP problems to GUROBI 8.0 for all subsequent solve statements, you can use the following code in a procedure::
 
-    if StringToElement(AllSolvers, "GUROBI 5.0") then
-        CurrentSolver('LP') := StringToElement(AllSolvers, "GUROBI 5.0") ; 
+    if StringToElement(AllSolvers, "GUROBI 8.0") then
+        CurrentSolver('LP') := StringToElement(AllSolvers, "GUROBI 8.0") ; 
     else
-        raise error "Solver GUROBI 5.0 is not present" ;
+        raise error "Solver GUROBI 8.0 is not present" ;
     endif ; 
 
 .. tip:: 
 
-    Note that I am using the function ``StringToElement`` to avoid using single quoted elements (e.g. 'GUROBI 5.0'). This way, opening the AIMMS project will not result in a compilation error in case GUROBI 5.0 is not present in the set ``AllSolvers``.
+    Note that I am using the function ``StringToElement`` to avoid using single quoted elements (e.g. 'GUROBI 8.0'). This way, opening the AIMMS project will not result in a compilation error in case GUROBI 8.0 is not present in the set ``AllSolvers``.
 
 Please keep in mind that the values of ``CurrentSolver`` are used as defaults: You can also still override these defaults for each separate solve statement in the following way
 
