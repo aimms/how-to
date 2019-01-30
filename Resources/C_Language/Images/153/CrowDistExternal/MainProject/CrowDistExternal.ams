@@ -2,7 +2,22 @@
 
 Model Main_CrowDistExternal {
     StringParameter sp_dll {
-        Definition: "external\\Windows\\x64\\HaversineDLL.dll";
+        Definition: {
+            if AimmsStringConstants('Platform') = "Linux" then
+            	if AimmsStringConstants('Architecture') = "x64" then
+            		"./external/Linux/x64/HaversineDLL.so"
+            	else
+            		"32 bit Linux is no longer supported by AIMMS"
+            	endif
+            else
+            	if AimmsStringConstants('Architecture') = "x64" then
+            		".\\external\\Windows\\x64\\HaversineDLL.dll"
+            	else
+            		".\\external\\Windows\\x66\\HaversineDLL.dll"
+            	endif
+            
+            endif
+        }
     }
     Set s_Locations {
         Index: i_loc, i_locFrom, i_locTo;
@@ -25,23 +40,9 @@ Model Main_CrowDistExternal {
     Parameter p_dist1 {
         IndexDomain: (i_locFrom,i_locTo);
     }
-    Parameter p_dist2 {
-        IndexDomain: (i_locFrom,i_locTo);
-        Definition: {
-            if i_LocFrom = i_LocTo then
-            	0
-            else
-            	6371*(arccos[sin(radians(p_Latitude(i_locFrom)))*sin(radians(p_Latitude(i_locTo)))+cos(radians(p_Latitude(i_locFrom)))*cos(radians(p_Latitude(i_locTo)))*cos(radians(p_Longitude(i_locTo))-(radians(p_Longitude(i_locFrom))))])
-            endif
-        }
-    }
-    Parameter p_diff {
-        IndexDomain: (i_locFrom,i_locTo);
-        Definition: p_dist1(i_locFrom, i_locTo) - p_dist2(i_locFrom, i_locTo);
-    }
     ExternalFunction fnc_Haversine {
         Arguments: (latFrom,lonFrom,latTo,lonTo);
-        DllName: "external\\Windows\\x64\\HaversineDLL.dll";
+        DllName: sp_dll;
         ReturnType: double;
         BodyCall: Haversine(scalar: latFrom, scalar: lonFrom, scalar: latTo, scalar: lonTo);
         Parameter latFrom {
