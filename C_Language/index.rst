@@ -1,10 +1,10 @@
 .. |aimmsIcon| image:: ../Images/icons/favicon.png
-			:scale: 15 %
+            :scale: 15 %
 
 .. |aimms| image:: ../Images/aimms-logo-s-rgb.png
-				:scale: 10 %
-				:target: https://aimms.com/
-				
+                :scale: 10 %
+                :target: https://aimms.com/
+                
 .. |space| image:: ../Images/ThanksSmileySpace.gif
 
 
@@ -37,9 +37,10 @@ AIMMS Language
    109-deprecate-compound-sets-overview
    109-convert-compound-sets
    157-WriteFewTables
+   175-select-variables-and-constraints-for-math-program
 
 .. Generate Random Numbers
-..    
+ 
 
     
     
