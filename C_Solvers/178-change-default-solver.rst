@@ -17,7 +17,7 @@ Solver configuration
 
 The trivial approach to change which solver should be used for each type of problem is to make use of the Solver Configuration screen. You can access this configuration screen via *Menu > Settings > Solver Configuration*
 
-The picture above shows an example screenshot, where CPLEX 12.4 is used as the default solver for problems of the type LP. By double-clicking on any of the X's in the LP column, you can make the corresponding solver the default for LP problems. Any changes you make to the default solvers via this configuration screen are persistent between your AIMMS sessions: if you close your AIMMS application and start it again, the same default settings are used.
+The picture above shows an example screenshot, where CPLEX 12.6.3 is used as the default solver for problems of the type LP. By double-clicking on any of the X's in the LP column, you can make the corresponding solver the default for LP problems. Any changes you make to the default solvers via this configuration screen are persistent between your AIMMS sessions: if you close your AIMMS application and start it again, the same default settings are used.
 
 Default Solver option in AIMMS Procedures
 ---------------------------------------------
