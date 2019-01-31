@@ -5,7 +5,7 @@
    :description: How to use sets, subsets, indices, element parameters in AIMMS models.
    :keywords: set, subset, index, element, parameter
 
-.. figure:: set-god.png
+.. figure:: /Images/121-set-index-element-parameter/set-god.png
    :scale: 10 %
    :align: center
 
@@ -13,7 +13,7 @@
 
 	This article was originally posted to the AIMMS Tech Blog on September 23, 2016 by Deanne Zhang.
 
-.. |god| image:: set-god.png
+.. |god| image:: /Images/121-set-index-element-parameter/set-god.png
          :scale: 10 %
 
 Do you know Set is a god of the desert, storms, disorder, violence and foreigners in ancient Egyptian? So it is totally possible that his disturbance power influenced mathematical world, which is considered employing set theory as foundation system. From 5th century Greek in west India in the east to today's modern society, there are struggles, debates, paradoxes around set theories. You can find lots of readings about them, or if reading history sounds boring, there will be a little fun video to watch at the end of this blog.
