@@ -7,12 +7,12 @@ Deploy an Application on AIMMS PRO
 
 
 Introduction
-------------
+--------------
 
 When you want to share the AIMMS application you developed with your colleagues, they will need an AIMMS developer system and license installed on their Windows PC to be able to use the application. The AIMMS PRO Platform enables you to share your AIMMS applications without your colleagues having AIMMS installed on their PC, and even let the end users access the application in their web browser, via AIMMS WebUI. 
 
 Running Example
----------------
+------------------
 
 We choose the popular flowshop problem as running example. The question the flowshop model answers is how to order  machines and jobs such that the total time required time to process all jobs is minimal. More details about this model can be found, for instance, on `Wikipedia <https://en.wikipedia.org/wiki/Flow_shop_scheduling>`_. The advantage of the flowshop model for our purposes is that we only need to adapt the number of jobs and machines to illustrate how our application behaves with different running times.
 
@@ -37,11 +37,11 @@ The story behind this picture is as follows:
 This separation into multiple processes allows to use the license to solve only a limited amount of time, thereby facilitating efficient sharing. However, the required *delegation* needs to be facilitated in the model. Let's discuss the modeling of the delegation next.
 
 Basic Modeling of delegation
-----------------------------
+------------------------------
 
 A simple way to model delegation is by introducing a new procedure that just handles the delegation. In the remainder of this section, we'll handle the details of that.
 
-To publish an application on the AIMMS PRO platform, the procedure containing the Solve statement in the model needs to be modified first. In our example, the "Start solving the problem" button is linked to the procedure "prDoSOlve".
+To publish an application on the AIMMS PRO platform, the procedure containing the Solve statement in the model needs to be modified first. In our example, the "Start solving the problem" button is linked to the procedure ``prDoSolve``.
 
 Perform the following steps:
 
@@ -55,10 +55,11 @@ Perform the following steps:
               completionCallback: 'pro::session::LoadResultsCallBack' )
             then return 1;
         endif;
-        prDoSolve();
+
+   By including the above code at the top of a procedure, you are instructing AIMMS to delegate the execution of all the subsequent statements on the AIMMS PRO server. As you want to solve the math program on the PRO server, simply call the procedure ``prDoSOlve`` at the end of ``prSolve``.
 
 
-#.  Link the widget ``BtnSolve`` in the WebUI to the new procedure ``prSolve``.
+#.  Link the widget "BtnSolve" in the WebUI to the new procedure ``prSolve``.
 
 The AIMMS project that does just this, can be downloaded from: :download:`2. Flow Shop - Delegated <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/2. Flow Shop - Delegated.zip>`.
 

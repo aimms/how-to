@@ -24,5 +24,5 @@ Solvers
    126-TSP-Lazy-Constraints
    136-Infeasible-Unbounded
    130-Infeasible-Nonlinear-Problems
-
+   178-change-default-solver.rst
 

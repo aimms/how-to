@@ -1,5 +1,23 @@
 {# Import the theme's layout. #}
-{% extends "!layout.html" %}
+{% extends "!layout.html" %} 
+
+
+{%- block document %}
+
+    {% if pagename == "ContentIndex" %}
+
+        
+        <div class="page-content" style="width: 100%;">
+            {% block body %} {% endblock %}
+        </div>
+    
+    {% else %}
+    
+        {{ super() }}
+    
+    {% endif %}
+    
+{% endblock %}
 
 {% block footer %}
 {{ super() }}

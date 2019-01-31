@@ -53,15 +53,26 @@ After opening Visual Studio, in order:
 
     .. image:: ../Resources/C_Language/Images/153/06NewProjectDLL.PNG
 
-Header code
---------------------
+#. You may want to turn off precompiled headers:
+
+    #. Select your project, use the "Project -> Properties" menu and 
+    
+    #. go to the "Configuration Properties -> C/C++ -> Precompiled Headers" section, 
+    
+    #. then change the "Precompiled Header" setting to "Not Using Precompiled Headers" option.
+    
+Coding the function
+-------------------
 
 .. code-block:: cpp
     :linenos:
 
-    // HaversineDLL.h Declares the exported Haversine function
+    // HaversineDLL.cpp : Implements the exported Haversine function for the DLL application.
 
-    #include "stdafx.h"
+    #ifdef _MSC_VER
+    #define WIN32_LEAN_AND_MEAN
+    #include <windows.h>
+    #endif 
     #define _USE_MATH_DEFINES
     #include <math.h>
 
@@ -72,27 +83,6 @@ Header code
     #endif
 
     DLL_EXPORT_PROTO(double) Haversine(double lat1, double lon1, double lat2, double lon2);
-
-* Line 3: Needed somehow
-
-* Line 4: Such that we can use pi.
-
-* Line 5: Sin, cos, etc.
-
-* Line 7 - 11: C calling convention is needed for AIMMS to be able to call this function.
-
-
-
-Coding the function
--------------------
-
-.. code-block:: cpp
-    :linenos:
-
-    // HaversineDLL.cpp : Implements the exported Haversine function for the DLL application.
-
-    #include "stdafx.h"
-    #include "HaversineDLL.h"
 
     static double toRadians(double angle)
     {
@@ -111,15 +101,12 @@ Coding the function
         return R * 2 * asin(sqrt(a));
     }
 
-* Line 3: Windows needs this
 
-* Line 4: Declarations of h file should be checked against implementation.
+* Line 18-21: Helper function, convert angle from degrees to radians.
 
-* Line 6-9: Helper function, convert angle from degrees to radians.
+* Line 22: Function declaration, use C calling convention
 
-* Line 10: Function declaration, use C calling convention
-
-* Line 12 - 20: based on `Haversine code <https://rosettacode.org/wiki/Haversine_formula>`_
+* Line 24 - 32: based on `Haversine code <https://rosettacode.org/wiki/Haversine_formula>`_
 
 Building using Visual Studio
 ----------------------------

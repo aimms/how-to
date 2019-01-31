@@ -6,6 +6,8 @@
                 :scale: 10 %
                 :target: https://aimms.com/
 
+.. _ref-deployment:
+
 Deployment
 ========================
 
