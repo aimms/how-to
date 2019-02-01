@@ -7,7 +7,7 @@ Create an External Function with Visual Studio
 
 .. sidebar:: Crow in flight - Wikimedia Commons
 
-    .. image:: ../Resources/C_Language/Images/153/Crow_in_flight.jpg
+    .. image:: ../../Resources/C_Language/Images/153/Crow_in_flight.jpg
 
 `Haversine code <https://rosettacode.org/wiki/Haversine_formula>`_ in various computer languages is publicly available to compute the distance between locations.
 In this article, we use it as an illustration of how to create an external function using `Microsoft Visual Studio <https://visualstudio.microsoft.com/>`_.
@@ -19,7 +19,7 @@ A Visual Studio Project facilitates incremental building of software components 
 Here we just use it to create a ``.dll`` containing external functions for Haversine.  
 
 
-.. image:: ../Resources/C_Language/Images/153/01NewProjectDLL.PNG
+.. image:: ../../Resources/C_Language/Images/153/01NewProjectDLL.PNG
 
 After opening Visual Studio, in order:
 
@@ -35,23 +35,23 @@ After opening Visual Studio, in order:
     
 #. Make sure we can change further settings
 
-    .. image:: ../Resources/C_Language/Images/153/02NewProjectDLL.PNG
+    .. image:: ../../Resources/C_Language/Images/153/02NewProjectDLL.PNG
 
 #. We want a DLL
 
-    .. image:: ../Resources/C_Language/Images/153/03NewProjectDLL.PNG
+    .. image:: ../../Resources/C_Language/Images/153/03NewProjectDLL.PNG
 
 #. The default configuration is not correct
 
-    .. image:: ../Resources/C_Language/Images/153/04NewProjectDLL.PNG
+    .. image:: ../../Resources/C_Language/Images/153/04NewProjectDLL.PNG
 
 #. We want a new configuration
 
-    .. image:: ../Resources/C_Language/Images/153/05NewProjectDLL.PNG
+    .. image:: ../../Resources/C_Language/Images/153/05NewProjectDLL.PNG
 
 #. Namely x64
 
-    .. image:: ../Resources/C_Language/Images/153/06NewProjectDLL.PNG
+    .. image:: ../../Resources/C_Language/Images/153/06NewProjectDLL.PNG
 
 #. You may want to turn off precompiled headers:
 
@@ -126,7 +126,7 @@ Installing is just unzipping. Then start the executable and browse the .dll
 
 #. ``depends22_x86\depends.exe`` for the **32 bit** dll: ``<HaversineDLL>\release\HaversineDLL.dll``.  
 
-    .. image:: ../Resources/C_Language/Images/153/32BitsDependsCheck.PNG
+    .. image:: ../../Resources/C_Language/Images/153/32BitsDependsCheck.PNG
 
     * Missing functions in MSVCR120.dll may be reported, but those are covered when starting AIMMS. 
     
@@ -135,7 +135,7 @@ Installing is just unzipping. Then start the executable and browse the .dll
     
 #. ``depends22_x64\depends.exe`` for the **64 bit** dll: ``<HaversineDLL>\x64\release\HaversineDLL.dll``.  
 
-    .. image:: ../Resources/C_Language/Images/153/64BitsDependsCheck.PNG
+    .. image:: ../../Resources/C_Language/Images/153/64BitsDependsCheck.PNG
 
     * Missing functions in MSVCR120.dll may be reported, but those are covered when starting AIMMS. 
     
@@ -212,11 +212,11 @@ Good performance; my desktop requires less than 0.3 seconds to fill a 274 X 274 
 Downloads
 ------------
 
-*  :download:`Visual Studio project <../Resources/C_Language/Images/153/VSCPP.zip>` 
+*  :download:`Visual Studio project <../../Resources/C_Language/Images/153/VSCPP.zip>` 
 
-*  :download:`AIMMS project <../Resources/C_Language/Images/153/CrowDistExternal.zip>` 
+*  :download:`AIMMS project <../../Resources/C_Language/Images/153/CrowDistExternal.zip>` 
 
 
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def
 

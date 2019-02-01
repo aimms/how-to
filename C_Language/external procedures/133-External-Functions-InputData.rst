@@ -19,7 +19,7 @@
 
 .. sidebar:: Make connection
 
-    .. image:: ../Resources/C_Language/Images/133/5.10_Road_sign.gif
+    .. image:: ../../Resources/C_Language/Images/133/5.10_Road_sign.gif
         :align: center
 
 
@@ -168,6 +168,6 @@ Further reading
 * M. Dincbas, H. Simonis, and P. van Hentenryck. Solving the car-sequencing problem in constraint logic programming. In Y. Kodratoff, editor, Proceedings ECAI-88, pp. 290–295, 1988
 
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def
 
 

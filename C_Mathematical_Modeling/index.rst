@@ -20,3 +20,4 @@ Mathematical Modeling
    137-Small-Rostering
    142-Narrowing-Time-Windows
    140-Scheduling-Project-Planning
+   C_Solvers/index

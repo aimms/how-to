@@ -56,9 +56,9 @@ Processing each of the input files
 Example used:
 -------------
 
-:download:`Excel inputs download <../Resources/C_Language/Images/150/ExcelInputs.zip>` 
+:download:`Excel inputs download <../../Resources/C_Language/Images/150/ExcelInputs.zip>` 
 
-:download:`AIMMS project download <../Resources/C_Language/Images/150/MultiRunExcel.zip>` 
+:download:`AIMMS project download <../../Resources/C_Language/Images/150/MultiRunExcel.zip>` 
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def
 

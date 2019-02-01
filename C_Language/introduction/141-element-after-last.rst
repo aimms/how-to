@@ -11,7 +11,7 @@
 
 .. sidebar:: What is beyond the last element?
 
-    .. image:: ../Resources/C_Language/Images/141/Cliff.jpg
+    .. image:: ../../Resources/C_Language/Images/141/Cliff.jpg
 
 
 Consider a stock balance ``v_Stock(i_t+1) = v_Stock(i_t) + v_Production(i_t) - p_Demand(i_t)``. Via ``t+1`` we refer to the next element in a set. Using such an expression as an argument of a variable, as in ``S(t+1)``, we refer to the stock of the next period. The meaning of an expression like ``t+1`` needs to be well-defined, including when ``t`` equals the last element in the set ``H``. This brings us to the question in the title of this post.
@@ -55,6 +55,6 @@ The ``StockBalance`` becomes:
 As an aside, the "+1" and "-1" operations discussed above are also known as lead and lag operations, respectively.
 
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def
 
 

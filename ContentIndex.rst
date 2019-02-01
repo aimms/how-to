@@ -82,12 +82,6 @@ AIMMS Knowledge Center
                 <p>Mathematical modeling and optimization</p>
             </div>
         </a>
-        <a href="C_Solvers/index.html">
-            <div class="box_home_page">
-                <h1 align="center">Solvers</h1>
-                <p>Solvers in AIMMS</p>
-            </div>
-        </a>
         <a href="C_UI/index.html">
             <div class="box_home_page">
                 <h1 align="center">UI</h1>
@@ -105,7 +99,7 @@ AIMMS Knowledge Center
 -----------------------------------------------------------
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :titlesonly:
    :hidden:
 
@@ -113,7 +107,6 @@ AIMMS Knowledge Center
    C_Deployment/index
    C_Connectivity/index
    C_Mathematical_Modeling/index
-   C_Solvers/index
    C_UI/index
    C_Licensing/index
    

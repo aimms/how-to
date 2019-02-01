@@ -45,7 +45,7 @@ We provide a library with tools to identify compound sets based on these charact
 
 To identify compound sets in your application, 
 
-#. Download the attached :download:`AIMMS project download <../Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` 
+#. Download the attached :download:`AIMMS project download <../../Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` 
 
 #. Copy the ``DeprecateCompoundSetUtilities`` library to your AIMMS project.
 
@@ -133,7 +133,7 @@ The importance of creating backups before starting maintenance on your projects 
 Step 2: Add library DeprecateCompoundSetUtilities
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The :download:`AIMMS project download <../Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` provides an example app and utility library ``DeprecateCompoundSetUtilities``. 
+The :download:`AIMMS project download <../../Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` provides an example app and utility library ``DeprecateCompoundSetUtilities``. 
 
 Copy the library from that example and add it to your application.
 
@@ -424,4 +424,4 @@ Glossary of Terms Used
 
     For further information on the deprecation of compound sets, contact `AIMMS Support Team <mailto:support@aimms.com>`_.
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def

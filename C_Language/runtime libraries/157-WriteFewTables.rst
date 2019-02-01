@@ -7,7 +7,7 @@ How to Write a Few Database Tables
 
 .. sidebar:: Don't write on these tables. Thanks.
 
-    .. figure:: ../Resources/C_Language/Images/157/Billiard_hall.JPG
+    .. figure:: ../../Resources/C_Language/Images/157/Billiard_hall.JPG
     
             Picture by: Dmitry G.
 
@@ -314,7 +314,7 @@ Resource for this article
 
 The enclosed example shows how to do this.
 
-*  :download:`AIMMS project <../Resources/C_Language/Images/157/WriteOnlyAFewDatabaseTables.zip>` 
+*  :download:`AIMMS project <../../Resources/C_Language/Images/157/WriteOnlyAFewDatabaseTables.zip>` 
 
 
 Summary
@@ -336,7 +336,7 @@ Further reading
 
 
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def
 
 
 
