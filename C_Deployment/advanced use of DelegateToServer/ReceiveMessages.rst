@@ -10,7 +10,7 @@ Send and Receive Messages
 
 .. sidebar:: ListeningConnectionId
 
-    .. image:: ../Resources/C_Deployment/Images/80/159915.svg
+    .. image:: ../../Resources/C_Deployment/Images/80/159915.svg
 
 This article is a follow up of :doc:`RegularJob`
 
@@ -40,8 +40,8 @@ This article provides a simple example based on  :doc:`RegularJob`  The essence 
 
 #. When these server sessions pass their message, it should be stored and displayed in the data session.  
 
-A potential implementation can be downloaded :download:`here <../Resources/C_Deployment/RegularJob/ReceiveMessages.zip>` .
+A potential implementation can be downloaded :download:`here <../../Resources/C_Deployment/RegularJob/ReceiveMessages.zip>` .
 
 To operate this app, just press the button and watch messages appear.
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def

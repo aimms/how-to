@@ -13,7 +13,7 @@ Overview: Model Sources, Version Control and aimmspack Files
 
 .. sidebar:: Don't be a git use Version Control
 
-    .. image:: ../Resources/C_Deployment/Images/151/keep_calm_and_carry_on_coasters-r44b83d095b374e2d9454dc9b102fab13_am0u7_8byvr_152.png
+    .. image:: ../../Resources/C_Deployment/Images/151/keep_calm_and_carry_on_coasters-r44b83d095b374e2d9454dc9b102fab13_am0u7_8byvr_152.png
         :scale: 200 %
 
 In our current AIMMS 4.0 release we have introduced a number of fundamental, and sometimes breaking changes in managing the project sources, about which we got a lot of questions. In this article, I will describe these changes and also explain the rationale behind them.
@@ -89,5 +89,5 @@ Backing up sources without using a VCS
 As you may have understood by now, I’m a strong advocate of using version control to manage AIMMS 4 projects, and my answers are pretty biased towards steering you in that direction as I’m convinced it won’t take long before you’re grateful for me having done so. However, if you’re really not up to using a VCS, then using zip to backup your project folder provides equivalent functionality to using aimmspack files for backup or communicating project sources between developers. By using a commandline version of the zip tool from within a batch file, you can even restrict which files and directories to include into the zip file as you were able to accomplish using aimmspack files. From within such a batch file you could then also include the date and time of the backup in the name of the zip file, or automatically move the backup to the location of your choice. Note, however, that by doing so, you're actually implementing functionality that comes for free with any VCS.
 
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def
 

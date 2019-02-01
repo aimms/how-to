@@ -110,11 +110,11 @@ Further reading
 #. The descriptions of the functions ``ReferencedIdentifiers`` and ``SectionIdentifiers`` in `AIMMS PRO Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_ .
 
 You can download the example: 
-:download:`2a. Flow Shop - ReducedCases <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/2a. Flow Shop - ReducedCases.zip>`.
+:download:`2a. Flow Shop - ReducedCases <../../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/2a. Flow Shop - ReducedCases.zip>`.
 
 
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def
 
 
 

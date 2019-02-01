@@ -14,7 +14,7 @@ We saw how to remove the "Busy" veil during a solve process in a :doc:`previous 
 Implementation
 --------------
 
-.. image::  ../Resources/AIMMSPRO/Deploy_DataServerComm_7_Interrupt/Images/QueuesBetweenDataAndServerSession.png
+.. image::  ../../Resources/AIMMSPRO/Deploy_DataServerComm_7_Interrupt/Images/QueuesBetweenDataAndServerSession.png
 
 Interrupting the server session is very direct and can be done by using the AIMMS PRO library procedure, ``pro::client::StopExecution`` which requires you to specify two input arguments.  
 
@@ -22,7 +22,7 @@ Interrupting the server session is very direct and can be done by using the AIMM
 
 #. ``intType`` short for interruption type, to specify whether you want to interrupt the execution of the entire procedure, or just a currently executing solve statement (if any). The difference between these two is that with a solve statement, the solver session is also invoked by the server session. If there is no solve statement in a procedure, it is executed only on the AIMMS server in the background. 
 
-This mechanism is illustrated in the code snippet below. Here, we interrupt only a solve statement by using the predefined identifier ``pro::AIMMSAPI_INTERRUPT_SOLVE``. To interrupt the entire procedure execution, simply replace ``pro::AIMMSAPI_INTERRUPT_SOLVE`` with ``pro::AIMMSAPI_INTERRUPT_EXECUTE`` in the below code. 
+This mechanism is illustrated in the code snippet below. Here, we interrupt only a solve statement by using the predefined identifier ``pro::AIMMSAPI_INTERUPT_SOLVE``. To interrupt the entire procedure execution, simply replace ``pro::AIMMSAPI_INTERUPT_SOLVE`` with ``pro::AIMMSAPI_INTERUPT_EXECUTE`` in the below code. 
 
     .. code-block:: aimms
 
@@ -31,7 +31,7 @@ This mechanism is illustrated in the code snippet below. Here, we interrupt only
                 if pro::GetPROEndPoint() then
                     pro::client::StopExecution(               ! 1 - The procedure that makes an interrupt.
                         pro::session::CurrentSessionQueue(),  ! 2 - The queue leading to the server session.
-                        pro::AIMMSAPI_INTERRUPT_SOLVE );      ! 3 - Interrupt SOLVE, not entire server session.
+                        pro::AIMMSAPI_INTERUPT_SOLVE );      ! 3 - Interrupt SOLVE, not entire server session.
                 endif ;
                 pSolveInterruptable := 0 ; ! Button BtnInterrupSolve becomes invisible.
             }
@@ -39,7 +39,7 @@ This mechanism is illustrated in the code snippet below. Here, we interrupt only
 
 Now, you can link this procedure to a button in your WebUI application to be able to interrupt a solve procedure running in the backround.
 
-The example AIMMS project with the above demonstrated procedure implemented can be downloaded from :download:`8. Flow Shop - Interrupt <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/8. Flow Shop - Interrupt.zip>`.
+The example AIMMS project with the above demonstrated procedure implemented can be downloaded from :download:`8. Flow Shop - Interrupt <../../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/8. Flow Shop - Interrupt.zip>`.
 
 Further reading
 ---------------
@@ -47,4 +47,4 @@ Further reading
 An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided in :doc:`Deploy_DataServerComm_8_PassNewData`.
 
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def

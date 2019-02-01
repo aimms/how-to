@@ -35,7 +35,7 @@ Supported features:
 Adding the library
 --------------------
 
-Add *EmailClient* to your project from the library repository using the *Library Manager*. For more details, see AIMMS Knowledge: :doc:`../C_Language/Using_AIMMS_Libraries`.
+Add *EmailClient* to your project from the library repository using the *Library Manager*. For more details, see AIMMS Knowledge: :doc:`../C_Language/introduction/Using_AIMMS_Libraries`.
 
 |add-email-client-lib|
 

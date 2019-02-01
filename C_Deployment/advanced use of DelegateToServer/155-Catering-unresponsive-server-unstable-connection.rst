@@ -16,7 +16,7 @@ Example
 
 The example app executes a procedure on the PRO Server upon pressing the button.
 
-.. image:: ../Resources/C_Deployment/Images/155/callstack.png
+.. image:: ../../Resources/C_Deployment/Images/155/callstack.png
    :scale: 105%
 
 #. A button is pressed
@@ -151,5 +151,5 @@ Further Reading
 
 
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def
 

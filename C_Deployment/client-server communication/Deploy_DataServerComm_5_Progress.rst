@@ -15,7 +15,7 @@ Approach
 
 The approach we take here involves passing information through three levels of execution.
 
-.. image:: ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/ThreeLevelsOfExecutionTimeCB.png
+.. image:: ../../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/ThreeLevelsOfExecutionTimeCB.png
 
 #. The solver execution on the server session. 
     The solver passes on status information periodically, as part of the time callback mechanism.
@@ -31,11 +31,11 @@ The implementation of the information stream represented by the two arrows will 
 Implementation
 --------------
 
-The AIMMS project for the current running example with the steps implemented can be downloaded from: :download:`6. Flow Shop - Progress Communication <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/6. Flow Shop - Progress Communication.zip>`.
+The AIMMS project for the current running example with the steps implemented can be downloaded from: :download:`6. Flow Shop - Progress Communication <../../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/6. Flow Shop - Progress Communication.zip>`.
 
 The Gap curve linechart widget in the below image is updated every second with the gap between the bestbound and incumbent objective value of the mathematical program in the project. 
 
-.. image:: ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB06_WebUI_screen.PNG 
+.. image:: ../../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB06_WebUI_screen.PNG 
 
 You can implement the same in your project by communicating the data from the solver (level 1) to the data session (level 2), which is done in two steps as explained in detail below. 
 
@@ -120,5 +120,5 @@ You can read more about the ``pro::PROMFLAG_LIVE`` and other flag arguments in a
 
 Now that end users know the state of the solution process, they might want to interrupt it when they see that further improvements are not worth waiting for. The article  :doc:`Deploy_DataServerComm_7_Interrupt` shows you how to do it.
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def
  

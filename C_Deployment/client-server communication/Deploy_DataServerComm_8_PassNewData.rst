@@ -18,7 +18,7 @@ Use case: We continue with the Flowshop application. Even though the progress in
 Implementation
 --------------
 
-.. image:: ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/DataChangesToServerSession.png
+.. image:: ../../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/DataChangesToServerSession.png
 
 Once a solver session is started, you can send additional information using the predefined procedure ``pro::DelegateToServer()``, provided you pass it the queue it already is listening to in the call. When ``pro::DelegateToServer`` is passed a message queue it will not start a new job, but add the enclosing procedure, here ``prPassProgressSupplied``, as a message to the existing queue. This lets the indicated procedure be run as part of the current job.  As you know, a job running on a server is essentially an AIMMS procedure running. In order to let the message start immediately, it should be given priority.
 
@@ -52,9 +52,9 @@ Note the use of the flag ``pro::PROMFLAG_PRIORITY`` ; this flag indicates that t
 
 The user interface when the problem is being solved now looks as follows:
 
-.. image::  ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB08_WebUI_screen.PNG 
+.. image::  ../../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB08_WebUI_screen.PNG 
 
-The AIMMS project that does just this, can be downloaded from: :download:`9. Flow Shop - Control <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/9. Flow Shop - Control.zip>`.
+The AIMMS project that does just this, can be downloaded from: :download:`9. Flow Shop - Control <../../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/9. Flow Shop - Control.zip>`.
 
 Summary
 -------
@@ -72,5 +72,5 @@ Further reading
 Information about `AIMMS PRO <https://documentation.aimms.com/pro/index.html>`_
 
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def
  

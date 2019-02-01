@@ -1,0 +1,77 @@
+C_Language/104-creating-email-templates.rst	C_Connectivity/104-creating-email-templates.rst
+C_Language/104-using-email-client-library.rst	C_Connectivity/104-using-email-client-library.rst
+C_Language/135-UTF8-Encoding.rst	C_Connectivity/135-UTF8-Encoding.rst
+C_Language/85-using-axll-library.rst	C_Connectivity/85-using-axll-library.rst
+C_Language/125-execution-efficiency.rst	C_Language/efficiency/125-execution-efficiency.rst
+C_Language/134-Monitoring-Memory-Use.rst	C_Language/efficiency/134-Monitoring-Memory-Use.rst
+C_Language/144-Stopwatch.rst	C_Language/efficiency/144-Stopwatch.rst
+C_Language/133-External-Functions-InputData.rst	C_Language/external procedures/133-External-Functions-InputData.rst
+C_Language/153-external-haversine.rst	C_Language/external procedures/153-external-haversine.rst
+C_Language/112-Integer-properties.rst	C_Language/introduction/112-Integer-properties.rst
+C_Language/119-Reproducible-Random-Sequence.rst	C_Language/introduction/119-Reproducible-Random-Sequence.rst
+C_Language/121-set-index-element-parameter.rst	C_Language/introduction/121-set-index-element-parameter.rst
+C_Language/141-element-after-last.rst	C_Language/introduction/141-element-after-last.rst
+C_Language/145-import-export-section.rst	C_Language/introduction/145-import-export-section.rst
+C_Language/150-solve-in-loop.rst	C_Language/introduction/150-solve-in-loop.rst
+C_Language/175-select-variables-and-constraints-for-math-program.rst	C_Language/introduction/175-select-variables-and-constraints-for-math-program.rst
+C_Language/How to model categorization of objects.rst	C_Language/introduction/How to model categorization of objects.rst
+C_Language/Using_AIMMS_Libraries.rst	C_Language/introduction/Using_AIMMS_Libraries.rst
+C_Language/109-convert-compound-sets.rst	C_Language/runtime libraries/109-convert-compound-sets.rst
+C_Language/109-deprecate-compound-sets-overview.rst	C_Language/runtime libraries/109-deprecate-compound-sets-overview.rst
+C_Language/131-Formulas-as-Data.rst	C_Language/runtime libraries/131-Formulas-as-Data.rst
+C_Language/132-Repetive-Patterns-Model-Edit.rst	C_Language/runtime libraries/132-Repetive-Patterns-Model-Edit.rst
+C_Language/146-value-dynamic-identifier.rst	C_Language/runtime libraries/146-value-dynamic-identifier.rst
+C_Language/157-WriteFewTables.rst	C_Language/runtime libraries/157-WriteFewTables.rst
+C_Deployment/how to work with csv files.rst	C_Connectivity/how to work with csv files.rst
+C_Deployment/159-exchange-data-with-pro.rst	C_Deployment/159-exchange-data-with-cloud.rst
+C_Mathematical_Modeling/C_Licensing/105-adding-named-user-licenses.rst	C_Licensing/105-adding-named-user-licenses.rst
+C_Mathematical_Modeling/C_Licensing/106-install-network-license.rst	C_Licensing/106-install-network-license.rst
+C_Mathematical_Modeling/C_Licensing/89-academic-license.rst	C_Licensing/89-academic-license.rst
+C_Mathematical_Modeling/C_Licensing/89-license-nodelock-error.rst	C_Licensing/89-license-nodelock-error.rst
+C_Mathematical_Modeling/C_Licensing/How To Transfer My Developer License to Another Machine.rst	C_Licensing/How To Transfer My Developer License to Another Machine.rst
+C_Mathematical_Modeling/C_Licensing/index.rst	C_Licensing/index.rst
+C_Licensing/105-adding-named-user-licenses.rst	C_Mathematical_Modeling/C_Licensing/105-adding-named-user-licenses.rst
+C_Licensing/106-install-network-license.rst	C_Mathematical_Modeling/C_Licensing/106-install-network-license.rst
+C_Licensing/89-academic-license.rst	C_Mathematical_Modeling/C_Licensing/89-academic-license.rst
+C_Licensing/89-license-nodelock-error.rst	C_Mathematical_Modeling/C_Licensing/89-license-nodelock-error.rst
+C_Licensing/How To Transfer My Developer License to Another Machine.rst	C_Mathematical_Modeling/C_Licensing/How To Transfer My Developer License to Another Machine.rst
+C_Licensing/index.rst	C_Mathematical_Modeling/C_Licensing/index.rst
+C_UI/49-webui-css-color-for-line-chart.rst	C_UI/49-webui-css-color.rst
+C_UI/49-webui-css-color-for-linechart.rst	C_UI/49-webui-css-color-for-line-chart.rst
+C_UI/152-html-tooltip.rst	Resources/C_Mathematical_Modeling/Images/140/BuildBridge/log/CPOptimizer 12.8.sta
+C_Mathematical_Modeling/109-convert-compound-sets.rst	C_Language/109-convert-compound-sets.rst
+C_Mathematical_Modeling/109-deprecate-compound-sets-overview.rst	C_Language/109-deprecate-compound-sets-overview.rst
+C_Language/Using AIMMS Libraries.rst	C_Language/Using_AIMMS_Libraries.rst
+draft.rst	C_Language/Using AIMMS Libraries.rst
+Deploy_DataServerComm_1_Publish.rst	C_Deployment/Deploy_DataServerComm_1_Publish.rst
+Deploy_DataServerComm_2_Develop.rst	C_Deployment/Deploy_DataServerComm_2_Develop.rst
+Deploy_DataServerComm_3_RemoveVeil.rst	C_Deployment/Deploy_DataServerComm_3_RemoveVeil.rst
+Deploy_DataServerComm_4_LoadResults.rst	C_Deployment/Deploy_DataServerComm_4_LoadResults.rst
+Deploy_DataServerComm_5_Progress.rst	C_Deployment/Deploy_DataServerComm_5_Progress.rst
+Deploy_DataServerComm_6_Retrieve.rst	C_Deployment/Deploy_DataServerComm_6_Retrieve.rst
+Deploy_DataServerComm_7_Interrupt.rst	C_Deployment/Deploy_DataServerComm_7_Interrupt.rst
+Deploy_DataServerComm_8_PassNewData.rst	C_Deployment/Deploy_DataServerComm_8_PassNewData.rst
+C_Deployment.rst	C_Deployment/index.rst
+How to model categorization of objects.rst	C_Language/How to model categorization of objects.rst
+C_Language.rst	C_Language/index.rst
+C_Mathematical Modeling.rst	C_Mathematical_Modeling/index.rst
+How To Transfer My Developer License to Another Machine.rst	C_Other/How To Transfer My Developer License to Another Machine.rst
+HowToHandleTheDeprecationOfCompoundSets.rst	C_Other/HowToHandleTheDeprecationOfCompoundSets.rst
+C_Other.rst	C_Other/index.rst
+C_Solvers.rst	C_Solvers/index.rst
+C_UI.rst	C_UI/index.rst
+RetrieveIntermediateResults.rst	Deploy_DataServerComm_6_Retrieve.rst
+PublishOnPro.rst	Deploy_DataServerComm_1_Publish.rst
+AIMMSPROAppAvailbleOnPROandUsableInIDE.rst	Deploy_DataServerComm_2_Develop.rst
+RemoveVeil.rst	Deploy_DataServerComm_3_RemoveVeil.rst
+LoadResultsSolverSession.rst	Deploy_DataServerComm_4_LoadResults.rst
+ProgressWindowServerSession.rst	Deploy_DataServerComm_5_Progress.rst
+StopSolveServerSession.rst	Deploy_DataServerComm_7_Interrupt.rst
+CommunicateDataChangesToServerSession.rst	Deploy_DataServerComm_8_PassNewData.rst
+.special.rst	special.rst
+RetreiveIntermediateResults.rst	RetrieveIntermediateResults.rst
+How do I use this, man.rst	How to use this, man.rst
+Resources/Other/HowDoIMan/Images/HowDoIManFirstCommit.PNG	Resources/Other/HowToMan/Images/HowToManFirstCommit.PNG
+Resources/Other/HowDoIMan/Images/HowDoIManFirstCommitNeedsClarification.PNG	Resources/Other/HowToMan/Images/HowToManFirstCommitNeedsClarification.PNG
+Resources/Other/HowDoIMan/Images/HowDoIManGitLogAfterFirstCommitNeedsClarification.PNG	Resources/Other/HowToMan/Images/HowToManGitLogAfterFirstCommitNeedsClarification.PNG
+HDI Transfer My Developer License to Another Machine.rst	How To Transfer My Developer License to Another Machine.rst
