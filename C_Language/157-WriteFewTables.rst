@@ -1,8 +1,8 @@
-How to Write a Few Database Tables
-=====================================
+Write Database Tables
+======================
 
 .. meta::
-   :description: The combo of ReferencedIdentifiers, Datachange monitors and runtime libraries allows to make a selection of database tables that actually need rewriting
+   :description: The combo of ReferencedIdentifiers, Datachange monitors and runtime libraries allows us to make a selection of database tables that actually need rewriting.
    :keywords: database table, odbc, runtime library, model editing, AIMMS Language, execution efficiency
 
 .. sidebar:: Don't write on these tables. Thanks.
@@ -11,18 +11,17 @@ How to Write a Few Database Tables
     
             Picture by: Dmitry G.
 
-.. note:: Under Construction / Draft status - please do not hesitate to use the form at the end of this article to ask for clarification where needed.
+The operation of writing to databases in AIMMS is tuned for performance. 
 
+Even when writing just a few rows, it takes time to set up a connection, write, and commit the transaction to the database. 
 
-Writing to databases is tuned for performance. 
-Even when writing just a few rows, there is some time needed to setup a connection, actually write and commit the transaction to the database. 
-Applications keep acquiring functionality, and subsequently the number of database tables in large applications becomes significant. 
-Having worked on an application with more than 100 database tables, where saving the data often consisted of writing the same data for most of the tables, we sought a solution whereby the writing of database tables is skipped for those tables where the data is not changed. 
+As applications gain functionality, the number of database tables in large applications grows. 
+If you find yourself working an application with 100 database tables, you will quickly favor a solution that skips writing database tables where the data is not changed. 
 
-Example
-----------
+Example of database tables
+--------------------------
 
-To illustrate the mechanism, we created a small example with just two database tables. The mechanism works the same for applications with dozens of database tables.
+To illustrate the mechanism, here is a small example with just two database tables. The mechanism works the same for applications with dozens of database tables.
 
 .. code-block:: aimms
    :linenos:
@@ -59,17 +58,17 @@ To illustrate the mechanism, we created a small example with just two database t
             searchAttrSet  ! (input) subset of AllAttributeNames
             recursive )    ! (optional) numerical expression
 
-      * Line 2: the identifiers to be searched, in our example this will be a singleton set containing just the database table to be investigated
+      * Line 2: the identifiers to be searched; in our example this will be a singleton set containing just the database table to be investigated
 
-      * Line 3: the attributes to be searched, we search all attributes
+      * Line 3: the attributes to be searched; here, we search all attributes
 
-      * Line 4: We will do a recursive search, because we also want to write defined parameters, when the data of one of the constituents of its definition is changed.
+      * Line 4: We will do a recursive search, because we also want to write defined parameters when the data of one of the constituents of its definition is changed.
 
 * Writing to table db_ab saves the data of i_a, i_b, p_AB1, p_AB2. In other words, when the data of i_a, i_b, p_AB1, or p_AB2 is changed, we want to write to table db_ab.
 
 * Writing to table db_bc saves the data of i_b, i_c, p_BC1. Again, when the data of i_b, i_c, p_BC1 is changed, we want to write to table db_bc.
 
-The original procedure that writes the data looks like this:
+This was the original procedure to write the data:
 
 .. code-block:: aimms
    :linenos:
@@ -81,19 +80,17 @@ The original procedure that writes the data looks like this:
       }
    }
 
-And we want to change it to something like (in pseudo code):
+However, we want to change it to something like this (in pseudo code):
 
 .. sidebar:: DatachangeMonitors
 
-    So how do we know the model or user changed data that is to be saved to a database table?
-
-    Datachange monitors track whether or not the data of a selection of identifiers was changed since the last time checked. So what is a datachange monitor?
+    Datachange monitors track whether or not the data of a selection of identifiers was changed since the last time checked.
 
     A datachange monitor consists of three components:
 
     #. A name - for sake of identification.
 
-    #. A reference to an AIMMS set - by having a reference, a data change monitor can even monitor dynamic subsets of AllIdentifiers (yes there are use cases of this feature).
+    #. A reference to an AIMMS set - by having a reference, a data change monitor can even monitor dynamic subsets of ``AllIdentifiers``. (Yes, there are use cases of this feature.)
    
     #. An internal component that maintains for each identifier and the referenced set the number of assignments since the last reset.
 
@@ -101,9 +98,9 @@ And we want to change it to something like (in pseudo code):
    
     * ``DataChangeMonitorHasChanged`` - returns 1 if the data of at least one identifier, or the data of the reference set itself, has changed.
 
-    * ``DataChangeMonitorCreate`` - create a new datachange monitor name and resets
+    * ``DataChangeMonitorCreate`` - creates a new datachange monitor name and resets
 
-    * ``DataChangeMonitorReset`` - reset a datachange monitor and links it to the same or other reference set
+    * ``DataChangeMonitorReset`` - resets a datachange monitor and links it to the same or another reference set
 
     * ``DataChangeMonitorDelete`` - allows for cleanup!
 
@@ -122,29 +119,26 @@ And we want to change it to something like (in pseudo code):
         }
     }
 
-We do not want to do this change manually, because:
-
-#. Cut / Copy / Paste typically leads to coding errors, but worse:
-
-#. It is a maintenance problem; when your successor adds a column and corresponding AIMMS identifier to the database table, does he remember to make the corresponding update for the procedure that writes the data?
+You could do this manually, but it could lead to coding errors and, worse, maintenance problems.
 
 Luckily, AIMMS has the following facilities:
 
-#. The predeclared function ReferencedIdentifiers (see sidebar), this function examines portions of AIMMS code and return the identifiers referenced. 
+* The predeclared function ``ReferencedIdentifiers`` (see sidebar) examines portions of AIMMS code and returns the identifiers referenced. 
 
-#. The construct DatachangeMonitor (see sidebar), given a set of AIMMS identifiers, has any one of them changed value?
+* The construct ``DatachangeMonitor`` (see sidebar) checks a given set of AIMMS identifiers for changed values.
 
-#. Runtime libraries, AIMMS code generated in the model that can be activated in the same session. 
-   Each database table is monitored separately, which means we want a separate monitor for each table. 
-   Because each monitor has a reference to a set, instead of just the value of a set, we need to resort to runtime libraries.
-   By automating the use of ReferencedIdentifiers and DatachangeMonitors, we avoid the maintenance problem mentioned above.
+* Runtime libraries, that is AIMMS code generated in the model that can be activated in the same session. 
+   Each database table is monitored separately, so you need a separate monitor for each table. 
+   We need runtime libraries because each monitor has a reference to a set, not the value of a set. 
+   
+By automating the use of ``ReferencedIdentifiers`` and ``DatachangeMonitors`` we avoid maintenance problems.
 
-The runtime library created
+Example of runtime library 
 ----------------------------
 
-Because of its abstraction, code writing runtime libraries are usually not easy to understand.
-It helps me to first have an example of code created by such a procedure, before trying to understand a procedure that creates a runtime library.
-So here the runtime library created for our example:
+Code writing runtime libraries are a bit abstract.
+
+Before trying to understand a procedure that creates a runtime library, let's take an example of code created by such a procedure:
 
 .. code-block:: aimms
    :linenos:
@@ -184,30 +178,28 @@ So here the runtime library created for our example:
         }
     }
     
-An explanation of the contents for database table db_ab follows below, in addition, the library shows how the repetition is done for subsequent tables such as db_bc.
+An explanation of the contents for the database table ``db_ab`` follows below. In addition, the library shows how the repetition is done for subsequent tables such as ``db_bc``.
 
-* line 1: The name of the runtime library, I usually take something long to be unique and descriptive of the purpose, in Camel Case.
+* line 1: The name of the runtime library. Here, unique and descriptive of the purpose in Camel Case.
     
-* line 2: The prefix, I usually take the capital letters of the runtime library name in lower case.
+* line 2: The prefix. Here, acronym of the runtime library name in lower case.
 
 * line 6: The sets and parameters referenced in the first database table, constructed using the function ``ReferencedIdentifiers``.
 
 * line 4-7: A set declaration and definition for the identifiers referenced in the first table. 
 
-* line 15: A datachange monitor is created for table db_ab using the set MonitorSet_db_ab.
+* line 15: A datachange monitor is created for table ``db_ab`` using the set ``MonitorSet_db_ab``.
 
-* line 21: Check if data is changed for table db_ab.
+* line 21: Check if data is changed for table ``db_ab``.
 
 * line 22: Perform the actual write action.
 
-* line 23: Only for illustrative purposes of this example we mark the table as written.
+* line 23: Here, we mark the table as written.
 
 * line 24: Reset the data change monitor.
 
-So how do we create a runtime library as above?
 
-
-The actual runtime library creation
+Create the runtime library 
 -----------------------------------
 
 .. code-block:: aimms
@@ -287,13 +279,13 @@ The actual runtime library creation
       }
    }
     
-Most of the components of this long procedure have been explained above. Selected remarks:
+Notes:
 
 * ``sp_bodyLineInit``, ``sp_bodyInitProc`` we collect the text for the datachange monitor initialization procedure.
 
 * ``sp_bodyLineWrite``, ``sp_bodyWriteProc`` we collect the text for the write procedure, as illustrated in the previous section.
 
-The call to write the database tables
+Call to write the database tables
 -------------------------------------
 
 .. code-block:: aimms
@@ -309,7 +301,7 @@ The call to write the database tables
 
 Essentially just an apply statement of the procedure we created above.
 
-Resource for this article
+Example project
 -------------------------
 
 The enclosed example shows how to do this.
@@ -317,13 +309,7 @@ The enclosed example shows how to do this.
 *  :download:`AIMMS project <../Resources/C_Language/Images/157/WriteOnlyAFewDatabaseTables.zip>` 
 
 
-Summary
--------
-
-The combo of ReferencedIdentifiers, Datachange monitors and runtime libraries allows to make a selection of database tables that actually need rewriting.
-
-
-Further reading
+Related Topics
 ----------------
 
 * `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_: Section "Runtime Libraries and the Model Edit Functions"
