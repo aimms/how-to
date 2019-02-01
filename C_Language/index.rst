@@ -27,6 +27,7 @@ AIMMS Language
    119-Reproducible-Random-Sequence
    144-Stopwatch
    125-execution-efficiency
+   170-memory-in-use.rst
    134-Monitoring-Memory-Use
    135-UTF8-Encoding
    133-External-Functions-InputData
