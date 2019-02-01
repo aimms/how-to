@@ -20,6 +20,11 @@ AIMMS Language
    112-Integer-properties
    Using_AIMMS_Libraries
    144-Stopwatch
+<<<<<<< HEAD
+=======
+   125-execution-efficiency
+   170-memory-in-use.rst
+>>>>>>> 3f109593bcf8af4731d3eee2f5eff5cd4eba39af
    134-Monitoring-Memory-Use
    135-UTF8-Encoding
    146-value-dynamic-identifier
