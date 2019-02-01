@@ -11,20 +11,20 @@
  
 .. sidebar:: Connecting to EXCEL
 
-    .. image:: ../Resources/C_Connectivity/Images/122/782px-Microsoft_Excel_2013_logo.svg.png
+    .. image:: ../../Resources/C_Connectivity/Images/122/782px-Microsoft_Excel_2013_logo.svg.png
 
 The AimmsXLLibrary was introduced in AIMMS 4.20. The new library can communicate with Excel files in server environments, where Excel is not installed. For instance, while running AIMMS through a WebUI on PRO or on Linux. Excel is usually not installed in such environments. However, this isn't a problem. The AimmsXLLibrary doesn't require Excel to be installed in order to read from or write to an Excel (.xls/.xlsx) file. By using this library, you can deploy your AIMMS project to more platforms with less restrictions.
 
 In order to use the library, you first need to add the system library 'AIMMSXLLibrary' to your model. Then, you can use the functions, which start with prefix "axll"(Aimms eXeL Library), provided in the library. This blog post illustrates how these functions work. Let's take a look.
 
-.. image:: ../Resources/C_Connectivity/Images/122/XLLibrary.png
+.. image:: ../../Resources/C_Connectivity/Images/122/XLLibrary.png
 
 Reading your Excel File in AIMMS
 ---------------------------------
 
 I needed some geographical information about the US for an application I was building. The information was easy to find online. I downloaded the file below, titled "free-zipcode-database-Primary.xlsx". It provided the Zipcode, State, Latitude and Longitude columns I needed.
 
-.. image:: ../Resources/C_Connectivity/Images/122/Excel-e1465306005168.png
+.. image:: ../../Resources/C_Connectivity/Images/122/Excel-e1465306005168.png
         :scale: 150 %
 
 Next, I created a procedure in my AIMMS project, called "ReadFromExcel." 
@@ -78,7 +78,7 @@ The first argument, "IdentifierReference", is the name of the parameter. The sec
 
 In case you have an identifier with more dimensions, "RowHeaderRange" is the range where the starting indices reside, and "ColumnHeaderRange", is the range where the ending indices reside. For example, identifier ``MyValue(r1, r2, r3, r4,c1,c2,c3,c4)`` has 8 indices, and the data in Excel looks like this:
 
-.. image:: ../Resources/C_Connectivity/Images/122/Excel3-e1465306679329.png
+.. image:: ../../Resources/C_Connectivity/Images/122/Excel3-e1465306679329.png
         :scale: 150 %
         
 
@@ -113,7 +113,7 @@ And ``axll::ReadList`` to read in data "ZipCodeState(z)," which holds the state 
 ``axll::ReadList`` is designed for reading in data which is represented as lists in Excel. 
 So it is only with RowHeaderRange. The following Excel Sheet is an example with "A8:D17" as RowHeaderRange and "E8:E17" as DataRange.
 
-.. image:: ../Resources/C_Connectivity/Images/122/Excel4-e1465308154550.png
+.. image:: ../../Resources/C_Connectivity/Images/122/Excel4-e1465308154550.png
 
 At this point, everything I need to use in my model is in there, so I use ``axll::CloseWorkBook`` to close the workbook.
 
@@ -123,11 +123,11 @@ At this point, everything I need to use in my model is in there, so I use ``axll
     
 With the data I just imported from Excel, I can do further analyses. For example, I can calculate the distance between zip codes based on the latitude and longitude, and show it in AIMMS WebUI.
 
-.. image:: ../Resources/C_Connectivity/Images/122/Distance-e1465308283102.png
+.. image:: ../../Resources/C_Connectivity/Images/122/Distance-e1465308283102.png
 
 Similarly, you can use the AIMMSXLLibrary to write to Excel. You can see the comments in the library for further reference.
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def
 
 
 

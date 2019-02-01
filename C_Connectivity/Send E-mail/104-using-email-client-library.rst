@@ -35,7 +35,7 @@ Supported features:
 Adding the library
 --------------------
 
-Add *EmailClient* to your project from the library repository using the *Library Manager*. For more details, see AIMMS Knowledge: :doc:`../C_Language/introduction/Using_AIMMS_Libraries`.
+Add *EmailClient* to your project from the library repository using the *Library Manager*. For more details, see AIMMS Knowledge: :doc:`../../C_Language/introduction/Using_AIMMS_Libraries`.
 
 |add-email-client-lib|
 
@@ -142,7 +142,7 @@ Example
 
 Download an example AIMMS project containing an email procedure:
 
-:download:`EmailLibraryDemo.zip <../Resources/Other/104-using-email-client-library/EmailLibraryDemo.zip>`
+:download:`EmailLibraryDemo.zip <../../Resources/Other/104-using-email-client-library/EmailLibraryDemo.zip>`
 
 Related topics
 ---------------
@@ -152,7 +152,7 @@ Related topics
 
 .. END CONTENT
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def
 
 .. author: Jessica Valasek Estenssoro
 .. checked by: Mohan Chiriki

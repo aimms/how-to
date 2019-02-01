@@ -13,7 +13,7 @@
 
 .. sidebar:: Connecting to 32 or 64 bit drivers
 
-    .. image:: ../Resources/C_Connectivity/Images/129/32_bit_vs_64_bit.jpg
+    .. image:: ../../Resources/C_Connectivity/Images/129/32_bit_vs_64_bit.jpg
 
  
 Some years ago, before Microsoft Office 2010, life was – in some sense – easier for developers: Office was 32-bit, period. In our days, since the release of Microsoft Office 2010, things are a bit more complicated, as users can now have a machine with a 64-bit native version of Office installed as well. This means, for instance, that a 32-bit application using an ODBC driver to connect to an Access database might not work anymore, since the 32-bit ODBC driver might not exist on a machine with a 64-bit Office installation. In such a case, even though the user has a valid Office installation on his or her machine, the application may still display an error regarding the installation or the registration of the proper drivers on the local machine.
@@ -111,7 +111,7 @@ Note that the "mso.dll" registry value will already be present if a 64-bit versi
 
 
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def
 
 
 

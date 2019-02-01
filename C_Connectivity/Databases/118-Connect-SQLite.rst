@@ -1,4 +1,4 @@
-﻿.. include:: ../includes/icons-sub.def
+﻿.. include:: ../../includes/icons-sub-sub.def
 
 Link an SQLite Database to a Project
 =========================================
@@ -39,11 +39,11 @@ Verification of the installation
 
 To verify that the driver is well installed, please open the "Administrative Tools" of your computer (type "administrative tools" in windows search bar). You should see a window like this :
 
-.. image:: ../Resources/C_Connectivity/Images/118/2odbc.png
+.. image:: ../../Resources/C_Connectivity/Images/118/2odbc.png
 
 Then open the "ODBC Data Sources (64-bit)" (or 32-bit) and reach the "Drivers" tab. Normally, you should find 3 new drivers, named **SQLite ODBC (UTF-8)**, **SQLite ODBC** and **SQLite3 ODBC**. The window may include other drivers (as Microsoft Access for example) :
 
-.. image:: ../Resources/C_Connectivity/Images/118/3odbc.png
+.. image:: ../../Resources/C_Connectivity/Images/118/3odbc.png
 
 Congrats! The installation is successful.
 
@@ -75,17 +75,17 @@ Every database has its own .dsn file, that's why you need to generate it for eac
 
 To generate the appropriate .dsn file from your SQLite ODBC driver, please select the tab "File DSN" from the ODBC Data Sources administrator (the one that we opened just before to check that the installation was completed). Then click the "Add" button in the upper right of the window. You should see this pop up window:
 
-.. image:: ../Resources/C_Connectivity/Images/118/4odbc.png
+.. image:: ../../Resources/C_Connectivity/Images/118/4odbc.png
 
 Select the driver you want to use (in our case, SQLite3 ODBC Driver) and click "Next".
 
 At this point, the computer is asking you the name of the .dsn file you want to create. Name it as you wish. As you may see below, I choose to name it "test".
 
-.. image:: ../Resources/C_Connectivity/Images/118/5odbc.png
+.. image:: ../../Resources/C_Connectivity/Images/118/5odbc.png
 
 After that, you will have access to the 'SQLite ODBC Driver Connect', which finally ask you to browse and select your SQLite database. As explained in <a href="#Download">Download an SQLite database sample to test</a>, my database is named *chinook.db*, you just need to browse and select it.
 
-.. image:: ../Resources/C_Connectivity/Images/118/8odbc.png
+.. image:: ../../Resources/C_Connectivity/Images/118/8odbc.png
 
 After clicking the OK button, you should see a new .dsn file (named *test* in my case) in the file explorer of your ODBC Data Source Administrator.
 
@@ -100,7 +100,7 @@ To generate the appropriate .dsn System file from your SQLite ODBC driver, pleas
 * Select SQLite3 ODBC Driver as shown below.
 
  
-.. image:: ../Resources/C_Connectivity/Images/118/7odbc.png
+.. image:: ../../Resources/C_Connectivity/Images/118/7odbc.png
 
 
 When the SQLite3 configuration window pops up :
@@ -109,11 +109,11 @@ When the SQLite3 configuration window pops up :
 * define the location of your SQLite database (*db* in my case) :
 * Click OK
 
-.. image:: ../Resources/C_Connectivity/Images/118/8odbc.png
+.. image:: ../../Resources/C_Connectivity/Images/118/8odbc.png
 
 You should now see that there is a new System DSN file in the System DSN tab:
 
-.. image:: ../Resources/C_Connectivity/Images/118/9odbc.png
+.. image:: ../../Resources/C_Connectivity/Images/118/9odbc.png
 
 Congrats! You may go directly to the <a href="#Fill">Fill out AIMMS Database Table identifier</a> in order to complete the connection with your AIMMS database.
 
@@ -147,7 +147,7 @@ Fill out an AIMMS Database Table identifier
 
 Let's start a super simple new AIMMS project, containing only one Database Table  named "Table1" :
 
-.. image:: ../Resources/C_Connectivity/Images/118/10aimms.png
+.. image:: ../../Resources/C_Connectivity/Images/118/10aimms.png
 
 * Create a new Database Table ,
 * Specify 'Table1',
@@ -184,7 +184,7 @@ Once you have linked the data source, you are now ready and able to select a tab
     
     if you receive the following error message when trying to link with a connection string: 
 
-    .. image:: ../Resources/C_Connectivity/Images/118/11aimms.png
+    .. image:: ../../Resources/C_Connectivity/Images/118/11aimms.png
 
     |
      
@@ -215,7 +215,7 @@ Other related websites
 * `SQLite Website <https://sqlite.org/>`_
 
 
-.. include:: ../includes/form.def
+.. include:: ../../includes/form.def
 
 
 
