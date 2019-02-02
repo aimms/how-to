@@ -37,6 +37,7 @@ AIMMS Language
    109-deprecate-compound-sets-overview
    109-convert-compound-sets
    157-WriteFewTables
+   172-use-stop-criteria
 
 .. Generate Random Numbers
 ..    
