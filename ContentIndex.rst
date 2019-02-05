@@ -1,6 +1,6 @@
 
 
-AIMMS Knowledge Center
+AIMMS Knowledge Center: How-To
 ======================================
 
 .. rst-class:: display
@@ -12,7 +12,7 @@ AIMMS Knowledge Center
             width:100%;
             max-width:1000px;    /* A. max horizontal number of boxes =~ int(A/B) */
             margin:0 auto;
-            text-align:left;    /* (left|center) align last boxes and the set vert. line */
+            text-align:center;    /* (left|center) align last boxes and the set vert. line */
             /*background-color:#AAA; */
         }
         .box_home_page {
@@ -58,10 +58,40 @@ AIMMS Knowledge Center
     </style>
     
     <div id="content_home_page">
+        <a href="C_Licensing/index.html">
+            <div class="box_home_page">
+                <h1 align="center">Getting Started</h1>
+                <p>Installing and updating AIMMS, setting up licenses</p>
+            </div>
+        </a>
+        <a href="C_Mathematical_Modeling/index.html">
+            <div class="box_home_page">
+                <h1 align="center">Modeling</h1>
+                <p>Converting real problems into optimization models</p>
+            </div>
+        </a>
+        <a href="C_Solvers/index.html">
+            <div class="box_home_page">
+                <h1 align="center">Solvers</h1>
+                <p>Selecting solvers</p>
+            </div>
+        </a>
         <a href="C_Language/index.html">
             <div class="box_home_page">
                 <h1 align="center">Language</h1>
                 <p>Expressing a model in the AIMMS programming language</p>
+            </div>
+        </a>
+        <a href="C_Connectivity/index.html">
+            <div class="box_home_page">
+                <h1 align="center">Data Connections</h1>
+                <p>Connecting AIMMS to other sources with extensions, links, and libraries</p>
+            </div>
+        </a>
+        <a href="C_UI/index.html">
+            <div class="box_home_page">
+                <h1 align="center">Applications</h1>
+                <p>Creating and customizing WebUI and WinUI apps</p>
             </div>
         </a>
         <a href="C_Deployment/index.html">
@@ -70,36 +100,7 @@ AIMMS Knowledge Center
                 <p>Distributing your applications with AIMMS PRO, on-premise or with the Cloud platform</p>
             </div>
         </a>
-        <a href="C_Connectivity/index.html">
-            <div class="box_home_page">
-                <h1 align="center">Connectivity</h1>
-                <p>Connecting AIMMS to other sources with extensions, links, and libraries</p>
-            </div>
-        </a>
-        <a href="C_Mathematical_Modeling/index.html">
-            <div class="box_home_page">
-                <h1 align="center">Modeling</h1>
-                <p>Mathematical modeling and optimization</p>
-            </div>
-        </a>
-        <a href="C_Solvers/index.html">
-            <div class="box_home_page">
-                <h1 align="center">Solvers</h1>
-                <p>Converting real problems into optimization models, selecting solvers</p>
-            </div>
-        </a>
-        <a href="C_UI/index.html">
-            <div class="box_home_page">
-                <h1 align="center">UI</h1>
-                <p>Creating and customizing WebUI and WinUI apps</p>
-            </div>
-        </a>
-        <a href="C_Licensing/index.html">
-            <div class="box_home_page">
-                <h1 align="center">Licensing</h1>
-                <p>Setting up developer, academic, and network licenses</p>
-            </div>
-        </a>
+
     </div>
     
 -----------------------------------------------------------
@@ -109,10 +110,12 @@ AIMMS Knowledge Center
    :titlesonly:
    :hidden:
 
-   C_Language/index
-   C_Deployment/index
-   C_Connectivity/index
-   C_Mathematical_Modeling/index
-   C_UI/index
    C_Licensing/index
+   C_Mathematical_Modeling/index
+   C_Solvers/index
+   C_Language/index
+   C_Connectivity/index
+   C_UI/index
+   C_Deployment/index
+
    
