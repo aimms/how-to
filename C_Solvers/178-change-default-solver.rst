@@ -5,7 +5,7 @@ How to change the default solver
    :description: How to change the default solver used for each type of mathematical program.
    :keywords: mathematics, solver, mathematical program
 
-.. image:: ../Resources/C_Solvers/Images/178/solverselection.png
+.. image:: /Resources/C_Solvers/Images/178/solverselection.png
 
 Introduction
 --------------
@@ -51,5 +51,5 @@ Please keep in mind that the values of ``CurrentSolver`` are used as defaults: Y
     solve TransportModel where solver:='CPLEX 12.2' ;
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 

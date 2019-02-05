@@ -55,4 +55,4 @@ Be careful with variables that have a definition. Please keep in mind that for e
 
     If you use the above mentioned approach of selecting certain variables and constraints for a mathematical program identifier in AIMMS, please make sure that all defined variables are also in the set of selected constraints. Otherwise, AIMMS would only consider the variable and not its corresponding equality constraint.
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def

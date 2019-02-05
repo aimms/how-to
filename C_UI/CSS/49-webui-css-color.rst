@@ -227,7 +227,7 @@ See `Data-Dependent Styling <https://manual.aimms.com/webui/folder.html#data-dep
 .. .. image:: /Images/49-webui-css-color/css-more-specific.png
 
 
-:download:`AIMMS project download <../Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` 
+:download:`AIMMS project download </Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` 
 
 
 Related topics
@@ -239,4 +239,4 @@ Related topics
 .. END CONTENT
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def

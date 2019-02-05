@@ -11,7 +11,7 @@
 
 .. sidebar:: Infeasible triangle
 
-    .. image:: ../Resources/C_Solvers/Images/136/infeasible-triangle.png
+    .. image:: /Resources/C_Solvers/Images/136/infeasible-triangle.png
 
 Unfortunately, when modeling things hardly ever go as planned at the first try and more than once you end up with results that you did not expect. At first glance everything in the symbolic model (i.e. the variables, constraints, and parameters in the model tree) might look OK, but still you are getting results that do not make sense or the solver concludes that your model is either infeasible or unbounded.
 
@@ -27,7 +27,7 @@ where MathProgramName is the name of the mathematical program identifier in your
 
 The first thing you would like to know which of the two statuses it actually is: infeasible or unbounded. One way you can determine this is by adding a constraint on the objective that limits its value. If you solve the problem again with this constraint and now you get a feasible solution, it means that your original problem was unbounded. If it is still infeasible, it means your original problem was infeasible. Alternatively, you could also ensure you have bounds (i.e. by using the range attribute) for all variables in your model except the objective variable (which must have range free). This would not allow for an unbounded model anymore.
 
-.. image:: ../Resources/C_Solvers/Images/136/cplex-settings.png
+.. image:: /Resources/C_Solvers/Images/136/cplex-settings.png
 
 Another, easier way to determine whether the problem is infeasible or unbounded is by setting the CPLEX solver option *Presolve* to the non-default value "off" via the project settings.
 
@@ -60,6 +60,6 @@ Note that these tools (MPI and constraint listing) can help you see what is actu
 It could also be that the generated mathematical program is completely correct and that this problem is actually infeasible. In these cases you can use tools like the Infeasibility Finder of the solver or the IIS finder in the MPI to get more insights in what is causing the infeasibility for your problem. How to use these tools will be the subject of a future blog article :)
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 

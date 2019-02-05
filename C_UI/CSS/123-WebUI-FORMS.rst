@@ -17,7 +17,7 @@ The AIMMS WebUI is well known for its capability to create a UI for inspecting a
 
 Consider the picture below:
 
-.. image:: ../Resources/C_UI/Images/123/FormData-ModelIdentifiersExchange.png
+.. image:: /Resources/C_UI/Images/123/FormData-ModelIdentifiersExchange.png
 
 
 This picture illustrates a form in the AIMMS WebUI in which new or modified data is entered (red rectangle), and once it passes the checks, copied to the actual model identifiers as if it were a single transaction. You might be asking yourself how this can be done and what the required effort is. To properly implement such a form, several identifiers are needed in addition to the model identifiers, whereby each of them inherits some properties from the corresponding model identifier. In addition, AIMMS code is needed for checking and for copying/deleting. The AIMMS WebUI Forms framework minimizes effort for developers by creating the needed additional identifiers, and generating code for copying, deleting and the repetitive part of checking. Deploying this framework in order to create an advanced form is the topic for the remainder of this blog post.
@@ -31,7 +31,7 @@ Step 1. Project preparation for AIMMS in combination with WebUI
 
 In order to add forms to your application, you will need to prepare your application for the WebUI by adding the system libraries ``AimmsProLibrary`` and ``AimmsWebUI`` to your application. This can be done using the AIMMS Library manager. This action needs to be done only once per application.
 
-.. figure:: ../Resources/C_UI/Images/123/1-New-project-with-system-libraries.png
+.. figure:: /Resources/C_UI/Images/123/1-New-project-with-system-libraries.png
 
     1 New project with system libraries
 
@@ -46,7 +46,7 @@ The targets of the form to be created are the model identifiers in which we want
 
 Thus we declare the corresponding model identifiers as follows:
 
-.. figure:: ../Resources/C_UI/Images/123/2-sets-and-parameters-for-model.png
+.. figure:: /Resources/C_UI/Images/123/2-sets-and-parameters-for-model.png
 
     2 sets and parameters for model
 
@@ -68,7 +68,7 @@ We need the following extra declarations in order to work with the forms:
 
 From the AIMMS model explorer, the above declarations look as follows:
 
-.. figure:: ../Resources/C_UI/Images/123/3-procedure-callback-declarations.png
+.. figure:: /Resources/C_UI/Images/123/3-procedure-callback-declarations.png
 
     Procedure callback declarations
 
@@ -188,7 +188,7 @@ After starting the AIMMS WebUI (AIMMS Menu – Tools – Start WebUI) and openin
 
 This will result in the following form:
 
-.. figure:: ../Resources/C_UI/Images/123/4-Basic-widget-placing.png
+.. figure:: /Resources/C_UI/Images/123/4-Basic-widget-placing.png
 
     4 Basic widget placing
 
@@ -224,7 +224,7 @@ Phrase adapting in the WebUI is achieved via translation files. In our running e
 
 With this phrase adapting, the form now looks as follows:
 
-.. figure:: ../Resources/C_UI/Images/123/4-Basic-widget-placing-translated-names.png
+.. figure:: /Resources/C_UI/Images/123/4-Basic-widget-placing-translated-names.png
 
     4 Basic widget placing - translated names
 
@@ -247,6 +247,6 @@ In this blog post we have shown that modern looking forms for data entry can eas
 
 This makes the AIMMS WebUI Forms framework an efficient method to create forms from the model builder's perspective.
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 

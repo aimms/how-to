@@ -11,7 +11,7 @@
 
 .. sidebar:: Sherlock Holmes
 
-    .. image:: ../Resources/C_Solvers/Images/130/sherlock.png
+    .. image:: /Resources/C_Solvers/Images/130/sherlock.png
     	:scale: 50 %
     	:align: center
 
@@ -24,6 +24,6 @@ Another way to analyze an infeasible problem is by using the *Display Infeasibil
 Both the Infeasibility Analysis and the IIS, as calculated by BARON, are printed in the listing file.
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 
