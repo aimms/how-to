@@ -11,7 +11,7 @@
 
 .. sidebar:: Der Maler - Honoré Daumier - from Rheims Museum of Fine Arts
 
-    .. image:: ../Resources/C_Language/Images/132/1280px-Honore_Daumier_008.jpg
+    .. image:: /Resources/C_Language/Images/132/1280px-Honore_Daumier_008.jpg
 
     
 When constructing AIMMS models, we are usually able to handle repetition and structure by adding indexes. For instance, if we have built a model for the conversion process of a single machine, we do not have to duplicate the relevant model code when given an extra machine. Instead, we can use an extra index over a set of machines. However, there are situations where adding an extra index is not an option. This blog post will provide an example of such a situation, illustrating how the issue can be tackled using the AIMMS Model Query and Model Edit functions.  **Duplicating data with the AIMMS Model Edit and Model Query functions** The example discussed in this blog post deals with the specification of data maintained per product. Note the differences in dimension and index domain of the following identifiers containing the data of the products, ``pr`` is an index in the set ``Products``:
@@ -143,7 +143,7 @@ Here we compile the entire library, not just a single procedure. Note that the g
     apply( e_proc );
     
 
-A complete AIMMS model that provides the data duplication code, as a library, is available here: :download:`AIMMS project download <../Resources/C_Language/Images/132/SomeApplication_converted.zip>`  
+A complete AIMMS model that provides the data duplication code, as a library, is available here: :download:`AIMMS project download </Resources/C_Language/Images/132/SomeApplication_converted.zip>`  
 
 This completes the data duplication example. It illustrates the use of Model Query and Model Edit functions in the reduction of application maintenance costs. Other uses of Model Query and Model Edit functions include:
 
@@ -153,6 +153,6 @@ This completes the data duplication example. It illustrates the use of Model Que
 Moreover, Model Query and Model Edit functions form a major building block when treating formulas as data. This, however, is a topic for another blog post. More information about Runtime libraries and Model Edit functions can be found in the Language Reference of AIMMS, section "Runtime Libraries and the Model Edit Functions." Another example of the use of Model Edit functions was written in the post :doc:`146-value-dynamic-identifier`.
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 

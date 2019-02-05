@@ -11,7 +11,7 @@
 
 .. sidebar:: 8 Queens Solution
 
-    .. image:: ../Resources/C_Solvers/Images/139/Eight-Queens-Solution.png
+    .. image:: /Resources/C_Solvers/Images/139/Eight-Queens-Solution.png
 
 Some of the solvers in AIMMS, including the CP Optimizer solver for Constraint Programming problems, support not only returning a single (optimal) solution, but also a pool of feasible solutions.
 
@@ -46,11 +46,11 @@ After the solve is finished, you can use the AIMMS function ``GMP::Solution::Sen
     endwhile ;
 
 Below you can download the aimmspack containing the modified version of the original project from Hakan.
-:download:`AIMMS project download <../Resources/C_Solvers/Images/139/NQueens_converted.zip>` 
+:download:`AIMMS project download </Resources/C_Solvers/Images/139/NQueens_converted.zip>` 
 
 Another small modification I made to the project is that it graphically shows the locations of the queens on a chessboard. This allows to quickly compare different solutions, as depicted below:
 
-.. figure:: ../Resources/C_Solvers/Images/139/nqueens-solution.png
+.. figure:: /Resources/C_Solvers/Images/139/nqueens-solution.png
 
     Graphical representation of NQueens solution
 
@@ -58,6 +58,6 @@ Other solvers that directly support working with a solution pool are Baron and C
 
 Note that with solvers that don't directly support a solution pool but do support the Incumbent callback, you can manually create the solution repository by storing each solution found by using the Incumbent callback.
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 

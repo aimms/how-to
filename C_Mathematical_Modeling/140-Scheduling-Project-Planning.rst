@@ -12,7 +12,7 @@
 
 .. sidebar:: Golden Gate bridge by Guido Diepen
 
-    .. image:: ../Resources/C_Mathematical_Modeling/Images/140/golden-gate.jpg
+    .. image:: /Resources/C_Mathematical_Modeling/Images/140/golden-gate.jpg
         :scale: 150%
 
 The identifier types ACTIVITIES and RESOURCES, and the scheduling intrinsic functions as part of the AIMMS constraint programming component are very useful in modeling construction projects and optimizing the makespan of those projects.
@@ -21,7 +21,7 @@ Several existing constraint programming languages use the Bridge Building exampl
 
 In such a construction project, there are construction activities related to each element of a structure, such as pillars, and to the activities to manage the project itself such as delivery of materials and the building of housing to shelter the construction equipment.
 
-.. figure:: ../Resources/C_Mathematical_Modeling/Images/140/Bridge-Building.jpg
+.. figure:: /Resources/C_Mathematical_Modeling/Images/140/Bridge-Building.jpg
    :align: center
     
    Bridge Building
@@ -81,12 +81,12 @@ Having multiple machines of a certain type, we can generalize this to:
         }
     }
 
-The entire example can be downloaded from: :download:`AIMMS project download <../Resources/C_Mathematical_Modeling/Images/140/BuildBridge.zip>`
+The entire example can be downloaded from: :download:`AIMMS project download </Resources/C_Mathematical_Modeling/Images/140/BuildBridge.zip>`
 
 Reference:
 Bartusch, M. (1983), Optimierung von Netzplänen mit Anordnungsbeziehungen bei knappen Betriebsmitteln, Ph.D. thesis, Universität Passau, Fakultät für Mathematik und Informatik.
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 

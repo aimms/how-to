@@ -9,7 +9,7 @@ Sharing is rewarding
 
 .. sidebar:: Sharing ideas
 
-    .. figure:: ../Resources/C_Deployment/Images/166/Women_Inspired_Health_and_Community_2016_45.jpg
+    .. figure:: /Resources/C_Deployment/Images/166/Women_Inspired_Health_and_Community_2016_45.jpg
     
             Picture by: http://projectpinkblue.org/
 
@@ -65,7 +65,7 @@ Resource for this article
 
 The enclosed example shows how to do this.
 
-*  :download:`AIMMS project <../Resources/C_Language/Images/157/WriteOnlyAFewDatabaseTables.zip>` 
+*  :download:`AIMMS project </Resources/C_Language/Images/157/WriteOnlyAFewDatabaseTables.zip>` 
 
 Summary
 ---------
@@ -91,5 +91,5 @@ More information can be found in the following references.
 
 * :doc:`115-Securing-File-Access` 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 

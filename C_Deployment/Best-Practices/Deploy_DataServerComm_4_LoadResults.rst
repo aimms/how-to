@@ -103,9 +103,9 @@ We are executing the predefined procedure ``pro::session::LoadResultsCallBack`` 
 
 We want to control the visibility of ``BtnLoadResults`` because it makes sense for it to show up only when results are available to load. This appearance acts as a notification for the end user that results are available. The user interface when the results are available, but not yet downloaded looks as follows:
 
-.. image::  ../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB05_WebUI_screen.PNG 
+.. image::  /Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB05_WebUI_screen.PNG 
 
-The AIMMS project that does just this, can be downloaded from: :download:`5. Flow Shop - Load Results <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/5. Flow Shop - Load Results.zip>`.
+The AIMMS project that does just this, can be downloaded from: :download:`5. Flow Shop - Load Results </Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/5. Flow Shop - Load Results.zip>`.
 
 Summary
 -------
@@ -124,5 +124,5 @@ There are now several opportunities for further improvement:
 #. Once the solution is "good enough for now", the end user may want to abort the server session.  In :doc:`Deploy_DataServerComm_7_Interrupt` we will show how to interrupt the server session.
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
  

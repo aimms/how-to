@@ -41,26 +41,26 @@ Fantasy Football is a game where people can choose their team rosters by partici
 
 We can see the information of each player. For example, Russel Wilson, the Quarterback(QB) from my favorite team Seattle Seahawks (SEA), has fantasy points of 336.26. In order to get his points in, it is natural to create a parameter to hold Russel Wilson's point.
 
-.. image:: ../Resources/C_Language/Images/121/Screenshot_13.png
+.. image:: /Resources/C_Language/Images/121/Screenshot_13.png
 
 And I also want to have fantasy points for each of the players, so I will create a list of parameters to hold each value.
 
-.. image:: ../Resources/C_Language/Images/121/Screenshot_14.png
+.. image:: /Resources/C_Language/Images/121/Screenshot_14.png
 
  
 It will soon become too cumbersome to continue because there are hundreds players in the draft. We don't want to repeat the same thing for each of the player. So here Set comes. Let's create a set, called ``Players``. It contains all the players I will consider in the draft. And I put ``p`` as index. An Index, or sometimes called running index, can refer to any element in the set.
 
-.. image:: ../Resources/C_Language/Images/121/Screenshot_15.png
+.. image:: /Resources/C_Language/Images/121/Screenshot_15.png
 
 Then I create a parameter called ``FantasyPoints(p)``, "(p)" means FantasyPoints has index domain over ``p``, representing fantasy points for each player.
 
-.. image:: ../Resources/C_Language/Images/121/Screenshot_16.png
+.. image:: /Resources/C_Language/Images/121/Screenshot_16.png
 
 With Set ``Players`` and Parameter ``FantasyPoints(p)``, we can easily hold the fantasy points for all players.
 
 Next I want to have each player's position in my model. In our sample data, we see Quarterbacks(QB), Running Backs(RB) and Wide Receivers(WR). So I will create a set, called ``ositions``, with index ``ps``.
 
-.. image:: ../Resources/C_Language/Images/121/Screenshot_17.png
+.. image:: /Resources/C_Language/Images/121/Screenshot_17.png
 
 Each of the player is at one of the positions. In order to hold such information in AIMMS, there are two alternative ways
 
@@ -69,21 +69,21 @@ Each of the player is at one of the positions. In order to hold such information
 
 Let's implement both. I name the parameter ``PlayerAtPosition(p,ps)``, and specify ``binary`` in the range.
 
-.. image:: ../Resources/C_Language/Images/121/Screenshot_20.png
+.. image:: /Resources/C_Language/Images/121/Screenshot_20.png
 
 And we will assign value 1 (box checked) if a player palys the position.
 
-.. image:: ../Resources/C_Language/Images/121/Screenshot_21.png
+.. image:: /Resources/C_Language/Images/121/Screenshot_21.png
 
 Now Parameter ``PlayerAtPosition`` use numerical value (0/1) to indicate if a player belongs to position. Next we will create an element parameter ``PositionOfPlayer`` to take value of the positions for each player.
 
-.. image:: ../Resources/C_Language/Images/121/Screenshot_22.png
+.. image:: /Resources/C_Language/Images/121/Screenshot_22.png
 
 A mandatory attribute of element parameter is the "``Range``". It must be a set name in the model, because element parameter is defined as an element of a set. And you probably have already noticed, that parameter has "Range" attribute as well, but it is not mandatory to fill in. It is because Parameter in AIMMS has default range, which is the set of real numbers. And you can overwrite the range to a subset of real number, for example, binary for Parameter PlayerAtPosition as we did earlier.
 
 Now we fill in the value of PositionOfPlayer.
 
-.. image:: ../Resources/C_Language/Images/121/Screenshot_23.png
+.. image:: /Resources/C_Language/Images/121/Screenshot_23.png
 
 
 You may wonder which option is better. It usually depends on multiple things, for example, input file format, how this parameter or element parameter will be used in the model, and your modeling preferences. In general, making it an element parameter is easier for reading from Excel or Database, since there is usually no extra numerical column for the mapping value. Parameter, at the other hand, can be directly used as domain condition, which might reduce some computational run time. For example, if we want to calculate the average fantasy points for all Quarterbacks. I can have either
@@ -112,11 +112,11 @@ Or in another case, you already have the Parameter but you would like to create 
 
 Here AIMMS operator "``First``" is used to find the first position the player plays at. This operator depends on the assumption that each player only plays at one position.  In another situation, where I want to know all the Quarterback players, statement ``First(p|PlayerAtPosition(p, ps))`` won't help me since there are more than one player plays Quarterback. In this case I need create a set ``AllQuarterbacks``, make it a ``subset`` of Players, index ``allqb`` and define it as the following.
 
-.. image:: ../Resources/C_Language/Images/121/Screenshot_26.png
+.. image:: /Resources/C_Language/Images/121/Screenshot_26.png
  
 With this definition, AIMMS automatically pops the data.
 
-.. image:: ../Resources/C_Language/Images/121/Screenshot_27.png
+.. image:: /Resources/C_Language/Images/121/Screenshot_27.png
 
 
 
@@ -132,7 +132,7 @@ Thank you for reading this blog, and here is a video on some fun facts about se
 `Ted about Set <https://www.youtube.com/watch?v=UPA3bwVVzGI>`_
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 
 

@@ -12,13 +12,13 @@
 
 .. .. sidebar:: ROGO Puzzle: avoid pitfalls, grab prizes within limit on steps
 
-.. figure:: ../Resources/C_Mathematical_Modeling/Images/138/ROGO.logo_.png
+.. figure:: /Resources/C_Mathematical_Modeling/Images/138/ROGO.logo_.png
 
     Creative Maths - A world of mathematicians
 
 .. sidebar:: ROGO Puzzle: avoid pitfalls, grab prizes within limit on steps
 
-    .. image:: ../Resources/C_Mathematical_Modeling/Images/138/rogo1.gif
+    .. image:: /Resources/C_Mathematical_Modeling/Images/138/rogo1.gif
 
 The ROGO puzzle, `rogopuzzle <http://www.rogopuzzle.co.nz>`_, challenges players to find a good path on a board, pick up treasures, and avoid pitfalls. This puzzle, and its corresponding iPhone app, were originally developed in New Zealand. In this post, I'll explain a method for solving ROGO puzzles using constraint programming in AIMMS.
 
@@ -83,7 +83,7 @@ If we want to give the objective some value, at least one cell should have value
 The AIMMS application
 ---------------------
 
-The complete example is presented in this :download:`AIMMS project download <../Resources/C_Mathematical_Modeling/Images/138/ROGO.zip>` 
+The complete example is presented in this :download:`AIMMS project download </Resources/C_Mathematical_Modeling/Images/138/ROGO.zip>` 
 
 
 It comes with a case for each of the introductory ROGO puzzles. Psst, there is a transparent button on the ROGO logo; clicking it will open the puzzle site.
@@ -121,6 +121,6 @@ Hakan Kjellerstrand recently posted a better symmetry breaking rule `here <http:
 For the first four ROGO examples, there is hardly any difference. For ROGO puzzles 5, 6 and 7, the symmetry breaking rule of Hakan performs better. For ROGO puzzle 8 both formulations found the optimal value but were not able to prove optimality within 60 seconds. In short, Hakan's symmetry breaking rule performs better than mine.
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 

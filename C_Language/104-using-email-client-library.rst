@@ -142,7 +142,7 @@ Example
 
 Download an example AIMMS project containing an email procedure:
 
-:download:`EmailLibraryDemo.zip <../Resources/Other/104-using-email-client-library/EmailLibraryDemo.zip>`
+:download:`EmailLibraryDemo.zip </Resources/Other/104-using-email-client-library/EmailLibraryDemo.zip>`
 
 Related topics
 ---------------
@@ -152,7 +152,7 @@ Related topics
 
 .. END CONTENT
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 .. author: Jessica Valasek Estenssoro
 .. checked by: Mohan Chiriki

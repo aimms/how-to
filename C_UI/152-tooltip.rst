@@ -5,7 +5,7 @@ html tooltips
 
 .. sidebar:: Tool with a sharp tip
 
-    .. image:: ../Resources/C_UI/Images/152/TipOfASharpTool.jpg
+    .. image:: /Resources/C_UI/Images/152/TipOfASharpTool.jpg
 
 The power of HTML tooltips
 --------------------------

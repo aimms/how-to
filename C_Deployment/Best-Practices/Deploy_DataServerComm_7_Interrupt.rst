@@ -14,7 +14,7 @@ We saw how to remove the "Busy" veil during a solve process in a :doc:`previous 
 Implementation
 --------------
 
-.. image::  ../Resources/AIMMSPRO/Deploy_DataServerComm_7_Interrupt/Images/QueuesBetweenDataAndServerSession.png
+.. image::  /Resources/AIMMSPRO/Deploy_DataServerComm_7_Interrupt/Images/QueuesBetweenDataAndServerSession.png
 
 Interrupting the server session is very direct and can be done by using the AIMMS PRO library procedure, ``pro::client::StopExecution`` which requires you to specify two input arguments.  
 
@@ -39,7 +39,7 @@ This mechanism is illustrated in the code snippet below. Here, we interrupt only
 
 Now, you can link this procedure to a button in your WebUI application to be able to interrupt a solve procedure running in the backround.
 
-The example AIMMS project with the above demonstrated procedure implemented can be downloaded from :download:`8. Flow Shop - Interrupt <../Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/8. Flow Shop - Interrupt.zip>`.
+The example AIMMS project with the above demonstrated procedure implemented can be downloaded from :download:`8. Flow Shop - Interrupt </Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/8. Flow Shop - Interrupt.zip>`.
 
 Further reading
 ---------------
@@ -47,4 +47,4 @@ Further reading
 An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided in :doc:`Deploy_DataServerComm_8_PassNewData`.
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def

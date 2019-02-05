@@ -17,7 +17,7 @@ To view details about memory use, use the identifier cardinalities tool:
 
 This will give you an indication of the identifiers with most memory consumption. 
 
-.. figure:: ../Resources/C_Language/Images/170/GateAssignmentMemoryInUse.PNG
+.. figure:: /Resources/C_Language/Images/170/GateAssignmentMemoryInUse.PNG
 
     Data cardinalities tool for the Gate Assignment problem in the AIMMS Examples repo.
 
@@ -62,4 +62,4 @@ Related Topics
 * :doc:`134-Monitoring-Memory-Use`
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def

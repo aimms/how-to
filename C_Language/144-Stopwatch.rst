@@ -11,7 +11,7 @@
 
 .. sidebar:: Stopwatch
 
-    .. image:: ../Resources/C_Language/Images/144/stopwatch-156008_960_720.png
+    .. image:: /Resources/C_Language/Images/144/stopwatch-156008_960_720.png
             :scale: 50 %
             :align: center
 
@@ -78,9 +78,9 @@ To obtain the above code, please see the instructions in the post :doc:`145-impo
 If your project already contains the SI_Time quantity, please remove the quantity from the ``.ams`` file after downloading it.
 
 Example project:
-:download:`AIMMS project download <../Resources/C_Language/Images/144/Stopwatch.zip>` 
+:download:`AIMMS project download </Resources/C_Language/Images/144/Stopwatch.zip>` 
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 
