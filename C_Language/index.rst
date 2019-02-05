@@ -14,6 +14,15 @@ AIMMS Language
 .. toctree::
    :maxdepth: 1
 
+   104-creating-email-templates 
+   104-using-email-client-library 
+   119-Reproducible-Random-Sequence 
+   132-Repetive-Patterns-Model-Edit 
+   133-External-Functions-InputData 
+   145-import-export-section 
+   150-solve-in-loop 
+   153-external-haversine 
+   85-using-axll-library 
    121-set-index-element-parameter
    How to model categorization of objects
    141-element-after-last
