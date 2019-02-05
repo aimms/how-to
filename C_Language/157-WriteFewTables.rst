@@ -1,8 +1,8 @@
 Write Database Tables
-======================
+==============================
 
 .. meta::
-   :description: The combo of ReferencedIdentifiers, Datachange monitors and runtime libraries allows us to make a selection of database tables that actually need rewriting.
+   :description: Use existing AIMMS function to selectivly write to database tables whose data has changed.
    :keywords: database table, odbc, runtime library, model editing, AIMMS Language, execution efficiency
 
 .. sidebar:: Don't write on these tables. Thanks.
@@ -13,15 +13,14 @@ Write Database Tables
 
 The operation of writing to databases in AIMMS is tuned for performance. 
 
-Even when writing just a few rows, it takes time to set up a connection, write, and commit the transaction to the database. 
+In an application with several database table, it is not very efficient to write all database tables. Much more efficient is to skip writing to those tables where data has not changed.
 
-As applications gain functionality, the number of database tables in large applications grows. 
-If you find yourself working an application with 100 database tables, you will quickly favor a solution that skips writing database tables where the data is not changed. 
+To do so, you can use a combination of the function ``ReferencedIdentifiers``, the construct ``DatachangeMonitor``, and runtime libraries.
 
 Example of database tables
 --------------------------
 
-To illustrate the mechanism, here is a small example with just two database tables. The mechanism works the same for applications with dozens of database tables.
+Here is an example with two database tables. The mechanism works the same for any number of database tables.
 
 .. code-block:: aimms
    :linenos:
@@ -58,7 +57,7 @@ To illustrate the mechanism, here is a small example with just two database tabl
             searchAttrSet  ! (input) subset of AllAttributeNames
             recursive )    ! (optional) numerical expression
 
-      * Line 2: the identifiers to be searched; in our example this will be a singleton set containing just the database table to be investigated
+      * Line 2: the identifiers to be searched; here, a singleton set containing just the database table to be investigated
 
       * Line 3: the attributes to be searched; here, we search all attributes
 
@@ -84,17 +83,17 @@ However, we want to change it to something like this (in pseudo code):
 
 .. sidebar:: DatachangeMonitors
 
-    Datachange monitors track whether or not the data of a selection of identifiers was changed since the last time checked.
+    Datachange monitors track whether data of a selection of identifiers was changed since the last time checked.
 
     A datachange monitor consists of three components:
 
     #. A name - for sake of identification.
 
-    #. A reference to an AIMMS set - by having a reference, a data change monitor can even monitor dynamic subsets of ``AllIdentifiers``. (Yes, there are use cases of this feature.)
+    #. A reference to an AIMMS set - by having a reference, a data change monitor can even monitor dynamic subsets of ``AllIdentifiers``.
    
     #. An internal component that maintains for each identifier and the referenced set the number of assignments since the last reset.
 
-    The AIMMS function reference describes the procedures operating on datachange monitors in detail. In short:
+    The AIMMS function reference describes the procedures operating on datachange monitors in detail:
    
     * ``DataChangeMonitorHasChanged`` - returns 1 if the data of at least one identifier, or the data of the reference set itself, has changed.
 
@@ -102,7 +101,7 @@ However, we want to change it to something like this (in pseudo code):
 
     * ``DataChangeMonitorReset`` - resets a datachange monitor and links it to the same or another reference set
 
-    * ``DataChangeMonitorDelete`` - allows for cleanup!
+    * ``DataChangeMonitorDelete`` - allows for cleanup
 
 .. code-block:: none
    :linenos:
@@ -119,9 +118,7 @@ However, we want to change it to something like this (in pseudo code):
         }
     }
 
-You could do this manually, but it could lead to coding errors and, worse, maintenance problems.
-
-Luckily, AIMMS has the following facilities:
+To avoid coding errors and maintenance issues from doing this manually, AIMMS has the following facilities:
 
 * The predeclared function ``ReferencedIdentifiers`` (see sidebar) examines portions of AIMMS code and returns the identifiers referenced. 
 
@@ -188,13 +185,13 @@ An explanation of the contents for the database table ``db_ab`` follows below. I
 
 * line 4-7: A set declaration and definition for the identifiers referenced in the first table. 
 
-* line 15: A datachange monitor is created for table ``db_ab`` using the set ``MonitorSet_db_ab``.
+* line 15: Create a datachange monitor for table ``db_ab`` using the set ``MonitorSet_db_ab``.
 
 * line 21: Check if data is changed for table ``db_ab``.
 
 * line 22: Perform the actual write action.
 
-* line 23: Here, we mark the table as written.
+* line 23: Mark the table as written.
 
 * line 24: Reset the data change monitor.
 
@@ -302,9 +299,9 @@ Call to write the database tables
 Essentially just an apply statement of the procedure we created above.
 
 Example project
--------------------------
+-----------------
 
-The enclosed example shows how to do this.
+Download the attached project for an example.
 
 *  :download:`AIMMS project <../Resources/C_Language/Images/157/WriteOnlyAFewDatabaseTables.zip>` 
 
