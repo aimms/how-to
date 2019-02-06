@@ -22,7 +22,7 @@ AIMMS Language
    145-import-export-section 
    150-solve-in-loop 
    153-external-haversine 
-   85-using-axll-library 
+   85-using-axll-library
    121-set-index-element-parameter
    How to model categorization of objects
    141-element-after-last

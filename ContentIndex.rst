@@ -73,18 +73,18 @@ AIMMS Knowledge Center: How-To
         <a href="C_Solvers/index.html">
             <div class="box_home_page">
                 <h1 align="center">Solvers</h1>
-                <p>Selecting solvers</p>
+                <p>Selecting and calling solvers</p>
             </div>
         </a>
         <a href="C_Language/index.html">
             <div class="box_home_page">
-                <h1 align="center">Language</h1>
+                <h1 align="center">AIMMS Language</h1>
                 <p>Expressing a model in the AIMMS programming language</p>
             </div>
         </a>
         <a href="C_Connectivity/index.html">
             <div class="box_home_page">
-                <h1 align="center">Data Connections</h1>
+                <h1 align="center">Data Connection</h1>
                 <p>Connecting AIMMS to other sources with extensions, links, and libraries</p>
             </div>
         </a>

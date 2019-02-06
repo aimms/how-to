@@ -9,7 +9,7 @@
 .. |space| image:: ../Images/ThanksSmileySpace.gif
 
 
-Licensing
+Getting Started
 ========================
 
 
