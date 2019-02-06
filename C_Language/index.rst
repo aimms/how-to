@@ -41,6 +41,7 @@ AIMMS Language
    175-select-variables-and-constraints-for-math-program
    184-use-multiple-indices-for-set
    187-convert-string-to-number
+   188-use-nbest-operator
 
 .. Generate Random Numbers
  
