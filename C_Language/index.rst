@@ -40,6 +40,7 @@ AIMMS Language
    157-write-selected-tables
    175-select-variables-and-constraints-for-math-program
    184-use-multiple-indices-for-set
+   187-convert-string-to-number
 
 .. Generate Random Numbers
  
