@@ -44,6 +44,7 @@ AIMMS Language
    188-use-nbest-operator
    189-using-calendars-in-aimms
    190-empty-sets
+   191-handle-errors-and-warnings
 
 .. Generate Random Numbers
  
