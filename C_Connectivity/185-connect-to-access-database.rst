@@ -1,23 +1,41 @@
-Connect to Access database file via ODBC connection string
-==========================================================
-For a long time, AIMMS already has the possibility to retrieve/store data from/into any ODBC or OLEDB datasource. Originally, you could provide a UDL file (in case of OLEDB) or a System/User/File DSN (in case of ODBC).
+Connect to Access database file
+================================
 
-In case you deploy a project where the user of the project can actually choose which specific Access database file should be used, you either would have to generate the .dsn files based on this choice, or let the user choose the specific Access database file via the file selection wizards of the ODBC driver.
+.. meta::
 
-Since AIMMS 3.11, another possibility was introduced, namely generating the connection string within AIMMS itself. You could then base this connection string on some file that the end-user had selected. One very big advantage of creating such a connection string instead of using DSN files is that you don't have to include the database password in the plain-text DSN file if your database requires a password: you can keep this password hidden in the code of your project.
-
-These connection strings can be used in the Data Source attributes of all the database related identifiers AIMMS (e.g. tables, database procedures).
+ :description: How to connect to a MS Access database file via the ODBC connection string.
 
 
+AIMMS has the possibility to retrieve/store data from/into any ODBC or OLEDB datasource. You could provide a UDL file (in case of OLEDB) or a System/User/File DSN (in case of ODBC).
 
-To create a connection string for a given Access database file (*.mdb or *.accdb), the procedure CreateAccessFileConnectionString below uses the intrinsic AIMMS function SQLCreateConnectionString. The procedure will first query which ODBC drivers are available and then first tries to find the driver that supports the Office 2007 and later databases (i.e. the Access files that have the extension .accdb). If this driver cannot be found, it will search for the driver that supports .mdb files. If this also cannot be found, an error will be raised.
+This article shows how to generate a connection string to connect to an Access database via the ODBC layer. (However, you can use a similar approach to connect to any database, also via the OLEDB layer.)
 
-The procedure will have two arguments:
+When you deploy a project where the end-user can specify an Access database file, you have three options:
+* generate the DSN files based on the user's choice
+* let the user choose the specific Access database file via the file selection wizards of the ODBC driver
+* generate the connection string within AIMMS itself, based on the file that the user selected
 
-* AccessDatabaseFile: Input argument denoting which file to use,
-* ConnectionString: Output argument in which the connection string is stored.
+One advantage of creating a connection string instead of using DSN files is that you don't have to include the database password in the plain-text DSN file if your database requires a password; you can keep this password hidden in the code of your project.
 
-Furthermore, the procedure needs the following two local identifiers::
+These connection strings can be used in the *Data Source* attributes of all the database related identifiers AIMMS (e.g. tables, database procedures).
+
+
+
+To create a connection string for a given Access database file (*.mdb or *.accdb), the procedure ``CreateAccessFileConnectionString`` below uses the intrinsic AIMMS function ``SQLCreateConnectionString``. 
+
+The procedure will first query which ODBC drivers are available, and follow with these actions:
+
+1. try to find the driver that supports the Office 2007 and later databases (i.e. the Access files with extension .accdb) 
+2. if the driver cannot be found, search for the driver that supports .mdb files. 
+3. if that driver cannot be found, raise an error
+
+The procedure requires two arguments:
+
+* ``AccessDatabaseFile``: Input argument denoting which file to use,
+* ``ConnectionString``: Output argument in which the connection string is stored.
+
+Furthermore, the procedure needs the following two local identifiers:
+.. code-block:: aimms
 
   SET:
    identifier :  sODBCDrivers
@@ -27,7 +45,9 @@ Furthermore, the procedure needs the following two local identifiers::
    identifier :  epODBCDriver
    range      :  sODBCDrivers ;
 
-The source for the procedure is then as follows::
+The source for the procedure is then as follows:
+
+.. code-block:: aimms
 
   !Find all ODBC drivers
   while LoopCount <= SQLNumberOfDrivers( 'ODBC' ) do
@@ -67,8 +87,9 @@ The source for the procedure is then as follows::
 	DatabaseName                   :  AccessDatabaseFile,
 	AdditionalConnectionParameters :  ";DefaultDir=.\\") ;
 
-You can also download the .aim file below and import it into a section of your model. See the post "Exporting a section and importing it in another AIMMS project" for more information about importing the .aim file in your project.
+You can download the .aim file below and import it into a section of your model. 
 
-.. download
+.. See "Importing a section from another AIMMS project" for more information about importing the .aim file in your project.
 
-Note that the article shows how to generate a connection string to connect to an Access database via the ODBC layer. However, you can use a similar approach to connect to any database, also via the OLEDB layer.
+:download: `Resources/185-connect-to-access-database/CreateAccessFileConnectionString.aim`
+
