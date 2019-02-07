@@ -1,11 +1,12 @@
-Converting string to numerical value
+Convert string to numerical value
 =====================================
+This article explains how to convert a string representation of a number to a numerical value.
 
-There are various situations where you will have a number that is stored in a string parameter or an element in AIMMS. Although this string looks like the number, you can't directly use the numerical value it represents. You will need the val intrinsic function of AIMMS to convert the string representation of the number to a numerical value again.
+If a number may be stored in a string parameter or an element in AIMMS, you can't operate on the numerical value it represents. You can use the AIMMS intrinsic function ``val``.
 
+The example illustrates how to use the ``val`` function:
 
-
-A small example of how you use the val function is given below::
+.. code-block:: aimms
 
  mySet := { '3' , 'a' } ;
  myStringParameter := "5" ;
@@ -29,6 +30,7 @@ A small example of how you use the val function is given below::
  !of 'a' can't be computed
  myParameter := val(myElementParameter) ;
 
-To ensure the execution is not halted when the string or element you are trying to convert does not represent a number (like the last case in the above example), you can make use of the error handling functions introduced with AIMMS 3.10.
+To ensure the execution is not halted when the string or element you are trying to convert does not represent a number (like the last case in the above example), you can use `error handling functions <https://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_.
 
-Note that if you make your set a subset of the predefined set Integers you don't have to use the val function for conversion, but you can directly use an index or an element parameter of this set as a number.
+
+Note that if you make your set a subset of the predefined set ``Integers`` you don't have to use the ``val`` function for conversion, but you can directly use an index or an element parameter of this set as a number.
