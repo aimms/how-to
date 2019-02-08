@@ -30,7 +30,11 @@ The example illustrates how to use the ``val`` function:
  !of 'a' can't be computed
  myParameter := val(myElementParameter) ;
 
-To ensure the execution is not halted when the string or element you are trying to convert does not represent a number (like the last case in the above example), you can use `error handling functions <https://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_.
+To ensure the execution is not halted when the string or element you are trying to convert does not represent a number (like the last case in the above example), you can use :doc:`error handling functions <190-handle-errors-and-warnings>`.
 
 
 Note that if you make your set a subset of the predefined set ``Integers`` you don't have to use the ``val`` function for conversion, but you can directly use an index or an element parameter of this set as a number.
+
+Related Topics
+--------------
+* `AIMMS Function Reference <https://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_.
