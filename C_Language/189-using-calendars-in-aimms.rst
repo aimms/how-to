@@ -10,7 +10,7 @@ Using Calendars to produce your sets is a much better option.
 
 When declaring calendars, provide the unit of your calendar (e.g., hours / days / weeks) and when it starts and stops. Optionally, you can declare an index to be used in the index domain of other identifiers. An example of the declaration of a calendar is shown in the screenshot below. 
 
-.. image:: Images/189-using-calendars-in-aimms/calendar_attributes.png 
+.. image:: /Images/189-using-calendars-in-aimms/calendar_attributes.png 
 
 Note that the start and end date do not necessarily need to be provided as hard-coded strings (as shown in the image above), but can also be provided via string parameters. The input format for these start and end dates is fixed (i.e. ``YYYY-MM-DD HH:MM:SS``). However, the elements of set produced by the calendar will be formatted according to the timeslot format attribute. You can see the result of this formatting by viewing the data of the calendar identifier.
 
@@ -47,7 +47,7 @@ So if you have a calendar that has unit days and you want to find out the day in
 
 The data for these three parameters is shown below in a pivot table:
 
-.. image:: Images/189-using-calendars-in-aimms/timeslotcharacteristic-example.png 
+.. image:: /Images/189-using-calendars-in-aimms/timeslotcharacteristic-example.png 
 
 As you can see, the 24th of April 2013 is the 114th day of the year, the 24th day of the month, and the third day of the week (i.e. Wednesday). 
 

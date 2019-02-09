@@ -21,7 +21,7 @@ These connection strings can be used in the *Data Source* attributes of all the 
 
 
 
-To create a connection string for a given Access database file (*.mdb or *.accdb), the procedure ``CreateAccessFileConnectionString`` below uses the intrinsic AIMMS function ``SQLCreateConnectionString``. 
+To create a connection string for a given Access database file (.mdb or .accdb), the procedure ``CreateAccessFileConnectionString`` below uses the intrinsic AIMMS function ``SQLCreateConnectionString``. 
 
 The procedure will first query which ODBC drivers are available, and follow with these actions:
 

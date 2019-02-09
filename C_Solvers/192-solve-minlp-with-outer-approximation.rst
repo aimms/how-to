@@ -5,7 +5,9 @@ Solve MINLP problems with AOA
 
 For solving Mixed Integer Nonlinear Programming (MINLP) problems AIMMS offers, besides the solvers BARON and KNITRO, the AIMMS Outer Approximation algorithm, or AOA for short.
 
-There exist two versions of the AOA algorithm in AIMMS. The old version is available as a solver which calls the module OuterApproximation and was developed before GMP functionality was added to AIMMS. The new version uses GMP functions and has been implemented in the module GMPOuterApproximation. You can install this system module via *Menu > Settings > Install System Module* and select the GMP Outer Approximation Module to be installed. GMP-AOA is not a solver and cannot be called using the normal ‘solve’ statement. Instead you should use::
+There exist two versions of the AOA algorithm in AIMMS. The old version is available as a solver which calls the module OuterApproximation and was developed before GMP functionality was added to AIMMS. The new version uses GMP functions and has been implemented in the module GMPOuterApproximation. You can install this system module via *Menu > Settings > Install System Module* and select the GMP Outer Approximation Module to be installed. GMP-AOA is not a solver and cannot be called using the normal ï¿½solveï¿½ statement. Instead you should use:
+
+.. code-block:: aimms
 
  ! First we must generate the GMP for our MathProgram.
  myGMP := GMP::Instance::Generate( myMP ) ;
@@ -15,7 +17,7 @@ There exist two versions of the AOA algorithm in AIMMS. The old version is avail
 
 An example can be found in this ZIP file.
 
-.. download
+:download:`/Resources/192-solve-minlp-with-outer-approximation/alan.zip`
 
 There are several reasons why you should use GMP-AOA instead of old AOA. First, the GMP-AOA algorithm offers more possibilities to customize the algorithm to your needs, for example by using functions from the GMP library.
 
@@ -27,4 +29,6 @@ http://www.aimms.com/downloads/white-papers
 
 Old AOA cannot be combined with the nonlinear presolver nor the multi-start algorithm.
 
-Note: In the special case that the MINLP problem contains only convex quadratic and/or second-order cone constraints also linear solvers like CPLEX or GUROBI can be used.
+.. note::
+    
+     In the special case that the MINLP problem contains only convex quadmratic and/or second-order cone constraints also linear solvers like CPLEX or GUROBI can be used.

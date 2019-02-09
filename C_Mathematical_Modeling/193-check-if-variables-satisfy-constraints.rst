@@ -1,17 +1,26 @@
-Check if given variable values satisfy all constraints
-======================================================
+Check if variable values satisfy constraints
+==============================================
 
-Sometimes you might want to check whether a given combination of value assignments for the variables in your model actually satisfy all the constraints. One possibility is to add an assignment constraint for each of your variables that fixes the variable to the given value and then solve the model again. If the solver returns with the status infeasible, you know that these variables values do not satisfy all constraints and otherwise the values of the variables are a feasible solution for your model.
+This article explains how to check whether a given combination of value assignments for the variables in your model satisfy all the constraints to produce a feasible solution. 
 
-Another approach to figure out whether the given values for the variables are a feasible solution that requires no modifications to your actual model, is to make use of the GMP function GMP::Solution::Check.
+You could add an assignment constraint for each of your variables that fixes the variable to the given value and then solve the model again. If the solver returns with the status infeasible, you know that these variable values do not satisfy all constraints.
+
+Or, better yet, use the GMP function ``GMP::Solution::Check``.
 
 Suppose we have the following simple model:
-`\mathrm{min\ }x`
-s.t.
-`x + y \ge 5`
-`x,y \ge 0`
 
-and we want to check whether the assignment `x=1\ ,\ y=1` is actually a feasible solution. We must first add identifiers for the required variables (x,y,obj) and constraint to an AIMMS project. After that, you add a math program identifier that links these variables and constraints. Finally, we can then use the following code to actually check whether the assignment `x=1\ ,\ y=1` is a feasible solution::
+:math:`{min}x`
+|
+:math:`x + y \ge 5`
+:math:`x,y \ge 0`
+
+and we want to check whether the assignment :math:`x=1\ ,\ y=1` is actually a feasible solution. 
+
+First, add identifiers for the required variables ``(x,y,obj)`` and constraint to an AIMMS project. 
+
+Then, add a math program identifier that links these variables and constraints. 
+
+Finally, use the following code to check whether the assignment :math:`x=1\ ,\ y=1` is a feasible solution::
 
  !We want to check if x=1, y=1 is a feasible solution for our MathProgram
 
@@ -52,8 +61,9 @@ and we want to check whether the assignment `x=1\ ,\ y=1` is actually a feasible
   dialogMessage("Variable values are feasible for all constraints") ; 
  endif ; 
 
-After running the above code, you will get the message that assignment `x=1\ ,\ y=1` does not satisfy all the constraints.
+After running the above code, you will get the message that assignment :math:`x=1\ ,\ y=1` does not satisfy all the constraints.
 
-.. download
 
-You can download the above example code in a complete AIMMS project. Please note that this file can only be opened in AIMMS versions 3.11 and newer.
+The example code above is available in a complete AIMMS project, attached below.
+
+:download:`/Resources/193-check-if-variables-satisfy-constraints/Check-Solution.aimmspack`
