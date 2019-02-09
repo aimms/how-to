@@ -39,6 +39,12 @@ AIMMS Language
    109-convert-compound-sets
    157-write-selected-tables
    175-select-variables-and-constraints-for-math-program
+   184-use-multiple-indices-for-set
+   187-convert-string-to-number
+   188-use-nbest-operator
+   189-using-calendars-in-aimms
+   190-empty-sets
+   191-handle-errors-and-warnings
 
 .. Generate Random Numbers
  

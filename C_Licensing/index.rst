@@ -21,3 +21,4 @@ Getting Started
    89-academic-license
    105-adding-named-user-licenses
    106-install-network-license
+   186-keyboard-shortcuts-for-aimms
