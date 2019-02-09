@@ -1,5 +1,7 @@
 Handle errors and warnings
-=====================================
+===========================
+This article explains how to add custom warning messages for certain errors.
+
 When you send your AIMMS project into the world, errors will inevitably pop up from time to time. Users may provide the wrong kind of input for your model resulting in AIMMS throwing errors that your user may not understand. 
 
 Starting with AIMMS 3.10, we added error handling routines that allow you to not only catch existing AIMMS errors, but also raise your own errors.
@@ -62,4 +64,3 @@ Once that's done, you can catch errors and provide custom error messages:
 
 Now your user can easily figure out what's wrong.
 
-https://download.aimms.com/aimms/download/manuals/AIMMS3_LRB.pdf

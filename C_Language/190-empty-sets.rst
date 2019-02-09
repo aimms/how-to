@@ -1,7 +1,7 @@
 Remove elements from a set
 ==========================
 
-This article explains the possible behaviors the ``empty`` statement.
+This article explains the possible behaviors of the ``empty`` statement.
 
 To remove all the elements from a set, you can use the ``empty`` statement in AIMMS. 
 
@@ -24,7 +24,7 @@ Let's assume the following two identifiers:
    subset of  :  AllVariables
 
 
-As you can see, it holds that ``ActiveVariables `\subseteq` AllVariables `\subseteq` AllIdentifiers`` because the predefined set ``AllVariables`` is defined in AIMMS to be a subset of ``AllVariablesConstraints``, which in turn is a subset of ``AllIdentifiers``. You can verify this by opening the attribute window of these predefined sets.
+As you can see, it holds that ``ActiveVariables`` :math:`\subseteq` ``AllVariables`` :math:`\subseteq` ``AllIdentifiers`` because the predefined set ``AllVariables`` is defined in AIMMS to be a subset of ``AllVariablesConstraints``, which in turn is a subset of ``AllIdentifiers``. You can verify this by opening the attribute window of these predefined sets.
 
 This means that the ``empty`` statement behaves differently for ``NormalSet`` and ``ActiveVariables``, as explained below:
 
