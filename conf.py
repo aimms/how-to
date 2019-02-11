@@ -21,6 +21,8 @@ import sys
 from sphinx.builders import html as builders
 from sphinx.util import logging
 import pdb
+import subprocess
+
 
 # sys.path.insert(0, os.path.abspath('.'))
 
@@ -331,6 +333,18 @@ TEMPLATE = """<html>
 
 def generate_redirects(app):
     
+    logger = logging.getLogger(__name__)
+    
+
+    try:
+        #Creates the mapping file out of Git logs by launching a batch script, Assuming you have git installed on your computer...
+        subprocess.call([r'WebSite_Redirection_Mapping\\Run_generate_redirection_map.bat'], stdout=open(os.devnull, 'wb'))
+        logger.info("Redirection map file has been written in WebSite_Redirection_Mapping\\redirection_map.txt")
+    except:
+        logger.warning("Website Mapping file couldn't be generated. Please debug the generate_redirects() function in conf.py. Redirection mapping is ignored.")
+        pass
+        return
+        
     #pdb.set_trace()
     path = os.path.join(app.srcdir, app.config.redirects_file)
     if not os.path.exists(path):
@@ -345,7 +359,7 @@ def generate_redirects(app):
                  "by the 'html' builder. Skipping...")
         return
     
-    logger = logging.getLogger(__name__)
+    
     logger.info("Redirection Generation has started..." )
     redirects_counter = 0
     with open(path) as redirects:

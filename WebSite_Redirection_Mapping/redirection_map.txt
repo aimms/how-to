@@ -1,3 +1,30 @@
+C_Connectivity/118-Connect-SQLite.rst	C_Connectivity/Databases/118-Connect-SQLite.rst
+C_Connectivity/129-MSACCESS-32bit-64bit.rst	C_Connectivity/Databases/129-MSACCESS-32bit-64bit.rst
+C_Connectivity/122-AXLL-Library.rst	C_Connectivity/Excel and CSV/122-AXLL-Library.rst
+C_Connectivity/85-using-axll-library.rst	C_Connectivity/Excel and CSV/85-using-axll-library.rst
+C_Connectivity/how to work with csv files.rst	C_Connectivity/Excel and CSV/how to work with csv files.rst
+C_Connectivity/104-creating-email-templates.rst	C_Connectivity/Send E-mail/104-creating-email-templates.rst
+C_Connectivity/104-using-email-client-library.rst	C_Connectivity/Send E-mail/104-using-email-client-library.rst
+C_Deployment/114-execute.rst	C_Connectivity/114-execute.rst
+C_Deployment/115-Securing-File-Access.rst	C_Deployment/PRO storage/115-Securing-File-Access.rst
+C_Deployment/117-Uploading-and-Downloading-files.rst	C_Deployment/PRO storage/117-Uploading-and-Downloading-files.rst
+C_Deployment/120-pro-user-groups.rst	C_Deployment/PRO storage/120-pro-user-groups.rst
+C_Deployment/166-SharingIsRewarding.rst	C_Deployment/PRO storage/166-SharingIsRewarding.rst
+C_Deployment/155-Catering-unresponsive-server-unstable-connection.rst	C_Deployment/advanced use of DelegateToServer/155-Catering-unresponsive-server-unstable-connection.rst
+C_Deployment/ReceiveMessages.rst	C_Deployment/advanced use of DelegateToServer/ReceiveMessages.rst
+C_Deployment/RegularJob.rst	C_Deployment/advanced use of DelegateToServer/RegularJob.rst
+C_Deployment/128-Intellectual-Property.rst	C_Deployment/best practises/128-Intellectual-Property.rst
+C_Deployment/151-version-control-aimmspack-backup.rst	C_Deployment/best practises/151-version-control-aimmspack-backup.rst
+C_Deployment/159-exchange-data-with-cloud.rst	C_Deployment/best practises/159-exchange-data-with-cloud.rst
+C_Deployment/Deploy_DataServerComm_1_Publish.rst	C_Deployment/client-server communication/Deploy_DataServerComm_1_Publish.rst
+C_Deployment/Deploy_DataServerComm_2_Develop.rst	C_Deployment/client-server communication/Deploy_DataServerComm_2_Develop.rst
+C_Deployment/Deploy_DataServerComm_2a_ReducedCases.rst	C_Deployment/client-server communication/Deploy_DataServerComm_2a_ReducedCases.rst
+C_Deployment/Deploy_DataServerComm_3_RemoveVeil.rst	C_Deployment/client-server communication/Deploy_DataServerComm_3_RemoveVeil.rst
+C_Deployment/Deploy_DataServerComm_4_LoadResults.rst	C_Deployment/client-server communication/Deploy_DataServerComm_4_LoadResults.rst
+C_Deployment/Deploy_DataServerComm_5_Progress.rst	C_Deployment/client-server communication/Deploy_DataServerComm_5_Progress.rst
+C_Deployment/Deploy_DataServerComm_6_Retrieve.rst	C_Deployment/client-server communication/Deploy_DataServerComm_6_Retrieve.rst
+C_Deployment/Deploy_DataServerComm_7_Interrupt.rst	C_Deployment/client-server communication/Deploy_DataServerComm_7_Interrupt.rst
+C_Deployment/Deploy_DataServerComm_8_PassNewData.rst	C_Deployment/client-server communication/Deploy_DataServerComm_8_PassNewData.rst
 C_Language/104-creating-email-templates.rst	C_Connectivity/104-creating-email-templates.rst
 C_Language/104-using-email-client-library.rst	C_Connectivity/104-using-email-client-library.rst
 C_Language/135-UTF8-Encoding.rst	C_Connectivity/135-UTF8-Encoding.rst
