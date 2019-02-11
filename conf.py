@@ -315,7 +315,7 @@ else:
 
 # Generate redirects from old URLs
 
-redirects_file = "moved_files_log.log"
+redirects_file = "WebSite_Redirection_Mapping\\redirection_map.txt"
 
 """
     sphinxcontrib.redirects
@@ -327,7 +327,7 @@ redirects_file = "moved_files_log.log"
 """
 
 TEMPLATE = """<html>
-  <head><meta http-equiv="refresh" content="0; url=%s"/></head>
+  <head><meta http-equiv="refresh" content="0; url=/%s"/></head>
 </html>
 """
 
@@ -335,15 +335,16 @@ def generate_redirects(app):
     
     logger = logging.getLogger(__name__)
     
-
-    try:
-        #Creates the mapping file out of Git logs by launching a batch script, Assuming you have git installed on your computer...
-        subprocess.call([r'WebSite_Redirection_Mapping\\Run_generate_redirection_map.bat'], stdout=open(os.devnull, 'wb'))
-        logger.info("Redirection map file has been written in WebSite_Redirection_Mapping\\redirection_map.txt")
-    except:
-        logger.warning("Website Mapping file couldn't be generated. Please debug the generate_redirects() function in conf.py. Redirection mapping is ignored.")
-        pass
-        return
+    #only if not on Linux (Gitlab computers)
+    if os.name == 'nt':
+        #Generates the mapping file out of Git logs by launching a batch script, Assuming you have git installed on your computer... 
+        try:
+            subprocess.call([r'WebSite_Redirection_Mapping\\Run_generate_redirection_map.bat'], stdout=open(os.devnull, 'wb'))
+            logger.info("Redirection map file has been written in WebSite_Redirection_Mapping\\redirection_map.txt")
+        except:
+            logger.warning("Website Mapping file couldn't be generated. Please debug the generate_redirects() function in conf.py. Redirection mapping is ignored.")
+            pass
+            return
         
     #pdb.set_trace()
     path = os.path.join(app.srcdir, app.config.redirects_file)
