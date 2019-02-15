@@ -1,0 +1,1 @@
+cmd /c ""C:\Program Files\Git\bin\bash.exe" --login -i -- WebSite_Redirection_Mapping\\generate-redirection-map.sh"
