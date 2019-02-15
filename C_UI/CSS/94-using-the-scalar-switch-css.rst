@@ -2,7 +2,7 @@
 .. BEGIN CONTENT
 
 Display an On/Off Switch in Widgets
-===================================
+======================================
 .. meta::
    :description: How to create an on/off toggle switch with CSS in AIMMS WebUI widgets.
    :keywords: css, widget, webui, binary, switch, toggle, slider, selector
@@ -12,7 +12,7 @@ Identifiers with ``binary`` range are displayed as checkboxes in table and scala
 .. image:: /Images/94-using-the-scalar-switch-css/binary-switch.png
     :align: center
 	
-Creating a binary switch
+Creating a Binary Switch
 --------------------------------------
 To render on/off switches in your AIMMS project, follow the steps below.
 
@@ -20,16 +20,16 @@ To render on/off switches in your AIMMS project, follow the steps below.
    
    2. Download the example CSS file for the appropriate widget type:
    
-		 :download:`scalar-binary-switch.css </Resources/UI/Downloads/css/scalar-binary-switch.css>`
-		 
-		 :download:`table-binary-switch.css </Resources/UI/Downloads/css/table-binary-switch.css>`
+      :download:`scalar-binary-switch.css </Resources/UI/Downloads/css/scalar-binary-switch.css>`
+      
+      :download:`table-binary-switch.css </Resources/UI/Downloads/css/table-binary-switch.css>`
 		    
-   3. Copy the downloaded CSS file(s) to ``MainProject\WebUI\resources\css`` in your project.
+   3. Place the downloaded CSS file(s) in the ``MainProject\WebUI\resources\css`` folder of your project.
    
 Based on the code contained in the CSS file(s), WebUI renders a switch for all identifiers with a binary range in a scalar and/or pivot table widget.
 
 
-Customizing the binary switch
+Customizing the Binary Switch
 -----------------------------------------------
 You can modify the CSS used to make the switch in many ways. For example, to create the switch for pivot table widgets, to change the color of the switch, or apply the switch rules only to some widgets.
 
@@ -70,11 +70,7 @@ The additional tag ``[data-widget\.uri*="Switch"]`` in all snippets identifies w
 
 This "filter" replaces the checkboxes with switches only when ``Switch`` is in the widget name. The filter is **case sensitive**.
 
-
-
-Last Updated: December 11, 2018 in AIMMS Version 4.61.3.0
-
-Related topics
+Related Topics
 -----------------
 * **AIMMS Documentation:** `Widget Options <https://manual.aimms.com/webui/widget-options.html>`_
 * **AIMMS Documentation:** `Scalar Widget <https://manual.aimms.com/webui/scalar-widget.html>`_
