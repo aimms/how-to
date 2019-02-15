@@ -104,7 +104,7 @@ Solution:
 ^^^^^^^^^^
 Ensure you are connected to your university network and try activation again.
 
-If the IP subnet error occurs even when connected to your university network, contact `AIMMS Support <mailto:support@aimms.com>`_ and provide the following information:
+If the IP subnet error occurs even when connected to your university network, contact AIMMS Support by sending an e-mail to support@aimms.com and provide the following information:
 
 * Your name
 * Email address used for registration
