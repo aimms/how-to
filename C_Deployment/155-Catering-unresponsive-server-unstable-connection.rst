@@ -30,11 +30,11 @@ The example app executes a procedure on the PRO Server upon pressing the button.
 
 .. code-block:: aimms
 
-    Procedure pr_Computation {
-        Body: {
-            pi := 3.14159265359 ;
-        }
-    }
+   Procedure pr_Computation {
+      Body: {
+         pi := 3.14159265359 ;
+      }
+   }
 
 We will now explain bottom up the procedure calls:
   

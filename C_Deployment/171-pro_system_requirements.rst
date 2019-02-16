@@ -1,3 +1,5 @@
+:orphan:
+
 How to size your hardware for AIMMS PRO Server
 ==================================================
 

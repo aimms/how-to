@@ -37,10 +37,6 @@ AIMMS Language
    131-Formulas-as-Data
    109-deprecate-compound-sets-overview
    109-convert-compound-sets
-<<<<<<< HEAD
-   157-WriteFewTables
-   172-use-stop-criteria
-=======
    157-write-selected-tables
    175-select-variables-and-constraints-for-math-program
    184-use-multiple-indices-for-set
@@ -49,7 +45,7 @@ AIMMS Language
    189-using-calendars-in-aimms
    190-empty-sets
    191-handle-errors-and-warnings
->>>>>>> 859923661fd16674e3d72f1d74faee94bffcf52a
+   172-use-stop-criteria
 
 .. Generate Random Numbers
  
