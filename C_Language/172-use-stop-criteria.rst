@@ -1,7 +1,7 @@
 How to set Stop Criteria for Math Programs 
 ==============================================
 
-When you solve a Mathematical Program in AIMMS, the default behavior is that AIMMS will let the solver solve the problem to (local) optimality. There might be situations where you want to stop the solve procedure after a set time period, or once a solution within 10% of the best value is available. This article will show you how to apply different stop criteria to a ``solve`` statement in AIMMS.
+When you solve a Mathematical Program in AIMMS, the default behavior is that AIMMS will let the solver solve the problem to (local) optimality. There might be situations where you want to stop the solve procedure after a set time period, or once a solution within x % of the best value is available. This article will show you how to apply different stop criteria to a ``solve`` statement in AIMMS.
 
 
 Available Stop Criteria
@@ -36,6 +36,3 @@ All of these stop criteria are options in your AIMMS project. This means that th
 .. code-block:: aimms
 
    solve MathProg where MIP_Relative_Optimality_Tolerance := 0.1, time_limit := 10 ;
-
-
-.. An explanation of this approach is shown in the article "Using block statement to temporary use other project settings".
