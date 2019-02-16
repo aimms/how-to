@@ -9,7 +9,7 @@ Sharing is rewarding
 
 .. sidebar:: Sharing ideas
 
-    .. figure:: ../Resources/C_Deployment/Images/166/Women_Inspired_Health_and_Community_2016_45.jpg
+    .. figure:: /Resources/C_Deployment/Images/166/Women_Inspired_Health_and_Community_2016_45.jpg
     
             Picture by: http://projectpinkblue.org/
 
@@ -31,22 +31,24 @@ In this section we determine with whom we are sharing our files.
 .. code-block:: aimms
     :linenos:
 
-    ! Ensure all entities are known.
+    ! Ensure all AIMMS PRO entities are known.
+    ! Examples of AIMMS PRO entities are the users and the groups.
     guipro::PopulateEntitySets( addUniversalSets:1 );
 
-    ! Get the "users" group(s) and the "domain users" group(s).
+    ! Get the "users" group(s) and the "domain users" group(s) into an AIMMS set.
+    ! Note that s_UserEntities is a subset of the set guipro::PROEntity 
     s_UserEntities :=  { guipro::PRO_ENT | 
         ( StringToLower( guipro::PROEntityName( guipro::PRO_ENT ) ) = "users"        ) or 
         ( StringToLower( guipro::PROEntityName( guipro::PRO_ENT ) ) = "domain users" )    } ;
 
-* Line 2: This call to AIMMS PRO, via AIMMS PRO UI, is needed to retrieve the number / name / property list of all AIMMS PRO entities. AIMMS PRO entity is a group or an individual.
+* Line 3: This call to AIMMS PRO, via AIMMS PRO UI, is needed to retrieve the number / name / property list of all AIMMS PRO entities. AIMMS PRO entity is a group or an individual.
 
-* Line 5 - 7: AIMMS set notation to find those groups that are called ``users`` or ``domain users``.
+* Line 7 - 9: AIMMS set notation to find those groups that are called ``users`` or ``domain users``.
 
 So what is the code to open up for our peers?
 -----------------------------------------------------
 
-Now that we identified the groups in which our peers can be found, we need to determine 
+Now that we identified the groups in which our peers can be found, we can construct an authorization string that permits a user in any of these two groups access.
 
 .. code-block:: aimms
     :linenos:
@@ -55,13 +57,15 @@ Now that we identified the groups in which our peers can be found, we need to de
     for i_UE do ! For each user group:
         sp_AuthUsersRWX += formatString("#7+%e", i_UE );
     endfor ;
+    
+In 
 
 Resource for this article
 -------------------------
 
 The enclosed example shows how to do this.
 
-*  :download:`AIMMS project <../Resources/C_Language/Images/157/WriteOnlyAFewDatabaseTables.zip>` 
+*  :download:`AIMMS project </Resources/C_Language/Images/157/WriteOnlyAFewDatabaseTables.zip>` 
 
 Summary
 ---------
@@ -87,5 +91,5 @@ More information can be found in the following references.
 
 * :doc:`115-Securing-File-Access` 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 

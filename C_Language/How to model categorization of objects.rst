@@ -44,7 +44,7 @@ Solution
 
 One way to do this is to define OrderSize as an element parameter which lets us assign a set element to an indexed parameter. A parameter type identifier is used to store numerical values, an element parameter type identifier is used to store elements of a set, and a string parameter type identifier is used to store string values like the name suggests. Remember to use an element parameter even if your set contains numerical elements.
 
-In the :download:`Category Modelling Example AIMMS Project <../Resources/Modelling/ElementParameter/Downloads/CategoryModelling.zip>`, you have sets ``sSizes`` and ``sOrders`` with ``s`` and ``o`` as indices respectively. Price per size is stored in the indexed parameter ``pPrice(s)``. 
+In the :download:`Category Modelling Example AIMMS Project </Resources/Modelling/ElementParameter/Downloads/CategoryModelling.zip>`, you have sets ``sSizes`` and ``sOrders`` with ``s`` and ``o`` as indices respectively. Price per size is stored in the indexed parameter ``pPrice(s)``. 
 
 Order size for each order is stored in an element parameter ``epOrderSize(o)`` which has the attribute `range` defined as as ``sSizes``. The `range` attribute is mandatory for an element parameter and it should be defined as the set which contains the elements to be stored in that element parameter. In this example, since order sizes small, medium, and large are elements in the set ``sSizes``, the `range` for ``epOrderSize`` is ``sSizes``. 
 
@@ -63,15 +63,9 @@ For each `o`, the corresponding `s` is mapped using the element parameter `epOrd
 
 The resulting data page of the parameter ``pOrderCost(o)`` will look as below, with the expected mapping. 
 
-.. image:: ../Resources/Modelling/ElementParameter/Images/FinalResult.png
+.. image:: /Resources/Modelling/ElementParameter/Images/FinalResult.png
 	:align: right
 
-.. .. raw:: html 
-   
-..    <body>
-..       <img src="_build\html\_images\set-god.png" alt="test" align="right" />
-..    </body>
-      
 
 .. Another method to model category mapping is to use a binary parameter indexed over the orders and sizes. A binary parameter is a regular `parameter` with range set as binary, meaning that only the values 0 or 1 are allowed. 
 .. Should I write this part too ? 
@@ -83,7 +77,7 @@ The resulting data page of the parameter ``pOrderCost(o)`` will look as below, w
 .. one more just for the sake of it.
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 .. do not delete this last line
 

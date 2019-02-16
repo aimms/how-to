@@ -169,7 +169,7 @@ html_theme_options = {
     'header_links' : [
        ('Support Home', 'ContentIndex', False, 'home'),
        ("AIMMS Home", "https://aimms.com", True, 'change_history'),
-       ("AIMMS Examples", "https://github.com/aimms/examples", True, 'link')
+       ("AIMMS Examples", "https://aimms.com/english/developers/resources/examples/", True, 'link')
     ],
 
 

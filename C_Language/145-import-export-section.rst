@@ -11,7 +11,7 @@
 
 .. sidebar:: Re-using AIMMS source code.
 
-    .. image:: ../Resources/C_Language/Images/145/Copy_font_awesome_200_.svg.png
+    .. image:: /Resources/C_Language/Images/145/Copy_font_awesome_200_.svg.png
     		    	:align: center
 
 
@@ -61,6 +61,6 @@ After this, AIMMS will present you with a dialog that shows which identifiers wi
     When using the source file attribute of a section, you can store the contents of the section in a separate file (if you do not use the "Remove (keep subtree)..."). Please note that if you use an .ams file for the source file attribute, changes that are made to this text file with any other program (e.g. a text editor or version management system) while the AIMMS project is open will not be picked up by AIMMS! Only after you close and re-open the project, will these changes be visible in your project.
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 

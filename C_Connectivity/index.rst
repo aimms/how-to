@@ -1,4 +1,3 @@
-
 .. |aimmsIcon| image:: ../Images/icons/favicon.png
             :scale: 15 %
 
@@ -6,7 +5,7 @@
                 :scale: 10 %
                 :target: https://aimms.com/
 
-Connectivity
+Data Connection
 ========================
 
 .. toctree::
@@ -16,3 +15,6 @@ Connectivity
    122-AXLL-Library
    how to work with csv files
    129-MSACCESS-32bit-64bit
+   185-connect-to-access-database
+   /C_Deployment/159-exchange-data-with-cloud
+   

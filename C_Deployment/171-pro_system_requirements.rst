@@ -1,7 +1,7 @@
 How to size your hardware for AIMMS PRO Server
 ==================================================
 
-`The AIMMS PRO documentation <https://manual.aimms.com/pro/system-requirements.html>`_ details the minimum system requirements for client-side and server-side machines used for AIMMS PRO. However, the memory and CPU requirements of the back-end server where all the solve procedures is heavily dependent on the size of your AIMMS model(s). This article will help you determine the system requirements of the machine on which the AIMMS PRO Server will reside. 
+`The AIMMS PRO documentation <https://manual.aimms.com/pro/system-requirements.html>`_ details the minimum system requirements for client-side and server-side machines used for AIMMS PRO. However, the memory and CPU requirements of the back-end server where all the solve procedures are executed is heavily dependent on the size of your AIMMS model(s). This article will help you determine the system requirements of the server-side machine.
 
 .. note::
 
@@ -19,10 +19,10 @@ The key components to consider for a WebUI application are
       * Can be monitored using AIMMS Progress Window (the Peak Mem metric)
 
 #. Average CPU usage of a data session
-      Can be monitored using the Windows Task Manager
+      * Can be monitored using the Windows Task Manager
 
 #. Average CPU usage of the solver session
-      Can be monitored using the Windows Task Manager
+      * Can be monitored using the Windows Task Manager
 
 #. Maximum number of concurrent data sessions
 #. Maximum number of concurrent solver sessions 

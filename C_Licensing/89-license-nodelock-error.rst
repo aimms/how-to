@@ -86,7 +86,7 @@ Related issues:
 
 .. END CONTENT
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 .. author: Jessica Valasek Estenssoro
 .. checked by: Khang Bui

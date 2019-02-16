@@ -44,7 +44,7 @@ You can open *Page Manager* with the ``F9`` key or from the menu in *Tools > Pag
 
 .. END CONTENT
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 .. author: Jessica Valasek Estenssoro
 .. checked by: -Khang Bui

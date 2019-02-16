@@ -11,7 +11,7 @@
 
 .. sidebar:: Pointing at something.
 
-    .. image:: ../Resources/C_Language/Images/146/hand-pointing-right.png
+    .. image:: /Resources/C_Language/Images/146/hand-pointing-right.png
 
 With the addition of Model Edit Functions (MEF), a lot of things that were previously impossible to do with AIMMS became possible.
 
@@ -108,9 +108,9 @@ The above procedure can now be called with the following example code:
 
 Keep in mind that the above code does not do any error checking. This means that you could try to assign the value of a string parameter to a numerical parameter, which would result in a runtime error. Other possibilities are that the body of the runtime procedure contains a syntax error, in which case the me::compile statement will result in an error. Please see the `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_ (section "Raising and handling warnings and errors") for more information on handling such errors with the AIMMS error handling.
 
-A complete project containing the above source can be :download:`downloaded <../Resources/C_Language/Images/146/ValueDynamicIdentifier.zip>` 
+A complete project containing the above source can be :download:`downloaded </Resources/C_Language/Images/146/ValueDynamicIdentifier.zip>` 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 
 

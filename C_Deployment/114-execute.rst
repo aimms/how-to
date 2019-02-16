@@ -11,7 +11,7 @@
 
 .. sidebar:: Executing another program
 
-    .. image:: ../Resources/C_Deployment/Images/114/exe-file-icon-68130.png
+    .. image:: /Resources/C_Deployment/Images/114/exe-file-icon-68130.png
 
 AIMMS provides a good selection of functions, such as arithmetic functions, string manipulation functions, time functions, distribution functions, file functions, and more, for app developers to build prescriptive analytics applications.
 
@@ -53,6 +53,6 @@ Similarly, you can use the Execute function to call Python to run a ".py" file. 
 Besides calling the EXE file of an installed program, you can also build your own executable file in various programming languages and tools, and use the Execute function to call it.
 
 
-.. include:: ../includes/form.def
+.. include:: /includes/form.def
 
 
