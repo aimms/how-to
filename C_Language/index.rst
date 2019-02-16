@@ -45,7 +45,6 @@ AIMMS Language
    189-using-calendars-in-aimms
    190-empty-sets
    191-handle-errors-and-warnings
-   172-use-stop-criteria
 
 .. Generate Random Numbers
  

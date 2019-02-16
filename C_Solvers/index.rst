@@ -19,7 +19,9 @@ Solvers
    BasicSolverLoggingIDE
    BasicSolverLoggingPRO
    147-GMP-Intro
+   172-use-stop-criteria
    139-Multiple-Solutions
+   177-alternative-mip-solutions-with-cplex
    116-Benders-CPLEX
    126-TSP-Lazy-Constraints
    136-Infeasible-Unbounded
