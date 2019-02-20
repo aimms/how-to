@@ -319,6 +319,9 @@ Related Topics
 
 
 
+<<<<<<< HEAD:C_Language/157-WriteFewTables.rst
+.. include:: ../includes/form.def
+=======
 .. include:: /includes/form.def
 
 
@@ -342,3 +345,4 @@ Related Topics
 
 
 
+>>>>>>> 859923661fd16674e3d72f1d74faee94bffcf52a:C_Language/157-write-selected-tables.rst

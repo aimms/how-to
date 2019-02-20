@@ -5,6 +5,7 @@ Troubleshooting Unresponsive Applications
    :description: The AIMMS Error handling permits explicit recoveries, controlled by the end user, of abnormal environment and system conditions.
    :keywords: error handling, time out, timed out, server session, AIMMS Deployment
 
+.. index:: PRO, DelegateToServer, Error Handling
 
 Executing a ``pro::DelegateToServer`` from a WinUI AIMMS app launched from a distant AIMMS PRO server may fail due to various causes. 
 In this article, we discuss one potential cause for an app not responding for more than a minute after the ``DelegateToServer`` call - an unstable internet connection. Wireless connections are more likely to be unstable compared to wired connections. 
@@ -29,11 +30,11 @@ The example app executes a procedure on the PRO Server upon pressing the button.
 
 .. code-block:: aimms
 
-    Procedure pr_Computation {
-        Body: {
-            pi := 3.14159265359 ;
-        }
-    }
+   Procedure pr_Computation {
+      Body: {
+         pi := 3.14159265359 ;
+      }
+   }
 
 We will now explain bottom up the procedure calls:
   
