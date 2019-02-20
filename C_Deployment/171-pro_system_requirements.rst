@@ -31,19 +31,38 @@ The key components to consider for a WebUI application are
 
 The memory and CPU usage of a single data session multiplied by the maximum number of data sessions gives the peak resource requirement by the data sessions. Likewise for the solver sessions. In addition to the data and solver sessions, the AIMMS PRO Server installation has its own requirements of 3 GB memory and 1 core of CPU. 
 
-.. todo::
+**memory_required(GB) >= peak_memory_data_session * number_data_sessions + peak_memory_solver_session * number_solver_sessions + 3**
 
-   Insert equation:
-
-   Memory required >= Peak memory(data session)*max number of data sessions + Peak memory(solver session)*max number of solver sessions + 3 GB for PRO Server 
-
-   CPU cores required >= Average CPU usage(data session)*max number of data sessions + Average CPU usage(solver session)*max number of solver sessions + 1 core for PRO Server
+**cores_required >= avg_cpu_usage_data_session * number_data_sessions + avg_cpu_usage_solver_session * number_solver_sessions + 1**
 
 Example
 -------------
 
-A typical data session's peak memory usage is usually upwards of 200 mb and a typical solver session can consumer up to a few gb of memory. To let 40 
+Let us consider a typical application for 20 concurrent data sessions and 2 concurrent solver sessions with metrics as below: 
+
+* peak_memory_data_session = 0.5 GB
+* peak_memory_solver_session = 2 GB 
+* avg_cpu_usage_data_session = 0.2 core
+* avg_cpu_usage_solver_session = 1 core 
+* max_number_data_sessions = 20 
+* max_number_of_solver_sessions = 2
+
+Substituting these numbers in the above equations, we get: 
+
+**memory_required >= 0.5 GB * 20 + 2 GB * 2 + 3 = 17 GB**
+
+**cores_required >= 0.2*20 + 1*2 + 1 = 7**
+
+Summary
+-----------
+
+Based on the calculations, a server machine for the above example use case will need at least 17 GB memory and 7 cores. You have to remember that this is one possible configuration and not necessarily the best one. Having fewer concurrent solver sessions than concurrent data sessions will result in a waiting time for some of the users. Depending on the runtime of the solve procedure and the acceptable waiting times for your users, choose the number of concurrent solver sessions that you want to purchase. The server size will also increase with each additional solver session added to the configuration. 
+
+Read more about the queueing on AIMMS PRO `here <https://manual.aimms.com/pro/config-sections.html#queue-priority-settings>`_
 
 
+.. todo:: 
 
+   Discuss effect of parallel threading on solve runs and the additional memory / cores required to do this ? Perhaps in a separate article ?
 
+   https://www-01.ibm.com/support/docview.wss?uid=swg21653811
