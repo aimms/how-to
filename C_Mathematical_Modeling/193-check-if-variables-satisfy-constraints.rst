@@ -1,6 +1,11 @@
 Check if variable values satisfy constraints
 ==============================================
 
+.. meta::
+   :description: Before solving a mathematical program, you can check whehter the current values satisfy some or all of the constraints.
+   :keywords: validation, initial value, checking mathematical programming instance
+
+
 This article explains how to check whether a given combination of value assignments for the variables in your model satisfy all the constraints to produce a feasible solution. 
 
 You could add an assignment constraint for each of your variables that fixes the variable to the given value and then solve the model again. If the solver returns with the status infeasible, you know that these variable values do not satisfy all constraints.

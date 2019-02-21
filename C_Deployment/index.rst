@@ -1,4 +1,3 @@
-
 .. |aimmsIcon| image:: ../Images/icons/favicon.png
             :scale: 15 %
 
@@ -6,10 +5,9 @@
                 :scale: 10 %
                 :target: https://aimms.com/
 
-.. _ref-deployment:
-
 Deployment
 ========================
+.. _ref-deployment:
 
 .. toctree::
    :maxdepth: 1
@@ -23,5 +21,7 @@ Deployment
    ReceiveMessages
    114-execute
    159-exchange-data-with-cloud
-   155-Catering-unresponsive-server-unstable-connection 
+   155-Catering-unresponsive-server-unstable-connection
    Best-Practices/index
+
+
