@@ -5,7 +5,7 @@ How to change the default solver
    :description: How to change the default solver used for each type of mathematical program.
    :keywords: mathematics, solver, mathematical program
 
-.. image:: /Resources/C_Solvers/Images/178/solverselection.png
+.. image:: /images/solverselection.png
 
 Introduction
 --------------
