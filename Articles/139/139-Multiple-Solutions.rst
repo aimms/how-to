@@ -7,11 +7,11 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on December 11, 2012 by Guido Diepen.
+	This article was originally posted to the AIMMS Tech Blog.
 
 .. sidebar:: 8 Queens Solution
 
-    .. image:: /Resources/C_Solvers/Images/139/Eight-Queens-Solution.png
+    .. image:: /images/Eight-Queens-Solution.png
 
 Some of the solvers in AIMMS, including the CP Optimizer solver for Constraint Programming problems, support not only returning a single (optimal) solution, but also a pool of feasible solutions.
 
@@ -46,11 +46,11 @@ After the solve is finished, you can use the AIMMS function ``GMP::Solution::Sen
     endwhile ;
 
 Below you can download the aimmspack containing the modified version of the original project from Hakan.
-:download:`AIMMS project download </Resources/C_Solvers/Images/139/NQueens_converted.zip>` 
+:download:`AIMMS project download </downloads/NQueens_converted.zip>` 
 
 Another small modification I made to the project is that it graphically shows the locations of the queens on a chessboard. This allows to quickly compare different solutions, as depicted below:
 
-.. figure:: /Resources/C_Solvers/Images/139/nqueens-solution.png
+.. figure:: /images/nqueens-solution.png
 
     Graphical representation of NQueens solution
 

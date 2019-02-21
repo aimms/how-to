@@ -7,20 +7,7 @@
 
       .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on January 21, 2014 by Chris Kuip.
-
-.. meta::
-   :description: 
-   :keywords:
-
-      .. note::
-
-	This article was originally posted to the AIMMS Tech Blog on - by -.
-
-.. sidebar:: Make connection
-
-    .. image:: /Resources/C_Language/Images/133/5.10_Road_sign.gif
-        :align: center
+	This article was originally posted to the AIMMS Tech Blog.
 
 
 Data exchange is an essential part of every application. AIMMS supports various industry standards for data exchange, such as ODBC for databases, XML Files and spreadsheets. But what if the data is not stored according to one of these standards? In order to read data from an arbitrary data source, AIMMS offers access to self-developed or third party functions. This blog post provides an overview of the steps you need to take to create a data exchange link between a proprietary data format and AIMMS. The process is illustrated by using a concrete modeling exercise from the Constraint Programming example library CSPLIB.  

@@ -7,13 +7,7 @@
 
       .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on August 21, 2014 by Chris Kuip.
-
-.. sidebar:: Mathematics as taught
-
-    .. image:: /Resources/C_Language/Images/131/mathematics-327488_150.jpg
-            :align: center
-            :scale: 150 %
+	This article was originally posted to the AIMMS Tech Blog.
 
 
 A mathematical formula is considered data within an application when it is read in as a string during the application's runtime, and subsequently used in the construction of selected assignments and constraints. The concept "Formulas as Data" can be applied to several optimization apps, for instance those that deal with "Blending on Specification" and "Asset Management." In these types of applications, the benefit of the end-users is that they do not have to share these formulas with anyone else, including the developers of the apps. For such apps, good formulas are expensive to develop and having good formulas provides a competitive edge to these end-users. In AIMMS, formulas can be used in the following way:
@@ -39,7 +33,7 @@ Suppose we have the formula and its argument in the string parameters:
      
 Then we want to create a macro holding the above as definition:
 
-.. figure:: /Resources/C_Language/Images/131/macroDef.png
+.. figure:: /images/macroDef.png
 
     macro definition
 
@@ -60,7 +54,7 @@ Within the runtime declaration section, we create a macro as follows:
 
 As you can see, the text of the argument and the formula is simply copied to the ``arguments`` and ``definition`` attributes respectively. Now that we have defined the macro ``myFormula``, we can use it. We will do so in two ways. First, we will create the points for a curve, then we will use it to solve the equation ``myFormula(x)=0`` **Using the formula to draw a curve** To create a curve that looks as follows:
 
-.. figure:: /Resources/C_Language/Images/131/curve.png
+.. figure:: /images/curve.png
 
     curve approximating formula
     
@@ -104,13 +98,13 @@ The ``"Draw"`` button will execute the above procedure and present the curve as 
 
 Here ``boundedVariable`` is declared in the main model. Because it is declared in the main model, we can refer to it in other portions of the model and on AIMMS pages. **The enclosed application** The enclosed AIMMS application starts with the following page:
 
-.. figure:: /Resources/C_Language/Images/131/startUp.png
+.. figure:: /images/startUp.png
 
     Formulas as Data startup
 
 I invite you to play with this AIMMS application, changing the formula, argument and bounds. In addition, observe the curve and the result for ``boundedVariable`` after pressing the buttons labeled ``"Draw"`` and ``"Solve"``.  
 
-:download:`AIMMS project download </Resources/C_Language/Images/131/FormulasAsData.zip>` 
+:download:`AIMMS project download </downloads/FormulasAsData.zip>` 
 
 
 Summary

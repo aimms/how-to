@@ -7,18 +7,18 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on December 18, 2012 by Chris Kuip.
+	This article was originally posted to the AIMMS Tech Blog.
 
 
 .. .. sidebar:: ROGO Puzzle: avoid pitfalls, grab prizes within limit on steps
 
-.. figure:: /Resources/C_Mathematical_Modeling/Images/138/ROGO.logo_.png
+.. figure:: /images/ROGO.logo_.png
 
     Creative Maths - A world of mathematicians
 
 .. sidebar:: ROGO Puzzle: avoid pitfalls, grab prizes within limit on steps
 
-    .. image:: /Resources/C_Mathematical_Modeling/Images/138/rogo1.gif
+    .. image:: /images/rogo1.gif
 
 The ROGO puzzle, `rogopuzzle <http://www.rogopuzzle.co.nz>`_, challenges players to find a good path on a board, pick up treasures, and avoid pitfalls. This puzzle, and its corresponding iPhone app, were originally developed in New Zealand. In this post, I'll explain a method for solving ROGO puzzles using constraint programming in AIMMS.
 
@@ -83,7 +83,7 @@ If we want to give the objective some value, at least one cell should have value
 The AIMMS application
 ---------------------
 
-The complete example is presented in this :download:`AIMMS project download </Resources/C_Mathematical_Modeling/Images/138/ROGO.zip>` 
+The complete example is presented in this :download:`AIMMS project download </downloads/ROGO.zip>` 
 
 
 It comes with a case for each of the introductory ROGO puzzles. Psst, there is a transparent button on the ROGO logo; clicking it will open the puzzle site.
