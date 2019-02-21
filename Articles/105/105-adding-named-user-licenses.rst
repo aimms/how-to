@@ -1,10 +1,10 @@
 
 .. IMAGES
 
-.. |maintenance-mode| image:: /Images/105-adding-named-user-licenses/maintenance-mode.png
-.. |registered-users-menu| image:: /Images/105-adding-named-user-licenses/registered-users-menu.png
-.. |add-new-users| image:: /Images/105-adding-named-user-licenses/add-new-users.png
-.. |client-section| image:: /Images/105-adding-named-user-licenses/client-section.png
+.. |maintenance-mode| image:: /images/maintenance-mode.png
+.. |registered-users-menu| image:: /images/registered-users-menu.png
+.. |add-new-users| image:: /images/add-new-users.png
+.. |client-section| image:: /images/client-section.png
     :scale: 60 %
 
 

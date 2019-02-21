@@ -6,12 +6,7 @@ Overview: Deprecation of Compound Sets
    :keywords: compound, sets
 
 
-.. sidebar:: Announcing deprecation compound sets
-
-    .. image:: /Resources/C_Language/Images/109/hoorn.png
-
-
-    
+   
 .. _Section-Announcement:
 
 Overview

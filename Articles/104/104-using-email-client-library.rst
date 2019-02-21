@@ -1,6 +1,6 @@
 .. IMAGES
 
-.. |add-email-client-lib| image:: /Images/104-using-email-client-library/add-email-client-lib.png
+.. |add-email-client-lib| image:: /images/add-email-client-lib.png
 
 .. FILES ATTACHED
 
@@ -35,7 +35,7 @@ Supported features:
 Adding the library
 --------------------
 
-Add *EmailClient* to your project from the library repository using the *Library Manager*. For more details, see AIMMS Knowledge: :doc:`../C_Language/Using_AIMMS_Libraries`.
+Add *EmailClient* to your project from the library repository using the *Library Manager*. For more details, see AIMMS Knowledge: :doc:`84-using-libraries`.
 
 |add-email-client-lib|
 
@@ -131,7 +131,7 @@ To specify any other file attachments::
     email::AddFileAttachment(messageID,"EmailTemplate_files/document.pdf");
 
 
-Read more about creating templates for your message in AIMMS Knowledge: :doc:`104-creating-email-templates`.
+Read more about creating templates for your message in AIMMS Knowledge: :doc:`111-creating-email-templates`.
 
 For a full list of functions available, read AIMMS Documentation: `Email Client API <https://manual.aimms.com/emailclient/api.html>`_.
 
@@ -142,12 +142,12 @@ Example
 
 Download an example AIMMS project containing an email procedure:
 
-:download:`EmailLibraryDemo.zip </Resources/Other/104-using-email-client-library/EmailLibraryDemo.zip>`
+:download:`EmailLibraryDemo.zip </downloads/EmailLibraryDemo.zip>`
 
 Related topics
 ---------------
 
-*  AIMMS Knowledge: :doc:`104-creating-email-templates`
+*  AIMMS Knowledge: :doc:`111-creating-email-templates`
 *  AIMMS Documentation: `Email Client Library <https://manual.aimms.com/emailclient/index.html>`_ 
 
 .. END CONTENT

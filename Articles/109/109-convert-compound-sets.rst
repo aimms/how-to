@@ -1,6 +1,6 @@
 .. IMAGES
 
-.. |SetMappingDeclarations| image:: /Images/109-convert-compound-sets/SetMappingDeclarations.png
+.. |SetMappingDeclarations| image:: /images/SetMappingDeclarations.png
 
 
 Prepare for the Deprecation of Compound Sets
@@ -45,7 +45,7 @@ We provide a library with tools to identify compound sets based on these charact
 
 To identify compound sets in your application, 
 
-#. Download the attached :download:`AIMMS project download </Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets.zip>` 
+#. Download the attached :download:`AIMMS project download </downloads/DeprecateCompoundSets.zip>` 
 
 #. Copy the ``DeprecateCompoundSetUtilities`` library to your AIMMS project.
 
