@@ -6,7 +6,7 @@ Retrieve Solver Log Files in AIMMS PRO
    :keywords: log, logfile, solver
 
 
-In :doc:`BasicSolverLoggingIDE`, we explain how to adapt the project such that solver log files are available for inspection. 
+In :doc:`13-Solver-Logging-IDE`, we explain how to adapt the project such that solver log files are available for inspection. 
 A solver session runs somewhere on an AIMMS PRO server, and as a user, you do not have direct access to those files. 
 However, with a few small steps, which are explained in this article, you can access these files as well.
 
@@ -116,6 +116,6 @@ Summary
 With a few easy to copy extensions to your model, it becomes easy to get an overview of the solution process that takes place on the AIMMS PRO server.
 
 The example used to construct this article: 
-:download:`Flow Shop – with download log file </Resources/C_Solvers/BasicLogging/FlowShop with Download log file.zip>`.
+:download:`Flow Shop – with download log file </downloads/FlowShop with Download log file.zip>`.
 
 .. include:: /includes/form.def
