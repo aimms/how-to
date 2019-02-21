@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on May 26, 2015 by Marcel Hunting.
+	This article was originally posted to the AIMMS Tech Blog.
 
 The famous **travelling salesman problem** (TSP) deals with the following problem: given a list of cities and the distances between each pair of cities, a salesman has to find the shortest possible route to visit each city exactly once while returning to the origin city. One way to formulate the TSP is as follows:
 
@@ -25,7 +25,7 @@ Here ``x(i,j)`` equals 1 if the route from city ``i`` to city ``j`` is in the to
 
 Here ``S`` is a subset of cities while ``n`` denotes the number of cities. This SEC enforces that at least one route is going from a city in set ``S`` to a city outside ``S``.
 
-.. figure:: /Resources/C_Solvers/Images/126/ch130.png
+.. figure:: /images/ch130.png
 
     First solution with subtours for instance ch130
 

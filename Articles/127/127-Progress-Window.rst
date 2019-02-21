@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on April 1, 2015 by Marcel Hunting.
+	This article was originally posted to the AIMMS Tech Blog.
 
 .. sidebar:: Progress Window
 

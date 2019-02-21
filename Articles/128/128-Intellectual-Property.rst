@@ -7,12 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on March 6, 2015 by Peter Nieuwesteeg.
-
-
-.. sidebar:: Protecting intellectual property through encryption
-
-    .. image:: /Resources/C_Deployment/Images/128/encryption2.png
+	This article was originally posted to the AIMMS Tech Blog.
 
 
 Encryption is typically used to protect the intellectual property (IP) in your AIMMS model and libraries. Access to your application can also be restricted in both AIMMS 3 and AIMMS 4; though the methods differ between the two AIMMS versions.
@@ -30,7 +25,7 @@ Manually Export to Aimmspack
 The first option is by creating an Aimmspack file. As you have seen in an earlier :doc:`151-version-control-aimmspack-backup`, 
 Aimmspack files (in AIMMS 4) are always encrypted. You can create an Aimmspack via menu "File - Export End User Project…" Once you have selected that menu, you will be asked to specify a file name for the Aimmspack, followed by a dialog "Encryption of Exported End-User Project".
 
-.. image:: /Resources/C_Deployment/Images/128/Encryption-Dialog.jpg
+.. image:: /images/Encryption-Dialog.jpg
 
 In this dialog, you can specify one of the following three types of encryption:
 

@@ -7,7 +7,7 @@ Create PRO User Groups
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on September 27, 2016 by Chris Kuip.
+	This article was originally posted to the AIMMS Tech Blog.
 
 
 AIMMS PRO is a multi-user environment, designed to host several Apps used by several end-users. Information is shared by these users via these applications. Depending on the role of the app user in the organization, selected information may or may not be accessible. For instance, a planner may change the production plan, that plan can be inspected by management, but is not accessible to the HRM staff.
@@ -29,14 +29,14 @@ Granting Access to Data with User Groups
 Within the AIMMS PRO Portal, tab Users, the AIMMS PRO administrator can assign groups, as depicted in the picture below:
 
 
-.. image:: /Resources/C_Deployment/Images/120/Portal-with-groups.png
+.. image:: /images/Portal-with-groups.png
 
 
 This picture is taken from my AIMMS PRO test environment. Besides the predefined groups Admin, AimmsPublishers, AppPublishers, and Users, there are two organization specific groups added to this environment: Planners and Purchase. I’ve selected the group Planners and made Theo and myself users of that group. If I want to make Theo a member of Purchase as well, I just drag Theo’s icon to the Purchase group.
 
 A first method with which you can determine who accesses certain kinds of information is by selecting users when an AIMMS App is published. At that time, the access rights can be assigned per environment, per group or per user as illustrated below:
 
-.. image:: /Resources/C_Deployment/Images/120/RX-access-to-Flowshop-for-Planners.png
+.. image:: /images/RX-access-to-Flowshop-for-Planners.png
 
 
 Here the FlowShop app may be run by a planner.
