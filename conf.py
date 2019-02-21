@@ -133,7 +133,7 @@ html_title = title
 html_use_index = True
 html_show_sourcelink = False
 
- html_theme_options = {
+html_theme_options = {
 #     'canonical_url': '',
 #     # 'analytics_id': 'UA-XXXXXXX-1',  #  Provided by Google in your dashboard
 #     'logo_only': False,
