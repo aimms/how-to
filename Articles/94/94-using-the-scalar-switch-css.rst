@@ -9,7 +9,7 @@ Display an On/Off Switch in Widgets
 
 Identifiers with ``binary`` range are displayed as checkboxes in table and scalar widgets of AIMMS WebUI, by default. You can render on/off switches instead of checkboxes using CSS. 
 
-.. image:: /Images/94-using-the-scalar-switch-css/binary-switch.png
+.. image:: /images/binary-switch.png
     :align: center
 	
 Creating a Binary Switch
@@ -20,9 +20,9 @@ To render on/off switches in your AIMMS project, follow the steps below.
    
    2. Download the example CSS file for the appropriate widget type:
    
-      :download:`scalar-binary-switch.css </Resources/UI/Downloads/css/scalar-binary-switch.css>`
+      :download:`scalar-binary-switch.css </downloads/scalar-binary-switch.css>`
       
-      :download:`table-binary-switch.css </Resources/UI/Downloads/css/table-binary-switch.css>`
+      :download:`table-binary-switch.css </downloads/table-binary-switch.css>`
 		    
    3. Place the downloaded CSS file(s) in the ``MainProject\WebUI\resources\css`` folder of your project.
    
@@ -59,7 +59,7 @@ To display checkboxes in some cases and switches in others, you can define rules
 
 The AIMMS project attached below contains CSS files with filters for both types of widgets.
 
-:download:`filtered-binary-switch-example.zip </Resources/UI/Downloads/filtered-binary-switch.zip>`
+:download:`filtered-binary-switch-example.zip </downloads/filtered-binary-switch.zip>`
 
 The additional tag ``[data-widget\.uri*="Switch"]`` in all snippets identifies widgets containing "Switch" in their names, as shown in the example below.
 
