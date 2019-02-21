@@ -9,9 +9,9 @@ Sharing is rewarding
 
 .. sidebar:: Sharing ideas
 
-    .. figure:: /Resources/C_Deployment/Images/166/Women_Inspired_Health_and_Community_2016_45.jpg
+    .. figure:: /images/icons8-cloud-user-group-512.png
     
-            Picture by: http://projectpinkblue.org/
+
 
 When you want to share results derived using an AIMMS decision support application, you may want to share these in a shared folder such as AIMMS PRO storage. This article discusses an example that shows 
 
@@ -65,7 +65,7 @@ Resource for this article
 
 The enclosed example shows how to do this.
 
-*  :download:`AIMMS project </Resources/C_Language/Images/157/WriteOnlyAFewDatabaseTables.zip>` 
+*  :download:`AIMMS project </downloads/SharingIsRewarding.zip>` 
 
 Summary
 ---------

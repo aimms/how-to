@@ -61,15 +61,15 @@ Assume, we're working in the model, we'd prefer to declare the relevant paramete
 The initial table widget specification:
     
     
-.. image:: /Resources/C_UI/Images/160/01InitialTableWidgetSpecification.PNG
+.. image:: /images/01InitialTableWidgetSpecification.PNG
 
 after super slicing ``i_S`` to ``i_L`` via the display domain of ``p_Demand``:
 
-.. image:: /Resources/C_UI/Images/160/02AfterSuperSlicingOnIndexI_S.PNG
+.. image:: /images/02AfterSuperSlicingOnIndexI_S.PNG
 
 after super slicing ``i_F`` to ``i_L`` via the display domain of ``p_ProductionCapacity``:
 
-.. image:: /Resources/C_UI/Images/160/03AfterSuperSlicingOnIndexI_F.PNG
+.. image:: /images/03AfterSuperSlicingOnIndexI_F.PNG
 
 Note in the above, the cursor shows "forbidden" when hovering over the empty cells.
 This is expected, as these cells correspond to elements outside the domain of the corresponding identifiers.
