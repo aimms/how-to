@@ -91,5 +91,5 @@ You can import the AIM file into a section of your model.
 
 .. See "Importing a section from another AIMMS project" for more information about importing the .aim file in your project. (I think this post is gone, needs to be reproduced perhaps?)
 
-:download:`CreateAccessFileConnectionString.aim <../Resources/185-connect-to-access-database/CreateAccessFileConnectionString.aim>`
+:download:`CreateAccessFileConnectionString.aim </downloads/CreateAccessFileConnectionString.aim>`
 
