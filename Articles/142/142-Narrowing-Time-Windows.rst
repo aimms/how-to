@@ -7,12 +7,12 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on November 13, 2012 by Chris Kuip.
+	This article was originally posted to the AIMMS Tech Blog.
 
 
 .. sidebar:: Scheduling problem
 
-    .. image:: /Resources/C_Mathematical_Modeling/Images/142/small_schedule_example.png
+    .. image:: /images/142/small_schedule_example.png
 
 The purpose of this example is to illustrate a few features of the AIMMS identifier types *ACTIVITIES* and *RESOURCES*.
 
@@ -28,7 +28,7 @@ In the `Three field notation for scheduling problems <http://en.wikipedia.org/wi
 
 The data of ``actLen``, ``StartTime``, and ``EndTime`` is constructed such that the smaller the job, the more narrow the time window is in which this job can be executed. The data of ``JobChgOver`` is constructed such that it slowly increases with the difference between jobs. This is illustrated in the following Gantt Chart:
 
-.. figure:: /Resources/C_Mathematical_Modeling/Images/142/Gantt-Chart-Example-Narrowing.png
+.. figure:: /images/Gantt-Chart-Example-Narrowing.png
 
     Gantt Chart Example Narrowing
 
@@ -65,7 +65,7 @@ The worker is represented by a single sequential resource:
 This declaration states that it needs to execute all activities ``act(j)``, one at a time, and that there is a change over time between activities.
 
 
-The complete example is presented in this :download:`AIMMS project download </Resources/C_Mathematical_Modeling/Images/142/Narrowing_converted.zip>` 
+The complete example is presented in this :download:`AIMMS project download </downloads/Narrowing_converted.zip>` 
 
 The above Gantt Chart is a screen shot from the demo page. Pressing the solve button on this demo page will show that CP Optimizer is able to find a feasible solution in a fraction of a second. In addition, note that the rows of the Gantt Chart are re-ordered such that the jobs are ordered on their begin time.
 

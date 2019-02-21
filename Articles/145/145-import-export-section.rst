@@ -7,11 +7,11 @@
 
       .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on November 29, 2011 by Guido Diepen.
+	This article was originally posted to the AIMMS Tech Blog.
 
 .. sidebar:: Re-using AIMMS source code.
 
-    .. image:: /Resources/C_Language/Images/145/Copy_font_awesome_200_.svg.png
+    .. image:: /images/code.png
     		    	:align: center
 
 
