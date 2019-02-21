@@ -262,7 +262,7 @@ color: #7d879a;
     margin: auto;
 }
     .logo {
-        max-width: 300px;
+        max-width: 220px;
         margin: auto;
     }
 .wy-side-nav-search>a img.logo {
@@ -345,5 +345,8 @@ color: #7d879a;
     }
     .botaofooter {
         margin: 10px;
+    }
+    .menurodape { 
+    margin: 0 -30px;
     }
 }
