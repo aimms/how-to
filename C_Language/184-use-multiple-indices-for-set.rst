@@ -1,5 +1,10 @@
 Multiple indices for a set
 ==========================
+
+.. meta::
+   :description: multiple indices can be associated with a single set
+   :keywords: set, index, alias
+
 This article explains how to use different indices to refer to the elements of a set.
 
 Suppose we have a set ``Cities``, then a parameter ``Distance`` would naturally be defined over 2 dimensions (from and to), both coming from this same set ``Cities``. 
