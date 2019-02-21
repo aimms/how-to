@@ -4,13 +4,7 @@
 .. raw:: html
 
     <style>
-        #content_home_page {
-            width:100%;
-            max-width:1000px;    /* A. max horizontal number of boxes =~ int(A/B) */
-            margin:0 auto;
-            text-align:left;    /* (left|center) align last boxes and the set vert. line */
-            /*background-color:#AAA; */
-        }
+
         .box_home_page {
             display: inline-block;
             overflow:hidden;      /* hide scroll bars */
