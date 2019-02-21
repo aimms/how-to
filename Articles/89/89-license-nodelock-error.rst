@@ -1,12 +1,12 @@
 .. IMAGES
 
-.. |nodelock-readonly| image:: /Images/89-license-nodelock-error/nodelock-readonly.png
-.. |uncheck-read-only| image:: /Images/89-license-nodelock-error/uncheck-read-only.png
-.. |license-config| image:: /Images/89-license-nodelock-error/license-config.png
-.. |deactivate| image:: /Images/89-license-nodelock-error/deactivate.png
-.. |deactivate-yes| image:: /Images/89-license-nodelock-error/deactivate-yes.png
-.. |deactivate-success| image:: /Images/89-license-nodelock-error/deactivate-success.png
-.. |program-data| image:: /Images/89-license-nodelock-error/program-data.png
+.. |nodelock-readonly| image:: /images/nodelock-readonly.png
+.. |uncheck-read-only| image:: /images/uncheck-read-only.png
+.. |license-config| image:: /images/license-config.png
+.. |deactivate| image:: /images/deactivate.png
+.. |deactivate-yes| image:: /images/deactivate-yes.png
+.. |deactivate-success| image:: /images/deactivate-success.png
+.. |program-data| image:: /images/program-data.png
 
 .. BEGIN CONTENT
 

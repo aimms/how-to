@@ -12,7 +12,7 @@ Schedule Regular Jobs
 Some applications involve solving a mathematical program regularly, for instance every night or every ten minutes. 
 In this article, we'll discuss how an AIMMS job can reschedule itself, as depicted in the next picture.
 
-.. image:: /Resources/C_Deployment/RegularJob/Images/DelegationLevel.png
+.. image:: /images/DelegationLevel.png
 
 Effectively, this realizes that the job at hand is solved regularly. As you can see from this image:
 
@@ -26,7 +26,7 @@ Effectively, this realizes that the job at hand is solved regularly. As you can 
 
 To start this sequence, the following code is used.
 
-.. image:: /Resources/C_Deployment/RegularJob/Images/pr_OnButtonStartServerSessions.PNG
+.. image:: /images/pr_OnButtonStartServerSessions.PNG
 
 Each line is explained as follows:
 
@@ -120,7 +120,7 @@ Each portion of the procedure code is explained below:
 
 #. This will execute the payload for each of the server sessions started.
 
-To operate, the example that can be downloaded :download:`here </Resources/C_Deployment/RegularJob/JobRepetition.zip>`.
+To operate, the example that can be downloaded :download:`here </downloads/JobRepetition.zip>`.
 
 #. Create an .aimmspack, publish on your favorite AIMMS PRO system.
 
@@ -130,7 +130,7 @@ To operate, the example that can be downloaded :download:`here </Resources/C_Dep
 
 #. Go to job tab in the AIMMS PRO portal and watch new jobs being created, queued, running, and finished.
 
-.. image:: /Resources/C_Deployment/RegularJob/Images/PROJobs.png
+.. image:: /images/PROJobs.png
 
 .. note::
 

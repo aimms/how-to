@@ -1,9 +1,9 @@
 .. IMAGES
 
 
-.. |pending-status-info| image:: /Images/89-academic-license/pending-status-info.png
-.. |interrupt-sequence| image:: /Images/89-academic-license/interrupt-sequence.png
-.. |confirm-interrupt-sequence| image:: /Images/89-academic-license/confirm-interrupt-sequence.png
+.. |pending-status-info| image:: /images/pending-status-info.png
+.. |interrupt-sequence| image:: /images/interrupt-sequence.png
+.. |confirm-interrupt-sequence| image:: /images/confirm-interrupt-sequence.png
 
 .. BEGIN CONTENT
 

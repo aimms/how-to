@@ -1,7 +1,7 @@
 
 .. IMAGES
 
-.. |axll-workflow| image:: /Images/85-using-axll-library/axll-workflow.png
+.. |axll-workflow| image:: /images/axll-workflow.png
 
 .. CONTENT
 
@@ -111,10 +111,7 @@ Importing data from Excel files
 
 .. Example
 
-Practical Example
-------------------
-
-For a practical example, read **AIMMS Tech Blog:** `How to use the AIMMS Excel Library <https://techblog.aimms.com/2016/06/07/how-to-use-the-aimms-excel-library/>`_
+.. For a practical example, read **AIMMS Tech Blog:** `How to use the AIMMS Excel Library <https://techblog.aimms.com/2016/06/07/how-to-use-the-aimms-excel-library/>`_
 
 .. END CONTENT
 
