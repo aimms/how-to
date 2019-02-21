@@ -121,10 +121,10 @@ todo_include_todos = True
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 
-html_theme = 'sphinx_materialdesign_theme'
+#html_theme = 'sphinx_materialdesign_theme'
 #html_theme_path = ["."]
 
-# html_theme = 'sphinx_rtd_theme'
+html_theme = 'sphinx_rtd_theme'
 
 html_logo = 'Resources/images/aimms-logo.png' 
 
@@ -133,7 +133,7 @@ html_title = title
 html_use_index = True
 html_show_sourcelink = False
 
-# html_theme_options = {
+ html_theme_options = {
 #     'canonical_url': '',
 #     # 'analytics_id': 'UA-XXXXXXX-1',  #  Provided by Google in your dashboard
 #     'logo_only': False,
@@ -144,63 +144,17 @@ html_show_sourcelink = False
 #     # Toc options
 #     'collapse_navigation': True,
 #     'sticky_navigation': True,
-#     'navigation_depth': 4,
+     'navigation_depth': 4,
 #     'includehidden': True,
 #     'titles_only': False
-# }
+ }
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
 html_theme_options = {
-    # Specify a list of menu in Header.
-    # Tuples forms:
-    #  ('Name', 'external url or path of pages in the document', boolean, 'icon name')
-    #
-    # Third argument:
-    # True indicates an external link.
-    # False indicates path of pages in the document.
-    #
-    # Fourth argument:
-    # Specify the icon name.
-    # For details see link.
-    # https://material.io/icons/
-    'header_links' : [
-       ('Support Home', 'ContentIndex', False, 'home'),
-       ("AIMMS Home", "https://aimms.com", True, 'change_history'),
-       ("AIMMS Examples", "https://aimms.com/english/developers/resources/examples/", True, 'link')
-    ],
 
-
-
-    # Customize css colors.
-    # For details see link.
-    # https://getmdl.io/customize/index.html
-    #
-    # Values: amber, blue, brown, cyan deep_orange, deep_purple, green, grey, indigo, light_blue,
-    #         light_green, lime, orange, pink, purple, red, teal, yellow(Default: indigo)
-    'primary_color': 'blue',
-    # Values: Same as primary_color. (Default: pink)
-    'accent_color': 'deep_orange',
-
-    # Customize layout.
-    # For details see link.
-    # https://getmdl.io/components/index.html#layout-section
-    'fixed_drawer': False,
-    'fixed_header': False,
-    'header_waterfall': True,
-    'header_scroll': True,
-
-    # Render title in header.
-    # Values: True, False (Default: False)
-    'show_header_title': False,
-    # Render title in drawer.
-    # Values: True, False (Default: True)
-    'show_drawer_title': True,
-    # Render footer.
-    # Values: True, False (Default: True)
-    'show_footer': True
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -216,7 +170,7 @@ else:
 
     
 html_context = {
-    'css_files': ['_static/Hacks.css'],
+    'css_files': ['_static/Hacks.css','_static/theme.css'],
     "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
     "gitlab_user": "Chris", # Username
     "gitlab_repo": "aimms-how-to", # Repo name

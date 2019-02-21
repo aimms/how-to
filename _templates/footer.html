@@ -1,0 +1,34 @@
+<footer>
+  {% if (theme_prev_next_buttons_location == 'bottom' or theme_prev_next_buttons_location == 'both') and (next or prev) %}
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      {% if next %}
+        <a href="{{ next.link|e }}" class="btn btn-neutral float-right" title="{{ next.title|striptags|e }}" accesskey="n" rel="next">{{ _('Next') }} <span class="fa fa-arrow-circle-right"></span></a>
+      {% endif %}
+      {% if prev %}
+        <a href="{{ prev.link|e }}" class="btn btn-neutral float-left" title="{{ prev.title|striptags|e }}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> {{ _('Previous') }}</a>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <hr/>
+       <div class="rodape" style="margin-bottom: 24px;margin-top: 20px;min-height: 0px;">
+  <div role="contentinfo">
+      <nav class="menurodape"><ul id="menu-main-site-navigation-1" class="footermenu">
+          <li class="menu-item socialfooter"><a href="https://facebook.com/aimms"><i class="fa fa-facebook"></i></a></li>
+          <li class="menu-item socialfooter"><a href="https://twitter.com/aimms"><i class="fa fa-twitter"></i></a></li>
+          <li class="menu-item socialfooter"><a href="https://www.linkedin.com/company/aimms"><i class="fa fa-linkedin"></i></a></li>
+          <li class="menu-item socialfooter"><a href="https://www.youtube.com/user/AIMMSChannel"><i class="fa fa-youtube"></i></a></li>
+          </ul></nav></div></div>
+    <div class="rodape">
+  <div role="contentinfo">
+      <nav class="menurodape"><ul id="menu-main-site-navigation-1" class="footermenu"><li class="menu-item linkfooter"><a><img src="{{ pathto('_static/AIMMS_logo_H_RGB.png', 1) }}" style="max-width: 180px;"> © 1989 - 2019 AIMMS B.V.</a></li>
+<li class="menu-item botaofooter"><a href="http://aimms.com/english/software-solutions/software/">TECH BLOG</a></li>
+<li class="menu-item botaofooter"><a href="https://documentation.aimms.com/">AIMMS DOCUMENTATION</a></li>
+<li class="menu-item disclaimer"><a href="https://aimms.com/english/disclaimer/?_ga=2.177379877.1873129748.1545777536-1064392530.1545777536">DISCLAIMER</a></li>
+<li class="menu-item disclaimer"><a href="https://aimms.com/english/privacy-statement/?_ga=2.177379877.1873129748.1545777536-1064392530.1545777536">PRIVACY STATEMENT</a></li>
+    </ul></nav></div>
+        </div>
+
+  {%- block extrafooter %} {% endblock %}
+
+</footer>
