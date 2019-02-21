@@ -331,7 +331,19 @@ color: #7d879a;
 .socialfooter a {
     font-size: 24px;
     color: #000;
+    display: none;
 }
 .socialfooter a:hover {
     color: #009dd9;
+}
+@media screen and (max-width: 500px) {
+    .topomenu {
+        grid-template-columns: auto;
+    }
+    .menuprincipal {
+        padding: 20px 0 0 0;
+    }
+    .botaofooter {
+        margin: 10px;
+    }
 }
