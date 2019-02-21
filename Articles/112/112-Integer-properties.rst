@@ -7,9 +7,9 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on July 27, 2018 by Richard Stegeman.
+	This article was originally posted to the AIMMS Tech Blog.
 
-.. image:: /Resources/C_Language/Images/112/BlogPicture.jpg
+.. image:: /images/BlogPicture.jpg
    :align: right
 
 For the past couple of years, we have worked on improving the compiler and execution engine in AIMMS. We've done this in a way that minimizes problems in existing models.  

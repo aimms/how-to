@@ -7,11 +7,11 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on October 20, 2016 by Peter Nieuwesteeg.
+	This article was originally posted to the AIMMS Tech Blog.
 
 .. sidebar:: Repeating seemingly random patterns
 
-    .. image:: /Resources/C_Language/Images/119/Random-Number-generator.png
+    .. image:: /images/Random-Number-generator.png
     		:align: center
 
 The other day I got a model from a user and every time that I solved the model the results were different. At first I thought that some of the outputs were used as input, but that wasn't the case. After some analysis I found out that this statement was the culprit: 

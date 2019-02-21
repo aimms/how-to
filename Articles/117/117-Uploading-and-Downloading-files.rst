@@ -7,7 +7,7 @@ Upload and Download Files
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on November 21, 2016 by Chris Kuip.
+	This article was originally posted to the AIMMS Tech Blog.
 
 This blog post is the second post in a series of three to enable AIMMS app developers to model necessary file sharing in a secure manner. In our 
 :doc:`120-pro-user-groups`, we covered AIMMS PRO User groups and how they can be used to authorize access to information within your AIMMS Apps. This blog post explains how you can upload and download files to and from AIMMS PRO Storage.
@@ -22,7 +22,7 @@ Within AIMMS PRO storage, folders are referred to as *buckets* and files are ref
 
 AIMMS PRO storage has the following folder layout, and it is best practice to follow it:
 
-.. image:: /Resources/C_Deployment/Images/117/Default-folder-layout-of-AIMMS-PRO-Storage.png
+.. image:: /images/Default-folder-layout-of-AIMMS-PRO-Storage.png
 
 In this overview, user specific data is stored in ``/userdata``, and the user is identified first by his environment and then by his or her name.
 
@@ -47,7 +47,7 @@ In a way, the second situation can be viewed as an extension of the first situat
 Exchanging files for an AIMMS WinUI app
 ----------------------------------------
 
-.. image:: /Resources/C_Deployment/Images/117/win-ui-file-exchange-e1479732007875.png
+.. image:: /images/win-ui-file-exchange-e1479732007875.png
 
 This is not so difficult. Just use the functions ``pro::SaveFileToCentralStroage`` and ``pro::RetrieveFileFromCentralStorage``. For instance, as follows:
 
@@ -96,7 +96,7 @@ Exchanging files for an AIMMS WebUI app
 
 In a manner of speaking, an AIMMS WebUI application is like an AIMMS WinUI application whereby the visualization and interaction is done on a separate device running Chrome, and the Client Side execution of AIMMS procedures is done on a machine in the AIMMS PRO cluster. This is illustrated in more detail in the picture below.
 
-.. image:: /Resources/C_Deployment/Images/117/download-upload.png
+.. image:: /images/download-upload.png
 
 The picture above illustrates the file communication architecture for a WebUI AIMMS application.
 

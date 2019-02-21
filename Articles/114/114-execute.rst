@@ -7,11 +7,11 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on February 22, 2017 by Deanne Zhang.
+	This article was originally posted to the AIMMS Tech Blog.
 
 .. sidebar:: Executing another program
 
-    .. image:: /Resources/C_Deployment/Images/114/exe-file-icon-68130.png
+    .. image:: /images/exe-file-icon-68130.png
 
 AIMMS provides a good selection of functions, such as arithmetic functions, string manipulation functions, time functions, distribution functions, file functions, and more, for app developers to build prescriptive analytics applications.
 
@@ -46,7 +46,7 @@ You can also use the Execute function to run your own code written in programmin
     MyCommandLine := FormatString("-jar RetrieveData.jar %s %s",ID, RequestDate);
     Execute("java", MyCommandLine );
 
-where "MyCommandLine", "ID" and "RequestData" are string parameters in AIMMS. "ID" and "RequestDate" take dynamic value at run time, and "MyCommandLine" is generated based on these values.  Please refer to the `Again: AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_ for more information on the "FormatString" function.
+where "MyCommandLine", "ID" and "RequestData" are string parameters in AIMMS. "ID" and "RequestDate" take dynamic value at run time, and "MyCommandLine" is generated based on these values.  Please refer to the `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_ for more information on the "FormatString" function.
 
 Similarly, you can use the Execute function to call Python to run a ".py" file. Please note that in both cases, the environment variables are set properly. Otherwise, you need to specify the full path where Java.exe or Python.exe is installed.
 

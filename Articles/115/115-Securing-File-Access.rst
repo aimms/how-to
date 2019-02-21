@@ -7,7 +7,7 @@ Secure File Access
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on December 20, 2016 by Chris Kuip.
+	This article was originally posted to the AIMMS Tech Blog.
 
 This blog post is the last in a series of thee to enable AIMMS app developers to model file sharing in a secure manner.  
 In the :doc:`120-pro-user-groups`, we covered authorization of AIMMS PRO users, 
