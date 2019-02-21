@@ -8,13 +8,8 @@ Overview: Model Sources, Version Control and aimmspack Files
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog on September 18, 2014 by Marcel Roelofs.
+	This article was originally posted to the AIMMS Tech Blog.
 
-
-.. sidebar:: Don't be a git use Version Control
-
-    .. image:: /Resources/C_Deployment/Images/151/keep_calm_and_carry_on_coasters-r44b83d095b374e2d9454dc9b102fab13_am0u7_8byvr_152.png
-        :scale: 200 %
 
 In our current AIMMS 4.0 release we have introduced a number of fundamental, and sometimes breaking changes in managing the project sources, about which we got a lot of questions. In this article, I will describe these changes and also explain the rationale behind them.
 

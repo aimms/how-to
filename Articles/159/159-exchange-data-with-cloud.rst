@@ -1,8 +1,8 @@
-.. |image1| image:: /Images/159-exchange-data-with-cloud/image1.png
-.. |image2| image:: /Images/159-exchange-data-with-cloud/image2.png
-.. |image3| image:: /Images/159-exchange-data-with-cloud/image3.png
-.. |image4| image:: /Images/159-exchange-data-with-cloud/image4.png
-.. |image5| image:: /Images/159-exchange-data-with-cloud/image5.png
+.. |image1| image:: /images/image1.png
+.. |image2| image:: /images/image2.png
+.. |image3| image:: /images/image3.png
+.. |image4| image:: /images/image4.png
+.. |image5| image:: /images/image5.png
 
 Exchange data with the AIMMS Cloud Platform
 ===========================================

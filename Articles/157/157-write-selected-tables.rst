@@ -5,11 +5,7 @@ Write Selected Database Tables
    :description: Use existing AIMMS function to selectivly write to database tables whose data has changed.
    :keywords: database table, odbc, runtime library, model editing, AIMMS Language, execution efficiency
 
-.. sidebar:: Don't write on these tables. Thanks.
 
-    .. figure:: /Resources/C_Language/Images/157/Billiard_hall.JPG
-    
-            Picture by: Dmitry G.
 
 The operation of writing to databases in AIMMS is tuned for performance. 
 
@@ -303,7 +299,7 @@ Example project
 
 Download the attached project for an example.
 
-*  :download:`AIMMS project </Resources/C_Language/Images/157/WriteOnlyAFewDatabaseTables.zip>` 
+*  :download:`AIMMS project </downloads/WriteOnlyAFewDatabaseTables.zip>` 
 
 
 Related Topics
@@ -319,9 +315,6 @@ Related Topics
 
 
 
-<<<<<<< HEAD:C_Language/157-WriteFewTables.rst
-.. include:: ../includes/form.def
-=======
 .. include:: /includes/form.def
 
 
@@ -345,4 +338,3 @@ Related Topics
 
 
 
->>>>>>> 859923661fd16674e3d72f1d74faee94bffcf52a:C_Language/157-write-selected-tables.rst
