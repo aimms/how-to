@@ -1,10 +1,17 @@
 Investigate memory in use
 ============================
 
-This article summarizes some techniques to monitor your application's memory use.
+.. meta::
+   :description: Techniques to investigate memory in use.
+   :keywords: memory, virtual memory, MemoryInUse, identifiers, mathematical programming instance
+
+
+
+This article summarizes some techniques to investigate your application's memory use.
 
 Viewing total memory in use
 ----------------------------
+
 
 The function ``MemInUse`` returns the amount of memory used by AIMMS in Mb. ``MemInUse`` calls a system function to find out how much memory is used by executing a procedure. 
 

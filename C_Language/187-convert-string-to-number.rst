@@ -1,5 +1,10 @@
 Convert string to numerical value
 =====================================
+
+.. meta::
+   :description: input string translated to numbers with specified handling for errors
+   :keywords: string, number, error handling
+
 This article explains how to convert a string representation of a number to a numerical value.
 
 If a number may be stored in a string parameter or an element in AIMMS, you can't operate on the numerical value it represents. You can use the AIMMS intrinsic function ``val``.

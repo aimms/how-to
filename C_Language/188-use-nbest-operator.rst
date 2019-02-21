@@ -1,6 +1,10 @@
 Overview: NBest Operator
 =========================
 
+.. meta::
+   :description: Selecting the best few elements from a set according to some criterion.
+   :keywords: NBest, sort, set, selecting
+
 In addition to the ``first`` and ``last`` functions, which return first and last elements of a set, you can use the ``NBest`` operator to obtain the first :math:`n` elements of a set. This is based on criteria you provide to the ``NBest`` operator as an additional argument.
 
 Let's take for example a transportation problem, where you have a variable ``Transport(i,j)`` denoting how much is transported from factory ``i`` to customer ``j``. You may want to know the three customers ``j`` to which the most amount is transported per factory ``i``. Let's use the ``NBest`` operator to get these elements.
