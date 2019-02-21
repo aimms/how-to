@@ -9,12 +9,12 @@ Interrupt the Server Session
 Introduction
 ------------
 
-We saw how to remove the "Busy" veil during a solve process in a :doc:`previous article<Deploy_DataServerComm_3_RemoveVeil>` to let the user be in control of the application while a procedure execution is running in the background. However, we also lose the ability to interrupt this background process which was available as a "Cancel" button on the veil. This article will guide you on how to interrupt a procedure executing in the server session when the veil has been disabled.
+We saw how to remove the "Busy" veil during a solve process in a :doc:`previous article<19-remove-veil>` to let the user be in control of the application while a procedure execution is running in the background. However, we also lose the ability to interrupt this background process which was available as a "Cancel" button on the veil. This article will guide you on how to interrupt a procedure executing in the server session when the veil has been disabled.
 
 Implementation
 --------------
 
-.. image::  /Resources/AIMMSPRO/Deploy_DataServerComm_7_Interrupt/Images/QueuesBetweenDataAndServerSession.png
+.. image::  /images/QueuesBetweenDataAndServerSession.png
 
 Interrupting the server session is very direct and can be done by using the AIMMS PRO library procedure, ``pro::client::StopExecution`` which requires you to specify two input arguments.  
 
@@ -39,12 +39,12 @@ This mechanism is illustrated in the code snippet below. Here, we interrupt only
 
 Now, you can link this procedure to a button in your WebUI application to be able to interrupt a solve procedure running in the backround.
 
-The example AIMMS project with the above demonstrated procedure implemented can be downloaded from :download:`8. Flow Shop - Interrupt </Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/8. Flow Shop - Interrupt.zip>`.
+The example AIMMS project with the above demonstrated procedure implemented can be downloaded from :download:`8. Flow Shop - Interrupt </downloads/8. Flow Shop - Interrupt.zip>`.
 
 Further reading
 ---------------
 
-An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided in :doc:`Deploy_DataServerComm_8_PassNewData`.
+An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided in :doc:`42-data-session-changes`.
 
 
 .. include:: /includes/form.def
