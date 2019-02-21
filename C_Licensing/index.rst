@@ -16,7 +16,7 @@ Getting Started
 .. toctree::
    :maxdepth: 1
         
-   How To Transfer My Developer License to Another Machine
+   195-transfer-dev-license
    89-license-nodelock-error
    89-academic-license
    105-adding-named-user-licenses
