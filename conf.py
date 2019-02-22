@@ -167,7 +167,7 @@ else:
 
     
 html_context = {
-    'css_files': ['_static/Hacks.css','_static/theme.css'],
+    'css_files': ['_static/Hacks.css','_static/theme.css', '_static/copycode.css'],
     "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
     "gitlab_user": "Chris", # Username
     "gitlab_repo": "aimms-how-to", # Repo name
@@ -260,9 +260,14 @@ else:
 # Import the AIMMSLexer into local Pygments module (syntax highlighting). The styling is made with Hacks.css in the _static folder
 def setup(sphinx):
 	
-    sys.path.insert(0, os.path.abspath("./includes/AIMMSLexer/Lexer"))
-    from aimms import AIMMSLexer
-    from pygments.formatters import HtmlFormatter
-    sphinx.add_lexer("aimms", AIMMSLexer())
+   sys.path.insert(0, os.path.abspath("./includes/AIMMSLexer/Lexer"))
+   from aimms import AIMMSLexer
+   from pygments.formatters import HtmlFormatter
+   sphinx.add_lexer("aimms", AIMMSLexer())
+
+   # for copy code snippet, css file also referred to in html_context
+   sphinx.add_stylesheet('copycode.css')
+   sphinx.add_javascript('copycode.js')
+   sphinx.add_javascript("https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js")
     
 highlight_language = 'aimms'
