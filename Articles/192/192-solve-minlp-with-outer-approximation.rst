@@ -17,7 +17,7 @@ There exist two versions of the AOA algorithm in AIMMS. The old version is avail
 
 An example can be found in this ZIP file.
 
-:download:`/Resources/192-solve-minlp-with-outer-approximation/alan.zip`
+:download:`/downloads/alan.zip`
 
 There are several reasons why you should use GMP-AOA instead of old AOA. First, the GMP-AOA algorithm offers more possibilities to customize the algorithm to your needs, for example by using functions from the GMP library.
 
