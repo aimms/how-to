@@ -1,61 +1,10 @@
 
 
-AIMMS Knowledge Center: How-To
-======================================
-
-.. rst-class:: display
 
 .. raw:: html
-
-    <style>
-        #content_home_page {
-            width:100%;
-            max-width:1000px;    /* A. max horizontal number of boxes =~ int(A/B) */
-            margin:0 auto;
-            text-align:center;    /* (left|center) align last boxes and the set vert. line */
-            /*background-color:#AAA; */
-        }
-        .box_home_page {
-            display: inline-block;
-            overflow:hidden;      /* hide scroll bars */
-            min-height: 100px;    /* B. change the vertical numb. of boxes */
-            width: 170px;        /* C. change the horizontal numb. of boxes*/
-            height: 170px;
-            margin:40px;          /*  boxes separator */
-            vertical-align: top; /* (top|bottom) align boxes */
-            text-align:center;
-            padding:10pt;
-            background-color:#E4F0FE /*#EDEFF2;#c5c6c7;*/
-            border-radius: 5px;
-            margin: 10px 10px 50px;
-            flex: 1 0 270px;
-            min-width: 270px; 
-        }
-        
-        .box_home_page:hover{
-            opacity: 0.7;
-            cursor: pointer;
-            transition: all .2s ease-in-out;
-        }
-        
-        .box_home_page h1{
-            border-bottom: 1px solid black;
-            margin-left: 10px !important;
-            margin-right: 10px !important;
-            margin-bottom:25px !important;
-        }
-        
-        .box_home_page:hover h1{
-            opacity: 1;
-            /*color: #000081;*/
-        }
-        
-        .box_home_page p{
-            color : black ;
-            /*font-style: italic;*/
-        }
-        
-    </style>
+    
+    <div id="topo"> 
+    <br><h1>Welcome to AIMMS' How-To Page</h1><h2>Check out our helpful customer tips and tricks to use your AIMMS software</h2></div>
     
     <div id="content_home_page">
         <a href="C_Licensing/index.html">
@@ -117,5 +66,3 @@ AIMMS Knowledge Center: How-To
    C_Connectivity/index
    C_UI/index
    C_Deployment/index
-
-   

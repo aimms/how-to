@@ -5,12 +5,11 @@ Develop Multi-Platform Applications
    :description: Tips for developing flexible AIMMS applications for use on both AIMMS PRO and AIMMS IDE.
    :keywords: platform, pro
 
+.. image:: /Resources/AIMMSPRO/FlexibleDevelopment/Images/useprosession.PNG
+	:align: right
 
 After publishing an app on the AIMMS PRO server, it is common to continue development of that application for updates using the AIMMS IDE. 
 When we test our app from within the AIMMS IDE, we get the following dialog:
-
-.. image:: /Resources/AIMMSPRO/FlexibleDevelopment/Images/useprosession.PNG
-	:align: center
 
 .. this image should be centered, but that is CSS properties for now. 
 

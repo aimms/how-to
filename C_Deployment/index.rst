@@ -1,4 +1,3 @@
-
 .. |aimmsIcon| image:: ../Images/icons/favicon.png
             :scale: 15 %
 
