@@ -14,7 +14,7 @@ AIMMS Language
 .. toctree::
    :maxdepth: 1
 
-   /Articles/104/104-creating-email-templates 
+   /Articles/111/111-creating-email-templates 
    /Articles/104/104-using-email-client-library 
    /Articles/119/119-Reproducible-Random-Sequence 
    /Articles/132/132-Repetive-Patterns-Model-Edit 
