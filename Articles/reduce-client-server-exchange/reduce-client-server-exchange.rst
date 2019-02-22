@@ -6,7 +6,7 @@ Reduce Exchange Between Client Session and Server Session
    :description: How to reduce the overhead of creating and communicating cases between the client session and the server session.
    :keywords: client, server, session
 
-As shown in :doc:`Deploy_DataServerComm_1_Publish`, part of the overhead in solving is creating a case and transferring it, once from the client session to the server session and once back.
+As shown in :doc:`33-pro-deploy-app`, part of the overhead in solving is creating a case and transferring it, once from the client session to the server session and once back.
 Especially, for short solves, the overhead can be relatively large.
 To reduce this overhead, we'll reduce the number of identifiers that need to be passed between these sessions.
 
@@ -110,7 +110,7 @@ Further reading
 #. The descriptions of the functions ``ReferencedIdentifiers`` and ``SectionIdentifiers`` in `AIMMS PRO Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_ .
 
 You can download the example: 
-:download:`2a. Flow Shop - ReducedCases </Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/2a. Flow Shop - ReducedCases.zip>`.
+:download:`2a. Flow Shop - ReducedCases </downloads/2a. Flow Shop - ReducedCases.zip>`.
 
 
 
