@@ -12,12 +12,12 @@ Send and Receive Messages
 
     .. image:: /images/159915.svg
 
-This article is a follow up of :doc:`80-schedule-job`
+This article is a follow up of :doc:`80-schedule-jobs`
 
 In the context of a coherent collection of AIMMS data and server sessions, there should be an option to communicate between these sessions.
 AIMMS PRO provides the concept of queue for this; a session can create a queue and start listening to it. In addition, that session can communicate the name of that queue such that other sessions can also listen to it, or can put messages on it.
 
-This article provides a simple example based on  :doc:`80-schedule-job`  The essence of this latter article is that server jobs are regularly created. Now suppose we want to monitor the server sessions created and their execution; then these server sessions should have a way of communicating with the WebUI data session. There are several steps needed to realize this:
+This article provides a simple example based on  :doc:`80-schedule-jobs`  The essence of this latter article is that server jobs are regularly created. Now suppose we want to monitor the server sessions created and their execution; then these server sessions should have a way of communicating with the WebUI data session. There are several steps needed to realize this:
 
 #. The queue should be created and listened to by the WebUI data session as illustrated here:
 

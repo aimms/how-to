@@ -11,7 +11,7 @@ Communicate Data Changes in WebUI
 Introduction
 ------------
 
-In previous articles it was shown how to communicate :doc:`progress <35-web-ui-progress-window>` and :doc:`data <36-intermediate-solution>`, from the server session to the data session. In addition, we can :doc:`interrupt <34-interrupt-server-session>` by sending a signal from the data session to the server session.  In this article we will send data from the data session to a running server session. 
+In previous articles it was shown how to communicate :doc:`progress <../35/35-web-ui-progress-window>` and :doc:`data <../36/36-intermediate-solution>`, from the server session to the data session. In addition, we can :doc:`interrupt <../34/34-interrupt-server-session>` by sending a signal from the data session to the server session.  In this article we will send data from the data session to a running server session. 
 
 Use case: We continue with the Flowshop application. Even though the progress information obtained from the server is very interesting, we decide to wait for a longer period the solve and do not want to waste computation time with progress or incumbent updates. Therefore, we switch the progress and incumbent updates off in the server session.
 
