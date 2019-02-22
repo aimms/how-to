@@ -52,7 +52,7 @@ AIMMS will actually generate two things:
 =======
 For variables with a definition, AIMMS will actually generate both the variable and an additional equality constraint. For example, if you have the variable ``X`` that has ``Y + Z`` in its definition attribute:
 
-.. cod-block:: aimms
+.. code-block:: aimms
 
    Variable X {
       Range: free;
