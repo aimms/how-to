@@ -16,9 +16,9 @@ Getting Started
 .. toctree::
    :maxdepth: 1
         
-   How To Transfer My Developer License to Another Machine
-   89-license-nodelock-error
-   89-academic-license
-   105-adding-named-user-licenses
-   106-install-network-license
-   186-keyboard-shortcuts-for-aimms
+   /Articles/195/195-transfer-developer-license
+   /Articles/89/89-license-nodelock-error
+   /Articles/89/89-academic-license
+   /Articles/105/105-adding-named-user-licenses
+   /Articles/106/106-install-network-license
+   /Articles/186/186-keyboard-shortcuts-for-aimms

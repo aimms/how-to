@@ -13,17 +13,17 @@ Deployment
 .. toctree::
    :maxdepth: 1
 
-   151-version-control-aimmspack-backup
-   128-Intellectual-Property
-   120-pro-user-groups
-   117-Uploading-and-Downloading-files
-   115-Securing-File-Access
-   RegularJob
-   ReceiveMessages
-   114-execute
-   159-exchange-data-with-cloud
-   155-Catering-unresponsive-server-unstable-connection
-   171-pro_system_requirements
+   /Articles/151/151-version-control-aimmspack-backup
+   /Articles/128/128-Intellectual-Property
+   /Articles/120/120-pro-user-groups
+   /Articles/117/117-Uploading-and-Downloading-files
+   /Articles/115/115-Securing-File-Access
+   /Articles/80/80-schedule-jobs
+   /Articles/80/80-receive-messages
+   /Articles/114/114-execute
+   /Articles/159/159-exchange-data-with-cloud
+   /Articles/155/155-Catering-unresponsive-server-unstable-connection
+   /Articles/171/171-pro_system_requirements
    Best-Practices/index
 
 

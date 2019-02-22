@@ -24,10 +24,10 @@ AIMMS Language
    153-external-haversine 
    85-using-axll-library
    121-set-index-element-parameter
-   How to model categorization of objects
+   17-category-mapping
    141-element-after-last
    112-Integer-properties
-   Using_AIMMS_Libraries
+   84-using-libraries
    144-Stopwatch
    125-execution-efficiency
    170-memory-in-use.rst
@@ -45,8 +45,7 @@ AIMMS Language
    189-using-calendars-in-aimms
    190-empty-sets
    191-handle-errors-and-warnings
-
-.. Generate Random Numbers
+   12-generate-random-numbers
  
 
     
