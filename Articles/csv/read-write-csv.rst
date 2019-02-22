@@ -15,7 +15,7 @@ Architecture view
 
 The DataLink and CSVProvider libraries cooperate to present the following data view:
 
-.. image::  /images/DataLinkDataView.png 
+.. image::  images/DataLinkDataView.png 
 
 The DataLink column maps to an AIMMS set or an AIMMS parameter.
 This DataLink column is linked to a CSV column.
@@ -128,7 +128,7 @@ The following example is hopefully self-explanatory.
                 "TheMapping" ,                ! using relation "TheMapping" between folder "semi" and AIMMS identifiers.
                 spCommunicationAttributes);   ! Technicalities on how to communicate.
                 
-Download example: :download:`project </downloads/dlcsv.zip>`
+Download example: :download:`project <downloads/dlcsv.zip>`
 
                 
 

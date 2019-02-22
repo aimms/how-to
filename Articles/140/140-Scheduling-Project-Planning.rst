@@ -16,7 +16,7 @@ Several existing constraint programming languages use the Bridge Building exampl
 
 In such a construction project, there are construction activities related to each element of a structure, such as pillars, and to the activities to manage the project itself such as delivery of materials and the building of housing to shelter the construction equipment.
 
-.. figure:: /images/Bridge-Building.jpg
+.. figure:: images/Bridge-Building.jpg
    :align: center
     
    Bridge Building
@@ -76,7 +76,7 @@ Having multiple machines of a certain type, we can generalize this to:
         }
     }
 
-The entire example can be downloaded from: :download:`AIMMS project download </downloads/BuildBridge.zip>`
+The entire example can be downloaded from: :download:`AIMMS project download <downloads/BuildBridge.zip>`
 
 Reference:
 Bartusch, M. (1983), Optimierung von Netzplänen mit Anordnungsbeziehungen bei knappen Betriebsmitteln, Ph.D. thesis, Universität Passau, Fakultät für Mathematik und Informatik.

@@ -1,7 +1,7 @@
 
 .. IMAGES
 
-.. |axll-workflow| image:: /images/axll-workflow.png
+.. |axll-workflow| image:: images/axll-workflow.png
 
 .. CONTENT
 

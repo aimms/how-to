@@ -140,7 +140,7 @@ Here we compile the entire library, not just a single procedure. Note that the g
     apply( e_proc );
     
 
-A complete AIMMS model that provides the data duplication code, as a library, is available here: :download:`AIMMS project download </downloads/SomeApplication_converted.zip>`  
+A complete AIMMS model that provides the data duplication code, as a library, is available here: :download:`AIMMS project download <downloads/SomeApplication_converted.zip>`  
 
 This completes the data duplication example. It illustrates the use of Model Query and Model Edit functions in the reduction of application maintenance costs. Other uses of Model Query and Model Edit functions include:
 

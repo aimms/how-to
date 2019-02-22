@@ -1,19 +1,19 @@
 
 .. IMAGES
 
-.. |license-mgr-icon| image:: /images/license-mgr-icon.png
+.. |license-mgr-icon| image:: images/license-mgr-icon.png
     :scale: 150 %
-.. |maintenance-mode| image:: /images/maintenance-mode.png
+.. |maintenance-mode| image:: images/maintenance-mode.png
     :scale: 100 %
-.. |license-config| image:: /images/license-config.png
+.. |license-config| image:: images/license-config.png
     :scale: 100 %
-.. |service-running| image:: /images/service-running.png
+.. |service-running| image:: images/service-running.png
     :scale: 100 %
-.. |no-license| image:: /images/no-license.png
+.. |no-license| image:: images/no-license.png
     :scale: 100 %
-.. |license-config-done| image:: /images/license-config-done.png
+.. |license-config-done| image:: images/license-config-done.png
     :scale: 100 %
-.. |rename-profile| image:: /images/rename-profile.png
+.. |rename-profile| image:: images/rename-profile.png
     :scale: 100 %
 
     
@@ -34,7 +34,7 @@ Installing the Network License Server
 
 A network license is administrated by the Network License Server.
 
-1. Download the **Network License Server** from `AIMMS Downloads <https://aimms.com/english/developers/downloads/download-aimms/aimms-network-license-server>`_.
+1. Download the **Network License Server** from `AIMMS Downloads <https://aimms.com/english/developersdownloads/download-aimms/aimms-network-license-server>`_.
 
 2. Run the `AimmsLicenseServer...msi` installation file and follow the prompts in the Installation Wizard.
 

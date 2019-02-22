@@ -14,7 +14,7 @@ We saw how to remove the "Busy" veil during a solve process in a :doc:`previous 
 Implementation
 --------------
 
-.. image::  /images/QueuesBetweenDataAndServerSession.png
+.. image::  images/QueuesBetweenDataAndServerSession.png
 
 Interrupting the server session is very direct and can be done by using the AIMMS PRO library procedure, ``pro::client::StopExecution`` which requires you to specify two input arguments.  
 
@@ -39,7 +39,7 @@ This mechanism is illustrated in the code snippet below. Here, we interrupt only
 
 Now, you can link this procedure to a button in your WebUI application to be able to interrupt a solve procedure running in the backround.
 
-The example AIMMS project with the above demonstrated procedure implemented can be downloaded from :download:`8. Flow Shop - Interrupt </downloads/8. Flow Shop - Interrupt.zip>`.
+The example AIMMS project with the above demonstrated procedure implemented can be downloaded from :download:`8. Flow Shop - Interrupt <downloads/8. Flow Shop - Interrupt.zip>`.
 
 Further reading
 ---------------

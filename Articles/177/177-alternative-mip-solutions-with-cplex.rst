@@ -11,7 +11,7 @@ One of the approaches he discusses is the solution pool functionality of CPLEX. 
 
 Note that using this solution pool does not necessarily provide the K best solutions. It provides the optimal solution and some sub-optimal alternatives, but testing shows that there might exist some sub-optimal solutions which are better than the K-1 sub-optimal solutions provided by CPLEX. 
 
-Download the example AIMMS project used in this article: :download:`K Best Solutions </downloads/Find-K-Best-solutions.zip>` 
+Download the example AIMMS project used in this article: :download:`K Best Solutions <downloads/Find-K-Best-solutions.zip>` 
 
 On the page that is displayed after opening the project, you can set some relevant CPLEX solution pool options and see what the effect on the solution pool is. You can also compare the results with the actual K best solutions as found by using the integer solution elimination approach to see what the quality of the solution pool is. Both these approaches are discussed below.
 

@@ -11,7 +11,7 @@
 
 .. sidebar:: Stopwatch
 
-    .. image:: /images/icons8-stopwatch-512.png
+    .. image:: images/icons8-stopwatch-512.png
             :align: center
 
 There are situations where you would like to know how long the execution of something in AIMMS took.
@@ -77,7 +77,7 @@ To obtain the above code, please see the instructions in the post :doc:`../145/1
 If your project already contains the SI_Time quantity, please remove the quantity from the ``.ams`` file after downloading it.
 
 Example project:
-:download:`AIMMS project download </downloads/Stopwatch.zip>` 
+:download:`AIMMS project download <downloads/Stopwatch.zip>` 
 
 
 .. include:: /includes/form.def

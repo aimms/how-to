@@ -299,7 +299,7 @@ Example project
 
 Download the attached project for an example.
 
-*  :download:`AIMMS project </downloads/WriteOnlyAFewDatabaseTables.zip>` 
+*  :download:`AIMMS project <downloads/WriteOnlyAFewDatabaseTables.zip>` 
 
 
 Related Topics

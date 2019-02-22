@@ -10,7 +10,7 @@ Send and Receive Messages
 
 .. sidebar:: ListeningConnectionId
 
-    .. image:: /images/159915.svg
+    .. image:: images/159915.svg
 
 This article is a follow up of :doc:`80-schedule-jobs`
 
@@ -40,7 +40,7 @@ This article provides a simple example based on  :doc:`80-schedule-jobs`  The es
 
 #. When these server sessions pass their message, it should be stored and displayed in the data session.  
 
-A potential implementation can be downloaded :download:`here </downloads/ReceiveMessages.zip>` .
+A potential implementation can be downloaded :download:`here <downloads/ReceiveMessages.zip>` .
 
 To operate this app, just press the button and watch messages appear.
 

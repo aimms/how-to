@@ -17,7 +17,7 @@ Example
 
 The example app executes a procedure on the PRO Server upon pressing the button.
 
-.. image:: /downloads/callstack.png
+.. image:: images/callstack.png
    :scale: 105%
 
 #. A button is pressed

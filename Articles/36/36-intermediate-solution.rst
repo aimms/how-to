@@ -38,7 +38,7 @@ Approach
 
 The approach here involves passing information through three levels of execution. 
 
-.. image:: /images/ThreeLevelsOfExecutionIncumbentCB.png
+.. image:: images/ThreeLevelsOfExecutionIncumbentCB.png
 
 #. The solver execution on the server session. 
     Construct a new incumbent containing the entire solution. This is done as part of the incumbent callback mechanism. 
@@ -51,7 +51,7 @@ The approach here involves passing information through three levels of execution
 
 This approach is possible because both the data session and the server session have access to the AIMMS PRO storage and storing all the different incumbent solutions as case files allows the user to access them when required to conduct further studies. The following image illustrates how AIMMS PRO storage is organized:
 
-.. image:: /images/Default-folder-layout-of-AIMMS-PRO-Storage.png
+.. image:: images/Default-folder-layout-of-AIMMS-PRO-Storage.png
     :align: center
 
 We will use the folder ``pro:/UserData/<environment>/<User>/Cases/<app>/`` on AIMMS PRO storage. 
@@ -134,7 +134,7 @@ The procedure ``UpdateIncumbentToClient`` is a simple loading case file executio
         pro::DeleteStorageFile( spArgFullProStorageName );
 
 
-A copy of the flowshop model that is the result of this answer: :download:`Flow Shop - share intermediate </downloads/Flow Shop - share intermediate - after.zip>`.
+A copy of the flowshop model that is the result of this answer: :download:`Flow Shop - share intermediate <downloads/Flow Shop - share intermediate - after.zip>`.
 
 
 ..  Let's start with an example that is being used elsewhere in `How To <https://how-to.aimms.com>`_  as well.
@@ -143,7 +143,7 @@ A copy of the flowshop model that is the result of this answer: :download:`Flow 
 ..  Flow Shop - share intermediate - after
 ..  Flow Shop - share intermediate - before
 
-.. image:: /images/BB07_WebUI_screen.PNG
+.. image:: images/BB07_WebUI_screen.PNG
 
 Further reading
 ---------------

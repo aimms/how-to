@@ -31,11 +31,11 @@ The implementation of the information stream represented by the two arrows will 
 Implementation
 --------------
 
-The AIMMS project for the current running example with the steps implemented can be downloaded from: :download:`6. Flow Shop - Progress Communication </downloads/6. Flow Shop - Progress Communication.zip>`.
+The AIMMS project for the current running example with the steps implemented can be downloaded from: :download:`6. Flow Shop - Progress Communication <downloads/6. Flow Shop - Progress Communication.zip>`.
 
 The Gap curve linechart widget in the below image is updated every second with the gap between the bestbound and incumbent objective value of the mathematical program in the project. 
 
-.. image:: /images/BB06_WebUI_screen.PNG 
+.. image:: images/BB06_WebUI_screen.PNG 
 
 You can implement the same in your project by communicating the data from the solver (level 1) to the data session (level 2), which is done in two steps as explained in detail below. 
 

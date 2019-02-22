@@ -18,7 +18,7 @@ Analytic applications may involve a lot of data and subsequently a lot of comput
 
 Consider the following screen shot of the Identifier Cardinalities tool for a Gate Assignment example.
 
-.. figure:: /images/Data-Cardinalities-2.png
+.. figure:: images/Data-Cardinalities-2.png
 
     Data Cardinalities
 
@@ -39,13 +39,13 @@ The parameter "BothFlightsPossibleOnGate" has a density of 30%, and it will grow
 When the registered memory usage continues to increase, there can be a memory leak. Memory leaks commonly occur when the cardinality of an identifier increases. Use the function Card to identify the identifier(s) that keep increasing their size. Another possible cause is that AIMMS only reclaims memory of strings and sets that are elements of indexed sets whenever AIMMS checks whether they are still in use. Such a memory reclaim process is also known as garbage collection in computer science literature. AIMMS will reclaim that memory at selected moments, but you can enforce this by executing the REBUILD statement. In the enclosed example, a small mathematical program is solved 10000 times, registering the occupied memory every 100 times. This results in a flat memory usage curve:
 
 
-.. figure:: /images/Used-memory.png
+.. figure:: images/Used-memory.png
 
     Memory used
     
 .. "D:\u\s\How to\gitlab\master\Resources\C_Language\Images\134\MemoryUsageTest_converted.zip"
 
-The example can be replayed via the AIMMSpack presented below.  :download:`AIMMS project download </downloads/MemoryUsageTest_converted.zip>`  
+The example can be replayed via the AIMMSpack presented below.  :download:`AIMMS project download <downloads/MemoryUsageTest_converted.zip>`  
 
 
 .. include:: /includes/form.def

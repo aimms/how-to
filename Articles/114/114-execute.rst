@@ -11,7 +11,7 @@
 
 .. sidebar:: Executing another program
 
-    .. image:: /images/exe-file-icon-68130.png
+    .. image:: images/exe-file-icon-68130.png
 
 AIMMS provides a good selection of functions, such as arithmetic functions, string manipulation functions, time functions, distribution functions, file functions, and more, for app developers to build prescriptive analytics applications.
 

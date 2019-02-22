@@ -25,7 +25,7 @@ Manually Export to Aimmspack
 The first option is by creating an Aimmspack file. As you have seen in an earlier :doc:`../151/151-version-control-aimmspack-backup`, 
 Aimmspack files (in AIMMS 4) are always encrypted. You can create an Aimmspack via menu "File - Export End User Project…" Once you have selected that menu, you will be asked to specify a file name for the Aimmspack, followed by a dialog "Encryption of Exported End-User Project".
 
-.. image:: /images/Encryption-Dialog.jpg
+.. image:: images/Encryption-Dialog.jpg
 
 In this dialog, you can specify one of the following three types of encryption:
 

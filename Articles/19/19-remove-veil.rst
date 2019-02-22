@@ -13,7 +13,7 @@ While solving decision problems using the AIMMS WebUI and PRO platform, the brow
 This article explains the required steps to keep the AIMMS WebUI interactive while a solve session is going. 
 
 
-.. image:: /images/Solve.gif
+.. image:: images/Solve.gif
 
 The Flowshop Problem As Running Example
 ---------------------------------------
@@ -40,9 +40,9 @@ We can keep the WebUI session active, or in other words - remove the veil by sim
 
 This modification in the waitForCompletion argument reduces the inactive time of the browser window during a solve session drastically. There still could be inactive periods, especially during the initialization of the background procedures. The previously illustrated example will now look as follows. 
 
-.. image:: /images/NoVeil.gif
+.. image:: images/NoVeil.gif
 
-The example AIMMS project can be downloaded from :download:`Flow Shop - No Veil </downloads/4. Flow Shop - No Veil.zip>`
+The example AIMMS project can be downloaded from :download:`Flow Shop - No Veil <downloads/4. Flow Shop - No Veil.zip>`
 
 Summary
 -------

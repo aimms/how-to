@@ -11,7 +11,7 @@
 
 .. sidebar:: Re-using AIMMS source code.
 
-    .. image:: /images/code.png
+    .. image:: images/code.png
     		    	:align: center
 
 

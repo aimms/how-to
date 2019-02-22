@@ -12,7 +12,7 @@
 
 .. sidebar:: Stock Exchange Dry Board.
 
-    .. image:: /images/Stock-Exchange-Dry-Board-570618_77956939.jpg
+    .. image:: images/Stock-Exchange-Dry-Board-570618_77956939.jpg
         :scale: 35%
 
 
@@ -38,7 +38,7 @@ Here the ``cp::Channel`` constraint enforces that ``Employee`` and ``Shift`` are
 
 So let's solve this base model. The solution is presented in the following two tables containing the variables:
 
-.. figure:: /images/Solution-Base.png
+.. figure:: images/Solution-Base.png
 
     Solution Base
 
@@ -53,7 +53,7 @@ This is the first problem we have to resolve: to distribute free time evenly. We
 
 Let's solve this and take again a look at the solution:
 
-.. figure:: /images/Solution-Base.png
+.. figure:: images/Solution-Base.png
 
     Solution Free distributed
 
@@ -70,13 +70,13 @@ Inspecting the solution, we see that nurse C does the night shift on Wednesday a
                       
 Here PermittedNextShifts is an Indexed Set with the following contents:
 
-.. image:: /images/Permitted-Next-Shifts.png
+.. image:: images/Permitted-Next-Shifts.png
 
 As an aside: note the use of the circular ++ operator here: d++1, is the next day, with one exception: 'last day'++1 is the first day.
 
 Let's solve this and see what the result is now:
 
-.. figure:: /images/Applying-successor-shift-restriction.png
+.. figure:: images/Applying-successor-shift-restriction.png
 
     Applying successor shift restriction
 
@@ -90,7 +90,7 @@ First, we introduce an element variable for each of the working shifts: ShiftVal
 
 We are ready for the next iteration and then looking at the solution:
 
-.. figure:: /images/Limited-to-two-nurses-per-shift.png
+.. figure:: images/Limited-to-two-nurses-per-shift.png
 
     Limited to two nurses per shift
 
@@ -108,7 +108,7 @@ and minimizing that.
 
 With this objective we get the following solution:
 
-.. figure:: /images/Minimal-staff-changes.png
+.. figure:: images/Minimal-staff-changes.png
 
     Minimal staff changes
 
@@ -123,7 +123,7 @@ The second technique is to add redundant constraints. A redundant constraint is 
 Applying these two techniques, gives us instantaneous feedback again.
 
 If you would like to experiment with the model, the AIMMS project is provided here.
-:download:`AIMMS project download </downloads/Employee-Rostering-Week2.zip>` 
+:download:`AIMMS project download <downloads/Employee-Rostering-Week2.zip>` 
 
 .. include:: /includes/form.def
 

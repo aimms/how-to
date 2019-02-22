@@ -9,7 +9,7 @@ Sharing is rewarding
 
 .. sidebar:: Sharing ideas
 
-    .. figure:: /images/icons8-cloud-user-group-512.png
+    .. figure:: images/icons8-cloud-user-group-512.png
     
 
 
@@ -65,7 +65,7 @@ Resource for this article
 
 The enclosed example shows how to do this.
 
-*  :download:`AIMMS project </downloads/SharingIsRewarding.zip>` 
+*  :download:`AIMMS project <downloads/SharingIsRewarding.zip>` 
 
 Summary
 ---------

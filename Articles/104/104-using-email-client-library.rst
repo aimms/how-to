@@ -1,6 +1,6 @@
 .. IMAGES
 
-.. |add-email-client-lib| image:: /images/add-email-client-lib.png
+.. |add-email-client-lib| image:: images/add-email-client-lib.png
 
 .. FILES ATTACHED
 
@@ -142,7 +142,7 @@ Example
 
 Download an example AIMMS project containing an email procedure:
 
-:download:`EmailLibraryDemo.zip </downloads/EmailLibraryDemo.zip>`
+:download:`EmailLibraryDemo.zip <downloads/EmailLibraryDemo.zip>`
 
 Related topics
 ---------------

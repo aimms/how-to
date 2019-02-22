@@ -116,6 +116,6 @@ Summary
 With a few easy to copy extensions to your model, it becomes easy to get an overview of the solution process that takes place on the AIMMS PRO server.
 
 The example used to construct this article: 
-:download:`Flow Shop – with download log file </downloads/FlowShop with Download log file.zip>`.
+:download:`Flow Shop – with download log file <downloads/FlowShop with Download log file.zip>`.
 
 .. include:: /includes/form.def

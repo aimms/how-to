@@ -25,7 +25,7 @@ where MathProgramName is the name of the mathematical program identifier in your
 
 The first thing you would like to know which of the two statuses it actually is: infeasible or unbounded. One way you can determine this is by adding a constraint on the objective that limits its value. If you solve the problem again with this constraint and now you get a feasible solution, it means that your original problem was unbounded. If it is still infeasible, it means your original problem was infeasible. Alternatively, you could also ensure you have bounds (i.e. by using the range attribute) for all variables in your model except the objective variable (which must have range free). This would not allow for an unbounded model anymore.
 
-.. image:: /images/cplex-settings.png
+.. image:: images/cplex-settings.png
 
 Another, easier way to determine whether the problem is infeasible or unbounded is by setting the CPLEX solver option *Presolve* to the non-default value "off" via the project settings.
 

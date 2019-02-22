@@ -17,7 +17,7 @@ There exist two versions of the AOA algorithm in AIMMS. The old version is avail
 
 An example can be found in this ZIP file.
 
-:download:`/downloads/alan.zip`
+:download:`downloads/alan.zip`
 
 There are several reasons why you should use GMP-AOA instead of old AOA. First, the GMP-AOA algorithm offers more possibilities to customize the algorithm to your needs, for example by using functions from the GMP library.
 
@@ -25,7 +25,7 @@ Second, the GMP version can be used in combination with the nonlinear presolver 
 
 Third, for non-convex problems AOA might sometimes have difficulties in finding a good feasible solution. In that case it might help to combine the AOA with the multi-start algorithm. The way to do this has been explained in a white paper that describes GMP-AOA. This paper is available from our web site:
 
-http://www.aimms.com/downloads/white-papers
+http://www.aimms.comdownloads/white-papers
 
 Old AOA cannot be combined with the nonlinear presolver nor the multi-start algorithm.
 

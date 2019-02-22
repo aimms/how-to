@@ -5,7 +5,7 @@ Create an External Function with Visual Studio
    :description: Example using Haversine to create an external function with Microsoft Visual Studio.
    :keywords: external, function, visual, studio, dll
 
-.. image:: /images/icons8-puzzle-512.png
+.. image:: images/icons8-puzzle-512.png
 
 `Haversine code <https://rosettacode.org/wiki/Haversine_formula>`_ in various computer languages is publicly available to compute the distance between locations.
 In this article, we use it as an illustration of how to create an external function using `Microsoft Visual Studio <https://visualstudio.microsoft.com/>`_.
@@ -17,7 +17,7 @@ A Visual Studio Project facilitates incremental building of software components 
 Here we just use it to create a ``.dll`` containing external functions for Haversine.  
 
 
-.. image:: /images/01NewProjectDLL.PNG
+.. image:: images/01NewProjectDLL.PNG
 
 After opening Visual Studio, in order:
 
@@ -33,23 +33,23 @@ After opening Visual Studio, in order:
     
 #. Make sure we can change further settings
 
-    .. image:: /images/02NewProjectDLL.PNG
+    .. image:: images/02NewProjectDLL.PNG
 
 #. We want a DLL
 
-    .. image:: /images/03NewProjectDLL.PNG
+    .. image:: images/03NewProjectDLL.PNG
 
 #. The default configuration is not correct
 
-    .. image:: /images/04NewProjectDLL.PNG
+    .. image:: images/04NewProjectDLL.PNG
 
 #. We want a new configuration
 
-    .. image:: /images/05NewProjectDLL.PNG
+    .. image:: images/05NewProjectDLL.PNG
 
 #. Namely x64
 
-    .. image:: /images/06NewProjectDLL.PNG
+    .. image:: images/06NewProjectDLL.PNG
 
 #. You may want to turn off precompiled headers:
 
@@ -124,7 +124,7 @@ Installing is just unzipping. Then start the executable and browse the .dll
 
 #. ``depends22_x86\depends.exe`` for the **32 bit** dll: ``<HaversineDLL>\release\HaversineDLL.dll``.  
 
-    .. image:: /images/32BitsDependsCheck.PNG
+    .. image:: images/32BitsDependsCheck.PNG
 
     * Missing functions in MSVCR120.dll may be reported, but those are covered when starting AIMMS. 
     
@@ -133,7 +133,7 @@ Installing is just unzipping. Then start the executable and browse the .dll
     
 #. ``depends22_x64\depends.exe`` for the **64 bit** dll: ``<HaversineDLL>\x64\release\HaversineDLL.dll``.  
 
-    .. image:: /images/64BitsDependsCheck.PNG
+    .. image:: images/64BitsDependsCheck.PNG
 
     * Missing functions in MSVCR120.dll may be reported, but those are covered when starting AIMMS. 
     
@@ -210,9 +210,9 @@ Good performance; my desktop requires less than 0.3 seconds to fill a 274 X 274 
 Downloads
 ------------
 
-*  :download:`Visual Studio project </downloads/VSCPP.zip>` 
+*  :download:`Visual Studio project <downloads/VSCPP.zip>` 
 
-*  :download:`AIMMS project </downloads/CrowDistExternal.zip>` 
+*  :download:`AIMMS project <downloads/CrowDistExternal.zip>` 
 
 
 

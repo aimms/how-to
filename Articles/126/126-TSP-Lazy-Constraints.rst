@@ -25,7 +25,7 @@ Here ``x(i,j)`` equals 1 if the route from city ``i`` to city ``j`` is in the to
 
 Here ``S`` is a subset of cities while ``n`` denotes the number of cities. This SEC enforces that at least one route is going from a city in set ``S`` to a city outside ``S``.
 
-.. figure:: /images/ch130.png
+.. figure:: images/ch130.png
 
     First solution with subtours for instance ch130
 
@@ -33,7 +33,7 @@ The problem with the SECs is that the number of these constraints is exponential
 
 Fortunately, we can use SECs as **lazy constraints**. Unlike normal constraints, lazy constraints are not generated upfront. Instead, they are only generated when needed. Typically lazy constraints are unlikely to be violated. In a TSP with 50 cities usually at most 100 SECs will be "active" which is only a fraction of the total number of SECs. Lazy constraints are supported by CPLEX and Gurobi.
 
-The new AIMMS example `TSP <https://raw.githubusercontent.com/aimms/examples/master/Practical%20Examples/Routing/TSP/MainProject/TSP.ams>`_, which can be found on the `examples page <http://www.aimms.com/downloads/application-examples/>`_ on the AIMMS website, uses the above formulation. The SECs are added as lazy constraints inside a callback. This callback is called whenever the solver finds a new candidate incumbent solution, i.e., a solution that satisfies formulation (1) plus the SECs that have been added before as lazy constraints. The callback procedure checks whether the candidate solution forms one tour. If it does, the solver found a true solution for the TSP and the solution is accepted; otherwise a SEC is added for each subtour. Finding a violated SEC, the so-called separation problem, can be solved in polynomial time despite the exponential number of SECs. The separation algorithm implemented in this example (inside the procedure DetermineSubtours) has a worst-case running time of :math:`O(n^2)`.
+The new AIMMS example `TSP <https://raw.githubusercontent.com/aimms/examples/master/Practical%20Examples/Routing/TSP/MainProject/TSP.ams>`_, which can be found on the `examples page <http://www.aimms.comdownloads/application-examples/>`_ on the AIMMS website, uses the above formulation. The SECs are added as lazy constraints inside a callback. This callback is called whenever the solver finds a new candidate incumbent solution, i.e., a solution that satisfies formulation (1) plus the SECs that have been added before as lazy constraints. The callback procedure checks whether the candidate solution forms one tour. If it does, the solver found a true solution for the TSP and the solution is accepted; otherwise a SEC is added for each subtour. Finding a violated SEC, the so-called separation problem, can be solved in polynomial time despite the exponential number of SECs. The separation algorithm implemented in this example (inside the procedure DetermineSubtours) has a worst-case running time of :math:`O(n^2)`.
 
 The example comes with several symmetric instances from `TSPLIB <https://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/>`_. More information on the TSP can be found on `this <http://www.math.uwaterloo.ca/tsp/>`_ very nice page maintained by William Cook.
 

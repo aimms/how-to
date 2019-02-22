@@ -103,9 +103,9 @@ We are executing the predefined procedure ``pro::session::LoadResultsCallBack`` 
 
 We want to control the visibility of ``BtnLoadResults`` because it makes sense for it to show up only when results are available to load. This appearance acts as a notification for the end user that results are available. The user interface when the results are available, but not yet downloaded looks as follows:
 
-.. image::  /images/BB05_WebUI_screen.PNG 
+.. image::  images/BB05_WebUI_screen.PNG 
 
-The AIMMS project that does just this, can be downloaded from: :download:`5. Flow Shop - Load Results </downloads/5. Flow Shop - Load Results.zip>`.
+The AIMMS project that does just this, can be downloaded from: :download:`5. Flow Shop - Load Results <downloads/5. Flow Shop - Load Results.zip>`.
 
 Summary
 -------

@@ -9,7 +9,7 @@
 
 	This article was originally posted to the AIMMS Tech Blog.
 
-.. image:: /images/BlogPicture.jpg
+.. image:: images/BlogPicture.jpg
    :align: right
 
 For the past couple of years, we have worked on improving the compiler and execution engine in AIMMS. We've done this in a way that minimizes problems in existing models.  

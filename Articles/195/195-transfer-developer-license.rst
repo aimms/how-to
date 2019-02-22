@@ -1,25 +1,25 @@
-.. |doc| image:: /images/icons/Documentation.png
-.. |aimmsIcon| image:: /images/icons/favicon.png
+.. |doc| image:: images/icons/Documentation.png
+.. |aimmsIcon| image:: images/icons/favicon.png
 			:scale: 15 %
 
-.. |aimms| image:: /images/aimms-logo-s-rgb.png
+.. |aimms| image:: images/aimms-logo-s-rgb.png
 				:scale: 10 %
 				:target: https://aimms.com/
-.. |LicenseConfigurationLocation| image:: /images/LicenseConfigurationLocation.png
-.. |LicenseDeactivation| image:: /images/LicenseDeactivation.png
-.. |SuccessfulDeactivation| image:: /images/SuccessfulDeactivation.png
-.. |NoValidLicense| image:: /images/NoValidLicense.png
-.. |InstallAimmsLicense| image:: /images/InstallAimmsLicense.png
-.. |InputLicense| image:: /images/InputLicense.png
-.. |LicenseProtection| image:: /images/LicenseProtection.png
-.. |InputActivationCode| image:: /images/InputActivationCode.png
-.. |NodelockProtection| image:: /images/NodelockProtection.png
-.. |SuccessfulActivation| image:: /images/SuccessfulActivation.png
+.. |LicenseConfigurationLocation| image:: images/LicenseConfigurationLocation.png
+.. |LicenseDeactivation| image:: images/LicenseDeactivation.png
+.. |SuccessfulDeactivation| image:: images/SuccessfulDeactivation.png
+.. |NoValidLicense| image:: images/NoValidLicense.png
+.. |InstallAimmsLicense| image:: images/InstallAimmsLicense.png
+.. |InputLicense| image:: images/InputLicense.png
+.. |LicenseProtection| image:: images/LicenseProtection.png
+.. |InputActivationCode| image:: images/InputActivationCode.png
+.. |NodelockProtection| image:: images/NodelockProtection.png
+.. |SuccessfulActivation| image:: images/SuccessfulActivation.png
 
 				
 				
 .. This text will not be shown 				
-	.. figure:: /images/aimms-logo-s-rgb.png
+	.. figure:: images/aimms-logo-s-rgb.png
 					:scale: 70 %
 					:align: center
 					:target: https://aimms.com/

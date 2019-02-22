@@ -1,10 +1,10 @@
 
 .. IMAGES
 
-.. |maintenance-mode| image:: /images/maintenance-mode.png
-.. |registered-users-menu| image:: /images/registered-users-menu.png
-.. |add-new-users| image:: /images/add-new-users.png
-.. |client-section| image:: /images/client-section.png
+.. |maintenance-mode| image:: images/maintenance-mode.png
+.. |registered-users-menu| image:: images/registered-users-menu.png
+.. |add-new-users| image:: images/add-new-users.png
+.. |client-section| image:: images/client-section.png
     :scale: 60 %
 
 

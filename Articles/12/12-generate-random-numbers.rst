@@ -1,6 +1,6 @@
 :orphan:
 
-.. include:: includes/icons.def
+.. include:: /includes/icons.def
 
 :abbr:`LIFO (last-in, first-out)`
 
@@ -33,8 +33,8 @@ How to generate random numbers ?
 
 .. sidebar:: Normal and Log Normal Distributions
 
-		.. image:: http://mathworld.wolfram.com/images/eps-gif/NormalDistribution_651.gif
-		.. image:: http://mathworld.wolfram.com/images/eps-gif/LogNormalDistribution_800.gif
+		.. image:: http://mathworld.wolfram.comimages/eps-gif/NormalDistribution_651.gif
+		.. image:: http://mathworld.wolfram.comimages/eps-gif/LogNormalDistribution_800.gif
 	
    
 .. topic:: Normal Distribution
@@ -56,7 +56,7 @@ How to generate random numbers ?
 
 .. only:: builder_html
 
-   See :download:`this example AIMMS project <Resources/Other/GenerateRandomNumbers/GenerateRandomNumbers.zip>`.
+   See :download:`this example AIMMS project <downloads/GenerateRandomNumbers.zip>`.
 
 .. note::
 	
@@ -89,7 +89,7 @@ How to generate random numbers ?
 
 :samp:`{variable = 2} print 1+{variable}`
 
-.. literalinclude:: ./Resources/Modelling/CSVFiles/Downloads/CSVInterface/MainProject/CSVInterface.ams
+.. literalinclude:: /Resources/Modelling/CSVFiles/Downloads/CSVInterface/MainProject/CSVInterface.ams
     :caption: CSVInterface.ams
     :name: CSVInterface.ams
     
