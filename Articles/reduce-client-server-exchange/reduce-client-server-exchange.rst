@@ -6,7 +6,7 @@ Reduce Exchange Between Client Session and Server Session
    :description: How to reduce the overhead of creating and communicating cases between the client session and the server session.
    :keywords: client, server, session
 
-As shown in :doc:`33-pro-deploy-app`, part of the overhead in solving is creating a case and transferring it, once from the client session to the server session and once back.
+As shown in :doc:`../33/33-pro-deploy-app`, part of the overhead in solving is creating a case and transferring it, once from the client session to the server session and once back.
 Especially, for short solves, the overhead can be relatively large.
 To reduce this overhead, we'll reduce the number of identifiers that need to be passed between these sessions.
 

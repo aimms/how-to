@@ -118,9 +118,9 @@ Related posts
 This article is part of the series on Model Edit Functions. Other articles in this series can be found here:
 
 
-#. :doc:`146-value-dynamic-identifier`
+#. :doc:`../146/146-value-dynamic-identifier`
 
-#. :doc:`132-Repetive-Patterns-Model-Edit`
+#. :doc:`../132/132-Repetive-Patterns-Model-Edit`
 
 .. include:: /includes/form.def
 
