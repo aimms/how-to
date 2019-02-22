@@ -139,9 +139,9 @@ Further study
 
 Oops, I see several problems that we can work on.  
 
-#. I want to continue working on the app itself using my development environment. Now, the system asks whether I want to solve on a PRO system, while I am clearly not connected to that PRO system – I just want to be able to :doc:`test and debug <32-pro-develop-app>` my application.  
+#. I want to continue working on the app itself using my development environment. Now, the system asks whether I want to solve on a PRO system, while I am clearly not connected to that PRO system – I just want to be able to :doc:`test and debug <../32/32-pro-develop-app>` my application.  
 
-#. I want to remove the veil that drops down when a procedure of the data session runs for more than a few seconds. See topic :doc:`19-remove-veil`
+#. I want to remove the veil that drops down when a procedure of the data session runs for more than a few seconds. See topic :doc:`../19/19-remove-veil`
 
 
 .. include:: /includes/form.def

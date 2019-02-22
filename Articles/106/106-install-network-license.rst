@@ -92,7 +92,7 @@ Configuring license and adding users
 2. 
     Add users in *Maintenance > License > Registered Users*. 
 
-    For further instructions, read :doc:`105-adding-named-user-licenses`.
+    For further instructions, read :doc:`../105/105-adding-named-user-licenses`.
 
     |
 
@@ -114,7 +114,7 @@ Users can access an AIMMS Network License while connected to the network from an
 Related topics
 ---------------
 
-*  AIMMS Knowledge: :doc:`105-adding-named-user-licenses`
+*  AIMMS Knowledge: :doc:`../105/105-adding-named-user-licenses`
 *  AIMMS Documentation: `Network License Server Manual <https://download.aimms.com/aimms/download/data/LicenseServer/AIMMS_net.pdf>`_ 
 *  AIMMS Documentation: `License Server Installation and Configuration <https://manual.aimms.com/pro/license-server.html>`_ 
 

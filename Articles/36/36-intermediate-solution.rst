@@ -148,7 +148,7 @@ A copy of the flowshop model that is the result of this answer: :download:`Flow 
 Further reading
 ---------------
 
-Now that end users know the state of the solution process, they also want to interrupt it when they see that further improvements are not worth waiting for. This is handled in :doc:`34-interrupt-server-session`.
+Now that end users know the state of the solution process, they also want to interrupt it when they see that further improvements are not worth waiting for. This is handled in :doc:`../34/34-interrupt-server-session`.
 
 
 .. include:: /includes/form.def

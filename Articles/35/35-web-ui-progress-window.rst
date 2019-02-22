@@ -118,7 +118,7 @@ You can read more about the ``pro::PROMFLAG_LIVE`` and other flag arguments in a
 
 .. here, `What are the pro flag arguments and why use them? <Insert article link here>`_.
 
-Now that end users know the state of the solution process, they might want to interrupt it when they see that further improvements are not worth waiting for. The article  :doc:`Deploy_DataServerComm_7_Interrupt` shows you how to do it.
+Now that end users know the state of the solution process, they might want to interrupt it when they see that further improvements are not worth waiting for. The article  :doc:`../34/34-interrupt-server-session` shows you how to do it.
 
 .. include:: /includes/form.def
  

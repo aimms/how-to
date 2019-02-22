@@ -117,11 +117,11 @@ Further opportunities
 
 There are now several opportunities for further improvement:
 
-#. End users may want to keep track of the progress of the solution process, especially the gap is interesting. In :doc:`35-web-ui-progress-window` we show how to do this.
+#. End users may want to keep track of the progress of the solution process, especially the gap is interesting. In :doc:`../35/35-web-ui-progress-window` we show how to do this.
    
-#. The contents of intermediate solutions can be interesting for the data session at hand. In :doc:`36-intermediate-solution` we show how to copy selected intermediate results from the server session to the data session.
+#. The contents of intermediate solutions can be interesting for the data session at hand. In :doc:`../36/36-intermediate-solution` we show how to copy selected intermediate results from the server session to the data session.
 
-#. Once the solution is "good enough for now", the end user may want to abort the server session.  In :doc:`34-interrupt-server-session` we will show how to interrupt the server session.
+#. Once the solution is "good enough for now", the end user may want to abort the server session.  In :doc:`../34/34-interrupt-server-session` we will show how to interrupt the server session.
 
 
 .. include:: /includes/form.def

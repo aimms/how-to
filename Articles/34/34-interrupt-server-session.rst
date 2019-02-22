@@ -9,7 +9,7 @@ Interrupt the Server Session
 Introduction
 ------------
 
-We saw how to remove the "Busy" veil during a solve process in a :doc:`previous article<19-remove-veil>` to let the user be in control of the application while a procedure execution is running in the background. However, we also lose the ability to interrupt this background process which was available as a "Cancel" button on the veil. This article will guide you on how to interrupt a procedure executing in the server session when the veil has been disabled.
+We saw how to remove the "Busy" veil during a solve process in a :doc:`previous article<../19/19-remove-veil>` to let the user be in control of the application while a procedure execution is running in the background. However, we also lose the ability to interrupt this background process which was available as a "Cancel" button on the veil. This article will guide you on how to interrupt a procedure executing in the server session when the veil has been disabled.
 
 Implementation
 --------------
@@ -44,7 +44,7 @@ The example AIMMS project with the above demonstrated procedure implemented can 
 Further reading
 ---------------
 
-An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided in :doc:`42-data-session-changes`.
+An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided in :doc:`../42/42-data-session-changes`.
 
 
 .. include:: /includes/form.def

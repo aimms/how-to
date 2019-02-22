@@ -128,7 +128,7 @@ Related Topics
     
     * Function GMP::Instance::GetMemoryUsed
     
-* :doc:`134-Monitoring-Memory-Use`
+* :doc:`../134/134-Monitoring-Memory-Use`
 
 
 .. include:: /includes/form.def

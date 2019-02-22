@@ -73,7 +73,7 @@ After you have imported the section, the stopwatch code can be used as follows:
 
 When running this code, you will get a dialog window telling you how many seconds the execution of SomeLongLastingProcedure took.
 
-To obtain the above code, please see the instructions in the post :doc:`145-import-export-section` to export the section ``Stopwatch support`` from the example model below and import this ``.ams`` file into your own project. 
+To obtain the above code, please see the instructions in the post :doc:`../145/145-import-export-section` to export the section ``Stopwatch support`` from the example model below and import this ``.ams`` file into your own project. 
 If your project already contains the SI_Time quantity, please remove the quantity from the ``.ams`` file after downloading it.
 
 Example project:

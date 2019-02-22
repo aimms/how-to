@@ -85,11 +85,11 @@ Further reading
 
 More information can be found in the following references.
 
-* :doc:`120-pro-user-groups` 
+* :doc:`../120/120-pro-user-groups` 
 
-* :doc:`117-Uploading-and-Downloading-files` 
+* :doc:`../117/117-Uploading-and-Downloading-files` 
 
-* :doc:`115-Securing-File-Access` 
+* :doc:`../115/115-Securing-File-Access` 
 
 .. include:: /includes/form.def
 
