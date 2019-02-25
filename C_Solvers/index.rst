@@ -15,17 +15,17 @@ Solvers
 .. toctree::
    :maxdepth: 1
         
-   178-change-default-solver
-   127-Progress-Window
-   BasicSolverLoggingIDE
-   BasicSolverLoggingPRO
-   147-GMP-Intro
-   172-use-stop-criteria
-   139-Multiple-Solutions
-   177-alternative-mip-solutions-with-cplex
-   116-Benders-CPLEX
-   126-TSP-Lazy-Constraints
-   136-Infeasible-Unbounded
-   130-Infeasible-Nonlinear-Problems
-   192-solve-minlp-with-outer-approximation
+   /Articles/127/127-Progress-Window
+   /Articles/13/13-Solver-Logging-IDE
+   /Articles/13/13-Solver-Logging-PRO
+   /Articles/147/147-GMP-Intro
+   /Articles/172/172-use-stop-criteria
+   /Articles/139/139-Multiple-Solutions
+   /Articles/177/177-alternative-mip-solutions-with-cplex
+   /Articles/116/116-Benders-CPLEX
+   /Articles/126/126-TSP-Lazy-Constraints
+   /Articles/136/136-Infeasible-Unbounded
+   /Articles/130/130-Infeasible-Nonlinear-Problems
+   /Articles/178/178-change-default-solver
+   /Articles/192/192-solve-minlp-with-outer-approximation
 
