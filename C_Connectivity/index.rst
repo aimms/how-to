@@ -11,10 +11,10 @@ Data Connection
 .. toctree::
    :maxdepth: 1
 
-   /Articles/118/118-Connect-SQLite
-   /Articles/122/122-AXLL-Library
-   /Articles/csv/read-write-csv
-   /Articles/129/129-MSACCESS-32bit-64bit
-   /Articles/185/185-connect-to-access-database
-   /Articles/159/159-exchange-data-with-cloud
+   118-Connect-SQLite
+   122-AXLL-Library
+   how to work with csv files
+   129-MSACCESS-32bit-64bit
+   185-connect-to-access-database
+   /C_Deployment/159-exchange-data-with-cloud
    
