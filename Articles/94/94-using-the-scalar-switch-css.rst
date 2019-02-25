@@ -3,6 +3,7 @@
 
 Display an On/Off Switch in Widgets
 ======================================
+
 .. meta::
    :description: How to create an on/off toggle switch with CSS in AIMMS WebUI widgets.
    :keywords: css, widget, webui, binary, switch, toggle, slider, selector

@@ -1,6 +1,11 @@
 Remove elements from a set
 ==========================
 
+.. meta::
+   :description: Removing elements from a set and even emptying.
+   :keywords: Set, element, remove, empty, 
+
+
 This article explains the possible behaviors of the ``empty`` statement.
 
 To remove all the elements from a set, you can use the ``empty`` statement in AIMMS. 

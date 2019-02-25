@@ -2,9 +2,8 @@ Connect to Access database file
 ================================
 
 .. meta::
-
- :description: How to connect to a MS Access database file via the ODBC connection string.
-
+   :description: How to connect to a MS Access database file via the ODBC connection string.
+   :keywords: MS ACCESS, ODBC, connection string
 
 AIMMS has the possibility to retrieve/store data from/into any ODBC or OLEDB datasource. You could provide a UDL file (in case of OLEDB) or a System/User/File DSN (in case of ODBC).
 

@@ -1,4 +1,3 @@
-
 .. |aimmsIcon| image:: ../Images/icons/favicon.png
             :scale: 15 %
 
@@ -23,7 +22,8 @@ Deployment
    /Articles/114/114-execute
    /Articles/159/159-exchange-data-with-cloud
    /Articles/155/155-Catering-unresponsive-server-unstable-connection
-   /Articles/171/171-pro_system_requirements
+   171-pro-system-requirements
    Best-Practices/index
+
 
 

@@ -1,6 +1,11 @@
 How to set Stop Criteria for Math Programs 
 ==============================================
 
+.. meta::
+   :description: Early stopping of the solution process of linear programming models.
+   :keywords: GAP, iteration limit, time limit, MIP Relative Optimality Tolerance, maximum number of nodes
+
+
 When you solve a Mathematical Program in AIMMS, the default behavior is that AIMMS will let the solver solve the problem to (local) optimality. There might be situations where you want to stop the solve procedure after a set time period, or once a solution within x % of the best value is available. This article will show you how to apply different stop criteria to a ``solve`` statement in AIMMS.
 
 

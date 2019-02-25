@@ -1,5 +1,11 @@
 Overview: Calendars in AIMMS
 ============================
+
+.. meta::
+   :description: Representation of time in AIMMS optimization models and linking to real time.
+   :keywords: Calendar, second, minute, hour, day, week, month, year, granularity, localized format, time representation
+
+
 Many models involve some time-based notion. This article explains how using Calendars in AIMMS can make working with time a lot easier.
 
 For example, with a transportation problem the main decision could be how much to transport from each depot to each customer for every day in a given time horizon.
