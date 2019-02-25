@@ -16,8 +16,8 @@ Mathematical Modeling
 .. toctree::
    :maxdepth: 1
     
-   /Articles/138/138-ROGO
-   /Articles/137/137-Small-Rostering
-   /Articles/142/142-Narrowing-Time-Windows
-   /Articles/140/140-Scheduling-Project-Planning
-   /Articles/193/193-check-if-variables-satisfy-constraints
+   138-ROGO
+   137-Small-Rostering
+   142-Narrowing-Time-Windows
+   140-Scheduling-Project-Planning
+   193-check-if-variables-satisfy-constraints

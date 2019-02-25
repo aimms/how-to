@@ -12,13 +12,13 @@ Best Practices
 .. toctree::
    :maxdepth: 1
 
-   ../../Articles/33/33-pro-deploy-app
-   ../../Articles/32/32-pro-develop-app
-   ../../Articles/reduce-client-server-exchange/reduce-client-server-exchange 
-   ../../Articles/19/19-remove-veil
-   ../../Articles/40/40-data-server-load-results
-   ../../Articles/35/35-web-ui-progress-window
-   ../../Articles/36/36-intermediate-solution 
-   ../../Articles/34/34-interrupt-server-session 
-   ../../Articles/42/42-data-session-changes
+   Deploy_DataServerComm_1_Publish
+   Deploy_DataServerComm_2_Develop
+   Deploy_DataServerComm_3_RemoveVeil
+   Deploy_DataServerComm_4_LoadResults
+   Deploy_DataServerComm_5_Progress
+   Deploy_DataServerComm_6_Retrieve
+   Deploy_DataServerComm_7_Interrupt
+   Deploy_DataServerComm_8_PassNewData
+   Deploy_DataServerComm_2a_ReducedCases
 
