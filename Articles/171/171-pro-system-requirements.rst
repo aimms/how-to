@@ -1,4 +1,4 @@
-How to size your hardware for AIMMS PRO Server
+How to Size Your AIMMS PRO Server Hardware
 ==================================================
 
 .. meta::
