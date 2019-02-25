@@ -25,31 +25,10 @@ Default Constraints and Variables
 ----------------------------------------
 
 When you solve a mathematical program (or generate it via the GMP functions), AIMMS will use the values of the ``Constraints`` and ``Variables`` attributes of the mathematical program identifier to determine which symbolic variables and constraints should actually be considered in the model. The default values of ``Constraints`` and ``Variables`` attributes are the predefined sets ``AllConstraints`` and ``AllVariables`` respectively. ``AllConstraints`` contains all the constraints declared in your AIMMS project and similarly, ``AllVariables`` contains all the variables. 
-<<<<<<< HEAD
 
 Variables with definition
 """""""""""""""""""""""""""""
 
-For variables with a definition, AIMMS will actually generate both the variable and an additional equality constraint. For example, if you have the variable ``X`` that has ``Y + Z`` in its definition attribute:
-=======
->>>>>>> 3b82d0db1f781ab38eac5ed8f050ef5af77af32a
-
-Variables with definition
-"""""""""""""""""""""""""""""
-
-<<<<<<< HEAD
-   Variable X {
-      Range: free;
-      Definition: Y+Z;
-   }
-
-AIMMS will actually generate two things:
-
-#. Variable ``X``
-
-#. Equality constraint ``X_definition`` as ``X = Y + Z``
-
-=======
 For variables with a definition, AIMMS will actually generate both the variable and an additional equality constraint. For example, if you have the variable ``X`` that has ``Y + Z`` in its definition attribute:
 
 .. code-block:: aimms
@@ -65,7 +44,6 @@ AIMMS will actually generate two things:
 
 #. Equality constraint ``X_definition`` as ``X = Y + Z``
 
->>>>>>> 3b82d0db1f781ab38eac5ed8f050ef5af77af32a
 So, any variable with a definition (like ``X``) will appear in both the predeclared sets ``AllConstraints`` and ``AllVariables``. 
 
 Selecting Constraints (Variables) 
