@@ -1,4 +1,4 @@
-Deploy an Application on AIMMS PRO 
+﻿Deploy an Application on AIMMS PRO 
 ===================================
 
 .. meta::
@@ -24,7 +24,7 @@ Note that to use this example, you'll need an AIMMS license with a MIP solver. W
 
 When your application solves one or more mathematical programs, or contains some other long running search procedure, you will need to prepare your application for AIMMS PRO. The reason behind this is that the AIMMS session to support AIMMS can be separated from the AIMMS session that does the "heavy weight" computation. This separation of processes is illustrated below:
 
-.. image:: /Resources/AIMMSPRO/Deploy_DataServerComm_1_Publish/Images/AIMMS_PRO.png
+.. image:: images/AIMMS_PRO.png
 
 The story behind this picture is as follows:
 
@@ -61,7 +61,7 @@ Perform the following steps:
 
 #.  Link the widget "BtnSolve" in the WebUI to the new procedure ``prSolve``.
 
-The AIMMS project that does just this, can be downloaded from: :download:`2. Flow Shop - Delegated </Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/2. Flow Shop - Delegated.zip>`.
+The AIMMS project that does just this, can be downloaded from: :download:`2. Flow Shop - Delegated <downloads/2. Flow Shop - Delegated.zip>`.
 
 .. caution:: Please do not use the "if pro::DelegateToServer" somewhere in the middle of a procedure; on the server the calling procedure will start from the **beginning**, thus repeating execution steps and this easily leads to confusion.
 
@@ -80,11 +80,11 @@ The publication process consists of creating an artifact, the so-called *``.aimm
 An ``.aimmspack`` is created using the AIMMS IDE, via AIMMS Menu - File - Export File...
 After the standard file selection dialog of Windows where to save a file, you'll get a dialog that looks like:
 
-.. image::  /Resources/AIMMSPRO/Deploy_DataServerComm_1_Publish/Images/EncryptiongAimmspack.PNG 
+.. image::  images/EncryptiongAimmspack.PNG 
 
 enabling you to select a non-default encryption.  OK'ing this dialog, you'll get a next dialog to select the contents of the ``.aimmspack``:
 
-.. image::  /Resources/AIMMSPRO/Deploy_DataServerComm_1_Publish/Images/FileSelectionAimmspack.PNG
+.. image::  images/FileSelectionAimmspack.PNG
 
 Note, AIMMS will store the selection made in the project such that you do not have the make the same selection next time around. 
 
@@ -93,14 +93,14 @@ Note, AIMMS will store the selection made in the project such that you do not ha
 
 When you open your AIMMS portal, you should see something like this, in particular the green "Publish App" button.
 
-.. image:: /Resources/AIMMSPRO/Deploy_DataServerComm_1_Publish/Images/EmptyPortal.PNG
+.. image:: images/EmptyPortal.PNG
    :scale: 50 %
 
 .. note:: If you do not have the publish button, please contact your AIMMS PRO administrator and ask to become a member of the ``AppPublishers`` group.
    
 Pressing the publish button on the AIMMS PRO portal, you will be asked for the .aimmspack file.  After uploading this, you will get you to:
 
-.. image:: /Resources/AIMMSPRO/Deploy_DataServerComm_1_Publish/Images/PublicationFilledIn.PNG
+.. image:: images/PublicationFilledIn.PNG
    :scale: 50 %
 
 Here the areas with a red border need to be filled in.
@@ -111,17 +111,17 @@ Here the areas with a red border need to be filled in.
 
 At the end of the app publication, you can set the access rights. You can also modify the access rights at a later stage, by 
 
-.. image:: /Resources/AIMMSPRO/Deploy_DataServerComm_1_Publish/Images/InvokeModifyAccessRights.PNG
+.. image:: images/InvokeModifyAccessRights.PNG
 
 Anyway, you'll get a browser page that looks somewhat like this, and you can point and click to select groups and/or individual users, and you can point and click to give groups and individual rights. 
 
-.. image:: /Resources/AIMMSPRO/Deploy_DataServerComm_1_Publish/Images/SettingAccessRights.PNG
+.. image:: images/SettingAccessRights.PNG
 
 Here we've given all AimmsCloudUsers of the AIMMS environment the right to read and execute the Flowshop application.
 
 The interface to the end-user looks almost the same, as you can see from the screen shot below.
 
-.. image::  /Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/BB02_WebUI_screen.png 
+.. image::  images/BB02_WebUI_screen.png 
 
 Some of the minor differences are highlighted in the above screenshot. 
 The two major differences are:
@@ -145,4 +145,3 @@ Oops, I see several problems that we can work on.
 
 
 .. include:: /includes/form.def
- 
