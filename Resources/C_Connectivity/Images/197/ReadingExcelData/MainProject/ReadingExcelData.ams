@@ -1,0 +1,85 @@
+## ams_version=1.0
+
+Model Main_ReadingExcelData {
+    DeclarationSection Potential_EXCEL_input_data {
+        Set s_SKU {
+            SubsetOf: Integers;
+            Index: i_sku;
+        }
+        Set s_Vendors {
+            Index: i_Vendor;
+        }
+        Parameter p_price {
+            IndexDomain: (i_sku,i_vendor);
+        }
+        Parameter p_maxavail {
+            IndexDomain: (i_sku,i_Vendor);
+        }
+        Parameter p_amtPerPackage {
+            IndexDomain: (i_sku,i_Vendor);
+        }
+    }
+    DeclarationSection excel_mngmt_data {
+        Set s_RangeNames {
+            Index: i_rn;
+        }
+    }
+    Procedure pr_ReadUsingAXLL {
+        Arguments: (sp_dataFilename);
+        Body: {
+            axll::CloseAllWorkBooks();
+            
+            empty p_price ;
+            axll::OpenWorkBook( sp_dataFilename );
+            axll::SelectSheet("Sheet1");
+            axll::GetNamedRanges(
+            	RangeNames :  s_RangeNames, 
+            	SheetName  :  0);
+            axll::ReadList(
+            	IdentifierReference    :  p_price, 
+            	RowHeaderRange         :  "colrange", !"A2:B4",
+            	DataRange              :  "Price", ! "C2:C4", 
+            	ModeForUnknownElements :  1, 
+            	MergeWithExistingData  :  0);
+            axll::CloseAllWorkBooks();
+        }
+        StringParameter sp_dataFilename {
+            Property: Input;
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            pr_ReadUsingAXLL( "data\\data1.xlsx");
+        }
+    }
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}
