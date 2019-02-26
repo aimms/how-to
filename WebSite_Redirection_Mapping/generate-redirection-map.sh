@@ -4,4 +4,4 @@
 var=$(git branch | grep \* | cut -d ' ' -f2 )
 
 #Output the mapping file in the format "<original file location>\t<new file location>"
-git log $var --name-status --format='%H' --after='2019-01-01' | grep ^R | grep .rst | cut -f2- > WebSite_Redirection_Mapping\\redirection_map.txt
+git log $var --name-status --format='%H' --after='2019-01-01' | grep ^R | grep .rst | cut -f2- > WebSite_Redirection_Mapping\\redirection_map_full.txt
