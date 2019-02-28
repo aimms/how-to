@@ -62,7 +62,7 @@ When connected, their details will appear in the *Client* section of the Network
 Related topics
 ---------------
 
-.. *  AIMMS Knowledge: :doc:`106-install-network-license`
+.. *  AIMMS Knowledge: :doc:`../106/106-install-network-license`
 
 *  AIMMS Documentation: `Network License Server Manual <https://download.aimms.com/aimms/download/data/LicenseServer/AIMMS_net.pdf>`_ 
 *  AIMMS Documentation: `License Server Installation and Configuration <https://manual.aimms.com/pro/license-server.html>`_ 

@@ -32,19 +32,55 @@ Model Main_ReadingExcelData {
             empty p_price ;
             axll::OpenWorkBook( sp_dataFilename );
             axll::SelectSheet("Sheet1");
-            axll::GetNamedRanges(
-            	RangeNames :  s_RangeNames, 
-            	SheetName  :  0);
+            !axll::GetNamedRanges(
+            !	RangeNames :  s_RangeNames, 
+            !	SheetName  :  0);
+            
             axll::ReadList(
             	IdentifierReference    :  p_price, 
-            	RowHeaderRange         :  "colrange", !"A2:B4",
-            	DataRange              :  "Price", ! "C2:C4", 
+            	RowHeaderRange         :  "colrange",  
+            	DataRange              :  "Price",     
             	ModeForUnknownElements :  1, 
             	MergeWithExistingData  :  0);
+            
+            axll::ReadList(
+            	IdentifierReference    :  p_maxAvail, 
+            	RowHeaderRange         :  "colrange",  
+            	DataRange              :  "maxAvail",     
+            	ModeForUnknownElements :  1, 
+            	MergeWithExistingData  :  0);
+            
+            axll::ReadList(
+            	IdentifierReference    :  p_amtPerPackage, 
+            	RowHeaderRange         :  "colrange",  
+            	DataRange              :  "amtPerPackage",          
+            	ModeForUnknownElements :  1, 
+            	MergeWithExistingData  :  0);
+            
             axll::CloseAllWorkBooks();
+            
+            display { p_price, p_maxAvail, p_amtPerPackage };
         }
         StringParameter sp_dataFilename {
             Property: Input;
+        }
+    }
+    Procedure pr_ReadUsingDatalink {
+        Arguments: (sp_dataFilename);
+        StringParameter sp_dataFilename {
+            Property: Input;
+        }
+    }
+    Procedure pr_ReadAllUsingAXLL {
+        Body: {
+            pr_ReadUsingAXLL( "data\\data1.xlsx");
+            pr_ReadUsingAXLL( "data\\data2.xlsx");
+        }
+    }
+    Procedure pr_ReadAllUsingDatalink {
+        Body: {
+            pr_ReadUsingDatalink( "data\\data1.xlsx");
+            pr_ReadUsingDatalink( "data\\data2.xlsx");
         }
     }
     Procedure MainInitialization {
@@ -56,11 +92,7 @@ Model Main_ReadingExcelData {
             or add statements that require the Data Management module to be initialized."
         }
     }
-    Procedure MainExecution {
-        Body: {
-            pr_ReadUsingAXLL( "data\\data1.xlsx");
-        }
-    }
+    Procedure MainExecution;
     Procedure PreMainTermination {
         Body: {
             return 1;
