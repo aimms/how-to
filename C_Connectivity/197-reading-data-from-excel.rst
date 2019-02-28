@@ -9,7 +9,7 @@ Reading columns of data from EXCEL
 .. datalink/xlsprovider : column feature
 ..                      : self support column selection
 
-AIMMS provides several methodes for exchanging data with EXCEL workbooks. Which method is adviced; is there a "best" method?
+AIMMS provides several methodes for exchanging data with EXCEL workbooks. Which method is adviced, is there a "best" method?
 This depends on the application at hand, and how sheets containing data are formatted.
 
 Overview of methods to exchange data
@@ -26,7 +26,12 @@ AIMMS provides three methods of reading data from EXCEL:
    The data can be exchanged with any range on a sheet in a workbook, making it suitable to communicate between AIMMS and any EXCEL sheet.
 
 #. Datalink with the provider xlsprovider.
-   When an EXCEL sheet is organized as parallel columns of data, with a row on top containing the column data descriptions, then such a sheet is suited to be used by Datalink. This may sound restrictive upon first reading, but it is actually a common format to store data in EXCEL workbooks.
+   When an EXCEL sheet is organized as parallel columns of data, 
+   with a row on top containing the column data descriptions, 
+   then such a sheet is suited to be used by Datalink. 
+   This may sound restrictive upon first reading, but it is actually a common format to store data in EXCEL workbooks.
+   
+   
    
 Further reading
 ---------------
