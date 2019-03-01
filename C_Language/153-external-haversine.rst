@@ -5,9 +5,6 @@ Create an External Function with Visual Studio
    :description: Example using Haversine to create an external function with Microsoft Visual Studio.
    :keywords: external, function, visual, studio, dll
 
-.. sidebar:: Crow in flight - Wikimedia Commons
-
-    .. image:: /Resources/C_Language/Images/153/Crow_in_flight.jpg
 
 `Haversine code <https://rosettacode.org/wiki/Haversine_formula>`_ in various computer languages is publicly available to compute the distance between locations.
 In this article, we use it as an illustration of how to create an external function using `Microsoft Visual Studio <https://visualstudio.microsoft.com/>`_.
