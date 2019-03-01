@@ -2,16 +2,20 @@
 
 .. belongs in WebUI/CSS
 
-Use Side Panels with Old Menu
-====================================
+Using Sidepanels with the Old WebUI Theme
+=============================================
 
 .. wait for release
 
-You can use side panels with the old menu. The side panels added in the page manager will also show in the old menu using the application-specific resource to roll back.
+Sidepanels were released in AIMMS version 4.64.1. If you are using the previously shared application specific resources (ASR) to retain the old theme of WebUI (AIMMS 4.58 and lower), links to the sidepanel pages will be also displayed in the top navigation menu. 
 
-.. image:: images/image001.jpg
+.. image:: images/merged.png
+   :align: center
 
-In order to hide these side panels from the old navigation menu, go to the menu ASR folder, open header-override.css (or create a new css file), and add the code below. 
+Adapting ASR for Sidepanels
+----------------------------------
+
+As Sidepanels links in the top navigation menu is not desired behavior, add the below code snippet to the *header-override.css* file in your ASR folder to hide these links. You can also place this code in a separate file in that folder. 
 
 .. code-block:: css
 
@@ -21,15 +25,18 @@ In order to hide these side panels from the old navigation menu, go to the menu 
 
 	}
 
-After this, the side panel with old style ASR looks like the example below.
 
-.. image:: images/image002.jpg
+The resulting page can be seen on the right. 
+
+Sidepanels added as subpages
+"""""""""""""""""""""""""""""""
+
+If a sidepanel page is added as a subpage, an arrow will be displayed indicating the presence of subpages to your end users. However, this is not functional and we recommend you to not add sidepanel pages as subpages to avoid this issue. 
  
-It is best to avoid adding side panels as child or subpages, or you will see an arrow indicating nested pages where really there are none.
-
 .. image:: images/image003.jpg
+   :align: center
 
 Related Topics
----------------
+------------------
 
-* AIMMS Documentation: Side panels
+* `AIMMS Documentation: Sidepanels <https://manual.aimms.com/webui/page-manager.html#id6>`_
