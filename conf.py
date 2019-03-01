@@ -157,7 +157,9 @@ html_theme_options = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static', '.htaccess']
+html_static_path = ['_static']
+
+html_extra_path = ['.htaccess']
 
 # if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown :)
 if os.name != 'nt':
