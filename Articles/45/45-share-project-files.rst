@@ -41,13 +41,17 @@ Sharing a Project
 --------------------
 To share your project with other developers, you need to zip the entire project folder (not just the ``.aimms`` file). 
 
-.. need to add a quick procedure for that
+Right-click on the project folder and go to *Send to > Compressed (zipped) folder*. 
 
-It is also helpful to share a data case file if you have imported data from external sources, such as Excel files or databases.
+The resulting ZIP file will contain all of the project files in a more portable format.
 
-To save a data case go to *Data > Save Case as*.
+.. note::
 
-For details see **AIMMS Documentation**: `Case Management <https://download.aimms.com/aimms/download/manuals/AIMMS3UG_CaseManagement.pdf>`_
+   If you have imported data from external sources, such as Excel files or databases, it is also helpful to share a data case file in your project.
+
+   To save a data case go to *Data > Save Case as*.
+
+   For details see **AIMMS Documentation**: `Case Management <https://download.aimms.com/aimms/download/manuals/AIMMS3UG_CaseManagement.pdf>`_
 
 
 Related Topics
