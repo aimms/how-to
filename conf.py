@@ -171,6 +171,7 @@ else:
 html_context = {
     'css_files': ['_static/Hacks.css','_static/theme.css', '_static/copycode.css'],
     "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
+    "gitlab_host": "gitlab.aimms.com",
     "gitlab_user": "Chris", # Username
     "gitlab_repo": "aimms-how-to", # Repo name
     "gitlab_version": "master", # Version
