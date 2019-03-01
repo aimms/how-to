@@ -1,0 +1,5 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"Procedure_1" "WriteOut" "2019-02-20 15:13:06"
+"WriteOut" "WriteOutNutrientValues" "2019-02-20 15:14:09"
+"Copy_WriteOutNutrientValues" "GetSchemaDiet" "2019-02-20 16:01:27"
+"ColumnTypes" "ColumnType" "2019-02-20 16:04:20"

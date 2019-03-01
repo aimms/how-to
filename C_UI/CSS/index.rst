@@ -16,6 +16,7 @@ CSS
 .. toctree::
    :maxdepth: 1
     
-   94-using-the-scalar-switch-css
-   123-WebUI-FORMS
-   49-webui-css-color
+   ../../Articles/94/94-using-the-scalar-switch-css
+   ../../Articles/123/123-WebUI-FORMS
+   ../../Articles/49/49-webui-css-color
+   /Articles/180/180-use-side-panel-with-old-menu
