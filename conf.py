@@ -159,8 +159,6 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-html_extra_path = ['.htaccess']
-
 # if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown :)
 if os.name != 'nt':
     Display_edit_on_gitlab = False
@@ -171,7 +169,6 @@ else:
 html_context = {
     'css_files': ['_static/Hacks.css','_static/theme.css', '_static/copycode.css'],
     "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
-    "gitlab_host": "gitlab.aimms.com",
     "gitlab_user": "Chris", # Username
     "gitlab_repo": "aimms-how-to", # Repo name
     "gitlab_version": "master", # Version
