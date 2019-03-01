@@ -36,8 +36,6 @@ Old AOA cannot be combined with the nonlinear presolver nor the multi-start algo
     
      In the special case that the MINLP problem contains only convex quadratic and/or second-order cone constraints also linear solvers like CPLEX or GUROBI can be used.
      
-.. note:: The AOA provided by AIMMS is among the best Mixed Integer Nonlinear programming solvers according to this comparison:
-
-    :download:`AIMMS project download <downloads/AReviewAndComparisonOfSolversForConvexMINLP.pdf>` 
+.. note:: The AOA provided by AIMMS is among the best Mixed Integer Nonlinear programming solvers according to this comparison: :download:`A review and comparison of solvers for convex MINLP <downloads/AReviewAndComparisonOfSolversForConvexMINLP.pdf>` 
 
     
