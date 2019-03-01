@@ -9,28 +9,36 @@ Share an AIMMS Project
 This article gives you an overview of what is contained in your project folder, and how to share your project with other developers.
 
 
-Overview of project files
---------------------------
+AIMMS Project Folder Structure
+----------------------------------
 An AIMMS project consists of multiple folders and files.
 
 .. image:: images/new-project-folders.png
+   :align: center
 
-Every AIMMS application initially consists of these components:
+When you create a new AIMMS project, the below three files are always created. 
 
-* ``.aimms`` project file contains references to the main application project and all library projects contained in your
-application
+#. ``.aimms``: this is a clickable (if the AIMMS Launcher is installed) file which will launch the AIMMS Developer IDE. 
+#. ``.ams``: the model source file which contains all the identifier declarations created in an AIMMS project. This is the file tracked by version control systems to keep track of changes in an AIMMS model. 
+#. ``Project.xml``: contains information about the AIMMS version of your project and a reference to the ``.ams`` file. 
 
-* ``MainProject`` folder contains source files for the main project
-   
-   * ``.ams`` model source file contains identifier declarations, procedures and functions for the project
-   * ``Project.xml`` contains references to the .ams file 
+.. code-block:: xml
+   :linenos:
 
-* ``WebUI`` library folder (if selected)
+   <?xml version="1.0"?>
+   <Project AimmsVersion="4.63.2.5 unicode x64" ProjectUUID="D3D989F2-FB95-4F29-98E6-A56D9DD245A7">
+      <ModelFileName>Demo.ams</ModelFileName>
+      <AutoSaveAndBackup>
+         <DataBackup AtRegularInterval="true" EveryNMinutes="15" NumBackupsDatedToday="3" NumDaysBeforeToday="3" />
+      </AutoSaveAndBackup>
+   </Project>
 
-Additional files are created during development or deployment, such as library sources, settings, cases, logs, and others. These are also in the project folder.
+The ``.aimms`` and ``.ams`` take the name specified when a new project is created and the ``.aimms`` file will always look for the ``.ams`` file specified in the ``Project.xml`` file. So, the ``<ModelFileName>`` in line #3 of the ``Project.xml`` file should always be same as the name of the ``.ams`` file, both of which are inside the MainProject folder. 
 
-Sharing a project
-------------------
+If any libraries are added to the project, they will have an associated folder either in the project root folder or inside the MainProject folder. 
+
+Sharing a Project
+--------------------
 To share your project with other developers, you need to zip the entire project folder (not just the ``.aimms`` file). 
 
 .. need to add a quick procedure for that
