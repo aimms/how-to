@@ -16,7 +16,7 @@ Applications
 .. toctree::
    :maxdepth: 1
     
-   /Articles/download-compressed-files/download-compressed-files
-   /Articles/95/95-change-default-ui
-   /Articles/124/124-tableau-integration
+   How To download multiple files
+   95-change-default-ui
+   124-tableau-integration
    CSS/index
