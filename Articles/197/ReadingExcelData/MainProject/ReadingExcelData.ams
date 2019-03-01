@@ -67,9 +67,18 @@ Model Main_ReadingExcelData {
     }
     Procedure pr_ReadUsingDatalink {
         Arguments: (sp_dataFilename);
+        Body: {
+            SKUMapping(dl::dt,dl::idn,dl::cn,dl::dn) := data {
+               ( 'SKU', 's_SKU'      , 1, 1 ) : "SKU",
+               ( 'SKU', 's_Vendors'  , 2, 2 ) : "Vendor",
+               ( 'SKU', 'January'    , 2, 0 ) : "Price",
+               ( 'SKU', 'May'        , 3, 0 ) : "May"
+            };
+        }
         StringParameter sp_dataFilename {
             Property: Input;
         }
+        StringParameter SKUMapping;
     }
     Procedure pr_ReadAllUsingAXLL {
         Body: {
