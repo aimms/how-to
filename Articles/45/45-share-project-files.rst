@@ -1,26 +1,27 @@
 Share an AIMMS Project
-======================
+========================
 
 .. meta::
    :keywords:
    :description: Overview of files included in the project folder and how to share your AIMMS project with others, such as AIMMS developers or the AIMMS Support Team.
 
 
-This article gives you an overview of what is contained in your project folder, and how to share your project with other developers.
+This article gives you an overview of the folder structure of an AIMMS project, and how to share your project with other developers.
 
 
-AIMMS Project Folder Structure
+AIMMS project folder structure
 ----------------------------------
-An AIMMS project consists of multiple folders and files.
+
+When you create a new AIMMS project, multiple folders and files are initialized. The project folder, or the root folder will have the name you specified (*Demo* in the below example). 
 
 .. image:: images/new-project-folders.png
    :align: center
 
-When you create a new AIMMS project, the below three files are always created. 
+The below three files are always created and necessary to open an AIMMS project. 
 
-#. ``.aimms``: this is a clickable (if the AIMMS Launcher is installed) file which will launch the AIMMS Developer IDE. 
-#. ``.ams``: the model source file which contains all the identifier declarations created in an AIMMS project. This is the file tracked by version control systems to keep track of changes in an AIMMS model. 
-#. ``Project.xml``: contains information about the AIMMS version of your project and a reference to the ``.ams`` file. 
+#. ``Demo.aimms`` : this is an executable (if the AIMMS Launcher is installed) file which launches the AIMMS Developer IDE. 
+#. ``Demo.ams`` : the model source file which contains all the identifier declarations created in an AIMMS project. Version control systems track this file to track changes made in your model. 
+#. ``Project.xml`` : contains information about the version of the AIMMS project and links the ``Demo.aimms`` file to the ``Demo.ams`` file. 
 
 .. code-block:: xml
    :linenos:
@@ -33,11 +34,11 @@ When you create a new AIMMS project, the below three files are always created.
       </AutoSaveAndBackup>
    </Project>
 
-The ``.aimms`` and ``.ams`` take the name specified when a new project is created and the ``.aimms`` file will always look for the ``.ams`` file specified in the ``Project.xml`` file. So, the ``<ModelFileName>`` in line #3 of the ``Project.xml`` file should always be same as the name of the ``.ams`` file, both of which are inside the MainProject folder. 
+So, the ``<ModelFileName>`` in line #3 of the ``Project.xml`` file should always be same as the name of the ``.ams`` file, both of which are inside the MainProject folder. When you click on ``Demo.aimms`` file, it will load the ``Demo.ams`` file into the IDE as specified in the ``Project.xml`` file. 
 
-If any libraries are added to the project, they will have an associated folder either in the project root folder or inside the MainProject folder. 
+If any libraries are added to the project, additional files and folders will be created in the root folder or inside the MainProject folder. 
 
-Sharing a Project
+Sharing a project
 --------------------
 To share your project with other developers, you need to zip the entire project folder (not just the ``.aimms`` file). 
 
@@ -55,10 +56,12 @@ The resulting ZIP file will contain all of the project files in a more portable 
 
 
 Related Topics
---------------
+----------------
 
 * **AIMMS Documentation**: `Getting Started <https://download.aimms.com/aimms/download/manuals/AIMMS3UG_GettingStarted.pdf>`_
 
 * **AIMMS Knowledge**: :doc:`../151/151-version-control-aimmspack-backup`
 
 * **AIMMS Knowledge**: :doc:`../145/145-import-export-section`
+
+* **AIMMS Knowledge**: :doc:`../95/95-change-default-ui`

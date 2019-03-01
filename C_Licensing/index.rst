@@ -22,3 +22,4 @@ Getting Started
    /Articles/105/105-adding-named-user-licenses
    /Articles/106/106-install-network-license
    /Articles/186/186-keyboard-shortcuts-for-aimms
+   /Articles/45/45-share-project-files

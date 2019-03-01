@@ -1,3 +1,5 @@
+:orphan:
+
 Reading columns of data from EXCEL
 ====================================
 
@@ -33,7 +35,7 @@ Further reading
 
 * `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_: Chapter "Spreadsheet Functions"
 
-* :doc:`122-AXLL-Library`
+* :doc:`/Articles/122/122-AXLL-Library`
 
 * `Datalink library <https://documentation.aimms.com/datalink/index.html>`_ and `xlsprovider <https://documentation.aimms.com/datalink/index.html>`_
 
