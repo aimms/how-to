@@ -16,7 +16,7 @@ Running Example
 
 We choose the popular flowshop problem as running example. The question the flowshop model answers is how to order  machines and jobs such that the total time required time to process all jobs is minimal. More details about this model can be found, for instance, on `Wikipedia <https://en.wikipedia.org/wiki/Flow_shop_scheduling>`_. The advantage of the flowshop model for our purposes is that we only need to adapt the number of jobs and machines to illustrate how our application behaves with different running times.
 
-The example AIMMS project can be downloaded from :download:`1. Flow Shop – WebUI – Dev version <downloads/1. Flow Shop - WebUI - Dev version.zip>`.
+The example AIMMS project can be downloaded from :download:`1. Flow Shop – WebUI – Dev version </Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/1. Flow Shop - WebUI - Dev version.zip>`.
 
 You can open this project in the AIMMS Development environment, open the WebUI, and enter the number of machines and jobs before pressing the "Start solving the problem" button. After some time, the solution is presented in a Gantt Chart.
 
@@ -139,9 +139,9 @@ Further study
 
 Oops, I see several problems that we can work on.  
 
-#. I want to continue working on the app itself using my development environment. Now, the system asks whether I want to solve on a PRO system, while I am clearly not connected to that PRO system – I just want to be able to :doc:`test and debug <../32/32-pro-develop-app>` my application.  
+#. I want to continue working on the app itself using my development environment. Now, the system asks whether I want to solve on a PRO system, while I am clearly not connected to that PRO system – I just want to be able to :doc:`test and debug <Deploy_DataServerComm_2_Develop>` my application.  
 
-#. I want to remove the veil that drops down when a procedure of the data session runs for more than a few seconds. See topic :doc:`../19/19-remove-veil`
+#. I want to remove the veil that drops down when a procedure of the data session runs for more than a few seconds. See topic :doc:`Deploy_DataServerComm_3_RemoveVeil`
 
 
 .. include:: /includes/form.def
