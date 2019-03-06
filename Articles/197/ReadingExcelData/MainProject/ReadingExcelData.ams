@@ -95,7 +95,7 @@ Model Main_ReadingExcelData {
             	TableAttribute :  dl::TableAttributesEmpty, 
             	ColAttribute   :  dl::ColAttributeEmpty);
             sp_readAttribute :=  { 'DataProvider': xlsprovider::DataLink };
-            DebuggerBreakpoint();
+            !DebuggerBreakpoint();
             dl::DataRead(
             	DataSource     :  sp_dataFilename, 
             	MapName        :  "SKUData", 
