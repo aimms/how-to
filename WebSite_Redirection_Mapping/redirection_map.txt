@@ -1,9 +1,11 @@
 C_Language/104-using-email-client-library.rst	Articles/104/104-using-email-client-library.rst
+C_Other/104-using-email-client-library.rst	Articles/104/104-using-email-client-library.rst
 C_Licensing/105-adding-named-user-licenses.rst	Articles/105/105-adding-named-user-licenses.rst
 C_Licensing/106-install-network-license.rst	Articles/106/106-install-network-license.rst
 C_Language/109-convert-compound-sets.rst	Articles/109/109-convert-compound-sets.rst
 C_Language/109-deprecate-compound-sets-overview.rst	Articles/109/109-deprecate-compound-sets-overview.rst
 C_Language/104-creating-email-templates.rst	Articles/111/111-creating-email-templates.rst
+C_Other/104-creating-email-templates.rst	Articles/111/111-creating-email-templates.rst
 C_Language/112-Integer-properties.rst	Articles/112/112-Integer-properties.rst
 C_UI/113-diff-WinUI-WebUI.rst	Articles/113/113-diff-WinUI-WebUI.rst
 C_Deployment/114-execute.rst	Articles/114/114-execute.rst
