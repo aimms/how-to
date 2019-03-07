@@ -17,6 +17,7 @@ C_Deployment/120-pro-user-groups.rst	Articles/120/120-pro-user-groups.rst
 C_Language/121-set-index-element-parameter.rst	Articles/121/121-set-index-element-parameter.rst
 C_Connectivity/122-AXLL-Library.rst	Articles/122/122-AXLL-Library.rst
 C_UI/CSS/123-WebUI-FORMS.rst	Articles/123/123-WebUI-FORMS.rst
+C_UI/123-WebUI-FORMS.rst	Articles/123/123-WebUI-FORMS.rst
 C_UI/124-tableau-integration.rst	Articles/124/124-tableau-integration.rst
 C_Language/125-execution-efficiency.rst	Articles/125/125-execution-efficiency.rst
 C_Solvers/126-TSP-Lazy-Constraints.rst	Articles/126/126-TSP-Lazy-Constraints.rst
@@ -78,6 +79,7 @@ C_Deployment/Best-Practices/Deploy_DataServerComm_6_Retrieve.rst	Articles/36/36-
 C_Deployment/Best-Practices/Deploy_DataServerComm_4_LoadResults.rst	Articles/40/40-data-server-load-results.rst
 C_Deployment/Best-Practices/Deploy_DataServerComm_8_PassNewData.rst	Articles/42/42-data-session-changes.rst
 C_UI/CSS/49-webui-css-color.rst	Articles/49/49-webui-css-color.rst
+C_UI/49-webui-css-color.rst	Articles/49/49-webui-css-color.rst
 C_Deployment/ReceiveMessages.rst	Articles/80/80-receive-messages.rst
 C_Deployment/RegularJob.rst	Articles/80/80-schedule-jobs.rst
 C_Language/Using_AIMMS_Libraries.rst	Articles/84/84-using-libraries.rst
@@ -85,6 +87,7 @@ C_Language/85-using-axll-library.rst	Articles/85/85-using-axll-library.rst
 C_Licensing/89-academic-license.rst	Articles/89/89-academic-license.rst
 C_Licensing/89-license-nodelock-error.rst	Articles/89/89-license-nodelock-error.rst
 C_UI/CSS/94-using-the-scalar-switch-css.rst	Articles/94/94-using-the-scalar-switch-css.rst
+C_UI/94-using-the-scalar-switch-css.rst	Articles/94/94-using-the-scalar-switch-css.rst
 C_UI/95-change-default-ui.rst	Articles/95/95-change-default-ui.rst
 C_Connectivity/how to work with csv files.rst	Articles/csv/read-write-csv.rst
 C_UI/How To download multiple files.rst	Articles/download-compressed-files/download-compressed-files.rst
@@ -94,6 +97,10 @@ C_Mathematical_Modeling/109-convert-compound-sets.rst	Articles/109/109-convert-c
 C_Mathematical_Modeling/109-deprecate-compound-sets-overview.rst	Articles/109/109-deprecate-compound-sets-overview.rst
 How To Transfer My Developer License to Another Machine.rst	Articles/195/195-transfer-developer-license.rst
 C_Other/How To Transfer My Developer License to Another Machine.rst	Articles/195/195-transfer-developer-license.rst
+C_Licensing/How To Transfer My Developer License to Another Machine.rst	Articles/195/195-transfer-developer-license.rst
 HowToHandleTheDeprecationOfCompoundSets.rst	Articles/109/109-deprecate-compound-sets-overview.rst
 C_Other/HowToHandleTheDeprecationOfCompoundSets.rst	Articles/109/109-deprecate-compound-sets-overview.rst
 C_Other/89-academic-license.rst	Articles/89/89-academic-license.rst
+C_Other/89-license-nodelock-error.rst	Articles/89/89-license-nodelock-error.rst
+C_Other/105-adding-named-user-licenses.rst	Articles/105/105-adding-named-user-licenses.rst
+C_Other/106-install-network-license.rst	Articles/106/106-install-network-license.rst
