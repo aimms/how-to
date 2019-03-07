@@ -92,3 +92,7 @@ C_Deployment/Best-Practices/Deploy_DataServerComm_2a_ReducedCases.rst	Articles/r
 C_Connectivity/197-reading-data-from-excel.rst	Articles/197/197-reading-data-from-excel.rst
 C_Mathematical_Modeling/109-convert-compound-sets.rst	Articles/109/109-convert-compound-sets.rst
 C_Mathematical_Modeling/109-deprecate-compound-sets-overview.rst	Articles/109/109-deprecate-compound-sets-overview.rst
+How To Transfer My Developer License to Another Machine.rst	Articles/195/195-transfer-developer-license.rst
+C_Other/How To Transfer My Developer License to Another Machine.rst	Articles/195/195-transfer-developer-license.rst
+HowToHandleTheDeprecationOfCompoundSets.rst	Articles/109/109-deprecate-compound-sets-overview.rst
+C_Other/HowToHandleTheDeprecationOfCompoundSets.rst	Articles/109/109-deprecate-compound-sets-overview.rst
