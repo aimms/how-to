@@ -266,7 +266,7 @@ else:
 
 # Generate redirects from old URLs
 
-redirects_file = "WebSite_Redirection_Mapping\\redirection_map.txt"
+redirects_file = "WebSite_Redirection_Mapping/redirection_map.txt"
 
 """
     sphinxcontrib.redirects
