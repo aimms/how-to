@@ -80,6 +80,13 @@ C_Deployment/Best-Practices/Deploy_DataServerComm_5_Progress.rst	Articles/35/35-
 C_Deployment/Best-Practices/Deploy_DataServerComm_6_Retrieve.rst	Articles/36/36-intermediate-solution.rst
 C_Deployment/Best-Practices/Deploy_DataServerComm_4_LoadResults.rst	Articles/40/40-data-server-load-results.rst
 C_Deployment/Best-Practices/Deploy_DataServerComm_8_PassNewData.rst	Articles/42/42-data-session-changes.rst
+C_Deployment/Deploy_DataServerComm_2_Develop.rst	Articles/32/32-pro-develop-app.rst
+C_Deployment/Deploy_DataServerComm_1_Publish.rst	Articles/33/33-pro-deploy-app.rst
+C_Deployment/Deploy_DataServerComm_7_Interrupt.rst	Articles/34/34-interrupt-server-session.rst
+C_Deployment/Deploy_DataServerComm_5_Progress.rst	Articles/35/35-web-ui-progress-window.rst
+C_Deployment/Deploy_DataServerComm_6_Retrieve.rst	Articles/36/36-intermediate-solution.rst
+C_Deployment/Deploy_DataServerComm_4_LoadResults.rst	Articles/40/40-data-server-load-results.rst
+C_Deployment/Deploy_DataServerComm_8_PassNewData.rst	Articles/42/42-data-session-changes.rst
 C_UI/CSS/49-webui-css-color.rst	Articles/49/49-webui-css-color.rst
 C_UI/49-webui-css-color.rst	Articles/49/49-webui-css-color.rst
 C_Deployment/ReceiveMessages.rst	Articles/80/80-receive-messages.rst
