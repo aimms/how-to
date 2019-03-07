@@ -96,3 +96,4 @@ How To Transfer My Developer License to Another Machine.rst	Articles/195/195-tra
 C_Other/How To Transfer My Developer License to Another Machine.rst	Articles/195/195-transfer-developer-license.rst
 HowToHandleTheDeprecationOfCompoundSets.rst	Articles/109/109-deprecate-compound-sets-overview.rst
 C_Other/HowToHandleTheDeprecationOfCompoundSets.rst	Articles/109/109-deprecate-compound-sets-overview.rst
+C_Other/89-academic-license.rst	Articles/89/89-academic-license.rst
