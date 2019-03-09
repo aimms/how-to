@@ -23,3 +23,5 @@ Getting Started
    /Articles/106/106-install-network-license
    /Articles/186/186-keyboard-shortcuts-for-aimms
    /Articles/45/45-share-project-files
+   /Articles/84/84-using-libraries
+   /Articles/145/145-import-export-section
