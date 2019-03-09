@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<DataManagementSetup TimeStamp="2016-09-22 10:24:09">
-	<CaseType Name="All Identifiers" InternalID="1">
-		<Properties>
-			<Contents AllIdentifiers="true" />
-			<Options ConfirmOverwriteExisting="false" />
-		</Properties>
-	</CaseType>
-</DataManagementSetup>
