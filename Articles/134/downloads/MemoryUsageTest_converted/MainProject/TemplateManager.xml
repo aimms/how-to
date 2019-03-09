@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<TemplateManager>
+	<Page Name="Display Used Memory Page" PageGUID="29D352DD-EC5C-4A4A-83B5-46CB3DF09673" />
+	<Page Name="All Data Pages" PageGUID="A07B952C-8339-4C6E-982E-D1CE1A9E10C8" />
+	<Page Name="[Data Page] UsedMemory" PageGUID="B56FE0D2-A176-4699-A257-8F1EAB6FE2FA" />
+</TemplateManager>
