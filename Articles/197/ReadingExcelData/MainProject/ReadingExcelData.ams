@@ -68,17 +68,48 @@ Model Main_ReadingExcelData {
     Procedure pr_ReadUsingDatalink {
         Arguments: (sp_dataFilename);
         Body: {
+            ! for data1
+            dl::DataTables += 'Sheet1' ;
             SKUMapping(dl::dt,dl::idn,dl::cn,dl::dn) := data {
-               ( 'SKU', 's_SKU'      , 1, 1 ) : "SKU",
-               ( 'SKU', 's_Vendors'  , 2, 2 ) : "Vendor",
-               ( 'SKU', 'January'    , 2, 0 ) : "Price",
-               ( 'SKU', 'May'        , 3, 0 ) : "May"
+               ( 'Sheet1', 's_SKU'           , 1, 1 ) : "SKU",
+               ( 'Sheet1', 's_Vendors'       , 2, 2 ) : "Vendor",
+               ( 'Sheet1', 'p_price'         , 3, 0 ) : "Price",
+               ( 'Sheet1', 'p_maxavail'      , 5, 0 ) : "maxAvail",
+               ( 'Sheet1', 'p_amtPerPackage' , 6, 0 ) : "amtPerPackage"
             };
+            
+            ! for data2
+            !SKUMapping(dl::dt,dl::idn,dl::cn,dl::dn) := data {
+            !   ( 'Sheet1', 's_SKU'           , 1, 1 ) : "SKU",
+            !   ( 'Sheet1', 's_Vendors'       , 2, 2 ) : "Vendor",
+            !   ( 'Sheet1', 'p_price'         , 5, 0 ) : "Price",
+            !   ( 'Sheet1', 'p_maxavail'      , 4, 0 ) : "maxAvail",
+            !   ( 'Sheet1', 'p_amtPerPackage' , 3, 0 ) : "amtPerPackage"
+            !};
+            
+            dl::RemoveDataSourceMapping("SKUData");
+            dl::AddDataSourceMapping(
+            	MapName        :  "SKUData", 
+            	DataMap        :  SKUMapping, 
+            	ColDepend      :  dl::DependEmpty, 
+            	TableAttribute :  dl::TableAttributesEmpty, 
+            	ColAttribute   :  dl::ColAttributeEmpty);
+            sp_readAttribute :=  { 'DataProvider': xlsprovider::DataLink };
+            !DebuggerBreakpoint();
+            dl::DataRead(
+            	DataSource     :  sp_dataFilename, 
+            	MapName        :  "SKUData", 
+            	ReadAttributes :  sp_readAttribute);
         }
         StringParameter sp_dataFilename {
             Property: Input;
         }
-        StringParameter SKUMapping;
+        StringParameter SKUMapping {
+            IndexDomain: (dl::dt,dl::idn,dl::cn,dl::dn);
+        }
+        StringParameter sp_readAttribute {
+            IndexDomain: dl::rwattr;
+        }
     }
     Procedure pr_ReadAllUsingAXLL {
         Body: {
@@ -89,38 +120,40 @@ Model Main_ReadingExcelData {
     Procedure pr_ReadAllUsingDatalink {
         Body: {
             pr_ReadUsingDatalink( "data\\data1.xlsx");
-            pr_ReadUsingDatalink( "data\\data2.xlsx");
+            !pr_ReadUsingDatalink( "data\\data2.xlsx");
         }
     }
-    Procedure MainInitialization {
-        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
-    }
-    Procedure PostMainInitialization {
-        Comment: {
-            "Add initialization statements here that require that the libraries are already initialized properly,
-            or add statements that require the Data Management module to be initialized."
+    Section Attic {
+        Procedure MainInitialization {
+            Comment: "Add initialization statements here that do NOT require any library being initialized already.";
         }
-    }
-    Procedure MainExecution;
-    Procedure PreMainTermination {
-        Body: {
-            return 1;
+        Procedure PostMainInitialization {
+            Comment: {
+                "Add initialization statements here that require that the libraries are already initialized properly,
+                or add statements that require the Data Management module to be initialized."
+            }
         }
-        Comment: {
-            "Add termination statements here that require all libraries to be still alive.
-            Return 1 if you allow the termination sequence to continue.
-            Return 0 if you want to cancel the termination sequence."
+        Procedure MainExecution;
+        Procedure PreMainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that require all libraries to be still alive.
+                Return 1 if you allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence."
+            }
         }
-    }
-    Procedure MainTermination {
-        Body: {
-            return 1;
-        }
-        Comment: {
-            "Add termination statements here that do not require all libraries to be still alive.
-            Return 1 to allow the termination sequence to continue.
-            Return 0 if you want to cancel the termination sequence.
-            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        Procedure MainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that do not require all libraries to be still alive.
+                Return 1 to allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence.
+                It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+            }
         }
     }
 }
