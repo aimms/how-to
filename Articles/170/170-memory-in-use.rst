@@ -1,4 +1,4 @@
-Investigate memory in use
+Investigate Memory in Use
 ============================
 
 .. meta::
@@ -6,28 +6,39 @@ Investigate memory in use
    :keywords: memory, virtual memory, MemoryInUse, identifiers, mathematical programming instance
 
 
+Analytic applications may involve a lot of data and subsequently a lot of computer memory. AIMMS hides the technicalities related to memory management from the model developer. These technicalities include, for instance, the allocation and de-allocation of memory for individual data items. Still, the memory usage of applications created with AIMMS grows as the amount of data related to these applications grows. At some point during model development, the memory usage of your application becomes interesting. AIMMS offers tools to monitor and investigate the memory usage of your application. We will discuss a couple of the tools available in AIMMS to investigate memory usage. 
 
-This article summarizes some techniques to investigate your application's memory use.
+Memory functions
+-----------------------------
 
-Viewing total memory in use
-----------------------------
+The function ``MemoryInUse`` returns the amount of memory used by AIMMS in Mb. ``MemoryInUse`` calls a system function to find out how much memory is used by executing a procedure. 
 
+Several other functions are available to check the memory used by specific identifiers in your project.
 
-The function ``MemInUse`` returns the amount of memory used by AIMMS in Mb. ``MemInUse`` calls a system function to find out how much memory is used by executing a procedure. 
+* ``Card()``  returns the number of elements, both active and inactive, for the identifier between the parentheses.
 
-Getting an overview of memory used for identifiers
-----------------------------------------------------
+* ``ActiveCard()``, returns only the number of active elements for the identifier between the parentheses. 
 
-To view details about memory use, use the identifier cardinalities tool:
-#. Go to *AIMMS Menu > Tools > Diagnostic tools*.
-#. Tick both selection boxes at the bottom bar, and click the header *Mem Usage* to sort by that value. 
+* ``IdentifierMemory()``, returns the memory in use for the identifier between the parentheses.
 
-This will give you an indication of the identifiers with most memory consumption. 
+.. tip::
 
-.. figure:: images/GateAssignmentMemoryInUse.PNG
+   The **Rebuild** statement allows to return the memory occupied by permutations.
 
-    Data cardinalities tool for the Gate Assignment problem in the AIMMS Examples repo.
-    
+Memory used by AIMMS identifiers 
+-----------------------------------
+
+One of the tools you can use to monitor the memory usage of your application is the `Identifier Cardinality` tool (available in the *Tools* menu: *Tools -> Diagnostic Tools -> Identifier Cardinalities*). Even with small sample data sets, this tool helps you identify candidates worthwhile of investigation; in particular those with:
+
+* high density, say more than 10%
+* high dimension, say three or more
+* index domain referencing sets that grow when data sets grow
+
+Consider the below screenshot of the identifier cardinalities for a typical gate assignment problem. The parameter ``BothFlightsPossibleOnGate`` has a density of 30%, and it will grow quadratically with the number of flights handled for the gate assignment. When such an identifier is identified, you can choose to handle it according to your application's needs and requirements. 
+
+.. image:: images/identifier-cardinalities.png
+   :align: center
+
 Tips and tricks:
 
 * The open door tip is to reconsider whether you really need the identifiers in the top list. All too often, some of the identifiers in the top list were defined parameters, where this parameter is actually not used anymore in the application.
@@ -36,88 +47,49 @@ Tips and tricks:
 
 * A generic tip is to use minimal index domains, especially for identifiers that are used for intermediate computations. This includes variables and constraints, but it doesn't include parameters for visualization or data exchange. Minimal index domains are constructed using the following two principles:
 
-    * Use indices over subsets
-    
-    * Use tight index domain conditions
-    
-    More about this in AIMMS The language reference, see reference below.
+   * Use indices over subsets
+   
+   * Use tight index domain conditions
 
-
-Analyzing memory used for identifiers
--------------------------------------------------
-Several functions can be used to check memory use for identifiers in your project.
-
-* ``Card()``  returns the number of elements, both active and inactive, for the identifier between the parentheses.
-
-* ``ActiveCard()``, returns only the number of active elements for the identifier between the parentheses. 
-
-* ``IdentifierMemory()``, returns the memory in use for the identifier between the parentheses.
-
-Tips and tricks:
-
-In addition, to the tips and tricks mentioned in the previous section, note that the **Rebuild** statement allows to return the memory occupied by "permutations".
-
-Analyzing of memory used for GMPs
+Analyzing memory used by GMPs
 -----------------------------------------
 
-The function ``GMP::Instance::GetMemoryUsed`` returns the memory used by a generated mathematical program (GMP). 
-As illustrated in the following code block, by visiting all elements in the set ``AllGeneratedMathematicalPRograms`` 
-you'll know how much memory AIMMS reserved for the GMPs.
+The function ``GMP::Instance::GetMemoryUsed`` returns the memory used by a generated mathematical program (GMP). The set ``AllGeneratedMathematicalPrograms`` is another handy tool you can use to monitor memory use. The larger the size of this set, the more the number of generated mathematical programs managed by your application, and you may want to release the memory they occupy using the intrinsic function ``GMP::Instance::Delete``. 
+
+You can retrieve the memory used by all the math programs in ``AllGeneratedMathematicalPrograms`` by declaring a parameter over the index ``IndexGeneratedMathematicalPrograms`` and using the ``GMP::Instance::GetMemoryUsed`` function in a ``for`` loop as illustrated in lines 6-12 in the below code. Lines 13-18 consist a procedure to delete all the GMPs in your project. 
 
 .. code-block:: aimms
-    :linenos:
+   :linenos:
 
-    Section Memory_In_Use_of_Mathematical_Programs {
-        Parameter p_MemInUseMPs {
-            IndexDomain: IndexGeneratedMathematicalPrograms;
-        }
-        Parameter p_TotMemInUseMPs {
-            Definition: sum( IndexGeneratedMathematicalPrograms, p_MemInUseMPs(IndexGeneratedMathematicalPrograms) );
-        }
-        Procedure pr_OverviewMemoryInUseMathematicalPrograms {
-            Body: {
-                for IndexGeneratedMathematicalPrograms do
-                    p_MemInUseMPs(IndexGeneratedMathematicalPrograms) := gmp::Instance::GetMemoryUsed(IndexGeneratedMathematicalPrograms);
-                endfor ;
-                block where single_column_display := 1;
-                    display p_TotMemInUseMPs, p_MemInUseMPs;
-                endblock ;
-            }
-        }
-        Procedure pr_DeleteAllGeneratedMathematicalPrograms {
-            Body: {
-                while card( AllGeneratedMathematicalPrograms ) do
-                    gmp::Instance::Delete( first( AllGeneratedMathematicalPrograms ) );
-                endwhile ;
-            }
-        }
-    }
+   Section Memory_In_Use_of_Mathematical_Programs {
+      Parameter p_MemInUseMPs {
+         IndexDomain: IndexGeneratedMathematicalPrograms;
+      }
+   
+      Procedure pr_OverviewMemoryInUseMathematicalPrograms {
+         Body: {
+               for IndexGeneratedMathematicalPrograms do
+                  p_MemInUseMPs(IndexGeneratedMathematicalPrograms) := GMP::Instance::GetMemoryUsed(IndexGeneratedMathematicalPrograms);
+               endfor ;
+         }
+      }
+      Procedure pr_DeleteAllGeneratedMathematicalPrograms {
+         Body: {
+               while card( AllGeneratedMathematicalPrograms)  do
+                  GMP::Instance::Delete( first( AllGeneratedMathematicalPrograms ) );
+               endwhile ;
+         }
+      }
+   }
 
-Running the above procedure, will generate the following in the listing file for the Nest Solve example in the AIMMS Example library.
-    
-.. code-block:: none
-
-    p_TotMemInUseMPs := 1.378 ;
-
-
-    p_MemInUseMPs := data 
-    { NetworkFlowModel     : 0.429,
-      DicutSeparationModel : 0.949 } ;
-
-Tips and tricks:
-
-* To reclaim the memory occupied by a GMP you can use the procedure gmp::Instance::Delete() as illustrated above by the procedur e ``pr_DeleteAllGeneratedMathematicalPrograms()``. 
-  However, when the mathematical program will be solved again, then having the corresponding GMP already in memory may save significant time. 
-  
-* The general tip to reduce memory by working with minimal index domain also applies to the GMP's generated; this will avoid superfluous rows and columns, thus saving memory and time to generate mathematical programs.
-
-* Often times there are many variables for which the solution is obvious; decision variables from the past, filled tanks cannot be filled further, built distribution centers need not be build again, and so on. You can model these variables by setting their nonvar attribute to 1.  See also the option `Eliminate novar columns`
+.. tip::
+ 
+   Often times there are many variables for which the solution is obvious; decision variables from the past, filled tanks cannot be filled further, built distribution centers need not be build again, and so on. You can model these variables by setting their ``nonvar`` suffix to 1.  See also the option `Eliminate nonvar columns`
 
 Minimizing memory used for element spaces
-------------------------------------------
+--------------------------------------------
 
-AIMMS maintains a mapping between elements(strings) and numbers per root set. This mapping is the *element space*. Because the element space of the set ``Integers`` is very small, as this is just an arithmetic operation without the need for additional memory. When your elements are integers, the corresponding set should be a subset of the set ``Integers``.
-
+AIMMS maintains a mapping between elements(strings) and numbers per root set. This mapping is the *element space*. The element space of the set ``Integers`` is very small as this is just an arithmetic operation without the need for additional memory. When your elements are integers, making the corresponding set a subset of ``Integers`` helps you in reducing the element space. 
 
 
 Related Topics
@@ -127,13 +99,7 @@ Related Topics
 
 * `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_: Chapter "Execution Efficiency Cookbook", Section "Reducing the number of elements"
 
-* `AIMMS Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_: 
-
-    * Function MemoryInUse   
-    
-    * Function Card
-    
-    * Function GMP::Instance::GetMemoryUsed
+* `AIMMS Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_
     
 * :doc:`../134/134-Monitoring-Memory-Use`
 

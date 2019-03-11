@@ -15,19 +15,15 @@ AIMMS Language
    :maxdepth: 1
 
    /Articles/111/111-creating-email-templates 
-   /Articles/104/104-using-email-client-library 
+   /Articles/104/104-using-email-client-library
    /Articles/119/119-Reproducible-Random-Sequence 
    /Articles/132/132-Repetive-Patterns-Model-Edit 
-   /Articles/133/133-External-Functions-InputData 
-   /Articles/145/145-import-export-section 
-   /Articles/150/150-solve-in-loop 
-   /Articles/153/153-external-haversine 
-   /Articles/85/85-using-axll-library
+   /Articles/133/133-External-Functions-InputData
+   /Articles/150/150-solve-in-loop
    /Articles/121/121-set-index-element-parameter
    /Articles/17/17-category-mapping
    /Articles/141/141-element-after-last
    /Articles/112/112-Integer-properties
-   /Articles/84/84-using-libraries
    /Articles/144/144-Stopwatch
    /Articles/125/125-execution-efficiency
    /Articles/170/170-memory-in-use.rst
@@ -37,7 +33,6 @@ AIMMS Language
    /Articles/131/131-Formulas-as-Data
    /Articles/109/109-deprecate-compound-sets-overview
    /Articles/109/109-convert-compound-sets
-   /Articles/157/157-write-selected-tables
    /Articles/175/175-select-variables-and-constraints-for-math-program
    /Articles/184/184-use-multiple-indices-for-set
    /Articles/187/187-convert-string-to-number
