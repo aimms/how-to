@@ -170,8 +170,11 @@ Note the following:
 Datalink with the provider xlsprovider.
 ---------------------------------------
 
-When an EXCEL sheet is organized as parallel columns of data, with a row on top containing the column data descriptions, then such a sheet is usually suited to be used by Datalink. 
-This may sound restrictive upon first reading, but it is actually a common format to store data in EXCEL workbooks.
+The xlsprovider uses a simple strategy to understand the structure of the data in an EXCEL worksheet.
+The top most row with data is assumed to be the header, containing the names of the columns. 
+You have to map these names onto identifier names in the AIMMS model.
+Then datalink can read by making the xlsprovider scan the worksheet row by row and use the mapping to send the data to the appropriate identifiers.
+
 
 The code to read the EXCEL data looks as follows:
 
