@@ -1,1 +1,1 @@
-Redirect /Arthur http://google.com/
+Redirect 301 /Arthur http://google.com/
