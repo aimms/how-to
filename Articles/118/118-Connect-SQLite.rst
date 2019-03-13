@@ -89,7 +89,7 @@ After that, you will have access to the 'SQLite ODBC Driver Connect', which fina
 
 After clicking the OK button, you should see a new .dsn file (named *test* in my case) in the file explorer of your ODBC Data Source Administrator.
 
-Then you may go directly to the `Fill out AIMMS Database Table identifier`_ in order to complete the connection with your AIMMS database.
+Then you may go directly to the `Fill out an AIMMS Database Table identifier`_ in order to complete the connection with your AIMMS database.
 
 Generate a .dsn system file connected to your SQLite database
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -115,7 +115,7 @@ You should now see that there is a new System DSN file in the System DSN tab:
 
 .. image:: images/9odbc.png
 
-Congrats! You may go directly to the `Fill out AIMMS Database Table identifier`_ in order to complete the connection with your AIMMS database.
+Congrats! You may go directly to the `Fill out an AIMMS Database Table identifier`_ in order to complete the connection with your AIMMS database.
 
 Create a connection string
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
