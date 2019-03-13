@@ -16,6 +16,5 @@ CSS
    :maxdepth: 1
     
    /Articles/94/94-using-the-scalar-switch-css
-   /Articles/123/123-WebUI-FORMS
    /Articles/49/49-webui-css-color
    /Articles/180/180-use-side-panel-with-old-menu
