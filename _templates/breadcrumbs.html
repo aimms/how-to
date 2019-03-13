@@ -25,7 +25,6 @@
 {% endif %}
 <style>
 
-    
 </style>
 <div role="navigation" aria-label="breadcrumbs navigation">
 <div class="topomenu">
@@ -36,16 +35,26 @@
 <li class="menu-item"><a href="http://aimms.com/english/developers/">Developers</a></li>
 <li class="menu-item"><a href="http://aimms.com/english/about-us/">About Us</a></li>
     </ul></nav></div><div class="farelo">
-  
+
     {% if pagename == "ContentIndex" %}
-<style> 
+<style>  
         .farelo {
-            display: none !important;
+            display: none; !important
+        } 
+     .topomenu {
+         width: 100%; !important
+    max-width: 100%; !important
         }
+    
 	</style>
 	
 {% else %}
-	
+	<style>   
+         @media screen and (min-width: 600px) {
+        .topomenu {
+            width: 1100px; !important
+    max-width: 1100px; !important
+             }}</style>
      <ul class="wy-breadcrumbs">
     {% block breadcrumbs %}
       <li><a href="{{ pathto(master_doc) }}">{{ _('Docs') }}</a> &raquo;</li>
@@ -53,7 +62,7 @@
           <li><a href="{{ doc.link|e }}">{{ doc.title }}</a> &raquo;</li>
         {% endfor %}
       <li>{{ title }}</li>
-    {% endblock %}
+    {% endblock %} 
     {% block breadcrumbs_aside %}
       <li class="wy-breadcrumbs-aside">
         {% if hasdoc(pagename) %}
@@ -76,7 +85,7 @@
               <!-- User defined GitLab URL -->
               <a href="{{ meta['gitlab_url'] }}" class="fa fa-gitlab"> {{ _('Edit on GitLab') }}</a>
             {% else %}
-              <a href="https://{{ gitlab_host|default("gitlab.com") }}/{{ gitlab_user }}/{{ gitlab_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ gitlab_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-gitlab"> {{ _('Edit on GitLab') }}</a>
+              <a href="https://{{ gitlab_host|default("gitlab.aimms.com") }}/{{ gitlab_user }}/{{ gitlab_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ gitlab_version }}/{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-gitlab"> {{ _('Edit on GitLab') }}</a>
             {% endif %}
           {% elif show_source and source_url_prefix %}
             <a href="{{ source_url_prefix }}{{ pagename }}{{ suffix }}">{{ _('View page source') }}</a>
@@ -88,6 +97,7 @@
     {% endblock %}
   </ul></div>
 
+  
   {% if (theme_prev_next_buttons_location == 'top' or theme_prev_next_buttons_location == 'both') and (next or prev) %}
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       {% if next %}

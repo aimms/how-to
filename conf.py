@@ -175,7 +175,7 @@ else:
 html_context = {
     'css_files': ['_static/Hacks.css','_static/theme.css', '_static/copycode.css'],
     "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
-    "gitlab_user": "Chris", # Username
+    "gitlab_user": "aimms/customer-support", # Username
     "gitlab_repo": "aimms-how-to", # Repo name
     "gitlab_version": "master", # Version
     "conf_py_path": "", # Path in the checkout to the docs root
