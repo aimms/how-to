@@ -1,0 +1,110 @@
+## ams_version=1.0
+
+Model Main_loadportdata {
+    Set s_LoadPortNames {
+        Index: i_lpn;
+    }
+    Set s_Regions {
+        Index: i_reg;
+        Parameter: ep_SelectedRegion;
+    }
+    Parameter p_lpsize1 {
+        IndexDomain: i_lpn;
+    }
+    Parameter p_lpsize2 {
+        IndexDomain: (i_lpn,i_reg);
+    }
+    Parameter p_lpsizeAgg {
+        IndexDomain: i_lpn;
+    }
+    DatabaseTable db_lpdata {
+        DataSource: "data\\lpdata.dsn";
+        TableName: "lptable";
+        Mapping:  "regionNM" --> s_Regions;
+    }
+    DatabaseTable db_lpdataID {
+        IndexDomain: i_reg;
+        DataSource: "data\\lpdata.dsn";
+        TableName: "lptable";
+        Mapping: {
+            "loadport" --> i_lpn,
+            "lpsize"   --> p_lpsize1(i_lpn),
+            "regionNM" --> i_reg
+        }
+    }
+    DatabaseTable db_lpdataAgg {
+        DataSource: "data\\lpdata.dsn";
+        TableName: "lptable";
+        Mapping: {
+            "loadport" --> i_lpn,
+            "regionNM" --> i_reg,
+            "lpsize2"   --> p_lpsize2(i_lpn,i_reg)
+        }
+    }
+    Procedure pr_emptyDatabaseTable {
+        Body: {
+            empty db_lpdata ;
+        }
+    }
+    Procedure pr_ReadFromTextFile {
+        Body: {
+            read from file "data\\lpdata.txt" ;
+        }
+    }
+    Procedure pr_WriteToDatabaseTable {
+        Body: {
+            write to table db_lpdata ;
+        }
+    }
+    Procedure pr_ReadFromDatabaseTableSlice {
+        Body: {
+            read from table db_lpdata ; ! this will fill s_Regions
+            
+            ep_SelectedRegion := first( s_Regions ); ! Just select one region.
+            
+            Read from table db_lpdataID(ep_SelectedRegion); ! Read in the data for the selected region.
+        }
+    }
+    Procedure pr_ReadFromDatabaseTableSliceAggregate {
+        Body: {
+            read from table db_lpdataAgg ; ! this will fill  p_lpsize2
+            
+            p_lpsizeAgg(i_lpn) := sum( i_reg, p_lpsize2(i_lpn, i_reg) ); ! Aggregate over all regions.
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            read from table db_lpdata ;
+        }
+    }
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

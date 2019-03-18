@@ -1,0 +1,11 @@
+﻿p_lpsize := data {
+    lp1 : 3,
+    lp2 : 4,
+    lp3 : 5
+} ;
+
+ep_regionOfLoadPort := data {
+    lp1 : reg1,
+    lp2 : reg2,
+    lp3 : reg2
+} ;
