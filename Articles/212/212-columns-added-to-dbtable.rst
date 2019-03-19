@@ -26,8 +26,9 @@ Now let's add the column "regionNM" to the database table as a derived column. T
 
 .. image:: images/derivedExtensionDatabaseTable.PNG
 
-For the sake of efficiency, AIMMS caches the knowledge of the table structure of the tables it is connected to.
-When these table structures are changed, the caches need to be updated.  The easiest way to do this, is to close the project and open it again.
+.. note:: For the sake of efficiency, AIMMS caches the knowledge of the table structure of the tables it is connected to.
+          When these table structures are changed, whilst AIMMS is still open, the caches need to be updated.  
+          The easiest way to do this, is to close the project and open it again.
 
 The extended structure is then captured in the AIMMS model as follows:
 
