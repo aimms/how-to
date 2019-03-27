@@ -53,7 +53,7 @@ source_suffix = '.rst'
 # The master toctree document.
 master_doc = 'ContentIndex'
 
-title = 'AIMMS Knowledge Center'
+title = 'AIMMS How-To'
 
 # General information about the project.
 project = title

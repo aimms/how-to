@@ -4,7 +4,7 @@
 .. raw:: html
     
     <div id="topo"> 
-    <br><h1>Welcome to the AIMMS Knowledge Center</h1><h2>Check out our helpful tips and tricks to use your AIMMS software</h2></div>
+    <br><h1>Welcome to the AIMMS How-To</h1><h2>Check out our helpful tips and tricks to use your AIMMS software</h2></div>
     
     <div id="content_home_page">
         <a href="C_Licensing/index.html">
