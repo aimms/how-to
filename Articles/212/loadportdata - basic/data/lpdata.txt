@@ -1,0 +1,5 @@
+p_lpsize := data {
+    lp1 : 3,
+    lp2 : 4,
+    lp3 : 5
+} ;

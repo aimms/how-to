@@ -18,6 +18,7 @@ Data Connection
    /Articles/129/129-MSACCESS-32bit-64bit
    /Articles/185/185-connect-to-access-database
    /Articles/157/157-write-selected-tables
+   /Articles/212/212-columns-added-to-dbtable
    /Articles/153/153-external-haversine
    /Articles/159/159-exchange-data-with-cloud
    
