@@ -1,6 +1,10 @@
 Setting Options
 ================
 
+.. meta::
+   :description: Comparing different ways to customize AIMMS engine and solver settings.
+   :keywords: 
+
 AIMMS offers many options to customize the behavior of the engine and its solvers. 
 This article describes various ways to set these options. 
 
