@@ -22,7 +22,10 @@ from sphinx.builders import html as builders
 from sphinx.util import logging
 #import pdb
 import subprocess
-
+#spellcheck
+if os.name == 'nt':
+	import ssl
+	import urllib
 
 # sys.path.insert(0, os.path.abspath('.'))
 
@@ -336,6 +339,12 @@ def generate_redirects(app):
                 f.write(TEMPLATE % to_path)
                 
     logger.info("Redirection Generation has finished successfully! With %i redirections" % redirects_counter )
+
+#import the one and only spelling exception central file 
+if os.name == 'nt':
+	context = ssl._create_unverified_context()
+	urllib.urlretrieve("https://gitlab.aimms.com/Arthur/unified-spelling_word_list_filename/raw/master/spelling_wordlist.txt", "spelling_wordlist.txt", context=context)
+
     
 # The setup function here is picked up by sphinx at each build. You may input any cool change here, like syntax highlighting or redirects
 def setup(sphinx):
