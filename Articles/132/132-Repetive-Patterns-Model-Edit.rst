@@ -34,7 +34,11 @@ And then specify the differences:
     P4(newPr) := 333 ;
 
 When we start maintaining additional information per product, say ``P5(pr,reg)``, this added identifier requires us to visit the ``CopyProductDataProcedure`` code again. Hence, we need to add a similar line:
-<pre>P5(newPr,reg) := P5(existingPr,reg);</pre>
+
+.. code-block:: aimms
+	
+	P5(newPr,reg) := P5(existingPr,reg);
+
 Here we have identified a maintenance burden: to introduce a new identifier for products, we need *to remember* to extend the code of procedure ``CopyProductDataProcedure``. Note that the difference in dimension and index domains of the involved identifiers prohibits the capturing of this structure by introducing an extra index. *This ends our problem statement. Let us now try to tackle it in a generic manner.* There is a clear pattern, for each identifier referencing a product ``pr``, there is an assignment statement, and the product index ``pr`` within each statement is replaced by the new element and the existing element respectively. We will generate AIMMS code following this pattern using *model query and model edit functions*. Before we begin, however, a kind of pre-amble is needed. The model edit functions only operate on so-called runtime identifiers which are created inside a runtime library. In our example, we only need a single procedure. Therefore, we create the runtime library and its single procedure in the following two lines:
 
 .. code-block:: aimms

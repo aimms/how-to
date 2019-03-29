@@ -22,7 +22,10 @@ from sphinx.builders import html as builders
 from sphinx.util import logging
 #import pdb
 import subprocess
-
+#spellcheck
+if os.name == 'nt':
+	import ssl
+	import urllib
 
 # sys.path.insert(0, os.path.abspath('.'))
 
@@ -41,6 +44,9 @@ extensions = ['sphinx.ext.doctest',
     'sphinx.ext.githubpages',
 	'sphinx.builders.linkcheck']
 
+if os.name == 'nt':
+	extensions.append('sphinxcontrib.spelling')
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -53,7 +59,7 @@ source_suffix = '.rst'
 # The master toctree document.
 master_doc = 'ContentIndex'
 
-title = 'AIMMS Knowledge Center'
+title = 'AIMMS How-To'
 
 # General information about the project.
 project = title
@@ -175,7 +181,7 @@ else:
 html_context = {
     'css_files': ['_static/Hacks.css','_static/theme.css', '_static/copycode.css'],
     "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
-    "gitlab_user": "Chris", # Username
+    "gitlab_user": "aimms/customer-support", # Username
     "gitlab_repo": "aimms-how-to", # Repo name
     "gitlab_version": "master", # Version
     "conf_py_path": "", # Path in the checkout to the docs root
@@ -335,6 +341,12 @@ def generate_redirects(app):
                 f.write(TEMPLATE % to_path)
                 
     logger.info("Redirection Generation has finished successfully! With %i redirections" % redirects_counter )
+
+#import the one and only spelling exception central file 
+if os.name == 'nt':
+	context = ssl._create_unverified_context()
+	urllib.urlretrieve("https://gitlab.aimms.com/Arthur/unified-spelling_word_list_filename/raw/master/spelling_wordlist.txt", "spelling_wordlist.txt", context=context)
+
     
 # The setup function here is picked up by sphinx at each build. You may input any cool change here, like syntax highlighting or redirects
 def setup(sphinx):
