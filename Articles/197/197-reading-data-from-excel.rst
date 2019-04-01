@@ -20,16 +20,16 @@ Example used
 
 To make this comparison, we'll read from two spreadsheets:
 
-.. image:: images/data1.PNG
+.. image:: Images/data1.PNG
 
-.. image:: images/data2.PNG
+.. image:: Images/data2.PNG
 
 In this practical example, these two spreadsheets contain similar data, but with different order and number of columns.
 This may happen when various analysts provide the necessary data in a spreadsheet, but not in the same column order.
 
 The name manager in both sheets covers for the difference in columns: 
 
-.. image:: images/CommonNameManager.PNG
+.. image:: Images/CommonNameManager.PNG
 
 The data is read in to the following parameters:
 
