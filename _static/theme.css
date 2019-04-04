@@ -610,3 +610,58 @@ form {
         overflow: visible !important;
     }
 }
+
+
+/* colors for admonitions */
+
+
+/* blue note */
+
+div.admonition.note {
+    background: #009dd9;
+    opacity: .1
+}
+
+.admonition-title.note {
+    background: #009dd9;
+    opacity: .65
+}
+
+
+/* yellow tip */
+
+div.admonition.tip {
+    background: #ffc100;
+    opacity: .1
+}
+
+.admonition-title.tip {
+    background: #ffc100;
+    opacity: .65
+}
+
+
+/*red warning */
+
+div.admonition.warning {
+    background: #e74c3c;
+    opacity: .1
+}
+
+.admonition-title.warning {
+    background: #e74c3c;
+    opacity: .65
+}
+
+
+/* green example */
+
+div.admonition.example {
+    background: #27ae60;
+    opacity: .1
+}
+
+.admonition-title.example {
+    background: #27ae60;
+    opacity: .65
+}
