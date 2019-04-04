@@ -12,6 +12,8 @@
 Solvers
 ========================
 
+This section covers topics related to mathematical solvers used in AIMMS applications. These articles also explain how to work with solvers in AIMMS language.
+
 .. toctree::
    :maxdepth: 1
         

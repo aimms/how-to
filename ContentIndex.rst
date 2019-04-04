@@ -4,8 +4,8 @@
 .. raw:: html
     
     <div id="topo"> 
-    <br><h1>Welcome to the AIMMS How-To</h1><h2>Check out our helpful tips and tricks to use your AIMMS software</h2></div>
-    
+    <br><h1>Welcome to AIMMS How-To</h1><h2>Tips and tricks for using AIMMS software</h2></div>
+    <p id="introduction">AIMMS How-To is a knowledge base for AIMMS developers, PRO network administrators, and application end-users. You'll find tutorials, best practices, and practical guidance for using AIMMS software, including help topics in mathematical modeling, solvers, AIMMS language, and building applications in optimization and prescriptive analytics. You'll also find support for troubleshooting errors and handling deprecations.</p>
     <div id="content_home_page">
         <a href="C_Licensing/index.html">
             <div class="box_home_page">

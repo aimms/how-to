@@ -8,6 +8,8 @@
 Data Connection
 ========================
 
+This section provides help to connect your AIMMS Software to external data sources, such as Excel, and databases. You will also find topics for using libraries built-in to AIMMS.
+
 .. toctree::
    :maxdepth: 1
 
