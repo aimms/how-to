@@ -12,6 +12,7 @@
 Mathematical Modeling
 ========================
 
+This section provides support for designing mathematical models that produce the best solutions to solve problems and maximize opportunities in your business or organization.
 
 .. toctree::
    :maxdepth: 1

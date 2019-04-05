@@ -1,0 +1,2773 @@
+## ams_version=1.0
+
+LibraryModule AimmsForecasting {
+    Prefix: forecasting;
+    Interface: Public_Section;
+    Property: NoSave;
+    Comment: {
+        "The functions in this library are documented in AIMMS The function reference, Chapter \"Forecasting functions\".
+        You can find this reference via the AIMMS Menu - Help."
+    }
+    Section Public_Section {
+        Section SimpleLinearRegressionSection {
+            Set VariationCompSet {
+                Index: vcs;
+                Definition: {
+                    data{
+                        SST,       ! Sum of Squares Total
+                        SSE,       ! Sum of Squares Error
+                        SSR,       ! Sum of Squares Regression
+                        Rsquare,   ! Coefficient of Determination
+                        MultipleR, ! Sample Linear Correlation Rxy
+                        Se         ! Standard Error
+                    }
+                }
+            }
+            Set LRcoeffSet {
+                SubsetOf: Integers;
+                Index: co;
+                Definition: {
+                    data{
+                        0,  ! Intercept Coefficient of Regression Line
+                        1   ! Slope Coefficient of Regression Line
+                    }
+                }
+            }
+            Procedure SimpleLinearRegression {
+                Arguments: (xIndepVarValue,yDepVarValue,LRcoeff);
+                Body: {
+                    return SimpleLinearRegressionWork(
+                            xIndepVarValue,
+                            yDepVarValue  ,
+                            LRcoeff       ,
+                            VariationComp ,
+                            yEstimates    ,
+                            eResiduals    ,
+                      flag: 0                );
+                }
+                DeclarationSection Arguments_declarations {
+                    Set sValueSet {
+                        Index: i;
+                    }
+                    Parameter xIndepVarValue {
+                        IndexDomain: i;
+                        Property: Input;
+                    }
+                    Parameter yDepVarValue {
+                        IndexDomain: i;
+                        Property: Input;
+                    }
+                    Parameter LRcoeff {
+                        IndexDomain: co;
+                        Property: Output;
+                    }
+                }
+                DeclarationSection declarations_of_locals {
+                    Parameter VariationComp {
+                        IndexDomain: vcs;
+                    }
+                    Parameter yEstimates {
+                        IndexDomain: i;
+                    }
+                    Parameter eResiduals {
+                        IndexDomain: i;
+                    }
+                }
+            }
+            Procedure SimpleLinearRegressionVC {
+                Arguments: (xIndepVarValue,yDepVarValue,LRcoeff,VariationComp);
+                Body: {
+                    return SimpleLinearRegressionWork(
+                            xIndepVarValue,
+                            yDepVarValue  ,
+                            LRcoeff       ,
+                            VariationComp ,
+                            yEstimates    ,
+                            eResiduals    ,
+                      flag: 1               );
+                }
+                DeclarationSection Arguments_declarations {
+                    Set sValueSet {
+                        Index: i;
+                    }
+                    Parameter xIndepVarValue {
+                        IndexDomain: i;
+                        Property: Input;
+                    }
+                    Parameter yDepVarValue {
+                        IndexDomain: i;
+                        Property: Input;
+                    }
+                    Parameter LRcoeff {
+                        IndexDomain: co;
+                        Property: Output;
+                    }
+                    Parameter VariationComp {
+                        IndexDomain: vcs;
+                        Property: Output;
+                    }
+                }
+                DeclarationSection declarations_of_locals {
+                    Parameter yEstimates {
+                        IndexDomain: i;
+                    }
+                    Parameter eResiduals {
+                        IndexDomain: i;
+                    }
+                }
+            }
+            Procedure SimpleLinearRegressionVCR {
+                Arguments: (xIndepVarValue,yDepVarValue,LRcoeff,VariationComp,yEstimates,eResiduals);
+                Body: {
+                    return SimpleLinearRegressionWork(
+                            xIndepVarValue,
+                            yDepVarValue  ,
+                            LRcoeff       ,
+                            VariationComp ,
+                            yEstimates    ,
+                            eResiduals    ,
+                      flag: 2         );
+                }
+                DeclarationSection Arguments_declarations {
+                    Set sValueSet {
+                        Index: i;
+                    }
+                    Parameter xIndepVarValue {
+                        IndexDomain: i;
+                        Property: Input;
+                    }
+                    Parameter yDepVarValue {
+                        IndexDomain: i;
+                        Property: Input;
+                    }
+                    Parameter LRcoeff {
+                        IndexDomain: co;
+                        Property: Output;
+                    }
+                    Parameter VariationComp {
+                        IndexDomain: vcs;
+                        Property: Output;
+                    }
+                    Parameter yEstimates {
+                        IndexDomain: i;
+                        Property: Output;
+                    }
+                    Parameter eResiduals {
+                        IndexDomain: i;
+                        Property: Output;
+                    }
+                }
+            }
+            Procedure SimpleLinearRegressionWork {
+                Arguments: (xIndepVarValue,yDepVarValue,LRcoeff,VariationComp,yEstimates,eResiduals,flag);
+                Body: {
+                    rcode := 1 ;  ! Until an error is detected.
+                    
+                    NoObservations := Card(sValueSet);
+                    
+                    if rcode then
+                        if NoObservations <= 1 then
+                            rcode := 0 ;
+                            raise error "The number of data observations should be greater than 1";
+                        else
+                            xMean := sum(i, xIndepVarValue(i)) / NoObservations;
+                            yMean := sum(i, yDepVarValue(i)  ) / NoObservations;
+                        endif ;
+                    endif ;
+                    
+                    if rcode then
+                        if xMean = min(i, xIndepVarValue(i)) then
+                            rcode := 0 ;
+                            raise error "The independent variable should have at least 2 distict observation values" ;
+                        else
+                            LRcoeff(1) := sum(i, (xIndepVarValue(i) - xMean)*(yDepVarValue(i) - yMean) ) / sum(i, (xIndepVarValue(i) - xMean)^2 );
+                            LRcoeff(0) := yMean - LRcoeff(1) * xMean;
+                        endif ;
+                    endif ;
+                    
+                    if rcode then
+                        if (flag<>0) and (flag<>1) and (flag<>2) then
+                            rcode := 0 ;
+                            raise error "The flag argument should be either 0, 1 or 2" ;
+                        else
+                        if (flag = 1) or (flag = 2) then
+                    
+                            yEstimates(i) := LRcoeff(0) + LRcoeff(1) * xIndepVarValue(i);
+                    
+                    	eResiduals(i) := yDepVarValue(i) - yEstimates(i);
+                    
+                            VariationComp('SST') := sum(i, (yDepVarValue(i) - yMean)^2 );
+                    
+                            VariationComp('SSE') := sum(i, eResiduals(i)^2 );
+                    
+                            VariationComp('SSR') := sum(i, (yEstimates(i) - yMean)^2 );
+                    
+                        if VariationComp('SST') > 0
+                            then
+                            VariationComp('Rsquare') := VariationComp('SSR') / VariationComp('SST');
+                            else
+                            VariationComp('Rsquare') := 0;
+                        endif;
+                    
+                        if NoObservations > 2
+                            then
+                            VariationComp('Se') := sqrt( VariationComp('SSE') / (NoObservations -2) );
+                            else
+                            VariationComp('Se') := 0;
+                        endif;
+                    
+                        if LRcoeff(1) >=0
+                            then
+                            VariationComp('MultipleR') :=  sqrt( VariationComp('Rsquare') );
+                            else
+                            VariationComp('MultipleR') := -sqrt( VariationComp('Rsquare') );
+                        endif;
+                    
+                        endif;
+                       endif;
+                    endif;
+                    
+                    return rcode;
+                }
+                DeclarationSection Arguments_declarations {
+                    Set sValueSet {
+                        Index: i;
+                    }
+                    Parameter xIndepVarValue {
+                        IndexDomain: i;
+                        Property: Input;
+                    }
+                    Parameter yDepVarValue {
+                        IndexDomain: i;
+                        Property: Input;
+                    }
+                    Parameter LRcoeff {
+                        IndexDomain: co;
+                        Property: Output;
+                    }
+                    Parameter VariationComp {
+                        IndexDomain: vcs;
+                        Property: Output;
+                    }
+                    Parameter yEstimates {
+                        IndexDomain: i;
+                        Property: Output;
+                    }
+                    Parameter eResiduals {
+                        IndexDomain: i;
+                        Property: Output;
+                    }
+                    Parameter flag {
+                        Property: Input;
+                    }
+                }
+                DeclarationSection declarations_of_locals {
+                    Parameter rcode {
+                        Comment: {
+                            "1 : ok
+                            0 : Error occurred."
+                        }
+                    }
+                    Parameter NoObservations {
+                        Range: integer;
+                    }
+                    Parameter xMean;
+                    Parameter yMean;
+                }
+            }
+        }
+        Section CommonDeclaraitons {
+            Set ErrorMeasureSet {
+                Index: ems;
+                Definition: {
+                    data {
+                    	MAPE, ! Mean Absolute Percentage Error
+                    	MAD,  ! Mean Absolute Deviation
+                    	MSE   ! Mean Squared Error
+                    }
+                }
+                Comment: "Set used to index parameters over which error measures are communicated.";
+            }
+            StringParameter DLL_Name {
+                Definition: {
+                    if (AimmsStringConstants('Platform') = 'Linux') then
+                    	"DLL\\"+AimmsStringConstants('Architecture')+"\\libforecasting.so"
+                    else
+                    	"DLL\\"+AimmsStringConstants('Architecture')+"\\forecasting.dll"
+                    endif;
+                }
+                Comment: "The location of the external dll where the Moving Average and Exponential Smoothing values are calculated.";
+            }
+        }
+        Section MovingAverageSection {
+            Procedure MovingAverage {
+                Arguments: (dataValues,estimates,noObservations,noAveragingPeriods);
+                Body: {
+                    retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                    if retval then
+                    	return MovingAverageWork(dataValues(dvs),estimates(dvs),noObservations,noAveragingPeriods,
+                            	   ErrorMeasures,Residuals,flags:0);
+                    else
+                    	return 0 ;
+                    endif ;
+                }
+                Comment: {
+                    "Calculate Moving Average of noAveringLength elements given values in dataValues and return result in estimates.
+                    The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon."
+                }
+                DeclarationSection Argument_declarations {
+                    Parameter dataValues {
+                        IndexDomain: t;
+                        Property: Input;
+                    }
+                    Parameter estimates {
+                        IndexDomain: t;
+                        Property: Output;
+                    }
+                    Set TimeSet {
+                        Index: dvs, dvsp, t;
+                    }
+                    Parameter noObservations {
+                        Range: {
+                            {1..maxint}
+                        }
+                        Property: Input;
+                    }
+                    Parameter noAveragingPeriods {
+                        Range: {
+                            {1..maxint}
+                        }
+                        Property: Input;
+                    }
+                }
+                DeclarationSection declarations_of_locals {
+                    Parameter Residuals {
+                        IndexDomain: dvs;
+                    }
+                    Parameter ErrorMeasures {
+                        IndexDomain: ems;
+                    }
+                    Parameter retval;
+                }
+            }
+            Procedure MovingAverageEM {
+                Arguments: (dataValues,estimates,noObservations,noAveragingPeriods,ErrorMeasures);
+                Body: {
+                    retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                    if retval then
+                    	return MovingAverageWork(dataValues,estimates,noObservations,noAveragingPeriods,
+                    			ErrorMeasures, Residuals, flags:1);
+                    else
+                    	return 0 ;
+                    endif ;
+                }
+                Comment: {
+                    "Calculate Moving Average of noAveringLength elements given values in dataValues and return result in estimates.
+                    The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon.
+                    The MAD, MAPE, and MSE error measures are returned in the ErrorMeasures argument."
+                }
+                DeclarationSection Argument_declarations {
+                    Parameter dataValues {
+                        IndexDomain: t;
+                        Property: Input;
+                    }
+                    Parameter estimates {
+                        IndexDomain: t;
+                        Property: Output;
+                    }
+                    Set TimeSet {
+                        Index: dvs, t;
+                    }
+                    Parameter noObservations {
+                        Property: Input;
+                    }
+                    Parameter noAveragingPeriods {
+                        Property: Input;
+                    }
+                    Parameter ErrorMeasures {
+                        IndexDomain: ems;
+                        Property: Output;
+                    }
+                }
+                DeclarationSection declarations_of_locals {
+                    Parameter Residuals {
+                        IndexDomain: dvs;
+                    }
+                    Parameter retval;
+                }
+            }
+            Procedure MovingAverageEMR {
+                Arguments: (dataValues,estimates,noObservations,noAveragingPeriods,ErrorMeasures,Residuals);
+                Body: {
+                    retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                    if retval then
+                    	return MovingAverageWork(dataValues,estimates,noObservations,noAveragingPeriods,
+                    			ErrorMeasures, Residuals, flags:3);
+                    else
+                    	return 0 ;
+                    endif ;
+                }
+                Comment: {
+                    "Calculate Moving Average of noAveringLength elements given values in dataValues and return result in estimates.
+                    The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon.
+                    The MAD, MAPE, and MSE error measures are returned in the ErrorMeasures argument.
+                    The residuals are returned in the Residuals argument."
+                }
+                DeclarationSection Argument_declarations {
+                    Parameter dataValues {
+                        IndexDomain: t;
+                        Property: Input;
+                    }
+                    Parameter estimates {
+                        IndexDomain: t;
+                        Property: Output;
+                    }
+                    Set TimeSet {
+                        Index: dvs, t;
+                    }
+                    Parameter Residuals {
+                        IndexDomain: t;
+                        Property: Output;
+                    }
+                    Parameter noObservations {
+                        Property: Input;
+                    }
+                    Parameter ErrorMeasures {
+                        IndexDomain: ems;
+                        Property: Output;
+                    }
+                    Parameter noAveragingPeriods {
+                        Property: Input;
+                    }
+                }
+                DeclarationSection declaration_of_locals {
+                    Parameter retval;
+                }
+            }
+            Procedure WeightedMovingAverage {
+                Arguments: (dataValues,estimates,noObservations,Weights,noAveragingPeriods);
+                Body: {
+                    retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                    if retval then
+                    	return WeightedMovingAverageWork(dataValues(dvs),estimates(dvs),noObservations,Weights,noAveragingPeriods,
+                            	   ErrorMeasures,Residuals,flags:0);
+                    else
+                    	return 0 ;
+                    endif ;
+                }
+                Comment: {
+                    "Calculate Moving Average of noAveringLength elements given values in dataValues and return result in estimates.
+                    The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon."
+                }
+                DeclarationSection Argument_declarations {
+                    Parameter dataValues {
+                        IndexDomain: t;
+                        Property: Input;
+                    }
+                    Parameter estimates {
+                        IndexDomain: t;
+                        Property: Output;
+                    }
+                    Set TimeSet {
+                        Index: dvs, dvsp, t;
+                    }
+                    Parameter noObservations {
+                        Range: {
+                            {1..maxint}
+                        }
+                        Property: Input;
+                    }
+                    Parameter noAveragingPeriods {
+                        Range: {
+                            {1..maxint}
+                        }
+                        Property: Input;
+                    }
+                    Parameter weights {
+                        IndexDomain: ws;
+                        Property: Input;
+                    }
+                    Set weightsSet {
+                        SubsetOf: Integers;
+                        Index: ws;
+                    }
+                }
+                DeclarationSection declarations_of_locals {
+                    Parameter Residuals {
+                        IndexDomain: dvs;
+                    }
+                    Parameter ErrorMeasures {
+                        IndexDomain: ems;
+                    }
+                    Parameter retval;
+                }
+            }
+            Procedure weightedMovingAverageEM {
+                Arguments: (dataValues,estimates,noObservations,Weights,noAveragingPeriods,ErrorMeasures);
+                Body: {
+                    retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                    if retval then
+                    	return WeightedMovingAverageWork(dataValues,estimates,noObservations,Weights,noAveragingPeriods,
+                    			ErrorMeasures, Residuals, flags:1);
+                    else
+                    	return 0 ;
+                    endif ;
+                }
+                Comment: {
+                    "Calculate Moving Average of noAveringLength elements given values in dataValues and return result in estimates.
+                    The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon.
+                    The MAD, MAPE, and MSE error measures are returned in the ErrorMeasures argument."
+                }
+                DeclarationSection Argument_declarations {
+                    Parameter dataValues {
+                        IndexDomain: t;
+                        Property: Input;
+                    }
+                    Parameter estimates {
+                        IndexDomain: t;
+                        Property: Output;
+                    }
+                    Set TimeSet {
+                        Index: dvs, t;
+                    }
+                    Parameter noObservations {
+                        Property: Input;
+                    }
+                    Parameter noAveragingPeriods {
+                        Property: Input;
+                    }
+                    Parameter ErrorMeasures {
+                        IndexDomain: ems;
+                        Property: Output;
+                    }
+                    Parameter weights {
+                        IndexDomain: ws;
+                        Property: Input;
+                    }
+                    Set weightsSet {
+                        SubsetOf: Integers;
+                        Index: ws;
+                    }
+                }
+                DeclarationSection declarations_of_locals {
+                    Parameter Residuals {
+                        IndexDomain: dvs;
+                    }
+                    Parameter retval;
+                }
+            }
+            Procedure weightedMovingAverageEMR {
+                Arguments: (dataValues,estimates,noObservations,Weights,noAveragingPeriods,ErrorMeasures,Residuals);
+                Body: {
+                    retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                    if retval then
+                    	return WeightedMovingAverageWork(dataValues,estimates,noObservations,Weights,noAveragingPeriods,
+                    			ErrorMeasures, Residuals, flags:3);
+                    else
+                    	return 0 ;
+                    endif ;
+                }
+                Comment: {
+                    "Calculate Moving Average of noAveringLength elements given values in dataValues and return result in estimates.
+                    The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon.
+                    The MAD, MAPE, and MSE error measures are returned in the ErrorMeasures argument.
+                    The residuals are returned in the Residuals argument."
+                }
+                DeclarationSection Argument_declarations {
+                    Parameter dataValues {
+                        IndexDomain: t;
+                        Property: Input;
+                    }
+                    Parameter estimates {
+                        IndexDomain: t;
+                        Property: Output;
+                    }
+                    Set TimeSet {
+                        Index: dvs, t;
+                    }
+                    Parameter Residuals {
+                        IndexDomain: t;
+                        Property: Output;
+                    }
+                    Parameter noObservations {
+                        Property: Input;
+                    }
+                    Parameter ErrorMeasures {
+                        IndexDomain: ems;
+                        Property: Output;
+                    }
+                    Parameter noAveragingPeriods {
+                        Property: Input;
+                    }
+                    Parameter weights {
+                        IndexDomain: ws;
+                        Property: Input;
+                    }
+                    Set weightsSet {
+                        SubsetOf: Integers;
+                        Index: ws;
+                    }
+                }
+                DeclarationSection declaration_of_locals {
+                    Parameter retval;
+                }
+            }
+        }
+        Section ExponentialSmoothingSection {
+            Section Normal_Exponential_Smoothing {
+                Procedure ExponentialSmoothing {
+                    Arguments: (dataValues,estimates,noObservations,alpha);
+                    Body: {
+                        retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                        if retval then
+                        	return ExponentialSmoothingExternal(dataValues,estimates,
+                        			noObservations,alpha, ErrorMeasures, Residuals, flags:0);
+                        else
+                        	return 0 ;
+                        endif ;
+                    }
+                    Comment: {
+                        "Calculate Exponential Smoothing with observation weight alpha and noObservations values in dataValues
+                        and return result in estimates.
+                        The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon."
+                    }
+                    DeclarationSection Argument_declarations {
+                        Parameter dataValues {
+                            IndexDomain: t;
+                            Property: Input;
+                        }
+                        Set TimeSet {
+                            Index: dvs, t;
+                        }
+                        Parameter alpha {
+                            Property: Input;
+                        }
+                        Parameter estimates {
+                            IndexDomain: t;
+                            Property: Output;
+                        }
+                        Parameter noObservations {
+                            Property: Input;
+                        }
+                    }
+                    DeclarationSection declarations_of_locals {
+                        Parameter Residuals {
+                            IndexDomain: dvs;
+                        }
+                        Parameter ErrorMeasures {
+                            IndexDomain: ems;
+                        }
+                        Parameter retval;
+                    }
+                }
+                Procedure ExponentialSmoothingEM {
+                    Arguments: (dataValues,estimates,noObservations,alpha,ErrorMeasures);
+                    Body: {
+                        retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                        if retval then
+                        	return ExponentialSmoothingExternal(dataValues,estimates,noObservations,alpha,
+                        			ErrorMeasures, Residuals, flags:1);
+                        else
+                        	return 0 ;
+                        endif ;
+                    }
+                    Comment: {
+                        "Calculate Exponential Smoothing with observation weight alpha and noObservations values in dataValues and return result in estimates.
+                        The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon.
+                        The MAD, MAPE, and MSE error measures are returned in the ErrorMeasures argument."
+                    }
+                    DeclarationSection Argument_declarations {
+                        Parameter dataValues {
+                            IndexDomain: dvs;
+                            Property: Input;
+                        }
+                        Set dataValueSet {
+                            Index: dvs;
+                        }
+                        Parameter alpha {
+                            Property: Input;
+                        }
+                        Parameter estimates {
+                            IndexDomain: dvs;
+                            Property: Output;
+                        }
+                        Parameter noObservations {
+                            Property: Input;
+                        }
+                        Parameter ErrorMeasures {
+                            IndexDomain: ems;
+                            Property: Output;
+                        }
+                    }
+                    DeclarationSection declarations_of_locals {
+                        Parameter Residuals {
+                            IndexDomain: dvs;
+                        }
+                        Parameter retval;
+                    }
+                }
+                Procedure ExponentialSmoothingEMR {
+                    Arguments: (dataValues,estimates,noObservations,alpha,ErrorMeasures, Residuals);
+                    Body: {
+                        retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                        if retval then
+                        	return ExponentialSmoothingExternal(dataValues, estimates, noObservations, alpha, ErrorMeasures, Residuals, flags:3);
+                        else
+                        	return 0 ;
+                        endif ;
+                    }
+                    Comment: {
+                        "Calculate Exponential Smoothing with observation weight alpha and noObservations values in dataValues and return result in estimates.
+                        The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon.
+                        The MAD, MAPE, and MSE error measures are returned in the ErrorMeasures argument.
+                        The residuals are returned in the Residuals argument."
+                    }
+                    DeclarationSection Argument_declarations {
+                        Parameter dataValues {
+                            IndexDomain: dvs;
+                            Property: Input;
+                        }
+                        Set dataValueSet {
+                            Index: dvs;
+                        }
+                        Parameter alpha {
+                            Property: Input;
+                        }
+                        Parameter estimates {
+                            IndexDomain: dvs;
+                            Property: Output;
+                        }
+                        Parameter noObservations {
+                            Property: Input;
+                        }
+                        Parameter Residuals {
+                            IndexDomain: dvs;
+                            Property: Output;
+                        }
+                        Parameter ErrorMeasures {
+                            IndexDomain: ems;
+                            Property: Output;
+                        }
+                    }
+                    DeclarationSection declarations_of_locals {
+                        Parameter retval;
+                    }
+                }
+            }
+            Section Exponential_Smoothing_with_Trend {
+                Procedure ExponentialSmoothingTrend {
+                    Arguments: (dataValues,estimates,noObservations,alpha,beta);
+                    Body: {
+                        retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                        if retval then
+                        	return ExponentialSmoothingTrendExternal(dataValues,estimates,noObservations,alpha, beta, ErrorMeasures, Residuals, flags:0);
+                        else
+                        	return 0 ;
+                        endif ;
+                    }
+                    Comment: {
+                        "Calculate Exponential Smoothing taking Trend into account with observation weight alpha and change weight beta,
+                        noObservations values in dataValues and return result in estimates.
+                        The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon."
+                    }
+                    DeclarationSection Argument_declarations {
+                        Parameter dataValues {
+                            IndexDomain: dvs;
+                            Property: Input;
+                        }
+                        Set dataValueSet {
+                            Index: dvs;
+                        }
+                        Parameter alpha {
+                            Property: Input;
+                        }
+                        Parameter beta {
+                            Property: Input;
+                        }
+                        Parameter estimates {
+                            IndexDomain: dvs;
+                            Property: Output;
+                        }
+                        Parameter noObservations {
+                            Property: Input;
+                        }
+                    }
+                    DeclarationSection declarations_of_locals {
+                        Parameter Residuals {
+                            IndexDomain: dvs;
+                        }
+                        Parameter ErrorMeasures {
+                            IndexDomain: ems;
+                        }
+                        Parameter retval;
+                    }
+                }
+                Procedure ExponentialSmoothingTrendEM {
+                    Arguments: (dataValues,estimates,noObservations,alpha,beta,ErrorMeasures);
+                    Body: {
+                        retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                        if retval then
+                        	return ExponentialSmoothingTrendExternal(dataValues,estimates,noObservations,alpha,beta,
+                        		ErrorMeasures, Residuals, flags:1);
+                        else
+                        	return 0 ;
+                        endif ;
+                    }
+                    Comment: {
+                        "Calculate Exponential Smoothing taking Trend into account with observation weight alpha and change weight beta,
+                        noObservations values in dataValues and return result in estimates.
+                        The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon.
+                        The MAD, MAPE, and MSE error measures are returned in the ErrorMeasures argument."
+                    }
+                    DeclarationSection Argument_declarations {
+                        Parameter dataValues {
+                            IndexDomain: dvs;
+                            Property: Input;
+                        }
+                        Set dataValueSet {
+                            Index: dvs;
+                        }
+                        Parameter alpha {
+                            Property: Input;
+                        }
+                        Parameter beta {
+                            Property: Input;
+                        }
+                        Parameter estimates {
+                            IndexDomain: dvs;
+                            Property: Output;
+                        }
+                        Parameter noObservations {
+                            Property: Input;
+                        }
+                        Parameter ErrorMeasures {
+                            IndexDomain: ems;
+                            Property: Output;
+                        }
+                    }
+                    DeclarationSection declarations_of_locals {
+                        Parameter Residuals {
+                            IndexDomain: dvs;
+                        }
+                        Parameter retval;
+                    }
+                }
+                Procedure ExponentialSmoothingTrendEMR {
+                    Arguments: (dataValues,estimates,noObservations,alpha,beta,ErrorMeasures,Residuals);
+                    Body: {
+                        retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                        if retval then
+                        	return ExponentialSmoothingTrendExternal(dataValues,estimates,noObservations,alpha,beta, ErrorMeasures, Residuals, flags:3);
+                        else
+                        	return 0 ;
+                        endif ;
+                    }
+                    Comment: {
+                        "Calculate Exponential Smoothing taking Trend into account with observation weight alpha and change weight beta,
+                        noObservations values in dataValues and return result in estimates.
+                        The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon.
+                        The MAD, MAPE, and MSE error measures are returned in the ErrorMeasures argument.
+                        The residuals are returned in the Residuals argument."
+                    }
+                    DeclarationSection Argument_declarations {
+                        Parameter dataValues {
+                            IndexDomain: dvs;
+                            Property: Input;
+                        }
+                        Set dataValueSet {
+                            Index: dvs;
+                        }
+                        Parameter alpha {
+                            Property: Input;
+                        }
+                        Parameter beta {
+                            Property: Input;
+                        }
+                        Parameter estimates {
+                            IndexDomain: dvs;
+                            Property: Output;
+                        }
+                        Parameter noObservations {
+                            Property: Input;
+                        }
+                        Parameter Residuals {
+                            IndexDomain: dvs;
+                            Property: Output;
+                        }
+                        Parameter ErrorMeasures {
+                            IndexDomain: ems;
+                            Property: Output;
+                        }
+                    }
+                    DeclarationSection declarations_of_locals {
+                        Parameter retval;
+                    }
+                }
+            }
+            Section Exponential_Smoothing_with_Trend_and_Seasonality {
+                Procedure ExponentialSmoothingTrendSeasonality {
+                    Arguments: (dataValues,estimates,noObservations,alpha,beta,gamma,periodLength);
+                    Body: {
+                        retCode := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                        if retCode then
+                        	errMsg := "" ;
+                        	retCode := ExponentialSmoothingTrendSeasonExternal(dataValues,estimates,noObservations,
+                        			alpha, beta,gamma,periodLength, ErrorMeasures, Residuals, flags:0,
+                        			errMsg);
+                        	if errMsg then
+                        		retCode := 0.0 ;
+                        		raise error "forecasting::ExponentialSmoothingTrendSeasonality(): " + errMsg ;
+                        	endif ;
+                        endif ;
+                        
+                        return retCode ;
+                    }
+                    Comment: {
+                        "Calculate Exponential Smoothing taking Trend and seasonality into account with observation weight alpha, change weight beta,
+                        and seasonality weight gamma, noObservations values in dataValues and return result in estimates.
+                        The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon."
+                    }
+                    DeclarationSection Argument_declarations {
+                        Parameter dataValues {
+                            IndexDomain: dvs;
+                            Property: Input;
+                        }
+                        Parameter estimates {
+                            IndexDomain: dvs;
+                            Property: Output;
+                        }
+                        Set dataValueSet {
+                            Index: dvs;
+                        }
+                        Parameter noObservations {
+                            Property: Input;
+                        }
+                        Parameter alpha {
+                            Property: Input;
+                        }
+                        Parameter beta {
+                            Property: Input;
+                        }
+                        Parameter gamma {
+                            Property: Input;
+                        }
+                        Parameter periodLength {
+                            Property: Input;
+                        }
+                    }
+                    DeclarationSection declarations_of_locals {
+                        Parameter Residuals {
+                            IndexDomain: dvs;
+                        }
+                        Parameter ErrorMeasures {
+                            IndexDomain: ems;
+                        }
+                        Parameter retCode;
+                        StringParameter errMsg;
+                        Parameter retval;
+                    }
+                }
+                Procedure ExponentialSmoothingTrendSeasonalityEM {
+                    Arguments: (dataValues,estimates,noObservations,alpha,beta,gamma,periodLength,ErrorMeasures);
+                    Body: {
+                        retCode := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                        if retCode then
+                        	errMsg := "" ;
+                        	retCode := ExponentialSmoothingTrendSeasonExternal(dataValues,estimates,noObservations,
+                        			alpha,beta,gamma,periodLength,
+                        			ErrorMeasures, Residuals, flags:1, errmsg);
+                        	if errMsg then
+                        		retCode := 0.0 ;
+                        		raise error "forecasting::ExponentialSmoothingTrendSeasonalityEM(): " + errMsg ;
+                        	endif ;
+                        endif ;
+                        
+                        return retCode ;
+                    }
+                    Comment: {
+                        "Calculate Exponential Smoothing taking Trend and seasonality into account with observation weight alpha, change weight beta,
+                        and seasonality weight gamma, noObservations values in dataValues and return result in estimates.
+                        The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon.
+                        The MAD, MAPE, and MSE error measures are returned in the ErrorMeasures argument."
+                    }
+                    DeclarationSection Argument_declarations {
+                        Parameter dataValues {
+                            IndexDomain: dvs;
+                            Property: Input;
+                        }
+                        Parameter estimates {
+                            IndexDomain: dvs;
+                            Property: Output;
+                        }
+                        Set dataValueSet {
+                            Index: dvs;
+                        }
+                        Parameter noObservations {
+                            Property: Input;
+                        }
+                        Parameter alpha {
+                            Property: Input;
+                        }
+                        Parameter beta {
+                            Property: Input;
+                        }
+                        Parameter gamma {
+                            Property: Input;
+                        }
+                        Parameter periodLength {
+                            Property: Input;
+                        }
+                        Parameter ErrorMeasures {
+                            IndexDomain: ems;
+                            Property: Output;
+                        }
+                    }
+                    DeclarationSection declarations_of_locals {
+                        Parameter Residuals {
+                            IndexDomain: dvs;
+                        }
+                        Parameter retCode;
+                        StringParameter errMsg;
+                        Parameter retval;
+                    }
+                }
+                Procedure ExponentialSmoothingTrendSeasonalityEMR {
+                    Arguments: {
+                        (dataValues,estimates,noObservations,alpha,beta,gamma,periodLength,ErrorMeasures,
+                         Residuals)
+                    }
+                    Body: {
+                        retCode := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                        if retCode then
+                        	errMsg := "" ;
+                        	retCode := ExponentialSmoothingTrendSeasonExternal(dataValues, estimates, noObservations,
+                        			alpha, beta, gamma, periodLength,
+                        			ErrorMeasures, Residuals, flags:3, errMsg);
+                        	if errMsg then
+                        		retCode := 0.0 ;
+                        		raise error "forecasting::ExponentialSmoothingTrendSeasonalityEMR(): " + errMsg ;
+                        	endif ;
+                        endif ;
+                        return retCode ;
+                    }
+                    Comment: {
+                        "Calculate Exponential Smoothing taking Trend and seasonality into account with observation weight alpha, change weight beta,
+                        and seasonality weight gamma, noObservations values in dataValues and return result in estimates.
+                        The length of the history is noObservations; the remaining elements of the time set make up the forecasting horizon.
+                        The MAD, MAPE, and MSE error measures are returned in the ErrorMeasures argument.
+                        The residuals are returned in the Residuals argument."
+                    }
+                    DeclarationSection Argument_declarations {
+                        Parameter dataValues {
+                            IndexDomain: dvs;
+                            Property: Input;
+                        }
+                        Parameter estimates {
+                            IndexDomain: dvs;
+                            Property: Output;
+                        }
+                        Set dataValueSet {
+                            Index: dvs;
+                        }
+                        Parameter noObservations {
+                            Property: Input;
+                        }
+                        Parameter alpha {
+                            Property: Input;
+                        }
+                        Parameter beta {
+                            Property: Input;
+                        }
+                        Parameter gamma {
+                            Property: Input;
+                        }
+                        Parameter periodLength {
+                            Property: Input;
+                        }
+                        Parameter ErrorMeasures {
+                            IndexDomain: ems;
+                            Property: Output;
+                        }
+                        Parameter Residuals {
+                            IndexDomain: dvs;
+                            Property: Output;
+                        }
+                    }
+                    DeclarationSection declarations_of_locals {
+                        Parameter retCode;
+                        StringParameter errMsg;
+                        Parameter retval;
+                    }
+                }
+            }
+            Section ExponentialSmoothingSectionTuning {
+                Procedure ExponentialSmoothingTune {
+                    Arguments: (dataValues,noObservations,alpha,alphaLow,alphaUpp);
+                    Body: {
+                        retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                        block ! Sanity checking
+                        	if alphaLow <= 0 then
+                        		raise error "forecasting::ExponentialSmoothingTrendTune() alphaLow should be > 0" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if alphaUpp >= 1 then
+                        		raise error "forecasting::ExponentialSmoothingTrendTune() alphaUpp should be < 1" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if alphaLow > alphaUpp then
+                        		raise error "forecasting::ExponentialSmoothingTrendTune() alphaLow should be <= alphaUpp" ;
+                        		retval := 0 ;
+                        	endif ;
+                        endblock ;
+                        if retval then
+                        	return sespt::ExponentialSmoothingTune(dataValues,noObservations,alpha,alphaLow,alphaUpp);
+                        else
+                        	return 0 ;
+                        endif ;
+                    }
+                    Comment: {
+                        "In the context of exponential smoothing, find the observation weight parameter alpha
+                        that minimizes the error measure mean squared error.
+                        The length of the history is noObservations, the remaining elements of the time set are ignored.
+                        alpha is InOut, upon input, it is used as initial value (if in the range (alphaLow, alphaUpp)) for the optimization step.
+                        upon Output, if successful, it is the observation weight parameter that minimizes the mean squared error."
+                    }
+                    DeclarationSection Argument_Declaration {
+                        Parameter dataValues {
+                            IndexDomain: dvs;
+                            Property: Input;
+                        }
+                        Set dataValueSet {
+                            Index: dvs;
+                        }
+                        Parameter noObservations {
+                            Property: Input;
+                        }
+                        Parameter alpha {
+                            Property: InOut;
+                            Comment: "Inout property, input value supplied will be used as starting value for the optimization.";
+                        }
+                        Parameter alphaLow {
+                            Default: 0.01;
+                            Property: Optional;
+                        }
+                        Parameter alphaUpp {
+                            Default: 0.99;
+                            Property: Optional;
+                        }
+                    }
+                    DeclarationSection Local_Declaration {
+                        Set S {
+                            SubsetOf: Integers;
+                            Index: i;
+                        }
+                        Parameter Y {
+                            IndexDomain: i;
+                        }
+                        ElementParameter err {
+                            Range: errh::PendingErrors;
+                        }
+                        Parameter retval;
+                    }
+                }
+                Procedure ExponentialSmoothingTrendTune {
+                    Arguments: (dataValues,noObservations,alpha,beta,alphaLow,alphaUpp,betaLow,betaUpp);
+                    Body: {
+                        retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                        block ! Sanity checking
+                        	if alphaLow <= 0 then
+                        		raise error "forecasting::ExponentialSmoothingTrendTune() alphaLow should be > 0" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if alphaUpp >= 1 then
+                        		raise error "forecasting::ExponentialSmoothingTrendTune() alphaUpp should be < 1" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if alphaLow > alphaUpp then
+                        		raise error "forecasting::ExponentialSmoothingTrendTune() alphaLow should be <= alphaUpp" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if betaLow <= 0 then
+                        		raise error "forecasting::ExponentialSmoothingTrendTune() betaLow should be > 0" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if betaUpp >= 1 then
+                        		raise error "forecasting::ExponentialSmoothingTrendTune() betaUpp should be < 1" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if betaLow > betaUpp then
+                        		raise error "forecasting::ExponentialSmoothingTrendTune() betaLow should be <= betaUpp" ;
+                        		retval := 0 ;
+                        	endif ;
+                        endblock ;
+                        
+                        if retval then ! Actual work inside a private module.
+                        	return tespt::ExponentialSmoothingTrendTune(dataValues,noObservations,
+                        			alpha,beta,alphaLow,alphaUpp,betaLow,betaUpp);
+                        else
+                        	return 0 ;
+                        endif ;
+                    }
+                    Comment: {
+                        "In the context of exponential smoothing, find the observation weight parameter alpha
+                        that minimizes the error measure mean squared error.
+                        The length of the history is noObservations, the remaining elements of the time set are ignored.
+                        alpha is InOut, upon input, it is used as initial value (if in the range (alphaLow, alphaUpp)) for the optimization step.
+                        upon Output, if successful, it is the observation weight parameter that minimizes the mean squared error."
+                    }
+                    DeclarationSection Argument_Declaration {
+                        Parameter dataValues {
+                            IndexDomain: dvs;
+                            Property: Input;
+                        }
+                        Set dataValueSet {
+                            Index: dvs;
+                        }
+                        Parameter noObservations {
+                            Property: Input;
+                        }
+                        Parameter alpha {
+                            Property: InOut;
+                            Comment: "Inout property, input value supplied will be used as starting value for the optimization.";
+                        }
+                        Parameter alphaLow {
+                            Default: 0.01;
+                            Property: Optional;
+                        }
+                        Parameter alphaUpp {
+                            Default: 0.99;
+                            Property: Optional;
+                        }
+                        Parameter beta {
+                            Property: InOut;
+                        }
+                        Parameter betaLow {
+                            Default: 0.01;
+                            Property: Optional;
+                        }
+                        Parameter betaUpp {
+                            Default: 0.99;
+                            Property: Optional;
+                        }
+                    }
+                    DeclarationSection Local_Declaration {
+                        Set S {
+                            SubsetOf: Integers;
+                            Index: i;
+                        }
+                        Parameter Y {
+                            IndexDomain: i;
+                        }
+                        ElementParameter err {
+                            Range: errh::PendingErrors;
+                        }
+                        Parameter retval;
+                    }
+                }
+                Procedure ExponentialSmoothingTrendSeasonalityTune {
+                    Arguments: {
+                        (dataValues,noObservations,alpha,beta,gamma,periodLength,alphaLow,alphaUpp,betaLow,
+                         betaUpp,gammaLow,gammaUpp)
+                    }
+                    Body: {
+                        retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                        block ! Sanity checking
+                        
+                        	if alphaLow <= 0 then
+                        		raise error "forecasting::ExponentialSmoothingTrendTune() alphaLow should be > 0" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if alphaUpp >= 1 then
+                        		raise error "forecasting::ExponentialSmoothingTrendTune() alphaUpp should be < 1" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if alphaLow > alphaUpp then
+                        		raise error "forecasting::ExponentialSmoothingTrendSeasonalityTune() alphaLow should be <= alphaUpp" ;
+                        		retval := 0 ;
+                        	endif ;
+                        
+                        	if betaLow <= 0 then
+                        		raise error "forecasting::ExponentialSmoothingTrendSeasonalityTune() betaLow should be > 0" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if betaUpp >= 1 then
+                        		raise error "forecasting::ExponentialSmoothingTrendSeasonalityTune() betaUpp should be < 1" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if betaLow > betaUpp then
+                        		raise error "forecasting::ExponentialSmoothingTrendSeasonalityTune() betaLow should be <= betaUpp" ;
+                        		retval := 0 ;
+                        	endif ;
+                        
+                        	if gammaLow <= 0 then
+                        		raise error "forecasting::ExponentialSmoothingTrendSeasonalityTune() gammaLow should be > 0" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if gammaUpp >= 1 then
+                        		raise error "forecasting::ExponentialSmoothingTrendSeasonalityTune() gammaUpp should be < 1" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if gammaLow > gammaUpp then
+                        		raise error "forecasting::ExponentialSmoothingTrendSeasonalityTune() gammaLow should be <= gammaUpp" ;
+                        		retval := 0 ;
+                        	endif ;
+                        
+                        	if periodLength <= 0 then
+                        		raise error "forecasting::ExponentialSmoothingTrendSeasonalityTune() periodLength should be > 0" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if mod(periodLength, 1) then
+                        		raise error "forecasting::ExponentialSmoothingTrendSeasonalityTune() periodLength should be integer" ;
+                        		retval := 0 ;
+                        	endif ;
+                        	if div(noObservations, periodLength) < 3 then
+                        		raise error "forecasting::ExponentialSmoothingTrendSeasonalityTune() at least three full seasons required" ;
+                        		retval := 0 ;
+                        	endif ;
+                        
+                        endblock ;
+                        
+                        if retval then ! Actual work inside a private module.
+                        	return esspt::ExponentialSmoothingSeasonalityTune(dataValues,noObservations,
+                        			alpha,beta,gamma,periodLength,alphaLow,alphaUpp,betaLow,betaUpp,gammaLow,gammaUpp);
+                        else
+                        	return 0 ;
+                        endif ;
+                    }
+                    Comment: {
+                        "In the context of exponential smoothing, find the observation weight parameter alpha
+                        that minimizes the error measure mean squared error.
+                        The length of the history is noObservations, the remaining elements of the time set are ignored.
+                        alpha is InOut, upon input, it is used as initial value (if in the range (alphaLow, alphaUpp)) for the optimization step.
+                        upon Output, if successful, it is the observation weight parameter that minimizes the mean squared error."
+                    }
+                    DeclarationSection Argument_Declaration {
+                        Parameter dataValues {
+                            IndexDomain: dvs;
+                            Property: Input;
+                        }
+                        Set dataValueSet {
+                            Index: dvs;
+                        }
+                        Parameter noObservations {
+                            Property: Input;
+                        }
+                        Parameter alpha {
+                            Property: InOut;
+                            Comment: "Inout property, input value supplied will be used as starting value for the optimization.";
+                        }
+                        Parameter beta {
+                            Property: InOut;
+                        }
+                        Parameter gamma {
+                            Property: InOut;
+                        }
+                        Parameter alphaLow {
+                            Default: 0.01;
+                            Property: Optional;
+                        }
+                        Parameter alphaUpp {
+                            Default: 0.99;
+                            Property: Optional;
+                        }
+                        Parameter betaLow {
+                            Default: 0.01;
+                            Property: Optional;
+                        }
+                        Parameter betaUpp {
+                            Default: 0.99;
+                            Property: Optional;
+                        }
+                        Parameter gammaLow {
+                            Default: 0.01;
+                            Property: Optional;
+                        }
+                        Parameter gammaUpp {
+                            Default: 0.99;
+                            Property: Optional;
+                        }
+                        Parameter periodLength {
+                            Property: Input;
+                        }
+                    }
+                    DeclarationSection Local_Declaration {
+                        Set S {
+                            SubsetOf: Integers;
+                            Index: i;
+                        }
+                        Parameter Y {
+                            IndexDomain: i;
+                        }
+                        ElementParameter err {
+                            Range: errh::PendingErrors;
+                        }
+                        Parameter retval;
+                    }
+                }
+            }
+        }
+    }
+    Section Private_Section {
+        ElementParameter DLL_Encoding {
+            Range: AllCharacterEncodings;
+            Definition: {
+                if AimmsStringConstants('Platform') = "Windows" then
+                	'UTF-16LE'
+                else
+                	'UTF-32LE'
+                endif
+            }
+        }
+        Section MovingAverageSupport {
+            Procedure MovingAverageWork {
+                Arguments: (dataValues,estimates,noObservations,noAveragingPeriods,ErrorMeasures,Residuals,flags);
+                Body: {
+                    rcode := 1 ; ! Until an error is detected.
+                    
+                    ! Sanity checking
+                    block
+                    	if rcode then ! Ensure averaging length does not exceed number of elements in time set.
+                    		if noAveragingPeriods >= card( dataValueSet ) then
+                    			rcode := 0 ;
+                    			raise error "The number of averaging periods (" + noAveragingPeriods
+                    				+ ") should be less than the size of estimates ("
+                    				+ card( dataValueSet ) + ") to be computed." ;
+                    		endif ;
+                    	endif ;
+                    
+                    	if rcode then ! Ensure averaging length does not exceed number of elements in history
+                    		if noAveragingPeriods > noObservations then
+                    			rcode := 0 ;
+                    			raise error "The number of averaging periods (" + noAveragingPeriods
+                    				+ ") should be less than or equal to the number of observations ("
+                    				+ noObservations + ") available." ;
+                    		endif ;
+                    	endif ;
+                    endblock ;
+                    
+                    if rcode then ! Let a C++ function do the actual work.
+                    	if not MovingAverageExternal(dataValues,estimates,noObservations,noAveragingPeriods,
+                    		ErrorMeasures, Residuals, flags) then
+                    		rcode := 0 ;
+                    		raise error "Calling MovingAverageExternal failed." ;
+                    	endif ;
+                    endif ;
+                    
+                    return rcode ;
+                }
+                DeclarationSection Argument_declarations {
+                    Parameter dataValues {
+                        IndexDomain: dvs;
+                        Property: Input;
+                    }
+                    Parameter estimates {
+                        IndexDomain: dvs;
+                        Property: Output;
+                    }
+                    Set dataValueSet {
+                        Index: dvs;
+                    }
+                    Parameter Residuals {
+                        IndexDomain: dvs;
+                        Property: Output;
+                    }
+                    Parameter noObservations {
+                        Property: Input;
+                    }
+                    Parameter ErrorMeasures {
+                        IndexDomain: ems;
+                        Property: Output;
+                    }
+                    Parameter noAveragingPeriods {
+                        Property: Input;
+                    }
+                    Parameter flags {
+                        Property: Input;
+                        Comment: {
+                            "Comment flags:
+                            0 : no error measures requested
+                            1 : only error measures requested
+                            2 : not an allowed value for the flags argument
+                            3 : Both error measures and residuals requested"
+                        }
+                    }
+                }
+                DeclarationSection declarations_of_locals {
+                    Parameter rcode {
+                        Comment: {
+                            "1 : ok
+                            0 : Error occurred."
+                        }
+                    }
+                }
+            }
+            Procedure WeightedMovingAverageWork {
+                Arguments: {
+                    (dataValues,estimates,noObservations,weights,noAveragingPeriods,ErrorMeasures,Residuals,
+                     flags)
+                }
+                Body: {
+                    rcode := 1 ; ! Until an error is detected.
+                    
+                    ! Sanity checking
+                    block
+                    	if rcode then ! Ensure averaging length does not exceed number of elements in time set.
+                    		if noAveragingPeriods >= card( dataValueSet ) then
+                    			rcode := 0 ;
+                    			raise error "The number of averaging periods (" + noAveragingPeriods
+                    				+ ") should be less than the size of estimates ("
+                    				+ card( dataValueSet ) + ") to be computed." ;
+                    		endif ;
+                    	endif ;
+                    
+                    	if rcode then ! Ensure averaging length does not exceed number of elements in history
+                    		if noAveragingPeriods > noObservations then
+                    			rcode := 0 ;
+                    			raise error "The number of averaging periods (" + noAveragingPeriods
+                    				+ ") should be less than or equal to the number of observations ("
+                    				+ noObservations + ") available." ;
+                    		endif ;
+                    	endif ;
+                    
+                    	if rcode then ! Ensure the weights sum to 1.0.
+                    		if sum( ws, weights[ws] ) <> 1.0 then
+                    			rcode := 0 ;
+                    			raise error "The sum of the weights should equal 1" ;
+                    		endif ;
+                    	endif ;
+                    endblock ;
+                    
+                    if rcode then ! Let a C++ function do the actual work.
+                    	if not WeightedMovingAverageExternal(dataValues,estimates,noObservations,Weights,noAveragingPeriods,
+                    		ErrorMeasures, Residuals, flags) then
+                    		rcode := 0 ;
+                    		raise error "Calling MovingAverageExternal failed." ;
+                    	endif ;
+                    endif ;
+                    
+                    return rcode ;
+                }
+                DeclarationSection Argument_declarations {
+                    Parameter dataValues {
+                        IndexDomain: dvs;
+                        Property: Input;
+                    }
+                    Parameter estimates {
+                        IndexDomain: dvs;
+                        Property: Output;
+                    }
+                    Set dataValueSet {
+                        Index: dvs;
+                    }
+                    Parameter Residuals {
+                        IndexDomain: dvs;
+                        Property: Output;
+                    }
+                    Parameter noObservations {
+                        Property: Input;
+                    }
+                    Parameter ErrorMeasures {
+                        IndexDomain: ems;
+                        Property: Output;
+                    }
+                    Parameter noAveragingPeriods {
+                        Property: Input;
+                    }
+                    Parameter flags {
+                        Property: Input;
+                        Comment: {
+                            "Comment flags:
+                            0 : no error measures requested
+                            1 : only error measures requested
+                            2 : not an allowed value for the flags argument
+                            3 : Both error measures and residuals requested"
+                        }
+                    }
+                    Set WeigthsSet {
+                        SubsetOf: Integers;
+                        Index: ws;
+                    }
+                    Parameter weights {
+                        IndexDomain: ws;
+                        Property: Input;
+                    }
+                }
+                DeclarationSection declarations_of_locals {
+                    Parameter rcode {
+                        Comment: {
+                            "1 : ok
+                            0 : Error occurred."
+                        }
+                    }
+                }
+            }
+            ExternalProcedure MovingAverageExternal {
+                Arguments: (dataValues,estimates,noObservations,noAveragingPeriods,errMeas,residuals,flags);
+                DllName: DLL_Name;
+                ReturnType: integer;
+                BodyCall: {
+                    MovingAverage( double array: dataValues, double array: estimates,
+                    	card: dataValueSet, scalar integer: noObservations, scalar integer: noAveragingPeriods,
+                    	double array: errMeas, double array: residuals, scalar integer: flags );
+                }
+                Comment: {
+                    "Comment flags:
+                    0 : no error measures requested
+                    1 : only error measures requested
+                    2 : not an allowed value for the flags argument
+                    3 : Both error measures and residuals requested"
+                }
+                Parameter dataValues {
+                    IndexDomain: dvs;
+                    Property: Input;
+                }
+                Parameter estimates {
+                    IndexDomain: dvs;
+                    Property: Output;
+                }
+                Set dataValueSet {
+                    Index: dvs, dvsp;
+                }
+                Parameter noObservations {
+                    Property: Input;
+                }
+                Parameter noAveragingPeriods {
+                    Property: Input;
+                }
+                Parameter errMeas {
+                    IndexDomain: ems;
+                    Property: Output;
+                }
+                Parameter residuals {
+                    IndexDomain: dvs;
+                    Property: Output;
+                }
+                Parameter flags {
+                    Property: Input;
+                    Comment: {
+                        "Comment flags:
+                        0 : no error measures requested
+                        1 : only error measures requested
+                        2 : not an allowed value for the flags argument
+                        3 : Both error measures and residuals requested"
+                    }
+                }
+            }
+            ExternalProcedure WeightedMovingAverageExternal {
+                Arguments: {
+                    (dataValues,estimates,noObservations,weights,noAveragingPeriods,errMeas,residuals,
+                     flags)
+                }
+                DllName: DLL_Name;
+                ReturnType: integer;
+                BodyCall: {
+                    WeightedMovingAverage( double array: dataValues, double array: estimates,
+                    	card: dataValueSet, scalar integer: noObservations,
+                    	double array: weights, scalar integer: noAveragingPeriods,
+                    	double array: errMeas, double array: residuals, scalar integer: flags );
+                }
+                Comment: {
+                    "Comment flags:
+                    0 : no error measures requested
+                    1 : only error measures requested
+                    2 : not an allowed value for the flags argument
+                    3 : Both error measures and residuals requested"
+                }
+                Parameter dataValues {
+                    IndexDomain: dvs;
+                    Property: Input;
+                }
+                Parameter estimates {
+                    IndexDomain: dvs;
+                    Property: Output;
+                }
+                Set dataValueSet {
+                    Index: dvs, dvsp;
+                }
+                Parameter noObservations {
+                    Property: Input;
+                }
+                Parameter noAveragingPeriods {
+                    Property: Input;
+                }
+                Parameter errMeas {
+                    IndexDomain: ems;
+                    Property: Output;
+                }
+                Parameter residuals {
+                    IndexDomain: dvs;
+                    Property: Output;
+                }
+                Parameter flags {
+                    Property: Input;
+                    Comment: {
+                        "Comment flags:
+                        0 : no error measures requested
+                        1 : only error measures requested
+                        2 : not an allowed value for the flags argument
+                        3 : Both error measures and residuals requested"
+                    }
+                }
+                Parameter weights {
+                    IndexDomain: ws;
+                    Property: Input;
+                }
+                Set weightsSet {
+                    SubsetOf: Integers;
+                    Index: ws;
+                }
+            }
+        }
+        Section ExponentialSmoothingSupport {
+            ExternalProcedure ExponentialSmoothingExternal {
+                Arguments: (dataValues,estimates,noObservations,alphaPar,errMeas,residuals,flags);
+                DllName: DLL_Name;
+                ReturnType: integer;
+                BodyCall: {
+                    ExponentialSmoothing( double array: dataValues, double array: estimates,
+                    	card: dataValueSet, scalar integer: noObservations, scalar double: alphaPar,
+                    	double array: errMeas, double array: residuals, scalar integer: flags );
+                }
+                Comment: {
+                    "Comment flags:
+                    0 : no error measures requested
+                    1 : only error measures requested
+                    2 : not an allowed value for the flags argument
+                    3 : Both error measures and residuals requested"
+                }
+                Parameter dataValues {
+                    IndexDomain: dvs;
+                    Property: Input;
+                }
+                Parameter estimates {
+                    IndexDomain: dvs;
+                    Property: Output;
+                }
+                Set dataValueSet {
+                    Index: dvs, dvsp;
+                }
+                Parameter noObservations {
+                    Property: Input;
+                }
+                Parameter alphaPar {
+                    Property: Input;
+                }
+                Parameter errMeas {
+                    IndexDomain: ems;
+                    Property: Output;
+                }
+                Parameter residuals {
+                    IndexDomain: dvs;
+                    Property: Output;
+                }
+                Parameter flags {
+                    Property: Input;
+                }
+            }
+            ExternalProcedure ExponentialSmoothingTrendExternal {
+                Arguments: (dataValues,estimates,noObservations,alphaPar,betaPar,errMeas,residuals,flags);
+                DllName: DLL_Name;
+                ReturnType: integer;
+                BodyCall: {
+                    ExponentialSmoothingTrend( double array: dataValues, double array: estimates,
+                    	card: dataValueSet, scalar integer: noObservations,
+                    	scalar double: alphaPar, scalar double: betaPar,
+                    	double array: errMeas, double array: residuals, scalar integer: flags );
+                }
+                Comment: {
+                    "Comment flags:
+                    0 : no error measures requested
+                    1 : only error measures requested
+                    2 : not an allowed value for the flags argument
+                    3 : Both error measures and residuals requested"
+                }
+                Parameter dataValues {
+                    IndexDomain: dvs;
+                    Property: Input;
+                }
+                Parameter estimates {
+                    IndexDomain: dvs;
+                    Property: Output;
+                }
+                Set dataValueSet {
+                    Index: dvs, dvsp;
+                }
+                Parameter noObservations {
+                    Property: Input;
+                }
+                Parameter alphaPar {
+                    Property: Input;
+                }
+                Parameter errMeas {
+                    IndexDomain: ems;
+                    Property: Output;
+                }
+                Parameter residuals {
+                    IndexDomain: dvs;
+                    Property: Output;
+                }
+                Parameter flags {
+                    Property: Input;
+                }
+                Parameter betaPar {
+                    Property: Input;
+                }
+            }
+            ExternalProcedure ExponentialSmoothingTrendSeasonExternal {
+                Arguments: {
+                    (dataValues,estimates,noObservations,alphaPar,betaPar,gammaPar,periodLength,errMeas,
+                     residuals,flags,errmsg)
+                }
+                DllName: DLL_Name;
+                ReturnType: integer;
+                Encoding: DLL_Encoding;
+                BodyCall: {
+                    ExponentialSmoothingTrendSeason( double array: dataValues, double array: estimates,
+                    	card: dataValueSet, scalar integer: noObservations,
+                    	scalar double: alphaPar, scalar double: betaPar, scalar double: gammaPar, scalar integer: periodLength,
+                    	double array: errMeas, double array: residuals, scalar integer: flags, scalar string: errmsg );
+                }
+                Comment: {
+                    "Comment flags:
+                    0 : no error measures requested
+                    1 : only error measures requested
+                    2 : not an allowed value for the flags argument
+                    3 : Both error measures and residuals requested"
+                }
+                Parameter dataValues {
+                    IndexDomain: dvs;
+                    Property: Input;
+                }
+                Parameter estimates {
+                    IndexDomain: dvs;
+                    Property: Output;
+                }
+                Set dataValueSet {
+                    Index: dvs, dvsp;
+                }
+                Parameter noObservations {
+                    Property: Input;
+                }
+                Parameter alphaPar {
+                    Property: Input;
+                }
+                Parameter errMeas {
+                    IndexDomain: ems;
+                    Property: Output;
+                }
+                Parameter residuals {
+                    IndexDomain: dvs;
+                    Property: Output;
+                }
+                Parameter flags {
+                    Property: Input;
+                }
+                Parameter betaPar {
+                    Property: Input;
+                }
+                Parameter gammaPar {
+                    Property: Input;
+                }
+                Parameter periodLength {
+                    Property: Input;
+                }
+                StringParameter errmsg {
+                    Property: Output;
+                }
+            }
+            Section ParameterTuning {
+                Module SimpleExponentialSmoothingParameterTuning {
+                    Prefix: sespt;
+                    Procedure ExponentialSmoothingTune {
+                        Arguments: (dataValues,noObservations,alphaPar,alphaLow,alphaUpp);
+                        Body: {
+                            retval := SanityCheckNoSpecialValuesSufficientObservations(dataValues,NoObservations);
+                            if alphaLow <= 0 then
+                            	raise error "forecasting::ExponentialSmoothingTune() alphaLow should be > 0" ;
+                            	retval := 0 ;
+                            endif ;
+                            if alphaUpp >= 1 then
+                            	raise error "forecasting::ExponentialSmoothingTune() alphaUpp should be < 1" ;
+                            	retval := 0 ;
+                            endif ;
+                            if alphaLow > alphaUpp then
+                            	raise error "forecasting::ExponentialSmoothingTune() alphaLow should be < alphaUpp" ;
+                            	retval := 0 ;
+                            endif ;
+                            if not retval then
+                            	return 0 ;
+                            endif ;
+                            
+                            obsSet := { dvs | ord(dvs) <= noObservations };
+                            IntegerSubset := ElementRange( 1, noObservations );
+                            CopyOneDimData( obs, dataValues(iObs) );
+                            IntegerSubset += data { 0 } ;
+                            nul := 0 ;
+                            one := 1 ;
+                            SimpleExponentialSmoothingParameterTuningActive := 1 ;
+                            empty residuals ;
+                            empty estimates ;
+                            
+                            block
+                            
+                            	block ! Provide starting values for the optimization.
+                            		if ( alphaLow < alphaPar ) and ( alphaPar < alphaUpp ) then
+                            			alpha.Level := alphaPar ;
+                            		else
+                            			alpha.Level := alphaLow + 0.7 * ( alphaUpp - alphaLow ) ;
+                            		endif ;
+                            		alpha.Lower := alphaLow ;
+                            		alpha.Upper := alphaUpp ;
+                            
+                            		obs(nul) := obs(one);
+                            
+                            		estimates(nul) := obs(one);
+                            		estimates(is|is>=1).level := alpha.level * obs(is-1) + ( 1 - alpha.level ) * estimates(is-1).Level ;
+                            
+                            		obsMin := Min( is|is>=1, obs(is) );
+                            		obsMax := Max( is|is>=1, obs(is) );
+                            		obsRng := obsMax - obsMin ;
+                            		estLow := obsMin - 0.0 * obsRng ;
+                            		estUpp := obsMax + 0.0 * obsRng ;
+                            		estimates.Lower(is) := estLow ;
+                            		estimates.Upper(is) := estUpp ;
+                            
+                            		residuals(is|is>=1) := obs(is) - estimates(is);
+                            		residuals(is|is>=1).Lower := -obsRng ;
+                            		residuals(is|is>=1).Upper :=  obsRng ;
+                            
+                            		mse_obj := sum( is|is>=1, sqr( residuals(is) ) );
+                            	endblock ;
+                            
+                            	solve mp_ses_tune ;
+                            
+                            	alphaPar := alpha.Level ;
+                            
+                            	SimpleExponentialSmoothingParameterTuningActive := 0 ;
+                            onerror err do
+                            	SimpleExponentialSmoothingParameterTuningActive := 0 ;
+                            	if errh::Severity(err) <> 'warning' then
+                            		alphaPar := NA ;
+                            		retval := 0.0 ;
+                            	endif ;
+                            endblock ;
+                            
+                            return retval ;
+                        }
+                        DeclarationSection Argument_Declaration {
+                            Parameter dataValues {
+                                IndexDomain: dvs;
+                                Property: Input;
+                            }
+                            Set TimeSet {
+                                Index: dvs, t;
+                            }
+                            Parameter noObservations {
+                                Property: Input;
+                            }
+                            Parameter alphaPar {
+                                Property: InOut;
+                                Comment: "Inout property, input value supplied will be used as starting value for the optimization.";
+                            }
+                            Parameter alphaLow {
+                                Default: 0.01;
+                                Property: Optional;
+                            }
+                            Parameter alphaUpp {
+                                Default: 0.99;
+                                Property: Optional;
+                            }
+                        }
+                        DeclarationSection Local_Declaration {
+                            Set S {
+                                SubsetOf: Integers;
+                                Index: i;
+                            }
+                            ElementParameter err {
+                                Range: errh::PendingErrors;
+                            }
+                            Set obsSet {
+                                SubsetOf: TimeSet;
+                                Index: iObs;
+                            }
+                            Parameter obsMin;
+                            Parameter obsMax;
+                            Parameter obsRng;
+                            Parameter estLow;
+                            Parameter estUpp;
+                            Parameter retval;
+                        }
+                    }
+                    Parameter SimpleExponentialSmoothingParameterTuningActive {
+                        Range: binary;
+                        Comment: {
+                            "Little trick to hide the variables and constraints in this module from other mathematical programs.
+                            
+                            This parameter is present in all the index domains of the variables and constraints of this module
+                            and only 1 iff we are searching for the observation weight alpha that minimizes the sum of the
+                            squared errors."
+                        }
+                    }
+                    Parameter obs {
+                        IndexDomain: is;
+                    }
+                    ElementParameter one {
+                        Range: IntegerSubset;
+                    }
+                    ElementParameter nul {
+                        Range: IntegerSubset;
+                    }
+                    Set IntegerSubset {
+                        SubsetOf: Integers;
+                        Index: is;
+                    }
+                    Variable estimates {
+                        IndexDomain: is | SimpleExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Variable alpha {
+                        IndexDomain: | SimpleExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Variable residuals {
+                        IndexDomain: is | 1 and ( is >= 1 ) and SimpleExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                        Property: Inline;
+                        Definition: obs(is) - estimates(is);
+                    }
+                    Variable mse_obj {
+                        IndexDomain: | SimpleExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                        Definition: sum( is | is >= 1, sqr( residuals(is) ) );
+                    }
+                    Constraint est_def_0 {
+                        IndexDomain: | 0 and SimpleExponentialSmoothingParameterTuningActive;
+                        Definition: estimates(nul) = obs(one);
+                    }
+                    Constraint est_def_cnt {
+                        IndexDomain: is | ( is >= 1 ) and SimpleExponentialSmoothingParameterTuningActive;
+                        Definition: estimates(is) = alpha * obs(is-1) + ( 1 - alpha ) * estimates(is-1);
+                    }
+                    Set ses_tune_cs {
+                        SubsetOf: AllIdentifiers;
+                        Definition: AllConstraints * SimpleExponentialSmoothingParameterTuning;
+                    }
+                    Set ses_tune_vs {
+                        SubsetOf: AllIdentifiers;
+                        Definition: AllVariables * SimpleExponentialSmoothingParameterTuning;
+                    }
+                    MathematicalProgram mp_ses_tune {
+                        Objective: mse_obj;
+                        Direction: minimize;
+                        Constraints: ses_tune_cs;
+                        Variables: ses_tune_vs;
+                        Type: NLP;
+                    }
+                    ElementParameter e_mp_ses_tune {
+                        Range: AllGeneratedMathematicalPrograms;
+                    }
+                }
+                Module TrendExponentialSmoothingParameterTuning {
+                    Prefix: tespt;
+                    Parameter TrendExponentialSmoothingParameterTuningActive {
+                        Range: binary;
+                        Comment: {
+                            "Little trick to hide the variables and constraints in this module from other mathematical programs.
+                            
+                            This parameter is present in all the index domains of the variables and constraints of this module
+                            and only 1 iff we are searching for the observation weight alpha that minimizes the sum of the
+                            squared errors."
+                        }
+                    }
+                    Parameter obs {
+                        IndexDomain: is;
+                    }
+                    ElementParameter nul {
+                        Range: IntegerSubset;
+                    }
+                    ElementParameter one {
+                        Range: IntegerSubset;
+                    }
+                    ElementParameter two {
+                        Range: IntegerSubset;
+                    }
+                    Set IntegerSubset {
+                        SubsetOf: Integers;
+                        Index: is;
+                    }
+                    Variable E {
+                        IndexDomain: is | TrendExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Constraint E_def {
+                        IndexDomain: is | ( is >= 1 ) and TrendExponentialSmoothingParameterTuningActive;
+                        Definition: E(is) = L(is-1) + B(is-1);
+                    }
+                    Variable L {
+                        IndexDomain: is | TrendExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Constraint L_Def0 {
+                        IndexDomain: | TrendExponentialSmoothingParameterTuningActive;
+                        Definition: L(nul) = obs(one);
+                    }
+                    Constraint L_Def {
+                        IndexDomain: is | ( is >= 1 ) and TrendExponentialSmoothingParameterTuningActive;
+                        Definition: L(is) = alpha * obs(is) + ( 1.0 - alpha ) * ( L(is-1) + B(is-1) );
+                    }
+                    Variable B {
+                        IndexDomain: is | TrendExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Constraint B_Def0 {
+                        IndexDomain: | TrendExponentialSmoothingParameterTuningActive;
+                        Definition: B(nul) = obs(two) - obs(one);
+                    }
+                    Constraint B_Def {
+                        IndexDomain: is | ( is >= 1 ) and TrendExponentialSmoothingParameterTuningActive;
+                        Definition: B(is) = betaStar * ( L(is) - L(is-1) ) + ( 1.0 - betaStar ) * B(is-1);
+                    }
+                    Variable alpha {
+                        IndexDomain: | TrendExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Variable beta {
+                        IndexDomain: | TrendExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Variable betaStar {
+                        IndexDomain: | TrendExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Constraint alphaBetaStarEq {
+                        IndexDomain: | TrendExponentialSmoothingParameterTuningActive;
+                        Definition: beta = alpha * betaStar;
+                    }
+                    Variable R {
+                        IndexDomain: (is)| 1 and ( is >= 1 ) and TrendExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                        Property: Inline;
+                        Definition: obs(is) - E(is);
+                    }
+                    Variable mse_obj {
+                        IndexDomain: | TrendExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                        Definition: sum( is | is >= 1, sqr( R( is ) ) );
+                    }
+                    Set tes_tune_cs {
+                        SubsetOf: AllIdentifiers;
+                        Definition: AllConstraints * TrendExponentialSmoothingParameterTuning;
+                    }
+                    Set tes_tune_vs {
+                        SubsetOf: AllIdentifiers;
+                        Definition: AllVariables * TrendExponentialSmoothingParameterTuning;
+                    }
+                    MathematicalProgram mp_trend_tune {
+                        Objective: mse_obj;
+                        Direction: minimize;
+                        Constraints: tes_tune_cs;
+                        Variables: tes_tune_vs;
+                        Type: NLP;
+                    }
+                    ElementParameter e_mp_tes_tune {
+                        Range: AllGeneratedMathematicalPrograms;
+                    }
+                    Procedure ExponentialSmoothingTrendTune {
+                        Arguments: (dataValues,noObservations,alphaPar,betaPar,alphaLow,alphaUpp,betaLow,betaUpp);
+                        Body: {
+                            retval := 1;
+                            
+                            obsSet := { dvs | ord(dvs) <= noObservations };
+                            IntegerSubset := ElementRange( 1, noObservations );
+                            CopyOneDimData( obs, dataValues(iObs) );
+                            IntegerSubset += data { 0 } ;
+                            nul := 0 ;
+                            one := 1 ;
+                            two := 2 ;
+                            TrendExponentialSmoothingParameterTuningActive := 1 ;
+                            empty R ;
+                            empty E ;
+                            
+                            block
+                            
+                            	block ! Provide starting values for the optimization.
+                            		if ( alphaLow < alphaPar ) and ( alphaPar < alphaUpp ) then
+                            			alpha.Level := alphaPar ;
+                            		else
+                            			alpha.Level := alphaLow + 0.7 * ( alphaUpp - alphaLow ) ;
+                            		endif ;
+                            		alpha.Lower := alphaLow ;
+                            		alpha.Upper := alphaUpp ;
+                            
+                            		if ( betaLow < betaPar ) and ( betaPar < betaUpp ) then
+                            			beta.Level := betaPar ;
+                            		else
+                            			beta.Level := betaLow + 0.2 * ( betaUpp - betaLow ) ;
+                            		endif ;
+                            		beta.Lower := betaLow ;
+                            		beta.Upper := betaUpp ;
+                            
+                            		betaStar.Level := beta.Level / alpha.Level ;
+                            
+                            		obs(nul) := obs(one);
+                            
+                            		E(nul) := obs(one);
+                            		L(nul) := obs(one);
+                            		B(nul) := obs(two) - obs(one);
+                            		for is | is >= 1 do
+                            			L(is).Level := alpha.level * obs(is) + ( 1.0 - alpha.level ) * ( L(is-1).Level + B(is-1).Level );
+                            			B(is).Level := betaStar.Level * ( L(is).level - L(is-1).level ) + ( 1.0 - betaStar.level ) * B(is-1).level ;
+                            			E(is).level := L(is-1).level + B(is-1).level;
+                            		endfor ;
+                            		R(is) := obs(is) - E(is) ;
+                            
+                            		obsMin := Min( is|is>=1, obs(is) );
+                            		obsMax := Max( is|is>=1, obs(is) );
+                            		obsRng := obsMax - obsMin ;
+                            		estLow := obsMin - 1.0 * obsRng ;
+                            		estUpp := obsMax + 1.0 * obsRng ;
+                            		E.Lower(is) := estLow ;
+                            		E.Upper(is) := estUpp ;
+                            		R(is).Lower := -obsRng ;
+                            		R(is).Upper :=  obsRng ;
+                            
+                            		mse_obj := sum( is|is>=1, sqr( R(is) ) );
+                            	endblock ;
+                            
+                            	solve mp_trend_tune ;
+                            
+                            	alphaPar := alpha.Level ;
+                            	betaPar := beta.Level ;
+                            
+                            	TrendExponentialSmoothingParameterTuningActive := 0 ;
+                            onerror err do
+                            	!DebuggerBreakpoint();
+                            	TrendExponentialSmoothingParameterTuningActive := 0 ;
+                            	if errh::Severity(err) <> 'warning' then
+                            		alphaPar := NA ;
+                            		betaPar := NA ;
+                            		retval := 0.0 ;
+                            	endif ;
+                            endblock ;
+                            
+                            return retval ;
+                        }
+                        DeclarationSection Argument_Declaration {
+                            Parameter dataValues {
+                                IndexDomain: t;
+                                Property: Input;
+                            }
+                            Set TimeSet {
+                                Index: dvs, t;
+                            }
+                            Parameter noObservations {
+                                Property: Input;
+                            }
+                            Parameter alphaPar {
+                                Property: InOut;
+                                Comment: "Inout property, input value supplied will be used as starting value for the optimization.";
+                            }
+                            Parameter betaPar {
+                                Property: InOut;
+                            }
+                            Parameter alphaLow {
+                                Default: 0.01;
+                                Property: Optional;
+                            }
+                            Parameter alphaUpp {
+                                Default: 0.99;
+                                Property: Optional;
+                            }
+                            Parameter betaLow {
+                                Default: 0.01;
+                                Property: Optional;
+                            }
+                            Parameter betaUpp {
+                                Default: 0.99;
+                                Property: Optional;
+                            }
+                        }
+                        DeclarationSection Local_Declaration {
+                            Set S {
+                                SubsetOf: Integers;
+                                Index: i;
+                            }
+                            ElementParameter err {
+                                Range: errh::PendingErrors;
+                            }
+                            Set obsSet {
+                                SubsetOf: TimeSet;
+                                Index: iObs;
+                            }
+                            Parameter obsMin;
+                            Parameter obsMax;
+                            Parameter obsRng;
+                            Parameter estLow;
+                            Parameter estUpp;
+                            Parameter retval;
+                        }
+                    }
+                }
+                Module ExponentialSmoothingSeasonalityParameterTuning {
+                    Prefix: esspt;
+                    Parameter NoObserv;
+                    Parameter SeasonalityExponentialSmoothingParameterTuningActive {
+                        Range: binary;
+                        Comment: {
+                            "Little trick to hide the variables and constraints in this module from other mathematical programs.
+                            
+                            This parameter is present in all the index domains of the variables and constraints of this module
+                            and only 1 iff we are searching for the observation weight alpha that minimizes the sum of the
+                            squared errors."
+                        }
+                    }
+                    Parameter perLength;
+                    Parameter obs {
+                        IndexDomain: is;
+                    }
+                    ElementParameter nul {
+                        Range: IntegerSubset;
+                    }
+                    ElementParameter one {
+                        Range: IntegerSubset;
+                    }
+                    ElementParameter two {
+                        Range: IntegerSubset;
+                    }
+                    ElementParameter lastObs {
+                        Range: IntegerSubset;
+                    }
+                    Parameter seasonAdjust {
+                        IndexDomain: is;
+                    }
+                    Parameter seasonAverage {
+                        IndexDomain: is;
+                    }
+                    Set extendedIntegerSubset {
+                        SubsetOf: Integers;
+                        Index: eis;
+                    }
+                    Set extendedIntegerSubsetPast {
+                        SubsetOf: extendedIntegerSubset;
+                        Index: eisp;
+                    }
+                    Set IntegerSubset {
+                        SubsetOf: extendedIntegerSubset;
+                        Index: is;
+                    }
+                    Set jSet {
+                        SubsetOf: Integers;
+                        Index: j;
+                    }
+                    Set jpSet {
+                        SubsetOf: Integers;
+                        Index: jp;
+                        Definition: data { -2 .. 2 };
+                    }
+                    Set singlePeriodSet {
+                        SubsetOf: IntegerSubset;
+                        Index: p;
+                    }
+                    Set seasonsSet {
+                        SubsetOf: Integers;
+                        Index: sn;
+                    }
+                    Variable E {
+                        IndexDomain: is | SeasonalityExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Constraint E_def {
+                        IndexDomain: eis | ( eis >= 1 ) and SeasonalityExponentialSmoothingParameterTuningActive;
+                        Definition: E(eis) = L(eis-1) + B(eis-1) + S(eis-perLength);
+                    }
+                    Variable B {
+                        IndexDomain: is | SeasonalityExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Constraint B_Def0 {
+                        IndexDomain: | SeasonalityExponentialSmoothingParameterTuningActive;
+                        Definition: B(nul) = ( seasonAdjust(lastObs) - seasonAdjust(one) ) / NoObserv;
+                    }
+                    Constraint B_Def {
+                        IndexDomain: is | ( is >= 1 ) and SeasonalityExponentialSmoothingParameterTuningActive;
+                        Definition: B(is) = betaStar * ( L(is) - L(is-1) ) + ( 1.0 - betaStar ) * B(is-1);
+                    }
+                    Variable L {
+                        IndexDomain: is | SeasonalityExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Constraint L_Def0 {
+                        IndexDomain: | SeasonalityExponentialSmoothingParameterTuningActive;
+                        Definition: L(nul) = seasonAdjust(one) - B(nul);
+                    }
+                    Constraint L_Def {
+                        IndexDomain: eis | ( eis >= 1 ) and SeasonalityExponentialSmoothingParameterTuningActive;
+                        Definition: L(eis) = alpha * ( obs(eis) - S(eis-perLength)) + ( 1.0 - alpha ) * ( L(eis-1) + B(eis-1) );
+                    }
+                    Variable S {
+                        IndexDomain: eis | SeasonalityExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Constraint S_DefPast {
+                        IndexDomain: eis|eis in singlePeriodSet and SeasonalityExponentialSmoothingParameterTuningActive;
+                        Definition: S(eis - perLength) = SeasonAverage(eis);
+                    }
+                    Constraint S_Def {
+                        IndexDomain: eis | ( eis >= 1 ) and SeasonalityExponentialSmoothingParameterTuningActive;
+                        Definition: S(eis) = gamma * ( ( obs[eis] - l[eis-1] ) - b[eis-1] ) + ( 1.0 - gamma ) * s[eis-perLength];
+                    }
+                    Variable alpha {
+                        IndexDomain: | SeasonalityExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Variable beta {
+                        IndexDomain: | SeasonalityExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Variable gamma {
+                        IndexDomain: | SeasonalityExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Variable betaStar {
+                        IndexDomain: | SeasonalityExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                    }
+                    Constraint alphaBetaStarEq {
+                        IndexDomain: | SeasonalityExponentialSmoothingParameterTuningActive;
+                        Definition: beta = alpha * betaStar;
+                    }
+                    Variable R {
+                        IndexDomain: (is)| 1 and ( is >= 1 ) and SeasonalityExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                        Property: Inline;
+                        Definition: obs(is) - E(is);
+                    }
+                    Variable mse_obj {
+                        IndexDomain: | SeasonalityExponentialSmoothingParameterTuningActive;
+                        Range: free;
+                        Definition: sum( is | is >= 1, sqr( R( is ) ) );
+                    }
+                    Set ess_tune_cs {
+                        SubsetOf: AllIdentifiers;
+                        Definition: AllConstraints * ExponentialSmoothingSeasonalityParameterTuning;
+                    }
+                    Set ess_tune_vs {
+                        SubsetOf: AllIdentifiers;
+                        Definition: AllVariables * ExponentialSmoothingSeasonalityParameterTuning;
+                    }
+                    MathematicalProgram mp_seasonality_tune {
+                        Objective: mse_obj;
+                        Direction: minimize;
+                        Constraints: ess_tune_cs;
+                        Variables: ess_tune_vs;
+                        Type: NLP;
+                    }
+                    ElementParameter e_mp_ess_tune {
+                        Range: AllGeneratedMathematicalPrograms;
+                    }
+                    Procedure ExponentialSmoothingSeasonalityTune {
+                        Arguments: {
+                            (dataValues,noObservations,alphaPar,betaPar,gammaPar,periodLength,alphaLow,alphaUpp,
+                             betaLow,betaUpp,gammaLow,gammaUpp)
+                        }
+                        Body: {
+                            retval := 1;
+                            NoObserv := noObservations ;
+                            obsSet := { dvs | ord(dvs) <= noObservations };
+                            extendedIntegerSubset := ElementRange( -periodLength, noObservations );
+                            IntegerSubset := ElementRange( 1, noObservations );
+                            CopyOneDimData( obs, dataValues(iObs) );
+                            IntegerSubset += data { 0 } ;
+                            perLength := periodLength ;
+                            nul := 0 ;
+                            one := 1 ;
+                            two := 2 ;
+                            lastObs := noObservations ;
+                            SeasonalityExponentialSmoothingParameterTuningActive := 1 ;
+                            empty R ;
+                            empty E ;
+                            
+                            block
+                            
+                            	block ! Provide starting values for the optimization.
+                            		if ( alphaLow < alphaPar ) and ( alphaPar < alphaUpp ) then
+                            			alpha.Level := alphaPar ;
+                            		else
+                            			alpha.Level := alphaLow + 0.5 * ( alphaUpp - alphaLow ) ;
+                            		endif ;
+                            		alpha.Lower := alphaLow ;
+                            		alpha.Upper := alphaUpp ;
+                            
+                            		if ( betaLow < betaPar ) and ( betaPar < betaUpp ) then
+                            			beta.Level := betaPar ;
+                            		else
+                            			beta.Level := betaLow + 0.1 * ( betaUpp - betaLow ) ;
+                            		endif ;
+                            		beta.Lower := betaLow ;
+                            		beta.Upper := betaUpp ;
+                            
+                            		if ( gammaLow < gammaPar ) and ( gammaPar < gammaUpp ) then
+                            			gamma.Level := gammaPar ;
+                            		else
+                            			gamma.Level := gammaLow + 0.01 * ( gammaUpp - gammaLow ) ;
+                            		endif ;
+                            		gamma.Lower := gammaLow ;
+                            		gamma.Upper := gammaUpp ;
+                            
+                            		betaStar.Level := beta.Level / alpha.Level ;
+                            
+                            		obs(nul) := obs(one);
+                            		!display { alpha, beta, betaStar, gamma };
+                            
+                            		block ! Initial seasonal values.
+                            
+                            			! To initialize we need to find the seasonality first.
+                            			! Holt-Winters initialization method as described in http://robjhyndman.com/hyndsight/hw-initialization/
+                            			! A: Compute the a  2XM symmetric Moving average
+                            			! B: Subtract the smooth trend from the original data, resulting in so-called detrended data.
+                            			! C: Initial seasonal values are averages from the detrended data.
+                            
+                            			! Step A: Compute 2XM symmetric moving average.
+                            			jSet := elementRange( -periodLength, periodLength );
+                            			firstMa(is)  := sum(j, obs(if val(is)+val(j) < 1 then 1 elseif val(is)+val(j) > noObservations then noObservations else val(is)+val(j) endif ) ) / ( periodLength * 2 + 1 );
+                            			secondMa(is) := sum(jp, obs(if val(is)+val(jp) < 1 then 1 elseif val(is)+val(jp) > noObservations then noObservations else val(is)+val(jp) endif ) ) / ( 2 * 2 + 1 );
+                            
+                            			! Step B: Subtract the smooth trend from the original data, resulting in so-called detrended data.
+                            			detrendData(is) := obs(is)-secondMa(is);
+                            
+                            			! Step C: Initial seasonal values are averages from the detrended data.
+                            			singlePeriodSet := ElementRange(1, periodLength );
+                            			maxComplSeas := div( noObservations, periodLength );
+                            			seasonsSet := ElementRange( 1, maxComplSeas - 1 );
+                            			seasonAverage( is | is in singlePeriodSet ) := sum( sn, detrendData( is + ( periodLength * sn ) ) ) / ( maxComplSeas - 1 );
+                            
+                            			seasonAverageCorr := sum( p, seasonAverage( p ) ) / periodLength ;
+                            			seasonAverage(p) -= seasonAverageCorr ;
+                            
+                            			seasonAverageTot := sum( p, seasonAverage( p ) );
+                            			seasonAdjust(is | is > 0 and obs(is) ) := obs( is ) - seasonAverage( mod( val(is)-1, periodLength ) + 1 );
+                            		endblock ;
+                            
+                            		B(nul).level := ( seasonAdjust(lastObs) - seasonAdjust(one) ) / noObservations ;
+                            		L(nul).Level := seasonAdjust(one) - B(nul);
+                            		S((eis - PeriodLength)|( eis in singlePeriodSet )).Level := SeasonAverage(eis);
+                            
+                            		E(nul) := obs(one);
+                            		for eis | eis >= 1 do
+                            			L(eis).Level := alpha.level * ( obs(eis) - S(eis-periodLength) ) + ( 1.0 - alpha.level ) * ( L(eis-1).Level + B(eis-1).Level );
+                            			B(eis).Level := betaStar.Level * ( L(eis).level - L(eis-1).level ) + ( 1.0 - betaStar.level ) * B(eis-1).level ;
+                            			S(eis).Level := gamma.Level * ( ( obs(eis) - L(eis-1).Level ) - B(eis-1).Level ) + ( 1.0 - gamma.Level ) * S(eis-periodLength).Level ;
+                            			E(eis).Level := L(eis-1).level + B(eis-1).Level + S(eis-periodLength).Level ;
+                            		endfor ;
+                            		R(is) := obs(is) - E(is) ;
+                            
+                            		S(eis|eis <= 0).nonvar := 1 ;
+                            		!L(eis|eis <= 0).nonvar := 1 ;
+                            		!B(eis|eis <= 0).nonvar := 1 ;
+                            
+                            		obsMin := Min( is|is>=1, obs(is) );
+                            		obsMax := Max( is|is>=1, obs(is) );
+                            		obsRng := obsMax - obsMin ;
+                            		estLow := obsMin - 1.0 * obsRng ;
+                            		estUpp := obsMax + 1.0 * obsRng ;
+                            
+                            		mse_obj := sum( is|is>=1, sqr( R(is) ) );
+                            	endblock ;
+                            
+                            	solve mp_seasonality_tune ;
+                            
+                            	alphaPar := alpha.Level ;
+                            	betaPar  :=  beta.Level ;
+                            	gammaPar := gamma.Level ;
+                            
+                            	SeasonalityExponentialSmoothingParameterTuningActive := 0 ;
+                            onerror err do
+                            	SeasonalityExponentialSmoothingParameterTuningActive := 0 ;
+                            	if errh::Severity(err) <> 'warning' then
+                            		alphaPar := NA ;
+                            		betaPar  := NA ;
+                            		gammaPar := NA ;
+                            		retval := 0.0 ;
+                            	endif ;
+                            endblock ;
+                            
+                            return retval ;
+                        }
+                        DeclarationSection Argument_Declaration {
+                            Parameter dataValues {
+                                IndexDomain: t;
+                                Property: Input;
+                            }
+                            Set TimeSet {
+                                Index: dvs, t;
+                            }
+                            Parameter noObservations {
+                                Property: Input;
+                            }
+                            Parameter alphaPar {
+                                Property: InOut;
+                                Comment: "Inout property, input value supplied will be used as starting value for the optimization.";
+                            }
+                            Parameter betaPar {
+                                Property: InOut;
+                            }
+                            Parameter gammaPar {
+                                Property: InOut;
+                            }
+                            Parameter periodLength {
+                                Property: Input;
+                            }
+                            Parameter alphaLow {
+                                Default: 0.01;
+                                Property: Optional;
+                            }
+                            Parameter alphaUpp {
+                                Default: 0.99;
+                                Property: Optional;
+                            }
+                            Parameter betaLow {
+                                Default: 0.01;
+                                Property: Optional;
+                            }
+                            Parameter betaUpp {
+                                Default: 0.99;
+                                Property: Optional;
+                            }
+                            Parameter gammaLow {
+                                Property: Optional;
+                            }
+                            Parameter gammaUpp {
+                                Property: Optional;
+                            }
+                        }
+                        DeclarationSection Local_Declaration {
+                            Parameter firstMa {
+                                IndexDomain: is;
+                            }
+                            Parameter secondMa {
+                                IndexDomain: is;
+                            }
+                            Parameter detrendData {
+                                IndexDomain: is;
+                            }
+                            Parameter maxComplSeas;
+                            Parameter seasonAverageCorr;
+                            Parameter seasonAverageTot;
+                            ElementParameter err {
+                                Range: errh::PendingErrors;
+                            }
+                            Set obsSet {
+                                SubsetOf: TimeSet;
+                                Index: iObs;
+                            }
+                            Parameter obsMin;
+                            Parameter obsMax;
+                            Parameter obsRng;
+                            Parameter estLow;
+                            Parameter estUpp;
+                            Parameter retval;
+                        }
+                    }
+                }
+            }
+        }
+        Section Utilities {
+            Procedure SanityCheckNoSpecialValuesSufficientObservations {
+                Arguments: (P,N);
+                Body: {
+                    
+                    ! Ensure that the TimeSet has at least N elements.
+                    if card(S) < N then
+                    	eNode := CallerNode(1);
+                    	eNodeName := FormatString( "%e", eNode );
+                    	raise error eNodeName + "(): Insufficient observations" ;
+                    	return 0 ;
+                    endif ;
+                    
+                    ! Ensure that there are no special values used in the input data.
+                    for i | P(i) do
+                    	if MapVal(P(i)) then
+                    		eNode := CallerNode(1);
+                    		eNodeName := FormatString( "%e", eNode );
+                    		raise error eNodeName + "(): Special values are not supported" ;
+                    		return 0 ;
+                    	endif ;
+                    endfor;
+                    
+                    return 1 ;
+                }
+                Comment: {
+                    "Returns 1 upon succes
+                    When error found an exception is thrown"
+                }
+                Parameter P {
+                    IndexDomain: i;
+                    Property: Input;
+                }
+                Set S {
+                    Index: i;
+                }
+                ElementParameter eNode {
+                    Range: AllIdentifiers;
+                }
+                StringParameter eNodeName;
+                Parameter N {
+                    Property: Input;
+                }
+            }
+            ExternalProcedure CopyOneDimDataExternal {
+                Arguments: (pTo,pFrom);
+                DllName: DLL_Name;
+                BodyCall: CastData(double array: pTo, double array: pFrom,card: sFrom);
+                Parameter pTo {
+                    IndexDomain: iTo;
+                    Property: Output;
+                }
+                Set sTo {
+                    Index: iTo;
+                }
+                Parameter pFrom {
+                    IndexDomain: iFrom;
+                    Property: Input;
+                }
+                Set sFrom {
+                    Index: iFrom;
+                }
+            }
+            Procedure CopyOneDimData {
+                Arguments: (pTo,pFrom);
+                Body: {
+                    if card(sTo) < card(sFrom) then
+                    	raise error "CopyOneDimData(): The index domain set of the assigned parameter is smaller than the index domain set of the input parameter" ;
+                    endif ;
+                    CopyOneDimDataExternal(pTo,pFrom);
+                }
+                Parameter pTo {
+                    IndexDomain: iTo;
+                    Property: Output;
+                }
+                Set sTo {
+                    Index: iTo;
+                }
+                Parameter pFrom {
+                    IndexDomain: iFrom;
+                    Property: Input;
+                }
+                Set sFrom {
+                    Index: iFrom;
+                }
+            }
+        }
+    }
+    Procedure LibraryInitialization {
+        Body: {
+            sespt::SimpleExponentialSmoothingParameterTuningActive := 0 ;
+            tespt:: TrendExponentialSmoothingParameterTuningActive := 0 ;
+        }
+    }
+    Procedure LibraryTermination {
+        Body: {
+            return 1 ;
+        }
+    }
+}

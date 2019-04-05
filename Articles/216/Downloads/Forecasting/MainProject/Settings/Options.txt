@@ -1,0 +1,28 @@
+﻿* AIMMS
+constraint_listing_printed_when 0
+constraint_listing_variable_values 1
+listing_number_precision 6
+listing_number_width 12
+warning_lag_lead_on_subset_of_integers off
+warning_not_initialized off
+warning_range_violation common_warning_default
+* AOA
+* BARON 15
+* CBC 2.9
+* CONOPT 3.14V
+* CONOPT 4.0
+* CPLEX 12.6.3
+* CPLEX 12.8
+* CPOptimizer 12.6.3
+* CPOptimizer 12.7
+* GUROBI 7.5
+* IPOPT 3.11
+* Knitro 10.3
+* MINOS
+* PATH 4.7
+* SNOPT 7.2
+* XA 16
+* NETSOL
+* Environment
+Project_Title "PredictivePOC"
+Startup_Case "data\initial.data"

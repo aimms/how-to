@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2015-05-04 08:38:22">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>44E008CA-8FB6-49D2-84C4-1981C0F9140B</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Curve">
+		<Location top="18" left="18" bottom="372" right="810" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ColorScheme Number="0" />
+		<RemoveDefaults>true</RemoveDefaults>
+		<Title>true</Title>
+		<Legend>true</Legend>
+		<Y-Labels>true</Y-Labels>
+		<X-Labels>true</X-Labels>
+		<StatusLine>true</StatusLine>
+		<ExplicitIdentifier>
+			<Identifier>taf::Y( taf::t )</Identifier>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::E( taf::t )</Identifier>
+		</ExplicitIdentifier>
+		<DrawLines>true</DrawLines>
+		<MarkPoints>true</MarkPoints>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="390" left="18" bottom="486" right="246" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"test"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>taf::pr_Test_Exponential_Smoothing_Season_Small_from_otext_7_5</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="396" left="306" bottom="486" right="558" />
+		<TabOrder>3</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>taf::alphaPar</Identifier>
+			<NumberFormat Width="5" Decimals="2" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::betaPar</Identifier>
+			<NumberFormat Width="5" Decimals="2" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::gammaPar</Identifier>
+			<NumberFormat Width="6" Decimals="3" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>taf::alphaPar</Symbol>
+			<Symbol>taf::betaPar</Symbol>
+			<Symbol>taf::gammaPar</Symbol>
+			<Symbol>taf::Y</Symbol>
+			<Symbol>taf::E</Symbol>
+			<Symbol>taf::pr_Test_Exponential_Smoothing_Season_Small_from_otext_7_5</Symbol>
+			<Symbol>taf::t</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

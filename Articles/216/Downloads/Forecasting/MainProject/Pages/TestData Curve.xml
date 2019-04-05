@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2014-11-05 11:19:17">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>BFAB052A-0648-4127-A134-CABEB151EF9F</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Curve">
+		<Location top="48" left="96" bottom="390" right="1314" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ColorScheme Number="0" />
+		<RemoveDefaults>true</RemoveDefaults>
+		<Title>true</Title>
+		<Legend>true</Legend>
+		<Y-Labels>true</Y-Labels>
+		<X-Labels>true</X-Labels>
+		<StatusLine>true</StatusLine>
+		<ExplicitIdentifier>
+			<Identifier>sampleDataSet( e_Product, e_Region, d )</Identifier>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>estimateDataSet( e_Product, e_Region, d, 'MovingAverage5' )</Identifier>
+		</ExplicitIdentifier>
+		<DrawLines>true</DrawLines>
+		<MarkPoints>true</MarkPoints>
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>DropDownList</SelectionType>
+		<Location top="54" left="1338" bottom="78" right="1512" />
+		<TabOrder>3</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="None" />
+		<BackgroundColor RGB="#ffffff" />
+		<ExplicitIdentifier>
+			<Identifier>e_Product</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>DropDownList</SelectionType>
+		<Location top="108" left="1344" bottom="150" right="1518" />
+		<TabOrder>2</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="None" />
+		<BackgroundColor RGB="#ffffff" />
+		<ExplicitIdentifier>
+			<Identifier>e_Region</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>productSet</Symbol>
+			<Symbol>regionSet</Symbol>
+			<Symbol>sampleDataSet</Symbol>
+			<Symbol>estimateDataSet</Symbol>
+			<Symbol>e_Product</Symbol>
+			<Symbol>e_Region</Symbol>
+			<Symbol>d</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

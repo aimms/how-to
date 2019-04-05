@@ -1,0 +1,21 @@
+{
+	"slot0": "",
+	"slot1": "",
+	"------------------------------------------------------------------<<<<-aimms.widget.type-": "",
+	"aimms.widget.type": "literal:\"page\"",
+	"------------------------------------------------------------------>>>>-aimms.widget.type-": "",
+	"slot2": "",
+	"slot3": "",
+	"slot4": "",
+	"------------------------------------------------------------------<<<<-awf.persistence.version-": "",
+	"awf.persistence.version": "1.1",
+	"------------------------------------------------------------------>>>>-awf.persistence.version-": "",
+	"------------------------------------------------------------------<<<<-widgets-": "",
+	"widgets": "literal:[{\"uri\":\"EnergCol1\",\"layoutInfo\":{\"width\":\"5\",\"height\":\"3\"}},{\"uri\":\"StartSelector\",\"layoutInfo\":{\"width\":\"2\",\"height\":\"1\"}},{\"uri\":\"Recompute Moving Average\",\"layoutInfo\":{\"width\":\"2\",\"height\":\"1\"}},{\"uri\":\"Read Energy Data\",\"layoutInfo\":{\"width\":\"2\",\"height\":\"1\"}},{\"uri\":\"Test1\",\"layoutInfo\":{\"width\":\"4\",\"height\":\"2\",\"customPosition\":\"\"}}]",
+	"------------------------------------------------------------------>>>>-widgets-": "",
+	"slot5": "",
+	"slot6": "",
+	"slot7": "",
+	"slot8": "",
+	"slot9": ""
+}

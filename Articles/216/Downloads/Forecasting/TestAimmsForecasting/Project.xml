@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<LibraryProject AimmsVersion="4.53.1.8 unicode x64" ProjectUUID="44E008CA-8FB6-49D2-84C4-1981C0F9140B">
+	<ModelFileName>TestAimmsForecasting.ams</ModelFileName>
+	<Prefix>taf</Prefix>
+	<DisplayName>TestAimmsForecasting</DisplayName>
+</LibraryProject>

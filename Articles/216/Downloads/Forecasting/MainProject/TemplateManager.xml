@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<TemplateManager>
+	<Template Name="Navigation Template" PageGUID="44160FBA-87B0-412B-BB54-131DACEFD1FF" CrossLibraryDuplicate="66E08D8C-5677-49B5-970F-BB85475A48BE|1FEE57F1-DA78-41D3-9A3D-0E14CC533C9A|Navigation Template">
+		<Template Name="Background Info Template" PageGUID="2C37CC35-EED6-40EC-BBB9-B6A14CB672D6" CrossLibraryDuplicate="66E08D8C-5677-49B5-970F-BB85475A48BE|A96FC893-F2D9-47FF-B307-4949904C7395|Background Info Template" />
+	</Template>
+	<Template Name="Background Info Template" PageGUID="2C37CC35-EED6-40EC-BBB9-B6A14CB672D6" CrossLibraryDuplicate="66E08D8C-5677-49B5-970F-BB85475A48BE|A96FC893-F2D9-47FF-B307-4949904C7395|Background Info Template" />
+	<Page Name="TestNo1" PageGUID="0517CAFE-1CBB-4755-A804-951648AA8DBC" />
+	<Page Name="TestNo1b" PageGUID="32963D4E-AFAF-4936-8698-0076460B6083" />
+	<Page Name="TestData Active X 2D chart" PageGUID="009596E1-39BE-4534-88AC-70180F4D2600" />
+	<Page Name="TestData Curve" PageGUID="507B1E29-5682-48EA-BEEF-E57D6ADB0A69" />
+	<Page Name="EnergyData" PageGUID="E42C38AA-1525-43EE-B3E9-2899F996DAA8" />
+	<Page Name="klad" PageGUID="FB872F7C-C8FB-494E-A07F-FA8BA02571E6" />
+	<Page Name="Unit test 6" PageGUID="C2D802AA-1D75-4D6F-9992-8528B5A6095C" />
+	<Page Name="MachineCostData" PageGUID="0BC87526-D68A-4506-AD76-7D60BAB5841E" />
+</TemplateManager>

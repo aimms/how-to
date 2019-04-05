@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2015-10-12 12:38:59">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>BFAB052A-0648-4127-A134-CABEB151EF9F</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="2D Chart">
+		<Location top="114" left="126" bottom="636" right="1074" />
+		<TabOrder>1</TabOrder>
+		<Border Style="InShadow" Width="2" />
+		<X_Axis>
+			<Domain ID="1004">d</Domain>
+			<Annotation>
+				<Show_every_n_th_label ID="1025">5</Show_every_n_th_label>
+			</Annotation>
+		</X_Axis>
+		<Y_Axis>
+			<Identifier>
+				<Value ID="2007">sampDat( d )</Value>
+			</Identifier>
+			<Identifier>
+				<Value ID="2007">sampEst1( d )</Value>
+			</Identifier>
+			<Scale>
+				<Data_minimum ID="2033">0</Data_minimum>
+			</Scale>
+			<Misc_settings>
+				<Remove_all_default_values ID="2061">1</Remove_all_default_values>
+			</Misc_settings>
+		</Y_Axis>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>sampDat</Symbol>
+			<Symbol>sampEst1</Symbol>
+			<Symbol>d</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2015-05-11 09:19:40">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>44E008CA-8FB6-49D2-84C4-1981C0F9140B</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Curve">
+		<Location top="60" left="114" bottom="372" right="972" />
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ColorScheme Number="0" />
+		<Title>true</Title>
+		<Legend>true</Legend>
+		<Y-Labels>true</Y-Labels>
+		<X-Labels>true</X-Labels>
+		<StatusLine>true</StatusLine>
+		<ExplicitIdentifier>
+			<Identifier>taf::ausair( taf::aayn )</Identifier>
+		</ExplicitIdentifier>
+		<DrawLines>true</DrawLines>
+		<MarkPoints>true</MarkPoints>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>taf::ausair</Symbol>
+			<Symbol>taf::aayn</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

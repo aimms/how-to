@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2015-05-04 08:38:22">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>BFAB052A-0648-4127-A134-CABEB151EF9F</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Curve">
+		<Location top="54" left="48" bottom="408" right="834" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="Line" MarginTop="30" MarginRight="30" MarginBottom="30" MarginLeft="30" />
+		<BackgroundColor RGB="#ffffff" />
+		<ColorScheme Number="0" />
+		<RemoveDefaults>true</RemoveDefaults>
+		<Title>true</Title>
+		<Legend>true</Legend>
+		<Y-Labels>true</Y-Labels>
+		<X-Labels>true</X-Labels>
+		<StatusLine>true</StatusLine>
+		<ExplicitIdentifier>
+			<Identifier>sampDat( d )</Identifier>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sampEst1( d )</Identifier>
+		</ExplicitIdentifier>
+		<DrawLines>true</DrawLines>
+		<MarkPoints>true</MarkPoints>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>sampDat</Symbol>
+			<Symbol>sampEst1</Symbol>
+			<Symbol>d</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

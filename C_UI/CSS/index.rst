@@ -11,6 +11,7 @@
 CSS
 ====
 
+This section contains tips for customizing your AIMMS applications using CSS.
     
 .. toctree::
    :maxdepth: 1
