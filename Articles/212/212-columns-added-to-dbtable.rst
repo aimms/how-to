@@ -1,6 +1,10 @@
 Adapt model when linked database table is modified
 ======================================================
 
+.. meta::
+   :description: This article shows an example of adapting your model when adding columns to a linked database table.
+   :keywords: odbc, connect, link, database, db, table, adapt, column
+
 AIMMS uses ODBC to connect to database tables. 
 When database table columns are linked to AIMMS identifiers, adding columns to the table may require you to adapt the model.
 In this article, we'll show an example of how to adapt for changes in the database table definition.
