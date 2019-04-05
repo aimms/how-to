@@ -12,6 +12,7 @@
 Getting Started
 ========================
 
+These topics provide fundamentals about using AIMMS. Learn about terminology, shortcuts, and basic set-up. You will also find licensing help here.
 
 .. toctree::
    :maxdepth: 1

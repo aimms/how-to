@@ -12,6 +12,7 @@
 Applications
 ==============
 
+This section offers guidance in developing an application and building a user interface. You will also find help to add custom styling to your applications.
     
 .. toctree::
    :maxdepth: 1

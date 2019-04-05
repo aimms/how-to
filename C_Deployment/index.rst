@@ -9,6 +9,8 @@ Deployment
 ========================
 .. _ref-deployment:
 
+This section provides many topics about deploying AIMMS applications using AIMMS Pro. You will also find guidance for setting up AIMMS Cloud Platform. Includes best practices to build and deploy applications using AIMMS PRO.
+
 .. toctree::
    :maxdepth: 1
 

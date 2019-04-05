@@ -11,6 +11,8 @@
 AIMMS Language
 ========================
 
+This section covers topics relating to programming applications in the AIMMS IDE. You will find helpful articles about several common functions in AIMMS.
+
 .. toctree::
    :maxdepth: 1
 
