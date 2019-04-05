@@ -10,13 +10,21 @@ html tooltips
 The power of HTML tooltips
 --------------------------
 
-.. todo:: background, coloring text
+.. todo:: 
 
-.. todo:: table
+	background, coloring text
 
-.. todo:: mult col table
+.. todo:: 
 
-.. todo:: images
+	table
+
+.. todo:: 
+
+	mult col table
+
+.. todo:: 
+
+	images
 
 
     

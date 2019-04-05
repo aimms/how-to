@@ -21,6 +21,5 @@ Data Connection
    /Articles/212/212-columns-added-to-dbtable
    /Articles/153/153-external-haversine
    /Articles/159/159-exchange-data-with-cloud
-   
-..   /Articles/197/197-reading-data-from-excel
+   /Articles/197/197-reading-data-from-excel
 

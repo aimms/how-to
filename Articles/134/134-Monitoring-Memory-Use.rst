@@ -37,7 +37,7 @@ The example project can be downloaded from the link below. The procedure of inte
 Related Topics
 --------------------
 
-* :doc:` /170/170-memory-in-use`
+* :doc:`../170/170-memory-in-use`
 
 .. include:: /includes/form.def
 

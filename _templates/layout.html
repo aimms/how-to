@@ -1,5 +1,6 @@
 {# Import the theme's layout. #}
 {% extends "!layout.html" %}
+<link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
  <link rel="stylesheet" href="https://use.typekit.net/ydq4pad.css">
 <link rel='stylesheet' id='font-awesome-original-css'  href='https://techblog.aimms.com/wp-content/plugins/dpArticleShare/css/font-awesome.css?ver=1.3.4' type='text/css' media='all' />
 {% block header %}
@@ -8,14 +9,16 @@
 
 	<style> 
 		.wy-nav-content {
-			max-width: none; !important
+			max-width: none !important; 
 		}
-
+        .localtoc {
+            display: none;
+        }
 	</style>
 {% else %}
 	<style> 
 		.wy-nav-content {
-			max-width: 1200px; !important
+			max-width: 1200px !important;
 		}
 	</style>
 {% endif %}
@@ -28,22 +31,22 @@
 	
 	<style> 
 		.wy-nav-content {
-			max-width: none; !important
+			max-width: none !important ;
 		}
 	</style>
 {% else %}
 	<style> 
 		.wy-nav-content {
-			max-width: 1200px; !important
+			max-width: 1200px !important;
 		}
-	</style>
+	</style> 
 {% endif %}
     <link rel="stylesheet" href="{{ pathto('_static/Hacks.css', 1) }}">
  <a href="{{ pathto(master_doc) }}">
 	<img src="{{ pathto('_static/AIMMS_logo_H_RGB_rev.png', 1) }}" class="logo" alt="Logo"/></a>
 
 {% include "searchbox.html" %}
-
+ 
 {% endblock %}
 
 {% block body %}
@@ -52,14 +55,14 @@
  
 	<style> 
 		.wy-nav-content {
-			max-width: none; !important
+			max-width: none !important;
 		}
 	</style>
 {% else %}
 	<style> 
 		.wy-nav-content {
-			max-width: 1200px; !important
-		}
+			max-width: 1200px !important;
+		} 
 	</style>
 {% endif %}
 
@@ -68,20 +71,27 @@
 {% block htmltitle %}
 	{% if pagename == "ContentIndex" %}
 		
-		<title>{{ _('AIMMS Knowledge Center') }}</title>
+		<title>{{ _('AIMMS How-To') }}</title>
 
 	{% else %}
 		
 		<title>{{ title|striptags|e }} &mdash; AIMMS Knowledge Center</title>
 		
 	{% endif %}
-	
+    {% if display_toc %} 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">{{ _('Table Of Contents') }}</span>
+    </p>
+    {{ toc }}
+</div>
+{% endif %}
 {% endblock %}
 
 {% block footer %}
 {{ super() }}
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1290545-13"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1290545-14"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}

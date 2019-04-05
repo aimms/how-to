@@ -19,4 +19,5 @@ Applications
    /Articles/download-compressed-files/download-compressed-files
    /Articles/95/95-change-default-ui
    /Articles/124/124-tableau-integration
+   /Articles/123/123-WebUI-FORMS
    CSS/index

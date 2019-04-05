@@ -1,11 +1,11 @@
-Different methods for Reading columns of data from EXCEL
-===========================================================
+Reading columns of data from Excel
+===================================
 
 .. meta::
-   :description: EXCEL data can be read via the libraries AimmsXLLibrary and via datalink using the xlsprovider. How do these methods compare?
-   :keywords: excel, AimmsXLLibrary, library, axll, xlsprovider, datalink
+   :description: This article compares different methods of reading Excel data to AIMMS.
+   :keywords: Excel, AimmsXLLibrary, library, axll, xlsprovider, datalink
 
-AIMMS provides various methods for reading EXCEL data. 
+AIMMS provides various methods for reading Excel data. 
 
 #. A prepackaged module of procedures and functions, using the prefix ``spreadsheet::``.  
  
@@ -13,29 +13,29 @@ AIMMS provides various methods for reading EXCEL data.
 
 #. Datalink with the provider xlsprovider, two libraries from the AIMMS repository of libraries. 
 
-Clearly, there is overlapping functionality here. Which method for EXCEL communication is the best method for your application, depends on your application. So let's compare some features of these libraries.
+Let's compare some features of these libraries, and you can decide which method is best for your application.
 
 Example used
 -------------
 
 To make this comparison, we'll read from two spreadsheets:
 
-.. image:: images/data1.PNG
+.. image:: Images/data1.PNG
 
-.. image:: images/data2.PNG
+.. image:: Images/data2.PNG
 
-As you can see, these two spreadsheets look a lot like each other, more or less the same data, but different column order, and one sheet has one more column that the other.
-This is what we see in practice often; various analysts that provide the necessary data in spreadsheet, but not necessarily adhering to the same column order.
+In this practical example, these two spreadsheets contain similar data, but with different order and number of columns.
+This may happen when various analysts provide the necessary data in a spreadsheet, but not in the same column order.
 
 The name manager in both sheets covers for the difference in columns: 
 
-.. image:: images/CommonNameManager.PNG
+.. image:: Images/CommonNameManager.PNG
 
 The data is read in to the following parameters:
 
 .. code-block:: aimms
 
-    DeclarationSection Potential_EXCEL_input_data {
+    DeclarationSection Potential_Excel_input_data {
         Set s_SKU {
             SubsetOf: Integers;
             Index: i_sku;
@@ -55,18 +55,18 @@ The data is read in to the following parameters:
     }
 
 
-The ``spreatsheet::`` functions and procedures 
+The ``spreadsheet::`` functions and procedures 
 ----------------------------------------------
 
-The ``spreadsheet::`` module include functions and procedures to:
+The ``spreadsheet::`` module includes these functions and procedures:
 
-#. Create and close work books
+#. Create and close workbooks
 
 #. Helper functions to create ranges
 
-#. Support for exchanging data between ranges on an EXCEL sheet with scalar, one-dimensional and multi-dimensional AIMMS parameters. Note that these ranges can be named ranges.
+#. Support for exchanging data between ranges on an Excel sheet with scalar, one-dimensional and multi-dimensional AIMMS parameters. Note that these ranges can be named ranges.
 
-The code to read EXCEL data using looks as follows:
+The code to read Excel data using looks as follows:
 
 .. code-block:: aimms
 
@@ -100,29 +100,29 @@ The code to read EXCEL data using looks as follows:
 
 Note the following:
 
-#. The implementation of these functions uses EXCEL itself, and therefore this module is less suited for application development; it would require the presence of EXCEL on the client computer or AIMMS PRO Server. 
+#. The implementation of these functions uses Excel itself, and therefore this module is less suited for application development; it would require the presence of Excel on the client computer or AIMMS PRO Server. 
 
-#. This library supports running EXCEL macros.
+#. This library supports Excel macros.
 
-#. We can abstract here from the column order because the name manager of EXCEL took care of providing consistent names in the named ranges. When this is not provided, the above code would become signficant more complicated.
+#. In this example, the name manager of Excel provided consistent names in the named ranges. When names are not consistent, the code would become signficantly more complicated.
 
 #. This library doesn't make any assumptions about the placing of data in columns.
 
 #. For more information about these functions, see: `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_: Chapter "Spreadsheet Functions".
  
 
-The AXLL functions and procedures
+AXLL functions and procedures
 ---------------------------------
 
-The ``AXLL::`` system library includes functions and procedures to:
+The ``AXLL::`` system library includes these functions and procedures:
 
-#. Create and close work books
+#. Create and close workbooks
 
 #. Helper functions to create ranges
 
-#. Support for exchanging data between ranges on an EXCEL sheet with scalar, one-dimensional and multi-dimensional AIMMS parameters. Note that these ranges can be named ranges.
+#. Support for exchanging data between ranges on an Excel sheet with scalar, one-dimensional and multi-dimensional AIMMS parameters. Note that these ranges can be named ranges.
 
-The code to read EXCEL data using looks as follows:
+The code to read Excel data using AXLL looks as follows:
 
 .. code-block:: aimms
 
@@ -155,11 +155,11 @@ The code to read EXCEL data using looks as follows:
 
 Note the following:
 
-#. The implementation of these functions that accesses the workbook directly without the need to use EXCEL. This makes this library more suited for application development. 
+#. These functions access the workbook directly without the need to use Excel. This makes the library more suited for application development. 
 
-#. This library doesn't support running EXCEL macros.
+#. This library doesn't support Excel macros.
 
-#. We can abstract here from the column order because the name manager of EXCEL took care of providing consistent names in the named ranges. When this is not provided, the above code would become signficant more complicated.
+#. In this example, the name manager of Excel provided consistent names in the named ranges. When names are not consistent, the code would become signficantly more complicated.
 
 #. This library doesn't make any assumptions about the placing of data in columns.
 
@@ -167,16 +167,16 @@ Note the following:
    see also :doc:`../85/85-using-axll-library` and :doc:`../122/122-AXLL-Library` .
 
 
-Datalink with the provider xlsprovider.
+Datalink with the provider xlsprovider
 ---------------------------------------
 
-The xlsprovider uses a simple strategy to understand the structure of the data in an EXCEL worksheet.
-The top most row with data is assumed to be the header, containing the names of the columns. 
+The xlsprovider uses a simple strategy to understand the structure of the data in an Excel worksheet.
+The top row with data is assumed to be the header, containing the names of the columns. 
 You have to map these names onto identifier names in the AIMMS model.
 Then datalink can read by making the xlsprovider scan the worksheet row by row and use the mapping to send the data to the appropriate identifiers.
 
 
-The code to read the EXCEL data looks as follows:
+The code to read the Excel data looks as follows:
 
 .. code-block:: aimms
 
@@ -204,13 +204,13 @@ The code to read the EXCEL data looks as follows:
 
 Note the following:
 
-#. The implementation of this library accesses the workbook directly without the need to use EXCEL. This makes this library more suited for application development. 
+#. This library accesses the workbook directly without the need to use Excel. This makes the library more suited for application development. 
 
-#. This library doesn't support running EXCEL macros.
+#. This library doesn't support Excel macros.
 
-#. We can abstract here from the column order because the functionality in the datalink library; independent of the name manager.
+#. Data order is abstracted from the column order in the datalink library, independently of the name manager.
 
-#. This library assumes that the data is presented column wise on the sheet; this library is less suited for data that is scattered on a EXCEL sheet.
+#. This library assumes that the data is presented in columns on the sheet; this library is less suited for data that is scattered on an Excel sheet.
 
 #. See also :doc:`../csv/read-write-csv` and `XLSProvider for datalink <https://documentation.aimms.com/datalink/providers.html#xlsprovider>`_
 
