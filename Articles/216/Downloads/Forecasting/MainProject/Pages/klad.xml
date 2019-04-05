@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2014-11-14 15:36:16">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>BFAB052A-0648-4127-A134-CABEB151EF9F</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Table">
+		<Location top="12" left="12" bottom="210" right="132" />
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>setje</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="1" Decimals="0" Binary="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>ListBox</SelectionType>
+		<Location top="12" left="144" bottom="210" right="300" />
+		<TabOrder>1</TabOrder>
+		<UseTabInObject>true</UseTabInObject>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<EditField>AtTop</EditField>
+		<AddAndRemoveButtons>true</AddAndRemoveButtons>
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<MultipleColumns>true</MultipleColumns>
+		<ExplicitIdentifier>
+			<Identifier>setje(setje)</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>*</Symbol>
+			<Symbol>setje</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2015-03-24 12:15:29">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>BFAB052A-0648-4127-A134-CABEB151EF9F</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="2D Chart">
+		<Location top="66" left="78" bottom="774" right="1224" />
+		<TabOrder>1</TabOrder>
+		<Border Style="InShadow" Width="2" />
+		<X_Axis>
+			<Domain ID="1004">dh</Domain>
+			<Annotation>
+				<Show_every_n_th_label ID="1025">1440</Show_every_n_th_label>
+				<Number_of_first_label_shown ID="1026">1440</Number_of_first_label_shown>
+			</Annotation>
+		</X_Axis>
+		<Y_Axis>
+			<Identifier>
+				<Value ID="2007">CP1( dh )</Value>
+			</Identifier>
+			<Identifier>
+				<Value ID="2007">ma3_CP1( dh )</Value>
+				<Appearance>
+					<Line>
+						<Color ID="2023">257CED91-8909-41AC-BED6-911268D7BBCE blue</Color>
+					</Line>
+				</Appearance>
+			</Identifier>
+		</Y_Axis>
+		<Legend>
+			<Show ID="53">"Show"</Show>
+		</Legend>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="804" left="510" bottom="876" right="852" />
+		<TabOrder>2</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>noAveragingHours</Identifier>
+			<NumberFormat Width="7" Decimals="0" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="804" left="888" bottom="876" right="1224" />
+		<TabOrder>3</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Test3"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>Test3</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="882" left="510" bottom="978" right="870" />
+		<StaticText>Interesting values:
+6
+24
+7*24=168
+30*24=720</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="798" left="90" bottom="864" right="498" />
+		<TabOrder>4</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Initialize"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>ReadEnergyData</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="84" left="1254" bottom="204" right="1536" />
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"PUG"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GetUserInf</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>noAveragingHours</Symbol>
+			<Symbol>CP1</Symbol>
+			<Symbol>ma3_CP1</Symbol>
+			<Symbol>ReadEnergyData</Symbol>
+			<Symbol>Test3</Symbol>
+			<Symbol>dh</Symbol>
+			<Symbol>GetUserInf</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

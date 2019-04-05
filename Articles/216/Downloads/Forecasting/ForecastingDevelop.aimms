@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<References AIMMS_Version="4.53.1.8 (x64)">
+	<MainProject Path="MainProject" />
+	<Library Path="AIMMSForecasting" />
+	<Library Path="TestAimmsForecasting" />
+	<RepositoryLibrary UUID="7A2E765C-2A09-4456-8583-C7AF9DE0484D" Name="AIMMSUnitTest" Version="1.0.0.40" />
+</References>
