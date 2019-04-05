@@ -12,7 +12,7 @@
 Solvers
 ========================
 
-This section covers topics related to mathematical solvers used in AIMMS applications. These articles also explain how to work with solvers in AIMMS language.
+Mathematical Programming solution algorithms, solvers for short, are the muscles inside AIMMS applications. The articles in this section contain tips and tricks for steering these solvers and interpreting their solutions and behavior.
 
 .. toctree::
    :maxdepth: 1

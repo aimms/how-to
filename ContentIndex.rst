@@ -5,7 +5,7 @@
     
     <div id="topo"> 
     <br><h1>Welcome to AIMMS How-To</h1><h2>Tips and tricks for using AIMMS software</h2></div>
-    <p id="introduction">AIMMS How-To is a knowledge base for AIMMS developers, PRO network administrators, and application end-users. You'll find tutorials, best practices, and practical guidance for using AIMMS software, including help topics in mathematical modeling, solvers, AIMMS language, and building applications in optimization and prescriptive analytics. You'll also find support for troubleshooting errors and handling deprecations.</p>
+    <p id="introduction">AIMMS How-To is a knowledge base for for everyone involved in projects that use AIMMS, including developers, network administrators, application end-users, and business process stakeholders. You'll find tutorials, best practices, and practical guidance for using AIMMS software, including help topics in mathematical modeling, solvers, AIMMS language, and building applications in optimization and prescriptive analytics. You'll also find support for troubleshooting errors and handling deprecations.</p>
     <div id="content_home_page">
         <a href="C_Licensing/index.html">
             <div class="box_home_page">
@@ -16,7 +16,7 @@
         <a href="C_Mathematical_Modeling/index.html">
             <div class="box_home_page">
                 <h1 style="text-align: center">Modeling</h1>
-                <p>Converting real problems into optimization models</p>
+                <p>Converting business opportunities into optimization models</p>
             </div>
         </a>
         <a href="C_Solvers/index.html">
