@@ -6,22 +6,20 @@ Solve in Loop
    :keywords: loop, solve
 
 
-I often get the question how to solve several instances in one go.
-In this article I provide a simple example.
+This article shows a simple example of how to solve several instances at once, using a loop.
 
-The structure of execution is typically something ilke:
+The structure of execution usually follows this format:
 
-#. Determine the collection of inputs
-#. For each input:
-    #. Work that input
+#. Define the collection of inputs
+#. Process each input in a loop
     
 Let's discuss these steps in detail:
 
-Determine the collection of inputs
+Defining the input files
 ----------------------------------
 
-When you have multiple input files, you'll probably want to determine the folder name.
-For this you can use the predeclared funtion ``DirectorySelect``. Example code is:
+Use the predeclared function ``DirectorySelect`` to define the folder containing your input files, as shown in the code example below:
+
 
 .. code-block:: aimms
 
@@ -30,10 +28,7 @@ For this you can use the predeclared funtion ``DirectorySelect``. Example code i
         directory     :  ".", 
         title         :  "Please select folder to read the .xlsx input files from.");
 
-Obtaining the collection of input files
-------------------------------------------
-        
-With the directory name, the collection of input files can be obtained using ``DirectoryGetFiles``.
+Use ``DirectoryGetFiles`` to get files from the specified directory name for processing, as shown in the code example below:
 
 .. code-block:: aimms
 
@@ -46,6 +41,8 @@ With the directory name, the collection of input files can be obtained using ``D
 Processing each of the input files
 ------------------------------------
 
+Now that input files are specified, you can define how you want to process each of them, as shown in the code example below:
+
 .. code-block:: aimms
 
     for i_fn do
@@ -53,7 +50,7 @@ Processing each of the input files
         pr_ExecuteSingleRun( sp_Workbook );
     endfor ;
 
-Example used:
+Example
 -------------
 
 :download:`Excel inputs download <downloads/ExcelInputs.zip>` 
