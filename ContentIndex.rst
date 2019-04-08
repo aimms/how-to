@@ -22,7 +22,7 @@
         <a href="C_Solvers/index.html">
             <div class="box_home_page">
                 <h1 style="text-align: center">Solvers</h1>
-                <p>Selecting and calling solvers</p>
+                <p>Using solvers and interpreting their results</p>
             </div>
         </a>
         <a href="C_Language/index.html">
@@ -40,7 +40,7 @@
         <a href="C_UI/index.html">
             <div class="box_home_page">
                 <h1 style="text-align: center">Applications</h1>
-                <p>Creating and customizing WebUI and WinUI apps</p>
+                <p>Creating and customizing a user interface for your apps</p>
             </div>
         </a>
         <a href="C_Deployment/index.html">
