@@ -2,8 +2,8 @@ Solve in Loop
 ==============
 
 .. meta::
-   :description: How to solve several instances at once using a loop.
-   :keywords: loop, solve
+   :description: How to solve several instances of Excel inputs at once using a loop.
+   :keywords: loop, solve, excel
 
 
 This article shows a simple example of how to solve several instances at once, using a loop.
