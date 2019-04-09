@@ -1,0 +1,87 @@
+## ams_version=1.0
+
+LibraryModule TestMeanLibrary {
+    Prefix: tml;
+    Interface: TestMeanLibrary;
+    Procedure pr_Test_Small_Example {
+        Body: {
+            S := data { a, b, c };
+            P := data { a: 3, b : 5, c: 13 };
+            r := ml::SelfDefinedMean(P(i));
+            aimmsunit::AssertTrue("Rocket science; the average of 3, 5, and 13 is 7. Really.", r=7);
+        }
+        Comment: "first test: Mean( 3, 5, 13 ) = 7";
+        aimmsunit::TestSuite: MeanSuite;
+        Set S {
+            Index: i;
+        }
+        Parameter P {
+            IndexDomain: i;
+        }
+        Parameter r;
+    }
+    Procedure pr_Test_Empty_List {
+        Body: {
+            aimmsunit::AssertThrow("The average of an empty list cannot be computed.");
+            S := data { };
+            P := data { };
+            r := ml::SelfDefinedMean(P(i));
+        }
+        Comment: "Edge case, empty list.";
+        aimmsunit::TestSuite: MeanSuite;
+        Set S {
+            Index: i;
+        }
+        Parameter P {
+            IndexDomain: i;
+        }
+        Parameter r;
+    }
+    Procedure pr_Test_Zero_In_Observations {
+        Body: {
+            S := data { a, b, c, d };
+            P := data { a: 3, b : 5, c: 0, d: 12 };
+            r := ml::SelfDefinedMean(P(i));
+            aimmsunit::AssertTrue("The average of 3, 5, 0, and 12 is 5.", r=5);
+        }
+        Comment: "third test: Mean( 3, 5, 0, 12 ) = 5";
+        aimmsunit::TestSuite: MeanSuite;
+        Set S {
+            Index: i;
+        }
+        Parameter P {
+            IndexDomain: i;
+        }
+        Parameter r;
+    }
+    Procedure LibraryInitialization {
+        Comment: "Add initialization statements here that do not require any other library being initialized already.";
+    }
+    Procedure PostLibraryInitialization {
+        Comment: {
+            "Add initialization statements here that require another library to be initialized already,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure PreLibraryTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all other libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure LibraryTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require other libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}
