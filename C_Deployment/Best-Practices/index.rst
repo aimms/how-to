@@ -9,6 +9,8 @@
 Best Practices
 ========================
 
+This section offers best practices to build and deploy applications using AIMMS PRO.
+
 .. toctree::
    :maxdepth: 1
 
