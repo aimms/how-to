@@ -11,6 +11,9 @@
 AIMMS Language
 ========================
 
+This section covers topics related to expressing a model in the AIMMS programming language. A programming language defines the limits of what you can express in it. The articles in this section familiarize you with the basics of the AIMMS language to get you up and running, and explain the boundaries.
+ 
+
 .. toctree::
    :maxdepth: 1
 
@@ -41,6 +44,8 @@ AIMMS Language
    /Articles/190/190-empty-sets
    /Articles/191/191-handle-errors-and-warnings
    /Articles/12/12-generate-random-numbers
+   /Articles/208/208-setting-options
+   /Articles/216/216-effective-use-unit-test-library
  
 
     

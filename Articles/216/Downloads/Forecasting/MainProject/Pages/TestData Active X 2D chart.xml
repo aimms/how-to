@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2014-11-05 11:19:17">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>BFAB052A-0648-4127-A134-CABEB151EF9F</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="2D Chart">
+		<Location top="54" left="66" bottom="630" right="1206" />
+		<TabOrder>1</TabOrder>
+		<Border Style="InShadow" Width="2" />
+		<X_Axis>
+			<Domain ID="1004">d</Domain>
+			<Annotation>
+				<Rotation_angle ID="1010">30</Rotation_angle>
+				<Show_every_n_th_label ID="1025">30</Show_every_n_th_label>
+				<Tick_spacing ID="1024">30</Tick_spacing>
+			</Annotation>
+		</X_Axis>
+		<Y_Axis>
+			<Identifier>
+				<Value ID="2007">sampleDataSet( e_Product, e_Region, d )</Value>
+			</Identifier>
+			<Identifier>
+				<Value ID="2007">estimateDataSet( e_Product, e_Region, d, 'MovingAverage5' )</Value>
+			</Identifier>
+			<Misc_settings>
+				<Remove_all_default_values ID="2061">1</Remove_all_default_values>
+			</Misc_settings>
+		</Y_Axis>
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>DropDownList</SelectionType>
+		<Location top="54" left="1242" bottom="78" right="1416" />
+		<TabOrder>2</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="None" />
+		<BackgroundColor RGB="#ffffff" />
+		<ExplicitIdentifier>
+			<Identifier>e_Product</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>DropDownList</SelectionType>
+		<Location top="96" left="1242" bottom="120" right="1416" />
+		<TabOrder>3</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="None" />
+		<BackgroundColor RGB="#ffffff" />
+		<ExplicitIdentifier>
+			<Identifier>e_Region</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Table">
+		<Location top="300" left="1224" bottom="630" right="1428" />
+		<TabOrder>4</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>sampleDataSet( e_Product, e_Region, d )</Identifier>
+			<Permutation>[2,0,1]</Permutation>
+			<FirstColumn>3</FirstColumn>
+			<NumberFormat Width="10" Decimals="3" Alignment="Center" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>productSet</Symbol>
+			<Symbol>regionSet</Symbol>
+			<Symbol>sampleDataSet</Symbol>
+			<Symbol>estimateDataSet</Symbol>
+			<Symbol>e_Product</Symbol>
+			<Symbol>e_Region</Symbol>
+			<Symbol>d</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

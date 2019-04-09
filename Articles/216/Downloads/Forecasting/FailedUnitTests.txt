@@ -1,0 +1,9 @@
+﻿The test taf::pr_Test_Exponential_Smoothing_Season_Too_Few_Seasons: 19 Failed.
+The test taf::pr_Test_Exponential_Smoothing_Season_Too_Few_Seasons: 19 Failed.
+The test taf::pr_Test_Exponential_Smoothing_Season_Too_Few_Seasons: 19 Failed.
+The test taf::pr_Test_Tune_SES_Work_Simple: 7 Failed.
+The test taf::pr_Test_Tune_SES_Work_Very_Simple: 7 Failed.
+The test taf::pr_Test_Tune_SES_Work_Simple: 7 Failed.
+The test taf::pr_Test_Tune_SES_Work_Very_Simple: 7 Failed.
+The test taf::pr_Test_Tune_SES_Work_Simple: 7 Failed.
+The test taf::pr_Test_Tune_SES_Work_Simple: 7 Failed.

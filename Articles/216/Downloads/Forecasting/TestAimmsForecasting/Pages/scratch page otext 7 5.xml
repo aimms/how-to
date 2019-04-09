@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2015-05-18 11:03:04">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>44E008CA-8FB6-49D2-84C4-1981C0F9140B</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Curve">
+		<Location top="12" left="744" bottom="894" right="1482" />
+		<TabOrder>4</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ColorScheme Number="0" />
+		<Title>true</Title>
+		<Legend>true</Legend>
+		<Y-Labels>true</Y-Labels>
+		<X-Labels>true</X-Labels>
+		<StatusLine>true</StatusLine>
+		<ExplicitIdentifier>
+			<Identifier>taf::Y( taf::t )</Identifier>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::ST_E( taf::t )</Identifier>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::ST_E2( taf::t )</Identifier>
+		</ExplicitIdentifier>
+		<DrawLines>true</DrawLines>
+		<MarkPoints>true</MarkPoints>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="912" left="1092" bottom="990" right="1206" />
+		<TabOrder>1</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"via AIMMS"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>taf::pr_Test_Detrend</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Composite Table">
+		<Location top="12" left="18" bottom="990" right="720" />
+		<TabOrder>5</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Domain>
+			<Identifier>taf::d</Identifier>
+			<Index Name="taf::d" />
+		</Domain>
+		<ExplicitIdentifier>
+			<Identifier>taf::st_ep( taf::d )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::E( taf::d )</Identifier>
+			<NumberFormat Width="5" Decimals="1" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::MA4( taf::d )</Identifier>
+			<NumberFormat Width="8" Decimals="3" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::TMA4( taf::d )</Identifier>
+			<NumberFormat Width="8" Decimals="3" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::DT1( taf::d )</Identifier>
+			<NumberFormat Width="8" Decimals="3" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::DESR( taf::d )</Identifier>
+			<NumberFormat Width="8" Decimals="3" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::ST_L( taf::d )</Identifier>
+			<NumberFormat Width="10" Decimals="3" Scientific="IfTooSmallorLarge" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::ST_B( taf::d )</Identifier>
+			<NumberFormat Width="10" Decimals="3" Scientific="IfTooSmallorLarge" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::ST_S( taf::d )</Identifier>
+			<NumberFormat Width="10" Decimals="3" Scientific="IfTooSmallorLarge" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::ST_E( taf::d )</Identifier>
+			<NumberFormat Width="10" Decimals="3" Scientific="IfTooSmallorLarge" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::ST_E2( taf::d )</Identifier>
+			<NumberFormat Width="8" Decimals="3" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::ST_R( taf::d )</Identifier>
+			<NumberFormat Width="8" Decimals="3" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::ST_R2( taf::d )</Identifier>
+			<NumberFormat Width="10" Decimals="3" Scientific="IfTooSmallorLarge" Alignment="Center" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="912" left="774" bottom="990" right="918" />
+		<TabOrder>6</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>taf::alphaPar</Identifier>
+			<NumberFormat Width="5" Decimals="2" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::betaPar</Identifier>
+			<NumberFormat Width="5" Decimals="2" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::gammaPar</Identifier>
+			<NumberFormat Width="5" Decimals="2" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="912" left="1218" bottom="990" right="1332" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"via CPP"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>taf::pr_Test_Detrend_via_CPP</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="912" left="1344" bottom="990" right="1458" />
+		<TabOrder>3</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"clear"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>taf::pr_Detrend_Clear</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="912" left="936" bottom="990" right="1080" />
+		<TabOrder>7</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>taf::mae_cpp</Identifier>
+			<NumberFormat Width="5" Decimals="1" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>taf::mae_aimms</Identifier>
+			<NumberFormat Width="5" Decimals="1" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>taf::alphaPar</Symbol>
+			<Symbol>taf::betaPar</Symbol>
+			<Symbol>taf::gammaPar</Symbol>
+			<Symbol>taf::Y</Symbol>
+			<Symbol>taf::E</Symbol>
+			<Symbol>taf::MA4</Symbol>
+			<Symbol>taf::TMA4</Symbol>
+			<Symbol>taf::DT1</Symbol>
+			<Symbol>taf::DESR</Symbol>
+			<Symbol>taf::ST_L</Symbol>
+			<Symbol>taf::ST_B</Symbol>
+			<Symbol>taf::ST_S</Symbol>
+			<Symbol>taf::ST_E</Symbol>
+			<Symbol>taf::ST_E2</Symbol>
+			<Symbol>taf::ST_R</Symbol>
+			<Symbol>taf::ST_R2</Symbol>
+			<Symbol>taf::mae_cpp</Symbol>
+			<Symbol>taf::mae_aimms</Symbol>
+			<Symbol>taf::st_ep</Symbol>
+			<Symbol>taf::pr_Test_Detrend</Symbol>
+			<Symbol>taf::pr_Test_Detrend_via_CPP</Symbol>
+			<Symbol>taf::pr_Detrend_Clear</Symbol>
+			<Symbol>taf::d</Symbol>
+			<Symbol>taf::t</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>
