@@ -293,6 +293,12 @@ Fix a bug
             <testcase name="tml::pr_Test_Zero_In_Observations" time="0.001"/>
           </testsuite>
         </testsuites>
+        
+    With this result, we know the following:
+    
+    #. The fix repaired the problem
+    
+    #. **We didn't have to test manually the old tests again** which is a huge time saver!
 
 :download:`AIMMS project download <downloads/mean/mean.zip>` 
 
