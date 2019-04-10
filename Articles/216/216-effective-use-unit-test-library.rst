@@ -165,24 +165,26 @@ Mean is calculated by dividing the sum of the records by the count of records. T
 .. code-block:: aimms
    :linenos:
 
-   Function SelfDefinedMean {
-      Arguments: (p);
-      Body: {
-            if card(p) then
-               SelfDefinedMean := sum( i, p(i) ) / card( p );
+    Function SelfDefinedMean {
+        Arguments: (p);
+        Body: {
+            p_NoElements := card(p);
+            if p_NoElements then
+                SelfDefinedMean := sum( i, p(i) ) / p_NoElements;
             else
-               raise error "The average of an empty list cannot be computed." ;
-               SelfDefinedMean := 0 ;
+                raise error "The average of an empty list cannot be computed." ;
+                SelfDefinedMean := 0 ;
             endif ;
-      }
-      Parameter p {
+        }
+        Parameter p {
             IndexDomain: i;
             Property: Input;
-      }
-      Set S {
+        }
+        Set S {
             Index: i;
-      }
-   }
+        }
+        Parameter p_NoElements;
+    }
 
 Running the test now gives the following results:
 
@@ -256,24 +258,26 @@ Our unit test reproduces the bug. See `failures="1"` in line 3. Notice the diffe
 .. code-block:: aimms
    :linenos:
 
-   Function SelfDefinedMean {
-      Arguments: (p);
-      Body: {
-            if card(p) then
-               SelfDefinedMean := sum( i, p(i) ) / card( S );
+    Function SelfDefinedMean {
+        Arguments: (p);
+        Body: {
+            p_NoElements := card(S);
+            if p_NoElements then
+                SelfDefinedMean := sum( i, p(i) ) / p_NoElements;
             else
-               raise error "The average of an empty list cannot be computed." ;
-               SelfDefinedMean := 0 ;
+                raise error "The average of an empty list cannot be computed." ;
+                SelfDefinedMean := 0 ;
             endif ;
-      }
-      Parameter p {
+        }
+        Parameter p {
             IndexDomain: i;
             Property: Input;
-      }
-      Set S {
+        }
+        Set S {
             Index: i;
-      }
-   }
+        }
+        Parameter p_NoElements;
+    }
 
 Running the test suite now should give the below result which indicates that the problem was fixed. 
     

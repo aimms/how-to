@@ -6,8 +6,9 @@ LibraryModule MeanLibrary {
     Function SelfDefinedMean {
         Arguments: (p);
         Body: {
-            if card(p) then
-            	SelfDefinedMean := sum( i, p(i) ) / card( S );
+            p_NoElements := card(S);
+            if p_NoElements then
+            	SelfDefinedMean := sum( i, p(i) ) / p_NoElements;
             else
             	raise error "The average of an empty list cannot be computed." ;
             	SelfDefinedMean := 0 ;
@@ -33,6 +34,7 @@ LibraryModule MeanLibrary {
         Set S {
             Index: i;
         }
+        Parameter p_NoElements;
     }
     Procedure LibraryInitialization {
         Comment: "Add initialization statements here that do not require any other library being initialized already.";
