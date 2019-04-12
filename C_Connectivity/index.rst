@@ -8,7 +8,7 @@
 Data Connection
 ========================
 
-This section provides help to connect your AIMMS Software to external data sources, such as Excel, and databases. You will also find topics for using libraries built-in to AIMMS.
+We're aware that AIMMS is one of many tools in your workspace. This section provides help to connect your AIMMS Software to external data sources, such as spreadsheets, databases, and R-based computations. You will also find topics for using libraries built-in to AIMMS.
 
 .. toctree::
    :maxdepth: 1

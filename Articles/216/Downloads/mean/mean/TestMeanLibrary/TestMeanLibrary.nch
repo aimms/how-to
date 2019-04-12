@@ -1,0 +1,5 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"tml::Copy_pr_Test1" "tml::pr_Test3" "2019-04-05 14:20:45"
+"tml::pr_Test1" "tml::pr_Test_Small_Example" "2019-04-09 06:24:51"
+"tml::pr_Test2" "tml::pr_Test_Empty_List" "2019-04-09 06:25:02"
+"tml::pr_Test3" "tml::pr_Test_Zero_In_Observations" "2019-04-09 06:25:16"

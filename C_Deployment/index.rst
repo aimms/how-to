@@ -9,7 +9,8 @@ Deployment
 ========================
 .. _ref-deployment:
 
-This section provides many topics about deploying AIMMS applications using AIMMS Pro. You will also find guidance for setting up AIMMS Cloud Platform. Includes best practices to build and deploy applications using AIMMS PRO.
+
+AIMMS apps can be made available in various ways: Windows server, Linux server, AIMMS PRO (on premise or in the cloud). In this section we’ll discuss these publication methods to get your applications to your end users. You'll find help deploying AIMMS applications using AIMMS Pro, and guidance for setting up AIMMS Cloud Platform. We've also included some best practices to build and deploy applications.
 
 .. toctree::
    :maxdepth: 1

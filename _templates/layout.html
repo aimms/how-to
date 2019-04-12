@@ -18,7 +18,8 @@
         max-width: 1200px !important;
     }
 </style>
-{% endif %} {% endblock %} {% block sidebartitle %} {% if pagename == "ContentIndex" %}
+{% endif %} {% endblock %} {% block extrahead %}{% if pagename == "ContentIndex" %}
+<meta name="description" content="AIMMS How-To is a knowledge base for everyone involved in projects that use AIMMS. You'll find tutorials, best practices, and practical guidance for using AIMMS software."> {% endif %} {% endblock %} {% block sidebartitle %} {% if pagename == "ContentIndex" %}
 
 <style>
     .wy-nav-content {
