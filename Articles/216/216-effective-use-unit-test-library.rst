@@ -1,13 +1,13 @@
 Test Driven Development using the AIMMSUnitTest Library
 ==========================================================================
 
-This article uses the following elements from the popular software methodology `Test Driven Development <https://en.wikipedia.org/wiki/Test-driven_development>`_
+This article discusses some elements from the popular software methodology `Test Driven Development <https://en.wikipedia.org/wiki/Test-driven_development>`_ in relation to the AIMMS Library ``AIMMSUnitTest``.
 
 #. Gather requirements from stakeholders
    
-   * What are small examples ?
+   * What are small examples?
    
-   * What are the edge cases, including error cases, performance ?
+   * What are the edge cases, including error cases, performance?
     
 #. Implement requirements as unit tests and **see them fail!**
 
@@ -18,6 +18,7 @@ This article uses the following elements from the popular software methodology `
    #. Execute tests and **see them pass!**
    
    #. Refactor until performance is acceptable.
+
 #. Repeat
     
 Unit tests in AIMMS projects
@@ -31,7 +32,7 @@ Prepare your AIMMS project with the below steps to declare unit tests.
 
 #. Create another new library containing tests on the actual code
 
-#. Make sure all tests can be run, for instance by specifying ``MainExecution`` as below:
+#. Make sure all tests can be run, for instance by specifying ``MainExecution`` as shown below:
 
    .. code-block:: aimms
 
@@ -70,7 +71,7 @@ Prototype the requirements
             }
       }
 
-This is a dummy implementation, a function that meets the prototype requirements, but will obviously fail. Having a dummy implementation allows us to code the tests as below. 
+This is a dummy implementation, a function that meets the prototype requirements, but will obviously fail. Having a dummy implementation allows us to code the tests as detailed below. 
 
 Write the tests
 """""""""""""""""""
@@ -126,13 +127,13 @@ Write the tests
       
    Note that the ``aimmsunit::AssertThrow``(line 2) statement is **before** the call to ``ml::SelfDefinedMean``.
 
-The annotation ``aimmsunit::TestSuite: MeanSuite`` is added to the test function. As you may know, such an annotation can be added by:
+The annotation ``aimmsunit::TestSuite: MeanSuite`` is added to the test function. You can add annotations this way:
    
-   #. click add annotation in the attribute window
+   #. Click add annotation in the attribute window
    
-   #. select aimmsunit::TestSuite
+   #. Select aimmsunit::TestSuite
    
-   #. type in the name of the suite. In this example, we only use one suite: ``MeanSuite``
+   #. Type in the name of the suite. In this example, we only use one suite: ``MeanSuite``
    
 Now, run the tests and with the above implementation of ``ml::SelfDefinedMean``. They will fail as expected. Example result in file: ``log/AimmsUnit.xml``
 
@@ -153,7 +154,7 @@ Now, run the tests and with the above implementation of ``ml::SelfDefinedMean``.
 
 There are several remarks about this file:
 
-   #. On line 3, which suite and which tests are run, also important, the number of tests that failed. All the tests failed as expected (`errors ="2"`) and we can start coding the function now.
+   #. On line 3, which suite and which tests are run, it is also important the number of tests that failed. All the tests failed as expected (`errors ="2"`) and we can start coding the function now.
 
    #. In lines 4 - 9, we see the details of the failure of our two tests. As the function hasn't been implemented yet, it raised an error message in both the tests. 
 
@@ -204,13 +205,13 @@ The log indicates that both the tests passed without any issue. So, everything i
 Fix a bug
 """""""""""
 
-However, soon one of our stakeholders comes with the question 
+However, soon one of our stakeholders comes with a question:
 
 .. pull-quote::
 
-   Why does ``ml::SelfDefinedMean(3, 5, 0, 12)`` return 6.67 instead of 5 ?
+   Why does ``ml::SelfDefinedMean(3, 5, 0, 12)`` return 6.67 instead of 5?
 
-Apparently, our set of requirements does not consider all edge cases and now we will iterate on this by adding another requirement and test: 
+Apparently, our set of requirements does not consider all edge cases. Now we will iterate on this by adding another requirement and test: 
 
 .. pull-quote::
    
@@ -253,7 +254,7 @@ Running the test suite again gives the below result:
    </testsuite>
    </testsuites>
     
-Our unit test reproduces the bug. See `failures="1"` in line 3. Notice the difference between failures and errors in the test report. Clearly, the mistake in the above implementation is that we divided by ``card(P)`` - the cardinality of the parameter which only counts non default values instead of ``card(S)`` - the cardinality of the set which counts all the indices. So, the function is updated as below:
+Our unit test reproduces the bug. See ``failures="1"`` in line 3. Notice the difference between failures and errors in the test report. Clearly, the mistake in the above implementation is that we divided by ``card(P)`` - the cardinality of the parameter which only counts non-default values instead of ``card(S)`` - the cardinality of the set which counts all the indices. So, the function is updated as shown below:
 
 .. code-block:: aimms
    :linenos:
@@ -297,7 +298,7 @@ All the previously written tests (before this latest change) were also automatic
 
 :download:`AIMMS project download <downloads/mean/mean.zip>` 
 
-Related
+Related Topics
 --------------------
 
 * **AIMMS Documentation:** `Unit Test Library <https://documentation.aimms.com/unit-test/index.html>`_
