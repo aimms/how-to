@@ -27,6 +27,9 @@ AIMMS apps can be made available in various ways: Windows server, Linux server, 
    /Articles/155/155-Catering-unresponsive-server-unstable-connection
    /Articles/171/171-pro-system-requirements
    Best-Practices/index
+   /Articles/98/98-starting-job-aimms-pro-api-java
+   /Articles/98/98-starting-job-aimms-pro-api-csharp
+   
 
 
 
