@@ -12,6 +12,10 @@
 Mathematical Modeling
 ========================
 
+.. image:: ../Images/modeling-gray.png
+   :scale: 100
+   :align: right
+
 This section provides support for designing mathematical models that produce the best solutions to solve problems and maximize opportunities in your business or organization.
 
 .. toctree::

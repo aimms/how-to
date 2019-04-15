@@ -12,6 +12,10 @@
 Getting Started
 ========================
 
+.. image:: ../Images/getting-started.png
+   :scale: 100
+   :align: right
+
 These topics provide fundamentals about using AIMMS. Learn about terminology, shortcuts, and basic set-up. You will also find licensing help here.
 
 .. toctree::

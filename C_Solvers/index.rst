@@ -12,6 +12,10 @@
 Solvers
 ========================
 
+.. image:: ../Images/solver.png
+   :scale: 100
+   :align: right
+
 Mathematical Programming solution algorithms, solvers for short, are the muscles inside AIMMS applications. The articles in this section contain tips and tricks for steering these solvers and interpreting their solutions and behavior.
 
 .. toctree::

@@ -1,22 +1,22 @@
-.. image:: Images/getting-started.png
+.. image:: Images/getting-started-32.png
    :scale: 0
 
-.. image:: Images/modeling-gray.png
+.. image:: Images/modeling-gray-32.png
    :scale: 0
 
-.. image:: Images/solver.png
+.. image:: Images/solver-32.png
    :scale: 0
 
-.. image:: Images/language.png
+.. image:: Images/language-32.png
    :scale: 0
 
-.. image:: Images/connection.png
+.. image:: Images/connection-32.png
    :scale: 0
 
-.. image:: Images/applications.png
+.. image:: Images/applications-32.png
    :scale: 0
 
-.. image:: Images/deploy-blue.png
+.. image:: Images/deploy-blue-32.png
    :scale: 0
 
 .. raw:: html
@@ -32,43 +32,50 @@ AIMMS How-To is a knowledge base for everyone involved in projects that use AIMM
     <div id="content_home_page">
         <a href="C_Licensing/index.html">
             <div class="box_home_page">
-                <h1 style="text-align: center"><img class="icones" src="_images/getting-started.png">Getting Started</h1>
+                <img alignment="center" src="_images/getting-started-32.png">
+                <h1 style="text-align: center"><!--img class="icones" src="_images/getting-started.png"-->Getting Started</h1>
                 <p>Installing and updating AIMMS, setting up licenses</p>
             </div>
         </a>
         <a href="C_Mathematical_Modeling/index.html">
             <div class="box_home_page">
-                <h1 style="text-align: center"><img class="icones" src="_images/modeling-gray.png">Modeling</h1>
+                <img alignment="center" src="_images/modeling-gray-32.png">
+                <h1 style="text-align: center"><!--img class="icones" src="_images/modeling-gray.png"-->Modeling</h1>
                 <p>Converting business opportunities into optimization models</p>
             </div>
         </a>
         <a href="C_Solvers/index.html">
             <div class="box_home_page">
-                <h1 style="text-align: center"><img class="icones" src="_images/solver.png">Solvers</h1>
+                <img alignment="center" src="_images/solver-32.png">
+                <h1 style="text-align: center"><!--img class="icones" src="_images/solver.png"-->Solvers</h1>
                 <p>Using solvers and interpreting their results</p>
             </div>
         </a>
         <a href="C_Language/index.html">
             <div class="box_home_page">
-                <h1 style="text-align: center"><img class="icones" src="_images/language.png">AIMMS Language</h1>
+                <img alignment="center" src="_images/language-32.png">
+                <h1 style="text-align: center"><!--img class="icones" src="_images/language.png"-->AIMMS Language</h1>
                 <p>Expressing a model in the AIMMS programming language</p>
             </div>
         </a>
         <a href="C_Connectivity/index.html">
             <div class="box_home_page">
-                <h1 style="text-align: center"><img class="icones" src="_images/connection.png">Data Connections</h1>
+                <img alignment="center" src="_images/connection-32.png">
+                <h1 style="text-align: center"><!--img class="icones" src="_images/connection.png"-->Data Connection</h1>
                 <p>Connecting AIMMS to other sources with extensions, links, and libraries</p>
             </div>
         </a>
         <a href="C_UI/index.html">
             <div class="box_home_page">
-                <h1 style="text-align: center"><img class="icones" src="_images/applications.png">Applications</h1>
+                <img alignment="center" src="_images/applications-32.png">
+                <h1 style="text-align: center"><!--img class="icones" src="_images/applications.png"-->Applications</h1>
                 <p>Creating and customizing a user interface for your apps</p>
             </div>
         </a>
         <a href="C_Deployment/index.html">
             <div class="box_home_page">
-                <h1 style="text-align: center"><img class="icones" src="_images/deploy-blue.png">Deployment</h1>
+                <img alignment="center" src="_images/deploy-blue-32.png">
+                <h1 style="text-align: center"><!--img class="icones" src="_images/deploy-blue.png"-->Deployment</h1>
                 <p>Distributing your applications with AIMMS PRO, on-premise or with the Cloud platform</p>
             </div>
         </a>
