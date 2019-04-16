@@ -43,14 +43,19 @@ extensions = ['sphinx.ext.doctest',
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
     'sphinx.ext.githubpages',
-	'sphinx.builders.linkcheck',
-    'sphinx_sitemap']
+	'sphinx.builders.linkcheck']
+
+if os.name == 'linux':
+
+#Import spelling extension
+    extensions.append('sphinx_sitemap')
 
 #```
 #This next if-then-else tries to import advanced extensions
 #Please mind the spelling extension is only available for 32bits Python (2 or 3) currently (2019-04-01)
 #```
 SpellCheck_Please = False # ------------------------------------------------------------------------------------> To activate spellchecking (make spelling)
+
 
 
 
@@ -307,6 +312,9 @@ else:
 
 # index page for your site
 html_baseurl = 'https://how-to.aimms.com/'
+
+# adding path to non-rst files that go to the build
+html_extra_path = ['robots.txt']
 
 # Generate redirects from old URLs
 
