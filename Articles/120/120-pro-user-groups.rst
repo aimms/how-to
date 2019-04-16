@@ -32,7 +32,7 @@ Within the AIMMS PRO Portal, tab Users, the AIMMS PRO administrator can assign g
 .. image:: images/Portal-with-groups.png
 
 
-This picture is taken from my AIMMS PRO test environment. Besides the predefined groups Admin, AimmsPublishers, AppPublishers, and Users, there are two organization specific groups added to this environment: Planners and Purchase. I’ve selected the group Planners and made Theo and myself users of that group. If I want to make Theo a member of Purchase as well, I just drag Theo’s icon to the Purchase group.
+This picture is taken from my AIMMS PRO test environment. Besides the predefined groups Admin, AimmsPublishers, AppPublishers, and Users, there are two organization specific groups added to this environment: Planners and Purchase. I have selected the group Planners and made Theo and myself users of that group. If I want to make Theo a member of Purchase as well, I just drag Theo’s icon to the Purchase group.
 
 A first method with which you can determine who accesses certain kinds of information is by selecting users when an AIMMS App is published. At that time, the access rights can be assigned per environment, per group or per user as illustrated below:
 
@@ -47,7 +47,7 @@ Granting Access to Data within your App
 -----------------------------------------
 
 This brings us to a second method of granting access, which is within the application itself.
-The AIMMS PRO library allows an AIMMS App to identify the current user and identify the groups that user is in, namely via the procedure:`` pro::GetCurrentUserInfo.``
+The AIMMS PRO library allows an AIMMS App to identify the current user and identify the groups that user is in, namely via the procedure: ``pro::GetCurrentUserInfo``.
 
 Let us continue our example. A planner may change the start and duration of production activities which are in the model represented by the parameters ``startProduction(a)`` and ``durationProduction(a)`` respectively.
 

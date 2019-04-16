@@ -87,7 +87,7 @@ The deprecation follows a staged timeline:
 +-----------------+-------------+-------------------------------------------------------------------------+
 | Release after   | Version     | Description of phase/stage                                              |
 +=================+=============+=========================================================================+
-| July 1, 2018    | AIMMS 4.56  | Attibutes 'index' or 'parameter' not available for relations.           |
+| July 1, 2018    | AIMMS 4.56  | Attributes 'index' or 'parameter' not available for relations.          |
 |                 |             | (This prevents creating new compound sets.)                             |
 +-----------------+-------------+-------------------------------------------------------------------------+
 | January 1, 2019 | ...         | Error message warns against existing compound sets.                     |

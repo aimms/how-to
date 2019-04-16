@@ -57,7 +57,7 @@ This is not so difficult. Just use the functions ``pro::SaveFileToCentralStroage
 
 This function will copy the file data.txt from the folder ``c:\inputs`` on the client Windows Desktop to the folder ``/publicdata/myapp/input`` in the AIMMS PRO storage. Note that ``Pro::SaveFileToCentralStorage`` requires the filename to be present in the second argument. In addition, note that ``Pro::SaveFileToCentralStorage`` has a third optional argument to specify access rights for the file at hand on the AIMMS PRO storage system.  The default behavior is to use the access rights as indicated in the encompassing bucket.
 
-In order to warn the end-user that a file in AIMMS PRO storage is about to be overwritten, you want to check the existence of the file first. You can do this via a self-defined procedure (proFileExists) as follows:
+In order to warn the end-user that a file in AIMMS PRO storage is about to be overwritten, you want to check the existence of the file first. You can do this via a self-defined procedure ``proFileExists`` as follows:
 
 .. code-block:: aimms
 
@@ -89,7 +89,7 @@ In order to warn the end-user that a file in AIMMS PRO storage is about to be ov
 
 If we continue exploring the "Central Storage" section of the PRO API in the library ``AimmProLibrary``, we see that there are also functions to create folders and to delete files and folders.
 
-In this section, we’ve illustrated the use of the AIMMS PRO storage from within an AIMMS WinUI application. We build on this knowledge in the next section, where we illustrate how to use the AIMMS PRO storage in a WebUI application.
+In this section, we have illustrated the use of the AIMMS PRO storage from within an AIMMS WinUI application. We build on this knowledge in the next section, where we illustrate how to use the AIMMS PRO storage in a WebUI application.
 
 Exchanging files for an AIMMS WebUI app
 --------------------------------------------------
