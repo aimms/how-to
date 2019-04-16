@@ -43,7 +43,8 @@ extensions = ['sphinx.ext.doctest',
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
     'sphinx.ext.githubpages',
-	'sphinx.builders.linkcheck']
+	'sphinx.builders.linkcheck',
+    'sphinx_sitemap']
 
 #```
 #This next if-then-else tries to import advanced extensions
@@ -304,6 +305,8 @@ else:
 	#To check any broken links 
 	nitpicky = True
 
+# index page for your site
+html_baseurl = 'https://how-to.aimms.com/'
 
 # Generate redirects from old URLs
 
@@ -398,3 +401,4 @@ def setup(sphinx):
 		sphinx.connect('builder-inited', generate_redirects)   
  
 highlight_language = 'aimms'
+
