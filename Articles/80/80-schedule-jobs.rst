@@ -30,7 +30,7 @@ To start this sequence, the following code is used.
 
 Each line is explained as follows:
 
-#. Determine the payload procedure that should be executed by each server session.  Here it is the ``pr_Friesian``, as Friesians are excellent workhorses.
+#. Determine the payload procedure that should be executed by each server session.  Here it is the ``pr_Friesian``, as Friesian horses are excellent workhorses.
 
 #. A call to the procedure that actually starts each server session.
 

@@ -82,7 +82,7 @@ After the standard file selection dialog of Windows where to save a file, you'll
 
 .. image::  images/EncryptiongAimmspack.PNG 
 
-enabling you to select a non-default encryption.  OK'ing this dialog, you'll get a next dialog to select the contents of the ``.aimmspack``:
+enabling you to select a non-default encryption.  By clicking OK, you'll get a next dialog to select the contents of the ``.aimmspack``:
 
 .. image::  images/FileSelectionAimmspack.PNG
 

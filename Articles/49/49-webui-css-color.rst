@@ -69,19 +69,19 @@ Styling options for Linecharts
 
 The tables below reference some of the CSS selectors and properties that apply to Line Chart Widgets.
 
-+-------------------------------------------------+-------------------------------------------------+
-|CSS Selector                                     | Widget/Element Description                      |
-+=================================================+=================================================+
-| .tag-linechart                                  | defines the widget type (line chart)            |
-+-------------------------------------------------+-------------------------------------------------+
-| .tag-linechart[data-widget\.uri="*widgetname*"] | defines a widget by name                        |
-+-------------------------------------------------+-------------------------------------------------+
-| .circle                                         | defines the element (data points)               |
-+-------------------------------------------------+-------------------------------------------------+
-| .path                                           | defines the element (lines between data points) |
-+-------------------------------------------------+-------------------------------------------------+
-| .annotation-*identifiername*                    | defines an identifier represented in the widget |
-+-------------------------------------------------+-------------------------------------------------+
++-----------------------------------------------------+-------------------------------------------------+
+|CSS Selector                                         | Widget/Element Description                      |
++=====================================================+=================================================+
+| ``.tag-linechart``                                  | defines the widget type (line chart)            |
++-----------------------------------------------------+-------------------------------------------------+
+| ``.tag-linechart[data-widget\.uri="<widgetname>"]`` | defines a widget by name                        |
++-----------------------------------------------------+-------------------------------------------------+
+| ``.circle``                                         | defines the element (data points)               |
++-----------------------------------------------------+-------------------------------------------------+
+| ``.path``                                           | defines the element (lines between data points) |
++-----------------------------------------------------+-------------------------------------------------+
+| ``.annotation-<identifiername>``                    | defines an identifier represented in the widget |
++-----------------------------------------------------+-------------------------------------------------+
 
 You'll also need to know the *properties* that can be controlled to customize the appearance of elements.
 
@@ -89,15 +89,16 @@ You'll also need to know the *properties* that can be controlled to customize th
 +-------------------------------------------+-----------------------------------------------+
 |CSS Property                               | Element Description                           |
 +===========================================+===============================================+
-| background: *color*                       | controls the background color of lines/points |
+| ``background: <color>``                   | controls the background color of lines/points |
 +-------------------------------------------+-----------------------------------------------+
-| stroke: *color*                           | controls the stroke color of lines/points     |
+| ``stroke: <color>``                       | controls the stroke color of lines/points     |
 +-------------------------------------------+-----------------------------------------------+
-| fill: *color*                             | controls the fill color of lines/points       |
+| ``fill: <color>``                         | controls the fill color of lines/points       |
 +-------------------------------------------+-----------------------------------------------+
-| stroke-width: *line width in pixels*      | controls the line thickness                   |
+| ``stroke-width: <line width in pixels>``  | controls the line thickness                   |
 +-------------------------------------------+-----------------------------------------------+
-| stroke-dasharray: *dash length in pixels* | makes a dashed line, controls dash length     |
+| ``stroke-dasharray:                       | makes a dashed line                           |
+| <dash length in pixels>``                 | controls dash length                          |
 |                                           | (only applies to lines in a line chart)       |
 +-------------------------------------------+-----------------------------------------------+
 

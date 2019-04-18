@@ -131,7 +131,7 @@ The annotation ``aimmsunit::TestSuite: MeanSuite`` is added to the test function
    
    #. Click add annotation in the attribute window
    
-   #. Select aimmsunit::TestSuite
+   #. Select ``aimmsunit::TestSuite``
    
    #. Type in the name of the suite. In this example, we only use one suite: ``MeanSuite``
    

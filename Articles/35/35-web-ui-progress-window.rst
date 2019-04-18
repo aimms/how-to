@@ -33,7 +33,7 @@ Implementation
 
 The AIMMS project for the current running example with the steps implemented can be downloaded from: :download:`6. Flow Shop - Progress Communication <downloads/6. Flow Shop - Progress Communication.zip>`.
 
-The Gap curve linechart widget in the below image is updated every second with the gap between the bestbound and incumbent objective value of the mathematical program in the project. 
+The Gap curve linechart widget in the below image is updated every second with the gap between the best bound and incumbent objective value of the mathematical program in the project. 
 
 .. image:: images/BB06_WebUI_screen.PNG 
 
@@ -82,7 +82,7 @@ Step 2. From server session (level 2) to data session (level 3)
 
 As we are only passing small amounts of data and executing some simple arithmetic, the procedure ``UpdateGapToClient`` can be executed on the data session i.e., on the end user's browser. To do this, we use the call ``pro::DelegateToClient``. This is very similar to the earlier used call, ``pro::DelegateToServer`` and the difference is evident as their names suggest - in ``pro::DelegateToClient``, we are delegating a procedure to the client (or data) session and in the other one, we are delegating a procedure to the server session.
 
-This procedure contains two arguments as input parameters, bb and icb which take on the values of the bestbound and Incumbent suffices specified in the previous step.
+This procedure contains two arguments as input parameters, ``bb`` and ``icb`` which take on the values of the best bound and Incumbent suffices specified in the previous step.
 
     .. code-block:: aimms
 
@@ -104,7 +104,7 @@ This procedure contains two arguments as input parameters, bb and icb which take
             }
         }
 
-In our running example, the body of this procedure contains other data manipulation statements to update a set of observations and calculate the gap percentage between the bestbound and incumbent objective value. These statements are not discussed in this article.
+In our running example, the body of this procedure contains other data manipulation statements to update a set of observations and calculate the gap percentage between the best bound and incumbent objective value. These statements are not discussed in this article.
 
 Further reading
 ---------------

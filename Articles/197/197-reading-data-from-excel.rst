@@ -3,7 +3,7 @@ Reading columns of data from Excel
 
 .. meta::
    :description: This article compares different methods of reading Excel data to AIMMS.
-   :keywords: Excel, AimmsXLLibrary, library, axll, xlsprovider, datalink
+   :keywords: Excel, AimmsXLLibrary, library, `axll`, `xlsprovider`, `datalink`
 
 AIMMS provides various methods for reading Excel data. 
 
@@ -11,7 +11,7 @@ AIMMS provides various methods for reading Excel data.
  
 #. AimmsXLLibrary, a system library of functions and procedures.
 
-#. Datalink with the provider xlsprovider, two libraries from the AIMMS repository of libraries. 
+#. Datalink with the provider `xlsprovider`, two libraries from the AIMMS repository of libraries. 
 
 Let's compare some features of these libraries, and you can decide which method is best for your application.
 
@@ -104,7 +104,7 @@ Note the following:
 
 #. This library supports Excel macros.
 
-#. In this example, the name manager of Excel provided consistent names in the named ranges. When names are not consistent, the code would become signficantly more complicated.
+#. In this example, the name manager of Excel provided consistent names in the named ranges. When names are not consistent, the code would become significantly more complicated.
 
 #. This library doesn't make any assumptions about the placing of data in columns.
 
@@ -159,7 +159,7 @@ Note the following:
 
 #. This library doesn't support Excel macros.
 
-#. In this example, the name manager of Excel provided consistent names in the named ranges. When names are not consistent, the code would become signficantly more complicated.
+#. In this example, the name manager of Excel provided consistent names in the named ranges. When names are not consistent, the code would become significantly more complicated.
 
 #. This library doesn't make any assumptions about the placing of data in columns.
 

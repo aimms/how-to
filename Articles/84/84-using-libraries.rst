@@ -15,7 +15,7 @@ Read more about libraries in the `AIMMS User Manual <https://download.aimms.com/
 
 .. Procedure
 
-To add a new libary to the current project, go to :menuselection:`File --> Library manager`.
+To add a new library to the current project, go to :menuselection:`File --> Library manager`.
 
 Select a library type:
 
