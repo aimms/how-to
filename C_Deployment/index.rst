@@ -33,6 +33,7 @@ AIMMS apps can be made available in various ways: Windows server, Linux server, 
    Best-Practices/index
    /Articles/98/98-starting-job-aimms-pro-api-java
    /Articles/98/98-starting-job-aimms-pro-api-csharp
+   /Articles/218/218-develop-reliable-succesfull-aimms-app 
    
 
 
