@@ -28,7 +28,7 @@ Second, the GMP version can be used in combination with the nonlinear presolver 
 
 Third, for non-convex problems AOA might sometimes have difficulties in finding a good feasible solution. In that case it might help to combine the AOA with the multi-start algorithm. The way to do this has been explained in a white paper that describes GMP-AOA. This paper is available from our web site:
 
-http://www.aimms.comdownloads/white-papers
+http://www.aimms.com/downloads/white-papers
 
 Old AOA cannot be combined with the nonlinear presolver nor the multi-start algorithm.
 
