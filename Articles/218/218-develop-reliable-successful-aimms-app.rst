@@ -2,8 +2,8 @@ How to create a reliable successful AIMMS application?
 ===========================================================
 
 .. meta::
-   :description: A checklist for managing the development of an AIMMS application
-   :keywords: project management, application complexity, model complexity, data management, source code management, 
+   :description: A checklist for planning and managing the development of an AIMMS application
+   :keywords: project management, application complexity, model complexity, data management, source code management, best practice
 
 
 This is a checklist to develop a reliable successful AIMMS application. 
@@ -45,40 +45,40 @@ This is a checklist to develop a reliable successful AIMMS application.
 
 #. Determine at the start: single-user or multi-user
 
-    Determine how many users and/or roles will collaborate with the same data and same application, concurrently and/or sequentially. This will influence your:
+    Determine how many users and/or roles will collaborate with the same data and same application, concurrently and/or sequentially. This will influence several aspects:
 
-    #. data management choice (multi-user often requires application database and concurrent use greatly benefits from CDM), 
-    #. need for role and permission differentiation, 
+    #. Data management choice (multi-user often requires an application database and concurrent use greatly benefits from `CDM <https://documentation.aimms.com/cdm/index.html>`_), 
+    #. Need for role and permission differentiation
     
-    #. user-interface page flows and page designs, etc. 
+    #. User-interface page flows and page designs, etc. 
 
     #. Capacity sizing (# concurrent users, solves, peak times)
 
 #. Estimate early resource requirements
 
-    Early in the development start measuring memory requirements and solve durations. Also find out about likely number of concurrent users, concurrent solves and usage patterns over time (day, week, month, etc.). Together these will drive subscription sizing and, if on-premise, hardware sizing.
+    Early in the development start measuring memory requirements and solve durations. Also find out the likely number of concurrent users, concurrent solves and usage patterns over time (day, week, month, etc.). Together these will drive subscription sizing and, if on-premise, hardware sizing.
 
 #. Test non-functionals early on
 
-    Early on in the development start testing with real-life data set (sizes) to catch performance and scaling challenges early on. Include early testing on AIMMS PRO or AIMMS Cloud Platform, again to catch potential problems early on.
+    Start early testing with real-life data set (sizes) to catch performance and scaling challenges. Include early testing on AIMMS PRO or AIMMS Cloud Platform, again to catch potential problems.
 
 #. Consider automated testing
 
-    Consider developing automated tests, for example using AIMMS’ Unit Test library. This will pay off in increased innovation speed and reduced maintenance effort, because you can quickly and accurately re-test models after changes.
+    Consider developing automated tests, for example using the `AIMMS Unit Test library <https://documentation.aimms.com/unit-test/index.html>`_. This will pay off in increased innovation speed and reduced maintenance effort, because you can quickly and accurately re-test models after changes.
 
 #. Work incrementally with end-user feedback
 
     Keep your feedback loops short by giving regular demos to end users, starting early in the project. This will increase user/client happiness and reduce project effort and cost. This requires that you develop the user interface and the model concurrently. Maybe even start with the user interface and then build the model underneath. 
 
-#. Consider End user documentation requirements
+#. Consider end-user documentation requirements
 
-    How can each end user relate his tasks to the features and screens offered by your application?
+    How can each end-user relate his tasks to the features and screens offered by your application?
     
 
 .. include:: /includes/form.def
 
     
-.. #. Do not abuse AIMMS functionality
+.. #. Do not misuse AIMMS functionality
 .. 
 ..     We often see AIMMS app development projects run into trouble when AIMMS functionality is used beyond its intended use. This holds for AIMMS as a whole, use it for decision support apps, and for the functions inside AIMMS. When in doubt how to best achieve a desired result reach out to AIMMS User Support. 
 .. 
