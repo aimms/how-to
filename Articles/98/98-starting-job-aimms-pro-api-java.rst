@@ -7,40 +7,43 @@ Prerequisites
 -------------
 
 #. Get a Java environment for development, such as `IntelliJ IDEA <https://www.jetbrains.com/idea/>`_ . 
-   Here we'll assume you're just using the 64 bits version.
+   Here we'll assume you're just using the 64-bit version.
 
-#. Get latest official `JDK <https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html>`_
-   More information about JDK `here <https://docs.oracle.com/en/java/javase/11/>`_
+#. Get the latest official JDK from the Oracle website: `Download JDK <https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html>`_
+   More information about JDK can be found in Oracle's documentation: `JDK Documentation <https://docs.oracle.com/en/java/javase/11/>`_
 
-#. Get AIMMS PRO API via AIMMS PRO Portal
+#. Get `AIMMS PRO API <https://documentation.aimms.com/pro/api.html>`_ via AIMMS PRO Portal.
 
-   #. Log on to your AIMMS PRO
+   a. Log into AIMMS PRO
 
-   #. Tab help - getting started
+   #. Go to *Help > getting started*
    
    #. Download AIMMS PRO API
 
-   #. Move it to a convenient location, and unzip.
+   #. Move it to a convenient location, and unzip the archive
    
 Running the example
 -------------------
 
-#.  First publish the example application
+#.  First publish the example application.
 
     You can find the example model in ``.\pro-api-complete\examples\AimmsModel\PROApiExampleApplication.aimms``.
     Create an aimmspack, say ``PROApiExampleApplication.aimmspack`` and publish it on your AIMMS PRO system, for instance using the name ``PROApiExampleApplication`` and version ``1``. 
 
 #.  Start the Java example by opening ``.\pro-api-complete\examples\java\pom.xml`` using IntelliJ IDEA.
 
-    #.  You may note the following message: ``Project SDK is not defined.`` To repair:
+    a.  You may note the following message: ``Project SDK is not defined.`` 
+        
+        To repair:
 
-        .. image:: images/ProjectSDKIsNotDefinedRepairing.PNG
-
-        #. Click on the "Setup SDK"   to the right
+        i. Click on the "Setup SDK"   to the right
         
         #. Select the latest version without subversion, here ``11``.
         
         #. Ok the dialog.  The message ``Project SDK is not defined.`` should disappear.
+
+        .. image:: images/ProjectSDKIsNotDefinedRepairing.PNG
+
         
     #.  Adapt application details presented on lines 30 - 39.
     
@@ -48,15 +51,20 @@ Running the example
     
         * Line 30, DEFAULT_ENDPOINT: this might also be "wss://your-cloud-name.cloud.aimms.com" 
         
-            #. when connection encrypted, start with wss (cloud systems are always encrypted).
+            * when connection is encrypted, start with WSS (cloud systems are always encrypted).
             
-            #. when connection not encrypted, start with ws
+            * when connection is not encrypted, start with WS
         
         * Lines 32-34, DEFAULT_ENVIRONMENT, DEFAULT_USERNAME, and DEFAULT_PASSWORD should've been supplied by your AIMMS PRO administrator.
         
         * Lines 38-39, DEFAULT_APPLICATION_NAME, DEFAULT_APPLICATION_VERSION, the name and version of the app as it is published.
-    
-    #.  Now you can start the demo via IDEA menu - Run - Run...
+
+    #.  Now you can start the demo via *IDEA menu > Run > Run*
+
+.. _pro-api-java-output:
+
+Output
+-------
     
         In the window ``4: Run`` of IDEA, you'll get the following log:
 
@@ -150,23 +158,23 @@ Running the example
         
         Selected remarks about that log:
         
-        * Lines 1-5 are about making the connection
+        * Lines 1-5 are about making the connection.
         
         * We first execute ``BasicScheduleJob`` which starts an AIMMS job after a delay of 60 seconds.  Note the absence of tracing statements in this procedure, so there isn't anything in our log.
         
-        * Lines 6,7 is about ListAllJobs, there is currently one job  waiting, the job we've just started (because of it's initial delay).
+        * Lines 6-7 are about ``ListAllJobs``, there is currently one job  waiting, the job we've just started (because of it's initial delay).
         
-        * lines 8 - 14 is about BasicScheduleJobAndCheck; we see that the status this jobs moves thru the states QUEUED, INITIALIZING, and FINISHED.
+        * Lines 8-14 are about ``BasicScheduleJobAndCheck``; we see that the status this jobs moves thru the states QUEUED, INITIALIZING, and FINISHED.
         
-        * Lines 15 - 31 is about ScheduleJobAndCheckResult, the procedure notifyClientWithResults sends two times a result back from AIMMS.
+        * Lines 15-31 are about ScheduleJobAndCheckResult, the procedure ``notifyClientWithResults`` sends two times a result back from AIMMS.
         
-        * Lines 33 - 36, the data for an AIMMS Parameter is prepared/passed to AIMMS.
+        * Lines 33-36 show that the data for an AIMMS Parameter is prepared/passed to AIMMS.
         
-        * Lines 37 - 53, shows another procedure ``AdvancedInteraction`` that acts on the interaction with AIMMS.
+        * Lines 37-53 shows another procedure ``AdvancedInteraction`` that acts on the interaction with AIMMS.
         
-        * Line 55 logs that via notifyClientWithProgress a stopExecution event is sent to AIMMS to stop the execution.
+        * Line 55 logs that via ``notifyClientWithProgress`` a ``stopExecution`` event is sent to AIMMS to stop the execution.
         
-        * Lines 56 - 84, show how this abnormal termination is handled step by step.
+        * Lines 56-84 show how this abnormal termination is handled step by step.
     
         
 .. include:: /includes/form.def
