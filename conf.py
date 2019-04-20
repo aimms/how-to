@@ -210,9 +210,9 @@ if os.name != 'nt':
 else:   
     Display_edit_on_gitlab = True
 
-    
+# removed reference to theme.css as it no longer exists     
 html_context = {
-    'css_files': ['_static/Hacks.css','_static/theme.css', '_static/copycode.css'],
+    'css_files': ['_static/Hacks.css', '_static/copycode.css'],
     "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
     "gitlab_user": "aimms/customer-support", # Username
     "gitlab_repo": "aimms-how-to", # Repo name
