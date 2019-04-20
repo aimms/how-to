@@ -19,7 +19,7 @@
     }
 </style>
 {% endif %} {% endblock %} {% block extrahead %}{% if pagename == "ContentIndex" %}
-<meta name="description" content="AIMMS How-To is a support knowledge base for everyone involved in projects that use AIMMS. You'll find help tutorials, best practices, and practical guidance for using AIMMS software."> {% endif %} {% endblock %} {% block sidebartitle %} {% if pagename == "ContentIndex" %}
+<meta name="description" content="AIMMS How-To is a knowledge base for everyone involved in projects that use AIMMS. You'll find tutorials, best practices, and practical guidance for using AIMMS software."> {% endif %} {% endblock %} {% block sidebartitle %} {% if pagename == "ContentIndex" %}
 
 <style>
     .wy-nav-content {
@@ -35,7 +35,7 @@
 {% endif %}
 <link rel="stylesheet" href="{{ pathto('_static/Hacks.css', 1) }}">
 <a href="{{ pathto(master_doc) }}">
-    <img src="{{ pathto('_static/AIMMS_logo_H_RGB_rev.png', 1) }}" class="logo" title="AIMMS" alt="AIMMS Help &amp; Support" /></a>
+    <img src="{{ pathto('_static/AIMMS_logo_H_RGB_rev.png', 1) }}" class="logo" alt="AIMMS Logo" /></a>
 
 {% include "searchbox.html" %} {% endblock %} {% block body %} {% if pagename == "ContentIndex" %}
 
@@ -52,11 +52,11 @@
 </style>
 {% endif %} {% endblock %} {% block htmltitle %} {% if pagename == "ContentIndex" %}
 
-<title>{{ _('AIMMS How-To &mdash; Help &amp; Support') }}</title>
+<title>{{ _('AIMMS How-To') }}</title>
 
 {% else %}
 
-<title>{{ title|striptags|e }} &mdash; AIMMS How-To &mdash; Help &amp; Support</title>
+<title>{{ title|striptags|e }} &mdash; AIMMS How-To</title>
 
 {% endif %} {% if display_toc %}
 <div class="localtoc">

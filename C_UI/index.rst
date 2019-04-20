@@ -12,14 +12,6 @@
 Applications
 ==============
 
-.. meta::
-   :description: Help and support with building AIMMS application GUI.
-
-.. image:: ../Images/applications.png
-   :scale: 100
-   :align: right
-   :alt: AIMMS Applications Help & Support
-
 AIMMS offers two User Interface builders, the classic WinUI for applications that run on Windows, and the modern WebUI for applications that run in a browser. This section offers guidance in developing an application and building a user interface. You will also find help to add custom styling to your applications.
     
 .. toctree::
