@@ -138,9 +138,7 @@ Last Updated: |date|
 
 # include these texts at the beginning of all source .rsts, use only for HTML builds to update last updated date. 
 
-rst_prolog = """
-:tocdepth: 2
-"""
+# rst_prolog = """
 # Last Updated on |date|
 # """
 

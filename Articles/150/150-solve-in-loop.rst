@@ -33,7 +33,7 @@ When using a ``while`` loop, you must initialize the iterator before the loop bl
 
    Logic of the iterative operation
 
-In the example, we use a ``for`` loop:
+In the example, we use a for loop:
 
 .. code-block:: aimms
 
