@@ -9,9 +9,12 @@
 Best Practices
 ========================
 
+This section offers best practices to build and deploy applications using AIMMS PRO.
+
 .. toctree::
    :maxdepth: 1
 
+   ../../Articles/218/218-develop-reliable-successful-aimms-app 
    ../../Articles/33/33-pro-deploy-app
    ../../Articles/32/32-pro-develop-app
    ../../Articles/reduce-client-server-exchange/reduce-client-server-exchange 

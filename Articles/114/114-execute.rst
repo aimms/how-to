@@ -21,13 +21,13 @@ However, if you already have another program for certain tasks that you don't w
 Unzipping Files Using the Execute Function
 ------------------------------------------
 
-Here's an example. Let's say you need a functionality to unzip files. In your case, the input files, taken from the archive directory, are currently zipped. You need to unzip them before reading. You have the application, unzip.exe, installed in the "C:\ProgramFiles" for you to use. Then you can use the following code in your AIMMS procedure to unzip the input files:
+Here's an example. Let's say you need a functionality to unzip files. In your case, the input files, taken from the archive directory, are currently zipped. You need to unzip them before reading. You have the application, unzip.exe, installed in the "C:\Program Files" for you to use. Then you can use the following code in your AIMMS procedure to unzip the input files:
 
 .. code-block:: aimms
 
     Execute("C:\\ProgramFiles\\unzip.exe", "D:\\data\\archive\\inputfile.zip");
 
-It works as executing the command line: ``"C:\ProgramFiles\upzip.exe D:\data\archive\inputfile.zip"`` from your AIMMS project directory. Of course, you don't want to see a bunch of files unzipped in your project directory. You can fix that by modifying the statement. Simply add the "-d" option, provided by the unzip.exe, to redirect the upzipped files to a temp folder:
+It works as executing the command line: ``"C:\Program Files\upzip.exe D:\data\archive\inputfile.zip"`` from your AIMMS project directory. Of course, you don't want to see a bunch of files unzipped in your project directory. You can fix that by modifying the statement. Simply add the "-d" option, provided by the unzip.exe, to redirect the extracted files to a temp folder:
 
 .. code-block:: aimms
 

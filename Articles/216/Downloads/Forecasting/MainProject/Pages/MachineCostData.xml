@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2015-10-12 12:38:59">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>BFAB052A-0648-4127-A134-CABEB151EF9F</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="2D Chart">
+		<Location top="156" left="108" bottom="654" right="720" />
+		<TabOrder>1</TabOrder>
+		<Border Style="InShadow" Width="2" />
+		<X_Axis>
+			<Domain ID="1004">MachinesProd( i_ob )</Domain>
+			<Annotation>
+				<Tick_spacing ID="1024">5</Tick_spacing>
+				<Label_spacing ID="1031">10</Label_spacing>
+			</Annotation>
+			<Scale>
+				<Data_minimum ID="1012">10</Data_minimum>
+				<Data_maximum ID="1013">70</Data_maximum>
+			</Scale>
+			<Gridlines>
+				<Spacing ID="1018">10</Spacing>
+			</Gridlines>
+		</X_Axis>
+		<Y_Axis>
+			<Identifier>
+				<Value ID="2007">ScaledCostData( i_ob )</Value>
+				<Value_label ID="2060">STRING( i_ob ) := i_ob</Value_label>
+				<Appearance>
+					<Line>
+						<Pattern ID="2024">"None"</Pattern>
+					</Line>
+					<Symbol>
+						<Shape ID="2030">"Dot"</Shape>
+						<Size ID="2031">4</Size>
+					</Symbol>
+				</Appearance>
+			</Identifier>
+			<Identifier>
+				<Value ID="2007">ScaledCostEstimate( i_ob )</Value>
+				<Appearance>
+					<Line>
+						<Color ID="2023">RGB ff8000</Color>
+						<Pattern ID="2024">"Solid"</Pattern>
+						<Width ID="2025">1.5</Width>
+					</Line>
+					<Symbol>
+						<Color ID="2029">RGB 2f97ff</Color>
+						<Shape ID="2030">"Box"</Shape>
+						<Size ID="2031">6</Size>
+					</Symbol>
+				</Appearance>
+			</Identifier>
+		</Y_Axis>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="690" left="108" bottom="804" right="312" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Run Linear Regression"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>EstimateCostsVCR</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="690" left="384" bottom="804" right="720" />
+		<TabOrder>3</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>Beta0</Identifier>
+			<NumberFormat Width="10" Decimals="2" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>Beta1</Identifier>
+			<NumberFormat Width="10" Decimals="2" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>VariationMeasure( 'SST' )</Identifier>
+			<NumberFormat Width="10" Decimals="2" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>VariationMeasure( 'SSE' )</Identifier>
+			<NumberFormat Width="10" Decimals="2" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>VariationMeasure( 'SSR' )</Identifier>
+			<NumberFormat Width="10" Decimals="2" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>VariationMeasure( 'Rsquare' )</Identifier>
+			<NumberFormat Width="5" Decimals="2" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>VariationMeasure( 'Se' )</Identifier>
+			<NumberFormat Width="10" Decimals="2" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="66" left="108" bottom="120" right="306" />
+		<TabOrder>4</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"(Re)Initialize"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>ReInitializeEstimates</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>MachinesProd</Symbol>
+			<Symbol>Beta0</Symbol>
+			<Symbol>Beta1</Symbol>
+			<Symbol>VariationMeasure</Symbol>
+			<Symbol>EstimateCostsVCR</Symbol>
+			<Symbol>ScaledCostData</Symbol>
+			<Symbol>ScaledCostEstimate</Symbol>
+			<Symbol>ReInitializeEstimates</Symbol>
+			<Symbol>i_ob</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

@@ -1,0 +1,1604 @@
+## ams_version=1.0
+
+LibraryModule TestAimmsForecasting {
+    Prefix: taf;
+    Interface: PublicSection;
+    Property: NoSave;
+    Section PublicSection {
+        Set dayCal {
+            Index: dc;
+            InitialData: {
+                data { 01-01, 01-02, 01-03, 01-04, 01-05, 01-06, 01-07, 01-08, 01-09,
+                       01-10, 01-11, 01-12, 01-13, 01-14, 01-15, 01-16, 01-17, 01-18,
+                       01-19, 01-20, 01-21, 01-22, 01-23, 01-24, 01-25, 01-26, 01-27,
+                       01-28, 01-29, 01-30, 01-31, 02-01, 02-02, 02-03, 02-04, 02-05,
+                       02-06, 02-07, 02-08, 02-09, 02-10, 02-11, 02-12, 02-13, 02-14 } ;
+            }
+        }
+        Section SimpleLinearRegression {
+            Set sObservationsSet {
+                SubsetOf: Integers;
+                Index: i_ob;
+                Definition: data{1..10};
+            }
+            Parameter MachinesProd {
+                IndexDomain: i_ob;
+                Definition: {
+                    					data{
+                    					 1 : 10,
+                    					 2 : 20,
+                    					 3 : 30,
+                    					 4 : 40,
+                    					 5 : 45,
+                    					 6 : 50,
+                    					 7 : 60,
+                    					 8 : 55,
+                    					 9 : 70,
+                    					10 : 40
+                    					}
+                }
+            }
+            Parameter CostOfMachinesProd {
+                IndexDomain: i_ob;
+                Definition: {
+                    					data{
+                    					 1 :  257.40,
+                    					 2 :  601.60,
+                    					 3 :  782.00,
+                    					 4 :  765.40,
+                    					 5 :  895.50,
+                    					 6 : 1133.00,
+                    					 7 : 1152.80,
+                    					 8 : 1132.70,
+                    					 9 : 1459.20,
+                    					10 :  970.10
+                    					}
+                }
+            }
+            Parameter Coeff {
+                IndexDomain: forecasting::co;
+            }
+            Parameter Beta0;
+            Parameter Beta1;
+            Parameter VariationMeasure {
+                IndexDomain: forecasting::vcs;
+            }
+            Parameter CostEstimate {
+                IndexDomain: i_ob;
+            }
+            Parameter CostError {
+                IndexDomain: i_ob;
+            }
+            Procedure EstimateCosts {
+                Body: {
+                    
+                    forecasting::SimpleLinearRegression( MachinesProd, CostOfMachinesProd, Coeff);
+                    
+                    ::Beta0 := ::Coeff(0);
+                    ::Beta1 := ::Coeff(1);
+                }
+            }
+            Procedure EstimateCostsVCR {
+                Body: {
+                    
+                    
+                    forecasting::SimpleLinearRegressionVCR( MachinesProd, CostOfMachinesProd, Coeff, VariationMeasure, CostEstimate, CostError);
+                    
+                    ::Beta0 := ::Coeff(0);
+                    ::Beta1 := ::Coeff(1);
+                }
+            }
+            DeclarationSection GUI_Declaration {
+                Parameter ScaledCostData {
+                    IndexDomain: ::i_ob;
+                    Definition: ::CostOfMachinesProd(::i_ob) / 1000;
+                }
+                Parameter ScaledCostEstimate {
+                    IndexDomain: ::i_ob;
+                    Definition: ::CostEstimate(::i_ob) / 1000;
+                }
+            }
+            Procedure ReInitializeEstimates {
+                Body: {
+                    
+                    empty
+                    
+                    ::Coeff,
+                    ::Beta0,
+                    ::Beta1,
+                    ::VariationMeasure,
+                    ::CostEstimate,
+                    ::CostError
+                    ;
+                }
+            }
+        }
+        Section MovingAverage {
+            Set obs1 {
+                SubsetOf: est1;
+                Index: iObs1;
+                Definition: ElementRange(1,7);
+            }
+            Set est1 {
+                SubsetOf: Integers;
+                Index: iEst1;
+                Definition: ElementRange(1,10);
+            }
+            Set WeightSet1 {
+                SubsetOf: Integers;
+                Index: ws1;
+                Definition: ElementRange(1,4);
+            }
+            Parameter Weights1 {
+                IndexDomain: ws1;
+                Definition: data { 1 : 0.1, 2 : 0.2, 3 : 0.3, 4 : 0.4 };
+            }
+            Parameter Weights2 {
+                IndexDomain: ws1;
+                Definition: data { 1 : 0.25, 2 : 0.25, 3 : 0.25, 4 : 0.25 };
+            }
+            Parameter Weights3 {
+                IndexDomain: ws1;
+                Definition: data { 1 : 0.1, 2 : 0.3, 3 : 0.3, 4 : 0.3 };
+            }
+            Parameter Weights4 {
+                IndexDomain: ws1;
+                Definition: {
+                    data { 1 : 0.3, 2 : 0.3, 3 : 0.3, 4 : 0.3 }
+                    ! Does not sum to 1.
+                }
+            }
+            Set eest1e {
+                SubsetOf: Integers;
+                Index: i_est1e;
+                Definition: data { -3 .. 10 };
+            }
+            Parameter edv1e {
+                IndexDomain: i_est1e;
+                Definition: {
+                    if i_est1e < 1 then 1
+                    else i_est1e
+                    endif ;
+                }
+            }
+            Parameter wma_edv1e {
+                IndexDomain: i_est1e;
+                Definition: {
+                    if i_est1e < 1 then
+                    	1
+                    else
+                    	sum( ws1, edv1e(i_est1e - ws1 ) * Weights3(ws1) )
+                    endif ;
+                }
+            }
+            Parameter dv1 {
+                IndexDomain: iEst1;
+                Definition: ord(iEst1)|(iEst1<=7);
+            }
+            Parameter ev1 {
+                IndexDomain: iEst1;
+            }
+            Parameter wev1 {
+                IndexDomain: iEst1;
+            }
+            Parameter wma_chk_ev1 {
+                IndexDomain: iEst1;
+                Definition: {
+                    data {
+                    	 1 : 1.000,
+                    	 2 : 1.000,
+                    	 3 : 1.300,
+                    	 4 : 1.900,
+                    	 5 : 2.800,
+                    	 6 : 3.800,
+                    	 7 : 4.800,
+                    	 8 : 5.800,
+                    	 9 : 6.140,
+                            10 : 6.282 }
+                }
+            }
+            Parameter chk1 {
+                IndexDomain: iEst1;
+                InitialData: {
+                    data {  1 : 1.000,   2 : 1.000,   3 : 1.250,   4 : 1.750,   5 : 2.500,
+                            6 : 3.500,   7 : 4.500,   8 : 5.500,   9 : 5.875,  10 : 6.09375 }
+                }
+            }
+            Parameter iDiff1 {
+                IndexDomain: iEst1;
+                Definition: abs(ev1(iEst1)-chk1(iEst1));
+            }
+            Parameter totDiff1 {
+                Definition: sum( iEst1, iDiff1(iEst1) );
+            }
+            Parameter totDiff1a;
+            Parameter EM {
+                IndexDomain: forecasting::ems;
+            }
+            Parameter EMChk1 {
+                IndexDomain: forecasting::ems;
+            }
+            Parameter RES {
+                IndexDomain: iEst1;
+            }
+            Parameter RESChk1 {
+                IndexDomain: iEst1;
+            }
+            Procedure pr_Test_Moving_Average_Small_Working_Example {
+                Body: {
+                    forecasting::MovingAverage(dv1,ev1,card(obs1),4);
+                    aimmsunit::AssertTrue( "Expected Result", aimmsunit::compareEqual( taf::ev1, taf::chk1 ) );
+                }
+                aimmsunit::TestSuite: one;
+            }
+            Procedure pr_Test_Weighted_Moving_Average_Small_Working_Example {
+                Body: {
+                    forecasting::WeightedMovingAverage(dv1,wev1,card(obs1),Weights3,4);
+                    d_ev1(iEst1) := wma_chk_ev1(iEst1) - wev1(iEst1);
+                    aimmsunit::AssertTrue( "Expected Result", aimmsunit::compareEqual( taf::wev1, taf::wma_chk_ev1 ) );
+                }
+                aimmsunit::TestSuite: one;
+                Parameter d_ev1 {
+                    IndexDomain: iEst1;
+                }
+            }
+            Set wma_observations {
+                Index: i_obs;
+            }
+            Set wma_weightSet {
+                SubsetOf: Integers;
+                Index: ws;
+            }
+            Parameter wma_p {
+                IndexDomain: i_obs;
+            }
+            Parameter wma_q {
+                IndexDomain: i_obs;
+            }
+            Parameter wma_wghts {
+                IndexDomain: ws;
+            }
+            Parameter wma_r;
+            Parameter wma_r2;
+            Procedure pr_Test_Weighted_Moving_Average_Small_Working_Example_Pieter {
+                Body: {
+                    wma_observations := ElementRange(1,6);
+                    wma_p := data { 1: 3, 2: 8, 3 : 2, 4: 9, 5 : 10 } ;
+                    wma_weightSet := ElementRange(1,5);
+                    wma_wghts := data { 1: 0.06667, 2: 0.13333, 3 : 0.2, 4: 0.26667, 5 : 0.33333 };
+                    forecasting::WeightedMovingAverage(wma_p,wma_q,5,wma_wghts,5);
+                    wma_r := sum( (i_obs,ws)|ord(i_obs)=ord(ws),wma_wghts(ws)*wma_p(i_obs));
+                    wma_r2 := wma_q('6');
+                    aimmsunit::AssertTrue( "Expected result", wma_r = wma_r2 );
+                }
+                aimmsunit::TestSuite: one;
+            }
+            Procedure pr_Test_Moving_Average_Small_Fail_Special_Values {
+                Body: {
+                    block
+                        dv1cpy(iEst1) := dv1(iEst1);
+                        dv1cpy('1') := NA ;
+                        forecasting::MovingAverage(dv1cpy,ev1,card(obs1),4);
+                    onerror err do
+                        ! debuggerbreakpoint();
+                        msg := errh::Message( err );
+                        cnd := ( msg = "forecasting::MovingAverage(): Special values are not supported." );
+                        aimmsunit::AssertTrue( "Expected result",cnd );
+                        errh::MarkAsHandled( err );
+                    endblock ;
+                }
+                aimmsunit::TestSuite: one;
+                Parameter dv1cpy {
+                    IndexDomain: iEst1;
+                }
+                ElementParameter err {
+                    Range: errh::PendingErrors;
+                }
+                StringParameter msg;
+                Parameter cnd;
+            }
+            Procedure pr_Test_Moving_Average_Fail_Target_Small {
+                Body: {
+                    block
+                        forecasting::MovingAverage(dv1,ev1,card(obs1),40);
+                    onerror err do
+                        ! debuggerbreakpoint();
+                        msg := errh::Message( err );
+                        cnd := ( msg = "The number of averaging periods (40) should be less than the size of estimates (10) to be computed." );
+                        aimmsunit::AssertTrue( "Expected result",cnd );
+                        errh::MarkAsHandled( err );
+                    endblock ;
+                }
+                aimmsunit::TestSuite: one;
+                ElementParameter err {
+                    Range: errh::PendingErrors;
+                }
+                StringParameter msg;
+                Parameter cnd;
+            }
+            Procedure pr_Test_Weighted_Moving_Average_Fail_InvalidSumWeights {
+                Body: {
+                    block
+                        forecasting::WeightedMovingAverage(dv1,wev1,card(obs1),Weights4,4);
+                    onerror err do
+                        ! debuggerbreakpoint();
+                        msg := errh::Message( err );
+                        cnd := ( msg = "The sum of the weights should equal 1." );
+                        aimmsunit::AssertTrue( "Expected result", cnd );
+                        errh::MarkAsHandled( err );
+                    endblock ;
+                }
+                aimmsunit::TestSuite: one;
+                ElementParameter err {
+                    Range: errh::PendingErrors;
+                }
+                StringParameter msg;
+                Parameter cnd;
+            }
+            Procedure pr_Test_Moving_Average_Fail_Data_Small {
+                Body: {
+                    block
+                        forecasting::MovingAverage(dv1,ev1,card(obs1),8);
+                    onerror err do
+                        ! debuggerbreakpoint();
+                        msg := errh::Message( err );
+                        cnd := ( msg = "The number of averaging periods (8) should be less than or equal to the number of observations (7) available." );
+                        aimmsunit::AssertTrue( "Expected result",cnd );
+                        errh::MarkAsHandled( err );
+                    endblock ;
+                }
+                aimmsunit::TestSuite: one;
+                ElementParameter err {
+                    Range: errh::PendingErrors;
+                }
+                StringParameter msg;
+                Parameter cnd;
+            }
+            Procedure pr_Test_Moving_Average_Work_Check_Error_Measures {
+                Body: {
+                        EMChk1 := data { MAPE : 0.41709184,  MAD : 1.78571429,  MSE : 3.98214286 } ;
+                    
+                        RESChk1 := data { 2 : 1.00000000,  3 : 1.75000000,  4 : 2.25000000,  5 : 2.50000000,
+                                          6 : 2.50000000,  7 : 2.50000000 } ;
+                    
+                    
+                    forecasting::MovingAverageEMR(dv1,ev1,card(obs1),4,EM,RES);
+                    mad := sum( iEst1 | dv1( iEst1 ), abs( res( iEst1 ) ) ) / sum( iEst1 | dv1( iEst1 ), 1 ) ;
+                    p(iEst1) := res(iEst1) /$ dv1(iEst1) ;
+                    mape  := sum( iEst1 | dv1( iEst1 ), abs( p( iEst1 ) ) ) / sum( iEst1 | dv1( iEst1 ), 1 ) ;
+                    mse   := sum( iEst1 | dv1( iEst1 ), sqr( res( iEst1 ) ) ) / sum( iEst1 | dv1( iEst1 ), 1 ) ;
+                    
+                    totDiff1a := sum( forecasting::ems, abs( em(forecasting::ems)-emchk1(forecasting::ems) ) ) +
+                                sum( iEst1 | dv1(iEst1), abs( reschk1(iEst1) - res(iEst1) ) ) ;
+                    if abs(totDiff1a) < 1e-7 then
+                        totDiff1a := 0.0 ;
+                    endif ;
+                    mymape := em('MAPE') ;
+                }
+                aimmsunit::TestSuite: one;
+                Parameter mape;
+                Parameter mad;
+                Parameter mse;
+                Parameter p {
+                    IndexDomain: iEst1;
+                }
+            }
+        }
+        Section ExponentialSmoothing {
+            Procedure pr_Test_Simple_Exponential_Smoothing_work_small_example {
+                Body: {
+                        EMChk1 := data { MAPE : 0.42901673,  MAD : 1.87675286,  MSE : 4.49182194 } ;
+                    
+                        RESChk1 := data { 2 : 1.00000000,
+                                          3 : 1.70000000,
+                                          4 : 2.19000000,
+                                          5 : 2.53300000,
+                                          6 : 2.77310000,
+                                          7 : 2.94117000 } ;
+                    
+                    
+                    forecasting::ExponentialSmoothingEMR(dv1,ev1,card(obs1),0.3,EM,RES);
+                    mad := sum( iEst1 | dv1( iEst1 ), abs( res( iEst1 ) ) ) / sum( iEst1 | dv1( iEst1 ), 1 ) ;
+                    p(iEst1) := res(iEst1) /$ dv1(iEst1) ;
+                    mape  := sum( iEst1 | dv1( iEst1 ), abs( p( iEst1 ) ) ) / sum( iEst1 | dv1( iEst1 ), 1 ) ;
+                    mse   := sum( iEst1 | dv1( iEst1 ), sqr( res( iEst1 ) ) ) / sum( iEst1 | dv1( iEst1 ), 1 ) ;
+                    
+                    totDiff1a := sum( forecasting::ems, abs( em(forecasting::ems)-emchk1(forecasting::ems) ) ) +
+                                sum( iEst1 | dv1(iEst1), abs( reschk1(iEst1) - res(iEst1) ) ) ;
+                    if abs(totDiff1a) < 1e-7 then
+                        totDiff1a := 0.0 ;
+                    endif ;
+                    aimmsunit::AssertTrue( "Expected result",totDiff1a = 0 );
+                }
+                aimmsunit::TestSuite: one;
+                Parameter mape;
+                Parameter mad;
+                Parameter mse;
+                Parameter p {
+                    IndexDomain: iEst1;
+                }
+            }
+            DeclarationSection Globals_for_pr_Test_SES_Work_10_Oil_otext_7_1 {
+                Set alphaVerSet {
+                    Index: iAlphaVer;
+                    Parameter: e_min_sse, e_min_mse;
+                }
+                Set betaVerSet {
+                    Index: iBetaVer;
+                }
+                Set gammaVerSet {
+                    Index: iGammaVer;
+                }
+                Set compAlpaBetaVerSet {
+                    SubsetOf: (alphaVerSet, betaVerSet);
+                    Index: iCompAlphaBeta;
+                    Parameter: e_min_comp_alpha_beta_sse, e_min_comp_alpha_beta_mse;
+                    Definition: {
+                        {(iAlphaVer,iBetaVer)|1}
+                    }
+                }
+                Set compAlphaBetaGammaVerSet {
+                    SubsetOf: (alphaVerSet, betaVerSet, gammaVerSet);
+                    Index: iCompAlphaBetaGamma;
+                    Parameter: e_min_comp_alpha_beta_gamma_sse, e_min_comp_alpha_beta_gamma_mse;
+                    Definition: {
+                        {(iAlphaVer,iBetaVer,iGammaVer)|1}
+                    }
+                }
+                Parameter alphaVer {
+                    IndexDomain: iAlphaVer;
+                }
+                Parameter betaVer {
+                    IndexDomain: iBetaVer;
+                }
+                Parameter gammaVer {
+                    IndexDomain: iGammaVer;
+                }
+                Parameter sseVer {
+                    IndexDomain: iAlphaVer;
+                }
+                Parameter sseTrendVer {
+                    IndexDomain: (iAlphaVer,iBetaVer);
+                }
+                Parameter sseTrendVerComp {
+                    IndexDomain: (iCompAlphaBeta);
+                }
+                Parameter mseVer {
+                    IndexDomain: iAlphaVer;
+                }
+                Parameter mseTrendVer {
+                    IndexDomain: (iAlphaVer,iBetaVer);
+                }
+                Parameter mseTrendVerComp {
+                    IndexDomain: (iCompAlphaBeta);
+                }
+                Parameter sseVerSESChk {
+                    IndexDomain: iAlphaVer;
+                    Definition: {
+                        data{ 1  : 19001.713927,  2  : 18505.358919,  3  : 18029.855367,  4  : 17574.244837,  5  : 17137.629908,  6  : 16719.168525,
+                              7  : 16318.068915,  8  : 15933.585019,  9  : 15565.012406,  10 : 15211.684593,  11 : 14872.969772,  12 : 14548.267870,
+                              13 : 14237.007929,  14 : 13938.645769,  15 : 13652.661907,  16 : 13378.559704,  17 : 13115.863723,  18 : 12864.118265,
+                              19 : 12622.886070,  20 : 12391.747175,  21 : 12170.297891,  22 : 11958.149898,  23 : 11754.929451,  24 : 11560.276663,
+                              25 : 11373.844878,  26 : 11195.300107,  27 : 11024.320524,  28 : 10860.596018,  29 : 10703.827786,  30 : 10553.727963,
+                              31 : 10410.019291,  32 : 10272.434804,  33 : 10140.717552,  34 : 10014.620326,  35 :  9893.905411,  36 :  9778.344350,
+                              37 :  9667.717710,  38 :  9561.814864,  39 :  9460.433781,  40 :  9363.380806,  41 :  9270.470463,  42 :  9181.525244,
+                              43 :  9096.375407,  44 :  9014.858775,  45 :  8936.820533,  46 :  8862.113023,  47 :  8790.595548,  48 :  8722.134162,
+                              49 :  8656.601475,  50 :  8593.876444,  51 :  8533.844175,  52 :  8476.395719,  53 :  8421.427869,  54 :  8368.842965,
+                              55 :  8318.548688,  56 :  8270.457866,  57 :  8224.488276,  58 :  8180.562454,  59 :  8138.607497,  60 :  8098.554880,
+                              61 :  8060.340266,  62 :  8023.903327,  63 :  7989.187561,  64 :  7956.140121,  65 :  7924.711641,  66 :  7894.856068,
+                              67 :  7866.530502,  68 :  7839.695036,  69 :  7814.312599,  70 :  7790.348814,  71 :  7767.771846,  72 :  7746.552267,
+                              73 :  7726.662917,  74 :  7708.078780,  75 :  7690.776851,  76 :  7674.736022,  77 :  7659.936964,  78 :  7646.362013,
+                              79 :  7633.995071,  80 :  7622.821495,  81 :  7612.828007,  82 :  7604.002600,  83 :  7596.334446,  84 :  7589.813816,
+                              85 :  7584.431999,  86 :  7580.181222,  87 :  7577.054585,  88 :  7575.045985,  89 :  7574.150057,  90 :  7574.362111,
+                              91 :  7575.678071,  92 :  7578.094425,  93 :  7581.608171,  94 :  7586.216769,  95 :  7591.918094,  96 :  7598.710394,
+                              97 :  7606.592252,  98 :  7615.562544,  99 :  7625.620406 }
+                    }
+                }
+                Parameter mseVerSESChk {
+                    IndexDomain: iAlphaVer;
+                    Definition: {
+                        data{ 1  : 1583.476161,  2  : 1542.113243,  3  : 1502.487947,  4  : 1464.520403,  5  : 1428.135826,  6  : 1393.264044,
+                              7  : 1359.839076,  8  : 1327.798752,  9  : 1297.084367,  10 : 1267.640383,  11 : 1239.414148,  12 : 1212.355656,
+                              13 : 1186.417327,  14 : 1161.553814,  15 : 1137.721826,  16 : 1114.879975,  17 : 1092.988644,  18 : 1072.009855,
+                              19 : 1051.907172,  20 : 1032.645598,  21 : 1014.191491,  22 :  996.512491,  23 :  979.577454,  24 :  963.356389,
+                              25 :  947.820406,  26 :  932.941676,  27 :  918.693377,  28 :  905.049668,  29 :  891.985649,  30 :  879.477330,
+                              31 :  867.501608,  32 :  856.036234,  33 :  845.059796,  34 :  834.551694,  35 :  824.492118,  36 :  814.862029,
+                              37 :  805.643142,  38 :  796.817905,  39 :  788.369482,  40 :  780.281734,  41 :  772.539205,  42 :  765.127104,
+                              43 :  758.031284,  44 :  751.238231,  45 :  744.735044,  46 :  738.509419,  47 :  732.549629,  48 :  726.844514,
+                              49 :  721.383456,  50 :  716.156370,  51 :  711.153681,  52 :  706.366310,  53 :  701.785656,  54 :  697.403580,
+                              55 :  693.212391,  56 :  689.204822,  57 :  685.374023,  58 :  681.713538,  59 :  678.217291,  60 :  674.879573,
+                              61 :  671.695022,  62 :  668.658611,  63 :  665.765630,  64 :  663.011677,  65 :  660.392637,  66 :  657.904672,
+                              67 :  655.544209,  68 :  653.307920,  69 :  651.192717,  70 :  649.195735,  71 :  647.314321,  72 :  645.546022,
+                              73 :  643.888576,  74 :  642.339898,  75 :  640.898071,  76 :  639.561335,  77 :  638.328080,  78 :  637.196834,
+                              79 :  636.166256,  80 :  635.235125,  81 :  634.402334,  82 :  633.666883,  83 :  633.027870,  84 :  632.484485,
+                              85 :  632.036000,  86 :  631.681769,  87 :  631.421215,  88 :  631.253832,  89 :  631.179171,  90 :  631.196843,
+                              91 :  631.306506,  92 :  631.507869,  93 :  631.800681,  94 :  632.184731,  95 :  632.659841,  96 :  633.225866,
+                              97 :  633.882688,  98 :  634.630212,  99 :  635.468367 }
+                    }
+                }
+                Parameter sseVerTrendOilChk {
+                    IndexDomain: (iAlphaVer,iBetaVer);
+                    Definition: {
+                         data table
+                                      1             2             3             4             5             6             7             8             9
+                        !  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
+                        1   9575.224172  10234.040995  11046.819609  11867.648512  12617.532858  13262.249696  13796.071145  14230.042426  14583.757378
+                        2   9391.780953  10261.965953  11054.324706  11715.750900  12266.938535  12751.047374  13208.126861  13664.842770  14132.677061
+                        3   9133.969113   9934.060832  10635.636975  11262.952293  11855.815017  12433.532535  12991.961643  13512.142160  13970.376026
+                        4   8873.710977   9624.110311  10312.899690  10956.557437  11554.187021  12084.879557  12522.606140  12848.558021  13056.602131
+                        5   8666.443261   9383.493298  10045.316828  10637.671358  11135.997627  11518.576045  11778.405449  11925.362695  11982.010448
+                        6   8515.081679   9192.650195   9799.346382  10307.841101  10700.430069  10978.344280  11161.885695  11283.455971  11379.532222
+                        7   8426.670364   9066.834825   9624.400989  10079.332526  10434.982642  10716.543867  10962.341359  11214.040819  11509.990794
+                        8   8421.605028   9046.443291   9594.462868  10063.093444  10476.934552  10877.315820  11310.443485  11819.134968  12439.270342
+                        9   8525.227945   9173.736866   9770.741999  10332.697234  10900.199401  11523.258955  12250.407625  13123.662459  14178.056798
+                    }
+                }
+                Parameter mseVerTrendOilChk {
+                    IndexDomain: (iAlphaVer,iBetaVer);
+                    Definition: {
+                        data table
+                                     1            2            3            4            5            6            7            8            9
+                        !  -----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------
+                        1   797.935348   852.836750   920.568301   988.970709  1051.461071  1105.187475  1149.672595  1185.836869  1215.313115
+                        2   782.648413   855.163829   921.193725   976.312575  1022.244878  1062.587281  1100.677238  1138.736897  1177.723088
+                        3   761.164093   827.838403   886.303081   938.579358   987.984585  1036.127711  1082.663470  1126.011847  1164.198002
+                        4   739.475915   802.009193   859.408308   913.046453   962.848918  1007.073296  1043.550512  1070.713168  1088.050178
+                        5   722.203605   781.957775   837.109736   886.472613   927.999802   959.881337   981.533787   993.780225   998.500871
+                        6   709.590140   766.054183   816.612198   858.986758   891.702506   914.862023   930.157141   940.287998   948.294352
+                        7   702.222530   755.569569   802.033416   839.944377   869.581887   893.045322   913.528447   934.503402   959.165900
+                        8   701.800419   753.870274   799.538572   838.591120   873.077879   906.442985   942.536957   984.927914  1036.605862
+                        9   710.435662   764.478072   814.228500   861.058103   908.349950   960.271580  1020.867302  1093.638538  1181.504733
+                    }
+                }
+            }
+            Procedure pr_Test_SES_Work_10_Oil_otext_7_1 {
+                Body: {
+                    YearNumbers := data { 1996 .. 2007 };
+                    Y := data {
+                        1996 : 446.6565229,
+                        1997 : 454.4733065,
+                        1998 : 455.6629740,
+                        1999 : 423.6322388,
+                        2000 : 456.2713279,
+                        2001 : 440.5880501,
+                        2002 : 425.3325201,
+                        2003 : 485.1494479,
+                        2004 : 506.0481621,
+                        2005 : 526.7919833,
+                        2006 : 514.2688890,
+                        2007 : 494.2110193
+                    };
+                    alphaVerSet := data { 1 .. 99 };
+                    for iAlphaVer do
+                        alphaVer(ialphaVer) := (ord(ialphaVer)-0)*0.01 ;
+                        forecasting::ExponentialSmoothingEM(Y,E,12,alphaVer(iAlphaVer),errMeas);
+                        mseVer(iAlphaVer) := errMeas('MSE');
+                        sseVer(iAlphaVer) := sum( t, sqr(y(t)-E(t)));
+                    endfor ;
+                    !display { sseVer, mseVer } ;
+                    !display sseVer, mseVer ;
+                    
+                    e_min_sse := argmin( iAlphaVer, sseVer(iAlphaVer ) );
+                    e_min_mse := argmin( iAlphaVer, sseVer(iAlphaVer ) );
+                    !display e_min_sse, e_min_mse ;
+                    aimmsunit::AssertTrue( "Expected result",e_min_sse = e_min_mse );
+                    aimmsunit::AssertTrue( "Expected Result", aimmsunit::compareEqual( taf::sseVer, taf::sseVerSESChk,eps:1e-6) );
+                    aimmsunit::AssertTrue( "Expected Result", aimmsunit::compareEqual( taf::mseVer, taf::mseVerSESChk,eps:1e-6) );
+                }
+                aimmsunit::TestSuite: one;
+                Set YearNumbers {
+                    Index: t;
+                }
+                Parameter E {
+                    IndexDomain: t;
+                }
+                Parameter Y {
+                    IndexDomain: t;
+                }
+                Parameter errMeas {
+                    IndexDomain: forecasting::ems;
+                }
+            }
+            Procedure pr_Test_Trend_Work_10_Oil_otext_7_1 {
+                Body: {
+                    YearNumbers := data { 1996 .. 2007 };
+                    Y := data {
+                        1996 : 446.6565229,
+                        1997 : 454.4733065,
+                        1998 : 455.6629740,
+                        1999 : 423.6322388,
+                        2000 : 456.2713279,
+                        2001 : 440.5880501,
+                        2002 : 425.3325201,
+                        2003 : 485.1494479,
+                        2004 : 506.0481621,
+                        2005 : 526.7919833,
+                        2006 : 514.2688890,
+                        2007 : 494.2110193
+                    };
+                    alphaVerSet := data { 1 .. 9 };
+                    alphaVer(ialphaVer) := ord(ialphaVer) *0.1 + 0.05;
+                    betaVerSet := data { 1 .. 9 };
+                    betaVer(iBetaVer) := ord(iBetaVer) * 0.1 + 0.05;
+                    for iAlphaVer,iBetaVer do
+                        forecasting::ExponentialSmoothingTrendEM(Y,E,12,alphaVer(iAlphaVer),betaVer(iBetaVer),errMeas);
+                        mseTrendVer(iAlphaVer,iBetaVer) := errMeas('MSE');
+                        sseTrendVer(iAlphaVer,iBetaVer) := sum( t, sqr(y(t)-E(t)));
+                    endfor ;
+                    !display { sseTrendVer, mseTrendVer } ;
+                    !display sseTrendVer, mseTrendVer ;
+                    sseTrendVerComp(iCompAlphaBeta) := sseTrendVer(iCompAlphaBeta);
+                    mseTrendVerComp(iCompAlphaBeta) := mseTrendVer(iCompAlphaBeta);
+                    e_min_comp_alpha_beta_sse := argmin( iCompAlphaBeta, sseTrendVerComp(iCompAlphaBeta ) );
+                    e_min_comp_alpha_beta_mse := argmin( iCompAlphaBeta, mseTrendVerComp(iCompAlphaBeta ) );
+                    !display e_min_comp_alpha_beta_sse, e_min_comp_alpha_beta_mse ;
+                    aimmsunit::AssertTrue( "Expected result",e_min_comp_alpha_beta_sse = e_min_comp_alpha_beta_mse );
+                    aimmsunit::AssertTrue( "Expected Result", aimmsunit::compareEqual( taf::sseTrendVer, taf::sseVerTrendOilChk, eps:1e-6 ) );
+                    aimmsunit::AssertTrue( "Expected Result", aimmsunit::compareEqual( taf::mseTrendVer, taf::mseVerTrendOilChk, eps:1e-6 ) );
+                }
+                aimmsunit::TestSuite: one;
+                Set YearNumbers {
+                    Index: t;
+                }
+                Parameter E {
+                    IndexDomain: t;
+                }
+                Parameter Y {
+                    IndexDomain: t;
+                }
+                Parameter errMeas {
+                    IndexDomain: forecasting::ems;
+                }
+            }
+            DeclarationSection Declaration_australian_air_data {
+                Set ausAirYearNumbers {
+                    SubsetOf: Integers;
+                    Index: aayn;
+                    Definition: data { 1970 .. 2009 };
+                }
+                Parameter ausair {
+                    IndexDomain: aayn;
+                    Definition: {
+                        data {
+                        1970 :  7.318700,
+                        1971 :  7.326600,
+                        1972 :  7.795600,
+                        1973 :  9.384600,
+                        1974 : 10.664700,
+                        1975 : 11.055100,
+                        1976 : 10.864300,
+                        1977 : 11.306500,
+                        1978 : 12.122300,
+                        1979 : 13.022500,
+                        1980 : 13.648800,
+                        1981 : 13.219500,
+                        1982 : 13.187900,
+                        1983 : 12.601500,
+                        1984 : 13.236800,
+                        1985 : 14.412100,
+                        1986 : 15.497300,
+                        1987 : 16.880200,
+                        1988 : 18.816300,
+                        1989 : 15.114300,
+                        1990 : 17.553400,
+                        1991 : 21.860100,
+                        1992 : 23.886600,
+                        1993 : 26.929300,
+                        1994 : 26.888500,
+                        1995 : 28.831400,
+                        1996 : 30.075100,
+                        1997 : 30.953500,
+                        1998 : 30.185700,
+                        1999 : 31.579700,
+                        2000 : 32.577569,
+                        2001 : 33.477398,
+                        2002 : 39.021581,
+                        2003 : 41.386432,
+                        2004 : 41.596552,
+                        2005 : 44.657324,
+                        2006 : 46.951775,
+                        2007 : 48.728837,
+                        2008 : 51.488427,
+                        2009 : 50.026967 }
+                    }
+                }
+                Parameter ausAirWindow {
+                    IndexDomain: aaynt;
+                }
+                Set ausAirYearTimeset {
+                    SubsetOf: ausAirYearNumbers;
+                    Index: aaynt;
+                }
+                Set ausAirYearHistory {
+                    SubsetOf: ausAirYearTimeset;
+                    Index: aaynh;
+                }
+                Parameter ausAirTrendEsts {
+                    IndexDomain: aayn;
+                }
+                Parameter ausAirTrendEstsChk {
+                    IndexDomain: aayn;
+                    Definition: {
+                        data {
+                        1990 : 21.86010,
+                        1991 : 22.03237,
+                        1992 : 25.48462,
+                        1993 : 27.54059,
+                        1994 : 30.28813,
+                        1995 : 30.26106,
+                        1996 : 31.58122,
+                        1997 : 32.59923,
+                        1998 : 33.24224,
+                        1999 : 32.26755,
+                        2000 : 33.07776,
+                        2001 : 33.95807,
+                        2002 : 34.77708,
+                        2003 : 40.05535,
+                        2004 : 43.21586,
+                        
+                        2005 : 43.75697,
+                        2006 : 45.59352,
+                        2007 : 47.43008,
+                        2008 : 49.26663,
+                        2009 : 51.10319 } ;
+                    }
+                }
+                Parameter mseVerTrendChk {
+                    IndexDomain: (iAlphaVer,iBetaVer);
+                    Definition: {
+                        data table
+                                   1          2          3          4          5          6          7          8          9
+                        !  ---------  ---------  ---------  ---------  ---------  ---------  ---------  ---------  ---------
+                        1  75.955576  49.349362  35.582635  28.337898  24.206345  21.454199  19.271014  17.326365  15.518959
+                        2  31.670757  20.812392  16.070746  13.398230  11.453300   9.867478   8.564256   7.525320   6.728180
+                        3  17.528970  12.097808   9.622692   8.064242   6.936347   6.115240   5.538870   5.152052   4.904620
+                        4  11.507672   8.280745   6.759043   5.820596   5.204425   4.811346   4.575485   4.446992   4.389659
+                        5   8.456824   6.340705   5.359735   4.800923   4.480168   4.313980   4.249383   4.251225   4.297171
+                        6   6.750868   5.286735   4.649687   4.334068   4.196964   4.170970   4.216143   4.308241   4.432944
+                        7   5.747167   4.707259   4.306015   4.158108   4.148298   4.222554   4.350678   4.515421   4.707122
+                        8   5.151145   4.409855   4.182240   4.160772   4.250918   4.409825   4.615542   4.857454   5.131918
+                        9   4.816349   4.301680   4.214418   4.302511   4.489154   4.742937   5.051999   5.416143   5.843986
+                    }
+                }
+                Parameter sseVerTrendChk {
+                    IndexDomain: (iAlphaVer,iBetaVer);
+                    Definition: {
+                         data table
+                                     1            2            3            4            5            6            7            8            9
+                        !  -----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------
+                        1  1139.333636   740.240435   533.739530   425.068470   363.095171   321.812990   289.065211   259.895477   232.784379
+                        2   475.061358   312.185883   241.061190   200.973444   171.799501   148.012172   128.463845   112.879798   100.922704
+                        3   262.934545   181.467120   144.340375   120.963626   104.045201    91.728603    83.083052    77.280775    73.569296
+                        4   172.615074   124.211182   101.385652    87.308934    78.066377    72.170183    68.632271    66.704886    65.844884
+                        5   126.852366    95.110575    80.396030    72.013849    67.202513    64.709699    63.740742    63.768370    64.457566
+                        6   101.263027    79.301023    69.745306    65.011013    62.954457    62.564556    63.242145    64.623615    66.494159
+                        7    86.207507    70.608878    64.590229    62.371616    62.224465    63.338306    65.260175    67.731309    70.606832
+                        8    77.267175    66.147830    62.733598    62.411584    63.763771    66.147379    69.233134    72.861803    76.978769
+                        9    72.245238    64.525193    63.216269    64.537669    67.337312    71.144049    75.779992    81.242145    87.659795
+                    }
+                }
+            }
+            Procedure pr_Test_Trend_Work_ausair_otext_7_2 {
+                Body: {
+                    
+                    ausAirYearTimeset := data { 1990 .. 2009 };
+                    ausAirYearHistory := data { 1990 .. 2004 };
+                    
+                    ausAirWindow(aaynh) := ausair(aaynh);
+                    
+                    !forecasting::ExponentialSmoothingTrendEM(
+                    !   dataValues     :  ausAirWindow(aaynt),
+                    !   estimates      :  ausAirTrendEsts(aaynt),
+                    !   noObservations :  15,
+                    !   alpha          :  0.8,
+                    !   beta           :  0.2,
+                    !   ErrorMeasures  :  errMeas);
+                    !display errMeas ;
+                    forecasting::ExponentialSmoothingTrendEMR(
+                        dataValues     :  ausAirWindow(aaynt),
+                        estimates      :  ausAirTrendEsts(aaynt),
+                        noObservations :  15,
+                        alpha          :  0.8,
+                        beta           :  0.2,
+                        ErrorMeasures  :  errMeas,
+                        Residuals      :  res);
+                    resman(aaynh) := ausAirWindow(aaynh) - ausAirTrendEsts(aaynh) ;
+                    mse := sum( aaynh, sqr( resman(aaynh) ) )  ;
+                    !display mse, errMeas ;
+                    !display { ausAirWindow(aaynt), ausAirTrendEsts(aaynt), resman(aaynt), res(aaynt) };
+                    aimmsunit::AssertTrue( "Expected Result", aimmsunit::compareEqual( taf::ausAirTrendEsts, taf::ausAirTrendEstsChk, eps: 1e-5 ) );
+                }
+                aimmsunit::TestSuite: one;
+                Parameter d {
+                    IndexDomain: aaynt;
+                }
+                Parameter res {
+                    IndexDomain: aaynt;
+                }
+                Parameter resman {
+                    IndexDomain: aaynt;
+                }
+                Parameter mse;
+            }
+            Procedure pr_Test_Trend_Multi_ausair_otext_7_2 {
+                Body: {
+                    ausAirYearTimeset := data { 1990 .. 2009 };
+                    ausAirYearHistory := data { 1990 .. 2004 };
+                    
+                    ausAirWindow(aaynh) := ausair(aaynh);
+                    
+                    alphaVerSet := data { 1 .. 9 };
+                    alphaVer(ialphaVer) := ord(ialphaVer) * 0.1 + 0.05 ;
+                    betaVerSet := data { 1 .. 9 };
+                    betaVer(iBetaVer) := ord(iBetaVer) * 0.1 + 0.05 ;
+                    for iAlphaVer,iBetaVer do
+                        forecasting::ExponentialSmoothingTrendEM(
+                            dataValues     :  ausAirWindow(aaynt),
+                            estimates      :  ausAirTrendEsts(aaynt),
+                            noObservations :  15,
+                            alpha          :  alphaVer(ialphaVer),
+                            beta           :  betaVer(iBetaVer),
+                            ErrorMeasures  :  errMeas);
+                        mseTrendVer(iAlphaVer,iBetaVer) := errMeas('MSE');
+                        sseTrendVer(iAlphaVer,iBetaVer) := sum( aaynh, sqr(ausAirWindow(aaynh)-ausAirTrendEsts(aaynh)));
+                        factor_mse_sse(iAlphaVer,iBetaVer) := sseTrendVer(iAlphaVer,iBetaVer) / mseTrendVer(iAlphaVer,iBetaVer);
+                    endfor ;
+                    
+                    sseTrendVerComp(iCompAlphaBeta) := sseTrendVer(iCompAlphaBeta);
+                    mseTrendVerComp(iCompAlphaBeta) := mseTrendVer(iCompAlphaBeta);
+                    e_min_comp_alpha_beta_sse := argmin( iCompAlphaBeta, sseTrendVerComp(iCompAlphaBeta ) );
+                    e_min_comp_alpha_beta_mse := argmin( iCompAlphaBeta, mseTrendVerComp(iCompAlphaBeta ) );
+                    min_mse := min( iCompAlphaBeta, sseTrendVerComp(iCompAlphaBeta ) );
+                    min_sse := min( iCompAlphaBeta, mseTrendVerComp(iCompAlphaBeta ) );
+                    
+                    aimmsunit::AssertTrue( "Expected result", e_min_comp_alpha_beta_sse = e_min_comp_alpha_beta_mse );
+                    aimmsunit::AssertTrue( "Expected Result", aimmsunit::compareEqual( taf::sseTrendVer, taf::sseVerTrendChk,eps:1e-6 ) );
+                    aimmsunit::AssertTrue( "Expected Result", aimmsunit::compareEqual( taf::mseTrendVer, taf::mseVerTrendChk,eps:1e-6 ) );
+                }
+                aimmsunit::TestSuite: one;
+                Parameter min_mse;
+                Parameter min_sse;
+                Parameter factor_mse_sse {
+                    IndexDomain: (iAlphaVer,iBetaVer);
+                }
+            }
+            DeclarationSection Declaration_exp_smooth_trend_6 {
+                Set EMonths {
+                    Index: emon;
+                    Definition: {
+                        data { Jan, Feb, Mar,
+                               Apr, May, Jun,
+                               Jul, Aug, Sep,
+                               Oct, Nov, Dec,
+                               JanNY, FebNY, MarNY }
+                    }
+                }
+                Set Months {
+                    SubsetOf: EMonths;
+                    Index: mon;
+                    Definition: {
+                        data { Jan, Feb, Mar,
+                               Apr, May, Jun,
+                               Jul, Aug, Sep,
+                               Oct, Nov, Dec }
+                    }
+                }
+                Parameter Dem {
+                    IndexDomain: emon;
+                    Definition: {
+                        data { Jan : 37,  Feb : 40,  Mar : 41,  Apr : 37,  May : 45,  Jun : 50,
+                               Jul : 43,  Aug : 47,  Sep : 56,  Oct : 52,  Nov : 55,  Dec : 54 }
+                    }
+                }
+                Parameter ForeCastDem {
+                    IndexDomain: emon;
+                }
+                Parameter DemRes {
+                    IndexDomain: emon;
+                }
+                Parameter demreschk {
+                    IndexDomain: emon;
+                }
+            }
+            Procedure pr_Test_Exponential_Smoothing_Trend_Small_working_example {
+                Body: {
+                        EMChk1 := data { MAPE : 0.078289,  MAD : 3.531110,  MSE : 18.283165 } ;
+                    
+                        demreschk(mon) := data {
+                            jan : -3.000000,
+                            feb : -1.050000,
+                            mar : -1.917500,
+                            apr : -7.063625,
+                            may :  3.422856,
+                            jun :  5.152668,
+                            jul : -6.755326,
+                            aug : -0.696024,
+                            sep :  7.438031,
+                        oct : -2.610647,
+                        nov : -0.243388,
+                        dec : -3.023251 } ;
+                    
+                    forecasting::ExponentialSmoothingTrendEMR(dem(emon),ForeCastDem(emon),card(Months),0.5,0.3,EM,DemRes(emon));
+                    mad := sum( emon | dem( emon ), abs( demres( emon ) ) ) / sum( emon | dem( emon ), 1 ) ;
+                    p(emon) := demres(emon) /$ dem(emon) ;
+                    mape  := sum( emon | dem( emon ), abs( p( emon ) ) ) / sum( emon | dem( emon ), 1 ) ;
+                    mse   := sum( emon | dem( emon ), sqr( demres( emon ) ) ) / sum( emon | dem( emon ), 1 ) ;
+                    
+                    totDiff1a := sum( forecasting::ems, abs( em(forecasting::ems)-emchk1(forecasting::ems) ) ) +
+                                sum( emon | dem(emon), abs( demreschk(emon) - demres(emon) ) ) ;
+                    if abs(totDiff1a) < 1e-5 then
+                        totDiff1a := 0.0 ;
+                    endif ;
+                    aimmsunit::AssertTrue( "Expected result",totDiff1a = 0 );
+                    /*
+                    display { emchk1, em };
+                    display mad, mape, mse ;
+                    display {dem, ForeCastDem, DemRes, demreschk };
+                    display totdiff1a ;
+                    */
+                }
+                aimmsunit::TestSuite: one;
+                Parameter mape;
+                Parameter mad;
+                Parameter mse;
+                Parameter p {
+                    IndexDomain: emon;
+                }
+            }
+            Section ExponentialSmoothingTrendSeason {
+                Procedure pr_Test_Exponential_Smoothing_Season_Too_Few_Seasons {
+                    Body: {
+                        block
+                            locDV( dp ) := 1.0 ;
+                            errMsg := "" ;
+                            forecasting::ExponentialSmoothingTrendSeasonalityEMR(
+                            dataValues     :  locDV,
+                            estimates      :  locEst,
+                            noObservations :  7,
+                            alpha          :  0.1,
+                            beta           :  0.1,
+                            gamma          :  0.3,
+                            periodLength   :  4,
+                            ErrorMeasures  :  locEms,
+                            Residuals      :  res );
+                            aimmsunit::AssertTrue( "Don't get here", 1 = 0); ! Code should not get here.
+                        onerror err do
+                            ! debuggerbreakpoint();
+                            msg := errh::Message( err );
+                            cnd := ( msg = "forecasting::ExponentialSmoothingTrendSeasonalityEMR(): Too few complete seasons." );
+                            aimmsunit::AssertTrue( "Expected result",cnd );
+                            errh::MarkAsHandled( err );
+                        endblock ;
+                    }
+                    aimmsunit::TestSuite: one;
+                    Set DataPoints {
+                        SubsetOf: Integers;
+                        Index: dp;
+                        InitialData: ElementRange( 1 , 10 );
+                    }
+                    Parameter locDV {
+                        IndexDomain: dp;
+                    }
+                    Parameter locEst {
+                        IndexDomain: dp;
+                    }
+                    Parameter res {
+                        IndexDomain: dp;
+                    }
+                    Parameter locEms {
+                        IndexDomain: forecasting::ems;
+                    }
+                    StringParameter errMsg;
+                    ElementParameter err {
+                        Range: errh::PendingErrors;
+                    }
+                    StringParameter msg;
+                    Parameter cnd;
+                }
+                Set Quarters {
+                    Index: q;
+                }
+                Parameter observ {
+                    IndexDomain: q;
+                }
+                Parameter estim {
+                    IndexDomain: q;
+                }
+                Parameter resis {
+                    IndexDomain: q;
+                }
+                Parameter errMeas {
+                    IndexDomain: forecasting::ems;
+                }
+                Parameter alphaPar {
+                    InitialData: 0.5;
+                }
+                Parameter betaStarPar;
+                Parameter betaPar {
+                    InitialData: 0.1;
+                }
+                Parameter gammaPar {
+                    InitialData: 0.1;
+                }
+                Parameter N;
+                Parameter noObs;
+                Procedure pr_Test_Exponential_Smoothing_Season_Small_Example {
+                    Body: {
+                        Quarters := data { 2012q1, 2012q2, 2012q3, 2012q4,
+                                   2013q1, 2013q2, 2013q3, 2013q4,
+                                   2014q1, 2014q2, 2014q3, 2014q4,
+                                   2015q1, 2015q2, 2015q3, 2015q4
+                                         } ;
+                        N := 10 ;
+                        L := 4 ;
+                        while loopCount <= N do
+                            pref := formatString( "%iq", 2000 + loopCount );
+                            Quarters += ElementRange(
+                                    From    :  1,
+                                    To      :  L,
+                                    Incr    :  1,
+                                    Prefix  :  pref,
+                                    Postfix :  "",
+                                    Fill    :  1);
+                        endwhile ;
+                        noObs := N*(L-1);
+                        observ(q|ord(q)<=noObs) :=
+                                     1000 +                    ! Average
+                                     ord(q) * 100 +            ! Linear effect
+                                     400 * mod( ord(q), L ) +  ! seasonal effect
+                                     normal( 0, 10 );          ! Noise.
+                        
+                        forecasting::ExponentialSmoothingTrendSeasonalityEMR(
+                            dataValues     :  observ,
+                            estimates      :  estim,
+                            noObservations :  noObs,
+                            alpha          :  alphaPar,
+                            beta           :  betaPar,
+                            gamma          :  gammaPar,
+                            periodLength   :  L,
+                            ErrorMeasures  :  errMeas,
+                            Residuals      :  resis);
+                    }
+                    aimmsunit::TestSuite: one;
+                    Parameter L;
+                    StringParameter pref;
+                }
+                Set Dates {
+                    Index: d, d2;
+                    Parameter: d_first_his, d_last_his;
+                }
+                Set DatesWithDataAndHorizon {
+                    SubsetOf: Dates;
+                    Index: t, tp;
+                    Parameter: t_first_his, t_last_his;
+                }
+                Parameter Y {
+                    IndexDomain: d;
+                }
+                Parameter E {
+                    IndexDomain: d;
+                }
+                Parameter MA4 {
+                    IndexDomain: d;
+                    Definition: sum( s4, Y(d-s4) ) / 9;
+                }
+                Parameter TMA4 {
+                    IndexDomain: d;
+                    Definition: {
+                        Y(d-2) / 8 +
+                        Y(d-1) / 4 +
+                        Y(d)   / 4 +
+                        Y(d+1) / 4 +
+                        Y(d+2) / 8
+                    }
+                    Comment: "2 X MA(4) See section 2 http://robjhyndman.com/papers/movingaverage.pdf";
+                }
+                Parameter DT1 {
+                    IndexDomain: d;
+                    Definition: E(d)-TMA4(d);
+                }
+                Parameter DT1A {
+                    Definition: sum( d, dt1(d) ) / sum( d | dt1(d), 1 );
+                }
+                Parameter DTS {
+                    IndexDomain: d;
+                }
+                Parameter NoSeas {
+                    Definition: sum( d | Y(d), 1 ) / 4;
+                }
+                Parameter DES {
+                    IndexDomain: d | d <= StringToElement(dates,"dec-04");
+                    Definition: {
+                        Sum( d2 | d2 >= StringToElement(dates,"Mar-06") and
+                        	  d2 <= StringToElement(dates,"Dec-09") and
+                        	  mod( ord(d), 4 ) = mod( ord(d2), 4 ), DT1(d2) ) / 4
+                    }
+                }
+                Parameter DESR {
+                    IndexDomain: d;
+                    Definition: sum( d2 | ( ( ord(d2) <= 4 ) and ( mod( ord(d), 4 ) = mod( ord(d2), 4 ) ) ), DES(d2) );
+                }
+                Parameter DESA {
+                    Definition: sum( d, des(d) ) / sum( d | des(d), 1 );
+                }
+                Parameter L0;
+                Parameter ST_L {
+                    IndexDomain: d;
+                }
+                Parameter ST_B {
+                    IndexDomain: d;
+                }
+                Parameter ST_S {
+                    IndexDomain: d;
+                }
+                Parameter ST_E {
+                    IndexDomain: d;
+                }
+                Parameter ST_E2 {
+                    IndexDomain: d;
+                }
+                Parameter ST_R {
+                    IndexDomain: d;
+                    Definition: ( ST_E(d) - Y(d) ) | Y(d);
+                }
+                Parameter R {
+                    IndexDomain: d;
+                }
+                Parameter errMeas2 {
+                    IndexDomain: forecasting::ems;
+                }
+                Parameter ST_R2 {
+                    IndexDomain: d;
+                }
+                Parameter mae_cpp {
+                    Definition: sum( d | y(d), st_r2(d)^2 );
+                }
+                Parameter mae_aimms {
+                    Definition: sum( d | y(d), st_r(d)^2 );
+                }
+                ElementParameter st_ep {
+                    IndexDomain: d;
+                    Range: Dates;
+                }
+                Set SIS4 {
+                    SubsetOf: Integers;
+                    Index: s4;
+                    Definition: elementRange( -4, 4 );
+                }
+                Procedure pr_Test_Exponential_Smoothing_Season_Small_from_otext_7_5 {
+                    Body: {
+                        dates := data {
+                            Mar-04, Jun-04, Sep-04, Dec-04,
+                            Mar-05, Jun-05, Sep-05, Dec-05,
+                            Mar-06, Jun-06, Sep-06, Dec-06,
+                            Mar-07, Jun-07, Sep-07, Dec-07,
+                            Mar-08, Jun-08, Sep-08, Dec-08,
+                            Mar-09, Jun-09, Sep-09, Dec-09,
+                            Mar-10, Jun-10, Sep-10, Dec-10,
+                            Mar-11, Jun-11, Sep-11, Dec-11,
+                            Mar-12, Jun-12, Sep-12, Dec-12,
+                            Mar-13, Jun-13, Sep-13, Dec-13
+                            !,Mar-14, Jun-14, Sep-14, Dec-14,
+                            !Mar-15, Jun-15, Sep-15, Dec-15
+                            };
+                        
+                        y := data {
+                            Mar-05 : 41.7, Jun-05 : 24.0, Sep-05 : 32.3, Dec-05 : 37.3,
+                            Mar-06 : 46.2, Jun-06 : 29.3, Sep-06 : 36.5, Dec-06 : 43.0,
+                            Mar-07 : 48.9, Jun-07 : 31.2, Sep-07 : 37.7, Dec-07 : 40.4,
+                            Mar-08 : 51.2, Jun-08 : 31.9, Sep-08 : 41.0, Dec-08 : 43.8,
+                            Mar-09 : 55.6, Jun-09 : 33.9, Sep-09 : 42.1, Dec-09 : 45.6,
+                            Mar-10 : 59.8, Jun-10 : 35.2, Sep-10 : 44.3, Dec-10 : 47.9
+                        };
+                        noObs := 24 ;
+                        !alphaPar := 0.9 ;
+                        !betaPar  := 0.1 ;
+                        !gammaPar := 0.01 ;
+                        DatesWithDataAndHorizon := { d | d >= 'Mar-05' } ;
+                        forecasting::ExponentialSmoothingTrendSeasonalityEMR(
+                            dataValues     :  y(t),
+                            estimates      :  E(t),
+                            noObservations :  noObs,
+                            alpha          :  alphaPar,
+                            beta           :  betaPar,
+                            gamma          :  gammaPar,
+                            periodLength   :  4,
+                            ErrorMeasures  :  errMeas,
+                            Residuals      :  R(t));
+                        
+                        !display {Y(t),E(T),R(T)}    ;
+                    }
+                    aimmsunit::TestSuite: one;
+                }
+                Procedure pr_Detrend_Setup {
+                    Body: {
+                        dates := data {
+                            Mar-04, Jun-04, Sep-04, Dec-04,
+                            Mar-05, Jun-05, Sep-05, Dec-05,
+                            Mar-06, Jun-06, Sep-06, Dec-06,
+                            Mar-07, Jun-07, Sep-07, Dec-07,
+                            Mar-08, Jun-08, Sep-08, Dec-08,
+                            Mar-09, Jun-09, Sep-09, Dec-09,
+                            Mar-10, Jun-10, Sep-10, Dec-10,
+                            Mar-11, Jun-11, Sep-11, Dec-11,
+                            Mar-12, Jun-12, Sep-12, Dec-12,
+                            Mar-13, Jun-13, Sep-13, Dec-13
+                            ,Mar-14, Jun-14, Sep-14, Dec-14,
+                            Mar-15, Jun-15, Sep-15, Dec-15
+                            };
+                        y := data {
+                            Mar-05 : 41.727458, Jun-05 : 24.041850, Sep-05 : 32.328103, Dec-05 : 37.328708,
+                            Mar-06 : 46.213153, Jun-06 : 29.346326, Sep-06 : 36.482910, Dec-06 : 42.977719,
+                            Mar-07 : 48.901525, Jun-07 : 31.180221, Sep-07 : 37.717881, Dec-07 : 40.420211,
+                            Mar-08 : 51.206863, Jun-08 : 31.887228, Sep-08 : 40.978263, Dec-08 : 43.772491,
+                            Mar-09 : 55.558567, Jun-09 : 33.850915, Sep-09 : 42.076383, Dec-09 : 45.642292,
+                            Mar-10 : 59.766780, Jun-10 : 35.191877, Sep-10 : 44.319737, Dec-10 : 47.913736
+                        };
+                        !DatesWithDataAndHorizon := dates ;
+                        DatesWithDataAndHorizon := { d | Y(d) or exists( d2 | Y(d2) and d2 < d ) } ;
+                    }
+                }
+                Procedure pr_Test_Detrend {
+                    Body: {
+                        pr_Detrend_setup ;
+                        
+                        E(d) := Y(d);
+                        d_first_his := stringToElement(dates,"mar-05") ; t_first_his := d_first_his ;
+                        d_last_his := stringToElement(dates,"dec-10") ;  t_last_his := d_last_his ;
+                        
+                        ST_B(d_first_his-1) := ( ( Y(d_last_his) - DESR(d_last_his) ) - ( Y(d_first_his) - DESR(d_first_his) ) ) / 24 ;
+                        ST_L(d_first_his-1) := Y(d_first_his) - DESR(d_first_his); ! - ST_B(d_first_his-1) ;
+                        
+                        ST_S(d) | (d < d_first_his ) := DESR(d) ;
+                        
+                        betaStarPar := betaPar / alphaPar ;
+                        m := 4 ;
+                        
+                        ! Smooth
+                        for d | d >= d_first_his and d <= d_last_his do
+                            ST_L(d) := alphaPar * ( Y(d) - ST_S(d-m) ) + ( 1 - alphaPar) * ( ST_L(d-1) + ST_B(d-1) );
+                            ST_B(d) := betaStarPar * ( ST_L(d) - ST_L(d-1) ) + ( 1- betaStarPar ) * ST_B(d-1) ;
+                            ST_S(d) := gammaPar * ( Y(d) - ST_L(d-1) - ST_B(d-1) ) + ( 1 - gammaPar ) * ST_S( d - m );
+                        endfor ;
+                        
+                        ! Fit
+                        ST_E(d | ( d <= d_last_his ) and ( d >= d_first_his ) ) := ST_L(d-1) + ST_B(d-1) + ST_S(d-(m+0)) ;
+                        
+                        ! Forecast
+                        ST_E(t | ord(t,dates) > ord(d_last_his,dates) ) :=
+                            ST_L(d_last_his) +
+                                ( t - t_last_his ) * ST_B( d_last_his ) + ! h = ( t - e_last_his )
+                                ST_S( t - ( ( floor( ( t - t_last_his ) / m ) + 1 ) * m ) ) ;
+                        st_ep(d) :=
+                        	if ord(d,dates) > ord(t_last_his,dates) then
+                        		d - ( ( floor( ( ( d - d_last_his ) - 1 ) / m ) + 1 ) * m )
+                        	else
+                        		d - m
+                        	endif ;
+                    }
+                    aimmsunit::TestSuite: one;
+                    Parameter m;
+                }
+                Procedure pr_Test_Detrend_via_CPP {
+                    Body: {
+                        pr_Detrend_Setup ;
+                        
+                        forecasting::ExponentialSmoothingTrendSeasonalityEMR(
+                        	dataValues     :  Y(t),
+                        	estimates      :  st_e2(t),
+                        	noObservations :  card(Y),
+                        	alpha          :  alphaPar,
+                        	beta           :  betaPar,
+                        	gamma          :  gammaPar,
+                        	periodLength   :  4,
+                        	ErrorMeasures  :  errMeas2,
+                        	Residuals      :  ST_R2(t));
+                        
+                        
+                           ! (Y(t),st_e(t),card(Y),0.5,0.3,EM,DemRes(emon));
+                        !display dates ;
+                        !display DatesWithDataAndHorizon ;
+                        !display { Y, st_e2 };
+                    }
+                    aimmsunit::TestSuite: one;
+                    Parameter m;
+                }
+                Procedure pr_Detrend_Clear {
+                    Body: {
+                        empty st_e, st_e2 ;
+                    }
+                }
+                Parameter mseSeasonVer {
+                    IndexDomain: (iAlphaVer,iBetaVer,iGammaVer);
+                }
+                Parameter sseSeasonVer {
+                    IndexDomain: (iAlphaVer,iBetaVer,iGammaVer);
+                }
+                Parameter mseSeasonVerComp {
+                    IndexDomain: iCompAlphaBetaGamma;
+                }
+                Parameter sseSeasonVerComp {
+                    IndexDomain: iCompAlphaBetaGamma;
+                }
+                Procedure pr_Test_Exponential_Smoothing_Season_Multi_from_otext_7_5 {
+                    Body: {
+                        dates := data {
+                            Mar-04, Jun-04, Sep-04, Dec-04,
+                            Mar-05, Jun-05, Sep-05, Dec-05,
+                            Mar-06, Jun-06, Sep-06, Dec-06,
+                            Mar-07, Jun-07, Sep-07, Dec-07,
+                            Mar-08, Jun-08, Sep-08, Dec-08,
+                            Mar-09, Jun-09, Sep-09, Dec-09,
+                            Mar-10, Jun-10, Sep-10, Dec-10,
+                            Mar-11, Jun-11, Sep-11, Dec-11,
+                            Mar-12, Jun-12, Sep-12, Dec-12,
+                            Mar-13, Jun-13, Sep-13, Dec-13
+                            !,Mar-14, Jun-14, Sep-14, Dec-14,
+                            !Mar-15, Jun-15, Sep-15, Dec-15
+                            };
+                        
+                        y := data {
+                            Mar-05 : 41.7, Jun-05 : 24.0, Sep-05 : 32.3, Dec-05 : 37.3,
+                            Mar-06 : 46.2, Jun-06 : 29.3, Sep-06 : 36.5, Dec-06 : 43.0,
+                            Mar-07 : 48.9, Jun-07 : 31.2, Sep-07 : 37.7, Dec-07 : 40.4,
+                            Mar-08 : 51.2, Jun-08 : 31.9, Sep-08 : 41.0, Dec-08 : 43.8,
+                            Mar-09 : 55.6, Jun-09 : 33.9, Sep-09 : 42.1, Dec-09 : 45.6,
+                            Mar-10 : 59.8, Jun-10 : 35.2, Sep-10 : 44.3, Dec-10 : 47.9
+                        };
+                        noObs := 24 ;
+                        !alphaPar := 0.9 ;
+                        !betaPar  := 0.1 ;
+                        !gammaPar := 0.01 ;
+                        DatesWithDataAndHorizon := { d | d >= 'Mar-05' } ;
+                        alphaVerSet := data { 1 .. 9 };
+                        alphaVer(ialphaVer) := ord(ialphaVer) * 0.1 + 0.05 ;
+                        betaVerSet := data { 1 .. 9 };
+                        betaVer(iBetaVer) := ord(iBetaVer) * 0.1 + 0.05 ;
+                        gammaVerSet := data { 1 .. 9 };
+                        gammaVer(iGammaVer) := ord(iGammaVer) * 0.1 + 0.05 ;
+                        for iAlphaVer,iBetaVer,iGammaVer do
+                            forecasting::ExponentialSmoothingTrendSeasonalityEMR(
+                                dataValues     :  y(t),
+                                estimates      :  E(t),
+                                noObservations :  noObs,
+                                alpha          :  alphaVer(ialphaVer),
+                                beta           :  betaVer(iBetaVer),
+                                gamma          :  gammaVer(iGammaVer),
+                                periodLength   :  4,
+                                ErrorMeasures  :  errMeas,
+                                Residuals      :  R(t));
+                            mseSeasonVer(iAlphaVer,iBetaVer,iGammaVer) := errMeas('MSE');
+                            sseSeasonVer(iAlphaVer,iBetaVer,iGammaVer) := sum( t | ord(t) <= noObs, sqr(Y(t)-E(t)));
+                        endfor ;
+                        !display { mseSeasonVer, sseSeasonVer } ;
+                        
+                        sseSeasonVerComp(iCompAlphaBetaGamma) := sseSeasonVer(iCompAlphaBetaGamma);
+                        mseSeasonVerComp(iCompAlphaBetaGamma) := mseSeasonVer(iCompAlphaBetaGamma);
+                        e_min_comp_alpha_beta_gamma_sse := argmin( iCompAlphaBetaGamma, sseSeasonVerComp(iCompAlphaBetaGamma ) );
+                        e_min_comp_alpha_beta_gamma_mse := argmin( iCompAlphaBetaGamma, mseSeasonVerComp(iCompAlphaBetaGamma ) );
+                        
+                        !display e_min_comp_alpha_beta_gamma_sse, e_min_comp_alpha_beta_gamma_mse ;
+                    }
+                    aimmsunit::TestSuite: one;
+                }
+                Section Test_Tuning_Exponential_Smoothing_Parameters {
+                    Section SES {
+                        Procedure pr_Test_Tune_SES_Work_Simple {
+                            Body: {
+                                forecasting::ExponentialSmoothingTune(
+                                    dataValues     :  Y,
+                                    noObservations :  10,
+                                    alpha          :  alpha,
+                                    alphaLow       :  0.01,
+                                    alphaUpp       :  0.99);
+                                aimmsunit::AssertTrue( "Expected result",abs( alpha - 0.84055 ) <= 0.0001 );
+                            }
+                            aimmsunit::TestSuite: one;
+                            Parameter Y {
+                                IndexDomain: dc;
+                                InitialData: {
+                                    data { 01-01 : 20.4, 01-02 : 19.6, 01-03 : 18.8, 01-04 : 18.8, 01-05 : 19.0,
+                                           01-06 : 19.6, 01-07 : 21.7, 01-08 : 20.3, 01-09 : 21.6, 01-10 : 22.4 }
+                                }
+                            }
+                            Parameter alpha;
+                        }
+                        Procedure pr_Test_Tune_SES_Work_otext_7_1 {
+                            Body: {
+                                YearNumbers := data { 1996 .. 2007 };
+                                Y := data {
+                                1996 : 446.6565229,
+                                1997 : 454.4733065,
+                                1998 : 455.6629740,
+                                1999 : 423.6322388,
+                                2000 : 456.2713279,
+                                2001 : 440.5880501,
+                                2002 : 425.3325201,
+                                2003 : 485.1494479,
+                                2004 : 506.0481621,
+                                2005 : 526.7919833,
+                                2006 : 514.2688890,
+                                2007 : 494.2110193
+                                 };
+                                forecasting::ExponentialSmoothingTune(
+                                    dataValues     :  Y,
+                                    noObservations :  12,
+                                    alpha          :  alpha,
+                                    alphaLow       :  0.01,
+                                    alphaUpp       :  0.99);
+                                
+                                aimmsunit::AssertTrue( "Expected result",abs( alpha - 0.892 ) <= 0.001 );
+                            }
+                            aimmsunit::TestSuite: one;
+                            Set YearNumbers {
+                                Index: t;
+                            }
+                            Parameter Y {
+                                IndexDomain: t;
+                            }
+                            Parameter alpha;
+                        }
+                        Procedure pr_Test_Tune_SES_Work_Very_Simple {
+                            Body: {
+                                forecasting::ExponentialSmoothingTune(
+                                    dataValues     :  Y,
+                                    noObservations :  5,
+                                    alpha          :  alpha,
+                                    alphaLow       :  0.01,
+                                    alphaUpp       :  0.99);
+                                aimmsunit::AssertTrue( "Expected result",abs( alpha - 0.99 ) <= 0.01 );
+                            }
+                            aimmsunit::TestSuite: one;
+                            Parameter Y {
+                                IndexDomain: dc;
+                                InitialData: data { 01-01 : 20, 01-02 : 21, 01-03 : 21, 01-04 : 21, 01-05 : 21.2  };
+                            }
+                            Parameter alpha;
+                        }
+                        Procedure pr_Test_Tune_SES_Work_Fibo {
+                            Body: {
+                                forecasting::ExponentialSmoothingTune(
+                                    dataValues     :  Y,
+                                    noObservations :  9,
+                                    alpha          :  alpha,
+                                    alphaLow       :  0.01,
+                                    alphaUpp       :  0.99);
+                                aimmsunit::AssertTrue( "Expected result",alpha = 0.99 );
+                            }
+                            aimmsunit::TestSuite: one;
+                            Parameter Y {
+                                IndexDomain: dc;
+                                InitialData: data { 01-01 : 1, 01-02 : 1, 01-03 : 2, 01-04 : 3, 01-05 : 5, 01-06 : 8, 01-07 : 13, 01-08 : 21, 01-09 : 34 };
+                            }
+                            Parameter alpha;
+                        }
+                    }
+                    Section TES {
+                        Procedure pr_Test_Tune_TES_Work_otext_7_1 {
+                            Body: {
+                                YearNumbers := data { 1996 .. 2007 };
+                                Y := data {
+                                1996 : 446.6565229,
+                                1997 : 454.4733065,
+                                1998 : 455.6629740,
+                                1999 : 423.6322388,
+                                2000 : 456.2713279,
+                                2001 : 440.5880501,
+                                2002 : 425.3325201,
+                                2003 : 485.1494479,
+                                2004 : 506.0481621,
+                                2005 : 526.7919833,
+                                2006 : 514.2688890,
+                                2007 : 494.2110193
+                                 };
+                                
+                                ! Starting point from pr_Test_Trend_Multi_ausair_otext_7_2
+                                alpha := 0.75 ;
+                                beta  := 0.55 ;
+                                
+                                !DebuggerBreakpoint();
+                                forecasting::ExponentialSmoothingTrendTune(
+                                    dataValues     :  Y,
+                                    noObservations :  12,
+                                    alpha          :  alpha,
+                                    beta           :  beta,
+                                    alphaLow       :  0.01,
+                                    alphaUpp       :  0.99,
+                                    betaLow        :  0.01,
+                                    betaUpp        :  0.99);
+                                
+                                !aimmsunit::AssertTrue( abs( alpha - 0.75 ) <= 0.1 ); ! Around 0.75?
+                                !aimmsunit::AssertTrue( abs(  beta - 0.55 ) <= 0.1 ); ! Around 0.55?
+                                
+                                !display alpha, beta ;
+                            }
+                            aimmsunit::TestSuite: one;
+                            Set YearNumbers {
+                                Index: t;
+                            }
+                            Parameter Y {
+                                IndexDomain: t;
+                            }
+                            Parameter alpha;
+                            Parameter beta;
+                        }
+                        Procedure pr_Test_Tune_TES_Work_ausair_otext_7_2 {
+                            Body: {
+                                ausAirYearTimeset := data { 1990 .. 2009 };
+                                ausAirYearHistory := data { 1990 .. 2004 };
+                                
+                                ausAirWindow(aaynh) := ausair(aaynh);
+                                
+                                ! Starting point from pr_Test_Trend_Multi_ausair_otext_7_2
+                                alpha := 0.75 ;
+                                beta  := 0.55 ;
+                                
+                                !DebuggerBreakpoint();
+                                forecasting::ExponentialSmoothingTrendTune(
+                                    dataValues     :  ausAirWindow(aaynt),
+                                    noObservations :  15,
+                                    alpha          :  alpha,
+                                    beta           :  beta,
+                                    alphaLow       :  0.01,
+                                    alphaUpp       :  0.99,
+                                    betaLow        :  0.01,
+                                    betaUpp        :  0.99);
+                                
+                                aimmsunit::AssertTrue( "Expected result",abs( alpha - 0.7713 ) <= 0.001 ); ! Around 0.75?
+                                aimmsunit::AssertTrue( "Expected result",abs(  beta - 0.3753 ) <= 0.001 ); ! Around 0.55?
+                                
+                                !display alpha, beta ;
+                            }
+                            aimmsunit::TestSuite: one;
+                            Set YearNumbers {
+                                Index: t;
+                            }
+                            Parameter Y {
+                                IndexDomain: t;
+                            }
+                            Parameter alpha;
+                            Parameter beta;
+                        }
+                    }
+                    Section ESS {
+                        Procedure pr_Test_Tune_ESS_Work_otext_7_5 {
+                            Body: {
+                                pr_Detrend_Setup ;
+                                SelectedDates := { d | Y(d) } ;
+                                forecasting::ExponentialSmoothingTrendSeasonalityTune(
+                                    dataValues     :  y(t),
+                                    noObservations :  card(selectedDates),
+                                    alpha          :  alpha,
+                                    beta           :  beta,
+                                    gamma          :  gamma,
+                                    periodLength   :  4,
+                                    alphaLow       :  0.01,
+                                    alphaUpp       :  0.99,
+                                    betaLow        :  0.01,
+                                    betaUpp        :  0.99,
+                                    gammaLow       :  0.01,
+                                    gammaUpp       :  0.99);
+                                
+                                !display alpha, beta, gamma ;
+                            }
+                            aimmsunit::TestSuite: one;
+                            Set SelectedDates {
+                                SubsetOf: Dates;
+                                Index: t;
+                            }
+                            Parameter alpha;
+                            Parameter beta;
+                            Parameter gamma;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    Procedure LibraryInitialization;
+    Procedure LibraryTermination {
+        Body: {
+            return 1 ;
+        }
+    }
+}

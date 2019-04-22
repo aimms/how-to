@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ExportSettings>
+	<ExcludedFile>_Example Style Library\Example Style Library.amb</ExcludedFile>
+	<ExcludedFile>_Example Style Library\Example Style Library.libprj</ExcludedFile>
+	<ExcludedFile>AimmsPROGUI\AimmsPROGUI.aim</ExcludedFile>
+	<ExcludedFile>AimmsPROGUI\AimmsPROGUI.libprj</ExcludedFile>
+	<ExcludedFile>AimmsPROLibrary\AimmsPRO-%AIMMSVERSION%.aim</ExcludedFile>
+	<ExcludedFile>AimmsPROLibrary\AimmsPRO-3.11.aim</ExcludedFile>
+	<ExcludedFile>AimmsPROLibrary\AimmsPRO-3.12.aim</ExcludedFile>
+	<ExcludedFile>AimmsPROLibrary\AimmsPRO-3.13.aim</ExcludedFile>
+	<ExcludedFile>AimmsPROLibrary\AimmsPRO-3.14.aim</ExcludedFile>
+	<ExcludedFile>AimmsPROLibrary\AimmsPROLibrary.aim</ExcludedFile>
+	<ExcludedFile>AimmsPROLibrary\AimmsPROLibrary.libprj</ExcludedFile>
+	<ExcludedFile>backup</ExcludedFile>
+	<ExcludedFile>log</ExcludedFile>
+	<ExcludedFile>WebUI</ExcludedFile>
+	<ExcludedFile>aimms.sig</ExcludedFile>
+	<ExcludedFile>debug.log</ExcludedFile>
+	<ExcludedFile>Example dataset for Statistics.msg</ExcludedFile>
+	<ExcludedFile>memory.log</ExcludedFile>
+	<ExcludedFile>WebUI - CSS.PNG</ExcludedFile>
+	<ExcludedFile>WebUI.PNG</ExcludedFile>
+</ExportSettings>

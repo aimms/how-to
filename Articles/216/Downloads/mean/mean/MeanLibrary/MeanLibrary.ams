@@ -1,0 +1,69 @@
+## ams_version=1.0
+
+LibraryModule MeanLibrary {
+    Prefix: ml;
+    Interface: MeanLibrary;
+    Function SelfDefinedMean {
+        Arguments: (p);
+        Body: {
+            p_NoElements := card(S);
+            if p_NoElements then
+            	SelfDefinedMean := sum( i, p(i) ) / p_NoElements;
+            else
+            	raise error "The average of an empty list cannot be computed." ;
+            	SelfDefinedMean := 0 ;
+            endif ;
+        }
+        Comment: {
+            "Dummy implementation:
+                raise error \"Not implemented yet\";
+                SelfDefinedMean := 0 ;
+            
+            First implementation:
+            	if card(p) then
+            		SelfDefinedMean := sum( i, p(i) ) / card( p );
+            	else
+            		raise error \"The average of an empty list cannot be computed.\" ;
+            		SelfDefinedMean := 0 ;
+            	endif ;"
+        }
+        Parameter p {
+            IndexDomain: i;
+            Property: Input;
+        }
+        Set S {
+            Index: i;
+        }
+        Parameter p_NoElements;
+    }
+    Procedure LibraryInitialization {
+        Comment: "Add initialization statements here that do not require any other library being initialized already.";
+    }
+    Procedure PostLibraryInitialization {
+        Comment: {
+            "Add initialization statements here that require another library to be initialized already,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure PreLibraryTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all other libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure LibraryTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require other libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

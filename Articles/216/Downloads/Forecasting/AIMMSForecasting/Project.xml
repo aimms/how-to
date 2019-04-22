@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<LibraryProject AimmsVersion="4.42.2.1106 unicode x64" ProjectUUID="4E687D7C-4E77-4366-B833-5C9956EA9BDF">
+	<ModelFileName>ForecastingPredictive.ams</ModelFileName>
+	<Prefix>forecasting</Prefix>
+	<DisplayName>AimmsForecasting</DisplayName>
+</LibraryProject>

@@ -27,14 +27,9 @@ Model Main_ReadingExcelData {
     Procedure pr_ReadUsingAXLL {
         Arguments: (sp_dataFilename);
         Body: {
-            axll::CloseAllWorkBooks();
-            
-            empty p_price ;
+            empty p_price, p_maxavail, p_amtPerPackage ;
             axll::OpenWorkBook( sp_dataFilename );
             axll::SelectSheet("Sheet1");
-            !axll::GetNamedRanges(
-            !	RangeNames :  s_RangeNames, 
-            !	SheetName  :  0);
             
             axll::ReadList(
             	IdentifierReference    :  p_price, 
@@ -65,6 +60,43 @@ Model Main_ReadingExcelData {
             Property: Input;
         }
     }
+    Procedure pr_ReadUsingSpreadsheet {
+        Arguments: (sp_dataFilename);
+        Body: {
+            empty p_price, p_maxavail, p_amtPerPackage ;
+            
+            spreadsheet::RetrieveTable(
+            	workbook                :  sp_dataFilename,
+            	parameter               :  p_price, 
+            	DataRange               :  "Price",     
+            	RowsRange               :  "colrange",  
+            	sheet                   :  "Sheet1",
+            	automaticallyExtendSets :  1 );
+            
+            spreadsheet::RetrieveTable(
+            	workbook                :  sp_dataFilename,
+            	parameter               :  p_maxAvail, 
+            	DataRange               :  "maxAvail",     
+            	RowsRange               :  "colrange",  
+            	sheet                   :  "Sheet1",
+            	automaticallyExtendSets :  1 );
+            
+            spreadsheet::RetrieveTable(
+            	workbook                :  sp_dataFilename,
+            	parameter               :  p_amtPerPackage, 
+            	DataRange               :  "amtPerPackage",     
+            	RowsRange               :  "colrange",  
+            	sheet                   :  "Sheet1",
+            	automaticallyExtendSets :  1 );
+            
+            spreadsheet::CloseWorkBook(sp_dataFilename,0);
+            
+            display { p_price, p_maxAvail, p_amtPerPackage };
+        }
+        StringParameter sp_dataFilename {
+            Property: Input;
+        }
+    }
     Procedure pr_ReadUsingDatalink {
         Arguments: (sp_dataFilename);
         Body: {
@@ -74,18 +106,9 @@ Model Main_ReadingExcelData {
                ( 'Sheet1', 's_SKU'           , 1, 1 ) : "SKU",
                ( 'Sheet1', 's_Vendors'       , 2, 2 ) : "Vendor",
                ( 'Sheet1', 'p_price'         , 3, 0 ) : "Price",
-               ( 'Sheet1', 'p_maxavail'      , 5, 0 ) : "maxAvail",
-               ( 'Sheet1', 'p_amtPerPackage' , 6, 0 ) : "amtPerPackage"
+               ( 'Sheet1', 'p_maxavail'      , 4, 0 ) : "maxAvail",
+               ( 'Sheet1', 'p_amtPerPackage' , 5, 0 ) : "amtPerPackage"
             };
-            
-            ! for data2
-            !SKUMapping(dl::dt,dl::idn,dl::cn,dl::dn) := data {
-            !   ( 'Sheet1', 's_SKU'           , 1, 1 ) : "SKU",
-            !   ( 'Sheet1', 's_Vendors'       , 2, 2 ) : "Vendor",
-            !   ( 'Sheet1', 'p_price'         , 5, 0 ) : "Price",
-            !   ( 'Sheet1', 'p_maxavail'      , 4, 0 ) : "maxAvail",
-            !   ( 'Sheet1', 'p_amtPerPackage' , 3, 0 ) : "amtPerPackage"
-            !};
             
             dl::RemoveDataSourceMapping("SKUData");
             dl::AddDataSourceMapping(
@@ -95,11 +118,12 @@ Model Main_ReadingExcelData {
             	TableAttribute :  dl::TableAttributesEmpty, 
             	ColAttribute   :  dl::ColAttributeEmpty);
             sp_readAttribute :=  { 'DataProvider': xlsprovider::DataLink };
-            !DebuggerBreakpoint();
             dl::DataRead(
             	DataSource     :  sp_dataFilename, 
             	MapName        :  "SKUData", 
             	ReadAttributes :  sp_readAttribute);
+            
+            display { p_price, p_maxAvail, p_amtPerPackage };
         }
         StringParameter sp_dataFilename {
             Property: Input;
@@ -117,10 +141,16 @@ Model Main_ReadingExcelData {
             pr_ReadUsingAXLL( "data\\data2.xlsx");
         }
     }
+    Procedure pr_ReadAllUsingSpreadsheet {
+        Body: {
+            pr_ReadUsingSpreadsheet( "data\\data1.xlsx");
+            pr_ReadUsingSpreadsheet( "data\\data2.xlsx");
+        }
+    }
     Procedure pr_ReadAllUsingDatalink {
         Body: {
             pr_ReadUsingDatalink( "data\\data1.xlsx");
-            !pr_ReadUsingDatalink( "data\\data2.xlsx");
+            pr_ReadUsingDatalink( "data\\data2.xlsx");
         }
     }
     Section Attic {

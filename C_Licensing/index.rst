@@ -12,6 +12,15 @@
 Getting Started
 ========================
 
+.. meta::
+   :description: Help and support with installation and licensing.
+
+.. image:: ../Images/getting-started.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS Getting Started Help & Support
+
+These topics provide fundamentals about using AIMMS. Learn about terminology, shortcuts, and basic set-up. You will also find licensing help here.
 
 .. toctree::
    :maxdepth: 1

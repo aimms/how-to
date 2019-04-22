@@ -1,0 +1,78 @@
+/* SCSS generator:
+
+@each $index, $value in (
+0: '#9e74b0',
+1: '#7e71b0',
+2: '#726fb0',
+3: '#6a7ab8',
+4: '#6096ce',
+5: '#5daad7',
+6: '#54bbbc',
+7: '#6fbfa6',
+8: '#a3c67b',
+9: '#93c262',
+10: '#82be4a',
+11: '#f59651', 
+12: '#f38357',
+13: '#f0725e',
+14: '#ef6265',
+15: '#ed7d89',
+16: '#ea6f8e',
+17: '#e96193',
+18: '#d964a4',
+19: '#b2649a',
+20: '#a36396',
+21: '#a06ca5',
+) {
+  .Ord#{$index} {
+   background:#{$value};fill:#{$value};stroke:#{$value};
+  }
+} 
+*/
+ 
+/*
+ 
+.sampEst3 {
+  color:green;
+}
+.point.CP1Sel {
+  background:#0000ff;
+}
+.point.ma3_CP1_Sel {
+  background:#00FF00;
+}
+.point.ma3_CP1_Sel {
+  color:#00FF00;
+}
+.line.ma3_CP1_Sel {
+  color:#00FF00;
+}
+
+.line.CP1Sel {
+    stroke-width:0;
+}
+
+.sampEst3 {
+    color:green;
+}
+
+.point.sampEst3 {
+  background: #008000 ;
+  fill: #008000;
+  stroke: #008000;
+}
+.line.sampEst3 {
+   color: #008000 ;
+   background: #008000 ;
+}
+.point.sampDat {
+    background: blue ;
+}
+
+.line.ma3_CP1_Sel {
+	stroke-width: 0;
+}
+*/
+.line .sampDat {
+	stroke-width: 0;
+}

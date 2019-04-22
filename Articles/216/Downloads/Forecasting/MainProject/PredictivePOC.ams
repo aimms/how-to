@@ -1,0 +1,739 @@
+## ams_version=1.0
+
+Model Main_PredictivePOC {
+    Quantity SI_Time_Duration {
+        BaseUnit: day;
+        Conversions: s -> day : # -> # / 86400;
+        Comment: "Expresses the value for the duration of periods.";
+    }
+    Quantity SI_Unitless {
+        BaseUnit: -;
+        Conversions: % -> - : # -> # / 100;
+        Comment: "Expresses a dimensionless value.";
+    }
+    Set EstimationMethodsUsed {
+        Index: emu;
+        Definition: {
+            data { MovingAverage5 ! 5 day moving average.
+                 }
+        }
+    }
+    Parameter pi {
+        Property: NoSave;
+        Definition: 3.142857142857;
+    }
+    StringParameter strPar {
+        InitialData: "Hi Wu";
+    }
+    Parameter myMAPE {
+        Unit: %;
+    }
+    Set setje {
+        Index: sj;
+    }
+    Set PredictivePOCCaseContentType {
+        SubsetOf: AllIdentifiers;
+    }
+    Procedure MainInitialization {
+        Body: {
+            PredictivePOCCaseContentType := 'ArtificialDataPreparation' + 'EnergyData' + 'TestNo1' ;
+            AllCaseFileContentTypes := data { PredictivePOCCaseContentType } ;
+            CurrentCaseFileContentType := 'PredictivePOCCaseContentType' ;
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            !Test1 ;
+            !taf::pr_Test_Tune_TES_Work_ausair_otext_7_2();
+        }
+    }
+    Procedure Procedure_1 {
+        Body: {
+            !aimmsunit::DetermineTestSuites();
+            !aimmsunit::RunTestSuite('one');
+            
+            EnvironmentSetString("aimmsunit::RunAllTests","1");
+            aimmsunit::TestRunner;
+        }
+    }
+    Section ArtificialDataPreparation {
+        DeclarationSection DataDeclaration {
+            Parameter noProducts;
+            Set productSet {
+                SubsetOf: Integers;
+                Index: pr;
+            }
+            Parameter noRegions;
+            Set regionSet {
+                Index: r;
+            }
+            StringParameter calBeg;
+            StringParameter calEnd;
+            Calendar dayCalendar {
+                Index: d;
+                Parameter: e_d;
+                Unit: day;
+                BeginDate: "2014-01-01";
+                EndDate: "2014-02-14";
+                TimeslotFormat: "%m-%d";
+            }
+            Parameter noObservations {
+                InitialData: 365;
+            }
+            Set observedDays {
+                SubsetOf: dayCalendar;
+                Index: od;
+                Definition: {
+                    { d | ord(d) <= noObservations }
+                }
+            }
+            Parameter sampleDataSet {
+                IndexDomain: (pr,r,d);
+            }
+            Parameter estimateDataSet {
+                IndexDomain: (pr,r,d,emu);
+            }
+            Set usedDistributions {
+                Index: ud;
+                Parameter: e_ud;
+                Property: NoSave;
+                Definition: {
+                    data { Binomial, HyperGeometric, Poisson, NegativeBinomial, Geometric,
+                           Uniform, Triangular, Beta,
+                           LogNormal, Exponential, Gamma, Weibull, Pareto,
+                           Normal, Logistic, ExtremeValue
+                    }
+                }
+            }
+        }
+        DeclarationSection GuiDeclarations {
+            ElementParameter e_Product {
+                Range: productSet;
+            }
+            ElementParameter e_Region {
+                Range: regionSet;
+            }
+            Parameter implChoice {
+                Range: {
+                    {0..1000}
+                }
+            }
+        }
+        Procedure CreateTestData {
+            Body: {
+                
+                ! Should be 1000 products.
+                noProducts := 100 ;
+                productSet := ElementRange( 1, noProducts );
+                e_Product := first( productSet );
+                
+                ! Should be 100 regions
+                noRegions := 10 ;
+                regionSet := ElementRange( 1, noRegions, prefix:"Reg" );
+                e_Region := first( regionSet );
+                
+                ! 2014 history data, predict for January 2015.
+                calBeg := "2014-01-01" ;
+                calEnd := "2015-01-31" ;
+                noObservations := 365 ;
+                
+                for pr do
+                	newRndVal := uniform(0,1);
+                	useTrend := if newRndVal >= 0.7 then 1 else 0 endif ;
+                	trend := if useTrend then uniform( -70, 70 ) else 0 endif ;
+                	newRndVal := uniform(0,1);
+                	useSeason := if newRndVal >= 0.7 then 1 else 0 endif ;
+                	if useSeason then
+                		newRndVal := uniform(0,1);
+                		if newRndVal > 0.8 then seasonLength := 90 ;
+                		elseif newRndVal > 0.6 then seasonLength := 30 ;
+                		elseif newRndVal > 0.4 then seasonLength := 7 ;
+                		else seasonLength := 3 ;
+                		endif ;
+                		seasonPeak := uniform( 20, 80 );
+                	else
+                		seasonLength := 365;
+                		seasonPeak := 0 ;
+                	endif ;
+                	multFactor(r):= exp(uniform(0,5));
+                	distrNo := round( uniform( 0.51, card( usedDistributions ) + 0.49 ) );
+                	if distrNo < 1 then distrNo := 1;
+                	elseif distrNo > card( usedDistributions ) then distrNo := card( usedDistributions );
+                	endif ;
+                	e_ud := element( usedDistributions, distrNo );
+                	switch e_ud do
+                	'Binomial':
+                		sampleDataSet(pr,r,od) := multFactor(r) * Binomial(0.7,100)           + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                	'HyperGeometric':
+                		sampleDataSet(pr,r,od) := multFactor(r) * HyperGeometric(0.7,100,300) + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                	'Poisson':
+                		sampleDataSet(pr,r,od) := multFactor(r) * Poisson(0.3)                + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                	'NegativeBiomial':
+                		sampleDataSet(pr,r,od) := multFactor(r) * NegativeBinomial(0.7,100)   + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                	'Geometric':
+                		sampleDataSet(pr,r,od) := multFactor(r) * 100* Geometric(0.7)         + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                        'Uniform':
+                        	sampleDataSet(pr,r,od) := multFactor(r) * Uniform(50,200)             + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                        'Triangular':
+                        	sampleDataSet(pr,r,od) := multFactor(r) * Triangular(0.8,100,200)     + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                        'Beta':
+                        	sampleDataSet(pr,r,od) := multFactor(r) * Beta(1.5,1.5,50,100)        + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                        'LogNormal':
+                        	sampleDataSet(pr,r,od) := multFactor(r) * 100*LogNormal(0.7,100,17)   + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                        'Exponential':
+                        	sampleDataSet(pr,r,od) := multFactor(r) * 100*Exponential(0.7,100)    + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                        'Gamma':
+                        	sampleDataSet(pr,r,od) := multFactor(r) * Gamma(0.7,0.5,1)            + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                        'Weibull':
+                        	sampleDataSet(pr,r,od) := multFactor(r) * Weibull(0.7,0.5,1)          + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                        'Pareto':
+                        	sampleDataSet(pr,r,od) := multFactor(r) * Pareto(0.7,100,10)          + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                        'Normal':
+                        	sampleDataSet(pr,r,od) := multFactor(r) * Normal(100,20)              + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                        'Logistic':
+                        	sampleDataSet(pr,r,od) := multFactor(r) * Logistic(100,20)            + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                        'ExtremeValue':
+                        	sampleDataSet(pr,r,od) := multFactor(r) * ExtremeValue(100,20)        + trend * ord(od) + seasonPeak * sin( ( seasonLength * ord(od) ) / ( 2 * pi ) );
+                
+                	 endswitch ;
+                endfor ; ! pr
+            }
+            Set usedDistributions {
+                Index: ud;
+                Parameter: e_ud;
+                InitialData: {
+                    data { Binomial, HyperGeometric, Poisson,
+                           NegativeBiomial, Geometric, Uniform,
+                           Triangular, Beta, LogNormal, Exponential,
+                           Gamma, Weibull, Pareto,
+                           Normal, Logistic, ExtremeValue }
+                }
+            }
+            Parameter newRndVal;
+            Parameter trend;
+            Parameter useTrend;
+            Parameter useSeason;
+            Parameter seasonLength;
+            Parameter seasonPeak;
+            Parameter distrNo;
+            Parameter multFactor {
+                IndexDomain: r;
+            }
+        }
+        Procedure TestArtificialDataMovingAverage {
+            Body: {
+                empty estimateDataSet ;
+                for pr, r do
+                	forecasting::MovingAverage(sampleDataSet(pr,r,d),estimateDataSet(pr,r,d,'MovingAverage5'),365,15);
+                endfor ;
+            }
+        }
+        Procedure SpikeEvaluation {
+            Body: {
+                implChoice := 0 ; ! Fake
+                TestArtificialDataMovingAverage ;
+                
+                implChoice := 1 ; ! Programming style AIMMS usage
+                TestArtificialDataMovingAverage ;
+                
+                implChoice := 2 ; ! Modeling style AIMMS usage
+                TestArtificialDataMovingAverage ;
+                
+                implChoice := 3 ; ! Via external function
+                TestArtificialDataMovingAverage ;
+            }
+        }
+    }
+    Section EnergyData {
+        Parameter startNoElem {
+            InitialData: 1;
+        }
+        Parameter noVisElems {
+            InitialData: 50;
+        }
+        ElementParameter startUISelector {
+            Range: DateHour;
+            Definition: element( DateHour, startNoElem );
+        }
+        Set DateHoursVisible {
+            SubsetOf: DateHour;
+            Index: dhv;
+            Definition: {
+                { dh | startUISelector <= dh and dh <= startUISelector + noVisElems }
+            }
+        }
+        Parameter noAveragingHours;
+        Set DateHour {
+            SubsetOf: (DayNames, HourNames);
+            Tags: (eDay, eHour);
+            Index: dh;
+            Parameter: e_DateHour;
+        }
+        Set DayNames {
+            Index: dn;
+        }
+        Set HourNames {
+            Index: hn;
+        }
+        Set ColumnHeaders {
+            Index: ch;
+            Parameter: e_col1, e_col2, e_col3;
+        }
+        Parameter P0 {
+            IndexDomain: (dn,hn,ch);
+        }
+        Parameter P1 {
+            IndexDomain: (dn,hn);
+        }
+        Parameter P2 {
+            IndexDomain: (dn,hn);
+        }
+        Parameter P3 {
+            IndexDomain: (dn,hn);
+        }
+        Parameter CP1 {
+            IndexDomain: dh;
+        }
+        Parameter CP1Sel {
+            IndexDomain: dhv;
+            Definition: cp1(dhv);
+        }
+        Parameter CP2 {
+            IndexDomain: dh;
+        }
+        Parameter CP3 {
+            IndexDomain: dh;
+        }
+        Parameter am_ems {
+            IndexDomain: forecasting::ems;
+        }
+        Parameter es_ems {
+            IndexDomain: forecasting::ems;
+        }
+        Parameter es_alpha {
+            InitialData: 0.3;
+        }
+        Parameter ma0_CP1 {
+            IndexDomain: dh;
+        }
+        Parameter ma0_CP1_sel {
+            IndexDomain: (dhv);
+            Definition: ma0_CP1(dhv);
+        }
+        Parameter ma1_CP1 {
+            IndexDomain: dh;
+        }
+        Parameter ma2_CP1 {
+            IndexDomain: dh;
+        }
+        Parameter ma3_CP1 {
+            IndexDomain: dh;
+        }
+        Parameter es_CP1 {
+            IndexDomain: dh;
+        }
+        Parameter ma3_CP1_Sel {
+            IndexDomain: (dhv);
+            Definition: ma3_CP1(dhv);
+        }
+        Parameter es_CP1_Sel {
+            IndexDomain: (dhv);
+            Definition: es_CP1(dhv);
+        }
+        Parameter ma0_CP2 {
+            IndexDomain: dh;
+        }
+        Parameter ma1_CP2 {
+            IndexDomain: dh;
+        }
+        Parameter ma2_CP2 {
+            IndexDomain: dh;
+        }
+        Parameter ma3_CP2 {
+            IndexDomain: dh;
+        }
+        Parameter ma0_CP3 {
+            IndexDomain: dh;
+        }
+        Parameter ma1_CP3 {
+            IndexDomain: dh;
+        }
+        Parameter ma2_CP3 {
+            IndexDomain: dh;
+        }
+        Parameter ma3_CP3 {
+            IndexDomain: dh;
+        }
+        Procedure ReadEnergyData {
+            Body: {
+                
+                spreadsheet::RetrieveTable(
+                	Workbook                :  "EnergyPrice.xlsx",
+                	Parameter               :  P0(dn,hn,ch),
+                	DataRange               :  "C2:E8761",
+                	RowsRange               :  "A2:B8761",
+                	ColumnsRange            :  "C1:E1",
+                	Sheet                   :  "data_table",
+                	AutomaticallyExtendSets :  1);
+                
+                DateHour := {(dn,hn)|1};
+                
+                e_col1 := Element( ColumnHeaders, 1 );
+                e_col2 := Element( ColumnHeaders, 2 );
+                e_col3 := Element( ColumnHeaders, 3 );
+                
+                CP1(dh) := P0(dh,e_col1);
+                CP2(dh) := P0(dh,e_col2);
+                CP3(dh) := P0(dh,e_col3);
+                
+                noAveragingHours := 4;
+                es_alpha := 0.3 ;
+                
+                implChoice := 0 ;
+                forecasting::MovingAverage(cp1(dh), ma0_cp1(dh), card(DateHour), noAveragingHours);
+                forecasting::MovingAverage(cp2(dh), ma0_cp2(dh), card(DateHour), noAveragingHours);
+                forecasting::MovingAverage(cp3(dh), ma0_cp3(dh), card(DateHour), noAveragingHours);
+                
+                implChoice := 1 ;
+                forecasting::MovingAverage(cp1(dh), ma1_cp1(dh), card(DateHour), noAveragingHours);
+                forecasting::MovingAverage(cp2(dh), ma1_cp2(dh), card(DateHour), noAveragingHours);
+                forecasting::MovingAverage(cp3(dh), ma1_cp3(dh), card(DateHour), noAveragingHours);
+                
+                implChoice := 2 ;
+                forecasting::MovingAverage(cp1(dh), ma2_cp1(dh), card(DateHour), noAveragingHours);
+                forecasting::MovingAverage(cp2(dh), ma2_cp2(dh), card(DateHour), noAveragingHours);
+                forecasting::MovingAverage(cp3(dh), ma2_cp3(dh), card(DateHour), noAveragingHours);
+                
+                implChoice := 3 ;
+                forecasting::MovingAverageEM(cp1(dh), ma3_cp1(dh), card(DateHour), noAveragingHours, am_ems);
+                forecasting::MovingAverage(cp2(dh), ma3_cp2(dh), card(DateHour), noAveragingHours);
+                forecasting::MovingAverage(cp3(dh), ma3_cp3(dh), card(DateHour), noAveragingHours);
+                
+                forecasting::ExponentialSmoothingEM(cp1(dh), ma3_cp1(dh), card(DateHour), es_alpha, es_ems);
+            }
+        }
+        Procedure Test3 {
+            Body: {
+                implChoice := 3 ;
+                forecasting::MovingAverageEM(cp1(dh), ma3_cp1(dh), card(DateHour), noAveragingHours, am_ems);
+                forecasting::MovingAverage(cp2(dh), ma3_cp2(dh), card(DateHour), noAveragingHours);
+                forecasting::MovingAverage(cp3(dh), ma3_cp3(dh), card(DateHour), noAveragingHours);
+                
+                forecasting::ExponentialSmoothingEM(cp1(dh), es_cp1(dh), card(DateHour), es_alpha, es_ems);
+            }
+        }
+    }
+    Section TestNo1 {
+        Set history {
+            SubsetOf: dayCalendar;
+            Index: his;
+        }
+        Parameter sampDat {
+            IndexDomain: d;
+        }
+        Parameter sampEst1 {
+            IndexDomain: d;
+        }
+        Parameter sampEst2 {
+            IndexDomain: d;
+        }
+        Parameter sampEst3 {
+            IndexDomain: d;
+        }
+        Parameter sampEstDiff12 {
+            IndexDomain: d;
+        }
+        Parameter sampEstDiff23 {
+            IndexDomain: d;
+        }
+        Parameter periodLen;
+        Parameter seasonHeight;
+        Parameter alpha;
+        Procedure Test1_MovingAverage {
+            Body: {
+                Test1_Setup ;
+                
+                implChoice := 3 ;
+                forecasting::MovingAverage(
+                	dataValues         :  sampDat,
+                	estimates          :  sampEst1,
+                	noObservations     :  31,
+                	noAveragingPeriods :  5);
+                
+                display sampDat, sampEst1 ;
+            }
+        }
+        Procedure Test1_WeightedMovingAverage {
+            Body: {
+                Test1_Setup ;
+                
+                weightSet := ElementRange(1,4);
+                locWeights := data { 1 : 0.1, 2 : 0.2, 3: 0.3, 4: 0.4 } ;
+                forecasting::WeightedMovingAverage(
+                	dataValues         :  sampDat,
+                	estimates          :  sampEst1,
+                	noObservations     :  31,
+                	weights		   :  locWeights,
+                	noAveragingPeriods :  4);
+                
+                block where listing_page_width := 72 ;
+                display sampDat, sampEst1 ;
+                endblock ;
+            }
+            Set weightSet {
+                SubsetOf: Integers;
+                Index: ws;
+            }
+            Parameter locWeights {
+                IndexDomain: ws;
+            }
+        }
+        Procedure Test1_ExponentialSmoothing {
+            Body: {
+                Test1_Setup ;
+                
+                forecasting::ExponentialSmoothing(
+                	dataValues         :  sampDat,
+                	estimates          :  sampEst1,
+                	noObservations     :  31,
+                	alpha              :  0.3);
+                
+                display sampDat, sampEst1 ;
+            }
+        }
+        Procedure Test1_ExponentialSmoothingTune {
+            Body: {
+                /*
+                Test1_Setup ;
+                forecasting::ExponentialSmoothingTune(
+                	dataValues     :  sampDat,
+                	noObservations :  31,
+                	alpha          :  alpha);
+                
+                forecasting::ExponentialSmoothing(
+                	dataValues         :  sampDat,
+                	estimates          :  sampEst1,
+                	noObservations     :  31,
+                	alpha              :  alpha);
+                
+                display alpha, sampDat, sampEst1 ;
+                */
+            }
+        }
+        Procedure Test1_ExponentialSmoothingTrend {
+            Body: {
+                Test1_Setup ;
+                
+                forecasting::ExponentialSmoothingTrend(
+                	dataValues         :  sampDat,
+                	estimates          :  sampEst1,
+                	noObservations     :  31,
+                	alpha              :  0.3,
+                	beta               :  0.3);
+                
+                display dayCalendar, sampDat, sampEst1 ;
+            }
+        }
+        Procedure Test1_ExponentialSmoothingTrendSeason {
+            Body: {
+                Test1_Setup ;
+                forecasting::ExponentialSmoothingTrendSeasonality(
+                	dataValues         :  sampDat,
+                	estimates          :  sampEst1,
+                	noObservations     :  31,
+                	alpha              :  0.5,
+                	beta               :  0.3,
+                	gamma              :  0.3,
+                	periodLength       :  7);
+                
+                display dayCalendar, sampDat, sampEst1 ;
+            }
+        }
+        Section WebUI_Declarations {
+            Set AllPublicIdentifiers {
+                SubsetOf: AllIdentifiers;
+                Definition: {
+                    data { Test3, ReadEnergyData, CP1, CP1Sel, DateHour, dh, am_ems, es_ems, es_alpha,es_CP1_Sel,
+                           DateHoursVisible, dhv, ma0_CP1_sel, ma3_CP1_sel, DateHoursVisible,
+                           startUISelector, startNoElem, noVisElems, noAveragingHours,
+                           sampDat, sampEst1, sampEst2, sampEst3, sampEstDiff12, sampEstDiff23, strPar,
+                           Three, costEach, totcost3
+                           !, SObservationSet, MachinesProd, CostOfMachinesProd, CostEstimate, CostError, ScaledCostData, ScaledCostEstimate,
+                           !ReInitializeEstimates, EstimateCosts, EstimateCostsVCR, Beta0, Beta1, VariationMeasure
+                           }
+                }
+                Comment: "ArtificialDataPreparation + EnergyData + TestNo1";
+            }
+        }
+        Procedure Test1_Setup {
+            Body: {
+                if card(sampDat) = 0 then
+                
+                	history := { d | ord(d) <= 31 } ;
+                	periodLen := 7 ;
+                	seasonHeight := 10 ;
+                	sampDat(his) := 30 + 1.3 * ord(his) + uniform( -10, 10 ) + seasonHeight * sin( ( periodLen * ord(his) ) / ( 2 * pi ) );
+                
+                endif ;
+            }
+        }
+    }
+    Section ausair;
+    Section SimpleLinearRegression {
+        Set sObservationsSet {
+            SubsetOf: Integers;
+            Index: i_ob;
+            Definition: data{1..10};
+        }
+        Parameter MachinesProd {
+            IndexDomain: i_ob;
+            Definition: {
+                data{
+                 1 : 10,
+                 2 : 20,
+                 3 : 30,
+                 4 : 40,
+                 5 : 45,
+                 6 : 50,
+                 7 : 60,
+                 8 : 55,
+                 9 : 70,
+                10 : 40
+                }
+            }
+        }
+        Parameter CostOfMachinesProd {
+            IndexDomain: i_ob;
+            Definition: {
+                data{
+                 1 :  257.40,
+                 2 :  601.60,
+                 3 :  782.00,
+                 4 :  765.40,
+                 5 :  895.50,
+                 6 : 1133.00,
+                 7 : 1152.80,
+                 8 : 1132.70,
+                 9 : 1459.20,
+                10 :  970.10
+                }
+            }
+        }
+        Parameter Coeff {
+            IndexDomain: forecasting::co;
+        }
+        Parameter Beta0;
+        Parameter Beta1;
+        Parameter VariationMeasure {
+            IndexDomain: forecasting::vcs;
+        }
+        Parameter CostEstimate {
+            IndexDomain: i_ob;
+        }
+        Parameter CostError {
+            IndexDomain: i_ob;
+        }
+        Procedure EstimateCosts {
+            Body: {
+                
+                forecasting::SimpleLinearRegression( MachinesProd, CostOfMachinesProd, Coeff);
+                
+                Beta0 := Coeff(0);
+                Beta1 := Coeff(1);
+            }
+        }
+        Procedure EstimateCostsVC {
+            Body: {
+                
+                forecasting::SimpleLinearRegressionVC( MachinesProd, CostOfMachinesProd, Coeff, VariationMeasure);
+                
+                Beta0 := Coeff(0);
+                Beta1 := Coeff(1);
+            }
+        }
+        Procedure EstimateCostsVCR {
+            Body: {
+                
+                
+                forecasting::SimpleLinearRegressionVCR( MachinesProd, CostOfMachinesProd, Coeff, VariationMeasure, CostEstimate, CostError);
+                
+                Beta0 := Coeff(0);
+                Beta1 := Coeff(1);
+            }
+        }
+        DeclarationSection GUI_Declaration {
+            Parameter ScaledCostData {
+                IndexDomain: i_ob;
+                Definition: CostOfMachinesProd(i_ob) / 1000;
+            }
+            Parameter ScaledCostEstimate {
+                IndexDomain: i_ob;
+                Definition: CostEstimate(i_ob) / 1000;
+            }
+        }
+        Procedure ReInitializeEstimates {
+            Body: {
+                
+                empty
+                
+                Coeff,
+                Beta0,
+                Beta1,
+                VariationMeasure,
+                CostEstimate,
+                CostError
+                ;
+            }
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1 ;
+        }
+    }
+    Section ProUserInfoObtain {
+        StringParameter pro_cur_env;
+        StringParameter pro_cur_user;
+        StringParameter pro_cur_Bucket;
+        Set pro_usr_groups {
+            Index: pug;
+        }
+        StringParameter pro_cur_GroupName {
+            IndexDomain: pug;
+        }
+        Procedure GetUserInf {
+            Body: {
+                !pro::GetCurrentUserInfo(pro_cur_env, pro_cur_user, pro_cur_Bucket, pro_usr_groups, pro_cur_GroupName);
+                !write pro_cur_env, pro_cur_user, pro_cur_Bucket, pro_usr_groups, pro_cur_GroupName to file "c:\\tmp\\GetCurInf.txt"
+            }
+        }
+    }
+    Section stackedBarChart {
+        Set Three {
+            Index: th;
+            Definition: data { a, b, c };
+        }
+        Parameter costEach {
+            IndexDomain: th;
+            Definition: data { a : 100,  b : 150,  c : 70 };
+        }
+        Parameter TotCost3 {
+            Definition: 270;
+        }
+    }
+}

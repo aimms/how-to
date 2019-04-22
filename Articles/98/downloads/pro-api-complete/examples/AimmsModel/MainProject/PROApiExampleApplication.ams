@@ -1,0 +1,136 @@
+## ams_version=1.0
+
+Model Main_PROApiExampleApplication {
+    Section Storage {
+        Set someElements {
+            Index: se;
+        }
+        Parameter someValues {
+            IndexDomain: se;
+        }
+        Procedure DownloadAndUpload {
+            Arguments: (storagePath);
+            Body: {
+                pro::RetrieveFileFromCentralStorage(storagePath, "input.xml");
+                
+                readxml( "input.xml", "someXML.axm" );
+                someValues(se) := sqr( someValues(se) );
+                writexml( "output.xml", "someXML.axm");
+                
+                pro::SaveFileToCentralStorage("output.xml",storagePath);
+                
+                FileDelete( "input.xml" );
+                FileDelete( "output.xml" );
+            }
+            StringParameter storagePath {
+                Property: Input;
+            }
+        }
+    }
+    Section BasicScheduleJob {
+        Procedure proc_BasicScheduleJob {
+            Arguments: (value,description);
+            Body: {
+                DISPLAY value, description;
+            }
+            Parameter value {
+                Property: Input;
+            }
+            StringParameter description {
+                Property: Input;
+            }
+        }
+    }
+    Section ScheduleJobAndCheck {
+        Procedure proc_ScheduleJobAndCheck {
+            Arguments: (value,description);
+            Body: {
+                DISPLAY value, description;
+            }
+            Parameter value {
+                Property: Input;
+            }
+            StringParameter description {
+                Property: Input;
+            }
+        }
+    }
+    Section ScheduleJobAndCheckResult {
+        Procedure proc_ScheduleJobAndCheckResult {
+            Arguments: (value,description);
+            Body: {
+                DISPLAY value, description;
+                
+                notifyClientWithResults(2.0*value, "ThisIsTheResult");
+            }
+            Parameter value {
+                Property: Input;
+            }
+            StringParameter description {
+                Property: Input;
+            }
+        }
+        Procedure notifyClientWithResults {
+            Arguments: (value,description);
+            Body: {
+                ! Just pass all the arguments to the client as is
+                pro::DelegateToClient();
+            }
+            Parameter value {
+                Property: Input;
+            }
+            StringParameter description {
+                Property: Input;
+            }
+        }
+    }
+    Section AdvancedInteract {
+        Parameter AdvInteractCounter {
+            InitialData: 0;
+        }
+        Parameter MaxAdvInteractCounter {
+            InitialData: 10;
+        }
+        Procedure proc_AdvancedInteraction {
+            Arguments: (value,description);
+            Body: {
+                ! This method will be called by the Advanced Interact example
+                ! The API example will regularly inject calls to proc_AdvancedInteractProgress
+                ! in order to obtain progress reports
+                
+                ! Because PRO will inject these request for progress call in between statements
+                ! for this example we emulate multiple statements with a while loop
+                
+                AdvInteractCounter := 0;
+                MaxAdvInteractCounter := 10;
+                
+                while ( AdvInteractCounter < MaxAdvInteractCounter) do
+                	! Emulate work for a second
+                	Delay(1)
+                endwhile;
+            }
+            Parameter value {
+                Property: Input;
+            }
+            StringParameter description {
+                Property: Input;
+            }
+        }
+        Procedure proc_AdvancedInteractProgress {
+            Body: {
+                AdvInteractCounter := AdvInteractCounter + 1.0;
+                notifyClientWithProgress( AdvInteractCounter / MaxAdvInteractCounter);
+            }
+        }
+        Procedure notifyClientWithProgress {
+            Arguments: (x);
+            Body: {
+                ! Just pass all the arguments to the client as is
+                pro::DelegateToClient();
+            }
+            Parameter x {
+                Property: Input;
+            }
+        }
+    }
+}

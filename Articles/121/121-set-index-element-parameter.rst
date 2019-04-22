@@ -51,7 +51,7 @@ Then I create a parameter called ``FantasyPoints(p)``, "(p)" means FantasyPoints
 
 With Set ``Players`` and Parameter ``FantasyPoints(p)``, we can easily hold the fantasy points for all players.
 
-Next I want to have each player's position in my model. In our sample data, we see Quarterbacks(QB), Running Backs(RB) and Wide Receivers(WR). So I will create a set, called ``ositions``, with index ``ps``.
+Next I want to have each player's position in my model. In our sample data, we see Quarterbacks(QB), Running Backs(RB) and Wide Receivers(WR). So I will create a set, called ``positions``, with index ``ps``.
 
 .. image:: images/Screenshot_17.png
 
@@ -64,7 +64,7 @@ Let's implement both. I name the parameter ``PlayerAtPosition(p,ps)``, and speci
 
 .. image:: images/Screenshot_20.png
 
-And we will assign value 1 (box checked) if a player palys the position.
+And we will assign value 1 (box checked) if a player plays the position.
 
 .. image:: images/Screenshot_21.png
 
