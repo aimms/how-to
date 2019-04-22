@@ -1,0 +1,9 @@
+<log4a xmlns="http://tempuri.org/AIMMS/generated-namespace-12787">
+  <theValues someElements="Berlin">4</theValues>
+  <theValues someElements="Breda">5</theValues>
+  <theValues someElements="Beijing">7</theValues>
+  <theValues someElements="Bangkok">1</theValues>
+  <theValues someElements="Bogota">7</theValues>
+  <theValues someElements="Barcelona">3</theValues>
+</log4a>
+
