@@ -254,7 +254,7 @@ Running the test suite again gives the below result:
    </testsuite>
    </testsuites>
     
-Our unit test reproduces the bug. See `failures="1"` in line 3. Notice the difference between failures and errors in the test report. Clearly, the mistake in the above implementation is that we divided by ``card(P)`` - the cardinality of the parameter which only counts non default values instead of ``card(S)`` - the cardinality of the set which counts all the elements. So, the function is updated as shown below:
+Our unit test reproduces the bug. See ``failures="1"`` in line 3. Notice the difference between failures and errors in the test report. Clearly, the mistake in the above implementation is that we divided by ``card(P)`` - the cardinality of the parameter which only counts non-default values instead of ``card(S)`` - the cardinality of the set which counts all the indices. So, the function is updated as shown below:
 
 .. code-block:: aimms
    :linenos:

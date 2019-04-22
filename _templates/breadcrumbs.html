@@ -7,10 +7,11 @@ check_meta = True %} {% else %} {% set check_meta = False %} {% endif %} {% if c
 <div role="navigation" aria-label="breadcrumbs navigation">
     <div class="topomenu">
         <div class="logo">
-            <a href="https://aimms.com/"><img src="{{ pathto('_static/AIMMS_logo_S_RGB.png', 1) }}" alt="AIMMS Logo" title="AIMMS Help &amp; Support"></a>
+            <a href="https://aimms.com/"><img src="{{ pathto('_static/AIMMS_logo_S_RGB.png', 1) }}" alt="AIMMS Logo" title="AIMMS software"></a>
         </div>
         <nav class="menuprincipal">
             <ul id="menu-main-site-navigation-1" class="main-menu">
+                <li class="menu-item"><a href="http://how-to.aimms.com/">How-To Home</a></li>
                 <li class="menu-item"><a href="https://community.aimms.com/">Support Center</a></li>
                 <li class="menu-item"><a href="https://documentation.aimms.com/">Documentation</a></li>
                 <li class="menu-item"><a href="https://aimms.com/english/developers/downloads/">Downloads</a></li>
@@ -61,7 +62,7 @@ check_meta = True %} {% else %} {% set check_meta = False %} {% endif %} {% if c
         </style>
         <ul class="wy-breadcrumbs">
             {% block breadcrumbs %}
-            <li><a href="{{ pathto(master_doc) }}">{{ _('How-To') }}</a> &raquo;</li>
+            <li><a href="{{ pathto(master_doc) }}">{{ _('Docs') }}</a> &raquo;</li>
             {% for doc in parents %}
             <li><a href="{{ doc.link|e }}">{{ doc.title }}</a> &raquo;</li>
             {% endfor %}

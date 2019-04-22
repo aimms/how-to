@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<AimmsXMLSchemaMapping xmlns="http://www.aimms.com/XMLSchema/AimmsXMLMappingSchema" MappedNameSpace="http://tempuri.org/AIMMS/generated-namespace-12787">
-	<ElementMapping name="log4a">
-		<ElementMapping name="theValues" maps-to="someValues( se )">
-			<AttributeMapping name="someElements" binds-to="se"/>
-		</ElementMapping>
-	</ElementMapping>
-</AimmsXMLSchemaMapping>
