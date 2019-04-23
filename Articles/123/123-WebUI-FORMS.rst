@@ -58,7 +58,7 @@ We need the following extra declarations in order to work with the forms:
 
 * When we are editing existing data, we want to know for which element that is. The WebUI forms uses a binary parameter for this. In our example we will call this binary parameter ``P_SKUFORM_Selection(sku)``.
 
-* Each SKU needs a unique identification before it can be added to the set. This identification can simply be a unique (non-descriptive) number or a name. In our example we use a name. That is why we add an extra string parameter: ``SP_SKUFORM_InternalName(sku)``. Actually, this is just another property, modelled here via a string parameter.
+* Each SKU needs a unique identification before it can be added to the set. This identification can simply be a unique (non-descriptive) number or a name. In our example we use a name. That is why we add an extra string parameter: ``SP_SKUFORM_InternalName(sku)``. Actually, this is just another property, modeled here via a string parameter.
 
 * A procedure to create a new element. In our running example, this will be ``pr_SKUFORM_Create``. This is a callback procedure; it will be called by the AIMMS WebUI Forms framework.
 
@@ -180,11 +180,11 @@ Step 6. Drawing the form on the WebUI canvas:
 
 After starting the AIMMS WebUI (AIMMS Menu – Tools – Start WebUI) and opening the browser page localhost:12001/example, we can create the necessary widgets:
 
-* A legend widget, contents: P_SKUFORM_Selection
+* A legend widget, contents: ``P_SKUFORM_Selection``
 
-* A scalar widget, contents: webui_runtime::SKUForm_P_Stock, webui_runtime::SKUForm_EP_Color, webui_runtime::SKUForm_P_Volume, webui_runtime::SKUForm_SP_Manufacturer, webui_runtime::SKUForm_SP_SKUFORM_InternalName
+* A scalar widget, contents: ``webui_runtime::SKUForm_P_Stock``, ``webui_runtime::SKUForm_EP_Color``, ``webui_runtime::SKUForm_P_Volume``, ``webui_runtime::SKUForm_SP_Manufacturer``, ``webui_runtime::SKUForm_SP_SKUFORM_InternalName``
 
-* Three button widgets linking to the procedures webui_runtime::SKUForm_SaveForm, webui_runtime::SKUForm_NewEntry, webui_runtime::SKUForm_DeleteEntry and name them Save, Create, and Delete respectively.
+* Three button widgets linking to the procedures ``webui_runtime::SKUForm_SaveForm``, ``webui_runtime::SKUForm_NewEntry``, ``webui_runtime::SKUForm_DeleteEntry`` and name them ``Save``, ``Create``, and ``Delete`` respectively.
 
 This will result in the following form:
 
