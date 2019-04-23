@@ -33,7 +33,7 @@ I don't know about you, but I have to look twice to see that the lines have a di
 
 This is achieved using the following css code:
 
-.. code-block:: css
+.. code-block:: none
     :linenos:
 
     .tag-linechart[data-widget\.uri="Linechart_HomeAway_IdentifierStyling"] path.annotation-p_HomeSum{
@@ -151,7 +151,7 @@ You'll also need to assign *annotations* to data identifiers you want to style i
 
 #. Reference the element in your style sheet, with a selector (``.annotation-whatever``). 
 
-.. code-block:: css
+.. code-block:: none
 
     .tag-linechart[data-widget\.uri="Linechart_HomeAway_ElementStyling"] circle.annotation-p_HomeSum.annotation-SignificantDiff{
             stroke: red;

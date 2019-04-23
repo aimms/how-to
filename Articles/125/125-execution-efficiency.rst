@@ -10,7 +10,7 @@ The time spent by AIMMS applications can be divided into AIMMS execution time ( 
 
 
 1. Avoid ``for`` Loop
--------------------
+---------------------
 
 Use bulk execution of assignment as much as possible. If a ``for`` loop is necessary, try to minimize calculation inside the loop. For example,
 

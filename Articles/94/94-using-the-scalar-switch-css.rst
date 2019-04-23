@@ -64,7 +64,7 @@ The AIMMS project attached below contains CSS files with filters for both types 
 
 The additional tag ``[data-widget\.uri*="Switch"]`` in all snippets identifies widgets containing "Switch" in their names, as shown in the example below.
 
-.. code-block:: css
+.. code-block:: none
 
     .tag-scalar[data-widget\.uri*="Switch"] .boolean-value-editor input {
     }
