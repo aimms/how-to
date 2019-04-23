@@ -296,7 +296,7 @@ Running the test suite now should give the below result which indicates that the
         
 All the previously written tests (before this latest change) were also automatically run, saving us time and effort. The example project can be downloaded below:
 
-:download:`AIMMS project download <downloads/mean/mean.zip>` 
+:download:`AIMMS project download <Downloads/mean/mean.zip>` 
 
 Related Topics
 --------------------
