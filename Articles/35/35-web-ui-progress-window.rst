@@ -71,7 +71,7 @@ In our example, we want to display only the best bound and incumbent objective v
     
     ``pro::PROMFLAG_LIVE``
      
-    The message is not stored in the database. As such it more efficient and lighter than ordinary messages. When an AIMMS Session connects to a queue after a live message is invoked, it will not see that live message; which is desired for progress and status updates.  
+    The message is not stored in the database. As such, it is more efficient and lighter than ordinary messages. When an AIMMS Session connects to a queue after a live message is invoked, it will not see that live message; which is desired for progress and status updates.  
     
     ``pro::PROMFLAG_PRIORITY``
     
