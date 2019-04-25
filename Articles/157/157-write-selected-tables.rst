@@ -77,6 +77,21 @@ This was the original procedure to write the data:
 
 However, we want to change it to something like this (in pseudo code):
 
+.. code-block:: none
+   :linenos:
+
+    Procedure pr_TargetDatabaseWriteProcedure {
+        Body: {
+            if a set or parameter referenced in db_ab is changed then
+                write to table db_ab;
+            endif ;
+
+            if a set or parameter referenced in db_bc is changed then
+                write to table db_bc;
+            endif ;
+        }
+    }
+
 .. sidebar:: DatachangeMonitors
 
     Datachange monitors track whether data of a selection of identifiers was changed since the last time checked.
@@ -98,21 +113,6 @@ However, we want to change it to something like this (in pseudo code):
     * ``DataChangeMonitorReset`` - resets a datachange monitor and links it to the same or another reference set
 
     * ``DataChangeMonitorDelete`` - allows for cleanup
-
-.. code-block:: none
-   :linenos:
-
-    Procedure pr_TargetDatabaseWriteProcedure {
-        Body: {
-            if a set or parameter referenced in db_ab is changed then
-                write to table db_ab;
-            endif ;
-
-            if a set or parameter referenced in db_bc is changed then
-                write to table db_bc;
-            endif ;
-        }
-    }
 
 To avoid coding errors and maintenance issues from doing this manually, AIMMS has the following facilities:
 
