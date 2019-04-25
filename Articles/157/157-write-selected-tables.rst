@@ -53,11 +53,11 @@ Here is an example with two database tables. The mechanism works the same for an
             searchAttrSet  ! (input) subset of AllAttributeNames
             recursive )    ! (optional) numerical expression
 
-      * Line 2: the identifiers to be searched; here, a singleton set containing just the database table to be investigated
+   * Line 2: the identifiers to be searched; here, a singleton set containing just the database table to be investigated
 
-      * Line 3: the attributes to be searched; here, we search all attributes
+   * Line 3: the attributes to be searched; here, we search all attributes
 
-      * Line 4: We will do a recursive search, because we also want to write defined parameters when the data of one of the constituents of its definition is changed.
+   * Line 4: We will do a recursive search, because we also want to write defined parameters when the data of one of the constituents of its definition is changed.
 
 * Writing to table db_ab saves the data of i_a, i_b, p_AB1, p_AB2. In other words, when the data of i_a, i_b, p_AB1, or p_AB2 is changed, we want to write to table db_ab.
 
