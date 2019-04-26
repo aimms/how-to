@@ -36,7 +36,7 @@ With that new situation in AIMMS 4, aimmspack file deployment now serves two pur
 #. protecting the IP through encryption.
 
 
-Many customers have complained throughout the years that the encryption scheme in AIMMS 3 was quite error-prone. Because of the use of VAR files, one really had to be careful to make sure that it wasn’t possible for non-authorized users to have access to the model sources. We therefore decided to greatly simplify the encryption scheme used by AIMMS 4, while at the same time using stronger encryption. As a result, you now have the certainty that the model sources in an aimmspack file are *always* encrypted, and that AIMMS will never again allow access to the model sources of an encrypted model. Moreover, no one without access to the proper key will be able to decrypt the model, including AIMMS employees.
+Many customers have complained throughout the years that the encryption scheme in AIMMS 3 was quite error-prone. Because of the use of VAR files, one had to be very careful to make sure that non-authorized users do not have access to the model sources. We therefore decided to greatly simplify the encryption scheme used by AIMMS 4, while at the same time using stronger encryption. As a result, you now have the certainty that the model sources in an aimmspack file are *always* encrypted, and that AIMMS will never again allow access to the model sources of an encrypted model. Moreover, no one without access to the proper key will be able to decrypt the model, including AIMMS employees.
 
 Using aimmspack files for backup
 --------------------------------

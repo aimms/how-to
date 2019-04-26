@@ -17,10 +17,10 @@ Key Components
 The key components to consider for a WebUI application are 
 
 #. Peak memory usage of the data session
-      * Can be monitored using the Windows Task Manager or the AIMMS Progress Window (the Memory Used metric)
+      * Can be monitored using the Windows Task Manager or the AIMMS Progress Window (the `Memory Used` metric)
 
 #. Peak memory usage of the solver session
-      * Can be monitored using AIMMS Progress Window (the Peak Mem metric)
+      * Can be monitored using AIMMS Progress Window (the `Peak Mem` metric)
 
 #. Average CPU usage of a data session
       * Can be monitored using the Windows Task Manager

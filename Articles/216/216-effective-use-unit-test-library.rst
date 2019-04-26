@@ -1,15 +1,6 @@
 Test Driven Development using the AIMMSUnitTest Library
 ==========================================================================
 
-<<<<<<< HEAD
-This article uses the following elements from the popular software methodology `Test Driven Development <https://en.wikipedia.org/wiki/Test-driven_development>`_
-
-#. Gather requirements from stakeholders
-   
-   * What are small examples ?
-   
-   * What are the edge cases, including error cases, performance ?
-=======
 This article discusses some elements from the popular software methodology `Test Driven Development <https://en.wikipedia.org/wiki/Test-driven_development>`_ in relation to the AIMMS Library ``AIMMSUnitTest``.
 
 #. Gather requirements from stakeholders
@@ -17,7 +8,6 @@ This article discusses some elements from the popular software methodology `Test
    * What are small examples?
    
    * What are the edge cases, including error cases, performance?
->>>>>>> 4e3349bd59ab4758d6364314b8bceea78163527e
     
 #. Implement requirements as unit tests and **see them fail!**
 
@@ -28,10 +18,6 @@ This article discusses some elements from the popular software methodology `Test
    #. Execute tests and **see them pass!**
    
    #. Refactor until performance is acceptable.
-<<<<<<< HEAD
-=======
-
->>>>>>> 4e3349bd59ab4758d6364314b8bceea78163527e
 #. Repeat
     
 Unit tests in AIMMS projects
@@ -45,11 +31,7 @@ Prepare your AIMMS project with the below steps to declare unit tests.
 
 #. Create another new library containing tests on the actual code
 
-<<<<<<< HEAD
-#. Make sure all tests can be run, for instance by specifying ``MainExecution`` as below:
-=======
 #. Make sure all tests can be run, for instance by specifying ``MainExecution`` as shown below:
->>>>>>> 4e3349bd59ab4758d6364314b8bceea78163527e
 
    .. code-block:: aimms
 
@@ -66,7 +48,6 @@ Example: implement "mean"
  
 Prototype the requirements
 """"""""""""""""""""""""""""""
-<<<<<<< HEAD
 
 #. The mean should return the average value of a series of numbers
 
@@ -74,15 +55,6 @@ Prototype the requirements
 
    .. code-block:: aimms
 
-=======
-
-#. The mean should return the average value of a series of numbers
-
-#. Prototype ``SelfDefinedMean`` (As both ``mean`` and ``average`` are key words in AIMMS, we need to come up with a new name):
-
-   .. code-block:: aimms
-
->>>>>>> 4e3349bd59ab4758d6364314b8bceea78163527e
       Function SelfDefinedMean {
             Arguments: (p);
             Body: {
@@ -98,11 +70,7 @@ Prototype the requirements
             }
       }
 
-<<<<<<< HEAD
-This is a dummy implementation, a function that meets the prototype requirements, but will obviously fail. Having a dummy implementation allows us to code the tests as below. 
-=======
 This is a dummy implementation, a function that meets the prototype requirements, but will obviously fail. Having a dummy implementation allows us to code the tests as detailed below. 
->>>>>>> 4e3349bd59ab4758d6364314b8bceea78163527e
 
 Write the tests
 """""""""""""""""""
@@ -123,7 +91,6 @@ Write the tests
             aimmsunit::TestSuite: MeanSuite;
             Set S {
                Index: i;
-<<<<<<< HEAD
             }
             Parameter P {
                IndexDomain: i;
@@ -134,18 +101,6 @@ Write the tests
    Note that the ``aimmsunit::AssertTrue`` statement (line 6) is **after** the call to ``ml::SelfDefinedMean``.
 
 
-=======
-            }
-            Parameter P {
-               IndexDomain: i;
-            }
-            Parameter r;
-      }
-
-   Note that the ``aimmsunit::AssertTrue`` statement (line 6) is **after** the call to ``ml::SelfDefinedMean``.
-
-
->>>>>>> 4e3349bd59ab4758d6364314b8bceea78163527e
 #. Edge case test: an empty series of numbers
 
    .. code-block:: aimms
@@ -170,18 +125,6 @@ Write the tests
       }
       
    Note that the ``aimmsunit::AssertThrow``(line 2) statement is **before** the call to ``ml::SelfDefinedMean``.
-<<<<<<< HEAD
-
-The annotation ``aimmsunit::TestSuite: MeanSuite`` is added to the test function. As you may know, such an annotation can be added by:
-   
-   #. click add annotation in the attribute window
-   
-   #. select aimmsunit::TestSuite
-   
-   #. type in the name of the suite. In this example, we only use one suite: ``MeanSuite``
-   
-Now, run the tests and with the above implementation of ``ml::SelfDefinedMean``. They will fail as expected. Example result in file: ``log/AimmsUnit.xml``
-=======
 
 The annotation ``aimmsunit::TestSuite: MeanSuite`` is added to the test function. You can add annotations this way:
    
@@ -244,83 +187,12 @@ Mean is calculated by dividing the sum of the records by the count of records. T
     }
 
 Running the test now gives the following results:
->>>>>>> 4e3349bd59ab4758d6364314b8bceea78163527e
 
 .. code-block:: xml
    :linenos:
 
    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
    <testsuites>
-<<<<<<< HEAD
-      <testsuite id="1" name="MeanSuite" timestamp="2019-04-09T08:26:10" tests="2" errors="2" time="0.002">
-      <testcase name="tml::pr_Test_Small_Example" time="0.001">
-         <error message="Not implemented yet."/>
-      </testcase>
-      <testcase name="tml::pr_Test_Empty_List" time="0.001">
-         <error message="Not implemented yet."/>
-      </testcase>
-      </testsuite>
-   </testsuites>
-
-There are several remarks about this file:
-
-   #. On line 3, which suite and which tests are run, also important, the number of tests that failed. All the tests failed as expected (`errors ="2"`) and we can start coding the function now.
-
-   #. In lines 4 - 9, we see the details of the failure of our two tests. As the function hasn't been implemented yet, it raised an error message in both the tests. 
-
-Code the function
-""""""""""""""""""""
-
-Mean is calculated by dividing the sum of the records by the count of records. This is implemented in the code below: 
-
-.. code-block:: aimms
-   :linenos:
-
-   Function SelfDefinedMean {
-      Arguments: (p);
-      Body: {
-            if card(p) then
-               SelfDefinedMean := sum( i, p(i) ) / card( p );
-            else
-               raise error "The average of an empty list cannot be computed." ;
-               SelfDefinedMean := 0 ;
-            endif ;
-      }
-      Parameter p {
-            IndexDomain: i;
-            Property: Input;
-      }
-      Set S {
-            Index: i;
-      }
-   }
-
-Running the test now gives the following results:
-
-.. code-block:: xml
-   :linenos:
-
-   <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-   <testsuites>
-      <testsuite id="1" name="MeanSuite" timestamp="2019-04-09T09:31:16" tests="2" time="0.002">
-      <testcase name="tml::pr_Test_Small_Example" time="0.001"/>
-      <testcase name="tml::pr_Test_Empty_List" time="0.001"/>
-      </testsuite>
-   </testsuites>
-        
-The log indicates that both the tests passed without any issue. So, everything is good to go. Or is it? 
-    
-Fix a bug
-"""""""""""
-
-However, soon one of our stakeholders comes with the question 
-
-.. pull-quote::
-
-   Why does ``ml::SelfDefinedMean(3, 5, 0, 12)`` return 6.67 instead of 5 ?
-
-Apparently, our set of requirements does not consider all edge cases and now we will iterate on this by adding another requirement and test: 
-=======
       <testsuite id="1" name="MeanSuite" timestamp="2019-04-09T09:31:16" tests="2" time="0.002">
       <testcase name="tml::pr_Test_Small_Example" time="0.001"/>
       <testcase name="tml::pr_Test_Empty_List" time="0.001"/>
@@ -339,7 +211,6 @@ However, soon one of our stakeholders comes with a question:
    Why does ``ml::SelfDefinedMean(3, 5, 0, 12)`` return 6.67 instead of 5?
 
 Apparently, our set of requirements does not consider all edge cases. Now we will iterate on this by adding another requirement and test: 
->>>>>>> 4e3349bd59ab4758d6364314b8bceea78163527e
 
 .. pull-quote::
    
@@ -382,35 +253,11 @@ Running the test suite again gives the below result:
    </testsuite>
    </testsuites>
     
-<<<<<<< HEAD
-Our unit test reproduces the bug. See `failures="1"` in line 3. Notice the difference between failures and errors in the test report. Clearly, the mistake in the above implementation is that we divided by ``card(P)`` - the cardinality of the parameter which only counts non default values instead of ``card(S)`` - the cardinality of the set which counts all the indices. So, the function is updated as below:
-=======
 Our unit test reproduces the bug. See `failures="1"` in line 3. Notice the difference between failures and errors in the test report. Clearly, the mistake in the above implementation is that we divided by ``card(P)`` - the cardinality of the parameter which only counts non default values instead of ``card(S)`` - the cardinality of the set which counts all the elements. So, the function is updated as shown below:
->>>>>>> 4e3349bd59ab4758d6364314b8bceea78163527e
 
 .. code-block:: aimms
    :linenos:
 
-<<<<<<< HEAD
-   Function SelfDefinedMean {
-      Arguments: (p);
-      Body: {
-            if card(p) then
-               SelfDefinedMean := sum( i, p(i) ) / card( S );
-            else
-               raise error "The average of an empty list cannot be computed." ;
-               SelfDefinedMean := 0 ;
-            endif ;
-      }
-      Parameter p {
-            IndexDomain: i;
-            Property: Input;
-      }
-      Set S {
-            Index: i;
-      }
-   }
-=======
     Function SelfDefinedMean {
         Arguments: (p);
         Body: {
@@ -431,7 +278,6 @@ Our unit test reproduces the bug. See `failures="1"` in line 3. Notice the diffe
         }
         Parameter p_NoElements;
     }
->>>>>>> 4e3349bd59ab4758d6364314b8bceea78163527e
 
 Running the test suite now should give the below result which indicates that the problem was fixed. 
     
@@ -451,11 +297,7 @@ All the previously written tests (before this latest change) were also automatic
 
 :download:`AIMMS project download <Downloads/mean/mean.zip>` 
 
-<<<<<<< HEAD
-Related
-=======
 Related Topics
->>>>>>> 4e3349bd59ab4758d6364314b8bceea78163527e
 --------------------
 
 * **AIMMS Documentation:** `Unit Test Library <https://documentation.aimms.com/unit-test/index.html>`_

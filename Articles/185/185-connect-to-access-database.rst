@@ -18,8 +18,6 @@ One advantage of creating a connection string instead of using DSN files is that
 
 These connection strings can be used in the *Data Source* attributes of all the database related identifiers AIMMS (e.g. tables, database procedures).
 
-
-
 To create a connection string for a given Access database file (.mdb or .accdb), the procedure ``CreateAccessFileConnectionString`` below uses the intrinsic AIMMS function ``SQLCreateConnectionString``. 
 
 The procedure will first query which ODBC drivers are available, and follow with these actions:
@@ -34,6 +32,7 @@ The procedure requires two arguments:
 * ``ConnectionString``: Output argument in which the connection string is stored.
 
 Furthermore, the procedure needs the following two local identifiers:
+
 .. code-block:: aimms
 
   SET:
