@@ -51,11 +51,11 @@ Running the example
     
         * Line 30, DEFAULT_ENDPOINT: this might also be "wss://your-cloud-name.cloud.aimms.com" 
         
-            * when connection is encrypted, start with WSS (cloud systems are always encrypted).
+            * when connection is encrypted, start with ``wss`` (cloud systems are always encrypted).
             
-            * when connection is not encrypted, start with WS
+            * when connection is not encrypted, start with ``ws``
         
-        * Lines 32-34, DEFAULT_ENVIRONMENT, DEFAULT_USERNAME, and DEFAULT_PASSWORD should've been supplied by your AIMMS PRO administrator.
+        * Lines 32-34, DEFAULT_ENVIRONMENT, DEFAULT_USERNAME, and DEFAULT_PASSWORD should have been supplied by your AIMMS PRO administrator.
         
         * Lines 38-39, DEFAULT_APPLICATION_NAME, DEFAULT_APPLICATION_VERSION, the name and version of the app as it is published.
 

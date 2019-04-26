@@ -117,7 +117,7 @@ The first "if" in the code below, is about new element names. A new name does no
         endif;
     endif;
 
-If there is an error, this will be logged via the function webui::CreateValidationError.
+If there is an error, this will be logged via the function ``webui::CreateValidationError``.
 
 The second check we do is that the manufacturer is specified and the length is at least 3.
 
