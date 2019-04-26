@@ -52,7 +52,7 @@ The color of the switch can be modified by editing the background color defined 
 	    background: #004bff !important;
     }
 
-The default AIMMS blue color is #004bff. You can replace this color code in the CSS snippet.
+The default AIMMS blue color hexadecimal code is ``#004bff``. You can replace this color code in the CSS snippet.
 
 Filter based on name
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -64,7 +64,7 @@ The AIMMS project attached below contains CSS files with filters for both types 
 
 The additional tag ``[data-widget\.uri*="Switch"]`` in all snippets identifies widgets containing "Switch" in their names, as shown in the example below.
 
-.. code-block:: css
+.. code-block:: none
 
     .tag-scalar[data-widget\.uri*="Switch"] .boolean-value-editor input {
     }

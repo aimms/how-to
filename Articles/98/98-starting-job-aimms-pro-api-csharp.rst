@@ -31,13 +31,15 @@ Running the example
     
         .. images/AdaptingConnectionDetailsCS.png
     
-        * Line 14, PRO_ENDPOINT: this might also be "wss://your-cloud-name.cloud.aimms.com" 
+        * Line 14, ``PRO_ENDPOINT``: this might also be ``wss://your-cloud-name.cloud.aimms.com`` 
         
-            * when connection is encrypted, start with WSS (cloud systems are always encrypted).
+            #. when connection encrypted, start with ``wss`` (cloud systems are always encrypted).
+           
             
-            * when connection is not encrypted, start with WS
+            #. when connection not encrypted, start with ``ws``
+           
         
-        * Lines 32-34, PRO_ENVIRONMENT, USERNAME, and USER_PASSWORD should've been supplied by your AIMMS PRO administrator.
+        * Lines 32-34, PRO_ENVIRONMENT, USERNAME, and USER_PASSWORD should have been supplied by your AIMMS PRO administrator.
         
         * Lines 38-39, PRO_APPLICATION_NAME, PRO_APPLICATION_VERSION, the name and version of the app as it is published.
 

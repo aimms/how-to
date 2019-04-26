@@ -6,7 +6,7 @@ Read and Write CSV Files
    :description: How to link CSV files to an AIMMS project using DataLink and CSVProvider libraries.
    :keywords:  csv, datalink, csvprovider
 
-CSV files are a de facto standard for communication of data. 
+CSV files are a *de facto* standard for communication of data. 
 AIMMS provides the libraries ``DataLink`` and ``CSVProvider`` for the serializing of CSV files.
 In this article an example is provided for reading data from a CSV file.
 

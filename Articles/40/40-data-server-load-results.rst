@@ -120,7 +120,7 @@ The AIMMS project that does just this, can be downloaded from: :download:`5. Flo
 Summary
 -------
 
-By following the above steps, the end user can control when the casefile resulting from an execution on the server session is loaded onto the data session (or available to view by the end user).
+By following the above steps, the end user can control when the case file resulting from an execution on the server session is loaded onto the data session (or available to view by the end user).
 
 Further Opportunities
 ------------------------

@@ -5,17 +5,16 @@
    :description: How to link data from an external data source in AIMMS models.
    :keywords: link, exchange, external, import, source
 
-      .. note::
-
-	This article was originally posted to the AIMMS Tech Blog.
 
 
-Data exchange is an essential part of every application. AIMMS supports various industry standards for data exchange, such as ODBC for databases, XML Files and spreadsheets. But what if the data is not stored according to one of these standards? In order to read data from an arbitrary data source, AIMMS offers access to self-developed or third party functions. This blog post provides an overview of the steps you need to take to create a data exchange link between a proprietary data format and AIMMS. The process is illustrated by using a concrete modeling exercise from the Constraint Programming example library CSPLIB.  
+Data exchange is an essential part of every application. AIMMS supports various industry standards for data exchange, such as ODBC for databases, XML Files and spreadsheets. In addition, AIMMS offers access to self-developed or third-party functions so you can read data from non-standard data sources.
+
+This article shows how to create a data exchange link between a proprietary data format and AIMMS. The process is illustrated by using a concrete modeling exercise from the Constraint Programming example library CSPLIB.  
 
 The example
 -----------
 
-The constraint programming example library, http://www.csplib.org, provides several concrete constraint programming modeling exercises, where, given a particular exercise, several input files are provided. Each such input file is a sequence of numbers. Consider the first modeling exercise: the famous car sequencing problem. The input format for the car sequencing problem, quoting the CSPLIB, is defined as:
+The `constraint programming example library <http://www.csplib.org>`_, provides several concrete constraint programming modeling exercises, where, given a particular exercise, several input files are provided. Each such input file is a sequence of numbers. Consider the first modeling exercise: the famous car sequencing problem. The input format for the car sequencing problem, quoting the CSPLIB, is defined as:
 
 
 .. code-block:: none
@@ -43,8 +42,8 @@ In "Solving the car-sequencing problem in constraint logic programming," M. Dinc
 
 To input the data into an AIMMS application, we want external functions that:
 
-* Open and close a text file, say openFileHandle and closeFileHandle.
-* Get an integer from a file, say getInt.
+* Open and close a text file, say ``openFileHandle`` and ``closeFileHandle``.
+* Get an integer from a file, say ``getInt``.
 
 Creating a DLL for external functions:
 --------------------------------------
@@ -59,7 +58,7 @@ To declare functions in the DLL as *callable*, you will need the following macro
     #define DLL_EXPORT_PROTO(type) extern __declspec(dllexport) type WINAPI
     #endif
 
-C++ Functions declared using this macro can be called from outside the DLL in which they are implemented. Just put this macro in a header file. For the getInt function, you can use this macro to declare it as follows:
+C++ Functions declared using this macro can be called from outside the DLL in which they are implemented. Just put this macro in a header file. For the ``getInt`` function, you can use this macro to declare it as follows:
 
 
 .. code-block:: cpp
@@ -78,7 +77,7 @@ and subsequently the implementation as follows:
             // the visual studio solution provided below.
     }
 
-Note that the DLL_EXPORT_PROTO macro needs to be repeated in the header of the implementation. Once a set of callable functions is available, we want to use these functions in an AIMMS project. We do this in two steps, in the first step we declare the external procedure in AIMMS, and in the second step we wrap this in an ordinary procedure, easing the syntax and simplifying error handling. 
+Note that the ``DLL_EXPORT_PROTO`` macro needs to be repeated in the header of the implementation. Once a set of callable functions is available, we want to use these functions in an AIMMS project. We do this in two steps, in the first step we declare the external procedure in AIMMS, and in the second step we wrap this in an ordinary procedure, easing the syntax and simplifying error handling. 
 
 Step 1, the external procedure call
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -145,13 +144,14 @@ By wrapping the external procedure in an ordinary procedure, we are able to defi
         pti::int(instanceFileHandle,maxCarsPerBlock(o));
     endfor ;
 
-As you can see from this example, the "int" procedure in the PlainTextInput library, with prefix "pti", is used to retrieve the integer values of the input sequentially. The AIMMS car sequencing application and the Visual Studio 2010 project that creates the PlainTextInput DLL are provided in the following zip file: [attachments include="4088"]Using Visual Studio you can build the DLL's. Using AIMMS 3.14 FR2 or later, either the 32 bits or 64 bits version, you can solve car sequencing problems using inputs specified according to the input format defined by CSPLIB. 
+As you can see from this example, the ``int`` procedure in the PlainTextInput library, with prefix ``pti``, is used to retrieve the integer values of the input sequentially. 
+
+.. The AIMMS car sequencing application and the Visual Studio 2010 project that creates the ``PlainTextInput DLL`` are provided in the following zip file: [missing] Using Visual Studio you can build the DLL's. Using AIMMS 3.14 FR2 or later, either the 32 bits or 64 bits version, you can solve car sequencing problems using inputs specified according to the input format defined by CSPLIB. 
 
 Further reading
 ---------------
 
-* The AIMMS Language Reference documents how arguments can be passed via external functions in Chapter "External Procedures and Functions"
-* The AIMMS Language Reference documents how AIMMS can be called back from within the C++ functions in Chapter "The AIMMS Programming Interface", also allowing sparse data exchange.
+* `The AIMMS Language Reference <https://documentation.aimms.com/aimms_ref.html>`_ (Chapters "External Procedures and Functions" and "The AIMMS Programming Interface")
 * M. Dincbas, H. Simonis, and P. van Hentenryck. Solving the car-sequencing problem in constraint logic programming. In Y. Kodratoff, editor, Proceedings ECAI-88, pp. 290–295, 1988
 
 

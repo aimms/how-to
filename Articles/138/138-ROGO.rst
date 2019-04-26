@@ -20,7 +20,7 @@
 
     .. image:: images/rogo1.gif
 
-The ROGO puzzle, `rogopuzzle <http://www.rogopuzzle.co.nz>`_, challenges players to find a good path on a board, pick up treasures, and avoid pitfalls. This puzzle, and its corresponding iPhone app, were originally developed in New Zealand. In this post, I'll explain a method for solving ROGO puzzles using constraint programming in AIMMS.
+The ROGO puzzle, `rogopuzzle <http://www.rogopuzzle.co.nz>`_, challenges players to find a good path on a board, pick up treasures, and avoid pitfalls. This puzzle, and its corresponding iPhone app, were originally developed in New Zealand. In this article, I'll explain a method for solving ROGO puzzles using constraint programming in AIMMS.
 
 
 
@@ -32,7 +32,7 @@ I started modeling this problem in a straightforward manner: ``x(i) in { 1 .. no
 Model preparation
 -----------------
 
-In a procedure, we prepare by numbering all cells, including treasures and pitfalls, row wise and by creating both an element parameter and relation to link the row and column number with the cell number. The preparation is completed by constructing the set of allowed transitions. Consider, as an example, Intro 6, the cell no 4 in row 1, colum 4 with treasure value 2. From this cell, you can go west and east, making transitions (4,3) and (4,5) allowed. The cell no 13 in row 2, column 4 is a pitfall, making (4,13) not an allowed transition.
+In a procedure, we prepare by numbering all cells, including treasures and pitfalls, row wise and by creating both an element parameter and relation to link the row and column number with the cell number. The preparation is completed by constructing the set of allowed transitions. Consider, as an example, Intro 6, the cell no 4 in row 1, column 4 with treasure value 2. From this cell, you can go west and east, making transitions (4,3) and (4,5) allowed. The cell no 13 in row 2, column 4 is a pitfall, making (4,13) not an allowed transition.
 
 Enforcing a cycle
 -----------------
@@ -80,7 +80,7 @@ A bit of search reduction
    
 If we want to give the objective some value, at least one cell should have value. As the sequence might begin at any place, we may as well start in a cell with value. This reduces the search, as we rule out the first cell without value.
 
-The AIMMS application
+Example download
 ---------------------
 
 The complete example is presented in this :download:`AIMMS project download <downloads/ROGO.zip>` 
@@ -88,15 +88,9 @@ The complete example is presented in this :download:`AIMMS project download <dow
 
 It comes with a case for each of the introductory ROGO puzzles. Psst, there is a transparent button on the ROGO logo; clicking it will open the puzzle site.
 
-Reference
-------------
-
-Gilles Pesant "A Regular Language Membership Constraint for Finite Sequences of Variables" in "Principles and Practice of Constraint Programming - CP", 2004, pp. 482-495
-
-Update Januari 14, 2013
--------------------------
-
-Hakan Kjellerstrand recently posted a better symmetry breaking rule `here <http://www.hakank.org/constraint_programming_blog/2011/01/rogo_grid_puzzle_in_answer_set_programming_clingo_and_minizinc.html>`_: the idea is that the first element in the path has the lowest cell number. For the introductory problems presented at the ROGO site, I compared the performance of these two symmetry breaking rules.
+Alternative
+-----------
+Hakan Kjellerstrand posted an alternative `symmetry breaking rule <http://www.hakank.org/constraint_programming_blog/2011/01/rogo_grid_puzzle_in_answer_set_programming_clingo_and_minizinc.html>`_: the idea is that the first element in the path has the lowest cell number. For the introductory problems presented at the ROGO site, I compared the performance of these two symmetry breaking rules.
 
 +-------------+------------------+----------------------+
 | Instance    | first with value | first lowest cell no |
@@ -120,6 +114,10 @@ Hakan Kjellerstrand recently posted a better symmetry breaking rule `here <http:
 
 For the first four ROGO examples, there is hardly any difference. For ROGO puzzles 5, 6 and 7, the symmetry breaking rule of Hakan performs better. For ROGO puzzle 8 both formulations found the optimal value but were not able to prove optimality within 60 seconds. In short, Hakan's symmetry breaking rule performs better than mine.
 
+Reference
+------------
+
+Gilles Pesant "A Regular Language Membership Constraint for Finite Sequences of Variables" in "Principles and Practice of Constraint Programming - CP", 2004, pp. 482-495
 
 .. include:: /includes/form.def
 
