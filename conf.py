@@ -207,10 +207,10 @@ html_theme_options = {
 html_static_path = ['_static']
 
 # if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown :)
-if os.name != 'nt':
-    Display_edit_on_gitlab = False
-else:   
-    Display_edit_on_gitlab = True
+if os.name == 'nt':
+   Display_edit_on_gitlab = True
+else:
+   Display_edit_on_gitlab = False
 
 # removed reference to theme.css as it no longer exists     
 html_context = {
@@ -298,11 +298,11 @@ texinfo_documents = [
 ]
 
 # if builds on GitLab (a Linux machine), force todos not to be shown :)
-if os.name != 'nt':
-	todo_include_todos = False
+if os.name == 'nt':
+   nitpicky = True
 else:
 	#To check any broken links 
-	nitpicky = True
+   todo_include_todos = False
 
 
 # Generate redirects from old URLs

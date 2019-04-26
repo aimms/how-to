@@ -13,21 +13,21 @@
 
     .. image:: images/782px-Microsoft_Excel_2013_logo.svg.png
 
-The AimmsXLLibrary was introduced in AIMMS 4.20. The new library can communicate with Excel files in server environments, where Excel is not installed. For instance, while running AIMMS through a WebUI on PRO or on Linux. Excel is usually not installed in such environments. However, this isn't a problem. The AimmsXLLibrary doesn't require Excel to be installed in order to read from or write to an Excel (.xls/.xlsx) file. By using this library, you can deploy your AIMMS project to more platforms with less restrictions.
+The ``AimmsXLLibrary`` was introduced in AIMMS 4.20. The new library can communicate with Excel files in server environments, where Excel is not installed. For instance, while running AIMMS through a WebUI on PRO or on Linux. Excel is usually not installed in such environments. However, this isn't a problem. The AimmsXLLibrary doesn't require Excel to be installed in order to read from or write to an Excel (.xls/.xlsx) file. By using this library, you can deploy your AIMMS project to more platforms with less restrictions.
 
-In order to use the library, you first need to add the system library 'AIMMSXLLibrary' to your model. Then, you can use the functions, which start with prefix "axll" (Aimms eXceL Library), provided in the library. This blog post illustrates how these functions work. Let's take a look.
+In order to use the library, you first need to add the system library 'AIMMSXLLibrary' to your model. Then, you can use the functions, which start with prefix ``axll`` (Aimms eXceL Library), provided in the library. This blog post illustrates how these functions work. Let's take a look.
 
 .. image:: images/XLLibrary.png
 
 Reading your Excel File in AIMMS
 ---------------------------------
 
-I needed some geographical information about the US for an application I was building. The information was easy to find online. I downloaded the file below, titled "free-zipcode-database-Primary.xlsx". It provided the zip code, State, Latitude and Longitude columns I needed.
+I needed some geographical information about the US for an application I was building. The information was easy to find online. I downloaded the file below, titled ``free-zipcode-database-Primary.xlsx``. It provided the zip code, State, Latitude and Longitude columns I needed.
 
 .. image:: images/Excel-e1465306005168.png
         :scale: 150 %
 
-Next, I created a procedure in my AIMMS project, called "ReadFromExcel." 
+Next, I created a procedure in my AIMMS project, called ``ReadFromExcel``. 
 In the procedure, first I would like to have AIMMS point to the file so I can read it. Here is the code:
 
 .. code-block:: aimms
@@ -40,7 +40,7 @@ In the procedure, first I would like to have AIMMS point to the file so I can re
              axll::OpenWorkBook(WorkBookName);
     endif;
 
-I used a String Parameter "WorkBookName" to take the file name. 
+I used a String Parameter ``WorkBookName`` to take the file name. 
 The code in the "if-else" statement is to avoid opening the workbook again if it is already opened. If it was already opened, I would just select it by calling ``axll::SelectWorkBook`` function; otherwise,I would open the file by the ``axll::OpenWorkBook`` function.
 
 The next thing is to use ``axll::SelectSheet`` to set the sheet I am going to use.
@@ -59,7 +59,7 @@ Then I use ``axll::ReadSet`` function to read value for set ``sZipCode``.
         SetRange        : "A2:A42523",
         ExtendSuperSets : 1);
 
-The first argument, "SetReference," is the set name. The second argument, "SetRange," is the range in Excel. The third argument, "ExtendSuperSets," is telling AIMMS to extend this set's super set when the elements read in this Excel are not part of the super set.
+The first argument, ``SetReference``, is the set name. The second argument, ``SetRange``, is the range in Excel. The third argument, ``ExtendSuperSets``, is telling AIMMS to extend this set's super set when the elements read in this Excel are not part of the super set.
 
 Adding Parameters
 ------------------
@@ -74,9 +74,9 @@ Next, I want to make sure I can read the following data in two dimensional param
         ColumnHeaderRange   : "F1:G1",
         DataRange           : "F2:G42523");
 
-The first argument, "IdentifierReference", is the name of the parameter. The second argument, "RowHeaderRange", is the range for first index "z", which is represented as row range "A2:A42523" in Excel. The third argument, "ColumnHeaderRange", is the range for second index "iLonLat", which is represented as column range "F1:G1" in Excel. The forth argument, "DataRange", is the range for the actual data. 
+The first argument, ``IdentifierReference``, is the name of the parameter. The second argument, ``RowHeaderRange``, is the range for first index ``z``, which is represented as row range ``"A2:A42523"`` in Excel. The third argument, ``ColumnHeaderRange``, is the range for second index ``iLonLat``, which is represented as column range ``"F1:G1"`` in Excel. The forth argument, ``DataRange``, is the range for the actual data. 
 
-In case you have an identifier with more dimensions, "RowHeaderRange" is the range where the starting indices reside, and "ColumnHeaderRange", is the range where the ending indices reside. For example, identifier ``MyValue(r1, r2, r3, r4,c1,c2,c3,c4)`` has 8 indices, and the data in Excel looks like this:
+In case you have an identifier with more dimensions, ``RowHeaderRange`` is the range where the starting indices reside, and ``ColumnHeaderRange``, is the range where the ending indices reside. For example, identifier ``MyValue(r1, r2, r3, r4,c1,c2,c3,c4)`` has 8 indices, and the data in Excel looks like this:
 
 .. image:: images/Excel3-e1465306679329.png
         :scale: 150 %
@@ -101,7 +101,7 @@ Continuing with the zip code example. I then use ``axll::ReadSet`` to read in da
         SetRange        : "D2:D42523",
         ExtendSuperSets : 1);
 
-And ``axll::ReadList`` to read in data "ZipCodeState(z)," which holds the state name that each zip code belongs to.
+And ``axll::ReadList`` to read in data ``ZipCodeState(z)``, which holds the state name that each zip code belongs to.
 
 .. code-block:: aimms
 
@@ -111,7 +111,7 @@ And ``axll::ReadList`` to read in data "ZipCodeState(z)," which holds the state 
         DataRange           : "D2:D42523");
          
 ``axll::ReadList`` is designed for reading in data which is represented as lists in Excel. 
-So it is only with RowHeaderRange. The following Excel Sheet is an example with "A8:D17" as RowHeaderRange and "E8:E17" as DataRange.
+So it is only with RowHeaderRange. The following Excel Sheet is an example with ``"A8:D17"`` as ``RowHeaderRange`` and ``"E8:E17"`` as DataRange.
 
 .. image:: images/Excel4-e1465308154550.png
 
@@ -125,7 +125,7 @@ With the data I just imported from Excel, I can do further analyses. For example
 
 .. image:: images/Distance-e1465308283102.png
 
-Similarly, you can use the AIMMSXLLibrary to write to Excel. You can see the comments in the library for further reference.
+Similarly, you can use the ``AIMMSXLLibrary`` to write to Excel. You can see the comments in the library for further reference.
 
 .. include:: /includes/form.def
 
