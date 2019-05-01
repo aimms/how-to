@@ -7,7 +7,7 @@ Aborting execution of AIMMS
 ..       <description></description>
 ..       <content:encoded>
 With AIMMS it is possible to interrupt long running executions by pressing the keyboard shortcut **CTRL-Shift-S**. However, this requires multiple statements to be executed and/or generation of multiple constraints because this shortcut key only works between two statements executed that are executed or constraints that are generated. The only exception to this is the solve statement in AIMMS, although this is a single statement, you can still interrupt it with this keyboard shortcut as most solvers allow user interrupt between solver iterations.
-A more powerful tool to interrupt is ``AimmsInterrupt``. You can download this tool `here <http://download.aimms.com/aimms/download/data/AIMMSInterruptTool/AimmsInterrupt.exe>`_This tool is more powerful than the original CTRL-Shift-S shortcut, as it is even able to interrupt long running statements.
+A more powerful tool to interrupt is ``AimmsInterrupt``. You can download this tool `here <http://download.aimms.com/aimms/download/data/AIMMSInterruptTool/AimmsInterrupt.exe>`_.This tool is more powerful than the original CTRL-Shift-S shortcut, as it is even able to interrupt long running statements.
 
 For example, the assignment
 .. code-block:: aimms
