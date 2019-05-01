@@ -54,7 +54,7 @@ This section covers topics related to expressing a model in the AIMMS programmin
    /Articles/12/12-generate-random-numbers
    /Articles/208/208-setting-options
    /Articles/216/216-effective-use-unit-test-library
- 
+   /Articles/220/220-aborting-execution-of-aimms
 
     
     
