@@ -52,7 +52,7 @@ The color of the switch can be modified by editing the background color defined 
 	    background: #004bff !important;
     }
 
-The default AIMMS blue color is #004bff. You can replace this color code in the CSS snippet.
+The default AIMMS blue color hexadecimal code is ``#004bff``. You can replace this color code in the CSS snippet.
 
 Filter based on name
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

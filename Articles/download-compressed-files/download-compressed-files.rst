@@ -46,7 +46,7 @@ You may download the ``7za.exe`` executable from https://www.7-zip.org/download.
 
     
 
-As you may see, we asked AIMMS to execute a program called "7za.exe" located in the project folder, provided some arguments:
+As you may see, we asked AIMMS to execute a program called ``7za.exe`` located in the project folder, provided some arguments:
 
     * ``a`` = `add` command
     * ``archive2.zip`` = the archive path. This will create the archive file in the project folder
@@ -125,8 +125,8 @@ I will thus simply improve my **MainExecution** procedure as follows:
 
 .. note:: 
 
-    * For windows, I assumed you bundled the 7za.exe program with your AIMMS project in the aimmspack. As explained above, an alternative would be to install a zip program on your Windows Server accessible from the PATH, or  
-    * The ``AimmsStringConstants`` intrinsic string parameter provides a list of system constants, such as ``'platform'`` (windows, linux) or ``'architecture'`` (x64, x86). Please refer to the `Function Reference <https://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_ for further details.
+    * For windows, I assumed you bundled the ``7za.exe`` program with your AIMMS project in the aimmspack. As explained above, an alternative would be to install a zip program on your Windows Server accessible from the PATH, or  
+    * The ``AimmsStringConstants`` intrinsic string parameter provides a list of system constants, such as ``'platform'`` (Windows, Linux) or ``'architecture'`` (x64, x86). Please refer to the `Function Reference <https://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_ for further details.
     
 And I will improve my **Download** procedure as well:
 

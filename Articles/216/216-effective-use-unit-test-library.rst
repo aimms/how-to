@@ -18,7 +18,6 @@ This article discusses some elements from the popular software methodology `Test
    #. Execute tests and **see them pass!**
    
    #. Refactor until performance is acceptable.
-
 #. Repeat
     
 Unit tests in AIMMS projects
@@ -131,7 +130,7 @@ The annotation ``aimmsunit::TestSuite: MeanSuite`` is added to the test function
    
    #. Click add annotation in the attribute window
    
-   #. Select aimmsunit::TestSuite
+   #. Select ``aimmsunit::TestSuite``
    
    #. Type in the name of the suite. In this example, we only use one suite: ``MeanSuite``
    
@@ -296,7 +295,7 @@ Running the test suite now should give the below result which indicates that the
         
 All the previously written tests (before this latest change) were also automatically run, saving us time and effort. The example project can be downloaded below:
 
-:download:`AIMMS project download <downloads/mean/mean.zip>` 
+:download:`AIMMS project download <Downloads/mean/mean.zip>` 
 
 Related Topics
 --------------------

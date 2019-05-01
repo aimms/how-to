@@ -16,7 +16,7 @@
 
 There are situations where you would like to know how long the execution of something in AIMMS took.
 
-When you are working as an AIMMS developer, one of the tools you have for this is the AIMMS profiler. This profiler will provide you with information about how long each statement in an execution took, as well as how long the evaluation of the definition of a parameter took. More information about the profiler can be found in the `AIMMS The User's Guide <https://documentation.aimms.com/_downloads/AIMMS_user.pdf>`_ Chapter "Debugging and Profiling an Aimms Model".
+When you are working as an AIMMS developer, one of the tools you have for this is the AIMMS profiler. This profiler will provide you with information about how long each statement in an execution took, as well as how long the evaluation of the definition of a parameter took. More information about the profiler can be found in the `AIMMS The User's Guide <https://documentation.aimms.com/_downloads/AIMMS_user.pdf>`_ Chapter "Debugging and Profiling an AIMMS Model".
 
 When running in End-user mode, the profiler is not available. To still be able to give the end-user feedback on how much time certain steps took, you can create a 'stopwatch' in AIMMS code. This can be achieved by introducing the following identifiers into your model:
 

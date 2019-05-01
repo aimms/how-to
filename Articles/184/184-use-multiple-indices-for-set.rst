@@ -15,7 +15,7 @@ One solution is creating two new sets ``CitiesFrom`` and ``CitiesTo``, both subs
 
 However, an easier approach is to assign multiple indices to the set. 
 
-When you create a new set, you can directly add multiple indices to this set by typing all of them in the index attribute field, separated by commas (e.g. "city, cityFrom, cityTo"). 
+When you create a new set, you can directly add multiple indices to this set by typing all of them in the index attribute field, separated by commas (e.g. ``city, cityFrom, cityTo``). 
 
 Note that after adding the index ``city`` and clicking *Check, Commit, and Close*, the index attribute is grayed out.
 

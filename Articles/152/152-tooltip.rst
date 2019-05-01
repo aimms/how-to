@@ -35,6 +35,6 @@ Upgrading to HTML tooltips
 
 .. todo:: \n to < br > and \t to table
 
-.. todo:: border around tooltip - asked Pratab.
+.. todo:: border around tooltip - asked Pratap.
 
 
