@@ -49,7 +49,7 @@ Running the example
     
         .. images/AdaptingConnectionDetails.png
     
-        * Line 30, DEFAULT_ENDPOINT: this might also be "wss://your-cloud-name.cloud.aimms.com" 
+        * Line 30, DEFAULT_ENDPOINT: this might also be ``wss://your-cloud-name.cloud.aimms.com`` 
         
             * when connection is encrypted, start with ``wss`` (cloud systems are always encrypted).
             

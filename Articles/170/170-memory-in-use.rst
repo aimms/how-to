@@ -6,7 +6,7 @@ Investigate Memory in Use
    :keywords: memory, virtual memory, MemoryInUse, identifiers, mathematical programming instance
 
 
-Analytic applications may involve a lot of data and subsequently a lot of computer memory. AIMMS hides the technicalities related to memory management from the model developer. These technicalities include, for instance, the allocation and de-allocation of memory for individual data items. Still, the memory usage of applications created with AIMMS grows as the amount of data related to these applications grows. At some point during model development, the memory usage of your application becomes interesting. AIMMS offers tools to monitor and investigate the memory usage of your application. We will discuss a couple of the tools available in AIMMS to investigate memory usage. 
+Analytic applications may involve a lot of data and subsequently a lot of computer memory. AIMMS hides the technicalities related to memory management from the model developer. These technicalities include, for instance, the allocation and deallocation of memory for individual data items. Still, the memory usage of applications created with AIMMS grows as the amount of data related to these applications grows. At some point during model development, the memory usage of your application becomes interesting. AIMMS offers tools to monitor and investigate the memory usage of your application. We will discuss a couple of the tools available in AIMMS to investigate memory usage. 
 
 Memory functions
 -----------------------------

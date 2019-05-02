@@ -1,5 +1,5 @@
-Interrupt Execution During a Single Statment
-============================================
+Interrupt Execution During a Single Statement
+=============================================
 
 .. meta::
    :description: How to interrupt a long running assignment.

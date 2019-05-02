@@ -49,7 +49,7 @@ The example AIMMS project can be downloaded from :download:`Flow Shop - No Veil 
 Summary
 ----------
 
-Perhaps a lot to do about almost nothing; but by simply changing the argument waitForCompletion to 0, or removing it, from the call to ``pro::DelegateToServer``, the data session no longer waits for the server session to complete, thus allowing the end user to browse and edit the data while the server session is executing a long running procedure.
+Perhaps a lot to do about almost nothing; but by simply changing the argument ``waitForCompletion`` to 0, or removing it, from the call to ``pro::DelegateToServer``, the data session no longer waits for the server session to complete, thus allowing the end user to browse and edit the data while the server session is executing a long running procedure.
 
 Next reading
 ---------------
