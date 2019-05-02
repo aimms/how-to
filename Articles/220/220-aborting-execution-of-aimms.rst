@@ -49,6 +49,6 @@ Use the AimmsInterrupt tool like this:
 
 Please keep in mind that after you interrupt execution, you cannot rely on the data of parameter ``someParameter``, because the assignment statement was not finished.
 
-
-
 .. include:: /includes/form.def
+
+

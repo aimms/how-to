@@ -13,7 +13,7 @@
 
     .. image:: images/nrd.jpg
 
-The latest version of CPLEX, version 12.7, supports Benders decomposition. Benders decomposition is an approach to solve mathematical programming problems with a decomposable structure, including stochastic programming (SP) problems (it is also known as the L-shaped method). 
+As of version 12.7, CPLEX supports Benders decomposition. Benders decomposition is an approach to solve mathematical programming problems with a decomposable structure, including stochastic programming (SP) problems (it is also known as the L-shaped method). 
 Computational results by IBM, see this `slide show <http://www.slideshare.net/xnodet/ibm-cplex-optimization-studio-127-benders-modeling-assistance-etc?cm_mc_uid=18650205168313994945525&amp;cm_mc_sid_50200000=1480695733>`_ by Xavier Nodet, show that Benders decomposition is faster than traditional branch-and-cut for 5% of their nontrivial MIP models. 
 That number might not seem impressive but for certain type of MIP problems Benders decomposition is much faster than other methods.
 
