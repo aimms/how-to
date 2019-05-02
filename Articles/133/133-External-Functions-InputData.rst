@@ -158,3 +158,12 @@ Further reading
 .. include:: /includes/form.def
 
 
+.. below are spelling exceptions only for this document
+
+.. spelling::
+
+    Dincbas
+    Simonis
+    Hentenryck
+    Kodratoff
+    al

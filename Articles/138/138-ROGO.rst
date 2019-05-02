@@ -122,3 +122,10 @@ Gilles Pesant "A Regular Language Membership Constraint for Finite Sequences of 
 .. include:: /includes/form.def
 
 
+.. below are spelling exceptions only for this document
+
+.. spelling::
+
+    Pesant
+    Hakan
+    Kjellerstrand
