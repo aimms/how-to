@@ -68,7 +68,7 @@ We need the following extra declarations in order to work with the forms:
 
 From the AIMMS model explorer, the above declarations look as follows:
 
-.. figure:: images/3-procedure-callback-declarations.png
+.. figure:: images/3-Procedure-callback-declarations.png
 
     Procedure callback declarations
 

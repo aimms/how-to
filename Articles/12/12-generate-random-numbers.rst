@@ -17,12 +17,12 @@ How to generate random numbers ?
 
  Let's create a set |set| "Locations" in AIMMS, specify 2 indices "l1" and "l2", and define it as ``elementrange(1,201,1,"Location-")``. 
 
- .. image:: Images/Locations.png
+ .. image:: images/Locations.png
 			:scale: 50 %
 			
  Then let's create the new parameter that we want to populate with data, over those 2 indices. To do so, just index this parameter over `l1` and `l2`, and put ``uniform(0,200)`` in his definition. Check the data of this parameter ( **CTRL + D** ), and see the result:
 
- .. image:: Images/Data.png
+ .. image:: images/Data.png
 			:scale: 40 %
 
 
