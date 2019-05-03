@@ -31,3 +31,5 @@ AIMMS offers two User Interface builders, the classic WinUI for applications tha
    /Articles/123/123-WebUI-FORMS
    CSS/index
    /Articles/221/221-adding-a-custom-splashscreen-to-your-aimms-application
+   /Articles/232/232-displaying-line-numbers-in-the-editor-of-the-aimms-ide
+   /Articles/225/225-changing-colors-for-different-identifier-types-in-aimms-ide

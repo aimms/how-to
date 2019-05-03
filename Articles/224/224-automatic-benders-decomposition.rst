@@ -1,4 +1,4 @@
-Automatic Benders’ decomposition================================.. meta::   :description: Benders Decomposition directly supported by AIMMS.   :keywords: Benders Decomposition, MIP, GMP.. note::	This article was originally posted to the AIMMS Tech Blog.
+Automatic Benders’ decomposition================================.. meta::   :description: Benders Decomposition directly supported by AIMMS.   :keywords: Benders Decomposition, MIP, GMP.. note::    This article was originally posted to the AIMMS Tech Blog.
 .. <link>https://berthier.design/aimmsbackuptech/2013/01/08/benders-decomposition-aimms-beta-version-available/</link>
 .. <pubDate>Tue, 08 Jan 2013 13:52:32 +0000</pubDate>
 .. <dc:creator><![CDATA[]]></dc:creator>
