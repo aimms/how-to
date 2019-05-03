@@ -1,5 +1,5 @@
 Automatic Benders’ decomposition
-================================
+=================================
 
 .. meta::
    :description: How to solve using Benders Decomposition directly supported by AIMMS.
