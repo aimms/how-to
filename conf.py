@@ -41,7 +41,7 @@ extensions = ['sphinx.ext.doctest',
     'sphinx.ext.githubpages',
 	'sphinx.builders.linkcheck']
 
-if os.name == 'linux':
+if os.name != 'nt':
 
 #Import spelling extension
     extensions.append('sphinx_sitemap')
