@@ -87,8 +87,7 @@ Bartusch, M. (1983), Optimierung von Netzplänen mit Anordnungsbeziehungen bei k
 
 .. below are spelling exceptions only for this document
 
-.. spelling::
-
+.. spelling:
     Bartusch
     Optimierung 
     von 
