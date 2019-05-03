@@ -29,20 +29,28 @@ To change these editor settings:
 
 1. Go to *Settings > Editor Settings*. A dialog appears.
 
-2. Select an identifier type on the left, and edit its display settings on the right.
+2. Select an identifier type in the Style Type section on the left, and edit its display settings in the right and top sections.
 
-.. figure:: images/editor_settings.png
+.. figure:: images/editor-settings-style-identifier.png
 
-    AIMMS Editor settings
+    Editor settings for identifiers
 
 
-In addition to colors, you can customize styling to display identifier types as bold, italic, or underline.
+In addition to colors, you can customize styling to display identifier types in bold, italic, or underline.
 
-You can also change the styling of comments, keywords, and other elements using the drop-down: *Style Type > AIMMS*.
+You can also change the styling of comments, keywords, and other elements. In the *Style Type* section select *AIMMS* from the drop-down menu.
 
-AIMMS' in-house Editor settings (used for creating the screen shots for How-To articles and User Support training materials) are available for download in the file below. After downloading, use the *Import* menu to add its contents to your settings.
+.. figure:: images/editor-settings-style-aimms.png
 
-:download:`AIMMS Editor Settings <images/EditorSettingsCommunity.xml>`.
+    Editor settings for AIMMS elements
+
+You can also import/export your style settings as .xml to share with others in your organization. Use the *Import* and *Export* buttons in the *Editor Settings* dialog.
+
+AIMMS' in-house Editor settings (as seen in How-To articles and User Support training materials) are available for download in the file below. 
+
+:download:`AIMMS Editor Settings <downloads/EditorSettingsCommunity.xml>`.
+
+
 
 Related Topics
 --------------

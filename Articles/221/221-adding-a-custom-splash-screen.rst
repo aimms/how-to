@@ -12,9 +12,9 @@ Adding a custom splash screen to your AIMMS application
 ..       <link>https://berthier.design/aimmsbackuptech/2012/04/04/adding-a-custom-splashscreen-to-your-aimms-application/</link>
 ..       <pubDate>Wed, 04 Apr 2012 12:03:19 +0000</pubDate>
                
-When you deploy your application, AIMMS uses a standard splash screen as shown below: 
+When you deploy your application, AIMMS uses a standard splash screen at startup, as shown below: 
 
-.. image:: images/Default-AIMMS-Splashscreen-300x195.png
+.. image:: images/aimms-default-splash-screen.png
 
 You have the option to provide your own custom splash screen. 
 
