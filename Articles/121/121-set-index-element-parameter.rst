@@ -128,3 +128,10 @@ We briefly covered set, index, subset, element parameter and mapping in this pos
 
 
 
+.. below are spelling exceptions only for this document
+
+.. spelling::
+
+    Naqada
+    Devonta
+    WR
