@@ -41,6 +41,10 @@ extensions = ['sphinx.ext.doctest',
     'sphinx.ext.githubpages',
 	'sphinx.builders.linkcheck']
 
+if os.name == 'linux':
+
+#Import spelling extension
+    extensions.append('sphinx_sitemap')
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -265,6 +269,11 @@ else:
 	#To check any broken links 
    todo_include_todos = False
 
+# index page for your site
+html_baseurl = 'https://how-to.aimms.com/'
+
+# adding path to non-rst files that go to the build
+html_extra_path = ['robots.txt']
 
 # Generate redirects from old URLs
 
@@ -359,3 +368,4 @@ def setup(sphinx):
 		sphinx.connect('builder-inited', generate_redirects)   
  
 highlight_language = 'aimms'
+
