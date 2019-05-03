@@ -32,6 +32,7 @@ Mathematical Programming solution algorithms, solvers for short, are the muscles
    /Articles/172/172-use-stop-criteria
    /Articles/139/139-Multiple-Solutions
    /Articles/177/177-alternative-mip-solutions-with-cplex
+   /Articles/224/224-automatic-benders-decomposition
    /Articles/116/116-Benders-CPLEX
    /Articles/126/126-TSP-Lazy-Constraints
    /Articles/136/136-Infeasible-Unbounded

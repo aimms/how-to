@@ -1,5 +1,5 @@
-Overview: NBest Operator
-=========================
+Overview: ``NBest`` Operator
+============================
 
 .. meta::
    :description: Selecting the best few elements from a set according to some criterion.
@@ -17,9 +17,9 @@ The third argument is the number ``n``, indicating how many elements you are int
 
 Note that you need to add a subset identifier to store the results (``LargestTransportCities`` in this case) and to set the *Order by* attribute to *user*. 
 
-In the code below, ``LargestTransportCities`` is an indexed subset that is indexed over all factories ``i`` and is a subset of the set ``Customers``.
+In the code below, ``LargestTransportCities`` is an indexed subset that is indexed over all factories ``i`` and is a subset of the set ``Customers``::
 
-  LargestTransportCities(i) := NBest( j, Transport(i,j), 3 );
+   LargestTransportCities(i) := NBest( j, Transport(i,j), 3 );
 
 For each factory ``i``, the above indexed subset ``LargestTransportCities(i)`` will contain the three customers to which the most amount is transported.
 

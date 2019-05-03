@@ -18,7 +18,6 @@ This article discusses some elements from the popular software methodology `Test
    #. Execute tests and **see them pass!**
    
    #. Refactor until performance is acceptable.
-
 #. Repeat
     
 Unit tests in AIMMS projects

@@ -66,3 +66,7 @@ Note that with solvers that don't directly support a solution pool, but do suppo
 .. include:: /includes/form.def
 
 
+.. below are spelling exceptions only for this document
+
+.. spelling:
+   Hakan

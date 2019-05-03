@@ -85,4 +85,22 @@ Bartusch, M. (1983), Optimierung von Netzplänen mit Anordnungsbeziehungen bei k
 
 .. include:: /includes/form.def
 
+.. below are spelling exceptions only for this document
 
+.. spelling:
+    Bartusch
+    Optimierung 
+    von 
+    Netzplänen 
+    mit 
+    Anordnungsbeziehungen 
+    bei 
+    knappen 
+    Betriebsmitteln
+    Universität 
+    Passau
+    Fakultät 
+    für 
+    Mathematik 
+    und 
+    Informatik
