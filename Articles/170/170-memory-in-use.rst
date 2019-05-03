@@ -36,7 +36,7 @@ One of the tools you can use to monitor the memory usage of your application is 
 
 Consider the below screenshot of the identifier cardinalities for a typical gate assignment problem. The parameter ``BothFlightsPossibleOnGate`` has a density of 30%, and it will grow quadratically with the number of flights handled for the gate assignment. When such an identifier is identified, you can choose to handle it according to your application's needs and requirements. 
 
-.. image:: images/identifier-cardinalities.png
+.. image:: images/identifier-cardinalities.PNG
    :align: center
 
 Tips and tricks:

@@ -11,7 +11,7 @@ AIMMS provides various methods for reading Excel data.
  
 #. AimmsXLLibrary, a system library of functions and procedures.
 
-#. Datalink with the provider xlsprovider, two libraries from the AIMMS repository of libraries. 
+#. Datalink with the XLSProvider, two libraries from the AIMMS repository of libraries. 
 
 Let's compare some features of these libraries, and you can decide which method is best for your application.
 
@@ -104,7 +104,7 @@ Note the following:
 
 #. This library supports Excel macros.
 
-#. In this example, the name manager of Excel provided consistent names in the named ranges. When names are not consistent, the code would become signficantly more complicated.
+#. In this example, the name manager of Excel provided consistent names in the named ranges. When names are not consistent, the code would become significantly more complicated.
 
 #. This library doesn't make any assumptions about the placing of data in columns.
 
@@ -159,7 +159,7 @@ Note the following:
 
 #. This library doesn't support Excel macros.
 
-#. In this example, the name manager of Excel provided consistent names in the named ranges. When names are not consistent, the code would become signficantly more complicated.
+#. In this example, the name manager of Excel provided consistent names in the named ranges. When names are not consistent, the code would become significantly more complicated.
 
 #. This library doesn't make any assumptions about the placing of data in columns.
 
@@ -167,13 +167,13 @@ Note the following:
    see also :doc:`../85/85-using-axll-library` and :doc:`../122/122-AXLL-Library` .
 
 
-Datalink with the provider xlsprovider
----------------------------------------
+Datalink with the XLSProvider
+------------------------------------------
 
-The xlsprovider uses a simple strategy to understand the structure of the data in an Excel worksheet.
+The XLSProvider uses a simple strategy to understand the structure of the data in an Excel worksheet.
 The top row with data is assumed to be the header, containing the names of the columns. 
 You have to map these names onto identifier names in the AIMMS model.
-Then datalink can read by making the xlsprovider scan the worksheet row by row and use the mapping to send the data to the appropriate identifiers.
+Then datalink can read by making the XLSProvider scan the worksheet row by row and use the mapping to send the data to the appropriate identifiers.
 
 
 The code to read the Excel data looks as follows:

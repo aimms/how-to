@@ -12,9 +12,13 @@
 Mathematical Modeling
 ========================
 
+.. meta::
+   :description: Help and support with creating mathematical models in AIMMS.
+
 .. image:: ../Images/modeling-gray.png
    :scale: 100
    :align: right
+   :alt: AIMMS Modeling Help & Support
 
 This section provides support for designing mathematical models that produce the best solutions to solve problems and maximize opportunities in your business or organization.
 

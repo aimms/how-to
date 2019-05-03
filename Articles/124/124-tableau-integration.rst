@@ -5,15 +5,8 @@
    :description: How to automate Tableau integration with the AIMMS DataLink library.
    :keywords: tableau, datalink, link, integrate
 
-.. note::
 
-	This article was originally posted to the AIMMS Tech Blog.
-
-.. sidebar:: Well, we're using:
-
-    .. image:: images/tableau.logo_.png
-
-Although both the traditional AIMMS Windows UI and the new AIMMS Web UI offer excellent data visualization capabilities to view the data present *within* an AIMMS application, many of our customers have expressed the wish to be able to view and work with AIMMS data in Tableau (and other BI tools such as QlikView, or Spotfire). This allows a much wider audience within a company to track KPIs on dashboards based on the results from an AIMMS application, using a wider range of graphical capabilities to drill down into the data presented, and to cross analyze these results against data from various other corporate data sources.
+Although both the traditional AIMMS Windows UI and the new AIMMS WebUI offer excellent data visualization capabilities to view the data present *within* an AIMMS application, many of our customers have expressed the wish to be able to view and work with AIMMS data in Tableau (and other BI tools such as QlikView, or Spotfire). This allows a much wider audience within a company to track KPIs on dashboards based on the results from an AIMMS application, using a wider range of graphical capabilities to drill down into the data presented, and to cross analyze these results against data from various other corporate data sources.
 
 .. figure:: images/AIMMS.Data_.For_.Tableau.TDE_.png
 
@@ -47,27 +40,27 @@ You can also imagine looking at the same data from within AIMMS while doing some
 Working with the DataLink library
 ---------------------------------
 
-The datalink library is available from the library repository. This repository can be accessed via the AIMMS - File - LibraryManager tool, and an example project that demonstrates the use of the DataLink library from this `location <http://download.aimms.com/aimms/download/data/Libraries/DataLinkExample.7z>`_. To see how the Tableau link works, let's take a look at the example project. I'll explain how to specify which identifiers in the model need to be written to a TDE file, how to actually generate a native Tableau TDE file, and how to upload a TDE file to a Tableau Server right from your model.
+The DataLink library is available from the library repository. This repository can be accessed via *AIMMS > File > LibraryManager*, and you can also find an `example project <http://download.aimms.com/aimms/download/data/Libraries/DataLinkExample.7z>`_ that demonstrates the use of the DataLink library. To see how the Tableau link works, let's take a look at the example project. I'll explain how to specify which identifiers in the model need to be written to a TDE file, how to actually generate a native Tableau TDE file, and how to upload a TDE file to a Tableau Server right from your model.
 
 Annotations
 ^^^^^^^^^^^^
 
-To indicate which identifiers in a model need to be exported to a TDE file, the DataLink library uses a recent new feature that we have (silently) introduced into AIMMS called *annotations.* Annotations in AIMMS are generic string-valued key-value pairs, that can be associated with any node in the model tree in the AIMMS IDE, and can be set through the regular attribute form of a model node. If set on a section within the model, the annotation value will be inherited by all child nodes underneath that section. Any model library can define its own collection of annotation keys; they serve as *library-specific* properties that you can set for every identifier in a model. Thus, annotations allow any developer to *extend* the core functionality of AIMMS by creating *generic* libraries, with full support for specifying the properties necessary to use such a library within the model tree.
+To indicate which identifiers in a model need to be exported to a TDE file, the DataLink library uses a feature in AIMMS called *annotations*. Annotations in AIMMS are generic string-valued key-value pairs, that can be associated with any node in the model tree in the AIMMS IDE, and can be set through the regular attribute form of a model node. If set on a section within the model, the annotation value will be inherited by all child nodes underneath that section. Any model library can define its own collection of annotation keys; they serve as *library-specific* properties that you can set for every identifier in a model. Thus, annotations allow any developer to *extend* the core functionality of AIMMS by creating *generic* libraries, with full support for specifying the properties necessary to use such a library within the model tree.
 
 Use for Tableau link
 ^^^^^^^^^^^^^^^^^^^^
 
 The DataLink library is an example of such a generic library: by adding it to a model, you extend the functionality of AIMMS with the capability to create and export TDE files generated from data in the model. Thus far, we have defined two annotation types for the DataLink library,
 
-* dl::Table
-* dl::Category
+* ``dl::Table``
+* ``dl::Category``
 
 .. figure:: images/annotations.png
 
      DataLink annotations set on a declaration section
 
 
-By specifying the dl::Table annotation for a specific identifier in a model, you indicate that you want to store the content of that identifier in the table with the name specified through the annotation, along with all other identifiers that hold the same dl::Table value.  All identifiers exported to the same TDE table should have the identical index domain. If a section in your model contains a set of identifiers with the same domain that all need to be exported to the same TDE file, you can simply set the dl::Table annotation on the section, after which the value will be inherited by all identifiers in that section. Identifiers for which the dl::Table annotation is not set will not be exported to a TDE file. Through the dl::Category annotation, you can specify one or more categories of identifiers that you want to selectively export to a TDE file.
+By specifying the ``dl::Table`` annotation for a specific identifier in a model, you indicate that you want to store the content of that identifier in the table with the name specified through the annotation, along with all other identifiers that hold the same ``dl::Table`` value.  All identifiers exported to the same TDE table should have the identical index domain. If a section in your model contains a set of identifiers with the same domain that all need to be exported to the same TDE file, you can simply set the ``dl::Table`` annotation on the section, after which the value will be inherited by all identifiers in that section. Identifiers for which the ``dl::Table annotation`` is not set will not be exported to a TDE file. Through the ``dl::Category annotation``, you can specify one or more categories of identifiers that you want to selectively export to a TDE file.
 
 .. figure:: images/tableau-control.png
 
@@ -77,12 +70,12 @@ By specifying the dl::Table annotation for a specific identifier in a model, you
 Creating a TDE file
 ^^^^^^^^^^^^^^^^^^^^
 
-After you have selected which identifiers to export to which TDE files, you can actually create a TDE file by calling the procedure dl::TDEDataWrite contained in the DataLink library. It will export all identifiers for which the dl::Table annotation has been specified to their corresponding TDE files. Through the optional category argument you can limit the export to those identifiers for which the dl::Category annotation matches the category argument. Once the TDE file has been created you can open it using the Tableau desktop application. Alternatively, you can display it *within the AIMMS end-user UI* by opening it through the Document Viewer object.
+After you have selected which identifiers to export to which TDE files, you can actually create a TDE file by calling the procedure ``dl::TDEDataWrite`` contained in the DataLink library. It will export all identifiers for which the ``dl::Table`` annotation has been specified to their corresponding TDE files. Through the optional category argument you can limit the export to those identifiers for which the ``dl::Category`` annotation matches the category argument. Once the TDE file has been created you can open it using the Tableau desktop application. Alternatively, you can display it *within the AIMMS end-user UI* by opening it through the Document Viewer object.
 
 Uploading a TDE file to a Tableau Server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once the TDE file has been created, you can subsequently upload to a Tableau Server through the procedure dl::UploadTDEToServer. Through the arguments of this procedure you must provide the server info and credentials necessary to upload the file. After you have uploaded a TDE file to the Tableau Server you can view the data by logging onto the the Tableau Server via your browser and opening a workspace that is linked to the data in the uploaded file.
+Once the TDE file has been created, you can subsequently upload to a Tableau Server through the procedure ``dl::UploadTDEToServer``. Through the arguments of this procedure you must provide the server info and credentials necessary to upload the file. After you have uploaded a TDE file to the Tableau Server you can view the data by logging onto the the Tableau Server via your browser and opening a workspace that is linked to the data in the uploaded file.
 
 Embedding Tableau in the AIMMS Web UI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -111,7 +104,7 @@ In fact, the interface to export to any data source is fairly straightforward, a
 
 * Closing an open data source
 
-If you are interested in extending, or having the DataLink library extended to QlikView or Spotfire, please drop us a line, and we can discuss the possibilities.
+If you are interested in extending, or having the DataLink library extended to QlikView or Spotfire, please `drop us a line <https://community.aimms.com/>`_.
 
 
 

@@ -12,7 +12,7 @@ Schedule Regular Jobs
 Some applications involve solving a mathematical program regularly, for instance every night or every ten minutes. 
 In this article, we'll discuss how an AIMMS job can reschedule itself, as depicted in the next picture.
 
-.. image:: images/159915.svg
+.. image:: images/DelegationLevel.png
 
 Effectively, this realizes that the job at hand is solved regularly. As you can see from this image:
 
@@ -30,7 +30,7 @@ To start this sequence, the following code is used.
 
 Each line is explained as follows:
 
-#. Determine the payload procedure that should be executed by each server session.  Here it is the ``pr_Friesian``, as Friesians are excellent workhorses.
+#. Determine the payload procedure that should be executed by each server session.  Here it is the ``pr_Friesian``, as Friesian horses are excellent workhorses.
 
 #. A call to the procedure that actually starts each server session.
 

@@ -22,11 +22,7 @@ from sphinx.builders import html as builders
 from sphinx.util import logging
 #import pdb
 import subprocess
-#spellcheck
-if os.name == 'nt':
-	import platform
-	# import ssl
-	# import urllib
+
 
 # sys.path.insert(0, os.path.abspath('.'))
 
@@ -49,43 +45,6 @@ if os.name == 'linux':
 
 #Import spelling extension
     extensions.append('sphinx_sitemap')
-
-#```
-#This next if-then-else tries to import advanced extensions
-#Please mind the spelling extension is only available for 32bits Python (2 or 3) currently (2019-04-01)
-#```
-SpellCheck_Please = False # ------------------------------------------------------------------------------------> To activate spellchecking (make spelling)
-
-
-
-
-if os.name == 'nt' and platform.architecture()[0]=='64bit' and SpellCheck_Please:
-
-		#pdb.set_trace()
-		try:
-			import sphinxcontrib.spelling
-			success = 1
-		except ImportError ,e:
-			success = 0
-			pass	
-			
-		if success:	
-			#Import spelling extension
-			extensions.append('sphinxcontrib.spelling')
-			
-			#Retrieve the one and only spelling exception central file 
-			import requests
-			url = "https://gitlab.aimms.com/Arthur/unified-spelling_word_list_filename/raw/master/spelling_wordlist.txt"
-			#to debug, please comment the following line
-			requests.packages.urllib3.disable_warnings()
-			r = requests.get(url,verify=False)
-			with open('spelling_wordlist.txt','wb') as f:
-			  f.write(r.content)
-		else:
-			
-			logger = logging.getLogger(__name__)
-			logger.info("\nIf you would like to use the Spell Checker, please make sure to install the extension by running ``python -m pip install sphinxcontrib.spelling``, and to run Python 32bits\n")
-
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -213,14 +172,14 @@ html_theme_options = {
 html_static_path = ['_static']
 
 # if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown :)
-if os.name != 'nt':
-    Display_edit_on_gitlab = False
-else:   
-    Display_edit_on_gitlab = True
+if os.name == 'nt':
+   Display_edit_on_gitlab = True
+else:
+   Display_edit_on_gitlab = False
 
-    
+# removed reference to theme.css as it no longer exists     
 html_context = {
-    'css_files': ['_static/Hacks.css','_static/theme.css', '_static/copycode.css'],
+    'css_files': ['_static/Hacks.css', '_static/copycode.css'],
     "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
     "gitlab_user": "aimms/customer-support", # Username
     "gitlab_repo": "aimms-how-to", # Repo name
@@ -304,11 +263,11 @@ texinfo_documents = [
 ]
 
 # if builds on GitLab (a Linux machine), force todos not to be shown :)
-if os.name != 'nt':
-	todo_include_todos = False
+if os.name == 'nt':
+   nitpicky = True
 else:
 	#To check any broken links 
-	nitpicky = True
+   todo_include_todos = False
 
 # index page for your site
 html_baseurl = 'https://how-to.aimms.com/'
@@ -403,7 +362,7 @@ def setup(sphinx):
    sphinx.add_javascript("https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js")
 
    #To handle redirections
-   handle_redirections = False
+   handle_redirections = True
    if handle_redirections or os.name != 'nt':
 		sphinx.add_config_value('redirects_file', 'redirects', 'env')
 		sphinx.connect('builder-inited', generate_redirects)   
