@@ -20,7 +20,7 @@ Getting Started
    :align: right
    :alt: AIMMS Getting Started Help & Support
 
-These topics provide fundamentals about using AIMMS. Learn about terminology, shortcuts, and basic set-up. You will also find licensing help here.
+These topics provide fundamentals about using and customizing AIMMS. Learn about terminology, settings options, shortcuts, and basic set-up. You will also find licensing help here.
 
 .. toctree::
    :maxdepth: 1
@@ -34,3 +34,5 @@ These topics provide fundamentals about using AIMMS. Learn about terminology, sh
    /Articles/45/45-share-project-files
    /Articles/84/84-using-libraries
    /Articles/145/145-import-export-section
+   /Articles/232/232-display-line-numbers
+   /Articles/225/225-change-syntax-highlighting-colors

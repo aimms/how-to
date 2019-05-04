@@ -29,7 +29,7 @@ AIMMS offers two User Interface builders, the classic WinUI for applications tha
    /Articles/95/95-change-default-ui
    /Articles/124/124-tableau-integration
    /Articles/123/123-WebUI-FORMS
+   /Articles/221/221-adding-a-custom-splash-screen
    CSS/index
-   /Articles/221/221-adding-a-custom-splashscreen-to-your-aimms-application
-   /Articles/232/232-displaying-line-numbers-in-the-editor-of-the-aimms-ide
-   /Articles/225/225-changing-colors-for-different-identifier-types-in-aimms-ide
+   
+*For AIMMS IDE and Editor Settings topics, see* :doc:`../C_Licensing/index`
