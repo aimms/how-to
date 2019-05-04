@@ -1,0 +1,25 @@
+﻿* AIMMS
+solver_listing_messages 4
+* AOA
+* BARON 19
+* CBC 2.9
+* CONOPT 4.0
+* CPLEX 12.8
+* CPLEX 12.9
+"CPLEX 12.9".multi_objective_display 2
+* CPOptimizer 12.8
+* CPOptimizer 12.9
+* GUROBI 8.1
+* IPOPT 3.11
+* Knitro 11.0
+* Knitro 11.1
+* MINOS
+* ODH-CPLEX 4.0
+* PATH 4.7
+* SNOPT 7.2
+* XA 16
+* NETSOL
+* Environment
+Project_Title "AIMMS - Diet Problem"
+Startup_Page "Problem Description"
+Startup_Case "data\Cases\A Diet Problem.data"
