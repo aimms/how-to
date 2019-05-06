@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2012-11-30 12:30:57">
+	<PageEditSize Type="Inherited">
+		<Size Width="774" Height="540" />
+	</PageEditSize>
+	<ProjectUUID>B8B2733F-7D8E-44C4-9A04-310722BD55FF</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<ResizeData>
+		<MainArea Line="FixedFromBottom" Value="82" />
+	</ResizeData>
+	<Background Inherited="true" />
+	<PageObject Type="Network Object">
+		<Location top="12" left="18" bottom="444" right="726" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<HorizontalScrollbar>true</HorizontalScrollbar>
+		<VerticalScrollbar>true</VerticalScrollbar>
+		<EqualXYScale>false</EqualXYScale>
+		<ScrollControl>NavigationButtons</ScrollControl>
+		<VisibleArea>
+			<Left>-130</Left>
+			<Right>-60</Right>
+			<Top>55</Top>
+			<Bottom>15</Bottom>
+		</VisibleArea>
+		<TotalArea>
+			<Left>-180</Left>
+			<Right>180</Right>
+			<Top>90</Top>
+			<Bottom>-90</Bottom>
+		</TotalArea>
+		<Background>
+			<Background_Image_Source ID="101">"From GIS Source"</Background_Image_Source>
+			<Source>
+				<Name ID="1001">StateSource( s )</Name>
+				<Type ID="1002">"GML"</Type>
+				<GML_File ID="1010">StateGMLFile( s )</GML_File>
+			</Source>
+			<Layer>
+				<Name ID="2001">StateName( s )</Name>
+				<Source ID="2012">StateSource( s )</Source>
+				<Appearance>
+					<Fill_Color ID="2011">stateColor( s )</Fill_Color>
+				</Appearance>
+			</Layer>
+		</Background>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>s</Symbol>
+			<Symbol>StateSource</Symbol>
+			<Symbol>stateColor</Symbol>
+			<Symbol>StateGMLFile</Symbol>
+			<Symbol>StateName</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

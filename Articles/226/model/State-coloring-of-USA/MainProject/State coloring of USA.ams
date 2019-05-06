@@ -1,0 +1,140 @@
+## ams_version=1.0
+
+Model State_coloring_of_USA {
+    Section ConstraintProgrammingSection {
+        Set USAStates {
+            Index: s, s1, s2;
+            Definition: {
+                data { Alabama, Alaska, Arizona, Arkansas, California, Colorado,
+                Connecticut, Delaware, Florida, Georgia, Hawaii,
+                Idaho, Illinois, Indiana, Iowa, Kansas,
+                Kentucky, Louisiana, Maine, Maryland, Massachusetts,
+                Michigan, Minnesota, Mississippi, Missouri, Montana,
+                Nebraska, Nevada, 'New Jersey', 'New Hampshire', 'New Mexico',
+                'New York', 'North Carolina', 'North Dakota', Ohio, Oklahoma,
+                Oregon, Pennsylvania, 'Rhode Island', 'South Carolina', 'South Dakota',
+                Tennessee, Texas, Utah, Vermont, Virginia,
+                Washington, 'West Virginia', Wisconsin, Wyoming }
+            }
+        }
+        Set AdjacentStates {
+            IndexDomain: s;
+            SubsetOf: USAStates;
+            InitialData: {
+                data { Alabama           : { Florida, Georgia, Mississippi, Tennessee },
+                                                Arizona           : { California, Colorado, Nevada, 'New Mexico', Utah },
+                                                Arkansas          : { Missouri, Tennessee, Oklahoma, Texas, Louisiana, Mississippi },
+                                                California        : { Arizona, Nevada, Oregon },
+                                                Colorado          : { Arizona, Kansas, Nebraska, 'New Mexico', Oklahoma, Utah, Wyoming },
+                                                Connecticut       : { Massachusetts, 'New York', 'Rhode Island' },
+                                                Delaware          : { Maryland, 'New Jersey' },
+                                                Florida           : { Alabama, Georgia },
+                                                Georgia           : { Florida, Alabama, 'North Carolina', 'South Carolina', Tennessee },
+                                                Idaho             : { Montana, Nevada, Oregon, Utah, Washington, Wyoming },
+                                                Illinois          : { Indiana, Iowa, Kentucky, Michigan, Missouri, Wisconsin },
+                                                Indiana           : { Illinois, Kentucky, Michigan, Ohio },
+                                                Iowa              : { Illinois, Minnesota, Nebraska, 'South Dakota', Wisconsin },
+                                                Kansas            : { Colorado, Missouri, Nebraska, Oklahoma },
+                                                Kentucky          : { Virginia, Illinois, Indiana, Missouri, Ohio, Tennessee, 'West Virginia' },
+                                                Louisiana         : { Arkansas, Mississippi, Texas },
+                                                Maine             : { 'New Hampshire' },
+                                                Maryland          : { Pennsylvania, Virginia, 'West Virginia' },
+                                                Massachusetts     : { Connecticut, 'New Hampshire', 'New York', 'Rhode Island', Vermont },
+                                                Michigan          : { Minnesota, Wisconsin, Illinois, Indiana, Ohio },
+                                                Minnesota         : { Michigan, 'North Dakota', 'South Dakota', Iowa,  Wisconsin },
+                                                Mississippi       : { Alabama, Arkansas, Louisiana, Tennessee },
+                                                Missouri          : { Arkansas, Illinois, Iowa, Nebraska, Oklahoma, Tennessee },
+                                                Montana           : { Idaho, 'North Dakota', 'South Dakota', Wyoming },
+                                                Nebraska          : { Colorado, Iowa, Kansas, Missouri, 'South Dakota', Wyoming },
+                                                Nevada            : { Arizona, California, Idaho, Oregon, Utah },
+                                                'New Jersey'      : { 'New York', Pennsylvania, Delaware },
+                                                'New Hampshire'   : { Massachusetts, Maine, Vermont },
+                                                'New Mexico'      : { Arizona, Colorado, Oklahoma, Texas, Utah },
+                                                'New York'        : { Pennsylvania, Massachusetts, Connecticut, 'New Jersey', Vermont },
+                                                'North Carolina'  : { Virginia, Georgia, 'South Carolina', Tennessee },
+                                                'North Dakota'    : { Minnesota, Montana, 'South Dakota' },
+                                                Ohio              : { Kentucky, Pennsylvania, Indiana, Michigan, 'West Virginia' },
+                                                Oklahoma          : { Arkansas, Colorado, Kansas, Missouri, 'New Mexico', Texas },
+                                                Oregon            : { Washington, California, Nevada, Idaho },
+                                                Pennsylvania      : { Delaware, Maryland, 'New Jersey', 'New York', Ohio, 'West Virginia' },
+                                                'Rhode Island'    : { Massachusetts, Connecticut },
+                                                'South Carolina'  : { Georgia, 'North Carolina' },
+                                                'South Dakota'    : { Iowa, Minnesota, Montana, Nebraska, 'North Dakota', Wyoming },
+                                                Tennessee         : { Kentucky, Virginia, Alabama, Arkansas, Georgia, Mississippi, Missouri, 'North Carolina' },
+                                                Texas             : { Arkansas, Louisiana, 'New Mexico', Oklahoma },
+                                                Utah              : { Wyoming, Colorado, Idaho, Nevada, Arizona, 'New Mexico' },
+                                                Vermont           : { Massachusetts, 'New Hampshire', 'New York' },
+                                                Virginia          : { Kentucky, Maryland, 'North Carolina', Tennessee, 'West Virginia' },
+                                                Washington        : { Idaho, Oregon },
+                                                'West Virginia'   : { Kentucky, Pennsylvania, Maryland, Ohio },
+                                                Wisconsin         : { Illinois, Iowa, Michigan, Minnesota },
+                                                Wyoming           : { Colorado, Idaho, Montana, Nebraska, 'South Dakota', Utah }
+                                                 }
+            }
+        }
+        Set SelectedColors {
+            SubsetOf: AllColors;
+            Index: sc;
+            Definition: {
+                { IndexColors | 6 <= ord(IndexColors) and ord(IndexColors) < (6+MaxNoColors) }
+            }
+        }
+        Parameter MaxNoColors {
+            Definition: 4;
+        }
+        ElementVariable stateColor {
+            IndexDomain: (s);
+            Range: SelectedColors;
+        }
+        Constraint AdjacentStatesHaveDifferentColors {
+            IndexDomain: (s1,s2)|s1 < s2 and s2 in AdjacentStates(s1);
+            Definition: stateColor(s1) <> stateColor(s2);
+        }
+        MathematicalProgram coloringPlan {
+            Direction: minimize;
+            Constraints: AllConstraints;
+            Variables: AllVariables;
+            Type: Automatic;
+        }
+        Procedure SolveColoringProblem {
+            Body: {
+                ShowProgressWindow();
+                Solve ColoringPlan where time_limit := 60 ;
+            }
+        }
+    }
+    Section GIS_USA {
+        StringParameter StateSource {
+            IndexDomain: (s);
+            Definition: s;
+            Comment: "The name of a GIS source layer, here we just use the name of a state.";
+        }
+        StringParameter StateGMLFile {
+            IndexDomain: s;
+            Definition: "US States GML Files\\" + s + ".gml";
+        }
+        StringParameter StateName {
+            IndexDomain: (s);
+            Definition: s;
+            Comment: "Identifying a layer, just use the name of the state here.";
+        }
+    }
+    Procedure MainInitialization {
+        Body: {
+            stateColor(s) := first( SelectedColors ); ! Avoid warning about not initialized.
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            SolveColoringProblem ;
+            
+            !stateColor('Hawaii') := first(SelectedColors);
+            !stateColor('Alaska') := last(SelectedColors);
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+    }
+}
