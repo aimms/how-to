@@ -14,8 +14,7 @@ Interrupt Execution During a Single Statement
 ..       <pubDate>Tue, 03 Jan 2012 14:31:26 +0000</pubDate>
 ..       <dc:creator><![CDATA[]]></dc:creator>
 ..       <guid isPermaLink="false">http://blog.aimms.com/?p=583</guid>
-..       <description></description>
-..       <content:encoded>
+
 
 With AIMMS it is possible to interrupt long running executions with the keyboard shortcut ``CTRL+ Shift + S``. However, this shortcut key only works between two executed statements or two generated constraints, or between solver iterations while running the solve statement.
 

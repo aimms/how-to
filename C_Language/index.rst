@@ -32,6 +32,7 @@ This section covers topics related to expressing a model in the AIMMS programmin
    /Articles/133/133-External-Functions-InputData
    /Articles/150/150-solve-in-loop
    /Articles/121/121-set-index-element-parameter
+   /Articles/272/272-using-multiple-indices-for-one-set
    /Articles/243/243-local-binding-vs-default-binding 
    /Articles/17/17-category-mapping
    /Articles/141/141-element-after-last
