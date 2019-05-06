@@ -1,4 +1,4 @@
-Determine number of available processors in AIMMS==================================================
+:orphan:Determine number of available processors in AIMMS==================================================
 .. meta::   :description: Determine the number of CPUs available on the current computer.   :keywords: CPU's available, Windows, Linux.. note::    This article was originally posted to the AIMMS Tech Blog.
 .. <link>https://berthier.design/aimmsbackuptech/2012/06/28/determine-number-of-available-processors-in-aimms/</link>
 .. <pubDate>Thu, 28 Jun 2012 15:31:18 +0000</pubDate>.. <guid isPermaLink="false">http://blog.aimms.com/?p=1448</guid>

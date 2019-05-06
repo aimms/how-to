@@ -5,10 +5,9 @@ Interrupt Execution During a Single Statement
    :description: How to interrupt a long running assignment.
    :keywords: interrupt, long running 
 
-
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog.
+    This article was originally posted to the AIMMS Tech Blog.
 
 
 ..       <link>https://berthier.design/aimmsbackuptech/2012/01/03/aborting-execution-of-aimms/</link>
