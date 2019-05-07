@@ -65,7 +65,7 @@ You can also make the page responsive to screen size.
 
 The model can be downloaded below:
 
-   * :download:`State map coloring example <model/State-coloring-of-USA.zip>`
+   :download:`State map coloring example <model/State-coloring-of-USA.zip>`
 
 To run this example, just press ``F6`` to see the following solution:
 

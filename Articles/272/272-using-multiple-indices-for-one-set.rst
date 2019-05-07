@@ -35,7 +35,7 @@ After the initial assignment of indices, you can't edit in the ``index`` attribu
 
     Set attribute window with grayed out index attribute
 
-Instead, use the ``index`` attribute wizard by clicking the magic wand icon just left of the input field.
+Instead, use the ``index`` attribute wizard by clicking the magic wand icon just left of the input field. The wizard appears, as shown below.
 
 .. figure:: images/Cities-index-attribute-wizard.png
     :align: center

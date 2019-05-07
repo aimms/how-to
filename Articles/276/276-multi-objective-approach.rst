@@ -152,6 +152,6 @@ Project download
 
 The project can be downloaded below.
 
-    * :download:`DietProblem.zip <model/DietProblem.zip>` 
+    :download:`DietProblem.zip <model/DietProblem.zip>` 
 
 .. include:: /includes/form.def
