@@ -1,4 +1,4 @@
-How to Change the Default Solvers Used
+Change the Default Solvers Used
 =============================================
 
 .. meta::

@@ -25,12 +25,12 @@ This section provides support for designing mathematical models that produce the
 .. toctree::
    :maxdepth: 1
     
-   /Articles/226/226-coloring-the-states-of-the-usa
+   /Articles/226/226-color-a-map-with-constraint-programming
    /Articles/138/138-ROGO
    /Articles/137/137-Small-Rostering
    /Articles/142/142-Narrowing-Time-Windows
    /Articles/140/140-Scheduling-Project-Planning
    /Articles/193/193-check-if-variables-satisfy-constraints
-   /Articles/276/276-healthy-diet-reasonable-price
+   /Articles/276/276-multi-objective-approach
    
    

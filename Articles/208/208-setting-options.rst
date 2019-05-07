@@ -1,5 +1,5 @@
-Setting Options
-================
+Adjust Engine and Solver Settings
+=================================
 
 .. meta::
    :description: Comparing different ways to customize AIMMS engine and solver settings.

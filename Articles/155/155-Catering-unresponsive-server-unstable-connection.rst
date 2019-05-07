@@ -1,4 +1,4 @@
-Troubleshooting Unresponsive Applications
+Troubleshoot Unresponsive Applications
 ============================================================
 
 .. meta::

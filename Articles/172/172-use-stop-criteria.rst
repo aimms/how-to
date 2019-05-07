@@ -1,4 +1,4 @@
-How to set Stop Criteria for Math Programs 
+Set Stop Criteria for Math Programs 
 ==============================================
 
 .. meta::
