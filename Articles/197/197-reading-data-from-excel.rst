@@ -1,4 +1,4 @@
-Reading columns of data from Excel
+Read Columns of Data from Excel
 ===================================
 
 .. meta::

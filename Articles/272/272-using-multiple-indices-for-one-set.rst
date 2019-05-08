@@ -1,12 +1,52 @@
-Using multiple indices for one set========================================.. meta::   :description: One set can have several indices running over it.   :keywords: indices, set, algebraic notation, AIMMS Essentials .. note::
-    This article was originally posted to the AIMMS Tech Blog.
+Use Multiple Indices for a Set
+========================================
+
+.. meta::
+   :description: One set can have several indices running over it.
+   :keywords: indices, set, index, algebraic notation
+
+.. note::
+
+    This article was originally posted to the AIMMS Tech Blog.
+
 .. <link>https://berthier.design/aimmsbackuptech/2012/10/05/using-multiple-indices-for-one-set/</link>
-.. <pubDate>Fri, 05 Oct 2012 12:41:07 +0000</pubDate>.. <guid isPermaLink="false">http://blog.aimms.com/?p=1845</guid>
-.. figure:: images/index.jpg    :align: center    Multiple indices for a set    One question that we have seen multiple times at User Support being asked, as well as on the AIMMS Google Group is a way to use different indices to refer to the elements of a set.
-Suppose we have a set ``Cities``, then a parameter ``Distance`` would naturally be defined over 2 dimensions (``from`` and ``to``), both coming from this same set ``Cities``. However, if you don't know that AIMMS can handle multiple indices for a set, a solution approach I have seen come by a couple of times is creating two new sets ``CitiesFrom`` and ``CitiesTo``, both subset of the set ``Cities``, containing all elements of the set ``Cities`` and each with its' own index.
-Luckily, there exists an easier approach: you can just assign multiple indices to one set. If you create a new set, you can directly add multiple indices to this set by typing all of them in the index attribute field, separated by commas (e.g. ``city, cityFrom, cityTo``). The only thing is that after the initial assignment of one or more indices to the index attribute of a set, you can't type in the index attribute of a set anymore.
-.. figure:: images/Cities-attribute-window.png    :align: center    Set attribute window with grayed out index attribute. In the screenshot above, the index ``city`` was added, after which the 'Check, Commit, and Close' button was pressed. When the attribute window for this set is now opened, you will see that the index attribute is grayed out indicating it is not possible to type in this attribute anymore.
-If you want to modify the indices for this set Cities now, you will have to make use of the index attribute wizard, which you can open by pressing the magic wand button just left of the input field for the index attribute. This will then open the wizard for the index attribute, which is shown below: 
-.. figure:: images/Cities-index-attribute-wizard.png    :align: center    Wizard for index attribute of set
-Note that an alternative way is to manually add an index identifier to your model tree for each index you want to add. For these index identifiers, you will have to set the Range attribute to the set that this index should correspond to as shown in the image below: .. figure:: images/demo-explicit-index.png    :align: center    Explicit index identifier for set
+.. <pubDate>Fri, 05 Oct 2012 12:41:07 +0000</pubDate>
+.. <guid isPermaLink="false">http://blog.aimms.com/?p=1845</guid>
+
+.. figure:: images/index.jpg
+    :align: center
+
+    Multiple indices for a set
+    
+You can use different indices to refer to the elements of the same set.
+
+Suppose we have a set, ``Cities``, and a parameter, ``Distance``. We want to define ``Distance`` over 2 dimensions (``from`` and ``to``) for the same set, ``Cities``. 
+
+If you didn't know that AIMMS can handle multiple indices for a set, you might create two new subsets ``CitiesFrom`` and ``CitiesTo``, containing all elements of the set ``Cities``, and each with its own index.
+
+Luckily, you can just assign multiple indices to one set. 
+
+When you create a new set, you can directly add multiple indices to it by typing all of them in the index attribute field, separated by commas (e.g. ``city, cityFrom, cityTo``). 
+
+After the initial assignment of indices, you can't edit in the ``index`` attribute of the set anymore. It will be grayed out when you open the attribute window.
+
+.. figure:: images/Cities-attribute-window.png
+    :align: center
+
+    Set attribute window with grayed out index attribute
+
+Instead, use the ``index`` attribute wizard by clicking the magic wand icon just left of the input field. The wizard appears, as shown below.
+
+.. figure:: images/Cities-index-attribute-wizard.png
+    :align: center
+
+    Wizard for index attribute of set
+
+Alternatively, you can manually add an ``index`` identifier to your model tree for each index you want to add. For these ``index`` identifiers, you will have to set the ``range`` attribute to the corresponding set as shown below: 
+
+.. figure:: images/demo-explicit-index.png
+    :align: center
+
+    Explicit index identifier for set
+
 .. include:: /includes/form.def

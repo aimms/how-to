@@ -1,19 +1,24 @@
-A Healthy Diet for a Reasonable Price
+Use a Multi-Objective Approach
 ========================================
 
 .. meta::
-   :description: Compare multi objective approach to approach directly solving objectives
+   :description: Compare multi-objective approach to separately solving single objectives.
    :keywords: multi objective, diet, CPLEX, WebUI
 
-Trying to loose some weight, a healthy diet means for me that it should be low on calories.
-A reasonable price means for me not that the absolute minimum is a must, but I do not want much above it either.
-So I have two objectives: minimizing price, and minimizing calories of my diet.
-Of course, minimum/maximum requirements on nutrients such as proteins should be met.
+In this article we will compare a multi-objective approach to separately solving single objectives.
 
-Approach
------------
+Let's take for an example a problem trying to find a healthy diet for a reasonable price. First let's define our objectives:
 
-Use the multi objective feature available since AIMMS 4.65 and CPLEX 12.9. 
+* Minimize calories: I'm trying to lose some weight, so my healthy diet should be low in calories.
+
+* Minimize price: A reasonable price means that it doesn't have to be the absolute minimum, but should be within a close range.
+
+Of course, I want to include minimum/maximum requirements for nutrients such as proteins.
+
+Multi-Objective Approach
+-------------------------
+
+Let's use the multi-objective feature available since AIMMS 4.65 and CPLEX 12.9. 
 
 .. code-block:: aimms
     :linenos:
@@ -50,17 +55,19 @@ There are several remarks on the above:
 
 #. Because the ``reltol`` argument on line 11 has value 0.1, subsequent solves will not increase the total cost by more than 10%.
 
-To be able to compare the multi objective procedure to traditional single objective solves, there are also two solution procedures in this application:
+Single Objective Approach
+-------------------------
+
+To be able to compare the multi-objective procedure to traditional single objective solves, there are also two solution procedures in this application:
 
 #. ``MainExecution``, a traditional single objective solve minimizing total cost.
 
 #. ``SolveMinCalo``, a traditional single objective solve minimizing total calories.
 
-Results
-----------
+Comparing Results
+------------------
 
-The application has both a WinUI and a WebUI interface. 
-Because I like the WebUI more, I used that one to make the following screenshots.
+The application has both WinUI and WebUI interfaces, but WebUI is featured in the following screenshots.
 
 .. figure:: images/mintotcost.png
 
@@ -86,10 +93,10 @@ The objectives are summarized in the table below:
 | Multi objective          |  23.85      |  2576.40       |
 +--------------------------+-------------+----------------+
 
-As you can see, the objective values of the multi objective are not as good as the individual objectives values, but they provide a good balance.
+As you can see, the multi-objective values are not as good as either of the individual objective values, but the multi-objective approach provides a good balance.
 
-Also interesting is the log that CPLEX provides in the file ``log/cplex 12.9.sta``. 
-(Obtaining such a log is discussed in :doc:`../13/13-Solver-Logging-IDE`).
+You may also find the CPLEX log interesting, as found in the file ``log/cplex 12.9.sta``. 
+(See also :doc:`../13/13-Solver-Logging-IDE`.)
 
 .. code-block:: none
     :linenos:
@@ -140,6 +147,11 @@ A breakdown of above log:
 
 #. lines 13 - 37 for the multi objective solve.
 
-The project can be downloaded :download:`here <model/DietProblem.zip>` 
+Project download
+------------------
+
+The project can be downloaded below.
+
+    :download:`DietProblem.zip <model/DietProblem.zip>` 
 
 .. include:: /includes/form.def

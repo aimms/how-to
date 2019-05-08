@@ -1,7 +1,10 @@
-Starting AIMMS Job via the AIMMS PRO API using JAVA
+Start a Job via PRO API using Java
 ===================================================
 
 
+.. meta::
+    :description: Starting an AIMMS job via the AIMMS PRO API using C#.
+    :keywords: java, pro api
 
 Prerequisites
 -------------

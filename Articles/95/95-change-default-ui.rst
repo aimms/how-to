@@ -9,7 +9,7 @@
 
 .. BEGIN CONTENT
 
-How to Enable the Page Manager in Recent Versions of AIMMS 
+Enable the Page Manager
 ================================================================
 
 .. meta::
