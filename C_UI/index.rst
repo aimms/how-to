@@ -31,7 +31,7 @@ AIMMS offers two User Interface builders, the classic WinUI for applications tha
    /Articles/123/123-WebUI-FORMS
    /Articles/279/279-timebar
    /Articles/221/221-adding-a-custom-splash-screen
-   /Articles/234/234-easily-align-multiple-objects-on-page
+   /Articles/234/234-align-multiple-objects-winui
    /Articles/235/235-end-user-feature-for-2d-chart-object
    CSS/index
    
