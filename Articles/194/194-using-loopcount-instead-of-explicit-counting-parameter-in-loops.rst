@@ -1,5 +1,5 @@
 Using LoopCount instead of explicit counting parameter in loops ====================================================================
-.. meta::   :description: Changing editor settings to display line numbers in the AIMMS IDE.   :keywords: Editor, settings, line numbers, goto line.. note::    This article was originally posted to the AIMMS Tech Blog.
+.. meta::   :description: Repetition sometimes needed, iterative construct preferred, loop counts reduce need of coding.   :keywords: Iterative, repetition, loop count, sum, for, while, parameter.. note::    This article was originally posted to the AIMMS Tech Blog.
 .. <link>https://berthier.design/aimmsbackuptech/2012/04/11/using-loopcount-instead-of-explicit-counting-parameter-in-loops/</link>
 .. <pubDate>Wed, 11 Apr 2012 12:18:14 +0000</pubDate>
 .. <guid isPermaLink="false">http://blog.aimms.com/?p=1126</guid>
@@ -26,5 +26,5 @@ If you have multiple nested loops, you can name each of these loops by using a l
                            + "Inner : " + LoopCount("inner-loop") + "\n"
                            + "No string : " + LoopCount ); 
         endwhile ; 
-    endwhile ;  
+    endwhile ; 
 .. include:: /includes/form.def
