@@ -1,0 +1,5 @@
+User-agent: *
+
+Sitemap: https://how-to.aimms.com/sitemap.xml
+
+Disallow: https://how-to.aimms.com/How to use this, man.html
