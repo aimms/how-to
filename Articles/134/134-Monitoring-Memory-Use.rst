@@ -1,4 +1,4 @@
-﻿Monitoring Memory Usage and Leaks
+﻿Monitor Memory Usage and Leaks
 =====================================
 
 .. meta::

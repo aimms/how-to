@@ -8,7 +8,8 @@ Show Intermediate Solutions
 
 
 .. todo  Work the following comments.
-.. todo  Terminologie: WebUI session vs. server session vs. solver session komt niet overeen met die door het backend/webui team gebezigd wordt. 
+.. todo  Terminology: WebUI session vs. server session vs. solver session
+         The terminology used in this article is not consistent with the terminology used by backend and webui teams.
 
 Introduction
 ------------

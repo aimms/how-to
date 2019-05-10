@@ -1,0 +1,70 @@
+## ams_version=1.0
+
+Model Main_NumCPUs {
+    Section Section_1 {
+        Parameter p_NumCPUs;
+        StringParameter sp_res;
+        Procedure pr_DetermineNumberOfCPUs {
+            Arguments: (p_NumberOfCPUs);
+            Body: {
+                if AimmsStringConstants('Platform') = "Windows" then
+                        if EnvironmentGetString("NUMBER_OF_PROCESSORS", sp_NumCPS) then
+                       		p_NumberOfCPUs := val( sp_NumCPS );
+                        else
+                           	raise error "(2) Could not determine number of processors" ; 
+                        endif ; 
+                else
+                	execute("grep \"^processor\" /proc/cpuinfo  | wc -l | tr -d '\\n' > ./log/numcpus.txt", wait:1);
+                	sp_res := FileRead("./log/numcpus.txt");
+                	p_NumberOfCPUs := val(sp_res) ;
+                endif ;
+                if p_NumberOfCPUs <= 0 then
+                	raise error "(1) Could not determine number of processors" ; 
+                endif ;
+            }
+            DeclarationSection Argument_Declaration {
+                Parameter p_NumberOfCPUs {
+                    Property: Output;
+                }
+            }
+            DeclarationSection Local_Declaration {
+                StringParameter sp_NumCPS;
+            }
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            pr_DetermineNumberOfCPUs( p_NumCPUs );
+        }
+    }
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

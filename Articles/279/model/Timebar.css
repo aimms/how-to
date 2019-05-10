@@ -1,0 +1,36 @@
+
+/* Hides the Widget header and the widget options */
+.theme-aimms .aimms-widget[data-widget\.uri='GanttControl'] .title-addon, .aimms-widget[data-widget\.uri='GanttControl'] .awf-dock.top.vbox.drag-handle.ui-draggable-handle {
+    display: none;
+}
+
+/* Reduces the height of the 1 row height Timebar widget */
+.theme-aimms .widgetdivHeight-1{	
+	height: 90px !important;
+}
+
+
+.widgetdivHeight-1>div:not(.tag-inline-widget):only-child,
+.theme-aimms .widgetdivHeight-1 .aimms-widget{	
+	height: 170px !important;
+	background-color: white;
+}
+
+.theme-aimms .widgetdivHeight-1 .aimms-widget[data-widget\.uri='GanttControl'] {	
+	height: 90px !important;
+}
+
+/* Hides the labels on top of the timbar gantt chart */
+.theme-aimms .aimms-widget[data-widget\.uri='GanttControl'] g.x.axis {
+    display: none;
+}
+
+/* .theme-aimms .aimms-widget[data-widget\.uri='GanttControl'] svg .job-resize-drag-handle rect { */
+	/* fill: brown !important;	 */
+/* } */
+
+
+/* .theme-aimms .aimms-widget[data-widget\.uri='GanttControl'] svg.graphic.boxFlex{ */
+	/* background-color: red; */
+	
+/* } */

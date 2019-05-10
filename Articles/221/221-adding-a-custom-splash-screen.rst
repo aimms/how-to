@@ -1,9 +1,9 @@
-Adding a custom splash screen to your AIMMS application
+Add a Custom Splash Screen
 =============================================================
 
 .. meta::
-   :description: How to interrupt a long running assignment.
-   :keywords: interrupt, long running 
+   :description: How to include a custom loading screen for your AIMMS application.
+   :keywords: splash screen, load, startup
 
 .. note::
 

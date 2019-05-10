@@ -1,4 +1,4 @@
-Troubleshooting Unresponsive Applications
+Troubleshoot Unresponsive Applications
 ============================================================
 
 .. meta::
@@ -137,7 +137,7 @@ The real meat of this article is in the ``pr_ButtonComputation`` procedure where
 
 * The 01 parameters are auxiliary parameters created to ensure the flow of the troubleshoot procedure. 
 
-.. todo:: p01_errorHandled should not be needed. See https://gitlab.aimms.com/aimms/customer-tickets/issues/970 Adapt article when issue is fixed.
+.. todo:: ``p01_errorHandled`` should not be needed. See https://gitlab.aimms.com/aimms/customer-tickets/issues/970 Adapt article when issue is fixed.
           Fix should appear in AIMMS 4.62 :-)
 
 

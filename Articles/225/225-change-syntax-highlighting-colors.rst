@@ -19,7 +19,7 @@ AIMMS uses a default syntax highlighting theme to help you quickly interpret a d
 
 You can customize the colors displayed for types of identifiers in the editor. 
 
-For example, in the image below variable Assignments in the Editor are highlighted green. 
+For example, in the image below, the variable ``Assignments`` is highlighted green. 
 
 .. figure:: images/variables_in_green.png
 

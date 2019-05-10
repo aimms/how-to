@@ -1,5 +1,9 @@
-Starting AIMMS Job via the AIMMS PRO API using C#
+Start a Job via PRO API using C#
 ===================================================
+
+.. meta::
+    :description: Starting an AIMMS job via the AIMMS PRO API using C#.
+    :keywords: C#, pro api
 
 Prerequisites
 --------------
