@@ -89,7 +89,7 @@ You can retrieve the memory used by all the math programs in ``AllGeneratedMathe
 Minimizing memory used for element spaces
 --------------------------------------------
 
-AIMMS maintains a mapping between elements(strings) and numbers per root set. This mapping is the *element space*. The element space of the set ``Integers`` is very small as this is just an arithmetic operation without the need for additional memory. When your elements are integers, making the corresponding set a subset of ``Integers`` helps you in reducing the element space. 
+AIMMS maintains a mapping between elements (strings) and numbers per root set. This mapping is the *element space*. The element space of the set ``Integers`` is very small as this is just an arithmetic operation without the need for additional memory. When your elements are integers, making the corresponding set a subset of ``Integers`` helps you in reducing the element space. 
 
 
 Related Topics

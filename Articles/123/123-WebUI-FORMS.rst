@@ -21,7 +21,7 @@ Three basic actions are needed:
 
 This makes the AIMMS WebUI Forms framework an efficient method to create forms from the model builder's perspective.
 
-The AIMMS WebUI Forms framework follows `CRUD <https://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_) and thus provides your users the ability to:
+The AIMMS WebUI Forms framework follows `CRUD <https://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_ and thus provides your users the ability to:
 
 * Create new data
 * Read existing data
