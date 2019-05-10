@@ -20,7 +20,6 @@ AIMMS Language
    :alt: AIMMS Language Help & Support
 
 This section covers topics related to expressing a model in the AIMMS programming language. A programming language defines the limits of what you can express in it. The articles in this section familiarize you with the basics of the AIMMS language to get you up and running, and explain the boundaries.
- 
 
 .. toctree::
    :maxdepth: 1
@@ -30,6 +29,7 @@ This section covers topics related to expressing a model in the AIMMS programmin
    /Articles/119/119-Reproducible-Random-Sequence 
    /Articles/132/132-Repetive-Patterns-Model-Edit 
    /Articles/133/133-External-Functions-InputData
+   /Articles/194/194-using-loopcount-instead-of-explicit-counting-parameter-in-loops
    /Articles/150/150-solve-in-loop
    /Articles/121/121-set-index-element-parameter
    /Articles/272/272-using-multiple-indices-for-one-set
