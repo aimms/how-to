@@ -13,9 +13,6 @@ Get Name of an AIMMS Case
 .. <pubDate>Thu, 19 Jul 2012 11:45:32 +0000</pubDate>
 .. <guid isPermaLink="false">http://blog.aimms.com/?p=1558</guid>
 
-.. sidebar::   Get name of a case
-
-    .. image:: images/my-name.jpg
 
 This article explains how to get the name of the current case, or more generally, any case denoted by an element in the predefined set ``AllCases``. You can use the case-related AIMMS functions to achieve this.
 
