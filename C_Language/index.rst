@@ -37,6 +37,7 @@ This section covers topics related to expressing a model in the AIMMS programmin
    /Articles/17/17-category-mapping
    /Articles/141/141-element-after-last
    /Articles/112/112-Integer-properties
+   /Articles/236/236-get-name-of-current-case
    /Articles/144/144-Stopwatch
    /Articles/125/125-execution-efficiency
    /Articles/170/170-memory-in-use.rst
