@@ -58,8 +58,7 @@ This section covers topics related to expressing a model in the AIMMS programmin
    /Articles/208/208-setting-options
    /Articles/216/216-effective-use-unit-test-library
    /Articles/220/220-aborting-execution-of-aimms
-   /Articles/248/248-modeling-the-forest-ontarios-ministry-of-natural-resources-takes-us-through-decades-of-effective-forest-management
-   /Articles/278/278-north-star
+
 
     
     

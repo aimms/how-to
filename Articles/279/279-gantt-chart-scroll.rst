@@ -1,18 +1,21 @@
-Using a timebar to zoom and scroll in a Gantt Chart
+Zoom and Scroll in a Gantt Chart
 ====================================================
 
 .. meta::
-   :description: Distributing HIV medication
-   :keywords: HIV, medication, distribution, supply chain, 
+   :description: An AIMMS tip to create scroll and zoom functionality in a Gantt chart.
+   :keywords: Gantt chart, scroll, zoom, timebar
 
-Depicted below is the elegant and powerful idea to use one Gantt Chart to control the scrolling and zooming of another Gantt Chart.
+This article presents an elegant trick to use one Gantt Chart to control the scrolling and zooming of another Gantt Chart. The result is shown in the image below.
 
 .. image:: images/timebar.png
     :align: center
 
-Some remarks to explain details:
 
-#.  There is only one bar, but we still have sets to cover the resources (one) and jobs (one), parameters for start and duration, element parameters to denote this one bar, and two string parameters to specify the viewport. In our example this is the following 
+Creating a single bar
+----------------------
+The Gantt chart used to create the scrolling and zooming functionality is only one bar, but we still have sets to cover the resources (one) and jobs (one), parameters for start and duration, element parameters to denote this one bar, and two string parameters to specify the viewport. 
+
+In our example this is achieved with the code below: 
 
     .. code-block:: aimms
         :linenos:
@@ -68,8 +71,9 @@ Some remarks to explain details:
             }
         }
 
-
-#.  The beginning of the timebar defines the beginning of viewport of the lower Gantt Chart (``sp_SelectedViewPortStart``), and similarly, the end the timebar defines the end of the viewport of the lower Gantt Chart (``sp_SelectedViewPortEnd``). These two string parameters are defined as follows:
+Defining the viewport
+----------------------
+The beginning of the timebar defines the beginning of viewport of the lower Gantt Chart (``sp_SelectedViewPortStart``), and similarly, the end the timebar defines the end of the viewport of the lower Gantt Chart (``sp_SelectedViewPortEnd``). These two string parameters are defined as follows:
 
     .. code-block:: aimms
         :linenos:
@@ -88,7 +92,11 @@ Some remarks to explain details:
             }
         }
 
-The example can be downloaded :download:`here <model/GanttChartTimebar.zip>` 
+Example project
+------------------
+The example can be downloaded below.
+
+    :download:`GanttChartTimebar.zip <model/GanttChartTimebar.zip>` 
 
 
 .. include:: /includes/form.def
