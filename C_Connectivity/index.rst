@@ -24,7 +24,8 @@ We're aware that AIMMS is one of many tools in your workspace. This section prov
    :maxdepth: 1
 
    /Articles/85/85-using-axll-library
-   /Articles/122/122-AXLL-Library
+   
+   /Articles/197/197-reading-data-from-excel
    /Articles/csv/read-write-csv
    /Articles/118/118-Connect-SQLite
    /Articles/129/129-MSACCESS-32bit-64bit
@@ -33,5 +34,7 @@ We're aware that AIMMS is one of many tools in your workspace. This section prov
    /Articles/212/212-columns-added-to-dbtable
    /Articles/153/153-external-haversine
    /Articles/159/159-exchange-data-with-cloud
-   /Articles/197/197-reading-data-from-excel
+   
+.. /Articles/122/122-AXLL-Library
+
 
