@@ -1,0 +1,410 @@
+## ams_version=1.0
+
+Model Planning_the_building_of_a_bridge {
+    Section WebUI_support {
+        StringParameter sp_BuildBridgeImageName {
+            Definition: "Bridge Building.jpg";
+            Comment: "MainProject\\WebUI\\resources\\images\\build bridge.JPG";
+        }
+        StringParameter sp_ViewportBegin;
+        StringParameter sp_ViewportEnd;
+        Parameter p_WebUI_PillarBegin {
+            IndexDomain: (epbs,ep)|p_PillarDuration(epbs,ep);
+        }
+        Parameter p_WebUI_PillarDuration {
+            IndexDomain: (epbs,ep);
+        }
+        Parameter p01_Legend_epbs {
+            IndexDomain: epbs;
+            Range: binary;
+        }
+        Parameter p01_CustomAxis {
+            Range: binary;
+        }
+        Parameter p01_Timeline {
+            Range: binary;
+        }
+        Procedure uponchange_p_NumberOfPillars {
+            Body: {
+                pr_InitializePillarDuration();
+            }
+        }
+    }
+    Section ConstraintProgrammingModel {
+        DeclarationSection CP_Variables_Constraints_Declaration {
+            Activity v_PillarActivity {
+                IndexDomain: (epbs,ep);
+                ScheduleDomain: cal_TimeLine;
+                Length: p_PillarDuration(epbs, ep);
+            }
+            Constraint c_pillarBuildingOrder {
+                IndexDomain: {
+                    (i_pbs1, i_pbs2, i_p) | p_PillarDuration(i_pbs1,i_p)          and
+                                      p_PillarDuration(i_pbs2,i_p)          and
+                                      i_pbs1 < i_pbs2                  /*   and
+                                      ( not exists( pbs3 | pbs1 < pbs3 and pbs3 < pbs2 and PillarDuration(pbs3,p) ) ) */
+                }
+                Definition: cp::EndBeforeBegin(v_PillarActivity(i_pbs1,i_p),v_PillarActivity(i_pbs2,i_p));
+            }
+            Constraint c_projectRequiresRemovalHousing {
+                Definition: cp::EndBeforeBegin(v_PillarActivity('RemovalTemporaryHousing','individual'),v_PillarActivity('ProjectEnd','individual'));
+            }
+            Constraint c_projectRequiresFillingAbutments {
+                IndexDomain: ap;
+                Definition: cp::EndBeforeBegin(v_PillarActivity('filling',ap),v_PillarActivity('ProjectEnd','individual'));
+            }
+            Constraint c_projectRequiresPlacingBearers {
+                IndexDomain: i_p | i_p <> last(s_Pillars);
+                Definition: cp::EndBeforeBegin(v_PillarActivity('bearer placing',i_p),v_PillarActivity('ProjectEnd','individual'));
+            }
+            Constraint c_BearerRequiresRightPillar {
+                IndexDomain: i_p | i_p <> last(s_Pillars);
+                Definition: cp::EndBeforeBegin(v_PillarActivity( ep_lastPurePillarActivity(i_p+1),i_p+1),v_PillarActivity('bearer placing',i_p));
+            }
+            Constraint c_ConcreteFoundationWithinFourDaysOfFormwork {
+                IndexDomain: (i_p);
+                Definition: v_PillarActivity.End('concrete foundation',i_p) <= v_PillarActivity.End('formwork',i_p) + 4;
+            }
+            Constraint c_TemporaryHousingShouldBeStartedWithinSixDaysAfterStartingAnExcavation {
+                IndexDomain: (i_p);
+                Definition: v_PillarActivity('ErectionTemporaryHousing','individual').Begin + 6 <= v_PillarActivity.Begin('formwork',i_p);
+            }
+            Constraint c_RemovalTemporaryHousingNotBeforeTwoDaysBeforeEndLastMasonry {
+                IndexDomain: (i_p);
+                Definition: v_PillarActivity('RemovalTemporaryHousing','individual').Begin >= v_PillarActivity.End('masonry work',i_p) -2;
+            }
+            Constraint c_BearerDeliveryDate {
+                Definition: v_PillarActivity('ProjectBegin','individual').Begin + 30 = v_PillarActivity('BearerDelivery','individual').Begin;
+            }
+            Constraint c_StartTemporaryHousing {
+                Definition: cp::EndBeforeBegin(v_PillarActivity('ProjectBegin','individual'),v_PillarActivity('ErectionTemporaryHousing','individual'));
+            }
+            Constraint c_BearerPlacingAfterDelivery {
+                IndexDomain: i_p | i_p <> last(s_Pillars);
+                Definition: cp::EndBeforeBegin(v_PillarActivity('BearerDelivery','individual'),v_PillarActivity('bearer placing',i_p));
+            }
+            Constraint c_FormworkShouldBeStartedWithinThreeDaysAfterExcavationOrPilePlacement {
+                IndexDomain: (i_p);
+                Definition: {
+                    v_PillarActivity.Begin('formwork',i_p) <=
+                    	if ( p_PillarDuration('foundation piles',i_p) ) then
+                    		v_PillarActivity.End('foundation piles',i_p)
+                    	else
+                    		v_PillarActivity.End('excavation',i_p)
+                    	endif
+                    	+ 3
+                }
+                Comment: {
+                    "erroneous constraint: PillarActivity.Begin(\'concrete foundation\',p) <= PillarActivity.End(\'excavation\',p) + 3
+                    Improved version:
+                    PillarActivity.Begin(\'formwork\',p) <=
+                    	if ( PillarDuration(\'foundation piles\',p) ) then
+                    		PillarActivity.End(\'foundation piles\',p)
+                    	else
+                    		PillarActivity.End(\'excavation\',p)
+                    	endif
+                    	+ 3"
+                }
+            }
+            Constraint c_FillingRightAbutment {
+                Definition: cp::EndBeforeBegin(v_PillarActivity('bearer placing',ep_lastRealPillar),v_PillarActivity('filling','right abutment'));
+            }
+            Resource c_mach_par {
+                Usage: parallel;
+                IndexDomain: i_mn | exists( i_mnp | p_NoAvailableMachines(i_mnp) <> 1 );
+                ScheduleDomain: cal_TimeLine;
+                Activities: v_PillarActivity(i_pbs, i_p): (ep_requiredMachineForBuildingStep(i_pbs)=i_mn) and p_PillarDuration(i_pbs, i_p);
+                LevelRange: {
+                    {0..p_NoAvailableMachines(i_mn)}
+                }
+                LevelChange: {
+                    v_PillarActivity(i_pbs, i_p) : 1 $ ( (ep_requiredMachineForBuildingStep(i_pbs)=i_mn)  and p_PillarDuration(i_pbs, i_p) );
+                }
+            }
+            Resource c_mach_seq {
+                Usage: sequential;
+                IndexDomain: i_mn | forall( i_mnp, p_NoAvailableMachines(i_mnp) = 1 );
+                ScheduleDomain: cal_TimeLine;
+                Activities: v_PillarActivity(i_pbs, i_p): (ep_requiredMachineForBuildingStep(i_pbs)=i_mn) and p_PillarDuration(i_pbs, i_p);
+            }
+            Variable v_MakeSpan {
+                Range: free;
+                Unit: day;
+                Definition: v_PillarActivity('ProjectEnd','individual').End - first(cal_TimeLine);
+            }
+        }
+        DeclarationSection Adminstrative_CP_Declarations {
+            Set CP_Variables {
+                SubsetOf: AllVariables;
+                Definition: CP_Variables_Constraints_Declaration * AllVariables;
+            }
+            Set CP_Constraints {
+                SubsetOf: AllConstraints;
+                Definition: CP_Variables_Constraints_Declaration * AllConstraints;
+            }
+            MathematicalProgram mp_BridgeSchedulingModel {
+                Objective: v_MakeSpan;
+                Direction: minimize;
+                Constraints: CP_Constraints;
+                Variables: CP_Variables;
+                Type: Automatic;
+            }
+            ElementParameter ep_gmp_cp_model {
+                Range: AllGeneratedMathematicalPrograms;
+            }
+        }
+        Procedure pr_SolveCP_BridgeScheduling {
+            Body: {
+                Solve mp_BridgeSchedulingModel where time_limit := p_time_limit /* seconds */ ;
+            }
+        }
+        Procedure pr_Generate_CP_BridgeScheduling {
+            Body: {
+                ep_gmp_cp_model := gmp::Instance::Generate( mp_BridgeSchedulingModel );
+                if ep_gmp_cp_model then
+                    GMP::Solution::RetrieveFromModel( ep_gmp_cp_model, 1 );
+                    GMP::Solution::ConstraintListing( ep_gmp_cp_model, 1, "cp181.wrt" );
+                endif ;
+            }
+        }
+    }
+    Section Data_declarations {
+        DeclarationSection Input_Data_Declarations {
+            StringParameter sp_CalBeginDate;
+            StringParameter sp_CalEndDate;
+            Set s_PillarBuildingSteps {
+                SubsetOf: s_ExtendedPillarBuildingSteps;
+                Index: i_pbs, i_pbs1, i_pbs2, i_pbs3;
+                OrderBy: user;
+                Definition: {
+                    data {
+                       excavation,
+                       'foundation piles',
+                       formwork,
+                       'concrete foundation',
+                       'concrete setting',
+                       'masonry work', ! Including pillar placing.
+                       'bearer placing',
+                       'filling' ! Abutments only.
+                    }
+                }
+            }
+            Set s_earlyPillarBuildSteps {
+                SubsetOf: s_PillarBuildingSteps;
+                Definition: {
+                    data {   excavation,
+                       'foundation piles',
+                       formwork,
+                       'concrete foundation',
+                       'concrete setting'
+                    }
+                }
+            }
+            Parameter p_NumberOfPillars {
+                Range: {
+                    {1..100}
+                }
+                InitialData: 4;
+            }
+            Set s_Machines {
+                Index: i_m, i_mp;
+                Definition: data { Excavator, 'Pile driver', carpentry, 'concrete mixer', 'brick laying', crane, caterpillar };
+            }
+            Parameter p_NoAvailableMachines {
+                IndexDomain: i_m;
+                InitialData: data { Excavator : 2,  'Pile driver' : 1,  carpentry : 1,  'concrete mixer' : 1,  'brick laying' : 1,  crane : 2,  caterpillar : 1 };
+            }
+            Parameter p_PillarDuration {
+                IndexDomain: (epbs,ep);
+                Unit: day;
+            }
+            ElementParameter ep_requiredMachineForBuildingStep {
+                IndexDomain: i_pbs;
+                Range: s_Machines;
+                Definition: {
+                    data
+                    { Excavation            : Excavator       ,
+                      'foundation piles'    : 'Pile driver'   ,
+                      formwork              : carpentry       ,
+                      'concrete foundation' : 'concrete mixer',
+                      'masonry work'        : 'brick laying'  ,
+                      'bearer placing'      : crane           ,
+                      filling               : caterpillar      }
+                }
+            }
+            Parameter p_time_limit {
+                InitialData: 10;
+            }
+        }
+        DeclarationSection Derived_Data_Declarations {
+            Set s_MachinesNeeded {
+                SubsetOf: s_Machines;
+                Index: i_mn, i_mnp;
+                Definition: {
+                    { i_m | (exists( (i_pbs,i_p) |  (ep_requiredMachineForBuildingStep(i_pbs)=i_m) and p_PillarDuration(i_pbs, i_p)))}
+                }
+            }
+            Quantity SI_Time_Duration {
+                BaseUnit: day;
+                Comment: "Expresses the value for the duration of periods.";
+            }
+            Calendar cal_TimeLine {
+                Index: tl;
+                Unit: day;
+                BeginDate: sp_CalBeginDate;
+                EndDate: sp_CalEndDate;
+                TimeslotFormat: "%c%y-%m-%d";
+            }
+            Set s_Pillars {
+                SubsetOf: s_ExtendedPillars;
+                Index: i_p;
+                Parameter: ep_firstRealPillar, ep_lastRealPillar;
+                OrderBy: user;
+            }
+            Set s_AbutmentPillars {
+                SubsetOf: s_Pillars;
+                Index: ap;
+                Definition: {
+                    {first(s_Pillars)} + {last(s_Pillars)}
+                }
+            }
+            Set s_PillarsRequiringFoundationPiles {
+                SubsetOf: s_Pillars;
+                Definition: {
+                    { i_p | ord(i_p) > 2 and ord(i_p) < (card(s_Pillars)-1) }
+                }
+            }
+            Set s_IntermediatePillars {
+                SubsetOf: s_Pillars;
+                Index: ip;
+                Definition: s_Pillars - s_AbutmentPillars;
+            }
+            ElementParameter ep_lastPurePillarActivity {
+                IndexDomain: (i_p);
+                Range: s_PillarBuildingSteps;
+                Definition: last( i_pbs | ( i_pbs <> 'bearer placing' ) and ( i_pbs <> 'filling' ) and p_PillarDuration(i_pbs,i_p) );
+            }
+        }
+        DeclarationSection Interface_Declarations {
+            StringParameter sp_EndDateGanttChart {
+                Definition: element(cal_TimeLine, round( v_MakeSpan * 1.1 ) );
+            }
+            Set s_ExtendedPillars {
+                Index: ep;
+                OrderBy: User;
+                Comment: "s_Pillars + data { \'individual\' }";
+            }
+            Set s_ExtendedPillarBuildingSteps {
+                Index: epbs;
+                OrderBy: user;
+                Definition: s_PillarBuildingSteps + s_IndividualActivities;
+            }
+            Set s_IndividualActivities {
+                SubsetOf: s_ExtendedPillarBuildingSteps;
+                Index: ia;
+                Definition: data { ProjectBegin, ErectionTemporaryHousing, RemovalTemporaryHousing, BearerDelivery, ProjectEnd };
+            }
+            ElementParameter ep_ActionColors {
+                IndexDomain: (epbs);
+                Range: AllColors;
+                InitialData: {
+                    data
+                    { RemovalTemporaryHousing  : grey       ,  ProjectEnd               : grey       ,  filling                  : yellow     ,
+                      'bearer placing'         : orange     ,  'masonry work'           : red        ,  'concrete foundation'    : blue       ,
+                      formwork                 : green      ,  ErectionTemporaryHousing : grey       ,  excavation               : magenta    ,
+                      ProjectBegin             : grey       ,  BearerDelivery           : grey       ,  'foundation piles'       : cyan       ,
+                      'concrete setting'       : 'navy blue' }
+                }
+            }
+        }
+        DeclarationSection Suspect_Constraints;
+    }
+    Procedure pr_InitializePillarDuration {
+        Body: {
+            Empty s_ExtendedPillars ;
+            s_ExtendedPillars := 
+            	  data {  'left abutment' }
+            	+ ElementRange(1,p_NumberOfPillars,prefix:"P",fill:1)
+            	+ data { 'right abutment', 'Individual' };
+            s_Pillars := 
+            	  data {  'left abutment' }
+            	+ ElementRange(1,p_NumberOfPillars,prefix:"P",fill:1)
+            	+ data { 'right abutment' };
+            ep_firstRealPillar := element( s_Pillars, 2);
+            ep_lastRealPillar := element( s_Pillars,p_NumberOfPillars+1);
+            
+            ! Excavation takes two days excepts for the abutments
+            p_PillarDuration('Excavation', ip) := 2 [day] ;
+            p_PillarDuration('Excavation', 'left abutment')  := 4 [day] ;
+            p_PillarDuration('Excavation', 'right abutment') := 5 [day] ;
+            
+            ! Pile driving
+            for i_p | (ord(i_p) > 2) and (ord(i_p) < (card(s_Pillars)-1)) do
+            	if mod(ord(i_p),2) then
+            		p_PillarDuration('foundation piles', i_p) := 20 [day] ;
+            	else
+            		p_PillarDuration('foundation piles', i_p) := 13 [day] ;
+            	endif ;
+            endfor ;
+            
+            ! Formwork takes 4 days except for the abutments.
+            p_PillarDuration('formwork', ip) := 4 [day] ;
+            p_PillarDuration('formwork', 'left abutment')  :=  8 [day] ;
+            p_PillarDuration('formwork', 'right abutment') := 10 [day] ;
+            
+            ! Once the formwork is ready, pouring in the concrete takes one day.
+            p_PillarDuration('concrete foundation', i_p) := 1 [day] ;
+            
+            ! After pouring in the concrete it takes 1 day for setting
+            p_PillarDuration('concrete setting', i_p) := 1 [day] ;
+            
+            ! Masonry work is typically 8 days but more for the abutments.
+            p_PillarDuration('masonry work', ip) := 8 [day] ;
+            p_PillarDuration('masonry work', 'left abutment')  := 16 [day] ;
+            p_PillarDuration('masonry work', 'right abutment') := 20 [day] ;
+            
+            ! pillar placing is quick
+            p_PillarDuration(('bearer placing', i_p) | i_p <> last(s_Pillars)) := 12 [day] ;
+            
+            ! Filling with sand alongside the abutments
+            p_PillarDuration('filling',  'left abutment')  := 15 [day] ;
+            p_PillarDuration('filling', 'right abutment')  := 10 [day] ;
+            
+            ! Individual lengths
+            p_PillarDuration('ErectionTemporaryHousing',  'individual')  := 10 [day] ;
+            p_PillarDuration('BearerDelivery',            'individual')  :=  2 [day] ;
+            p_PillarDuration('RemovalTemporaryHousing',   'individual')  := 10 [day] ;
+        }
+    }
+    Procedure MainInitialization {
+        Body: {
+            sp_CalBeginDate := CurrentToString("%c%y-%m-%d");
+            sp_CalEndDate    := MomentToString( "%c%y-%m-%d", [day], sp_CalBeginDate, (10*365)[day] );
+            sp_ViewportBegin := MomentToString( "%c%y-%m-%d", [day], sp_CalBeginDate, -7[day] );
+            sp_ViewportEnd := sp_CalEndDate ;
+            p01_Legend_epbs(epbs) := 1 ;
+            
+            pr_InitializePillarDuration ;
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            pr_SolveCP_BridgeScheduling ; 
+            
+            sp_ViewPortBegin := MomentToString( "%c%y-%m-%d", [day], sp_CalBeginDate, -7[day] );
+            sp_ViewportEnd := 	if mapval( v_MakeSpan ) or v_MakeSpan = 0[day] then
+            				sp_CalEndDate
+            			else
+            				MomentToString( "%c%y-%m-%d", [day], sp_CalBeginDate, ceil(v_MakeSpan) + 7[day] )
+            			endif;
+            
+            p_WebUI_PillarBegin(epbs, ep) := 24 * (ord(v_PillarActivity(epbs, ep).begin)-1);
+            p_WebUI_PillarDuration(epbs, ep) := (24 * p_PillarDuration(epbs,ep))[-];
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1 ; ! No questions asked.
+        }
+    }
+}
