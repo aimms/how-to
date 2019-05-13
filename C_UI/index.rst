@@ -34,5 +34,8 @@ AIMMS offers two User Interface builders, the classic WinUI for applications tha
    /Articles/234/234-align-multiple-objects-winui
    /Articles/235/235-change-chart-view
    CSS/index
+
+..   /Articles/200/200-Measuring-Page-Loadtime.rst
+
    
 *For AIMMS IDE and Editor Settings topics, see* :doc:`../C_Licensing/index`
