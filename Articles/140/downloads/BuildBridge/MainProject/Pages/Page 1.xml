@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2011-04-08 13:44:14">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>D5244FB6-7791-48DE-8FA5-0B7DB8650C35</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Composite Table">
+		<Location top="48" left="126" bottom="390" right="864" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Domain>
+			<Identifier>PillarActivity.Begin( epbs, ep )</Identifier>
+			<Index Name="epbs" />
+			<Index Name="ep" />
+		</Domain>
+		<ExplicitIdentifier>
+			<Identifier>PillarActivity.Begin( epbs, ep )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>PillarActivity.End( epbs, ep )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>PillarActivity.Length( epbs, ep )</Identifier>
+			<NumberFormat Width="4" Decimals="0" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>PillarActivity.Size( epbs, ep )</Identifier>
+			<NumberFormat Width="4" Decimals="0" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>PillarActivity.Present( epbs, ep )</Identifier>
+			<NumberFormat Width="3" Decimals="0" Alignment="Center" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>ep</Symbol>
+			<Symbol>epbs</Symbol>
+			<Symbol>PillarActivity</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>
