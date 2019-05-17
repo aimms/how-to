@@ -1,0 +1,27 @@
+﻿* AIMMS
+constraint_listing 3
+constraint_listing_nonlinear_expression 1
+constraint_listing_variable_values 1
+negate_objective_coefficient_modifications 1
+rounding_compatibility Aimms_3_7
+* AOA
+* BARON 15
+* CBC 2.9
+* CONOPT 4.0
+* CPLEX 12.8
+* CPOptimizer 12.7
+* GUROBI 7.5
+* GUROBI 8.0
+* IPOPT 3.11
+* Knitro 10.3
+* Knitro 11.0
+* MINOS
+* ODH-CPLEX 3.2
+* PATH 4.7
+* SNOPT 7.2
+* XA 16
+* CPOptimizer 12.2
+"CPOptimizer 12.2".Sequence_inference_level 4
+"CPOptimizer 12.2".Search_type 0
+* NETSOL
+* Environment
