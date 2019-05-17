@@ -33,7 +33,7 @@ This section provides support for designing mathematical models that produce the
    /Articles/193/193-check-if-variables-satisfy-constraints
    /Articles/276/276-multi-objective-approach
    /Articles/247/247-minimize-objective-min-operator
-   /Articles/249/249-modeling-variables-with-limited-number-of-possible-values
+   /Articles/249/249-model-variables-with-limited-values
  
    
    
