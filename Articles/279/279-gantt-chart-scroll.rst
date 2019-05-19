@@ -7,7 +7,7 @@ Zoom and Scroll in a Gantt Chart
 
 This article presents an elegant trick to use one Gantt Chart to control the scrolling and zooming of another Gantt Chart. The result is shown in the image below.
 
-.. image:: images/timebar.png
+.. image:: images/Timebar.png
     :align: center
 
 
