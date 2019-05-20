@@ -15,6 +15,7 @@ This section offers best practices to build and deploy applications using AIMMS 
    :maxdepth: 1
 
    ../../Articles/218/218-develop-reliable-successful-aimms-app 
+   ../../Articles/251/251-professionally-operating-your-aimms-pro-platform
    ../../Articles/33/33-pro-deploy-app
    ../../Articles/32/32-pro-develop-app
    ../../Articles/reduce-client-server-exchange/reduce-client-server-exchange 

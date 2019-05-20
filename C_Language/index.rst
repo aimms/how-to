@@ -48,6 +48,7 @@ This section covers topics related to expressing a model in the AIMMS programmin
    /Articles/109/109-deprecate-compound-sets-overview
    /Articles/109/109-convert-compound-sets
    /Articles/175/175-select-variables-and-constraints-for-math-program
+   /Articles/250/250-monitoring-identifiers-for-changes
    /Articles/184/184-use-multiple-indices-for-set
    /Articles/187/187-convert-string-to-number
    /Articles/188/188-use-nbest-operator
