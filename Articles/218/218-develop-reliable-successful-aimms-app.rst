@@ -10,11 +10,11 @@ This is a checklist to develop a reliable, successful AIMMS application.
 
 #. **Understand the application complexity**
  
-    a.	Who is your audience and what is the type of purpose? Is your app a study, to be used once? Is your app a strategic app, only to be used now and then? Or is your app an operational app to be used often by a large audience?
+    a.  Who is your audience and what is the type of purpose? Is your app a study, to be used once? Is your app a strategic app, only to be used now and then? Or is your app an operational app to be used often by a large audience?
     
-    #.	Are the tasks that the model needs to perform properly described? For instance, when building a S&OP app, is the demand forecast a given, or can it be operated upon?
+    #.  Are the tasks that the model needs to perform properly described? For instance, when building a S&OP app, is the demand forecast a given, or can it be operated upon?
     
-    #.	Are the tasks that the users need to execute properly described?
+    #.  Are the tasks that the users need to execute properly described?
 
 #. **Understand the modeling complexity**
 
@@ -24,7 +24,22 @@ This is a checklist to develop a reliable, successful AIMMS application.
     
     #. What are the units of measurement to be used in the application?
     
+#. **Team setup**
+
+    Does the team setup cover all the skills and roles related to the project, consider:
+
+    a. Modeling skills
     
+    #. Programming skills
+    
+    #. End user design skills
+    
+    #. Stake holder role
+    
+    #. End user role
+
+    Especially, when all these skills are in one person, that person should avoid being trapped in his own mind and get feedback fast.
+
 #. **Design data management early on**
 
     Design your data management approach. How do you manage your data? Where is input data coming from? Where do you store results or scenarios? Which data is *owned* by the application to be developed, which data is *owned* by other applications.
