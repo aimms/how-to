@@ -31,53 +31,46 @@
         <p style="text-align:justify">AIMMS How-To is a knowledge base for everyone involved in projects that use AIMMS, including developers, network administrators, application end-users, and business process stakeholders.</p>
         <p style="text-align:justify">You'll find tutorials, best practices, and practical guidance for using AIMMS software, including help topics in mathematical modeling, solvers, AIMMS language, and building applications in optimization and prescriptive analytics. You'll also find support for troubleshooting errors and handling deprecations.</p>
 
-        <a href="C_Licensing/index.html">
+        <a href="C_Getting_Started/index.html">
             <div class="box_home_page">
                 <img alignment="center" src="_images/getting-started-32.png">
-                <h1 style="text-align: center"><!--img class="icones" src="_images/getting-started.png"-->Getting Started</h1>
-                <p>Installing and updating AIMMS, setting up licenses</p>
+                <h1 style="text-align: center">Getting Started</h1>
+                <p>Installing AIMMS, settings options, licensing help</p>
             </div>
         </a>
-        <a href="C_Mathematical_Modeling/index.html">
+        <a href="C_Developer/index.html">
             <div class="box_home_page">
                 <img alignment="center" src="_images/modeling-gray-32.png">
-                <h1 style="text-align: center"><!--img class="icones" src="_images/modeling-gray.png"-->Modeling</h1>
-                <p>Converting business opportunities into optimization models</p>
-            </div>
-        </a>
-        <a href="C_Solvers/index.html">
-            <div class="box_home_page">
-                <img alignment="center" src="_images/solver-32.png">
-                <h1 style="text-align: center"><!--img class="icones" src="_images/solver.png"-->Solvers</h1>
-                <p>Using solvers and interpreting their results</p>
-            </div>
-        </a>
-        <a href="C_Language/index.html">
-            <div class="box_home_page">
-                <img alignment="center" src="_images/language-32.png">
-                <h1 style="text-align: center"><!--img class="icones" src="_images/language.png"-->AIMMS Language</h1>
-                <p>Expressing a model in the AIMMS programming language</p>
-            </div>
-        </a>
-        <a href="C_Connectivity/index.html">
-            <div class="box_home_page">
-                <img alignment="center" src="_images/connection-32.png">
-                <h1 style="text-align: center"><!--img class="icones" src="_images/connection.png"-->Data Connection</h1>
-                <p>Connecting AIMMS to other sources with extensions, links, and libraries</p>
+                <h1 style="text-align: center">Developer</h1>
+                <p>Data connection, modeling, solvers, programming, error handling</p>
             </div>
         </a>
         <a href="C_UI/index.html">
             <div class="box_home_page">
                 <img alignment="center" src="_images/applications-32.png">
-                <h1 style="text-align: center"><!--img class="icones" src="_images/applications.png"-->Applications</h1>
+                <h1 style="text-align: center">Application UI</h1>
                 <p>Creating and customizing a user interface for your apps</p>
             </div>
         </a>
         <a href="C_Deployment/index.html">
             <div class="box_home_page">
                 <img alignment="center" src="_images/deploy-blue-32.png">
-                <h1 style="text-align: center"><!--img class="icones" src="_images/deploy-blue.png"-->Deployment</h1>
-                <p>Distributing your applications with AIMMS PRO, on-premise or with the Cloud platform</p>
+                <h1 style="text-align: center">Deployment</h1>
+                <p>Distributing your apps with AIMMS PRO (on-premise or cloud-hosted)</p>
+            </div>
+        </a>
+        <a href="C_Evolution/index.html">
+            <div class="box_home_page">
+                <img alignment="center" src="_images/language-32.png">
+                <h1 style="text-align: center">Software Evolution</h1>
+                <p>Implementing new AIMMS features, planning for deprecation</p>
+            </div>
+        </a>
+        <a href="https://scnavigator-manual.aimms.com/">
+            <div class="box_home_page">
+                <img alignment="center" src="_images/connection-32.png">
+                <h1 style="text-align: center">SC Navigator</h1>
+                <p>Help and documentation for the SC Navigator suite of apps</p>
             </div>
         </a>
 
@@ -90,10 +83,9 @@
    :titlesonly:
    :hidden:
 
-   C_Licensing/index
-   C_Mathematical_Modeling/index
-   C_Solvers/index
-   C_Language/index
-   C_Connectivity/index
+   C_Getting_Started/index
+   C_Developer/index
    C_UI/index
    C_Deployment/index
+   C_Evolution/index
+   
