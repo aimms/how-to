@@ -7,58 +7,77 @@
                 
 .. |space| image:: ../Images/ThanksSmileySpace.gif
 
+.. image:: ../Images/connection-32.png
+   :scale: 0
 
-AIMMS Language
+.. image:: ../Images/modeling-gray-32.png
+   :scale: 0
+
+.. image:: ../Images/language-32.png
+   :scale: 0
+
+.. image:: ../Images/solver-32.png
+   :scale: 0
+
+
+AIMMS Developer
 ========================
 
 .. meta::
-   :description: Help and support with building models in AIMMS programming language.
+   :description: Help and support with building models and developing apps in AIMMS IDE.
 
 .. image:: ../Images/language.png
    :scale: 100
    :align: right
-   :alt: AIMMS Language Help & Support
+   :alt: AIMMS Developer Help & Support
 
-This section covers topics related to expressing a model in the AIMMS programming language. A programming language defines the limits of what you can express in it. The articles in this section familiarize you with the basics of the AIMMS language to get you up and running, and explain the boundaries.
+This section covers topics of app development in the AIMMS IDE. Here are support guides to connect to external datasources, such as databases and Excel files. This section also includes practical advice for creating various types of models. You'll find plenty of help getting started with the AIMMS programming language, along with troubleshooting tips for errors.
+
+.. raw:: html
+
+        <div>
+        <a href="Sub_Connectivity/index.html">
+            <div class="box_home_page">
+                <img alignment="center" src="_images/connection-32.png">
+                <h1 style="text-align: center">Data Connection</h1>
+                <p>Connecting AIMMS to other sources with extensions, links, and libraries</p>
+            </div>
+        </a>
+        <a href="Sub_Mathematical_Modeling/index.html">
+            <div class="box_home_page">
+                <img alignment="center" src="_images/modeling-gray-32.png">
+                <h1 style="text-align: center">Mathematical Modeling</h1>
+                <p>Converting business opportunities into optimization models</p>
+            </div>
+        </a>
+        </div>
+        <div>
+        <a href="Sub_Programming/index.html">
+            <div class="box_home_page">
+                <img alignment="center" src="_images/language-32.png">
+                <h1 style="text-align: center">AIMMS Language</h1>
+                <p>Expressing a model in the AIMMS programming language</p>
+            </div>
+        </a>
+        <a href="Sub_Errors/index.html">
+            <div class="box_home_page">
+                <img alignment="center" src="_images/solver-32.png">
+                <h1 style="text-align: center">Error Handling</h1>
+                <p>Debugging errors that arise during development</p>
+            </div>
+        </a>
+        </div>
+
 
 .. toctree::
    :maxdepth: 1
+   :titlesonly:
+   :hidden:
 
-   /Articles/111/111-creating-email-templates 
-   /Articles/104/104-using-email-client-library
-   /Articles/119/119-Reproducible-Random-Sequence 
-   /Articles/132/132-Repetive-Patterns-Model-Edit 
-   /Articles/133/133-External-Functions-InputData
-   /Articles/194/194-using-loopcount-instead-of-explicit-counting-parameter-in-loops
-   /Articles/150/150-solve-in-loop
-   /Articles/121/121-set-index-element-parameter
-   /Articles/272/272-using-multiple-indices-for-one-set
-   /Articles/243/243-local-binding-vs-default-binding 
-   /Articles/17/17-category-mapping
-   /Articles/141/141-element-after-last
-   /Articles/112/112-Integer-properties
-   /Articles/236/236-get-name-of-current-case
-   /Articles/144/144-Stopwatch
-   /Articles/125/125-execution-efficiency
-   /Articles/170/170-memory-in-use.rst
-   /Articles/134/134-Monitoring-Memory-Use
-   /Articles/135/135-UTF8-Encoding
-   /Articles/146/146-value-dynamic-identifier
-   /Articles/131/131-Formulas-as-Data
-   /Articles/109/109-deprecate-compound-sets-overview
-   /Articles/109/109-convert-compound-sets
-   /Articles/175/175-select-variables-and-constraints-for-math-program
-   /Articles/250/250-monitoring-identifiers-for-changes
-   /Articles/184/184-use-multiple-indices-for-set
-   /Articles/187/187-convert-string-to-number
-   /Articles/188/188-use-nbest-operator
-   /Articles/189/189-using-calendars-in-aimms
-   /Articles/190/190-empty-sets
-   /Articles/191/191-handle-errors-and-warnings
-   /Articles/12/12-generate-random-numbers
-   /Articles/208/208-setting-options
-   /Articles/216/216-effective-use-unit-test-library
-   /Articles/220/220-aborting-execution-of-aimms
+   Sub_Connectivity/index
+   Sub_Mathematical_Modeling/index
+   Sub_Programming/index
+   Sub_Errors/index
 
 
 
