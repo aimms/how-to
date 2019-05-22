@@ -1,8 +1,9 @@
 Recently added
 ==============
 
-.. image:: Images/sparkler.png
+.. image:: Images/sparkler-480.png
    :align: right
+   :scale: 25
 
 .. Added in May 2019
 

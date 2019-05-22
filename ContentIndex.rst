@@ -4,13 +4,10 @@
 .. image:: Images/modeling-gray-32.png
    :scale: 0
 
-.. image:: Images/solver-32.png
+.. image:: Images/time-machine-512.png
    :scale: 0
 
-.. image:: Images/language-32.png
-   :scale: 0
-
-.. image:: Images/connection-32.png
+.. image:: Images/global-chain-512.png
    :scale: 0
 
 .. image:: Images/applications-32.png
@@ -61,14 +58,14 @@
         </a>
         <a href="C_Evolution/index.html">
             <div class="box_home_page">
-                <img alignment="center" src="_images/language-32.png">
+                <img alignment="center" width="32px" src="_images/time-machine-512.png">
                 <h1 style="text-align: center">Software Evolution</h1>
                 <p>Implementing new AIMMS features, planning for deprecation</p>
             </div>
         </a>
         <a href="https://scnavigator-manual.aimms.com/">
             <div class="box_home_page">
-                <img alignment="center" src="_images/connection-32.png">
+                <img alignment="center" width="32px" src="_images/global-chain-512.png">
                 <h1 style="text-align: center">SC Navigator</h1>
                 <p>Help and documentation for the SC Navigator suite of apps</p>
             </div>
