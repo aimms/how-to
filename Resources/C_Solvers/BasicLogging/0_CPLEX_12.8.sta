@@ -1,6 +1,0 @@
-
-Solve problem 'FlowShopModel' with 554 rows, 476 columns (196 binaries, 0 generals), and 8808 nonzeros.
-
-MIP - Integer optimal solution:  Objective = 3.8900000000e+002
-Solution time = 71.72 sec.  Iterations = 6163443  Nodes = 101990
-

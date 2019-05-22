@@ -1,5 +1,0 @@
-In this small AIMMS project the intuition is modelled that smaller jobs get a smaller time window to be executed in. In addition, change over times are illustrated.
-
-The periods when the blue activities are not allowed are black out.  Necessary change over times between the blue activities are in yellow.
-
-key words: scheduling, activities, resources, and change over times.
