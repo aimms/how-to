@@ -22,21 +22,10 @@ AIMMS apps can be made available in various ways: Windows server, Linux server, 
 .. toctree::
    :maxdepth: 1
 
-   Best-Practices/index
-   /Articles/151/151-version-control-aimmspack-backup
-   /Articles/128/128-Intellectual-Property
-   /Articles/120/120-pro-user-groups
-   /Articles/117/117-Uploading-and-Downloading-files
-   /Articles/115/115-Securing-File-Access
-   /Articles/80/80-schedule-jobs
-   /Articles/80/80-receive-messages
-   /Articles/114/114-execute
-   /Articles/257/257-run-batch-commands-in-aimms-command-line-tool
-   /Articles/159/159-exchange-data-with-cloud
-   /Articles/155/155-Catering-unresponsive-server-unstable-connection
-   /Articles/171/171-pro-system-requirements
-   /Articles/98/98-starting-job-aimms-pro-api-java
-   /Articles/98/98-starting-job-aimms-pro-api-csharp
+   Sub_PRO_Basics/index
+   Sub_Cloud_Basics/index
+   Sub_Client_Server/index
+   Sub_DelegateToServer/index
 
    
 

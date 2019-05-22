@@ -13,26 +13,18 @@ Getting Started
 ========================
 
 .. meta::
-   :description: Help and support with installation and licensing.
+   :description: Help and support with installation and settings.
 
 .. image:: ../Images/getting-started.png
    :scale: 100
    :align: right
    :alt: AIMMS Getting Started Help & Support
 
-These topics provide fundamentals about using and customizing AIMMS. Learn about terminology, settings options, shortcuts, and basic set-up. You will also find licensing help here.
+These topics provide fundamentals about using and customizing AIMMS. Learn about terminology, settings options, shortcuts, and basic set up. You will also find licensing help here.
 
 .. toctree::
    :maxdepth: 1
         
-   /Articles/195/195-transfer-developer-license
-   /Articles/89/89-license-nodelock-error
-   /Articles/89/89-academic-license
-   /Articles/105/105-adding-named-user-licenses
-   /Articles/106/106-install-network-license
-   /Articles/186/186-keyboard-shortcuts-for-aimms
-   /Articles/45/45-share-project-files
-   /Articles/84/84-using-libraries
-   /Articles/145/145-import-export-section
-   /Articles/232/232-display-line-numbers
-   /Articles/225/225-change-syntax-highlighting-colors
+   Sub_Basics/index
+   Sub_Settings/index
+   Sub_Licensing/index

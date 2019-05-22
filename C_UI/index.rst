@@ -9,7 +9,7 @@
 .. |space| image:: ../Images/ThanksSmileySpace.gif
 
 
-Applications
+Application UI
 ==============
 
 .. meta::
@@ -18,24 +18,16 @@ Applications
 .. image:: ../Images/applications.png
    :scale: 100
    :align: right
-   :alt: AIMMS Applications Help & Support
+   :alt: AIMMS UI Help & Support
 
 AIMMS offers two User Interface builders, the classic WinUI for applications that run on Windows, and the modern WebUI for applications that run in a browser. This section offers guidance in developing an application and building a user interface. You will also find help to add custom styling to your applications.
     
 .. toctree::
    :maxdepth: 1
     
-   /Articles/download-compressed-files/download-compressed-files
-   /Articles/95/95-change-default-ui
-   /Articles/124/124-tableau-integration
-   /Articles/123/123-WebUI-FORMS
-   /Articles/279/279-gantt-chart-scroll
-   /Articles/221/221-adding-a-custom-splash-screen
-   /Articles/234/234-align-multiple-objects-winui
-   /Articles/235/235-change-chart-view
-   CSS/index
-
-..   /Articles/200/200-Measuring-Page-Loadtime.rst
+   Sub_UI_Features/index
+   Sub_Styling/index
+.. Sub_Reporting/index
 
    
-*For AIMMS IDE and Editor Settings topics, see* :doc:`../C_Licensing/index`
+*For AIMMS IDE and Editor Settings topics, see* :doc:`../C_Getting_Started/index`
