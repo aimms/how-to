@@ -9,7 +9,7 @@ Error Handling
    :align: right
    :alt: AIMMS Error Handling Help & Support
 
-This section includes topics to troubleshoot and debug errors in your AIMMS project.
+Get help debugging errors that arise during development. This section covers troubleshooting errors in your AIMMS project.
 
 .. toctree::
    :maxdepth: 1

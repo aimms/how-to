@@ -20,7 +20,7 @@ Mathematical Modeling
    :align: right
    :alt: AIMMS Modeling Help & Support
 
-This section provides support for designing mathematical models that produce the best solutions to solve problems and maximize opportunities in your business or organization.
+Learn how to convert business opportunities into optimization models. This section provides support for designing mathematical models that produce the best solutions to solve problems and maximize opportunities in your business or organization.
 
 .. toctree::
    :maxdepth: 1
