@@ -17,11 +17,11 @@ Client-Server Communication
 
    /Articles/155/155-Catering-unresponsive-server-unstable-connection
    /Articles/80/80-receive-messages
-   ../../Articles/reduce-client-server-exchange/reduce-client-server-exchange 
+   /Articles/reduce-client-server-exchange/reduce-client-server-exchange 
    /Articles/117/117-Uploading-and-Downloading-files
    /Articles/115/115-Securing-File-Access
-   ../../Articles/40/40-data-server-load-results
-   ../../Articles/35/35-web-ui-progress-window
-   ../../Articles/36/36-intermediate-solution 
-   ../../Articles/34/34-interrupt-server-session 
-   ../../Articles/42/42-data-session-changes
+   /Articles/40/40-data-server-load-results
+   /Articles/35/35-web-ui-progress-window
+   /Articles/36/36-intermediate-solution 
+   /Articles/34/34-interrupt-server-session 
+   /Articles/42/42-data-session-changes

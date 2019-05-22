@@ -88,4 +88,5 @@
    C_UI/index
    C_Deployment/index
    C_Evolution/index
+   Recently_added
    
