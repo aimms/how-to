@@ -1,19 +1,19 @@
-.. image:: Images/getting-started-32.png
+.. image:: Images/rocket-32.png
    :scale: 0
 
-.. image:: Images/modeling-gray-32.png
+.. image:: Images/school-supplies-32.png
    :scale: 0
 
-.. image:: Images/time-machine-512.png
+.. image:: Images/time-machine-32.png
    :scale: 0
 
-.. image:: Images/global-chain-512.png
+.. image:: Images/global-chain-32.png
    :scale: 0
 
-.. image:: Images/applications-32.png
+.. image:: Images/bricks-32.png
    :scale: 0
 
-.. image:: Images/deploy-blue-32.png
+.. image:: Images/network-care-32.png
    :scale: 0
 
 .. raw:: html
@@ -30,42 +30,42 @@
 
         <a href="C_Getting_Started/index.html">
             <div class="box_home_page">
-                <img alignment="center" src="_images/getting-started-32.png">
+                <img alignment="center" alt="getting started" src="_images/rocket-32.png">
                 <h1 style="text-align: center">Getting Started</h1>
                 <p>Installing AIMMS, settings options, licensing help</p>
             </div>
         </a>
         <a href="C_Developer/index.html">
             <div class="box_home_page">
-                <img alignment="center" src="_images/modeling-gray-32.png">
+                <img alignment="center" alt="developer" src="_images/school-supplies-32.png">
                 <h1 style="text-align: center">Developer</h1>
                 <p>Data connection, modeling, solvers, programming, error handling</p>
             </div>
         </a>
         <a href="C_UI/index.html">
             <div class="box_home_page">
-                <img alignment="center" src="_images/applications-32.png">
+                <img alignment="center" alt="applications" src="_images/bricks-32.png">
                 <h1 style="text-align: center">Application UI</h1>
                 <p>Creating and customizing a user interface for your apps</p>
             </div>
         </a>
         <a href="C_Deployment/index.html">
             <div class="box_home_page">
-                <img alignment="center" src="_images/deploy-blue-32.png">
+                <img alignment="center" alt="deployment" src="_images/network-care-32.png">
                 <h1 style="text-align: center">Deployment</h1>
                 <p>Distributing your apps with AIMMS PRO (on-premise or cloud-hosted)</p>
             </div>
         </a>
         <a href="C_Evolution/index.html">
             <div class="box_home_page">
-                <img alignment="center" width="32px" src="_images/time-machine-512.png">
+                <img alignment="center" alt="evolution" src="_images/time-machine-512.png">
                 <h1 style="text-align: center">Software Evolution</h1>
                 <p>Implementing new AIMMS features, planning for deprecation</p>
             </div>
         </a>
         <a href="https://scnavigator-manual.aimms.com/">
             <div class="box_home_page">
-                <img alignment="center" width="32px" src="_images/global-chain-512.png">
+                <img alignment="center" alt="navigator" src="_images/global-chain-32.png">
                 <h1 style="text-align: center">SC Navigator</h1>
                 <p>Help and documentation for the SC Navigator suite of apps</p>
             </div>

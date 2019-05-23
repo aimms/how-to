@@ -23,18 +23,8 @@ We're aware that AIMMS is one of many tools in your workspace. This section prov
 .. toctree::
    :maxdepth: 1
 
-   /Articles/85/85-using-axll-library
-   
-   /Articles/197/197-reading-data-from-excel
-   /Articles/csv/read-write-csv
-   /Articles/118/118-Connect-SQLite
-   /Articles/129/129-MSACCESS-32bit-64bit
-   /Articles/185/185-connect-to-access-database
-   /Articles/157/157-write-selected-tables
-   /Articles/212/212-columns-added-to-dbtable
-   /Articles/153/153-external-haversine
-   /Articles/159/159-exchange-data-with-cloud
-   
-.. /Articles/122/122-AXLL-Library
+   sub_databases/index
+   sub_excel_csv/index
+   sub_email/index
 
 

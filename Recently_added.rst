@@ -1,22 +1,20 @@
+.. image:: Images/shooting-star-128.png
+   :align: right
+   :scale: 100
+
 Recently added
 ==============
 
-.. image:: Images/sparkler-480.png
-   :align: right
-   :scale: 25
 
 .. Added in May 2019
 
-.. toctree::
-   :maxdepth: 1
-
-   /Articles/249/249-model-variables-with-limited-values
-   /Articles/235/235-change-chart-view
-   /Articles/247/247-minimize-objective-min-operator
-   /Articles/279/279-gantt-chart-scroll
-   /Articles/234/234-align-multiple-objects-winui
-   /Articles/225/225-change-syntax-highlighting-colors
-   /Articles/226/226-color-a-map-with-constraint-programming
-   /Articles/276/276-multi-objective-approach
-   /Articles/272/272-using-multiple-indices-for-one-set
-   /Articles/243/243-local-binding-vs-default-binding 
+* :doc:`/Articles/249/249-model-variables-with-limited-values`
+* :doc:`/Articles/235/235-change-chart-view`
+* :doc:`/Articles/247/247-minimize-objective-min-operator`
+* :doc:`/Articles/279/279-gantt-chart-scroll`
+* :doc:`/Articles/234/234-align-multiple-objects-winui`
+* :doc:`/Articles/225/225-change-syntax-highlighting-colors`
+* :doc:`/Articles/226/226-color-a-map-with-constraint-programming`
+* :doc:`/Articles/276/276-multi-objective-approach`
+* :doc:`/Articles/272/272-using-multiple-indices-for-one-set`
+* :doc:`/Articles/243/243-local-binding-vs-default-binding`
