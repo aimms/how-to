@@ -1,13 +1,14 @@
+.. image:: ../../Images/server-128.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS Server Commands Help & Support
+
 Delegate To Server
 ===================
 
 .. meta::
    :description: Help and support managing server jobs in AIMMS PRO.
 
-.. .. image:: ../Images/deploy-blue.png
-   :scale: 100
-   :align: right
-   :alt: AIMMS Server Commands Help & Support
 
 .. Need some filler text!
 

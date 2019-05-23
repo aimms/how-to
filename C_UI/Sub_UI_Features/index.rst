@@ -1,12 +1,13 @@
+.. image:: ../../Images/browser-128.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS UI Functions Help & Support
+
 UI Features
 ===========
 .. meta::
    :description: Help and support building and using AIMMS applications.
 
-.. .. image:: ../Images/applications.png
-   :scale: 100
-   :align: right
-   :alt: AIMMS UI Functions Help & Support
 
 This section contains explanations of various UI features available when building AIMMS applications.
     

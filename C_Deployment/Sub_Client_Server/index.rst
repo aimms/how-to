@@ -1,3 +1,8 @@
+.. image:: ../../Images/synchronize-128.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS Client-Server Communication Help & Support
+
 Client-Server Communication
 ===========================
 
@@ -5,10 +10,7 @@ Client-Server Communication
 .. meta::
    :description: Help and support managing client-server communication in AIMMS.
 
-.. .. image:: ../Images/deploy-blue.png
-   :scale: 100
-   :align: right
-   :alt: AIMMS Client-Server Communication Help & Support
+
 
 .. Need some filler text!
 

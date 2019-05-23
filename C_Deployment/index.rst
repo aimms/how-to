@@ -1,9 +1,7 @@
-.. |aimmsIcon| image:: ../Images/icons/favicon.png
-            :scale: 15 %
-
-.. |aimms| image:: ../Images/aimms-logo-s-rgb.png
-                :scale: 10 %
-                :target: https://aimms.com/
+.. image:: ../Images/network-care-128.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS Deployment Help & Support
 
 Deployment
 ========================
@@ -12,10 +10,6 @@ Deployment
 .. meta::
    :description: Help and support with deploying AIMMS applications.
 
-.. image:: ../Images/deploy-blue.png
-   :scale: 100
-   :align: right
-   :alt: AIMMS Deployment Help & Support
 
 AIMMS apps can be made available in various ways: Windows server, Linux server, AIMMS PRO (on premise or in the cloud). In this section we’ll discuss these publication methods to get your applications to your end users. You'll find help deploying AIMMS applications using AIMMS PRO, and guidance for setting up AIMMS Cloud Platform. We've also included some best practices to build and deploy applications.
 

@@ -1,11 +1,7 @@
-.. |aimmsIcon| image:: ../Images/icons/favicon.png
-            :scale: 15 %
-
-.. |aimms| image:: ../Images/aimms-logo-s-rgb.png
-                :scale: 10 %
-                :target: https://aimms.com/
-                
-.. |space| image:: ../Images/ThanksSmileySpace.gif
+.. image:: ../../Images/paint-tool-128.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS Styling Help & Support
 
 
 Styling
@@ -13,10 +9,6 @@ Styling
 .. meta::
    :description: Help and support with styling AIMMS applications.
 
-.. .. image:: ../Images/applications.png
-   :scale: 100
-   :align: right
-   :alt: AIMMS Styling Help & Support
 
 This section contains tips for customizing the appearance of your AIMMS applications using CSS.
     

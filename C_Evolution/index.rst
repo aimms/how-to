@@ -1,9 +1,7 @@
-.. |aimmsIcon| image:: ../Images/icons/favicon.png
-            :scale: 15 %
-
-.. |aimms| image:: ../Images/aimms-logo-s-rgb.png
-                :scale: 10 %
-                :target: https://aimms.com/
+.. image:: ../Images/time-machine-128.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS Deprecations Help & Support
 
 Evolution
 =========
@@ -12,10 +10,7 @@ Evolution
 .. meta::
    :description: Help and support with adapting to changes in AIMMS IDE.
 
-.. image:: ../Images/deploy-blue.png
-   :scale: 100
-   :align: right
-   :alt: AIMMS Deprecations Help & Support
+
 
 AIMMS software has evolved over time, to match arising user needs and changes in the industry. As we make changes to available features, adding new ones and deprecating old ones, you may need guidance in adapting your models. These topics help you prepare your apps for what's to come.
 

@@ -10,7 +10,7 @@
 .. image:: Images/global-chain-32.png
    :scale: 0
 
-.. image:: Images/bricks-32.png
+.. image:: Images/web-design-32.png
    :scale: 0
 
 .. image:: Images/network-care-32.png
@@ -44,7 +44,7 @@
         </a>
         <a href="C_UI/index.html">
             <div class="box_home_page">
-                <img alignment="center" alt="applications" src="_images/bricks-32.png">
+                <img alignment="center" alt="applications" src="_images/web-design-32.png">
                 <h1 style="text-align: center">Application UI</h1>
                 <p>Creating and customizing a user interface for your apps</p>
             </div>
@@ -58,7 +58,7 @@
         </a>
         <a href="C_Evolution/index.html">
             <div class="box_home_page">
-                <img alignment="center" alt="evolution" src="_images/time-machine-512.png">
+                <img alignment="center" alt="evolution" src="_images/time-machine-32.png">
                 <h1 style="text-align: center">Software Evolution</h1>
                 <p>Implementing new AIMMS features, planning for deprecation</p>
             </div>
