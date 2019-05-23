@@ -4,6 +4,10 @@
 
 :abbr:`LIFO (last-in, first-out)`
 
+.. note::
+
+	This article is currently under construction.
+
 
 Generate random numbers
 ================================
@@ -63,9 +67,7 @@ That's good. But if we would plot our parameter distribution we would end up wit
 
 
 
-.. comment:
-	.. productionlist::
-
+.. .. productionlist::
 	   try_stmt: try1_stmt | try2_stmt
 	   try1_stmt: "try" ":" `suite`
 	            : ("except" [`expression` ["," `target`]] ":" `suite`)+
@@ -82,7 +84,7 @@ That's good. But if we would plot our parameter distribution we would end up wit
 
 :samp:`{variable = 2} print 1+{variable}`
 
-.. literalinclude:: /Resources/Modelling/CSVFiles/Downloads/CSVInterface/MainProject/CSVInterface.ams
+.. literalinclude:: /resources/CSVInterface.ams
     :caption: CSVInterface.ams
     :name: CSVInterface.ams
     
