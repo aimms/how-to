@@ -16,10 +16,10 @@ Data Connection
 We're aware that AIMMS is one of many tools in your workspace. This section provides help to connect your AIMMS Software to external data sources, such as spreadsheets, databases, and R-based computations. You will also find topics for using libraries built-in to AIMMS.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    sub_databases/index
    sub_excel_csv/index
-   sub_email/index
+   sub_other_functions/index
 
 

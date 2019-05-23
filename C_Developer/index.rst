@@ -19,7 +19,7 @@ This section covers topics of app development in the AIMMS IDE. Here are support
 
    Sub_Connectivity/index
    Sub_Mathematical_Modeling/index
-   Sub_Programming/index
+   Sub_Language/index
    Sub_Errors/index
 
 

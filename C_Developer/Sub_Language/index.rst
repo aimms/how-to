@@ -4,7 +4,7 @@
    :alt: AIMMS Language Help & Support
 
 
-AIMMS Programming
+AIMMS Language
 ========================
 
 .. meta::
@@ -17,11 +17,11 @@ This section covers topics related to expressing a model in the AIMMS programmin
 .. toctree::
    :maxdepth: 1
 
-   sub_language/index
-   sub_external_functions/index
+   sub_language_basics/index
    sub_efficiency/index
    sub_libraries/index
    Sub_Solvers/index
+.. sub_external_functions/index
 
 
 

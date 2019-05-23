@@ -18,6 +18,6 @@ This section contains explanations of various UI features available when buildin
    /Articles/279/279-gantt-chart-scroll
    /Articles/95/95-change-default-ui
    /Articles/235/235-change-chart-view
-   /Articles/124/124-tableau-integration
    /Articles/download-compressed-files/download-compressed-files
    /Articles/180/180-use-side-panel-with-old-menu
+.. /Articles/200/200-Measuring-Page-Loadtime.rst

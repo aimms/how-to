@@ -17,5 +17,4 @@ Delegate To Server
 
    /Articles/98/98-starting-job-aimms-pro-api-java
    /Articles/98/98-starting-job-aimms-pro-api-csharp
-   /Articles/257/257-run-batch-commands-in-aimms-command-line-tool
    /Articles/80/80-schedule-jobs

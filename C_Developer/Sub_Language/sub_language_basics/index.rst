@@ -34,4 +34,5 @@ These topics cover what you need to get started programming your model in AIMMS 
    /Articles/190/190-empty-sets
    /Articles/220/220-aborting-execution-of-aimms
    /Articles/12/12-generate-random-numbers
-   /Articles/114/114-execute
+   /Articles/189/189-using-calendars-in-aimms
+   /Articles/236/236-get-name-of-current-case

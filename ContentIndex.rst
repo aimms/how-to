@@ -18,8 +18,8 @@
 
 .. raw:: html
     
-    <div id="topo"> 
-    <br><h1>Welcome to AIMMS How-To</h1><h2>Tips and tricks for using AIMMS software</h2></div>
+    <div style="text-align:center"> <!--id="topo"-->
+    <br><h1>WELCOME TO HOW-TO</h1><!--h2>The AIMMS Knowledge Base</h1--></div>
     
 .. raw:: html
     
@@ -38,7 +38,7 @@
         <a href="C_Developer/index.html">
             <div class="box_home_page">
                 <img alignment="center" alt="developer" src="_images/school-supplies-32.png">
-                <h1 style="text-align: center">Developer</h1>
+                <h1 style="text-align: center">AIMMS Developer</h1>
                 <p>Data connection, modeling, solvers, programming, error handling</p>
             </div>
         </a>
