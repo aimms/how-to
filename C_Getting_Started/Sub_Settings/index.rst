@@ -1,13 +1,14 @@
+.. image:: ../../Images/settings-128.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS Settings Help & Support
+
 Program Settings
 ========================
 
 .. meta::
    :description: Help and support with AIMMS options and settings.
 
-.. .. image:: ../Images/getting-started.png
-   :scale: 100
-   :align: right
-   :alt: AIMMS Settings Help & Support
 
 These articles provide help with customizing AIMMS. Learn about settings options and basic set up.
 

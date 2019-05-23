@@ -1,13 +1,15 @@
-Basics
+.. image:: ../../Images/apple-book-128.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS Basics Help & Support
+
+AIMMS Basics
 ========================
 
 .. meta::
    :description: Help and support with AIMMS basic functionality.
 
-.. .. image:: ../Images/getting-started.png
-   :scale: 100
-   :align: right
-   :alt: AIMMS Basics Help & Support
+
 
 These topics provide fundamentals about using and customizing AIMMS. Learn about terminology, shortcuts, and basic functions.
 

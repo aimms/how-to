@@ -1,13 +1,14 @@
+.. image:: ../../Images/key-128.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS Licensing Help & Support
+
 Licensing
 ========================
 
 .. meta::
    :description: Help and support with licenses.
 
-.. .. image:: ../Images/getting-started.png
-   :scale: 100
-   :align: right
-   :alt: AIMMS Licensing Help & Support
 
 Here you can find help with license set up and troubleshooting license errors. Includes Network License installation.
 

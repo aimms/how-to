@@ -1,13 +1,14 @@
+.. image:: ../../../Images/database-128.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS Database Help & Support
+   
 Databases
 ==========
 
 .. meta::
    :description: Help and support with connecting AIMMS to databases.
 
-.. .. image:: ../Images/
-   :scale: 100
-   :align: right
-   :alt: AIMMS Database Help & Support
 
 These topics instruct how to link your AIMMS model to databases, such as MS Access and SQLite. You'll find help using AIMMS functions to interact with that data dynamically.
 

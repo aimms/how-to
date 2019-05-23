@@ -1,13 +1,14 @@
+.. image:: ../../../Images/spreadsheet-file-128.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS Excel/CSV Help & Support
+
 Excel and CSV
 =============================
 
 .. meta::
    :description: Help and support with connecting AIMMS to Excel and CSV files.
 
-.. .. image:: ../Images/
-   :scale: 100
-   :align: right
-   :alt: AIMMS Excel/CSV Help & Support
 
 Link your AIMMS model to spreadsheet data in Excel and CSV files.
 

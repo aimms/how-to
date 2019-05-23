@@ -1,13 +1,13 @@
+.. image:: ../../../Images/code-file-128.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS Language Help & Support
+
 AIMMS Language Basics
 =============================
 
 .. meta::
    :description: Help and support with basics of AIMMS language.
-
-.. .. image:: ../Images/
-   :scale: 100
-   :align: right
-   :alt: AIMMS Language Help & Support
 
 These topics cover what you need to get started programming your model in AIMMS language. Get help with identifiers, operators, functions, constraints, and more.
 

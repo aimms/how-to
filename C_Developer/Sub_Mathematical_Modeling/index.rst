@@ -1,12 +1,7 @@
-
-.. |aimmsIcon| image:: ../Images/icons/favicon.png
-            :scale: 15 %
-
-.. |aimms| image:: ../Images/aimms-logo-s-rgb.png
-                :scale: 10 %
-                :target: https://aimms.com/
-                
-.. |space| image:: ../Images/ThanksSmileySpace.gif
+.. image:: ../../Images/bricks-128.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS Modeling Help & Support
 
 
 Mathematical Modeling
@@ -15,10 +10,7 @@ Mathematical Modeling
 .. meta::
    :description: Help and support with creating mathematical models in AIMMS.
 
-.. image:: ../Images/modeling-gray.png
-   :scale: 100
-   :align: right
-   :alt: AIMMS Modeling Help & Support
+
 
 Learn how to convert business opportunities into optimization models. This section provides support for designing mathematical models that produce the best solutions to solve problems and maximize opportunities in your business or organization.
 
