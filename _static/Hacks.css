@@ -849,3 +849,8 @@ li {
     border: solid 1px lightgrey;
     padding: 5px;
 }
+
+.menuselection {
+    
+    font-style: italic;
+}
