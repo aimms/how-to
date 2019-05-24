@@ -1,0 +1,22 @@
+﻿* AIMMS
+rounding_compatibility Aimms_3_7
+* AOA
+* BARON 15
+* CBC 2.8.0
+* CBC 2.9
+* CONOPT 3.14V
+* CPLEX 12.6
+* CPLEX 12.6.2
+* CPOptimizer 12.6
+* GUROBI 5.6
+* GUROBI 6.0
+* IPOPT 3.11
+* KNITRO 9.0
+* KNITRO 9.1
+* MINOS
+* SNOPT 7.2
+* XA 15
+* PATH 4.6
+* NETSOL
+* Environment
+Data_Management_Style 1

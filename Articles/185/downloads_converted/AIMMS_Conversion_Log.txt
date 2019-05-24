@@ -1,0 +1,12 @@
+﻿Converting Main project
+Converting AccessDB.amb to new style model file: C:\u\s\How To\develop\Articles\185\downloads_converted\MainProject\AccessDB.ams
+Writing: C:\u\s\How To\develop\Articles\185\downloads_converted\MainProject\Project.xml
+Writing: C:\u\s\How To\develop\Articles\185\downloads_converted\MainProject\Tools\ProjectExport.xml
+Writing: C:\u\s\How To\develop\Articles\185\downloads_converted\MainProject\Settings\Options.txt
+Writing: C:\u\s\How To\develop\Articles\185\downloads_converted\MainProject\PageManager.xml
+Writing: C:\u\s\How To\develop\Articles\185\downloads_converted\MainProject\TemplateManager.xml
+Writing: C:\u\s\How To\develop\Articles\185\downloads_converted\MainProject\DataManagementSetup.xml
+Copying file: AccessDB.dat to C:\u\s\How To\develop\Articles\185\downloads_converted\AccessDB.dat
+Copying file: CreateAccessFileConnectionString.aim to C:\u\s\How To\develop\Articles\185\downloads_converted\CreateAccessFileConnectionString.aim
+Writing file: C:\u\s\How To\develop\Articles\185\downloads_converted\AccessDB.aimms
+Finished the conversion of the project.
