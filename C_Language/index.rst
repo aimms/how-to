@@ -20,7 +20,6 @@ AIMMS Language
    :alt: AIMMS Language Help & Support
 
 This section covers topics related to expressing a model in the AIMMS programming language. A programming language defines the limits of what you can express in it. The articles in this section familiarize you with the basics of the AIMMS language to get you up and running, and explain the boundaries.
- 
 
 .. toctree::
    :maxdepth: 1
@@ -30,6 +29,7 @@ This section covers topics related to expressing a model in the AIMMS programmin
    /Articles/119/119-Reproducible-Random-Sequence 
    /Articles/132/132-Repetive-Patterns-Model-Edit 
    /Articles/133/133-External-Functions-InputData
+   /Articles/194/194-using-loopcount-instead-of-explicit-counting-parameter-in-loops
    /Articles/150/150-solve-in-loop
    /Articles/121/121-set-index-element-parameter
    /Articles/272/272-using-multiple-indices-for-one-set
@@ -37,6 +37,7 @@ This section covers topics related to expressing a model in the AIMMS programmin
    /Articles/17/17-category-mapping
    /Articles/141/141-element-after-last
    /Articles/112/112-Integer-properties
+   /Articles/236/236-get-name-of-current-case
    /Articles/144/144-Stopwatch
    /Articles/125/125-execution-efficiency
    /Articles/170/170-memory-in-use.rst
@@ -47,6 +48,7 @@ This section covers topics related to expressing a model in the AIMMS programmin
    /Articles/109/109-deprecate-compound-sets-overview
    /Articles/109/109-convert-compound-sets
    /Articles/175/175-select-variables-and-constraints-for-math-program
+   /Articles/250/250-monitoring-identifiers-for-changes
    /Articles/184/184-use-multiple-indices-for-set
    /Articles/187/187-convert-string-to-number
    /Articles/188/188-use-nbest-operator
@@ -57,8 +59,8 @@ This section covers topics related to expressing a model in the AIMMS programmin
    /Articles/208/208-setting-options
    /Articles/216/216-effective-use-unit-test-library
    /Articles/220/220-aborting-execution-of-aimms
-   /Articles/248/248-modeling-the-forest-ontarios-ministry-of-natural-resources-takes-us-through-decades-of-effective-forest-management
-   /Articles/278/278-north-star
+
+
 
     
     

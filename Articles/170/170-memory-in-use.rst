@@ -36,7 +36,7 @@ One of the tools you can use to monitor the memory usage of your application is 
 
 Consider the below screenshot of the identifier cardinalities for a typical gate assignment problem. The parameter ``BothFlightsPossibleOnGate`` has a density of 30%, and it will grow quadratically with the number of flights handled for the gate assignment. When such an identifier is identified, you can choose to handle it according to your application's needs and requirements. 
 
-.. image:: images/identifier-cardinalities.png
+.. image:: images/identifier-cardinalities.PNG
    :align: center
 
 Tips and tricks:
@@ -89,7 +89,7 @@ You can retrieve the memory used by all the math programs in ``AllGeneratedMathe
 Minimizing memory used for element spaces
 --------------------------------------------
 
-AIMMS maintains a mapping between elements(strings) and numbers per root set. This mapping is the *element space*. The element space of the set ``Integers`` is very small as this is just an arithmetic operation without the need for additional memory. When your elements are integers, making the corresponding set a subset of ``Integers`` helps you in reducing the element space. 
+AIMMS maintains a mapping between elements (strings) and numbers per root set. This mapping is the *element space*. The element space of the set ``Integers`` is very small as this is just an arithmetic operation without the need for additional memory. When your elements are integers, making the corresponding set a subset of ``Integers`` helps you in reducing the element space. 
 
 
 Related Topics
