@@ -1,0 +1,116 @@
+## ams_version=1.0
+
+Model Main_DataChangeMonitorExample {
+    Parameter p_myParameter1;
+    Parameter p_myParameter2;
+    Parameter p_myDefinedParameter {
+        Definition: 2*p_myParameter2;
+    }
+    Set s_WatchedIdentifiers {
+        SubsetOf: AllIdentifiers;
+        Definition: {
+            data { 'p_myParameter1' , 'p_myParameter2' , 
+                                        'p_myDefinedParameter' }
+        }
+    }
+    StringParameter sp_DataChangeMonitorID;
+    Procedure pr_block1 {
+        Body: {
+            !The identifiers we are interested in checking for changes
+            s_WatchedIdentifiers := data { 'p_myParameter1' , 'p_myParameter2' , 
+                                'p_myDefinedParameter' } ; 
+            
+            !Create a name that will be the ID for this data change monitor
+            sp_DataChangeMonitorID := "Monitor parameters" ;
+        }
+    }
+    Procedure pr_block2 {
+        Body: {
+            !Create the actual Data Change Monitor with the ID denoted
+            !by the string parameter DataChangeMonitorID and monitor the
+            !changes of identifiers present in the set WatchedIdentifiers
+            DataChangeMonitorCreate(
+            	ID                   : sp_DataChangeMonitorID  , 
+            	monitoredIdentifiers : s_WatchedIdentifiers , 
+            	ExcludeNoneSaveables : 1) ;
+        }
+    }
+    Procedure pr_block3 {
+        Body: {
+                !Make sure that we delete any data change monitor with this name
+                !if it already exists. The function DataChangeMonitorDelete will
+                !return 1 in case of success, 0 in case it did not find a monitor
+                !with the given ID and -1 for all other errors.
+                p_retval := DataChangeMonitorDelete( sp_DataChangeMonitorID )  ;
+            
+                if p_retval = 1 then
+                    raise warning "Deleted existing data change monitor with ID \""
+                                  + sp_DataChangeMonitorID  + "\"" ;
+                endif ;
+            
+                if p_retval = -1 then
+                    raise error "Error while deleting data change monitor with ID \""
+                                + sp_DataChangeMonitorID +"\"\n"
+                                + "CurrentErrorMessage = " + CurrentErrorMessage ;
+                endif ;
+        }
+        Parameter p_retval;
+    }
+    Procedure pr_block4 {
+        Body: {
+            !Now modify the data
+            p_myParameter2 := 3.14 ;
+            
+            !And check if the data is indeed changed. You should see this
+            !DialogMessage appear
+            if DataChangeMonitorHasChanged(sp_DataChangeMonitorID) then
+            	DialogMessage("Data changed (2) - Should show dialog") ; 
+            endif ;
+        }
+    }
+    Procedure pr_block5 {
+        Body: {
+            p_myParameter2 := 1998 ;
+            
+            !you might expect the monitor to indicate here that the data has changed.
+            !However, as explained above, the data change monitor does not evaluate
+            !definitions, so as long as the identifier myDefinedParameter has not been
+            !updated (either explicitly with update statement or implicitly by accessing
+            !its data), the datachange monitor will not indicate any changes
+            if DataChangeMonitorHasChanged(sp_DataChangeMonitorID) then
+            	DialogMessage("Data defined parameter changed - Should not show dialog!");
+            endif ;
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

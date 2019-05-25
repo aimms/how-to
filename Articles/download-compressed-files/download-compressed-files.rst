@@ -162,7 +162,7 @@ Et voilà!
 Downloadable example
 +++++++++++++++++++++
 
-Please find the AIMMS example project attached here :download:`DownloadMultipleFiles.zip</Resources/UI/Downloads/DownloadMultipleFiles.zip>`
+Please find the AIMMS example project attached here :download:`DownloadMultipleFiles.zip<downloads/DownloadMultipleFiles.zip>`
 
 
 

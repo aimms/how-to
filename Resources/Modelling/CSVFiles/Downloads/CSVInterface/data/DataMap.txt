@@ -1,4 +1,0 @@
-DataMap(dl::dt, dl::idn, dl::cn, dl::dn) := data { 
-	('FootballRanking', 's_Rank', 1, 1) 		: "Rank",
-	('FootballRanking', 'sp_Country', 2, 0)		: "Country",
-	('FootballRanking', 'p_Points', 3, 0)		: "Points"} ;

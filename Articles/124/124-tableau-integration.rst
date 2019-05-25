@@ -1,4 +1,6 @@
-﻿Link AIMMS with Tableau
+﻿:orphan:
+
+Link AIMMS with Tableau
 ===========================
 
 .. meta::
