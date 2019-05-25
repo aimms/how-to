@@ -32,7 +32,7 @@ If you want to manually trigger this loading of results, you need:
 Example Implementation
 ---------------------------
 
-The approach outlined above is implemented in the running example - the Flow Shop project. Download the completed file from :download:`5. Flow Shop - Load Results </downloads/5. Flow Shop - Load Results.zip>`.
+The approach outlined above is implemented in the running example - the Flow Shop project. Download the completed file from :download:`5. Flow Shop - Load Results <downloads/5. Flow Shop - Load Results.zip>`.
 
 The workflow is as below:
 

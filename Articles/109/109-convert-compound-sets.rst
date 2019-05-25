@@ -133,7 +133,7 @@ The importance of creating backups before starting maintenance on your projects 
 Step 2: Add library DeprecateCompoundSetUtilities
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The :download:`AIMMS project download </downloads/DeprecateCompoundSets.zip>` provides an example app and utility library ``DeprecateCompoundSetUtilities``. 
+The :download:`AIMMS project download <downloads/DeprecateCompoundSets.zip>` provides an example app and utility library ``DeprecateCompoundSetUtilities``. 
 
 Copy the library from that example and add it to your application.
 

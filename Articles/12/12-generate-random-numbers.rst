@@ -84,7 +84,7 @@ That's good. But if we would plot our parameter distribution we would end up wit
 
 :samp:`{variable = 2} print 1+{variable}`
 
-.. literalinclude:: /resources/CSVInterface.ams
+.. literalinclude:: resources/CSVInterface.ams
     :caption: CSVInterface.ams
     :name: CSVInterface.ams
     
