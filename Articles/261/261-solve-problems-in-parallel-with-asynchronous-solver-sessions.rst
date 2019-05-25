@@ -147,4 +147,4 @@ name of the solver in the license details on the right.
 If you have a free AIMMS Academic License, the main solvers like CPLEX
 and Gurobi will allow 32 simultaneous solver sessions. The 30 day AIMMS
 Trial License will allow two sessions to be started simultaneously for
-these solvers.]]> <[CDATA[]]> 1266 0 0 0
+these solvers.]]> <[CDATA[]]> 1266 0 0 0.. include:: /includes/form.def

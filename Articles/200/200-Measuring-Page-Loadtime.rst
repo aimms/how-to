@@ -39,4 +39,7 @@ Measuring Page Load time
 .. ``_aimms_only_boomr_env dev``
 .. 
 
+.. include:: /includes/form.def
+
+
 

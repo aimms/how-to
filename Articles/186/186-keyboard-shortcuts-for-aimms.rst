@@ -74,3 +74,6 @@ To run any procedure using only the keyboard:
 #. Press ``P`` to open the *Run Procedure* dialog.
 #. Type the name of the procedure you want to run.
 
+
+.. include:: /includes/form.def
+

@@ -38,4 +38,6 @@ Old AOA cannot be combined with the nonlinear presolver nor the multi-start algo
      
 .. note:: The AOA provided by AIMMS is among the best Mixed Integer Nonlinear programming solvers according to this comparison: :download:`A review and comparison of solvers for convex MINLP <downloads/AReviewAndComparisonOfSolversForConvexMINLP.pdf>` 
 
-    
+
+.. include:: /includes/form.def
+
