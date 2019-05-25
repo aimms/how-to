@@ -43,3 +43,7 @@ Note that if you make your set a subset of the predefined set ``Integers`` you d
 Related Topics
 --------------
 * `AIMMS Function Reference <https://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_.
+
+
+.. include:: /includes/form.def
+

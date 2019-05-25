@@ -45,3 +45,7 @@ Related Topics
 ------------------
 
 * `AIMMS Documentation: Sidepanels <https://manual.aimms.com/webui/page-manager.html#id6>`_
+
+
+.. include:: /includes/form.def
+

@@ -1,5 +1,0 @@
-* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
-"Reading_Excel_Input" "Handling_Excel_File" "2019-01-04 07:53:28"
-"pr_ReadExcelData" "pr_ReadDataFromExcelWorkbook" "2019-01-04 11:06:48"
-"pr_WriteExcel" "pr_WriteSolutionToExcelWorkbook" "2019-01-04 11:07:02"
-"sp_BatchWorkFolder" "sp_BatchExcelInputFolder" "2019-01-04 11:26:28"

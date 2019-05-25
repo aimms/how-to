@@ -41,3 +41,7 @@ All of these stop criteria are options in your AIMMS project. This means that th
 .. code-block:: aimms
 
    solve MathProg where MIP_Relative_Optimality_Tolerance := 0.1, time_limit := 10 ;
+   
+
+.. include:: /includes/form.def
+

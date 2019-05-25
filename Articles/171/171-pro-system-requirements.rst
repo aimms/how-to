@@ -70,3 +70,7 @@ Read more about the queueing on AIMMS PRO `here <https://manual.aimms.com/pro/co
    Discuss effect of parallel threading on solve runs and the additional memory / cores required to do this ? Perhaps in a separate article ?
 
    https://www-01.ibm.com/support/docview.wss?uid=swg21653811
+   
+
+.. include:: /includes/form.def
+
