@@ -64,6 +64,10 @@ The table below provides a list of shortcuts provided by AIMMS.
 +----------------------------------+----------------------------------------------------------------------------------------------------------+
 | ``Insert``                       | Insert a node (when single insert choice) or Open Select Node Type dialog (when multiple insert choices) |
 +----------------------------------+----------------------------------------------------------------------------------------------------------+
+| ``Ctrl`` + ``K``                 | Comment the selected code                                                                                |
++----------------------------------+----------------------------------------------------------------------------------------------------------+
+| ``Ctrl`` + ``U``                 | Uncomment the selected code                                                                              |
++----------------------------------+----------------------------------------------------------------------------------------------------------+
 
 
 Another "shortcut" you may find handy is a way to quickly run a procedure other than the MainExecution (as this already has the keyboard shortcut F6).

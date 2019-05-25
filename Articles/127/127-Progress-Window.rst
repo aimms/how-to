@@ -11,7 +11,7 @@
 
 .. sidebar:: Progress Window
 
-    .. image:: /Resources/C_Solvers/Images/127/pw1.png
+    .. image:: images/pw1.png
 
 
 The progress window, which can be opened by pressing CTRL-P, allows you to monitor AIMMS during compilation, execution and solving. For example, while solving a MIP problem, AIMMS will display the number of iterations and nodes, the best bound and the best solution in the progress window. So far, progress updates during a solve have been based on the number of iterations used by the solver. By default, the progress window is updated every 100 iterations. This frequency is controlled by the general solvers option **Progress Solution**.

@@ -1,5 +1,0 @@
-* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
-"Copy_MainExecution" "ReadCSVFileUsingExplicitDataMaps" "2018-07-09 08:48:26"
-"ReadCSVFileUsingExplicitDataMaps" "ReadCSV_KommaSeparated" "2018-07-09 08:53:05"
-"Copy_ReadCSV_KommaSeparated" "ReadCSV_SemiSeparated" "2018-07-09 08:53:15"
-"spCommAttr" "spCommunicationAttributes" "2018-07-09 08:58:23"

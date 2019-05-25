@@ -15,7 +15,7 @@ Approach
 
 The approach we take here involves passing information through three levels of execution.
 
-.. image:: /Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/ThreeLevelsOfExecutionTimeCB.png
+.. image:: images/ThreeLevelsOfExecutionTimeCB.png
 
 #. The solver execution on the server session. 
     The solver passes on status information periodically, as part of the time callback mechanism.

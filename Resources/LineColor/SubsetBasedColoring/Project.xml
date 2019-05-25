@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<LibraryProject AimmsVersion="4.59.59853.0 unicode x64" ProjectUUID="8707C101-7241-4152-905C-C1B738090D8B">
-	<ModelFileName>SubsetBasedColoring.ams</ModelFileName>
-	<Prefix>sbc</Prefix>
-	<DisplayName>SubsetBasedColoring</DisplayName>
-</LibraryProject>

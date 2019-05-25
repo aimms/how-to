@@ -13,7 +13,7 @@ Local Binding vs. Default Binding
 
 .. image:: images/rootSetSubset.png
 
-In this article we will compares two ways of defining index binding: local binding and default binding.
+In this article we will compare two ways of defining index binding: local binding and default binding.
 
 Assume there are two sets:
 
