@@ -13,15 +13,14 @@ In this article an example is provided for reading data from a CSV file.
 Import ``CSVProvider`` library
 ------------------------------------------------
 
-1. Go to :menuselection:`File --> Library Manager --> Add Library from Repository...`
+1. Go to :menuselection:`File > Library Manager > Add Library from Repository...`
 2. Select ``CSVProvider``
 
 
 Quick preview
 ---------------
 
-.. sidebar:: fourRows.csv
-    
+.. .. sidebar:: fourRows.csv    
     .. image::  images/CSVFile.png 
 
     
