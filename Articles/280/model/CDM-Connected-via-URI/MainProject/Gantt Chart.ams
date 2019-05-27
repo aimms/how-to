@@ -1,0 +1,234 @@
+## ams_version=1.0
+
+Model Main_Gantt_Chart {
+    Section Gantt_Chart_Section {
+        DeclarationSection Gantt_Chart_Declarations {
+            cdm::Category: CDMExample;
+            Quantity SI_Time_Duration {
+                BaseUnit: hour;
+                Conversions: minute->hour : #-># / 60;
+                Comment: "Expresses the value for the duration of periods.";
+            }
+            Set Tasks {
+                Index: t;
+                Parameter: SelectedTask;
+            }
+            Set Persons {
+                Index: p;
+            }
+            Set TaskTypes {
+                Index: tt;
+            }
+            Parameter TaskStart {
+                IndexDomain: (t,tt,p);
+                Unit: hour;
+            }
+            Parameter TaskDuration {
+                IndexDomain: (t,tt,p);
+                Unit: hour;
+            }
+            StringParameter TaskDescription {
+                IndexDomain: t;
+            }
+            StringParameter DescriptionOfSelectedTask {
+                Definition: TaskDescription(SelectedTask);
+            }
+            StringParameter ViewportStart;
+            StringParameter ViewportEnd;
+        }
+        Procedure InitializeGanttChartData {
+            Body: {
+                ViewPortStart := "2016-08-01 00:00";
+                ViewportEnd := "2016-08-03 00:00";
+                
+                Tasks := ElementRange(1,28,prefix:"task-");
+                Persons := data { George, John, Paul, Ringo };
+                TaskTypes := data { 'daily scrum', meeting, refinement, lunch, programming, testing };
+                
+                empty TaskStart, TaskDuration;
+                
+                COMPOSITE TABLE
+                  t       tt                p        TaskStart TaskDuration
+                ! ------- ----------------- -------- --------- ------------
+                  task-01 testing           George   9         1
+                  task-02 'daily scrum'     George   11        0.25
+                  task-03 lunch             George   12        1
+                  task-04 testing           George   14        1     
+                  task-05 testing           George   35        1
+                  task-06 'daily scrum'     George   36        0.25
+                  task-07 programming       John     10        1
+                  task-08 'daily scrum'     John     11        0.25
+                  task-09 lunch             John     14        0.5
+                  task-10 meeting           John     15        1
+                  task-11 testing           John     34        1
+                  task-12 'daily scrum'     John     36        0.25
+                  task-13 lunch             John     38        0.5
+                  task-14 refinement        John     39        1.5
+                  task-15 'daily scrum'     Paul     11        0.25
+                  task-16 lunch             Paul     13        0.5
+                  task-17 programming       Paul     14        3
+                  task-18 'daily scrum'     Paul     36        0.25
+                  task-19 lunch             Paul     37        0.5
+                  task-20 refinement        Paul     39        1.5
+                  task-21 programming       Ringo    8         2
+                  task-22 'daily scrum'     Ringo    11        0.25
+                  task-23 lunch             Ringo    13        0.5
+                  task-24 meeting           Ringo    15        1
+                  task-25 programming       Ringo    32        2
+                  task-26 'daily scrum'     Ringo    36        0.25
+                  task-27 lunch             Ringo    37        0.5
+                  task-28 refinement        Ringo    39        1.5
+                 ;
+                
+                 for ((t,tt,p) | TaskStart(t, tt, p)) do
+                 	startTime := MomentToString(DateFormat,[hour],"2016-08-01 00",TaskStart(t,tt,p));
+                 	endTime := MomentToString(DateFormat,[hour],"2016-08-01 00",TaskStart(t,tt,p)+TaskDuration(t, tt, p));
+                 	TaskDescription(t) := FormatString("%e performs task %e from %s till %s",p,tt,startTime,endTime);
+                 endfor;
+            }
+            StringParameter startTime;
+            StringParameter endTime;
+        }
+        Section Viewport_Control_Procedures {
+            StringParameter DateFormat {
+                Definition: "%c%y-%m-%d %H:%M";
+            }
+            StringParameter StartDate {
+                Definition: "2016-01-01 00:00:00";
+            }
+            Procedure MoveDate {
+                Arguments: (dateString,numHours);
+                Body: {
+                    moment := StringToMoment(DateFormat, [hour], StartDate, dateString);
+                    moment += numHours;
+                    dateString := MomentToString(DateFormat, [hour], StartDate, moment);
+                }
+                StringParameter dateString {
+                    Property: InOut;
+                }
+                Parameter numHours {
+                    Unit: hour;
+                    Property: Input;
+                }
+                Parameter moment {
+                    Unit: hour;
+                }
+            }
+            Procedure ZoomViewport {
+                Arguments: (factor);
+                Body: {
+                    ! zoom and keep center
+                    
+                    startMoment := StringToMoment(DateFormat, [hour], StartDate, ViewportStart);
+                    endMoment := StringToMoment(DateFormat, [hour], StartDate, ViewportEnd);
+                    duration := endMoment - startMoment;
+                    ViewportStart := MomentToString(DateFormat, [hour], StartDate, floor(startMoment + 0.5 * duration * (1-factor)));
+                    ViewportEnd := MomentToString(DateFormat, [hour], StartDate, ceil(startMoment + 0.5 * duration * (1+factor)));
+                }
+                Parameter factor {
+                    Property: Input;
+                }
+                Parameter startMoment {
+                    Unit: hour;
+                }
+                Parameter endMoment {
+                    Unit: hour;
+                }
+                Parameter duration {
+                    Unit: hour;
+                }
+            }
+            Procedure ScrollViewport {
+                Arguments: (numHours);
+                Body: {
+                    MoveDate(ViewportStart,numHours);
+                    MoveDate(ViewportEnd,numHours);
+                }
+                Parameter numHours {
+                    Unit: hour;
+                    Property: Input;
+                }
+            }
+            Procedure ViewportScrollToTheRight {
+                Body: {
+                    ScrollViewport(1[hour]);
+                }
+            }
+            Procedure ViewportScrollToTheLeft {
+                Body: {
+                    ScrollViewport(-1[hour]);
+                }
+            }
+            Procedure ViewportZoomIn {
+                Body: {
+                    ZoomViewport(0.8);
+                }
+            }
+            Procedure ViewportZoomOut {
+                Body: {
+                    ZoomViewport(1.25);
+                }
+            }
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Body: {
+            LoadCDM;
+            
+            if (card(TaskStart) = 0) then
+            	InitializeGanttChartData;
+            endif;
+        }
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+    Procedure LoadCDM {
+        Body: {
+            cdm::ApplicationDatabase := "CDM-Example-DB";
+            cdm::DataSchemaVersion := "1";
+            
+            ! Perhaps an open door, but please verify that 19999 is an open port on the machine running the CDM Service
+            ! Tip: on the command prompt use netstat to list the open ports.
+            cdm::ServerURI := "tcp://chrisk-pc:19999";
+            
+            cdm::CallTimeout := 300000;
+            
+            cdm::ServiceLogLevel := 'TRACE';
+            
+            cdm::ConnectToApplicationDB;
+            
+            ! Make this app auto-commit and auto-pull
+            cdm::ListenToDataChanges := 1;
+            cdm::AutoCommitCategory(cdm::cat) := 1;
+            cdm::AutoPullCategory(cdm::cat) := 1;
+            cdm::StartListeningToDataChanges;
+        }
+    }
+}
