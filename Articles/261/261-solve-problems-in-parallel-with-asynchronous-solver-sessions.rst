@@ -38,47 +38,47 @@ Session first and instruct AIMMS to start executing this Solver Session.
    !Set input parameters corresponding to situation 1  (e.g. max number of jobs)
    maxNumberOfJobs := 10 ; 
    !Generate the GMP for situation 1
-   epGMP_Situation1 := gmp::Instance::Generate(
+   ep_GMP_Situation1 := gmp::Instance::Generate(
                MP   : MathProgram , 
                name : "situation 1" ) ; 
    !Set input parameters corresponding to situation 2  (e.g. max number of jobs)
    maxNumberOfJobs := 15 ; 
    !Generate the GMP for situation 2
-   epGMP_Situation2 := gmp::Instance::Generate(
+   ep_GMP_Situation2 := gmp::Instance::Generate(
                MP   : MathProgram , 
                name : "situation 2" ) ;         
    !Now create the solver sessions that can be used
    !to actually solve the problems
-   epSolverSession1 := gmp::Instance::CreateSolverSession(   
-               GMP    : epGMP_Situation1 ,               
+   ep_SolverSession1 := gmp::Instance::CreateSolverSession(   
+               GMP    : ep_GMP_Situation1 ,               
                Name   : "Solver session situation 1" ) ;                
-   epSolverSession2 := gmp::Instance::CreateSolverSession(
-               GMP    : epGMP_Situation2 , 
+   ep_SolverSession2 := gmp::Instance::CreateSolverSession(
+               GMP    : ep_GMP_Situation2 , 
                Name   : "Solver session situation 2" ) ; 
                
    !Instruct AIMMS to execute both solver sessions asynchronously
    gmp::SolverSession::AsynchronousExecute(
-               solverSession : epSolverSession1 ) ; 
+               solverSession : ep_SolverSession1 ) ; 
    gmp::SolverSession::AsynchronousExecute(
-               solverSession : epSolverSession2 ) ; 
+               solverSession : ep_SolverSession2 ) ; 
    !As long as there are still solver sessions, keep on checking for the
    !next one that is finished and do something with the results
    while card(AllsolverSessions) do
        !Wait for any of the solver sessions to be finished. The solver
        !session that is actually finished will be returned by the
        !WaitForSingleCompletion function
-       epFinishedSolverSession := gmp::SolverSession::WaitForSingleCompletion(
+       ep_FinishedSolverSession := gmp::SolverSession::WaitForSingleCompletion(
                        solSesSet : AllSolverSessions  ) ;   
        !Do something with the result, e.g. display the objective
-       pFoundObjective := gmp::SolverSession::GetObjective(
-                      solverSession : epFinishedSolverSession ) ; 
+       p_FoundObjective := gmp::SolverSession::GetObjective(
+                      solverSession : ep_FinishedSolverSession ) ; 
        !Based on the name of the solver session, you can see which situation
        !was finished solving.
-       display epFinishedSolverSession, pFoundObjective
+       display ep_FinishedSolverSession, p_FoundObjective
        !This solver session is finished. We do not need it anymore, so 
        !we can delete it
        gmp::Instance::DeleteSolverSession(
-               solverSession : epFinishedSolverSession ) ; 
+               solverSession : ep_FinishedSolverSession ) ; 
    endwhile ; 
 
 The above example just shows how you can make use of two static
