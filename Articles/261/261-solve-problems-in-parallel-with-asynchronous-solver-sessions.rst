@@ -31,7 +31,7 @@ all the problems with multiple solver sessions compared to solving all
 problems sequentially.
 How to implement asynchronous solves--------------------------------------
 To use the asynchronous solver sessions, you will first have to create a
-GMP for your problem as explained in :doc:`../147/147-GMP-Intro.html`. Instead of just using
+GMP for your problem as explained in :doc:`../147/147-GMP-Intro`. Instead of just using
 ``GMP::Instance::Solve``, you will now have to manually create a Solver
 Session first and instruct AIMMS to start executing this Solver Session.
 .. code::
