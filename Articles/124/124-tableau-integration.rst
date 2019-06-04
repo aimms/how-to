@@ -1,5 +1,4 @@
-﻿:orphan:
-
+﻿
 Link AIMMS with Tableau
 ===========================
 

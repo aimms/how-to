@@ -1,4 +1,4 @@
-... image:: ../../../Images/login-128.png
+.. image:: ../../../Images/login-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Data Connection Help & Support

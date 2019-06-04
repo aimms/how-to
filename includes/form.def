@@ -11,9 +11,9 @@ _______________________________________________________________________________
 	
 	<h3 style=" display:inline; font-weight: bold; margin-top: 4px; padding-right: 10px">Was this helpful ?</h3>
 	
-	<!-- LikeBtn.com BEGIN
+	<!-- LikeBtn.com BEGIN -->
 	<span class="likebtn-wrapper" data-theme="elegant" data-white_label="true" data-show_like_label="false" data-popup_disabled="true" data-share_enabled="false" data-tooltip_enabled="false" data-site_id="5c4b11426fd08b424f7e547c"></span>
 	<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
-	LikeBtn.com END -->
+	<!-- LikeBtn.com END -->
 
 	<br>
