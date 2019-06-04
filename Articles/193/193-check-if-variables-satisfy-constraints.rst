@@ -25,7 +25,7 @@ First, add identifiers for the required variables ``(x,y,obj)`` and constraint t
 
 Then, add a math program identifier that links these variables and constraints. 
 
-Finally, use the following code to check whether the assignment :math:`x=1\ ,\ y=1` is a feasible solution::
+Finally, use the following code to check whether the assignment :math:`x=1\ ,\ y=1` is a feasible solution:
 
 .. code-block:: aimms
     :linenos:
@@ -50,11 +50,11 @@ Finally, use the following code to check whether the assignment :math:`x=1\ ,\ y
     !We can now use the GMP::Solution::Check to check solution
     !number 1.
     GMP::Solution::Check(
-        GMP       : generatedMP , 	!The Math program we want to use
-        solution  : 1 , 		!The solution number we want to check
+        GMP       : generatedMP ,   !The Math program we want to use
+        solution  : 1 ,         !The solution number we want to check
         numInfeas : numberOfInfeasibilities , !store # of infeasibilities 
         sumInfeas : sumOfInfeasibilities ,    !store sum infeasibilities
-        skipObj   : 1 ) ; 		!Objective can be skipped
+        skipObj   : 1 ) ;       !Objective can be skipped
     
     !Now we can check the number of infeasibilities. If there are no 
     !infeasibilities, it means the variables values satisfy all constraints
