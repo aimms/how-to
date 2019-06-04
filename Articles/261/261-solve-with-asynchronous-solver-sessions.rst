@@ -1,5 +1,3 @@
-:orphan:
-
 Solve in parallel with Asynchronous Solver Sessions
 ==================================================================
 
