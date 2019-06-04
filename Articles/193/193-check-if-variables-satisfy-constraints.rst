@@ -25,28 +25,29 @@ First, add identifiers for the required variables ``(x,y,obj)`` and constraint t
 
 Then, add a math program identifier that links these variables and constraints. 
 
-Finally, use the following code to check whether the assignment :math:`x=1\ ,\ y=1` is a feasible solution::
+Finally, use the following code to check whether the assignment :math:`x=1\ ,\ y=1` is a feasible solution:
 
 .. code-block:: aimms
     :linenos:
-
+    
     !We want to check if x=1, y=1 is a feasible solution for our MathProgram
-   
+
     !First we must generate the GMP for our MathProgram
     generatedMP := GMP::Instance::Generate(
        MP   : MathProgram ) ; 
-   
+
     !Then we must assign the values we want to check to the variables
     x := 1 ; 
     y := 1 ; 
-   
+
     !Now retrieve the values from the variables in the model to
     !solution number 1 of this generated math program.
+
     GMP::Solution::RetrieveFromModel(
         GMP      : generatedMP , 
         solution : 1 ) ; 
-   
-   
+
+
     !We can now use the GMP::Solution::Check to check solution
     !number 1.
     GMP::Solution::Check(
@@ -55,7 +56,7 @@ Finally, use the following code to check whether the assignment :math:`x=1\ ,\ y
         numInfeas : numberOfInfeasibilities , !store # of infeasibilities 
         sumInfeas : sumOfInfeasibilities ,    !store sum infeasibilities
         skipObj   : 1 ) ; 		!Objective can be skipped
-    
+
     !Now we can check the number of infeasibilities. If there are no 
     !infeasibilities, it means the variables values satisfy all constraints
     if numberOfInfeasibilities then 
@@ -67,12 +68,13 @@ Finally, use the following code to check whether the assignment :math:`x=1\ ,\ y
         dialogMessage("Variable values are feasible for all constraints") ; 
     endif ; 
 
+
 After running the above code, you will get the message that assignment :math:`x=1\ ,\ y=1` does not satisfy all the constraints.
 
 
 The example code above is available in a complete AIMMS project, attached below.
 
-:download:`downloads/Check-Solution.aimmspack`
+:download:`Check-Solution.aimmspack <downloads/Check-Solution.aimmspack>`
 
 
 .. include:: /includes/form.def
