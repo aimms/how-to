@@ -74,7 +74,7 @@ After running the above code, you will get the message that assignment :math:`x=
 
 The example code above is available in a complete AIMMS project, attached below.
 
-:download:`downloads/Check-Solution.aimmspack`
+:download:`Check-Solution.aimmspack <downloads/Check-Solution.aimmspack>`
 
 
 .. include:: /includes/form.def
