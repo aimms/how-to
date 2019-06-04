@@ -44,3 +44,4 @@ You can use the execute statement in AIMMS to execute the above statement (and i
    </pre>
 
 Note that the backslash of \\n in the tr command needs to be escaped in the AIMMS string. The purpose of the tr command is to remove the trailing \\n (=newline) character of the file numcpus.txt. Without using this tr command, obtaining the numerical value of the contents of the file with the val command will value because the contents of the file are actually "2\n" .
+.. include:: /includes/form.def

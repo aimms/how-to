@@ -38,7 +38,6 @@ Running the example
         * Line 14, ``PRO_ENDPOINT``: this might also be ``wss://your-cloud-name.cloud.aimms.com`` 
         
             #. when connection encrypted, start with ``wss`` (cloud systems are always encrypted).
-           
             
             #. when connection not encrypted, start with ``ws``
            

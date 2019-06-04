@@ -48,3 +48,4 @@ The AIMMS project for running Flowshop example can be downloaded from: :download
 The next article in this AIMMS PRO series shows how to keep the end user interface active while a solve procedure is in process. Please read  :doc:`../19/19-remove-veil`.
 
 .. include:: /includes/form.def
+
