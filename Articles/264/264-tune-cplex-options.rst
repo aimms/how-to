@@ -1,4 +1,4 @@
-Adjust CPLEX Options from AIMMS
+Tune CPLEX Options from AIMMS
 ========================================
 
 .. meta::
@@ -13,7 +13,7 @@ The CPLEX solver has many options that influence the way CPLEX solves your model
 
 
 
-To help you out with this problem, CPLEX has the possibility automatically tune some of the options. In AIMMS, you can access this CPLEX tuning tool via the following two functions:
+To help you out, CPLEX has some automatic tuning options. In AIMMS, you can access this CPLEX tuning tool via the following two functions:
 
 
 .. code::
@@ -25,23 +25,21 @@ To help you out with this problem, CPLEX has the possibility automatically tune 
     GMP::Tuning::TuneSingleGMP
 
 
-As the names already suggest, the first function will tune the CPLEX options for a set of LP/MPS files. As an argument, you will have to specify the directory containing the LP/MPS files. The second function will tune the options based on one single GMP, which you will have to provide as an argument. As the ``GMP::Tuning::TuneSingleGMP`` works as the other GMP function, the solver to use is known. In case of the function ``GMP::Tuning::TuneMultipleMPS``, you must also provide which solver to use as an argument.
+As the names already suggest, the first function will tune the CPLEX options for a set of LP/MPS files. As an argument, you will have to specify the directory containing the LP/MPS files. The second function will tune the options based on one single GMP, which you will have to provide as an argument. 
+
+The function ``GMP::Tuning::TuneSingleGMP`` works like the other GMP function, so the solver to use is already known. In case of the function ``GMP::Tuning::TuneMultipleMPS``, you must also provide which solver to use as an argument.
+
+In order to create the MPS files for multiple instances of your problem, you can set the project setting :menuselection:`General > MPS` under the ``CPLEX`` specific solver options to *At every solve*. Each time you solve an instance of your problem, the solver will generate a MPS file.
 
 
-
-In order to create the MPS files for multiple instances of your problem, you can set the project setting :menuselection:`General --> MPS` under the ``CPLEX`` specific solver options to ``At every solve``. Each time that you solve an instance of your problem, the solver will generate a MPS file.
-
-
-The rest of the options that you need to provide are the following three:
+The other options to provide are the following:
 
 
-   * ``FixedOptions``: A subset of the set AllOptions that are to be considered unchangeable and for which the current project options will be used
+   * ``FixedOptions``: A subset of the set ``AllOptions`` that are to be considered unchangeable and for which the current project options will be used
 
    * ``ApplyTunedSettings``: A binary argument indicating whether the found tuned option settings should be set in the project options
 
    * ``OptionFileName``: File to which the tuned option settings should be written. This file can be imported in the Project Options screen.
-
-
 
 
 To use these functions, we first need the following declarations:
@@ -117,6 +115,6 @@ To actually tune the solver settings, you can use the following code:
 
 .. note::
     
-    Please be careful when you are tuning: you must always ensure that you have one or more instances that are a good representation of all possible instances. If the instances you are tuning are not representative for all possible instances, you will over tune to one specific instance. This might lead to worse performances with the tuned settings for all instances combined.
+    Take care when tuning; always ensure that you have a few instances that are a good sample of the range of possible instances. If the instances you are tuning are not representative for all possible instances, you will tune to one specific instance but risk decreasing performance for all instances overall.
 
 .. include:: /includes/form.def

@@ -7,17 +7,51 @@ Read and Write CSV Files
    :keywords:  csv, datalink, csvprovider
 
 CSV files are a *de facto* standard for communication of data. 
-AIMMS provides the libraries ``DataLink`` and ``CSVProvider`` for the serializing of CSV files.
-In this article an example is provided for reading data from a CSV file.
+AIMMS provides the libraries ``DataLink`` and ``CSVProvider`` in order to serialize CSV files.
+
+This article shows an example of how to read data from a CSV file.
 
 Import ``CSVProvider`` library
 ------------------------------------------------
+
+First you'll need to import the ``CSVProvider`` library
 
 1. Go to :menuselection:`File > Library Manager > Add Library from Repository...`
 2. Select ``CSVProvider``
 
 
-Quick preview
+.. comment
+
+Architecture view and more details
+-----------------------------------
+
+The ``DataLink`` and ``CSVProvider`` libraries cooperate to present the following data view:
+
+.. image::  images/DataLinkDataView.png 
+
+The ``DataLink`` column maps to an AIMMS set or parameter, and is linked to a CSV column.
+
+A group of columns make up for a table in the ``DataLink`` view, and such a table corresponds to a file in the ``CSVProvider`` view.
+
+A group of ``DataLink`` tables make up for a database in the ``DataLink`` view, and such a database corresponds to a datasource in the ``CSVProvider`` view. 
+
+Procedure
+-----------
+Using the image above for reference, it is clear we need to provide details in several steps:
+
+#. Provide a name for the mapping between the ``DataLink`` view and the ``CSVProvider`` view.
+
+#. Provide the names of the tables in the ``DataLink`` view that correspond to the filenames in the ``CSVProvider`` view. Note that in the ``CSVProvider`` view, the file suffix ``.csv`` is automatically appended.
+
+#. Provide a mapping between AIMMS Sets and Parameters to columns in CSV files.
+
+#. Define file convention details such as separator characters, and width/precision of numeric data.
+
+#. Put it all together in a read or write call.
+
+We will discuss each of these steps in detail below the code example.
+
+Code example
 ---------------
 
 .. .. sidebar:: fourRows.csv    
@@ -49,57 +83,24 @@ Quick preview
             "TheMapping" ,                ! using relation "TheMapping" between folder komma and AIMMS identifiers.
             spCommunicationAttributes);   ! Technicalities on how to communicate.
 
-.. comment:
-
-    Architecture view and more details
-    -----------------------------------
-
-    The DataLink and CSVProvider libraries cooperate to present the following data view:
-
-    .. image::  images/DataLinkDataView.png 
-
-    The DataLink column maps to an AIMMS set or an AIMMS parameter.
-    This DataLink column is linked to a CSV column.
-
-    A group of columns make up for a table in the DataLink view, and such a table corresponds to a file in the CSVProvider view.
-
-    A group of DataLink tables make up for a database in the DataLink view, and such a database corresponds to a datasource in the CSVProvider view. 
-
-    Getting some data
-    -----------------
-
-    Looking at the above picture, we need to provide details in several steps:
-
-    #. Provide a name for the mapping between the DataLink view and the CSVProvider view.
-
-    #. Provide the names of the tables in the DataLink view that correspond to the filenames in the CSVProvider view. Note that in the CSVProvider view, the file suffix ``.csv`` is automatically appended.
-
-    #. Provide a mapping between AIMMS Sets and Parameters to columns in .csv files.
-
-    #. File convention details such as separator characters, and width/precision of numeric data.
-
-    #. Putting it all together in a read or write call.
-
-    We will discuss each of these steps in detail below.
-
-Code Explanation
----------------------    
     
 Provide the file name (line 1)
 ++++++++++++++++++++++++++++++++++++++
 
-The table names in the DataLink view are the same as the filenames in the CSVProvider view, with the note that these files have suffix ``.csv``.
-The AIMMS set ``dl::DataTables`` contains a list of these table names. For instance, adding the table ``fourRows`` to the list of tables is done as follows:
+The table names in the ``DataLink`` view are the same as the filenames in the ``CSVProvider`` view, except with suffix ``.csv``.
+
+The AIMMS set ``dl::DataTables`` contains a list of these table names. For instance, adding the table ``fourRows`` to the list of tables is done like this:
 
     .. code-block:: aimms
 
-        dl::DataTables += {'fourRows'} ; ! komma/fourRows.csv is the file we're gonna read from.
+        dl::DataTables += {'fourRows'} ; ! komma/fourRows.csv is the file we will read from.
 
 
 Provide the mapping (line 3 to 8)
 ++++++++++++++++++++++++++++++++++++++++++++
 
-For each set and parameter in the AIMMS model, we need to specify in which DataLink table aka CSV file it corresponds and to which column in that table.
+For each set and parameter in the AIMMS model, we need to specify to which ``DataLink`` table (CSV file) it corresponds and to which column in that table.
+
 We do this using the following 4-dimensional table:
 
     .. code-block:: aimms
@@ -119,11 +120,11 @@ We do this using the following 4-dimensional table:
             ( fourRows, spCmt, 4, 0 ) : "comment"
         };
 
-As you can see from the above example, the column numbers are increasing and correspond to the *column number in the DataLink view*. 
+As you can see in the example above, the column numbers are increasing and **correspond to the column numbers in the ``DataLink`` view**. 
 
-#. When reading a .csv file, the header line of the .csv file, in combination with the value of each element in the DataMap, is used to determine the column numbers in the CSV Provider view. Thus the column numbers in the DataMap are not necessarily the same as the column numbers in the CSVProvider view. 
+#. When reading a CSV file, the header line of the CSV file, in combination with the value of each element in the ``DataMap``, is used to determine the column numbers in the ``CSVProvider`` view. Thus the column numbers in the ``DataMap`` are not necessarily the same as the column numbers in the ``CSVProvider`` view. 
 
-#. When writing a .csv file, these two column numberings happen to be same.
+#. When writing a CSV file, these two column numberings happen to be same.
 
         
 Provide the mapping name (line 10 and 11)
@@ -131,7 +132,7 @@ Provide the mapping name (line 10 and 11)
 
 The DataLink library provides two procedures for managing data source mappings:
 
-#. ``dl::RemoveDataSourceMapping("someMapping")``. When the data link mapping ``someMapping`` exists, it will be removed from the data structures of the DataLink library. Otherwise this procedure does nothing; it is harmless to call this procedure two times in a row with the same argument.
+#. ``dl::RemoveDataSourceMapping("someMapping")``. When the data link mapping ``someMapping`` exists, it will be removed from the data structures of the ``DataLink`` library. Otherwise this procedure does nothing; it is harmless to call this procedure two times in a row with the same argument.
 
 #. ``dl::AddDataSourcemapping( "someMapping", ... )`` will create a mapping. 
 
@@ -144,9 +145,9 @@ Provide settings for the link (line 13 to 17)
 The communication attributes are specified via a string parameter indexed using ``dl::rwattr``.
 The following attributes are supported:
 
-#. ``DataProvider``.  This attribute is mandatory.  For the CSVProvider use: ``csvprov::DataLink``.
+#. ``DataProvider``.  This attribute is mandatory.  For the ``CSVProvider`` use: ``csvprov::DataLink``.
 
-#. ``ContainsHeader``. This attribute is mandatory. Its value must be "yes" when reading csv files.
+#. ``ContainsHeader``. This attribute is mandatory. Its value must be "yes" when reading CSV files.
 
 #. ``Separator``. This attribute is optional.  The default is ",".  A frequently used alternative is ";".
 
@@ -166,13 +167,13 @@ Example:
 
 .. note::
 
-    ``DataLink``, the underlying library of the CSVProvider can be used to read/write other file types than ``CSV``. ``DataLink`` is a generic library for a multitude of different providers (CSV,XLS,XML,etc.)
+    ``DataLink``, the underlying library of the ``CSVProvider`` can be used to read/write other file types than ``CSV``. ``DataLink`` is a generic library for several different providers (CSV,XLS,XML,etc.)
 
-The actual read and write call (line 19 to 21)
+The read and write call (line 19 to 21)
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-using the above detail specifications, we are now ready to actually read from or write to CSV files. 
-The following example is hopefully self-explanatory.
+Using the above specifications, we are now ready to actually read from or write to CSV files. 
+The following example should be self-explanatory.
 
     .. code-block:: aimms
 
@@ -184,7 +185,9 @@ The following example is hopefully self-explanatory.
 Download example
 ----------------------                
  
-Download example: :download:`project <downloads/dlcsv.zip>`
+You can download the example used in this article: 
+
+* :download:`dlcsv project <downloads/dlcsv.zip>`
 
                 
 

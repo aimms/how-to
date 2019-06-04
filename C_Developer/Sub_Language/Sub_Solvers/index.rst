@@ -34,5 +34,5 @@ Mathematical Programming solution algorithms, solvers for short, are the muscles
    /Articles/192/192-solve-minlp-with-outer-approximation
    /Articles/193/193-check-if-variables-satisfy-constraints
    /Articles/276/276-multi-objective-approach
-   /Articles/264/264-adjust-cplex-options
-   /Articles/261/261-solve-problems-in-parallel-with-asynchronous-solver-sessions
+   /Articles/264/264-tune-cplex-options
+   /Articles/261/261-solve-with-asynchronous-solver-sessions
