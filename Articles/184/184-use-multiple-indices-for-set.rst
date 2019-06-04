@@ -26,3 +26,7 @@ To modify the indices for this set, you can use the index attribute wizard by pr
 Alternatively, you can manually add an index identifier to your model tree for each index you want to add. For these index identifiers, you will have to set the *Range* attribute to the set corresponding to that index, as shown in the image below:
 
 .. image:: images/demo-explicit-index.png
+
+
+.. include:: /includes/form.def
+

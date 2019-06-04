@@ -5,9 +5,6 @@
    :description: How to configure character encoding in your project such as UTF8 and ASCII.
    :keywords: encode, character, format, UTF, ASCII, unicode
 
-
-
-
 A text is a sequence of characters. A text file contains such a text whereby the characters are represented by numbers. The mapping between these characters in a text and these numbers in a file is called an encoding. Confusion arises when people or programs communicate using different encodings. 
 
 For instance, a text file containing the following bytes (hexadecimal): "48 65 6c 6c 6f 20 57 6f 72 6c 64 2e", would be interpreted using the IBM284 encoding, a Spanish variant of EBCDIC, as: ``çÁ%%?ï?Ê%À``, but using UTF16LE encoding, it would be interpreted as ``效汬⁯潗汲``. Finally, using an ASCII encoding, it would be interpreted as: ``Hello World``.
@@ -48,9 +45,6 @@ the statements
 will write a text using the selected encoding.
 
 Actually, the interpretations of the byte sequence shown in the introduction of this article were generated using the above statements.
-
- 
-
 
 .. include:: /includes/form.def
 

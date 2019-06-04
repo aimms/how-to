@@ -62,3 +62,6 @@ Further examples
 * `Media selection problem <https://aimms.com/english/developers/resources/examples/modeling-book-examples/media-selection-problem>`_
 
 
+
+.. include:: /includes/form.def
+
