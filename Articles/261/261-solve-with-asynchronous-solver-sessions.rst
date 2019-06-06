@@ -200,4 +200,3 @@ name of the solver in the license details on the right.
     Trial License will allow two sessions to be started simultaneously for
     these solvers.
 
-.. include:: /includes/form.def

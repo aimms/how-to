@@ -69,6 +69,6 @@ For example, if you have a project with two libraries (Protected Library 1 and P
 The rest of the model will be accessible for everybody. More information can be found in the chapter "Project Security" of the `AIMMS User Guide <https://documentation.aimms.com/aimms_user.html>`_.
 
 
-.. include:: /includes/form.def
+
 
 

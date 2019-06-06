@@ -152,7 +152,7 @@ Related topics
 
 .. END CONTENT
 
-.. include:: /includes/form.def
+
 
 .. author: Jessica Valasek Estenssoro
 .. checked by: Mohan Chiriki

@@ -83,7 +83,7 @@ Reference
 Bartusch, M. (1983), Optimierung von Netzplänen mit Anordnungsbeziehungen bei knappen Betriebsmitteln, Ph.D. thesis, Universität Passau, Fakultät für Mathematik und Informatik.
 
 
-.. include:: /includes/form.def
+
 
 .. below are spelling exceptions only for this document
 

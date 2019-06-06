@@ -77,7 +77,7 @@ The resulting data page of the parameter ``pOrderCost(o)`` will look as below, w
 .. one more just for the sake of it.
 
 
-.. include:: /includes/form.def
+
 
 .. do not delete this last line
 

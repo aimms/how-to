@@ -70,5 +70,5 @@ Once that's done, you can catch errors and provide custom error messages:
 Now your user can easily figure out what's wrong.
 
 
-.. include:: /includes/form.def
+
 

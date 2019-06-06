@@ -45,4 +45,3 @@ To match sizing of the objects, select the *Make same width* and *Make same heig
 
 To evenly space the buttons, select *Spread horizontally* (or *Spread vertically*). AIMMS will try to keep the same amount of spacing between adjacent objects. 
 
-.. include:: /includes/form.def

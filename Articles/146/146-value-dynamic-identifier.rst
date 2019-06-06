@@ -107,7 +107,7 @@ Keep in mind that the above code does not do any error checking. This means that
 
 A complete project containing the above source can be :download:`downloaded <downloads/ValueDynamicIdentifier.zip>` 
 
-.. include:: /includes/form.def
+
 
 
 

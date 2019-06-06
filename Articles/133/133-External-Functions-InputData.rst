@@ -155,7 +155,7 @@ Further reading
 * M. Dincbas, H. Simonis, and P. van Hentenryck. Solving the car-sequencing problem in constraint logic programming. In Y. Kodratoff, editor, Proceedings ECAI-88, pp. 290–295, 1988
 
 
-.. include:: /includes/form.def
+
 
 
 .. below are spelling exceptions only for this document

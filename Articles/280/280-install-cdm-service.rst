@@ -167,5 +167,5 @@ Example CDM startup code that connects to an existing shared CDM service, whethe
 
 The download :download:`available <model/CDM-Connected-via-URI.zip>` is a variation of the standard example for CDM.
 
-.. include:: /includes/form.def
+
 

@@ -44,5 +44,5 @@ In the example, we use a ``for`` loop:
 
 In the attached example, go to section ``Iterative Solve`` to find the procedure ``pr_ExecuteBatch``. This procedure contains some additional error handling statements to ensure the proper working of this example.
 
-.. include:: /includes/form.def
+
 

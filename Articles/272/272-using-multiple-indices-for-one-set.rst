@@ -49,4 +49,3 @@ Alternatively, you can manually add an ``index`` identifier to your model tree f
 
     Explicit index identifier for set
 
-.. include:: /includes/form.def

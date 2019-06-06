@@ -122,6 +122,6 @@ This article is part of the series on Model Edit Functions. Other articles in th
 
 #. :doc:`../132/132-Repetive-Patterns-Model-Edit`
 
-.. include:: /includes/form.def
+
 
 

@@ -2,12 +2,6 @@
 
 .. include:: /includes/icons.def
 
-:abbr:`LIFO (last-in, first-out)`
-
-.. note::
-
-	This article is currently under construction.
-
 
 Generate random numbers
 ================================
@@ -33,15 +27,15 @@ Then let's create the new parameter that we want to populate with data, over tho
 			:scale: 40 %
 
 
-That's good. But if we would plot our parameter distribution we would end up with a uniform distribution. 
+If we would plot our parameter distribution we would end up with a uniform distribution. 
  
-|aimms| proposes a lot of other different distributions.
+.. seealso::
+    
+    |aimms| proposes a lot of other different distributions, listed `here <http://images.aimms.com/aimms/download/manuals/aimms3fr_distributionandcombinatoric.pdf>`_
 
-
-.. sidebar:: Normal and Log Normal Distributions
-
-		.. image:: http://mathworld.wolfram.comimages/eps-gif/NormalDistribution_651.gif
-		.. image:: http://mathworld.wolfram.comimages/eps-gif/LogNormalDistribution_800.gif
+	* |doc| http://images.aimms.com/aimms/download/manuals/aimms3fr_distributionandcombinatoric.pdf 
+    
+    See the AIMMS example project :download:`GenerateRandomNumbers.zip <downloads/GenerateRandomNumbers.zip>`.
 	
    
 .. topic:: Normal Distribution
@@ -56,36 +50,9 @@ That's good. But if we would plot our parameter distribution we would end up wit
 	
 	https://en.wikipedia.org/wiki/Log-normal_distribution
 	
-.. seealso::
-   
-	* |doc| http://images.aimms.com/aimms/download/manuals/aimms3fr_distributionandcombinatoric.pdf 
-
-.. only:: builder_html
-
-   See the AIMMS example project :download:`GenerateRandomNumbers.zip <downloads/GenerateRandomNumbers.zip>`.
 
 
-
-
-.. .. productionlist::
-	   try_stmt: try1_stmt | try2_stmt
-	   try1_stmt: "try" ":" `suite`
-	            : ("except" [`expression` ["," `target`]] ":" `suite`)+
-	            : ["else" ":" `suite`]
-	            : ["finally" ":" `suite`]
-	   try2_stmt: "try" ":" `suite`
-	            : "finally" ":" `suite`
-
-:menuselection:`Start > Programs > Execute`
-
-.. code-block:: aimms
     
-    P_demand :=$ 
 
-:samp:`{variable = 2} print 1+{variable}`
 
-.. literalinclude:: resources/CSVInterface.ams
-    :caption: CSVInterface.ams
-    :name: CSVInterface.ams
     
-.. include:: /includes/form.def

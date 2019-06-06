@@ -68,6 +68,6 @@ If you look at the Language Reference, you will see that you can emulate its beh
     GMP::Solution::SendToModel(ep_GenMathProgram, 1);
 
 
-.. include:: /includes/form.def
+
 
 

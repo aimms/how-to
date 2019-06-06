@@ -119,7 +119,7 @@ Reference
 
 Gilles Pesant "A Regular Language Membership Constraint for Finite Sequences of Variables" in "Principles and Practice of Constraint Programming - CP", 2004, pp. 482-495
 
-.. include:: /includes/form.def
+
 
 
 .. below are spelling exceptions only for this document
