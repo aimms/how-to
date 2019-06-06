@@ -40,4 +40,3 @@ You can do so by introducing the following equality constraint (or use everythin
 
 Because exactly one of the variables will take the value of ``1``, the sum will result in the variable :math:`x` taking the value of the chosen option. All the other terms in the sum will have value ``0``, as the corresponding binary variables will have the value ``0``.
 
-.. include:: /includes/form.def

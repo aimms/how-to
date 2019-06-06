@@ -77,7 +77,7 @@ check_meta = True %} {% else %} {% set check_meta = False %} {% endif %} {% if c
                 <a href="https://bitbucket.org/{{ bitbucket_user }}/{{ bitbucket_repo }}/src/{{ bitbucket_version}}{{ conf_py_path }}{{ pagename }}{{ suffix }}?mode={{ theme_vcs_pageview_mode|default(" view ") }}" class="fa fa-bitbucket"> {{ _('Edit on Bitbucket') }}</a>                {% endif %} {% elif display_gitlab %} {% if check_meta and 'gitlab_url' in meta %}
                 <!-- User defined GitLab URL -->
                 <a href="{{ meta['gitlab_url'] }}" class="fa fa-gitlab"> {{ _('Edit on GitLab') }}</a> {% else %}
-                <a href="https://{{ gitlab_host|default(" gitlab.aimms.com ") }}/{{ gitlab_user }}/{{ gitlab_repo }}/{{ theme_vcs_pageview_mode|default("blob ") }}/{{ gitlab_version }}/{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-gitlab"> {{ _('Edit on GitLab') }}</a>                {% endif %} {% elif show_source and source_url_prefix %}
+                <a href="https://{{ gitlab_host|default("gitlab.aimms.com") }}/{{ gitlab_user }}/{{ gitlab_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ gitlab_version }}/{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-gitlab"> {{ _('Edit on GitLab') }}</a>                {% endif %} {% elif show_source and source_url_prefix %}
                 <a href="{{ source_url_prefix }}{{ pagename }}{{ suffix }}">{{ _('View page source') }}</a> {% elif show_source and has_source and sourcename %}
                 <a href="{{ pathto('_sources/' + sourcename, true)|e }}" rel="nofollow"> {{ _('View page source') }}</a> {% endif %} {% endif %}
             </li>

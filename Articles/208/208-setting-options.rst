@@ -84,7 +84,7 @@ As the setting is reverted at the ``endblock statement``, you do not have to wor
 
 The block statement is documented in the `AIMMS language reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_, section "The BLOCK statement".
 
-.. include:: /includes/form.def
+
 
  
 

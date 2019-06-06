@@ -152,5 +152,5 @@ Further reading
 Now that end users know the state of the solution process, they also want to interrupt it when they see that further improvements are not worth waiting for. This is handled in :doc:`../34/34-interrupt-server-session`.
 
 
-.. include:: /includes/form.def
+
 

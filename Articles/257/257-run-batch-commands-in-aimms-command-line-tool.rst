@@ -95,6 +95,6 @@ Further reading
 
 * `AIMMS User Guide <https://documentation.aimms.com/aimms_user.html>`_, Section "The AIMMS command line tool".
 
-.. include:: /includes/form.def
+
 
 

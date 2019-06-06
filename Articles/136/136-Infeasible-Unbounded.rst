@@ -52,6 +52,6 @@ Note that these tools (MPI and constraint listing) can help you see what is actu
 It could also be that the generated mathematical program is completely correct and that this problem is actually infeasible. In these cases you can use tools like the Infeasibility Finder of the solver or the IIS finder in the MPI to get more insights in what is causing the infeasibility for your problem.
 
 
-.. include:: /includes/form.def
+
 
 

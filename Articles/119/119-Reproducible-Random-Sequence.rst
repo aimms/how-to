@@ -37,6 +37,6 @@ Of course, I mentioned this to the user and he said that he had set the value of
 If your model contains multiple calls to these functions, you will need to have this "Option Seed" statement only before the very first call and not all the other calls. 
 
 
-.. include:: /includes/form.def
+
 
 

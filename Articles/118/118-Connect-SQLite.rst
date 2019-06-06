@@ -215,7 +215,7 @@ Other related websites
 * `SQLite Website <https://sqlite.org/>`_
 
 
-.. include:: /includes/form.def
+
 
 
 

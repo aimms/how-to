@@ -118,4 +118,3 @@ With a few easy to copy extensions to your model, it becomes easy to get an over
 The example used to construct this article: 
 :download:`Flow Shop – with download log file <downloads/FlowShop with Download log file.zip>`.
 
-.. include:: /includes/form.def

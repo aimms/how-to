@@ -36,4 +36,3 @@ The end user can change the view of 2D charts (e.g. scaling or moving). This art
 * Reset
    Press the ``R`` key to reset to the original view. 
 
-.. include:: /includes/form.def

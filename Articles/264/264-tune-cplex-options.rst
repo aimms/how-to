@@ -117,4 +117,4 @@ To actually tune the solver settings, you can use the following code:
     
     Take care when tuning; always ensure that you have a few instances that are a good sample of the range of possible instances. If the instances you are tuning are not representative for all possible instances, you will tune to one specific instance but risk decreasing performance for all instances overall.
 
-.. include:: /includes/form.def
+

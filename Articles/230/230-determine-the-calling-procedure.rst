@@ -37,4 +37,4 @@ In AIMMS, this can be done by introducing a new procedure with the codebelow. N
         errh::MarkAsHandled(err,1) ;
         !Ensure that the predefined string parameter CurrentErrorMessage         !is emptied.
         CurrentErrorMessage := "";
-    endblock ;.. include:: /includes/form.def
+    endblock ;

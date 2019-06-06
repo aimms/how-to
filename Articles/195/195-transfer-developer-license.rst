@@ -87,4 +87,3 @@ If successful, you will receive the following message:
    
 |SuccessfulActivation|
 
-.. include:: /includes/form.def

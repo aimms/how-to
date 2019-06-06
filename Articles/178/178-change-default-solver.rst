@@ -52,5 +52,5 @@ The data of ``CurrentSolver`` is applied to the default solver for each problem 
    solve TransportModel where solver:='CPLEX 12.2' ;
 
 
-.. include:: /includes/form.def
+
 

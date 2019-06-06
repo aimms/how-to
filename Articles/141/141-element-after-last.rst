@@ -52,6 +52,6 @@ The ``StockBalance`` becomes:
 As an aside, the "+1" and "-1" operations discussed above are also known as lead and lag operations, respectively.
 
 
-.. include:: /includes/form.def
+
 
 

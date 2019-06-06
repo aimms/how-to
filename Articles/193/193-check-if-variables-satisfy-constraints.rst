@@ -77,4 +77,4 @@ The example code above is available in a complete AIMMS project, attached below.
 :download:`Check-Solution.aimmspack <downloads/Check-Solution.aimmspack>`
 
 
-.. include:: /includes/form.def
+

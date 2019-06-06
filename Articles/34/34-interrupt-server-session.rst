@@ -47,4 +47,4 @@ Further reading
 An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided in :doc:`../42/42-data-session-changes`.
 
 
-.. include:: /includes/form.def
+

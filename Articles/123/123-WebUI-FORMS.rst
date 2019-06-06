@@ -261,6 +261,6 @@ You can find this example in the AIMMS Example repository at `AIMMS Examples <ht
 
 
 
-.. include:: /includes/form.def
+
 
 

@@ -144,4 +144,3 @@ Oops, I see several problems that we can work on.
 #. I want to remove the veil that drops down when a procedure of the data session runs for more than a few seconds. See topic :doc:`../19/19-remove-veil`
 
 
-.. include:: /includes/form.def

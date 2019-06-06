@@ -154,6 +154,6 @@ This completes the data duplication example. It illustrates the use of Model Que
 Moreover, Model Query and Model Edit functions form a major building block when treating formulas as data. This, however, is a topic for another blog post. More information about Runtime libraries and Model Edit functions can be found in the Language Reference of AIMMS, section "Runtime Libraries and the Model Edit Functions." Another example of the use of Model Edit functions was written in the post :doc:`../146/146-value-dynamic-identifier`.
 
 
-.. include:: /includes/form.def
+
 
 

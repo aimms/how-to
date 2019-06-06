@@ -121,4 +121,3 @@ The interpretation of log files is discussed in:
 * `MIP <https://pubsonline.informs.org/doi/10.1287/educ.2014.0130>`_ 
 
 
-.. include:: /includes/form.def
