@@ -20,7 +20,7 @@ AIMMS apps can be made available in various ways: Windows server, Linux server, 
    Sub_Cloud_Basics/index
    Sub_Client_Server/index
    Sub_PRO_API/index
-
+   /Articles/280/280-install-cdm-service
    
 
 
