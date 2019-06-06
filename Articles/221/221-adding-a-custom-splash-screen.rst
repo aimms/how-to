@@ -37,6 +37,6 @@ By saving the picture from the example as ``Gate Assignment.bmp`` in the same fo
 
 
 
-.. include:: /includes/form.def
+
 
 

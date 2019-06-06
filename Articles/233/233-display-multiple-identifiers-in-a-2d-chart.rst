@@ -5,4 +5,4 @@ In this chart, "Existing Resources" and "Capacity Deficit" are in MW and display
 .. image:: images/2D-Chart-Y.png    :align: centerspecifying details:
 .. image:: images/2D-Chart-Y2.png    :align: center
 The appearance of each identifier, for example, colors, width, labels, etc. can be modified to the desired look in the properties dialog.  For the details, you may check the attached 2D Chart example. download: here?
-.. include:: /includes/form.def
+

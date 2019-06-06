@@ -45,5 +45,5 @@ Related Topics
 * `AIMMS Function Reference <https://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_.
 
 
-.. include:: /includes/form.def
+
 

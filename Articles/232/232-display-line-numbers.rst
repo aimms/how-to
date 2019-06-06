@@ -47,5 +47,5 @@ Related Topics
 
 See also :doc:`../225/225-change-syntax-highlighting-colors`
 
-.. include:: /includes/form.def
+
 

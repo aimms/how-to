@@ -61,4 +61,4 @@ Further reading
 ---------------
 Recently, `Erwin Kalvelagen <https://yetanothermathprogrammingconsultant.blogspot.com/>`_ discussed a similar topic in his `max tricks <https://yetanothermathprogrammingconsultant.blogspot.com/2012/02/max-tricks.html>`_ blog post. 
 
-.. include:: /includes/form.def
+

@@ -80,6 +80,6 @@ Example project:
 :download:`AIMMS project download <downloads/Stopwatch.zip>` 
 
 
-.. include:: /includes/form.def
+
 
 

@@ -46,6 +46,6 @@ will write a text using the selected encoding.
 
 Actually, the interpretations of the byte sequence shown in the introduction of this article were generated using the above statements.
 
-.. include:: /includes/form.def
+
 
 

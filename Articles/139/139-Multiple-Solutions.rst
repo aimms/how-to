@@ -63,7 +63,7 @@ Other solvers that directly support working with a solution pool are Baron and C
 
 Note that with solvers that don't directly support a solution pool, but do support the Incumbent callback, you can manually create the solution repository by storing each solution found by using the Incumbent callback.
 
-.. include:: /includes/form.def
+
 
 
 .. below are spelling exceptions only for this document

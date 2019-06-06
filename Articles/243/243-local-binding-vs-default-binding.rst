@@ -65,4 +65,4 @@ is the same as
 
 So there is a difference between the two only if you use certain functions that are relative to the set. A complete explanation can be found in the section "Index Binding" of `AIMMS Language Reference <https://documentation.aimms.com/aimms_ref.html>`_.
 
-.. include:: /includes/form.def
+

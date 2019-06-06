@@ -52,4 +52,3 @@ Save your project to save this setting. You can now open *Page Manager* with the
 
 .. END CONTENT
 
-.. include:: /includes/form.def

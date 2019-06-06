@@ -60,7 +60,7 @@ Next reading
 
 
 
-.. include:: /includes/form.def
+
 
 
 

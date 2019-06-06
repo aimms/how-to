@@ -95,7 +95,7 @@ And more insights of AIMMS execution engine can be found in chapters "The AIMMS 
 
 
 
-.. include:: /includes/form.def
+
 
 
 

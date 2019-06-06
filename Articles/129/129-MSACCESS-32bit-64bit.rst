@@ -106,7 +106,7 @@ Note that the ``mso.dll`` registry value will already be present if a 64-bit ver
 
 
 
-.. include:: /includes/form.def
+
 
 
 

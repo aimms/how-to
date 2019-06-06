@@ -25,6 +25,6 @@ In AIMMS 4.6 progress updates will, by default, be based on elapsed **time**. Th
 Note that even after this change there is no guarantee that you will see progress updates regularly all the time. Doing progress window updates requires that the solver passes updates to AIMMS, which does not always happen.
 
 
-.. include:: /includes/form.def
+
 
 

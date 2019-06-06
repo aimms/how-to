@@ -144,4 +144,3 @@ To operate, the example that can be downloaded :download:`here <downloads/JobRep
 
     * When you want to interrupt a sequence of server jobs, please terminate the scheduled session before terminating the running session.
 
-.. include:: /includes/form.def

@@ -166,6 +166,6 @@ Please find the AIMMS example project attached here :download:`DownloadMultipleF
 
 
 
-.. include:: /includes/form.def
+
 
 

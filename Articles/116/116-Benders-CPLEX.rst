@@ -47,7 +47,7 @@ I do not have extensive test results that compare the performance of CPLEX Bende
 CPLEX 12.7 is available since AIMMS 4.30 
 
 
-.. include:: /includes/form.def
+
 
 
 .. below are spelling exceptions only for this document

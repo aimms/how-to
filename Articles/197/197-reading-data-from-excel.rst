@@ -215,4 +215,3 @@ The code to read the Excel data looks as follows:
    * `XLSProvider for datalink <https://documentation.aimms.com/datalink/providers.html#xlsprovider>`_
 
 
-.. include:: /includes/form.def
