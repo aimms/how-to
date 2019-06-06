@@ -1,11 +1,11 @@
 :orphan:
 
-How to install CDM Service
+Install CDM Service
 ===========================
 
 .. meta::
-   :description: Installing a CDM service to allow collaboration between multiple users of a single AIMMS model.  
-   :keywords: CDM, service, port, 19999, data sharing, collaboration, versioning, application testing and deployment
+   :description: This article explains how to install CDM service to allow multiple users to collaborate on a single AIMMS model.
+   :keywords: CDM, share, collaborate, versioning, testing
 
 During the development of an application using CDM, the embedded CDM server is ideal, as mistakes and restarts are easily captured by manually switching and/or clearing the database that stores the CDM data.
 
