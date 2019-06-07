@@ -19,7 +19,6 @@ These topics cover what you need to get started programming your model in AIMMS 
    /Articles/194/194-using-loopcount-instead-of-explicit-counting-parameter-in-loops
    /Articles/150/150-solve-in-loop
    /Articles/121/121-set-index-element-parameter
-   /Articles/272/272-using-multiple-indices-for-one-set
    /Articles/243/243-local-binding-vs-default-binding 
    /Articles/17/17-category-mapping
    /Articles/141/141-element-after-last
