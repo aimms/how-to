@@ -20,4 +20,4 @@ These topics cover connecting various other types of functions to your AIMMS pro
    /Articles/133/133-External-Functions-InputData
    /Articles/114/114-execute
    /Articles/257/257-run-batch-commands-in-aimms-command-line-tool
-.. /Articles/124/124-tableau-integration
+   /Articles/124/124-tableau-integration
