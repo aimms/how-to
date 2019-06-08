@@ -51,11 +51,11 @@ Finally, use the following code to check whether the assignment :math:`x=1\ ,\ y
     !We can now use the GMP::Solution::Check to check solution
     !number 1.
     GMP::Solution::Check(
-        GMP       : generatedMP , 	!The Math program we want to use
-        solution  : 1 , 		!The solution number we want to check
+        GMP       : generatedMP ,   !The Math program we want to use
+        solution  : 1 ,         !The solution number we want to check
         numInfeas : numberOfInfeasibilities , !store # of infeasibilities 
         sumInfeas : sumOfInfeasibilities ,    !store sum infeasibilities
-        skipObj   : 1 ) ; 		!Objective can be skipped
+        skipObj   : 1 ) ;       !Objective can be skipped
 
     !Now we can check the number of infeasibilities. If there are no 
     !infeasibilities, it means the variables values satisfy all constraints
@@ -77,4 +77,4 @@ The example code above is available in a complete AIMMS project, attached below.
 :download:`Check-Solution.aimmspack <downloads/Check-Solution.aimmspack>`
 
 
-.. include:: /includes/form.def
+

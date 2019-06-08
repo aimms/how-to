@@ -136,6 +136,6 @@ Example download
 If you would like to experiment with the model, the AIMMS project is provided here.
 :download:`AIMMS project download <downloads/Employee-Rostering-Week2.zip>` 
 
-.. include:: /includes/form.def
+
 
 

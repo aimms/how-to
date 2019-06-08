@@ -44,4 +44,4 @@ A potential implementation can be downloaded :download:`here <downloads/ReceiveM
 
 To operate this app, just press the button and watch messages appear.
 
-.. include:: /includes/form.def
+

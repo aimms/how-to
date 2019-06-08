@@ -97,4 +97,4 @@ You can import the AIM file into a section of your model.
 .. note:: Please do not forget to close the connection using the intrinsic procedure ``CloseDataSource``; especially when long sessions may occur after data reading.
 
 
-.. include:: /includes/form.def
+

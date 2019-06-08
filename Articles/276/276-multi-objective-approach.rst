@@ -3,7 +3,7 @@ Use a Multi-Objective Approach
 
 .. meta::
    :description: Compare multi-objective approach to separately solving single objectives.
-   :keywords: multi objective, diet, CPLEX, WebUI
+   :keywords: multi objective, CPLEX
 
 In this article we will compare a multi-objective approach to separately solving single objectives.
 
@@ -154,4 +154,3 @@ The project can be downloaded below.
 
     :download:`DietProblem.zip <model/DietProblem.zip>` 
 
-.. include:: /includes/form.def

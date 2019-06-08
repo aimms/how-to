@@ -20,6 +20,6 @@ Another way to analyze an infeasible problem is by using the *Display Infeasibil
 Both the Infeasibility Analysis and the IIS, as calculated by BARON, are printed in the listing file.
 
 
-.. include:: /includes/form.def
+
 
 

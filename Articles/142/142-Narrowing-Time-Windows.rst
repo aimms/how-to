@@ -70,6 +70,6 @@ The complete example is presented in this :download:`AIMMS project download <dow
 The above Gantt Chart is a screen shot from the demo page. Pressing the solve button on this demo page will show that CP Optimizer is able to find a feasible solution in a fraction of a second. In addition, note that the rows of the Gantt Chart are re-ordered such that the jobs are ordered on their begin time.
 
 
-.. include:: /includes/form.def
+
 
 

@@ -40,6 +40,6 @@ The example comes with several symmetric instances from `TSPLIB <https://comopt.
 
 **Remark**: SECs are often used as cutting planes in a branch-and-cut algorithm. In that case the separation problem is more difficult as it is applied to a fractional ``x``. Currently its fastest separation algorithm has a worst-case running time of :math:`O(nm + n^2 \log n)` where ``m`` denotes the number of nonzero ``x`` in the fractional solution. In our case, using SECs as lazy constraints, the separation problem is applied to a binary ``x``. Although the separation problem becomes easier if SECs are used as lazy constraints, it does not mean that TSPs are solved more efficiently that way.
 
-.. include:: /includes/form.def
+
 
 

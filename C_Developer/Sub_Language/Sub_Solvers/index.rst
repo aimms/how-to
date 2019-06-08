@@ -31,6 +31,7 @@ Mathematical Programming solution algorithms, solvers for short, are the muscles
    /Articles/136/136-Infeasible-Unbounded
    /Articles/130/130-Infeasible-Nonlinear-Problems
    /Articles/178/178-change-default-solver
+   /Articles/274/274-using-project-local-solver-configuration
    /Articles/192/192-solve-minlp-with-outer-approximation
    /Articles/193/193-check-if-variables-satisfy-constraints
    /Articles/276/276-multi-objective-approach

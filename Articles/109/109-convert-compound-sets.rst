@@ -424,4 +424,4 @@ Glossary of Terms Used
 
     For further information on the deprecation of compound sets, contact `AIMMS Support Team <mailto:support@aimms.com>`_.
 
-.. include:: /includes/form.def
+

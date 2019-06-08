@@ -134,5 +134,5 @@ By following the above steps, the end user can control when the case file result
 #. Once the solution is "good enough for now", the end user may want to abort the server session.  In :doc:`../34/34-interrupt-server-session` we will show how to interrupt the server session.
 
 
-.. include:: /includes/form.def
+
  

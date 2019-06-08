@@ -120,4 +120,4 @@ new function IdentifierGetUsedInformation that has been introduced in
 AIMMS 3.12 FR2. This function also allows you to determine if there
 exists a reference to the identifier in any of the case types or
 menus.]]> <[CDATA[]]> 177 0 0 0
-.. include:: /includes/form.def
+

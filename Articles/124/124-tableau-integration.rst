@@ -1,5 +1,4 @@
-﻿:orphan:
-
+﻿
 Link AIMMS with Tableau
 ===========================
 
@@ -110,7 +109,7 @@ If you are interested in extending, or having the DataLink library extended to
 
 
 
-.. include:: /includes/form.def
+
 
 
 

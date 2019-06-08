@@ -79,6 +79,6 @@ The following code demonstrates how to make use of the function ``GMP::Instance:
                 elimNo   :  LoopCount) ; 
     endwhile ;
 
-.. include:: /includes/form.def
+
 
 

@@ -56,5 +56,5 @@ scenario.
 
 CPLEX nowadays provides its own Benders Decomposition. See :doc:`../116/116-Benders-CPLEX`
 
-.. include:: /includes/form.def
+
 

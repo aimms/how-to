@@ -90,7 +90,7 @@ This is a checklist to develop a reliable, successful AIMMS application.
     How can each end-user relate his tasks to the features and screens offered by your application?
     
 
-.. include:: /includes/form.def
+
 
     
 .. #. Do not misuse AIMMS functionality

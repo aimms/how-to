@@ -171,13 +171,18 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-# if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown :)
 if os.name == 'nt':
+   
    Display_edit_on_gitlab = True
+   # if builds on GitLab (a Linux machine), display Thumbs and Insided Embeddable (extensions) :)
+   Display_3rd_Party_Extensions = True
 else:
-   Display_edit_on_gitlab = False
 
-# removed reference to theme.css as it no longer exists     
+   # if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown :)
+   Display_edit_on_gitlab = False
+   Display_3rd_Party_Extensions = True
+
+# The following "context" is passed to templates in _templates folder
 html_context = {
     'css_files': ['_static/Hacks.css', '_static/copycode.css'],
     "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
@@ -186,6 +191,8 @@ html_context = {
     "gitlab_version": "master", # Version
     "conf_py_path": "", # Path in the checkout to the docs root
     "suffix": ".rst",
+    "Display_3rd_Party_Extensions" : Display_3rd_Party_Extensions # display Thumbs and Insided Embeddable
+    
 }
 
 # Custom sidebar templates, must be a dictionary that maps document names

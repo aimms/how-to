@@ -68,6 +68,6 @@ If neither of the two properties are set, then you will get a warning whenever t
 We do know that some time ago, AIMMS generated a similar warning for these situations. However, with these two new properties we can now replace the warning with a more scalable solution.  
 
  
-.. include:: /includes/form.def
+
 
 

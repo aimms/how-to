@@ -240,4 +240,3 @@ Related topics
 .. END CONTENT
 
 
-.. include:: /includes/form.def

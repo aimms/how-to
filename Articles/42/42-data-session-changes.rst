@@ -72,5 +72,5 @@ Further reading
 Information about `AIMMS PRO <https://documentation.aimms.com/pro/index.html>`_
 
 
-.. include:: /includes/form.def
+
  

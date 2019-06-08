@@ -39,6 +39,6 @@ If successful, the above call will store the name of the case referred to by the
 Please see the sections "Case Management Related Identifiers" and "Case management" in the `AIMMS Function Reference <https://documentation.aimms.com/aimms_func.html>`_ for more information about these functions.
 
  
-.. include:: /includes/form.def
+
 
 
