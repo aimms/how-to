@@ -17,3 +17,4 @@ Get help debugging errors that arise during development. This section covers tro
    :maxdepth: 1
 
    /Articles/191/191-handle-errors-and-warnings
+   /Articles/265/265-under-control-managing-errors-and-warnings-within-aimms.rst
