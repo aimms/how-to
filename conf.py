@@ -175,7 +175,7 @@ if os.name == 'nt':
    
    Display_edit_on_gitlab = True
    # if builds on GitLab (a Linux machine), display Thumbs and Insided Embeddable (extensions) :)
-   Display_3rd_Party_Extensions = True
+   Display_3rd_Party_Extensions = False
 else:
 
    # if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown :)
