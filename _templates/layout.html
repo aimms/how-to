@@ -65,7 +65,25 @@
     </p>
     {{ toc }}
 </div>
-{% endif %} {% endblock %} {% block footer %} {{ super() }}
+{% endif %} {% endblock %} 
+
+{% block document %} {{ super() }}
+
+{% if pagename != ("ContentIndex" or "index") and Display_3rd_Party_Extensions %}
+
+<h3 style="display: inline; margin-right: 20px;">Was this helpful ?</h3>
+
+<!-- LikeBtn.com BEGIN -->
+<span class="likebtn-wrapper" data-theme="elegant" data-white_label="true" data-show_like_label="false" data-popup_disabled="true" data-share_enabled="false" data-tooltip_enabled="false" data-site_id="5cfe2c12fa8fdfef20968ca8"></span>
+<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+<!-- LikeBtn.com END -->
+
+{% endif %}
+
+{% endblock %} 
+
+
+{% block footer %} {{ super() }}
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1290545-14"></script>
 <script>
@@ -80,84 +98,12 @@
 </script>
 
 
-<!-- Cookie consent -->
-<!-- <script src="https://cc.cdn.civiccomputing.com/8/cookieControl-8.x.min.js" type="text/javascript"></script>
-<script>
- 
-var config = {
-    apiKey: 'f58c49169fb2d570ab514e1e538f6148f36c6cea',
-    product: 'PRO',
-        necessaryCookies: ['_ga', '_ga*', '_gid', '_gali', '_gat', '_gat_UA-TRACKERID*', '_gat_UA-UA-137026614-1*', 'UA-137026614-1'],
-    text : {
-        title: 'Our website uses cookies',
-        intro: 'We and our advertising partners use cookies to offer you a better online experience and personalized content.  By clicking accept you will benefit from this improved service in accordance with our <a href="https://aimms.com/english/privacy-statement/" style="color: blue"> privacy statement</a>.',
-        necessaryTitle: 'Change cookie preferences',
-        necessaryDescription: 'Click below to adjust your preferences. You can change your mind at anytime.',
-    },
-    optionalCookies: [
-        {
-            name: 'analytics',
-            label: 'Analytics',
-            initialConsentState: 'on',
-            recommendedState: 'true',
-            lawfulBasis: 'legitimate interest',
-            description: 'Analytical cookies help us to improve our website by collecting and reporting information on its usage.',
-            cookies: [],
-            onAccept : function(){
-                //google analytics
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-
-                gtag('config', 'UA-137026614-1');
-                //end of google
-           },
-            onRevoke: function(){
-                window['ga-disable-UA-137026614-1'] = true;
-            }
-        }
-    ],
-initialState: 'notify',
-layout: 'slideout',
-position: 'LEFT',
-theme: 'LIGHT',
-branding: {
-backgroundColor: '#009dda',
-fontColor: '#FFF',
-toggleColor: '#f0f0f0',
-toggleText: '#000',
-toggleBackground: '#fff',
-acceptBackground: '#fff',
-acceptText: '#000',
-fontSizeTitle: "1.2em",
-fontSizeIntro: "1em",
-fontSizeHeaders: "1em",
-fontSize: "13px",
-buttonIcon: null,
-buttonIconWidth: "64px",
-buttonIconHeight: "64px",
-removeIcon: false,
-removeAbout: false
-}
-};CookieControl.load( config );</script>
- -->
-
 {% if Display_3rd_Party_Extensions %}
-    <!-- Insided embeddable -->
-    <script>
-    (function(w,d,s){var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='//embeddable-widgets-euw1.insided.com/aimms-en.insided-conversational.js';f.parentNode.insertBefore(j,f);})(window,document,'script');
-    </script>
 
-    {% if pagename != ("ContentIndex" or "index") %}
-
-        <h3 style=" display:inline; font-weight: bold; margin-top: 4px; padding-right: 10px">Was this helpful ?</h3>
-
-        <!-- LikeBtn.com BEGIN -->
-        <span class="likebtn-wrapper" data-theme="elegant" data-white_label="true" data-show_like_label="false" data-popup_disabled="true" data-share_enabled="false" data-tooltip_enabled="false" data-site_id="5c4b11426fd08b424f7e547c"></span>
-        <script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
-        <!-- LikeBtn.com END -->
-
-    {% endif %}
+<!-- Insided embeddable -->
+<script>
+(function(w,d,s){var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='//embeddable-widgets-euw1.insided.com/aimms-en.insided-conversational.js';f.parentNode.insertBefore(j,f);})(window,document,'script');
+</script>
     
 {% endif %}
 
