@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2019-06-11 09:39:46">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>44697097-EFF5-45AB-8F5C-1B6AE7764FCC</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Scalar">
+		<Location top="18" left="48" bottom="54" right="342" />
+		<TabOrder>2</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>ep_GuiConv</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Table">
+		<Location top="66" left="48" bottom="168" right="342" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>p_Distance( i, j )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="5" Decimals="0" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>i</Symbol>
+			<Symbol>j</Symbol>
+			<Symbol>p_Distance</Symbol>
+			<Symbol>ep_GuiConv</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>
