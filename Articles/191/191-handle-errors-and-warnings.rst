@@ -5,6 +5,10 @@ Handle errors and warnings
    :description: Error handling provides for a way of making your applications robust.
    :keywords: Error handling, throwing exceptions, guarded code, happy flow
 
+.. note::
+
+    This article was originally posted to the AIMMS Tech Blog.
+
 This article explains how to add custom warning messages for certain errors.
 
 When you send your AIMMS project into the world, errors will inevitably pop up from time to time. Users may provide the wrong kind of input for your model resulting in AIMMS throwing errors that your user may not understand. 

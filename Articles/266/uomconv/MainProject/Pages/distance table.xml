@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2019-06-11 08:15:33">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>7F2ED1B5-31DE-44AA-B81B-202CD02D5AA2</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Table">
+		<Location top="48" left="108" bottom="168" right="408" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>DistanceTable( i, j )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="6" Decimals="0" />
+			<Unit Display="InTitle" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="12" left="108" bottom="42" right="408" />
+		<TabOrder>2</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>ep_guiConv</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>i</Symbol>
+			<Symbol>j</Symbol>
+			<Symbol>DistanceTable</Symbol>
+			<Symbol>ep_guiConv</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

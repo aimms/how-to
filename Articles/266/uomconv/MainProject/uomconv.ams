@@ -1,0 +1,50 @@
+## ams_version=1.0
+
+Model Main_uomconv {
+    Convention: ep_guiConv;
+    Set CityNames {
+        Index: i, j;
+        InitialData: data { London, Paris, NewYork, Shanghai };
+    }
+    Parameter DistanceTable {
+        IndexDomain: (i,j);
+        Unit: mile;
+        InitialData: {
+            data table
+                       London    Paris  NewYork
+                   !  -------  -------  -------
+               Paris      213
+             NewYork     3465     3631
+            Shanghai     5721     5774     7377
+        }
+    }
+    Quantity SI_Length {
+        BaseUnit: km;
+        Conversions: {
+            mile -> km : # -> # * 1.609344,
+            m    -> km : # -> # / 1000
+        }
+        Comment: "Expresses the value of a distance.";
+    }
+    Convention conv_English {
+        PerQuantity: SI_Length : mile;
+    }
+    Convention conv_SI {
+        PerQuantity: SI_Length : km;
+    }
+    ElementParameter ep_guiConv {
+        Range: AllConventions;
+        InitialData: 'conv_SI';
+    }
+    Procedure MainInitialization;
+    Procedure MainExecution {
+        Body: {
+            display (DistanceTable)[km] ;
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1 ;
+        }
+    }
+}
