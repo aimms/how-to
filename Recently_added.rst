@@ -5,6 +5,13 @@
 Recently added
 ==============
 
+.. Added 21 June 2019
+
+* :doc:`/Articles/265/265-settings-for-errors-and-warnings`
+* :doc:`/Articles/266/266-units-of-measurement-check-equations`
+* :doc:`/Articles/266/266-units-of-measurement-localized-data`
+* :doc:`/Articles/251/251-pro-operations-best-practices`
+
 .. Added 7 June 2019
 
 * :doc:`/Articles/264/264-tune-cplex-options`
