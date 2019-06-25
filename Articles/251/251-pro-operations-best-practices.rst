@@ -13,7 +13,9 @@ Overview: Best Practices for Operating AIMMS PRO
 .. <pubDate>Wed, 19 Nov 2014 10:55:01 +0000</pubDate>
 .. <guid isPermaLink="false">http://techblog.aimms.com/?p=4074</guid>
        
-       
+As AIMMS applications move from desktops to PRO platforms and start to play a larger role for a larger number of users it is important to adopt the best practices that the IT specialists have developed for operating server-based business applications.
+
+
 This article presents common best practices of application management as they apply to professionally operating AIMMS PRO platforms. These address how to deal with application management challenges such as bugs, accidental project deletion, and hardware failures.
 
 AIMMS PRO platform is generally meant to maximize uptime and facilitate rapid innovation.
@@ -83,10 +85,8 @@ Depending on the nature of your PRO applications you need to take appropriate me
 There is obviously a trade-off between the level of resilience and time required to recover from a disaster and costs. Each business will have to make its own trade-offs here.
 
 Conclusion
------------------------
-
-As AIMMS applications move from desktops to PRO platforms and start to play a larger role for a larger number of users it is important to adopt the best practices that the IT specialists have developed for operating server-based business applications. We have listed a few of them, mainly with the purpose to raise awareness. We do not claim to be experts on this topic and we encourage you to connect with those specialists and their best practices to ensure that your AIMMS PRO project becomes and remains successful.
-
+-----------
+We have listed a few best practices here to raise awareness. We do not claim to be experts on this topic and we encourage you to connect with IT operations specialists to ensure that your AIMMS PRO project becomes and remains successful.
 
 
 

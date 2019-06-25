@@ -35,6 +35,6 @@ These topics cover what you need to get started programming your model in AIMMS 
    /Articles/12/12-generate-random-numbers
    /Articles/189/189-using-calendars-in-aimms
    /Articles/236/236-get-name-of-current-case
-   /Articles/266/266-units-of-measurement-localized-interaction-with-numeric-data
-   /Articles/266/266-units-of-measurement-are-your-computations-correct
+   /Articles/266/266-units-of-measurement-check-equations
+   /Articles/266/266-units-of-measurement-localized-data
    
