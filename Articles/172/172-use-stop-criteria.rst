@@ -27,21 +27,31 @@ Setting Stop Criteria
 
 All of these stop criteria are options in your AIMMS project. This means that there are multiple ways of modifying them:
 
-* Modify the option in your Project Options. This will result in the same settings holding for all solve statements. You will most of these options in *Settings -> Project options.. -> Solvers general -> Stop criteria*
+* Modify the option in your Project Options. This will result in the same settings holding for all solve statements. You will find most of these options in *Settings -> Project options... -> Solvers general -> Stop criteria*
+  
+     .. image:: images/stop-criteria-option-settings.png
+         :align: center
 
 * Use the ``OptionSetValue`` or ``OPTION`` functions to modify the values of the options in a procedure. ``OptionSetValue`` will let you change the value for a single option while the ``OPTION`` statement lets you change multiple options in a single statement. 
 
-.. code-block:: aimms
+    .. code-block:: aimms
 
-   OptionSetValue(OptionName : "time_limit" , NewValue   : 10 );
-   option time_limit := 10, MIP_Relative_Optimality_Tolerance := 0.1
+       OptionSetValue(OptionName : "time_limit" , NewValue   : 10 );
+       option time_limit := 10, MIP_Relative_Optimality_Tolerance := 0.1
 
 * Use the ``where`` keyword in a ``solve`` statement to modify an option for that particular solve only. For example, the solve process triggered by the below statement will be terminated after 10 seconds of execution or when the MIP_Relative_Optimality_Tolerance = 0.1, whichever happens first. 
 
-.. code-block:: aimms
+    .. code-block:: aimms
 
-   solve MathProg where MIP_Relative_Optimality_Tolerance := 0.1, time_limit := 10 ;
+       solve MathProg where MIP_Relative_Optimality_Tolerance := 0.1, time_limit := 10 ;
    
+* Use ``block where`` to temporarily set options:
+
+    .. code-block:: aimms
+
+        block where MIP_Relative_Optimality_Tolerance := 0.1, time_limit := 10 
+            solve MathProg  ;
+        endblock ;
 
 
 
