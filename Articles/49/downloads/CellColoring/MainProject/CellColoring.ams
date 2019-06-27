@@ -1,0 +1,55 @@
+## ams_version=1.0
+
+Model Main_CellColoring {
+    Set s_colNames {
+        Index: i_c;
+        Definition: data { a, b, c, d, e };
+    }
+    Set s_rowNumbers {
+        SubsetOf: Integers;
+        Index: i_r;
+        Definition: ElementRange(0,9);
+    }
+    Parameter p_dat {
+        IndexDomain: (i_r,i_c);
+        webui::AnnotationsIdentifier: sp_dat_annot;
+    }
+    StringParameter sp_dat_annot {
+        IndexDomain: (i_r,i_c);
+        Definition: data { (2,a): "red", (6,b):"green" };
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Body: {
+            p_dat(i_r, i_c) := val(i_r)*10 + ord(i_c);
+        }
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}
