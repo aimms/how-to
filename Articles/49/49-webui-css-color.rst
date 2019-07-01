@@ -228,8 +228,9 @@ See `Data-Dependent Styling <https://manual.aimms.com/webui/folder.html#data-dep
 .. .. image:: images/css-more-specific.png
 
 
-:download:`AIMMS project download <downloads/LineChartWidgetStyling.zip>` 
+:download:`AIMMS project download of the above example <downloads/LineChartWidgetStyling.zip>` 
 
+:download:`AIMMS project download for cell coloring in a table <downloads/CellColoring.zip>` 
 
 Related topics
 -----------------

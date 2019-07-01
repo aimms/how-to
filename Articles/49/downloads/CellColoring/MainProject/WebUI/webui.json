@@ -1,0 +1,56 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "dattab",
+          "layoutInfo": {
+            "width": "4",
+            "height": "3",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/dattab": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_dat"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_r"
+        ],
+        "colHeader": [
+          "i_c"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    }
+  }
+}
