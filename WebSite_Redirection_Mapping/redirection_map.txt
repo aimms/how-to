@@ -112,4 +112,5 @@ C_Other/HowToHandleTheDeprecationOfCompoundSets.rst	Articles/109/109-deprecate-c
 C_Other/89-academic-license.rst	Articles/89/89-academic-license.rst
 C_Other/89-license-nodelock-error.rst	Articles/89/89-license-nodelock-error.rst
 C_Other/105-adding-named-user-licenses.rst	Articles/105/105-adding-named-user-licenses.rst
-C_Other/106-install-network-license.rst	Articles/106/106-install-network-license.rst
+C_Other/106-install-network-license.rst Articles/106/106-install-network-license.rst
+C_Deployment/how-to-work-with-csv-files.rst    Articles/csv/read-write-csv.rst
