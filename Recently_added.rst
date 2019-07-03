@@ -5,6 +5,10 @@
 Recently added
 ==============
 
+.. Added 3 July 2019
+
+* :doc:`Articles/258/258-save-a-case-from-aimms-procedure`
+
 .. Added 21 June 2019
 
 * :doc:`/Articles/265/265-settings-for-errors-and-warnings`
