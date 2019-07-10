@@ -1,7 +1,5 @@
-:orphan:
-
 Install CDM Service
-===========================
+====================
 
 .. meta::
    :description: This article explains how to install CDM service to allow multiple users to collaborate on a single AIMMS model.
