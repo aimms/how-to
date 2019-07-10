@@ -37,4 +37,4 @@ These topics cover what you need to get started programming your model in AIMMS 
    /Articles/236/236-get-name-of-current-case
    /Articles/266/266-units-of-measurement-check-equations
    /Articles/266/266-units-of-measurement-localized-data
-   
+   /Articles/258/258-save-a-case-from-aimms-procedure
