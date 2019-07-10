@@ -3,5 +3,5 @@
 	<MainProject Path="MainProject" />
 	<Library System="true" Path="AimmsPro" />
 	<Library System="true" Path="AimmsWebUI" />
-	<RepositoryLibrary UUID="CAD7F596-11F8-4AD9-88FC-24BE91C6F38B" Name="AimmsCDM" Version="1.10.0.7" />
+	<RepositoryLibrary UUID="CAD7F596-11F8-4AD9-88FC-24BE91C6F38B" Name="AimmsCDM" Version="1.11.0.4" />
 </References>

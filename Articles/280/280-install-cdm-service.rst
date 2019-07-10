@@ -75,6 +75,10 @@ Let's start with downloading the executable on the machine that should run the C
 +----------------------------------------------------------------------------------------+
 | https://library-repository.aimms.com/bin/CDMService-1.10.0.7-vc141_x64_Release.exe     |
 +----------------------------------------------------------------------------------------+
+| https://library-repository.aimms.com/bin/CDMService-1.11.0.4-vc120_x64_Release.exe     |
++----------------------------------------------------------------------------------------+
+| https://library-repository.aimms.com/bin/CDMService-1.12.0.7-vc120_x64_Release.exe     |
++----------------------------------------------------------------------------------------+
 
 Perhaps the protocol is updated after the last update of this article. To make sure, you want to check the value of the string parameter ``cdm::WindowsServiceDownloadLocation`` which contains the URL for the download that corresponds to the protocol of your library. 
 
@@ -103,9 +107,13 @@ Ensure the CDM service is accessible
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Make sure that the port chosen, typically 19999, is open on the machine that hosts the CDM service. 
-You can check whether this port is open using the command ``netstat`` on a CMD prompt.
+You can check whether this port is open using the command ``netstat -a`` on a CMD prompt.
 
 .. todo:: how to safely open port 19999
+
+.. https://www.tomshardware.com/news/how-to-open-firewall-ports-in-windows-10,36451.html
+
+
 
 Linking the CDM service to a database
 ---------------------------------------------
