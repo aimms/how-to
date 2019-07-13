@@ -108,10 +108,9 @@ follows:
 More about case related functions
 ---------------------------------------------
 To access contextual help from within AIMMS, 
-1. Right-click any predefined
-functions in the AIMMS editor.
-2. Select *Help* in the context
-menu.
+
+1. Right-click any predefined functions in the AIMMS editor.
+2. Select *Help* in the context menu.
 3. Select the function name. 
 
 The AIMMS Function Reference will open at the page corresponding to the function.
@@ -119,7 +118,7 @@ The AIMMS Function Reference will open at the page corresponding to the function
 Related Topics
 ---------------
 
-In the `AIMMS Function Reference <http://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_, you can find more details about the
+In the `AIMMS Function Reference <https://download.aimms.com/aimms/download/manuals/AIMMS3FR_Case.pdf>`_, you can find more details about the
 case related functions used. 
 
 

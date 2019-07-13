@@ -3,18 +3,18 @@ Install CDM Service
 
 .. meta::
    :description: This article explains how to install CDM service to allow multiple users to collaborate on a single AIMMS model.
-   :keywords: CDM, share, collaborate, versioning, testing
+   :keywords: CDM, share, collaborate, version, test
 
 During the development of an application using CDM, the embedded CDM server is ideal, as mistakes and restarts are easily captured by manually switching and/or clearing the database that stores the CDM data.
 
-.. sidebar:: **Advantage of using CDM in an AIMMS Cloud** 
-    
-    When publishing applications in an AIMMS cloud, you do not have to install a CDM service.  The appropriate CDM service is started on demand, and stops itself after some idle time.
+.. note::
+
+    When publishing applications in an AIMMS cloud, you do not have to install a CDM service. The appropriate CDM service is started on demand, and stops itself after some idle time.
 
 When testing or deploying an application with multiple collaborating users a CDM service needs to be installed that handles commits by storing the data and informing other users of these commits.
 The architecture that we want to achieve looks as follows:
 
-.. image:: images/ArchitectureOverview.png
+.. image:: images/cdm-architecture.jpg
 
 We will first focus on the central part of the above, namely to get a CDM service installed, next we will link it to a database and finally, we will illustrate an application directly connected to a CDM service.
 
@@ -30,17 +30,18 @@ You can check whether the CDM service is installed by starting the Windows Servi
 
 .. image:: images/ServicesIncludingCDM.png
     :align: center
+    :scale: 50
 
-When the service is installed, you will need to identify the installation folder by right clicking on the service and selecting properties.  This will show the following dialog and tell you from which folder it is installed:
+When the service is installed, you will need to identify the installation folder by right-clicking on the service and selecting **Properties**.  This will show the following dialog and tell you from which folder it is installed:
 
 .. image:: images/PropertiesCDMService.png
     :align: center
 
-#. Open a command prompt with elevated rights (run as administrator), 
+#. Open a command prompt (run as administrator)
 
-#. cd to that folder, and 
+#. ``cd`` to go to that folder
 
-#. execute ``CDMService.exe --uninstall``.
+#. Execute ``CDMService.exe --uninstall``
 
 Download the new CDM service executable
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -57,7 +58,7 @@ Download the new CDM service executable
     
     You want to make sure this protocol corresponds to protocol of the CDM service that you are going to connect to.
 
-    Nb. For every CDM protocol there is a CDM service available in the cloud. So then you can simply use the latest.
+    For every CDM protocol there is a CDM service available in the cloud. You can simply use the latest.
 
     
 Let's start with downloading the executable on the machine that should run the CDM service. Depending on the protocol of choice this download can be:
@@ -80,12 +81,14 @@ Let's start with downloading the executable on the machine that should run the C
 | https://library-repository.aimms.com/bin/CDMService-1.12.0.7-vc120_x64_Release.exe     |
 +----------------------------------------------------------------------------------------+
 
-Perhaps the protocol is updated after the last update of this article. To make sure, you want to check the value of the string parameter ``cdm::WindowsServiceDownloadLocation`` which contains the URL for the download that corresponds to the protocol of your library. 
+.. note::
+
+    This is correct at the time of writing this article. To make sure the protocol is up to date, check the value of the string parameter ``cdm::WindowsServiceDownloadLocation`` which contains the URL for the download that corresponds to the protocol of your library. 
 
 Installing a new CDM service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Now that we've uninstalled an old CDM service, if any, and downloaded the new executable, we can install it.
+Now we can install CDM.
 
 #. First run the executable, it will just unpack itself and create new folder.
 
@@ -148,7 +151,7 @@ Link an AIMMS application to a running CDM service
 Here ``cdm::serverURI`` should be set to ``tcp://CDMServiceHostName:19999`` where 19999 is the port number.  
 This port number may be chosen differently, as long as it matches the <listenport> entry in the xml configuration file.
 
-Example CDM startup code that connects to an existing shared CDM service, whether the application is opened as a deployed application or as an application in the AIMMS IDE.
+Below is an example of CDM startup code that connects to an existing shared CDM service, whether the application is opened as a deployed application or as an application in the AIMMS IDE.
 
 .. code-block:: aimms
     :linenos:
@@ -171,7 +174,10 @@ Example CDM startup code that connects to an existing shared CDM service, whethe
     cdm::AutoPullCategory(cdm::cat) := 1;
     cdm::StartListeningToDataChanges;
 
-The download :download:`available <model/CDM-Connected-via-URI.zip>` is a variation of the standard example for CDM.
+Download example
+-----------------
+
+The project download :download:`CDM-Connected-via-URI <model/CDM-Connected-via-URI.zip>` is a variation of the standard example for CDM.
 
 
 
