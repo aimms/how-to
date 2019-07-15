@@ -7,7 +7,7 @@ Recently added
 
 .. Added 11 July 2019
 
-* :doc:`/Articles/280/280-install-cdm-service`
+.. * :doc:`/Articles/289/289-`
 
 .. Added 3 July 2019
 

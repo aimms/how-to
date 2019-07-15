@@ -5,6 +5,9 @@ Overview: Best Practices for Operating AIMMS PRO
    :description: How to professionally operate your AIMMS PRO system.
    :keywords: AIMMS PRO, backup, recovery
 
+.. image:: images/system-task-512.png
+   :align: center
+
 .. note::
 
     This article was originally posted to the AIMMS Tech Blog.
@@ -29,8 +32,10 @@ In the AIMMS PRO context, software updates fall into two categories:
 
 We will propose some basic practices for dealing with both.
 
-Operate a Test-environment
+Operating a Test-environment
 ----------------------------------------
+
+.. image:: images/test-tube-128.png
 
 All larger IT applications operate change procedures and test and/or acceptance environments in addition to their production installation in order to prevent disruptions to their users and operations from changes and updates. Typically the test environment serves to test changes before these are applied in production. The acceptance environment is used for testing the migration to the production environment. For less critical applications, the acceptance environment is often left out.
 
@@ -44,17 +49,21 @@ For AIMMS PRO we can identify two types of changes that require testing prior to
 
 #. New or updated AIMMS PRO applications; even though PRO enables instant global release of new or updated applications, one should test these thoroughly before publication.
 
-#. Changes, updates, patches, etc. to the underlying software such as the AIMMS software, the operating system, virtualization software, etc. can cause disruptions to the proper functioning of the optimization platform and the optimization applications. So these changes need to be tested prior to applying them for the production environment.</li>
+#. Changes, updates, patches, etc. to the underlying software such as the AIMMS software, the operating system, virtualization software, etc. can cause disruptions to the proper functioning of the optimization platform and the optimization applications. So these changes need to be tested prior to applying them for the production environment.
 
-Consider operating a Maintenance Window
+Operating a Maintenance Window
 -------------------------------------------
+
+.. image:: images/wrench-128.png
 
 If your AIMMS PRO installation is used by large numbers of app developers and end users, you may want to operate a Maintenance Window. This is a fixed time window, e.g. each Monday 20:00-0:00, in which the production system may be taken down for software updates and other maintenance. Users can then plan for this.
 
-Consider using a Version Control System
+Using a Version Control System
 ---------------------------------------
 
-With the launch of AIMMS 4 the entire model is saved in text files and can thus be stored in a version control system. This has numerous advantages:
+.. image:: images/multicast-128.png
+
+With the launch of AIMMS 4 the entire model is saved in text files and can thus be stored in a version control system (VCS). This has numerous advantages:
 
 #. The entire history of a model remains available and one can always roll-back to earlier versions or differentiate between proven production version and development versions with new functionality.
 
@@ -62,15 +71,18 @@ With the launch of AIMMS 4 the entire model is saved in text files and can thus 
 
 We recommend the use of a distributed VCS like Git. With Git you can have the entire repository on your local machine, commits are initially just stored locally, and you can branch and merge locally without making those branches public. This aspect is just a matter of installing the Git-related software and starting to use it.
 
-To be able to share, Git also supports the capability to pull/push some or all branches to a repository on a central machine. If other people also pushed to the branch(es) you are pushing to, you first have to pull in those commits, after which merging (and possibly conflict resolution) takes place locally, and you can push the merged branch back to the central repo. For infrastructure needs, you would need to consult your IT (and to make it easy: there are virtual appliances that set up a central Git server with authentication and authorization). Alternatively, there are companies like Atlassian, Github, Assembla, and others which offer hosted solutions where you get private repositories hosted in the cloud, with integrated issue tracker support (where issues can be linked to commits and vice versa).
+To be able to share, Git also supports the capability to pull/push some or all branches to a repository on a central machine. If other people also pushed to the branch(es) you are pushing to, you first have to pull in those commits, after which merging (and possibly conflict resolution) takes place locally, and you can push the merged branch back to the central repo. For infrastructure needs, you would need to consult your IT (and to make it easy: there are virtual appliances that set up a central Git server with authentication and authorization). 
 
-See :doc:`this post <../151/151-version-control-aimmspack-backup>` for a more in-depth explanation on the use of Version Control systems with AIMMS.
+Alternatively, there are companies like Atlassian, GitHub, Assembla, and others which offer hosted solutions where you get private repositories hosted in the cloud, with integrated issue tracker support (where issues can be linked to commits and vice versa).
+
+See :doc:`../151/151-version-control-aimmspack-backup` for a more in-depth explanation on the use of Version Control systems with AIMMS.
 
 .. :doc:`151-version-control-aimmspack-backup`
-.. :doc:`this post <../151/151-version-control-aimmspack-backup>`
 
 Disaster Recovery
 ------------------
+
+.. image:: images/error-128.png
 
 Depending on the nature of your PRO applications you need to take appropriate measures to deal with 'disasters' such as server, disk or connection failure. It is best to refer to you IT department for appropriate solutions. Some issues to consider:
 
@@ -86,7 +98,7 @@ There is obviously a trade-off between the level of resilience and time required
 
 Conclusion
 -----------
-We have listed a few best practices here to raise awareness. We do not claim to be experts on this topic and we encourage you to connect with IT operations specialists to ensure that your AIMMS PRO project becomes and remains successful.
+We have listed a few best practices here to raise awareness. We encourage you to connect with IT operations specialists to ensure that your AIMMS PRO project becomes and remains successful.
 
 
 
