@@ -16,7 +16,7 @@ This section offers guidance on installing and using CDM.
    :maxdepth: 1
 
    /Articles/280/280-install-cdm-service
-.. /Articles/289/289-logging-CDM
+   /Articles/289/289-logging-CDM
 
 
 

@@ -5,9 +5,9 @@
 Recently added
 ==============
 
-.. Added 11 July 2019
+.. Added 15 July 2019
 
-* :doc:`/Articles/280/280-install-cdm-service`
+* :doc:`/Articles/289/289-logging-CDM`
 
 .. Added 3 July 2019
 
