@@ -51,7 +51,7 @@ To save it, we will need to copy it from that folder to AIMMS PRO storage:
         solve FlowShopModel  ;
 
         ! Copy the solver status file from the pro temp folder to AIMMS PRO Storage.
-        sp_SolverLogFilename := "CPLEX 12.8.sta" ;
+        sp_SolverLogFilename := "CPLEX 12.9.sta" ;
         sp_ProTempLocation := pro::PROTempFolder + "/" + sp_SolverLogFilename ;
         sp_userLocation := "userdata/" + pro::PROEnvironment + "/" + pro::PROUserName + "/" + pro::ModelName + "/" + sp_SolverLogFilename ;
         pro::SaveFileToCentralStorage( sp_ProTempLocation, sp_userLocation );
@@ -76,7 +76,7 @@ The part not highlighted is taken literally from `Webui documentation <https://d
         Procedure prDownloadSolverLogFile {
             Arguments: (FileLocation,statusCode,statusDescription);
             Body: {
-                sp_SolverLogFilename := "CPLEX 12.8.sta" ;
+                sp_SolverLogFilename := "CPLEX 12.9.sta" ;
                 FileLocation := sp_SolverLogFilename ;
                 
                 sp_FileLoc := webui::GetIOFilePath( sp_SolverLogFilename );
@@ -107,7 +107,7 @@ The part not highlighted is taken literally from `Webui documentation <https://d
             StringParameter sp_userLocation;
         }
 
-On lines 4-5 we specify the file name assuming the use of CPLEX 12.8, on lines 9-11 we actually copy from the PRO storage to the PRO temp folder.
+On lines 4-5 we specify the file name assuming the use of CPLEX 12.9, on lines 9-11 we actually copy from the PRO storage to the PRO temp folder.
         
 By pressing the download button, the user will retrieve the log file from PRO storage and download it to his/her download folder.
         
