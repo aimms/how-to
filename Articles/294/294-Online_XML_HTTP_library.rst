@@ -99,9 +99,42 @@ Using the ``request_getHeaders`` method, we can extract the default settings for
 
 The ``web::HttpHeader`` is composed of the data [Accept, Accept-Encoding, Authorization, Cache-Control, Content-Length, Content-Type, Transfer-Encoding, Location].
 
-.. todo:: Please explain each of these entries, and also whether or not we are going to adapt them below.
+Let's review those headers:
 
-Now that we have access to these headers, we can change their values and set them back to the request.
+	* **Accept** specify the file format we want from the server. If not specified, accept every kind of data.
+
+			
+
+	* **Accept-Encoding** indicate to the server what kind of compression you support. In AIMMS, it should always be "identity" (default value) which means that no compression are aloud.
+   
+			
+
+	* **Authorization** contains the identification informations required to connect to the server. The identification can also be done through a parameter in the URL address, depending on the server security.
+
+
+
+	* **Cache-Control**  specify directives for caching mechanisms in both requests and responses.
+
+
+
+	* **Content-Length**  indicates the size of the request body sent to the server in bytes.
+    
+
+
+	* **Content-Type** indicates the real type of the resource sent in the request body.
+
+
+
+	* **Transfer-Encoding** tells about the form of encoding used to safely transfer the answer body to the user.
+
+
+   
+	* **Location** is an answer Header and shouldn't be specified. In case of redirection, store the URL where the request must be redirected.
+
+
+.. note:: Most of these headers doesn't need to be touched and should only be used to specify your demand. Here, we wouldn't usually need to change anything to the default headers, but for this time we'll set the accept header to xml in order to show the process.
+
+Now that we have access to these headers, we need to change their values and set them back to the request.
 
 .. code-block:: aimms
     :linenos:
@@ -109,7 +142,7 @@ Now that we have access to these headers, we can change their values and set the
     HttpHeaders['Accept'] := "application/xml";
     web::request_setHeaders(requestId, HttpHeaders);
 
-Here, we tell the server what data format do we want from the request.
+Here, we tell the server we only want xml files.
 
 Set the Output file, invoke the request.
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -146,6 +179,8 @@ References
 
 
 `About HTTP <https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177>`_
+
+`About HTTP Headers <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers>`_
 
 `AIMMS HTTP client library documentation <https://documentation.aimms.com/httpclient/index.html>`_
 
