@@ -1,0 +1,85 @@
+## ams_version=1.0
+
+Section TracingValues {
+    Module Mod1 {
+        Prefix: m;
+        Set s1 {
+            Index: i1;
+            Definition: data { a, b, c };
+        }
+        Parameter p1 {
+            IndexDomain: i1;
+            InitialData: data { a : 1,  b : 2,  c : 3 };
+        }
+    }
+    Module Mod2 {
+        Prefix: m2;
+        Set s2 {
+            Index: i2;
+            Definition: data { a, b, c };
+        }
+        Parameter p2 {
+            IndexDomain: i2;
+            InitialData: data { a : 4,  b : 5,  c : 6 };
+        }
+    }
+    Procedure pr_ExampleTraceValues {
+        Body: {
+            s_outputIds := AllUpdatableIdentifiers * ( mod1 + mod2 );
+            pr_TraceValues( s_outputIds, "myModuleData" );
+        }
+        Set s_outputIds {
+            SubsetOf: AllIdentifiers;
+        }
+    }
+    Procedure pr_TraceValues {
+        Arguments: (s_someIds,sp_outputFoldername);
+        Body: {
+            block where
+            	single_column_display := 1, ! Each element on a single line; it is easy to identify single element differences.
+            	listing_number_precision := 6 ; ! Increase this if you want to identify potential numerical causes.
+            
+            	! Ensure the output folder exists.
+            	if not DirectoryExists( sp_outputFolderName ) then
+            		DirectoryCreate( sp_outputFolderName );
+            	endif ;
+            
+            	! Write each identifier to a separate output file.
+            	!
+            	! To do so, we need to put each identifier in consecutively in a singleton set
+            	! and then we can use the write statement.
+            	!
+            	! :: cannot be part of a filename, so replace it with __.
+            	for i_sid do
+            
+            		! Fill the single ton set with the identifier at hand.
+            		s_oneId := {};
+            		s_oneId := i_sid ;
+            
+            		! Construct the name of the output file.
+            		sp_outputBase := formatString("%e",i_sid);
+            		sp_outputBase := FindReplaceStrings( sp_outputBase, ":", "_" );
+            		sp_outputFilename := formatString("%s\\%s", sp_outputFolderName, sp_outputBase);
+            
+            		! Actually write the identifier
+            		write s_oneId to file sp_outputFilename ;
+            
+            	endfor ;
+            
+            endblock ;
+        }
+        Set s_someIds {
+            SubsetOf: AllIdentifiers;
+            Index: i_sid;
+            Property: Input;
+        }
+        Set s_oneId {
+            SubsetOf: AllIdentifiers;
+        }
+        StringParameter sp_outputFoldername {
+            Property: Input;
+        }
+        StringParameter sp_outputBase;
+        StringParameter sp_outputFilename;
+    }
+}
