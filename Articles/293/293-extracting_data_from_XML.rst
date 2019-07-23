@@ -112,6 +112,9 @@ Congratulation, you should now have all your XML data accessible in AIMMS!
 .. image:: images/theOtherEndOfTheArticleAsWeKnowIt.png
     :align: center
     
+The project :download:`AIMMS project download <download/HttpFood.zip>` 
+
+    
 Related topics
 ------------------
 
@@ -126,4 +129,4 @@ Related topics
 
 `about XML reading and writing in AIMMS <https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=2ahUKEwjrrazf26rjAhVFy6QKHRiQAvgQFjACegQIABAC&url=https%3A%2F%2Fdownload.aimms.com%2Faimms%2Fdownload%2Fmanuals%2FAIMMS3LR_XMLReadWrite.pdf&usg=AOvVaw37iBhEynwwPU9k3ecKSX3q>`_
 
-:doc:`./Online_XML_HTTP_library`
+:doc:`../294/294-Online_XML_HTTP_library`
