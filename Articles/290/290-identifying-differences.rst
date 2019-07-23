@@ -116,7 +116,7 @@ Then I can use the following to output all identifiers making up the mathematica
 Note that in the above code, I include the variables because the bound information is essential to the mathematical program.  
 Note that I also include the constraints; this may be obsolete unless you are interested in the shadow prices as well.
 
-The section that contains this procedure and sample can be downloaded from :download:`AIMMS section download <download/TracingValues.zip>` 
+The section that contains this procedure and sample can be downloaded from :download:`AIMMS section download <download/TracingValues.ams>` 
 
 How to add such a section to your model can be found :doc:`here<../145/145-import-export-section>`  
 

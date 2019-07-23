@@ -1,8 +1,8 @@
-Extract XML Data from a Server with the HTTP Library
+Extract XML File from a Server with the HTTP Library
 =====================================================
 
 .. meta::
-   :description: Using the AIMMS HTTP library to extract data from XML.
+   :description: Using the AIMMS HTTP library to extract an XML file.
    :keywords: xml, http library
 
 **Summary**
@@ -153,7 +153,7 @@ Setting the OutputFile
 
     web::request_setResponseBody(requestId, 'File', OutputFile);
 
-The ``request_setResponseBody`` second argument can either be ``'File'``(you want to get the response body) or ``'None'``(the response body will be ignored).
+The ``request_setResponseBody`` second argument can either be ``'File'`` (to get the response body) or ``'None'`` (to ignore the response body).
 The response body represents the data the server gives in response to your request. Use this method to specify where the data should be stored.
 
 When you send a request to a server, it gives you back an answer containing a status code. Here, this code is stored in a parameter called ``responseCode``.
@@ -173,7 +173,7 @@ We're finally ready to send our request using the ``request_invoke method``.
 
 Congratulations, you should now have your XML file stored as ``output.xml`` in the project folder!
 
-If you now want to link the XML data with AIMMS, please follow the tutorial :doc:`../293/293-extracting_data_from_XML` .
+If you now want to link the XML data with AIMMS, please follow the tutorial :doc:`../293/293-extracting-data-from-XML` .
 
 Example project
 ------------------
@@ -185,7 +185,7 @@ You can download the example AIMMS project below:
 
 Related Topics
 ---------------
-* **AIMMS How-To**: :doc:`../293/293-extracting_data_from_XML`
+* **AIMMS How-To**: :doc:`../293/293-extracting-data-from-XML`
 * **AIMMS Documentation**: `Add a library to your model <https://documentation.aimms.com/httpclient/library.html#adding-the-http-client-library-to-your-model>`_
 
 References

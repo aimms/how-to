@@ -31,6 +31,8 @@ Extracting XML Data
 ---------------------
 We will extract the data from the XML into AIMMS, so that all the data from the XML will be converted into AIMMS objects.
 
+If you followed the procedure to :doc:`Extract an XML File from a Server <../294/294-Online-XML-HTTP-library>`, your XML file will be in the root directory of your project (or in any directory specified in the ``OutputFile`` string). Otherwise you'll need to specify the path to your XML file in a parameter before you begin.
+
 The procedure is as follows:
 #. Generate XSD
 #. Create AIMMS objects
@@ -45,10 +47,6 @@ To properly use the XML schema mapping tool in AIMMS, you'll need an XSD file co
 If you do not have an XSD file, you can simply use a free online XSD generator tool in most cases.
 Here, we will use a generator from `FreeFormatter.com <https://www.freeformatter.com/xsd-generator.html>`_.
 
-Put your XML file in the root directory of your project, or in any directory specified in the ``OutputFile`` string.
-
-.. does this sentence belong somewhere at the beginning? - jve
-
 Once you've generated the XSD, save it in the root directory of your project.
 
 Creating AIMMS objects
@@ -59,7 +57,7 @@ Create the AIMMS objects to be linked with the XML contents.
 In this case, we will create the following:
 
 * set ``Meal`` with  index ``M``
-* string parameter ``Price(M) 
+* string parameter ``Price(M)``
 * string parameter ``Description(M)``
 * parameter ``Calories(M)``
 
@@ -131,9 +129,7 @@ Execute the following code to obtain your data.
 
     READXML(OutputFile,"NameOfYourAXM.axm");
 
-``OutputFile`` still contains the directory to your XML file extracted from the server.
-
-.. is this step explained earlier? - jve
+If you followed the procedure to :doc:`Extract an XML File from a Server <../294/294-Online-XML-HTTP-library>`, ``OutputFile`` still contains the directory. Otherwise you'll need to specify the parameter containing the path to your XML.
 
 Congratulations, you should now have all your XML data accessible in AIMMS!
 
@@ -151,7 +147,7 @@ You can download the example AIMMS project below:
 Related topics
 ------------------
 
-* **AIMMS How-To**: :doc:`../294/294-Online_XML_HTTP_library`
+* **AIMMS How-To**: :doc:`../294/294-Online-XML-HTTP-library`
 
 * **AIMMS Documentation**: `Read and write XML <https://download.aimms.com/aimms/download/manuals/AIMMS3LR_XMLReadWrite.pdf>`_
 
