@@ -33,11 +33,12 @@ We will extract the data from the XML into AIMMS, so that all the data from the 
 
 If you followed the procedure to :doc:`Extract an XML File from a Server <../294/294-Online-XML-HTTP-library>`, your XML file will be in the root directory of your project (or in any directory specified in the ``OutputFile`` string). Otherwise you'll need to specify the path to your XML file in a parameter before you begin.
 
-The procedure is as follows:
-#. Generate XSD
-#. Create AIMMS objects
-#. Generate AXM
-#. Read XML data 
+The procedure is as follows:  
+
+#. Generate XSD.
+#. Create AIMMS objects.
+#. Generate AXM.
+#. Read XML data.
 
 Generating XSD file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
