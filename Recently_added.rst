@@ -5,6 +5,13 @@
 Recently added
 ==============
 
+.. Added 26 July 2019
+
+* :doc:`/Articles/290/290-identifying-differences`
+* :doc:`/Articles/292/292-identifying-error`
+* :doc:`/Articles/293/293-extracting-data-from-XML`
+* :doc:`/Articles/294/294-Online-XML-HTTP-library`
+
 .. Added 15 July 2019
 
 * :doc:`/Articles/289/289-logging-CDM`
