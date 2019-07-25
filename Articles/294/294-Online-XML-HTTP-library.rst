@@ -99,10 +99,11 @@ Once these objects are created, we can start coding.
     OutputFile:="Output.xml";
     web::request_create(requestId);
     web::request_setURL(requestId,requestURL);
-    
+    web::request_setMethod(requestId, "GET");
+
     
 The ``request_create`` function creates a request and gives it an identification number which is stored in ``requestId``.
-Then, set the URL for the request using ``request_setURL``.
+Then, set the URL for the request using ``request_setURL`` and the request method to GET using ``request_setMethod``.
 
 Specifying headers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
