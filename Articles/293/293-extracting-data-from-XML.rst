@@ -22,23 +22,57 @@ File formats related to XML
 Use Case
 ----------
 
-In this example, we will extract data from a breakfast menu containing data about meals, their price, the number of calories, and a small description. (From an example provided at `W3Schools <https://www.w3schools.com/xml/simple.xml>`_.)
+In this example, we will extract data from a breakfast menu containing data about meals, their price, the number of calories, and a small description. (From an example provided at `W3Schools <https://www.w3schools.com/xml/simple.xml>`_)
 
-.. image:: images/XML.png
-    :align: center
+.. code-block:: xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <breakfast_menu>
+    <food>
+        <name>Belgian Waffles</name>
+        <price>$5.95</price>
+        <description>Two of our famous Belgian Waffles with plenty of real maple syrup</description>
+        <calories>650</calories>
+    </food>
+    <food>
+        <name>Strawberry Belgian Waffles</name>
+        <price>$7.95</price>
+        <description>Light Belgian waffles covered with strawberries and whipped cream</description>
+        <calories>900</calories>
+    </food>
+    <food>
+        <name>Berry-Berry Belgian Waffles</name>
+        <price>$8.95</price>
+        <description>Light Belgian waffles covered with an assortment of fresh berries and whipped cream</description>
+        <calories>900</calories>
+    </food>
+    <food>
+        <name>French Toast</name>
+        <price>$4.50</price>
+        <description>Thick slices made from our homemade sourdough bread</description>
+        <calories>600</calories>
+    </food>
+    <food>
+        <name>Homestyle Breakfast</name>
+        <price>$6.95</price>
+        <description>Two eggs, bacon or sausage, toast, and our ever-popular hash browns</description>
+        <calories>950</calories>
+    </food>
+    </breakfast_menu>
+
 
 Extracting XML Data
 ---------------------
 We will extract the data from the XML into AIMMS, so that all the data from the XML will be converted into AIMMS objects.
 
-If you followed the procedure to :doc:`Extract an XML File from a Server <../294/294-Online-XML-HTTP-library>`, your XML file will be in the root directory of your project (or in any directory specified in the ``OutputFile`` string). Otherwise you'll need to specify the path to your XML file in a parameter before you begin.
+If you followed the procedure to :doc:`Extract an XML File from a Server <../294/294-Online-XML-HTTP-library>`, your XML file will be in the root directory of your project (or in any directory specified in the ``OutputFile`` string). Otherwise you'll need to specify the path to your XML file in a string parameter before you begin.
 
 The procedure is as follows:  
 
-#. Generate XSD.
-#. Create AIMMS objects.
-#. Generate AXM.
-#. Read XML data.
+#. `Generating XSD file`_
+#. `Creating AIMMS objects`_
+#. `Generating the AXM file`_
+#. `Reading XML data`_
 
 Generating XSD file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -57,10 +91,21 @@ Create the AIMMS objects to be linked with the XML contents.
 
 In this case, we will create the following:
 
-* set ``Meal`` with  index ``M``
-* string parameter ``Price(M)``
-* string parameter ``Description(M)``
-* parameter ``Calories(M)``
+.. code::
+
+    Set Meal {
+        Index: M;
+    }
+    StringParameter Price {
+        IndexDomain: M;
+    }
+    StringParameter Desription {
+        IndexDomain: M;
+    }
+    Parameter Calories {
+        IndexDomain: M;
+    }
+
 
 Generating the AXM file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -88,7 +133,7 @@ The elements tree of your XML file is displayed on the left.
 Data can be stored in an element, in child elements, or in the element's parameters.
 In this example there aren't child elements nor parameters, but the process is the same.
 
-Click on a an element or a parameter folder on the right to view a list of attributes.
+Click on an element or a parameter folder in the elements tree to view a list of attributes.
 
 .. image:: images/AXMgeneratorBindsTo.png
     :align: center
@@ -123,14 +168,14 @@ Reading XML data
 
 Now we can read the data into AIMMS.
 
-Execute the following code to obtain your data.
+Execute the following code in a procedure to obtain your data.
 
 
 .. code-block:: aimms
 
     READXML(OutputFile,"NameOfYourAXM.axm");
 
-If you followed the procedure to :doc:`Extract an XML File from a Server <../294/294-Online-XML-HTTP-library>`, ``OutputFile`` still contains the directory. Otherwise you'll need to specify the parameter containing the path to your XML.
+If you followed the procedure to :doc:`Extract an XML File from a Server <../294/294-Online-XML-HTTP-library>`, ``OutputFile`` still contains the directory. Otherwise you'll need to specify the string parameter containing the path to your XML.
 
 Congratulations, you should now have all your XML data accessible in AIMMS!
 
