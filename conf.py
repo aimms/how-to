@@ -171,14 +171,13 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+# if builds locally (a windows machine), force "Edit on Gitlab" to be shown, and do not displays Thumbs and Insided Embeddable (extensions)
 if os.name == 'nt':
-   
    Display_edit_on_gitlab = True
-   # if builds on GitLab (a Linux machine), display Thumbs and Insided Embeddable (extensions) :)
    Display_3rd_Party_Extensions = False
 else:
 
-   # if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown :)
+   # if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown, and displays Thumbs and Insided Embeddable (extensions)
    Display_edit_on_gitlab = False
    Display_3rd_Party_Extensions = True
 

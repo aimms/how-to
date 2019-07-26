@@ -69,7 +69,11 @@
 
 {% block document %} {{ super() }}
 
-{% if pagename != ("ContentIndex" or "index") and Display_3rd_Party_Extensions %}
+{% if (("index" in pagename) or ("ContentIndex" in pagename)) %}
+
+{# Do nothing :) I don't know how to do the negation properly in Jinja #}
+
+{% elif Display_3rd_Party_Extensions %}
 
 <h3 style="display: inline; margin-right: 20px;">Was this helpful ?</h3>
 

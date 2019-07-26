@@ -189,6 +189,9 @@ You can download the example used in this article:
 
 * :download:`dlcsv project <downloads/dlcsv.zip>`
 
+.. note::
+    
+    This project contains also an example procedure to write a ``CSV`` file
                 
 
 
