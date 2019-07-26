@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AimmsXMLSchemaMapping xmlns="http://www.aimms.com/XMLSchema/AimmsXMLMappingSchema" MappedNameSpace="http://tempuri.org/AIMMS/auto-generated-namespace">
+	<ElementMapping name="breakfast_menu">
+		<ElementMapping name="food">
+			<ElementMapping name="name" binds-to="M"/>
+			<ElementMapping name="price" maps-to="Price( M )"/>
+			<ElementMapping name="description" maps-to="description( M )"/>
+			<ElementMapping name="calories" maps-to="calories( M )" width="16" precision="0"/>
+		</ElementMapping>
+	</ElementMapping>
+</AimmsXMLSchemaMapping>

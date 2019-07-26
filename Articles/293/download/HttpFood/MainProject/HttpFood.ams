@@ -1,0 +1,23 @@
+## ams_version=1.0
+
+Model Main_HttpFood {
+    Set Meal {
+        Index: M;
+    }
+    StringParameter OutputFile;
+    StringParameter Price {
+        IndexDomain: M;
+    }
+    StringParameter description {
+        IndexDomain: M;
+    }
+    Parameter calories {
+        IndexDomain: M;
+    }
+    Procedure DataExtraction {
+        Body: {
+            OutputFile:="Output.xml";
+            READXML(OutputFile,"Output.axm");
+        }
+    }
+}
