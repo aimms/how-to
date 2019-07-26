@@ -89,7 +89,7 @@ Before we create our HTTP request, we will need some parameters to store informa
   
 Create three string parameters :``requestURL``, ``requestId``, and ``OutputFile``.
 
-Once these objects are created, we can start coding.
+Once these objects are created, we can start coding the following in a procedure.
 
 .. code-block:: aimms
     :linenos:
@@ -108,23 +108,30 @@ Then, set the URL for the request using ``request_setURL`` and the request metho
 Specifying headers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you want to specify headers in your request, you can create a string parameter ``HttpHeaders`` for domain ``web::HttpHeaders``.
+If you want to specify headers in your request, you can create a string parameter ``HttpHeaders`` indexed over ``web::httpHeader``.
 
-Using the ``request_getHeaders`` method, we can extract the default settings for this request and store them in ``HttpHeaders``.
+.. code-block:: aimms
+    
+    StringParameter HttpHeaders {
+        IndexDomain: web::httpHeader;
+    }
+
+
+Using the ``request_getHeaders`` procedure, we can extract the default settings for this request and store them in ``HttpHeaders``.
 
 .. code-block:: aimms
 
     web::request_getHeaders(requestId, HttpHeaders);
 
-The ``web::HttpHeaders`` function accepts the following arguments: 
+The ``web::HttpHeader`` index contains the following elements: 
 
-	* **Accept** specify the file format we want from the server. If not specified, accept every kind of data.			
+	* **Accept** specifies the file format we want from the server. If not specified, it accepts every kind of data.			
 
-	* **Accept-Encoding** indicate to the server what kind of compression you support. In AIMMS, it should always be "identity" (default value) which means that no compression are aloud.			
+	* **Accept-Encoding** indicates to the server what kind of compression you support. In AIMMS, it should always be "identity" (default value) which means that no compression are allowed.			
 
-	* **Authorization** contains the identification informations required to connect to the server. The identification can also be done through a parameter in the URL address, depending on the server security.
+	* **Authorization** contains identification informations required to connect to the server. The identification can also be done through a parameter in the URL address, depending on the server security.
 
-	* **Cache-Control**  specify directives for caching mechanisms in both requests and responses.
+	* **Cache-Control**  specifies directives for caching mechanisms in both requests and responses.
 
 	* **Content-Length**  indicates the size of the request body sent to the server in bytes.
 
@@ -165,7 +172,7 @@ When you send a request to a server, it gives you back an answer containing a st
 
 Invoking the request
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-We're finally ready to send our request using the ``request_invoke method``.
+We're finally ready to send our request using the ``web::request_invoke`` procedure.
 
 .. code-block:: aimms
 
