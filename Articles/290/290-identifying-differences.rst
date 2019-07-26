@@ -1,8 +1,19 @@
-Identifying differences
+Identify differences
 =======================
+.. meta::
+   :description: A trick for how to troubleshoot data differences with an AIMMS procedure and diff tool.
+   :keywords: diff, difference, data, refactor
 
-Recently I helped a customer to identify the cause of data differences in his model after a refactorization. 
-I used code like the below:
+In this article we'll identify the cause of data differences in a model after a refactorization. 
+
+The process we're following can be summarized like this:
+
+#. You'll want to separate out each element, so it will be easy to break down the differences. 
+#. Then send each identifier to a separate output file in an output folder. 
+#. Do that for each version of the model, so you'll have two output folders each containing output files to be compared. 
+#. Finally you'll compare the two output folders with a diff tool to find the differences between the individual files.
+
+See the procedure below for an example:
 
 .. code-block:: aimms
     :linenos:
@@ -58,7 +69,7 @@ I used code like the below:
         StringParameter sp_outputFilename;
     }
 
-A sample calls of this procedure is:
+You can call the procedure with the code below:
 
 .. code-block:: aimms
     :linenos:
@@ -73,11 +84,13 @@ A sample calls of this procedure is:
         }
     }
     
-During the support session, I used such a call on both versions of the project and then compared the output folders using `WinMerge <winmerge.org>`_ . This utility quickly identifies which files are different, and for two differing files, what are the differences between those files.
+To compare, call the procedure on both versions of the project, and then compare the output folders using a diff tool such as `WinMerge <winmerge.org>`_.
 
-When definitions of sets and parameters haven't changed, I just output a subset of ``AllUpdatableIdentifiers``; these are the sets and parameters without definition.
+Now it's time to use that diff to figure out what happened.
 
-When I'm interested in the sets and parameters related to a particular mathematical program, such as the one below:
+When definitions of sets and parameters haven't changed, output a subset of ``AllUpdatableIdentifiers``; these are the sets and parameters without definition.
+
+Let's say we're interested in the sets and parameters related to a particular mathematical program, such as the one below:
 
 .. code-block:: aimms
     :linenos:
@@ -104,7 +117,7 @@ When I'm interested in the sets and parameters related to a particular mathemati
         }
     }
     
-Then I can use the following to output all identifiers making up the mathematical program like this:  
+Then we can use the following to output all identifiers making up the mathematical program like this:  
 
 .. code-block:: aimms
     :linenos:
@@ -113,10 +126,14 @@ Then I can use the following to output all identifiers making up the mathematica
     s_outputIds += ReferencedIdentifiers( s_outputIds, AllAttributeNames, 1 );
     pr_TraceValues( s_outputIds, "myMPData" );
 
-Note that in the above code, I include the variables because the bound information is essential to the mathematical program.  
-Note that I also include the constraints; this may be obsolete unless you are interested in the shadow prices as well.
+In the above code, we include the variables because the bound information is essential to the mathematical program.  
+We also include the constraints; this may be obsolete unless you are interested in the shadow prices as well.
 
-The section that contains this procedure and sample can be downloaded from :download:`AIMMS section download <download/TracingValues.ams>` 
+Example download
+------------------
+You can download the section (``.ams`` file) that contains this procedure and sample below:
+* :download:`TracingValues.ams <download/TracingValues.ams>` 
 
-How to add such a section to your model can be found :doc:`here<../145/145-import-export-section>`  
+
+To use it, you'll need to :doc:`Import a section to your project <../145/145-import-export-section>`.  
 

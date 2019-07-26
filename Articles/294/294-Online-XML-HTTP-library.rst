@@ -10,7 +10,7 @@ Extract XML File from a Server with the HTTP Library
 
 In this article, we will create an HTTP request to extract a file from a server without an identification system using the AIMMS HTTP library.
 
-We'll use an example XML file from `W3Schools <https://www.w3schools.com/xml/simple.xml>`_
+We'll use an example XML file from `W3Schools <https://www.w3schools.com/xml/simple.xml>`_.
 
 Definitions
 -----------
@@ -120,7 +120,7 @@ The ``web::HttpHeaders`` function accepts the following arguments:
 
 	* **Accept** specify the file format we want from the server. If not specified, accept every kind of data.			
 
-	* **Accept-Encoding** indicate to the server what kind of compression you support. In AIMMS, it should always be "identity" (default value) which means that no compression are aloud.			
+	* **Accept-Encoding** indicate to the server what kind of compression you support. In AIMMS, it should always be "identity" (default value) which means that no compression is allowedd.			
 
 	* **Authorization** contains the identification informations required to connect to the server. The identification can also be done through a parameter in the URL address, depending on the server security.
 
@@ -187,16 +187,16 @@ You can download the example AIMMS project below:
 Related Topics
 ---------------
 * **AIMMS How-To**: :doc:`../293/293-extracting-data-from-XML`
+* **AIMMS Documentation**: `HTTP client library <https://documentation.aimms.com/httpclient/index.html>`_
 * **AIMMS Documentation**: `Add a library to your model <https://documentation.aimms.com/httpclient/library.html#adding-the-http-client-library-to-your-model>`_
 
 References
 ------------------------------------
 
-`About HTTP <https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177>`_
+* `TutsPlus, about HTTP <https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177>`_
+* `Mozilla, about HTTP Headers <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers>`_
 
-`About HTTP Headers <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers>`_
 
-`AIMMS HTTP client library documentation <https://documentation.aimms.com/httpclient/index.html>`_
 
 
 

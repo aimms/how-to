@@ -1,5 +1,8 @@
-Identifying error
+Identify error
 ===================
+.. meta::
+   :description: A trick for how to troubleshoot errors occurring during definition evaluation.
+   :keywords: case, error, definition
 
 When creating a case file, for instance during a ``pro::DelegateToServer``, errors may occur during the evaluation of the definitions.
 Here we show a little trick to identify the set or parameter that has the definition in which this error occurred.
@@ -38,7 +41,7 @@ Here we show a little trick to identify the set or parameter that has the defini
 
 Remarks about the above code:
 
-* line 6,7: the single ton set is constructed.
+* line 6,7: the singleton set is constructed.
 
 * line 8: the definition is evaluated.
 
@@ -54,6 +57,10 @@ A sample call is below:
 Here we check all definitions of the sets and parameters that are passed in input case to the server session.
 Note that by default in modern versions of AIMMS and of AIMMS PRO most if not all parameter defitions are avoided anyway.
 
-The section that contains this procedure and sample can be downloaded from :download:`AIMMS section download <download/CheckDefinitions.zip>` 
+Example download
+------------------
+You can download the section (``.ams`` file) that contains this procedure and sample below:
+* :download:`CheckDefinitions.zip <download/CheckDefinitions.zip>` 
 
-How to add such a section to your model can be found :doc:`here<../145/145-import-export-section>`  
+
+To use it, you'll need to :doc:`Import a section to your project <../145/145-import-export-section>`.  
