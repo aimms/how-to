@@ -21,5 +21,6 @@ We're aware that AIMMS is one of many tools in your workspace. This section prov
    sub_databases/index
    sub_excel_csv/index
    sub_other_functions/index
+   sub_http/index
 
 

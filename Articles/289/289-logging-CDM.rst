@@ -1,5 +1,9 @@
-Logging CDM
+Log CDM
 ===============
+
+.. meta::
+   :description: This article explains how to enable logging when using CDM service.
+   :keywords: CDM, log, client, server
 
 CDM logging can be turned on for both the client and the service.
 
@@ -11,7 +15,7 @@ CDM Logging in the client
 .. image:: images/client-128.png
 
 Copy the file ``CDMLogConfig.cfg`` from the installation folder of the ``CDMService`` to the project folder.
-Uncomment line 17 of this file.
+*Uncomment line 17 of this file*.
 
 .. code-block:: aimms
     :linenos:

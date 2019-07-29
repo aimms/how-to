@@ -55,6 +55,11 @@ Output
 
 The output is the same as when using Java. See :ref:`Starting AIMMS Job via the AIMMS PRO API using JAVA <pro-api-java-output>`.
 
+Further reading
+-----------------
+
+See also the `manual <https://manual.aimms.com/pro/api.html>`_
+
 
 
 
