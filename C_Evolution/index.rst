@@ -19,3 +19,5 @@ AIMMS software has evolved over time, to match arising user needs and changes in
 
    /Articles/109/109-deprecate-compound-sets-overview
    /Articles/109/109-convert-compound-sets
+   /Articles/295/295-convert-page-actions
+   /Articles/295/295-convert-maps
