@@ -41,7 +41,7 @@ After installing the HTTP library, the procedure we'll use follows these steps:
 
 #. Create the HTTP request
 #. Specify headers
-#. Set ``OutputFile``
+#. Set ``SP_OutputFile``
 #. Invoke the request
 
 
@@ -51,23 +51,23 @@ The code should look like this:
 .. code-block:: aimms
     :linenos:
     
-    requestURL:="https://www.w3schools.com/xml/simple.xml";
-    OutputFile:="Output.xml";
+    SP_requestURL:="https://www.w3schools.com/xml/simple.xml";
+    SP_OutputFile:="Output.xml";
     
     !Create the request and set the URL
-    web::request_create(requestId);
-    web::request_setURL(requestId,requestURL );
-    web::request_setMethod(requestId, "GET");
+    web::request_create(SP_requestId);
+    web::request_setURL(SP_requestId,SP_requestURL );
+    web::request_setMethod(SP_requestId, "GET");
     
     !header
-    web::request_getHeaders(requestId, HttpHeaders);
-    HttpHeaders['Accept'] := "application/xml";
-    web::request_setHeaders(requestId, HttpHeaders);
+    web::request_getHeaders(SP_requestId, SP_HttpHeaders();
+    SP_HttpHeaders(['Accept'] := "application/xml";
+    web::request_setHeaders(SP_requestId, SP_HttpHeaders();
     
     !Set the Output file and invoke the request.
-    web::request_setResponseBody(requestId, 'File', OutputFile);
+    web::request_setResponseBody(SP_requestId, 'File', SP_OutputFile);
     !invoke method
-    web::request_invoke(requestId,responseCode);
+    web::request_invoke(SP_requestId,P_responseCode);
 
 
 Let's break down the process in more detail.
@@ -87,41 +87,41 @@ Creating the request
 
 Before we create our HTTP request, we will need some parameters to store information about the request.
   
-Create three string parameters :``requestURL``, ``requestId``, and ``OutputFile``.
+Create three string parameters :``SP_requestURL``, ``SP_requestId``, and ``SP_OutputFile``.
 
 Once these objects are created, we can start coding the following in a procedure.
 
 .. code-block:: aimms
     :linenos:
 
-    !requestURL will define the aim of the request and OutputFile the answer file's destination.
-    requestURL:="https://www.w3schools.com/xml/simple.xml";
-    OutputFile:="Output.xml";
-    web::request_create(requestId);
-    web::request_setURL(requestId,requestURL);
-    web::request_setMethod(requestId, "GET");
+    !SP_requestURL will define the aim of the request and SP_OutputFile the answer file's destination.
+    SP_requestURL:="https://www.w3schools.com/xml/simple.xml";
+    SP_OutputFile:="Output.xml";
+    web::request_create(SP_requestId);
+    web::request_setURL(SP_requestId,SP_requestURL);
+    web::request_setMethod(SP_requestId, "GET");
 
     
-The ``request_create`` function creates a request and gives it an identification number which is stored in ``requestId``.
+The ``request_create`` function creates a request and gives it an identification number which is stored in ``SP_requestId``.
 Then, set the URL for the request using ``request_setURL`` and the request method to GET using ``request_setMethod``.
 
 Specifying headers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you want to specify headers in your request, you can create a string parameter ``HttpHeaders`` indexed over ``web::httpHeader``.
+If you want to specify headers in your request, you can create a string parameter ``SP_HttpHeaders(`` indexed over ``web::httpHeader``.
 
 .. code-block:: aimms
     
-    StringParameter HttpHeaders {
+    StringParameter SP_HttpHeaders( {
         IndexDomain: web::httpHeader;
     }
 
 
-Using the ``request_getHeaders`` procedure, we can extract the default settings for this request and store them in ``HttpHeaders``.
+Using the ``request_getHeaders`` procedure, we can extract the default settings for this request and store them in ``SP_HttpHeaders(``.
 
 .. code-block:: aimms
 
-    web::request_getHeaders(requestId, HttpHeaders);
+    web::request_getHeaders(SP_requestId, SP_HttpHeaders();
 
 The ``web::HttpHeader`` index contains the following elements: 
 
@@ -149,22 +149,22 @@ Now that we have access to these headers, we need to change their values and set
 .. code-block:: aimms
     :linenos:
 
-    HttpHeaders['Accept'] := "application/xml";
-    web::request_setHeaders(requestId, HttpHeaders);
+    SP_HttpHeaders(['Accept'] := "application/xml";
+    web::request_setHeaders(SP_requestId, SP_HttpHeaders();
 
 Here, we tell the server we only want XML files.
 
-Setting the OutputFile
+Setting the SP_OutputFile
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: aimms
 
-    web::request_setResponseBody(requestId, 'File', OutputFile);
+    web::request_setResponseBody(SP_requestId, 'File', SP_OutputFile);
 
 The ``request_setResponseBody`` second argument can either be ``'File'`` (to get the response body) or ``'None'`` (to ignore the response body).
 The response body represents the data the server gives in response to your request. Use this method to specify where the data should be stored.
 
-When you send a request to a server, it gives you back an answer containing a status code. Here, this code is stored in a parameter called ``responseCode``.
+When you send a request to a server, it gives you back an answer containing a status code. Here, this code is stored in a parameter called ``P_responseCode``.
 
 .. note::
 
@@ -176,7 +176,7 @@ We're finally ready to send our request using the ``web::request_invoke`` proced
 
 .. code-block:: aimms
 
-    web::request_invoke(requestId,responseCode);
+    web::request_invoke(SP_requestId,P_responseCode);
 
 
 Congratulations, you should now have your XML file stored as ``output.xml`` in the project folder!
