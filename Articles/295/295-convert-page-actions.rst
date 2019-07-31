@@ -1,4 +1,4 @@
-Upgrade Old WebUI Page Actions
+﻿Upgrade Old WebUI Page Actions
 =========================================
 .. meta::
    :description: A brief guide to upgrading Page Actions in your WebUI app.
@@ -39,7 +39,7 @@ To convert Page Actions from V1 to V2, you'll need to do the following:
 A quick way to do this is to use the ``webui.json`` file.
 
 a. Locate and open the file ``\MainProject\WebUI\webui.json``. 
-b. Search for the text “actions" the file.
+b. Search for the text “actions" in the file.
 
 .. image:: images/webui-action.png
 
