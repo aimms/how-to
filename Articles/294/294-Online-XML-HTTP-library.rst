@@ -5,7 +5,6 @@ Extract XML File from a Server with the HTTP Library
    :description: Using the AIMMS HTTP library to extract an XML file.
    :keywords: xml, http library
 
-**Summary**
 
 
 In this article, we will create an HTTP request to extract a file from a server without an identification system using the AIMMS HTTP library.
