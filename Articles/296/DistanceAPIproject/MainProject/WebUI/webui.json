@@ -1,0 +1,360 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "distime",
+          "layoutInfo": {
+            "width": "7",
+            "height": "2",
+            "customPosition": "checked",
+            "pos": {
+              "x": "210",
+              "y": "500"
+            }
+          }
+        },
+        {
+          "uri": "ori",
+          "layoutInfo": {
+            "width": "4",
+            "height": "2",
+            "customPosition": "checked",
+            "pos": {
+              "x": "100",
+              "y": "100"
+            }
+          }
+        },
+        {
+          "uri": "dep",
+          "layoutInfo": {
+            "width": "4",
+            "height": "2",
+            "customPosition": "checked",
+            "pos": {
+              "x": "750",
+              "y": "100"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "widgets/destpart": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "destination",
+          "Origin"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "Did",
+          "Oid"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "Oid": "5"
+          },
+          "width": 128.16326530612244
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "Origin"
+          },
+          "width": 102.65306122448979
+        }
+      ]
+    }
+  },
+  "widgets/dep": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "destination"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "Did"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "Did": "5"
+          },
+          "width": 92.52413240255186
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "destination"
+          },
+          "width": 1405.0663511156467
+        }
+      ]
+    }
+  },
+  "widgets/ori": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "Origin"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "Oid"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "Oid",
+          "width": 14.594594594594591
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "Origin"
+          },
+          "width": 1058.9484434254716
+        }
+      ]
+    }
+  },
+  "widgets/distime": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "Time",
+          "dist"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "d"
+        ],
+        "colHeader": [
+          "a",
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "d": "5"
+          },
+          "width": 115.3061224489796
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "d": "1"
+          },
+          "width": 18.6
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "d": "2"
+          },
+          "width": 26.580310880829014
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "d": "3"
+          },
+          "width": 25.84786641929499
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "d": "4"
+          },
+          "width": 29.788852404505587
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "<IDENTIFIER-SET>",
+          "width": 22.638493636363638
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "a": "2"
+          },
+          "width": 36.483821683381024
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "a": "1"
+          },
+          "width": 31.243083800541203
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "a": "3"
+          },
+          "width": 53.03075926670446
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "a": "4"
+          },
+          "width": 33.72900861583269
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "a": "5"
+          },
+          "width": 31.9458312849496
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "dist",
+            "a": "4"
+          },
+          "width": 38.20713076923077
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "dist",
+            "a": "5"
+          },
+          "width": 26.721799993231468
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "dist",
+            "a": "3"
+          },
+          "width": 22.56610512820513
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "dist",
+            "a": "2"
+          },
+          "width": 25.130207692307692
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "Time",
+            "a": "5"
+          },
+          "width": 27.0019525
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "a": "1",
+            "<IDENTIFIER-SET>": "Time"
+          },
+          "width": 21.7519525
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "a": "1",
+            "<IDENTIFIER-SET>": "dist"
+          },
+          "width": 25.299477969576923
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "a": "2",
+            "<IDENTIFIER-SET>": "Time"
+          },
+          "width": 25.5019525
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "a": "3",
+            "<IDENTIFIER-SET>": "Time"
+          },
+          "width": 26.5019525
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "a": "4",
+            "<IDENTIFIER-SET>": "Time"
+          },
+          "width": 28.719951282051284
+        }
+      ]
+    }
+  }
+}

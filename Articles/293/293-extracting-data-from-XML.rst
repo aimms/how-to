@@ -93,17 +93,17 @@ In this case, we will create the following:
 
 .. code::
 
-    Set Meal {
-        Index: M;
+    Set S_Meal {
+        Index: I_M;
     }
-    StringParameter Price {
-        IndexDomain: M;
+    StringParameter SP_Price {
+        IndexDomain: I_M;
     }
-    StringParameter Desription {
-        IndexDomain: M;
+    StringParameter SP_Desription {
+        IndexDomain: I_M;
     }
-    Parameter Calories {
-        IndexDomain: M;
+    Parameter P_Calories {
+        IndexDomain: I_M;
     }
 
 
@@ -146,11 +146,11 @@ Click on an element or a parameter folder in the elements tree to view a list of
 
 * ``write filter``: This attribute specifies if you want to overwrite the data from your XML file using the value of the AIMMS identifier the element has been mapped to. Set the value ``0`` if you don't want AIMMS to overwrite, or ``1`` if you do.
 
-First we need to set the element to bind to the index ``M`` of the ``Meal`` set. Here, ``M`` is bound to the element ``Name``. 
+First we need to set the element to bind to the index ``I_M`` of the ``S_Meal`` set. Here, ``I_M`` is bound to the element ``SP_Name``. 
 
 Click on the attribute you want to change and enter the value you want to put in the text field. (You can use the wizard tool for auto-completion.)
 
-Click *Apply*. Because ``Name`` is in the same branch as ``Price``, ``Description``, and ``Calories``, we have now access to their data to fill ``Meal`` parameters.
+Click *Apply*. Because ``SP_Name`` is in the same branch as ``SP_Price``, ``SP_Description``, and ``P_Calories``, we have now access to their data to fill ``S_Meal`` parameters.
 
 Repeat this process with the other elements and map them to their respective parameters using the ``maps-to`` attribute.
 
