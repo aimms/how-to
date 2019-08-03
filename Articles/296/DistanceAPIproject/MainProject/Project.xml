@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<Project AimmsVersion="4.68.1.6 unicode x64" ProjectUUID="14BB64DC-A5BC-41F2-A638-DFFA6084A911">
-	<ModelFileName>GoogleApiArticle.ams</ModelFileName>
-	<AutoSaveAndBackup>
-		<DataBackup AtRegularInterval="true" EveryNMinutes="15" NumBackupsDatedToday="3" NumDaysBeforeToday="3" />
-	</AutoSaveAndBackup>
-</Project>
