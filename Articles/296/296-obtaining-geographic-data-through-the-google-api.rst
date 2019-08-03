@@ -201,7 +201,7 @@ The ``origin_address`` and ``destination_address`` are elements that contain the
 Now that we know what we want from the XML file, we will need an XSD file. This XSD file provides the structure for an XML file. Read more about XML Mapping and creating XSD files in :doc:`../293/293-extracting-data-from-XML`.
 
 .. image:: images/initialmappingupdated.PNG
-    :align: center
+   :align: center
 
 When you select an element, the mapping tool gives you access to a list of attributes.
 
