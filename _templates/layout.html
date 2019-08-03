@@ -69,7 +69,7 @@
 
 {% block document %} {{ super() }}
 
-{% if (("index" in pagename) or ("ContentIndex" in pagename)) %}
+{% if (("index" in pagename) or ("ContentIndex" in pagename) or ("search" in pagename)) %}
 
 {# Do nothing :) I don't know how to do the negation properly in Jinja #}
 
