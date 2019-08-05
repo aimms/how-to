@@ -41,7 +41,7 @@ API requirements
 -----------------------------------------------
 We need information about the authentication required and the request format. As indicated in `Google Maps Developer Guide: Required Parameters <https://developers.google.com/maps/documentation/distance-matrix/intro#required-parameters>`_, these are required parameters for the request:
 
-.. removed image (images/MandatoryParameters.PNG)
+.. removed image (images/MandatoryParameters.png)
 
 * ``origins`` — The starting point for calculating travel distance and time. You can supply one or more locations separated by the pipe character (|), in the form of an address, latitude/longitude coordinates, or a place ID.
 * ``destinations`` — One or more locations to use as the finishing point for calculating travel distance and time. The options for the destinations parameter are the same as for the origins parameter, described above.
@@ -49,7 +49,7 @@ We need information about the authentication required and the request format. As
 
 Specify these parameters by putting them at the end of the request URL: 
 
-.. removed image (images/RequestFormat.PNG)
+.. removed image (images/RequestFormat.png)
     
 As indicated in `Google Maps Developer Guide: Distance Matrix Requests <https://developers.google.com/maps/documentation/distance-matrix/intro#DistanceMatrixRequests>`_ the format should look like this:
 
@@ -106,7 +106,7 @@ Most of this code is common for every HTTP request sent using the HTTP Client Li
 
 ``GetDistances`` has the below locally declared identifiers. 
 
-.. removed, redundant image .. image:: images/RequestObjects.PNG
+.. removed, redundant image .. image:: images/RequestObjects.png
 
 .. code-block:: aimms
 
@@ -200,7 +200,7 @@ The ``origin_address`` and ``destination_address`` are elements that contain the
     
 Now that we know what we want from the XML file, we will need an XSD file. This XSD file provides the structure for an XML file. Read more about XML Mapping and creating XSD files in :doc:`../293/293-extracting-data-from-XML`.
 
-.. image:: images/initialmappingupdated.PNG
+.. image:: images/initialmappingupdated.png
    :align: center
 
 When you select an element, the mapping tool gives you access to a list of attributes.
@@ -217,7 +217,7 @@ Given the structure of the XML, the virtual attribute for ``row`` will also corr
 
 Here is an example schema for the XML:
 
-.. image:: images/SimplifiedXML.PNG
+.. image:: images/SimplifiedXML.png
     :align: center
 
 As we are creating a distance (time) matrix for the given set of locations, we will use a set ``sAddresses`` with two indices - ``iOrigin`` and ``iDestination``. Then, ``origin_address`` and ``destination_address`` will be string parameters indexed over this set. The elements in ``sAddresses`` will be numbers 1, 2, .. and the values of ``origin_address`` and ``destination_address`` will be the corresponding addresses. 
@@ -248,11 +248,11 @@ Declare the below identifiers in your project:
 
 
 
-.. .. image:: images/MappingObjects.PNG
+.. .. image:: images/MappingObjects.png
 
 Using the XML Mapping Tool, create the following mapping:
 
-.. image:: images/finalschema.PNG
+.. image:: images/finalschema.png
 
 * ``origin_address`` virtual attribute **binds to** ``iOrigin``
 * ``destination_address`` virtual attribute **binds to** ``iDestination``
@@ -274,7 +274,7 @@ Now, you just have to read the XML file data.
 
 You can use ``spOrigin`` or ``spDestination`` as the ``webui::ElementTextIdentifier`` for the set ``sAddresses`` to get the final tables as below. 
 
-.. image:: images/outputtable.PNG
+.. image:: images/outputtable.png
    :align: center
 
 Related Topics
