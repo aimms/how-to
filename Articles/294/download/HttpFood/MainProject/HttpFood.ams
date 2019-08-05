@@ -1,0 +1,36 @@
+## ams_version=1.0
+
+Model Main_HttpFood {
+    StringParameter SP_OutputFile;
+    Procedure HTTPrequest {
+        Body: {
+            SP_requestURL:="https://www.w3schools.com/xml/simple.xml";
+            SP_OutputFile:="Output.xml";
+            !structure requete
+            web::request_create(SP_requestId);
+            web::request_setURL(SP_requestId,SP_requestURL );
+            web::request_setMethod(SP_requestId, "GET");
+            !header
+            web::request_getHeaders(SP_requestId, SP_HttpHeaders);
+            SP_HttpHeaders['Accept'] := "application/xml";
+            web::request_setHeaders(SP_requestId, SP_HttpHeaders);
+            !output file
+            web::request_setResponseBody(SP_requestId, 'File', SP_OutputFile);
+            !invoke method
+            web::request_invoke(SP_requestId,P_responseCode);
+            
+            web::request_invoke(SP_requestId, P_responseCode);
+            if (P_responseCode <> 200) then
+                raise error "Web Request failed ";
+            endif;
+        }
+        DeclarationSection DeclarationRequest {
+            StringParameter SP_requestURL;
+            StringParameter SP_requestId;
+            Parameter P_responseCode;
+            StringParameter SP_HttpHeaders {
+                IndexDomain: web::httpHeader;
+            }
+        }
+    }
+}

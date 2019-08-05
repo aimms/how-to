@@ -32,7 +32,7 @@ If you want to manually trigger this loading of results, you need:
 Example Implementation
 ---------------------------
 
-The approach outlined above is implemented in the running example - the Flow Shop project. Download the completed file from :download:`5. Flow Shop - Load Results </Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Downloads/5. Flow Shop - Load Results.zip>`.
+The approach outlined above is implemented in the running example - the Flow Shop project. Download the completed file from :download:`5. Flow Shop - Load Results <downloads/5. Flow Shop - Load Results.zip>`.
 
 The workflow is as below:
 
@@ -120,7 +120,7 @@ The AIMMS project that does just this, can be downloaded from: :download:`5. Flo
 Summary
 -------
 
-By following the above steps, the end user can control when the casefile resulting from an execution on the server session is loaded onto the data session (or available to view by the end user).
+By following the above steps, the end user can control when the case file resulting from an execution on the server session is loaded onto the data session (or available to view by the end user).
 
 Further Opportunities
 ------------------------
@@ -134,5 +134,5 @@ By following the above steps, the end user can control when the case file result
 #. Once the solution is "good enough for now", the end user may want to abort the server session.  In :doc:`../34/34-interrupt-server-session` we will show how to interrupt the server session.
 
 
-.. include:: /includes/form.def
+
  

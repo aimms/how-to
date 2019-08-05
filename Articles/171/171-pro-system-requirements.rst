@@ -1,11 +1,13 @@
-How to Size Your AIMMS PRO Server Hardware
+Size AIMMS PRO Server Hardware
 ==================================================
 
 .. meta::
    :description: Estimating equipment size for AIMMS PRO Server
    :keywords: AIMMS PRO, server, memory, requirements
 
-`The AIMMS PRO documentation <https://manual.aimms.com/pro/system-requirements.html>`_ details the minimum system requirements for client-side and server-side machines used for AIMMS PRO. However, the memory and CPU requirements of the back-end server where all the solve procedures are executed is heavily dependent on the size of your AIMMS model(s). This article will help you determine the system requirements of the server-side machine.
+`The AIMMS PRO documentation <https://manual.aimms.com/pro/system-requirements.html>`_ details the minimum system requirements for client-side and server-side machines used for AIMMS PRO. However, the memory and CPU requirements of the back-end server where all the solve procedures are executed is heavily dependent on the size of your AIMMS model(s).
+
+This article will help you determine the system requirements of the server-side machine.
 
 .. note::
 
@@ -17,10 +19,10 @@ Key Components
 The key components to consider for a WebUI application are 
 
 #. Peak memory usage of the data session
-      * Can be monitored using the Windows Task Manager or the AIMMS Progress Window (the Memory Used metric)
+      * Can be monitored using the Windows Task Manager or the AIMMS Progress Window (the `Memory Used` metric)
 
 #. Peak memory usage of the solver session
-      * Can be monitored using AIMMS Progress Window (the Peak Mem metric)
+      * Can be monitored using AIMMS Progress Window (the `Peak Mem` metric)
 
 #. Average CPU usage of a data session
       * Can be monitored using the Windows Task Manager
@@ -68,3 +70,7 @@ Read more about the queueing on AIMMS PRO `here <https://manual.aimms.com/pro/co
    Discuss effect of parallel threading on solve runs and the additional memory / cores required to do this ? Perhaps in a separate article ?
 
    https://www-01.ibm.com/support/docview.wss?uid=swg21653811
+   
+
+
+

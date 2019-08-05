@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<References AIMMS_Version="4.52.5.1272 (x64)">
+	<MainProject Path="MainProject" />
+	<Library System="true" Path="AimmsPro" />
+	<Library System="true" Path="AimmsWebUI" />
+	<RepositoryLibrary UUID="CAD7F596-11F8-4AD9-88FC-24BE91C6F38B" Name="AimmsCDM" Version="1.11.0.4" />
+</References>

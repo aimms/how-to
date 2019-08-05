@@ -35,12 +35,16 @@ This means that the ``empty`` statement behaves differently for ``NormalSet`` an
 
 .. code-block:: aimms
 
- !This will remove all elements from the set NormalSet 
- empty NormalSet ; 
+    !This will remove all elements from the set NormalSet 
+    empty NormalSet ; 
+   
+    !This will clear the values of all variables in the subset ActiveVariables
+    !After the empty statement, the set itself will still contain elements!
+    empty ActiveVariables ;
+   
+    !This will actually remove all elements from the set ActiveVariables 
+    ActiveVariables := {} ; 
+ 
 
- !This will clear the values of all variables in the subset ActiveVariables
- !After the empty statement, the set itself will still contain elements!
- empty ActiveVariables ;
 
- !This will actually remove all elements from the set ActiveVariables 
- ActiveVariables := {} ; 
+

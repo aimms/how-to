@@ -1,11 +1,11 @@
 Create an External Function with Visual Studio
-===============================================
+================================================
 
 .. meta::
    :description: Example using Haversine to create an external function with Microsoft Visual Studio.
    :keywords: external, function, visual, studio, dll
 
-.. image:: images/icons8-puzzle-512.png
+.. .. image:: images/icons8-puzzle-512.png
 
 `Haversine code <https://rosettacode.org/wiki/Haversine_formula>`_ in various computer languages is publicly available to compute the distance between locations.
 In this article, we use it as an illustration of how to create an external function using `Microsoft Visual Studio <https://visualstudio.microsoft.com/>`_.
@@ -18,6 +18,8 @@ Here we just use it to create a ``.dll`` containing external functions for Haver
 
 
 .. image:: images/01NewProjectDLL.PNG
+   :align: center
+   :scale: 70
 
 After opening Visual Studio, in order:
 
@@ -34,22 +36,22 @@ After opening Visual Studio, in order:
 #. Make sure we can change further settings
 
     .. image:: images/02NewProjectDLL.PNG
+      :align: center
 
 #. We want a DLL
 
     .. image:: images/03NewProjectDLL.PNG
+      :align: center
 
 #. The default configuration is not correct
 
     .. image:: images/04NewProjectDLL.PNG
+      :align: center
 
-#. We want a new configuration
-
-    .. image:: images/05NewProjectDLL.PNG
-
-#. Namely x64
+#. We want a new configuration with 64-bit
 
     .. image:: images/06NewProjectDLL.PNG
+      :align: center
 
 #. You may want to turn off precompiled headers:
 
@@ -115,8 +117,8 @@ Building using Visual Studio
 
 #. Press Build
 
-Verifying that the exported functions are there
------------------------------------------------
+Verifying the build
+-------------------------------------------------
 
 We need to verify that the .dll's built are valid 32 bit and 64 bit .dll's. 
 To do this, we use a nifty free of charge utility named depends.exe.  You may download the x86 and x64 from this `website <http://www.dependencywalker.com/>`_.
@@ -125,6 +127,9 @@ Installing is just unzipping. Then start the executable and browse the .dll
 #. ``depends22_x86\depends.exe`` for the **32 bit** dll: ``<HaversineDLL>\release\HaversineDLL.dll``.  
 
     .. image:: images/32BitsDependsCheck.PNG
+      :align: center
+
+    ..
 
     * Missing functions in MSVCR120.dll may be reported, but those are covered when starting AIMMS. 
     
@@ -134,6 +139,8 @@ Installing is just unzipping. Then start the executable and browse the .dll
 #. ``depends22_x64\depends.exe`` for the **64 bit** dll: ``<HaversineDLL>\x64\release\HaversineDLL.dll``.  
 
     .. image:: images/64BitsDependsCheck.PNG
+      :align: center
+    ..
 
     * Missing functions in MSVCR120.dll may be reported, but those are covered when starting AIMMS. 
     
@@ -141,71 +148,63 @@ Installing is just unzipping. Then start the executable and browse the .dll
     
 
 Testing the DLL's
------------------
+-------------------
 
 Create a separate AIMMS project just for testing.
 
-Step 1: Copy the dll's into the AIMMS project:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#. Copy the dll's into the AIMMS project directory.
 
-#. Copy the ``<HaversineDLL>\release\HaversineDLL.dll`` to the AIMMS project subfolder ``external\Windows\x86``
+   * Copy the ``<HaversineDLL>\release\HaversineDLL.dll`` to the AIMMS project subfolder ``external\Windows\x86``
 
-#. Copy the ``<HaversineDLL>\x64\release\HaversineDLL.dll`` to the AIMMS project subfolder ``external\Windows\x64``
+   * Copy the ``<HaversineDLL>\x64\release\HaversineDLL.dll`` to the AIMMS project subfolder ``external\Windows\x64``
 
 
-Step 2: Declare the external function in AIMMS:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#. Declare the external function in AIMMS.
 
-.. code-block:: aimms
-    :linenos:
+   .. code-block:: aimms
+      :linenos:
 
-    ExternalFunction fnc_Haversine {
-        Arguments: (latFrom,lonFrom,latTo,lonTo);
-        DllName: "external\\Windows\\x64\\HaversineDLL.dll";
-        ReturnType: double;
-        BodyCall: Haversine(scalar: latFrom, scalar: lonFrom, scalar: latTo, scalar: lonTo);
-        Parameter latFrom {
-            Property: Input;
-        }
-        Parameter lonFrom {
-            Property: Input;
-        }
-        Parameter latTo {
-            Property: Input;
-        }
-        Parameter lonTo {
-            Property: Input;
-        }
-    }
+      ExternalFunction fnc_Haversine {
+         Arguments: (latFrom,lonFrom,latTo,lonTo);
+         DllName: "external\\Windows\\x64\\HaversineDLL.dll";
+         ReturnType: double;
+         BodyCall: Haversine(scalar: latFrom, scalar: lonFrom, scalar: latTo, scalar: lonTo);
+         Parameter latFrom {
+               Property: Input;
+         }
+         Parameter lonFrom {
+               Property: Input;
+         }
+         Parameter latTo {
+               Property: Input;
+         }
+         Parameter lonTo {
+               Property: Input;
+         }
+      }
 
-Step 3: Test the external function in AIMMS:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#. Test the external function in AIMMS.
 
-.. code-block:: aimms
-    :linenos:
+   .. code-block:: aimms
+      :linenos:
 
-    Procedure MainExecution {
-        Body: {
-            p_DistNashvilleLosAngeles := fnc_Haversine(36.12, -86.67, 33.94, -118.40);
-            
-            p_dist1(i_slocFrom, i_slocTo) := fnc_Haversine( p_Latitude(i_slocFrom), p_Longitude(i_slocFrom), p_Latitude(i_slocTo), p_Longitude(i_slocTo) );
-            
-            display p_DistNashvilleLosAngeles ;
-        }
-    }
+      Procedure MainExecution {
+         Body: {
+               p_DistNashvilleLosAngeles := fnc_Haversine(36.12, -86.67, 33.94, -118.40);
+               
+               p_dist1(i_slocFrom, i_slocTo) := fnc_Haversine( p_Latitude(i_slocFrom), p_Longitude(i_slocFrom), p_Latitude(i_slocTo), p_Longitude(i_slocTo) );
+               
+               display p_DistNashvilleLosAngeles ;
+         }
+      }
 
-The resulted Listing file:
+The resulted Listing file is as below with the expected value. 
             
 .. code-block:: none
 
     p_DistNashvilleLosAngeles := 2887.260 ; 
 
-which is the expected value!
-
-
 Good performance; my desktop requires less than 0.3 seconds to fill a 274 X 274 distance matrix.
-
-
 
 Downloads
 ------------
@@ -216,5 +215,5 @@ Downloads
 
 
 
-.. include:: /includes/form.def
+
 

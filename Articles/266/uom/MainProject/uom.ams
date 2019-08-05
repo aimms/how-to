@@ -1,0 +1,72 @@
+## ams_version=1.0
+
+Model Main_uom {
+    Convention: ep_GuiConv;
+    Set s_Nodes {
+        Index: i, j;
+        InitialData: data {London ,  Shanghai,  Paris,  NewYork};
+    }
+    Quantity SI_Length {
+        BaseUnit: km;
+        Conversions: {
+            mile->km : #-># * 1.609344,
+            m   ->km : #-># / 1000
+        }
+        Comment: "Expresses the value of a distance.";
+    }
+    Parameter p_Distance {
+        IndexDomain: (i,j);
+        Unit: mile;
+        InitialData: {
+            data table
+                     London     Paris  NewYork
+                 !  -------   -------  -------
+            Paris       213
+            NewYork    3465      3631
+            Shanghai   5721      5774     7377
+        }
+        Comment: {
+            "Assumed symmetric; only lower half needed"
+        }
+    }
+    Convention cnv_Imperial {
+        PerQuantity: SI_Length : mile;
+    }
+    Convention cnv_Metric {
+        PerQuantity: SI_Length : km;
+    }
+    ElementParameter ep_GuiConv {
+        Range: AllConventions;
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

@@ -1,7 +1,10 @@
-Starting AIMMS Job via the AIMMS PRO API using JAVA
+Start a Job via PRO API using Java
 ===================================================
 
 
+.. meta::
+    :description: Starting an AIMMS job via the AIMMS PRO API using C#.
+    :keywords: java, pro api
 
 Prerequisites
 -------------
@@ -40,7 +43,7 @@ Running the example
         
         #. Select the latest version without subversion, here ``11``.
         
-        #. Ok the dialog.  The message ``Project SDK is not defined.`` should disappear.
+        #. click ``Ok`` in the dialog.  The message ``Project SDK is not defined.`` should disappear.
 
         .. image:: images/ProjectSDKIsNotDefinedRepairing.PNG
 
@@ -49,13 +52,13 @@ Running the example
     
         .. images/AdaptingConnectionDetails.png
     
-        * Line 30, DEFAULT_ENDPOINT: this might also be "wss://your-cloud-name.cloud.aimms.com" 
+        * Line 30, DEFAULT_ENDPOINT: this might also be ``wss://your-cloud-name.cloud.aimms.com`` 
         
-            * when connection is encrypted, start with WSS (cloud systems are always encrypted).
+            * when connection is encrypted, start with ``wss`` (cloud systems are always encrypted).
             
-            * when connection is not encrypted, start with WS
+            * when connection is not encrypted, start with ``ws``
         
-        * Lines 32-34, DEFAULT_ENVIRONMENT, DEFAULT_USERNAME, and DEFAULT_PASSWORD should've been supplied by your AIMMS PRO administrator.
+        * Lines 32-34, DEFAULT_ENVIRONMENT, DEFAULT_USERNAME, and DEFAULT_PASSWORD should have been supplied by your AIMMS PRO administrator.
         
         * Lines 38-39, DEFAULT_APPLICATION_NAME, DEFAULT_APPLICATION_VERSION, the name and version of the app as it is published.
 
@@ -162,11 +165,11 @@ Output
         
         * We first execute ``BasicScheduleJob`` which starts an AIMMS job after a delay of 60 seconds.  Note the absence of tracing statements in this procedure, so there isn't anything in our log.
         
-        * Lines 6-7 are about ``ListAllJobs``, there is currently one job  waiting, the job we've just started (because of it's initial delay).
+        * Lines 6-7 are about ``ListAllJobs``, there is currently one job  waiting, the job we've just started (because of its initial delay).
         
-        * Lines 8-14 are about ``BasicScheduleJobAndCheck``; we see that the status this jobs moves thru the states QUEUED, INITIALIZING, and FINISHED.
+        * Lines 8-14 are about ``BasicScheduleJobAndCheck``; we see that the status this jobs moves through the states QUEUED, INITIALIZING, and FINISHED.
         
-        * Lines 15-31 are about ScheduleJobAndCheckResult, the procedure ``notifyClientWithResults`` sends two times a result back from AIMMS.
+        * Lines 15-31 are about ``ScheduleJobAndCheckResult``, the procedure ``notifyClientWithResults`` sends two times a result back from AIMMS.
         
         * Lines 33-36 show that the data for an AIMMS Parameter is prepared/passed to AIMMS.
         
@@ -177,7 +180,12 @@ Output
         * Lines 56-84 show how this abnormal termination is handled step by step.
     
         
-.. include:: /includes/form.def
-    
+
+
+Further reading
+-----------------
+
+See also the `manual <https://manual.aimms.com/pro/api.html>`_
+
 
    

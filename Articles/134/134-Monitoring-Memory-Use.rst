@@ -1,4 +1,4 @@
-﻿Monitoring Memory Usage and Leaks
+﻿Monitor Memory Usage and Leaks
 =====================================
 
 .. meta::
@@ -39,6 +39,6 @@ Related Topics
 
 * :doc:`../170/170-memory-in-use`
 
-.. include:: /includes/form.def
+
 
 

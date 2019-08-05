@@ -14,6 +14,7 @@ This article explains the required steps to keep the AIMMS WebUI interactive whi
 
 
 .. image:: images/Solve.gif
+   :align: center
 
 The Flowshop Problem As Running Example
 ---------------------------------------
@@ -26,31 +27,32 @@ This is a very good illustrative example for this case because the solving time 
 Keep WebUI Session Active
 -------------------------
 
-We can keep the WebUI session active, or in other words - remove the veil by simply modifying the waitForCompletion argument in the pro::DelegateToServer statement. It can either be removed or the value set to 0. The code will look something like the following;
+We can keep the WebUI session active, or in other words - remove the veil by simply modifying the ``waitForCompletion`` argument in the ``pro::DelegateToServer`` statement. It can either be removed or the value set to 0. The code will look something like the following;
 
-	.. code-block:: aimms
+.. code-block:: aimms
 
-		if pro::GetPROEndPoint() then
-			if pro::DelegateToServer(  
-				waitForCompletion  :  0,
-				completionCallback :  'pro::session::LoadResultsCallBack' )  
-			then return 1;
-			endif ;
-		endif ;
+   if pro::GetPROEndPoint() then
+      if pro::DelegateToServer(  
+         waitForCompletion  :  0,
+         completionCallback :  'pro::session::LoadResultsCallBack' )  
+      then return 1;
+      endif ;
+   endif ;
 
-This modification in the waitForCompletion argument reduces the inactive time of the browser window during a solve session drastically. There still could be inactive periods, especially during the initialization of the background procedures. The previously illustrated example will now look as follows. 
+This modification in the ``waitForCompletion`` argument reduces the inactive time of the browser window during a solve session drastically. There still could be inactive periods, especially during the initialization of the background procedures. The previously illustrated example will now look as follows. 
 
 .. image:: images/NoVeil.gif
+   :align: center
 
 The example AIMMS project can be downloaded from :download:`Flow Shop - No Veil <downloads/4. Flow Shop - No Veil.zip>`
 
 Summary
--------
+----------
 
-Perhaps a lot to do about almost nothing; but by simply changing the argument waitForCompletion to 0, or removing it, from the call to ``pro::DelegateToServer``, the data session no longer waits for the server session to complete, thus allowing the end user to browse and edit the data while the server session is executing a long running procedure.
+Perhaps a lot to do about almost nothing; but by simply changing the argument ``waitForCompletion`` to 0, or removing it, from the call to ``pro::DelegateToServer``, the data session no longer waits for the server session to complete, thus allowing the end user to browse and edit the data while the server session is executing a long running procedure.
 
 Next reading
-------------
+---------------
 
 **Oops, I see a problem.**  The results are pushed back without any notification – suddenly data is changed on screen.  How can we give control back to the end-users, such that they can determine themselves when the results are shown? See :doc:`../40/40-data-server-load-results`
 
@@ -58,7 +60,7 @@ Next reading
 
 
 
-.. include:: /includes/form.def
+
 
 
 

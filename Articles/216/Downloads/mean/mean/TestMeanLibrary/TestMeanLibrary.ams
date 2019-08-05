@@ -8,7 +8,7 @@ LibraryModule TestMeanLibrary {
             S := data { a, b, c };
             P := data { a: 3, b : 5, c: 13 };
             r := ml::SelfDefinedMean(P(i));
-            aimmsunit::AssertTrue("Rocket science; the average of 3, 5, and 13 is 7. Really.", r=7);
+            aimmsunit::AssertTrue("The average of 3, 5, and 13 is 7.", r=7);
         }
         Comment: "first test: Mean( 3, 5, 13 ) = 7";
         aimmsunit::TestSuite: MeanSuite;

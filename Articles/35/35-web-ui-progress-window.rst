@@ -15,7 +15,7 @@ Approach
 
 The approach we take here involves passing information through three levels of execution.
 
-.. image:: /Resources/AIMMSPRO/Deploy_DataServerComm_3_RemoveVeil/Images/ThreeLevelsOfExecutionTimeCB.png
+.. image:: images/ThreeLevelsOfExecutionTimeCB.png
 
 #. The solver execution on the server session. 
     The solver passes on status information periodically, as part of the time callback mechanism.
@@ -33,7 +33,7 @@ Implementation
 
 The AIMMS project for the current running example with the steps implemented can be downloaded from: :download:`6. Flow Shop - Progress Communication <downloads/6. Flow Shop - Progress Communication.zip>`.
 
-The Gap curve linechart widget in the below image is updated every second with the gap between the bestbound and incumbent objective value of the mathematical program in the project. 
+The Gap curve linechart widget in the below image is updated every second with the gap between the best bound and incumbent objective value of the mathematical program in the project. 
 
 .. image:: images/BB06_WebUI_screen.PNG 
 
@@ -71,7 +71,7 @@ In our example, we want to display only the best bound and incumbent objective v
     
     ``pro::PROMFLAG_LIVE``
      
-    The message is not stored in the database. As such it more efficient and lighter than ordinary messages. When an AIMMS Session connects to a queue after a live message is invoked, it will not see that live message; which is desired for progress and status updates.  
+    The message is not stored in the database. As such, it is more efficient and lighter than ordinary messages. When an AIMMS Session connects to a queue after a live message is invoked, it will not see that live message; which is desired for progress and status updates.  
     
     ``pro::PROMFLAG_PRIORITY``
     
@@ -82,7 +82,7 @@ Step 2. From server session (level 2) to data session (level 3)
 
 As we are only passing small amounts of data and executing some simple arithmetic, the procedure ``UpdateGapToClient`` can be executed on the data session i.e., on the end user's browser. To do this, we use the call ``pro::DelegateToClient``. This is very similar to the earlier used call, ``pro::DelegateToServer`` and the difference is evident as their names suggest - in ``pro::DelegateToClient``, we are delegating a procedure to the client (or data) session and in the other one, we are delegating a procedure to the server session.
 
-This procedure contains two arguments as input parameters, bb and icb which take on the values of the bestbound and Incumbent suffices specified in the previous step.
+This procedure contains two arguments as input parameters, ``bb`` and ``icb`` which take on the values of the best bound and Incumbent suffices specified in the previous step.
 
     .. code-block:: aimms
 
@@ -104,7 +104,7 @@ This procedure contains two arguments as input parameters, bb and icb which take
             }
         }
 
-In our running example, the body of this procedure contains other data manipulation statements to update a set of observations and calculate the gap percentage between the bestbound and incumbent objective value. These statements are not discussed in this article.
+In our running example, the body of this procedure contains other data manipulation statements to update a set of observations and calculate the gap percentage between the best bound and incumbent objective value. These statements are not discussed in this article.
 
 Further reading
 ---------------
@@ -120,5 +120,5 @@ You can read more about the ``pro::PROMFLAG_LIVE`` and other flag arguments in a
 
 Now that end users know the state of the solution process, they might want to interrupt it when they see that further improvements are not worth waiting for. The article  :doc:`../34/34-interrupt-server-session` shows you how to do it.
 
-.. include:: /includes/form.def
+
  

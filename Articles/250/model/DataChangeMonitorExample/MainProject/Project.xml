@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Project AimmsVersion="4.66.2.6 unicode x64" ProjectUUID="8EDD9872-F8B0-4AF1-88D3-6F9D6F10D18F">
+	<ModelFileName>DataChangeMonitorExample.ams</ModelFileName>
+	<AutoSaveAndBackup>
+		<DataBackup AtRegularInterval="true" EveryNMinutes="15" NumBackupsDatedToday="3" NumDaysBeforeToday="3" />
+	</AutoSaveAndBackup>
+</Project>

@@ -1,23 +1,16 @@
-﻿Link to Excel Files
-=======================
+﻿:orphan:
+
+Exchanging Data with Excel Files
+======================================
 
 .. meta::
    :description: How to link spreadsheet data to an AIMMS project with the AIMMS Excel Library.
    :keywords: excel, library, axll
 
-.. note::
 
-    This article was originally posted to the AIMMS Tech Blog.
- 
-.. sidebar:: Connecting to EXCEL
+This is a follow up to :doc:`../85/85-using-axll-library`. The 'AIMMS Excel Library (AXLL)' lets you exchange data between AIMMS and Excel files (.xls and .xlsx) without having Excel installed on that computer. This is very useful when deploying applications using AIMMS PRO as it is typically installed on a terminal server where a copy of Microsoft Office is not available. 
 
-    .. image:: images/782px-Microsoft_Excel_2013_logo.svg.png
-
-The ``AimmsXLLibrary`` was introduced in AIMMS 4.20. The new library can communicate with Excel files in server environments, where Excel is not installed. For instance, while running AIMMS through a WebUI on PRO or on Linux. Excel is usually not installed in such environments. However, this isn't a problem. The AimmsXLLibrary doesn't require Excel to be installed in order to read from or write to an Excel (.xls/.xlsx) file. By using this library, you can deploy your AIMMS project to more platforms with less restrictions.
-
-In order to use the library, you first need to add the system library 'AIMMSXLLibrary' to your model. Then, you can use the functions, which start with prefix ``axll`` (Aimms eXceL Library), provided in the library. This blog post illustrates how these functions work. Let's take a look.
-
-.. image:: images/XLLibrary.png
+In this article, we show you which functions available in ``axll::`` namespace to use depending on the format of the data in your Excel file. 
 
 Reading your Excel File in AIMMS
 ---------------------------------
@@ -127,7 +120,7 @@ With the data I just imported from Excel, I can do further analyses. For example
 
 Similarly, you can use the ``AIMMSXLLibrary`` to write to Excel. You can see the comments in the library for further reference.
 
-.. include:: /includes/form.def
+
 
 
 

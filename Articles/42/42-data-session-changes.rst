@@ -59,7 +59,7 @@ The AIMMS project that does just this, can be downloaded from: :download:`9. Flo
 Summary
 -------
 
-Like small data updates to the client session from the server session are facilitated by pro::DelegateToClient, in a similar way small data changes from the client session to the server session are facilitated by pro::DelegateToServer, provided:
+Like small data updates to the client session from the server session are facilitated by ``pro::DelegateToClient``, in a similar way small data changes from the client session to the server session are facilitated by pro::DelegateToServer, provided:
 
 #. The queue to which the server session listens is specified in the call
 
@@ -72,5 +72,5 @@ Further reading
 Information about `AIMMS PRO <https://documentation.aimms.com/pro/index.html>`_
 
 
-.. include:: /includes/form.def
+
  

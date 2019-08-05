@@ -37,7 +37,7 @@ This mechanism is illustrated in the code snippet below. Here, we interrupt only
             }
         }
 
-Now, you can link this procedure to a button in your WebUI application to be able to interrupt a solve procedure running in the backround.
+Now, you can link this procedure to a button in your WebUI application to be able to interrupt a solve procedure running in the background.
 
 The example AIMMS project with the above demonstrated procedure implemented can be downloaded from :download:`8. Flow Shop - Interrupt <downloads/8. Flow Shop - Interrupt.zip>`.
 
@@ -47,4 +47,4 @@ Further reading
 An interruption is only one type of communication to a server session.  A generic way to communicate data changes from the data session to the server session is provided in :doc:`../42/42-data-session-changes`.
 
 
-.. include:: /includes/form.def
+

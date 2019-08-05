@@ -1,0 +1,86 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "XMLData",
+          "layoutInfo": {
+            "width": "7",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/XMLData": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "description",
+          "Price",
+          "calories"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "M"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "title": {
+      "literal": "Data read from XML file"
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "Price"
+          },
+          "width": 11.224489795918366
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "calories"
+          },
+          "width": 13.516303072953317
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "M",
+          "width": 32.53518495453979
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "description"
+          },
+          "width": 104.34288219186615
+        }
+      ]
+    }
+  }
+}

@@ -2,7 +2,7 @@ Write Selected Database Tables
 ==============================
 
 .. meta::
-   :description: Use existing AIMMS function to selectivly write to database tables whose data has changed.
+   :description: Use existing AIMMS function to selectively write to database tables whose data has changed.
    :keywords: database table, odbc, runtime library, model editing, AIMMS Language, execution efficiency
 
 
@@ -53,15 +53,15 @@ Here is an example with two database tables. The mechanism works the same for an
             searchAttrSet  ! (input) subset of AllAttributeNames
             recursive )    ! (optional) numerical expression
 
-      * Line 2: the identifiers to be searched; here, a singleton set containing just the database table to be investigated
+   * Line 2: the identifiers to be searched; here, a singleton set containing just the database table to be investigated
 
-      * Line 3: the attributes to be searched; here, we search all attributes
+   * Line 3: the attributes to be searched; here, we search all attributes
 
-      * Line 4: We will do a recursive search, because we also want to write defined parameters when the data of one of the constituents of its definition is changed.
+   * Line 4: We will do a recursive search, because we also want to write defined parameters when the data of one of the constituents of its definition is changed.
 
-* Writing to table db_ab saves the data of i_a, i_b, p_AB1, p_AB2. In other words, when the data of i_a, i_b, p_AB1, or p_AB2 is changed, we want to write to table db_ab.
+* Writing to table ``db_ab`` saves the data of ``i_a, i_b, p_AB1, p_AB2``. In other words, when the data of ``i_a, i_b, p_AB1, or p_AB2`` is changed, we want to write to table ``db_ab``.
 
-* Writing to table db_bc saves the data of i_b, i_c, p_BC1. Again, when the data of i_b, i_c, p_BC1 is changed, we want to write to table db_bc.
+* Writing to table ``db_bc`` saves the data of ``i_b, i_c, p_BC1``. Again, when the data of ``i_b, i_c, p_BC1`` is changed, we want to write to table ``db_bc``.
 
 This was the original procedure to write the data:
 
@@ -76,6 +76,21 @@ This was the original procedure to write the data:
    }
 
 However, we want to change it to something like this (in pseudo code):
+
+.. code-block:: none
+   :linenos:
+
+    Procedure pr_TargetDatabaseWriteProcedure {
+        Body: {
+            if a set or parameter referenced in db_ab is changed then
+                write to table db_ab;
+            endif ;
+
+            if a set or parameter referenced in db_bc is changed then
+                write to table db_bc;
+            endif ;
+        }
+    }
 
 .. sidebar:: DatachangeMonitors
 
@@ -98,21 +113,6 @@ However, we want to change it to something like this (in pseudo code):
     * ``DataChangeMonitorReset`` - resets a datachange monitor and links it to the same or another reference set
 
     * ``DataChangeMonitorDelete`` - allows for cleanup
-
-.. code-block:: none
-   :linenos:
-
-    Procedure pr_TargetDatabaseWriteProcedure {
-        Body: {
-            if a set or parameter referenced in db_ab is changed then
-                write to table db_ab;
-            endif ;
-
-            if a set or parameter referenced in db_bc is changed then
-                write to table db_bc;
-            endif ;
-        }
-    }
 
 To avoid coding errors and maintenance issues from doing this manually, AIMMS has the following facilities:
 
@@ -315,7 +315,7 @@ Related Topics
 
 
 
-.. include:: /includes/form.def
+
 
 
 

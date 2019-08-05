@@ -5,17 +5,14 @@
    :description: How to improve efficiency of executing procedures in AIMMS projects.
    :keywords: execute, solve, long, time, duration
 
-      .. note::
-
-	This article was originally posted to the AIMMS Tech Blog.
 
 The time spent by AIMMS applications can be divided into AIMMS execution time ( including evaluation parameters with definition, executing procedures, generate matrix for solvers, etc), the time spent by solvers, and the I/O time.  Here are some coding tricks that help you improve AIMMS execution time.
 
 
-1. Avoid 'For' Loop
--------------------
+1. Avoid ``for`` Loop
+---------------------
 
-Use bulk execution of assignment as much as possible. If a 'for' loop is necessary, try to minimize calculation inside the loop. For example,
+Use bulk execution of assignment as much as possible. If a ``for`` loop is necessary, try to minimize calculation inside the loop. For example,
 
 .. code-block:: aimms
 
@@ -32,7 +29,7 @@ can be written as the following bulk statement
 2. Pay attention to index order
 --------------------------------
 
-When declaring a parameter with multiple indices, usually index with small cardinality goes first and running index goes last. For example, in the following statement, k is used as running index:
+When declaring a parameter with multiple indices, usually index with small cardinality goes first and running index goes last. For example, in the following statement, ``k`` is used as running index:
 
 .. code-block:: aimms
 
@@ -89,15 +86,16 @@ The problem can be solved by introducing a new parameter SumCondition(i,j,k) an
     sum[(t,sc,i,j,k) | SumCondition(i,j,k), …];
 
 These are some general rules. 
-In practice, lots of the performance improvements are done on by trials and errors.  
+
+In practice, lots of the performance improvements are done on by trial and error.  
 And AIMMS diagnostic tools, such as Debugger, Profiler, and Identifier Cardinalities Viewer can help with identifying the performance bottleneck. 
 You can refer to  `AIMMS The Users's Guide <https://documentation.aimms.com/_downloads/AIMMS_user.pdf>`_    for how to use them. 
-And more insights of AIMMS execution engine can be found in chapters "The Aimms Sparse Execution Engine" and "Execution Efficiency Cookbook" of `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_   .
+And more insights of AIMMS execution engine can be found in chapters "The AIMMS Sparse Execution Engine" and "Execution Efficiency Cookbook" of `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_   .
 
 
 
 
-.. include:: /includes/form.def
+
 
 
 

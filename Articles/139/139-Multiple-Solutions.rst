@@ -5,9 +5,6 @@
    :description: How to produce and retrieve multiple solutions in AIMMS.
    :keywords: multiple, solution, solve
 
-.. note::
-
-	This article was originally posted to the AIMMS Tech Blog.
 
 Some of the solvers in AIMMS, including the CP Optimizer solver for Constraint Programming problems, support not only returning a single (optimal) solution, but also a pool of feasible solutions.
 
@@ -20,7 +17,7 @@ In this post we will show how to instruct the solver to create additional soluti
 Solution storage limit
 ---------------------------
 
-In the case CP Optimizer, you can influence the number of solutions that are created (and stored in the GMP solution repository) via the option ``solution_storage_limit``, which is an option specific to CP Optimizer. Find it under *Tools -> Project Options -> Specific solvers -> CPoptimizer -> General*.
+In the case CP Optimizer, you can influence the number of solutions that are created (and stored in the GMP solution repository) via the option ``solution_storage_limit``, which is an option specific to CP Optimizer. Find it under *Tools > Project Options > Specific solvers > CPoptimizer > General*.
 
 By setting this option to a very large value, you can instruct the solver to store all solutions to the problem in the GMP solution repository. You can either change this setting explicitly in the project settings, or you can use the block statement to temporary use alternative project settings.  For example:
 
@@ -31,7 +28,7 @@ By setting this option to a very large value, you can instruct the solver to sto
       solve NQueensPlan;
    endblock;
 
-After the solve is finished, you can use the AIMMS function ``GMP::Solution::SendToModel`` to transfer the solution values from the GMP solution repository to the variables in your project. This approach does require that for every variable X in your problem, you introduce a new parameter X2 that has the same index domain as X with an index added for indexing the solutions. In our example, this parameter is ``XValueInSolution``.
+After the solve is finished, you can use the AIMMS function ``GMP::Solution::SendToModel`` to transfer the solution values from the GMP solution repository to the variables in your project. This approach does require that for every variable ``X`` in your problem, you introduce a new parameter ``X2`` that has the same index domain as ``X`` with an index added for indexing the solutions. In our example, this parameter is ``XValueInSolution``.
 
 .. code-block:: aimms
 
@@ -64,8 +61,12 @@ Other solvers that directly support working with a solution pool are Baron and C
 
 * :doc:`/Articles/177/177-alternative-mip-solutions-with-cplex` 
 
-Note that with solvers that don't directly support a solution pool but do support the Incumbent callback, you can manually create the solution repository by storing each solution found by using the Incumbent callback.
-
-.. include:: /includes/form.def
+Note that with solvers that don't directly support a solution pool, but do support the Incumbent callback, you can manually create the solution repository by storing each solution found by using the Incumbent callback.
 
 
+
+
+.. below are spelling exceptions only for this document
+
+.. spelling:
+   Hakan

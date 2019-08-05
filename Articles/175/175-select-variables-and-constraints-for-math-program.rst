@@ -1,9 +1,9 @@
+Select Constraints and Variables for a Math Program Declaration
+=======================================================================
+
 .. meta::
    :description: How to select variables and constraints for a mathematical program.
    :keywords: variables, constraints, mathematical program, AllConstraints, AllVariables, goal, programming, sequential
-
-Selecting Constraints and Variables for a Math Program Declaration
-=======================================================================
 
 A sample declaration of a math program is shown below. 
 
@@ -74,4 +74,4 @@ You can either manually select the constraints and variables to be included in t
       Type: Automatic;
    }
 
-.. include:: /includes/form.def
+

@@ -1,0 +1,238 @@
+## ams_version=1.0
+
+Model Main_DietProblem {
+    Comment: {
+        "Keywords:
+        Diet problem, Blending problem, Unit-valued Parameter, Unit Parameter, Quantity, Unit conversion."
+    }
+    Section Model_Section {
+        Set FoodTypes {
+            Index: f;
+            Definition: {
+                data 
+                    { 'Big Mac'             , 'Quarter Pounder'     , 'French Fries'        , Salad                 , 'Lowfat Milk'         ,
+                      'Coca Cola'           , 'Big Mac Menu'        , 'Quarter Pounder Menu', 'Vegetable Burger'    }
+            }
+        }
+        Parameter BP_selectedproducts {
+            IndexDomain: i;
+            Range: binary;
+        }
+        Variable Selectedproducts {
+            IndexDomain: i;
+            Range: binary;
+        }
+        Set Identifierss {
+            Index: i;
+            Definition: data { 'Nutritient Value', 'Servings', 'Weight (g)', 'PricePetUnit' };
+        }
+        Set Nutrients {
+            Index: n;
+        }
+        ElementParameter ep_Calories {
+            Range: Nutrients;
+            Definition: StringToElement(Nutrients,"Calories");
+        }
+        Set BoundedNutrients {
+            SubsetOf: Nutrients;
+            Index: bn;
+            Definition: Nutrients - ep_Calories;
+        }
+        Parameter NutrientValuePerUnit {
+            IndexDomain: (f,n);
+            Unit: UnitNutrients(n);
+        }
+        Parameter MaximumNumberOfServings {
+            IndexDomain: (f);
+        }
+        Parameter MaximumAllowanceOfNutrient {
+            IndexDomain: (n);
+            Text: "Maximum Allowed";
+            Unit: UnitNutrients(n);
+        }
+        Parameter MinimumRequirementOfNutrient {
+            IndexDomain: (n);
+            Text: "Minimum Requirement";
+            Unit: UnitNutrients(n);
+        }
+        Parameter PricePerUnit {
+            IndexDomain: (f);
+            Unit: Hfl;
+        }
+        Parameter WeightOfFoodType {
+            IndexDomain: (f);
+            Unit: g;
+        }
+        Variable TotalWeightOptimalDiet {
+            Unit: g;
+            Definition: Sum[ f, WeightOfFoodType(f) * NumberOfUnitsInMenu(f)];
+        }
+        Variable TotalValueOfNutrientsInOptimalDiet {
+            IndexDomain: (n);
+            Unit: UnitNutrients(n);
+            Definition: Sum[ f, NutrientValuePerUnit(f,n) * NumberOfUnitsInMenu(f)];
+        }
+        Variable NumberOfUnitsInMenu {
+            IndexDomain: (f);
+            Range: {
+                {0..MaximumNumberOfServings(f)}
+            }
+        }
+        Variable TotalCost {
+            Unit: Hfl;
+            Definition: {
+                Sum[ f, PricePerUnit(f) * NumberOfUnitsInMenu(f)];
+            }
+        }
+        Variable TotalCalories {
+            Range: free;
+            Unit: UnitNutrients(ep_Calories);
+            Definition: Sum[ f, NutrientValuePerUnit(f,'Calories') * NumberOfUnitsInMenu(f)];
+        }
+        Constraint AllowanceConstraint {
+            IndexDomain: bn | MaximumAllowanceOfNutrient(bn);
+            Unit: UnitNutrients(bn);
+            Definition: {
+                Sum[ f, NutrientValuePerUnit(f,bn) * NumberOfUnitsInMenu(f)] <= MaximumAllowanceOfNutrient(bn);
+            }
+        }
+        Constraint RequirementConstraint {
+            IndexDomain: bn | MinimumRequirementOfNutrient(bn);
+            Unit: UnitNutrients(bn);
+            Definition: {
+                Sum[ f, NutrientValuePerUnit(f,bn) * NumberOfUnitsInMenu(f)] >= MinimumRequirementOfNutrient(bn);
+            }
+        }
+        MathematicalProgram DietProblem {
+            Objective: TotalCost;
+            Direction: minimize;
+            Constraints: AllConstraints;
+            Variables: AllVariables;
+            Type: MIP;
+        }
+        MathematicalProgram MinCaloDietProblem {
+            Objective: TotalCalories;
+            Direction: minimize;
+            Constraints: AllConstraints;
+            Variables: AllVariables;
+            Type: MIP;
+        }
+        ElementParameter ACase {
+            Range: AllCases;
+        }
+    }
+    Section Quantities_and_Units_Section {
+        DeclarationSection Quantities_and_Units {
+            Quantity SI_Mass {
+                BaseUnit: g;
+                Conversions: {
+                    kg -> g : # -> # * 1000,
+                    oz -> g : # -> # * 283.4952
+                }
+                Comment: "Expresses the value for the amount of matter.";
+            }
+            Quantity SI_Energy {
+                BaseUnit: kcal;
+                Conversions: {
+                    J  -> kcal : # -> # * 0.0002388458966,
+                    kJ -> kcal : # -> # * 0.2388458966
+                }
+                Comment: "Expresses the value for the capacity to do work.";
+            }
+            Quantity Currency {
+                BaseUnit: Euro;
+                Conversions: {
+                    US$ -> Euro : # -> # * 0.9708737863,
+                    Hfl -> Euro : # -> # * 0.4368932039
+                }
+            }
+            UnitParameter UnitNutrients {
+                IndexDomain: (n);
+            }
+            StringParameter DefaultUnits {
+                IndexDomain: n;
+            }
+        }
+    }
+    Section GUI_Section {
+        Set PossibleUnits {
+            Definition: data { g, kg, oz, j, kj, kcal };
+        }
+        Set PossibleUnitsByNutrients {
+            IndexDomain: (n);
+            SubsetOf: PossibleUnits;
+            Definition: {
+                data
+                    { Calories      : { j   , kj  , kcal } ,
+                      Protein       : { g   , kg  , oz   } ,
+                      Fat           : { g   , kg  , oz   } ,
+                      Carbohydrates : { g   , kg  , oz   } } ;
+            }
+        }
+        Assertion CheckUnit {
+            IndexDomain: n;
+            Definition: StringToElement(PossibleUnits,UnitNutrients(n),0) in PossibleUnitsByNutrients(n) OR not UnitNutrients(n);
+            Action: {
+                DialogMessage(FormatString("This unit is not allowed for this value (%e)", n),"Warning");
+                empty UnitNutrients(n)
+            }
+        }
+    }
+    Section MultiObjSection {
+        ElementParameter ep_GMP {
+            Range: AllGeneratedMathematicalPrograms;
+        }
+        Parameter p_retcode;
+        Procedure SolveMultiObj {
+            Body: {
+                ep_GMP := gmp::Instance::Generate( DietProblem );
+                
+                p_retcode := GMP::Column::SetAsMultiObjective(
+                	GMP      :  ep_GMP, 
+                	column   :  TotalCost, 
+                	priority :  2, 
+                	weight   :  1, 
+                	abstol   :  0, 
+                	reltol   :  0.1);
+                if not p_retcode then raise error "Unable to set TotalCost as an objective" ; endif ;
+                
+                p_retcode := GMP::Column::SetAsMultiObjective(
+                	GMP      :  ep_GMP, 
+                	column   :  TotalCalories, 
+                	priority :  1, 
+                	weight   :  1, 
+                	abstol   :  0, 
+                	reltol   :  0.0);
+                if not p_retcode then raise error "Unable to set TotalCalories as an objective" ; endif ;
+                
+                GMP::Instance::Solve( ep_GMP );
+                
+                display "After SolveMultiObj", TotalCost, TotalCalories, NumberOfUnitsInMenu;
+            }
+        }
+    }
+    Procedure MainInitialization {
+        Body: {
+            Empty NumberOfUnitsInMenu, TotalCost, TotalValueOfNutrientsInOptimalDiet, TotalWeightOptimalDiet;
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            Solve DietProblem;
+            
+            display "After MainExecution", TotalCost, TotalCalories, NumberOfUnitsInMenu;
+        }
+    }
+    Procedure SolveMinCalo {
+        Body: {
+            solve MinCaloDietProblem ;
+            
+            display "After SolveMinCalo", TotalCost, TotalCalories, NumberOfUnitsInMenu;
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+    }
+}

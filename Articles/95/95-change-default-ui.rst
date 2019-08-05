@@ -9,7 +9,7 @@
 
 .. BEGIN CONTENT
 
-How to Enable the Page Manager in Recent Versions of AIMMS 
+Enable the Page Manager
 ================================================================
 
 .. meta::
@@ -52,4 +52,3 @@ Save your project to save this setting. You can now open *Page Manager* with the
 
 .. END CONTENT
 
-.. include:: /includes/form.def

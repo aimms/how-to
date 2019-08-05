@@ -82,7 +82,7 @@ After the standard file selection dialog of Windows where to save a file, you'll
 
 .. image::  images/EncryptiongAimmspack.PNG 
 
-enabling you to select a non-default encryption.  OK'ing this dialog, you'll get a next dialog to select the contents of the ``.aimmspack``:
+enabling you to select a non-default encryption.  By clicking OK, you'll get a next dialog to select the contents of the ``.aimmspack``:
 
 .. image::  images/FileSelectionAimmspack.PNG
 
@@ -144,4 +144,3 @@ Oops, I see several problems that we can work on.
 #. I want to remove the veil that drops down when a procedure of the data session runs for more than a few seconds. See topic :doc:`../19/19-remove-veil`
 
 
-.. include:: /includes/form.def

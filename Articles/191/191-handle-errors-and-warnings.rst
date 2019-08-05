@@ -5,6 +5,10 @@ Handle errors and warnings
    :description: Error handling provides for a way of making your applications robust.
    :keywords: Error handling, throwing exceptions, guarded code, happy flow
 
+.. note::
+
+    This article was originally posted to the AIMMS Tech Blog.
+
 This article explains how to add custom warning messages for certain errors.
 
 When you send your AIMMS project into the world, errors will inevitably pop up from time to time. Users may provide the wrong kind of input for your model resulting in AIMMS throwing errors that your user may not understand. 
@@ -38,34 +42,37 @@ Once that's done, you can catch errors and provide custom error messages:
 
 .. code-block:: aimms
 
- block
-    result := parameter1 / parameter2 ; 
-    DialogMessage("Result of division = " + result ) ; 
-
- onerror err do
-    !If any runtime errors occur in the statements executed in the above 
-    !block, AIMMS will execute the statements in this error handling block
-
-    !Tell the user that there is an error in the input
-    DialogMessage("Make sure parameter2 is unequal to 0 to prevent division by 0",
-                  "Caught error in input") ; 
-
-    !Now tell AIMMS that we have handled the error. If we skip this statement
-    !AIMMS will consider the error as unhandled, meaning it will go to the next
-    !layer in the list of error handlers. If no error handler marks the error
-    !as handled, the result is the same as without error handling: AIMMS will
-    !display the error in the error window and halt further execution.
-    errh::MarkAsHandled(err , 1) ; 
-
-    !If you want, you can use the other functionality in the errh module to
-    !get more information about the error, for example the message that would
-    !be printed to the error window:
-    DialogMessage("Error message = \n" + errh::Message( err ) ) ; 
-
-    !You can also show the user whether the error that was caught was an 
-    !error or just a warning:
-    DialogMessage("Severity = " + errh::Severity( err ) ) ;     
- endblock ; 
+    block
+        result := parameter1 / parameter2 ; 
+        DialogMessage("Result of division = " + result ) ; 
+   
+    onerror err do
+        !If any runtime errors occur in the statements executed in the above 
+        !block, AIMMS will execute the statements in this error handling block
+        
+        !Tell the user that there is an error in the input
+        DialogMessage("Make sure parameter2 is unequal to 0 to prevent division by 0",
+                      "Caught error in input") ; 
+        
+        !Now tell AIMMS that we have handled the error. If we skip this statement
+        !AIMMS will consider the error as unhandled, meaning it will go to the next
+        !layer in the list of error handlers. If no error handler marks the error
+        !as handled, the result is the same as without error handling: AIMMS will
+        !display the error in the error window and halt further execution.
+        errh::MarkAsHandled(err , 1) ; 
+        
+        !If you want, you can use the other functionality in the errh module to
+        !get more information about the error, for example the message that would
+        !be printed to the error window:
+        DialogMessage("Error message = \n" + errh::Message( err ) ) ; 
+        
+        !You can also show the user whether the error that was caught was an 
+        !error or just a warning:
+        DialogMessage("Severity = " + errh::Severity( err ) ) ;     
+    end block ; 
 
 Now your user can easily figure out what's wrong.
+
+
+
 

@@ -66,3 +66,7 @@ For example, the subset of all days in the calendar that represent weekend days 
 	iDay | TimeslotCharacteristic(iDay ,'weekday') >= 6
 
 You can view the data of the predefined set ``TimeSlotCharacteristics`` to see which other characteristics for timeslots are available.
+
+
+
+

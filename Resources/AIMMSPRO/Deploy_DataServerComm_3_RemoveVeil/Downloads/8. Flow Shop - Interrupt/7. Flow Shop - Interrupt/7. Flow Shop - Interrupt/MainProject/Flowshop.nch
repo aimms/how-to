@@ -1,7 +1,0 @@
-* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
-"Section_1" "Loading_server_session_results" "2017-11-14 20:26:08"
-"Procedure_2" "prepInterface" "2017-11-14 20:47:28"
-"Copy_prSolve" "prWorkSolve" "2017-11-15 13:58:15"
-"Copy_MainExecution" "prDoSolve" "2017-11-16 12:02:26"
-"prWorkSolve" "prDelegateSolve" "2017-11-16 12:24:12"
-"pResultsAvailable" "bpResultsAvailable" "2018-02-26 08:41:21"

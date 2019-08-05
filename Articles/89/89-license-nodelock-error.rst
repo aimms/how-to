@@ -19,7 +19,7 @@ Resolve License Error: Nodelock file is read-only
 
 .. _ref-update-failed:
 
-Error: Update failed - The nodelock file is readonly
+Error: Update failed - The nodelock file is read-only
 -----------------------------------------------------
 
 Issue:
@@ -86,7 +86,7 @@ Related issues:
 
 .. END CONTENT
 
-.. include:: /includes/form.def
+
 
 .. author: Jessica Valasek Estenssoro
 .. checked by: Khang Bui

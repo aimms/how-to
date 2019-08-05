@@ -163,7 +163,7 @@ Related Topics
 ----------------
 * **AIMMS Documentation:** `AIMMS Cloud Platform <https://manual.aimms.com/cloud/>`_
 
-.. include:: /includes/form.def
+
 
 
 

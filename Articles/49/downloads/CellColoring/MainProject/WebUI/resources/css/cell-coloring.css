@@ -1,0 +1,7 @@
+.tag-table .grid-viewport td.annotation-red {
+	background-color:  red;
+}
+
+.tag-table .grid-viewport td.annotation-green {
+	background-color:  green;
+}

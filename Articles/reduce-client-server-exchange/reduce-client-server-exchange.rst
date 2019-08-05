@@ -71,13 +71,13 @@ To determine which identifiers make up the mathematical program instance we need
             ! Stash list of identifiers to be returned. 
             data { sOutputIds } ; 
 
-Now we only to construct the set of output identifiers, ie those identifiers that should be in the case send from the server session to the client session.  The client session only needs the Gantt Chart starts and durations. So that is simply:
+Now we only to construct the set of output identifiers, i.e. those identifiers that should be in the case send from the server session to the client session.  The client session only needs the Gantt Chart starts and durations. So that is simply:
 
     .. code-block:: aimms
      
         sOutputIds := data { pGCJobStart, pGCJobDuration };
   
-Now we have constructed the sets of identifiers that need to be passed from the client session to the server session (sInputIds) and the set of identifiers to be passed from the server session to the client session (sOutputIds), we need to pass this information to AIMMS PRO, such that ``pro::DelegateToServer`` correctly handles this. For this purpose, AIMMS PRO declares the following sets: ``pro::ManagedSessionInputCaseIdentifierSet`` and ``pro::ManagedSessionOutputCaseIdentifierSet``.
+Now we have constructed the sets of identifiers that need to be passed from the client session to the server session (``sInputIds``) and the set of identifiers to be passed from the server session to the client session (``sOutputIds``), we need to pass this information to AIMMS PRO, such that ``pro::DelegateToServer`` correctly handles this. For this purpose, AIMMS PRO declares the following sets: ``pro::ManagedSessionInputCaseIdentifierSet`` and ``pro::ManagedSessionOutputCaseIdentifierSet``.
 
 #. The ``pro::ManagedSessionInputCaseIdentifierSet`` needs to be assigned **before** calling the procedure ``pro::DelegateToServer``, for instance as follows:
 
@@ -114,7 +114,7 @@ You can download the example:
 
 
 
-.. include:: /includes/form.def
+
 
 
 

@@ -17,7 +17,7 @@ By just setting this option, a solver will generate a small log file with the na
 The first solve of an AIMMS session will create the file, subsequent solves will append to the file. 
 To generate a log file, I used the Flow Shop problem with 14 jobs and 20 machines and solved it using CPLEX 12.8 on my desktop.
 
-.. literalinclude:: /Resources/C_Solvers/BasicLogging/0_CPLEX_12.8.sta 
+.. literalinclude:: resources/0_CPLEX_12.8.sta 
     :name: cplex 12.8.sta
     :language: none
     :linenos: 
@@ -33,7 +33,7 @@ For a MIP problem, a typical first setting to add is the option ``MIP display`` 
 Thus I obtained a 95 line log file ``log\cplex 12.8.sta``.
 For the sake of brevity, I only show the first and last five lines here.
 
-.. literalinclude:: /Resources/C_Solvers/BasicLogging/1_CPLEX_12.8.sta 
+.. literalinclude:: resources/1_CPLEX_12.8.sta 
     :name: cplex 12.8.sta (extended)
     :language: none
     :linenos: 
@@ -41,7 +41,7 @@ For the sake of brevity, I only show the first and last five lines here.
     
 Last five lines:
     
-.. literalinclude:: /Resources/C_Solvers/BasicLogging/1_CPLEX_12.8.sta 
+.. literalinclude:: resources/1_CPLEX_12.8.sta 
     :name: cplex 12.8.sta (extended continued)
     :language: none
     :linenos: 
@@ -121,4 +121,3 @@ The interpretation of log files is discussed in:
 * `MIP <https://pubsonline.informs.org/doi/10.1287/educ.2014.0130>`_ 
 
 
-.. include:: /includes/form.def

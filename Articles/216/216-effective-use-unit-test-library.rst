@@ -18,7 +18,6 @@ This article discusses some elements from the popular software methodology `Test
    #. Execute tests and **see them pass!**
    
    #. Refactor until performance is acceptable.
-
 #. Repeat
     
 Unit tests in AIMMS projects
@@ -131,7 +130,7 @@ The annotation ``aimmsunit::TestSuite: MeanSuite`` is added to the test function
    
    #. Click add annotation in the attribute window
    
-   #. Select aimmsunit::TestSuite
+   #. Select ``aimmsunit::TestSuite``
    
    #. Type in the name of the suite. In this example, we only use one suite: ``MeanSuite``
    
@@ -192,13 +191,13 @@ Running the test now gives the following results:
 .. code-block:: xml
    :linenos:
 
-   <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-   <testsuites>
-      <testsuite id="1" name="MeanSuite" timestamp="2019-04-09T09:31:16" tests="2" time="0.002">
-      <testcase name="tml::pr_Test_Small_Example" time="0.001"/>
-      <testcase name="tml::pr_Test_Empty_List" time="0.001"/>
-      </testsuite>
-   </testsuites>
+    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    <testsuites>
+       <testsuite id="1" name="MeanSuite" timestamp="2019-04-09T09:31:16" tests="2" time="0.002">
+       <testcase name="tml::pr_Test_Small_Example" time="0.001"/>
+       <testcase name="tml::pr_Test_Empty_List" time="0.001"/>
+       </testsuite>
+    </testsuites>
         
 The log indicates that both the tests passed without any issue. So, everything is good to go. Or is it? 
     
@@ -220,39 +219,39 @@ Apparently, our set of requirements does not consider all edge cases. Now we wil
 .. code-block:: aimms
    :linenos:
 
-   Procedure pr_Test_Zero_In_Observations {
-      Body: {
-            S := data { a, b, c, d };
-            P := data { a: 3, b : 5, c: 0, d: 12 };
-            r := ml::SelfDefinedMean(P(i));
-            aimmsunit::AssertTrue("The average of 3, 5, 0, and 12 is 5.", r=5);
-      }
-      Comment: "third test: Mean( 3, 5, 0, 12 ) = 5";
-      aimmsunit::TestSuite: MeanSuite;
-      Set S {
-            Index: i;
-      }
-      Parameter P {
-            IndexDomain: i;
-      }
-      Parameter r;
-   }
+    Procedure pr_Test_Zero_In_Observations {
+       Body: {
+             S := data { a, b, c, d };
+             P := data { a: 3, b : 5, c: 0, d: 12 };
+             r := ml::SelfDefinedMean(P(i));
+             aimmsunit::AssertTrue("The average of 3, 5, 0, and 12 is 5.", r=5);
+       }
+       Comment: "third test: Mean( 3, 5, 0, 12 ) = 5";
+       aimmsunit::TestSuite: MeanSuite;
+       Set S {
+             Index: i;
+       }
+       Parameter P {
+             IndexDomain: i;
+       }
+       Parameter r;
+    }
 
 Running the test suite again gives the below result:
 
 .. code-block:: xml
    :linenos:
 
-   <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-   <testsuites>
-   <testsuite id="1" name="MeanSuite" timestamp="2019-04-09T09:59:31" tests="3" failures="1" time="0.003">
-      <testcase name="tml::pr_Test_Small_Example" time="0.001"/>
-      <testcase name="tml::pr_Test_Empty_List" time="0.001"/>
-      <testcase name="tml::pr_Test_Zero_In_Observations" time="0.001">
-         <failure message="The average of 3, 5, 0, and 12 is 5."/>
-      </testcase>
-   </testsuite>
-   </testsuites>
+    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    <testsuites>
+    <testsuite id="1" name="MeanSuite" timestamp="2019-04-09T09:59:31" tests="3" failures="1" time="0.003">
+       <testcase name="tml::pr_Test_Small_Example" time="0.001"/>
+       <testcase name="tml::pr_Test_Empty_List" time="0.001"/>
+       <testcase name="tml::pr_Test_Zero_In_Observations" time="0.001">
+          <failure message="The average of 3, 5, 0, and 12 is 5."/>
+       </testcase>
+    </testsuite>
+    </testsuites>
     
 Our unit test reproduces the bug. See `failures="1"` in line 3. Notice the difference between failures and errors in the test report. Clearly, the mistake in the above implementation is that we divided by ``card(P)`` - the cardinality of the parameter which only counts non default values instead of ``card(S)`` - the cardinality of the set which counts all the elements. So, the function is updated as shown below:
 
@@ -285,18 +284,18 @@ Running the test suite now should give the below result which indicates that the
 .. code-block:: xml
    :linenos:
 
-   <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-   <testsuites>
-      <testsuite id="1" name="MeanSuite" timestamp="2019-04-09T10:03:07" tests="3" time="0.003">
-      <testcase name="tml::pr_Test_Small_Example" time="0.001"/>
-      <testcase name="tml::pr_Test_Empty_List" time="0.001"/>
-      <testcase name="tml::pr_Test_Zero_In_Observations" time="0.001"/>
-      </testsuite>
-   </testsuites>
+    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    <testsuites>
+       <testsuite id="1" name="MeanSuite" timestamp="2019-04-09T10:03:07" tests="3" time="0.003">
+       <testcase name="tml::pr_Test_Small_Example" time="0.001"/>
+       <testcase name="tml::pr_Test_Empty_List" time="0.001"/>
+       <testcase name="tml::pr_Test_Zero_In_Observations" time="0.001"/>
+       </testsuite>
+    </testsuites>
         
 All the previously written tests (before this latest change) were also automatically run, saving us time and effort. The example project can be downloaded below:
 
-:download:`AIMMS project download <downloads/mean/mean.zip>` 
+:download:`AIMMS project download <Downloads/mean/mean.zip>` 
 
 Related Topics
 --------------------
@@ -304,5 +303,5 @@ Related Topics
 * **AIMMS Documentation:** `Unit Test Library <https://documentation.aimms.com/unit-test/index.html>`_
 * :doc:`../84/84-using-libraries`
 
-.. include:: /includes/form.def
+
 

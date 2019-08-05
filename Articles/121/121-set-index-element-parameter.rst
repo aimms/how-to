@@ -124,7 +124,13 @@ We briefly covered set, index, subset, element parameter and mapping in this pos
 
 
 
-.. include:: /includes/form.def
 
 
 
+
+.. below are spelling exceptions only for this document
+
+.. spelling:
+    Naqada
+    Devonta
+    WR

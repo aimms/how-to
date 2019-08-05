@@ -56,6 +56,13 @@ div.page-content div.section img {
 
 }
 
+/* margin before footer (thumbs buttons)*/
+
+.rst-footer-buttons{
+    
+    margin-top: 30px;
+}
+
 /*---------------------- Sphinx Directives -----------------------------*/
 
 /*Color any Topic block */
@@ -848,4 +855,9 @@ li {
     background: white;
     border: solid 1px lightgrey;
     padding: 5px;
+}
+
+.menuselection {
+    
+    font-style: italic;
 }

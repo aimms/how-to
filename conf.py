@@ -22,11 +22,7 @@ from sphinx.builders import html as builders
 from sphinx.util import logging
 #import pdb
 import subprocess
-#spellcheck
-if os.name == 'nt':
-	import platform
-	# import ssl
-	# import urllib
+
 
 # sys.path.insert(0, os.path.abspath('.'))
 
@@ -45,41 +41,10 @@ extensions = ['sphinx.ext.doctest',
     'sphinx.ext.githubpages',
 	'sphinx.builders.linkcheck']
 
-#```
-#This next if-then-else tries to import advanced extensions
-#Please mind the spelling extension is only available for 32bits Python (2 or 3) currently (2019-04-01)
-#```
-SpellCheck_Please = False # ------------------------------------------------------------------------------------> To activate spellchecking (make spelling)
+if os.name != 'nt':
 
-
-
-if os.name == 'nt' and platform.architecture()[0]=='64bit' and SpellCheck_Please:
-
-		#pdb.set_trace()
-		try:
-			import sphinxcontrib.spelling
-			success = 1
-		except ImportError ,e:
-			success = 0
-			pass	
-			
-		if success:	
-			#Import spelling extension
-			extensions.append('sphinxcontrib.spelling')
-			
-			#Retrieve the one and only spelling exception central file 
-			import requests
-			url = "https://gitlab.aimms.com/Arthur/unified-spelling_word_list_filename/raw/master/spelling_wordlist.txt"
-			#to debug, please comment the following line
-			requests.packages.urllib3.disable_warnings()
-			r = requests.get(url,verify=False)
-			with open('spelling_wordlist.txt','wb') as f:
-			  f.write(r.content)
-		else:
-			
-			logger = logging.getLogger(__name__)
-			logger.info("\nIf you would like to use the Spell Checker, please make sure to install the extension by running ``python -m pip install sphinxcontrib.spelling``, and to run Python 32bits\n")
-
+#Import spelling extension
+    extensions.append('sphinx_sitemap')
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -173,7 +138,7 @@ todo_include_todos = True
 
 html_theme = 'sphinx_rtd_theme'
 
-html_logo = 'Resources/images/aimms-logo.png' 
+html_logo = 'Images/logo/aimms-logo.png' 
 
 html_title = title
 
@@ -206,13 +171,17 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-# if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown :)
+# if builds locally (a windows machine), force "Edit on Gitlab" to be shown, and do not displays Thumbs and Insided Embeddable (extensions)
 if os.name == 'nt':
    Display_edit_on_gitlab = True
+   Display_3rd_Party_Extensions = False
 else:
-   Display_edit_on_gitlab = False
 
-# removed reference to theme.css as it no longer exists     
+   # if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown, and displays Thumbs and Insided Embeddable (extensions)
+   Display_edit_on_gitlab = False
+   Display_3rd_Party_Extensions = True
+
+# The following "context" is passed to templates in _templates folder
 html_context = {
     'css_files': ['_static/Hacks.css', '_static/copycode.css'],
     "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
@@ -221,6 +190,8 @@ html_context = {
     "gitlab_version": "master", # Version
     "conf_py_path": "", # Path in the checkout to the docs root
     "suffix": ".rst",
+    "Display_3rd_Party_Extensions" : Display_3rd_Party_Extensions # display Thumbs and Insided Embeddable
+    
 }
 
 # Custom sidebar templates, must be a dictionary that maps document names
@@ -304,6 +275,11 @@ else:
 	#To check any broken links 
    todo_include_todos = False
 
+# index page for your site
+html_baseurl = 'https://how-to.aimms.com/'
+
+# adding path to non-rst files that go to the build
+html_extra_path = ['robots.txt']
 
 # Generate redirects from old URLs
 
@@ -392,9 +368,10 @@ def setup(sphinx):
    sphinx.add_javascript("https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js")
 
    #To handle redirections
-   handle_redirections = False
+   handle_redirections = True
    if handle_redirections or os.name != 'nt':
 		sphinx.add_config_value('redirects_file', 'redirects', 'env')
 		sphinx.connect('builder-inited', generate_redirects)   
  
 highlight_language = 'aimms'
+

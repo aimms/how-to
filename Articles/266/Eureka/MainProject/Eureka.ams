@@ -1,0 +1,62 @@
+## ams_version=1.0
+
+Model Main_Eureka {
+    Quantity SI_Mass {
+        BaseUnit: kg;
+        Comment: "Expresses the value for the amount of matter.";
+    }
+    Quantity SI_Volume {
+        BaseUnit: m3 = m^3;
+        Comment: "Expresses the value of solid content.";
+    }
+    Quantity SI_Length {
+        BaseUnit: m;
+        Comment: "Expresses the value of a distance.";
+    }
+    Parameter p_WaterDensity {
+        Unit: kg/m^3;
+    }
+    Variable v_MaxWeight {
+        Range: nonnegative;
+        Unit: kg;
+    }
+    Variable v_ShipVolume {
+        Range: nonnegative;
+        Unit: m^3;
+    }
+    Constraint c_KeepFloating {
+        Unit: kg;
+        Definition: v_MaxWeight * p_WaterDensity <= v_ShipVolume;
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

@@ -1,4 +1,4 @@
-Reading columns of data from Excel
+Read Columns of Data from Excel
 ===================================
 
 .. meta::
@@ -7,16 +7,16 @@ Reading columns of data from Excel
 
 AIMMS provides various methods for reading Excel data. 
 
-#. A prepackaged module of procedures and functions, using the prefix ``spreadsheet::``.  
+.. #. A prepackaged module of procedures and functions, using the prefix ``spreadsheet::``.  
  
 #. AimmsXLLibrary, a system library of functions and procedures.
 
-#. Datalink with the provider xlsprovider, two libraries from the AIMMS repository of libraries. 
+#. Datalink with the XLSProvider, two libraries from the AIMMS repository of libraries. 
 
 Let's compare some features of these libraries, and you can decide which method is best for your application.
 
 Example used
--------------
+---------------
 
 To make this comparison, we'll read from two spreadsheets:
 
@@ -30,6 +30,7 @@ This may happen when various analysts provide the necessary data in a spreadshee
 The name manager in both sheets covers for the difference in columns: 
 
 .. image:: Images/CommonNameManager.PNG
+   :align: center
 
 The data is read in to the following parameters:
 
@@ -54,73 +55,75 @@ The data is read in to the following parameters:
         }
     }
 
+You can download the example from :download:`AIMMS Project Download <ReadingExcelData.zip>` 
 
-The ``spreadsheet::`` functions and procedures 
-----------------------------------------------
 
-The ``spreadsheet::`` module includes these functions and procedures:
+.. The ``spreadsheet::`` functions and procedures 
+.. ----------------------------------------------
 
-#. Create and close workbooks
+.. The ``spreadsheet::`` module includes these functions and procedures:
 
-#. Helper functions to create ranges
+.. #. Create and close workbooks
 
-#. Support for exchanging data between ranges on an Excel sheet with scalar, one-dimensional and multi-dimensional AIMMS parameters. Note that these ranges can be named ranges.
+.. #. Helper functions to create ranges
 
-The code to read Excel data using looks as follows:
+.. #. Support for exchanging data between ranges on an Excel sheet with scalar, one-dimensional and multi-dimensional AIMMS parameters. Note that these ranges can be named ranges.
 
-.. code-block:: aimms
+.. The code to read Excel data using looks as follows:
 
-    empty p_price, p_maxavail, p_amtPerPackage ;
+.. .. code-block:: aimms
 
-    spreadsheet::RetrieveTable(
-        workbook                :  sp_dataFilename,
-        parameter               :  p_price, 
-        DataRange               :  "Price",     
-        RowsRange               :  "colrange",  
-        sheet                   :  "Sheet1",
-        automaticallyExtendSets :  1 );
+..     empty p_price, p_maxavail, p_amtPerPackage ;
 
-    spreadsheet::RetrieveTable(
-        workbook                :  sp_dataFilename,
-        parameter               :  p_maxAvail, 
-        DataRange               :  "maxAvail",     
-        RowsRange               :  "colrange",  
-        sheet                   :  "Sheet1",
-        automaticallyExtendSets :  1 );
+..     spreadsheet::RetrieveTable(
+..         workbook                :  sp_dataFilename,
+..         parameter               :  p_price, 
+..         DataRange               :  "Price",     
+..         RowsRange               :  "colrange",  
+..         sheet                   :  "Sheet1",
+..         automaticallyExtendSets :  1 );
 
-    spreadsheet::RetrieveTable(
-        workbook                :  sp_dataFilename,
-        parameter               :  p_amtPerPackage, 
-        DataRange               :  "amtPerPackage",     
-        RowsRange               :  "colrange",  
-        sheet                   :  "Sheet1",
-        automaticallyExtendSets :  1 );
+..     spreadsheet::RetrieveTable(
+..         workbook                :  sp_dataFilename,
+..         parameter               :  p_maxAvail, 
+..         DataRange               :  "maxAvail",     
+..         RowsRange               :  "colrange",  
+..         sheet                   :  "Sheet1",
+..         automaticallyExtendSets :  1 );
 
-    spreadsheet::CloseWorkBook(sp_dataFilename,0);
+..     spreadsheet::RetrieveTable(
+..         workbook                :  sp_dataFilename,
+..         parameter               :  p_amtPerPackage, 
+..         DataRange               :  "amtPerPackage",     
+..         RowsRange               :  "colrange",  
+..         sheet                   :  "Sheet1",
+..         automaticallyExtendSets :  1 );
 
-Note the following:
+..     spreadsheet::CloseWorkBook(sp_dataFilename,0);
 
-#. The implementation of these functions uses Excel itself, and therefore this module is less suited for application development; it would require the presence of Excel on the client computer or AIMMS PRO Server. 
+.. Note the following:
 
-#. This library supports Excel macros.
+.. #. The implementation of these functions uses Excel itself, and therefore this module is less suited for application development; it would require the presence of Excel on the client computer or AIMMS PRO Server. 
 
-#. In this example, the name manager of Excel provided consistent names in the named ranges. When names are not consistent, the code would become signficantly more complicated.
+.. #. This library supports Excel macros.
 
-#. This library doesn't make any assumptions about the placing of data in columns.
+.. #. In this example, the name manager of Excel provided consistent names in the named ranges. When names are not consistent, the code would become significantly more complicated.
 
-#. For more information about these functions, see: `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_: Chapter "Spreadsheet Functions".
+.. #. This library doesn't make any assumptions about the placing of data in columns.
+
+.. #. For more information about these functions, see: `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_: Chapter "Spreadsheet Functions".
  
 
 AXLL functions and procedures
 ---------------------------------
 
-The ``AXLL::`` system library includes these functions and procedures:
+.. The ``AXLL::`` system library includes these functions and procedures:
 
-#. Create and close workbooks
+.. #. Create and close workbooks
 
-#. Helper functions to create ranges
+.. #. Helper functions to create ranges
 
-#. Support for exchanging data between ranges on an Excel sheet with scalar, one-dimensional and multi-dimensional AIMMS parameters. Note that these ranges can be named ranges.
+.. #. Support for exchanging data between ranges on an Excel sheet with scalar, one-dimensional and multi-dimensional AIMMS parameters. Note that these ranges can be named ranges.
 
 The code to read Excel data using AXLL looks as follows:
 
@@ -153,28 +156,25 @@ The code to read Excel data using AXLL looks as follows:
 
     axll::CloseAllWorkBooks();
 
-Note the following:
 
 #. These functions access the workbook directly without the need to use Excel. This makes the library more suited for application development. 
 
 #. This library doesn't support Excel macros.
 
-#. In this example, the name manager of Excel provided consistent names in the named ranges. When names are not consistent, the code would become signficantly more complicated.
+#. In this example, the name manager of Excel provided consistent names in the named ranges. When names are not consistent, the code would become significantly more complicated.
 
-#. This library doesn't make any assumptions about the placing of data in columns.
+#. This library does not make any assumptions about the placing of data in columns.
 
-#. For more information about these functions, 
-   see also :doc:`../85/85-using-axll-library` and :doc:`../122/122-AXLL-Library` .
+#. For more information about these functions, see
+   * :doc:`../85/85-using-axll-library`  
+   
+.. * :doc:`../122/122-AXLL-Library` .
 
 
-Datalink with the provider xlsprovider
----------------------------------------
+DataLink with the XLSProvider
+------------------------------------------
 
-The xlsprovider uses a simple strategy to understand the structure of the data in an Excel worksheet.
-The top row with data is assumed to be the header, containing the names of the columns. 
-You have to map these names onto identifier names in the AIMMS model.
-Then datalink can read by making the xlsprovider scan the worksheet row by row and use the mapping to send the data to the appropriate identifiers.
-
+The XLSProvider uses a simple strategy to understand the structure of the data in an Excel worksheet. The top row with data is assumed to be the header, containing the names of the columns. You have to map these names onto identifier names in the AIMMS model. Then ``DataLink`` can read by making the XLSProvider scan the worksheet row by row and use the mapping to send the data to the appropriate identifiers.
 
 The code to read the Excel data looks as follows:
 
@@ -202,19 +202,16 @@ The code to read the Excel data looks as follows:
         MapName        :  "SKUData", 
         ReadAttributes :  sp_readAttribute);
 
-Note the following:
-
 #. This library accesses the workbook directly without the need to use Excel. This makes the library more suited for application development. 
 
-#. This library doesn't support Excel macros.
+#. This library also doesn't support Excel macros.
 
-#. Data order is abstracted from the column order in the datalink library, independently of the name manager.
+#. Data order is abstracted from the column order in the ``datalink`` library, independently of the name manager.
 
 #. This library assumes that the data is presented in columns on the sheet; this library is less suited for data that is scattered on an Excel sheet.
 
-#. See also :doc:`../csv/read-write-csv` and `XLSProvider for datalink <https://documentation.aimms.com/datalink/providers.html#xlsprovider>`_
+#. See also 
+   * :doc:`../csv/read-write-csv` and 
+   * `XLSProvider for datalink <https://documentation.aimms.com/datalink/providers.html#xlsprovider>`_
 
-You can download the example from :download:`AIMMS project download <ReadingExcelData.zip>` 
 
-
-.. include:: /includes/form.def

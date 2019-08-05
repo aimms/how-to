@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<Project AimmsVersion="4.61.3.0 unicode x64" ProjectUUID="17F296AE-9F5F-40F6-BD58-6D2C80C08AFF">
-	<ModelFileName>Stopwatch.ams</ModelFileName>
-	<AutoSaveAndBackup>
-		<DataBackup AtRegularInterval="true" EveryNMinutes="15" NumBackupsDatedToday="3" NumDaysBeforeToday="3" />
-	</AutoSaveAndBackup>
-</Project>
