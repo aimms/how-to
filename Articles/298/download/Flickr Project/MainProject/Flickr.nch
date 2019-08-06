@@ -1,0 +1,12 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"PR_GetPhotosId" "PR_GetGalleryId" "2019-07-30 14:58:34"
+"Procedure_1" "PR_GetPhotosId" "2019-07-30 14:58:45"
+"farm" "farmId" "2019-07-31 08:12:37"
+"Photos" "P_Photos" "2019-07-31 10:34:17"
+"farmId" "SP_farmId" "2019-07-31 10:34:25"
+"P_Photos" "S_Photos" "2019-07-31 10:34:30"
+"serverId" "SP_serverId" "2019-07-31 10:34:36"
+"Id" "SP_Id" "2019-07-31 10:34:43"
+"secretId" "SP_secretId" "2019-07-31 10:34:53"
+"GalleryID" "SP_GalleryID" "2019-07-31 10:35:03"
+"p" "I_p" "2019-08-02 08:35:07"

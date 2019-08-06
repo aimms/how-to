@@ -1,0 +1,117 @@
+## ams_version=1.0
+
+Model Main_Flickr {
+    Set S_Photos {
+        Index: I_p;
+    }
+    StringParameter SP_farmId {
+        IndexDomain: I_p;
+    }
+    StringParameter SP_serverId {
+        IndexDomain: I_p;
+    }
+    StringParameter SP_Id {
+        IndexDomain: I_p;
+    }
+    StringParameter SP_secretId {
+        IndexDomain: I_p;
+    }
+    StringParameter SP_GalleryID;
+    Procedure PR_GetGalleryId {
+        Body: {
+            SP_responseFile:="Output.xml";
+            SP_requestparameters:={
+            	'method': "flickr.urls.lookupGallery",
+            	'api_key': "940585ad72b1c33b936e3101bc04fed8",
+            	'url': "https://www.flickr.com/photos/flickr/galleries/72157647277042064/"
+            };
+            
+            web::query_format(SP_requestparameters,SP_formattedparameters);
+            SP_URL:="https://www.flickr.com/services/rest/?"+SP_formattedparameters;
+            web::request_create(SP_requestId);
+            web::request_setMethod(SP_requestId,"GET");
+            web::request_setURL(SP_requestId,SP_URL);
+            web::request_setResponseBody(SP_requestId,'File',SP_responseFile);
+            web::request_invoke(SP_requestId,P_responsecode);
+            READXML("Output.xml","GetGallery.axm");
+            
+            PR_GetPhotosId;
+        }
+        StringParameter SP_responseFile;
+        StringParameter SP_MethodName;
+        StringParameter SP_APIkey;
+        StringParameter SP_requestparameters {
+            IndexDomain: rp;
+        }
+        StringParameter SP_formattedparameters;
+        StringParameter SP_requestId;
+        StringParameter SP_URL;
+        Set S_requestparam {
+            Index: rp;
+            Definition: {
+                DATA{api_key,method, id_photo,url,gallery_id};
+            }
+            InitialData: DATA{api_key,method,url};
+        }
+        Parameter P_responsecode;
+    }
+    Procedure PR_GetPhotosId {
+        Body: {
+            SP_responseFile:="Output2.xml";
+            SP_APIkey:= "940585ad72b1c33b936e3101bc04fed8";
+            SP_MethodName:="flickr.galleries.getPhotos";
+            
+            SP_requestparameters:= {
+            	'method' : SP_MethodName,
+            	'api_key' : SP_APIkey,
+            	'gallery_id' : SP_GalleryID
+            };
+            
+            web::query_format(SP_requestparameters,SP_formattedparameters); 
+            SP_URL:="https://www.flickr.com/services/rest/?"+SP_formattedparameters;
+            web::request_create(SP_requestId);
+            web::request_setMethod(SP_requestId,"GET");
+            web::request_setURL(SP_requestId,SP_URL);
+            web::request_setResponseBody(SP_requestId,'File',SP_responseFile);
+            web::request_invoke(SP_requestId,P_responsecode);
+            READXML("Output2.xml","GetPhotos.axm");
+            
+            PR_GetPhoto;
+        }
+        StringParameter SP_responseFile;
+        StringParameter SP_MethodName;
+        StringParameter SP_APIkey;
+        StringParameter SP_requestparameters {
+            IndexDomain: rp;
+        }
+        Set S_requestparam {
+            Index: rp;
+            Definition: {
+                DATA{api_key,method, id_photo,url,gallery_id};
+            }
+            InitialData: DATA{api_key,method,gallery_id};
+        }
+        StringParameter SP_formattedparameters;
+        StringParameter SP_requestId;
+        StringParameter SP_URL;
+        Parameter P_responsecode;
+    }
+    Procedure PR_GetPhoto {
+        Body: {
+            
+            for I_p in S_Photos Do
+            	SP_OutputFile:="MainProject/WebUI/resources//images/"+I_p+".jpg";
+            	SP_URL:="https://farm"+SP_farmId(I_p)+".staticflickr.com/"+SP_serverId(I_p)+"/"+SP_Id(I_p)+"_"+SP_secretId(I_p)+".jpg";
+            	web::request_create(SP_requestId);
+            	web::request_setMethod(SP_requestId,"GET");
+            	web::request_setURL(SP_requestId,SP_URL);
+            	web::request_setResponseBody(SP_requestId,'File',SP_OutputFile);
+            	web::request_invoke(SP_requestId,P_responsecode);
+            endfor;
+        }
+        StringParameter SP_requestId;
+        StringParameter SP_OutputFile;
+        StringParameter SP_URL;
+        Parameter P_responsecode;
+    }
+}

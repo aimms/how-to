@@ -17,4 +17,5 @@ These topics help you to use the HTTP Library with your AIMMS project.
    /Articles/293/293-extracting-data-from-XML
    /Articles/294/294-Online-XML-HTTP-library
    /Articles/296/296-obtaining-geographic-data-through-the-google-api
+   /Articles/298/298-use-flickr-api
    
