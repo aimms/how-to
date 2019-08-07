@@ -19,11 +19,6 @@ This use case is inspired by  an `idratherbewriting tutorial <https://idratherbe
 Flickr is an image and video hosting social network with a database of millions of photos.
 Our mission will be to extract the photos from `this Flickr gallery <https://www.flickr.com/photos/flickr/galleries/72157647277042064/>`_.
 
-.. todo:: It is ok to use this gallery, but can you add a section at the end, to show how to obtain other galleries?
-          Alternatively,
-          I haven't checked the app, but perhaps you can build in the app the option to view other galleries based on some key words?
-          and boast about this in the section at the end on download project.
-
 To do so, we'll need the `AIMMS http client library <https://documentation.aimms.com/httpclient/library.html#adding-the-http-client-library-to-your-model>`_.
 
 Searching the documentation
@@ -41,9 +36,9 @@ Reading the **user authentication topic**, we learn that the main authentication
 .. image:: flickr/overview.PNG
     :align: center
 
-The **overview** section gives us the format to apply for using a request : An URL endpoint followed by specified parameters ``method``,``api_key`` and additional parameters (depending on the method) must be used.
+The **overview** section gives us the format to apply for using a request : An URL endpoint followed by specified parameters ``method``, ``api_key`` and additional parameters (depending on the method) must be used.
 
-.. Note:: To obtain your API key, please follow `this tutorial <https://www.flickr.com/services/apps/create/apply/>`_  and selecting a non-commercial key. Don't worry, th way you fill the fields doesn't matters in our case. Please keep your API key accessible, we'll need it in what's coming next.
+.. Note:: To obtain your API key, please follow `this tutorial <https://www.flickr.com/services/apps/create/apply/>`_  and selecting a non-commercial key. Don't worry, the way you fill the fields doesn't matters in our case. Please keep your API key accessible, we'll need it in what's coming next.
 
 Finally, the **URL section** gives us the process to create a photo URL.This photo URL is what we need to download an image using a get request :
 
@@ -51,6 +46,9 @@ Finally, the **URL section** gives us the process to create a photo URL.This pho
 
 
 To access a photo, we need different informations : ``the farm_id``, ``the server_id``,the ``id`` and the ``secret``.
+
+.. Note: please note that the farm ID is no longer to be specified, the server will find out the farm id itself if you don't write it.
+
 We're now searching for these informations about the gallery photos.
 
 On the right column of the documentation `main page <https://www.flickr.com/services/api/>`_, we have a list of methods supported by the Flickr API.
@@ -71,16 +69,15 @@ Getting the gallery ``id``.
 ---------------------------------------------
 
 The code for this request is the following one.
-
-.. todo:: Please use the string parameter ``sp_APIkey`` in the below.
  
 .. code-block:: aimms
     :linenos:
 
     SP_responseFile:="Output.xml";
+	SP_APIkey:="Your_api_key";
     SP_requestparameters:={
         'method': "flickr.urls.lookupGallery",
-        'api_key': "YOUR_API_KEY",
+        'api_key': SP_APIkey,
         'url': "https://www.flickr.com/photos/flickr/galleries/72157647277042064/"
     };
     web::query_format(SP_requestparameters,SP_formattedparameters);
@@ -106,6 +103,9 @@ Let's check what the `Flickr documentation <https://www.flickr.com/services/api/
 .. image:: ./flickr/lookupGallery.PNG 
 
 Two arguments are required that are an API key and an URL. You should now have access to your own API key, and the URL of the gallery is the following one: **https://www.flickr.com/photos/flickr/galleries/72157647277042064/**
+
+.. Note:: You can extract photos from any gallery by setting the ``SP_url`` to the url of the wanted gallery.
+
 
 For this request, you'll need sereval objects:
 
@@ -152,14 +152,12 @@ We can specify the direction for the outputfile using the ``SP_OutputFile`` stri
 
 The parameters of the request must be put at the end of the endpoint URL **https://www.flickr.com/services/rest/?** after being formatted by the ``web::query_format`` method.
 
-.. todo:: Again use sp_APIKey.
-
 .. code-block:: aimms
     :linenos:
     
     SP_requestparameters:={
         'method': "flickr.urls.lookupGallery",
-        'api_key': "YOUR_API_KEY",
+        'api_key': SP_APIkey,
         'url': "https://www.flickr.com/photos/flickr/galleries/72157647277042064/"
     };
 
@@ -209,13 +207,11 @@ Getting Photos informations.
 We now want to create another procedure to get all the ``id`` informations we need about the gallery photos.
 For that, we'll use the **flickr.galleries.getPhotos** method from the flickr API. The code for this procedure is the following one.
 
-.. todo:: anonymise by removing sp_APIKey assignment!
-
 .. code-block:: aimms
     :linenos:
     
     SP_responseFile:="Output2.xml";
-    SP_APIkey:= "940585ad72b1c33b936e3101bc04fed8";
+    SP_APIkey:= "Your_api_key";
     SP_MethodName:="flickr.galleries.getPhotos";
     SP_requestparameters:= {
         'method' : SP_MethodName,
@@ -252,7 +248,6 @@ You need to create these objects:
     Set S_requestparam {
         Index: I_rp;
         DATA:{api_key,method,gallery_id};
-    }
     StringParameter SP_requestId {
     
     }
@@ -263,7 +258,6 @@ You need to create these objects:
     
     }
     StringParameter SP_APIkey {
-    
     }
     StringParameter SP_MethodName{
     
@@ -284,7 +278,7 @@ And then to execute this code:
     :linenos:
     
     SP_responseFile:="Output2.xml";
-    SP_APIkey:= "YOUR_API_KEY";
+    SP_APIkey:= "Your_api_key";
     SP_MethodName:="flickr.galleries.getPhotos";
     SP_requestparameters:= {
         'method' : SP_MethodName,
@@ -380,7 +374,7 @@ The code of this procedure is the following one.
     
     for p in S_Photos Do
         !set direction for the photos
-        SP_OutputFile:="MainProject/WebUI/resources//images/"+I_p+".jpg";
+        SP_OutputFile:="MainProject/WebUI/resources//images/"+SP_id(I_p)+".jpg";
         !create URLs
         SP_URL:="https://farm"+SP_farmId(p)+".staticflickr.com/"+SP_serverId(p)+"/"+SP_Id(p)+"_"+SP_secretId(p)+".jpg";
         !send request
@@ -391,7 +385,8 @@ The code of this procedure is the following one.
         web::request_invoke(SP_requestId,P_responsecode);
     endfor;
 
-The choice to set the names of photo files using the ``I_p`` index is arbitrary. The result is that every file has for name the title of the concerned photo in flickr.
+The choice to set the names of photo files using the ``SP_id(I_p)`` parameter is arbitrary. The result is that every file has for name the id of the concerned photo in flickr. It is convenient because by using titles of photos for example, we could have problem with special characters not supported.
+Also, the choice of the destination **MainProject/WebUI/resources//images/** refers to the use of `WebUI image widget <https://manual.aimms.com/webui/image-widget.html>`_.
 
 Congratulation, we finally reached our goal!
 
@@ -401,20 +396,31 @@ And, after some efforts, we can finally use those photos in AIMMS:
 .. image:: flickr/final.PNG 
     :align: center
 
-Example project
-------------------
 
-Please download the :download:`AIMMS project <download/FlickrProject.zip>` 
+Going further
+---------------------------------------------
+
+The flickr API also allows you to search for photos using tags with the `flickr.photos.search method <https://www.flickr.com/services/api/flickr.photos.search.html>`_ .
+It'll then send you back a list of photos identified by those tags with all the IDs you need to recreate their url.
+And by mapping into aimms these data and making a get request to the newly created urls, you can get the photos.
+You will find the related code in the example project.
+
+.. Note: please note that you can only specify 20 tags at the same time, and the answer will contains only one page of results (max 500 photos).
+
+Example project
+^^^^^^^^^^^^^^^^
+
+Please download the :download:`AIMMS project <download/Flickr Project.zip>` 
 
 Related Topics
----------------
+------------------------------------
 * **AIMMS How-To**: :doc:`../294/294-Online-XML-HTTP-library`
 * **AIMMS How-To**: :doc:`../293/293-extracting-data-from-XML`
 * **AIMMS How-to**: :doc:`../296/296-obtaining-geographic-data-through-the-google-api`
 * **AIMMS manual**: `WebUI image widget tutorial <https://manual.aimms.com/webui/image-widget.html>`_
 
 References
-------------------------------------
+^^^^^^^^^^^^^^^^
 * `Flickr API documentation <https://www.flickr.com/services/api/>`_
 * `idratherbewriting tutorial <https://idratherbewriting.com/learnapidoc/docapis_flickr_example.html>`_
 

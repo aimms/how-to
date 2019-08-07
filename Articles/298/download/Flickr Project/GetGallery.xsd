@@ -1,0 +1,59 @@
+
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="rsp">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="gallery">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="title"/>
+              <xs:element type="xs:string" name="description"/>
+              <xs:element name="cover_photos">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="photo" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="url" use="optional"/>
+                            <xs:attribute type="xs:short" name="width" use="optional"/>
+                            <xs:attribute type="xs:short" name="height" use="optional"/>
+                            <xs:attribute type="xs:byte" name="is_primary" use="optional"/>
+                            <xs:attribute type="xs:byte" name="is_video" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="id"/>
+            <xs:attribute type="xs:long" name="gallery_id"/>
+            <xs:attribute type="xs:string" name="url"/>
+            <xs:attribute type="xs:string" name="owner"/>
+            <xs:attribute type="xs:string" name="username"/>
+            <xs:attribute type="xs:short" name="iconserver"/>
+            <xs:attribute type="xs:byte" name="iconfarm"/>
+            <xs:attribute type="xs:long" name="primary_photo_id"/>
+            <xs:attribute type="xs:int" name="date_create"/>
+            <xs:attribute type="xs:int" name="date_update"/>
+            <xs:attribute type="xs:byte" name="count_photos"/>
+            <xs:attribute type="xs:byte" name="count_videos"/>
+            <xs:attribute type="xs:byte" name="count_total"/>
+            <xs:attribute type="xs:int" name="count_views"/>
+            <xs:attribute type="xs:short" name="count_comments"/>
+            <xs:attribute type="xs:string" name="sort_group"/>
+            <xs:attribute type="xs:string" name="current_state"/>
+            <xs:attribute type="xs:short" name="primary_photo_server"/>
+            <xs:attribute type="xs:byte" name="primary_photo_farm"/>
+            <xs:attribute type="xs:string" name="primary_photo_secret"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="stat"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

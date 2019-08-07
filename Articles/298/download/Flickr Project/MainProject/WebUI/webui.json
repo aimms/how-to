@@ -12,14 +12,26 @@
     "widgets": {
       "literal": [
         {
+          "uri": "tag",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1",
+            "customPosition": "checked",
+            "pos": {
+              "x": "950",
+              "y": "150"
+            }
+          }
+        },
+        {
           "uri": "Get Images",
           "layoutInfo": {
             "width": "2",
             "height": "1",
             "customPosition": "checked",
             "pos": {
-              "x": "10",
-              "y": "70"
+              "x": "950",
+              "y": "100"
             }
           }
         },
@@ -30,8 +42,8 @@
             "height": "2",
             "customPosition": "checked",
             "pos": {
-              "x": "1220",
-              "y": "580"
+              "x": "1190",
+              "y": "810"
             }
           }
         },
@@ -42,8 +54,8 @@
             "height": "2",
             "customPosition": "checked",
             "pos": {
-              "x": "180",
-              "y": "580"
+              "x": "110",
+              "y": "660"
             }
           }
         },
@@ -54,8 +66,8 @@
             "height": "2",
             "customPosition": "checked",
             "pos": {
-              "x": "630",
-              "y": "860"
+              "x": "610",
+              "y": "870"
             }
           }
         },
@@ -66,8 +78,8 @@
             "height": "2",
             "customPosition": "checked",
             "pos": {
-              "x": "1860",
-              "y": "700"
+              "x": "1830",
+              "y": "820"
             }
           }
         },
@@ -78,8 +90,8 @@
             "height": "2",
             "customPosition": "checked",
             "pos": {
-              "x": "1970",
-              "y": "220"
+              "x": "1860",
+              "y": "370"
             }
           }
         },
@@ -102,8 +114,8 @@
             "height": "2",
             "customPosition": "checked",
             "pos": {
-              "x": "970",
-              "y": "370"
+              "x": "950",
+              "y": "390"
             }
           }
         },
@@ -114,8 +126,8 @@
             "height": "2",
             "customPosition": "checked",
             "pos": {
-              "x": "60",
-              "y": "120"
+              "x": "10",
+              "y": "130"
             }
           }
         }
@@ -127,7 +139,7 @@
       "literal": "image"
     },
     "contents": {
-      "literal": "Color.jpg"
+      "literal": "1.jpg"
     }
   },
   "widgets/2": {
@@ -135,7 +147,7 @@
       "literal": "image"
     },
     "contents": {
-      "literal": "Blue Lizard.jpg"
+      "literal": "2.jpg"
     }
   },
   "widgets/3": {
@@ -143,7 +155,7 @@
       "literal": "image"
     },
     "contents": {
-      "literal": "Colorful Parrots Couple.jpg"
+      "literal": "5.jpg"
     }
   },
   "widgets/4": {
@@ -151,7 +163,7 @@
       "literal": "image"
     },
     "contents": {
-      "literal": "mountain.jpg"
+      "literal": "3.jpg"
     }
   },
   "widgets/5": {
@@ -159,7 +171,7 @@
       "literal": "image"
     },
     "contents": {
-      "literal": "Neighbours.jpg"
+      "literal": "6.jpg"
     }
   },
   "widgets/6": {
@@ -167,7 +179,7 @@
       "literal": "image"
     },
     "contents": {
-      "literal": "No one is free, even birds are chained to the sky.jpg"
+      "literal": "8.jpg"
     }
   },
   "widgets/7": {
@@ -175,7 +187,7 @@
       "literal": "image"
     },
     "contents": {
-      "literal": "Owens River and Sea Grass.jpg"
+      "literal": "7.jpg"
     }
   },
   "widgets/8": {
@@ -199,7 +211,7 @@
       "literal": "image"
     },
     "contents": {
-      "literal": "Tobacco Worm Portrait.jpg"
+      "literal": "4.jpg"
     }
   },
   "widgets/GetImages": {
@@ -215,17 +227,41 @@
     }
   },
   "widgets/Get Images": {
-    "action": {
-      "literal": {
-        "type": "procedure",
-        "value": "PR_GetGalleryId"
-      }
-    },
     "aimms.widget.type": {
       "literal": "button"
     },
     "title": {
       "literal": "Get Images"
+    },
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "PR_GoingFurther"
+      }
+    }
+  },
+  "widgets/tags": {
+    "aimms.widget.type": {
+      "literal": "label"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "SP_tags"
+        ]
+      }
+    }
+  },
+  "widgets/tag": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "SP_tags"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "scalar"
     }
   }
 }
