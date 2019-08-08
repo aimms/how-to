@@ -112,7 +112,9 @@ Most of this code is common for every HTTP request sent using the HTTP Client Li
 
     Set TotalParameters {
         Index: tp;
-        DATA:{origins,destinations,key,mode,language,region,avoid,units,arrival_time,departure_time,traffic_model,transit_mode,transit_routing_preference};
+        InitialData: {
+            DATA{origins,destinations,address,key,mode,language,region,avoid,units,arrival_time,departure_time,traffic_model,transit_mode,transit_routing_preference};
+        }
     }
     StringParameter requestId {
     
@@ -175,7 +177,7 @@ Now that we have set up our parameters, we will translate them into a URL using 
    web::query_format(requestparameters,formattedparameters);
    URL:="https://maps.googleapis.com/maps/api/distancematrix/xml?"+formattedparameters;
     
-Once this URL is generated, you just to create a ``GET`` request and submit it to the API. This is done in lines 10 through 15. 
+Once this URL is generated, you just need to create a ``GET`` request and submit it to the API. This is done in lines 10 through 15. 
 
 .. code-block:: aimms
 
