@@ -59,7 +59,7 @@ given a ``gallery_id`` and an ``api_key``, this method doesn't return the galler
 But before to be able to use the **flickr.galleries.getPhotos** method, we need the ``id`` of the gallery.
 After exploring the different methods available,we can find the `flickr.urls.lookupGallery <https://www.flickr.com/services/api/flickr.urls.lookupGallery.html>`_ that, given the URL address of a gallery, return informations about this gallery, including its ``id``.
 
-We can finally design the process we'll be using:
+We can finally design the process:
 
 #. Create a request to obtain the gallery ``id`` using **flickr.urls.lookupGallery**
 #. Create a request to obtain gallery photos using **flickr.galleries.getPhotos**
@@ -113,10 +113,12 @@ For this request, you'll need sereval objects:
 
 .. code-block:: aimms
     :linenos:
-    
+
     Set S_requestparam {
         Index: I_rp;
-        DATA:{api_key,method,url};
+        InitialData: {
+            DATA{api_key,method,url};
+        }
     }
     StringParameter SP_requestId {
     
@@ -247,7 +249,10 @@ You need to create these objects:
     
     Set S_requestparam {
         Index: I_rp;
-        DATA:{api_key,method,gallery_id};
+        Definition: {
+            DATA{api_key,method,gallery_id};
+        }
+	}
     StringParameter SP_requestId {
     
     }
@@ -408,7 +413,7 @@ You will find the related code in the example project.
 .. Note: please note that you can only specify 20 tags at the same time, and the answer will contains only one page of results (max 500 photos).
 
 Example project
-^^^^^^^^^^^^^^^^
+------------------
 
 Please download the :download:`AIMMS project <download/Flickr Project.zip>` 
 
