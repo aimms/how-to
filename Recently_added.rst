@@ -20,9 +20,9 @@ Recently added
 * :doc:`/Articles/294/294-Online-XML-HTTP-library`
 * :doc:`/Articles/289/289-logging-CDM`
 * :doc:`/Articles/258/258-save-a-case-from-aimms-procedure`
-* :doc:`/Articles/265/265-settings-for-errors-and-warnings`
-* :doc:`/Articles/266/266-units-of-measurement-check-equations`
-* :doc:`/Articles/266/266-units-of-measurement-localized-data`
-* :doc:`/Articles/251/251-pro-operations-best-practices`
-* :doc:`/Articles/280/280-install-cdm-service`
+.. * :doc:`/Articles/265/265-settings-for-errors-and-warnings`
+.. * :doc:`/Articles/266/266-units-of-measurement-check-equations`
+.. * :doc:`/Articles/266/266-units-of-measurement-localized-data`
+.. * :doc:`/Articles/251/251-pro-operations-best-practices`
+.. * :doc:`/Articles/280/280-install-cdm-service`
 

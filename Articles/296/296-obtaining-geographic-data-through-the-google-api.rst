@@ -148,8 +148,8 @@ Following the API documentation, we create two strings storing the different ori
 .. code-block:: aimms
     
     !Set the Locations
-    ListOrigins:="Eiff Tower, Paris | The atomium is in Brussels | AIMMS Haarlem | Roma Italy Coliseum | The alhambra, granada spain";
-    ListDestinations:="Eiffel Tower, Pari | The atomium, Brussels | AIMMS Haarlem | Coliseum, Roma Italy | The alhambra, granada spain";
+    ListOrigins:="**Eiff** Tower, Paris | The atomium is in Brussels | AIMMS Haarlem | Roma Italy Coliseum | The alhambra, granada spain";
+    ListDestinations:="Eiffel Tower, **Pari** | The atomium, Brussels | AIMMS Haarlem | Coliseum, Roma Italy | The alhambra, granada spain";
 
 .. tip::
 
