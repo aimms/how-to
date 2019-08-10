@@ -5,12 +5,15 @@
 Recently added
 ==============
 
+.. Added 9 Aug 2019: 286,289
 .. Added 26 July 2019: 290,292,293,294
 .. Added 15 July 2019: 289
 .. Added 3 July 2019: 258
 .. Added 21 June 2019: 265, 266, 266, 251
 .. Added 7 June 2019: 280
 
+* :doc:`/Articles/298/298-use-flickr-api`
+* :doc:`/Articles/296/296-obtaining-geographic-data-through-the-google-api`
 * :doc:`/Articles/290/290-identifying-differences`
 * :doc:`/Articles/292/292-identifying-error`
 * :doc:`/Articles/293/293-extracting-data-from-XML`
