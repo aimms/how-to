@@ -8,21 +8,29 @@ Extract Photos Using the Flickr API
 
 In this article, we'll learn how to use the Flickr REST API. 
 
-The process to deal with a REST API in AIMMS is very similar, however you can find details of the differences in `AIMMS Documentation: HTTP Client Library <https://documentation.aimms.com/httpclient/index.html>`. Here, we use a concrete example of this process to supplement the documentation.
+The process to deal with a REST API in AIMMS is very similar, however you can find details of the differences in `AIMMS Documentation: HTTP Client Library <https://documentation.aimms.com/httpclient/index.html>`_. Here, we use a concrete example of this process to supplement the documentation.
 
 **Use case**
 
-This use case is inspired by an `idratherbewriting tutorial <https://idratherbewriting.com/learnapidoc/docapis_flickr_example.html>`_.
+This use case is inspired by an `idratherbewriting <https://idratherbewriting.com/learnapidoc/docapis_flickr_example.html>`_ tutorial.
 
 Flickr is an image and video hosting social network with a database of millions of photos.
 Our mission will be to extract the photos from a `Flickr gallery <https://www.flickr.com/photos/flickr/galleries/72157647277042064/>`_.
 
 Prerequisites
 --------------
-Make sure the following items have been done:
+Make sure the following have been done:
 
 * Install the `AIMMS HTTP Client Library <https://documentation.aimms.com/httpclient/library.html#adding-the-http-client-library-to-your-model>`_
-* Obtain a `API Key <https://www.flickr.com/services/apps/create/apply/>`_
+* Obtain an `API Key <https://www.flickr.com/services/apps/create/apply/>`_
+
+Example project
+------------------
+
+You can download the example project for this tutorial from the link below:
+
+* :download:`Flickr_Project.zip <download/Flickr Project.zip>` 
+
 
 Required information
 ---------------------------------------------
@@ -106,9 +114,11 @@ Let's check what the `Flickr documentation <https://www.flickr.com/services/api/
 
 .. image:: ./flickr/lookupGallery.PNG 
 
-Two arguments are required that are an API key and an URL. You should now have access to your own API key, and the URL of the gallery is the following one: **https://www.flickr.com/photos/flickr/galleries/72157647277042064/**
+The request requires two arguments, API key URL. The URL of the gallery is as follows: ``https://www.flickr.com/photos/flickr/galleries/72157647277042064/``
 
-.. Note:: You can extract photos from any gallery by setting the ``SP_url`` to the URL of the wanted gallery.
+.. Note:: 
+
+    Using the example project, you can extract photos from any gallery by setting the ``SP_url`` to the URL of the wanted gallery.
 
 
 For this request, you'll need several objects:
@@ -418,12 +428,6 @@ You will find the related code in the example project.
 
     Please note that you can only specify 20 tags at the same time, and the answer will contain only one page of results (max 500 photos).
 
-Example project
-------------------
-
-You can download the example project from the link below:
-
-* :download:`Flickr_Project.zip <download/Flickr Project.zip>` 
 
 Related Topics
 ------------------------------------
