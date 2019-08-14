@@ -8,7 +8,7 @@ Stop AIMMS PRO services
 
 Log in as an admin on the AIMMS PRO service and stop the services
 
-.. image:: images/StopService1.png
+.. image:: images/StartStopServices1.png
     :align: center
 
 
@@ -17,24 +17,51 @@ Start Services app
 
 Open up the services window, e.g. by hitting the windows button and typing ‘Services’
 
-.. image:: images/StartServices0.png
+.. image:: images/StartServices1.png
     :align: center
 
 
 Select AIMMS PRO 2 service
 -----------------------------------------
 
-.. image:: images/piet.png
+.. image:: images/SelectAIMMSPROService1.png
+    :align: center
+    
+Select properties
+-----------------------------------------
+
+.. image:: images/SelectProperties0.png
     :align: center
 
 Actually change account
 -----------------------------------------
 
-.. image:: images/piet.png
+.. image:: images/PropertyTabLogOn0.png
+    :align: center
+    
+Here you can fill in a service account, see also: `service account <https://docs.microsoft.com/en-us/windows/security/identity-protection/access-control/service-accounts>`_
+
+Start the service again
+------------------------
+
+Log in again as an admin on the AIMMS PRO service and stop the services
+
+.. image:: images/StartServices1b.png
     :align: center
 
 
-see also: `service account <https://docs.microsoft.com/en-us/windows/security/identity-protection/access-control/service-accounts>`_
+Verify via Services
+----------------------------------------
+
+Open up the services window, e.g. by hitting the windows button and typing ‘Services’
+
+.. image:: images/StartServices1b.png
+    :align: center
+
+Verify by starting job
+----------------------------------------
+
+
 
 
 
