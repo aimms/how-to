@@ -1,7 +1,20 @@
 How do I change the account AIMMS PRO is running on?
 =====================================================
 
-IMPORTANT: since the end goal is that you’re running on another account then the system account, it might be possible that this new account does not allow you access to resources you previously could; please consult with your system administrator if this is the case.
+By running a process using a particular account, resources can be acquired that are particular to that account. To make AIMMS jobs use such an account, we need to make the AIMMS PRO service run using that account. This article provides a detailed and verifiable step by step procedure to achieve just this.
+
+.. note:: since the end goal is that you’re running on another account then the system account, it might be possible that this new account does not allow you access to resources you previously could; please consult with your system administrator if this is the case.
+
+
+Start situation
+---------------
+
+AIMMS jobs are run on an AIMMS PRO server with the name ``AimmsPROSession.exe``. 
+
+.. image:: images/AimmsPROSession1.png
+    :align: center
+
+The default account for these jobs is ``SYSTEM``.
 
 Stop AIMMS PRO services
 ------------------------
@@ -61,7 +74,12 @@ Open up the services window, e.g. by hitting the windows button and typing ‘Se
 Verify by starting job
 ----------------------------------------
 
+Starting the same job again, and opening up the task manager, details tab:
 
+.. image:: images/AimmsPROSession1b.png
+    :align: center
+
+The account used for AIMMS jobs is now ``chris``.
 
 
 
