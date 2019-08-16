@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AimmsXMLSchemaMapping xmlns="http://www.aimms.com/XMLSchema/AimmsXMLMappingSchema" MappedNameSpace="http://tempuri.org/AIMMS/auto-generated-namespace">
+	<ElementMapping name="DistanceMatrixResponse">
+		<ElementMapping name="status" read-filter="0"/>
+		<ElementMapping name="origin_address" maps-to="spOrigin(iOrigin)">
+			<VirtualAttributeMapping binds-to="iOrigin" assume-element-value="No"/>
+		</ElementMapping>
+		<ElementMapping name="destination_address" maps-to="spDestination(iDestination)">
+			<VirtualAttributeMapping binds-to="iDestination" assume-element-value="No"/>
+		</ElementMapping>
+		<ElementMapping name="row">
+			<VirtualAttributeMapping binds-to="iOrigin" assume-element-value="No"/>
+			<ElementMapping name="element">
+				<VirtualAttributeMapping binds-to="iDestination" assume-element-value="No"/>
+				<ElementMapping name="status" read-filter="0"/>
+				<ElementMapping name="duration">
+					<ElementMapping name="value" maps-to="pDuration(iOrigin,iDestination)" width="16" precision="0"/>
+					<ElementMapping name="text" read-filter="0"/>
+				</ElementMapping>
+				<ElementMapping name="distance">
+					<ElementMapping name="value" maps-to="pDistance(iOrigin,iDestination)" width="16" precision="0"/>
+					<ElementMapping name="text" read-filter="0"/>
+				</ElementMapping>
+			</ElementMapping>
+		</ElementMapping>
+	</ElementMapping>
+</AimmsXMLSchemaMapping>

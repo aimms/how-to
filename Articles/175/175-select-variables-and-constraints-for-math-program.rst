@@ -17,14 +17,14 @@ A sample declaration of a math program is shown below.
       Type: Automatic;
    }
 
-``Objective`` specifies which variable is the objective function of the math program. ``Direction`` specifies whether you want to minimize or maximize the objective function. The default options ``AllConstraints`` and ``AllVariables`` apply all the declared constraints and variables in your model in the math program. ``Type`` specifies what kind of a problem the math program is, e.g., a linear program, an integer program, and so on. The default option ``Automatic`` suffices in most cases. 
+``Objective`` specifies which variable is the objective function of the math program. ``Direction`` specifies whether you want to minimize or maximize the objective function. The default ``AllConstraints`` and ``AllVariables`` apply all the declared constraints and variables in your project to this math program. ``Type`` specifies what kind of a problem the math program is, e.g., a linear program, an integer program, and so on. The default option ``Automatic`` suffices in most cases. 
 
-One feature of AIMMS is that you can have multiple mathematical programs in the same project. An example use case is a sequential goal programming problem where the solution of the first problem is provided as input to the second problem. Some of the constraints (variables) might only be applicable to one of the math programs. The default value ``AllConstraints`` (``AllVariables``) will apply all the constraints (variables) to all the math programs in your project. This article will show you how to model your project so that you can control the constraints (variables) imposed on a math program. 
+AIMMS lets you have multiple math programs in the same project. An example use case is a sequential goal programming problem where the solution of the first problem is provided as input to the second problem. Some of the constraints (variables) might only be applicable to one of the math programs. Another example is if you to activate/deactivate some constraints on the model to see how the results vary. In this article, we demonstrate how to model your AIMMS project so that you can control the constraints (variables) imposed on a math program. 
 
 Default Constraints and Variables
 ----------------------------------------
 
-When you solve a mathematical program (or generate it via the GMP functions), AIMMS will use the values of the ``Constraints`` and ``Variables`` attributes of the mathematical program identifier to determine which symbolic variables and constraints should actually be considered in the model. The default values of ``Constraints`` and ``Variables`` attributes are the predefined sets ``AllConstraints`` and ``AllVariables`` respectively. ``AllConstraints`` contains all the constraints declared in your AIMMS project and similarly, ``AllVariables`` contains all the variables. 
+When you solve a math program (or generate it via the GMP functions), AIMMS will use the values of the ``Constraints`` and ``Variables`` attributes of the math program identifier to determine which symbolic variables and constraints should actually be considered. The default values of ``Constraints`` and ``Variables`` attributes are the predefined sets ``AllConstraints`` and ``AllVariables`` respectively. ``AllConstraints`` contains all the constraints declared in your AIMMS project and similarly, ``AllVariables`` contains all the variables. 
 
 Variables with definition
 """""""""""""""""""""""""""""
@@ -38,7 +38,7 @@ For variables with a definition, AIMMS will actually generate both the variable 
       Definition: Y+Z;
    }
 
-AIMMS will actually generate two things:
+AIMMS will generate:
 
 #. Variable ``X``
 
@@ -51,7 +51,7 @@ Selecting Constraints (Variables)
 
 To select the constraints (variables) to be applied in a math program, you can create a set as a subset of ``AllConstraints`` (``AllVariables``) and use that set in the declaration of the math program instead of ``AllConstraints`` (``AllVariables``). The below below example shows two sets ``ModelConstraints`` and ``ModelVariables`` being used in the math program ``Sample_Math_Program``. 
 
-You can either manually select the constraints and variables to be included in these subsets or use the definition like below to include all the constraints and variables present in a particular section or declaration section. Using a definition is recommended as it offers scalability - any new constraint or variable added inside that section will be automatically added to the subset and thereby used in the math program generation. You also do not need to worry about selecting variables with a definition in both the subsets. 
+You can either manually select the constraints and variables to be included in these subsets or use a definition like below to include all the constraints and variables present in a particular section or declaration. Using a definition is recommended as it offers scalability - any new constraint or variable added inside that section will be automatically added to the subset and thereby used in the math model. You also do not need to worry about selecting variables with a definition in both the subsets. 
 
 
 .. code-block:: aimms
@@ -73,5 +73,27 @@ You can either manually select the constraints and variables to be included in t
       Variables: ModelVariables;
       Type: Automatic;
    }
+
+
+.. note::
+
+   If you want to be able to edit the contents the sets ``ModelConstraints`` and ``ModelVariables`` in a procedure, you must not declare them with a definition. Instead, initialize their contents in the procedure before calling the ``solve`` statement. 
+
+   .. code-block:: aimms
+
+      !solve full model
+
+      ModelConstraints := AllConstraints*Section_or_Declaration_to_Optimize;
+      ModelVariables := AllVariables*Section_or_Declaration_to_Optimize;
+
+      solve Sample_Math_Program;
+
+      !solve model after removing a constraint
+      
+      ModelConstraints := ModelConstraints - Constraint_to_remove;
+
+      solve Sample_Math_Program;
+
+
 
 
