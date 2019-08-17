@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AimmsXMLSchemaMapping xmlns="http://www.aimms.com/XMLSchema/AimmsXMLMappingSchema" MappedNameSpace="http://tempuri.org/AIMMS/auto-generated-namespace">
+	<ElementMapping name="rsp">
+		<AttributeMapping name="stat" read-filter="0"/>
+		<ElementMapping name="photos">
+			<AttributeMapping name="page" read-filter="0" width="16" precision="0"/>
+			<AttributeMapping name="pages" read-filter="0" width="16" precision="0"/>
+			<AttributeMapping name="perpage" read-filter="0" width="16" precision="0"/>
+			<AttributeMapping name="total" read-filter="0" width="16" precision="0"/>
+			<ElementMapping name="photo">
+				<AttributeMapping name="id" maps-to="SP_Id(I_p)" width="16" precision="0"/>
+				<AttributeMapping name="owner" read-filter="0"/>
+				<AttributeMapping name="secret" maps-to="SP_secretId(I_p)"/>
+				<AttributeMapping name="server" maps-to="SP_serverId(I_p)" width="16" precision="0"/>
+				<AttributeMapping name="farm" maps-to="SP_farmId(I_p)" width="16" precision="0"/>
+				<AttributeMapping name="title" binds-to="I_p"/>
+				<AttributeMapping name="ispublic" read-filter="0" width="16" precision="0"/>
+				<AttributeMapping name="isfriend" read-filter="0" width="16" precision="0"/>
+				<AttributeMapping name="isfamily" read-filter="0" width="16" precision="0"/>
+				<AttributeMapping name="is_primary" read-filter="0" width="16" precision="0"/>
+				<AttributeMapping name="has_comment" read-filter="0" width="16" precision="0"/>
+			</ElementMapping>
+		</ElementMapping>
+	</ElementMapping>
+</AimmsXMLSchemaMapping>
