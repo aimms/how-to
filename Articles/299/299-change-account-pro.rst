@@ -1,68 +1,77 @@
-How do I change the account AIMMS PRO is running on?
+Change AIMMS PRO account
 =====================================================
+.. meta::
+   :description: How to change the account AIMMS PRO is running on.
+   :keywords: PRO, account
 
-By running a process using a particular account, resources can be acquired that are particular to that account. AIMMS jobs are started using the AIMMS PRO service, and use the same account on which the AIMMS PRO service is running; to make AIMMS jobs use such a particular account, we need to make the AIMMS PRO service run using that account. This article provides a detailed and verifiable step by step procedure to achieve just this.
 
-.. note:: Since the end goal is that you’re running on another account then the system account, it might be possible that this new account does not allow you access to resources you previously could; please consult with your system administrator if this is the case.
+By running a process using a particular account, you can access resources particular to that account. AIMMS jobs are started on the PRO service using the same account that the PRO service is running on. To specify a different account for AIMMS jobs, we need to run the PRO service on the new account. 
+
+This article explains the procedure to change the PRO account that runs the AIMMS jobs.
+
+.. note:: 
+
+    When you run on an account that is not the system account, it can affect access to resources and cause errors. In this case, please consult with your system administrator.
 
 
-Start situation
----------------
+Overview
+--------------------
 
-AIMMS jobs are run on a the AIMMS PRO server with the name ``AimmsPROSession.exe``. 
+AIMMS jobs are run on the PRO server with the name ``AimmsPROSession.exe``. 
 
 .. image:: images/AimmsPROSession1.png
     :align: center
 
 The default account for these jobs is ``SYSTEM``.
 
-Stop AIMMS PRO services
-------------------------
+To change the account for the service, you'll follow this process:
+
+1. Stop the PRO services.
+
+2. Change the service in Windows Services.
+
+3. Start the PRO services again.
+
+4. Test the job and verify the change in Windows.
+
+We'll go step-by-step in more detail below.
+
+Stopping the service in PRO
+---------------------------
 
 Before making changes to the service, it is a good idea to stop those services.
-Log in as an admin on the AIMMS PRO service and stop the services
+
+Log in as an admin on the PRO service and stop the services.
 
 .. image:: images/StartStopServices1.png
     :align: center
 
 
-Start Services app
-----------------------------------------
-
-Open up the services window, e.g. by hitting the windows button and typing ‘Services’
-
-.. image:: images/StartServices1.png
-    :align: center
-
-
-Select AIMMS PRO 2 service
+Changing the service in Windows Services
 -----------------------------------------
+#. Open up the Services app on your Windows system. (You can find it by typing "services" in the Windows menu search.)
 
-.. image:: images/SelectAIMMSPROService1.png
-    :align: center
+
+#. Select the AIMMS PRO 2 service. By default, the ``SYSTEM`` account is used for this service.
+
+    .. image:: images/SelectAIMMSPROService1.png
+       :align: center
     
-As you can see, by default, the ``SYSTEM`` account is used for this service.
     
-Select properties
------------------------------------------
+#. Right-click on the process and select *Properties* from the menu.
 
-By selecting the properties of the process
+    .. image:: images/SelectProperties0.png
+       :align: center
 
-.. image:: images/SelectProperties0.png
-    :align: center
+#. Go to the tab *Log On* and select the account the AIMMS PRO 2 service will use next time it is started.
 
-Actually change account
------------------------------------------
-
-And then selecting the tab ``Log On``, we are able to select the account on which the AIMMS PRO 2 service will use next time it is started.
-
-.. image:: images/PropertyTabLogOn0.png
-    :align: center
+    .. image:: images/PropertyTabLogOn0.png
+       :align: center
     
-Here you can fill in another account, such as a service account.  See also: `service account <https://docs.microsoft.com/en-us/windows/security/identity-protection/access-control/service-accounts>`_
+You can fill in another account, such as a service account.  Find out more in `Microsoft Documentation: Service accounts <https://docs.microsoft.com/en-us/windows/security/identity-protection/access-control/service-accounts>`_.
 
-Start the service again
-------------------------
+Restarting the service in PRO
+-----------------------------
 
 Log in again as an admin on the AIMMS PRO service and start the services again:
 
@@ -70,30 +79,32 @@ Log in again as an admin on the AIMMS PRO service and start the services again:
     :align: center
 
 
-Verify via Services
+Verifying the change in Windows Services
 ----------------------------------------
 
-Open up the services window, e.g. by hitting the windows button and typing ‘Services’
+Open up the Services app again.
 
 .. image:: images/SelectAIMMSPROService1b.png
     :align: center
 
-The service is now using the account ``chris``
+The service is now using the new account (in this example, ``chris``).
 
-Verify by starting job
-----------------------------------------
+Verifying the change in Windows Task Manager
+----------------------------------------------
 
-Starting the same job again, and opening up the task manager, details tab:
+Start the same job again. Then open the Windows Task Manager and go to the *Details* tab:
 
 .. image:: images/AimmsPROSession1b.png
     :align: center
 
 The account used for this AIMMS job is now ``chris``.
 
-Materials
+Test project
 ----------------
 
-To create this article, this :download:`WinUI model <model/WaitABit.zip>` was used. After publishing and launching this app, just press the huge button, to start an AIMMS job that waits for five minutes on the AIMMS PRO server.
+To test for yourself, you can use the simple WinUI model :download:`WaitABit.zip <model/WaitABit.zip>`. 
+
+After publishing and launching this app, just press the huge button to start an AIMMS job that waits for five minutes on the AIMMS PRO server.
 
 
 
