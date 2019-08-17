@@ -5,12 +5,14 @@
 Recently added
 ==============
 
-.. Added 16 Aug 2019: 299
+.. Added 16 Aug 2019: 299, 295
 .. Added 9 Aug 2019: 296, 298
 .. Added 26 July 2019: 290,292,293,294
 .. Added 15 July 2019: 289
 .. Added 3 July 2019: 258
 
+* :doc:`/Articles/295/295-convert-page-actions`
+* :doc:`/Articles/295/295-convert-maps`
 * :doc:`/Articles/299/299-change-account-pro`
 * :doc:`/Articles/298/298-use-flickr-api`
 * :doc:`/Articles/296/296-obtaining-geographic-data-through-the-google-api`
