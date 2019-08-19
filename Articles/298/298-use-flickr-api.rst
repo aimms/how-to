@@ -112,7 +112,7 @@ For details about how to formulate an HTTP request, please follow the article :d
 Our goal is to use the ``flickr.urls.lookupGallery`` method from the API using a GET request and to extract the gallery ``id`` from the answer file.
 Let's check what the `Flickr documentation <https://www.flickr.com/services/api/flickr.urls.lookupGallery.html>`_ has to tell us about this method.
 
-.. image:: ./flickr/lookupGallery.PNG 
+.. image:: ./flickr/lookupGallery.png 
 
 The request requires two arguments, API key URL. The URL of the gallery is as follows: ``https://www.flickr.com/photos/flickr/galleries/72157647277042064/``
 
@@ -123,7 +123,7 @@ The request requires two arguments, API key URL. The URL of the gallery is as fo
 
 For this request, you'll need several objects:
 
-.. image:: flickr/GalleryObjects.PNG
+.. image:: flickr/GalleryObjects.png
 
 .. code-block:: aimms
     :linenos:
@@ -204,7 +204,7 @@ To generate this XSD file, you can use an online generator such as the one provi
 
 Now create a string parameter ``SP_GalleryID`` made for containing the gallery ID information and using the XML schema mapping tool, map it to the ``rsp/gallery/id`` element of the XML file (not the ``rsp/gallery/Gallery_id`` element).
 
-.. image:: flickr/mapping1.PNG
+.. image:: flickr/mapping1.png
 
 .. Warning:: 
 
@@ -246,7 +246,7 @@ For that, we'll use the ``flickr.galleries.getPhotos`` method from the Flickr AP
     
 **Set the HTTP request**
 
-.. image:: flickr/Getphotos.PNG
+.. image:: flickr/Getphotos.png
 
 This request takes the parameters ``api_key`` and ``gallery_id``, and we want from the answer the ``farm`` ID, the ``server ID``, the ``ID`` and the ``secret`` for each photo in the gallery.
 But before extracting these, we need to get the XML file containing this information from an HTTP request.
@@ -255,7 +255,7 @@ The process is almost the same as in the last request, the only thing changing h
 
 You need to create these objects: 
 
-.. image:: flickr/getphotosObjects.PNG
+.. image:: flickr/getphotosObjects.png
 
 
 .. code-block:: aimms
@@ -319,7 +319,7 @@ You should now have access to the XML answer file in the direction ``SP_response
 
 Before extracting the data from the XML file using the AIMMS XML schema mapping tool, you need to create objects to contain this information:
 
-.. image:: flickr/getidsObjects.PNG
+.. image:: flickr/getidsObjects.png
 
 .. code-block:: aimms
     :linenos:
@@ -368,7 +368,7 @@ We know from the `Flickr API Documentation: URLs <https://www.flickr.com/service
 Now we'll set a GET request to the URL corresponding to each photo contained in the gallery, to obtain the photos.
 For that, we need some new objects:
 
-.. image:: flickr/photoObjects.PNG
+.. image:: flickr/photoObjects.png
 
 
 .. code-block:: aimms
@@ -412,7 +412,7 @@ Congratulations, we finally reached our goal!
 
 And, after some efforts, we can finally use those photos in AIMMS:
 
-.. image:: flickr/final.PNG 
+.. image:: flickr/final.png 
     :align: center
 
 
