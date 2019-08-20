@@ -1,0 +1,131 @@
+## ams_version=1.0
+
+Model Main_SelectConstraints {
+    DeclarationSection Input_Declarations {
+        Set s_Products {
+            Index: i_product;
+            InitialData: data { a, b };
+        }
+        Set s_Markets {
+            Index: i_market;
+            InitialData: data { m, n };
+        }
+        Parameter p_Demand {
+            IndexDomain: (i_product,i_market);
+            InitialData: data { ( a, m ) : 1,  ( a, n ) : 1,  ( b, m ) : 2,  ( b, n ) : 2 };
+        }
+        Parameter p_PlantMinCapacity {
+            InitialData: 8;
+        }
+        Parameter p_PlantMaxCapacity {
+            InitialData: 20;
+        }
+    }
+    DeclarationSection Mathematical_Program_declarations {
+        Variable v_obj {
+            Range: free;
+            Definition: sum( (i_product, i_market), v_Deliver(i_product, i_market) );
+        }
+        Variable v_Produce {
+            IndexDomain: i_product;
+            Range: nonnegative;
+        }
+        Variable v_Deliver {
+            IndexDomain: (i_product,i_market);
+            Range: nonnegative;
+        }
+        Constraint c_DeliverDemand {
+            IndexDomain: (i_product,i_market);
+            Definition: v_Deliver(i_product, i_market) = p_Demand(i_product, i_market);
+            Comment: {
+                "We meet demand precisely; no unmet demand, no over delivery."
+            }
+        }
+        Constraint c_PlantMaxCapacity {
+            Definition: sum( i_product, v_Produce(i_product) ) <= p_PlantMaxCapacity;
+            Comment: "The plant cannot produce more than p_PlantMaxCapacity";
+        }
+        Constraint c_ProductBalance {
+            IndexDomain: i_product;
+            Definition: v_Produce(i_product) = sum( i_market, v_Deliver(i_product, i_market) );
+            Comment: {
+                "Balance on products, amount produced = total amount delivered; we do not keep stock."
+            }
+        }
+        Set s_mpVars {
+            SubsetOf: AllVariables;
+            Definition: AllVariables * Mathematical_Program_declarations;
+        }
+        Set s_mpCons {
+            SubsetOf: AllConstraints;
+            Definition: AllConstraints * Mathematical_Program_declarations;
+        }
+        MathematicalProgram mp_produceDeliver {
+            Objective: v_obj;
+            Direction: maximize;
+            Constraints: s_mpCons;
+            Variables: s_mpVars;
+            Type: Automatic;
+        }
+    }
+    DeclarationSection Attic {
+        Constraint c_PlantMinCapacity {
+            Definition: sum( i_product, v_Produce(i_product) ) >= p_PlantMinCapacity;
+            Comment: "The plant operates efficiently when it at least produces p_PlantMinCapacity";
+        }
+    }
+    DeclarationSection Reporting_declarations {
+        Set s_AcceptableSolutionStates {
+            SubsetOf: AllSolutionStates;
+            InitialData: data { Optimal, LocallyOptimal, IntermediateNonOptimal, IntegerSolution };
+        }
+        StringParameter sp_SolutionAcceptable {
+            Definition: {
+                if ep_solutionState in s_AcceptableSolutionStates then
+                	"Solution is acceptable"
+                else
+                	"Solution is not acceptable; at least one of our constraints is violated"
+                endif
+            }
+        }
+        ElementParameter ep_solutionState {
+            Range: AllSolutionStates;
+            Definition: mp_produceDeliver.ProgramStatus;
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            Solve mp_produceDeliver ;
+        }
+    }
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

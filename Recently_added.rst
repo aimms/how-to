@@ -5,13 +5,16 @@
 Recently added
 ==============
 
-.. Added 8 Aug 2019: 296
+.. Added 16 Aug 2019: 299, 295
+.. Added 9 Aug 2019: 296, 298
 .. Added 26 July 2019: 290,292,293,294
 .. Added 15 July 2019: 289
 .. Added 3 July 2019: 258
-.. Added 21 June 2019: 265, 266, 266, 251
-.. Added 7 June 2019: 280
 
+* :doc:`/Articles/295/295-convert-page-actions`
+* :doc:`/Articles/295/295-convert-maps`
+* :doc:`/Articles/299/299-change-account-pro`
+* :doc:`/Articles/298/298-use-flickr-api`
 * :doc:`/Articles/296/296-obtaining-geographic-data-through-the-google-api`
 * :doc:`/Articles/290/290-identifying-differences`
 * :doc:`/Articles/292/292-identifying-error`
@@ -19,9 +22,4 @@ Recently added
 * :doc:`/Articles/294/294-Online-XML-HTTP-library`
 * :doc:`/Articles/289/289-logging-CDM`
 * :doc:`/Articles/258/258-save-a-case-from-aimms-procedure`
-.. * :doc:`/Articles/265/265-settings-for-errors-and-warnings`
-.. * :doc:`/Articles/266/266-units-of-measurement-check-equations`
-.. * :doc:`/Articles/266/266-units-of-measurement-localized-data`
-.. * :doc:`/Articles/251/251-pro-operations-best-practices`
-.. * :doc:`/Articles/280/280-install-cdm-service`
 
