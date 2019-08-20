@@ -1,0 +1,17 @@
+{
+   "results": [
+      {
+         "alternatives": [
+            {
+               "confidence": 0.99, 
+               "transcript": "the space shuttle enterprise was the first orbiter of the space shuttle system rolled out on September seventeenth nineteen seventy six it was built for NASA is part of the space shuttle program to perform atmospheric test flights after being launched from a modified Boeing seven forty seven "
+            }
+         ], 
+         "final": true
+      }
+   ], 
+   "result_index": 0, 
+   "warnings": [
+      "Unknown arguments: continuous."
+   ]
+}

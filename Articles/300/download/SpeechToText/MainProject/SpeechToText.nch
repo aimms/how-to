@@ -1,0 +1,13 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"MainExecution" "FromSpeechToText" "2019-07-05 10:12:28"
+"responseCode" "P_responseCode" "2019-08-15 12:58:52"
+"Coption" "SP_Coption" "2019-08-15 12:58:59"
+"Clientop" "SClientop" "2019-08-15 12:59:03"
+"SClientop" "S_Clientop" "2019-08-15 12:59:09"
+"requestId" "SP_requestId" "2019-08-15 12:59:14"
+"requestURI" "SP_requestURI" "2019-08-15 12:59:20"
+"myHttpHeaders" "SP_myHttpHeaders" "2019-08-15 12:59:26"
+"responseFileName" "SP_responseFileName" "2019-08-15 12:59:31"
+"requestFileName" "SP_requestFileName" "2019-08-15 12:59:36"
+"apikey" "SP_apikey" "2019-08-15 12:59:41"
+"authorization" "SP_authorization" "2019-08-15 12:59:46"
