@@ -18,6 +18,6 @@ These topics help you to use the HTTP Library with your AIMMS project.
    /Articles/294/294-Online-XML-HTTP-library
    /Articles/296/296-obtaining-geographic-data-through-the-google-api
    /Articles/298/298-use-flickr-api
-   /Articles/300/300-ibm-overview
+   /Articles/300/300-ibm-api-speech-to-text
    /Articles/301/301-Image-Recognition
    
