@@ -17,6 +17,7 @@ Learn how to convert business opportunities into optimization models. This secti
 .. toctree::
    :maxdepth: 1
     
+   /Articles/291/291-from-solve-to-gmp-including-callback
    /Articles/226/226-color-a-map-with-constraint-programming
    /Articles/138/138-ROGO
    /Articles/137/137-Small-Rostering
