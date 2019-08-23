@@ -1,4 +1,4 @@
-Use the IBM image recognition API
+Use the IBM Image Recognition API
 ==================================================================================================
 
 .. meta::
@@ -15,7 +15,7 @@ Before we begin, make sure you have done the following:
 
 * Download and unzip the photo from the link below, and place it at the root of your project folder. 
 
-    :download:`download this photo <download/clownfish.zip>`
+    :download:`Clownfish photo <download/clownfish.zip>`
 
 * Read the IBM tutorial and obtain your own API Key from the link below. (The CURL section is not relevant for this case.)
 

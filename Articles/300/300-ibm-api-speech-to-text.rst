@@ -10,7 +10,7 @@ This article contains an overview of IBM APIs, and a short example using the Spe
 Introduction to IBM APIs
 -----------------------------------------------
 
-IBM is known for their hardware and software, but they also provides a lot of APIs on the IBM Cloud. This API provides a variety of services, some free and some paid.
+IBM is known for their hardware and software, but they also provide a lot of APIs on the IBM Cloud. This API provides a variety of services, some free and some paid.
 
 Their `IBM Cloud Docs: APIs <https://cloud.ibm.com/apidocs>`_ provides all the specifications for each API. 
 
