@@ -19,9 +19,10 @@ Our mission will be to extract the photos from a `Flickr gallery <https://www.fl
 
 Prerequisites
 --------------
-Make sure the following have been done:
+Before you begin, make sure you have done the following:
 
 * Install the `AIMMS HTTP Client Library <https://documentation.aimms.com/httpclient/library.html#adding-the-http-client-library-to-your-model>`_
+
 * Obtain an `API Key <https://www.flickr.com/services/apps/create/apply/>`_
 
 Example project
@@ -41,13 +42,13 @@ Information about the URL format where we can address our request and the authen
 
     According to Flickr's documentation, the main authentication system used for this API is a complex OAuth protocol, but some methods can still be used with a simple API key. We'll use the API key method here.
 
-The request format is specified as a URL endpoint followed by: 
+The request format is specified as a URL endpoint followed by these parameters: 
 
-* REQUIRED parameter method is used to specify the calling method.
-* REQUIRED parameter api_key is used to specify your API Key.
-* optional parameter format is used to specify a response format.
+* ``method`` (REQUIRED) - specify the calling method
+* ``api_key`` (REQUIRED) - specify your API Key
+* ``format`` (optional) - specify a response format
 
-The arguments, responses and error codes for each method are listed on the method's spec page, found on the `Flickr API index page <https://www.flickr.com/services/api/>`_.
+The arguments, responses, and error codes for each method are listed on the method's spec page, found on the `Flickr API index page <https://www.flickr.com/services/api/>`_.
 
 To download an image using a ``GET`` request, we need a photo URL. 
 
@@ -406,11 +407,12 @@ The code of this procedure is as follows:
     endfor;
 
 The choice to set the names of photo files using the ``SP_id(I_p)`` parameter is arbitrary. The result is that every file name is the ID of the concerned photo in Flickr. (If you chose to use title of photos, for example, unsupported special characters may be included.)
-Also, the choice of the destination **MainProject/WebUI/resources//images/** refers to the use of `WebUI image widget <https://manual.aimms.com/webui/image-widget.html>`_.
+
+The choice of the destination **MainProject/WebUI/resources//images/** refers to the use of `WebUI image widget <https://manual.aimms.com/webui/image-widget.html>`_.
 
 Congratulations, we finally reached our goal!
 
-And, after some efforts, we can finally use those photos in AIMMS:
+Now we can use the photos in AIMMS:
 
 .. image:: flickr/final.png 
     :align: center
@@ -420,8 +422,9 @@ Further information
 ---------------------------------------------
 
 The Flickr API also allows you to search for photos using tags with the `flickr.photos.search method <https://www.flickr.com/services/api/flickr.photos.search.html>`_ .
-It'll then send you back a list of photos identified by those tags with all the IDs you need to recreate their url.
-And by mapping into aimms these data and making a get request to the newly created urls, you can get the photos.
+
+It will then send you back a list of photos identified by those tags with all the IDs you need to recreate their URL.
+And by mapping the data into AIMMS and making a GET request to the newly created URLs, you can get the photos.
 You will find the related code in the example project.
 
 .. note::
