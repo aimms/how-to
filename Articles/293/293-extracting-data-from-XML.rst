@@ -22,7 +22,7 @@ File formats related to XML
 Use Case
 ----------
 
-In this example, we will extract data from a breakfast menu containing data about meals, their price, the number of calories, and a small description. (From an example provided at `W3Schools <https://www.w3schools.com/xml/simple.xml>`_)
+In this example, we will extract data from a breakfast menu containing data about meals, their price, the number of calories, and a small description. (From an example provided at `W3Schools <https://www.w3schools.com/xml/simple.xml>`_.)
 
 .. code-block:: xml
 

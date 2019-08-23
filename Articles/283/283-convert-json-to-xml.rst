@@ -59,6 +59,6 @@ To extract the data from your newly created XML file, follow the process describ
 Related Topics
 -----------------
 
-* AIMMS How-To: :doc:`../293/293-extracting-data-from-XML`.
+* AIMMS How-To: :doc:`../293/293-extracting-data-from-XML`
 * AIMMS Documentation: `Collaborative Project Development <https://download.aimms.com/aimms/download/manuals/AIMMS3UG_OrganizingProjectInLibraries.pdf>`_
 
