@@ -2,7 +2,7 @@ Convert Audio File with IBM API
 ================================================
 
 .. meta::
-   :description: An overview of IBM APIs in the context of converting audio files to text.
+   :description: An overview of using IBM APIs with AIMMS in the context of converting audio files to text.
    :keywords: IBM, API, audio, speech, text, http
 
 This article contains an overview of IBM APIs, and a short example using the Speech-to-Text API.

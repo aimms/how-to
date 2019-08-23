@@ -2,58 +2,61 @@ Use the IBM image recognition API
 ==================================================================================================
 
 .. meta::
-   :description: An overview of IBM APIs in the context of image recognition.
+   :description: An overview of using IBM APIs with AIMMS in the context of image recognition.
    :keywords: IBM, API, image, recognition, http
 
-In this article, we will show how to use the image recognition API from IBM to identify an image.
+In this article, we will show how to use the Image Recognition API from IBM to identify an image.
 
 This API takes an image (JPG, PNG, GIF, etc) and returns a JSON file explaining the result of the machine learning algorithm trying to recognize it.
 
 Prerequisites
 -----------------------------------------------
+Before we begin, make sure you have done the following:
 
-* :download:`download this photo <download/clownfish.zip>` and unzip it a the root of your project folder.
-* Obtain your own API key following `this reference <https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-getting-started-tutorial>`_. You can stop after obtaining your API key, you don't have to worry about curl commands.
-* install the AIMMS HTTP Client library following `this tutorial <https://documentation.aimms.com/httpclient/library.html#adding-the-http-client-library-to-your-model>`_ .
+* Download and unzip the photo from the link below, and place it at the root of your project folder. 
 
-Overview of IBM Cloud APIs
+    :download:`download this photo <download/clownfish.zip>`
+
+* Read the IBM tutorial and obtain your own API Key from the link below. (The CURL section is not relevant for this case.)
+
+    `IBM APIs: Visual Recognition Tutorial <https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-getting-started-tutorial>`_
+
+* Install the AIMMS HTTP Client Library according to `AIMMS Documentation: Adding the HTTP Client Library <https://documentation.aimms.com/httpclient/library.html#adding-the-http-client-library-to-your-model>`_.
+
+Basics of IBM Cloud APIs
 -----------------------------------------------
 
-You can find in  the IBM Cloud website the `documentation of this API <https://cloud.ibm.com/apidocs/visual-recognition#classify-images>`_
+You can find information about this API in `IBM Cloud API Docs: Visual Recognition <https://cloud.ibm.com/apidocs/visual-recognition#classify-images>`_.
 
 The Authentication system we'll be using is a simple API key.
-The request to classify an image can be a GET request using the url of a photo or a POST request where we'll send to the server the document to analyze. Here, we'll be using the POST request.
+You can use a GET request using the URL of a photo, or a POST request to send the document to analyze to the server. (Here, we'll be using the POST request, explained in IBM docs in section *Methods > Classify images*.)
 
-You can find informations about the used method in the subsection **Classify images** from the **Methods** section.
-
-There are 3 different kinds of parameters we can set for this method.
+There are 3 kinds of parameters we can set for this method.
 
 * **Headers**:
 
 
-.. image:: images/customparam.png
-    :align: center
-    
-    
-There is only one here which is used to set the language for the answer file,we will set it to "en" for english.
+    .. image:: images/customparam.png
+        :align: center
+        
+        
+    We'll set the language for the answer file to ``en`` for English.
 
 * **Query parameters**:
 
     .. image:: images/queryparam.png
-        :align: center
-        
-This one is the version of the API we want to use, and will here be 2018-03-19.
+            :align: center
+            
+    We'll specify the version of the API we want to use, in this case ``2018-03-19``.
 
 * **Form parameters**:
 
-.. image:: images/formparam.png
-    :align: center
-        
-We'll be using the ``images_file`` parameters that is used to set the photo we want to analyze. We'll also set the parameters ``threshold`` and ``Classifiers_ids`` as an example.
+    .. image:: images/formparam.png
+        :align: center
+            
+    We'll be using the ``images_file`` parameters that is used to set the photo we want to analyze. We'll also set the parameters ``threshold`` and ``Classifiers_ids`` as an example.
 
-The documentation is quite complete but it gives examples using CURL, a client for formulating HTTP requests. 
-
-Our goal will be to translate the CURL requests into AIMMS and to set the different kind of parameters.
+The IBM documentation gives examples using CURL, a client for formulating HTTP requests. Here we'll find out how to translate the CURL requests into AIMMS and set the parameters.
 
 Example project
 ----------------
@@ -114,7 +117,7 @@ The final code will be:
     web::request_invoke(SP_requestId, P_responseCode);
 
 
-And you'll need these identifiers:
+Additionally, you'll need these identifiers:
 
 .. code-block:: aimms
     :linenos:
@@ -152,8 +155,7 @@ Let's check the example of the documentation using CURL.
 .. image:: images/Curl1.png
 
 
-Here, the URL is specified at the end of the request and the query parameters are added at the end of the endpoint of the URL.
-We can do the same thing in AIMMS:
+Here, the URL is specified at the end of the request, and the query parameters are added at the end of the endpoint of the URL. We can do the same thing in AIMMS:
 
 .. code-block:: aimms
     :linenos:
@@ -173,9 +175,9 @@ Form parameters
 
 In the given example, the form parameters are specified by writing ``-F parameter= value``. 
 
-From the `CURL documentation <https://curl.haxx.se/docs/httpscripting.html#The_HTTP_Protocol>`_  (in section **4.2 : GET** ) we learn that when you specify this kind of parameters in CURL, the client then redirects to another URL composed of the basic URL where we add the formatted form parameters at the end.
+From the `CURL documentation <https://curl.haxx.se/docs/httpscripting.html#The_HTTP_Protocol>`_  (in section **4.2 : GET** ) we learn that when you specify this kind of parameters in CURL, the client then redirects to another URL, i.e., the base URL plus the formatted form parameters.
 
-We can also do the same thing in a different way in AIMMS. Let's transform the previous code and configure form parameters and query parameters.
+We can also do the same thing in a different way in AIMMS. Let's transform the previous code and configure the form and query parameters.
 
 .. code-block:: aimms
     :linenos:
@@ -189,7 +191,7 @@ We can also do the same thing in a different way in AIMMS. Let's transform the p
     SP_requestURI := "https://gateway.watsonplatform.net/visual-recognition/api/v3/classify?"+SP_formattedRequestParam;
 
 The ``threshold`` and ``classifier_ids`` parameters can be set in the request URL but the ``images_file`` doesn't have a text value or a float we can put in the URL, so it needs to be set elsewhere.
-For that, we can use the ``web::request_setRequestBody`` method to put the file to be analyzed in the body of the request which sends file to the server.
+For that, we can use the ``web::request_setRequestBody`` method to put the file to be analyzed in the body of the request which sends the file to the server.
 
 .. code-block:: aimms
     :linenos:
@@ -201,7 +203,7 @@ Specifying headers
 ^^^^^^^^^^^^^^^^^^^^
 
 We want to specify the **headers** of the request.
-More specificly, we want to specify a header called ``Accept-Language``. The HTTP client library already have methods to set headers, but this is not a native header of the HTTP client library, so we need to add it to the list of headers.
+More specifically, we want to specify a header called ``Accept-Language``. We need to add it to the list of headers, as is not a native header of the HTTP Client Library.
 
 .. code-block:: aimms
     :linenos:
