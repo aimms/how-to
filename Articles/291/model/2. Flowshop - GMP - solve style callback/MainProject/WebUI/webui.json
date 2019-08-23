@@ -1,0 +1,135 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "FlowshopGanttChart",
+          "layoutInfo": {
+            "width": "8",
+            "height": "3"
+          }
+        },
+        {
+          "uri": "FlowshopScalars",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "FLowshopProgressLinechart",
+          "layoutInfo": {
+            "width": "8",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    },
+    "maxcolumns": {
+      "literal": 10
+    },
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_GCWidgetActionSpecs"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_GCWidgetActionSpecs",
+            "slice": [
+              {
+                "index": "i_wao",
+                "type": "free",
+                "value": "i_wao"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "widgets/FlowshopGanttChart": {
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "time.reference": {
+      "literal": "\"2017-01-01\""
+    },
+    "time.resolution": {
+      "literal": 1
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_GCJobStart",
+          "p_GCJobDuration"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Gantt Chart when the Jobs are scheduled on the available machines"
+    },
+    "contents.partition": {
+      "literal": {
+        "resources": [
+          "m"
+        ],
+        "jobs": [
+          "<IDENTIFIER-SET>",
+          "j"
+        ],
+        "aggregated": []
+      }
+    }
+  },
+  "widgets/FlowshopScalars": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_MaxMachines",
+          "p_MaxJobs"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "title": {
+      "literal": "ModelParameters"
+    }
+  },
+  "widgets/FLowshopProgressLinechart": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_Incumbents",
+          "p_Bestbounds"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "linechart"
+    },
+    "title": {
+      "literal": "Gap overview"
+    }
+  }
+}

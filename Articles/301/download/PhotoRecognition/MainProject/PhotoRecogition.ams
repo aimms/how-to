@@ -1,0 +1,70 @@
+## ams_version=1.0
+
+Model Main_PhotoRecognition {
+    Procedure PR_Request {
+        Body: {
+            SP_requestFileName:="clownfish.JPG";
+            SP_responseFileName := "Answer.json";
+            SP_apikey:="YOUR_API_KEY";
+            
+            SP_Requestparam:={
+            	'version' : "2018-03-19",
+            	'threshold' : "0.6",
+            	'classifier_ids' : "default"
+            };
+            web::query_format(SP_Requestparam,SP_formattedRequestParam);
+            !given on the IBMCloud website
+            SP_requestURI := "https://gateway.watsonplatform.net/visual-recognition/api/v3/classify?"+SP_formattedRequestParam;
+            !Create request
+            web::request_create(SP_requestId);
+            web::request_setURL(SP_requestId, SP_requestURI);
+            web::request_setMethod(SP_requestId, "POST");
+            !Set Headers
+            web::HttpHeaders:= DATA{ Accept, Accept-Encoding, Authorization, Cache-Control, Content-Length, Content-Type, Transfer-Encoding, Location ,Accept-Language};
+            web::request_getHeaders(SP_requestId, SP_myHttpHeaders);
+            SP_myHttpHeaders[ 'Accept-Language' ] := "en";
+            !Authentication
+            web::base64_encode( "apikey" + ":" + SP_apikey, SP_authorization);
+            SP_myHttpHeaders[ 'Authorization' ] := "Basic " + SP_authorization;
+            web::request_setHeaders(SP_requestId, SP_myHttpHeaders);
+            
+            web::request_setRequestBody(SP_requestId, 'File', SP_requestFileName);
+            web::request_setResponseBody(SP_requestId, 'File', SP_responseFileName);
+            web::request_getOptions(SP_requestId,SP_requestOption);
+            SP_requestOption['requestTimeout'] := "30";
+            web::request_setOptions(SP_requestId, SP_requestOption);
+            web::request_invoke(SP_requestId, P_responseCode);
+        }
+        StringParameter SP_requestFileName;
+        StringParameter SP_responseFileName;
+        StringParameter SP_requestURI;
+        Parameter P_responseCode;
+        StringParameter SP_requestId;
+        StringParameter SP_requestOption {
+            IndexDomain: web::co;
+        }
+        StringParameter SP_apikey;
+        StringParameter SP_myHttpHeaders {
+            IndexDomain: web::httpHeader;
+        }
+        StringParameter SP_authorization;
+        Set S_Param {
+            Index: i_p;
+            InitialData: DATA{version,threshold,classifier_ids};
+        }
+        StringParameter SP_Requestparam {
+            IndexDomain: i_p;
+        }
+        StringParameter SP_formattedRequestParam;
+    }
+    Procedure PR_JsonToXML {
+        Body: {
+            SP_InputFile:="Answer.json";
+            SP_Outputfile:="Anwer.xml";
+            
+            jxml::ConvertFromJsonToXML(SP_InputFile,SP_Outputfile);
+        }
+        StringParameter SP_InputFile;
+        StringParameter SP_Outputfile;
+    }
+}

@@ -65,29 +65,31 @@
     </p>
     {{ toc }}
 </div>
-{% endif %} {% endblock %} 
+{% endif %} {% endblock %} {% block document %} {{ super() }} {% if (("index" in pagename) or ("ContentIndex" in pagename) or ("search" in pagename)) %} {# Do nothing :) I don't know how to do the negation properly in Jinja #} {% else %} {% if Display_3rd_Party_Extensions
+%}
 
-{% block document %} {{ super() }}
-
-{% if (("index" in pagename) or ("ContentIndex" in pagename) or ("search" in pagename)) %}
-
-{# Do nothing :) I don't know how to do the negation properly in Jinja #}
-
-{% elif Display_3rd_Party_Extensions %}
-
-<h3 style="display: inline; margin-right: 20px;">Was this helpful ?</h3>
+<h3 style="display: inline; margin-right: 20px;">Was this helpful?</h3>
 
 <!-- LikeBtn.com BEGIN -->
-<span class="likebtn-wrapper" data-theme="elegant" data-white_label="true" data-show_like_label="false" data-popup_disabled="true" data-share_enabled="false" data-tooltip_enabled="false" data-site_id="5c4b11426fd08b424f7e547c"></span>
-<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+<span class="likebtn-wrapper" data-theme="elegant" data-white_label="true" data-identifier="item_1" data-show_like_label="false" data-counter_show="false" data-popup_dislike="true" data-popup_html="Thanks for your feedback!<br>You can tell us more on<br><a href= &quot;https://community.aimms.com/search?q={{ title|striptags|e }}&quot; target= &quot;_blank&quot; >AIMMS Community</a>"
+    data-share_enabled="false" data-tooltip_enabled="false" data-site_id="5c4b11426fd08b424f7e547c"></span>
+<script>
+    (function(d, e, s) {
+        if (d.getElementById("likebtn_wjs")) return;
+        a = d.createElement(e);
+        m = d.getElementsByTagName(e)[0];
+        a.async = 1;
+        a.id = "likebtn_wjs";
+        a.src = s;
+        m.parentNode.insertBefore(a, m)
+    })(document, "script", "//w.likebtn.com/js/w/widget.js");
+</script>
 <!-- LikeBtn.com END -->
 
 {% endif %}
 
-{% endblock %} 
-
-
-{% block footer %} {{ super() }}
+<!--
+<a href="https://community.aimms.com/search?q={{ title|striptags|e }}" target="_blank">Give feedback for this article on the AIMMS Community</a> -->{% endif %} {% endblock %} {% block footer %} {{ super() }}
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1290545-14"></script>
 <script>
@@ -106,9 +108,13 @@
 
 <!-- Insided embeddable -->
 <script>
-(function(w,d,s){var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='//embeddable-widgets-euw1.insided.com/aimms-en.insided-conversational.js';f.parentNode.insertBefore(j,f);})(window,document,'script');
+    (function(w, d, s) {
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s);
+        j.async = true;
+        j.src = '//embeddable-widgets-euw1.insided.com/aimms-en.insided-conversational.js';
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script');
 </script>
-    
-{% endif %}
 
-{% endblock %}
+{% endif %} {% endblock %}

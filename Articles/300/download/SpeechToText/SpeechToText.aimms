@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<References AIMMS_Version="4.68.1.6 (x64)">
+	<MainProject Path="MainProject" />
+	<Library System="true" Path="AimmsPro" />
+	<Library System="true" Path="AimmsWebUI" />
+	<RepositoryLibrary UUID="DABB08E6-6AD8-4118-B08B-46C1CBFAEA04" Name="HTTPClient" Version="1.0.2.30" />
+	<Library Path=".\JsonXML" />
+</References>

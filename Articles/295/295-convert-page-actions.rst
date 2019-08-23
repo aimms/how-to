@@ -1,4 +1,4 @@
-﻿Upgrade Old WebUI Page Actions
+﻿Upgrade WebUI Page Actions
 =========================================
 .. meta::
    :description: A brief guide to upgrading Page Actions in your WebUI app.

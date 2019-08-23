@@ -5,21 +5,11 @@ Retrieve Geographic Data with Google Maps API
    :description: Using Google Maps API to return geographic data to an AIMMS project.
    :keywords: google, 
 
-In this article, we will learn how to use the HTTP Library to obtain data from a Google map API. Those data will be distances between different places.
+In this article, we will learn how to use the HTTP Library to obtain distance data from a Google Maps API. 
 
-Let's say we're planning a road trip in Europe and we want to visit some very famous places:
+Let's say we're planning a road trip in Europe and we want to visit sites in different cities. We can use the Distance Matrix API from Google Maps to calculate important information for our trip. 
 
-* The Atomium in Brussels, Belgium
-
-* The Eiffel tower in Paris, France
-
-* The AIMMS office in Haarlem, Netherlands
-
-* The Colosseum in Roma, Italy
-
-* The Alhambra in Granada, Spain
-
-We can use the Distance Matrix API from Google Maps to calculate important information for our trip. We want to know:
+We want to know:
 
 * Distances between locations
 
