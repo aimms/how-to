@@ -19,7 +19,7 @@ Before we begin, there are a couple things you'll need to have in place.
 Example project
 ------------------
 
-You can download the example AIMMS project here: :download:`Google API Example.zip <download/GoogleAPIExample.zip>` 
+You can download the example AIMMS project here: :download:`Google API Example.zip <downloads/GoogleAPIExample.zip>` 
 
 Informations about the request
 -----------------------------------------------
@@ -64,24 +64,24 @@ To create the request, the code is as follows:
 You'll also need the following AIMMS identifiers:
 
 .. code-block:: aimms
-	:linenos:
+   :linenos:
 	
 	Parameter P_Lat;
-    Parameter P_Long;
-    StringParameter SP_responseFile;
-    Set S_reqpar {
-        Index: rp;
-        InitialData: DATA{key,address};0001
-    }
-    StringParameter SP_requestparameters {
-        IndexDomain: rp;
-    }
-    StringParameter SP_URL;
-    StringParameter SP_requestId;
-    Parameter P_responsecode;
-    StringParameter SP_key;
-    StringParameter SP_location;
-    StringParameter SP_formattedparameters;
+   Parameter P_Long;
+   StringParameter SP_responseFile;
+   Set S_reqpar {
+      Index: rp;
+      InitialData: DATA{key,address};0001
+   }
+   StringParameter SP_requestparameters {
+      IndexDomain: rp;
+   }
+   StringParameter SP_URL;
+   StringParameter SP_requestId;
+   Parameter P_responsecode;
+   StringParameter SP_key;
+   StringParameter SP_location;
+   StringParameter SP_formattedparameters;
 
 
 
@@ -136,7 +136,7 @@ The error refers to a 'bound' element missing from our current XSD file. Let's c
 The ``bound`` is set after the ``viewport`` node in the Amsterdam XSD file, so let's copy/paste the block in the original XSD file.
 Then, again using the XML schema mapping tool to set the ``bound`` read-filter attribute to ``0`` and executing the procedure, we can get the proper coordinates.
 
-We're providing an XSD file to get you started: :download:`googlecoord.zip <download/googlecoord.zip>`
+We're providing an XSD file to get you started: :download:`googlecoord.zip <downloads/googlecoord.zip>`
 
 However, this file may be incomplete, so be prepared to make your own additions to the XSD file while using this API.
 
