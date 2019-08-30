@@ -5,11 +5,13 @@
 Recently added
 ==============
 
+.. Added 30 Aug 2019: 302
 .. Added 23 Aug 2019: 283, 300, 301
 .. Added 16 Aug 2019: 299, 295
 .. Added 9 Aug 2019: 296, 298
 .. Added 26 July 2019: 290,292,293,294
 
+* :doc:`/Articles/302/302-get-google-maps-coordinates`
 * :doc:`/Articles/283/283-convert-json-to-xml`
 * :doc:`/Articles/300/300-ibm-api-speech-to-text`
 * :doc:`/Articles/301/301-Image-Recognition`

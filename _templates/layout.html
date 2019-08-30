@@ -58,13 +58,6 @@
 
 <title>{{ title|striptags|e }} &mdash; AIMMS How-To &mdash; Help &amp; Support</title>
 
-{% endif %} {% if display_toc %}
-<div class="localtoc">
-    <p class="caption">
-        <span class="caption-text">{{ _('Table Of Contents') }}</span>
-    </p>
-    {{ toc }}
-</div>
 {% endif %} {% endblock %} {% block document %} {{ super() }} {% if (("index" in pagename) or ("ContentIndex" in pagename) or ("search" in pagename)) %} {# Do nothing :) I don't know how to do the negation properly in Jinja #} {% else %} {% if Display_3rd_Party_Extensions
 %}
 
@@ -88,8 +81,8 @@
 
 {% endif %}
 
-<!--
-<a href="https://community.aimms.com/search?q={{ title|striptags|e }}" target="_blank">Give feedback for this article on the AIMMS Community</a> -->{% endif %} {% endblock %} {% block footer %} {{ super() }}
+
+<a href="https://community.aimms.com/search?q={{ title|striptags|e }}" target="_blank">Give feedback for this article on the AIMMS Community</a>{% endif %} {% endblock %} {% block footer %} {{ super() }}
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1290545-14"></script>
 <script>
