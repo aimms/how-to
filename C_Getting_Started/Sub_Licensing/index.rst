@@ -20,3 +20,7 @@ Here you can find help with license set up and troubleshooting license errors. I
    /Articles/89/89-academic-license
    /Articles/105/105-adding-named-user-licenses
    /Articles/106/106-install-network-license
+   /Articles/304/304-transfer-license-server
+
+
+
