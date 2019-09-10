@@ -23,7 +23,7 @@ How to migrate your PRO server to another machine in 10 steps
  
 4.	On the destination new machine, create the AIMMS PRO data folder at the desired target location; by default, the AIMMS PRO data folder is at ``C:\ProgramData\AimmsPRO``
 5.	Copy the subfolders Backup and Data from the source to the destination machine
-6.	Install the exact same version of PRO onto the destination machine (it is very important that it is the exact same version, because normal upgrades are likely to fail when migrating as well; after the migration is successful you can upgrade to e.g. the latest version of PRO).
+6.	Install **the exact same version** of PRO onto the destination machine (it is very important that it is the exact same version, because normal upgrades are likely to fail when migrating as well; after the migration is successful you can upgrade to e.g. the latest version of PRO).
 7.	Once the installation finishes, you should be redirected to the AIMMS PRO Configurator page. If you changed the username/password/schema for the database user, please enter the same here as well:
 
 .. image:: images/4_img.png
