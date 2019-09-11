@@ -1,10 +1,14 @@
 Selecting Pages for Workflow Panels
 =======================================================
 .. meta::
-   :description: How to use element and string parameters to configure Workflows more precisely.
+   :description: How to use element and string parameters to configure Workflows more smoothly.
    :keywords: workflow, parameter, pageId, redirect, work flow, webui, ui
 
-You can use element and string parameters to reduce errors while configuring the steps for Workflows.
+.. important::
+
+   Workflow Panels are available in AIMMS version 4.68 and later as an Experimental Feature. Please reach out to `User Support <mailto:support@aimms.com>`_ on how to enable Experimental Features.
+
+You can use element and string parameters to reduce errors while configuring the steps for Workflows. For example, this helps you avoid entering a wrong ``pageId``, or adding a Side Panel ``pageId`` or Dialog ``pageId``.
 
 The procedure can be summarized as follows:
 
@@ -30,9 +34,7 @@ So the index domain will look like this::
 
 #. Add a range of ``webui::AllRegularPages``.
  
-Now, in the data the user can select values for ``pageID`` and ``redirectpageId`` from drop-down menus where values are from the ``AllRegularPages`` set.
-
-.. the user means the end user or app developer?
+Now, in the data you can only select values for ``pageId`` and ``redirectpageId`` from drop-down menus where values are from the ``AllRegularPages`` set.
 
  
 Adding values for other properties
@@ -49,9 +51,7 @@ So the index domain will look like this::
    
    (webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec) | NOT(webui::indexWorkflowPageSpec = 'pageId' OR webui::indexWorkflowPageSpec = 'redirectpageId')
  
-#. Go to the data and add values for the rest of the properties. The user will not be able to add values to the ``pageId`` and ``redirectpageId``.
-
-.. the user means the end user or app developer?
+#. Go to the data and add values for the rest of the properties. Now you will not be able to add values to the ``pageId`` and ``redirectpageId``.
 
  
 Selecting steps for the Workflow
@@ -68,13 +68,8 @@ This is a concatenation of the string and element parameter. It gives the comple
 
 #. Add the ``AllMyWorkflowSteps`` string parameter in the *Workflow Panel > Workflow Steps* field, under *Application Settings*.
 
-Example project download
------------------------------
 
-You can download an example project containing these parameters from the link below.
+Related Topics
+---------------
 
-* :download:`Workflow_Panel_Demo_with_element_parameters.zip <downloads/Workflow_Panel_Demo_with_element_parameters.zip>`
-
-The identifiers can be found under the Workflows section in the Workflows from Element Parameters declaration.
-
-.. image:: images/workflow-identifiers.png
+* **AIMMS Documenation**: `Workflow Panel <https://manual.aimms.com/webui/application-settings.html#workflow-panel>`_
