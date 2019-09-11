@@ -1,6 +1,10 @@
 Overview: HTTP Client Library
 ==================================================================================================
 
+.. meta::
+   :description: An overview of the HTTP Client Library and a guide to a few use cases.
+   :keywords: http, client, library, requests, api
+
 In this article you'll find an overview of the library itself, plus a guide to existing How-To tutorials for using the HTTP Client Library. These articles cover some possible use cases for HTTP requests to give you guidance and inspiration for your own applications.
 
 Basic overview
@@ -25,7 +29,7 @@ REST APIs
 
 HTTP requests can also be used to call APIs (application programming interface).
 
-APIs allow the use of an application through programming. `REST APIs <https://searchapparchitecture.techtarget.com/definition/RESTful-API>`_ uses HTTP requests to communicate. Hence, we can use services from REST APIs directly in our model using the HTTP Client Library.
+APIs allow the use of an application through programming. `REST APIs <https://searchapparchitecture.techtarget.com/definition/RESTful-API>`_ use HTTP requests to communicate. Hence, we can use services from REST APIs directly in our model using the HTTP Client Library.
 
 Each REST API has its own specifications and format requirements. You'll need to refer to the documentation for that API to learn what functionality the API offers and what information is required for your request.
 
@@ -75,8 +79,9 @@ Usually, after your request, the API will send back a file containing the data y
 Each XML file can have a specific structure which is detailed in a **schema** file, the **XSD** file.
 Often, an API will send you XML files in the same structure, and based on the same XSD schema file.
 
-.. tip:: An example of an API that does not follow the same XSD, and how to handle it, is detailed in 
-:doc:`../302/302-get-google-maps-coordinates`.
+.. tip:: 
+
+   An example of an API that does not follow the same XSD, and how to handle it, is detailed in :doc:`../302/302-get-google-maps-coordinates`.
 
 In order to **retrieve data** from the XML file, we'll use the **XML schema mapping tool**. This AIMMS tool, given an XSD file, allows us to create links between AIMMS identifiers and XML data. This tool then generates an **AXM** file containing all the links you've created.
 The process to retrieve data from an XML file is explained in :doc:`../293/293-extracting-data-from-XML`.
