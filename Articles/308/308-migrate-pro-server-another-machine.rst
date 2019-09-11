@@ -2,45 +2,72 @@ Migrate PRO Server to Another Machine
 ===============================================================
 
 .. meta::
-   :description: How to migrate your PRO server to another machine in 10 steps.
-   :keywords: PRO, Server, migrate
-
+   :description: How to migrate your PRO server to another machine.
+   :keywords: PRO, Server, migrate, move, transfer
 
 This article explains how to migrate your PRO server to a new machine.
 
-.. note:: 
+(For instructions to migrate the license server, please see :doc:`304-transfer-license-server`.)
 
-   This article does not include migrating the license server.
+We will call these servers the original machine (source host) and the new machine (target host).
 
- 
-1.	Stop the AIMMS PRO Services from within the *AIMMS PRO Configurator*.
+This can be broken down into five stages, discussed in detail below.
+
+1. Stop the PRO services.
+#. Backup the PRO configuration on the original machine.
+#. Install PRO on the new machine.
+#. Configure PRO on the new machine.
+#. Restart the PRO services.
+
+Stop the services
+-----------------------------------------------
+
+Stop the AIMMS PRO Services from within the *AIMMS PRO Configurator*.
 
 .. image:: images/1_img.png
 
-2.	Go to *Backup Management* and click *Backup Now*.
+Backup the configuration
+-----------------------------------------------
+
+a.	Go to *Backup Management* and click *Backup Now*.
 
 .. image:: images/2_img.png
 
-3.	Go to the tab *PRO Configuration* and copy all settings in a text document, so that during PRO configuration on the  new machine you can enter these settings again.
+#.	Go to the tab *PRO Configuration* and copy all settings in a text document, so that during PRO configuration on the  new machine you can enter these settings again.
  
 .. image:: images/3_img.png
  
-4.	On the new machine, create the AIMMS PRO data folder at the desired target location; by default, the AIMMS PRO data folder is at ``C:\ProgramData\AimmsPRO``.
+Install PRO on the new machine
+--------------------------------------------------------
 
-5.	Copy the subfolders ``Backup`` and ``Data`` from the original machine to the new machine.
+a.	On the new machine, create the AIMMS PRO data folder at the desired target location; by default, the AIMMS PRO data folder is at ``C:\ProgramData\AimmsPRO``.
 
-6.	Install **the same version** of PRO onto the new machine.
+#.	Copy the subfolders ``Backup`` and ``Data`` from the original machine to the new machine.
+
+#.	Install **the same version** of PRO onto the new machine.
 
 **It is very important that you install exactly the same version, because normal upgrades are likely to fail when migrating. After the migration is successful you can upgrade to another version of PRO.**
 
-7.	Once the installation is done, you should be redirected to the page *AIMMS PRO Configurator*. If you changed the username/password/schema for the database user, please enter the same here.
+Configuring the new installation
+--------------------------------------------------------
+
+a.	Once the installation is done, you should be redirected to the page *AIMMS PRO Configurator*. If you changed the username/password/schema for the database user, please enter the same here.
 
 .. image:: images/4_img.png
 
-8.	Go to the tab *PRO Configuration* and enter the values that you saved from the original configuration in step 3.
+#.	Go to the tab *PRO Configuration* and enter the values that you saved from the original configuration, as detailed above.
 
-9.	Go to the tab *Backup Management*, select the backup you made in step 2, and click *Restore Now*.
+#.	Go to the tab *Backup Management*, select the backup you made earlier, and click *Restore Now*.
 
-10. Go to *Start/Stop Services* and start the service.
+Restarting the services
+--------------------------------------------------------
+
+Go to *Start/Stop Services* and start the service.
 
 You have now migrated your PRO server!
+
+Related Topics
+--------------
+* **AIMMS How-To:** :doc:`304-transfer-license-server`
+* **AIMMS Documentation** `AIMMS PRO Server Administration <https://documentation.aimms.com/pro/admin.html>`_
+
