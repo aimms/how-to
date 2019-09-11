@@ -2,12 +2,12 @@ Migrate the AIMMS PRO License Server
 =======================================================
 
 .. meta::
-   :description: How to migrate your PRO server to another machine.
+   :description: How to migrate your PRO license server to another machine.
    :keywords: PRO, license, server, migrate, move, transfer
 
 This article explains how to transfer AIMMS Licenses to a new server.
 
-(For instructions to migrate your PRO server, please see :doc:`308-migrate-pro-server-another-machine`.)
+(For instructions to migrate your PRO server, please see :doc:`../308/308-migrate-pro-server-another-machine`.)
 
 We will call these servers the original machine (source host) and the new machine (target host).
 
@@ -118,5 +118,5 @@ You have now migrated your license server!
 Related Topics
 --------------------------
 
-* **AIMMS How-To:** :doc:`308-migrate-pro-server-another-machine`
+* **AIMMS How-To:** :doc:`../308/308-migrate-pro-server-another-machine`
 * **AIMMS Documentation** `AIMMS PRO License Server Installation <https://documentation.aimms.com/pro/license-server.html>`_
