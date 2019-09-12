@@ -15,24 +15,26 @@ Number of running and pending solver sessions
 .. pro::sessionmanager::RetrieveSessionList
 .. 
 
-One potential consideration to start a new server session, 
-is whether there are other server sessions started on that AIMMS PRO server.
-In this article, we will illustrate how to obtain the number of sessions running at an AIMMS PRO server.
 
-Interpretations
+When starting a new server session it is useful to know whether there are other server sessions started on the same server. This article explains how to find out the number of sessions running at an AIMMS PRO server.
+
+
+Scope
 ----------------
 
-There are at least two interpretations on the number of server sessions:
+We will discuss two variations on the number of server sessions:
 
-#. The number of AIMMS PRO sessions actually running
+#. The number of AIMMS PRO sessions actually running.
 
-#. The number of AIMMS PRO sessions not yet finished. 
-   This latter number is called the number of *active* sessions in this article.
+#. The number of AIMMS PRO active sessions, i.e., sessions not yet finished.
 
-Use ``pro::sessionmanager::ListSessionSinceDate``
-------------------------------------------------------
-   
-To obtain the number of server session actually running, we use the following code, 
+Obtain number of sessions running
+-----------------------------------
+
+To obtain the number of server session actually running,
+you can use ``pro::sessionmanager::ListSessionSinceDate``.
+
+We use the following code, 
 where ``p_NoRun`` contains the number of server sessions actually running.
 
 .. code-block:: aimms
@@ -90,8 +92,9 @@ where ``p_NoRun`` contains the number of server sessions actually running.
     return p_ret ;
 
 
-Aggregate number of unfinished sessions
--------------------------------------------
+Obtaining number of active sessions
+----------------------------------------
+Next, to find the active sessions we'll aggregate number of unfinished sessions.
 
 Based on the above, aggregating the number of unfinished sessions is simple:
 
@@ -105,39 +108,36 @@ Based on the above, aggregating the number of unfinished sessions is simple:
         p_ObservedReadyToRunJobs(   ep_obs ) +
         p_ObservedRunningJobs(      ep_obs ) ;
 
-Trying out yourself
+Example projects
 -------------------
 
-To permit you to try out this example code yourself, two applications can be downloaded from this article:
+You can download two example apps to try out the code yourself:
 
-#. :download:`Start several jobs <model/FlowShopMultipleSolves.zip>` 
+* Start several jobs with :download:`FlowShopMultipleSolves <model/FlowShopMultipleSolves.zip>` 
 
-#. :download:`Show active jobs <model/CountRunningJobs.zip>` 
+* Show active jobs with :download:`CountRunningJobs <model/CountRunningJobs.zip>` 
 
-To experiment with these apps, you should download and publish them both on an AIMMS PRO. 
-Subsequently start both apps, and press the start button of both apps.
+To experiment with these apps, you should download and publish them both on AIMMS PRO. 
+Start both apps, and press the start button of both apps.
 
 You'll then see how ``CountRunningJobs`` monitors multiple jobs:
 
 .. image:: images/monitoring.png
     :align: center
 
-You can copy the procedure ``pr_CountRunningJobs`` in ``CountRunningJobs`` to 
+You can copy the procedure ``pr_CountRunningJobs`` (in the app ``CountRunningJobs``) to 
 determine the number of running jobs or the number of active jobs in your own application.
 
 
-.. warning:: 
+.. important:: 
 
-    There is a race condition here. When two users at the same time:
+    It is possible that two users *at the same time* query the number of running jobs, which return 0, and then submit a job. In this case, there may still be one job waiting for the other. 
     
-    #. Ask for the number of running jobs, both returning 0
+    To detect such cases, the number of active jobs is *one more than* the number allowed to run in parallel.
     
-    #. Subsequently submit a jobs
-    
-    There may still be one job waiting for the other. 
-    To detect this circumstance, the number of active jobs is one more than the number allowed to run in parallel.
-    To detect, whether the waiting job is your job, you can test for ``pro::session::CurrentSessionStatus``
-    It is possible to kill that waiting job as explained in :doc:`this article<../34/34-interrupt-server-session>`
+    To detect whether the waiting job is your job, you can test for ``pro::session::CurrentSessionStatus``.
+
+    You can cancel the waiting job as explained in :doc:`../34/34-interrupt-server-session`.
 
 
 
