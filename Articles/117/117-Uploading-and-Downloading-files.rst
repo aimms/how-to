@@ -5,9 +5,12 @@ Upload and Download Files
    :description: Modeling for secure apps deployed on AIMMS PRO – Part 2: Uploading and Downloading files.
    :keywords: secure, upload, download
 
+This article explains how you can upload and download files to and from AIMMS PRO Storage.
 
-This blog post is the second post in a series of three to enable AIMMS app developers to model necessary file sharing in a secure manner. In our 
-:doc:`../120/120-pro-user-groups`, we covered AIMMS PRO User groups and how they can be used to authorize access to information within your AIMMS Apps. This blog post explains how you can upload and download files to and from AIMMS PRO Storage.
+topic:: File Sharing Series
+
+    This article is the second post in a series of three to enable AIMMS app developers to model necessary file sharing in a secure manner. In 
+    :doc:`../120/120-pro-user-groups`, we covered AIMMS PRO User groups and how they can be used to authorize access to information within your AIMMS Apps. 
 
 
 Uploading and downloading files
@@ -15,7 +18,7 @@ Uploading and downloading files
 
 First, I’d like to explain what AIMMS PRO storage is. AIMMS PRO storage is a disk area managed by AIMMS PRO to share files within an AIMMS application and between AIMMS applications. This disk area is separate from the disk area in which AIMMS apps are actually executing. Among other things, it handles the cases created during various (solver) sessions, which are then shared between users of the same app.
 
-Within AIMMS PRO storage, folders are referred to as *buckets* and files are referred to as *objects*. When you look at the AIMMS PRO API, as presented in the AIMMS PRO library, you will see the terms buckets and objects. In this blog post, I will use the terms folders and files.
+Within AIMMS PRO storage, folders are referred to as *buckets* and files are referred to as *objects*. When you look at the AIMMS PRO API, as presented in the AIMMS PRO library, you will see the terms buckets and objects. In this article, I will use the terms folders and files.
 
 AIMMS PRO storage has the following folder layout, and it is best practice to follow it:
 
@@ -105,17 +108,24 @@ The picture above illustrates the file communication architecture for a WebUI AI
 
 The AIMMS WebUI provides the `Upload Widget <https://documentation.aimms.com/webui/upload-widget.html?highlight=upload#upload-widget>`_ to transfer files from your device to the folder in which the AIMMS client session runs. In addition, it provides the `Download Widget <https://documentation.aimms.com/webui/download-widget.html#download-widget>`_ to transfer files the other way around.
 
-Now that we discussed file exchanges between the user device and AIMMS PRO storage, thus allowing for file sharing between AIMMS app users, we want to be able to arrange file sharing in a secure manner. This is the topic for the last blog post in this series.
+Conclusion
+--------------
 
+Now that we discussed file exchanges between the user device and AIMMS PRO storage, thus allowing for file sharing between AIMMS app users, we want to be able to arrange file sharing in a secure manner. This is the topic for the last article in this series.
+
+Example project
+----------------
 An example app that lets you upload a file and download the same: :download:`AIMMS project download <model/MovingUpAndDown.zip>` 
 
 
-Further reading:
+Related Topics
 ----------------
 
-*  `WebUI <https://documentation.aimms.com/webui/index.html#webui>`_
+* **AIMMS How-To**: :doc:`../120/120-pro-user-groups`
 
-*  `AIMMS PRO <https://documentation.aimms.com/pro/index.html#pro-platform>`_
+* **AIMMS Documentation**: `WebUI <https://documentation.aimms.com/webui/index.html#webui>`_
+
+* **AIMMS Documentation**: `AIMMS PRO <https://documentation.aimms.com/pro/index.html#pro-platform>`_
 
 
 

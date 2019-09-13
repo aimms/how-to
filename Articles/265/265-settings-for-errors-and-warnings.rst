@@ -14,12 +14,6 @@ Customize Settings for Errors and Warnings
 .. <link>https://berthier.design/aimmsbackuptech/2014/11/24/under-control-managing-errors-and-warnings-within-aimms/</link>
 
 
-.. sidebar:: heed warnings
-
-    .. image:: images/molumen_Exclamation_icons_1.png
-
-
-
 This article explains how you can control errors and warnings within AIMMS. We'll include some useful tips to create better models.
 
 Errors versus warnings
