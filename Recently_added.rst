@@ -12,7 +12,7 @@ Recently added
 .. Added 9 Aug 2019: 296, 298
 .. Added 26 July 2019: 290,292,293,294
 
-* :doc:`/Articles/309/309-`
+* :doc:`/Articles/309/309-workflow-panel-element-and-string-parameters`
 * :doc:`/Articles/308/308-migrate-pro-server-another-machine`
 * :doc:`/Articles/306/306-http-client-library-overview`
 * :doc:`/Articles/305/305-number-of-solves`
