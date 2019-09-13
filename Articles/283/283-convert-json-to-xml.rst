@@ -53,7 +53,23 @@ Note that if the JSON element had a name, then it will be set as a **parameter**
 
 .. image:: images/conversion.png
 
-To extract the data from your newly created XML file, follow the process described in :doc:`../293/293-extracting-data-from-XML`.
+Extracting data.
+-----------------
+Extracting data from this XML requires a quite specific process. You can see in the image above that each element has an element name in the format **json:Object-Type**.
+When you'll generate your XSD file, this notation will not be there anymore and you'll only have **Object-Type**.
+
+Hence, by generating the .AXM file using the XML schema mapping tool with that XSD, the AXM will neither have this notation.
+So, the  ``XMLREAD()`` method will not be executed properly because AXM and XML will have different element names.
+
+In order to solve this situation, you can follow this process:
+
+* Generate your XSD file as usual.
+* Create your mapping using the XML schema mapping tool
+* Edit your AXM file at the root of your project by transforming every element name **ElementMapping name="(OBJECT-TYPE)"** into **ElementMapping name="json:(OBJECT-TYPE)"**
+
+.. Warning:: be careful to transform only element names and not attributes names.
+
+If you want more details about the general steps to extract data from an XML file you can check this article : :doc:`../293/293-extracting-data-from-XML`.
 
 
 Related Topics

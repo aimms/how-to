@@ -5,12 +5,12 @@ Upload and Download Files
    :description: Modeling for secure apps deployed on AIMMS PRO – Part 2: Uploading and Downloading files.
    :keywords: secure, upload, download
 
-.. note::
+This article explains how you can upload and download files to and from AIMMS PRO Storage.
 
-	This article was originally posted to the AIMMS Tech Blog.
+topic:: File Sharing Series
 
-This blog post is the second post in a series of three to enable AIMMS app developers to model necessary file sharing in a secure manner. In our 
-:doc:`../120/120-pro-user-groups`, we covered AIMMS PRO User groups and how they can be used to authorize access to information within your AIMMS Apps. This blog post explains how you can upload and download files to and from AIMMS PRO Storage.
+    This article is the second post in a series of three to enable AIMMS app developers to model necessary file sharing in a secure manner. In 
+    :doc:`../120/120-pro-user-groups`, we covered AIMMS PRO User groups and how they can be used to authorize access to information within your AIMMS Apps. 
 
 
 Uploading and downloading files
@@ -18,7 +18,7 @@ Uploading and downloading files
 
 First, I’d like to explain what AIMMS PRO storage is. AIMMS PRO storage is a disk area managed by AIMMS PRO to share files within an AIMMS application and between AIMMS applications. This disk area is separate from the disk area in which AIMMS apps are actually executing. Among other things, it handles the cases created during various (solver) sessions, which are then shared between users of the same app.
 
-Within AIMMS PRO storage, folders are referred to as *buckets* and files are referred to as *objects*. When you look at the AIMMS PRO API, as presented in the AIMMS PRO library, you will see the terms buckets and objects. In this blog post, I will use the terms folders and files.
+Within AIMMS PRO storage, folders are referred to as *buckets* and files are referred to as *objects*. When you look at the AIMMS PRO API, as presented in the AIMMS PRO library, you will see the terms buckets and objects. In this article, I will use the terms folders and files.
 
 AIMMS PRO storage has the following folder layout, and it is best practice to follow it:
 
@@ -26,7 +26,7 @@ AIMMS PRO storage has the following folder layout, and it is best practice to fo
 
 In this overview, user specific data is stored in ``/userdata``, and the user is identified first by his environment and then by his or her name.
 
-Data that is shared among users is stored in ``/publicdata``. Cases that are intended to be shared by all users are stored in ``/publicdata``, and organized per app. If data is to be shared per group, it is to be stored in ``/publicdata/groupname`` and there are no further restrictions.
+Data that is shared among users is stored in ``/PublicData``. Cases that are intended to be shared by all users are stored in ``/PublicData``, and organized per app. If data is to be shared per group, it is to be stored in ``/PublicData/groupname`` and there are no further restrictions.
 
 By following this layout, the default access rights are as expected. For instance, all files created within a group folder, unless specified otherwise, get the access rights of that group folder.
 
@@ -53,9 +53,9 @@ This is not so difficult. Just use the functions ``pro::SaveFileToCentralStroage
 
 .. code-block:: aimms
 
-    Pro::SaveFileToCentralStorage("c:\\Inputs\\data.txt", "pro:/publicdata/myapp/input/data.txt" );
+    Pro::SaveFileToCentralStorage("c:\\Inputs\\data.txt", "pro:/PublicData/myapp/input/data.txt" );
 
-This function will copy the file data.txt from the folder ``c:\inputs`` on the client Windows Desktop to the folder ``/publicdata/myapp/input`` in the AIMMS PRO storage. Note that ``Pro::SaveFileToCentralStorage`` requires the filename to be present in the second argument. In addition, note that ``Pro::SaveFileToCentralStorage`` has a third optional argument to specify access rights for the file at hand on the AIMMS PRO storage system.  The default behavior is to use the access rights as indicated in the encompassing bucket.
+This function will copy the file data.txt from the folder ``c:\inputs`` on the client Windows Desktop to the folder ``/PublicData/myapp/input`` in the AIMMS PRO storage. Note that ``Pro::SaveFileToCentralStorage`` requires the filename to be present in the second argument. In addition, note that ``Pro::SaveFileToCentralStorage`` has a third optional argument to specify access rights for the file at hand on the AIMMS PRO storage system.  The default behavior is to use the access rights as indicated in the encompassing bucket.
 
 In order to warn the end-user that a file in AIMMS PRO storage is about to be overwritten, you want to check the existence of the file first. You can do this via a self-defined procedure ``proFileExists`` as follows:
 
@@ -108,14 +108,24 @@ The picture above illustrates the file communication architecture for a WebUI AI
 
 The AIMMS WebUI provides the `Upload Widget <https://documentation.aimms.com/webui/upload-widget.html?highlight=upload#upload-widget>`_ to transfer files from your device to the folder in which the AIMMS client session runs. In addition, it provides the `Download Widget <https://documentation.aimms.com/webui/download-widget.html#download-widget>`_ to transfer files the other way around.
 
-Now that we discussed file exchanges between the user device and AIMMS PRO storage, thus allowing for file sharing between AIMMS app users, we want to be able to arrange file sharing in a secure manner. This is the topic for the last blog post in this series.
+Conclusion
+--------------
 
-Further reading:
+Now that we discussed file exchanges between the user device and AIMMS PRO storage, thus allowing for file sharing between AIMMS app users, we want to be able to arrange file sharing in a secure manner. This is the topic for the last article in this series.
+
+Example project
+----------------
+An example app that lets you upload a file and download the same: :download:`AIMMS project download <model/MovingUpAndDown.zip>` 
+
+
+Related Topics
 ----------------
 
-*  `WebUI <https://documentation.aimms.com/webui/index.html#webui>`_
+* **AIMMS How-To**: :doc:`../120/120-pro-user-groups`
 
-*  `AIMMS PRO <https://documentation.aimms.com/pro/index.html#pro-platform>`_
+* **AIMMS Documentation**: `WebUI <https://documentation.aimms.com/webui/index.html#webui>`_
+
+* **AIMMS Documentation**: `AIMMS PRO <https://documentation.aimms.com/pro/index.html#pro-platform>`_
 
 
 

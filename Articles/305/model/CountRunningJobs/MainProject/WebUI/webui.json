@@ -1,0 +1,185 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "maxcolumns": {
+      "literal": 10
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "buttonStartMonitoring",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "linechartObservations",
+          "layoutInfo": {
+            "width": "10",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "tableObservations",
+          "layoutInfo": {
+            "width": "10",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/buttonStartMonitoring": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_ButtonRegisterSomeSecondsActiveJobs"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "title": {
+      "literal": "buttonStartMonitoring"
+    }
+  },
+  "widgets/tableObservations": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_obs"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_NoRunningJobs"
+          },
+          "width": 28.4916129032258
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_NoObservations"
+          },
+          "width": 23.599999999999998
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_obs",
+          "width": 24.324324324324323
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_ObservationTimestamp"
+          },
+          "width": 35.30612244897959
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_ObservedCreatedJobs"
+          },
+          "width": 12.17453299791254
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_ObservedQueuedJobs"
+          },
+          "width": 11.199999999999998
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_ObservedInitializingJobs"
+          },
+          "width": 11.400000000000002
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_ObservedReadyToRunJobs"
+          },
+          "width": 15.944282474894717
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_ObservedRunningJobs"
+          },
+          "width": 11.694123432505533
+        }
+      ]
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_ObservedCreatedJobs",
+          "p_ObservedQueuedJobs",
+          "p_ObservedInitializingJobs",
+          "p_ObservedReadyToRunJobs",
+          "p_ObservedRunningJobs",
+          "p_DerivedActiveJobs",
+          "sp_ObservationTimestamp",
+          "p_returns"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_observedcreatedjobs": "1",
+        "p_observedinitializingjobs": "1",
+        "p_observedqueuedjobs": "1",
+        "p_observedreadytorunjobs": "1",
+        "p_observedrunningjobs": "1",
+        "sp_observationtimestamp": "1",
+        "p_returns": "1"
+      }
+    }
+  },
+  "widgets/linechartObservations": {
+    "aimms.widget.type": {
+      "literal": "linechart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_ObservedCreatedJobs",
+          "p_ObservedQueuedJobs",
+          "p_ObservedInitializingJobs",
+          "p_ObservedReadyToRunJobs",
+          "p_ObservedRunningJobs",
+          "p_DerivedActiveJobs"
+        ]
+      }
+    },
+    "yaxis.step": {
+      "literal": 1
+    }
+  }
+}

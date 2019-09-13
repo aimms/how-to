@@ -22,6 +22,8 @@ This section offers best practices to build and deploy applications using AIMMS 
    /Articles/32/32-pro-develop-app
    /Articles/19/19-remove-veil
    /Articles/299/299-change-account-pro
+   /Articles/305/305-number-of-solves
+   /Articles/308/308-migrate-pro-server-another-machine
 
 
 

@@ -5,12 +5,19 @@
 Recently added
 ==============
 
+.. Added 13 Sep 2019: 291,304,305,306,308,309
 .. Added 30 Aug 2019: 302
 .. Added 23 Aug 2019: 283, 300, 301
 .. Added 16 Aug 2019: 299, 295
 .. Added 9 Aug 2019: 296, 298
 .. Added 26 July 2019: 290,292,293,294
 
+* :doc:`/Articles/309/309-workflow-panel-element-and-string-parameters`
+* :doc:`/Articles/308/308-migrate-pro-server-another-machine`
+* :doc:`/Articles/306/306-http-client-library-overview`
+* :doc:`/Articles/305/305-number-of-solves`
+* :doc:`/Articles/304/304-transfer-license-server`
+* :doc:`/Articles/291/291-solve-to-gmp-with-callback`
 * :doc:`/Articles/302/302-get-google-maps-coordinates`
 * :doc:`/Articles/283/283-convert-json-to-xml`
 * :doc:`/Articles/300/300-ibm-api-speech-to-text`
