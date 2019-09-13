@@ -43,11 +43,15 @@ Next let's create the string parameter to enter values for rest of the propertie
 
 #. Create a string parameter, let’s call it ``MyWorkflowStepsDetails``, indexed over ``(webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec)``.
 
-#. Add domain condition to index domain::
+#. Add domain condition to index domain:
+
+code-block:: aimms
 
    NOT(webui::indexWorkflowPageSpec = 'pageId' OR webui::indexWorkflowPageSpec = 'redirectpageId')
 
-So the index domain will look like this::
+So the index domain will look like this:
+
+code-block:: aimms
    
    (webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec) | NOT(webui::indexWorkflowPageSpec = 'pageId' OR webui::indexWorkflowPageSpec = 'redirectpageId')
  
@@ -60,13 +64,25 @@ Finally we will create a string parameter that uses the above element and string
 
 #. Create a string parameter, ``AllMyWorkflowSteps``, again indexed over ``(webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec)``.
 
-#. In the definition, add::
+#. In the definition, add:
+
+code-block:: aimms
 
    MyWorkflowStepsDetails(webui::indexWorkflowOrder, webui::indexNoOfPages, webui::indexWorkflowPageSpec) + MyWorkflowStepsPages(webui::indexWorkflowOrder, webui::indexNoOfPages, webui::indexWorkflowPageSpec)
  
 This is a concatenation of the string and element parameter. It gives the complete data for defining the Workflow steps.
 
 #. Add the ``AllMyWorkflowSteps`` string parameter in the *Workflow Panel > Workflow Steps* field, under *Application Settings*.
+
+Result in WebUI
+---------------
+After configuring both the string parameters in *Application settings > Workflow Panel*, the Workflow Panel will be displayed on the pages configured in the ``MyWorkflowStepsPages`` element parameter, as shown in the example below.
+
+.. image:: images/workflow-page-example.png
+   :align: center
+
+.. page Route Optimization > Initialize Data in example project 
+.. Pratap will update the example project before we make it available for download
 
 
 Related Topics
