@@ -21,7 +21,7 @@ Timeline
 
 When using AIMMS 4.61 and higher, existing Map widgets in your apps will remain the old version (V1) but any new Map widgets added are in the new version (V2).
 
-AIMMS releases on or after **October 1, 2019** will not support projects using the `older version <https://manual.aimms.com/webui/map-widget-old-style.html>`_ of this feature.
+AIMMS releases after **the end of November 2019** will not support projects using the `older version <https://manual.aimms.com/webui/map-widget-old-style.html>`_ of this feature.
 
 To use AIMMS versions released after that date, you will need to be sure that you have upgraded any pages in your WebUI app using Map widgets.
 
