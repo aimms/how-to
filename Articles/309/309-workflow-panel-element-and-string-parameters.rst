@@ -20,7 +20,7 @@ Below we will discuss these steps in more detail.
  
 Selecting pages and redirect pages
 ---------------------------------------
-First, let's create the element parameter to select the ``pageId`` and ``redirectpageId``.
+1. First, let's create the element parameter to select the ``pageId`` and ``redirectpageId``.
 
 a. Create an element parameter, let’s call it ``MyWorkflowStepsPages``, indexed over ``(webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec)``.
 
@@ -41,13 +41,13 @@ Now, in the data you can only select values for ``pageId`` and ``redirectpageId`
  
 Adding values for other properties
 -------------------------------------
-Next let's create the string parameter to enter values for rest of the properties:
+2. Next let's create the string parameter to enter values for rest of the properties:
 
 a. Create a string parameter, let’s call it ``MyWorkflowStepsDetails``, indexed over ``(webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec)``.
 
 b. Add domain condition to index domain:
 
-code-block:: aimms
+.. code-block:: aimms
 
    NOT(webui::indexWorkflowPageSpec = 'pageId' OR webui::indexWorkflowPageSpec = 'redirectpageId')
 
@@ -62,7 +62,7 @@ c. Go to the data and add values for the rest of the properties. Now you will no
  
 Selecting steps for the Workflow
 ----------------------------------
-Finally we will create a string parameter that uses the above element and string parameter in combination to complete the data for the steps of the Workflows.
+3. Finally we will create a string parameter that uses the above element and string parameter in combination to complete the data for the steps of the Workflows.
 
 a. Create a string parameter, ``AllMyWorkflowSteps``, again indexed over ``(webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec)``.
 
