@@ -5,7 +5,7 @@ Overview: HTTP Client Library
    :description: An overview of the HTTP Client Library and a guide to a few use cases.
    :keywords: http, client, library, requests, api
 
-In this article you'll find an overview of the library itself, plus a guide to existing How-To tutorials for using the HTTP Client Library. These articles cover some possible use cases for HTTP requests to give you guidance and inspiration for your own applications.
+In this article you'll find an overview of the `HTTP Client Library <https://documentation.aimms.com/httpclient/index.html>`_ itself, plus a guide to existing How-To tutorials for using the HTTP Client Library. These articles cover some possible use cases for HTTP requests to give you guidance and inspiration for your own applications.
 
 Basic overview
 ------------------------------------------------------------------------------------------
@@ -105,6 +105,7 @@ In some documentation, examples of requests are given in CURL. You can find out 
 Related topics
 ------------------------------------------------------------------------------------------
 
+* **AIMMS** `library documentation <https://documentation.aimms.com/httpclient/index.html>`_
 * **AIMMS How-To**: :doc:`../294/294-Online-XML-HTTP-library`
 * **AIMMS How-To**: :doc:`../293/293-extracting-data-from-XML`
 * **AIMMS How-To**: :doc:`../298/298-use-flickr-api`
@@ -113,3 +114,4 @@ Related topics
 * **AIMMS How-To**: :doc:`../296/296-obtaining-geographic-data-through-the-google-api`
 * **AIMMS How-To**: :doc:`../300/300-ibm-api-speech-to-text`
 * **AIMMS How-To**: :doc:`../283/283-convert-json-to-xml`
+

@@ -116,11 +116,11 @@ If you want to specify headers in your request, you can create a string paramete
     }
 
 
-Using the ``request_getHeaders`` procedure, we can extract the default settings for this request and store them in ``SP_HttpHeaders(``.
+Using the ``request_getHeaders`` procedure, we can extract the default settings for this request and store them in ``SP_HttpHeaders``.
 
 .. code-block:: aimms
 
-    web::request_getHeaders(SP_requestId, SP_HttpHeaders();
+    web::request_getHeaders(SP_requestId, SP_HttpHeaders);
 
 The ``web::HttpHeader`` index contains the following elements: 
 
