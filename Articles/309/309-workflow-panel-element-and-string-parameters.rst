@@ -6,7 +6,7 @@ Selecting Pages for Workflow Panels
 
 .. important::
 
-   Workflow Panels are available in AIMMS version 4.68 and later as an Experimental Feature. Please reach out to `User Support <mailto:support@aimms.com>`_ on how to enable Experimental Features.
+   Workflow Panels are available in AIMMS version 4.68 as an Experimental Feature. Please reach out to `User Support <mailto:support@aimms.com>`_ on how to enable Experimental Features.
 
 You can use element and string parameters to reduce errors while configuring the steps for Workflows. For example, this helps you avoid entering a wrong ``pageId``, or adding a Side Panel ``pageId`` or Dialog ``pageId``.
 
@@ -32,7 +32,8 @@ So the index domain will look like this:
 
 .. code-block:: aimms
 
-   (webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec) | (webui::indexWorkflowPageSpec = 'pageId' OR webui::indexWorkflowPageSpec = 'redirectpageId')
+   (webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec) | 
+   (webui::indexWorkflowPageSpec = 'pageId' OR webui::indexWorkflowPageSpec = 'redirectpageId')
 
 c. Add a range of ``webui::AllRegularPages``.
  
@@ -55,7 +56,8 @@ So the index domain will look like this:
 
 .. code-block:: aimms
    
-   (webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec) | NOT(webui::indexWorkflowPageSpec = 'pageId' OR webui::indexWorkflowPageSpec = 'redirectpageId')
+   (webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec) | 
+   NOT(webui::indexWorkflowPageSpec = 'pageId' OR webui::indexWorkflowPageSpec = 'redirectpageId')
  
 c. Go to the data and add values for the rest of the properties. Now you will not be able to add values to the ``pageId`` and ``redirectpageId``.
 
@@ -70,7 +72,8 @@ b. In the definition, add:
 
 .. code-block:: aimms
 
-   MyWorkflowStepsDetails(webui::indexWorkflowOrder, webui::indexNoOfPages, webui::indexWorkflowPageSpec) + MyWorkflowStepsPages(webui::indexWorkflowOrder, webui::indexNoOfPages, webui::indexWorkflowPageSpec)
+   MyWorkflowStepsDetails(webui::indexWorkflowOrder, webui::indexNoOfPages, webui::indexWorkflowPageSpec) + 
+   MyWorkflowStepsPages(webui::indexWorkflowOrder, webui::indexNoOfPages, webui::indexWorkflowPageSpec)
  
 This is a concatenation of the string and element parameter. It gives the complete data for defining the Workflow steps.
 
