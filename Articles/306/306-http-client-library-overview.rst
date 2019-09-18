@@ -40,7 +40,7 @@ Flickr APIs
 
 .. image:: images/flickr.png
 
-Flickr is a social network platform where users can post their photos. The Flickr API allows you to explore the photos and reactions (comments, like...) available on Flickr. 
+Flickr is a social network platform where users can post their photos. The Flickr API allows you to explore the photos and reactions such as comments and likes. 
 
 You'll find an example in :doc:`../298/298-use-flickr-api`.
 
