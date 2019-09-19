@@ -131,7 +131,7 @@ Therefore we can only expand our current XSD file with the missing information a
 
 The error refers to a 'bound' element missing from our current XSD file. Let's check where it is.
 
-.. image:: images/comparison.PNG
+.. image:: images/comparison.png
 
 The ``bound`` is set after the ``viewport`` node in the Amsterdam XSD file, so let's copy/paste the block in the original XSD file.
 Then, again using the XML schema mapping tool to set the ``bound`` read-filter attribute to ``0`` and executing the procedure, we can get the proper coordinates.
