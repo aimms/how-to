@@ -170,7 +170,7 @@ Form parameters
 ^^^^^^^^^^^^^^^^^^^^
 
 
-.. image:: images/Curl2.png
+.. image:: images/curl2.png
 
 
 In the given example, the form parameters are specified by writing ``-F parameter= value``. 
@@ -222,7 +222,7 @@ And then we can set the headers to their proper values.
 Authentication
 ^^^^^^^^^^^^^^^^^^^^
 
-.. image:: images/Curl3.png
+.. image:: images/curl3.png
  
     
 In the documentation example, it is done by writing ``-u apikey:{your_api_key}``.
