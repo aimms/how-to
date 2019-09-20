@@ -247,7 +247,7 @@ For that, we'll use the ``flickr.galleries.getPhotos`` method from the Flickr AP
     
 **Set the HTTP request**
 
-.. image:: flickr/Getphotos.png
+.. image:: flickr/GetPhotos.png
 
 This request takes the parameters ``api_key`` and ``gallery_id``, and we want from the answer the ``farm`` ID, the ``server ID``, the ``ID`` and the ``secret`` for each photo in the gallery.
 But before extracting these, we need to get the XML file containing this information from an HTTP request.
@@ -320,7 +320,7 @@ You should now have access to the XML answer file in the direction ``SP_response
 
 Before extracting the data from the XML file using the AIMMS XML schema mapping tool, you need to create objects to contain this information:
 
-.. image:: flickr/getidsObjects.png
+.. image:: flickr/GetidsObjects.png
 
 .. code-block:: aimms
     :linenos:
