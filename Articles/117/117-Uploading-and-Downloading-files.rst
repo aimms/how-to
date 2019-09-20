@@ -39,7 +39,7 @@ Uploading and downloading files
 
 To detail the building blocks for the exchanging files between an AIMMS app and its environment, we need to distinguish two situations:
 
-* **For AIMMS WinUI apps **
+* **For AIMMS WinUI apps**
     The client side of the AIMMS app runs on the client device itself. The app has direct access to the user files via the file and directory functions such as ``FileCopy`` and ``FileDelete``. See `AIMMS Function Reference, Chapter “File and Directory Functions” <https://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_.
 
 * **For AIMMS WebUI apps**
