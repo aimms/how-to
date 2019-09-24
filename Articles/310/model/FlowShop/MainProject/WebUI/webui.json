@@ -1,0 +1,126 @@
+{
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [],
+                "name": "home",
+                "slug": "home"
+              }
+            ],
+            "name": "Main Project",
+            "slug": "main_project"
+          }
+        ],
+        "name": "root",
+        "slug": "root"
+      }
+    },
+    "theme.classic": {
+      "literal": false
+    },
+    "widget.visibility.greyout": {
+      "literal": true
+    }
+  },
+  "version": "4.67.0",
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "GanttChart_Flowshop",
+          "layoutInfo": {
+            "width": "6",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/GanttChart_Flowshop": {
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "time.reference": {
+      "aimms": {
+        "contents": [
+          "sp_RefTime"
+        ]
+      }
+    },
+    "time.resolution": {
+      "literal": 1
+    },
+    "time.viewport.start": {
+      "aimms": {
+        "contents": [
+          "sp_RefTime"
+        ]
+      }
+    },
+    "time.viewport.end": {
+      "aimms": {
+        "contents": [
+          "sp_EndTime"
+        ]
+      }
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_GCJobStart",
+          "p_GCJobDuration"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "resources": [
+          "m"
+        ],
+        "jobs": [
+          "<IDENTIFIER-SET>",
+          "j"
+        ],
+        "aggregated": []
+      }
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_GCWidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_GCWidgetActions",
+            "slice": [
+              {
+                "index": "i_gcwan",
+                "type": "free",
+                "value": "i_gcwan"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "title": {
+      "literal": "Flow shop Gantt Chart"
+    }
+  }
+}
