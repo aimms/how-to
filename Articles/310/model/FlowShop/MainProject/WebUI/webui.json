@@ -9,7 +9,14 @@
           {
             "children": [
               {
-                "children": [],
+                "children": [
+                  {
+                    "name": "ServerJobMessagesProfilerInfo",
+                    "type": "page",
+                    "slug": "serverjobmessagesprofilerinfo_1",
+                    "children": []
+                  }
+                ],
                 "name": "home",
                 "slug": "home"
               }
@@ -121,6 +128,162 @@
     },
     "title": {
       "literal": "Flow shop Gantt Chart"
+    }
+  },
+  "pages/serverjobmessagesprofilerinfo_1": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "ErrorWarningMessageTable",
+          "layoutInfo": {
+            "width": "4",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "JobProfilerData",
+          "layoutInfo": {
+            "width": "4",
+            "height": "2"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/ErrorWarningMessageTable": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_JobErrorMessages"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_JobErrorMessageNumber"
+        ],
+        "colHeader": [],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "i_JobErrorMessageNumber",
+          "width": 7.844594594594593
+        },
+        {
+          "type": "colHeader",
+          "colKey": {},
+          "width": 84.86336907644413
+        }
+      ]
+    },
+    "title": {
+      "literal": "Error and Warning messages"
+    }
+  },
+  "widgets/JobProfilerData": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_JobProfilerData"
+        ],
+        "prefix": "aimms",
+        "slices": [
+          {
+            "identifier": "p_JobProfilerData",
+            "slice": [
+              {
+                "index": "IndexIdentifiers",
+                "type": "free",
+                "value": "IndexIdentifiers"
+              },
+              {
+                "index": "i_LineNumber",
+                "type": "fixed-element",
+                "value": "0"
+              },
+              {
+                "index": "IndexProfilerTypes",
+                "type": "free",
+                "value": "IndexProfilerTypes"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 3
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "IndexIdentifiers"
+        ],
+        "colHeader": [
+          "IndexProfilerTypes"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "contents.sorting": {
+      "literal": [
+        {
+          "partIndex": 0,
+          "partOffsets": [
+            -1,
+            1
+          ],
+          "mode": "decreasing"
+        }
+      ]
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "IndexProfilerTypes": "net time"
+          },
+          "width": 16.53061224489796
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "IndexProfilerTypes": "gross time"
+          },
+          "width": 18
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "IndexProfilerTypes": "hits"
+          },
+          "width": 10.599999999999998
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "IndexIdentifiers",
+          "width": 49.624491748385545
+        }
+      ]
+    },
+    "title": {
+      "literal": "Profiler Data"
     }
   }
 }

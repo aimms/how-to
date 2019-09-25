@@ -1,6 +1,5 @@
 * The timestamps in this namechange file are stored in Coordinated universal time (UTC).
 "Procedure_2" "prepInterface" "2017-11-14 20:47:28"
-"Copy_MainExecution" "prDoSolve" "2017-11-16 10:58:39"
 "MaxJobs" "p_MaxJobs" "2019-09-24 07:45:58"
 "Jobs" "s_Jobs" "2019-09-24 07:46:10"
 "Schedules" "s_Schedules" "2019-09-24 07:46:16"
@@ -25,3 +24,7 @@
 "JobDescription" "sp_JobDescription" "2019-09-24 07:49:52"
 "MachineDescription" "sp_MachineDescription" "2019-09-24 07:50:00"
 "prDoSolve" "pr_DoSolve" "2019-09-24 08:53:40"
+"p_ServerSessionProfilerData" "p_JobProfilerData" "2019-09-25 08:50:36"
+"s_ServerSessionErrorMessageNumbers" "s_JobErrorMessageNumbers" "2019-09-25 08:50:46"
+"i_ServerSessionErrorMessageNumber" "i_JobErrorMessageNumber" "2019-09-25 08:51:01"
+"pr_DoSolve" "pr_GuardAndProfileServerJob" "2019-09-25 09:11:20"

@@ -12,7 +12,10 @@ Model Main_Flow_Shop {
             }
         }
         Parameter p_DummySize {
-            InitialData: 499;
+            InitialData: {
+                499 ! Set to 499 to generate 800+ Mb files ;-)
+                ! 9 ! To get small amount of overhead.
+            }
         }
         Set s_Dummy {
             SubsetOf: Integers;
@@ -24,12 +27,12 @@ Model Main_Flow_Shop {
         }
         Procedure pr_SaveSeemProCase {
             Body: {
-                            s_InputCaseIdentifierSet := 
-                                pro::ManagedSessionInputCaseIdentifierSet - 
-                                pro::ManagedSessionRemoveFromCaseIdentifierSet ;
-                            CaseFileSave(
-                                url      :  "testcase.data", 
-                                contents :  s_InputCaseIdentifierSet);
+                s_InputCaseIdentifierSet := 
+                    pro::ManagedSessionInputCaseIdentifierSet - 
+                    pro::ManagedSessionRemoveFromCaseIdentifierSet ;
+                CaseFileSave(
+                    url      :  "testcase.data", 
+                    contents :  s_InputCaseIdentifierSet);
             }
             Set s_InputCaseIdentifierSet {
                 SubsetOf: AllIdentifiers;
@@ -85,7 +88,7 @@ Model Main_Flow_Shop {
                     data { 
                     	( 1, displaytext ) : "Optimize",  
                     	( 1, icon        ) : "aimms-blog2",  
-                    	( 1, procedure   ) : "prBtnSolve",  
+                    	( 1, procedure   ) : "pr_BtnSolve",  
                     	( 1, state       ) : "Active" 
                     	}
                 }
@@ -168,15 +171,17 @@ Model Main_Flow_Shop {
     Section MainModelProcedures {
         Procedure MainInitialization {
             Body: {
-                p_MaxJobs 	:= 4;
-                p_MaxMachines 	:= 8;
-                
-                pr_GenerateData;
+                ProfilerStart();
             }
         }
         Procedure PostMainInitialization {
             Body: {
                 pr_fillDummy();
+                
+                p_MaxJobs 	:= 4;
+                p_MaxMachines 	:= 8;
+                
+                pr_GenerateData;
             }
         }
         Procedure MainExecution;
@@ -196,29 +201,108 @@ Model Main_Flow_Shop {
             p_ProcesTime(j,m) := round(Uniform(1,20));
         }
     }
-    Procedure pr_DoSolve {
-        Body: {
-            MainExecution();
-            
-            ! Copy the solver status file from the pro temp folder to AIMMS PRO Storage.
-            if pro::GetPROEndPoint() then
-            	sp_SolverLogFilename := "CPLEX 12.9.sta" ;
-            	sp_ProTempLocation := pro::PROTempFolder + "/" + sp_SolverLogFilename ;
-            	sp_userLocation := "userdata/" + pro::PROEnvironment + "/" + pro::PROUserName + "/" + pro::ModelName + "/" + sp_SolverLogFilename ;
-            	pro::SaveFileToCentralStorage( sp_ProTempLocation, sp_userLocation );
-            endif ;
-            pr_prepInterface;
+    DeclarationSection ServerSessionProfilerErrorData {
+        Set s_LineNumbers {
+            SubsetOf: Integers;
+            Index: i_LineNumber;
+            Definition: ElementRange(0,1000);
         }
-        StringParameter sp_SolverLogFilename;
-        StringParameter sp_ProTempLocation;
-        StringParameter sp_userLocation;
+        Set s_StackPositions {
+            SubsetOf: Integers;
+            Index: i_StackPosition;
+            Definition: ElementRange(1,255);
+        }
+        Parameter p_JobProfilerData {
+            IndexDomain: (IndexIdentifiers,i_LineNumber,IndexProfilerTypes );
+        }
+        Set s_JobErrorMessageNumbers {
+            SubsetOf: Integers;
+            Index: i_JobErrorMessageNumber;
+        }
+        StringParameter sp_JobErrorMessages {
+            IndexDomain: i_JobErrorMessageNumber;
+        }
+        ElementParameter ep_JobErrorSeverity {
+            IndexDomain: i_JobErrorMessageNumber;
+            Range: errh::AllErrorSeverities;
+        }
+        ElementParameter ep_JobErrorNodes {
+            IndexDomain: (i_JobErrorMessageNumber,i_StackPosition);
+            Range: AllSymbols;
+        }
+        Parameter p_JobErrorLines {
+            IndexDomain: (i_JobErrorMessageNumber,i_StackPosition);
+        }
+    }
+    Procedure pr_GuardAndProfileServerJob {
+        Body: {
+            block
+            	empty s_JobErrorMessageNumbers ;
+            
+            	! Ensure that the error recorded and profiler data are transmitted via the output case:
+            	pro::ManagedSessionOutputCaseIdentifierSet += ServerSessionProfilerErrorData ;
+            
+            	! Actual work.
+            	pr_WorkSolve();
+            
+            	! Ensure that the definitions of all defined sets and defined parameters in 
+            	! output case identifier set are profiled.
+            	update pro::ManagedSessionOutputCaseIdentifierSet;
+            
+            onerror ep_err do
+            
+            	! Increase the number of recorded error messages.
+            	s_JobErrorMessageNumbers += card(s_JobErrorMessageNumbers) + 1;
+            	ep_JobErrorMessageNumber := last(s_JobErrorMessageNumbers);
+            
+            	! Record the message and severity.
+            	sp_JobErrorMessages(ep_JobErrorMessageNumber) := errh::Message( ep_err);
+            	ep_JobErrorSeverity(ep_JobErrorMessageNumber) := errh::Severity(ep_err);
+            
+            	! Record the entire stack of error positions
+            	p_errStackHeight := errh::NumberOfLocations(ep_err);
+            	p_errStackPos := 1 ;
+            	while p_errStackPos <= p_errStackHeight do
+            		ep_StackPosition := p_errStackPos;
+            		ep_JobErrorNodes(ep_JobErrorMessageNumber,ep_StackPosition) := errh::Node(ep_err,ep_StackPosition);
+            		p_JobErrorLines( ep_JobErrorMessageNumber,ep_StackPosition) := errh::Line(ep_err,ep_StackPosition);
+            		p_errStackPos += 1 ;
+            	endwhile ;
+            
+            	! Don't let the server job be halted by this error; 
+            	! we still want the result case including the profiled data.
+            	errh::MarkAsHandled(ep_err);
+            
+            endblock ;
+            ProfilerCollectAllData(
+            	ProfilerData       :  p_JobProfilerData, 
+            	GrossTimeThreshold :  0, 
+            	NetTimeThreshold   :  0);
+        }
+        ElementParameter ep_err {
+            Range: errh::PendingErrors;
+        }
+        Parameter p_errStackHeight;
+        Parameter p_errStackPos;
+        ElementParameter ep_StackPosition {
+            Range: s_StackPositions;
+        }
+        ElementParameter ep_JobErrorMessageNumber {
+            Range: s_JobErrorMessageNumbers;
+        }
     }
     Procedure pr_WorkSolve {
         Body: {
             Empty AllVariables;
             pr_GenerateData();
             
+            raise warning "Cry wolf." ;
+            
             solve mp_FlowShopModel  ;
+            
+            raise warning "Hi, hi, false alarm.";
+            
+            pr_prepInterface;
         }
     }
     Procedure pr_Solve {
@@ -230,7 +314,7 @@ Model Main_Flow_Shop {
             	endif ;
             endif ;
             
-            pr_DoSolve();
+            pr_GuardAndProfileServerJob();
         }
     }
     Procedure pr_BtnSolve {
