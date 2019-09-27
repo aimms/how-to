@@ -261,6 +261,9 @@ Client side: read the case file with results
 
 This is the same as section :ref:`sec_server_read_case`.
 
+
+Project download
+-----------------
 The AIMMS project used to create the screenshots of this article can be downloaded below:
 
 * :download:`FlowShop.zip <model/FlowShop.zip>` 

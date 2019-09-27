@@ -43,8 +43,9 @@ To convert a GAMS model to an AIMMS model, you'll need to execute the following 
 
     .. image:: images/ConvertedModelTree.png
         :align: center
-        
-    .. tip:: Double-click with the ``Ctrl`` key pressed, on the box before the main model named "aimms 2 upgrade", and again to fully expand the model tree.
+
+
+    (Double-click with the ``Ctrl`` key pressed on the box before the main model named "aimms 2 upgrade", and again to fully expand the model tree.)
         
     Now we need to convert the model to ``.amb`` format as a preparation for the next step.
     AIMMS 3.14 will do this for you, after you make a model change.
