@@ -235,6 +235,10 @@ whereby the procedure ``pr_GuardAndProfileServerJob();`` is defined as:
         GrossTimeThreshold :  0, 
         NetTimeThreshold   :  0);
 
+Remarks:
+
+#. ``ProfilerCollectAllData`` is available since AIMMS 4.68
+
 In addition, we set the option ``communicate_warnings_to_end_users`` to ``on``.
 
 Run the optimization via the widget action of the Gantt Chart:
