@@ -9,13 +9,12 @@ Error Handling
 .. meta::
    :description: Help and support with diagnosing and fixing errors.
 
-
-
 Get help debugging errors that arise during development. This section covers troubleshooting errors in your AIMMS project.
 
 .. toctree::
    :maxdepth: 1
 
+   /Articles/313/313-get-log-files
    /Articles/191/191-handle-errors-and-warnings
    /Articles/265/265-settings-for-errors-and-warnings
    /Articles/292/292-identifying-error

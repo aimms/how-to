@@ -1,0 +1,120 @@
+﻿
+MAIN MODEL aimms_2_upgrade
+
+  PROCEDURE
+    identifier :  MainInitialization
+
+  ENDPROCEDURE  ;
+
+  PROCEDURE
+    identifier :  MainExecution
+    body       :  
+      EXECUTION SECTION Execution_1
+        body :  
+          c(i_i,j_i) :=f * d(i_i,j_i) / 1000 ;
+
+      ENDSECTION  ;
+      EXECUTION SECTION Execution_2
+        body :  
+          Solve transport using LP minimizing z ;
+
+      ENDSECTION  ;
+
+  ENDPROCEDURE  ;
+
+  DECLARATION SECTION Declaration_1
+
+    SET:
+       identifier   :  i
+       text         :  "canning plants"
+       index        :  i_i
+       initial data :  data { Seattle, San-Diego }
+                        ;
+
+    SET:
+       identifier   :  j
+       text         :  "markets"
+       index        :  j_i
+       initial data :  data { New-York, Chicago, Topeka }
+                        ;
+
+    PARAMETER:
+       identifier   :  a
+       index domain :  i_i
+       text         :  "capacity of plant i in cases"
+       initial data :  data { Seattle : 350,  San-Diego : 600 }
+                        ;
+
+    PARAMETER:
+       identifier   :  b
+       index domain :  j_i
+       text         :  "demand at market j in cases"
+       initial data :  data { New-York : 325,  Chicago : 300,  Topeka : 275 }
+                        ;
+
+    PARAMETER:
+       identifier   :  d
+       index domain :  (i_i,j_i)
+       text         :  "distance in thousands of miles"
+       initial data :  data table 
+                                  New-York   Chicago    Topeka
+                               !  --------  --------  --------
+                         Seattle     2.500     1.700     1.800
+                       San-Diego     2.500     1.800     1.400
+                       
+                        ;
+
+    PARAMETER:
+       identifier   :  f
+       text         :  "freight in dollars per case per thousand miles"
+       initial data :  90 ;
+
+    PARAMETER:
+       identifier   :  c
+       index domain :  (i_i,j_i)
+       text         :  "transport cost in thousands of dollars per case" ;
+
+  ENDSECTION  ;
+
+  DECLARATION SECTION Declaration_2
+
+    VARIABLE:
+       identifier   :  x
+       index domain :  (i_i,j_i)
+       text         :  "shipment quantities in cases"
+       range        :  nonnegative
+       property     :  ReducedCost ;
+
+    VARIABLE:
+       identifier   :  z
+       text         :  "total transportation costs in thousands of dollars"
+       property     :  ReducedCost ;
+
+    CONSTRAINT:
+       identifier   :  cost_
+       text         :  "define objective function"
+       property     :  ShadowPrice
+       definition   :  z  =    sum((i_i,j_i), c(i_i,j_i)*x(i_i,j_i)) ;
+
+    CONSTRAINT:
+       identifier   :  supply
+       index domain :  i_i
+       text         :  "observe supply limit at plant i"
+       property     :  ShadowPrice
+       definition   :  sum(j_i, x(i_i,j_i))  <=   a(i_i) ;
+
+    CONSTRAINT:
+       identifier   :  demand
+       index domain :  j_i
+       text         :  "satisfy demand at market j"
+       property     :  ShadowPrice
+       definition   :  sum(i_i, x(i_i,j_i))  >=   b(j_i) ;
+
+    MATHEMATICAL PROGRAM:
+       identifier   :  transport
+       objective    :  z
+       type         :  LP ;
+
+  ENDSECTION  ;
+
+ENDMODEL aimms_2_upgrade ;

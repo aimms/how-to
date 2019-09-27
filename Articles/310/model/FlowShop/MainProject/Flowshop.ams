@@ -1,0 +1,325 @@
+## ams_version=1.0
+
+Model Main_Flow_Shop {
+    Comment: {
+        "Keywords:
+        CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP."
+    }
+    Section Superfluous_Data {
+        Procedure pr_fillDummy {
+            Body: {
+                p_Dummy(i_d1, i_d2, i_d3):=(ord(i_d1)*ord(i_d2)*ord(i_d3))/(ord(i_d1)+ord(i_d2)+ord(i_d3));
+            }
+        }
+        Parameter p_DummySize {
+            InitialData: {
+                499 ! Set to 499 to generate 800+ Mb files ;-)
+                ! 9 ! To get small amount of overhead.
+            }
+        }
+        Set s_Dummy {
+            SubsetOf: Integers;
+            Index: i_d, i_d1, i_d2, i_d3;
+            Definition: ELementRange(0,p_DummySize);
+        }
+        Parameter p_Dummy {
+            IndexDomain: (i_d1,i_d2,i_d3);
+        }
+        Procedure pr_SaveSeemProCase {
+            Body: {
+                s_InputCaseIdentifierSet := 
+                    pro::ManagedSessionInputCaseIdentifierSet - 
+                    pro::ManagedSessionRemoveFromCaseIdentifierSet ;
+                CaseFileSave(
+                    url      :  "testcase.data", 
+                    contents :  s_InputCaseIdentifierSet);
+            }
+            Set s_InputCaseIdentifierSet {
+                SubsetOf: AllIdentifiers;
+            }
+        }
+    }
+    Section WebUI_support {
+        Set AllPublicIdentifiers {
+            SubsetOf: AllIdentifiers;
+            Definition: Main_Flow_Shop;
+        }
+        Section Gantt_Chart {
+            Procedure pr_prepInterface {
+                Body: {
+                    p_GCJobStart(j,m)  := v_StartTime( first(s | v01_JobSchedule(j,s)),m);
+                    p_GCJobDuration(j,m) := p_ProcesTime(j,m);
+                }
+            }
+            StringParameter sp_RefTime {
+                Definition: "2000-01-01 01:01:01";
+            }
+            StringParameter sp_EndTime {
+                Definition: "2000-01-07 01:01:01";
+            }
+            Parameter p_GCJobStart {
+                IndexDomain: (j,m);
+            }
+            Parameter p_GCJobDuration {
+                IndexDomain: (j,m);
+            }
+            StringParameter sp_JobDescription {
+                IndexDomain: (j);
+                Text: "Description of jobs that can be used inside the Gantt Chart";
+                Definition: {
+                    FormatString("J%i", ord(j));
+                }
+            }
+            StringParameter sp_MachineDescription {
+                IndexDomain: (m);
+                Text: "Description of machines that can be used inside the Gantt Chart";
+                Definition: {
+                    FormatString("M%i", ord(m));
+                }
+            }
+            Set s_GCWidgetActionNumbers {
+                SubsetOf: Integers;
+                Index: i_gcwan;
+                Definition: ElementRange(1,9);
+            }
+            StringParameter sp_GCWidgetActions {
+                IndexDomain: (i_gcwan,webui::indexWidgetActionSpec);
+                Definition: {
+                    data { 
+                    	( 1, displaytext ) : "Optimize",  
+                    	( 1, icon        ) : "aimms-blog2",  
+                    	( 1, procedure   ) : "pr_BtnSolve",  
+                    	( 1, state       ) : "Active" 
+                    	}
+                }
+            }
+        }
+    }
+    Parameter p_MaxJobs {
+        Text: "Number of elements in the set Jobs";
+        Range: integer;
+    }
+    Set s_Jobs {
+        Text: "Set of all Jobs";
+        Index: j, j2;
+        Definition: {
+            ElementRange(1,p_MaxJobs, prefix: "Job-");
+        }
+    }
+    Set s_Schedules {
+        Text: "Set of all schedules";
+        Index: s;
+        Definition: {
+            ElementRange(1,p_MaxJobs, prefix: "Pos-");
+        }
+    }
+    Parameter p_MaxMachines {
+        Text: "Number of elements in the set Machines";
+        Range: integer;
+    }
+    Set s_Machines {
+        Text: "Set of all machines";
+        Index: m;
+        Definition: {
+            ElementRange(1,p_MaxMachines, prefix: "M-");
+        }
+    }
+    Parameter p_ProcesTime {
+        IndexDomain: (j,m);
+        Text: "Time required to process job j on machine m";
+    }
+    Variable v01_JobSchedule {
+        IndexDomain: (j,s);
+        Text: "Determining the place of the job";
+        Range: binary;
+    }
+    Variable v_StartTime {
+        IndexDomain: (s,m);
+        Text: "The time at which job in schedule position s commences processing on machine m";
+        Range: nonnegative;
+    }
+    Constraint c_OneJobPerSchedule {
+        IndexDomain: (s);
+        Text: "Only one job is related to every schedule";
+        Definition: sum(j, v01_JobSchedule(j,s)) = 1;
+    }
+    Constraint c_OneSchedulePerJob {
+        IndexDomain: (j);
+        Text: "Only one schedule is related to every job";
+        Definition: sum(s, v01_JobSchedule(j,s)) = 1;
+    }
+    Constraint c_MachineStartTime {
+        IndexDomain: (s,m) | m <> last(s_Machines);
+        Text: "The commencement of schedule s on machine m+1 is no earlier then its finish on machine m";
+        Definition: v_StartTime(s,m + 1) >=  v_StartTime(s,m) + sum(j, p_ProcesTime(j,m)*v01_JobSchedule(j,s));
+    }
+    Constraint c_ScheduleStartTime {
+        IndexDomain: (s,m) | s <> last(s_Schedules);
+        Text: "The commencement of schedule s + 1 on machine m is no earlier then the finish time of job j on machine m";
+        Definition: v_StartTime(s + 1,m) >=  v_StartTime(s,m) + sum(j, p_ProcesTime(j,m)*v01_JobSchedule(j,s));
+    }
+    Variable v_TimeSpan {
+        Text: "Total time to process all jobs on all machines";
+        Definition: v_StartTime(Last(s),last(m)) + sum(j, p_ProcesTime(j,last(m))*v01_JobSchedule(j,Last(s)));
+    }
+    MathematicalProgram mp_FlowShopModel {
+        Objective: v_TimeSpan;
+        Direction: minimize;
+        Constraints: AllConstraints;
+        Variables: AllVariables;
+    }
+    Section MainModelProcedures {
+        Procedure MainInitialization {
+            Body: {
+                ProfilerStart();
+            }
+        }
+        Procedure PostMainInitialization {
+            Body: {
+                pr_fillDummy();
+                
+                p_MaxJobs 	:= 4;
+                p_MaxMachines 	:= 8;
+                
+                pr_GenerateData;
+            }
+        }
+        Procedure MainExecution;
+        Procedure PreMainTermination {
+            Body: {
+                return 1;
+            }
+        }
+        Procedure MainTermination {
+            Body: {
+                return 1;
+            }
+        }
+    }
+    Procedure pr_GenerateData {
+        Body: {
+            p_ProcesTime(j,m) := round(Uniform(1,20));
+        }
+    }
+    DeclarationSection ServerSessionProfilerErrorData {
+        Set s_LineNumbers {
+            SubsetOf: Integers;
+            Index: i_LineNumber;
+            Definition: ElementRange(0,1000);
+        }
+        Set s_StackPositions {
+            SubsetOf: Integers;
+            Index: i_StackPosition;
+            Definition: ElementRange(1,255);
+        }
+        Parameter p_JobProfilerData {
+            IndexDomain: (IndexIdentifiers,i_LineNumber,IndexProfilerTypes );
+        }
+        Set s_JobErrorMessageNumbers {
+            SubsetOf: Integers;
+            Index: i_JobErrorMessageNumber;
+        }
+        StringParameter sp_JobErrorMessages {
+            IndexDomain: i_JobErrorMessageNumber;
+        }
+        ElementParameter ep_JobErrorSeverity {
+            IndexDomain: i_JobErrorMessageNumber;
+            Range: errh::AllErrorSeverities;
+        }
+        ElementParameter ep_JobErrorNodes {
+            IndexDomain: (i_JobErrorMessageNumber,i_StackPosition);
+            Range: AllSymbols;
+        }
+        Parameter p_JobErrorLines {
+            IndexDomain: (i_JobErrorMessageNumber,i_StackPosition);
+        }
+    }
+    Procedure pr_GuardAndProfileServerJob {
+        Body: {
+            block
+            	empty s_JobErrorMessageNumbers ;
+            
+            	! Ensure that the error recorded and profiler data are transmitted via the output case:
+            	pro::ManagedSessionOutputCaseIdentifierSet += ServerSessionProfilerErrorData ;
+            
+            	! Actual work.
+            	pr_WorkSolve();
+            
+            	! Ensure that the definitions of all defined sets and defined parameters in 
+            	! output case identifier set are profiled.
+            	update pro::ManagedSessionOutputCaseIdentifierSet;
+            
+            onerror ep_err do
+            
+            	! Increase the number of recorded error messages.
+            	s_JobErrorMessageNumbers += card(s_JobErrorMessageNumbers) + 1;
+            	ep_JobErrorMessageNumber := last(s_JobErrorMessageNumbers);
+            
+            	! Record the message and severity.
+            	sp_JobErrorMessages(ep_JobErrorMessageNumber) := errh::Message( ep_err);
+            	ep_JobErrorSeverity(ep_JobErrorMessageNumber) := errh::Severity(ep_err);
+            
+            	! Record the entire stack of error positions
+            	p_errStackHeight := errh::NumberOfLocations(ep_err);
+            	p_errStackPos := 1 ;
+            	while p_errStackPos <= p_errStackHeight do
+            		ep_StackPosition := p_errStackPos;
+            		ep_JobErrorNodes(ep_JobErrorMessageNumber,ep_StackPosition) := errh::Node(ep_err,ep_StackPosition);
+            		p_JobErrorLines( ep_JobErrorMessageNumber,ep_StackPosition) := errh::Line(ep_err,ep_StackPosition);
+            		p_errStackPos += 1 ;
+            	endwhile ;
+            
+            	! Don't let the server job be halted by this error; 
+            	! we still want the result case including the profiled data.
+            	errh::MarkAsHandled(ep_err);
+            
+            endblock ;
+            ProfilerCollectAllData(
+            	ProfilerData       :  p_JobProfilerData, 
+            	GrossTimeThreshold :  0, 
+            	NetTimeThreshold   :  0);
+        }
+        ElementParameter ep_err {
+            Range: errh::PendingErrors;
+        }
+        Parameter p_errStackHeight;
+        Parameter p_errStackPos;
+        ElementParameter ep_StackPosition {
+            Range: s_StackPositions;
+        }
+        ElementParameter ep_JobErrorMessageNumber {
+            Range: s_JobErrorMessageNumbers;
+        }
+    }
+    Procedure pr_WorkSolve {
+        Body: {
+            Empty AllVariables;
+            pr_GenerateData();
+            
+            raise warning "Cry wolf." ;
+            
+            solve mp_FlowShopModel  ;
+            
+            raise warning "Hi, hi, false alarm.";
+            
+            pr_prepInterface;
+        }
+    }
+    Procedure pr_Solve {
+        Body: {
+            if pro::GetPROEndPoint() then
+            	if pro::DelegateToServer( waitForCompletion  :  1, 
+            				  completionCallback :  'pro::session::LoadResultsCallBack' ) then	
+            		return 1;
+            	endif ;
+            endif ;
+            
+            pr_GuardAndProfileServerJob();
+        }
+    }
+    Procedure pr_BtnSolve {
+        Body: {
+            pr_Solve();
+        }
+    }
+}

@@ -18,6 +18,7 @@ This section offers best practices to build and deploy applications using AIMMS 
    /Articles/171/171-pro-system-requirements
    /Articles/120/120-pro-user-groups
    /Articles/251/251-pro-operations-best-practices
+   /Articles/310/310-investigate-behavior-pro-job
    /Articles/33/33-pro-deploy-app
    /Articles/32/32-pro-develop-app
    /Articles/19/19-remove-veil
