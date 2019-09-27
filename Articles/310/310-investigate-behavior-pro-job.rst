@@ -1,15 +1,15 @@
-Investigate behaviour of AIMMS PRO job
+Investigate Behavior of AIMMS PRO Job
 ==============================================
 
 .. meta::
-   :description: An AIMMS PRO job may spent more time than the corresponding procedure client side. Why? How to reduce?
+   :description: Checking execution time and troubleshooting AIMMS PRO jobs.
    :keywords: profiling, AIMMS PRO, deployment, execution time, case management
 
-At AIMMS User Support, we repeatedly get a question like:
+An AIMMS PRO job may spend more time than the corresponding procedure on the client side. In this article we set out to answer the following questions:
 
-#. Why does it take so long for my AIMMS PRO job?
+* How can I reduce the execution time of my AIMMS PRO job?
 
-#. Something gone wrong with my AIMMS PRO job, what happened?
+* How can I find out what went wrong with my AIMMS PRO job?
 
 To provide a structural answer for your application, we need to dive into the workings of the procedure ``PRO::DelegateToServer``.
 
@@ -114,7 +114,7 @@ Anyway, now that we have this log file open, we may want to search for other occ
 On the AIMMS PRO server, wait for a server license
 ---------------------------------------------------
 
-This is also known as wait time or queue-ing time. 
+This is also known as wait time or queueing time. 
 This can be obtained from the AIMMS PRO portal, tab jobs as illustrated in the image below:
 
 .. image:: images/JobsTabForQueueing.png
@@ -254,14 +254,16 @@ Switch to the profile and error page of the app:
 On the AIMMS PRO server, create a case file with the results
 ----------------------------------------------------------------------------
 
-This is the same as section :ref:`sec_client_create_case`, just the other way around and the identifier ``pro::ManagedSessionOutputCaseIdentifierSet``
+This is the same as section :ref:`sec_client_create_case`, except the other way around and the identifier ``pro::ManagedSessionOutputCaseIdentifierSet``
 
 Client side: read the case file with results
 -----------------------------------------------------------
 
-Again, this is the same as section :ref:`sec_server_read_case` .
+This is the same as section :ref:`sec_server_read_case`.
 
-The AIMMS project used to create the screenshots of this article can be downloaded :download:`here <model/FlowShop.zip>` 
+The AIMMS project used to create the screenshots of this article can be downloaded below:
+
+* :download:`FlowShop.zip <model/FlowShop.zip>` 
 
 
 

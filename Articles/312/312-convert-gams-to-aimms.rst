@@ -1,20 +1,23 @@
-Converting a GAMS model to an AIMMS model
+Convert a GAMS Model to an AIMMS Model
 =============================================
+.. meta::
+    :description:
+    :keywords: gams, convert
 
 To convert a GAMS model to an AIMMS model, you'll need to execute the following steps:
 
-#. Create a new AIMMS project using AIMMS 3.14. Close AIMMS 3.14
+#. Create a new AIMMS project using AIMMS 3.14. Close AIMMS 3.14.
 
     .. image:: images/NewAIMMS313Project.png
         :align: center
 
-#. Copy the GAMS model file next to the .amb file created by AIMMS 3.14.
+#. Copy the GAMS model file next to the ``.amb`` file created by AIMMS 3.14.
 
    We assume here that the GAMS model file has extension ``.gms``, for instance ``trnsport.gms``.  The screenshots of this article are made using this `GAMS model <https://www.gams.com/products/simple-example/>`_.
 
 #. Close AIMMS. Open AIMMS 3.14 again on the existing project
 
-#. Using File - Open Model File, switch the file type to .aim, you can open the GAMS model
+#. Using *File > Open Model File*, switch the file type to ``.aim``, you can open the GAMS model
 
     .. image:: images/NewModelAIMTypeFiles.png
         :align: center
@@ -24,7 +27,7 @@ To convert a GAMS model to an AIMMS model, you'll need to execute the following 
     .. image:: images/OkTheAreYouSureNewModel.png
         :align: center
         
-    You'll have to ok that the model is converted
+    Confirm that the model is converted
 
     .. image:: images/NotificationModelIsConverted.png
         :align: center
@@ -41,23 +44,23 @@ To convert a GAMS model to an AIMMS model, you'll need to execute the following 
     .. image:: images/ConvertedModelTree.png
         :align: center
         
-    .. tip:: Doube click with the ctrl key pressed, on the box before the main model named "aimms 2 upgrade", and again to fully expand the model tree.
+    .. tip:: Double-click with the ``Ctrl`` key pressed, on the box before the main model named "aimms 2 upgrade", and again to fully expand the model tree.
         
     Now we need to convert the model to ``.amb`` format as a preparation for the next step.
     AIMMS 3.14 will do this for you, after you make a model change.
-    A change you want to make anyway is to add the procedure ``MainTermination`` with the contents:
+    You'll also want to add the procedure ``MainTermination`` with the contents:
     
     .. code-block:: aimms
         :linenos:
 
         return 1;
         
-    Save and close the project. You may need to OK the following dialog:
+    Save and close the project. Confirm the following dialog:
     
     .. image:: images/convertModelFromAim3ToAmb.png
         :align: center
 
-    Ensure you can open this project again using AIMMS 3.14 and look somehting like the following:
+    Open this project again using AIMMS 3.14 and it should look something like the following:
     
     .. image:: images/Convert314AimTo314Amb.png
         :align: center
@@ -75,8 +78,7 @@ To convert a GAMS model to an AIMMS model, you'll need to execute the following 
 #. Tailor some default settings
 
     The AIMMS 3.14 default for data management is to use ``.dat`` files. 
-    However, the modern ``.data`` files offer several advantages, and you may as well start using that right away:
+    However, you can switch to the ``.data`` files offered with newer versions of AIMMS:
 
     .. image:: images/settingOptionsDataManagerStyle.png
         :align: center
-

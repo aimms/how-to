@@ -1,5 +1,8 @@
-From ``.dat`` files to ``.data`` files
+Convert Files from DAT to DATA
 ======================================
+.. meta::
+    :description: How to convert a data manager file to a case file.
+    :keywords: dat, data, data manager, case
 
 Cases contain data of AIMMS identifiers, binary, zipped. 
 
