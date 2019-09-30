@@ -1,5 +1,8 @@
-From ``.dat`` files to ``.data`` files
+Convert Files from DAT to DATA
 ======================================
+.. meta::
+    :description: How to convert a data manager file to a case file.
+    :keywords: dat, data, data manager, case
 
 Cases contain data of AIMMS identifiers, binary, zipped. 
 
@@ -10,7 +13,7 @@ AIMMS 3.0 stores cases were in so-called "data manager files".
 A data manager file has the extension ``.dat``. 
 A data manager file contains zero, one or more cases.
 An AIMMS project is linked to a single data manager file file at any one time.   
-One can switch from data manager file, by opening it from the AIMMS menu - FILE - Open data file dialog.
+One can switch from data manager file, by opening it from the *AIMMS menu > FILE > Open data file* dialog.
 
 .. image:: images/OpeningDataFile.png
     :align: center
