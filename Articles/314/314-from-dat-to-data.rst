@@ -23,8 +23,6 @@ The dialog that appears is a file select type dialog:
 .. image:: images/FileSelectForData.png
     :align: center
 
-
-
 The above described "data management style" is referred to as "Single data manager file".
 
 Disk files and folders
@@ -35,6 +33,12 @@ Only one case is stored in a ``.data`` file.
 The term "data manager file" is dropped, and a ``.data`` file is simply referred to as a case.
 The default location of ``.data`` files, is the ``data`` sub folder of the project folder. 
 The project option ``Default data folder`` can be used to modify this. 
+
+Why was this change made?
+--------------------------
+
+In AIMMS it is possible to compare different scenarios as explained in Section "Managing multiple case selections" in AIMMS The User's guide.
+By having the case in a folder, it is easy to copy cases from other and different people in the same folder; thereby it becomes easy to compare scenarios developed by different people.
 
 Upgrading an AIMMS project to a newer AIMMS release
 ---------------------------------------------------
