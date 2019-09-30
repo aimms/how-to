@@ -8,8 +8,17 @@ To convert a GAMS model to an AIMMS model, you'll need to execute the following 
 
 #. Create a new AIMMS project using AIMMS 3.14. Close AIMMS 3.14.
 
-    .. image:: images/NewAIMMS313Project.png
-        :align: center
+    A.  Download and install AIMMS 3.14 if it isn't available on your system yet.
+    
+        Navigate to `Download AIMMS <https://www.aimms.com/english/developers/downloads/download-aimms/>`_ and download AIMMS 3.14 using the form at the bottom of that page:
+    
+        .. image:: images/DownloadAIMMS314.png
+            :align: center
+    
+    #.  After creating and restarting your project with AIMMS 3.14, it should look like:
+
+        .. image:: images/NewAIMMS313Project.png
+            :align: center
 
 #. Copy the GAMS model file next to the ``.amb`` file created by AIMMS 3.14.
 
@@ -67,6 +76,8 @@ To convert a GAMS model to an AIMMS model, you'll need to execute the following 
         :align: center
     
 #. Convert the AIMMS 3.14 project to AIMMS 4.
+
+    If you do not have AIMMS 4.9, download and install it, just like you may have done for AIMMS 3.14 above.
 
     .. image:: images/OpenProjectUsing4-9.png
         :align: center
