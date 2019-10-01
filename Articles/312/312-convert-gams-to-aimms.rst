@@ -61,7 +61,6 @@ To convert a GAMS model to an AIMMS model, you'll need to execute the following 
     You'll also want to add the procedure ``MainTermination`` with the contents:
     
     .. code-block:: aimms
-        :linenos:
 
         return 1;
         
@@ -94,3 +93,7 @@ To convert a GAMS model to an AIMMS model, you'll need to execute the following 
 
     .. image:: images/settingOptionsDataManagerStyle.png
         :align: center
+
+**Related Topics**:
+
+* **AIMMS How-To:** :doc:`../314/314-from-dat-to-data`
