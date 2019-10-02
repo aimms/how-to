@@ -1,96 +1,122 @@
 Convert a GAMS Model to an AIMMS Model
 =============================================
 .. meta::
-    :description:
+    :description: How to open and save a GAMS model as an AIMMS project.
     :keywords: gams, convert
 
-To convert a GAMS model to an AIMMS model, you'll need to execute the following steps:
+You can convert GAMS files using an older version of AIMMS.
 
-#. Create a new AIMMS project using AIMMS 3.14. Close AIMMS 3.14.
+To convert a GAMS model to an AIMMS model, follow this procedure:
 
-    A.  Download and install AIMMS 3.14 if it isn't available on your system yet.
+You can follow this procedure to convert a GAMS file to an AIMMS project:
+1. Download AIMMS 3.14 and convert the .gms file to a .aim file.
+2. Download current AIMMS version and convert the old AIMMS project to a modern one using .ams file.
+3. Open the newly converted project in current version of AIMMS.
+
+These steps are discussed in further detail below.
+
+This article uses an `example GAMS model <https://www.gams.com/products/simple-example/>`_.
+
+Converting GMS to AIM file
+----------------------------
+
+A. 
+    Download and install `AIMMS 3.14 <https://download.aimms.com/aimms/download/data/3.14/5.53/Aimms-3.14.5.53-x86.exe>` (if you don't already have it).
     
-        Navigate to `Download AIMMS <https://www.aimms.com/english/developers/downloads/download-aimms/>`_ and download AIMMS 3.14 using the form at the bottom of that page:
+        
     
-        .. image:: images/DownloadAIMMS314.png
-            :align: center
-    
-    #.  After creating and restarting your project with AIMMS 3.14, it should look like:
+    After creating and restarting your project with AIMMS 3.14, it should look like:
 
         .. image:: images/NewAIMMS313Project.png
             :align: center
 
 #. Copy the GAMS model file next to the ``.amb`` file created by AIMMS 3.14.
 
-   We assume here that the GAMS model file has extension ``.gms``, for instance ``trnsport.gms``.  The screenshots of this article are made using this `GAMS model <https://www.gams.com/products/simple-example/>`_.
+   We assume here that the GAMS model file has extension ``.gms``, for instance ``trnsport.gms``.
 
-#. Close AIMMS. Open AIMMS 3.14 again on the existing project
 
-#. Using *File > Open Model File*, switch the file type to ``.aim``, you can open the GAMS model
+#. Close AIMMS. Open AIMMS 3.14 again on the existing project.
+
+#. Go to *File > Open Model File* and switch the file type to ``.aim``. Now you can open the GAMS model.
 
     .. image:: images/NewModelAIMTypeFiles.png
         :align: center
         
-    You'll have to accept a new model.
+    Accept a new model.
 
     .. image:: images/OkTheAreYouSureNewModel.png
         :align: center
         
-    Confirm that the model is converted
+    Confirm that the model is converted.
 
     .. image:: images/NotificationModelIsConverted.png
         :align: center
         
-    And then choose a name to save it as an AIMMS 3 ``.aim`` file.
+    Enter a name and save it as an AIMMS 3 ``.aim`` file.
 
     .. image:: images/SaveAs30AimFile.png
         :align: center
 
-#. Convert the AIMMS 3 model from ``.aim`` to AIMMS 3 ``.amb`` format 
+Converting AIM to AMB file
+--------------------------
 
-    This is what see when you open the project again using AIMMS 3.14
+
+
+
+
+A.  
+    Open the project again using AIMMS 3.14.
 
     .. image:: images/ConvertedModelTree.png
-        :align: center
-
+        :align: center   
 
     (Double-click with the ``Ctrl`` key pressed on the box before the main model named "aimms 2 upgrade", and again to fully expand the model tree.)
-        
-    Now we need to convert the model to ``.amb`` format as a preparation for the next step.
-    AIMMS 3.14 will do this for you, after you make a model change.
-    You'll also want to add the procedure ``MainTermination`` with the contents:
+    
+    AIMMS 3.14 will automatically convert the AIMMS 3 model from ``.aim`` to AIMMS 3 ``.amb`` format , after you make a model change.
+
+#.  
+    Add the procedure ``MainTermination`` with the contents:
     
     .. code-block:: aimms
-        :linenos:
 
         return 1;
         
+#.   
     Save and close the project. Confirm the following dialog:
     
     .. image:: images/convertModelFromAim3ToAmb.png
         :align: center
 
+#.
     Open this project again using AIMMS 3.14 and it should look something like the following:
     
     .. image:: images/Convert314AimTo314Amb.png
         :align: center
-    
-#. Convert the AIMMS 3.14 project to AIMMS 4.
 
-    If you do not have AIMMS 4.9, download and install it, just like you may have done for AIMMS 3.14 above.
+Converting AIMMS 3 to current AIMMS version
+-------------------------------------------
+A. 
+    Install the `current version of AIMMS <https://www.aimms.com/english/developers/downloads/download-aimms/>`_ (or the AIMMS 4 version you prefer to use).
+
+#. 
+    Open the project with the new version of AIMMS.
 
     .. image:: images/OpenProjectUsing4-9.png
         :align: center
 
-    As usual a warning should be acknowledged: 
+    Acknowledge the warning. 
 
     .. image:: images/OkWarningConversion.png
         :align: center
 
-#. Tailor some default settings
-
-    The AIMMS 3.14 default for data management is to use ``.dat`` files. 
-    However, you can switch to the ``.data`` files offered with newer versions of AIMMS:
+#. 
+    Now you can switch the ``.dat`` files (used with AIMMS 3.14) to the ``.data`` files offered with newer versions of AIMMS:
 
     .. image:: images/settingOptionsDataManagerStyle.png
         :align: center
+
+    For more information about why to do this, read :doc:`../314/314-from-dat-to-data`.
+
+.. topic:: AIMMS Support
+
+    If you need further help, contact AIMMS Support at `support@aimms.com <mailto:support@aimms.com>`_.
