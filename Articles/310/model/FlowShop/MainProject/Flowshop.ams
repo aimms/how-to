@@ -13,8 +13,8 @@ Model Main_Flow_Shop {
         }
         Parameter p_DummySize {
             InitialData: {
-                499 ! Set to 499 to generate 800+ Mb files ;-)
-                ! 9 ! To get small amount of overhead.
+                ! 499 ! Set to 499 to generate 800+ Mb files ;-)
+                9 ! To get small amount of overhead.
             }
         }
         Set s_Dummy {
