@@ -81,9 +81,7 @@ To obtain this log information, we need to obtain this from the browser as follo
 Chrome
 ^^^^^^
 
-* Right click on your browser and select "Inspect".  
-
-* Click on the Console tab
+* Ctrl-Shift-J or F12
 
 * mark all messages
 
