@@ -64,10 +64,55 @@ Download button for log files can be found at on tab ``configuration``, click ``
 Note that this tab is only available to users in the ``Admin`` group.
 You will find the session logs (verify sessions, data sessions and server sessions) in the folder ``log\\Sessions`` after unzipping the download.
 
+.. warning:: The AIMMS PRO log files are designed to be interpreted by AIMMS staff only.
+             Please do not be alarmed if (parts of it) don't make sense.
 
 The download button is available since AIMMS PRO 2.11. 
 For older AIMMS PRO systems, you can look at the folders:
 ``C:\ProgramData\AimmsPRO\Log\Sessions\`` and ``C:\ProgramData\AimmsPRO\Log\`` on the machine running AIMMS PRO.
+
+Browser logs
+-------------------------
+
+The front end of the WebUI actually shows your User Interface and runs in a supported browser.  
+The logging information of this component is also kept in the browser.
+To obtain this log information, we need to obtain this from the browser as follows:
+
+Chrome
+^^^^^^
+
+* Ctrl-Shift-J or F12
+
+* mark all messages
+
+* right click and select "save as"
+
+Edge
+^^^^
+
+* Ctrl-shift-J or right click and select "Inspect Element"
+
+* Switch to tab "Console"
+
+* Mark and copy all (relevant) text
+
+* Paste this text to a text editor, and save it as a ``.log`` file.
+
+
+Internet Explorer 11
+^^^^^^^^^^^^^^^^^^^^
+
+* Right click in the browser window
+
+* Select "Inspect Element"
+
+* Select tab console
+
+* Right click in this tab, and select Copy All
+
+* Paste the copied text to a text editor and save it as a ``.log`` file.
+
+
 
 Related Topics
 ----------------

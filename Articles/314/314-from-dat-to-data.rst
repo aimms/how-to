@@ -4,37 +4,34 @@ Convert Files from DAT to DATA
     :description: How to convert a data manager file to a case file.
     :keywords: dat, data, data manager, case
 
-Cases contain data of AIMMS identifiers, binary, zipped. 
 
-Single data manager file
-------------------------
+Overview & comparison of file types
+-----------------------------------
+AIMMS 3.0 stores cases were in so-called "data manager files".  AIMMS 3.12 introduced the ``.data`` format as an alternative. 
 
-AIMMS 3.0 stores cases were in so-called "data manager files".  
-A data manager file has the extension ``.dat``. 
-A data manager file contains zero, one or more cases.
-An AIMMS project is linked to a single data manager file file at any one time.   
-One can switch from data manager file, by opening it from the *AIMMS menu > FILE > Open data file* dialog.
+This change was made for several reasons.
 
-.. image:: images/OpeningDataFile.png
-    :align: center
+*  Data manager files (``.dat``) became difficult to manage when maintaining several cases.
 
-The dialog that appears is a file select type dialog:
+*  Case files (``.data``) avoid the risk of data corruption in one case affecting other cases stored in the same file. 
 
-.. image:: images/FileSelectForData.png
-    :align: center
+* Storing multiple case files in a folder makes it easy to copy cases from multiple users in the same folder, and compare scenarios. (See the `AIMMS User's Guide <https://documentation.aimms.com/aimms_user.html>`_, Section "Managing multiple case selections".)
 
 
+In projects created with AIMMS version before 3.14, a single data manager file (``.dat``) contains zero, one or more cases. From AIMMS version 3.14, a case file (``.data``) only stores one case, but multiple cases may be stored in the same folder. 
 
-The above described "data management style" is referred to as "Single data manager file".
++----------------------------------+----------------------------------------------+
+| Before AIMMS 3                   | AIMMS 3.14 and later                         |
++----------------------------------+----------------------------------------------+
+| ``.dat``                         | ``.data``                                    |
++----------------------------------+----------------------------------------------+
+| Single data manager file         | Disk files and folders                       |
+| contains zero, one or more cases | store multiple files, with one case per file |
++----------------------------------+----------------------------------------------+
 
-Disk files and folders
-----------------------
 
-AIMMS 3.12 introduced the ``.data`` format as an alternative. 
-Only one case is stored in a ``.data`` file. 
-The term "data manager file" is dropped, and a ``.data`` file is simply referred to as a case.
-The default location of ``.data`` files, is the ``data`` sub folder of the project folder. 
-The project option ``Default data folder`` can be used to modify this. 
+The default location of ``.data`` files, is the ``data`` subfolder of the project folder. (You can modify this with the project option ``Default data folder``.)
+
 
 Upgrading an AIMMS project to a newer AIMMS release
 ---------------------------------------------------
