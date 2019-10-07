@@ -19,7 +19,9 @@ To start using the command line tool open the terminal and run ``AimmsCmd Exampl
 
 .. note::
     
-    If ``AimmsCmd`` program ia not part of your environnement variables, you may find ``AimmsCmd`` in ``C:\Users\<Your_User_Name>\AppData\Local\AIMMS\IFA\Aimms\<AIMMS_version>\Bin\AimmsCmd.exe``
+    If ``AimmsCmd`` program is not part of your environnement variables, you may find ``AimmsCmd`` in 
+    
+    ``C:\Users\<Your_User_Name>\AppData\Local\AIMMS\IFA\Aimms\<AIMMS_version>\Bin\AimmsCmd.exe``
 
 Basic commands available
 ------------------------
