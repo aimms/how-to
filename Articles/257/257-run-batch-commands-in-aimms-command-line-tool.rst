@@ -17,6 +17,10 @@ In the integrated environment, or on a Linux system, you can control an AIMMS pr
 
 To start using the command line tool open the terminal and run ``AimmsCmd ExampleProject.aimms``.
 
+.. note::
+    
+    If ``AimmsCmd`` program ia not part of your environnement variables, you may find ``AimmsCmd`` in ``C:\Users\<Your_User_Name>\AppData\Local\AIMMS\IFA\Aimms\<AIMMS_version>\Bin\AimmsCmd.exe``
+
 Basic commands available
 ------------------------
 AIMMS command line tool offers a the following commands.
@@ -24,30 +28,26 @@ AIMMS command line tool offers a the following commands.
 * Assigning values:
 
     .. code-block:: none
-        :linenos:
 
-        Let Demand := 100;
+        Let p_Demand := 100;
 
 * Displaying the contents:
 
     .. code-block:: none
-        :linenos:
 
-        Display Supply;
+        Display p_Revenue;
  
 * Running procedures:
 
     .. code-block:: none
-        :linenos:
 
-        Run MainExecution ;
+        Run MainExecution;
         
 * Exiting the tool
 
     .. code-block:: none
-        :linenos:
 
-        Quit ;
+        Quit;
         
 Running batch commands
 ----------------------
