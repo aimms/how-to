@@ -50,7 +50,7 @@ Prepare the project for WebUI
 To add forms to your application, the system libraries ``AimmsProLibrary`` and ``AimmsWebUI`` are needed. 
 When your existing project doesn't have these two libraries you can add them using the library manager.
 In order to add forms to your application, you will need to prepare your application for the WebUI by adding the system libraries ``AimmsProLibrary`` and ``AimmsWebUI`` to your application. 
-This can be done using the AIMMS Library manager. 
+You can do this with the AIMMS Library manager. 
 This action needs to be done only once per application.
 
 .. figure:: images/1-New-project-with-system-libraries.png
@@ -127,7 +127,9 @@ In the following three steps we will discuss the selected details of these three
 Create a new element
 ---------------------------------------------
 
-This procedure is expected to create a new element in the set for which the form is setup. In our running example that is ``S_StockKeepingUnit``. You can use element names different from the literal text entered by the user, but our example does not. Please note that, before this procedure is called, the name was already verified by the check procedure discussed in the next section.
+This procedure is expected to create a new element in the set for which the form is setup. In our running example that is ``S_StockKeepingUnit``. You can use element names different from the literal text entered by the user, but our example does not. 
+
+Before this procedure is called, the name was already verified by a check procedure which we will discuss in the next section.
 
 
 .. code-block:: aimms
@@ -193,8 +195,7 @@ Linking callbacks to WebUI Forms framework
 In our running example, we use the procedure ``pr_SKUFORM_Setup`` as the procedure which links the model identifiers, ``SKUFORM`` procedures and the actual form in WebUI together. 
 This procedure is called at the end of the StartupProcedure in order to make sure it is called before the form is opened for the first time.
 
-There are two steps in this procedure. 
-In the first step we name the model identifiers that identify the fields in the form (here FormFields is a subset of ``AllIdentifiers``):
+First we name the model identifiers that identify the fields in the form (here FormFields is a subset of ``AllIdentifiers``):
 
 .. code-block:: aimms
 
@@ -205,7 +206,7 @@ In the first step we name the model identifiers that identify the fields in the 
         'EP_Color',
         'P_Stock'};
 
-In the second step, the actual linking is done:
+Next we will actually link the fields:
 
 .. code-block:: aimms
 
@@ -219,7 +220,7 @@ In the second step, the actual linking is done:
 Draw the form on the WebUI canvas
 ---------------------------------------------
 
-After starting the AIMMS WebUI (AIMMS Menu – Tools – Start WebUI) and opening the browser page ``localhost:12001/example``, we can create the necessary widgets:
+After starting the AIMMS WebUI *AIMMS Menu > Tools > Start WebUI* and opening the browser page ``localhost:12001/example``, we can create the necessary widgets:
 
 *   A legend widget, contents: ``P_SKUFORM_Selection``
 
@@ -250,7 +251,7 @@ This will result in the following form:
     4 Basic widget placing
 
 
-As the names in this form are a bit opaque to the average user, we will try to make them more appealing in the next step.
+We will try to make the names easier to understand in the next step.
 
 Create user-friendly names
 -----------------------------------------------------------------------------
@@ -289,7 +290,9 @@ With this phrase adapting, the form now looks as follows:
 Example project
 ----------------------------
 
-The sample project can be downloaded :download:`here <model/InventoryManagement.zip>` 
+You can download a sample project below.
+
+* :download:`InventoryManagement.zip <model/InventoryManagement.zip>` 
 
 
 
