@@ -23,3 +23,9 @@ AIMMS software has evolved over time, to match arising user needs and changes in
    /Articles/314/314-from-dat-to-data
    /Articles/295/295-convert-page-actions
    /Articles/295/295-convert-maps
+   /Articles/317/317-upgrade-your-aimms-pro
+   /Articles/318/318-aimms-and-aimms-pro
+   
+   
+   
+   

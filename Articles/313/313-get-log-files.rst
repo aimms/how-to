@@ -18,26 +18,26 @@ This folder is by default the subfolder ``log`` of the project folder. This fold
 
 The ``project/log`` folder contains the following files:
 
-*  File ``aimms.err`` 
+*   File ``aimms.err`` 
     This file is a recording of the error and warning messages sent to the error and warning window of the AIMMS IDE.
     This file is refreshed when the AIMMS project is started.
 
-*  File ``messages.log`` 
+*   File ``messages.log`` 
     This file is a recording of the messages sent to the message window of the AIMMS IDE. 
     You can increase the amount of information by activating the options ``major messages`` and ``time messages``.
     This file is refreshed when the AIMMS project is started.
 
-*  File ``<modelName>.lis`` 
+*   File ``<modelName>.lis`` 
     Constraint and solution listings are written to this file. 
     In addition, if no FILE is opened, then the output of PUT and DISPLAY statements is written to this file as well.
     This file is refreshed when the AIMMS project is started.
 
-*  File ``<solver>.sta`` 
+*   File ``<solver>.sta`` 
     This file is a recording of the messages issued by the solver. 
     See also :doc:`solver logging<../13/13-Solver-Logging-IDE>`. 
     This file is refreshed when the AIMMS project is started. 
 
-*  Folder ``ErrorReports`` 
+*   Folder ``ErrorReports`` 
     This folder contains so-called ``.dmp`` files.  
     A ``.dmp`` file is a recording of the state of the running threads during a **severe internal error**. 
     Note that this folder is not emptied automatically by AIMMS. 
@@ -70,6 +70,12 @@ You will find the session logs (verify sessions, data sessions and server sessio
 The download button is available since AIMMS PRO 2.11. 
 For older AIMMS PRO systems, you can look at the folders:
 ``C:\ProgramData\AimmsPRO\Log\Sessions\`` and ``C:\ProgramData\AimmsPRO\Log\`` on the machine running AIMMS PRO.
+
+further reading
+^^^^^^^^^^^^^^^^
+
+See also https://documentation.aimms.com/pro/logging.html
+
 
 Browser logs
 -------------------------
@@ -112,7 +118,27 @@ Internet Explorer 11
 
 * Paste the copied text to a text editor and save it as a ``.log`` file.
 
+License server logs
+---------------------
 
+The licensing log files can be found in the folder ``C:\\ProgramData\\AIMMS\\Logging\\`` 
+and the log files are called ``LicenseServer.log`` ``LicenseServer.log.1`` thru ``LicenseServer.log.10`` 
+
+The license logging can be configured using ``LicenseServerLogging.xml`` in that same folder.
+
+In this configuration file, you may want to change 
+
+.. code-block:: none
+
+    <param name="ConversionPattern" value="%r %5p [%t] %m%n"/>
+
+to 
+
+.. code-block:: none
+
+    <param name="ConversionPattern" value="%d{ISO8601} %r %5p [%t] %m%n"/>
+
+such that the timestamps of the incidents are more easily interpreted.
 
 Related Topics
 ----------------
