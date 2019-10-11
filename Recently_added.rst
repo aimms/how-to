@@ -5,13 +5,14 @@
 Recently added
 ==============
 
-.. Added 11 Oct 2019: 315
+.. keep most recent 10-15 articles
+
+.. Added 11 Oct 2019: 315, 317, 318
 .. Added 28 Sep 2019: 310, 312, 313, 314
 .. Added 13 Sep 2019: 291,304,305,306,308,309
-.. Added 30 Aug 2019: 302
-.. Added 23 Aug 2019: 283, 300, 301
-.. Added 16 Aug 2019: 299, 295
 
+* :doc:`/Articles/317/317-upgrade-your-aimms-pro`
+* :doc:`/Articles/318/318-aimms-and-aimms-pro`
 * :doc:`/Articles/315/315-hover-and-select-effects-webui-charts`
 * :doc:`/Articles/310/310-investigate-behavior-pro-job`
 * :doc:`/Articles/312/312-convert-gams-to-aimms`
@@ -23,12 +24,6 @@ Recently added
 * :doc:`/Articles/305/305-number-of-solves`
 * :doc:`/Articles/304/304-transfer-license-server`
 * :doc:`/Articles/291/291-solve-to-gmp-with-callback`
-* :doc:`/Articles/302/302-get-google-maps-coordinates`
-* :doc:`/Articles/283/283-convert-json-to-xml`
-* :doc:`/Articles/300/300-ibm-api-speech-to-text`
-* :doc:`/Articles/301/301-Image-Recognition`
-* :doc:`/Articles/295/295-convert-page-actions`
-* :doc:`/Articles/295/295-convert-maps`
 
 
 

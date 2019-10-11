@@ -12,7 +12,7 @@ Software Evolution
 
 
 
-AIMMS software has evolved over time, to match arising user needs and changes in the industry. As we make changes to available features, adding new ones and deprecating old ones, you may need guidance in adapting your models. These topics help you prepare your apps for what's to come.
+AIMMS software has evolved over time, to match arising user needs and changes in the industry. As we make changes to available features, you may need guidance in upgrading software versions, or adapting your models. These topics help you prepare your apps for upgrades and deprecations.
 
 .. toctree::
    :maxdepth: 1
