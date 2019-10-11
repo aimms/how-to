@@ -1,0 +1,332 @@
+/* Bar Chart */
+
+/* Default state */
+.annotation-bar_blue{
+	/* fill changes */
+    fill: blue;
+    fill-opacity: .5 !important;
+	/* stroke changes */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+}
+
+/* Hover State */
+.annotation-bar_blue.chart-item:hover,
+.annotation-bar_blue.chart-item.is-hover {
+	/* fill changes  */
+    fill: orange;
+    fill-opacity: .5 !important;
+	/* stroke changes  */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+}
+
+/* Selected state */
+.annotation-bar_blue.chart-item:active,
+.annotation-bar_blue.chart-item.is-active {
+	/* fill changes  */
+    fill: yellow;
+    fill-opacity: .5 !important;
+	/* stroke changes  */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+}
+
+/* ----------------------------------------------------------- */
+
+
+/*Line Chart - only dots can be annotated not the line. */
+
+/* Default state */
+.annotation-line_blue{
+	/* fill changes */
+    fill: Blue;
+    fill-opacity: .5 !important;
+	/* stroke changes */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+	r: 10px
+}
+
+/* Hover State */
+.annotation-line_blue.chart-item:hover,
+.annotation-line_blue.chart-item.is-hover {
+	/* fill changes  */
+    fill: green;
+    fill-opacity: .5 !important;
+	/* stroke changes  */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+	r: 10px
+}
+
+/* Selected state */
+.annotation-line_blue.chart-item:active,
+.annotation-line_blue.chart-item.is-active {
+	/* fill changes  */
+    fill: yellow;
+    fill-opacity: .5 !important;
+	/* stroke changes  */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+	r: 10px
+}
+
+/* ----------------------------------------------------------- */
+
+/* Pie Chart */
+
+/* Default state */
+.annotation-pie_blue{
+	/* fill changes */
+	fill: Blue;
+    fill-opacity: .5 !important;
+	/* stroke changes */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+}
+
+/* Hover State */
+.annotation-pie_blue.chart-item:hover,
+.annotation-pie_blue.chart-item.is-hover {
+	/* fill changes  */
+    fill: green;
+    fill-opacity: .5 !important;
+	/* stroke changes  */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+}
+
+/* Selected state */
+.annotation-pie_blue.chart-item:active,
+.annotation-pie_blue.chart-item.is-active {
+	/* fill changes  */
+    fill: yellow;
+    fill-opacity: .5 !important;
+	/* stroke changes  */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+}
+
+/* ----------------------------------------------------------- */
+
+/* TreeMap Chart */
+
+/* Default state */
+.annotation-tree_blue{
+	/* fill changes */
+	background: Blue;
+    opacity: .5 !important;
+	/* text changes */
+	font-size: 30px !important;
+    font-family: sans-serif;
+    font-style: italic;
+    font-weight: bold;
+}
+
+/* Hover State */
+.container .annotation-tree_blue.chart-item:hover,
+.container .annotation-tree_blue.chart-item.is-hover {
+	/* fill changes */
+	background: green;
+    opacity: .5 !important;
+	/* text changes */
+	font-size: 30px !important;
+    font-family: sans-serif;
+    font-style: italic;
+    font-weight: bold;
+}
+
+/* Selected state */
+.container .annotation-tree_blue.chart-item:active,
+.container .annotation-tree_blue.chart-item.is-active {
+	/* fill changes */
+	background: yellow;
+    opacity: .5 !important;
+	/* text changes */
+	font-size: 30px !important;
+    font-family: sans-serif;
+    font-style: italic;
+    font-weight: bold;
+}
+
+/* ----------------------------------------------------------- */
+
+/* Table */
+
+.annotation-table_blue{
+	/* fill changes */
+	background: Blue;
+	opacity: .5;
+	/* text changes */
+	font-size: 15px !important;
+    font-family: sans-serif;
+    font-style: italic;
+    font-weight: bold;
+	
+}
+
+/* ----------------------------------------------------------- */
+
+/* Bubble Chart */
+
+/* Default state */
+.annotation-bubble_blue{
+		/* fill changes */
+    fill: Blue;
+    fill-opacity: .5 !important;
+	/* stroke changes */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+	r: 25px;
+}
+
+/* Hover State */
+.annotation-bubble_blue.chart-item:hover,
+.annotation-bubble_blue.chart-item.is-hover {
+	/* fill changes  */
+    fill: green;
+    fill-opacity: .5 !important;
+	/* stroke changes  */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+	r: 25px;
+}
+
+/* Selected state */
+.annotation-bubble_blue.chart-item:active,
+.annotation-bubble_blue.chart-item.is-active {
+	/* fill changes  */
+    fill: yellow;
+    fill-opacity: .5 !important;
+	/* stroke changes  */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+	r: 25px;
+}
+
+/* ----------------------------------------------------------- */
+
+/* Gantt chart */
+
+/* Default state */
+.annotation-Gantt_Blue{
+		/* fill changes */
+    fill: Blue;
+    fill-opacity: .5 !important;
+	/* stroke changes */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+}
+
+/* Hover State */
+.annotation-Gantt_Blue.chart-item:hover,
+.annotation-Gantt_Blue.chart-item.is-hover {
+	/* fill changes  */
+    fill: green;
+    fill-opacity: .5 !important;
+	/* stroke changes  */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+}
+
+/* Selected state */
+.annotation-Gantt_Blue.chart-item:active,
+.annotation-Gantt_Blue.chart-item.is-active {
+	/* fill changes  */
+    fill: yellow;
+    fill-opacity: .5 !important;
+	/* stroke changes  */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+}
+
+/* ----------------------------------------------------------- */
+
+/* Map */
+
+/* Default state */
+.annotation-map_blue{
+		/* fill changes */
+    fill: Blue;
+    fill-opacity: .5;
+	/* stroke changes */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+	r: 50px;
+}
+
+/* Hover State */
+.tag-mapv2 .olMap svg.nodes-focused circle.selected-node.annotation-map_blue{
+		/* fill changes */
+    fill: green;
+    fill-opacity: .5;
+	/* stroke changes */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+	r: 50px;
+}
+
+/* Selected state */
+.tag-mapv2 .olMap circle.is-hover.annotation-map_blue{
+		/* fill changes */
+    fill: yellow;
+    fill-opacity: .5;
+	/* stroke changes */
+	stroke: aqua !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+	r: 50px;
+}
+
+/* Default state - Second annotation for nodes */
+.annotation-map_red{
+		/* fill changes */
+    fill: red;
+    fill-opacity: .5;
+	/* stroke changes */
+	stroke: brown !important;
+    stroke-width: 4 !important;
+    stroke-dasharray: 5;
+	r: 25px;
+}
+
+/* ----------------------------------------------------------- */
+
+/* Scalar Widget */
+
+.annotation-scalar_blue {
+   /* fill changes */
+	background: Blue;
+	opacity: .5;
+	/* text changes */
+	font-size: 15px !important;
+    font-family: sans-serif;
+    font-style: italic;
+    font-weight: bold;
+
+}
+
+/* ----------------------------------------------------------- */
+
+/* highlight feature */
+.annotation-exceeds-time-limit {
+	background: green;
+}	

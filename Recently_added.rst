@@ -5,12 +5,14 @@
 Recently added
 ==============
 
+.. Added 11 Oct 2019: 315
 .. Added 28 Sep 2019: 310, 312, 313, 314
 .. Added 13 Sep 2019: 291,304,305,306,308,309
 .. Added 30 Aug 2019: 302
 .. Added 23 Aug 2019: 283, 300, 301
 .. Added 16 Aug 2019: 299, 295
 
+* :doc:`/Articles/315/315-hover-and-select-effects-webui-charts`
 * :doc:`/Articles/310/310-investigate-behavior-pro-job`
 * :doc:`/Articles/312/312-convert-gams-to-aimms`
 * :doc:`/Articles/313/313-get-log-files`
