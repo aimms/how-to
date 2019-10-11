@@ -1,0 +1,50 @@
+## ams_version=1.0
+
+Section md_emi_Set_Mapping_Declarations {
+    DeclarationSection Set_Mapping_Declarations_for_Compound_Set_sFood {
+        Set sSetMappingSet_sFood {
+            Index: iSMI_sFood;
+            Parameter: epSM_sFood;
+            Definition: prDef_SetMappingSet_sFood;
+        }
+        Set sSetMappingBaseRelation_sFood {
+            SubsetOf: (md::emi::sAnimals,md::emi::sFruits);
+        }
+        Set sSetMappingRelation_sFood {
+            SubsetOf: (md::emi::sAnimals,md::emi::sFruits,sSetMappingSet_sFood);
+            Definition: prDef_SetMappingRelation_sFood;
+        }
+        ElementParameter epTag_sFood_FTan {
+            IndexDomain: iSMI_sFood;
+            Range: md::emi::sAnimals;
+            Definition: first( md::emi::ia | exists( md::emi::i_f | ( md::emi::ia, md::emi::i_f, iSMI_sFood ) in sSetMappingRelation_sFood ) );
+        }
+        ElementParameter epTag_sFood_FTFr {
+            IndexDomain: iSMI_sFood;
+            Range: md::emi::sFruits;
+            Definition: first( md::emi::i_f | exists( md::emi::ia | ( md::emi::ia, md::emi::i_f, iSMI_sFood ) in sSetMappingRelation_sFood ) );
+        }
+        ElementParameter epHelp_sFood_1 {
+            Range: md::emi::sAnimals;
+        }
+        ElementParameter epHelp_sFood_2 {
+            Range: md::emi::sFruits;
+        }
+    }
+    Procedure prDef_SetMappingSet_sFood {
+        Body: {
+            sSetMappingSet_sFood := {}; 
+            for ( md::emi::ia, md::emi::i_f ) | ( md::emi::ia, md::emi::i_f ) in sSetMappingBaseRelation_sFood do
+                    sSetMappingSet_sFood += StringToElement( sSetMappingSet_sFood, formatString("(%e, %e)", md::emi::ia, md::emi::i_f), create: 1 );
+            endfor ;
+        }
+    }
+    Procedure prDef_SetMappingRelation_sFood {
+        Body: {
+            sSetMappingRelation_sFood := {}; 
+            for ( md::emi::ia, md::emi::i_f ) | ( md::emi::ia, md::emi::i_f ) in sSetMappingBaseRelation_sFood do
+                    sSetMappingRelation_sFood += {( md::emi::ia, md::emi::i_f,  iSMI_sFood ) | iSMI_sFood = StringToElement(sSetMappingSet_sFood, formatString("(%e, %e)", md::emi::ia, md::emi::i_f), create: 0 ) } ;
+            endfor ;
+        }
+    }
+}

@@ -1,0 +1,244 @@
+﻿    S := data 
+    { s1,
+      s2,
+      s3,
+      s4,
+      s5 } ;
+
+    T := data 
+    { t1,
+      t2,
+      t3,
+      t4 } ;
+
+    U := data 
+    { u1,
+      u2,
+      u3 } ;
+
+
+    R := data 
+    { ( s1, t1, u2 ),
+      ( s1, t2, u1 ),
+      ( s1, t3, u3 ),
+      ( s1, t4, u2 ),
+      ( s2, t1, u1 ),
+      ( s2, t2, u3 ),
+      ( s2, t3, u2 ),
+      ( s2, t4, u1 ),
+      ( s3, t1, u3 ),
+      ( s3, t2, u2 ),
+      ( s3, t3, u1 ),
+      ( s3, t4, u3 ),
+      ( s4, t1, u2 ),
+      ( s4, t2, u1 ),
+      ( s4, t3, u3 ),
+      ( s4, t4, u2 ),
+      ( s5, t1, u1 ),
+      ( s5, t2, u3 ),
+      ( s5, t3, u2 ),
+      ( s5, t4, u1 ) } ;
+
+    C := data 
+    { (s1, t1, u2),
+      (s1, t2, u1),
+      (s1, t3, u3),
+      (s1, t4, u2),
+      (s2, t1, u1),
+      (s2, t2, u3),
+      (s2, t3, u2),
+      (s2, t4, u1),
+      (s3, t1, u3),
+      (s3, t2, u2),
+      (s3, t3, u1),
+      (s3, t4, u3),
+      (s4, t1, u2),
+      (s4, t2, u1),
+      (s4, t3, u3),
+      (s4, t4, u2),
+      (s5, t1, u1),
+      (s5, t2, u3),
+      (s5, t3, u2),
+      (s5, t4, u1) } ;
+
+    D := data 
+    { (s1, t3, u3),
+      (s2, t2, u3),
+      (s3, t1, u3),
+      (s3, t4, u3),
+      (s4, t3, u3),
+      (s5, t2, u3) } ;
+
+    DD := data 
+    { (s1, t1, u2),
+      (s1, t4, u2),
+      (s2, t3, u2),
+      (s3, t2, u2),
+      (s4, t1, u2),
+      (s4, t4, u2),
+      (s5, t3, u2) } ;
+
+
+    A := data 
+    { s1 : 1,
+      s2 : 2,
+      s3 : 3,
+      s4 : 4,
+      s5 : 5 } ;
+
+
+    P := data 
+    { (s1, t1, u2) :  1,
+      (s1, t2, u1) :  2,
+      (s1, t3, u3) :  3,
+      (s1, t4, u2) :  4,
+      (s2, t1, u1) :  5,
+      (s2, t2, u3) :  6,
+      (s2, t3, u2) :  7,
+      (s2, t4, u1) :  8,
+      (s3, t1, u3) :  9,
+      (s3, t2, u2) : 10,
+      (s3, t3, u1) : 11,
+      (s3, t4, u3) : 12,
+      (s4, t1, u2) : 13,
+      (s4, t2, u1) : 14,
+      (s4, t3, u3) : 15,
+      (s4, t4, u2) : 16,
+      (s5, t1, u1) : 17,
+      (s5, t2, u3) : 18,
+      (s5, t3, u2) : 19,
+      (s5, t4, u1) : 20 } ;
+
+
+    p1 := data 
+    { (s1, t1, u2) : 1,
+      (s1, t2, u1) : 1,
+      (s1, t3, u3) : 1,
+      (s1, t4, u2) : 1,
+      (s2, t1, u1) : 2,
+      (s2, t2, u3) : 2,
+      (s2, t3, u2) : 2,
+      (s2, t4, u1) : 2,
+      (s3, t1, u3) : 3,
+      (s3, t2, u2) : 3,
+      (s3, t3, u1) : 3,
+      (s3, t4, u3) : 3,
+      (s4, t1, u2) : 4,
+      (s4, t2, u1) : 4,
+      (s4, t3, u3) : 4,
+      (s4, t4, u2) : 4,
+      (s5, t1, u1) : 5,
+      (s5, t2, u3) : 5,
+      (s5, t3, u2) : 5,
+      (s5, t4, u1) : 5 } ;
+
+
+    PD := data 
+    { (s1, t3, u3) : 1,
+      (s2, t2, u3) : 2,
+      (s3, t1, u3) : 3,
+      (s3, t4, u3) : 4,
+      (s4, t3, u3) : 5,
+      (s5, t2, u3) : 6 } ;
+
+    V1 := 210 ;
+
+    epC := ('s2', 't1', 'u1') ;
+
+
+    epC2 := data 
+    { s1 : (s1, t4, u2),
+      s2 : (s2, t1, u1),
+      s3 : (s2, t2, u3),
+      s4 : (s2, t3, u2),
+      s5 : (s2, t4, u1) } ;
+
+    epC3 := data { } ;
+
+    epC4 := data { } ;
+
+    sIC := data 
+    { s1 : { (s1, t1, u2), (s2, t2, u3) } ,
+      s2 : { (s1, t2, u1), (s2, t3, u2) } ,
+      s3 : { (s1, t3, u3), (s2, t4, u1) } ,
+      s4 : { (s1, t4, u2), (s3, t1, u3) } ,
+      s5 : { (s2, t1, u1), (s3, t2, u2) } } ;
+
+    md::E := data 
+    { e1,
+      e2,
+      e3 } ;
+
+    md::ee := '' ;
+
+    md::F := data 
+    { f1,
+      f2,
+      f3,
+      f4,
+      f5 } ;
+
+    md::e_f := '' ;
+
+    md::EF := data 
+    { (e1, f1),
+      (e1, f5),
+      (e2, f1),
+      (e2, f4),
+      (e3, f2),
+      (e3, f3),
+      (e3, f4) } ;
+
+    md::eEF := '' ;
+
+
+    md::p01 := data 
+    { ( e1, f1 ) : 1,
+      ( e1, f5 ) : 1,
+      ( e2, f1 ) : 1,
+      ( e2, f4 ) : 1,
+      ( e3, f2 ) : 1,
+      ( e3, f3 ) : 1,
+      ( e3, f4 ) : 1 } ;
+
+
+    md::p := data 
+    { e1 : 3.140,
+      e2 : 3.140,
+      e3 : 3.140 } ;
+
+
+    md::pcd := data 
+    { (e1, f1) : 14,
+      (e1, f5) : 18,
+      (e2, f1) : 16,
+      (e2, f4) : 18,
+      (e3, f2) : 17,
+      (e3, f3) : 12,
+      (e3, f4) : 16 } ;
+
+    md::emi::sFruits := data 
+    { Banana    ,
+      Strawberry } ;
+
+    md::emi::e_f := '' ;
+
+    md::emi::sAnimals := data 
+    { Monkey ,
+      Sparrow } ;
+
+    md::emi::ea := '' ;
+
+    md::emi::sFood := data 
+    { (Monkey, Banana)     ,
+      (Monkey, Strawberry) ,
+      (Sparrow, Strawberry) } ;
+
+    md::emi::eFood := '' ;
+
+
+    md::emi::qqq := data 
+    { (Monkey, Banana)      : 324,
+      (Monkey, Strawberry)  : 478,
+      (Sparrow, Strawberry) : 876 } ;
+

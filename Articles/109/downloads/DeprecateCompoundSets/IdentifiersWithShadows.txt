@@ -1,0 +1,15 @@
+﻿
+    dcsu::epShadowsDataIdentifiers(IndexIdentifiers) := data 
+    { DD               : 'cssrl::Shadow_DD'          ,
+      P                : 'cssrl::Shadow_P'           ,
+      PD               : 'cssrl::Shadow_PD'          ,
+      epC              : 'cssrl::Shadow_epC'         ,
+      epC2             : 'cssrl::Shadow_epC2'        ,
+      epC3             : 'cssrl::Shadow_epC3'        ,
+      epC4             : 'cssrl::Shadow_epC4'        ,
+      sIC              : 'cssrl::Shadow_sIC'         ,
+      'md::pcd'        : 'cssrl::Shadow_md_pcd'      ,
+      'md::emi::qqq'   : 'cssrl::Shadow_md_emi_qqq'  ,
+      'md::emi::eFood' : 'cssrl::Shadow_md_emi_eFood',
+      'md::eEF'        : 'cssrl::Shadow_md_eEF'       } ;
+
