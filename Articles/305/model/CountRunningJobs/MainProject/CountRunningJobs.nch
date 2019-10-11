@@ -1,0 +1,12 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"Section_1" "CountJobsSection" "2019-09-04 12:50:54"
+"CurrentToStringDelta" "Fnc_CurrentToStringDelta" "2019-09-06 12:32:09"
+"Copy_p_ObservedCreatedJobs" "p_ObservedQueuedJobs" "2019-09-07 08:56:48"
+"Copy1_p_ObservedCreatedJobs" "p_ObservedInitializingJobs" "2019-09-07 08:57:16"
+"Copy2_p_ObservedCreatedJobs" "p_ObservedReadyToRunJobs" "2019-09-07 08:57:51"
+"Copy3_p_ObservedCreatedJobs" "p_ObservedRunningJobs" "2019-09-07 08:58:11"
+"Copy4_p_ObservedCreatedJobs" "p_DerivedActiveJobs" "2019-09-07 08:58:36"
+"Copy5_p_ObservedCreatedJobs" "p_ObservationTimestamp" "2019-09-07 08:58:59"
+"p_ObservationTime" "p_NoObservations" "2019-09-07 09:00:28"
+"p_ObservationTimestamp" "sp_ObservationTimestamp" "2019-09-07 09:06:52"
+"Copy_pr_ButtonRegisterSomeSecondsActiveJobs" "pr_WorkRegisterSomeSecondsActiveJobs" "2019-09-09 06:30:16"

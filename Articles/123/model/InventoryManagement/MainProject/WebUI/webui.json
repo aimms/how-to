@@ -1,0 +1,115 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home",
+                "children": [
+                  {
+                    "name": "SKU",
+                    "type": "page",
+                    "slug": "sku_1",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/sku_1": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "LegendSKUMaster",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "ScalarSKUDetail",
+          "layoutInfo": {
+            "width": "4",
+            "height": "2"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/LegendSKUMaster": {
+    "aimms.widget.type": {
+      "literal": "legend"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "P_SKUFORM_Selection"
+        ]
+      }
+    },
+    "title": {
+      "literal": "SKUFORM Master View"
+    }
+  },
+  "widgets/ScalarSKUDetail": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "webui_runtime::SKUForm_P_Stock",
+          "webui_runtime::SKUForm_EP_Color",
+          "webui_runtime::SKUForm_P_Volume",
+          "webui_runtime::SKUForm_SP_Manufacturer",
+          "webui_runtime::SKUForm_SP_SKUFORM_InternalName"
+        ]
+      }
+    },
+    "title": {
+      "literal": "SKUFORM Detail View"
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_SKUFORM_WidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_SKUFORM_WidgetActions",
+            "slice": [
+              {
+                "index": "i_SKUFORM_WidgetActionNumber",
+                "type": "free",
+                "value": "i_SKUFORM_WidgetActionNumber"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

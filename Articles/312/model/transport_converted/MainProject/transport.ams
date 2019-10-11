@@ -1,0 +1,90 @@
+## ams_version=1.0
+
+Model aimms_2_upgrade {
+    Procedure MainInitialization;
+    Procedure MainExecution {
+        Body: {
+            c(i_i,j_i) :=f * d(i_i,j_i) / 1000 ;
+            Solve transport using LP minimizing z ;
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+    }
+    DeclarationSection Declaration_1 {
+        Set i {
+            Text: "canning plants";
+            Index: i_i;
+            InitialData: data { Seattle, San-Diego };
+        }
+        Set j {
+            Text: "markets";
+            Index: j_i;
+            InitialData: data { New-York, Chicago, Topeka };
+        }
+        Parameter a {
+            IndexDomain: i_i;
+            Text: "capacity of plant i in cases";
+            InitialData: data { Seattle : 350,  San-Diego : 600 };
+        }
+        Parameter b {
+            IndexDomain: j_i;
+            Text: "demand at market j in cases";
+            InitialData: data { New-York : 325,  Chicago : 300,  Topeka : 275 };
+        }
+        Parameter d {
+            IndexDomain: (i_i,j_i);
+            Text: "distance in thousands of miles";
+            InitialData: {
+                data table
+                           New-York   Chicago    Topeka
+                        !  --------  --------  --------
+                  Seattle     2.500     1.700     1.800
+                San-Diego     2.500     1.800     1.400
+            }
+        }
+        Parameter f {
+            Text: "freight in dollars per case per thousand miles";
+            InitialData: 90;
+        }
+        Parameter c {
+            IndexDomain: (i_i,j_i);
+            Text: "transport cost in thousands of dollars per case";
+        }
+    }
+    DeclarationSection Declaration_2 {
+        Variable x {
+            IndexDomain: (i_i,j_i);
+            Text: "shipment quantities in cases";
+            Range: nonnegative;
+            Property: ReducedCost;
+        }
+        Variable z {
+            Text: "total transportation costs in thousands of dollars";
+            Property: ReducedCost;
+        }
+        Constraint cost_ {
+            Text: "define objective function";
+            Property: ShadowPrice;
+            Definition: z  =    sum((i_i,j_i), c(i_i,j_i)*x(i_i,j_i));
+        }
+        Constraint supply {
+            IndexDomain: i_i;
+            Text: "observe supply limit at plant i";
+            Property: ShadowPrice;
+            Definition: sum(j_i, x(i_i,j_i))  <=   a(i_i);
+        }
+        Constraint demand {
+            IndexDomain: j_i;
+            Text: "satisfy demand at market j";
+            Property: ShadowPrice;
+            Definition: sum(i_i, x(i_i,j_i))  >=   b(j_i);
+        }
+        MathematicalProgram transport {
+            Objective: z;
+            Type: LP;
+        }
+    }
+}

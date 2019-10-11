@@ -1,0 +1,60 @@
+Convert Files from DAT to DATA
+======================================
+.. meta::
+    :description: How to convert a data manager file to a case file.
+    :keywords: dat, data, data manager, case
+
+
+Overview & comparison of file types
+-----------------------------------
+AIMMS 3.0 stores cases were in so-called "data manager files".  AIMMS 3.12 introduced the ``.data`` format as an alternative. 
+
+This change was made for several reasons.
+
+*  Data manager files (``.dat``) became difficult to manage when maintaining several cases.
+
+*  Case files (``.data``) avoid the risk of data corruption in one case affecting other cases stored in the same file. 
+
+* Storing multiple case files in a folder makes it easy to copy cases from multiple users in the same folder, and compare scenarios. (See the `AIMMS User's Guide <https://documentation.aimms.com/aimms_user.html>`_, Section "Managing multiple case selections".)
+
+
+In projects created with AIMMS version before 3.14, a single data manager file (``.dat``) contains zero, one or more cases. From AIMMS version 3.14, a case file (``.data``) only stores one case, but multiple cases may be stored in the same folder. 
+
++----------------------------------+----------------------------------------------+
+| Before AIMMS 3                   | AIMMS 3.14 and later                         |
++----------------------------------+----------------------------------------------+
+| ``.dat``                         | ``.data``                                    |
++----------------------------------+----------------------------------------------+
+| Single data manager file         | Disk files and folders                       |
+| contains zero, one or more cases | store multiple files, with one case per file |
++----------------------------------+----------------------------------------------+
+
+
+The default location of ``.data`` files, is the ``data`` subfolder of the project folder. (You can modify this with the project option ``Default data folder``.)
+
+
+Upgrading an AIMMS project to a newer AIMMS release
+---------------------------------------------------
+
+When upgrading AIMMS on a particular project, the data management style persists. 
+In other words, using AIMMS 3.12 on a project created using AIMMS 3.11, will still use as "data management style": "Single data manager file". 
+This allowed users to use their data in data manager files created with older versions of AIMMS.
+
+For these upgraded projects, the data management style can be changed; it is a setting of the project:
+
+.. image:: images/SwitchDataManagementStyle.png
+    :align: center
+
+After changing this setting; AIMMS needs to be closed and re-opened before the change takes effect properly. (Just closing and re-opening the project is not sufficient).
+
+After restarting AIMMS, the cases in data manager files can be extracted, by the dialog opened via:
+
+.. image:: images/OpeningDataFile.png
+    :align: center
+
+but it now looks different:
+
+.. image:: images/ConvertingDatToData.png
+    :align: center
+
+

@@ -1,0 +1,13 @@
+﻿Converting Main project
+Converting transport.amb to new style model file: C:\u\s\How To\develop\Articles\312\model\transport_converted\MainProject\transport.ams
+Writing: C:\u\s\How To\develop\Articles\312\model\transport_converted\MainProject\Project.xml
+Writing: C:\u\s\How To\develop\Articles\312\model\transport_converted\MainProject\Tools\ProjectExport.xml
+Writing: C:\u\s\How To\develop\Articles\312\model\transport_converted\MainProject\Settings\Options.txt
+Writing: C:\u\s\How To\develop\Articles\312\model\transport_converted\MainProject\PageManager.xml
+Writing: C:\u\s\How To\develop\Articles\312\model\transport_converted\MainProject\TemplateManager.xml
+Writing: C:\u\s\How To\develop\Articles\312\model\transport_converted\MainProject\DataManagementSetup.xml
+Copying file: transport.nch to C:\u\s\How To\develop\Articles\312\model\transport_converted\MainProject\transport.nch
+Copying file: transport.aim to C:\u\s\How To\develop\Articles\312\model\transport_converted\transport.aim
+Copying file: transport.dat to C:\u\s\How To\develop\Articles\312\model\transport_converted\transport.dat
+Writing file: C:\u\s\How To\develop\Articles\312\model\transport_converted\transport.aimms
+Finished the conversion of the project.

@@ -1,0 +1,113 @@
+## ams_version=1.0
+
+Model Main_MovingUpAndDown {
+    StringParameter sp_BaseFilename;
+    StringParameter sp_Filename {
+        InitialData: ".\\Pictures\\circle.png";
+    }
+    Section UpDownloadExampleCode {
+        StringParameter sp_PublicDataExchangeFilename {
+            InitialData: "pro:/PublicData/ExchangeFilename";
+        }
+        Section DownloadButton {
+            StringParameter sp_FileProcessSpecificFileName;
+            Procedure pr_Download {
+                Arguments: (FileLocation,StatusCode,StatusDescription);
+                Body: {
+                    Block
+                    	FileLocation := "circle.png";
+                    	sp_FileProcessSpecificFileName := webui::GetIOFilePath(FileLocation);
+                    
+                    	pro::RetrieveFileFromCentralStorage(
+                    		storagePath :  sp_PublicDataExchangeFilename, 
+                    		localPath   :  sp_FileProcessSpecificFileName) ;
+                    
+                    	StatusCode := webui::ReturnStatusCode('CREATED');
+                    	StatusDescription := "Nice.";
+                    OnError err Do
+                    	StatusCode := webui::ReturnStatusCode('ERROR');
+                    	StatusDescription := "Oops: " + errh::Message(err) ;
+                    	errh::MarkAsHandled(err);
+                    	break ; ! Trick to reporting one error.
+                    EndBlock ;
+                }
+                StringParameter FileLocation {
+                    Property: Output;
+                }
+                Parameter StatusCode {
+                    Property: Output;
+                }
+                StringParameter StatusDescription {
+                    Property: Output;
+                }
+                ElementParameter err {
+                    Range: errh::PendingErrors;
+                }
+            }
+        }
+        Section UploadButton {
+            Procedure pr_Upload {
+                Arguments: (FileLocation,StatusCode,StatusDescription);
+                Body: {
+                    sp_FileUploadLocation := webui::GetIOFilePath(FileLocation);
+                    ! The file is uploaded to the process specific temporary folder. 
+                    
+                    ! Now copy the uploaded file to Central Storage.
+                    pro::SaveFileToCentralStorage(
+                    	localPath     :  sp_FileUploadLocation, 
+                    	storagePath   :  sp_PublicDataExchangeFilename );
+                    
+                    FileDelete(sp_FileUploadLocation); ! Remove the file in the temporary folder.
+                    
+                    StatusCode := webui::ReturnStatusCode('OK');
+                    StatusDescription := "Nice.";
+                }
+                StringParameter FileLocation {
+                    Property: Input;
+                }
+                Parameter StatusCode {
+                    Property: Output;
+                }
+                StringParameter StatusDescription {
+                    Property: Output;
+                }
+                StringParameter sp_FileUploadLocation;
+            }
+        }
+    }
+    Section Attic {
+        Section MainModelProcedures {
+            Procedure MainInitialization {
+                Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+            }
+            Procedure PostMainInitialization {
+                Comment: {
+                    "Add initialization statements here that require that the libraries are already initialized properly,
+                    or add statements that require the Data Management module to be initialized."
+                }
+            }
+            Procedure MainExecution;
+            Procedure PreMainTermination {
+                Body: {
+                    return 1;
+                }
+                Comment: {
+                    "Add termination statements here that require all libraries to be still alive.
+                    Return 1 if you allow the termination sequence to continue.
+                    Return 0 if you want to cancel the termination sequence."
+                }
+            }
+            Procedure MainTermination {
+                Body: {
+                    return 1;
+                }
+                Comment: {
+                    "Add termination statements here that do not require all libraries to be still alive.
+                    Return 1 to allow the termination sequence to continue.
+                    Return 0 if you want to cancel the termination sequence.
+                    It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+                }
+            }
+        }
+    }
+}
