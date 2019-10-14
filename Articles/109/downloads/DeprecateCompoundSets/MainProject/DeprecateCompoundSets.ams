@@ -30,7 +30,8 @@ Model Main_DeprecateCompoundSets {
             SubsetOf: C;
         }
         Set E {
-            SubsetOf: (S, Integers);
+            SubsetOf: (S, Integers, Integers);
+            Tags: (tg1, tg2, tg3);
             Index: i_e;
             Parameter: ep_e;
         }
@@ -54,6 +55,9 @@ Model Main_DeprecateCompoundSets {
         }
         Parameter V1 {
             Definition: sum( h, P(h) );
+        }
+        Parameter dte {
+            IndexDomain: (i_e);
         }
         ElementParameter epC {
             Range: C;
@@ -108,6 +112,8 @@ Model Main_DeprecateCompoundSets {
             epC := Element(C,5);
             epC2(i) := Element(C,ord(i)+3);
             siC(i) := { Element(c,ord(i)+5), Element(c,ord(i)) } ;
+            E := data { (s1, 1, 2), (s2, 2, 3 )};
+            dte := data { (s1, 1, 2): 3, (s2, 2, 3): 4 };
             
             md::p01(md::ie, md::i_f) := 1 onlyif ( uniform(11,19) > 16 );
             md::pcd(md::iEF) := round(uniform(11,19));
