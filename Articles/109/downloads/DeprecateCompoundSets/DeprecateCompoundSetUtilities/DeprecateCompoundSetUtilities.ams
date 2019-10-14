@@ -456,13 +456,13 @@ LibraryModule DeprecateCompoundSetUtilities {
                     Property: Optional;
                 }
                 ElementParameter rval {
-                    Range: AllIdentifiers;
+                    Range: AllSymbols;
                 }
                 StringParameter spPrefix;
             }
             Function fncIndexForSet {
                 Arguments: (epSet);
-                Range: AllIdentifiers;
+                Range: AllSymbols;
                 Body: {
                     rval := '';
                     
@@ -470,34 +470,38 @@ LibraryModule DeprecateCompoundSetUtilities {
                     if not epSet then
                     	raise error "fncIndexForSet(): Identifier for which to find an index is not specified." ;
                     endif ;
-                    if identifierType(epSet) <> 'set' then
-                    	raise error formatString("fncIndexForSet(): the %e is not a set for which an index can be found", epset) ;
-                    endif ;
-                    
-                    ! Actual search for index as an element in AllIdentifiers.
-                    spIndexStr := AttributeToSTring( epSet, 'index' );
-                    if spIndexStr then
-                    	pKommaPos := FindString(spIndexStr,",");
-                    	if pKommaPos then
-                    		spIndexStr := SubString(spIndexStr,1,pKommaPos-1);
+                    if epSet = 'Integers' then
+                    	rval := 'i_si' ;
+                    else
+                    	if identifierType(epSet) <> 'set' then
+                    		raise error formatString("fncIndexForSet(): the %e is not a set for which an index can be found", epset) ;
                     	endif ;
-                    	rval := fncDetermineIdentifier(spIndexStr,epSameContext: epSet);
-                    endif ;
                     
-                    ! Do we deliver what we promise
-                    if not rval then
-                    	raise error formatString("fncIndexForSet(): Unable to find index for set %e", epSet);
+                    	! Actual search for index as an element in AllIdentifiers.
+                    	spIndexStr := AttributeToSTring( epSet, 'index' );
+                    	if spIndexStr then
+                    		pKommaPos := FindString(spIndexStr,",");
+                    		if pKommaPos then
+                    			spIndexStr := SubString(spIndexStr,1,pKommaPos-1);
+                    		endif ;
+                    		rval := fncDetermineIdentifier(spIndexStr,epSameContext: epSet);
+                    	endif ;
+                    
+                    	! Do we deliver what we promise
+                    	if not rval then
+                    		raise error formatString("fncIndexForSet(): Unable to find index for set %e", epSet);
+                    	endif ;
                     endif ;
                     
                     ! Returning.
                     fncIndexForSet := rval ;
                 }
                 ElementParameter epSet {
-                    Range: AllIdentifiers;
+                    Range: AllSymbols;
                     Property: Input;
                 }
                 ElementParameter rval {
-                    Range: AllIdentifiers;
+                    Range: AllSymbols;
                 }
                 StringParameter spIndexStr;
                 Parameter pKommaPos;
@@ -729,11 +733,11 @@ LibraryModule DeprecateCompoundSetUtilities {
             }
             ElementParameter epIndexDomainSets {
                 IndexDomain: (IndexIdentifiers,iIDP);
-                Range: AllSets;
+                Range: AllSymbols;
             }
             ElementParameter epDomainIndices {
                 IndexDomain: (IndexIdentifiers,iIDP);
-                Range: AllIndices;
+                Range: AllSymbols;
             }
             StringParameter spIndexDomainTags {
                 IndexDomain: iIDP;
