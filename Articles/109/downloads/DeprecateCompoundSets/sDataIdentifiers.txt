@@ -6,9 +6,11 @@
       DD                 ,
       IntSet1            ,
       IntSet2            ,
+      s_Locs             ,
       P                  ,
       PD                 ,
       dte                ,
+      p_dist             ,
       epC                ,
       epC2               ,
       epC3               ,
@@ -25,5 +27,6 @@
       'md::ee'           ,
       'md::e_f'          ,
       'md::eEF'          ,
-      ep_e               } ;
+      ep_e               ,
+      ep_route           } ;
  

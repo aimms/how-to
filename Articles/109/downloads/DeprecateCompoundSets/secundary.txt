@@ -1,6 +1,7 @@
 ﻿    dcsu::sCompoundRootSets := data 
     { C               ,
       E               ,
+      s_Routes        ,
       'md::EF'        ,
       'md::emi::sFood' } ;
 
@@ -10,10 +11,25 @@
     { C               ,
       D               ,
       E               ,
+      s_Routes        ,
       'md::EF'        ,
       'md::emi::sFood' } ;
 
     dcsu::eCompoundSet := '' ;
+
+
+    dcsu::sp_CompoundSet_SubsetOf := data 
+    { C                : "(S, T, U)",
+      D                : "C",
+      E                : "(S, IntSet1, IntSet2)",
+      s_Routes         : "(s_Locs, s_Locs)",
+      'md::EF'         : "(E, F)",
+      'md::emi::sFood' : "(sAnimals, sFruits)" } ;
+
+
+    dcsu::sp_CompoundSet_Definition := data 
+    { C        : "{ (i,j,k) | mod(ord(i)+ord(j)+ord(k),3) = 1 }\n",
+      'md::EF' : "{ (ie, i_f) | p01(ie, i_f) }\n" } ;
 
     dcsu::sCompoundSetsThatAreNotRootSets := data 
     { D } ;
@@ -25,9 +41,10 @@
       2,
       3,
       4,
-      5 } ;
+      5,
+      6 } ;
 
-    dcsu::eCompoundSetNo := 5 ;
+    dcsu::eCompoundSetNo := 6 ;
 
     dcsu::sCompoundSetPrefixes := data 
     { '::'       ,
@@ -41,6 +58,7 @@
     { C                : '::'       ,
       D                : '::'       ,
       E                : '::'       ,
+      s_Routes         : '::'       ,
       'md::EF'         : 'md::'     ,
       'md::emi::sFood' : 'md::emi::' } ;
 
@@ -48,9 +66,10 @@
     dcsu::epFoundCompoundSets := data 
     { 1 : C               ,
       2 : E               ,
-      3 : 'md::EF'        ,
-      4 : 'md::emi::sFood',
-      5 : D                } ;
+      3 : s_Routes        ,
+      4 : 'md::EF'        ,
+      5 : 'md::emi::sFood',
+      6 : D                } ;
 
     dcsu::epSectionRelationCompoundSetSetMappingSetDeclarations := '' ;
 
@@ -80,9 +99,11 @@
       DD                 ,
       IntSet1            ,
       IntSet2            ,
+      s_Locs             ,
       P                  ,
       PD                 ,
       dte                ,
+      p_dist             ,
       epC                ,
       epC2               ,
       epC3               ,
@@ -99,7 +120,8 @@
       'md::ee'           ,
       'md::e_f'          ,
       'md::eEF'          ,
-      ep_e               } ;
+      ep_e               ,
+      ep_route           } ;
 
     dcsu::sDataIdentifiersRequiringShadow := data { } ;
 
@@ -114,6 +136,7 @@
     { C                : "iSMI_C",
       D                : "iSMI_D",
       E                : "iSMI_E",
+      s_Routes         : "iSMI_s_Routes",
       'md::EF'         : "iSMI_EF",
       'md::emi::sFood' : "iSMI_sFood" } ;
 
@@ -132,6 +155,7 @@
     { C                : "C",
       D                : "D",
       E                : "E",
+      s_Routes         : "s_Routes",
       'md::EF'         : "EF",
       'md::emi::sFood' : "sFood" } ;
 
@@ -140,6 +164,7 @@
     { C                : "h",
       D                : "g",
       E                : "i_e",
+      s_Routes         : "i_route",
       'md::EF'         : "iEF",
       'md::emi::sFood' : "iFood" } ;
 
@@ -148,6 +173,7 @@
     { C                : "h",
       D                : "g",
       E                : "i_e",
+      s_Routes         : "i_route",
       'md::EF'         : "md::iEF",
       'md::emi::sFood' : "md::emi::iFood" } ;
 
@@ -156,6 +182,7 @@
     { C                : 3,
       D                : 3,
       E                : 3,
+      s_Routes         : 2,
       'md::EF'         : 2,
       'md::emi::sFood' : 2 } ;
 
@@ -175,6 +202,8 @@
       ( E               , 1 ) : S                  ,
       ( E               , 2 ) : IntSet1            ,
       ( E               , 3 ) : IntSet2            ,
+      ( s_Routes        , 1 ) : s_Locs             ,
+      ( s_Routes        , 2 ) : s_Locs             ,
       ( 'md::EF'        , 1 ) : 'md::E'            ,
       ( 'md::EF'        , 2 ) : 'md::F'            ,
       ( 'md::emi::sFood', 1 ) : 'md::emi::sAnimals',
@@ -191,6 +220,8 @@
       ( E               , 1 ) : i             ,
       ( E               , 2 ) : ie1           ,
       ( E               , 3 ) : ie2           ,
+      ( s_Routes        , 1 ) : i_from        ,
+      ( s_Routes        , 2 ) : i_to          ,
       ( 'md::EF'        , 1 ) : 'md::ie'      ,
       ( 'md::EF'        , 2 ) : 'md::i_f'     ,
       ( 'md::emi::sFood', 1 ) : 'md::emi::ia' ,
@@ -209,6 +240,8 @@
       ( E               , 1 ) : "tg1",
       ( E               , 2 ) : "tg2",
       ( E               , 3 ) : "tg3",
+      ( s_Routes        , 1 ) : "tgFrom",
+      ( s_Routes        , 2 ) : "tgTo",
       ( 'md::EF'        , 1 ) : "EFTE",
       ( 'md::EF'        , 2 ) : "EFTF",
       ( 'md::emi::sFood', 1 ) : "FTan",
@@ -219,6 +252,7 @@
     { C                : "iSMI_C",
       D                : "iSMI_D",
       E                : "iSMI_E",
+      s_Routes         : "iSMI_s_Routes",
       'md::EF'         : "iSMI_EF",
       'md::emi::sFood' : "iSMI_sFood" } ;
 
@@ -227,6 +261,7 @@
     { C                : "iSMI_C",
       D                : "iSMI_D",
       E                : "iSMI_E",
+      s_Routes         : "iSMI_s_Routes",
       'md::EF'         : "md::iSMI_EF",
       'md::emi::sFood' : "md::emi::iSMI_sFood" } ;
 
@@ -235,6 +270,7 @@
     { C                : "epSM_C",
       D                : "epSM_D",
       E                : "epSM_E",
+      s_Routes         : "epSM_s_Routes",
       'md::EF'         : "epSM_EF",
       'md::emi::sFood' : "epSM_sFood" } ;
 

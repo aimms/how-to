@@ -988,12 +988,25 @@ LibraryModule DeprecateCompoundSetUtilities {
                     				pEndPos := FindNthString( spSubsetOfString, ",", pIndexNo     ) - 1 ;
                     			endif ;
                     			spAtomicDomainSetName := SubString( spSubsetOfString, pBegPos, pEndPos );
-                    			epIndexDomainSets(eCompoundSet, iIDP ) := 
-                    				fncDetermineIdentifier( spAtomicDomainSetName, epSameContext: eCompoundSet);
-                    				!StringToElement( AllSets, spAtomicDomainSetName, create:0);
                     
-                    			if not epIndexDomainSets(eCompoundSet, iIDP ) then raise error "bug" ; endif ;
-                    			epDomainIndices(eCompoundSet,iIDP) := fncIndexForSet( epIndexDomainSets(eCompoundSet, iIDP ) );
+                    			ep_CompoundSetComponent := 
+                    				fncDetermineIdentifier( spAtomicDomainSetName, epSameContext: eCompoundSet);
+                    			epIndexDomainSets(eCompoundSet, iIDP ) := ep_CompoundSetComponent ;
+                    			if not ep_CompoundSetComponent then raise error "bug" ; endif ;
+                    
+                    			! Get an index for this component, try to avoid duplicate index names.
+                    			ep_notIndex1 := '' ;
+                    			ep_notIndex2 := '' ;
+                    			for iIDP2 | iIDP2 < iIDP do
+                    				if ep_CompoundSetComponent = IdentifierElementRange( epDomainIndices(eCompoundSet,iIDP2) ) then
+                    					if ep_notIndex1 then
+                    						ep_notIndex2 := epDomainIndices(eCompoundSet,iIDP2);
+                    					else 
+                    						ep_notIndex1 := epDomainIndices(eCompoundSet,iIDP2);
+                    					endif ;
+                    				endif ;
+                    			endfor ;
+                    			epDomainIndices(eCompoundSet,iIDP) := fncIndexForSet( ep_CompoundSetComponent, ep_notIndex1, ep_notIndex2 );
                     		endfor ;
                     	endblock ;
                     
@@ -1278,6 +1291,15 @@ LibraryModule DeprecateCompoundSetUtilities {
                     }
                 }
                 DeclarationSection Local_Declarations {
+                    ElementParameter ep_CompoundSetComponent {
+                        Range: AllSymbols;
+                    }
+                    ElementParameter ep_notIndex1 {
+                        Range: AllSymbols;
+                    }
+                    ElementParameter ep_notIndex2 {
+                        Range: AllSymbols;
+                    }
                     StringParameter spSubsetOfString;
                     ElementParameter epDomainSet {
                         Range: AllIdentifiers;
