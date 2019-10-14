@@ -45,3 +45,4 @@
 "dcsu::Copy_spCompoundIndexName" "dcsu::spQualifiedCompoundIndexName" "2018-07-10 08:28:55"
 "dcsu::Copy_spMappingSetIndex" "dcsu::spQualifiedMappingSetIndex" "2018-07-10 08:41:59"
 "dcsu::Copy_epElementParameterForwardMaps" "dcsu::epHelperForwardElementParameter" "2018-07-10 11:22:22"
+"dcsu::Copy_sp_CompoundSet_SubsetOf" "dcsu::sp_CompoundSet_Definition" "2019-10-14 10:44:24"

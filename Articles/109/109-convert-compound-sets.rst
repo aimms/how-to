@@ -166,7 +166,8 @@ Consider the following example:
         }
     }
  
-In the example above, the definition of ``C`` can also be used for a relation, :math:`R`, that is a subset of the Cartesian product :math:`S \times T \times U`. The definition of ``D`` cannot be used for a relation, so it must be rewritten:
+In the example above, the definition of ``C`` can also be used for a relation, :math:`R`, that is a subset of the Cartesian product :math:`S \times T \times U`. 
+The definition of ``D`` cannot be used for a relation, so it must be rewritten:
 
 .. code-block:: aimms
 
@@ -179,6 +180,12 @@ In the example above, the definition of ``C`` can also be used for a relation, :
     }
  
 The new definition of ``D`` is now based on tuples instead of individual elements and can be used for a relation.
+
+.. limitations and how to handle them:
+
+.. 1. When the same root set appears twice as domain set in the compound set: The index "IndexIntegers" already has a scope.
+
+.. 2. When the root set Integers is used: The set Integers is too big to be used as the range of running index "IndexIntegers".
 
 
 .. _Step_conversion_Create_Set_Mapping_declarations:

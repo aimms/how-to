@@ -36,10 +36,19 @@ Model Main_DeprecateCompoundSets {
             Index: ie2;
         }
         Set E {
-            SubsetOf: (S,IntSet1,IntSet2);
+            SubsetOf: (S, IntSet1, IntSet2);
             Tags: (tg1, tg2, tg3);
             Index: i_e;
             Parameter: ep_e;
+        }
+        Set s_Locs {
+            Index: i_from, i_to;
+        }
+        Set s_Routes {
+            SubsetOf: (s_Locs, s_Locs);
+            Tags: (tgFrom, tgTo);
+            Index: i_route;
+            Parameter: ep_route;
         }
         Parameter A {
             IndexDomain: i;
@@ -64,6 +73,9 @@ Model Main_DeprecateCompoundSets {
         }
         Parameter dte {
             IndexDomain: (i_e);
+        }
+        Parameter p_dist {
+            IndexDomain: i_route;
         }
         ElementParameter epC {
             Range: C;
@@ -122,6 +134,10 @@ Model Main_DeprecateCompoundSets {
             IntSet2 := data { 1, 2, 3, 4 };
             E := data { (s1, 1, 2), (s2, 2, 3 )};
             dte := data { (s1, 1, 2): 3, (s2, 2, 3): 4 };
+            
+            s_locs := data { a, b, c };
+            s_routes := data { (a,b), (b,c) };
+            p_dist := data { (a,b):3, (b,c):4 };
             
             md::p01(md::ie, md::i_f) := 1 onlyif ( uniform(11,19) > 16 );
             md::pcd(md::iEF) := round(uniform(11,19));

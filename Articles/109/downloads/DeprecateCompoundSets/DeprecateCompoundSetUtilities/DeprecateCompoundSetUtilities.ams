@@ -96,6 +96,8 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		endif ;
                     	endfor ;
                     endwhile ;
+                    sp_CompoundSet_SubsetOf  (iCompoundSet) := AttributeToString( iCompoundSet, 'subset of'  );
+                    sp_CompoundSet_Definition(iCompoundSet) := AttributeToString( iCompoundSet, 'definition' );
                 }
                 Comment: {
                     "This procedure will search the application for compound sets and put the names in the set dcsu::sCompoundSets.
@@ -461,7 +463,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                 StringParameter spPrefix;
             }
             Function fncIndexForSet {
-                Arguments: (epSet);
+                Arguments: (epSet,epNot1,epNot2);
                 Range: AllSymbols;
                 Body: {
                     rval := '';
@@ -477,17 +479,47 @@ LibraryModule DeprecateCompoundSetUtilities {
                     		raise error formatString("fncIndexForSet(): the %e is not a set for which an index can be found", epset) ;
                     	endif ;
                     
+                    	rval := '' ;
+                    
                     	! Actual search for index as an element in AllIdentifiers.
-                    	spIndexStr := AttributeToSTring( epSet, 'index' );
-                    	if spIndexStr then
-                    		pKommaPos := FindString(spIndexStr,",");
-                    		if pKommaPos then
-                    			spIndexStr := SubString(spIndexStr,1,pKommaPos-1);
+                    	sp_AttrStr := AttributeToSTring( epSet, 'index' );
+                    	p_IndexStrLen := StringLength( sp_AttrStr );
+                    	p_KommaPos := 0 ;
+                    	p_PrevKommaPos := 0 ;
+                    	while ( not rval ) and ( p_prevKommaPos < p_IndexStrLen ) do
+                    		sp_SubStr := SubString( sp_AttrStr, p_PrevKommaPos+1, p_IndexStrLen);
+                    		p_KommaPos := FindString(sp_SubStr,",");
+                    		if p_KommaPos then
+                    			sp_IndexStr := SubString(sp_SubStr,1,p_KommaPos-1);
+                    			p_PrevKommaPos += p_KommaPos +1;
+                    		else
+                    			sp_IndexStr := sp_SubStr;
+                    			p_PrevKommaPos := p_IndexStrLen;
                     		endif ;
-                    		rval := fncDetermineIdentifier(spIndexStr,epSameContext: epSet);
+                    		rval := fncDetermineIdentifier(sp_IndexStr, epSameContext: epSet);
+                    		if rval then
+                    			if ( rval = epNot1 ) or ( rval = epNot2 ) then
+                    				rval := '';
+                    			endif ;
+                    		endif ;
+                    	endwhile ;
+                    
+                    	! If not found, then loop over all indices, to see if we can find a separately declared index with that range.
+                    	if not rval then
+                    		for i_Index in AllIndices do
+                    			ep_range := identifierElementRange(i_Index);
+                    			if ep_range = epSet then
+                    				rval := i_index ;
+                    				if ( rval = epNot1 ) or ( rval = epNot2 ) then
+                    					rval := '' ;
+                    				endif ; 
+                    			else
+                    				rval := '' ;
+                    			endif ;
+                    		endfor ;
                     	endif ;
                     
-                    	! Do we deliver what we promise
+                    	! Do we deliver what we promise?
                     	if not rval then
                     		raise error formatString("fncIndexForSet(): Unable to find index for set %e", epSet);
                     	endif ;
@@ -503,8 +535,29 @@ LibraryModule DeprecateCompoundSetUtilities {
                 ElementParameter rval {
                     Range: AllSymbols;
                 }
-                StringParameter spIndexStr;
-                Parameter pKommaPos;
+                Index i_Index {
+                    Range: AllSymbols;
+                }
+                ElementParameter ep_range {
+                    Range: AllSymbols;
+                }
+                ElementParameter ep_Index {
+                    Range: AllSymbols;
+                }
+                StringParameter sp_IndexStr;
+                StringParameter sp_SubStr;
+                StringParameter sp_AttrStr;
+                Parameter p_KommaPos;
+                Parameter p_prevKommaPos;
+                Parameter p_IndexStrLen;
+                ElementParameter epNot1 {
+                    Range: AllSymbols;
+                    Property: Optional;
+                }
+                ElementParameter epNot2 {
+                    Range: AllSymbols;
+                    Property: Optional;
+                }
             }
             Function fncNoCompoundIndices {
                 Arguments: (epId);
@@ -623,6 +676,12 @@ LibraryModule DeprecateCompoundSetUtilities {
                 SubsetOf: AllSets;
                 Index: iCompoundSet;
                 Parameter: eCompoundSet;
+            }
+            StringParameter sp_CompoundSet_SubsetOf {
+                IndexDomain: iCompoundSet;
+            }
+            StringParameter sp_CompoundSet_Definition {
+                IndexDomain: iCompoundSet;
             }
             Set sCompoundSetsThatAreNotRootSets {
                 SubsetOf: AllSets;
