@@ -1,5 +1,6 @@
 ﻿    dcsu::sCompoundRootSets := data 
     { C               ,
+      E               ,
       'md::EF'        ,
       'md::emi::sFood' } ;
 
@@ -8,6 +9,7 @@
     dcsu::sCompoundSets := data 
     { C               ,
       D               ,
+      E               ,
       'md::EF'        ,
       'md::emi::sFood' } ;
 
@@ -22,9 +24,10 @@
     { 1,
       2,
       3,
-      4 } ;
+      4,
+      5 } ;
 
-    dcsu::eCompoundSetNo := 4 ;
+    dcsu::eCompoundSetNo := 5 ;
 
     dcsu::sCompoundSetPrefixes := data 
     { '::'       ,
@@ -37,15 +40,17 @@
     dcsu::epCompoundSetPrefixes := data 
     { C                : '::'       ,
       D                : '::'       ,
+      E                : '::'       ,
       'md::EF'         : 'md::'     ,
       'md::emi::sFood' : 'md::emi::' } ;
 
 
     dcsu::epFoundCompoundSets := data 
     { 1 : C               ,
-      2 : 'md::EF'        ,
-      3 : 'md::emi::sFood',
-      4 : D                } ;
+      2 : E               ,
+      3 : 'md::EF'        ,
+      4 : 'md::emi::sFood',
+      5 : D                } ;
 
     dcsu::epSectionRelationCompoundSetSetMappingSetDeclarations := '' ;
 
@@ -73,8 +78,11 @@
       U                  ,
       R                  ,
       DD                 ,
+      IntSet1            ,
+      IntSet2            ,
       P                  ,
       PD                 ,
+      dte                ,
       epC                ,
       epC2               ,
       epC3               ,
@@ -90,7 +98,8 @@
       'md::emi::eFood'   ,
       'md::ee'           ,
       'md::e_f'          ,
-      'md::eEF'          } ;
+      'md::eEF'          ,
+      ep_e               } ;
 
     dcsu::sDataIdentifiersRequiringShadow := data { } ;
 
@@ -104,6 +113,7 @@
     dcsu::spCompoundSetMappedIndex := data 
     { C                : "iSMI_C",
       D                : "iSMI_D",
+      E                : "iSMI_E",
       'md::EF'         : "iSMI_EF",
       'md::emi::sFood' : "iSMI_sFood" } ;
 
@@ -121,6 +131,7 @@
     dcsu::spCompoundSetName := data 
     { C                : "C",
       D                : "D",
+      E                : "E",
       'md::EF'         : "EF",
       'md::emi::sFood' : "sFood" } ;
 
@@ -128,6 +139,7 @@
     dcsu::spCompoundIndexName := data 
     { C                : "h",
       D                : "g",
+      E                : "i_e",
       'md::EF'         : "iEF",
       'md::emi::sFood' : "iFood" } ;
 
@@ -135,6 +147,7 @@
     dcsu::spQualifiedCompoundIndexName := data 
     { C                : "h",
       D                : "g",
+      E                : "i_e",
       'md::EF'         : "md::iEF",
       'md::emi::sFood' : "md::emi::iFood" } ;
 
@@ -142,6 +155,7 @@
     dcsu::pCompoundDimension := data 
     { C                : 3,
       D                : 3,
+      E                : 3,
       'md::EF'         : 2,
       'md::emi::sFood' : 2 } ;
 
@@ -158,6 +172,9 @@
       ( D               , 1 ) : S                  ,
       ( D               , 2 ) : T                  ,
       ( D               , 3 ) : U                  ,
+      ( E               , 1 ) : S                  ,
+      ( E               , 2 ) : IntSet1            ,
+      ( E               , 3 ) : IntSet2            ,
       ( 'md::EF'        , 1 ) : 'md::E'            ,
       ( 'md::EF'        , 2 ) : 'md::F'            ,
       ( 'md::emi::sFood', 1 ) : 'md::emi::sAnimals',
@@ -171,6 +188,9 @@
       ( D               , 1 ) : i             ,
       ( D               , 2 ) : j             ,
       ( D               , 3 ) : k             ,
+      ( E               , 1 ) : i             ,
+      ( E               , 2 ) : ie1           ,
+      ( E               , 3 ) : ie2           ,
       ( 'md::EF'        , 1 ) : 'md::ie'      ,
       ( 'md::EF'        , 2 ) : 'md::i_f'     ,
       ( 'md::emi::sFood', 1 ) : 'md::emi::ia' ,
@@ -186,6 +206,9 @@
       ( D               , 1 ) : "TS",
       ( D               , 2 ) : "TT",
       ( D               , 3 ) : "TU",
+      ( E               , 1 ) : "tg1",
+      ( E               , 2 ) : "tg2",
+      ( E               , 3 ) : "tg3",
       ( 'md::EF'        , 1 ) : "EFTE",
       ( 'md::EF'        , 2 ) : "EFTF",
       ( 'md::emi::sFood', 1 ) : "FTan",
@@ -195,6 +218,7 @@
     dcsu::spMappingSetIndex := data 
     { C                : "iSMI_C",
       D                : "iSMI_D",
+      E                : "iSMI_E",
       'md::EF'         : "iSMI_EF",
       'md::emi::sFood' : "iSMI_sFood" } ;
 
@@ -202,6 +226,7 @@
     dcsu::spQualifiedMappingSetIndex := data 
     { C                : "iSMI_C",
       D                : "iSMI_D",
+      E                : "iSMI_E",
       'md::EF'         : "md::iSMI_EF",
       'md::emi::sFood' : "md::emi::iSMI_sFood" } ;
 
@@ -209,6 +234,7 @@
     dcsu::spMappingSetParameter := data 
     { C                : "epSM_C",
       D                : "epSM_D",
+      E                : "epSM_E",
       'md::EF'         : "epSM_EF",
       'md::emi::sFood' : "epSM_sFood" } ;
 

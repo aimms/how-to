@@ -471,7 +471,7 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	raise error "fncIndexForSet(): Identifier for which to find an index is not specified." ;
                     endif ;
                     if epSet = 'Integers' then
-                    	rval := 'i_si' ;
+                    	rval := 'IndexIntegers' ;
                     else
                     	if identifierType(epSet) <> 'set' then
                     		raise error formatString("fncIndexForSet(): the %e is not a set for which an index can be found", epset) ;

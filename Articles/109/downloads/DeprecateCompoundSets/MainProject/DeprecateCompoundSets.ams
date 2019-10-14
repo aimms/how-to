@@ -29,8 +29,14 @@ Model Main_DeprecateCompoundSets {
         Set DD {
             SubsetOf: C;
         }
+        Set IntSet1 {
+            Index: ie1;
+        }
+        Set IntSet2 {
+            Index: ie2;
+        }
         Set E {
-            SubsetOf: (S, Integers, Integers);
+            SubsetOf: (S,IntSet1,IntSet2);
             Tags: (tg1, tg2, tg3);
             Index: i_e;
             Parameter: ep_e;
@@ -112,6 +118,8 @@ Model Main_DeprecateCompoundSets {
             epC := Element(C,5);
             epC2(i) := Element(C,ord(i)+3);
             siC(i) := { Element(c,ord(i)+5), Element(c,ord(i)) } ;
+            IntSet1 := data { 1, 2, 3 };
+            IntSet2 := data { 1, 2, 3, 4 };
             E := data { (s1, 1, 2), (s2, 2, 3 )};
             dte := data { (s1, 1, 2): 3, (s2, 2, 3): 4 };
             
