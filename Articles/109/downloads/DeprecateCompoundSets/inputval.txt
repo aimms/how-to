@@ -78,11 +78,33 @@
       (s4, t4, u2),
       (s5, t3, u2) } ;
 
+    IntSet1 := data 
+    { 1,
+      2,
+      3 } ;
+
+    IntSet2 := data 
+    { 1,
+      2,
+      3,
+      4 } ;
+
     E := data 
     { (s1, 1, 2),
       (s2, 2, 3) } ;
 
     ep_e := '' ;
+
+    s_Locs := data 
+    { a,
+      b,
+      c } ;
+
+    s_Routes := data 
+    { (a, b),
+      (b, c) } ;
+
+    ep_route := '' ;
 
 
     A := data 
@@ -153,6 +175,11 @@
     dte := data 
     { (s1, 1, 2) : 3,
       (s2, 2, 3) : 4 } ;
+
+
+    p_dist := data 
+    { (a, b) : 3,
+      (b, c) : 4 } ;
 
     epC := ('s2', 't1', 'u1') ;
 

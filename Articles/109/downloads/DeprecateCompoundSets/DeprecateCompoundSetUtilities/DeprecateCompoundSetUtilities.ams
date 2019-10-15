@@ -523,6 +523,10 @@ LibraryModule DeprecateCompoundSetUtilities {
                     	if not rval then
                     		raise error formatString("fncIndexForSet(): Unable to find index for set %e", epSet);
                     	endif ;
+                    
+                    	if IdentifierType( rval ) <> 'index' then
+                    		raise error FormatString("fncIndexForSet(): Bug: unexpected return type %e is %e", rval, IdentifierType( rval ) );
+                    	endif ;
                     endif ;
                     
                     ! Returning.
