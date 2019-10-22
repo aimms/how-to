@@ -1,7 +1,8 @@
 {# Import the theme's layout. #} {% extends "!layout.html" %}
 <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
 <link rel="stylesheet" href="https://use.typekit.net/ydq4pad.css">
-<link rel='stylesheet' id='font-awesome-original-css' href='https://techblog.aimms.com/wp-content/plugins/dpArticleShare/css/font-awesome.css?ver=1.3.4' type='text/css' media='all' /> {% block header %} {% if pagename == "ContentIndex" %}
+<link rel='stylesheet' id='font-awesome-original-css' href='https://techblog.aimms.com/wp-content/plugins/dpArticleShare/css/font-awesome.css?ver=1.3.4' type='text/css' media='all' /> 
+{% block header %} {% if pagename == "ContentIndex" %}
 
 <style>
     .wy-nav-content {
@@ -18,8 +19,15 @@
         max-width: 1200px !important;
     }
 </style>
-{% endif %} {% endblock %} {% block extrahead %}{% if pagename == "ContentIndex" %}
-<meta name="description" content="AIMMS How-To is a support knowledge base for everyone involved in projects that use AIMMS. You'll find help tutorials, best practices, and practical guidance for using AIMMS software."> {% endif %} {% endblock %} {% block sidebartitle %} {% if pagename == "ContentIndex" %}
+{% endif %} 
+
+{% endblock %} {% block extrahead %}{% if pagename == "ContentIndex" %}
+
+<meta name="description" content="AIMMS How-To is a support knowledge base for everyone involved in projects that use AIMMS. You'll find help tutorials, best practices, and practical guidance for using AIMMS software."> 
+{% endif %} 
+<!-- Algolia's docsearch stylesheet -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+{% endblock %} {% block sidebartitle %} {% if pagename == "ContentIndex" %}
 
 <style>
     .wy-nav-content {
@@ -50,7 +58,10 @@
         max-width: 1200px !important;
     }
 </style>
-{% endif %} {% endblock %} {% block htmltitle %} {% if pagename == "ContentIndex" %}
+{% endif %} 
+
+
+{% endblock %} {% block htmltitle %} {% if pagename == "ContentIndex" %}
 
 <title>{{ _('AIMMS How-To &mdash; Help &amp; Support') }}</title>
 
@@ -96,6 +107,17 @@
     gtag('config', 'UA-1290545-14');
 </script>
 
+<!-- Algolia docsearch BEGIN -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+appId: 'BH4D9OD16A',
+apiKey: '0fc935020f8088e762190434cffaee41',
+indexName: 'aimms_how-to',
+inputSelector: '#rtd-search-form input[type=text]',
+debug: true // Set debug to true if you want to inspect the dropdown
+});
+</script>
+<!-- Algolia docsearch END -->
 
 {% if Display_3rd_Party_Extensions %}
 

@@ -15,9 +15,19 @@ These effects are the same for all the charts types.
 Each chart has 3 states:
 
 * Default state – all bars have the same opacity
-* Hover state – hovered bar remains solid, opacity slightly reduced for the other bars
-* Select state – selected bar remains solid, opacity is further reduced for the other bars
 
+.. image:: images/default-state.png
+   :scale: 50
+
+* Hover state – hovered bar remains solid, opacity slightly reduced for the other bars
+
+.. image:: images/hover-state.png
+   :scale: 50
+
+* Selected state – selected bar remains solid, opacity is further reduced for the other bars
+
+.. image:: images/selected-state.png
+   :scale: 50
 
 Nodes in the Map widget have a slightly different behavior: 
 
@@ -31,11 +41,11 @@ Changing the style for selection states
 
 To customize the styles for these states, you'll need to add a CSS file in the folder ``MainProject\WebUI\resources\css``.
 
-.. You can use the chart in `WebUI Annotations - Widget and CSS support <>`_ for a reference of elements and their corresponding CSS properties.
+You can use the chart in `WebUI Annotations - Widget and CSS support <https://manual.aimms.com/webui/folder.html#css-styling>`_ for a reference of elements and their corresponding CSS properties.
 
 .. topic:: Example CSS
 
-   You can download the file ``AnnotationsCSS.css`` below with examples of how to change styles for the 3 states for the supported chart types.
+   You can download the file ``AnnotationsCSS.css`` below with examples of how to change styles for the 3 states in  charts.
 
    * :download:`downloads/AnnotationsCSS.css`
 
@@ -43,7 +53,8 @@ To customize the styles for these states, you'll need to add a CSS file in the f
 In the images below, the first bar on the left has custom styles applied.
 
 Default
-^^^^^^^^^^ 
+^^^^^^^^^^
+
 .. code-block:: css
    :linenos:
 

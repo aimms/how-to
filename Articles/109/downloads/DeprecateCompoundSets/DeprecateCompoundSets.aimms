@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<References AIMMS_Version="4.54.2.16 (x64)">
+	<MainProject Path="MainProject" />
+	<Library Path="MoreData" />
+	<Library Path="DeprecateCompoundSetUtilities" />
+</References>

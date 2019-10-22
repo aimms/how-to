@@ -143,42 +143,97 @@ Copy the library from that example and add it to your application.
 Step 3: Create Set Mapping
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Use the data from compound sets in your project to create corresponding relations. 
-The definition (if any) of a compound set must be suitable for a relation as well. 
+There are two things to watch out for:
 
-Consider the following example:
+#.  The definition of a compound set should be suitable for a relation as well.
 
-.. code-block:: aimms
+    Use the data from compound sets in your project to create corresponding relations. 
+    The definition (if any) of a compound set must be suitable for a relation as well. 
 
-    Set C {
-        SubsetOf: (S, T, U);
-        Tags: (TS, TT, TU);
-        Index: h ;
-        Definition: {
-            { (i,j,k) | pAllowedElementsC(i,j,k) = 1 }
+    Consider the following example:
+
+    .. code-block:: aimms
+
+        Set C {
+            SubsetOf: (S, T, U);
+            Tags: (TS, TT, TU);
+            Index: h ;
+            Definition: {
+                { (i,j,k) | pAllowedElementsC(i,j,k) = 1 }
+            }
         }
-    }
-    Set D {
-        SubsetOf: C;
-        Index: g ;
-        definition: {
-            { h | pAllowedElementsD(h.TS, h.TT, h.TU) = 1 }
+        Set D {
+            SubsetOf: C;
+            Index: g ;
+            definition: {
+                { h | pAllowedElementsD(h.TS, h.TT, h.TU) = 1 }
+            }
         }
-    }
- 
-In the example above, the definition of ``C`` can also be used for a relation, :math:`R`, that is a subset of the Cartesian product :math:`S \times T \times U`. The definition of ``D`` cannot be used for a relation, so it must be rewritten:
+     
+    In the example above, the definition of ``C`` can also be used for a relation, :math:`R`, that is a subset of the Cartesian product :math:`S \times T \times U`. 
+    The definition of ``D`` cannot be used for a relation, so it must be rewritten:
 
-.. code-block:: aimms
+    .. code-block:: aimms
 
-    Set D {
-        SubsetOf: C;
-        Index: g ;
-        definition: {
-            { (i,j,k) | pAllowedElementsC(i,j,k) = 1 and pAllowedElementsD(i, j, k) = 1 }
+        Set D {
+            SubsetOf: C;
+            Index: g ;
+            definition: {
+                { (i,j,k) | pAllowedElementsC(i,j,k) = 1 and pAllowedElementsD(i, j, k) = 1 }
+            }
         }
-    }
- 
-The new definition of ``D`` is now based on tuples instead of individual elements and can be used for a relation.
+     
+    The new definition of ``D`` is now based on tuples instead of individual elements and can be used for a relation.
+
+#.  The predeclared set `Integers` cannot be used as a component in the domain of a compound set for conversion.
+
+    As an example consider the set
+    
+    .. code-block:: aimms
+    
+        Set E {
+            SubsetOf: (S, Integers);
+            Tags: (TS, Int);
+            Index:  i_e ;
+        }
+    
+    The language construct ``ie.Int`` will be converted to the use of an element parameter. 
+    To fill this element parameter with the appropriate contents, a slicing is formulated and this slicing involves an index of each component. For instance as follows:
+    
+    .. code-block:: aimms
+    
+        ElementParameter epTag_E_int {
+            IndexDomain: iSMI_E;
+            Range: Integers;
+            Definition: first( IndexIntegers | exists( i | ( i, IndexIntegers, iSMI_E ) in sSetMappingRelation_E ) );
+        }
+    
+    When the set ``Integers`` is used as a component, then ``IndexIntegers`` is an index that varies over 2G elements. 
+    An attempt to do so would trigger the error message ``The set Integers is too big to be used as the range of running index "IndexIntegers"``. 
+    
+    Therefore we should introduce a new set, say ``s_SomeIntegers`` and fill it using the integer elements actually used. 
+    Then we should replace the component ``Integers`` in the compound set, for instance as follows:
+    
+    .. code-block:: aimms
+    
+        Set E {
+            SubsetOf: (S, s_SomeIntegers);
+            Tags: (TS, Int);
+            Index:  i_e ;
+        }
+    
+    The set ``s_SomeIntegers`` should not be declared to be a subset of the set ``Integers``.
+    Once the compound set conversion is complete, we can make ``s_SomeIntegers`` a subset of the set ``Integers``.
+
+.. limitations and how to handle them:
+
+.. 1. When the same root set appears twice as domain set in the compound set: The index "IndexIntegers" already has a scope.
+
+.. 2. When the root set Integers is used: The set Integers is too big to be used as the range of running index "IndexIntegers".
+
+.. 3. For new AIMMS versions: Aimms detected a cyclic definition.  See message window for details.
+..    Error not in AIMMS 4.54
+..    Error in AIMMS 4.70
 
 
 .. _Step_conversion_Create_Set_Mapping_declarations:
