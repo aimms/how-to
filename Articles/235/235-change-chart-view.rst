@@ -1,5 +1,5 @@
-Change Chart View on a Page
-======================================
+Change Views of 2D Charts in a WinUI Page
+============================================
 
  .. meta::
    :description: How to change the view for 2D charts as an end user.
@@ -14,25 +14,20 @@ Change Chart View on a Page
 .. <pubDate>Wed, 28 Dec 2011 09:21:59 +0000</pubDate>
 .. <guid isPermaLink="false">http://blog.aimms.com/?p=211</guid>
 
-The end user can change the view of 2D charts (e.g. scaling or moving). This article describes the view options and shortcuts available.
+The end user of a WinUI app can change the view of 2D charts (e.g. scaling or moving). This article describes the view options and shortcuts available.
 
-* Scale 
-   Hold down both mouse buttons and press ``Ctrl``.
+#. **Scale**: Hold down both mouse buttons and press ``Ctrl``.
    Move the mouse up to increase the size of the chart.
    Move the mouse down to decrease the size of the chart.
 
-* Move
-   Hold down both mouse buttons and press ``Shift``.
+#. **Move**: Hold down both mouse buttons and press ``Shift``.
    Move the mouse to reposition the chart.
 
-* Zoom 
-   Hold down the left mouse button and press ``Ctrl``.
+#. **Zoom**: Hold down the left mouse button and press ``Ctrl``.
    Drag the mouse to select the area to zoom.
 
-* Rotate 
-   Hold down both mouse buttons.
+#. **Rotate**: Hold down both mouse buttons.
    Move the mouse up or down to rotate.
 
-* Reset
-   Press the ``R`` key to reset to the original view. 
+#. **Reset**: Press the ``R`` key to reset to the original view. 
 
