@@ -1,64 +1,80 @@
-Use the IBM image recognition API.
+Use the IBM Image Recognition API
 ==================================================================================================
 
+.. meta::
+   :description: An overview of using IBM APIs with AIMMS in the context of image recognition.
+   :keywords: IBM, API, image, recognition, http
 
-In this article, we will show how to use the image recognition API from IBM to identify an image.
-This APi takes an image (jpg,png,gif...) and gives back a JSON file explaining the result of the machine learning algorithm trying to recognize it.
-But AIMMS doesn't support JSON files,so this article will also be the occasion for us to talk about JSON to XML conversion.
+In this article, we will show how to use the Image Recognition API from IBM to identify an image.
+
+This API takes an image (JPG, PNG, GIF, etc) and returns a JSON file explaining the result of the machine learning algorithm trying to recognize it.
 
 Prerequisites
 -----------------------------------------------
+Before we begin, make sure you have done the following:
 
-* :download:`download this photo <download/clownfish.zip>` and unzip it a the root of your project folder.
-* Obtain your own API key following `this reference <https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-getting-started-tutorial>`_. You can stop after obtaining your API key, you don't have to worry about curl commands.
-* install the AIMMS HTTP Client library following `this tutorial <https://documentation.aimms.com/httpclient/library.html#adding-the-http-client-library-to-your-model>`_ .
+* Download and unzip the photo from the link below, and place it at the root of your project folder. 
 
-Exploring the documentation.
+    :download:`Clownfish photo <download/clownfish.zip>`
+
+* Read the IBM tutorial and obtain your own API Key from the link below. (The CURL section is not relevant for this case.)
+
+    `IBM APIs: Visual Recognition Tutorial <https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-getting-started-tutorial>`_
+
+* Install the AIMMS HTTP Client Library according to `AIMMS Documentation: Adding the HTTP Client Library <https://documentation.aimms.com/httpclient/library.html#adding-the-http-client-library-to-your-model>`_.
+
+Basics of IBM Cloud APIs
 -----------------------------------------------
 
-You can find in  the IBM Cloud website the `documentation of this API <https://cloud.ibm.com/apidocs/visual-recognition#classify-images>`_
+You can find information about this API in `IBM Cloud API Docs: Visual Recognition <https://cloud.ibm.com/apidocs/visual-recognition#classify-images>`_.
 
 The Authentication system we'll be using is a simple API key.
-The request to classify an image can be a GET request using the url of a photo or a POST request where we'll send to the server the document to analyze. Here, we'll be using the POST request.
+You can use a GET request using the URL of a photo, or a POST request to send the document to analyze to the server. (Here, we'll be using the POST request, explained in IBM docs in section *Methods > Classify images*.)
 
-You can find informations about the used method in the subsection **Classify images** from the **Methods** section.
+There are 3 kinds of parameters we can set for this method.
 
-There are 3 different kinds of parameters we can set for this method.
-
-**The first type are the headers**:
+* **Headers**:
 
 
-.. image:: images/customparam.png
-    :align: center
-    
-    
-There is only one here which is used to set the language for the answer file,we will set it to "en" for english.
-
-**The second one are the query parameters**:
-
-    .. image:: images/queryparam.png
+    .. image:: images/customparam.png
         :align: center
         
-This one is the version of the API we want to use, and will here be 2018-03-19.
-
-**The last one are the form parameters**:
-
-.. image:: images/formparam.png
-    :align: center
         
-we'll be using the images_file parameters that is used to set the photo we want to analyze. We'll also, as an example, set the parameters ``threshold`` and ``Classifiers_ids``.
+    We'll set the language for the answer file to ``en`` for English.
 
-The documentation is quite complete but it gives examples using cURL, which is a client for formulating HTTP request. Our goal will be to translate this into AIMMS and to see how we can set the different kind of parameters.
+* **Query parameters**:
+
+    .. image:: images/queryparam.png
+            :align: center
+            
+    We'll specify the version of the API we want to use, in this case ``2018-03-19``.
+
+* **Form parameters**:
+
+    .. image:: images/formparam.png
+        :align: center
+            
+    We'll be using the ``images_file`` parameters that is used to set the photo we want to analyze. We'll also set the parameters ``threshold`` and ``Classifiers_ids`` as an example.
+
+The IBM documentation gives examples using CURL, a client for formulating HTTP requests. Here we'll find out how to translate the CURL requests into AIMMS and set the parameters.
 
 Example project
-^^^^^^^^^^^^^^^^^^^^
+----------------
 
 You can download the example project here: :download:`AIMMS project <download/PhotoRecognition.zip>` 
 
-Get the JSON file
------------------------------------------------
+We'll first show how to get the JSON file.
 
-The code at the end of this part will be this one:
+Then we will talk about how to specify the following:
+
+* Query parameters
+* Form parameters
+* Request headers
+
+Getting the JSON file
+^^^^^^^^^^^^^^^^^^^^^^
+
+The final code will be:
 
 .. code-block:: aimms
     :linenos:
@@ -101,7 +117,7 @@ The code at the end of this part will be this one:
     web::request_invoke(SP_requestId, P_responseCode);
 
 
-And you'll need these identifiers:
+Additionally, you'll need these identifiers:
 
 .. code-block:: aimms
     :linenos:
@@ -128,25 +144,18 @@ And you'll need these identifiers:
     }
     StringParameter SP_formattedRequestParam;
 
-In this article, we'll not develop every part of this code because most of it is common for every HTTP request in AIMMS, but if you want to know more about it, you can check this How-to :doc:`../294/294-Online-XML-HTTP-library` article.
-
-The parts we will talk about are:
-
-* How to specify the query parameters
-* How to specify the form parameters
-* How to specify the request headers
+In this article, we will analyze only selections of the code. You can read more generally about HTTP requests in AIMMS in :doc:`../294/294-Online-XML-HTTP-library`.
 
 Query parameters
 ^^^^^^^^^^^^^^^^^^^^
 
 To begin, we need to know how to specify the **query parameters**.
-Let's check the example of the documentation using cURL.
+Let's check the example of the documentation using CURL.
 
 .. image:: images/Curl1.png
 
 
-Here, the URL is specified at the end of the request and the query parameters are added at the end of the endpoint of the URL.
-We can do the same thing in AIMMS:
+Here, the URL is specified at the end of the request, and the query parameters are added at the end of the endpoint of the URL. We can do the same thing in AIMMS:
 
 .. code-block:: aimms
     :linenos:
@@ -161,14 +170,14 @@ Form parameters
 ^^^^^^^^^^^^^^^^^^^^
 
 
-.. image:: images/Curl2.png
+.. image:: images/curl2.png
 
 
-In the given example, the form parameters are specified by writing "-F parameter= value". Obviously, it'll not work like that in AIMMS.
-What we can do is check the `CURL documentation <https://curl.haxx.se/docs/httpscripting.html#The_HTTP_Protocol>`_ . 
+In the given example, the form parameters are specified by writing ``-F parameter= value``. 
 
-There, we can learn in the **4.2 : GET** subsection of the section **4 : HTML Forms** that when you specify this kind of parameters in cURL, the client then redirect to another url composed of the basic url where we add the formatted form parameters at the end.
-We can also do this in AIMMS. Let's transform the previous code to make one stone two birds and configure at the same time form parameters and query parameters.
+From the `CURL documentation <https://curl.haxx.se/docs/httpscripting.html#The_HTTP_Protocol>`_  (in section **4.2 : GET** ) we learn that when you specify this kind of parameters in CURL, the client then redirects to another URL, i.e., the base URL plus the formatted form parameters.
+
+We can also do the same thing in a different way in AIMMS. Let's transform the previous code and configure the form and query parameters.
 
 .. code-block:: aimms
     :linenos:
@@ -181,8 +190,8 @@ We can also do this in AIMMS. Let's transform the previous code to make one ston
     web::query_format(SP_Requestparam,SP_formattedRequestParam);
     SP_requestURI := "https://gateway.watsonplatform.net/visual-recognition/api/v3/classify?"+SP_formattedRequestParam;
 
-The ``threshold`` and ``classifier_ids`` parameters can be set in the request URL but the ``images_file`` hasn't for value a text or a float we can put in the URL, so it needs to be set elsewhere.
-For that, we can use the ``web::request_setRequestBody`` method to put the file to analyze in the body of the request which is used to send file to the server.
+The ``threshold`` and ``classifier_ids`` parameters can be set in the request URL but the ``images_file`` doesn't have a text value or a float we can put in the URL, so it needs to be set elsewhere.
+For that, we can use the ``web::request_setRequestBody`` method to put the file to be analyzed in the body of the request which sends the file to the server.
 
 .. code-block:: aimms
     :linenos:
@@ -190,11 +199,11 @@ For that, we can use the ``web::request_setRequestBody`` method to put the file 
     SP_requestFileName:="clownfish.JPG";
     web::request_setRequestBody(SP_requestId, 'File', SP_requestFileName);
 
-Specify headers.
+Specifying headers
 ^^^^^^^^^^^^^^^^^^^^
 
 We want to specify the **headers** of the request.
-More specificly, we want to specify a header called ``Accept-Language``. The HTTP client library already have methods to set headers, but this is not a native header of the HTTP client library, so we need to add it to the list of headers.
+More specifically, we want to specify a header called ``Accept-Language``. We need to add it to the list of headers, as is not a native header of the HTTP Client Library.
 
 .. code-block:: aimms
     :linenos:
@@ -213,12 +222,14 @@ And then we can set the headers to their proper values.
 Authentication
 ^^^^^^^^^^^^^^^^^^^^
 
-.. image:: images/Curl3.png
+.. image:: images/curl3.png
  
     
-In the documentation example, it is done by writing down "-u apikey:{your_api_key}".
-In AIMMS, what we'll use is the ``Authentication`` header and we'll set a basic authentication as referred in this `Wikipedia article <https://en.wikipedia.org/wiki/Basic_access_authentication>`_.
-Here, the user id is "apikey" and the password is your api key.
+In the documentation example, it is done by writing ``-u apikey:{your_api_key}``.
+
+In AIMMS, we'll use the ``Authentication`` header and set a basic authentication as referenced in `Basic Access Authentication <https://en.wikipedia.org/wiki/Basic_access_authentication>`_.
+
+(Here, the user ID is "apikey" and the password is your API key.)
 
  
 .. code-block:: aimms
@@ -228,48 +239,17 @@ Here, the user id is "apikey" and the password is your api key.
     SP_myHttpHeaders[ 'Authorization' ] := "Basic " + SP_authorization;
     web::request_setHeaders(SP_requestId, SP_myHttpHeaders);    
 
-Executing the complete code, we're now able to obtain our JSON file in the ``SP_responseFileName`` direction.
+Executing the complete code, our JSON file will be returned in the ``SP_responseFileName`` direction.
 
-Conversion to XML
+Converting JSON to XML
 -----------------------------------------------
-In order to use the data from the IBM APIs in AIMMS, we need to convert JSON files in XML files. 
-For that, download :download:`this archive <download/JSONXML.zip>`. Then, extract the two folders at the root of your project.
-It contains a conversion AIMMS library between XML and JSON files.
-Here is how to install it:
+In order to use the data from the IBM APIs in AIMMS, we need to convert JSON files to XML files. 
+You can follow the conversion process using a custom AIMMS library in :doc:`../283/283-convert-json-to-xml`.
 
-* open the Library Manager.
-
-.. image:: images/step1.png
+Finally, to learn how to extract the XML data into AIMMS, read :doc:`../293/293-extracting-data-from-XML`.
 
 
-* click on **add existing library**
-
-.. image:: images/step2.png
-
-* select the JSONXML folder and click on **select a folder**
-
-.. image:: images/step3.png
-
-* Click on **ok** to leave the library manager.
-
-.. image:: images/step4.png
-
-Then by calling the method ``jxml::ConvertFromJsonToXML`` you should be able to obtain your data into an XML file.
-
-.. code-block:: aimms
-    :linenos:
-
-    jxml::ConvertFromJsonToXML(SP_InputFile,"Answer.xml");
-
-During the conversion, the general structure of the JSON file is conserved. For every json element{}, an xml <element> is created. Be careful, if the json element had a name then it will be set as a **parameter** of the corresponding xml element.
-
-
-.. image:: images/conversion.png
-
-If you want to know how to extract the XML data into AIMMS, feel free to check this article : :doc:`../293/293-extracting-data-from-XML`
-
-
-Related topics.
+Related Topics
 -----------------------------------------------
 * **AIMMS How-To**: :doc:`../294/294-Online-XML-HTTP-library`
-* **AIMMS How-To**: :doc:`../300/300-ibm-overview`
+* **AIMMS How-To**: :doc:`../300/300-ibm-api-speech-to-text`

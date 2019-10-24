@@ -1,7 +1,8 @@
 {# Import the theme's layout. #} {% extends "!layout.html" %}
 <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
 <link rel="stylesheet" href="https://use.typekit.net/ydq4pad.css">
-<link rel='stylesheet' id='font-awesome-original-css' href='https://techblog.aimms.com/wp-content/plugins/dpArticleShare/css/font-awesome.css?ver=1.3.4' type='text/css' media='all' /> {% block header %} {% if pagename == "ContentIndex" %}
+<link rel='stylesheet' id='font-awesome-original-css' href='https://techblog.aimms.com/wp-content/plugins/dpArticleShare/css/font-awesome.css?ver=1.3.4' type='text/css' media='all' /> 
+{% block header %} {% if pagename == "ContentIndex" %}
 
 <style>
     .wy-nav-content {
@@ -18,8 +19,15 @@
         max-width: 1200px !important;
     }
 </style>
-{% endif %} {% endblock %} {% block extrahead %}{% if pagename == "ContentIndex" %}
-<meta name="description" content="AIMMS How-To is a support knowledge base for everyone involved in projects that use AIMMS. You'll find help tutorials, best practices, and practical guidance for using AIMMS software."> {% endif %} {% endblock %} {% block sidebartitle %} {% if pagename == "ContentIndex" %}
+{% endif %} 
+
+{% endblock %} {% block extrahead %}{% if pagename == "ContentIndex" %}
+
+<meta name="description" content="AIMMS How-To is a support knowledge base for everyone involved in projects that use AIMMS. You'll find help tutorials, best practices, and practical guidance for using AIMMS software."> 
+{% endif %} 
+<!-- Algolia's docsearch stylesheet -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+{% endblock %} {% block sidebartitle %} {% if pagename == "ContentIndex" %}
 
 <style>
     .wy-nav-content {
@@ -50,7 +58,10 @@
         max-width: 1200px !important;
     }
 </style>
-{% endif %} {% endblock %} {% block htmltitle %} {% if pagename == "ContentIndex" %}
+{% endif %} 
+
+
+{% endblock %} {% block htmltitle %} {% if pagename == "ContentIndex" %}
 
 <title>{{ _('AIMMS How-To &mdash; Help &amp; Support') }}</title>
 
@@ -58,29 +69,31 @@
 
 <title>{{ title|striptags|e }} &mdash; AIMMS How-To &mdash; Help &amp; Support</title>
 
-{% endif %} {% endblock %} 
+{% endif %} {% endblock %} {% block document %} {{ super() }} {% if (("index" in pagename) or ("ContentIndex" in pagename) or ("search" in pagename)) %} {# Do nothing :) I don't know how to do the negation properly in Jinja #} {% else %} {% if Display_3rd_Party_Extensions
+%}
 
-{% block document %} {{ super() }}
-
-{% if (("index" in pagename) or ("ContentIndex" in pagename) or ("search" in pagename)) %}
-
-{# Do nothing :) I don't know how to do the negation properly in Jinja #}
-
-{% elif Display_3rd_Party_Extensions %}
-
-<h3 style="display: inline; margin-right: 20px;">Was this helpful ?</h3>
+<h3 style="display: inline; margin-right: 20px;">Was this helpful?</h3>
 
 <!-- LikeBtn.com BEGIN -->
-<span class="likebtn-wrapper" data-theme="elegant" data-white_label="true" data-show_like_label="false" data-popup_disabled="true" data-share_enabled="false" data-tooltip_enabled="false" data-site_id="5c4b11426fd08b424f7e547c"></span>
-<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+<span class="likebtn-wrapper" data-theme="elegant" data-white_label="true" data-show_like_label="false" data-counter_show="false" data-popup_dislike="true" data-popup_html="Thanks for your feedback!<br>You can tell us more on<br><a href= &quot;https://community.aimms.com/search?q={{ title|striptags|e }}&quot; target= &quot;_blank&quot; >AIMMS Community</a>"
+    data-share_enabled="false" data-tooltip_enabled="false" data-site_id="5c4b11426fd08b424f7e547c"></span>
+<script>
+    (function(d, e, s) {
+        if (d.getElementById("likebtn_wjs")) return;
+        a = d.createElement(e);
+        m = d.getElementsByTagName(e)[0];
+        a.async = 1;
+        a.id = "likebtn_wjs";
+        a.src = s;
+        m.parentNode.insertBefore(a, m)
+    })(document, "script", "//w.likebtn.com/js/w/widget.js");
+</script>
 <!-- LikeBtn.com END -->
 
 {% endif %}
 
-{% endblock %} 
 
-
-{% block footer %} {{ super() }}
+<a href="https://community.aimms.com/search?q={{ title|striptags|e }}" target="_blank">Give feedback for this article on the AIMMS Community</a>{% endif %} {% endblock %} {% block footer %} {{ super() }}
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1290545-14"></script>
 <script>
@@ -94,14 +107,29 @@
     gtag('config', 'UA-1290545-14');
 </script>
 
+<!-- Algolia docsearch BEGIN -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+appId: 'BH4D9OD16A',
+apiKey: '0fc935020f8088e762190434cffaee41',
+indexName: 'aimms_how-to',
+inputSelector: '#rtd-search-form input[type=text]',
+debug: true // Set debug to true if you want to inspect the dropdown
+});
+</script>
+<!-- Algolia docsearch END -->
 
 {% if Display_3rd_Party_Extensions %}
 
 <!-- Insided embeddable -->
 <script>
-(function(w,d,s){var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='//embeddable-widgets-euw1.insided.com/aimms-en.insided-conversational.js';f.parentNode.insertBefore(j,f);})(window,document,'script');
+    (function(w, d, s) {
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s);
+        j.async = true;
+        j.src = '//embeddable-widgets-euw1.insided.com/aimms-en.insided-conversational.js';
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script');
 </script>
-    
-{% endif %}
 
-{% endblock %}
+{% endif %} {% endblock %}

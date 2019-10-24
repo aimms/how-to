@@ -1,0 +1,207 @@
+## ams_version=1.0
+
+Model Main_InventoryManagement {
+    DeclarationSection Units_of_Measurement {
+        Quantity SI_Volume {
+            BaseUnit: m3;
+            Comment: "Expresses the value of solid content.";
+        }
+        Set AllUsableColors {
+            SubsetOf: AllColors;
+            Definition: AllColors;
+        }
+    }
+    DeclarationSection Stock_Keeping_Units {
+        Set S_StockKeepingUnit {
+            Index: sku, i_sku;
+        }
+        StringParameter SP_Manufacturer {
+            IndexDomain: sku;
+        }
+        Parameter P_Volume {
+            IndexDomain: sku;
+            Unit: m3;
+        }
+        ElementParameter EP_Color {
+            IndexDomain: sku;
+            Range: AllUsableColors;
+        }
+        Parameter P_Stock {
+            IndexDomain: sku;
+            Range: {
+                {0..inf}
+            }
+        }
+    }
+    Section SKUForms {
+        Parameter P_SKUFORM_Selection {
+            IndexDomain: sku;
+            Range: binary;
+        }
+        StringParameter SP_SKUFORM_InternalName {
+            IndexDomain: sku;
+        }
+        Set s_SKUFORM_WidgetActionNumbers {
+            SubsetOf: Integers;
+            Index: i_SKUFORM_WidgetActionNumber;
+            Definition: ElementRange(1,3);
+        }
+        StringParameter sp_SKUFORM_WidgetActions {
+            IndexDomain: (i_SKUFORM_WidgetActionNumber,webui::indexWidgetActionSpec);
+            Definition: {
+                data 
+                { ( 1, displaytext ) : "Save"                              ,  ( 1, icon        ) : "aimms-floppy-disk"                 ,
+                  ( 1, procedure   ) : "webui_runtime::SKUForm_SaveForm"   ,  ( 1, state       ) : "Active"                            ,
+                  ( 2, displaytext ) : "Create"                            ,  ( 2, icon        ) : "aimms-file-plus"                   ,
+                  ( 2, procedure   ) : "webui_runtime::SKUForm_NewEntry"   ,  ( 2, state       ) : "Active"                            ,
+                  ( 3, displaytext ) : "Delete"                            ,  ( 3, icon        ) : "aimms-bin"                         ,
+                  ( 3, procedure   ) : "webui_runtime::SKUForm_DeleteEntry",  ( 3, state       ) : "Active"                             }
+            }
+        }
+        Procedure pr_SKUFORM_Create {
+            Arguments: (formdata,newSKUName);
+            Body: {
+                SetElementAdd(S_StockKeepingUnit,anSKU,formData('SP_SKUFORM_InternalName'));
+                newSKUName := formData('SP_SKUFORM_InternalName');
+            }
+            DeclarationSection Argument_declarations {
+                StringParameter formData {
+                    IndexDomain: webui::ffn;
+                    Property: Input;
+                }
+                StringParameter newSKUName {
+                    Property: Output;
+                }
+            }
+            DeclarationSection local_declarations {
+                ElementParameter anSKU {
+                    Range: S_StockKeepingUnit;
+                }
+            }
+        }
+        Procedure pr_SKUFORM_Check {
+            Arguments: (formData,validationErrors);
+            Body: {
+                ! Verify that a new name (P_SKUFORM_Selection is empty) is indeed unique (not yet present in the set).
+                if ( not exists[ i_SKU | P_SKUFORM_Selection(i_SKU) ] ) then
+                	if ( StringToElement(S_StockKeepingUnit, formData('SP_SKUFORM_InternalName')) ) then
+                		validationErrors('SP_SKUFORM_InternalName') := webui::CreateValidationError("validation-error-name-already-exists");
+                	endif;
+                endif;
+                
+                if (StringLength(formData('SP_SKUFORM_InternalName')) < 2) then
+                	validationErrors('SP_SKUFORM_InternalName') := webui::CreateValidationError("validation-error-min-length");
+                endif;
+                
+                if (formData('SP_SKUFORM_InternalName') = "form-enter-InternalName" ) then
+                	validationErrors('SP_SKUFORM_InternalName') := webui::CreateValidationError("validation-error-required-field");
+                endif;
+                
+                if (StringLength(formData('SP_Manufacturer')) < 3) then
+                	validationErrors('SP_Manufacturer') := webui::CreateValidationError("validation-error-not-a-valid-manufacturer-name");
+                endif;
+                
+                block
+                	p_loc_Stock := Val(formData('P_Stock'));
+                	if ( ( p_loc_Stock < 0 ) or ( mod(p_loc_Stock,1) <> 0 ) ) then
+                		validationErrors('P_Stock') := webui::CreateValidationError("validation-error-not-a-valid-availability");
+                	endif;
+                onerror err do
+                	validationErrors('P_Stock') := webui::CreateValidationError("validation-error-not-a-valid-availability");
+                	errh::MarkAsHandled(err);
+                endblock;
+            }
+            Comment: {
+                "webui_runtime::SKUForm_P_Stock
+                webui_runtime::SKUForm_EP_Color
+                webui_runtime::SKUForm_P_Volume
+                webui_runtime::SKUForm_SP_Manufacturer
+                webui_runtime::SKUForm_SP_SKUFORM_InternalName
+                
+                
+                webui_runtime::SKUForm_SaveForm
+                webui_runtime::SKUForm_NewEntry
+                webui_runtime::SKUForm_DeleteEntry"
+            }
+            DeclarationSection Argument_declarations {
+                StringParameter formData {
+                    IndexDomain: webui::ffn;
+                    Property: Input;
+                }
+                StringParameter validationErrors {
+                    IndexDomain: webui::ffn;
+                    Property: Output;
+                }
+            }
+            DeclarationSection Local_declarations {
+                Parameter p_loc_Stock;
+                ElementParameter err {
+                    Range: errh::PendingErrors;
+                }
+            }
+        }
+        Procedure pr_SKUFORM_DataInit {
+            Body: {
+                P_SKUFORM_Selection(sku) := 0;
+            }
+        }
+        Procedure pr_SKUFORM_Setup {
+            Body: {
+                FormFields := data {
+                	'SP_SKUFORM_InternalName',
+                	'SP_Manufacturer',
+                	'P_Volume',
+                	'EP_Color',
+                	'P_Stock'};
+                
+                webui::SetupForm(
+                	formId             :  "SKUForm",
+                	selInMaster        :  'P_SKUFORM_Selection',
+                	detailsIdentifiers :  FormFields,
+                	validationHandler  :  'pr_SKUFORM_Check',
+                	updateEntryCallback   :  'pr_SKUFORM_Create');
+            }
+            DeclarationSection Local_Declarations {
+                Set Formfields {
+                    SubsetOf: AllIdentifiers;
+                    Index: ff;
+                }
+            }
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Body: {
+            pr_SKUFORM_DataInit();
+            pr_SKUFORM_Setup();
+        }
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

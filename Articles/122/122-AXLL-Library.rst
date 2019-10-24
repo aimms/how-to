@@ -1,6 +1,4 @@
-﻿:orphan:
-
-Exchanging Data with Excel Files
+﻿Exchanging Data with Excel Files
 ======================================
 
 .. meta::

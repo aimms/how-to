@@ -1,4 +1,4 @@
-﻿Upgrade Old WebUI Page Actions
+﻿Upgrade WebUI Page Actions
 =========================================
 .. meta::
    :description: A brief guide to upgrading Page Actions in your WebUI app.
@@ -22,7 +22,7 @@ Timeline
 
 If you activated Page Actions (V1) as an experimental feature, they will still appear when using AIMMS 4.68 and higher until you activate Page Actions (V2) by adding an identifier to the model with the appropriate index.
 
-AIMMS releases on or after **October 1, 2019** will not support projects using the older version of this feature.
+AIMMS releases after **the end of November 2019** will not support projects using the older version of this feature.
 
 To use AIMMS versions released after that date, you will need to be sure that any pages in your WebUI app using Page Actions have been upgraded.
 

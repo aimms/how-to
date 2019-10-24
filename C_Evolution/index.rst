@@ -12,12 +12,20 @@ Software Evolution
 
 
 
-AIMMS software has evolved over time, to match arising user needs and changes in the industry. As we make changes to available features, adding new ones and deprecating old ones, you may need guidance in adapting your models. These topics help you prepare your apps for what's to come.
+AIMMS software has evolved over time, to match arising user needs and changes in the industry. As we make changes to available features, you may need guidance in upgrading software versions, or adapting your models. These topics help you prepare your apps for upgrades and deprecations.
 
 .. toctree::
    :maxdepth: 1
 
+   /Articles/312/312-convert-gams-to-aimms
    /Articles/109/109-deprecate-compound-sets-overview
    /Articles/109/109-convert-compound-sets
+   /Articles/314/314-from-dat-to-data
    /Articles/295/295-convert-page-actions
    /Articles/295/295-convert-maps
+   /Articles/317/317-upgrade-your-aimms-pro
+   /Articles/318/318-aimms-and-aimms-pro
+   
+   
+   
+   

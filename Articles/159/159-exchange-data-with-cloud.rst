@@ -39,24 +39,23 @@ PRO database where apps, users and configuration of the AIMMS PRO
 instance are stored). This database is a paid option for the AIMMS Cloud
 Platform service.
 
-Option Overview
----------------
+Options Overview
+----------------
 
 We support four options for exchanging data between on-premise systems
-and AIMMS apps running on the AIMMS Cloud Platform. Each option has its
-application, no universal recommendation can be given.
+and AIMMS apps running on the AIMMS Cloud Platform.
 
-1. Via a connection with the Application Database that can form part of
-      a customer’s set-up in the AIMMS Cloud Platform.
+.. topic:: Options:
 
-#. Via a connection directly to an on-premise database
+      1. **Via a connection with the Application Database** that can form part of a customer’s set-up in the AIMMS Cloud Platform.
 
-#. Via the AIMMS PRO API, using the commands to upload and download
-      files to/from PRO Storage.
+      #. **Via a direct connection** to an on-premise database.
 
-#. Via a web-service offered on the internet from the on-premise IT
-      infrastructure with which the AIMMS apps interact using the AIMMS
-      http-client library.
+      #. **Via the AIMMS PRO API** using the commands to upload and download files to/from PRO Storage.
+
+      #. **Via a web service** offered on the internet from the on-premise IT infrastructure with which the AIMMS apps interact using the AIMMS HTTP Client library.
+
+Deciding which option is right depends on your situation. Each option is discussed in further detail below.
 
 Please carefully consider latency when choosing an option; in particular Option 2 might hurt the responsiveness of apps.
 

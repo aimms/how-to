@@ -7,7 +7,7 @@
 
 .. note::
 
-	This article was originally posted to the AIMMS Tech Blog.
+    This article was originally posted to the AIMMS Tech Blog.
 
 
  
@@ -50,8 +50,8 @@ This should be changed to look like (where the changes are highlighted):
 .. code-block:: none
 
     [ODBC]
-    DRIVER=Microsoft Access Driver (*.mdb<mark>, *.accdb</mark>)
-    DBQ=<mark>.</mark>MyDB.mdb
+    DRIVER=Microsoft Access Driver (*.mdb, *.accdb)
+    DBQ=.MyDB.mdb
     DriverId=25
     FIL=MS Access
     SafeTransactions=0
@@ -81,8 +81,8 @@ For the new driver this should be changed to look like (where the changes are hi
 .. code-block:: none
 
     [ODBC]
-    DRIVER=Microsoft Access Text Driver (*.txt<mark>,</mark> *.csv)
-    DBQ=<mark>.</mark>DATA
+    DRIVER=Microsoft Access Text Driver (*.txt, *.csv)
+    DBQ=.DATA
     UserCommitSync=Yes
     Threads=3
     SafeTransactions=0
@@ -97,9 +97,13 @@ For the new driver this should be changed to look like (where the changes are hi
 Please note that the above is applicable to Office 2010 as well as to Office 2013. In case of Office 2013, the installation steps above should suffice. However, when Office 2010 32-bit is natively installed and the user tries to install the 64-bit version of the Microsoft Access Database Engine, he or she might still get an error regarding the registration of the proper drivers on the local machine. Should such a situation occur, please try the following workaround:
 
 * Check the 64-bit registry key ``HKEY_LOCAL_MACHINESOFTWAREMicrosoftOffice14.0CommonFilesPaths`` **before** installing the 64-bit version of the Microsoft Access Database Engine 2010 redistributable.
+
 * If it does not contain the ``mso.dll`` registry value, then you will need to rename or delete the value **after** installing the 64-bit version of the Microsoft Access Database Engine 2010 redistributable on a system with a 32-bit version of MS Office installed.
+
 * Use the ``/passive`` command line parameter to install the redistributable, e.g. ``"C:directory pathAccessDatabaseEngine_x64.exe" /passive``
+
 * Delete or rename the ``mso.dll`` registry value, which contains the path to the 64-bit version of ``mso.dll`` (and should not be used by 32-bit MS Office versions).
+
 * Now you can start a 32-bit MS Office application without the "re-configuring" issue.
 
 Note that the ``mso.dll`` registry value will already be present if a 64-bit version of MS Office is installed. In this case the value should not be deleted or renamed.

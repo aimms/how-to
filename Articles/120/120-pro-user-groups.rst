@@ -5,23 +5,19 @@ Create PRO User Groups
    :description: Modeling for secure multi-user AIMMS Apps deployed on AIMMS PRO – Part 1: User Groups.
    :keywords: secure, upload, download
 
-.. note::
+In this article we explore how you can authorize access to information within your AIMMS app by creating and managing user groups. 
 
-	This article was originally posted to the AIMMS Tech Blog.
+topic:: File Sharing Series
+
+    This article is part of a series of three to enable AIMMS app developers to model file sharing securely. See also:
+
+    * In :doc:`../117/117-Uploading-and-Downloading-files`, we'll cover transferring files.
+    * In :doc:`../115/115-Securing-File-Access` we'll find out how to securely arrange file sharing.
 
 
 AIMMS PRO is a multi-user environment, designed to host several Apps used by several end-users. Information is shared by these users via these applications. Depending on the role of the app user in the organization, selected information may or may not be accessible. For instance, a planner may change the production plan, that plan can be inspected by management, but is not accessible to the HRM staff.
 
-This blog post is the first post in a series of three to enable AIMMS app developers to model necessary file sharing in a secure manner. The topics of the three posts are:
-
-#. Identify the user of the AIMMS PRO App and the AIMMS PRO groups they belong to 
-
-#. Upload files to AIMMS PRO Storage and download files from AIMMS PRO Storage 
-
-#. Grant access, via authorization strings, as appropriate to files in AIMMS PRO Storage 
-
-
-In this first blog post of three we explore how you can authorize access to information within your AIMMS app by creating and managing user groups. Let us consider an example.
+Let us consider an example.
 
 Granting Access to Data with User Groups
 ---------------------------------------------

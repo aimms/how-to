@@ -2,8 +2,10 @@ Select Constraints and Variables for a Math Program Declaration
 =======================================================================
 
 .. meta::
-   :description: How to select variables and constraints for a mathematical program.
-   :keywords: variables, constraints, mathematical program, AllConstraints, AllVariables, goal, programming, sequential
+   :description: How to select specific variables and constraints for a mathematical program.
+   :keywords: variables, constraints, mathematical program, AllConstraints, AllVariables, sequential goal programming
+
+In this article we will explore how you can control the constraints or variables used in a math program. Then we'll show an example of how to use this method to analyze infeasibility of a mathematical program. 
 
 A sample declaration of a math program is shown below. 
 
@@ -23,15 +25,15 @@ A sample declaration of a math program is shown below.
 * ``Variables`` specifies which set of variables should be considered. In this case, ``AllVariables`` will be considered.
 * ``Type`` specifies what kind of a problem the math program is, e.g., a linear program, an integer program, and so on. The default option ``Automatic`` suffices in most cases and is recommended. 
 
-.. seealso::
+.. note::
 
-    * ``AllConstraints`` and ``AllVariables`` are `Model related predeclared identifier <https://download.aimms.com/aimms/download/manuals/AIMMS3FR_PredeclaredModel.pdf>`_ Sets, containing all constraints and all variables defined in your model.
-    * `AIMMS Documentation on Mathematical Programs <https://download.aimms.com/aimms/download/manuals/AIMMS3LR_SolvingMathematicalPrograms.pdf>`_
-
+    ``AllConstraints`` and ``AllVariables`` are `Model related predeclared identifier <https://download.aimms.com/aimms/download/manuals/AIMMS3FR_PredeclaredModel.pdf>`_ Sets, containing all constraints and all variables defined in your model. 
+    
 
 You may have multiple mathematical program identifiers in the same project, subject to different sets of constraints and variables. 
 For example, it can be used in a sequential goal programming problem where the solution of the first problem is provided as input to the second problem. 
-We will explore how you can control the constraints or variables imposed on a math program. 
+
+
 
 Default Constraints and Variables
 ----------------------------------------
@@ -40,7 +42,7 @@ When you solve a mathematical program (or generate it via `the GMP functions <ht
 The default values of ``Constraints`` and ``Variables`` attributes are the predefined sets ``AllConstraints`` and ``AllVariables`` respectively. ``AllConstraints`` contains all the constraints declared in your AIMMS project and similarly, ``AllVariables`` contains all the variables. 
 
 Variables with definition
-"""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For variables with a definition, AIMMS will actually generate both the variable and an additional equality constraint. For example, if you have the variable ``X`` that has ``Y + Z`` in its definition attribute:
 
@@ -59,10 +61,14 @@ AIMMS will generate:
 
 So, any variable with a definition (like ``X``) will appear in both the predeclared sets ``AllConstraints`` and ``AllVariables``. 
 
-Selecting Constraints (Variables) 
+Selecting Constraints or Variables
 -----------------------------------------
 
-To select the constraints (variables) to be applied in a math program, you can create a set as a subset of ``AllConstraints`` (``AllVariables``) and use that set in the declaration of the math program instead of ``AllConstraints`` (``AllVariables``). The below below example shows two sets ``ModelConstraints`` and ``ModelVariables`` being used in the math program ``Sample_Math_Program``. 
+To select the constraints to be applied in a math program, you can create a set as a subset of ``AllConstraints``  and use that set in the declaration of the math program instead of ``AllConstraints``. 
+
+Likewise, you can create a subset of ``AllVariables`` and use it in the declaration of the math program.
+
+The below below example shows two sets, ``ModelConstraints`` and ``ModelVariables``, used in the math program ``Sample_Math_Program``. 
 
 .. code-block:: aimms
 
@@ -84,9 +90,37 @@ To select the constraints (variables) to be applied in a math program, you can c
       Type: Automatic;
    }
 
-You can either manually select the constraints and variables to be included in these subsets or use the definition like above to include all the constraints and variables present in a particular section or declaration section. 
-Using a definition is recommended as it offers scalability - any new constraint or variable added inside that ``Section_or_Declaration_to_Optimize`` will be automatically added to the subset and thereby used in the math program generation. 
-You also do not need to worry about selecting variables with a definition in both the subsets. 
+You can either manually select the constraints and variables to be included in these subsets or use the definition, as shown above, to include all the constraints and variables present in a particular section or declaration section. 
+
+Using a definition makes it easy to scale the project ⁠— any new constraint or variable added inside ``Section_or_Declaration_to_Optimize`` is automatically added to the subset and used in generating the math program. You do not need to select variables with a definition in both the subsets.
+
+Analyzing infeasibility of a mathematical program
+--------------------------------------------------
+
+Using the above method can be used to a quick analysis on the infeasibility of a mathematical program.
+
+We'll use an example project, which you can download from the link below:
+
+* :download:`model/SelectConstraints.zip`.
 
 
+#. Run ``MainExecution``. The Progress Window shows "Model infeasible" and there is a warning in the error/warning window.
 
+.. image:: images/model-infeasible.png
+
+#. Move the declaration of the constraint ``c_PlantMinCapacity`` to the declaration section "Attic" (that famous place where you put stuff you don't use, but don't want to throw away).
+
+.. image:: images/attic-declaration.png
+
+#. Run ``MainExecution`` again. The Progress Window now shows "Model feasible".
+
+.. image:: images/model-feasible.png
+
+Under the hood, the set ``s_mpCons`` is recomputed removing the constraint ``c_PlantMinCapacity`` from the mathematical program.
+
+Related Topics
+----------------
+
+* `AIMMS Documentation: Predeclared identifiers <https://download.aimms.com/aimms/download/manuals/AIMMS3FR_PredeclaredModel.pdf>`_
+
+* `AIMMS Documentation: Mathematical Programs <https://download.aimms.com/aimms/download/manuals/AIMMS3LR_SolvingMathematicalPrograms.pdf>`_

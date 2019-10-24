@@ -5,14 +5,16 @@ Secure File Access
    :description: Modeling for secure apps deployed on AIMMS PRO – Part 3: securing file access in AIMMS PRO storage.
    :keywords: secure, storage, access
 
-.. note::
+In this article, we will cover granting and denying access to files in AIMMS PRO storage.
 
-	This article was originally posted to the AIMMS Tech Blog.
+topic:: File Sharing Series
 
-This blog post is the last in a series of thee to enable AIMMS app developers to model file sharing in a secure manner.  
-In the :doc:`/Articles/120/120-pro-user-groups`, we covered authorization of AIMMS PRO users, 
-and in the :doc:`/Articles/117/117-Uploading-and-Downloading-files`, we covered transferring files. 
-In this blog post, we will cover granting and denying access to files in AIMMS PRO storage.
+    This article is part of a series of three to enable AIMMS app developers to model file sharing securely. See also:
+    
+    * In :doc:`../120/120-pro-user-groups`, covered authorization of AIMMS PRO users. 
+    * In :doc:`../117/117-Uploading-and-Downloading-files`, we covered transferring files.
+
+
 
 AIMMS PRO storage organizes access per entity, whereby an entity is a user or a group of users. 
 We start with retrieving the set of entities and the group or user names associated with them. 

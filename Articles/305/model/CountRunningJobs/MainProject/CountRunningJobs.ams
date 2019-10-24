@@ -1,0 +1,334 @@
+## ams_version=1.0
+
+Model Main_CountRunningJobs {
+    Parameter p_NoRunningJobs;
+    Section CountJobsSection {
+        Quantity SI_Time_Duration {
+            BaseUnit: s;
+            Comment: "Expresses the value for the duration of periods.";
+        }
+        Parameter p_NoObservations {
+            InitialData: 100;
+        }
+        Set s_Observations {
+            SubsetOf: Integers;
+            Index: i_obs;
+            Parameter: ep_obs;
+        }
+        Parameter p_ObservedCreatedJobs {
+            IndexDomain: i_obs;
+        }
+        Parameter p_ObservedQueuedJobs {
+            IndexDomain: i_obs;
+        }
+        Parameter p_ObservedInitializingJobs {
+            IndexDomain: i_obs;
+        }
+        Parameter p_ObservedReadyToRunJobs {
+            IndexDomain: i_obs;
+        }
+        Parameter p_ObservedRunningJobs {
+            IndexDomain: i_obs;
+        }
+        Parameter p_DerivedActiveJobs {
+            IndexDomain: i_obs;
+        }
+        Parameter p_returns {
+            IndexDomain: i_obs;
+        }
+        StringParameter sp_ObservationTimestamp {
+            IndexDomain: i_obs;
+        }
+        Parameter p_ObservationsMade {
+            InitialData: 0;
+        }
+        Function Fnc_CurrentToStringDelta {
+            Arguments: (p_deltaSeconds);
+            Range: string;
+            Body: {
+                p_tmpSec := CurrentToMoment([s], "2011-01-01 00:00:00") ;
+                p_tmpSec += (p_deltaSeconds) [s];
+                Fnc_CurrentToStringDelta := MomentToString( "%c%y-%m-%d %H:%M:%S", [s], "2011-01-01 00:00:00", p_tmpSec );
+            }
+            Comment: "Copied from AimmsPROGUI function CurrentToStringDelta";
+            Parameter p_deltaSeconds {
+                Property: Input;
+            }
+            Parameter p_tmpHour {
+                Range: integer;
+            }
+            Parameter p_tmpMin {
+                Range: integer;
+            }
+            Parameter p_tmpSec {
+                Range: integer;
+                Unit: s;
+            }
+        }
+        Procedure pr_MakeObservation {
+            Body: {
+                s_Observations += card( s_Observations ) +1;
+                ep_obs := last( s_Observations );
+                p_ret := pr_CountRunningJobs(
+                	p_NoCreated      :  p_ObservedCreatedJobs(      ep_obs ), 
+                	p_NoQueued       :  p_ObservedQueuedJobs(       ep_obs ), 
+                	p_NoInitializing :  p_ObservedInitializingJobs( ep_obs ), 
+                	p_NoReadyToRun   :  p_ObservedReadyToRunJobs(   ep_obs ), 
+                	p_NoRun          :  p_ObservedRunningJobs(      ep_obs ) );
+                	sp_ObservationTimestamp(ep_obs) := CurrentToString("%c%y-%m-%d %H:%M:%S");
+                p_returns(ep_obs) := p_ret ;
+                if p_ret then 
+                	p_DerivedActiveJobs(ep_obs) := 
+                		p_ObservedCreatedJobs(      ep_obs ) +
+                		p_ObservedQueuedJobs(       ep_obs ) +
+                		p_ObservedInitializingJobs( ep_obs ) +
+                		p_ObservedReadyToRunJobs(   ep_obs ) +
+                		p_ObservedRunningJobs(      ep_obs ) ;
+                endif ;
+                return p_ret ;
+            }
+            Parameter p_ret;
+        }
+        Procedure pr_ButtonRegisterSomeSecondsActiveJobs {
+            Body: {
+                p_ObservationsMade := 0 ;
+                pr_WorkRegisterSomeSecondsActiveJobs();
+            }
+        }
+        Procedure pr_WorkRegisterSomeSecondsActiveJobs {
+            Body: {
+                pr_MakeObservation();
+                p_ObservationsMade += 1 ;
+                if p_ObservationsMade < p_NoObservations then
+                	sp_NextTime := Fnc_CurrentToStringDelta(1);
+                	ScheduleAt(
+                		starttime :  sp_NextTime, 
+                		procedure :  'pr_WorkRegisterSomeSecondsActiveJobs');
+                endif ;
+            }
+            StringParameter sp_NextTime;
+        }
+        Procedure pr_CountRunningJobs {
+            Arguments: (p_NoCreated,p_NoQueued,p_NoInitializing,p_NoReadyToRun,p_NoRun);
+            Body: {
+                p_NoRun := 0 ; ! initializing output parameter.
+                
+                p_ret := pro::Initialize();
+                if not (p_ret) then return 0; endif;
+                
+                if pro::GetPROEndPoint() then
+                	sp_SinceDate :=  fnc_CurrentToStringDelta(-24*60*60); ! Assuming jobs older than a day are no longer interesting.
+                
+                	p_AllUsers := 1 ;
+                	if (p_AllUsers) then
+                		sp_SessionModelId := "";
+                		sp_SessionModelVersion := "";
+                	else
+                		sp_SessionModelId := pro::ModelName; ! Retrieve sessions for all versions of the model
+                		sp_SessionModelVersion := ""; ! don't restrict to a specific ModelVersion
+                	endif;
+                
+                	! Load raw session list from PROT
+                	p_ret := pro::sessionmanager::ListSessionSinceDate(
+                		dateStr           :  sp_SinceDate, 
+                		SessionList       :  S_SessionList, 
+                		ClientQueue       :  sp_ClientQueue, 
+                		WorkerQueue       :  sp_WorkerQueue, 
+                		CurrentStatus     :  p_CurrentStatus, 
+                		CreateTime        :  sp_CreateTime, 
+                		userEnvironment   :  sp_UserEnv, 
+                		UserName          :  sp_UserName, 
+                		proj              :  sp_Application, 
+                		clientRef         :  sp_OriginalCasePath, 
+                		descr             :  sp_RequestDescription, 
+                		proc              :  sp_RequestProcedure, 
+                		timeOut           :  p_RunTimeOut, 
+                		inputDataVersion  :  sp_VersionID, 
+                		outputDataVersion :  sp_ResponseVersionID, 
+                		logFileVersion    :  sp_MessageLogVersionID, 
+                		ErrorMessage      :  sp_ErrorMessage, 
+                		modelStatus       :  p_ActiveStatus, 
+                		ErrorCode         :  p_ErrorCode, 
+                		AllUsers          :  p_AllUsers, 
+                		projectID         :  sp_SessionModelId, 
+                		projectVersion    :  sp_SessionModelVersion);	
+                	if not (p_ret) then return 0; endif;
+                	p_NoCreated      := count( i_sess | p_CurrentStatus(i_sess) = pro::PROTS_CREATED      );
+                	p_NoQueued       := count( i_sess | p_CurrentStatus(i_sess) = pro::PROTS_QUEUED       );
+                	p_NoInitializing := count( i_sess | p_CurrentStatus(i_sess) = pro::PROTS_INITIALIZING );
+                	p_NoReadyToRun   := count( i_sess | p_CurrentStatus(i_sess) = pro::PROTS_READY        );
+                	p_NoRun          := count( i_sess | p_CurrentStatus(i_sess) = pro::PROTS_RUNNING      );
+                else
+                	p_ret := 0 ;
+                endif;
+                
+                return p_ret ;
+            }
+            Comment: {
+                "!pro::sessionmanager::ListActiveSessions
+                !pro::sessionmanager::ListSessionByStatus
+                !pro::sessionmanager::ListSessionSinceDate
+                !"
+            }
+            Parameter p_ret;
+            Parameter p_AllUsers {
+                InitialData: 1;
+            }
+            StringParameter sp_SessionModelId;
+            StringParameter sp_SessionModelVersion;
+            StringParameter sp_sinceDate;
+            Set S_SessionList {
+                Index: i_sess;
+                Parameter: selectedSession;
+            }
+            StringParameter sp_ClientQueue {
+                IndexDomain: (i_sess);
+                InitialData: "";
+            }
+            StringParameter sp_WorkerQueue {
+                IndexDomain: (i_sess);
+                InitialData: "";
+            }
+            Parameter p_CurrentStatus {
+                IndexDomain: (i_sess);
+                InitialData: 0;
+            }
+            StringParameter sp_CreateTime {
+                IndexDomain: (i_sess);
+                InitialData: "";
+            }
+            StringParameter sp_UserEnv {
+                IndexDomain: (i_sess);
+                InitialData: "";
+            }
+            StringParameter sp_UserName {
+                IndexDomain: (i_sess);
+                InitialData: "";
+            }
+            StringParameter sp_Application {
+                IndexDomain: (i_sess);
+                InitialData: "";
+            }
+            Parameter p_IsManaged {
+                IndexDomain: i_sess;
+                Range: binary;
+                InitialData: 0;
+            }
+            StringParameter sp_RequestDescription {
+                IndexDomain: i_sess;
+                InitialData: "";
+            }
+            StringParameter sp_RequestProcedure {
+                IndexDomain: i_sess;
+                InitialData: "";
+            }
+            Parameter p_RunTimeOut {
+                IndexDomain: i_sess;
+                InitialData: 0;
+            }
+            StringParameter sp_VersionID {
+                IndexDomain: i_sess;
+                InitialData: "";
+            }
+            StringParameter sp_ResponseVersionID {
+                IndexDomain: i_sess;
+                InitialData: "";
+            }
+            StringParameter sp_MessageLogVersionID {
+                IndexDomain: i_sess;
+                InitialData: "";
+            }
+            StringParameter sp_ErrorMessage {
+                IndexDomain: i_sess;
+                InitialData: "";
+            }
+            StringParameter sp_RequestTime {
+                IndexDomain: i_sess;
+                InitialData: "";
+            }
+            StringParameter sp_OriginalCasePath {
+                IndexDomain: i_sess;
+                InitialData: "";
+            }
+            Parameter p_ActiveStatus {
+                IndexDomain: i_sess;
+                InitialData: 0;
+            }
+            Parameter p_ErrorCode {
+                IndexDomain: i_sess;
+                InitialData: 0;
+            }
+            Parameter p_NoRun {
+                Property: Output;
+            }
+            Parameter p_NoCreated {
+                Property: Output;
+            }
+            Parameter p_NoQueued {
+                Property: Output;
+            }
+            Parameter p_NoInitializing {
+                Property: Output;
+            }
+            Parameter p_NoReadyToRun {
+                Property: Output;
+            }
+        }
+    }
+    Section Attic {
+        Section MainModelProcedures {
+            Procedure MainInitialization {
+                Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+            }
+            Procedure PostMainInitialization {
+                Body: {
+                    CurrentInputs -= 'p_ObservationsMade';
+                    
+                    if not pro::GetPROEndPoint() then
+                    	! Create a fake observation.
+                    	s_Observations := card(s_Observations)+1;
+                    	ep_obs := last(s_Observations);
+                    	p_ObservedCreatedJobs(      ep_obs ) := 1;
+                    	p_ObservedQueuedJobs(       ep_obs ) := 2;
+                    	p_ObservedInitializingJobs( ep_obs ) := 3;
+                    	p_ObservedReadyToRunJobs(   ep_obs ) := 4;
+                    	p_ObservedRunningJobs(      ep_obs ) := 5;
+                    	p_DerivedActiveJobs(ep_obs) := 
+                    		p_ObservedCreatedJobs(      ep_obs ) +
+                    		p_ObservedQueuedJobs(       ep_obs ) +
+                    		p_ObservedInitializingJobs( ep_obs ) +
+                    		p_ObservedReadyToRunJobs(   ep_obs ) +
+                    		p_ObservedRunningJobs(      ep_obs ) ;
+                    	sp_ObservationTimestamp(ep_obs) := CurrentToString("%c%y-%m-%d %H:%M:%S");
+                    endif ;
+                }
+                Comment: {
+                    "Add initialization statements here that require that the libraries are already initialized properly,
+                    or add statements that require the Data Management module to be initialized."
+                }
+            }
+            Procedure MainExecution;
+            Procedure PreMainTermination {
+                Body: {
+                    return 1;
+                }
+                Comment: {
+                    "Add termination statements here that require all libraries to be still alive.
+                    Return 1 if you allow the termination sequence to continue.
+                    Return 0 if you want to cancel the termination sequence."
+                }
+            }
+            Procedure MainTermination {
+                Body: {
+                    return 1;
+                }
+                Comment: {
+                    "Add termination statements here that do not require all libraries to be still alive.
+                    Return 1 to allow the termination sequence to continue.
+                    Return 0 if you want to cancel the termination sequence.
+                    It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+                }
+            }
+        }
+    }
+}
