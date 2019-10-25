@@ -183,7 +183,7 @@ else:
 
 # The following "context" is passed to templates in _templates folder
 html_context = {
-    'css_files': ['_static/Hacks.css', '_static/copycode.css'],
+    'css_files': ['_static/aimms_2019_10_25.css', '_static/copycode.css'],
     "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
     "gitlab_user": "aimms/customer-support", # Username
     "gitlab_repo": "aimms-how-to", # Repo name
