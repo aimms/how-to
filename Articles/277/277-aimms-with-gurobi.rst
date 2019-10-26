@@ -3,7 +3,7 @@ How to Use AIMMS with Gurobi
 
 .. should this be - How to use AIMMS with your On-Premise Gurobi Installation ? 
 
-You can connect your on-premise `Gurobi <https://www.gurobi.com/>` installation to AIMMS and use Gurobi as the solver for your math programs. 
+You can connect your on-premise `Gurobi <https://www.gurobi.com/>`_ installation to AIMMS and use Gurobi as the solver for your math programs. 
 
 Gurobi offers two kinds of on-premise licenses:
 
@@ -17,9 +17,17 @@ This article outlines the process to connect AIMMS with different types of Gurob
 Single machine
 -----------------
 
-#. Locate the gurobi.lic file (usually in 'C:\gurobi\gurobi.lic')
-#. Set the environment variable GRB_LICENSE_FILE to point to the exact location of this file.
-   .. image:: grb_lic.png
+#. Locate the gurobi.lic file (usually, `C:\\gurobi\\gurobi.lic`)
+#. Set the environment variable GRB_LICENSE_FILE to point to the exact location of this file
+
+   .. image:: grb_license.png
       :align: center
-#. In the Solver Configuration dialog box in AIMMS, add a new solver and select Gurobi (ligrb*.dll).
+#. In the Solver Configuration dialog box in AIMMS, click on Add and select the dll for the appropriate Gurobi version (`libgrb**.dll`)
+
+   .. image:: solver_config.png
+      :align: center
+
+Compute server
+------------------
+
 
