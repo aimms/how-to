@@ -7,15 +7,15 @@ Overview: Calendars in AIMMS
 
 The word "programming" in Mathematical Programming is about creating a plan, typically a plan to be executed over some period in real-time. 
 This makes reference to real-time an essential ingredient for most decision support applications. 
-Calendars are used in AIMMS to reference to real-time. In this how to article we will discuss:
+Calendars are used in AIMMS to reference to real-time. In this how-to article we will discuss:
 
 #.  How calendars are constructed flexibly
 
-#.  How calendars relate to the datetime fields in database tables
+#.  How calendars relate to the date/time fields in database tables
 
 #.  How current time is mapped to elements in a calendar
 
-#.  How information about calendars can be used to construct meaningfull subsets such as the sundays.
+#.  How information about calendars can be used to construct meaningful subsets such as the Sundays.
 
 Construction of calendars
 -------------------------
@@ -24,7 +24,7 @@ A calendar is an AIMMS set, a finite collection of elements.
 The calendar elements, called timeslots, are descriptions of periods of equal length. 
 To describe such a calendar, the length of each timeslot, the begin, and end of the calendar need to be known. 
 The length is based on the unit of measurement available in the quantity ``SI_Time_Duration``. 
-Finally the presentation of timeslots to users should follow the conventions of those users.
+Finally, the presentation of timeslots to users should follow the conventions of those users.
 As a running example, let's use:
 
 .. code-block:: aimms
@@ -68,14 +68,14 @@ As a running example, let's use:
 Some remarks on the above:
 
 #.  Lines 2-13. To define the length of a timeslot, we need to use the quantity ``SI_Time_Duration``. 
-    In our example we only use the conversion for ``day``.
+    In our example, we only use the conversion for ``day``.
 
 #.  Lines 14-16. This example shows all days in a particular year, so the year number is the actual input.
 
 #.  Lines 17-19. The calendar begin date is captured by the string parameter ``sp_CalBeg``. 
     It captures the first day of the year specified by the year number ``p_YearNumber``, so it is easily defined using ``FormatString``.
 
-#.  Lines 20-22. The calendar end date is defined similary via the string parameter ``sp_CalEnd``.
+#.  Lines 20-22. The calendar end date is defined similarly via the string parameter ``sp_CalEnd``.
 
 #.  Lines 23-25. The timeslot format specifies how timeslots are formatted. 
     A possible value for this format we use the standard AIMMS format for days; so a timeslot is formatted as ``2019-01-01``.
@@ -85,11 +85,11 @@ Some remarks on the above:
 
 #.  Lines 26-33 The calendar itself. Almost fully parametrized, using the definitions explained above, but still a daily calendar. 
     The only part not parametrized is that it is by day, and not by some number of days, or by some unit of measurement. 
-    However, to change the granularity of a decision support application, changing it from day to months, or to hours, is quite rare.
+    However, to change the granularity of a decision support application, changing it from day to month, or to hours, is quite rare.
 
 AIMMS The Language Reference, Chapter "Time-Based Modeling", section "Calendars" provides further details on declaring Calendars.
 
-Relating calendars in AIMMS to datetime columns in databases
+Relating calendars in AIMMS to date/time columns in databases
 -------------------------------------------------------------
 
 A key feature of Calendars in AIMMS is the natural mapping to date/time columns in a database.
@@ -114,7 +114,7 @@ Reading the data and then displaying it in the WebUI results in:
     :align: center
 
 As you can see, without any programming on dates, the format of the dates in the WebUI presentation changed.
-This is achieved, because the calendar timeslots are mapped onto date/time fields in the database.
+This is achieved because the calendar timeslots are mapped onto date/time fields in the database.
 
 Using current time
 ------------------
