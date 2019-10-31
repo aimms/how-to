@@ -33,6 +33,7 @@ The upgrade for this feature is manual, but quite simple.
 #. Open your AIMMS project in AIMMS 4.61 or later.
 #. Replace old Map widgets in your WebUI pages with new Map widgets. 
 
-You can use the same identifiers with V2 that you used with V1.
+For V2, you must separate the Latitude and Longitude into two separate identifiers declared in the model. These were contained in one identifier in V1.
+All other identifiers that you used with V1 will work for V2.
 
 Please refer to `AIMMS Documentation: Maps Widget <https://manual.aimms.com/webui/map-widget.html>`_ for further details about this widget.

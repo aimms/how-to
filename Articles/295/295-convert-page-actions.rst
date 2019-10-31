@@ -36,14 +36,14 @@ To convert Page Actions from V1 to V2, you'll need to do the following:
 
 A quick way to get this data is to use the ``webui.json`` file.
 
-a. Locate and open the file ``\MainProject\WebUI\webui.json``. 
-b. Search for the text “actions" in the file.
+   a. Locate and open the file ``\MainProject\WebUI\webui.json``. 
+   b. Search for the text “actions" in the file.
 
-.. image:: images/webui-action.png
+   .. image:: images/webui-action.png
 
-c. Copy the values to string parameters.
+   c. Copy the values to string parameters.
 
-.. Which values specifically? Ask Pratap if we can use the image from his email.
+#. Turn off the experimental features toggle.
 
 Once the string parameters are configured with index ``webui::indexPageActionSpec``, the Page Actions V1 will be overridden by the Page Actions V2 specified in the string parameter.
 
