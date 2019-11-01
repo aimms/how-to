@@ -1,0 +1,110 @@
+## ams_version=1.0
+
+Model Main_CalendarDemo {
+    DeclarationSection Calendar_Declaration {
+        Quantity SI_Time_Duration {
+            BaseUnit: s;
+            Conversions: {
+                century->s : #-># * 3153600000,
+                day    ->s : #-># * 86400,
+                hour   ->s : #-># * 3600,
+                minute ->s : #-># * 60,
+                month  ->s : #-># * 2628000,
+                year   ->s : #-># * 31536000
+            }
+            Comment: "Expresses the value for the duration of periods.";
+        }
+        Parameter p_YearNumber {
+            InitialData: 2016;
+        }
+        StringParameter sp_CalBeg {
+            Definition: FormatString("%i-01-01", p_YearNumber);
+        }
+        StringParameter sp_CalEnd {
+            Definition: FormatString("%i-12-31", p_YearNumber);
+        }
+        StringParameter sp_TimeslotFormat {
+            InitialData: "%Am|AllAbbrMonths| %d, %c%y";
+        }
+        Calendar cal_daysInYear {
+            Index: i_day;
+            Parameter: ep_day;
+            Unit: day;
+            BeginDate: sp_CalBeg;
+            EndDate: sp_CalEnd;
+            TimeslotFormat: sp_TimeslotFormat;
+        }
+    }
+    DeclarationSection Application_Data_Declaration {
+        Set s_ProductNames {
+            Index: i_ProductName;
+        }
+        Parameter p_Deliveries {
+            IndexDomain: (i_ProductName,i_day);
+        }
+        DatabaseTable db_deliveries {
+            DataSource: "data\\CalendarDemoAccess.dsn";
+            TableName: "DeliveryData";
+            Mapping: {
+                "ProductName"  -->i_ProductName,
+                "DeliveryDate" -->i_day,
+                "Amount"       -->p_Deliveries( i_ProductName, i_day )
+            }
+        }
+    }
+    Procedure pr_ReadDeliveries {
+        Body: {
+            read from table db_deliveries ;
+        }
+    }
+    DeclarationSection The_weekend {
+        Set s_WeekendDays {
+            SubsetOf: cal_daysInYear;
+            Definition: {
+                { i_day | 
+                	TimeslotCharacteristic( i_day, 'weekday' ) = 6 or  
+                	TimeslotCharacteristic( i_day, 'weekday' ) = 7 }
+            }
+        }
+    }
+    Section MainModelProcedures {
+        Procedure MainInitialization {
+            Body: {
+                p_YearNumber := val( CurrentToString("%c%y") );
+            }
+            Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+        }
+        Procedure PostMainInitialization {
+            Comment: {
+                "Add initialization statements here that require that the libraries are already initialized properly,
+                or add statements that require the Data Management module to be initialized."
+            }
+        }
+        Procedure MainExecution {
+            Body: {
+                ep_day := CurrentToTimeSlot(Calendar : cal_daysInYear );
+            }
+        }
+        Procedure PreMainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that require all libraries to be still alive.
+                Return 1 if you allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence."
+            }
+        }
+        Procedure MainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that do not require all libraries to be still alive.
+                Return 1 to allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence.
+                It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+            }
+        }
+    }
+}

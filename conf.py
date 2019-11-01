@@ -374,4 +374,3 @@ def setup(sphinx):
 		sphinx.connect('builder-inited', generate_redirects)   
  
 highlight_language = 'aimms'
-

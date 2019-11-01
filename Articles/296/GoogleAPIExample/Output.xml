@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DistanceMatrixResponse>
+ <status>OK</status>
+ <origin_address>Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France</origin_address>
+ <origin_address>Square de l'Atomium, 1020 Bruxelles, Belgium</origin_address>
+ <origin_address>Diakenhuisweg 29- 35, 2033 AP Haarlem, Netherlands</origin_address>
+ <origin_address>Piazza del Colosseo, 1, 00184 Roma RM, Italy</origin_address>
+ <origin_address>Calle Real de la Alhambra, s/n, 18009 Granada, Spain</origin_address>
+ <destination_address>Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France</destination_address>
+ <destination_address>Square de l'Atomium, 1020 Bruxelles, Belgium</destination_address>
+ <destination_address>Diakenhuisweg 29- 35, 2033 AP Haarlem, Netherlands</destination_address>
+ <destination_address>Piazza del Colosseo, 1, 00184 Roma RM, Italy</destination_address>
+ <destination_address>Calle Real de la Alhambra, s/n, 18009 Granada, Spain</destination_address>
+ <row>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>0</value>
+    <text>1 min</text>
+   </duration>
+   <distance>
+    <value>0</value>
+    <text>1 m</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>11757</value>
+    <text>3 hours 16 mins</text>
+   </duration>
+   <distance>
+    <value>317937</value>
+    <text>318 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>18810</value>
+    <text>5 hours 14 mins</text>
+   </duration>
+   <distance>
+    <value>520241</value>
+    <text>520 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>50283</value>
+    <text>13 hours 58 mins</text>
+   </duration>
+   <distance>
+    <value>1432053</value>
+    <text>1,432 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>57189</value>
+    <text>15 hours 53 mins</text>
+   </duration>
+   <distance>
+    <value>1691318</value>
+    <text>1,691 km</text>
+   </distance>
+  </element>
+ </row>
+ <row>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>11894</value>
+    <text>3 hours 18 mins</text>
+   </duration>
+   <distance>
+    <value>319915</value>
+    <text>320 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>0</value>
+    <text>1 min</text>
+   </duration>
+   <distance>
+    <value>0</value>
+    <text>1 m</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>7971</value>
+    <text>2 hours 13 mins</text>
+   </duration>
+   <distance>
+    <value>210810</value>
+    <text>211 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>53217</value>
+    <text>14 hours 47 mins</text>
+   </duration>
+   <distance>
+    <value>1498274</value>
+    <text>1,498 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>67808</value>
+    <text>18 hours 50 mins</text>
+   </duration>
+   <distance>
+    <value>2005067</value>
+    <text>2,005 km</text>
+   </distance>
+  </element>
+ </row>
+ <row>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>18758</value>
+    <text>5 hours 13 mins</text>
+   </duration>
+   <distance>
+    <value>519681</value>
+    <text>520 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>7911</value>
+    <text>2 hours 12 mins</text>
+   </duration>
+   <distance>
+    <value>209206</value>
+    <text>209 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>0</value>
+    <text>1 min</text>
+   </duration>
+   <distance>
+    <value>0</value>
+    <text>1 m</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>59337</value>
+    <text>16 hours 29 mins</text>
+   </duration>
+   <distance>
+    <value>1673030</value>
+    <text>1,673 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>74673</value>
+    <text>20 hours 45 mins</text>
+   </duration>
+   <distance>
+    <value>2204833</value>
+    <text>2,205 km</text>
+   </distance>
+  </element>
+ </row>
+ <row>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>50219</value>
+    <text>13 hours 57 mins</text>
+   </duration>
+   <distance>
+    <value>1435302</value>
+    <text>1,435 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>53214</value>
+    <text>14 hours 47 mins</text>
+   </duration>
+   <distance>
+    <value>1500006</value>
+    <text>1,500 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>59501</value>
+    <text>16 hours 32 mins</text>
+   </duration>
+   <distance>
+    <value>1675753</value>
+    <text>1,676 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>0</value>
+    <text>1 min</text>
+   </duration>
+   <distance>
+    <value>0</value>
+    <text>1 m</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>77672</value>
+    <text>21 hours 35 mins</text>
+   </duration>
+   <distance>
+    <value>2241715</value>
+    <text>2,242 km</text>
+   </distance>
+  </element>
+ </row>
+ <row>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>57056</value>
+    <text>15 hours 51 mins</text>
+   </duration>
+   <distance>
+    <value>1690238</value>
+    <text>1,690 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>67636</value>
+    <text>18 hours 47 mins</text>
+   </duration>
+   <distance>
+    <value>2001465</value>
+    <text>2,001 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>74689</value>
+    <text>20 hours 45 mins</text>
+   </duration>
+   <distance>
+    <value>2203769</value>
+    <text>2,204 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>78250</value>
+    <text>21 hours 44 mins</text>
+   </duration>
+   <distance>
+    <value>2241836</value>
+    <text>2,242 km</text>
+   </distance>
+  </element>
+  <element>
+   <status>OK</status>
+   <duration>
+    <value>0</value>
+    <text>1 min</text>
+   </duration>
+   <distance>
+    <value>0</value>
+    <text>1 m</text>
+   </distance>
+  </element>
+ </row>
+</DistanceMatrixResponse>

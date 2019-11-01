@@ -53,7 +53,7 @@ For variables with a definition, AIMMS will actually generate both the variable 
       Definition: Y+Z;
    }
 
-AIMMS will actually generate two things:
+AIMMS will generate:
 
 #. Variable ``X``
 
