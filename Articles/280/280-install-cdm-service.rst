@@ -76,9 +76,13 @@ Let's start with downloading the executable on the machine that should run the C
 +----------------------------------------------------------------------------------------+
 | https://library-repository.aimms.com/bin/CDMService-1.10.0.7-vc141_x64_Release.exe     |
 +----------------------------------------------------------------------------------------+
-| https://library-repository.aimms.com/bin/CDMService-1.11.0.4-vc120_x64_Release.exe     |
+| https://library-repository.aimms.com/bin/CDMService-1.11.0.4-vc141_x64_Release.exe     |
 +----------------------------------------------------------------------------------------+
-| https://library-repository.aimms.com/bin/CDMService-1.12.0.7-vc120_x64_Release.exe     |
+| https://library-repository.aimms.com/bin/CDMService-1.12.0.7-vc141_x64_Release.exe     |
++----------------------------------------------------------------------------------------+
+| https://library-repository.aimms.com/bin/CDMService-1.13.1.33-vc141_x64_Release.exe    |
++----------------------------------------------------------------------------------------+
+| https://library-repository.aimms.com/bin/CDMService-1.14.0.6-vc141_x64_Release.exe     |
 +----------------------------------------------------------------------------------------+
 
 .. note::

@@ -1,0 +1,79 @@
+{
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "version": "4.67.0",
+  "pages/home": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "tab",
+          "layoutInfo": {
+            "width": "3",
+            "height": "1",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/tab": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_Deliveries"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_ProductName",
+          "i_day"
+        ],
+        "colHeader": [],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_ProductName": "a",
+            "i_day": "Oct 31, 2019"
+          },
+          "width": 15.6
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_ProductName": "b",
+            "i_day": "Oct 03, 2019"
+          },
+          "width": 18.163265306122449
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_ProductName",
+          "width": 21.486486486486485
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_day",
+          "width": 20.87235750602087
+        }
+      ]
+    }
+  }
+}
