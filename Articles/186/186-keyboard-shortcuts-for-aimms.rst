@@ -74,7 +74,8 @@ The table below provides a list of shortcuts provided by AIMMS.
 +----------------------------------+----------------------------------------------------------------------------------------------------------+
 | ``Ctrl`` + ``U``                 | Uncomment the selected code                                                                              |
 +----------------------------------+----------------------------------------------------------------------------------------------------------+
-
+| ``Ctrl`` + ``Shift`` + ``F``     | Find all                                                                                                 |
++----------------------------------+----------------------------------------------------------------------------------------------------------+
 
 Another "shortcut" you may find handy is a way to quickly run a procedure other than the MainExecution (as this already has the keyboard shortcut F6).
 
