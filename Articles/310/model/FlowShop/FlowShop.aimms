@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
-<References AIMMS_Version="4.70.10001.32 (x64)">
+<References AIMMS_Version="4.70.10003.36 (x64)">
 	<MainProject Path="MainProject" />
+	<Library Path="GuardServerSession" />
 	<Library System="true" Path="AimmsPro" />
 	<Library System="true" Path="AimmsWebUI" />
 </References>
