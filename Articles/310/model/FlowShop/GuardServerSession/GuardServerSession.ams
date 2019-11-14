@@ -64,7 +64,7 @@ LibraryModule Library_GuardServerSession {
                 
                 	! Record the message and severity.
                 	sp_JobErrorMessages(ep_JobErrorMessageNumber) := errh::Message( ep_err);
-                	sp_JobErrorMoments( ep_JobErrorMessageNumber) := CurrentToString("%c%y-%m-%d %H:%M:%S:%T%TZ('UTC')");
+                	sp_JobErrorMoments( ep_JobErrorMessageNumber) := errh::CreationTime(ep_err,"%c%y-%m-%d %H:%M:%S:%T%TZ('UTC')");
                 	ep_JobErrorSeverity(ep_JobErrorMessageNumber) := errh::Severity(ep_err);
                 
                 	! Record the entire stack of error positions
