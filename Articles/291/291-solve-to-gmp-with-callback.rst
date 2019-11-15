@@ -59,7 +59,7 @@ An example solve results in the following progress window:
 
 As you can see, optimality is reached.
 
-topic:: Example Project 1
+.. topic:: Example Project 1
 
     If you want to replay this yourself, please download and run :download:`1.flowshop...zip <model/1.flowshop-solve-solve-cb.zip>` and press the solve button in the lower right corner.
 
@@ -102,7 +102,7 @@ As you can see, optimality is not reached; instead you'll get the following warn
 
 This is caused by the different interface for callbacks. We will handle that in the next section.
 
-topic:: Example Project 2
+.. topic:: Example Project 2
 
     If you want to replay this yourself, please download and run :download:`2.flowshop...zip <model/2.flowshop-gmp-solve-cb.zip>` and press the solve button in the lower right corner.
 
