@@ -96,7 +96,9 @@ The only difference in coding the solution procedure is then on lines 6 and 7, h
 .. image:: images/2-progress-window.png
     :align: center
 
-As you can see, optimality is not reached; instead you'll get the following warning::
+As you can see, optimality is not reached; instead you'll get the following warning:
+
+.. code-block:: none
 
     After zero iterations CPLEX 12.9 found an integer solution to FlowShopModel. The minimum found for TimeSpan is 1865.
 
