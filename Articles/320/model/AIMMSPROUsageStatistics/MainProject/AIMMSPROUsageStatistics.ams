@@ -12,21 +12,58 @@ Model Main_AIMMSPROUsageStatistics {
                 month  ->tick : #-># * 262800000,
                 s      ->tick : #-># * 100,
                 year   ->tick : #-># * 3153600000,
-                second ->tick : #-># * 100
+                second ->tick : #-># * 100,
+                milliseconds ->tick : #-># /10
             }
             Comment: "Expresses the value for the duration of periods.";
+        }
+    }
+    DeclarationSection database_connection {
+        StringParameter sp_Datasource {
+            Definition: {
+                SQLCreateConnectionString(
+                	DatabaseInterface              :  'ODBC', 
+                	DriverName                     :  "", 
+                	ServerName                     :  "localhost", 
+                	DatabaseName                   :  "aimms", 
+                	UserId                         :  "aimms", 
+                	Password                       :  "aimms123", 
+                	AdditionalConnectionParameters :  "")
+            }
         }
     }
     DeclarationSection Session_information_read_in {
         Set s_Sessions {
             Index: i_session;
         }
+        StringParameter sp_AccountName {
+            IndexDomain: i_session;
+        }
         StringParameter sp_StartTimes {
+            IndexDomain: i_session;
+        }
+        StringParameter sp_SessionType {
+            IndexDomain: i_session;
+        }
+        StringParameter sp_Env {
+            IndexDomain: i_session;
+        }
+        StringParameter sp_UserName {
+            IndexDomain: i_session;
+        }
+        StringParameter sp_app {
+            IndexDomain: i_session;
+        }
+        StringParameter sp_AppVersion {
             IndexDomain: i_session;
         }
         Parameter p_Durations {
             IndexDomain: i_Session;
-            Unit: tick;
+            Unit: milliseconds;
+        }
+        Parameter p_peakMemory {
+            IndexDomain: i_Session;
+            Unit: milliseconds;
         }
         DatabaseTable db_SessionTable {
             DataSource: "data\\AIMMSPROUsageStatistics.dsn";
@@ -123,7 +160,35 @@ Model Main_AIMMSPROUsageStatistics {
             }
         }
     }
-    Procedure pr_ReadData;
+    Procedure pr_ReadData {
+        Body: {
+            read from table dbpr_ReadProSessionData();
+        }
+    }
+    DatabaseProcedure dbpr_ReadProSessionData {
+        DataSource: sp_Datasource;
+        SqlQuery: {
+            "SELECT r.id, a.name as accountname, r.created_at, r.session_type, r.env, r.username, r.app, r.app_version,"
+            +    " SUM(m.duration) as duration,"
+            +    " MAX(m.peak_memory) as peak_memory"
+            +" FROM co_tool.account a, co_tool.session_run r, co_tool.session_run_metrics m"
+            +" where m.session_run_id=r.id and a.id = r.account_id and r.created_at >= '2010-03-01'"
+            !+" GROUP BY a.name, r.created_at, r.session_type, r.env, r.username, r.app, r.app_version ORDER BY r.created_at DESC"
+        }
+        Property: UseResultSet;
+        Mapping: {
+            "id"            --> i_session,
+            "accuntname"    --> sp_AccountName( i_session ),
+            "created_at"    --> sp_StartTimes( i_session ),
+            "session_type"  --> sp_SessionType(i_session ),
+            "env"           --> sp_Env(i_session ),
+            "username"      --> sp_UserName(i_session ),
+            "app"           --> sp_app(i_session ),
+            "app_version"   --> sp_AppVersion(i_session ),
+            "peak_memory"   --> p_peakMemory(i_session ),
+            "duration"      --> p_Durations(i_session)
+        }
+    }
     Procedure pr_EventsFromSessions {
         Body: {
             empty s_WorkEvents ;
