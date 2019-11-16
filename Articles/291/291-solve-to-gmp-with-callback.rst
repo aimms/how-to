@@ -59,7 +59,7 @@ An example solve results in the following progress window:
 
 As you can see, optimality is reached.
 
-topic:: Example Project 1
+.. topic:: Example Project 1
 
     If you want to replay this yourself, please download and run :download:`1.flowshop...zip <model/1.flowshop-solve-solve-cb.zip>` and press the solve button in the lower right corner.
 
@@ -96,13 +96,15 @@ The only difference in coding the solution procedure is then on lines 6 and 7, h
 .. image:: images/2-progress-window.png
     :align: center
 
-As you can see, optimality is not reached; instead you'll get the following warning::
+As you can see, optimality is not reached; instead you'll get the following warning:
+
+.. code-block:: none
 
     After zero iterations CPLEX 12.9 found an integer solution to FlowShopModel. The minimum found for TimeSpan is 1865.
 
 This is caused by the different interface for callbacks. We will handle that in the next section.
 
-topic:: Example Project 2
+.. topic:: Example Project 2
 
     If you want to replay this yourself, please download and run :download:`2.flowshop...zip <model/2.flowshop-gmp-solve-cb.zip>` and press the solve button in the lower right corner.
 
