@@ -1,0 +1,11 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"i_event" "i_Event1" "2019-11-15 11:49:52"
+"i_Event1" "i_Event" "2019-11-15 14:02:03"
+"s_Events" "s_WorkEvents" "2019-11-15 14:06:49"
+"i_Event" "i_WorkEvent" "2019-11-15 14:07:17"
+"ep_Event" "ep_WorkEvent" "2019-11-15 14:08:01"
+"sp_Moments" "sp_WorkMoments" "2019-11-15 14:12:58"
+"ep_EventType" "ep_WorkEventType" "2019-11-15 14:13:11"
+"s_OrderedEvents" "s_OrderedWorkEvents" "2019-11-15 14:14:51"
+"i_OrderedEvent" "i_OrderedWorkEvent" "2019-11-15 14:15:03"
+"s_EventType" "s_EventTypes" "2019-11-15 14:17:32"

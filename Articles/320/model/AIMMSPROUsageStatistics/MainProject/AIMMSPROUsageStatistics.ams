@@ -1,0 +1,194 @@
+## ams_version=1.0
+
+Model Main_AIMMSPROUsageStatistics {
+    DeclarationSection Generic_declarations {
+        Quantity SI_Time_Duration {
+            BaseUnit: tick;
+            Conversions: {
+                century->tick : #-># * 3.1536e+11,
+                day    ->tick : #-># * 8640000,
+                hour   ->tick : #-># * 360000,
+                minute ->tick : #-># * 6000,
+                month  ->tick : #-># * 262800000,
+                s      ->tick : #-># * 100,
+                year   ->tick : #-># * 3153600000,
+                second ->tick : #-># * 100
+            }
+            Comment: "Expresses the value for the duration of periods.";
+        }
+    }
+    DeclarationSection Session_information_read_in {
+        Set s_Sessions {
+            Index: i_session;
+        }
+        StringParameter sp_StartTimes {
+            IndexDomain: i_session;
+        }
+        Parameter p_Durations {
+            IndexDomain: i_Session;
+            Unit: tick;
+        }
+        DatabaseTable db_SessionTable {
+            DataSource: "data\\AIMMSPROUsageStatistics.dsn";
+            TableName: "SessionTable";
+            Mapping: {
+                "SessionID"        -->i_session,
+                "SessionStartTime" -->sp_StartTimes( i_session ),
+                "SessionDuration"  -->p_Durations(i_session)
+            }
+        }
+    }
+    DeclarationSection Events {
+        Set s_EventTypes {
+            Index: i_EventType;
+            Parameter: ep_EventType;
+            Definition: data { StartSession, FinishSession };
+        }
+        Set s_Events {
+            SubsetOf: Integers;
+            Index: i_Event;
+            Parameter: ep_Event;
+        }
+        StringParameter sp_Moment {
+            IndexDomain: i_Event;
+        }
+        Parameter p_NumberOfSessionsAfterEvent {
+            IndexDomain: i_Event;
+        }
+    }
+    DeclarationSection WorkEvents {
+        Set s_WorkEvents {
+            SubsetOf: Integers;
+            Index: i_WorkEvent;
+            Parameter: ep_WorkEvent;
+        }
+        Set s_OrderedWorkEvents {
+            SubsetOf: s_WorkEvents;
+            Index: i_OrderedWorkEvent;
+            OrderBy: sp_WorkMoments(i_WorkEvent);
+            Definition: s_WorkEvents;
+        }
+        StringParameter sp_WorkMoments {
+            IndexDomain: i_WorkEvent;
+        }
+        ElementParameter ep_WorkEventType {
+            IndexDomain: i_WorkEvent;
+            Range: s_EventTypes;
+        }
+    }
+    Section Generate_example {
+        Parameter p_NoSessions {
+            InitialData: 100;
+        }
+        StringParameter sp_StartTime {
+            InitialData: {
+                !"%c%y-%m-%d %H:%M:%S:%T"
+                "2019-01-01 00:00:00:00"
+            }
+        }
+        StringParameter sp_EndTime {
+            InitialData: "2019-12-31 23:59:59:99";
+        }
+        Parameter p_TotalTime {
+            Unit: tick;
+        }
+        Parameter p_ticksFromStart {
+            Unit: tick;
+        }
+        StringParameter sp_ThisSessionStart;
+        Parameter p_ThisSessionDuration {
+            Unit: tick;
+        }
+        ElementParameter ep_addThis {
+            Range: s_Sessions;
+        }
+        Procedure pr_GenerateArtificialSessionData {
+            Body: {
+                empty s_Sessions ;
+                p_TotalTime := StringToMoment( "%c%y-%m-%d %H:%M:%S:%T", [tick], sp_StartTime, sp_EndTime);
+                while loopCount <= p_NoSessions do
+                	p_ticksFromStart := Round(Uniform(1[tick],p_TotalTime));
+                	sp_ThisSessionStart := MomentToString( "%c%y-%m-%d %H:%M:%S:%T", [tick], sp_StartTime, p_ticksFromStart );
+                	p_ThisSessionDuration := Exponential(30[day],120[day]);
+                	SetElementAdd( s_Sessions, ep_addThis, formatString("Session%04i",loopcount));
+                	sp_StartTimes(ep_addThis) := sp_ThisSessionStart;
+                	p_Durations(ep_addThis) := p_ThisSessionDuration;
+                endwhile ;
+            }
+        }
+        Procedure pr_WriteData {
+            Body: {
+                empty db_SessionTable ;
+                write to table db_SessionTable;
+            }
+        }
+    }
+    Procedure pr_ReadData;
+    Procedure pr_EventsFromSessions {
+        Body: {
+            empty s_WorkEvents ;
+            for i_Session do
+            	s_WorkEvents += card(s_WorkEvents)+1 ;
+            	ep_WorkEvent := last( s_WorkEvents );
+            	sp_WorkMoments( ep_WorkEvent ) := sp_StartTimes(i_session);
+            	ep_WorkEventType( ep_WorkEvent ) := 'StartSession';
+            
+            	s_WorkEvents += card(s_WorkEvents)+1 ;
+            	ep_WorkEvent := last( s_WorkEvents );
+            	sp_WorkMoments( ep_WorkEvent ) := MomentToString("%c%y-%m-%d %H:%M:%S:%T",[tick],sp_StartTimes(i_session),p_Durations(i_Session));
+            	ep_WorkEventType( ep_WorkEvent ) := 'FinishSession';
+            endfor ;
+            
+            empty s_Events ;
+            p_NumberOfRunningSessions := 0 ;
+            for i_OrderedWorkEvent do ! Go thru the events in an ordered fashion.
+            	ep_WorkEvent := i_OrderedWorkEvent;
+            	s_Events += card(s_Events)+1 ;
+            	ep_Event := last( s_Events );
+            	sp_Moment(ep_Event ):= sp_WorkMoments( ep_WorkEvent );
+            	ep_EventType := ep_WorkEventType( ep_WorkEvent );
+            	if ep_EventType = 'StartSession' then
+            		p_NumberOfRunningSessions += 1 ;
+            	else
+            		p_NumberOfRunningSessions -= 1 ;
+            	endif ;
+            	p_NumberOfSessionsAfterEvent(ep_event):= p_NumberOfRunningSessions;
+            endfor ;
+            !data { StartSession, FinishSession }
+        }
+        Parameter p_NumberOfRunningSessions;
+    }
+    Section Attic {
+        Procedure MainInitialization {
+            Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+        }
+        Procedure PostMainInitialization {
+            Comment: {
+                "Add initialization statements here that require that the libraries are already initialized properly,
+                or add statements that require the Data Management module to be initialized."
+            }
+        }
+        Procedure MainExecution;
+        Procedure PreMainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that require all libraries to be still alive.
+                Return 1 if you allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence."
+            }
+        }
+        Procedure MainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that do not require all libraries to be still alive.
+                Return 1 to allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence.
+                It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+            }
+        }
+    }
+}

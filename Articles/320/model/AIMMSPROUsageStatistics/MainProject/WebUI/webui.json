@@ -1,0 +1,172 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home",
+                "children": [
+                  {
+                    "name": "Sessions and Events",
+                    "type": "page",
+                    "slug": "sessions_and_events",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/sessions_and_events": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Sessions",
+          "layoutInfo": {
+            "width": "5",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "Events",
+          "layoutInfo": {
+            "width": "5",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "usage",
+          "layoutInfo": {
+            "width": "10",
+            "height": "2"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/Sessions": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_StartTimes",
+          "p_Durations"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_session"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_StartTimes"
+          },
+          "width": 43.91744772882182
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_Durations"
+          },
+          "width": 28.153197720473656
+        }
+      ]
+    },
+    "show.units": {
+      "literal": 0
+    },
+    "title": {
+      "literal": "Session data [ticks]"
+    }
+  },
+  "widgets/Events": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_Moment",
+          "p_NumberOfSessionsAfterEvent"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_Event"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_Moment"
+          },
+          "width": 47.22596153846154
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_NumberOfSessionsAfterEvent"
+          },
+          "width": 42.2876695588415
+        }
+      ]
+    },
+    "title": {
+      "literal": "Events"
+    }
+  },
+  "widgets/usage": {
+    "aimms.widget.type": {
+      "literal": "linechart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_NumberOfSessionsAfterEvent"
+        ]
+      }
+    }
+  }
+}
