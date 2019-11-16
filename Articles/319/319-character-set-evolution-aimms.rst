@@ -2,57 +2,47 @@ Using UNICODE in maintained AIMMS applications
 ==============================================
 
 .. meta::
-   :description: Converting one-byte per character AIMMS apps deploying UTF8 character sets, including Far East and Emoji's.
-   :keywords: evolution, single byte character, two byte character, UNICODE, ASCII, encoding.
+   :description: Converting one-byte per character AIMMS apps deploying UTF8 character sets, including Far East and Emojis.
+   :keywords: evolution, single byte character, two byte character, UNICODE, ASCII, encoding
 
-Applications created using AIMMS 2 were ASCII based, one byte per character; not allowing for UNICODE. This is in contrast with UTF8, the default character set of AIMMS 4, where all `UNICODE characters <https://en.wikipedia.org/wiki/List_of_Unicode_characters>`_ are allowed. Some older AIMMS applications were developed based on ASCII, and can be upgraded to using ``UTF8``, thus empowering users with texts using the UNICODE character set.
+AIMMS 4 uses UTF8 as default character set, where all `UNICODE characters <https://en.wikipedia.org/wiki/List_of_Unicode_characters>`_ are allowed. Some older AIMMS applications were developed based on ASCII, and can be upgraded to use UTF8, thus empowering users with texts using the UNICODE character set.
 
 This brief How To article 
 
-#. first starts with some terminology,
+#. outlines encoding terminology
 
-#. next provides an overview of the use of character sets in the various AIMMS versions, 
+#. charts character sets by AIMMS version
 
-#. then discusses some concerns on changing character sets, and
+#. discusses changing character sets
 
-#. finally details how older AIMMS applications can be upgraded to using ``UNICODE``.
+#. defines how to upgrade AIMMS projects to allow UNICODE
 
-Introducing encoding
---------------------
+Introduction to encoding
+-------------------------
 
-Roughly speaking:
+Text files are stored as a sequence of numbers and the characters corresponding these numbers are viewed as "text".
 
-* Humans interpret small pictures as characters, and a sequence of such small pictures is interpreted as a word, a sentence, a text.
-
-* Texts are stored in files as a sequence of numbers and the pictures corresponding these numbers are viewed as the "text".
-
-The mapping of pictures to numbers is an encoding, and the collection of pictures that can be handled is a character set.
-
-With the introduction of computers, some computer vendors introduced their own character sets and encodings. 
-The character set was standardized to an **American** standard, as ASCII.
-The dominant character set of 80's and 90's of last century was the ASCII character set, defining pictures for up to value 127.
-
-This was extended by Microsoft to using values up to 255, specialized by region; the so-called code pages. 
-This might cause confusion, when a text file was copied from one region to another where a different code page was the norm.
+The mapping of characters to numbers is an encoding, and there are a few different standard character sets.
 
 Nowadays, the dominant character set is ``UNICODE``, and the dominant encoding is ``UTF8``. 
-Note that this character set and corresponding encoding are still `evolving <https://en.wikibooks.org/wiki/Unicode/Versions>`_.
+
+When a text file using one encoding is ported to a program using another encoding, the mapping doesn't match and the characters are not translated as intended.
 
 History on the use of character sets in AIMMS
 ---------------------------------------------
 
-#.  AIMMS 2, developed in the early 90's, used the ASCII character set as this was the dominant character set at the time. 
+#.  AIMMS 2 used the ASCII character set, the dominant character set at the time. 
     AIMMS 2 used the common implementation of using one byte per character.
 
-#.  AIMMS 3.0 and AIMMS 3.1, developed and released around the turn of the century, also used ASCII as the only character set and encoding supported. 
+#.  AIMMS 3.0 and AIMMS 3.1 also used ASCII as the only character set and encoding supported. 
     The AIMMS projects created with these AIMMS releases were agnostic to the code page at hand.
 
-#.  AIMMS 3.2 introduced the option to use two characters for encoding and supported a 16 bit encoding of UNICODE. 
-    Two different installers were available, one for ASCII versions of AIMMS, and one for the so-called UNICODE version of AIMMS. 
-    This position was retained until AIMMS 3.13. 
+#.  AIMMS 3.2 introduced the option to use two characters for encoding and supported a 16-bit encoding of UNICODE. 
+    Two different installers were available, one for ASCII versions of AIMMS, and one for the UNICODE version of AIMMS. 
+    This remained until AIMMS 3.13. 
     The ASCII versions of these AIMMS releases were all agnostic to the code page in use.
 
-#.  AIMMS 3.14, released in 2014, introduced the concept of encoding, supporting more than 50 different encodings; 
+#.  AIMMS 3.14 introduced the concept of encoding, supporting more than 50 different encodings; 
     different code pages were counted as different encodings. 
     New projects created with AIMMS 3.14 used the ``UTF8`` encoding by default. 
     This is also available in modern versions of AIMMS 4. 
