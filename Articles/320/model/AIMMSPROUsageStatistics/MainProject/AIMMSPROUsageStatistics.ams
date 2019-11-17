@@ -18,213 +18,611 @@ Model Main_AIMMSPROUsageStatistics {
             Comment: "Expresses the value for the duration of periods.";
         }
     }
-    DeclarationSection database_connection {
-        StringParameter sp_Datasource {
-            Definition: {
-                SQLCreateConnectionString(
-                	DatabaseInterface              :  'ODBC', 
-                	DriverName                     :  "", 
-                	ServerName                     :  "localhost", 
-                	DatabaseName                   :  "aimms", 
-                	UserId                         :  "aimms", 
-                	Password                       :  "aimms123", 
-                	AdditionalConnectionParameters :  "")
+    Section database_connections {
+        Section Generate_example {
+            Parameter p_NoSessions {
+                InitialData: {
+                    10000
+                    ! with a million sessions, some procedures start taking several minutes.
+                }
             }
+            StringParameter sp_StartTime {
+                InitialData: {
+                    !"%c%y-%m-%d %H:%M:%S:%T"
+                    "2019-01-01 00:00:00:00"
+                }
+            }
+            StringParameter sp_EndTime {
+                InitialData: "2019-12-31 23:59:59:99";
+            }
+            Parameter p_TotalTime {
+                Unit: tick;
+            }
+            Parameter p_ticksFromStart {
+                Unit: tick;
+            }
+            StringParameter sp_ThisSessionStart;
+            Parameter p_ThisSessionDuration {
+                Unit: tick;
+            }
+            ElementParameter ep_addThis {
+                Range: s_Sessions;
+            }
+            Procedure pr_GenerateArtificialSessionData {
+                Body: {
+                    empty s_Sessions ;
+                    p_TotalTime := StringToMoment( "%c%y-%m-%d %H:%M:%S:%T", [tick], sp_StartTime, sp_EndTime);
+                    while loopCount <= p_NoSessions do
+                    	p_ticksFromStart := Round(Uniform(1[tick],p_TotalTime));
+                    	sp_ThisSessionStart := MomentToString( "%c%y-%m-%d %H:%M:%S:%T", [tick], sp_StartTime, p_ticksFromStart );
+                    	p_ThisSessionDuration := Exponential(1[hour],10[hour]);
+                    	SetElementAdd( s_Sessions, ep_addThis, formatString("Session%06i",loopcount));
+                    	sp_SessStartTimes(ep_addThis) := sp_ThisSessionStart;
+                    	p_SessDurations(ep_addThis) := p_ThisSessionDuration;
+                    	sp_SessAccountName(ep_addThis) := "ProOnPrem";
+                    	sp_SessSessionType(ep_addThis) := "WinUI";
+                    	sp_SessEnv(ep_addThis) := "ROOT";
+                    	sp_SessUserName(ep_addThis) := "Theo";
+                    	sp_SessApp(ep_addThis) := "Fabulous";
+                    	sp_SessAppVersion(ep_addThis) := "3.14159";
+                    	p_SessPeakMemory(ep_addThis) := 123456;
+                    endwhile ;
+                }
+            }
+            Procedure pr_WriteData {
+                Body: {
+                    empty db_SessionTable ;
+                    write to table db_SessionTable;
+                }
+            }
+        }
+        Procedure pr_TestDataSource {
+            Body: {
+                CurrentErrorMessage := "" ;
+                p_TestDataSource := TestDataSource(
+                	Datasource  :  sp_Datasource, 
+                	interactive :  1, 
+                	timeout     :  30);
+                display CurrentErrorMessage ;
+            }
+        }
+        Procedure pr_ReadData {
+            Body: {
+                empty Session_information_read_in;
+                read from table dbpr_ReadProSessionData();
+            }
+        }
+        DatabaseProcedure dbpr_ReadProSessionData {
+            DataSource: sp_Datasource;
+            SqlQuery: {
+                "SELECT r.id, a.name as accountname, r.created_at, r.session_type, r.env, r.username, r.app, r.app_version,"
+                +    " SUM(m.duration) as duration,"
+                +    " MAX(m.peak_memory) as peak_memory"
+                +" FROM co_tool.account a, co_tool.session_run r, co_tool.session_run_metrics m"
+                +" where m.session_run_id=r.id and a.id = r.account_id and r.created_at >= '2010-03-01'"
+                +" GROUP BY r.id, a.name, r.created_at, r.session_type, r.env, r.username, r.app, r.app_version ORDER BY r.created_at DESC"
+            }
+            Property: UseResultSet;
+            Mapping: {
+                "id"            --> i_session,
+                "accuntname"    --> sp_SessAccountName( i_session ),
+                "created_at"    --> sp_SessStartTimes( i_session ),
+                "session_type"  --> sp_SessSessionType(i_session ),
+                "env"           --> sp_SessEnv(i_session ),
+                "username"      --> sp_SessUserName(i_session ),
+                "app"           --> sp_SessApp(i_session ),
+                "app_version"   --> sp_SessAppVersion(i_session ),
+                "peak_memory"   --> p_SessPeakMemory(i_session ),
+                "duration"      --> p_SessDurations(i_session)
+            }
+        }
+        DeclarationSection database_connection {
+            StringParameter sp_Datasource {
+                Definition: {
+                    "PostgreSQL35W"
+                    
+                    !SQLCreateConnectionString(
+                    !	DatabaseInterface              :  'ODBC', 
+                    !	DriverName                     :  "PostgreSQL Unicode(x64)", 
+                    !	ServerName                     :  "aimmspro-local", 
+                    !	DatabaseName                   :  "aimms", 
+                    !	UserId                         :  "aimms", 
+                    !	Password                       :  "aimms123", 
+                    !	AdditionalConnectionParameters :  "")
+                    
+                    !SQLCreateConnectionString(
+                    !    	DatabaseInterface              :  'ODBC', 
+                    !    	DriverName                     :  "MySQL ODBC 5.3 ANSI Driver", 
+                    !    	ServerName                     :  "localhost", 
+                    !    	DatabaseName                   :  "aimms", 
+                    !    	UserId                         :  "aimms", 
+                    !    	Password                       :  "aimms123", 
+                    !    	AdditionalConnectionParameters :  "");
+                    !
+                }
+            }
+            Parameter p_TestDataSource;
+            DatabaseTable db_SessionTable {
+                DataSource: "data\\AIMMSPROUsageStatistics.dsn";
+                TableName: "SessionTable";
+                Mapping: {
+                    "SessionID"        -->i_session,
+                    "SessionStartTime" -->sp_SessStartTimes( i_session ),
+                    "SessionDuration"  -->p_SessDurations(i_session)
+                }
+            }
+        }
+    }
+    DeclarationSection Value_sets {
+        Set s_EventTypes {
+            Index: i_EventType;
+            Parameter: ep_EventType;
+            Definition: data { StartSession, FinishSession };
+        }
+        Set s_AccountNames {
+            Index: i_AccountName;
+            Parameter: ep_AccountName;
+        }
+        Set s_Environments {
+            Index: i_Environment;
+            Parameter: ep_Environment;
+        }
+        Set s_UserNames {
+            Index: i_UserName;
+            Parameter: ep_UserName;
+        }
+        Set s_SessionTypes {
+            Index: i_SessionType;
+            Parameter: ep_SessionType;
+        }
+        Set s_Applications {
+            Index: i_Application;
+            Parameter: ep_Application;
+        }
+        Set s_AppVersions {
+            Index: i_AppVersion;
+            Parameter: ep_AppVersion;
         }
     }
     DeclarationSection Session_information_read_in {
         Set s_Sessions {
             Index: i_session;
         }
-        StringParameter sp_AccountName {
+        StringParameter sp_SessStartTimes {
             IndexDomain: i_session;
         }
-        StringParameter sp_StartTimes {
+        StringParameter sp_SessAccountName {
             IndexDomain: i_session;
         }
-        StringParameter sp_SessionType {
+        StringParameter sp_SessSessionType {
             IndexDomain: i_session;
         }
-        StringParameter sp_Env {
+        StringParameter sp_SessEnv {
             IndexDomain: i_session;
         }
-        StringParameter sp_UserName {
+        StringParameter sp_SessUserName {
             IndexDomain: i_session;
         }
-        StringParameter sp_app {
+        StringParameter sp_SessApp {
             IndexDomain: i_session;
         }
-        StringParameter sp_AppVersion {
+        StringParameter sp_SessAppVersion {
             IndexDomain: i_session;
         }
-        Parameter p_Durations {
+        ElementParameter ep_SessAccountName {
+            IndexDomain: i_session;
+            Range: s_AccountNames;
+        }
+        ElementParameter ep_SessSessionType {
+            IndexDomain: i_session;
+            Range: s_SessionTypes;
+        }
+        ElementParameter ep_SessEnv {
+            IndexDomain: i_session;
+            Range: s_Environments;
+        }
+        ElementParameter ep_SessUserName {
+            IndexDomain: i_session;
+            Range: s_UserNames;
+        }
+        ElementParameter ep_SessApp {
+            IndexDomain: i_session;
+            Range: s_Applications;
+        }
+        ElementParameter ep_SessAppVersion {
+            IndexDomain: i_session;
+            Range: s_AppVersions;
+        }
+        Parameter p_SessDurations {
             IndexDomain: i_Session;
             Unit: milliseconds;
         }
-        Parameter p_peakMemory {
+        Parameter p_SessDurationsTick {
             IndexDomain: i_Session;
-            Unit: milliseconds;
+            Unit: tick;
+            Definition: p_SessDurations(i_session);
         }
-        DatabaseTable db_SessionTable {
-            DataSource: "data\\AIMMSPROUsageStatistics.dsn";
-            TableName: "SessionTable";
-            Mapping: {
-                "SessionID"        -->i_session,
-                "SessionStartTime" -->sp_StartTimes( i_session ),
-                "SessionDuration"  -->p_Durations(i_session)
-            }
+        Parameter p_SessPeakMemory {
+            IndexDomain: i_Session;
         }
     }
     DeclarationSection Events {
-        Set s_EventTypes {
-            Index: i_EventType;
-            Parameter: ep_EventType;
-            Definition: data { StartSession, FinishSession };
-        }
         Set s_Events {
             SubsetOf: Integers;
             Index: i_Event;
             Parameter: ep_Event;
+            Property: ElementsAreLabels;
         }
-        StringParameter sp_Moment {
+        StringParameter sp_EvMoment {
+            IndexDomain: i_Event;
+        }
+        ElementParameter ep_EvEventTypes {
+            IndexDomain: i_Event;
+            Range: s_EventTypes;
+        }
+        ElementParameter ep_EvAccountName {
+            IndexDomain: i_Event;
+            Range: s_AccountNames;
+        }
+        ElementParameter ep_EvSessionType {
+            IndexDomain: i_Event;
+            Range: s_SessionTypes;
+        }
+        ElementParameter ep_EvEnv {
+            IndexDomain: i_Event;
+            Range: s_Environments;
+        }
+        ElementParameter ep_EvUserName {
+            IndexDomain: i_Event;
+            Range: s_UserNames;
+        }
+        ElementParameter ep_EvApp {
+            IndexDomain: i_Event;
+            Range: s_Applications;
+        }
+        ElementParameter ep_EvAppVersion {
+            IndexDomain: i_Event;
+            Range: s_AppVersions;
+        }
+        Parameter p_EvPeakMemory {
             IndexDomain: i_Event;
         }
         Parameter p_NumberOfSessionsAfterEvent {
             IndexDomain: i_Event;
         }
-    }
-    DeclarationSection WorkEvents {
-        Set s_WorkEvents {
-            SubsetOf: Integers;
-            Index: i_WorkEvent;
-            Parameter: ep_WorkEvent;
-        }
-        Set s_OrderedWorkEvents {
-            SubsetOf: s_WorkEvents;
-            Index: i_OrderedWorkEvent;
-            OrderBy: sp_WorkMoments(i_WorkEvent);
-            Definition: s_WorkEvents;
-        }
-        StringParameter sp_WorkMoments {
-            IndexDomain: i_WorkEvent;
-        }
-        ElementParameter ep_WorkEventType {
-            IndexDomain: i_WorkEvent;
-            Range: s_EventTypes;
+        Parameter p_MemoryBySessionsAfterEvent {
+            IndexDomain: i_Event;
         }
     }
-    Section Generate_example {
-        Parameter p_NoSessions {
-            InitialData: 100;
-        }
-        StringParameter sp_StartTime {
-            InitialData: {
-                !"%c%y-%m-%d %H:%M:%S:%T"
-                "2019-01-01 00:00:00:00"
-            }
-        }
-        StringParameter sp_EndTime {
-            InitialData: "2019-12-31 23:59:59:99";
-        }
-        Parameter p_TotalTime {
-            Unit: tick;
-        }
-        Parameter p_ticksFromStart {
-            Unit: tick;
-        }
-        StringParameter sp_ThisSessionStart;
-        Parameter p_ThisSessionDuration {
-            Unit: tick;
-        }
-        ElementParameter ep_addThis {
-            Range: s_Sessions;
-        }
-        Procedure pr_GenerateArtificialSessionData {
-            Body: {
-                empty s_Sessions ;
-                p_TotalTime := StringToMoment( "%c%y-%m-%d %H:%M:%S:%T", [tick], sp_StartTime, sp_EndTime);
-                while loopCount <= p_NoSessions do
-                	p_ticksFromStart := Round(Uniform(1[tick],p_TotalTime));
-                	sp_ThisSessionStart := MomentToString( "%c%y-%m-%d %H:%M:%S:%T", [tick], sp_StartTime, p_ticksFromStart );
-                	p_ThisSessionDuration := Exponential(30[day],120[day]);
-                	SetElementAdd( s_Sessions, ep_addThis, formatString("Session%04i",loopcount));
-                	sp_StartTimes(ep_addThis) := sp_ThisSessionStart;
-                	p_Durations(ep_addThis) := p_ThisSessionDuration;
-                endwhile ;
-            }
-        }
-        Procedure pr_WriteData {
-            Body: {
-                empty db_SessionTable ;
-                write to table db_SessionTable;
-            }
-        }
-    }
-    Procedure pr_ReadData {
+    Procedure pr_TranslateStringsToElements {
         Body: {
-            read from table dbpr_ReadProSessionData();
+            Block ! Normalize session start time.
+                  ! Time fraction handling: AIMMS can only handle up to tick (1/100 of a second), database gives up to 6 decimals.
+                  ! We're removing everthing after the first two decimals.
+                  	for i_session do
+                  		p_dotPos := findNthString( sp_SessStartTimes( i_session ), ".", -1 );
+                  		if p_dotPos then
+                  			sp_SessStartTimes( i_session ) := 
+                  				substring( sp_SessStartTimes( i_session ), 1, p_dotPos-1) +
+                  				":"+
+                  				substring( sp_SessStartTimes( i_session ), p_dotPos+1, p_dotPos + 2);
+                  		endif ;
+                  	endfor ;
+            endblock ;
+            
+            sp_SessAccountName(i_session)|(not sp_SessAccountName(i_session)) := "ProOnPrem";
+            
+            ep_SessAccountName(i_session) := StringToElement(s_AccountNames, sp_SessAccountName( i_session ), create:1);
+            ep_SessSessionType(i_session) := StringToElement(s_SessionTypes, sp_SessSessionType( i_session ), create:1);
+            ep_SessEnv(        i_session) := StringToElement(s_Environments, sp_SessEnv(         i_session ), create:1);
+            ep_SessUserName(   i_session) := StringToElement(s_UserNames   , sp_SessUserName(    i_session ), create:1);
+            ep_SessApp(        i_session) := StringToElement(s_Applications, sp_SessApp(         i_session ), create:1);
+            ep_SessAppVersion( i_session) := StringToElement(s_AppVersions , sp_SessAppVersion(  i_session ), create:1);
+            
+            p01_SelectedAccounts(i_AccountName) := 1;
+            p01_SelectedSessionTypes(i_SessionType) := 1;
+            p01_SelectedEnvironments(i_Environment) := 1;
+            p01_SelectedUsernames(i_UserName) := 1;
+            p01_SelectedApplications(i_Application) := 1;
+            p01_SelectedAppversions(i_AppVersion) := 1;
         }
-    }
-    DatabaseProcedure dbpr_ReadProSessionData {
-        DataSource: sp_Datasource;
-        SqlQuery: {
-            "SELECT r.id, a.name as accountname, r.created_at, r.session_type, r.env, r.username, r.app, r.app_version,"
-            +    " SUM(m.duration) as duration,"
-            +    " MAX(m.peak_memory) as peak_memory"
-            +" FROM co_tool.account a, co_tool.session_run r, co_tool.session_run_metrics m"
-            +" where m.session_run_id=r.id and a.id = r.account_id and r.created_at >= '2010-03-01'"
-            !+" GROUP BY a.name, r.created_at, r.session_type, r.env, r.username, r.app, r.app_version ORDER BY r.created_at DESC"
-        }
-        Property: UseResultSet;
-        Mapping: {
-            "id"            --> i_session,
-            "accuntname"    --> sp_AccountName( i_session ),
-            "created_at"    --> sp_StartTimes( i_session ),
-            "session_type"  --> sp_SessionType(i_session ),
-            "env"           --> sp_Env(i_session ),
-            "username"      --> sp_UserName(i_session ),
-            "app"           --> sp_app(i_session ),
-            "app_version"   --> sp_AppVersion(i_session ),
-            "peak_memory"   --> p_peakMemory(i_session ),
-            "duration"      --> p_Durations(i_session)
-        }
+        Parameter p_dotPos;
     }
     Procedure pr_EventsFromSessions {
         Body: {
-            empty s_WorkEvents ;
-            for i_Session do
-            	s_WorkEvents += card(s_WorkEvents)+1 ;
-            	ep_WorkEvent := last( s_WorkEvents );
-            	sp_WorkMoments( ep_WorkEvent ) := sp_StartTimes(i_session);
-            	ep_WorkEventType( ep_WorkEvent ) := 'StartSession';
+            block ! Construct an unordered list of evens from sessions and session duration.
+            	empty s_WorkEvents ;
+            	for i_Session do
+            		block ! Create work event, start of this session
+            			s_WorkEvents += card(s_WorkEvents)+1 ;
+            			ep_WorkEvent := last( s_WorkEvents );
+            			sp_WrkEvMoments( ep_WorkEvent ) := sp_SessStartTimes(i_session);
+            			ep_WrkEvEventType( ep_WorkEvent ) := 'StartSession';
+            		endblock ;
+            		block ! Copy session data to work event.
+            			ep_WrkEvAccountName( ep_WorkEvent ) := ep_SessAccountName( i_session );
+            			ep_WrkEvSessionType( ep_WorkEvent ) := ep_SessSessionType( i_session );
+            			ep_WrkEvEnv(         ep_WorkEvent ) := ep_SessEnv(         i_session );
+            			ep_WrkEvUserName(    ep_WorkEvent ) := ep_SessUserName(    i_session );
+            			ep_WrkEvApp(         ep_WorkEvent ) := ep_SessApp(         i_session );
+            			ep_WrkEvAppVersion(  ep_WorkEvent ) := ep_SessAppVersion(  i_session );
+            			p_WrkEvPeakMemory(   ep_WorkEvent ) := p_SessPeakMemory(   i_session );
+            		endblock ;
             
-            	s_WorkEvents += card(s_WorkEvents)+1 ;
-            	ep_WorkEvent := last( s_WorkEvents );
-            	sp_WorkMoments( ep_WorkEvent ) := MomentToString("%c%y-%m-%d %H:%M:%S:%T",[tick],sp_StartTimes(i_session),p_Durations(i_Session));
-            	ep_WorkEventType( ep_WorkEvent ) := 'FinishSession';
-            endfor ;
+            		block ! Create work event, end of this session
+            			s_WorkEvents += card(s_WorkEvents)+1 ;
+            			ep_WorkEvent := last( s_WorkEvents );
+            			sp_WrkEvMoments( ep_WorkEvent ) := MomentToString("%c%y-%m-%d %H:%M:%S:%T",[tick],sp_SessStartTimes(i_session),p_SessDurations(i_Session));
+            			ep_WrkEvEventType( ep_WorkEvent ) := 'FinishSession';
+            		endblock ;
+            		block ! Copy session data to work event.
+            			ep_WrkEvAccountName( ep_WorkEvent ) := ep_SessAccountName( i_session );
+            			ep_WrkEvSessionType( ep_WorkEvent ) := ep_SessSessionType( i_session );
+            			ep_WrkEvEnv(         ep_WorkEvent ) := ep_SessEnv(         i_session );
+            			ep_WrkEvUserName(    ep_WorkEvent ) := ep_SessUserName(    i_session );
+            			ep_WrkEvApp(         ep_WorkEvent ) := ep_SessApp(         i_session );
+            			ep_WrkEvAppVersion(  ep_WorkEvent ) := ep_SessAppVersion(  i_session );
+            			p_WrkEvPeakMemory(   ep_WorkEvent ) := p_SessPeakMemory(   i_session );
+            		endblock ;
             
-            empty s_Events ;
-            p_NumberOfRunningSessions := 0 ;
-            for i_OrderedWorkEvent do ! Go thru the events in an ordered fashion.
-            	ep_WorkEvent := i_OrderedWorkEvent;
-            	s_Events += card(s_Events)+1 ;
-            	ep_Event := last( s_Events );
-            	sp_Moment(ep_Event ):= sp_WorkMoments( ep_WorkEvent );
-            	ep_EventType := ep_WorkEventType( ep_WorkEvent );
-            	if ep_EventType = 'StartSession' then
-            		p_NumberOfRunningSessions += 1 ;
-            	else
-            		p_NumberOfRunningSessions -= 1 ;
-            	endif ;
-            	p_NumberOfSessionsAfterEvent(ep_event):= p_NumberOfRunningSessions;
-            endfor ;
-            !data { StartSession, FinishSession }
+            	endfor ;
+            endblock ;
+            
+            s_OrderedWorkEvents := sort( i_WorkEvent, sp_WrkEvMoments(i_WorkEvent));
+            
+            block ! Transform the unordered list into an ordered list.
+            	empty s_Events ;
+            	for i_OrderedWorkEvent do ! Go thru the events in an ordered fashion.
+            		block ! Create a new event.
+            			ep_WorkEvent := i_OrderedWorkEvent;
+            			s_Events += card(s_Events)+1 ;
+            			ep_Event := last( s_Events );
+            			sp_EvMoment(ep_Event ):= sp_WrkEvMoments( ep_WorkEvent );
+            		endblock ;
+            		block ! copy data from "work event" to "event"
+            			ep_EvEventTypes( ep_Event ) := ep_WrkEvEventType( ep_WorkEvent );
+            			ep_EvAccountName( ep_Event ) := ep_WrkEvAccountName( ep_WorkEvent );
+            			ep_EvSessionType( ep_Event ) := ep_WrkEvSessionType( ep_WorkEvent );
+            			ep_EvEnv( ep_Event ) := ep_WrkEvEnv( ep_WorkEvent );
+            			ep_EvUserName( ep_Event ) := ep_WrkEvUserName( ep_WorkEvent );
+            			ep_EvApp( ep_Event ) := ep_WrkEvApp( ep_WorkEvent );
+            			ep_EvAppVersion( ep_Event ) := ep_WrkEvAppVersion( ep_WorkEvent );
+            			p_EvPeakMemory( ep_Event ) := p_WrkEvPeakMemory( ep_WorkEvent );
+            		endblock ;
+            
+            	endfor ;
+            endblock ;
+        }
+        DeclarationSection WorkEvents {
+            Set s_WorkEvents {
+                SubsetOf: Integers;
+                Index: i_WorkEvent;
+                Parameter: ep_WorkEvent;
+            }
+            Set s_OrderedWorkEvents {
+                SubsetOf: s_WorkEvents;
+                Index: i_OrderedWorkEvent;
+                OrderBy: user;
+            }
+            StringParameter sp_WrkEvMoments {
+                IndexDomain: i_WorkEvent;
+            }
+            ElementParameter ep_WrkEvEventType {
+                IndexDomain: i_WorkEvent;
+                Range: s_EventTypes;
+            }
+            ElementParameter ep_WrkEvAccountName {
+                IndexDomain: i_WorkEvent;
+                Range: s_AccountNames;
+            }
+            ElementParameter ep_WrkEvSessionType {
+                IndexDomain: i_WorkEvent;
+                Range: s_SessionTypes;
+            }
+            ElementParameter ep_WrkEvEnv {
+                IndexDomain: i_WorkEvent;
+                Range: s_Environments;
+            }
+            ElementParameter ep_WrkEvUserName {
+                IndexDomain: i_WorkEvent;
+                Range: s_UserNames;
+            }
+            ElementParameter ep_WrkEvApp {
+                IndexDomain: i_WorkEvent;
+                Range: s_Applications;
+            }
+            ElementParameter ep_WrkEvAppVersion {
+                IndexDomain: i_WorkEvent;
+                Range: s_AppVersions;
+            }
+            Parameter p_WrkEvPeakMemory {
+                IndexDomain: i_WorkEvent;
+            }
+        }
+    }
+    Procedure pr_NoSessionsMemInUse {
+        Body: {
+            block ! Compute p_NumberOfSessionsAfterEvent, p_MemoryBySessionsAfterEvent
+            !	p_NumberOfRunningSessions := 0 ;
+            !	p_MemInUseBySession := 0;
+            !	for i_ShownEvent do
+            !		ep_EventType := ep_EvEventTypes( i_ShownEvent );
+            !		if ep_EventType = 'StartSession' then
+            !			p_NumberOfRunningSessions += 1 ;
+            !			p_MemInUseBySession += p_EvPeakMemory( i_ShownEvent );
+            !		else
+            !			p_NumberOfRunningSessions -= 1 ;
+            !			p_MemInUseBySession -= p_EvPeakMemory( i_ShownEvent );
+            !		endif ;
+            !		p_NumberOfSessionsAfterEvent(i_ShownEvent) := p_NumberOfRunningSessions;
+            !		p_MemoryBySessionsAfterEvent(i_ShownEvent) := p_MemInUseBySession;
+            !	endfor ;
+            	empty p_NumberOfSessionsAfterEvent, p_MemoryBySessionsAfterEvent;
+            	update s_ShownEvents;
+            	p_NumberOfSessionsAfterEvent(i_ShownEvent) := p_NumberOfSessionsAfterEvent(i_ShownEvent-1)+
+            		if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+            			1
+            		else
+            			-1
+            		endif ;
+            	p_MemoryBySessionsAfterEvent(i_ShownEvent) := p_MemoryBySessionsAfterEvent(i_ShownEvent-1)+
+            		if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+            			p_EvPeakMemory( i_ShownEvent )
+            		else
+            			-p_EvPeakMemory( i_ShownEvent )
+            		endif ;
+            endblock ;
         }
         Parameter p_NumberOfRunningSessions;
+        Parameter p_MemInUseBySession;
+    }
+    Procedure pr_Open_Full_Event_Information {
+        Body: {
+            pr_ReadData();
+            pr_TranslateStringsToElements();
+            pr_EventsFromSessions();
+            pr_NoSessionsMemInUse();
+        }
+    }
+    Section WebUI_Full_Event_Information_Support {
+        Procedure uponchange_p01_SelectedAccounts {
+            Body: {
+                pr_NoSessionsMemInUse();
+            }
+        }
+        Procedure uponchange_p01_SelectedSessionTypes {
+            Body: {
+                pr_NoSessionsMemInUse();
+            }
+        }
+        Procedure uponchange_p01_SelectedEnvironments {
+            Body: {
+                pr_NoSessionsMemInUse();
+            }
+        }
+        Procedure uponchange_p01_SelectedUsernames {
+            Body: {
+                pr_NoSessionsMemInUse();
+            }
+        }
+        Procedure uponchange_p01_SelectedApplications {
+            Body: {
+                pr_NoSessionsMemInUse();
+            }
+        }
+        Procedure uponchange_p01_SelectedAppversions {
+            Body: {
+                pr_NoSessionsMemInUse();
+            }
+        }
+        Set s_ShownEvents {
+            SubsetOf: s_Events;
+            Index: i_ShownEvent;
+            Property: ElementsAreLabels;
+            Definition: {
+                { i_event |
+                	( ep_EvSessionType(i_Event) in s_ShownSessionTypes ) and
+                	( ep_EvApp(i_Event) in s_ShownApplications ) and
+                	( ep_EvAppVersion(i_Event) in s_ShownAppVersions ) and
+                
+                	( ep_EvAccountName(i_Event) in s_ShownAccounts ) and
+                	( ep_EvEnv(i_Event) in s_ShownEnvironments ) and
+                	( ep_EvUserName(i_Event) in s_ShownUserNames ) }
+            }
+        }
+        Set s_ShownAccounts {
+            SubsetOf: s_AccountNames;
+            Index: i_ShownAccount;
+            Definition: {
+                { i_AccountName | p01_SelectedAccounts(i_AccountName) }
+            }
+        }
+        Set s_ShownSessionTypes {
+            SubsetOf: s_SessionTypes;
+            Index: i_ShownSessionType;
+            Definition: {
+                { i_SessionType | p01_SelectedSessionTypes(i_SessionType) }
+            }
+        }
+        Set s_ShownEnvironments {
+            SubsetOf: s_Environments;
+            Index: i_ShownEnvironment;
+            Definition: {
+                { i_Environment | p01_SelectedEnvironments(i_Environment)}
+            }
+        }
+        Set s_ShownUserNames {
+            SubsetOf: s_UserNames;
+            Parameter: i_shownUserName;
+            Definition: {
+                { i_UserName | p01_SelectedUsernames(i_UserName) }
+            }
+        }
+        Set s_ShownApplications {
+            SubsetOf: s_Applications;
+            Index: i_ShownApp;
+            Definition: {
+                {i_Application | p01_SelectedApplications(i_Application)}
+            }
+        }
+        Set s_ShownAppVersions {
+            SubsetOf: s_AppVersions;
+            Index: i_ShownAppVersion;
+            Definition: {
+                { i_AppVersion | p01_SelectedAppversions(i_AppVersion) }
+            }
+        }
+        Parameter p01_SelectedAccounts {
+            IndexDomain: i_AccountName;
+            Range: binary;
+        }
+        Parameter p01_SelectedSessionTypes {
+            IndexDomain: i_SessionType;
+            Range: binary;
+        }
+        Parameter p01_SelectedEnvironments {
+            IndexDomain: i_Environment;
+            Range: binary;
+        }
+        Parameter p01_SelectedUsernames {
+            IndexDomain: i_UserName;
+            Range: binary;
+        }
+        Parameter p01_SelectedApplications {
+            IndexDomain: i_Application;
+            Range: binary;
+        }
+        Parameter p01_SelectedAppversions {
+            IndexDomain: i_AppVersion;
+            Range: binary;
+        }
+        Set s_SidePanelOrder {
+            SubsetOf: Integers;
+            Index: i_spo;
+            Definition: ElementRange(1,2);
+        }
+        StringParameter sp_SidePanelsFullEventPage {
+            IndexDomain: (i_spo,webui::indexSidePanelSpec);
+            Definition: {
+                data 
+                { ( 1, displayText ) : "App Filter"           ,  
+                  ( 1, pageId      ) : "appfilter_1"          ,
+                  ( 1, tooltip     ) : "ses-type app version" ,  
+                  ( 1, state       ) : "Active"               ,
+                
+                  ( 2, displayText ) : "User Filter"          ,
+                  ( 2, pageId      ) : "usefilter_1"          ,
+                  ( 2, tooltip     ) : "account environment user",  
+                  ( 2, state       ) : "Active"               
+                }
+            }
+        }
     }
     Section Attic {
         Procedure MainInitialization {
+            Body: {
+                profilerStart();
+            }
             Comment: "Add initialization statements here that do NOT require any library being initialized already.";
         }
         Procedure PostMainInitialization {
