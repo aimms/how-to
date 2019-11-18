@@ -1,0 +1,56 @@
+## ams_version=1.0
+
+Model Main_EmailLibraryDemo {
+    StringParameter messageId;
+    StringParameter ErrorMessage;
+    Set PlaceHolders {
+        Index: V;
+        Definition: data { CUSTOMERNAME, CUSTOMERNUMBER, REPORTNUMBER};
+    }
+    StringParameter PlaceHolderValuesSingle {
+        IndexDomain: v;
+    }
+    Procedure SendMail {
+        Body: {
+            if not ProjectDeveloperMode then
+            	if pro::DelegateToServer(completionCallback: 'pro::session::loadResultsCallback') then
+            		return 1;
+            	endif;
+            endif;
+            
+            ! Set the STMP server to send the email message -- FILL the HostName and Port and any needed authentication details
+            email::SetServer(
+            	_HostName         :  "smtp.TEST.com", 
+            	_Port             :  25, 
+            	_ConnectionType   :  0, 
+            	_AuthType         :  0, 
+            	_UserName         :  0, 
+            	_Password         :  0, 
+            	_OAuth2Token      :  0, 
+            	_CheckCertificate :  0);
+            
+            ! Create the message and set the sender -- FILL the Address
+            email::NewMail("Test Email", "Test Sender", "Sender@TEST.com", messageId);
+            
+            ! Add recipients -- FILL the Address
+            email::AddRecipientTo(messageId, "Test Recipient", "Recipient@TEST.com");
+            
+            ! Define values for placeholders to replace in the template
+            PlaceHolderValuesSingle := data { CUSTOMERNAME: "Valued Customer", CUSTOMERNUMBER: "#1", REPORTNUMBER: "#20181025" };
+            
+            ! Set the templates
+            email::SetMessageFromFile(messageId , "EmailTemplate.txt" , "EmailTemplate.htm" , PlaceHolderValuesSingle);
+            
+            ! Add related attachments for the template image
+            email::AddRelatedAttachment(messageId, "EmailTemplate_files/image001.jpg", "image001.jpg");
+            
+            email::AddFileAttachment(messageId, "DownloadAttachment.txt");
+            
+            ! Here the message is actually sent
+            email::SendMail(messageId, ErrorMessage);
+            
+            ! Close the message for this messageId
+            email::CloseMail(messageId);
+        }
+    }
+}

@@ -1,0 +1,18 @@
+﻿* AIMMS
+* AOA
+* BARON 15
+* CBC 2.9
+* CONOPT 4.0
+* CPLEX 12.8
+* CPOptimizer 12.7
+* GUROBI 8.0
+* IPOPT 3.11
+* Knitro 11.0
+* MINOS
+* PATH 4.7
+* SNOPT 7.2
+* XA 16
+* ODH-CPLEX 3.2
+* NETSOL
+* Environment
+Default_UI 0
