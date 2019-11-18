@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<References AIMMS_Version="4.59.2.1 (x64)">
+	<MainProject Path="MainProject" />
+	<Library System="true" Path="AimmsPro" />
+	<Library System="true" Path="AimmsWebUI" />
+	<RepositoryLibrary UUID="4281C38A-D924-4A7D-AA76-A88BC9932BB9" Name="EmailClient" Version="0.9.0.15" />
+</References>

@@ -1,0 +1,11 @@
+Hot Dogs R Us 
+Customer: CUSTOMERNAME
+Customer Number: CUSTOMERNUMBER
+Report Number: REPORTNUMBER
+
+Dear CUSTOMERNAME, 
+Thank you for choosing Hot Dogs R Us as your supplier. Your weekly Transport Scheduling report is attached.
+
+Best regards,
+Hot Dogs R Us 
+
