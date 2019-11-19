@@ -1,3 +1,5 @@
+:orphan:
+
 AIMMS PRO Usage statistics
 ==========================
 

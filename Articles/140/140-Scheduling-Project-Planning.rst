@@ -5,9 +5,6 @@
    :description: A construction scheduling example showing how to plan projects with AIMMS.
    :keywords: scheduling, project, activities, resources
 
-.. note::
-
-	This article was originally posted to the AIMMS Tech Blog.
 
 
 The identifier types ACTIVITIES and RESOURCES, and the scheduling intrinsic functions as part of the AIMMS constraint programming component are very useful in modeling construction projects and optimizing the makespan of those projects.
@@ -77,6 +74,8 @@ Having multiple machines of a certain type, we can generalize this to:
     }
 
 The entire example can be downloaded from: :download:`AIMMS project download <downloads/BuildBridge.zip>`
+
+.. note:: If you are using AIMMS 4.70 or later with this example, you will need to replace ``.boolean-value-editor input`` with  ``.boolean-cell-editor-contents`` in the CSS file ``.\BuildBridge\MainProject\WebUI\resources\css\scalar-binary-switch.css``.
 
 Reference
 ----------
