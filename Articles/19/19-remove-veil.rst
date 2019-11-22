@@ -1,6 +1,6 @@
-Keep WebUI Active During Solve
+﻿Keep WebUI Active During Solve
 ===============================
-
+xx
 .. meta::
    :description: How to keep the AIMMS WebUI interactive while a solve process is running in the background.
    :keywords: solve, webui, ui, veil
