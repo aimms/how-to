@@ -91,6 +91,20 @@ Note that a user can be a member of multiple AIMMS PRO user groups; that is why 
 
 In this blog post we have considered restricting information to an AIMMS app user based on the roles assigned to that app user via the AIMMS PRO user groups. In the upcoming blog post in this series, we are going to discuss the building blocks for exchanging files between AIMMS PRO storage on the one hand and the storage system directly available to the app user.
 
+Sample app
+----------
+
+A simple Who am I app: :download:`AIMMS project download <model/WhoAmI.zip>` 
+
+After starting, the opening screen looks like this:
+
+.. image:: images/WhoAmI.png
+    :align: center
+
+
+You can take a screenshot when asked for credentials on AIMMS PRO and then close it. 
+
+
 Reference:
 -----------
 

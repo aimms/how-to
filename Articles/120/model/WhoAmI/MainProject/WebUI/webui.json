@@ -1,0 +1,85 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "ScalarIdentityInfo",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "GroupIdentityInfo",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/ScalarIdentityInfo": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_Env",
+          "sp_Usr",
+          "sp_Bucket"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Identity in AIMMS PRO"
+    }
+  },
+  "widgets/GroupIdentityInfo": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_UsrGroupNames"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_ug"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_UsrGroupNames"
+          },
+          "width": 30.8519003931848
+        }
+      ]
+    },
+    "title": {
+      "literal": "AIMMS PRO Groups I'm in"
+    }
+  }
+}

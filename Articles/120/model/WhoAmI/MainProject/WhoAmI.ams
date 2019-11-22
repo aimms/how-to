@@ -1,0 +1,64 @@
+## ams_version=1.0
+
+Model Main_WhoAmI {
+    DeclarationSection User_and_Group_Declarations {
+        StringParameter sp_Env;
+        StringParameter sp_Usr;
+        StringParameter sp_Bucket;
+        Set s_UsrGroups {
+            Index: i_ug;
+        }
+        StringParameter sp_UsrGroupNames {
+            IndexDomain: i_ug;
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Body: {
+            if pro::GetPROEndPoint() then
+            	pro::Initialize();
+            	pro::GetCurrentUserInfo(
+            		environment   :  sp_env, 
+            		username      :  sp_usr, 
+            		userBucket    :  sp_Bucket, 
+            		userGroups    :  s_UsrGroups, 
+            		userGroupname :  sp_UsrGroupNames);
+            else
+            	Empty User_and_Group_Declarations;
+            	sp_env := "ROOT" ;
+            	sp_usr := "MeMyselfAndI" ;
+            	sp_Bucket := "Userdata" + "/" + sp_env + "/" + sp_usr ;
+            	s_UsrGroups := data { 1 } ;
+            	sp_UsrGroupNames := data { 1 : "Admin" } ;
+            endif ;
+        }
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}
