@@ -2,6 +2,16 @@
 
 Model Planning_the_building_of_a_bridge {
     Section WebUI_support {
+        StringParameter sp_PrimaryPageActionSpecification {
+            IndexDomain: webui::indexPageActionSpec;
+            Definition: {
+                data { 
+                	displaytext : "Solve",  
+                	icon        : "aimms-spinner3",  
+                	procedure   : "MainExecution",  
+                	state       : "active" }
+            }
+        }
         StringParameter sp_BuildBridgeImageName {
             Definition: "Bridge Building.jpg";
             Comment: "MainProject\\WebUI\\resources\\images\\build bridge.JPG";
@@ -404,7 +414,7 @@ Model Planning_the_building_of_a_bridge {
     }
     Procedure MainTermination {
         Body: {
-            return 1 ; ! No questions asked.
+            return 1; ! No questions asked.
         }
     }
 }

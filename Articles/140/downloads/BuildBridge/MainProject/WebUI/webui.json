@@ -1,0 +1,410 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "Home",
+                "slug": "home_1",
+                "children": []
+              },
+              {
+                "name": "Gantt Chart",
+                "slug": "home",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home_1": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Home_Text_ProjectDescription",
+          "layoutInfo": {
+            "width": "10",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Home_Image_Build_Bridge",
+          "layoutInfo": {
+            "width": "10",
+            "height": "4",
+            "customPosition": ""
+          }
+        }
+      ]
+    },
+    "maxcolumns": {
+      "literal": 10
+    }
+  },
+  "widgets/Home_Text_ProjectDescription": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div><span style=\"font-size: 18px;\">This example is based on a classic scheduling problem: bridge building.&nbsp;&nbsp;</span></div><div><br></div><div><span style=\"font-size: 18px;\">The formulation here is based on the one given in</span></div><div><span style=\"font-size: 18px;\">http://www.mozart-oz.org/documentation/fdt/node48.html#section.scheduling.bridge</span></div><div><br></div><div><span style=\"font-size: 18px;\">For each pillar/abutment several tasks need to be executed sequentially; excavation, pile driving (if needed), formwork, concrete filling and setting, masonry work, bearer placing and/or sand filling. For most of these tasks a resource is needed which can only execute one activity at a time. A bearer is to placed on both pillars once they are erected.</span></div><ul><li><span style=\"font-size: 18px;\">First additional constraint: temporary housing is needed, which takes 10 days to erect/break down, and the resources should not be exposed to weather for more than 6 days.</span></li><li><span style=\"font-size: 18px;\">Second additional constraint: bearers are delivered after 30 days.</span></li><li><span style=\"font-size: 18px;\">Third additional constraint: the formwork is not very strong and should therefore be filled with concrete within four days after construction.</span></li></ul><div><br></div><div><br></div>"
+    }
+  },
+  "widgets/Home_Image_Build_Bridge": {
+    "aimms.widget.type": {
+      "literal": "image"
+    },
+    "widget.visible": {
+      "literal": 1
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_BuildBridgeImageName"
+        ]
+      }
+    }
+  },
+  "pages/home": {
+    "action.optimize.visible": {
+      "literal": false
+    },
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "maxcolumns": {
+      "literal": 12
+    },
+    "primarypageaction": {
+      "aimms": {
+        "contents": [
+          "sp_PrimaryPageActionSpecification"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_PrimaryPageActionSpecification",
+            "slice": [
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "gc1",
+          "layoutInfo": {
+            "width": "10",
+            "height": "3",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "GanttChart_Legend_EBPS",
+          "layoutInfo": {
+            "width": "2",
+            "height": "4",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "GanttChart_Button_Solve",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "GanttChart_Scalar_Switch",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "GanttChart_table_Machines",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "GanttChart_Table_PillarRequirements",
+          "layoutInfo": {
+            "width": "6",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/gc1": {
+    "time.reference": {
+      "aimms": {
+        "contents": [
+          "sp_CalBeginDate"
+        ]
+      }
+    },
+    "time.resolution": {
+      "literal": 24
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_WebUI_PillarBegin",
+          "p_WebUI_PillarDuration"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "time.viewport.end": {
+      "aimms": {
+        "contents": [
+          "sp_ViewportEnd"
+        ]
+      }
+    },
+    "time.viewport.start": {
+      "aimms": {
+        "contents": [
+          "sp_ViewportBegin"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "resources": [
+          "ep"
+        ],
+        "jobs": [
+          "<IDENTIFIER-SET>",
+          "epbs"
+        ],
+        "aggregated": []
+      }
+    },
+    "time.customaxis": {
+      "aimms": {
+        "contents": [
+          "p01_CustomAxis"
+        ]
+      }
+    },
+    "time.timeline": {
+      "aimms": {
+        "contents": [
+          "p01_Timeline"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Bridge building"
+    }
+  },
+  "widgets/GanttChart_Legend_EBPS": {
+    "title": {
+      "literal": "Legend Job Activites"
+    },
+    "aimms.widget.type": {
+      "literal": "legend"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p01_Legend_epbs"
+        ]
+      }
+    }
+  },
+  "widgets/GanttChart_Button_Solve": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "MainExecution"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "title": {
+      "literal": "Solve"
+    },
+    "widget.visible": {
+      "literal": 0
+    }
+  },
+  "widgets/GanttChart_Scalar_Switch": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_NumberOfPillars",
+          "v_MakeSpan",
+          "p01_CustomAxis",
+          "p01_Timeline",
+          "sp_ViewportBegin",
+          "sp_ViewportEnd"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "title": {
+      "literal": "GC Visualization controls"
+    }
+  },
+  "widgets/GanttChart_table_Machines": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_NoAvailableMachines"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents.partition": {
+      "literal": {
+        "keys": [
+          "i_m"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "title": {
+      "literal": "Available machines"
+    }
+  },
+  "widgets/GanttChart_Table_PillarRequirements": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "epbs",
+          "width": 33.930501930501926
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "ep": "individual"
+          },
+          "width": 15.306122448979592
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "ep": "right abutment"
+          },
+          "width": 17.896158463385355
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "ep": "Pillar-5"
+          },
+          "width": 11.224489795918366
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "ep": "Pillar-6"
+          },
+          "width": 13.877551020408164
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "ep": "left abutment"
+          },
+          "width": 17.94886363636364
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "ep": "Pillar-7"
+          },
+          "width": 11.63265306122449
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "ep": "Pillar-8"
+          },
+          "width": 13.061224489795917
+        }
+      ]
+    },
+    "show.units": {
+      "literal": 0
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_PillarDuration"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "epbs"
+        ],
+        "colHeader": [
+          "ep"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_pillarduration": "1"
+      }
+    }
+  }
+}

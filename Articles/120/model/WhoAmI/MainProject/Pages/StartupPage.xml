@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2019-11-22 07:41:22">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>6A3A0E1D-07CB-450D-A88F-CB5165E955F3</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Scalar">
+		<Location top="54" left="48" bottom="150" right="372" />
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>sp_Env</Identifier>
+			<NumberFormat Width="40" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_Usr</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_Bucket</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Table">
+		<Location top="54" left="396" bottom="150" right="774" />
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>sp_UsrGroupNames( i_ug )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="15" Decimals="0" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="24" left="48" bottom="48" right="372" />
+		<StaticText>AIMMS PRO Identity</StaticText>
+		<Font GUID="2A210F3A-8F95-4798-A888-9936B8D34599" Name="Arial12b" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="24" left="396" bottom="48" right="774" />
+		<StaticText>The AIMMS PRO groups I'm in</StaticText>
+		<Font GUID="2A210F3A-8F95-4798-A888-9936B8D34599" Name="Arial12b" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>sp_Env</Symbol>
+			<Symbol>sp_Usr</Symbol>
+			<Symbol>sp_Bucket</Symbol>
+			<Symbol>sp_UsrGroupNames</Symbol>
+			<Symbol>i_ug</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

@@ -1,4 +1,4 @@
-Keep WebUI Active During Solve
+﻿Keep WebUI Active During Solve
 ===============================
 
 .. meta::
