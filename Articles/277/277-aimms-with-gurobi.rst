@@ -61,5 +61,5 @@ You will need to set Gurobi as the solver to use before creating the AIMMSPACK f
 Related Topics
 ---------------
 
-* :doc:`/Articles/178/178-change-default-solver.html`
+* :doc:`/Articles/178/178-change-default-solver`
 * :doc:`/Articles/208/208-setting-options`
