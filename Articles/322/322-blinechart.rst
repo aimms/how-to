@@ -29,6 +29,8 @@ Any additional contents will not be displayed in the chart.
 
 The linechart will always overlay the barchart.
 
+.. note:: Changes to the data are reflected inmediately on the blinechart, but you cannot change values in the blinechart itself.
+
 Pivoting
 ^^^^^^^^
 ^
