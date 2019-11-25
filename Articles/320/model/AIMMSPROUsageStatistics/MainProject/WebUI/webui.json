@@ -49,6 +49,12 @@
                     "children": []
                   }
                 ]
+              },
+              {
+                "name": "Timebased Event Information",
+                "type": "page",
+                "slug": "timebased_event_information",
+                "children": []
               }
             ]
           }
@@ -121,6 +127,14 @@
     "widgets": {
       "literal": [
         {
+          "uri": "TimebarGanttChart",
+          "layoutInfo": {
+            "width": "12",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
           "uri": "FullEventInformation",
           "layoutInfo": {
             "width": "12",
@@ -141,6 +155,14 @@
           "layoutInfo": {
             "width": "12",
             "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "bl",
+          "layoutInfo": {
+            "width": "12",
+            "height": "3",
             "customPosition": ""
           }
         }
@@ -442,7 +464,7 @@
           "colKey": {
             "<IDENTIFIER-SET>": "ep_EvEnv"
           },
-          "width": 18.163265306122449
+          "width": 18.163265306122447
         },
         {
           "type": "colHeader",
@@ -477,7 +499,7 @@
           "colKey": {
             "<IDENTIFIER-SET>": "ep_EvSessionType"
           },
-          "width": 27.421507064364208
+          "width": 27.421507064364206
         },
         {
           "type": "rowHeader",
@@ -496,13 +518,6 @@
     },
     "contents": {
       "aimms": {
-        "contents": [
-          "p_MemoryBySessionsAfterEvent"
-        ],
-        "prefix": "aimms",
-        "displaydomain": {
-          "p_memorybysessionsafterevent": "1"
-        },
         "slices": [
           {
             "identifier": "p_MemoryBySessionsAfterEvent",
@@ -513,8 +528,26 @@
                 "value": "i_ShownEvent"
               }
             ]
+          },
+          {
+            "identifier": "p_AverageMemoryInUse",
+            "slice": [
+              {
+                "index": "i_Event",
+                "type": "subset",
+                "value": "i_ShownEvent"
+              }
+            ]
           }
-        ]
+        ],
+        "contents": [
+          "p_MemoryBySessionsAfterEvent",
+          "p_AverageMemoryInUse"
+        ],
+        "prefix": "aimms",
+        "displaydomain": {
+          "p_memorybysessionsafterevent": "1"
+        }
       }
     },
     "contents.displaydomain": {
@@ -689,7 +722,7 @@
           "colKey": {
             "<IDENTIFIER-SET>": "p_Durations"
           },
-          "width": 28.153197720473658
+          "width": 28.153197720473656
         },
         {
           "type": "colHeader",
@@ -770,14 +803,14 @@
           "colKey": {
             "<IDENTIFIER-SET>": "sp_Env"
           },
-          "width": 14.773515909090908
+          "width": 14.773515909090907
         },
         {
           "type": "colHeader",
           "colKey": {
             "<IDENTIFIER-SET>": "sp_app"
           },
-          "width": 21.757167619739538
+          "width": 21.757167619739537
         },
         {
           "type": "colHeader",
@@ -798,7 +831,7 @@
           "colKey": {
             "<IDENTIFIER-SET>": "sp_UserName"
           },
-          "width": 29.349655883249676
+          "width": 29.349655883249675
         },
         {
           "type": "rowHeader",
@@ -824,7 +857,7 @@
           "colKey": {
             "<IDENTIFIER-SET>": "sp_SessSessionType"
           },
-          "width": 30.677083333333333
+          "width": 30.677083333333332
         },
         {
           "type": "colHeader",
@@ -845,14 +878,14 @@
           "colKey": {
             "<IDENTIFIER-SET>": "sp_SessApp"
           },
-          "width": 17.142857142857144
+          "width": 17.142857142857142
         },
         {
           "type": "colHeader",
           "colKey": {
             "<IDENTIFIER-SET>": "p_SessDurations"
           },
-          "width": 21.020408163265306
+          "width": 21.020408163265305
         },
         {
           "type": "colHeader",
@@ -888,6 +921,171 @@
           "p_NumberOfSessionsAfterEvent"
         ]
       }
+    }
+  },
+  "widgets/TimebarGanttChart": {
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_TimebarTimeStart",
+          "p_TimebarDuration"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "resources": [
+          "i_tb_res"
+        ],
+        "jobs": [
+          "<IDENTIFIER-SET>",
+          "i_tb_job"
+        ],
+        "aggregated": []
+      }
+    },
+    "time.reference": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportStart"
+        ]
+      }
+    },
+    "time.resolution": {
+      "aimms": {
+        "contents": [
+          "p_TimebarTimeunit"
+        ]
+      }
+    },
+    "time.viewport.end": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportEnd"
+        ]
+      }
+    },
+    "time.viewport.start": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportStart"
+        ]
+      }
+    },
+    "widget.visible": {
+      "literal": 0
+    }
+  },
+  "pages/timebased_event_information": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "GanttChartTimeBar",
+          "layoutInfo": {
+            "width": "12",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "SessionsInUseStackedBySessionType",
+          "layoutInfo": {
+            "width": "12",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "MemoryInUseStackedBySessionType",
+          "layoutInfo": {
+            "width": "12",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/GanttChartTimeBar": {
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_TimebarTimeStart",
+          "p_TimebarDuration"
+        ]
+      }
+    },
+    "time.reference": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportStart"
+        ]
+      }
+    },
+    "time.resolution": {
+      "aimms": {
+        "contents": [
+          "p_TimebarTimeunit"
+        ]
+      }
+    },
+    "time.viewport.end": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportEnd"
+        ]
+      }
+    },
+    "time.viewport.start": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportStart"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Timebar"
+    }
+  },
+  "widgets/SessionsInUseStackedBySessionType": {
+    "aimms.widget.type": {
+      "literal": "barchart"
+    }
+  },
+  "widgets/MemoryInUseStackedBySessionType": {
+    "aimms.widget.type": {
+      "literal": "barchart"
+    }
+  },
+  "widgets/bl": {
+    "aimms.widget.type": {
+      "literal": "blinechart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_MemoryBySessionsAfterEvent",
+          "p_AverageMemoryInUse"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_Event"
+        ],
+        "layers": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "title": {
+      "literal": "Blinechart"
     }
   }
 }

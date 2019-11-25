@@ -249,8 +249,8 @@ Model Main_AIMMSPROUsageStatistics {
     DeclarationSection Events {
         Set s_Events {
             SubsetOf: Integers;
-            Index: i_Event;
-            Parameter: ep_Event;
+            Index: i_Event, i_Event2;
+            Parameter: ep_Event, ep_prevEvent, ep_nextEvent;
             Property: ElementsAreLabels;
         }
         StringParameter sp_EvMoment {
@@ -292,6 +292,20 @@ Model Main_AIMMSPROUsageStatistics {
         }
         Parameter p_MemoryBySessionsAfterEvent {
             IndexDomain: i_Event;
+        }
+        Parameter p_AverageNumberOfSessions {
+            IndexDomain: i_Event;
+            Definition: average(i_event2, p_NumberOfSessionsAfterEvent(i_Event2));
+        }
+        Parameter p_AverageMemoryInUse {
+            IndexDomain: i_Event;
+            Definition: average(i_event2, p_MemoryBySessionsAfterEvent(i_Event2));
+        }
+        Parameter p_NumberOfSessionsAfterEventBySessionType {
+            IndexDomain: (i_Event,i_SessionType);
+        }
+        Parameter p_MemoryBySessionsAfterEventBySessionType {
+            IndexDomain: (i_Event,i_SessionType);
         }
     }
     Procedure pr_TranslateStringsToElements {
@@ -392,6 +406,26 @@ Model Main_AIMMSPROUsageStatistics {
             
             	endfor ;
             endblock ;
+            
+            sp_FirstEvent := sp_EvMoment( first( s_Events ) );
+            sp_LastEvent  := sp_EvMoment( last(  s_Events ) );
+            p_DurationBetweenFirstLastEvent := StringToMoment(
+            	Format        :  "%c%y-%m-%d %H:%M:%S:%T", 
+            	Unit          :  [tick], 
+            	ReferenceDate :  sp_FirstEvent, 
+            	Timeslot      :  sp_LastEvent);
+            sp_ViewportStart := MomentToString(
+            	Format        :  "%c%y-%m-%d %H:%M:%S:%T", 
+            	unit          :  [tick], 
+            	ReferenceDate :  sp_FirstEvent, 
+            	Elapsed       :  -0.05 * p_DurationBetweenFirstLastEvent);
+            sp_ViewportEnd := MomentToString(
+            	Format        :  "%c%y-%m-%d %H:%M:%S:%T", 
+            	unit          :  [tick], 
+            	ReferenceDate :  sp_LastEvent, 
+            	Elapsed       :  0.05 * p_DurationBetweenFirstLastEvent);
+            
+            pr_InitializeTimebarGanttChart( sp_ViewportStart, sp_FirstEvent, sp_LastEvent, sp_ViewportEnd );
         }
         DeclarationSection WorkEvents {
             Set s_WorkEvents {
@@ -438,27 +472,23 @@ Model Main_AIMMSPROUsageStatistics {
             Parameter p_WrkEvPeakMemory {
                 IndexDomain: i_WorkEvent;
             }
+            StringParameter sp_FirstEvent;
+            StringParameter sp_LastEvent;
+            Parameter p_DurationBetweenFirstLastEvent {
+                Unit: tick;
+            }
+            StringParameter sp_ViewportStart;
+            StringParameter sp_ViewportEnd;
         }
     }
     Procedure pr_NoSessionsMemInUse {
         Body: {
             block ! Compute p_NumberOfSessionsAfterEvent, p_MemoryBySessionsAfterEvent
-            !	p_NumberOfRunningSessions := 0 ;
-            !	p_MemInUseBySession := 0;
-            !	for i_ShownEvent do
-            !		ep_EventType := ep_EvEventTypes( i_ShownEvent );
-            !		if ep_EventType = 'StartSession' then
-            !			p_NumberOfRunningSessions += 1 ;
-            !			p_MemInUseBySession += p_EvPeakMemory( i_ShownEvent );
-            !		else
-            !			p_NumberOfRunningSessions -= 1 ;
-            !			p_MemInUseBySession -= p_EvPeakMemory( i_ShownEvent );
-            !		endif ;
-            !		p_NumberOfSessionsAfterEvent(i_ShownEvent) := p_NumberOfRunningSessions;
-            !		p_MemoryBySessionsAfterEvent(i_ShownEvent) := p_MemInUseBySession;
-            !	endfor ;
-            	empty p_NumberOfSessionsAfterEvent, p_MemoryBySessionsAfterEvent;
+            	empty p_NumberOfSessionsAfterEvent, p_MemoryBySessionsAfterEvent,
+            		p_NumberOfSessionsAfterEventBySessionType, p_MemoryBySessionsAfterEventBySessionType;
             	update s_ShownEvents;
+            
+            
             	p_NumberOfSessionsAfterEvent(i_ShownEvent) := p_NumberOfSessionsAfterEvent(i_ShownEvent-1)+
             		if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
             			1
@@ -471,6 +501,31 @@ Model Main_AIMMSPROUsageStatistics {
             		else
             			-p_EvPeakMemory( i_ShownEvent )
             		endif ;
+            
+            	p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent,i_SessionType) := p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent-1,i_SessionType)+
+            		if ep_EvSessionType( i_ShownEvent ) = i_SessionType then
+            			if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+            				1
+            			else
+            				-1
+            			endif 
+            		else
+            			0
+            		endif ;
+            	p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent,i_SessionType) := p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent-1,i_SessionType)+
+            		if ep_EvSessionType( i_ShownEvent ) = i_SessionType then
+            			if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+            				p_EvPeakMemory( i_ShownEvent )
+            			else
+            				-p_EvPeakMemory( i_ShownEvent )
+            			endif
+            		else
+            			0
+            		endif ;
+            
+            
+            
+            
             endblock ;
         }
         Parameter p_NumberOfRunningSessions;
@@ -617,11 +672,164 @@ Model Main_AIMMSPROUsageStatistics {
                 }
             }
         }
+        Section timebar_handling {
+            Set s_TimebarResourceSet {
+                Index: i_tb_res;
+                Parameter: ep_tb_selectedResource;
+                Definition: data {Timeline};
+            }
+            Set s_TimebarJobSet {
+                Index: i_tb_job;
+                Parameter: ep_tb_selectedJob;
+                Definition: data {Timebar};
+            }
+            StringParameter p_TimebarDuration_text {
+                IndexDomain: (i_tb_res,i_tb_job);
+            }
+            StringParameter p_TimebarDuration_Tooltips {
+                IndexDomain: (i_tb_res,i_tb_job);
+                Definition: {
+                    "Viewing ["+
+                    MomentToString("%c%y-%m-%d %H:%M:%S:%T", [tick], sp_TimebarViewportStart, 
+                    	p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob) )+","+
+                    MomentToString("%c%y-%m-%d %H:%M:%S:%T", [tick], sp_TimebarViewportStart, 
+                    	p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob)+
+                    	p_TimebarDuration(  ep_tb_selectedResource, ep_tb_selectedJob) )+"]"
+                }
+            }
+            Parameter p_TimebarTimeStart {
+                IndexDomain: (i_tb_res,i_tb_job);
+                Unit: hour;
+            }
+            Parameter p_TimebarDuration {
+                IndexDomain: (i_tb_res,i_tb_job);
+                Unit: hour;
+            }
+            StringParameter sp_TimebarViewportStart;
+            StringParameter sp_TimebarViewportEnd;
+            Parameter p_TimebarTimeunit {
+                Definition: 1 / ( 60 * 60 * 100 );
+            }
+            Procedure pr_InitializeTimebarGanttChart {
+                Arguments: (sp_VpBeg,sp_ActBeg,sp_ActEnd,sp_VpEnd);
+                Body: {
+                    ! The view port of the Timebar Gantt Chart should allow for the maximum 
+                    ! view port of the actual Gantt Chart.
+                    sp_TimebarViewportStart := sp_VpBeg ; ! "2019-04-02 00";
+                    sp_TimebarViewportEnd := sp_VpEnd ; ! "2019-04-06 00";
+                    
+                    ! There is only one resource/job so the element parameters are always set to this one.
+                    ep_tb_selectedResource := first( s_TimebarResourceSet );
+                    ep_tb_selectedJob := first( s_TimebarJobSet );
+                    
+                    ! The start/duration of the only job in the timebar Gantt Chart 
+                    ! should be initialized the same as the controlled Gantt Chart Viewport was initialized.
+                    ! In this example we assume for the sake of simplicity that the second day is ok.
+                    p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob) := StringToMoment(
+                    	Format        :  "%c%y-%m-%d %H:%M:%S:%T", 
+                    	Unit          :  [tick], 
+                    	ReferenceDate :  sp_TimebarViewportStart, 
+                    	Timeslot      :  sp_ActBeg) ;
+                    p_TimebarDuration(  ep_tb_selectedResource, ep_tb_selectedJob) := StringToMoment(
+                    	Format        :  "%c%y-%m-%d %H:%M:%S:%T", 
+                    	Unit          :  [tick], 
+                    	ReferenceDate :  sp_ActBeg, 
+                    	Timeslot      :  sp_ActEnd) ;
+                    p_TimebarDuration_text(  ep_tb_selectedResource, ep_tb_selectedJob) := "Timebar";
+                }
+                StringParameter sp_VpBeg {
+                    Property: Input;
+                }
+                StringParameter sp_VpEnd {
+                    Property: Input;
+                }
+                StringParameter sp_ActBeg {
+                    Property: Input;
+                }
+                StringParameter sp_ActEnd {
+                    Property: Input;
+                }
+            }
+        }
+        Section Stacked_Bar_Chart {
+            Parameter p_NoPointsPerBarChart {
+                Range: {
+                    {1..50}
+                }
+                InitialData: 25;
+            }
+            Set s_BarChartPoints {
+                SubsetOf: Integers;
+                Index: i_bcp;
+                Parameter: ep_bcp, ep_prevBCP, ep_nextBCP, ep_firstBCP, ep_lastBCP;
+                Property: ElementsAreNumerical;
+                Definition: elementRange(1,p_NoPointsPerBarChart);
+            }
+            StringParameter sp_BarChartMoments {
+                IndexDomain: i_bcp;
+            }
+            ElementParameter ep_FirstEventAtBarChartPoint {
+                IndexDomain: i_bcp;
+                Range: s_Events;
+            }
+            ElementParameter ep_lastEventAtBarChartPoint {
+                IndexDomain: i_bcp;
+                Range: s_Events;
+            }
+            Set s_EventsAtBarChartPoint {
+                IndexDomain: i_bcp;
+                SubsetOf: s_Events;
+            }
+            Parameter p_NumberOfSessionsStackedBySessionType {
+                IndexDomain: i_bcp;
+            }
+            Procedure pr_ComputeStackedBarCharts;
+            Procedure pr_RelateBarChartMomentsToEvents {
+                Body: {
+                    ep_firstBCP := first( s_BarChartPoints );
+                    ep_lastBCP  := last(  s_BarChartPoints );
+                    
+                    p_dur := p_TimebarDuration( ep_tb_selectedResource, ep_tb_selectedJob );
+                    
+                    sp_beg := MomentToString(
+                    		Format        :  "%c%y-%m-%d %H:%M:%S:%T", 
+                    		unit          :  [tick], 
+                    		ReferenceDate :  sp_TimebarViewportStart, 
+                    		Elapsed       :  p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob ) );
+                    sp_end := MomentToString(
+                    		Format        :  "%c%y-%m-%d %H:%M:%S:%T", 
+                    		unit          :  [tick], 
+                    		ReferenceDate :  sp_TimebarViewportStart, 
+                    		Elapsed       :  p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob ) +
+                    		                 p_TimebarDuration(  ep_tb_selectedResource, ep_tb_selectedJob )   );
+                    
+                    sp_BarChartMoments( i_bcp ) := 
+                    	MomentToString(
+                    		Format        :  "%c%y-%m-%d %H:%M:%S:%T", 
+                    		unit          :  [tick], 
+                    		ReferenceDate :  sp_beg, 
+                    		Elapsed       :  ( ( i_bcp - 1 ) * p_dur ) / p_NoPointsPerBarChart );
+                    
+                    ep_FirstEventAtBarChartPoint(i_bcp) := 
+                    	first( i_event | sp_EvMoment(i_Event) >= sp_BarChartMoments( i_bcp ) );
+                    ep_lastEventAtBarChartPoint(i_bcp) := ep_FirstEventAtBarChartPoint(i_bcp+1) - 1 ;
+                    ep_lastEventAtBarChartPoint(ep_lastBCP) := last( i_event | sp_EvMoment(i_Event) <= sp_end );
+                    
+                    s_EventsAtBarChartPoint(i_bcp) := { i_event | ep_FirstEventAtBarChartPoint(i_bcp) <= i_event <= ep_lastEventAtBarChartPoint(i_bcp) };
+                }
+                Parameter p_dur {
+                    Unit: hour;
+                }
+                StringParameter sp_beg;
+                StringParameter sp_end;
+            }
+            Procedure pr_ComputeBarChartsStackedBySessionType;
+        }
     }
     Section Attic {
         Procedure MainInitialization {
             Body: {
-                profilerStart();
+                !profilerStart();
             }
             Comment: "Add initialization statements here that do NOT require any library being initialized already.";
         }
