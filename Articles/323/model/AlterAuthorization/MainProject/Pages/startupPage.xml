@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2019-11-27 11:48:40">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>07350B9F-30C8-4955-9DF8-63A7AE38EB22</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Scalar">
+		<Location top="108" left="54" bottom="216" right="930" />
+		<TabOrder>3</TabOrder>
+		<Font GUID="35B676CC-6495-4932-923A-27247F93DBD0" Name="Ariel12" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>sp_TargetRoot</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_Auth</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>p_noFiles</Identifier>
+			<NumberFormat Width="7" Decimals="0" Scientific="IfTooSmallorLarge" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="18" left="420" bottom="90" right="618" />
+		<TabOrder>5</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Specify authorization"</Title>
+		<Font GUID="35B676CC-6495-4932-923A-27247F93DBD0" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_ObtainAuthorization</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="18" left="630" bottom="90" right="924" />
+		<TabOrder>4</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Alter authorization files and folders"</Title>
+		<Font GUID="35B676CC-6495-4932-923A-27247F93DBD0" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_AdaptAuthorizationFilesFolders</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Table">
+		<Location top="228" left="54" bottom="624" right="930" />
+		<TabOrder>6</TabOrder>
+		<Font GUID="35B676CC-6495-4932-923A-27247F93DBD0" Name="Ariel12" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>sp_Filenames( i_fn )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="18" left="54" bottom="90" right="228" />
+		<TabOrder>1</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Select target folder"</Title>
+		<Font GUID="35B676CC-6495-4932-923A-27247F93DBD0" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_SelectTargetFolder</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="18" left="240" bottom="90" right="414" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Select my data"</Title>
+		<Font GUID="35B676CC-6495-4932-923A-27247F93DBD0" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_SelectMyData</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>sp_TargetRoot</Symbol>
+			<Symbol>sp_Auth</Symbol>
+			<Symbol>sp_Filenames</Symbol>
+			<Symbol>p_noFiles</Symbol>
+			<Symbol>pr_SelectTargetFolder</Symbol>
+			<Symbol>pr_SelectMyData</Symbol>
+			<Symbol>pr_ObtainAuthorization</Symbol>
+			<Symbol>pr_AdaptAuthorizationFilesFolders</Symbol>
+			<Symbol>i_fn</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

@@ -1,0 +1,257 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2016-02-26 10:36:50">
+	<Location top="27" left="8" bottom="638" right="1106" />
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>301F4081-1989-4AC8-A02B-020246DF9209</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<Action>
+		<EntryProcedure>GUI_LoadPathRoot</EntryProcedure>
+	</Action>
+	<PageObject Type="Button">
+		<Location top="216" left="354" bottom="240" right="426" />
+		<ReadOnly>VALUE := ChildrenBktElement = ''</ReadOnly>
+		<TabOrder>1</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Authorization"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_EditBucketAuth</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_LoadPathSelected</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>ListBox</SelectionType>
+		<SingleSelect>true</SingleSelect>
+		<Location top="36" left="12" bottom="450" right="204" />
+		<TabOrder>11</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ProcedureUponDblClick>GUI_LoadPathSelected</ProcedureUponDblClick>
+		<ExplicitIdentifier>
+			<Identifier>CurrentPathElement</Identifier>
+		</ExplicitIdentifier>
+		<ElementText Index="CurrentPath">CurrentPathName( CURPATH )</ElementText>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="18" left="12" bottom="30" right="204" />
+		<StaticText>Current Path:</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>ListBox</SelectionType>
+		<SingleSelect>true</SingleSelect>
+		<Location top="36" left="228" bottom="216" right="426" />
+		<TabOrder>10</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ProcedureUponDblClick>GUI_LoadSubPathSelected</ProcedureUponDblClick>
+		<ExplicitIdentifier>
+			<Identifier>ChildrenBktElement</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>ListBox</SelectionType>
+		<SingleSelect>true</SingleSelect>
+		<Location top="270" left="228" bottom="450" right="426" />
+		<TabOrder>8</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ProcedureUponChange>GUI_LoadObjVersionSelected</ProcedureUponChange>
+		<ExplicitIdentifier>
+			<Identifier>ChildrenObjElement</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="18" left="228" bottom="30" right="420" />
+		<StaticText>Buckets:</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>ListBox</SelectionType>
+		<SingleSelect>true</SingleSelect>
+		<Location top="36" left="444" bottom="450" right="642" />
+		<TabOrder>9</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ProcedureUponDblClick>GUI_DownloadVersion</ProcedureUponDblClick>
+		<ExplicitIdentifier>
+			<Identifier>ChildrenObjVerElement</Identifier>
+		</ExplicitIdentifier>
+		<ElementText Index="ChildrenObjVer">ChildrenObjVerDate( CURPATH_OBJVER )</ElementText>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="18" left="450" bottom="30" right="606" />
+		<StaticText>Object Versions:</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="450" left="354" bottom="474" right="426" />
+		<ReadOnly>VALUE := ChildrenObjElement = ''</ReadOnly>
+		<TabOrder>5</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Authorization"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_EditObjectAuth</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_LoadPathSelected</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="450" left="306" bottom="474" right="354" />
+		<ReadOnly>VALUE := ChildrenObjElement = ''</ReadOnly>
+		<TabOrder>4</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Delete"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_DeleteObjectAllVersions</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="450" left="444" bottom="474" right="504" />
+		<ReadOnly>VALUE := ChildrenObjVerElement = ''</ReadOnly>
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Delete"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_DeleteVersion</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="216" left="306" bottom="240" right="354" />
+		<ReadOnly>VALUE := CurrentPathElement = ''</ReadOnly>
+		<TabOrder>6</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Delete"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_DeleteBucket</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="216" left="228" bottom="240" right="306" />
+		<ReadOnly>VALUE := CurrentPathElement = ''</ReadOnly>
+		<TabOrder>7</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Add Bucket"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_AddElement</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="450" left="228" bottom="474" right="306" />
+		<ReadOnly>VALUE := ChildrenObjElement = ''</ReadOnly>
+		<TabOrder>3</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Add Object"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_AddElementVersion</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="252" left="228" bottom="264" right="420" />
+		<StaticText>Objects:</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="450" left="504" bottom="474" right="564" />
+		<ReadOnly>VALUE := ChildrenObjVerElement = ''</ReadOnly>
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Download"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_DownloadVersion</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>GUI_LoadPathRoot</Symbol>
+			<Symbol>GUI_LoadPathSelected</Symbol>
+			<Symbol>GUI_LoadSubPathSelected</Symbol>
+			<Symbol>GUI_LoadObjVersionSelected</Symbol>
+			<Symbol>GUI_EditBucketAuth</Symbol>
+			<Symbol>GUI_EditObjectAuth</Symbol>
+			<Symbol>GUI_DeleteBucket</Symbol>
+			<Symbol>GUI_DeleteVersion</Symbol>
+			<Symbol>GUI_DeleteObjectAllVersions</Symbol>
+			<Symbol>GUI_AddElement</Symbol>
+			<Symbol>GUI_AddElementVersion</Symbol>
+			<Symbol>GUI_DownloadVersion</Symbol>
+			<Symbol>CurrentPath</Symbol>
+			<Symbol>CurrentPathName</Symbol>
+			<Symbol>ChildrenBkt</Symbol>
+			<Symbol>ChildrenObj</Symbol>
+			<Symbol>ChildrenObjVer</Symbol>
+			<Symbol>ChildrenObjVerDate</Symbol>
+			<Symbol>CurrentPathElement</Symbol>
+			<Symbol>ChildrenBktElement</Symbol>
+			<Symbol>ChildrenObjElement</Symbol>
+			<Symbol>ChildrenObjVerElement</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

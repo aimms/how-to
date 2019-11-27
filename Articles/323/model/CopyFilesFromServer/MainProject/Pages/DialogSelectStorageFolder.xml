@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2019-01-25 12:47:55">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>4B1E8FF1-7165-40B0-85AE-593A28A0CFFB</ProjectUUID>
+	<Title>sp_SelectStorageFolder_PageTitle</Title>
+	<IsDialogPage>true</IsDialogPage>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<Action>
+		<SystemClose Action="ViaProcedure" Procedure="pr_SelectStorageFolder_Cancel" />
+	</Action>
+	<PageObject Type="Scalar">
+		<Location top="12" left="18" bottom="60" right="678" />
+		<TabOrder>5</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>sp_FolderToSelect</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Composite Table">
+		<Location top="66" left="18" bottom="276" right="678" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Domain>
+			<Identifier>sp_subFolders( i_ef )</Identifier>
+			<Index Name="i_ef">
+				<ProcedureUponDblClick>pr_SelectStorageFolder_DoubleClick( i_ef )</ProcedureUponDblClick>
+			</Index>
+		</Domain>
+		<ExplicitIdentifier>
+			<Identifier>sp_subFolders( i_ef )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="294" left="18" bottom="336" right="84" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Up"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_SelectStorageFolder_Up</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="288" left="618" bottom="330" right="672" />
+		<TabOrder>3</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"OK"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_SelectStorageFolder_OK</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="288" left="510" bottom="330" right="600" />
+		<TabOrder>4</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Cancel"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_SelectStorageFolder_Cancel</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>sp_FolderToSelect</Symbol>
+			<Symbol>sp_subFolders</Symbol>
+			<Symbol>sp_SelectStorageFolder_PageTitle</Symbol>
+			<Symbol>pr_SelectStorageFolder_DoubleClick</Symbol>
+			<Symbol>pr_SelectStorageFolder_Up</Symbol>
+			<Symbol>pr_SelectStorageFolder_OK</Symbol>
+			<Symbol>pr_SelectStorageFolder_Cancel</Symbol>
+			<Symbol>i_ef</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

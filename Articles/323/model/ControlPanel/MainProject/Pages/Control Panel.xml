@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2013-11-22 21:07:09">
+	<Location top="27" left="8" bottom="638" right="1106" />
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>301F4081-1989-4AC8-A02B-020246DF9209</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Tabbed Page Object">
+		<Location top="42" left="18" bottom="564" right="684" />
+		<TabOrder>1</TabOrder>
+		<PrintingOccurrence>Never</PrintingOccurrence>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<MultipleTabRows>true</MultipleTabRows>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="12" left="18" bottom="36" right="444" />
+		<StaticText>PRO Framework - Publishing and Remote Optimization</StaticText>
+		<Font GUID="2A210F3A-8F95-4798-A888-9936B8D34599" Name="Arial12b" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="18" left="552" bottom="42" right="600" />
+		<TabOrder>4</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Finalize"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="18" left="498" bottom="42" right="546" />
+		<TabOrder>3</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Start"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_Initialize</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>GUI_Initialize</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<TemplateManager>
+	<Template Name="Background Color" PageGUID="B7F1F674-9ADE-43E1-ABB2-2E48654A92FC" CrossLibraryDuplicate="542E2CC1-3709-407D-A3B4-8BDD7229C67D|1351096655|&quot;Background Color&quot;">
+		<Template Name="Pro Wizard Large Dialog" PageGUID="969793AE-EBB7-4DED-9CBA-67EF883AB956" CrossLibraryDuplicate="542E2CC1-3709-407D-A3B4-8BDD7229C67D|1563928101|&quot;Pro Wizard Large Dialog&quot;">
+			<Template Name="Bitmap" PageGUID="FF6BD0A1-5E68-44C1-847F-5811F4789034" CrossLibraryDuplicate="542E2CC1-3709-407D-A3B4-8BDD7229C67D|1330959378|&quot;Bitmap&quot;">
+				<Template Name="Title of Steps" PageGUID="271FB65D-F26E-4FD0-87BD-3CEEF6DF7310" CrossLibraryDuplicate="542E2CC1-3709-407D-A3B4-8BDD7229C67D|1333257823|&quot;Title of Steps&quot;" />
+			</Template>
+		</Template>
+		<Template Name="Pro Wizard Small Dialog" PageGUID="776C973D-C4D8-49F2-BE0D-55C80FF9D49C" CrossLibraryDuplicate="542E2CC1-3709-407D-A3B4-8BDD7229C67D|1315688051|&quot;Pro Wizard Small Dialog&quot;">
+			<Template Name="Bitmap" PageGUID="FF6BD0A1-5E68-44C1-847F-5811F4789034" CrossLibraryDuplicate="542E2CC1-3709-407D-A3B4-8BDD7229C67D|1330959378|&quot;Bitmap&quot;">
+				<Template Name="Title of Steps" PageGUID="271FB65D-F26E-4FD0-87BD-3CEEF6DF7310" CrossLibraryDuplicate="542E2CC1-3709-407D-A3B4-8BDD7229C67D|1333257823|&quot;Title of Steps&quot;">
+					<Template Name="All Steps button" PageGUID="B62570E8-ACE8-40F9-9002-849DC0BD7F61" CrossLibraryDuplicate="542E2CC1-3709-407D-A3B4-8BDD7229C67D|1334148041|&quot;All Steps button&quot;">
+						<Template Name="Next button" PageGUID="FA8D05EF-D112-45D8-93E5-BFA2A9211C4D" CrossLibraryDuplicate="542E2CC1-3709-407D-A3B4-8BDD7229C67D|1332950656|&quot;Next button&quot;">
+							<Template Name="Previous button" PageGUID="8F4C3B99-5220-4318-B487-739EA7702684" CrossLibraryDuplicate="542E2CC1-3709-407D-A3B4-8BDD7229C67D|1332956430|&quot;Previous button&quot;" />
+						</Template>
+						<Template Name="Previous button" PageGUID="8F4C3B99-5220-4318-B487-739EA7702684" CrossLibraryDuplicate="542E2CC1-3709-407D-A3B4-8BDD7229C67D|1332956430|&quot;Previous button&quot;">
+							<Template Name="Close button" PageGUID="FBE9069C-F740-4B4D-82C6-C31A4C4820FC" CrossLibraryDuplicate="542E2CC1-3709-407D-A3B4-8BDD7229C67D|1332963501|&quot;Close button&quot;" />
+						</Template>
+					</Template>
+				</Template>
+			</Template>
+		</Template>
+		<Template Name="Pro Wizard Dialog" PageGUID="63803D80-D71D-4322-8C6E-D6C401C9A15B" CrossLibraryDuplicate="542E2CC1-3709-407D-A3B4-8BDD7229C67D|1315757053|&quot;Pro Wizard Dialog&quot;">
+			<Template Name="Bitmap" PageGUID="FF6BD0A1-5E68-44C1-847F-5811F4789034" CrossLibraryDuplicate="542E2CC1-3709-407D-A3B4-8BDD7229C67D|1330959378|&quot;Bitmap&quot;" />
+		</Template>
+	</Template>
+	<Page Name="Control Panel" PageGUID="6395D696-7C26-4A87-B741-68BB5B4A9B68" />
+	<Page Name="Model Attributes" PageGUID="34B8C8BD-93AD-41D8-9B2C-8672BB96D593" />
+	<Page Name="Aimms List" PageGUID="A492BF78-BD57-4520-A598-867451BA013F" />
+	<Page Name="Session List" PageGUID="13224377-6DDC-4E90-ABA4-9768C8A221B8" />
+	<Page Name="Storage Manager" PageGUID="8566BE5A-E0F8-48A4-8B35-4E29DA68AE78" />
+	<Page Name="User Database" PageGUID="5BD892D1-F459-4FF5-8C27-58B2D6FA1A73" />
+	<Page Name="Storage Add" PageGUID="92AAD0E5-BC0E-41DB-BFA3-83C193631D97" />
+	<Page Name="Service Configuration" PageGUID="B83F1AB2-4C01-4B75-B205-09AD7438B834" />
+	<Page Name="Project List" PageGUID="145A7F4C-70D1-474E-B645-8310274508DF" />
+	<Page Name="All Data Pages" PageGUID="991D814C-1873-497C-BF28-67675042EAC9" />
+	<Page Name="[Data Page] PROUserGroup" PageGUID="2264861B-0C62-4539-8486-22BCDF156CCA" />
+	<Page Name="Authorization Manager" PageGUID="05156AF2-0F6F-4124-BE48-0857EAA32B15" />
+	<Page Name="Permissions Overview" PageGUID="ED0B740A-EA7E-45FA-B082-C7F26E83D98C" />
+</TemplateManager>

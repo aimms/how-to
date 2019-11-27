@@ -1,0 +1,2780 @@
+## ams_version=1.0
+
+Model Main_ControlPanel {
+    Section Tools {
+        Procedure handleError {
+            Arguments: (ret);
+            Body: {
+                if (not ret) then
+                        ret := pro::HandleError(errorCode,description);
+                        if (not ret) then
+                                DialogMessage("Unknown error","PRO Framework");
+                        else
+                                DialogMessage(description,"Error code " + errorCode);
+                        endif;
+                        return 0;
+                endif;
+                return 1;
+            }
+            Parameter ret {
+                Property: Input;
+            }
+            Parameter errorCode {
+                Default: 0;
+                InitialData: 0;
+            }
+            StringParameter description {
+                Default: "";
+                InitialData: "";
+            }
+        }
+        Procedure SplitString {
+            Arguments: (StrValue,Key,SetIndex,SetElement);
+            Body: {
+                if Card(SetIndex) = 0 then
+                        SetIndex := ElementRange(1,StringOccurrences(StrValue,Key) + 1);
+                endif;
+                empty SetElement;
+                
+                tmpLast := 1;
+                tmpCont := 1;
+                for LOC_SET_INDEX do
+                        tmpNext := FindNthString(StrValue,Key,tmpCont);
+                        if tmpNext > 0 then
+                                SetElement(LOC_SET_INDEX) := SubString(StrValue,tmpLast,tmpNext - 1);
+                        else
+                                ! Last token
+                                SetElement(LOC_SET_INDEX) := SubString(StrValue,tmpLast,10000);
+                                break;
+                        endif;
+                
+                        tmpLast := tmpNext + StringLength(Key);
+                        tmpCont += 1;
+                        tmpNext := FindNthString(StrValue,"#",tmpCont);
+                endfor;
+                
+                return 1;
+            }
+            Comment: {
+                "Split StrValue in tokens separeted by Key, and put each token inside SetElement. The set SetIndex
+                defines the index of SetElement and must be already filled with the maximum number of tokens to be retrieved."
+            }
+            StringParameter StrValue {
+                Property: Input;
+            }
+            StringParameter Key {
+                Property: Input;
+            }
+            Set SetIndex {
+                Index: LOC_SET_INDEX;
+                Property: InOut;
+            }
+            StringParameter SetElement {
+                IndexDomain: (LOC_SET_INDEX);
+                Property: Output;
+            }
+            Parameter tmpLast;
+            Parameter tmpNext;
+            Parameter tmpCont;
+        }
+    }
+    Section Control_Panel_GUI {
+        Procedure GUI_Initialize {
+            Body: {
+                pro::Initialize();
+            }
+        }
+        Section AIMMS_Publishing_GUI {
+            Procedure GUI_UpdateAimmsVersion {
+                Body: {
+                    return UpdateAimmsVersion(PGUI_NewAimmsVersion, PGUI_NewAimmsDescription, PGUI_Authorization);
+                }
+            }
+            Procedure GUI_DeleteAimmsVersion {
+                Body: {
+                    return DeleteAimmsVersion(PGUI_NewAimmsVersion);
+                }
+            }
+            Procedure GUI_EditAuthNewAIMMS {
+                Body: {
+                    PGUI_Authorization := AimmsAuthorization(AimmsVersion);
+                    if (guipro::EditAuthorization(PGUI_Authorization)) then
+                            GUI_UpdateAimmsVersion;
+                    endif;
+                }
+            }
+            StringParameter PGUI_SelectFile {
+                Property: NoSave;
+                InitialData: "";
+            }
+            StringParameter PGUI_Authorization {
+                Property: NoSave;
+                InitialData: "";
+            }
+            DeclarationSection Aimms_List {
+                StringParameter PGUI_NewAimmsVersion {
+                    Property: NoSave;
+                    Definition: AimmsVersion;
+                }
+                StringParameter PGUI_NewAimmsDescription {
+                    Property: NoSave;
+                    Definition: AimmsDescription(AimmsVersion);
+                }
+                Parameter PGUI_NewAimms {
+                    Range: binary;
+                    Property: NoSave;
+                    Definition: StringToElement(AimmsVersions,PGUI_NewAimmsVersion)='';
+                }
+            }
+        }
+        Section App_Publishing_GUI {
+            Parameter PGUI_IsNewModel {
+                Range: binary;
+                Property: NoSave;
+                Definition: StringToElement(PublishModels,PGUI_NewModelName + " " + PGUI_NewModelVersion)='';
+            }
+            StringParameter PGUI_SelectFileApp {
+                Property: NoSave;
+                InitialData: "";
+            }
+            StringParameter PGUI_NewModelName {
+                Property: NoSave;
+                Definition: PublishModelName(PePublishModel);
+            }
+            StringParameter PGUI_NewModelVersion {
+                Property: NoSave;
+                Definition: PublishModelVersion(PePublishModel);
+            }
+            StringParameter PGUI_NewModelDescription {
+                Property: NoSave;
+                Definition: PublishModelDescription(PePublishModel);
+            }
+            ElementParameter PGUI_NewModelAimmsVersion {
+                Range: AimmsVersions;
+                Property: NoSave;
+                Definition: StringToElement(AimmsVersions,PublishModelAimmsVersion(PePublishModel));
+            }
+            StringParameter PGUI_ModelAttributes {
+                Property: NoSave;
+            }
+            StringParameter PGUI_UpdatedModelAttributes;
+            StringParameter PGUI_NewModelAuthorization {
+                Property: NoSave;
+                InitialData: "";
+            }
+            Set NewModelAttributes {
+                Index: GUI_MODEL_ATTR;
+                Parameter: NewModelAttribute;
+                Property: NoSave;
+            }
+            StringParameter PGUI_NewModelAttributeValue {
+                IndexDomain: (GUI_MODEL_ATTR);
+                Property: NoSave;
+                InitialData: "";
+            }
+            Set GUI_AppOldVersion {
+                Index: APP_OLD_VER;
+                Parameter: Pe_App_Old_Ver;
+                Property: NoSave;
+            }
+            StringParameter PGUI_AppOldVersionName {
+                IndexDomain: (APP_OLD_VER);
+                Property: NoSave;
+                InitialData: "";
+            }
+            Set GUI_ReplaceOptions {
+                Index: GUI_REPLACE_OPT;
+                Parameter: Pe_GUI_ReplaceOption;
+                Property: NoSave;
+                Definition: {
+                    {'0','1','2'}
+                }
+                Comment: {
+                    "DISCRETE,               // \'version\' and newer can coexist (empty=first); older versions receives a warning.
+                    WARNING,                // \'version\' and newer receives a warning (empty=first); older versions must update.
+                    MUST_UPDATE,    // All versions must be updated."
+                }
+            }
+            StringParameter PGUI_ReplaceOption_Description {
+                IndexDomain: (GUI_REPLACE_OPT);
+                Property: NoSave;
+                Definition: {
+                    data
+                    { 0 : "DISCRETE: Versions can coexist; versions older than the indicated receives a warning.",
+                      1 : "WARNING: Version can coexist, but versions newer than the indicated one.",
+                      2 : "MUST_UPDATE: All old versions must be updated." }
+                }
+            }
+            Parameter PGUI_CancelPublish {
+                Range: binary;
+                Default: 0;
+                Property: NoSave;
+            }
+            Procedure GUI_UpdateModel {
+                Body: {
+                    return UpdateModel(PGUI_NewModelName,PGUI_NewModelVersion, PGUI_NewModelDescription, PGUI_NewModelAimmsVersion, PGUI_ModelAttributes, PGUI_NewModelAuthorization);
+                }
+            }
+            Procedure GUI_DeleteModel {
+                Body: {
+                    return DeleteModel(PGUI_NewModelName,PGUI_NewModelVersion);
+                }
+            }
+            Procedure GUI_EditAttributes_Str2Set {
+                Body: {
+                    ! Fill the set with the attribute string
+                    PGUI_ModelAttributes := PublishModelAttributes(PePublishModel);
+                    PGUI_NewModelAuthorization := PublishModelAuthorization(PePublishModel);
+                    
+                    Empty NewModelAttributes;
+                    if SubString(PGUI_ModelAttributes,1,2) = "##" then
+                            tmpLast := 3;
+                            tmpCont := 2;
+                            tmpNext := FindNthString(PGUI_ModelAttributes,"##",tmpCont);
+                            while tmpNext > 0 do
+                                    tmpAttr := SubString(PGUI_ModelAttributes,tmpLast,tmpNext - 1);
+                                    tmpVal := "";
+                                    tmpDiv := FindString(tmpAttr,"=");
+                                    if tmpDiv > 0 then
+                                            tmpVal := SubString(tmpAttr, tmpDiv + 1, 10000);
+                                            tmpAttr := SubString(tmpAttr, 1, tmpDiv - 1);
+                                    endif;
+                                    SetElementAdd(NewModelAttributes,NewModelAttribute,tmpAttr);
+                                    PGUI_NewModelAttributeValue(NewModelAttribute) := tmpVal;
+                                    tmpLast := tmpNext + 2;
+                                    tmpCont += 1;
+                                    tmpNext := FindNthString(PGUI_ModelAttributes,"##",tmpCont);
+                            endwhile;
+                    
+                            ! Last attribute
+                            tmpAttr := SubString(PGUI_ModelAttributes,tmpLast,10000);
+                            tmpVal := "";
+                            tmpDiv := FindString(tmpAttr,"=");
+                            if tmpDiv > 0 then
+                                    tmpVal := SubString(tmpAttr, tmpDiv + 1, 10000);
+                                    tmpAttr := SubString(tmpAttr, 1, tmpDiv - 1);
+                            endif;
+                            SetElementAdd(NewModelAttributes,NewModelAttribute,tmpAttr);
+                            PGUI_NewModelAttributeValue(NewModelAttribute) := tmpVal;
+                    endif;
+                }
+                Parameter tmpLast;
+                Parameter tmpNext;
+                Parameter tmpDiv;
+                Parameter tmpCont;
+                StringParameter tmpAttr;
+                StringParameter tmpVal;
+            }
+            Procedure GUI_EditAttributes_Set2Str {
+                Body: {
+                    ! Assemble a new string
+                    PGUI_NewModelAuthorization := PublishModelAuthorization(PePublishModel);
+                    PGUI_ModelAttributes := "";
+                    FOR GUI_MODEL_ATTR | PGUI_NewModelAttributeValue(GUI_MODEL_ATTR) <> "" DO
+                            PGUI_ModelAttributes += "##" + GUI_MODEL_ATTR + "=" + FindReplaceStrings(PGUI_NewModelAttributeValue(GUI_MODEL_ATTR),"##","#");
+                    ENDFOR;
+                    GUI_UpdateModel;
+                }
+            }
+            Procedure GUI_AddAttribute {
+                Body: {
+                    if DialogGetString("Attribute name:",tmpStr,"Add Attribute") then
+                            ! Name validation
+                            if StringLength(tmpStr) > 15 then
+                                    DialogError("Attribute name too long","Add Attribute");
+                                    return 0;
+                            elseif FindString(tmpStr,"=") > 0 then
+                                    DialogError("Invalid characters in the attribute name: '='","Add Attribute");
+                                    return 0;
+                            elseif FindString(tmpStr,"##") > 0 then
+                                    DialogError("Invalid sequence in the attribute name: '##'","Add Attribute");
+                                    return 0;
+                            elseif StringToElement(NewModelAttributes,tmpStr) <> '' then
+                                    DialogError("Attribute " + tmpStr + " already exists.","Add Attribute");
+                                    return 0;
+                            endif;
+                            ! Add to the set
+                            SetElementAdd(NewModelAttributes,NewModelAttribute,tmpStr);
+                    ENDIF;
+                    return 1;
+                }
+                StringParameter tmpStr;
+            }
+            Procedure GUI_RemoveAttribute {
+                Body: {
+                    if NewModelAttribute = '' then
+                            DialogError("No attribute selected","Remove Attribute");
+                            return 0;
+                    endif;
+                    NewModelAttributes -= NewModelAttribute;
+                    return 1;
+                }
+                StringParameter tmpStr;
+            }
+            Procedure GUI_PredefinedAttributes {
+                Body: {
+                    NewModelAttribute := StringToElement(NewModelAttributes,"storedIcon",1);
+                    NewModelAttribute := StringToElement(NewModelAttributes,"Arguments",1);
+                    NewModelAttribute := StringToElement(NewModelAttributes,"ClientLicense",1);
+                    NewModelAttribute := StringToElement(NewModelAttributes,"ServerLicense",1);
+                    return 1;
+                }
+                StringParameter tmpStr;
+            }
+            Procedure GUI_EditAuthNewModel {
+                Body: {
+                    PGUI_ModelAttributes := PublishModelAttributes(PePublishModel);
+                    PGUI_NewModelAuthorization := PublishModelAuthorization(PePublishModel);
+                    if (guipro::EditAuthorization(PGUI_NewModelAuthorization)) then
+                            GUI_UpdateModel;
+                    endif;
+                }
+            }
+        }
+        Section User_DB_Management {
+            Set PROGroup_Current_User {
+                SubsetOf: PROGroup;
+                Index: PRO_GRP_CUR_USR;
+                Property: NoSave;
+                OrderBy: PROGroupName(PRO_GRP);
+                Definition: {
+                    {PRO_GRP | PROUserGroup(Pe_User_List,PRO_GRP)}
+                }
+            }
+            Procedure GUI_AddEnvironment {
+                Body: {
+                    return AddEnvironment(Pe_Env_List);
+                }
+            }
+            Procedure GUI_UpdateEnvironment {
+                Body: {
+                    return UpdateEnvironment(Pe_Env_List);
+                }
+            }
+            Procedure GUI_RemoveEnvironment {
+                Body: {
+                    return RemoveEnvironment(Pe_Env_List);
+                }
+            }
+            Procedure GUI_AddUser {
+                Body: {
+                    return AddUser(Pe_Env_List,Pe_User_List);
+                }
+            }
+            Procedure GUI_AddGroup {
+                Body: {
+                    return AddGroup(Pe_Env_List,Pe_Group_List);
+                }
+            }
+            Procedure GUI_RemoveUser {
+                Body: {
+                    return RemoveUser(Pe_Env_List,Pe_User_List);
+                }
+            }
+            Procedure GUI_RemoveGroup {
+                Body: {
+                    return RemoveGroup(Pe_Env_List,Pe_Group_List);
+                }
+            }
+            Procedure GUI_AssociateUserToGroup {
+                Body: {
+                    return AssociateUserToGroup(Pe_User_List,Pe_Group_List);
+                }
+            }
+            Procedure GUI_DisassociateUserFromGroup {
+                Body: {
+                    return DisassociateUserFromGroup(Pe_User_List,Pe_Group_Cur_User);
+                }
+            }
+        }
+        Section Session_List_GUI {
+            Quantity SI_Time_Duration {
+                BaseUnit: s;
+                Comment: "Expresses the value for the duration of periods.";
+            }
+            StringParameter DateToList {
+                Property: NoSave;
+                InitialData: "";
+            }
+            StringParameter DateEndList {
+                Property: NoSave;
+                InitialData: "";
+            }
+            Parameter FromAllUsers {
+                Range: binary;
+                Property: NoSave;
+                InitialData: 1;
+            }
+            Parameter session_Mark {
+                IndexDomain: PRO_SESSION;
+                Range: binary;
+                Property: NoSave;
+                InitialData: 0;
+            }
+            StringParameter GUI_session_CurrentStatusDescr {
+                IndexDomain: PRO_SESSION;
+                Property: NoSave;
+                Definition: {
+                    if(session_CurrentStatus(PRO_SESSION) = 0) then
+                    "Created"
+                    elseif(session_CurrentStatus(PRO_SESSION) = 1) then
+                    "Queued"
+                    elseif(session_CurrentStatus(PRO_SESSION) = 2) then
+                    "Starting server session"
+                    elseif(session_CurrentStatus(PRO_SESSION) = 3) then
+                    "Waiting for tasks"
+                    elseif(session_CurrentStatus(PRO_SESSION) = 4) then
+                    "Running"
+                    elseif(session_CurrentStatus(PRO_SESSION) = 5) then
+                    "Closing server session"
+                    elseif(session_CurrentStatus(PRO_SESSION) = 6) then
+                    "Finished"
+                    elseif(session_CurrentStatus(PRO_SESSION) = 7) then
+                    "Terminated"
+                    elseif(session_CurrentStatus(PRO_SESSION) = 8) then
+                    "Finished with errors"
+                    elseif(session_CurrentStatus(PRO_SESSION) = 9) then
+                    "Deleted"
+                    else
+                    "Unknown"
+                    endif
+                }
+            }
+            Set sessionMarked {
+                SubsetOf: sessionList;
+                Index: MARK_SESSION;
+                Property: NoSave;
+                Definition: {
+                    {PRO_SESSION | session_Mark(PRO_SESSION)}
+                }
+            }
+            Parameter markAll {
+                Range: binary;
+                Property: NoSave;
+            }
+            StringParameter PersistentSelectedFolder {
+                Property: NoSave;
+                InitialData: "";
+            }
+            Procedure GUI_UpdateSessionList {
+                Body: {
+                    return LoadSessionList(DateToList,FromAllUsers);
+                }
+            }
+            Procedure GUI_RemoveMarked {
+                Body: {
+                    if Card(sessionMarked) = 0 then return 0; endif;
+                    
+                    ! Remove in batches to prevent call timeouts
+                    sessionsToRemove := sessionMarked;
+                    while (card(sessionsToRemove) > 0) do
+                            sessionRemoveList := SubRange(sessionsToRemove, Element(sessionsToRemove,1),
+                                                                            Element(sessionsToRemove,Min(50,Card(sessionsToRemove))));
+                            sessionsToRemove -= sessionRemoveList;
+                    
+                            ret := PurgeSessionList(sessionRemoveList);
+                            if not (ret) then return 0; endif;
+                    
+                            ! Purge all object versions related to managed sessions
+                            empty VersionToRemove;
+                            for PRO_SESSION in sessionRemoveList | session_IsManaged(PRO_SESSION) do
+                                    if(session_man_VersionID(PRO_SESSION) <> "") then SetElementAdd(VersionToRemove,PeVersionToRemove,session_man_VersionID(PRO_SESSION)); endif;
+                                    if(session_man_ResponseVersionID(PRO_SESSION) <> "") then SetElementAdd(VersionToRemove,PeVersionToRemove,session_man_ResponseVersionID(PRO_SESSION)); endif;
+                                    if(session_man_MessageLogVersionID(PRO_SESSION) <> "") then SetElementAdd(VersionToRemove,PeVersionToRemove,session_man_MessageLogVersionID(PRO_SESSION)); endif;
+                            endfor;
+                            ret := pro::storage::DeleteObjectVersionFromSet(VersionToRemove);
+                            if not handleError(ret) then return 0; endif;
+                    endwhile;
+                    
+                    ! Update session list
+                    ret := GUI_UpdateSessionList;
+                    if not (ret) then return 0; endif;
+                    
+                    return 1;
+                }
+                Set sessionsToRemove {
+                    SubsetOf: sessionList;
+                }
+                Set sessionRemoveList {
+                    SubsetOf: sessionList;
+                }
+                Parameter ret;
+                Set VersionToRemove {
+                    Parameter: PeVersionToRemove;
+                }
+            }
+            Procedure GUI_MarkAll {
+                Body: {
+                    session_Mark(PRO_SESSION) := markAll;
+                    return 1;
+                }
+                Parameter ret;
+                StringParameter warnStr;
+            }
+            Procedure GUI_MarkUntil {
+                Body: {
+                    session_Mark(PRO_SESSION | StringToMoment("%c%y-%m-%d %H:%M:%S", [s], "2000-01-01 00:00:00", session_CreateTime(PRO_SESSION))
+                    							< StringToMoment("%c%y-%m-%d %H:%M:%S", [s], "2000-01-01 00:00:00", DateEndList) ) := 1;
+                    return 1;
+                }
+                Parameter ret;
+                StringParameter warnStr;
+            }
+            Procedure GUI_HardInterruptRequest {
+                Body: {
+                    return pro::sessionmanager::TerminateSession(sessionElement);
+                }
+            }
+            Procedure GUI_DownloadRequest {
+                Body: {
+                    return pro::SaveVersionInFolder(session_man_VersionID(sessionElement),PersistentSelectedFolder);
+                }
+            }
+            Procedure GUI_DownloadResponse {
+                Body: {
+                    return pro::SaveVersionInFolder(session_man_ResponseVersionID(sessionElement),PersistentSelectedFolder);
+                }
+            }
+            Procedure GUI_DownloadLog {
+                Body: {
+                    return pro::SaveVersionInFolder(session_man_MessageLogVersionID(sessionElement),PersistentSelectedFolder);
+                }
+            }
+        }
+        Section Storage_Manager_GUI {
+            StringParameter ElementPath {
+                Property: NoSave;
+            }
+            StringParameter ElementName {
+                Property: NoSave;
+            }
+            Parameter ElementObject {
+                Range: binary;
+                Property: NoSave;
+            }
+            StringParameter ElementFile {
+                Property: NoSave;
+            }
+            StringParameter ElementAuth {
+                Property: NoSave;
+            }
+            Procedure GUI_LoadPathRoot {
+                Body: {
+                    return LoadPathInfo('');
+                }
+            }
+            Procedure GUI_LoadPathSelected {
+                Body: {
+                    return LoadPathInfo(CurrentPathElement);
+                }
+            }
+            Procedure GUI_LoadSubPathSelected {
+                Body: {
+                    if ChildrenBktElement <> '' then
+                            SetElementAdd(CurrentPath,CurrentPathElement,ChildrenBktElement);
+                            CurrentPathLevel(CurrentPathElement) := Card(CurrentPath);
+                            CurrentPathName(CurrentPathElement) := " " + CurrentPathElement;
+                            n := 1;
+                            while(n < CurrentPathLevel(CurrentPathElement)) do
+                                    CurrentPathName(CurrentPathElement) := "+" +  CurrentPathName(CurrentPathElement);
+                                    n += 1;
+                            endwhile;
+                            return LoadPathInfo(CurrentPathElement);
+                    endif;
+                    return 1;
+                }
+                Parameter n {
+                    Range: integer;
+                }
+            }
+            Procedure GUI_LoadObjVersionSelected {
+                Body: {
+                    return LoadVersionInfo(ChildrenObjElement);
+                }
+            }
+            Procedure GUI_EditBucketAuth {
+                Body: {
+                    return EditBucketAuth(ChildrenBktElement);
+                }
+            }
+            Procedure GUI_EditObjectAuth {
+                Body: {
+                    return EditObjectAuth(CurrentPathElement,ChildrenObjElement);
+                }
+            }
+            Procedure GUI_DeleteBucket {
+                Body: {
+                    ret := DeleteBucket(ChildrenBktElement);
+                    if not (ret) then return 0; endif;
+                    
+                    return GUI_LoadPathSelected;
+                }
+                Parameter ret;
+            }
+            Procedure GUI_DeleteVersion {
+                Body: {
+                    ret := DeleteVersion(ChildrenObjVerElement);
+                    if not (ret) then return 0; endif;
+                    
+                    ChildrenObjSize(ChildrenObjElement) -= 1;
+                    return GUI_LoadObjVersionSelected;
+                }
+                Parameter ret;
+            }
+            Procedure GUI_DeleteObjectAllVersions {
+                Body: {
+                    ret := DeleteObjectAllVersions(CurrentPathElement,ChildrenObjElement);
+                    if not (ret) then return 0; endif;
+                    
+                    return GUI_LoadPathSelected;
+                }
+                Parameter ret;
+            }
+            Procedure GUI_AddEditAuth {
+                Body: {
+                    ret := guipro::EditAuthorization(ElementAuth);
+                    if not (ret) then return 0; endif;
+                    
+                    return 1;
+                }
+                Parameter ret;
+            }
+            Procedure GUI_AddElement {
+                Body: {
+                    if CurrentPathElement = '' or CurrentPathElement = '/' then return 0; endif;
+                    
+                    ! Build selected path
+                    ElementPath := "";
+                    for (CURPATH in CurrentPath | CURPATH <> '/' AND CurrentPathLevel(CURPATH) <= CurrentPathLevel(CurrentPathElement)) do
+                            ElementPath += CURPATH + "/";
+                    endfor;
+                    ElementPath := SubString(ElementPath,1,StringLength(ElementPath) - 1);
+                    
+                    ElementName := "";
+                    ElementAuth := "";
+                    ElementObject := 0;
+                    
+                    ! Open Page
+                    PageOpen("Storage Add");
+                    
+                    return 1;
+                }
+                Parameter ret;
+                StringParameter versionID;
+            }
+            Procedure GUI_AddElementAction {
+                Body: {
+                    ! Check defined authorization
+                    if ElementAuth = "" then
+                            ret := guipro::EditAuthorization(ElementAuth);
+                            if not (ret) then return 0; endif;
+                    endif;
+                    
+                    ! Add element
+                    if ElementObject then
+                            ret := pro::storage::PutObjectVersion(ElementPath,ElementName,ElementFile,ElementAuth,versionID);
+                            if not handleError(ret) then return 0; endif;
+                    else
+                            ret := pro::storage::CreateBucket(ElementPath,ElementName,ElementAuth);
+                            if not handleError(ret) then return 0; endif;
+                    endif;
+                    GUI_LoadPathSelected;
+                    
+                    return 1;
+                }
+                Parameter ret;
+                StringParameter versionID;
+            }
+            Procedure GUI_AddElementVersion {
+                Body: {
+                    if ChildrenObjElement = '' then return 0; endif;
+                    
+                    if not FileSelect(ElementFile, title: "Select new version file") then return 0; endif;
+                    
+                    ! Add object version
+                    ret := pro::storage::UpdateObjectVersion(First(ChildrenObjVer), ElementFile, versionID);
+                    if not handleError(ret) then return 0; endif;
+                    GUI_LoadObjVersionSelected;
+                    
+                    return 1;
+                }
+                Parameter ret;
+                StringParameter versionID;
+            }
+            Procedure GUI_DownloadVersion {
+                Body: {
+                    if ChildrenObjVerElement = '' then return 0; endif;
+                    
+                    ret := pro::SaveVersionInFolder(ChildrenObjVerElement,PersistentSelectedFolder);
+                    if not handleError(ret) then return 0; endif;
+                    
+                    return 1;
+                }
+                Parameter ret;
+            }
+        }
+        Section Service_Configuration_GUI {
+            Set Services {
+                Index: PRO_SERVICES;
+                Parameter: ServicesElement;
+                Property: NoSave;
+                Definition: {
+                    data
+                        { 'Authentication Service', 'Messaging Service'     ,'Publishing Service'    ,
+                          'Storage Service'       , 'Session Manager'       }
+                }
+            }
+            StringParameter ServiceName {
+                IndexDomain: PRO_SERVICES;
+                Property: NoSave;
+                Definition: {
+                    data
+                    { 'Session Manager'        : "PROT",  'Authentication Service' : "PROA",
+                      'Messaging Service'      : "PROM",  'Publishing Service'     : "PROP",  'Storage Service'        : "PROS" }
+                }
+            }
+            StringParameter GUI_ConfigParamDefault {
+                IndexDomain: (CFG_PARAM);
+                Property: NoSave;
+                InitialData: "";
+            }
+            StringParameter GUI_ConfigParamAttrDefault {
+                IndexDomain: (CFG_PARAM,CFG_ATTR,LST_INDEX) | ConfigParamType(CFG_PARAM)='list' and Ord(LST_INDEX) <= ConfigParamListSize(CFG_PARAM);
+                Property: NoSave;
+                InitialData: "";
+            }
+            Parameter GUI_ConfigParamListSizeDefault {
+                IndexDomain: CFG_PARAM | ConfigParamType(CFG_PARAM)='list';
+                Range: integer;
+                Property: NoSave;
+                InitialData: 0;
+            }
+            Parameter GUI_ConfigParamChanged {
+                IndexDomain: (CFG_PARAM);
+                Range: binary;
+                Property: NoSave;
+                InitialData: 0;
+            }
+            ElementParameter GUI_ConfigParamColor {
+                IndexDomain: (CFG_PARAM);
+                Range: AllColors;
+                Property: NoSave;
+                Definition: if GUI_ConfigParamChanged(CFG_PARAM) then 'red' else 'black' endif;
+            }
+            Set GUI_ConfigAttrFilter {
+                SubsetOf: ConfigAttributes;
+                Index: GUI_CFG_ATTR;
+                Property: NoSave;
+                Definition: {
+                    {CFG_ATTR | ConfigParamAttrType(ConfigParamElement,CFG_ATTR)}
+                }
+            }
+            Set GUI_ListElements {
+                SubsetOf: ListIndex;
+                Index: GUI_LST_INDEX;
+                Parameter: GUI_ListElement;
+                OrderBy: GUI_LST_INDEX;
+                Definition: {
+                    {LST_INDEX | Ord(LST_INDEX) <= ConfigParamListSize(ConfigParamElement)}
+                }
+            }
+            Procedure GUI_FillConfigParameters {
+                Body: {
+                    ! Get parameter list in the server
+                    if ServicesElement = '' then
+                            DialogMessage("Please select a valid service","PRO Framework");
+                    endif;
+                    
+                    ret := FillConfigParameters(ServiceName(ServicesElement));
+                    
+                    empty GUI_ConfigParamChanged;
+                    GUI_ConfigParamDefault(CFG_PARAM) := ConfigParamValue(CFG_PARAM);
+                    GUI_ConfigParamAttrDefault(CFG_PARAM,CFG_ATTR,LST_INDEX) := ConfigParamAttrValue(CFG_PARAM,CFG_ATTR,LST_INDEX);
+                    GUI_ConfigParamListSizeDefault(CFG_PARAM) := ConfigParamListSize(CFG_PARAM);
+                    
+                    return ret;
+                }
+                Parameter ret;
+                StringParameter tmpStr {
+                    InitialData: "";
+                }
+            }
+            Procedure GUI_SetConfigParameters {
+                Body: {
+                    ! Get parameter list in the server
+                    if ServicesElement = '' then
+                            DialogMessage("Please select a valid service","PRO Framework");
+                    endif;
+                    
+                    for CFG_PARAM | GUI_ConfigParamChanged(CFG_PARAM) do
+                            ret := SetConfigParameter(ServiceName(ServicesElement),CFG_PARAM,tmpRest);
+                            if not ret then return 0; endif;
+                    
+                            tmpRestAny := tmpRestAny or tmpRest;
+                            if tmpRest then
+                                    if tmpStr <> "" then tmpStr += ", "; endif;
+                                    tmpStr += CFG_PARAM;
+                            endif;
+                    endfor;
+                    
+                    empty GUI_ConfigParamChanged;
+                    
+                    if tmpRestAny then
+                            DialogMessage(ServiceName(ServicesElement) + " must be restarted due to changes in: " + tmpStr,"PRO Framework");
+                    endif;
+                    
+                    return 1;
+                }
+                Parameter ret;
+                StringParameter tmpStr {
+                    InitialData: "";
+                }
+                Parameter tmpRest {
+                    Range: binary;
+                }
+                Parameter tmpRestAny {
+                    Range: binary;
+                }
+            }
+            Procedure GUI_ConfigChange {
+                Body: {
+                    GUI_ConfigParamChanged(ConfigParamElement) := 1;
+                }
+            }
+            Procedure GUI_UndoChanges {
+                Body: {
+                    for CFG_PARAM | GUI_ConfigParamChanged(CFG_PARAM) do
+                            ConfigParamValue(CFG_PARAM) := GUI_ConfigParamDefault(CFG_PARAM);
+                            ConfigParamListSize(CFG_PARAM) := GUI_ConfigParamListSizeDefault(CFG_PARAM);
+                            if ConfigParamType(CFG_PARAM) = 'list' then
+                                    ConfigParamAttrValue(CFG_PARAM,CFG_ATTR,LST_INDEX) := GUI_ConfigParamAttrDefault(CFG_PARAM,CFG_ATTR,LST_INDEX);
+                            endif;
+                    endfor;
+                    empty GUI_ConfigParamChanged;
+                }
+            }
+            Procedure GUI_AddListElement {
+                Body: {
+                    ConfigParamListSize(ConfigParamElement) += 1;
+                    GUI_ListElement := Last(GUI_ListElements);
+                    
+                    GUI_ConfigChange;
+                }
+            }
+            Procedure GUI_RemoveListElement {
+                Body: {
+                    for GUI_LST_INDEX | GUI_LST_INDEX >= GUI_ListElement do
+                            ConfigParamAttrValue(ConfigParamElement,CFG_ATTR,GUI_LST_INDEX) := ConfigParamAttrValue(ConfigParamElement,CFG_ATTR,GUI_LST_INDEX + 1);
+                    endfor;
+                    
+                    ConfigParamListSize(ConfigParamElement) -= 1;
+                    
+                    GUI_ConfigChange;
+                }
+            }
+            Procedure GUI_UpListElement {
+                Body: {
+                    if First(GUI_LST_INDEX) = GUI_ListElement then return 1; endif;
+                    
+                    Tmp_ConfigParamAttrValue(CFG_ATTR) := ConfigParamAttrValue(ConfigParamElement,CFG_ATTR,GUI_ListElement - 1);
+                    ConfigParamAttrValue(ConfigParamElement,CFG_ATTR,GUI_ListElement - 1) := ConfigParamAttrValue(ConfigParamElement,CFG_ATTR,GUI_ListElement);
+                    ConfigParamAttrValue(ConfigParamElement,CFG_ATTR,GUI_ListElement) := Tmp_ConfigParamAttrValue(CFG_ATTR);
+                    
+                    GUI_ListElement -= 1;
+                    
+                    GUI_ConfigChange;
+                }
+                StringParameter Tmp_ConfigParamAttrValue {
+                    IndexDomain: (CFG_ATTR);
+                    InitialData: "";
+                }
+            }
+            Procedure GUI_DownListElement {
+                Body: {
+                    if Last(GUI_LST_INDEX) = GUI_ListElement then return 1; endif;
+                    
+                    Tmp_ConfigParamAttrValue(CFG_ATTR) := ConfigParamAttrValue(ConfigParamElement,CFG_ATTR,GUI_ListElement + 1);
+                    ConfigParamAttrValue(ConfigParamElement,CFG_ATTR,GUI_ListElement + 1) := ConfigParamAttrValue(ConfigParamElement,CFG_ATTR,GUI_ListElement);
+                    ConfigParamAttrValue(ConfigParamElement,CFG_ATTR,GUI_ListElement) := Tmp_ConfigParamAttrValue(CFG_ATTR);
+                    
+                    GUI_ListElement += 1;
+                    
+                    GUI_ConfigChange;
+                }
+                StringParameter Tmp_ConfigParamAttrValue {
+                    IndexDomain: (CFG_ATTR);
+                    InitialData: "";
+                }
+            }
+        }
+        Section Authorization_Editor_GUI {
+            Procedure GUI_RemoveEntity {
+                Body: {
+                    ! Validation
+                    if Pe_CUR_Entity = '' then
+                            DialogError("Please select a valid entity","Remove Authorization");
+                            return 0;
+                    endif;
+                    
+                    ! Add to the set
+                    CurrentEntity -= Pe_CUR_Entity;
+                    
+                    return 1;
+                }
+                StringParameter tmpStr;
+            }
+            Procedure GUI_AddUserAuth {
+                Body: {
+                    ! Validation
+                    if Pe_GUI_User = '' then
+                            DialogError("Please select a valid user","Add User Authorization");
+                            return 0;
+                    endif;
+                    
+                    ! Add to the set
+                    CurrentEntity += Pe_GUI_User;
+                    
+                    return 1;
+                }
+                StringParameter tmpStr;
+            }
+            Procedure GUI_AddGroupAuth {
+                Body: {
+                    ! Validation
+                    if Pe_GUI_Group = '' then
+                            DialogError("Please select a valid group","Add Group Authorization");
+                            return 0;
+                    endif;
+                    
+                    ! Add to the set
+                    CurrentEntity += Pe_GUI_Group;
+                    
+                    return 1;
+                }
+                StringParameter tmpStr;
+            }
+        }
+        Section Model_Configuration_GUI {
+            Parameter PGUI_SelectDLLPath {
+                Range: binary;
+                Property: NoSave;
+                InitialData: 0;
+            }
+        }
+    }
+    Section User_DB {
+        Set PROEnvList {
+            SubsetOf: PROEnv;
+            Index: PRO_ENV_LST;
+            Parameter: Pe_Env_List, Pe_Env_Group_List;
+            Property: NoSave;
+            OrderBy: PRO_ENV_LST;
+        }
+        Set PROUserList {
+            SubsetOf: PROUser;
+            Index: PRO_USER_LST;
+            Parameter: Pe_User_List;
+            Property: NoSave;
+            OrderBy: PROUserName(PRO_USER_LST);
+        }
+        Set PROGroupList {
+            SubsetOf: PROGroup;
+            Index: PRO_GRP_LST;
+            Parameter: Pe_Group_List;
+            Property: NoSave;
+            OrderBy: PROGroupName(PRO_GRP_LST);
+        }
+        Set PROCurrentUserGroupList {
+            SubsetOf: PROGroup;
+            Parameter: Pe_Group_Cur_User;
+        }
+        Procedure AddEnvironment {
+            Arguments: (ArgEnv);
+            Body: {
+                ! Get the environment name
+                ret := DialogGetString("Enter the Environment Name",tmpEnv,"New Environment");
+                if not ret then return 0; endif;
+                if StringToElement(PROEnvList,tmpEnv) <> '' then
+                        DialogError("Environment already exists","PRO Framework");
+                        return 0;
+                endif;
+                
+                ret := DialogGetString("Enter some description",tmpDescr,"New Environment");
+                if not ret then return 0; endif;
+                
+                ! Define the security
+                tmpAuth := "";
+                ret := guipro::EditAuthorization(tmpAuth);
+                if not (ret) then return 0; endif;
+                
+                ! Initialize PRO Framework (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Create environment
+                ret := pro::authentication::AddEnvironment(tmpEnv,tmpDescr,tmpAuth);
+                if not handleError(ret) then return 0; endif;
+                
+                ! Populate sets
+                UpdateLocalUserDatabase;
+                
+                return 1;
+            }
+            Parameter ret;
+            StringParameter tmpEnv;
+            StringParameter tmpDescr;
+            StringParameter tmpAuth;
+            ElementParameter ArgEnv {
+                Range: PROEnvList;
+                Property: Output;
+            }
+        }
+        Procedure UpdateEnvironment {
+            Arguments: (ArgEnv);
+            Body: {
+                ! Basic validation
+                if ArgEnv = '' then
+                        DialogError("Please choose a valid environment","PRO Framework");
+                        return 0;
+                endif;
+                
+                ! Define the security
+                tmpAuth := PROEnvAuth(ArgEnv);
+                ret := guipro::EditAuthorization(tmpAuth);
+                if not (ret) then return 0; endif;
+                
+                ! Initialize PRO Framework (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Create environment
+                ret := pro::authentication::UpdateEnvironment(PROEnvName(ArgEnv),tmpAuth);
+                if not handleError(ret) then return 0; endif;
+                PROEnvAuth(ArgEnv) := tmpAuth;
+                
+                return 1;
+            }
+            Parameter ret;
+            StringParameter tmpAuth;
+            ElementParameter ArgEnv {
+                Range: PROEnvList;
+                Property: Input;
+            }
+        }
+        Procedure AddUser {
+            Arguments: (ArgEnv,ArgUser);
+            Body: {
+                ! Basic validation
+                if ArgEnv = '' then
+                        DialogError("Please choose a valid environment","PRO Framework");
+                        return 0;
+                endif;
+                
+                ! Get the environment name
+                ret := DialogGetString("Enter the User Name",tmpUsr,"New User");
+                if not ret then return 0; endif;
+                if StringToElement(PROUserList,tmpUsr) <> '' then
+                        DialogError("User already exists","PRO Framework");
+                        return 0;
+                endif;
+                
+                ret := DialogGetString("Enter some description",tmpName,"New User");
+                if not ret then return 0; endif;
+                
+                ret := DialogGetPassword("Enter the password",tmpPassword,"New User");
+                if not ret then return 0; endif;
+                
+                ! Initialize PRO Framework (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Create environment
+                ret := pro::authentication::AddUser(PROEnvName(ArgEnv),tmpUsr,tmpName,"",tmpPassword);
+                if not handleError(ret) then return 0; endif;
+                
+                ! Populate sets
+                UpdateLocalUserDatabase;
+                
+                return 1;
+            }
+            Parameter ret;
+            StringParameter tmpUsr {
+                InitialData: "";
+            }
+            StringParameter tmpName {
+                InitialData: "";
+            }
+            StringParameter tmpPassword {
+                InitialData: "";
+            }
+            StringParameter tmpBucket {
+                InitialData: "";
+            }
+            ElementParameter ArgEnv {
+                Range: PROEnvList;
+                Property: Input;
+            }
+            ElementParameter ArgUser {
+                Range: PROUserList;
+                Property: Output;
+            }
+        }
+        Procedure AddGroup {
+            Arguments: (ArgEnv,ArgGroup);
+            Body: {
+                ! Basic validation
+                if ArgEnv = '' then
+                        DialogError("Please choose a valid environment","PRO Framework");
+                        return 0;
+                endif;
+                
+                ! Get the environment name
+                ret := DialogGetString("Enter the Group Name",tmpGrp,"New Group");
+                if not ret then return 0; endif;
+                if StringToElement(PROEnvList,tmpGrp) <> '' then
+                        DialogError("Group already exists","PRO Framework");
+                        return 0;
+                endif;
+                
+                ret := DialogGetString("Enter some description",tmpDescription,"New Group");
+                if not ret then return 0; endif;
+                
+                ! Initialize PRO Framework (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Create environment
+                ret := pro::authentication::AddGroup(PROEnvName(ArgEnv),tmpGrp,tmpDescription);
+                if not handleError(ret) then return 0; endif;
+                
+                ! Populate sets
+                UpdateLocalUserDatabase;
+                
+                return 1;
+            }
+            Parameter ret;
+            StringParameter tmpGrp {
+                InitialData: "";
+            }
+            StringParameter tmpDescription {
+                InitialData: "";
+            }
+            ElementParameter ArgEnv {
+                Range: PROEnvList;
+                Property: Input;
+            }
+            ElementParameter ArgGroup {
+                Range: PROGroupList;
+                Property: Output;
+            }
+        }
+        Procedure RemoveEnvironment {
+            Arguments: (ArgEnv);
+            Body: {
+                ! Basic validation
+                if ArgEnv = '' then
+                        DialogError("Please choose a valid environment","PRO Framework");
+                        return 0;
+                elseif DialogAsk("Are you sure to remove the selected environment and all entities?","Yes","No",title:"PRO Framework")=2 then
+                        return 0;
+                endif;
+                
+                ! Initialize PRO Framework (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Create environment
+                ret := pro::authentication::RemoveEnvironment(PROEnvName(ArgEnv));
+                if not handleError(ret) then return 0; endif;
+                
+                PROEnvList -= ArgEnv;
+                
+                ! Populate sets
+                UpdateLocalUserDatabase;
+                
+                return 1;
+            }
+            Parameter ret;
+            StringParameter tmpEnv;
+            StringParameter tmpDescr;
+            StringParameter tmpAuth;
+            ElementParameter ArgEnv {
+                Range: PROEnvList;
+                Property: Input;
+            }
+        }
+        Procedure RemoveUser {
+            Arguments: (ArgEnv,ArgUser);
+            Body: {
+                ! Basic validation
+                if ArgEnv = '' then
+                        DialogError("Please choose a valid environment","PRO Framework");
+                        return 0;
+                elseif ArgUser = '' then
+                        DialogError("Please select an user","PRO Framework");
+                        return 0;
+                endif;
+                
+                ! Initialize PRO Framework (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Create environment
+                ret := pro::authentication::RemoveUser(PROEnvName(ArgEnv),PROUserName(ArgUser));
+                if not handleError(ret) then return 0; endif;
+                
+                ! Populate sets
+                UpdateLocalUserDatabase;
+                
+                return 1;
+            }
+            Parameter ret;
+            ElementParameter ArgEnv {
+                Range: PROEnvList;
+                Property: Input;
+            }
+            ElementParameter ArgUser {
+                Range: PROUserList;
+                Property: Input;
+            }
+        }
+        Procedure RemoveGroup {
+            Arguments: (ArgEnv,ArgGroup);
+            Body: {
+                ! Basic validation
+                if ArgEnv = '' then
+                        DialogError("Please choose a valid environment","PRO Framework");
+                        return 0;
+                elseif ArgGroup = '' then
+                        DialogError("Please select a group","PRO Framework");
+                        return 0;
+                endif;
+                
+                ! Initialize PRO Framework (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Create environment
+                ret := pro::authentication::RemoveGroup(PROEnvName(ArgEnv),PROGroupName(ArgGroup));
+                if not handleError(ret) then return 0; endif;
+                
+                ! Populate sets
+                UpdateLocalUserDatabase;
+                
+                return 1;
+            }
+            Parameter ret;
+            ElementParameter ArgEnv {
+                Range: PROEnvList;
+                Property: Input;
+            }
+            ElementParameter ArgGroup {
+                Range: PROGroupList;
+                Property: Input;
+            }
+        }
+        Procedure AssociateUserToGroup {
+            Arguments: (ArgUser,ArgGroup);
+            Body: {
+                ! Basic validation
+                if Pe_Env_List = '' then
+                        DialogError("Please choose a valid environment","PRO Framework");
+                        return 0;
+                elseif ArgUser = '' then
+                        DialogError("Please choose a valid user","PRO Framework");
+                        return 0;
+                elseif ArgGroup = '' then
+                        DialogError("Please choose a valid group","PRO Framework");
+                        return 0;
+                elseif PROUserGroup(ArgUser,ArgGroup) then
+                        return 1;
+                endif;
+                
+                ! Initialize PRO (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ret := pro::authentication::AssociateUserGroup(PROEntityEnvironmentName(ArgUser),PROEntityName(ArgUser),
+                                                                                                PROEntityEnvironmentName(ArgGroup),PROEntityName(ArgGroup));
+                if not (ret) then return 0; endif;
+                
+                ! Populate sets
+                UpdateLocalUserDatabase;
+                
+                return 1;
+            }
+            Parameter ret;
+            ElementParameter ArgUser {
+                Range: PROUserList;
+                Property: Input;
+            }
+            ElementParameter ArgGroup {
+                Range: PROGroupList;
+                Property: Input;
+            }
+        }
+        Procedure DisassociateUserFromGroup {
+            Arguments: (ArgUser,ArgGroup);
+            Body: {
+                ! Basic validation
+                if Pe_Env_List = '' then
+                        DialogError("Please choose a valid environment","PRO Framework");
+                        return 0;
+                elseif ArgUser = '' then
+                        DialogError("Please choose a valid user","PRO Framework");
+                        return 0;
+                elseif ArgGroup = '' then
+                        DialogError("Please choose a valid group","PRO Framework");
+                        return 0;
+                elseif PROUserGroup(ArgUser,ArgGroup) = 0 then
+                        return 1;
+                endif;
+                
+                ! Initialize PRO (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ret := pro::authentication::DisassociateUserGroup(PROEntityEnvironmentName(ArgUser),PROEntityName(ArgUser),
+                                                                                                PROEntityEnvironmentName(ArgGroup),PROEntityName(ArgGroup));
+                if not (ret) then return 0; endif;
+                
+                ! Populate sets
+                UpdateLocalUserDatabase;
+                
+                return 1;
+            }
+            Parameter ret;
+            ElementParameter ArgUser {
+                Range: PROUserList;
+                Property: Input;
+            }
+            ElementParameter ArgGroup {
+                Range: PROGroup;
+                Property: Input;
+            }
+        }
+        Procedure UpdateEnvList {
+            Body: {
+                ! Initialize PRO Framework (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                UpdateLocalUserDatabase;
+                
+                return 1;
+            }
+            Parameter ret;
+        }
+        Procedure UpdateLocalUserDatabase {
+            Body: {
+                ! Initialize PRO Framework (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                PopulateEntitySets;
+                
+                ! Populate sets
+                
+                PROEnvList := PROEnv;
+                if (not Pe_Env_List) then Pe_Env_List := first(PROEnvList); endif;
+                PROUserList := PROEnvUser(Pe_Env_List);
+                UpdateUserGroupList;
+                
+                Pe_Env_Group_List := Pe_Env_List;
+                UpdateEnvGroupList;
+                
+                return 1;
+            }
+            Parameter ret;
+        }
+        Procedure UpdateUserGroupList {
+            Body: {
+                PROCurrentUserGroupList := { PRO_GRP | PROUserGroup(Pe_User_List, PRO_GRP) };
+            }
+        }
+        Procedure UpdateEnvGroupList {
+            Body: {
+                PROGroupList := PROEnvGroup(Pe_Env_Group_List);
+            }
+        }
+    }
+    Section Session_List {
+        Set sessionList {
+            Index: PRO_SESSION;
+            Parameter: sessionElement;
+            Property: NoSave;
+        }
+        StringParameter session_ClientQueue {
+            IndexDomain: (PRO_SESSION);
+            Property: NoSave;
+        }
+        StringParameter session_WorkerQueue {
+            IndexDomain: (PRO_SESSION);
+            Property: NoSave;
+        }
+        Parameter session_CurrentStatus {
+            IndexDomain: (PRO_SESSION);
+            Property: NoSave;
+        }
+        StringParameter session_CreateTime {
+            IndexDomain: (PRO_SESSION);
+            Property: NoSave;
+        }
+        StringParameter session_UserEnv {
+            IndexDomain: (PRO_SESSION);
+            Property: NoSave;
+        }
+        StringParameter session_UserName {
+            IndexDomain: (PRO_SESSION);
+            Property: NoSave;
+        }
+        StringParameter session_Application {
+            IndexDomain: (PRO_SESSION);
+            Property: NoSave;
+        }
+        Parameter session_IsManaged {
+            IndexDomain: PRO_SESSION;
+            Range: binary;
+            Property: NoSave;
+            InitialData: 0;
+        }
+        StringParameter session_man_RequestDescription {
+            IndexDomain: PRO_SESSION;
+            Property: NoSave;
+            InitialData: "";
+        }
+        StringParameter session_man_Procedure {
+            IndexDomain: PRO_SESSION;
+            Property: NoSave;
+            InitialData: "";
+        }
+        Parameter session_man_RunTimeOut {
+            IndexDomain: PRO_SESSION;
+            Property: NoSave;
+            InitialData: 0;
+        }
+        StringParameter session_man_VersionID {
+            IndexDomain: PRO_SESSION;
+            Property: NoSave;
+            InitialData: "";
+        }
+        StringParameter session_man_ResponseVersionID {
+            IndexDomain: PRO_SESSION;
+            Property: NoSave;
+            InitialData: "";
+        }
+        StringParameter session_man_MessageLogVersionID {
+            IndexDomain: PRO_SESSION;
+            Property: NoSave;
+            InitialData: "";
+        }
+        StringParameter session_man_CurrentErrorMessage {
+            IndexDomain: PRO_SESSION;
+            Property: NoSave;
+            InitialData: "";
+        }
+        StringParameter session_man_RequestTime {
+            IndexDomain: PRO_SESSION;
+            Property: NoSave;
+            InitialData: "";
+        }
+        StringParameter session_man_OriginalCasePath {
+            IndexDomain: PRO_SESSION;
+            Property: NoSave;
+            InitialData: "";
+        }
+        Parameter session_man_ActiveStatus {
+            IndexDomain: PRO_SESSION;
+            Property: NoSave;
+            InitialData: 0;
+        }
+        Parameter session_man_ErrorCode {
+            IndexDomain: PRO_SESSION;
+        }
+        Procedure LoadSessionList {
+            Arguments: (SinceDate,AllUsers);
+            Body: {
+                ! Initialize PRO Framework (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Load raw session list from PROT
+                ret := pro::sessionmanager::ListSessionSinceDate(SinceDate,sessionList,session_ClientQueue,session_WorkerQueue,session_CurrentStatus,
+                                                      session_CreateTime,session_UserEnv,session_UserName,session_Application,
+                                                      session_man_OriginalCasePath, session_man_RequestDescription, session_man_Procedure, session_man_RunTimeOut,
+                                                      session_man_VersionID, session_man_ResponseVersionID, session_man_MessageLogVersionID,
+                                                      session_man_CurrentErrorMessage, session_man_ActiveStatus, session_man_ErrorCode, AllUsers : AllUsers);
+                if not handleError(ret) then return 0; endif;
+                if Card(sessionList) = 0 then return 1; endif;
+                
+                ! Get detailed data from managed sessions
+                contList := "";
+                for PRO_SESSION do
+                        if(contList<>"") then contList += ","; endif;
+                        contList += "'" + PRO_SESSION + "'";
+                endfor;
+                
+                ! Update session list data with managed session info, if available
+                session_IsManaged(PRO_SESSION) := 1;
+                
+                return 1;
+            }
+            Parameter ret;
+            StringParameter contList;
+            Set Containers {
+                Index: CONT;
+                Parameter: Container;
+            }
+            Set Items {
+                Index: Item;
+                Parameter: PeItem;
+            }
+            StringParameter Value {
+                IndexDomain: (CONT,ITEM);
+            }
+            ElementParameter Ref {
+                IndexDomain: (CONT,ITEM);
+                Range: Containers;
+            }
+            StringParameter SinceDate {
+                Property: Input;
+            }
+            Parameter AllUsers {
+                Property: Input;
+            }
+        }
+        Procedure PurgeSessionList {
+            Arguments: (sList);
+            Body: {
+                if Card(sList) = 0 then return 0; endif;
+                
+                ! Request to remove sessions in PROT
+                warnStr := "";
+                ret := pro::sessionmanager::ClearSessionDatabase(sList,warnStr);
+                if not handleError(ret) then return 0; endif;
+                
+                ! Remove associated queues
+                for SESSION_LIST do
+                        SetElementAdd(queueList,sessionListElement,session_ClientQueue(StringToElement(sessionList,SESSION_LIST)));
+                        SetElementAdd(queueList,sessionListElement,session_WorkerQueue(StringToElement(sessionList,SESSION_LIST)));
+                endfor;
+                ret := pro::messaging::ClearMessageDatabase(queueList);
+                if not handleError(ret) then return 0; endif;
+                
+                ! Remove entries in the registry service
+                contList := "";
+                for SESSION_LIST do
+                        if(contList<>"") then contList += ","; endif;
+                        contList += "'" + SESSION_LIST + "'";
+                endfor;
+                
+                if (warnStr <> "") then
+                        DialogMessage(warnStr,"Warnings");
+                endif;
+                
+                return 1;
+            }
+            Set sList {
+                Index: SESSION_LIST;
+                Property: Input;
+            }
+            Parameter ret;
+            StringParameter warnStr;
+            StringParameter contList;
+            Set queueList {
+                Index: SES_QUEUE_LIST;
+                Parameter: sessionListElement;
+            }
+        }
+    }
+    Section Storage_Manager {
+        Set CurrentPath {
+            Index: CURPATH;
+            Parameter: CurrentPathElement;
+            Property: NoSave;
+            OrderBy: CurrentPathLevel(CURPATH);
+        }
+        StringParameter CurrentPathName {
+            IndexDomain: (CURPATH);
+            Property: NoSave;
+        }
+        Parameter CurrentPathLevel {
+            IndexDomain: (CURPATH);
+            Range: integer;
+            Property: NoSave;
+        }
+        Set ChildrenBkt {
+            Index: CURPATH_BKT;
+            Parameter: ChildrenBktElement;
+            Property: NoSave;
+        }
+        Parameter ChildrenBktSize {
+            IndexDomain: (CURPATH_BKT);
+            Property: NoSave;
+        }
+        StringParameter ChildrenBktAuth {
+            IndexDomain: (CURPATH_BKT);
+            Property: NoSave;
+        }
+        StringParameter ChildrenBktDate {
+            IndexDomain: (CURPATH_BKT);
+            Property: NoSave;
+        }
+        Set ChildrenObj {
+            Index: CURPATH_OBJ;
+            Parameter: ChildrenObjElement;
+            Property: NoSave;
+        }
+        StringParameter ChildrenObjName {
+            IndexDomain: (CURPATH_OBJ);
+            Property: NoSave;
+        }
+        StringParameter ChildrenObjType {
+            IndexDomain: (CURPATH_OBJ);
+            Property: NoSave;
+        }
+        Parameter ChildrenObjSize {
+            IndexDomain: (CURPATH_OBJ);
+            Property: NoSave;
+        }
+        StringParameter ChildrenObjAuth {
+            IndexDomain: (CURPATH_OBJ);
+            Property: NoSave;
+        }
+        Set ChildrenObjVer {
+            Index: CURPATH_OBJVER;
+            Parameter: ChildrenObjVerElement;
+            Property: NoSave;
+        }
+        Parameter ChildrenObjVerSize {
+            IndexDomain: (CURPATH_OBJVER);
+            Property: NoSave;
+        }
+        StringParameter ChildrenObjVerDate {
+            IndexDomain: (CURPATH_OBJVER);
+            Property: NoSave;
+        }
+        Procedure LoadPathInfo {
+            Arguments: (BaseLevel);
+            Body: {
+                ! Initialize PRO Framework (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Build selected path
+                if BaseLevel <> '' and BaseLevel <> '/' then
+                        for (CURPATH in CurrentPath | CURPATH <> '/' AND CurrentPathLevel(CURPATH) <= CurrentPathLevel(BaseLevel)) do
+                                SelectedFullPath += CURPATH + "/";
+                        endfor;
+                        SelectedFullPath := SubString(SelectedFullPath,1,StringLength(SelectedFullPath) - 1);
+                else
+                    SelectedFullPath := "/";
+                endif;
+                
+                ! Fill sub-buckets and folder information
+                ret := pro::storage::ListBuckets(SelectedFullPath,ChildrenBkt,ChildrenBktSize,ChildrenBktAuth,ChildrenBktDate);
+                ChildrenBktElement := first(ChildrenBkt);
+                if not handleError(ret) then return 0; endif;
+                if (SelectedFullPath <> "") then
+                        ret := pro::storage::ListObjects(SelectedFullPath,ChildrenObj,ChildrenObjName,ChildrenObjType,ChildrenObjSize,ChildrenObjAuth);
+                        ChildrenObjElement := first(ChildrenObj);
+                        ! if not handleError(ret) then return 0; endif;
+                else
+                        empty ChildrenObj;
+                endif;
+                empty ChildrenObjVer;
+                
+                ! New tree
+                if BaseLevel <> '' and BaseLevel <> '/' then
+                        CurrentPath := {CURPATH in CurrentPath | CurrentPathLevel(CURPATH) <= CurrentPathLevel(BaseLevel)};
+                        CurrentPath := {CURPATH in CurrentPath | CurrentPathLevel(CURPATH) <= CurrentPathLevel(BaseLevel)};
+                else
+                        CurrentPath := {'/'};
+                        CurrentPathLevel('/') := 0;
+                        CurrentPathName('/') := "/";
+                endif;
+                
+                return 1;
+            }
+            ElementParameter BaseLevel {
+                Range: CurrentPath;
+                Property: Input;
+            }
+            Parameter ret;
+            StringParameter SelectedFullPath;
+        }
+        Procedure LoadVersionInfo {
+            Arguments: (BaseObj);
+            Body: {
+                if BaseObj = '' then return 0; endif;
+                
+                ! Initialize PRO Framework (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Build selected path
+                SelectedFullPath := "";
+                for (CURPATH in CurrentPath | CURPATH <> '/') do
+                        SelectedFullPath += CURPATH + "/";
+                endfor;
+                SelectedFullPath := SubString(SelectedFullPath,1,StringLength(SelectedFullPath) - 1);
+                
+                ! Fill version information
+                ret := pro::storage::ListVersions(SelectedFullPath,BaseObj,ChildrenObjVer,ChildrenObjVerSize,ChildrenObjVerDate);
+                if not handleError(ret) then return 0; endif;
+                
+                return 1;
+            }
+            ElementParameter BaseObj {
+                Range: ChildrenObj;
+                Property: Input;
+            }
+            Parameter ret;
+            StringParameter SelectedFullPath;
+        }
+        Procedure EditBucketAuth {
+            Arguments: (Bucket);
+            Body: {
+                if Bucket = '' then return 0; endif;
+                
+                ! Define the security
+                tmpAuth := ChildrenBktAuth(Bucket);
+                ret := guipro::EditAuthorization(tmpAuth);
+                if not (ret) then return 0; endif;
+                
+                ! Build selected path
+                SelectedFullPath := "";
+                for (CURPATH in CurrentPath | CURPATH <> '/') do
+                        SelectedFullPath += CURPATH + "/";
+                endfor;
+                SelectedFullPath += Bucket;
+                
+                ! Update bucket info
+                ret := pro::storage::UpdateBucket(SelectedFullPath, tmpAuth);
+                if not handleError(ret) then return 0; endif;
+                
+                return 1;
+            }
+            ElementParameter Bucket {
+                Range: ChildrenBkt;
+                Property: Input;
+            }
+            Parameter ret;
+            StringParameter tmpAuth {
+                InitialData: "";
+            }
+            StringParameter SelectedFullPath {
+                InitialData: "";
+            }
+        }
+        Procedure EditObjectAuth {
+            Arguments: (Bucket,Object);
+            Body: {
+                if Bucket = '' or Object = '' then return 0; endif;
+                
+                ! Define the security
+                tmpAuth := ChildrenObjAuth(Object);
+                ret := guipro::EditAuthorization(tmpAuth);
+                if not (ret) then return 0; endif;
+                
+                ! Build selected path
+                SelectedFullPath := "";
+                for (CURPATH in CurrentPath | CURPATH <> '/') do
+                        SelectedFullPath += CURPATH + "/";
+                endfor;
+                SelectedFullPath := SubString(SelectedFullPath,1,StringLength(SelectedFullPath) - 1);
+                
+                ! Update bucket info
+                ret := pro::storage::UpdateObject(SelectedFullPath,Object,tmpAuth);
+                if not handleError(ret) then return 0; endif;
+                LoadPathInfo(Bucket);
+                
+                return 1;
+            }
+            ElementParameter Object {
+                Range: ChildrenObj;
+                Property: Input;
+            }
+            Parameter ret;
+            StringParameter tmpAuth {
+                InitialData: "";
+            }
+            StringParameter SelectedFullPath {
+                InitialData: "";
+            }
+            ElementParameter Bucket {
+                Range: CurrentPath;
+                Property: Input;
+            }
+        }
+        Procedure DeleteBucket {
+            Arguments: (Bucket);
+            Body: {
+                if Bucket = '' then return 0; endif;
+                
+                ! Build selected path
+                SelectedFullPath := "";
+                if Bucket <> '' and Bucket <> '/' then
+                        for (CURPATH in CurrentPath | CURPATH <> '/' ) do
+                                SelectedFullPath += CURPATH + "/";
+                        endfor;
+                        SelectedFullPath += Bucket;
+                endif;
+                
+                ! Update bucket info
+                ret := pro::storage::DeleteBucket(SelectedFullPath);
+                if not handleError(ret) then return 0; endif;
+                
+                return 1;
+            }
+            ElementParameter Bucket {
+                Range: ChildrenBkt;
+                Property: Input;
+            }
+            Parameter ret;
+            StringParameter SelectedFullPath {
+                InitialData: "";
+            }
+        }
+        Procedure DeleteVersion {
+            Arguments: (Version);
+            Body: {
+                if Version = '' then return 0; endif;
+                
+                ! Update bucket info
+                ret := pro::storage::DeleteObjectVersion(Version);
+                if not handleError(ret) then return 0; endif;
+                
+                return 1;
+            }
+            ElementParameter Version {
+                Range: ChildrenObjVer;
+                Property: Input;
+            }
+            Parameter ret;
+        }
+        Procedure DeleteObjectAllVersions {
+            Arguments: (Bucket,Object);
+            Body: {
+                if Bucket = '' or Object = '' then return 0; endif;
+                
+                ! Build selected path
+                SelectedFullPath := "";
+                for (CURPATH in CurrentPath | CURPATH <> '/') do
+                        SelectedFullPath += CURPATH + "/";
+                endfor;
+                SelectedFullPath := SubString(SelectedFullPath,1,StringLength(SelectedFullPath) - 1);
+                
+                ! Update bucket info
+                ret := pro::storage::DeleteObjectAllVersions(SelectedFullPath,Object);
+                if not handleError(ret) then return 0; endif;
+                
+                return 1;
+            }
+            ElementParameter Bucket {
+                Range: CurrentPath;
+                Property: Input;
+            }
+            ElementParameter Object {
+                Range: ChildrenObj;
+                Property: Input;
+            }
+            Parameter ret;
+            StringParameter SelectedFullPath {
+                InitialData: "";
+            }
+        }
+    }
+    Section Service_Configuration {
+        Set ConfigParam {
+            Index: CFG_PARAM;
+            Parameter: ConfigParamElement;
+            Property: NoSave;
+        }
+        Set ConfigAttributes {
+            Index: CFG_ATTR;
+            Parameter: ConfigAttributesElement, ConfigAttributesElement1;
+            Property: NoSave;
+        }
+        Set ConfigType {
+            Index: CFG_TYPE;
+            Property: NoSave;
+        }
+        Set ListIndex {
+            Index: LST_INDEX;
+            Parameter: ListElement;
+            Property: NoSave;
+            Definition: {
+                if Sum(CFG_PARAM,ConfigParamListSize(CFG_PARAM)) > 0 then
+                        ElementRange(1,Max(CFG_PARAM,ConfigParamListSize(CFG_PARAM)),prefix : "Elem #")
+                endif
+            }
+        }
+        Parameter ConfigParamListSize {
+            IndexDomain: CFG_PARAM | ConfigParamType(CFG_PARAM)='list';
+            Range: integer;
+            Property: NoSave;
+            InitialData: 0;
+        }
+        ElementParameter ConfigParamType {
+            IndexDomain: CFG_PARAM;
+            Range: ConfigType;
+            Property: NoSave;
+        }
+        ElementParameter ConfigParamAttrType {
+            IndexDomain: (CFG_PARAM,CFG_ATTR);
+            Range: ConfigType;
+            Property: NoSave;
+        }
+        StringParameter ConfigParamValue {
+            IndexDomain: (CFG_PARAM);
+            Property: NoSave;
+            InitialData: "";
+        }
+        StringParameter ConfigParamAttrValue {
+            IndexDomain: (CFG_PARAM,CFG_ATTR,LST_INDEX) | ConfigParamType(CFG_PARAM)='list' and Ord(LST_INDEX) <= ConfigParamListSize(CFG_PARAM);
+            Property: NoSave;
+        }
+        Procedure FillConfigParameters {
+            Arguments: (service);
+            Body: {
+                empty ConfigParam, ConfigAttributes, ConfigType, ConfigParamType, ConfigParamAttrType, ConfigParamValue, ConfigParamAttrValue;
+                empty TmpTokenIndex, TmpTokenIndex1, TmpTokenIndex2;
+                
+                ! Get the parameter list
+                ret := pro::management::GetConfig(service,"parameters",tmpStr);
+                if not handleError(ret) then return 0; endif;
+                
+                ! Split list into the parameters elements (separated by ";")
+                SplitString(tmpStr,";",TmpTokenIndex,TmpTokenValue);
+                
+                ! Split each parameter in name:type:listelements (:listelements is only for type "list")
+                TmpTokenIndex1 := ElementRange(1,3);
+                for LOC_TOKEN | TmpTokenValue(LOC_TOKEN)<>"" do
+                        empty TmpTokenValue1;
+                        SplitString(TmpTokenValue(LOC_TOKEN),":",TmpTokenIndex1,TmpTokenValue1);
+                
+                        ! Add the new configuration parameter
+                        SetElementAdd(ConfigParam,ConfigParamElement,TmpTokenValue1('1'));
+                        ConfigParamType(ConfigParamElement) := StringToElement(ConfigType,TmpTokenValue1('2'),1);
+                
+                        ! If it`s a list, split into the list elements (separated by ",")
+                        if TmpTokenValue1('2')="list" then
+                                empty TmpTokenIndex2, TmpTokenValue2;
+                
+                                SplitString(TmpTokenValue1('3'),",",TmpTokenIndex2,TmpTokenValue2);
+                                for LOC_TOKEN2 | TmpTokenValue2(LOC_TOKEN2)<>"" do
+                
+                                        ! Split the attribute name from the type (separated by "=")
+                                        tmpPos := FindNthString(TmpTokenValue2(LOC_TOKEN2),"=",1);
+                                        if(tmpPos > 0) then
+                                                ! Add the new parameter attribute
+                                                SetElementAdd(ConfigAttributes,ConfigAttributesElement,SubString(TmpTokenValue2(LOC_TOKEN2),0,tmpPos - 1));
+                                                ConfigParamAttrType(ConfigParamElement,ConfigAttributesElement) := StringToElement(ConfigType,SubString(TmpTokenValue2(LOC_TOKEN2),tmpPos + 1,10000),1);
+                                        endif;
+                
+                                endfor;
+                        endif;
+                endfor;
+                
+                ! Get the associated values
+                Tmp_ConfigParamNames(CFG_PARAM) := CFG_PARAM;
+                ret := pro::management::GetConfigVector(service, Tmp_ConfigParamNames,  ConfigParamValue);
+                if not handleError(ret) then return 0; endif;
+                
+                ! Fill the list attributes values
+                for CFG_PARAM | ConfigParamType(CFG_PARAM)='list' do
+                
+                        empty TmpTokenIndex, TmpTokenValue;
+                        SplitString(ConfigParamValue(CFG_PARAM),";",TmpTokenIndex,TmpTokenValue);
+                
+                        ConfigParamListSize(CFG_PARAM) := Count(LOC_TOKEN | TmpTokenValue(LOC_TOKEN)<>"");
+                        Tmp_ListIndex := First(LST_INDEX);
+                        for LOC_TOKEN | TmpTokenValue(LOC_TOKEN)<>"" do
+                
+                                empty TmpTokenIndex2, TmpTokenValue2;
+                                SplitString(TmpTokenValue(LOC_TOKEN),",",TmpTokenIndex2,TmpTokenValue2);
+                                for LOC_TOKEN2 | TmpTokenValue2(LOC_TOKEN2)<>"" do
+                
+                                        ! Split the attribute name from the type (separated by "=")
+                                        tmpPos := FindNthString(TmpTokenValue2(LOC_TOKEN2),"=",1);
+                                        if (tmpPos > 0) then
+                                                ConfigParamAttrValue(CFG_PARAM,StringToElement(ConfigAttributes,SubString(TmpTokenValue2(LOC_TOKEN2),0,tmpPos - 1)),Tmp_ListIndex) := SubString(TmpTokenValue2(LOC_TOKEN2),tmpPos + 1,10000);
+                                        endif;
+                
+                                endfor;
+                                Tmp_ListIndex += 1;
+                        endfor;
+                
+                        ConfigParamValue(CFG_PARAM) := "<<see attributes>>";
+                endfor;
+                
+                return 1;
+            }
+            StringParameter service {
+                Property: Input;
+            }
+            Parameter ret;
+            StringParameter tmpStr {
+                InitialData: "";
+            }
+            Parameter tmpPos {
+                Range: integer;
+            }
+            Set TmpTokenIndex {
+                Index: LOC_TOKEN;
+            }
+            StringParameter TmpTokenValue {
+                IndexDomain: (LOC_TOKEN);
+            }
+            Set TmpTokenIndex1 {
+                Index: LOC_TOKEN1;
+            }
+            StringParameter TmpTokenValue1 {
+                IndexDomain: LOC_TOKEN1;
+            }
+            Set TmpTokenIndex2 {
+                Index: LOC_TOKEN2;
+            }
+            StringParameter TmpTokenValue2 {
+                IndexDomain: LOC_TOKEN2;
+            }
+            StringParameter Tmp_ConfigParamNames {
+                IndexDomain: (CFG_PARAM);
+                InitialData: "";
+            }
+            ElementParameter Tmp_ListIndex {
+                Range: ListIndex;
+            }
+        }
+        Procedure SetConfigParameter {
+            Arguments: (service,param,restart);
+            Body: {
+                ! Select the value to be submitted
+                if ConfigParamType(param) <> 'list' then
+                        tmpStr := ConfigParamValue(param);
+                else
+                        for LST_INDEX | Ord(LST_INDEX) <= ConfigParamListSize(param) do
+                                if tmpStr <> "" then tmpStr += ";"; endif;
+                
+                                tmpPos := 0;
+                                for CFG_ATTR | ConfigParamAttrValue(param,CFG_ATTR,LST_INDEX) <> "" do
+                                        if tmpPos <> 0 then tmpStr += ","; endif;
+                
+                                        tmpStr += CFG_ATTR + "=" + ConfigParamAttrValue(param,CFG_ATTR,LST_INDEX);
+                                        tmpPos += 1;
+                                endfor;
+                        endfor;
+                endif;
+                
+                ret := pro::management::SetConfig(service,param,tmpStr,restart);
+                if not handleError(ret) then return 0; endif;
+                
+                return 1;
+            }
+            StringParameter service {
+                Property: Input;
+            }
+            ElementParameter param {
+                Range: ConfigParam;
+                Property: Input;
+            }
+            Parameter ret;
+            StringParameter tmpStr {
+                InitialData: "";
+            }
+            Parameter tmpPos {
+                Range: integer;
+            }
+            Parameter restart {
+                Property: Output;
+            }
+        }
+    }
+    Section Publishing_AIMMS {
+        Set AimmsVersions {
+            Index: AIMVER;
+            Parameter: AimmsVersion;
+            Property: NoSave;
+        }
+        Parameter SelectedAimmsVersion {
+            IndexDomain: (AIMVER);
+        }
+        StringParameter AimmsDescription {
+            IndexDomain: (AIMVER);
+            Property: NoSave;
+        }
+        StringParameter AimmsStorageID {
+            IndexDomain: (AIMVER);
+            Property: NoSave;
+        }
+        StringParameter AimmsAuthorization {
+            IndexDomain: (AIMVER);
+            Property: NoSave;
+        }
+        Set UserModels {
+            Index: USER_MODEL;
+            Parameter: UserModel;
+            Property: NoSave;
+        }
+        StringParameter ModelName {
+            IndexDomain: (USER_MODEL);
+            Property: NoSave;
+        }
+        StringParameter ModelVersion {
+            IndexDomain: (USER_MODEL);
+            Property: NoSave;
+        }
+        StringParameter ModelDescription {
+            IndexDomain: (USER_MODEL);
+            Property: NoSave;
+        }
+        StringParameter ModelAimmsVersion {
+            IndexDomain: (USER_MODEL);
+            Property: NoSave;
+        }
+        StringParameter ModelArguments {
+            IndexDomain: (USER_MODEL);
+            Property: NoSave;
+        }
+        StringParameter ModelStorageVersion {
+            IndexDomain: (USER_MODEL);
+            Property: NoSave;
+        }
+        Parameter Permission {
+            IndexDomain: (USER_MODEL);
+            Property: NoSave;
+        }
+        Procedure GetAimmsList {
+            Body: {
+                ! Initialize PRO Framework (if not initialized yet)
+                ret := pro::Initialize();
+                if not ret then return 0; endif;
+                
+                ! Retrieve the Aimms version list directly to the corresponding set and identifiers
+                ret := pro::publishing::RetrieveAimmsVersionList(AimmsVersions,AimmsDescription,AimmsStorageID,AimmsAuthorization);
+                if not handleError(ret) then return 0; endif;
+                
+                return 1;
+            }
+            Parameter ret;
+        }
+        Procedure PublishAimmsVersion {
+            Arguments: (NewAimmsVersion,NewAimmsDescription,SelectedFile,Authorization);
+            Body: {
+                ! Basic validation
+                if NewAimmsVersion = "" then
+                        DialogError("The Aimms Version cannot be empty","PRO Framework - Publish Aimms Version");
+                        return 0;
+                elseif not FileExists(SelectedFile) then
+                        DialogError("Invalid Aimms package","PRO Framework - Publish Aimms Version");
+                        return 0;
+                elseif SubString(SelectedFile,-3,-1) <> ".7z" then
+                        DialogError("Invalid Aimms package format (" + SubString(SelectedFile,-3,-1) + ")","PRO Framework - Publish Aimms Version");
+                        return 0;
+                endif;
+                
+                ! Initialize PRO (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Check if this version is already published
+                ret := pro::publishing::GetAimmsVersionInfo(NewAimmsVersion, tmpStr, tmpStr1, tmpStr2);
+                if not handleError(ret) then return 0; endif;
+                if tmpStr1 <> "" then
+                        DialogError("Version already published: " + NewAimmsVersion + " / " + tmpStr,"PRO Framework - Publish Aimms Version");
+                        return 0;
+                endif;
+                
+                ! Check the bucket to store the package
+                ret := pro::storage::GetBucketInfo(pro::GetPROSUserBucket,"PROP",tmpVal,tmpStr,tmpStr1); ! Get storage bucket info
+                if not handleError(ret) then return 0; endif;
+                if tmpVal < 0 then
+                        ret := pro::storage::CreateBucket(pro::GetPROSUserBucket,"PROP",Authorization); ! If necessary, create the storage bucket
+                        if not handleError(ret) then return 0; endif;
+                endif;
+                
+                ! Send the AIMMS package
+                ret := pro::storage::PutObjectVersion(pro::GetPROSUserBucket+"/PROP",NewAimmsVersion,SelectedFile,Authorization,tmpStr);
+                if not handleError(ret) then return 0; endif;
+                
+                ! Publish the AIMMS version
+                ret := pro::publishing::PublishAimmsVersion(NewAimmsVersion,NewAimmsDescription,tmpStr,Authorization);
+                if not handleError(ret) then return 0; endif;
+                
+                ! Update the AIMMS version list
+                return GetAimmsList;
+            }
+            StringParameter NewAimmsVersion {
+                Property: Input;
+            }
+            StringParameter NewAimmsDescription {
+                Property: Input;
+            }
+            StringParameter SelectedFile {
+                Property: Input;
+            }
+            Parameter ret {
+                InitialData: 0;
+            }
+            Parameter tmpVal {
+                InitialData: 0;
+            }
+            StringParameter tmpStr {
+                InitialData: "";
+            }
+            StringParameter tmpStr1 {
+                InitialData: "";
+            }
+            StringParameter tmpStr2 {
+                InitialData: "";
+            }
+            StringParameter Authorization {
+                Property: Input;
+            }
+        }
+        Procedure UpdateAimmsVersion {
+            Arguments: (AimmsVersion,AimmsDescription,Authorization);
+            Body: {
+                ! Basic validation
+                if AimmsVersion = "" then
+                        DialogError("The Aimms Version cannot be empty","PRO Framework - Publish Aimms Version");
+                        return 0;
+                endif;
+                
+                ! Initialize PRO (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Update the AIMMS version
+                ret := pro::publishing::UpdateAimmsVersionInfo(AimmsVersion,AimmsDescription,Authorization);
+                if not handleError(ret) then return 0; endif;
+                
+                ! Update the AIMMS version list
+                return GetAimmsList;
+            }
+            StringParameter AimmsVersion {
+                Property: Input;
+            }
+            StringParameter AimmsDescription {
+                Property: Input;
+            }
+            Parameter ret {
+                InitialData: 0;
+            }
+            StringParameter Authorization {
+                Property: Input;
+            }
+        }
+        Procedure DeleteAimmsVersion {
+            Arguments: (AimmsVersion);
+            Body: {
+                ! Basic validation
+                if AimmsVersion = "" then
+                        DialogError("The Aimms Version cannot be empty","PRO Framework - Publish Aimms Version");
+                        return 0;
+                endif;
+                
+                ! Initialize PRO (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Update the AIMMS version
+                ret := pro::publishing::DeleteAimmsVersion(AimmsVersion);
+                if not handleError(ret) then return 0; endif;
+                
+                ! Update the AIMMS version list
+                return GetAimmsList;
+            }
+            StringParameter AimmsVersion {
+                Property: Input;
+            }
+            Parameter ret {
+                InitialData: 0;
+            }
+        }
+    }
+    Section Publish_Applications {
+        Set PublishAimmsVersions {
+            Index: AIMVER_;
+            Parameter: AimmsVersion_;
+            Property: NoSave;
+        }
+        StringParameter PublishAimmsDescription {
+            IndexDomain: (AIMVER_);
+            Property: NoSave;
+        }
+        StringParameter PublishAimmsStorageID {
+            IndexDomain: (AIMVER_);
+            Property: NoSave;
+        }
+        StringParameter PublishAimmsAuthorization {
+            IndexDomain: (AIMVER_);
+            Property: NoSave;
+        }
+        Set PublishModels {
+            Index: MODVER;
+            Parameter: PePublishModel;
+            Property: NoSave;
+        }
+        StringParameter PublishModelName {
+            IndexDomain: (MODVER);
+            Property: NoSave;
+        }
+        StringParameter PublishModelVersion {
+            IndexDomain: (MODVER);
+            Property: NoSave;
+        }
+        StringParameter PublishModelDescription {
+            IndexDomain: (MODVER);
+            Property: NoSave;
+        }
+        StringParameter PublishModelAimmsVersion {
+            IndexDomain: (MODVER);
+            Property: NoSave;
+        }
+        StringParameter PublishModelAttributes {
+            IndexDomain: (MODVER);
+            Property: NoSave;
+        }
+        StringParameter PublishModelStorageVersion {
+            IndexDomain: (MODVER);
+            Property: NoSave;
+        }
+        Parameter PublishModelPermission {
+            IndexDomain: (MODVER);
+            Property: NoSave;
+        }
+        StringParameter PublishModelAuthorization {
+            IndexDomain: (MODVER);
+            Property: NoSave;
+        }
+        Set ModelEntity {
+            SubsetOf: guipro::PROEntity;
+            Index: MOD_ENT;
+            Property: NoSave;
+        }
+        Parameter ModelEntityDeny {
+            IndexDomain: (MODVER,MOD_ENT);
+            Range: binary;
+            Property: NoSave;
+        }
+        Parameter ModelEntityExec {
+            IndexDomain: (MODVER,MOD_ENT);
+            Range: binary;
+            Property: NoSave;
+        }
+        Parameter ModelEntityRead {
+            IndexDomain: (MODVER,MOD_ENT);
+            Range: binary;
+            Property: NoSave;
+        }
+        Parameter ModelEntityWrite {
+            IndexDomain: (MODVER,MOD_ENT);
+            Range: binary;
+            Property: NoSave;
+        }
+        StringParameter UserGroupName {
+            IndexDomain: MOD_ENT;
+            Definition: guipro::PROEntityName(mod_ent) + "@" + guipro::PROEntityEnvironmentName(mod_ent);
+        }
+        Procedure GetModelList {
+            Body: {
+                ! Initialize PRO Framework (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Retrieve the Model list directly to the corresponding set and identifiers
+                ret := pro::publishing::RetrieveModelList(PublishModels,PublishModelName,PublishModelVersion,PublishModelDescription,PublishModelAimmsVersion,PublishModelAttributes,PublishModelStorageVersion,PublishModelPermission,PublishModelAuthorization);
+                if not pro::handleError(ret) then return 0; endif;
+                
+                return 1;
+            }
+            Parameter ret;
+        }
+        Procedure UpdateModel {
+            Arguments: (ModelID,ModelVersion,ModelDescription,AimmsVersion,ModelAttributes,Authorization);
+            Body: {
+                ! Basic validation
+                if ModelID = "" or ModelVersion = "" then
+                        DialogError("Model ID and Version cannot be empty","PRO Framework - Publish Model");
+                        return 0;
+                elseif AimmsVersion = '' then
+                        DialogError("Invalid Aimms version","PRO Framework - Publish Model");
+                        return 0;
+                endif;
+                
+                ! Initialize PRO (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Update the Model
+                ret := pro::publishing::UpdateModelInfo(ModelID,ModelVersion,ModelDescription,AimmsVersion,ModelAttributes,Authorization);
+                if not pro::handleError(ret) then return 0; endif;
+                
+                ! Update the Model list
+                return GetModelList;
+            }
+            StringParameter ModelID {
+                Property: Input;
+            }
+            StringParameter ModelVersion {
+                Property: Input;
+            }
+            StringParameter ModelDescription {
+                Property: Input;
+            }
+            ElementParameter AimmsVersion {
+                Range: AimmsVersions;
+                Property: Input;
+            }
+            StringParameter ModelAttributes {
+                Property: Input;
+            }
+            Parameter ret {
+                InitialData: 0;
+            }
+            Parameter tmpVal {
+                InitialData: 0;
+            }
+            StringParameter tmpStr {
+                InitialData: "";
+            }
+            StringParameter tmpStr1 {
+                InitialData: "";
+            }
+            StringParameter tmpStr2 {
+                InitialData: "";
+            }
+            StringParameter Authorization {
+                Property: Input;
+            }
+        }
+        Procedure DeleteModel {
+            Arguments: (ModelID,ModelVersion);
+            Body: {
+                ! Basic validation
+                if ModelID = "" or ModelVersion = "" then
+                        DialogError("Model ID and Version cannot be empty","PRO Framework - Publish Model");
+                        return 0;
+                endif;
+                
+                ! Initialize PRO (if not initialized yet)
+                ret := pro::Initialize();
+                if not (ret) then return 0; endif;
+                
+                ! Delete the Model
+                ret := pro::publishing::DeleteModel(ModelID,ModelVersion);
+                if not pro::handleError(ret) then return 0; endif;
+                
+                ! Update the Model list
+                return GetModelList;
+            }
+            StringParameter ModelID {
+                Property: Input;
+            }
+            StringParameter ModelVersion {
+                Property: Input;
+            }
+            Parameter ret {
+                InitialData: 0;
+            }
+            Parameter tmpVal {
+                InitialData: 0;
+            }
+            StringParameter tmpStr {
+                InitialData: "";
+            }
+            StringParameter tmpStr1 {
+                InitialData: "";
+            }
+            StringParameter tmpStr2 {
+                InitialData: "";
+            }
+        }
+        Procedure ComputePermissions {
+            Body: {
+                guipro::PopulateEntitySets(1);
+                
+                for (modver) do
+                	guipro::DeconstructAuthorizationString(PublishModelAuthorization(modver), CurrentEntity, CurrentObjectEntityDeny, CurrentObjectEntityExec, CurrentObjectEntityRead, CurrentObjectEntityWrite);
+                	ModelEntity += CurrentEntity;
+                	ModelEntityDeny(modver,mod_ent) := CurrentObjectEntityDeny(mod_ent);
+                	ModelEntityExec(modver,mod_ent) := CurrentObjectEntityExec(mod_ent);
+                	ModelEntityRead(modver,mod_ent) := CurrentObjectEntityRead(mod_ent);
+                	ModelEntityWrite(modver,mod_ent) := CurrentObjectEntityWrite(mod_ent);
+                endfor;
+            }
+            Set CurrentEntity {
+                SubsetOf: guipro::PROEntity;
+                Index: CUR_ENT;
+                Parameter: Pe_CUR_Entity;
+            }
+            Parameter CurrentObjectEntityDeny {
+                IndexDomain: CUR_ENT;
+                Range: binary;
+            }
+            Parameter CurrentObjectEntityExec {
+                IndexDomain: CUR_ENT;
+                Range: binary;
+            }
+            Parameter CurrentObjectEntityRead {
+                IndexDomain: CUR_ENT;
+                Range: binary;
+            }
+            Parameter CurrentObjectEntityWrite {
+                IndexDomain: CUR_ENT;
+                Range: binary;
+            }
+        }
+    }
+    Section Authentication_Data {
+        DeclarationSection User_and_Group_Entities {
+            Set PROEnv {
+                Index: PRO_ENV;
+                Parameter: Pe_Env, Pe_GUI_Env;
+                Property: NoSave;
+                OrderBy: PRO_ENV;
+            }
+            Set PROEntity {
+                Index: PRO_ENT, PRO_ENT_U, PRO_ENT_G;
+                Parameter: Pe_Entity;
+                Property: NoSave;
+            }
+            Set PROUser {
+                SubsetOf: PROEntity;
+                Index: PRO_USER;
+                Parameter: Pe_User;
+                Property: NoSave;
+                OrderBy: PROUserName(PRO_USER);
+            }
+            Set PROEnvUser {
+                IndexDomain: (PRO_ENV);
+                SubsetOf: PROUser;
+                Property: NoSave;
+            }
+            Set PROGroup {
+                SubsetOf: PROEntity;
+                Index: PRO_GRP;
+                Parameter: Pe_Group;
+                Property: NoSave;
+                OrderBy: PROGroupName(PRO_GRP);
+            }
+            Set PROEnvGroup {
+                IndexDomain: (PRO_ENV);
+                SubsetOf: PROGroup;
+                Property: NoSave;
+            }
+            StringParameter PROEnvName {
+                IndexDomain: (PRO_ENV);
+                Property: NoSave;
+            }
+            StringParameter PROEnvDescr {
+                IndexDomain: (PRO_ENV);
+                Property: NoSave;
+            }
+            StringParameter PROEnvAuth {
+                IndexDomain: (PRO_ENV);
+                Property: NoSave;
+            }
+            StringParameter PROUserName {
+                IndexDomain: (PRO_ENT_U);
+                Property: NoSave;
+            }
+            StringParameter PROGroupName {
+                IndexDomain: (PRO_ENT_G);
+                Property: NoSave;
+            }
+            Parameter PROUserGroup {
+                IndexDomain: (PRO_ENT_U,PRO_ENT_G);
+                Range: binary;
+                Property: NoSave;
+            }
+            Parameter PROEntityIsGroup {
+                IndexDomain: PRO_ENT;
+                Range: binary;
+                Property: NoSave;
+            }
+            StringParameter PROEntityType {
+                IndexDomain: PRO_ENT;
+                Property: NoSave;
+                Definition: {
+                    if PROEntityIsGroup(PRO_ENT) then
+                            "group"
+                    else
+                            "user"
+                    endif
+                }
+            }
+            ElementParameter PROEntityEnvironment {
+                IndexDomain: PRO_ENT;
+                Range: PROEnv;
+                Default: '';
+                Property: NoSave;
+            }
+            StringParameter PROEntityEnvironmentName {
+                IndexDomain: PRO_ENT;
+                Property: NoSave;
+                Definition: {
+                    if PROEntityEnvironment(PRO_ENT) = '' then
+                            if (Val(PRO_ENT) = 16777215 OR Val(PRO_ENT) = 16777087) then
+                                    "<<all>>"
+                            else
+                                    "?"
+                            endif
+                    else
+                            PROEnvName(PROEntityEnvironment(PRO_ENT))
+                    endif
+                }
+            }
+            StringParameter PROEntityName {
+                IndexDomain: PRO_ENT;
+                Property: NoSave;
+            }
+        }
+        DeclarationSection Entity_Properties_Current_Object {
+            Set CurrentEntity {
+                SubsetOf: PROEntity;
+                Index: CUR_ENT;
+                Parameter: Pe_CUR_Entity;
+                Property: NoSave;
+            }
+            Parameter CurrentObjectEntityDeny {
+                IndexDomain: CUR_ENT;
+                Range: binary;
+                Property: NoSave;
+            }
+            Parameter CurrentObjectEntityExec {
+                IndexDomain: CUR_ENT;
+                Range: binary;
+                Property: NoSave;
+            }
+            Parameter CurrentObjectEntityRead {
+                IndexDomain: CUR_ENT;
+                Range: binary;
+                Property: NoSave;
+            }
+            Parameter CurrentObjectEntityWrite {
+                IndexDomain: CUR_ENT;
+                Range: binary;
+                Property: NoSave;
+            }
+            Set CurrentUserSet {
+                SubsetOf: PROUser;
+                Parameter: Pe_GUI_User;
+                Property: NoSave;
+                Definition: PROEnvUser(Pe_GUI_Env);
+            }
+            Set CurrentGroupSet {
+                SubsetOf: PROGroup;
+                Parameter: Pe_GUI_Group;
+                Property: NoSave;
+                Definition: PROEnvGroup(Pe_GUI_Env);
+            }
+            Parameter PROCancelAuth {
+                Range: binary;
+                Property: NoSave;
+            }
+        }
+        Procedure PopulateEntitySets {
+            Arguments: (addUniversalSets);
+            Body: {
+                ! Populate users and groups
+                ret := pro::authentication::GetEnvironmentList(PROEnv,PROEnvName,PROEnvDescr,PROEnvAuth);
+                for (PRO_ENV) do
+                        block
+                                empty UserCurrentEnv, GroupCurrentEnv;
+                
+                                ret := pro::authentication::GetEnvironmentUsersAndGroups(PROEnvName(PRO_ENV),UserCurrentEnv,GroupCurrentEnv,PROUserName,PROGroupName);
+                
+                                if (addUniversalSets) then
+                                        tmpEnt := FormatString("%i",16776960 + Val(PRO_ENV));   ! 0xFFFF00 = 0xFFFF | 0x0 (+ 7 bits to the environment id)
+                                        SetElementAdd(PROUser,Pe_User,tmpEnt);
+                                        PROUserName(Pe_User) := "<<all>>";
+                                        UserCurrentEnv += Pe_User;
+                                        tmpEnt := FormatString("%i",16777088 + Val(PRO_ENV));   ! 0xFFFF80 = 0xFFFF | 0x1 (+ 7 bits to the environment id)
+                                        SetElementAdd(PROGroup,Pe_Group,tmpEnt);
+                                        PROGroupName(Pe_Group) := "<<all>>";
+                                        GroupCurrentEnv += Pe_Group;
+                                endif;
+                
+                                PROEnvUser(PRO_ENV) := UserCurrentEnv;
+                                PROEnvGroup(PRO_ENV) := GroupCurrentEnv;
+                
+                                PROEntityEnvironment(PRO_ENT in UserCurrentEnv) := PRO_ENV;
+                                PROEntityEnvironment(PRO_ENT in GroupCurrentEnv) := PRO_ENV;
+                        onerror err do
+                                errh::MarkAsHandled(err);
+                        endblock;
+                endfor;
+                
+                ! Retrieve user and group relationships
+                empty PROUserGroup;
+                for (PRO_ENV) do
+                        block
+                                ret := pro::authentication::GetEntityList(PROEnvName(PRO_ENV),PROUser,PROGroup,PROUserName,PROGroupName,PROUserGroup);
+                        onerror err do
+                                errh::MarkAsHandled(err);
+                        endblock;
+                endfor;
+                
+                ! Add universal group
+                if (addUniversalSets) then
+                        empty UserCurrentEnv,GroupCurrentEnv;
+                
+                        tmpEnt := FormatString("%i", 127);
+                        SetElementAdd(PROEnv,Pe_Env,tmpEnt);
+                        PROEnvName(Pe_Env) := "<<all>>";
+                
+                        tmpEnt := FormatString("%i",16776960 + Val(Pe_Env));    ! 0xFFFF00 = 0xFFFF | 0x0 (+ 7 bits to the environment id)
+                        SetElementAdd(PROUser,Pe_User,tmpEnt);
+                        PROUserName(Pe_User) := "<<all>>";
+                        UserCurrentEnv += Pe_User;
+                
+                        tmpEnt := FormatString("%i",16777088 + Val(Pe_Env));    ! 0xFFFF80 = 0xFFFF | 0x1 (+ 7 bits to the environment id)
+                        SetElementAdd(PROGroup,Pe_Group,tmpEnt);
+                        PROGroupName(Pe_Group) := "<<all>>";
+                        GroupCurrentEnv += Pe_Group;
+                
+                        PROEnvUser(Pe_Env) := UserCurrentEnv;
+                        PROEnvGroup(Pe_Env) := GroupCurrentEnv;
+                        PROEntityEnvironment(PRO_ENT in UserCurrentEnv) := Pe_Env;
+                        PROEntityEnvironment(PRO_ENT in GroupCurrentEnv) := Pe_Env;
+                endif;
+                
+                empty PROEntityIsGroup;
+                PROEntityIsGroup(PRO_GRP) := 1;
+                PROEntityName(PRO_USER) := PROUserName(PRO_USER);
+                PROEntityName(PRO_GRP) := PROGroupName(PRO_GRP);
+            }
+            Parameter ret;
+            ElementParameter err {
+                Range: errh::PendingErrors;
+            }
+            Set UserCurrentEnv {
+                SubsetOf: PROUser;
+            }
+            Set GroupCurrentEnv {
+                SubsetOf: PROGroup;
+            }
+            StringParameter tmpEnt;
+            Parameter addUniversalSets {
+                Default: 0;
+                Property: Optional;
+            }
+        }
+    }
+    Procedure MainInitialization {
+        Body: {
+            DateToList := CurrentToString("%c%y-%m-%d 00:00:00");
+            DateEndList := CurrentToString("%c%y-%m-%d 00:00:00");
+            return 1;
+        }
+    }
+    Procedure MainExecution;
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+    }
+}

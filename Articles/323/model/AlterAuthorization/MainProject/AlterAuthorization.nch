@@ -1,0 +1,9 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"Copy_sp_Filenames" "sp_FileTimes" "2019-01-28 07:11:22"
+"Copy1_sp_Filenames" "sp_FileSizes" "2019-01-28 07:11:36"
+"Copy_pr_GetAllFiles" "pr_GetAllFilesFolders" "2019-01-28 07:12:40"
+"sp_FileSizes" "p_FileSizes" "2019-01-28 07:15:21"
+"idn" "i_dn" "2019-01-28 07:16:21"
+"pr_CopyFile" "pr_AdaptAuthorizationFile" "2019-01-28 07:21:33"
+"pr_CopyFiles" "pr_AdaptAuthorizationFilesFolders" "2019-01-28 07:21:51"
+"Main_CopyFilesToServer" "Main_AlterAuthorization" "2019-11-27 11:48:38"

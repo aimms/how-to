@@ -38,6 +38,12 @@ Model Main_Flow_Shop {
                 SubsetOf: AllIdentifiers;
             }
         }
+        Module Module_1 {
+            Prefix: m1;
+            Parameter p1 {
+                InitialData: 33.33;
+            }
+        }
     }
     Section WebUI_support {
         Set AllPublicIdentifiers {
@@ -211,6 +217,10 @@ Model Main_Flow_Shop {
             solve mp_FlowShopModel  ;
             
             raise warning "Hi, hi, false alarm.";
+            
+            gss::pr_SaveState(
+            	sp_Label              :  "ThirdSaveLabel", 
+            	s_SelectedIdentifiers :  Superfluous_Data);
             
             pr_prepInterface;
         }

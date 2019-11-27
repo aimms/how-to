@@ -1,0 +1,35 @@
+﻿* AIMMS
+aim_character_encoding WINDOWS-1252
+ascii_case_character_encoding WINDOWS-1252
+Case_sensitive_element_comparison 1
+datatable_character_encoding WINDOWS-1252
+default_input_character_encoding WINDOWS-1252
+default_output_character_encoding WINDOWS-1252
+external_dll_AIMMS_reference ASCII
+external_procedure_error_handling raise_warning_when_not_checked
+external_string_character_encoding WINDOWS-1252
+intrinsic_procedure_error_handling raise_warning_when_not_checked
+negate_objective_coefficient_modifications 1
+rounding_compatibility Aimms_3_7
+warning_duplicate_column strict_warning_default
+warning_duplicate_row strict_warning_default
+* AOA
+* BARON 15
+* CBC 2.8.0
+* CONOPT 3.14V
+* CPLEX 12.6
+* CPLEX 12.6.1
+* CPOptimizer 12.6
+* GUROBI 5.6
+* GUROBI 6.0
+* IPOPT 3.11
+* KNITRO 9.0
+* KNITRO 9.1
+* MINOS
+* SNOPT 6.1
+* SNOPT 7.2
+* XA 15
+* NETSOL
+* Environment
+Project_Title "PRO Framework - Control Panel"
+Startup_Page "Control Panel"
