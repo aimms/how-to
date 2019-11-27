@@ -19,7 +19,8 @@ This section offers best practices to build and deploy applications using AIMMS 
    /Articles/120/120-pro-user-groups
    /Articles/251/251-pro-operations-best-practices
    /Articles/310/310-investigate-behavior-pro-job
-   /Articles/323/323-pro-storage-folder 
+   /Articles/321/321-state-server-session
+   /Articles/323/323-pro-storage-folder
    /Articles/33/33-pro-deploy-app
    /Articles/32/32-pro-develop-app
    /Articles/19/19-remove-veil
@@ -27,6 +28,5 @@ This section offers best practices to build and deploy applications using AIMMS 
    /Articles/305/305-number-of-solves
    /Articles/308/308-migrate-pro-server-another-machine
 
-..   /Articles/321/321-state-server-session 
 
 
