@@ -781,7 +781,10 @@ Model Main_AIMMSPROUsageStatistics {
                 SubsetOf: s_Events;
             }
             Parameter p_NumberOfSessionsStackedBySessionType {
-                IndexDomain: i_bcp;
+                IndexDomain: (i_bcp,i_SessionType);
+            }
+            Parameter p_MemoryInUseStackedBySessionType {
+                IndexDomain: (i_bcp,i_SessionType);
             }
             Procedure pr_ComputeStackedBarCharts;
             Procedure pr_RelateBarChartMomentsToEvents {

@@ -57,3 +57,4 @@
 "Copy_p_MemoryBySessionsAfterEvent" "MemoryBySessionsAfterEventBySessionType" "2019-11-20 12:57:45"
 "MemoryBySessionsAfterEventBySessionType" "p_MemoryBySessionsAfterEventBySessionType" "2019-11-20 12:58:30"
 "p_Average" "p_AverageNumberOfSessions" "2019-11-20 13:39:10"
+"Copy_p_NumberOfSessionsStackedBySessionType" "p_MemoryInUseStackedBySessionType" "2019-11-25 11:22:49"
