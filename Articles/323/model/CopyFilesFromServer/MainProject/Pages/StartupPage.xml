@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2019-01-25 12:47:55">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>4B1E8FF1-7165-40B0-85AE-593A28A0CFFB</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Scalar">
+		<Location top="24" left="30" bottom="258" right="948" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="D1070295-A787-45C7-A264-12480B03AE52" Name="Ariel12" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>sp_SourceFolder</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_TargetFolder</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>p_NoFiles</Identifier>
+			<NumberFormat Width="7" Decimals="0" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="270" left="600" bottom="336" right="768" />
+		<TabOrder>6</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Get File info"</Title>
+		<Font GUID="D1070295-A787-45C7-A264-12480B03AE52" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_DetermineInputFiles</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Composite Table">
+		<Location top="354" left="36" bottom="768" right="942" />
+		<TabOrder>2</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Domain>
+			<Identifier>sp_AllFilenames( i_afn )</Identifier>
+			<Index Name="i_afn" />
+		</Domain>
+		<ExplicitIdentifier>
+			<Identifier>p01_Selection( i_afn )</Identifier>
+			<NumberFormat Width="4" Decimals="0" Alignment="Center" Binary="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_AllFilenames( i_afn )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_AllFiletimes( i_afn )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>p_AllFilesizes( i_afn )</Identifier>
+			<NumberFormat Width="9" Decimals="0" Alignment="Center" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="270" left="780" bottom="336" right="948" />
+		<TabOrder>3</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Copy selected files"</Title>
+		<Font GUID="D1070295-A787-45C7-A264-12480B03AE52" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_CopyFiles</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="270" left="30" bottom="336" right="198" />
+		<TabOrder>4</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Select Source Folder"</Title>
+		<Font GUID="D1070295-A787-45C7-A264-12480B03AE52" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_SelectSourceFolder</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="270" left="420" bottom="336" right="588" />
+		<TabOrder>5</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Select Target Folder"</Title>
+		<Font GUID="D1070295-A787-45C7-A264-12480B03AE52" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_SelectTargetFolder</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="270" left="210" bottom="336" right="378" />
+		<TabOrder>4</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Select My Data"</Title>
+		<Font GUID="D1070295-A787-45C7-A264-12480B03AE52" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_SelectMyData</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>p_NoFiles</Symbol>
+			<Symbol>sp_SourceFolder</Symbol>
+			<Symbol>sp_TargetFolder</Symbol>
+			<Symbol>sp_AllFilenames</Symbol>
+			<Symbol>sp_AllFiletimes</Symbol>
+			<Symbol>p_AllFilesizes</Symbol>
+			<Symbol>p01_Selection</Symbol>
+			<Symbol>pr_SelectSourceFolder</Symbol>
+			<Symbol>pr_SelectMyData</Symbol>
+			<Symbol>pr_SelectTargetFolder</Symbol>
+			<Symbol>pr_DetermineInputFiles</Symbol>
+			<Symbol>pr_CopyFiles</Symbol>
+			<Symbol>i_afn</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

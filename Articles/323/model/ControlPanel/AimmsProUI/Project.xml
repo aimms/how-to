@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<LibraryProject AimmsVersion="4.19.2.428 unicode x64" ProjectUUID="CEE75F90-6086-4AD0-890B-C051C7F4AF0D">
+	<ModelFileName>AimmsPROGUI.ams</ModelFileName>
+	<Prefix>guipro</Prefix>
+	<DisplayName>AimmsProGUI</DisplayName>
+</LibraryProject>

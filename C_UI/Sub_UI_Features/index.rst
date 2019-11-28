@@ -21,4 +21,5 @@ This section contains explanations of various UI features available when buildin
    /Articles/download-compressed-files/download-compressed-files
    /Articles/180/180-use-side-panel-with-old-menu
    /Articles/309/309-workflow-panel-element-and-string-parameters
+   /Articles/322/322-blinechart
 .. /Articles/200/200-Measuring-Page-Loadtime.rst

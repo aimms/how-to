@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2013-11-22 21:07:09">
+	<Location top="27" left="8" bottom="192" right="528" />
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>301F4081-1989-4AC8-A02B-020246DF9209</ProjectUUID>
+	<Title>"Add Element"</Title>
+	<IsDialogPage>true</IsDialogPage>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Button">
+		<Location top="120" left="414" bottom="150" right="510" />
+		<TabOrder>7</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Add"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_AddElementAction</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+			<Action Type="ClosePage" />
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="120" left="210" bottom="150" right="306" />
+		<TabOrder>5</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Cancel"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="ClosePage" />
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="6" left="96" bottom="30" right="510" />
+		<ReadOnly>"Yes"</ReadOnly>
+		<TabOrder>1</TabOrder>
+		<TabStop>false</TabStop>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="None" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor>
+			<UserColor GUID="4C29CF98-3E51-4BAA-8563-90FCE3E3DF3B">default background</UserColor>
+		</BackgroundColor>
+		<Layout>Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>ElementPath</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="12" left="12" bottom="30" right="90" />
+		<StaticText>Current Path :</StaticText>
+		<Alignment>Right</Alignment>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="30" left="96" bottom="54" right="336" />
+		<TabOrder>2</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="2" MarginRight="2" MarginBottom="2" MarginLeft="2" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>ElementName</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="36" left="12" bottom="54" right="90" />
+		<StaticText>Element Name :</StaticText>
+		<Alignment>Right</Alignment>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="120" left="312" bottom="150" right="408" />
+		<TabOrder>6</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Edit Security..."</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_AddEditAuth</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>CheckBoxes</SelectionType>
+		<Location top="60" left="90" bottom="84" right="216" />
+		<TabOrder>3</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>IdentifierText</TextShown>
+		<Border Style="None" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor>
+			<UserColor GUID="4C29CF98-3E51-4BAA-8563-90FCE3E3DF3B">default background</UserColor>
+		</BackgroundColor>
+		<ExplicitIdentifier>
+			<Identifier>ElementObject</Identifier>
+			<Description>"Element is an Object"</Description>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="File Name Object">
+		<Location top="84" left="96" bottom="108" right="510" />
+		<Hidden>VALUE := ElementObject = 0</Hidden>
+		<TabOrder>4</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Identifier>ElementFile</Identifier>
+		<AllowedFiles>ExistingFile</AllowedFiles>
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="90" left="12" bottom="108" right="90" />
+		<Hidden>VALUE := ElementObject = 0</Hidden>
+		<StaticText>File :</StaticText>
+		<Alignment>Right</Alignment>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>GUI_AddElementAction</Symbol>
+			<Symbol>ElementName</Symbol>
+			<Symbol>GUI_AddEditAuth</Symbol>
+			<Symbol>ElementPath</Symbol>
+			<Symbol>ElementObject</Symbol>
+			<Symbol>ElementFile</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

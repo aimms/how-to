@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2019-03-19 08:14:36">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>07350B9F-30C8-4955-9DF8-63A7AE38EB22</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Button">
+		<Location top="30" left="786" bottom="102" right="930" />
+		<TabOrder>3</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Copy multiple files"</Title>
+		<Font GUID="35B676CC-6495-4932-923A-27247F93DBD0" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="LinkedPage">
+				<Page PageGUID="F709804A-FCE8-407E-8714-B56DEAC60D69" Name="startupPage" />
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="30" left="510" bottom="102" right="672" />
+		<TabOrder>1</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Do Copy a single file"</Title>
+		<Font GUID="35B676CC-6495-4932-923A-27247F93DBD0" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_CopySingleFile</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="120" left="54" bottom="258" right="930" />
+		<TabOrder>5</TabOrder>
+		<Font GUID="35B676CC-6495-4932-923A-27247F93DBD0" Name="Ariel12" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>sp_sourceFolder</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+			<Title>"Source Folder"</Title>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_TargetRoot</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+			<Title>"Target Folder"</Title>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_Auth</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+			<Title>"Authorization"</Title>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_SingleFileSourceName</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+			<Title>"Source Filename"</Title>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_SingleFileTargetName</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+			<Title>"Target Filename"</Title>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="30" left="348" bottom="102" right="492" />
+		<TabOrder>6</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Alter authorization"</Title>
+		<Font GUID="35B676CC-6495-4932-923A-27247F93DBD0" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_ObtainAuthorization</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="30" left="204" bottom="102" right="336" />
+		<TabOrder>4</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Select target folder"</Title>
+		<Font GUID="35B676CC-6495-4932-923A-27247F93DBD0" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_SelectTargetFolder</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="30" left="54" bottom="102" right="186" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Select source file"</Title>
+		<Font GUID="35B676CC-6495-4932-923A-27247F93DBD0" Name="Ariel12" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_SelectSourceFile</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>sp_sourceFolder</Symbol>
+			<Symbol>sp_TargetRoot</Symbol>
+			<Symbol>sp_Auth</Symbol>
+			<Symbol>sp_SingleFileSourceName</Symbol>
+			<Symbol>sp_SingleFileTargetName</Symbol>
+			<Symbol>pr_SelectSourceFile</Symbol>
+			<Symbol>pr_CopySingleFile</Symbol>
+			<Symbol>pr_SelectTargetFolder</Symbol>
+			<Symbol>pr_ObtainAuthorization</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

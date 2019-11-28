@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2013-11-22 21:07:09">
+	<Location top="27" left="8" bottom="638" right="1106" />
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>301F4081-1989-4AC8-A02B-020246DF9209</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Selection Object">
+		<SelectionType>DropDownList</SelectionType>
+		<Location top="18" left="108" bottom="42" right="336" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="None" />
+		<BackgroundColor RGB="#ffffff" />
+		<ProcedureUponChange>GUI_FillConfigParameters</ProcedureUponChange>
+		<ExplicitIdentifier>
+			<Identifier>ServicesElement</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="18" left="12" bottom="36" right="102" />
+		<StaticText>Select a service:</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Composite Table">
+		<Location top="48" left="12" bottom="216" right="558" />
+		<TabOrder>4</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<MarkEntireRow>false</MarkEntireRow>
+		<HeaderRearrange>false</HeaderRearrange>
+		<RowSelection>false</RowSelection>
+		<MultipleRowSelection>false</MultipleRowSelection>
+		<Domain>
+			<Identifier>CFG_PARAM</Identifier>
+			<Index Name="CFG_PARAM">
+				<Width>27</Width>
+				<TitleText>"Parameter"</TitleText>
+				<AutomaticWidth>false</AutomaticWidth>
+				<WidthAsPercentage>true</WidthAsPercentage>
+				<AllowCellSelection>false</AllowCellSelection>
+				<Color>GUI_ConfigParamColor( CFG_PARAM )</Color>
+			</Index>
+		</Domain>
+		<ExplicitIdentifier>
+			<Identifier>ConfigParamType( CFG_PARAM -&gt; ConfigParamElement )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<Width>8</Width>
+			<TitleText>"Type"</TitleText>
+			<AutomaticWidth>false</AutomaticWidth>
+			<WidthAsPercentage>true</WidthAsPercentage>
+			<Color>GUI_ConfigParamColor( CFG_PARAM )</Color>
+			<Readonly>1</Readonly>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>ConfigParamValue( CFG_PARAM -&gt; ConfigParamElement )</Identifier>
+			<UpdateOnChange>GUI_ConfigParamColor</UpdateOnChange>
+			<NumberFormat Width="50" Decimals="0" Alignment="Left" />
+			<Width>62</Width>
+			<TitleText>"Value"</TitleText>
+			<AutomaticWidth>false</AutomaticWidth>
+			<WidthAsPercentage>true</WidthAsPercentage>
+			<Color>GUI_ConfigParamColor( CFG_PARAM )</Color>
+			<Readonly>VALUE( CFG_PARAM ) := ConfigParamType( CFG_PARAM ) = 'list'</Readonly>
+			<ProcedureUponChange>GUI_ConfigChange</ProcedureUponChange>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="222" left="438" bottom="246" right="552" />
+		<ReadOnly>VALUE := sum(CFG_PARAM,GUI_ConfigParamChanged(CFG_PARAM)) = 0</ReadOnly>
+		<TabOrder>6</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Apply Changes"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_SetConfigParameters</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="222" left="312" bottom="246" right="426" />
+		<ReadOnly>VALUE := sum(CFG_PARAM,GUI_ConfigParamChanged(CFG_PARAM)) = 0</ReadOnly>
+		<TabOrder>5</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Undo Changes"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_UndoChanges</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Composite Table">
+		<Location top="264" left="108" bottom="408" right="558" />
+		<TabOrder>7</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<HeaderRearrange>false</HeaderRearrange>
+		<RowSelection>false</RowSelection>
+		<Domain>
+			<Identifier>GUI_CFG_ATTR</Identifier>
+			<Index Name="GUI_CFG_ATTR">
+				<Width>22</Width>
+				<TitleText>"Attribute"</TitleText>
+				<AutomaticWidth>false</AutomaticWidth>
+				<WidthAsPercentage>true</WidthAsPercentage>
+			</Index>
+		</Domain>
+		<ExplicitIdentifier>
+			<Identifier>ConfigParamAttrType( ConfigParamElement, GUI_CFG_ATTR -&gt; ConfigAttributesElement )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<Width>10</Width>
+			<TitleText>"Type"</TitleText>
+			<AutomaticWidth>false</AutomaticWidth>
+			<WidthAsPercentage>true</WidthAsPercentage>
+			<Readonly>1</Readonly>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>ConfigParamAttrValue( ConfigParamElement, GUI_CFG_ATTR, GUI_ListElement )</Identifier>
+			<UpdateOnChange>GUI_ConfigParamColor</UpdateOnChange>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<Width>65</Width>
+			<TitleText>"Value"</TitleText>
+			<AutomaticWidth>false</AutomaticWidth>
+			<WidthAsPercentage>true</WidthAsPercentage>
+			<ProcedureUponChange>GUI_ConfigChange</ProcedureUponChange>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="246" left="12" bottom="264" right="102" />
+		<StaticText>List attributes:</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>ListBox</SelectionType>
+		<SingleSelect>true</SingleSelect>
+		<Location top="264" left="12" bottom="384" right="72" />
+		<TabOrder>8</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ExplicitIdentifier>
+			<Identifier>GUI_ListElement</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="390" left="18" bottom="408" right="42" />
+		<ReadOnly>VALUE := ConfigParamType(ConfigParamElement)&lt;&gt;'list'</ReadOnly>
+		<TabOrder>12</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"+"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_AddListElement</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="300" left="78" bottom="318" right="96" />
+		<ReadOnly>VALUE := ConfigParamType(ConfigParamElement)&lt;&gt;'list'</ReadOnly>
+		<TabOrder>9</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"^"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_UpListElement</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="324" left="78" bottom="342" right="96" />
+		<ReadOnly>VALUE := ConfigParamType(ConfigParamElement)&lt;&gt;'list'</ReadOnly>
+		<TabOrder>10</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"v"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_DownListElement</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="390" left="42" bottom="408" right="66" />
+		<ReadOnly>VALUE := ConfigParamType(ConfigParamElement)&lt;&gt;'list'</ReadOnly>
+		<TabOrder>11</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"-"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_RemoveListElement</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="18" left="342" bottom="42" right="414" />
+		<TabOrder>13</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Refresh"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_FillConfigParameters</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>GUI_SetConfigParameters</Symbol>
+			<Symbol>GUI_ConfigParamColor</Symbol>
+			<Symbol>ServicesElement</Symbol>
+			<Symbol>Services</Symbol>
+			<Symbol>ConfigParamElement</Symbol>
+			<Symbol>GUI_UndoChanges</Symbol>
+			<Symbol>ConfigParamAttrType</Symbol>
+			<Symbol>ConfigAttributesElement</Symbol>
+			<Symbol>GUI_AddListElement</Symbol>
+			<Symbol>GUI_ListElements</Symbol>
+			<Symbol>GUI_UpListElement</Symbol>
+			<Symbol>GUI_ListElement</Symbol>
+			<Symbol>GUI_FillConfigParameters</Symbol>
+			<Symbol>GUI_DownListElement</Symbol>
+			<Symbol>CFG_PARAM</Symbol>
+			<Symbol>GUI_ConfigParamChanged</Symbol>
+			<Symbol>ConfigParamType</Symbol>
+			<Symbol>ConfigParamValue</Symbol>
+			<Symbol>ConfigParamAttrValue</Symbol>
+			<Symbol>GUI_ConfigChange</Symbol>
+			<Symbol>ConfigType</Symbol>
+			<Symbol>GUI_RemoveListElement</Symbol>
+			<Symbol>ConfigParam</Symbol>
+			<Symbol>GUI_CFG_ATTR</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

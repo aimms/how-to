@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2019-01-25 09:48:38">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>4B1E8FF1-7165-40B0-85AE-593A28A0CFFB</ProjectUUID>
+	<IsDialogPage>true</IsDialogPage>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Scalar">
+		<Location top="6" left="6" bottom="114" right="648" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>p01_errCancel</Identifier>
+			<NumberFormat Width="4" Decimals="0" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_errmsg</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_errSrcFile</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_errTrgFile</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>ep_errFileNo</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="120" left="372" bottom="156" right="438" />
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"OK"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_ErrorHandlingDIalog_OK</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="120" left="456" bottom="156" right="570" />
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Cancel"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_ErrorHandlingDIalog_OK</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>sp_errmsg</Symbol>
+			<Symbol>sp_errSrcFile</Symbol>
+			<Symbol>sp_errTrgFile</Symbol>
+			<Symbol>ep_errFileNo</Symbol>
+			<Symbol>p01_errCancel</Symbol>
+			<Symbol>pr_ErrorHandlingDIalog_OK</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ExportSettings>
+	<ExcludedFile>backup</ExcludedFile>
+	<ExcludedFile>data</ExcludedFile>
+	<ExcludedFile>log</ExcludedFile>
+	<ExcludedFile>PROTemp</ExcludedFile>
+	<ExcludedFile>PROTemp-D28F78AF</ExcludedFile>
+	<ExcludedFile>AimmsPROClientLog.xml</ExcludedFile>
+	<ExcludedFile>ControlPanel.7z</ExcludedFile>
+	<ExcludedFile>pro_arguments.txt</ExcludedFile>
+</ExportSettings>

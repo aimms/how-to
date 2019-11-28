@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2013-11-22 21:07:09">
+	<Location top="32" left="78" bottom="323" right="763" />
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>301F4081-1989-4AC8-A02B-020246DF9209</ProjectUUID>
+	<IsDialogPage>true</IsDialogPage>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<Action>
+		<SystemClose Action="ViaProcedure" Procedure="GUI_EditAttributes_Set2Str" />
+	</Action>
+	<PageObject Type="Composite Table">
+		<Location top="42" left="6" bottom="282" right="678" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<HorizontalLines>false</HorizontalLines>
+		<HeaderRearrange>false</HeaderRearrange>
+		<CellSelection>false</CellSelection>
+		<MultipleRowSelection>false</MultipleRowSelection>
+		<Domain>
+			<Identifier>GUI_MODEL_ATTR</Identifier>
+			<Index Name="GUI_MODEL_ATTR">
+				<Width>20</Width>
+				<TitleText>"Attribute"</TitleText>
+				<AutomaticWidth>false</AutomaticWidth>
+			</Index>
+		</Domain>
+		<ExplicitIdentifier>
+			<Identifier>PGUI_NewModelAttributeValue( GUI_MODEL_ATTR -&gt; NewModelAttribute )</Identifier>
+			<NumberFormat Width="100" Decimals="0" Alignment="Left" />
+			<Width>85</Width>
+			<TitleText>"Value"</TitleText>
+			<AutomaticWidth>false</AutomaticWidth>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="6" left="6" bottom="30" right="102" />
+		<TabOrder>4</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Add Attribute"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_AddAttribute</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="6" left="108" bottom="30" right="204" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Remove Attribute"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_RemoveAttribute</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="6" left="600" bottom="30" right="678" />
+		<TabOrder>6</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Update"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_EditAttributes_Set2Str</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+			<Action Type="ClosePage" />
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="6" left="240" bottom="30" right="378" />
+		<TabOrder>3</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Add Predefined Attributes"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_PredefinedAttributes</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="6" left="516" bottom="30" right="594" />
+		<TabOrder>5</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Cancel"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="ClosePage" />
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>GUI_RemoveAttribute</Symbol>
+			<Symbol>GUI_PredefinedAttributes</Symbol>
+			<Symbol>GUI_MODEL_ATTR</Symbol>
+			<Symbol>PGUI_NewModelAttributeValue</Symbol>
+			<Symbol>NewModelAttribute</Symbol>
+			<Symbol>GUI_EditAttributes_Set2Str</Symbol>
+			<Symbol>GUI_AddAttribute</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

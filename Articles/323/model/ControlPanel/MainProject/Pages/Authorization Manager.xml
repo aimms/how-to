@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2016-02-26 10:36:50">
+	<Location top="38" left="268" bottom="615" right="942" />
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>301F4081-1989-4AC8-A02B-020246DF9209</ProjectUUID>
+	<IsDialogPage>true</IsDialogPage>
+	<Positioning>Save Last Position</Positioning>
+	<TemplatesTabOrderPosition>2</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Rectangle">
+		<Location top="288" left="6" bottom="564" right="654" />
+		<Shape>In-Shadow</Shape>
+		<FillColor>
+			<UserColor GUID="4C29CF98-3E51-4BAA-8563-90FCE3E3DF3B">default background</UserColor>
+		</FillColor>
+		<LineColor>
+			<UserColor GUID="9E91AFF7-0C42-4624-9450-66E75C74B1AB">grey</UserColor>
+		</LineColor>
+		<LineWidth>2</LineWidth>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="6" left="486" bottom="30" right="570" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Cancel"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Assignment">
+				<Identifier>PROCancelAuth</Identifier>
+				<AssignedValue>1</AssignedValue>
+			</Action>
+			<Action Type="ClosePage" />
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="6" left="576" bottom="30" right="654" />
+		<TabOrder>1</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Finished"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="ClosePage" />
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Composite Table">
+		<Location top="72" left="6" bottom="246" right="654" />
+		<TabOrder>3</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ColumnSort>false</ColumnSort>
+		<CellSelection>false</CellSelection>
+		<MultipleRowSelection>false</MultipleRowSelection>
+		<Domain>
+			<Identifier>CUR_ENT</Identifier>
+			<Index Name="CUR_ENT">
+				<TitleText>"Entity"</TitleText>
+				<ProcedureUponDblClick>GUI_RemoveEntity</ProcedureUponDblClick>
+			</Index>
+		</Domain>
+		<ExplicitIdentifier>
+			<Identifier>PROEntityEnvironmentName( CUR_ENT-&gt;Pe_CUR_Entity )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<TitleText>"Env"</TitleText>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>PROEntityType( CUR_ENT-&gt;Pe_CUR_Entity )</Identifier>
+			<NumberFormat Width="4" Decimals="0" Alignment="Center" />
+			<TitleText>"Type"</TitleText>
+			<Readonly>1</Readonly>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>CurrentObjectEntityDeny( CUR_ENT-&gt;Pe_CUR_Entity )</Identifier>
+			<NumberFormat Width="4" Decimals="0" Alignment="Center" Binary="true" />
+			<TitleText>"Deny?"</TitleText>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>CurrentObjectEntityExec( CUR_ENT-&gt;Pe_CUR_Entity )</Identifier>
+			<NumberFormat Width="4" Decimals="0" Alignment="Center" Binary="true" />
+			<TitleText>"Exec"</TitleText>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>CurrentObjectEntityRead( CUR_ENT-&gt;Pe_CUR_Entity )</Identifier>
+			<NumberFormat Width="4" Decimals="0" Alignment="Center" Binary="true" />
+			<TitleText>"Read"</TitleText>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>CurrentObjectEntityWrite( CUR_ENT-&gt;Pe_CUR_Entity )</Identifier>
+			<NumberFormat Width="4" Decimals="0" Alignment="Center" Binary="true" />
+			<TitleText>"Write"</TitleText>
+		</ExplicitIdentifier>
+		<ElementText Index="CUR_ENT">PROEntityName( CUR_ENT )</ElementText>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="48" left="6" bottom="66" right="126" />
+		<TabOrder>4</TabOrder>
+		<TabStop>false</TabStop>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="None" MarginTop="1" MarginRight="4" MarginBottom="1" MarginLeft="4" />
+		<BackgroundColor>
+			<UserColor GUID="4C29CF98-3E51-4BAA-8563-90FCE3E3DF3B">default background</UserColor>
+		</BackgroundColor>
+		<TextColor>
+			<UserColor GUID="701D5E4D-A50B-4FD8-B7AD-7ED61961A523">default foreground</UserColor>
+		</TextColor>
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>"Current Authorization:"</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="264" left="6" bottom="282" right="72" />
+		<TabOrder>5</TabOrder>
+		<TabStop>false</TabStop>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="None" MarginTop="1" MarginRight="4" MarginBottom="1" MarginLeft="4" />
+		<BackgroundColor>
+			<UserColor GUID="4C29CF98-3E51-4BAA-8563-90FCE3E3DF3B">default background</UserColor>
+		</BackgroundColor>
+		<TextColor>
+			<UserColor GUID="701D5E4D-A50B-4FD8-B7AD-7ED61961A523">default foreground</UserColor>
+		</TextColor>
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>"Add Entity:"</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>ListBox</SelectionType>
+		<SingleSelect>true</SingleSelect>
+		<Location top="342" left="24" bottom="552" right="318" />
+		<TabOrder>7</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ProcedureUponDblClick>GUI_AddGroupAuth</ProcedureUponDblClick>
+		<ExplicitIdentifier>
+			<Identifier>Pe_GUI_Group</Identifier>
+		</ExplicitIdentifier>
+		<ElementText Index="CurrentGroupSet">PROEntityName( CurrentGroupSet )</ElementText>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="324" left="24" bottom="342" right="84" />
+		<StaticText>Groups:</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>ListBox</SelectionType>
+		<SingleSelect>true</SingleSelect>
+		<Location top="342" left="330" bottom="552" right="642" />
+		<TabOrder>6</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ProcedureUponDblClick>GUI_AddUserAuth</ProcedureUponDblClick>
+		<ExplicitIdentifier>
+			<Identifier>Pe_GUI_User</Identifier>
+		</ExplicitIdentifier>
+		<ElementText Index="CurrentUserSet">PROEntityName( CurrentUserSet )</ElementText>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="318" left="336" bottom="336" right="396" />
+		<StaticText>Users:</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>DropDownList</SelectionType>
+		<Location top="300" left="108" bottom="330" right="318" />
+		<TabOrder>8</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="None" />
+		<BackgroundColor RGB="#ffffff" />
+		<ExplicitIdentifier>
+			<Identifier>Pe_GUI_Env</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="300" left="24" bottom="318" right="96" />
+		<StaticText>Environment:</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>GUI_RemoveEntity</Symbol>
+			<Symbol>GUI_AddUserAuth</Symbol>
+			<Symbol>GUI_AddGroupAuth</Symbol>
+			<Symbol>PROEnv</Symbol>
+			<Symbol>PROEntityType</Symbol>
+			<Symbol>PROEntityEnvironmentName</Symbol>
+			<Symbol>PROEntityName</Symbol>
+			<Symbol>CurrentObjectEntityDeny</Symbol>
+			<Symbol>CurrentObjectEntityExec</Symbol>
+			<Symbol>CurrentObjectEntityRead</Symbol>
+			<Symbol>CurrentObjectEntityWrite</Symbol>
+			<Symbol>CurrentUserSet</Symbol>
+			<Symbol>CurrentGroupSet</Symbol>
+			<Symbol>PROCancelAuth</Symbol>
+			<Symbol>Pe_GUI_Env</Symbol>
+			<Symbol>CUR_ENT</Symbol>
+			<Symbol>Pe_CUR_Entity</Symbol>
+			<Symbol>Pe_GUI_User</Symbol>
+			<Symbol>Pe_GUI_Group</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>
