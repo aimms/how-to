@@ -63,12 +63,14 @@ Model Main_AIMMSPROUsageStatistics {
                     	SetElementAdd( s_Sessions, ep_addThis, formatString("Session%06i",loopcount));
                     	sp_SessStartTimes(ep_addThis) := sp_ThisSessionStart;
                     	p_SessDurations(ep_addThis) := p_ThisSessionDuration;
-                    	sp_SessAccountName(ep_addThis) := "ProOnPrem";
-                    	sp_SessSessionType(ep_addThis) := "WinUI";
-                    	sp_SessEnv(ep_addThis) := "ROOT";
-                    	sp_SessUserName(ep_addThis) := "Theo";
-                    	sp_SessApp(ep_addThis) := "Fabulous";
-                    	sp_SessAppVersion(ep_addThis) := "3.14159";
+                    
+                    	sp_SessValueData(ep_addThis,'AccountNames') := "ProOnPrem";
+                    	sp_SessValueData(ep_addThis,'SessionTypes') := "WinUI";
+                    	sp_SessValueData(ep_addThis,'Environments') := "ROOT";
+                    	sp_SessValueData(ep_addThis,'UserNames') := "Theo";
+                    	sp_SessValueData(ep_addThis,'Applications') := "Fabulous";
+                    	sp_SessValueData(ep_addThis,'AppVersions') := "3.14159";
+                    
                     	p_SessPeakMemory(ep_addThis) := 123456;
                     endwhile ;
                 }
@@ -109,13 +111,13 @@ Model Main_AIMMSPROUsageStatistics {
             Property: UseResultSet;
             Mapping: {
                 "id"            --> i_session,
-                "accuntname"    --> sp_SessAccountName( i_session ),
                 "created_at"    --> sp_SessStartTimes( i_session ),
-                "session_type"  --> sp_SessSessionType(i_session ),
-                "env"           --> sp_SessEnv(i_session ),
-                "username"      --> sp_SessUserName(i_session ),
-                "app"           --> sp_SessApp(i_session ),
-                "app_version"   --> sp_SessAppVersion(i_session ),
+                "accuntname"    --> sp_SessValueData( i_session, 'AccountNames' ),
+                "session_type"  --> sp_SessValueData( i_session, 'SessionTypes' ),
+                "env"           --> sp_SessValueData( i_session, 'Environments' ),
+                "username"      --> sp_SessValueData( i_session, 'UserNames'    ),
+                "app"           --> sp_SessValueData( i_session, 'Applications' ),
+                "app_version"   --> sp_SessValueData( i_session, 'AppVersions'  ),
                 "peak_memory"   --> p_SessPeakMemory(i_session ),
                 "duration"      --> p_SessDurations(i_session)
             }
@@ -158,32 +160,65 @@ Model Main_AIMMSPROUsageStatistics {
         }
     }
     DeclarationSection Value_sets {
+        Set s_ValueMasterSet {
+            Index: i_valueMaster;
+            Definition: s_AccountNames + s_Environments + s_UserNames + s_SessionTypes + s_Applications + s_AppVersions + s_GenericAll;
+        }
+        Set s_ValueSubset {
+            SubsetOf: s_ValueMasterSet;
+            Index: i_someValue;
+            Parameter: ep_someValue, ep_FocusValue;
+        }
+        Set s_ValueTypes {
+            Index: i_valueType;
+            Parameter: ep_valueType, ep_BarchartColumnValueType;
+            Definition: {
+                data {
+                	AccountNames,
+                	Environments,
+                	UserNames,
+                	SessionTypes,
+                	Applications,
+                	AppVersions,
+                	None }
+            }
+        }
+        Set s_GenericAll {
+            SubsetOf: s_ValueMasterSet;
+            Definition: data { all };
+        }
         Set s_EventTypes {
             Index: i_EventType;
             Parameter: ep_EventType;
             Definition: data { StartSession, FinishSession };
         }
         Set s_AccountNames {
+            SubsetOf: s_ValueMasterSet;
             Index: i_AccountName;
             Parameter: ep_AccountName;
         }
         Set s_Environments {
+            SubsetOf: s_ValueMasterSet;
             Index: i_Environment;
             Parameter: ep_Environment;
         }
         Set s_UserNames {
+            SubsetOf: s_ValueMasterSet;
             Index: i_UserName;
             Parameter: ep_UserName;
         }
         Set s_SessionTypes {
+            SubsetOf: s_ValueMasterSet;
             Index: i_SessionType;
             Parameter: ep_SessionType, ep_FocusSessionType;
         }
         Set s_Applications {
+            SubsetOf: s_ValueMasterSet;
             Index: i_Application;
             Parameter: ep_Application;
         }
         Set s_AppVersions {
+            SubsetOf: s_ValueMasterSet;
             Index: i_AppVersion;
             Parameter: ep_AppVersion;
         }
@@ -195,47 +230,12 @@ Model Main_AIMMSPROUsageStatistics {
         StringParameter sp_SessStartTimes {
             IndexDomain: i_session;
         }
-        StringParameter sp_SessAccountName {
-            IndexDomain: i_session;
+        StringParameter sp_SessValueData {
+            IndexDomain: (i_session,i_valueType);
         }
-        StringParameter sp_SessSessionType {
-            IndexDomain: i_session;
-        }
-        StringParameter sp_SessEnv {
-            IndexDomain: i_session;
-        }
-        StringParameter sp_SessUserName {
-            IndexDomain: i_session;
-        }
-        StringParameter sp_SessApp {
-            IndexDomain: i_session;
-        }
-        StringParameter sp_SessAppVersion {
-            IndexDomain: i_session;
-        }
-        ElementParameter ep_SessAccountName {
-            IndexDomain: i_session;
-            Range: s_AccountNames;
-        }
-        ElementParameter ep_SessSessionType {
-            IndexDomain: i_session;
-            Range: s_SessionTypes;
-        }
-        ElementParameter ep_SessEnv {
-            IndexDomain: i_session;
-            Range: s_Environments;
-        }
-        ElementParameter ep_SessUserName {
-            IndexDomain: i_session;
-            Range: s_UserNames;
-        }
-        ElementParameter ep_SessApp {
-            IndexDomain: i_session;
-            Range: s_Applications;
-        }
-        ElementParameter ep_SessAppVersion {
-            IndexDomain: i_session;
-            Range: s_AppVersions;
+        ElementParameter ep_SessValueData {
+            IndexDomain: (i_session,i_valueType);
+            Range: s_ValueMasterSet;
         }
         Parameter p_SessDurations {
             IndexDomain: i_Session;
@@ -264,6 +264,10 @@ Model Main_AIMMSPROUsageStatistics {
         ElementParameter ep_EvEventTypes {
             IndexDomain: i_Event;
             Range: s_EventTypes;
+        }
+        ElementParameter ep_EvValueData {
+            IndexDomain: (i_Event,i_valueType);
+            Range: s_ValueMasterSet;
         }
         ElementParameter ep_EvAccountName {
             IndexDomain: i_Event;
@@ -310,10 +314,10 @@ Model Main_AIMMSPROUsageStatistics {
             Definition: average(i_event2, p_MemoryBySessionsAfterEvent(i_Event2));
         }
         Parameter p_NumberOfSessionsAfterEventBySessionType {
-            IndexDomain: (i_Event,i_SessionType);
+            IndexDomain: (i_Event,i_someValue);
         }
         Parameter p_MemoryBySessionsAfterEventBySessionType {
-            IndexDomain: (i_Event,i_SessionType);
+            IndexDomain: (i_Event,i_someValue);
             Unit: MB;
         }
     }
@@ -333,14 +337,14 @@ Model Main_AIMMSPROUsageStatistics {
                   	endfor ;
             endblock ;
             
-            sp_SessAccountName(i_session)|(not sp_SessAccountName(i_session)) := "ProOnPrem";
+            sp_SessValueData(i_session,'AccountNames')|(not sp_SessValueData(i_session,'AccountNames')) := "ProOnPrem";
             
-            ep_SessAccountName(i_session) := StringToElement(s_AccountNames, sp_SessAccountName( i_session ), create:1);
-            ep_SessSessionType(i_session) := StringToElement(s_SessionTypes, sp_SessSessionType( i_session ), create:1);
-            ep_SessEnv(        i_session) := StringToElement(s_Environments, sp_SessEnv(         i_session ), create:1);
-            ep_SessUserName(   i_session) := StringToElement(s_UserNames   , sp_SessUserName(    i_session ), create:1);
-            ep_SessApp(        i_session) := StringToElement(s_Applications, sp_SessApp(         i_session ), create:1);
-            ep_SessAppVersion( i_session) := StringToElement(s_AppVersions , sp_SessAppVersion(  i_session ), create:1);
+            ep_SessValueData( i_session, 'AccountNames' ) := StringToElement(s_AccountNames, sp_SessValueData( i_session, 'AccountNames' ), create:1);
+            ep_SessValueData( i_session, 'SessionTypes' ) := StringToElement(s_SessionTypes, sp_SessValueData( i_session, 'SessionTypes' ), create:1);
+            ep_SessValueData( i_session, 'Environments' ) := StringToElement(s_Environments, sp_SessValueData( i_session, 'Environments' ), create:1);
+            ep_SessValueData( i_session, 'UserNames'    ) := StringToElement(s_UserNames   , sp_SessValueData( i_session, 'UserNames'    ), create:1);
+            ep_SessValueData( i_session, 'Applications' ) := StringToElement(s_Applications, sp_SessValueData( i_session, 'Applications' ), create:1);
+            ep_SessValueData( i_session, 'AppVersions'  ) := StringToElement(s_AppVersions , sp_SessValueData( i_session, 'AppVersions'  ), create:1);
             
             p01_SelectedAccounts(i_AccountName) := 1;
             p01_SelectedSessionTypes(i_SessionType) := 1;
@@ -363,12 +367,8 @@ Model Main_AIMMSPROUsageStatistics {
             			ep_WrkEvEventType( ep_WorkEvent ) := 'StartSession';
             		endblock ;
             		block ! Copy session data to work event.
-            			ep_WrkEvAccountName( ep_WorkEvent ) := ep_SessAccountName( i_session );
-            			ep_WrkEvSessionType( ep_WorkEvent ) := ep_SessSessionType( i_session );
-            			ep_WrkEvEnv(         ep_WorkEvent ) := ep_SessEnv(         i_session );
-            			ep_WrkEvUserName(    ep_WorkEvent ) := ep_SessUserName(    i_session );
-            			ep_WrkEvApp(         ep_WorkEvent ) := ep_SessApp(         i_session );
-            			ep_WrkEvAppVersion(  ep_WorkEvent ) := ep_SessAppVersion(  i_session );
+            			ep_WrkValueData(ep_WorkEvent,i_ValueType) := ep_SessValueData(i_Session,i_valuetype);
+            
             			p_WrkEvPeakMemory(   ep_WorkEvent ) := p_SessPeakMemory(   i_session );
             		endblock ;
             
@@ -379,12 +379,7 @@ Model Main_AIMMSPROUsageStatistics {
             			ep_WrkEvEventType( ep_WorkEvent ) := 'FinishSession';
             		endblock ;
             		block ! Copy session data to work event.
-            			ep_WrkEvAccountName( ep_WorkEvent ) := ep_SessAccountName( i_session );
-            			ep_WrkEvSessionType( ep_WorkEvent ) := ep_SessSessionType( i_session );
-            			ep_WrkEvEnv(         ep_WorkEvent ) := ep_SessEnv(         i_session );
-            			ep_WrkEvUserName(    ep_WorkEvent ) := ep_SessUserName(    i_session );
-            			ep_WrkEvApp(         ep_WorkEvent ) := ep_SessApp(         i_session );
-            			ep_WrkEvAppVersion(  ep_WorkEvent ) := ep_SessAppVersion(  i_session );
+            			ep_WrkValueData(ep_WorkEvent,i_ValueType) := ep_SessValueData(i_Session,i_valuetype);
             			p_WrkEvPeakMemory(   ep_WorkEvent ) := p_SessPeakMemory(   i_session );
             		endblock ;
             
@@ -404,12 +399,15 @@ Model Main_AIMMSPROUsageStatistics {
             		endblock ;
             		block ! copy data from "work event" to "event"
             			ep_EvEventTypes( ep_Event ) := ep_WrkEvEventType( ep_WorkEvent );
-            			ep_EvAccountName( ep_Event ) := ep_WrkEvAccountName( ep_WorkEvent );
-            			ep_EvSessionType( ep_Event ) := ep_WrkEvSessionType( ep_WorkEvent );
-            			ep_EvEnv( ep_Event ) := ep_WrkEvEnv( ep_WorkEvent );
-            			ep_EvUserName( ep_Event ) := ep_WrkEvUserName( ep_WorkEvent );
-            			ep_EvApp( ep_Event ) := ep_WrkEvApp( ep_WorkEvent );
-            			ep_EvAppVersion( ep_Event ) := ep_WrkEvAppVersion( ep_WorkEvent );
+            
+            !			ep_EvAccountName( ep_Event ) := ep_WrkEvAccountName( ep_WorkEvent );
+            !			ep_EvSessionType( ep_Event ) := ep_WrkEvSessionType( ep_WorkEvent );
+            !			ep_EvEnv( ep_Event ) := ep_WrkEvEnv( ep_WorkEvent );
+            !			ep_EvUserName( ep_Event ) := ep_WrkEvUserName( ep_WorkEvent );
+            !			ep_EvApp( ep_Event ) := ep_WrkEvApp( ep_WorkEvent );
+            !			ep_EvAppVersion( ep_Event ) := ep_WrkEvAppVersion( ep_WorkEvent );
+            			ep_EvValueData( ep_Event,i_valuetype ) := ep_WrkValueData( ep_WorkEvent, i_valueType );
+            
             			p_EvPeakMemory( ep_Event ) := p_WrkEvPeakMemory( ep_WorkEvent );
             		endblock ;
             
@@ -454,29 +452,9 @@ Model Main_AIMMSPROUsageStatistics {
                 IndexDomain: i_WorkEvent;
                 Range: s_EventTypes;
             }
-            ElementParameter ep_WrkEvAccountName {
-                IndexDomain: i_WorkEvent;
-                Range: s_AccountNames;
-            }
-            ElementParameter ep_WrkEvSessionType {
-                IndexDomain: i_WorkEvent;
-                Range: s_SessionTypes;
-            }
-            ElementParameter ep_WrkEvEnv {
-                IndexDomain: i_WorkEvent;
-                Range: s_Environments;
-            }
-            ElementParameter ep_WrkEvUserName {
-                IndexDomain: i_WorkEvent;
-                Range: s_UserNames;
-            }
-            ElementParameter ep_WrkEvApp {
-                IndexDomain: i_WorkEvent;
-                Range: s_Applications;
-            }
-            ElementParameter ep_WrkEvAppVersion {
-                IndexDomain: i_WorkEvent;
-                Range: s_AppVersions;
+            ElementParameter ep_WrkValueData {
+                IndexDomain: (i_WorkEvent,i_valueType);
+                Range: s_ValueMasterSet;
             }
             Parameter p_WrkEvPeakMemory {
                 IndexDomain: i_WorkEvent;
@@ -498,7 +476,6 @@ Model Main_AIMMSPROUsageStatistics {
             		p_NumberOfSessionsAfterEventBySessionType, p_MemoryBySessionsAfterEventBySessionType;
             	update s_ShownEvents;
             
-            
             	p_NumberOfSessionsAfterEvent(i_ShownEvent) := p_NumberOfSessionsAfterEvent(i_ShownEvent-1)+
             		if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
             			1
@@ -512,29 +489,43 @@ Model Main_AIMMSPROUsageStatistics {
             			-p_EvPeakMemory( i_ShownEvent )
             		endif ;
             
-            	p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent,i_SessionType) := p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent-1,i_SessionType)+
-            		if ep_EvSessionType( i_ShownEvent ) = i_SessionType then
+            	p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent,i_someValue) := p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent-1,i_someValue)+
+            		if ep_BarchartColumnValueType = 'None' then
             			if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
             				1
             			else
             				-1
             			endif 
             		else
-            			0
+            			if ep_EvValueData( i_ShownEvent,ep_BarchartColumnValueType ) = i_someValue then
+            				if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+            					1
+            				else
+            					-1
+            				endif 
+            			else
+            				0
+            			endif 
             		endif ;
-            	p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent,i_SessionType) := p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent-1,i_SessionType)+
-            		if ep_EvSessionType( i_ShownEvent ) = i_SessionType then
+            
+            	p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent,i_someValue) := p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent-1,i_someValue)+
+            		if ep_BarchartColumnValueType = 'None' then
             			if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
             				p_EvPeakMemory( i_ShownEvent )
             			else
             				-p_EvPeakMemory( i_ShownEvent )
-            			endif
+            			endif 
             		else
-            			0
+            			if ep_EvValueData( i_ShownEvent,ep_BarchartColumnValueType ) = i_someValue then
+            				if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+            					p_EvPeakMemory( i_ShownEvent )
+            				else
+            					-p_EvPeakMemory( i_ShownEvent )
+            				endif
+            			else
+            				0
+            			endif 
             		endif ;
-            
-            
-            
             
             endblock ;
         }
@@ -547,6 +538,7 @@ Model Main_AIMMSPROUsageStatistics {
             	pr_ReadData();
             	pr_TranslateStringsToElements();
             	pr_EventsFromSessions();
+            	pr_handleBarchartColumnValueType();
             	pr_NoSessionsMemInUse();
             endif ;
         }
@@ -685,32 +677,58 @@ Model Main_AIMMSPROUsageStatistics {
     Section WebUI_Full_Event_Information_Support {
         Procedure uponchange_p01_SelectedAccounts {
             Body: {
-                pr_NoSessionsMemInUse();
+                pr_handle_uponchange_ValueSelections();
             }
         }
         Procedure uponchange_p01_SelectedSessionTypes {
             Body: {
-                pr_NoSessionsMemInUse();
+                pr_handle_uponchange_ValueSelections();
             }
         }
         Procedure uponchange_p01_SelectedEnvironments {
             Body: {
-                pr_NoSessionsMemInUse();
+                pr_handle_uponchange_ValueSelections();
             }
         }
         Procedure uponchange_p01_SelectedUsernames {
             Body: {
-                pr_NoSessionsMemInUse();
+                pr_handle_uponchange_ValueSelections();
             }
         }
         Procedure uponchange_p01_SelectedApplications {
             Body: {
-                pr_NoSessionsMemInUse();
+                pr_handle_uponchange_ValueSelections();
             }
         }
         Procedure uponchange_p01_SelectedAppversions {
             Body: {
+                pr_handle_uponchange_ValueSelections();
+            }
+        }
+        Procedure uponchange_ep_BarchartColumnValueType {
+            Body: {
+                pr_handleBarchartColumnValueType();
+                pr_handle_uponchange_ValueSelections();
+            }
+        }
+        Procedure pr_handle_uponchange_ValueSelections {
+            Body: {
                 pr_NoSessionsMemInUse();
+                pr_ComputeBarChartsStackedBySessionType();
+            }
+        }
+        Procedure pr_handleBarchartColumnValueType {
+            Body: {
+                switch ep_BarchartColumnValueType do
+                	'AccountNames' : s_ValueSubset := s_AccountNames   ;
+                	'Environments' : s_ValueSubset := s_Environments   ;
+                	'UserNames'    : s_ValueSubset := s_UserNames      ;
+                	'SessionTypes' : s_ValueSubset := s_SessionTypes   ;
+                	'Applications' : s_ValueSubset := s_Applications   ;
+                	'AppVersions'  : s_ValueSubset := s_AppVersions    ;
+                	'None'         : s_ValueSubset := s_GenericAll     ;
+                	default        : s_ValueSubset := s_GenericAll     ;
+                endswitch;
             }
         }
         Set s_ShownEvents {
@@ -719,14 +737,15 @@ Model Main_AIMMSPROUsageStatistics {
             Property: ElementsAreLabels;
             Definition: {
                 { i_event |
-                	( ep_EvSessionType(i_Event) in s_ShownSessionTypes ) and
-                	( ep_EvApp(i_Event) in s_ShownApplications ) and
-                	( ep_EvAppVersion(i_Event) in s_ShownAppVersions ) and
+                	( ep_EvValueData(i_Event,'SessionTypes') in s_ShownSessionTypes ) and
+                	( ep_EvValueData(i_Event,'Applications') in s_ShownApplications ) and
+                	( ep_EvValueData(i_Event,'AppVersions') in s_ShownAppVersions ) and
                 
-                	( ep_EvAccountName(i_Event) in s_ShownAccounts ) and
-                	( ep_EvEnv(i_Event) in s_ShownEnvironments ) and
-                	( ep_EvUserName(i_Event) in s_ShownUserNames ) }
+                	( ep_EvValueData(i_Event,'AccountNames') in s_ShownAccounts ) and
+                	( ep_EvValueData(i_Event,'Environments') in s_ShownEnvironments ) and
+                	( ep_EvValueData(i_Event,'UserNames') in s_ShownUserNames ) }
             }
+            Comment: "data {";
         }
         Set s_ShownAccounts {
             SubsetOf: s_AccountNames;
@@ -797,7 +816,7 @@ Model Main_AIMMSPROUsageStatistics {
         Set s_SidePanelOrder {
             SubsetOf: Integers;
             Index: i_spo;
-            Definition: ElementRange(1,2);
+            Definition: ElementRange(1,9);
         }
         StringParameter sp_SidePanelsFullEventPage {
             IndexDomain: (i_spo,webui::indexSidePanelSpec);
@@ -811,7 +830,12 @@ Model Main_AIMMSPROUsageStatistics {
                   ( 2, displayText ) : "User Filter"          ,
                   ( 2, pageId      ) : "usefilter_1"          ,
                   ( 2, tooltip     ) : "account environment user",  
-                  ( 2, state       ) : "Active"               
+                  ( 2, state       ) : "Active"               ,
+                
+                  ( 3, displayText ) : "Stack by"          ,
+                  ( 3, pageId      ) : "stackselector_1"          ,
+                  ( 3, tooltip     ) : "Choose value type for stacking",  
+                  ( 3, state       ) : "Active"               
                 }
             }
         }
@@ -895,12 +919,14 @@ Model Main_AIMMSPROUsageStatistics {
             }
             Procedure uponchange_p_TimebarTimeStart {
                 Body: {
-                    pr_ComputeStackedBarCharts();
+                    pr_RelateBarChartMomentsToEvents();
+                    pr_ComputeBarChartsStackedBySessionType();
                 }
             }
             Procedure uponchange_p_TimebarDuration {
                 Body: {
-                    pr_ComputeStackedBarCharts();
+                    pr_RelateBarChartMomentsToEvents();
+                    pr_ComputeBarChartsStackedBySessionType();
                 }
             }
         }
@@ -1149,11 +1175,44 @@ Model Main_AIMMSPROUsageStatistics {
                 SubsetOf: s_Events;
             }
             Parameter p_NumberOfSessionsStackedBySessionType {
-                IndexDomain: (i_bcc,i_SessionType);
+                IndexDomain: (i_bcc,i_someValue);
             }
             Parameter p_MemoryInUseStackedBySessionType {
-                IndexDomain: (i_bcc,i_SessionType);
+                IndexDomain: (i_bcc,i_someValue);
                 Unit: MB;
+            }
+            StringParameter sp_StackedBarChartsSecondaryActions {
+                IndexDomain: (i_si, webui::indexPageActionSpec);
+                Definition: {
+                    data {
+                    (1,displaytext): "Enable session tracking",
+                    (1,icon): "aimms-database-edit2",
+                    (1,procedure): "pr_EnableSessionTracking",
+                    (1,state): "Active",
+                    
+                    (2,displaytext): "Read Data",
+                    (2,icon): "aimms-bin5",
+                    (2,procedure): "pr_ClearErrors",
+                    (2,state): "Hidden" }
+                }
+            }
+            StringParameter sp_TitleSessionInUseChart {
+                Definition: {
+                    if ep_BarchartColumnValueType and ep_BarchartColumnValueType <> 'None' then
+                    	formatString("Number of sessions in use stacked by %e", ep_BarchartColumnValueType )
+                    else
+                    	"Number of sessions in use"
+                    endif ;
+                }
+            }
+            StringParameter sp_TitleMemoryInUseChart {
+                Definition: {
+                    if ep_BarchartColumnValueType and ep_BarchartColumnValueType <> 'None' then
+                    	formatString("Memory in use stacked by %e", ep_BarchartColumnValueType )
+                    else
+                    	"Memory in use"
+                    endif ;
+                }
             }
             Procedure pr_ComputeStackedBarCharts {
                 Body: {
@@ -1294,13 +1353,18 @@ Model Main_AIMMSPROUsageStatistics {
             }
             Procedure pr_ComputeBarChartsStackedBySessionType {
                 Body: {
-                    p_NumberOfSessionsStackedBySessionType(i_bcc, i_SessionType) :=
-                    	max( 0, max( i_event | i_event in s_EventsAtBarChartPoint(i_bcc), 
-                    		p_NumberOfSessionsAfterEventBySessionType(i_Event, i_SessionType) ) );
+                    p_NumberOfSessionsStackedBySessionType(i_bcc, i_someValue) :=
+                    	max( 0, max( i_ShownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc), 
+                    		p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent, i_someValue) ) );
                     
-                    p_MemoryInUseStackedBySessionType(i_bcc, i_SessionType) :=
-                    	max( 0[mb], max( i_event | i_event in s_EventsAtBarChartPoint(i_bcc), 
-                    		p_MemoryBySessionsAfterEventBySessionType(i_Event, i_SessionType) ) );
+                    p_MemoryInUseStackedBySessionType(i_bcc, i_someValue) :=
+                    	max( 0[mb], max( i_ShownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc), 
+                    		p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent, i_someValue) ) );
+                }
+            }
+            Procedure pr_EnableSessionTracking {
+                Body: {
+                    !webui::OpenDialogPage(
                 }
             }
         }
@@ -1309,10 +1373,13 @@ Model Main_AIMMSPROUsageStatistics {
                 SubsetOf: s_Events;
                 Index: i_focusEvent;
                 Definition: {
-                    { i_event |
-                    	( i_event in s_EventsAtBarChartPoint(ep_FocusBCC)        ) and
-                    	( ( ep_EvSessionType(i_event) = ep_FocusSessionType ) or
-                    	  ( ''                       =  ep_FocusSessionType )    )     }
+                    { i_shownevent |
+                            ( ep_EvEventTypes(i_shownevent) = 'StartSession'                                 ) and
+                    	( i_shownevent in s_EventsAtBarChartPoint(ep_FocusBCC)                           ) and
+                    	( ( ep_BarchartColumnValueType = ''                                         ) or
+                    	  ( ep_BarchartColumnValueType = 'None'                                     ) or
+                    	  ( ep_EvValueData(i_shownevent,ep_BarchartColumnValueType) = ep_FocusValue ) or
+                    	  ( ''                                                      = ep_FocusValue )    )     }
                 }
             }
         }
@@ -1352,7 +1419,8 @@ Model Main_AIMMSPROUsageStatistics {
     Section Attic {
         Procedure MainInitialization {
             Body: {
-                profilerStart();
+                !profilerStart();
+                ep_BarchartColumnValueType := 'SessionTypes' ;
             }
             Comment: "Add initialization statements here that do NOT require any library being initialized already.";
         }

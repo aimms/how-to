@@ -25,6 +25,12 @@
                 "slug": "full_event_information",
                 "children": [
                   {
+                    "name": "StackSelector",
+                    "type": "sidepanel",
+                    "slug": "stackselector_1",
+                    "children": []
+                  },
+                  {
                     "name": "AppFilter",
                     "type": "sidepanel",
                     "slug": "appfilter_1",
@@ -60,6 +66,12 @@
                 "name": "Error Handling",
                 "type": "page",
                 "slug": "error_handling",
+                "children": []
+              },
+              {
+                "name": "Control panel",
+                "type": "page",
+                "slug": "control_panel",
                 "children": []
               }
             ]
@@ -313,90 +325,9 @@
     },
     "contents": {
       "aimms": {
-        "contents": [
-          "sp_EvMoment",
-          "ep_EvAccountName",
-          "ep_EvApp",
-          "ep_EvAppVersion",
-          "ep_EvSessionType",
-          "ep_EvEventTypes",
-          "ep_EvEnv",
-          "ep_EvUserName",
-          "p_EvPeakMemory"
-        ],
-        "prefix": "aimms",
-        "partition": {
-          "rowHeader": [
-            "i_Event"
-          ],
-          "colHeader": [
-            "<IDENTIFIER-SET>"
-          ],
-          "aggregated": []
-        },
         "slices": [
           {
-            "identifier": "ep_EvAccountName",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
-            "identifier": "ep_EvApp",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
-            "identifier": "ep_EvAppVersion",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
-            "identifier": "ep_EvEnv",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
             "identifier": "ep_EvEventTypes",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
-            "identifier": "ep_EvSessionType",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
-            "identifier": "ep_EvUserName",
             "slice": [
               {
                 "index": "i_Event",
@@ -424,7 +355,28 @@
                 "value": "i_ShownEvent"
               }
             ]
+          },
+          {
+            "identifier": "ep_EvValueData",
+            "slice": [
+              {
+                "index": "i_Event",
+                "type": "subset",
+                "value": "i_ShownEvent"
+              },
+              {
+                "index": "i_valueType",
+                "type": "free",
+                "value": "i_valueType"
+              }
+            ]
           }
+        ],
+        "contents": [
+          "sp_EvMoment",
+          "ep_EvEventTypes",
+          "ep_EvValueData",
+          "p_EvPeakMemory"
         ]
       }
     },
@@ -434,9 +386,11 @@
     "contents.partition": {
       "literal": {
         "rowHeader": [
-          "i_Event"
+          "i_Event",
+          "i_ShownEvent"
         ],
         "colHeader": [
+          "i_valueType",
           "<IDENTIFIER-SET>"
         ],
         "aggregated": []
@@ -511,6 +465,78 @@
           "type": "rowHeader",
           "colKey": "i_ShownEvent",
           "width": 28.17567567567567
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "SessionTypes",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 20.70042831947594
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "AccountNames",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 23.000000000000004
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "Environments",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 22.072500000000005
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "UserNames",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 19.8
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "",
+            "<IDENTIFIER-SET>": "sp_EvMoment"
+          },
+          "width": 30.4
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "",
+            "<IDENTIFIER-SET>": "p_EvPeakMemory"
+          },
+          "width": 26
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "AppVersions",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 22.3926812104152
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "Applications",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 33.425850340136044
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "",
+            "<IDENTIFIER-SET>": "ep_EvEventTypes"
+          },
+          "width": 21
         }
       ]
     },
@@ -731,6 +757,22 @@
             "<IDENTIFIER-SET>": "p_SessDurations"
           },
           "width": 24.28571428571429
+        },
+        {
+          "type": "rowHeader",
+          "width": 27.67441860465116
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_session",
+          "width": 51.09993714644877
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_SessStartTimes"
+          },
+          "width": 34.65070578857387
         }
       ]
     },
@@ -1126,7 +1168,8 @@
         ],
         "grouped": [],
         "stacked": [
-          "i_SessionType"
+          "i_SessionType",
+          "i_someValue"
         ],
         "aggregated": [
           "<IDENTIFIER-SET>"
@@ -1136,11 +1179,16 @@
     "store.focus.in": {
       "literal": {
         "i_bcc": "ep_FocusBCC",
-        "i_SessionType": "ep_FocusSessionType"
+        "i_SessionType": "ep_FocusSessionType",
+        "i_someValue": "ep_FocusValue"
       }
     },
     "title": {
-      "literal": "Session in use stacked by Session Type"
+      "aimms": {
+        "contents": [
+          "sp_TitleSessionInUseChart"
+        ]
+      }
     }
   },
   "widgets/MemoryInUseStackedBySessionType": {
@@ -1166,7 +1214,8 @@
         ],
         "grouped": [],
         "stacked": [
-          "i_SessionType"
+          "i_SessionType",
+          "i_someValue"
         ],
         "aggregated": [
           "<IDENTIFIER-SET>"
@@ -1176,11 +1225,16 @@
     "store.focus.in": {
       "literal": {
         "i_bcc": "ep_FocusBCC",
-        "i_SessionType": "ep_FocusSessionType"
+        "i_SessionType": "ep_FocusSessionType",
+        "i_someValue": "ep_FocusValue"
       }
     },
     "title": {
-      "literal": "Memory in use stacked by Session Type"
+      "aimms": {
+        "contents": [
+          "sp_TitleMemoryInUseChart"
+        ]
+      }
     }
   },
   "widgets/bl": {
@@ -1266,25 +1320,6 @@
     },
     "contents": {
       "aimms": {
-        "contents": [
-          "sp_EvMoment",
-          "ep_EvEventTypes",
-          "ep_EvSessionType",
-          "ep_EvEnv",
-          "ep_EvUserName",
-          "ep_EvApp",
-          "ep_EvAppVersion"
-        ],
-        "prefix": "aimms",
-        "partition": {
-          "rowHeader": [
-            "i_Event"
-          ],
-          "colHeader": [
-            "<IDENTIFIER-SET>"
-          ],
-          "aggregated": []
-        },
         "slices": [
           {
             "identifier": "ep_EvApp",
@@ -1355,16 +1390,53 @@
                 "value": "i_focusEvent"
               }
             ]
+          },
+          {
+            "identifier": "ep_EvValueData",
+            "slice": [
+              {
+                "index": "i_Event",
+                "type": "subset",
+                "value": "i_focusEvent"
+              },
+              {
+                "index": "i_valueType",
+                "type": "free",
+                "value": "i_valueType"
+              }
+            ]
           }
-        ]
+        ],
+        "contents": [
+          "sp_EvMoment",
+          "ep_EvEventTypes",
+          "ep_EvSessionType",
+          "ep_EvEnv",
+          "ep_EvUserName",
+          "ep_EvApp",
+          "ep_EvAppVersion",
+          "ep_EvValueData"
+        ],
+        "prefix": "aimms",
+        "partition": {
+          "rowHeader": [
+            "i_Event"
+          ],
+          "colHeader": [
+            "<IDENTIFIER-SET>"
+          ],
+          "aggregated": []
+        }
       }
     },
     "contents.partition": {
       "literal": {
         "rowHeader": [
-          "i_Event"
+          "i_Event",
+          "i_focusEvent"
         ],
         "colHeader": [
+          "i_valueType",
           "<IDENTIFIER-SET>"
         ],
         "aggregated": []
@@ -1415,13 +1487,6 @@
           "width": 31.78523489932886
         },
         {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "ep_EvEventTypes"
-          },
-          "width": 19.2
-        },
-        {
           "type": "rowHeader",
           "colKey": "i_focusEvent",
           "width": 13.714285714285714
@@ -1432,11 +1497,151 @@
             "<IDENTIFIER-SET>": "ep_EvApp"
           },
           "width": 19.29942126104173
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "ep_EvEventTypes"
+          },
+          "width": 22.029473684210526
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "AppVersions",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 25.028571428571432
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "AccountNames",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 16.4
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "",
+            "<IDENTIFIER-SET>": "ep_EvEventTypes"
+          },
+          "width": 19.4
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "",
+            "<IDENTIFIER-SET>": "sp_EvMoment"
+          },
+          "width": 32.199999999999996
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "Environments",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 13.600000000000001
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "UserNames",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 10.57596371882086
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "SessionTypes",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 12.917694550347614
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "Applications",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 16.833976833976834
         }
       ]
     },
     "title": {
       "literal": "Events with focus"
+    }
+  },
+  "pages/control_panel": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "ControlScalars_1",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/ControlScalars_1": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    }
+  },
+  "pages/stackselector_1": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "MultiSelectControlValueType",
+          "layoutInfo": {
+            "width": "2",
+            "height": "3",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "DEBUGControlValueType",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/DEBUGControlValueType": {
+    "aimms.widget.type": {
+      "literal": "selectionbox"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "ep_BarchartColumnValueType"
+        ]
+      }
+    },
+    "widget.visible": {
+      "literal": 0
+    }
+  },
+  "widgets/MultiSelectControlValueType": {
+    "aimms.widget.type": {
+      "literal": "multiselect"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "ep_BarchartColumnValueType"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Stack by"
     }
   }
 }
