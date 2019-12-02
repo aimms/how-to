@@ -3,19 +3,23 @@
 Model Main_AIMMSPROUsageStatistics {
     DeclarationSection Generic_declarations {
         Quantity SI_Time_Duration {
-            BaseUnit: tick;
+            BaseUnit: hour;
             Conversions: {
-                century->tick : #-># * 3.1536e+11,
-                day    ->tick : #-># * 8640000,
-                hour   ->tick : #-># * 360000,
-                minute ->tick : #-># * 6000,
-                month  ->tick : #-># * 262800000,
-                s      ->tick : #-># * 100,
-                year   ->tick : #-># * 3153600000,
-                second ->tick : #-># * 100,
-                milliseconds ->tick : #-># /10
+                century     ->hour : #-># * 876000,
+                day         ->hour : #-># * 24,
+                tick        ->hour : #-># / 360000,
+                minute      ->hour : #-># / 60,
+                month       ->hour : #-># * 730,
+                s           ->hour : #-># / 3600,
+                year        ->hour : #-># * 8760,
+                second      ->hour : #-># / 3600,
+                milliseconds->hour : #-># / 3600000
             }
             Comment: "Expresses the value for the duration of periods.";
+        }
+        Quantity qnt_Memory {
+            BaseUnit: MB;
+            Conversions: byte->MB : #-># / 1048576;
         }
     }
     Section database_connections {
@@ -173,7 +177,7 @@ Model Main_AIMMSPROUsageStatistics {
         }
         Set s_SessionTypes {
             Index: i_SessionType;
-            Parameter: ep_SessionType;
+            Parameter: ep_SessionType, ep_FocusSessionType;
         }
         Set s_Applications {
             Index: i_Application;
@@ -244,6 +248,7 @@ Model Main_AIMMSPROUsageStatistics {
         }
         Parameter p_SessPeakMemory {
             IndexDomain: i_Session;
+            Unit: byte;
         }
     }
     DeclarationSection Events {
@@ -286,12 +291,14 @@ Model Main_AIMMSPROUsageStatistics {
         }
         Parameter p_EvPeakMemory {
             IndexDomain: i_Event;
+            Unit: MB;
         }
         Parameter p_NumberOfSessionsAfterEvent {
             IndexDomain: i_Event;
         }
         Parameter p_MemoryBySessionsAfterEvent {
             IndexDomain: i_Event;
+            Unit: MB;
         }
         Parameter p_AverageNumberOfSessions {
             IndexDomain: i_Event;
@@ -299,6 +306,7 @@ Model Main_AIMMSPROUsageStatistics {
         }
         Parameter p_AverageMemoryInUse {
             IndexDomain: i_Event;
+            Unit: MB;
             Definition: average(i_event2, p_MemoryBySessionsAfterEvent(i_Event2));
         }
         Parameter p_NumberOfSessionsAfterEventBySessionType {
@@ -306,6 +314,7 @@ Model Main_AIMMSPROUsageStatistics {
         }
         Parameter p_MemoryBySessionsAfterEventBySessionType {
             IndexDomain: (i_Event,i_SessionType);
+            Unit: MB;
         }
     }
     Procedure pr_TranslateStringsToElements {
@@ -471,6 +480,7 @@ Model Main_AIMMSPROUsageStatistics {
             }
             Parameter p_WrkEvPeakMemory {
                 IndexDomain: i_WorkEvent;
+                Unit: MB;
             }
             StringParameter sp_FirstEvent;
             StringParameter sp_LastEvent;
@@ -533,10 +543,143 @@ Model Main_AIMMSPROUsageStatistics {
     }
     Procedure pr_Open_Full_Event_Information {
         Body: {
-            pr_ReadData();
-            pr_TranslateStringsToElements();
-            pr_EventsFromSessions();
-            pr_NoSessionsMemInUse();
+            if not card( s_Events ) then
+            	pr_ReadData();
+            	pr_TranslateStringsToElements();
+            	pr_EventsFromSessions();
+            	pr_NoSessionsMemInUse();
+            endif ;
+        }
+    }
+    Function fnc_StringToMoment {
+        Arguments: (sp_format, ep_timeunit, sp_referenceDate, sp_timeslot);
+        Unit: hour;
+        Body: {
+            p_returnValue := 0;
+            switch ep_timeunit do
+            	'tick' 	: p_returnValue := StringToMoment(
+            					Format        :  sp_format, 
+            					Unit          :  [tick], 
+            					ReferenceDate :  sp_referenceDate, 
+            					Timeslot      :  sp_timeslot); 
+            	'second' : p_returnValue := StringToMoment(
+            					Format        :  sp_format, 
+            					Unit          :  [s], 
+            					ReferenceDate :  sp_referenceDate, 
+            					Timeslot      :  sp_timeslot);
+            	'minute' : p_returnValue := StringToMoment(
+            					Format        :  sp_format, 
+            					Unit          :  [minute], 
+            					ReferenceDate :  sp_referenceDate, 
+            					Timeslot      :  sp_timeslot);
+            	'hour'   : p_returnValue := StringToMoment(
+            					Format        :  sp_format, 
+            					Unit          :  [hour], 
+            					ReferenceDate :  sp_referenceDate, 
+            					Timeslot      :  sp_timeslot);
+            	'day'    : p_returnValue := StringToMoment(
+            					Format        :  sp_format, 
+            					Unit          :  [day], 
+            					ReferenceDate :  sp_referenceDate, 
+            					Timeslot      :  sp_timeslot);
+            	'month'  : p_returnValue := StringToMoment(
+            					Format        :  sp_format, 
+            					Unit          :  [month], 
+            					ReferenceDate :  sp_referenceDate, 
+            					Timeslot      :  sp_timeslot);
+            	'year'   : p_returnValue := StringToMoment(
+            					Format        :  sp_format, 
+            					Unit          :  [year], 
+            					ReferenceDate :  sp_referenceDate, 
+            					Timeslot      :  sp_timeslot);
+            	'century': p_returnValue := StringToMoment(
+            					Format        :  sp_format, 
+            					Unit          :  [century], 
+            					ReferenceDate :  sp_referenceDate, 
+            					Timeslot      :  sp_timeslot);
+            endswitch ;
+            fnc_StringToMoment := p_returnValue ;
+        }
+        Parameter p_returnValue {
+            Unit: hour;
+        }
+        StringParameter sp_format {
+            Property: Input;
+        }
+        ElementParameter ep_timeunit {
+            Range: s_baseGranularities;
+            Property: Input;
+        }
+        StringParameter sp_referenceDate {
+            Property: Input;
+        }
+        StringParameter sp_timeslot {
+            Property: Input;
+        }
+    }
+    Function fnc_MomentToString {
+        Arguments: (sp_format, ep_timeunit, sp_referenceDate, p_elapsed);
+        Range: string;
+        Body: {
+            sp_returnValue := "error";
+            switch ep_timeunit do
+            	'tick' 	: sp_returnValue := MomentToString(
+            					Format        :  sp_format, 
+            					Unit          :  [tick], 
+            					ReferenceDate :  sp_referenceDate, 
+            					elapsed       :  p_elapsed); 
+            	'second' : sp_returnValue := MomentToString(
+            					Format        :  sp_format, 
+            					Unit          :  [s], 
+            					ReferenceDate :  sp_referenceDate, 
+            					elapsed       :  p_elapsed);
+            	'minute' : sp_returnValue := MomentToString(
+            					Format        :  sp_format, 
+            					Unit          :  [minute], 
+            					ReferenceDate :  sp_referenceDate, 
+            					elapsed       :  p_elapsed);
+            	'hour'   : sp_returnValue := MomentToString(
+            					Format        :  sp_format, 
+            					Unit          :  [hour], 
+            					ReferenceDate :  sp_referenceDate, 
+            					elapsed       :  p_elapsed);
+            	'day'    : sp_returnValue := MomentToString(
+            					Format        :  sp_format, 
+            					Unit          :  [day], 
+            					ReferenceDate :  sp_referenceDate, 
+            					elapsed       :  p_elapsed);
+            	'month'  : sp_returnValue := MomentToString(
+            					Format        :  sp_format, 
+            					Unit          :  [month], 
+            					ReferenceDate :  sp_referenceDate, 
+            					elapsed       :  p_elapsed);
+            	'year'   : sp_returnValue := MomentToString(
+            					Format        :  sp_format, 
+            					Unit          :  [year], 
+            					ReferenceDate :  sp_referenceDate, 
+            					elapsed       :  p_elapsed);
+            	'century': sp_returnValue := MomentToString(
+            					Format        :  sp_format, 
+            					Unit          :  [century], 
+            					ReferenceDate :  sp_referenceDate, 
+            					elapsed       :  p_elapsed);
+            endswitch ;
+            fnc_MomentToString := sp_returnValue ;
+        }
+        StringParameter sp_returnValue;
+        StringParameter sp_format {
+            Property: Input;
+        }
+        ElementParameter ep_timeunit {
+            Range: s_baseGranularities;
+            Property: Input;
+        }
+        StringParameter sp_referenceDate {
+            Property: Input;
+        }
+        Parameter p_elapsed {
+            Unit: hour;
+            Property: Input;
         }
     }
     Section WebUI_Full_Event_Information_Support {
@@ -750,89 +893,466 @@ Model Main_AIMMSPROUsageStatistics {
                     Property: Input;
                 }
             }
+            Procedure uponchange_p_TimebarTimeStart {
+                Body: {
+                    pr_ComputeStackedBarCharts();
+                }
+            }
+            Procedure uponchange_p_TimebarDuration {
+                Body: {
+                    pr_ComputeStackedBarCharts();
+                }
+            }
         }
         Section Stacked_Bar_Chart {
-            Parameter p_NoPointsPerBarChart {
+            Set s_Granularities {
+                Index: i_granul;
+                Parameter: ep_granul;
+                Definition: {
+                    data {
+                    	'1sec',
+                    	'2sec',
+                    	'3sec',
+                    	'4sec',
+                    	'5sec',
+                    	'6sec',
+                    	'10sec',
+                    	'12sec',
+                    	'15sec',
+                    	'20sec',
+                    	'30sec',
+                    	'1min',
+                    	'2min',
+                    	'3min',
+                    	'4min',
+                    	'5min',
+                    	'6min',
+                    	'10min',
+                    	'12min',
+                    	'15min',
+                    	'20min',
+                    	'30min',
+                    	'1hour',
+                    	'2hour',
+                    	'3hour',
+                    	'4hour',
+                    	'6hour',
+                    	'12hour',
+                    	'1day',
+                    	'7day',
+                    	'1month',
+                    	'2month',
+                    	'3month',
+                    	'4month',
+                    	'6month',
+                    	'1year',
+                    	'5year',
+                    	'10year'
+                    }
+                }
+            }
+            Parameter p_timePerGranul {
+                IndexDomain: i_granul;
+                Unit: s;
+                Definition: {
+                    data {
+                    	'1sec':1[s],
+                    	'2sec':2[s],
+                    	'3sec':3[s],
+                    	'4sec':4[s],
+                    	'5sec':5[s],
+                    	'6sec':6[s],
+                    	'10sec':10[s],
+                    	'12sec':12[s],
+                    	'15sec':15[s],
+                    	'20sec':20[s],
+                    	'30sec':30[s],
+                    	'1min':1[minute],
+                    	'2min':2[minute],
+                    	'3min':3[minute],
+                    	'4min':4[minute],
+                    	'5min':5[minute],
+                    	'6min':6[minute],
+                    	'10min':10[minute],
+                    	'12min':12[minute],
+                    	'15min':15[minute],
+                    	'20min':20[minute],
+                    	'30min':30[minute],
+                    	'1hour':1[hour],
+                    	'2hour':2[hour],
+                    	'3hour':3[hour],
+                    	'4hour':4[hour],
+                    	'6hour':6[hour],
+                    	'12hour':12[hour],
+                    	'1day':1[day],
+                    	'7day':7[day],
+                    	'1month':1[month],
+                    	'2month':2[month],
+                    	'3month':3[month],
+                    	'4month':4[month],
+                    	'6month':6[month],
+                    	'1year':1[year],
+                    	'5year':5[year],
+                    	'10year':10[year]
+                    }
+                }
+            }
+            Parameter p_divisorPerGranul {
+                IndexDomain: i_granul;
+                Definition: {
+                    data {
+                    	'1sec':1,
+                    	'2sec':2,
+                    	'3sec':3,
+                    	'4sec':4,
+                    	'5sec':5,
+                    	'6sec':6,
+                    	'10sec':10,
+                    	'12sec':12,
+                    	'15sec':15,
+                    	'20sec':20,
+                    	'30sec':30,
+                    	'1min':1,
+                    	'2min':2,
+                    	'3min':3,
+                    	'4min':4,
+                    	'5min':5,
+                    	'6min':6,
+                    	'10min':10,
+                    	'12min':12,
+                    	'15min':15,
+                    	'20min':20,
+                    	'30min':30,
+                    	'1hour':1,
+                    	'2hour':2,
+                    	'3hour':3,
+                    	'4hour':4,
+                    	'6hour':6,
+                    	'12hour':12,
+                    	'1day':1,
+                    	'7day':7,
+                    	'1month':1,
+                    	'2month':2,
+                    	'3month':3,
+                    	'4month':4,
+                    	'6month':6,
+                    	'1year':1,
+                    	'5year':5,
+                    	'10year':10
+                    }
+                }
+            }
+            Set s_baseGranularities {
+                Index: i_baseGranul;
+                Parameter: ep_baseGranul;
+                Definition: data { tick, second, minute, hour, day, month, year, century };
+            }
+            ElementParameter ep_mapToBaseGranularity {
+                IndexDomain: i_granul;
+                Range: s_baseGranularities;
+                Definition: {
+                    data {
+                    	'1sec':second,
+                    	'2sec':second,
+                    	'3sec':second,
+                    	'4sec':second,
+                    	'5sec':second,
+                    	'6sec':second,
+                    	'10sec':second,
+                    	'12sec':second,
+                    	'15sec':second,
+                    	'20sec':second,
+                    	'30sec':second,
+                    	'1min':minute,
+                    	'2min':minute,
+                    	'3min':minute,
+                    	'4min':minute,
+                    	'5min':minute,
+                    	'6min':minute,
+                    	'10min':minute,
+                    	'12min':minute,
+                    	'15min':minute,
+                    	'20min':minute,
+                    	'30min':minute,
+                    	'1hour':hour,
+                    	'2hour':hour,
+                    	'3hour':hour,
+                    	'4hour':hour,
+                    	'6hour':hour,
+                    	'12hour':hour,
+                    	'1day':day,
+                    	'7day':day,
+                    	'1month':month,
+                    	'2month':month,
+                    	'3month':month,
+                    	'4month':month,
+                    	'6month':month,
+                    	'1year':year,
+                    	'5year':year,
+                    	'10year':year
+                    }
+                }
+            }
+            StringParameter sp_baseFormat {
+                IndexDomain: i_baseGranul;
+                Definition: {
+                    data {
+                    	tick:"%c%y-%m-%d %H:%M:%S:%T", 
+                    	second:"%c%y-%m-%d %H:%M:%S", 
+                    	minute:"%c%y-%m-%d %H:%M", 
+                    	hour:"%c%y-%m-%d %H", 
+                    	day:"%c%y-%m-%d", 
+                    	month:"%c%y-%m", 
+                    	year:"%c%y",
+                    	century:"%c"}
+                }
+            }
+            UnitParameter up_baseTimeUnit {
+                IndexDomain: i_baseGranul;
+                Quantity: SI_Time_Duration;
+                Definition: {
+                    data {  tick:[tick],
+                    	second:[s], 
+                    	minute:[minute], 
+                    	hour:[hour], 
+                    	day:[day], 
+                    	month:[month], 
+                    	year:[year], 
+                    	century:[century]}
+                }
+            }
+            Parameter p_NoInitialColumnsPerBarChart {
                 Range: {
                     {1..50}
                 }
                 InitialData: 25;
             }
-            Set s_BarChartPoints {
-                SubsetOf: Integers;
-                Index: i_bcp;
-                Parameter: ep_bcp, ep_prevBCP, ep_nextBCP, ep_firstBCP, ep_lastBCP;
-                Property: ElementsAreNumerical;
-                Definition: elementRange(1,p_NoPointsPerBarChart);
+            Parameter p_NoColumnsPerBarChart;
+            Set s_BarChartColumns {
+                Index: i_bcc;
+                Parameter: ep_bcc,ep_prevBCC,ep_nextBCC,ep_firstBCC,ep_lastBCC,ep_FocusBCC;
+                Comment: "elementRange(1,p_NoInitialColumnsPerBarChart, prefix:\"long live the king\")";
             }
             StringParameter sp_BarChartMoments {
-                IndexDomain: i_bcp;
+                IndexDomain: i_bcc;
             }
             ElementParameter ep_FirstEventAtBarChartPoint {
-                IndexDomain: i_bcp;
+                IndexDomain: i_bcc;
                 Range: s_Events;
             }
             ElementParameter ep_lastEventAtBarChartPoint {
-                IndexDomain: i_bcp;
+                IndexDomain: i_bcc;
                 Range: s_Events;
             }
             Set s_EventsAtBarChartPoint {
-                IndexDomain: i_bcp;
+                IndexDomain: i_bcc;
                 SubsetOf: s_Events;
             }
             Parameter p_NumberOfSessionsStackedBySessionType {
-                IndexDomain: (i_bcp,i_SessionType);
+                IndexDomain: (i_bcc,i_SessionType);
             }
             Parameter p_MemoryInUseStackedBySessionType {
-                IndexDomain: (i_bcp,i_SessionType);
+                IndexDomain: (i_bcc,i_SessionType);
+                Unit: MB;
             }
-            Procedure pr_ComputeStackedBarCharts;
+            Procedure pr_ComputeStackedBarCharts {
+                Body: {
+                    pr_Open_Full_Event_Information();
+                    pr_RelateBarChartMomentsToEvents();
+                    pr_ComputeBarChartsStackedBySessionType();
+                }
+            }
             Procedure pr_RelateBarChartMomentsToEvents {
                 Body: {
-                    ep_firstBCP := first( s_BarChartPoints );
-                    ep_lastBCP  := last(  s_BarChartPoints );
+                    p_beg := p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob );
+                    p_dur := p_TimebarDuration(  ep_tb_selectedResource, ep_tb_selectedJob );
+                    p_end := P_beg + p_dur ;
                     
-                    p_dur := p_TimebarDuration( ep_tb_selectedResource, ep_tb_selectedJob );
+                    block ! Determine granularity per bar chart and a good starting reference.
+                    	block ! Granularity is selected such that the width of a bar chart column is a "natural" width.
+                    		! Here a natural width is an integer * a known granularity, and the integer is such that it is a 
+                    		! divisor of the next larger granularity. The definition of p_timePerGranul provides examples.
+                    		ep_granul := first( i_granul | p_NoInitialColumnsPerBarChart * p_timePerGranul(i_granul) > p_dur );
+                    		if not ep_granul then raise error "unable to find proper granularity" ; endif ;
+                    		ep_baseGranul := ep_mapToBaseGranularity( ep_granul );
+                    		if not ep_baseGranul then raise error "unable to find proper base granularity" ; endif ;
+                    	endblock ;
                     
-                    sp_beg := MomentToString(
-                    		Format        :  "%c%y-%m-%d %H:%M:%S:%T", 
-                    		unit          :  [tick], 
-                    		ReferenceDate :  sp_TimebarViewportStart, 
-                    		Elapsed       :  p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob ) );
-                    sp_end := MomentToString(
-                    		Format        :  "%c%y-%m-%d %H:%M:%S:%T", 
-                    		unit          :  [tick], 
-                    		ReferenceDate :  sp_TimebarViewportStart, 
-                    		Elapsed       :  p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob ) +
-                    		                 p_TimebarDuration(  ep_tb_selectedResource, ep_tb_selectedJob )   );
+                    	block ! The first column is mapped to "natural" start before the first event.
+                    		sp_beg := MomentToString(
+                    				Format        :  "%c%y-%m-%d %H:%M:%S:%T", 
+                    				unit          :  [tick], 
+                    				ReferenceDate :  sp_TimebarViewportStart, 
+                    				Elapsed       :  p_beg );
+                    		sp_beg1 := substring(sp_beg,1,19);	
+                    		sp_beg2 := substring(sp_beg,1,16);	
+                    		sp_beg3 := substring(sp_beg,1,13);	
+                    		sp_beg4 := substring(sp_beg,1,10);	
+                    		sp_beg5 := substring(sp_beg,1,7);	
+                    		sp_beg6 := substring(sp_beg,1,4);
                     
-                    sp_BarChartMoments( i_bcp ) := 
-                    	MomentToString(
-                    		Format        :  "%c%y-%m-%d %H:%M:%S:%T", 
-                    		unit          :  [tick], 
-                    		ReferenceDate :  sp_beg, 
-                    		Elapsed       :  ( ( i_bcp - 1 ) * p_dur ) / p_NoPointsPerBarChart );
+                    		switch ep_baseGranul do
+                    			'second'  : sp_beg := sp_beg1;
+                    			'minute'  : sp_beg := sp_beg2;
+                    			'hour'    : sp_beg := sp_beg3;
+                    			'day'     : sp_beg := sp_beg4;
+                    			'month'   : sp_beg := sp_beg5;
+                    			'year'    : sp_beg := sp_beg6;
+                    		endswitch ;
+                    		sp_beg_len := Stringlength(sp_beg);
+                    		sp_lastNo := substring( sp_beg, sp_beg_len-1, sp_beg_len);
+                    		p_lastNo := val( sp_lastNo );
+                    		p_lastNo := div( p_lastNo, p_divisorPerGranul(ep_granul)) * p_divisorPerGranul(ep_granul);
+                    		sp_lastNo := formatString("%02i", p_LastNo );
+                    		sp_beg := substring(sp_beg, 1, sp_beg_len-2) + sp_lastNo ;
+                    	endblock ;
                     
-                    ep_FirstEventAtBarChartPoint(i_bcp) := 
-                    	first( i_event | sp_EvMoment(i_Event) >= sp_BarChartMoments( i_bcp ) );
-                    ep_lastEventAtBarChartPoint(i_bcp) := ep_FirstEventAtBarChartPoint(i_bcp+1) - 1 ;
-                    ep_lastEventAtBarChartPoint(ep_lastBCP) := last( i_event | sp_EvMoment(i_Event) <= sp_end );
+                    	block ! Ensure that the columns of the bar chart cover all the events in the timebar.
+                    		p_start := fnc_StringToMoment(
+                    				sp_Format        :  sp_baseFormat(ep_baseGranul), 
+                    				ep_timeUnit      :  ep_baseGranul, 
+                    				sp_ReferenceDate :  sp_TimebarViewportStart, 
+                    				sp_Timeslot      :  sp_beg);
+                    		sp_end := MomentToString(
+                    				Format        :  "%c%y-%m-%d %H:%M:%S:%T", 
+                    				unit          :  [tick], 
+                    				ReferenceDate :  sp_TimebarViewportStart, 
+                    				Elapsed       :  p_beg + p_dur  );
+                    		p_totdur := fnc_StringToMoment(
+                    				sp_Format        :  sp_baseFormat(ep_basegranul), 
+                    				ep_timeUnit      :  ep_baseGranul, 
+                    				sp_ReferenceDate :  sp_beg, 
+                    				sp_Timeslot      :  sp_end);
+                    	endblock ;
                     
-                    s_EventsAtBarChartPoint(i_bcp) := { i_event | ep_FirstEventAtBarChartPoint(i_bcp) <= i_event <= ep_lastEventAtBarChartPoint(i_bcp) };
+                    	block ! Ensure there are sufficient columns in the bar chart.
+                    		p_NoColumnsPerBarChart := p_NoInitialColumnsPerBarChart ;
+                    		while p_NoColumnsPerBarChart * p_timePerGranul( ep_granul ) < p_totdur do
+                    			p_NoColumnsPerBarChart += 1 ;
+                    		endwhile ;
+                    	endblock ;
+                    
+                    	sp_finish := fnc_MomentToString(
+                    			sp_Format        :  sp_baseFormat(ep_baseGranul), 
+                    			ep_timeunit      :   ep_baseGranul, 
+                    			sp_ReferenceDate :  sp_beg, 
+                    			p_Elapsed        :  p_NoColumnsPerBarChart * p_timePerGranul( ep_granul ) );
+                    endblock ;
+                    
+                    empty s_BarChartColumns;
+                    p_ElemNo := 1 ;
+                    while p_ElemNo <= p_NoColumnsPerBarChart do
+                    	sp_elemName := fnc_MomentToString(
+                    			sp_Format        :  sp_baseFormat(ep_baseGranul), 
+                    			ep_timeunit      :  ep_baseGranul, 
+                    			sp_ReferenceDate :  sp_beg, 
+                    			p_Elapsed        :  (p_ElemNo-1) * p_timePerGranul( ep_granul ) );
+                    	SetElementAdd( s_BarChartColumns, ep_bcc, sp_elemName);
+                    	sp_BarChartMoments( ep_bcc ) := sp_elemName;
+                    	p_ElemNo += 1 ;
+                    endwhile ;
+                    
+                    ep_firstBCC := first( s_BarChartColumns );
+                    ep_lastBCC  := last(  s_BarChartColumns );
+                    ep_FirstEventAtBarChartPoint(i_bcc) := 
+                    	first( i_event | sp_EvMoment(i_Event) >= sp_BarChartMoments( i_bcc ) );
+                    ep_lastEventAtBarChartPoint(i_bcc) := ep_FirstEventAtBarChartPoint(i_bcc+1) - 1 ;
+                    ep_lastEventAtBarChartPoint(ep_lastBCC) := last( i_event | sp_EvMoment(i_Event) <= sp_finish );
+                    
+                    s_EventsAtBarChartPoint(i_bcc) := { i_event | ep_FirstEventAtBarChartPoint(i_bcc) <= i_event <= ep_lastEventAtBarChartPoint(i_bcc) };
                 }
+                StringParameter sp_beg1;
+                StringParameter sp_beg2;
+                StringParameter sp_beg3;
                 Parameter p_dur {
+                    Unit: hour;
+                }
+                Parameter p_beg {
+                    Unit: hour;
+                }
+                Parameter p_start {
+                    Unit: hour;
+                }
+                Parameter p_totdur {
+                    Unit: hour;
+                }
+                Parameter p_end {
                     Unit: hour;
                 }
                 StringParameter sp_beg;
                 StringParameter sp_end;
+                StringParameter sp_finish;
+                StringParameter sp_beg4;
+                StringParameter sp_beg5;
+                StringParameter sp_beg6;
+                Parameter p_ElemNo;
+                StringParameter sp_ElemName;
+                StringParameter sp_lastNo;
+                Parameter p_lastNo;
+                Parameter sp_beg_len;
+                Parameter p_LastDivisor;
             }
-            Procedure pr_ComputeBarChartsStackedBySessionType;
+            Procedure pr_ComputeBarChartsStackedBySessionType {
+                Body: {
+                    p_NumberOfSessionsStackedBySessionType(i_bcc, i_SessionType) :=
+                    	max( 0, max( i_event | i_event in s_EventsAtBarChartPoint(i_bcc), 
+                    		p_NumberOfSessionsAfterEventBySessionType(i_Event, i_SessionType) ) );
+                    
+                    p_MemoryInUseStackedBySessionType(i_bcc, i_SessionType) :=
+                    	max( 0[mb], max( i_event | i_event in s_EventsAtBarChartPoint(i_bcc), 
+                    		p_MemoryBySessionsAfterEventBySessionType(i_Event, i_SessionType) ) );
+                }
+            }
+        }
+        Section Events_with_focus {
+            Set s_EventsWithFocus {
+                SubsetOf: s_Events;
+                Index: i_focusEvent;
+                Definition: {
+                    { i_event |
+                    	( i_event in s_EventsAtBarChartPoint(ep_FocusBCC)        ) and
+                    	( ( ep_EvSessionType(i_event) = ep_FocusSessionType ) or
+                    	  ( ''                       =  ep_FocusSessionType )    )     }
+                }
+            }
+        }
+        Section Error_Handler {
+            Procedure pr_CreateErrorReport {
+                Body: {
+                    gss::pr_ReportCurrentErrorsToTextFile("log\\usage.errorLogging");
+                }
+            }
+            Procedure pr_ClearErrors {
+                Body: {
+                    gss::pr_ClearErrors();
+                }
+            }
+            Set s_SomeIntegers {
+                SubsetOf: Integers;
+                Index: i_si;
+                Definition: ElementRange(1,9);
+            }
+            StringParameter sp_ErrorHandlingSecondaryActions {
+                IndexDomain: (i_si, webui::indexPageActionSpec);
+                Definition: {
+                    data {
+                    (1,displaytext): "CreateErrorReport",
+                    (1,icon): "aimms-typewriter",
+                    (1,procedure): "pr_CreateErrorReport",
+                    (1,state): "Active",
+                    
+                    (2,displaytext): "ClearErrors",
+                    (2,icon): "aimms-bin5",
+                    (2,procedure): "pr_ClearErrors",
+                    (2,state): "Active" }
+                }
+            }
         }
     }
     Section Attic {
         Procedure MainInitialization {
             Body: {
-                !profilerStart();
+                profilerStart();
             }
             Comment: "Add initialization statements here that do NOT require any library being initialized already.";
         }
