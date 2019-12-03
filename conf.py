@@ -38,8 +38,12 @@ import subprocess
 extensions = ['sphinx.ext.doctest',
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
-    'sphinx.ext.githubpages',
-	'sphinx.builders.linkcheck']
+    'sphinx.ext.intersphinx',
+	  'sphinx.builders.linkcheck',
+    'sphinx_aimms_theme']
+  
+intersphinx_mapping = {'functionreference': ('https://documentation.aimms.com/functionreference',
+                                  (None,'objects.inv'))}
 
 if os.name != 'nt':
 
@@ -83,24 +87,6 @@ rst_epilog = """
 Last Updated: |date|
 """
 
-# .. |set| image:: /resources/icons/Set.png
-
-# .. |par| image:: /resources/icons/Parameter.png
-
-# .. |var| image:: /resources/icons/Variable.png
-
-# .. |cons| image:: /resources/icons/Constraint.png
-
-# .. |index| image:: /resources/icons/index.png
-
-# .. |sp| image:: /resources/icons/StringParameter.png
-
-# .. |doc| image:: /resources/icons/Documentation.png
-
-# .. |aimmsIcon| image:: /resources/icons/favicon.png
-#                :scale: 15 %
-
-
 # include these texts at the beginning of all source .rsts, use only for HTML builds to update last updated date. 
 
 rst_prolog = """
@@ -122,7 +108,7 @@ language = None
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = 'default'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
@@ -133,17 +119,24 @@ todo_include_todos = True
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 
-#html_theme = 'sphinx_materialdesign_theme'
 #html_theme_path = ["."]
 
-html_theme = 'sphinx_rtd_theme'
-
-html_logo = 'Images/logo/aimms-logo.png' 
+html_theme = 'sphinx_aimms_theme'
 
 html_title = title
 
 html_use_index = True
 html_show_sourcelink = False
+
+# if builds locally (a windows machine), force "Edit on Gitlab" to be shown, and do not displays Thumbs and Insided Embeddable (extensions)
+if os.name == 'nt':
+   Display_edit_on_gitlab = True
+   Display_3rd_Party_Extensions = False
+else:
+
+   # if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown, and displays Thumbs and Insided Embeddable (extensions)
+   Display_edit_on_gitlab = False
+   Display_3rd_Party_Extensions = True
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -163,6 +156,10 @@ html_theme_options = {
     'navigation_depth': 4,
  #   'includehidden': True,
  #   'titles_only': False
+    'doc_title' : 'How-To',
+    'home_page_title': 'AIMMS How-To',
+    'home_page_description': "AIMMS How-To is a support knowledge base for everyone involved in projects that use AIMMS. You'll find help tutorials, best practices, and practical guidance for using AIMMS software.",
+    'display_community_embeddable' : Display_3rd_Party_Extensions,
  }
 
 
@@ -171,19 +168,10 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-# if builds locally (a windows machine), force "Edit on Gitlab" to be shown, and do not displays Thumbs and Insided Embeddable (extensions)
-if os.name == 'nt':
-   Display_edit_on_gitlab = True
-   Display_3rd_Party_Extensions = False
-else:
-
-   # if builds on GitLab (a Linux machine), force "Edit on Gitlab" not to be shown, and displays Thumbs and Insided Embeddable (extensions)
-   Display_edit_on_gitlab = False
-   Display_3rd_Party_Extensions = True
 
 # The following "context" is passed to templates in _templates folder
 html_context = {
-    'css_files': ['_static/aimms_2019_10_25.css', '_static/copycode.css'],
+    'css_files': ['_static/aimms_how_to_2019_10_25.css'],
     "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
     "gitlab_user": "aimms/customer-support", # Username
     "gitlab_repo": "aimms-how-to", # Repo name
@@ -209,8 +197,6 @@ html_context = {
 #         'searchbox.html'
 #     ]
 # }
-html_favicon = "_static/favicon.png"
-#rst_prolog = "\n.. include:: ../special.rst\n"
 
 # -- Options for HTMLHelp output ------------------------------------------
 
@@ -275,13 +261,13 @@ else:
 	#To check any broken links 
    todo_include_todos = False
 
-# index page for your site
+# index page for your site (used by sitemap extension)
 html_baseurl = 'https://how-to.aimms.com/'
 
 # adding path to non-rst files that go to the build
 html_extra_path = ['robots.txt']
 
-# Generate redirects from old URLs
+#------------------------------------------------- Generate redirects from old URLs  ----------------------------------------------------------#
 
 redirects_file = "WebSite_Redirection_Mapping/redirection_map.txt"
 
@@ -356,19 +342,8 @@ def generate_redirects(app):
 # The setup function here is picked up by sphinx at each build. You may input any cool change here, like syntax highlighting or redirects
 def setup(sphinx):
 	
-    # Import the AIMMSLexer into local Pygments module (syntax highlighting). The styling is made with Hacks.css in the _static folder
-   sys.path.insert(0, os.path.abspath("./includes/AIMMSLexer/Lexer"))
-   from aimms import AIMMSLexer
-   from pygments.formatters import HtmlFormatter
-   sphinx.add_lexer("aimms", AIMMSLexer())
-
-   # for copy code snippet, css file also referred to in html_context
-   sphinx.add_stylesheet('copycode.css')
-   sphinx.add_javascript('copycode.js')
-   sphinx.add_javascript("https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js")
-
    #To handle redirections
-   handle_redirections = True
+   handle_redirections = False
    if handle_redirections or os.name != 'nt':
 		sphinx.add_config_value('redirects_file', 'redirects', 'env')
 		sphinx.connect('builder-inited', generate_redirects)   

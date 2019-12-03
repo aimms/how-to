@@ -120,7 +120,7 @@ This argument is declared as follows:
 
 Here the index ``webui::ffn`` is an index in the set ``webui::AllFormFieldNames``. This index and set are available in the ``AimmsWebUI`` system library and will be linked to the model identifiers later on. 
 
-The set ``webui::AllFormFieldNames`` is a subset of ``AllIdentifiers``, which allows us to link easily to the model identifiers at hand.
+The set ``webui::AllFormFieldNames`` is a subset of :aimms:set:`AllIdentifiers`, which allows us to link easily to the model identifiers at hand.
 
 In the following three steps we will discuss the selected details of these three procedures.
 
