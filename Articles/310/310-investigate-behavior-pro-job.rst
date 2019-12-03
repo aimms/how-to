@@ -11,6 +11,8 @@ An AIMMS PRO job may spend more time than the corresponding procedure on the cli
 
 * How can I find out what went wrong with my AIMMS PRO job?
 
+.. tip:: A first check is to search for ``: duration`` and for ``transmitted`` in the session log files; this may provide a clue quickly of where a bottleneck might be.
+
 To provide a structural answer for your application, we need to dive into the workings of the procedure ``PRO::DelegateToServer``.
 
 As the AIMMS PRO job realizing the delegated procedure runs **in a different process**, potentially on **a different host**, the necessary actions taken by ``PRO::DelegateToServer`` are illustrated in the picture below:
