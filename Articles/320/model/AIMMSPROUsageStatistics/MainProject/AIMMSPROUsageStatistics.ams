@@ -745,7 +745,6 @@ Model Main_AIMMSPROUsageStatistics {
                 	( ep_EvValueData(i_Event,'Environments') in s_ShownEnvironments ) and
                 	( ep_EvValueData(i_Event,'UserNames') in s_ShownUserNames ) }
             }
-            Comment: "data {";
         }
         Set s_ShownAccounts {
             SubsetOf: s_AccountNames;
@@ -1214,6 +1213,17 @@ Model Main_AIMMSPROUsageStatistics {
                     endif ;
                 }
             }
+            StringParameter sp_finish;
+            StringParameter sp_BarChartEnd {
+                IndexDomain: i_bcc;
+                Definition: {
+                    if i_bcc = last( s_BarChartColumns ) then 
+                    			sp_finish 
+                    		else 
+                    			formatString("%e",i_bcc+1 )
+                    		endif
+                }
+            }
             Procedure pr_ComputeStackedBarCharts {
                 Body: {
                     pr_Open_Full_Event_Information();
@@ -1320,9 +1330,6 @@ Model Main_AIMMSPROUsageStatistics {
                     
                     s_EventsAtBarChartPoint(i_bcc) := { i_event | ep_FirstEventAtBarChartPoint(i_bcc) <= i_event <= ep_lastEventAtBarChartPoint(i_bcc) };
                 }
-                StringParameter sp_beg1;
-                StringParameter sp_beg2;
-                StringParameter sp_beg3;
                 Parameter p_dur {
                     Unit: hour;
                 }
@@ -1340,7 +1347,9 @@ Model Main_AIMMSPROUsageStatistics {
                 }
                 StringParameter sp_beg;
                 StringParameter sp_end;
-                StringParameter sp_finish;
+                StringParameter sp_beg1;
+                StringParameter sp_beg2;
+                StringParameter sp_beg3;
                 StringParameter sp_beg4;
                 StringParameter sp_beg5;
                 StringParameter sp_beg6;
@@ -1380,6 +1389,17 @@ Model Main_AIMMSPROUsageStatistics {
                     	  ( ep_BarchartColumnValueType = 'None'                                     ) or
                     	  ( ep_EvValueData(i_shownevent,ep_BarchartColumnValueType) = ep_FocusValue ) or
                     	  ( ''                                                      = ep_FocusValue )    )     }
+                }
+            }
+            StringParameter sp_TitleEventsWithFocusTable {
+                Definition: {
+                    if ep_BarchartColumnValueType and ep_BarchartColumnValueType <> 'None' then
+                    	formatString("Events with focus on %e %e in period %e to %s", ep_BarchartColumnValueType, ep_FocusValue, ep_FocusBCC,
+                    		sp_BarChartEnd( ep_FocusBCC )  )
+                    else
+                    	formatString("Events with focus in period %e to %s", ep_FocusBCC,
+                    		sp_BarChartEnd( ep_FocusBCC ) )
+                    endif ;
                 }
             }
         }

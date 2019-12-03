@@ -1532,14 +1532,6 @@
         {
           "type": "colHeader",
           "colKey": {
-            "i_valueType": "",
-            "<IDENTIFIER-SET>": "sp_EvMoment"
-          },
-          "width": 32.199999999999996
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
             "i_valueType": "Environments",
             "<IDENTIFIER-SET>": "ep_EvValueData"
           },
@@ -1568,11 +1560,23 @@
             "<IDENTIFIER-SET>": "ep_EvValueData"
           },
           "width": 16.833976833976834
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "",
+            "<IDENTIFIER-SET>": "sp_EvMoment"
+          },
+          "width": 34.40624475342465
         }
       ]
     },
     "title": {
-      "literal": "Events with focus"
+      "aimms": {
+        "contents": [
+          "sp_TitleEventsWithFocusTable"
+        ]
+      }
     }
   },
   "pages/control_panel": {
