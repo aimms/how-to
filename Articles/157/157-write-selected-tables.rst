@@ -11,7 +11,7 @@ The operation of writing to databases in AIMMS is tuned for performance.
 
 In an application with several database table, it is not very efficient to write all database tables. Much more efficient is to skip writing to those tables where data has not changed.
 
-To do so, you can use a combination of the function ``ReferencedIdentifiers``, the construct ``DatachangeMonitor``, and runtime libraries.
+To do so, you can use a combination of the function :aimms:function:`ReferencedIdentifiers`, the construct ``DatachangeMonitor``, and runtime libraries.
 
 Example of database tables
 --------------------------
@@ -100,23 +100,23 @@ However, we want to change it to something like this (in pseudo code):
 
     #. A name - for sake of identification.
 
-    #. A reference to an AIMMS set - by having a reference, a data change monitor can even monitor dynamic subsets of ``AllIdentifiers``.
+    #. A reference to an AIMMS set - by having a reference, a data change monitor can even monitor dynamic subsets of :aimms:set:`AllIdentifiers`.
    
     #. An internal component that maintains for each identifier and the referenced set the number of assignments since the last reset.
 
     The AIMMS function reference describes the procedures operating on datachange monitors in detail:
    
-    * ``DataChangeMonitorHasChanged`` - returns 1 if the data of at least one identifier, or the data of the reference set itself, has changed.
+    * :aimms:function:`DataChangeMonitorHasChanged` - returns 1 if the data of at least one identifier, or the data of the reference set itself, has changed.
 
-    * ``DataChangeMonitorCreate`` - creates a new datachange monitor name and resets
+    * :aimms:function:`DataChangeMonitorCreate` - creates a new datachange monitor name and resets
 
-    * ``DataChangeMonitorReset`` - resets a datachange monitor and links it to the same or another reference set
+    * :aimms:function:`DataChangeMonitorReset` - resets a datachange monitor and links it to the same or another reference set
 
-    * ``DataChangeMonitorDelete`` - allows for cleanup
+    * :aimms:function:`DataChangeMonitorDelete` - allows for cleanup
 
 To avoid coding errors and maintenance issues from doing this manually, AIMMS has the following facilities:
 
-* The predeclared function ``ReferencedIdentifiers`` (see sidebar) examines portions of AIMMS code and returns the identifiers referenced. 
+* The predeclared function :aimms:function:`ReferencedIdentifiers` (see sidebar) examines portions of AIMMS code and returns the identifiers referenced. 
 
 * The construct ``DatachangeMonitor`` (see sidebar) checks a given set of AIMMS identifiers for changed values.
 
