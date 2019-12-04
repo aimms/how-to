@@ -4,14 +4,19 @@ rounding_compatibility Aimms_3_7
 * AOA
 * BARON 19
 * CBC 2.9
+* CONOPT 3.14V
 * CONOPT 4.0
 * CPLEX 12.6.3
+* CPLEX 12.8
 * CPLEX 12.9
+* CPOptimizer 12.8
 * CPOptimizer 12.9
 * GUROBI 7.5
 * GUROBI 8.1
 * IPOPT 3.11
+* Knitro 10.3
 * Knitro 11.0
+* Knitro 11.1
 * Knitro 12.0
 * MINOS
 * ODH-CPLEX 4.0
@@ -21,4 +26,3 @@ rounding_compatibility Aimms_3_7
 * NETSOL
 * Environment
 Default_UI 0
-Open_WebUI_on_Startup 1

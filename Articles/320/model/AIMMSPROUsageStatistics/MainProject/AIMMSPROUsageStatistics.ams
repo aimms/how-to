@@ -886,6 +886,8 @@ Model Main_AIMMSPROUsageStatistics {
             Procedure pr_InitializeTimebarGanttChart {
                 Arguments: (sp_VpBeg,sp_ActBeg,sp_ActEnd,sp_VpEnd);
                 Body: {
+                    !DebuggerBreakpoint();
+                    
                     ! The view port of the Timebar Gantt Chart should allow for the maximum 
                     ! view port of the actual Gantt Chart.
                     sp_TimebarViewportStart := sp_VpBeg ; ! "2019-04-02 00";
@@ -1471,6 +1473,18 @@ Model Main_AIMMSPROUsageStatistics {
                 	unit          :  [month], 
                 	ReferenceDate :  sp_TimebarViewportEnd, 
                 	Elapsed       :  -3[month]) + " 00:00:00:00";
+                sp_FirstEvent := MomentToString(
+                	Format        :  "%c%y-%m-%d", 
+                	unit          :  [day], 
+                	ReferenceDate :  sp_TimebarViewportStart, 
+                	Elapsed       :  7[day]) + " 00:00:00:00" ;
+                sp_LastEvent := MomentToString(
+                	Format        :  "%c%y-%m-%d", 
+                	unit          :  [day], 
+                	ReferenceDate :  sp_TimebarViewportEnd, 
+                	Elapsed       :  -1[day]) + " 00:00:00:00" ;
+                pr_InitializeTimebarGanttChart( sp_TimebarViewportStart, sp_FirstEvent, sp_LastEvent, sp_TimebarViewportEnd );
+                
                 
                 ep_FocusBCC := '' ;
                 sp_finish := sp_TimebarViewportEnd ;
@@ -1481,6 +1495,8 @@ Model Main_AIMMSPROUsageStatistics {
                 empty   ep_EvValueData, s_EventsAtBarChartPoint ;
             }
             Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+            StringParameter sp_FirstEvent;
+            StringParameter sp_LastEvent;
         }
         Procedure PostMainInitialization {
             Comment: {
