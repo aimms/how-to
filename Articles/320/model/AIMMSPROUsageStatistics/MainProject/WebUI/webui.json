@@ -1029,7 +1029,31 @@
     "onload": {
       "literal": {
         "type": "procedure",
-        "value": "pr_ComputeStackedBarCharts"
+        "value": "none"
+      }
+    },
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_StackedBarChartsSecondaryActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_StackedBarChartsSecondaryActions",
+            "slice": [
+              {
+                "index": "i_si",
+                "type": "free",
+                "value": "i_si"
+              },
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
       }
     },
     "sidepanels": {
@@ -1111,6 +1135,18 @@
           "p_TimebarTimeStart",
           "p_TimebarDuration"
         ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "resources": [
+          "i_tb_res"
+        ],
+        "jobs": [
+          "<IDENTIFIER-SET>",
+          "i_tb_job"
+        ],
+        "aggregated": []
       }
     },
     "time.reference": {

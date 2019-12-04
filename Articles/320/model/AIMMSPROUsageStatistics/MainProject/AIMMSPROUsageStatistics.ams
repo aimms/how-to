@@ -158,6 +158,13 @@ Model Main_AIMMSPROUsageStatistics {
                 }
             }
         }
+        Procedure pr_ReadInitialCaseData {
+            Body: {
+                CaseFileLoad(
+                	url                         :  "data\\initialData.data", 
+                	keepUnreferencedRuntimeLibs :  0);
+            }
+        }
     }
     DeclarationSection Value_sets {
         Set s_ValueMasterSet {
@@ -1184,15 +1191,28 @@ Model Main_AIMMSPROUsageStatistics {
                 IndexDomain: (i_si, webui::indexPageActionSpec);
                 Definition: {
                     data {
-                    (1,displaytext): "Enable session tracking",
+                    (1,displaytext): "Enable session tracking (working on it)",
                     (1,icon): "aimms-database-edit2",
                     (1,procedure): "pr_EnableSessionTracking",
-                    (1,state): "Active",
+                    (1,state): "Inactive",
                     
-                    (2,displaytext): "Read Data",
-                    (2,icon): "aimms-bin5",
-                    (2,procedure): "pr_ClearErrors",
-                    (2,state): "Hidden" }
+                    (2,displaytext): "Read Data from database (requires connection to AIMMS PRO Database)",
+                    (2,icon): "aimms-database",
+                    (2,procedure): "pr_ReadData",
+                    (2,state): "Active" ,
+                    
+                    (3,displaytext): "Read Data from case file",
+                    (3,icon): "aimms-file-zip",
+                    (3,procedure): "pr_ReadInitialCaseData",
+                    (3,state): "Active" ,
+                    
+                    (4,displaytext): "Initialize datastructures stacked bar chart (this page)",
+                    (4,icon): "aimms-file-zip",
+                    (4,procedure): "pr_ComputeStackedBarCharts",
+                    (4,state): "Active" 
+                    
+                    
+                    }
                 }
             }
             StringParameter sp_TitleSessionInUseChart {
@@ -1226,7 +1246,6 @@ Model Main_AIMMSPROUsageStatistics {
             }
             Procedure pr_ComputeStackedBarCharts {
                 Body: {
-                    return ;
                     pr_Open_Full_Event_Information();
                     pr_RelateBarChartMomentsToEvents();
                     pr_ComputeBarChartsStackedBySessionType();
@@ -1440,10 +1459,26 @@ Model Main_AIMMSPROUsageStatistics {
     Section Attic {
         Procedure MainInitialization {
             Body: {
-                profilerStart();
+                !profilerStart();
+                
                 ep_BarchartColumnValueType := 'SessionTypes' ;
                 s_ValueSubset := s_SessionTypes ;
                 ep_FocusValue := 'data' ;
+                
+                sp_TimebarViewportEnd   := CurrentToString("%c%y-%m-%d 00:00:00:00");
+                sp_TimebarViewportStart := MomentToString(
+                	Format        :  "%c%y-%m-%d", 
+                	unit          :  [month], 
+                	ReferenceDate :  sp_TimebarViewportEnd, 
+                	Elapsed       :  -3[month]) + " 00:00:00:00";
+                
+                ep_FocusBCC := '' ;
+                sp_finish := sp_TimebarViewportEnd ;
+                
+                empty   p01_SelectedSessionTypes, p01_SelectedApplications, 
+                	p01_SelectedAppversions, p01_SelectedAccounts, p01_SelectedEnvironments, p01_SelectedUsernames;
+                
+                empty   ep_EvValueData, s_EventsAtBarChartPoint ;
             }
             Comment: "Add initialization statements here that do NOT require any library being initialized already.";
         }
