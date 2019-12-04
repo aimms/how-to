@@ -11,7 +11,7 @@ The operation of writing to databases in AIMMS is tuned for performance.
 
 In an application with several database table, it is not very efficient to write all database tables. Much more efficient is to skip writing to those tables where data has not changed.
 
-To do so, you can use a combination of the function :aimms:function:`ReferencedIdentifiers`, the construct ``DatachangeMonitor``, and runtime libraries.
+To do so, you can use a combination of the function :aimms:func:`ReferencedIdentifiers`, the construct ``DatachangeMonitor``, and runtime libraries.
 
 Example of database tables
 --------------------------
@@ -106,17 +106,17 @@ However, we want to change it to something like this (in pseudo code):
 
     The AIMMS function reference describes the procedures operating on datachange monitors in detail:
    
-    * :aimms:function:`DataChangeMonitorHasChanged` - returns 1 if the data of at least one identifier, or the data of the reference set itself, has changed.
+    * :aimms:func:`DataChangeMonitorHasChanged` - returns 1 if the data of at least one identifier, or the data of the reference set itself, has changed.
 
-    * :aimms:function:`DataChangeMonitorCreate` - creates a new datachange monitor name and resets
+    * :aimms:func:`DataChangeMonitorCreate` - creates a new datachange monitor name and resets
 
-    * :aimms:function:`DataChangeMonitorReset` - resets a datachange monitor and links it to the same or another reference set
+    * :aimms:func:`DataChangeMonitorReset` - resets a datachange monitor and links it to the same or another reference set
 
-    * :aimms:function:`DataChangeMonitorDelete` - allows for cleanup
+    * :aimms:func:`DataChangeMonitorDelete` - allows for cleanup
 
 To avoid coding errors and maintenance issues from doing this manually, AIMMS has the following facilities:
 
-* The predeclared function :aimms:function:`ReferencedIdentifiers` (see sidebar) examines portions of AIMMS code and returns the identifiers referenced. 
+* The predeclared function :aimms:func:`ReferencedIdentifiers` (see sidebar) examines portions of AIMMS code and returns the identifiers referenced. 
 
 * The construct ``DatachangeMonitor`` (see sidebar) checks a given set of AIMMS identifiers for changed values.
 
