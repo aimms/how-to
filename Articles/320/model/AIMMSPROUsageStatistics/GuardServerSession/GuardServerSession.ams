@@ -1,0 +1,188 @@
+## ams_version=1.0
+
+LibraryModule Library_GuardServerSession {
+    Prefix: gss;
+    Interface: Public_Section;
+    Section Public_Section {
+        DeclarationSection ServerSessionProfilerErrorData {
+            Set s_LineNumbers {
+                SubsetOf: Integers;
+                Index: i_LineNumber;
+                Definition: ElementRange(0,1000);
+            }
+            Set s_StackPositions {
+                SubsetOf: Integers;
+                Index: i_StackPosition;
+                Definition: ElementRange(1,255);
+            }
+            Parameter p_JobProfilerData {
+                IndexDomain: (IndexIdentifiers,i_LineNumber,IndexProfilerTypes );
+            }
+            Set s_JobErrorMessageNumbers {
+                SubsetOf: Integers;
+                Index: i_JobErrorMessageNumber;
+            }
+            StringParameter sp_JobErrorMessages {
+                IndexDomain: i_JobErrorMessageNumber;
+            }
+            StringParameter sp_JobErrorMoments {
+                IndexDomain: i_JobErrorMessageNumber;
+            }
+            ElementParameter ep_JobErrorSeverity {
+                IndexDomain: i_JobErrorMessageNumber;
+                Range: errh::AllErrorSeverities;
+            }
+            ElementParameter ep_JobErrorNodes {
+                IndexDomain: (i_JobErrorMessageNumber,i_StackPosition);
+                Range: AllSymbols;
+            }
+            Parameter p_JobErrorLines {
+                IndexDomain: (i_JobErrorMessageNumber,i_StackPosition);
+            }
+        }
+        Procedure pr_ClearErrors {
+            Body: {
+                empty s_JobErrorMessageNumbers;
+            }
+        }
+        Procedure pr_ReportCurrentErrorsToTextFile {
+            Arguments: (sp_filename);
+            Body: {
+                block where listing_page_width := 32000 ;
+                f_out.pagewidth := 32000 ;
+                put f_out;
+                for i_JobErrorMessageNumber do
+                	put     ep_JobErrorSeverity(i_JobErrorMessageNumber), " ", 
+                	        sp_JobErrorMoments( i_JobErrorMessageNumber), " : ",
+                		sp_JobErrorMessages(i_JobErrorMessageNumber), / ;
+                	for i_StackPosition | p_JobErrorLines(i_JobErrorMessageNumber, i_StackPosition) do
+                		put "    ", p_JobErrorLines(i_JobErrorMessageNumber, i_StackPosition):4:0, 
+                		    " : ", ep_JobErrorNodes(i_JobErrorMessageNumber, i_StackPosition):0, / ;
+                	endfor ;
+                	put / ;
+                endfor ;
+                putclose ;
+                endblock ;
+            }
+            StringParameter sp_filename {
+                Property: Input;
+            }
+            File f_out {
+                Name: sp_filename;
+                Device: Disk;
+                Mode: replace;
+            }
+        }
+        Procedure pr_GlobalErrorHandler {
+            Arguments: (ep_err);
+            Body: {
+                ! Increase the number of recorded error messages.
+                s_JobErrorMessageNumbers += card(s_JobErrorMessageNumbers) + 1;
+                ep_JobErrorMessageNumber := last(s_JobErrorMessageNumbers);
+                
+                ! Record the message and severity.
+                sp_JobErrorMessages(ep_JobErrorMessageNumber) := errh::Message( ep_err);
+                sp_JobErrorMoments( ep_JobErrorMessageNumber) := CurrentToString("%c%y-%m-%d %H:%M:%S:%T%TZ('UTC')");
+                ep_JobErrorSeverity(ep_JobErrorMessageNumber) := errh::Severity(ep_err);
+                
+                ! Record the entire stack of error positions
+                p_errStackHeight := errh::NumberOfLocations(ep_err);
+                p_errStackPos := 1 ;
+                while p_errStackPos <= p_errStackHeight do
+                	ep_StackPosition := p_errStackPos;
+                	ep_JobErrorNodes(ep_JobErrorMessageNumber,ep_StackPosition) := errh::Node(ep_err,ep_StackPosition);
+                	p_JobErrorLines( ep_JobErrorMessageNumber,ep_StackPosition) := errh::Line(ep_err,ep_StackPosition);
+                	p_errStackPos += 1 ;
+                endwhile ;
+            }
+            ElementParameter ep_err {
+                Range: errh::PendingErrors;
+                Property: Input;
+            }
+            ElementParameter ep_JobErrorMessageNumber {
+                Range: s_JobErrorMessageNumbers;
+            }
+            Parameter p_errStackHeight;
+            Parameter p_errStackPos;
+            ElementParameter ep_StackPosition {
+                Range: s_StackPositions;
+            }
+        }
+        Procedure pr_GuardAndProfileServerJob {
+            Arguments: (ep_Work);
+            Body: {
+                block
+                	empty s_JobErrorMessageNumbers ;
+                
+                	! Ensure that the error recorded and profiler data are transmitted via the output case:
+                	pro::ManagedSessionOutputCaseIdentifierSet += ServerSessionProfilerErrorData ;
+                
+                	! Actual work.
+                	apply( ep_Work);
+                
+                	! Ensure that the definitions of all defined sets and defined parameters in 
+                	! output case identifier set are profiled.
+                	update pro::ManagedSessionOutputCaseIdentifierSet;
+                
+                onerror ep_err do
+                
+                	pr_GlobalErrorHandler( ep_err );
+                
+                
+                	! Don't let the server job be halted by this error; 
+                	! we still want the result case including the profiled data.
+                	errh::MarkAsHandled(ep_err);
+                
+                endblock ;
+                ProfilerCollectAllData(
+                	ProfilerData       :  p_JobProfilerData, 
+                	GrossTimeThreshold :  0, 
+                	NetTimeThreshold   :  0);
+            }
+            ElementParameter ep_err {
+                Range: errh::PendingErrors;
+            }
+            ElementParameter ep_Work {
+                Range: AllProcedures;
+                Default: 'gss::pr_SampleProc';
+                Property: Input;
+            }
+        }
+    }
+    Section Private_Section {
+        Procedure pr_SampleProc;
+        Procedure LibraryInitialization {
+            Comment: "Add initialization statements here that do not require any other library being initialized already.";
+        }
+        Procedure PostLibraryInitialization {
+            Comment: {
+                "Add initialization statements here that require another library to be initialized already,
+                or add statements that require the Data Management module to be initialized."
+            }
+        }
+        Procedure PreLibraryTermination {
+            Body: {
+                if card( s_JobErrorMessageNumbers ) then
+                
+                endif ;
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that require all other libraries to be still alive.
+                Return 1 if you allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence."
+            }
+        }
+        Procedure LibraryTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that do not require other libraries to be still alive.
+                Return 1 to allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence.
+                It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+            }
+        }
+    }
+}
