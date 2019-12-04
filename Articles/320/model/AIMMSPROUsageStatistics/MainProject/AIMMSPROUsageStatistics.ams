@@ -211,6 +211,7 @@ Model Main_AIMMSPROUsageStatistics {
             SubsetOf: s_ValueMasterSet;
             Index: i_SessionType;
             Parameter: ep_SessionType, ep_FocusSessionType;
+            InitialData: data { data, solver, WinUI };
         }
         Set s_Applications {
             SubsetOf: s_ValueMasterSet;
@@ -534,8 +535,7 @@ Model Main_AIMMSPROUsageStatistics {
     }
     Procedure pr_Open_Full_Event_Information {
         Body: {
-            if not card( s_Events ) then
-            	pr_ReadData();
+            if not card( ep_SessValueData ) then
             	pr_TranslateStringsToElements();
             	pr_EventsFromSessions();
             	pr_handleBarchartColumnValueType();
@@ -1226,6 +1226,7 @@ Model Main_AIMMSPROUsageStatistics {
             }
             Procedure pr_ComputeStackedBarCharts {
                 Body: {
+                    return ;
                     pr_Open_Full_Event_Information();
                     pr_RelateBarChartMomentsToEvents();
                     pr_ComputeBarChartsStackedBySessionType();
@@ -1439,8 +1440,10 @@ Model Main_AIMMSPROUsageStatistics {
     Section Attic {
         Procedure MainInitialization {
             Body: {
-                !profilerStart();
+                profilerStart();
                 ep_BarchartColumnValueType := 'SessionTypes' ;
+                s_ValueSubset := s_SessionTypes ;
+                ep_FocusValue := 'data' ;
             }
             Comment: "Add initialization statements here that do NOT require any library being initialized already.";
         }
