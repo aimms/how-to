@@ -1,0 +1,101 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "pages/home": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "tab",
+          "layoutInfo": {
+            "width": "2",
+            "height": "3"
+          }
+        },
+        {
+          "uri": "bl",
+          "layoutInfo": {
+            "width": "6",
+            "height": "3"
+          }
+        }
+      ]
+    },
+    "aimms.widget.type": {
+      "literal": "page"
+    }
+  },
+  "widgets/tab": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_d",
+          "p_e"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_pt"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    }
+  },
+  "widgets/bl": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_d",
+          "p_e"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "blinechart"
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_pt"
+        ],
+        "layers": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    }
+  }
+}

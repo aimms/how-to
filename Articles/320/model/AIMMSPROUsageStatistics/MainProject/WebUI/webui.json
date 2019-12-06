@@ -14,10 +14,22 @@
             "slug": "main_project",
             "children": [
               {
+                "name": "Timebased Event Information",
+                "type": "page",
+                "slug": "timebased_event_information",
+                "children": []
+              },
+              {
                 "name": "Full Event Information",
                 "type": "page",
                 "slug": "full_event_information",
                 "children": [
+                  {
+                    "name": "StackSelector",
+                    "type": "sidepanel",
+                    "slug": "stackselector_1",
+                    "children": []
+                  },
                   {
                     "name": "AppFilter",
                     "type": "sidepanel",
@@ -49,6 +61,18 @@
                     "children": []
                   }
                 ]
+              },
+              {
+                "name": "Error Handling",
+                "type": "page",
+                "slug": "error_handling",
+                "children": []
+              },
+              {
+                "name": "Control panel",
+                "type": "page",
+                "slug": "control_panel",
+                "children": []
               }
             ]
           }
@@ -57,6 +81,9 @@
     },
     "theme.classic": {
       "literal": "NOT_ALLOWED"
+    },
+    "widget.visibility.greyout": {
+      "literal": false
     }
   },
   "pages/appfilter_1": {
@@ -121,6 +148,14 @@
     "widgets": {
       "literal": [
         {
+          "uri": "TimebarGanttChart",
+          "layoutInfo": {
+            "width": "12",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
           "uri": "FullEventInformation",
           "layoutInfo": {
             "width": "12",
@@ -141,6 +176,14 @@
           "layoutInfo": {
             "width": "12",
             "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "bl",
+          "layoutInfo": {
+            "width": "12",
+            "height": "3",
             "customPosition": ""
           }
         }
@@ -285,90 +328,9 @@
     },
     "contents": {
       "aimms": {
-        "contents": [
-          "sp_EvMoment",
-          "ep_EvAccountName",
-          "ep_EvApp",
-          "ep_EvAppVersion",
-          "ep_EvSessionType",
-          "ep_EvEventTypes",
-          "ep_EvEnv",
-          "ep_EvUserName",
-          "p_EvPeakMemory"
-        ],
-        "prefix": "aimms",
-        "partition": {
-          "rowHeader": [
-            "i_Event"
-          ],
-          "colHeader": [
-            "<IDENTIFIER-SET>"
-          ],
-          "aggregated": []
-        },
         "slices": [
           {
-            "identifier": "ep_EvAccountName",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
-            "identifier": "ep_EvApp",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
-            "identifier": "ep_EvAppVersion",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
-            "identifier": "ep_EvEnv",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
             "identifier": "ep_EvEventTypes",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
-            "identifier": "ep_EvSessionType",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
-            "identifier": "ep_EvUserName",
             "slice": [
               {
                 "index": "i_Event",
@@ -396,7 +358,28 @@
                 "value": "i_ShownEvent"
               }
             ]
+          },
+          {
+            "identifier": "ep_EvValueData",
+            "slice": [
+              {
+                "index": "i_Event",
+                "type": "subset",
+                "value": "i_ShownEvent"
+              },
+              {
+                "index": "i_valueType",
+                "type": "free",
+                "value": "i_valueType"
+              }
+            ]
           }
+        ],
+        "contents": [
+          "sp_EvMoment",
+          "ep_EvEventTypes",
+          "ep_EvValueData",
+          "p_EvPeakMemory"
         ]
       }
     },
@@ -406,9 +389,11 @@
     "contents.partition": {
       "literal": {
         "rowHeader": [
-          "i_Event"
+          "i_Event",
+          "i_ShownEvent"
         ],
         "colHeader": [
+          "i_valueType",
           "<IDENTIFIER-SET>"
         ],
         "aggregated": []
@@ -419,37 +404,9 @@
         {
           "type": "colHeader",
           "colKey": {
-            "<IDENTIFIER-SET>": "ep_EvApp"
-          },
-          "width": 24.4
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "ep_EvAppVersion"
-          },
-          "width": 23.60000000000001
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
             "<IDENTIFIER-SET>": "ep_EvEventTypes"
           },
           "width": 20.2
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "ep_EvEnv"
-          },
-          "width": 18.163265306122449
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "ep_EvUserName"
-          },
-          "width": 21.22448979591837
         },
         {
           "type": "colHeader",
@@ -466,23 +423,81 @@
           "width": 37
         },
         {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "ep_EvAccountName"
-          },
-          "width": 26.2
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "ep_EvSessionType"
-          },
-          "width": 27.421507064364208
-        },
-        {
           "type": "rowHeader",
           "colKey": "i_ShownEvent",
           "width": 28.17567567567567
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "SessionTypes",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 20.70042831947594
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "AccountNames",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 23.000000000000004
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "Environments",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 22.072500000000005
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "UserNames",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 19.8
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "",
+            "<IDENTIFIER-SET>": "sp_EvMoment"
+          },
+          "width": 30.4
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "",
+            "<IDENTIFIER-SET>": "p_EvPeakMemory"
+          },
+          "width": 26
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "AppVersions",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 22.3926812104152
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "Applications",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 33.425850340136044
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "",
+            "<IDENTIFIER-SET>": "ep_EvEventTypes"
+          },
+          "width": 21
         }
       ]
     },
@@ -496,13 +511,6 @@
     },
     "contents": {
       "aimms": {
-        "contents": [
-          "p_MemoryBySessionsAfterEvent"
-        ],
-        "prefix": "aimms",
-        "displaydomain": {
-          "p_memorybysessionsafterevent": "1"
-        },
         "slices": [
           {
             "identifier": "p_MemoryBySessionsAfterEvent",
@@ -513,7 +521,20 @@
                 "value": "i_ShownEvent"
               }
             ]
+          },
+          {
+            "identifier": "p_AverageMemoryInUse",
+            "slice": [
+              {
+                "index": "i_Event",
+                "type": "subset",
+                "value": "i_ShownEvent"
+              }
+            ]
           }
+        ],
+        "contents": [
+          "p_MemoryBySessionsAfterEvent"
         ]
       }
     },
@@ -689,7 +710,7 @@
           "colKey": {
             "<IDENTIFIER-SET>": "p_Durations"
           },
-          "width": 28.153197720473658
+          "width": 28.153197720473656
         },
         {
           "type": "colHeader",
@@ -697,6 +718,22 @@
             "<IDENTIFIER-SET>": "p_SessDurations"
           },
           "width": 24.28571428571429
+        },
+        {
+          "type": "rowHeader",
+          "width": 27.67441860465116
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_session",
+          "width": 51.09993714644877
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_SessStartTimes"
+          },
+          "width": 34.65070578857387
         }
       ]
     },
@@ -770,14 +807,14 @@
           "colKey": {
             "<IDENTIFIER-SET>": "sp_Env"
           },
-          "width": 14.773515909090908
+          "width": 14.773515909090907
         },
         {
           "type": "colHeader",
           "colKey": {
             "<IDENTIFIER-SET>": "sp_app"
           },
-          "width": 21.757167619739538
+          "width": 21.757167619739537
         },
         {
           "type": "colHeader",
@@ -798,7 +835,7 @@
           "colKey": {
             "<IDENTIFIER-SET>": "sp_UserName"
           },
-          "width": 29.349655883249676
+          "width": 29.349655883249675
         },
         {
           "type": "rowHeader",
@@ -824,7 +861,7 @@
           "colKey": {
             "<IDENTIFIER-SET>": "sp_SessSessionType"
           },
-          "width": 30.677083333333333
+          "width": 30.677083333333332
         },
         {
           "type": "colHeader",
@@ -845,14 +882,14 @@
           "colKey": {
             "<IDENTIFIER-SET>": "sp_SessApp"
           },
-          "width": 17.142857142857144
+          "width": 17.142857142857142
         },
         {
           "type": "colHeader",
           "colKey": {
             "<IDENTIFIER-SET>": "p_SessDurations"
           },
-          "width": 21.020408163265306
+          "width": 21.020408163265305
         },
         {
           "type": "colHeader",
@@ -886,6 +923,678 @@
       "aimms": {
         "contents": [
           "p_NumberOfSessionsAfterEvent"
+        ]
+      }
+    }
+  },
+  "widgets/TimebarGanttChart": {
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_TimebarTimeStart",
+          "p_TimebarDuration"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "resources": [
+          "i_tb_res"
+        ],
+        "jobs": [
+          "<IDENTIFIER-SET>",
+          "i_tb_job"
+        ],
+        "aggregated": []
+      }
+    },
+    "time.reference": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportStart"
+        ]
+      }
+    },
+    "time.resolution": {
+      "aimms": {
+        "contents": [
+          "p_TimebarTimeunit"
+        ]
+      }
+    },
+    "time.viewport.end": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportEnd"
+        ]
+      }
+    },
+    "time.viewport.start": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportStart"
+        ]
+      }
+    },
+    "widget.visible": {
+      "literal": 0
+    }
+  },
+  "pages/timebased_event_information": {
+    "maxcolumns": {
+      "literal": 12
+    },
+    "onload": {
+      "literal": {
+        "type": "procedure",
+        "value": "none"
+      }
+    },
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_StackedBarChartsSecondaryActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_StackedBarChartsSecondaryActions",
+            "slice": [
+              {
+                "index": "i_si",
+                "type": "free",
+                "value": "i_si"
+              },
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "sidepanels": {
+      "aimms": {
+        "contents": [
+          "sp_SidePanelsFullEventPage"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_SidePanelsFullEventPage",
+            "slice": [
+              {
+                "index": "i_spo",
+                "type": "free",
+                "value": "i_spo"
+              },
+              {
+                "index": "webui::indexSidePanelSpec",
+                "type": "free",
+                "value": "webui::indexSidePanelSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "GanttChartTimeBar",
+          "layoutInfo": {
+            "width": "7",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "ControlScalars",
+          "layoutInfo": {
+            "width": "6",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "SessionsInUseStackedBySessionType",
+          "layoutInfo": {
+            "width": "7",
+            "height": "3",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "MemoryInUseStackedBySessionType",
+          "layoutInfo": {
+            "width": "7",
+            "height": "3",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "FocusEvents",
+          "layoutInfo": {
+            "width": "5",
+            "height": "4",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "ActiveUsersStackedBySessionType",
+          "layoutInfo": {
+            "width": "7",
+            "height": "3"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/GanttChartTimeBar": {
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_TimebarTimeStart",
+          "p_TimebarDuration"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "resources": [
+          "i_tb_res"
+        ],
+        "jobs": [
+          "<IDENTIFIER-SET>",
+          "i_tb_job"
+        ],
+        "aggregated": []
+      }
+    },
+    "time.reference": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportStart"
+        ]
+      }
+    },
+    "time.resolution": {
+      "aimms": {
+        "contents": [
+          "p_TimebarTimeunit"
+        ]
+      }
+    },
+    "time.viewport.end": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportEnd"
+        ]
+      }
+    },
+    "time.viewport.start": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportStart"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Timebar"
+    }
+  },
+  "widgets/SessionsInUseStackedBySessionType": {
+    "aimms.widget.type": {
+      "literal": "barchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_NumberOfSessionsStackedBySessionType"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_numberofsessionsstackedbysessiontype": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_bcc"
+        ],
+        "grouped": [],
+        "stacked": [
+          "i_SessionType",
+          "i_someValue"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "store.focus.in": {
+      "literal": {
+        "i_bcc": "ep_FocusBCC",
+        "i_SessionType": "ep_FocusSessionType",
+        "i_someValue": "ep_FocusValue"
+      }
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_TitleSessionInUseChart"
+        ]
+      }
+    },
+    "widget.visible": {
+      "aimms": {
+        "contents": [
+          "p01_SessionBarChartVisible"
+        ]
+      }
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_BarChartWidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_BarChartWidgetActions",
+            "slice": [
+              {
+                "index": "i_si",
+                "type": "free",
+                "value": "i_si"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "widgets/MemoryInUseStackedBySessionType": {
+    "aimms.widget.type": {
+      "literal": "barchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_MemoryInUseStackedBySessionType"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_memoryinusestackedbysessiontype": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_bcc"
+        ],
+        "grouped": [],
+        "stacked": [
+          "i_SessionType",
+          "i_someValue"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "store.focus.in": {
+      "literal": {
+        "i_bcc": "ep_FocusBCC",
+        "i_SessionType": "ep_FocusSessionType",
+        "i_someValue": "ep_FocusValue"
+      }
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_TitleMemoryInUseChart"
+        ]
+      }
+    },
+    "widget.visible": {
+      "aimms": {
+        "contents": [
+          "p01_MemoryBarChartVisible"
+        ]
+      }
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_BarChartWidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_BarChartWidgetActions",
+            "slice": [
+              {
+                "index": "i_si",
+                "type": "free",
+                "value": "i_si"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "widgets/bl": {
+    "aimms.widget.type": {
+      "literal": "blinechart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_MemoryBySessionsAfterEvent",
+          "p_AverageMemoryInUse"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_Event"
+        ],
+        "layers": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "title": {
+      "literal": "Blinechart"
+    }
+  },
+  "pages/error_handling": {
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_ErrorHandlingSecondaryActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_ErrorHandlingSecondaryActions",
+            "slice": [
+              {
+                "index": "i_si",
+                "type": "free",
+                "value": "i_si"
+              },
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "widgets/ControlScalars": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_NoInitialColumnsPerBarChart",
+          "p_NoColumnsPerBarChart",
+          "ep_FocusBCC",
+          "ep_FocusSessionType"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "title": {
+      "literal": "Controls"
+    },
+    "widget.visible": {
+      "literal": 0
+    }
+  },
+  "widgets/FocusEvents": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "slices": [
+          {
+            "identifier": "ep_EvEventTypes",
+            "slice": [
+              {
+                "index": "i_Event",
+                "type": "subset",
+                "value": "i_focusEvent"
+              }
+            ]
+          },
+          {
+            "identifier": "sp_EvMoment",
+            "slice": [
+              {
+                "index": "i_Event",
+                "type": "subset",
+                "value": "i_focusEvent"
+              }
+            ]
+          },
+          {
+            "identifier": "ep_EvValueData",
+            "slice": [
+              {
+                "index": "i_Event",
+                "type": "subset",
+                "value": "i_focusEvent"
+              },
+              {
+                "index": "i_valueType",
+                "type": "free",
+                "value": "i_valueType"
+              }
+            ]
+          }
+        ],
+        "contents": [
+          "sp_EvMoment",
+          "ep_EvEventTypes",
+          "ep_EvValueData"
+        ],
+        "prefix": "aimms",
+        "partition": {
+          "rowHeader": [
+            "i_Event"
+          ],
+          "colHeader": [
+            "<IDENTIFIER-SET>"
+          ],
+          "aggregated": []
+        }
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_Event",
+          "i_focusEvent"
+        ],
+        "colHeader": [
+          "i_valueType",
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_TitleEventsWithFocusTable"
+        ]
+      }
+    }
+  },
+  "pages/control_panel": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "ControlScalars_1",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/ControlScalars_1": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    }
+  },
+  "pages/stackselector_1": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "MultiSelectControlValueType",
+          "layoutInfo": {
+            "width": "2",
+            "height": "3",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "DEBUGControlValueType",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/DEBUGControlValueType": {
+    "aimms.widget.type": {
+      "literal": "selectionbox"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "ep_BarchartColumnValueType"
+        ]
+      }
+    },
+    "widget.visible": {
+      "literal": 0
+    }
+  },
+  "widgets/MultiSelectControlValueType": {
+    "aimms.widget.type": {
+      "literal": "multiselect"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "ep_BarchartColumnValueType"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Stack by"
+    }
+  },
+  "widgets/ActiveUsersStackedBySessionType": {
+    "aimms.widget.type": {
+      "literal": "barchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_NumberOfUsersStackedBySessionType"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_numberofusersstackedbysessiontype": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_bcc"
+        ],
+        "grouped": [],
+        "stacked": [
+          "i_someValue"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_TitleUsersInUseChart"
+        ]
+      }
+    },
+    "widget.visible": {
+      "aimms": {
+        "contents": [
+          "p01_UserBarChartVisible"
+        ]
+      }
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_BarChartWidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_BarChartWidgetActions",
+            "slice": [
+              {
+                "index": "i_si",
+                "type": "free",
+                "value": "i_si"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
         ]
       }
     }

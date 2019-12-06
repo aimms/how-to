@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<PageManager>
+	<Page Name="startupPage" PageGUID="F709804A-FCE8-407E-8714-B56DEAC60D69" />
+	<Page Name="DialogSelectStorageFolder" PageGUID="EC2B120F-2B2E-48C2-BB96-62B97C42CF70" />
+</PageManager>

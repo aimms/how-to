@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2016-05-04 14:04:06">
+	<Location top="29" left="8" bottom="781" right="1167" />
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>301F4081-1989-4AC8-A02B-020246DF9209</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<Action>
+		<EntryProcedure>GetModelList</EntryProcedure>
+	</Action>
+	<PageObject Type="Composite Table">
+		<Location top="30" left="6" bottom="246" right="642" />
+		<ReadOnly>"Yes"</ReadOnly>
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<HorizontalLines>false</HorizontalLines>
+		<HeaderRearrange>false</HeaderRearrange>
+		<CellSelection>false</CellSelection>
+		<MultipleRowSelection>false</MultipleRowSelection>
+		<Domain>
+			<Identifier>MODVER</Identifier>
+			<Index Name="MODVER">
+				<TitleText>"Model / Version"</TitleText>
+			</Index>
+		</Domain>
+		<ExplicitIdentifier>
+			<Identifier>PublishModelDescription( MODVER-&gt;PePublishModel )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<TitleText>"Description"</TitleText>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>PublishModelAimmsVersion( MODVER-&gt;PePublishModel )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<TitleText>"Aimms Version"</TitleText>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>PublishModelAttributes( MODVER-&gt;PePublishModel )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<TitleText>"Attributes"</TitleText>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="252" left="564" bottom="276" right="642" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Refresh"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GetModelList</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Rectangle">
+		<Location top="288" left="6" bottom="474" right="642" />
+		<Shape>In-Shadow</Shape>
+		<FillColor>
+			<UserColor GUID="4C29CF98-3E51-4BAA-8563-90FCE3E3DF3B">default background</UserColor>
+		</FillColor>
+		<LineColor>
+			<UserColor GUID="9E91AFF7-0C42-4624-9450-66E75C74B1AB">grey</UserColor>
+		</LineColor>
+		<LineWidth>2</LineWidth>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="318" left="24" bottom="462" right="528" />
+		<TabOrder>5</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>PGUI_NewModelName</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+			<Title>"Model Name"</Title>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>PGUI_NewModelVersion</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+			<Title>"Model Version"</Title>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>PGUI_NewModelDescription</Identifier>
+			<NumberFormat Width="50" Decimals="0" Alignment="Left" ShowDefaults="true" />
+			<Title>"Description"</Title>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>PGUI_NewModelAimmsVersion</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+			<Title>"Aimms Version"</Title>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="374" left="558" bottom="398" right="636" />
+		<TabOrder>6</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Delete"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_DeleteModel</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="405" left="558" bottom="429" right="636" />
+		<TabOrder>3</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Attributes"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_EditAttributes_Str2Set</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+			<Action Type="LinkedPage">
+				<Page PageGUID="34B8C8BD-93AD-41D8-9B2C-8672BB96D593" Name="Model Attributes" />
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="436" left="558" bottom="460" right="636" />
+		<TabOrder>4</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Security"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_EditAuthNewModel</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_UpdateModel</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="6" left="6" bottom="24" right="150" />
+		<TabOrder>8</TabOrder>
+		<TabStop>false</TabStop>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="None" MarginTop="1" MarginRight="4" MarginBottom="1" MarginLeft="4" />
+		<BackgroundColor Transparent="true" />
+		<TextColor>
+			<UserColor GUID="701D5E4D-A50B-4FD8-B7AD-7ED61961A523">default foreground</UserColor>
+		</TextColor>
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>"All Published Applications:"</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="282" left="12" bottom="300" right="108" />
+		<TabOrder>7</TabOrder>
+		<TabStop>false</TabStop>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="None" MarginTop="1" MarginRight="4" MarginBottom="1" MarginLeft="4" />
+		<BackgroundColor>
+			<UserColor GUID="4C29CF98-3E51-4BAA-8563-90FCE3E3DF3B">default background</UserColor>
+		</BackgroundColor>
+		<TextColor>
+			<UserColor GUID="701D5E4D-A50B-4FD8-B7AD-7ED61961A523">default foreground</UserColor>
+		</TextColor>
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>"Application Detail:"</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="252" left="6" bottom="276" right="150" />
+		<TabOrder>9</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Permissions Overview"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>ComputePermissions</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+			<Action Type="LinkedPage">
+				<Page PageGUID="ED0B740A-EA7E-45FA-B082-C7F26E83D98C" Name="Permissions Overview" />
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>PGUI_NewModelName</Symbol>
+			<Symbol>PGUI_NewModelVersion</Symbol>
+			<Symbol>PGUI_NewModelDescription</Symbol>
+			<Symbol>PGUI_NewModelAimmsVersion</Symbol>
+			<Symbol>GUI_UpdateModel</Symbol>
+			<Symbol>GUI_DeleteModel</Symbol>
+			<Symbol>GUI_EditAttributes_Str2Set</Symbol>
+			<Symbol>GUI_EditAuthNewModel</Symbol>
+			<Symbol>PublishModelDescription</Symbol>
+			<Symbol>PublishModelAimmsVersion</Symbol>
+			<Symbol>PublishModelAttributes</Symbol>
+			<Symbol>GetModelList</Symbol>
+			<Symbol>ComputePermissions</Symbol>
+			<Symbol>MODVER</Symbol>
+			<Symbol>PePublishModel</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

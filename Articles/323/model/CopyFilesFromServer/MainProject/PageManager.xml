@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<PageManager>
+	<Page Name="StartupPage" PageGUID="BC027D92-B004-43E6-AD88-C017FA542F9D" />
+	<Page Name="DialogSelectStorageFolder" PageGUID="D76E8C78-57D4-4F76-B454-38CC5513B568" />
+	<Page Name="dialogErrorCopyFile" PageGUID="C9768F2C-5352-4BA8-BD35-A4C100011131" />
+</PageManager>

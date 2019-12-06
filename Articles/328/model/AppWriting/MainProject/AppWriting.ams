@@ -1,0 +1,72 @@
+## ams_version=1.0
+
+Model Main_AppWriting {
+    StringParameter sp_ExchangeFilename {
+        InitialData: "..\\dataExchange.txt";
+    }
+    Set s_outputSet {
+        SubsetOf: AllIdentifiers;
+    }
+    Section CommonDeclarationsForDataExchange {
+        SourceFile: "..\\..\\common.ams";
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Body: {
+            s_Fruits := data { orange, pear };
+            s_Dates := data { day1, day2 };
+            p_amount := data { orange:3.4567891234, pear:4.7654321987 };
+            p_delivery := data table
+            	day1 day2
+            orange   1    1
+            pear     2    1    ;
+        }
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            block where 
+            		single_column_display := 1, 
+            		listing_page_width := 32000,
+            		listing_number_width := 20,
+            		listing_number_precision := 12 ;
+            	s_outputSet := CommonDeclarationsForDataExchange * CurrentInputs ;
+            	write  s_outputSet
+            	to file sp_ExchangeFilename 
+            	in backup mode ;
+            endblock ;
+        }
+    }
+    Procedure Copy_MainExecution {
+        Body: {
+            s_outputSet := CommonDeclarationsForDataExchange - AllDefinedParameters ;
+            write  s_outputSet	to file sp_ExchangeFilename ;
+        }
+    }
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

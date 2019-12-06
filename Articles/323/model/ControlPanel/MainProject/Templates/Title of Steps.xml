@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2013-11-22 21:07:09" NeedsCompiledModel="false">
+	<Location top="32" left="78" bottom="323" right="763" />
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>301F4081-1989-4AC8-A02B-020246DF9209</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Text">
+		<Location top="12" left="0" bottom="30" right="684" />
+		<StaticText>AIMMS PRO Framework - 5 Step Configuration Wizard (beta-release)</StaticText>
+		<Alignment>Center</Alignment>
+		<Font GUID="2A210F3A-8F95-4798-A888-9936B8D34599" Name="Arial12b" />
+		<TextColor RGB="#ffffff" />
+	</PageObject>
+	<UsedReferences>
+		<Model />
+	</UsedReferences>
+</Page>

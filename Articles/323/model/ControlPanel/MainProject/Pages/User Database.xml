@@ -1,0 +1,254 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2016-05-04 09:54:54">
+	<Location top="27" left="8" bottom="610" right="1106" />
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>301F4081-1989-4AC8-A02B-020246DF9209</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<Action>
+		<EntryProcedure>UpdateEnvList</EntryProcedure>
+	</Action>
+	<PageObject Type="Selection Object">
+		<SelectionType>DropDownList</SelectionType>
+		<Location top="42" left="24" bottom="66" right="210" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="None" />
+		<BackgroundColor RGB="#ffffff" />
+		<ProcedureUponChange>UpdateLocalUserDatabase</ProcedureUponChange>
+		<ExplicitIdentifier>
+			<Identifier>Pe_Env_List</Identifier>
+		</ExplicitIdentifier>
+		<ElementText Index="PROEnvList">PROEnvName( PROEnvList )</ElementText>
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>ListBox</SelectionType>
+		<SingleSelect>true</SingleSelect>
+		<Location top="96" left="24" bottom="288" right="210" />
+		<TabOrder>4</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ProcedureUponChange>UpdateUserGroupList</ProcedureUponChange>
+		<ExplicitIdentifier>
+			<Identifier>Pe_User_List</Identifier>
+		</ExplicitIdentifier>
+		<ElementText Index="PROUserList">PROUserName( PROUserList )</ElementText>
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>ListBox</SelectionType>
+		<SingleSelect>true</SingleSelect>
+		<Location top="96" left="450" bottom="288" right="636" />
+		<TabOrder>3</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ProcedureUponDblClick>GUI_AssociateUserToGroup</ProcedureUponDblClick>
+		<ExplicitIdentifier>
+			<Identifier>Pe_Group_List</Identifier>
+		</ExplicitIdentifier>
+		<ElementText Index="PROGroupList">PROGroupName( PROGroupList )</ElementText>
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>ListBox</SelectionType>
+		<SingleSelect>true</SingleSelect>
+		<Location top="96" left="234" bottom="288" right="420" />
+		<TabOrder>5</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ProcedureUponDblClick>GUI_DisassociateUserFromGroup</ProcedureUponDblClick>
+		<ExplicitIdentifier>
+			<Identifier>Pe_Group_Cur_User</Identifier>
+		</ExplicitIdentifier>
+		<ElementText Index="PROCurrentUserGroupList">PROGroupName( PROCurrentUserGroupList )</ElementText>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="78" left="234" bottom="96" right="366" />
+		<StaticText>Selected user groups:</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="78" left="450" bottom="96" right="582" />
+		<StaticText>All groups:</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="174" left="426" bottom="192" right="444" />
+		<StaticText>&lt;&lt;</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="78" left="30" bottom="96" right="162" />
+		<StaticText>All users:</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="18" left="18" bottom="36" right="150" />
+		<StaticText>User Environment:</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="42" left="216" bottom="66" right="276" />
+		<TabOrder>8</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Add New"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_AddEnvironment</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="294" left="24" bottom="318" right="72" />
+		<TabOrder>12</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"add"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_AddUser</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="294" left="450" bottom="318" right="498" />
+		<TabOrder>9</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"add"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_AddGroup</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="294" left="78" bottom="318" right="126" />
+		<TabOrder>10</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"remove"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_RemoveUser</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="294" left="504" bottom="318" right="552" />
+		<TabOrder>11</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"remove"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_RemoveGroup</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="42" left="336" bottom="66" right="396" />
+		<TabOrder>6</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Remove"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_RemoveEnvironment</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="42" left="276" bottom="66" right="336" />
+		<TabOrder>7</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Security"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_UpdateEnvironment</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>DropDownList</SelectionType>
+		<Location top="48" left="450" bottom="72" right="636" />
+		<TabOrder>2</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>ElementName</TextShown>
+		<Border Style="None" />
+		<BackgroundColor RGB="#ffffff" />
+		<ProcedureUponChange>UpdateEnvGroupList</ProcedureUponChange>
+		<ExplicitIdentifier>
+			<Identifier>Pe_Env_Group_List</Identifier>
+		</ExplicitIdentifier>
+		<ElementText Index="PROEnvList">PROEnvName( PROEnvList )</ElementText>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="24" left="450" bottom="42" right="582" />
+		<StaticText>Group Environment:</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>GUI_AddEnvironment</Symbol>
+			<Symbol>GUI_UpdateEnvironment</Symbol>
+			<Symbol>GUI_RemoveEnvironment</Symbol>
+			<Symbol>GUI_AddUser</Symbol>
+			<Symbol>GUI_AddGroup</Symbol>
+			<Symbol>GUI_RemoveUser</Symbol>
+			<Symbol>GUI_RemoveGroup</Symbol>
+			<Symbol>GUI_AssociateUserToGroup</Symbol>
+			<Symbol>GUI_DisassociateUserFromGroup</Symbol>
+			<Symbol>PROEnvList</Symbol>
+			<Symbol>PROUserList</Symbol>
+			<Symbol>PROGroupList</Symbol>
+			<Symbol>PROCurrentUserGroupList</Symbol>
+			<Symbol>UpdateEnvList</Symbol>
+			<Symbol>UpdateLocalUserDatabase</Symbol>
+			<Symbol>UpdateUserGroupList</Symbol>
+			<Symbol>UpdateEnvGroupList</Symbol>
+			<Symbol>PROEnvName</Symbol>
+			<Symbol>PROUserName</Symbol>
+			<Symbol>PROGroupName</Symbol>
+			<Symbol>Pe_Env_List</Symbol>
+			<Symbol>Pe_Env_Group_List</Symbol>
+			<Symbol>Pe_User_List</Symbol>
+			<Symbol>Pe_Group_List</Symbol>
+			<Symbol>Pe_Group_Cur_User</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

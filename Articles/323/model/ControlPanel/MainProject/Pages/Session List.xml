@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2016-02-26 10:36:50">
+	<Location top="27" left="8" bottom="638" right="1106" />
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>301F4081-1989-4AC8-A02B-020246DF9209</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Composite Table">
+		<Location top="72" left="12" bottom="336" right="636" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<CellSelection>false</CellSelection>
+		<MultipleRowSelection>false</MultipleRowSelection>
+		<Domain>
+			<Identifier>PRO_SESSION</Identifier>
+			<Index Name="PRO_SESSION">
+				<Width>10</Width>
+				<TitleText>"ID"</TitleText>
+				<AutomaticWidth>false</AutomaticWidth>
+			</Index>
+		</Domain>
+		<ExplicitIdentifier>
+			<Identifier>session_CreateTime( PRO_SESSION-&gt;sessionElement )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<TitleText>"Requested"</TitleText>
+			<Readonly>1</Readonly>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>GUI_session_CurrentStatusDescr( PRO_SESSION-&gt;sessionElement )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<TitleText>"Status"</TitleText>
+			<Readonly>1</Readonly>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>session_Application( PRO_SESSION-&gt;sessionElement )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<TitleText>"Application"</TitleText>
+			<Readonly>1</Readonly>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>session_UserEnv( PRO_SESSION-&gt;sessionElement )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<TitleText>"Env."</TitleText>
+			<Readonly>1</Readonly>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>session_UserName( PRO_SESSION-&gt;sessionElement )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<TitleText>"Username"</TitleText>
+			<Readonly>1</Readonly>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>session_IsManaged( PRO_SESSION-&gt;sessionElement )</Identifier>
+			<NumberFormat Width="3" Decimals="0" Alignment="Center" Binary="true" />
+			<TitleText>"Managed?"</TitleText>
+			<Readonly>1</Readonly>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>session_Mark( PRO_SESSION-&gt;sessionElement )</Identifier>
+			<NumberFormat Width="4" Decimals="0" Alignment="Center" Binary="true" />
+			<TitleText>"Mark"</TitleText>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="14" left="396" bottom="38" right="486" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Load"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_UpdateSessionList</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Date Time Picker">
+		<Location top="16" left="126" bottom="40" right="270" />
+		<TabOrder>7</TabOrder>
+		<Display>
+			<Date_format>
+				<None_1_format ID="1018">"31/01/2000"</None_1_format>
+			</Date_format>
+			<Time_format>
+				<Show_time_component ID="1020">"Yes"</Show_time_component>
+				<Show_hour_leading_zero ID="1022">"Yes"</Show_hour_leading_zero>
+				<Show_seconds ID="1023">"Yes"</Show_seconds>
+			</Time_format>
+		</Display>
+		<Contents>
+			<Identifier ID="2001">DateToList</Identifier>
+			<Procedures>
+				<On_change ID="3">GUI_UpdateSessionList</On_change>
+			</Procedures>
+		</Contents>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="18" left="12" bottom="36" right="132" />
+		<StaticText>Load Sessions since :</StaticText>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>CheckBoxes</SelectionType>
+		<Location top="14" left="270" bottom="38" right="372" />
+		<TabOrder>9</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>IdentifierText</TextShown>
+		<Border Style="None" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor>
+			<UserColor GUID="4C29CF98-3E51-4BAA-8563-90FCE3E3DF3B">default background</UserColor>
+		</BackgroundColor>
+		<ExplicitIdentifier>
+			<Identifier>FromAllUsers</Identifier>
+			<Description>"From All Users"</Description>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="342" left="540" bottom="366" right="636" />
+		<TabOrder>5</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Remove Marked"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_RemoveMarked</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Selection Object">
+		<SelectionType>CheckBoxes</SelectionType>
+		<Location top="18" left="546" bottom="42" right="636" />
+		<TabOrder>4</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextShown>IdentifierText</TextShown>
+		<Border Style="None" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor>
+			<UserColor GUID="4C29CF98-3E51-4BAA-8563-90FCE3E3DF3B">default background</UserColor>
+		</BackgroundColor>
+		<ProcedureUponChange>GUI_MarkAll</ProcedureUponChange>
+		<ExplicitIdentifier>
+			<Identifier>markAll</Identifier>
+			<Description>"[Un]mark All"</Description>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="342" left="438" bottom="366" right="534" />
+		<ReadOnly>VALUE := session_CurrentStatus(sessionElement) &gt;= 5 OR session_CurrentStatus(sessionElement) &lt;= 2</ReadOnly>
+		<TabOrder>6</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Terminate Marked"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_HardInterruptRequest</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Date Time Picker">
+		<Location top="45" left="396" bottom="66" right="540" />
+		<TabOrder>8</TabOrder>
+		<Display>
+			<Date_format>
+				<None_1_format ID="1018">"31/01/2000"</None_1_format>
+			</Date_format>
+			<Time_format>
+				<Show_time_component ID="1020">"Yes"</Show_time_component>
+				<Show_hour_leading_zero ID="1022">"Yes"</Show_hour_leading_zero>
+				<Show_seconds ID="1023">"Yes"</Show_seconds>
+			</Time_format>
+		</Display>
+		<Contents>
+			<Identifier ID="2001">DateEndList</Identifier>
+			<Procedures>
+				<On_change ID="3">GUI_UpdateSessionList</On_change>
+			</Procedures>
+		</Contents>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="42" left="546" bottom="66" right="636" />
+		<TabOrder>3</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Mark Until"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_MarkUntil</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>DateToList</Symbol>
+			<Symbol>DateEndList</Symbol>
+			<Symbol>FromAllUsers</Symbol>
+			<Symbol>session_Mark</Symbol>
+			<Symbol>GUI_session_CurrentStatusDescr</Symbol>
+			<Symbol>markAll</Symbol>
+			<Symbol>GUI_UpdateSessionList</Symbol>
+			<Symbol>GUI_RemoveMarked</Symbol>
+			<Symbol>GUI_MarkAll</Symbol>
+			<Symbol>GUI_MarkUntil</Symbol>
+			<Symbol>GUI_HardInterruptRequest</Symbol>
+			<Symbol>sessionList</Symbol>
+			<Symbol>session_CurrentStatus</Symbol>
+			<Symbol>session_CreateTime</Symbol>
+			<Symbol>session_UserEnv</Symbol>
+			<Symbol>session_UserName</Symbol>
+			<Symbol>session_Application</Symbol>
+			<Symbol>session_IsManaged</Symbol>
+			<Symbol>PRO_SESSION</Symbol>
+			<Symbol>sessionElement</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

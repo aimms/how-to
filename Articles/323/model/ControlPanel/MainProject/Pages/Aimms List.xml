@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2013-11-22 21:07:09">
+	<Location top="27" left="8" bottom="638" right="1106" />
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>301F4081-1989-4AC8-A02B-020246DF9209</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<Action>
+		<EntryProcedure>GetAimmsList</EntryProcedure>
+	</Action>
+	<PageObject Type="Composite Table">
+		<Location top="30" left="6" bottom="240" right="642" />
+		<ReadOnly>"Yes"</ReadOnly>
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<CellSelection>false</CellSelection>
+		<MultipleRowSelection>false</MultipleRowSelection>
+		<Domain>
+			<Identifier>AIMVER</Identifier>
+			<Index Name="AIMVER">
+				<TitleText>"Version"</TitleText>
+			</Index>
+		</Domain>
+		<ExplicitIdentifier>
+			<Identifier>AimmsDescription( AIMVER -&gt; AimmsVersion )</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<TitleText>"Description"</TitleText>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="246" left="564" bottom="270" right="642" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Refresh"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GetAimmsList</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Rectangle">
+		<Location top="282" left="6" bottom="426" right="642" />
+		<Shape>In-Shadow</Shape>
+		<FillColor>
+			<UserColor GUID="4C29CF98-3E51-4BAA-8563-90FCE3E3DF3B">default background</UserColor>
+		</FillColor>
+		<LineColor RGB="#000000" />
+		<LineWidth>2</LineWidth>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="276" left="12" bottom="294" right="132" />
+		<TabOrder>6</TabOrder>
+		<TabStop>false</TabStop>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="None" MarginTop="1" MarginRight="4" MarginBottom="1" MarginLeft="4" />
+		<BackgroundColor>
+			<UserColor GUID="4C29CF98-3E51-4BAA-8563-90FCE3E3DF3B">default background</UserColor>
+		</BackgroundColor>
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>"Aimms Version Detail:"</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="300" left="24" bottom="414" right="552" />
+		<TabOrder>3</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>PGUI_NewAimmsVersion</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+			<Title>"Version Number"</Title>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>PGUI_NewAimmsDescription</Identifier>
+			<NumberFormat Width="50" Decimals="0" Alignment="Left" ShowDefaults="true" />
+			<Title>"Description"</Title>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="360" left="564" bottom="384" right="630" />
+		<ReadOnly>PGUI_NewAimms</ReadOnly>
+		<TabOrder>5</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Delete"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_DeleteAimmsVersion</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="390" left="564" bottom="414" right="630" />
+		<TabOrder>4</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Security"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>GUI_EditAuthNewAIMMS</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="6" left="6" bottom="24" right="162" />
+		<TabOrder>8</TabOrder>
+		<TabStop>false</TabStop>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="None" MarginTop="1" MarginRight="4" MarginBottom="1" MarginLeft="4" />
+		<BackgroundColor Transparent="true" />
+		<TextColor>
+			<UserColor GUID="701D5E4D-A50B-4FD8-B7AD-7ED61961A523">default foreground</UserColor>
+		</TextColor>
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>"All Published AIMMS versions:"</Identifier>
+		</ExplicitIdentifier>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>GetAimmsList</Symbol>
+			<Symbol>GUI_EditAuthNewAIMMS</Symbol>
+			<Symbol>PGUI_NewAimmsDescription</Symbol>
+			<Symbol>AimmsVersion</Symbol>
+			<Symbol>GUI_DeleteAimmsVersion</Symbol>
+			<Symbol>AIMVER</Symbol>
+			<Symbol>AimmsDescription</Symbol>
+			<Symbol>PGUI_NewAimms</Symbol>
+			<Symbol>PGUI_NewAimmsVersion</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

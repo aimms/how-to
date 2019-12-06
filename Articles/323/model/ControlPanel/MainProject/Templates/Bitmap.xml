@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2013-11-22 21:07:09" NeedsCompiledModel="false">
+	<Location top="32" left="78" bottom="693" right="763" />
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>301F4081-1989-4AC8-A02B-020246DF9209</ProjectUUID>
+	<IsDialogPage>true</IsDialogPage>
+	<TemplatesTabOrderPosition>2</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Picture">
+		<Location top="0" left="0" bottom="282" right="690" />
+		<FileName LiteralFileName="true">"&lt;lib:pro&gt;:bitmaps\bg-black-jquery-ui.jpg"</FileName>
+		<Display>ActualSize</Display>
+	</PageObject>
+	<PageObject Type="Line">
+		<Location top="36" left="0" bottom="36" right="684" />
+		<LineColor RGB="#c0c0c0" />
+	</PageObject>
+	<UsedReferences>
+		<Model />
+	</UsedReferences>
+</Page>

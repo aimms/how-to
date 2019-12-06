@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PageManager>
+	<Page Name="Control Panel" PageGUID="6395D696-7C26-4A87-B741-68BB5B4A9B68">
+		<Page Name="Aimms List" PageGUID="A492BF78-BD57-4520-A598-867451BA013F" />
+		<Page Name="Project List" PageGUID="145A7F4C-70D1-474E-B645-8310274508DF">
+			<Page Name="Permissions Overview" PageGUID="ED0B740A-EA7E-45FA-B082-C7F26E83D98C" />
+			<Page Name="Model Attributes" PageGUID="34B8C8BD-93AD-41D8-9B2C-8672BB96D593" />
+		</Page>
+		<Page Name="User Database" PageGUID="5BD892D1-F459-4FF5-8C27-58B2D6FA1A73" />
+		<Page Name="Session List" PageGUID="13224377-6DDC-4E90-ABA4-9768C8A221B8" />
+		<Page Name="Storage Manager" PageGUID="8566BE5A-E0F8-48A4-8B35-4E29DA68AE78">
+			<Page Name="Storage Add" PageGUID="92AAD0E5-BC0E-41DB-BFA3-83C193631D97" />
+		</Page>
+	</Page>
+	<Page Name="Service Configuration" PageGUID="B83F1AB2-4C01-4B75-B205-09AD7438B834" />
+	<Page Name="Authorization Manager" PageGUID="05156AF2-0F6F-4124-BE48-0857EAA32B15" />
+	<Page Name="All Data Pages" PageGUID="991D814C-1873-497C-BF28-67675042EAC9">
+		<Page Name="[Data Page] PROUserGroup" PageGUID="2264861B-0C62-4539-8486-22BCDF156CCA" />
+	</Page>
+</PageManager>

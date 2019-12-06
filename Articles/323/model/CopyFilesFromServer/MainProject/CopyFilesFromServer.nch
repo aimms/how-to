@@ -1,0 +1,10 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"Section_1" "Utils_recursively_visit_PRO_Storage_Folder_Structture" "2019-01-23 15:33:33"
+"prGetAllDirectories" "pr_GetAllDirectories" "2019-01-23 15:35:17"
+"prGetFolders" "pr_GetFolders" "2019-01-23 15:35:21"
+"prGetFiles" "pr_GetFiles" "2019-01-23 15:35:26"
+"prGetAllFiles" "pr_GetAllFiles" "2019-01-23 15:35:31"
+"Section_1" "Select_Folder_on_PRO_Storage" "2019-01-25 08:58:32"
+"sp_msg" "sp_errmsg" "2019-01-25 09:47:24"
+"ep_FileNo" "ep_errFileNo" "2019-01-25 09:48:36"
+"Copy_pr_SelectStorageFolder_OK" "pr_SelectStorageFolder_Cancel" "2019-01-25 12:47:53"
