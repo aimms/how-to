@@ -1,0 +1,19 @@
+## ams_version=1.0
+
+Section CommonDeclarationsForDataExchange {
+    Parameter p_NumberOfDifferentKindOfFruit {
+        Definition: count( i_fruit | p_Amount(i_fruit) );
+    }
+    Parameter p_Delivery {
+        IndexDomain: (i_fruit,i_date);
+    }
+    Set s_Fruits {
+        Index: i_fruit;
+    }
+    Parameter p_Amount {
+        IndexDomain: i_fruit;
+    }
+    Set s_Dates {
+        Index: i_date;
+    }
+}
