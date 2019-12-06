@@ -1,23 +1,27 @@
-The Blinechart - overlay of the bar chart with a line chart
+Combine Bar Chart and Line Chart
 =============================================================
 
 .. meta::
-   :description: The Blinechart is a combo of linechart and barchart
+   :description: What happens when you combine a linechart and barchart? "Bline Chart"
    :keywords: linechart, barchart, widget, WebUI, Application Specific Resource
+
+Sometimes you may want to combine a bar and linechart in one widget. We'll call this a "blinechart." 
+
+The example shown below has a single y-axis.
+
 
 .. image:: images/blinechart.png
     :align: center
 
-Above a blinechart is shown; a combination of a bar and linechart in one widget. This version has a single y-axis.
 
-The blinechart is provided "as is"; there is no support on it.
+(The blinechart is not a supported feature, so this handy tip is provided "as is".)
 
-It is an example on how to use Application Specific Resources (ASR).
+It is an example of how to use Application Specific Resources (ASR).
 
 This widget has a number of assumptions regarding the data, and a couple of configurations as outlined below.
 
-Usage
-----------
+Using the blinechart
+---------------------
 
 The blinechart assumes you have two identifiers in your contents, in a specific order:
 
@@ -33,7 +37,7 @@ The linechart will always overlay the barchart.
 
 Pivoting
 ^^^^^^^^
-^
+
 For this widget, it is required to have "<IDENTIFIER-SET>" in the layers; make sure the pivoting respects this.
 
 Any other indexes can be ordered freely in the "headers".
@@ -58,4 +62,9 @@ The axis labels do not automatically size to their contents.
 If your indexes have long names, they might not fit inside the widget as a result. 
 To change, this, update the "b" (for bottom) value on line 15 of jquery.blinechart.js to a higher number.
 
-The above example can be :download:`AIMMS project download <model/blineTest.zip>`  
+Example download
+---------------------
+
+This example AIMMS project is available for download below:
+
+* :download:`blineTest.zip <model/blineTest.zip>`  
