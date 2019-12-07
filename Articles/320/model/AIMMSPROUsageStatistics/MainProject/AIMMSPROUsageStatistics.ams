@@ -3,8 +3,9 @@
 Model Main_AIMMSPROUsageStatistics {
     Procedure pr_Test {
         Body: {
-            pr_ReadInitialCaseData();
-            pr_ComputeStackedBarCharts();
+            !pr_ReadInitialCaseData();
+            !pr_ComputeStackedBarCharts();
+            display webui::AllDialogPages;
         }
     }
     DeclarationSection Generic_declarations {
@@ -95,7 +96,21 @@ Model Main_AIMMSPROUsageStatistics {
                 	Datasource  :  sp_Datasource, 
                 	interactive :  1, 
                 	timeout     :  30);
-                display CurrentErrorMessage ;
+            }
+        }
+        Procedure pr_ToggleTrackingOn {
+            Body: {
+                CurrentErrorMessage := "" ;
+                p_retCode :=DirectSQL(
+                	Datasource :  sp_Datasource, 
+                	SQLcommand :  "UPDATE aimms.configuration_parameters " +
+                                      "SET value = 1 " +
+                                      "WHERE name='enableStoring'; ");
+                CloseDataSource(sp_Datasource);
+                if p_retCode <> 1 or CurrentErrorMessage <> "" then
+                	raise error "Toggling session tracking on failed: " +
+                	            CurrentErrorMessage ;
+                endif ;
             }
         }
         Procedure pr_ReadData {
@@ -103,6 +118,7 @@ Model Main_AIMMSPROUsageStatistics {
                 block 
                 	empty Session_information_read_in;
                 	read from table dbpr_ReadProSessionData();
+                	CloseDataSource(sp_Datasource);
                 onerror ep_err do
                 	gss::pr_GlobalErrorHandler(ep_err);
                 endblock ;
@@ -136,31 +152,31 @@ Model Main_AIMMSPROUsageStatistics {
             }
         }
         DeclarationSection database_connection {
+            Property: NoSave;
+            Parameter p01_isAnAdmin {
+                InitialData: 0;
+            }
             StringParameter sp_Datasource {
                 Definition: {
-                    "PostgreSQL35W"
+                    !"PostgreSQL35W"
                     
-                    !SQLCreateConnectionString(
-                    !	DatabaseInterface              :  'ODBC', 
-                    !	DriverName                     :  "PostgreSQL Unicode(x64)", 
-                    !	ServerName                     :  "aimmspro-local", 
-                    !	DatabaseName                   :  "aimms", 
-                    !	UserId                         :  "aimms", 
-                    !	Password                       :  "aimms123", 
-                    !	AdditionalConnectionParameters :  "")
-                    
-                    !SQLCreateConnectionString(
-                    !    	DatabaseInterface              :  'ODBC', 
-                    !    	DriverName                     :  "MySQL ODBC 5.3 ANSI Driver", 
-                    !    	ServerName                     :  "localhost", 
-                    !    	DatabaseName                   :  "aimms", 
-                    !    	UserId                         :  "aimms", 
-                    !    	Password                       :  "aimms123", 
-                    !    	AdditionalConnectionParameters :  "");
-                    !
+                    SQLCreateConnectionString(
+                    	DatabaseInterface              :  'ODBC', 
+                    	DriverName                     :  "PostgreSQL Unicode(x64)", 
+                    	ServerName                     :  "localhost",  
+                    	DatabaseName                   :  "aimms", 
+                    	UserId                         :  "aimms", 
+                    	Password                       :  sp_Password, ! "aimms123", 
+                    	AdditionalConnectionParameters :  "port=15432")
                 }
             }
-            Parameter p_TestDataSource;
+            Parameter p_TestDataSource {
+                InitialData: 0;
+            }
+            Parameter p_retCode;
+            StringParameter sp_Password {
+                InitialData: "";
+            }
             DatabaseTable db_SessionTable {
                 DataSource: "data\\AIMMSPROUsageStatistics.dsn";
                 TableName: "SessionTable";
@@ -176,6 +192,38 @@ Model Main_AIMMSPROUsageStatistics {
                 CaseFileLoad(
                 	url                         :  "data\\initialData.data", 
                 	keepUnreferencedRuntimeLibs :  0);
+            }
+        }
+        Procedure pr_ReadAimmsPro {
+            Body: {
+                block
+                	pro::sessionmanager::ListSessionsUsage(
+                		beginDate   :  "1970-01-01 00:00:00:00", 
+                		endDate     :  CurrentToString("%c%y-%m-%d %H:%M:%S:%t"), 
+                		sessionList :  s_Sessions, 
+                		sessionType :  sp_SessValueData( i_session, 'SessionTypes' ), 
+                		accountName :  sp_SessValueData( i_session, 'AccountNames' ), 
+                		environment :  sp_SessValueData( i_session, 'Environments' ), 
+                		username    :  sp_SessValueData( i_session, 'UserNames'    ), 
+                		appName     :  sp_SessValueData( i_session, 'Applications' ), 
+                		appVersion  :  sp_SessValueData( i_session, 'AppVersions'  ), 
+                		startedAt   :  sp_SessStartTimes( i_session ), 
+                		duration    :  p_sessDur( i_session ), 
+                		peakMemory  :  p_sessMem( i_session ));
+                	p_SessDurations(i_session) := (p_sessDur( i_session ))[milliseconds];
+                	p_SessPeakMemory( i_session ) := (p_sessMem(i_session))[byte];
+                onerror ep_err do
+                	gss::pr_GlobalErrorHandler(ep_err);
+                endblock ;
+            }
+            ElementParameter ep_err {
+                Range: errh::PendingErrors;
+            }
+            Parameter p_sessDur {
+                IndexDomain: i_session;
+            }
+            Parameter p_sessMem {
+                IndexDomain: i_session;
             }
         }
     }
@@ -1285,27 +1333,42 @@ Model Main_AIMMSPROUsageStatistics {
             StringParameter sp_StackedBarChartsSecondaryActions {
                 IndexDomain: (i_si, webui::indexPageActionSpec);
                 Definition: {
-                    data {
-                    (1,displaytext): "Enable session tracking (working on it)",
-                    (1,icon): "aimms-database-edit2",
-                    (1,procedure): "pr_EnableSessionTracking",
-                    (1,state): "Inactive",
+                    {
                     
-                    (2,displaytext): "Read database",
-                    (2,icon): "aimms-database",
-                    (2,procedure): "pr_ReadData",
-                    (2,state): "Active" ,
+                    ('1','displaytext'): "Enable tracking",
+                    ('1','icon'       ): "aimms-database-edit2",
+                    ('1','procedure'  ): "pr_EnableSessionTracking",
+                    ('1','state'      ): if p01_isAnAdmin then "Active" else "Inactive" endif,
                     
-                    (3,displaytext): "Load input case",
-                    (3,icon): "aimms-file-zip",
-                    (3,procedure): "pr_ReadInitialCaseData",
-                    (3,state): "Active" ,
+                    ('2','displaytext'): "Read database",
+                    ('2','icon'       ): "aimms-database",
+                    ('2','procedure'  ): "pr_ReadData",
+                    ('2','state'      ): if p01_isAnAdmin then "Active" else "Inactive" endif,
                     
-                    (4,displaytext): "Stack the bars",
-                    (4,icon): "aimms-spinner3",
-                    (4,procedure): "pr_ComputeStackedBarCharts",
-                    (4,state): "Active" 
+                    ('3','displaytext'): "Read via PRO",
+                    ('3','icon'       ): "aimms-binoculars",
+                    ('3','procedure'  ): "pr_ReadAimmsPRO",
+                    ('3','state'      ): if p01_isAnAdmin then "Active" else "Inactive" endif,
                     
+                    ('4','displaytext'): "Load input case",
+                    ('4','icon'       ): "aimms-file-zip",
+                    ('4','procedure'  ): "pr_ReadInitialCaseData",
+                    ('4','state'      ): "Hidden" ,
+                    
+                    ('5','displaytext'): "Stack the bars",
+                    ('5','icon'       ): "aimms-spinner3",
+                    ('5','procedure'  ): "pr_ComputeStackedBarCharts",
+                    ('5','state'      ): "Active" ,
+                    
+                    ('6','displaytext'): "CreateErrorReport",
+                    ('6','icon'       ): "aimms-typewriter",
+                    ('6','procedure'  ): "pr_CreateErrorReport",
+                    ('6','state'      ): "Active",
+                    
+                    ('7','displaytext'): "ClearErrors",
+                    ('7','icon'       ): "aimms-bin5",
+                    ('7','procedure'  ): "pr_ClearErrors",
+                    ('7','state'      ): "Active" 
                     
                     }
                 }
@@ -1384,6 +1447,9 @@ Model Main_AIMMSPROUsageStatistics {
                     			formatString("%e",i_bcc+1 )
                     		endif
                 }
+            }
+            Set s_DialogPageDefaultActions {
+                Definition: data { Cancel, OK };
             }
             Procedure pr_BarChartSelectSessions {
                 Body: {
@@ -1567,17 +1633,55 @@ Model Main_AIMMSPROUsageStatistics {
             Procedure pr_EnableSessionTracking {
                 Body: {
                     block 
-                    	raise error "pr_EnableSessionTracking(): not implemented yet";
+                    	sp_Password := "" ;
+                    	webui::OpenDialogPage(
+                    		pageId  :  'obtainpasswordfortracking_1', 
+                    		title   :  "Provide password for AIMMS PRO database", 
+                    		actions :  s_DialogPageDefaultActions, 
+                    		onDone  :  'pr_OnDoneObtainPasswordSessionTracking');
+                    	!raise error "pr_EnableSessionTracking(): not implemented yet";
                     	! Open a dialog page
                     	! obtain password
                     	! Create connection
                     	! DirectSql - change the number.
                     onerror ep_err do
                     	gss::pr_GlobalErrorHandler(ep_err);
+                    	sp_password := "" ;
+                    	CloseDataSource(sp_Datasource);
                     endblock ;
                 }
                 ElementParameter ep_err {
                     Range: errh::PendingErrors;
+                }
+            }
+            Procedure pr_OnDoneObtainPasswordSessionTracking {
+                Arguments: (sp_response);
+                Body: {
+                    block
+                    	if sp_response = "OK" then
+                    		pr_ToggleTrackingOn();
+                    	else
+                    		raise warning "You cancelled out of the dialog; tracking not enabled" ;
+                    	endif ;
+                    onerror ep_err do
+                    	gss::pr_GlobalErrorHandler(ep_err);
+                    endblock ;
+                }
+                StringParameter sp_response {
+                    Property: Input;
+                }
+                ElementParameter ep_err {
+                    Range: errh::PendingErrors;
+                }
+            }
+            Procedure pr_CreateErrorReport {
+                Body: {
+                    gss::pr_ReportCurrentErrorsToTextFile("log\\usage.errorLogging");
+                }
+            }
+            Procedure pr_ClearErrors {
+                Body: {
+                    gss::pr_ClearErrors();
                 }
             }
         }
@@ -1608,16 +1712,6 @@ Model Main_AIMMSPROUsageStatistics {
             }
         }
         Section Error_Handler {
-            Procedure pr_CreateErrorReport {
-                Body: {
-                    gss::pr_ReportCurrentErrorsToTextFile("log\\usage.errorLogging");
-                }
-            }
-            Procedure pr_ClearErrors {
-                Body: {
-                    gss::pr_ClearErrors();
-                }
-            }
             Set s_SomeIntegers {
                 SubsetOf: Integers;
                 Index: i_si;
@@ -1681,9 +1775,36 @@ Model Main_AIMMSPROUsageStatistics {
             StringParameter sp_LastEvent;
         }
         Procedure PostMainInitialization {
+            Body: {
+                if pro::GetPROEndPoint() then
+                	p01_isAnAdmin := 0 ;
+                	pro::Initialize();
+                	if pro::GetCurrentUserInfo(
+                		environment   :  sp_env, 
+                		username      :  sp_usr, 
+                		userBucket    :  sp_bkt, 
+                		userGroups    :  s_groups, 
+                		userGroupname :  sp_GroupNames) then
+                		if exists( i_grp | sp_GroupNames(i_grp) = "admin" ) then
+                			p01_isAnAdmin := 1 ;
+                		endif ;
+                	endif ;
+                else
+                	p01_isAnAdmin := 1 ;
+                endif ;
+            }
             Comment: {
                 "Add initialization statements here that require that the libraries are already initialized properly,
                 or add statements that require the Data Management module to be initialized."
+            }
+            StringParameter sp_env;
+            StringParameter sp_usr;
+            StringParameter sp_bkt;
+            Set s_Groups {
+                Index: i_grp;
+            }
+            StringParameter sp_GroupNames {
+                IndexDomain: i_grp;
             }
         }
         Procedure MainExecution;

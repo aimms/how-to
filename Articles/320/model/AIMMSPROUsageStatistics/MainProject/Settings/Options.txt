@@ -25,4 +25,3 @@ rounding_compatibility Aimms_3_7
 * XA 16
 * NETSOL
 * Environment
-Default_UI 0
