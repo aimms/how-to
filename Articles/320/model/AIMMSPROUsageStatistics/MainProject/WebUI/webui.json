@@ -17,25 +17,7 @@
                 "name": "Timebased Event Information",
                 "type": "page",
                 "slug": "timebased_event_information",
-                "children": []
-              },
-              {
-                "name": "Full Event Information",
-                "type": "page",
-                "slug": "full_event_information",
                 "children": [
-                  {
-                    "name": "Full Session Information",
-                    "type": "page",
-                    "slug": "full_session_information",
-                    "children": []
-                  },
-                  {
-                    "name": "Sessions and Events",
-                    "type": "page",
-                    "slug": "sessions_and_events",
-                    "children": []
-                  },
                   {
                     "name": "StackSelector",
                     "type": "sidepanel",
@@ -43,15 +25,15 @@
                     "children": []
                   },
                   {
-                    "name": "AppFilter",
-                    "type": "sidepanel",
-                    "slug": "appfilter_1",
-                    "children": []
-                  },
-                  {
                     "name": "UseFilter",
                     "type": "sidepanel",
                     "slug": "usefilter_1",
+                    "children": []
+                  },
+                  {
+                    "name": "AppFilter",
+                    "type": "sidepanel",
+                    "slug": "appfilter_1",
                     "children": []
                   }
                 ]
@@ -94,108 +76,6 @@
           }
         }
       ]
-    }
-  },
-  "pages/full_event_information": {
-    "onload": {
-      "literal": {
-        "type": "procedure",
-        "value": "pr_Open_Full_Event_Information"
-      }
-    },
-    "sidepanels": {
-      "aimms": {
-        "contents": [
-          "sp_SidePanelsFullEventPage"
-        ],
-        "slices": [
-          {
-            "identifier": "sp_SidePanelsFullEventPage",
-            "slice": [
-              {
-                "index": "i_spo",
-                "type": "free",
-                "value": "i_spo"
-              },
-              {
-                "index": "webui::indexSidePanelSpec",
-                "type": "free",
-                "value": "webui::indexSidePanelSpec"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "widgets": {
-      "literal": [
-        {
-          "uri": "TimebarGanttChart",
-          "layoutInfo": {
-            "width": "12",
-            "height": "1",
-            "customPosition": ""
-          }
-        },
-        {
-          "uri": "FullEventInformation",
-          "layoutInfo": {
-            "width": "12",
-            "height": "2",
-            "customPosition": ""
-          }
-        },
-        {
-          "uri": "NumberOfSessionsInUse",
-          "layoutInfo": {
-            "width": "12",
-            "height": "2",
-            "customPosition": ""
-          }
-        },
-        {
-          "uri": "MemoryInUseBySessions",
-          "layoutInfo": {
-            "width": "12",
-            "height": "2",
-            "customPosition": ""
-          }
-        },
-        {
-          "uri": "bl",
-          "layoutInfo": {
-            "width": "12",
-            "height": "3",
-            "customPosition": ""
-          }
-        }
-      ]
-    }
-  },
-  "pages/full_session_information": {
-    "widgets": {
-      "literal": [
-        {
-          "uri": "TableFullSession",
-          "layoutInfo": {
-            "width": "14",
-            "height": "3",
-            "customPosition": ""
-          }
-        },
-        {
-          "uri": "fake",
-          "layoutInfo": {
-            "width": "2",
-            "height": "1"
-          }
-        }
-      ]
-    }
-  },
-  "pages/sessions_and_events": {
-    "widgets": {
-      "literal": []
     }
   },
   "pages/stackselector_1": {
@@ -426,33 +306,6 @@
       }
     }
   },
-  "widgets/bl": {
-    "aimms.widget.type": {
-      "literal": "blinechart"
-    },
-    "contents": {
-      "aimms": {
-        "contents": [
-          "p_MemoryBySessionsAfterEvent",
-          "p_AverageMemoryInUse"
-        ]
-      }
-    },
-    "contents.partition": {
-      "literal": {
-        "header": [
-          "i_Event"
-        ],
-        "layers": [
-          "<IDENTIFIER-SET>"
-        ],
-        "aggregated": []
-      }
-    },
-    "title": {
-      "literal": "Blinechart"
-    }
-  },
   "widgets/ControlScalars": {
     "aimms.widget.type": {
       "literal": "scalar"
@@ -490,14 +343,6 @@
     },
     "widget.visible": {
       "literal": 0
-    }
-  },
-  "widgets/fake": {
-    "aimms.widget.type": {
-      "literal": "button"
-    },
-    "title": {
-      "literal": "fake"
     }
   },
   "widgets/FocusEvents": {
@@ -581,189 +426,6 @@
       }
     }
   },
-  "widgets/FullEventInformation": {
-    "aimms.widget.type": {
-      "literal": "table"
-    },
-    "contents": {
-      "aimms": {
-        "slices": [
-          {
-            "identifier": "ep_EvEventTypes",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
-            "identifier": "p_EvPeakMemory",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
-            "identifier": "sp_EvMoment",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
-            "identifier": "ep_EvValueData",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              },
-              {
-                "index": "i_valueType",
-                "type": "free",
-                "value": "i_valueType"
-              }
-            ]
-          }
-        ],
-        "contents": [
-          "sp_EvMoment",
-          "ep_EvEventTypes",
-          "ep_EvValueData",
-          "p_EvPeakMemory"
-        ]
-      }
-    },
-    "contents.numdecimals": {
-      "literal": 0
-    },
-    "contents.partition": {
-      "literal": {
-        "rowHeader": [
-          "i_Event",
-          "i_ShownEvent"
-        ],
-        "colHeader": [
-          "i_valueType",
-          "<IDENTIFIER-SET>"
-        ],
-        "aggregated": []
-      }
-    },
-    "custom.column.widths": {
-      "literal": [
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "ep_EvEventTypes"
-          },
-          "width": 20.2
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "p_EvPeakMemory"
-          },
-          "width": 24.28571428571429
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "sp_EvMoment"
-          },
-          "width": 37
-        },
-        {
-          "type": "rowHeader",
-          "colKey": "i_ShownEvent",
-          "width": 28.17567567567567
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "i_valueType": "SessionTypes",
-            "<IDENTIFIER-SET>": "ep_EvValueData"
-          },
-          "width": 20.70042831947594
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "i_valueType": "AccountNames",
-            "<IDENTIFIER-SET>": "ep_EvValueData"
-          },
-          "width": 23.000000000000005
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "i_valueType": "Environments",
-            "<IDENTIFIER-SET>": "ep_EvValueData"
-          },
-          "width": 22.072500000000006
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "i_valueType": "UserNames",
-            "<IDENTIFIER-SET>": "ep_EvValueData"
-          },
-          "width": 19.8
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "i_valueType": "",
-            "<IDENTIFIER-SET>": "sp_EvMoment"
-          },
-          "width": 30.4
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "i_valueType": "",
-            "<IDENTIFIER-SET>": "p_EvPeakMemory"
-          },
-          "width": 26
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "i_valueType": "AppVersions",
-            "<IDENTIFIER-SET>": "ep_EvValueData"
-          },
-          "width": 22.3926812104152
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "i_valueType": "Applications",
-            "<IDENTIFIER-SET>": "ep_EvValueData"
-          },
-          "width": 33.425850340136047
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "i_valueType": "",
-            "<IDENTIFIER-SET>": "ep_EvEventTypes"
-          },
-          "width": 21
-        }
-      ]
-    },
-    "title": {
-      "literal": "Selected events"
-    }
-  },
   "widgets/GanttChartTimeBar": {
     "aimms.widget.type": {
       "literal": "ganttchart"
@@ -818,48 +480,6 @@
     },
     "title": {
       "literal": "Timebar"
-    }
-  },
-  "widgets/MemoryInUseBySessions": {
-    "aimms.widget.type": {
-      "literal": "linechart"
-    },
-    "contents": {
-      "aimms": {
-        "slices": [
-          {
-            "identifier": "p_MemoryBySessionsAfterEvent",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          },
-          {
-            "identifier": "p_AverageMemoryInUse",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          }
-        ],
-        "contents": [
-          "p_MemoryBySessionsAfterEvent"
-        ]
-      }
-    },
-    "contents.displaydomain": {
-      "literal": {
-        "p_memorybysessionsafterevent": "1"
-      }
-    },
-    "title": {
-      "literal": "Memory in Use"
     }
   },
   "widgets/MemoryInUseStackedBySessionType": {
@@ -1044,42 +664,6 @@
       "literal": "User name"
     }
   },
-  "widgets/NumberOfSessionsInUse": {
-    "aimms.widget.type": {
-      "literal": "linechart"
-    },
-    "contents": {
-      "aimms": {
-        "contents": [
-          "p_NumberOfSessionsAfterEvent"
-        ],
-        "prefix": "aimms",
-        "displaydomain": {
-          "p_numberofsessionsafterevent": "1"
-        },
-        "slices": [
-          {
-            "identifier": "p_NumberOfSessionsAfterEvent",
-            "slice": [
-              {
-                "index": "i_Event",
-                "type": "subset",
-                "value": "i_ShownEvent"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "contents.displaydomain": {
-      "literal": {
-        "p_numberofsessionsafterevent": "1"
-      }
-    },
-    "title": {
-      "literal": "Number Of Sessions In Use"
-    }
-  },
   "widgets/SessionsInUseStackedBySessionType": {
     "aimms.widget.type": {
       "literal": "barchart"
@@ -1155,233 +739,6 @@
           }
         ]
       }
-    }
-  },
-  "widgets/TableFullSession": {
-    "aimms.widget.type": {
-      "literal": "table"
-    },
-    "contents": {
-      "aimms": {
-        "contents": [
-          "sp_SessAccountName",
-          "sp_SessStartTimes",
-          "sp_SessSessionType",
-          "sp_SessEnv",
-          "sp_SessUserName",
-          "sp_SessApp",
-          "sp_SessAppVersion",
-          "p_SessDurations",
-          "p_SessPeakMemory"
-        ]
-      }
-    },
-    "contents.numdecimals": {
-      "literal": 0
-    },
-    "contents.partition": {
-      "literal": {
-        "rowHeader": [
-          "i_session"
-        ],
-        "colHeader": [
-          "<IDENTIFIER-SET>"
-        ],
-        "aggregated": []
-      }
-    },
-    "custom.column.widths": {
-      "literal": [
-        {
-          "type": "colHeader",
-          "colKey": {
-            "i_session": "8efdc149fca84012a0a5d87fb6f24b04"
-          },
-          "width": 62.63673114180547
-        },
-        {
-          "type": "rowHeader",
-          "colKey": "<IDENTIFIER-SET>",
-          "width": 38.95600074626866
-        },
-        {
-          "type": "rowHeader",
-          "width": 31.3440604477612
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "sp_StartTimes"
-          },
-          "width": 41.19666210431215
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "sp_Env"
-          },
-          "width": 14.773515909090908
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "sp_app"
-          },
-          "width": 21.757167619739538
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "p_Durations"
-          },
-          "width": 40.20587988992427
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "sp_SessionType"
-          },
-          "width": 29.2397269566895
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "sp_UserName"
-          },
-          "width": 29.349655883249676
-        },
-        {
-          "type": "rowHeader",
-          "colKey": "i_session",
-          "width": 52.12299611270766
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "sp_AppVersion"
-          },
-          "width": 28.49565236608654
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "p_peakMemory"
-          },
-          "width": 26.92321598734417
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "sp_SessSessionType"
-          },
-          "width": 30.677083333333333
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "sp_SessEnv"
-          },
-          "width": 25.2
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "sp_SessUserName"
-          },
-          "width": 23.06122448979592
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "sp_SessApp"
-          },
-          "width": 17.142857142857144
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "p_SessDurations"
-          },
-          "width": 21.020408163265306
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "p_SessPeakMemory"
-          },
-          "width": 26.12244897959184
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "sp_SessAppVersion"
-          },
-          "width": 27.05907626208378
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "<IDENTIFIER-SET>": "sp_SessStartTimes"
-          },
-          "width": 36.89477746413831
-        }
-      ]
-    }
-  },
-  "widgets/TimebarGanttChart": {
-    "aimms.widget.type": {
-      "literal": "ganttchart"
-    },
-    "contents": {
-      "aimms": {
-        "contents": [
-          "p_TimebarTimeStart",
-          "p_TimebarDuration"
-        ]
-      }
-    },
-    "contents.partition": {
-      "literal": {
-        "resources": [
-          "i_tb_res"
-        ],
-        "jobs": [
-          "<IDENTIFIER-SET>",
-          "i_tb_job"
-        ],
-        "aggregated": []
-      }
-    },
-    "time.reference": {
-      "aimms": {
-        "contents": [
-          "sp_TimebarViewportStart"
-        ]
-      }
-    },
-    "time.resolution": {
-      "aimms": {
-        "contents": [
-          "p_TimebarTimeunit"
-        ]
-      }
-    },
-    "time.viewport.end": {
-      "aimms": {
-        "contents": [
-          "sp_TimebarViewportEnd"
-        ]
-      }
-    },
-    "time.viewport.start": {
-      "aimms": {
-        "contents": [
-          "sp_TimebarViewportStart"
-        ]
-      }
-    },
-    "widget.visible": {
-      "literal": 0
     }
   }
 }
