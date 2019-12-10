@@ -94,6 +94,10 @@ LibraryModule Library_GuardServerSession {
                 	p_JobErrorLines( ep_JobErrorMessageNumber,ep_StackPosition) := errh::Line(ep_err,ep_StackPosition);
                 	p_errStackPos += 1 ;
                 endwhile ;
+                
+                if p01_locSeenErrorsAreHandled then
+                	errh::MarkAsHandled( ep_err );
+                endif ;
             }
             ElementParameter ep_err {
                 Range: errh::PendingErrors;
@@ -106,6 +110,13 @@ LibraryModule Library_GuardServerSession {
             Parameter p_errStackPos;
             ElementParameter ep_StackPosition {
                 Range: s_StackPositions;
+            }
+        }
+        Procedure pr_SeenErrorsAreHandled {
+            Parameter p01_AreHandled {
+                Range: binary;
+                Default: 1;
+                Property: Optional;
             }
         }
         Procedure pr_GuardAndProfileServerJob {
@@ -150,6 +161,10 @@ LibraryModule Library_GuardServerSession {
         }
     }
     Section Private_Section {
+        Parameter p01_locSeenErrorsAreHandled {
+            Range: binary;
+            InitialData: 0;
+        }
         Procedure pr_SampleProc;
         Procedure LibraryInitialization {
             Comment: "Add initialization statements here that do not require any other library being initialized already.";

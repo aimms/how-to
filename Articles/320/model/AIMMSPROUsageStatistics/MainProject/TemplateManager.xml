@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<TemplateManager>
+	<Page Name="All Data Pages" PageGUID="EBACBF4A-7318-42C8-BF91-E0828BEE58C5" />
+	<Page Name="[Data Page] pr_NoSessionsMemInUse p_NumberOfSessionByUserAfterEventBySession" PageGUID="12F66F18-1512-442C-80F0-B3F4251097DF" />
+</TemplateManager>
