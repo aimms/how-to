@@ -3,11 +3,11 @@
    :align: right
    :alt: AIMMS Server Commands Help & Support
 
-Delegate To Server
+AIMMS PRO API
 ===================
 
 .. meta::
-   :description: Help and support managing server jobs in AIMMS PRO.
+   :description: Using PRO API to delegate and start jobs on the AIMMS PRO server
 
 
 .. Need some filler text!
