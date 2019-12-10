@@ -1,13 +1,6 @@
 ## ams_version=1.0
 
 Model Main_AIMMSPROUsageStatistics {
-    Procedure pr_Test {
-        Body: {
-            !pr_ReadInitialCaseData();
-            !pr_ComputeStackedBarCharts();
-            display webui::AllDialogPages;
-        }
-    }
     DeclarationSection Generic_declarations {
         Quantity SI_Time_Duration {
             BaseUnit: hour;
@@ -27,68 +20,10 @@ Model Main_AIMMSPROUsageStatistics {
         Quantity qnt_Memory {
             BaseUnit: MB;
             Conversions: byte->MB : #-># / 1048576;
+            Comment: "Expresses the value for Computer Memory";
         }
     }
     Section database_connections {
-        Section Generate_example {
-            Parameter p_NoSessions {
-                InitialData: {
-                    10000
-                    ! with a million sessions, some procedures start taking several minutes.
-                }
-            }
-            StringParameter sp_StartTime {
-                InitialData: {
-                    
-                    "2019-01-01 00"
-                }
-            }
-            StringParameter sp_EndTime {
-                InitialData: "2019-12-31 23:59:59:99";
-            }
-            Parameter p_TotalTime {
-                Unit: tick;
-            }
-            Parameter p_ticksFromStart {
-                Unit: tick;
-            }
-            StringParameter sp_ThisSessionStart;
-            Parameter p_ThisSessionDuration {
-                Unit: tick;
-            }
-            ElementParameter ep_addThis {
-                Range: s_Sessions;
-            }
-            Procedure pr_GenerateArtificialSessionData {
-                Body: {
-                    empty s_Sessions ;
-                    p_TotalTime := StringToMoment( "%c%y-%m-%d %H", [hour], sp_StartTime, sp_EndTime);
-                    while loopCount <= p_NoSessions do
-                    	p_ticksFromStart := Round(Uniform(1[tick],p_TotalTime));
-                    	sp_ThisSessionStart := MomentToString( "%c%y-%m-%d %H", [hour], sp_StartTime, p_ticksFromStart );
-                    	p_ThisSessionDuration := Exponential(1[hour],10[hour]);
-                    	SetElementAdd( s_Sessions, ep_addThis, formatString("Session%06i",loopcount));
-                    	sp_SessStartTimes(ep_addThis) := sp_ThisSessionStart;
-                    	p_SessDurations(ep_addThis) := p_ThisSessionDuration;
-                    
-                    	sp_SessValueData(ep_addThis,'AccountNames') := "ProOnPrem";
-                    	sp_SessValueData(ep_addThis,'SessionTypes') := "WinUI";
-                    	sp_SessValueData(ep_addThis,'Environments') := "ROOT";
-                    	sp_SessValueData(ep_addThis,'UserNames') := "Theo";
-                    	sp_SessValueData(ep_addThis,'Applications') := "Fabulous";
-                    	sp_SessValueData(ep_addThis,'AppVersions') := "3.14159";
-                    
-                    	p_SessPeakMemory(ep_addThis) := 123456;
-                    endwhile ;
-                }
-            }
-            Procedure pr_WriteData {
-                Body: {
-                    empty db_SessionTable ;
-                    write to table db_SessionTable;
-                }
-            }
-        }
         Procedure pr_TestDataSource {
             Body: {
                 CurrentErrorMessage := "" ;
@@ -119,6 +54,9 @@ Model Main_AIMMSPROUsageStatistics {
                 	empty Session_information_read_in;
                 	read from table dbpr_ReadProSessionData();
                 	CloseDataSource(sp_Datasource);
+                
+                	p01_StartTimeAccurateByTick := 1 ;
+                	pr_ComputeStackedBarCharts();
                 onerror ep_err do
                 	gss::pr_GlobalErrorHandler(ep_err);
                 endblock ;
@@ -158,15 +96,13 @@ Model Main_AIMMSPROUsageStatistics {
             }
             StringParameter sp_Datasource {
                 Definition: {
-                    !"PostgreSQL35W"
-                    
                     SQLCreateConnectionString(
                     	DatabaseInterface              :  'ODBC', 
                     	DriverName                     :  "PostgreSQL Unicode(x64)", 
                     	ServerName                     :  "localhost",  
                     	DatabaseName                   :  "aimms", 
                     	UserId                         :  "aimms", 
-                    	Password                       :  sp_Password, ! "aimms123", 
+                    	Password                       :  sp_Password, 
                     	AdditionalConnectionParameters :  "port=15432")
                 }
             }
@@ -186,6 +122,9 @@ Model Main_AIMMSPROUsageStatistics {
                     "SessionDuration"  -->p_SessDurations(i_session)
                 }
             }
+            Parameter p01_StartTimeAccurateByTick {
+                InitialData: 0;
+            }
         }
         Procedure pr_ReadInitialCaseData {
             Body: {
@@ -198,8 +137,8 @@ Model Main_AIMMSPROUsageStatistics {
             Body: {
                 block
                 	pro::sessionmanager::ListSessionsUsage(
-                		beginDate   :  "1970-01-01 00:00:00:00", 
-                		endDate     :  CurrentToString("%c%y-%m-%d %H:%M:%S:%t"), 
+                		beginDate   :  "1970-01-01", ! "1970-01-01 00:00:00:00", 
+                		endDate     :  CurrentToString("%c%y-%m-%d"), ! CurrentToString("%c%y-%m-%d %H:%M:%S:%t"), 
                 		sessionList :  s_Sessions, 
                 		sessionType :  sp_SessValueData( i_session, 'SessionTypes' ), 
                 		accountName :  sp_SessValueData( i_session, 'AccountNames' ), 
@@ -212,9 +151,16 @@ Model Main_AIMMSPROUsageStatistics {
                 		peakMemory  :  p_sessMem( i_session ));
                 	p_SessDurations(i_session) := (p_sessDur( i_session ))[milliseconds];
                 	p_SessPeakMemory( i_session ) := (p_sessMem(i_session))[byte];
+                
+                	p01_StartTimeAccurateByTick := 0 ;
+                	pr_ComputeStackedBarCharts();
                 onerror ep_err do
                 	gss::pr_GlobalErrorHandler(ep_err);
                 endblock ;
+            }
+            Comment: {
+                "Read all session info via the pro::sessionmanager::ListSessionsUsage. 
+                Filtering on date will be done in this application itself."
             }
             ElementParameter ep_err {
                 Range: errh::PendingErrors;
@@ -380,15 +326,19 @@ Model Main_AIMMSPROUsageStatistics {
             Block ! Normalize session start time.
                   ! Time fraction handling: AIMMS can only handle up to tick (1/100 of a second), database gives up to 6 decimals.
                   ! We're removing everthing after the first two decimals.
-                  	for i_session do
-                  		p_dotPos := findNthString( sp_SessStartTimes( i_session ), ".", -1 );
-                  		if p_dotPos then
-                  			sp_SessStartTimes( i_session ) := 
-                  				substring( sp_SessStartTimes( i_session ), 1, p_dotPos-1) +
-                  				":"+
-                  				substring( sp_SessStartTimes( i_session ), p_dotPos+1, p_dotPos + 2);
-                  		endif ;
-                  	endfor ;
+                  	if p01_StartTimeAccurateByTick then
+            		for i_session do
+            			p_dotPos := findNthString( sp_SessStartTimes( i_session ), ".", -1 );
+            			if p_dotPos then
+            				sp_SessStartTimes( i_session ) := 
+            					substring( sp_SessStartTimes( i_session ), 1, p_dotPos-1) +
+            					":"+
+            					substring( sp_SessStartTimes( i_session ), p_dotPos+1, p_dotPos + 2);
+            			endif ;
+            		endfor ;
+            	else
+            		sp_SessStartTimes( i_session ) += ":00" ;
+                  	endif ;
             endblock ;
             
             sp_SessValueData(i_session,'AccountNames')|(not sp_SessValueData(i_session,'AccountNames')) := "ProOnPrem";
@@ -429,7 +379,12 @@ Model Main_AIMMSPROUsageStatistics {
             		block ! Create work event, end of this session
             			s_WorkEvents += card(s_WorkEvents)+1 ;
             			ep_WorkEvent := last( s_WorkEvents );
-            			sp_WrkEvMoments( ep_WorkEvent ) := MomentToString("%c%y-%m-%d %H:%M:%S:%T",[tick],sp_SessStartTimes(i_session),p_SessDurations(i_Session));
+            			sp_WrkEvMoments( ep_WorkEvent ) := 
+            				MomentToString(
+            					Format        :  "%c%y-%m-%d %H:%M:%S:%T" , 
+            					unit          :  [tick], 
+            					ReferenceDate :  sp_SessStartTimes(i_session), 
+            					Elapsed       :  p_SessDurations(i_Session));
             			ep_WrkEvEventType( ep_WorkEvent ) := 'FinishSession';
             		endblock ;
             		block ! Copy session data to work event.
@@ -521,7 +476,8 @@ Model Main_AIMMSPROUsageStatistics {
         Body: {
             empty 	p_NumberOfSessionsAfterEvent, p_MemoryBySessionsAfterEvent, 
             	p_NumberOfSessionByUserAfterEvent, p_NumberOfUsersAfterEvent, 
-            	p_NumberOfSessionsAfterEventBySessionType, p_MemoryBySessionsAfterEventBySessionType;
+            	p_NumberOfSessionsAfterEventBySessionType, p_MemoryBySessionsAfterEventBySessionType,
+            	p_NumberOfSessionByUserAfterEventBySession;
             update s_ShownEvents;
             
             p_NumberOfSessionByUserAfterEvent(i_ShownEvent,ep_EvValueData(i_ShownEvent,'UserNames')) := 
@@ -949,21 +905,27 @@ Model Main_AIMMSPROUsageStatistics {
         StringParameter sp_SidePanelsFullEventPage {
             IndexDomain: (i_spo,webui::indexSidePanelSpec);
             Definition: {
-                data 
-                { ( 1, displayText ) : "App Filter"           ,  
-                  ( 1, pageId      ) : "appfilter_1"          ,
-                  ( 1, tooltip     ) : "ses-type app version" ,  
-                  ( 1, state       ) : "Active"               ,
+                {
                 
-                  ( 2, displayText ) : "User Filter"          ,
-                  ( 2, pageId      ) : "usefilter_1"          ,
-                  ( 2, tooltip     ) : "account environment user",  
-                  ( 2, state       ) : "Active"               ,
+                  ( '1', 'displayText' ) : "App Filter",  
+                  ( '1', 'pageId'      ) : "appfilter_1",
+                  ( '1', 'tooltip'     ) : "ses-type app version",  
+                  ( '1', 'state'       ) : "Active",
                 
-                  ( 3, displayText ) : "Stack by"          ,
-                  ( 3, pageId      ) : "stackselector_1"          ,
-                  ( 3, tooltip     ) : "Choose value type for stacking",  
-                  ( 3, state       ) : "Active"               
+                  ( '2', 'displayText' ) : "User Filter",
+                  ( '2', 'pageId'      ) : "usefilter_1",
+                  ( '2', 'tooltip'     ) : "account environment user",  
+                  ( '2', 'state'       ) : "Active" ,
+                
+                  ( '3', 'displayText' ) : "Stack by",
+                  ( '3', 'pageId'      ) : "stackselector_1",
+                  ( '3', 'tooltip'     ) : "Choose value type for stacking",  
+                  ( '3', 'state'       ) : "Active" ,
+                
+                  ( '4', 'displayText' ) : if card( gss::s_JobErrorMessageNumbers ) then FormatString("%i errors", card( gss::s_JobErrorMessageNumbers ) ) else "" endif,
+                  ( '4', 'pageId'      ) : if card( gss::s_JobErrorMessageNumbers ) then "errors_1"                                                        else "" endif,
+                  ( '4', 'tooltip'     ) : if card( gss::s_JobErrorMessageNumbers ) then "Error handling"                                                  else "" endif,  
+                  ( '4', 'state'       ) : if card( gss::s_JobErrorMessageNumbers ) then "Active"                                                          else "" endif 
                 }
             }
         }
@@ -1335,7 +1297,7 @@ Model Main_AIMMSPROUsageStatistics {
                 Definition: {
                     {
                     
-                    ('1','displaytext'): "Enable tracking",
+                    ('1','displaytext'): "Track",
                     ('1','icon'       ): "aimms-database-edit2",
                     ('1','procedure'  ): "pr_EnableSessionTracking",
                     ('1','state'      ): if p01_isAnAdmin then "Active" else "Inactive" endif,
@@ -1345,7 +1307,7 @@ Model Main_AIMMSPROUsageStatistics {
                     ('2','procedure'  ): "pr_ReadData",
                     ('2','state'      ): if p01_isAnAdmin then "Active" else "Inactive" endif,
                     
-                    ('3','displaytext'): "Read via PRO",
+                    ('3','displaytext'): "Read",
                     ('3','icon'       ): "aimms-binoculars",
                     ('3','procedure'  ): "pr_ReadAimmsPRO",
                     ('3','state'      ): if p01_isAnAdmin then "Active" else "Inactive" endif,
@@ -1358,20 +1320,25 @@ Model Main_AIMMSPROUsageStatistics {
                     ('5','displaytext'): "Stack the bars",
                     ('5','icon'       ): "aimms-spinner3",
                     ('5','procedure'  ): "pr_ComputeStackedBarCharts",
-                    ('5','state'      ): "Active" ,
+                    ('5','state'      ): "Hidden" ,
                     
                     ('6','displaytext'): "CreateErrorReport",
                     ('6','icon'       ): "aimms-typewriter",
                     ('6','procedure'  ): "pr_CreateErrorReport",
-                    ('6','state'      ): "Active",
+                    ('6','state'      ): "Hidden", ! if card( gss::s_JobErrorMessageNumbers ) then "Active" else "Hidden" endif,
                     
                     ('7','displaytext'): "ClearErrors",
                     ('7','icon'       ): "aimms-bin5",
                     ('7','procedure'  ): "pr_ClearErrors",
-                    ('7','state'      ): "Active" 
+                    ('7','state'      ): "Hidden"  ! if card( gss::s_JobErrorMessageNumbers ) then "Active" else "Hidden" endif 
                     
                     }
                 }
+            }
+            Set s_SomeIntegers {
+                SubsetOf: Integers;
+                Index: i_si;
+                Definition: ElementRange(1,9);
             }
             StringParameter sp_BarChartWidgetActions {
                 IndexDomain: (i_si,webui::indexWidgetActionSpec);
@@ -1456,6 +1423,8 @@ Model Main_AIMMSPROUsageStatistics {
                     p01_SessionBarChartVisible := 1 ;
                     p01_UserBarChartVisible    := 0 ;
                     p01_MemoryBarChartVisible  := 0 ;
+                    
+                    pr_CommonBarChartInitialization();
                 }
             }
             Procedure pr_BarChartSelectUsers {
@@ -1463,6 +1432,8 @@ Model Main_AIMMSPROUsageStatistics {
                     p01_SessionBarChartVisible := 0 ;
                     p01_UserBarChartVisible    := 1 ;
                     p01_MemoryBarChartVisible  := 0 ;
+                    
+                    pr_CommonBarChartInitialization();
                 }
             }
             Procedure pr_BarChartSelectMemory {
@@ -1470,6 +1441,14 @@ Model Main_AIMMSPROUsageStatistics {
                     p01_SessionBarChartVisible := 0 ;
                     p01_UserBarChartVisible    := 0 ;
                     p01_MemoryBarChartVisible  := 1 ;
+                    
+                    pr_CommonBarChartInitialization();
+                }
+            }
+            Procedure pr_CommonBarChartInitialization {
+                Body: {
+                    ep_FocusValue := '' ;
+                    ep_BarchartColumnValueType := '' ;
                 }
             }
             Procedure pr_ComputeStackedBarCharts {
@@ -1676,7 +1655,7 @@ Model Main_AIMMSPROUsageStatistics {
             }
             Procedure pr_CreateErrorReport {
                 Body: {
-                    gss::pr_ReportCurrentErrorsToTextFile("log\\usage.errorLogging");
+                    gss::pr_ReportCurrentErrorsToTextFile("log/usage.errorLogging");
                 }
             }
             Procedure pr_ClearErrors {
@@ -1711,37 +1690,17 @@ Model Main_AIMMSPROUsageStatistics {
                 }
             }
         }
-        Section Error_Handler {
-            Set s_SomeIntegers {
-                SubsetOf: Integers;
-                Index: i_si;
-                Definition: ElementRange(1,9);
-            }
-            StringParameter sp_ErrorHandlingSecondaryActions {
-                IndexDomain: (i_si, webui::indexPageActionSpec);
-                Definition: {
-                    data {
-                    (1,displaytext): "CreateErrorReport",
-                    (1,icon): "aimms-typewriter",
-                    (1,procedure): "pr_CreateErrorReport",
-                    (1,state): "Active",
-                    
-                    (2,displaytext): "ClearErrors",
-                    (2,icon): "aimms-bin5",
-                    (2,procedure): "pr_ClearErrors",
-                    (2,state): "Active" }
-                }
-            }
-        }
     }
     Section Attic {
         Procedure MainInitialization {
             Body: {
                 !profilerStart();
                 
-                ep_BarchartColumnValueType := 'SessionTypes' ;
-                s_ValueSubset := s_SessionTypes ;
-                ep_FocusValue := 'data' ;
+                gss::pr_SeenErrorsAreHandled(1);
+                
+                ep_BarchartColumnValueType := 'None' ; ! 'SessionTypes' ;
+                s_ValueSubset := s_GenericAll ; ! s_SessionTypes ;
+                ep_FocusValue := '' ; ! 'data' ;
                 
                 sp_TimebarViewportEnd   := CurrentToString("%c%y-%m-%d 00");
                 sp_TimebarViewportStart := MomentToString(

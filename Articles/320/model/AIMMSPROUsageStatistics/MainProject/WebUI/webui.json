@@ -4,6 +4,9 @@
     "aimms.widget.type": {
       "literal": "application"
     },
+    "limited.option.editor": {
+      "literal": 1
+    },
     "pages": {
       "literal": {
         "name": "root",
@@ -35,6 +38,12 @@
                     "type": "sidepanel",
                     "slug": "appfilter_1",
                     "children": []
+                  },
+                  {
+                    "name": "Errors",
+                    "type": "sidepanel",
+                    "slug": "errors_1",
+                    "children": []
                   }
                 ]
               }
@@ -45,6 +54,9 @@
     },
     "theme.classic": {
       "literal": "NOT_ALLOWED"
+    },
+    "ui.editable": {
+      "literal": 0
     },
     "widget.visibility.greyout": {
       "literal": false
@@ -73,6 +85,26 @@
           "layoutInfo": {
             "width": "2",
             "height": "2"
+          }
+        }
+      ]
+    }
+  },
+  "pages/errors_1": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "downloadErrors",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "ClearErrors",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
           }
         }
       ]
@@ -306,6 +338,20 @@
       }
     }
   },
+  "widgets/ClearErrors": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_ClearErrors"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "title": {
+      "literal": "ClearErrors"
+    }
+  },
   "widgets/ControlScalars": {
     "aimms.widget.type": {
       "literal": "scalar"
@@ -343,6 +389,20 @@
     },
     "widget.visible": {
       "literal": 0
+    }
+  },
+  "widgets/downloadErrors": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "gss::pr_DownloadErrorReport"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "title": {
+      "literal": "Download Errors"
     }
   },
   "widgets/FocusEvents": {
@@ -417,6 +477,18 @@
         ],
         "aggregated": []
       }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "",
+            "<IDENTIFIER-SET>": "sp_EvMoment"
+          },
+          "width": 18.62745098039216
+        }
+      ]
     },
     "title": {
       "aimms": {

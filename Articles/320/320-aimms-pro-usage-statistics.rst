@@ -1,30 +1,47 @@
 :orphan:
 
-AIMMS PRO Usage statistics
+AIMMS PRO Usage Statistics
 ==========================
 
 .. meta::
-   :description: Converting one-byte per character AIMMS apps deploying UTF8 character sets, including Far East and Emojis.
-   :keywords: evolution, single byte character, two byte character, UNICODE, ASCII, encoding
+   :description: User's guide to the app "AIMMS PRO Usage Statistics"
+   :keywords: AIMMS app, WebUI, User's Guide, Statistics
 
-.. warning:: AIMMS Administrators only. This How To article requires careful operation of the AIMMS PRO database.
+.. image:: images/AIMMSPROUsageStartup.png
+    :align: center
 
+The AIMMS PRO Usage Statistics app, :download:`which can be downloaded here <model/example.zip>`, starts as follows:
 
+.. image:: images/AIMMSPROUsageStartup.png
+    :align: center
 
+From bottom to top, there are three menus that allow you to operate the application:
 
-.. On Prem: turn toggle on
-.. On Cloud: toggle already turned on
-.. Generic: read table
+#.  In the lower right corner, there is a menu of actions available. 
+    Normally, there are only two actions available, and they are only available to 
+    members of the group ``admin``.
+    
+    #.  **Track** 
+        This action will toggle the session tracking behavior of AIMMS PRO. 
+        The default tracking behavior of AIMMS PRO is to not track sessions.
+        By pressing this button, you will get a dialog page asking for the password 
+        of the database backing AIMMS PRO. 
+        By supplying this password you will turn on tracking of sessions by AIMMS PRO.
 
+    #.  **Read**
+        Read the database backing AIMMS PRO for tracked sessions. 
 
-.. PostgreSQL ODBC: https://odbc.postgresql.org/
-.. Download
-.. MSI
-.. Scroll down for latest, tested: psqlodbc_12_00_0000-x64.msi
+#.  The left widget, which will contain bar charts when data is read in, the focus of the data can be switched.  The focus can be on:
 
-.. Use PostgreSQL Unixode(X64)
+    #.  The maximum number of sessions running at a given moment
+    
+    #.  The maximum number of users active at a given moment
+    
+    #.  The maximum amount of memory in use by the sessions at a given moment
 
-.. 
+#.  The AIMMS Data manager. Here cases can be saved and read back.  
+    This allows an admin to share the data with other users.
+
 
 
 
