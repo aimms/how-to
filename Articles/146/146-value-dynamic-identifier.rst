@@ -12,9 +12,9 @@
 
 With the addition of Model Edit Functions (MEF), a lot of things that were previously impossible to do with AIMMS became possible.
 
-One simple example of something that previously was not possible is to 'dereference' an element parameter with range ``AllIdentifiers``, to get the value of the identifier that was denoted by the element parameter if this identifier was not scalar. In case the identifier that is referred to is scalar, you could use the ``ScalarValue`` intrinsic function (see `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_).
+One simple example of something that previously was not possible is to 'dereference' an element parameter with range :aimms:set:`AllIdentifiers`, to get the value of the identifier that was denoted by the element parameter if this identifier was not scalar. In case the identifier that is referred to is scalar, you could use the ``ScalarValue`` intrinsic function (see `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_).
 
-For example, if you had an element parameter ``ep_MySelectedSourceIdentifier`` with range ``AllIdentifiers`` that points to indexed identifier ``p_SourceParameter1``, it was not possible to get the actual value of the ``p_SourceParameter1`` for a given element via this element parameter.
+For example, if you had an element parameter ``ep_MySelectedSourceIdentifier`` with range :aimms:set:`AllIdentifiers` that points to indexed identifier ``p_SourceParameter1``, it was not possible to get the actual value of the ``p_SourceParameter1`` for a given element via this element parameter.
 
 With MEF, it now is possible to create a procedure at runtime that retrieves the value of the identifier denoted by the element parameter. To keep this example easy, we demonstrate how you can do this for a scalar identifier, although an intrinsic function for this already exists. You can easily extend the example below to work on indexed identifiers also.
 
@@ -55,7 +55,7 @@ Now we can create a procedure, say ``pr_GetValueOfIdentifer`` that will get two 
 
     !If there already exists an identifier with the name
     !RuntimeLibrary, we must delete it first
-    if "RuntimeLibrary" in AllIdentifiers then
+    if "RuntimeLibrary" in :aimms:set:`AllIdentifiers` then
         me::Delete('RuntimeLibrary') ;
     endif ;
     
@@ -90,7 +90,7 @@ Now we can create a procedure, say ``pr_GetValueOfIdentifer`` that will get two 
     !And run the procedure via the apply statement
     apply(ep_RuntimeProcedure) ;
 
-Please note that this procedure has two arguments, ``ep_Source`` and ``ep_Target``, both of which are element parameters with range ``AllIdentifiers``. Also, the earlier mentioned additional element and string parameters for MEF could be local identifiers for this procedure.
+Please note that this procedure has two arguments, ``ep_Source`` and ``ep_Target``, both of which are element parameters with range :aimms:set:`AllIdentifiers`. Also, the earlier mentioned additional element and string parameters for MEF could be local identifiers for this procedure.
 
 The above procedure can now be called with the following example code:
 

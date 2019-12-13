@@ -120,7 +120,7 @@ This argument is declared as follows:
 
 Here the index ``webui::ffn`` is an index in the set ``webui::AllFormFieldNames``. This index and set are available in the ``AimmsWebUI`` system library and will be linked to the model identifiers later on. 
 
-The set ``webui::AllFormFieldNames`` is a subset of ``AllIdentifiers``, which allows us to link easily to the model identifiers at hand.
+The set ``webui::AllFormFieldNames`` is a subset of :aimms:set:`AllIdentifiers`, which allows us to link easily to the model identifiers at hand.
 
 In the following three steps we will discuss the selected details of these three procedures.
 
@@ -195,7 +195,7 @@ Linking callbacks to WebUI Forms framework
 In our running example, we use the procedure ``pr_SKUFORM_Setup`` as the procedure which links the model identifiers, ``SKUFORM`` procedures and the actual form in WebUI together. 
 This procedure is called at the end of the StartupProcedure in order to make sure it is called before the form is opened for the first time.
 
-First we name the model identifiers that identify the fields in the form (here FormFields is a subset of ``AllIdentifiers``):
+First we name the model identifiers that identify the fields in the form (here FormFields is a subset of :aimms:set:`AllIdentifiers`):
 
 .. code-block:: aimms
 

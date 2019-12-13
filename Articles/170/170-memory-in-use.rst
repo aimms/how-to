@@ -11,15 +11,15 @@ Analytic applications may involve a lot of data and subsequently a lot of comput
 Memory functions
 -----------------------------
 
-The function ``MemoryInUse`` returns the amount of memory used by AIMMS in Mb. ``MemoryInUse`` calls a system function to find out how much memory is used by executing a procedure. 
+The function :aimms:func:`MemoryInUse` returns the amount of memory used by AIMMS in Mb. :aimms:func:`MemoryInUse` calls a system function to find out how much memory is used by executing a procedure. 
 
 Several other functions are available to check the memory used by specific identifiers in your project.
 
-* ``Card()``  returns the number of elements, both active and inactive, for the identifier between the parentheses.
+* :aimms:func:`Card()`  returns the number of elements, both active and inactive, for the identifier between the parentheses.
 
-* ``ActiveCard()``, returns only the number of active elements for the identifier between the parentheses. 
+* :aimms:func:`ActiveCard()`, returns only the number of active elements for the identifier between the parentheses. 
 
-* ``IdentifierMemory()``, returns the memory in use for the identifier between the parentheses.
+* :aimms:func:`IdentifierMemory()`, returns the memory in use for the identifier between the parentheses.
 
 .. tip::
 
@@ -54,9 +54,9 @@ Tips and tricks:
 Analyzing memory used by GMPs
 -----------------------------------------
 
-The function ``GMP::Instance::GetMemoryUsed`` returns the memory used by a generated mathematical program (GMP). The set ``AllGeneratedMathematicalPrograms`` is another handy tool you can use to monitor memory use. The larger the size of this set, the more the number of generated mathematical programs managed by your application, and you may want to release the memory they occupy using the intrinsic function ``GMP::Instance::Delete``. 
+The function :aimms:func:`GMP::Instance::GetMemoryUsed` returns the memory used by a generated mathematical program (GMP). The set :aimms:set:`AllGeneratedMathematicalPrograms` is another handy tool you can use to monitor memory use. The larger the size of this set, the more the number of generated mathematical programs managed by your application, and you may want to release the memory they occupy using the intrinsic function :aimms:procedure:`GMP::Instance::Delete`. 
 
-You can retrieve the memory used by all the math programs in ``AllGeneratedMathematicalPrograms`` by declaring a parameter over the index ``IndexGeneratedMathematicalPrograms`` and using the ``GMP::Instance::GetMemoryUsed`` function in a ``for`` loop as illustrated in lines 6-12 in the below code. Lines 13-18 consist a procedure to delete all the GMPs in your project. 
+You can retrieve the memory used by all the math programs in :aimms:set:`AllGeneratedMathematicalPrograms` by declaring a parameter over the index ``IndexGeneratedMathematicalPrograms`` and using the :aimms:func:`GMP::Instance::GetMemoryUsed` function in a ``for`` loop as illustrated in lines 6-12 in the below code. Lines 13-18 consist a procedure to delete all the GMPs in your project. 
 
 .. code-block:: aimms
    :linenos:
@@ -89,7 +89,7 @@ You can retrieve the memory used by all the math programs in ``AllGeneratedMathe
 Minimizing memory used for element spaces
 --------------------------------------------
 
-AIMMS maintains a mapping between elements (strings) and numbers per root set. This mapping is the *element space*. The element space of the set ``Integers`` is very small as this is just an arithmetic operation without the need for additional memory. When your elements are integers, making the corresponding set a subset of ``Integers`` helps you in reducing the element space. 
+AIMMS maintains a mapping between elements (strings) and numbers per root set. This mapping is the *element space*. The element space of the set :aimms:set:`Integers` is very small as this is just an arithmetic operation without the need for additional memory. When your elements are integers, making the corresponding set a subset of :aimms:set:`Integers` helps you in reducing the element space. 
 
 
 Related Topics
