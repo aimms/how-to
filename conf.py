@@ -171,7 +171,7 @@ html_static_path = ['_static']
 
 # The following "context" is passed to templates in _templates folder
 html_context = {
-    'css_files': ['_static/aimms_how_to_2019_10_25.css'],
+    'css_files': ['_static/aimms-how-to_13122019.css'],
     "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
     "gitlab_user": "aimms/customer-support", # Username
     "gitlab_repo": "aimms-how-to", # Repo name
