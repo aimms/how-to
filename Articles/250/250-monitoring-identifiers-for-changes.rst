@@ -36,9 +36,9 @@ The data change monitor has the following intrinsic functions:
 
 Creating data change monitor
 ----------------------------
-To create a new data change monitor, first provide it an ID and a subset of the predefined set ``AllIdentifiers`` containing the identifiers you want to monitor for changes. 
+To create a new data change monitor, first provide it an ID and a subset of the predefined set :aimms:set:`AllIdentifiers` containing the identifiers you want to monitor for changes. 
 
-In the example code below, ``s_WatchedIdentifiers`` is a subset of ``AllIdentifiers`` and ``sp_DataChangeMonitorID`` is a string parameter.
+In the example code below, ``s_WatchedIdentifiers`` is a subset of :aimms:set:`AllIdentifiers` and ``sp_DataChangeMonitorID`` is a string parameter.
 
 .. code-block:: aimms
     :linenos:

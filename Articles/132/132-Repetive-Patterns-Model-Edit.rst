@@ -46,7 +46,7 @@ Here we have identified a maintenance burden: to introduce a new identifier for 
     e_lib  := me::CreateLibrary("LibCreateCopyOfElement", "cce" );
     e_proc := me::Create("ProcCreateCopyOfElement", 'procedure', e_lib);
 
-Creating a runtime identifier results in a new element in the set ``AllIdentifiers``. These new elements are assigned to the element parameters ``e_lib`` and ``e_proc``. These element parameters are used reference the created library and procedure below. The body of the procedure is just some text that is compiled by the AIMMS compiler. Our job is to piece that text together. The trick is to know when to create a piece of text and what piece of text to create. "When to create a piece" is determined by considering each identifier from some subset of identifiers, and considering each argument in that identifier. This results in the following nested for/while loop:
+Creating a runtime identifier results in a new element in the set :aimms:set:`AllIdentifiers`. These new elements are assigned to the element parameters ``e_lib`` and ``e_proc``. These element parameters are used reference the created library and procedure below. The body of the procedure is just some text that is compiled by the AIMMS compiler. Our job is to piece that text together. The trick is to know when to create a piece of text and what piece of text to create. "When to create a piece" is determined by considering each identifier from some subset of identifiers, and considering each argument in that identifier. This results in the following nested for/while loop:
 
 .. code-block:: aimms
 

@@ -18,59 +18,47 @@
 
 .. raw:: html
     
-    <div style="text-align:center"> <!--id="topo"-->
-    <br><h1>WELCOME TO HOW-TO</h1><!--h2>The AIMMS Knowledge Base</h1--></div>
+    <h1 class="home_header">WELCOME TO HOW-TO</h1>
     
 .. raw:: html
     
     <div id="content_home_page">
 
-        <p style="text-align:justify">AIMMS How-To is a knowledge base for everyone involved in projects that use AIMMS, including developers, network administrators, application end-users, and business process stakeholders.</p>
-        <p style="text-align:justify">You'll find tutorials, best practices, and practical guidance for using AIMMS software, including help topics in mathematical modeling, solvers, AIMMS language, and building applications in optimization and prescriptive analytics. You'll also find support for troubleshooting errors and handling deprecations.</p>
+        <p>AIMMS How-To is a knowledge base for everyone involved in projects that use AIMMS, including developers, network administrators, application end-users, and business process stakeholders.</p>
+        <p>You'll find tutorials, best practices, and practical guidance for using AIMMS software, including help topics in mathematical modeling, solvers, AIMMS language, and building applications in optimization and prescriptive analytics. You'll also find support for troubleshooting errors and handling deprecations.</p>
 
-        <a href="C_Getting_Started/index.html">
-            <div class="box_home_page">
-                <img alignment="center" alt="getting started" src="_images/rocket-32.png">
-                <h1 style="text-align: center">Getting Started</h1>
-                <p>Installing AIMMS, settings options, licensing help</p>
-            </div>
-        </a>
-        <a href="C_Developer/index.html">
-            <div class="box_home_page">
-                <img alignment="center" alt="developer" src="_images/school-supplies-32.png">
-                <h1 style="text-align: center">AIMMS Developer</h1>
-                <p>Data connection, modeling, solvers, programming, error handling</p>
-            </div>
-        </a>
-        <a href="C_UI/index.html">
-            <div class="box_home_page">
-                <img alignment="center" alt="applications" src="_images/web-design-32.png">
-                <h1 style="text-align: center">Application UI</h1>
-                <p>Creating and customizing a user interface for your apps</p>
-            </div>
-        </a>
-        <a href="C_Deployment/index.html">
-            <div class="box_home_page">
-                <img alignment="center" alt="deployment" src="_images/network-care-32.png">
-                <h1 style="text-align: center">Deployment</h1>
-                <p>Distributing your apps with AIMMS PRO (on-premise or cloud-hosted)</p>
-            </div>
-        </a>
-        <a href="C_Evolution/index.html">
-            <div class="box_home_page">
-                <img alignment="center" alt="evolution" src="_images/time-machine-32.png">
-                <h1 style="text-align: center">Software Evolution</h1>
-                <p>Implementing new AIMMS features, planning for deprecation</p>
-            </div>
-        </a>
-        <a href="https://scnavigator-manual.aimms.com/">
-            <div class="box_home_page">
-                <img alignment="center" alt="navigator" src="_images/global-chain-32.png">
-                <h1 style="text-align: center">SC Navigator</h1>
-                <p>Help and documentation for the SC Navigator suite of apps</p>
-            </div>
-        </a>
-
+        <div class="boxes">
+            <a class="box_home_page" href="C_Getting_Started/index.html">
+                <img alt="getting started" src="_images/rocket-32.png">
+                <h1>Getting Started</h1>
+                <div>Installing AIMMS, settings options, licensing help</div>
+            </a>
+            <a class="box_home_page" href="C_Developer/index.html">
+                <img alt="developer" src="_images/school-supplies-32.png">
+                <h1>AIMMS Developer</h1>
+                <div>Data connection, modeling, solvers, programming, error handling</div>
+            </a>
+            <a class="box_home_page" href="C_UI/index.html">
+                <img alt="applications" src="_images/web-design-32.png">
+                <h1>Application UI</h1>
+                <div>Creating and customizing a user interface for your apps</div>
+            </a>
+            <a class="box_home_page" href="C_Deployment/index.html">
+                <img alt="deployment" src="_images/network-care-32.png">
+                <h1>Deployment</h1>
+                <div>Distributing your apps with AIMMS PRO (on-premise or cloud-hosted)</div>
+            </a>
+            <a class="box_home_page" href="C_Evolution/index.html">
+                <img alt="evolution" src="_images/time-machine-32.png">
+                <h1>Software Evolution</h1>
+                <div>Implementing new AIMMS features, planning for deprecation</div>
+            </a>
+            <a class="box_home_page" href="https://scnavigator-manual.aimms.com/">
+                <img alt="navigator" src="_images/global-chain-32.png">
+                <h1>SC Navigator</h1>
+                <div>Help and documentation for the SC Navigator suite of apps</div>
+            </a>
+        </div>
     </div>
     
 -----------------------------------------------------------

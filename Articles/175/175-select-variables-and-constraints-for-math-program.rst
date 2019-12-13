@@ -21,13 +21,13 @@ A sample declaration of a math program is shown below.
 
 * ``Objective`` specifies which variable is the objective function of the math program. 
 * ``Direction`` specifies whether you want to minimize or maximize the objective function. 
-* ``Constraints`` specifies which set of constraints should be considered. In this case, ``AllConstraints`` will be considered.
-* ``Variables`` specifies which set of variables should be considered. In this case, ``AllVariables`` will be considered.
+* ``Constraints`` specifies which set of constraints should be considered. In this case, :aimms:set:`AllConstraints` will be considered.
+* ``Variables`` specifies which set of variables should be considered. In this case, :aimms:set:`AllVariables` will be considered.
 * ``Type`` specifies what kind of a problem the math program is, e.g., a linear program, an integer program, and so on. The default option ``Automatic`` suffices in most cases and is recommended. 
 
 .. note::
 
-    ``AllConstraints`` and ``AllVariables`` are `Model related predeclared identifier <https://download.aimms.com/aimms/download/manuals/AIMMS3FR_PredeclaredModel.pdf>`_ Sets, containing all constraints and all variables defined in your model. 
+    :aimms:set:`AllConstraints` and :aimms:set:`AllVariables` are `Model related predeclared identifier <https://documentation.aimms.com/functionreference/predefined-identifiers/model-related-identifiers/index.html>`_ Sets, containing all constraints and all variables defined in your model. 
     
 
 You may have multiple mathematical program identifiers in the same project, subject to different sets of constraints and variables. 
@@ -39,7 +39,7 @@ Default Constraints and Variables
 ----------------------------------------
 
 When you solve a mathematical program (or generate it via `the GMP functions <https://how-to.aimms.com/Articles/147/147-GMP-Intro.html>`_), AIMMS will use the values of the ``Constraints`` and ``Variables`` attributes of the mathematical program identifier to determine which symbolic variables and constraints should actually be considered in the model. 
-The default values of ``Constraints`` and ``Variables`` attributes are the predefined sets ``AllConstraints`` and ``AllVariables`` respectively. ``AllConstraints`` contains all the constraints declared in your AIMMS project and similarly, ``AllVariables`` contains all the variables. 
+The default values of ``Constraints`` and ``Variables`` attributes are the predefined sets :aimms:set:`AllConstraints` and :aimms:set:`AllVariables` respectively. :aimms:set:`AllConstraints` contains all the constraints declared in your AIMMS project and similarly, :aimms:set:`AllVariables` contains all the variables. 
 
 Variables with definition
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -59,14 +59,14 @@ AIMMS will generate:
 
 #. Equality constraint ``X_definition`` as ``X = Y + Z``
 
-So, any variable with a definition (like ``X``) will appear in both the predeclared sets ``AllConstraints`` and ``AllVariables``. 
+So, any variable with a definition (like ``X``) will appear in both the predeclared sets :aimms:set:`AllConstraints` and :aimms:set:`AllVariables`. 
 
 Selecting Constraints or Variables
 -----------------------------------------
 
-To select the constraints to be applied in a math program, you can create a set as a subset of ``AllConstraints``  and use that set in the declaration of the math program instead of ``AllConstraints``. 
+To select the constraints to be applied in a math program, you can create a set as a subset of :aimms:set:`AllConstraints`  and use that set in the declaration of the math program instead of :aimms:set:`AllConstraints`. 
 
-Likewise, you can create a subset of ``AllVariables`` and use it in the declaration of the math program.
+Likewise, you can create a subset of :aimms:set:`AllVariables` and use it in the declaration of the math program.
 
 The below below example shows two sets, ``ModelConstraints`` and ``ModelVariables``, used in the math program ``Sample_Math_Program``. 
 

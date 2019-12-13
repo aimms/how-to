@@ -72,7 +72,7 @@ The identifiers of the input case created by ``pro::DelegateToServer`` is define
 
 Remarks about the above code:
 
-#. ``pro::ManagedSessionInputCaseIdentifierSet`` is initialized to ``AllIdentifiers``
+#. ``pro::ManagedSessionInputCaseIdentifierSet`` is initialized to :aimms:set:`AllIdentifiers`
 
 #. ``pro::ManagedSessionRemoveFromCaseIdentifierSet`` is initialized to ``AllDefinedParameters``
 
