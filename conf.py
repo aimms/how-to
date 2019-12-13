@@ -160,6 +160,7 @@ html_theme_options = {
     'home_page_title': 'AIMMS How-To',
     'home_page_description': "AIMMS How-To is a support knowledge base for everyone involved in projects that use AIMMS. You'll find help tutorials, best practices, and practical guidance for using AIMMS software.",
     'display_community_embeddable' : Display_3rd_Party_Extensions,
+    'display_algolia_search' : False,
  }
 
 
