@@ -31,7 +31,8 @@ From bottom to top, there are three menus that allow you to operate the applicat
     #.  **Read**
         Read the database backing AIMMS PRO for tracked sessions. 
 
-#.  The left widget, which will contain bar charts when data is read in, the focus of the data can be switched.  The focus can be on:
+#.  The left widget, which will contain bar charts when data is read in, the focus of the data can be switched.  
+    The focus can be on:
 
     #.  The maximum number of sessions running at a given moment
     
@@ -41,6 +42,39 @@ From bottom to top, there are three menus that allow you to operate the applicat
 
 #.  The AIMMS Data manager. Here cases can be saved and read back.  
     This allows an admin to share the data with other users.
+
+
+
+
+
+.. On Prem: turn toggle on
+.. On Cloud: toggle already turned on
+.. Generic: read table
+
+
+.. PostgreSQL ODBC: https://odbc.postgresql.org/
+.. Download
+.. MSI
+.. Scroll down for latest, tested: psqlodbc_12_00_0000-x64.msi
+
+.. Use PostgreSQL Unixode(X64)
+
+.. points to demo / explain:
+
+.. * Side panels - filters, stack by, error (dynamic).
+.. * bar charts - overlay by menu.
+.. * time bar used - probably familiar
+.. * Toggle - Update statement
+.. * Who is the admin? I am the admin! See PostMainInitialization.
+.. * Computation procedure
+..   o Data based on sessions
+..   o Each session has a start and a finish event (stored as work events)
+..   o Ordering events based on moment
+..   o Grouping events based on periods in bars (and bar naming based on length of period)
+..   o Stacking based on ep_BarchartColumnValueType
+..     - s_ValueSubset, subset of s_ValueMasterSet, constructed by all values on which we can filter.
+
+
 
 
 

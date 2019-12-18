@@ -44,6 +44,12 @@
                     "type": "sidepanel",
                     "slug": "errors_1",
                     "children": []
+                  },
+                  {
+                    "name": "obtainpasswordfortracking",
+                    "type": "dialog",
+                    "slug": "obtainpasswordfortracking_1",
+                    "children": []
                   }
                 ]
               }
@@ -105,6 +111,20 @@
           "layoutInfo": {
             "width": "2",
             "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "pages/obtainpasswordfortracking_1": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "EnterPassword",
+          "layoutInfo": {
+            "width": "3",
+            "height": "1",
+            "customPosition": ""
           }
         }
       ]
@@ -405,6 +425,21 @@
       "literal": "Download Errors"
     }
   },
+  "widgets/EnterPassword": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_Password"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Password for PRO Database"
+    }
+  },
   "widgets/FocusEvents": {
     "aimms.widget.type": {
       "literal": "table"
@@ -483,10 +518,66 @@
         {
           "type": "colHeader",
           "colKey": {
+            "i_valueType": "AppVersions",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 22.05328461538462
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "Applications",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 15.643028205128204
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "SessionTypes",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 19.48918205128206
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "UserNames",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 17.69431025641026
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "Environments",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 17.0019525
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
             "i_valueType": "",
             "<IDENTIFIER-SET>": "sp_EvMoment"
           },
-          "width": 18.62745098039216
+          "width": 31.10486939957331
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "",
+            "<IDENTIFIER-SET>": "ep_EvEventTypes"
+          },
+          "width": 19.4
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "AccountNames",
+            "<IDENTIFIER-SET>": "ep_EvValueData"
+          },
+          "width": 18.14091456081081
         }
       ]
     },
@@ -551,7 +642,11 @@
       }
     },
     "title": {
-      "literal": "Timebar"
+      "aimms": {
+        "contents": [
+          "sp_TitleTimebar"
+        ]
+      }
     }
   },
   "widgets/MemoryInUseStackedBySessionType": {
