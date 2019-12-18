@@ -94,6 +94,10 @@ LibraryModule Library_GuardServerSession {
                 	p_JobErrorLines( ep_JobErrorMessageNumber,ep_StackPosition) := errh::Line(ep_err,ep_StackPosition);
                 	p_errStackPos += 1 ;
                 endwhile ;
+                
+                if p01_locSeenErrorsAreHandled then
+                	errh::MarkAsHandled( ep_err );
+                endif ;
             }
             ElementParameter ep_err {
                 Range: errh::PendingErrors;
@@ -106,6 +110,17 @@ LibraryModule Library_GuardServerSession {
             Parameter p_errStackPos;
             ElementParameter ep_StackPosition {
                 Range: s_StackPositions;
+            }
+        }
+        Procedure pr_SeenErrorsAreHandled {
+            Arguments: (p01_AreHandled);
+            Body: {
+                p01_locSeenErrorsAreHandled := p01_AreHandled ;
+            }
+            Parameter p01_AreHandled {
+                Range: binary;
+                Default: 1;
+                Property: Input;
             }
         }
         Procedure pr_GuardAndProfileServerJob {
@@ -148,8 +163,51 @@ LibraryModule Library_GuardServerSession {
                 Property: Input;
             }
         }
+        Procedure pr_DownloadErrorReport {
+            Arguments: (FileLocation,statusCode,statusDescription);
+            Body: {
+                FileLocation := "usage.errorLogging";
+                
+                ! we store the location of the file in string parameter FinalLocation
+                FinalLocation := webui::GetIOFilePath(FileLocation);
+                
+                ! writing the string parameter FinalLocation to a text file
+                pr_ReportCurrentErrorsToTextFile(FinalLocation);
+                
+                ! checking if the previous write statement was successful or not
+                if FileExists(FinalLocation) then
+                
+                   ! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
+                   StatusCode := webui::ReturnStatusCode('CREATED');
+                   ! displaying the status message as All perfect instead of the default "File ready to download"
+                   StatusDescription := "All perfect!";
+                
+                else    !if previous write statement was not successful
+                
+                   ! setting the statusCode to 'ERROR' and the download widget will not show the Get button anymore
+                   statusCode := webui::ReturnStatusCode('ERROR');
+                   !displaying a custom error message
+                   statusDescription := "Something went wrong when creating the file.";
+                
+                endif;
+            }
+            StringParameter FileLocation {
+                Property: Output;
+            }
+            Parameter statusCode {
+                Property: Output;
+            }
+            StringParameter statusDescription {
+                Property: Output;
+            }
+            StringParameter FinalLocation;
+        }
     }
     Section Private_Section {
+        Parameter p01_locSeenErrorsAreHandled {
+            Range: binary;
+            InitialData: 0;
+        }
         Procedure pr_SampleProc;
         Procedure LibraryInitialization {
             Comment: "Add initialization statements here that do not require any other library being initialized already.";

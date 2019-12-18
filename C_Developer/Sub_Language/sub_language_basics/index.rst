@@ -31,7 +31,7 @@ These topics cover what you need to get started programming your model in AIMMS 
    /Articles/187/187-convert-string-to-number
    /Articles/188/188-use-nbest-operator
    /Articles/190/190-empty-sets
-   /Articles/328/328-writing-reading
+   /Articles/328/328-writing-reading-text-files
    /Articles/220/220-aborting-execution-of-aimms
    /Articles/12/12-generate-random-numbers
    /Articles/189/189-using-calendars-in-aimms

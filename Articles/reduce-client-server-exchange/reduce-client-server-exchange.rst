@@ -19,7 +19,7 @@ There are three groups of identifiers needed by the server session that can be p
 
 #. The sets and parameters used in pre-processing and post-processing these mathematical programs
 
-#. The subset of AllIdentifiers that contains those identifiers that comprise the solution; in other words those identifiers that need to be passed back to the client session.
+#. The subset of :aimms:set:`AllIdentifiers` that contains those identifiers that comprise the solution; in other words those identifiers that need to be passed back to the client session.
 
 .. sidebar:: Constructing the subset of constraints.
 
@@ -27,7 +27,7 @@ There are three groups of identifiers needed by the server session that can be p
     
     In other words, these are the identifiers declared in the section ``Flowshop Mathematical Program Declarations`` that are also constraints. 
     
-    In algebraic terms, this is the intersection of the sets, *identifiers declared in the section Flowshop Mathematical Program Declarations* and the predeclared set ``AllConstraints``.
+    In algebraic terms, this is the intersection of the sets, *identifiers declared in the section Flowshop Mathematical Program Declarations* and the predeclared set :aimms:set:`AllConstraints`.
     
     In AIMMS this is expressed as ``AllConstraints * Flowshop_Mathematical_Program_Declarations`` because section names can be used as sets of identifiers declared in that section.
     

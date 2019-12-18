@@ -1,5 +1,5 @@
-Folder operations in PRO Storage
-=================================
+Control Folder Operations in PRO Storage
+=========================================
 
 .. meta::
    :description: Utility apps for AIMMS PRO Storage, available for download including a brief user guide.
@@ -7,34 +7,49 @@ Folder operations in PRO Storage
 
 This article provides for the source of four utility apps to operate on AIMMS PRO storage.
 
-Download for the apps are available:
+To access the apps, create an .aimmspack from these sources and publish them on your AIMMS PRO system.
 
-#. :download:`Alter authorization and/or delete individual files and folders <model/ControlPanel.zip>`
+The app sources are available for download in the sections below:
 
-#. :download:`Alter authorization of files in a pro storage folder <model/AlterAuthorization.zip>`
+#. Alter authorization and/or delete individual files and folders: 323-control-panel_ 
 
-#. :download:`Copy a PRO Storage folder to a Windows folder on laptop/desktop <model/CopyFilesFromServer.zip>`
+#. Alter authorization of files in a pro storage folder: 323-alter-authorization_ 
 
-#. :download:`Alter authorization of files in a pro storage folder <model/CopyFilesToServer.zip>`
+#. Copy a PRO Storage folder to a Windows folder on laptop/desktop: 323-copy-files-from-server_ 
 
-To make these apps available, you will need to create an .aimmspack from these sources and subsquently publish them on your AIMMS PRO system.
+#. Alter authorization of files in a pro storage folder: 323-copy-files-to-server_ 
 
-``ControlPanel``
+
+.. _323-control-panel:
+
+Control Panel
 -----------------
+
+.. topic:: Download
+
+    :download:`Alter authorization and/or delete individual files and folders <model/ControlPanel.zip>`
 
 This is a WinUI app, and when you select the storage tab, the screen looks as follows:
 
 .. image:: images/ControlPanelStorageTab.png
     :align: center
 
-For individual files (called objects) and folders (called buckets) you can alter the authorization, add them or delete them.
-If you delete a folder (bucket), then all its files and sub folders will be deleted as well.
-If you change the authorization of a folder (bucket), then you only change the authorization of that folder, not of its files, or of its sub folders.
+For individual files (objects) and folders (buckets) you can alter the authorization, add them or delete them.
+
+* When you delete a folder (bucket), you delete all its files and subfolders.
+* If you change the authorization of a folder (bucket), you do not change the authorization of its files or subfolders.
 
 .. note:: The default setup is such that users that are not members of the group Admin, ordinary users for short, cannot read the folder ``/userdata``.  To provide them with this access, a user that is the admin, or a member of the group Admin, can provide Read access to all of the folder ``/userdata`` and of the direct sub folders corresponding to the environments. Note that the consequence of this action is that a user sees which other users are on the AIMMS PRO system.  This may, or may not, be a violation of the security protocols; and is therefore not provided by default.
 
-``AlterAuthorization``
+
+.. _323-alter-authorization:
+
+Alter Authorization
 -----------------------
+
+.. topic:: Download 
+
+    :download:`Alter authorization of files in a pro storage folder <model/AlterAuthorization.zip>`
 
 ``AlterAuthorization`` is a WinUI app that starts with the following screen:
 
@@ -77,8 +92,15 @@ There are four buttons that allow you to operate this app:
     
 #.  ``Alter authorization files and folders``. Pressing this button will apply the authorization specified to the target folder specified and all files and folders therein.
 
-``CopyFilesFromServer``
+
+.. _323-copy-files-from-server:
+
+Copy Files From Server
 ------------------------
+
+.. topic:: Download
+
+    :download:`Copy a PRO Storage folder to a Windows folder on laptop/desktop <model/CopyFilesFromServer.zip>`
 
 This is a WinUI app that copies a folder from AIMMS PRO Storage to a folder on your Windows laptop or desktop; it starts with the following screen:
 
@@ -98,8 +120,15 @@ You can use the following buttons to operate this app:
 
 #.  ``Copy selected files`` This will copy all selected files.
 
-``CopyFilesToServer``
+
+.. _323-copy-files-to-server:
+
+Copy Files To Server
 ----------------------
+
+.. topic:: Download
+
+    :download:`Alter authorization of files in a pro storage folder <model/CopyFilesToServer.zip>`
 
 This is a WinUI app that copies a folder from your Windows laptop or desktop to AIMMS PRO Storage. It starts with the following screen:
 

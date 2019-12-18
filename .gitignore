@@ -14,6 +14,9 @@
 *.sdf
 *.suo
 *.errorLogging
+*.err.txt
+pro*.txt
+scratch*.txt
 Musterlösung
 _build
 backup
@@ -27,3 +30,4 @@ Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets/sDataIdentifiers.tx
 Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets/secundary.txt
 .vscode
 /WebSite_Redirection_Mapping/redirection_map_full.txt
+.vs
