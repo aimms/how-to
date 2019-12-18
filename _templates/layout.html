@@ -1,76 +1,14 @@
 {# Import the theme's layout. #} {% extends "!layout.html" %}
-<link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
-<link rel="stylesheet" href="https://use.typekit.net/ydq4pad.css">
-<link rel='stylesheet' id='font-awesome-original-css' href='https://techblog.aimms.com/wp-content/plugins/dpArticleShare/css/font-awesome.css?ver=1.3.4' type='text/css' media='all' /> 
-{% block header %} {% if pagename == "ContentIndex" %}
 
-<style>
-    .wy-nav-content {
-        max-width: none !important;
-    }
-    
-    .localtoc {
-        display: none;
-    }
-</style>
-{% else %}
-<style>
-    .wy-nav-content {
-        max-width: 1200px !important;
-    }
-</style>
-{% endif %} 
+{% block extrahead %}
 
-{% endblock %} {% block extrahead %}{% if pagename == "ContentIndex" %}
-
-<meta name="description" content="AIMMS How-To is a support knowledge base for everyone involved in projects that use AIMMS. You'll find help tutorials, best practices, and practical guidance for using AIMMS software."> 
-{% endif %} 
 <!-- Algolia's docsearch stylesheet -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
-{% endblock %} {% block sidebartitle %} {% if pagename == "ContentIndex" %}
+{% endblock %} 
 
-<style>
-    .wy-nav-content {
-        max-width: none !important;
-    }
-</style>
-{% else %}
-<style>
-    .wy-nav-content {
-        max-width: 1200px !important;
-    }
-</style>
-{% endif %}
-<link rel="stylesheet" href="{{ pathto('_static/Hacks.css', 1) }}">
-<a href="{{ pathto(master_doc) }}">
-    <img src="{{ pathto('_static/AIMMS_logo_H_RGB_rev.png', 1) }}" class="logo" title="AIMMS" alt="AIMMS Help &amp; Support" /></a>
+{% block document %} {{ super() }} 
 
-{% include "searchbox.html" %} {% endblock %} {% block body %} {% if pagename == "ContentIndex" %}
-
-<style>
-    .wy-nav-content {
-        max-width: none !important;
-    }
-</style>
-{% else %}
-<style>
-    .wy-nav-content {
-        max-width: 1200px !important;
-    }
-</style>
-{% endif %} 
-
-
-{% endblock %} {% block htmltitle %} {% if pagename == "ContentIndex" %}
-
-<title>{{ _('AIMMS How-To &mdash; Help &amp; Support') }}</title>
-
-{% else %}
-
-<title>{{ title|striptags|e }} &mdash; AIMMS How-To &mdash; Help &amp; Support</title>
-
-{% endif %} {% endblock %} {% block document %} {{ super() }} {% if (("index" in pagename) or ("ContentIndex" in pagename) or ("search" in pagename)) %} {# Do nothing :) I don't know how to do the negation properly in Jinja #} {% else %} {% if Display_3rd_Party_Extensions
-%}
+{% if (("index" in pagename) or ("ContentIndex" in pagename) or ("search" in pagename)) %} {# Do nothing :) I don't know how to do the negation properly in Jinja #} {% else %} {% if Display_3rd_Party_Extensions %}
 
 <h3 style="display: inline; margin-right: 20px;">Was this helpful?</h3>
 
@@ -90,10 +28,6 @@
 </script>
 <!-- LikeBtn.com END -->
 
-{% endif %}
-
-
-<a href="https://community.aimms.com/search?q={{ title|striptags|e }}" target="_blank">Give feedback for this article on the AIMMS Community</a>{% endif %} {% endblock %} {% block footer %} {{ super() }}
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1290545-14"></script>
 <script>
@@ -107,6 +41,9 @@
     gtag('config', 'UA-1290545-14');
 </script>
 
+{% endif %}
+{% endif %}
+
 <!-- Algolia docsearch BEGIN -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
 <script type="text/javascript"> docsearch({
@@ -119,17 +56,4 @@ debug: true // Set debug to true if you want to inspect the dropdown
 </script>
 <!-- Algolia docsearch END -->
 
-{% if Display_3rd_Party_Extensions %}
-
-<!-- Insided embeddable -->
-<script>
-    (function(w, d, s) {
-        var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s);
-        j.async = true;
-        j.src = '//embeddable-widgets-euw1.insided.com/aimms-en.insided-conversational.js';
-        f.parentNode.insertBefore(j, f);
-    })(window, document, 'script');
-</script>
-
-{% endif %} {% endblock %}
+{% endblock %}

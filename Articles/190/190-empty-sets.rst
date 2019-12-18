@@ -12,9 +12,9 @@ To remove all the elements from a set, you can use the ``empty`` statement in AI
 
 The behavior of the empty statement depends on the set that you provide as an argument:
 
-* The set is not a subset of ``AllIdentifiers`` -
+* The set is not a subset of :aimms:set:`AllIdentifiers` -
     The empty statement will remove all elements from the given set.
-* The set is a subset of ``AllIdentifiers`` -
+* The set is a subset of :aimms:set:`AllIdentifiers` -
     The empty statement will empty all the identifiers that are in the given subset.
 
 Let's assume the following two identifiers:
@@ -29,7 +29,7 @@ Let's assume the following two identifiers:
    subset of  :  AllVariables
 
 
-As you can see, it holds that ``ActiveVariables`` :math:`\subseteq` ``AllVariables`` :math:`\subseteq` ``AllIdentifiers`` because the predefined set ``AllVariables`` is defined in AIMMS to be a subset of ``AllVariablesConstraints``, which in turn is a subset of ``AllIdentifiers``. You can verify this by opening the attribute window of these predefined sets.
+As you can see, it holds that ``ActiveVariables`` :math:`\subseteq` :aimms:set:`AllVariables` :math:`\subseteq` :aimms:set:`AllIdentifiers` because the predefined set :aimms:set:`AllVariables` is defined in AIMMS to be a subset of ``AllVariablesConstraints``, which in turn is a subset of :aimms:set:`AllIdentifiers`. You can verify this by opening the attribute window of these predefined sets.
 
 This means that the ``empty`` statement behaves differently for ``NormalSet`` and ``ActiveVariables``, as explained below:
 

@@ -1,0 +1,12 @@
+/* --------------     Styling for the Search field -------------------------------- */
+
+.wy-side-nav-search input[type=text] {
+    background-color: white;
+    border-radius: 10px;
+}
+/*---------- Algolia search ----------*/
+/*In order to have the search widget on top of the content */
+
+.wy-nav-side { overflow: visible; }
+.wy-side-scroll { overflow: inherit; }
+.ds-input {vertical-align: inherit!important;}

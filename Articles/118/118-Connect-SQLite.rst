@@ -1,4 +1,4 @@
-﻿.. include:: /includes/icons-sub.def
+.. include:: /includes/icons-sub.def
 
 Link an SQLite Database to a Project
 =========================================
@@ -64,7 +64,7 @@ To read one database, AIMMS needs to know the name of the driver it should use a
 
 * By generating a **.dsn file**, that you will store somewhere on your computer (almost equivalent to a text file .txt) and link it to your AIMMS identifier
 * By generating a **system .dsn file**, that your computer will store for you in a specific place
-* By creating a** connection string**, that will have the same role as a .dsn file, but directly written into the AIMMS application. This appears to be particularly useful when, for instance, a password is needed to read a certain database, and you don't want to rewrite it each time you open your application or the database.
+* By creating a **connection string**, that will have the same role as a .dsn file, but directly written into the AIMMS application. This appears to be particularly useful when, for instance, a password is needed to read a certain database, and you don't want to rewrite it each time you open your application or the database.
 
 Generate a .dsn file connected to your SQLite database
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -136,7 +136,7 @@ A connection string is an AIMMS string parameter |sp| that you could fill out 
 
 As you may see, this function fills out your string parameter with a "coded" string that will be read by your AIMMS datasource table identifier. This function allows you to define a user name and a password as well, by default empty, to access your SQLite database.
 
-For more details on ``SQLCreateConnectionString`` function syntax, right-click on ``SQLCreateConnectionString`` in the body field and select the 'help on' item  
+For more details on :aimms:func:`SQLCreateConnectionString` function syntax, right-click on :aimms:func:`SQLCreateConnectionString` in the body field and select the 'help on' item  
 
 * Finally, you should run the procedure ``WriteTheConnectionString``, in order to fill out your String parameter.
 

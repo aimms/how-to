@@ -66,7 +66,7 @@ As you can see, optimality is reached.
 Declaring the GMP
 ----------------------------------
 
-The Generated Mathematical Programs are objects stored in AIMMS internally. Each object is given an identification as an element in the predeclared set ``AllGeneratedMathematicalPrograms``. We use an element parameter to store such an element after generating, so that we can reference it in later manipulations such as solving. The declaration is:
+The Generated Mathematical Programs are objects stored in AIMMS internally. Each object is given an identification as an element in the predeclared set :aimms:set:`AllGeneratedMathematicalPrograms`. We use an element parameter to store such an element after generating, so that we can reference it in later manipulations such as solving. The declaration is:
 
 .. code-block:: aimms
     :linenos:

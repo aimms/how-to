@@ -1,9 +1,6 @@
 {
   "version": "4.67.0",
   "application": {
-    "theme.classic": {
-      "literal": "NOT_ALLOWED"
-    },
     "aimms.widget.type": {
       "literal": "application"
     },
@@ -25,6 +22,9 @@
           }
         ]
       }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
     }
   },
   "pages/home": {
@@ -50,30 +50,6 @@
       "literal": "page"
     }
   },
-  "widgets/tab": {
-    "contents": {
-      "aimms": {
-        "contents": [
-          "p_d",
-          "p_e"
-        ]
-      }
-    },
-    "aimms.widget.type": {
-      "literal": "table"
-    },
-    "contents.partition": {
-      "literal": {
-        "rowHeader": [
-          "i_pt"
-        ],
-        "colHeader": [
-          "<IDENTIFIER-SET>"
-        ],
-        "aggregated": []
-      }
-    }
-  },
   "widgets/bl": {
     "contents": {
       "aimms": {
@@ -92,6 +68,30 @@
           "i_pt"
         ],
         "layers": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    }
+  },
+  "widgets/tab": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_d",
+          "p_e"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_pt"
+        ],
+        "colHeader": [
           "<IDENTIFIER-SET>"
         ],
         "aggregated": []

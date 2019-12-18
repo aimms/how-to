@@ -71,6 +71,17 @@ The download button is available since AIMMS PRO 2.11.
 For older AIMMS PRO systems, you can look at the folders:
 ``C:\ProgramData\AimmsPRO\Log\Sessions\`` and ``C:\ProgramData\AimmsPRO\Log\`` on the machine running AIMMS PRO.
 
+.. Increase logging for WinUI apps
+.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. 
+.. Use the ``LoggerConfig.xml`` file which can be downloaded :download:`here <model/LoggerConfig.zip>` and copy this in the cache of the published application, which can be found at ``~\AppData\Local\AIMMS\PRO\<pro name>\<App Name>\<UUID>``.
+.. 
+.. The cache of the ControlPanel app on my laptop looks as follows:
+.. 
+.. .. image:: images/FolderStructureCachedApp.png
+..     :align: center
+
+
 further reading
 ^^^^^^^^^^^^^^^^
 
