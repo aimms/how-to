@@ -105,6 +105,128 @@ LibraryModule Library_GuardServerSession {
                     Property: Input;
                 }
             }
+            Procedure pr_ClearErrors {
+                Body: {
+                    empty s_JobErrorMessageNumbers;
+                }
+            }
+            Procedure pr_ReportCurrentErrorsToTextFile {
+                Arguments: (sp_filename);
+                Body: {
+                    block where listing_page_width := 32000 ;
+                    f_out.pagewidth := 32000 ;
+                    put f_out;
+                    for i_JobErrorMessageNumber do
+                    	put     ep_JobErrorSeverity(i_JobErrorMessageNumber), " ", 
+                    	        sp_JobErrorMoments( i_JobErrorMessageNumber), " : ",
+                    		sp_JobErrorMessages(i_JobErrorMessageNumber), / ;
+                    	for i_StackPosition | p_JobErrorLines(i_JobErrorMessageNumber, i_StackPosition) do
+                    		put "    ", p_JobErrorLines(i_JobErrorMessageNumber, i_StackPosition):4:0, 
+                    		    " : ", ep_JobErrorNodes(i_JobErrorMessageNumber, i_StackPosition):0, / ;
+                    	endfor ;
+                    	put / ;
+                    endfor ;
+                    putclose ;
+                    endblock ;
+                }
+                StringParameter sp_filename {
+                    Property: Input;
+                }
+                File f_out {
+                    Name: sp_filename;
+                    Device: Disk;
+                    Mode: replace;
+                }
+            }
+            Procedure pr_GlobalErrorHandler {
+                Arguments: (ep_err);
+                Body: {
+                    ! Increase the number of recorded error messages.
+                    s_JobErrorMessageNumbers += card(s_JobErrorMessageNumbers) + 1;
+                    ep_JobErrorMessageNumber := last(s_JobErrorMessageNumbers);
+                    
+                    ! Record the message and severity.
+                    sp_JobErrorMessages(ep_JobErrorMessageNumber) := errh::Message( ep_err);
+                    sp_JobErrorMoments( ep_JobErrorMessageNumber) := CurrentToString("%c%y-%m-%d %H:%M:%S:%T%TZ('UTC')");
+                    ep_JobErrorSeverity(ep_JobErrorMessageNumber) := errh::Severity(ep_err);
+                    
+                    ! Record the entire stack of error positions
+                    p_errStackHeight := errh::NumberOfLocations(ep_err);
+                    p_errStackPos := 1 ;
+                    while p_errStackPos <= p_errStackHeight do
+                    	ep_StackPosition := p_errStackPos;
+                    	ep_JobErrorNodes(ep_JobErrorMessageNumber,ep_StackPosition) := errh::Node(ep_err,ep_StackPosition);
+                    	p_JobErrorLines( ep_JobErrorMessageNumber,ep_StackPosition) := errh::Line(ep_err,ep_StackPosition);
+                    	p_errStackPos += 1 ;
+                    endwhile ;
+                    
+                    if p01_locSeenErrorsAreHandled then
+                    	errh::MarkAsHandled( ep_err );
+                    endif ;
+                }
+                ElementParameter ep_err {
+                    Range: errh::PendingErrors;
+                    Property: Input;
+                }
+                ElementParameter ep_JobErrorMessageNumber {
+                    Range: s_JobErrorMessageNumbers;
+                }
+                Parameter p_errStackHeight;
+                Parameter p_errStackPos;
+                ElementParameter ep_StackPosition {
+                    Range: s_StackPositions;
+                }
+            }
+            Procedure pr_SeenErrorsAreHandled {
+                Arguments: (p01_AreHandled);
+                Body: {
+                    p01_locSeenErrorsAreHandled := p01_AreHandled ;
+                }
+                Parameter p01_AreHandled {
+                    Range: binary;
+                    Default: 1;
+                    Property: Input;
+                }
+            }
+            Procedure pr_DownloadErrorReport {
+                Arguments: (FileLocation,statusCode,statusDescription);
+                Body: {
+                    FileLocation := "usage.errorLogging";
+                    
+                    ! we store the location of the file in string parameter FinalLocation
+                    FinalLocation := webui::GetIOFilePath(FileLocation);
+                    
+                    ! writing the string parameter FinalLocation to a text file
+                    pr_ReportCurrentErrorsToTextFile(FinalLocation);
+                    
+                    ! checking if the previous write statement was successful or not
+                    if FileExists(FinalLocation) then
+                    
+                       ! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
+                       StatusCode := webui::ReturnStatusCode('CREATED');
+                       ! displaying the status message as All perfect instead of the default "File ready to download"
+                       StatusDescription := "All perfect!";
+                    
+                    else    !if previous write statement was not successful
+                    
+                       ! setting the statusCode to 'ERROR' and the download widget will not show the Get button anymore
+                       statusCode := webui::ReturnStatusCode('ERROR');
+                       !displaying a custom error message
+                       statusDescription := "Something went wrong when creating the file.";
+                    
+                    endif;
+                }
+                StringParameter FileLocation {
+                    Property: Output;
+                }
+                Parameter statusCode {
+                    Property: Output;
+                }
+                StringParameter statusDescription {
+                    Property: Output;
+                }
+                StringParameter FinalLocation;
+            }
         }
         Section Inspect_state_session {
             Procedure pr_SaveState {
@@ -164,7 +286,7 @@ LibraryModule Library_GuardServerSession {
                 StringParameter sp_ProStorageFileName;
                 StringParameter sp_slash;
                 Set s_SelectedIdentifiers {
-                    SubsetOf: AllIdentifiers;
+                    SubsetOf: AllSymbols;
                     Index: i_someId;
                     Property: Input;
                 }
@@ -185,6 +307,10 @@ LibraryModule Library_GuardServerSession {
     }
     Section Private_Section {
         Section Guard_utilities {
+            Parameter p01_locSeenErrorsAreHandled {
+                Range: binary;
+                InitialData: 0;
+            }
             Procedure pr_SampleProc;
         }
         Section Inspect_utilities {
