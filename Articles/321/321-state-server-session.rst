@@ -26,7 +26,7 @@ The library  ``Library GuardServerSession``, includes the procedure ``gss::pr_Sa
 
 #.  ``sp_Label`` The value of this string parameter is used as the folder name; this folder name is referred to as the output folder below.
 
-#.  ``s_SelectedIdentifiers`` This is a subset of ``AllIdentifiers``. For each identifier that contains data, a corresponding file is created in the output folder, containing one element per line.
+#.  ``s_SelectedIdentifiers`` This is a subset of ``AllSymbols``. For each identifier that contains data, a corresponding file is created in the output folder, containing one element per line.
 
 .. note:: If your app is running on an AIMMS PRO platform, or if it has a connection to an AIMMS PRO platform, the files created will also be copied to AIMMS PRO storage, as a subfolder of ``/Userdata/<env>/<userName>/<appName>/<appVersion>``.
 
