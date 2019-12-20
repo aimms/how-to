@@ -1,13 +1,7 @@
 ## ams_version=1.0
 
 Model Main_AIMMSPROUsageStatistics {
-    Procedure pr_Test {
-        Body: {
-            pr_ReadInitialCaseData();
-            pr_ComputeStackedBarCharts();
-        }
-    }
-    DeclarationSection Generic_declarations {
+    DeclarationSection Units_of_Measurement {
         Quantity SI_Time_Duration {
             BaseUnit: hour;
             Conversions: {
@@ -26,76 +20,37 @@ Model Main_AIMMSPROUsageStatistics {
         Quantity qnt_Memory {
             BaseUnit: MB;
             Conversions: byte->MB : #-># / 1048576;
+            Comment: "Expresses the value for Computer Memory";
         }
     }
     Section database_connections {
-        Section Generate_example {
-            Parameter p_NoSessions {
-                InitialData: {
-                    10000
-                    ! with a million sessions, some procedures start taking several minutes.
-                }
+        Section snippets_db {
+            Parameter p_TestDataSource {
+                InitialData: 0;
             }
-            StringParameter sp_StartTime {
-                InitialData: {
-                    
-                    "2019-01-01 00"
-                }
-            }
-            StringParameter sp_EndTime {
-                InitialData: "2019-12-31 23:59:59:99";
-            }
-            Parameter p_TotalTime {
-                Unit: tick;
-            }
-            Parameter p_ticksFromStart {
-                Unit: tick;
-            }
-            StringParameter sp_ThisSessionStart;
-            Parameter p_ThisSessionDuration {
-                Unit: tick;
-            }
-            ElementParameter ep_addThis {
-                Range: s_Sessions;
-            }
-            Procedure pr_GenerateArtificialSessionData {
+            Procedure pr_TestDataSource {
                 Body: {
-                    empty s_Sessions ;
-                    p_TotalTime := StringToMoment( "%c%y-%m-%d %H", [hour], sp_StartTime, sp_EndTime);
-                    while loopCount <= p_NoSessions do
-                    	p_ticksFromStart := Round(Uniform(1[tick],p_TotalTime));
-                    	sp_ThisSessionStart := MomentToString( "%c%y-%m-%d %H", [hour], sp_StartTime, p_ticksFromStart );
-                    	p_ThisSessionDuration := Exponential(1[hour],10[hour]);
-                    	SetElementAdd( s_Sessions, ep_addThis, formatString("Session%06i",loopcount));
-                    	sp_SessStartTimes(ep_addThis) := sp_ThisSessionStart;
-                    	p_SessDurations(ep_addThis) := p_ThisSessionDuration;
-                    
-                    	sp_SessValueData(ep_addThis,'AccountNames') := "ProOnPrem";
-                    	sp_SessValueData(ep_addThis,'SessionTypes') := "WinUI";
-                    	sp_SessValueData(ep_addThis,'Environments') := "ROOT";
-                    	sp_SessValueData(ep_addThis,'UserNames') := "Theo";
-                    	sp_SessValueData(ep_addThis,'Applications') := "Fabulous";
-                    	sp_SessValueData(ep_addThis,'AppVersions') := "3.14159";
-                    
-                    	p_SessPeakMemory(ep_addThis) := 123456;
-                    endwhile ;
-                }
-            }
-            Procedure pr_WriteData {
-                Body: {
-                    empty db_SessionTable ;
-                    write to table db_SessionTable;
+                    CurrentErrorMessage := "" ;
+                    p_TestDataSource := TestDataSource(
+                    	Datasource  :  sp_Datasource, 
+                    	interactive :  1, 
+                    	timeout     :  30);
                 }
             }
         }
-        Procedure pr_TestDataSource {
+        Procedure pr_ToggleTrackingOn {
             Body: {
                 CurrentErrorMessage := "" ;
-                p_TestDataSource := TestDataSource(
-                	Datasource  :  sp_Datasource, 
-                	interactive :  1, 
-                	timeout     :  30);
-                display CurrentErrorMessage ;
+                p_retCode :=DirectSQL(
+                	Datasource :  sp_Datasource, 
+                	SQLcommand :  "UPDATE aimms.configuration_parameters " +
+                                      "SET value = 1 " +
+                                      "WHERE name='enableStoring'; ");
+                CloseDataSource(sp_Datasource);
+                if p_retCode <> 1 or CurrentErrorMessage <> "" then
+                	raise error "Toggling session tracking on failed: " +
+                	            CurrentErrorMessage ;
+                endif ;
             }
         }
         Procedure pr_ReadData {
@@ -103,6 +58,10 @@ Model Main_AIMMSPROUsageStatistics {
                 block 
                 	empty Session_information_read_in;
                 	read from table dbpr_ReadProSessionData();
+                	CloseDataSource(sp_Datasource);
+                
+                	p01_StartTimeAccurateByTick := 1 ;
+                	pr_ComputeStackedBarCharts();
                 onerror ep_err do
                 	gss::pr_GlobalErrorHandler(ep_err);
                 endblock ;
@@ -136,31 +95,26 @@ Model Main_AIMMSPROUsageStatistics {
             }
         }
         DeclarationSection database_connection {
+            Property: NoSave;
+            Parameter p01_isAnAdmin {
+                InitialData: 0;
+            }
             StringParameter sp_Datasource {
                 Definition: {
-                    "PostgreSQL35W"
-                    
-                    !SQLCreateConnectionString(
-                    !	DatabaseInterface              :  'ODBC', 
-                    !	DriverName                     :  "PostgreSQL Unicode(x64)", 
-                    !	ServerName                     :  "aimmspro-local", 
-                    !	DatabaseName                   :  "aimms", 
-                    !	UserId                         :  "aimms", 
-                    !	Password                       :  "aimms123", 
-                    !	AdditionalConnectionParameters :  "")
-                    
-                    !SQLCreateConnectionString(
-                    !    	DatabaseInterface              :  'ODBC', 
-                    !    	DriverName                     :  "MySQL ODBC 5.3 ANSI Driver", 
-                    !    	ServerName                     :  "localhost", 
-                    !    	DatabaseName                   :  "aimms", 
-                    !    	UserId                         :  "aimms", 
-                    !    	Password                       :  "aimms123", 
-                    !    	AdditionalConnectionParameters :  "");
-                    !
+                    SQLCreateConnectionString(
+                    	DatabaseInterface              :  'ODBC', 
+                    	DriverName                     :  "PostgreSQL Unicode(x64)", 
+                    	ServerName                     :  "localhost",  
+                    	DatabaseName                   :  "aimms", 
+                    	UserId                         :  "aimms", 
+                    	Password                       :  sp_Password, 
+                    	AdditionalConnectionParameters :  "port=15432")
                 }
             }
-            Parameter p_TestDataSource;
+            Parameter p_retCode;
+            StringParameter sp_Password {
+                InitialData: "";
+            }
             DatabaseTable db_SessionTable {
                 DataSource: "data\\AIMMSPROUsageStatistics.dsn";
                 TableName: "SessionTable";
@@ -170,632 +124,350 @@ Model Main_AIMMSPROUsageStatistics {
                     "SessionDuration"  -->p_SessDurations(i_session)
                 }
             }
+            Parameter p01_StartTimeAccurateByTick {
+                InitialData: 0;
+            }
         }
-        Procedure pr_ReadInitialCaseData {
+        Procedure pr_ReadAimmsPro {
             Body: {
-                CaseFileLoad(
-                	url                         :  "data\\initialData.data", 
-                	keepUnreferencedRuntimeLibs :  0);
+                block
+                	pro::sessionmanager::ListSessionsUsage(
+                		beginDate   :  "1970-01-01", ! "1970-01-01 00:00:00:00", 
+                		endDate     :  CurrentToString("%c%y-%m-%d"), ! CurrentToString("%c%y-%m-%d %H:%M:%S:%t"), 
+                		sessionList :  s_Sessions, 
+                		sessionType :  sp_SessValueData( i_session, 'SessionTypes' ), 
+                		accountName :  sp_SessValueData( i_session, 'AccountNames' ), 
+                		environment :  sp_SessValueData( i_session, 'Environments' ), 
+                		username    :  sp_SessValueData( i_session, 'UserNames'    ), 
+                		appName     :  sp_SessValueData( i_session, 'Applications' ), 
+                		appVersion  :  sp_SessValueData( i_session, 'AppVersions'  ), 
+                		startedAt   :  sp_SessStartTimes( i_session ), 
+                		duration    :  p_sessDur( i_session ), 
+                		peakMemory  :  p_sessMem( i_session ));
+                	p_SessDurations(i_session) := (p_sessDur( i_session ))[milliseconds];
+                	p_SessPeakMemory( i_session ) := (p_sessMem(i_session))[byte];
+                
+                	p01_StartTimeAccurateByTick := 0 ;
+                	pr_ComputeStackedBarCharts();
+                onerror ep_err do
+                	gss::pr_GlobalErrorHandler(ep_err);
+                endblock ;
+            }
+            Comment: {
+                "Read all session info via the pro::sessionmanager::ListSessionsUsage. 
+                Filtering on date will be done in this application itself."
+            }
+            ElementParameter ep_err {
+                Range: errh::PendingErrors;
+            }
+            Parameter p_sessDur {
+                IndexDomain: i_session;
+            }
+            Parameter p_sessMem {
+                IndexDomain: i_session;
             }
         }
     }
-    DeclarationSection Value_sets {
-        Set s_ValueMasterSet {
-            Index: i_valueMaster;
-            Definition: s_AccountNames + s_Environments + s_UserNames + s_SessionTypes + s_Applications + s_AppVersions + s_GenericAll;
-        }
-        Set s_ValueSubset {
-            SubsetOf: s_ValueMasterSet;
-            Index: i_someValue;
-            Parameter: ep_someValue, ep_FocusValue;
-        }
-        Set s_ValueTypes {
-            Index: i_valueType;
-            Parameter: ep_valueType, ep_BarchartColumnValueType;
-            Definition: {
-                data {
-                	AccountNames,
-                	Environments,
-                	UserNames,
-                	SessionTypes,
-                	Applications,
-                	AppVersions,
-                	None }
+    Section data_declarations {
+        DeclarationSection Value_sets {
+            Set s_ValueMasterSet {
+                Index: i_valueMaster;
+                Definition: s_AccountNames + s_Environments + s_UserNames + s_SessionTypes + s_Applications + s_AppVersions + s_GenericAll;
+            }
+            Set s_ValueSubset {
+                SubsetOf: s_ValueMasterSet;
+                Index: i_someValue;
+                Parameter: ep_someValue, ep_FocusValue;
+            }
+            Set s_ValueTypes {
+                Index: i_valueType;
+                Parameter: ep_valueType, ep_BarchartColumnValueType;
+                Definition: {
+                    data {
+                    	AccountNames,
+                    	Environments,
+                    	UserNames,
+                    	SessionTypes,
+                    	Applications,
+                    	AppVersions,
+                    	None }
+                }
+            }
+            Set s_GenericAll {
+                SubsetOf: s_ValueMasterSet;
+                Definition: data { all };
+            }
+            Set s_EventTypes {
+                Index: i_EventType;
+                Parameter: ep_EventType;
+                Definition: data { StartSession, FinishSession };
+            }
+            Set s_AccountNames {
+                SubsetOf: s_ValueMasterSet;
+                Index: i_AccountName;
+                Parameter: ep_AccountName;
+            }
+            Set s_Environments {
+                SubsetOf: s_ValueMasterSet;
+                Index: i_Environment;
+                Parameter: ep_Environment;
+            }
+            Set s_UserNames {
+                SubsetOf: s_ValueMasterSet;
+                Index: i_UserName;
+                Parameter: ep_UserName;
+            }
+            Set s_SessionTypes {
+                SubsetOf: s_ValueMasterSet;
+                Index: i_SessionType;
+                Parameter: ep_SessionType, ep_FocusSessionType;
+                InitialData: data { data, solver, WinUI };
+            }
+            Set s_Applications {
+                SubsetOf: s_ValueMasterSet;
+                Index: i_Application;
+                Parameter: ep_Application;
+            }
+            Set s_AppVersions {
+                SubsetOf: s_ValueMasterSet;
+                Index: i_AppVersion;
+                Parameter: ep_AppVersion;
             }
         }
-        Set s_GenericAll {
-            SubsetOf: s_ValueMasterSet;
-            Definition: data { all };
-        }
-        Set s_EventTypes {
-            Index: i_EventType;
-            Parameter: ep_EventType;
-            Definition: data { StartSession, FinishSession };
-        }
-        Set s_AccountNames {
-            SubsetOf: s_ValueMasterSet;
-            Index: i_AccountName;
-            Parameter: ep_AccountName;
-        }
-        Set s_Environments {
-            SubsetOf: s_ValueMasterSet;
-            Index: i_Environment;
-            Parameter: ep_Environment;
-        }
-        Set s_UserNames {
-            SubsetOf: s_ValueMasterSet;
-            Index: i_UserName;
-            Parameter: ep_UserName;
-        }
-        Set s_SessionTypes {
-            SubsetOf: s_ValueMasterSet;
-            Index: i_SessionType;
-            Parameter: ep_SessionType, ep_FocusSessionType;
-            InitialData: data { data, solver, WinUI };
-        }
-        Set s_Applications {
-            SubsetOf: s_ValueMasterSet;
-            Index: i_Application;
-            Parameter: ep_Application;
-        }
-        Set s_AppVersions {
-            SubsetOf: s_ValueMasterSet;
-            Index: i_AppVersion;
-            Parameter: ep_AppVersion;
-        }
-    }
-    DeclarationSection Session_information_read_in {
-        Set s_Sessions {
-            Index: i_session;
-        }
-        StringParameter sp_SessStartTimes {
-            IndexDomain: i_session;
-        }
-        StringParameter sp_SessValueData {
-            IndexDomain: (i_session,i_valueType);
-        }
-        ElementParameter ep_SessValueData {
-            IndexDomain: (i_session,i_valueType);
-            Range: s_ValueMasterSet;
-        }
-        Parameter p_SessDurations {
-            IndexDomain: i_Session;
-            Unit: milliseconds;
-        }
-        Parameter p_SessDurationsTick {
-            IndexDomain: i_Session;
-            Unit: tick;
-            Definition: p_SessDurations(i_session);
-        }
-        Parameter p_SessPeakMemory {
-            IndexDomain: i_Session;
-            Unit: byte;
-        }
-    }
-    DeclarationSection Events {
-        Set s_Events {
-            SubsetOf: Integers;
-            Index: i_Event, i_Event2;
-            Parameter: ep_Event, ep_prevEvent, ep_nextEvent;
-            Property: ElementsAreLabels;
-        }
-        StringParameter sp_EvMoment {
-            IndexDomain: i_Event;
-        }
-        ElementParameter ep_EvEventTypes {
-            IndexDomain: i_Event;
-            Range: s_EventTypes;
-        }
-        ElementParameter ep_EvValueData {
-            IndexDomain: (i_Event,i_valueType);
-            Range: s_ValueMasterSet;
-        }
-        Parameter p_EvPeakMemory {
-            IndexDomain: i_Event;
-            Unit: MB;
-        }
-        Parameter p_NumberOfSessionsAfterEvent {
-            IndexDomain: i_Event;
-        }
-        Parameter p_NumberOfSessionByUserAfterEvent {
-            IndexDomain: (i_Event,i_UserName);
-        }
-        Parameter p_NumberOfUsersAfterEvent {
-            IndexDomain: i_Event;
-        }
-        Parameter p_MemoryBySessionsAfterEvent {
-            IndexDomain: i_Event;
-            Unit: MB;
-        }
-        Parameter p_AverageNumberOfSessions {
-            IndexDomain: i_Event;
-            Definition: average(i_event2, p_NumberOfSessionsAfterEvent(i_Event2));
-        }
-        Parameter p_AverageMemoryInUse {
-            IndexDomain: i_Event;
-            Unit: MB;
-            Definition: average(i_event2, p_MemoryBySessionsAfterEvent(i_Event2));
-        }
-        Parameter p_NumberOfSessionsAfterEventBySessionType {
-            IndexDomain: (i_Event,i_someValue);
-        }
-        Parameter p_MemoryBySessionsAfterEventBySessionType {
-            IndexDomain: (i_Event,i_someValue);
-            Unit: MB;
-        }
-        Parameter p_NumberOfUsersAfterEventBySessionType {
-            IndexDomain: (i_Event,i_someValue);
-        }
-    }
-    Procedure pr_TranslateStringsToElements {
-        Body: {
-            Block ! Normalize session start time.
-                  ! Time fraction handling: AIMMS can only handle up to tick (1/100 of a second), database gives up to 6 decimals.
-                  ! We're removing everthing after the first two decimals.
-                  	for i_session do
-                  		p_dotPos := findNthString( sp_SessStartTimes( i_session ), ".", -1 );
-                  		if p_dotPos then
-                  			sp_SessStartTimes( i_session ) := 
-                  				substring( sp_SessStartTimes( i_session ), 1, p_dotPos-1) +
-                  				":"+
-                  				substring( sp_SessStartTimes( i_session ), p_dotPos+1, p_dotPos + 2);
-                  		endif ;
-                  	endfor ;
-            endblock ;
-            
-            sp_SessValueData(i_session,'AccountNames')|(not sp_SessValueData(i_session,'AccountNames')) := "ProOnPrem";
-            
-            ep_SessValueData( i_session, 'AccountNames' ) := StringToElement(s_AccountNames, sp_SessValueData( i_session, 'AccountNames' ), create:1);
-            ep_SessValueData( i_session, 'SessionTypes' ) := StringToElement(s_SessionTypes, sp_SessValueData( i_session, 'SessionTypes' ), create:1);
-            ep_SessValueData( i_session, 'Environments' ) := StringToElement(s_Environments, sp_SessValueData( i_session, 'Environments' ), create:1);
-            ep_SessValueData( i_session, 'UserNames'    ) := StringToElement(s_UserNames   , sp_SessValueData( i_session, 'UserNames'    ), create:1);
-            ep_SessValueData( i_session, 'Applications' ) := StringToElement(s_Applications, sp_SessValueData( i_session, 'Applications' ), create:1);
-            ep_SessValueData( i_session, 'AppVersions'  ) := StringToElement(s_AppVersions , sp_SessValueData( i_session, 'AppVersions'  ), create:1);
-            
-            p01_SelectedAccounts(i_AccountName) := 1;
-            p01_SelectedSessionTypes(i_SessionType) := 1;
-            p01_SelectedEnvironments(i_Environment) := 1;
-            p01_SelectedUsernames(i_UserName) := 1;
-            p01_SelectedApplications(i_Application) := 1;
-            p01_SelectedAppversions(i_AppVersion) := 1;
-        }
-        Parameter p_dotPos;
-    }
-    Procedure pr_EventsFromSessions {
-        Body: {
-            block ! Construct an unordered list of evens from sessions and session duration.
-            	empty s_WorkEvents ;
-            	for i_Session do
-            		block ! Create work event, start of this session
-            			s_WorkEvents += card(s_WorkEvents)+1 ;
-            			ep_WorkEvent := last( s_WorkEvents );
-            			sp_WrkEvMoments( ep_WorkEvent ) := sp_SessStartTimes(i_session);
-            			ep_WrkEvEventType( ep_WorkEvent ) := 'StartSession';
-            		endblock ;
-            		block ! Copy session data to work event.
-            			ep_WrkValueData(ep_WorkEvent,i_ValueType) := ep_SessValueData(i_Session,i_valuetype);
-            
-            			p_WrkEvPeakMemory(   ep_WorkEvent ) := p_SessPeakMemory(   i_session );
-            		endblock ;
-            
-            		block ! Create work event, end of this session
-            			s_WorkEvents += card(s_WorkEvents)+1 ;
-            			ep_WorkEvent := last( s_WorkEvents );
-            			sp_WrkEvMoments( ep_WorkEvent ) := MomentToString("%c%y-%m-%d %H:%M:%S:%T",[tick],sp_SessStartTimes(i_session),p_SessDurations(i_Session));
-            			ep_WrkEvEventType( ep_WorkEvent ) := 'FinishSession';
-            		endblock ;
-            		block ! Copy session data to work event.
-            			ep_WrkValueData(ep_WorkEvent,i_ValueType) := ep_SessValueData(i_Session,i_valuetype);
-            			p_WrkEvPeakMemory(   ep_WorkEvent ) := p_SessPeakMemory(   i_session );
-            		endblock ;
-            
-            	endfor ;
-            endblock ;
-            
-            s_OrderedWorkEvents := sort( i_WorkEvent, sp_WrkEvMoments(i_WorkEvent));
-            
-            block ! Transform the unordered list into an ordered list.
-            	empty s_Events ;
-            	for i_OrderedWorkEvent do ! Go thru the events in an ordered fashion.
-            		block ! Create a new event.
-            			ep_WorkEvent := i_OrderedWorkEvent;
-            			s_Events += card(s_Events)+1 ;
-            			ep_Event := last( s_Events );
-            			sp_EvMoment(ep_Event ):= sp_WrkEvMoments( ep_WorkEvent );
-            		endblock ;
-            		block ! copy data from "work event" to "event"
-            			ep_EvEventTypes( ep_Event ) := ep_WrkEvEventType( ep_WorkEvent );
-            
-            			ep_EvValueData( ep_Event,i_valuetype ) := ep_WrkValueData( ep_WorkEvent, i_valueType );
-            
-            			p_EvPeakMemory( ep_Event ) := p_WrkEvPeakMemory( ep_WorkEvent );
-            		endblock ;
-            
-            	endfor ;
-            endblock ;
-            
-            sp_FirstEvent := substring( sp_EvMoment( first( s_Events ) ), 1, 13 );
-            sp_LastEvent  := substring( sp_EvMoment( last(  s_Events ) ), 1, 13 );
-            p_DurationBetweenFirstLastEvent := StringToMoment(
-            	Format        :  "%c%y-%m-%d %H", 
-            	Unit          :  [hour], 
-            	ReferenceDate :  sp_FirstEvent, 
-            	Timeslot      :  sp_LastEvent);
-            sp_ViewportStart := MomentToString(
-            	Format        :  "%c%y-%m-%d %H", 
-            	unit          :  [hour], 
-            	ReferenceDate :  sp_FirstEvent, 
-            	Elapsed       :  -0.05 * p_DurationBetweenFirstLastEvent);
-            sp_ViewportEnd := MomentToString(
-            	Format        :  "%c%y-%m-%d %H", 
-            	unit          :  [hour], 
-            	ReferenceDate :  sp_LastEvent, 
-            	Elapsed       :  0.05 * p_DurationBetweenFirstLastEvent);
-            
-            pr_InitializeTimebarGanttChart( sp_ViewportStart, sp_FirstEvent, sp_LastEvent, sp_ViewportEnd );
-        }
-        DeclarationSection WorkEvents {
-            Set s_WorkEvents {
-                SubsetOf: Integers;
-                Index: i_WorkEvent;
-                Parameter: ep_WorkEvent;
+        DeclarationSection Session_information_read_in {
+            Set s_Sessions {
+                Index: i_session;
             }
-            Set s_OrderedWorkEvents {
-                SubsetOf: s_WorkEvents;
-                Index: i_OrderedWorkEvent;
-                OrderBy: user;
+            StringParameter sp_SessStartTimes {
+                IndexDomain: i_session;
             }
-            StringParameter sp_WrkEvMoments {
-                IndexDomain: i_WorkEvent;
+            StringParameter sp_SessValueData {
+                IndexDomain: (i_session,i_valueType);
             }
-            ElementParameter ep_WrkEvEventType {
-                IndexDomain: i_WorkEvent;
-                Range: s_EventTypes;
-            }
-            ElementParameter ep_WrkValueData {
-                IndexDomain: (i_WorkEvent,i_valueType);
+            ElementParameter ep_SessValueData {
+                IndexDomain: (i_session,i_valueType);
                 Range: s_ValueMasterSet;
             }
-            Parameter p_WrkEvPeakMemory {
-                IndexDomain: i_WorkEvent;
+            Parameter p_SessDurations {
+                IndexDomain: i_Session;
+                Unit: milliseconds;
+            }
+            Parameter p_SessDurationsTick {
+                IndexDomain: i_Session;
+                Unit: tick;
+                Definition: p_SessDurations(i_session);
+            }
+            Parameter p_SessPeakMemory {
+                IndexDomain: i_Session;
+                Unit: byte;
+            }
+        }
+        DeclarationSection Events {
+            Set s_Events {
+                SubsetOf: Integers;
+                Index: i_Event, i_Event2;
+                Parameter: ep_Event, ep_prevEvent, ep_nextEvent;
+                Property: ElementsAreLabels;
+            }
+            StringParameter sp_EvMoment {
+                IndexDomain: i_Event;
+            }
+            ElementParameter ep_EvEventTypes {
+                IndexDomain: i_Event;
+                Range: s_EventTypes;
+            }
+            ElementParameter ep_EvValueData {
+                IndexDomain: (i_Event,i_valueType);
+                Range: s_ValueMasterSet;
+            }
+            Parameter p_EvPeakMemory {
+                IndexDomain: i_Event;
                 Unit: MB;
             }
-            StringParameter sp_FirstEvent;
-            StringParameter sp_LastEvent;
-            Parameter p_DurationBetweenFirstLastEvent {
-                Unit: tick;
+            Parameter p_NumberOfSessionsAfterEvent {
+                IndexDomain: i_Event;
             }
-            StringParameter sp_ViewportStart;
-            StringParameter sp_ViewportEnd;
+            Parameter p_NumberOfSessionByUserAfterEvent {
+                IndexDomain: (i_Event,i_UserName);
+            }
+            Parameter p_NumberOfUsersAfterEvent {
+                IndexDomain: i_Event;
+            }
+            Parameter p_MemoryBySessionsAfterEvent {
+                IndexDomain: i_Event;
+                Unit: MB;
+            }
+            Parameter p_AverageNumberOfSessions {
+                IndexDomain: i_Event;
+                Definition: average(i_event2, p_NumberOfSessionsAfterEvent(i_Event2));
+            }
+            Parameter p_AverageMemoryInUse {
+                IndexDomain: i_Event;
+                Unit: MB;
+                Definition: average(i_event2, p_MemoryBySessionsAfterEvent(i_Event2));
+            }
+            Parameter p_NumberOfSessionsAfterEventBySessionType {
+                IndexDomain: (i_Event,i_valueMaster);
+            }
+            Parameter p_MemoryBySessionsAfterEventBySessionType {
+                IndexDomain: (i_Event,i_valueMaster);
+                Unit: MB;
+            }
+            Parameter p_NumberOfUsersAfterEventBySessionType {
+                IndexDomain: (i_Event,i_valueMaster);
+            }
         }
     }
-    Procedure pr_NoSessionsMemInUse {
-        Body: {
-            empty 	p_NumberOfSessionsAfterEvent, p_MemoryBySessionsAfterEvent, 
-            	p_NumberOfSessionByUserAfterEvent, p_NumberOfUsersAfterEvent, 
-            	p_NumberOfSessionsAfterEventBySessionType, p_MemoryBySessionsAfterEventBySessionType;
-            update s_ShownEvents;
-            
-            p_NumberOfSessionByUserAfterEvent(i_ShownEvent,ep_EvValueData(i_ShownEvent,'UserNames')) := 
-            	p_NumberOfSessionByUserAfterEvent(i_ShownEvent-1,ep_EvValueData(i_ShownEvent,'UserNames'))+
-            	if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
-            		1
-            	else
-            		-1
-            	endif ;
-            p_NumberOfUsersAfterEvent(i_ShownEvent) := 
-            	Count( i_UserName | p_NumberOfSessionByUserAfterEvent(i_ShownEvent, i_UserName ) );
-            
-            p_NumberOfSessionsAfterEvent(i_ShownEvent) := p_NumberOfSessionsAfterEvent(i_ShownEvent-1)+
-            	if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
-            		1
-            	else
-            		-1
-            	endif ;
-            p_MemoryBySessionsAfterEvent(i_ShownEvent) := p_MemoryBySessionsAfterEvent(i_ShownEvent-1)+
-            	if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
-            		p_EvPeakMemory( i_ShownEvent )
-            	else
-            		-p_EvPeakMemory( i_ShownEvent )
-            	endif ;
-            
-            p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent,i_someValue) := p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent-1,i_someValue)+
-            	if ep_BarchartColumnValueType = 'None' then
-            		if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
-            			1
-            		else
-            			-1
-            		endif 
-            	else
-            		if ep_EvValueData( i_ShownEvent,ep_BarchartColumnValueType ) = i_someValue then
-            			if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
-            				1
-            			else
-            				-1
-            			endif 
-            		else
-            			0
-            		endif 
-            	endif ;
-            
-            p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent,i_someValue) := p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent-1,i_someValue)+
-            	if ep_BarchartColumnValueType = 'None' then
-            		if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
-            			p_EvPeakMemory( i_ShownEvent )
-            		else
-            			-p_EvPeakMemory( i_ShownEvent )
-            		endif 
-            	else
-            		if ep_EvValueData( i_ShownEvent,ep_BarchartColumnValueType ) = i_someValue then
-            			if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
-            				p_EvPeakMemory( i_ShownEvent )
-            			else
-            				-p_EvPeakMemory( i_ShownEvent )
-            			endif
-            		else
-            			0
-            		endif 
-            	endif ;
-            p_NumberOfSessionByUserAfterEventBySession(i_ShownEvent,i_someValue,ep_EvValueData(i_ShownEvent,'UserNames')) :=
-            	p_NumberOfSessionByUserAfterEventBySession(i_ShownEvent-1,i_someValue,ep_EvValueData(i_ShownEvent,'UserNames')) +
-            	if ( ep_BarchartColumnValueType = 'None' ) or ( ep_BarchartColumnValueType = 'UserNames' ) then
-            		if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
-            			1
-            		else
-            			-1
-            		endif 
-            	else
-            		if ep_EvValueData( i_ShownEvent,ep_BarchartColumnValueType ) = i_someValue then
-            			if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
-            				1
-            			else
-            				-1
-            			endif
-            		else
-            			0
-            		endif 
-            	endif ;
-            
-            p_NumberOfUsersAfterEventBySessionType( i_ShownEvent, i_someValue ) := 
-            	Count( i_UserName | p_NumberOfSessionByUserAfterEventBySession( i_ShownEvent, i_someValue, i_UserName ) );
-        }
-        Parameter p_NumberOfRunningSessions;
-        Parameter p_MemInUseBySession;
-        Parameter p_NumberOfSessionByUserAfterEventBySession {
-            IndexDomain: (i_Event,i_someValue,i_username);
-        }
-    }
-    Procedure pr_Open_Full_Event_Information {
-        Body: {
-            if not card( ep_SessValueData ) then
-            	pr_TranslateStringsToElements();
-            	pr_EventsFromSessions();
-            	pr_handleBarchartColumnValueType();
-            	pr_NoSessionsMemInUse();
-            endif ;
-        }
-    }
-    Function fnc_StringToMoment {
-        Arguments: (sp_format, ep_timeunit, sp_referenceDate, sp_timeslot);
-        Unit: hour;
-        Body: {
-            p_returnValue := 0;
-            switch ep_timeunit do
-            	'tick' 	: p_returnValue := StringToMoment(
-            					Format        :  sp_format, 
-            					Unit          :  [tick], 
-            					ReferenceDate :  sp_referenceDate, 
-            					Timeslot      :  sp_timeslot); 
-            	'second' : p_returnValue := StringToMoment(
-            					Format        :  sp_format, 
-            					Unit          :  [s], 
-            					ReferenceDate :  sp_referenceDate, 
-            					Timeslot      :  sp_timeslot);
-            	'minute' : p_returnValue := StringToMoment(
-            					Format        :  sp_format, 
-            					Unit          :  [minute], 
-            					ReferenceDate :  sp_referenceDate, 
-            					Timeslot      :  sp_timeslot);
-            	'hour'   : p_returnValue := StringToMoment(
-            					Format        :  sp_format, 
-            					Unit          :  [hour], 
-            					ReferenceDate :  sp_referenceDate, 
-            					Timeslot      :  sp_timeslot);
-            	'day'    : p_returnValue := StringToMoment(
-            					Format        :  sp_format, 
-            					Unit          :  [day], 
-            					ReferenceDate :  sp_referenceDate, 
-            					Timeslot      :  sp_timeslot);
-            	'month'  : p_returnValue := StringToMoment(
-            					Format        :  sp_format, 
-            					Unit          :  [month], 
-            					ReferenceDate :  sp_referenceDate, 
-            					Timeslot      :  sp_timeslot);
-            	'year'   : p_returnValue := StringToMoment(
-            					Format        :  sp_format, 
-            					Unit          :  [year], 
-            					ReferenceDate :  sp_referenceDate, 
-            					Timeslot      :  sp_timeslot);
-            	'century': p_returnValue := StringToMoment(
-            					Format        :  sp_format, 
-            					Unit          :  [century], 
-            					ReferenceDate :  sp_referenceDate, 
-            					Timeslot      :  sp_timeslot);
-            endswitch ;
-            fnc_StringToMoment := p_returnValue ;
-        }
-        Parameter p_returnValue {
-            Unit: hour;
-        }
-        StringParameter sp_format {
-            Property: Input;
-        }
-        ElementParameter ep_timeunit {
-            Range: s_baseGranularities;
-            Property: Input;
-        }
-        StringParameter sp_referenceDate {
-            Property: Input;
-        }
-        StringParameter sp_timeslot {
-            Property: Input;
-        }
-    }
-    Function fnc_MomentToString {
-        Arguments: (sp_format, ep_timeunit, sp_referenceDate, p_elapsed);
-        Range: string;
-        Body: {
-            sp_returnValue := "error";
-            switch ep_timeunit do
-            	'tick' 	: sp_returnValue := MomentToString(
-            					Format        :  sp_format, 
-            					Unit          :  [tick], 
-            					ReferenceDate :  sp_referenceDate, 
-            					elapsed       :  p_elapsed); 
-            	'second' : sp_returnValue := MomentToString(
-            					Format        :  sp_format, 
-            					Unit          :  [s], 
-            					ReferenceDate :  sp_referenceDate, 
-            					elapsed       :  p_elapsed);
-            	'minute' : sp_returnValue := MomentToString(
-            					Format        :  sp_format, 
-            					Unit          :  [minute], 
-            					ReferenceDate :  sp_referenceDate, 
-            					elapsed       :  p_elapsed);
-            	'hour'   : sp_returnValue := MomentToString(
-            					Format        :  sp_format, 
-            					Unit          :  [hour], 
-            					ReferenceDate :  sp_referenceDate, 
-            					elapsed       :  p_elapsed);
-            	'day'    : sp_returnValue := MomentToString(
-            					Format        :  sp_format, 
-            					Unit          :  [day], 
-            					ReferenceDate :  sp_referenceDate, 
-            					elapsed       :  p_elapsed);
-            	'month'  : sp_returnValue := MomentToString(
-            					Format        :  sp_format, 
-            					Unit          :  [month], 
-            					ReferenceDate :  sp_referenceDate, 
-            					elapsed       :  p_elapsed);
-            	'year'   : sp_returnValue := MomentToString(
-            					Format        :  sp_format, 
-            					Unit          :  [year], 
-            					ReferenceDate :  sp_referenceDate, 
-            					elapsed       :  p_elapsed);
-            	'century': sp_returnValue := MomentToString(
-            					Format        :  sp_format, 
-            					Unit          :  [century], 
-            					ReferenceDate :  sp_referenceDate, 
-            					elapsed       :  p_elapsed);
-            endswitch ;
-            fnc_MomentToString := sp_returnValue ;
-        }
-        StringParameter sp_returnValue;
-        StringParameter sp_format {
-            Property: Input;
-        }
-        ElementParameter ep_timeunit {
-            Range: s_baseGranularities;
-            Property: Input;
-        }
-        StringParameter sp_referenceDate {
-            Property: Input;
-        }
-        Parameter p_elapsed {
-            Unit: hour;
-            Property: Input;
-        }
-    }
-    Section WebUI_Full_Event_Information_Support {
-        Procedure uponchange_p01_SelectedAccounts {
+    Section Steps_to_compute_the_stacked_bar_charts {
+        Procedure pr_TranslateStringsToElements {
             Body: {
-                block 
-                	pr_handle_uponchange_ValueSelections();
-                onerror ep_err do
-                	gss::pr_GlobalErrorHandler(ep_err);
+                Block ! Normalize session start time.
+                      ! Time fraction handling: AIMMS can only handle up to tick (1/100 of a second), database gives up to 6 decimals.
+                      ! We're removing everthing after the first two decimals.
+                      	if p01_StartTimeAccurateByTick then
+                		for i_session do
+                			p_dotPos := findNthString( sp_SessStartTimes( i_session ), ".", -1 );
+                			if p_dotPos then
+                				sp_SessStartTimes( i_session ) := 
+                					substring( sp_SessStartTimes( i_session ), 1, p_dotPos-1) +
+                					":"+
+                					substring( sp_SessStartTimes( i_session ), p_dotPos+1, p_dotPos + 2);
+                			endif ;
+                		endfor ;
+                	else
+                		sp_SessStartTimes( i_session ) += ":00" ;
+                      	endif ;
                 endblock ;
+                
+                sp_SessValueData(i_session,'AccountNames')|(not sp_SessValueData(i_session,'AccountNames')) := "ProOnPrem";
+                
+                ep_SessValueData( i_session, 'AccountNames' ) := StringToElement(s_AccountNames, sp_SessValueData( i_session, 'AccountNames' ), create:1);
+                ep_SessValueData( i_session, 'SessionTypes' ) := StringToElement(s_SessionTypes, sp_SessValueData( i_session, 'SessionTypes' ), create:1);
+                ep_SessValueData( i_session, 'Environments' ) := StringToElement(s_Environments, sp_SessValueData( i_session, 'Environments' ), create:1);
+                ep_SessValueData( i_session, 'UserNames'    ) := StringToElement(s_UserNames   , sp_SessValueData( i_session, 'UserNames'    ), create:1);
+                ep_SessValueData( i_session, 'Applications' ) := StringToElement(s_Applications, sp_SessValueData( i_session, 'Applications' ), create:1);
+                ep_SessValueData( i_session, 'AppVersions'  ) := StringToElement(s_AppVersions , sp_SessValueData( i_session, 'AppVersions'  ), create:1);
+                
+                p01_SelectedAccounts(i_AccountName) := 1;
+                p01_SelectedSessionTypes(i_SessionType) := 1;
+                p01_SelectedEnvironments(i_Environment) := 1;
+                p01_SelectedUsernames(i_UserName) := 1;
+                p01_SelectedApplications(i_Application) := 1;
+                p01_SelectedAppversions(i_AppVersion) := 1;
             }
-            ElementParameter ep_err {
-                Range: errh::PendingErrors;
-            }
+            Parameter p_dotPos;
         }
-        Procedure uponchange_p01_SelectedSessionTypes {
+        Procedure pr_EventsFromSessions {
             Body: {
-                block 
-                	pr_handle_uponchange_ValueSelections();
-                onerror ep_err do
-                	gss::pr_GlobalErrorHandler(ep_err);
+                block ! Construct an unordered list of evens from sessions and session duration.
+                	empty s_WorkEvents ;
+                	for i_Session do
+                		block ! Create work event, start of this session
+                			s_WorkEvents += card(s_WorkEvents)+1 ;
+                			ep_WorkEvent := last( s_WorkEvents );
+                			sp_WrkEvMoments( ep_WorkEvent ) := sp_SessStartTimes(i_session);
+                			ep_WrkEvEventType( ep_WorkEvent ) := 'StartSession';
+                		endblock ;
+                		block ! Copy session data to work event.
+                			ep_WrkValueData(ep_WorkEvent,i_ValueType) := ep_SessValueData(i_Session,i_valuetype);
+                
+                			p_WrkEvPeakMemory(   ep_WorkEvent ) := p_SessPeakMemory(   i_session );
+                		endblock ;
+                
+                		block ! Create work event, end of this session
+                			s_WorkEvents += card(s_WorkEvents)+1 ;
+                			ep_WorkEvent := last( s_WorkEvents );
+                			sp_WrkEvMoments( ep_WorkEvent ) := 
+                				MomentToString(
+                					Format        :  "%c%y-%m-%d %H:%M:%S:%T" , 
+                					unit          :  [tick], 
+                					ReferenceDate :  sp_SessStartTimes(i_session), 
+                					Elapsed       :  p_SessDurations(i_Session));
+                			ep_WrkEvEventType( ep_WorkEvent ) := 'FinishSession';
+                		endblock ;
+                		block ! Copy session data to work event.
+                			ep_WrkValueData(ep_WorkEvent,i_ValueType) := ep_SessValueData(i_Session,i_valuetype);
+                			p_WrkEvPeakMemory(   ep_WorkEvent ) := p_SessPeakMemory(   i_session );
+                		endblock ;
+                
+                	endfor ;
                 endblock ;
-            }
-            ElementParameter ep_err {
-                Range: errh::PendingErrors;
-            }
-        }
-        Procedure uponchange_p01_SelectedEnvironments {
-            Body: {
-                block 
-                	pr_handle_uponchange_ValueSelections();
-                onerror ep_err do
-                	gss::pr_GlobalErrorHandler(ep_err);
+                
+                s_OrderedWorkEvents := sort( i_WorkEvent, sp_WrkEvMoments(i_WorkEvent));
+                
+                block ! Transform the unordered list into an ordered list.
+                	empty s_Events ;
+                	for i_OrderedWorkEvent do ! Go thru the events in an ordered fashion.
+                		block ! Create a new event.
+                			ep_WorkEvent := i_OrderedWorkEvent;
+                			s_Events += card(s_Events)+1 ;
+                			ep_Event := last( s_Events );
+                			sp_EvMoment(ep_Event ):= sp_WrkEvMoments( ep_WorkEvent );
+                		endblock ;
+                		block ! copy data from "work event" to "event"
+                			ep_EvEventTypes( ep_Event ) := ep_WrkEvEventType( ep_WorkEvent );
+                
+                			ep_EvValueData( ep_Event,i_valuetype ) := ep_WrkValueData( ep_WorkEvent, i_valueType );
+                
+                			p_EvPeakMemory( ep_Event ) := p_WrkEvPeakMemory( ep_WorkEvent );
+                		endblock ;
+                
+                	endfor ;
                 endblock ;
+                
+                sp_FirstEvent := substring( sp_EvMoment( first( s_Events ) ), 1, 13 );
+                sp_LastEvent  := substring( sp_EvMoment( last(  s_Events ) ), 1, 13 );
+                p_DurationBetweenFirstLastEvent := StringToMoment(
+                	Format        :  "%c%y-%m-%d %H", 
+                	Unit          :  [hour], 
+                	ReferenceDate :  sp_FirstEvent, 
+                	Timeslot      :  sp_LastEvent);
+                sp_ViewportStart := MomentToString(
+                	Format        :  "%c%y-%m-%d %H", 
+                	unit          :  [hour], 
+                	ReferenceDate :  sp_FirstEvent, 
+                	Elapsed       :  -0.05 * p_DurationBetweenFirstLastEvent);
+                sp_ViewportEnd := MomentToString(
+                	Format        :  "%c%y-%m-%d %H", 
+                	unit          :  [hour], 
+                	ReferenceDate :  sp_LastEvent, 
+                	Elapsed       :  0.05 * p_DurationBetweenFirstLastEvent);
+                
+                pr_InitializeTimebarGanttChart( sp_ViewportStart, sp_FirstEvent, sp_LastEvent, sp_ViewportEnd );
             }
-            ElementParameter ep_err {
-                Range: errh::PendingErrors;
-            }
-        }
-        Procedure uponchange_p01_SelectedUsernames {
-            Body: {
-                block 
-                	pr_handle_uponchange_ValueSelections();
-                onerror ep_err do
-                	gss::pr_GlobalErrorHandler(ep_err);
-                endblock ;
-            }
-            ElementParameter ep_err {
-                Range: errh::PendingErrors;
-            }
-        }
-        Procedure uponchange_p01_SelectedApplications {
-            Body: {
-                block 
-                	pr_handle_uponchange_ValueSelections();
-                onerror ep_err do
-                	gss::pr_GlobalErrorHandler(ep_err);
-                endblock ;
-            }
-            ElementParameter ep_err {
-                Range: errh::PendingErrors;
-            }
-        }
-        Procedure uponchange_p01_SelectedAppversions {
-            Body: {
-                block 
-                	pr_handle_uponchange_ValueSelections();
-                onerror ep_err do
-                	gss::pr_GlobalErrorHandler(ep_err);
-                endblock ;
-            }
-            ElementParameter ep_err {
-                Range: errh::PendingErrors;
-            }
-        }
-        Procedure uponchange_ep_BarchartColumnValueType {
-            Body: {
-                block 
-                	pr_handleBarchartColumnValueType();
-                	pr_handle_uponchange_ValueSelections();
-                onerror ep_err do
-                	gss::pr_GlobalErrorHandler(ep_err);
-                endblock ;
-            }
-            ElementParameter ep_err {
-                Range: errh::PendingErrors;
-            }
-        }
-        Procedure pr_handle_uponchange_ValueSelections {
-            Body: {
-                pr_NoSessionsMemInUse();
-                pr_ComputeBarChartsStackedBySessionType();
+            DeclarationSection WorkEvents {
+                Set s_WorkEvents {
+                    SubsetOf: Integers;
+                    Index: i_WorkEvent;
+                    Parameter: ep_WorkEvent;
+                }
+                Set s_OrderedWorkEvents {
+                    SubsetOf: s_WorkEvents;
+                    Index: i_OrderedWorkEvent;
+                    OrderBy: user;
+                }
+                StringParameter sp_WrkEvMoments {
+                    IndexDomain: i_WorkEvent;
+                }
+                ElementParameter ep_WrkEvEventType {
+                    IndexDomain: i_WorkEvent;
+                    Range: s_EventTypes;
+                }
+                ElementParameter ep_WrkValueData {
+                    IndexDomain: (i_WorkEvent,i_valueType);
+                    Range: s_ValueMasterSet;
+                }
+                Parameter p_WrkEvPeakMemory {
+                    IndexDomain: i_WorkEvent;
+                    Unit: MB;
+                }
+                StringParameter sp_FirstEvent;
+                StringParameter sp_LastEvent;
+                Parameter p_DurationBetweenFirstLastEvent {
+                    Unit: tick;
+                }
+                StringParameter sp_ViewportStart;
+                StringParameter sp_ViewportEnd;
             }
         }
         Procedure pr_handleBarchartColumnValueType {
@@ -812,113 +484,433 @@ Model Main_AIMMSPROUsageStatistics {
                 endswitch;
             }
         }
-        Set s_ShownEvents {
-            SubsetOf: s_Events;
-            Index: i_ShownEvent;
-            Property: ElementsAreLabels;
-            Definition: {
-                { i_event |
-                	( ep_EvValueData(i_Event,'SessionTypes') in s_ShownSessionTypes ) and
-                	( ep_EvValueData(i_Event,'Applications') in s_ShownApplications ) and
-                	( ep_EvValueData(i_Event,'AppVersions') in s_ShownAppVersions ) and
+        Procedure pr_NoSessionsMemInUse {
+            Body: {
+                empty 	p_NumberOfSessionsAfterEvent, p_MemoryBySessionsAfterEvent, 
+                	p_NumberOfSessionByUserAfterEvent, p_NumberOfUsersAfterEvent, 
+                	p_NumberOfSessionsAfterEventBySessionType, p_MemoryBySessionsAfterEventBySessionType,
+                	p_NumberOfSessionByUserAfterEventBySession;
+                update s_ShownEvents;
                 
-                	( ep_EvValueData(i_Event,'AccountNames') in s_ShownAccounts ) and
-                	( ep_EvValueData(i_Event,'Environments') in s_ShownEnvironments ) and
-                	( ep_EvValueData(i_Event,'UserNames') in s_ShownUserNames ) }
-            }
-        }
-        Set s_ShownAccounts {
-            SubsetOf: s_AccountNames;
-            Index: i_ShownAccount;
-            Definition: {
-                { i_AccountName | p01_SelectedAccounts(i_AccountName) }
-            }
-        }
-        Set s_ShownSessionTypes {
-            SubsetOf: s_SessionTypes;
-            Index: i_ShownSessionType;
-            Definition: {
-                { i_SessionType | p01_SelectedSessionTypes(i_SessionType) }
-            }
-        }
-        Set s_ShownEnvironments {
-            SubsetOf: s_Environments;
-            Index: i_ShownEnvironment;
-            Definition: {
-                { i_Environment | p01_SelectedEnvironments(i_Environment)}
-            }
-        }
-        Set s_ShownUserNames {
-            SubsetOf: s_UserNames;
-            Parameter: i_shownUserName;
-            Definition: {
-                { i_UserName | p01_SelectedUsernames(i_UserName) }
-            }
-        }
-        Set s_ShownApplications {
-            SubsetOf: s_Applications;
-            Index: i_ShownApp;
-            Definition: {
-                {i_Application | p01_SelectedApplications(i_Application)}
-            }
-        }
-        Set s_ShownAppVersions {
-            SubsetOf: s_AppVersions;
-            Index: i_ShownAppVersion;
-            Definition: {
-                { i_AppVersion | p01_SelectedAppversions(i_AppVersion) }
-            }
-        }
-        Parameter p01_SelectedAccounts {
-            IndexDomain: i_AccountName;
-            Range: binary;
-        }
-        Parameter p01_SelectedSessionTypes {
-            IndexDomain: i_SessionType;
-            Range: binary;
-        }
-        Parameter p01_SelectedEnvironments {
-            IndexDomain: i_Environment;
-            Range: binary;
-        }
-        Parameter p01_SelectedUsernames {
-            IndexDomain: i_UserName;
-            Range: binary;
-        }
-        Parameter p01_SelectedApplications {
-            IndexDomain: i_Application;
-            Range: binary;
-        }
-        Parameter p01_SelectedAppversions {
-            IndexDomain: i_AppVersion;
-            Range: binary;
-        }
-        Set s_SidePanelOrder {
-            SubsetOf: Integers;
-            Index: i_spo;
-            Definition: ElementRange(1,9);
-        }
-        StringParameter sp_SidePanelsFullEventPage {
-            IndexDomain: (i_spo,webui::indexSidePanelSpec);
-            Definition: {
-                data 
-                { ( 1, displayText ) : "App Filter"           ,  
-                  ( 1, pageId      ) : "appfilter_1"          ,
-                  ( 1, tooltip     ) : "ses-type app version" ,  
-                  ( 1, state       ) : "Active"               ,
+                p_NumberOfSessionByUserAfterEvent(i_ShownEvent,ep_EvValueData(i_ShownEvent,'UserNames')) := 
+                	p_NumberOfSessionByUserAfterEvent(i_ShownEvent-1,ep_EvValueData(i_ShownEvent,'UserNames'))+
+                	if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+                		1
+                	else
+                		-1
+                	endif ;
+                p_NumberOfUsersAfterEvent(i_ShownEvent) := 
+                	Count( i_UserName | p_NumberOfSessionByUserAfterEvent(i_ShownEvent, i_UserName ) );
                 
-                  ( 2, displayText ) : "User Filter"          ,
-                  ( 2, pageId      ) : "usefilter_1"          ,
-                  ( 2, tooltip     ) : "account environment user",  
-                  ( 2, state       ) : "Active"               ,
+                p_NumberOfSessionsAfterEvent(i_ShownEvent) := p_NumberOfSessionsAfterEvent(i_ShownEvent-1)+
+                	if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+                		1
+                	else
+                		-1
+                	endif ;
+                p_MemoryBySessionsAfterEvent(i_ShownEvent) := p_MemoryBySessionsAfterEvent(i_ShownEvent-1)+
+                	if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+                		p_EvPeakMemory( i_ShownEvent )
+                	else
+                		-p_EvPeakMemory( i_ShownEvent )
+                	endif ;
                 
-                  ( 3, displayText ) : "Stack by"          ,
-                  ( 3, pageId      ) : "stackselector_1"          ,
-                  ( 3, tooltip     ) : "Choose value type for stacking",  
-                  ( 3, state       ) : "Active"               
-                }
+                p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent,i_valueMaster) := 
+                	p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent-1,i_valueMaster)+
+                	if i_valueMaster = 'All' then
+                		if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+                			1
+                		else
+                			-1
+                		endif 
+                	else
+                		if exists( i_valueType | ep_EvValueData( i_ShownEvent, i_valueType ) = i_valueMaster ) then
+                			if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+                				1
+                			else
+                				-1
+                			endif 
+                		else
+                			0
+                		endif 
+                	endif ;
+                
+                p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent,i_valueMaster) := 
+                	p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent-1,i_valueMaster)+
+                	if i_valueMaster = 'All' then
+                		if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+                			p_EvPeakMemory( i_ShownEvent )
+                		else
+                			-p_EvPeakMemory( i_ShownEvent )
+                		endif 
+                	else
+                		if exists( i_valueType | ep_EvValueData( i_ShownEvent, i_valueType ) = i_valueMaster ) then
+                			if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+                				p_EvPeakMemory( i_ShownEvent )
+                			else
+                				-p_EvPeakMemory( i_ShownEvent )
+                			endif
+                		else
+                			0
+                		endif 
+                	endif ;
+                p_NumberOfSessionByUserAfterEventBySession(i_ShownEvent,i_valueMaster,ep_EvValueData(i_ShownEvent,'UserNames')) :=
+                	p_NumberOfSessionByUserAfterEventBySession(i_ShownEvent-1,i_valueMaster,ep_EvValueData(i_ShownEvent,'UserNames')) +
+                	if i_valueMaster = 'All' then
+                		if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+                			1
+                		else
+                			-1
+                		endif 
+                	else
+                		if exists( i_valueType | ep_EvValueData( i_ShownEvent, i_valueType ) = i_valueMaster ) then
+                			if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
+                				1
+                			else
+                				-1
+                			endif
+                		else
+                			0
+                		endif 
+                	endif ;
+                
+                p_NumberOfUsersAfterEventBySessionType( i_ShownEvent, i_valueMaster ) := 
+                	Count( i_UserName | p_NumberOfSessionByUserAfterEventBySession( i_ShownEvent, i_valueMaster, i_UserName ) );
+            }
+            Parameter p_NumberOfRunningSessions;
+            Parameter p_MemInUseBySession;
+            Parameter p_NumberOfSessionByUserAfterEventBySession {
+                IndexDomain: (i_Event,i_someValue,i_username);
             }
         }
+        Procedure pr_Open_Full_Event_Information {
+            Body: {
+                if not card( ep_SessValueData ) then
+                	pr_TranslateStringsToElements();
+                	pr_EventsFromSessions();
+                	pr_handleBarchartColumnValueType();
+                	pr_NoSessionsMemInUse();
+                endif ;
+            }
+        }
+        Procedure pr_RelateBarChartMomentsToEvents {
+            Body: {
+                p_beg := p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob );
+                p_dur := p_TimebarDuration(  ep_tb_selectedResource, ep_tb_selectedJob );
+                p_end := P_beg + p_dur ;
+                
+                block ! Determine granularity per bar chart and a good starting reference.
+                	block ! Granularity is selected such that the width of a bar chart column is a "natural" width.
+                		! Here a natural width is an integer * a known granularity, and the integer is such that it is a 
+                		! divisor of the next larger granularity. The definition of p_timePerGranul provides examples.
+                		ep_granul := first( i_granul | p_NoInitialColumnsPerBarChart * p_timePerGranul(i_granul) > p_dur );
+                		if not ep_granul then raise error "unable to find proper granularity" ; endif ;
+                		if ep_granul < '1hour' then ep_granul := '1hour' ; endif ;
+                		ep_baseGranul := ep_mapToBaseGranularity( ep_granul );
+                		if not ep_baseGranul then raise error "unable to find proper base granularity" ; endif ;
+                	endblock ;
+                
+                	block ! The first column is mapped to "natural" start before the first event.
+                		sp_beg := MomentToString(
+                				Format        :  "%c%y-%m-%d %H", 
+                				unit          :  [hour], 
+                				ReferenceDate :  sp_TimebarViewportStart, 
+                				Elapsed       :  p_beg );
+                		sp_beg1 := substring(sp_beg,1,19);	
+                		sp_beg2 := substring(sp_beg,1,16);	
+                		sp_beg3 := substring(sp_beg,1,13);	
+                		sp_beg4 := substring(sp_beg,1,10);	
+                		sp_beg5 := substring(sp_beg,1,7);	
+                		sp_beg6 := substring(sp_beg,1,4);
+                
+                		switch ep_baseGranul do
+                			'second'  : sp_beg := sp_beg1;
+                			'minute'  : sp_beg := sp_beg2;
+                			'hour'    : sp_beg := sp_beg3;
+                			'day'     : sp_beg := sp_beg4;
+                			'month'   : sp_beg := sp_beg5;
+                			'year'    : sp_beg := sp_beg6;
+                		endswitch ;
+                		sp_beg_len := Stringlength(sp_beg);
+                		sp_lastNo := substring( sp_beg, sp_beg_len-1, sp_beg_len);
+                		p_lastNo := val( sp_lastNo );
+                		p_lastNo := div( p_lastNo, p_divisorPerGranul(ep_granul)) * p_divisorPerGranul(ep_granul);
+                		sp_lastNo := formatString("%02i", p_LastNo );
+                		sp_beg := substring(sp_beg, 1, sp_beg_len-2) + sp_lastNo ;
+                	endblock ;
+                
+                	block ! Ensure that the columns of the bar chart cover all the events in the timebar.
+                		p_start := fnc_StringToMoment(
+                				sp_Format        :  sp_baseFormat(ep_baseGranul), 
+                				ep_timeUnit      :  ep_baseGranul, 
+                				sp_ReferenceDate :  sp_TimebarViewportStart, 
+                				sp_Timeslot      :  sp_beg);
+                		sp_end := MomentToString(
+                				Format        :  "%c%y-%m-%d %H", 
+                				unit          :  [hour], 
+                				ReferenceDate :  sp_TimebarViewportStart, 
+                				Elapsed       :  p_beg + p_dur  );
+                		p_totdur := fnc_StringToMoment(
+                				sp_Format        :  sp_baseFormat(ep_baseGranul), 
+                				ep_timeUnit      :  ep_baseGranul, 
+                				sp_ReferenceDate :  sp_beg, 
+                				sp_Timeslot      :  sp_end);
+                	endblock ;
+                
+                	block ! Ensure there are sufficient columns in the bar chart.
+                		p_NoColumnsPerBarChart := 1 ; ! p_NoInitialColumnsPerBarChart / 2 ;
+                		while p_NoColumnsPerBarChart * p_timePerGranul( ep_granul ) < p_totdur do
+                			p_NoColumnsPerBarChart += 1 ;
+                		endwhile ;
+                	endblock ;
+                
+                	sp_finish := fnc_MomentToString(
+                			sp_Format        :  sp_baseFormat(ep_baseGranul), 
+                			ep_timeunit      :  ep_baseGranul, 
+                			sp_ReferenceDate :  sp_beg, 
+                			p_Elapsed        :  p_NoColumnsPerBarChart * p_timePerGranul( ep_granul ) );
+                endblock ;
+                
+                empty s_BarChartColumns;
+                p_ElemNo := 1 ;
+                while p_ElemNo <= p_NoColumnsPerBarChart do
+                	sp_elemName := fnc_MomentToString(
+                			sp_Format        :  sp_baseFormat(ep_baseGranul), 
+                			ep_timeunit      :  ep_baseGranul, 
+                			sp_ReferenceDate :  sp_beg, 
+                			p_Elapsed        :  (p_ElemNo-1) * p_timePerGranul( ep_granul ) );
+                	SetElementAdd( s_BarChartColumns, ep_bcc, sp_elemName);
+                	sp_BarChartMoments( ep_bcc ) := sp_elemName;
+                	p_ElemNo += 1 ;
+                endwhile ;
+                
+                ep_firstBCC := first( s_BarChartColumns );
+                ep_lastBCC  := last(  s_BarChartColumns );
+                ep_FirstEventAtBarChartPoint(i_bcc) := 
+                	first( i_event | sp_EvMoment(i_Event) >= sp_BarChartMoments( i_bcc ) );
+                ep_lastEventAtBarChartPoint(i_bcc) := ep_FirstEventAtBarChartPoint(i_bcc+1) - 1 ;
+                ep_lastEventAtBarChartPoint(ep_lastBCC) := last( i_event | sp_EvMoment(i_Event) <= sp_finish );
+                
+                s_EventsAtBarChartPoint(i_bcc) := { i_event | ep_FirstEventAtBarChartPoint(i_bcc) <= i_event <= ep_lastEventAtBarChartPoint(i_bcc) };
+            }
+            Parameter p_dur {
+                Unit: hour;
+            }
+            Parameter p_beg {
+                Unit: hour;
+            }
+            Parameter p_start {
+                Unit: hour;
+            }
+            Parameter p_totdur {
+                Unit: hour;
+            }
+            Parameter p_end {
+                Unit: hour;
+            }
+            StringParameter sp_beg;
+            StringParameter sp_end;
+            StringParameter sp_beg1;
+            StringParameter sp_beg2;
+            StringParameter sp_beg3;
+            StringParameter sp_beg4;
+            StringParameter sp_beg5;
+            StringParameter sp_beg6;
+            Parameter p_ElemNo;
+            StringParameter sp_ElemName;
+            StringParameter sp_lastNo;
+            Parameter p_lastNo;
+            Parameter sp_beg_len;
+            Parameter p_LastDivisor;
+        }
+        Procedure pr_ComputeBarChartsStackedBySessionType {
+            Body: {
+                ep_ArgMax_NumberOfSessions( i_bcc ) :=
+                	argmax( i_shownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc),
+                		p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent, 'All') );
+                
+                ep_ArgMax_NumberOfUsers( i_bcc ) :=
+                	argmax( i_shownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc),
+                		p_NumberOfUsersAfterEventBySessionType(i_ShownEvent, 'All') );
+                
+                ep_ArgMax_MemoryInUse( i_bcc ) :=
+                	argmax( i_shownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc),
+                		p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent, 'All') );
+                
+                
+                
+                p_NumberOfSessionsStackedBySessionType(i_bcc, i_someValue) :=
+                		p_NumberOfSessionsAfterEventBySessionType(ep_ArgMax_NumberOfSessions( i_bcc ), i_someValue);
+                
+                p_MemoryInUseStackedBySessionType(i_bcc, i_someValue) :=
+                		p_MemoryBySessionsAfterEventBySessionType(ep_ArgMax_NumberOfUsers( i_bcc ), i_someValue);
+                
+                p_NumberOfUsersStackedBySessionType(i_bcc, i_someValue) :=
+                		p_NumberOfUsersAfterEventBySessionType(ep_ArgMax_MemoryInUse( i_bcc ), i_someValue);
+            }
+            Comment: {
+                "p_NumberOfSessionsStackedBySessionType(i_bcc, i_someValue) :=
+                	max( 0, max( i_ShownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc), 
+                		p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent, i_someValue) ) );
+                
+                p_MemoryInUseStackedBySessionType(i_bcc, i_someValue) :=
+                	max( 0[mb], max( i_ShownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc), 
+                		p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent, i_someValue) ) );
+                
+                p_NumberOfUsersStackedBySessionType(i_bcc, i_someValue) :=
+                	max( 0, max( i_ShownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc), 
+                		p_NumberOfUsersAfterEventBySessionType(i_ShownEvent, i_someValue) ) );"
+            }
+        }
+        Procedure pr_ComputeStackedBarCharts {
+            Body: {
+                block
+                	pr_Open_Full_Event_Information();
+                	pr_RelateBarChartMomentsToEvents();
+                	pr_ComputeBarChartsStackedBySessionType();
+                onerror ep_err do
+                	gss::pr_GlobalErrorHandler(ep_err);
+                endblock ;
+            }
+            ElementParameter ep_err {
+                Range: errh::PendingErrors;
+            }
+        }
+    }
+    Section Workarounds_for_Vintage_compiler {
+        Function fnc_StringToMoment {
+            Arguments: (sp_format, ep_timeunit, sp_referenceDate, sp_timeslot);
+            Unit: hour;
+            Body: {
+                p_returnValue := 0;
+                switch ep_timeunit do
+                	'tick' 	: p_returnValue := StringToMoment(
+                					Format        :  sp_format, 
+                					Unit          :  [tick], 
+                					ReferenceDate :  sp_referenceDate, 
+                					Timeslot      :  sp_timeslot); 
+                	'second' : p_returnValue := StringToMoment(
+                					Format        :  sp_format, 
+                					Unit          :  [s], 
+                					ReferenceDate :  sp_referenceDate, 
+                					Timeslot      :  sp_timeslot);
+                	'minute' : p_returnValue := StringToMoment(
+                					Format        :  sp_format, 
+                					Unit          :  [minute], 
+                					ReferenceDate :  sp_referenceDate, 
+                					Timeslot      :  sp_timeslot);
+                	'hour'   : p_returnValue := StringToMoment(
+                					Format        :  sp_format, 
+                					Unit          :  [hour], 
+                					ReferenceDate :  sp_referenceDate, 
+                					Timeslot      :  sp_timeslot);
+                	'day'    : p_returnValue := StringToMoment(
+                					Format        :  sp_format, 
+                					Unit          :  [day], 
+                					ReferenceDate :  sp_referenceDate, 
+                					Timeslot      :  sp_timeslot);
+                	'month'  : p_returnValue := StringToMoment(
+                					Format        :  sp_format, 
+                					Unit          :  [month], 
+                					ReferenceDate :  sp_referenceDate, 
+                					Timeslot      :  sp_timeslot);
+                	'year'   : p_returnValue := StringToMoment(
+                					Format        :  sp_format, 
+                					Unit          :  [year], 
+                					ReferenceDate :  sp_referenceDate, 
+                					Timeslot      :  sp_timeslot);
+                	'century': p_returnValue := StringToMoment(
+                					Format        :  sp_format, 
+                					Unit          :  [century], 
+                					ReferenceDate :  sp_referenceDate, 
+                					Timeslot      :  sp_timeslot);
+                endswitch ;
+                fnc_StringToMoment := p_returnValue ;
+            }
+            Parameter p_returnValue {
+                Unit: hour;
+            }
+            StringParameter sp_format {
+                Property: Input;
+            }
+            ElementParameter ep_timeunit {
+                Range: s_baseGranularities;
+                Property: Input;
+            }
+            StringParameter sp_referenceDate {
+                Property: Input;
+            }
+            StringParameter sp_timeslot {
+                Property: Input;
+            }
+        }
+        Function fnc_MomentToString {
+            Arguments: (sp_format, ep_timeunit, sp_referenceDate, p_elapsed);
+            Range: string;
+            Body: {
+                sp_returnValue := "error";
+                switch ep_timeunit do
+                	'tick' 	: sp_returnValue := MomentToString(
+                					Format        :  sp_format, 
+                					Unit          :  [tick], 
+                					ReferenceDate :  sp_referenceDate, 
+                					elapsed       :  p_elapsed); 
+                	'second' : sp_returnValue := MomentToString(
+                					Format        :  sp_format, 
+                					Unit          :  [s], 
+                					ReferenceDate :  sp_referenceDate, 
+                					elapsed       :  p_elapsed);
+                	'minute' : sp_returnValue := MomentToString(
+                					Format        :  sp_format, 
+                					Unit          :  [minute], 
+                					ReferenceDate :  sp_referenceDate, 
+                					elapsed       :  p_elapsed);
+                	'hour'   : sp_returnValue := MomentToString(
+                					Format        :  sp_format, 
+                					Unit          :  [hour], 
+                					ReferenceDate :  sp_referenceDate, 
+                					elapsed       :  p_elapsed);
+                	'day'    : sp_returnValue := MomentToString(
+                					Format        :  sp_format, 
+                					Unit          :  [day], 
+                					ReferenceDate :  sp_referenceDate, 
+                					elapsed       :  p_elapsed);
+                	'month'  : sp_returnValue := MomentToString(
+                					Format        :  sp_format, 
+                					Unit          :  [month], 
+                					ReferenceDate :  sp_referenceDate, 
+                					elapsed       :  p_elapsed);
+                	'year'   : sp_returnValue := MomentToString(
+                					Format        :  sp_format, 
+                					Unit          :  [year], 
+                					ReferenceDate :  sp_referenceDate, 
+                					elapsed       :  p_elapsed);
+                	'century': sp_returnValue := MomentToString(
+                					Format        :  sp_format, 
+                					Unit          :  [century], 
+                					ReferenceDate :  sp_referenceDate, 
+                					elapsed       :  p_elapsed);
+                endswitch ;
+                fnc_MomentToString := sp_returnValue ;
+            }
+            StringParameter sp_returnValue;
+            StringParameter sp_format {
+                Property: Input;
+            }
+            ElementParameter ep_timeunit {
+                Range: s_baseGranularities;
+                Property: Input;
+            }
+            StringParameter sp_referenceDate {
+                Property: Input;
+            }
+            Parameter p_elapsed {
+                Unit: hour;
+                Property: Input;
+            }
+        }
+    }
+    Section WebUI_Support {
         Section timebar_handling {
             Set s_TimebarResourceSet {
                 Index: i_tb_res;
@@ -947,6 +939,9 @@ Model Main_AIMMSPROUsageStatistics {
             Parameter p_TimebarTimeStart {
                 IndexDomain: (i_tb_res,i_tb_job);
                 Unit: hour;
+                Definition: {
+                    !
+                }
             }
             Parameter p_TimebarDuration {
                 IndexDomain: (i_tb_res,i_tb_job);
@@ -954,9 +949,38 @@ Model Main_AIMMSPROUsageStatistics {
             }
             StringParameter sp_TimebarViewportStart;
             StringParameter sp_TimebarViewportEnd;
+            StringParameter sp_TimebarSelectedStart {
+                Definition: {
+                    MomentToString(
+                    				Format        :  "%c%y-%m-%d %H", 
+                    				unit          :  [hour], 
+                    				ReferenceDate :  sp_TimebarViewportStart, 
+                    				Elapsed       :  p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob ) )
+                    !p_beg := p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob );
+                    !p_dur := p_TimebarDuration(  ep_tb_selectedResource, ep_tb_selectedJob );
+                }
+            }
+            StringParameter sp_TimebarSelectedEnd {
+                Definition: {
+                    MomentToString(
+                    	Format        :  "%c%y-%m-%d %H", 
+                    	unit          :  [hour], 
+                    	ReferenceDate :  sp_TimebarViewportStart, 
+                    	Elapsed       :  p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob ) + 
+                    			 p_TimebarDuration(  ep_tb_selectedResource, ep_tb_selectedJob )  )
+                    !p_beg := p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob );
+                    !p_dur := p_TimebarDuration(  ep_tb_selectedResource, ep_tb_selectedJob );
+                }
+            }
             Parameter p_TimebarTimeunit {
                 Definition: {
                     1 ! / ( 60 * 60 * 100 )
+                }
+            }
+            StringParameter sp_TitleTimebar {
+                Definition: {
+                    FormatString("Data available from %s to %s, showing data for %s to %s",
+                    	sp_TimebarViewportStart, sp_TimebarViewportEnd, sp_TimebarSelectedStart, sp_TimebarSelectedEnd )
                 }
             }
             Procedure pr_InitializeTimebarGanttChart {
@@ -967,7 +991,7 @@ Model Main_AIMMSPROUsageStatistics {
                     ! The view port of the Timebar Gantt Chart should allow for the maximum 
                     ! view port of the actual Gantt Chart.
                     sp_TimebarViewportStart := sp_VpBeg ; ! "2019-04-02 00";
-                    sp_TimebarViewportEnd := sp_VpEnd ; ! "2019-04-06 00";
+                    sp_TimebarViewportEnd   := sp_VpEnd ; ! "2019-04-06 00";
                     
                     ! There is only one resource/job so the element parameters are always set to this one.
                     ep_tb_selectedResource := first( s_TimebarResourceSet );
@@ -1221,14 +1245,14 @@ Model Main_AIMMSPROUsageStatistics {
                 IndexDomain: i_baseGranul;
                 Definition: {
                     data {
-                    	tick:"%c%y-%m-%d %H:%M:%S:%T", 
-                    	second:"%c%y-%m-%d %H:%M:%S", 
-                    	minute:"%c%y-%m-%d %H:%M", 
-                    	hour:"%c%y-%m-%d %H", 
-                    	day:"%c%y-%m-%d", 
-                    	month:"%c%y-%m", 
-                    	year:"%c%y",
-                    	century:"%c"}
+                    	tick     : "%c%y-%m-%d %H:%M:%S:%T", 
+                    	second   : "%c%y-%m-%d %H:%M:%S", 
+                    	minute   : "%c%y-%m-%d %H:%M", 
+                    	hour     : "%c%y-%m-%d %H", 
+                    	day      : "%c%y-%m-%d", 
+                    	month    : "%c%y-%m", 
+                    	year     : "%c%y",
+                    	century  : "%c"}
                 }
             }
             UnitParameter up_baseTimeUnit {
@@ -1272,6 +1296,18 @@ Model Main_AIMMSPROUsageStatistics {
                 IndexDomain: i_bcc;
                 SubsetOf: s_Events;
             }
+            ElementParameter ep_ArgMax_NumberOfSessions {
+                IndexDomain: i_bcc;
+                Range: s_Events;
+            }
+            ElementParameter ep_ArgMax_NumberOfUsers {
+                IndexDomain: i_bcc;
+                Range: s_Events;
+            }
+            ElementParameter ep_ArgMax_MemoryInUse {
+                IndexDomain: i_bcc;
+                Range: s_Events;
+            }
             Parameter p_NumberOfSessionsStackedBySessionType {
                 IndexDomain: (i_bcc,i_someValue);
             }
@@ -1285,30 +1321,49 @@ Model Main_AIMMSPROUsageStatistics {
             StringParameter sp_StackedBarChartsSecondaryActions {
                 IndexDomain: (i_si, webui::indexPageActionSpec);
                 Definition: {
-                    data {
-                    (1,displaytext): "Enable session tracking (working on it)",
-                    (1,icon): "aimms-database-edit2",
-                    (1,procedure): "pr_EnableSessionTracking",
-                    (1,state): "Inactive",
+                    {
                     
-                    (2,displaytext): "Read database",
-                    (2,icon): "aimms-database",
-                    (2,procedure): "pr_ReadData",
-                    (2,state): "Active" ,
+                    ('1','displaytext'): "Track",
+                    ('1','icon'       ): "aimms-database-edit2",
+                    ('1','procedure'  ): "pr_EnableSessionTracking",
+                    ('1','state'      ): if p01_isAnAdmin then "Active" else "Inactive" endif,
                     
-                    (3,displaytext): "Load input case",
-                    (3,icon): "aimms-file-zip",
-                    (3,procedure): "pr_ReadInitialCaseData",
-                    (3,state): "Active" ,
+                    ('2','displaytext'): "Read database",
+                    ('2','icon'       ): "aimms-database",
+                    ('2','procedure'  ): "pr_ReadData",
+                    ('2','state'      ): if ProjectDeveloperMode then
+                    			if p01_isAnAdmin then "Active" else "Inactive" endif
+                    		     else
+                    		     	"Hidden"
+                    		     endif,
                     
-                    (4,displaytext): "Stack the bars",
-                    (4,icon): "aimms-spinner3",
-                    (4,procedure): "pr_ComputeStackedBarCharts",
-                    (4,state): "Active" 
+                    ('3','displaytext'): "Read",
+                    ('3','icon'       ): "aimms-binoculars",
+                    ('3','procedure'  ): "pr_ReadAimmsPRO",
+                    ('3','state'      ): if p01_isAnAdmin then "Active" else "Inactive" endif,
                     
+                    ('4','displaytext'): "Stack the bars",
+                    ('4','icon'       ): "aimms-spinner3",
+                    ('4','procedure'  ): "pr_ComputeStackedBarCharts",
+                    ('4','state'      ): "Hidden" ,
+                    
+                    ('5','displaytext'): "CreateErrorReport",
+                    ('5','icon'       ): "aimms-typewriter",
+                    ('5','procedure'  ): "pr_CreateErrorReport",
+                    ('5','state'      ): "Hidden", ! if card( gss::s_JobErrorMessageNumbers ) then "Active" else "Hidden" endif,
+                    
+                    ('6','displaytext'): "ClearErrors",
+                    ('6','icon'       ): "aimms-bin5",
+                    ('6','procedure'  ): "pr_ClearErrors",
+                    ('6','state'      ): "Hidden"  ! if card( gss::s_JobErrorMessageNumbers ) then "Active" else "Hidden" endif 
                     
                     }
                 }
+            }
+            Set s_SomeIntegers {
+                SubsetOf: Integers;
+                Index: i_si;
+                Definition: ElementRange(1,9);
             }
             StringParameter sp_BarChartWidgetActions {
                 IndexDomain: (i_si,webui::indexWidgetActionSpec);
@@ -1348,29 +1403,42 @@ Model Main_AIMMSPROUsageStatistics {
             StringParameter sp_TitleSessionInUseChart {
                 Definition: {
                     if ep_BarchartColumnValueType and ep_BarchartColumnValueType <> 'None' then
-                    	formatString("Number of sessions in use stacked by %e", ep_BarchartColumnValueType )
+                    	formatString("The maximum number of simultaneous sessions in use stacked by %e, per %i[%u]", 
+                    		ep_BarchartColumnValueType, 
+                    		p_divisorPerGranul( ep_Granul ), 
+                    		up_baseTimeUnit( ep_mapToBaseGranularity( ep_Granul ) ) )
                     else
-                    	"Number of sessions in use"
-                    endif ;
+                    	formatString( "The maximum number of simultaneous sessions in use, per %i[%u]", 
+                    		p_divisorPerGranul( ep_Granul ), 
+                    		up_baseTimeUnit( ep_mapToBaseGranularity( ep_Granul ) ) )
+                    endif
                 }
             }
             StringParameter sp_TitleUsersInUseChart {
                 Definition: {
-                    if 	ep_BarchartColumnValueType and 
-                    	ep_BarchartColumnValueType <> 'None' and
-                    	ep_BarchartColumnValueType <> 'UserNames' then
-                    	formatString("Number of users active stacked by %e", ep_BarchartColumnValueType )
+                    if ep_BarchartColumnValueType and  ep_BarchartColumnValueType <> 'None'   then
+                    	formatString("The maximum number of users simultaneously active stacked by %e, per %i[%u]", 
+                    		ep_BarchartColumnValueType, 
+                    		p_divisorPerGranul( ep_Granul ), 
+                    		up_baseTimeUnit( ep_mapToBaseGranularity( ep_Granul ) ) )
                     else
-                    	"Number of users active"
+                    	formatString( "The maximum number of users simultaneously active, per %i[%u]", 
+                    		p_divisorPerGranul( ep_Granul ), 
+                    		up_baseTimeUnit( ep_mapToBaseGranularity( ep_Granul ) ) )
                     endif ;
                 }
             }
             StringParameter sp_TitleMemoryInUseChart {
                 Definition: {
                     if ep_BarchartColumnValueType and ep_BarchartColumnValueType <> 'None' then
-                    	formatString("Memory in use stacked by %e", ep_BarchartColumnValueType )
+                    	formatString("The maximum amount of memory in use by simultaneous sessions stacked by %e, per %i[%u]", 
+                    		ep_BarchartColumnValueType, 
+                    		p_divisorPerGranul( ep_Granul ), 
+                    		up_baseTimeUnit( ep_mapToBaseGranularity( ep_Granul ) ) )
                     else
-                    	"Memory in use"
+                    	formatString( "The maximum amount of memory in use by simultaneous sessions, per %i[%u]", 
+                    		p_divisorPerGranul( ep_Granul ), 
+                    		up_baseTimeUnit( ep_mapToBaseGranularity( ep_Granul ) ) )
                     endif ;
                 }
             }
@@ -1385,11 +1453,16 @@ Model Main_AIMMSPROUsageStatistics {
                     		endif
                 }
             }
+            Set s_DialogPageDefaultActions {
+                Definition: data { Cancel, OK };
+            }
             Procedure pr_BarChartSelectSessions {
                 Body: {
                     p01_SessionBarChartVisible := 1 ;
                     p01_UserBarChartVisible    := 0 ;
                     p01_MemoryBarChartVisible  := 0 ;
+                    
+                    pr_CommonBarChartInitialization();
                 }
             }
             Procedure pr_BarChartSelectUsers {
@@ -1397,6 +1470,8 @@ Model Main_AIMMSPROUsageStatistics {
                     p01_SessionBarChartVisible := 0 ;
                     p01_UserBarChartVisible    := 1 ;
                     p01_MemoryBarChartVisible  := 0 ;
+                    
+                    pr_CommonBarChartInitialization();
                 }
             }
             Procedure pr_BarChartSelectMemory {
@@ -1404,180 +1479,14 @@ Model Main_AIMMSPROUsageStatistics {
                     p01_SessionBarChartVisible := 0 ;
                     p01_UserBarChartVisible    := 0 ;
                     p01_MemoryBarChartVisible  := 1 ;
+                    
+                    pr_CommonBarChartInitialization();
                 }
             }
-            Procedure pr_ComputeStackedBarCharts {
+            Procedure pr_CommonBarChartInitialization {
                 Body: {
-                    block
-                    	pr_Open_Full_Event_Information();
-                    	pr_RelateBarChartMomentsToEvents();
-                    	pr_ComputeBarChartsStackedBySessionType();
-                    onerror ep_err do
-                    	gss::pr_GlobalErrorHandler(ep_err);
-                    endblock ;
-                }
-                ElementParameter ep_err {
-                    Range: errh::PendingErrors;
-                }
-            }
-            Procedure pr_RelateBarChartMomentsToEvents {
-                Body: {
-                    p_beg := p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob );
-                    p_dur := p_TimebarDuration(  ep_tb_selectedResource, ep_tb_selectedJob );
-                    p_end := P_beg + p_dur ;
-                    
-                    block ! Determine granularity per bar chart and a good starting reference.
-                    	block ! Granularity is selected such that the width of a bar chart column is a "natural" width.
-                    		! Here a natural width is an integer * a known granularity, and the integer is such that it is a 
-                    		! divisor of the next larger granularity. The definition of p_timePerGranul provides examples.
-                    		ep_granul := first( i_granul | p_NoInitialColumnsPerBarChart * p_timePerGranul(i_granul) > p_dur );
-                    		if not ep_granul then raise error "unable to find proper granularity" ; endif ;
-                    		ep_baseGranul := ep_mapToBaseGranularity( ep_granul );
-                    		if not ep_baseGranul then raise error "unable to find proper base granularity" ; endif ;
-                    	endblock ;
-                    
-                    	block ! The first column is mapped to "natural" start before the first event.
-                    		sp_beg := MomentToString(
-                    				Format        :  "%c%y-%m-%d %H", 
-                    				unit          :  [hour], 
-                    				ReferenceDate :  sp_TimebarViewportStart, 
-                    				Elapsed       :  p_beg );
-                    		sp_beg1 := substring(sp_beg,1,19);	
-                    		sp_beg2 := substring(sp_beg,1,16);	
-                    		sp_beg3 := substring(sp_beg,1,13);	
-                    		sp_beg4 := substring(sp_beg,1,10);	
-                    		sp_beg5 := substring(sp_beg,1,7);	
-                    		sp_beg6 := substring(sp_beg,1,4);
-                    
-                    		switch ep_baseGranul do
-                    			'second'  : sp_beg := sp_beg1;
-                    			'minute'  : sp_beg := sp_beg2;
-                    			'hour'    : sp_beg := sp_beg3;
-                    			'day'     : sp_beg := sp_beg4;
-                    			'month'   : sp_beg := sp_beg5;
-                    			'year'    : sp_beg := sp_beg6;
-                    		endswitch ;
-                    		sp_beg_len := Stringlength(sp_beg);
-                    		sp_lastNo := substring( sp_beg, sp_beg_len-1, sp_beg_len);
-                    		p_lastNo := val( sp_lastNo );
-                    		p_lastNo := div( p_lastNo, p_divisorPerGranul(ep_granul)) * p_divisorPerGranul(ep_granul);
-                    		sp_lastNo := formatString("%02i", p_LastNo );
-                    		sp_beg := substring(sp_beg, 1, sp_beg_len-2) + sp_lastNo ;
-                    	endblock ;
-                    
-                    	block ! Ensure that the columns of the bar chart cover all the events in the timebar.
-                    		p_start := fnc_StringToMoment(
-                    				sp_Format        :  sp_baseFormat(ep_baseGranul), 
-                    				ep_timeUnit      :  ep_baseGranul, 
-                    				sp_ReferenceDate :  sp_TimebarViewportStart, 
-                    				sp_Timeslot      :  sp_beg);
-                    		sp_end := MomentToString(
-                    				Format        :  "%c%y-%m-%d %H", 
-                    				unit          :  [hour], 
-                    				ReferenceDate :  sp_TimebarViewportStart, 
-                    				Elapsed       :  p_beg + p_dur  );
-                    		p_totdur := fnc_StringToMoment(
-                    				sp_Format        :  sp_baseFormat(ep_basegranul), 
-                    				ep_timeUnit      :  ep_baseGranul, 
-                    				sp_ReferenceDate :  sp_beg, 
-                    				sp_Timeslot      :  sp_end);
-                    	endblock ;
-                    
-                    	block ! Ensure there are sufficient columns in the bar chart.
-                    		p_NoColumnsPerBarChart := p_NoInitialColumnsPerBarChart ;
-                    		while p_NoColumnsPerBarChart * p_timePerGranul( ep_granul ) < p_totdur do
-                    			p_NoColumnsPerBarChart += 1 ;
-                    		endwhile ;
-                    	endblock ;
-                    
-                    	sp_finish := fnc_MomentToString(
-                    			sp_Format        :  sp_baseFormat(ep_baseGranul), 
-                    			ep_timeunit      :   ep_baseGranul, 
-                    			sp_ReferenceDate :  sp_beg, 
-                    			p_Elapsed        :  p_NoColumnsPerBarChart * p_timePerGranul( ep_granul ) );
-                    endblock ;
-                    
-                    empty s_BarChartColumns;
-                    p_ElemNo := 1 ;
-                    while p_ElemNo <= p_NoColumnsPerBarChart do
-                    	sp_elemName := fnc_MomentToString(
-                    			sp_Format        :  sp_baseFormat(ep_baseGranul), 
-                    			ep_timeunit      :  ep_baseGranul, 
-                    			sp_ReferenceDate :  sp_beg, 
-                    			p_Elapsed        :  (p_ElemNo-1) * p_timePerGranul( ep_granul ) );
-                    	SetElementAdd( s_BarChartColumns, ep_bcc, sp_elemName);
-                    	sp_BarChartMoments( ep_bcc ) := sp_elemName;
-                    	p_ElemNo += 1 ;
-                    endwhile ;
-                    
-                    ep_firstBCC := first( s_BarChartColumns );
-                    ep_lastBCC  := last(  s_BarChartColumns );
-                    ep_FirstEventAtBarChartPoint(i_bcc) := 
-                    	first( i_event | sp_EvMoment(i_Event) >= sp_BarChartMoments( i_bcc ) );
-                    ep_lastEventAtBarChartPoint(i_bcc) := ep_FirstEventAtBarChartPoint(i_bcc+1) - 1 ;
-                    ep_lastEventAtBarChartPoint(ep_lastBCC) := last( i_event | sp_EvMoment(i_Event) <= sp_finish );
-                    
-                    s_EventsAtBarChartPoint(i_bcc) := { i_event | ep_FirstEventAtBarChartPoint(i_bcc) <= i_event <= ep_lastEventAtBarChartPoint(i_bcc) };
-                }
-                Parameter p_dur {
-                    Unit: hour;
-                }
-                Parameter p_beg {
-                    Unit: hour;
-                }
-                Parameter p_start {
-                    Unit: hour;
-                }
-                Parameter p_totdur {
-                    Unit: hour;
-                }
-                Parameter p_end {
-                    Unit: hour;
-                }
-                StringParameter sp_beg;
-                StringParameter sp_end;
-                StringParameter sp_beg1;
-                StringParameter sp_beg2;
-                StringParameter sp_beg3;
-                StringParameter sp_beg4;
-                StringParameter sp_beg5;
-                StringParameter sp_beg6;
-                Parameter p_ElemNo;
-                StringParameter sp_ElemName;
-                StringParameter sp_lastNo;
-                Parameter p_lastNo;
-                Parameter sp_beg_len;
-                Parameter p_LastDivisor;
-            }
-            Procedure pr_ComputeBarChartsStackedBySessionType {
-                Body: {
-                    p_NumberOfSessionsStackedBySessionType(i_bcc, i_someValue) :=
-                    	max( 0, max( i_ShownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc), 
-                    		p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent, i_someValue) ) );
-                    
-                    p_MemoryInUseStackedBySessionType(i_bcc, i_someValue) :=
-                    	max( 0[mb], max( i_ShownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc), 
-                    		p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent, i_someValue) ) );
-                    
-                    p_NumberOfUsersStackedBySessionType(i_bcc, i_someValue) :=
-                    	max( 0, max( i_ShownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc), 
-                    		p_NumberOfUsersAfterEventBySessionType(i_ShownEvent, i_someValue) ) );
-                }
-            }
-            Procedure pr_EnableSessionTracking {
-                Body: {
-                    block 
-                    	raise error "pr_EnableSessionTracking(): not implemented yet";
-                    	! Open a dialog page
-                    	! obtain password
-                    	! Create connection
-                    	! DirectSql - change the number.
-                    onerror ep_err do
-                    	gss::pr_GlobalErrorHandler(ep_err);
-                    endblock ;
-                }
-                ElementParameter ep_err {
-                    Range: errh::PendingErrors;
+                    ep_FocusValue := '' ;
+                    ep_BarchartColumnValueType := 'None' ;
                 }
             }
         }
@@ -1598,44 +1507,287 @@ Model Main_AIMMSPROUsageStatistics {
             StringParameter sp_TitleEventsWithFocusTable {
                 Definition: {
                     if ep_BarchartColumnValueType and ep_BarchartColumnValueType <> 'None' then
-                    	formatString("Events with focus on %e %e in period %e to %s", ep_BarchartColumnValueType, ep_FocusValue, ep_FocusBCC,
+                    	formatString("%i Events with focus on %e %e in period %e to %s", 
+                    		card( s_EventsWithFocus ),
+                    		ep_BarchartColumnValueType, ep_FocusValue, ep_FocusBCC,
                     		sp_BarChartEnd( ep_FocusBCC )  )
                     else
-                    	formatString("Events with focus in period %e to %s", ep_FocusBCC,
+                    	formatString("%i Events with focus in period %e to %s", 
+                    		card( s_EventsWithFocus ),
+                    		ep_FocusBCC,
                     		sp_BarChartEnd( ep_FocusBCC ) )
                     endif ;
                 }
             }
         }
-        Section Error_Handler {
-            Procedure pr_CreateErrorReport {
-                Body: {
-                    gss::pr_ReportCurrentErrorsToTextFile("log\\usage.errorLogging");
+        Section Side_panel_handling {
+            DeclarationSection Side_panel_declarations {
+                Set s_SidePanelOrder {
+                    SubsetOf: Integers;
+                    Index: i_spo;
+                    Definition: ElementRange(1,9);
+                }
+                StringParameter sp_SidePanelsFullEventPage {
+                    IndexDomain: (i_spo,webui::indexSidePanelSpec);
+                    Definition: {
+                        {
+                        
+                          ( '1', 'displayText' ) : "App Filter",  
+                          ( '1', 'pageId'      ) : "appfilter_1",
+                          ( '1', 'tooltip'     ) : "ses-type app version",  
+                          ( '1', 'state'       ) : "Active",
+                        
+                          ( '2', 'displayText' ) : "User Filter",
+                          ( '2', 'pageId'      ) : "usefilter_1",
+                          ( '2', 'tooltip'     ) : "account environment user",  
+                          ( '2', 'state'       ) : "Active" ,
+                        
+                          ( '3', 'displayText' ) : "Stack by",
+                          ( '3', 'pageId'      ) : "stackselector_1",
+                          ( '3', 'tooltip'     ) : "Choose value type for stacking",  
+                          ( '3', 'state'       ) : "Active" ,
+                        
+                          ( '4', 'displayText' ) : if card( gss::s_JobErrorMessageNumbers ) then FormatString("%i errors", card( gss::s_JobErrorMessageNumbers ) ) else "" endif,
+                          ( '4', 'pageId'      ) : if card( gss::s_JobErrorMessageNumbers ) then "errors_1"                                                        else "" endif,
+                          ( '4', 'tooltip'     ) : if card( gss::s_JobErrorMessageNumbers ) then "Error handling"                                                  else "" endif,  
+                          ( '4', 'state'       ) : if card( gss::s_JobErrorMessageNumbers ) then "Active"                                                          else "" endif 
+                        
+                        }
+                    }
                 }
             }
-            Procedure pr_ClearErrors {
-                Body: {
-                    gss::pr_ClearErrors();
+            Section Filtering_panels {
+                Procedure uponchange_p01_SelectedAccounts {
+                    Body: {
+                        block 
+                        	pr_handle_uponchange_ValueSelections();
+                        onerror ep_err do
+                        	gss::pr_GlobalErrorHandler(ep_err);
+                        endblock ;
+                    }
+                    ElementParameter ep_err {
+                        Range: errh::PendingErrors;
+                    }
+                }
+                Procedure uponchange_p01_SelectedSessionTypes {
+                    Body: {
+                        block 
+                        	pr_handle_uponchange_ValueSelections();
+                        onerror ep_err do
+                        	gss::pr_GlobalErrorHandler(ep_err);
+                        endblock ;
+                    }
+                    ElementParameter ep_err {
+                        Range: errh::PendingErrors;
+                    }
+                }
+                Procedure uponchange_p01_SelectedEnvironments {
+                    Body: {
+                        block 
+                        	pr_handle_uponchange_ValueSelections();
+                        onerror ep_err do
+                        	gss::pr_GlobalErrorHandler(ep_err);
+                        endblock ;
+                    }
+                    ElementParameter ep_err {
+                        Range: errh::PendingErrors;
+                    }
+                }
+                Procedure uponchange_p01_SelectedUsernames {
+                    Body: {
+                        block 
+                        	pr_handle_uponchange_ValueSelections();
+                        onerror ep_err do
+                        	gss::pr_GlobalErrorHandler(ep_err);
+                        endblock ;
+                    }
+                    ElementParameter ep_err {
+                        Range: errh::PendingErrors;
+                    }
+                }
+                Procedure uponchange_p01_SelectedApplications {
+                    Body: {
+                        block 
+                        	pr_handle_uponchange_ValueSelections();
+                        onerror ep_err do
+                        	gss::pr_GlobalErrorHandler(ep_err);
+                        endblock ;
+                    }
+                    ElementParameter ep_err {
+                        Range: errh::PendingErrors;
+                    }
+                }
+                Procedure uponchange_p01_SelectedAppversions {
+                    Body: {
+                        block 
+                        	pr_handle_uponchange_ValueSelections();
+                        onerror ep_err do
+                        	gss::pr_GlobalErrorHandler(ep_err);
+                        endblock ;
+                    }
+                    ElementParameter ep_err {
+                        Range: errh::PendingErrors;
+                    }
+                }
+                Procedure uponchange_ep_BarchartColumnValueType {
+                    Body: {
+                        block 
+                        	pr_handleBarchartColumnValueType();
+                        	pr_handle_uponchange_ValueSelections();
+                        onerror ep_err do
+                        	gss::pr_GlobalErrorHandler(ep_err);
+                        endblock ;
+                    }
+                    ElementParameter ep_err {
+                        Range: errh::PendingErrors;
+                    }
+                }
+                Procedure pr_handle_uponchange_ValueSelections {
+                    Body: {
+                        pr_NoSessionsMemInUse();
+                        pr_ComputeBarChartsStackedBySessionType();
+                    }
+                }
+                DeclarationSection filtering_the_events {
+                    Set s_ShownEvents {
+                        SubsetOf: s_Events;
+                        Index: i_ShownEvent;
+                        Property: ElementsAreLabels;
+                        Definition: {
+                            { i_event |
+                            	( ep_EvValueData(i_Event,'SessionTypes') in s_ShownSessionTypes ) and
+                            	( ep_EvValueData(i_Event,'Applications') in s_ShownApplications ) and
+                            	( ep_EvValueData(i_Event,'AppVersions')  in s_ShownAppVersions  ) and
+                            
+                            	( ep_EvValueData(i_Event,'AccountNames') in s_ShownAccounts     ) and
+                            	( ep_EvValueData(i_Event,'Environments') in s_ShownEnvironments ) and
+                            	( ep_EvValueData(i_Event,'UserNames')    in s_ShownUserNames    )     }
+                        }
+                    }
+                    Set s_ShownAccounts {
+                        SubsetOf: s_AccountNames;
+                        Index: i_ShownAccount;
+                        Definition: {
+                            { i_AccountName | p01_SelectedAccounts(i_AccountName) }
+                        }
+                    }
+                    Set s_ShownSessionTypes {
+                        SubsetOf: s_SessionTypes;
+                        Index: i_ShownSessionType;
+                        Definition: {
+                            { i_SessionType | p01_SelectedSessionTypes(i_SessionType) }
+                        }
+                    }
+                    Set s_ShownEnvironments {
+                        SubsetOf: s_Environments;
+                        Index: i_ShownEnvironment;
+                        Definition: {
+                            { i_Environment | p01_SelectedEnvironments(i_Environment)}
+                        }
+                    }
+                    Set s_ShownUserNames {
+                        SubsetOf: s_UserNames;
+                        Parameter: i_shownUserName;
+                        Definition: {
+                            { i_UserName | p01_SelectedUsernames(i_UserName) }
+                        }
+                    }
+                    Set s_ShownApplications {
+                        SubsetOf: s_Applications;
+                        Index: i_ShownApp;
+                        Definition: {
+                            {i_Application | p01_SelectedApplications(i_Application)}
+                        }
+                    }
+                    Set s_ShownAppVersions {
+                        SubsetOf: s_AppVersions;
+                        Index: i_ShownAppVersion;
+                        Definition: {
+                            { i_AppVersion | p01_SelectedAppversions(i_AppVersion) }
+                        }
+                    }
+                    Parameter p01_SelectedAccounts {
+                        IndexDomain: i_AccountName;
+                        Range: binary;
+                    }
+                    Parameter p01_SelectedSessionTypes {
+                        IndexDomain: i_SessionType;
+                        Range: binary;
+                    }
+                    Parameter p01_SelectedEnvironments {
+                        IndexDomain: i_Environment;
+                        Range: binary;
+                    }
+                    Parameter p01_SelectedUsernames {
+                        IndexDomain: i_UserName;
+                        Range: binary;
+                    }
+                    Parameter p01_SelectedApplications {
+                        IndexDomain: i_Application;
+                        Range: binary;
+                    }
+                    Parameter p01_SelectedAppversions {
+                        IndexDomain: i_AppVersion;
+                        Range: binary;
+                    }
                 }
             }
-            Set s_SomeIntegers {
-                SubsetOf: Integers;
-                Index: i_si;
-                Definition: ElementRange(1,9);
+            Section Error_panel {
+                Procedure pr_CreateErrorReport {
+                    Body: {
+                        gss::pr_ReportCurrentErrorsToTextFile("log/usage.errorLogging");
+                    }
+                }
+                Procedure pr_ClearErrors {
+                    Body: {
+                        gss::pr_ClearErrors();
+                    }
+                }
             }
-            StringParameter sp_ErrorHandlingSecondaryActions {
-                IndexDomain: (i_si, webui::indexPageActionSpec);
-                Definition: {
-                    data {
-                    (1,displaytext): "CreateErrorReport",
-                    (1,icon): "aimms-typewriter",
-                    (1,procedure): "pr_CreateErrorReport",
-                    (1,state): "Active",
-                    
-                    (2,displaytext): "ClearErrors",
-                    (2,icon): "aimms-bin5",
-                    (2,procedure): "pr_ClearErrors",
-                    (2,state): "Active" }
+        }
+        Section Tracking_Toggle {
+            Procedure pr_EnableSessionTracking {
+                Body: {
+                    block 
+                    	sp_Password := "" ;
+                    	webui::OpenDialogPage(
+                    		pageId  :  'obtainpasswordfortracking_1', 
+                    		title   :  "Provide password for AIMMS PRO database", 
+                    		actions :  s_DialogPageDefaultActions, 
+                    		onDone  :  'pr_OnDoneObtainPasswordSessionTracking');
+                    	!raise error "pr_EnableSessionTracking(): not implemented yet";
+                    	! Open a dialog page
+                    	! obtain password
+                    	! Create connection
+                    	! DirectSql - change the number.
+                    onerror ep_err do
+                    	gss::pr_GlobalErrorHandler(ep_err);
+                    	sp_password := "" ;
+                    	CloseDataSource(sp_Datasource);
+                    endblock ;
+                }
+                ElementParameter ep_err {
+                    Range: errh::PendingErrors;
+                }
+            }
+            Procedure pr_OnDoneObtainPasswordSessionTracking {
+                Arguments: (sp_response);
+                Body: {
+                    block
+                    	if sp_response = "OK" then
+                    		pr_ToggleTrackingOn();
+                    	else
+                    		raise warning "You cancelled out of the dialog; tracking not enabled" ;
+                    	endif ;
+                    onerror ep_err do
+                    	gss::pr_GlobalErrorHandler(ep_err);
+                    endblock ;
+                }
+                StringParameter sp_response {
+                    Property: Input;
+                }
+                ElementParameter ep_err {
+                    Range: errh::PendingErrors;
                 }
             }
         }
@@ -1645,9 +1797,11 @@ Model Main_AIMMSPROUsageStatistics {
             Body: {
                 !profilerStart();
                 
-                ep_BarchartColumnValueType := 'SessionTypes' ;
-                s_ValueSubset := s_SessionTypes ;
-                ep_FocusValue := 'data' ;
+                gss::pr_SeenErrorsAreHandled(1);
+                
+                ep_BarchartColumnValueType := 'None' ; ! 'SessionTypes' ;
+                s_ValueSubset := s_GenericAll ; ! s_SessionTypes ;
+                ep_FocusValue := '' ; ! 'data' ;
                 
                 sp_TimebarViewportEnd   := CurrentToString("%c%y-%m-%d 00");
                 sp_TimebarViewportStart := MomentToString(
@@ -1681,9 +1835,36 @@ Model Main_AIMMSPROUsageStatistics {
             StringParameter sp_LastEvent;
         }
         Procedure PostMainInitialization {
+            Body: {
+                if pro::GetPROEndPoint() then
+                	p01_isAnAdmin := 0 ;
+                	pro::Initialize();
+                	if pro::GetCurrentUserInfo(
+                		environment   :  sp_env, 
+                		username      :  sp_usr, 
+                		userBucket    :  sp_bkt, 
+                		userGroups    :  s_groups, 
+                		userGroupname :  sp_GroupNames) then
+                		if exists( i_grp | sp_GroupNames(i_grp) = "admin" ) then
+                			p01_isAnAdmin := 1 ;
+                		endif ;
+                	endif ;
+                else
+                	p01_isAnAdmin := 1 ;
+                endif ;
+            }
             Comment: {
                 "Add initialization statements here that require that the libraries are already initialized properly,
                 or add statements that require the Data Management module to be initialized."
+            }
+            StringParameter sp_env;
+            StringParameter sp_usr;
+            StringParameter sp_bkt;
+            Set s_Groups {
+                Index: i_grp;
+            }
+            StringParameter sp_GroupNames {
+                IndexDomain: i_grp;
             }
         }
         Procedure MainExecution;

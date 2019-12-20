@@ -7,9 +7,9 @@ Investigate Behavior of AIMMS PRO Job
 
 An AIMMS PRO job may spend more time than the corresponding procedure on the client side. In this article we set out to answer the following questions:
 
-* How can I reduce the execution time of my AIMMS PRO job?
+#. How to reduce the execution time of an AIMMS PRO job?
 
-* How can I find out what went wrong with my AIMMS PRO job?
+#. How to find out what went wrong with an AIMMS PRO job?
 
 .. tip:: A first check is to search for ``: duration`` and for ``transmitted`` in the session log files; this may provide a clue quickly of where a bottleneck might be.
 
@@ -19,6 +19,7 @@ As the AIMMS PRO job realizing the delegated procedure runs **in a different pro
 
 .. image:: images/actions-delegate.png
     :align: center
+    :scale: 70
 
 Actions taken by ``PRO::DelegateToServer``:
 
@@ -93,7 +94,7 @@ Remarks about the above code:
 Copy the case file to the AIMMS PRO server
 ----------------------------------------------------------
 
-To transfer items, transfer speed and item size do matter. To reduce the item size is discussed in the previous section. The transfer speed depends on the connection and distance. Clearly when the client and server session are executed on the same host, or the hosts are in the same domain, then transfer speed is high. On the other hand, when those hosts are on different continents, then the transfer speed may very well be low. 
+To transfer items, transfer speed and item size do matter. To reduce the item size is discussed in the previous section. The transfer speed depends on the connection and distance. Obviously, when the client and server sessions are executed on the same host or the hosts are in the same domain, the transfer speed is high. On the other hand, when these hosts are in different continents, then the transfer speed may very well be low. 
 
 To investigate how much time is spent for the case transfer, we have to look in the session log file of the server session. This file can be found in the AIMMS PRO data folder, by default ``C:\ProgramData\AimmsPRO``, subfolder ``Log\Sessions``. The name of this log file is a GUID with extension .log. On a test server, the file was named  ``D:\ProgramData\AimmsPRO\Log\Sessions\f9706ac8-841f-4b35-bc74-57863e82e630-1.log``
 
@@ -116,8 +117,7 @@ Anyway, now that we have this log file open, we may want to search for other occ
 On the AIMMS PRO server, wait for a server license
 ---------------------------------------------------
 
-This is also known as wait time or queueing time. 
-This can be obtained from the AIMMS PRO portal, tab jobs as illustrated in the image below:
+This is also known as wait time or queueing time. This can be obtained from the Jobs tab in the AIMMS PRO Portal as illustrated in the image below:
 
 .. image:: images/JobsTabForQueueing.png
     :align: center
@@ -130,20 +130,13 @@ On the AIMMS PRO server, compile and initialize the AIMMS Project
 
 A server session starts with opening the project, including running initialization procedures of the Main model and running the initialization procedures of each of its libraries.
 
-By adding the line
-
-.. code-block:: aimms
-    :linenos:
-
-    ProfilerStart();
-    
-Restarting AIMMS on your project, opening the profiler, results overview, you'll get an impression how long initialization, **client side**, took for your project.
+By adding the code ``ProfilerStart()`` at the top of your ``MainInitialization`` procedure, you can measure how long do these initialization procedures take for your project. After adding this line, close and reopen your AIMMS project. Profiler -> Results Overview will give you the numbers on **client side**.      
 
 .. image:: images/ProfiledClientSideInitialization.png
     :align: center
+    :scale: 70
 
-Once you're ok with the initialization time of your project, you may want to check this server side as well.
-How to check the timings server side is discussed below: see :ref:`profiling_work_procedure`.
+Once you are satisfied with the initialization times of your project on client side, you might want to check this on the server side as well. How to check the timings server side is discussed below: see :ref:`profiling_work_procedure`.
 
 .. _sec_server_read_case:
 
@@ -154,8 +147,12 @@ This action, and subsequently the time it takes, is closely linked to the size o
 
 .. _profiling_work_procedure:
 
-On the AIMMS PRO server, execute the procedure that is invoked by ``pro::DelegateToServer``
+On the AIMMS PRO server, execute the delegated procedure
 -----------------------------------------------------------------------------------------------
+
+We will use the attached AIMMS project as an example for this section. 
+
+* :download:`FlowShop.zip <model/FlowShop.zip>` 
 
 We assume here that your ``MainInitialization`` procedure, still starts with  ``ProfilerStart();``
 In addition, we assume here that delegation is done as follows:
@@ -188,7 +185,7 @@ We change this to:
 
     gss::pr_GuardAndProfileServerJob( 'pr_WorkSolve' );
 
-whereby the procedure ``gss::pr_GuardAndProfileServerJob();`` is defined as:
+``gss::pr_GuardAndProfileServerJob();`` is defined as:
 
 .. code-block:: aimms
     :linenos:
@@ -259,11 +256,10 @@ whereby the procedure ``gss::pr_GuardAndProfileServerJob();`` is defined as:
         }
     }
 
-Remarks:
+.. note::
+     ``ProfilerCollectAllData`` is available since AIMMS 4.68
 
-#. ``ProfilerCollectAllData`` is available since AIMMS 4.68
-
-In addition, we set the option ``communicate_warnings_to_end_users`` to ``on``.
+In addition, we also set the option ``communicate_warnings_to_end_users`` to ``on``.
 
 Run the optimization via the widget action of the Gantt Chart:
 
@@ -275,6 +271,10 @@ Switch to the profile and error page of the app:
 .. image:: images/ErrorProfilerDataServerJob.png
     :align: center
 
+The flow shop project contains a custom library ``GuardServerSession``, which you can download and add to your project. See :doc:`add libraries to your project<../84/84-using-libraries>`.
+
+* :download:`GuardServerSession.zip <model/GuardServerSession.zip>` 
+
 On the AIMMS PRO server, create a case file with the results
 ----------------------------------------------------------------------------
 
@@ -284,13 +284,6 @@ Client side: read the case file with results
 -----------------------------------------------------------
 
 This is the same as section :ref:`sec_server_read_case`.
-
-
-Project download
------------------
-The AIMMS project used to create the screenshots of this article can be downloaded below:
-
-* :download:`FlowShop.zip <model/FlowShop.zip>` 
 
 
 
