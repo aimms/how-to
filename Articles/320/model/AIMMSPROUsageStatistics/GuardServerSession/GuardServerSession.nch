@@ -17,4 +17,6 @@
 "s_StackPositions" "gss::s_StackPositions" "2019-11-06 10:11:57"
 "sp_JobErrorMessages" "gss::sp_JobErrorMessages" "2019-11-06 10:11:57"
 "gss::Copy_sp_JobErrorMessages" "gss::sp_JobErrorMoments" "2019-11-06 10:42:09"
+"gss::sp_FileFriendlyName" "gss::spfnc_FileFriendlyName" "2019-11-27 07:39:24"
+"gss::EnsurePath" "gss::pr_EnsurePath" "2019-11-27 10:55:23"
 "pr_DownloadErrorReport" "gss::pr_DownloadErrorReport" "2019-12-10 14:51:18"

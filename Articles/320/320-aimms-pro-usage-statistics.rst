@@ -61,6 +61,61 @@ From bottom to top, there are three menus that allow you to operate the applicat
 
 .. points to demo / explain:
 
+.. demo
+
+.. Purpose:
+.. - Show AIMMS PRO usage of jobs, seats, and memory over time.
+
+.. Three menus and some side panels:
+.. - Page menu
+.. - Widget menu of bar charts
+.. - Data manager
+
+.. Menu 1: Page menu - aka secondary actions.
+..         Only active entries for admins, briefly show Theo, logged in via Edge
+..         Show dialog page for Track - explain 
+..         Press Read button.
+
+..         Show time selection
+..         Show selection by filtering
+..         Show stacking
+
+.. Menu 2: Widget menu 
+..         Show that you can easily switch
+..         We have a bar chart for Sessions, Users, and Memory Usage
+
+.. Menu 3: Data manager
+..         Save a case, share it.
+..         Load it by Theo
+
+
+.. In begeleidende text:
+
+.. - Stakeholders:
+..   o Procurement from customers
+..     - Is the current subscription oversized?
+..     - Is there an increase in seat / memory / server jobs, and should we increase our subscription?
+..   o AIMMS Cloud operations
+..     - Which accounts use how much?
+..   o AIMMS G2 Market team
+..     - Analyze with customer their needs
+
+.. Provided new technology:
+..    - pro::sessionmanager::ListSessionsUsage
+..    - AIMMS PRO 2.34 is needed.
+..    - AIMMS 4.71 is needed.
+
+.. Used existing technology
+.. - Side panels
+.. - widget menu
+.. - data manager
+.. - extensive use of time functions
+
+.. Used How To tricks
+.. Timebar?
+.. Who is the admin?
+.
+
 .. * Side panels - filters, stack by, error (dynamic).
 .. * bar charts - overlay by menu.
 .. * time bar used - probably familiar

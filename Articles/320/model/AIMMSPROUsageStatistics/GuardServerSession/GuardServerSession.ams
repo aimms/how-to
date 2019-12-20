@@ -4,242 +4,459 @@ LibraryModule Library_GuardServerSession {
     Prefix: gss;
     Interface: Public_Section;
     Section Public_Section {
-        DeclarationSection ServerSessionProfilerErrorData {
-            Set s_LineNumbers {
-                SubsetOf: Integers;
-                Index: i_LineNumber;
-                Definition: ElementRange(0,1000);
+        Section Guard_session {
+            DeclarationSection ServerSessionProfilerErrorData {
+                Set s_LineNumbers {
+                    SubsetOf: Integers;
+                    Index: i_LineNumber;
+                    Definition: ElementRange(0,1000);
+                }
+                Set s_StackPositions {
+                    SubsetOf: Integers;
+                    Index: i_StackPosition;
+                    Definition: ElementRange(1,255);
+                }
+                Parameter p_JobProfilerData {
+                    IndexDomain: (IndexIdentifiers,i_LineNumber,IndexProfilerTypes );
+                }
+                Set s_JobErrorMessageNumbers {
+                    SubsetOf: Integers;
+                    Index: i_JobErrorMessageNumber;
+                }
+                StringParameter sp_JobErrorMessages {
+                    IndexDomain: i_JobErrorMessageNumber;
+                }
+                StringParameter sp_JobErrorMoments {
+                    IndexDomain: i_JobErrorMessageNumber;
+                }
+                ElementParameter ep_JobErrorSeverity {
+                    IndexDomain: i_JobErrorMessageNumber;
+                    Range: errh::AllErrorSeverities;
+                }
+                ElementParameter ep_JobErrorNodes {
+                    IndexDomain: (i_JobErrorMessageNumber,i_StackPosition);
+                    Range: AllSymbols;
+                }
+                Parameter p_JobErrorLines {
+                    IndexDomain: (i_JobErrorMessageNumber,i_StackPosition);
+                }
             }
-            Set s_StackPositions {
-                SubsetOf: Integers;
-                Index: i_StackPosition;
-                Definition: ElementRange(1,255);
+            Procedure pr_GuardAndProfileServerJob {
+                Arguments: (ep_Work);
+                Body: {
+                    block
+                    	empty s_JobErrorMessageNumbers ;
+                    
+                    	! Ensure that the error recorded and profiler data are transmitted via the output case:
+                    	pro::ManagedSessionOutputCaseIdentifierSet += ServerSessionProfilerErrorData ;
+                    
+                    	! Actual work.
+                    	apply( ep_Work);
+                    
+                    	! Ensure that the definitions of all defined sets and defined parameters in 
+                    	! output case identifier set are profiled.
+                    	update pro::ManagedSessionOutputCaseIdentifierSet;
+                    
+                    onerror ep_err do
+                    
+                    	! Increase the number of recorded error messages.
+                    	s_JobErrorMessageNumbers += card(s_JobErrorMessageNumbers) + 1;
+                    	ep_JobErrorMessageNumber := last(s_JobErrorMessageNumbers);
+                    
+                    	! Record the message and severity.
+                    	sp_JobErrorMessages(ep_JobErrorMessageNumber) := errh::Message( ep_err);
+                    	sp_JobErrorMoments( ep_JobErrorMessageNumber) := errh::CreationTime(ep_err,"%c%y-%m-%d %H:%M:%S:%T%TZ('UTC')");
+                    	ep_JobErrorSeverity(ep_JobErrorMessageNumber) := errh::Severity(ep_err);
+                    
+                    	! Record the entire stack of error positions
+                    	p_errStackHeight := errh::NumberOfLocations(ep_err);
+                    	p_errStackPos := 1 ;
+                    	while p_errStackPos <= p_errStackHeight do
+                    		ep_StackPosition := p_errStackPos;
+                    		ep_JobErrorNodes(ep_JobErrorMessageNumber,ep_StackPosition) := errh::Node(ep_err,ep_StackPosition);
+                    		p_JobErrorLines( ep_JobErrorMessageNumber,ep_StackPosition) := errh::Line(ep_err,ep_StackPosition);
+                    		p_errStackPos += 1 ;
+                    	endwhile ;
+                    
+                    	! Don't let the server job be halted by this error; 
+                    	! we still want the result case including the profiled data.
+                    	errh::MarkAsHandled(ep_err);
+                    
+                    endblock ;
+                    ProfilerCollectAllData(
+                    	ProfilerData       :  p_JobProfilerData, 
+                    	GrossTimeThreshold :  0, 
+                    	NetTimeThreshold   :  0);
+                }
+                ElementParameter ep_err {
+                    Range: errh::PendingErrors;
+                }
+                Parameter p_errStackHeight;
+                Parameter p_errStackPos;
+                ElementParameter ep_StackPosition {
+                    Range: s_StackPositions;
+                }
+                ElementParameter ep_JobErrorMessageNumber {
+                    Range: s_JobErrorMessageNumbers;
+                }
+                ElementParameter ep_Work {
+                    Range: AllProcedures;
+                    Default: 'gss::pr_SampleProc';
+                    Property: Input;
+                }
             }
-            Parameter p_JobProfilerData {
-                IndexDomain: (IndexIdentifiers,i_LineNumber,IndexProfilerTypes );
+            Procedure pr_ClearErrors {
+                Body: {
+                    empty s_JobErrorMessageNumbers;
+                }
             }
-            Set s_JobErrorMessageNumbers {
-                SubsetOf: Integers;
-                Index: i_JobErrorMessageNumber;
+            Procedure pr_ReportCurrentErrorsToTextFile {
+                Arguments: (sp_filename);
+                Body: {
+                    block where listing_page_width := 32000 ;
+                    f_out.pagewidth := 32000 ;
+                    put f_out;
+                    for i_JobErrorMessageNumber do
+                    	put     ep_JobErrorSeverity(i_JobErrorMessageNumber), " ", 
+                    	        sp_JobErrorMoments( i_JobErrorMessageNumber), " : ",
+                    		sp_JobErrorMessages(i_JobErrorMessageNumber), / ;
+                    	for i_StackPosition | p_JobErrorLines(i_JobErrorMessageNumber, i_StackPosition) do
+                    		put "    ", p_JobErrorLines(i_JobErrorMessageNumber, i_StackPosition):4:0, 
+                    		    " : ", ep_JobErrorNodes(i_JobErrorMessageNumber, i_StackPosition):0, / ;
+                    	endfor ;
+                    	put / ;
+                    endfor ;
+                    putclose ;
+                    endblock ;
+                }
+                StringParameter sp_filename {
+                    Property: Input;
+                }
+                File f_out {
+                    Name: sp_filename;
+                    Device: Disk;
+                    Mode: replace;
+                }
             }
-            StringParameter sp_JobErrorMessages {
-                IndexDomain: i_JobErrorMessageNumber;
+            Procedure pr_GlobalErrorHandler {
+                Arguments: (ep_err);
+                Body: {
+                    ! Increase the number of recorded error messages.
+                    s_JobErrorMessageNumbers += card(s_JobErrorMessageNumbers) + 1;
+                    ep_JobErrorMessageNumber := last(s_JobErrorMessageNumbers);
+                    
+                    ! Record the message and severity.
+                    sp_JobErrorMessages(ep_JobErrorMessageNumber) := errh::Message( ep_err);
+                    sp_JobErrorMoments( ep_JobErrorMessageNumber) := CurrentToString("%c%y-%m-%d %H:%M:%S:%T%TZ('UTC')");
+                    ep_JobErrorSeverity(ep_JobErrorMessageNumber) := errh::Severity(ep_err);
+                    
+                    ! Record the entire stack of error positions
+                    p_errStackHeight := errh::NumberOfLocations(ep_err);
+                    p_errStackPos := 1 ;
+                    while p_errStackPos <= p_errStackHeight do
+                    	ep_StackPosition := p_errStackPos;
+                    	ep_JobErrorNodes(ep_JobErrorMessageNumber,ep_StackPosition) := errh::Node(ep_err,ep_StackPosition);
+                    	p_JobErrorLines( ep_JobErrorMessageNumber,ep_StackPosition) := errh::Line(ep_err,ep_StackPosition);
+                    	p_errStackPos += 1 ;
+                    endwhile ;
+                    
+                    if p01_locSeenErrorsAreHandled then
+                    	errh::MarkAsHandled( ep_err );
+                    endif ;
+                }
+                ElementParameter ep_err {
+                    Range: errh::PendingErrors;
+                    Property: Input;
+                }
+                ElementParameter ep_JobErrorMessageNumber {
+                    Range: s_JobErrorMessageNumbers;
+                }
+                Parameter p_errStackHeight;
+                Parameter p_errStackPos;
+                ElementParameter ep_StackPosition {
+                    Range: s_StackPositions;
+                }
             }
-            StringParameter sp_JobErrorMoments {
-                IndexDomain: i_JobErrorMessageNumber;
+            Procedure pr_SeenErrorsAreHandled {
+                Arguments: (p01_AreHandled);
+                Body: {
+                    p01_locSeenErrorsAreHandled := p01_AreHandled ;
+                }
+                Parameter p01_AreHandled {
+                    Range: binary;
+                    Default: 1;
+                    Property: Input;
+                }
             }
-            ElementParameter ep_JobErrorSeverity {
-                IndexDomain: i_JobErrorMessageNumber;
-                Range: errh::AllErrorSeverities;
-            }
-            ElementParameter ep_JobErrorNodes {
-                IndexDomain: (i_JobErrorMessageNumber,i_StackPosition);
-                Range: AllSymbols;
-            }
-            Parameter p_JobErrorLines {
-                IndexDomain: (i_JobErrorMessageNumber,i_StackPosition);
+            Procedure pr_DownloadErrorReport {
+                Arguments: (FileLocation,statusCode,statusDescription);
+                Body: {
+                    FileLocation := "usage.errorLogging";
+                    
+                    ! we store the location of the file in string parameter FinalLocation
+                    FinalLocation := webui::GetIOFilePath(FileLocation);
+                    
+                    ! writing the string parameter FinalLocation to a text file
+                    pr_ReportCurrentErrorsToTextFile(FinalLocation);
+                    
+                    ! checking if the previous write statement was successful or not
+                    if FileExists(FinalLocation) then
+                    
+                       ! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
+                       StatusCode := webui::ReturnStatusCode('CREATED');
+                       ! displaying the status message as All perfect instead of the default "File ready to download"
+                       StatusDescription := "All perfect!";
+                    
+                    else    !if previous write statement was not successful
+                    
+                       ! setting the statusCode to 'ERROR' and the download widget will not show the Get button anymore
+                       statusCode := webui::ReturnStatusCode('ERROR');
+                       !displaying a custom error message
+                       statusDescription := "Something went wrong when creating the file.";
+                    
+                    endif;
+                }
+                StringParameter FileLocation {
+                    Property: Output;
+                }
+                Parameter statusCode {
+                    Property: Output;
+                }
+                StringParameter statusDescription {
+                    Property: Output;
+                }
+                StringParameter FinalLocation;
             }
         }
-        Procedure pr_ClearErrors {
-            Body: {
-                empty s_JobErrorMessageNumbers;
+        Section Inspect_state_session {
+            Procedure pr_SaveState {
+                Arguments: (sp_Label,s_SelectedIdentifiers);
+                Body: {
+                    
+                    Block ! Determine the subset of identifiers that actually have data to be written to file.
+                    	s_SelectedIdentifiersWithData := { i_someId |
+                    		( i_someId in AllSets ) or
+                    		( i_someId in AllParameters ) or
+                    		( i_someId in AllVariables ) or
+                    		( i_someId in AllConstraints ) };
+                    	if not card( s_SelectedIdentifiersWithData ) then
+                    		raise warning "No data output from gss::SaveState, as no identifier contains data" ;
+                    		return 0;
+                    	endif ;
+                    endblock ;
+                    
+                    Block ! Materials will be written first to a subfolder of the project folder.  Ensure this intermediate folder exists.
+                    	if  not directoryExists( sp_label ) then
+                    		directoryCreate( sp_label );
+                    	endif ;
+                    endblock ;
+                    
+                    block ! Ensure PRO is connected, initialized, and the PRO Storage folder exists that will contain all text output files
+                    	if pro::GetPROEndPoint() then
+                    		pro::Initialize();
+                    		sp_slash := "/" ;
+                    		sp_ProStorageFolderName := "/Userdata/" + 
+                    			pro::GetPROEnvironment() + sp_slash + 
+                    			pro::GetPROUserName()    + sp_slash + 
+                    			pro::ModelName           + sp_slash + 
+                    			pro::modelversion        + sp_slash + 
+                    			sp_label ;
+                    		pr_EnsurePath( sp_ProStorageFolderName );
+                    	endif ;
+                    endblock ;
+                    
+                    block ! Each data identifier to be written to file is written to a separate file.
+                    	where single_column_display := 1, listing_number_precision := 12, listing_number_width := 20 ;
+                    	for i_SomeIdWithData do
+                    		s_SingleTonSet := {};
+                    		s_SingleTonSet += i_SomeIdWithData ;
+                    		sp_filename := spfnc_FileFriendlyName( i_SomeIdWithData );
+                    		sp_fullFilename := sp_label + "\\" + sp_filename;
+                    		write s_SingleTonSet to file sp_fullFilename ;
+                    		if pro::GetPROEndPoint() then
+                    			sp_ProStorageFileName := sp_ProStorageFolderName + sp_slash + sp_filename ;
+                    			pro::SaveFileToCentralStorage(
+                    				localPath     :  sp_fullFilename, 
+                    				storagePath   :  sp_ProStorageFileName);
+                    		endif ;
+                    	endfor ;
+                    endblock ;
+                }
+                StringParameter sp_ProStorageFolderName;
+                StringParameter sp_ProStorageFileName;
+                StringParameter sp_slash;
+                Set s_SelectedIdentifiers {
+                    SubsetOf: AllSymbols;
+                    Index: i_someId;
+                    Property: Input;
+                }
+                Set s_SelectedIdentifiersWithData {
+                    SubsetOf: AllIdentifiers;
+                    Index: i_SomeIdWithData;
+                }
+                Set s_SingleTonSet {
+                    SubsetOf: AllIdentifiers;
+                }
+                StringParameter sp_Label {
+                    Property: Input;
+                }
+                StringParameter sp_filename;
+                StringParameter sp_fullFilename;
             }
-        }
-        Procedure pr_ReportCurrentErrorsToTextFile {
-            Arguments: (sp_filename);
-            Body: {
-                block where listing_page_width := 32000 ;
-                f_out.pagewidth := 32000 ;
-                put f_out;
-                for i_JobErrorMessageNumber do
-                	put     ep_JobErrorSeverity(i_JobErrorMessageNumber), " ", 
-                	        sp_JobErrorMoments( i_JobErrorMessageNumber), " : ",
-                		sp_JobErrorMessages(i_JobErrorMessageNumber), / ;
-                	for i_StackPosition | p_JobErrorLines(i_JobErrorMessageNumber, i_StackPosition) do
-                		put "    ", p_JobErrorLines(i_JobErrorMessageNumber, i_StackPosition):4:0, 
-                		    " : ", ep_JobErrorNodes(i_JobErrorMessageNumber, i_StackPosition):0, / ;
-                	endfor ;
-                	put / ;
-                endfor ;
-                putclose ;
-                endblock ;
-            }
-            StringParameter sp_filename {
-                Property: Input;
-            }
-            File f_out {
-                Name: sp_filename;
-                Device: Disk;
-                Mode: replace;
-            }
-        }
-        Procedure pr_GlobalErrorHandler {
-            Arguments: (ep_err);
-            Body: {
-                ! Increase the number of recorded error messages.
-                s_JobErrorMessageNumbers += card(s_JobErrorMessageNumbers) + 1;
-                ep_JobErrorMessageNumber := last(s_JobErrorMessageNumbers);
-                
-                ! Record the message and severity.
-                sp_JobErrorMessages(ep_JobErrorMessageNumber) := errh::Message( ep_err);
-                sp_JobErrorMoments( ep_JobErrorMessageNumber) := CurrentToString("%c%y-%m-%d %H:%M:%S:%T%TZ('UTC')");
-                ep_JobErrorSeverity(ep_JobErrorMessageNumber) := errh::Severity(ep_err);
-                
-                ! Record the entire stack of error positions
-                p_errStackHeight := errh::NumberOfLocations(ep_err);
-                p_errStackPos := 1 ;
-                while p_errStackPos <= p_errStackHeight do
-                	ep_StackPosition := p_errStackPos;
-                	ep_JobErrorNodes(ep_JobErrorMessageNumber,ep_StackPosition) := errh::Node(ep_err,ep_StackPosition);
-                	p_JobErrorLines( ep_JobErrorMessageNumber,ep_StackPosition) := errh::Line(ep_err,ep_StackPosition);
-                	p_errStackPos += 1 ;
-                endwhile ;
-                
-                if p01_locSeenErrorsAreHandled then
-                	errh::MarkAsHandled( ep_err );
-                endif ;
-            }
-            ElementParameter ep_err {
-                Range: errh::PendingErrors;
-                Property: Input;
-            }
-            ElementParameter ep_JobErrorMessageNumber {
-                Range: s_JobErrorMessageNumbers;
-            }
-            Parameter p_errStackHeight;
-            Parameter p_errStackPos;
-            ElementParameter ep_StackPosition {
-                Range: s_StackPositions;
-            }
-        }
-        Procedure pr_SeenErrorsAreHandled {
-            Arguments: (p01_AreHandled);
-            Body: {
-                p01_locSeenErrorsAreHandled := p01_AreHandled ;
-            }
-            Parameter p01_AreHandled {
-                Range: binary;
-                Default: 1;
-                Property: Input;
-            }
-        }
-        Procedure pr_GuardAndProfileServerJob {
-            Arguments: (ep_Work);
-            Body: {
-                block
-                	empty s_JobErrorMessageNumbers ;
-                
-                	! Ensure that the error recorded and profiler data are transmitted via the output case:
-                	pro::ManagedSessionOutputCaseIdentifierSet += ServerSessionProfilerErrorData ;
-                
-                	! Actual work.
-                	apply( ep_Work);
-                
-                	! Ensure that the definitions of all defined sets and defined parameters in 
-                	! output case identifier set are profiled.
-                	update pro::ManagedSessionOutputCaseIdentifierSet;
-                
-                onerror ep_err do
-                
-                	pr_GlobalErrorHandler( ep_err );
-                
-                
-                	! Don't let the server job be halted by this error; 
-                	! we still want the result case including the profiled data.
-                	errh::MarkAsHandled(ep_err);
-                
-                endblock ;
-                ProfilerCollectAllData(
-                	ProfilerData       :  p_JobProfilerData, 
-                	GrossTimeThreshold :  0, 
-                	NetTimeThreshold   :  0);
-            }
-            ElementParameter ep_err {
-                Range: errh::PendingErrors;
-            }
-            ElementParameter ep_Work {
-                Range: AllProcedures;
-                Default: 'gss::pr_SampleProc';
-                Property: Input;
-            }
-        }
-        Procedure pr_DownloadErrorReport {
-            Arguments: (FileLocation,statusCode,statusDescription);
-            Body: {
-                FileLocation := "usage.errorLogging";
-                
-                ! we store the location of the file in string parameter FinalLocation
-                FinalLocation := webui::GetIOFilePath(FileLocation);
-                
-                ! writing the string parameter FinalLocation to a text file
-                pr_ReportCurrentErrorsToTextFile(FinalLocation);
-                
-                ! checking if the previous write statement was successful or not
-                if FileExists(FinalLocation) then
-                
-                   ! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
-                   StatusCode := webui::ReturnStatusCode('CREATED');
-                   ! displaying the status message as All perfect instead of the default "File ready to download"
-                   StatusDescription := "All perfect!";
-                
-                else    !if previous write statement was not successful
-                
-                   ! setting the statusCode to 'ERROR' and the download widget will not show the Get button anymore
-                   statusCode := webui::ReturnStatusCode('ERROR');
-                   !displaying a custom error message
-                   statusDescription := "Something went wrong when creating the file.";
-                
-                endif;
-            }
-            StringParameter FileLocation {
-                Property: Output;
-            }
-            Parameter statusCode {
-                Property: Output;
-            }
-            StringParameter statusDescription {
-                Property: Output;
-            }
-            StringParameter FinalLocation;
         }
     }
     Section Private_Section {
-        Parameter p01_locSeenErrorsAreHandled {
-            Range: binary;
-            InitialData: 0;
+        Section Guard_utilities {
+            Parameter p01_locSeenErrorsAreHandled {
+                Range: binary;
+                InitialData: 0;
+            }
+            Procedure pr_SampleProc;
         }
-        Procedure pr_SampleProc;
-        Procedure LibraryInitialization {
-            Comment: "Add initialization statements here that do not require any other library being initialized already.";
-        }
-        Procedure PostLibraryInitialization {
-            Comment: {
-                "Add initialization statements here that require another library to be initialized already,
-                or add statements that require the Data Management module to be initialized."
+        Section Inspect_utilities {
+            Procedure pr_EnsurePath {
+                Arguments: (sp_Path);
+                Body: {
+                    if not proFolderExists( sp_path ) then
+                    	pro::CreateStorageFolder( sp_path );
+                    endif ;
+                }
+                StringParameter sp_Path {
+                    Property: Input;
+                }
+            }
+            Function spfnc_FileFriendlyName {
+                Arguments: (ep_Id);
+                Range: string;
+                Body: {
+                    sp_retVal := formatString("%e", ep_Id );
+                    sp_retVal := FindReplaceStrings( sp_retVal, ":", "_" );
+                    
+                    spfnc_FileFriendlyName := sp_retVal ;
+                }
+                ElementParameter ep_Id {
+                    Range: AllIdentifiers;
+                    Property: Input;
+                }
+                StringParameter sp_retVal;
+            }
+            Procedure proFolderExists {
+                Arguments: (spFilepath);
+                Body: {
+                    ! proFolderExists, proDirectoryExists, FolderExists, DirectoryExists
+                    pro::NormalizeStoragePath(spFilepath);
+                    ret := pro::storage::ListBuckets(
+                    			path       :  spFilepath, 
+                    			BucketSet  :  locBucketSet, 
+                    			BucketSize :  locBucketSize, 
+                    			BucketAuth :  locBucketAuth, 
+                    			BucketDate :  locBucketDate);
+                    return ret ;
+                }
+                StringParameter spFilepath {
+                    Property: Input;
+                }
+                Parameter ret;
+                Set locBucketSet {
+                    Index: bs;
+                }
+                Parameter locBucketSize {
+                    IndexDomain: bs;
+                }
+                StringParameter locBucketAuth {
+                    IndexDomain: bs;
+                }
+                StringParameter locBucketDate {
+                    IndexDomain: bs;
+                }
+            }
+            Procedure proFileExists {
+                Arguments: (spFilename);
+                Body: {
+                    pro::NormalizeStoragePath(spFilename);
+                    pro::SplitStoragePath(spFilename,spStorageBucketPath,spStorageFileWithoutPath);
+                    if not proFolderExists( spStorageBucketPath ) then return 0 ; endif ;
+                    ret := pro::storage::GetObjectInfo(spStorageBucketPath, spStorageFileWithoutPath,
+                    		tmpLocalFileName, tmpType, tmpNum, tmpAuth, tmpVersion );
+                    if ret = 0 or tmpNum <= 0 then
+                    	return 0 ;
+                    endif ;
+                    return 1 ;
+                }
+                Comment: {
+                    "d:\\u\\s\\aimms3\\deps\\vc120_x64_Debug\\Libraries\\AimmsWebUI\\AimmsWebUI.ams line 1600
+                    d:\\u\\s\\Customers\\K3 Delta\\Escalation March 2017\\6763\\UploadTool\\UploadTool\\UploadTool\\FileExistsFolderExists.ams line 40"
+                }
+                StringParameter spFilename {
+                    Property: Input;
+                }
+                Parameter ret;
+                StringParameter spStorageBucketPath;
+                StringParameter spStorageFileWithoutPath;
+                Parameter tmpNum;
+                StringParameter tmpLocalFileName;
+                StringParameter tmpType;
+                StringParameter tmpAuth;
+                Parameter tmpVersion;
+            }
+            Function hasProPrefix {
+                Arguments: (spFilename);
+                Range: binary;
+                Body: {
+                    retval := 0 ;
+                    
+                    if Stringlength( spFilename ) > 4 then
+                    	if findstring( substring( spFilename, 1, 4 ), "pro:", CaseSensitive:0 ) then
+                    		retval := 1 ;
+                    	else
+                    		retval := 0 ;
+                    	endif ;
+                    else
+                    	retval := 0 ;
+                    endif ;
+                    
+                    hasProPrefix := retval ;
+                }
+                StringParameter spFilename {
+                    Property: Input;
+                }
+                Parameter retval {
+                    Range: binary;
+                }
             }
         }
-        Procedure PreLibraryTermination {
-            Body: {
-                if card( s_JobErrorMessageNumbers ) then
-                
-                endif ;
-                return 1;
-            }
-            Comment: {
-                "Add termination statements here that require all other libraries to be still alive.
-                Return 1 if you allow the termination sequence to continue.
-                Return 0 if you want to cancel the termination sequence."
-            }
-        }
-        Procedure LibraryTermination {
-            Body: {
-                return 1;
-            }
-            Comment: {
-                "Add termination statements here that do not require other libraries to be still alive.
-                Return 1 to allow the termination sequence to continue.
-                Return 0 if you want to cancel the termination sequence.
-                It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+        Section Attic {
+            Section Main_Library_procedures {
+                Procedure LibraryInitialization {
+                    Comment: "Add initialization statements here that do not require any other library being initialized already.";
+                }
+                Procedure PostLibraryInitialization {
+                    Comment: {
+                        "Add initialization statements here that require another library to be initialized already,
+                        or add statements that require the Data Management module to be initialized."
+                    }
+                }
+                Procedure PreLibraryTermination {
+                    Body: {
+                        return 1;
+                    }
+                    Comment: {
+                        "Add termination statements here that require all other libraries to be still alive.
+                        Return 1 if you allow the termination sequence to continue.
+                        Return 0 if you want to cancel the termination sequence."
+                    }
+                }
+                Procedure LibraryTermination {
+                    Body: {
+                        return 1;
+                    }
+                    Comment: {
+                        "Add termination statements here that do not require other libraries to be still alive.
+                        Return 1 to allow the termination sequence to continue.
+                        Return 0 if you want to cancel the termination sequence.
+                        It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+                    }
+                }
             }
         }
     }

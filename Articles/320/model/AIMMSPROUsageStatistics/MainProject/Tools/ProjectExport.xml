@@ -5,4 +5,5 @@
 	<ExcludedFile>PROTemp</ExcludedFile>
 	<ExcludedFile>pro_arguments_.txt</ExcludedFile>
 	<ExcludedFile>PROLog.cfg</ExcludedFile>
+	<ExcludedFile>usage.errorLogging</ExcludedFile>
 </ExportSettings>

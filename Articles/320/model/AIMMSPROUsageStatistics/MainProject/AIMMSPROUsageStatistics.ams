@@ -307,14 +307,14 @@ Model Main_AIMMSPROUsageStatistics {
                 Definition: average(i_event2, p_MemoryBySessionsAfterEvent(i_Event2));
             }
             Parameter p_NumberOfSessionsAfterEventBySessionType {
-                IndexDomain: (i_Event,i_someValue);
+                IndexDomain: (i_Event,i_valueMaster);
             }
             Parameter p_MemoryBySessionsAfterEventBySessionType {
-                IndexDomain: (i_Event,i_someValue);
+                IndexDomain: (i_Event,i_valueMaster);
                 Unit: MB;
             }
             Parameter p_NumberOfUsersAfterEventBySessionType {
-                IndexDomain: (i_Event,i_someValue);
+                IndexDomain: (i_Event,i_valueMaster);
             }
         }
     }
@@ -515,15 +515,16 @@ Model Main_AIMMSPROUsageStatistics {
                 		-p_EvPeakMemory( i_ShownEvent )
                 	endif ;
                 
-                p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent,i_someValue) := p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent-1,i_someValue)+
-                	if ep_BarchartColumnValueType = 'None' then
+                p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent,i_valueMaster) := 
+                	p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent-1,i_valueMaster)+
+                	if i_valueMaster = 'All' then
                 		if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
                 			1
                 		else
                 			-1
                 		endif 
                 	else
-                		if ep_EvValueData( i_ShownEvent,ep_BarchartColumnValueType ) = i_someValue then
+                		if exists( i_valueType | ep_EvValueData( i_ShownEvent, i_valueType ) = i_valueMaster ) then
                 			if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
                 				1
                 			else
@@ -534,15 +535,16 @@ Model Main_AIMMSPROUsageStatistics {
                 		endif 
                 	endif ;
                 
-                p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent,i_someValue) := p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent-1,i_someValue)+
-                	if ep_BarchartColumnValueType = 'None' then
+                p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent,i_valueMaster) := 
+                	p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent-1,i_valueMaster)+
+                	if i_valueMaster = 'All' then
                 		if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
                 			p_EvPeakMemory( i_ShownEvent )
                 		else
                 			-p_EvPeakMemory( i_ShownEvent )
                 		endif 
                 	else
-                		if ep_EvValueData( i_ShownEvent,ep_BarchartColumnValueType ) = i_someValue then
+                		if exists( i_valueType | ep_EvValueData( i_ShownEvent, i_valueType ) = i_valueMaster ) then
                 			if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
                 				p_EvPeakMemory( i_ShownEvent )
                 			else
@@ -552,16 +554,16 @@ Model Main_AIMMSPROUsageStatistics {
                 			0
                 		endif 
                 	endif ;
-                p_NumberOfSessionByUserAfterEventBySession(i_ShownEvent,i_someValue,ep_EvValueData(i_ShownEvent,'UserNames')) :=
-                	p_NumberOfSessionByUserAfterEventBySession(i_ShownEvent-1,i_someValue,ep_EvValueData(i_ShownEvent,'UserNames')) +
-                	if ( ep_BarchartColumnValueType = 'None' ) or ( ep_BarchartColumnValueType = 'UserNames' ) then
+                p_NumberOfSessionByUserAfterEventBySession(i_ShownEvent,i_valueMaster,ep_EvValueData(i_ShownEvent,'UserNames')) :=
+                	p_NumberOfSessionByUserAfterEventBySession(i_ShownEvent-1,i_valueMaster,ep_EvValueData(i_ShownEvent,'UserNames')) +
+                	if i_valueMaster = 'All' then
                 		if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
                 			1
                 		else
                 			-1
                 		endif 
                 	else
-                		if ep_EvValueData( i_ShownEvent,ep_BarchartColumnValueType ) = i_someValue then
+                		if exists( i_valueType | ep_EvValueData( i_ShownEvent, i_valueType ) = i_valueMaster ) then
                 			if ep_EvEventTypes( i_ShownEvent ) = 'StartSession' then
                 				1
                 			else
@@ -572,8 +574,8 @@ Model Main_AIMMSPROUsageStatistics {
                 		endif 
                 	endif ;
                 
-                p_NumberOfUsersAfterEventBySessionType( i_ShownEvent, i_someValue ) := 
-                	Count( i_UserName | p_NumberOfSessionByUserAfterEventBySession( i_ShownEvent, i_someValue, i_UserName ) );
+                p_NumberOfUsersAfterEventBySessionType( i_ShownEvent, i_valueMaster ) := 
+                	Count( i_UserName | p_NumberOfSessionByUserAfterEventBySession( i_ShownEvent, i_valueMaster, i_UserName ) );
             }
             Parameter p_NumberOfRunningSessions;
             Parameter p_MemInUseBySession;
@@ -723,7 +725,31 @@ Model Main_AIMMSPROUsageStatistics {
         }
         Procedure pr_ComputeBarChartsStackedBySessionType {
             Body: {
+                ep_ArgMax_NumberOfSessions( i_bcc ) :=
+                	argmax( i_shownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc),
+                		p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent, 'All') );
+                
+                ep_ArgMax_NumberOfUsers( i_bcc ) :=
+                	argmax( i_shownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc),
+                		p_NumberOfUsersAfterEventBySessionType(i_ShownEvent, 'All') );
+                
+                ep_ArgMax_MemoryInUse( i_bcc ) :=
+                	argmax( i_shownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc),
+                		p_MemoryBySessionsAfterEventBySessionType(i_ShownEvent, 'All') );
+                
+                
+                
                 p_NumberOfSessionsStackedBySessionType(i_bcc, i_someValue) :=
+                		p_NumberOfSessionsAfterEventBySessionType(ep_ArgMax_NumberOfSessions( i_bcc ), i_someValue);
+                
+                p_MemoryInUseStackedBySessionType(i_bcc, i_someValue) :=
+                		p_MemoryBySessionsAfterEventBySessionType(ep_ArgMax_NumberOfUsers( i_bcc ), i_someValue);
+                
+                p_NumberOfUsersStackedBySessionType(i_bcc, i_someValue) :=
+                		p_NumberOfUsersAfterEventBySessionType(ep_ArgMax_MemoryInUse( i_bcc ), i_someValue);
+            }
+            Comment: {
+                "p_NumberOfSessionsStackedBySessionType(i_bcc, i_someValue) :=
                 	max( 0, max( i_ShownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc), 
                 		p_NumberOfSessionsAfterEventBySessionType(i_ShownEvent, i_someValue) ) );
                 
@@ -733,7 +759,7 @@ Model Main_AIMMSPROUsageStatistics {
                 
                 p_NumberOfUsersStackedBySessionType(i_bcc, i_someValue) :=
                 	max( 0, max( i_ShownEvent | i_ShownEvent in s_EventsAtBarChartPoint(i_bcc), 
-                		p_NumberOfUsersAfterEventBySessionType(i_ShownEvent, i_someValue) ) );
+                		p_NumberOfUsersAfterEventBySessionType(i_ShownEvent, i_someValue) ) );"
             }
         }
         Procedure pr_ComputeStackedBarCharts {
@@ -1270,6 +1296,18 @@ Model Main_AIMMSPROUsageStatistics {
                 IndexDomain: i_bcc;
                 SubsetOf: s_Events;
             }
+            ElementParameter ep_ArgMax_NumberOfSessions {
+                IndexDomain: i_bcc;
+                Range: s_Events;
+            }
+            ElementParameter ep_ArgMax_NumberOfUsers {
+                IndexDomain: i_bcc;
+                Range: s_Events;
+            }
+            ElementParameter ep_ArgMax_MemoryInUse {
+                IndexDomain: i_bcc;
+                Range: s_Events;
+            }
             Parameter p_NumberOfSessionsStackedBySessionType {
                 IndexDomain: (i_bcc,i_someValue);
             }
@@ -1619,11 +1657,11 @@ Model Main_AIMMSPROUsageStatistics {
                             { i_event |
                             	( ep_EvValueData(i_Event,'SessionTypes') in s_ShownSessionTypes ) and
                             	( ep_EvValueData(i_Event,'Applications') in s_ShownApplications ) and
-                            	( ep_EvValueData(i_Event,'AppVersions') in s_ShownAppVersions ) and
+                            	( ep_EvValueData(i_Event,'AppVersions')  in s_ShownAppVersions  ) and
                             
-                            	( ep_EvValueData(i_Event,'AccountNames') in s_ShownAccounts ) and
+                            	( ep_EvValueData(i_Event,'AccountNames') in s_ShownAccounts     ) and
                             	( ep_EvValueData(i_Event,'Environments') in s_ShownEnvironments ) and
-                            	( ep_EvValueData(i_Event,'UserNames') in s_ShownUserNames ) }
+                            	( ep_EvValueData(i_Event,'UserNames')    in s_ShownUserNames    )     }
                         }
                     }
                     Set s_ShownAccounts {
