@@ -42,7 +42,7 @@ extensions = ['sphinx.ext.doctest',
 	  'sphinx.builders.linkcheck',
     'sphinx_aimms_theme']
   
-intersphinx_mapping = {'functionreference': ('https://documentation.aimms.com/functionreference',
+intersphinx_mapping = {'functionreference': ('https://documentation.aimms.com/functionreference/',
                                   (None,'objects-functionreference.inv'))}
 
 if os.name != 'nt':
@@ -110,10 +110,6 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'default'
 
-# If true, `todo` and `todoList` produce output, else they produce nothing.
-todo_include_todos = True
-
-
 # -- Options for HTML output ----------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -160,18 +156,24 @@ html_theme_options = {
     'home_page_title': 'AIMMS How-To',
     'home_page_description': "AIMMS How-To is a support knowledge base for everyone involved in projects that use AIMMS. You'll find help tutorials, best practices, and practical guidance for using AIMMS software.",
     'display_community_embeddable' : Display_3rd_Party_Extensions,
+    'generate_google_analytics' : Display_3rd_Party_Extensions,
+    'google_analytics_id' : 'UA-1290545-14',
+    'display_algolia_search': Display_3rd_Party_Extensions,
+    'algolia_appid': 'BH4D9OD16A',
+    'algolia_appkey': '0fc935020f8088e762190434cffaee41',
+    'algolia_indexname':'aimms_how-to',
  }
 
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+# html_static_path = ['_static']
 
 
 # The following "context" is passed to templates in _templates folder
 html_context = {
-    'css_files': ['_static/aimms-how-to_13122019.css'],
+    #'css_files': ['_static/aimms-how-to_13122019.css'],
     "display_gitlab": Display_edit_on_gitlab, # Integrate Gitlab
     "gitlab_user": "aimms/customer-support", # Username
     "gitlab_repo": "aimms-how-to", # Repo name
