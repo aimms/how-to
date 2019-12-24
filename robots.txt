@@ -19,7 +19,4 @@ Disallow: https://how-to.aimms.com/Articles/320/320-aimms-pro-usage-statistics.h
 Disallow: https://how-to.aimms.com/Articles/329/329-more-logging.html
 
 
-Disallow: https://how-to.aimms.com/Articles/12/12-generate-random-numbers.html
-
-
 
