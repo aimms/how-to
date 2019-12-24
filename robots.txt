@@ -3,3 +3,23 @@ User-agent: *
 Sitemap: https://how-to.aimms.com/sitemap.xml
 
 Disallow: https://how-to.aimms.com/How to use this, man.html
+Disallow: https://how-to.aimms.com/Articles/160/160-super-slicing.html
+Disallow: https://how-to.aimms.com/Articles/166/166-shared-user-files.html
+Disallow: https://how-to.aimms.com/Articles/200/200-Measuring-Page-Loadtime.html
+Disallow: https://how-to.aimms.com/Articles/217/217-Unexpected-element-order.html
+Disallow: https://how-to.aimms.com/Articles/223/223-animation-with-colors-in-aimms.html
+Disallow: https://how-to.aimms.com/Articles/229/229-determine-number-of-available-processors-in-aimms.html
+Disallow: https://how-to.aimms.com/Articles/230/230-determine-the-calling-procedure.html
+Disallow: https://how-to.aimms.com/Articles/231/231-determine-where-each-identifier-is-used-in-your-model.html
+Disallow: https://how-to.aimms.com/Articles/233/233-display-multiple-identifiers-in-a-2d-chart.html
+Disallow: https://how-to.aimms.com/Articles/284/284-AimmsCMD.html
+Disallow: https://how-to.aimms.com/Articles/285/285-DatabaseConnection.html
+Disallow: https://how-to.aimms.com/Articles/286/286-mysql-odbc-driver-select.html
+Disallow: https://how-to.aimms.com/Articles/320/320-aimms-pro-usage-statistics.html
+Disallow: https://how-to.aimms.com/Articles/329/329-more-logging.html
+
+
+Disallow: https://how-to.aimms.com/Articles/12/12-generate-random-numbers.html
+
+
+
