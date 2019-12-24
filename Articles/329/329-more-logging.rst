@@ -33,7 +33,7 @@ Terminology
     When a main component has a sub component, the tracing facility of the sub component is usually named 
     ``<main component>.<sub component>``. An so on recursively.
 
-#.  **Log Level** Both a logger and a message have a level associated with it. 
+#.  **Log level** Both a logger and a message have a level associated with it. 
     When the message level is equal or greater than the level of the logger, it is written to file.
     Here is the list of log levels used (from low to high):
 
@@ -50,7 +50,7 @@ Terminology
     Clearly: the lower the level of the logger, the higher the volume of output!
     
     .. note:: We caution you to not use the levels Trace and Debug unless instructed to do so by AIMMS Staff; 
-              not only generate these log levels a high volume of output, the actual output text generated 
+              not only do  these log levels generate a high volume of output, the actual output text generated 
               typically only makes sense with knowledge of the implementation of the corresponding 
               software component.
 
@@ -61,8 +61,9 @@ Terminology
 Using a text editor to analyze ``.txt`` log files
 ----------------------------------------------------
 
-Use your favorite text editor, my favorite is `notepad++ <https://notepad-plus-plus.org/>`_, to open the log file 
-``log/aimms-log.txt``. A couple of lines may look like this:
+Use your favorite text editor to open the log file ``log/aimms-log.txt``. 
+BTW, my favorite text editor is `notepad++ <https://notepad-plus-plus.org/>`_. 
+A couple of lines may look like this:
 
 .. code-block:: none
     :linenos:
