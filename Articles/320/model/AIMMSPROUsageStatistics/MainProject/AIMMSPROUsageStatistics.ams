@@ -1,6 +1,11 @@
 ## ams_version=1.0
 
 Model Main_AIMMSPROUsageStatistics {
+    Procedure pr_test {
+        Body: {
+            pr_ReadAimmsPRO();
+        }
+    }
     DeclarationSection Units_of_Measurement {
         Quantity SI_Time_Duration {
             BaseUnit: hour;
@@ -59,6 +64,7 @@ Model Main_AIMMSPROUsageStatistics {
                 	empty Session_information_read_in;
                 	read from table dbpr_ReadProSessionData();
                 	CloseDataSource(sp_Datasource);
+                	pr_ReadSessionStatus();
                 
                 	p01_StartTimeAccurateByTick := 1 ;
                 	pr_ComputeStackedBarCharts();
@@ -83,7 +89,7 @@ Model Main_AIMMSPROUsageStatistics {
             Property: UseResultSet;
             Mapping: {
                 "id"            --> i_session,
-                "created_at"    --> sp_SessStartTimes( i_session ),
+                "created_at"    --> sp_SessValueData( i_session, 'Start'        ),
                 "accuntname"    --> sp_SessValueData( i_session, 'AccountNames' ),
                 "session_type"  --> sp_SessValueData( i_session, 'SessionTypes' ),
                 "env"           --> sp_SessValueData( i_session, 'Environments' ),
@@ -120,7 +126,7 @@ Model Main_AIMMSPROUsageStatistics {
                 TableName: "SessionTable";
                 Mapping: {
                     "SessionID"        -->i_session,
-                    "SessionStartTime" -->sp_SessStartTimes( i_session ),
+                    "SessionStartTime" -->sp_SessValueData( i_session,  'Start'    ),
                     "SessionDuration"  -->p_SessDurations(i_session)
                 }
             }
@@ -131,9 +137,15 @@ Model Main_AIMMSPROUsageStatistics {
         Procedure pr_ReadAimmsPro {
             Body: {
                 block
+                	sp_endDate := 
+                		MomentToString(
+                			Format        :  "%c%y-%m-%d", 
+                			unit          :  [day], 
+                			ReferenceDate :  CurrentToString("%c%y-%m-%d"), 
+                			Elapsed       :  1[day]);
                 	pro::sessionmanager::ListSessionsUsage(
                 		beginDate   :  "1970-01-01", ! "1970-01-01 00:00:00:00", 
-                		endDate     :  CurrentToString("%c%y-%m-%d"), ! CurrentToString("%c%y-%m-%d %H:%M:%S:%t"), 
+                		endDate     :  sp_EndDate, ! CurrentToString("%c%y-%m-%d"), ! CurrentToString("%c%y-%m-%d %H:%M:%S:%t"), 
                 		sessionList :  s_Sessions, 
                 		sessionType :  sp_SessValueData( i_session, 'SessionTypes' ), 
                 		accountName :  sp_SessValueData( i_session, 'AccountNames' ), 
@@ -141,11 +153,12 @@ Model Main_AIMMSPROUsageStatistics {
                 		username    :  sp_SessValueData( i_session, 'UserNames'    ), 
                 		appName     :  sp_SessValueData( i_session, 'Applications' ), 
                 		appVersion  :  sp_SessValueData( i_session, 'AppVersions'  ), 
-                		startedAt   :  sp_SessStartTimes( i_session ), 
+                		startedAt   :  sp_SessValueData( i_session, 'Start'        ), 
                 		duration    :  p_sessDur( i_session ), 
                 		peakMemory  :  p_sessMem( i_session ));
                 	p_SessDurations(i_session) := (p_sessDur( i_session ))[milliseconds];
                 	p_SessPeakMemory( i_session ) := (p_sessMem(i_session))[byte];
+                	pr_ReadSessionStatus();
                 
                 	p01_StartTimeAccurateByTick := 0 ;
                 	pr_ComputeStackedBarCharts();
@@ -157,6 +170,7 @@ Model Main_AIMMSPROUsageStatistics {
                 "Read all session info via the pro::sessionmanager::ListSessionsUsage. 
                 Filtering on date will be done in this application itself."
             }
+            StringParameter sp_EndDate;
             ElementParameter ep_err {
                 Range: errh::PendingErrors;
             }
@@ -167,21 +181,33 @@ Model Main_AIMMSPROUsageStatistics {
                 IndexDomain: i_session;
             }
         }
+        Procedure pr_ReadSessionStatus {
+            Body: {
+                ! only applies to server sessions.
+            }
+            Parameter p_ret;
+        }
     }
     Section data_declarations {
         DeclarationSection Value_sets {
             Set s_ValueMasterSet {
                 Index: i_valueMaster;
-                Definition: s_AccountNames + s_Environments + s_UserNames + s_SessionTypes + s_Applications + s_AppVersions + s_GenericAll;
+                Definition: {
+                    s_AccountNames + s_Environments + s_UserNames + 
+                    s_SessionTypes + s_SessionStates +
+                    s_Applications + s_AppVersions + 
+                    s_GenericAll
+                }
             }
             Set s_ValueSubset {
                 SubsetOf: s_ValueMasterSet;
                 Index: i_someValue;
-                Parameter: ep_someValue, ep_FocusValue;
+                Parameter: ep_FocusValue;
             }
             Set s_ValueTypes {
+                SubsetOf: s_ExtendedValueTypes;
                 Index: i_valueType;
-                Parameter: ep_valueType, ep_BarchartColumnValueType;
+                Parameter: ep_BarchartColumnValueType;
                 Definition: {
                     data {
                     	AccountNames,
@@ -191,6 +217,25 @@ Model Main_AIMMSPROUsageStatistics {
                     	Applications,
                     	AppVersions,
                     	None }
+                }
+            }
+            Set s_ExtendedValueTypes {
+                Index: i_ExtendedValueType;
+                Definition: {
+                    data {
+                    	Start,        ! timeslot, up to second
+                    	Duration,     ! timelength, up to second
+                    	End,          ! timeslot, up to second
+                    	State,        ! One of s_SessionStates
+                    
+                    	AccountNames, ! One of s_AccountNames
+                    	Environments, ! One of s_Environments
+                    	UserNames,    ! One of s_UserNames
+                    	SessionTypes, ! One of s_SessionTypes
+                    	Applications, ! One of s_Applications
+                    	AppVersions,  ! One of s_AppVersions
+                    	None          ! Always element "all"
+                    }
                 }
             }
             Set s_GenericAll {
@@ -205,47 +250,61 @@ Model Main_AIMMSPROUsageStatistics {
             Set s_AccountNames {
                 SubsetOf: s_ValueMasterSet;
                 Index: i_AccountName;
-                Parameter: ep_AccountName;
             }
             Set s_Environments {
                 SubsetOf: s_ValueMasterSet;
                 Index: i_Environment;
-                Parameter: ep_Environment;
             }
             Set s_UserNames {
                 SubsetOf: s_ValueMasterSet;
                 Index: i_UserName;
-                Parameter: ep_UserName;
             }
             Set s_SessionTypes {
                 SubsetOf: s_ValueMasterSet;
                 Index: i_SessionType;
-                Parameter: ep_SessionType, ep_FocusSessionType;
                 InitialData: data { data, solver, WinUI };
+            }
+            Set s_nonServerSessionTypes {
+                SubsetOf: s_SessionTypes;
+                Definition: data { data, WinUI };
+            }
+            Set s_SessionStates {
+                SubsetOf: s_ValueMasterSet;
+                Index: i_sessionState;
+                Definition: {
+                    data {
+                    ! All states below apply to a server session
+                    	created,      ! Worker created but project not opened yet
+                    	queued,       ! Project opening requested and being executed
+                    	initializing, ! Project opening requested and being executed
+                    	ready,        ! Waiting for new tasks to be executed
+                    	running,      ! Server session: Running a task, WinUI or Data session: still active and responding.
+                    	closing,      ! Project closing; no more tasks will be handled
+                    	finished,     ! Project closed; no more tasks will be handled
+                    	terminated,   ! Also used for data and WinUI sessions.
+                    	error,        ! Project ended with an error; no more tasks will be handled
+                    	deleted 
+                    }
+                }
             }
             Set s_Applications {
                 SubsetOf: s_ValueMasterSet;
                 Index: i_Application;
-                Parameter: ep_Application;
             }
             Set s_AppVersions {
                 SubsetOf: s_ValueMasterSet;
                 Index: i_AppVersion;
-                Parameter: ep_AppVersion;
             }
         }
         DeclarationSection Session_information_read_in {
             Set s_Sessions {
                 Index: i_session;
             }
-            StringParameter sp_SessStartTimes {
-                IndexDomain: i_session;
-            }
             StringParameter sp_SessValueData {
-                IndexDomain: (i_session,i_valueType);
+                IndexDomain: (i_session,i_extendedValueType);
             }
             ElementParameter ep_SessValueData {
-                IndexDomain: (i_session,i_valueType);
+                IndexDomain: (i_session,i_ExtendedvalueType);
                 Range: s_ValueMasterSet;
             }
             Parameter p_SessDurations {
@@ -260,6 +319,9 @@ Model Main_AIMMSPROUsageStatistics {
             Parameter p_SessPeakMemory {
                 IndexDomain: i_Session;
                 Unit: byte;
+            }
+            Parameter p_SessStatus {
+                IndexDomain: i_session;
             }
         }
         DeclarationSection Events {
@@ -277,7 +339,7 @@ Model Main_AIMMSPROUsageStatistics {
                 Range: s_EventTypes;
             }
             ElementParameter ep_EvValueData {
-                IndexDomain: (i_Event,i_valueType);
+                IndexDomain: (i_Event,i_ExtendedvalueType);
                 Range: s_ValueMasterSet;
             }
             Parameter p_EvPeakMemory {
@@ -316,6 +378,69 @@ Model Main_AIMMSPROUsageStatistics {
             Parameter p_NumberOfUsersAfterEventBySessionType {
                 IndexDomain: (i_Event,i_valueMaster);
             }
+            Parameter p01_RelationSessionEvent {
+                IndexDomain: (i_session,i_Event);
+                Range: binary;
+                InitialData: data {};
+            }
+        }
+        Function fnc_DurationToString {
+            Arguments: (p_dur);
+            Range: string;
+            Body: {
+                sp_ret := "" ;
+                
+                p_days := p_dur ;
+                p_days := floor( p_days );
+                if p_days then sp_ret += formatString( "%i days", p_days ); endif ;
+                p_dur -= p_days ;
+                
+                p_hours := p_dur ;
+                p_hours := floor( p_hours);
+                if p_hours then
+                	sp_ret := if sp_ret then sp_ret + " " else "" endif + 
+                	          formatString( "%i hours", p_hours );
+                endif ;
+                p_dur -= p_hours ;
+                
+                p_minutes := p_dur ;
+                p_minutes := floor( p_minutes);
+                if p_minutes then
+                	sp_ret := if sp_ret then sp_ret + " " else "" endif + 
+                	          formatString( "%i minutes", p_minutes );
+                endif ;
+                p_dur -= p_minutes ;
+                
+                
+                p_seconds := p_dur ;
+                p_seconds := floor( p_seconds);
+                if p_seconds then
+                	sp_ret := if sp_ret then sp_ret + " " else "" endif + 
+                	          formatString( "%i seconds", p_seconds );
+                endif ;
+                p_dur -= p_seconds ;
+                
+                
+                
+                fnc_DurationToString := sp_ret ;
+            }
+            Parameter p_dur {
+                Unit: second;
+                Property: Input;
+            }
+            StringParameter sp_ret;
+            Parameter p_days {
+                Unit: day;
+            }
+            Parameter p_hours {
+                Unit: hour;
+            }
+            Parameter p_minutes {
+                Unit: minute;
+            }
+            Parameter p_seconds {
+                Unit: second;
+            }
         }
     }
     Section Steps_to_compute_the_stacked_bar_charts {
@@ -326,20 +451,26 @@ Model Main_AIMMSPROUsageStatistics {
                       ! We're removing everthing after the first two decimals.
                       	if p01_StartTimeAccurateByTick then
                 		for i_session do
-                			p_dotPos := findNthString( sp_SessStartTimes( i_session ), ".", -1 );
+                			p_dotPos := findNthString( sp_SessValueData( i_session, 'Start'    ), ".", -1 );
                 			if p_dotPos then
-                				sp_SessStartTimes( i_session ) := 
-                					substring( sp_SessStartTimes( i_session ), 1, p_dotPos-1) +
+                				sp_SessValueData( i_session, 'Start'    ) := 
+                					substring( sp_SessValueData( i_session, 'Start'    ), 1, p_dotPos-1) +
                 					":"+
-                					substring( sp_SessStartTimes( i_session ), p_dotPos+1, p_dotPos + 2);
+                					substring( sp_SessValueData( i_session, 'Start'    ), p_dotPos+1, p_dotPos + 2);
                 			endif ;
                 		endfor ;
                 	else
-                		sp_SessStartTimes( i_session ) += ":00" ;
+                		sp_SessValueData( i_session, 'Start'    ) += ":00" ;
                       	endif ;
                 endblock ;
-                
+                sp_SessValueData(i_Session,'End') := 
+                	MomentToString(
+                		Format        :  "%c%y-%m-%d %H:%M:%S:%T" , 
+                		unit          :  [tick], 
+                		ReferenceDate :  sp_SessValueData( i_session, 'Start'    ), 
+                		Elapsed       :  p_SessDurations(i_Session));
                 sp_SessValueData(i_session,'AccountNames')|(not sp_SessValueData(i_session,'AccountNames')) := "ProOnPrem";
+                sp_SessValueData(i_session,'Duration') := fnc_DurationToString( p_SessDurations( i_session ) );
                 
                 ep_SessValueData( i_session, 'AccountNames' ) := StringToElement(s_AccountNames, sp_SessValueData( i_session, 'AccountNames' ), create:1);
                 ep_SessValueData( i_session, 'SessionTypes' ) := StringToElement(s_SessionTypes, sp_SessValueData( i_session, 'SessionTypes' ), create:1);
@@ -348,14 +479,90 @@ Model Main_AIMMSPROUsageStatistics {
                 ep_SessValueData( i_session, 'Applications' ) := StringToElement(s_Applications, sp_SessValueData( i_session, 'Applications' ), create:1);
                 ep_SessValueData( i_session, 'AppVersions'  ) := StringToElement(s_AppVersions , sp_SessValueData( i_session, 'AppVersions'  ), create:1);
                 
-                p01_SelectedAccounts(i_AccountName) := 1;
-                p01_SelectedSessionTypes(i_SessionType) := 1;
-                p01_SelectedEnvironments(i_Environment) := 1;
-                p01_SelectedUsernames(i_UserName) := 1;
-                p01_SelectedApplications(i_Application) := 1;
-                p01_SelectedAppversions(i_AppVersion) := 1;
+                block ! Determine status
+                	sp_cur := CurrentToString("%c%y-%m-%d %H:%M:%S" );
+                	sp_last := 
+                		MomentToString(
+                			Format        :  "%c%y-%m-%d %H:%M:%S" , 
+                			unit          :  [second], 
+                			ReferenceDate :  sp_cur, 
+                			Elapsed       :  -60[second]);
+                	p_ret := pro::sessionmanager::CurrentState(s_Sessions,p_SessStatus);
+                	s_ServerSessions := { i_Session | ep_SessValueData( i_session, 'SessionTypes' ) = 'solver' };
+                	ep_SessionStateNumber(i_serversession) := p_SessStatus( i_serversession );
+                	ep_SessValueData( i_serversession, 'State'  ) := 
+                		if ep_SessionStateNumber(i_serversession) = '0' then
+                			if sp_SessValueData(i_serversession,'End') < sp_last then
+                				'deleted'
+                			else
+                				ep_SessionStateMap( ep_SessionStateNumber(i_serversession) )
+                			endif
+                		else
+                			ep_SessionStateMap( ep_SessionStateNumber(i_serversession) ) 
+                		endif;
+                
+                	s_NonServerSessions := { i_Session | ep_SessValueData( i_session, 'SessionTypes' ) in s_nonServerSessionTypes };
+                	ep_SessValueData( i_nonServerSession, 'State'  ) :=
+                		if sp_SessValueData(i_nonServerSession,'End') < sp_last then 
+                			'terminated'
+                		else
+                			'running'
+                		endif ;
+                	sp_SessValueData( i_Session, 'state' ) := FormatString("%e", ep_SessValueData( i_Session, 'state' ) );
+                endblock ;
+                
+                Block ! Initialize filters
+                	p01_SelectedAccounts(      i_AccountName  ) := 1;
+                	p01_SelectedSessionTypes(  i_SessionType  ) := 1;
+                	p01_SelectedSessionStates( i_SessionState ) := 1;
+                	p01_SelectedEnvironments(  i_Environment  ) := 1;
+                	p01_SelectedUsernames(     i_UserName     ) := 1;
+                	p01_SelectedApplications(  i_Application  ) := 1;
+                	p01_SelectedAppversions(   i_AppVersion   ) := 1;
+                endblock ;
             }
             Parameter p_dotPos;
+            DeclarationSection Determine_status_declarations {
+                Parameter p_ret;
+                StringParameter sp_cur;
+                StringParameter sp_last;
+                Set s_NonServerSessions {
+                    SubsetOf: s_Sessions;
+                    Index: i_nonServerSession;
+                }
+                Set s_ServerSessions {
+                    SubsetOf: s_Sessions;
+                    Index: i_serversession;
+                }
+                Set s_SessionStateNumbers {
+                    SubsetOf: Integers;
+                    Index: i_sessionStateNumber;
+                    Property: ElementsAreNumerical;
+                    InitialData: data { 0 .. 9 };
+                }
+                ElementParameter ep_SessionStateNumber {
+                    IndexDomain: i_serversession;
+                    Range: s_SessionStateNumbers;
+                }
+                ElementParameter ep_SessionStateMap {
+                    IndexDomain: i_sessionStateNumber;
+                    Range: s_SessionStates;
+                    InitialData: {
+                        data {
+                        	0:created,
+                        	1:queued,
+                        	2:initializing,
+                        	3:ready,
+                        	4:running,
+                        	5:closing,
+                        	6:finished,
+                        	7:terminated,
+                        	8:error,
+                        	9:deleted
+                        }
+                    }
+                }
+            }
         }
         Procedure pr_EventsFromSessions {
             Body: {
@@ -365,11 +572,12 @@ Model Main_AIMMSPROUsageStatistics {
                 		block ! Create work event, start of this session
                 			s_WorkEvents += card(s_WorkEvents)+1 ;
                 			ep_WorkEvent := last( s_WorkEvents );
-                			sp_WrkEvMoments( ep_WorkEvent ) := sp_SessStartTimes(i_session);
+                			sp_WrkEvMoments( ep_WorkEvent ) := sp_SessValueData( i_session, 'Start'    );
                 			ep_WrkEvEventType( ep_WorkEvent ) := 'StartSession';
+                			ep_WrkEventSession( ep_WorkEvent) := i_Session ;
                 		endblock ;
                 		block ! Copy session data to work event.
-                			ep_WrkValueData(ep_WorkEvent,i_ValueType) := ep_SessValueData(i_Session,i_valuetype);
+                			ep_WrkValueData(ep_WorkEvent,i_ExtendedValueType) := ep_SessValueData(i_Session,i_ExtendedValueType);
                 
                 			p_WrkEvPeakMemory(   ep_WorkEvent ) := p_SessPeakMemory(   i_session );
                 		endblock ;
@@ -377,16 +585,12 @@ Model Main_AIMMSPROUsageStatistics {
                 		block ! Create work event, end of this session
                 			s_WorkEvents += card(s_WorkEvents)+1 ;
                 			ep_WorkEvent := last( s_WorkEvents );
-                			sp_WrkEvMoments( ep_WorkEvent ) := 
-                				MomentToString(
-                					Format        :  "%c%y-%m-%d %H:%M:%S:%T" , 
-                					unit          :  [tick], 
-                					ReferenceDate :  sp_SessStartTimes(i_session), 
-                					Elapsed       :  p_SessDurations(i_Session));
+                			sp_WrkEvMoments( ep_WorkEvent ) := sp_SessValueData(i_Session,'End');
                 			ep_WrkEvEventType( ep_WorkEvent ) := 'FinishSession';
+                			ep_WrkEventSession( ep_WorkEvent) := i_Session ;
                 		endblock ;
                 		block ! Copy session data to work event.
-                			ep_WrkValueData(ep_WorkEvent,i_ValueType) := ep_SessValueData(i_Session,i_valuetype);
+                			ep_WrkValueData(ep_WorkEvent,i_ExtendedValueType) := ep_SessValueData(i_Session,i_ExtendedValueType);
                 			p_WrkEvPeakMemory(   ep_WorkEvent ) := p_SessPeakMemory(   i_session );
                 		endblock ;
                 
@@ -403,11 +607,12 @@ Model Main_AIMMSPROUsageStatistics {
                 			s_Events += card(s_Events)+1 ;
                 			ep_Event := last( s_Events );
                 			sp_EvMoment(ep_Event ):= sp_WrkEvMoments( ep_WorkEvent );
+                			p01_RelationSessionEvent( ep_WrkEventSession( ep_WorkEvent), ep_Event ) := 1 ;
                 		endblock ;
                 		block ! copy data from "work event" to "event"
                 			ep_EvEventTypes( ep_Event ) := ep_WrkEvEventType( ep_WorkEvent );
                 
-                			ep_EvValueData( ep_Event,i_valuetype ) := ep_WrkValueData( ep_WorkEvent, i_valueType );
+                			ep_EvValueData( ep_Event,i_ExtendedValueType ) := ep_WrkValueData( ep_WorkEvent, i_ExtendedValueType );
                 
                 			p_EvPeakMemory( ep_Event ) := p_WrkEvPeakMemory( ep_WorkEvent );
                 		endblock ;
@@ -453,8 +658,12 @@ Model Main_AIMMSPROUsageStatistics {
                     IndexDomain: i_WorkEvent;
                     Range: s_EventTypes;
                 }
+                ElementParameter ep_WrkEventSession {
+                    IndexDomain: i_WorkEvent;
+                    Range: s_Sessions;
+                }
                 ElementParameter ep_WrkValueData {
-                    IndexDomain: (i_WorkEvent,i_valueType);
+                    IndexDomain: (i_WorkEvent,i_ExtendedvalueType);
                     Range: s_ValueMasterSet;
                 }
                 Parameter p_WrkEvPeakMemory {
@@ -1273,7 +1482,7 @@ Model Main_AIMMSPROUsageStatistics {
                 Range: {
                     {1..50}
                 }
-                InitialData: 25;
+                InitialData: 50;
             }
             Parameter p_NoColumnsPerBarChart;
             Set s_BarChartColumns {
@@ -1504,6 +1713,13 @@ Model Main_AIMMSPROUsageStatistics {
                     	  ( ''                                                      = ep_FocusValue )    )     }
                 }
             }
+            Set s_SessionsWithFocus {
+                SubsetOf: s_Sessions;
+                Index: i_FocusSession;
+                Definition: {
+                    { i_Session | exists( i_focusEvent | p01_RelationSessionEvent(i_session, i_focusEvent) ) }
+                }
+            }
             StringParameter sp_TitleEventsWithFocusTable {
                 Definition: {
                     if ep_BarchartColumnValueType and ep_BarchartColumnValueType <> 'None' then
@@ -1570,6 +1786,18 @@ Model Main_AIMMSPROUsageStatistics {
                     }
                 }
                 Procedure uponchange_p01_SelectedSessionTypes {
+                    Body: {
+                        block 
+                        	pr_handle_uponchange_ValueSelections();
+                        onerror ep_err do
+                        	gss::pr_GlobalErrorHandler(ep_err);
+                        endblock ;
+                    }
+                    ElementParameter ep_err {
+                        Range: errh::PendingErrors;
+                    }
+                }
+                Procedure uponchange_p01_SelectedSessionStates {
                     Body: {
                         block 
                         	pr_handle_uponchange_ValueSelections();
@@ -1655,13 +1883,14 @@ Model Main_AIMMSPROUsageStatistics {
                         Property: ElementsAreLabels;
                         Definition: {
                             { i_event |
-                            	( ep_EvValueData(i_Event,'SessionTypes') in s_ShownSessionTypes ) and
-                            	( ep_EvValueData(i_Event,'Applications') in s_ShownApplications ) and
-                            	( ep_EvValueData(i_Event,'AppVersions')  in s_ShownAppVersions  ) and
+                            	( ep_EvValueData(i_Event,'SessionTypes') in s_ShownSessionTypes  ) and
+                            	( ep_EvValueData(i_Event,'State')        in s_ShownSessionStates ) and
+                            	( ep_EvValueData(i_Event,'Applications') in s_ShownApplications  ) and
+                            	( ep_EvValueData(i_Event,'AppVersions')  in s_ShownAppVersions   ) and
                             
-                            	( ep_EvValueData(i_Event,'AccountNames') in s_ShownAccounts     ) and
-                            	( ep_EvValueData(i_Event,'Environments') in s_ShownEnvironments ) and
-                            	( ep_EvValueData(i_Event,'UserNames')    in s_ShownUserNames    )     }
+                            	( ep_EvValueData(i_Event,'AccountNames') in s_ShownAccounts      ) and
+                            	( ep_EvValueData(i_Event,'Environments') in s_ShownEnvironments  ) and
+                            	( ep_EvValueData(i_Event,'UserNames')    in s_ShownUserNames     )     }
                         }
                     }
                     Set s_ShownAccounts {
@@ -1676,6 +1905,12 @@ Model Main_AIMMSPROUsageStatistics {
                         Index: i_ShownSessionType;
                         Definition: {
                             { i_SessionType | p01_SelectedSessionTypes(i_SessionType) }
+                        }
+                    }
+                    Set s_ShownSessionStates {
+                        SubsetOf: s_SessionStates;
+                        Definition: {
+                            { i_SessionState | p01_SelectedSessionStates(i_SessionState) }
                         }
                     }
                     Set s_ShownEnvironments {
@@ -1712,6 +1947,10 @@ Model Main_AIMMSPROUsageStatistics {
                     }
                     Parameter p01_SelectedSessionTypes {
                         IndexDomain: i_SessionType;
+                        Range: binary;
+                    }
+                    Parameter p01_SelectedSessionStates {
+                        IndexDomain: i_sessionState;
                         Range: binary;
                     }
                     Parameter p01_SelectedEnvironments {
@@ -1792,6 +2031,50 @@ Model Main_AIMMSPROUsageStatistics {
             }
         }
     }
+    Section Tools_copied_from_AimmsProUI_system_library {
+        Function CurrentToStringDelta {
+            Arguments: (deltaSeconds);
+            Range: string;
+            Body: {
+                tmpSec := CurrentToMoment([s], "2011-01-01 00:00:00") ;
+                tmpSec += (deltaSeconds) [s];
+                CurrentToStringDelta := MomentToString( "%c%y-%m-%d %H:%M:%S", [s], "2011-01-01 00:00:00", tmpSec );
+            }
+            Parameter deltaSeconds {
+                Property: Input;
+            }
+            Parameter tmpHour {
+                Range: integer;
+            }
+            Parameter tmpMin {
+                Range: integer;
+            }
+            Parameter tmpSec {
+                Range: integer;
+                Unit: s;
+            }
+        }
+        Procedure RepeatUpdate {
+            Body: {
+                !if guipro::progress::WatchedSessionNotRunning then return 0;
+                !
+                !! Run update and schedule nex check
+                !elseif guipro::progress::UpdateWindow(guipro::progress::WatchedSession) then
+                !        if pro::GetPROLastErrorMessage = "" then
+                !                guipro::progress::NextCheck := CurrentToStringDelta(guipro::progress::UpdateDelay/1000);
+                !                if not ScheduleAt(guipro::progress::NextCheck, 'guipro::progress::RepeatUpdate') then
+                !                        raise error "Error scheduling updateprogress procedure: " + CurrentErrorMessage code 'PRO-Error-scheduling-progress-procedure' ;
+                !                endif;
+                !        else
+                !                guipro::progress::WatchedSession := '';
+                !                pro::session::SetActiveSession(guipro::progress::WatchedSession);
+                !        endif;
+                !endif;
+                !return 1;
+                !
+            }
+        }
+    }
     Section Attic {
         Procedure MainInitialization {
             Body: {
@@ -1825,10 +2108,12 @@ Model Main_AIMMSPROUsageStatistics {
                 ep_FocusBCC := '' ;
                 sp_finish := sp_TimebarViewportEnd ;
                 
-                empty   p01_SelectedSessionTypes, p01_SelectedApplications, 
+                empty   p01_SelectedSessionTypes, p01_SelectedSessionStates, p01_SelectedApplications, 
                 	p01_SelectedAppversions, p01_SelectedAccounts, p01_SelectedEnvironments, p01_SelectedUsernames;
                 
                 empty   ep_EvValueData, s_EventsAtBarChartPoint ;
+                
+                CurrentInputs -= data {sp_SessValueData};
             }
             Comment: "Add initialization statements here that do NOT require any library being initialized already.";
             StringParameter sp_FirstEvent;
@@ -1867,7 +2152,11 @@ Model Main_AIMMSPROUsageStatistics {
                 IndexDomain: i_grp;
             }
         }
-        Procedure MainExecution;
+        Procedure MainExecution {
+            Body: {
+                !guipro::currentToStringDelta
+            }
+        }
         Procedure PreMainTermination {
             Body: {
                 return 1;

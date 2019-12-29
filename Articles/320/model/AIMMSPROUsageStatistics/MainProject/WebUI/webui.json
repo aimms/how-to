@@ -80,6 +80,13 @@
           }
         },
         {
+          "uri": "multiselectsessionstate",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2"
+          }
+        },
+        {
           "uri": "MultiSelectAppName",
           "layoutInfo": {
             "width": "2",
@@ -153,7 +160,7 @@
   },
   "pages/timebased_event_information": {
     "maxcolumns": {
-      "literal": 12
+      "literal": 14
     },
     "onload": {
       "literal": {
@@ -220,10 +227,18 @@
           }
         },
         {
-          "uri": "ControlScalars",
+          "uri": "FocusEvents",
           "layoutInfo": {
-            "width": "6",
-            "height": "2",
+            "width": "7",
+            "height": "4",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "FocusSessions",
+          "layoutInfo": {
+            "width": "7",
+            "height": "4",
             "customPosition": ""
           }
         },
@@ -240,14 +255,6 @@
           "layoutInfo": {
             "width": "7",
             "height": "3",
-            "customPosition": ""
-          }
-        },
-        {
-          "uri": "FocusEvents",
-          "layoutInfo": {
-            "width": "5",
-            "height": "4",
             "customPosition": ""
           }
         },
@@ -370,30 +377,6 @@
     },
     "title": {
       "literal": "ClearErrors"
-    }
-  },
-  "widgets/ControlScalars": {
-    "aimms.widget.type": {
-      "literal": "scalar"
-    },
-    "contents": {
-      "aimms": {
-        "contents": [
-          "p_NoInitialColumnsPerBarChart",
-          "p_NoColumnsPerBarChart",
-          "ep_FocusBCC",
-          "ep_FocusSessionType"
-        ]
-      }
-    },
-    "contents.numdecimals": {
-      "literal": 0
-    },
-    "title": {
-      "literal": "Controls"
-    },
-    "widget.visible": {
-      "literal": 0
     }
   },
   "widgets/DEBUGControlValueType": {
@@ -578,6 +561,187 @@
             "<IDENTIFIER-SET>": "ep_EvValueData"
           },
           "width": 18.14091456081081
+        }
+      ]
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_TitleEventsWithFocusTable"
+        ]
+      }
+    },
+    "widget.visible": {
+      "literal": 0
+    }
+  },
+  "widgets/FocusSessions": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_SessValueData"
+        ],
+        "prefix": "aimms",
+        "slices": [
+          {
+            "identifier": "sp_SessValueData",
+            "slice": [
+              {
+                "index": "i_session",
+                "type": "subset",
+                "value": "i_FocusSession"
+              },
+              {
+                "index": "i_valueType",
+                "type": "free",
+                "value": "i_valueType"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_FocusSession"
+        ],
+        "colHeader": [
+          "i_valueType"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "AccountNames"
+          },
+          "width": 16.8
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "AppVersions"
+          },
+          "width": 15.510204081632653
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "Environments"
+          },
+          "width": 18.4
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "UserNames"
+          },
+          "width": 17.2
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "SessionTypes"
+          },
+          "width": 16.8
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_valueType": "Applications"
+          },
+          "width": 28.190476190476184
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_FocusSession",
+          "width": 44.64760607122072
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_ExtendedValueType": "StartTime"
+          },
+          "width": 29.77909915123457
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_ExtendedValueType": "SessionTypes"
+          },
+          "width": 12.107314836046776
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_ExtendedValueType": "Environments"
+          },
+          "width": 12.6
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_ExtendedValueType": "UserNames"
+          },
+          "width": 10.49165120593692
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_ExtendedValueType": "Applications"
+          },
+          "width": 27.76378636561008
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_ExtendedValueType": "AccountNames"
+          },
+          "width": 16.8
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_ExtendedValueType": "AppVersions"
+          },
+          "width": 11.667638483965013
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_ExtendedValueType": "Start"
+          },
+          "width": 31.87292794494104
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_ExtendedValueType": "End"
+          },
+          "width": 30.61962564073695
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_ExtendedValueType": "State"
+          },
+          "width": 16.970052847915448
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_ExtendedValueType": "Duration"
+          },
+          "width": 19.2
         }
       ]
     },
@@ -799,6 +963,21 @@
     },
     "title": {
       "literal": "Environment name"
+    }
+  },
+  "widgets/multiselectsessionstate": {
+    "aimms.widget.type": {
+      "literal": "multiselect"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p01_SelectedSessionStates"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Session State"
     }
   },
   "widgets/MultiSelectSessionType": {

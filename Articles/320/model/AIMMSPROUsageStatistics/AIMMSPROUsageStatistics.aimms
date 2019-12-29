@@ -4,4 +4,5 @@
 	<Library Path="GuardServerSession" />
 	<Library System="true" Path="AimmsPro" />
 	<Library System="true" Path="AimmsWebUI" />
+	<Library System="true" Path="AimmsProUI" />
 </References>
