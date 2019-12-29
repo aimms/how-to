@@ -1,1 +1,0 @@
-These images guide to the implementation ;-)
