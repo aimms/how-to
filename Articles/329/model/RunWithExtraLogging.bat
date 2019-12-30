@@ -23,7 +23,7 @@ rem Logging is turned on by --logcfg LoggerConfig.xml on the command line.
 for /f "usebackq delims=|" %%f in (`dir /b *.aimms`) do %AIMMSEXECUTABLE% --logcfg LoggerConfig.xml %%f
 
 rem Assuming here LoggerConfig.xml still writes to the fixed folder c:\temp,
-rem we move the create log file from this folder to the current folder.
+rem we move the create logfile from this folder to the current folder.
 rem Because of this fixed location, we can only debug one AIMMS project at a time!
 copy c:\temp\aimms-log.xml log
 del c:\temp\aimms-log.xml

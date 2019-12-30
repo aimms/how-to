@@ -12,10 +12,11 @@ To provide more detailed logging, AIMMS comes with so-called loggers, explained 
 This logging facility is somewhat similar to the `log4j <https://logging.apache.org/log4j/2.x/>`_ technology.
 In this article, we explore how this facility can be used for initial troubleshooting in AIMMS projects.
 
-But first, the log files are there to help diagnose an issue in the application; the application does not exist to
-demonstrate surprising log file contents. For instance, connections are often maintained at several layers, thus
-facilitating automatic recovery. When a connection fails at a lower level, this may give a warning, but there is
-recovery at a higher level. In short:
+But first, the log files are there to help diagnose an issue in the application. 
+The reverse is not true: an alarming message in the log files does not necessarily indicate a problem in the application. 
+For instance, connections are often maintained at several layers, thereby facilitating automatic recovery. 
+When a connection fails at a lower level, this sounds alarming, but there may be a recovery at a higher level. 
+In short:
 
 .. warning:: The AIMMS log files are designed to be interpreted by AIMMS staff.
              Please do not be alarmed if (parts of it) don't make sense.
@@ -34,12 +35,12 @@ Terminology
 
 #.  **Logger** A logger is a tracing facility built in a software component.
 
-#.  **Logger naming** A logger is usually named after the component it is built in. 
-    When a main component has a sub component, the tracing facility of the sub component is usually named 
-    ``<main component>.<sub component>``. An so on recursively.
+#.  **Logger naming** A logger is usually named after the component in which it is built. 
+    When the main component has a sub-component, the tracing facility of the sub-component is usually named 
+    ``<main component>.<sub component>``. And so on recursively.
 
 #.  **Log level** Both a logger and a message have a level associated with it. 
-    When the message level is equal or greater than the level of the logger, it is written to file.
+    When the message level is equal to or greater than the level of the logger, it is written to file.
     Here is the list of log levels used (from low to high):
 
     #.  *Trace* Typically intermediate results, and indications of where execution is.
@@ -80,10 +81,13 @@ A couple of lines may look like this:
     
 Selected remarks:
 
-*   On line 1: I clearly made the mistake to reference the procedure ``guipro::progress::NextCheck`` outside the library ``AimmsProGUI``.
+*   Line 1: I clearly made the mistake to reference the procedure ``guipro::progress::NextCheck`` outside the library ``AimmsProGUI``.
     Don't worry, I got this as an error message in the AIMMS IDE as well ;-).
 
-*   Lines 2-4 are obtained by setting the level of the logger ``AIMMS.Trace.Procedure`` to trace; and the pattern of the lines generated is visualized. This pattern is ``%d{yyyy-MM-dd HH:mm:ss,SSS} %t [%p] {%c} %m%n``.  The components in this pattern are:
+*   Lines 2-4 are obtained by setting the level of the logger ``AIMMS.Trace.Procedure`` to trace; 
+    and the pattern of the lines generated is visualized. 
+    This pattern is ``%d{yyyy-MM-dd HH:mm:ss,SSS} %t [%p] {%c} %m%n``.  
+    The components in this pattern are:
     
     *   ``%d`` The date up to millisecond precision
 
@@ -108,7 +112,7 @@ The community edition of ``Log4View`` is sufficient to analyze one ``.xml`` log 
     :align: center
 
 With the utility `Log4View <https://www.log4view.com/>`_ you can filter away the output of selected loggers. 
-The screenshot shown above, shows that the output of the logger ``AimmsSession`` is hidden, and the output of the logger ``CubeEngineLink`` is about to be hidden, by right clicking on such a logger.
+The screenshot shown above shows that the output of the logger ``AimmsSession`` is hidden, and the output of the logger ``CubeEngineLink`` is about to be hidden, by right-clicking on such a logger.
 
 
 About ``LoggerConfig.xml``
@@ -166,7 +170,7 @@ A batch file quickly becomes more convenient, if you do this more than once.  Co
     for /f "usebackq delims=|" %%f in (`dir /b *.aimms`) do %AIMMSEXECUTABLE% --logcfg LoggerConfig.xml %%f
     
     rem Assuming here LoggerConfig.xml still writes to the fixed folder c:\temp,
-    rem we move the create log file from this folder to the current folder.
+    rem we move the create logfile from this folder to the current folder.
     rem Because of this fixed location, we can only debug one AIMMS project at a time!
     copy c:\temp\aimms-log.xml log
     del c:\temp\aimms-log.xml
@@ -177,14 +181,14 @@ Selected remarks about the about this ``.bat`` file:
 
 *   The file provided is just a template to be tailored as needed.
 
-*   Line 1: We keep the echo-ing on; such that we can see afterwards whether the ``.bat`` file worked as expected.
+*   Line 1: We keep the echo-ing on; such that we can see afterward whether the ``.bat`` file worked as expected.
 
 *   Lines 10-16: Search the folder ``%localappdata%\AIMMS\IFA\Aimms\`` for the latest AIMMS installed. 
     For me, this doesn't work as I still have AIMMS 4.9 installed. 
     That is why I uncommented line 4, and commented out lines 10-16 for the projects I'm working on.
 
 *   Line 23: Here AIMMS is started using the command line option ``--logcfg``. 
-    The trick in this statement, is that it is applied to every ``.aimms`` file in the folder. 
+    The trick in this statement is that it is applied to every ``.aimms`` file in the folder. 
     As there is usually only one such file, this works out nicely.
 
 *   Line 28,29 The XML file appender only writes to a file with an absolute path. 
@@ -206,6 +210,6 @@ Further reading
 
 * The AIMMS Debugger, see AIMMS The User's Guide: Chapter "Debugging and Profiling an Aimms Model"
 
-* Command line options, see AIMMS The User's Guide: Chapter "Calling Aimms"
+* Command-line options, see AIMMS The User's Guide: Chapter "Calling Aimms"
 
 
