@@ -1,5 +1,3 @@
-:orphan:
-
 .. include:: /includes/icons.def
 
 
@@ -33,7 +31,7 @@ If we would plot our parameter distribution we would end up with a uniform distr
     
     |aimms| proposes a lot of other different distributions, listed `here <http://images.aimms.com/aimms/download/manuals/aimms3fr_distributionandcombinatoric.pdf>`_
 
-	* |doc| http://images.aimms.com/aimms/download/manuals/aimms3fr_distributionandcombinatoric.pdf 
+	* |doc| https://documentation.aimms.com/functionreference/elementary-computational-operations/distribution-and-combinatoric-functions/index.html 
     
     See the AIMMS example project :download:`GenerateRandomNumbers.zip <downloads/GenerateRandomNumbers.zip>`.
 	
