@@ -1,5 +1,3 @@
-:orphan:
-
 Get More Log Information
 =========================
 
