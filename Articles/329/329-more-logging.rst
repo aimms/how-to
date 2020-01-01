@@ -10,10 +10,22 @@ To provide more detailed logging, AIMMS comes with so-called loggers, explained 
 This logging facility is somewhat similar to the `log4j <https://logging.apache.org/log4j/2.x/>`_ technology.
 In this article, we explore how this facility can be used for initial troubleshooting in AIMMS projects.
 
-But first, the log files are there to help diagnose an issue in the application. 
-The reverse is not true: an alarming message in the log files does not necessarily indicate a problem in the application. 
-For instance, connections are often maintained at several layers, thereby facilitating automatic recovery. 
-When a connection fails at a lower level, this sounds alarming, but there may be a recovery at a higher level. 
+The log files are there to help diagnose an issue in the application:
+When you have such a log file, you can search for ``[ERROR]`` or ``[WARN]``, with the square brackets if you like, and 
+whenever the message corresponds to the unexpected behaviour you are experiencing, look at the lines just before
+to see if they provide a clue to the cause of the unexpected behaviour you are experiencing.
+
+A word of caution is necessary here. 
+The reverse of the above is not true; 
+an alarming message in the log files does not necessarily indicate a problem in the application. 
+For instance, 
+
+*   A version mismatch may just be an indication that renewed data needs to be copied from one software component to another.
+
+*   Connections are often maintained at several layers, potentially facilitating automatic recovery. 
+    When a connection fails at a lower level, this sounds alarming, 
+    but this may just be used as a signal to invoke a recovery at a higher level. 
+
 In short:
 
 .. warning:: The AIMMS log files are designed to be interpreted by AIMMS staff.
@@ -22,7 +34,7 @@ In short:
 This article provides two files that are templates in creating this information:
 
 #.  ``LoggerConfig.xml`` This file configures how much output several loggers provide during an AIMMS session.
-    You can tailor it to either write ``.xml`` or ``.txt`` output.
+    You can tailor it to write ``.xml`` or ``.txt`` output.
 
 #.  ``RunWithExtraLogging.bat`` This is a small utility to start up AIMMS with ``LoggerConfig.xml`` activated.
 
