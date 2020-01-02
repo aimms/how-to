@@ -5,15 +5,14 @@ Get More Log Information
    :description: This article explains how to increase the amount of log information.
    :keywords: log, troubleshoot
 
-After reporting an incident and analyzing the associated log files, more detailed logging may be needed. 
-To provide more detailed logging, AIMMS comes with so-called loggers, explained below. 
-This logging facility is somewhat similar to the `log4j <https://logging.apache.org/log4j/2.x/>`_ technology.
-In this article, we explore how this facility can be used for initial troubleshooting in AIMMS projects.
+After an incident is reported, as discussed in :doc:`log files can be analyzed<../313/313-get-log-files>`, more detailed logging may be needed to complete this analysis. 
+As a modeler, it may be more efficient to check if there is a clue on how to handle the incident by looking for relevant information in this additional logging information before explaining the incident to `AIMMS User Support <https://www.aimms.com/english/developers/support/report-issue/>`_ or on the `AIMMS Community <https://community.aimms.com/>`_.
 
-The log files are there to help diagnose an issue in the application:
-When you have such a log file, you can search for ``[ERROR]`` or ``[WARN]``, with the square brackets if you like, and 
-whenever the message corresponds to the unexpected behaviour you are experiencing, look at the lines just before
-to see if they provide a clue to the cause of the unexpected behaviour you are experiencing.
+To help diagnose an issue in the application by additional logging, AIMMS comes with so-called loggers, explained below. 
+This logging facility is somewhat similar to the `log4j <https://logging.apache.org/log4j/2.x/>`_ technology.
+
+The tactic I follow as a modeler is to scan for ``[ERROR]`` or ``[WARN]`` in these log files. 
+When the message associated with such a line is related to the issue at hand; I check the lines just prior for a clue.
 
 A word of caution is necessary here. 
 The reverse of the above is not true; 
@@ -54,6 +53,7 @@ Terminology
     Here is the list of log levels used (from low to high):
 
     #.  *Trace* Typically intermediate results, and indications of where execution is.
+                This output typically requires detailed knowledge of the AIMMS implementation to make sense.
 
     #.  *Debug* Typically input echo-ing and computed results
 
@@ -66,8 +66,8 @@ Terminology
     Clearly: the lower the level of the logger, the higher the volume of output!
     
     .. note:: We caution you to not use the levels Trace and Debug unless instructed to do so by AIMMS Staff; 
-              not only do  these log levels generate a high volume of output, the actual output text generated 
-              typically only makes sense with knowledge of the implementation of the corresponding 
+              not only do  these log levels generate a high volume of output and thereby degrade application performance, 
+              the actual output text generated typically only makes sense with knowledge of the implementation of the corresponding 
               software component.
 
 #.  **appender** There are two appenders available; one to generate ``.txt`` files and one to generate ``.xml`` files.
