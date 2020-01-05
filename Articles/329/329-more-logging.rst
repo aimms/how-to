@@ -53,7 +53,7 @@ Terminology
     Here is the list of log levels used (from low to high):
 
     #.  *Trace* Typically intermediate results, and indications of where execution is.
-                This output typically requires detailed knowledge of the AIMMS implementation to make sense.
+        This output typically requires detailed knowledge of the AIMMS implementation to make sense.
 
     #.  *Debug* Typically input echo-ing and computed results
 
@@ -103,7 +103,7 @@ Selected remarks:
 
     *   ``%t`` The number of the execution thread (hexadecimal)
 
-    *   ``%p`` The priority of the message
+    *   ``%p`` The level of the message
 
     *   ``%c`` The name of the logger
 
