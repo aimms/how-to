@@ -17,6 +17,7 @@ Client-Server Communication
 .. toctree::
    :maxdepth: 1
 
+   /Articles/331/331-responsive-applications
    /Articles/155/155-Catering-unresponsive-server-unstable-connection
    /Articles/80/80-receive-messages
    /Articles/reduce-client-server-exchange/reduce-client-server-exchange 
@@ -27,3 +28,5 @@ Client-Server Communication
    /Articles/36/36-intermediate-solution 
    /Articles/34/34-interrupt-server-session 
    /Articles/42/42-data-session-changes
+
+
