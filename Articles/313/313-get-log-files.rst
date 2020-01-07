@@ -171,3 +171,4 @@ Related Topics
 ----------------
 
 * **AIMMS Documentation**: `PRO Log Management <https://documentation.aimms.com/pro/admin-config-2.html>`_
+* **AIMMS How-To**: `Retrieve Solver Log Files in AIMMS PRO <https://how-to.aimms.com/Articles/13/13-Solver-Logging-PRO.html>`_
