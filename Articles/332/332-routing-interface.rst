@@ -3,11 +3,13 @@ Using the Routing Library
 
 **What should be in the article?**
 
-* Short explaination of what a routing problem is 
-* List of all variables and parameters that should be in the main model
+* Short explanation of what a routing problem is 
 * How to transfer that data to the library
-* The different possible formulations of subtour elimination constraints and how to select the one you want to use. 
 * The meaning of the output arguments
+* The different possible formulations of subtour elimination constraints 
+  and how to select the one you want to use. 
+* Literature / further reading
+* eg https://how-to.aimms.com/Articles/126/126-TSP-Lazy-Constraints.html
 
 
 .. note::
