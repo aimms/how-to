@@ -18,15 +18,16 @@ LibraryModule PracticeLibrary {
             Body: {
                 Empty PracticeSet;
                 
-                
                 For i_argNod do
                 	SetElementAdd(PracticeSet, newep, i_ArgNod);
                 
                 	newep2(i_ArgNod) := newep;
-                	Demand(newep2(i_ArgNod)) := p_locDemand(i_ArgNod);
-                
+                	newep1(newep) := i_argNod ;
                 
                 EndFor;
+                Demand(i_practice) := p_locDemand( newep1(i_practice));
+                Distance(i_practice, j_practice) :=
+                	p_locDistance(newep1(i_practice), newep1(j_practice));
             }
             Comment: {
                 "	For j_argNod do
@@ -46,6 +47,10 @@ LibraryModule PracticeLibrary {
             ElementParameter newep2 {
                 IndexDomain: i_ArgNod;
                 Range: PracticeSet;
+            }
+            ElementParameter newep1 {
+                IndexDomain: i_practice;
+                Range: s_locPracSet;
             }
             ElementParameter newep3 {
                 IndexDomain: (i_ArgNod,j_ArgNod);
