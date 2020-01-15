@@ -1,3 +1,10 @@
 * The timestamps in this namechange file are stored in Coordinated universal time (UTC).
 "PracticeSet" "pl::PracticeSet" "2020-01-14 12:07:04"
 "i_practice" "pl::i_practice" "2020-01-14 12:07:04"
+"pl::PracticeSet" "pl::s_Costumers" "2020-01-15 11:20:47"
+"pl::Demand" "pl::p_Demand" "2020-01-15 11:20:57"
+"pl::Distance" "pl::p_Distance" "2020-01-15 11:21:06"
+"pl::i_practice" "pl::i_library" "2020-01-15 11:21:56"
+"pl::j_practice" "pl::j_library" "2020-01-15 11:21:56"
+"pl::s_Costumers" "pl::s_CostumersLib" "2020-01-15 15:32:49"
+"pl::s_CostumersLib" "pl::s_CostumersLibrary" "2020-01-15 15:33:13"

@@ -1,16 +1,16 @@
 ## ams_version=1.0
 
 Model Main_Practice {
-    Set Costumers {
+    Set s_Costumers {
         Index: i, j;
         Definition: {
-            {'punt A', 'punt B', 'punt C', 'punt D'}
+            {'costumer A', 'costumer B', 'costumer C', 'costumer D'}
         }
     }
-    Parameter Demand1 {
+    Parameter p_Demand {
         IndexDomain: i;
     }
-    Parameter Distance1 {
+    Parameter p_Distance {
         IndexDomain: (i,j);
     }
     Procedure MainInitialization {
@@ -24,14 +24,7 @@ Model Main_Practice {
     }
     Procedure MainExecution {
         Body: {
-            pl::TransferData(Costumers,Demand1,Distance1);
-            
-            
-            !Empty pl::PracticeSet;
-            
-            !For i do
-            !	SetElementAdd(pl::PracticeSet, pl::newep, i);
-            !EndFor;
+            pl::TransferData(s_Costumers,p_Demand,p_Distance);
         }
     }
     Procedure PreMainTermination {

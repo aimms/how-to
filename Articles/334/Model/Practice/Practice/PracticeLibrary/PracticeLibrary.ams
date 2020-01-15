@@ -4,64 +4,52 @@ LibraryModule PracticeLibrary {
     Prefix: pl;
     Interface: Public_Section;
     Section Public_Section {
-        Set PracticeSet {
-            Index: i_practice, j_practice;
+        Set s_CostumersLibrary {
+            Index: i_library, j_library;
         }
-        Parameter Demand {
-            IndexDomain: i_practice;
+        Parameter p_Demand {
+            IndexDomain: i_library;
         }
-        Parameter Distance {
-            IndexDomain: (i_practice,j_practice);
+        Parameter p_Distance {
+            IndexDomain: (i_library,j_library);
         }
         Procedure TransferData {
-            Arguments: (s_locPracSet,p_locDemand,p_locDistance);
+            Arguments: (s_locCostumers,p_locDemand,p_locDistance);
             Body: {
-                Empty PracticeSet;
+                Empty s_CostumersLibrary;
                 
-                For i_argNod do
-                	SetElementAdd(PracticeSet, newep, i_ArgNod);
-                
-                	newep2(i_ArgNod) := newep;
-                	newep1(newep) := i_argNod ;
+                For i_loc do
+                	SetElementAdd(s_CostumersLibrary, newep, i_loc);
+                	newep2(i_loc) := newep;
+                	newep1(newep) := i_loc;
                 
                 EndFor;
-                Demand(i_practice) := p_locDemand( newep1(i_practice));
-                Distance(i_practice, j_practice) :=
-                	p_locDistance(newep1(i_practice), newep1(j_practice));
+                p_Demand(i_library) := p_locDemand( newep1(i_library));
+                p_Distance(i_library, j_library) :=
+                	p_locDistance(newep1(i_library), newep1(j_library));
             }
-            Comment: {
-                "	For j_argNod do
-                		newep3(i_ArgNod, j_ArgNod) := newep;
-                		Distance(newep3(i_ArgNod, j_ArgNod)) := p_locDistance(i_ArgNod,j_ArgNod);
-                	EndFor;"
-            }
-            Set s_locPracSet {
-                Index: i_ArgNod, j_ArgNod;
+            Set s_locCostumers {
+                Index: i_loc, j_loc;
                 Property: Input;
-                Comment: "i_ArgNodes";
             }
             Parameter p_locDemand {
-                IndexDomain: i_ArgNod;
+                IndexDomain: i_loc;
+                Property: Input;
+            }
+            Parameter p_locDistance {
+                IndexDomain: (i_loc, j_loc);
                 Property: Input;
             }
             ElementParameter newep2 {
-                IndexDomain: i_ArgNod;
-                Range: PracticeSet;
+                IndexDomain: i_loc;
+                Range: s_CostumersLibrary;
             }
             ElementParameter newep1 {
-                IndexDomain: i_practice;
-                Range: s_locPracSet;
-            }
-            ElementParameter newep3 {
-                IndexDomain: (i_ArgNod,j_ArgNod);
-                Range: PracticeSet;
+                IndexDomain: i_library;
+                Range: s_locCostumers;
             }
             ElementParameter newep {
-                Range: PracticeSet;
-            }
-            Parameter p_locDistance {
-                IndexDomain: (i_ArgNod, j_ArgNod);
-                Property: Input;
+                Range: s_CostumersLibrary;
             }
         }
     }
