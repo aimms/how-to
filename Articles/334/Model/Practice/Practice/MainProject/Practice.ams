@@ -1,17 +1,34 @@
 ## ams_version=1.0
 
 Model Main_Practice {
-    Set s_Costumers {
-        Index: i, j;
+    Set s_Plants {
+        Index: p;
         Definition: {
-            {'costumer A', 'costumer B', 'costumer C', 'costumer D'}
+            {'plant A', 'plant B'}
         }
     }
-    Parameter p_Demand {
-        IndexDomain: i;
+    Set s_Costumers {
+        Index: c;
+        Definition: {
+            {'Costumer A', 'Costumer B', 'Costumer C', 'Costumer D', 'Costumer E'}
+        }
     }
-    Parameter p_Distance {
-        IndexDomain: (i,j);
+    Parameter p_Supply {
+        IndexDomain: p;
+    }
+    Parameter p_Demand {
+        IndexDomain: c;
+    }
+    Parameter p_TransportCost {
+        IndexDomain: (p,c);
+    }
+    Variable v_TotalTransportCost {
+        Range: free;
+        Definition: sum[(p,c), v_Transport(p,c) * p_TransportCost(p,c) ];
+    }
+    Variable v_Transport {
+        IndexDomain: (p,c);
+        Range: nonnegative;
     }
     Procedure MainInitialization {
         Comment: "Add initialization statements here that do NOT require any library being initialized already.";
@@ -24,7 +41,15 @@ Model Main_Practice {
     }
     Procedure MainExecution {
         Body: {
-            pl::TransferData(s_Costumers,p_Demand,p_Distance);
+            
+            
+            !pl::TransferData(s_Plants, s_Costumers, p_Supply, p_Demand, p_TransportCost, v_TotalTransportCost, v_Transport)
+            
+            !pl::TransferData(s_Costumers,p_Demand,p_Distance);
+            
+            !Solve mp_LeastCostTransportPlan;
+            
+            pl::TransferData(s_Plants, s_Costumers, p_Supply, p_Demand, p_TransportCost, v_TotalTransportCost, v_Transport);
         }
     }
     Procedure PreMainTermination {
