@@ -1,6 +1,6 @@
 ## ams_version=1.0
 
-LibraryModule PracticeLibrary {
+LibraryModule TransportLibrary {
     Prefix: pl;
     Interface: Public_Section;
     Section Public_Section {
@@ -77,6 +77,7 @@ LibraryModule PracticeLibrary {
         }
     }
     Section Private_Section {
+        Parameter p_lalala;
         Set s_libPlants {
             Index: p_lib;
         }
@@ -108,11 +109,19 @@ LibraryModule PracticeLibrary {
             IndexDomain: c_lib;
             Definition: sum[p_lib, v_libTransport(p_lib,c_lib)] >= p_libDemand(c_lib);
         }
+        Set s_TransportConstraints {
+            SubsetOf: AllConstraints;
+            Definition: Allconstraints * Private_Section;
+        }
+        Set s_TransportVariables {
+            SubsetOf: AllVariables;
+            Definition: AllVariables * Private_Section;
+        }
         MathematicalProgram mp_LeastCostTransportPlan {
             Objective: v_libTotalTransportCost;
             Direction: minimize;
-            Constraints: AllConstraints;
-            Variables: AllVariables;
+            Constraints: s_TransportConstraints;
+            Variables: s_TransportVariables;
             Type: Automatic;
         }
     }

@@ -1,6 +1,6 @@
 ## ams_version=1.0
 
-Model Main_Practice {
+Model Main_Transport {
     Set s_Plants {
         Index: p;
         Definition: {
@@ -41,14 +41,6 @@ Model Main_Practice {
     }
     Procedure MainExecution {
         Body: {
-            
-            
-            !pl::TransferData(s_Plants, s_Costumers, p_Supply, p_Demand, p_TransportCost, v_TotalTransportCost, v_Transport)
-            
-            !pl::TransferData(s_Costumers,p_Demand,p_Distance);
-            
-            !Solve mp_LeastCostTransportPlan;
-            
             pl::TransferData(s_Plants, s_Costumers, p_Supply, p_Demand, p_TransportCost, v_TotalTransportCost, v_Transport);
         }
     }
