@@ -27,6 +27,7 @@ Learn how to convert business opportunities into optimization models. This secti
    /Articles/247/247-minimize-objective-min-operator
    /Articles/249/249-model-variables-with-limited-values
    /Articles/275/275-various-integer-linear-modeling-tricks
+   /Articles/199/199-model-rounded-variable
  
    
    
