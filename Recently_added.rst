@@ -6,6 +6,7 @@ Recently added
 ==============
 
 .. keep most recent 10-15 articles
+.. Added 17 Jan 2020: 199
 .. Added 6 Dec 2019: 328, 323, 322, 321, 
 .. Added 22 Nov 2019: 277
 .. Added 1 Nov 2019: 319
@@ -13,6 +14,7 @@ Recently added
 .. Added 28 Sep 2019: 310
 .. Added 13 Sep 2019: 309
 
+* :doc:`/Articles/199/199-model-rounded-variable`
 * :doc:`/Articles/322/322-combine-bar-line-chart`
 * :doc:`/Articles/321/321-state-server-session`
 * :doc:`/Articles/323/323-pro-storage-folder`
