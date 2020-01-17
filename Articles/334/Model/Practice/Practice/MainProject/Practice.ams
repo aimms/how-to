@@ -1,33 +1,33 @@
 ## ams_version=1.0
 
 Model Main_Transport {
-    Set s_Plants {
-        Index: p;
+    Set s_Sources {
+        Index: i_so;
         Definition: {
-            {'plant A', 'plant B'}
+            {'Source A', 'Source B'}
         }
     }
-    Set s_Costumers {
-        Index: c;
+    Set s_Sinks {
+        Index: i_si;
         Definition: {
-            {'Costumer A', 'Costumer B', 'Costumer C', 'Costumer D', 'Costumer E'}
+            {'Sink A', 'Sink B', 'Sink C', 'Sink D', 'Sink E'}
         }
     }
     Parameter p_Supply {
-        IndexDomain: p;
+        IndexDomain: i_so;
     }
     Parameter p_Demand {
-        IndexDomain: c;
+        IndexDomain: i_si;
     }
     Parameter p_TransportCost {
-        IndexDomain: (p,c);
+        IndexDomain: (i_so,i_si);
     }
     Variable v_TotalTransportCost {
         Range: free;
-        Definition: sum[(p,c), v_Transport(p,c) * p_TransportCost(p,c) ];
+        Definition: sum[(i_so,i_si), v_Transport(i_so,i_si) * p_TransportCost(i_so,i_si) ];
     }
     Variable v_Transport {
-        IndexDomain: (p,c);
+        IndexDomain: (i_so,i_si);
         Range: nonnegative;
     }
     Procedure MainInitialization {
@@ -41,7 +41,7 @@ Model Main_Transport {
     }
     Procedure MainExecution {
         Body: {
-            pl::TransferData(s_Plants, s_Costumers, p_Supply, p_Demand, p_TransportCost, v_TotalTransportCost, v_Transport);
+            pl::TransferData(s_Sources, s_Sinks, p_Supply, p_Demand, p_TransportCost, v_TotalTransportCost, v_Transport);
         }
     }
     Procedure PreMainTermination {

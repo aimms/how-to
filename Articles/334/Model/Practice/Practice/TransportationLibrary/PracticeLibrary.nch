@@ -19,3 +19,7 @@
 "pl::v_TotalTransportCost_definition" "pl::v_libTotalTransportCost_definition" "2020-01-16 11:19:18"
 "pl::v_Transport" "pl::v_libTransport" "2020-01-16 11:19:24"
 "PracticeLibrary" "TransportLibrary" "2020-01-17 10:05:02"
+"pl::s_libPlants" "pl::s_libSources" "2020-01-17 11:18:38"
+"pl::s_libCostumers" "pl::s_libSinks" "2020-01-17 11:18:47"
+"pl::p_lib" "pl::i_libSo" "2020-01-17 12:20:32"
+"pl::c_lib" "pl::i_libSi" "2020-01-17 12:20:44"

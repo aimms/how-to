@@ -6,108 +6,107 @@ LibraryModule TransportLibrary {
     Section Public_Section {
         Procedure TransferData {
             Arguments: {
-                (s_locPlants,s_locCostumers,p_locSupply,p_locDemand,p_locTransportCost,p_locTotalTransportCost,
+                (s_locSources,s_locSinks,p_locSupply,p_locDemand,p_locTransportCost,p_locTotalTransportCost,
                  p_locTransport)
             }
             Body: {
-                Empty s_libPlants, s_libCostumers;
+                Empty s_libSources, s_libSinks;
                 
-                For p_loc do
-                	SetElementAdd(s_libPlants, ep_new1, p_loc);
-                	ep_map1(ep_new1) := p_loc;
+                For i_locSo do
+                	SetElementAdd(s_libSources, ep_new1, i_locSo);
+                	ep_map1(ep_new1) := i_locSo;
                 EndFor;
-                p_libSupply(p_lib) := p_locSupply( ep_map1(p_lib));
+                p_libSupply(i_libSo) := p_locSupply( ep_map1(i_libSo));
                 
-                For c_loc do
-                	SetElementAdd(s_libCostumers, ep_new2, c_loc);
-                	ep_map2(ep_new2) := c_loc;
+                For i_locSi do
+                	SetElementAdd(s_libSinks, ep_new2, i_locSi);
+                	ep_map2(ep_new2) := i_locSi;
                 EndFor;
-                p_libDemand(c_lib) := p_locDemand( ep_map2(c_lib));
+                p_libDemand(i_libSi) := p_locDemand( ep_map2(i_libSi));
                 
-                p_libTransportCost(p_lib,c_lib) :=
-                	p_locTransportCost(ep_map1(p_lib), ep_map2(c_lib));
+                p_libTransportCost(i_libSo,i_libSi) :=
+                	p_locTransportCost(ep_map1(i_libSo), ep_map2(i_libSi));
                 
-                Solve mp_LeastCostTransportPlan;
+                pr_Solve;
                 
                 p_locTotalTransportCost := v_libTotalTransportCost;
-                p_locTransport(ep_map1(p_lib), ep_map2(c_lib)) 
-                	:= v_libTransport(p_lib,c_lib);
+                p_locTransport(ep_map1(i_libSo), ep_map2(i_libSi)) 
+                	:= v_libTransport(i_libSo,i_libSi);
             }
-            Set s_locPlants {
-                Index: p_loc;
+            Set s_locSources {
+                Index: i_locSo;
                 Property: Input;
             }
-            Set s_locCostumers {
-                Index: c_loc;
+            Set s_locSinks {
+                Index: i_locSi;
                 Property: Input;
             }
             Parameter p_locSupply {
-                IndexDomain: p_loc;
+                IndexDomain: i_locSo;
                 Property: Input;
             }
             Parameter p_locDemand {
-                IndexDomain: c_loc;
+                IndexDomain: i_locSi;
                 Property: Input;
             }
             Parameter p_locTransportCost {
-                IndexDomain: (p_loc, c_loc);
+                IndexDomain: (i_locSo, i_locSi);
                 Property: Input;
             }
             Parameter p_locTotalTransportCost {
                 Property: Output;
             }
             Parameter p_locTransport {
-                IndexDomain: (p_loc, c_loc);
+                IndexDomain: (i_locSo, i_locSi);
                 Property: Output;
             }
             ElementParameter ep_new1 {
-                Range: s_libPlants;
+                Range: s_libSources;
             }
             ElementParameter ep_map1 {
-                IndexDomain: p_lib;
-                Range: s_locPlants;
+                IndexDomain: i_libSo;
+                Range: s_locSources;
             }
             ElementParameter ep_new2 {
-                Range: s_libCostumers;
+                Range: s_libSinks;
             }
             ElementParameter ep_map2 {
-                IndexDomain: c_lib;
-                Range: s_locCostumers;
+                IndexDomain: i_libSi;
+                Range: s_locSinks;
             }
         }
     }
     Section Private_Section {
-        Parameter p_lalala;
-        Set s_libPlants {
-            Index: p_lib;
+        Set s_libSources {
+            Index: i_libSo;
         }
-        Set s_libCostumers {
-            Index: c_lib;
+        Set s_libSinks {
+            Index: i_libSi;
         }
         Parameter p_libSupply {
-            IndexDomain: p_lib;
+            IndexDomain: i_libSo;
         }
         Parameter p_libDemand {
-            IndexDomain: c_lib;
+            IndexDomain: i_libSi;
         }
         Parameter p_libTransportCost {
-            IndexDomain: (p_lib, c_lib);
+            IndexDomain: (i_libSo, i_libSi);
         }
         Variable v_libTotalTransportCost {
             Range: free;
-            Definition: sum[(p_lib,c_lib), v_libTransport(p_lib,c_lib) * p_libTransportCost(p_lib,c_lib) ];
+            Definition: sum[(i_libSo,i_libSi), v_libTransport(i_libSo,i_libSi) * p_libTransportCost(i_libSo,i_libSi) ];
         }
         Variable v_libTransport {
-            IndexDomain: (p_lib, c_lib);
+            IndexDomain: (i_libSo, i_libSi);
             Range: nonnegative;
         }
         Constraint c_SupplyRestriction {
-            IndexDomain: p_lib;
-            Definition: sum[c_lib, v_libTransport(p_lib, c_lib)] <= p_libSupply(p_lib);
+            IndexDomain: i_libSo | p_lalala;
+            Definition: sum[i_libSi, v_libTransport(i_libSo, i_libSi)] <= p_libSupply(i_libSo);
         }
         Constraint c_DemandRequirement {
-            IndexDomain: c_lib;
-            Definition: sum[p_lib, v_libTransport(p_lib,c_lib)] >= p_libDemand(c_lib);
+            IndexDomain: i_libSi | p_lalala;
+            Definition: sum[i_libSo, v_libTransport(i_libSo,i_libSi)] >= p_libDemand(i_libSi);
         }
         Set s_TransportConstraints {
             SubsetOf: AllConstraints;
@@ -123,6 +122,17 @@ LibraryModule TransportLibrary {
             Constraints: s_TransportConstraints;
             Variables: s_TransportVariables;
             Type: Automatic;
+        }
+        Parameter p_lalala {
+            Range: binary;
+            InitialData: 0;
+        }
+        Procedure pr_Solve {
+            Body: {
+                p_lalala := 1;
+                solve mp_LeastCostTransportPlan;
+                p_lalala := 0;
+            }
         }
     }
     Procedure LibraryInitialization {
