@@ -93,19 +93,20 @@ LibraryModule TransportLibrary {
             IndexDomain: (i_libSo, i_libSi);
         }
         Variable v_libTotalTransportCost {
+            IndexDomain: | p_ActivateVariablesandConstraints;
             Range: free;
             Definition: sum[(i_libSo,i_libSi), v_libTransport(i_libSo,i_libSi) * p_libTransportCost(i_libSo,i_libSi) ];
         }
         Variable v_libTransport {
-            IndexDomain: (i_libSo, i_libSi);
+            IndexDomain: (i_libSo, i_libSi) | p_ActivateVariablesandConstraints;
             Range: nonnegative;
         }
         Constraint c_SupplyRestriction {
-            IndexDomain: i_libSo | p_lalala;
+            IndexDomain: i_libSo | p_ActivateVariablesandConstraints;
             Definition: sum[i_libSi, v_libTransport(i_libSo, i_libSi)] <= p_libSupply(i_libSo);
         }
         Constraint c_DemandRequirement {
-            IndexDomain: i_libSi | p_lalala;
+            IndexDomain: i_libSi | p_ActivateVariablesandConstraints;
             Definition: sum[i_libSo, v_libTransport(i_libSo,i_libSi)] >= p_libDemand(i_libSi);
         }
         Set s_TransportConstraints {
@@ -123,15 +124,15 @@ LibraryModule TransportLibrary {
             Variables: s_TransportVariables;
             Type: Automatic;
         }
-        Parameter p_lalala {
+        Parameter p_ActivateVariablesandConstraints {
             Range: binary;
             InitialData: 0;
         }
         Procedure pr_Solve {
             Body: {
-                p_lalala := 1;
+                p_ActivateVariablesandConstraints := 1;
                 solve mp_LeastCostTransportPlan;
-                p_lalala := 0;
+                p_ActivateVariablesandConstraints := 0;
             }
         }
     }

@@ -34,6 +34,8 @@ Bij een transport probleem zijn er een aantal sources. Vanuit die sources moeten
 
 
 
+
+
 - pl::TransferData(s_Sources, s_Sinks, p_Supply, p_Demand, p_TransportCost, v_TotalTransportCost, v_Transport);
 
 
