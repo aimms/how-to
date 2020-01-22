@@ -12,7 +12,8 @@
 .. image:: images/BlogPicture.jpg
    :align: right
 
-For the past couple of years, we have worked on improving the compiler and execution engine in AIMMS. We've done this in a way that minimizes problems in existing models.  
+For the past couple of years, we have worked on improving the compiler and execution engine in AIMMS. We've done this in a way that minimizes problems in existing models. 
+
 During this process, we have encountered issues in the existing code that are not in line with the Language Reference. We struggled with the handling of subsets of integers in an expression in particular. 
 
 For example, consider this set: 
@@ -52,6 +53,7 @@ So what can the modeler do to write exactly what they want?
 ------------------------------------------------------------
 
 For this, we introduced two new properties that you can specify for each subset of integers in your model: ``ElementsAreNumerical`` and ``ElementsAreLabels``.
+
 If ``ElementsAreNumerical`` is specified, then in every situation where either of the two described ambiguities arise, the element expression is automatically surrounded by the ``Val()`` operator. So the statements in the example will be interpreted as:
 
 .. code-block:: aimms
@@ -64,11 +66,14 @@ and
 
     if val(EP_anInteger) then DialogMessage("It is true!") endif;
 
-If ``ElementsAreLabels`` is specified, then the fact that an element can be treated as a numerical value will only apply when there is no ambiguity. In the first statement this means that the + is interpreted as a lead, and in the second statement the condition will be true.
+If ``ElementsAreLabels`` is specified, then the fact that an element can be treated as a numerical value will only apply when there is no ambiguity. 
+
+In the first statement this means that the + is interpreted as a lead, and in the second statement the condition will be true.
+
 If neither of the two properties are set, then you will get a warning whenever the new compiler encounters an ambiguity. We recommended that you then make the proper choice between the two properties. If you ignore the warnings, your statement may behave differently in new AIMMS versions, because the coverage of the new compiler increases and a statement that was previously handled by the old compiler is now handled by the new compiler.
+
 We do know that some time ago, AIMMS generated a similar warning for these situations. However, with these two new properties we can now replace the warning with a more scalable solution.  
 
- 
 
 
 
