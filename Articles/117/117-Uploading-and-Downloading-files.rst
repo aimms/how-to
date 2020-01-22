@@ -7,7 +7,7 @@ Upload and Download Files on AIMMS PRO
 
 This article explains how you can upload and download files to and from AIMMS PRO Storage.
 
-topic:: File Sharing Series
+.. topic:: File Sharing Series
 
     This article is part of a series of three to enable AIMMS app developers to model file sharing securely. See also:
 
