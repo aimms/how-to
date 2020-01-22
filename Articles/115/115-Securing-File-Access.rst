@@ -7,7 +7,7 @@ Secure File Access
 
 In this article, we will cover granting and denying access to files in AIMMS PRO storage.
 
-topic:: File Sharing Series
+.. topic:: File Sharing Series
 
     This article is part of a series of three to enable AIMMS app developers to model file sharing securely. See also:
     
