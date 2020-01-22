@@ -21,7 +21,7 @@ For example, consider this set:
 
     Set subSetIntegers { 
        SubsetOf: Integers; 
-       Parameter: P_anInteger; 
+       Parameter: EP_anInteger; 
        InitialData: data { 0, 1, 4, 7, 8 }; 
     } 
 
@@ -29,23 +29,24 @@ And these two statements:
 
 .. code-block:: aimms
 
-    P_anInteger := 1; 
-    P_anInteger := P_anInteger + 3; 
+    EP_anInteger := 1; 
+    EP_anInteger := EP_anInteger + 3; 
 
 What kind of operator is the + in this situation?
 -------------------------------------------------
 
-If we refer to the Language Reference, it seems pretty simple: the left hand side is element-valued and the right hand side is numerical, so the + is a lead operator. Hence, the value of ``P_anInteger`` should become ``8``.
-But, the Language Reference also states that elements in a subset of integers are treated as numerical when needed, as if it was surrounded by the ``Val()`` operator. If that would be the rule, then the value of ``P_anInteger`` should become 4.
+If we refer to the Language Reference, it seems pretty simple: the left hand side is element-valued and the right hand side is numerical, so the + is a lead operator. Hence, the value of ``EP_anInteger`` should become ``8``.
+But, the Language Reference also states that elements in a subset of integers are treated as numerical when needed, as if it was surrounded by the ``Val()`` operator. If that would be the rule, then the value of ``EP_anInteger`` should become 4.
+
 In the past, AIMMS has tried to be smart in these situations and applied either the lead or the numerical plus depending on the context of the expression in which the + appeared.
 Now look at these two statements:
 
 .. code-block:: aimms
 
-    P_anInteger := 0;
-    if P_anInteger then DialogMessage("It is true!") endif;
+    EP_anInteger := 0;
+    if EP_anInteger then DialogMessage("It is true!") endif;
 
-Will the dialog *It is true!* be shown or not? Again, if we refer to the Language Reference,  it states that the logical value of an element parameter is true if it is not empty. That is, if its current value is not the empty element.  Here ``P_anInteger``  has the value ``0``, so it should be true and the dialog is shown. But, I think that many of us would have expected that the dialog would not be shown in this situation.
+Will the dialog *It is true!* be shown or not? Again, the Language Reference states that the logical value of an element parameter is true if it is not empty. That is, if its current value is not the empty element.  Here ``EP_anInteger``  has the value ``0``, so it should be true and the dialog is shown. But, I think that many of us would have expected that the dialog would not be shown in this situation.
  
 So what can the modeler do to write exactly what they want? 
 ------------------------------------------------------------
@@ -55,13 +56,13 @@ If ``ElementsAreNumerical`` is specified, then in every situation where either o
 
 .. code-block:: aimms
 
-    P_anInteger := val(P_anInteger) + 3;
+    EP_anInteger := val(EP_anInteger) + 3;
     
 and
 
 .. code-block:: aimms
 
-    if val(P_anInteger) then DialogMessage("It is true!") endif;
+    if val(EP_anInteger) then DialogMessage("It is true!") endif;
 
 If ``ElementsAreLabels`` is specified, then the fact that an element can be treated as a numerical value will only apply when there is no ambiguity. In the first statement this means that the + is interpreted as a lead, and in the second statement the condition will be true.
 If neither of the two properties are set, then you will get a warning whenever the new compiler encounters an ambiguity. We recommended that you then make the proper choice between the two properties. If you ignore the warnings, your statement may behave differently in new AIMMS versions, because the coverage of the new compiler increases and a statement that was previously handled by the old compiler is now handled by the new compiler.
