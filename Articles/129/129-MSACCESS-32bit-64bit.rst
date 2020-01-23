@@ -21,14 +21,14 @@ So, for example, if you have a 32-bit application using a 32-bit ODBC driver on 
 
 Please note that launching the installation of a Microsoft Access Database Engine in the usual way, on a machine with an Office installation architecture different from the current one (e.g. 32-bit on 64-bit), may cause the installation to fail. To have it run properly, you need to launch it from a command line with the ``/passive`` argument specified:
 
-* To install the Microsoft Access Database Engine 32-bit on a machine running Office 2010 64-bit:
+* To install the Microsoft Access Database Engine 32-bit on a machine running Office 2010 64-bit:
 
 .. code-block:: none
 
     > AccessDatabaseEngine.exe /passive
 
 
-* To install the Microsoft Access Database Engine 64-bit on a machine running Office 2010 32-bit:
+* To install the Microsoft Access Database Engine 64-bit on a machine running Office 2010 32-bit:
 
 .. code-block:: none
 
@@ -48,7 +48,8 @@ In order to use the new driver from your AIMMS project for connecting to an Acce
 This should be changed to look like (where the changes are highlighted):
 
 .. code-block:: none
-
+    :emphasize-lines: 2,3
+    
     [ODBC]
     DRIVER=Microsoft Access Driver (*.mdb, *.accdb)
     DBQ=.MyDB.mdb
@@ -79,7 +80,8 @@ In this example, Data is the subfolder of your AIMMS Project directory containin
 For the new driver this should be changed to look like (where the changes are highlighted):
 
 .. code-block:: none
-
+    :emphasize-lines: 3,12
+    
     [ODBC]
     DRIVER=Microsoft Access Text Driver (*.txt, *.csv)
     DBQ=.DATA
