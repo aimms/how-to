@@ -152,7 +152,7 @@ To activate the ``LoggerConfig.xml`` the command line option ``--logcfg`` should
 A straightforward way to do this is to enter the entire command from the command prompt.
 A batch file quickly becomes more convenient, if you do this more than once.  Consider the following .bat file:
 
-.. code-block:: none
+.. code-block:: winbatch
     :linenos:
 
     echo on
