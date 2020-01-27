@@ -1,61 +1,65 @@
-Data for Optimization Libraries
-================================
+Data for Optimization Libaries
+==============================
 
-Een AIMMS bibliotheek kan worden toegevoegd aan andere projecten. Dit is handig bij vaker voorkomende problemen, zoals het Transport Probleem. Dan hoeven verschillende gebruikers niet telkens opnieuw over hetzelfde probleem na te denken. Een bestaande bibliotheek van een Transport Probleem kan gewoon worden toegevoegd aan een model. Er zijn enkel een aantal input argumenten nodig en de relevante uitkomsten worden teruggegeven. 
+An AIMMS library can be reused in other projects. To solve an optimisation problem in a library we're dealing with two abstraction mechanisms:
 
-In de bibliotheek moet een manier zijn waarbij de input data wordt overgezet naar data in de bibliotheek. Hier is een voorbeeld van een Transport Probleem bibliotheek waarbij dat gebeurt (Link naar Transport Bibliotheek).
+* On the one hand, procedures are used in which the sets transferred via the arguments have different meanings.
+* On the other hand, we can declare variables and constraints as globals with a fixed index domain within the library and by working with subsets of AllConstraints and AllVariables locally within that library.
 
-Bij een transport probleem zijn er een aantal sources. Vanuit die sources moeten goederen worden geleverd aan sinks. Iedere source heeft een supply en iedere sink heeft een demand. De routes tussen de sources en de sinks hebben allemaal hun eigen kosten voor het vervoeren van één unit. De vraag is wat de goedkoopste manier is om alle goederen te leveren die de sinks nodig hebben. 
+These two abstraction mechanisms do not work together naturally.
+This article explains how we can bring these two abstraction mechanisms together using element parameters based on the well-known **Transport Problem**. 
+-> het voorbeeld is gebaseerd op het transport problem, niet het artikel 
 
-- je hebt dus deze input argumenten (geef de benaming hoe ze ook in de bibliotheek staan)
-- je wilt de volgende output argumenten (geef de benaming hoe ze ook in de bibliotheek staan)
-- dat zijn de gegevens die getransfered moeten worden 
-
-- In de bibliotheek zijn alle parameters etc waar de data naar gekopieerd moet worden. 
-
-
-- in de bibliotheek maak je een procedure die de data gaat transferren
-- in het hoofdmodel hoef je alleen maar 1 zin te typen die de procedure aanroept en alle argumenten meegeeft
-- de procedure in de bibliotheek heeft argumenten waar je de gegevens aan meegeeft
-- aangezien dat in een procedure is, zijn de gegevens niet public
-- Nu wil je de gegevens kopieren naar de public argumenten
-- eerst maak je de sets leeg (voor de zekerheid)
-
-- als je bijvoorbeeld gegevens van een parameter wilt kopieren/plakken kan dat een stuk makkelijker
-- bij een set kun je niet zomaar s_library := s_local doen. dat komt omdat .....
-
-
-- stukje code uitleggen 
+-> as you know:
+The Transport Problem searches for the best way to transport goods from a couple of sources to sinks. For more information see (link)
 
 
 
+.. image:: images/TransportProblem.png
+   :scale: 50 %
+
+
+Description
+-----------
+
+.. image:: images/data.png
+   :scale: 50 %
+
+-> the input and output instead of the first two and the first three
+The data needed in the library to solve the transport problem is declared in the main model (MainTransport). These are the two sets and the first three parameters (..,..,..,..,..). This data is transferrend into the library so the transport problem can be solved locally and two variables are calculated(..,..). The information from these variables is then transferred back to the main model. 
 
 
 
+MainTransport -> Library Procedure 
+----------------------------------
+The procedure inside the library that transfers the data is called pr_SolveTransportProblem. From the main model it should be possible to call this procedure and provide the input and output arguments. In order to enable this, the procedure must have locally declared arguments to which the data is given. Adding arguments to the procedure can be done by pressing the wizard next to arguments in ``pr_SolveTransportProblem``. It is important to correctly select the type and the property of these arguments (see image):
 
+.. image:: images/Arguments.png
+   :scale: 50 %
 
+The procedure can now be called from the main model as followed (make sure the arguments are in correct order):
 
+.. code-block:: aimms
 
-- pl::TransferData(s_Sources, s_Sinks, p_Supply, p_Demand, p_TransportCost, v_TotalTransportCost, v_Transport);
-
-
-
-
-
-
-
+	pl::pr_SolveTransportProblem(s_Sources, s_Sinks, p_Supply, p_Demand, p_TransportCost, p_TotalTransportCost, p_Transport);
 
 
 
 
+Library Procedure -> Global Library declaration
+-----------------------------------------------
+The locally declared 
 
 
 
 
 
--> ergens in de tekst verwerken waarom je sets niet zomaar kunt kopieren/plakken. 
-	extra note: Als beide sets een subset zijn van een andere set kan het wel
--> iets over dat je het op deze manier doet omdat mensen niet iets in de bibliotheek moeten hoeven bewerken.
--> library interface
--> iets van dat de procedure private is en je de data public wilt krijgen 
--> stukje code 
+
+
+
+
+
+
+
+
+

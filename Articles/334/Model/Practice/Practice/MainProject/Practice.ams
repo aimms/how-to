@@ -22,11 +22,10 @@ Model Main_Transport {
     Parameter p_TransportCost {
         IndexDomain: (i_so,i_si);
     }
-    Variable v_TotalTransportCost {
+    Parameter p_TotalTransportCost {
         Range: free;
-        Definition: sum[(i_so,i_si), v_Transport(i_so,i_si) * p_TransportCost(i_so,i_si) ];
     }
-    Variable v_Transport {
+    Parameter p_Transport {
         IndexDomain: (i_so,i_si);
         Range: nonnegative;
     }
@@ -41,7 +40,7 @@ Model Main_Transport {
     }
     Procedure MainExecution {
         Body: {
-            pl::TransferData(s_Sources, s_Sinks, p_Supply, p_Demand, p_TransportCost, v_TotalTransportCost, v_Transport);
+            pl::pr_SolveTransportProblem(s_Sources, s_Sinks, p_Supply, p_Demand, p_TransportCost, p_TotalTransportCost, p_Transport);
         }
     }
     Procedure PreMainTermination {

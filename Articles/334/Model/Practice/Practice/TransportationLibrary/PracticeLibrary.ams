@@ -4,12 +4,13 @@ LibraryModule TransportLibrary {
     Prefix: pl;
     Interface: Public_Section;
     Section Public_Section {
-        Procedure TransferData {
+        Procedure pr_SolveTransportProblem {
             Arguments: {
                 (s_locSources,s_locSinks,p_locSupply,p_locDemand,p_locTransportCost,p_locTotalTransportCost,
                  p_locTransport)
             }
             Body: {
+                p_ActivateVariablesandConstraints := 1;
                 Empty s_libSources, s_libSinks;
                 
                 For i_locSo do
@@ -32,6 +33,9 @@ LibraryModule TransportLibrary {
                 p_locTotalTransportCost := v_libTotalTransportCost;
                 p_locTransport(ep_map1(i_libSo), ep_map2(i_libSi)) 
                 	:= v_libTransport(i_libSo,i_libSi);
+                
+                
+                p_ActivateVariablesandConstraints := 0;
             }
             Set s_locSources {
                 Index: i_locSo;
@@ -130,9 +134,7 @@ LibraryModule TransportLibrary {
         }
         Procedure pr_Solve {
             Body: {
-                p_ActivateVariablesandConstraints := 1;
                 solve mp_LeastCostTransportPlan;
-                p_ActivateVariablesandConstraints := 0;
             }
         }
     }
