@@ -13,7 +13,7 @@ Use the installer available from the `AIMMS Downloads page <https://www.aimms.co
 Prerequisites
 ---------------
 
-AIMMS PRO requires **Universal Runtime** from **version 2.28** onwards.
+AIMMS PRO requires `Universal Runtime <https://support.microsoft.com/en-us/help/2999226/update-for-universal-c-runtime-in-windows>`_ from **version 2.28** onwards.
 
 Windows 10 comes with this runtime pre-installed. However, some versions or installations of Windows do not include it. 
 
