@@ -9,7 +9,7 @@ An AIMMS library can be reused in other projects. To solve an optimisation probl
 These two abstraction mechanisms do not work together naturally.
 This article explains how we can bring these two abstraction mechanisms together using element parameters. The project example (Transport Problem Library) is based on the well-known **Transport Problem**. 
 
-As you probably know, the Transport Problem searches for the best way to transport goods from a couple of sources to sinks. For more information about the Transport Problem see (link)
+The Transport Problem searches for the best way to transport goods from a couple of sources to sinks. 
 
 .. image:: images/TransportProblem.png
    :scale: 50 %
