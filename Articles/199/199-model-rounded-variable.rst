@@ -1,7 +1,10 @@
-How To Model Rounding of a Variable
+Model a Rounded Variable
 =======================================
+.. meta::
+   :description: How to model a variable as the closest integer to another variable or parameter.
+   :keywords: round, mixed, integer
 
-There might be cases where you need to model a variable ``var1`` as the closest integer to another variable or parameter ``value``. Essentially, constraint like::
+There might be cases where you need to model a variable ``var1`` as the closest integer to another variable or parameter ``value``. Essentially, a constraint like::
 
     var1 = Round(value)
 
@@ -10,9 +13,9 @@ However, using the :aimms:func:`Round` function in a constraint is not allowed i
 .. code-block:: none
 
     Constraint programming constraints cannot be used in combination with real valued variables, only with integer valued variables, 
-    element valued variables, and activities..
+    element valued variables, and activities.
 
-We can avoid such errors by declaring ``var1`` as an integer variable and using two auxiliary non-negative variables in a target constraint as below::
+We can avoid such errors by declaring ``var1`` as an integer variable and using two auxiliary non-negative variables in a target constraint as shown below::
 
     var1 = value + aux1 - aux2 
 
