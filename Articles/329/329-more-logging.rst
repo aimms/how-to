@@ -61,7 +61,7 @@ Terminology
 
     #.  *Warn* Exceptions that can be continued from
 
-    #.  *Error* Exceptions that should be handled by the modeler or user
+    #.  *Error* Exceptions that should be handled, by a higher layer in the program, by the modeler, or by the user
     
     Clearly: the lower the level of the logger, the higher the volume of output!
     
