@@ -73,9 +73,9 @@ author = u'AIMMS'
 # built documents.
 #
 # The short X.Y version.
-version = u'1'
+#version = u'1'
 # The full version, including alpha/beta/rc tags.
-release = u'0'
+#release = u'0'
 
 # includes these texts at the end of all source .rsts, helpful for using repetitive replacements 
 
@@ -156,12 +156,13 @@ html_theme_options = {
     'home_page_title': 'AIMMS How-To',
     'home_page_description': "AIMMS How-To is a support knowledge base for everyone involved in projects that use AIMMS. You'll find help tutorials, best practices, and practical guidance for using AIMMS software.",
     'display_community_embeddable' : Display_3rd_Party_Extensions,
-    'generate_google_analytics' : Display_3rd_Party_Extensions,
-    'google_analytics_id' : 'UA-1290545-14',
-    'display_algolia_search': Display_3rd_Party_Extensions,
-    'algolia_appid': 'BH4D9OD16A',
-    'algolia_appkey': '0fc935020f8088e762190434cffaee41',
-    'algolia_indexname':'aimms_how-to',
+    'display_algolia_search' : False,
+#   'google_analytics_id' : 'UA-1290545-14',
+#   'display_algolia_search': Display_3rd_Party_Extensions,
+#   'algolia_appid': 'BH4D9OD16A',
+#   'algolia_appkey': '0fc935020f8088e762190434cffaee41',
+#   'algolia_indexname':'aimms_how-to',
+
  }
 
 

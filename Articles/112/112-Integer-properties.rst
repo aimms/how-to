@@ -1,23 +1,26 @@
-﻿Overview: New Handling of Integer Sets and Operators
+﻿Handling of Integer Sets and Operators
 ====================================================
 
 .. meta::
    :description: Discussion of how AIMMS handles of subsets of integers in an expression.
    :keywords: integer, set, subset, operator
 
-.. note::
+.. .. note::
 
-	This article was originally posted to the AIMMS Tech Blog.
+.. 	This article was originally posted to the AIMMS Tech Blog.
+
+.. don't think this note is required in the how-to, eventually we'd have to remove them
 
 .. image:: images/BlogPicture.jpg
-   :align: right
+    :align: right
+    :scale: 75
 
-For the past couple of years, we have worked on improving the compiler and execution engine in AIMMS. We've done this in a way that minimizes problems in existing models.  
-During this process, we have encountered issues in the existing code that are not in line with the Language Reference. We struggled with the handling of subsets of integers in an expression in particular. 
+Improving the compiler and execution engine in AIMMS is one of our ongoing projects. This is being done in a way that minimizes problems in existing AIMMS models (backward compatibility). During this process, we have noticed many issues in the existing code base that are not inline with our Language Reference. Subsets of integers is one topic of interest. 
 
-For example, consider this set: 
+Subsets of Integers
+----------------------
 
-.. code-block:: aimms
+Consider the below subset of Integers:: 
 
     Set subSetIntegers { 
        SubsetOf: Integers; 
@@ -25,47 +28,68 @@ For example, consider this set:
        InitialData: data { 0, 1, 4, 7, 8 }; 
     } 
 
-And these two statements:
-
-.. code-block:: aimms
+And these two statements::
 
     P_anInteger := 1; 
     P_anInteger := P_anInteger + 3; 
 
-What kind of operator is the + in this situation?
+Should the final value of ``P_anInteger`` be 4 or 8 ? 
+
+    #. ``P_anInteger`` is an **element parameter** in the set ``subSetIntegers``. According to the Language Reference, the LHS is element valued so ``+`` in the RHS becomes a lead operator. So, ``P_anInteger + 3`` must return 8 because 8 is the 3rd element from 1 in the set ``subSetIntegers``. 
+    #. However, the Language Reference also states that elements in a subset of integers are treated as integers (as if the element was surrounded by the ``Val()`` operator). So, with a current value of 1 - ``P_anInteger + 3`` must return 4. 
+
+Which is the correct answer ? 
+
+Another example
 -------------------------------------------------
 
-If we refer to the Language Reference, it seems pretty simple: the left hand side is element-valued and the right hand side is numerical, so the + is a lead operator. Hence, the value of ``P_anInteger`` should become ``8``.
-But, the Language Reference also states that elements in a subset of integers are treated as numerical when needed, as if it was surrounded by the ``Val()`` operator. If that would be the rule, then the value of ``P_anInteger`` should become 4.
-In the past, AIMMS has tried to be smart in these situations and applied either the lead or the numerical plus depending on the context of the expression in which the + appeared.
-Now look at these two statements:
-
-.. code-block:: aimms
+In the past, AIMMS has tried to be smart in these situations and applied either the lead or the numerical plus depending on the context of the expression in which the + operator appeared. Now look at these two statements::
 
     P_anInteger := 0;
     if P_anInteger then DialogMessage("It is true!") endif;
 
 Will the dialog *It is true!* be shown or not? Again, if we refer to the Language Reference,  it states that the logical value of an element parameter is true if it is not empty. That is, if its current value is not the empty element.  Here ``P_anInteger``  has the value ``0``, so it should be true and the dialog is shown. But, I think that many of us would have expected that the dialog would not be shown in this situation.
  
-So what can the modeler do to write exactly what they want? 
+Elements are Numeric or Labels
 ------------------------------------------------------------
 
-For this, we introduced two new properties that you can specify for each subset of integers in your model: ``ElementsAreNumerical`` and ``ElementsAreLabels``.
-If ``ElementsAreNumerical`` is specified, then in every situation where either of the two described ambiguities arise, the element expression is automatically surrounded by the ``Val()`` operator. So the statements in the example will be interpreted as:
+To solve this dilemma, we introduced a new property that you can specify for each subset of integers in your model: 
 
-.. code-block:: aimms
+.. image:: images/properties.png
+    :align: center
+
+If ``Elements are Numeric`` is chosen, then in every situation where the aforementioned dilemma occurs, the element expression is automatically surrounded by the ``Val()`` operator. So the statements in the example will be interpreted as::
 
     P_anInteger := val(P_anInteger) + 3;
+    !returns 4
     
 and
 
 .. code-block:: aimms
 
     if val(P_anInteger) then DialogMessage("It is true!") endif;
+    !returns FALSE
 
-If ``ElementsAreLabels`` is specified, then the fact that an element can be treated as a numerical value will only apply when there is no ambiguity. In the first statement this means that the + is interpreted as a lead, and in the second statement the condition will be true.
-If neither of the two properties are set, then you will get a warning whenever the new compiler encounters an ambiguity. We recommended that you then make the proper choice between the two properties. If you ignore the warnings, your statement may behave differently in new AIMMS versions, because the coverage of the new compiler increases and a statement that was previously handled by the old compiler is now handled by the new compiler.
-We do know that some time ago, AIMMS generated a similar warning for these situations. However, with these two new properties we can now replace the warning with a more scalable solution.  
+If ``Elements are Labels`` is specified, then the fact that an element can be treated as a numerical value will only apply when there is no ambiguity. In the first example this means that the + is interpreted as a lead, and in the second example the condition will be true::
+
+    P_anInteger := P_anInteger + 3;
+    !returns 8
+
+and
+
+.. code-block:: aimms
+
+    if P_anInteger then DialogMessage("It is true!") endif;
+    !returns TRUE
+
+If neither of the two properties are set, then you will get a warning whenever the new compiler encounters an ambiguity. We recommended that you then make the proper selection when declaring a subset of ``Integers``. 
+
+.. warning:: 
+
+    If you ignore the warnings, your statement may behave differently in new AIMMS versions, because the coverage of the new compiler increases and a statement that was previously handled by the old compiler is now handled by the new compiler.
+
+
+* `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_
 
  
 

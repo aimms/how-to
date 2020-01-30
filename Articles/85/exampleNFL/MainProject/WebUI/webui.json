@@ -1,0 +1,131 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "maxcolumns": {
+      "literal": 10
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "NFL Teams",
+          "layoutInfo": {
+            "width": "10",
+            "height": "4"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/NFL Teams": {
+    "aimms.widget.type": {
+      "literal": "map-v2"
+    },
+    "center.latitude": {
+      "literal": 37.39670171467287
+    },
+    "center.longitude": {
+      "literal": -97.53279606361974
+    },
+    "nodes.__display_order__": {
+      "literal": [
+        "nodes.0"
+      ]
+    },
+    "nodes.0": {
+      "aimms": {
+        "contents": [
+          "pLongitude",
+          "pLatitude",
+          "pCapacity"
+        ],
+        "slices": [
+          {
+            "identifier": "pLongitude",
+            "slice": [
+              {
+                "index": "iTeam",
+                "type": "free",
+                "value": "iTeam"
+              }
+            ]
+          },
+          {
+            "identifier": "pLatitude",
+            "slice": [
+              {
+                "index": "iTeam",
+                "type": "free",
+                "value": "iTeam"
+              }
+            ]
+          },
+          {
+            "identifier": "pCapacity",
+            "slice": [
+              {
+                "index": "iTeam",
+                "type": "free",
+                "value": "iTeam"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "nodes.0.index": {
+      "literal": {
+        "identifier": "iTeam"
+      }
+    },
+    "nodes.0.latitude": {
+      "literal": {
+        "identifier": "pLatitude",
+        "slice": [
+          {
+            "index": "iTeam",
+            "type": "free",
+            "value": "iTeam"
+          }
+        ]
+      }
+    },
+    "nodes.0.longitude": {
+      "literal": {
+        "identifier": "pLongitude",
+        "slice": [
+          {
+            "index": "iTeam",
+            "type": "free",
+            "value": "iTeam"
+          }
+        ]
+      }
+    },
+    "nodes.0.size": {
+      "literal": {
+        "identifier": "pCapacity",
+        "slice": [
+          {
+            "index": "iTeam",
+            "type": "free",
+            "value": "iTeam"
+          }
+        ]
+      }
+    },
+    "title": {
+      "literal": "NFL Team Map"
+    },
+    "zoom": {
+      "literal": 5
+    }
+  }
+}

@@ -1,0 +1,159 @@
+## ams_version=1.0
+
+Model Main_exampleNFL {
+    Set sTeams {
+        Index: iTeam, jTeam;
+        webui::AnnotationsIdentifier: spAnnotation;
+    }
+    Set sConferences {
+        Index: iConference;
+    }
+    Set sDivisions {
+        Index: iDivision;
+    }
+    ElementParameter epConference {
+        IndexDomain: iTeam;
+        Range: sConferences;
+    }
+    ElementParameter epDivision {
+        IndexDomain: iTeam;
+        Range: sDivisions;
+    }
+    StringParameter spStadiumName {
+        IndexDomain: iTeam;
+    }
+    Parameter pCapacity {
+        IndexDomain: iTeam;
+    }
+    Parameter pLatitude {
+        IndexDomain: iTeam;
+    }
+    Parameter pLongitude {
+        IndexDomain: iTeam;
+    }
+    Parameter pDistance {
+        IndexDomain: (iTeam, jTeam);
+    }
+    DeclarationSection Optional_for_AXLL {
+        StringParameter spWorkbook;
+        StringParameter spSheet;
+    }
+    DeclarationSection Map_Customization {
+        StringParameter spAnnotation {
+            IndexDomain: iTeam;
+            Definition: FormatString("%e %e", epConference(iTeam), epDivision(iTeam));
+            Comment: "We want to color the map nodes based on their conference and stroke based on their division.";
+        }
+    }
+    Procedure prReadFromExcel {
+        Body: {
+            axll::CloseAllWorkBooks;
+            
+            !select the input Excel file and load it into memory
+            spWorkbook := "input.xlsx";
+            axll::OpenWorkBook(WorkbookFilename : spWorkbook );
+            !axll::OpenWorkBook(WorkbookFilename : "input.xlsx" )
+            
+            !select the sheet from the workbook opened
+            spSheet := "Teams";
+            axll::SelectSheet(SheetName : spSheet );
+            
+            !read sets
+            axll::ReadSet(
+            	SetReference              : sTeams , 
+            	SetRange                  : "A2:A33" , 
+            	ExtendSuperSets           :  1, 
+            	MergeWithExistingElements :  0, 
+            	SkipEmptyCells            :  0);
+            
+            axll::ReadSet(sConferences, "B2:B33", 1);
+            axll::ReadSet(sDivisions, "C2:C33", 1);
+            
+            !read (string) parameters in list format
+            
+            axll::ReadList(
+            	IdentifierReference    : spStadiumName , 
+            	RowHeaderRange         : "A2:A33" , 
+            	DataRange              : "D2:D33" , 
+            	ModeForUnknownElements :  0, 
+            	MergeWithExistingData  :  0);
+            
+            axll::ReadList(epConference, "A2:A33", "B2:B33");
+            axll::ReadList(epDivision, "A2:A33", "C2:C33");
+            axll::ReadList(pCapacity, "A2:A33", "E2:E33");
+            axll::ReadList(pLatitude, "A2:A33", "F2:F33");
+            axll::ReadList(pLongitude, "A2:A33", "G2:G33");
+            
+            spSheet := "Distances";
+            axll::SelectSheet(spSheet);
+            
+            !read data in matrix format
+            
+            axll::ReadTable(
+            	IdentifierReference    : pDistance , 
+            	RowHeaderRange         : "A2:A33" , 
+            	ColumnHeaderRange      : "B1:AG1" , 
+            	DataRange              : "B2:AG33", 
+            	ModeForUnknownElements :  0, 
+            	MergeWithExistingData  :  0);
+            
+            axll::CloseAllWorkBooks;
+        }
+    }
+    Procedure prWriteToExcel {
+        Body: {
+            spWorkbook := "input.xlsx";
+            
+            if not (axll::WorkBookIsOpen(WorkbookFilename : spWorkbook )) then
+            	axll::OpenWorkBook(WorkbookFilename : spWorkbook );
+            endif;
+            
+            !select the sheet to write output
+            spSheet := "AIMMSOutput";
+            axll::SelectSheet(SheetName : spSheet );
+            
+            !emptying current contents of the sheet
+            axll::ClearActiveSheet;
+            
+            !write the distance matrix in a composite table format
+            axll::WriteCompositeTable(
+            	IdentifierReference : pDistance , 
+            	TopLeftCell         : "A1" , 
+            	WriteZeros          :  0, 
+            	WriteIndexNames     :  1);
+            
+            axll::CloseAllWorkBooks;
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return DataManagementExit();
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

@@ -26,21 +26,17 @@ However, some solvers support using multiple cores. This means that if you are s
 large LP or MIP problem, a solver like CPLEX or Gurobi use
 multiple cores in your computer to solve your problem.
 
-
 Unfortunately, if you need to solve a large number of smaller problems 
 using multiple cores, the solver probably will not much 
 improve the total solving time. This means that if you have 4
 cores in your computer, you probably will see that only one core is
 busy, while the other three are not doing anything.
-    
-
 
 In order to prevent such a situation, you can instruct
 AIMMS to execute a solve asynchronously (or simultaneously) by using the concept
 of asynchronous solver sessions. This way the each problem is solved in a separate thread, and
 you can get to 100% CPU usage by starting as many solver sessions as you
 have cores in your machine.
-
 
 Please note that in general, it does not mean that if you use N
 simultaneous solver sessions the time needed to solve all the problems
@@ -62,54 +58,39 @@ Session (instead of using ``GMP::Instance::Solve``) and instruct AIMMS to start 
 .. code::
 
    !Set input parameters corresponding to situation 1  (e.g. max number of jobs)
-
    maxNumberOfJobs := 10 ; 
 
    !Generate the GMP for situation 1
-
    ep_GMP_Situation1 := gmp::Instance::Generate(
-
                MP   : MathProgram , 
-
                name : "situation 1" ) ; 
 
    !Set input parameters corresponding to situation 2  (e.g. max number of jobs)
-
    maxNumberOfJobs := 15 ; 
 
    !Generate the GMP for situation 2
-
    ep_GMP_Situation2 := gmp::Instance::Generate(
-
                MP   : MathProgram , 
-
                name : "situation 2" ) ;         
 
    !Now create the solver sessions that can be used
    !to actually solve the problems
 
    ep_SolverSession1 := gmp::Instance::CreateSolverSession(
-   
                GMP    : ep_GMP_Situation1 ,
-               
                Name   : "Solver session situation 1" ) ; 
                
    ep_SolverSession2 := gmp::Instance::CreateSolverSession(
-
                GMP    : ep_GMP_Situation2 , 
-
                Name   : "Solver session situation 2" ) ; 
                
    !Instruct AIMMS to execute both solver sessions asynchronously
 
    gmp::SolverSession::AsynchronousExecute(
-
                solverSession : ep_SolverSession1 ) ; 
 
    gmp::SolverSession::AsynchronousExecute(
-
                solverSession : ep_SolverSession2 ) ; 
-
 
    !As long as there are still solver sessions, keep on checking for the
    !next one that is finished and do something with the results
@@ -121,31 +102,22 @@ Session (instead of using ``GMP::Instance::Solve``) and instruct AIMMS to start 
        !WaitForSingleCompletion function
 
        ep_FinishedSolverSession := gmp::SolverSession::WaitForSingleCompletion(
-
                        solSesSet : AllSolverSessions  ) ;   
 
        !Do something with the result, e.g. display the objective
-
        p_FoundObjective := gmp::SolverSession::GetObjective(
-
                       solverSession : ep_FinishedSolverSession ) ; 
 
        !Based on the name of the solver session, you can see which situation
        !was finished solving.
-
        display ep_FinishedSolverSession, p_FoundObjective
 
        !This solver session is finished. We do not need it anymore, so 
        !we can delete it
-
        gmp::Instance::DeleteSolverSession(
-
                solverSession : ep_FinishedSolverSession ) ; 
 
    endwhile ; 
-
-
-
 
 The above example shows how you can use two static
 sessions. If you want to use a variable number of parallel
@@ -161,15 +133,11 @@ scenarios with multiple solver sessions. You can change the number of simultaneo
 to see how using multiple sessions affects the time
 required for solving all scenarios. 
 
-You can download the modified
-example below. Please note that you will need AIMMS 3.11 or newer to
-open this project. 
+You can download the modified example below.  
 
 :download:`FlowShop.zip <downloads/FlowShop.zip>`
 
 After opening the project, go to "*Open Demo Page*", then "*Multiple Scenarios Parallel*". You may check the code in the Section "*Solve Scenarios parallel with Multiple SolverSessions*"
-
-
 
 .. warning:: 
 
@@ -191,7 +159,6 @@ in the License Configuration ( :menuselection:`Menu > Tools > License > License 
 If a solver can be started multiple times simultaneously
 according to the selected license, this number will be printed after the
 name of the solver in the license details on the right.
-
 
 .. note::
 

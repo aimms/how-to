@@ -33,7 +33,7 @@ Running the example
 
     Adapt application details presented on lines 14 - 30.
     
-        .. images/AdaptingConnectionDetailsCS.png
+        .. image:: images/AdaptingConnectionDetailsCS.png
     
         * Line 14, ``PRO_ENDPOINT``: this might also be ``wss://your-cloud-name.cloud.aimms.com`` 
         
@@ -42,9 +42,9 @@ Running the example
             #. when connection not encrypted, start with ``ws``
            
         
-        * Lines 32-34, PRO_ENVIRONMENT, USERNAME, and USER_PASSWORD should have been supplied by your AIMMS PRO administrator.
+        * Lines 32-34, ``PRO_ENVIRONMENT``, ``USERNAME``, and ``USER_PASSWORD`` should have been supplied by your AIMMS PRO administrator.
         
-        * Lines 38-39, PRO_APPLICATION_NAME, PRO_APPLICATION_VERSION, the name and version of the app as it is published.
+        * Lines 38-39, ``PRO_APPLICATION_NAME``, ``PRO_APPLICATION_VERSION``, the name and version of the app as it is published.
 
 #.  Build the application using *Visual Studio Menu > Build > Build*.
 
@@ -53,7 +53,7 @@ Running the example
 Output
 ------
 
-The output is the same as when using Java. See :ref:`Starting AIMMS Job via the AIMMS PRO API using JAVA <pro-api-java-output>`.
+The output is the same as when using Java. See :doc:`98-starting-job-aimms-pro-api-java`.
 
 Further reading
 -----------------
