@@ -12,7 +12,6 @@ While solving decision problems using the AIMMS WebUI and PRO platform, the brow
 
 This article explains the required steps to keep the AIMMS WebUI interactive while a solve session is going. 
 
-
 .. image:: images/Solve.gif
    :align: center
 

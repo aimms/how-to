@@ -1,0 +1,24 @@
+﻿* AIMMS
+aim_character_encoding WINDOWS-1252
+ascii_case_character_encoding WINDOWS-1252
+datatable_character_encoding WINDOWS-1252
+default_input_character_encoding WINDOWS-1252
+default_output_character_encoding WINDOWS-1252
+external_dll_AIMMS_reference ASCII
+external_string_character_encoding WINDOWS-1252
+* AOA
+* BARON 15
+* CBC 2.9
+* CONOPT 3.14V
+* CPLEX 12.7.1
+* CPOptimizer 12.7
+* GUROBI 7.5
+* IPOPT 3.11
+* Knitro 10.3
+* MINOS
+* PATH 4.7
+* SNOPT 7.2
+* XA 16
+* NETSOL
+* Environment
+Project_Title "3. Flowshop model - Enable development testing"

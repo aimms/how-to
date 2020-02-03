@@ -30,7 +30,7 @@ The story behind this picture is as follows:
 
 #. By starting an AIMMS app on AIMMS PRO, the end user starts a new tab in his browser containing the user interface of the app. Behind this user interface, there is an AIMMS session providing the data for the user interface; the so-called *data session*. This data session is given an end-user license, without the ability to solve.
 
-#. When a solve needs to be executed, execution is delegated to a new session, a so-called *server session*. This server session is equipped with a license that also allows to solve mathematical programming problems. When the solve is finished, the server session sends the results back to the data session. 
+#. When a solve needs to be executed, execution is delegated to a new session, a so-called *solver session*. This solver session is equipped with a license that also allows to solve mathematical programming problems. When the solve is finished, the solver session sends the results back to the data session. 
 
 #. The data session continues by presenting the results to the end user.
 
@@ -41,7 +41,7 @@ Basic Modeling of delegation
 
 A simple way to model delegation is by introducing a new procedure that just handles the delegation. In the remainder of this section, we'll handle the details of that.
 
-To publish an application on the AIMMS PRO platform, the procedure containing the Solve statement in the model needs to be modified first. In our example, the "Start solving the problem" button is linked to the procedure ``prDoSolve``.
+To publish an application on the AIMMS PRO platform, the procedure containing the Solve statement in the model needs to be modified first. In our example, the "Solve" button is linked to the procedure ``pr_DoSolve``.
 
 Perform the following steps:
 
@@ -56,14 +56,33 @@ Perform the following steps:
             then return 1;
         endif;
 
-   By including the above code at the top of a procedure, you are instructing AIMMS to delegate the execution of all the subsequent statements on the AIMMS PRO server. As you want to solve the math program on the PRO server, simply call the procedure ``prDoSOlve`` at the end of ``prSolve``.
+    By including the above code at the top of a procedure, you are instructing AIMMS to delegate the execution of all the subsequent statements on the AIMMS PRO server. As you want to solve the math program on the PRO server, simply call the procedure ``prDoSOlve`` at the end of ``prSolve``.
 
+#.  Link the primary action of the page in the WebUI to 
+    the new procedure ``prSolve`` via the string parameter ``sp_PrimaryAction``.
 
-#.  Link the widget "BtnSolve" in the WebUI to the new procedure ``prSolve``.
+    .. code-block:: aimms
+        :linenos:
+
+        StringParameter sp_PrimaryAction {
+            IndexDomain: webui::indexPageActionSpec;
+            Definition: {
+                data {
+                    'displaytext': "Solve" ,    ! (Optional) The text/label you would like to give the action.
+                    'icon' : "aimms-hammer",    ! (Optional) The icon you want to display for the respective action.
+                    'procedure' : "pr_Solve",   ! (Optional) The procedure you want to call when the respective action is clicked.
+                    'state' : "Active"          ! (Optional) Active (displayed and clickable), 
+                                                !            Inactive (displayed and not clickable), and 
+                                                !            Hidden (not displayed). 
+                                                !            By default, the state is Hidden.
+                }
+            }
+        }
+
 
 The AIMMS project that does just this, can be downloaded from: :download:`2. Flow Shop - Delegated <downloads/2. Flow Shop - Delegated.zip>`.
 
-.. caution:: Please do not use the "if pro::DelegateToServer" somewhere in the middle of a procedure; on the server the calling procedure will start from the **beginning**, thus repeating execution steps and this easily leads to confusion.
+.. caution:: Please do not use the ``if pro::DelegateToServer`` somewhere in the middle of a procedure; on the server the calling procedure will start from the **beginning**, thus repeating execution steps and this easily leads to confusion.
 
 Now that we have an application developed that is ready to be published, we need to actually publish it. This is discussed next.
 
