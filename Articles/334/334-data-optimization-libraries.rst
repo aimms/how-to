@@ -1,13 +1,14 @@
 Data for Optimization Libaries
 ==============================
 
-An AIMMS library can be reused in other projects. To solve an optimisation problem in a library we're dealing with two abstraction mechanisms:
+An AIMMS library can be reused in other projects. To solve an optimization problem in a library we're dealing with two abstraction mechanisms:
 
-* On the one hand, procedures are used in which the sets transferred via the arguments have different meanings.
-* On the other hand, we can declare variables and constraints as globals with a fixed index domain within the library and by working with subsets of AllConstraints and AllVariables locally within that library.
+* Procedures where sets transferred via the arguments have different meanings.
+* Declare global variables and constraints with a fixed index domain within the library, and use subsets of ``AllConstraints`` and ``AllVariables`` locally within that library.
 
 These two abstraction mechanisms do not work together naturally.
-This article explains how we can bring these two abstraction mechanisms together using element parameters. The project example (Transport Problem Library) is based on the well-known **Transport Problem**. 
+
+This article explains how we can bring these two abstraction mechanisms together using element parameters. We'll use an example based on the **Transport Problem**. 
 
 The Transport Problem searches for the best way to transport goods from a couple of sources to sinks. 
 
@@ -17,31 +18,46 @@ The Transport Problem searches for the best way to transport goods from a couple
 
 Transferring data
 -----------------
-A Transport Problem can be solved locally inside the library. The following **input data** is declared in the main model: ``s_Sources``, ``s_Sinks``, ``p_Supply``, ``p_Demand`` and ``p_TransportCost``.  This data must be transferred into the library in order for the Transport Problem to be solved. Then, the following **output data** must be transferred back to the main model: ``p_TotalTransportCost`` and ``p_Transport``. 
+A Transport Problem can be solved locally inside the library. 
 
-Tranferring the data is done by the procedure ``pr_SolveTransportProblem`` and happens in two steps (see image):
+The following **input data** is declared in the main model: 
+
+* ``s_Sources`` 
+* ``s_Sinks``
+* ``p_Supply`` 
+* ``p_Demand`` 
+* ``p_TransportCost``  
+
+This data must be transferred into the library to solve the problem. 
+
+Then, the following **output data** must be transferred back to the main model: 
+* ``p_TotalTransportCost``
+* ``p_Transport``
+
+We'll use the procedure ``pr_SolveTransportProblem`` to complete the transfer in two steps (see image):
  
-1. Data from ``Main Transport`` must be provided to the procedure ``pr_SolveTransportProblem`` inside the library.
-2. Data must be transferrerd from ``pr_SolveTransportProblem`` to the global ``Declaration`` of the ``Transport Library``, where the Transport Problem can be solved.
+1. Provide data from ``Main Transport`` to the procedure ``pr_SolveTransportProblem`` inside the library.
+2. Transfer data from ``pr_SolveTransportProblem`` to the global ``Declaration`` of the ``Transport Library``.
 
 .. image:: images/data.png
    :scale: 50 %
 
 
-
+These steps are explained in more detail below.
 
 Step 1
 ^^^^^^
 
 Firstly, the procedure ``pr_SolveTransportProblem`` should contain local arguments. They can be added by pressing the wizard next to arguments. It is important to select the correct type and property of the arguments. 
 (also something about index)
- See image:
 
 .. image:: images/Arguments.png
 	:align: center
 	:scale: 60%
 
-Now it is possible to call the procedure from the main model. If you provide the input and output arguments in the right order, they will be linked to the local arguments. The procedure can now be called as follows:
+Now we can call the procedure from the main model. We must provide the input and output arguments in the right order to link them to the local arguments. 
+
+Call the procedure as follows:
 	
 .. code-block:: aimms
 
@@ -52,9 +68,9 @@ Now it is possible to call the procedure from the main model. If you provide the
 
 Step 2
 ^^^^^^
-The next step is to correctly transfer the data to the global declaration of the library. 
+Next we'll transfer the data to the global declaration of the library. 
 
-In the main model there is a parameter (``s_Supply``) that describes the supply of the sources (``s_Sources``). When transferring the data, the supplies must be linked to the correct sources. This is done with element mapping, see the following code:
+In the main model there is a parameter (``s_Supply``) that describes the supply of the sources (``s_Sources``). When transferring the data, we must link supplies to the correct sources with element mapping:
 
 
 .. code-block:: aimms
@@ -74,7 +90,9 @@ In the main model there is a parameter (``s_Supply``) that describes the supply 
 
 
 
-The rest of the input data is transferred in a similar way. Then the Transport Problem is calculated and the output data is transferred back like this:
+The rest of the input data is transferred in a similar way. 
+
+Then the Transport Problem is calculated and the output data is transferred back like this:
 
 .. code-block:: aimms
 
