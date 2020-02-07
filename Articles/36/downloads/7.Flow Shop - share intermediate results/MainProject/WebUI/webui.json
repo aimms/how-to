@@ -17,6 +17,12 @@
                 "name": "home",
                 "slug": "home",
                 "children": []
+              },
+              {
+                "name": "error data",
+                "type": "page",
+                "slug": "error_data",
+                "children": []
               }
             ]
           }
@@ -28,6 +34,27 @@
     },
     "widget.visibility.greyout": {
       "literal": true
+    }
+  },
+  "pages/error_data": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "messages",
+          "layoutInfo": {
+            "width": "10",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "errorData",
+          "layoutInfo": {
+            "width": "10",
+            "height": "2"
+          }
+        }
+      ]
     }
   },
   "pages/home": {
@@ -136,12 +163,62 @@
       "literal": "linechart"
     }
   },
-  "widgets/LblIdentifyModel": {
-    "contents": {
-      "literal": "Flow Shop - share intermediate - after"
+  "widgets/errorData": {
+    "aimms.widget.type": {
+      "literal": "table"
     },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "gss::ep_JobErrorNodes",
+          "gss::p_JobErrorLines"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "gss::i_JobErrorMessageNumber",
+          "gss::i_StackPosition"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>",
+          "gss::i_LineNumber"
+        ],
+        "aggregated": []
+      }
+    }
+  },
+  "widgets/LblIdentifyModel": {
     "aimms.widget.type": {
       "literal": "label"
+    },
+    "contents": {
+      "literal": "7. Flow Shop - Share intermediate results"
+    }
+  },
+  "widgets/messages": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "gss::sp_JobErrorMessages",
+          "gss::ep_JobErrorSeverity"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "gss::i_JobErrorMessageNumber"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
     }
   },
   "widgets/pgc": {

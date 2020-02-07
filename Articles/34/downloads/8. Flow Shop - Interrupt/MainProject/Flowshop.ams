@@ -20,24 +20,39 @@ Model Main_Flow_Shop {
                 IndexDomain: (i_an, webui::indexPageActionSpec );
                 Definition: {
                     {
-                    	('1','displaytext'): "Solve" ,          ! (Optional) The text/label you would like to give the action.
-                    	('1','icon'       ): "aimms-hammer",    ! (Optional) The icon you want to display for the respective action.
-                    	('1','procedure'  ): "pr_Solve",        ! (Optional) The procedure you want to call when the respective action is clicked.
-                    	('1','state'      ): "Active",          ! (Optional) Active (displayed and clickable), 
-                    	                                        !            Inactive (displayed and not clickable), and 
-                    	                                        !            Hidden (not displayed). 
-                    	                                        !            By default, the state is Hidden.
+                    	('1','displaytext'): "Solve" ,             ! (Optional) The text/label you would like to give the action.
+                    	('1','icon'       ): "aimms-hammer",       ! (Optional) The icon you want to display for the respective action.
+                    	('1','procedure'  ): "pr_Solve",           ! (Optional) The procedure you want to call when the respective action is clicked.
+                    	('1','state'      ): "Active",             ! (Optional) Active (displayed and clickable), 
+                    	                                           !            Inactive (displayed and not clickable), and 
+                    	                                           !            Hidden (not displayed). 
+                    	                                           !            By default, the state is Hidden.
                     
-                    	('2','displaytext'): "Load results"   , ! (Optional) The text/label you would like to give the action.
-                    	('2','icon'       ): "aimms-download9", ! (Optional) The icon you want to display for the respective action.
-                    	('2','procedure'  ): "pr_LoadResults" , ! (Optional) The procedure you want to call when the respective action is clicked.
-                    	('2','state'      ): if p01_ResultsAvailable then "Active" else "InActive" endif
-                    	                                        ! (Optional) Active (displayed and clickable), 
-                    	                                        !            Inactive (displayed and not clickable), and 
-                    	                                        !            Hidden (not displayed). 
-                    	                                        !            By default, the state is Hidden.
+                    	('2','displaytext'): "Load results"   ,    ! (Optional) The text/label you would like to give the action.
+                    	('2','icon'       ): "aimms-download9",    ! (Optional) The icon you want to display for the respective action.
+                    	('2','procedure'  ): "pr_LoadResults" ,    ! (Optional) The procedure you want to call when the respective action is clicked.
+                    	('2','state'      ): if p01_ResultsAvailable then "Active" else "InActive" endif,
+                    	                                           ! (Optional) Active (displayed and clickable), 
+                    	                                           !            Inactive (displayed and not clickable), and 
+                    	                                           !            Hidden (not displayed). 
+                    	                                           !            By default, the state is Hidden.
+                    
+                    	('3','displaytext'): "Interrupt"         , ! (Optional) The text/label you would like to give the action.
+                    	('3','icon'       ): "aimms-bow"         , ! (Optional) The icon you want to display for the respective action.
+                    	('3','procedure'  ): "pr_InterruptSolve" , ! (Optional) The procedure you want to call when the respective action is clicked.
+                    	('3','state'      ): if p01_SolveInterruptable then "Active" else "InActive" endif
+                    	                                           ! (Optional) Active (displayed and clickable), 
+                    	                                           !            Inactive (displayed and not clickable), and 
+                    	                                           !            Hidden (not displayed). 
+                    	                                           !            By default, the state is Hidden.
                     }
                 }
+            }
+        }
+        Section Solve_Interruptable {
+            Parameter p01_SolveInterruptable {
+                Range: binary;
+                InitialData: 0;
             }
         }
         Section Loading_server_session_results {
@@ -54,6 +69,7 @@ Model Main_Flow_Shop {
                 Body: {
                     sp_SavedRequestID := sp_RequestID;
                     p01_ResultsAvailable := 1;
+                    p01_SolveInterruptable := 0 ;
                 }
                 StringParameter sp_RequestID {
                     Property: Input;
@@ -100,10 +116,6 @@ Model Main_Flow_Shop {
         }
         Section GapCurves {
             Property: NoSave;
-            Parameter p01_SolveInterruptable {
-                Range: binary;
-                InitialData: 1;
-            }
             Set s_Observations {
                 Index: i_Obs;
                 Parameter: ep_LastObservation;
@@ -113,8 +125,8 @@ Model Main_Flow_Shop {
                 Index: i_Sobs;
                 Definition: {
                     { i_Obs | ( p_NoObservations <= ( 2 * p_PointsShownInCurve ) ) or 
-                              ( mod(ord(i_Obs), p_DividerForPointSelection ) = 1 ) or 
-                              ( i_Obs = last(s_Observations)                     )    }
+                             ( mod(ord(i_Obs), p_DividerForPointSelection ) = 1 ) or 
+                             ( i_Obs = last(s_Observations)                     )    }
                 }
             }
             Parameter p_BestBound {
@@ -152,7 +164,7 @@ Model Main_Flow_Shop {
                 }
             }
             Procedure pr_UpdateGapToClient {
-                Arguments: (p_ArgBB,p_ArgICB);
+                Arguments: (bb,icb);
                 Body: {
                     if pro::GetPROEndPoint() then
                     	if pro::DelegateToClient(flags: pro::PROMFLAG_LIVE) then
@@ -161,50 +173,31 @@ Model Main_Flow_Shop {
                     endif ;
                     if p01_SolveInterruptable then
                     	SetElementAdd( s_Observations, ep_LastObservation, FormatString("%i", p_NoObservations+1) );
-                    	p_BestBound(ep_LastObservation) := if mapval(p_ArgBB ) then 0 else p_ArgBB  endif ;
-                    	p_Incumbent(ep_LastObservation) := if mapval(p_ArgICB) then 0 else p_ArgICB endif ;
-                    	if mapval(p_ArgBB) or mapval(p_ArgICB) then 
-                    		p_gap := 100  ;
+                    	p_BestBound(ep_LastObservation) := if mapval(bb ) then 0 else bb  endif ;
+                    	p_Incumbent(ep_LastObservation) := if mapval(icb) then 0 else icb endif ;
+                    	if mapval(bb) or mapval(icb) then 
+                    		gap := 100  ;
                     	else
-                    		if p_ArgBB then
-                    			p_gap := ( ( p_ArgICB - p_ArgBB  ) / p_ArgBB ) * 100 ;
+                    		if bb then
+                    			gap := ( ( icb - bb  ) / bb ) * 100 ;
                     		else
-                    			p_gap := 0 ;
+                    			gap := 0 ;
                     		endif ;
                     	endif ;
                     	sp_TitleGapCurve := FormatString("Gap curve: best: %n, incumbent: %n, gap: %n%%",
-                    		p_ArgBB, p_ArgICB, p_gap );
+                    		bb, icb, gap );
                     endif ;
                 }
-                Parameter p_ArgBB {
+                Parameter bb {
                     Property: Input;
                 }
-                Parameter p_ArgICB {
+                Parameter icb {
                     Property: Input;
                 }
-                Parameter p_gap;
-            }
-            Procedure pr_LoadIntermediateResult {
-                Arguments: (sp_ArgFullProStorageName);
-                Body: {
-                    block
-                    	CaseFileLoad( sp_ArgFullProStorageName );
-                    
-                    	! Comment out the next line if you want to retain intermediate solutions.
-                    	pro::DeleteStorageFile( sp_ArgFullProStorageName );
-                    
-                    	p_noIncumbents+=1 ;
-                    onerror ep_err do
-                    
-                    EndBlock ;
-                }
-                StringParameter sp_ArgFullProStorageName {
-                    Property: Input;
-                }
-                ElementParameter ep_err;
+                Parameter gap;
             }
         }
-        Section Progress_Updating {
+        Section Save_intermediate_incumbents {
             Set s_IncumbentSolutionIdentifiers {
                 SubsetOf: AllIdentifiers;
                 Definition: data { p_GCJobStart, p_GCJobDuration };
@@ -261,7 +254,21 @@ Model Main_Flow_Shop {
                     endif ;
                     
                     ! From here on, only the client (data) session is running.
-                    pr_LoadIntermediateResult(sp_ArgFullProStorageName)
+                    pr_LoadIntermediateResult(sp_ArgFullProStorageName);
+                }
+                StringParameter sp_ArgFullProStorageName {
+                    Property: Input;
+                }
+            }
+            Procedure pr_LoadIntermediateResult {
+                Arguments: (sp_ArgFullProStorageName);
+                Body: {
+                    CaseFileLoad( sp_ArgFullProStorageName );
+                    
+                    ! Comment out the next line if you want to retain intermediate solutions.
+                    pro::DeleteStorageFile( sp_ArgFullProStorageName );
+                    
+                    p_noIncumbents+=1 ;
                 }
                 StringParameter sp_ArgFullProStorageName {
                     Property: Input;
@@ -347,8 +354,8 @@ Model Main_Flow_Shop {
     Section MainModelProcedures {
         Procedure MainInitialization {
             Body: {
-                p_MaxJobs 	:= 12;
-                p_MaxMachines 	:= 20;
+                p_MaxJobs 	:= 25;
+                p_MaxMachines 	:= 25;
                 
                 pr_GenerateData;
             }
@@ -369,6 +376,7 @@ Model Main_Flow_Shop {
         Body: {
             Empty s_Observations ;
             p_noIncumbents := 0 ;
+            p01_SolveInterruptable := 1 ;
             pr_DelegateSolve();
         }
     }
@@ -396,5 +404,14 @@ Model Main_Flow_Shop {
             
             solve mp_FlowShopModel;
         }
+    }
+    Procedure pr_InterruptSolve {
+        Body: {
+            if pro::GetPROEndPoint() then
+            	locSessionQueue := pro::session::CurrentSessionQueue();
+            	pro::client::StopExecution( locSessionQueue, pro::AIMMSAPI_INTERRUPT_SOLVE );
+            endif ;
+        }
+        StringParameter locSessionQueue;
     }
 }

@@ -1,0 +1,202 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": false
+    },
+    "widget.visibility.greyout": {
+      "literal": true
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "maxcolumns": {
+      "literal": 10
+    },
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_SecondaryActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_SecondaryActions",
+            "slice": [
+              {
+                "index": "i_an",
+                "type": "free",
+                "value": "i_an"
+              },
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "LblIdentifyModel",
+          "layoutInfo": {
+            "width": "10",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "ScaModelParam",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "pgc",
+          "layoutInfo": {
+            "width": "8",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "CrvGap",
+          "layoutInfo": {
+            "width": "10",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/CrvGap": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_BestBound",
+          "p_Incumbent"
+        ],
+        "prefix": "aimms",
+        "slices": [
+          {
+            "identifier": "p_BestBound",
+            "slice": [
+              {
+                "index": "i_Obs",
+                "type": "subset",
+                "value": "i_Sobs"
+              }
+            ]
+          },
+          {
+            "identifier": "p_Incumbent",
+            "slice": [
+              {
+                "index": "i_Obs",
+                "type": "subset",
+                "value": "i_Sobs"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "title": {
+      "literal": "Gap curve"
+    },
+    "aimms.widget.type": {
+      "literal": "linechart"
+    }
+  },
+  "widgets/LblIdentifyModel": {
+    "aimms.widget.type": {
+      "literal": "label"
+    },
+    "contents": {
+      "literal": "8. Flowshop - Interrupt"
+    }
+  },
+  "widgets/pgc": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_GCJobStart",
+          "p_GCJobDuration"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "time.reference": {
+      "literal": "\"2017-01-01\""
+    },
+    "time.resolution": {
+      "literal": 1
+    },
+    "contents.partition": {
+      "literal": {
+        "resources": [
+          "m",
+          "s"
+        ],
+        "jobs": [
+          "<IDENTIFIER-SET>",
+          "j"
+        ],
+        "aggregated": []
+      }
+    },
+    "title": {
+      "literal": "Gantt chart presenting when the jobs are scheduled on the available machines."
+    }
+  },
+  "widgets/ScaModelParam": {
+    "title": {
+      "literal": "Model parameters"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_MaxMachines",
+          "p_MaxJobs",
+          "p_noIncumbents"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    }
+  }
+}

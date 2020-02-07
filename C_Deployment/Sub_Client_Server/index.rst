@@ -25,4 +25,11 @@ Client-Server Communication
    /Articles/42/42-data-session-changes
    /Articles/reduce-client-server-exchange/reduce-client-server-exchange 
 
-
+.. 33 has 1 and 2
+.. 32 has 3
+.. 19 has 4
+.. 40 has 5
+.. 35 has 6
+.. 36 has 7
+.. 34 has 8
+.. 42 has 9

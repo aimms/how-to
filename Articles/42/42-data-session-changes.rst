@@ -22,7 +22,7 @@ Implementation
 
 Once a solver session is started, you can send additional information using the predefined procedure ``pro::DelegateToServer()``, provided you pass it the queue it already is listening to in the call. When ``pro::DelegateToServer`` is passed a message queue it will not start a new job, but add the enclosing procedure, here ``prPassProgressSupplied``, as a message to the existing queue. This lets the indicated procedure be run as part of the current job.  As you know, a job running on a server is essentially an AIMMS procedure running. In order to let the message start immediately, it should be given priority.
 
-This is illustrated in the following code of ``prPassProgressSupplied``. 
+This is illustrated in the following code of ``pr_PassProgressSupplied``. 
 
     .. code-block:: aimms
 
@@ -39,7 +39,7 @@ This is illustrated in the following code of ``prPassProgressSupplied``.
                 endif ;
                 
                 ! The following code will only be executed server side.
-                pProgressWillBeSupplied := pwbs ;
+                p_ProgressWillBeSupplied := pwbs ;
                                 
             }
             StringParameter locSessionQueue;
