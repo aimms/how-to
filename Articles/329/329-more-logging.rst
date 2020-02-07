@@ -184,9 +184,9 @@ Further reading
 
 * Get log files :doc:`The parent article<../313/313-get-log-files>`
 
-* Guard server session :doc:`Investigating behavior server session<../310/310-investigate-behavior-pro-job>`
+* Guard solver session :doc:`Investigating behavior solver session<../310/310-investigate-behavior-pro-job>`
 
-* Save state  :doc:`Data state server session<../321/321-state-server-session>`
+* Save state  :doc:`Data state solver session<../321/321-state-server-session>`
 
 * The AIMMS Debugger, see AIMMS The User's Guide: Chapter "Debugging and Profiling an Aimms Model"
 

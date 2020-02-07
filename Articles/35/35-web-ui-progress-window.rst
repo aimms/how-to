@@ -17,14 +17,14 @@ The approach we take here involves passing information through three levels of e
 
 .. image:: images/ThreeLevelsOfExecutionTimeCB.png
 
-#. The solver execution on the server session. 
+#. The solver execution on the solver session. 
     The solver passes on status information periodically, as part of the time callback mechanism.
 
-#. The AIMMS execution on the server session.
+#. The AIMMS execution on the solver session.
     Retrieves the information provided by the solver in the previous step, also as part of the time callback mechanism.
 
 #. The AIMMS execution on the data session. 
-    Execute a procedure to retrieve the information from the server session to the data session and display it in the WebUI widgets.
+    Execute a procedure to retrieve the information from the solver session to the data session and display it in the WebUI widgets.
 
 The implementation of the information stream represented by the two arrows will be discussed in the next section. 
  
@@ -41,7 +41,7 @@ You can implement the same in your project by communicating the data from the so
 
 
 
-Step 1. From Solver (level 1) to server session (level 2)
+Step 1. From Solver (level 1) to solver session (level 2)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Step 1A Instruct the solver to provide the progress information periodically. 
@@ -57,7 +57,7 @@ If included before the solve statement in your project, the procedure ``NewTimeC
         FlowShopModel.CallbackTime := 'NewTimeCallback';
         option progress_time_interval := 1 ;
 
-Step 1B Retrieve the information passed on by the solver to the AIMMS server session.
+Step 1B Retrieve the information passed on by the solver to the AIMMS solver session.
 
 In our example, we want to display only the best bound and incumbent objective value of the MIP. So, the body of ``NewTimeCallback`` consists of a procedure with two arguments - FlowShopModel.bestbound and FlowShopModel.Incumbent. You can retrieve values of any of the mathematical program suffices which are listed and explained in chapter "Mathematical Program Suffices" of `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_.
 
@@ -77,10 +77,10 @@ In our example, we want to display only the best bound and incumbent objective v
     
     The message gets priority over the other messages in the message queue. Also, when a procedure is running in the receiving process, the message invokes a procedure that is ran in between statements of the current procedure.
         
-Step 2. From server session (level 2) to data session (level 3)   
+Step 2. From solver session (level 2) to data session (level 3)   
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As we are only passing small amounts of data and executing some simple arithmetic, the procedure ``UpdateGapToClient`` can be executed on the data session i.e., on the end user's browser. To do this, we use the call ``pro::DelegateToClient``. This is very similar to the earlier used call, ``pro::DelegateToServer`` and the difference is evident as their names suggest - in ``pro::DelegateToClient``, we are delegating a procedure to the client (or data) session and in the other one, we are delegating a procedure to the server session.
+As we are only passing small amounts of data and executing some simple arithmetic, the procedure ``UpdateGapToClient`` can be executed on the data session i.e., on the end user's browser. To do this, we use the call ``pro::DelegateToClient``. This is very similar to the earlier used call, ``pro::DelegateToServer`` and the difference is evident as their names suggest - in ``pro::DelegateToClient``, we are delegating a procedure to the client (or data) session and in the other one, we are delegating a procedure to the solver session.
 
 This procedure contains two arguments as input parameters, ``bb`` and ``icb`` which take on the values of the best bound and Incumbent suffices specified in the previous step.
 

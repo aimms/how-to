@@ -1,11 +1,11 @@
-Load Server Session Results Manually
+Load solver session Results Manually
 ========================================
 
 .. meta::
-   :description: How to load results of a server session on demand in AIMMS PRO.
+   :description: How to load results of a solver session on demand in AIMMS PRO.
    :keywords: server, session, results
 
-If the ``waitForCompletion`` argument of ``pro::DelegateToServer`` is 0, both the data session and the server session run in parallel. This allows the end user to browse and modify data while a delegated procedure is executed on the server side in the background. However, at the end of execution, the results are loaded back in to the data session without any warning. This unannounced loading of data does not provide the best user experience. This article presents the approach to manually control this data transfer between the data and server sessions. 
+If the ``waitForCompletion`` argument of ``pro::DelegateToServer`` is 0, both the data session and the solver session run in parallel. This allows the end user to browse and modify data while a delegated procedure is executed on the server side in the background. However, at the end of execution, the results are loaded back in to the data session without any warning. This unannounced loading of data does not provide the best user experience. This article presents the approach to manually control this data transfer between the data and server sessions. 
 
 What is Happening Here?
 --------------------------
@@ -21,7 +21,7 @@ A typical ``pro::DelegateToServer`` call looks as below:
       endif ;
    endif ;
 
-Any procedure written after the above call will be executed on the server session and the results are stored as a data case file with a certain ``RequestID``, a predefined AIMMS identifier. If the ``completionCallback`` argument is the predefined  procedure ``pro::session::LoadResultsCallBack``, the aforementioned case file is loaded into the data session automatically. ``pro::session::LoadResultsCallBack`` has ``RequestID`` as a local input argument.
+Any procedure written after the above call will be executed on the solver session and the results are stored as a data case file with a certain ``RequestID``, a predefined AIMMS identifier. If the ``completionCallback`` argument is the predefined  procedure ``pro::session::LoadResultsCallBack``, the aforementioned case file is loaded into the data session automatically. ``pro::session::LoadResultsCallBack`` has ``RequestID`` as a local input argument.
 
 If you want to manually trigger this loading of results, you need:
 
@@ -79,7 +79,7 @@ When run, this procedure simply stores ``RequestID`` in ``spSavedRequestID`` and
 Provide ``completionCallback`` argument to ``pro::DelegateToServer``
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Now, we need to trigger the assignment procedure ``myLoadResultsCallback`` when a solved case file is available on the server session. This is done by providing ``myLoadResultsCallback`` as the `completionCallback` argument.
+Now, we need to trigger the assignment procedure ``myLoadResultsCallback`` when a solved case file is available on the solver session. This is done by providing ``myLoadResultsCallback`` as the `completionCallback` argument.
 
 .. code-block:: aimms
 
@@ -120,18 +120,18 @@ The AIMMS project that does just this, can be downloaded from: :download:`5. Flo
 Summary
 -------
 
-By following the above steps, the end user can control when the case file resulting from an execution on the server session is loaded onto the data session (or available to view by the end user).
+By following the above steps, the end user can control when the case file resulting from an execution on the solver session is loaded onto the data session (or available to view by the end user).
 
 Further Opportunities
 ------------------------
 
-By following the above steps, the end user can control when the case file resulting from an execution on the server session is loaded onto the data session (or available to view by the end user). Some examples of opportunities for further improvement are:
+By following the above steps, the end user can control when the case file resulting from an execution on the solver session is loaded onto the data session (or available to view by the end user). Some examples of opportunities for further improvement are:
 
 #. End users may want to keep track of the progress of the solution process, especially the gap is interesting. In :doc:`../35/35-web-ui-progress-window` we show how to do this.
    
-#. The contents of intermediate solutions can be interesting for the data session at hand. In :doc:`../36/36-intermediate-solution` we show how to copy selected intermediate results from the server session to the data session.
+#. The contents of intermediate solutions can be interesting for the data session at hand. In :doc:`../36/36-intermediate-solution` we show how to copy selected intermediate results from the solver session to the data session.
 
-#. Once the solution is "good enough for now", the end user may want to abort the server session.  In :doc:`../34/34-interrupt-server-session` we will show how to interrupt the server session.
+#. Once the solution is "good enough for now", the end user may want to abort the solver session.  In :doc:`../34/34-interrupt-server-session` we will show how to interrupt the solver session.
 
 
 
