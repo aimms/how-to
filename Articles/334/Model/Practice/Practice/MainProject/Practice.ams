@@ -1,0 +1,67 @@
+## ams_version=1.0
+
+Model Main_Transport {
+    Set s_Sources {
+        Index: i_so;
+        Definition: {
+            {'Source A', 'Source B'}
+        }
+    }
+    Set s_Sinks {
+        Index: i_si;
+        Definition: {
+            {'Sink A', 'Sink B', 'Sink C', 'Sink D', 'Sink E'}
+        }
+    }
+    Parameter p_Supply {
+        IndexDomain: i_so;
+    }
+    Parameter p_Demand {
+        IndexDomain: i_si;
+    }
+    Parameter p_TransportCost {
+        IndexDomain: (i_so,i_si);
+    }
+    Parameter p_TotalTransportCost {
+        Range: free;
+    }
+    Parameter p_Transport {
+        IndexDomain: (i_so,i_si);
+        Range: nonnegative;
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            pl::pr_SolveTransportProblem(s_Sources, s_Sinks, p_Supply, p_Demand, p_TransportCost, p_TotalTransportCost, p_Transport);
+        }
+    }
+    Procedure PreMainTermination {
+        Body: {
+            return DataManagementExit();
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

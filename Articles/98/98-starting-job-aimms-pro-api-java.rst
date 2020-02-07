@@ -15,7 +15,7 @@ Prerequisites
 #. Get the latest official JDK from the Oracle website: `Download JDK <https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html>`_
    More information about JDK can be found in Oracle's documentation: `JDK Documentation <https://docs.oracle.com/en/java/javase/11/>`_
 
-#. Get `AIMMS PRO API <https://documentation.aimms.com/pro/api.html>`_ via AIMMS PRO Portal.
+#. Get `AIMMS PRO API <https://documentation.aimms.com/pro/api.html>`_ **via your AIMMS PRO Portal**.
 
    a. Log into AIMMS PRO
 
@@ -24,6 +24,8 @@ Prerequisites
    #. Download AIMMS PRO API
 
    #. Move it to a convenient location, and unzip the archive
+   
+.. note:: If you are on the AIMMS Cloud, you may directly use ``https://your-cloud-name.cloud.aimms.com/api-library/pro-api-complete.zip`` 
    
 Running the example
 -------------------
@@ -48,19 +50,19 @@ Running the example
         .. image:: images/ProjectSDKIsNotDefinedRepairing.PNG
 
         
-    #.  Adapt application details presented on lines 30 - 39.
+    #.  Adapt application details presented on lines 30 - 39 of ``Program.java`` file.
     
-        .. images/AdaptingConnectionDetails.png
+        .. image:: images/AdaptingConnectionDetails.png
     
-        * Line 30, DEFAULT_ENDPOINT: this might also be ``wss://your-cloud-name.cloud.aimms.com`` 
+        * Line 30, ``DEFAULT_ENDPOINT``: this might also be ``wss://your-cloud-name.cloud.aimms.com`` 
         
             * when connection is encrypted, start with ``wss`` (cloud systems are always encrypted).
             
             * when connection is not encrypted, start with ``ws``
         
-        * Lines 32-34, DEFAULT_ENVIRONMENT, DEFAULT_USERNAME, and DEFAULT_PASSWORD should have been supplied by your AIMMS PRO administrator.
+        * Lines 32-34, ``DEFAULT_ENVIRONMENT``, ``DEFAULT_USERNAME``, and ``DEFAULT_PASSWORD`` should have been supplied by your AIMMS PRO administrator.
         
-        * Lines 38-39, DEFAULT_APPLICATION_NAME, DEFAULT_APPLICATION_VERSION, the name and version of the app as it is published.
+        * Lines 38-39, ``DEFAULT_APPLICATION_NAME``, ``DEFAULT_APPLICATION_VERSION``, the name and version of the app as it is published.
 
     #.  Now you can start the demo via *IDEA menu > Run > Run*
 
@@ -173,7 +175,7 @@ Output
         
         * Lines 33-36 show that the data for an AIMMS Parameter is prepared/passed to AIMMS.
         
-        * Lines 37-53 shows another procedure ``AdvancedInteraction`` that acts on the interaction with AIMMS.
+        * Lines 37-53 shows another procedure ``proc_AdvancedInteraction`` that acts on the interaction with AIMMS.
         
         * Line 55 logs that via ``notifyClientWithProgress`` a ``stopExecution`` event is sent to AIMMS to stop the execution.
         

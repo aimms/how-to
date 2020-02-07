@@ -194,6 +194,15 @@ Once you have linked the data source, you are now ready and able to select a tab
 
         DRIVER={SQLite3 ODBC Driver};DATABASE=C:\Users\Arthur.AIMMS\Documents\SQLite\sqlite-dll-win64-x64-3150000\chinook.db;
 
+Example Download
+-------------------
+
+:download:`Database read AIMMS example<model/databaseConnection.zip>`
+
+.. note:: You will need the SQLite ODBC driver to be installed to run this example, as described in `Install the SQLite driver`_
+
+Please `tell us <https://community.aimms.com/aimms-developer-12/how-to-link-an-sqlite-database-to-a-project-47>`_ if you think this example could be improved !
+
 Summary
 ----------
 
@@ -206,16 +215,11 @@ AIMMS materials
 
 * `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_: Chapter 27 - Communicating With Databases
 
-* `AIMMS Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_: Function SQLCreateConnectionString   
+* `AIMMS Function Reference :aimms:func:`SQLCreateConnectionString`  
 
 Other related websites
 ----------------------
 
 * `SQLite ODBC Driver <http://www.ch-werner.de/sqliteodbc/>`_
 * `SQLite Website <https://sqlite.org/>`_
-
-
-
-
-
 
