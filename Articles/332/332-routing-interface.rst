@@ -55,20 +55,19 @@ The input argument ``s_Formulations`` should contain the name(s) of the formulat
 
 Both of them are different ways to formulate subtour elimination constraints. 
 
-The **Explicit Dantzig-Fulkerson-Johnson** formulation is based on the idea that the amount of edges in any subset must be lower than the amount of nodes in that subset. Otherwise it would make a subtour. If ``s_Nodes`` contains n nodes, ... subsets and ... constraints would be generated. This is the formulation:
+The **Explicit Dantzig-Fulkerson-Johnson** formulation is based on the idea that the amount of edges in any subset must be lower than the amount of nodes in that subset. Otherwise it would make a subtour. If ``V`` is the set of all costumers, the formulation is:
 
-.. math::
-		
-		\sum_{i,j \in S}{x_{ijk}} \leq |S|-1 \qquad (S \subset V, 2 \leq |S| \leq n - 2)
+.. math:: \sum_{i,j \in S}{x_{ijk}} \leq |S|-1 \qquad (S \subset V, 2 \leq |S| \leq n - 2)
 
 
 
-The **Explicit Miller-Tucker-Zemlin** formulation is based on the idea that the route can't go back to a node were it has already been, since that would make a subtour. ``v_U(i,k)`` is a variable that goes up each time a new node is visited. If ``n_Nodes`` contains n nodes, ... variables and ... contraints would be generated. This is the formulation:
+The **Explicit Miller-Tucker-Zemlin** formulation uses variable :math:`u_{ik}` to determine the order in which nodes are being visited. Every time a new city is visited, the value of :math:`u_{ik}` for that city must be greater than for the previous city. This way it is not possible to return to a city that has already been visited, as it already has a lower value for :math:`u_{ik}`. If :math:`D_{j}` is the demand of the costumers, and :math:`C_{k}` the capacity of the vehicles, the formulation is:
 
-.. math::
 
-		U_{ik} - U_{jk} + Capacity(k) * x_{ijk} \leq Capacity(k) - Demand(j)
-		Demand(i) \leq u(i,k) leq Capacity 
+.. math:: u_{jk} - u_{ik}  \geq D_{j} - C_{k} (1-x_{ijk}) \qquad \forall (i,j) \in V, i \neq j \quad s.t. \enspace D_{i} + D_{j} \leq C_{k} 
+.. math:: 0 \leq u_{jk} \leq C_{k} - D_{j} \qquad \forall i \in V 
+
+
 
 
 
