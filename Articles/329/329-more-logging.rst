@@ -5,39 +5,26 @@ Get More Log Information
    :description: This article explains how to increase the amount of log information.
    :keywords: log, troubleshoot
 
-After an incident is reported, as discussed in :doc:`log files can be analyzed<../313/313-get-log-files>`, more detailed logging may be needed to complete this analysis. 
-As a modeler, it may be more efficient to check if there is a clue on how to handle the incident by looking for relevant information in this additional logging information before explaining the incident to `AIMMS User Support <https://www.aimms.com/english/developers/support/report-issue/>`_ or on the `AIMMS Community <https://community.aimms.com/>`_.
+As a modeler, you can find :doc:`detailed logs <../313/313-get-log-files>` to analyze an issue before reporting it to `AIMMS User Support <https://www.aimms.com/english/developers/support/report-issue/>`_ or on the `AIMMS Community <https://community.aimms.com/>`_.
 
-To help diagnose an issue in the application by additional logging, AIMMS comes with so-called loggers, explained below. 
-This logging facility is somewhat similar to the `log4j <https://logging.apache.org/log4j/2.x/>`_ technology.
+AIMMS comes with loggers, a logging feature somewhat similar to the `log4j <https://logging.apache.org/log4j/2.x/>`_ technology.
 
-The tactic I follow as a modeler is to scan for ``[ERROR]`` or ``[WARN]`` in these log files. 
-When the message associated with such a line is related to the issue at hand; I check the lines just prior for a clue.
+A good tactic for analyzing these logs is to scan for ``[ERROR]`` or ``[WARN]``. 
+When an error or warning is related to the issue you are analyzing, check the lines just above it.
 
-A word of caution is necessary here. 
-The reverse of the above is not true; 
-an alarming message in the log files does not necessarily indicate a problem in the application. 
-For instance, 
 
-*   A version mismatch may just be an indication that renewed data needs to be copied from one software component to another.
-
-*   Connections are often maintained at several layers, potentially facilitating automatic recovery. 
-    When a connection fails at a lower level, this sounds alarming, 
-    but this may just be used as a signal to invoke a recovery at a higher level. 
-
-In short:
-
-.. warning:: The AIMMS log files are designed to be interpreted by AIMMS staff.
-             Please do not be alarmed if (parts of it) don't make sense.
+Note that the AIMMS log files are designed to be interpreted by AIMMS staff, and their meaning is not always obvious. However, an error or warning message itself does NOT necessarily indicate a problem in the application. 
 
 This article provides two files that are templates in creating this information:
 
-#.  ``LoggerConfig.xml`` This file configures how much output several loggers provide during an AIMMS session.
-    You can tailor it to write ``.xml`` or ``.txt`` output.
+*  ``LoggerConfig.xml`` This file configures how much output several loggers provide during an AIMMS session.
+    You can tailor it to write XML or TXT output.
 
-#.  ``RunWithExtraLogging.bat`` This is a small utility to start up AIMMS with ``LoggerConfig.xml`` activated.
+*  ``RunWithExtraLogging.bat`` This is a small utility to start up AIMMS with ``LoggerConfig.xml`` activated.
 
-These two files can be downloaded :download:`here <model.zip>` 
+These two files can be downloaded from the link below
+
+* :download:`model.zip <model.zip>` 
 
 Terminology
 -------------
@@ -45,8 +32,7 @@ Terminology
 #.  **Logger** A logger is a tracing facility built in a software component.
 
 #.  **Logger naming** A logger is usually named after the component in which it is built. 
-    When the main component has a sub-component, the tracing facility of the sub-component is usually named 
-    ``<main component>.<sub component>``. And so on recursively.
+    For sub-components, the tracing element is usually named ``<main component>.<sub component>`` and so on.
 
 #.  **Log level** Both a logger and a message have a level associated with it. 
     When the message level is equal to or greater than the level of the logger, it is written to file.
@@ -63,23 +49,19 @@ Terminology
 
     #.  *Error* Exceptions that should be handled, by a higher layer in the program, by the modeler, or by the user
     
-    Clearly: the lower the level of the logger, the higher the volume of output!
-    
-    .. note:: We caution you to not use the levels Trace and Debug unless instructed to do so by AIMMS Staff; 
-              not only do  these log levels generate a high volume of output and thereby degrade application performance, 
-              the actual output text generated typically only makes sense with knowledge of the implementation of the corresponding 
-              software component.
+ 
+    .. note:: Levels Trace and Debug can decrease application performance, and do not provide much use to the modeler. Therefore we don't recommend to enable them unless instructed by AIMMS Support.
 
-#.  **appender** There are two appenders available; one to generate ``.txt`` files and one to generate ``.xml`` files.
+#.  **Appender** There are two appenders available; one to generate TXT files and one to generate XML files.
     In the configuration file provided, they are both activated.
     In the next two sections, the corresponding output formats are discussed in more detail.
 
-Using a text editor to analyze ``.txt`` log files
+Using a text editor to analyze TXT log files
 ----------------------------------------------------
 
-Use your favorite text editor to open the log file ``log/aimms-log.txt``. 
-BTW, my favorite text editor is `notepad++ <https://notepad-plus-plus.org/>`_. 
-A couple of lines may look like this:
+Use a text editor to open the log file ``log/aimms-log.txt``. 
+
+Some example text:
 
 .. code-block:: none
     :linenos:
@@ -91,38 +73,25 @@ A couple of lines may look like this:
     
 Selected remarks:
 
-*   Line 1: I clearly made the mistake to reference the procedure ``guipro::progress::NextCheck`` outside the library ``AimmsProGUI``.
-    Don't worry, I got this as an error message in the AIMMS IDE as well ;-).
+*   Line 1: I referenced the procedure ``guipro::progress::NextCheck`` outside the library ``AimmsProGUI``.
+    This error message appeared in the AIMMS IDE as well.
 
-*   Lines 2-4 are obtained by setting the level of the logger ``AIMMS.Trace.Procedure`` to trace; 
-    and the pattern of the lines generated is visualized. 
-    This pattern is ``%d{yyyy-MM-dd HH:mm:ss,SSS} %t [%p] {%c} %m%n``.  
-    The components in this pattern are:
-    
-    *   ``%d`` The date up to millisecond precision
-
-    *   ``%t`` The number of the execution thread (hexadecimal)
-
-    *   ``%p`` The level of the message
-
-    *   ``%c`` The name of the logger
-
-    *   ``%m`` The message itself
-
-    *   ``%n`` A newline
-
+*   Lines 2-4 I have set the level of the logger ``AIMMS.Trace.Procedure`` to trace. 
+    You can see the message pattern ``Date{yyyy-MM-dd HH:mm:ss,SSS} ExecutionThread [MessageLevel] {Logger} Message``.  
+ 
  
 Using ``Log4View`` to analyze ``.xml`` log files
 -----------------------------------------------------
 
-``Log4View`` is a nifty utility to analyze ``.xml`` log files. It can be downloaded `here <https://www.log4view.com/download-en>`_.
-The community edition of ``Log4View`` is sufficient to analyze one ``.xml`` log file at a time.
+``Log4View`` is a utility to analyze XML log files available at `log4view.com <https://www.log4view.com/download-en>`_.
+The community edition of ``Log4View`` is sufficient to analyze one XML log file at a time.
+
+With the Log4View utility you can filter the output of selected loggers, as shown in the image below.
 
 .. image:: images/log4view.png
     :align: center
 
-With the utility `Log4View <https://www.log4view.com/>`_ you can filter away the output of selected loggers. 
-The screenshot shown above shows that the output of the logger ``AimmsSession`` is hidden, and the output of the logger ``CubeEngineLink`` is about to be hidden, by right-clicking on such a logger.
+
 
 
 About ``LoggerConfig.xml``
@@ -130,18 +99,18 @@ About ``LoggerConfig.xml``
 
 There are three sections in the file ``LoggerConfig.xml``
 
-#.  **Appenders** This section defines how and where the output can be sent to.
+*  **Appenders** This section defines how and where the output can be sent to.
     In practice, there are only two appenders used:
 
-    #.  *MyFileAppender* A text file appender, which sent output to the local file ``log/aimms-log.txt``.
+    *  *MyFileAppender* A text file appender, which sent output to the local file ``log/aimms-log.txt``.
 
-    #.  *MyXMLFileAppender* An XML text file appender, which sents its output to the file ``c:/temp/aimms-log.xml``
+    *  *MyXMLFileAppender* An XML text file appender, which sents its output to the file ``c:/temp/aimms-log.xml``
 
-#.  **loggers**
+*  **Loggers**
 
     There are various loggers, and each logger has its own default level.
 
-#.  **Final configuration**
+*  **Final configuration**
 
     This section is used to select the appenders to be used.  Normally, you'll just use one, and comment out the other.
 
@@ -149,7 +118,8 @@ About ``RunWithExtraLogging.bat``
 ---------------------------------
 
 To activate the ``LoggerConfig.xml`` the command line option ``--logcfg`` should be used. 
-A straightforward way to do this is to enter the entire command from the command prompt.
+You can enter the entire command from the command prompt.
+
 A batch file quickly becomes more convenient, if you do this more than once.  Consider the following .bat file:
 
 .. code-block:: winbatch
