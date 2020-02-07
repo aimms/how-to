@@ -1,0 +1,171 @@
+## ams_version=1.0
+
+LibraryModule TransportLibrary {
+    Prefix: pl;
+    Interface: Public_Section;
+    Section Public_Section {
+        Procedure pr_SolveTransportProblem {
+            Arguments: {
+                (s_locSources,s_locSinks,p_locSupply,p_locDemand,p_locTransportCost,p_locTotalTransportCost,
+                 p_locTransport)
+            }
+            Body: {
+                p_ActivateVariablesandConstraints := 1;
+                Empty s_libSources, s_libSinks;
+                
+                For i_locSo do
+                	SetElementAdd(s_libSources, ep_new1, i_locSo);
+                	ep_map1(ep_new1) := i_locSo;
+                EndFor;
+                p_libSupply(i_libSo) := p_locSupply( ep_map1(i_libSo));
+                
+                For i_locSi do
+                	SetElementAdd(s_libSinks, ep_new2, i_locSi);
+                	ep_map2(ep_new2) := i_locSi;
+                EndFor;
+                p_libDemand(i_libSi) := p_locDemand( ep_map2(i_libSi));
+                
+                p_libTransportCost(i_libSo,i_libSi) :=
+                	p_locTransportCost(ep_map1(i_libSo), ep_map2(i_libSi));
+                
+                pr_Solve;
+                
+                p_locTotalTransportCost := v_libTotalTransportCost;
+                p_locTransport(ep_map1(i_libSo), ep_map2(i_libSi)) 
+                	:= v_libTransport(i_libSo,i_libSi);
+                
+                
+                p_ActivateVariablesandConstraints := 0;
+            }
+            Set s_locSources {
+                Index: i_locSo;
+                Property: Input;
+            }
+            Set s_locSinks {
+                Index: i_locSi;
+                Property: Input;
+            }
+            Parameter p_locSupply {
+                IndexDomain: i_locSo;
+                Property: Input;
+            }
+            Parameter p_locDemand {
+                IndexDomain: i_locSi;
+                Property: Input;
+            }
+            Parameter p_locTransportCost {
+                IndexDomain: (i_locSo, i_locSi);
+                Property: Input;
+            }
+            Parameter p_locTotalTransportCost {
+                Property: Output;
+            }
+            Parameter p_locTransport {
+                IndexDomain: (i_locSo, i_locSi);
+                Property: Output;
+            }
+            ElementParameter ep_new1 {
+                Range: s_libSources;
+            }
+            ElementParameter ep_map1 {
+                IndexDomain: i_libSo;
+                Range: s_locSources;
+            }
+            ElementParameter ep_new2 {
+                Range: s_libSinks;
+            }
+            ElementParameter ep_map2 {
+                IndexDomain: i_libSi;
+                Range: s_locSinks;
+            }
+        }
+    }
+    Section Private_Section {
+        Set s_libSources {
+            Index: i_libSo;
+        }
+        Set s_libSinks {
+            Index: i_libSi;
+        }
+        Parameter p_libSupply {
+            IndexDomain: i_libSo;
+        }
+        Parameter p_libDemand {
+            IndexDomain: i_libSi;
+        }
+        Parameter p_libTransportCost {
+            IndexDomain: (i_libSo, i_libSi);
+        }
+        Variable v_libTotalTransportCost {
+            IndexDomain: | p_ActivateVariablesandConstraints;
+            Range: free;
+            Definition: sum[(i_libSo,i_libSi), v_libTransport(i_libSo,i_libSi) * p_libTransportCost(i_libSo,i_libSi) ];
+        }
+        Variable v_libTransport {
+            IndexDomain: (i_libSo, i_libSi) | p_ActivateVariablesandConstraints;
+            Range: nonnegative;
+        }
+        Constraint c_SupplyRestriction {
+            IndexDomain: i_libSo | p_ActivateVariablesandConstraints;
+            Definition: sum[i_libSi, v_libTransport(i_libSo, i_libSi)] <= p_libSupply(i_libSo);
+        }
+        Constraint c_DemandRequirement {
+            IndexDomain: i_libSi | p_ActivateVariablesandConstraints;
+            Definition: sum[i_libSo, v_libTransport(i_libSo,i_libSi)] >= p_libDemand(i_libSi);
+        }
+        Set s_TransportConstraints {
+            SubsetOf: AllConstraints;
+            Definition: Allconstraints * Private_Section;
+        }
+        Set s_TransportVariables {
+            SubsetOf: AllVariables;
+            Definition: AllVariables * Private_Section;
+        }
+        MathematicalProgram mp_LeastCostTransportPlan {
+            Objective: v_libTotalTransportCost;
+            Direction: minimize;
+            Constraints: s_TransportConstraints;
+            Variables: s_TransportVariables;
+            Type: Automatic;
+        }
+        Parameter p_ActivateVariablesandConstraints {
+            Range: binary;
+            InitialData: 0;
+        }
+        Procedure pr_Solve {
+            Body: {
+                solve mp_LeastCostTransportPlan;
+            }
+        }
+    }
+    Procedure LibraryInitialization {
+        Comment: "Add initialization statements here that do not require any other library being initialized already.";
+    }
+    Procedure PostLibraryInitialization {
+        Comment: {
+            "Add initialization statements here that require another library to be initialized already,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure PreLibraryTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all other libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure LibraryTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require other libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}
