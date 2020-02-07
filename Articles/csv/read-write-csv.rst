@@ -95,7 +95,28 @@ The AIMMS set ``dl::DataTables`` contains a list of these table names. For insta
 
         dl::DataTables += {'fourRows'} ; ! komma/fourRows.csv is the file we will read from.
 
-
+.. note::
+    
+    You may also dynamically update this file name by declaring a local set, and filling it through the same procedure
+    
+    .. code-block:: aimms
+        
+        SetElementAdd(S_datatable, EP_datatable, SP_filename);
+        dl::DataTables += S_datatable ; 
+    
+    Knowing that
+    
+    .. code-block:: aimms
+    
+        Set S_datatable {
+            SubsetOf: dl::DataTables;
+            Parameter: EP_datatable;
+        }
+        
+        StringParameter SP_filename;
+        
+        
+        
 Provide the mapping (line 3 to 8)
 ++++++++++++++++++++++++++++++++++++++++++++
 
@@ -177,7 +198,8 @@ The following example should be self-explanatory.
 
     .. code-block:: aimms
 
-        dl::DataRead("semi",                  ! reading from data source "semi" - because we use CSVProvider this data source is a folder.
+        dl::DataRead("semi",                  ! reading from data source "semi" - because we use CSVProvider this data source is a folder 
+                                              ! data source "semi" path is relative to the project folder
                 "TheMapping" ,                ! using relation "TheMapping" between folder "semi" and AIMMS identifiers.
                 spCommunicationAttributes);   ! Technicalities on how to communicate.
 

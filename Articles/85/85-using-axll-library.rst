@@ -5,7 +5,7 @@
 
 .. CONTENT
 
-Overview: AIMMS Excel Library
+AIMMS Excel Library - AXLL
 ==============================
 
 .. meta::
@@ -15,105 +15,159 @@ Overview: AIMMS Excel Library
 
 .. Overview
 
-The AimmsXLLibrary can communicate with Excel files in server environments where Excel is not installed.
+The AimmsXLLibrary can communicate with Excel files in server environments where Excel is not installed. This is particularly useful when you deploy applications on AIMMS PRO which is typically installed on a machine with no Office / Excel instance. 
 
-This library is especially useful when building WebUI apps for AIMMS PRO in a server environment.
-
-The procedure follows the basic workflow illustrated below.
+The workflow for integrating external Excel files with your AIMMS model is illustrated below. 
 
 |axll-workflow|
 
+The AimmsXLLibrary is a collection of functions to do this and more. It is provided as a system library and you can add it to your project from the library manager, as detailed in :doc:`../84/84-using-libraries`
+
+You can read/write data both in tabular (a list or composite table) or matrix formats. Matrix formats are particularly popular when solving network problems because you need the distances between each nodes in your network and this is typically represented in the form of a distance matrix. 
+
+The functions in this library can be accessed by their prefix, ``AXLL::`` which displays a list of available functions. Documentation of an individual function can be accessed by `Right click -> Attributes`. The comments for that function explain each attribute. 
+
+.. image:: images/axll-docs.png
+    :align: center
+
+Opening/closing files
+------------------------
+
+When using the ``AXLL`` functions, the Excel file will be loaded into memory. This loading will happen in the background and you will not see any file opened on your computer, as this library works without using an Excel installation. 
+
+To open an Excel file or load it into memory::
+
+    axll::OpenWorkBook(WorkbookFilename : "filename.xlsx" );
+
+To close an Excel file or to remove it from memory::
+
+    axll::CloseWorkBook(WorkbookFilename : "filename.xlsx" );
+
+A call to the function ``axll::OpenWorkBook`` will raise an error if that file was already opened before. So, checking if the file is already open or closing it before opening is recommended. There are three options for you to choose from:
+
+.. code-block:: aimms
+    
+    if not axll::WorkBookIsOpen(WorkbookFilename : "filename.xlsx" ) then
+	    axll::OpenWorkBook(WorkbookFilename : "filename.xlsx" );
+    endif;
+
+.. code-block:: aimms
+
+    axll::CloseWorkBook(WorkbookFilename : "filename.xlsx");
+    axll::OpenWorkBook(WorkbookFilename : "filename.xlsx" );
+
+.. code-block:: aimms
+
+    axll::CloseAllWorkbooks;
+    axll::OpenWorkBook(WorkbookFilename : "filename.xlsx" );
+
+Instead of typing the string "filename.xlsx" multiple times, we recommend you use a string parameter to store the file name and use that string parameter in all calls to ``AXLL`` functions. This also lets you use the auto-complete feature of AIMMS, making it easier to write long and complex data import/export procedures::
+
+    spFileName := "filename.xlsx"
+
+    axll::CloseAllWorkbooks;
+    axll::OpenWorkBook(WorkbookFilename : spFileName );
+
+After opening a file, you must select the sheet your data is in before you can read them in::
+
+    axll::SelectSheet(SheetName : "SheetName" );
+
+Reading data
+-----------------
+
+Many functions are available to read different kinds of data from an Excel file. Most commonly used are:
+
+#. ``axll::ReadSet``: Read in data to a set. Data in Excel is in a single column or a single row::
+    
+    axll::ReadSet(
+            SetReference              : sSetinAIMMS , 
+            SetRange                  : "A2:A33" , 
+            ExtendSuperSets           :  1, 
+            MergeWithExistingElements :  0, 
+            SkipEmptyCells            :  0);
+#. ``axll::ReadList``: Read in data to an indexed parameter. Data in Excel must be in a list / composite table format::
+
+    axll::ReadList(
+            IdentifierReference    : paraminAIMMS , 
+            RowHeaderRange         : "A2:A33" , 
+            DataRange              : "D2:D33" , 
+            ModeForUnknownElements :  0, 
+            MergeWithExistingData  :  0);
+
+#. ``axll::ReadTable``: Read in data to an indexed parameter (with 2+ indices in the index domain). Data in Excel must be in a matrix format::
+
+    axll::ReadTable(
+	    IdentifierReference    :  multidimParamInAIMMS , 
+	    RowHeaderRange         : "A2:A33" , 
+	    ColumnHeaderRange      : "B1:AG1" , 
+	    DataRange              : "B2:AG33", 
+	    ModeForUnknownElements :  0, 
+	    MergeWithExistingData  :  0);
+
+#. ``axll::ReadSingleValue``: Read in data to a scalar parameter. Data in Excel is in a single cell::
+
+    axll::ReadSingleValue(
+	    ScalarReference : scalarParaminAIMMS , 
+	    Cell            : "A1" );
+
+By setting a different value for the `ModeForUnknownElements` argument of ``ReadList or ReadTable``, you can skip the call to ``ReadSet``. 
+
 .. note::
 
-    Functions included with the AXLL library have a prefix ``axll``.
+    The `IdentifierReference` in ``ReadTable`` must be an AIMMS identifier with 2+ (at least 2) indices in its index domain.
 
-Importing data from Excel files
--------------------------------
+Writing data
+-----------------------
 
-.. Procedure
+Similar to reading data, many functions are available to write out data to Excel files. Commonly used are:
 
-1. **Add the AIMMSXLLibrary Library.**
+#. ``axll::WriteSet``: Writes out the contents of a set to a single column/row::
 
-    Go to *File > Library manager*.
+    axll::WriteSet(
+	    SetReference       : sSetinAIMMS , 
+	    SetRange           : "A2:A33" , 
+	    AllowRangeOverflow :  0);
 
-    Click *Add System library...* and select *AIMMSXLLibrary*. Click *OK*.
+#. ``axll::WriteCompositeTable``: Writes out an indexed identifier in the composite table format, very convenient to use::
 
-2. **Create a procedure.**
+    axll::WriteCompositeTable(
+	    IdentifierReference : multidimParamInAIMMS , 
+	    TopLeftCell         : "A1" , 
+	    WriteZeros          :  0, 
+	    WriteIndexNames     :  1);
 
-    Create a procedure to import data from the Excel document. For example, ``ReadData``.
+#. ``axll::WriteTable``: Writes out an indexed identifier in the matrix format, more options to control::
 
-    a. **Open the Excel file:**
+    axll::WriteTable(
+            IdentifierReference     : multidimParamInAIMMS,
+            RowHeaderRange          : "A2:A33",
+            ColumnHeaderRange       : "B1:AZ1",
+            DataRange               : "",
+            AllowRangeOverflow      : 1,
+            WriteZeros              : 1,
+            IncludeEmptyRows        : 0,
+            IncludeEmptyColumns     : 0,
+            IncludeEmptyRowsColumns : 0);
 
-        Use ``axll::OpenWorkBook`` to open your workbook. 
+#. ``axll::WriteSingleValue``: Writes out a scalar identifier to a single cell in Excel::
 
-        *Tip:* If you send a command to open a workbook which is already open, AIMMS raises an error. You can use an ``IF`` block to check whether a workbook is open or not, and open if it is closed or otherwise select the open workbook.
+    axll::WriteSingleValue(
+	    ScalarReference : scalarParaminAIMMS , 
+	    Cell            : "A1" );
 
-        .. code-block:: aimms
+There is no ``axll::WriteList`` but a one-dimensional identifier with ``WriteCompositeTable`` will you give the same result. An alternative is to use ``WriteSet`` and ``FillList``. 
 
-                WorkBookName := "zipcode-database.xlsx";
-                if axll::WorkBookIsOpen(WorkBookName) then
-                    axll::SelectWorkBook(WorkBookName);
-                else
-                    axll::OpenWorkBook(WorkBookName);
-                endif;
-        
-    b. **Specify a sheet of the workbook.**
+.. note:: 
 
-            Use ``axll::SelectSheet`` to specify which sheet of the workbook to pull data from.
+    `IdentifierReference` in ``WriteTable`` must be a 2+ dimensional identifier but for ``WriteCompositeTable``, 1+ is sufficient. 
 
-            .. code-block:: aimms
+Example 
+-------------
 
-                sp_Sheet := "Example";
-                axll::SelectSheet(SheetName : sp_Sheet );
+An example project which uses most of the functions described above is included below. 
 
-    c. **Import data from the Excel file to your AIMMS project.**
+:download:`Download exampleNFL.zip <exampleNFL.zip>`
 
-            Use the appropriate ``axll::`` function to read data from the Excel sheet.
-
-            The ReadTable statement will be:
-
-            .. code-block:: aimms
-
-                axll::ReadTable(
-                    IdentifierReference :  MyValue,
-                    RowHeaderRange      :  "A8:D18",
-                    ColumnHeaderRange   :  "E4:K7",
-                    DataRange           :  "E8:K18");
-
-            Use ``axll::ReadSet`` to read in data for the set ``sStates``.
-
-            .. code-block:: aimms
-
-                axll::ReadSet(
-                    SetReference    :  sStates,
-                    SetRange        :  "D2:D42523",
-                    ExtendSuperSets :  1);
-
-            Use ``axll::ReadList`` to read in data ``ZipCodeState(z)``, which holds the state name that each zip code belongs to.
-
-            .. code-block:: aimms
-
-                axll::ReadList(
-                    IdentifierReference :  ZipCodeState(z),
-                    RowHeaderRange      :  "A2:A42523",
-                    DataRange           :  "D2:D42523");
-
-    d. **Close the Excel file.**
-
-        Use ``axll::CloseWorkBook`` to close the workbook. ::
-
-            axll::CloseWorkBook(WorkBookName);
-
-3. **Run the procedure.**
-
-    Run the procedure to import the data to your model. You can use the imported data for further operations and analysis.
-
-
-.. Example
-
-.. For a practical example, read **AIMMS Tech Blog:** `How to use the AIMMS Excel Library <https://techblog.aimms.com/2016/06/07/how-to-use-the-aimms-excel-library/>`_
-
-.. END CONTENT
-
+See procedures ``prReadFromExcel`` and ``prWriteToExcel``. 
 
 

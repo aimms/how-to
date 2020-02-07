@@ -1,0 +1,62 @@
+## ams_version=1.0
+
+Model Main_databaseConnection {
+    Set ID {
+        Index: i;
+    }
+    StringParameter SP_ArtistName {
+        IndexDomain: i;
+    }
+    DatabaseTable DB_Artists {
+        DataSource: {
+            "DRIVER=SQLite3 ODBC Driver;Database=chinook.db;"
+        }
+        TableName: "artists";
+        Mapping: {
+            "ArtistId" -->i,                          ! always map a primary key with an index from a set! AIMMS assumes you do so, and you may run in trouble if not
+            "Name"     -->SP_ArtistName( i )
+        }
+        Comment: {
+            "Datasource : Build the connection string looking at https://www.connectionstrings.com/sqlite3-odbc-driver/
+            	     Or using https://documentation.aimms.com/functionreference/data-management/database-functions/sqlcreateconnectionstring.html"
+        }
+    }
+    Procedure ReadFromDatabase {
+        Body: {
+            read from table DB_Artists;
+        }
+    }
+    Section Predeclared_Procedures {
+        Procedure MainInitialization {
+            Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+        }
+        Procedure PostMainInitialization {
+            Comment: {
+                "Add initialization statements here that require that the libraries are already initialized properly,
+                or add statements that require the Data Management module to be initialized."
+            }
+        }
+        Procedure MainExecution;
+        Procedure PreMainTermination {
+            Body: {
+                return DataManagementExit();
+            }
+            Comment: {
+                "Add termination statements here that require all libraries to be still alive.
+                Return 1 if you allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence."
+            }
+        }
+        Procedure MainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that do not require all libraries to be still alive.
+                Return 1 to allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence.
+                It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+            }
+        }
+    }
+}
