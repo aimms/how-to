@@ -12,7 +12,7 @@ This article explains how we can bring these two abstraction mechanisms together
 
 The Transport Problem searches for the best way to transport goods from a couple of sources to sinks. 
 
-.. image:: images/TransportProblem.png
+.. image:: Images/TransportProblem.png
    :scale: 50 %
 
 
@@ -39,7 +39,7 @@ We'll use the procedure ``pr_SolveTransportProblem`` to complete the transfer in
 1. Provide data from ``Main Transport`` to the procedure ``pr_SolveTransportProblem`` inside the library.
 2. Transfer data from ``pr_SolveTransportProblem`` to the global ``Declaration`` of the ``Transport Library``.
 
-.. image:: images/data.png
+.. image:: Images/data.png
    :scale: 50 %
 
 
@@ -51,7 +51,7 @@ Step 1
 Firstly, the procedure ``pr_SolveTransportProblem`` should contain local arguments. They can be added by pressing the wizard next to arguments. It is important to select the correct type and property of the arguments. 
 (also something about index)
 
-.. image:: images/Arguments.png
+.. image:: Images/Arguments.png
 	:align: center
 	:scale: 60%
 
