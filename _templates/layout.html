@@ -1,4 +1,18 @@
-{# Import the theme's layout. #} {% extends "!layout.html" %} {% block document %} {{ super() }} {% if (("index" in pagename) or ("ContentIndex" in pagename) or ("search" in pagename)) %} {# Do nothing :) I don't know how to do the negation properly in
+{# Import the theme's layout. #} {% extends "!layout.html" %} 
+
+{% block extrahead %}
+<!-- Algolia's docsearch stylesheet -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+<style>
+/*---------- Algolia search ----------*/
+/*In order to have the search widget on top of the content */
+.wy-nav-side { overflow: visible; }
+.wy-side-scroll { overflow: inherit; }
+.ds-input {vertical-align: inherit!important;}
+</style>
+{% endblock %}
+
+{% block document %} {{ super() }} {% if (("index" in pagename) or ("ContentIndex" in pagename) or ("search" in pagename)) %} {# Do nothing :) I don't know how to do the negation properly in
 Jinja #} {% else %} {% if Display_3rd_Party_Extensions %}
 <br>
 <h3 style="display: inline; margin-right: 20px;">Was this helpful?</h3>
@@ -43,7 +57,11 @@ Jinja #} {% else %} {% if Display_3rd_Party_Extensions %}
         apiKey: '0fc935020f8088e762190434cffaee41',
         indexName: 'aimms_how-to',
         inputSelector: '#rtd-search-form input[type=text]',
-        debug: true // Set debug to true if you want to inspect the dropdown
+        debug: true, // Set debug to true if you want to inspect the dropdown
+        algoliaOptions: {
+          hitsPerPage: 10,
+          // See https://www.algolia.com/doc/api-reference/api-parameters/
+        },
     });
 </script>
 <!-- Algolia docsearch END -->

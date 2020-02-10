@@ -123,7 +123,7 @@ A connection string is an AIMMS string parameter |sp| that you could fill out 
 * Create an AIMMS string parameter |sp| named '*ConnectionString*' .
 * Check, Commit and Close.
 * Create a new procedure |proc|  named '*WriteTheConnectionString*' (the name is not important)
-* Double click on procedure's icon and write the following code in its body field:
+* Double click on procedure's name and write the following code in its body field:
 
 .. code-block:: aimms
 

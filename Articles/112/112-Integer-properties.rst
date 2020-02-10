@@ -24,14 +24,14 @@ Consider the below subset of Integers::
 
     Set subSetIntegers { 
        SubsetOf: Integers; 
-       Parameter: P_anInteger; 
+       Parameter: EP_anInteger; 
        InitialData: data { 0, 1, 4, 7, 8 }; 
     } 
 
 And these two statements::
 
-    P_anInteger := 1; 
-    P_anInteger := P_anInteger + 3; 
+    EP_anInteger := 1; 
+    EP_anInteger := EP_anInteger + 3; 
 
 Should the final value of ``P_anInteger`` be 4 or 8 ? 
 
@@ -45,10 +45,10 @@ Another example
 
 In the past, AIMMS has tried to be smart in these situations and applied either the lead or the numerical plus depending on the context of the expression in which the + operator appeared. Now look at these two statements::
 
-    P_anInteger := 0;
-    if P_anInteger then DialogMessage("It is true!") endif;
+    EP_anInteger := 0;
+    if EP_anInteger then DialogMessage("It is true!") endif;
 
-Will the dialog *It is true!* be shown or not? Again, if we refer to the Language Reference,  it states that the logical value of an element parameter is true if it is not empty. That is, if its current value is not the empty element.  Here ``P_anInteger``  has the value ``0``, so it should be true and the dialog is shown. But, I think that many of us would have expected that the dialog would not be shown in this situation.
+Will the dialog *It is true!* be shown or not? Again, the Language Reference states that the logical value of an element parameter is true if it is not empty. That is, if its current value is not the empty element.  Here ``EP_anInteger``  has the value ``0``, so it should be true and the dialog is shown. But, I think that many of us would have expected that the dialog would not be shown in this situation.
  
 Elements are Numeric or Labels
 ------------------------------------------------------------
@@ -91,7 +91,6 @@ If neither of the two properties are set, then you will get a warning whenever t
 
 * `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_
 
- 
 
 
 
