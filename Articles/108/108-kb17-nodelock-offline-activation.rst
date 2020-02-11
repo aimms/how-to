@@ -5,6 +5,9 @@ When AIMMS cannot make a connection to the internet license server to activate a
 
 To complete offline nodelock activation, follow these steps:
 
+Create request file
+-------------------
+
 1. Start AIMMS, go to License Configuration, and click *Install License*. This will give you the following screen:
 
 .. image:: images/Install_AIMMS_License.png
@@ -12,8 +15,8 @@ To complete offline nodelock activation, follow these steps:
 Select *Install a Single User AIMMS license* and click *Next*
 
 
-
 2.  Enter the license number and click *Next*. 
+
 .. image:: images/License_Number.png
 
 In case AIMMS cannot determine that the license number you entered is a nodelock license, you will get an option  to choose between the protection of the license: nodelock or USB dongle. Select *nodelock*. 
@@ -22,7 +25,7 @@ In case AIMMS cannot determine that the license number you entered is a nodelock
 
 .. image:: images/Activation_Code.png
 
-4. Choose the *Machine Nodelock* optionand click *Next*. 
+4. Choose the *Machine Nodelock* option and click *Next*. 
 
 .. image:: images/Nodelock_Protection.png
 
@@ -34,9 +37,12 @@ and click *Browse* to select a location to save the license request file. Then c
 
 .. image:: images/Pending_Activation_Request.png
 
-Remember where you save it, you will need it again!
+*Remember where you save the file, you will need it again!*
 
 AIMMS generates a license request file to the specified location. Click *Finish*. 
+
+Create response file
+-----------------------
 
 6. Open a web browser and go the `offline activation address <https://www.aimms.com/english/developers/licensing/processing-request-files/>`_. 
 
@@ -51,6 +57,9 @@ Please note that you can also download the generated response file from the webs
 .. image:: images/License_Requests.png
 
 The response file is downloaded automatically, and sent to the email address you provided. 
+
+Upload response file
+-----------------------
 
 7. Start AIMMS again and go to *License configuration*.
 
