@@ -53,19 +53,7 @@ The input argument ``s_Formulations`` should contain the name(s) of the formulat
 - **Explicit Dantzig-Fulkerson-Johnson**
 - **Explicit Miller-Tucker-Zemlin**
 
-Both of them are different ways to formulate subtour elimination constraints. 
 
-The **Explicit Dantzig-Fulkerson-Johnson** formulation is based on the idea that the amount of edges in any subset must be lower than the amount of nodes in that subset. Otherwise it would make a subtour. If ``V`` is the set of all costumers, the formulation is:
-
-.. math:: \sum_{i,j \in S}{x_{ijk}} \leq |S|-1 \qquad (S \subset V, 2 \leq |S| \leq n - 2)
-
-
-
-The **Explicit Miller-Tucker-Zemlin** formulation uses variable :math:`u_{ik}` to determine the order in which nodes are being visited. Every time a new city is visited, the value of :math:`u_{ik}` for that city must be greater than for the previous city. This way it is not possible to return to a city that has already been visited, as it already has a lower value for :math:`u_{ik}`. If :math:`D_{j}` is the demand of the costumers, and :math:`C_{k}` the capacity of the vehicles, the formulation is:
-
-
-.. math:: u_{jk} - u_{ik}  \geq D_{j} - C_{k} (1-x_{ijk}) \qquad \forall (i,j) \in V, i \neq j \quad s.t. \enspace D_{i} + D_{j} \leq C_{k} 
-.. math:: 0 \leq u_{jk} \leq C_{k} - D_{j} \qquad \forall i \in V 
 
 
 
