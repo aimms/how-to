@@ -57,6 +57,4 @@ The input argument ``s_Formulations`` should contain the name(s) of the formulat
 
 
 
-
-
 		
