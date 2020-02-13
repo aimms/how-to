@@ -30,7 +30,6 @@ Learn how to convert business opportunities into optimization models. This secti
    /Articles/199/199-model-rounded-variable
    /Articles/108/108-kb04-infeasible-model
    /Articles/108/108-kb07-speed-up-mip-solve
-   /Articles/108/108-kb10-simple-set-compound-set-relation
    /Articles/108/108-kb11-mip-initial-solution
 
  
