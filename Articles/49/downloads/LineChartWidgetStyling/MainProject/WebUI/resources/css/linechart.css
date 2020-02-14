@@ -1,0 +1,49 @@
+.tag-linechart[data-widget\.uri="Linechart_HomeAway_IdentifierStyling"] path.annotation-p_HomeSum{
+        stroke: blue;
+}
+
+.tag-linechart[data-widget\.uri="Linechart_HomeAway_IdentifierStyling"] circle.annotation-p_HomeSum{
+        stroke: blue;
+        fill: blue;
+}
+
+.tag-linechart[data-widget\.uri="Linechart_HomeAway_IdentifierStyling"] path.annotation-p_AwaySum{
+        stroke: green;
+}
+
+.tag-linechart[data-widget\.uri="Linechart_HomeAway_IdentifierStyling"] circle.annotation-p_AwaySum{
+        stroke: green;
+        fill: green;
+}
+
+/******************************************************************************************************/
+
+.tag-linechart[data-widget\.uri="Linechart_HomeAway_ElementStyling"] path.annotation-p_HomeSum{
+        stroke: blue;
+}
+
+.tag-linechart[data-widget\.uri="Linechart_HomeAway_ElementStyling"] circle.annotation-p_HomeSum{
+        stroke: blue;
+        fill: blue;
+}
+
+.tag-linechart[data-widget\.uri="Linechart_HomeAway_ElementStyling"] path.annotation-p_AwaySum{
+        stroke: green;
+}
+
+.tag-linechart[data-widget\.uri="Linechart_HomeAway_ElementStyling"] circle.annotation-p_AwaySum{
+        stroke: green;
+        fill: green;
+}
+
+.tag-linechart[data-widget\.uri="Linechart_HomeAway_ElementStyling"] circle.annotation-p_HomeSum.annotation-SignificantDiff{
+        stroke: red;
+        fill: red;
+}
+
+.tag-linechart[data-widget\.uri="Linechart_HomeAway_ElementStyling"] circle.annotation-p_AwaySum.annotation-SignificantDiff{
+        stroke: red;
+        fill: red;
+}
+
+ 
