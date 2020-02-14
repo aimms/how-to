@@ -1,0 +1,120 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "LineCharts",
+                "slug": "linecharts_1",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/linecharts_1": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Linechart_HomeAway_NoStyling",
+          "layoutInfo": {
+            "width": "6",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "Linechart_HomeAway_IdentifierStyling",
+          "layoutInfo": {
+            "width": "6",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "Linechart_HomeAway_ElementStyling",
+          "layoutInfo": {
+            "width": "6",
+            "height": "2"
+          }
+        }
+      ]
+    },
+    "aimms.widget.type": {
+      "literal": "page"
+    }
+  },
+  "widgets/Linechart_HomeAway_ElementStyling": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_HomeSum",
+          "p_AwaySum"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "linechart"
+    },
+    "title": {
+      "literal": "Linechart Home and Away - Significant differences marked in red"
+    }
+  },
+  "widgets/Linechart_HomeAway_IdentifierStyling": {
+    "aimms.widget.type": {
+      "literal": "linechart"
+    },
+    "title": {
+      "literal": "Linechart Home (blue) an Away (green) - Identifier based Styling"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_HomeSum",
+          "p_AwaySum"
+        ]
+      }
+    }
+  },
+  "widgets/Linechart_HomeAway_NoStyling": {
+    "aimms.widget.type": {
+      "literal": "linechart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_HomeSum",
+          "p_AwaySum"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_Season"
+        ],
+        "stacked": [],
+        "overlays": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "title": {
+      "literal": "Linechart Home and Away - No CSS Styling"
+    }
+  }
+}
