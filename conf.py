@@ -162,6 +162,7 @@ html_theme_options = {
     'algolia_appid': 'BH4D9OD16A',
     'algolia_appkey': '0fc935020f8088e762190434cffaee41',
     'algolia_indexname':'aimms_how-to',
+    'algolia_hitsperpage': 10,
 
  }
 
