@@ -24,3 +24,5 @@ These topics cover connecting various other types of functions to your AIMMS pro
    /Articles/283/283-convert-json-to-xml
    /Articles/277/277-aimms-with-gurobi
    /Articles/334/334-data-optimization-libraries
+   /Articles/108/108-kb14-call-to-from-aimms
+

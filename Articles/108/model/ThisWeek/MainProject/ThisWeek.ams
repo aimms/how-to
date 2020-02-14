@@ -1,0 +1,71 @@
+## ams_version=1.0
+
+Model Main_ThisWeek {
+    Set s_WeatherTypes {
+        Index: i_WeatherType;
+        Parameter: ep_WeatherType;
+        Definition: data { Rainy, Cloudy, Sunny };
+    }
+    Set s_DryWeatherTypes {
+        SubsetOf: s_WeatherTypes;
+        Index: i_DryWeatherType;
+        Parameter: ep_DryWeatherType;
+        Definition: data { Cloudy, Sunny };
+    }
+    Quantity SI_Time_Duration {
+        BaseUnit: day;
+        Conversions: s->day : #-># / 86400;
+        Comment: "Expresses the value for the duration of periods.";
+    }
+    Calendar cal_ThisWeek {
+        Index: i_dayThisWeek;
+        Parameter: ep_dayThisWeek;
+        Unit: day;
+        BeginDate: "2020-02-17";
+        EndDate: "2020-02-23";
+        TimeslotFormat: "%c%y-%m-%d";
+    }
+    Set s_ThisWeeksWeather {
+        SubsetOf: (cal_ThisWeek,s_WeatherTypes);
+        Definition: {
+            data 
+            { ( 2020-02-17, Cloudy ), ( 2020-02-18, Sunny  ), ( 2020-02-19, Cloudy ), ( 2020-02-20, Sunny  ), ( 2020-02-21, Rainy  ),
+              ( 2020-02-22, Rainy  ), ( 2020-02-23, Rainy  ) }
+        }
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            display s_WeatherTypes, cal_ThisWeek;
+        }
+    }
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}
