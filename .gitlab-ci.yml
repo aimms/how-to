@@ -8,7 +8,6 @@ build_and_install:
   stage: build
   script:
     - sphinx-build -M html . _build 
-    - sudo python -msphinx.ext.intersphinx _build/html/objects.inv > _build/html/help_index.txt
     - rsync -rt _build/html/ support@data.aimms.com:/home/aimms/www/how-to.aimms.com
   tags: 
     - ubuntu
