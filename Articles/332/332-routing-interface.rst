@@ -4,6 +4,8 @@ Using the Routing Library
 A **Capacitated Vehicle Routing Problem** (CVRP) deals with the following problem: A set is given with a depot and multiple costumers. The distances between those locations are known. A number of vehicles is available to serve the costumers. All costumers have a certain demand and the vehicles have a maximum capacity. The shortest route for the vehicles must be found for which all costumers get their demand. The vehicles all start and end at the depot. 
 
 .. image:: images/CVRP.png
+   :scale: 35%
+   :align: center
 
 This CVRP Library (link to the library) can be added to any model to solve this problem. This article explains how to use the library.
 
@@ -48,10 +50,11 @@ Output Arguments      Type                Index  Index Domain
 
 Formulations
 ------------
-The input argument ``s_Formulations`` should contain the name(s) of the formulation(s) you want to use to solve the problem. So far there are two options:
+The input argument ``s_Formulations`` should contain the name(s) of the formulation(s) you want to use to solve the problem. So far there are three options:
 
 - **Explicit Dantzig-Fulkerson-Johnson**
 - **Explicit Miller-Tucker-Zemlin**
+- **Implicit Dantzig-Fulkerson-Johnson**
 
 
 
