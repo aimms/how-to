@@ -47,14 +47,16 @@ Output Arguments      Type                Index  Index Domain
 
 ``p_TotalDistance`` is the total distance of the shortest route. ``bp_x`` is a binary variable with a value of ``1`` if the road from ``i`` to ``j`` is in the shortest route and is driven by vehicle ``k``.
 
+-> hier bound als extra output argument zodra Chris heeft gecheckt of ik dat goed heb gedaan.
 
 Formulations
 ------------
-The input argument ``s_Formulations`` should contain the name(s) of the formulation(s) you want to use to solve the problem. So far there are three options:
+The input argument ``s_Formulations`` should contain the name(s) of the formulation(s) you want to use to solve the problem. So far there are four options:
 
 - **Explicit Dantzig-Fulkerson-Johnson**
 - **Explicit Miller-Tucker-Zemlin**
 - **Implicit Dantzig-Fulkerson-Johnson**
+- **Time Windows**
 
 
 
