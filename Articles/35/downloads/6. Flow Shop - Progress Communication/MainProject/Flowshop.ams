@@ -302,8 +302,8 @@ Model Main_Flow_Shop {
     Section MainModelProcedures {
         Procedure MainInitialization {
             Body: {
-                p_MaxJobs 	:= 20;
-                p_MaxMachines 	:= 30;
+                p_MaxJobs 	:= 7;
+                p_MaxMachines 	:= 12;
                 
                 pr_GenerateData;
             }

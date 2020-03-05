@@ -23,40 +23,11 @@ Model Main_Flow_Shop {
                     	('1','displaytext'): "Solve" ,             ! (Optional) The text/label you would like to give the action.
                     	('1','icon'       ): "aimms-hammer",       ! (Optional) The icon you want to display for the respective action.
                     	('1','procedure'  ): "pr_Solve",           ! (Optional) The procedure you want to call when the respective action is clicked.
-                    	('1','state'      ): if ( not p01_ResultsAvailable ) and ( not p01_SolveInterruptable ) then "Active" else "InActive" endif,
+                    	('1','state'      ): if ( not p01_ResultsAvailable ) and ( not p01_SolveInterruptable ) then "Active" else "InActive" endif
                     	                                           ! (Optional) Active (displayed and clickable), 
                     	                                           !            Inactive (displayed and not clickable), and 
                     	                                           !            Hidden (not displayed). 
                     	                                           !            By default, the state is Hidden.
-                    
-                    	('2','displaytext'): "Load results"   ,    ! (Optional) The text/label you would like to give the action.
-                    	('2','icon'       ): "aimms-download9",    ! (Optional) The icon you want to display for the respective action.
-                    	('2','procedure'  ): "pr_LoadResults" ,    ! (Optional) The procedure you want to call when the respective action is clicked.
-                    	('2','state'      ): "Hidden", ! if p01_ResultsAvailable then "Active" else "InActive" endif,
-                    	                                           ! (Optional) Active (displayed and clickable), 
-                    	                                           !            Inactive (displayed and not clickable), and 
-                    	                                           !            Hidden (not displayed). 
-                    	                                           !            By default, the state is Hidden.
-                    
-                    	('3','displaytext'): "Interrupt"         , ! (Optional) The text/label you would like to give the action.
-                    	('3','icon'       ): "aimms-bow"         , ! (Optional) The icon you want to display for the respective action.
-                    	('3','procedure'  ): "pr_InterruptSolve" , ! (Optional) The procedure you want to call when the respective action is clicked.
-                    	('3','state'      ): "Hidden", ! if p01_SolveInterruptable then "Active" else "InActive" endif 
-                    	                                           ! (Optional) Active (displayed and clickable), 
-                    	                                           !            Inactive (displayed and not clickable), and 
-                    	                                           !            Hidden (not displayed). 
-                    	                                           !            By default, the state is Hidden.
-                    
-                    
-                    	('4','displaytext'): sp_TitleToggleButton, ! (Optional) The text/label you would like to give the action.
-                    	('4','icon'       ): "aimms-bullhorn"    , ! (Optional) The icon you want to display for the respective action.
-                    	('4','procedure'  ): "pr_ToggleProgress" , ! (Optional) The procedure you want to call when the respective action is clicked.
-                    	('4','state'      ): "Hidden" ! if p01_SolveInterruptable then "Active" else "InActive" endif
-                    	                                           ! (Optional) Active (displayed and clickable), 
-                    	                                           !            Inactive (displayed and not clickable), and 
-                    	                                           !            Hidden (not displayed). 
-                    	                                           !            By default, the state is Hidden.
-                    
                     
                     
                     }
@@ -184,9 +155,11 @@ Model Main_Flow_Shop {
                 SubsetOf: s_Observations;
                 Index: i_Sobs;
                 Definition: {
-                    { i_Obs | ( p_NoObservations <= ( 2 * p_PointsShownInCurve ) ) or 
-                             ( mod(ord(i_Obs), p_DividerForPointSelection ) = 1 ) or 
-                             ( i_Obs = last(s_Observations)                     )    }
+                    
+                    { i_Obs | ( ( p_NoObservations < 10 ) or ( ord( i_Obs ) > 5 )        ) and 
+                    	  ( ( p_NoObservations <= ( 2 * p_PointsShownInCurve )  ) or 
+                                ( mod(ord(i_Obs), p_DividerForPointSelection ) = 1  ) or 
+                                ( i_Obs = last(s_Observations)                      )    )     }
                 }
             }
             Parameter p_BestBound {
@@ -217,7 +190,7 @@ Model Main_Flow_Shop {
             Parameter p_CurrveUpperBound {
                 Definition: {
                     if card(s_Observations) > 5 then
-                    	ceil( max( i_obs | val(i_obs) > 3, p_Incumbent(i_Obs) ) / 10 ) * 10
+                    	ceil( max( i_obs | val(i_obs) > 5, p_Incumbent(i_Obs) ) / 10 ) * 10
                     else
                     	3 * p_CurveLowerBound
                     endif

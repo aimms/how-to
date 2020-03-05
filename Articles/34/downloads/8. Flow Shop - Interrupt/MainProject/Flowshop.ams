@@ -23,28 +23,46 @@ Model Main_Flow_Shop {
                     	('1','displaytext'): "Solve" ,             ! (Optional) The text/label you would like to give the action.
                     	('1','icon'       ): "aimms-hammer",       ! (Optional) The icon you want to display for the respective action.
                     	('1','procedure'  ): "pr_Solve",           ! (Optional) The procedure you want to call when the respective action is clicked.
-                    	('1','state'      ): "Active",             ! (Optional) Active (displayed and clickable), 
-                    	                                           !            Inactive (displayed and not clickable), and 
-                    	                                           !            Hidden (not displayed). 
-                    	                                           !            By default, the state is Hidden.
-                    
-                    	('2','displaytext'): "Load results"   ,    ! (Optional) The text/label you would like to give the action.
-                    	('2','icon'       ): "aimms-download9",    ! (Optional) The icon you want to display for the respective action.
-                    	('2','procedure'  ): "pr_LoadResults" ,    ! (Optional) The procedure you want to call when the respective action is clicked.
-                    	('2','state'      ): if p01_ResultsAvailable then "Active" else "InActive" endif,
+                    	('1','state'      ): if ( not p01_ResultsAvailable ) and ( not p01_SolveInterruptable ) then "Active" else "InActive" endif
                     	                                           ! (Optional) Active (displayed and clickable), 
                     	                                           !            Inactive (displayed and not clickable), and 
                     	                                           !            Hidden (not displayed). 
                     	                                           !            By default, the state is Hidden.
                     
-                    	('3','displaytext'): "Interrupt"         , ! (Optional) The text/label you would like to give the action.
-                    	('3','icon'       ): "aimms-bow"         , ! (Optional) The icon you want to display for the respective action.
-                    	('3','procedure'  ): "pr_InterruptSolve" , ! (Optional) The procedure you want to call when the respective action is clicked.
-                    	('3','state'      ): if p01_SolveInterruptable then "Active" else "InActive" endif
-                    	                                           ! (Optional) Active (displayed and clickable), 
-                    	                                           !            Inactive (displayed and not clickable), and 
-                    	                                           !            Hidden (not displayed). 
-                    	                                           !            By default, the state is Hidden.
+                    
+                    
+                    
+                    }
+                }
+            }
+            StringParameter sp_StatusBar {
+                IndexDomain: (webui::indexApplicationExtension,webui::indexStatusBarSpec);
+                Definition: {
+                    { 
+                    
+                    !-----------------------------------------------------------------------------------------------------------------------
+                    
+                    	( '1', 'header'    ) :  "Solve in progress",
+                    	( '1', 'icon'      ) :  "aimms-bow", ! (Optional) The icon you want to display for the respective message.
+                    	( '1', 'color'     ) :  "green", ! No solve in progress, so less interesting.
+                    	( '1', 'text'      ) :  "click to interrupt", ! (REQUIRED) The text you want to display for the status message.
+                    	( '1', 'tooltip'   ) :  "Solve in progress, click to interrupt", ! (Optional) Tooltip to be displayed when the user hovers over the respective status message.
+                    	( '1', 'procedure' ) :  "pr_AskInterruptSolve", ! (Optional) The procedure you want to call when the respective status message is clicked.
+                    	( '1', 'state'     ) :  if p01_SolveInterruptable then "Active" else "Hidden" endif, ! (Optional) Active (displayed and clickable), Inactive (displayed and not clickable) and Hidden (not displayed). By default, the state is Hidden.
+                    
+                    !-----------------------------------------------------------------------------------------------------------------------
+                    
+                    	( '2', 'header'    ) :  "solution can be downloaded", ! (Optional) The Header/Title text you want to display for the status message.
+                    	( '2', 'icon'      ) :  "aimms-download9", ! (Optional) The icon you want to display for the respective message.
+                    	( '2', 'color'     ) :  "green", ! (Optional) The color you want to display for the icon.
+                    	( '2', 'text'      ) :  "click to download", ! (REQUIRED) The text you want to display for the status message.
+                    	( '2', 'tooltip'   ) :  "Solution is available, click to download", ! (Optional) Tooltip to be displayed when the user hovers over the respective status message.
+                    	( '2', 'procedure' ) :  "pr_LoadResults", ! (Optional) The procedure you want to call when the respective status message is clicked.
+                    	( '2', 'state'     ) :  if p01_ResultsAvailable then "Active" else "Hidden" endif ! (Optional) Active (displayed and clickable), Inactive (displayed and not clickable) and Hidden (not displayed). By default, the state is Hidden.
+                    
+                    !-----------------------------------------------------------------------------------------------------------------------
+                    
+                    
                     }
                 }
             }
@@ -405,12 +423,35 @@ Model Main_Flow_Shop {
             solve mp_FlowShopModel;
         }
     }
+    Procedure pr_AskInterruptSolve {
+        Body: {
+            s_Actions:= data { Cancel, OK };
+            ep_PageId  := 'askinterruptsolve_1';
+            webui::OpenDialogPage(ep_PageId , "Are you sure you want to interrupt the solve", s_Actions, 'pr_ReactAnswerInterruptSolve');
+        }
+        Set s_Actions;
+        ElementParameter ep_PageId {
+            Range: webui::AllDialogPages;
+        }
+    }
+    Procedure pr_ReactAnswerInterruptSolve {
+        Arguments: (sp_Answer);
+        Body: {
+            if sp_Answer = "OK" then
+            	pr_InterruptSolve();
+            endif ;
+        }
+        StringParameter sp_Answer {
+            Property: Input;
+        }
+    }
     Procedure pr_InterruptSolve {
         Body: {
             if pro::GetPROEndPoint() then
             	locSessionQueue := pro::session::CurrentSessionQueue();
             	pro::client::StopExecution( locSessionQueue, pro::AIMMSAPI_INTERRUPT_SOLVE );
             endif ;
+            p01_SolveInterruptable := 0 ;
         }
         StringParameter locSessionQueue;
     }

@@ -30,45 +30,12 @@ Model Main_Flow_Shop {
                     	('1','displaytext'): "Solve" ,          ! (Optional) The text/label you would like to give the action.
                     	('1','icon'       ): "aimms-hammer",    ! (Optional) The icon you want to display for the respective action.
                     	('1','procedure'  ): "pr_Solve",        ! (Optional) The procedure you want to call when the respective action is clicked.
-                    	('1','state'      ): "Active",          ! (Optional) Active (displayed and clickable), 
+                    	('1','state'      ): "Active"           ! (Optional) Active (displayed and clickable), 
                     	                                        !            Inactive (displayed and not clickable), and 
                     	                                        !            Hidden (not displayed). 
                     	                                        !            By default, the state is Hidden.
                     
-                    	('2','displaytext'): "Load results"   , ! (Optional) The text/label you would like to give the action.
-                    	('2','icon'       ): "aimms-download9", ! (Optional) The icon you want to display for the respective action.
-                    	('2','procedure'  ): "pr_LoadResults" , ! (Optional) The procedure you want to call when the respective action is clicked.
-                    	('2','state'      ): if p01_ResultsAvailable then "Active" else "InActive" endif
-                    	                                        ! (Optional) Active (displayed and clickable), 
-                    	                                        !            Inactive (displayed and not clickable), and 
-                    	                                        !            Hidden (not displayed). 
-                    	                                        !            By default, the state is Hidden.
                     }
-                }
-            }
-        }
-        Section Loading_server_session_results {
-            StringParameter sp_SavedRequestID {
-                InitialData: "";
-            }
-            Parameter p01_ResultsAvailable {
-                Range: binary;
-                InitialData: 0;
-            }
-            Procedure pr_myLoadResultsCallback {
-                Arguments: (sp_RequestID);
-                Body: {
-                    pro::session::LoadResultsCallBack(sp_RequestID);
-                    pr_prepInterface();
-                }
-                StringParameter sp_RequestID {
-                    Property: Input;
-                }
-            }
-            Procedure pr_LoadResults {
-                Body: {
-                    pro::session::LoadResultsCallBack(sp_SavedRequestID);
-                    p01_ResultsAvailable := 0;
                 }
             }
         }
@@ -209,7 +176,7 @@ Model Main_Flow_Shop {
         Body: {
             if pro::GetPROEndPoint() then
             	if pro::DelegateToServer( waitForCompletion  :  0, 
-            				  completionCallback :  'pr_myLoadResultsCallback' 
+            				  completionCallback :  'pro::session::LoadResultsCallBack' 
             				  ) then	
             		return 1;
             	endif ;

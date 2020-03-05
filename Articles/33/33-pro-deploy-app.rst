@@ -45,7 +45,7 @@ To publish an application on the AIMMS PRO platform, the procedure containing th
 
 Perform the following steps:
 
-#.  In the model: create a new procedure, named: ``prSolve``
+#.  In the model: create a new procedure, named: ``pr_Solve``
 
 #.  Give it the following body:
 
@@ -56,10 +56,10 @@ Perform the following steps:
             then return 1;
         endif;
 
-    By including the above code at the top of a procedure, you are instructing AIMMS to delegate the execution of all the subsequent statements on the AIMMS PRO server. As you want to solve the math program on the PRO server, simply call the procedure ``prDoSOlve`` at the end of ``prSolve``.
+    By including the above code at the top of a procedure, you are instructing AIMMS to delegate the execution of all the subsequent statements on the AIMMS PRO server. As you want to solve the math program on the PRO server, simply call the procedure ``pr_DoSOlve`` at the end of ``pr_Solve``.
 
 #.  Link the primary action of the page in the WebUI to 
-    the new procedure ``prSolve`` via the string parameter ``sp_PrimaryAction``.
+    the new procedure ``pr_Solve`` via the string parameter ``sp_PrimaryAction``.
 
     .. code-block:: aimms
         :linenos:
@@ -123,8 +123,8 @@ Pressing the publish button on the AIMMS PRO portal, you will be asked for the .
    :scale: 50 %
 
 Here the areas with a red border need to be filled in.
-   
-   
+
+
 3. Configuring the access rights
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -145,8 +145,9 @@ The interface to the end-user looks almost the same, as you can see from the scr
 Some of the minor differences are highlighted in the above screenshot. 
 The two major differences are:
 
-#. For the end-users there is no need for an AIMMS Developer license, including solver license, to run the application.
-#. The end-users can run the app on almost any device, including tablets, Linux PC's and Windows PC's.
+#.  For the end-users there is no need for an AIMMS Developer license, including solver license, to run the application.
+
+#.  The end-users can run the app on almost any device, including tablets, Linux PC's and Windows PC's.
 
 Summary
 -------
@@ -158,8 +159,8 @@ Further study
 
 Oops, I see several problems that we can work on.  
 
-#. I want to continue working on the app itself using my development environment. Now, the system asks whether I want to solve on a PRO system, while I am clearly not connected to that PRO system – I just want to be able to :doc:`test and debug <../32/32-pro-develop-app>` my application.  
+#.  I want to continue working on the app itself using my development environment. Now, the system asks whether I want to solve on a PRO system, while I am clearly not connected to that PRO system – I just want to be able to :doc:`test and debug <../32/32-pro-develop-app>` my application.  
 
-#. I want to remove the veil that drops down when a procedure of the data session runs for more than a few seconds. See topic :doc:`../19/19-remove-veil`
+#.  I want to remove the veil that drops down when a procedure of the data session runs for more than a few seconds. See topic :doc:`../19/19-remove-veil`
 
 

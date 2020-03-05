@@ -18,7 +18,8 @@ Essentially, we achieve this by letting our application have two sessions:
 
 #.  The **data session**: this session is responsible for interacting with the user. Such a session only solves small mathematical programming problems.
 
-#.  The **solver session**: this session is responsible for solving the Operations Research problem at hand. Solving an operational research problem may involve one or more mathematical programming problems.
+#.  The **solver session**: this session is responsible for solving the Operations Research problem at hand. 
+    Solving an operational research problem may involve solving one or more mathematical programming problems.
 
 Clearly these two sessions need to communicate with each other.
 
@@ -52,7 +53,7 @@ The first step is that we are able to
 
 #.  test it by launching the application.
 
-This is described in detail at: :doc:`creating task<../33/33-pro-deploy-app>` .
+This is described in detail at: :doc:`Deploy an Application on AIMMS PRO <../33/33-pro-deploy-app>` .
 
 Delegate and develop
 --------------------

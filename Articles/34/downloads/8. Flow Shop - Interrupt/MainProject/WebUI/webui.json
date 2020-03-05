@@ -16,7 +16,38 @@
               {
                 "name": "home",
                 "slug": "home",
-                "children": []
+                "children": [
+                  {
+                    "name": "AskInterruptSolve",
+                    "type": "dialog",
+                    "slug": "askinterruptsolve_1",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "statusmessages": {
+      "aimms": {
+        "contents": [
+          "sp_StatusBar"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_StatusBar",
+            "slice": [
+              {
+                "index": "webui::indexApplicationExtension",
+                "type": "free",
+                "value": "webui::indexApplicationExtension"
+              },
+              {
+                "index": "webui::indexStatusBarSpec",
+                "type": "free",
+                "value": "webui::indexStatusBarSpec"
               }
             ]
           }
@@ -28,6 +59,19 @@
     },
     "widget.visibility.greyout": {
       "literal": true
+    }
+  },
+  "pages/askinterruptsolve_1": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "ProgressScalarOnInterrupt",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
     }
   },
   "pages/home": {
@@ -177,6 +221,42 @@
     },
     "title": {
       "literal": "Gantt chart presenting when the jobs are scheduled on the available machines."
+    }
+  },
+  "widgets/ProgressScalarOnInterrupt": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_Incumbent",
+          "p_BestBound"
+        ],
+        "prefix": "aimms",
+        "slices": [
+          {
+            "identifier": "p_BestBound",
+            "slice": [
+              {
+                "index": "i_Obs",
+                "type": "element-parameter",
+                "value": "ep_LastObservation"
+              }
+            ]
+          },
+          {
+            "identifier": "p_Incumbent",
+            "slice": [
+              {
+                "index": "i_Obs",
+                "type": "element-parameter",
+                "value": "ep_LastObservation"
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   "widgets/ScaModelParam": {

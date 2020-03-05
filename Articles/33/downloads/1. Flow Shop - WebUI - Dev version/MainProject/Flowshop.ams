@@ -14,7 +14,7 @@ Model Main_Flow_Shop {
                     data {
                     	'displaytext': "Solve" ,    ! (Optional) The text/label you would like to give the action.
                     	'icon' : "aimms-hammer",    ! (Optional) The icon you want to display for the respective action.
-                    	'procedure' : "pr_Solve",   ! (Optional) The procedure you want to call when the respective action is clicked.
+                    	'procedure' : "pr_DoSolve", ! (Optional) The procedure you want to call when the respective action is clicked.
                     	'state' : "Active"          ! (Optional) Active (displayed and clickable), 
                     	                            !            Inactive (displayed and not clickable), and 
                     	                            !            Hidden (not displayed). 
