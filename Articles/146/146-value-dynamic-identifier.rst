@@ -5,9 +5,9 @@
    :description: How to use Model Edit functions to retrieve the value of a dynamic identifier.
    :keywords: model, edit, me
 
-      .. note::
+.. note::
 
-	This article was originally posted to the AIMMS Tech Blog.
+   This article was originally posted to the AIMMS Tech Blog.
 
 
 With the addition of Model Edit Functions (MEF), a lot of things that were previously impossible to do with AIMMS became possible.
