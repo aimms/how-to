@@ -9,28 +9,34 @@ Handle errors and warnings
 
     This article was originally posted to the AIMMS Tech Blog.
 
-This article explains how to add custom warning messages for certain errors.
+Errors in AIMMS
+------------------
 
-When you send your AIMMS project into the world, errors will inevitably pop up from time to time. Users may provide the wrong kind of input for your model resulting in AIMMS throwing errors that your user may not understand. 
+Errors might inevitably pop up during the runtime of your production models. Users may provide the wrong kind of input for your model unexpectedly resulting in AIMMS throwing errors that your user may not understand, and that you might not have foreseen. 
 
-Starting with AIMMS 3.10, we added error handling routines that allow you to not only catch existing AIMMS errors, but also raise your own errors.
+AIMMS handles routines that allow you to not only catch existing AIMMS errors, but also raise your customized AIMMS errors.
 
 Error handling in AIMMS can be done at two levels: 
+
 * You can set a global error handler procedure for your project, which will be called whenever an error occurs anywhere in your code. 
 * You can set an error handler for a specific subset of your code that is within a block statement in AIMMS (comparable to try-catch blocks in languages like C/Java/Python). 
 
 This article focuses on the second approach.
 
+Example use case
+----------------------
 
-
-In the example below, let's calculate the division of two parameters for user input values and display the result:
+In the example below, we will calculate the division of two parameters for user input values and display the result:
 
 .. code-block:: aimms
 
  result := parameter1 / parameter2 ; 
  DialogMessage("Result of division = " + result ) ; 
 
-Now let's assume the user provides the value 0 for ``parameter2``, and execution of the first statement produces a division-by-zero error in AIMMS. That means the execution is halted, including the second statement. 
+Let's assume the user provides the value 0 for ``parameter2``, and execution of the first statement produces a division-by-zero error in AIMMS. That means the execution is halted, including the second statement. 
+
+Handling Errors
+----------------
 
 With the error handling, you can catch this division-by-zero error and tell the user what went wrong. 
 
@@ -71,8 +77,17 @@ Once that's done, you can catch errors and provide custom error messages:
         DialogMessage("Severity = " + errh::Severity( err ) ) ;     
     end block ; 
 
-Now your user can easily figure out what's wrong.
+Now you have full control on what is shown to your user if anything goes wrong.
 
 
+Related resources
+--------------------
 
+.. seealso::
+
+  * :doc:`../265/265-settings-for-errors-and-warnings`
+
+  * `AIMMS example model <https://www.aimms.com/english/developers/resources/examples/functional-examples/error-handling/>`_
+  
+  * Chapter "Raising and handling warnings and errors" of the `AIMMS Language Reference <https://download.aimms.com/aimms/download/manuals/AIMMS3LR_ExecutionStatements.pdf>`_
 

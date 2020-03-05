@@ -9,9 +9,9 @@ By running a process using a particular account, you can access resources partic
 
 This article explains the procedure to change the PRO account that runs the AIMMS jobs.
 
-.. note:: 
+.. warning:: 
 
-    When you run on an account that is not the system account, it can affect access to resources and cause errors. In this case, please consult with your system administrator.
+    When you run on an account that is not the system account, it can affect access to resources and cause errors. In this case, please consult with your system administrator. For instance, this may affect the Single-Sign On. See   `Link to Active Directory for Non-AD Member Servers <https://documentation.aimms.com/pro/ad-man-non-member.html>`_, but you may also want to check   `here <https://docs.vmware.com/en/VMware-Workspace-ONE-UEM/1811/WS1-Kerberos-Constrained-Delegation-Secure-Email-Gateway-V2/GUID-AWT-KCD-ASSIGNDELEGATIONRIGHT.html>`_   or `this one <https://help.sap.com/viewer/e3b264fbc92e4a10b21163d488966b0f/3.1/en-US/d5e69921945345fe910e527fbc1c3f73.html>`_
 
 
 Overview
