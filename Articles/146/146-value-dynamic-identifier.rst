@@ -10,7 +10,7 @@ Retrieve Value of Dynamic Identifier
    This article was originally posted to the AIMMS Tech Blog.
 
 
-With the addition of :doc:`/model-edit-functions/index` (MEF), a lot of things that were previously impossible to do with AIMMS became possible.
+With the addition of :doc:`model-handling/model-edit-functions/index` (MEF), a lot of things that were previously impossible to do with AIMMS became possible.
 
 One simple example of something that previously was not possible is to 'dereference' an element parameter with range :aimms:set:`AllIdentifiers`, to get the value of the identifier that was denoted by the element parameter if this identifier was not scalar. In case the identifier that is referred to is scalar, you could use the :aimms:func:`ScalarValue` intrinsic function.
 
