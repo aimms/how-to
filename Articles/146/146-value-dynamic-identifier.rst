@@ -9,7 +9,6 @@ Retrieve Value of Dynamic Identifier
 
    This article was originally posted to the AIMMS Tech Blog.
 
-
 With the addition of :doc:`model-handling/model-edit-functions/index` (MEF), a lot of things that were previously impossible to do with AIMMS became possible.
 
 One simple example of something that previously was not possible is to 'dereference' an element parameter with range :aimms:set:`AllIdentifiers`, to get the value of the identifier that was denoted by the element parameter if this identifier was not scalar. In case the identifier that is referred to is scalar, you could use the :aimms:func:`ScalarValue` intrinsic function.
@@ -105,9 +104,4 @@ The above procedure can now be called with the following example code:
 
 Keep in mind that the above code does not do any error checking. This means that you could try to assign the value of a string parameter to a numerical parameter, which would result in a runtime error. Other possibilities are that the body of the runtime procedure contains a syntax error, in which case the me::compile statement will result in an error. Please see the `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_ (section "Raising and handling warnings and errors") for more information on handling such errors with the AIMMS error handling.
 
-A complete project containing the above source can be :download:`downloaded <downloads/ValueDynamicIdentifier.zip>` 
-
-
-
-
-
+A complete project containing the above source can be downloaded :download:`here <downloads/ValueDynamicIdentifier.zip>`.
