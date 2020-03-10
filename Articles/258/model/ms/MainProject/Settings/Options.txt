@@ -1,0 +1,7 @@
+﻿* AIMMS
+* AOA
+* CBC 2.9
+* CPLEX 12.10
+* IPOPT 3.11
+* NETSOL
+* Environment
