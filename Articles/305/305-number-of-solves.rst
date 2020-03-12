@@ -16,7 +16,7 @@ Number of running and pending solver sessions
 .. 
 
 
-When starting a new server session it is useful to know whether there are other server sessions started on the same server. This article explains how to find out the number of sessions running at an AIMMS PRO server.
+When starting a new solver session it is useful to know whether there are other server sessions started on the same server. This article explains how to find out the number of sessions running at an AIMMS PRO server.
 
 
 Scope
@@ -31,7 +31,7 @@ We will discuss two variations on the number of server sessions:
 Obtain number of sessions running
 -----------------------------------
 
-To obtain the number of server session actually running,
+To obtain the number of solver session actually running,
 you can use ``pro::sessionmanager::ListSessionSinceDate``.
 
 We use the following code, 

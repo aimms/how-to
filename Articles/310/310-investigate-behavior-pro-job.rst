@@ -50,7 +50,7 @@ Client side: Create a case file to be used as input
 .. pro::ManagedSessionOutputCaseIdentifierSet
 .. pro::ManagedSessionRemoveFromCaseIdentifierSet
 
-The more information that is shared between the client session and the server session, the longer it takes (creating, transmitting, reading). The information is shared in the form of a case file. The amount of information in this case file is determined by the set of identifiers and their cardinalities.
+The more information that is shared between the client session and the solver session, the longer it takes (creating, transmitting, reading). The information is shared in the form of a case file. The amount of information in this case file is determined by the set of identifiers and their cardinalities.
 
 The identifiers of the input case created by ``pro::DelegateToServer`` is defined by ``pro::ManagedSessionInputCaseIdentifierSet``, minus the identifiers in ``pro::ManagedSessionRemoveFromCaseIdentifierSet``. However, the delegated job may only require the data of a subset of the identifiers in ``pro::ManagedSessionInputCaseIdentifierSet``.  To measure how long it takes to create an input case, please execute the procedure ``SaveInputCase``, coded below, with the AIMMS profiler on:
 
@@ -96,9 +96,9 @@ Copy the case file to the AIMMS PRO server
 
 To transfer items, transfer speed and item size do matter. To reduce the item size is discussed in the previous section. The transfer speed depends on the connection and distance. Obviously, when the client and server sessions are executed on the same host or the hosts are in the same domain, the transfer speed is high. On the other hand, when these hosts are in different continents, then the transfer speed may very well be low. 
 
-To investigate how much time is spent for the case transfer, we have to look in the session log file of the server session. This file can be found in the AIMMS PRO data folder, by default ``C:\ProgramData\AimmsPRO``, subfolder ``Log\Sessions``. The name of this log file is a GUID with extension .log. On a test server, the file was named  ``D:\ProgramData\AimmsPRO\Log\Sessions\f9706ac8-841f-4b35-bc74-57863e82e630-1.log``
+To investigate how much time is spent for the case transfer, we have to look in the session log file of the solver session. This file can be found in the AIMMS PRO data folder, by default ``C:\ProgramData\AimmsPRO``, subfolder ``Log\Sessions``. The name of this log file is a GUID with extension .log. On a test server, the file was named  ``D:\ProgramData\AimmsPRO\Log\Sessions\f9706ac8-841f-4b35-bc74-57863e82e630-1.log``
 
-To determine the time, obtain the session log file for the server session and search for "CaseLoad : duration":
+To determine the time, obtain the session log file for the solver session and search for "CaseLoad : duration":
 
 .. code-block:: none
 
@@ -128,7 +128,7 @@ In the example above, the job didn't have to wait for other jobs. Clearly, the q
 On the AIMMS PRO server, compile and initialize the AIMMS Project
 -----------------------------------------------------------------------------------
 
-A server session starts with opening the project, including running initialization procedures of the Main model and running the initialization procedures of each of its libraries.
+A solver session starts with opening the project, including running initialization procedures of the Main model and running the initialization procedures of each of its libraries.
 
 By adding the code ``ProfilerStart()`` at the top of your ``MainInitialization`` procedure, you can measure how long do these initialization procedures take for your project. After adding this line, close and reopen your AIMMS project. Profiler -> Results Overview will give you the numbers on **client side**.      
 

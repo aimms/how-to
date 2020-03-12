@@ -1,0 +1,149 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": false
+    },
+    "widget.visibility.greyout": {
+      "literal": false
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "maxcolumns": {
+      "literal": 10
+    },
+    "primarypageaction": {
+      "aimms": {
+        "contents": [
+          "sp_PrimaryAction"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_PrimaryAction",
+            "slice": [
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "LblModelIdentification",
+          "layoutInfo": {
+            "width": "10",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "ScaModelParam",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "pgc",
+          "layoutInfo": {
+            "width": "8",
+            "height": "2"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/LblModelIdentification": {
+    "aimms.widget.type": {
+      "literal": "label"
+    },
+    "contents": {
+      "literal": "2. Flowshop model - Delegated with wait for completion"
+    }
+  },
+  "widgets/pgc": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_GCJobStart",
+          "p_GCJobDuration"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "time.reference": {
+      "literal": "\"2017-01-01\""
+    },
+    "time.resolution": {
+      "literal": 1
+    },
+    "contents.partition": {
+      "literal": {
+        "resources": [
+          "m",
+          "s"
+        ],
+        "jobs": [
+          "<IDENTIFIER-SET>",
+          "j"
+        ],
+        "aggregated": []
+      }
+    },
+    "title": {
+      "literal": "Gantt chart presenting when the jobs are scheduled on the available machines."
+    }
+  },
+  "widgets/ScaModelParam": {
+    "title": {
+      "literal": "Model parameters"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_MaxMachines",
+          "p_MaxJobs"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    }
+  }
+}
