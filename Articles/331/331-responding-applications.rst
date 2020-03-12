@@ -1,5 +1,5 @@
-Responding applications
-===========================
+Create responding applications
+===============================
 
 .. meta::
    :description: Keeping your Decision Support application responding while letting it do long-running searches for the best solution.
@@ -11,38 +11,28 @@ Applications for decision support have two characteristics:
 
 * The search for an optimal solution may take a long time
 
-We want our application to be designed as a **responding application**.  
-A responding application is an application that keeps responding, 
-even in the presence of long-running searches for an optimal solution.
-Essentially, we achieve this by letting our application have two sessions:
+You can design a **responding application** which responds to user interaction, 
+even during long-running searches for an optimal solution.
 
-#.  The **data session**: this session is responsible for interacting with the user. 
-    Such a session only solves small mathematical programming problems.
+Assign two sessions for the application:
 
-#.  The **solver session**: this session is responsible for solving the Operations Research problem at hand. 
-    Solving an operational research problem may involve solving one or more mathematical programming problems.
+*  **Data session**: allows interaction with the user; only solves small mathematical programming problems.
 
-Clearly these two sessions need to communicate with each other.
+*  **Solver session**: solves the Operations Research problem; may involve solving one or more mathematical programming problems.
 
-The architecture of the AIMMS PRO platform is designed to facilitate the above.
+AIMMS PRO platform is designed so that these two sessions can communicate with each other.
 
-To adapt an optimization application to become a responding optimization application is a bit like building a house:
+To adapt an optimization application to become a responding optimization application requires several stages of development tasks:
 
-#.  When we build a house we start with the structure and the roof; this already keeps the rain away.
-    When we start with a responding application, we first separate the search for an optimal solution as a separate solver session.
+#.  Structure: Separate the search for an optimal solution as a separate solver session.
 
-#.  When we continue with the building of the house, we make sure that the walls, windows, and doors are put in, to keep the cold wind out.
-    When we continue with the development of a responding application, 
-    we make sure that we don't have to wait for the solution but read it back at our own convenience; 
-    that we can work on the application-independent from the presence of an AIMMS PRO system.
+#.  Development: Make sure that you can read the solution at your own convenience, 
+    and work on the application-independent from an AIMMS PRO system.
     
-#.  With the walls including windows and doors, and the roof done; we can continue to make it cozy by electricity, plumbing, etc.
-    When we continue with the development of a responding application, we make sure that the user is informed of progress, 
-    that intermediate solutions are saved, and even that we can provide new data to the solver session.
+#.  Finishing: Add progress status messages, ensure
+    that intermediate solutions are saved, and add a way to feed new data to the solver session.
 
-To adapt an application to become a responding application, there are several steps to take.
-
-We will discuss each of these steps briefly, and provide a reference where each step is presented in more detail. 
+Tasks required in these stages are discussed below in more detail with links to further help. 
 
 Separating sessions
 --------------------
