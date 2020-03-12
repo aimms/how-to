@@ -17,8 +17,8 @@ A CVRP can be formulated as a linear integer programming model. In the article a
    :align: center
 
 
-Explicit Miller-Tucker-Zemlin
------------------------------
+Miller-Tucker-Zemlin
+--------------------
 
 The Miller-Tucker-Zemlin formulation uses an extra variable to eliminate subtours. This variable ( :math:`u_{ik}` ) basically gets higher each time a new costumer is visited with vehicle k. If vehicle k travels from node i to node j, :math:`u_{jk}` should always be higher than :math:`u_{ik}`. This way it won't be possible to return to a previously visited node and create a subtour.
 
@@ -26,8 +26,7 @@ The Miller-Tucker-Zemlin formulation uses an extra variable to eliminate subtour
 (the node already has a value for i (that must be lower))
 
 
-
--> oke ik heb besloten wel gewoon u_ik te gebruiken. Je kan het dan namelijk ook uitleggen als u is een teller die omhoog gaat iedere keer als een nieuwe bezoeker wordt bezocht (met een bepaalde vehicle)
+-> Miller-Tucker-Zemlin formulering zorgt er ook voor dat de capacity van 
 
 
 

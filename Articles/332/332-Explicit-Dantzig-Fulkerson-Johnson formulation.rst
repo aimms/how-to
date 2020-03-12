@@ -1,7 +1,7 @@
 Explicit Dantzig-Fulkerson-Johnson formulation
 ==============================================
 
-In this article the formulation of a **Capacitated Vehicle Routing Problem** (CVRP) is discussed. There exists an example of a library in AIMMS that solves a CVRP. In that library there are four different formulation options (so far) of the problem. The first formulation is called the **Explicit Dantzig-Fulkerson-Johnson** formulation and will be explained in this article.
+There is a library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (CVRP). In that library there are four different formulation options (so far) of the problem. The first formulation is called the **Explicit Dantzig-Fulkerson-Johnson** formulation and will be explained in this article.
 
 - this is a link to the library 
 - this is a link to the article that explains the library
@@ -10,19 +10,22 @@ In this article the formulation of a **Capacitated Vehicle Routing Problem** (CV
 Formulation
 -----------
 
-A CVRP can be formulated as a linear integer programming model. The total distance of the route, where all costumers demands are met, must be minimized. The binary variable :math:`x_{ijk}` has a value of :math:`1` if the arc from node i to node j is in the optimal route and is driven by vehicle k. The variable :math:`d_{ijk}` discribes the distance from node i to node j for vehicle k. There are n nodes (depot = 1) and k vehicles. The objective function can be formulated as follows:
+A CVRP can be formulated as a linear integer programming model. The total distance of the route, where all costumers demands are met, must be minimized. The binary variable :math:`x_{ijk}` has a value of :math:`1` if the arc from node i to node j is in the optimal route and is driven by vehicle k. The variable :math:`d_{ij}` discribes the distance from node i to node j. There are n nodes (depot = 1) and p vehicles. The objective function can be formulated as follows:
 
-.. math:: Min \sum_{k = 1}^{p}{\sum_{i = 1}^{n}{\sum_{j = 1, i \neq j}^{n}{d_{ijk}x_{ijk}}}}
+.. math:: Min \sum_{k = 1}^{p}{\sum_{i = 1}^{n}{\sum_{j = 1, i \neq j}^{n}{d_{ij}x_{ijk}}}}
 
-Every node should be entered and left once (expect for the depot) and by the same vehicle. The depot should be left and entered once by each vehicle. :math:`g_{i}` describes the demand of each costumer and :math:`c_{k}` describes the capacity of each vehicle. The sum of the demands of all costumers that vehicle k will serve, shouldn't exceed the capacity of vehicle k. All these constraints can be formulated as follows:
+Every node should be entered and left once (expect for the depot) and by the same vehicle. The depot should be left and entered once by each vehicle. :math:`q_{i}` describes the demand of each costumer and :math:`Q` is the capacity of the vehicles. The sum of the demands of all costumers that vehicle k will serve, shouldn't exceed the capacity of vehicle k. All these constraints can be formulated as follows:
 
 .. math:: \sum_{k = 1}^{p}{\sum_{i = 1, i \neq j}^{n}{x_{ijk}}} = 1  \qquad \forall j \in \{2,...,n\}
 .. math:: \sum_{j = 2}^{n}{x_{1jk}} = 1 \qquad \forall k \in \{1,...,p\}
 .. math:: \sum_{i = 1, i \neq j}^{n}{x_{ijk}} = \sum_{i = 1}^{n}{x_{jik}} \qquad \forall j \in \{1,...,n\}, \enspace k \in \{1,...,p\}
-.. math:: \sum_{i = 1}^{n}{\sum_{j = 2}^{n}{g_{j} x_{ijk}}} \leq c_{k} \qquad \forall k \in \{1,...,p\}
+.. math:: \sum_{i = 1}^{n}{\sum_{j = 2}^{n}{q_{j} x_{ijk}}} \leq Q \qquad \forall k \in \{1,...,p\}
 .. math:: x_{ijk} \in \{0,1\} \qquad \forall k \in \{1,...,p\},\enspace i,j \in \{1,...,n\}, \enspace i \neq j
 
-- a little extra explanation of the formulation 
+-> The third constraint makes sure that every node is entered and left by the same vehicle, the same amount of times. lalala
+ 
+
+
 
 However, a route that satisfies all these constraints could still be infeasible. Namely when the route contains a subtour (see image). 
 
@@ -31,29 +34,22 @@ However, a route that satisfies all these constraints could still be infeasible.
    :align: center
 
 
-Explicit Dantzig-Fulkerson-Johnson 
-----------------------------------
+Subtour Elimination Constraints 
+-------------------------------
 
-The Dantzig-Fulkerson-Johnson formulation uses subsets to eliminate subtours. If a subset contains three nodes and there are three arcs between those nodes, it would create a subtour (see image). Therefore, there should always be less arcs between nodes in a subsets than nodes in that subset. This can be formulated as follows:
+The Dantzig-Fulkerson-Johnson formulation uses subsets to eliminate subtours. If a subset contains three nodes and there are three arcs between those nodes, it would create a subtour. Therefore, there should always be less arcs between nodes in a subsets than nodes in that subset. This can be formulated as follows:
 
 .. math:: \sum_{k = 1}^{p}{\sum_{i,j \in S}{x_{ijk}}} \leq |S|-1 \qquad S \subset \{2,...,n\}, \enspace 2 \leq |S| \leq n - 2
 
-- what is S
-- why not depot-> subtour containing the depot is not a subtour
-- 
-
-S is a subset of all nodes from 2 to n. Depot is left out, because
-so it is a subset of all costumers 
+A tour that passes the depot is not a subtour. That is why S is a subset of all nodes from 2 to n. Which is the set of all costumers. It is not possible to form a subtour with 1 node, so the cardinality of S should be at least 2.
 
 
 AIMMS 
 -----
--> this refers to the example mentioned before 
-
-To implement the Explicit Dantzig-Fulkerson-Johnson formulation in AIMMS, all subsets should first be generated. The subsets should contain at least two nodes and should not contain the depot. All possible subsets are generated by the procedure ``Create_Subsets``. 
+In the CVRP library this formulation is implemented in the section: ``Explicit Dantzig Fulkerson Johnson Section``. In order to create constraints about subsets, the subsets must first be generated. This happens in the procedure ``Create_Subsets``. The body of this procedure is as follows:
 
 .. code-block:: aimms
-   :linenos:
+	:linenos:
 
 	empty s_CostumerSubset, s_SubsetNumber, bp_Subsets;
 	
@@ -79,14 +75,14 @@ To implement the Explicit Dantzig-Fulkerson-Johnson formulation in AIMMS, all su
 	
 	endrepeat ;
 
- 
-and the constraints are formulated in AIMMS like this
+-> bp_Subsets is a binary parameter 
 
-.. code-block:: aimms
-	
-	sum((i, j) | bp_Subsets(i, s) and bp_Subsets(j, s), bv_x(i, j, k) ) <= sum( i, bp_Subsets(i,s) ) - 1
-   
-	
+
+
+
+
+
+
 
 
 
@@ -96,4 +92,4 @@ and the constraints are formulated in AIMMS like this
 
 -> link to Barcinova 
 
-note: The same formulation could also be implementen implicitly -> see this article 
+note: The same formulation could also be implemented implicitly -> see this article 
