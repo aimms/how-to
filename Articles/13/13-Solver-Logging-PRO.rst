@@ -10,7 +10,7 @@ In :doc:`13-Solver-Logging-IDE`, we explain how to adapt the project such that s
 A solver session runs somewhere on an AIMMS PRO server, and as a user, you do not have direct access to those files. 
 However, with a few small steps, which are explained in this article, you can access these files as well.
 
-#. Clarify the solver used in a AIMMS PRO server session (job).
+#. Clarify the solver used in a AIMMS PRO solver session (job).
 
 #. Copy the solver log file to a place on AIMMS PRO Storage
 
@@ -18,10 +18,10 @@ However, with a few small steps, which are explained in this article, you can ac
 
 Each of these steps are discussed in some more detail below:
 
-Clarify the solver used in an AIMMS PRO server session
+Clarify the solver used in an AIMMS PRO solver session
 ------------------------------------------------------
 
-As an AIMMS PRO server session doesn't have a UI, it doesn't have a progress window either. For apps published using a WinUI, you can still use the request manager to obtain progress information. Something similar is not available for WebUI applications (yet).
+As an AIMMS PRO solver session doesn't have a UI, it doesn't have a progress window either. For apps published using a WinUI, you can still use the request manager to obtain progress information. Something similar is not available for WebUI applications (yet).
 
 Some progress information can be obtained via setting the option ``major_messages`` to ``on``, the ``session.log`` file will contain lines like:
 
@@ -58,7 +58,7 @@ To save it, we will need to copy it from that folder to AIMMS PRO storage:
 
         prepInterface;        
         
-Here the server session has saved the solver log file to a location in AIMMS PRO storage that is reserved for the current user.
+Here the solver session has saved the solver log file to a location in AIMMS PRO storage that is reserved for the current user.
 On lines 6-10 were added just to save the log file to PRO storage.
 
 Now let the data session of that user actually download the log file to his own device.        

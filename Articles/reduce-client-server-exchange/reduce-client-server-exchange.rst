@@ -1,19 +1,19 @@
 
-Reduce Exchange Between Client Session and Server Session
+Reduce Exchange Between Client Session and solver session
 ==========================================================
 
 .. meta::
-   :description: How to reduce the overhead of creating and communicating cases between the client session and the server session.
+   :description: How to reduce the overhead of creating and communicating cases between the client session and the solver session.
    :keywords: client, server, session
 
-As shown in :doc:`../33/33-pro-deploy-app`, part of the overhead in solving is creating a case and transferring it, once from the client session to the server session and once back.
+As shown in :doc:`../33/33-pro-deploy-app`, part of the overhead in solving is creating a case and transferring it, once from the client session to the solver session and once back.
 Especially, for short solves, the overhead can be relatively large.
 To reduce this overhead, we'll reduce the number of identifiers that need to be passed between these sessions.
 
-The identifiers needed by the server session
+The identifiers needed by the solver session
 ----------------------------------------------
 
-There are three groups of identifiers needed by the server session that can be provided by the client session:
+There are three groups of identifiers needed by the solver session that can be provided by the client session:
 
 #. The sets and parameters used in defining mathematical program instances to be solved
 
@@ -71,13 +71,13 @@ To determine which identifiers make up the mathematical program instance we need
             ! Stash list of identifiers to be returned. 
             data { sOutputIds } ; 
 
-Now we only to construct the set of output identifiers, i.e. those identifiers that should be in the case send from the server session to the client session.  The client session only needs the Gantt Chart starts and durations. So that is simply:
+Now we only to construct the set of output identifiers, i.e. those identifiers that should be in the case send from the solver session to the client session.  The client session only needs the Gantt Chart starts and durations. So that is simply:
 
     .. code-block:: aimms
      
         sOutputIds := data { pGCJobStart, pGCJobDuration };
   
-Now we have constructed the sets of identifiers that need to be passed from the client session to the server session (``sInputIds``) and the set of identifiers to be passed from the server session to the client session (``sOutputIds``), we need to pass this information to AIMMS PRO, such that ``pro::DelegateToServer`` correctly handles this. For this purpose, AIMMS PRO declares the following sets: ``pro::ManagedSessionInputCaseIdentifierSet`` and ``pro::ManagedSessionOutputCaseIdentifierSet``.
+Now we have constructed the sets of identifiers that need to be passed from the client session to the solver session (``sInputIds``) and the set of identifiers to be passed from the solver session to the client session (``sOutputIds``), we need to pass this information to AIMMS PRO, such that ``pro::DelegateToServer`` correctly handles this. For this purpose, AIMMS PRO declares the following sets: ``pro::ManagedSessionInputCaseIdentifierSet`` and ``pro::ManagedSessionOutputCaseIdentifierSet``.
 
 #. The ``pro::ManagedSessionInputCaseIdentifierSet`` needs to be assigned **before** calling the procedure ``pro::DelegateToServer``, for instance as follows:
 
@@ -85,7 +85,7 @@ Now we have constructed the sets of identifiers that need to be passed from the 
      
         pro::ManagedSessionInputCaseIdentifierSet := sInputIds ;
 
-#. The ``pro::ManagedSessionOutputCaseIdentifierSet`` needs to be assigned **during** the execution of the server session. For instance as follows:
+#. The ``pro::ManagedSessionOutputCaseIdentifierSet`` needs to be assigned **during** the execution of the solver session. For instance as follows:
 
     .. code-block:: aimms
      
@@ -100,7 +100,7 @@ Now we have constructed the sets of identifiers that need to be passed from the 
 Summary
 -------
 
-In this article, we've shown how to reduce the overhead of creating and communicating cases between the client session and the server session.
+In this article, we've shown how to reduce the overhead of creating and communicating cases between the client session and the solver session.
 
 Further reading
 ----------------

@@ -10,9 +10,8 @@ After publishing an app on the AIMMS PRO server, it is common to continue develo
 When we test our app from within the AIMMS IDE, we get the following dialog:
 
 .. image:: images/useprosession.PNG
-	:align: center
+    :align: center
 
-.. this image should be centered, but that is CSS properties for now. 
 
 Clicking ``No`` avoids AIMMS PRO, but this soon becomes annoying. To avoid this dialog, many developers use the function ``ProjectDeveloperMode()``. This function returns a 0 (false) or 1 (true) for the question - "Is the current instance in developer mode (AIMMS IDE) or in end user mode?"   You can read more on ``ProjectDeveloperMode`` `here <http://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_.
 
@@ -29,7 +28,7 @@ The disadvantage of using ``ProjectDeveloperMode()`` is that it disallows the co
  
 To check whether we are connected to an AIMMS PRO session or not, we use the function ``PRO::GetPROEndPoint()``. The function ``PRO::GetPROEndPoint()`` returns the URL, or the 'end point', of the AIMMS PRO server the AIMMS instance is running on. If the current AIMMS instance is not running on an AIMMS PRO server, an empty string is returned.
 
-We change the body of the ``prSolve`` procedure by replacing the test ``not ProjectDeveloperMode()`` with the test ``PRO::GetPROEndPoint()`` below.
+We change the body of the ``pr_Solve`` procedure by replacing the test ``not ProjectDeveloperMode()`` with the test ``PRO::GetPROEndPoint()`` below.
 
 .. code-block:: aimms
 
@@ -40,7 +39,7 @@ We change the body of the ``prSolve`` procedure by replacing the test ``not Proj
       endif ;
    endif ;
 
-		
+        
 The ``pro::DelegateToServer`` statement is executed only if the current AIMMS instance is connected to an AIMMS PRO server. If not, it is skipped and the remaining procedure is executed in the AIMMS IDE. This way, we avoid the annoying dialog mentioned above, but still enable `AIMMS PRO debugging <https://manual.aimms.com/pro/debugging-pro.html>`_ when needed.
 
 The AIMMS project for running Flowshop example can be downloaded from: :download:`3. Flow Shop - Enable development testing <downloads/3. Flow Shop - Enable development testing.zip>`.
