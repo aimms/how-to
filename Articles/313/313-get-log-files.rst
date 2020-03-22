@@ -59,7 +59,7 @@ When the incident happened while launching an app, look at:
 App running
 ^^^^^^^^^^^^^^^^^^
 
-When the incident happens during an AIMMS verify, client, or server session, look at the session log.
+When the incident happens during an AIMMS verify, client, or solver session, look at the session log.
 
 Download button for log files can be found at on tab ``configuration``, click ``Log Management``. 
 Note that this tab is only available to users in the ``Admin`` group.

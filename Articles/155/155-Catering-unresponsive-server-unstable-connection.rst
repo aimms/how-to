@@ -3,7 +3,7 @@ Troubleshoot Unresponsive Applications
 
 .. meta::
    :description: The AIMMS Error handling permits explicit recoveries, controlled by the end user, of abnormal environment and system conditions.
-   :keywords: error handling, time out, timed out, server session, AIMMS Deployment
+   :keywords: error handling, time out, timed out, solver session, AIMMS Deployment
 
 .. index:: PRO, DelegateToServer, Error Handling
 

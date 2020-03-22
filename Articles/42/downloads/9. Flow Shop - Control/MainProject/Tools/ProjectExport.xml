@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<ExportSettings>
+	<ExcludedFile>backup</ExcludedFile>
+	<ExcludedFile>data</ExcludedFile>
+	<ExcludedFile>log</ExcludedFile>
+	<ExcludedFile>PROTemp</ExcludedFile>
+	<ExcludedFile>Incumbent0.data</ExcludedFile>
+</ExportSettings>
