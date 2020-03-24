@@ -5,54 +5,58 @@ Comparing schedules from scenarios
 
 We want to compare schedules from different scenarios.
 
-As basis for our running example we use  :doc:`this flowshop model <../42/42-data-session-changes>`.
-This model is extended with the following:
+We use a flowshop model example, which you can download from the link below.
 
-User story:
-------------
+    * Download :download:`Flow_shop_comparing_schedules <model/Flow_Shop_Comparing_schedules.zip>`
 
-#.  Select cases of interest, first via data manager
+We'll show the result for the end user, and how to achieve it as a developer.
+
+Comparison as end user
+-----------------------
+
+#.  Select cases via data manager
 
     .. image:: images/SelectingCaseViaDataManager.png
         :align: center
         
-    For every case, you are interested, press the Compare case button. 
-    Before a case can be compared, there should be an active case, so start with selecting an active case.
+    Select an active case. For every case to compare, click *Compare case*. 
 
-#.  Select cases you actually want to show, via scalar widget
+#.  Select cases to show via scalar widget
 
     .. image:: images/SelectingCasesForTopBottomPresentation.png
         :align: center
         
-    We want to select a case shown for the data shown in the top Gantt Chart, 
-    and then one to be shown in the bottom Gantt Chart.
+    Select a case to show in the top Gantt Chart, 
+    and one to show in the bottom Gantt Chart.
 
 #.  Compare schedules visually
 
     .. image:: images/SchedulesFromTwoScenarios.png
         :align: center
         
-    And we want to see something like this, such that we visually can compare different schedules.
+   The result is a visual comparison of schedules.
 
 
-Developer Steps to achieve result:
+Developer Steps
 -----------------------------------
 
-#.  We collect the cases we want to compare, at least two cases and show the cases selected in a scalar widget.
+#.  Select cases to compare (two or more) and show the selected cases in a scalar widget.
 
-#.  Cache the information about the schedules in the model
+#.  Cache the information about the schedules in the model.
 
-#.  In the WebUI we create two Gantt Chart widgets
+#.  Create two WebUI Gantt Chart widgets.
 
-    #.  The Gantt info is based on the cached info stored in second step
+    #.  The Gantt info is based on the cached info stored in second step.
     
-    #.  We slice this information per Gantt Chart using the element parameters from the first step.
+    #.  Slice this information per Gantt Chart using the element parameters from the first step.
 
-Step 1: Collect cases and select two specific ones
+These steps are explained in detail below.
+
+Select cases to compare
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-AIMMS provides the predeclared set ``CurrentCaseSelection`` for all cases to be compared.
-It is declared as follows:
+Use the predeclared set ``CurrentCaseSelection`` for all cases you selected to be compared.
+Declare as follows:
 
 .. code-block:: aimms
     :linenos:
@@ -71,7 +75,7 @@ Once a user filled this set, he can select the case for the schedule shown in th
 and similarly, the case for the schedule shown in the bottom Gantt Chart.
 
 This is simply a matter of element parameters selecting a value in  ``CurrentCaseSelection``.
-The scalar widget, for elements in ``AllCases`` shows the bare case name; so we don't have to do the number to name conversion ourselves here.
+The scalar widget, for elements in ``AllCases`` shows the case name; so we don't have to do the number-to-name conversion ourselves here.
 
 The element parameters are declared as follows:
 
@@ -94,10 +98,10 @@ As we do not want to show such identifier names in the user interface, we use tr
     ep_ReferenceTopCase = Select Schedule for top
     ep_ReferenceBottomCase = Select Schedule for bottom
 
-Step 2: Cache the data for showing schedules
+Cache data for schedules
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The WebUI requires identifier references for the start and duration of the Gantt Charts; that is data that is stored in the model. Thus we need to cache data from the cases selected to the model. The AIMMS modeling languages provides the so-called dot-notation to refer to data in cases as follows:
+The WebUI requires identifier references for the start and duration of the Gantt Charts; that is data that is stored in the model. Thus we need to cache data from the cases selected to the model. The AIMMS modeling languages uses dot-notation to refer to data in cases as follows:
 
 .. code-block:: aimms
     :linenos:
@@ -118,7 +122,7 @@ The "." is then followed by an ordinary identifier reference.
 
 Using this definition, AIMMS will fill the parameters ``p_case_GCJobStart`` and ``p_case_GCJobDuration`` with the schedules stored in the case files.
 
-Step 3: Create and show two Gantt Chart widgets
+Create Gantt Chart widgets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Now we create the two Gantt Chart widgets, both with Gantt data:
@@ -131,7 +135,7 @@ Using identifier settings on both these parameters, the index ``IndexCurrentCase
 
 This should give the desired result as shown at the end of our user story.
 
-Download :download:`example model here <model/Flow Shop - Comparing schedules.zip>`
+
 
 Further reading
 -------------------------------
