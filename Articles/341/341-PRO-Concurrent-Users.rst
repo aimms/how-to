@@ -1,98 +1,50 @@
-Create responding applications
+Understanding Concurrent Usage of AIMMS PRO/Cloud
 ===============================
 
 .. meta::
-   :description: Keeping your Decision Support application responding while letting it do long-running searches for the best solution.
-   :keywords: responding applications, interactive, Decision Support, AIMMS PRO
+   :description: Understanding how concurrent users/usage works on AIMMS PRO/Cloud with WebUI
+   Keeping your Decision Support application responding while letting it do long-running searches for the best solution.
+   :keywords: concurrent users, concurrent usage, AIMMS PRO, WebUI, Cloud 
+   responding applications, interactive, Decision Support, AIMMS PRO
 
-Applications for decision support have two characteristics:
+This article intends to help you understand how concurrent usage works within AIMMS PRO on the cloud.
 
-* A lot of information for the user
-
-* The search for an optimal solution may take a long time
-
-You can design a **responding application** which responds to user interaction, 
-even during long-running searches for an optimal solution.
-
-Assign two sessions for the application:
-
-*  **Data session**: allows interaction with the user; only solves small mathematical programming problems.
-
-*  **Solver session**: solves the Operations Research problem; may involve solving one or more mathematical programming problems.
-
-AIMMS PRO platform is designed so that these two sessions can communicate with each other.
-
-To adapt an optimization application to become a responding optimization application requires several stages of development tasks:
-
-#.  Structure: Separate the search for an optimal solution as a separate solver session.
-
-#.  Development: Make sure that you can read the solution at your own convenience, 
-    and work on the application-independent from an AIMMS PRO system.
-    
-#.  Finishing: Add progress status messages, ensure
-    that intermediate solutions are saved, and add a way to feed new data to the solver session.
-
-Tasks required in these stages are discussed below in more detail with links to further help. 
-
-Separating sessions
+Introduction
 --------------------
 
-The first step is that we are able to
+Online platforms like PRO that are hosted on the cloud usually have some policies in place that dictate how many concurrent users are allowed to use the service at a time and for how long due to having a large number of users running the service. It is also sometimes unclear what a single concurrent user is and how it may affect other users trying to run applications on the PRO platform. 
 
-#.  adapt our application such that the data and solver session are separated,
+This document explains what a single concurrent user means and how that may affect other users and clarifies if/what policies affect users logging onto PRO. 
 
-#.  connect to an AIMMS PRO system,
+**Concurrent User Definition**
 
-#.  publish our application on that AIMMS PRO system, and
+A single concurrent user is defined as one or more (different) apps that have been launched and are still active in WinUI or WebUI from within a single PRO portal session. 
+Keep in mind that if a user logs in to PRO with the same username from two different browsers at the same time with applications running concurrently, then this counts as two concurrent user usage.
 
-#.  test it by launching the application.
+**Concurrent Users Policies**
 
-This is described in detail at: :doc:`Deploy an Application on AIMMS PRO <../33/33-pro-deploy-app>` .
+* There is no policy on the number of concurrent users that can be logged into the portal at any moment of time. As a result there is no queue. 
+  (Note: The number of concurrent users is restricted by the number of concurrent user licenses you have)
 
-Delegate and develop
+* There is no timeout or any other policy that would auto log out a user. However, an admin can manually kick a user off a session to free up a license.  
+
+**Concurrent User Licenses**
+
+When a user is unable to launch a session due to an insufficient number of concurrent user licenses, a message of ‘There are no free seats available’ will be displayed. 
+
+WebUI
 --------------------
 
-The AIMMS IDE is used to develop applications, but the applications are deployed on AIMMS PRO. 
-In the article :doc:`develop multi-platform applications<../32/32-pro-develop-app>` we describe how to model for the combination.
+**Idle Session**
 
-Responding client side
------------------------
+An idle session is when all browser tabs are closed or any other reason causing a severed connection to our cloud database (e.g. internet connection loss). 
 
-To make an application responding, we should not wait for the solver session to complete. 
-When an AIMMS WebUI application is waiting for a long-running procedure, this is indicated to the user by
-having a veil is drawn over the screen and showing a busy indicator.
-By not waiting for the solver session, we avoid this veil.
-More about this in :doc:`remove veil<../19/19-remove-veil>`
+.. note::
 
-User-specified load
--------------------
+   There is a timeout policy that terminates an idle session after 5 minutes. 
+   Related: :doc:`Keep WebUI Session Active<../19/19-remove-veil>`
 
-The user may be surprised/overwhelmed when the results computed in the solver session come immediately in.
-To handle the results from the solver session at the convenience of the user, see 
-:doc:`load results upon request<../40/40-data-server-load-results>`
+**Terminating a Session**
 
-Progress information
----------------------
-
-The solver session can send messages to the data session to keep the user informed of the progress. 
-How to send and receive such messages is discussed in :doc:`share progress information<../35/35-web-ui-progress-window>`
-
-Passing intermediate solutions
-------------------------------
-
-Intermediate solutions found can be shared efficiently between the solver and data session using AIMMS cases. 
-These cases are stored using AIMMS PRO storage.
-Further details are in :doc:`share intermediate solutions<../36/36-intermediate-solution>`
-
-Interrupting the solver session
--------------------------------
-
-When the solver session is running too long or doesn't make sufficient progress, we'd like to stop it.
-The data session can :doc:`interrupt the solver session<../34/34-interrupt-server-session>`.
-
-Passing new data to the solver session
---------------------------------------
-
-Data changes can be sent to the solver session, for instance, to send more or less progress information to the data session.
-See :doc:`share data changes<../42/42-data-session-changes>`
+It is possible to terminate a session based on logic defined by the AIMMS developer using the AIMMS modeling language, which can free up licenses. 
 
