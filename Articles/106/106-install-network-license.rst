@@ -34,7 +34,7 @@ Installing the Network License Server
 
 A network license is administrated by the Network License Server.
 
-1. Download the **Network License Server** from `AIMMS Downloads <https://aimms.com/english/developersdownloads/download-aimms/aimms-network-license-server>`_.
+1. Download the **Network License Server** from `AIMMS Downloads <https://aimms.com/english/developers/downloads/download-aimms/aimms-network-license-server>`_.
 
 2. Run the `AimmsLicenseServer...msi` installation file and follow the prompts in the Installation Wizard.
 
