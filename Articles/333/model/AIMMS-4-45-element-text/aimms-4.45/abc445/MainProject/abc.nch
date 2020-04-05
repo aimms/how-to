@@ -1,0 +1,8 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"PostMainTermination" "PretMainTermination" "2020-04-05 09:42:01"
+"Copy_MainInitialization" "PostMainInitialization" "2020-04-05 09:42:10"
+"simpleNames" "s_someElements" "2020-04-05 11:11:37"
+"sn" "i_sn" "2020-04-05 11:11:44"
+"elaborateNames" "sp_elaborateNames" "2020-04-05 11:12:06"
+"valueNames" "p_associatedValues" "2020-04-05 11:12:27"
+"p01_visible" "p01_visibleElements" "2020-04-05 11:12:37"

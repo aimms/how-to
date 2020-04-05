@@ -48,7 +48,7 @@ AIMMS 4.16 is the last version where selection widget could contain AIMMS sets a
 .. image:: images/Aimms416FilteringUsingSetInSelectionWidget.png
     :align: center
 
-With AIMMS 4.17, you will need to a zero one parameter, for instance something like:
+With AIMMS 4.17, you will need to add a zero one parameter, for instance something like:
 
 .. code-block:: aimms
     :linenos:
@@ -72,9 +72,9 @@ And then specifying such a parameter in the contents  (and pressing ``select all
 
 **Downloads:**
 
-*   :download:`Before, using AIMMS 4.16 <model/AIMMS-3-16-set-selection-widget/AIMMS-4.16/abc416.zip>`
+*   :download:`Before, using AIMMS 4.16 <model/AIMMS-4-16-set-selection-widget/AIMMS-4.16/abc416.zip>`
 
-*   :download:`After, using AIMMS 4.17 <model/AIMMS-3-16-set-selection-widget/AIMMS-4.17/abc417.zip>`
+*   :download:`After, using AIMMS 4.17 <model/AIMMS-4-16-set-selection-widget/AIMMS-4.17/abc417.zip>`
 
 AIMMS 4.19 Starting browser
 ---------------------------
@@ -108,6 +108,38 @@ add the folder ``MainProject\WebUI`` afterwards!
 AIMMS 4.45 Element Text
 -----------------------
 
-AIMMS 4.45 is the last version of AIMMS that supports the ``elementText.js`` file to adapt 
-the `presentation of element names <https://documentation.aimms.com/webui/folder.html#element-text>`_ .
+See also `presentation of element names <https://documentation.aimms.com/webui/folder.html#element-text>`_
+
+The names of elements in a table can be displayed with more elaborate names; for instance, when initials of people are used in a set, but you want to see in the tables their actual names.
+
+AIMMS 4.45 is the last version of AIMMS that supports the javascript identifier ``ElementTextMap`` often found in files with names such as ``elementText.js`` or  ``element-text-map.js`` in the folder ``.\MainProject\WebUI\resources\javascript\``.
+
+Such a file looks like:
+
+.. code-block:: javascript
+    :linenos:
+    :emphasize-lines: 2
+
+    ElementTextMap = {
+         "i_sn" : "sp_elaborateNames",
+    };
+
+For every data line, on the left we see the name of an index, here ``i_sn``, and on the right the name of a string parameter, here ``sp_elaborateNames``. To convert such a line, we open the set that is the range of the index, here ``s_someElements``, and specify the string parameter as annotation ``webui::ElementTextIdentifier``.  The declaration of the set becomes:
+
+.. code-block:: aimms
+    :linenos:
+    :emphasize-lines: 3 
+
+    Set s_someElements {
+        Index: i_sn;
+        webui::ElementTextIdentifier: sp_elaborateNames;
+    }
+
+**Downloads:**
+
+*   :download:`Before, using AIMMS 4.45 <model/AIMMS-4-45-element-text/AIMMS-4.45/abc445.zip>`
+
+*   :download:`After, using AIMMS 4.46 <model/AIMMS-4-45-element-text/AIMMS-4.46/abc446.zip>`
+
+
 
