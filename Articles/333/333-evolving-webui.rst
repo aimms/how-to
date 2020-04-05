@@ -135,11 +135,59 @@ For every data line, on the left we see the name of an index, here ``i_sn``, and
         webui::ElementTextIdentifier: sp_elaborateNames;
     }
 
+Once this conversion is complete, I recommend to remove the corresponding ``.js`` from your project; some file transfer mechanisms don't approve of ``.js`` files in folders or ``.zip`` files.
+
 **Downloads:**
 
 *   :download:`Before, using AIMMS 4.45 <model/AIMMS-4-45-element-text/AIMMS-4.45/abc445.zip>`
 
 *   :download:`After, using AIMMS 4.46 <model/AIMMS-4-45-element-text/AIMMS-4.46/abc446.zip>`
+
+
+AIMMS 4.49 Annotations
+-----------------------
+
+`Data dependent styling <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_ uses annotations identifiers. 
+
+Up  to and including AIMMS 4.49, the annotation identifier associated with identifier ``X``, needed to be called ``X_annotations``.  From AIMMS 4.50 onwards, the annotation identifier associated with identifier ``X`` can be specified using the annotation attribute ``webui::AnnotationsIdentifier``. This permits the reuse of a single annotations identifiers by multiple other identifier and more freedom in naming identifiers.
+
+In our example, we use in AIMMS 4.49:
+
+.. code-block:: aimms
+    :linenos:
+
+    Parameter p_associatedValues {
+        IndexDomain: i_sn;
+    }
+    StringParameter p_associatedValues_annotations {
+        IndexDomain: i_sn;
+    }
+
+In AIMMS 4.50 we can use:
+
+.. code-block:: aimms
+    :linenos:
+    :emphasize-lines: 3,5
+
+    Parameter p_associatedValues {
+        IndexDomain: i_sn;
+        webui::AnnotationsIdentifier: sp_associatedValuesAnnotations;
+    }
+    StringParameter sp_associatedValuesAnnotations {
+        IndexDomain: i_sn;
+    }
+
+Not only did we add an annotation to the declaration of ``p_associatedValues``, but we also took the opportunity to change the name of the annotations identifier, such that it could adhere to our naming conventions.
+
+
+**Downloads:**
+
+*   :download:`Before, using AIMMS 4.49 <model/AIMMS-4-49-annotation/AIMMS-4.49/abc449.zip>`
+
+*   :download:`After, using AIMMS 4.50 <model/AIMMS-4-49-annotation/AIMMS-4.50/abc450.zip>`
+
+
+
 
 
 
