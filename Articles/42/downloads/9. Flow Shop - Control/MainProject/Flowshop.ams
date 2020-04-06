@@ -1,0 +1,550 @@
+## ams_version=1.0
+
+Model Main_Flow_Shop {
+    Comment: {
+        "Keywords:
+        CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP."
+    }
+    Section WebUI_support {
+        Set AllPublicIdentifiers {
+            SubsetOf: AllIdentifiers;
+            Definition: Main_Flow_Shop;
+        }
+        Section Actions {
+            Set s_ActionNumbers {
+                SubsetOf: Integers;
+                Index: i_an;
+                Definition: ElementRange(1,9);
+            }
+            StringParameter sp_SecondaryActions {
+                IndexDomain: (i_an, webui::indexPageActionSpec );
+                Definition: {
+                    {
+                    	('1','displaytext'): "Solve" ,             ! (Optional) The text/label you would like to give the action.
+                    	('1','icon'       ): "aimms-hammer",       ! (Optional) The icon you want to display for the respective action.
+                    	('1','procedure'  ): "pr_Solve",           ! (Optional) The procedure you want to call when the respective action is clicked.
+                    	('1','state'      ): if ( not p01_ResultsAvailable ) and ( not p01_SolveInterruptable ) then "Active" else "InActive" endif
+                    	                                           ! (Optional) Active (displayed and clickable), 
+                    	                                           !            Inactive (displayed and not clickable), and 
+                    	                                           !            Hidden (not displayed). 
+                    	                                           !            By default, the state is Hidden.
+                    
+                    
+                    }
+                }
+            }
+            StringParameter sp_StatusBar {
+                IndexDomain: (webui::indexApplicationExtension,webui::indexStatusBarSpec);
+                Definition: {
+                    { 
+                    
+                    !-----------------------------------------------------------------------------------------------------------------------
+                    
+                    	( '1', 'header'    ) :  "Solve in progress",
+                    	( '1', 'icon'      ) :  "aimms-bow", ! (Optional) The icon you want to display for the respective message.
+                    	( '1', 'color'     ) :  "green", ! No solve in progress, so less interesting.
+                    	( '1', 'text'      ) :  "click to interrupt", ! (REQUIRED) The text you want to display for the status message.
+                    	( '1', 'tooltip'   ) :  "Solve in progress, click to interrupt", ! (Optional) Tooltip to be displayed when the user hovers over the respective status message.
+                    	( '1', 'procedure' ) :  "pr_AskInterruptSolve", ! (Optional) The procedure you want to call when the respective status message is clicked.
+                    	( '1', 'state'     ) :  if p01_SolveInterruptable then "Active" else "Hidden" endif, ! (Optional) Active (displayed and clickable), Inactive (displayed and not clickable) and Hidden (not displayed). By default, the state is Hidden.
+                    
+                    !-----------------------------------------------------------------------------------------------------------------------
+                    
+                    	( '2', 'header'    ) :  "solution can be downloaded", ! (Optional) The Header/Title text you want to display for the status message.
+                    	( '2', 'icon'      ) :  "aimms-download9", ! (Optional) The icon you want to display for the respective message.
+                    	( '2', 'color'     ) :  "green", ! (Optional) The color you want to display for the icon.
+                    	( '2', 'text'      ) :  "click to download", ! (REQUIRED) The text you want to display for the status message.
+                    	( '2', 'tooltip'   ) :  "Solution is available, click to download", ! (Optional) Tooltip to be displayed when the user hovers over the respective status message.
+                    	( '2', 'procedure' ) :  "pr_LoadResults", ! (Optional) The procedure you want to call when the respective status message is clicked.
+                    	( '2', 'state'     ) :  if p01_ResultsAvailable then "Active" else "Hidden" endif ! (Optional) Active (displayed and clickable), Inactive (displayed and not clickable) and Hidden (not displayed). By default, the state is Hidden.
+                    
+                    !-----------------------------------------------------------------------------------------------------------------------
+                    
+                    
+                    }
+                }
+            }
+            StringParameter sp_GapWidgetActions {
+                IndexDomain: (i_an,webui::indexWidgetActionSpec);
+                Definition: {
+                    { 
+                    	( '1', 'displaytext' ) : if p01_ProgressWillBeSupplied then "pause progress recording" else "resume progress recording" endif,  
+                    	( '1', 'icon'        ) : "aimms-bullhorn",  
+                    	( '1', 'procedure'   ) : "pr_ToggleProgress",  
+                    	( '1', 'state'       ) : "Active" 
+                    }
+                }
+            }
+        }
+        Section Solve_Interruptable {
+            Parameter p01_SolveInterruptable {
+                InitialData: 0;
+            }
+            Parameter p01_ASolutionAvailable {
+                Range: binary;
+                Definition: if card( p_GCJobStart ) then 1 else 0 endif;
+            }
+        }
+        Section Loading_server_session_results {
+            Property: NoSave;
+            StringParameter sp_SavedRequestID {
+                InitialData: "";
+            }
+            Parameter p01_ResultsAvailable {
+                Range: binary;
+                InitialData: 0;
+            }
+            Procedure pr_myLoadResultsCallback {
+                Arguments: (RequestID);
+                Body: {
+                    sp_SavedRequestID := RequestID;
+                    p01_ResultsAvailable := 1;
+                    p01_SolveInterruptable := 0 ;
+                }
+                StringParameter RequestID {
+                    Property: Input;
+                }
+            }
+            Procedure pr_LoadResults {
+                Body: {
+                    pro::session::LoadResultsCallBack(sp_SavedRequestID);
+                    p01_ResultsAvailable := 0 ;
+                    sp_SavedRequestID := "";
+                    p01_SolveInterruptable := 0 ;
+                }
+            }
+        }
+        Section Gantt_Chart {
+            Procedure pr_prepInterface {
+                Body: {
+                    p_GCJobStart(j,m)  := v_StartTime( first(s | v01_JobSchedule(j,s)),m);
+                    p_GCJobDuration(j,m) := p_ProcesTime(j,m);
+                }
+            }
+            Parameter p_noIncumbents {
+                Property: NoSave;
+            }
+            Parameter p_GCJobStart {
+                IndexDomain: (j,m);
+            }
+            Parameter p_GCJobDuration {
+                IndexDomain: (j,m);
+            }
+            StringParameter sp_JobDescription {
+                IndexDomain: (j);
+                Text: "Description of jobs that can be used inside the Gantt Chart";
+                Definition: {
+                    FormatString("J%i", ord(j));
+                }
+            }
+            StringParameter sp_MachineDescription {
+                IndexDomain: (m);
+                Text: "Description of machines that can be used inside the Gantt Chart";
+                Definition: {
+                    FormatString("M%i", ord(m));
+                }
+            }
+        }
+        Section GapCurves {
+            Property: NoSave;
+            Set s_Observations {
+                Index: i_Obs;
+                Parameter: ep_LastObservation;
+            }
+            Set s_ShownObservations {
+                SubsetOf: s_Observations;
+                Index: i_Sobs;
+                Definition: {
+                    
+                    { i_Obs | ( ( p_NoObservations < 10 ) or ( ord( i_Obs ) > 5 )        ) and 
+                    	  ( ( p_NoObservations <= ( 2 * p_PointsShownInCurve )  ) or 
+                                ( mod(ord(i_Obs), p_DividerForPointSelection ) = 1  ) or 
+                                ( i_Obs = last(s_Observations)                      )    )     }
+                }
+            }
+            Parameter p_BestBound {
+                IndexDomain: (i_Obs);
+            }
+            Parameter p_Incumbent {
+                IndexDomain: (i_Obs);
+            }
+            Parameter p_PointsShownInCurve {
+                InitialData: 30;
+            }
+            Parameter p_DividerForPointSelection {
+                Definition: {
+                    if p_NoObservations <= ( 2 * p_PointsShownInCurve ) then
+                    	1
+                    else
+                    	div( p_NoObservations, p_PointsShownInCurve )
+                    endif
+                }
+            }
+            Parameter p_NoObservations {
+                Definition: card(s_Observations);
+            }
+            Parameter p01_ProgressWillBeSupplied {
+                Range: binary;
+                InitialData: 1;
+            }
+            Parameter p_CurrveUpperBound {
+                Definition: {
+                    if card(s_Observations) > 5 then
+                    	ceil( max( i_obs | val(i_obs) > 5, p_Incumbent(i_Obs) ) / 10 ) * 10
+                    else
+                    	3 * p_CurveLowerBound
+                    endif
+                }
+            }
+            Parameter p_CurveLowerBound {
+                Definition: {
+                    if card(s_Observations) > 5 then
+                    	floor( min( i_obs | val( i_obs ) > 3, p_BestBound(i_Obs) ) / 10 ) * 10
+                    else
+                    	floor( 
+                    		(
+                    			min( m, sum( j, p_ProcesTime(j,m) ) ) +
+                    			min( j, sum( m, p_ProcesTime(j,m) ) ) -
+                    			max( (j,m), p_ProcesTime(j, m) )
+                    		)
+                    		/ 100 ) * 100
+                    endif
+                }
+            }
+            StringParameter sp_TitleGapCurve {
+                InitialData: "Gap curve";
+            }
+            Procedure pr_NewTimeCallback {
+                Body: {
+                    if p01_ProgressWillBeSupplied then
+                    	pr_UpdateGapToClient(mp_FlowShopModel.bestbound,mp_FlowShopModel.Incumbent);
+                    endif ;
+                }
+            }
+            Procedure pr_UpdateGapToClient {
+                Arguments: (bb,icb);
+                Body: {
+                    if pro::GetPROEndPoint() then
+                    	if pro::DelegateToClient(flags: pro::PROMFLAG_LIVE) then
+                    		return 1; 
+                    	endif ;
+                    else
+                     	if card(s_Observations) > 9 then ! To get out of the (infinite) loop.
+                     		mp_FlowShopModel.CallbackReturnStatus := 'abort' ;
+                     		p01_SolveInterruptable := 0 ;
+                     	endif ;
+                    endif ;
+                    SetElementAdd( s_Observations, ep_LastObservation, FormatString("%i", p_NoObservations+1) );
+                    p_BestBound(ep_LastObservation) := if mapval(bb ) then 0 else bb  endif ;
+                    p_Incumbent(ep_LastObservation) := if mapval(icb) then 0 else icb endif ;
+                    if mapval(bb) or mapval(icb) then 
+                    	gap := 100  ;
+                    else
+                    	if bb then
+                    		gap := ( ( icb - bb  ) / bb ) * 100 ;
+                    	else
+                    		gap := 0 ;
+                    	endif ;
+                    endif ;
+                    sp_TitleGapCurve := FormatString("Gap curve: best: %n, incumbent: %n, gap: %n%%",
+                    	bb, icb, gap );
+                    !update p_CurveLowerBound, p_CurrveUpperBound ;
+                }
+                Parameter bb {
+                    Property: Input;
+                }
+                Parameter icb {
+                    Property: Input;
+                }
+                Parameter gap;
+            }
+        }
+        Section Load_Intermediate_Results {
+            Set s_IncumbentSolutionIdentifiers {
+                SubsetOf: AllIdentifiers;
+                Definition: data { p_GCJobStart, p_GCJobDuration };
+            }
+            Parameter p_IncumbentNumber {
+                InitialData: 0;
+            }
+            StringParameter sp_CaseFileName;
+            StringParameter sp_FullCaseFileName;
+            StringParameter sp_FullProStorageName;
+            Procedure pr_NewIncumbentCallback {
+                Body: {
+                    empty v01_JobSchedule;
+                    
+                    Block ! Transfer the solution from the solver to AIMMS
+                    	RetrieveCurrentVariableValues(AllVariables);
+                    	v_TimeSpan := mp_FlowShopModel.Incumbent;
+                    Endblock ;
+                    
+                    Block ! Convert the solutions in the variables to a solution that is used in the Gantt Chart (GC solution)
+                    	pr_prepInterface();
+                    Endblock ;
+                    
+                    Block ! Transfer the GC solution from AIMMS to a case.
+                    	AllCaseFileContentTypes += 's_IncumbentSolutionIdentifiers' ;
+                    	CurrentCaseFileContentType := 's_IncumbentSolutionIdentifiers' ;
+                    	sp_CaseFileName := FormatString( "Incumbent%i.data", p_IncumbentNumber );
+                    	p_IncumbentNumber += 1 ;
+                    	sp_FullCaseFileName := "data/" + sp_CaseFileName ;
+                    	CaseFileSave( sp_CaseFileName, s_IncumbentSolutionIdentifiers );
+                    Endblock ;
+                    
+                    ! Transfer the case from the data folder of the server session to the AIMMS PRO storage user data folder.
+                    if pro::GetPROEndPoint() then
+                    	Block ! Transfer the GC solution from AIMMS to a case.
+                    		sp_FullProStorageName := "pro:/Userdata/" + pro::GetPROEnvironment() + 
+                    				"/" + pro::GetPROUserName() + "/Cases/" + pro::ModelName + "/" + sp_CaseFileName ;
+                    		Pro::SaveFileToCentralStorage(sp_CaseFileName, sp_FullProStorageName );
+                    	Endblock ;
+                     else
+                     	sp_FullProStorageName := "" ;
+                     endif ;
+                    
+                    
+                    ! Run the AIMMS execution on the data session
+                    pr_UpdateIncumbentToClient(sp_FullProStorageName,v_TimeSpan);
+                }
+            }
+            Procedure pr_UpdateIncumbentToClient {
+                Arguments: (sp_FullProStorageName,ts);
+                Body: {
+                    if pro::GetPROEndPoint() then
+                    	if pro::DelegateToClient(flags: pro::PROMFLAG_LIVE) then
+                    		return 1; 
+                    	endif ;
+                    	pr_LoadIntermediateResult(sp_FullProStorageName);
+                    endif ;
+                    v_TimeSpan            := ts ;
+                    p_noIncumbents+=1 ;
+                }
+                StringParameter sp_FullProStorageName {
+                    Property: Input;
+                }
+                Parameter js {
+                    IndexDomain: (j,m);
+                }
+                Parameter jd {
+                    IndexDomain: (j,m);
+                }
+                Parameter ts {
+                    Property: Input;
+                }
+            }
+            Procedure pr_LoadIntermediateResult {
+                Arguments: (sp_ArgFullProStorageName);
+                Body: {
+                    CaseFileLoad( sp_ArgFullProStorageName );
+                    
+                    ! Comment out the next line if you want to retain intermediate solutions.
+                    pro::DeleteStorageFile( sp_ArgFullProStorageName );
+                    
+                    p_noIncumbents+=1 ;
+                }
+                StringParameter sp_ArgFullProStorageName {
+                    Property: Input;
+                }
+            }
+        }
+        Section Progress_Updating {
+            StringParameter sp_TitleToggleButton {
+                Definition: {
+                    if p01_ProgressWillBeSupplied 
+                    	then "Progress shared - suppress now"
+                    	else "Progress paused - start sharing"
+                    endif
+                }
+            }
+            Procedure pr_ToggleProgress {
+                Body: {
+                    p01_ProgressWillBeSupplied := 1 - p01_ProgressWillBeSupplied ;
+                    pr_PassProgressSupplied(p01_ProgressWillBeSupplied);
+                }
+            }
+            Procedure pr_PassProgressSupplied {
+                Arguments: (pwbs);
+                Body: {
+                    if pro::GetPROEndPoint() then
+                    	sp_locSessionQueue := pro::session::CurrentSessionQueue();
+                    	if pro::DelegateToServer(requestQueue: sp_locSessionQueue,
+                    			flags: pro::PROMFLAG_LIVE + pro::PROMFLAG_PRIORITY) then
+                    		return 1 ;
+                    	endif ;
+                    endif ;
+                    p01_ProgressWillBeSupplied := pwbs ;
+                }
+                StringParameter sp_locSessionQueue;
+                Parameter pwbs {
+                    Property: Input;
+                }
+            }
+        }
+    }
+    DeclarationSection Flowshop_Mathematical_Program_Declarations {
+        Parameter p_MaxJobs {
+            Text: "Number of elements in the set Jobs";
+            Range: integer;
+        }
+        Set s_Jobs {
+            Text: "Set of all Jobs";
+            Index: j, j2;
+            Definition: {
+                ElementRange(1,p_MaxJobs, prefix: "Job-");
+            }
+        }
+        Set s_Schedules {
+            Text: "Set of all schedules";
+            Index: s;
+            Definition: {
+                ElementRange(1,p_MaxJobs, prefix: "Pos-");
+            }
+        }
+        Parameter p_MaxMachines {
+            Text: "Number of elements in the set Machines";
+            Range: integer;
+        }
+        Set s_Machines {
+            Text: "Set of all machines";
+            Index: m;
+            Definition: {
+                ElementRange(1,p_MaxMachines, prefix: "M-");
+            }
+        }
+        Parameter p_ProcesTime {
+            IndexDomain: (j,m);
+            Text: "Time required to process job j on machine m";
+        }
+        Variable v01_JobSchedule {
+            IndexDomain: (j,s);
+            Text: "Determining the place of the job";
+            Range: binary;
+        }
+        Variable v_StartTime {
+            IndexDomain: (s,m);
+            Text: "The time at which job in schedule position s commences processing on machine m";
+            Range: nonnegative;
+        }
+        Constraint c_OneJobPerSchedule {
+            IndexDomain: (s);
+            Text: "Only one job is related to every schedule";
+            Definition: sum(j, v01_JobSchedule(j,s)) = 1;
+        }
+        Constraint c_OneSchedulePerJob {
+            IndexDomain: (j);
+            Text: "Only one schedule is related to every job";
+            Definition: sum(s, v01_JobSchedule(j,s)) = 1;
+        }
+        Constraint c_MachineStartTime {
+            IndexDomain: (s,m) | m <> last(s_Machines);
+            Text: "The commencement of schedule s on machine m+1 is no earlier then its finish on machine m";
+            Definition: v_StartTime(s,m + 1) >=  v_StartTime(s,m) + sum(j, p_ProcesTime(j,m)*v01_JobSchedule(j,s));
+        }
+        Constraint c_ScheduleStartTime {
+            IndexDomain: (s,m) | s <> last(s_Schedules);
+            Text: "The commencement of schedule s + 1 on machine m is no earlier then the finish time of job j on machine m";
+            Definition: v_StartTime(s + 1,m) >=  v_StartTime(s,m) + sum(j, p_ProcesTime(j,m)*v01_JobSchedule(j,s));
+        }
+        Variable v_TimeSpan {
+            Text: "Total time to process all jobs on all machines";
+            Definition: v_StartTime(Last(s),last(m)) + sum(j, p_ProcesTime(j,last(m))*v01_JobSchedule(j,Last(s)));
+        }
+        MathematicalProgram mp_FlowShopModel {
+            Objective: v_TimeSpan;
+            Direction: minimize;
+            Constraints: AllConstraints;
+            Variables: AllVariables;
+        }
+    }
+    Section MainModelProcedures {
+        Procedure MainInitialization {
+            Body: {
+                empty p_BestBound, p_Incumbent ;
+                
+                p_MaxJobs 	:= 18;
+                p_MaxMachines 	:= 20;
+                
+                pr_GenerateData;
+            }
+        }
+        Procedure MainExecution;
+        Procedure MainTermination {
+            Body: {
+                return 1 ;
+            }
+        }
+    }
+    Procedure pr_GenerateData {
+        Body: {
+            p_ProcesTime(j,m) := round(Uniform(1,20));
+        }
+    }
+    Procedure pr_Solve {
+        Body: {
+            Empty s_Observations ;
+            p_noIncumbents := 0 ;
+            p_IncumbentNumber := 0 ;
+            p01_SolveInterruptable := 1 ;
+            pr_DelegateSolve();
+        }
+    }
+    Procedure pr_DelegateSolve {
+        Body: {
+            if pro::GetPROEndPoint() then
+            	if pro::DelegateToServer(  
+            				  completionCallback :  'pr_myLoadResultsCallback' 
+            				  ) then	
+            		return 1;
+            	endif ;
+            endif ;
+            
+            pr_DoSolve();
+        }
+    }
+    Procedure pr_DoSolve {
+        Body: {
+            Empty AllVariables;
+            pr_GenerateData();
+            
+            mp_FlowShopModel.CallbackNewIncumbent := 'pr_NewIncumbentCallback';
+            mp_FlowShopModel.CallbackTime := 'pr_NewTimeCallback';
+            option progress_time_interval := 1 ;
+            p01_ProgressWillBeSupplied := 1 ;
+            
+            solve mp_FlowShopModel;
+        }
+    }
+    Procedure pr_AskInterruptSolve {
+        Body: {
+            s_Actions:= data { Cancel, OK };
+            ep_PageId  := 'askinterruptsolve_1';
+            webui::OpenDialogPage(ep_PageId , "Are you sure you want to interrupt the solve", s_Actions, 'pr_ReactAnswerInterruptSolve');
+        }
+        Set s_Actions;
+        ElementParameter ep_PageId {
+            Range: webui::AllDialogPages;
+        }
+    }
+    Procedure pr_ReactAnswerInterruptSolve {
+        Arguments: (sp_Answer);
+        Body: {
+            if sp_Answer = "OK" then
+            	pr_InterruptSolve();
+            endif ;
+        }
+        StringParameter sp_Answer {
+            Property: Input;
+        }
+    }
+    Procedure pr_InterruptSolve {
+        Body: {
+            if pro::GetPROEndPoint() then
+            	sp_locSessionQueue := pro::session::CurrentSessionQueue();
+            	pro::client::StopExecution( sp_locSessionQueue, pro::AIMMSAPI_INTERRUPT_SOLVE );
+            endif ;
+            p01_SolveInterruptable := 0 ;
+        }
+        StringParameter sp_locSessionQueue;
+    }
+}

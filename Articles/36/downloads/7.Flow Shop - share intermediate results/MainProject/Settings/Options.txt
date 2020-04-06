@@ -1,0 +1,26 @@
+﻿* AIMMS
+aim_character_encoding WINDOWS-1252
+ascii_case_character_encoding WINDOWS-1252
+datatable_character_encoding WINDOWS-1252
+default_input_character_encoding WINDOWS-1252
+default_output_character_encoding WINDOWS-1252
+external_dll_AIMMS_reference ASCII
+external_string_character_encoding WINDOWS-1252
+* AOA
+* BARON 19
+* CBC 2.9
+* CONOPT 4.0
+* CPLEX 12.10
+* CPOptimizer 12.9
+* GUROBI 9.0
+* IPOPT 3.11
+* Knitro 11.0
+* Knitro 12.0
+* MINOS
+* ODH-CPLEX 4.0
+* PATH 4.7
+* SNOPT 7.2
+* XA 16
+* NETSOL
+* Environment
+Project_Title "AIMMS - 7.Flow Shop - share intermediate"

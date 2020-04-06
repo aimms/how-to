@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2020-02-19 14:59:13">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>CDFB6C8D-067D-4490-BB30-D0174299E222</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Scalar">
+		<Location top="18" left="24" bottom="162" right="432" />
+		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>ep_ReferenceTopCase</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>ep_ReferenceBottomCase</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>ep_ReferenceTopCase</Symbol>
+			<Symbol>ep_ReferenceBottomCase</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

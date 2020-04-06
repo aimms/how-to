@@ -2,7 +2,7 @@ Send and Receive Messages
 ==============================
 
 .. meta::
-   :description: How to use queues to pass messages from the server session to the data session.
+   :description: How to use queues to pass messages from the solver session to the data session.
    :keywords:  queue, message
 
 .. https://gitlab.aimms.com/Chris/aimms-how-to/issues/80
@@ -36,7 +36,7 @@ This article provides a simple example based on  :doc:`80-schedule-jobs`  The es
 
 #. The name of the queue should be communicated to all the server sessions. In the example this is achieved by passing the name of the queue as a procedure argument.
 
-#. The server sessions should pass messages to the data session.  Only for the first server session, `pro::clientQueueID` is valid reference to a queue for the data session. This is why all these server sessions post their messages on the queue created in the first step.
+#. The server sessions should pass messages to the data session.  Only for the first solver session, `pro::clientQueueID` is valid reference to a queue for the data session. This is why all these server sessions post their messages on the queue created in the first step.
 
 #. When these server sessions pass their message, it should be stored and displayed in the data session.  
 
