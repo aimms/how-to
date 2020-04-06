@@ -20,7 +20,7 @@ set AIMMSEXECUTABLE="%localappdata%\AIMMS\IFA\Aimms\%AIMMSVERSION%\Bin\aimms.exe
 rem Assuming there is precisely one .aimms file in the current folder, 
 rem the following command will select that .aimms file and start it with the AIMMSEXECUTABLE selected.
 rem Logging is turned on by --logcfg LoggerConfig.xml on the command line.
-for /f "usebackq delims=|" %%f in (`dir /b *.aimms`) do %AIMMSEXECUTABLE% --logcfg LoggerConfig.xml %%f
+for /f "usebackq delims=|" %%f in (`dir /b *.aimms`) do %AIMMSEXECUTABLE% --logcfg LoggerConfig.xml "%%f"
 
 rem Assuming here LoggerConfig.xml still writes to the fixed folder c:\temp,
 rem we move the create logfile from this folder to the current folder.
