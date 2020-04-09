@@ -33,7 +33,7 @@ A second strategy is to:
 
 *   Insert rows as there is information
 
-Clearly, the first strategy looks more complicated and time consuming. It can be more time consuming, as it needs to read a potentially large amount of data, before the table is actually modified. To understand why this strategy is still needed, we need to take a close look at the concept of foreign keys.
+Clearly, the first strategy looks more complicated and time-consuming. It can be more time consuming, as it needs to read a potentially large amount of data before the table is actually modified. To understand why this strategy is still needed, we need to take a close look at the concept of foreign keys.
 
 Consider a database that maintains the data of customers and their orders:
 
@@ -79,19 +79,19 @@ AIMMS has several methods of obtaining that metadata:
 
 #.  It issues a call to the database, via the function `SQLForeignKeys <https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlforeignkeys-function>`_.
 
-#.  It ignores the presence of foreign keys, because the options ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys`` have both been set to ``'Ignore'``. Thus AIMMS will use the efficient strategy two.
+#.  It ignores the presence of foreign keys because the options ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys`` have both been set to ``'Ignore'``. Thus AIMMS will use  efficient strategy two.
 
-#.  It assumes the presence of foreign keys, because the options ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys`` have both been set to ``'Assume'``. Thus AIMMS will use the safe strategy one.
+#.  It assumes the presence of foreign keys because the options ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys`` have both been set to ``'Assume'``. Thus AIMMS will use the safe strategy one.
 
 The default of the options ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys`` is ``'Check'``. When an AIMMS application didn't specify other values for these options, AIMMS will use method 1 to obtain the metadata information.
 
-.. note:: Obtaining metadata from a database can be time consuming; depending on database vendor and complexity of the database schema.
+.. note:: Obtaining metadata from a database can be time-consuming; depending on database vendor and complexity of the database schema.
 
 
-Database schema design and providing meta data
+Database schema design and providing metadata
 ----------------------------------------------
 
-In this section, a practice is suggested to safely and efficiently write the data to the application database. To do so, we divide the schema in three layers:
+In this section, a practice is suggested to safely and efficiently write the data to the application database. To do so, we divide the schema into three layers:
 
 #.  The key data,
 
@@ -118,7 +118,7 @@ The key data are tables that correspond to the sets and the one-dimensional para
 
 *   Products
 
-There are several tables that refer to these tables; these key tables are the grand fathers for foreign keys.
+There are several tables that refer to these tables; these key tables are the grandfathers for foreign keys.
 When writing to these tables it is important that the foreign key constraints are adhered to.
 As these tables are relatively small, efficiency is less important.  So these tables are best written to with the options ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys`` set to ``'Assume'``, for instance as follows:
 
@@ -143,13 +143,13 @@ The following remarks apply to this code;
 Structure data
 ^^^^^^^^^^^^^^^^
 
-The structure data relates one or more key data tables.  Examples are:
+The structure data relates to one or more key data tables.  Examples are:
 
 *   Connections, between two Assets
 
 *   ProductCatalog, between a store and a product
 
-These tables are the fathers of the foreign keys, and themselves also children of the grand fathers.
+These tables are the fathers of the foreign keys, and themselves also children of the grandfathers.
 When writing to these tables, safety still prevails over efficiency.
 
 .. code-block:: aimms
@@ -170,7 +170,7 @@ Massive data
 The actual data, for instance, how much of which product is bought by which customer and when.
 These tables are the typical child tables. 
 Although they will be constrained by foreign keys, they will not invoke the constraints of other tables. 
-It is therefore safe to use an efficient strategy for writing to these tables.
+It is, therefore, safe to use an efficient strategy for writing to these tables.
 
 .. code-block:: aimms
     :linenos:
