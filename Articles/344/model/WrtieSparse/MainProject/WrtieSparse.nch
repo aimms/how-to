@@ -1,0 +1,7 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"p" "p_dat" "2020-04-19 07:35:51"
+"db_AB" "db_AB_for_writing" "2020-04-19 08:02:09"
+"db_AB_for_writing" "db_AB_for_writing_Selection" "2020-04-19 08:02:27"
+"Copy_db_AB_for_writing_Selection" "db_AB_for_reading_Table" "2020-04-19 08:02:50"
+"pr_test" "pr_testWriteSelectionToDatabase" "2020-04-19 08:18:15"
+"pr_InitializeData" "pr_InitializeDataForSelectionWriteToDatabase" "2020-04-19 08:18:41"
