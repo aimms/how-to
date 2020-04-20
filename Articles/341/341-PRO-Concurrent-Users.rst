@@ -1,4 +1,4 @@
-Understanding Concurrent Usage of AIMMS PRO/Cloud
+Understanding Concurrent Usage on AIMMS PRO/Cloud
 ==================================================
 
 .. meta::
@@ -6,12 +6,11 @@ Understanding Concurrent Usage of AIMMS PRO/Cloud
    :keywords: concurrent users, concurrent usage, AIMMS PRO, WebUI, Cloud 
 
 
-This article intends to help you understand how concurrent usage works within AIMMS PRO on the cloud.
+This article intends to help you understand how concurrent usage works on the AIMMS PRO and Cloud platforms. The number of concurrent users allowed depends on the licensing agreements of your AIMMS platform subscription. .  
 
-Introduction
---------------------
 
-Online platforms like PRO that are hosted on the cloud usually have some policies in place that dictate how many concurrent users are allowed to use the service at a time and for how long due to having a large number of users running the service. It is also sometimes unclear what a single concurrent user is and how it may affect other users trying to run applications on the PRO platform. 
+
+.. Online platforms like PRO that are hosted on the cloud usually have some policies in place that dictate how many concurrent users are allowed to use the service at a time and for how long due to having a large number of users running the service. It is also sometimes unclear what a single concurrent user is and how it may affect other users trying to run applications on the PRO platform. 
 
 This document explains what a single concurrent user means and how that may affect other users and clarifies if/what policies affect users logging onto PRO. 
 
