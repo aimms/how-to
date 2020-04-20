@@ -1,9 +1,11 @@
-Strategy for write to table
-===================================
+Strategies for Writing to Databases
+=====================================
 
 The purpose of this article is to provide a heuristic for safe and efficient writing when the performance of writing to the database is a concern.
 
-When AIMMS writes data to a database table, it uses structural information of the database table at hand to determine a safe and efficient available strategy for writing. To make it is easy to remember these strategies, we will also discuss the effects of different strategies. However, we need to introduce the concept of *Foreign Key* just to do that.
+When AIMMS writes data to a database table, it uses structural information of the database table to determine a safe and efficient available strategy for writing. To make it easy to remember these strategies, we will also discuss the effects of different strategies. However, we need to introduce the concept of *Foreign Key* just to do that.
+
+.. MC: Is it required to say "available strategy" in line 6? Is "a safe and efficient strategy" not sufficient ? Does saying "Available strategy" convey something specific ?
 
 In this article we discuss:
 
@@ -11,7 +13,7 @@ In this article we discuss:
 
 #.  Foreign key
 
-#.  The available strategies, and for each strategy, its consequences.
+#.  The available strategies and their  consequences.
 
 #.  The metadata obtained to determine the appropriate strategy.
 
@@ -53,9 +55,13 @@ As you can see from this schema, both a customer and a product have an ``Id``.  
 Foreign Keys
 -------------
 
+.. MC: very helpful information but don't people working with databases already know this ? I feel we don't need to go into this detail as it isn't AIMMS specific
+
 The relations mentioned in the previous section are examples of consistency relations in a database. 
 
-It is important that such relations between tables are maintained; for instance, if there is a ``CustomerId`` or a ``ProductId`` in the table ``Orders`` that is not in the table ``Customers``, respectively, in the table ``Products`` we will not be able to fulfill that order, because we do not know where to deliver, or what to deliver!
+.. MC: should it be consistent relations ?
+
+It is important that such relations between tables are maintained. For instance, if there is a ``CustomerId`` or a ``ProductId`` in the table ``Orders`` that is not in the table ``Customers`` or in the table ``Products`` respectively, then we will not be able to fulfill that order because we do not know where to deliver, or what to deliver!
 
 These relations can be enforced in a database using **Foreign Keys**. 
 
@@ -125,8 +131,10 @@ It can be more time consuming, as it needs to read a potentially large amount of
 To understand why this strategy is still needed, we need to take a close look at their behavior in combination with foreign keys.
 
 
-Choice of strategy and consequences for safety and efficiency
+Choice of strategy and consequences
 -------------------------------------------------------------
+
+.. Choice of strategy and consequences for safety and efficiency
 
 Let's get back to the strategies introduced at the beginning of the previous section.
 
@@ -140,9 +148,13 @@ As an example, consider the operation to change the address of a customer, using
     There is no effect on the table ``Orders``, which is desired. 
     Therefore, even though this strategy may be less efficient, it is safe.
 
-When the table at hand is a parent table in a Foreign Key constraint, then the safe strategy ``A`` is preferred. Otherwise, the efficient strategy ``B`` is preferred. AIMMS bases the knowledge of whether Foreign Keys are present on the setting of the two options ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys``, according to the following table:
+When the table at hand is a parent table in a Foreign Key constraint, then the safe strategy ``A`` is preferred. Otherwise, the efficient strategy ``B`` is preferred. 
 
-.. csv-table:: Effect options  ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys``
+AIMMS uses the knowledge of whether Foreign Keys are present or not based on the values of two options: ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys``, according to the following table:
+
+.. no need for inline formatting when in captions
+
+.. csv-table:: Effect of options Database_foreign_key_handling and Database_string_valued_foreign_keys
     :header: "Setting", "Foreign Key determination", "Strategy", "Pro", "Con"
     :widths: 7, 25, 7, 8, 11
 
@@ -150,7 +162,8 @@ When the table at hand is a parent table in a Foreign Key constraint, then the s
     "Both to ``'ignore'``", "AIMMS assumes the table at hand is not a parent table in Foreign Keys Constraints", "``B``", "Efficient", "Might lead to data loss" 
     "Both to ``'assume'``", "AIMMS assumes the table at hand is a parent table in Foreign Keys Constraints", "``A``", "Safe", "Less efficient" 
 
-**Pros and cons of the setting 'check'**
+Pros and cons of the setting 'check'
+"""""""""""""""""""""""""""""""""""""""
 
 The setting ``'check'`` has some clear advantages in terms of ease of use:
 
@@ -164,12 +177,12 @@ This depends on the database vendor and the complexity of the database schema.
 Thereby this initial overhead can be significant in the overall performance if there are only one or a few rows to be persisted.
 
 Database schema design and providing metadata
-----------------------------------------------
+------------------------------------------------
 
 In this section, a practice is suggested to safely and efficiently write the data to the application database. 
 
 The good practice of specifying Foreign Keys is assumed but limited to single keys in Parent Tables.
-To discuss write strategies in the presence of more complex Foreign Keys is a topic for another article.
+Writing strategies in the presence of more complex Foreign Keys is a topic for another article.
 
 To do so, we divide the schema into two layers:
 
@@ -177,12 +190,10 @@ To do so, we divide the schema into two layers:
 
 #.  The attribute data 
 
-We will discuss each of these layers:
-
 Key data
-^^^^^^^^^
+""""""""""""
 
-The key data are tables that correspond to the sets and the one-dimensional parameters declared over these sets. These tables are present as Parent tables in Foreign Key relations. Examples are:
+The "key data" are tables that correspond to the sets and one-dimensional parameters declared over these sets. These tables are present as Parent Tables in Foreign Key relations. Examples are:
 
 *   Assets, a parameter can indicate:
 
@@ -222,19 +233,19 @@ The following remarks apply to this code;
 
 * Efficiency is not really a concern, as these tables are relatively small. In addition, modifications are not expected too often.
 
-Notes:
+.. note::
 
-#.  The derived columns (non-key) in the keytables may have foreign keys to other keytables.
-
-#.  The derived columns cannot serve as foreign keys. 
-    In the Customer-Order example, we do not use the address of the customer as a foreign key for the orders.
+    #.  The derived columns (non-key) in the keytables may have foreign keys to other keytables.
+    #.  The derived columns cannot serve as foreign keys. In the Customer-Order example, we do not use the address of the customer as a foreign key for the orders.
 
 Attribute data
-^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""
 
 The actual data, for instance, how much of which product is bought by which customer and when.
-When these tables are part of a foreign key, they are only as child tables.
+These tables can be a part of foreign key constraints only as child tables. 
 It is, therefore, safe to use efficient strategy ``B`` for writing to these tables.
+
+.. When these tables are part of a foreign key, they are only as child tables.
 
 .. code-block:: aimms
     :linenos:
@@ -246,14 +257,16 @@ It is, therefore, safe to use efficient strategy ``B`` for writing to these tabl
 
     endblock ;
 
-Notes: 
+.. note::
 
-#.  Like key tables, the foreign keys of these tables only refer to keys in key tables.
+    Like key tables, the foreign keys of these tables only refer to keys in key tables.
 
-Summary
-^^^^^^^^^^
+.. I do not think this is necessary
 
-With a clear separation in key tables, structure tables, and massive tables; it clear which write to table strategy is safe and efficient for each of the tables.
+.. Summary
+.. ^^^^^^^^^^
+
+.. With a clear separation in key tables, structure tables, and massive tables; it clear which write to table strategy is safe and efficient for each of the tables.
 
 
 
