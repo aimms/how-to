@@ -1,0 +1,765 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "Home",
+                "type": "page",
+                "slug": "home_1",
+                "children": [
+                  {
+                    "name": "Write Plain to table",
+                    "type": "page",
+                    "slug": "write_plain_to_table",
+                    "children": []
+                  },
+                  {
+                    "name": "Write Dense to Table",
+                    "type": "page",
+                    "slug": "write_dense_to_table",
+                    "children": []
+                  },
+                  {
+                    "name": "Write Selection To Table Demo",
+                    "slug": "home",
+                    "children": []
+                  },
+                  {
+                    "name": "Insert Selection",
+                    "type": "page",
+                    "slug": "insert_selection",
+                    "children": []
+                  },
+                  {
+                    "name": "empty_slice",
+                    "type": "page",
+                    "slug": "empty_slice_1",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "workflows.configuration": {
+      "aimms": {
+        "contents": [
+          "sp_WorkflowSteps"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_WorkflowSteps",
+            "slice": [
+              {
+                "index": "webui::indexWorkflowOrder",
+                "type": "free",
+                "value": "webui::indexWorkflowOrder"
+              },
+              {
+                "index": "webui::indexNoOfPages",
+                "type": "free",
+                "value": "webui::indexNoOfPages"
+              },
+              {
+                "index": "webui::indexWorkflowPageSpec",
+                "type": "free",
+                "value": "webui::indexWorkflowPageSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "workflows.information": {
+      "aimms": {
+        "contents": [
+          "sp_Workflows"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_Workflows",
+            "slice": [
+              {
+                "index": "webui::indexWorkflowOrder",
+                "type": "free",
+                "value": "webui::indexWorkflowOrder"
+              },
+              {
+                "index": "webui::indexWorkflowSpec",
+                "type": "free",
+                "value": "webui::indexWorkflowSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "pages/empty_slice_1": {
+    "primarypageaction": {
+      "aimms": {
+        "contents": [
+          "es::sp_PrimaryAction"
+        ],
+        "slices": [
+          {
+            "identifier": "es::sp_PrimaryAction",
+            "slice": [
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "p_DatES",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "p_DatES_1",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2"
+          }
+        }
+      ]
+    }
+  },
+  "pages/home": {
+    "primarypageaction": {
+      "aimms": {
+        "contents": [
+          "wsd::sp_PrimaryAction"
+        ],
+        "slices": [
+          {
+            "identifier": "wsd::sp_PrimaryAction",
+            "slice": [
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "p_Dat",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "filterPattern",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "p_DatAfterWritingSelectionReadingBack",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "pages/home_1": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Welcome",
+          "layoutInfo": {
+            "width": "8",
+            "height": "2"
+          }
+        }
+      ]
+    }
+  },
+  "pages/insert_selection": {
+    "onload": {
+      "literal": {
+        "type": "procedure",
+        "value": "none"
+      }
+    },
+    "primarypageaction": {
+      "aimms": {
+        "contents": [
+          "isd::sp_PrimaryAction"
+        ],
+        "slices": [
+          {
+            "identifier": "isd::sp_PrimaryAction",
+            "slice": [
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "p_DatISD",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "p_DatAfterISD",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2"
+          }
+        }
+      ]
+    }
+  },
+  "pages/write_dense_to_table": {
+    "primarypageaction": {
+      "aimms": {
+        "contents": [
+          "wdd::sp_PrimaryAction"
+        ],
+        "slices": [
+          {
+            "identifier": "wdd::sp_PrimaryAction",
+            "slice": [
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "p_datwdd",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "p_datAfterReadingWDD",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "RecordsReadWDD",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "pages/write_plain_to_table": {
+    "primarypageaction": {
+      "aimms": {
+        "contents": [
+          "wpd::sp_PrimaryAction"
+        ],
+        "slices": [
+          {
+            "identifier": "wpd::sp_PrimaryAction",
+            "slice": [
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "p_DatWPT",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "p_DatReadWPT",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/filterPattern": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "wsd::p01_flt"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "wsd::p01_flt": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_a"
+        ],
+        "colHeader": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Pattern"
+    }
+  },
+  "widgets/p_Dat": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_dat"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_dat": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_a"
+        ],
+        "colHeader": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "p_Dat"
+    }
+  },
+  "widgets/p_DatAfterISD": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "isd::p_dat_readAfterWriting"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_a"
+        ],
+        "colHeader": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Data read back"
+    }
+  },
+  "widgets/p_datAfterReadingWDD": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "wdd::p_dat_readAfterWriting"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "wdd::p_dat_readafterwriting": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_a"
+        ],
+        "colHeader": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Data read back"
+    }
+  },
+  "widgets/p_DatAfterWritingSelectionReadingBack": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "wsd::p_dat_readAfterWriting"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "wsd::p_dat_readafterwriting": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_a"
+        ],
+        "colHeader": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Read in AfterSelction Write"
+    }
+  },
+  "widgets/p_DatES": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_dat"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_a"
+        ],
+        "colHeader": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "p_Dat"
+    }
+  },
+  "widgets/p_DatES_1": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "es::p_dat_readAfterWriting"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "es::p_dat_readafterwriting": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_a"
+        ],
+        "colHeader": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "After Empty slice"
+    }
+  },
+  "widgets/p_DatISD": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_dat"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_dat": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_a"
+        ],
+        "colHeader": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "p_Dat"
+    }
+  },
+  "widgets/p_DatReadWPT": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "wpd::p_dat_readAfterWriting"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_a"
+        ],
+        "colHeader": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Data read back in"
+    }
+  },
+  "widgets/p_datwdd": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_dat"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_dat": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_a"
+        ],
+        "colHeader": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "P_Dat"
+    }
+  },
+  "widgets/p_DatWPT": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_dat"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_a"
+        ],
+        "colHeader": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "p_Dat"
+    }
+  },
+  "widgets/RecordsReadWDD": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "wdd::p01_RecordsRead"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "wdd::p01_recordsread": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_a"
+        ],
+        "colHeader": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Records read back"
+    },
+    "widget.visible": {
+      "literal": 0
+    }
+  },
+  "widgets/Welcome": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div style=\"text-align: center;\"><br></div><div style=\"text-align: center;\"><br></div><div style=\"text-align: center;\"><br></div><div style=\"text-align: center;\"><br></div><div style=\"text-align: center;\"><br></div><div style=\"text-align: center;\"><br></div><div style=\"text-align: center;\"><span style=\"font-size: 32px;\">Welcome</span></div>"
+    }
+  }
+}

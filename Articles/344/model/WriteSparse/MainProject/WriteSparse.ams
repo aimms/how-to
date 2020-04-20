@@ -1,0 +1,536 @@
+## ams_version=1.0
+
+Model Main_WriteSparse {
+    DeclarationSection data_declarations {
+        Parameter p_N {
+            Range: {
+                {1..9}
+            }
+            InitialData: 4;
+        }
+        Set s_A {
+            Index: i_a;
+            Parameter: ep_a;
+        }
+        Set s_B {
+            Index: i_b;
+            Parameter: ep_b;
+        }
+        Parameter p_dat {
+            IndexDomain: (i_a,i_b);
+        }
+    }
+    DeclarationSection database_declarations {
+        StringParameter sp_Conn {
+            Definition: "data\\abc.dsn";
+        }
+        DatabaseTable db_AB {
+            DataSource: sp_Conn;
+            TableName: "TableAB";
+            Property: NoImplicitMapping;
+            Mapping: {
+                "NamesA" -->i_a,
+                "NamesB" -->i_b,
+                "Vals1"  -->p_dat( i_a, i_b )
+            }
+        }
+    }
+    Module Write_Plain_Demo {
+        Prefix: wpd;
+        Parameter p_dat_readAfterWriting {
+            IndexDomain: (i_a,i_b);
+        }
+        Set rel_RecordsReadIn {
+            SubsetOf: (s_A,s_B);
+            InitialData: {
+                {}
+            }
+        }
+        Parameter p01_RecordsRead {
+            IndexDomain: (i_a,i_b);
+            Range: binary;
+            Definition: 1 $ ( (i_a, i_b) in rel_RecordsReadIn );
+        }
+        DatabaseTable db_AB_for_reading_Table {
+            DataSource: sp_Conn;
+            TableName: "TableAB";
+            Property: NoImplicitMapping;
+            Mapping: {
+                "NamesA" -->i_a,
+                "NamesB" -->i_b,
+                "Vals1"  --> p_dat_readAfterWriting( i_a, i_b ),
+                ("NamesA","NamesB") --> rel_RecordsReadIn
+            }
+        }
+        Procedure pr_test {
+            Body: {
+                pr_EmptyTables();
+                wpd::pr_InitializeData();
+                
+                wpd::pr_Write();
+                wpd::pr_ReadTableAfter();
+                CloseDataSource(sp_Conn);
+                
+                !webui::OpenPage('write_plain_to_table');
+                !sp_WorkflowSteps('1', '2', 'pageDataState') := "Complete" ;
+                p01_completed('write_plain_to_table') := 1;
+            }
+        }
+        Procedure pr_InitializeData {
+            Body: {
+                empty S_A, S_B ;
+                p_N := 4 ;
+                s_A := ElementRange(0,p_N,prefix:"a");
+                s_B := ElementRange(0,p_N,prefix:"b");
+                p_dat(i_a, i_b) := ( (ord(i_a)-1) * 10 + (ord(i_b)-1) ) $ ( mod( ord(i_a) + ord(i_b), 3 ) = 0 ) ;
+            }
+        }
+        Procedure pr_Write {
+            Body: {
+                write p_dat(i_a, i_b) to table db_AB  ;
+            }
+        }
+        Procedure pr_ReadTableAfter {
+            Body: {
+                read p_dat_readAfterWriting from table db_AB_for_reading_Table ;
+            }
+        }
+        Section WebUI_support {
+            StringParameter sp_PrimaryAction {
+                IndexDomain: webui::indexPageActionSpec;
+                Definition: {
+                    {
+                    	'displaytext' : "Write Plain", 
+                    	'icon'        : "aimms-pen4", 
+                    	'procedure'   : "wpd::pr_test",
+                    	'state'       : "Active" 
+                    }
+                }
+            }
+        }
+    }
+    Module Write_Dense_Demo {
+        Prefix: wdd;
+        Parameter p_dat_readAfterWriting {
+            IndexDomain: (i_a,i_b);
+        }
+        Set rel_RecordsReadIn {
+            SubsetOf: (s_A,s_B);
+            InitialData: {
+                {}
+            }
+        }
+        Parameter p01_RecordsRead {
+            IndexDomain: (i_a,i_b);
+            Range: binary;
+            Definition: 1 $ ( (i_a, i_b) in rel_RecordsReadIn );
+        }
+        DatabaseTable db_AB_for_reading_Table {
+            DataSource: sp_Conn;
+            TableName: "TableAB";
+            Property: NoImplicitMapping;
+            Mapping: {
+                "NamesA" -->i_a,
+                "NamesB" -->i_b,
+                "Vals1"  --> p_dat_readAfterWriting( i_a, i_b ),
+                ("NamesA","NamesB") --> rel_RecordsReadIn
+            }
+        }
+        Procedure pr_test {
+            Body: {
+                pr_EmptyTables();
+                wdd::pr_InitializeData();
+                
+                wdd::pr_Write();
+                wdd::pr_ReadTableAfter();
+                CloseDataSource(sp_Conn);
+                
+                !webui::OpenPage('write_dense_to_table');
+                !sp_WorkflowSteps('1', '3', 'pageDataState') := "Complete" ;
+                p01_completed('write_dense_to_table') := 1;
+            }
+        }
+        Procedure pr_InitializeData {
+            Body: {
+                empty S_A, S_B ;
+                p_N := 4 ;
+                s_A := ElementRange(0,p_N,prefix:"a");
+                s_B := ElementRange(0,p_N,prefix:"b");
+                p_dat(i_a, i_b) := ( (ord(i_a)-1) * 10 + (ord(i_b)-1) ) $ ( mod( ord(i_a) + ord(i_b), 3 ) = 0 ) ;
+            }
+        }
+        Procedure pr_Write {
+            Body: {
+                write p_dat(i_a, i_b) to table db_AB in dense mode ;
+            }
+        }
+        Procedure pr_ReadTableAfter {
+            Body: {
+                read p_dat_readAfterWriting from table db_AB_for_reading_Table ;
+            }
+        }
+        Section WebUI_support {
+            StringParameter sp_PrimaryAction {
+                IndexDomain: webui::indexPageActionSpec;
+                Definition: {
+                    {
+                    	'displaytext' : "Write Dense", 
+                    	'icon'        : "aimms-paint-format", 
+                    	'procedure'   : "wdd::pr_test",
+                    	'state'       : "Active" 
+                    }
+                }
+            }
+        }
+    }
+    Module Write_Selection_Demo {
+        Prefix: wsd;
+        Parameter p_dat_readAfterWriting {
+            IndexDomain: (i_a,i_b);
+        }
+        DatabaseTable db_AB_for_reading_Table {
+            DataSource: sp_Conn;
+            TableName: "TableAB";
+            Property: NoImplicitMapping;
+            Mapping: {
+                "NamesA" -->i_a,
+                "NamesB" -->i_b,
+                "Vals1"  --> p_dat_readAfterWriting( i_a, i_b )
+            }
+        }
+        Parameter p01_flt {
+            IndexDomain: (i_a,i_b);
+            Range: binary;
+        }
+        Set rel_flt {
+            SubsetOf: (s_A,s_B);
+            Definition: {
+                { (i_a,i_b) | p01_flt(i_a, i_b) }
+            }
+        }
+        Procedure pr_test {
+            Body: {
+                pr_EmptyTables();
+                wsd::pr_InitializeData();
+                
+                wsd::pr_Write();
+                wsd::pr_ReadTableAfter();
+                CloseDataSource(sp_Conn);
+                
+                !webui::OpenPage('home');
+                !sp_WorkflowSteps('1', '4', 'pageDataState') := "Complete" ;
+                p01_completed('home') := 1;
+            }
+        }
+        Procedure pr_InitializeData {
+            Body: {
+                empty S_A, S_B ;
+                p_N := 4 ;
+                s_A := ElementRange(0,p_N,prefix:"a");
+                s_B := ElementRange(0,p_N,prefix:"b");
+                p_dat(i_a, i_b) := (ord(i_a)-1) * 10 + (ord(i_b)-1);
+                p01_flt(i_a, i_b) := 1 $ ( mod( ord(i_a) + ord(i_b), 3 ) = 0 );
+            }
+        }
+        Procedure pr_Write {
+            Body: {
+                write p_dat(i_a, i_b) to table db_AB 
+                	filtering (i_a, i_b) in rel_flt;
+            }
+        }
+        Procedure pr_ReadTableAfter {
+            Body: {
+                read p_dat_readAfterWriting from table db_AB_for_reading_Table ;
+            }
+        }
+        Section WebUI_support {
+            StringParameter sp_PrimaryAction {
+                IndexDomain: webui::indexPageActionSpec;
+                Definition: {
+                    {
+                    	'displaytext' : "Write Selection", 
+                    	'icon'        : "aimms-quill3", 
+                    	'procedure'   : "wsd::pr_test",
+                    	'state'       : "Active" 
+                    }
+                }
+            }
+        }
+    }
+    Module Insert_Selection_Demo {
+        Prefix: isd;
+        Parameter p_dat_readAfterWriting {
+            IndexDomain: (i_a,i_b);
+        }
+        DatabaseTable db_AB_for_reading_Table {
+            DataSource: sp_Conn;
+            TableName: "TableAB";
+            Property: NoImplicitMapping;
+            Mapping: {
+                "NamesA" -->i_a,
+                "NamesB" -->i_b,
+                "Vals1"  --> p_dat_readAfterWriting( i_a, i_b )
+            }
+        }
+        Parameter p01_flt {
+            IndexDomain: (i_a,i_b);
+            Range: binary;
+        }
+        Set rel_flt {
+            SubsetOf: (s_A,s_B);
+            Definition: {
+                { (i_a,i_b) | p01_flt(i_a, i_b) }
+            }
+        }
+        Procedure pr_test {
+            Body: {
+                pr_EmptyTables();
+                
+                block ! Start with database and AIMMS state similar to after running "Write Plain Section"
+                	wpd::pr_InitializeData(); 
+                	wpd::pr_Write();
+                endblock ;
+                
+                block ! Determine a new element to insert in the table.
+                	ep_a := StringToElement(s_A, "a3");
+                	ep_b := StringToElement(s_B, "b3");
+                endblock ;
+                
+                block ! Determine data for that new element.
+                	p_dat(ep_a, ep_b):= (ord(ep_a,s_A)-1) * 10 + (ord(ep_b,s_B)-1);
+                endblock ;
+                
+                block ! Only that element will be inserted
+                	empty p01_flt ;
+                	p01_flt(ep_a, ep_b) := 1 ;
+                	! Note rel_flt is defined on p01_flt.
+                endblock ;
+                
+                isd::pr_Write();
+                
+                isd::pr_ReadTableAfter();
+                CloseDataSource(sp_Conn);
+                
+                !webui::OpenPage('home');
+                !sp_WorkflowSteps('1', '5', 'pageDataState') := "Complete" ;
+                
+                p01_completed('insert_selection') := 1;
+            }
+        }
+        Procedure pr_InitializeData {
+            Body: {
+                empty S_A, S_B ;
+                p_N := 4 ;
+                s_A := ElementRange(0,p_N,prefix:"a");
+                s_B := ElementRange(0,p_N,prefix:"b");
+                p_dat(i_a, i_b) := (ord(i_a)-1) * 10 + (ord(i_b)-1);
+                p01_flt(i_a, i_b) := 1 $ ( mod( ord(i_a) + ord(i_b), 3 ) = 0 );
+            }
+        }
+        Procedure pr_Write {
+            Body: {
+                write p_dat(i_a, i_b) to table db_AB 
+                	in insert mode 
+                	filtering (i_a, i_b) in rel_flt;
+            }
+        }
+        Procedure pr_ReadTableAfter {
+            Body: {
+                read p_dat_readAfterWriting from table db_AB_for_reading_Table ;
+            }
+        }
+        Section WebUI_support {
+            StringParameter sp_PrimaryAction {
+                IndexDomain: webui::indexPageActionSpec;
+                Definition: {
+                    {
+                    	'displaytext' : "Insert Selection", 
+                    	'icon'        : "aimms-syringe2", 
+                    	'procedure'   : "isd::pr_test",
+                    	'state'       : "Active" 
+                    }
+                }
+            }
+        }
+    }
+    Module Empty_sliced {
+        Prefix: es;
+        Parameter p_dat_readAfterWriting {
+            IndexDomain: (i_a,i_b);
+        }
+        Parameter p_dat_slice {
+            IndexDomain: i_a;
+        }
+        DatabaseTable db_AB_for_reading_Table {
+            DataSource: sp_Conn;
+            TableName: "TableAB";
+            Property: NoImplicitMapping;
+            Mapping: {
+                "NamesA" -->i_a,
+                "NamesB" -->i_b,
+                "Vals1"  --> p_dat_readAfterWriting( i_a, i_b )
+            }
+        }
+        DatabaseTable db_A {
+            IndexDomain: i_b;
+            DataSource: sp_Conn;
+            TableName: "TableAB";
+            Property: NoImplicitMapping;
+            Mapping: {
+                "NamesA" --> i_a,
+                "NamesB" --> i_b,
+                "Vals1"  --> p_dat_Slice( i_a )
+            }
+        }
+        Procedure pr_test {
+            Body: {
+                pr_EmptyTables();
+                
+                block ! Start with database and AIMMS state similar to after running "Write Plain Section"
+                	wpd::pr_InitializeData(); 
+                	wpd::pr_Write();
+                endblock ;
+                
+                pr_EmptySlice(); ! Remove slice 'b2'
+                
+                pr_ReadTableAfter();
+                p01_completed('empty_slice_1') := 1;
+            }
+        }
+        Procedure pr_EmptySlice {
+            Body: {
+                block ! Determine a new element to insert in the table.
+                	ep_b := StringToElement(s_B, "b3");
+                endblock ;
+                
+                empty db_A( ep_b );
+            }
+        }
+        Procedure pr_ReadTableAfter {
+            Body: {
+                read p_dat_readAfterWriting from table db_AB_for_reading_Table ;
+            }
+        }
+        Section WebUI_support {
+            StringParameter sp_PrimaryAction {
+                IndexDomain: webui::indexPageActionSpec;
+                Definition: {
+                    {
+                    	'displaytext' : "Empty slice", 
+                    	'icon'        : "aimms-broom", 
+                    	'procedure'   : "es::pr_test",
+                    	'state'       : "Active" 
+                    }
+                }
+            }
+        }
+    }
+    Section database_operations {
+        Procedure pr_EmptyTables {
+            Body: {
+                empty db_AB ;
+            }
+        }
+    }
+    Section misc;
+    Section WebUI_Support {
+        StringParameter sp_Workflows {
+            IndexDomain: (webui::indexWorkflowOrder,webui::indexWorkflowSpec);
+            Definition: {
+                {
+                	('1', 'title'): "demo",
+                	('1', 'style'): "no"
+                }
+            }
+        }
+        StringParameter sp_WorkflowSteps {
+            IndexDomain: (webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec);
+            Definition: {
+                {
+                	('1', '1', 'displayText')       : "Welcome",
+                	('1', '1', 'icon')              : "aimms-flower",
+                	('1', '1', 'pageId')            : "home_1",
+                	('1', '1', 'tooltip')           : "Welcome",
+                	('1', '1', 'workflowPageState') : "Active",
+                	('1', '1', 'pageDataState')     : "Complete", ! "Active",
+                
+                	('1', '2', 'displayText')       : "Write Plain",
+                	('1', '2', 'icon')              : "aimms-pen4",
+                	('1', '2', 'pageId')            : "write_plain_to_table",
+                	('1', '2', 'tooltip')           : "Write Selection",
+                	('1', '2', 'workflowPageState') : "Active",
+                	('1', '2', 'pageDataState')     : if p01_completed('write_plain_to_table') then "Complete" else "Incomplete" endif, 
+                
+                	('1', '3', 'displayText')       : "Write Dense",
+                	('1', '3', 'icon')              : "aimms-paint-format",
+                	('1', '3', 'pageId')            : "write_dense_to_table",
+                	('1', '3', 'tooltip')           : "Write Selection",
+                	('1', '3', 'workflowPageState') : "Active",
+                	('1', '3', 'pageDataState')     : if p01_completed('write_dense_to_table') then "Complete" else "Incomplete" endif,
+                
+                	('1', '4', 'displayText')       : "Write Selection",
+                	('1', '4', 'icon')              : "aimms-quill3",
+                	('1', '4', 'pageId')            : "home",
+                	('1', '4', 'tooltip')           : "Write Selection",
+                	('1', '4', 'workflowPageState') : "Active",
+                	('1', '4', 'pageDataState')     : if p01_completed('home') then "Complete" else "Incomplete" endif,
+                
+                	('1', '5', 'displayText')       : "Insert Selection",
+                	('1', '5', 'icon')              : "aimms-syringe2",
+                	('1', '5', 'pageId')            : "insert_selection",
+                	('1', '5', 'tooltip')           : "Write Selection",
+                	('1', '5', 'workflowPageState') : "Active",
+                	('1', '5', 'pageDataState')     : if p01_completed('insert_selection') then "Complete" else "Incomplete" endif,
+                
+                	('1', '6', 'displayText')       : "empty slice",
+                	('1', '6', 'icon')              : "aimms-broom",
+                	('1', '6', 'pageId')            : "empty_slice_1",
+                	('1', '6', 'tooltip')           : "empty slice",
+                	('1', '6', 'workflowPageState') : "Active",
+                	('1', '6', 'pageDataState')     : if p01_completed('empty_slice_1') then "Complete" else "Incomplete" endif
+                
+                }
+            }
+        }
+        Parameter p01_completed {
+            IndexDomain: webui::indexPageId;
+            Range: binary;
+        }
+    }
+    Section MainModelProcedures {
+        Procedure MainInitialization {
+            Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+        }
+        Procedure PostMainInitialization {
+            Body: {
+                p01_completed(webui::indexPageId) := 0 ;
+            }
+            Comment: {
+                "Add initialization statements here that require that the libraries are already initialized properly,
+                or add statements that require the Data Management module to be initialized."
+            }
+        }
+        Procedure MainExecution;
+        Procedure PreMainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that require all libraries to be still alive.
+                Return 1 if you allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence."
+            }
+        }
+        Procedure MainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that do not require all libraries to be still alive.
+                Return 1 to allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence.
+                It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+            }
+        }
+    }
+}
