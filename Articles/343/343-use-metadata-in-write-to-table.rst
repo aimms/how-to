@@ -5,15 +5,13 @@ The purpose of this article is to provide a heuristic for safe and efficient wri
 
 When AIMMS writes data to a database table, it uses structural information of the database table to determine a safe and efficient available strategy for writing. To make it easy to remember these strategies, we will also discuss the effects of different strategies. However, we need to introduce the concept of *Foreign Key* just to do that.
 
-.. MC: Is it required to say "available strategy" in line 6? Is "a safe and efficient strategy" not sufficient ? Does saying "Available strategy" convey something specific ?
-
 In this article we discuss:
 
 #.  Running example
 
 #.  Foreign key
 
-#.  The available strategies and their  consequences.
+#.  The available strategies and their consequences.
 
 #.  The metadata obtained to determine the appropriate strategy.
 
@@ -55,11 +53,7 @@ As you can see from this schema, both a customer and a product have an ``Id``.  
 Foreign Keys
 -------------
 
-.. MC: very helpful information but don't people working with databases already know this ? I feel we don't need to go into this detail as it isn't AIMMS specific
-
-The relations mentioned in the previous section are examples of consistency relations in a database. 
-
-.. MC: should it be consistent relations ?
+The relations mentioned in the previous section are examples of consistent relations in a database. 
 
 It is important that such relations between tables are maintained. For instance, if there is a ``CustomerId`` or a ``ProductId`` in the table ``Orders`` that is not in the table ``Customers`` or in the table ``Products`` respectively, then we will not be able to fulfill that order because we do not know where to deliver, or what to deliver!
 
@@ -131,10 +125,8 @@ It can be more time consuming, as it needs to read a potentially large amount of
 To understand why this strategy is still needed, we need to take a close look at their behavior in combination with foreign keys.
 
 
-Choice of strategy and consequences
+Choice of strategy and consequences for safety and efficiency
 -------------------------------------------------------------
-
-.. Choice of strategy and consequences for safety and efficiency
 
 Let's get back to the strategies introduced at the beginning of the previous section.
 
@@ -152,9 +144,7 @@ When the table at hand is a parent table in a Foreign Key constraint, then the s
 
 AIMMS uses the knowledge of whether Foreign Keys are present or not based on the values of two options: ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys``, according to the following table:
 
-.. no need for inline formatting when in captions
-
-.. csv-table:: Effect of options Database_foreign_key_handling and Database_string_valued_foreign_keys
+.. csv-table:: Effect of options ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys``
     :header: "Setting", "Foreign Key determination", "Strategy", "Pro", "Con"
     :widths: 7, 25, 7, 8, 11
 
@@ -261,12 +251,6 @@ It is, therefore, safe to use efficient strategy ``B`` for writing to these tabl
 
     Like key tables, the foreign keys of these tables only refer to keys in key tables.
 
-.. I do not think this is necessary
-
-.. Summary
-.. ^^^^^^^^^^
-
-.. With a clear separation in key tables, structure tables, and massive tables; it clear which write to table strategy is safe and efficient for each of the tables.
 
 
 
