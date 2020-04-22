@@ -1,17 +1,17 @@
 Selected Tactics for Write to Table
 ======================================
 
-A database table may or may not match the data in the AIMMS model directly. 
+.. A database table may or may not match the data in the AIMMS model directly. 
 
-In addition, we may want to write all possible elements explicitly, or just a predetermined selection of rows instead of just the non-zeros.
+A database table may not always match the data in the related AIMMS model. In addition, we may want to write all possible elements explicitly, or just a predetermined selection of rows instead of just the non-zeros. Last but not least, from the context in the application, it may be clear that all of the data is changed, or just one or a few rows. 
 
-Last but not least, from the context in the application, it may be clear that all of the data is changed, or just one or a few rows. 
+.. This is why there are several tactics available to steer the selection of the rows written.
 
-This is why there are several tactics available to steer the selection of the rows written.
+This is why it is important to select the number of rows to be written (all or few) and there are several tactics available to help you make this selection. We discuss the following tactics in this article:
 
-In this article we discuss the following tactics:
+.. In this article we discuss the following tactics:
 
-#.  Writing the nonzeros directly to the database table.
+#.  Writing non-zeros directly to the database table.
 
 #.  Writing all possible elements to the database table.
 
@@ -60,7 +60,7 @@ The AIMMS data is mapped to this SQLite database table as follows:
 
 The AIMMS project used to illustrate the tactics below can be downloaded :download:`here <model/WriteSparse.zip>`
 
-Write in replace mode
+Write in Replace mode
 ------------------------
 
 The most direct way of writing data is:
@@ -74,6 +74,13 @@ The most direct way of writing data is:
             write p_dat(i_a, i_b) to table db_AB  ;
         }
     }
+
+Line #3 in the above code block is is equivalent to:
+
+.. code-block:: aimms
+
+    write p_dat(i_a, i_b) to table db_AB 
+        in replace mode ; 
 
 Given the data in the table on the left of the following WebUI image:
 
@@ -91,6 +98,7 @@ Remarks:
 
 *   Reading back ``p_Dat`` results in the same data, see the table on the right in above WebUI image.
 
+.. add a paragraph explaining why this is called "Replace mode" ? does it empty the database table and insert new rows for all aimms indices with non-zero values ? 
 
 Write in Dense mode
 ----------------------
@@ -113,8 +121,9 @@ With this procedure, the data written and read back is illustrated in the left a
 .. image:: images/writeDenseWebUI.png
     :align: center
 
-This is actually the same as in the previous section. 
-The difference is in the number of rows written; now also the 0.0's are written, as can be seen in the following table with 25 rows:
+This is actually the same as in the previous section except that the number of rows written now is 25, as the 0.0's are also written. 
+
+.. The difference is in the number of rows written; now also the 0.0's are written, as can be seen in the following table with 25 rows:
 
 .. image:: images/writeDenseSQLiteDB.png
     :align: center
@@ -140,10 +149,16 @@ To reduce the number of rows written, we can specify a selection as follows:
                 filtering (i_a, i_b) in rel_flt;
         }
     }
+
+.. rel_flt is declared as a compound set, which we have deprecated and also advocate not to use. can we do above filtering without using a compound set ? filtering (i_a, i_b)|p01_flt(i_a, i_b) does not work
     
-When the data is an almost full matrix, as illustrated in the table on the left, and specify a filter pattern, according to the table in the middle and use that pattern to filter the writing.  
-Reading the data back results in the table on the right. 
-Note that the table on the left and the table on the right are no longer equal!
+When the data is an almost full matrix, as illustrated in the table on the left, and specify a filter pattern, according to the table in the middle and use that pattern to filter the writing.  ``rel_flt`` is a compound set which contains the combinations of ``(i_a, i_b)`` which have a non-zero value in the pattern table. 
+
+.. todo::
+
+     remove last sentence in above paragraph if we remove compound sets
+
+Reading the data back results in the table on the right. Note that the table on the left and the table on the right are no longer same!
 
 .. image:: images/writeSelectionWebUI.png
     :align: center
@@ -156,7 +171,7 @@ Note also that the database contains less rows:
 Insert Selection
 -------------------
 
-When we tracked the rows that are inserted, we can limit ourselves to just inserting those rows as follows:
+If we tracked the rows that are inserted, then we can limit ourselves to just inserting those rows as follows:
 
 .. code-block:: aimms
     :linenos:
@@ -170,8 +185,10 @@ When we tracked the rows that are inserted, we can limit ourselves to just inser
         }
     }
 
-When we start with the ``p_Dat`` table in the section "Write in replace mode" and only insert one element ``p_Dat('a3','b3') = 33``, this will result in only one SQL insert statement executed. 
+When we start with the ``p_Dat`` table in the section `Write in Replace mode`_ and only insert one element ``p_Dat('a3','b3') = 33``, this will result in only one SQL insert statement executed. 
 The AIMMS data is shown here:
+
+.. little bit confusing, p_Dat('a3', 'b3') is not present in original table, I would like to show that the data has changed now by showing two tables side by side. what do you think ?
 
 .. image:: images/insertSelectionWebUI.png
     :align: center
