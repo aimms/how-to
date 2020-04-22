@@ -331,7 +331,7 @@ Model Main_WriteSparse {
             Body: {
                 write p_dat(i_a, i_b) to table db_AB 
                 	in insert mode 
-                	filtering (i_a, i_b) in rel_flt;
+                	filtering (i_a, i_b) in rel_flt ;
             }
         }
         Procedure pr_ReadTableAfter {
