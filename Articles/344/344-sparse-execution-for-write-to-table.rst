@@ -1,15 +1,9 @@
 Selected Tactics for Write to Table
 ======================================
 
-.. A database table may or may not match the data in the AIMMS model directly. 
-
 A database table may not always match the data in the related AIMMS model. In addition, we may want to write all possible elements explicitly, or just a predetermined selection of rows instead of just the non-zeros. Last but not least, from the context in the application, it may be clear that all of the data is changed, or just one or a few rows. 
 
-.. This is why there are several tactics available to steer the selection of the rows written.
-
 This is why it is important to select the number of rows to be written (all or few) and there are several tactics available to help you make this selection. We discuss the following tactics in this article:
-
-.. In this article we discuss the following tactics:
 
 #.  Writing non-zeros directly to the database table.
 
@@ -123,8 +117,6 @@ With this procedure, the data written and read back is illustrated in the left a
 
 This is actually the same as in the previous section except that the number of rows written now is 25, as the 0.0's are also written. 
 
-.. The difference is in the number of rows written; now also the 0.0's are written, as can be seen in the following table with 25 rows:
-
 .. image:: images/writeDenseSQLiteDB.png
     :align: center
 
@@ -150,9 +142,7 @@ To reduce the number of rows written, we can specify a selection as follows:
         }
     }
 
-.. rel_flt is declared as a compound set, which we have deprecated and also advocate not to use. can we do above filtering without using a compound set ? filtering (i_a, i_b)|p01_flt(i_a, i_b) does not work
-    
-When the data is an almost full matrix, as illustrated in the table on the left, and specify a filter pattern, according to the table in the middle and use that pattern to filter the writing.  ``rel_flt`` is a compound set which contains the combinations of ``(i_a, i_b)`` which have a non-zero value in the pattern table. 
+When the data is an almost full matrix, as illustrated in the table on the left, and specify a filter pattern, according to the table in the middle and use that pattern to filter the writing.  ``rel_flt`` is a relation which contains the combinations of ``(i_a, i_b)`` which have a non-zero value in the pattern table. 
 
 .. todo::
 

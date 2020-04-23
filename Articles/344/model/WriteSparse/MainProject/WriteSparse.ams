@@ -259,8 +259,16 @@ Model Main_WriteSparse {
     }
     Module Insert_Selection_Demo {
         Prefix: isd;
+        StringParameter sp_highlight {
+            IndexDomain: (i_a,i_b);
+        }
         Parameter p_dat_readAfterWriting {
             IndexDomain: (i_a,i_b);
+            webui::AnnotationsIdentifier: isd::sp_highlight;
+        }
+        Parameter p_datBefore {
+            IndexDomain: (i_a,i_b);
+            webui::AnnotationsIdentifier: isd::sp_highlight;
         }
         DatabaseTable db_AB_for_reading_Table {
             DataSource: sp_Conn;
@@ -288,6 +296,7 @@ Model Main_WriteSparse {
                 
                 block ! Start with database and AIMMS state similar to after running "Write Plain Section"
                 	wpd::pr_InitializeData(); 
+                	p_datBefore(i_a, i_b) := p_dat(i_a, i_b);
                 	wpd::pr_Write();
                 endblock ;
                 
@@ -298,6 +307,7 @@ Model Main_WriteSparse {
                 
                 block ! Determine data for that new element.
                 	p_dat(ep_a, ep_b):= (ord(ep_a,s_A)-1) * 10 + (ord(ep_b,s_B)-1);
+                	sp_highlight(ep_a, ep_b) := "boxed" ;
                 endblock ;
                 
                 block ! Only that element will be inserted
