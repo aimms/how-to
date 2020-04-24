@@ -161,7 +161,8 @@ Note also that the database contains less rows:
 Insert Selection
 -------------------
 
-If we tracked the rows that are inserted, then we can limit ourselves to just inserting those rows as follows:
+When it is clear in the application which rows are added, and these rows are stored in a relation, say ``ref_flt``, 
+then we can limit the database IO to just inserting those rows as follows:
 
 .. code-block:: aimms
     :linenos:
@@ -174,11 +175,11 @@ If we tracked the rows that are inserted, then we can limit ourselves to just in
                 filtering (i_a, i_b) in rel_flt;
         }
     }
+    
+Some data entry applictions explicitly track which data is newly entered, which data is modified, and which data is left untouched.
 
 When we start with the ``p_Dat`` table in the section `Write in Replace mode`_ and only insert one element ``p_Dat('a3','b3') = 33``, this will result in only one SQL insert statement executed. 
 The AIMMS data is shown here:
-
-.. little bit confusing, p_Dat('a3', 'b3') is not present in original table, I would like to show that the data has changed now by showing two tables side by side. what do you think ?
 
 .. image:: images/insertSelectionWebUI.png
     :align: center
