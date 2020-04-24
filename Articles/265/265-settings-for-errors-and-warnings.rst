@@ -118,4 +118,4 @@ Related Topics
 --------------
 
 * :doc:`../191/191-handle-errors-and-warnings`.
-
+* For a full description of the AIMMS Error Handling functionality, please see the section "Raising and handling warnings and errors" in `Chapter Execution Statements <http://download.aimms.com/aimms/download/manuals/AIMMS3LR_ExecutionStatements.pdf>`_ of the AIMMS Language Reference and the description of the `Error Handling Functions <https://documentation.aimms.com/functionreference/system-interaction/error-handling-functions/index.html>`_ in the AIMMS Function Reference.
