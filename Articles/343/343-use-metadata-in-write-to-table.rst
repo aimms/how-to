@@ -98,6 +98,7 @@ Given the above foreign constraints, there are at least two options available to
 
 .. tip:: It is generally considered to be good practice to enforce all Foreign Key relations; as it will enhance the quality of the data. Note that by enforcing these constraints in the database, any application that reads and modifies data in that database needs to adhere to these constraints. This is also true for AIMMS applications!
 
+
 Available strategies
 --------------------
 
@@ -144,13 +145,47 @@ When the table at hand is a parent table in a Foreign Key constraint, then the s
 
 AIMMS uses the knowledge of whether Foreign Keys are present or not based on the values of two options: ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys``, according to the following table:
 
-.. csv-table:: Effect of options ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys``
-    :header: "Setting", "Foreign Key determination", "Strategy", "Pro", "Con"
-    :widths: 7, 25, 7, 8, 11
+.. .. csv-table:: Effect of options ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys``
+..     :header: "Setting", "Foreign Key determination", "Strategy", "Pro", "Con"
+..     :widths: 7, 25, 7, 8, 11
+.. 
+..     "Both to ``'check'``", "ODBC function `SQLForeignKeys <https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlforeignkeys-function>`_ is used to determine whether the table is a parent table in a Foreign Key constraint.", "``A`` or ``B``", "Ease of use", "Initial overhead, see note below" 
+..     "Both to ``'ignore'``", "AIMMS assumes the table at hand is not a parent table in Foreign Keys Constraints", "``B``", "Efficient", "Might lead to data loss" 
+..     "Both to ``'assume'``", "AIMMS assumes the table at hand is a parent table in Foreign Keys Constraints", "``A``", "Safe", "Less efficient" 
 
-    "Both to ``'check'``", "ODBC function `SQLForeignKeys <https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlforeignkeys-function>`_ is used to determine whether the table is a parent table in a Foreign Key constraint.", "``A`` or ``B``", "Ease of use", "Initial overhead, see note below" 
-    "Both to ``'ignore'``", "AIMMS assumes the table at hand is not a parent table in Foreign Keys Constraints", "``B``", "Efficient", "Might lead to data loss" 
-    "Both to ``'assume'``", "AIMMS assumes the table at hand is a parent table in Foreign Keys Constraints", "``A``", "Safe", "Less efficient" 
+.. csv-table:: Foreign key presence
+    :header: "Presence", "Strategy", "Advantage", "Consquence when assumption invalid"
+    :widths: 8, 10, 10, 40
+    
+    "Yes", "A",  "Safe", "Less efficient strategy used"
+    "No", "B", "Efficient", "Data loss"
+
+Are Foreign Keys constraints active on the table to be written?
+----------------------------------------------------------------
+
+When writing to a table is is important to know whether the table at hand is used in a Foreign Key constraint:
+
+#.  As a parent table, see strategy discussion above.
+
+    When the option ``database_foreign_key_handling``  is set to:
+    
+    * ``'check'`` The ODBC function `SQLForeignKeys <https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlforeignkeys-function>`_ is used to determine this.
+
+    * ``'ignore'`` AIMMS assumes that the table is not used as a parent table in a Foreign Key constraint.
+
+    * ``'assume'`` AIMMS assumes that the table is used as a parent table in a Foreign Key constraint.
+
+#.  As a child table, if so, empty strings are written as NULL's. 
+    So this information is only relevant if your database schema has string valued keys.
+
+    When the option ``database_string_valued_foreign_keys``  is set to:
+
+    * ``'check'`` The ODBC function `SQLForeignKeys <https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlforeignkeys-function>`_ is used to determine this.
+
+    * ``'ignore'`` AIMMS assumes that the table is not used as a child table in a Foreign Key constraint.
+
+    * ``'assume'`` AIMMS assumes that the table is used as a child table in a Foreign Key constraint.
+
 
 Pros and cons of the setting 'check'
 """""""""""""""""""""""""""""""""""""""
@@ -164,7 +199,7 @@ The setting ``'check'`` has some clear advantages in terms of ease of use:
 
 On the other hand, obtaining metadata via the ODBC function `SQLForeignKeys <https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlforeignkeys-function>`_ from a database can be rather time-consuming. 
 This depends on the database vendor and the complexity of the database schema. 
-Thereby this initial overhead can be significant in the overall performance if there are only one or a few rows to be persisted.
+Thereby this initial overhead can be significant in the overall performance if there are several tables to be written, and for each table only one or a few rows to be persisted.
 
 Database schema design and providing metadata
 ------------------------------------------------
@@ -201,32 +236,29 @@ When these tables have derived columns, they can also appear as child table in a
 In our Customer-Order example, both tables ``Customers`` and ``Orders`` are key tables. 
 You may recall that in the Foreign Key of that example, ``Customers`` is the parent table, and ``Orders`` is the child table.
 
-When writing to these tables it is important that the foreign key constraints are adhered to.
-As these tables are relatively small, efficiency is less important.  
-So these tables are best written to with the options ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys`` set to ``'Assume'``, for instance as follows:
+When writing to these tables, it is important that data of other tables remain intact and that the writing operations succeed whenever possible. This is achieved by setting the option ``Database_foreign_key_handling`` to ``'Assume'`` and therefore have the required safe writing strategy.
+
+In our example, tables are best written to with the options ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys`` set to ``'Assume'`` and ``'Ignore'`` respectively, as follows:
 
 .. code-block:: aimms
     :linenos:
 
-    block where database_foreign_key_handling := 'assume',
-                database_string_valued_foreign_keys := 'assume' ;
+    block where database_foreign_key_handling := 'assume'
+                database_string_valued_foreign_keys := 'ignore'  ;
 
-        write to table db_Assets ;
+        write to table db_Customers ;
+        write to table db_Projects ;
 
     endblock ;
 
 The following remarks apply to this code;
 
-* By using a block statement, the options are only set in the respective code portion, and the remainder of the application is left untouched.
+* By using a block statement, the options are only set in the respective code portion, and the remainder of the application is left untouched.  See article :doc:`setting options <../208/208-setting-options>`
 
-* By setting the options to ``'Assume'``, we ensure a safe strategy is used, which is essential for grand-father tables.
+* As integer keys are used in our example, the option ``database_string_valued_foreign_keys`` can be set to ``'ignore'``.
 
-* Efficiency is not really a concern, as these tables are relatively small. In addition, modifications are not expected too often.
+* Efficiency is less important than correct behaviour, so we remove this from our considerations.
 
-.. note::
-
-    #.  The derived columns (non-key) in the keytables may have foreign keys to other keytables.
-    #.  The derived columns cannot serve as foreign keys. In the Customer-Order example, we do not use the address of the customer as a foreign key for the orders.
 
 Attribute data
 """""""""""""""""
@@ -235,15 +267,13 @@ The actual data, for instance, how much of which product is bought by which cust
 These tables can be a part of foreign key constraints only as child tables. 
 It is, therefore, safe to use efficient strategy ``B`` for writing to these tables.
 
-.. When these tables are part of a foreign key, they are only as child tables.
-
 .. code-block:: aimms
     :linenos:
 
-    block where database_foreign_key_handling := 'ignore',
-                database_string_valued_foreign_keys := 'ignore' ;
+    block where database_foreign_key_handling := 'ignore'
+                database_string_valued_foreign_keys := 'ignore'  ;
         
-        write to table db_Sales ;
+        write to table db_Orders ;
 
     endblock ;
 
