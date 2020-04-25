@@ -1,0 +1,24 @@
+Composite table
+i_Customer   sp_CustomerName  sp_CustomerAddress  p_CustomerCredit
+23           "John"             "Castle 23"               1
+45           "Jill"             "Appartment 43"          10
+67           "Jack"             "Cardbox 63"            100
+;
+
+Composite table
+i_Product  sp_ProductName  sp_ProductColor  p_PackageHeight p_PackageWidth p_packageDepth
+432        "Plank"              "brown"      10              100                 10000
+321        "Radio"              "yellow"    100              100                   100
+123        "Wallpaper"          "grey"        1              530                 10000
+;
+
+Composite table
+i_customer i_Product i_Day         p_Amount    p01_Prepaid
+   23         432    '2020-04-20'   10  
+   45         321    '2020-04-21'    1           1
+   67         123    '2020-04-22'    5           0
+;
+
+
+
+

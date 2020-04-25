@@ -1,0 +1,384 @@
+## ams_version=1.0
+
+Model Main_MetaDataForForeignKey {
+    Procedure pr_Test {
+        Body: {
+            pr_ReadInitialDataFromTextFile();
+            
+            pr_CreateDataBaseConnection();
+            
+            pr_FillDatabaseWithCurrentData();
+        }
+    }
+    DeclarationSection Units_of_Measurement {
+        Quantity SI_Length {
+            BaseUnit: m;
+            Conversions: mm->m : #-># / 1000;
+            Comment: "Expresses the value of a distance.";
+        }
+        Quantity SI_Time_Duration {
+            BaseUnit: s;
+            Conversions: day->s : #-># * 86400;
+            Comment: "Expresses the value for the duration of periods.";
+        }
+        Calendar cal_Days {
+            Index: i_day;
+            Parameter: ep_day;
+            Unit: day;
+            BeginDate: "2000-01-01";
+            EndDate: "2099-12-31";
+            TimeslotFormat: "%c%y-%m-%d";
+            Comment: "A century worth of days (including the Corona period).";
+        }
+    }
+    Section data_declarations {
+        DeclarationSection Customer_data {
+            Set s_Customers {
+                Index: i_Customer;
+            }
+            StringParameter sp_CustomerName {
+                IndexDomain: i_Customer;
+            }
+            StringParameter sp_CustomerAddress {
+                IndexDomain: i_Customer;
+            }
+            Parameter p_CustomerCredit {
+                IndexDomain: i_Customer;
+            }
+        }
+        DeclarationSection Product_data {
+            Set s_Products {
+                Index: i_Product;
+                Parameter: ep_NewProduct, ep_OldProduct;
+            }
+            Set s_ProductsNew {
+                SubsetOf: s_Products;
+                Index: i_productNew;
+            }
+            StringParameter sp_ProductName {
+                IndexDomain: i_Product;
+            }
+            StringParameter sp_ProductColor {
+                IndexDomain: i_Product;
+            }
+            Parameter p_PackageHeight {
+                IndexDomain: i_Product;
+            }
+            Parameter p_PackageWidth {
+                IndexDomain: i_Product;
+            }
+            Parameter p_PackageDepth {
+                IndexDomain: i_Product;
+            }
+        }
+        DeclarationSection Order_data {
+            Set s_Orders {
+                SubsetOf: (s_Customers,s_Products,cal_Days);
+            }
+            Parameter p_Amount {
+                IndexDomain: (i_customer,i_Product,i_Day);
+            }
+            Parameter p_AmountNew {
+                IndexDomain: (i_customer,i_ProductNew,i_Day);
+                Definition: p_Amount(i_Customer, i_ProductNew, i_day);
+            }
+            Parameter p01_PrePaid {
+                IndexDomain: (i_Customer,i_Product,i_day);
+                Range: binary;
+            }
+            Parameter p01_PrePaidNew {
+                IndexDomain: (i_Customer,i_ProductNew,i_day);
+                Range: binary;
+                Definition: p01_PrePaid(i_Customer, i_ProductNew, i_day);
+            }
+        }
+    }
+    Section database_connection {
+        Section MySQL_Sandbox_Data_Base_Connection {
+            Procedure pr_ReadSettings {
+                Body: {
+                    sp_SettingsFile := "..\\dbsettings.txt";
+                    if FileExists( sp_SettingsFile ) then
+                    	read from file sp_SettingsFile ;
+                    endif ;
+                }
+                StringParameter sp_SettingsFile;
+            }
+            Procedure pr_CreateDataBaseConnection {
+                Body: {
+                    !Read parameters from file
+                    pr_ReadSettings;
+                    
+                    block !find ODBC drviers for the database connection
+                    
+                    	! Find all ODBC Drivers
+                    	while loopcount <= SQLNumberOfDrivers ('ODBC') do
+                    		SetElementAdd(
+                    			Setname: s_ODBCDrivers,
+                    			Elempar: ep_ODBCDriver,
+                    			Newname: SQLDriverName('ODBC',Loopcount));
+                    	endwhile; 
+                    
+                    	! Find the driver that handles database connection
+                    	ep_ODBCDriver := '' ;
+                    	if (not ep_ODBCDriver) then
+                    		ep_ODBCDriver := first(iODBCDriver1 | ( FindString(iODBCDriver1,"MySQL"   ) and 
+                    		                                        FindString(iODBCDriver1,"8.0"     ) and 
+                    		                                     !   FindString(iODBCDriver1,"5.3"     ) and 
+                    		                                        FindString(iODBCDriver1,"Unicode" )      ) );
+                    	endif;
+                    
+                    	if (not ep_ODBCDriver) then
+                    		ep_ODBCDriver := first(iODBCDriver1 | ( FindString(iODBCDriver1,"MySQL") and 
+                    		                                        FindString(iODBCDriver1,"Unicode")));
+                    	endif;
+                    
+                    	if (not ep_ODBCDriver) then
+                    		ep_ODBCDriver := first(iODBCDriver1 | (FindString(iODBCDriver1,"MySQL") ));
+                    	endif;
+                    
+                    onerror ep_OnError do
+                    
+                    	DialogMessage("No ODBC driver found: "+errh::Message(ep_OnError));
+                    
+                    endblock;
+                    
+                    
+                    if projectDeveloperMode then
+                    	if pro::GetPROEndPoint() then
+                    		! In project developer mode with a connection to an AIMMS Cloud available.
+                    		! We don't need the Tunnel App, but can create our own tunnel and use it here.
+                    		pro::Initialize(); ! Ensure the PRO connection is initialized.
+                    		p_TunnelNo := pro::tunnel::TunnelStart( contextPath : "mysql" );
+                    		sp_ServerNameDB := "localhost" ;
+                    	else
+                    		! No connection to an AIMMS Cloud available.
+                    		! This only works if a tunnel is active using the tunnel app.
+                    		! Here we assume that the tunnel is using port 13306
+                    		p_TunnelNo := 13306 ;
+                    		sp_ServerNameDB := "localhost" ;
+                    	endif ;
+                    else
+                    	! Assume app is published on an AIMMS Cloud.
+                    	if DirectoryExists( "MainProject/WebUI" ) then
+                    		! The app is run as a published WebUI app, we can connect directly to the database.
+                    		p_TunnelNo := 3306 ;
+                    		sp_ServerNameDB := "aimms-sandbox.db.cloud.aimms.com" ;
+                    	else
+                    		! The app is run as a published WinUI app
+                    		! Going to assume that no Tunnel App is running, so we need to setup our own tunnel
+                    		p_TunnelNo := pro::tunnel::TunnelStart( contextPath :  "mysql" );
+                    		sp_ServerNameDB := "localhost" ;
+                    	endif ;
+                    endif ;
+                    
+                    
+                    !Create the connection string for calc
+                    sp_MySQLSandboxConnectionStringDB := SQLCreateConnectionString(
+                    		DatabaseInterface              	:  'ODBC' ,
+                    		DriverName                     	:  ep_ODBCDriver,
+                    		ServerName                     	:  sp_ServerNameDB,
+                    		DatabaseName                   	:  sp_DBNameDB,
+                    		UserId                         	:  sp_UserNameDB,
+                    		Password      			:  sp_PasswordDB,
+                    		AdditionalConnectionParameters	:  formatString("port=%i",p_TunnelNo) ); 
+                    
+                    ! Test if connection is established
+                    pr_TestDataBaseConnection;
+                }
+                ElementParameter ep_OnError {
+                    Range: errh::PendingErrors;
+                }
+                Parameter p_TunnelNo;
+            }
+            Procedure pr_TestDataBaseConnection {
+                Body: {
+                    p_ConnectionTestDB := TestDataSource(sp_MySQLSandboxConnectionStringDB,0);
+                    
+                    ! Raise error if no connection
+                    if not p_ConnectionTestDB then
+                                raise error "Cannot connect to database: " + CurrentErrorMessage;
+                    endif ;
+                }
+            }
+            Procedure pr_SaveDatabaseStructure {
+                Body: {
+                    p_SaveDBStructure := SaveDatabaseStructure(sp_DBNameDB);
+                    
+                    ! Raise error if no connection
+                    if not p_SaveDBStructure then
+                                raise error "Cannot save database structure: " + CurrentErrorMessage;
+                    endif ;
+                }
+            }
+            Procedure pr_LoadDatabaseStructure {
+                Body: {
+                    p_LoadDBStructure := LoadDatabaseStructure(sp_DBNameDB);
+                    
+                    ! Raise error if no connection
+                    if not p_LoadDBStructure then
+                                raise error "Cannot load database structure: " + CurrentErrorMessage;
+                    endif ;
+                }
+            }
+            DeclarationSection Database_Connection_Parameters {
+                Set s_ODBCDrivers {
+                    Index: iODBCDriver1;
+                }
+                ElementParameter ep_ODBCDriver {
+                    Range: s_ODBCDrivers;
+                }
+                StringParameter sp_MySQLODBCDriver;
+                StringParameter sp_DBNameDB;
+                StringParameter sp_ServerNameDB;
+                StringParameter sp_UserNameDB;
+                StringParameter sp_PasswordDB;
+                StringParameter sp_AdditionalConnectionParametersDB;
+                Parameter p_ConnectionTestDB;
+                Parameter p_SaveDBStructure {
+                    Range: binary;
+                }
+                Parameter p_LoadDBStructure {
+                    Range: binary;
+                }
+                StringParameter sp_SQLiteConnection {
+                    Definition: "data\\abc.dsn";
+                }
+                StringParameter sp_MySQLSandboxConnectionStringDB;
+            }
+        }
+        DeclarationSection database_declaration {
+            StringParameter sp_DatabaseConnection {
+                Definition: sp_MySQLSandboxConnectionStringDB;
+            }
+            DatabaseTable db_Customers {
+                DataSource: sp_DatabaseConnection;
+                TableName: "Customers";
+                Mapping: {
+                    "Id"      -->i_Customer,
+                    "Name"    -->sp_CustomerName(i_Customer),
+                    "Address" -->sp_CustomerAddress(i_Customer),
+                    "Credit"  -->p_CustomerCredit(i_Customer)
+                }
+            }
+            DatabaseTable db_Products {
+                DataSource: sp_DatabaseConnection;
+                TableName: "Products";
+                Mapping: {
+                    "Id"          -->i_Product,
+                    "ProductName" -->sp_ProductName,
+                    "color"       -->sp_ProductColor,
+                    "Height"      -->p_PackageHeight,
+                    "Width"       -->p_PackageWidth,
+                    "Depth"       -->p_PackageDepth
+                }
+            }
+            DatabaseTable db_Orders {
+                DataSource: sp_DatabaseConnection;
+                TableName: "Orders";
+                Mapping: {
+                    "CustomerId"   -->i_Customer,
+                    "ProductId"    -->i_Product,
+                    "DeliveryDate" -->i_day,
+                    "Amount"       -->p_Amount( i_Customer, i_Product, i_day ),
+                    "Prepaid"      -->p01_PrePaid( i_Customer, i_Product, i_day ),
+                    ("CustomerId", "ProductId", "DeliveryDate") --> s_Orders
+                }
+            }
+            DatabaseTable db_OrdersNew {
+                DataSource: sp_DatabaseConnection;
+                TableName: "Orders";
+                Mapping: {
+                    "CustomerId"   -->i_Customer,
+                    "ProductId"    -->i_ProductNew,
+                    "DeliveryDate" -->i_day,
+                    "Amount"       -->p_AmountNew( i_Customer, i_ProductNew, i_day ),
+                    "Prepaid"      -->p01_PrePaidNew( i_Customer, i_ProductNew, i_day )
+                }
+            }
+        }
+        Section Database_operations {
+            Procedure pr_FillDatabaseWithCurrentData {
+                Body: {
+                    write to table db_Customers ; ! in insert mode ;
+                    write to table db_Products ; ! in insert mode ;
+                    write to table db_Orders ; ! in insert mode ;
+                }
+            }
+            Procedure pr_ReadAllDatabaseData {
+                Body: {
+                    read from table db_Customers ;
+                    read from table db_Products ;
+                    read from table db_Orders ;
+                }
+            }
+            Procedure pr_EmptyTables {
+                Body: {
+                    empty  db_Orders ;
+                    empty  db_Customers;
+                    empty  db_Products;
+                }
+            }
+            Procedure pr_ForceErrorMessageFromDatabase {
+                Body: {
+                    !DirectSQL(                                             ! work around for SQLite.
+                    !	Datasource :  sp_SQLiteConnection, 
+                    !	SQLcommand :  "PRAGMA foreign_keys=1;");
+                    
+                    pr_ReadAllDatabaseData();
+                    
+                    ep_OldProduct := last( s_Products );
+                    SetElementAdd(
+                    	Setname :  s_Products, 
+                    	Elempar :  ep_NewProduct, 
+                    	Newname :  "567");
+                    p_Amount(i_Customer, ep_NewProduct, i_day) := p_Amount(i_Customer, ep_oldProduct, i_day);
+                    
+                    s_productsNew := {ep_newProduct};
+                    
+                    Write to table db_OrdersNew in insert mode ;
+                }
+            }
+        }
+    }
+    Section Misc {
+        Procedure pr_ReadInitialDataFromTextFile {
+            Body: {
+                read from file "data\\initial.txt" ;
+            }
+        }
+    }
+    Section MainModelProcedures {
+        Procedure MainInitialization {
+            Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+        }
+        Procedure PostMainInitialization {
+            Comment: {
+                "Add initialization statements here that require that the libraries are already initialized properly,
+                or add statements that require the Data Management module to be initialized."
+            }
+        }
+        Procedure MainExecution;
+        Procedure PreMainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that require all libraries to be still alive.
+                Return 1 if you allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence."
+            }
+        }
+        Procedure MainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that do not require all libraries to be still alive.
+                Return 1 to allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence.
+                It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+            }
+        }
+    }
+}
