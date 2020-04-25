@@ -20,7 +20,7 @@ Determining the version of AIMMS your project uses
 
 To know which changes may affect your project, it is important to know which version of AIMMS was used to maintain your project.
 
-Every AIMMS project contains a ``.aimms`` file in the root folder.  An example is:
+Every AIMMS 4 project contains a ``.aimms`` file in the root folder.  An example is:
 
 .. code-block:: XML
     :linenos:
@@ -34,7 +34,7 @@ Every AIMMS project contains a ``.aimms`` file in the root folder.  An example i
     </References>
 
 On line 2, the AIMMS version is refreshed when a change is made to the model text or the WinUI page manager.
-Double clicking this file will open AIMMS 4.39 if it is available on your system, or the latest AIMMS version if it is not.
+Assuming the `AIMMS App Launcher <https://download.aimms.com/aimms/download/data/AIMMSLauncher/AIMMSLauncher-1.0.0.55.exe>`_ is installed, double clicking this file will open AIMMS 4.39 if it is available on your system, or the latest AIMMS version if it is not.
 
 .. note:: A change **only** in the WebUI of your project does not affect this version number. 
           Therefore is it good practice to make a small change to the model text whenever you are upgrading your project to a newer version of AIMMS.
@@ -280,12 +280,180 @@ Some advantages of map V2 widgets over map v1 widgets are:
 
 *   :download:`After, using AIMMS 4.61 <model/AIMMS-4-60-map-v1/AIMMS-4.61/ShowGeocdes461.zip>`
 
+AIMMS 4.65 Filtering and new UX theme
+-------------------------------------
+
+.. Release note: The filtering of widgets, using the filter tab of a widget, did not always work correctly. Since we introduced slicing on identifiers in the WebUI quite a while ago, which is the preferred way of filtering, we decided to remove the filter tab from th widgets. If you have apps which rely on this functionality, they will continue to run as they did. Only if you want to make changes to the filtering, you should do so by either using the advanced options or by opening the model with an older AIMMS version which still has the filter tabs. We do recommend to consider using slicing on identifiers, though.
+
+.. image:: images/Aimms465Filter.png
+    :align: center
+
+Open project in AIMMS 4.66, Open WebUI and **accept new theme**!
+
+Declare a set for the filtering, including a new index:
+
+.. code-block:: aimms
+    :linenos:
+    :emphasize-lines: 3
+
+    Set s_VisibleElements {
+        SubsetOf: s_someElements;
+        Index: i_ve;
+        Definition: {
+            { i_sn | p01_visibleElements( i_sn ) }
+        }
+    }
+
+Next we open the identifier attributes of the identifiers in the table, and filter by specifying the use of ``i_ve``:
+
+.. image:: images/Aimms465Filter.png
+    :align: center
+
+**Downloads:**
+
+*   :download:`Before, using AIMMS 4.65 <model/AIMMS-4-65-filter-ux/AIMMS-4.65/abc465.zip>`
+
+*   :download:`After, using AIMMS 4.66 <model/AIMMS-4-65-filter-ux/AIMMS-4.66/abc466.zip>`
+
+
+AIMMS 4.66 Serialize WebUI specification with a single file
+-----------------------------------------------------------
+
+Up to AIMMS 4.66, the essence of the WebUI is serialized in three folders: 
+
+* application
+
+* pages
+
+* widgets
+
+The resources used by the WebUI are serialized in the folder resources.
+
+A WebUI folder therefore had the following structure:
+
+.. image:: images/Aimms466WebUIFolderStructure.png
+    :align: center
+
+The three folders forming the essence of the WebUI are replaced by a single file, named ``webui.json``
+This lead to the following folder structure.
+
+.. image:: images/Aimms467WebUIFolderStructure.png
+    :align: center
+
+The three folders are no longer used.
+
+Source code management
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When you are using a source code management system, you should remove the three folders from your source and add the file ``webui.json``.
+
+**Downloads:**
+
+*   :download:`Before, using AIMMS 4.65 <model/AIMMS-4-66-webui-json/AIMMS-4.66/abcd466.zip>`
+
+*   :download:`After, using AIMMS 4.66 <model/AIMMS-4-66-webui-json/AIMMS-4.67/abcd467.zip>`
+
+AIMMS 4.70 Identifier based tailoring
+--------------------------------------
+
+In AIMMS 4.70 Identifier based tailoring of the identifier ``X`` to:
+
+#.  Specify read only elements, was done via the identifier ``X_flags``.  
+    In AIMMS 4.72 the annotation ``webui::FlagsIdentifier`` is used.
+    Note that in the example provided, you cannot change the value for Annet, because the readonly flag is set.
+    
+#.  X_tooltips --> webui::TooltipIdentifier
+
+#.  X_text --> ? webui::ItemTextIdentifier, not demoed here, requires Gantt Chart.
+
+In the following image use is made of a flag and a tooltip identifier. 
+
+.. image:: images/AIMMS470ReadOnlyToolTip.png
+    :align: center
+
+The flag identifier sets the data for ``p_associatedValues('a')`` to readonly, and tooltip for ``p_associatedValues('a')`` is ``"wears facemask"``. The difference between AIMMS 4.70 and AIMMS 4.71 is the selection of identifier where this is specified.
+
+#.  In AIMMS 4.70, the flag and tooltip identifier are associated by name: for an identifier named ``p_associatedValues``, the
+
+    #.  Flag identifier must be named ``p_associatedValues_flags``
+    
+    #.  Tooltip identifier must be named ``p_associatedValues_tooltips``
+    
+    #.  Text in Gantt Chart bar, the identifier must be named ``p_associatedValues_text``.  
+        This is not illustrated here.
+
+#.  In AIMMS 4.71, the flag and tooltip identifier are associated by annotation: for an identifier named ``p_associatedValues``, the
+
+    #.  Flag identifier is specified in the annotation  ``webui::FlagsIdentifier``
+    
+    #.  Tooltip identifier is specified in the annotation  ``webui::TooltipIdentifier``
+    
+    #.  Text in Gantt Chart bar, the identifier is specified in the annotation  ``webui::ItemTextIdentifier``.  
+        This is not illustrated here.
+    
+When you open the AIMMS 4.70 project in AIMMS 4.71 you will get warnings like the following:
+
+.. image:: images/Aimms471Warnings.png
+    :align: center
+
+You can easily adapt your application by specifying the annotations, highlighted below:
+
+.. code-block:: aimms
+    :linenos:
+    :emphasize-lines: 4,5
+
+    Parameter p_associatedValues {
+        IndexDomain: i_sn;
+        webui::AnnotationsIdentifier: sp_associatedValuesAnnotations;
+        webui::FlagsIdentifier: p_associatedValues_flags;
+        webui::TooltipIdentifier: p_associatedValues_tooltips;
+    }
+
+After this edit, the behavior of the application does not change; but the warnings disappeared after restart.
+
+**Downloads:**
+
+*   :download:`Before, using AIMMS 4.70 <model/AIMMS-4-70-identifier-tailoring/AIMMS-4.70/abcde470.zip>`
+
+*   :download:`After, using AIMMS 4.71 <model/AIMMS-4-70-identifier-tailoring/AIMMS-4.71/abcde471.zip>`
 
 
 
+AIMMS 4.71 Data modifications
+-----------------------------------------------
+
+In AIMMS 4.71, the procedure associated with changes in the data of ``p_associatedValues`` must be named ``uponchange_p_associatedValues``.  In AIMMS 4.72, you can select a procedure via an annotation.
+
+We use the following simple procedure here that just displays the data in the listing file:
 
 
+.. code-block:: aimms
+    :linenos:
+
+    Procedure uponchange_p_associatedValues {
+        Body: {
+            display p_associatedValues ;
+        }
+    }
+
+In AIMMS 4.72, the procedure is linked using the annotation: 
+
+.. code-block:: aimms
+    :linenos:
+    :emphasize-lines: 6
+
+    Parameter p_associatedValues {
+        IndexDomain: i_sn;
+        webui::AnnotationsIdentifier: sp_associatedValuesAnnotations;
+        webui::FlagsIdentifier: p_associatedValues_flags;
+        webui::TooltipIdentifier: p_associatedValues_tooltips;
+        webui::UponChangeProcedure: uponchange_p_associatedValues;
+    }
 
 
+**Downloads:**
 
+*   :download:`Before, using AIMMS 4.71 <model/AIMMS-4-71-data-modifications/AIMMS-4.71/abcdef471.zip>`
+
+*   :download:`After, using AIMMS 4.72 <model/AIMMS-4-71-data-modifications/AIMMS-4.72/abcdef472.zip>`
 

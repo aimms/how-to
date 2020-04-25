@@ -1,0 +1,43 @@
+## ams_version=1.0
+
+Model Main_abc {
+    Set s_someElements {
+        Index: i_sn;
+        webui::ElementTextIdentifier: sp_elaborateNames;
+    }
+    StringParameter sp_elaborateNames {
+        IndexDomain: i_sn;
+    }
+    Parameter p_associatedValues {
+        IndexDomain: i_sn;
+        webui::AnnotationsIdentifier: sp_associatedValuesAnnotations;
+    }
+    StringParameter sp_associatedValuesAnnotations {
+        IndexDomain: i_sn;
+    }
+    Parameter p01_visibleElements {
+        IndexDomain: i_sn;
+        Range: binary;
+    }
+    Procedure MainInitialization;
+    Procedure PostMainInitialization {
+        Body: {
+            s_someElements := data { a, b, c } ;
+            sp_elaborateNames := data { a : "Annet", b : "Beate", c : "Cynthia" } ;
+            p_associatedValues := data { a : 121, b : 232, c : 343 } ;
+            sp_associatedValuesAnnotations := data { a : "red", b : "grey", c : "yellow" } ;
+            p01_visibleElements(i_sn) := 1;
+        }
+    }
+    Procedure MainExecution;
+    Procedure PretMainTermination {
+        Body: {
+            return 1;
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1 ;
+        }
+    }
+}

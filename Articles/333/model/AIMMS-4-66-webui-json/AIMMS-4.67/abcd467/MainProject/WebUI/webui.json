@@ -1,0 +1,167 @@
+
+{
+	"application" : 
+	{
+		"aimms.widget.type" : 
+		{
+			"literal" : "application"
+		},
+		"pages" : 
+		{
+			"literal" : 
+			{
+				"children" : 
+				[
+					
+					{
+						"children" : 
+						[
+							
+							{
+								"children" : [],
+								"name" : "home",
+								"slug" : "home"
+							}
+						],
+						"name" : "Main Project",
+						"slug" : "main_project"
+					}
+				],
+				"name" : "root",
+				"slug" : "root"
+			}
+		},
+		"theme.classic" : 
+		{
+			"literal" : false
+		}
+	},
+	"pages/home" : 
+	{
+		"aimms.widget.type" : 
+		{
+			"literal" : "page"
+		},
+		"widgets" : 
+		{
+			"literal" : 
+			[
+				
+				{
+					"layoutInfo" : 
+					{
+						"customPosition" : "",
+						"height" : "2",
+						"width" : "2"
+					},
+					"uri" : "valueNames"
+				},
+				
+				{
+					"layoutInfo" : 
+					{
+						"customPosition" : "",
+						"height" : "2",
+						"width" : "2"
+					},
+					"uri" : "valueSelection"
+				}
+			]
+		}
+	},
+	"version" : "4.67.0",
+	"widgets/valueNames" : 
+	{
+		"aimms.widget.type" : 
+		{
+			"literal" : "table"
+		},
+		"contents" : 
+		{
+			"aimms" : 
+			{
+				"contents" : [ "p_associatedValues" ],
+				"filters.in" : 
+				[
+					
+					{
+						"cubeId" : "valueSelection.contents",
+						"cubeViewId" : "contents"
+					}
+				],
+				"partition" : 
+				{
+					"aggregated" : [],
+					"colHeader" : [ "<IDENTIFIER-SET>" ],
+					"rowHeader" : [ "sn" ]
+				},
+				"prefix" : "aimms",
+				"slices" : 
+				[
+					
+					{
+						"identifier" : "p_associatedValues",
+						"slice" : 
+						[
+							
+							{
+								"index" : "i_sn",
+								"type" : "subset",
+								"value" : "i_ve"
+							}
+						]
+					}
+				]
+			}
+		},
+		"contents.filters.in" : 
+		{
+			"literal" : 
+			[
+				
+				{
+					"cubeId" : "valueSelection.contents",
+					"cubeViewId" : "contents"
+				}
+			]
+		},
+		"contents.partition" : 
+		{
+			"literal" : 
+			{
+				"aggregated" : [],
+				"colHeader" : [ "<IDENTIFIER-SET>" ],
+				"rowHeader" : [ "sn" ]
+			}
+		},
+		"custom.column.widths" : 
+		{
+			"literal" : 
+			[
+				
+				{
+					"colKey" : 
+					{
+						"<IDENTIFIER-SET>" : "p_associatedValues"
+					},
+					"type" : "colHeader",
+					"width" : 10.711687447040
+				}
+			]
+		}
+	},
+	"widgets/valueSelection" : 
+	{
+		"aimms.widget.type" : 
+		{
+			"literal" : "multiselect"
+		},
+		"contents" : 
+		{
+			"aimms" : 
+			{
+				"contents" : [ "p01_visibleElements" ]
+			}
+		}
+	}
+}
