@@ -2,8 +2,7 @@ Evolving WebUI
 ===============
 
 Based on new insights and customer demands the AIMMS WebUI technology keeps evolving.
-As a consequence, WebUI's of applications developed using older versions of AIMMS need 
-to be adapted before they can be used with modern versions of AIMMS. 
+As a consequence, WebUI's of applications developed using older versions of AIMMS need to be adapted before they can be used with modern versions of AIMMS. 
 
 This article mentions the changes made to functionality of AIMMS WebUI and how to make use of these changes in your applications.
 
@@ -34,7 +33,7 @@ Every AIMMS 4 project contains a ``.aimms`` file in the root folder.  An example
     </References>
 
 On line 2, the AIMMS version is refreshed when a change is made to the model text or the WinUI page manager.
-Assuming the `AIMMS App Launcher <https://download.aimms.com/aimms/download/data/AIMMSLauncher/AIMMSLauncher-1.0.0.55.exe>`_ is installed, double clicking this file will open AIMMS 4.39 if it is available on your system, or the latest AIMMS version if it is not.
+Assuming the `AIMMS App Launcher <https://download.aimms.com/aimms/download/data/AIMMSLauncher/AIMMSLauncher-1.0.0.55.exe>`_ is installed, double-clicking this file will open AIMMS 4.39 if it is available on your system, or the latest AIMMS version if it is not.
 
 .. note:: A change **only** in the WebUI of your project does not affect this version number. 
           Therefore is it good practice to make a small change to the model text whenever you are upgrading your project to a newer version of AIMMS.
@@ -96,7 +95,7 @@ AIMMS 4.40, the WebUI is a sub-folder of the folder ``MainProject``.
 
 When you are using a source code management system, you will want to 
 remove the ``WebUI`` folder from the repository before the upgrade and 
-add the folder ``MainProject\WebUI`` afterwards!
+add the folder ``MainProject\WebUI`` afterwards
 
 **Downloads:**
 
@@ -124,7 +123,7 @@ Such a file looks like:
          "i_sn" : "sp_elaborateNames",
     };
 
-For every data line, on the left we see the name of an index, here ``i_sn``, and on the right the name of a string parameter, here ``sp_elaborateNames``. To convert such a line, we open the set that is the range of the index, here ``s_someElements``, and specify the string parameter as annotation ``webui::ElementTextIdentifier``.  The declaration of the set becomes:
+For every data line, on the left we see the name of an index, here ``i_sn``, and on the right we see the name of a string parameter, here ``sp_elaborateNames``. To convert such a line, we open the set that is the range of the index, here ``s_someElements``, and specify the string parameter as annotation ``webui::ElementTextIdentifier``.  The declaration of the set becomes:
 
 .. code-block:: aimms
     :linenos:
@@ -147,9 +146,9 @@ Once this conversion is complete, I recommend to remove the corresponding ``.js`
 AIMMS 4.49 Annotations
 -----------------------
 
-`Data dependent styling <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_ uses annotations identifiers. 
+`Data-dependent styling <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_ uses annotations identifiers. 
 
-Up  to and including AIMMS 4.49, the annotation identifier associated with identifier ``X``, needed to be called ``X_annotations``.  From AIMMS 4.50 onwards, the annotation identifier associated with identifier ``X`` can be specified using the annotation attribute ``webui::AnnotationsIdentifier``. This permits the reuse of a single annotations identifiers by multiple other identifier and more freedom in naming identifiers.
+Up  to and including AIMMS 4.49, the annotation identifier associated with identifier ``X``, needed to be called ``X_annotations``.  From AIMMS 4.50 onwards, the annotation identifier associated with identifier ``X`` can be specified using the annotation attribute ``webui::AnnotationsIdentifier``. This permits the reuse of a single annotations identifiers by multiple other identifiers and more freedom in naming identifiers.
 
 In our example, we use in AIMMS 4.49:
 
@@ -221,7 +220,7 @@ Where the widget looks as follows, including its specification:
 
 To obtain the above image, we:
 
-#.  Specify a two dimensional parameter, whereby the second dimension is over a set with two elements, ``p_Coords`` in the example.
+#.  Specify a two-dimensional parameter, whereby the second dimension is over a set with two elements, ``p_Coords`` in the example.
 
 #.  Specify the first index as the node index, ``i_Customer``.
 
@@ -253,7 +252,7 @@ Using the following steps:
 
 #.  Create a new widget of the same size, of type map
 
-#.  In this new widget we add a node set, with specification 
+#.  In this new widget, we add a node set, with specification 
 
     *   ``index:`` : ``i_Customer``
 
@@ -288,7 +287,7 @@ AIMMS 4.65 Filtering and new UX theme
 .. image:: images/Aimms465Filter.png
     :align: center
 
-Open project in AIMMS 4.66, Open WebUI and **accept new theme**!
+Open project in AIMMS 4.66, Open WebUI, and **accept new theme**!
 
 Declare a set for the filtering, including a new index:
 
@@ -304,7 +303,7 @@ Declare a set for the filtering, including a new index:
         }
     }
 
-Next we open the identifier attributes of the identifiers in the table, and filter by specifying the use of ``i_ve``:
+Next, we open the identifier attributes of the identifiers in the table, and filter by specifying the use of ``i_ve``:
 
 .. image:: images/Aimms465Filter.png
     :align: center
@@ -329,7 +328,7 @@ Up to AIMMS 4.66, the essence of the WebUI is serialized in three folders:
 
 The resources used by the WebUI are serialized in the folder resources.
 
-A WebUI folder therefore had the following structure:
+A WebUI folder thus had the following structure:
 
 .. image:: images/Aimms466WebUIFolderStructure.png
     :align: center
@@ -358,9 +357,9 @@ AIMMS 4.70 Identifier based tailoring
 
 In AIMMS 4.70 Identifier based tailoring of the identifier ``X`` to:
 
-#.  Specify read only elements, was done via the identifier ``X_flags``.  
+#.  Specify read-only elements, was done via the identifier ``X_flags``.  
     In AIMMS 4.72 the annotation ``webui::FlagsIdentifier`` is used.
-    Note that in the example provided, you cannot change the value for Annet, because the readonly flag is set.
+    Note that in the example provided, you cannot change the value for Annet, because the read-only flag is set.
     
 #.  X_tooltips --> webui::TooltipIdentifier
 
@@ -409,7 +408,7 @@ You can easily adapt your application by specifying the annotations, highlighted
         webui::TooltipIdentifier: p_associatedValues_tooltips;
     }
 
-After this edit, the behavior of the application does not change; but the warnings disappeared after restart.
+After this edit, the behavior of the application does not change; but the warnings disappeared after a restart.
 
 **Downloads:**
 
