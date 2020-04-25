@@ -15,8 +15,8 @@ Before you start upgrading your project
 Please store a copy of your project in a safe place before you start upgrading your project.
 A good practice is using a source code management system.
 
-Determining the version of your project
----------------------------------------
+Determining the version of AIMMS your project uses
+--------------------------------------------------
 
 To know which changes may affect your project, it is important to know which version of AIMMS was used to maintain your project.
 
@@ -185,6 +185,104 @@ Not only did we add an annotation to the declaration of ``p_associatedValues``, 
 *   :download:`Before, using AIMMS 4.49 <model/AIMMS-4-49-annotation/AIMMS-4.49/abc449.zip>`
 
 *   :download:`After, using AIMMS 4.50 <model/AIMMS-4-49-annotation/AIMMS-4.50/abc450.zip>`
+
+
+
+AIMMS 4.60 Map V1
+-----------------------
+
+The map widget was replaced with a new map widget in AIMMS 4.61.
+The map v1 widget was available up to AIMMS 4.60.
+
+In our example we use the following declarations:
+
+.. code-block:: aimms
+    :linenos:
+
+    Set s_Customers {
+        Index: i_Customer, i_CustomerFrom, i_CustomerTo;
+    }
+    Set s_LatLon {
+        Index: i_LatLon;
+        Definition: data { Latitude, Longitude };
+    }
+    Parameter p_Coords {
+        IndexDomain: (i_Customer,i_LatLon);
+    }
+    Parameter p01_TravelArc {
+        IndexDomain: (i_CustomerFrom, i_CustomerTo);
+        Range: binary;
+    }
+
+Where the widget looks as follows, including its specification:
+
+.. image:: images/mapv1.png
+    :align: center
+
+To obtain the above image, we:
+
+#.  Specify a two dimensional parameter, whereby the second dimension is over a set with two elements, ``p_Coords`` in the example.
+
+#.  Specify the first index as the node index, ``i_Customer``.
+
+#.  Add a layer for points.
+
+#.  Add a layer for arcs, with contents: ``p01_TravelArc``.
+
+To obtain an equivalent map v2 arc, we:
+
+.. image:: images/mapv2.png
+    :align: center
+
+Using the following steps:
+
+#.  Create two one-dimensional parameters over the node set for the latitude and longitude respectively, for instance as follows:
+
+
+    .. code-block:: aimms
+        :linenos:
+
+        Parameter p_Latitude {
+            IndexDomain: i_Customer;
+            Definition: p_Coords(i_Customer, 'Latitude');
+        }
+        Parameter p_Longitude {
+            IndexDomain: i_Customer;
+            Definition: p_Coords(i_Customer, 'Longitude');
+        }
+
+#.  Create a new widget of the same size, of type map
+
+#.  In this new widget we add a node set, with specification 
+
+    *   ``index:`` : ``i_Customer``
+
+    *   ``Latitude`` : ``p_Latitude(i_Customer)``
+
+    *   ``Longitude`` : ``p_Longitude(i_Customer)``
+
+#.  Next, we add an arc set as follows:
+    
+    .. image:: images/mapv2arcset.png
+        :align: center
+
+Some advantages of map V2 widgets over map v1 widgets are:
+
+* Support for multiple node sets
+
+* Support for multiple arc sets
+
+* Zooming and center control
+
+**Downloads:**
+
+*   :download:`Before, using AIMMS 4.60 <model/AIMMS-4-60-map-v1/AIMMS-4.60/ShowGeocdes460.zip>`
+
+*   :download:`After, using AIMMS 4.61 <model/AIMMS-4-60-map-v1/AIMMS-4.61/ShowGeocdes461.zip>`
+
+
+
+
 
 
 
