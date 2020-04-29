@@ -1,16 +1,19 @@
 Miller-Tucker-Zemlin formulation
 ================================
 
-There are multiple ways to eliminate subtours from a Capacitated Vehicle Routing Problem (CVRP). There exists an example of an AIMMS library that solves a CVRP. In that library there are three different formulation options (so far). All options contain different ways of formulating subtour elimination constraints. The second formulation is called the **Explicit Miller-Tucker-Zemlin** formulation and will be explained in this article. 
+There is a library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**). In that library there are four different formulation options of the problem. The **Miller-Tucker-Zemlin** formulation will be explained in this article.
 
 - this is a link to the library
 - this is a link to the article that explains the library 
-- this is a link to the article that explains the first formulation 
 
 Formulation
 -----------
 
-A CVRP can be formulated as a linear integer programming model. In the article about the Explicit Dantzig-Fulkerson-Johnson formulation, the full formulation of a CVRP is given. However, the Miller-Tucker-Zemlin formulation uses a different way to eliminate subtours. 
+A CVRP can be formulated as a linear integer programming model. The four different formulations in the CVRP Library all have the same objective function. Most of the constraints are also the same for all formulations. These constraints are located in the section ``Common constraints and variables``. The article about the Explicit-Dantzig-Fulkerson-Johnson formulation elaborates on those constraints. The difference in formulations is the way that subtours are eliminated. 
+
+An optimal route that satisfies all 
+
+
 
 .. image:: images/subtour.png
    :scale: 35%

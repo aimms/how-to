@@ -1,16 +1,16 @@
 Explicit Dantzig-Fulkerson-Johnson formulation
 ==============================================
 
-There is a library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (CVRP). In that library there are four different formulation options (so far) of the problem. The first formulation is called the **Explicit Dantzig-Fulkerson-Johnson** formulation and will be explained in this article.
+There is a library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**). In that library there are four different formulation options of the problem. The first formulation is called the **Explicit Dantzig-Fulkerson-Johnson** formulation and will be explained in this article.
 
 - this is a link to the library 
 - this is a link to the article that explains the library
 
 
-Formulation
------------
+Formulation CVRP
+----------------
 
-A CVRP can be formulated as a linear integer programming model. The total distance of the route, where all costumers demands are met, must be minimized. The binary variable :math:`x_{ijk}` has a value of :math:`1` if the arc from node i to node j is in the optimal route and is driven by vehicle k. The variable :math:`d_{ij}` discribes the distance from node i to node j. There are n nodes (depot = 1) and p vehicles. The objective function can be formulated as follows:
+A CVRP can be formulated as a linear integer programming model. The total distance of the route, where all costumers demands are met, should be minimized. The binary variable :math:`x_{ijk}` has a value of :math:`1` if the arc from node i to node j is in the optimal route and is driven by vehicle k. The variable :math:`d_{ij}` discribes the distance from node i to node j. There are n nodes (depot = 1) and p vehicles. The objective function can be formulated as follows:
 
 .. math:: Min \sum_{k = 1}^{p}{\sum_{i = 1}^{n}{\sum_{j = 1, i \neq j}^{n}{d_{ij}x_{ijk}}}}
 
@@ -22,10 +22,10 @@ Every node should be entered and left once (expect for the depot) and by the sam
 .. math:: \sum_{i = 1}^{n}{\sum_{j = 2}^{n}{q_{j} x_{ijk}}} \leq Q \qquad \forall k \in \{1,...,p\}
 .. math:: x_{ijk} \in \{0,1\} \qquad \forall k \in \{1,...,p\},\enspace i,j \in \{1,...,n\}, \enspace i \neq j
 
--> The third constraint makes sure that every node is entered and left by the same vehicle, the same amount of times. lalala
- 
+* The constraints (1) ensure that every node is entered once. The constraints (3) denote that every node is entered and left by the same vehicle, the same amount of times. So if every node is entered once, it is also left once.
+* The constraints (2) denote that the depot is left once by vehicle k. In combination with constraints (3) it is made sure that the depot is also entered once by vehicle k.
 
-
+All these constraints are formulated in the ``Common Constraints and Variables`` section in the CVRP Library.
 
 However, a route that satisfies all these constraints could still be infeasible. Namely when the route contains a subtour (see image). 
 
@@ -46,12 +46,12 @@ A tour that passes the depot is not a subtour. That is why S is a subset of all 
 
 AIMMS 
 -----
-In the CVRP library this formulation is implemented in the section: ``Explicit Dantzig Fulkerson Johnson Section``. In order to create constraints about subsets, the subsets must first be generated. This happens in the procedure ``Create_Subsets``. The body of this procedure is as follows:
+In the CVRP library this formulation is implemented in the section: ``Explicit Dantzig Fulkerson Johnson Section``. In order to create constraints about subsets, the subsets should be generated first. This happens in the procedure ``Create_Subsets``. The body of this procedure is as follows:
 
 .. code-block:: aimms
 	:linenos:
 
-	empty s_CostumerSubset, s_SubsetNumber, bp_Subsets;
+	empty s_CostumerSubset, s_SubsetNumber, p01_Subsets;
 	
 	
 	repeat
@@ -60,7 +60,7 @@ In the CVRP library this formulation is implemented in the section: ``Explicit D
 			card(s_Nodes) - 2 then
 				s_SubsetNumber += card(s_SubsetNumber ) + 1 ;
 				ep_LastSubsetNumber := last(s_SubsetNumber);
-				bp_Subsets( i_SelectedCostumer, ep_LastSubsetNumber ) := 1;
+				p01_Subsets( i_SelectedCostumer, ep_LastSubsetNumber ) := 1;
 			endif;
 	
 			break when s_CostumerSubset = s_Costumers;
@@ -75,21 +75,26 @@ In the CVRP library this formulation is implemented in the section: ``Explicit D
 	
 	endrepeat ;
 
--> bp_Subsets is a binary parameter 
+
+Every possible subset of ``s_Nodes`` is checked using binary counting. All subsets without the depot and with a minimum of two nodes will be created. A number is then added to the set ``s_SubsetNumber``. The binary parameter ``p01_Subsets`` indicates which nodes are in that subset. 
+
+For example, if there are 5 nodes (i)
+
+- **line 15 - line 21**: 	The next subset (``s_CostumerSubset``) is generated using binary counting.
+- **line 6  - line 11**: 	If ``s_CostumerSubset`` contains at least two nodes, then that subset is added.
+- **line 13**: 				The procedure should stop when ``s_CostumerSubset`` contains all costumers. Because with binary counting, all the following subsets would contain the depot. 
+
+
+
+Constraints
+^^^^^^^^^^^
+
+.. code-block:: aimms 
+
+	sum((i, j) | p01_Subsets(i, s) and p01_Subsets(j, s), v01_x(i, j, k) ) 
+	<= sum( i, p01_Subsets(i,s) ) - 1
 
 
 
 
-
-
-
-
-
-
-
-
-
-
--> link to Barcinova 
-
-note: The same formulation could also be implemented implicitly -> see this article 
+note: realize that it takes a lot of time to generate all subsets!
