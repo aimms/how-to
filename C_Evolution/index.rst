@@ -26,7 +26,7 @@ AIMMS software has evolved over time, to match arising user needs and changes in
    /Articles/295/295-convert-maps
    /Articles/317/317-upgrade-your-aimms-pro
    /Articles/318/318-aimms-and-aimms-pro
-   /Articles/333/333-evolving-webui
+   /Articles/333/333-update-webui-version
    
    
    

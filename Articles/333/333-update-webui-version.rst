@@ -1,25 +1,26 @@
-Evolving WebUI
-===============
+Update WebUI to newer AIMMS version
+====================================
+.. meta::
+    :description: How to adapt an older AIMMS project to changes in WebUI.
+    :keywords: convert, adapt, update, webui, version
 
-Based on new insights and customer demands the AIMMS WebUI technology keeps evolving.
-As a consequence, WebUI's of applications developed using older versions of AIMMS need to be adapted before they can be used with modern versions of AIMMS. 
+AIMMS WebUI has evolved over the years based on new insights and customer demands.
+As a result, UIs developed using older versions of AIMMS need to be adapted to work with modern versions of AIMMS. 
 
-This article mentions the changes made to functionality of AIMMS WebUI and how to make use of these changes in your applications.
+This article covers changes in functionality of AIMMS WebUI and how to convert your UI to adapt to use these changes in your applications.
 
-.. The WebUI was introduced in AIMMS 4.3
-
-Before you start upgrading your project
+Before you start
 ---------------------------------------
 
-Please store a copy of your project in a safe place before you start upgrading your project.
-A good practice is using a source code management system.
+Save a copy of your project before you start upgrading.
+A good practice is using a source code management (version control) system.
 
-Determining the version of AIMMS your project uses
+Determining the version of AIMMS
 --------------------------------------------------
 
-To know which changes may affect your project, it is important to know which version of AIMMS was used to maintain your project.
+To know which changes may affect your project, check which version of AIMMS it is based on.
 
-Every AIMMS 4 project contains a ``.aimms`` file in the root folder.  An example is:
+Every AIMMS 4 project contains a ``.aimms`` file in the root folder.  For example:
 
 .. code-block:: XML
     :linenos:
@@ -33,14 +34,34 @@ Every AIMMS 4 project contains a ``.aimms`` file in the root folder.  An example
     </References>
 
 On line 2, the AIMMS version is refreshed when a change is made to the model text or the WinUI page manager.
-Assuming the `AIMMS App Launcher <https://download.aimms.com/aimms/download/data/AIMMSLauncher/AIMMSLauncher-1.0.0.55.exe>`_ is installed, double-clicking this file will open AIMMS 4.39 if it is available on your system, or the latest AIMMS version if it is not.
+When the `AIMMS App Launcher <https://download.aimms.com/aimms/download/data/AIMMSLauncher/AIMMSLauncher-1.0.0.55.exe>`_ is installed, double-click this file to open AIMMS 4.39 (or the latest AIMMS version if it is not installed).
 
-.. note:: A change **only** in the WebUI of your project does not affect this version number. 
-          Therefore is it good practice to make a small change to the model text whenever you are upgrading your project to a newer version of AIMMS.
-          I am in the habit of always adding or removing a space to ``MainTermination`` when I start using a newer version of AIMMS on one of my projects. 
+.. note:: Changing the WebUI alone does not update the version for the project. 
+          To otherwise trigger this update, you can make a small change to the model text whenever you are upgrading your project UI to a newer version of AIMMS.
+          For example, add (or remove) a space to ``MainTermination`` when using a newer version of AIMMS on a project. 
 
-AIMMS 4.16 Sets in selection widget
------------------------------------
+Adapting for WebUI changes
+--------------------------------------
+
+Now we will discuss features removed from WebUI, and how to adapt those features when using later AIMMS versions.
+
+The versions listed below are the earliest versions to require the specified adaptation.
+
+* `AIMMS 4.17: Sets in selection widget`_
+* `AIMMS 4.20: Starting browser`_
+* `AIMMS 4.40: WebUI folder position`_
+* `AIMMS 4.46: Element Text`_
+* `AIMMS 4.50: Annotations`_
+* `AIMMS 4.61: Map V2`_
+* `AIMMS 4.66: Filtering and new UX theme`_
+* `AIMMS 4.67: Serialize WebUI specification with a single file`_
+* `AIMMS 4.71: Identifier based tailoring`_
+* `AIMMS 4.72: Data modifications`_
+
+Download examples are available in each section below.
+
+AIMMS 4.17: Sets in selection widget
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 AIMMS 4.16 is the last version where selection widget could contain AIMMS sets as contents (and pressing ``select all`` in the selection widget):
 
@@ -75,17 +96,17 @@ And then specifying such a parameter in the contents  (and pressing ``select all
 
 *   :download:`After, using AIMMS 4.17 <model/AIMMS-4-16-set-selection-widget/AIMMS-4.17/abc417.zip>`
 
-AIMMS 4.19 Starting browser
----------------------------
+AIMMS 4.20: Starting browser
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-AIMMS 4.19 is the last version of AIMMS where the model developer had to manually start the browser useing something like: ``localhost:12001/Aimms-WebUI/home``.
+AIMMS 4.19 is the last version of AIMMS where the model developer had to manually start the browser using something like: ``localhost:12001/Aimms-WebUI/home``.
 
-With AIMMS4.20 onwards, starting the WebUI browser would start the browser directly.
+With AIMMS 4.20 onwards, starting the WebUI browser would start the browser directly.
 
 True, no change is made to the project, but it did change the interaction of the model developer.
 
-AIMMS 4.39 WebUI folder position
---------------------------------
+AIMMS 4.40: WebUI folder position
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 AIMMS 4.39 is the last version of AIMMS where the WebUI folder was located as a sub-folder of the project folder.
 AIMMS 4.40, the WebUI is a sub-folder of the folder ``MainProject``.
@@ -104,8 +125,8 @@ add the folder ``MainProject\WebUI`` afterwards
 *   :download:`After, using AIMMS 4.40 <model/AIMMS-4-39-folder-position/AIMMS-4.40/app440.zip>`
 
 
-AIMMS 4.45 Element Text
------------------------
+AIMMS 4.46: Element Text
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 See also `presentation of element names <https://documentation.aimms.com/webui/folder.html#element-text>`_
 
@@ -143,8 +164,8 @@ Once this conversion is complete, I recommend to remove the corresponding ``.js`
 *   :download:`After, using AIMMS 4.46 <model/AIMMS-4-45-element-text/AIMMS-4.46/abc446.zip>`
 
 
-AIMMS 4.49 Annotations
------------------------
+AIMMS 4.50: Annotations
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 `Data-dependent styling <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_ uses annotations identifiers. 
 
@@ -187,8 +208,8 @@ Not only did we add an annotation to the declaration of ``p_associatedValues``, 
 
 
 
-AIMMS 4.60 Map V1
------------------------
+AIMMS 4.61: Map V2
+^^^^^^^^^^^^^^^^^^
 
 The map widget was replaced with a new map widget in AIMMS 4.61.
 The map v1 widget was available up to AIMMS 4.60.
@@ -279,8 +300,8 @@ Some advantages of map V2 widgets over map v1 widgets are:
 
 *   :download:`After, using AIMMS 4.61 <model/AIMMS-4-60-map-v1/AIMMS-4.61/ShowGeocdes461.zip>`
 
-AIMMS 4.65 Filtering and new UX theme
--------------------------------------
+AIMMS 4.66: Filtering and new UX theme
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. Release note: The filtering of widgets, using the filter tab of a widget, did not always work correctly. Since we introduced slicing on identifiers in the WebUI quite a while ago, which is the preferred way of filtering, we decided to remove the filter tab from th widgets. If you have apps which rely on this functionality, they will continue to run as they did. Only if you want to make changes to the filtering, you should do so by either using the advanced options or by opening the model with an older AIMMS version which still has the filter tabs. We do recommend to consider using slicing on identifiers, though.
 
@@ -315,8 +336,8 @@ Next, we open the identifier attributes of the identifiers in the table, and fil
 *   :download:`After, using AIMMS 4.66 <model/AIMMS-4-65-filter-ux/AIMMS-4.66/abc466.zip>`
 
 
-AIMMS 4.66 Serialize WebUI specification with a single file
------------------------------------------------------------
+AIMMS 4.67: Serialize WebUI specification with a single file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Up to AIMMS 4.66, the essence of the WebUI is serialized in three folders: 
 
@@ -341,19 +362,18 @@ This lead to the following folder structure.
 
 The three folders are no longer used.
 
-Source code management
-^^^^^^^^^^^^^^^^^^^^^^^^^
+.. topic:: When using source code management (version control)
 
-When you are using a source code management system, you should remove the three folders from your source and add the file ``webui.json``.
+    When you are using a source code management system, you should remove the three folders from your source and add the file ``webui.json``.
 
-**Downloads:**
+    **Downloads:**
 
-*   :download:`Before, using AIMMS 4.65 <model/AIMMS-4-66-webui-json/AIMMS-4.66/abcd466.zip>`
+    *   :download:`Before, using AIMMS 4.65 <model/AIMMS-4-66-webui-json/AIMMS-4.66/abcd466.zip>`
 
-*   :download:`After, using AIMMS 4.66 <model/AIMMS-4-66-webui-json/AIMMS-4.67/abcd467.zip>`
+    *   :download:`After, using AIMMS 4.66 <model/AIMMS-4-66-webui-json/AIMMS-4.67/abcd467.zip>`
 
-AIMMS 4.70 Identifier based tailoring
---------------------------------------
+AIMMS 4.71: Identifier based tailoring
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In AIMMS 4.70 Identifier based tailoring of the identifier ``X`` to:
 
@@ -418,8 +438,8 @@ After this edit, the behavior of the application does not change; but the warnin
 
 
 
-AIMMS 4.71 Data modifications
------------------------------------------------
+AIMMS 4.72: Data modifications
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In AIMMS 4.71, the procedure associated with changes in the data of ``p_associatedValues`` must be named ``uponchange_p_associatedValues``.  In AIMMS 4.72, you can select a procedure via an annotation.
 
@@ -456,3 +476,8 @@ In AIMMS 4.72, the procedure is linked using the annotation:
 
 *   :download:`After, using AIMMS 4.72 <model/AIMMS-4-71-data-modifications/AIMMS-4.72/abcdef472.zip>`
 
+Related topics
+--------------
+
+* **AIMMS How-To** :doc:`UI Features articles </C_UI/Sub_UI_Features/index>`
+* **AIMMS Documentation** `WebUI App Development <https://documentation.aimms.com/webui/webui-app-development.html>`_
