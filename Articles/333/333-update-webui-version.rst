@@ -366,11 +366,11 @@ The three folders are no longer used.
 
     When you are using a source code management system, you should remove the three folders from your source and add the file ``webui.json``.
 
-    **Downloads:**
+**Downloads:**
 
-    *   :download:`Before, using AIMMS 4.65 <model/AIMMS-4-66-webui-json/AIMMS-4.66/abcd466.zip>`
+*   :download:`Before, using AIMMS 4.65 <model/AIMMS-4-66-webui-json/AIMMS-4.66/abcd466.zip>`
 
-    *   :download:`After, using AIMMS 4.66 <model/AIMMS-4-66-webui-json/AIMMS-4.67/abcd467.zip>`
+*   :download:`After, using AIMMS 4.66 <model/AIMMS-4-66-webui-json/AIMMS-4.67/abcd467.zip>`
 
 AIMMS 4.71: Identifier based tailoring
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
