@@ -1,22 +1,31 @@
-Selected Tactics for Write to Table
+Write data to a table
 ======================================
+.. meta::
+    :description: Methods of writing data to a table.
+    :keywords: database, db, write, efficient, performance, foreign key, schema
 
 A database table may not always match the data in the related AIMMS model. In addition, we may want to write all possible elements explicitly, or just a predetermined selection of rows instead of just the non-zeros. Last but not least, from the context in the application, it may be clear that all of the data is changed, or just one or a few rows. 
 
 This is why it is important to select the number of rows to be written (all or few) and there are several tactics available to help you make this selection. We discuss the following tactics in this article:
 
-#.  Writing non-zeros directly to the database table.
+* Writing non-zeros directly to the database table.
 
-#.  Writing all possible elements to the database table.
+* Writing all possible elements to the database table.
 
-#.  Writing a selection of rows to the database table.
+* Writing a selection of rows to the database table.
 
-#.  Insert a single row into a database table.
+* Insert a single row into a database table.
 
-Running example
-----------------
+An example project description
+---------------------------------
 
 As we are viewing the same data over and over again; and want to focus on the difference between the various tactics, we use an abstract example. 
+
+.. topic:: Example project download
+
+    Download the example AIMMS project for this article below:
+
+    * :download:`WriteSparse.zip <model/WriteSparse.zip>`
 
 Two sets with a few elements: ``s_A`` and ``s_B`` with indices ``i_a`` and ``i_b`` respectively.
 
@@ -52,10 +61,12 @@ The AIMMS data is mapped to this SQLite database table as follows:
     }
 
 
-The AIMMS project used to illustrate the tactics below can be downloaded :download:`here <model/WriteSparse.zip>`
+Methods of writing data
+-------------------------
+Below we discuss several methods for writing data to a table.
 
-Write in Replace mode
-------------------------
+Write in replace mode
+^^^^^^^^^^^^^^^^^^^^^
 
 The most direct way of writing data is:
 
@@ -94,8 +105,8 @@ Remarks:
 
 .. add a paragraph explaining why this is called "Replace mode" ? does it empty the database table and insert new rows for all aimms indices with non-zero values ? 
 
-Write in Dense mode
-----------------------
+Write in dense mode
+^^^^^^^^^^^^^^^^^^^^^
 
 When we also want the zeros to be stored in the database table, we can use the "in dense mode" using the following code:
 
@@ -121,8 +132,8 @@ This is actually the same as in the previous section except that the number of r
     :align: center
 
 
-Write Selection
-------------------
+Write selection
+^^^^^^^^^^^^^^^^^^^^
 
 In the above section, a lot of rows are written. 
 To reduce the number of rows written, we can specify a selection as follows:
@@ -191,3 +202,7 @@ and the database table data is shown here:
 
 Apparently, SQLite appends the new element to the end.
 
+Related topics
+------------------
+
+* :doc:`../343/343-use-metadata-in-write-to-table`

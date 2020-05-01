@@ -1,24 +1,25 @@
-Strategies for Writing to Databases
+Write to a database efficiently
 =====================================
+.. meta::
+    :description: Methods of writing data to a database and schema.
+    :keywords: database, db, write, efficient, performance, foreign key, schema
 
-The purpose of this article is to provide a heuristic for safe and efficient writing when the performance of writing to the database is a concern.
+This article explores a heuristic for writing to databases safely and efficiently.
 
-When AIMMS writes data to a database table, it uses structural information of the database table to determine a safe and efficient available strategy for writing. To make it easy to remember these strategies, we will also discuss the effects of different strategies. However, we need to introduce the concept of *Foreign Key* just to do that.
+When AIMMS writes data to a database table, it uses structural information of the database table to determine a safe and efficient strategy for writing.
 
 In this article we discuss:
 
-#.  Running example
+*  An example project
 
-#.  Foreign key
+*  Foreign key relations
 
-#.  The available strategies and their consequences.
+*  Available strategies
 
-#.  The metadata obtained to determine the appropriate strategy.
-
-#.  A good practice for application database schema design and steering strategy choice.
+*  Database schema design best practices
 
 
-Running example
+An example project description
 ------------------------------------
 
 We are maintaining orders to be delivered.  Each order is identified by (the key columns):
@@ -50,8 +51,8 @@ As you can see from this schema, both a customer and a product have an ``Id``.  
 
     In words: For each ``ProjectId``, it should be in the set of all ``Id`` in the table ``Projects``.
 
-Foreign Keys
--------------
+Foreign keys relations
+------------------------
 
 The relations mentioned in the previous section are examples of consistent relations in a database. 
 
@@ -105,43 +106,43 @@ Available strategies
 An AIMMS ``write to table`` statement will delete, update and insert some rows in a database table.
 This can be implemented using the SQL statements ``DELETE``, ``UPDATE``, and ``INSERT``. 
 
-A first strategy, we call it strategy ``A`` below, is to:
+A. Strategy A:
 
-#.  Determine the rows that are already in the database table
+    1.  Determine the rows that are already in the database table
 
-#.  Delete the existing rows no longer relevant
+    #.  Delete the existing rows no longer relevant
 
-#.  Update the existing rows still relevant with new data
+    #.  Update the existing rows still relevant with new data
 
-#.  Insert the new rows together with their data.
+    #.  Insert the new rows together with their data.
 
-A second strategy, we call it strategy ``B`` below, is to:
+B. Strategy B:
 
-#.  Delete all old rows in the table
+    1.  Delete all old rows in the table
 
-#.  Insert rows as there is information
+    #.  Insert rows as there is information
 
-Clearly, strategy ``A`` looks more complicated and time-consuming. 
+Clearly, Strategy A looks more complicated and time-consuming. 
 It can be more time consuming, as it needs to read a potentially large amount of data before the table is actually modified. 
 To understand why this strategy is still needed, we need to take a close look at their behavior in combination with foreign keys.
 
 
 Choice of strategy and consequences for safety and efficiency
--------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let's get back to the strategies introduced at the beginning of the previous section.
 
 As an example, consider the operation to change the address of a customer, using the two strategies:
 
-*   Using strategy ``B``, we first delete that customer and then recreate it using an insert statement.
+*   Using Strategy B, we first delete that customer and then recreate it using an insert statement.
     By doing a delete first in the presence of orders for that customer, depending on the type of foreign constraint, this will either be forbidden or it will lead to cascading deletes of orders. 
     Either way, that is **undesired behavior** for an operation like changing the address.
 
-*   Using strategy ``A``, in the end, the only modification is done is just a SQL UPDATE of that customer. 
+*   Using Strategy A, in the end, the only modification is done is just a SQL UPDATE of that customer. 
     There is no effect on the table ``Orders``, which is desired. 
     Therefore, even though this strategy may be less efficient, it is safe.
 
-When the table at hand is a parent table in a Foreign Key constraint, then the safe strategy ``A`` is preferred. Otherwise, the efficient strategy ``B`` is preferred. 
+When the table at hand is a parent table in a Foreign Key constraint, then the safe Strategy A is preferred. Otherwise, the efficient Strategy B is preferred. 
 
 AIMMS uses the knowledge of whether Foreign Keys are present or not based on the values of two options: ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys``, according to the following table:
 
@@ -161,7 +162,7 @@ AIMMS uses the knowledge of whether Foreign Keys are present or not based on the
     "No", "B", "Efficient", "Data loss"
 
 Are Foreign Keys constraints active on the table to be written?
-----------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 When writing to a table is is important to know whether the table at hand is used in a Foreign Key constraint:
 
@@ -188,7 +189,7 @@ When writing to a table is is important to know whether the table at hand is use
 
 
 Pros and cons of the setting 'check'
-"""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The setting ``'check'`` has some clear advantages in terms of ease of use:
 
@@ -201,7 +202,7 @@ On the other hand, obtaining metadata via the ODBC function `SQLForeignKeys <htt
 This depends on the database vendor and the complexity of the database schema. 
 Thereby this initial overhead can be significant in the overall performance if there are several tables to be written, and for each table only one or a few rows to be persisted.
 
-Database schema design and providing metadata
+Database schema design best practices
 ------------------------------------------------
 
 In this section, a practice is suggested to safely and efficiently write the data to the application database. 
@@ -209,14 +210,14 @@ In this section, a practice is suggested to safely and efficiently write the dat
 The good practice of specifying Foreign Keys is assumed but limited to single keys in Parent Tables.
 Writing strategies in the presence of more complex Foreign Keys is a topic for another article.
 
-To do so, we divide the schema into two layers:
+To do so, we divide the schema into two layers of metadata:
 
 #.  The key data,
 
 #.  The attribute data 
 
 Key data
-""""""""""""
+^^^^^^^^^^^^
 
 The "key data" are tables that correspond to the sets and one-dimensional parameters declared over these sets. These tables are present as Parent Tables in Foreign Key relations. Examples are:
 
@@ -261,11 +262,11 @@ The following remarks apply to this code;
 
 
 Attribute data
-"""""""""""""""""
+^^^^^^^^^^^^^^^^^^
 
 The actual data, for instance, how much of which product is bought by which customer and when.
 These tables can be a part of foreign key constraints only as child tables. 
-It is, therefore, safe to use efficient strategy ``B`` for writing to these tables.
+It is, therefore, safe to use efficient Strategy B for writing to these tables.
 
 .. code-block:: aimms
     :linenos:
@@ -282,5 +283,8 @@ It is, therefore, safe to use efficient strategy ``B`` for writing to these tabl
     Like key tables, the foreign keys of these tables only refer to keys in key tables.
 
 
+Related topics
+------------------
 
+* :doc:`../344/344-sparse-execution-for-write-to-table`
 
