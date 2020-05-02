@@ -155,10 +155,6 @@ To reduce the number of rows written, we can specify a selection as follows:
 
 When the data is an almost full matrix, as illustrated in the table on the left, and specify a filter pattern, according to the table in the middle and use that pattern to filter the writing.  ``rel_flt`` is a relation which contains the combinations of ``(i_a, i_b)`` which have a non-zero value in the pattern table. 
 
-.. todo::
-
-     remove last sentence in above paragraph if we remove compound sets
-
 Reading the data back results in the table on the right. Note that the table on the left and the table on the right are no longer same!
 
 .. image:: images/writeSelectionWebUI.png
