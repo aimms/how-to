@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Project AimmsVersion="4.45.5.1175 unicode x64" ProjectUUID="E84017C9-0140-4878-998F-83FAB1199A9D">
+	<ModelFileName>abc.ams</ModelFileName>
+	<AutoSaveAndBackup>
+		<DataBackup AtRegularInterval="true" EveryNMinutes="15" NumBackupsDatedToday="3" NumDaysBeforeToday="3" />
+	</AutoSaveAndBackup>
+</Project>

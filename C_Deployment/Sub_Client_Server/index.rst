@@ -22,6 +22,7 @@ Client-Server Communication
    /Articles/35/35-web-ui-progress-window
    /Articles/36/36-intermediate-solution 
    /Articles/34/34-interrupt-server-session 
+   /Articles/342/342-WebUI-Session-Timeout-Extension
    /Articles/42/42-data-session-changes
    /Articles/reduce-client-server-exchange/reduce-client-server-exchange 
 

@@ -1,0 +1,11 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"spWorkBookName" "sp_WorkBookName" "2020-04-05 14:34:25"
+"sCustomers" "s_Customers" "2020-04-05 14:34:30"
+"pLat" "p_Lat" "2020-04-05 14:34:36"
+"pLon" "p_Lon" "2020-04-05 14:34:40"
+"sLatLon" "s_LatLon" "2020-04-05 14:34:44"
+"pCoords" "p_Coords" "2020-04-05 14:34:49"
+"iC" "i_Customer" "2020-04-05 14:38:59"
+"iLL" "i_LatLon" "2020-04-05 14:44:14"
+"p_Lon" "p_Longitude" "2020-04-05 14:45:22"
+"p_Lat" "p_Latitude" "2020-04-05 14:45:30"
