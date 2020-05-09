@@ -9,7 +9,7 @@ Connection string for Access database files
 
     This article was originally posted to the AIMMS Tech Blog.
 
-AIMMS has the possibility to retrieve/store data from/into any ODBC datasource. You could provide a System/User/File DSN (in case of ODBC).
+AIMMS has the possibility to retrieve/store data from/into any ODBC datasource. You could provide a System/User/File DSN (in case of ODBC) pointing to the database as an input to AIMMS. You could also dynamically create a connection string instead of using a DSN file. 
 
 This article shows how to generate a connection string to connect to an Access database via the ODBC layer. 
 
@@ -39,10 +39,10 @@ The procedure will first query which ODBC drivers are available, and follow with
 
 The procedure requires two arguments:
 
-* ``AccessDatabaseFile``: Input argument denoting which file to use,
+* ``AccessDatabaseFile``: Input argument denoting which database to use,
 * ``ConnectionString``: Output argument in which the connection string is stored.
 
-Furthermore, the procedure needs the following two local identifiers:
+Furthermore, the procedure has the following two local identifiers:
 
 .. code-block:: aimms
 
@@ -53,9 +53,8 @@ Furthermore, the procedure needs the following two local identifiers:
         Range: sODBCDrivers;
     }
 
-The source for the procedure is then as follows:
-
 .. code-block:: aimms
+    :linenos:
 
     !Find all ODBC drivers
     while LoopCount <= SQLNumberOfDrivers( 'ODBC' ) do
@@ -94,6 +93,8 @@ The source for the procedure is then as follows:
         DatabaseName                   :  AccessDatabaseFile,
         AdditionalConnectionParameters :  ";DefaultDir=.\\") ;
 
+If you already know which driver to use as input for the argument *DriverName*, you can directly use the ConnectionString function. 
+
 Example Download
 ----------------------
         
@@ -103,12 +104,10 @@ You can import the ``.ams`` file into a section of your model. Select an empty S
 
 .. note:: Please do not forget to close the connection using the intrinsic procedure :aimms:func:`CloseDataSource` especially when long sessions may occur after data reading.
 
-Related materials
--------------------
+.. Related materials
+.. -------------------
 
-.. seealso::
-    
-    :doc:`../118/118-Connect-SQLite`: To build the mapping between AIMMS and database columns (database table identifier) 
+.. * :doc:`../118/118-Connect-SQLite`: To build the mapping between AIMMS and database columns (database table identifier) 
  
 
 

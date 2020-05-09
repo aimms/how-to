@@ -45,6 +45,10 @@ that you missed something, because then you can fix it.
 Option values
 --------------
 
+You may find all related warning options in the Project options (Settings → Project Options...)
+
+.. image:: images/UnitWarning.png
+
 AIMMS has options that allow you to control almost every warning in
 AIMMS. These options have the following possible values:
 
@@ -69,6 +73,8 @@ and ``Strict Warning Default`` specify the behavior indirectly. These
 latter ones are used to indicate that AIMMS should behave according to
 the options ``Common Warning Default`` and ``Strict Warning Default``.
 
+
+
 The idea behind ``Common Warning Default`` and ``Strict Warning Default`` is
 that it allows you to turn on or off a lot of options at the same time.
 The default value of ``Common Warning Default`` is ``Warning Handle``,
@@ -77,16 +83,17 @@ initially give a warning (or send to the nearest error handler). The
 option ``Strict Warning Default`` is initially set to off, meaning that
 all warnings that are set to follow this option will be ignored.
 
+.. image:: images/ProjectOptions.png
+
 Best practices
 ----------------------
 
 
 Some warnings emerge when you just started to develop or extend your
-model. You know that some parts are missing or incorrect, but you are
-okay with that. However, AIMMS might decide otherwise and throw a bunch
+model. They might be the result of a work in progress. However, AIMMS will still throw a bunch
 of errors at you. You first reaction might be to set the value of the
 associated option to ``off``, so that you won’t be bothered by this again.
-The problem with that approach is that you will not see these warnings
+However, you will not see these warnings
 again in the future, when they might actually be useful.
 
 We recommend that you set this option to ``Strict Warning Default`` or, if
@@ -94,7 +101,7 @@ you have a lot of different warnings, that you set the option ``Common
 Warning Default`` to ``off``. You can now continue to develop your model,
 without so many warnings.
 
-That is only the first step, the second step is that you should set the
+As a second step, you may set the
 options ``Common Warning Default`` and ``Strict Warning Default`` to
 ``Warning Collect/Warning Handle`` occasionally, especially when you are
 about to share your developments with the end-user. This gives you the
@@ -113,6 +120,8 @@ Deployment mode
 AIMMS will not generate warnings when running the model in deployment
 mode by default. The reason is that in most cases, the end-user
 cannot do anything to fix them.  You can override this behavior by setting the option ``Communicate warnings to end users`` to ``on``.
+
+.. image:: images/enduser.png
 
 Related Topics
 --------------
