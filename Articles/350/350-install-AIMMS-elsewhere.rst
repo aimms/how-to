@@ -1,6 +1,10 @@
 Install AIMMS perhaps elsewhere
 =================================
 
+.. meta::
+    :description: Installing AIMMS, making it available for all users, and perhaps even on a non-default location.
+    :keywords: AIMMS, Installation, all users, disk drive
+
 To install AIMMS on your own laptop is usually easy, just download the version of your choice from `our downloads page <https://www.aimms.com/english/developers/downloads/download-aimms/>`_ and run the self-extracting file, for instance ``Aimms-4.73.1.3-x64-VS2017.exe``.
 It will extract the actual program in ``%localappdata%\AIMMS\IFA\Aimms\`` and start it.
 
@@ -17,10 +21,6 @@ The functionalities of AIMMS Launcher are:
 
 With these, you can choose from the AIMMS versions on your computer to launch that project and manage those AIMMS versions; to save disk space.
  
-.. will provide you with a choice of AIMMS releases you have installed, to open the project. 
-
-.. * You can also manage the AIMMS versions on your computer; to save disk space.
-
 The above is sufficient for many people. In the remainder of this article we will discuss how to handle advanced requirements.
 
 Installing elsewhere
@@ -32,7 +32,8 @@ For the following reasons, the default installation location may not be the pref
 
 #.  The available disk space on the drive with the ``users`` folder may be limited.
 
-You can then install AIMMS in a different location, like ``C:\Program Files (x86)\AIMMS\IFA``.
+You can then install AIMMS in a different location, like ``C:\Program Files (x86)\AIMMS\IFA``. 
+Installation for all users is available since AIMMS 4.38.
 
 Check version of AIMMS Launcher
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -44,14 +45,13 @@ For example, here is a version that is quite old: ``1.0.0.50``:
 .. image:: images/LauncherTooOld.png
     :align: center
 
-.. On one of the machines I'm using, I had one that was too old: ``1.0.0.50``:
-
 Downloading and installing the AIMMS Launcher again will upgrade the version as:
 
 .. image:: images/LauncherRefreshed.png
     :align: center
     
-Also, you can install the AIMMS Launcher with elevated rights. It will then be installed in ``C:\Program Files (x86)\AIMMS\IFA\AIMMSLauncher``
+Also, you can install the AIMMS Launcher with elevated rights. 
+It will then be installed in ``C:\Program Files (x86)\AIMMS\IFA\AIMMSLauncher``
 
 Installing on a different drive
 ----------------------------------
@@ -68,13 +68,10 @@ Navigate to ``C:\Program Files (x86)\AIMMS\IFA``.
 If this folder does not exist, please create it.
 
 Then create a symbolic link as follows:
-.. removing line numbers and emphasis as it is a single line of code
 
 .. code-block:: none
 
     mklink /D Aimms "D:\Program Files (x86)\AIMMS\IFA\Aimms"
-
-.. This should give the following output:
 
 which gives the following output:
 
@@ -82,36 +79,25 @@ which gives the following output:
 
     symbolic link created for Aimms <<===>> D:\Program Files (x86)\AIMMS\IFA\Aimms
 
-.. More on symbolic links can be found `here <https://www.computerhope.com/mklink.htm>`_
-.. I like giving external links if possible to official websites only and also refer to what website in the text but your link has more info than the one below, so I leave it to you. . 
-
 More on symbolic links can be found `on Microsoft docs <https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/mklink>`_.
 
 Actually installing elsewhere
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-With the above preparations, you are now ready to install AIMMS in a different location. Just launch the installer "as administrator" by right clicking and selecting "as administrator".
+With the above preparations, you are now ready to install AIMMS in a different location. 
+Just launch the installer "as administrator" by right clicking and selecting "as administrator".
+
 It will install AIMMS in the D Drive folder and make AIMMS available to all licensed AIMMS users of that machine.
 
+Installing the license
+-----------------------
 
+*  You should have a valid AIMMS license to use AIMMS.  
+   If you do not have one yet, you can request a `free license <https://www.aimms.com/english/developers/licensing/free-licenses/>`_
 
-.. Figure out APP Luancher version.
-.. see image 
-.. 
-.. Download latest
-.. https://www.aimms.com/english/developers/downloads/download-aimms/
-.. 
-.. 
-.. Create folder D:\Program Files (x86)\AIMMS\IFA\Aimms
-.. 
-.. Cmd prompt, elevated, nav to c:\Program Files (x86)\AIMMS\IFA
-.. 
-.. Microsoft Windows [Version 10.0.18363.815]
-.. (c) 2019 Microsoft Corporation. All rights reserved.
-.. 
-.. C:\WINDOWS\system32>cd "C:\Program Files (x86)\AIMMS\IFA"
-.. 
-.. C:\Program Files (x86)\AIMMS\IFA>mklink /D Aimms "D:\Program Files (x86)\AIMMS\IFA\Aimms"
-.. symbolic link created for Aimms <<===>> D:\Program Files (x86)\AIMMS\IFA\Aimms
-.. 
-.. C:\Program Files (x86)\AIMMS\IFA>
+*  Read all about `AIMMS licensing here <https://www.aimms.com/english/developers/licensing/>`_  
+
+*  When using multiple licenses, they can be managed using the `AIMMS Network License server <https://www.aimms.com/english/developers/downloads/download-aimms/aimms-network-license-server>`_
+
+*  Further licensing `How-Tos <https://how-to.aimms.com/C_Getting_Started/Sub_Licensing/index.html>`_
+
