@@ -155,14 +155,14 @@ such that the timestamps of the incidents are more easily interpreted.
 After this change, the license service needs to be restarted as follows:
 
 #.  If the license server, also serves licenses for an AIMMS PRO, stop the service of AIMMS PRO using the AIMMS PRO configurator.
-
-#.  In the AIMMS License manager, stop the license service using the menu item ``Maintenance > Stop the service``. 
     It may take one or two minutes before the service is stopped.
 
+#.  In the AIMMS License manager, stop the license service using the menu item ``Maintenance > Stop the service``. 
+
 #.  In the AIMMS License manager, start the license service using the menu item ``Maintenance > Start the service``. 
-    It may take one or two minutes before the service is started.
 
 #.  Start the AIMMS PRO services stopped in the first step.
+    It may take one or two minutes before the service is started.
 
 
 
