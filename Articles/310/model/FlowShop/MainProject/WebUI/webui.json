@@ -271,6 +271,30 @@
     },
     "title": {
       "literal": "Error and Warning messages"
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "gss::sp_widgetActionMessageList"
+        ],
+        "slices": [
+          {
+            "identifier": "gss::sp_widgetActionMessageList",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   "widgets/ErrorWarningStack": {

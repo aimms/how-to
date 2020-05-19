@@ -77,11 +77,11 @@ LibraryModule Library_GuardServerSession {
             }
             ElementParameter ep_ProfilerDataSelectedIdentifier {
                 Range: AllIdentifiers;
-                Definition: '';
+                InitialData: '';
             }
             ElementParameter ep_ErrorWarningSelectedMessage {
                 Range: s_JobErrorMessageNumbers;
-                Definition: '';
+                InitialData: '';
             }
             ElementParameter ep_StackPos {
                 Range: s_StackPositions;
