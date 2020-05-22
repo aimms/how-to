@@ -21,14 +21,14 @@ How to use the Library
 
 .. code-block:: aimms
 	
-	cvrpl::pr_NoTimeWindows(s_Formulations, s_Nodes, p_NumberOfVehicles, p_MaxorExact, 
-	p_Distance,	p_Demand, p_Capacity, p_TotalDistance, p01_x, p_BoundTotalDist, 
+	cvrpl::pr_NoTimeWindows(s_Formulations, s_Nodes, p_NumberOfVehicles, p01_MaxorExact, 
+	p_Distance, p_Demand, p_Capacity, p_TotalDistance, p01_x, p_BoundTotalDist, 
 	sp_SolverStatus, sp_ProgramStatus, p_SolverTime);
 
 .. code-block:: aimms
 	
-	cvrpl::pr_CVRPLibrary(s_Formulations, s_Nodes, p_NumberOfVehicles, p_MaxorExact, 
-	p_Distance,	p_Demand, p_Capacity, p_TWLowerBound, p_TWUpperBound, p_ServiceTime, 
+	cvrpl::pr_CVRPLibrary(s_Formulations, s_Nodes, p_NumberOfVehicles, p01_MaxorExact, 
+	p_Distance, p_Demand, p_Capacity, p_TWLowerBound, p_TWUpperBound, p_ServiceTime, 
 	p_TotalDistance, p01_x, p_StartServing, p_BoundTotalDist, sp_SolverStatus, 
 	sp_ProgramStatus, p_SolverTime);
 
@@ -51,7 +51,9 @@ Input Arguments         Type                Index  Index Domain
 **p_ServiceTime** * 	Parameter				   (i, j)
 ======================  ==================  =====  ==================    
 
-``s_Formulations`` is a set containing the formulation you want to use to solve the problem. The set ``s_Nodes`` contains the depot and all costumers. ``p_MaxorExact`` is a binary parameter that indicates whether ``p_NumberOfVehicles`` is a maximum or an exact amount. If ``p_MaxorExact`` is 0, then a maximum of ``p_NumberOfVehicles`` can be used. If ``p_MaxorExact`` is 1, then exactly ``p_NumberOfVehicles`` should be used. ``p_Distance`` discribes the distance between two nodes. When there is no road between two nodes, you can just leave the value for that distance empty. 
+``s_Formulations`` should contain the formulation you want to use to solve the problem, choosing from:
+'Explicit Dantzig-Fulkerson-Johnson', 'Miller-Tucker-Zemlin', 'Implicit Dantzig-Fulkerson-Johnson' or 'Time Windows'
+The set ``s_Nodes`` contains the depot and all costumers. ``p_MaxorExact`` is a binary parameter that indicates whether ``p_NumberOfVehicles`` is a maximum or an exact amount. If ``p_MaxorExact`` is 0, then a maximum of ``p_NumberOfVehicles`` can be used. If ``p_MaxorExact`` is 1, then exactly ``p_NumberOfVehicles`` should be used. ``p_Distance`` discribes the distance between two nodes. When there is no road between two nodes, you can just leave the value for that distance empty. 
 
 * These input arguments are only necessary when you use time windows. ``p_TWLowerBound`` and ``p_TWUpperBound`` indicate the time in between which a vehicle should arrive at node i. ``p_ServiceTime`` denotes the time it takes to get from node i to node j. It may include the service time at node i. 
 
@@ -72,11 +74,18 @@ Output Arguments        Type                Index  Index Domain
 
 * The output argument ``p_StartServing`` is only necessary when you use time windows. It denotes the time that a vehicle should arrive at node i. 
 
-Formulations
-------------
-The input argument ``s_Formulations`` should contain the name(s) of the formulation(s) you want to use to solve the problem. So far there are four options. These are explained in seperate articles:
+More information
+----------------
 
-- **Explicit Dantzig-Fulkerson-Johnson**
-- **Explicit Miller-Tucker-Zemlin**
-- **Implicit Dantzig-Fulkerson-Johnson**
-- **Time Windows**
+- The general formulation of a CVRP used in the library is described in the following article: 
+	*	**lalal**
+- The four different formulations are explained in the following articles:
+	* 	**Explicit Dantzig-Fulkerson-Johnson**
+	* 	**Miller-Tucker-Zemlin**
+	* 	**Implicit Dantzig-Fulkerson-Johnson**
+	* 	**Time Windows**
+- These formulations are compared in this article:
+	*	**article link**
+
+
+

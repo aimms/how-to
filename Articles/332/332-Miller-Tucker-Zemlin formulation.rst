@@ -1,40 +1,27 @@
 Miller-Tucker-Zemlin formulation
 ================================
+The library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**) contains four different formulation options. The formulations have different methods of eliminating subtours. In this article the Miller-Tucker-Zemlin formulation is discussed. 
 
-There is a library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**). In that library there are four different formulation options of the problem. The **Miller-Tucker-Zemlin** formulation will be explained in this article.
+Subtour Elimination Constraints
+-------------------------------
+The Miller-Tucker-Zemlin (MTZ) formulation uses an extra variable to eliminate subtours. This variable ( :math:`u_{i}` ) increases each time a new node is visited. If vehicle k drives from node i to node j, the value of u_j should be higher than the value of u_i. This makes it impossible to return to a previously visited node that already has a lower value for u_i. 
 
-- this is a link to the library
-- this is a link to the article that explains the library 
+These constraints should apply to every node except for the depot (n = 1), since every vehicle should return there. The Miller-Tucker-Zemlin constraints can be formulated as follows:
 
-Formulation
------------
+uj-ui ≥qj- Q1-xij   ∀i,j∈V∖{1}#28 
+qi≤ui≤Q   ∀i ∈V∖{1}#29
 
-A CVRP can be formulated as a linear integer programming model. The four different formulations in the CVRP Library all have the same objective function. Most of the constraints are also the same for all formulations. These constraints are located in the section ``Common constraints and variables``. The article about the Explicit-Dantzig-Fulkerson-Johnson formulation elaborates on those constraints. The difference in formulations is the way that subtours are eliminated. 
-
-An optimal route that satisfies all 
-
-
-
-.. image:: images/subtour.png
-   :scale: 35%
-   :align: center
+If the arc x_{ij} is in the route, constraint (28) can be rewritten to u_j\geq{u_i+q}_j. This ensure that the value of u_j is at least q_j more than u_i. 
+If the arc x_{ij} is not in the route, the constraint is still valid. The equation could then be rewritten to u_j-q_j\gequ_i-Q. Constraint (29) states that q_j is the lowest possible value of u_j and Q is the greatest possible value of u_i. So u_j-q_j will at least be 0 and u_i-Q will at most be 0. So u_j-q_j is greater than or equal to u_i-Q
 
 
-Miller-Tucker-Zemlin
---------------------
+duration
+--------
 
-The Miller-Tucker-Zemlin formulation uses an extra variable to eliminate subtours. This variable ( :math:`u_{ik}` ) basically gets higher each time a new costumer is visited with vehicle k. If vehicle k travels from node i to node j, :math:`u_{jk}` should always be higher than :math:`u_{ik}`. This way it won't be possible to return to a previously visited node and create a subtour.
-
-
-(the node already has a value for i (that must be lower))
+- in aimms hoef je alleen maar een variable te maken en die twee constraints toe te voegen 
+- hoe lang duurt dit
 
 
--> Miller-Tucker-Zemlin formulering zorgt er ook voor dat de capacity van 
-
-
-
-AIMMS
------
 
 
 
