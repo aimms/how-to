@@ -53,15 +53,3 @@ For example, if there are 5 nodes (i)
 
 
 
-Constraints
-^^^^^^^^^^^
-
-.. code-block:: aimms 
-
-	sum((i, j) | p01_Subsets(i, s) and p01_Subsets(j, s), v01_x(i, j, k) ) 
-	<= sum( i, p01_Subsets(i,s) ) - 1
-
-
-
-
-note: realize that it takes a lot of time to generate all subsets!

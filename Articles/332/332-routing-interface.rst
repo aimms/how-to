@@ -78,14 +78,14 @@ More information
 ----------------
 
 - The general formulation of a CVRP used in the library is described in the following article: 
-	*	**lalal**
+	*	**Formulation CVRP**
 - The four different formulations are explained in the following articles:
 	* 	**Explicit Dantzig-Fulkerson-Johnson**
 	* 	**Miller-Tucker-Zemlin**
 	* 	**Implicit Dantzig-Fulkerson-Johnson**
 	* 	**Time Windows**
 - These formulations are compared in this article:
-	*	**article link**
+	*	**Comparing formulations**
 
 
 

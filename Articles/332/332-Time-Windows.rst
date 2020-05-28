@@ -9,6 +9,7 @@ Constraints
 
 [a_i, b_i] is the time window of costumer i. A vehicle must arrive at costumer i at least at a_i and at most at b_i. The time it takes to deliver the goods is irrelevant. t_{ij} denotes the time is takes to get from costumer i to costumer j. Any service time at costumer i is included. The variable s_i denotes the time that a vehicle starts serving costumer i (which must be between a_i and b_i). 
 These constraints can be formulated as follows:
+
 si+tij-M* 1- xijk≤sj   (∀i∈V,j∈V\{1},k∈{1,…,p})     #41
 ai≤si≤bi   ∀i∈{1,…,n}#42
 
