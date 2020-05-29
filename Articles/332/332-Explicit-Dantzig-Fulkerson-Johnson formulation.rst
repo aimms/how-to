@@ -81,8 +81,6 @@ In the CVRP library this formulation is implemented in the section: ``Explicit D
 
 Every possible subset of ``s_Nodes`` is checked using binary counting. All subsets without the depot and with a minimum of two nodes will be created. A number is then added to the set ``s_SubsetNumber``. The binary parameter ``p01_Subsets`` indicates which nodes are in that subset. 
 
-For example, if there are 5 nodes (i)
-
 - **line 15 - line 21**: 	The next subset (``s_CostumerSubset``) is generated using binary counting.
 - **line 6  - line 11**: 	If ``s_CostumerSubset`` contains at least two nodes, then that subset is added.
 - **line 13**: 				The procedure should stop when ``s_CostumerSubset`` contains all costumers. Because with binary counting, all the following subsets would contain the depot. 
