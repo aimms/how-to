@@ -2,22 +2,32 @@ Implicit Dantzig-Fulkerson-Johnson formulation
 ==============================================
 The library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**) contains four different formulation options. They have different methods of eliminating subtours. In this article the Implicit Dantzig-Fulkerson-Johnson formulation is discussed. 
 
+Dantzig-Fulkerson-Johnson formulation
+-------------------------------------
+The CVRP Library also has the option Explicit Dantzig-Fulkerson-Johnson (DFJ). For that option, the same formulation of the constraint is used. It uses subsets to eliminate subtours. The idea behind the formulation is that, for every subset that could form a subtour, at least two arcs should connect nodes from the subsets to nodes outside of the subset. This article (EDFJ) elaborates on this formulation.
+
+V is the set of all nodes from 1 to n (depot is n = 1). S is a subset of V. The binary variable :math:`x_{ijk}` has a value of 1 if vehicle k drives from node i to node j. The constraint can be formulated as follows:
+
+.. math:: \sum_{i \in S, j \notin S}{x_{ijk}}} \geq 2 \qquad S \subset V \setminus \{1\}, \enspace 2 \leq |S| \leq n - 2
+
 Lazy constraints
 ----------------
-The constraints are the same as for the Explicit Dantzig-Fulkerson-Johnson formulation (link). Subtours are eliminated using subsets and the constraints are formulated as follows:
+The difference, however, is when these constraints are formulated. The Explicit DFJ formulation generates all subsets that could be subtours, in advance. This way, a constraint can be formulated about all these subsets to eliminate any possible subtour. So for example, we have the following set of nodes:
 
-.. math:: \sum_{k = 1}^{p}{\sum_{i,j \in S}{x_{ijk}}} \leq |S|-1 \qquad S \subset \{2,...,n\}, \enspace 2 \leq |S| \leq n - 2
+.. image:: images/IDFJ1.png
+   :scale: 35%
+   :align: center
 
-The difference however, is when the constraints are formulated. When explicitly formulating constraints, all the possible subsets have to be generated beforehand. With ... nodes, already ... subsets can be formed. 
+All subsets with at least two elements, that do not contain the depot, should be generated. The number of subsets of a set with 10 elements = 10^2. The number of subsets thereof that contain 0 elements or all elements = 2. The number of subsets thereof that contain 1 element (or al but 1) = 20. So the number of generated subsets = 10^2 – 2 – 22 = 1000.
+However, most of these subtours are unlikely to be formed when looking for an optimal solution. For example, subset S = {10, 8, 4} is not likely to form a subtour. So most of the subsets generated beforehand are unnecessary.
+
+It is possible to search for an optimal solution without any subtour elimination constraints. The following route could then be formed:
+
+.. image:: images/Subtour.png
+   :scale: 35%
+   :align: center
+
+This route should then be checked for subtours. If a subtour is found, a constraint (lazy constraint) about that subset is formulated. Now, when searching for an optimal solution again, this subtour cannot be formed. This continues until an optimal solution without subtours is found. This way, far less subsets need to be generated which saves a lot of time. Especially with larger sets of nodes.  
 
 
 
-A CVRP can be formulated as a linear integer programming model. The four different formulations in the CVRP Library all have the same objective function. Most of the constraints are also the same for all formulations. These constraints are located in the section ``Common constraints and variables``. 
-
-
-
-
-
-
-
-to read more about lazy constraints: link to TSP lazy constraints

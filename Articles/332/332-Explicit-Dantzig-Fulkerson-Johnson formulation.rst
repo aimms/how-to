@@ -1,15 +1,51 @@
 Explicit Dantzig-Fulkerson-Johnson formulation
 ==============================================
 The library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**) contains four different formulation options. The formulations have different methods of eliminating subtours. In this article the Explicit Dantzig-Fulkerson-Johnson formulation is discussed. 
+This is an example of a subtour in a route for a CVRP:
 
+.. image:: images/subtour.png
+   :scale: 35%
+   :align: center
 
-Subtour Elimination Constraints 
+Idea behind the formulation
+---------------------------
+The Dantzig Fulkerson Johnson (DFJ) formulation uses subsets to eliminate subtours. The set of all nodes is V = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}. The set of nodes that makes a subtour is S = {3, 4, 5} and is a subset of V. 
+
+.. image:: images/EDFJ1.png
+   :scale: 35%
+   :align: center
+
+This subset contains three nodes. The number of arcs between the nodes in this subset is also three, which is why it makes a subtour. If the number of arcs should be less than three, one arc should be removed. For example, the arc between node 3 and node 5.
+
+.. image:: images/EDFJ2.png
+   :scale: 35%
+   :align: center
+   
+Now one arc has to go from node 3 to a node outside of the subset and another arc has to go from node 5 to a node outside of the subset. The following route can then be formed:
+
+.. image:: images/EDFJ3.png
+   :scale: 35%
+   :align: center
+   
+There are two ways of explaining this way of eliminating subtours:
+
+1.	The number of arcs between nodes in the subset should be less than the number of nodes in that subset. 
+2.	The number of arcs that connect a node from the subset to a node outside of the subset should be at least 2. 
+
+.. image:: images/EDFJ4.png
+   :scale: 35%
+   :align: center
+   
+The second explanation is used for the CVRP Library. To eliminate all possible subtours, it should apply to every subset that could be a subtour. 
+Subsets containing the depot cannot be subtours, for example S = {1, 9, 10, 11}. This is just a regular tour for one of the vehicles. A subset with 0 or 1 element can also not be a subtour. 
+So it should apply to every possible subset of V that has at least two elements and does not contain the depot. 
+
+Subtour elimination constraints
 -------------------------------
-The Dantzig-Fulkerson-Johnson formulation uses subsets to eliminate subtours. If a subset contains three nodes and there are three arcs between those nodes, it would create a subtour. Therefore, there should always be less arcs between nodes in a subsets than nodes in that subset. This can be formulated as follows:
+The binary variable :math:`x_{ijk}` has a value of 1 if vehicle k drives from node i to node j. The constraint can be formulated as follows:
 
-.. math:: \sum_{k = 1}^{p}{\sum_{i,j \in S}{x_{ijk}}} \leq |S|-1 \qquad S \subset \{2,...,n\}, \enspace 2 \leq |S| \leq n - 2
+.. math:: \sum_{i \in S, j \notin S}{x_{ijk}}} \geq 2 \qquad S \subset V \setminus \{1\}, \enspace 2 \leq |S| \leq n - 2
 
-A tour that passes the depot is not a subtour. That is why S is a subset of all nodes from 2 to n. Which is the set of all costumers. It is not possible to form a subtour with 1 node, so the cardinality of S should be at least 2.
 
 AIMMS 
 -----
