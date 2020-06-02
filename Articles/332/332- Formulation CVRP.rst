@@ -2,6 +2,9 @@ Capacitated Vehicle Routing Problem formulation
 ===============================================
 There is a library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**). It contains four different options of formulating the problem. However, the only difference is the way that Subtour Elimination Constraints (SEC) are formulated. The objective function and most of the constraints are the same for all four options and will be explained in this article.
 
+.. image:: images/CVRP.png
+   :align: center
+
 Linear integer programming model
 --------------------------------
 A CVRP can be formulated as a linear integer programming model. The total distance of the route, where all costumers demands are met, should be minimized. The binary variable :math:`x_{ijk}` has a value of :math:`1` if the arc from node i to node j is in the optimal route and is driven by vehicle k. The variable :math:`d_{ij}` discribes the distance from node i to node j. There are n nodes (depot = 1) and p vehicles. The objective function can be formulated as follows:
@@ -16,8 +19,8 @@ Every node should be entered and left once (expect for the depot) and by the sam
 .. math:: \sum_{i = 1}^{n}{\sum_{j = 2}^{n}{q_{j} x_{ijk}}} \leq Q \qquad \forall k \in \{1,...,p\}
 .. math:: x_{ijk} \in \{0,1\} \qquad \forall k \in \{1,...,p\},\enspace i,j \in \{1,...,n\}, \enspace i \neq j
 
-* The constraints (1) ensure that every node is entered once. The constraints (3) denote that every node is entered and left by the same vehicle, the same amount of times. So if every node is entered once, it is also left once.
-* The constraints (2) denote that the depot is left once by vehicle k. In combination with constraints (3) it is made sure that the depot is also entered once by vehicle k.
+* The first constraint ensures that every node is entered once. The third constraint denote that every node is entered and left by the same vehicle, the same amount of times. So if every node is entered once, it is also left once.
+* The second constraint denotes that the depot is left once by vehicle k. In combination with the third constraint it is made sure that the depot is also entered once by vehicle k.
 
 All these constraints are formulated in the ``Common Constraints and Variables`` section in the CVRP Library.
 

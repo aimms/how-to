@@ -44,7 +44,7 @@ Subtour elimination constraints
 -------------------------------
 The binary variable :math:`x_{ijk}` has a value of 1 if vehicle k drives from node i to node j. The constraint can be formulated as follows:
 
-.. math:: \sum_{i \in S, j \notin S}{x_{ijk}}} \geq 2 \qquad S \subset V \setminus \{1\}, \enspace 2 \leq |S| \leq n - 2
+.. math:: \sum_{i \in S, j \notin S}{x_{ijk}} \geq 2 \qquad S \subset V \setminus \{1\}, \enspace 2 \leq |S| \leq n - 2
 
 
 AIMMS 

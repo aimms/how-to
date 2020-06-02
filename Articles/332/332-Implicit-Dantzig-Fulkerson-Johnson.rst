@@ -8,7 +8,7 @@ The CVRP Library also has the option Explicit Dantzig-Fulkerson-Johnson (DFJ). F
 
 V is the set of all nodes from 1 to n (depot is n = 1). S is a subset of V. The binary variable :math:`x_{ijk}` has a value of 1 if vehicle k drives from node i to node j. The constraint can be formulated as follows:
 
-.. math:: \sum_{i \in S, j \notin S}{x_{ijk}}} \geq 2 \qquad S \subset V \setminus \{1\}, \enspace 2 \leq |S| \leq n - 2
+.. math:: \sum_{i \in S, j \notin S}{x_{ijk}} \geq 2 \qquad S \subset V \setminus \{1\}, \enspace 2 \leq |S| \leq n - 2
 
 Lazy constraints
 ----------------
@@ -18,7 +18,7 @@ The difference, however, is when these constraints are formulated. The Explicit 
    :scale: 35%
    :align: center
 
-All subsets with at least two elements, that do not contain the depot, should be generated. The number of subsets of a set with 10 elements = 10^2. The number of subsets thereof that contain 0 elements or all elements = 2. The number of subsets thereof that contain 1 element (or all but 1) = 20. So the number of generated subsets = 10^2 – 2 – 22 = 1000.
+All subsets with at least two elements, that do not contain the depot, should be generated. The number of subsets of a set with 10 elements = :math:`2^10`. The number of subsets thereof that contain 0 elements or all elements = 2. The number of subsets thereof that contain 1 element (or all but 1) = 20. So the number of generated subsets = :math:`2^10 – 2 – 20 = 1000`.
 
 However, most of these subtours are unlikely to be formed when looking for an optimal solution. For example, subset S = {10, 8, 4} is not likely to form a subtour. So most of the subsets generated beforehand are unnecessary.
 
@@ -30,7 +30,7 @@ It is possible to search for an optimal solution without any subtour elimination
 
 This route should then be checked for subtours. If a subtour is found, a constraint (lazy constraint) about that subset is formulated. Now, when searching for an optimal solution again, this subtour cannot be formed. This continues until an optimal solution without subtours is found. This way, far less subsets need to be generated which saves a lot of time. Especially with larger sets of nodes.  
 
-In the CVRP Library, these lazy constraints are implemented in the section `Implicit Dantzig Fulkerson Johnson section`.
+In the CVRP Library, these lazy constraints are implemented in the section ``Implicit Dantzig Fulkerson Johnson section``.
 
 
 

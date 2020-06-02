@@ -13,9 +13,11 @@ These constraints can be formulated as follows:
 
 .. math:: s_i + t_{ij} - M * (1 - x_{ijk}) \leq s_j \qquad (\forall i \in V, \enspace j \in V \setminus \{1\}, \enspace k \in \{1,...,p\} \qquad (1)
 
-.. math:: a_i \leq s_i \leq b_i \qquad (\forall i \in V) \qquad (2)
+.. math:: \qquad \qquad \qquad \qquad a_i \leq s_i \leq b_i \qquad (\forall i \in V) \qquad \qquad \qquad \qquad \qquad \qquad \qquad (2)
 
-.. math:: M = max \{b_i + t_ij - a_i} \qquad i,j \in \{1,...,n\}
+
+
+.. math:: * M = max \{b_i + t_{ij} - a_i\} \qquad i,j \in \{1,...,n\}
 
 
 Constraints (2) ensures that a vehicle can start serving a costumer in the time window of that costumer. Constraint (1) keeps track of the duration of the routes. If the arc :math:`x_{ijk}` is in the route, the constraint can be rewritten to :math:`s_i + t_{ij} \leq s_j`. The start of the service time at costumer j must be at least :math:`t_{ij}` later than the start of the service time at costumer i.  
@@ -23,7 +25,7 @@ If the arc :math:`x_{ijk}` is not in the route, constraint (1) is still valid. T
 These constraints are slightly similar to the constraints of the Miller-Tucker-Zemlin formulation. It is also not possible to return to a previously served costumer. That’s because the time a costumer is being served is always later than the previously served costumers. So for a VRPTW it isn’t necessary to formulate subtour elimination constraints, while the time window constraints eliminate subtours automatically. 
 
 
-In the CVRP Library, the constraints are implemented in the section `Time Windows Section`.
+In the CVRP Library, the constraints are implemented in the section ``Time Windows Section``.
 
 
 

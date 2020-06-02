@@ -45,7 +45,7 @@ If vehicle k drives from node i to node j, :math:`x_{ijk}` = 0 and constraint (1
 If vehicle k does not drive from node i to node j, the constraint is still valid. Constraint (1) could then be rewritten to :math:`u_{j} - q_{j} \geq u_i - Q`. Constraint (2) states that :math:`q_j` is the lowest possible value of :math:`u_j` and Q is the greatest possible value of :math:`u_i`. So :math:`u_j-q_j` will at least be 0 and :math:`u_i-Q` will at most be 0. So :math:`u_j-q_j` is greater than or equal to :math:`u_i-Q`
 
 
-In the CVRP Library, the constraints are implemented in the section `Miller Tucker Zemlin Section`.
+In the CVRP Library, the constraints are implemented in the section ``Miller Tucker Zemlin Section``.
 
 
 
