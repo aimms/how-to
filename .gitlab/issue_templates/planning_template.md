@@ -1,4 +1,4 @@
-# Walk Plan - Tactical Meeting on `<insert here>`
+Tactical Meeting on `<insert here>`
 
 ## Downvotes and Updates
 * [ ] 
