@@ -5,6 +5,8 @@ There is a library in AIMMS that solves a **Capacitated Vehicle Routing Problem*
 
 (download link for the library)
 
+.. git@gitlab.aimms.com:aimms/customer-support/routing.git\Projects\CVRP\CVRP library
+
 Capacitated Vehicle Routing Problem
 -----------------------------------
 A **CVRP** deals with the following problem: A set is given with a depot and multiple costumers. The distances between their locations are known. A number of vehicles is available to serve the costumers. All costumers have a certain demand and the vehicles have the same maximum capacity. The shortest route for the vehicles must be found where all costumers get their demand. The vehicles all start and end at the depot. 
@@ -20,17 +22,17 @@ How to use the Library
 3. When you choose a formulation without time windows, the library can be called with the procedure ``cvrpl::pr_NoTimeWindows``. If you choose the formulation with time windows, the library can be called with the procedure ``cvrpl::pr_CVRPLibrary``. They have the following input and output arguments:
 
 .. code-block:: aimms
-	
-	cvrpl::pr_NoTimeWindows(s_Formulations, s_Nodes, p_NumberOfVehicles, p01_MaxorExact, 
-	p_Distance, p_Demand, p_Capacity, p_TotalDistance, p01_x, p_BoundTotalDist, 
-	sp_SolverStatus, sp_ProgramStatus, p_SolverTime);
+    
+    cvrpl::pr_NoTimeWindows(s_Formulations, s_Nodes, p_NumberOfVehicles, p01_MaxorExact, 
+    p_Distance, p_Demand, p_Capacity, p_TotalDistance, p01_x, p_BoundTotalDist, 
+    sp_SolverStatus, sp_ProgramStatus, p_SolverTime);
 
 .. code-block:: aimms
-	
-	cvrpl::pr_CVRPLibrary(s_Formulations, s_Nodes, p_NumberOfVehicles, p01_MaxorExact, 
-	p_Distance, p_Demand, p_Capacity, p_TWLowerBound, p_TWUpperBound, p_ServiceTime, 
-	p_TotalDistance, p01_x, p_StartServing, p_BoundTotalDist, sp_SolverStatus, 
-	sp_ProgramStatus, p_SolverTime);
+    
+    cvrpl::pr_CVRPLibrary(s_Formulations, s_Nodes, p_NumberOfVehicles, p01_MaxorExact, 
+    p_Distance, p_Demand, p_Capacity, p_TWLowerBound, p_TWUpperBound, p_ServiceTime, 
+    p_TotalDistance, p01_x, p_StartServing, p_BoundTotalDist, sp_SolverStatus, 
+    sp_ProgramStatus, p_SolverTime);
 
 
 Input and output arguments
@@ -46,9 +48,9 @@ Input Arguments         Type                Index  Index Domain
 **p_Distance**          Parameter                  (i, j)       
 **p_Demand**            Parameter                  ( i )         
 **p_Capacity**          Parameter                  ( k )
-**p_TWLowerBound** *	Parameter				   ( i )
-**p_TWUpperBound** *	Parameter				   ( i )
-**p_ServiceTime** * 	Parameter				   (i, j)
+**p_TWLowerBound** *    Parameter                  ( i )
+**p_TWUpperBound** *    Parameter                  ( i )
+**p_ServiceTime** *     Parameter                  (i, j)
 ======================  ==================  =====  ==================    
 
 ``s_Formulations`` should contain the formulation you want to use to solve the problem, choosing from:
@@ -63,11 +65,11 @@ Output Arguments        Type                Index  Index Domain
 ======================  ==================  =====  ==================
 **p_TotalDistance**     Parameter                
 **p01_x**               Parameter (binair)         (i, j, k) | i <> j  
-**p_StartServing** *    Parameter        		   ( i )
-**p_BoundTotalDist**	Parameter
-**sp_SolverStatus** 	String Parameter
-**sp_ProgramStatus** 	String Parameter
-**p_SolverTime**		Parameter
+**p_StartServing** *    Parameter                  ( i )
+**p_BoundTotalDist**    Parameter
+**sp_SolverStatus**     String Parameter
+**sp_ProgramStatus**    String Parameter
+**p_SolverTime**        Parameter
 ======================  ==================  =====  ==================
 
 ``p_TotalDistance`` is the total distance of the shortest route. ``p01_x`` is a binary variable with a value of ``1`` if the road from ``i`` to ``j`` is in the shortest route and is driven by vehicle ``k``. ``p_BoundTotalDist`` is the lower bound of the total distance. The last three arguments provide information on how the program was executed. 
@@ -78,14 +80,14 @@ More information
 ----------------
 
 - The general formulation of a CVRP used in the library is described in the following article: 
-	*	Formulation CVRP
+    *   :doc:`332-Formulation-CVRP`
 - The four different formulations are explained in the following articles:
-	* 	Explicit Dantzig-Fulkerson-Johnson
-	* 	Miller-Tucker-Zemlin
-	* 	Implicit Dantzig-Fulkerson-Johnson
-	* 	Time Windows
+    *   :doc:`332-Explicit-Dantzig-Fulkerson-Johnson-formulation`
+    *   :doc:`332-Miller-Tucker-Zemlin-formulation`
+    *   :doc:`332-Implicit-Dantzig-Fulkerson-Johnson`
+    *   :doc:`332-Time-Windows`
 - These formulations are compared in this article:
-	*	Comparing formulations
+    *   :doc:`332-Comparing-Formulations`
 
 
 
