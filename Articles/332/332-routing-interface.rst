@@ -5,6 +5,8 @@ There is a library in AIMMS that solves a **Capacitated Vehicle Routing Problem*
 
 :download:`AIMMS library download <model/CVRP library.zip>` 
 
+.. git@gitlab.aimms.com:aimms/customer-support/routing.git\Projects\CVRP\CVRP library
+
 Capacitated Vehicle Routing Problem
 -----------------------------------
 A **CVRP** deals with the following problem: A set is given with a depot and multiple costumers. The distances between their locations are known. A number of vehicles is available to serve the costumers. All costumers have a certain demand and the vehicles have the same maximum capacity. The shortest route for the vehicles must be found where all costumers get their demand. The vehicles all start and end at the depot. 
