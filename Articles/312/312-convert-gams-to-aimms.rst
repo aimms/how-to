@@ -23,23 +23,30 @@ This article uses an `example GAMS model <https://www.gams.com/products/simple-e
 Converting GMS to AIM file
 ----------------------------
 
-A.  Download and install `AIMMS 3.14 <https://download.aimms.com/aimms/download/data/3.14/5.53/Aimms-3.14.5.53-x86.exe>`_ (if you don't already have it).
-    
+A.  If you do not have AIMMS 3.14 installed, then:
+
+    1.  Ensure that the path ``C:\ProgramData\Paragon Decision Technology`` is linked to ``C:\ProgramData\AIMMS``.
+        You can do this via the MS DOS command (with elevated rights / running as administrator):
         
+        .. code-block:: none
+
+            mklink /D "C:\ProgramData\Paragon Decision Technology" C:\ProgramData\AIMMS
+
+    #.  Download and install `AIMMS 3.14 <https://download.aimms.com/aimms/download/data/3.14/5.53/Aimms-3.14.5.53-x86.exe>`_  
     
     After creating and restarting your project with AIMMS 3.14, it should look like:
 
         .. image:: images/NewAIMMS313Project.png
             :align: center
 
-#. Copy the GAMS model file next to the ``.amb`` file created by AIMMS 3.14.
+#.  Copy the GAMS model file next to the ``.amb`` file created by AIMMS 3.14.
 
-   We assume here that the GAMS model file has extension ``.gms``, for instance ``trnsport.gms``.
+    We assume here that the GAMS model file has extension ``.gms``, for instance ``trnsport.gms``.
 
 
-#. Close AIMMS. Open AIMMS 3.14 again on the existing project.
+#.  Close AIMMS. Open AIMMS 3.14 again on the existing project.
 
-#. Go to *File > Open Model File* and switch the file type to ``.aim``. Now you can open the GAMS model.
+#.  Go to *File > Open Model File* and switch the file type to ``.aim``. Now you can open the GAMS model.
 
     .. image:: images/NewModelAIMTypeFiles.png
         :align: center
