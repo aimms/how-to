@@ -1,0 +1,216 @@
+## ams_version=1.0
+
+Model Main_Flow_Shop {
+    Comment: {
+        "Keywords:
+        CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP."
+    }
+    Section WebUI_support {
+        Set AllPublicIdentifiers {
+            SubsetOf: AllIdentifiers;
+            Definition: Main_Flow_Shop;
+        }
+        Section Actions {
+            Set s_ActionNumbers {
+                SubsetOf: Integers;
+                Index: i_an;
+                Definition: ElementRange(1,9);
+            }
+            StringParameter sp_SecondaryActions {
+                IndexDomain: (i_an, webui::indexPageActionSpec );
+                Definition: {
+                    {
+                    	('1','displaytext'): "Solve" ,          ! (Optional) The text/label you would like to give the action.
+                    	('1','icon'       ): "aimms-hammer",    ! (Optional) The icon you want to display for the respective action.
+                    	('1','procedure'  ): "pr_Solve",        ! (Optional) The procedure you want to call when the respective action is clicked.
+                    	('1','state'      ): "Active",          ! (Optional) Active (displayed and clickable), 
+                    	                                        !            Inactive (displayed and not clickable), and 
+                    	                                        !            Hidden (not displayed). 
+                    	                                        !            By default, the state is Hidden.
+                    
+                    	('2','displaytext'): "Load results"   , ! (Optional) The text/label you would like to give the action.
+                    	('2','icon'       ): "aimms-download9", ! (Optional) The icon you want to display for the respective action.
+                    	('2','procedure'  ): "pr_LoadResults" , ! (Optional) The procedure you want to call when the respective action is clicked.
+                    	('2','state'      ): if p01_ResultsAvailable then "Active" else "InActive" endif
+                    	                                        ! (Optional) Active (displayed and clickable), 
+                    	                                        !            Inactive (displayed and not clickable), and 
+                    	                                        !            Hidden (not displayed). 
+                    	                                        !            By default, the state is Hidden.
+                    }
+                }
+            }
+        }
+        Section Loading_server_session_results {
+            Property: NoSave;
+            StringParameter sp_SavedRequestID {
+                InitialData: "";
+            }
+            Parameter p01_ResultsAvailable {
+                Range: binary;
+                InitialData: 0;
+            }
+            Procedure pr_myLoadResultsCallback {
+                Arguments: (sp_RequestID);
+                Body: {
+                    sp_SavedRequestID := sp_RequestID;
+                    p01_ResultsAvailable := 1;
+                }
+                StringParameter sp_RequestID {
+                    Property: Input;
+                }
+            }
+            Procedure pr_LoadResults {
+                Body: {
+                    pro::session::LoadResultsCallBack(sp_SavedRequestID);
+                    p01_ResultsAvailable := 0;
+                    sp_SavedRequestID := "";
+                }
+            }
+        }
+        Section Gantt_Chart {
+            Procedure pr_prepInterface {
+                Body: {
+                    p_GCJobStart(j,m)  := v_StartTime( first(s | v01_JobSchedule(j,s)),m);
+                    p_GCJobDuration(j,m) := p_ProcesTime(j,m);
+                }
+            }
+            Parameter p_GCJobStart {
+                IndexDomain: (j,m);
+            }
+            Parameter p_GCJobDuration {
+                IndexDomain: (j,m);
+            }
+            StringParameter sp_JobDescription {
+                IndexDomain: (j);
+                Text: "Description of jobs that can be used inside the Gantt Chart";
+                Definition: {
+                    FormatString("J%i", ord(j));
+                }
+            }
+            StringParameter sp_MachineDescription {
+                IndexDomain: (m);
+                Text: "Description of machines that can be used inside the Gantt Chart";
+                Definition: {
+                    FormatString("M%i", ord(m));
+                }
+            }
+        }
+    }
+    DeclarationSection Flowshop_Mathematical_Program_Declarations {
+        Parameter p_MaxJobs {
+            Text: "Number of elements in the set Jobs";
+            Range: integer;
+        }
+        Set s_Jobs {
+            Text: "Set of all Jobs";
+            Index: j, j2;
+            Definition: {
+                ElementRange(1,p_MaxJobs, prefix: "Job-");
+            }
+        }
+        Set s_Schedules {
+            Text: "Set of all schedules";
+            Index: s;
+            Definition: {
+                ElementRange(1,p_MaxJobs, prefix: "Pos-");
+            }
+        }
+        Parameter p_MaxMachines {
+            Text: "Number of elements in the set Machines";
+            Range: integer;
+        }
+        Set s_Machines {
+            Text: "Set of all machines";
+            Index: m;
+            Definition: {
+                ElementRange(1,p_MaxMachines, prefix: "M-");
+            }
+        }
+        Parameter p_ProcesTime {
+            IndexDomain: (j,m);
+            Text: "Time required to process job j on machine m";
+        }
+        Variable v01_JobSchedule {
+            IndexDomain: (j,s);
+            Text: "Determining the place of the job";
+            Range: binary;
+        }
+        Variable v_StartTime {
+            IndexDomain: (s,m);
+            Text: "The time at which job in schedule position s commences processing on machine m";
+            Range: nonnegative;
+        }
+        Constraint c_OneJobPerSchedule {
+            IndexDomain: (s);
+            Text: "Only one job is related to every schedule";
+            Definition: sum(j, v01_JobSchedule(j,s)) = 1;
+        }
+        Constraint c_OneSchedulePerJob {
+            IndexDomain: (j);
+            Text: "Only one schedule is related to every job";
+            Definition: sum(s, v01_JobSchedule(j,s)) = 1;
+        }
+        Constraint c_MachineStartTime {
+            IndexDomain: (s,m) | m <> last(s_Machines);
+            Text: "The commencement of schedule s on machine m+1 is no earlier then its finish on machine m";
+            Definition: v_StartTime(s,m + 1) >=  v_StartTime(s,m) + sum(j, p_ProcesTime(j,m)*v01_JobSchedule(j,s));
+        }
+        Constraint c_ScheduleStartTime {
+            IndexDomain: (s,m) | s <> last(s_Schedules);
+            Text: "The commencement of schedule s + 1 on machine m is no earlier then the finish time of job j on machine m";
+            Definition: v_StartTime(s + 1,m) >=  v_StartTime(s,m) + sum(j, p_ProcesTime(j,m)*v01_JobSchedule(j,s));
+        }
+        Variable v_TimeSpan {
+            Text: "Total time to process all jobs on all machines";
+            Definition: v_StartTime(Last(s),last(m)) + sum(j, p_ProcesTime(j,last(m))*v01_JobSchedule(j,Last(s)));
+        }
+        MathematicalProgram mp_FlowShopModel {
+            Objective: v_TimeSpan;
+            Direction: minimize;
+            Constraints: AllConstraints;
+            Variables: AllVariables;
+        }
+    }
+    Section MainModelProcedures {
+        Procedure MainInitialization {
+            Body: {
+                p_MaxJobs 	:= 7;
+                p_MaxMachines 	:= 10;
+                
+                pr_GenerateData;
+            }
+        }
+        Procedure MainExecution;
+        Procedure MainTermination {
+            Body: {
+                return 1 ;
+            }
+        }
+    }
+    Procedure pr_GenerateData {
+        Body: {
+            p_ProcesTime(j,m) := round(Uniform(1,20));
+        }
+    }
+    Procedure pr_DoSolve {
+        Body: {
+            Empty AllVariables;
+            pr_GenerateData();
+            solve mp_FlowShopModel;
+            pr_prepInterface;
+        }
+    }
+    Procedure pr_Solve {
+        Body: {
+            if pro::GetPROEndPoint() then
+            	if pro::DelegateToServer( waitForCompletion  :  0, 
+            				  completionCallback :  'pr_myLoadResultsCallback' 
+            				  ) then	
+            		return 1;
+            	endif ;
+            endif ;
+            
+            pr_DoSolve();
+        }
+    }
+}

@@ -15,12 +15,9 @@ This section contains tips for customizing the appearance of your AIMMS applicat
 .. toctree::
    :maxdepth: 1
     
-   /Articles/94/94-using-the-scalar-switch-css
    /Articles/49/49-webui-css-color
+   /Articles/315/315-hover-and-select-effects-webui-charts
+   /Articles/94/94-using-the-scalar-switch-css
    /Articles/221/221-adding-a-custom-splash-screen
    /Articles/234/234-align-multiple-objects-winui
-   /Articles/315/315-hover-and-select-effects-webui-charts
 
-From the AIMMS Community:
-
-* `3 Tips for a Better Page Layout <https://community.aimms.com/ui-and-ux-40/3-tips-for-a-better-page-layout-223>`_

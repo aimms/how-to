@@ -1,11 +1,11 @@
-Investigate state server session
+Investigate state solver session
 ===================================
 
 .. meta::
-   :description: The state of the server session may be unexpected, and up for inspection
-   :keywords: data, state, server session
+   :description: The state of the solver session may be unexpected, and up for inspection
+   :keywords: data, state, solver session
 
-As an end user, you cannot directly inspect the data used by the data session or by the server session. 
+As an end user, you cannot directly inspect the data used by the data session or by the solver session. 
 As a model builder, you may need to investigate in detail what happens during these sessions.
 
 One way is by creating a data snapshot by creating case files or text files. This article shows how to do this with text files.

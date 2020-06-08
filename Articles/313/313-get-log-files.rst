@@ -59,7 +59,7 @@ When the incident happened while launching an app, look at:
 App running
 ^^^^^^^^^^^^^^^^^^
 
-When the incident happens during an AIMMS verify, client, or server session, look at the session log.
+When the incident happens during an AIMMS verify, client, or solver session, look at the session log.
 
 Download button for log files can be found at on tab ``configuration``, click ``Log Management``. 
 Note that this tab is only available to users in the ``Admin`` group.
@@ -155,14 +155,14 @@ such that the timestamps of the incidents are more easily interpreted.
 After this change, the license service needs to be restarted as follows:
 
 #.  If the license server, also serves licenses for an AIMMS PRO, stop the service of AIMMS PRO using the AIMMS PRO configurator.
-
-#.  In the AIMMS License manager, stop the license service using the menu item ``Maintenance > Stop the service``. 
     It may take one or two minutes before the service is stopped.
 
+#.  In the AIMMS License manager, stop the license service using the menu item ``Maintenance > Stop the service``. 
+
 #.  In the AIMMS License manager, start the license service using the menu item ``Maintenance > Start the service``. 
-    It may take one or two minutes before the service is started.
 
 #.  Start the AIMMS PRO services stopped in the first step.
+    It may take one or two minutes before the service is started.
 
 
 

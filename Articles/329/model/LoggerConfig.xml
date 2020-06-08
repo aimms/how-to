@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- The use of this file in your AIMMS projects is explained in
+         https://how-to.aimms.com/Articles/329/329-more-logging.html 
+    -->
+
+    <!-- Section 1: Appenders -->
+
+    <appender name="stdout" class="org.apache.log4j.ConsoleAppender"> 
+        <param name="Target" value="System.out"/> 
+        <layout class="org.apache.log4j.PatternLayout"> 
+            <param name="ConversionPattern" value="%d{HH:mm:ss,SSS} %t [%p] {%c} %m%n"/> 
+        </layout> 
+    </appender>
+
+    <!-- see http://wiki.apache.org/logging-log4j/Log4jXmlFormat for formatting options -->
+    <appender name="MyFileAppender" class="org.apache.log4j.FileAppender">
+        <param name="File" value="log/aimms-log.txt" />
+        <param name="Append" value="true" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} %t [%p] {%c} %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="MyXMLFileAppender" class="org.apache.log4j.FileAppender">
+        <param name="File" value="c:/temp/aimms-log.xml" />
+        <param name="Append" value="true" />
+        <layout class="org.apache.log4j.XMLLayout"/>
+    </appender>  
+
+    <!-- Section 2: Loggers -->
+
+    <logger name="AIMMS.Trace" >
+        <level value="warn"/>
+    </logger>
+    <logger name="AIMMS.Trace.Procedure">
+        <!--- Tracing entering and leaving AIMMS Procedures.
+              Put this logger to trace if you need this information.
+        -->
+        <level value="warn"/>
+    </logger>
+    <logger name="ModularCompiler">
+        <!--- The AIMMS Compiler -->
+        <level value="info"/> 
+    </logger>
+    <logger name="AIMMS.Engine" >
+        <!--- The multi-threaded AIMMS Engine -->
+        <level value="info"/>
+    </logger>
+    <logger name="AIMMS.gui" >
+        <level value="warn"/>
+    </logger>
+    <logger name="ARMI" >
+        <level value="info"/>
+    </logger>
+    <logger name="AimmsDLLSession" >
+        <level value="info"/>
+    </logger>
+    <logger name="AimmsSession" >
+        <level value="info"/>
+    </logger>
+
+    <logger name="CubeEngine">
+    <!--
+       It shows you what happenes in the back-end of WebUI. For example, requests on your
+      websockets, how your widgets are being setup, etc..
+    -->
+    <level value="warn" />
+    </logger>
+    <logger name="Frontend">
+        <!--
+           It shows you what happens in your browser. For example, errors triggered, widgets
+          loaded, pages loaded, etc..
+        -->
+        <level value="warn" />
+    </logger>
+    <logger name="beastweb">
+        <!--
+           It shows you what happens in HTTP layer between back-end of WebUI and your browser.
+           Mainly, it shows you the different HTTP requests send from your browsers
+        -->
+        <level value="warn" />
+    </logger>
+    <logger name="CubeEngineLink.WebUIServer">
+        <!--
+           It shows you what happens when back-end of WebUI process your http requests. For
+          example, when you upload file, download file, fetch your custom JS/CSS files.
+        -->
+      <level value="warn" />
+    </logger>
+
+    <!--- Database logging -->
+    <logger name="dbmsSqlApi">
+        <!--- Exchanging data with ODBC data sources -->
+        <level value="error"/>
+    </logger>
+    <logger name="dbmsSqlApi.Database">
+        <!-- Connecting wih ODBC data sources and managing transactions -->
+        <level value="info"/>
+    </logger>
+
+    <!--- Various layers in the HTTP library -->
+    <logger name="net4cxx" >
+        <level value="warn"/>
+    </logger>
+    <logger name="httpclient" >
+        <level value="info"/>
+    </logger>
+
+    <!-- Section 3: Final configuration -->
+
+    <root>
+        <priority value="info" />
+        <appender-ref ref="MyFileAppender" />
+        <!-- <appender-ref ref="MyXMLFileAppender" /> -->
+        <!-- <appender-ref ref="stdout" /> -->
+    </root>
+
+</log4j:configuration>

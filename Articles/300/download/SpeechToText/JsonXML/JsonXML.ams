@@ -2,7 +2,11 @@
 
 LibraryModule JsonXML {
     Prefix: jxml;
-    Interface: data { sp_DLLFilename, ConvertFromJsonToXML, ConvertFromXMLToJson };
+    Interface: {
+        data { sp_DLLFilename, 
+               ConvertFromJsonToXML, 
+               ConvertFromXMLToJson }
+    }
     Section Conversion_between_XML_and_JSON {
         StringParameter sp_DLLFilename {
             Definition: {

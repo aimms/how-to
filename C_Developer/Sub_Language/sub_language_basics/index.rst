@@ -15,7 +15,6 @@ These topics cover what you need to get started programming your model in AIMMS 
    :maxdepth: 1
 
    /Articles/119/119-Reproducible-Random-Sequence 
-   /Articles/132/132-Repetive-Patterns-Model-Edit 
    /Articles/194/194-using-loopcount-instead-of-explicit-counting-parameter-in-loops
    /Articles/150/150-solve-in-loop
    /Articles/121/121-set-index-element-parameter
@@ -23,11 +22,10 @@ These topics cover what you need to get started programming your model in AIMMS 
    /Articles/17/17-category-mapping
    /Articles/141/141-element-after-last
    /Articles/112/112-Integer-properties
-   /Articles/146/146-value-dynamic-identifier
-   /Articles/131/131-Formulas-as-Data
    /Articles/175/175-select-variables-and-constraints-for-math-program
    /Articles/250/250-monitoring-identifiers-for-changes
    /Articles/184/184-use-multiple-indices-for-set
+   /Articles/108/108-kb10-simple-set-compound-set-relation
    /Articles/187/187-convert-string-to-number
    /Articles/188/188-use-nbest-operator
    /Articles/190/190-empty-sets

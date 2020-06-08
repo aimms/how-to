@@ -1,0 +1,26 @@
+## ams_version=1.0
+
+Model Main_abc {
+    Set simpleNames {
+        Index: sn;
+    }
+    StringParameter elaborateNames {
+        IndexDomain: sn;
+    }
+    Parameter valueNames {
+        IndexDomain: sn;
+    }
+    Procedure MainInitialization {
+        Body: {
+            simpleNames := data { a, b, c } ;
+            elaborateNames := data { a : "aaa", b : "bbb", c : "ccc" } ;
+            valueNames := data { a : 121, b : 232, c : 343 } ;
+        }
+    }
+    Procedure MainExecution;
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+    }
+}

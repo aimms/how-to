@@ -1,0 +1,95 @@
+## ams_version=1.0
+
+Model Main_ms {
+    Parameter p01 {
+        Range: binary;
+        InitialData: 1;
+    }
+    Procedure SaveCase {
+        Arguments: (sp_CaseName);
+        Body: {
+            !DebuggerBreakpoint();
+            OptionGetString("Data Management Style", sp_dms);
+            if sp_dms = "Disk Files and Folders" then
+            
+            	! Save the case in the folder "data".
+            	if not DirectoryExists( "data" ) then
+            		DirectoryCreate("data");
+            	endif ;
+            	CaseFileSave( "data\\" + sp_CaseName, AllIdentifiers );
+            
+            else
+            	! First try to find a case with the name indicated by CaseName. 
+            	! If AIMMS can find this, it will store a reference to this case 
+            	! in the element parameter ep_CaseReference
+            	if ( not CaseFind( sp_CaseName, ep_CaseReference ) ) then
+            
+            		! If no case with the name indicated by CaseName could be found, then
+            		! we try to create a case with this name. After creating the case, AIMMS
+            		! will store a reference in the ep_CaseReference element parameter to the
+            		! newly created case
+            		if ( not CaseCreate( sp_CaseName, ep_CaseReference ) ) then
+            
+            			! If there was an error while creating the case, notify the developer
+            			! by raising an error. If the raised error is not caught, AIMMS will
+            			! display it in the error window.
+            			raise error "Could not create case with name " + sp_CaseName ;
+            
+            		endif;
+            
+            	endif;
+            
+            	! If we got here, it means either a case with the indicated case name could be
+            	! found, or it was created. 
+            	! Now instruct AIMMS to set this case to be the current case
+            	CaseSetCurrent( ep_CaseReference );
+            
+            	! And then instruct AIMMS to save the case
+            	CaseSave( 0 );
+            
+            endif;
+        }
+        StringParameter sp_CaseName {
+            Property: Input;
+        }
+        ElementParameter ep_CaseReference {
+            Range: AllCases;
+        }
+        StringParameter sp_dms;
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            saveCase( "cas01.data" );
+        }
+    }
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

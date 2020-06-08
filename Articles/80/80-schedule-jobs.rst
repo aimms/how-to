@@ -18,9 +18,9 @@ Effectively, this realizes that the job at hand is solved regularly. As you can 
 
 * The WebUI session you start via AIMMS PRO has an associated AIMMS data session. This data session has a ``pro::CurrentDelegationLevel()`` of 0; there is no delegation of work yet.
 
-* The AIMMS server session started from this AIMMS Data Session has a ``pro::CurrentDelegationLevel()`` of 1; it is the consequence of one delegation.
+* The AIMMS solver session started from this AIMMS Data Session has a ``pro::CurrentDelegationLevel()`` of 1; it is the consequence of one delegation.
 
-* The AIMMS server session started from the above AIMMS Server session has a ``pro::CurrentDelegationLevel()`` of 1 higher than its predecessor.
+* The AIMMS solver session started from the above AIMMS solver session has a ``pro::CurrentDelegationLevel()`` of 1 higher than its predecessor.
 
 .. Note: The WebUI session can be closed as soon as the sequence is started; each server job schedules the next before doing its actual work. The WebUI session is only used to start the sequence.
 
@@ -30,9 +30,9 @@ To start this sequence, the following code is used.
 
 Each line is explained as follows:
 
-#. Determine the payload procedure that should be executed by each server session.  Here it is the ``pr_Friesian``, as Friesian horses are excellent workhorses.
+#. Determine the payload procedure that should be executed by each solver session.  Here it is the ``pr_Friesian``, as Friesian horses are excellent workhorses.
 
-#. A call to the procedure that actually starts each server session.
+#. A call to the procedure that actually starts each solver session.
 
 #. When ``pr_IterativeJobScheduling`` is called by another procedure, then the argument ``delegateLevel`` should be 0.
 
@@ -49,7 +49,7 @@ The center piece of the project is the procedure ``pr_IterativeJobScheduling``:
         Procedure pr_IterativeJobScheduling {
             Arguments: (delegateLevel,maxDelegateLevel,timeIncrement,epPayloadProcedure);
             Body: {
-                ! pro::DelegateToServer uses the *current* values of local arguments to create a call for a new server session.
+                ! pro::DelegateToServer uses the *current* values of local arguments to create a call for a new solver session.
                 ! We modify the values of these arguments before calling pro::DelegateToServer
                 delegateLevel += 1 ;                                                       ! 1)
                 
@@ -140,7 +140,7 @@ To operate, the example that can be downloaded :download:`here <downloads/JobRep
 
             12:10:46,186 0x7f6389d90700 [INFO] {PRO.Client.Library} pr_Friesian(): At 2018-09-04 12:10:46 (UTC) delegation level is 3
 
-        That is because the procedure ``pr_Friesian`` uses the procedure call ``pro::management::LocalLogInfo(...);`` to log some information about current server session.
+        That is because the procedure ``pr_Friesian`` uses the procedure call ``pro::management::LocalLogInfo(...);`` to log some information about current solver session.
 
     * When you want to interrupt a sequence of server jobs, please terminate the scheduled session before terminating the running session.
 

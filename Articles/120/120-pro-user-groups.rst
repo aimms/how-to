@@ -7,7 +7,7 @@ Create PRO User Groups
 
 In this article we explore how you can authorize access to information within your AIMMS app by creating and managing user groups. 
 
-topic:: File Sharing Series
+.. topic:: File Sharing Series
 
     This article is part of a series of three to enable AIMMS app developers to model file sharing securely. See also:
 

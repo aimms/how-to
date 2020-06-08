@@ -1,0 +1,4 @@
+sp_DBNameDB := "howto343b" ;
+sp_ServerNameDB := "localhost" ;
+sp_UserNameDB := "ChrisKuip" ;
+sp_PasswordDB := "jd#4YnD54%fdS!" ;

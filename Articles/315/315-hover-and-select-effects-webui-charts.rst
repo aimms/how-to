@@ -18,26 +18,31 @@ Each chart has 3 states:
 
 .. image:: images/default-state.png
    :scale: 50
+   :align: center
 
 * Hover state – hovered bar remains solid, opacity slightly reduced for the other bars
 
 .. image:: images/hover-state.png
    :scale: 50
+   :align: center
 
 * Selected state – selected bar remains solid, opacity is further reduced for the other bars
 
 .. image:: images/selected-state.png
    :scale: 50
+   :align: center
 
-Nodes in the Map widget have a slightly different behavior: 
+.. note:: 
+    
+    Nodes in the Map widget have a slightly different behavior
+    
+        * Default - all nodes have same opacity and no border
+        * Hover - hovered node has a 1px border 
+        * Selected - selected node has a 2px border, opacity reduced for the other nodes
 
-* Default - all nodes have same opacity and no border
-* Hover - hovered node has a 1px border 
-* Selected - selected node has a 2px border, opacity reduced for the other nodes
 
-
-Changing the style for selection states
-----------------------------------------
+.. Changing the style for selection states
+.. ----------------------------------------
 
 To customize the styles for these states, you'll need to add a CSS file in the folder ``MainProject\WebUI\resources\css``.
 
@@ -45,36 +50,38 @@ You can use the chart in `WebUI Annotations - Widget and CSS support <https://ma
 
 .. topic:: Example CSS
 
-   You can download the file ``AnnotationsCSS.css`` below with examples of how to change styles for the 3 states in  charts.
+   You can download the file below which contains the code snippets to change styles for the 3 states in charts.
 
-   * :download:`downloads/AnnotationsCSS.css`
+   * :download:`Download AnnotationsCSS.css<downloads/AnnotationsCSS.css>`
 
 
 In the images below, the first bar on the left has custom styles applied.
 
-Default
-^^^^^^^^^^
+.. removed because this is duplication of information
+.. Default
+.. ^^^^^^^^^^
 
-.. code-block:: css
-   :linenos:
+.. .. code-block:: css
+..    :linenos:
 
-   /* Default state */
-   .annotation-bar_blue{
-      /* fill changes */
-      fill: blue;
-      fill-opacity: .5 !important;
-      /* stroke changes */
-      stroke: aqua !important;
-      stroke-width: 4 !important;
-      stroke-dasharray: 5;
-   }
+..    /* Default state */
+..    .annotation-bar_blue{
+..       /* fill changes */
+..       fill: blue;
+..       fill-opacity: .5 !important;
+..       /* stroke changes */
+..       stroke: aqua !important;
+..       stroke-width: 4 !important;
+..       stroke-dasharray: 5;
+..    }
 
 
-.. image:: images/image01.jpg
+.. .. image:: images/image01.jpg
+..     :align: center
 
 
 Hover
-^^^^^
+---------
 .. code-block:: css
    :linenos:
 
@@ -91,9 +98,10 @@ Hover
    }
 
 .. image:: images/image02.jpg
+    :align: center
 
 Selected
-^^^^^^^^^^^^^
+-------------
 .. code-block:: css
    :linenos:
 
@@ -110,5 +118,6 @@ Selected
    }
 
 .. image:: images/image03.jpg
+    :align: center
 
 
