@@ -1,4 +1,4 @@
-Determine Consecutive Ranges in Excel Files
+Determine Data Ranges in Excel Files
 ================================================
 
 When exchanging data with Excel files, you might need to provide the cell ranges as inputs to AIMMS AXLL functions. 
