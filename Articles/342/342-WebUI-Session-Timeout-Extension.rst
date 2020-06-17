@@ -1,4 +1,4 @@
-Extending WebUI Idle Session Timeout 
+Modifying Session Timeout Duration for WebUI Apps
 ==================================================
 
 .. meta::

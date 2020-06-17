@@ -1,0 +1,14 @@
+{
+  "level": {
+    ".*": "warn"
+  },
+  "destFile": {
+    ".*": "webui-service.log"
+  },
+  "remote": {
+    ".*": null
+  },
+  "stdout": false,
+  "locked": false,
+  "dateFormat": "MMM DD, YYYY / hh:mm:ss A"
+}

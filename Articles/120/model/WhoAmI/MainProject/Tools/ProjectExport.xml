@@ -2,4 +2,5 @@
 <ExportSettings>
 	<ExcludedFile>backup</ExcludedFile>
 	<ExcludedFile>log</ExcludedFile>
+	<ExcludedFile>PROTemp</ExcludedFile>
 </ExportSettings>

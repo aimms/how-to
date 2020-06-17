@@ -6,7 +6,11 @@ Understanding Concurrent Usage on AIMMS PRO/Cloud
    :keywords: concurrent users, concurrent usage, AIMMS PRO, WebUI, Cloud 
 
 
+<<<<<<< HEAD
 This article intends to help you understand how concurrent usage works on the AIMMS PRO and Cloud platforms. The number of concurrent users allowed depends on the licensing agreements of your AIMMS platform subscription. .  
+=======
+This article intends to help you understand how concurrent usage works on the AIMMS PRO and Cloud platforms. The number of concurrent users allowed depends on the licensing agreements of your AIMMS platform subscription.   
+>>>>>>> 9cda0fc83d853767897c11c2ad51f80775a1cd5a
 
 
 

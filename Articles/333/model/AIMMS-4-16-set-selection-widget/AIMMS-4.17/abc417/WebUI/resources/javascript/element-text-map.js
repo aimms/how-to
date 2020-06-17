@@ -1,0 +1,4 @@
+ElementTextMap = {
+     "sn" : "elaborateNames",
+};
+

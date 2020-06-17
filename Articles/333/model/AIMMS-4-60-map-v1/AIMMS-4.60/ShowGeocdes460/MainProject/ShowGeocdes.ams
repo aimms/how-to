@@ -1,0 +1,68 @@
+## ams_version=1.0
+
+Model Main_ShowGeocdes {
+    StringParameter sp_WorkBookName;
+    Set s_Customers {
+        Index: i_Customer, i_CustomerFrom, i_CustomerTo;
+    }
+    Set s_LatLon {
+        Index: i_LatLon;
+        Definition: data { Latitude, Longitude };
+    }
+    Parameter p_Coords {
+        IndexDomain: (i_Customer,i_LatLon);
+    }
+    Parameter p01_TravelArc {
+        IndexDomain: (i_CustomerFrom, i_CustomerTo);
+        Range: binary;
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution {
+        Body: {
+            sp_WorkBookName := "data\\100 UK geo-codes.xlsx";
+            if axll::WorkBookIsOpen(sp_WorkBookName) then
+                   axll::SelectWorkBook(sp_WorkBookName);
+            else
+                   axll::OpenWorkBook(sp_WorkBookName);
+            endif;
+            axll::ReadTable(
+                    IdentifierReference    :  p_Coords,
+                    RowHeaderRange         :  "A2:A10",
+                    ColumnHeaderRange      :  "B1:C1",
+                    DataRange              :  "B2:C10",
+            	ModeForUnknownElements :  1, 
+            	MergeWithExistingData  :  0);
+            axll::CloseWorkBook(sp_WorkBookName);
+            p01_TravelArc(i_customer, i_customer++1) := 1;
+        }
+    }
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

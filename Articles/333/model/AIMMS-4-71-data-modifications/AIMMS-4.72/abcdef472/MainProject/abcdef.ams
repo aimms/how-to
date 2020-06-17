@@ -1,0 +1,74 @@
+## ams_version=1.0
+
+Model Main_abcdef {
+    Set s_someElements {
+        Index: i_sn;
+        webui::ElementTextIdentifier: sp_elaborateNames;
+    }
+    StringParameter sp_elaborateNames {
+        IndexDomain: i_sn;
+    }
+    Parameter p_associatedValues {
+        IndexDomain: i_sn;
+        webui::AnnotationsIdentifier: sp_associatedValuesAnnotations;
+        webui::FlagsIdentifier: p_associatedValues_flags;
+        webui::TooltipIdentifier: p_associatedValues_tooltips;
+        webui::UponChangeProcedure: uponchange_p_associatedValues;
+    }
+    StringParameter sp_associatedValuesAnnotations {
+        IndexDomain: i_sn;
+    }
+    Parameter p01_visibleElements {
+        IndexDomain: i_sn;
+        Range: binary;
+    }
+    Set s_VisibleElements {
+        SubsetOf: s_someElements;
+        Index: i_ve;
+        Definition: {
+            { i_sn | p01_visibleElements( i_sn ) }
+        }
+    }
+    StringParameter p_associatedValues_flags {
+        IndexDomain: i_sn;
+    }
+    StringParameter p_associatedValues_tooltips {
+        IndexDomain: i_sn;
+    }
+    Procedure uponchange_p_associatedValues {
+        Body: {
+            display p_associatedValues ;
+        }
+    }
+    Procedure MainInitialization;
+    Procedure PostMainInitialization {
+        Body: {
+            s_someElements := data { a, b, c, d, e, f } ;
+            sp_elaborateNames := data { a : "Annet", b : "Beate", c : "Cynthia", d: "Deanne", e: "Eliza", f : "Felicia" } ;
+            p_associatedValues := data { a : 121, b : 232, c : 343, d: 454, e: 565, f : 676} ;
+            sp_associatedValuesAnnotations := data { a : "red", b : "grey", c : "yellow", d : "orange", e : "green", f : "blue" } ;
+            p01_visibleElements(i_sn) := 1;
+            
+            p_associatedValues_flags := data { a : "readonly"  } ;
+            
+            p_associatedValues_tooltips := data 
+             { a : "wears facemask",
+               b : "keeps her distance",
+               c : "stays at home",
+               d : "is in quarantine",
+               e : "provides care",
+               f : "only seen wearing gloves anyway" } ;
+        }
+    }
+    Procedure MainExecution;
+    Procedure PretMainTermination {
+        Body: {
+            return 1;
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+    }
+}
