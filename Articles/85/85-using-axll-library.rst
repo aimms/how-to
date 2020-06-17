@@ -170,4 +170,7 @@ An example project which uses most of the functions described above is included 
 
 See procedures ``prReadFromExcel`` and ``prWriteToExcel``. 
 
+See also :doc:`../228/consecutive-range`.
+
+
 
