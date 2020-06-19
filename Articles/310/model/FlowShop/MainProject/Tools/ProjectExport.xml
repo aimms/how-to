@@ -3,5 +3,5 @@
 	<ExcludedFile>backup</ExcludedFile>
 	<ExcludedFile>log</ExcludedFile>
 	<ExcludedFile>PROTemp</ExcludedFile>
-	<ExcludedFile>MINOS.PRN</ExcludedFile>
+	<ExcludedFile>ThirdSaveLabel</ExcludedFile>
 </ExportSettings>

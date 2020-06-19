@@ -4,18 +4,136 @@ LibraryModule Library_GuardServerSession {
     Prefix: gss;
     Interface: Public_Section;
     Section Public_Section {
+        Section WebUI_Support {
+            Property: NoSave;
+            StringParameter sp_widgetActionMessageStack {
+                IndexDomain: (webui::indexPageExtension, webui::indexWidgetActionSpec);
+                Definition: {
+                    {
+                    	('1', 'displaytext' ) : "Model explorer",  
+                    	('1', 'icon'        ) : "aimms-glasses",  
+                    	('1', 'procedure'   ) : "gss::pr_OpenIdentifierOnStack",  
+                    	('1', 'state'       ) : "Active"  
+                    }
+                }
+            }
+            StringParameter sp_widgetActionMessageList {
+                IndexDomain: (webui::indexPageExtension, webui::indexWidgetActionSpec);
+                Definition: {
+                    {
+                    	('1', 'displaytext' ) : "Model explorer",  
+                    	('1', 'icon'        ) : "aimms-glasses",  
+                    	('1', 'procedure'   ) : "gss::pr_OpenIdentifierOnMessageList",  
+                    	('1', 'state'       ) : "Active"  
+                    }
+                }
+            }
+            StringParameter sp_widgetActionIdentifierProfiler {
+                IndexDomain: (webui::indexPageExtension, webui::indexWidgetActionSpec);
+                Definition: {
+                    {
+                    	('1', 'displaytext' ) : "Model explorer",  
+                    	('1', 'icon'        ) : "aimms-glasses",  
+                    	('1', 'procedure'   ) : "gss::pr_OpenProfiledIdentifier",  
+                    	('1', 'state'       ) : "Active"  
+                    }
+                }
+            }
+            StringParameter sp_SidePanelErrorPage {
+                IndexDomain: (webui::indexApplicationExtension,webui::indexSidePanelSpec);
+                Definition: {
+                    {
+                      ( '1', 'displayText' ) : if p_NoSignificantMessages then FormatString("%i msgs", p_NoSignificantMessages ) else "" endif,
+                      ( '1', 'pageId'      ) : if p_NoSignificantMessages then "errorpanel_1"                                    else "" endif,
+                      ( '1', 'tooltip'     ) : if p_NoSignificantMessages then "Error handling"                                  else "" endif,  
+                      ( '1', 'state'       ) : if p_NoSignificantMessages then "Active"                                          else "" endif 
+                    }
+                }
+            }
+            StringParameter sp_MessageStatusBar {
+                IndexDomain: (webui::indexApplicationExtension,webui::indexStatusBarSpec);
+                Definition: {
+                    {
+                    	('1', 'header'   ): "Messages",
+                    	('1', 'icon'     ): "aimms-power", 
+                    	('1', 'color'    ): "", 
+                    	('1', 'text'     ): 
+                    		FormatString("%i messages, %i warnings, and %i errors",
+                    			p_NoLogMessages, p_NoWarnings, p_NoErrors), 
+                    	('1', 'tooltip'  ): "", 
+                    	('1', 'procedure'): "", 
+                    	('1', 'state'    ): if card(s_JobErrorMessageNumbers) then "Active" else "Hidden" endif 
+                    }
+                }
+            }
+            StringParameter sp_ErrorWarningMessageMenu {
+                IndexDomain: (webui::indexPageExtension, webui::indexWidgetActionSpec);
+            }
+            StringParameter sp_TitleProfilerDetail {
+                Definition: FormatString("Profiler data for %e", ep_ProfilerDataSelectedIdentifier);
+            }
+            StringParameter sp_TitleStackMessage {
+                Definition: FormatString("Stack of \"%s\"", sp_JobErrorMessages( ep_ErrorWarningSelectedMessage ) );
+            }
+            ElementParameter ep_ProfilerDataSelectedIdentifier {
+                Range: AllIdentifiers;
+                InitialData: '';
+            }
+            ElementParameter ep_ErrorWarningSelectedMessage {
+                Range: s_JobErrorMessageNumbers;
+                InitialData: '';
+            }
+            ElementParameter ep_StackPos {
+                Range: s_StackPositions;
+            }
+            Parameter p_NoSignificantMessages {
+                Definition: p_NoLogMessages + p_NoWarnings + p_NoErrors + 1;
+            }
+            Parameter p_NoLogMessages {
+                InitialData: 0;
+            }
+            Parameter p_NoWarnings {
+                InitialData: 0;
+            }
+            Parameter p_NoErrors {
+                InitialData: 0;
+            }
+            Set s_MessageLevels {
+                Index: i_MessageLevel;
+                Definition: {
+                    data { logging, warning, error, severe } ;
+                }
+            }
+            Set s_LineNumbers {
+                SubsetOf: Integers;
+                Index: i_LineNumber;
+                Definition: ElementRange(0,1000);
+            }
+            Set s_PositiveLineNumbers {
+                SubsetOf: s_LineNumbers;
+                Index: i_PositiveLineNumber;
+                Definition: ElementRange(1,1000);
+            }
+            Set s_ActualLinenumbers {
+                SubsetOf: s_LineNumbers;
+                Index: i_ActualLineNumber;
+                Definition: ElementRange(1,if ep_LastHitLine then ep_LastHitLine else 1 endif);
+            }
+            Parameter ep_LastHitLine {
+                Definition: {
+                    last( i_PositiveLineNumber | 
+                    	p_JobProfilerData(ep_ProfilerDataSelectedIdentifier, 
+                    	i_PositiveLineNumber, 'hits'))
+                }
+            }
+            Set s_StackPositions {
+                SubsetOf: Integers;
+                Index: i_StackPosition;
+                Definition: ElementRange(1,255);
+            }
+        }
         Section Guard_session {
             DeclarationSection ServerSessionProfilerErrorData {
-                Set s_LineNumbers {
-                    SubsetOf: Integers;
-                    Index: i_LineNumber;
-                    Definition: ElementRange(0,1000);
-                }
-                Set s_StackPositions {
-                    SubsetOf: Integers;
-                    Index: i_StackPosition;
-                    Definition: ElementRange(1,255);
-                }
                 Parameter p_JobProfilerData {
                     IndexDomain: (IndexIdentifiers,i_LineNumber,IndexProfilerTypes );
                 }
@@ -31,11 +149,15 @@ LibraryModule Library_GuardServerSession {
                 }
                 ElementParameter ep_JobErrorSeverity {
                     IndexDomain: i_JobErrorMessageNumber;
-                    Range: errh::AllErrorSeverities;
+                    Range: s_MessageLevels;
                 }
                 ElementParameter ep_JobErrorNodes {
                     IndexDomain: (i_JobErrorMessageNumber,i_StackPosition);
                     Range: AllSymbols;
+                }
+                ElementParameter ep_JobErrorAttributes {
+                    IndexDomain: (i_JobErrorMessageNumber,i_StackPosition);
+                    Range: AllAttributeNames;
                 }
                 Parameter p_JobErrorLines {
                     IndexDomain: (i_JobErrorMessageNumber,i_StackPosition);
@@ -59,24 +181,7 @@ LibraryModule Library_GuardServerSession {
                     
                     onerror ep_err do
                     
-                    	! Increase the number of recorded error messages.
-                    	s_JobErrorMessageNumbers += card(s_JobErrorMessageNumbers) + 1;
-                    	ep_JobErrorMessageNumber := last(s_JobErrorMessageNumbers);
-                    
-                    	! Record the message and severity.
-                    	sp_JobErrorMessages(ep_JobErrorMessageNumber) := errh::Message( ep_err);
-                    	sp_JobErrorMoments( ep_JobErrorMessageNumber) := errh::CreationTime(ep_err,"%c%y-%m-%d %H:%M:%S:%T%TZ('UTC')");
-                    	ep_JobErrorSeverity(ep_JobErrorMessageNumber) := errh::Severity(ep_err);
-                    
-                    	! Record the entire stack of error positions
-                    	p_errStackHeight := errh::NumberOfLocations(ep_err);
-                    	p_errStackPos := 1 ;
-                    	while p_errStackPos <= p_errStackHeight do
-                    		ep_StackPosition := p_errStackPos;
-                    		ep_JobErrorNodes(ep_JobErrorMessageNumber,ep_StackPosition) := errh::Node(ep_err,ep_StackPosition);
-                    		p_JobErrorLines( ep_JobErrorMessageNumber,ep_StackPosition) := errh::Line(ep_err,ep_StackPosition);
-                    		p_errStackPos += 1 ;
-                    	endwhile ;
+                    	pr_AppendError( ep_err );
                     
                     	! Don't let the server job be halted by this error; 
                     	! we still want the result case including the profiled data.
@@ -90,14 +195,6 @@ LibraryModule Library_GuardServerSession {
                 }
                 ElementParameter ep_err {
                     Range: errh::PendingErrors;
-                }
-                Parameter p_errStackHeight;
-                Parameter p_errStackPos;
-                ElementParameter ep_StackPosition {
-                    Range: s_StackPositions;
-                }
-                ElementParameter ep_JobErrorMessageNumber {
-                    Range: s_JobErrorMessageNumbers;
                 }
                 ElementParameter ep_Work {
                     Range: AllProcedures;
@@ -114,19 +211,19 @@ LibraryModule Library_GuardServerSession {
                 Arguments: (sp_filename);
                 Body: {
                     block where listing_page_width := 32000 ;
-                    f_out.pagewidth := 32000 ;
-                    put f_out;
-                    for i_JobErrorMessageNumber do
-                    	put     ep_JobErrorSeverity(i_JobErrorMessageNumber), " ", 
-                    	        sp_JobErrorMoments( i_JobErrorMessageNumber), " : ",
-                    		sp_JobErrorMessages(i_JobErrorMessageNumber), / ;
-                    	for i_StackPosition | p_JobErrorLines(i_JobErrorMessageNumber, i_StackPosition) do
-                    		put "    ", p_JobErrorLines(i_JobErrorMessageNumber, i_StackPosition):4:0, 
-                    		    " : ", ep_JobErrorNodes(i_JobErrorMessageNumber, i_StackPosition):0, / ;
+                    	f_out.pagewidth := 32000 ;
+                    	put f_out;
+                    	for i_JobErrorMessageNumber do
+                    		put     ep_JobErrorSeverity(i_JobErrorMessageNumber), " ", 
+                    			sp_JobErrorMoments( i_JobErrorMessageNumber), " : ",
+                    			sp_JobErrorMessages(i_JobErrorMessageNumber), / ;
+                    		for i_StackPosition | p_JobErrorLines(i_JobErrorMessageNumber, i_StackPosition) do
+                    			put "    ", p_JobErrorLines(i_JobErrorMessageNumber, i_StackPosition):4:0, 
+                    			" : ", ep_JobErrorNodes(i_JobErrorMessageNumber, i_StackPosition):0, / ;
+                    		endfor ;
+                    		put / ;
                     	endfor ;
-                    	put / ;
-                    endfor ;
-                    putclose ;
+                    	putclose ;
                     endblock ;
                 }
                 StringParameter sp_filename {
@@ -141,24 +238,7 @@ LibraryModule Library_GuardServerSession {
             Procedure pr_GlobalErrorHandler {
                 Arguments: (ep_err);
                 Body: {
-                    ! Increase the number of recorded error messages.
-                    s_JobErrorMessageNumbers += card(s_JobErrorMessageNumbers) + 1;
-                    ep_JobErrorMessageNumber := last(s_JobErrorMessageNumbers);
-                    
-                    ! Record the message and severity.
-                    sp_JobErrorMessages(ep_JobErrorMessageNumber) := errh::Message( ep_err);
-                    sp_JobErrorMoments( ep_JobErrorMessageNumber) := CurrentToString("%c%y-%m-%d %H:%M:%S:%T%TZ('UTC')");
-                    ep_JobErrorSeverity(ep_JobErrorMessageNumber) := errh::Severity(ep_err);
-                    
-                    ! Record the entire stack of error positions
-                    p_errStackHeight := errh::NumberOfLocations(ep_err);
-                    p_errStackPos := 1 ;
-                    while p_errStackPos <= p_errStackHeight do
-                    	ep_StackPosition := p_errStackPos;
-                    	ep_JobErrorNodes(ep_JobErrorMessageNumber,ep_StackPosition) := errh::Node(ep_err,ep_StackPosition);
-                    	p_JobErrorLines( ep_JobErrorMessageNumber,ep_StackPosition) := errh::Line(ep_err,ep_StackPosition);
-                    	p_errStackPos += 1 ;
-                    endwhile ;
+                    pr_AppendError(ep_err );
                     
                     if p01_locSeenErrorsAreHandled then
                     	errh::MarkAsHandled( ep_err );
@@ -226,6 +306,123 @@ LibraryModule Library_GuardServerSession {
                     Property: Output;
                 }
                 StringParameter FinalLocation;
+            }
+            Procedure pr_DownloadErrorData {
+                Arguments: (FileLocation,statusCode,statusDescription);
+                Body: {
+                    FileLocation := "usage.errorLogging";
+                    
+                    ! we store the location of the file in string parameter FinalLocation
+                    FinalLocation := webui::GetIOFilePath(FileLocation);
+                    
+                    ! writing the string parameter FinalLocation to a text file
+                    write ServerSessionProfilerErrorData to file FinalLocation ;
+                    
+                    ! checking if the previous write statement was successful or not
+                    if FileExists(FinalLocation) then
+                    
+                       ! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
+                       StatusCode := webui::ReturnStatusCode('CREATED');
+                       ! displaying the status message as All perfect instead of the default "File ready to download"
+                       StatusDescription := "All perfect!";
+                    
+                    else    !if previous write statement was not successful
+                    
+                       ! setting the statusCode to 'ERROR' and the download widget will not show the Get button anymore
+                       statusCode := webui::ReturnStatusCode('ERROR');
+                       !displaying a custom error message
+                       statusDescription := "Something went wrong when creating the file.";
+                    
+                    endif;
+                }
+                StringParameter FileLocation {
+                    Property: Output;
+                }
+                Parameter statusCode {
+                    Property: Output;
+                }
+                StringParameter statusDescription {
+                    Property: Output;
+                }
+                StringParameter FinalLocation;
+            }
+            Procedure pr_UploadErrorData {
+                Arguments: (FileLocation,StatusCode,StatusDescription);
+                Body: {
+                    sp_FileUploadLocation := webui::GetIOFilePath(FileLocation);
+                    ! The file is uploaded to the process specific temporary folder. 
+                    
+                    ! Now copy the uploaded file to Central Storage.
+                    Read from file sp_FileUploadLocation ;
+                    
+                    StatusCode := webui::ReturnStatusCode('OK');
+                    StatusDescription := "Nice.";
+                }
+                StringParameter sp_FileUploadLocation;
+                StringParameter FileLocation {
+                    Property: Input;
+                }
+                Parameter StatusCode {
+                    Property: Output;
+                }
+                StringParameter StatusDescription {
+                    Property: Output;
+                }
+            }
+            Procedure pr_AppendMessage {
+                Arguments: (sp_msg);
+                Body: {
+                    ! Increase the number of recorded error messages.
+                    s_JobErrorMessageNumbers += card(s_JobErrorMessageNumbers) + 1;
+                    ep_JobErrorMessageNumber := last(s_JobErrorMessageNumbers);
+                    
+                    ! Record the message and severity.
+                    sp_JobErrorMessages(ep_JobErrorMessageNumber) := sp_msg;
+                    sp_JobErrorMoments( ep_JobErrorMessageNumber) := CurrentToString("%c%y-%m-%d %H:%M:%S:%T");
+                    ep_JobErrorSeverity(ep_JobErrorMessageNumber) := 'logging';
+                    
+                    ! Record the entire stack of error positions
+                    p_errStackHeight := callerNumberOfLocations();
+                    p_errStackPos := 1 ;
+                    while p_errStackPos <= p_errStackHeight do
+                    	ep_StackPosition := p_errStackPos;
+                    	ep_JobErrorNodes(     ep_JobErrorMessageNumber,ep_StackPosition) := callerNode(     ep_StackPosition);
+                    	ep_JobErrorAttributes(ep_JobErrorMessageNumber,ep_StackPosition) := callerAttribute(ep_StackPosition);
+                    	p_JobErrorLines(      ep_JobErrorMessageNumber,ep_StackPosition) := callerLine(     ep_StackPosition);
+                    	p_errStackPos += 1 ;
+                    endwhile ;
+                    
+                    p_NoLogMessages += 1 ;
+                }
+                Comment: "Store the error in the data structures of the library.";
+                Parameter p_errStackHeight;
+                Parameter p_errStackPos;
+                ElementParameter ep_StackPosition {
+                    Range: s_StackPositions;
+                }
+                ElementParameter ep_JobErrorMessageNumber {
+                    Range: s_JobErrorMessageNumbers;
+                }
+                StringParameter sp_msg {
+                    Property: Input;
+                }
+            }
+            Procedure pr_OpenProfiledIdentifier {
+                Body: {
+                    IdentifierShowAttributes( ep_ProfilerDataSelectedIdentifier );
+                }
+            }
+            Procedure pr_OpenIdentifierOnStack {
+                Body: {
+                    IdentifierShowAttributes(  
+                    	ep_JobErrorNodes( ep_ErrorWarningSelectedMessage, ep_StackPos ));
+                }
+            }
+            Procedure pr_OpenIdentifierOnMessageList {
+                Body: {
+                    IdentifierShowAttributes(  
+                    	ep_JobErrorNodes( ep_ErrorWarningSelectedMessage, 1 ));
+                }
             }
         }
         Section Inspect_state_session {
@@ -306,12 +503,68 @@ LibraryModule Library_GuardServerSession {
         }
     }
     Section Private_Section {
+        Property: NoSave;
         Section Guard_utilities {
             Parameter p01_locSeenErrorsAreHandled {
                 Range: binary;
                 InitialData: 0;
             }
-            Procedure pr_SampleProc;
+            Index i_ErrorSeverity {
+                Range: errh::AllErrorSeverities;
+            }
+            ElementParameter ep_ErrorToMessageLevelMap {
+                IndexDomain: i_ErrorSeverity;
+                Range: s_MessageLevels;
+                Definition: data { 'severe' : 'severe', 'error' : 'error', 'warning' : 'warning' };
+            }
+            Procedure pr_SampleProc {
+                Body: {
+                    ! Do not delete this procedure, it is used as default of element parameter gss::ep_Work.
+                }
+            }
+            Procedure pr_AppendError {
+                Arguments: (ep_err);
+                Body: {
+                    ! Increase the number of recorded error messages.
+                    s_JobErrorMessageNumbers += card(s_JobErrorMessageNumbers) + 1;
+                    ep_JobErrorMessageNumber := last(s_JobErrorMessageNumbers);
+                    
+                    ! Record the message and severity.
+                    sp_JobErrorMessages(ep_JobErrorMessageNumber) := errh::Message( ep_err);
+                    sp_JobErrorMoments( ep_JobErrorMessageNumber) := errh::CreationTime(ep_err,"%c%y-%m-%d %H:%M:%S:%T%TZ('local')");
+                    ep_JobErrorSeverity(ep_JobErrorMessageNumber) := ep_ErrorToMessageLevelMap(errh::Severity(ep_err));
+                    
+                    ! Record the entire stack of error positions
+                    p_errStackHeight := errh::NumberOfLocations(ep_err);
+                    p_errStackPos := 1 ;
+                    while p_errStackPos <= p_errStackHeight do
+                    	ep_StackPosition := p_errStackPos;
+                    	ep_JobErrorNodes(ep_JobErrorMessageNumber,ep_StackPosition) := errh::Node(ep_err,ep_StackPosition);
+                    	ep_JobErrorAttributes(ep_JobErrorMessageNumber,ep_StackPosition) := errh::attribute(ep_err,ep_StackPosition);
+                    	p_JobErrorLines( ep_JobErrorMessageNumber,ep_StackPosition) := errh::Line(ep_err,ep_StackPosition);
+                    	p_errStackPos += 1 ;
+                    endwhile ;
+                    
+                    if errh::Severity(ep_err) = 'warning' then
+                    	p_NoWarnings += 1 ;
+                    else
+                    	p_NoErrors += 1 ;
+                    endif ;
+                }
+                Comment: "Store the error in the data structures of the library.";
+                ElementParameter ep_err {
+                    Range: errh::PendingErrors;
+                    Property: Input;
+                }
+                Parameter p_errStackHeight;
+                Parameter p_errStackPos;
+                ElementParameter ep_StackPosition {
+                    Range: s_StackPositions;
+                }
+                ElementParameter ep_JobErrorMessageNumber {
+                    Range: s_JobErrorMessageNumbers;
+                }
+            }
         }
         Section Inspect_utilities {
             Procedure pr_EnsurePath {
@@ -431,6 +684,10 @@ LibraryModule Library_GuardServerSession {
                     Comment: "Add initialization statements here that do not require any other library being initialized already.";
                 }
                 Procedure PostLibraryInitialization {
+                    Body: {
+                        !CurrentInputs -= Library_GuardServerSession ;
+                        CurrentInputs -= ServerSessionProfilerErrorData ;
+                    }
                     Comment: {
                         "Add initialization statements here that require another library to be initialized already,
                         or add statements that require the Data Management module to be initialized."

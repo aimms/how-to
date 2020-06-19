@@ -1,8 +1,13 @@
 ## ams_version=1.0
 
 Model Main_exampleNFL {
+    Quantity SI_Length {
+        BaseUnit: mile;
+        Comment: "Expresses the value of a distance.";
+    }
     Set sTeams {
         Index: iTeam, jTeam;
+        Parameter: SelectedTeam;
         webui::AnnotationsIdentifier: spAnnotation;
     }
     Set sConferences {
@@ -33,16 +38,26 @@ Model Main_exampleNFL {
     }
     Parameter pDistance {
         IndexDomain: (iTeam, jTeam);
+        Unit: mile;
     }
     DeclarationSection Optional_for_AXLL {
         StringParameter spWorkbook;
         StringParameter spSheet;
     }
-    DeclarationSection Map_Customization {
+    DeclarationSection UI_Customization {
         StringParameter spAnnotation {
             IndexDomain: iTeam;
             Definition: FormatString("%e %e", epConference(iTeam), epDivision(iTeam));
             Comment: "We want to color the map nodes based on their conference and stroke based on their division.";
+        }
+        StringParameter TitleDistance {
+            Definition: {
+                if SelectedTeam then
+                	formatstring("Distance %e (%s) to",SelectedTeam,spAnnotation(SelectedTeam))
+                else
+                	"Select Team on Map to show Distance Table"
+                endif;
+            }
         }
     }
     Procedure prReadFromExcel {
