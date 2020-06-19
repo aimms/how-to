@@ -6,13 +6,14 @@ Recently added
 ==============
 
 .. keep most recent 10-12 articles
+.. Added 19 June 2020: 228
 .. Added 1 May 2020: 333, 343, 344
 .. Added 27 March 2020: 338, 341
 .. Added 12 March 2020: 331
 .. Added 14 Feb 2020: 108-10, 108-09, 108-07
 .. Added 7 Feb 2020: 329, 334
-.. Added 17 Jan 2020: 199
 
+* :doc:`/Articles/228/228-data-ranges`
 * :doc:`/Articles/343/343-use-metadata-in-write-to-table`
 * :doc:`/Articles/344/344-sparse-execution-for-write-to-table`
 * :doc:`/Articles/333/333-update-webui-version`
@@ -24,7 +25,6 @@ Recently added
 * :doc:`/Articles/108/108-kb10-simple-set-compound-set-relation`
 * :doc:`/Articles/329/329-more-logging`
 * :doc:`/Articles/334/334-data-optimization-libraries`
-* :doc:`/Articles/199/199-model-rounded-variable`
 
 
 
