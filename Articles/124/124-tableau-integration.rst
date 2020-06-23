@@ -6,6 +6,10 @@ Link AIMMS with Tableau
    :description: How to automate Tableau integration with the AIMMS DataLink library.
    :keywords: tableau, datalink, link, integrate
 
+.. warning::
+	As of AIMMS 4.74 the Tableau Datalink Provider is deprecated. 
+
+	Customers using the Tableau Datalink Provider can convert the data to a regular data txt representation (instead of creating TDE-files) and enable any update needs within the Tableau product itself. 
 
 Although both the traditional AIMMS Windows UI and the new AIMMS WebUI offer excellent data visualization capabilities to view the data present *within* an AIMMS application, many of our customers have expressed the wish to be able to view and work with AIMMS data in Tableau (and other BI tools such as QlikView, or Spotfire). This allows a much wider audience within a company to track KPIs on dashboards based on the results from an AIMMS application, using a wider range of graphical capabilities to drill down into the data presented, and to cross analyze these results against data from various other corporate data sources.
 
