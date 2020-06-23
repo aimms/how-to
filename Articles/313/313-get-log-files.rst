@@ -52,9 +52,9 @@ App launch
 
 When the incident happened while launching an app, look at:
 
-* ``%LOCALAPPDATA%\\AIMMS\PRO\\Launcher\\<Pro version no>\\AimmsPROLauncher.log.txt``
+* ``%LOCALAPPDATA%\AIMMS\PRO\Launcher\<Pro version no>\AimmsPROLauncher.log.txt``
 
-* ``%LOCALAPPDATA%\\AIMMS\PRO\\AppLauncher\\<Pro version no>\\ProWebLink.log``
+* ``%LOCALAPPDATA%\AIMMS\PRO\AppLauncher\<Pro version no>\ProWebLink.log``
 
 App running
 ^^^^^^^^^^^^^^^^^^
@@ -72,14 +72,10 @@ The download button is available since AIMMS PRO 2.11.
 For older AIMMS PRO systems, you can look at the folders:
 ``C:\ProgramData\AimmsPRO\Log\Sessions\`` and ``C:\ProgramData\AimmsPRO\Log\`` on the machine running AIMMS PRO.
 
-
-
-
 further reading
 ^^^^^^^^^^^^^^^^
 
 See also https://documentation.aimms.com/pro/logging.html
-
 
 Browser logs
 -------------------------
@@ -125,7 +121,7 @@ Internet Explorer 11
 License server logs
 ---------------------
 
-The licensing log files can be found in the folder ``C:\\ProgramData\\AIMMS\\Logging\\`` 
+The licensing log files can be found in the folder ``C:\ProgramData\AIMMS\Logging\`` 
 and the log files are called ``LicenseServer.log`` ``LicenseServer.log.1`` thru ``LicenseServer.log.10`` 
 
 The license logging can be configured using ``LicenseServerLogging.xml`` in that same folder.
