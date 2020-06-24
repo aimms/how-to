@@ -16,7 +16,7 @@ Get help debugging errors that arise during development. This section covers tro
 
    /Articles/313/313-get-log-files
    /Articles/329/329-more-logging
+   /Articles/364/364-even-more-logging-published-apps
    /Articles/191/191-handle-errors-and-warnings
    /Articles/265/265-settings-for-errors-and-warnings
    /Articles/292/292-identifying-error
-   
