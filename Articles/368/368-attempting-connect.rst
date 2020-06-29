@@ -1,0 +1,50 @@
+Attempting Connect with License Server starting WinUI application
+=================================================================
+
+Diagnosis
+---------
+
+When you start a WinUI application from AIMMS PRO, you may get the dialog:
+
+.. image:: images/AttemptingReconnect.jpg
+    :align: center
+
+When you scan the log file 
+
+Explanation
+-------------
+
+Some certificates uses are expired and older AIMMS and AIMMS PRO implementations are not robust against this eventuality.  
+
+Solution
+---------
+
+There are actually two solutions:
+
+Quickly remove the symptom
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Note that you have valid certificates, otherwise you couldn't open the browser in a safe manner, see the following picture:
+
+.. image:: images/ValidCertificatePathBrowser.png
+    :align: center
+
+You can use the Internet Explorer to remove expired certificates. You will need to start Internet Explorer with elevated rights.
+#.  cog wheel - internet options
+#.  Tab content
+#.  Button Certificates
+#.  Tab Trusted Root Certificates
+#.  Order on Expiration date
+#.  For every expired certificate, press remove button.
+
+When you want to limit the number of removed expired tickets, just remove those that have a name that corresponds to one of the tickets on the valid certificate path shown above.
+
+Structurally remedy the problem
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This problem is fixed in AIMMS PRO 2.31 and newer, and in AIMMS 4.68 and newer.  
+By using these or newer versions of AIMMS and AIMMS PRO, the problem is structurally solved.
+
+AIMMS advises to keep using the most recent version of AIMMS, but only upgrade your application after sufficiently testing it.
+
+
