@@ -4,4 +4,6 @@
 	<Library System="true" Path="AimmsPro" />
 	<Library System="true" Path="AimmsWebUI" />
 	<Library System="true" Path="AIMMSXLLibrary" />
+	<RepositoryLibrary UUID="2A0BB6B2-D999-41B4-A0DD-71100DA17577" Name="DataLink" Version="1.1.1.24" />
+	<RepositoryLibrary UUID="7D23E0F3-1030-49F7-9E07-3482C63D8997" Name="RLink" Version="1.1.0.6" />
 </References>
