@@ -1,22 +1,26 @@
-Even more logging for WinUI Published Applications
+More logging of WinUI Published Applications
 ===================================================
 
-The end user session of a WinUI app hardly provides any log information.  
-This can be changes as follows:
+To obtain more logging from a published WinUI application, the following steps are needed:
 
-An :download:`example configuration file can be downloaded here <model/LoggerConfig.zip>`.
+#.  Run the application without logging, when this isn't done yet.
+    This will ensure that an encrypted copy of the publshed project is on the laptop of the enduser.
 
-You will need to place this configuration file in the folder ``%localappdata%\AIMMS\PRO\<pro name>\<app name>\<UUID>\``
+#.  Ensure that the folder ``c:\temp`` exists.  This is the folder in which the log files will be placed.
 
-When there are multiple UUID's associated with the app, then use the latest folder.
+#.  Copy a ``LoggerConfig.xml`` file to the folder ``%localappdata%\AIMMS\PRO\<pro name>\<app name>\<UUID>\``
+    An :download:`example configuration file can be downloaded here <model/LoggerConfig.zip>`.
+    Such a folder should now look as follows:
+    
+    .. image:: images/WinUIAppCacheFolder.png
+        :align: center
+    
+#.  Run the application again by launching it from the AIMMS PRO Portal.
 
-The logging will be placed in:
+#.  After closing the application, the session log files are:
 
-#.  ``c:\temp\aimms-log.txt``
+    #.  ``c:\temp\aimms-log.txt``
 
-#.  ``C:\temp\aimms-log.xml``
-
-Please make sure that the folder ``c:\temp`` exists.
-
+    #.  ``C:\temp\aimms-log.xml``
 
 .. putting a loggerConfig file in an .aimmspack may conflict with settings from the log management system of AIMMS PRO.
