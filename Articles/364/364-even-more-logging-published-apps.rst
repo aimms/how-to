@@ -8,8 +8,9 @@ To obtain more logging from a published WinUI application, the following steps a
 
 #.  Ensure that the folder ``c:\temp`` exists.  This is the folder in which the log files will be placed.
 
-#.  Copy a ``LoggerConfig.xml`` file to the folder ``%localappdata%\AIMMS\PRO\<pro name>\<app name>\<UUID>\``
-    An :download:`example configuration file can be downloaded here <model/LoggerConfig.zip>`.
+#.  An example configuration file can be :download:`downloaded here <model/LoggerConfig.zip>` .
+
+#.  Copy this ``LoggerConfig.xml`` file to the folder ``%localappdata%\AIMMS\PRO\<pro name>\<app name>\<UUID>\``
     Such a folder should now look as follows:
     
     .. image:: images/WinUIAppCacheFolder.png
