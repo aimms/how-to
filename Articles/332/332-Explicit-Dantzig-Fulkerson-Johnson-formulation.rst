@@ -1,6 +1,6 @@
 Explicit Dantzig-Fulkerson-Johnson formulation
 ==============================================
-The library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**) contains four different formulation options. The formulations have different methods of eliminating subtours. In this article the Explicit Dantzig-Fulkerson-Johnson formulation is discussed. 
+The library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**) contains  different formulation options. The formulations have different methods of eliminating subtours. In this article the Explicit Dantzig-Fulkerson-Johnson formulation is discussed. 
 This is an example of a subtour in a route for a CVRP:
 
 .. image:: images/subtour.png

@@ -5,7 +5,6 @@ There is a library in AIMMS that solves a **Capacitated Vehicle Routing Problem*
 
 :download:`AIMMS library download <model/CVRP library.zip>` 
 
-.. git@gitlab.aimms.com:aimms/customer-support/routing.git\Projects\CVRP\CVRP library
 
 Capacitated Vehicle Routing Problem
 -----------------------------------
@@ -60,9 +59,9 @@ Input Arguments         Type                Index  Index Domain
 
 ``s_Formulations`` should contain the formulation you want to use to solve the problem, choosing from:
 'Explicit Dantzig-Fulkerson-Johnson', 'Miller-Tucker-Zemlin', 'Implicit Dantzig-Fulkerson-Johnson' or 'Time Windows'
-The set ``s_Nodes`` contains the depot and all costumers. ``p_MaxorExact`` is a binary parameter that indicates whether ``p_NumberOfVehicles`` is a maximum or an exact amount. If ``p_MaxorExact`` is 0, then a maximum of ``p_NumberOfVehicles`` can be used. If ``p_MaxorExact`` is 1, then exactly ``p_NumberOfVehicles`` should be used. ``p_Distance`` discribes the distance between two nodes. When there is no road between two nodes, you can just leave the value for that distance empty. 
+The set ``s_Nodes`` contains the depot and all costumers. ``p_MaxorExact`` is a binary parameter that indicates whether ``p_NumberOfVehicles`` is a maximum or an exact amount. If ``p_MaxorExact`` is 0, then a maximum of ``p_NumberOfVehicles`` can be used. If ``p_MaxorExact`` is 1, then exactly ``p_NumberOfVehicles`` should be used. ``p_Distance`` describes the distance between two nodes. When there is no road between two nodes, you can just leave the value for that distance empty. 
 
-* These input arguments are only necessary when you use time windows. ``p_TWLowerBound`` and ``p_TWUpperBound`` indicate the time in between which a vehicle should arrive at node i. ``p_ServiceTime`` denotes the time it takes to get from node i to node j. It may include the service time at node i. 
+* These input arguments are only necessary when you use time windows. ``p_TWLowerBound`` and ``p_TWUpperBound`` indicate the time in between which a vehicle should arrive at node ``i``. ``p_ServiceTime`` denotes the time it takes to get from node ``i`` to node ``j``. It may include the service time at node ``i``. 
 
 
 ======================  ==================  =====  ==================

@@ -21,7 +21,7 @@ Whereby, there is no travel from a node to itself:
 
 The parameter :math:`d_{ij}` describes the distance from node :math:`i` to node :math:`j`. There are :math:`n` nodes (depot = 1) and :math:`p` vehicles. The objective function can be formulated as follows:
 
-.. math:: Min \sum_{k = 1}^{p}{\sum_{i = 1}^{n}{\sum_{j = 1, i \neq j}^{n}{d_{ij}x_{ijk}}}}
+.. math:: Min \sum_{k = 1}^{p}{\sum_{i = 1}^{n}{\sum_{j = 1}^{n}{d_{ij}x_{ijk}}}}
 
 Every node should be entered and left once (expect for the depot) and by the same vehicle. The depot should be left and entered once by each vehicle. :math:`q_{i}` describes the demand of each costumer and :math:`Q` is the capacity of the vehicles. The sum of the demands of all costumers that vehicle :math:`k` will serve, should not exceed the capacity of vehicle :math:`k`. All these constraints can be formulated as follows:
 
