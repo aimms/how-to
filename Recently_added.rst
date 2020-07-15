@@ -6,13 +6,16 @@ Recently added
 ==============
 
 .. keep most recent 10-12 articles
+.. Added 15 July 2020: 373, 374
 .. Added 19 June 2020: 228
 .. Added 1 May 2020: 333, 343, 344
 .. Added 27 March 2020: 338, 341
 .. Added 12 March 2020: 331
 .. Added 14 Feb 2020: 108-10, 108-09, 108-07
-.. Added 7 Feb 2020: 329, 334
 
+
+* :doc:`/Articles/373/373-pro-scaling-options`
+* :doc:`/Articles/374/374-pro-backup-and-continuity`
 * :doc:`/Articles/228/228-data-ranges`
 * :doc:`/Articles/343/343-use-metadata-in-write-to-table`
 * :doc:`/Articles/344/344-sparse-execution-for-write-to-table`
@@ -23,8 +26,7 @@ Recently added
 * :doc:`/Articles/108/108-kb07-speed-up-mip-solve`
 * :doc:`/Articles/108/108-kb09-improve-efficiency-and-performance`
 * :doc:`/Articles/108/108-kb10-simple-set-compound-set-relation`
-* :doc:`/Articles/329/329-more-logging`
-* :doc:`/Articles/334/334-data-optimization-libraries`
+
 
 
 
