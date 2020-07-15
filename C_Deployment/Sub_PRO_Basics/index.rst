@@ -29,6 +29,8 @@ This section offers best practices to build and deploy applications using AIMMS 
    /Articles/305/305-number-of-solves
    /Articles/308/308-migrate-pro-server-another-machine
    /Articles/155/155-Catering-unresponsive-server-unstable-connection
+   /Articles/373/373-pro-scaling-options
+   /Articles/374/374-pro-backup-and-continuity
 
 
 

@@ -98,9 +98,11 @@ Depending on the nature of your PRO applications you need to take appropriate me
 
 #. Recovery from server failure: this is typically done with back-up servers, 'hot standby' or 'cold standby'. The recovery times will depend on equipment and procedures. In addition, the new PRO 'scale-out' functions may already offer resilience against server failure as any machine in the PRO cluster can take on the job management automatically.
 
-.. #. Recovery from data-center incidents such as fire: this is dealt with by having multiple data centers, again either 'hot standby' or 'cold standby' or even mirrored.
+#. Recovery from data-center incidents such as fire: this is dealt with by having multiple data centers, again either 'hot standby' or 'cold standby' or even mirrored.
 
 There is obviously a trade-off between the level of resilience and time required to recover and costs. Each business will have to make its own trade-offs here.
+
+See also our article :doc:`../374/374-pro-backup-and-continuity`.
 
 .. Conclusion
 .. -------------
