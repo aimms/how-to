@@ -14,3 +14,13 @@ build_and_install:
   only:
     - master
   
+pages:
+  stage: deploy
+  script:
+  - pip install -U sphinx
+  - sphinx-build -b html . public
+  artifacts:
+    paths:
+    - public
+  only:
+  - branches
