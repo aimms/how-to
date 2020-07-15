@@ -15,7 +15,7 @@ build_and_install:
     - master
   
 pages:
-  stage: deploy
+  stage: build
   script:
   - pip install -U sphinx
   - sphinx-build -b html . public
