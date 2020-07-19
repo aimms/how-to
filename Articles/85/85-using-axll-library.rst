@@ -168,6 +168,13 @@ An example project which uses most of the functions described above is included 
 
 :download:`Download exampleNFL.zip <exampleNFL.zip>`
 
-See procedures ``prReadFromExcel`` and ``prWriteToExcel``. 
+See procedures ``prReadFromExcel`` and ``prWriteToExcel``.
+
+Related topics
+----------------
+
+* :doc:`../197/197-reading-data-from-excel`
+* :doc:`../228/228-data-ranges`
+
 
 

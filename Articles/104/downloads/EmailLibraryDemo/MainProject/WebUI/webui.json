@@ -1,0 +1,30 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

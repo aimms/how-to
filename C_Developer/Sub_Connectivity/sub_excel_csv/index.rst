@@ -18,6 +18,7 @@ Link your AIMMS model to spreadsheet data in Excel and CSV files.
    /Articles/85/85-using-axll-library   
    /Articles/197/197-reading-data-from-excel
    /Articles/csv/read-write-csv
+   /Articles/228/228-data-ranges
 
 
 ..    /Articles/122/122-AXLL-Library
