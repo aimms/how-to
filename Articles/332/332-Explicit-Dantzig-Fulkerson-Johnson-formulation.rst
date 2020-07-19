@@ -85,5 +85,16 @@ Every possible subset of ``s_Nodes`` is checked using binary counting. All subse
 - **line 6  - line 11**: 	If ``s_CostumerSubset`` contains at least two nodes, then that subset is added.
 - **line 13**: 				The procedure should stop when ``s_CostumerSubset`` contains all costumers. Because with binary counting, all the following subsets would contain the depot. 
 
+Generating the constraints
+-----------------------------
+
+Using the Explicit Dantzig-Fulkerson-Johnson, for every subset, a constraint is generated. It uses subsets to eliminate subtours. The idea behind the formulation is that, for every subset that could form a subtour, at least two arcs should connect nodes from the subsets to nodes outside of the subset. This article (EDFJ) elaborates on this formulation.
+
+:math:`V` is the set of all nodes from 1 to n (depot is n = 1). :math:`S` is a subset of :math:`V`. The binary variable :math:`x_{ijk}` has a value of 1 if vehicle k drives from node i to node j. The constraint can be formulated as follows:
+
+.. math:: \sum_{i \in S, j \notin S}{x_{ijk}} \geq 2 \qquad S \subset V \setminus \{1\}, \enspace 2 \leq |S| \leq n - 2
+
+Note that there are as there are an exponential number of subsets, there are also an exponential number of constraints generated. For instance: All subsets with at least two elements, that do not contain the depot, should be generated. The number of subsets of a set with 10 elements = :math:`2^{10}`. The number of subsets thereof that contain 0 elements or all elements = 2. The number of subsets thereof that contain 1 element (or all but 1) = 20. So the number of generated subtour elimination constraints is :math:`2^{10} – 2 – 20 = 1002`.
+
 
 

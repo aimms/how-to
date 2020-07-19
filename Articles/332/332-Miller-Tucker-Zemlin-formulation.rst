@@ -34,7 +34,7 @@ So the only circles permitted to be driven are the ones passing the depot. All t
 
 Subtour Elimination Constraints
 -------------------------------
-The binary variable :math:`x_{ijk}` has a value of 1 if vehicle k drives from node i to node j. Q is the capacity of the vehicles and :math:`q_{i}` is the demand of node i. V is a set containing all the nodes, and the depot is n=1. The constraints can be formulated as follows:
+The binary variable :math:`x_{ijk}` has a value of 1 if vehicle k drives from node i to node j. :math:`Q` is the capacity of the vehicles and :math:`q_{i}` is the demand of node i. :math:`V` is a set containing all the nodes, and the depot is n=1. The constraints can be formulated as follows:
 
 .. math:: u_{j} - u_{i} \geq q_{j} - Q (1 - x_{ijk}) \qquad \forall i,j \in V \setminus \{1\} \enspace i \neq j \qquad (1)
 
@@ -42,7 +42,7 @@ The binary variable :math:`x_{ijk}` has a value of 1 if vehicle k drives from no
 
 If vehicle k drives from node i to node j, :math:`x_{ijk}` = 0 and constraint (1) can be rewritten to :math:`u_{j} \geq u_{i} + q_{j}`. This ensure that the value of :math:`u_{j}` is at least :math:`q_j` more than :math:`u_i`. So the value of :math:`u_j` is greater than the value of :math:`u_i`
 
-If vehicle k does not drive from node i to node j, the constraint is still valid. Constraint (1) could then be rewritten to :math:`u_{j} - q_{j} \geq u_i - Q`. Constraint (2) states that :math:`q_j` is the lowest possible value of :math:`u_j` and Q is the greatest possible value of :math:`u_i`. So :math:`u_j-q_j` will at least be 0 and :math:`u_i-Q` will at most be 0. So :math:`u_j-q_j` is greater than or equal to :math:`u_i-Q`
+If vehicle k does not drive from node i to node j, the constraint is still valid. Constraint (1) could then be rewritten to :math:`u_{j} - q_{j} \geq u_i - Q`. Constraint (2) states that :math:`q_j` is the lowest possible value of :math:`u_j` and :math:`Q` is the greatest possible value of :math:`u_i`. So :math:`u_j-q_j` will at least be 0 and :math:`u_i-Q` will at most be 0. So :math:`u_j-q_j` is greater than or equal to :math:`u_i-Q`
 
 
 In the CVRP Library, the constraints are implemented in the section ``Miller Tucker Zemlin Section``.
