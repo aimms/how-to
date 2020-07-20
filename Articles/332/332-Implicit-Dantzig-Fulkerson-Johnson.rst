@@ -37,5 +37,7 @@ This way, compared to the explicit formulation, far less subsets need to be gene
 
 In the CVRP Library, these lazy constraints are implemented in the section ``Implicit Dantzig Fulkerson Johnson section``.
 
+See also: :doc:`lazy constraint article<../126/126-TSP-Lazy-Constraints>`
+
 
 
