@@ -1,0 +1,105 @@
+## ams_version=1.0
+
+Model Main_library_abstraction {
+    Section Example_Library_Use {
+        DeclarationSection Declaration_1 {
+            Set s_modelSet1 {
+                Text: "Some set used in the model";
+                Index: i;
+            }
+            Parameter p_modelParam1 {
+                IndexDomain: i;
+                Text: "Some parameter indexed over the model set s_modelSet";
+            }
+            Parameter p_calcResult1 {
+                Text: "Result of a calculation from calling a library function";
+            }
+        }
+        DeclarationSection Declaration_2 {
+            Set s_modelSet2 {
+                Text: "Another set used in the model";
+                Index: j;
+            }
+            Parameter p_modelParam2 {
+                IndexDomain: j;
+                Text: "Some parameter indexed over the model set s_modelSet";
+            }
+            Parameter p_calcResult2 {
+                Text: "Result of a calculation from calling a library function";
+            }
+        }
+        Procedure proc_usingLibraryFunction {
+            Body: {
+                ! The following is not possible since s_modelSet and s_libSet in myLibrary are two independent sets
+                ! p_calcResult := myLib::DoSomeCalculation(p_modelParam) ;
+                
+                ! Is there a way to completely abstract out library data structure and just provide a function as an interface? 
+                ! I am able to accomplish this with a runtime library (not implemented here) that copies s_modelSet into s_libSet and p_modelParam into p_libParam
+                ! This will also need a procedure instead of a function, however.
+                
+                p_calcResult1 := myLib::fnc_DoSomeCalculation(p_modelParam1) ;
+                display p_calcResult1 ;
+                
+                p_calcResult2 := myLib::fnc_DoSomeCalculation(p_modelParam2) ;
+                display p_calcResult2 ;
+            }
+        }
+        Procedure proc_usingLibraryProcedure {
+            Body: {
+                ! The following is not possible since s_modelSet and s_libSet in myLibrary are two independent sets
+                ! p_calcResult := myLib::DoSomeCalculation(p_modelParam) ;
+                
+                ! Is there a way to completely abstract out library data structure and just provide a function as an interface? 
+                ! I am able to accomplish this with a runtime library (not implemented here) that copies s_modelSet into s_libSet and p_modelParam into p_libParam
+                ! This will also need a procedure instead of a function, however.
+                
+                myLib::pr_DoSomeCalculation(p_modelParam1, p_calcResult1) ;
+                display p_calcResult1 ;
+                
+                 myLib::pr_DoSomeCalculation(p_modelParam2, p_calcResult2) ;
+                display p_calcResult2 ;
+            }
+        }
+    }
+    Section Application_initialization_execution_and_termination {
+        Procedure MainInitialization {
+            Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+        }
+        Procedure PostMainInitialization {
+            Body: {
+                s_modelSet1 := data { a, b, c, d };
+                p_modelParam1 := data { a: 1, b : 2, c : 3, d : 4 };
+                
+                s_modelSet2 := data { tea, coffee, soda, beer };
+                p_modelParam2 := data { tea:11, coffee:22, soda:33, beer:44 };
+            }
+            Comment: {
+                "Add initialization statements here that require that the libraries are already initialized properly,
+                or add statements that require the Data Management module to be initialized."
+            }
+        }
+        Procedure MainExecution;
+        Procedure PreMainTermination {
+            Body: {
+                !return DataManagementExit(); 
+                return 1 ; ! This application does not use cases.
+            }
+            Comment: {
+                "Add termination statements here that require all libraries to be still alive.
+                Return 1 if you allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence."
+            }
+        }
+        Procedure MainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that do not require all libraries to be still alive.
+                Return 1 to allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence.
+                It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+            }
+        }
+    }
+}

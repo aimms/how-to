@@ -1,0 +1,252 @@
+Library of functions and procedures
+===================================
+
+AIMMS permits a lot of freedom in creating libraries.
+In this article, some good practices and tips are presented to create reusable libraries of functions and procedures.
+
+The following tips are presented:
+
+#.  **Library organization** - interfacing with a library is eased by a proper organization to sections.
+
+#.  **Functions** - functions are popular because they can be used in expressions.
+
+#.  **Procedures** - procedures are popular because they can assign to global parameters and the full power of the AIMMS language can be used.
+
+This :download:`AIMMS project <model/library_abstraction.zip>` is used as example for the below.
+
+Library organization
+--------------------
+
+A good way of organizing your library is as follows:
+
+.. code-block:: aimms
+    :linenos:
+    :emphasize-lines: 3
+
+    LibraryModule myLibrary {
+        Prefix: myLib;
+        Interface: Public_Section;
+    ...
+    }
+
+.. image:: images/LibraryOrganization.png
+    :align: center
+
+There are three remarks on this organization:
+
+#.  To make all declarations in the section ``Public_Section`` accessible by other libraries and the main model, the interface attribute of the library only contains a reference to ``Public_Section``.
+
+#.  To make it visually clear which parts of the library require coordination before they can be changed, and which parts can be freely changed, the contents ar separated in a ``Public_Section`` and a ``Private_Section``.
+
+#.  The library initialization and termination procedures are executed during application initialization and termination. 
+    Many library implementers do not expect such procedures to be called explicitly from the main model, or from other libraries. 
+    To enforce this expectation, it is good practice to move the library initialization and termination procedures to a separate section inside the ``Private_Section``.
+
+Functions in the library
+-------------------------
+
+Functions provide a neat way of abstracting logic, consider the following small example:
+
+.. code-block:: aimms
+    :linenos:
+
+    Function fnc_DoSomeCalculation {
+        Arguments: (p_Arg1D);
+        Body: {
+            ! This function takes any one-dimensional numerical vector and returns a scalar value.
+            p_retval := sum(ii, p_Arg1D(ii)) ;
+            fnc_DoSomeCalculation := p_retval ;
+        }
+        Parameter p_Arg1D {
+            IndexDomain: ii;
+            Property: Input;
+        }
+        Set s_ImplicitSet {
+            Index: ii;
+        }
+        Parameter p_retval;
+    }
+
+The mechanism to realize "any one-dimensional numerical vector" is ilustrated in the following call: 
+
+.. code-block:: aimms
+    :linenos:
+
+    p_calcResult1 := myLib::fnc_DoSomeCalculation(p_modelParam1) ;
+    
+When this function starts, the **local** set ``s_ImplicitSet`` is instantiated with ``s_modelSet1`` based on the following information:
+
+*  The formal argument ``p_Arg1D`` is instantiated with the actual argument ``p_modelParam1``.
+
+*  This formal argument ``p_Arg1D`` has local index ``ii`` and the actual argument ``p_modelParam1`` has index ``i``.
+
+*  The range of local index ``ii`` is the local set ``s_ImplicitSet`` and the range of index ``i`` is ``s_modelSet1``; thereby the set ``s_ImplicitSet`` is instantiated with ``s_modelSet1``. 
+   Note that ``s_ImplicitSet`` needs to be local; sets declared outside functions or procedures cannot be instantiated this way.
+
+Similarly, in the call 
+
+.. code-block:: aimms
+    :linenos:
+
+    p_calcResult2 := myLib::fnc_DoSomeCalculation(p_modelParam2) ;
+
+The local set ``s_ImplicitSet`` is instantiated with ``s_modelSet2``.
+
+The data flow between formal and actual arguments is summarized below:
+
+.. image:: images/dataFlowFunctionCall.png
+    :align: center
+    
+Statements allowed in function bodies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+AIMMS Functions are designed to be used in expressions, including indexed expressions, and in definitions of parameters. 
+
+The AIMMS sparse execution system does not allow identifiers to be modified when they are used for the computation of another identifier. 
+In addition, the manager for parameter and set definition evaluation will be confused if a parameter is modified whilst the definition of another parameter is evaluated. 
+This is why several restrictions are placed on the statements that can be executed in the body of a function. 
+The most important restrictions are:
+
+#.  Identifiers declared outside the function cannot be assigned to.
+
+#.  Solve statements are not allowed.
+
+#.  Procedure calls are not allowed, but calls to other functions are allowed.
+
+.. note:: AIMMS Functions cannot be used in the expressions of constraints definitions and variable definitions.
+
+Procedures in the library
+-------------------------
+
+There are no restrictions placed on the statements that can be executed in a procedure. 
+This permits more complicated data flows than with functions.
+
+To illustrate, the above example will be extended by copying data to a set and parameter in the private part of the library.
+
+Consider the following set and parameters private to the library we are developing:
+
+.. code-block:: aimms
+    :linenos:
+
+    Set s_libSet {
+        Index: k;
+        Parameter: ep_libSet;
+    }
+    Parameter p_libParam {
+        IndexDomain: k;
+    }
+    Parameter p_libResult;
+
+These identifiers are used by a procedure private to the library:
+
+.. code-block:: aimms
+    :linenos:
+
+    Procedure pr_WorkSomeCalculation {
+        Body: {
+            display p_libParam ;
+            
+            ! In this procedure we can use the private sets and parameters of library 'myLibrary'.
+            p_libResult := sum( k, p_libParam(k));
+        }
+    }
+
+To facilitate this mechanism, the procedure that can be used outside the library is as follows:
+
+.. code-block:: aimms
+    :linenos:
+
+    Procedure pr_DoSomeCalculation {
+        Arguments: (inpArgument1d,outArgument0d);
+        Body: {
+            block ! Copy input data to the private sets and parameters of this library.
+                For ii do
+                    SetElementAdd(s_libSet, ep_new, ii);
+                    ep_map(ep_new) := ii;
+                EndFor;
+                p_libParam(k) := inpArgument1d( ep_map(k));
+            endblock ;
+            
+            ! Let the workhorse procedures inside the private section of the library do the actual work.
+            pr_WorkSomeCalculation();
+            
+            block ! Copy the results in the private sets and parameters to the output arguments of this procedure.
+                outArgument0d := p_libResult ;
+            endblock ;
+            
+            block ! Cleanup
+                empty private_section ;
+            endblock ;
+        }
+        Parameter inpArgument1d {
+            IndexDomain: ii;
+            Property: Input;
+        }
+        Parameter outArgument0d {
+            Property: Output;
+        }
+        Set s_ImplicitSet {
+            Index: ii;
+        }
+        ElementParameter ep_map {
+            IndexDomain: k;
+            Range: s_ImplicitSet;
+        }
+        ElementParameter ep_new {
+            Range: s_libSet;
+        }
+    }
+
+The instantiation of the arguments is done in a similar way as with functions and not discussed here.
+More interesting is the copying of the arguments to the sets and parameters private to the library as illustrated in lines 5-9 above:
+
+*   Line 5: For every element in the implicit argument set ``s_ImplicitSet`` we will copy this element to the set ``s_libSet``.
+
+*   Line 6: Explicitly add the element to set ``s_libSet``.
+
+*   Line 7: We need to map the data associated with the element in ``s_ImplicitSet`` to the corresponding element in  ``s_libSet``.
+
+*   Line 9: Actually map the data of the parameter argument to the parameter in the private section of the library.
+
+The data flow is now summarized in the following picture:
+
+.. image:: images/dataFlowProcedueCall.png
+    :align: center
+    
+* Blue arrows: The argument passing mechanism of AIMMS takes care.
+
+* Green arrows: To be implemented inside the procedure body.
+
+The above mechanism is used in :doc:`data for optimization libraries<../334/334-data-optimization-libraries>`. That article also illustrates the use of indexed output arguments.
+
+Procedures in expressions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The use of procedures inside expressions is limited to scalar evaluation. 
+Typical examples are:
+
+.. code-block:: aimms
+    :linenos:
+
+    p_RetCode := pr_someProc();
+    
+    if pr_otherProc() then
+        ...
+    endif ;
+
+These are both use cases of old style error handling. 
+A better way of :doc:`error handling is introduced here <../191/191-handle-errors-and-warnings>`.
+
+The use of procedures in expressions is not needed, as status information can be passed in output arguments.
+
+A good practice is to avoid the use of procedures in expressions; this permits the reader of a procedure to easily distinguish between procedure calls and function calls; procedure calls are not part of an expression.
+
+
+
+
+
+
+
+
+
+
