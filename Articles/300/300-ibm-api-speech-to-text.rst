@@ -39,11 +39,13 @@ Answers
 ^^^^^^^
 
 The result sent back from a IBM API is usually a JSON file.
-You'll need to convert this JSON file into an XML file to extract the data into AIMMS.
+.. You'll need to convert this JSON file into an XML file to extract the data into AIMMS.
+Such a JSON file can be read in using the `Data Exchange Library <https://documentation.aimms.com/dataexchange/index.html>`_.
 
 Example
 -----------------------------------------------
-We will here use the Speech-To-Text API from IBM. By sending an audio file, we'll be able to obtain the script of this video.
+We will here use the Speech-To-Text API from IBM. 
+By sending an audio file, we'll be able to obtain the script of this video.
 
 Prerequisites  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -57,7 +59,7 @@ Prerequisites
 Example project
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can find the completed project example below. Note that you'll need to specify your own API key.
+You can find the completed project example below. Note that you'll need to provide your own API key.
 
 * :download:`SpeechToText.zip <download/SpeechToText.zip>`
 
@@ -74,9 +76,9 @@ The final code is shown below:
     :linenos:
     
     ! indicate source and destination file
-    SP_requestFileName := "Space Shuttle Enterprise.mp3";
-    SP_responseFileName := "answer.json";
-    SP_apikey:="YOUR_API_KEY";
+    ! Ensure a valid path to SP_requestFileName ;
+    SP_responseFileName := "Answer.json"; ! the name of the JSON file containing the text spoken.
+    ! Ensure you have a valid SP_apikey ;
 
 
     !given on the IBMCloud website
@@ -132,7 +134,7 @@ To do so, we use the following code:
 .. code-block:: aimms
     :linenos:
 
-    SP_apikey:="YOUR_API_KEY";
+    ! Ensure you have a valid SP_apikey ;
 
     !getting the headers
     web::request_getHeaders(SP_requestId, SP_myHttpHeaders);
@@ -164,12 +166,96 @@ In some cases, like in this example, the API treatment is too long for the ``req
 By executing the complete code you should be able to retrieve your JSON file in the ``SP_responseFileName`` direction or at the root of your project.
 
 
-Converting JSON to XML
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. Converting JSON to XML
+.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. 
+.. We now have data in JSON format, but we need to convert it to XML to make it compatible with AIMMS. This process is detailed in :doc:`../283/283-convert-json-to-xml`.
+.. 
+.. To extract the data from your newly created XML file, follow the process described in :doc:`../293/293-extracting-data-from-XML`.
 
-We now have data in JSON format, but we need to convert it to XML to make it compatible with AIMMS. This process is detailed in :doc:`../283/283-convert-json-to-xml`.
+Reading JSON
+^^^^^^^^^^^^^
 
-To extract the data from your newly created XML file, follow the process described in :doc:`../293/293-extracting-data-from-XML`.
+An example JSON file sent back is:
+
+.. code-block:: json
+    :linenos:
+    :emphasize-lines: 7
+
+    {
+       "results": [
+          {
+             "alternatives": [
+                {
+                   "confidence": 0.99, 
+                   "transcript": "the space shuttle ... seven forty seven "
+                }
+             ], 
+             "final": "true" 
+          }
+       ], 
+       "result_index": 0, 
+       "warnings": [
+          "Unknown arguments: continuous."
+       ]
+    }
+    
+The actual transcript is contained on line 7.
+
+We can map this data to AIMMS identifiers using the following XML mapping file:
+
+.. code-block:: xml
+    :linenos:
+    :emphasize-lines: 8
+
+    <AimmsJSONMapping>
+        <ObjectMapping>
+            <ArrayMapping name="results">
+                <ObjectMapping iterative-binds-to="i0" >
+                    <ArrayMapping name="alternatives">
+                        <ObjectMapping iterative-binds-to="i1" >
+                            <ValueMapping name="confidence" maps-to="p_confidence(i0,i1)"/>
+                            <ValueMapping name="transcript" maps-to="sp_transcript(i0,i1)"/>
+                        </ObjectMapping>
+                    </ArrayMapping>
+                    <ValueMapping name="final" maps-to="sp_final(i0)"/>
+                </ObjectMapping>
+            </ArrayMapping>
+            <ValueMapping name="result_index" maps-to="p_resultIndex"/>
+            <ArrayMapping name="warnings">
+                <ValueMapping iterative-binds-to="i_msg" maps-to="sp_mgs(i_msg)"/>
+            </ArrayMapping>
+        </ObjectMapping>
+    </AimmsJSONMapping>
+
+Here the transcript is mapped to the AIMMS string parameter ``sp_transcript`` on line 8.
+To read in this data, we use the following procedure:
+
+.. code-block:: aimms
+    :linenos:
+
+    Procedure pr_ReadJSON {
+        Body: {
+            empty Declaration_data ;
+            dex::AddMapping("map", "map.xml");
+            dex::ReadFromFile(
+                dataFile         :  "Answer.json", 
+                mappingName      :  "map", 
+                emptyIdentifiers :  0, 
+                resetCounters    :  1);
+        }
+    }
+
+
+Finally, we can select the one non-empty element from ``sp_transcript`` by a summation (adding strings is concatenation).
+
+.. code-block:: aimms
+    :linenos:
+
+    StringParameter sp_FinalTranscript {
+        Definition: sum( (i0,i1), sp_transcript(i0, i1) );
+    }
+
 
 Related Topics
 -----------------------------------------------
