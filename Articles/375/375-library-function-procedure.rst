@@ -1,16 +1,21 @@
 Library of functions and procedures
 ===================================
 
-AIMMS permits a lot of freedom in creating libraries.
-In this article, some good practices and tips are presented to create reusable libraries of functions and procedures.
+.. AIMMS permits a lot of freedom in creating libraries.
 
-The following tips are presented:
+Creating libraries to share/reuse functionality in multiple projects is a powerful feature of AIMMS. 
+In this article, we present some best practices and tips to create such libraries of functions and procedures.
+.. some good practices and tips are presented to create reusable libraries of functions and procedures.
 
-#.  **Library organization** - interfacing with a library is eased by a proper organization to sections.
+The following are discussed in detail:
+
+#.  **Library organization** - interfacing with a library is eased by proper organization into sections.
 
 #.  **Functions** - functions are popular because they can be used in expressions.
 
-#.  **Procedures** - procedures are popular because they can assign to global parameters and the full power of the AIMMS language can be used.
+#.  **Procedures** - procedures are popular because they can assign new data to global identifiers.
+
+.. and the full power of the AIMMS language can be used.
 
 This :download:`AIMMS project <model/library_abstraction.zip>` is used as example for the below.
 
@@ -45,7 +50,9 @@ There are three remarks on this organization:
 Functions in the library
 -------------------------
 
-Functions provide a neat way of abstracting logic, consider the following small example:
+Functions provide a neat way of abstracting logic. Consider the following example:
+
+.. _functionExample:
 
 .. code-block:: aimms
     :linenos:
@@ -67,10 +74,9 @@ Functions provide a neat way of abstracting logic, consider the following small 
         Parameter p_retval;
     }
 
-The mechanism to realize "any one-dimensional numerical vector" is ilustrated in the following call: 
+The mechanism to realize "any one-dimensional numerical vector" is illustrated in the following call: 
 
 .. code-block:: aimms
-    :linenos:
 
     p_calcResult1 := myLib::fnc_DoSomeCalculation(p_modelParam1) ;
     
@@ -83,14 +89,11 @@ When this function starts, the **local** set ``s_ImplicitSet`` is instantiated w
 *  The range of local index ``ii`` is the local set ``s_ImplicitSet`` and the range of index ``i`` is ``s_modelSet1``; thereby the set ``s_ImplicitSet`` is instantiated with ``s_modelSet1``. 
    Note that ``s_ImplicitSet`` needs to be local; sets declared outside functions or procedures cannot be instantiated this way.
 
-Similarly, in the call 
+Similarly, the below call instantiates the local set ``s_ImplicitSet`` with ``s_modelSet2``.
 
 .. code-block:: aimms
-    :linenos:
 
     p_calcResult2 := myLib::fnc_DoSomeCalculation(p_modelParam2) ;
-
-The local set ``s_ImplicitSet`` is instantiated with ``s_modelSet2``.
 
 The data flow between formal and actual arguments is summarized below:
 
@@ -100,33 +103,62 @@ The data flow between formal and actual arguments is summarized below:
 Statements allowed in function bodies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-AIMMS Functions are designed to be used in expressions, including indexed expressions, and in definitions of parameters. 
+.. AIMMS Functions are designed to be used in expressions, including indexed expressions, and in definitions of parameters. 
 
-The AIMMS sparse execution system does not allow identifiers to be modified when they are used for the computation of another identifier. 
-In addition, the manager for parameter and set definition evaluation will be confused if a parameter is modified whilst the definition of another parameter is evaluated. 
-This is why several restrictions are placed on the statements that can be executed in the body of a function. 
+.. The AIMMS sparse execution system does not allow identifiers to be modified when they are used for the computation of another identifier. 
+.. In addition, the manager for parameter and set definition evaluation will be confused if a parameter is modified whilst the definition of another parameter is evaluated. 
+.. the above two lines are not clear / confusing, prefer not to introduce the abstract "manager for parameter and set definition". So I re-write it this way
+
+AIMMS does not allow the definition of one identifier to modify the contents of another identifier. 
+As AIMMS Functions are designed to be used in expressions (including indexed expressions), and to define parameters,
+several restrictions are placed on the statements that can be executed in their body. 
+
+.. in the body of a function. 
+
 The most important restrictions are:
 
 #.  Identifiers declared outside the function cannot be assigned to.
+
+    For example, the body of ``fnc_DoSomeCalculation`` from :ref:`the previous example <functionExample>` cannot be declared as below because ``p_calcResult`` is not declared locally to the function.
+
+    .. code-block:: aimms
+
+        Function fnc_DoSomeCalculation {
+            Arguments: (p_Arg1D);
+            Body: {
+                ! This function takes any one-dimensional numerical vector and returns a scalar value.
+                p_calcResult := sum(ii, p_Arg1D(ii)) ;
+                fnc_DoSomeCalculation := p_calcResult ;
+            }
+            Parameter p_Arg1D {
+                IndexDomain: ii;
+                Property: Input;
+            }
+            Set s_ImplicitSet {
+                Index: ii;
+            }
+            Parameter p_retval;
+            }
+
 
 #.  Solve statements are not allowed.
 
 #.  Procedure calls are not allowed, but calls to other functions are allowed.
 
-.. note:: AIMMS Functions cannot be used in the expressions of constraints definitions and variable definitions.
+.. warning:: AIMMS Functions cannot be used in the expressions of constraints definitions and variable definitions.
 
 Procedures in the library
 -------------------------
 
-There are no restrictions placed on the statements that can be executed in a procedure. 
-This permits more complicated data flows than with functions.
+Unlike with functions, there are no restrictions placed on the statements that can be executed in a procedure. 
+This allows you to model much more complicated data flows using procedures.
+.. This permits more complicated data flows than with functions.
 
-To illustrate, the above example will be extended by copying data to a set and parameter in the private part of the library.
+To illustrate, the above example will be extended to copy data to a set and parameter in the private section of the library.
 
-Consider the following set and parameters private to the library we are developing:
+Consider the following identifiers private to the library interface we are developing:
 
 .. code-block:: aimms
-    :linenos:
 
     Set s_libSet {
         Index: k;
@@ -137,10 +169,9 @@ Consider the following set and parameters private to the library we are developi
     }
     Parameter p_libResult;
 
-These identifiers are used by a procedure private to the library:
+These identifiers are used by a procedure private to the library interface:
 
 .. code-block:: aimms
-    :linenos:
 
     Procedure pr_WorkSomeCalculation {
         Body: {
@@ -200,13 +231,19 @@ To facilitate this mechanism, the procedure that can be used outside the library
 The instantiation of the arguments is done in a similar way as with functions and not discussed here.
 More interesting is the copying of the arguments to the sets and parameters private to the library as illustrated in lines 5-9 above:
 
-*   Line 5: For every element in the implicit argument set ``s_ImplicitSet`` we will copy this element to the set ``s_libSet``.
+.. we will copy this element to the set ``s_libSet``.
+.. I commented this because it is confusing, Line 5 is initializing a FOR loop for every element in the implicit argument set and line 6 is actually adding the set to the element
+
+*   Line 5: For every element in the implicit argument set ``s_ImplicitSet`` 
 
 *   Line 6: Explicitly add the element to set ``s_libSet``.
 
 *   Line 7: We need to map the data associated with the element in ``s_ImplicitSet`` to the corresponding element in  ``s_libSet``.
 
 *   Line 9: Actually map the data of the parameter argument to the parameter in the private section of the library.
+
+.. tip:: 
+    You can replace Line 7 and Line 9 with this statement (in Line 7): ``p_libParam(ep_new) := inpArgument1d(ii);``
 
 The data flow is now summarized in the following picture:
 
@@ -217,10 +254,12 @@ The data flow is now summarized in the following picture:
 
 * Green arrows: To be implemented inside the procedure body.
 
-The above mechanism is used in :doc:`data for optimization libraries<../334/334-data-optimization-libraries>`. That article also illustrates the use of indexed output arguments.
+The above mechanism is used in :doc:`Data for optimization libraries<../334/334-data-optimization-libraries>`. That article also illustrates the use of indexed output arguments.
 
 Procedures in expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. I suppose you mean use in definitions as well ? Perhaps mention that somewhere in this section ?
 
 The use of procedures inside expressions is limited to scalar evaluation. 
 Typical examples are:
