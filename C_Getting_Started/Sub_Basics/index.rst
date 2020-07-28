@@ -16,6 +16,7 @@ These topics provide fundamentals about using and customizing AIMMS. Learn about
 .. toctree::
    :maxdepth: 1
 
+   /Articles/350/350-install-AIMMS-elsewhere
    /Articles/218/218-develop-reliable-successful-aimms-app
    /Articles/186/186-keyboard-shortcuts-for-aimms
    /Articles/45/45-share-project-files

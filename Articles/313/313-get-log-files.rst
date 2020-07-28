@@ -52,9 +52,9 @@ App launch
 
 When the incident happened while launching an app, look at:
 
-* ``%LOCALAPPDATA%\\AIMMS\PRO\\Launcher\\<Pro version no>\\AimmsPROLauncher.log.txt``
+* ``%LOCALAPPDATA%\AIMMS\PRO\Launcher\<Pro version no>\AimmsPROLauncher.log.txt``
 
-* ``%LOCALAPPDATA%\\AIMMS\PRO\\AppLauncher\\2.6.1.0\\ProWebLink.log``
+* ``%LOCALAPPDATA%\AIMMS\PRO\AppLauncher\<Pro version no>\ProWebLink.log``
 
 App running
 ^^^^^^^^^^^^^^^^^^
@@ -72,22 +72,10 @@ The download button is available since AIMMS PRO 2.11.
 For older AIMMS PRO systems, you can look at the folders:
 ``C:\ProgramData\AimmsPRO\Log\Sessions\`` and ``C:\ProgramData\AimmsPRO\Log\`` on the machine running AIMMS PRO.
 
-.. Increase logging for WinUI apps
-.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. 
-.. Use the ``LoggerConfig.xml`` file which can be downloaded :download:`here <model/LoggerConfig.zip>` and copy this in the cache of the published application, which can be found at ``~\AppData\Local\AIMMS\PRO\<pro name>\<App Name>\<UUID>``.
-.. 
-.. The cache of the ControlPanel app on my laptop looks as follows:
-.. 
-.. .. image:: images/FolderStructureCachedApp.png
-..     :align: center
-
-
 further reading
 ^^^^^^^^^^^^^^^^
 
 See also https://documentation.aimms.com/pro/logging.html
-
 
 Browser logs
 -------------------------
@@ -133,7 +121,7 @@ Internet Explorer 11
 License server logs
 ---------------------
 
-The licensing log files can be found in the folder ``C:\\ProgramData\\AIMMS\\Logging\\`` 
+The licensing log files can be found in the folder ``C:\ProgramData\AIMMS\Logging\`` 
 and the log files are called ``LicenseServer.log`` ``LicenseServer.log.1`` thru ``LicenseServer.log.10`` 
 
 The license logging can be configured using ``LicenseServerLogging.xml`` in that same folder.
@@ -155,14 +143,14 @@ such that the timestamps of the incidents are more easily interpreted.
 After this change, the license service needs to be restarted as follows:
 
 #.  If the license server, also serves licenses for an AIMMS PRO, stop the service of AIMMS PRO using the AIMMS PRO configurator.
-
-#.  In the AIMMS License manager, stop the license service using the menu item ``Maintenance > Stop the service``. 
     It may take one or two minutes before the service is stopped.
 
+#.  In the AIMMS License manager, stop the license service using the menu item ``Maintenance > Stop the service``. 
+
 #.  In the AIMMS License manager, start the license service using the menu item ``Maintenance > Start the service``. 
-    It may take one or two minutes before the service is started.
 
 #.  Start the AIMMS PRO services stopped in the first step.
+    It may take one or two minutes before the service is started.
 
 
 

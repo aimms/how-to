@@ -209,6 +209,11 @@ Model Main_Flow_Shop {
     }
     Procedure pr_WorkSolve {
         Body: {
+            gss::pr_AppendMessage(
+            	FormatString("Going to solve flowshop for %i jobs on %i machines",
+            		p_MaxJobs, p_MaxMachines));
+            !delay(1);
+            
             Empty AllVariables;
             pr_GenerateData();
             
@@ -223,6 +228,12 @@ Model Main_Flow_Shop {
             	s_SelectedIdentifiers :  Superfluous_Data);
             
             pr_prepInterface;
+            
+            !delay(1);
+            
+            gss::pr_AppendMessage(
+            	FormatString("Finished solving flowshop for %i jobs on %i machines",
+            		p_MaxJobs, p_MaxMachines));
         }
     }
     Procedure pr_Solve {

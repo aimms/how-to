@@ -15,6 +15,17 @@ The new version gives several benefits over the previous version, including the 
 * Hide the labels on the arcs.
 * Display the arcs as straight lines instead of curved ones. 
 
+As of AIMMS 4.74, even more features are introduced including:
+
+* Maximum reference size for Node sizing
+* Ability to add icons to nodes
+* Dynamic sizing for arcs
+* Custom Tooltips on nodes and arcs
+* Annotation support for nodes and arcs
+* Heatmap
+
+See `WebUI Documentation: Map Widget <https://documentation.aimms.com/webui/map-widget.html>`_ for more details about these features.
+
 
 Timeline
 ----------
