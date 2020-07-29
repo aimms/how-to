@@ -1,23 +1,19 @@
 Library of functions and procedures
 ===================================
 
-.. AIMMS permits a lot of freedom in creating libraries.
-
 Creating libraries to share/reuse functionality in multiple projects is a powerful feature of AIMMS. 
 In this article, we present some best practices and tips to create such libraries of functions and procedures.
-.. some good practices and tips are presented to create reusable libraries of functions and procedures.
 
 The following are discussed in detail:
 
-#.  **Library organization** - interfacing with a library is eased by proper organization into sections.
+#.  **Library organization** - interfacing with a library is eased by a proper organization into sections.
 
 #.  **Functions** - functions are popular because they can be used in expressions.
 
 #.  **Procedures** - procedures are popular because they can assign new data to global identifiers.
 
-.. and the full power of the AIMMS language can be used.
 
-This :download:`AIMMS project <model/library_abstraction.zip>` is used as example for the below.
+This :download:`AIMMS project <model/library_abstraction.zip>` is used as an example for the below.
 
 Library organization
 --------------------
@@ -39,9 +35,12 @@ A good way of organizing your library is as follows:
 
 There are three remarks on this organization:
 
-#.  To make all declarations in the section ``Public_Section`` accessible by other libraries and the main model, the interface attribute of the library only contains a reference to ``Public_Section``.
+#.  To make all declarations in the section ``Public_Section`` accessible by other libraries and the main model, 
+    the interface attribute of the library only contains a reference to ``Public_Section``.
 
-#.  To make it visually clear which parts of the library require coordination before they can be changed, and which parts can be freely changed, the contents ar separated in a ``Public_Section`` and a ``Private_Section``.
+#.  To make it visually clear which parts of the library require coordination before they can be changed, 
+    and which parts can be freely changed, 
+    the contents ar separated in a ``Public_Section`` and a ``Private_Section``.
 
 #.  The library initialization and termination procedures are executed during application initialization and termination. 
     Many library implementers do not expect such procedures to be called explicitly from the main model, or from other libraries. 
@@ -100,34 +99,42 @@ The data flow between formal and actual arguments is summarized below:
 .. image:: images/dataFlowFunctionCall.png
     :align: center
     
+Side effects are not allowed for functions. 
+    
+Avoid side effects
+^^^^^^^^^^^^^^^^^^
+
+A side effect is when during the computation of identifier ``A``, identifier ``B`` is modified as well.
+The AIMMS language limits side effects. Consider the following example:
+
+.. code-block:: aimms
+
+      A(i,j) := fnc1( b(i,j) ) + C(i,j);
+
+When the evaluation of ``fnc1`` in the above expression, modifies ``C``, there is a side effect.
+The reason to avoid such side effects is that it becomes hard to understand what the outcome should be, because AIMMS leaves it undefined whether ``C(i,j)`` or ``fnc1( b(i,j) )`` is evaluated first.
+A nice consequence of this design choice is that the sparse execution system can make more strict assumptions on the behavior of the data structures it reads and thus execute faster.
+
 Statements allowed in function bodies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. AIMMS Functions are designed to be used in expressions, including indexed expressions, and in definitions of parameters. 
-
-.. The AIMMS sparse execution system does not allow identifiers to be modified when they are used for the computation of another identifier. 
-.. In addition, the manager for parameter and set definition evaluation will be confused if a parameter is modified whilst the definition of another parameter is evaluated. 
-.. the above two lines are not clear / confusing, prefer not to introduce the abstract "manager for parameter and set definition". So I re-write it this way
-
-AIMMS does not allow the definition of one identifier to modify the contents of another identifier. 
-As AIMMS Functions are designed to be used in expressions (including indexed expressions), and to define parameters,
-several restrictions are placed on the statements that can be executed in their body. 
-
-.. in the body of a function. 
-
-The most important restrictions are:
+AIMMS Functions are designed to be used in expressions, including indexed expressions, and in definitions of parameters. 
+To avoid side effects, the following restrictions are placed on the body of a function:
 
 #.  Identifiers declared outside the function cannot be assigned to.
 
     For example, the body of ``fnc_DoSomeCalculation`` from :ref:`the previous example <functionExample>` cannot be declared as below because ``p_calcResult`` is not declared locally to the function.
 
     .. code-block:: aimms
+        :linenos:
+        :emphasize-lines: 6
 
+        Parameter p_calcResult;
         Function fnc_DoSomeCalculation {
             Arguments: (p_Arg1D);
             Body: {
                 ! This function takes any one-dimensional numerical vector and returns a scalar value.
-                p_calcResult := sum(ii, p_Arg1D(ii)) ;
+                p_calcResult := sum(ii, p_Arg1D(ii)) ; ! Not allowed: assigning to global.
                 fnc_DoSomeCalculation := p_calcResult ;
             }
             Parameter p_Arg1D {
@@ -138,21 +145,20 @@ The most important restrictions are:
                 Index: ii;
             }
             Parameter p_retval;
-            }
+        }
 
 
 #.  Solve statements are not allowed.
 
 #.  Procedure calls are not allowed, but calls to other functions are allowed.
 
-.. warning:: AIMMS Functions cannot be used in the expressions of constraints definitions and variable definitions.
+.. note:: AIMMS Functions cannot be used in the expressions of constraints definitions and variable definitions.
 
 Procedures in the library
 -------------------------
 
 Unlike with functions, there are no restrictions placed on the statements that can be executed in a procedure. 
-This allows you to model much more complicated data flows using procedures.
-.. This permits more complicated data flows than with functions.
+This allows you to model much more complicated data flow using procedures.
 
 To illustrate, the above example will be extended to copy data to a set and parameter in the private section of the library.
 
@@ -231,9 +237,6 @@ To facilitate this mechanism, the procedure that can be used outside the library
 The instantiation of the arguments is done in a similar way as with functions and not discussed here.
 More interesting is the copying of the arguments to the sets and parameters private to the library as illustrated in lines 5-9 above:
 
-.. we will copy this element to the set ``s_libSet``.
-.. I commented this because it is confusing, Line 5 is initializing a FOR loop for every element in the implicit argument set and line 6 is actually adding the set to the element
-
 *   Line 5: For every element in the implicit argument set ``s_ImplicitSet`` 
 
 *   Line 6: Explicitly add the element to set ``s_libSet``.
@@ -242,8 +245,10 @@ More interesting is the copying of the arguments to the sets and parameters priv
 
 *   Line 9: Actually map the data of the parameter argument to the parameter in the private section of the library.
 
-.. tip:: 
-    You can replace Line 7 and Line 9 with this statement (in Line 7): ``p_libParam(ep_new) := inpArgument1d(ii);``
+.. .. tip:: 
+..      You can replace Line 7 and Line 9 with this statement (in Line 7): ``p_libParam(ep_new) := inpArgument1d(ii);``
+.. Yes, that can be done, but should be avoided, as it leads to additional execution of individual statements, and when output identifiers are to be used, 
+.. we need the element parameter ep_map again.
 
 The data flow is now summarized in the following picture:
 
@@ -259,8 +264,6 @@ The above mechanism is used in :doc:`Data for optimization libraries<../334/334-
 Procedures in expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. I suppose you mean use in definitions as well ? Perhaps mention that somewhere in this section ?
-
 The use of procedures inside expressions is limited to scalar evaluation. 
 Typical examples are:
 
@@ -273,12 +276,15 @@ Typical examples are:
         ...
     endif ;
 
-These are both use cases of old style error handling. 
+Both line 1 and line 3-5, are use cases of old-style error handling. 
+
+Line 1 is the allowed exception for side effects. It is allowed if the assignment doesn't bind any indices.
+
 A better way of :doc:`error handling is introduced here <../191/191-handle-errors-and-warnings>`.
 
 The use of procedures in expressions is not needed, as status information can be passed in output arguments.
 
-A good practice is to avoid the use of procedures in expressions; this permits the reader of a procedure to easily distinguish between procedure calls and function calls; procedure calls are not part of an expression.
+A good practice is to avoid the use of procedures in expressions; this permits the reader of a body of a procedure or function to easily distinguish between procedure calls and function calls; procedure calls are not part of an expression and avoid side effects altogether.
 
 
 
