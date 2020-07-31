@@ -1,0 +1,5 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"MainModelProcedures" "Main_Model_Procedures" "2020-06-19 13:10:21"
+"Copy_pr_UpdateUtcOptionOnPar" "pr_DisplayLocalOrUTC" "2020-06-22 13:12:58"
+"pr_DisplayLocalOrUTC" "pr_determineTimezoneForWebUIDisplay" "2020-06-22 13:40:48"
+"cnv_UTC" "cnv_Database" "2020-06-22 15:30:39"

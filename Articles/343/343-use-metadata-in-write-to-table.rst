@@ -244,7 +244,7 @@ In our example, tables are best written to with the options ``Database_foreign_k
 .. code-block:: aimms
     :linenos:
 
-    block where database_foreign_key_handling := 'assume'
+    block where database_foreign_key_handling := 'assume',
                 database_string_valued_foreign_keys := 'ignore'  ;
 
         write to table db_Customers ;
@@ -271,7 +271,7 @@ It is, therefore, safe to use efficient Strategy B for writing to these tables.
 .. code-block:: aimms
     :linenos:
 
-    block where database_foreign_key_handling := 'ignore'
+    block where database_foreign_key_handling := 'ignore',
                 database_string_valued_foreign_keys := 'ignore'  ;
         
         write to table db_Orders ;

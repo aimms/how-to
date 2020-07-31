@@ -1,0 +1,116 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "temperature",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Timezones",
+          "layoutInfo": {
+            "width": "3",
+            "height": "1",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/temperature": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_Temperature"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_loc",
+          "i_Min"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "i_loc",
+          "width": 19
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_Localtime"
+          },
+          "width": 24.8
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "ep_minute"
+          },
+          "width": 24.6
+        },
+        {
+          "type": "rowHeader",
+          "width": 7.954545454545454
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_Min",
+          "width": 21.833333333333333
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_Temperature"
+          },
+          "width": 21.02903225806452
+        }
+      ]
+    },
+    "title": {
+      "literal": "Measured temperatures"
+    }
+  },
+  "widgets/Timezones": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "ep_displayTimezone",
+          "webui::BrowserTimeZone",
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Timezone control"
+    }
+  }
+}
