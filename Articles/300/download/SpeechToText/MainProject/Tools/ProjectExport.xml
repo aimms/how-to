@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<ExportSettings>
+	<ExcludedFile>backup</ExcludedFile>
+	<ExcludedFile>log</ExcludedFile>
+	<ExcludedFile>Answer.json</ExcludedFile>
+	<ExcludedFile>Hallo meneer de Uil-1595858368.mp3</ExcludedFile>
+	<ExcludedFile>Hallo meneer de Uil-1595858386.mp3</ExcludedFile>
+	<ExcludedFile>Space Shuttle Enterprise-1595858663.mp3</ExcludedFile>
+	<ExcludedFile>Library Repository (local copy)</ExcludedFile>
+</ExportSettings>

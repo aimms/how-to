@@ -482,9 +482,9 @@ Model Main_Flow_Shop {
     }
     Procedure pr_Solve {
         Body: {
-            Empty s_Observations ;
-            p_noIncumbents := 0 ;
-            p_IncumbentNumber := 0 ;
+            Empty s_Observations ; 
+            p_noIncumbents := 0 ; 
+            p_IncumbentNumber := 0 ;  
             p01_SolveInterruptable := 1 ;
             pr_DelegateSolve();
         }

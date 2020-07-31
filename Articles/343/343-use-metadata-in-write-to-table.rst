@@ -146,13 +146,7 @@ When the table at hand is a parent table in a Foreign Key constraint, then the s
 
 AIMMS uses the knowledge of whether Foreign Keys are present or not based on the values of two options: ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys``, according to the following table:
 
-.. .. csv-table:: Effect of options ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys``
-..     :header: "Setting", "Foreign Key determination", "Strategy", "Pro", "Con"
-..     :widths: 7, 25, 7, 8, 11
-.. 
-..     "Both to ``'check'``", "ODBC function `SQLForeignKeys <https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlforeignkeys-function>`_ is used to determine whether the table is a parent table in a Foreign Key constraint.", "``A`` or ``B``", "Ease of use", "Initial overhead, see note below" 
-..     "Both to ``'ignore'``", "AIMMS assumes the table at hand is not a parent table in Foreign Keys Constraints", "``B``", "Efficient", "Might lead to data loss" 
-..     "Both to ``'assume'``", "AIMMS assumes the table at hand is a parent table in Foreign Keys Constraints", "``A``", "Safe", "Less efficient" 
+
 
 .. csv-table:: Foreign key presence
     :header: "Presence", "Strategy", "Advantage", "Consquence when assumption invalid"
@@ -164,7 +158,7 @@ AIMMS uses the knowledge of whether Foreign Keys are present or not based on the
 Are Foreign Keys constraints active on the table to be written?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When writing to a table is is important to know whether the table at hand is used in a Foreign Key constraint:
+When writing to a table it is important to know whether the table at hand is used in a Foreign Key constraint:
 
 #.  As a parent table, see strategy discussion above.
 
@@ -175,6 +169,8 @@ When writing to a table is is important to know whether the table at hand is use
     * ``'ignore'`` AIMMS assumes that the table is not used as a parent table in a Foreign Key constraint.
 
     * ``'assume'`` AIMMS assumes that the table is used as a parent table in a Foreign Key constraint.
+    
+    The default of the option ``database_foreign_key_handling`` is ``'check'``.
 
 #.  As a child table, if so, empty strings are written as NULL's. 
     So this information is only relevant if your database schema has string valued keys.
@@ -186,6 +182,8 @@ When writing to a table is is important to know whether the table at hand is use
     * ``'ignore'`` AIMMS assumes that the table is not used as a child table in a Foreign Key constraint.
 
     * ``'assume'`` AIMMS assumes that the table is used as a child table in a Foreign Key constraint.
+
+    The default of the option ``database_foreign_key_handling`` is ``'check'`` up to AIMMS 4.73 and is ``'ignore'`` for AIMMS 4.74 and upwards.
 
 
 Pros and cons of the setting 'check'
@@ -237,7 +235,8 @@ When these tables have derived columns, they can also appear as child table in a
 In our Customer-Order example, both tables ``Customers`` and ``Orders`` are key tables. 
 You may recall that in the Foreign Key of that example, ``Customers`` is the parent table, and ``Orders`` is the child table.
 
-When writing to these tables, it is important that data of other tables remain intact and that the writing operations succeed whenever possible. This is achieved by setting the option ``Database_foreign_key_handling`` to ``'Assume'`` and therefore have the required safe writing strategy.
+When writing to these tables, it is important that data of other tables remain intact and that the writing operations succeed whenever possible. 
+This is achieved by setting the option ``Database_foreign_key_handling`` to ``'Assume'`` and therefore have the required safe writing strategy.
 
 In our example, tables are best written to with the options ``Database_foreign_key_handling`` and ``Database_string_valued_foreign_keys`` set to ``'Assume'`` and ``'Ignore'`` respectively, as follows:
 
@@ -254,7 +253,8 @@ In our example, tables are best written to with the options ``Database_foreign_k
 
 The following remarks apply to this code;
 
-* By using a block statement, the options are only set in the respective code portion, and the remainder of the application is left untouched.  See article :doc:`setting options <../208/208-setting-options>`
+* By using a block statement, the options are only set in the respective code portion, and the remainder of the application is left untouched.  
+  See article :doc:`setting options <../208/208-setting-options>`
 
 * As integer keys are used in our example, the option ``database_string_valued_foreign_keys`` can be set to ``'ignore'``.
 

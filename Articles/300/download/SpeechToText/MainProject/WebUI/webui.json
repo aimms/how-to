@@ -1,0 +1,60 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "SpeechText",
+          "layoutInfo": {
+            "width": "8",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "UploadSound",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/SpeechText": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_FinalTranscript"
+        ]
+      }
+    },
+    "multi.line": {
+      "literal": 1
+    },
+    "title": {
+      "literal": "SpeechText"
+    }
+  },
+  "widgets/UploadSound": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_uploadSpeech"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "upload"
+    }
+  }
+}
