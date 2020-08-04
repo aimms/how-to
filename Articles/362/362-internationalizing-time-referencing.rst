@@ -1,5 +1,3 @@
-:orphan:
-
 Internationalized time referencing
 =====================================
 

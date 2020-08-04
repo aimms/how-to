@@ -33,10 +33,10 @@ These topics cover what you need to get started programming your model in AIMMS 
    /Articles/220/220-aborting-execution-of-aimms
    /Articles/12/12-generate-random-numbers
    /Articles/189/189-using-calendars-in-aimms
+   /Articles/362/362-internationalizing-time-referencing
+   /Articles/362/362-planning-support
    /Articles/236/236-get-name-of-current-case
    /Articles/266/266-units-of-measurement-check-equations
    /Articles/266/266-units-of-measurement-localized-data
    /Articles/258/258-save-a-case-from-aimms-procedure
    /Articles/290/290-identifying-differences
-   
-..   /Articles/362/362-internationalizing-time-referencing
