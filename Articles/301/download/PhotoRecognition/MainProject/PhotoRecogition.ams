@@ -5,7 +5,7 @@ Model Main_PhotoRecognition {
         Body: {
             SP_requestFileName:="clownfish.JPG";
             SP_responseFileName := "Answer.json";
-            SP_apikey:="YOUR_API_KEY";
+            SP_apikey:="WHUKmhjsk-SNHi7ZIr-1fho49pydLasvoqIeUaqYP_Mj";
             
             SP_Requestparam:={
             	'version' : "2018-03-19",
