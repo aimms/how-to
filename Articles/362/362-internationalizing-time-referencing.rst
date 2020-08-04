@@ -4,11 +4,17 @@ Internationalized time referencing
 The world is a global village; people around the world work together in teams.
 The timezone plays a key role in various ways:
 
-#.  Working together whilst situated in different timezones, viewing/editing data it is convenient to have a common timezone to represent data.
+#.  Working together whilst situated in different timezones, 
 
-#.  Working together whilst situated in the same timezone, to view/edit data, it feels natural to switch to that timezone.
+    #.  discussing data it is convenient to have a common timezone to represent data, but 
+
+    #.  working alone on the data, it is convenient to view the data in your own local timezone.
+        However, when persisting data, it is useful to do so according to an agreed timezone; such
+        that colleagues know the meaning of timestamps. 
 
 #.  Exchanging data with a data source, the timezone of that data source should be used.
+
+#.  Let's not forget: working together whilst situated in the same timezone, to view/edit data, it feels natural to view data according to the local timezone, respecting daylight saving time when that is in effect.  
 
 Running example
 ----------------
@@ -21,8 +27,8 @@ The database uses UTC as reference time zone. It has the following contents:
 .. image:: images/InputDataTable.png
     :align: center
 
-When team members from different locations communicate with each other about various events, they use the timezone UTC. 
-When team members within one location communicate with each other, they use the local timezone, including daylight saving time.
+When team members from different locations communicate with each other about various events, they use the timezone ``UTC``. 
+When team members within one location communicate with each other, they use the local timezone, including daylight saving time, in AIMMS: ``localDST``.
 
 The model used to create the images shown can be :download:`downloaded here <model/time-ref.zip>` 
 
