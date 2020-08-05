@@ -112,7 +112,7 @@ The AIMMS language limits side effects. Consider the following example:
       A(i,j) := fnc1( b(i,j) ) + C(i,j);
 
 When the evaluation of ``fnc1`` in the above expression, modifies ``C``, there is a side effect.
-The reason to avoid such side effects is that it becomes hard to understand what the outcome should be, because AIMMS leaves it undefined whether ``C(i,j)`` or ``fnc1( b(i,j) )`` is evaluated first.
+The reason to avoid such side effects is that it becomes hard to understand what the outcome should be, because it is not specified in the AIMMS execution engine which identifier is to be evaluated first: ``C(i,j)`` or ``fnc1( b(i,j) )``.
 A nice consequence of this design choice is that the sparse execution system can make more strict assumptions on the behavior of the data structures it reads and thus execute faster.
 
 Statements allowed in function bodies
@@ -157,7 +157,7 @@ To avoid side effects, the following restrictions are placed on the body of a fu
 Procedures in the library
 -------------------------
 
-Unlike with functions, there are no restrictions placed on the statements that can be executed in a procedure. 
+Relative to functions, there are much fewer restrictions placed on the statements that can be executed in a procedure. 
 This allows you to model much more complicated data flow using procedures.
 
 To illustrate, the above example will be extended to copy data to a set and parameter in the private section of the library.
@@ -188,7 +188,7 @@ These identifiers are used by a procedure private to the library interface:
         }
     }
 
-To facilitate this mechanism, the procedure that can be used outside the library is as follows:
+To facilitate this mechanism, the procedure that can be used outside the library as follows:
 
 .. code-block:: aimms
     :linenos:
