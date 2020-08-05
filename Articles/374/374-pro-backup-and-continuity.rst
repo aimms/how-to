@@ -1,9 +1,9 @@
-Backup AIMMS PRO
-=================
+Protect AIMMS PRO installation for business continuity
+======================================================
 
 .. meta::
    :description: How to back up your AIMMS PRO installation for business continuity.
-   :keywords: PRO, backup, standby, business continuity, cluster
+   :keywords: PRO, backup, standby, business continuity, cluster, disaster recovery
 
 In this document we will describe options to provide business continuity and ensure resilience against hardware or software failure for self-managed installations of AIMMS PRO (On-Premise).
 
@@ -40,7 +40,7 @@ Self-managed AIMMS PRO: Cold Standby
 
 Cold standby systems are installed once to install and configure the system and data and then turned off until needed, when the primary system becomes unavailable. In that case the cold standby system will be turned on, the backups of the primary system will be restored onto the standby system, network traffic will be rerouted to the standby system and services can be resumed. 
 
-By locating the standby in another data centre, you are also protected against the ‘loss’ of an entire data center, for example because the power supply, cooling or internet connection is lost, or the data center is damaged. 
+By locating the standby in another data center, you are also protected against the loss of an entire data center, for example because the power supply, cooling or internet connection is lost, or the data center is damaged. 
 
 Operating a cold standby for your AIMMS PRO installation will roughly require:  
 
@@ -55,7 +55,7 @@ Operating a cold standby for your AIMMS PRO installation will roughly require:
 Self-managed AIMMS PRO: Hot standby 
 -----------------------------------
 
-In contrast, a hot standby system is running and ‘shadowing’ the primary system. Software versions are kept identical and data is continuously copied to the standby system. In case of a failure of the primary system the hot standby system either takes over automatically or is manually engaged. Of course, much shorter RTOs and RPOs can be achieved using hot standby, but at a cost. 
+In contrast, a hot standby system is running and mirroring the primary system. Software versions are kept identical and data is continuously copied to the standby system. In case of a failure of the primary system the hot standby system either takes over automatically or is manually engaged. Of course, much shorter RTOs and RPOs can be achieved using hot standby, but at a cost. 
 
 Operating a hot standby for your AIMMS PRO installation will roughly require: 
 
@@ -71,7 +71,7 @@ Self-managed AIMMS PRO: Other options
 
 Of course, there are many more routes to achieve business continuity, such as running production on two identical AIMMS PRO installations, with traffic divided by a load balancer and mechanisms to keep the data identical on both installations. Then you achieve both scaling and business continuity.  
 
-Running self-managed AIMMS PRO on Virtual Machines may make moving the installation to a larger server easier. It may also in some cases simplify ‘disaster recovery’. 
+Running self-managed AIMMS PRO on Virtual Machines may make moving the installation to a larger server easier. It may also in some cases simplify disaster recovery. 
 
  
 

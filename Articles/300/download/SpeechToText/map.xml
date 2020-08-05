@@ -1,0 +1,21 @@
+<AimmsJSONMapping>
+    <ObjectMapping>
+
+        <ArrayMapping name="results">
+            <ObjectMapping iterative-binds-to="i0" >
+                <ArrayMapping name="alternatives">
+                    <ObjectMapping iterative-binds-to="i1" >
+                        <ValueMapping name="confidence" maps-to="p_confidence(i0,i1)"/>
+                        <ValueMapping name="transcript" maps-to="sp_transcript(i0,i1)"/>
+                    </ObjectMapping>
+                </ArrayMapping>
+                <ValueMapping name="final" maps-to="sp_final(i0)"/>
+            </ObjectMapping>
+        </ArrayMapping>
+
+        <ValueMapping name="result_index" maps-to="p_resultIndex"/>
+        <ArrayMapping name="warnings">
+            <ValueMapping iterative-binds-to="i_msg" maps-to="sp_mgs(i_msg)"/>
+        </ArrayMapping>
+    </ObjectMapping>
+</AimmsJSONMapping>
