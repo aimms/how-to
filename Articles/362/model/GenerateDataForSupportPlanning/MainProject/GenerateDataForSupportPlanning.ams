@@ -1,0 +1,140 @@
+## ams_version=1.0
+
+Model Main_GenerateDataForSupportPlanning {
+	Convention: cnv_utc;
+	StringParameter sp_timeslotFormat {
+		Definition: "%c%y-%m-%d %H:%M%TZ(ep_tzUTC)";
+	}
+	Quantity SI_Time_Duration {
+		BaseUnit: s;
+		Conversions: {
+			century->s : #-># * 3153600000,
+			day    ->s : #-># * 86400,
+			hour   ->s : #-># * 3600,
+			minute ->s : #-># * 60,
+			month  ->s : #-># * 2628000,
+			second ->s : #->#,
+			tick   ->s : #-># / 100,
+			week   ->s : #-># * 604800,
+			year   ->s : #-># * 31536000
+		}
+		Comment: "Expresses the value for the duration of periods.";
+	}
+	Calendar cal_workBlocks {
+		Index: i_workBlock;
+		Unit: 240 * minute;
+		BeginDate: "2020-01-01 00:00";
+		EndDate: "2040-01-01 00:00";
+		TimeslotFormat: sp_timeslotFormat;
+	}
+	Convention cnv_utc {
+		TimeslotFormat: {
+			!cal_Slots      : "%c%y-%m-%d %H:%M%TZ(ep_tzUTC)",
+			cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(ep_tzUTC)"
+		}
+		Comment: "\"%c%y-%m-%d %H:%M%TZ(\'UTC\')\"";
+	}
+	Convention cnv_newZealand {
+		TimeslotFormat: {
+			!!cal_Slots      : "%c%y-%m-%d %H:%M%TZ(ep_tzNewZealand)",
+			cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(ep_tzNewZealand)"
+		}
+		Comment: "\"%c%y-%m-%d %H:%M%TZ(\'UTC\')\"";
+	}
+	ElementParameter ep_tzNewZealand {
+		Range: AllTimeZones;
+		Definition: 'New Zealand Standard Time';
+	}
+	ElementParameter ep_tzUTC {
+		Range: AllTimeZones;
+		Definition: 'UTC';
+	}
+	Parameter p {
+		Definition: card( cal_workBlocks );
+	}
+	StringParameter sp_connStr;
+	Parameter p_testdb;
+	Parameter p_demand {
+		IndexDomain: (i_workBlock,i_certification);
+	}
+	Parameter p_dt {
+		IndexDomain: i_workBlock;
+		Definition: sum( i_certification, p_demand(i_workBlock, i_certification));
+	}
+	Set s_Certifications {
+		Index: i_certification;
+		Definition: data { a, b, c, d, e };
+	}
+	DatabaseTable db_Demand {
+		DataSource: sp_connStr;
+		TableName: "expected-demand-in-new-zealand-standard-time";
+		Convention: cnv_newZealand;
+		Mapping: {
+			"workblock"     --> i_workBlock,
+			"certification" --> i_certification,
+			"demand"        --> p_demand( i_workBlock, i_certification )
+		}
+	}
+	Procedure pr_Test {
+		Body: {
+			pr_Connect();
+			pr_GenData();
+			pr_writeData();
+		}
+	}
+	Procedure pr_Connect {
+		Body: {
+			MySQL::pr_connectionString(sp_connStr);
+			p_testdb := TestDataSource(sp_connStr);
+			if not p_testdb then
+				raise error "unable to connect to database";
+			endif ;
+		}
+	}
+	Procedure pr_GenData {
+		Body: {
+			p_demand(i_workBlock, i_certification) :=
+				Triangular(0.1,0,1.3);
+			p_demand(i_workBlock, i_certification) | ( p_dt(i_workBlock) > 3 ) :=
+				p_demand(i_workBlock, i_certification) / ( p_dt(i_workBlock) / 3 );
+		}
+	}
+	Procedure pr_writeData {
+		Body: {
+			write to table db_Demand ;
+		}
+	}
+	Section Application_initialization_execution_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure MainExecution;
+		Procedure PreMainTermination {
+			Body: {
+				return 1; ! This app doesn't use cases.
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+}

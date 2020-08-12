@@ -1,0 +1,68 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "p",
+          "layoutInfo": {
+            "width": "8",
+            "height": "3"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/p": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_demand"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_workBlock"
+        ],
+        "colHeader": [
+          "i_certification"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "contents.totals": {
+      "literal": [
+        {
+          "indexName": "i_certification",
+          "operators": [
+            "sum_only_visible"
+          ]
+        }
+      ]
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "i_workBlock",
+          "width": 25.2
+        }
+      ]
+    }
+  }
+}

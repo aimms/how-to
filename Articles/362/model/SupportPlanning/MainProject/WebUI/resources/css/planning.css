@@ -1,0 +1,71 @@
+:root {
+    --planning-qualitative-color-00: #eeeeee ;
+    --planning-qualitative-color-01: #8dd3c7 ;
+    --planning-qualitative-color-02: #ffffb3 ;
+    --planning-qualitative-color-03: #bebada ;
+    --planning-qualitative-color-04: #fb8072 ;
+    --planning-qualitative-color-05: #80b1d3 ;
+    --planning-qualitative-color-06: #fdb462 ;
+    --planning-qualitative-color-07: #b3de69 ;
+    --planning-qualitative-color-08: #fccde5 ;
+    --planning-qualitative-color-09: #d9d9d9 ;
+    --planning-qualitative-color-10: #bc80bd ;
+    --planning-qualitative-color-11: #ccebc5 ;
+    --planning-qualitative-color-12: #ffed6f ;
+}
+
+.annotation-qualitative00{
+        fill: var(--planning-qualitative-color-00);
+}
+
+.annotation-qualitative01{
+        fill: var(--planning-qualitative-color-01);
+}
+
+.annotation-qualitative02{
+        fill: var(--planning-qualitative-color-02);
+}
+
+.annotation-qualitative03{
+        fill: var(--planning-qualitative-color-03);
+}
+
+.annotation-qualitative04{
+        fill: var(--planning-qualitative-color-04);
+}
+
+.annotation-qualitative05{
+        fill: var(--planning-qualitative-color-05);
+}
+
+.annotation-qualitative06{
+        fill: var(--planning-qualitative-color-06);
+}
+
+.annotation-qualitative07{
+        fill: var(--planning-qualitative-color-07);
+}
+
+.annotation-qualitative08{
+        fill: var(--planning-qualitative-color-08);
+}
+
+.annotation-qualitative09{
+        fill: var(--planning-qualitative-color-09);
+}
+
+.annotation-qualitative10{
+        fill: var(--planning-qualitative-color-10);
+}
+
+.annotation-qualitative11{
+        fill: var(--planning-qualitative-color-11);
+}
+
+.annotation-qualitative12{
+        fill: var(--planning-qualitative-color-12);
+}
+
+
+
+
