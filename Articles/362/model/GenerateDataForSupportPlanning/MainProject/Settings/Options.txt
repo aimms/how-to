@@ -1,4 +1,5 @@
 ﻿* AIMMS
+max_calendar_elements 10000000
 rounding_compatibility Aimms_3_7
 use_UTC_forCaseAndStartEndDate 1
 * AOA
@@ -23,4 +24,3 @@ use_UTC_forCaseAndStartEndDate 1
 * NETSOL
 * Environment
 Project_Title "Generate data for multi timezone suppot planning"
-Default_UI 0

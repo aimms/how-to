@@ -2,6 +2,14 @@
 
 Model Main_GenerateDataForSupportPlanning {
 	Convention: cnv_utc;
+	Procedure Procedure_1 {
+		Body: {
+			display ep_tzMumbai;
+		}
+	}
+	Parameter p_yearNo {
+		InitialData: 3;
+	}
 	StringParameter sp_timeslotFormat {
 		Definition: "%c%y-%m-%d %H:%M%TZ(ep_tzUTC)";
 	}
@@ -20,12 +28,30 @@ Model Main_GenerateDataForSupportPlanning {
 		}
 		Comment: "Expresses the value for the duration of periods.";
 	}
+	StringParameter sp_begYear {
+		Definition: formatString("20%02i-01-01 00:00",p_yearNo);
+	}
+	StringParameter sp_endYear {
+		Definition: formatString("20%02i-01-01 00:00",p_yearNo+1);
+		Comment: "timeslotCharacteristic";
+	}
 	Calendar cal_workBlocks {
 		Index: i_workBlock;
 		Unit: 240 * minute;
-		BeginDate: "2020-01-01 00:00";
-		EndDate: "2040-01-01 00:00";
+		BeginDate: sp_begYear;
+		EndDate: sp_endYear;
 		TimeslotFormat: sp_timeslotFormat;
+	}
+	Calendar cal_minutes {
+		Index: i_minute;
+		Parameter: ep_minute;
+		Unit: minute;
+		BeginDate: "2020-01-01 00:00";
+		EndDate: "2021-01-01 00:00";
+		TimeslotFormat: sp_timeslotFormat;
+	}
+	Parameter p_noMinutes {
+		Definition: card( cal_minutes );
 	}
 	Convention cnv_utc {
 		TimeslotFormat: {
@@ -44,6 +70,10 @@ Model Main_GenerateDataForSupportPlanning {
 	ElementParameter ep_tzNewZealand {
 		Range: AllTimeZones;
 		Definition: 'New Zealand Standard Time';
+	}
+	ElementParameter ep_tzMumbai {
+		Range: AllTimeZones;
+		Definition: 'India Standard Time';
 	}
 	ElementParameter ep_tzUTC {
 		Range: AllTimeZones;
@@ -91,17 +121,15 @@ Model Main_GenerateDataForSupportPlanning {
 			endif ;
 		}
 	}
-	Procedure pr_GenData {
-		Body: {
-			p_demand(i_workBlock, i_certification) :=
-				Triangular(0.1,0,1.3);
-			p_demand(i_workBlock, i_certification) | ( p_dt(i_workBlock) > 3 ) :=
-				p_demand(i_workBlock, i_certification) / ( p_dt(i_workBlock) / 3 );
-		}
-	}
+	Procedure pr_GenData;
 	Procedure pr_writeData {
 		Body: {
-			write to table db_Demand ;
+			p_yearNo := 20 ;
+			while p_yearNo < 40 do
+			write p_demand to table db_Demand in merge mode;
+			
+				p_yearNo += 1 ;
+			endwhile ;
 		}
 	}
 	Section Application_initialization_execution_and_termination {

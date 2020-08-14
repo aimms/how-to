@@ -17,8 +17,27 @@
             "width": "8",
             "height": "3"
           }
+        },
+        {
+          "uri": "ep",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
         }
       ]
+    }
+  },
+  "widgets/ep": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "ep_tzMumbai"
+        ]
+      }
     }
   },
   "widgets/p": {
