@@ -215,7 +215,6 @@
     "contents": {
       "aimms": {
         "contents": [
-          "ep_selectedTimezone",
           "webui::DisplayTimeZone",
           "webui::WebApplicationTimeZone"
         ]
@@ -305,7 +304,7 @@
       }
     },
     "default.column.width": {
-      "literal": 25
+      "literal": 30
     },
     "title": {
       "literal": "Starting times per employee"

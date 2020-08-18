@@ -1,10 +1,11 @@
 ## ams_version=1.0
 
 Model Main_SupportPlanning {
-	Convention: cnv_utc;
+	Convention: cnv_model;
 	Section WebUI_use {
 		StringParameter sp_GanttChartReferenceTime {
-			Definition: "2020-01-01 00:00";
+			Definition: TimeSlotToString("%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)",cal_Slots,first(cal_Slots));
+			Comment: "timeslotToString";
 		}
 		Parameter p01_employeeWorking {
 			IndexDomain: (i_Employee,i_workBlock);
@@ -16,19 +17,46 @@ Model Main_SupportPlanning {
 			Definition: first( cal_workBlocks );
 		}
 		StringParameter sp_EmpPlanViewportStart {
-			Definition: TimeslotToString("%c%y-%m-%d %H:%M", cal_workBlocks, ep_EmpPlanViewportStart);
-		}
-		StringParameter sp_EmpPlanViewportEnd {
-			Definition: TimeslotToString("%c%y-%m-%d %H:%M", cal_workBlocks, ep_EmpPlanViewportEnd);
+			Definition: TimeslotToString("%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)", cal_workBlocks, ep_EmpPlanViewportStart);
 		}
 		ElementParameter ep_EmpPlanViewportEnd {
 			Range: cal_workBlocks;
 			Definition: last( cal_workBlocks );
 		}
+		StringParameter sp_EmpPlanViewportEnd {
+			Definition: TimeslotToString("%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)", cal_workBlocks, ep_EmpPlanViewportEnd);
+		}
+		StringParameter sp_datetimeFormat {
+			Definition: sp_datetimeFormats(webui::WebApplicationTimeZone);
+			Comment: {
+				"if webui::DisplayTimeZone = \'W. Europe Standard Time\' then 
+					\"%d.%m.%c%y %H:%M%TZ(webui::WebApplicationTimeZone)|\\\"\\\"|\\\" DST\\\"|\"
+				elseif webui::DisplayTimeZone = \'North Asia East Standard Time\' then
+					\"%d.%m.%c%y %H:%M%TZ(webui::WebApplicationTimeZone)|\\\"\\\"|\\\" DST\\\"|\"
+				elseif webui::DisplayTimeZone = \'Central Brazilian Standard Time\' then
+					\"%d/%m/%c%y %H:%M%TZ(webui::WebApplicationTimeZone)|\\\"\\\"|\\\" DST\\\"|\"
+				else
+					\"%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)|\\\"\\\"|\\\" DST\\\"|\"
+				endif"
+			}
+		}
+		StringParameter sp_datetimeFormats {
+			IndexDomain: indexTimeZones;
+			Default: "%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)|\"\"|\" DST\"|";
+		}
 		Convention cnv_WebUI {
 			TimeslotFormat: {
-				cal_Slots      : "%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)",
-				cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)"
+				cal_Slots      : sp_datetimeFormat,
+				cal_workBlocks : sp_datetimeFormat
+			}
+			Comment: {
+				"cal_Slots      : \"%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)\",
+				cal_workBlocks : \"%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)\""
+			}
+		}
+		Procedure pr_uponChangeDisplayTimeZone {
+			Body: {
+				update sp_datetimeFormat ;
 			}
 		}
 		Section actions {
@@ -61,32 +89,14 @@ Model Main_SupportPlanning {
 				}
 			}
 		}
-		Section Selecting_timezone {
-			Set s_SelectedTimezones {
-				SubsetOf: AllTimeZones;
-				Index: i_selectedTimezone;
-				Definition: {
-					{ indexTimeZones | exists( i_employee | ep_TimezoneEmployee(i_Employee) = indexTimeZones ) } + 'UTC'
-				}
-			}
-			ElementParameter ep_selectedTimezone {
-				Range: s_SelectedTimezones;
-				webui::UponChangeProcedure: pr_uponchangeTimezoneSelection;
-			}
-			Procedure pr_uponchangeTimezoneSelection {
-				Body: {
-					webui::DisplayTimeZone := ep_selectedTimezone ;
-				}
-			}
-		}
 		Section Planning_Employees {
 			Parameter p_EmployeeJobStart {
 				IndexDomain: (i_Employee,i_workBlock) | p01_employeeWorking(i_Employee, i_workBlock);
 				Unit: hour;
 				Definition: {
 					StringToMoment( 
-						"%c%y-%m-%d %H:%M", [hour], sp_GanttChartReferenceTime, 
-						TimeslotToString("%c%y-%m-%d %H:%M", cal_workBlocks, i_workBlock))
+						"%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)", [hour], sp_GanttChartReferenceTime, 
+						TimeslotToString("%c%y-%m-%d %H:%M%TZ('UTC')", cal_workBlocks, i_workBlock))
 				}
 			}
 			Parameter p_EmployeeJobDuration {
@@ -127,6 +137,7 @@ Model Main_SupportPlanning {
 				Unit: hour;
 				Definition: 4[hour];
 				webui::AnnotationsIdentifier: sp_SkillJobAnnotation;
+				webui::ItemTextIdentifier: sp_SkillJobext;
 				webui::TooltipIdentifier: sp_SkillTooltip;
 			}
 			StringParameter sp_SkillJobAnnotation {
@@ -134,6 +145,16 @@ Model Main_SupportPlanning {
 				Definition: {
 					formatString("qualitative%02i",
 						ord(ep_EmployeeCoveringSkill(i_certification, i_workBlock),s_Employees))
+				}
+			}
+			StringParameter sp_SkillJobext {
+				IndexDomain: (i_certification,i_workBlock);
+				Definition: {
+					if ep_EmployeeCoveringSkill(i_certification, i_workBlock) then
+						formatString("%e",ep_EmployeeCoveringSkill(i_certification, i_workBlock))
+					else
+						"none"
+					endif
 				}
 			}
 			StringParameter sp_SkillTooltip {
@@ -174,22 +195,28 @@ Model Main_SupportPlanning {
 		}
 	}
 	Section Read_demand_data {
+		Convention cnv_database {
+			TimeslotFormat: {
+				cal_Slots      : "%c%y-%m-%d %H:%M%TZ(ep_databaseTimezone)",
+				cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(ep_databaseTimezone)"
+			}
+			Comment: "\"%c%y-%m-%d %H:%M%TZ(\'UTC\')\"";
+		}
 		StringParameter sp_connStr {
 			InitialData: "";
 		}
 		DatabaseTable db_demandData {
 			DataSource: sp_connStr;
 			TableName: "expected-demand-in-new-zealand-standard-time";
-			Convention: cnv_newZealand;
+			Convention: cnv_database;
 			Mapping: {
 				"workblock"     -->i_workBlock,
-				"certification" -->i_certification,
-				"demand"        -->p_demand( i_workBlock, i_certification )
+				"demand"        -->p_demand( i_workBlock )
 			}
 		}
 		Parameter p_testDB;
 		Parameter p_demand {
-			IndexDomain: (i_workBlock, i_certification);
+			IndexDomain: (i_workBlock);
 		}
 		Procedure pr_Conn {
 			Body: {
@@ -210,25 +237,18 @@ Model Main_SupportPlanning {
 		}
 	}
 	DeclarationSection data_Declaration {
-		Convention cnv_utc {
+		Convention cnv_model {
 			TimeslotFormat: {
-				cal_Slots      : "%c%y-%m-%d %H:%M%TZ(ep_tzUTC)",
-				cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(ep_tzUTC)"
+				cal_Slots      : "%c%y-%m-%d %H:%M%TZ(ep_modelTimezone)",
+				cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(ep_modelTimezone)"
 			}
 			Comment: "\"%c%y-%m-%d %H:%M%TZ(\'UTC\')\"";
 		}
-		Convention cnv_newZealand {
-			TimeslotFormat: {
-				cal_Slots      : "%c%y-%m-%d %H:%M%TZ(ep_tzNewZealand)",
-				cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(ep_tzNewZealand)"
-			}
-			Comment: "\"%c%y-%m-%d %H:%M%TZ(\'UTC\')\"";
-		}
-		ElementParameter ep_tzNewZealand {
+		ElementParameter ep_databaseTimezone {
 			Range: AllTimeZones;
 			Definition: 'New Zealand Standard Time';
 		}
-		ElementParameter ep_tzUTC {
+		ElementParameter ep_modelTimezone {
 			Range: AllTimeZones;
 			Definition: 'UTC';
 		}
@@ -261,7 +281,7 @@ Model Main_SupportPlanning {
 		StringParameter sp_EndDayWeek;
 		StringParameter sp_EndWeek;
 		StringParameter sp_timeslotFormat {
-			Definition: "%c%y-%m-%d %H:%M%TZ(ep_tzUTC)";
+			Definition: "%c%y-%m-%d %H:%M%TZ(ep_modelTimezone)";
 		}
 		Calendar cal_Days {
 			Index: i_day;
@@ -317,10 +337,6 @@ Model Main_SupportPlanning {
 				{ i_day | ( sp_beginDayWeek <= i_day ) and ( i_day <= sp_EndDayWeek ) }
 			}
 		}
-		Parameter p_demandByWorkblock {
-			IndexDomain: i_workBlock;
-			Definition: ceil( sum( i_certification, p_demand(i_workBlock, i_certification) ) );
-		}
 	}
 	Section Modeling_and_solving_the_rostering_problem {
 		Section determining_cost_coefficients {
@@ -361,11 +377,11 @@ Model Main_SupportPlanning {
 						for indexTimeZones do
 							ep_TempForTimeZone := indexTimeZones;
 							sp_workblockTimezoneToStartHour(i_workBlock, ep_TempForTimeZone) := 
-								TimeSlotToString("%c%y-%m-%d %H:%M%TZ(ep_TempForTimeZone)", 
+								TimeSlotToString("%c%y-%m-%d %H:%M%TZ(ep_TempForTimeZone)|\"\"|\" DST\"|", 
 									cal_workBlocks, i_workBlock );
 						endfor ;
 					
-						! Thanks to the fixed format in the previous step, it is easy to determine the hour (in a 24 hour day).
+						! Thanks to the simplified format in the previous step, it is straightforward to determine the hour (in a 24 hour day).
 						p_workblockTimezoneToStartHour(i_workBlock, IndexTimeZones)  := 
 							val( substring( sp_workblockTimezoneToStartHour(i_workBlock, IndexTimeZones), 12, 13 ) );
 					
@@ -382,7 +398,8 @@ Model Main_SupportPlanning {
 					
 					! When an employee has more certifications; that employee is also better able
 					! to create relevant content for users.
-					p_noCertifications(i_Employee) := count( i_certification, p01_certified(i_certification, i_Employee) );
+					p_noCertifications(i_Employee) := 
+						count( i_certification, p01_certified(i_certification, i_Employee) );
 					
 					! The cost we're interested in, how expensive is it for an employee to be on standby during that workblock
 					! depends on both the number of certifications and the shift in which the workBlock is executed.
@@ -430,7 +447,7 @@ Model Main_SupportPlanning {
 			}
 			Variable v_NoWorkingEmployees {
 				IndexDomain: i_workBlock;
-				Range: [p_demandByWorkblock(i_workBlock), 4];
+				Range: [p_demand(i_workBlock), 4];
 				Definition: sum( i_Employee, v01_employeeWorking(i_Employee, i_workBlock) );
 			}
 			Constraint c_employeeWorksAtMostOncePerDay {
@@ -471,7 +488,6 @@ Model Main_SupportPlanning {
 		}
 		Procedure pr_solveStandbySchedule {
 			Body: {
-				read from file "data/certifications.inp" ;
 				pr_determineCostCoefficients();
 				solve mp_InternationalSupportScheduling ;
 				pr_AssignJobsToWorkblocks();
@@ -530,17 +546,34 @@ Model Main_SupportPlanning {
 		}
 		Procedure PostMainInitialization {
 			Body: {
-				
+				! We assume that the user wants to view the schedule of the current week,
+				! so we initialize the Gantt Chart View Window to that.
 				pr_determineBeginEndCurrentWeek();
 				
+				! The cost coefficients are declared and determined in the section determining_cost_coefficients.
+				! However, their values are not to be modified in the User Interface.
 				CurrentInputs -= determining_cost_coefficients ;
 				
-				ep_selectedTimezone := 'UTC' ;
-				webui::DisplayTimeZone := ep_selectedTimezone ;
+				! Let the WebUI know which timezone is used inside the model.
+				webui::ModelTimeZone := ep_modelTimezone ;
+				
+				webui::DisplayTimeZone := ep_modelTimezone ;
 				webui::ApplicationConvention := 'cnv_WebUI' ;
 				
 				! To get rid of warning not initialized:
 				empty p01_Certified, p_cost, ep_TimezoneEmployee, v01_employeeWorking, ep_workBlockTimezoneToShift ;
+				
+				! Certifications.inp contains the timezone of each employee and his/her certifications.
+				! For now this input is stored as a file within the project.
+				read from file "data/certifications.inp" ;
+				
+				! The user will be able to select the viewed timezone, from the collection of 
+				! relevant timezones only:
+				webui::DisplayTimeZones := 
+					{ indexTimeZones | exists( i_employee | ep_TimezoneEmployee(i_Employee) = indexTimeZones ) } 
+					+ ep_modelTimezone + ep_databaseTimezone ;
+				
+				webui::TimeZoneChangeHook := 'pr_uponChangeDisplayTimeZone' ;
 			}
 			Comment: {
 				"Add initialization statements here that require that the libraries are already initialized properly,

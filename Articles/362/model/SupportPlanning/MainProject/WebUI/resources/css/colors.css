@@ -1,0 +1,314 @@
+/*
+
+"#4e81c9",
+"#a2b937",
+"#b058d0",
+"#65c14c",
+"#ce4dae",
+"#3f9130",
+"#506cd9",
+"#c7a73a",
+"#8e67cf",
+"#4ec480",
+"#d94581",
+"#53c2a3",
+"#d13e4d",
+"#3abec8",
+"#ce4f2d",
+"#52a5d5",
+"#e18b3c",
+"#65599b",
+"#6f872b",
+"#a596de",
+"#35773e",
+"#de8ac1",
+"#5da266",
+"#9c4f88",
+"#9abb71",
+"#a64b5c",
+"#308266",
+"#e48679",
+"#6b6a27",
+"#9d602d",
+"#bba365"
+
+*/
+
+
+/*
+     Thank you stack overflow, https://medialab.github.io/iwanthue/
+     https://stackoverflow.com/questions/21352683/randomising-qualitative-colours-for-large-sets-in-ggplot
+*/
+
+:root {
+    --planning-qualitative-color-00: #eeeeee ;
+    --planning-qualitative-color-01: #89C5DA  ;
+    --planning-qualitative-color-02: #DA5724  ;
+    --planning-qualitative-color-03: #74D944  ;
+    --planning-qualitative-color-04: #CE50CA  ;
+    --planning-qualitative-color-05: #3F4921  ;
+    --planning-qualitative-color-06: #C0717C  ;
+    --planning-qualitative-color-07: #CBD588  ;
+    --planning-qualitative-color-08: #5F7FC7  ;
+    --planning-qualitative-color-09: #673770  ;
+    --planning-qualitative-color-10: #D3D93E  ;
+    --planning-qualitative-color-11: #38333E  ;
+    --planning-qualitative-color-12: #508578  ;
+    --planning-qualitative-color-13: #D7C1B1  ;
+    --planning-qualitative-color-14: #689030  ;
+    --planning-qualitative-color-15: #AD6F3B  ;
+    --planning-qualitative-color-16: #CD9BCD  ;
+    --planning-qualitative-color-17: #D14285  ;
+    --planning-qualitative-color-18: #6DDE88  ;
+    --planning-qualitative-color-19: #652926  ;
+    --planning-qualitative-color-20: #7FDCC0  ;
+    --planning-qualitative-color-21: #C84248  ;
+    --planning-qualitative-color-22: #8569D5  ;
+    --planning-qualitative-color-23: #5E738F  ;
+    --planning-qualitative-color-24: #D1A33D  ;
+    --planning-qualitative-color-25: #8A7C64  ;
+    --planning-qualitative-color-26: #599861  ;
+}
+
+/*
+"#89C5DA", "#DA5724", "#74D944", "#CE50CA", "#3F4921", "#C0717C", "#CBD588", "#5F7FC7", 
+"#673770", "#D3D93E", "#38333E", "#508578", "#D7C1B1", "#689030", "#AD6F3B", "#CD9BCD", 
+"#D14285", "#6DDE88", "#652926", "#7FDCC0", "#C84248", "#8569D5", "#5E738F", "#D1A33D", 
+"#8A7C64", "#599861"
+*/
+/* Thank you colorbrewer2.org
+:root {
+    
+    --planning-qualitative-color-00: #eeeeee ;
+    --planning-qualitative-color-01: #8dd3c7 ;
+    --planning-qualitative-color-02: #ffffb3 ;
+    --planning-qualitative-color-03: #bebada ;
+    --planning-qualitative-color-04: #fb8072 ;
+    --planning-qualitative-color-05: #80b1d3 ;
+    --planning-qualitative-color-06: #fdb462 ;
+    --planning-qualitative-color-07: #b3de69 ;
+    --planning-qualitative-color-08: #fccde5 ;
+    --planning-qualitative-color-09: #d9d9d9 ;
+    --planning-qualitative-color-10: #bc80bd ;
+    --planning-qualitative-color-11: #ccebc5 ;
+    --planning-qualitative-color-12: #ffed6f ;
+}
+*/
+
+.annotation-qualitative00{
+        fill: var(--planning-qualitative-color-00);
+}
+
+.annotation-qualitative01{
+        fill: var(--planning-qualitative-color-01);
+}
+
+.annotation-qualitative02{
+        fill: var(--planning-qualitative-color-02);
+}
+
+.annotation-qualitative03{
+        fill: var(--planning-qualitative-color-03);
+}
+
+.annotation-qualitative04{
+        fill: var(--planning-qualitative-color-04);
+}
+
+.annotation-qualitative05{
+        fill: var(--planning-qualitative-color-05);
+}
+
+.annotation-qualitative06{
+        fill: var(--planning-qualitative-color-06);
+}
+
+.annotation-qualitative07{
+        fill: var(--planning-qualitative-color-07);
+}
+
+.annotation-qualitative08{
+        fill: var(--planning-qualitative-color-08);
+}
+
+.annotation-qualitative09{
+        fill: var(--planning-qualitative-color-09);
+}
+
+.annotation-qualitative10{
+        fill: var(--planning-qualitative-color-10);
+}
+
+.annotation-qualitative11{
+        fill: var(--planning-qualitative-color-11);
+}
+
+.annotation-qualitative12{
+        fill: var(--planning-qualitative-color-12);
+}
+
+.annotation-qualitative13{
+        fill: var(--planning-qualitative-color-13);
+}
+
+.annotation-qualitative14{
+        fill: var(--planning-qualitative-color-14);
+}
+
+.annotation-qualitative15{
+        fill: var(--planning-qualitative-color-15);
+}
+
+.annotation-qualitative16{
+        fill: var(--planning-qualitative-color-16);
+}
+
+.annotation-qualitative17{
+        fill: var(--planning-qualitative-color-17);
+}
+
+.annotation-qualitative18{
+        fill: var(--planning-qualitative-color-18);
+}
+
+.annotation-qualitative19{
+        fill: var(--planning-qualitative-color-19);
+}
+
+.annotation-qualitative20{
+        fill: var(--planning-qualitative-color-20);
+}
+
+.annotation-qualitative21{
+        fill: var(--planning-qualitative-color-21);
+}
+
+.annotation-qualitative22{
+        fill: var(--planning-qualitative-color-22);
+}
+
+.annotation-qualitative23{
+        fill: var(--planning-qualitative-color-23);
+}
+
+.annotation-qualitative24{
+        fill: var(--planning-qualitative-color-24);
+}
+
+.annotation-qualitative25{
+        fill: var(--planning-qualitative-color-25);
+}
+
+.annotation-qualitative26{
+        fill: var(--planning-qualitative-color-26);
+}
+
+
+
+.aimms-widget.tag-legend-widget .annotation-qualitative01{
+        background: var(--planning-qualitative-color-01); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative02{
+        background: var(--planning-qualitative-color-02); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative03{
+        background: var(--planning-qualitative-color-03); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative04{
+        background: var(--planning-qualitative-color-04); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative05{
+        background: var(--planning-qualitative-color-05); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative06{
+        background: var(--planning-qualitative-color-06); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative07{
+        background: var(--planning-qualitative-color-07); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative08{
+        background: var(--planning-qualitative-color-08); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative09{
+        background: var(--planning-qualitative-color-09); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative10{
+        background: var(--planning-qualitative-color-10); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative11{
+        background: var(--planning-qualitative-color-11); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative12{
+        background: var(--planning-qualitative-color-12); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative13{
+        background: var(--planning-qualitative-color-13); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative14{
+        background: var(--planning-qualitative-color-14); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative15{
+        background: var(--planning-qualitative-color-15); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative16{
+        background: var(--planning-qualitative-color-16); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative17{
+        background: var(--planning-qualitative-color-17); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative18{
+        background: var(--planning-qualitative-color-18); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative19{
+        background: var(--planning-qualitative-color-19); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative20{
+        background: var(--planning-qualitative-color-20); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative21{
+        background: var(--planning-qualitative-color-21); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative22{
+        background: var(--planning-qualitative-color-22); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative23{
+        background: var(--planning-qualitative-color-23); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative24{
+        background: var(--planning-qualitative-color-24); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative25{
+        background: var(--planning-qualitative-color-25); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative26{
+        background: var(--planning-qualitative-color-26); 
+}
+
+
+
+
