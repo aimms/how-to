@@ -54,7 +54,7 @@ The number of evening and night shifts of these experts is minimized.
 Database
 ^^^^^^^^^^^^^^^^
 
-The expected demand per hour is stored with respect to the timezone ``'New Zealand Standard Time'``, without daylight saving time.
+The expected demand per hour is stored with respect to the timezone ``'New Zealand Standard Time'``.
 
 User interface
 ^^^^^^^^^^^^^^^^^^^^
@@ -81,10 +81,10 @@ The requirements for timezone handling of each of these parts are different.
     Therefore, there may be zero, one or more timezones relevant here as well.
 
 #.  The model is the component that communicates with both the user interface and with data sources.
-    The collection of timezones may change over time as the users, and perhaps also the data sources will vary over time. 
+    The collection of timezones may change over time as the users, and perhaps also the data sources, will vary over time. 
 
-    When there are multiple timezones managed by the model, data management and communication with user interface and data sources are unnecessarily complicated. 
-    A good practice is therefore to choose one timezone as a reference timezone and use this as the model timezone.
+    When the data of the model is stored using multiple timezones, data management and communication with user interface and data sources becomes complicated. 
+    A good practice is therefore to choose one timezone as a reference timezone, and store all data with respect to this timezone. 
 
     As all timezones are defined in terms of UTC, it is good practice to use UTC as the model timezone.
 
@@ -137,13 +137,13 @@ The WebUI is notified of the model timezone as follows in ``PostMainInitializati
 The mathematical programming problem
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This is a rostering problem, and constraints similar to rostering apply, see :doc:`rostering using constraint programming article<../137/137-Small-Rostering>` and `wikipedia <https://en.wikipedia.org/wiki/Nurse_scheduling_problem>`_. 
+This is a rostering problem, and constraints similar to rostering apply, see :doc:`rostering using constraint programming article<../137/137-Small-Rostering>` and `wikipedia <https://en.wikipedia.org/wiki/Nurse_scheduling_problem>`_ and are not discussed here.
 
 The multi-timezone aspect of the mathematical programming problems surfaces in the definition of the cost coefficients.
 Different costs are associated with different employees executing a particular shift.
 In the running example, this cost computation is handled in the section ``determining_cost_coefficients``.
 
-The procedure ``pr_determineCostCoefficients`` to compute the cost ``p_cost(i_Employee,i_workBlock)`` consists of four steps:
+The procedure ``pr_determineCostCoefficients`` computes the cost ``p_cost(i_Employee,i_workBlock)`` in four steps:
 
 #.  First compute the shift of each workblock, depending on the timezone. 
     This again, consists of three sub-steps:
@@ -161,9 +161,9 @@ The procedure ``pr_determineCostCoefficients`` to compute the cost ``p_cost(i_Em
                         cal_workBlocks, i_workBlock );
             endfor ;
 
-        On line 4,5 the call to :aimms:func:`TimeSlotToString` converts the calendar element ``i_workBlock`` 
-        to the timezone ``ep_TempForTimeZone``.
-        Line 2 lets the timezone  ``ep_TempForTimeZone`` vary over all timezones.
+        * On line 4,5 the call to :aimms:func:`TimeSlotToString` converts the calendar element ``i_workBlock`` to the timezone ``ep_TempForTimeZone``.
+
+        * Line 2 lets the timezone  ``ep_TempForTimeZone`` vary over all timezones.
 
     #.  Once, we have this string, extracting the starting hour from that string is straightforward.
 
@@ -173,7 +173,7 @@ The procedure ``pr_determineCostCoefficients`` to compute the cost ``p_cost(i_Em
             p_workblockTimezoneToStartHour(i_workBlock, IndexTimeZones)  := 
                 val( substring( sp_workblockTimezoneToStartHour(i_workBlock, IndexTimeZones), 12, 13 ) );
 
-    #.  Based on the starting hour, we determine the shift.
+    #.  Based on the starting hour of each timezone, we determine the shift:
 
         .. code-block:: aimms
             :linenos:
@@ -201,14 +201,6 @@ The procedure ``pr_determineCostCoefficients`` to compute the cost ``p_cost(i_Em
     .. code-block:: aimms
         :linenos:
 
-        Parameter p_CostPerShift {
-            IndexDomain: i_shift;
-            Definition: data { day : 1, evening : 1.25, night: 1.4 };
-        }
-
-    .. code-block:: aimms
-        :linenos:
-
         p_cost(i_Employee, i_workBlock) :=
             ( 3 + p_noCertifications(i_Employee) ) * 
             p_CostPerShift(
@@ -221,7 +213,17 @@ The procedure ``pr_determineCostCoefficients`` to compute the cost ``p_cost(i_Em
 
     * On line 4: Computed in the first part of cost coeff proc
 
-    * On line 5: Input data
+    * On line 5: The timezone of an employee is input data
+
+    Where the cost per shift is specified as:
+
+    .. code-block:: aimms
+        :linenos:
+
+        Parameter p_CostPerShift {
+            IndexDomain: i_shift;
+            Definition: data { day : 1, evening : 1.25, night: 1.4 };
+        }
 
 Data exchange
 --------------
@@ -281,31 +283,31 @@ User Interface
 The user interface is the pillar of the application that is most impacted by the multi-timezone aspect
 of such applications.   
 The WebUI offers several features to support the development of multi-timezone user interfaces.
-Central to this support are a few sets and parameters defined in the WebUI library. Let's discuss these first.
+Central to this support are a few sets and parameters defined in the WebUI library. Let's discuss these sets and parameters first.
 
-Sets and parameters for handling timezone
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+WebUI sets and parameters for handling multi-timezone applications
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-``webui::DisplayTimeZone``
+The element parameter ``webui::DisplayTimeZone``
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+The timezone according to which data is displayed in the browser is the ``webui::DisplayTimeZone``.  
+In the running example, this parameter is initialized to the timezone ``'UTC'``, because the application is designed to enable discussion between experts around the globe.
+
+
+The set ``webui::DisplayTimeZones``
 """"""""""""""""""""""""""""""""""""""
 
-The timezone according to which data is displayed is the ``webui::DisplayTimeZone``.  
-In the running example, this parameter is initialized to the timezone ``'UTC'``, because the application is designed to enable discussion between experts around the globe:
-
-
-``webui::DisplayTimeZones``
-""""""""""""""""""""""""""""""""""""""
-
-The range of this element parameter is the set ``webui::DisplayTimeZones``. 
+The range of the element parameter ``webui::DisplayTimeZone`` is the set ``webui::DisplayTimeZones``. 
 In the running example, the good practice is followed to limit the choices of the user to the relevant ones by limiting this set to:
 
-#.  The timezones where the experts live
+#.  The timezones where the experts are located
 
 #.  The model timezone
 
 #.  The database timezone
 
-After reading the timezones of the employees in the input in ``PostMainInitialization``:
+After reading the timezones of the employees in the input in ``PostMainInitialization`` the set ``webui::DisplayTimeZones`` is assigned as follows:
 
 .. code-block:: aimms
     :linenos:
@@ -315,18 +317,18 @@ After reading the timezones of the employees in the input in ``PostMainInitializ
         + ep_modelTimezone + ep_databaseTimezone ;
 
 
-``webui::TimeZoneChangeHook``
-""""""""""""""""""""""""""""""""
+The element parameter ``webui::TimeZoneChangeHook``
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 The uponchange procedure for this element parameter can be overriden by ``webui::TimeZoneChangeHook``.
 In the example, the procedure ``pr_uponChangeDisplayTimeZone`` is used, which just updates the string parameter ``sp_datetimeFormat`` (see below) after a change of timezone to the local date time formatting.
 
-``webui::ApplicationConvention``
-""""""""""""""""""""""""""""""""""""
+The element parameter ``webui::ApplicationConvention``
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 The dates are formatted using the ``webui::ApplicationConvention``. 
 In the running example, this parameter is initialized to ``'cnv_WebUI'``. 
-This convention uses a string parameter to avoid having to define a date format specific convention for every timezone relevant to the application.
+This convention uses a string parameter to avoid having to define a separate convention for every timezone relevant to the application.
 
 .. code-block:: aimms
     :linenos:
@@ -360,18 +362,17 @@ You can enable this widget via the Application settings / Application Extensions
 .. image:: images/EnableTimezoneSelector.png
     :align: center
 
-By enabling the ``Time Zone Setting``, in the right lower corner of the entire browser window a small globe appears.  
-Clicking this globe, shows the timezone currently selected.
+By enabling the ``Time Zone Setting`` a small globe appears in the right lower corner of the entire browser window .  Clicking this globe, shows the timezone currently selected.
 
 .. image:: images/ExpandedTimezoneSelector.png
     :align: center
 
-The shown timezone is actually a dropdown that permits to select another timezone:
+The shown timezone is actually a drop up that permits to select another timezone:
 
 .. image:: images/SelectingTimezoneUsingTimezoneSelector.png
     :align: center
 
-Note that the choices offered is defined by the set ``webui::DisplayTimeZones`` discussed above.
+Note that the choices offered is controlled by the set ``webui::DisplayTimeZones`` which we limited above.
 
 Clicking the globe a second time makes its dialog disappear.
 
@@ -380,31 +381,99 @@ Tables
 
 The first data widget is a table containing, per employee, a sequence of start moments of tasks.
 
+    #.  Using UTC:
+
+        .. image:: images/TableContainingTimeslots.png
+            :align: center
+
+    #.  Using timezone Irkutsk:
+
+        .. image:: images/TableContainingTimeslotsIrkutsk.png
+            :align: center
+
+The above two images show that both the
+
+    #.  The specific values
+
+    #.  The formatting of those values
+
+changes by changing the timezone.
 
 Date time picker for calendar elements
 """"""""""""""""""""""""""""""""""""""""
 
 Clicking a date in this table, pops up a date time picker. 
 
-
-.. image:: images/SelectingTimezoneUsingTimezoneSelector.png
+.. image:: images/dateTimePickerDate.png
     :align: center
 
+Clicking the clock icon in the right lower of this dialog gives a time selector:
 
+.. image:: images/dateTimePickerTime.png
+    :align: center
 
 To enable all timezones to be handled the calendars are defined in blocks of 240 minutes instead of 4 hours making the granularity of the timeslots shown minute instead of hour. 
 The date time picker thus shows both hours and minutes, instead of just hours when clicking the clock in the lower left corner.
 
+To get back to the date selector, click the calendar icon in the lower left of this dialog.
+
+Further information about the date time picker can be found .... (ref to documentation).
+
 Gantt charts
 ^^^^^^^^^^^^^^
 
-* Four available timezones, and four available conventions!
-* also setting webui timezone, how.
-* screen shots.
-* table subsection
-* gantt subsection
-* Use webui::TimeZoneChangeHook (set convention based on date/time format locally).
-* German date format: dd.mm.yyyy
+Using the following Gantt Chart specification
+
+.. image:: images/GCEmployeePlanningDef.png
+    :align: center
+
+It shows in UTC:
+
+.. image:: images/GCEmployeePlanningExample.png
+    :align: center
+
+It shows in Brazil timezone
+
+.. image:: images/GCEmployeePlanningBrazil.png
+    :align: center
+
+The refernce time is defined as follows:
+
+.. code-block:: aimms
+    :linenos:
+
+    StringParameter sp_GanttChartReferenceTime {
+        Definition: {
+            !TimeSlotToString(
+            !   "%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)|\"\"|\" DST\"|",
+            !   cal_Slots,first(cal_Slots))
+            ConvertReferenceDate(
+                ReferenceDate :  formatString("%e",first(cal_Slots)), 
+                FromTZ        :  ep_modelTimezone, 
+                ToTZ          :  webui::WebApplicationTimeZone, 
+                IgnoreDST     :  0)
+        }
+        Comment: "timeslotToString";
+    }
+    
+.. note:: Not sure why TimeSlotToString doesn't work here, it works at other places!
+
+Once we have ``sp_GanttChartReferenceTime`` we can define the start of each job shown as follows:
+
+.. code-block:: aimms
+    :linenos:
+
+    Parameter p_EmployeeJobStart {
+        IndexDomain: (i_Employee,i_workBlock) | p01_employeeWorking(i_Employee, i_workBlock);
+        Unit: hour;
+        Definition: {
+            ! The Gantt Chart reference time and the start of the job (in UTC)
+            
+            StringToMoment( 
+                "%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)", [hour], sp_GanttChartReferenceTime, 
+                TimeslotToString("%c%y-%m-%d %H:%M%TZ('UTC')", cal_workBlocks, i_workBlock))
+        }
+    }
 
 Further reading
 ------------------

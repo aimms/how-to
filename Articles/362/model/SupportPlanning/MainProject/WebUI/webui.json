@@ -41,6 +41,9 @@
     },
     "timezone.setting": {
       "literal": true
+    },
+    "widget.visibility.greyout": {
+      "literal": false
     }
   },
   "pages/home": {
@@ -113,10 +116,19 @@
           }
         },
         {
-          "uri": "selectTimezone",
+          "uri": "debugscalars",
           "layoutInfo": {
-            "width": "2",
-            "height": "1"
+            "width": "3",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "debugtable",
+          "layoutInfo": {
+            "width": "10",
+            "height": "3",
+            "customPosition": ""
           }
         }
       ]
@@ -151,6 +163,70 @@
           }
         }
       ]
+    }
+  },
+  "widgets/debugscalars": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_datetimeFormat",
+          "sp_GanttChartReferenceTime"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Debug scalars"
+    },
+    "widget.visible": {
+      "aimms": {
+        "contents": [
+          "p01_debug"
+        ]
+      }
+    }
+  },
+  "widgets/debugtable": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_EmployeeJobStart"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_Employee"
+        ],
+        "colHeader": [
+          "i_workBlock"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "default.column.width": {
+      "literal": 30
+    },
+    "show.units": {
+      "literal": 0
+    },
+    "widget.visible": {
+      "aimms": {
+        "contents": [
+          "p01_debug"
+        ]
+      }
     }
   },
   "widgets/EmployeePlanning": {
@@ -206,22 +282,6 @@
     },
     "title": {
       "literal": "Employee planning"
-    }
-  },
-  "widgets/selectTimezone": {
-    "aimms.widget.type": {
-      "literal": "scalar"
-    },
-    "contents": {
-      "aimms": {
-        "contents": [
-          "webui::DisplayTimeZone",
-          "webui::WebApplicationTimeZone"
-        ]
-      }
-    },
-    "title": {
-      "literal": "Timezone selector"
     }
   },
   "widgets/SkillCoverage": {

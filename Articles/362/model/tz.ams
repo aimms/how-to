@@ -1,0 +1,26 @@
+## ams_version=1.0
+
+Section Section_1 {
+	Convention cnv_utc {
+		TimeslotFormat: {
+			cal_Slots      : "%c%y-%m-%d %H:%M%TZ(ep_tzUTC)",
+			cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(ep_tzUTC)"
+		}
+		Comment: "\"%c%y-%m-%d %H:%M%TZ(\'UTC\')\"";
+	}
+	Convention cnv_newZealand {
+		TimeslotFormat: {
+			cal_Slots      : "%c%y-%m-%d %H:%M%TZ(ep_tzNewZealand)",
+			cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(ep_tzNewZealand)"
+		}
+		Comment: "\"%c%y-%m-%d %H:%M%TZ(\'UTC\')\"";
+	}
+	ElementParameter ep_tzNewZealand {
+		Range: AllTimeZones;
+		Definition: 'New Zealand Standard Time';
+	}
+	ElementParameter ep_tzUTC {
+		Range: AllTimeZones;
+		Definition: 'UTC';
+	}
+}

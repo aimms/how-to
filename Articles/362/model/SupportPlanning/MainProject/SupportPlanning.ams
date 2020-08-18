@@ -3,8 +3,20 @@
 Model Main_SupportPlanning {
 	Convention: cnv_model;
 	Section WebUI_use {
+		Parameter p01_debug {
+			InitialData: 0;
+		}
 		StringParameter sp_GanttChartReferenceTime {
-			Definition: TimeSlotToString("%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)",cal_Slots,first(cal_Slots));
+			Definition: {
+				!TimeSlotToString(
+				!	"%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)|\"\"|\" DST\"|",
+				!	cal_Slots,first(cal_Slots))
+				ConvertReferenceDate(
+					ReferenceDate :  formatString("%e",first(cal_Slots)), 
+					FromTZ        :  ep_modelTimezone, 
+					ToTZ          :  webui::WebApplicationTimeZone, 
+					IgnoreDST     :  0)
+			}
 			Comment: "timeslotToString";
 		}
 		Parameter p01_employeeWorking {
@@ -17,14 +29,28 @@ Model Main_SupportPlanning {
 			Definition: first( cal_workBlocks );
 		}
 		StringParameter sp_EmpPlanViewportStart {
-			Definition: TimeslotToString("%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)", cal_workBlocks, ep_EmpPlanViewportStart);
+			Definition: {
+				!TimeslotToString("%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)", cal_workBlocks, ep_EmpPlanViewportStart)
+				ConvertReferenceDate(
+					ReferenceDate :  formatString("%e",ep_EmpPlanViewportStart), 
+					FromTZ        :  ep_modelTimezone, 
+					ToTZ          :  webui::WebApplicationTimeZone, 
+					IgnoreDST     :  0)
+			}
 		}
 		ElementParameter ep_EmpPlanViewportEnd {
 			Range: cal_workBlocks;
 			Definition: last( cal_workBlocks );
 		}
 		StringParameter sp_EmpPlanViewportEnd {
-			Definition: TimeslotToString("%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)", cal_workBlocks, ep_EmpPlanViewportEnd);
+			Definition: {
+				!TimeslotToString("%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)", cal_workBlocks, ep_EmpPlanViewportEnd)
+				ConvertReferenceDate(
+					ReferenceDate :  formatString("%e",ep_EmpPlanViewportEnd), 
+					FromTZ        :  ep_modelTimezone, 
+					ToTZ          :  webui::WebApplicationTimeZone, 
+					IgnoreDST     :  0)
+			}
 		}
 		StringParameter sp_datetimeFormat {
 			Definition: sp_datetimeFormats(webui::WebApplicationTimeZone);
@@ -57,6 +83,8 @@ Model Main_SupportPlanning {
 		Procedure pr_uponChangeDisplayTimeZone {
 			Body: {
 				update sp_datetimeFormat ;
+				!update sp_GanttChartReferenceTime;
+				!update p_EmployeeJobStart ;
 			}
 		}
 		Section actions {
@@ -94,6 +122,8 @@ Model Main_SupportPlanning {
 				IndexDomain: (i_Employee,i_workBlock) | p01_employeeWorking(i_Employee, i_workBlock);
 				Unit: hour;
 				Definition: {
+					! The Gantt Chart reference time and the start of the job (in UTC)
+					
 					StringToMoment( 
 						"%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)", [hour], sp_GanttChartReferenceTime, 
 						TimeslotToString("%c%y-%m-%d %H:%M%TZ('UTC')", cal_workBlocks, i_workBlock))

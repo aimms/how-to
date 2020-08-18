@@ -1,0 +1,17 @@
+meeting notes
+
+convention without quotes in assignment?
+
+no string parameter.
+
+Use DST.
+Make a difference between DST and non-DST in the user interface.
+webapplicationtimezone should be used. (Done).
+
+datetime data type for database example.
+
+initialize displaytimezones with relevant ones.
+
+* Explain continuous scrolling.
+
+* workblocks in minutes (instead of hours). (Done).
