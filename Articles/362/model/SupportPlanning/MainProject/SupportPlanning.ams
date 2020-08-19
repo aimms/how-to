@@ -8,9 +8,6 @@ Model Main_SupportPlanning {
 		}
 		StringParameter sp_GanttChartReferenceTime {
 			Definition: {
-				!TimeSlotToString(
-				!	"%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)|\"\"|\" DST\"|",
-				!	cal_Slots,first(cal_Slots))
 				ConvertReferenceDate(
 					ReferenceDate :  formatString("%e",first(cal_Slots)), 
 					FromTZ        :  ep_modelTimezone, 
@@ -30,7 +27,6 @@ Model Main_SupportPlanning {
 		}
 		StringParameter sp_EmpPlanViewportStart {
 			Definition: {
-				!TimeslotToString("%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)", cal_workBlocks, ep_EmpPlanViewportStart)
 				ConvertReferenceDate(
 					ReferenceDate :  formatString("%e",ep_EmpPlanViewportStart), 
 					FromTZ        :  ep_modelTimezone, 
@@ -44,7 +40,6 @@ Model Main_SupportPlanning {
 		}
 		StringParameter sp_EmpPlanViewportEnd {
 			Definition: {
-				!TimeslotToString("%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)", cal_workBlocks, ep_EmpPlanViewportEnd)
 				ConvertReferenceDate(
 					ReferenceDate :  formatString("%e",ep_EmpPlanViewportEnd), 
 					FromTZ        :  ep_modelTimezone, 
@@ -118,16 +113,16 @@ Model Main_SupportPlanning {
 			}
 		}
 		Section Planning_Employees {
+			StringParameter sp_titlePlanningEmployees {
+				Definition: {
+					FormatString("Employee planning in timezone %s",  
+						webui::ActualLocaleTimeZoneDisplayName( webui::DisplayTimeZone ) );
+				}
+			}
 			Parameter p_EmployeeJobStart {
 				IndexDomain: (i_Employee,i_workBlock) | p01_employeeWorking(i_Employee, i_workBlock);
 				Unit: hour;
-				Definition: {
-					! The Gantt Chart reference time and the start of the job (in UTC)
-					
-					StringToMoment( 
-						"%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)", [hour], sp_GanttChartReferenceTime, 
-						TimeslotToString("%c%y-%m-%d %H:%M%TZ('UTC')", cal_workBlocks, i_workBlock))
-				}
+				Definition: ( ord( i_workBlock ) - 1 ) * 4[hour];
 			}
 			Parameter p_EmployeeJobDuration {
 				IndexDomain: (i_Employee,i_workBlock) | p01_employeeWorking(i_Employee, i_workBlock);
@@ -141,6 +136,12 @@ Model Main_SupportPlanning {
 			}
 		}
 		Section Covering_skills {
+			StringParameter sp_titleSkillCoverage {
+				Definition: {
+					FormatString("Starting times per employee in timezone %s", 
+						webui::ActualLocaleTimeZoneDisplayName( webui::DisplayTimeZone ) );
+				}
+			}
 			ElementParameter ep_EmployeeCoveringSkill {
 				IndexDomain: (i_certification,i_workBlock);
 				Range: s_Employees;
@@ -199,6 +200,12 @@ Model Main_SupportPlanning {
 			}
 		}
 		Section Job_table {
+			StringParameter sp_titleJobTable {
+				Definition: {
+					FormatString("Starting times per employee in timezone \"%s\"", 
+						webui::ActualLocaleTimeZoneDisplayName( webui::DisplayTimeZone ) );
+				}
+			}
 			Set s_JobNos {
 				SubsetOf: Integers;
 				Index: i_jobNo;
@@ -212,7 +219,9 @@ Model Main_SupportPlanning {
 			Procedure pr_AssignJobsToWorkblocks {
 				Body: {
 					ep_lastAssignedJobNo(i_Employee) := '0' ;
-					for (i_Employee, i_workBlock) | p01_employeeWorking(i_Employee, i_workBlock) do
+					for (i_Employee, i_workBlock) | 
+						p01_employeeWorking(i_Employee, i_workBlock) and 
+						( not p01_employeeWorking(i_Employee, i_workBlock - 1 ) ) do
 						ep_lastAssignedJobNo(i_Employee) += 1 ;
 						ep_Job( i_Employee, ep_lastAssignedJobNo(i_Employee) ) := i_workBlock ;
 					endfor ;

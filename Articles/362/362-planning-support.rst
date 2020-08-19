@@ -1,13 +1,34 @@
-Multi-timezone applications 
+Multi timezone applications 
 ============================
 
-A multi-timezone application is an application whereby 
+International organizations have offices around the world. 
+Staff from multiple offices may be cooperating to create operational plans.
+Such a plan may include the time of day information (timestamp) to start certain tasks.
+
+Clearly, the timezone for each timestamp needs to be clear. 
+But which timezone to use, that of the planner, that of the executor, that of some manager or director?
+
+An application that supports a global team to manage and use an operational plan 
+is an example of a multi timezone application.
+
+AIMMS offers a variety of features for implementing multi timezone applications.
+In this article, an overview of these features is presented together 
+with a practical approach of using these features.
+
+The running example of this article is an application whereby the multi time zone aspect surfaces 
+in each of the three pillars of application building. 
+
+definition
+-----------
+
+A multi timezone application is an application whereby 
 
 #.  users and/or data sources are located in different timezones, and 
 
 #.  the time of day is relevant to the information handled by the application.
 
-The multi-timezone aspect of such applications may play a role in the following pillars of that application:
+The multi timezone aspect of such an application plays a role in one or more of the following 
+pillars of that application:
 
 #.  The modeling 
 
@@ -15,39 +36,39 @@ The multi-timezone aspect of such applications may play a role in the following 
 
 #.  The user interface
 
-AIMMS offers a variety of features for handling multi-timezone applications.
-In this article, an overview of these features is presented together with a practical approach of using these features.
-
-The running example of this article is an application whereby the multi-timezone aspect surfaces in each of the three pillars of application building. The use case of this running example is described as follows:
+The use case of this running example is described as follows:
 
 The running example
 ----------------------
 
-To provide 24/7 expert support on (near) incidents of expensive equipment, there are three support locations: 
+To provide 24/7 expert support on (near) incidents of expensive equipment, 
+there are three support locations: 
 
-#. Irkutsk, Russia,
+#. Irkutsk, Russia (no daylight saving),
 
-#. Hamburg, Germany, and 
+#. Hamburg, Germany (daylight saving roughly during March-October), and 
 
-#. Sao Paolo, Brazil.  
+#. Sao Paolo, Brazil (daylight saving roughly during October-March).  
 
 At each location, there are some experts available willing to answer questions on this expensive equipment.
-The certification of an expert determines which questions that expert can handle.
+The certification of an expert determines which questions that the expert can handle.
 There are five certifications, lettered 'a' to 'e'; and each expert has one or more of these certifications.
 
-Note that when two employees are working at the same moment, but located at different places on the globe, one might be in a day shift, while the other might be in a night shift. 
+Note that when two employees are working at the same moment, but located at different places on the globe, 
+one might be on a day shift, while the other might be on a night shift. 
 To reduce work pressure and cost, the number of evening and night shifts for these experts is minimized. 
 
 Modeling
 ^^^^^^^^^^^^
 
-The schedule should meet the following requirements:
+The schedule meets the following requirements:
 
 #.  There is always an expert available for each certification.
 
 #.  Each expert is scheduled at most once a day, at least once a week, and at most five times a week.
 
-#.  The number of experts scheduled for a particular hour, is at least the number of simultaneous calls expected for that hour.
+#.  The number of experts scheduled for a particular hour, 
+    is at least the number of simultaneous calls expected for that hour.
 
 The number of evening and night shifts of these experts is minimized.
 
@@ -59,7 +80,10 @@ The expected demand per hour is stored with respect to the timezone ``'New Zeala
 User interface
 ^^^^^^^^^^^^^^^^^^^^
 
-When multiple users discuss the planning created, the Gantt Chart is shown and shared, using the timezone ``'UTC'``. However, when a particular user, or a team within one timezone discusses the planning, this is done with respect to the local timezone including daylight saving (if any).
+When multiple users discuss the planning created, 
+the Gantt Chart is shown and shared, using the timezone ``'UTC'``. 
+However, when a particular user or a team within one timezone discusses the planning, 
+this is done with respect to the local timezone including daylight saving (if any).
 
 To play around with this example, you can download it :download:`here <model/SupportPlanning.zip>` 
 
@@ -78,25 +102,29 @@ The requirements for timezone handling of each of these parts are different.
     Therefore, multiple timezones will be used in the user interface.
 
 #.  For the data sources, the timezone in which the data is presented is usually defined externally.
-    Therefore, there may be zero, one or more timezones relevant here as well.
+    Therefore, there may be zero, one, or more timezones relevant here as well.
 
 #.  The model is the component that communicates with both the user interface and with data sources.
-    The collection of timezones may change over time as the users, and perhaps also the data sources, will vary over time. 
+    The collection of timezones may change over time as the users, and perhaps also the data sources, 
+    will vary over time. 
 
-    When the data of the model is stored using multiple timezones, data management and communication with user interface and data sources becomes complicated. 
-    A good practice is therefore to choose one timezone as a reference timezone, and store all data with respect to this timezone. 
+    When the data of the model is stored using multiple timezones, 
+    data management and communication with user interface and data sources become complicated. 
+    A good practice is therefore to choose one timezone as a reference and store all data with respect to this timezone. 
+    In the following, we will call this the model timezone.
 
     As all timezones are defined in terms of UTC, it is good practice to use UTC as the model timezone.
 
 Modeling
 -----------
 
-In this section, at the implementation level, the multi-timezone aspects of the AIMMS model are described.
+In this section, at the implementation level, the multi timezone aspects of the AIMMS model are described.
 
-Formalizing the modeling timezone
+The modeling timezone
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As described above, we choose one timezone in the model, and name it ``ep_modelTimezone``.
+In addition, we fix upfront the choice: UTC.
 
 .. code-block:: aimms
     :linenos:
@@ -106,7 +134,8 @@ As described above, we choose one timezone in the model, and name it ``ep_modelT
         Definition: 'UTC';
     }
 
-To specify that all time related data is using the UTC timezone and using the standard AIMMS time format, the following convention is used:
+To specify that all time related data is using the UTC timezone and using the standard AIMMS time format, 
+the following convention is used:
 
 .. code-block:: aimms
     :linenos:
@@ -137,9 +166,13 @@ The WebUI is notified of the model timezone as follows in ``PostMainInitializati
 The mathematical programming problem
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This is a rostering problem, and constraints similar to rostering apply, see :doc:`rostering using constraint programming article<../137/137-Small-Rostering>` and `wikipedia <https://en.wikipedia.org/wiki/Nurse_scheduling_problem>`_ and are not discussed here.
+This is a rostering problem, and constraints similar to rostering apply, 
+see :doc:`rostering using constraint programming article<../137/137-Small-Rostering>` and 
+`wikipedia <https://en.wikipedia.org/wiki/Nurse_scheduling_problem>`_ . 
+The actual rostering problem is not discussed here.
 
-The multi-timezone aspect of the mathematical programming problems surfaces in the definition of the cost coefficients.
+The multi timezone aspect of the mathematical programming problems surfaces in 
+the definition of the cost coefficients.
 Different costs are associated with different employees executing a particular shift.
 In the running example, this cost computation is handled in the section ``determining_cost_coefficients``.
 
@@ -280,12 +313,12 @@ Once the convention is defined, all tables with time of day information can use 
 User Interface
 --------------
 
-The user interface is the pillar of the application that is most impacted by the multi-timezone aspect
+The user interface is the pillar of the application that is most impacted by the multi timezone aspect
 of such applications.   
-The WebUI offers several features to support the development of multi-timezone user interfaces.
+The WebUI offers several features to support the development of multi timezone user interfaces.
 Central to this support are a few sets and parameters defined in the WebUI library. Let's discuss these sets and parameters first.
 
-WebUI sets and parameters for handling multi-timezone applications
+WebUI sets and parameters for handling multi timezone applications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The element parameter ``webui::DisplayTimeZone``
@@ -320,15 +353,18 @@ After reading the timezones of the employees in the input in ``PostMainInitializ
 The element parameter ``webui::TimeZoneChangeHook``
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-The uponchange procedure for this element parameter can be overriden by ``webui::TimeZoneChangeHook``.
-In the example, the procedure ``pr_uponChangeDisplayTimeZone`` is used, which just updates the string parameter ``sp_datetimeFormat`` (see below) after a change of timezone to the local date time formatting.
+The uponchange procedure for this element parameter can be modified via ``webui::TimeZoneChangeHook``.
+In the example, the procedure ``pr_uponChangeDisplayTimeZone`` is used, 
+which just updates the string parameter ``sp_datetimeFormat`` 
+(see below) after a change of timezone to the local date-time formatting.
 
 The element parameter ``webui::ApplicationConvention``
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 The dates are formatted using the ``webui::ApplicationConvention``. 
 In the running example, this parameter is initialized to ``'cnv_WebUI'``. 
-This convention uses a string parameter to avoid having to define a separate convention for every timezone relevant to the application.
+This convention uses a string parameter to avoid having to define a separate 
+convention for every timezone relevant to the application.
 
 .. code-block:: aimms
     :linenos:
@@ -349,7 +385,9 @@ where
         Definition: sp_datetimeFormats(webui::WebApplicationTimeZone);
     }
 
-Here ``webui::WebApplicationTimeZone`` is a convenient helper element parameter that is the same as ``webui::DisplayTimeZone`` except when the latter is empty. In the example, the data for ``sp_datetimeFormats`` is read in together with the data for the certifications.
+Here ``webui::WebApplicationTimeZone`` is a convenient helper element parameter that 
+is the same as ``webui::DisplayTimeZone`` except when the latter is empty. 
+In the example, the data for ``sp_datetimeFormats`` is read in together with the data for the certifications.
 
 
 
@@ -362,7 +400,8 @@ You can enable this widget via the Application settings / Application Extensions
 .. image:: images/EnableTimezoneSelector.png
     :align: center
 
-By enabling the ``Time Zone Setting`` a small globe appears in the right lower corner of the entire browser window .  Clicking this globe, shows the timezone currently selected.
+By enabling the ``Time Zone Setting`` a small globe appears in the right lower corner of the entire browser window.  
+Clicking this globe shows the timezone currently selected.
 
 .. image:: images/ExpandedTimezoneSelector.png
     :align: center
@@ -381,28 +420,35 @@ Tables
 
 The first data widget is a table containing, per employee, a sequence of start moments of tasks.
 
-    #.  Using UTC:
+    #.  Using timezone UTC:
 
         .. image:: images/TableContainingTimeslots.png
             :align: center
+            
+        The second job of 'ha1' starts on ``2020-08-18 08:00`` in timezone ``'UTC'``.
 
-    #.  Using timezone Irkutsk:
+    #.  Using timezone ``'W. Europe Standard Time'``:
 
-        .. image:: images/TableContainingTimeslotsIrkutsk.png
+        .. image:: images/TableContainingTimeslotsHamburg.png
             :align: center
 
-The above two images show that both the
+        The employee is german, and his local timezone is ``'W. Europe Standard Time'``.
+        According to that timezone, his second job starts on ``18.08.2020 10:00 DST``.
 
-    #.  The specific values
+Thus there are changes in:
 
-    #.  The formatting of those values
+    #.  The specific values, for instance, the hour number changes from 08 to 10.
+        This is due to the change in timezone, see ``'webui::DisplayTimeZone'``
 
-changes by changing the timezone.
+    #.  The formatting, the date changes from YMD order to DMY order and there is a daylight saving indicator.
+        This is due to the change in date formatting, see ``'sp_datetimeFormat'``
+
+
 
 Date time picker for calendar elements
 """"""""""""""""""""""""""""""""""""""""
 
-Clicking a date in this table, pops up a date time picker. 
+Clicking a date in this table pops up a date time picker. 
 
 .. image:: images/dateTimePickerDate.png
     :align: center
@@ -427,53 +473,45 @@ Using the following Gantt Chart specification
 .. image:: images/GCEmployeePlanningDef.png
     :align: center
 
-It shows in UTC:
-
-.. image:: images/GCEmployeePlanningExample.png
-    :align: center
-
-It shows in Brazil timezone
-
-.. image:: images/GCEmployeePlanningBrazil.png
-    :align: center
-
-The refernce time is defined as follows:
+Here the reference time is defined as follows:
 
 .. code-block:: aimms
     :linenos:
 
     StringParameter sp_GanttChartReferenceTime {
         Definition: {
-            !TimeSlotToString(
-            !   "%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)|\"\"|\" DST\"|",
-            !   cal_Slots,first(cal_Slots))
             ConvertReferenceDate(
                 ReferenceDate :  formatString("%e",first(cal_Slots)), 
                 FromTZ        :  ep_modelTimezone, 
                 ToTZ          :  webui::WebApplicationTimeZone, 
                 IgnoreDST     :  0)
         }
-        Comment: "timeslotToString";
     }
-    
-.. note:: Not sure why TimeSlotToString doesn't work here, it works at other places!
 
-Once we have ``sp_GanttChartReferenceTime`` we can define the start of each job shown as follows:
+The begin and end of the viewport have similar definitions.
 
-.. code-block:: aimms
-    :linenos:
+The Gantt Chart looks as follows when selecting timezone UTC:
 
-    Parameter p_EmployeeJobStart {
-        IndexDomain: (i_Employee,i_workBlock) | p01_employeeWorking(i_Employee, i_workBlock);
-        Unit: hour;
-        Definition: {
-            ! The Gantt Chart reference time and the start of the job (in UTC)
-            
-            StringToMoment( 
-                "%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)", [hour], sp_GanttChartReferenceTime, 
-                TimeslotToString("%c%y-%m-%d %H:%M%TZ('UTC')", cal_workBlocks, i_workBlock))
-        }
-    }
+.. image:: images/GCEmployeePlanningExample.png
+    :align: center
+
+and when selecting timezone ``'W. Europe Standard Time'`` it looks as follows:
+
+.. image:: images/GCEmployeePlanningHamburg.png
+    :align: center
+
+Note that the 
+
+#.  The timeline on top of the Gantt Chart adapts itself to the selected timezone as expected.
+
+#.  The Now line, indicating the current moment, itself does not move.
+
+#.  The Now area, indicating today, does move. 
+
+#.  Default tooltips adapt themselves according to the selected timezone. 
+    This is achieved similarly as the adaptation to the timezone of 
+    the elements shown in the table as presented in the above subsection.
+
 
 Further reading
 ------------------
