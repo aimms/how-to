@@ -42,6 +42,9 @@
     "timezone.setting": {
       "literal": true
     },
+    "timezonesetting": {
+      "literal": true
+    },
     "widget.visibility.greyout": {
       "literal": true
     }
@@ -96,7 +99,7 @@
           "uri": "startWork",
           "layoutInfo": {
             "width": "10",
-            "height": "4",
+            "height": "2",
             "customPosition": ""
           }
         },

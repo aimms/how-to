@@ -3,15 +3,12 @@
 Model Main_SupportPlanning {
 	Convention: cnv_model;
 	Section WebUI_use {
-		Parameter p01_debug {
-			InitialData: 0;
-		}
 		StringParameter sp_GanttChartReferenceTime {
 			Definition: {
 				ConvertReferenceDate(
 					ReferenceDate :  formatString("%e",first(cal_Slots)), 
 					FromTZ        :  ep_modelTimezone, 
-					ToTZ          :  webui::WebApplicationTimeZone, 
+					ToTZ          :  webui::DisplayTimeZone, 
 					IgnoreDST     :  0)
 			}
 			Comment: "timeslotToString";
@@ -30,7 +27,7 @@ Model Main_SupportPlanning {
 				ConvertReferenceDate(
 					ReferenceDate :  formatString("%e",ep_EmpPlanViewportStart), 
 					FromTZ        :  ep_modelTimezone, 
-					ToTZ          :  webui::WebApplicationTimeZone, 
+					ToTZ          :  webui::DisplayTimeZone, 
 					IgnoreDST     :  0)
 			}
 		}
@@ -43,41 +40,26 @@ Model Main_SupportPlanning {
 				ConvertReferenceDate(
 					ReferenceDate :  formatString("%e",ep_EmpPlanViewportEnd), 
 					FromTZ        :  ep_modelTimezone, 
-					ToTZ          :  webui::WebApplicationTimeZone, 
+					ToTZ          :  webui::DisplayTimeZone, 
 					IgnoreDST     :  0)
 			}
 		}
-		StringParameter sp_datetimeFormat {
-			Definition: sp_datetimeFormats(webui::WebApplicationTimeZone);
-			Comment: {
-				"if webui::DisplayTimeZone = \'W. Europe Standard Time\' then 
-					\"%d.%m.%c%y %H:%M%TZ(webui::WebApplicationTimeZone)|\\\"\\\"|\\\" DST\\\"|\"
-				elseif webui::DisplayTimeZone = \'North Asia East Standard Time\' then
-					\"%d.%m.%c%y %H:%M%TZ(webui::WebApplicationTimeZone)|\\\"\\\"|\\\" DST\\\"|\"
-				elseif webui::DisplayTimeZone = \'Central Brazilian Standard Time\' then
-					\"%d/%m/%c%y %H:%M%TZ(webui::WebApplicationTimeZone)|\\\"\\\"|\\\" DST\\\"|\"
-				else
-					\"%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)|\\\"\\\"|\\\" DST\\\"|\"
-				endif"
-			}
+		StringParameter sp_datetimeFormatWebUI {
+			Definition: sp_datetimeFormatsWebUI(webui::DisplayTimeZone);
 		}
-		StringParameter sp_datetimeFormats {
+		StringParameter sp_datetimeFormatsWebUI {
 			IndexDomain: indexTimeZones;
-			Default: "%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)|\"\"|\" DST\"|";
+			Default: "%c%y-%m-%d %H:%M%TZ(webui::DisplayTimeZone)|\"\"|\" DST\"|";
 		}
 		Convention cnv_WebUI {
 			TimeslotFormat: {
-				cal_Slots      : sp_datetimeFormat,
-				cal_workBlocks : sp_datetimeFormat
-			}
-			Comment: {
-				"cal_Slots      : \"%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)\",
-				cal_workBlocks : \"%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)\""
+				cal_Slots      : sp_datetimeFormatWebUI,
+				cal_workBlocks : sp_datetimeFormatWebUI
 			}
 		}
 		Procedure pr_uponChangeDisplayTimeZone {
 			Body: {
-				update sp_datetimeFormat ;
+				update sp_datetimeFormatWebUI ;
 				!update sp_GanttChartReferenceTime;
 				!update p_EmployeeJobStart ;
 			}
@@ -210,7 +192,7 @@ Model Main_SupportPlanning {
 				SubsetOf: Integers;
 				Index: i_jobNo;
 				Property: ElementsAreLabels;
-				Definition: ElementRange(0,99);
+				Definition: ElementRange(1,5);
 			}
 			ElementParameter ep_Job {
 				IndexDomain: (i_Employee,i_jobNo);
@@ -218,12 +200,12 @@ Model Main_SupportPlanning {
 			}
 			Procedure pr_AssignJobsToWorkblocks {
 				Body: {
-					ep_lastAssignedJobNo(i_Employee) := '0' ;
+					ep_lastAssignedJobNo(i_Employee) := '1' ;
 					for (i_Employee, i_workBlock) | 
 						p01_employeeWorking(i_Employee, i_workBlock) and 
 						( not p01_employeeWorking(i_Employee, i_workBlock - 1 ) ) do
-						ep_lastAssignedJobNo(i_Employee) += 1 ;
 						ep_Job( i_Employee, ep_lastAssignedJobNo(i_Employee) ) := i_workBlock ;
+						ep_lastAssignedJobNo(i_Employee) += 1 ;
 					endfor ;
 				}
 				ElementParameter ep_lastAssignedJobNo {
@@ -233,64 +215,122 @@ Model Main_SupportPlanning {
 			}
 		}
 	}
-	Section Read_demand_data {
-		Convention cnv_database {
-			TimeslotFormat: {
-				cal_Slots      : "%c%y-%m-%d %H:%M%TZ(ep_databaseTimezone)",
-				cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(ep_databaseTimezone)"
+	Section data_management {
+		Section Read_demand_data {
+			ElementParameter ep_databaseTimezone {
+				Range: AllTimeZones;
+				Definition: 'New Zealand Standard Time';
 			}
-			Comment: "\"%c%y-%m-%d %H:%M%TZ(\'UTC\')\"";
-		}
-		StringParameter sp_connStr {
-			InitialData: "";
-		}
-		DatabaseTable db_demandData {
-			DataSource: sp_connStr;
-			TableName: "expected-demand-in-new-zealand-standard-time";
-			Convention: cnv_database;
-			Mapping: {
-				"workblock"     -->i_workBlock,
-				"demand"        -->p_demand( i_workBlock )
+			Convention cnv_database {
+				TimeslotFormat: {
+					cal_Slots      : "%c%y-%m-%d %H:%M%TZ(ep_databaseTimezone)",
+					cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(ep_databaseTimezone)"
+				}
+				Comment: "\"%c%y-%m-%d %H:%M%TZ(\'UTC\')\"";
+			}
+			StringParameter sp_connStr {
+				InitialData: "";
+			}
+			DatabaseTable db_demandData {
+				DataSource: sp_connStr;
+				TableName: "expected-demand-in-new-zealand-standard-time";
+				Convention: cnv_database;
+				Mapping: {
+					"workblock"     -->i_workBlock,
+					"demand"        -->p_demand( i_workBlock )
+				}
+			}
+			Parameter p_testDB;
+			Parameter p_demand {
+				IndexDomain: (i_workBlock);
+			}
+			Procedure pr_Conn {
+				Body: {
+					!MySQL::pr_connectionString(sp_connStr);
+					sp_connStr := "data/newZealand.dsn";
+					p_testdb := TestDataSource(sp_connStr);
+					if not p_testdb then
+						raise error "unable to connect to database";
+					endif ;
+				}
+			}
+			Procedure pr_ReadDB {
+				Body: {
+					if not sp_connStr then
+						pr_conn();
+					endif ;
+					read from table db_demandData filtering i_workBlock;
+				}
 			}
 		}
-		Parameter p_testDB;
-		Parameter p_demand {
-			IndexDomain: (i_workBlock);
-		}
-		Procedure pr_Conn {
-			Body: {
-				MySQL::pr_connectionString(sp_connStr);
-				p_testdb := TestDataSource(sp_connStr);
-				if not p_testdb then
-					raise error "unable to connect to database";
-				endif ;
+		Section Writing_job_table_to_German_Excel_workbook {
+			Procedure pr_writeExcel {
+				Body: {
+					pr_writeExcelTimezoneSetToWesternEurope();
+				}
+				ElementParameter ep_err {
+					Range: errh::PendingErrors;
+				}
+				ElementParameter ep_stashModelTimeze {
+					Range: AllTimeZones;
+				}
 			}
-		}
-		Procedure pr_ReadDB {
-			Body: {
-				if not sp_connStr then
-					pr_conn();
-				endif ;
-				read from table db_demandData filtering i_workBlock;
+			Procedure pr_writeExcelTimezoneSetToWesternEurope {
+				Body: {
+					FileCopy(  ! copy template file.
+						source      :  "data/wb.xlsx", 
+						destination :  "wb.xlsx", 
+						confirm     :  0);
+					
+					! Convert data
+					sp_job(i_Employee, i_jobNo)|ep_Job(i_Employee, i_jobNo) := 
+						TimeslotToString(
+							Format   :  "%d.%m.%c%y %H:%M%TZ('W. Europe Standard Time')|\"\"|\" DST\"|", 
+							Calendar :  cal_workBlocks, 
+							Timeslot :  ep_Job(i_Employee, i_jobNo));
+					
+					! Actually write to Excel file.
+					axll::OpenWorkBook("wb.xlsx");
+					axll::SelectSheet("Tabelle1");
+					axll::ColumnName(2+card(s_JobNos), sp_rightColName);
+					axll::WriteTable(
+						IdentifierReference     :  sp_Job, 
+						RowHeaderRange          :  formatString("B3:B%i",
+										2+card(s_Employees)),
+						ColumnHeaderRange       :  formatString("C2:%s2", 
+										sp_rightColName ), 
+						DataRange               :  formatString("C3:%s%i",
+										sp_rightColName,
+										2+card(s_Employees)));
+					axll::CloseWorkBook("wb.xlsx");
+				}
+				StringParameter sp_Job {
+					IndexDomain: (i_Employee, i_jobNo);
+				}
+				StringParameter sp_rightColName;
 			}
 		}
 	}
-	DeclarationSection data_Declaration {
-		Convention cnv_model {
-			TimeslotFormat: {
-				cal_Slots      : "%c%y-%m-%d %H:%M%TZ(ep_modelTimezone)",
-				cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(ep_modelTimezone)"
-			}
-			Comment: "\"%c%y-%m-%d %H:%M%TZ(\'UTC\')\"";
-		}
-		ElementParameter ep_databaseTimezone {
-			Range: AllTimeZones;
-			Definition: 'New Zealand Standard Time';
-		}
+	DeclarationSection Config_declarations {
 		ElementParameter ep_modelTimezone {
 			Range: AllTimeZones;
 			Definition: 'UTC';
 		}
+		StringParameter sp_datetimeFormatModel {
+			Definition: sp_datetimeFormatsModel(ep_modelTimezone);
+		}
+		StringParameter sp_datetimeFormatsModel {
+			IndexDomain: indexTimeZones;
+			Default: "%c%y-%m-%d %H:%M%TZ(ep_modelTimezone)|\"\"|\" DST\"|";
+		}
+		Convention cnv_model {
+			TimeslotFormat: {
+				cal_Slots      : sp_datetimeFormatModel,
+				cal_workBlocks : sp_datetimeFormatModel
+			}
+		}
+	}
+	DeclarationSection data_Declaration {
 		Set s_Certifications {
 			Index: i_certification;
 			Definition: data { a, b, c, d, e };
@@ -504,8 +544,9 @@ Model Main_SupportPlanning {
 				IndexDomain: i_Employee;
 				Range: [2, 8];
 				Definition: {
-					! lower bound of 2: everyone participates.
-					! upper bound of 8: No more than the working time per week ;-)
+					! Two adjacent shifts per day.
+					! lower bound of  4: everyone at least one day.
+					! upper bound of  8: No more than four days  
 					sum( i_workBlock, v01_employeeWorking(i_Employee, i_workBlock) )
 				}
 			}
@@ -526,6 +567,19 @@ Model Main_SupportPlanning {
 			}
 		}
 		Procedure pr_solveStandbySchedule {
+			Body: {
+				if pro::GetPROEndPoint() then
+					if pro::DelegateToServer( 
+							waitForCompletion  :  1, 
+							completionCallback :  'pro::session::LoadResultsCallBack' ) then	
+						return 1;
+					endif ;
+				endif ;
+				
+				pr_solveStandbyScheduleDelegated();
+			}
+		}
+		Procedure pr_solveStandbyScheduleDelegated {
 			Body: {
 				pr_determineCostCoefficients();
 				solve mp_InternationalSupportScheduling ;
@@ -581,6 +635,21 @@ Model Main_SupportPlanning {
 	}
 	Section Application_Initialization_Execution_and_Termination {
 		Procedure MainInitialization {
+			Body: {
+				
+				block ! Read the date formats
+					! Config.inp contains the date formats for the webui
+					read from file "data/config.inp" ;
+					! translate these formats to date formats for the model itself.
+					sp_datetimeFormatsModel(IndexTimeZones)|nondefault(sp_datetimeFormatsWebUI(IndexTimeZones)) :=
+						FindReplaceStrings(
+							SearchString  :  sp_datetimeFormatsWebUI(IndexTimeZones), 
+							Key           :  "webui::DisplayTimeZone", 
+							Replacement   :  "ep_modelTimezone", 
+							CaseSensitive :  1, 
+							WordOnly      :  0);
+				endblock ;
+			}
 			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
 		}
 		Procedure PostMainInitialization {

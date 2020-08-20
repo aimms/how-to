@@ -30,11 +30,6 @@ ep_TimezoneEmployee := data
       ha5 : 'W. Europe Standard Time'  
     };
 
-sp_dateTimeFormats := data {
-    'W. Europe Standard Time'         : "%d.%m.%c%y %H:%M%TZ(webui::WebApplicationTimeZone)|\"\"|\" DST\"|",
-    'North Asia East Standard Time'   : "%d.%m.%c%y %H:%M%TZ(webui::WebApplicationTimeZone)|\"\"|\" DST\"|",
-    'Central Brazilian Standard Time' : "%d/%m/%c%y %H:%M%TZ(webui::WebApplicationTimeZone)|\"\"|\" DST\"|"
-} ;
 
 
 

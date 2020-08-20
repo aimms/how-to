@@ -1,6 +1,10 @@
 Multi timezone applications 
 ============================
 
+.. meta::
+   :description: Creating multi timezone applications illustrated and good practice motivated.
+   :keywords: timezone, operations research, date conversion, datetime, visualization
+
 International organizations have offices around the world. 
 Staff from multiple offices may be cooperating to create operational plans.
 Such a plan may include the time of day information (timestamp) to start certain tasks.
@@ -16,9 +20,9 @@ In this article, an overview of these features is presented together
 with a practical approach of using these features.
 
 The running example of this article is an application whereby the multi time zone aspect surfaces 
-in each of the three pillars of application building. 
+in each pillar of application building. 
 
-definition
+Definition
 -----------
 
 A multi timezone application is an application whereby 
@@ -72,10 +76,18 @@ The schedule meets the following requirements:
 
 The number of evening and night shifts of these experts is minimized.
 
-Database
+Data management
 ^^^^^^^^^^^^^^^^
 
-The expected demand per hour is stored with respect to the timezone ``'New Zealand Standard Time'``.
+Data is managed in a variety of ways:
+
+#.  The expected demand per hour is stored in a database with respect 
+    to the timezone ``'New Zealand Standard Time'``.
+
+#.  Cases are used to hotstart a session
+
+#.  In Hamburg, an existing EXCEL application is used by the administration department, 
+    registering the worked hours.
 
 User interface
 ^^^^^^^^^^^^^^^^^^^^
@@ -85,7 +97,29 @@ the Gantt Chart is shown and shared, using the timezone ``'UTC'``.
 However, when a particular user or a team within one timezone discusses the planning, 
 this is done with respect to the local timezone including daylight saving (if any).
 
+Check out the example
+^^^^^^^^^^^^^^^^^^^^^^^^
+
 To play around with this example, you can download it :download:`here <model/SupportPlanning.zip>` 
+
+Upon start it looks like:
+
+.. image:: images/SupportPlanningStartup.png
+    :align: center
+
+Potential actions:
+
+#.  There is a globe in the far right lower corner marked with a green rectangle.
+    This is the time zone selector, and it allows you to select the time zone for viewing data.
+
+#.  Reading data is activated by the book icon in the blue rectangle. 
+    Note that this requires the proper ODBC driver to be installed.  More on this below.
+
+#.  Solving the rostering problem is activated by the two crossing arrows 
+    in the blue rectangle in the right lower part.
+
+#.  If you don't have the ODBC drivers installed, then you can load the data using the data manager icon 
+    as indicated by the blue rectangle in the upper part of the image.
 
 Timezone usage in the application pillars
 ----------------------------------------------
@@ -101,8 +135,15 @@ The requirements for timezone handling of each of these parts are different.
 
     Therefore, multiple timezones will be used in the user interface.
 
-#.  For the data sources, the timezone in which the data is presented is usually defined externally.
-    Therefore, there may be zero, one, or more timezones relevant here as well.
+#.  For data management, the handling depends on the type of data source:
+
+    #.  For ODBC data sources, the timezone in which the data is presented is usually defined externally.
+        Therefore, there may be zero, one, or more timezones relevant here as well.
+        
+    #.  For EXCEL workbooks there is no direct support, but time of day information can easily be converted as needed.
+    
+    #.  Cases, as binary dumps of the identifier in AIMMS memory, are best saved and restored using UTC.
+        This avoids ambiguity.
 
 #.  The model is the component that communicates with both the user interface and with data sources.
     The collection of timezones may change over time as the users, and perhaps also the data sources, 
@@ -142,15 +183,25 @@ the following convention is used:
 
     Convention cnv_model {
         TimeslotFormat: {
-            cal_Slots      : "%c%y-%m-%d %H:%M%TZ(ep_modelTimezone)",
-            cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(ep_modelTimezone)"
+            cal_Slots      : sp_datetimeFormatModel,
+            cal_workBlocks : sp_datetimeFormatModel
         }
     }
 
-And specify that in the main model as follows:
+where
 
 .. code-block:: aimms
     :linenos:
+
+    StringParameter sp_datetimeFormatModel {
+        Definition: "%c%y-%m-%d %H:%M%TZ(ep_modelTimezone)|\"\"|\" DST\"|";
+    }
+
+And specify the use of ``cnv_model`` that in the main model as follows:
+
+.. code-block:: aimms
+    :linenos:
+    :emphasize-lines: 2
 
     Model Main_SupportPlanning {
         Convention: cnv_model;
@@ -194,9 +245,10 @@ The procedure ``pr_determineCostCoefficients`` computes the cost ``p_cost(i_Empl
                         cal_workBlocks, i_workBlock );
             endfor ;
 
-        * On line 4,5 the call to :aimms:func:`TimeSlotToString` converts the calendar element ``i_workBlock`` to the timezone ``ep_TempForTimeZone``.
+        *   On line 4,5 the call to :aimms:func:`TimeSlotToString` converts the 
+            calendar element ``i_workBlock`` to the timezone ``ep_TempForTimeZone``.
 
-        * Line 2 lets the timezone  ``ep_TempForTimeZone`` vary over all timezones.
+        *   Line 2 lets the timezone  ``ep_TempForTimeZone`` vary over all timezones.
 
     #.  Once, we have this string, extracting the starting hour from that string is straightforward.
 
@@ -258,8 +310,8 @@ The procedure ``pr_determineCostCoefficients`` computes the cost ``p_cost(i_Empl
             Definition: data { day : 1, evening : 1.25, night: 1.4 };
         }
 
-Data exchange
---------------
+Data management
+------------------
 
 ODBC data exchange
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -302,11 +354,90 @@ Once the convention is defined, all tables with time of day information can use 
             "demand"        -->p_demand( i_workBlock )
         }
     }
+    
+Excel writing
+^^^^^^^^^^^^^^^^^^^^^^
 
+The procedure ``pr_writeExcelTimezoneSetToWesternEurope`` writes the job table in ``ep_Job`` to 
+an Excel workbook, using German datetime formatting and the Western Europe timezone:
 
-.. todo:: sub section on cases.
+.. code-block:: aimms
+    :linenos:
+    :emphasize-lines: 11
 
-.. todo:: sub section on Excel (axll).
+    Procedure pr_writeExcelTimezoneSetToWesternEurope {
+        Body: {
+            FileCopy(  ! copy template file.
+                source      :  "data/wb.xlsx", 
+                destination :  "wb.xlsx", 
+                confirm     :  0);
+
+            ! Convert data
+            sp_job(i_Employee, i_jobNo)|ep_Job(i_Employee, i_jobNo) := 
+                TimeslotToString(
+                    Format   :  "%d.%m.%c%y %H:%M%TZ('W. Europe Standard Time')|\"\"|\" DST\"|", 
+                    Calendar :  cal_workBlocks, 
+                    Timeslot :  ep_Job(i_Employee, i_jobNo));
+
+            ! Actually write to Excel file.
+            axll::OpenWorkBook("wb.xlsx");
+            axll::SelectSheet("Tabelle1");
+            axll::ColumnName(2+card(s_JobNos), sp_rightColName);
+            axll::WriteTable(
+                IdentifierReference :  sp_Job, 
+                RowHeaderRange      :  formatString("B3:B%i",
+                                           2+card(s_Employees)),
+                ColumnHeaderRange   :  formatString("C2:%s2", 
+                                           sp_rightColName ), 
+                DataRange           :  formatString("C3:%s%i",
+                                           sp_rightColName,
+                                           2+card(s_Employees)));
+            axll::CloseWorkBook("wb.xlsx");
+        }
+        StringParameter sp_Job {
+            IndexDomain: (i_Employee, i_jobNo);
+        }
+        StringParameter sp_rightColName;
+    }
+
+This code breaks down as follows:
+
+#.  Lines 3 - 6: A template file is used.
+
+#.  Lines 8 - 13: Create a copy of the data, whereby the conversion is applied.
+
+#.  Lines 15 - 28: Actual writing to Excel workbook.
+
+Of special interest to this article is line 11, which breaks down as follows:
+
+#.  ``"%d.%m.%c%y %H:%M"`` This is the German preferred way of writing timestamps when using numbers only.
+
+#.  ``'W. Europe Standard Time'`` This is the timezone in Germany.
+
+#.  ``%TZ( <tz> )|\"\"|\" DST\"|`` 
+    This specifies that the timezone conversion should be applied to the timeslot at hand, 
+    and that ``DST`` should be appended when daylight saving is in effect.
+
+After running this procedure on August 20, 2020, the Excel workbook looks like:
+
+.. image:: images/ExcelWorkbookWithJobTableForHamburg.png
+    :align: center
+
+Case management
+^^^^^^^^^^^^^^^^^^^^^^
+
+Cases contain timeslots and may be created by a user in one timezone and opened by a user in another timezone.
+To avoid confusion, the timeslots in cases should be saved with respect to the timezone UTC and 
+read back using this timezone.
+
+To enforce this, the option 'use UTC forCaseAndStartEndDate' should be set to 'on'.
+
+As this option is not present in the option tree of the project options, 
+you will need to search for it in the project option setting dialog:
+
+.. image:: images/SetOptionUseUTCForStartAndEndDate.png
+    :align: center
+
 
 .. todo:: sub section on Data exchange library (json).
 
@@ -316,7 +447,8 @@ User Interface
 The user interface is the pillar of the application that is most impacted by the multi timezone aspect
 of such applications.   
 The WebUI offers several features to support the development of multi timezone user interfaces.
-Central to this support are a few sets and parameters defined in the WebUI library. Let's discuss these sets and parameters first.
+Central to this support are a few sets and parameters defined in the WebUI library. 
+Let's discuss these sets and parameters first.
 
 WebUI sets and parameters for handling multi timezone applications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -325,14 +457,16 @@ The element parameter ``webui::DisplayTimeZone``
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
 The timezone according to which data is displayed in the browser is the ``webui::DisplayTimeZone``.  
-In the running example, this parameter is initialized to the timezone ``'UTC'``, because the application is designed to enable discussion between experts around the globe.
+In the running example, this parameter is initialized to the timezone ``'UTC'``, 
+because the application is designed to enable discussion between experts around the globe.
 
 
 The set ``webui::DisplayTimeZones``
 """"""""""""""""""""""""""""""""""""""
 
 The range of the element parameter ``webui::DisplayTimeZone`` is the set ``webui::DisplayTimeZones``. 
-In the running example, the good practice is followed to limit the choices of the user to the relevant ones by limiting this set to:
+In the running example, the good practice is followed to limit the choices 
+of the user to the relevant ones by limiting this set to:
 
 #.  The timezones where the experts are located
 
@@ -340,7 +474,8 @@ In the running example, the good practice is followed to limit the choices of th
 
 #.  The database timezone
 
-After reading the timezones of the employees in the input in ``PostMainInitialization`` the set ``webui::DisplayTimeZones`` is assigned as follows:
+After reading the timezones of the employees in the input in ``PostMainInitialization`` 
+the set ``webui::DisplayTimeZones`` is assigned as follows:
 
 .. code-block:: aimms
     :linenos:
@@ -355,7 +490,7 @@ The element parameter ``webui::TimeZoneChangeHook``
 
 The uponchange procedure for this element parameter can be modified via ``webui::TimeZoneChangeHook``.
 In the example, the procedure ``pr_uponChangeDisplayTimeZone`` is used, 
-which just updates the string parameter ``sp_datetimeFormat`` 
+which just updates the string parameter ``sp_datetimeFormatWebUI`` 
 (see below) after a change of timezone to the local date-time formatting.
 
 The element parameter ``webui::ApplicationConvention``
@@ -371,27 +506,26 @@ convention for every timezone relevant to the application.
 
     Convention cnv_WebUI {
         TimeslotFormat: {
-            cal_Slots      : sp_datetimeFormat,
-            cal_workBlocks : sp_datetimeFormat
+            cal_Slots      : sp_datetimeFormatWebUI,
+            cal_workBlocks : sp_datetimeFormatWebUI
         }
     }
 
-where
+where 
 
 .. code-block:: aimms
     :linenos:
 
-    StringParameter sp_datetimeFormat {
-        Definition: sp_datetimeFormats(webui::WebApplicationTimeZone);
+    StringParameter sp_datetimeFormatWebUI {
+        Definition: sp_datetimeFormatsWebUI(webui::DisplayTimeZone);
     }
 
-Here ``webui::WebApplicationTimeZone`` is a convenient helper element parameter that 
-is the same as ``webui::DisplayTimeZone`` except when the latter is empty. 
-In the example, the data for ``sp_datetimeFormats`` is read in together with the data for the certifications.
+The data for ``sp_datetimeFormatsWebUI`` is read in from ``"data/config.inp"`` 
+by the procedure ``MainInitialization``.
 
 
 
-Timezone selector
+Timezone selector 
 ^^^^^^^^^^^^^^^^^^^^^^
 
 The timezone selector is a predefined widget manipulating the element parameter ``webui::DisplayTimeZone``.
@@ -438,12 +572,10 @@ The first data widget is a table containing, per employee, a sequence of start m
 Thus there are changes in:
 
     #.  The specific values, for instance, the hour number changes from 08 to 10.
-        This is due to the change in timezone, see ``'webui::DisplayTimeZone'``
+        This is due to the change in timezone, see ``'webui::DisplayTimeZone'``.
 
     #.  The formatting, the date changes from YMD order to DMY order and there is a daylight saving indicator.
-        This is due to the change in date formatting, see ``'sp_datetimeFormat'``
-
-
+        This is due to the change in date formatting, see ``'sp_datetimeFormatWebUI'``.
 
 Date time picker for calendar elements
 """"""""""""""""""""""""""""""""""""""""
@@ -458,8 +590,11 @@ Clicking the clock icon in the right lower of this dialog gives a time selector:
 .. image:: images/dateTimePickerTime.png
     :align: center
 
-To enable all timezones to be handled the calendars are defined in blocks of 240 minutes instead of 4 hours making the granularity of the timeslots shown minute instead of hour. 
-The date time picker thus shows both hours and minutes, instead of just hours when clicking the clock in the lower left corner.
+To enable all timezones to be handled the calendars are defined in 
+blocks of 240 minutes instead of 4 hours making the granularity of 
+the timeslots shown minute instead of hour. 
+The date time picker thus shows both hours and minutes, instead of 
+just hours when clicking the clock in the lower left corner.
 
 To get back to the date selector, click the calendar icon in the lower left of this dialog.
 
@@ -500,18 +635,27 @@ and when selecting timezone ``'W. Europe Standard Time'`` it looks as follows:
 .. image:: images/GCEmployeePlanningHamburg.png
     :align: center
 
-Note that the 
+Observe from the above images: 
 
-#.  The timeline on top of the Gantt Chart adapts itself to the selected timezone as expected.
+#.  The timeline on top of the Gantt Chart adapts itself to the selected timezone.
 
-#.  The Now line, indicating the current moment, itself does not move.
+#.  The blue Now line, indicating the current moment, does not move.
 
-#.  The Now area, indicating today, does move. 
+#.  The blue shaded Now area, indicating today, moves a little; 
+    the day start and end are influenced by the timezone. 
 
 #.  Default tooltips adapt themselves according to the selected timezone. 
     This is achieved similarly as the adaptation to the timezone of 
     the elements shown in the table as presented in the above subsection.
 
+Summary
+-------
+
+In this article, a detailed presentation is given on creating a multi timezone application, 
+which is useful for prescriptive AIMMS applications with an operational use case.
+
+Each of the three pillars of AIMMS decision support application building has been addressed, 
+thereby presenting a comprehensive approach for multi timezone application building.
 
 Further reading
 ------------------
@@ -520,4 +664,4 @@ Further reading
 
 * `Date format by country <https://en.wikipedia.org/wiki/Date_format_by_country>`_
 
-* 
+
