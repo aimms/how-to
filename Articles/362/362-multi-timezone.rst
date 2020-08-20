@@ -52,7 +52,7 @@ there are three support locations:
 
 #. Hamburg, Germany (daylight saving roughly during March-October), and 
 
-#. Sao Paolo, Brazil (daylight saving roughly during October-March).  
+#. Santiago, Chile (daylight saving roughly during September-April).  
 
 At each location, there are some experts available willing to answer questions on this expensive equipment.
 The certification of an expert determines which questions that the expert can handle.

@@ -1,7 +1,7 @@
 
 p01_certified := data table 
 
-       br1  br2  br3  br4  br5  ir1  ir2  ir3  ir4  ir5  ha1  ha2  ha3  ha4  ha5 
+       ch1  ch2  ch3  ch4  ch5  ir1  ir2  ir3  ir4  ir5  ha1  ha2  ha3  ha4  ha5 
     !  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
     a    1    1         1         1    1         1              1    1         1
     b    1    1    1         1         1    1         1              1    1     
@@ -11,11 +11,11 @@ p01_certified := data table
         ;
 
 ep_TimezoneEmployee := data 
-    { br1 : 'Central Brazilian Standard Time',  
-      br2 : 'Central Brazilian Standard Time',  
-      br3 : 'Central Brazilian Standard Time',
-      br4 : 'Central Brazilian Standard Time',
-      br5 : 'Central Brazilian Standard Time',
+    { ch1 : 'Pacific SA Standard Time',  
+      ch2 : 'Pacific SA Standard Time',  
+      ch3 : 'Pacific SA Standard Time',
+      ch4 : 'Pacific SA Standard Time',
+      ch5 : 'Pacific SA Standard Time',
 
       ir1 : 'North Asia East Standard Time'  ,  
       ir2 : 'North Asia East Standard Time'  ,  
