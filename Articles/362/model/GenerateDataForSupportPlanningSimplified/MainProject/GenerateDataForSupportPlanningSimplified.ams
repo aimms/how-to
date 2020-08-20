@@ -120,7 +120,8 @@ Model Main_GenerateDataForSupportPlanning {
 	Procedure pr_Connect {
 		Body: {
 			!MySQL::pr_connectionString(sp_connStr);
-			sp_connStr := "data/newZealand.dsn";
+			!sp_connStr := "data/newZealand.dsn";
+			sp_connStr := "data/nz.dsn";
 			p_testdb := TestDataSource(sp_connStr);
 			if not p_testdb then
 				raise error "unable to connect to database";

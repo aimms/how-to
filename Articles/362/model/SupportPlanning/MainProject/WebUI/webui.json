@@ -117,6 +117,13 @@
             "width": "10",
             "height": "2"
           }
+        },
+        {
+          "uri": "downloadJobTableAsExcel",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
         }
       ]
     }
@@ -150,6 +157,20 @@
           }
         }
       ]
+    }
+  },
+  "widgets/downloadJobTableAsExcel": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_downloadExcelFile"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "title": {
+      "literal": "Download Job Table in Excel"
     }
   },
   "widgets/EmployeePlanning": {

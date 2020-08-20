@@ -120,8 +120,18 @@ LibraryModule MySQLSupportLibrary {
 				sp_credentialsFilename := "MySQL.credentials" ;
 				
 				if pro::GetPROEndPoint() then
-					raise error "Not implemented yet" ;
+					! raise error "Not implemented yet" ;
 					! Get credentials from AIMMS PRO Storage (if available)
+					sp_fn := "PublicData/ClientApplication/"+pro::ModelName+"/" + sp_credentialsFilename ;
+					pro::RetrieveFileFromCentralStorage(
+						storagePath :  sp_fn, 
+						localPath   :  sp_credentialsFilename);
+					if FileExists( sp_credentialsFilename ) then
+						read from file sp_credentialsFilename ;
+						FileDelete( sp_credentialsFilename );
+					else
+						raise error "credentials file not found";
+					endif ;
 				
 					! When no credentials available from AIMMS PRO Storage, and 
 					! if we're in developer mode; check the parent folder for credentials.

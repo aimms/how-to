@@ -36,7 +36,7 @@ pillars of that application:
 
 #.  The modeling 
 
-#.  The data exchange  
+#.  The data management  
 
 #.  The user interface
 
@@ -46,7 +46,7 @@ The running example
 ----------------------
 
 To provide 24/7 expert support on (near) incidents of expensive equipment, 
-there are three support locations: 
+there are three offices where support is organized: 
 
 #. Irkutsk, Russia (no daylight saving),
 
@@ -100,7 +100,11 @@ this is done with respect to the local timezone including daylight saving (if an
 Check out the example
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-To play around with this example, you can download it :download:`here <model/SupportPlanning.zip>` 
+The example can be experienced by:
+
+*   downloading it :download:`here <model/SupportPlanning.zip>`, or
+
+*   launching the ``SupportPlanning`` application from a cloud environment.
 
 Upon start it looks like:
 
@@ -109,19 +113,23 @@ Upon start it looks like:
 
 Potential actions:
 
-#.  There is a globe in the far right lower corner marked with a green rectangle.
+#.  There is a globe in the far right lower corner marked with a orange rectangle.
     This is the time zone selector, and it allows you to select the time zone for viewing data.
 
-#.  Reading data is activated by the book icon in the blue rectangle. 
-    Note that this requires the proper ODBC driver to be installed.  More on this below.
-
+#.  Reading data is activated by the book icon in the green rectangle. 
+    When the app is started after downloading, then this requires 
+    the :doc:`MS Access ODBC driver<../129/129-MSACCESS-32bit-64bit>` to be installed.  
+    
 #.  Solving the rostering problem is activated by the two crossing arrows 
-    in the blue rectangle in the right lower part.
+    in the green rectangle in the right lower part.
 
-#.  If you don't have the ODBC drivers installed, then you can load the data using the data manager icon 
+#.  You can load the data of a solved case using the data manager icon 
     as indicated by the blue rectangle in the upper part of the image.
 
-Timezone usage in the application pillars
+#.  Once the problem is solved, the download button in the yellow rectangle 
+    will download an EXCEL workbook containing the schedule.
+
+... and the application pillars
 ----------------------------------------------
 
 The application is structured in three parts according to the pillars above.
@@ -139,9 +147,10 @@ The requirements for timezone handling of each of these parts are different.
 
     #.  For ODBC data sources, the timezone in which the data is presented is usually defined externally.
         Therefore, there may be zero, one, or more timezones relevant here as well.
-        
-    #.  For EXCEL workbooks there is no direct support, but time of day information can easily be converted as needed.
-    
+
+    #.  The ``library AimmsXLLibrary``, providing direct access to EXCEL workbooks, listens to the 
+        convention of the main model. Therefore, some flexibility is in this convention.
+
     #.  Cases, as binary dumps of the identifier in AIMMS memory, are best saved and restored using UTC.
         This avoids ambiguity.
 
@@ -164,8 +173,8 @@ In this section, at the implementation level, the multi timezone aspects of the 
 The modeling timezone
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As described above, we choose one timezone in the model, and name it ``ep_modelTimezone``.
-In addition, we fix upfront the choice: UTC.
+As described above, we choose one timezone in the model, and name the parameter containing it ``ep_modelTimezone``.
+In addition, we initialize the choice: UTC.
 
 .. code-block:: aimms
     :linenos:
@@ -194,7 +203,7 @@ where
     :linenos:
 
     StringParameter sp_datetimeFormatModel {
-        Definition: "%c%y-%m-%d %H:%M%TZ(ep_modelTimezone)|\"\"|\" DST\"|";
+        Definition: sp_datetimeFormatsModel(ep_modelTimezone);
     }
 
 And specify the use of ``cnv_model`` that in the main model as follows:
@@ -217,7 +226,8 @@ The WebUI is notified of the model timezone as follows in ``PostMainInitializati
 The mathematical programming problem
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This is a rostering problem, and constraints similar to rostering apply, 
+The mathematical programming problem to be solved in this example is a rostering problem, 
+and constraints similar to rostering apply, 
 see :doc:`rostering using constraint programming article<../137/137-Small-Rostering>` and 
 `wikipedia <https://en.wikipedia.org/wiki/Nurse_scheduling_problem>`_ . 
 The actual rostering problem is not discussed here.
@@ -358,65 +368,91 @@ Once the convention is defined, all tables with time of day information can use 
 Excel writing
 ^^^^^^^^^^^^^^^^^^^^^^
 
-The procedure ``pr_writeExcelTimezoneSetToWesternEurope`` writes the job table in ``ep_Job`` to 
-an Excel workbook, using German datetime formatting and the Western Europe timezone:
+The task of procedure ``pr_writeExcel`` is to set the proper context, 
+including convention and timezone, for all procedures that actually write to the EXCEL workbook.
 
 .. code-block:: aimms
     :linenos:
-    :emphasize-lines: 11
+    :emphasize-lines: 8
 
-    Procedure pr_writeExcelTimezoneSetToWesternEurope {
+    Procedure pr_writeExcel {
+        Arguments: (sp_fn);
+        Body: {
+            block
+                ep_stashModelTimezone := ep_modelTimezone ;
+                ep_modelTimezone := 'W. Europe Standard Time' ;
+
+                pr_writeExcelJobTable(sp_fn);
+
+                ep_modelTimezone := ep_stashModelTimezone ;
+            onerror ep_err do
+                if errh::Severity( ep_err ) <> 'warning' then
+                    ep_modelTimezone := ep_stashModelTimezone ;
+                endif ;
+                ! Note the absence of a call to errh::markAsHandled; 
+                ! Stack unwinding continues after restoring ep_modelTimezone.
+            endblock ;
+        }
+        ElementParameter ep_err {
+            Range: errh::PendingErrors;
+        }
+        ElementParameter ep_stashModelTimezone {
+            Range: AllTimeZones;
+        }
+        StringParameter sp_fn {
+            Property: Input;
+        }
+    }
+
+The AimmsXLLibrary listens to the model convention.  
+The timezone conversion of this convention is controlled by the element parameter ``ep_modelTimezone``.
+By temporarily switching this element parameter to ``'W. Europe Standard Time'``, 
+the dates will be formatted and converted according to the locale of Hamburg.
+
+It is essential that the parameter ``ep_modelTimezone`` is reset to its original value, 
+even in the context of errors. The error handling on line 12-14 makes sure of this.
+
+The procedure ``pr_writeExcelJobTable`` writes the job table in ``ep_Job`` to 
+an Excel workbook. Note that this procedure is coded agnostic of the chosen convention and timezone.
+
+.. code-block:: aimms
+    :linenos:
+
+    Procedure pr_writeExcelJobTable {
+        Arguments: (sp_fn);
         Body: {
             FileCopy(  ! copy template file.
                 source      :  "data/wb.xlsx", 
-                destination :  "wb.xlsx", 
+                destination :  sp_fn, 
                 confirm     :  0);
 
-            ! Convert data
-            sp_job(i_Employee, i_jobNo)|ep_Job(i_Employee, i_jobNo) := 
-                TimeslotToString(
-                    Format   :  "%d.%m.%c%y %H:%M%TZ('W. Europe Standard Time')|\"\"|\" DST\"|", 
-                    Calendar :  cal_workBlocks, 
-                    Timeslot :  ep_Job(i_Employee, i_jobNo));
-
             ! Actually write to Excel file.
-            axll::OpenWorkBook("wb.xlsx");
+            axll::KeepExistingCellFormats:=1;
+            axll::OpenWorkBook(sp_fn);
             axll::SelectSheet("Tabelle1");
             axll::ColumnName(2+card(s_JobNos), sp_rightColName);
             axll::WriteTable(
-                IdentifierReference :  sp_Job, 
-                RowHeaderRange      :  formatString("B3:B%i",
-                                           2+card(s_Employees)),
-                ColumnHeaderRange   :  formatString("C2:%s2", 
-                                           sp_rightColName ), 
-                DataRange           :  formatString("C3:%s%i",
-                                           sp_rightColName,
-                                           2+card(s_Employees)));
-            axll::CloseWorkBook("wb.xlsx");
-        }
-        StringParameter sp_Job {
-            IndexDomain: (i_Employee, i_jobNo);
+                IdentifierReference     :  ep_Job,  
+                RowHeaderRange          :  formatString("B3:B%i",
+                                               2+card(s_Employees)),
+                ColumnHeaderRange       :  formatString("C2:%s2", 
+                                               sp_rightColName ), 
+                DataRange               :  formatString("C3:%s%i",
+                                               sp_rightColName,
+                                               2+card(s_Employees)));
+            axll::CloseWorkBook(sp_fn);
         }
         StringParameter sp_rightColName;
+        StringParameter sp_fn {
+            Property: Input;
+        }
     }
 
 This code breaks down as follows:
 
-#.  Lines 3 - 6: A template file is used.
+#.  Lines 3 - 6: A template file is used. This template file contains EXCEL cell formatting.
 
-#.  Lines 8 - 13: Create a copy of the data, whereby the conversion is applied.
-
-#.  Lines 15 - 28: Actual writing to Excel workbook.
-
-Of special interest to this article is line 11, which breaks down as follows:
-
-#.  ``"%d.%m.%c%y %H:%M"`` This is the German preferred way of writing timestamps when using numbers only.
-
-#.  ``'W. Europe Standard Time'`` This is the timezone in Germany.
-
-#.  ``%TZ( <tz> )|\"\"|\" DST\"|`` 
-    This specifies that the timezone conversion should be applied to the timeslot at hand, 
-    and that ``DST`` should be appended when daylight saving is in effect.
+#.  Lines 14 - 22: One call to the AimmsXLLibrary to write the entire table ;-).
 
 After running this procedure on August 20, 2020, the Excel workbook looks like:
 
@@ -523,7 +559,22 @@ where
 The data for ``sp_datetimeFormatsWebUI`` is read in from ``"data/config.inp"`` 
 by the procedure ``MainInitialization``.
 
+Consider the following example string from this file:
 
+.. code-block:: aimms
+    :linenos:
+
+    "%d.%m.%c%y %H:%M%TZ(webui::DisplayTimeZone)|\"\"|\" DST\"|"
+
+which breaks down as follows:
+
+#.  ``"%d.%m.%c%y %H:%M"`` This is the German preferred way of writing timestamps when using numbers only.
+
+#.  ``webui::DisplayTimeZone`` The value of this element parameter is the selected timezone.
+
+#.  ``%TZ( <tz> )|\"\"|\" DST\"|`` 
+    This specifies that the timezone conversion should be applied to the timeslot at hand, 
+    and that ``DST`` should be appended when daylight saving is in effect.
 
 Timezone selector 
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -559,7 +610,7 @@ The first data widget is a table containing, per employee, a sequence of start m
         .. image:: images/TableContainingTimeslots.png
             :align: center
             
-        The second job of 'ha1' starts on ``2020-08-18 08:00`` in timezone ``'UTC'``.
+        The second job of 'ha1' starts on ``2020-08-21 08:00`` in timezone ``'UTC'``.
 
     #.  Using timezone ``'W. Europe Standard Time'``:
 
@@ -567,7 +618,7 @@ The first data widget is a table containing, per employee, a sequence of start m
             :align: center
 
         The employee is german, and his local timezone is ``'W. Europe Standard Time'``.
-        According to that timezone, his second job starts on ``18.08.2020 10:00 DST``.
+        According to that timezone, his second job starts on ``21.08.2020 10:00 DST``.
 
 Thus there are changes in:
 
@@ -590,7 +641,9 @@ Clicking the clock icon in the right lower of this dialog gives a time selector:
 .. image:: images/dateTimePickerTime.png
     :align: center
 
-To enable all timezones to be handled the calendars are defined in 
+Not all timezones are an integral number of hours apart from UTC.
+Thus, to select a particular timeslot, access to the minutes is needed.
+To enable minutes to be handled, the calendars are defined in 
 blocks of 240 minutes instead of 4 hours making the granularity of 
 the timeslots shown minute instead of hour. 
 The date time picker thus shows both hours and minutes, instead of 
@@ -653,9 +706,8 @@ Summary
 
 In this article, a detailed presentation is given on creating a multi timezone application, 
 which is useful for prescriptive AIMMS applications with an operational use case.
-
-Each of the three pillars of AIMMS decision support application building has been addressed, 
-thereby presenting a comprehensive approach for multi timezone application building.
+The presentation is comprehensive, as each of the three pillars of 
+application building is supported.
 
 Further reading
 ------------------
@@ -663,5 +715,7 @@ Further reading
 * `Timezones per country <https://en.wikipedia.org/wiki/List_of_time_zones_by_country>`_
 
 * `Date format by country <https://en.wikipedia.org/wiki/Date_format_by_country>`_
+
+* `Another date time formatting source <https://calendars.wikia.org/wiki/Date_format_by_country>`_
 
 

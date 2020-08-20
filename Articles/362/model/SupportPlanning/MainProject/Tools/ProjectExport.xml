@@ -3,4 +3,6 @@
 	<ExcludedFile>backup</ExcludedFile>
 	<ExcludedFile>log</ExcludedFile>
 	<ExcludedFile>PROTemp</ExcludedFile>
+	<ExcludedFile>wb-ok.xlsx</ExcludedFile>
+	<ExcludedFile>wb.xlsx</ExcludedFile>
 </ExportSettings>

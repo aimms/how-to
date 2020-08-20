@@ -2,6 +2,12 @@
 
 Model Main_SupportPlanning {
 	Convention: cnv_model;
+	Procedure pr_Test {
+		Body: {
+			CaseFileLoad("data/solved.data");
+			pr_writeExcel("wb.xlsx");
+		}
+	}
 	Section WebUI_use {
 		StringParameter sp_GanttChartReferenceTime {
 			Definition: {
@@ -119,10 +125,7 @@ Model Main_SupportPlanning {
 		}
 		Section Covering_skills {
 			StringParameter sp_titleSkillCoverage {
-				Definition: {
-					FormatString("Starting times per employee in timezone %s", 
-						webui::ActualLocaleTimeZoneDisplayName( webui::DisplayTimeZone ) );
-				}
+				Definition: "Employee to be called first per certification";
 			}
 			ElementParameter ep_EmployeeCoveringSkill {
 				IndexDomain: (i_certification,i_workBlock);
@@ -246,8 +249,12 @@ Model Main_SupportPlanning {
 			}
 			Procedure pr_Conn {
 				Body: {
-					!MySQL::pr_connectionString(sp_connStr);
-					sp_connStr := "data/newZealand.dsn";
+					if pro::GetPROEndPoint() then
+						MySQL::pr_connectionString(sp_connStr);
+					else
+						!sp_connStr := "data/newZealand.dsn"; ! SQLite database
+						sp_connStr := "data/nz.dsn"; ! MS Access database
+					endif ;
 					p_testdb := TestDataSource(sp_connStr);
 					if not p_testdb then
 						raise error "unable to connect to database";
@@ -264,37 +271,77 @@ Model Main_SupportPlanning {
 			}
 		}
 		Section Writing_job_table_to_German_Excel_workbook {
-			Procedure pr_writeExcel {
+			Procedure pr_downloadExcelFile {
+				Arguments: (FileLocation,statusCode,statusDescription);
 				Body: {
-					pr_writeExcelTimezoneSetToWesternEurope();
+					sp_ExcelFilename := "wb.xlsx" ;
+					
+					FileLocation := sp_ExcelFilename ;
+					sp_FileLoc := webui::GetIOFilePath( sp_ExcelFilename );
+					
+					pr_writeExcel( sp_FileLoc );
+					
+					if FileExists(sp_FileLoc) then
+						statusCode := webui::ReturnStatusCode('CREATED');
+						statusDescription := "Nice" ;
+					else
+						statusCode := webui::ReturnStatusCode('ERROR');
+						statusDescription := "Better luck next time" ;
+					endif ;
+				}
+				StringParameter FileLocation {
+					Property: Output;
+				}
+				Parameter statusCode {
+					Property: Output;
+				}
+				StringParameter statusDescription {
+					Property: Output;
+				}
+				StringParameter sp_ExcelFilename;
+				StringParameter sp_FileLoc;
+			}
+			Procedure pr_writeExcel {
+				Arguments: (sp_fn);
+				Body: {
+					block
+						ep_stashModelTimezone := ep_modelTimezone ;
+						ep_modelTimezone := 'W. Europe Standard Time' ;
+						pr_writeExcelJobTable(sp_fn);
+						ep_modelTimezone := ep_stashModelTimezone ;
+					onerror ep_err do
+						if errh::Severity( ep_err ) <> 'warning' then
+							ep_modelTimezone := ep_stashModelTimezone ;
+						endif ;
+						! Note the absence of a call to errh::markAsHandled; 
+						! Stack unwinding continues after restoring ep_modelTimezone.
+					endblock ;
 				}
 				ElementParameter ep_err {
 					Range: errh::PendingErrors;
 				}
-				ElementParameter ep_stashModelTimeze {
+				ElementParameter ep_stashModelTimezone {
 					Range: AllTimeZones;
 				}
+				StringParameter sp_fn {
+					Property: Input;
+				}
 			}
-			Procedure pr_writeExcelTimezoneSetToWesternEurope {
+			Procedure pr_writeExcelJobTable {
+				Arguments: (sp_fn);
 				Body: {
 					FileCopy(  ! copy template file.
 						source      :  "data/wb.xlsx", 
-						destination :  "wb.xlsx", 
+						destination :  sp_fn, 
 						confirm     :  0);
 					
-					! Convert data
-					sp_job(i_Employee, i_jobNo)|ep_Job(i_Employee, i_jobNo) := 
-						TimeslotToString(
-							Format   :  "%d.%m.%c%y %H:%M%TZ('W. Europe Standard Time')|\"\"|\" DST\"|", 
-							Calendar :  cal_workBlocks, 
-							Timeslot :  ep_Job(i_Employee, i_jobNo));
-					
 					! Actually write to Excel file.
-					axll::OpenWorkBook("wb.xlsx");
+					axll::KeepExistingCellFormats:=1;
+					axll::OpenWorkBook(sp_fn);
 					axll::SelectSheet("Tabelle1");
 					axll::ColumnName(2+card(s_JobNos), sp_rightColName);
 					axll::WriteTable(
-						IdentifierReference     :  sp_Job, 
+						IdentifierReference     :  ep_Job, 
 						RowHeaderRange          :  formatString("B3:B%i",
 										2+card(s_Employees)),
 						ColumnHeaderRange       :  formatString("C2:%s2", 
@@ -302,19 +349,19 @@ Model Main_SupportPlanning {
 						DataRange               :  formatString("C3:%s%i",
 										sp_rightColName,
 										2+card(s_Employees)));
-					axll::CloseWorkBook("wb.xlsx");
-				}
-				StringParameter sp_Job {
-					IndexDomain: (i_Employee, i_jobNo);
+					axll::CloseWorkBook(sp_fn);
 				}
 				StringParameter sp_rightColName;
+				StringParameter sp_fn {
+					Property: Input;
+				}
 			}
 		}
 	}
 	DeclarationSection Config_declarations {
 		ElementParameter ep_modelTimezone {
 			Range: AllTimeZones;
-			Definition: 'UTC';
+			InitialData: 'UTC';
 		}
 		StringParameter sp_datetimeFormatModel {
 			Definition: sp_datetimeFormatsModel(ep_modelTimezone);
@@ -545,7 +592,7 @@ Model Main_SupportPlanning {
 				Range: [2, 8];
 				Definition: {
 					! Two adjacent shifts per day.
-					! lower bound of  4: everyone at least one day.
+					! lower bound of  2: everyone at least one day.
 					! upper bound of  8: No more than four days  
 					sum( i_workBlock, v01_employeeWorking(i_Employee, i_workBlock) )
 				}

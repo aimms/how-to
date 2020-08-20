@@ -1,0 +1,6 @@
+[ODBC]
+DRIVER=Microsoft Access Driver (*.mdb, *.accdb)
+DBQ=data\nz.accdb
+DriverId=25
+FIL=MS Access
+SafeTransactions=0
