@@ -128,13 +128,13 @@ The license logging can be configured using ``LicenseServerLogging.xml`` in that
 
 In this configuration file, you may want to change 
 
-.. code-block:: none
+.. code-block:: xml
 
     <param name="ConversionPattern" value="%r %5p [%t] %m%n"/>
 
 to 
 
-.. code-block:: none
+.. code-block:: xml
 
     <param name="ConversionPattern" value="%d{ISO8601} %r %5p [%t] %m%n"/>
 

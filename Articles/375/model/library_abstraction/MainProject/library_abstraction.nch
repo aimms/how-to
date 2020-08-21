@@ -1,0 +1,10 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"Example_Use" "Example_Library_Use" "2020-07-23 17:39:27"
+"Copy_p_calcResult" "p_calcResult1" "2020-07-24 06:40:39"
+"p_calcResult" "p_calcResult2" "2020-07-24 06:40:44"
+"Copy_s_modelSet" "s_modelSet2" "2020-07-24 06:41:14"
+"s_modelSet" "s_modelSet1" "2020-07-24 06:41:18"
+"p_modelParam" "p_modelParam1" "2020-07-24 06:41:48"
+"Copy_p_modelParam1" "p_modelParam2" "2020-07-24 06:42:00"
+"proc_modelProcedure" "proc_usingLibraryFunction" "2020-07-24 07:07:26"
+"Copy_proc_usingLibraryFunction" "proc_usingLibraryProcedure" "2020-07-24 07:08:42"
