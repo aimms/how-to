@@ -1,0 +1,117 @@
+## ams_version=1.0
+
+LibraryModule myLibrary {
+    Prefix: myLib;
+    Interface: Public_Section;
+    Section Public_Section {
+        Function fnc_DoSomeCalculation {
+            Arguments: (p_Arg1D);
+            Body: {
+                ! This function takes any one-dimensional numerical vector and returns a scalar value.
+                p_retval := sum(ii, p_Arg1D(ii)) ;
+                fnc_DoSomeCalculation := p_retval ;
+            }
+            Set s_ImplicitSet {
+                Index: ii;
+            }
+            Parameter p_Arg1D {
+                IndexDomain: ii;
+                Text: "Some one-dimensional parameter";
+                Property: Input;
+            }
+            Parameter p_retval;
+        }
+        Procedure pr_DoSomeCalculation {
+            Arguments: (inpArgument1d,outArgument0d);
+            Body: {
+                block ! Copy input data to the private sets and parameters of this library.
+                	For ii do
+                		SetElementAdd(s_libSet, ep_new, ii);
+                		ep_map(ep_new) := ii;
+                	EndFor;
+                	p_libParam(k) := inpArgument1d( ep_map(k));
+                endblock ;
+                
+                ! Let the workhorse procedures inside the private section of the library do the actual work.
+                pr_WorkSomeCalculation();
+                
+                block ! Copy the results in the private sets and parameters to the output arguments of this procedure.
+                	outArgument0d := p_libResult ;
+                endblock ;
+                
+                block ! Cleanup: here empty all identifiers declared in the private part of the library.
+                	empty Private_Section ;
+                endblock ;
+            }
+            Set s_ImplicitSet {
+                Index: ii;
+            }
+            Parameter inpArgument1d {
+                IndexDomain: ii;
+                Property: Input;
+            }
+            Parameter outArgument0d {
+                Property: Output;
+            }
+            ElementParameter ep_map {
+                IndexDomain: k;
+                Range: s_ImplicitSet;
+            }
+            ElementParameter ep_new {
+                Range: s_libSet;
+            }
+        }
+    }
+    Section Private_Section {
+        Set s_libSet {
+            Text: "A set for use within the library only";
+            Index: k;
+            Parameter: ep_libSet;
+        }
+        Parameter p_libParam {
+            IndexDomain: k;
+            Text: "Parameter to hold one-dimensional arguments to interface functions and procedures through a runtime library";
+        }
+        Parameter p_libResult;
+        Procedure pr_WorkSomeCalculation {
+            Body: {
+                display p_libParam ;
+                
+                ! In this procedure we can use the private sets and parameters of library 'myLibrary'.
+                p_libResult := sum( k, p_libParam(k));
+            }
+        }
+        Section Library_initialization_and_termination {
+            Procedure LibraryInitialization {
+                Comment: "Add initialization statements here that do not require any other library being initialized already.";
+            }
+            Procedure PostLibraryInitialization {
+                Comment: {
+                    "Add initialization statements here that require another library to be initialized already,
+                    or add statements that require the Data Management module to be initialized."
+                }
+            }
+            Procedure PreLibraryTermination {
+                Body: {
+                    return 1;
+                }
+                Comment: {
+                    "Add termination statements here that require all other libraries to be still alive.
+                    Return 1 if you allow the termination sequence to continue.
+                    Return 0 if you want to cancel the termination sequence."
+                }
+            }
+            Procedure LibraryTermination {
+                Body: {
+                    return 1;
+                }
+                Comment: {
+                    "Add termination statements here that do not require other libraries to be still alive.
+                    Return 1 to allow the termination sequence to continue.
+                    Return 0 if you want to cancel the termination sequence.
+                    It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+                }
+            }
+        }
+    }
+}

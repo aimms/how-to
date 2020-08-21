@@ -1,0 +1,5 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"l" "myLib" "2020-07-23 17:32:59"
+"myLib::DoSomeCalculation" "myLib::fnc_DoSomeCalculation" "2020-07-24 06:52:00"
+"myLib::Copy_pr_DoSomeCalculation" "myLib::pr_WorkSomeCalculation" "2020-07-24 07:21:05"
+"myLib::i" "myLib::k" "2020-07-24 07:33:52"
