@@ -4,14 +4,14 @@ Getting Started Tutorials
 As a beginner AIMMS user, the best starting point is the Tutorials.
  
 
-Tutorial for beginners
+Tutorial for Beginners
 -------------------------
 The Tutorial for Beginners is a one-hour tutorial designed as the bare minimum needed to build simple models using the AIMMS Model Explorer. Data values are entered manually using data pages, and you can build a page with objects to view and modify the data. 
 
 * `Download the Tutorial for Beginners <https://download.aimms.com/aimms/download/references/AIMMS_tutorial_beginner.pdf>`_
 
 
-Tutorial for professionals
+Tutorial for Professionals
 ----------------------------
 The tutorial for professionals covers advanced language features and building tools. 
 
@@ -29,6 +29,8 @@ Below you can download a zip file containing the auxiliary project files mention
 
 * :download:`Tutorial Project Files <downloads/AIMMSTutorialProjectFiles(64bit).zip>`
  
+.. note::
+	The Tutorial for Professionals uses compound sets, which is a deprecated feature only available in older AIMMS versions. We are working to update this tutorial to be compatible with the newest versions of AIMMS.
 
 AIMMS learning game
 ---------------------
@@ -39,7 +41,7 @@ The game is played in a developer version of AIMMS. Each level includes a tutori
 Completion of each A-level provides you with the password needed to enter the next level. A-levels focus on optimization modeling, while B-levels focus on AIMMS functionality.
 
 .. note::
-	Level 2b uses a MS Access database and therefore we advise you to download a 32-bit version of AIMMS. However 32-bit versions are only available in older versions.
+	Level 2b uses a MS Access database and therefore we advise you to download a 32-bit version of AIMMS. However 32-bit versions are only available in older versions. We are working to update this tutorial to be compatible with the newest versions of AIMMS.
 
  
 
