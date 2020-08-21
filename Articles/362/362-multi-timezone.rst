@@ -19,7 +19,7 @@ AIMMS offers a variety of features for implementing multi timezone applications.
 In this article, an overview of these features is presented together 
 with a practical approach of using these features.
 
-The running example of this article is an application whereby the multi time zone aspect surfaces 
+The running example of this article is an application whereby the multi timezone aspect surfaces 
 in each pillar of application building. 
 
 Definition
@@ -81,10 +81,10 @@ Data management
 
 Data is managed in a variety of ways:
 
-#.  The expected demand per hour is stored in a database with respect 
+#.  The expected demand per hour is stored in a database with respect
     to the timezone ``'New Zealand Standard Time'``.
 
-#.  Cases are used to hotstart a session
+#.  Cases are used to hot start a session
 
 #.  In Hamburg, an existing EXCEL application is used by the administration department, 
     registering the worked hours.
@@ -113,7 +113,7 @@ Upon start it looks like:
 
 Potential actions:
 
-#.  There is a globe in the far right lower corner marked with a orange rectangle.
+#.  There is a globe in the far right lower corner marked with an orange rectangle.
     This is the time zone selector, and it allows you to select the time zone for viewing data.
 
 #.  Reading data is activated by the book icon in the green rectangle. 
@@ -229,7 +229,7 @@ The mathematical programming problem
 The mathematical programming problem to be solved in this example is a rostering problem, 
 and constraints similar to rostering apply, 
 see :doc:`rostering using constraint programming article<../137/137-Small-Rostering>` and 
-`wikipedia <https://en.wikipedia.org/wiki/Nurse_scheduling_problem>`_ . 
+`wikipedia <https://en.wikipedia.org/wiki/Nurse_scheduling_problem>`_. 
 The actual rostering problem is not discussed here.
 
 The multi timezone aspect of the mathematical programming problems surfaces in 
@@ -302,13 +302,13 @@ The procedure ``pr_determineCostCoefficients`` computes the cost ``p_cost(i_Empl
                 ep_workBlockTimezoneToShift(i_workBlock, 
                     ep_TimezoneEmployee(i_Employee) ) );
 
-    * On line 2: The number of certifications of the employee is weighted
+    * Line 2: The number of certifications of the employee is weighted
 
-    * On line 3: The cost per shift is used
+    * Line 3: The cost per shift is used
 
-    * On line 4: Computed in the first part of cost coeff proc
+    * Line 4: Computed in the first part of this procedure
 
-    * On line 5: The timezone of an employee is input data
+    * Line 5: The timezone of an employee is input data
 
     Where the cost per shift is specified as:
 
@@ -473,9 +473,6 @@ you will need to search for it in the project option setting dialog:
 
 .. image:: images/SetOptionUseUTCForStartAndEndDate.png
     :align: center
-
-
-.. todo:: sub section on Data exchange library (json).
 
 User Interface
 --------------
@@ -647,7 +644,7 @@ To enable minutes to be handled, the calendars are defined in
 blocks of 240 minutes instead of 4 hours making the granularity of 
 the timeslots shown minute instead of hour. 
 The date time picker thus shows both hours and minutes, instead of 
-just hours when clicking the clock in the lower left corner.
+just hours when clicking the clock in the lower right corner.
 
 To get back to the date selector, click the calendar icon in the lower left of this dialog.
 
