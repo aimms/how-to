@@ -349,7 +349,7 @@ def setup(sphinx):
    #To handle redirections
    handle_redirections = False
    if handle_redirections or os.name != 'nt':
-		sphinx.add_config_value('redirects_file', 'redirects', 'env')
-		sphinx.connect('builder-inited', generate_redirects)   
- 
+       sphinx.add_config_value('redirects_file', 'redirects', 'env')
+       sphinx.connect('builder-inited', generate_redirects)   
+
 highlight_language = 'aimms'
