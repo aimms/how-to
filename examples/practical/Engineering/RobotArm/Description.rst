@@ -1,4 +1,5 @@
 Robot arm
+===========
 
 Problem type:
 NLP (medium)

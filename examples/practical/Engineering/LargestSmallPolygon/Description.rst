@@ -1,4 +1,5 @@
 Largest small polygon
+=====================
 
 Problem type:
 NLP (small)

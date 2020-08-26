@@ -1,4 +1,5 @@
 Single level big bucket (Lot sizing)
+====================================
 
 Problem type:
 MIP (small)

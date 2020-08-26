@@ -1,4 +1,5 @@
 Goddard rocket
+==============
 
 Problem type:
 NLP (medium)

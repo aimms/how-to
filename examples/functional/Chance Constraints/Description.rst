@@ -1,3 +1,6 @@
+Chance Constraints
+==================
+
 This example implements a portfolio selection model with uncertain investment returns, covering a single time period.
 
 There are 200 assets. Asset number 200 ("money in the bank") has yearly return 1.05 and zero variability. The yearly returns of assets from 1 to 199 are independent random variables taking values in the segments of the form [mean - deviation, mean + deviation], with mean and deviation values provided on the "Input Data" page.

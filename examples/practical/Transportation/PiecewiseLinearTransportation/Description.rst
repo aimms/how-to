@@ -1,4 +1,5 @@
 Piecewise linear transportation
+================================
 
 Problem type:
 MIP (small)
@@ -11,7 +12,7 @@ The Piecewise Linear Transportation problem models a simple transportation model
 with one complication, namely the objective function representing the cost is a
 piecewise linear function. This piecewise linear cost function is used to model
 price discounts. The piecewise linear function is modelled using the integer
-linear programming trick of Chapter 7.6 of the AIMMS Optimization Modeling
+linear programming trick of Chapter 7.6 of the `AIMMS Optimization Modeling <https://documentation.aimms.com/aimms_modeling.html>`_
 book.
 
 Note:
@@ -27,20 +28,3 @@ Research 245(3), pp. 645-655 (2015)
 .. meta::
    :keywords: Piecewise linear, special ordered set, SOS2, network object.
 
-Description:
-The Piecewise Linear Transportation problem models a simple transportation model
-with one complication, namely the objective function representing the cost is a
-piecewise linear function. This piecewise linear cost function is used to model
-price discounts. The piecewise linear function is modelled using the integer
-linear programming trick of Chapter 7.6 of the AIMMS Optimization Modeling
-book.
-
-Note:
-The Piecewise Linear Transportation problem is described by Christensen and
-Labbe (2015) but the model formulation in this project differs from their
-formulation.
-
-References:
-Christensen, T.R.L., M. Labbe, A branch-cut-and-price algorithm for the
-piecewise linear transportation problem, European Journal of Operational
-Research 245(3), pp. 645-655 (2015)

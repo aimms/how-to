@@ -1,3 +1,6 @@
+AIMMS API
+=========
+
 This AIMMS project illustrates the basic use of the AIMMS API in an external DLL.
 
 The model contained in this example project refers to the external C function illustrated in Section 25.1 of the AIMMS Language Reference, and its associated declaration in an AIMMS model.

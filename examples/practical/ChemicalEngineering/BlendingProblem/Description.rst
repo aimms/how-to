@@ -1,4 +1,5 @@
-Blending problem.
+Blending problem
+================
 
 Problem type:
 LP (small)

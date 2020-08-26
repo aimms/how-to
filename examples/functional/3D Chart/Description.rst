@@ -1,3 +1,6 @@
+3D Chart
+=========
+
 This example illustrates some of the possibilities of the 3D Chart in AIMMS. Like the 2D chart, the 3D chart supports different styles: bar, scatter, and surface. In this example only the surface style is used.
 
 The slider object is also used in this example. With the slider you can assign a value to a scalar parameter. 

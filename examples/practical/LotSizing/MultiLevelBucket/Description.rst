@@ -1,4 +1,5 @@
 Multi level bucket (Lot sizing)
+================================
 
 Problem type:
 MIP (medium)

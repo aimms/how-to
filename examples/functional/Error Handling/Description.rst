@@ -1,3 +1,6 @@
+Error Handling
+=================
+
 This example illustrates the use of the error handling functionality in AIMMS. Customized error handling is useful in situations where there is a clear distinction between the application developer and the end-user. The end-user has little or no knowledge of AIMMS and we do not want to confront them with AIMMS error messages directly. The error handling functionality of AIMMS can be subdivided into two parts, local and global handling of errors, this example illustrates both.
 
 It can be that certain parts of your application are especially sensitive to errors. For example when using a free format data source like Excel or text files, it is possible that your end-users do not adhere to your specific data input formats. It is often too cumbersome, or even impossible, to exactly check the input files before reading. The 'Local Error Handling' page shows how you can use local error handling to catch any errors occurring during the reading of data from a text file and give a clear explanation to the end-user.

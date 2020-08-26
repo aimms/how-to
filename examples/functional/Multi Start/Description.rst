@@ -1,3 +1,9 @@
+Multi Start
+===========
+.. meta::
+   :keywords: Nonlinear Programming, NLP, Multistart Algorithm, GMP, Module
+   :description: This example illustrates how a multistart algorithm can improve the reliability of any local NLP solver, by calling it with many starting points.
+
 A multistart algorithm can improve the reliability of any local NLP solver, by calling it with many starting points. A single call to a NLP solver can fail or result in a local optimum, but multiple calls from the widely spaced starting points provided by a multistart algorithm have more chances of finding a better solution.
 
 In a pure multistart algorithm many local searches will converge to the same local minimum. The AIMMS multistart algorithm tries to identify such searches to group them into clusters, to reduce computational effort. These clusters are updated (and become larger) whenever a starting point is found that leads to a local solution that has already been found before. 
@@ -9,5 +15,3 @@ The Multistart module can be added via menu "Settings" - "Install System Module.
 Keywords:
 Nonlinear Programming, NLP, Multistart Algorithm, GMP, Module
 
-.. meta::
-   :keywords: Nonlinear Programming, NLP, Multistart Algorithm, GMP, Module

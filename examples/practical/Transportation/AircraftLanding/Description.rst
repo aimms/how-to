@@ -1,4 +1,5 @@
 Aircraft landing
+==================
 
 Problem type:
 MIP (small)

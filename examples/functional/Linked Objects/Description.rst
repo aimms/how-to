@@ -1,3 +1,9 @@
+Linked Objects
+=================
+.. meta::
+   :keywords: Linking objects, network object
+   :description: This demo illustrates data objects in the graphical user interface can be linked together through the use scalar element parameters.
+
 This demo illustrates data objects in the graphical user interface can be linked together through the use scalar element parameters.
 
 The current value of an index associated with particular (multidimensional) data displayed in an object, can be automatically assigned to a scalar element parameter by specifying a Forward Link in the Contents tab of the object's Properties dialog box. A Forward Link is indicated by an arrow '->'.
@@ -9,5 +15,3 @@ You can examine how the linkage between various objects on the Example Page is a
 Keywords:
 Linking objects, network object
 
-.. meta::
-   :keywords: Linking objects, network object

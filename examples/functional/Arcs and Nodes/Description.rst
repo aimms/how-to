@@ -1,3 +1,6 @@
+Arcs and Nodes
+===============
+
 This example illustrates a simple network model with an associated user interface in which an end-user can graphically insert, delete and modify both nodes and arcs in the network.
 
 The model contains two mathematical programming formulations:

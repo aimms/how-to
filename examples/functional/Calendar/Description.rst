@@ -1,3 +1,6 @@
+Calendar
+=========
+
 This AIMMS project illustrates the basic use of calendars in AIMMS. It contains the declarations of a number of calendars, each demonstrating a different timeslot format.
 
 In addition, the project illustrates how you can

@@ -1,3 +1,6 @@
+Coloring
+==========
+
 This example illustrates how data in a model can influence the objects in the graphical user interface. More specifically, model data is used to 
 - determine the color of individual values in tables
 - determine the updatability of individual values in tables

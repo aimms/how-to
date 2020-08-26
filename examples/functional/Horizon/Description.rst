@@ -1,3 +1,9 @@
+Horizon
+========
+.. meta::
+   :keywords: LP model, Horizon, Composite table
+   :description: This AIMMS project illustrates the basic behavior of horizons in AIMMS.
+
 This AIMMS project illustrates the basic behavior of horizons in AIMMS. Through this example project you can learn how to create a horizon which consists of three separate sub-intervals
 - a past interval
 - a planning interval
@@ -16,5 +22,4 @@ In addition, the model contains a very simple horizon-dependent optimization mod
 Keywords:
 LP model, Horizon, Composite table
 
-.. meta::
-   :keywords: LP model, Horizon, Composite table
+

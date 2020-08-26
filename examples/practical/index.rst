@@ -7,4 +7,19 @@ The practical examples listed below illustrate applications of optimization mode
    :maxdepth: 1
    :titlesonly:
  
-   
+   /ChemicalEngineering/BlendingProblem/Description
+   ChemicalEngineering/ChemicalEquilibrium
+   Energy/OilPipelineDesign
+   Energy/WaterDistribution
+   Engineering/
+   Engineering/
+   Location/
+   LotSizing/
+   Miscellaneous/
+   MultipleSolutions\Dice/
+   ProductionPlanning\MachineScheduling/
+   Routing/
+   Telecommunications/
+   Transportation/
+   Uncertainty/
+

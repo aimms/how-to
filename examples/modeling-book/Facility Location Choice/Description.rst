@@ -1,8 +1,11 @@
+Facility Location Choice
+=========================
+
 This example considers the problem of selecting distribution centers along with their associated customer zones.  The mathematical model uses a simple mixed-integer linear programming formulation and can be easily solved by using a standard solver for small and medium datasets.  
 
 However, when working this type of problem with a larger datasets, you may consider re-examining your approach to the problem. One option is to decompose the problem into several smaller subproblems that are solved sequentially rather than simultaneously. One such approach, namely Benders' decomposition, is illustrated in this example.
 
-Details about this example can be read in Chapter 22 of AIMMS Optimization Modeling. An electronic version of this book is available through the 'Help' menu. (Note: the coordinates are adjusted to the map and therefore differ from the book.)
+Details about this example can be read in Chapter 22 of `AIMMS Optimization Modeling <https://documentation.aimms.com/aimms_modeling.html>`_. An electronic version of this book is available through the 'Help' menu. (Note: the coordinates are adjusted to the map and therefore differ from the book.)
 
 Reference: Geoffrion, A.M., and G.W. Graves, Multi-commodity distribution system design by Benders decomposition, Management Science 20, 822-844 (1974).
 

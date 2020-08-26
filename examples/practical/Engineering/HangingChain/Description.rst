@@ -1,4 +1,5 @@
 Hanging chain
+=============
 
 Problem type:
 NLP (small)

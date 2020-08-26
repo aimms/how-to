@@ -1,3 +1,6 @@
+Database Inspection
+====================
+
 In this example you can see how the following database functions can be used:
 
 	- GetDataSourceProperty 

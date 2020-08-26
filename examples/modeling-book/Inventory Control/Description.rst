@@ -1,3 +1,6 @@
+Inventory Control
+==================
+
 This example emphasizes on a multi-period inventory control problem with uncertain demand.  
 
 The volume of production is decided before the actual demand is known at the beginning of each period.  The objective of this example is to minimize overall costs to obtain maximum profit.  This type of problem can be categorized as a multi-stage stochastic optimization model.
@@ -6,7 +9,7 @@ The scenario of this inventory control example takes place within a beer company
 
 The figure below shows the various events and probabilities needed to solve this example. A node in the tree refers to a state of the system. The label associated with each arc is the event description. The fraction associated with each arc is the corresponding event probability. 
 
-Details about this example can be read in Chapter 17 of the AIMMS Optimization Modeling book. An electronic version of this book is available through the 'Help' menu.
+Details about this example can be read in Chapter 17 of the `AIMMS Optimization Modeling <https://documentation.aimms.com/aimms_modeling.html>`_ book. An electronic version of this book is available through the 'Help' menu.
 
 Keywords:
 Linear Program, Stochastic Program, Multi-Stage, Control-State Variables, Mathematical Derivation

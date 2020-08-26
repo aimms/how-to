@@ -1,3 +1,6 @@
+External Procedure
+=====================
+
 This model illustrates a very simple external procedure call, along with the C source of the external function called from within the model. This function computes the average of a dense array, which corresponds to the contents of a two-dimensional identifier in the AIMMS model that is passed to it as an argument.
 
 The C source code illustrates how the dense, linear, array must be interpreted as a two-dimensional data structure, given the number of elements for each dimension. It also illustrates how a function can be exported by the DLL in such a manner that AIMMS can find it runtime.

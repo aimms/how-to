@@ -1,3 +1,6 @@
+Excel Link
+============
+
 This example illustrates both the Spreadsheet function library and the Excel Add-In. This example also shows
 how AIMMS handles run time errors.
 
@@ -13,7 +16,7 @@ transport model, and stores the input and output data of the model in an Excel s
 specified in the "Aimms Interface Setup" dialog box correspond one-to-one to the calls to the Excel function
 library in the "Excel Linkage" section of the model tree.
 
-To use the Excel Add-In you have to install the AIMMS Launcher, which can be downloaded from www.aimms.com.
+To use the Excel Add-In you have to install the AIMMS Launcher, which can be downloaded from www.aimms.com/support/downloads.
 
 Keywords:
 Excel Add-In, Spreadsheet functions, Run Time Error Handling.
@@ -31,12 +34,3 @@ You should also update the AIMMS version in the ExcelLink.aimms file if you get 
 .. meta::
    :keywords: Excel Add-In, Spreadsheet functions, Run Time Error Handling.
 
-Note:
-If you start up the Excel spreadsheet by ExcelAddInExample.xls or Excel64AddInExample.xls then AIMMS will try
-to open the AIMMS version as specified in the ExcelLink.aimms file. If you want to use a newer version of AIMMS
-then you have to make sure that the AIMMS version in the ExcelLink.aimms file is updated to that version. You
-can manually edit this file. A safer option is to start up the project using the newer AIMMS version, make a
-dummy change in the project, and save the project. The version number in the ExcelLink.aimms file will now be
-updated.
-
-You should also update the AIMMS version in the ExcelLink.aimms file if you get an AIMMS COM related error

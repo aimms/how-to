@@ -1,3 +1,9 @@
+MPS Functions
+=============
+.. meta::
+   :keywords: MPS File, Tuning, MIP, Solving Options, Improving Solutions
+	:description: This example demonstrates the functions in AIMMS to solve and tune MPS files. 
+
 This example demonstrates the functions in AIMMS to solve and tune MPS files.
 
 The two GMP functions used in this example are:
@@ -21,5 +27,4 @@ The procedure GMP::Tuning::SolveSingleMPS is supported by CPLEX, GUROBI, CBC and
 Keywords:
 MPS File, Tuning, MIP, Solving Options, Improving Solutions
 
-.. meta::
-   :keywords: MPS File, Tuning, MIP, Solving Options, Improving Solutions
+

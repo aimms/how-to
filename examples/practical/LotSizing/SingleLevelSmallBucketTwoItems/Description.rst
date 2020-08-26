@@ -1,4 +1,5 @@
 Single level small bucket with two items (Lot sizing)
+=====================================================
 
 Problem type:
 MIP (small)

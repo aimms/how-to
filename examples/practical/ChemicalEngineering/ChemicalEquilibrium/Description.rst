@@ -1,4 +1,5 @@
 Chemical Equilibrium problem
+===============================
 
 Problem type:
 NLP (small)

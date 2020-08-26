@@ -1,3 +1,9 @@
+Nested Solve
+============
+.. meta::
+   :keywords: Nested solve, Network Flow, GMP, cut, callback, CallbackAddCut, MIP, Document Viewer
+   :description: This example illustrates the nested solve that can be done in AIMMS using GMP callback.
+
 This example illustrates the nested solve that can be done in AIMMS using GMP callback. CPLEX is needed to run this example, although the CallbackAddCut callback procedure can also be called when solving mixed integer programs with Gurobi.
 
 The problem discussed in this example is a single commodity uncapacitated fixed charge network flow problem (UFC):  
@@ -23,5 +29,3 @@ This paper is displayed on an AIMMS page using a document viewer.
 Keywords:
 Nested solve, Network Flow, GMP, cut, callback, CallbackAddCut, MIP, Document Viewer
 
-.. meta::
-   :keywords: Nested solve, Network Flow, GMP, cut, callback, CallbackAddCut, MIP, Document Viewer

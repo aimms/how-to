@@ -1,3 +1,6 @@
+Experiment
+===========
+
 This AIMMS project illustrates how to perform and visualize an experiment in AIMMS. The experiment is based on a simple transport model, in which the demand is distributed according to a given distribution. The objective of the experiment is to observe the distribution of the profit.
 
 The demand is randomized using one of the distribution functions available in AIMMS. This particular example uses the LogNormal distribution, where the average demand and demand deviation of every customer is given as input data.

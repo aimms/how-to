@@ -1,3 +1,6 @@
+File Merge
+===========
+
 This problem deals with merging two statistical database files; the Income Data File and the Population Data File. Because of the large sample sizes, the problem can be solved with an algorithmic evaluation approach that controls the size of the network, and systematically considers a subset of all columns at each iteration.
 
 There are two methods of solving this problem:
@@ -11,7 +14,7 @@ The algorithmic method contains a sequence of smaller sub-models which solves th
 
 The example reflects both methods plus a combination of the two.
 
-Details about this example can be read in Chapter 19 of the AIMMS Optimization Modeling book. An electronic version of this book is available through the 'Help' menu.
+Details about this example can be read in Chapter 19 of the `AIMMS Optimization Modeling <https://documentation.aimms.com/aimms_modeling.html>`_ book. An electronic version of this book is available through the 'Help' menu.
 
 Keywords:
 Linear Program, Network Program, Simplex Method, Column Generation, Mathematical Derivation, Customized Algorithm

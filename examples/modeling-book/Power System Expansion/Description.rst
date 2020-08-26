@@ -1,3 +1,6 @@
+Power System Expansion
+=======================
+
 This example implements a power system expansion model with uncertain electricity demand, covering a single time period. The problem is to determine new power plant design capacities in order to meet an increase in electricity demand. Yet, the future demand is uncertain and it is modeled by means of several demand scenarios. 
 
 This example illustrates the AIMMS support for handling uncertainty in input data through such methods as scenario analysis and stochastic programming. 
@@ -14,7 +17,7 @@ The second approach is based on the special stochastic programming features offe
 
 Both modeling approaches are illustrated in this project.
 
-Details about this example can be read in Chapter 16 of the AIMMS Optimization Modeling book.
+Details about this example can be read in Chapter 16 of the `AIMMS Optimization Modeling <https://documentation.aimms.com/aimms_modeling.html>`_ book.
 
 Keywords:
 Linear Program, Stochastic Program, Two-Stage, Control-State Variables, What-If Analysis, Benders Decomposition

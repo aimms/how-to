@@ -1,10 +1,13 @@
+Distributed Solver Sessions
+============================
+
 This project illustrates AIMMS' capabilities for solving two or more optimization programs in parallel by using distributed solver sessions. Ideally this example should be run on a multi-processor machine.
 
 This example is based on the Cutting Stock example.
 
-The problem can be summarized as follows: how to cut long rolls of material (referred to as raws) into smaller rolls of a prescribed size (referred to as finals), given a demand for each of the finals. A full description of the Cutting Stock problem can be found in the AIMMS Optimization Modeling Guide.
+The problem can be summarized as follows: how to cut long rolls of material (referred to as raws) into smaller rolls of a prescribed size (referred to as finals), given a demand for each of the finals. A full description of the Cutting Stock problem can be found in the `AIMMS Optimization Modeling <https://documentation.aimms.com/aimms_modeling.html>`_ Guide.
 
-While in the Cutting Stock example raws of only one size are considered, this example takes into account raws of two (or potentially more) sizes. This Extended Cutting Stock problem is tackled by the adjusted column generation scheme described in Chapter 20 of the Optimization Modeling guide.
+While in the Cutting Stock example raws of only one size are considered, this example takes into account raws of two (or potentially more) sizes. This Extended Cutting Stock problem is tackled by the adjusted column generation scheme described in Chapter 20 of the `AIMMS Optimization Modeling <https://documentation.aimms.com/aimms_modeling.html>`_ guide.
 
 The pattern generation approach is implemented both using conventional math programs (that require regeneration every time) and using generated math programs (GMPs) that allow for direct updates on the generated instances. In the former case the pattern generation sub-models corresponding to different raw sizes are solved sequentially, while in the latter case, the sub-models are solved in parallel by using different solver sessions.
 

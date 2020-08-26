@@ -1,3 +1,6 @@
+Data Feed
+===========
+
 This project illustrates how an independent data feed can pass data to and/or run procedures within an AIMMS project. Such independent data feeds typically occur in financial applications, where independent data feeds make available new stock and option prices whenever these have been changed.
 
 In this project, an independent data feed is implemented on top of a simple transport model. The data feed is implemented through a separate thread of execution in an external DLL, and is started from within the AIMMS model. 

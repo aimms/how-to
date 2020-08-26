@@ -1,3 +1,9 @@
+Rolling Horizon
+===============
+.. meta::
+   :keywords: Stock Model, Production Planning, Rolling Horizon, Calendar, Submodel
+   :description: This example illustrates the use of horizons and calendars. 
+
 This example illustrates the use of horizons and calendars. A time-based model is formulated using a calendar.
 
 The model is solved in two ways. The first way is solving it using rolling horizon. The second way is to solve it using the calendar model. 
@@ -8,6 +14,3 @@ The model that is used, is a production - stock model. The model determines how 
 
 Keywords:
 Stock Model, Production Planning, Rolling Horizon, Calendar, Submodel
-
-.. meta::
-   :keywords: Stock Model, Production Planning, Rolling Horizon, Calendar, Submodel

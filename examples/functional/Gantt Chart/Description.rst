@@ -1,3 +1,9 @@
+Gantt Chart
+===========
+.. meta::
+   :keywords: Gantt Chart, Overlapped Bars, Composite Table, Tooltips
+   :description: This AIMMS project illustrates the basic use of the Gantt chart object in AIMMS.
+
 This AIMMS project illustrates the basic use of the Gantt chart object in AIMMS. It illustrates both the identifier declarations that are typical for displaying data in a Gantt chart, and AIMMS' capabilities to interpret this data with respect to a given reference date.
 
 By duplicating the row index in the domain identifier used to determine whether a task is displayed in the Gantt chart for a particular tuple in the domain, and using one of these indices in the identifiers for start time and duration and the other to identify the row domain, AIMMS allows you to move tasks vertically within the Gantt chart. Without such a duplication of the row index, vertical movement would not be possible, as simply copying the remaining task data to the new tuple, may lead to a loss of tasks.
@@ -11,6 +17,5 @@ Both the Composite Table and Gantt Chart have tooltips set up to show when the m
 Keywords:
 Gantt Chart, Overlapped Bars, Composite Table, Tooltips
 
-.. meta::
-   :keywords: Gantt Chart, Overlapped Bars, Composite Table, Tooltips
+
 

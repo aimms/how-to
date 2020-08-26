@@ -1,4 +1,7 @@
-This example is based on the Chapter 'Two-Level Decision Problem' (Chapter 14) from the AIMMS Optimization Modeling book. This chapter is available as extensive documentation to this example through the link 'Open Documentation' (in order to view it, Adobe Acrobat Reader is required). 
+Two Level Decision
+===================
+
+This example is based on the Chapter 'Two-Level Decision Problem' (Chapter 14) from the `AIMMS Optimization Modeling <https://documentation.aimms.com/aimms_modeling.html>`_ book. This chapter is available as extensive documentation to this example through the link 'Open Documentation' (in order to view it, Adobe Acrobat Reader is required). 
 
 In this example there is a government at the policy making level wanting to influence the behavior of several companies at the policy receiving level. In order to achieve this, the government implements tax and subsidy policies. The companies make their own optimal decisions given the tax and subsidy rates announced by the government. Taking into account this rational behavior of the companies, the government problem is to decide upon appropriate tax and subsidy levels. 
 

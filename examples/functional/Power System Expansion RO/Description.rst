@@ -1,3 +1,10 @@
+Power System Expansion RO
+============================
+.. meta::
+   :keywords: Linear Program, Uncertainty, Robust Optimization, Non-adjustable and Adjustable Decisions, Linear Decision Rules
+   :description: This example implements a power system expansion model with uncertain electricity demand, covering a single time period.
+
+
 This example implements a power system expansion model with uncertain electricity demand, covering a single time period. 
 The problem is to determine new power plant design capacities in order to meet an increase in electricity demand. 
 Yet, the future demand is uncertain. Initially, the uncertainty in the instantaneous demand is modeled by means of several demand scenarios. 
@@ -21,11 +28,10 @@ There is a distinction made between non-adjustable decisions (that is, the desig
 
 The approach illustrated here is based on the special Robust Optimization features offered by AIMMS through the GMP library. 
 
-Details about the underlying deterministic model in this example can be read in Chapter 16 of the AIMMS Optimization Modeling book.
+Details about the underlying deterministic model in this example can be read in Chapter 16 of the `AIMMS Optimization Modeling <https://documentation.aimms.com/aimms_modeling.html>`_ book.
 
 Keywords:
 Linear Program, Uncertainty, Robust Optimization, Non-adjustable and Adjustable Decisions, Linear Decision Rules
 
-.. meta::
-   :keywords: Linear Program, Uncertainty, Robust Optimization, Non-adjustable and Adjustable Decisions, Linear Decision Rules
+
 

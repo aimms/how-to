@@ -13,9 +13,9 @@ The application examples listed below illustrate the models described in the `AI
   Employee Training/Description
   Facility Location Choice/Description
   Farm Planning/Description
-  File Merge/Description
+  File Merge/description
   Inventory Control/Description
-  Investment Portfolio Selection/Description
+  Investment Portfolio Selection/description
   Media Selection/Description
   Performance Assessment/Description
   Power System Expansion/Description

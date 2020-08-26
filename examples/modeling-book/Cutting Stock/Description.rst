@@ -1,3 +1,6 @@
+Cutting Stock
+=============
+
 This project illustrates AIMMS' capabilities to implement an algorithmic approach to find an optimal solution to a problem by repeatedly solving two optimization programs until no further improvement is possible anymore.
 
 The problem tackled in this demo is a cutting stock problem: how to cut long rolls of material (referred to as raws) into smaller rolls of a prescribed size (referred to as finals), given a demand for each of the finals.
@@ -14,7 +17,7 @@ The pattern generation approach is implemented using conventional math programs 
 
 The demo page illustrates the solution both in tabular and graphical (not when all patterns are generated) form given the raw size, as well as the prescribed finals and their demands. 
 
-Details about this Cutting Stock problem can be read in Chapter 20 of AIMMS Optimization Modeling book.
+Details about this Cutting Stock problem can be read in Chapter 20 of `AIMMS Optimization Modeling <https://documentation.aimms.com/aimms_modeling.html>`_ book.
 
 Keywords:
 Cutting Stock, Algorithmic approach, GMP, Callback function, Heuristic, Gantt Chart, AIMMS API

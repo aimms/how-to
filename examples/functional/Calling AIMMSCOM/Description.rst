@@ -1,4 +1,11 @@
-Note: The AIMMSCOM functionality has been deprecated in favor of the AIMMS API and AIMMS PRO API!
+Calling AIMMSCOM
+================
+.. meta::
+   :keywords: AIMMSCOM
+   :description: This project illustrates how AIMMS can be used as an optimization component from within an external program, using Microsoft COM technology. 
+
+
+.. note:: The AIMMSCOM functionality has been deprecated in favor of the AIMMS API and AIMMS PRO API!
 
 This project illustrates how AIMMS can be used as an optimization component from within an external program, using Microsoft COM technology. In this example data is transfered back and forth to an AIMMS model. The external program will also call a procedure within the AIMMS model. The AIMMS model is a simple transport model and contains all relevant declarations and procedures. The example illustrates both a C program as well as a python script. 
 

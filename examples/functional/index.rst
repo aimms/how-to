@@ -27,10 +27,10 @@ The functional AIMMS examples listed below illustrate specific AIMMS features.
   Error Handling/Description
   Excel Link/Description
   Experiment/Description
-  External Procedure/Description
+  External Procedure/description
   Gantt Chart/Description
-  GIS Support/Description
-  Goal Programming/Description
+  GIS Support/description
+  Goal Programming/description
   Horizon/Description
   Indexed Page/Description
   Interrupt AIMMS Externally/Description

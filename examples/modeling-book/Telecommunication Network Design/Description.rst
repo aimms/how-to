@@ -1,3 +1,6 @@
+Telecommunication Network Design
+================================
+
 This AIMMS project illustrates how to formulate and solve a telecommunication utilization problem of calls that are to be routed through a network of cables and switch-stations.
 
 The objective of the model is to check the utilization of telecommunication network capacity, such that
@@ -10,7 +13,7 @@ The objective of the model is to check the utilization of telecommunication netw
   
 For illustration this demo uses a dataset containing Dutch cities.
 
-More information on this problem can be found in Chapter 21 of the AIMMS Optimization Modeling book.
+More information on this problem can be found in Chapter 21 of the `AIMMS Optimization Modeling <https://documentation.aimms.com/aimms_modeling.html>`_ book.
 
 Keywords:
 Linear Program, Network Object

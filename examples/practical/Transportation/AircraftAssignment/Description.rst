@@ -1,10 +1,14 @@
 Aircraft Assignment
+===================
 
-//Type
+Type
+-----
 LP (small)
 
-//Description
+Description
+--------------
 Maximization of profits of allocating aircrafts.
 
-//Sources
+Sources
+---------
 Dantzig, G.B., Chapter 28 in: Linear Programming and Extensions, Princeton University Press, Princeton, New Jersey, 1963.

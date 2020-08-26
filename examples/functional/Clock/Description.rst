@@ -1,3 +1,6 @@
+Clock
+=======
+
 In this example a clock is created. This clock is drawn in a network object (with the old AIMMS logo) and is updated every second. 
 
 To perform this update we use the function ScheduleAt. This function can be used to run a specific procedure at a specific moment in time.

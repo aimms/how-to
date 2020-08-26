@@ -1,4 +1,5 @@
 Capacitated warehouse location
+==============================
 
 Problem type:
 MIP (small)

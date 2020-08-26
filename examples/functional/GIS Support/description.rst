@@ -1,3 +1,10 @@
+GIS Support
+===========
+
+.. meta::
+   :keywords: GIS, Network Object, Bitmap, Arcs, Nodes
+   :description: This AIMMS project illustrates how to display map data obtained from a Geographical Information System (GIS) in AIMMS.
+
 This AIMMS project illustrates how to display map data obtained from a Geographical Information System (GIS) in AIMMS.
  
 AIMMS supports various types of GIS sources:
@@ -24,6 +31,5 @@ All usage of map data is subjective to license terms set forth by the holders of
 Keywords:
 GIS, Network Object, Bitmap, Arcs, Nodes
 
-.. meta::
-   :keywords: GIS, Network Object, Bitmap, Arcs, Nodes
+
 
