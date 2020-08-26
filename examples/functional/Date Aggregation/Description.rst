@@ -1,0 +1,7 @@
+An example that shows how the CreateTimeTable function can help in creating a dynamic time unit; days, weeks or months.
+
+Keywords:
+CreateTimeTable, TimeSlotCharacteristic, Aggregate
+
+.. meta::
+   :keywords: CreateTimeTable, TimeSlotCharacteristic, Aggregate
