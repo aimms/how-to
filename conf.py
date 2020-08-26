@@ -310,7 +310,7 @@ def generate_redirects(app):
         app.info("Could not find redirects file at '%s'" % path)
         return
 
-    in_suffix = app.config.source_suffix.keys()[0]
+    in_suffix = list(app.config.source_suffix.keys())[0]
 
     # TODO(stephenfin): Add support for DirectoryHTMLBuilder
     if not type(app.builder) == builders.StandaloneHTMLBuilder:
