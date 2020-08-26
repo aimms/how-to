@@ -35,8 +35,6 @@ build:
     - sphinx-build -M html . _build 
   tags: 
     - ubuntu
-  only:
-    - master
 
 deploy:
   stage: deploy
