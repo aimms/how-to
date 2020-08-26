@@ -314,7 +314,7 @@ def generate_redirects(app):
 
     # TODO(stephenfin): Add support for DirectoryHTMLBuilder
     if not type(app.builder) == builders.StandaloneHTMLBuilder:
-        logger.warning("The 'sphinxcontrib-redirects' plugin is only supported "
+        logger.info("The 'sphinxcontrib-redirects' plugin is only supported "
                  "by the 'html' builder. Skipping...")
         return
     
