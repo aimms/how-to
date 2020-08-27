@@ -1,5 +1,11 @@
 Clock
 =======
+.. meta::
+   :keywords: Network Object, ScheduleAt, CurrentToString, MomentToString
+   :description: In this example a clock is created in a network object and is updated every second. 
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Clock
 
 In this example a clock is created. This clock is drawn in a network object (with the old AIMMS logo) and is updated every second. 
 
@@ -10,5 +16,3 @@ If you want to run a procedure at regular intervals, as we have done, then you c
 Keywords:
 Network Object, ScheduleAt, CurrentToString, MomentToString
 
-.. meta::
-   :keywords: Network Object, ScheduleAt, CurrentToString, MomentToString

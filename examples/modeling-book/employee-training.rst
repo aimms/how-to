@@ -1,5 +1,11 @@
 Employee Training
 ==================
+.. meta::
+   :keywords: Linear Program, Integer Program, Control-State variables, Rounding Heuristic, Probabilistic Constraint, WebUI
+   :description: This example illustrates a personnel planning problem and its corresponding multi-period model.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Modeling%20Book/Employee%20Training
 
 This example illustrates a personnel planning problem and its corresponding multi-period model. An airline company must decide how many flight attendants to hire and train over the next six months. The model includes a (stock) balance constraint which is typical in multi-period models involving state and control type decision variables. A time lag notation is introduced for the backward referencing of time periods. 
 
@@ -12,7 +18,6 @@ For this example you can use the AIMMS WebUI for the graphical user interface. T
 Keywords:
 Linear Program, Integer Program, Control-State variables, Rounding Heuristic, Probabilistic Constraint, WebUI
 
-.. meta::
-   :keywords: Linear Program, Integer Program, Control-State variables, Rounding Heuristic, Probabilistic Constraint, WebUI
+
 
 

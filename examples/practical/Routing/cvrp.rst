@@ -1,5 +1,11 @@
 Capacitated Vehicle Routing Problem
 =====================================
+.. meta::
+   :keywords: Subtour elimination, Miller-Tucker-Zemlin, incumbent callback, network object
+   :description: The Vehicle Routing Problem (VRP) deals with the distribution of goods between depots and customers using vehicles.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Practical%20Examples/Routing/CVRP
 
 Problem type:
 MIP (medium)
@@ -24,6 +30,5 @@ Toth, P., and D. Vigo, An Overview of Vehicle Routing Problems, In: The Vehicle
 Routing Problem, P. Toth and D. Vigo (eds), SIAM Monographs on Discrete Mathematics
 and Applications, Philadelphia, 2002, pp. 1-26
 
-.. meta::
-   :keywords: Subtour elimination, Miller-Tucker-Zemlin, incumbent callback, network object
+
 

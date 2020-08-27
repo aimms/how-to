@@ -1,5 +1,11 @@
 File Merge
 ===========
+.. meta::
+   :keywords: Linear Program, Network Program, Simplex Method, Column Generation, Mathematical Derivation, Customized Algorithm
+   :description: This problem deals with merging two statistical database files.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Modeling%20Book/File%20Merge
 
 This problem deals with merging two statistical database files; the Income Data File and the Population Data File. Because of the large sample sizes, the problem can be solved with an algorithmic evaluation approach that controls the size of the network, and systematically considers a subset of all columns at each iteration.
 
@@ -19,5 +25,3 @@ Details about this example can be read in Chapter 19 of the `AIMMS Optimization 
 Keywords:
 Linear Program, Network Program, Simplex Method, Column Generation, Mathematical Derivation, Customized Algorithm
 
-.. meta::
-   :keywords: Linear Program, Network Program, Simplex Method, Column Generation, Mathematical Derivation, Customized Algorithm

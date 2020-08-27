@@ -1,5 +1,11 @@
 Traffic Equilibrium
 ====================
+.. meta::
+   :keywords: Braess's paradox, Non-cooperative Game, Mixed Complementarity Problem (MCP), Stackelberg Game, Mathematical Programs with Complementarity Constraints (MPCC), PATH, KNITRO, Network Object
+   :description: This AIMMS demo describes an example of a mixed complementarity problem (MCP).
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Application%20Examples/Traffic%20Equilibrium
 
 This AIMMS demo describes an example of a mixed complementarity problem (MCP). The problem described here is a so-called traffic equilibrium model. The goal is to find a traffic distribution over the roads, that follows from the behaviour of the drivers.
 
@@ -16,5 +22,3 @@ In AIMMS currently the PATH and KNITRO solvers are available for solving mixed c
 Keywords:
 Braess's paradox, Non-cooperative Game, Mixed Complementarity Problem (MCP), Stackelberg Game, Mathematical Programs with Complementarity Constraints (MPCC), PATH, KNITRO, Network Object
 
-.. meta::
-   :keywords: Braess's paradox, Non-cooperative Game, Mixed Complementarity Problem (MCP), Stackelberg Game, Mathematical Programs with Complementarity Constraints (MPCC), PATH, KNITRO, Network Object

@@ -1,5 +1,11 @@
 Coloring
 ==========
+.. meta::
+   :keywords: Color, Inactive element, DialogGetColor, UserColorAdd, UserColorModify
+   :description: This example illustrates how data in a model can influence the objects in the graphical user interface.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Coloring
 
 This example illustrates how data in a model can influence the objects in the graphical user interface. More specifically, model data is used to 
 - determine the color of individual values in tables

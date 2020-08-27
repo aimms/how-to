@@ -1,5 +1,14 @@
 Railway Stock
 ====================
+.. meta::
+   :keywords: XML, network object, colors, compound set, calendar, time, tabbed page
+   :description: This model illustrates the use of compound sets.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Application%20Examples/Railway%20Stock
+
+
+.. note:: Compound sets have been deprecated. See :doc:`../../../Articles/109/109-deprecate-compound-sets-overview`
 
 "The Dutch Railways" (de Nederlandse Spoorwegen) performs a daily schedule on the line Amsterdam-Vlissingen (and back). Based on the estimated number of passengers there is a predication of the number of trains needed on every segment. A segment is a part of the line, between two station at which the trains can be coupled or decoupled. The goal is to find out the minimal number of trains that are needed to operate this schedule. This train schedule will run daily, so an extra condition is that the number of trains at the start of the schedule is equal to the number of trains at the end of the schedule for every station.
 
@@ -10,5 +19,3 @@ Trains will never disappear. This means that the number of trains that go into a
 Keywords:
 XML, network object, colors, compound set, calendar, time, tabbed page
 
-.. meta::
-   :keywords: XML, network object, colors, compound set, calendar, time, tabbed page

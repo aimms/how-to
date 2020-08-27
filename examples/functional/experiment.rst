@@ -1,5 +1,11 @@
 Experiment
 ===========
+.. meta::
+   :keywords: Histogram, statistical functions, distribution functions, bar chart, composite table, table, scalar object
+   :description: This AIMMS project illustrates how to perform and visualize an experiment in AIMMS.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Experiment
 
 This AIMMS project illustrates how to perform and visualize an experiment in AIMMS. The experiment is based on a simple transport model, in which the demand is distributed according to a given distribution. The objective of the experiment is to observe the distribution of the profit.
 
@@ -12,6 +18,5 @@ You can use the resulting distribution, for instance, to assess the risk of losi
 Keywords:
 Histogram, statistical functions, distribution functions, bar chart, composite table, table, scalar object
 
-.. meta::
-   :keywords: Histogram, statistical functions, distribution functions, bar chart, composite table, table, scalar object
+
 

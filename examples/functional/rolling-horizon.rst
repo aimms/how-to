@@ -4,6 +4,9 @@ Rolling Horizon
    :keywords: Stock Model, Production Planning, Rolling Horizon, Calendar, Submodel
    :description: This example illustrates the use of horizons and calendars. 
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Rolling%20Horizon
+
 This example illustrates the use of horizons and calendars. A time-based model is formulated using a calendar.
 
 The model is solved in two ways. The first way is solving it using rolling horizon. The second way is to solve it using the calendar model. 

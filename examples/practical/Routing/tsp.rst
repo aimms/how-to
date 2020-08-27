@@ -1,5 +1,11 @@
 Traveling Salesman Problem 
 ==========================
+.. meta::
+   :keywords: Lazy constraint callback, subtour elimination constraints, GMP, network object
+   :description: In this example the (symmetric) Traveling Salesman Problem (TSP) is formulated using subtour elimination constraints.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Practical%20Examples/Routing/TSP
 
 Problem type:
 MIP (medium - hard)
@@ -28,5 +34,4 @@ References:
 Applegate, D.L., R. E. Bixby, V. Chv�tal, and W. J. Cook, The Traveling Salesman
 Problem: A Computational Study, Princeton University Press, Princeton, 2007
 
-.. meta::
-   :keywords: Lazy constraint callback, subtour elimination constraints, GMP, network object
+

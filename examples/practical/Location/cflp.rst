@@ -1,6 +1,9 @@
 Capacitated facility location problem (CFLP)
 ============================================
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Practical%20Examples/Location/CFLP
+
 Problem type:
 MIP (medium: instances capa, capb and capc; small: rest)
 

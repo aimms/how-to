@@ -1,5 +1,11 @@
 Two Level Decision
 ===================
+.. meta::
+   :keywords: Environmental Economics, Stackelberg Games, Nonlinear Programming, NLP
+   :description: In this example there government policy makers influence the behavior of several companies by implementing tax and subsidy policies.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Modeling%20Book/Two%20Level%20Decision
 
 This example is based on the Chapter 'Two-Level Decision Problem' (Chapter 14) from the `AIMMS Optimization Modeling <https://documentation.aimms.com/aimms_modeling.html>`_ book. This chapter is available as extensive documentation to this example through the link 'Open Documentation' (in order to view it, Adobe Acrobat Reader is required). 
 
@@ -9,6 +15,3 @@ On the first demo page, the policy receiving submodels are solved for a pre-spec
 
 Keywords:
 Environmental Economics, Stackelberg Games, Nonlinear Programming, NLP
-
-.. meta::
-   :keywords: Environmental Economics, Stackelberg Games, Nonlinear Programming, NLP

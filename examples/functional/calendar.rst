@@ -1,5 +1,11 @@
 Calendar
 =========
+.. meta::
+   :keywords: Calendar, DialogGetDate, TimeslotToString, TimeSlotToMoment, TimeslotCharacteristic
+   :description: This AIMMS project illustrates the basic use of calendars in AIMMS.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Calendar
 
 This AIMMS project illustrates the basic use of calendars in AIMMS. It contains the declarations of a number of calendars, each demonstrating a different timeslot format.
 
@@ -14,5 +20,4 @@ In addition, the project illustrates how you can
 Keywords:
 Calendar, DialogGetDate, TimeslotToString, TimeSlotToMoment, TimeslotCharacteristic
 
-.. meta::
-   :keywords: Calendar, DialogGetDate, TimeslotToString, TimeSlotToMoment, TimeslotCharacteristic
+

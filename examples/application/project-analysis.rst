@@ -1,5 +1,11 @@
 Project Analysis
 ===================
+.. meta::
+   :keywords: Project Planning, Critical Path, Trade Off, Network Object, 2-D Chart
+   :description: The model describes a project planning problem where several activities need to be done in a certain order.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Application%20Examples/Project%20Analysis
 
 The model describes a project planning problem. In order to finish a project, a number of activities needs to be done in a certain order. Each activity can either be finished within normal time at a normal cost, or be crashed within shorter time at a higher cost. A project manager needs to find the mininize cost to complete whole project within a required deadline.
 
@@ -10,5 +16,4 @@ This example provides a solution to which activities can be crashed in order to 
 Keywords:
 Project Planning, Critical Path, Trade Off, Network Object, 2-D Chart
 
-.. meta::
-   :keywords: Project Planning, Critical Path, Trade Off, Network Object, 2-D Chart
+

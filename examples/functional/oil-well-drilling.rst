@@ -4,6 +4,9 @@ Oil Well Drilling
    :keywords: Model Edit Functions, Error Handling, source code generation
    :description: This example illustrates the use of AIMMS Model Edit functions in combination with the Error Handling functionality. 
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Oil%20Well%20Drilling
+
 This example illustrates the use of AIMMS Model Edit functions in combination with the Error Handling functionality. The Model Edit functions allow the end-user of an application to enter (proprietary) formulations to the model at runtime. This requires the end-user to have a basic understanding of the AIMMS language, but Error Handling features will be used to handle and present the errors in an appropriate format to the end-user.
 
 An oil company is considering setting up an oil well on a land that potentially has oil underneath. If the company decides to set up the oil well, they also need to determine the optimal drill depth and the hole diameter. These factors determine the cost of drilling, the amount of oil gathered if there is, and the pay off of the drilling. In order to evaluate the potential of the land, the company can consult with an oil survey firm to do a survey. This, of course, has an associated cost. Consequently, the first decision is to consult  the survey firm and then depending on the result the company needs to decide to drill or not along with drill-depth and hole-diameter.

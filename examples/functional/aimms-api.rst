@@ -1,5 +1,11 @@
 AIMMS API
 =========
+.. meta::
+   :keywords: AIMMS API, external DLL
+   :description: This AIMMS project illustrates the basic use of the AIMMS API in an external DLL.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/AIMMS%20API
 
 This AIMMS project illustrates the basic use of the AIMMS API in an external DLL.
 
@@ -14,5 +20,4 @@ The import library "libaimms.lib" that is provided in the AIMMS API directory of
 Keywords:
 AIMMS API, external DLL
 
-.. meta::
-   :keywords: AIMMS API, external DLL
+

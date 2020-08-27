@@ -1,5 +1,11 @@
 Farm Planning
 =============
+.. meta::
+   :keywords: LP, Linear Program, Measurement units, Sensitivity analysis, What-If analysis, WebUI
+   :description: This example introduces a simplified farm planning problem in a developing country.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Modeling%20Book/Farm%20Planning
 
 This example introduces a simplified farm planning problem in a developing country.
 Every year a farmer must decide what crops to grow, taking into account limiting resources such as land, labor and water.
@@ -15,5 +21,4 @@ For this example you can use the AIMMS WebUI for the graphical user interface. T
 Keywords:
 LP, Linear Program, Measurement units, Sensitivity analysis, What-If analysis, WebUI
 
-.. meta::
-   :keywords: LP, Linear Program, Measurement units, Sensitivity analysis, What-If analysis, WebUI
+

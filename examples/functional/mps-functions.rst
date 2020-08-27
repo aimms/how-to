@@ -4,6 +4,9 @@ MPS Functions
    :keywords: MPS File, Tuning, MIP, Solving Options, Improving Solutions
 	:description: This example demonstrates the functions in AIMMS to solve and tune MPS files. 
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/MPS%20Functions
+
 This example demonstrates the functions in AIMMS to solve and tune MPS files.
 
 The two GMP functions used in this example are:

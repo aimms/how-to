@@ -5,6 +5,9 @@ Traveling Salesman
    :description: This example illustrates some of AIMMS control flow statements by means of the traveling salesman 2-opt heuristic.
    :keywords: Algorithm, 2-opt heuristic, network object, traveling salesman problem, GMP, Progress Window.
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Application%20Examples/Traveling%20Salesman
+
 This example illustrates some of AIMMS control flow statements by means of the traveling salesman 2-opt heuristic. In the model tree, you will find some declarations to define the problem. In addition, you will find
 
 - A procedure and some declarations to compute and visualize an initial tour constructed by starting at some city and successively selecting the next city as the closest city not yet part of the tour.
@@ -18,5 +21,3 @@ When you run the procedures, the information in the progress window is updated b
 Keywords:
 Algorithm, 2-opt heuristic, network object, traveling salesman problem, GMP, Progress Window
 
-.. meta::
-   :keywords: Algorithm, 2-opt heuristic, network object, traveling salesman problem, GMP, Progress Window

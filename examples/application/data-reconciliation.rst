@@ -1,5 +1,12 @@
 Data Reconciliation
 ========================
+.. meta::
+   :keywords: Template, NLP model, network object, selection object, table, composite table, assertion, indexed sets, model structure, page structure, quantities, units, XML
+   :description: This demo illustrates a complete AIMMS application for the data reconcilitation of chemical processes.
+
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Application%20Examples/Data%20Reconciliation
 
 To control the production process in a chemical plant, the process is closely monitored through a continuous stream of measurements of both the flows between the process units in the plant and their composition. Such raw data may be subject to measurement errors, however, resulting in an inconsistent set of measurements.
 
@@ -12,5 +19,3 @@ The buttons in the left column of the pages will guide you, in succession, throu
 Keywords:
 Template, NLP model, network object, selection object, table, composite table, assertion, indexed sets, model structure, page structure, quantities, units, XML
 
-.. meta::
-   :keywords: Template, NLP model, network object, selection object, table, composite table, assertion, indexed sets, model structure, page structure, quantities, units, XML

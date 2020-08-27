@@ -1,5 +1,11 @@
 Arcs and Nodes
 ===============
+.. meta::
+   :keywords: Network model, Network object, Node and Arc formulation, SetElementAdd function
+   :description: This example illustrates a simple network model with a GUI in which an end-user can graphically insert, delete and modify both nodes and arcs in the network.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Arcs%20and%20Nodes
 
 This example illustrates a simple network model with an associated user interface in which an end-user can graphically insert, delete and modify both nodes and arcs in the network.
 
@@ -22,5 +28,3 @@ In addition, the demo illustrates the use of model-defined coloring and thicknes
 Keywords:
 Network model, Network object, Node and Arc formulation, SetElementAdd function
 
-.. meta::
-   :keywords: Network model, Network object, Node and Arc formulation, SetElementAdd function

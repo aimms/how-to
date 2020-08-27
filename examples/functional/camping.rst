@@ -1,5 +1,12 @@
 Camping
 =======
+.. meta::
+   :keywords: Constraint Programming, callback function
+   :description: In this AIMMS project, some aspects of Constraint Programming (CP) are illustrated.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Camping
+
 
 In this AIMMS project, some aspects of Constraint Programming (CP) are illustrated. In the various constraints, CP functions like ``cp::Count`` and ``cp::Sequence`` are used on the element variable identifier type. Furthermore, some if-then constructs are used in the constraints. Please note that you need the CPOptimizer solver in your solver configuration in order to solve the model.
 
@@ -12,5 +19,4 @@ You can clear all tents or trees from the current grid by clicking on 'Clear Ten
 Keywords:
 Constraint Programming, callback function
 
-.. meta::
-   :keywords: Constraint Programming, callback function
+

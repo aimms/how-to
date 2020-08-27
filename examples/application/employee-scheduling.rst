@@ -1,5 +1,11 @@
 Employee Scheduling
 ==========================
+.. meta::
+   :keywords: Employee assignment problem, scheduling
+   :description: The objective of the optimization is to find the best placement of staff at the lowest cost.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Application%20Examples/Employee%20Scheduling
 
 In this example an optimal employee assignment is determined for a chain of restaurants. Each restaurant has different demands concerning the number of employees available and their skills. The objective of the optimization is to find the best placement of staff at the lowest cost, while taking into account shortage of skilled workforce.
 
@@ -8,6 +14,5 @@ The employees work in shifts and each position is primarily fulfilled by skilled
 Keywords:
 Employee assignment problem, scheduling
 
-.. meta::
-   :keywords: Employee assignment problem, scheduling
+
 

@@ -1,5 +1,11 @@
 Facility Location Choice
 =========================
+.. meta::
+   :keywords: Distribution System Design, Integer Program, Mathematical Reformulation, Mathematical Derivation, Customized Algorithm, Benders decomposition, Auxiliary Model, Constraint Generation
+   :description: This example considers the problem of selecting distribution centers along with their associated customer zones.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Modeling%20Book/Facility%20Location%20Choice
 
 This example considers the problem of selecting distribution centers along with their associated customer zones.  The mathematical model uses a simple mixed-integer linear programming formulation and can be easily solved by using a standard solver for small and medium datasets.  
 
@@ -12,5 +18,3 @@ Reference: Geoffrion, A.M., and G.W. Graves, Multi-commodity distribution system
 Keywords:
 Distribution System Design, Integer Program, Mathematical Reformulation, Mathematical Derivation, Customized Algorithm, Benders decomposition, Auxiliary Model, Constraint Generation
 
-.. meta::
-   :keywords: Distribution System Design, Integer Program, Mathematical Reformulation, Mathematical Derivation, Customized Algorithm, Benders decomposition, Auxiliary Model, Constraint Generation

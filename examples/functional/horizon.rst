@@ -4,6 +4,9 @@ Horizon
    :keywords: LP model, Horizon, Composite table
    :description: This AIMMS project illustrates the basic behavior of horizons in AIMMS.
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Horizon
+
 This AIMMS project illustrates the basic behavior of horizons in AIMMS. Through this example project you can learn how to create a horizon which consists of three separate sub-intervals
 - a past interval
 - a planning interval

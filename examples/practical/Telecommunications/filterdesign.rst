@@ -1,6 +1,9 @@
 Filter design
 =============
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Practical%20Examples/Telecommunications/FilterDesign
+
 Problem type:
 SOCP (small)
 

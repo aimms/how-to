@@ -1,5 +1,11 @@
 Inventory Control
 ==================
+.. meta::
+   :keywords: Linear Program, Stochastic Program, Multi-Stage, Control-State Variables, Mathematical Derivation
+   :description: This example emphasizes on a multi-period inventory control problem with uncertain demand.  
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Modeling%20Book/Inventory%20Control
 
 This example emphasizes on a multi-period inventory control problem with uncertain demand.  
 
@@ -14,5 +20,3 @@ Details about this example can be read in Chapter 17 of the `AIMMS Optimization 
 Keywords:
 Linear Program, Stochastic Program, Multi-Stage, Control-State Variables, Mathematical Derivation
 
-.. meta::
-   :keywords: Linear Program, Stochastic Program, Multi-Stage, Control-State Variables, Mathematical Derivation

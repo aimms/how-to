@@ -4,6 +4,9 @@ Linked Objects
    :keywords: Linking objects, network object
    :description: This demo illustrates data objects in the graphical user interface can be linked together through the use scalar element parameters.
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Linked%20Objects
+
 This demo illustrates data objects in the graphical user interface can be linked together through the use scalar element parameters.
 
 The current value of an index associated with particular (multidimensional) data displayed in an object, can be automatically assigned to a scalar element parameter by specifying a Forward Link in the Contents tab of the object's Properties dialog box. A Forward Link is indicated by an arrow '->'.

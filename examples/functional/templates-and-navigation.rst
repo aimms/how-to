@@ -4,6 +4,9 @@ Templates and Navigation
    :keywords: Navigation object, navigation menu, resizability, page structure, bitmap, button, rectangle
    :description: This demo illustrates AIMMS' capabilities to use page templates and add an automatic navigational structure for end-user UI.
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Templates%20and%20Navigation
+
 This demo illustrates AIMMS' capabilities to
 
 - provide a common interface to your end-user interface through the use of page templates, and 

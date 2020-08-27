@@ -4,6 +4,9 @@ Print Pages
    :keywords: Print page, print template, project user files
    :description: In this example the use of print templates is illustrated.
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Print%20Pages
+
 In this example the use of print templates is illustrated. Print templates can be used to create paper reports. Paper reports containing the main model results are an indispensable part of any modeling application. The reports in AIMMS are created using print pages, a child page below a print template.
 
 There are often tables that are larger than one page. These tables can be printed over several pages using adjustable split lines. 

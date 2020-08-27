@@ -1,5 +1,11 @@
 Machine scheduling
 ==================
+.. meta::
+   :keywords: Gantt chart, MIP Gap, Callback procedures, GMP, Calendar
+   :description: This machine scheduling problem is formulated as a MIP problem.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Practical%20Examples/ProductionPlanning/MachineScheduling
 
 Problem type:
 MIP (hard)
@@ -18,6 +24,5 @@ assignment of the activities to the machines. The Gantt chart is updated
 whenever the solver finds a new solution. The page also contains a graph
 that displays the progress of the optimality gap during the optimization run
 
-.. meta::
-   :keywords: Gantt chart, MIP Gap, Callback procedures, GMP, Calendar.
+
 

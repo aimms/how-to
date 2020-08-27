@@ -1,5 +1,11 @@
 Economic Exchange Equilibrium
 =================================
+.. meta::
+   :keywords: Utility Function, Equilibrium, Duality, Nonlinear System
+   :description: This example models an economic exchange of a number of goods between a number of agents.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Application%20Examples/Economic%20Exchange%20Equilibrium
 
 This example models an economic exchange of a number of goods between a number of agents. 
 
@@ -16,5 +22,3 @@ The model computes the general equilibrium:
 Keywords:
 Utility Function, Equilibrium, Duality, Nonlinear System
 
-.. meta::
-   :keywords: Utility Function, Equilibrium, Duality, Nonlinear System

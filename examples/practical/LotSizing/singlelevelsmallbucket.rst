@@ -1,6 +1,9 @@
 Single level small bucket (Lot sizing)
 ========================================
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Practical%20Examples/LotSizing/SingleLevelSmallBucket
+
 Problem type:
 MIP (medium)
 

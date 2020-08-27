@@ -1,5 +1,12 @@
 Flow Shop
 ===========
+.. meta::
+   :keywords: CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP
+   :description: The goal in this example is to find a schedule such that the time to process all the jobs on all the machines is as small as possible.
+
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Application%20Examples/Flow%20Shop
 
 In this flow shop problem we have a set of Machines and a set of Jobs. Every job has to be processed on every machine, and the sequence of machines on which a job is processed is the same for every job. The goal is to find a schedule such that the time to process all the jobs on all the machines is as small as possible.
 
@@ -16,5 +23,4 @@ The Multiple Scenarios Parallel page will allow you to see the effect of using m
 Keywords:
 CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP
 
-.. meta::
-   :keywords: CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP
+

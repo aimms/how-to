@@ -1,6 +1,9 @@
 Synchronous Optical Network Ring Design
 =======================================
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Practical%20Examples/Uncertainty/NetworkRingDesign
+
 Problem type:
 MIP (medium - hard)
 

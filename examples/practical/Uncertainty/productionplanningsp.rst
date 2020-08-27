@@ -1,6 +1,9 @@
 Production Planning - Stochastic Programming
 ==============================================
         
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Practical%20Examples/Uncertainty/ProductionPlanningSP
+
 Problem type:
 LP (small)
 

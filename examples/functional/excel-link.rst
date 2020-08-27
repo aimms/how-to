@@ -1,5 +1,13 @@
 Excel Link
 ============
+.. meta::
+   :keywords: Excel Add-In, Spreadsheet functions, Run Time Error Handling.
+   :description: This example illustrates both the Spreadsheet function library and the Excel Add-In.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Excel%20Link
+
+.. note:: See also the :doc:`../../../Articles/85/85-using-axll-library`.
 
 This example illustrates both the Spreadsheet function library and the Excel Add-In. This example also shows
 how AIMMS handles run time errors.
@@ -31,6 +39,5 @@ updated.
 
 You should also update the AIMMS version in the ExcelLink.aimms file if you get an AIMMS COM related error
 
-.. meta::
-   :keywords: Excel Add-In, Spreadsheet functions, Run Time Error Handling.
+
 

@@ -1,6 +1,9 @@
 Piecewise linear transportation
 ================================
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Practical%20Examples/Transportation/PiecewiseLinearTransportation
+
 Problem type:
 MIP (small)
 

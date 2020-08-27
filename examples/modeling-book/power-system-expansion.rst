@@ -1,5 +1,11 @@
 Power System Expansion
 =======================
+.. meta::
+   :keywords: Linear Program, Stochastic Program, Two-Stage, Control-State Variables, What-If Analysis, Benders Decomposition
+   :description: This example implements a power system expansion model with uncertain electricity demand, covering a single time period. 
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Modeling%20Book/Power%20System%20Expansion
 
 This example implements a power system expansion model with uncertain electricity demand, covering a single time period. The problem is to determine new power plant design capacities in order to meet an increase in electricity demand. Yet, the future demand is uncertain and it is modeled by means of several demand scenarios. 
 
@@ -23,6 +29,5 @@ Details about this example can be read in Chapter 16 of the `AIMMS Optimization 
 Keywords:
 Linear Program, Stochastic Program, Two-Stage, Control-State Variables, What-If Analysis, Benders Decomposition
 
-.. meta::
-   :keywords: Linear Program, Stochastic Program, Two-Stage, Control-State Variables, What-If Analysis, Benders Decomposition
+
 

@@ -1,5 +1,11 @@
 Distributions
 =============
+.. meta::
+   :keywords: Probability Distribution, Extreme Value Distribution Approximation, Distribution Operators, 2D Chart
+   :description: This example shows the four distributions with shape parameter and lower bound (only): Pareto, Lognormal, Weibull and Gamma Distribution.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Distributions
 
 This example shows the four distributions with shape parameter and lower bound (only): Pareto, Lognormal, Weibull and Gamma Distribution. The distribution operators for the distribution density, cumulative and inverse cumulative distribution, and density of the inverse cumulative distribution are shown for those distributions, in addition to sample density of samples from those distributions.
 
@@ -10,6 +16,5 @@ In addition, for some distributions with shape parameter, this parameter is used
 Keywords:
 Probability Distribution, Extreme Value Distribution Approximation, Distribution Operators, 2D Chart
 
-.. meta::
-   :keywords: Probability Distribution, Extreme Value Distribution Approximation, Distribution Operators, 2D Chart
+
 

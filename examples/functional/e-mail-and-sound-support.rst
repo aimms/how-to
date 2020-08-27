@@ -1,5 +1,13 @@
 Email and Sound Support
 ========================
+.. meta::
+   :keywords: email, Sound, External procedure
+   :description: This example illustrates two external DLLs that allow you to send email messages and play sounds from within your model.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/E-mail%20and%20Sound%20Support
+
+.. note:: See also the `Email Client Library <https://documentation.aimms.com/emailclient/index.html>`_.
 
 This example illustrates two external DLLs (complete with source) that allow you to
 - programmatically generate and send email messages from within a model
@@ -18,5 +26,4 @@ If your needs go beyond the provided interface, you can modify and re-compile th
 Keywords:
 email, Sound, External procedure
 
-.. meta::
-   :keywords: email, Sound, External procedure
+

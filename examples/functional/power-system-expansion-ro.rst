@@ -5,6 +5,9 @@ Power System Expansion RO
    :description: This example implements a power system expansion model with uncertain electricity demand, covering a single time period.
 
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Power%20System%20Expansion%20RO
+
 This example implements a power system expansion model with uncertain electricity demand, covering a single time period. 
 The problem is to determine new power plant design capacities in order to meet an increase in electricity demand. 
 Yet, the future demand is uncertain. Initially, the uncertainty in the instantaneous demand is modeled by means of several demand scenarios. 

@@ -4,6 +4,8 @@ Calling AIMMSCOM
    :keywords: AIMMSCOM
    :description: This project illustrates how AIMMS can be used as an optimization component from within an external program, using Microsoft COM technology. 
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Calling%20AIMMSCOM
 
 .. note:: The AIMMSCOM functionality has been deprecated in favor of the AIMMS API and AIMMS PRO API!
 

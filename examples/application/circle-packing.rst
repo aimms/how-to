@@ -1,5 +1,12 @@
 Circle Packing
-================ 
+================
+.. meta::
+   :keywords: Circle Packing, Multistart Algorithm, Network Object
+   :description: In this AIMMS project different circle packing problems are solved.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Application%20Examples/Circle%20Packing
+
 
 In this AIMMS project different circle packing problems are solved. 
 
@@ -20,5 +27,4 @@ The Multistart module can be added via menu "Settings" - "Install System Module.
 Keywords:
 Circle Packing, Multistart Algorithm, Network Object
 
-.. meta::
-   :keywords: Circle Packing, Multistart Algorithm, Network Object
+

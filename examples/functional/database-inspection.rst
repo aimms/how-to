@@ -1,5 +1,11 @@
 Database Inspection
 ====================
+.. meta::
+   :keywords: Database, Datasource, GetDataSourceProperty, SQLNumberOfColumns, SQLNumberOfTables, SQLColumnData, SQLTableName, SQL Query, Mapping, Database Info
+	:description: In this example you can see how several database functions can be used.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Database%20Inspection
 
 In this example you can see how the following database functions can be used:
 
@@ -30,5 +36,3 @@ If you want to learn how to read/write data from/to tables in a database, please
 Keywords:
 Database, Datasource, GetDataSourceProperty, SQLNumberOfColumns, SQLNumberOfTables, SQLColumnData, SQLTableName, SQL Query, Mapping, Database Info
 
-.. meta::
-   :keywords: Database, Datasource, GetDataSourceProperty, SQLNumberOfColumns, SQLNumberOfTables, SQLColumnData, SQLTableName, SQL Query, Mapping, Database Info

@@ -4,6 +4,9 @@ Tea Consumption
    :keywords: 2D Chart, Pie Chart, Plot / Curve Chart, Reverse link, Spreadsheet Interface, Excel
    :description: This demo shows some features of the AIMMS 2D chart object.
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Tea%20Consumption
+
 This demo shows some features of the AIMMS 2D chart object. It also makes use of the AIMMS Spreadsheet Interface to read the model data.
 
 The demo shows two charts that display the tea consumption over a number of periods for the 22 countries with the highest average tea consumption.

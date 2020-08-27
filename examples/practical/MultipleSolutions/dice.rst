@@ -1,6 +1,9 @@
 Finding multiple solutions for the dice problem
 ================================================
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Practical%20Examples/MultipleSolutions/Dice
+
 Problem type:
 MIP (small)
 

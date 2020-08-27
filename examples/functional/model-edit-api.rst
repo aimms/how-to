@@ -4,6 +4,9 @@ Model Edit API
    :keywords: Model Edit functions, AIMMS API, using AIMMS externally, C++, integrating AIMMS, runtime libraries
    :description: This example illustrates how the Model Edit functions can be used to build and solve an AIMMS transport model from within an external program, using the AIMMS API. 
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/Model%20Edit%20API
+
 The AIMMS API supports Model Edit Functions, allowing external applications to inspect, modify or even construct AIMMS models. This example illustrates how the Model Edit functions can be used to build and solve an AIMMS transport model from within an external program, using the AIMMS API. 
 
 The external program "Model Edit API.exe" performs the following steps:

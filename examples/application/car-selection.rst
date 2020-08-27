@@ -1,5 +1,11 @@
 Car Selection
 =====================
+.. meta::
+   :keywords: Project User Files, Mixed Integer Programming model, MIP, Matching Problem, Network object, Nodes and arcs, Bitmap
+   :description: In this AIMMS project the use of pictures as nodes in a network is illustrated.
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Application%20Examples/Car%20Selection
 
 In this AIMMS project the use of pictures as nodes in a network is illustrated. These pictures are stored inside the project as so-called project user files. Project user files can only be reached in developer mode, through the menu bar command: Tools - Project User Files.
 
@@ -12,5 +18,4 @@ The number of cars and the number of participants can be changed by the user, wh
 Keywords:
 Project User Files, Mixed Integer Programming model, MIP, Matching Problem, Network object, Nodes and arcs, Bitmap
 
-.. meta::
-   :keywords: Project User Files, Mixed Integer Programming model, MIP, Matching Problem, Network object, Nodes and arcs, Bitmap
+

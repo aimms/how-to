@@ -1,5 +1,12 @@
 Sudoku
 =========
+.. meta::
+   :keywords: Mixed Integer Programming, Mixed Integer Formulations, Multiple Solutions, GMP Functions, Pivot Table
+   :description: Besides regular MIP solve, this example also allows you to use some solvers, such as CPLEX and BARON, to find multiple solutions.
+
+
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Application%20Examples/Sudoku
 
 An example that is based on a game called 'Sudoku'.  The objective of the game is to fill every blocks, rows and columns with numbers 1 - 9 without any duplicates.  
 
@@ -10,5 +17,3 @@ In addition, the example contains a Sudoku generator that employs the uniqueness
 Keywords:
 Mixed Integer Programming, Mixed Integer Formulations, Multiple Solutions, GMP Functions, Pivot Table
 
-.. meta::
-   :keywords: Mixed Integer Programming, Mixed Integer Formulations, Multiple Solutions, GMP Functions, Pivot Table

@@ -5,6 +5,9 @@ GIS Support
    :keywords: GIS, Network Object, Bitmap, Arcs, Nodes
    :description: This AIMMS project illustrates how to display map data obtained from a Geographical Information System (GIS) in AIMMS.
 
+Download the example from GitHub:
+https://github.com/aimms/examples/tree/master/Functional%20Examples/GIS%20Support
+
 This AIMMS project illustrates how to display map data obtained from a Geographical Information System (GIS) in AIMMS.
  
 AIMMS supports various types of GIS sources:
