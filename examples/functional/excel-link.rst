@@ -13,10 +13,10 @@ reads and writes data from and to an Excel file called AIMMSExample.xls.
 If you start up the Excel spreadsheet (ExcelAddInExample.xls or Excel64AddInExample.xls), you can exchange the
 data contained in it with AIMMS using the Excel Add-In. The example uses an AIMMS model containing a simple
 transport model, and stores the input and output data of the model in an Excel spreadsheet. The actions
-specified in the "Aimms Interface Setup" dialog box correspond one-to-one to the calls to the Excel function
+specified in the "AIMMS Interface Setup" dialog box correspond one-to-one to the calls to the Excel function
 library in the "Excel Linkage" section of the model tree.
 
-To use the Excel Add-In you have to install the AIMMS Launcher, which can be downloaded from www.aimms.com/support/downloads.
+To use the Excel Add-In you have to install the AIMMS Launcher, which can be downloaded from https://www.aimms.com/support/downloads.
 
 Keywords:
 Excel Add-In, Spreadsheet functions, Run Time Error Handling.

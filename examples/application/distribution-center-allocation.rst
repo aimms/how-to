@@ -18,7 +18,7 @@ The model uses Excel for importing data and contains two different data sets (Th
 The results are displayed in a network object using a map as background generated via the OpenStreetMap GIS server.
 
 Disclaimer:
-Example uses OpenStreetMap as data source. For licensing and use rights, visit www.openstreetmap.org.
+Example uses OpenStreetMap as data source. For licensing and use rights, visit https://www.openstreetmap.org .
 
 Keywords:
 Distribution Center Allocation, Center of Gravity, Minimize Expected Transportation Cost, Maximize Service Level, Excel, Spreadsheet, Network object, GIS, Calculate distance based on longitude and latitude
