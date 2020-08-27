@@ -22,6 +22,7 @@ The source of the external program "Model Edit API.exe" is displayed on the Sour
 
 To run the external program:
 
+
 - make sure that the Bin directory of your AIMMS installation directory is contained in the PATH environment variable on your computer. Make sure that there is no Bin folder of an older AIMMS version in the PATH environment, this will lead to incompatibility problems.
 - run the program "Model Edit API.exe", or use the corresponding button on the demo page.
 
@@ -30,6 +31,7 @@ Afterwards, you can inspect the log file, data output file and model file, on th
 You can inspect the created transport model by importing it, as a runtime library, into the model explorer of the 'Model Edit API' project. To do so, click on the Import Transport Model on the demo page, which calls the procedure 'ImportModelFile' underneath. Once it is imported, you can run the procedure 'Solve_Transport' to solve the transport model.
 
 Notes:
+
 - You can change the PATH environment variable by going to Control Panel, System... For Windows 7, Windows 10 and newer Windows versions: Advanced system settings, Environment Variables, select 'Path', click on Edit, and add the path of the Bin directory (separated by ";").
 - AIMMS projects started via the AIMMS API are in end-user mode. By default, warnings are not communicated to end-users. If you do want to check whether AIMMS has any warnings for you, you can set the option Communicate_warnings_to_end_users to 'On'.
 - The transport model is not created in the 'Empty AIMMS project'. To add it to that project the model has to be imported as a runtime library, as demonstrated for the 'Model Edit API' project by running the procedure 'ImportModelFile'.

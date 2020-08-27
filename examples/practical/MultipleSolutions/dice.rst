@@ -10,6 +10,7 @@ Multiple solutions, Incumbent callback, Solution pool, GMP
 Description:
 This example demonstrates several approaches to get multiple solutions when
 solving a MIP problem. These approaches are:
+
 - Using the incumbent (solver) callback;
 - Using the solution pool (only supported by CPLEX);
 - Repeatedly solve the problem forbidding the previous solutions.

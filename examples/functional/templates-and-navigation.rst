@@ -5,16 +5,19 @@ Templates and Navigation
    :description: This demo illustrates AIMMS' capabilities to use page templates and add an automatic navigational structure for end-user UI.
 
 This demo illustrates AIMMS' capabilities to
+
 - provide a common interface to your end-user interface through the use of page templates, and 
 - add an automatic navigational structure to the end-user interface by structuring your end-user pages in the page tree.
 
 The model associated with this project is empty, as all illustrated functionality is completely part of the graphical user interface of AIMMS.
 
 If you look at the Template Manager (Alt-F9-key), you can see the templates that determine the look-and-feel of all pages in the end-user interface. The highest level template only determines the size of all pages below it. The next levels of templates successively add new objects to higher-level templates. The objects added comprise:
+
 - rectangles,
 - bitmaps,
 - buttons, and
 - navigation objects.
+
 At the lowest level in the template tree you find all end-user pages. The positions of the end-user pages in the template tree determine which template objects will be displayed on each end-user page.
 
 To some of the templates a number of resizability lines have been added, which determine the behavior of the page when it is resized. You can view these resizability lines by double-clicking a template in the Template Manager, and executing the 'View-Resize Edit Mode' menu. The combined resizability effect is that the area marked 'Data Contents' on all but the first page will grow and shrink with the page size.

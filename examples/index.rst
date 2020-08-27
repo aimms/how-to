@@ -5,12 +5,14 @@ If you have any questions about AIMMS in general or about how to get the most ou
 them on our `community <https://community.aimms.com/>`_.
 
 This section contains several types of AIMMS examples:
+
 * Examples from the AIMMS Modeling Book
 * Functional examples demonstrating particular AIMMS features
 * AIMMS-style application examples including an end-user UI
 * Practical examples, including references to the articles on which each example is based
 
 Each example is stored in a separate folder containing:
+
 * An ``about.txt`` or ``description.txt`` file that briefly describes the model or functionality illustrated in the example
 * An ``.aimms`` file which listing the main project and all library folders included in the example
 * An ``.ams`` file containing the model source describing the AIMMS model

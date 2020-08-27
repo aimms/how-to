@@ -8,6 +8,7 @@ Each agent initially owns an amount of each good, called the Endowment. The Util
 - UtilityWeight, which determines the relative weight of each good
 
 The model computes the general equilibrium: 
+
 - Consumption (or allocation) of each good for each agent
 - Prices at which the goods are traded
 - Lambda, the marginal utility of wealth for each agent

@@ -3,6 +3,7 @@ Contract Allocation
 
 In this model we have a set of contracts, where every contract represents an amount of commodity that has to be supplied. The objective is to determine which of the producers will take care of which contract such that the total costs are minimal, under the following conditions:
 
+
 - The demand for every contract is met.
 
 - The amount supplied by each producer does not exceed the total amount available for supply.

@@ -10,6 +10,7 @@ The scenario analysis approach starts with a deterministic model and examines it
 The stochastic programming approach captures the input data associated with an entire what-if analysis into a single model formulation. It looks for a capacity design that optimizes the overall expected costs taking all scenarios into account (each scenario with a certain weight). 
 
 The stochastic model can be either:
+
 - built explicitly as a separate symbolic model within the AIMMS project, or
 - automatically generated starting from the deterministic formulation. 
 

@@ -4,8 +4,11 @@ Arcs and Nodes
 This example illustrates a simple network model with an associated user interface in which an end-user can graphically insert, delete and modify both nodes and arcs in the network.
 
 The model contains two mathematical programming formulations:
+
+
 - a formulation which uses the ARC and NODE language constructs of AIMMS
 - a straight LP formulation which is equivalent to the ARC and NODE formulation
+
 You can view both formulations within the Model Explorer.
 
 Within the user interface, you can select either formulation to verify that the formulations yield identical solutions.

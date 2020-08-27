@@ -38,6 +38,7 @@ After a scenario tree has been created, it can be viewed on the "Scenario Tree V
 After creating scenario trees using at least two methods, one tree can be selected for viewing at a time.
 
 The stochastic model is generated in its extensive form (deterministic equivalent) and can be solved in two ways:
+
 - using a standard solver: button "Solve Stochastic Model", or
 - using the Benders decomposition approach: button "Solve Stochastic Benders".
 

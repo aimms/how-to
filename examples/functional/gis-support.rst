@@ -9,6 +9,7 @@ This AIMMS project illustrates how to display map data obtained from a Geographi
  
 AIMMS supports various types of GIS sources:
 
+
 - OGC Web Map Service (WMS)
 - OGC Web Feature Service (WFS)
 - Microsoft Bing Maps
