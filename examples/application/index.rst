@@ -7,22 +7,22 @@ The application examples listed below represent complete AIMMS-style application
   :maxdepth: 1
   :titlesonly:
   
-  Car Selection/Description
-  Circle Packing/Description
-  Contract Allocation/Description
-  Data Reconciliation/Description
-  Distribution Center Allocation/Description
-  Economic Exchange Equilibrium/Description
-  Employee Scheduling/Description
-  Flow Shop/Description
-  Gate Assignment/Description
-  Knapsack Problem/Description
-  Life Cycle Consumption/Description
-  Project Analysis/Description
-  Railway Stock/Description
-  Sudoku/Description
-  Traffic Equilibrium/Description
-  Transport Model/Description
-  Traveling Salesman/Description
+  car-selection
+  circle-packing
+  contract-allocation
+  data-reconciliation
+  distribution-center-allocation
+  economic-exchange-equilibrium
+  employee-scheduling
+  flow-shop
+  gate-assignment
+  knapsack-problem
+  life-cycle-consumption
+  project-analysis
+  railway-stock
+  sudoku
+  traffic-equilibrium
+  transport-model
+  traveling-salesman
 
    

@@ -7,18 +7,18 @@ The application examples listed below illustrate the models described in the `AI
   :maxdepth: 1
   :titlesonly:
 
-  Bandwidth Allocation/Description
-  Cutting Stock/Description
-  Diet Problem/Description
-  Employee Training/Description
-  Facility Location Choice/Description
-  Farm Planning/Description
-  File Merge/description
-  Inventory Control/Description
-  Investment Portfolio Selection/description
-  Media Selection/Description
-  Performance Assessment/Description
-  Power System Expansion/Description
-  Refinery Pooling Planning/Description
-  Telecommunication Network Design/Description
-  Two Level Decision/Description
+  bandwidth-allocation
+  cutting-stock
+  diet-problem
+  employee-training
+  facility-location-choice
+  farm-planning
+  file-merge
+  inventory-control
+  investment-portfolio-selection
+  media-selection
+  performance-assessment
+  power-system-expansion
+  refinery-pooling-planning
+  telecommunication-network-design
+  two-level-decision

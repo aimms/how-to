@@ -2,7 +2,7 @@ Examples
 ===========
 
 If you have any questions about AIMMS in general or about how to get the most out of AIMMS for your problem, you can ask
-them on our `community <https://community.aimms.com/>`.
+them on our `community <https://community.aimms.com/>`_.
 
 This section contains several types of AIMMS examples:
 * Examples from the AIMMS Modeling Book
@@ -18,10 +18,10 @@ Each example is stored in a separate folder containing:
 The examples projects can only be opened in AIMMS 4.0 (or higher) through the ``.aimms`` file. To get an overview of the 
 underlying optimization model you can also directly view the .ams model source file.
 
+All examples are `on github <https://github.com/aimms/examples>`_ and can be downloaded :download:`AIMMS examples repo <https://github.com/aimms/examples/archive/master.zip>`
 
 .. toctree::
    :maxdepth: 1
-   :titlesonly:
 
    application/index
    functional/index

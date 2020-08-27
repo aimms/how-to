@@ -7,47 +7,47 @@ The functional AIMMS examples listed below illustrate specific AIMMS features.
   :maxdepth: 1
   :titlesonly:
 
-  3D Chart/Description
-  AIMMS API/Description
-  Arcs and Nodes/Description
-  Calendar/Description
-  Calling AIMMSCOM/Description
-  Camping/Description
-  Chance Constraints/Description
-  Clock/Description
-  Coloring/Description
-  Create CSV File/Description
-  Database Inspection/Description
-  Database Interface Generation/Description
-  DataFeed/Description
-  Date Aggregation/Description
-  Distributed Solver Sessions/Description
-  Distributions/Description
-  E-mail and Sound Support/Description
-  Error Handling/Description
-  Excel Link/Description
-  Experiment/Description
-  External Procedure/description
-  Gantt Chart/Description
-  GIS Support/description
-  Goal Programming/description
-  Horizon/Description
-  Indexed Page/Description
-  Interrupt AIMMS Externally/Description
-  Linked Objects/Description
-  Model Edit API/Description
-  Model Edit Functions/Description
-  MPS Functions/Description
-  Multi Start/Description
-  Nested Solve/Description
-  Oil Well Drilling/Description
-  Page Resizability/Description
-  Pivot Table/Description
-  Power System Expansion RO/Description
-  Print Pages/Description
-  ReindeerPairing/Description
-  Rolling Horizon/Description
-  Stochastic Programming/Description
-  Tea Consumption/Description
-  Templates and Navigation/Description
+  3d-chart
+  aimms-api
+  arcs-and-nodes
+  calendar
+  calling-aimmscom
+  camping
+  chance-constraints
+  clock
+  coloring
+  create-csv-file
+  database-inspection
+  database-interface-generation
+  datafeed
+  date-aggregation
+  distributed-solver-sessions
+  distributions
+  e-mail-and-sound-support
+  error-handling
+  excel-link
+  experiment
+  external-procedure
+  gantt-chart
+  gis-support
+  goal-programming
+  horizon
+  indexed-page
+  interrupt-aimms-externally
+  linked-objects
+  model-edit-api
+  model-edit-functions
+  mps-functions
+  multi-start
+  nested-solve
+  oil-well-drilling
+  page-resizability
+  pivot-table
+  power-system-expansion-ro
+  print-pages
+  reindeerpairing
+  rolling-horizon
+  stochastic-programming
+  tea-consumption
+  templates-and-navigation
    
