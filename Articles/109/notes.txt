@@ -1,0 +1,1 @@
+escape for AIMMS 4.73 and AIMMS 4.74: option allow_compound_sets.
