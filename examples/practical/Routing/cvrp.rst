@@ -1,10 +1,13 @@
-Capacitated Vehicle Routing Problem
-=====================================
+Routing: Capacitated Vehicle Routing Problem
+=================================================
 .. meta::
    :keywords: Subtour elimination, Miller-Tucker-Zemlin, incumbent callback, network object
    :description: The Vehicle Routing Problem (VRP) deals with the distribution of goods between depots and customers using vehicles.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Practical%20Examples/Routing/CVRP/MainProject/CVRP.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Routing/CVRP
 
 Problem type:

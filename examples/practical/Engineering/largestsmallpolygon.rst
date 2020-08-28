@@ -1,7 +1,10 @@
-Largest small polygon
-=====================
+Engineering: Largest small polygon
+==================================
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Practical%20Examples/Engineering/LargestSmallPolygon/MainProject/LargestSmallPolygon.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Engineering/LargestSmallPolygon
 
 Problem type:

@@ -4,7 +4,10 @@ Page Resizability
    :keywords: Resizability, Split lines
    :description: In this demo the use of split lines is demonstrated.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Functional%20Examples/Page%20Resizability/MainProject/Page%20Resizability.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Page%20Resizability
 
 In this demo the use of split lines is demonstrated. A split line influence the behavior of a page, when the size of that page is changed. A page can be resized by the user, by selecting a border of a window and dragging it to its new postion. A page can also be resized by setting the properties of a page to full screen. In that case the page will fill your screen completely, independent of the screen resolution. This page uses this last property.

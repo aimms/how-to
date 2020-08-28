@@ -1,7 +1,10 @@
-Multistart
-===========
+Miscellaneous: Multistart
+===========================
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Practical%20Examples/Miscellaneous/Multistart/MainProject/multistart.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Miscellaneous/Multistart
 
 Problem type:
@@ -12,7 +15,7 @@ Multistart, Starting point, GMP, 3D chart, Network object
 
 Description:
 This example demonstrates the AIMMS multistart algorithm. On the first
-page the heath map of the non-convex objective funtion is plotted. On
+page the heat map of the non-convex objective funtion is plotted. On
 the second page the impact of starting points is demonstrated. On the
 third and last page the multistart algorithm is demonstrated step by
 step.

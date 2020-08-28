@@ -1,7 +1,10 @@
-Finding multiple solutions for the dice problem
+Multiple Solutions: Dice problem
 ================================================
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Practical%20Examples/MultipleSolutions/Dice/MainProject/dice.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/MultipleSolutions/Dice
 
 Problem type:

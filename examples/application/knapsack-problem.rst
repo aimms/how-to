@@ -4,7 +4,10 @@ Knapsack Problem
    :keywords: 0-1 Knapsack, Knapsack, Integer Programming, Binary Integer Programming, Cover Inequalities, Network Object
    :description: This example introduces a knapsack problem.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Application%20Examples/Knapsack%20Problem/MainProject/Knapsack.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Knapsack%20Problem
 
 This example introduces a knapsack problem. The example considers a data set of 16 items which can be included in the knapsack. The objective is to maximize the cumulated value of the items. The number of items is restricted by the maximum weight that can be carried in the knapsack. 

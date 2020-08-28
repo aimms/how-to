@@ -4,7 +4,10 @@ Circle Packing
    :keywords: Circle Packing, Multistart Algorithm, Network Object
    :description: In this AIMMS project different circle packing problems are solved.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Application%20Examples/Circle%20Packing/MainProject/CirclePacking.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Circle%20Packing
 
 

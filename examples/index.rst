@@ -20,7 +20,9 @@ Each example is stored in a separate folder containing:
 The examples projects can only be opened in AIMMS 4.0 (or higher) through the ``.aimms`` file. To get an overview of the 
 underlying optimization model you can also directly view the .ams model source file.
 
-All examples are `on github <https://github.com/aimms/examples>`_ and can be downloaded :download:`AIMMS examples repo <https://github.com/aimms/examples/archive/master.zip>`
+All examples are `on github <https://github.com/aimms/examples>`_ and can be downloaded in one :download:`AIMMS examples master file <https://github.com/aimms/examples/archive/master.zip>`. Or, you can clone the entire repository.
+
+You can browse our examples by category:
 
 .. toctree::
    :maxdepth: 1

@@ -4,7 +4,10 @@ Excel Link
    :keywords: Excel Add-In, Spreadsheet functions, Run Time Error Handling.
    :description: This example illustrates both the Spreadsheet function library and the Excel Add-In.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Functional%20Examples/Excel%20Link/MainProject/ExcelLink.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Excel%20Link
 
 .. note:: See also the :doc:`../../../Articles/85/85-using-axll-library`.

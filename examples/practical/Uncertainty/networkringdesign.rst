@@ -1,7 +1,13 @@
-Synchronous Optical Network Ring Design
-=======================================
+Uncertainty: Synchronous Optical Network Ring Design
+====================================================
+.. meta::
+   :keywords: Synchronous Optical Network, SONET, ring assignment, stochastic programming, stochastic integer programming, uncertain data, Benders decomposition, networkobject
+   :description: In this problem we consider the assignment of rings to nodes in a network.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Practical%20Examples/Uncertainty/NetworkRingDesign/MainProject/NetworkRingDesign.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Uncertainty/NetworkRingDesign
 
 Problem type:
@@ -45,5 +51,3 @@ pp. 12-26.
 Goldschmidt, O., A. Laugier, E.V. Olinick, SONET/SDH ring assignment with capacity
 constraints, Discrete Applied Mathematics 129 (2003), pp. 99-128
 
-.. meta::
-   :keywords: Synchronous Optical Network, SONET, ring assignment, stochastic programming, stochastic integer programming, uncertain data, Benders decomposition, networkobject

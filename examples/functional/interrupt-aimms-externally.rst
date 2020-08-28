@@ -4,7 +4,10 @@ Interrupt AIMMS Externally
    :keywords: AIMMS Component, AIMMSCOM
    :description: How to interrupt an AIMMS session from outside AIMMS.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Functional%20Examples/Interrupt%20AIMMS%20Externally/MainProject/Interrupt%20AIMMS%20Project.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Interrupt%20AIMMS%20Externally
 
 In this example it is demonstrated how an AIMMS session can be interrupted from outside AIMMS. This is especially useful in situations where AIMMS (or AIMMSCOM) is controlled programmatically without any user interface, which means that the normal short cut for interruption (<ctrl><shift><s>) is not available.

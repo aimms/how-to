@@ -4,7 +4,10 @@ Reindeer Pairing
    :keywords: Stable marriage problem, network object, constraint programming, channel constraint, if-then constraint
    :description: This AIMMS project is an illustration of the stable marriage problem.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Functional%20Examples/ReindeerPairing/MainProject/ReindeerPairing.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/ReindeerPairing
 
 This AIMMS project is an illustration of the stable marriage problem. The problem formulation is originally stated elegantly at Tallys Yunes' blog: 
