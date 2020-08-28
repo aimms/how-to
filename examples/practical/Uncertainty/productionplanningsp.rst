@@ -2,8 +2,7 @@ Uncertainty: Production Planning - Stochastic Programming
 ============================================================
 .. meta::
    :keywords: Uncertain data, stochastic programming, scenarios
-   :description: This example is to decide how much of each of the raw materials to
-purchase and stock for a refinery.
+   :description: This example is to decide how much of each of the raw materials to purchase and stock for a refinery.
         
 Direct download link (right-click and Save link as...):
 https://raw.github.com/aimms/examples/master/Practical%20Examples/Uncertainty/ProductionPlanningSP/MainProject/kandw3.ams
