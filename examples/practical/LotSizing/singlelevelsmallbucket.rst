@@ -1,7 +1,10 @@
-Single level small bucket (Lot sizing)
+Lot Sizing: Single level small bucket
 ========================================
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Practical%20Examples/LotSizing/SingleLevelSmallBucket/MainProject/SingleLevelSmallBucket.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/LotSizing/SingleLevelSmallBucket
 
 Problem type:

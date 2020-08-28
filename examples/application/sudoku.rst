@@ -5,7 +5,10 @@ Sudoku
    :description: Besides regular MIP solve, this example also allows you to use some solvers, such as CPLEX and BARON, to find multiple solutions.
 
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Application%20Examples/Sudoku/MainProject/Sudoku.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Sudoku
 
 An example that is based on a game called 'Sudoku'.  The objective of the game is to fill every blocks, rows and columns with numbers 1 - 9 without any duplicates.  

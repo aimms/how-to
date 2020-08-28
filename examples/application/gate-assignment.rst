@@ -4,7 +4,10 @@ Gate Assignment problem
    :keywords: Mixed Integer Programming, Linear Programming, Column Generation, GMP, Gate Assignment
    :description: In this example we will demonstrate how to formulate a set-covering model that is solved by using column generation within an AIMMS project.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://www.aimms.com/english/developers/resources/examples/application-examples/gate-assignment
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Gate%20Assignment
 
 At an airport every day a large number of aircraft arrive. After they arrive, they need to be refueled, replenished, all the waste has to be taken off-board and also all the passengers must disembark the aircraft. After some time on the ground, the new passengers embark the aircraft, after which it will take off to its destination.

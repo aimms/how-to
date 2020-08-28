@@ -4,7 +4,10 @@ Stochastic Programming
    :keywords: Stochastic Programming, Scenario Tree, Benders Decomposition, Network Object
    :description: This example illustrates AIMMS capabilities for stochastic programming support.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Functional%20Examples/Stochastic%20Programming/MainProject/SPprod.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Stochastic%20Programming
 
 This example illustrates AIMMS capabilities for stochastic programming support. Starting from an existing deterministic LP or MIP model, AIMMS can create a stochastic model automatically, without the need to reformulate constraint definitions. One only needs to provide a scenario tree and stochastic input data as well as to assign decisions to different stages. Once these elements have been specified, any changes made in the deterministic formulation propagate automatically to its stochastic counterpart.

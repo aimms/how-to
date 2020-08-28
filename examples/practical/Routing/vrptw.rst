@@ -1,7 +1,10 @@
-Capacitated Vehicle Routing Problem with Time Windows
-======================================================
+Routing: Capacitated Vehicle Routing Problem with Time Windows
+===============================================================
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Practical%20Examples/Routing/VRPTW/MainProject/VRPTW.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Routing/VRPTW
 
 Problem type:

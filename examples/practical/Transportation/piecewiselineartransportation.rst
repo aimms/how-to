@@ -1,7 +1,10 @@
-Piecewise linear transportation
-================================
+Transportation: Piecewise linear transportation
+==================================================
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Practical%20Examples/Transportation/PiecewiseLinearTransportation/MainProject/PiecewiseLinearTransportation.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Transportation/PiecewiseLinearTransportation
 
 Problem type:

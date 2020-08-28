@@ -4,7 +4,10 @@
    :keywords: 3D Chart, Slider, Complementarity model, Complementarity variable
    :description: This example illustrates some of the possibilities of the 3D Chart in AIMMS.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Functional%20Examples/3D%20Chart/MainProject/3D%20Chart.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/3D%20Chart
 
 This example illustrates some of the possibilities of the 3D Chart in AIMMS. Like the 2D chart, the 3D chart supports different styles: bar, scatter, and surface. In this example only the surface style is used.

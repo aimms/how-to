@@ -4,7 +4,10 @@ Distributed Solver Sessions
    :keywords: Parallel Solver Session, Cutting Stock example, GMP, Indexed Page object, Progress Window, FileView, External Procedure
    :description: This project illustrates AIMMS' capabilities for solving two or more optimization programs in parallel by using distributed solver sessions.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Functional%20Examples/Distributed%20Solver%20Sessions/MainProject/ParallelSessions.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Distributed%20Solver%20Sessions
 
 This project illustrates AIMMS' capabilities for solving two or more optimization programs in parallel by using distributed solver sessions. Ideally this example should be run on a multi-processor machine.

@@ -4,7 +4,10 @@ Error Handling
    :keywords: Error Handling, Error Handler
    :description: This example illustrates the use of the error handling functionality in AIMMS.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Functional%20Examples/Error%20Handling/MainProject/Error%20Handling.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Error%20Handling
 
 This example illustrates the use of the error handling functionality in AIMMS. Customized error handling is useful in situations where there is a clear distinction between the application developer and the end-user. The end-user has little or no knowledge of AIMMS and we do not want to confront them with AIMMS error messages directly. The error handling functionality of AIMMS can be subdivided into two parts, local and global handling of errors, this example illustrates both.

@@ -4,7 +4,10 @@ Indexed Page
    :keywords: Indexed Page, Multiple cases
    :description: How to use indexed page object to show the same page for several items in a set.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Functional%20Examples/Indexed%20Page/MainProject/Indexed%20Page.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Indexed%20Page
 
 The indexed page object can be used to show the same page for several items in a set. The page that is shown can be dependent on an element parameter.  In the indexed page object that page can be shown for all elements in the range of the element parameter. 

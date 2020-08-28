@@ -1,7 +1,10 @@
-Hanging chain
-=============
+Engineering: Hanging chain
+==============================
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Practical%20Examples/Engineering/HangingChain/MainProject/HangingChain.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Engineering/HangingChain
 
 Problem type:

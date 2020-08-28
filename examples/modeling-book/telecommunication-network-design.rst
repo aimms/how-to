@@ -4,7 +4,10 @@ Telecommunication Network Design
    :keywords: Linear Program, Network Object
    :description: The objective of the model is to check the utilization of telecommunication network capacity.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Modeling%20Book/Telecommunication%20Network%20Design/MainProject/Telecom.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Modeling%20Book/Telecommunication%20Network%20Design
 
 This AIMMS project illustrates how to formulate and solve a telecommunication utilization problem of calls that are to be routed through a network of cables and switch-stations.

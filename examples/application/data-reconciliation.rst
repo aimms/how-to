@@ -5,7 +5,10 @@ Data Reconciliation
    :description: This demo illustrates a complete AIMMS application for the data reconcilitation of chemical processes.
 
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Application%20Examples/Data%20Reconciliation/MainProject/Data%20Reconciliation.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Data%20Reconciliation
 
 To control the production process in a chemical plant, the process is closely monitored through a continuous stream of measurements of both the flows between the process units in the plant and their composition. Such raw data may be subject to measurement errors, however, resulting in an inconsistent set of measurements.

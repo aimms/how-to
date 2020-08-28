@@ -4,7 +4,10 @@ Transport Model
    :keywords: Linear Programming, Network Object, Database Communication
    :description: The basic example illustrates how to formulate and solve a mathematical program in AIMMS.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Application%20Examples/Transport%20Model/MainProject/transport.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Transport%20Model
 
 The basic example illustrates how to formulate and solve a mathematical program in AIMMS. It contains the declarations and procedures necessary to formulate and solve a simple transportation model.

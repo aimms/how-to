@@ -1,7 +1,10 @@
-Oil pipeline design
-====================
+Energy: Oil pipeline design
+=============================
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Practical%20Examples/Energy/OilPipelineDesign/MainProject/OilPipelineDesign.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Energy/OilPipelineDesign
 
 Problem type:

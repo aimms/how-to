@@ -4,7 +4,10 @@ Data Feed
    :keywords: External Procedure, AIMMS API, table, Linear Program
    :description: This project illustrates how an independent data feed can pass data to and/or run procedures within an AIMMS project. 
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Functional%20Examples/DataFeed/MainProject/DataFeed.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/DataFeed
 
 This project illustrates how an independent data feed can pass data to and/or run procedures within an AIMMS project. Such independent data feeds typically occur in financial applications, where independent data feeds make available new stock and option prices whenever these have been changed.

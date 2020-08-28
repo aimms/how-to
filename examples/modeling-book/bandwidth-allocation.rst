@@ -4,7 +4,10 @@ Bandwidth Allocation
    :keywords: Binary programming model
    :description: This example introduces a bandwidth allocation problem that is often encountered by the ever growing mobile communication systems.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Modeling%20Book/Bandwidth%20Allocation/MainProject/Bandwidth%20Allocation.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Modeling%20Book/Bandwidth%20Allocation
 
 This example introduces a bandwidth allocation problem that is often encountered by the ever growing mobile communication systems.  The problem arises when there is an increasing need to allocate and re-allocate bandwidth for point-to-point communications.  

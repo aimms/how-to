@@ -4,7 +4,10 @@ External Procedure
    :keywords: External procedure, DLL
    :description: This model illustrates a very simple external procedure call, along with the C source of the external function called from within the model.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Functional%20Examples/External%20Procedure/MainProject/DLLExample.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/External%20Procedure
 
 This model illustrates a very simple external procedure call, along with the C source of the external function called from within the model. This function computes the average of a dense array, which corresponds to the contents of a two-dimensional identifier in the AIMMS model that is passed to it as an argument.

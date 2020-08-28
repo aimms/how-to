@@ -1,10 +1,13 @@
-Traveling Salesman Problem 
-==========================
+Routing: Traveling Salesman Problem 
+======================================
 .. meta::
    :keywords: Lazy constraint callback, subtour elimination constraints, GMP, network object
    :description: In this example the (symmetric) Traveling Salesman Problem (TSP) is formulated using subtour elimination constraints.
 
-Download the example from GitHub:
+Direct download link (right-click and Save link as...):
+https://raw.github.com/aimms/examples/master/Practical%20Examples/Routing/TSP/MainProject/TSP.ams
+
+Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Routing/TSP
 
 Problem type:
