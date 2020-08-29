@@ -1,0 +1,130 @@
+## ams_version=1.0
+
+Model Main_time_ref {
+	Convention: cnv_displayTime;
+	Quantity SI_Time_Duration {
+		BaseUnit: minute;
+		Conversions: {
+			s    ->minute : #-># / 60,
+			month->minute : #-># * 43800,
+			hour ->minute : #-># * 60,
+			day  ->minute : #-># * 1440,
+			week ->minute : #-># * 10080,
+			year ->minute : #-># * 525600
+		}
+		Comment: "Expresses the value for the duration of periods.";
+	}
+	Convention cnv_displayTime {
+		TimeslotFormat: cal_min : "%H:%M%TZ(webui::DisplayTimeZone)";
+	}
+	Convention cnv_Database {
+		TimeslotFormat: cal_min : "%c%y-%m-%d %H:%M%TZ('UTC')";
+	}
+	ElementParameter ep_displayTimezone {
+		Range: s_selectedTimezones;
+		InitialData: '';
+		Comment: "Allows end user to override the selected timezone.";
+		webui::UponChangeProcedure: pr_determineTimezoneForWebUIDisplay;
+	}
+	Set s_selectedTimezones {
+		SubsetOf: AllTimeZones;
+		Definition: {
+			data { 
+				UTC,                                ! When working in global team
+				'Central Brazilian Standard Time',  ! For office in Brasilia
+				'GTB Standard Time',                ! For office in Athens
+				'China Standard Time'               ! For office in Shanghai
+			}
+		}
+	}
+	Calendar cal_min {
+		Index: i_Min;
+		Parameter: ep_min;
+		Unit: minute;
+		BeginDate: "2020-03-03 00:00:00";
+		EndDate: "2020-03-03 23:59:59";
+		TimeslotFormat: "%c%y-%m-%d %H:%M%TZ('UTC')";
+		webui::ElementTextIdentifier: ;
+	}
+	Parameter p_Temperature {
+		IndexDomain: (i_Min);
+	}
+	DatabaseTable db_Celsius {
+		DataSource: "data/abc.dsn";
+		TableName: "TableAB";
+		Convention: cnv_Database;
+		Property: NoImplicitMapping;
+		Mapping: {
+			"Moment"             --> i_Min,
+			"TemperatureCelsius" --> p_Temperature( i_Min )
+		}
+	}
+	Procedure pr_dbRead {
+		Body: {
+			read from table db_Celsius ;
+		}
+	}
+	Procedure pr_determineTimezoneForWebUIDisplay {
+		Body: {
+			if ep_displayTimezone then 
+				ep_tz := ep_displayTimezone ;
+			elseif webui::BrowserTimeZone then
+				ep_tz := StringToElement( AllTimezones, webui::BrowserTimeZone, create:0);
+			else
+				ep_tz := 'UTC' ;
+			endif ;
+			if ep_tz and ( ep_tz in  s_selectedTimezones ) then
+				webui::DisplayTimeZone := ep_tz ;
+			else
+				webui::DisplayTimeZone := 'UTC' ;
+				raise warning "Unable to set display timezone, using UTC" ;
+			endif ;
+		}
+		Comment: {
+			"Activated when ep_displayTimezone or p01_displayInUTC changes.
+			In addition, activated via webui::"
+		}
+		ElementParameter ep_tz {
+			Range: AllTimeZones;
+		}
+	}
+	Section Main_Model_Procedures {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Body: {
+				webui::DisplayTimeZone := 'UTC' ;
+				webui::TimeZoneChangeHook := 'pr_determineTimezoneForWebUIDisplay';
+				
+				pr_dbRead();
+			}
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure MainExecution;
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+}

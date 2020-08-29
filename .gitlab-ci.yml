@@ -13,4 +13,3 @@ build_and_install:
     - ubuntu
   only:
     - master
-  

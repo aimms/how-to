@@ -1,25 +1,40 @@
 ﻿Measure Execution Time
-=======================
+==========================
 
 .. meta::
    :description: How to measure efficiency of procedures with StopWatch function.
    :keywords: efficient, time, execute, stopwatch, watch, clock
 
-      .. note::
+..   .. note::
 
-	This article was originally posted to the AIMMS Tech Blog.
+.. 	This article was originally posted to the AIMMS Tech Blog.
 
-.. sidebar:: Stopwatch
+.. .. sidebar:: Stopwatch
 
-    .. image:: images/icons8-stopwatch-512.png
-            :align: center
+..     .. image:: images/icons8-stopwatch-512.png
+..             :align: center
 
-There are situations where you would like to know how long the execution of something in AIMMS took.
+There are situations where you would like to know the duration of execution of an AIMMS code-block. 
+In AIMMS Developer, you can do this easily by using the built-in Profiler, accessed through `Tools -> Diagnostic Tools -> Profiler`. 
+This profiler will provide you with information about how long each statement in an execution took, as well as how long the evaluation of the definition of a parameter took. More information about the profiler can be found in the `AIMMS The User's Guide <https://documentation.aimms.com/_downloads/AIMMS_user.pdf>`_ Chapter "Debugging and Profiling an AIMMS Model".
 
-When you are working as an AIMMS developer, one of the tools you have for this is the AIMMS profiler. This profiler will provide you with information about how long each statement in an execution took, as well as how long the evaluation of the definition of a parameter took. More information about the profiler can be found in the `AIMMS The User's Guide <https://documentation.aimms.com/_downloads/AIMMS_user.pdf>`_ Chapter "Debugging and Profiling an AIMMS Model".
+You can also start the profiler programmatically using the function :aimms:func:`ProfilerStart`. 
+It is common to make a call to this function in the initialization procedures so that you can always have the profiler available while developing an AIMMS application.
+See all related functions in `AIMMS Function Reference - Development Support <https://documentation.aimms.com/functionreference/development-support/profiler-and-debugger/index.html>`_
 
-When running in End-user mode, the profiler is not available. To still be able to give the end-user feedback on how much time certain steps took, you can create a 'stopwatch' in AIMMS code. This can be achieved by introducing the following identifiers into your model:
+However, the profiler functionality is not available in WebUI or when running an app from AIMMS PRO. 
+To be able to give the end-users information about runtime, you can create a custom stopwatch functionality in your project.
+.. When you are working as an AIMMS developer, one of the tools you have for this is the AIMMS profiler.
 
+Custom stopwatch
+-------------------
+ 
+One way to do this is described in this article. 
+
+.. When running in End-user mode, the profiler is not available. To still be able to give the end-user feedback on how much time certain steps took, you can create a 'stopwatch' in AIMMS code. This can be achieved by introducing the following identifiers into your model:
+
+Introduce the below identifiers in your project. You can also just import the :download:`Stopwatch_support section <downloads/stopwatch_support.ams>`. 
+See :doc:`../145/145-import-export-section`
 
 .. code-block:: aimms
 
@@ -39,6 +54,9 @@ When running in End-user mode, the profiler is not available. To still be able t
                 The value for this is updated by the StopStopwatch procedure."
             }
         }
+
+        StringParameter sp_RunTime;
+
         Procedure pr_StartStopWatch {
             Body: {
                 !Use the CurrentToString AIMMS function to store the current time
@@ -60,24 +78,32 @@ When running in End-user mode, the profiler is not available. To still be able t
         }
     }
 
-If your model already contains the SI_Time quantity, just make sure that the units second and tick (1/100th of one second) are defined (either as conversion, or as base unit).
+.. note::
 
-After you have imported the section, the stopwatch code can be used as follows:
+    If your model already contains ``SI_Time quantity``, just update it so that the units second and tick (1/100th of one second) are defined (either as conversion, or as base unit).
+    Also, delete the ``SI_Time_Duration`` imported in the ``stopwatch_support`` section. 
+
+Example project
+------------------
+
+Download the :download:`example AIMMS Project <downloads/Stopwatch.zip>` 
+
+``MainExecution`` in this procedure shows the usage of the procedures built in the ``stopwatch_support`` section.
 
 .. code-block:: aimms
+    :linenos:
 
     pr_StartStopwatch ;
     pr_LongRunningProcedure  ;
     pr_StopStopwatch ;
-    DialogMessage(formatString("Execution of procedure took %n seconds", p_ElapsedTime ) ) ;
+    sp_RunTime := formatString("Execution of procedure took %n seconds", p_ElapsedTime );
 
-When running this code, you will get a dialog window telling you how many seconds the execution of SomeLongLastingProcedure took.
+In this procedure, we use functions from the ``Stopwatch_support`` section to measure the time it took to execute ``pr_LongRunningProcedure``. Line-4 is simply constructing a message using the stopwatch results. 
 
-To obtain the above code, please see the instructions in the post :doc:`../145/145-import-export-section` to export the section ``Stopwatch support`` from the example model below and import this ``.ams`` file into your own project. 
-If your project already contains the SI_Time quantity, please remove the quantity from the ``.ams`` file after downloading it.
+.. tip::
 
-Example project:
-:download:`AIMMS project download <downloads/Stopwatch.zip>` 
+    Instead of storing the message in a string parameter, update the text displayed in the WebUI Status Bar to communicate this information to your end users. 
+    See `WebUI Status Bar <https://documentation.aimms.com/webui/status-bar.html>`_
 
 
 
