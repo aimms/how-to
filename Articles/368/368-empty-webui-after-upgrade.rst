@@ -1,10 +1,10 @@
 Empty WebUI after upgrade
 =========================
 
-Diagnosis
+Symptom
 ----------
 
-When you upgrade an AIMMS Project developed in AIMMS 4.59 or older, directly to AIMMS 4.68 or newer, the WebUI appears empty.
+After upgrading an AIMMS Project developed in AIMMS 4.59 or older, directly to AIMMS 4.68 or newer, the WebUI appears empty.
 
 Explanation
 ------------
@@ -20,7 +20,7 @@ Considerable thought and refactoring work has gone into serialization of the Web
 Solution
 ---------
 
-In the article on the :doc:`evolution of the WebUI<../333/333-update-webui-version>` several steps are described.  Please make sure to execute at least the following steps:
+In the article on the :doc:`evolution of the WebUI<../333/333-update-webui-version>` several steps are described.  By at least executing the following steps, the WebUI created is retained.
 
 #.  `Map V2 <https://how-to.aimms.com/Articles/333/333-update-webui-version.html#aimms-4-61-map-v2>`_
 
