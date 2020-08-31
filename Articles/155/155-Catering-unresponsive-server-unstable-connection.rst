@@ -148,7 +148,7 @@ Further Reading
 
 * `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_: Chapter "Error Handling Functions"
 
-* `Error Handling Example <https://aimms.com/english/developers/resources/examples/functional-examples/error-handling/>`_ 
+* `Error Handling Example <../../examples/functional/error-handling/>`_ 
 
 
 

@@ -5,7 +5,7 @@ Get More Log Information
    :description: This article explains how to increase the amount of log information.
    :keywords: log, troubleshoot
 
-As a modeler, you can find :doc:`detailed logs <../313/313-get-log-files>` to analyze an issue before reporting it to `AIMMS User Support <https://www.aimms.com/english/developers/support/report-issue/>`_ or on the `AIMMS Community <https://community.aimms.com/>`_.
+As a modeler, you can find :doc:`detailed logs <../313/313-get-log-files>` to analyze an issue before reporting it to `AIMMS User Support <https://www.aimms.com/support/#were-here-for-you>`_ or on the `AIMMS Community <https://community.aimms.com/>`_.
 
 AIMMS comes with loggers, a logging feature somewhat similar to the `log4j <https://logging.apache.org/log4j/2.x/>`_ technology.
 

@@ -49,7 +49,7 @@ Congrats! The installation is successful.
 Download an SQLite database sample to test
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In order to test our installation, you could use your own generated SQLite database, or download a sample on this website: `example db <http://www.sqlitetutorial.net/download/sqlite-sample-database>`_
+In order to test our installation, you could use your own generated SQLite database, or download a sample on this website: `example db <https://www.sqlitetutorial.net/download/sqlite-sample-database>`_
 
 (click on the "SQLite Sample Database" download link). The downloaded database is named ``chinook.db``, and we will use it in the rest of this tutorial.
 
@@ -221,5 +221,5 @@ Other related websites
 ----------------------
 
 * `SQLite ODBC Driver <http://www.ch-werner.de/sqliteodbc/>`_
-* `SQLite Website <https://sqlite.org/>`_
+* `SQLite Website <https://sqlite.org/index.html>`_
 

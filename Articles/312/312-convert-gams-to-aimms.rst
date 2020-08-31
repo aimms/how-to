@@ -18,7 +18,7 @@ You can follow this procedure to convert a GAMS file to an AIMMS project:
 
 These steps are discussed in further detail below.
 
-This article uses an `example GAMS model <https://www.gams.com/products/simple-example/>`_.
+This article uses an `example GAMS model <https://www.gams.com/products/gams/gams-language/#the-gams-language-at-a-glance/>`_.
 
 Converting GMS to AIM file
 ----------------------------
@@ -96,7 +96,7 @@ A.  Open the project again using AIMMS 3.14.
 
 Converting AIMMS 3 to current AIMMS version
 -------------------------------------------
-A.  Install the `current version of AIMMS <https://www.aimms.com/english/developers/downloads/download-aimms/>`_ (or the AIMMS 4 version you prefer to use).
+A.  Install the `current version of AIMMS <https://www.aimms.com/support/downloads>`_ (or the AIMMS 4 version you prefer to use).
 
 #.  Open the project with the new version of AIMMS.
 
