@@ -60,7 +60,7 @@ Eliminating subtours
 
 However, a solution that satisfies the above constraints can still be infeasible to the actual problem; namely when the solution contains a subtour, as illustrated by the subtour through nodes 3, 4, and 5 below: 
 
-.. image:: images/subtour.png
+.. image:: images/Subtour.png
    :scale: 35%
    :align: center
 

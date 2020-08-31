@@ -3,7 +3,7 @@ Miller-Tucker-Zemlin formulation
 The library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**) contains four different formulation options. The formulations have different methods of eliminating subtours. In this article the Miller-Tucker-Zemlin formulation is discussed. 
 This is an example of a subtour in a route for a CVRP:
 
-.. image:: images/subtour.png
+.. image:: images/Subtour.png
    :scale: 35%
    :align: center
 
