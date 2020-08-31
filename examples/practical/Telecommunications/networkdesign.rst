@@ -1,8 +1,7 @@
 Telecommunications: Capacitated network design problem
 =======================================================
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Practical%20Examples/Telecommunications/NetworkDesign/MainProject/NetworkDesign.ams
+Direct download AIMMS Project :download:`NetworkDesign <https://download.aimms.com/aimms/download/examples/NetworkDesign.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Telecommunications/NetworkDesign

@@ -4,8 +4,7 @@ Database Inspection
    :keywords: Database, Datasource, GetDataSourceProperty, SQLNumberOfColumns, SQLNumberOfTables, SQLColumnData, SQLTableName, SQL Query, Mapping, Database Info
 	:description: In this example you can see how several database functions can be used.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Functional%20Examples/Database%20Inspection/MainProject/Database%20Inspection.ams
+Direct download AIMMS Project :download:`Database%20Inspection <https://download.aimms.com/aimms/download/examples/Database%20Inspection.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Database%20Inspection

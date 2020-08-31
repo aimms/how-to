@@ -1,8 +1,7 @@
 Engineering: Goddard rocket
 ============================
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Practical%20Examples/Engineering/GoddardRocket/MainProject/GoddardRocket.ams
+Direct download AIMMS Project :download:`GoddardRocket <https://download.aimms.com/aimms/download/examples/GoddardRocket.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Engineering/GoddardRocket

@@ -4,8 +4,7 @@ Investment Portfolio Selection
    :keywords: Mathematical Derivation, Mathematical Reformulation, Parametric Curve, Bar Chart, Mixed-Integer Nonlinear Programming, MINLP, BARON, Knitro
    :description: This example models how top management could spread an overall budget over several investment categories.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Modeling%20Book/Investment%20Portfolio%20Selection/MainProject/Portfolio%20Selection.ams
+Direct download AIMMS Project :download:`Portfolio%20Selection <https://download.aimms.com/aimms/download/examples/Portfolio%20Selection.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Modeling%20Book/Investment%20Portfolio%20Selection

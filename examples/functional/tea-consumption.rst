@@ -4,8 +4,7 @@ Tea Consumption
    :keywords: 2D Chart, Pie Chart, Plot / Curve Chart, Reverse link, Spreadsheet Interface, Excel
    :description: This demo shows some features of the AIMMS 2D chart object.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Functional%20Examples/Tea%20Consumption/MainProject/Tea.ams
+Direct download AIMMS Project :download:`Tea <https://download.aimms.com/aimms/download/examples/Tea.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Tea%20Consumption

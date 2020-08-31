@@ -1,8 +1,7 @@
 Energy: Water Distribution Network Design
 ==============================================
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Practical%20Examples/Energy/WaterDistribution/MainProject/WaterDistribution.ams
+Direct download AIMMS Project :download:`WaterDistribution <https://download.aimms.com/aimms/download/examples/WaterDistribution.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Energy/WaterDistribution

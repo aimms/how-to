@@ -4,8 +4,7 @@ Employee Scheduling
    :keywords: Employee assignment problem, scheduling
    :description: The objective of the optimization is to find the best placement of staff at the lowest cost.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Application%20Examples/Employee%20Scheduling/MainProject/Scheduling%20Problem.ams
+Direct download AIMMS Project :download:`EmployeeScheduling <https://download.aimms.com/aimms/download/examples/EmployeeScheduling.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Employee%20Scheduling

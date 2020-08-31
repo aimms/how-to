@@ -5,8 +5,7 @@ Sudoku
    :description: Besides regular MIP solve, this example also allows you to use some solvers, such as CPLEX and BARON, to find multiple solutions.
 
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Application%20Examples/Sudoku/MainProject/Sudoku.ams
+Direct download AIMMS Project :download:`Sudoku <https://download.aimms.com/aimms/download/examples/Sudoku.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Sudoku

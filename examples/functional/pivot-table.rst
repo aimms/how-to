@@ -4,8 +4,7 @@ Pivot Table
    :keywords: GUI, Pivot Table
    :description: In this example, the use of the pivot table is illustrated.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Functional%20Examples/Pivot%20Table/MainProject/Pivot%20Table.ams
+Direct download AIMMS Project :download:`Pivot%20Table <https://download.aimms.com/aimms/download/examples/Pivot%20Table.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Pivot%20Table
