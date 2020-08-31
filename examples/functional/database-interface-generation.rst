@@ -4,8 +4,7 @@ Database Interface Generation
    :keywords: Database, Datasource, GetDataSourceProperty, SQLNumberOfColumns, SQLNumberOfTables, SQLColumnData, SQLTableName, Mapping, Database Info, Model Edit Functions
 	:description: This example shows you how the Model Edit functions can be used to generate a link to one or more database tables for your projects.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Functional%20Examples/Database%20Interface%20Generation/MainProject/Database%20Interface%20Generation.ams
+Direct download AIMMS Project :download:`Database%20Interface%20Generation <https://download.aimms.com/aimms/download/examples/Database%20Interface%20Generation.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Database%20Interface%20Generation

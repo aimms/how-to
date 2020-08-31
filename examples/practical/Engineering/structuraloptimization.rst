@@ -1,8 +1,7 @@
 Engineering: Structural Optimization
 =======================================
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Practical%20Examples/Engineering/StructuralOptimization/MainProject/StructuralOptimization.ams
+Direct download AIMMS Project :download:`StructuralOptimization <https://download.aimms.com/aimms/download/examples/StructuralOptimization.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Engineering/StructuralOptimization

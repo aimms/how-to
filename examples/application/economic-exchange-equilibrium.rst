@@ -4,8 +4,7 @@ Economic Exchange Equilibrium
    :keywords: Utility Function, Equilibrium, Duality, Nonlinear System
    :description: This example models an economic exchange of a number of goods between a number of agents.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Application%20Examples/Economic%20Exchange%20Equilibrium/MainProject/Economic%20Exchange%20Equilibrium.ams
+Direct download AIMMS Project :download:`EconomicExchangeEquilibrium <https://download.aimms.com/aimms/download/examples/EconomicExchangeEquilibrium.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Economic%20Exchange%20Equilibrium

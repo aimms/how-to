@@ -4,8 +4,7 @@ Print Pages
    :keywords: Print page, print template, project user files
    :description: In this example the use of print templates is illustrated.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Functional%20Examples/Print%20Pages/MainProject/Print%20Pages.ams
+Direct download AIMMS Project :download:`Print%20Pages <https://download.aimms.com/aimms/download/examples/Print%20Pages.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Print%20Pages

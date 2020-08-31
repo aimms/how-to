@@ -1,8 +1,7 @@
 Miscellaneous: Multistart
 ===========================
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Practical%20Examples/Miscellaneous/Multistart/MainProject/multistart.ams
+Direct download AIMMS Project :download:`multistart <https://download.aimms.com/aimms/download/examples/multistart.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Miscellaneous/Multistart

@@ -1,8 +1,7 @@
 Engineering: 2D Strip Packing
 ================================
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Practical%20Examples/Engineering/2DStripPacking/MainProject/2DStripPacking.ams
+Direct download AIMMS Project :download:`2DStripPacking <https://download.aimms.com/aimms/download/examples/2DStripPacking.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Engineering/2DStripPacking

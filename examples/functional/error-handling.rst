@@ -4,8 +4,7 @@ Error Handling
    :keywords: Error Handling, Error Handler
    :description: This example illustrates the use of the error handling functionality in AIMMS.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Functional%20Examples/Error%20Handling/MainProject/Error%20Handling.ams
+Direct download AIMMS Project :download:`Error%20Handling <https://download.aimms.com/aimms/download/examples/Error%20Handling.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Error%20Handling

@@ -4,8 +4,7 @@ Uncertainty: Synchronous Optical Network Ring Design
    :keywords: Synchronous Optical Network, SONET, ring assignment, stochastic programming, stochastic integer programming, uncertain data, Benders decomposition, networkobject
    :description: In this problem we consider the assignment of rings to nodes in a network.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Practical%20Examples/Uncertainty/NetworkRingDesign/MainProject/NetworkRingDesign.ams
+Direct download AIMMS Project :download:`NetworkRingDesign <https://download.aimms.com/aimms/download/examples/NetworkRingDesign.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Uncertainty/NetworkRingDesign

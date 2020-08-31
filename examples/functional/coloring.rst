@@ -4,8 +4,7 @@ Coloring
    :keywords: Color, Inactive element, DialogGetColor, UserColorAdd, UserColorModify
    :description: This example illustrates how data in a model can influence the objects in the graphical user interface.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Functional%20Examples/Coloring/MainProject/Coloring.ams
+Direct download AIMMS Project :download:`Coloring <https://download.aimms.com/aimms/download/examples/Coloring.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Coloring

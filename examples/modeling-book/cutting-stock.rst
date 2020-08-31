@@ -4,8 +4,7 @@ Cutting Stock
    :keywords: Cutting Stock, Algorithmic approach, GMP, Callback function, Heuristic, Gantt Chart, AIMMS API 
    :description:    This project illustrates AIMMS' capabilities to implement an algorithmic approach to find an optimal solution to a problem by repeatedly solving two optimization programs.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Modeling%20Book/Cutting%20Stock/MainProject/Cutting%20Stock.ams
+Direct download AIMMS Project :download:`Cutting%20Stock <https://download.aimms.com/aimms/download/examples/Cutting%20Stock.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Modeling%20Book/Cutting%20Stock

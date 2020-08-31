@@ -4,8 +4,7 @@ Camping
    :keywords: Constraint Programming, callback function
    :description: In this AIMMS project, some aspects of Constraint Programming (CP) are illustrated.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Functional%20Examples/Camping/MainProject/Camping.ams
+Direct download AIMMS Project :download:`Camping <https://download.aimms.com/aimms/download/examples/Camping.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Camping

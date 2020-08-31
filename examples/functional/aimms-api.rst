@@ -4,8 +4,7 @@ AIMMS API
    :keywords: AIMMS API, external DLL
    :description: This AIMMS project illustrates the basic use of the AIMMS API in an external DLL.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Functional%20Examples/AIMMS%20API/MainProject/APITest.ams
+Direct download AIMMS Project :download:`APITest <https://download.aimms.com/aimms/download/examples/APITest.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/AIMMS%20API

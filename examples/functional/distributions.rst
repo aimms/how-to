@@ -4,8 +4,7 @@ Distributions
    :keywords: Probability Distribution, Extreme Value Distribution Approximation, Distribution Operators, 2D Chart
    :description: This example shows the four distributions with shape parameter and lower bound (only): Pareto, Lognormal, Weibull and Gamma Distribution.
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Functional%20Examples/Distributions/MainProject/Distributions.ams
+Direct download AIMMS Project :download:`Distributions <https://download.aimms.com/aimms/download/examples/Distributions.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Distributions

@@ -1,8 +1,7 @@
 Telecommunications: Delay constrained routing
 =============================================
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Practical%20Examples/Telecommunications/DelayConstrainedRouting/MainProject/DelayConstrainedRouting.ams
+Direct download AIMMS Project :download:`DelayConstrainedRouting <https://download.aimms.com/aimms/download/examples/DelayConstrainedRouting.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Telecommunications/DelayConstrainedRouting

@@ -11,7 +11,6 @@ The functional AIMMS examples listed below illustrate specific AIMMS features.
   aimms-api
   arcs-and-nodes
   calendar
-  calling-aimmscom
   camping
   chance-constraints
   clock
@@ -25,7 +24,6 @@ The functional AIMMS examples listed below illustrate specific AIMMS features.
   distributions
   e-mail-and-sound-support
   error-handling
-  excel-link
   experiment
   external-procedure
   gantt-chart

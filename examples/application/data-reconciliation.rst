@@ -5,8 +5,7 @@ Data Reconciliation
    :description: This demo illustrates a complete AIMMS application for the data reconcilitation of chemical processes.
 
 
-Direct download link (right-click and Save link as...):
-https://raw.github.com/aimms/examples/master/Application%20Examples/Data%20Reconciliation/MainProject/Data%20Reconciliation.ams
+Direct download AIMMS Project :download:`DataReconciliation <https://download.aimms.com/aimms/download/examples/DataReconciliation.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Data%20Reconciliation
