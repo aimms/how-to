@@ -1,7 +1,6 @@
-.. include:: /includes/icons-sub.def
-
 .. |sp| image:: /Images/icons/StringParameter.png
 .. |db| image:: /Images/icons/database.png
+.. |proc| image:: /Images/icons/proc.png
 
 Link an SQLite Database to a Project
 =========================================
