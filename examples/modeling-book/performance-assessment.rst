@@ -4,7 +4,7 @@ Performance Assessment
    :keywords: Linear Program, What-If Analysis
    :description: In this example the performance of a set of comparable organizations is determined, while introducing the concept of relative efficiency from organizational unit to another. 
 
-Direct download AIMMS Project :download:`Performance%20Assessment <https://download.aimms.com/aimms/download/examples/Performance%20Assessment.zip>`
+Direct download AIMMS Project :download:`PerformanceAssessment.zip <https://download.aimms.com/aimms/download/examples/PerformanceAssessment.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Modeling%20Book/Performance%20Assessment

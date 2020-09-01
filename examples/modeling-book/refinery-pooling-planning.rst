@@ -4,7 +4,7 @@ Refinery Pooling Planning
    :keywords: Pooling, Global optimization, Nonlinear Programming, NLP, Pivot table, Network object
    :description: This exampl eis a refinery-pooling problem, which illustrates the effect of selecting different initial values in supporting the solution finding process.
 
-Direct download AIMMS Project :download:`Pooling <https://download.aimms.com/aimms/download/examples/Pooling.zip>`
+Direct download AIMMS Project :download:`Pooling.zip <https://download.aimms.com/aimms/download/examples/Pooling.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Modeling%20Book/Refinery%20Pooling%20Planning

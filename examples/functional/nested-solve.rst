@@ -4,7 +4,7 @@ Nested Solve
    :keywords: Nested solve, Network Flow, GMP, cut, callback, CallbackAddCut, MIP, Document Viewer
    :description: This example illustrates the nested solve that can be done in AIMMS using GMP callback.
 
-Direct download AIMMS Project :download:`Nested%20Solve <https://download.aimms.com/aimms/download/examples/Nested%20Solve.zip>`
+Direct download AIMMS Project :download:`NestedSolve.zip <https://download.aimms.com/aimms/download/examples/NestedSolve.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Nested%20Solve

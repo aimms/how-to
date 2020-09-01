@@ -4,7 +4,7 @@ Employee Training
    :keywords: Linear Program, Integer Program, Control-State variables, Rounding Heuristic, Probabilistic Constraint, WebUI
    :description: This example illustrates a personnel planning problem and its corresponding multi-period model.
 
-Direct download AIMMS Project :download:`Employee%20Training%20Problem <https://download.aimms.com/aimms/download/examples/Employee%20Training%20Problem.zip>`
+Direct download AIMMS Project :download:`EmployeeTrainingProblem.zip <https://download.aimms.com/aimms/download/examples/EmployeeTrainingProblem.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Modeling%20Book/Employee%20Training

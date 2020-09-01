@@ -4,7 +4,7 @@ Goal Programming
    :keywords: Goal Programming, Violation penalty
    :description: This example illustrates how the goal programming can be easily implemented using the Violation Penalty of a mathematical program.
 
-Direct download AIMMS Project :download:`GoalProgramming <https://download.aimms.com/aimms/download/examples/GoalProgramming.zip>`
+Direct download AIMMS Project :download:`GoalProgramming.zip <https://download.aimms.com/aimms/download/examples/GoalProgramming.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Goal%20Programming

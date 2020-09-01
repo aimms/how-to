@@ -4,7 +4,7 @@ Life Cycle Consumption
    :keywords: Utility Function, Discount Factor, Present Value, Future Value, Nonlinear Programming, Nonlinear Solvers, Curve Object
    :description: In this example a life-cycle consumption optimization problem has been modeled, including labor and assets.
 
-Direct download AIMMS Project :download:`LifeCycleConsumptionModel <https://download.aimms.com/aimms/download/examples/LifeCycleConsumptionModel.zip>`
+Direct download AIMMS Project :download:`LifeCycleConsumptionModel.zip <https://download.aimms.com/aimms/download/examples/LifeCycleConsumptionModel.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Life%20Cycle%20Consumption

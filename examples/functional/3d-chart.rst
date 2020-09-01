@@ -4,7 +4,7 @@
    :keywords: 3D Chart, Slider, Complementarity model, Complementarity variable
    :description: This example illustrates some of the possibilities of the 3D Chart in AIMMS.
 
-Direct download AIMMS Project :download:`3D%20Chart <https://download.aimms.com/aimms/download/examples/3D%20Chart.zip>`
+Direct download AIMMS Project :download:`3DChart.zip <https://download.aimms.com/aimms/download/examples/3DChart.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/3D%20Chart

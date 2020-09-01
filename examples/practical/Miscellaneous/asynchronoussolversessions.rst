@@ -1,7 +1,7 @@
 Miscellaneous: Asynchronous solver sessions
 ===========================================
 
-Direct download AIMMS Project :download:`Flowshop <https://download.aimms.com/aimms/download/examples/Flowshop.zip>`
+Direct download AIMMS Project :download:`Flowshop.zip <https://download.aimms.com/aimms/download/examples/Flowshop.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Miscellaneous/AsynchronousSolverSessions

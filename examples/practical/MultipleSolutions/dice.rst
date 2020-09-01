@@ -1,7 +1,7 @@
 Multiple Solutions: Dice problem
 ================================================
 
-Direct download AIMMS Project :download:`dice <https://download.aimms.com/aimms/download/examples/dice.zip>`
+Direct download AIMMS Project :download:`Dice.zip <https://download.aimms.com/aimms/download/examples/Dice.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/MultipleSolutions/Dice

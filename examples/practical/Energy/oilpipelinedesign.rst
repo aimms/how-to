@@ -1,7 +1,7 @@
 Energy: Oil pipeline design
 =============================
 
-Direct download AIMMS Project :download:`OilPipelineDesign <https://download.aimms.com/aimms/download/examples/OilPipelineDesign.zip>`
+Direct download AIMMS Project :download:`OilPipelineDesign.zip <https://download.aimms.com/aimms/download/examples/OilPipelineDesign.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Energy/OilPipelineDesign

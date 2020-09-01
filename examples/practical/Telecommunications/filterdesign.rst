@@ -1,7 +1,7 @@
 Telecommunications: Filter design
 ===================================
 
-Direct download AIMMS Project :download:`FilterDesign <https://download.aimms.com/aimms/download/examples/FilterDesign.zip>`
+Direct download AIMMS Project :download:`FilterDesign.zip <https://download.aimms.com/aimms/download/examples/FilterDesign.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Telecommunications/FilterDesign

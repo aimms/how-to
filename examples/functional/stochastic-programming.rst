@@ -4,7 +4,7 @@ Stochastic Programming
    :keywords: Stochastic Programming, Scenario Tree, Benders Decomposition, Network Object
    :description: This example illustrates AIMMS capabilities for stochastic programming support.
 
-Direct download AIMMS Project :download:`SPprod <https://download.aimms.com/aimms/download/examples/SPprod.zip>`
+Direct download AIMMS Project :download:`SPprod.zip <https://download.aimms.com/aimms/download/examples/SPprod.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Stochastic%20Programming

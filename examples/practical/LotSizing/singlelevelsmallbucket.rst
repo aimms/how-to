@@ -1,7 +1,7 @@
 Lot Sizing: Single level small bucket
 ========================================
 
-Direct download AIMMS Project :download:`SingleLevelSmallBucket <https://download.aimms.com/aimms/download/examples/SingleLevelSmallBucket.zip>`
+Direct download AIMMS Project :download:`SingleLevelSmallBucket.zip <https://download.aimms.com/aimms/download/examples/SingleLevelSmallBucket.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/LotSizing/SingleLevelSmallBucket

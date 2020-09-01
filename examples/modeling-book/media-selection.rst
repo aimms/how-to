@@ -4,7 +4,7 @@ Media Selection
    :keywords: Integer Program, Logical Constraint, Set Covering Problem, WebUI
    :description: This example introduces a simplified media selection problem which is formulated as a binary programming model.  
 
-Direct download AIMMS Project :download:`Media%20Selection%20Problem <https://download.aimms.com/aimms/download/examples/Media%20Selection%20Problem.zip>`
+Direct download AIMMS Project :download:`MediaSelectionProblem.zip <https://download.aimms.com/aimms/download/examples/MediaSelectionProblem.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Modeling%20Book/Media%20Selection

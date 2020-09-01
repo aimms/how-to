@@ -4,7 +4,7 @@ Gantt Chart
    :keywords: Gantt Chart, Overlapped Bars, Composite Table, Tooltips
    :description: This AIMMS project illustrates the basic use of the Gantt chart object in AIMMS.
 
-Direct download AIMMS Project :download:`Gantt%20Chart <https://download.aimms.com/aimms/download/examples/Gantt%20Chart.zip>`
+Direct download AIMMS Project :download:`GanttChart.zip <https://download.aimms.com/aimms/download/examples/GanttChart.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Gantt%20Chart

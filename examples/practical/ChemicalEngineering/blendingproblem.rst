@@ -1,7 +1,7 @@
 Chemical Engineering: Blending problem
 =======================================
 
-Direct download AIMMS Project :download:`BlendingProblem <https://download.aimms.com/aimms/download/examples/BlendingProblem.zip>`
+Direct download AIMMS Project :download:`BlendingProblem.zip <https://download.aimms.com/aimms/download/examples/BlendingProblem.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/ChemicalEngineering/BlendingProblem

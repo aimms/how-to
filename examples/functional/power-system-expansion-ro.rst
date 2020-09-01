@@ -5,7 +5,7 @@ Power System Expansion RO
    :description: This example implements a power system expansion model with uncertain electricity demand, covering a single time period.
 
 
-Direct download AIMMS Project :download:`Power%20System%20Expansion%20RO <https://download.aimms.com/aimms/download/examples/Power%20System%20Expansion%20RO.zip>`
+Direct download AIMMS Project :download:`PowerSystemExpansionRO.zip <https://download.aimms.com/aimms/download/examples/PowerSystemExpansionRO.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Power%20System%20Expansion%20RO

@@ -1,7 +1,7 @@
 Lot Sizing: Single level small bucket with two items
 =====================================================
 
-Direct download AIMMS Project :download:`SingleLevelSmallBucketTwoItems <https://download.aimms.com/aimms/download/examples/SingleLevelSmallBucketTwoItems.zip>`
+Direct download AIMMS Project :download:`SingleLevelSmallBucketTwoItems.zip <https://download.aimms.com/aimms/download/examples/SingleLevelSmallBucketTwoItems.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/LotSizing/SingleLevelSmallBucketTwoItems

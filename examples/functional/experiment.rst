@@ -4,7 +4,7 @@ Experiment
    :keywords: Histogram, statistical functions, distribution functions, bar chart, composite table, table, scalar object
    :description: This AIMMS project illustrates how to perform and visualize an experiment in AIMMS.
 
-Direct download AIMMS Project :download:`Experiment <https://download.aimms.com/aimms/download/examples/Experiment.zip>`
+Direct download AIMMS Project :download:`Experiment.zip <https://download.aimms.com/aimms/download/examples/Experiment.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Experiment

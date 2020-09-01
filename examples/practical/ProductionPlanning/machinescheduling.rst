@@ -4,7 +4,7 @@ Production Planning: Machine scheduling
    :keywords: Gantt chart, MIP Gap, Callback procedures, GMP, Calendar
    :description: This machine scheduling problem is formulated as a MIP problem.
 
-Direct download AIMMS Project :download:`MachineScheduling <https://download.aimms.com/aimms/download/examples/MachineScheduling.zip>`
+Direct download AIMMS Project :download:`MachineScheduling.zip <https://download.aimms.com/aimms/download/examples/MachineScheduling.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/ProductionPlanning/MachineScheduling

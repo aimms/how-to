@@ -4,7 +4,7 @@ Railway Stock
    :keywords: XML, network object, colors, compound set, calendar, time, tabbed page
    :description: This model illustrates the use of compound sets.
 
-Direct download AIMMS Project :download:`RailwayStock <https://download.aimms.com/aimms/download/examples/RailwayStock.zip>`
+Direct download AIMMS Project :download:`RailwayStock.zip <https://download.aimms.com/aimms/download/examples/RailwayStock.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Railway%20Stock
