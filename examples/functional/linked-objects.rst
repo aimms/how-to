@@ -4,7 +4,7 @@ Linked Objects
    :keywords: Linking objects, network object
    :description: This demo illustrates data objects in the graphical user interface can be linked together through the use scalar element parameters.
 
-Direct download AIMMS Project :download:`Linked%20Objects <https://download.aimms.com/aimms/download/examples/Linked%20Objects.zip>`
+Direct download AIMMS Project :download:`LinkedObjects.zip <https://download.aimms.com/aimms/download/examples/LinkedObjects.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Linked%20Objects

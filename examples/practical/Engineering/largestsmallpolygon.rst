@@ -1,7 +1,7 @@
 Engineering: Largest small polygon
 ==================================
 
-Direct download AIMMS Project :download:`LargestSmallPolygon <https://download.aimms.com/aimms/download/examples/LargestSmallPolygon.zip>`
+Direct download AIMMS Project :download:`LargestSmallPolygon.zip <https://download.aimms.com/aimms/download/examples/LargestSmallPolygon.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Engineering/LargestSmallPolygon

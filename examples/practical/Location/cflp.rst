@@ -1,7 +1,7 @@
 Location: Capacitated facility location problem (CFLP)
 ========================================================
 
-Direct download AIMMS Project :download:`CapacitatedWarehouseLocation <https://download.aimms.com/aimms/download/examples/CapacitatedWarehouseLocation.zip>`
+Direct download AIMMS Project :download:`CapacitatedWarehouseLocation.zip <https://download.aimms.com/aimms/download/examples/CapacitatedWarehouseLocation.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Location/CFLP

@@ -5,7 +5,7 @@ Flow Shop
    :description: The goal in this example is to find a schedule such that the time to process all the jobs on all the machines is as small as possible.
 
 
-Direct download AIMMS Project :download:`FlowShop <https://download.aimms.com/aimms/download/examples/FlowShop.zip>`
+Direct download AIMMS Project :download:`FlowShop.zip <https://download.aimms.com/aimms/download/examples/FlowShop.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Flow%20Shop

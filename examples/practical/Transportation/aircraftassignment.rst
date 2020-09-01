@@ -1,7 +1,7 @@
 Transportation: Aircraft Assignment
 ====================================
 
-Direct download AIMMS Project :download:`AircraftAssignment <https://download.aimms.com/aimms/download/examples/AircraftAssignment.zip>`
+Direct download AIMMS Project :download:`AircraftAssignment.zip <https://download.aimms.com/aimms/download/examples/AircraftAssignment.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Transportation/AircraftAssignment

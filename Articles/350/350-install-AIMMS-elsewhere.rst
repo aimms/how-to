@@ -1,14 +1,14 @@
-Install AIMMS perhaps elsewhere
+Install AIMMS in another location
 =================================
 
 .. meta::
     :description: Installing AIMMS, making it available for all users, and perhaps even on a non-default location.
     :keywords: AIMMS, Installation, all users, disk drive
 
-To install AIMMS on your own laptop is usually easy, just download the version of your choice from `our downloads page <https://www.aimms.com/english/developers/downloads/download-aimms/>`_ and run the self-extracting file, for instance ``Aimms-4.73.1.3-x64-VS2017.exe``.
+To install AIMMS on your own laptop is usually easy, just download the version of your choice from `our downloads page <https://www.aimms.com/support/downloads>`_ and run the self-extracting file, for instance ``Aimms-4.73.1.3-x64-VS2017.exe``.
 It will extract the actual program in ``%localappdata%\AIMMS\IFA\Aimms\`` and start it.
 
-We also recommended to download and install the `AIMMS launcher <https://download.aimms.com/aimms/download/data/AIMMSLauncher/AIMMSLauncher-1.0.0.55.exe>`_. 
+We also recommended to download and install the `AIMMS launcher <https://www.aimms.com/support/downloads#aimms-other-download>`_. 
 The latest version can be downloaded from the same page. 
 The functionalities of AIMMS Launcher are:
 
@@ -93,11 +93,11 @@ Installing the license
 -----------------------
 
 *  You should have a valid AIMMS license to use AIMMS.  
-   If you do not have one yet, you can request a `free license <https://www.aimms.com/english/developers/licensing/free-licenses/>`_
+   If you do not have one yet, you can request a `free license <https://www.aimms.com/support/licensing/free-licenses/>`_
 
-*  Read all about `AIMMS licensing here <https://www.aimms.com/english/developers/licensing/>`_  
+*  Read all about `AIMMS licensing here <https://www.aimms.com/support/licensing/>`_  
 
-*  When using multiple licenses, they can be managed using the `AIMMS Network License server <https://www.aimms.com/english/developers/downloads/download-aimms/aimms-network-license-server>`_
+*  When using multiple licenses, they can be managed using the `AIMMS Network License server <https://www.aimms.com/support/downloads#aimms-other-download>`_
 
 *  Further licensing `How-Tos <https://how-to.aimms.com/C_Getting_Started/Sub_Licensing/index.html>`_
 

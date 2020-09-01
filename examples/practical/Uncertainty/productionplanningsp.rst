@@ -4,7 +4,7 @@ Uncertainty: Production Planning - Stochastic Programming
    :keywords: Uncertain data, stochastic programming, scenarios
    :description: This example is to decide how much of each of the raw materials to purchase and stock for a refinery.
         
-Direct download AIMMS Project :download:`kandw3 <https://download.aimms.com/aimms/download/examples/kandw3.zip>`
+Direct download AIMMS Project :download:`ProductionPlanningSP.zip <https://download.aimms.com/aimms/download/examples/ProductionPlanningSP.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Uncertainty/ProductionPlanningSP

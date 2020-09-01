@@ -4,7 +4,7 @@ Page Resizability
    :keywords: Resizability, Split lines
    :description: In this demo the use of split lines is demonstrated.
 
-Direct download AIMMS Project :download:`Page%20Resizability <https://download.aimms.com/aimms/download/examples/Page%20Resizability.zip>`
+Direct download AIMMS Project :download:`PageResizability.zip <https://download.aimms.com/aimms/download/examples/PageResizability.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Page%20Resizability

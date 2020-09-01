@@ -4,7 +4,7 @@ Horizon
    :keywords: LP model, Horizon, Composite table
    :description: This AIMMS project illustrates the basic behavior of horizons in AIMMS.
 
-Direct download AIMMS Project :download:`Horizon <https://download.aimms.com/aimms/download/examples/Horizon.zip>`
+Direct download AIMMS Project :download:`Horizon.zip <https://download.aimms.com/aimms/download/examples/Horizon.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Horizon

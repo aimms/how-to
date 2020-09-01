@@ -1,7 +1,7 @@
 Miscellaneous: Multistart
 ===========================
 
-Direct download AIMMS Project :download:`multistart <https://download.aimms.com/aimms/download/examples/multistart.zip>`
+Direct download AIMMS Project :download:`MultiStart.zip <https://download.aimms.com/aimms/download/examples/Multi_Start.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Miscellaneous/Multistart

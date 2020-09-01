@@ -4,7 +4,7 @@ Oil Well Drilling
    :keywords: Model Edit Functions, Error Handling, source code generation
    :description: This example illustrates the use of AIMMS Model Edit functions in combination with the Error Handling functionality. 
 
-Direct download AIMMS Project :download:`Oil%20Well%20Drilling <https://download.aimms.com/aimms/download/examples/Oil%20Well%20Drilling.zip>`
+Direct download AIMMS Project :download:`OilWellDrilling.zip <https://download.aimms.com/aimms/download/examples/OilWellDrilling.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Oil%20Well%20Drilling

@@ -24,7 +24,7 @@ Please note that you must use the bitmap (BMP) format, as AIMMS will only look f
 Example
 --------
 
-A custom startup image is used in the `Gate Assignment example project <https://aimms.com/english/developers/resources/examples/application-examples/gate-assignment/>`_:
+A custom startup image is used in the :doc:`Gate Assignment example project <../../examples/application/gate-assignment/>`:
 
 .. image:: images/GateAssignment.bmp
    :align: center

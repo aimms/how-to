@@ -37,7 +37,7 @@ Using the tool
 ------------------------------
 Use the AimmsInterrupt tool like this:
 
-#. Download the `AIMMS Interrupt Tool <http://download.aimms.com/aimms/download/data/AIMMSInterruptTool/AimmsInterrupt.exe>`_.
+#. Download the `AIMMS Interrupt Tool <https://download.aimms.com/aimms/download/data/AIMMSInterruptTool/AimmsInterrupt.exe>`_.
 
 #. Run ``AimmsInterrupt.exe`` from the Windows Start Menu. An icon appears in the Windows system tray in the toolbar. 
 

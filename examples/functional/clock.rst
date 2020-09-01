@@ -4,7 +4,7 @@ Clock
    :keywords: Network Object, ScheduleAt, CurrentToString, MomentToString
    :description: In this example a clock is created in a network object and is updated every second. 
 
-Direct download AIMMS Project :download:`Clock <https://download.aimms.com/aimms/download/examples/Clock.zip>`
+Direct download AIMMS Project :download:`Clock.zip <https://download.aimms.com/aimms/download/examples/Clock.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Clock

@@ -4,7 +4,7 @@ Model Edit Functions
    :keywords: Model Edit Functions, me::, Runtime Libraries, Excel
    :description: This example illustrates how you can use the Model Edit Functions to develop functionality that could not be developed in AIMMS without these functions. 
 
-Direct download AIMMS Project :download:`Model%20Edit%20Functions <https://download.aimms.com/aimms/download/examples/Model%20Edit%20Functions.zip>`
+Direct download AIMMS Project :download:`ModelEditFunctions.zip <https://download.aimms.com/aimms/download/examples/ModelEditFunctions.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Model%20Edit%20Functions

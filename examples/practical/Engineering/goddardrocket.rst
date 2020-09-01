@@ -1,7 +1,7 @@
 Engineering: Goddard rocket
 ============================
 
-Direct download AIMMS Project :download:`GoddardRocket <https://download.aimms.com/aimms/download/examples/GoddardRocket.zip>`
+Direct download AIMMS Project :download:`GoddardRocket.zip <https://download.aimms.com/aimms/download/examples/GoddardRocket.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Engineering/GoddardRocket

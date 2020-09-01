@@ -1,7 +1,7 @@
 Location: Capacitated warehouse location
 ==========================================
 
-Direct download AIMMS Project :download:`CFLP <https://download.aimms.com/aimms/download/examples/CFLP.zip>`
+Direct download AIMMS Project :download:`CFLP.zip <https://download.aimms.com/aimms/download/examples/CFLP.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Location/CapacitatedWarehouseLocation

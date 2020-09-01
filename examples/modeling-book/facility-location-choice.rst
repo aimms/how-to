@@ -4,7 +4,7 @@ Facility Location Choice
    :keywords: Distribution System Design, Integer Program, Mathematical Reformulation, Mathematical Derivation, Customized Algorithm, Benders decomposition, Auxiliary Model, Constraint Generation
    :description: This example considers the problem of selecting distribution centers along with their associated customer zones.
 
-Direct download AIMMS Project :download:`facility%20location <https://download.aimms.com/aimms/download/examples/facility%20location.zip>`
+Direct download AIMMS Project :download:`FacilityLocation.zip <https://download.aimms.com/aimms/download/examples/FacilityLocation.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Modeling%20Book/Facility%20Location%20Choice

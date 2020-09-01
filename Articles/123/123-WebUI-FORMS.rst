@@ -34,7 +34,7 @@ To properly implement such a form, several identifiers are needed. Each of them 
 
 The AIMMS WebUI Forms framework minimizes effort for developers by creating the needed additional identifiers, and generating code for copying, deleting and the repetitive part of checking. 
 
-Let's use an example to show how to deploy this framework in order to create an advanced form. This example is part of an inventory management application, where data of a `Stock Keeping Unit <http://en.wikipedia.org/wiki/Stock_keeping_unit>`_ is entered and maintained.
+Let's use an example to show how to deploy this framework in order to create an advanced form. This example is part of an inventory management application, where data of a `Stock Keeping Unit <https://en.wikipedia.org/wiki/Stock_keeping_unit>`_ is entered and maintained.
 
 1. Prepare the project for WebUI
 2. Create the declarations and procedures support the form

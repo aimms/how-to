@@ -4,7 +4,7 @@ Uncertainty: Production Planning - Robust Optimization
    :keywords: Uncertain data, robust optimization
    :description: The goal is to find the production plan for two products that maximizes the profit of the company. 
 
-Direct download AIMMS Project :download:`drugs <https://download.aimms.com/aimms/download/examples/drugs.zip>`
+Direct download AIMMS Project :download:`ProductionPlanningRO.zip <https://download.aimms.com/aimms/download/examples/ProductionPlanningRO.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Uncertainty/ProductionPlanningRO

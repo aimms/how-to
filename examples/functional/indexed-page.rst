@@ -4,7 +4,7 @@ Indexed Page
    :keywords: Indexed Page, Multiple cases
    :description: How to use indexed page object to show the same page for several items in a set.
 
-Direct download AIMMS Project :download:`Indexed%20Page <https://download.aimms.com/aimms/download/examples/Indexed%20Page.zip>`
+Direct download AIMMS Project :download:`IndexedPage.zip <https://download.aimms.com/aimms/download/examples/IndexedPage.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Indexed%20Page

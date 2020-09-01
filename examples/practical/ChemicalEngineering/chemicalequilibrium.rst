@@ -1,7 +1,7 @@
 Chemical Engineering: Chemical Equilibrium problem
 ====================================================
 
-Direct download AIMMS Project :download:`ChemicalEquilibrium <https://download.aimms.com/aimms/download/examples/ChemicalEquilibrium.zip>`
+Direct download AIMMS Project :download:`ChemicalEquilibrium.zip <https://download.aimms.com/aimms/download/examples/ChemicalEquilibrium.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/ChemicalEngineering/ChemicalEquilibrium

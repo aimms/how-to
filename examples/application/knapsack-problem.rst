@@ -4,7 +4,7 @@ Knapsack Problem
    :keywords: 0-1 Knapsack, Knapsack, Integer Programming, Binary Integer Programming, Cover Inequalities, Network Object
    :description: This example introduces a knapsack problem.
 
-Direct download AIMMS Project :download:`KnapsackProblem <https://download.aimms.com/aimms/download/examples/KnapsackProblem.zip>`
+Direct download AIMMS Project :download:`KnapsackProblem.zip <https://download.aimms.com/aimms/download/examples/KnapsackProblem.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Knapsack%20Problem

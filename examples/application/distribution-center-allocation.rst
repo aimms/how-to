@@ -4,7 +4,7 @@ Distribution Center Allocation
    :keywords: Distribution Center Allocation, Center of Gravity, Minimize Expected Transportation Cost, Maximize Service Level, Excel, Spreadsheet, Network object, GIS, longitude, latitude, supply chain
    :description: This example looks at some common ways to determine the location of distribution centers in a supply chain.
 
-Direct download AIMMS Project :download:`DistributionCenterAllocation <https://download.aimms.com/aimms/download/examples/DistributionCenterAllocation.zip>`
+Direct download AIMMS Project :download:`DistributionCenterAllocation.zip <https://download.aimms.com/aimms/download/examples/DistributionCenterAllocation.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Application%20Examples/Distribution%20Center%20Allocation

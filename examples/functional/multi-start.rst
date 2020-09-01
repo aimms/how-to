@@ -4,7 +4,7 @@ Multi Start
    :keywords: Nonlinear Programming, NLP, Multistart Algorithm, GMP, Module
    :description: This example illustrates how a multistart algorithm can improve the reliability of any local NLP solver, by calling it with many starting points.
 
-Direct download AIMMS Project :download:`Multi%20Start <https://download.aimms.com/aimms/download/examples/Multi%20Start.zip>`
+Direct download AIMMS Project :download:`MultiStart.zip <https://download.aimms.com/aimms/download/examples/MultiStart.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Multi%20Start

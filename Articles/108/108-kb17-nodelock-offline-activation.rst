@@ -44,7 +44,7 @@ AIMMS generates a license request file to the specified location. Click *Finish*
 Create response file
 -----------------------
 
-6. Open a web browser and go the `offline activation address <https://www.aimms.com/english/developers/licensing/processing-request-files/>`_. 
+6. Open a web browser and go the `offline activation address <https://www.aimms.com/support/licensing/processing-request-files/>`_. 
 
 .. image:: images/License_Request_Processing.png
 

@@ -4,7 +4,7 @@ Interrupt AIMMS Externally
    :keywords: AIMMS Component, AIMMSCOM
    :description: How to interrupt an AIMMS session from outside AIMMS.
 
-Direct download AIMMS Project :download:`Interrupt%20AIMMS%20Project <https://download.aimms.com/aimms/download/examples/Interrupt%20AIMMS%20Project.zip>`
+Direct download AIMMS Project :download:`InterruptAIMMSProject.zip <https://download.aimms.com/aimms/download/examples/InterruptAIMMSProject.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Interrupt%20AIMMS%20Externally

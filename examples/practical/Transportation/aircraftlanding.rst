@@ -1,7 +1,7 @@
 Transportation: Aircraft landing
 ===================================
 
-Direct download AIMMS Project :download:`AircraftLanding <https://download.aimms.com/aimms/download/examples/AircraftLanding.zip>`
+Direct download AIMMS Project :download:`AircraftLanding.zip <https://download.aimms.com/aimms/download/examples/AircraftLanding.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Practical%20Examples/Transportation/AircraftLanding

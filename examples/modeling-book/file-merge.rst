@@ -4,7 +4,7 @@ File Merge
    :keywords: Linear Program, Network Program, Simplex Method, Column Generation, Mathematical Derivation, Customized Algorithm
    :description: This problem deals with merging two statistical database files.
 
-Direct download AIMMS Project :download:`filemerge <https://download.aimms.com/aimms/download/examples/filemerge.zip>`
+Direct download AIMMS Project :download:`FileMerge.zip <https://download.aimms.com/aimms/download/examples/FileMerge.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Modeling%20Book/File%20Merge

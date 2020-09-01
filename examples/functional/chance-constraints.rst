@@ -4,7 +4,7 @@ Chance Constraints
    :keywords: Portfolio Selection, Chance Constraints, Safe Approximation, Robust Optimization
    :description: This example implements a portfolio selection model with uncertain investment returns, covering a single time period.
 
-Direct download AIMMS Project :download:`Chance%20Constraints <https://download.aimms.com/aimms/download/examples/Chance%20Constraints.zip>`
+Direct download AIMMS Project :download:`ChanceConstraints.zip <https://download.aimms.com/aimms/download/examples/ChanceConstraints.zip>`
 
 Go to the example on GitHub:
 https://github.com/aimms/examples/tree/master/Functional%20Examples/Chance%20Constraints
