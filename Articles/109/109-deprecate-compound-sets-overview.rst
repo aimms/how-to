@@ -24,6 +24,10 @@ This article provides the following background information:
 
 * :ref:`Section-When`
 
+.. seealso::
+
+    https://documentation.aimms.com/deprecation-table.html
+
 
 .. _Section-What:
 
