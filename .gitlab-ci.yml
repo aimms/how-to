@@ -32,7 +32,7 @@ spellcheck:
 build:
   stage: build
   script:
-    - sphinx-build -W -M html . _build 
+    - sphinx-build -W -b html . _build 
   tags: 
     - ubuntu
 
