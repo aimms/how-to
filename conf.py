@@ -307,14 +307,14 @@ def generate_redirects(app):
     #pdb.set_trace()
     path = os.path.join(app.srcdir, app.config.redirects_file)
     if not os.path.exists(path):
-        app.info("Could not find redirects file at '%s'" % path)
+        logger.info("Could not find redirects file at '%s'" % path)
         return
 
-    in_suffix = app.config.source_suffix.keys()[0]
+    in_suffix = list(app.config.source_suffix.keys())[0]
 
     # TODO(stephenfin): Add support for DirectoryHTMLBuilder
     if not type(app.builder) == builders.StandaloneHTMLBuilder:
-        app.warn("The 'sphinxcontrib-redirects' plugin is only supported "
+        logger.info("The 'sphinxcontrib-redirects' plugin is only supported "
                  "by the 'html' builder. Skipping...")
         return
     
@@ -349,7 +349,7 @@ def setup(sphinx):
    #To handle redirections
    handle_redirections = False
    if handle_redirections or os.name != 'nt':
-		sphinx.add_config_value('redirects_file', 'redirects', 'env')
-		sphinx.connect('builder-inited', generate_redirects)   
- 
+       sphinx.add_config_value('redirects_file', 'redirects', 'env')
+       sphinx.connect('builder-inited', generate_redirects)   
+
 highlight_language = 'aimms'
