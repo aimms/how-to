@@ -13,7 +13,7 @@ When we test our app from within the AIMMS IDE, we get the following dialog:
     :align: center
 
 
-Clicking ``No`` avoids AIMMS PRO, but this soon becomes annoying. To avoid this dialog, many developers use the function ``ProjectDeveloperMode()``. This function returns a 0 (false) or 1 (true) for the question - "Is the current instance in developer mode (AIMMS IDE) or in end user mode?"   You can read more on ``ProjectDeveloperMode`` `here <http://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_.
+Clicking ``No`` avoids AIMMS PRO, but this soon becomes annoying. To avoid this dialog, many developers use the function ``ProjectDeveloperMode()``. This function returns a 0 (false) or 1 (true) for the question - "Is the current instance in developer mode (AIMMS IDE) or in end user mode?"   You can read more on ``ProjectDeveloperMode`` `here <https://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_.
 
 .. code-block:: aimms
 

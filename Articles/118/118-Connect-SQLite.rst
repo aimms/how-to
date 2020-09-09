@@ -1,4 +1,6 @@
-.. include:: /includes/icons-sub.def
+.. |sp| image:: /Images/icons/StringParameter.png
+.. |db| image:: /Images/icons/database.png
+.. |proc| image:: /Images/icons/proc.png
 
 Link an SQLite Database to a Project
 =========================================
@@ -49,7 +51,7 @@ Congrats! The installation is successful.
 Download an SQLite database sample to test
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In order to test our installation, you could use your own generated SQLite database, or download a sample on this website: `example db <http://www.sqlitetutorial.net/download/sqlite-sample-database>`_
+In order to test our installation, you could use your own generated SQLite database, or download a sample on this website: `example db <https://www.sqlitetutorial.net/download/sqlite-sample-database>`_
 
 (click on the "SQLite Sample Database" download link). The downloaded database is named ``chinook.db``, and we will use it in the rest of this tutorial.
 
@@ -118,11 +120,11 @@ Congrats! You may go directly to the `Fill out an AIMMS Database Table identifie
 Create a connection string
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A connection string is an AIMMS string parameter |sp| that you could fill out thanks to a procedure. This procedure should use the '*SQLCreateConnectionString*' function. Let's build that connection string as follows :
+A connection string is an AIMMS string parameter |sp| that you could fill out thanks to a procedure. This procedure should use the "*SQLCreateConnectionString*" function. Let's build that connection string as follows :
 
-* Create an AIMMS string parameter |sp| named '*ConnectionString*' .
+* Create an AIMMS string parameter |sp| named "*ConnectionString*" .
 * Check, Commit and Close.
-* Create a new procedure |proc|  named '*WriteTheConnectionString*' (the name is not important)
+* Create a new procedure |proc|  named "*WriteTheConnectionString*" (the name is not important)
 * Double click on procedure's name and write the following code in its body field:
 
 .. code-block:: aimms
@@ -166,7 +168,7 @@ Let's start a super simple new AIMMS project, containing only one Database Table
 |                               |  * Press the **Save**                                                                                                                         |
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
 | Link with a connection string |  * Choose the **Select String Parameter/Connection String…** command in the menu that pops up,                                                |
-|                               |  * Select the String Parameter |sp| you've just created (named ``ConnectionString`` in our case                                               |
+|                               |  * Select the String Parameter |sp| you've just created (named ``ConnectionString`` in our case)                                              |
 +-------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -206,7 +208,7 @@ Please `tell us <https://community.aimms.com/aimms-developer-12/how-to-link-an-s
 Summary
 ----------
 
-In this article we installed the SQLite driver, and linked our SQLite database to an AIMMS database table identifier  |db| that we now may further use in our AIMMS application. We presented 3 different ways to link the database, namely the .dsn file, the system .dsn file and the connection string. We finally concluded by verifying that we were able to read our SQLite database through our AIMMS  database table identifier.
+In this article we installed the SQLite driver, and linked our SQLite database to an AIMMS database table identifier |db| that we now may further use in our AIMMS application. We presented 3 different ways to link the database, namely the .dsn file, the system .dsn file and the connection string. We finally concluded by verifying that we were able to read our SQLite database through our AIMMS  database table identifier.
 
 For further reading, please refer to the following related links :
 
@@ -215,11 +217,11 @@ AIMMS materials
 
 * `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_: Chapter 27 - Communicating With Databases
 
-* `AIMMS Function Reference :aimms:func:`SQLCreateConnectionString`  
+* :aimms:func:`SQLCreateConnectionString`  
 
 Other related websites
 ----------------------
 
 * `SQLite ODBC Driver <http://www.ch-werner.de/sqliteodbc/>`_
-* `SQLite Website <https://sqlite.org/>`_
+* `SQLite Website <https://sqlite.org/index.html>`_
 

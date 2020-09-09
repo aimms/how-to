@@ -68,9 +68,7 @@ You may verify that the archive was created in the project folder.
     
     * On Linux, you may also directly use ``Execute("tar", "cvf archivedossier.tar FilesToDownload/", wait: 1);``
     
-.. seealso::
-    
-    https://techblog.aimms.com/2017/02/22/execute-a-handy-function-to-run-an-executable-program-from-aimms/
+
 
     
 Configure WebUI download widget
@@ -164,7 +162,10 @@ Downloadable example
 
 Please find the AIMMS example project attached here :download:`DownloadMultipleFiles.zip<downloads/DownloadMultipleFiles.zip>`
 
+Related topics
++++++++++++++++
 
+* :doc:`Run executable files <../../Articles/114/114-execute>`
 
 
 

@@ -65,9 +65,9 @@ Replacing compound sets with set mapping
 
 .. sidebar:: Background: Idea behind conversion procedure
      
-    In the conversion process, :term:`compound data` identifier ``P`` has compound indexes in its index domain, while its shadow ``P_Shadow`` has the corresponding :term:`set mapping` indexes in its index domain. This is an **atomic shadow identifier** as it has only :term:`atomic index` es, some of which are set mapping indexes.
+    In the conversion process, :term:`compound data<Compound data>` identifier ``P`` has compound indexes in its index domain, while its shadow ``P_Shadow`` has the corresponding :term:`set mapping<Set mapping>` indexes in its index domain. This is an **atomic shadow identifier** as it has only :term:`atomic index<Atomic index>` es, some of which are set mapping indexes.
 
-    The ``dcsu`` library caches atomic :term:`shadow parameter` s in a runtime library while the compound data identifiers are transformed to atomic data identifiers. Additionally, there are temporary procedures in that runtime library to copy the data from the compound data identifiers to the atomic shadow parameters and later from the atomic shadow parameters to the transformed atomic data identifiers.
+    The ``dcsu`` library caches atomic :term:`shadow parameter<Shadow parameter>` s in a runtime library while the compound data identifiers are transformed to atomic data identifiers. Additionally, there are temporary procedures in that runtime library to copy the data from the compound data identifiers to the atomic shadow parameters and later from the atomic shadow parameters to the transformed atomic data identifiers.
 
 This conversion procedure explains how to convert compound sets to set mappings in your application. This ensures that your model will function in the same way but without compound sets.
 

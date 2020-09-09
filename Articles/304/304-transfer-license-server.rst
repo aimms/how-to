@@ -67,7 +67,7 @@ a.   In AIMMS Network License Manager, go to *Maintenance > Maintenance mode*.
 Installing and starting the license server on the new machine
 ------------------------------------------------------------------
 
-Download the `AIMMS Network License Server <https://www.aimms.com/english/developers/downloads/download-aimms/aimms-network-license-server>`_.
+Download the `AIMMS Network License Server <https://www.aimms.com/support/downloads/#aimms-other-download>`_.
 
 Installing the downloaded ``.msi`` file requires admin rights.
 

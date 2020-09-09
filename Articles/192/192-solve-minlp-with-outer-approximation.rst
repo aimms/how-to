@@ -26,9 +26,7 @@ There are several reasons why you should use GMP-AOA instead of old AOA. First, 
 
 Second, the GMP version can be used in combination with the nonlinear presolver which may reduce the size of the model and tighten the variable bounds which likely help the AOA algorithm to find a better solution or improve its performance. GMP-AOA starts by default by calling the nonlinear presolver.
 
-Third, for non-convex problems AOA might sometimes have difficulties in finding a good feasible solution. In that case it might help to combine the AOA with the multi-start algorithm. The way to do this has been explained in a white paper that describes GMP-AOA. This paper is available from our web site:
-
-http://www.aimms.com/downloads/white-papers
+Third, for non-convex problems AOA might sometimes have difficulties in finding a good feasible solution. In that case it might help to combine the AOA with the multi-start algorithm. The way to do this has been explained in a :doc:`white paper <../../Articles/366/366-aoa-for-minlp>` that describes GMP-AOA.
 
 Old AOA cannot be combined with the nonlinear presolver nor the multi-start algorithm.
 

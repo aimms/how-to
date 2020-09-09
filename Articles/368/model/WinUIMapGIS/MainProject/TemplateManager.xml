@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<TemplateManager>
+	<Page Name="Demis Map with GIS Background" PageGUID="A27CDA7F-8A97-4A21-AB59-367CA3A270B2" />
+	<Page Name="Yahoo Map with GIS Background" PageGUID="C131FC3D-0CBA-47F6-9580-B04E39892F41" />
+	<Page Name="Bing Map with GIS Background" PageGUID="F6993DB3-3449-472B-95E0-99D669CCDDF6" />
+	<Page Name="Mundialis Map with GIS Background" PageGUID="784564FB-AC5D-4E9C-85BA-6CB66E08BF2D" />
+	<Page Name="Mundialis -OSM Map with GIS Background" PageGUID="4F993C3A-2704-4029-BD31-6223811864A3" />
+	<Page Name="Thunderforest Map with GIS Background" PageGUID="0B62A306-70F9-4D5A-AA22-811FDE47BCE7" />
+	<Page Name="OpenstreetMap Map with GIS Background" PageGUID="1BCD41D6-A4D6-4866-B1CE-9A9BEFD2C1C9" />
+</TemplateManager>

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2020-08-13 09:39:20">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>714A0F14-0483-4278-A38D-223CAAB09F16</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Network Object">
+		<Location top="42" left="66" bottom="384" right="438" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<HorizontalScrollbar>true</HorizontalScrollbar>
+		<VerticalScrollbar>true</VerticalScrollbar>
+		<ScrollControl>NavigationButtons</ScrollControl>
+		<AutoAdjust>Right</AutoAdjust>
+		<VisibleArea>
+			<Left>p_left</Left>
+			<Right>p_right</Right>
+			<Top>p_top</Top>
+			<Bottom>p_bot</Bottom>
+		</VisibleArea>
+		<TotalArea>
+			<Left>3.3</Left>
+			<Right>7.3</Right>
+			<Top>53.5</Top>
+			<Bottom>50.7</Bottom>
+		</TotalArea>
+		<Background>
+			<Background_Image_Source ID="101">"From GIS Source"</Background_Image_Source>
+			<Source>
+				<Name ID="1001">"Demis"</Name>
+				<URL ID="1007">"http://www2.demis.nl/wms/wms.ashx?WMS=WorldMap"</URL>
+			</Source>
+			<Layer>
+				<Name ID="2001">"land"</Name>
+				<Source ID="2012">"Demis"</Source>
+				<External_Name ID="2002">"Topography"</External_Name>
+			</Layer>
+		</Background>
+		<Node>
+			<Identifier>i</Identifier>
+			<XCoordinate>p_x( i )</XCoordinate>
+			<YCoordinate>p_y( i )</YCoordinate>
+			<NumberFormat Width="6" Decimals="2" />
+			<MaximumSize>8</MaximumSize>
+			<TextPosition>Right</TextPosition>
+			<TextShowWhat>ElementName</TextShowWhat>
+			<Size>8</Size>
+			<Shape>Rectangle</Shape>
+		</Node>
+		<Arc>
+			<Identifier>p01_arcs( i, j )</Identifier>
+			<NumberFormat Width="6" Decimals="2" />
+			<MaximumSize>8</MaximumSize>
+			<TextPosition>Right</TextPosition>
+			<Shape>Straight</Shape>
+			<FirstSegment>Horizontal</FirstSegment>
+			<ClickWhere>EntireArc</ClickWhere>
+		</Arc>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="6" left="66" bottom="36" right="432" />
+		<StaticText>Demis</StaticText>
+		<Font GUID="8D2982BC-31DD-48CA-9B6C-35D2B14856E2" Name="ariel14" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>p_left</Symbol>
+			<Symbol>p_right</Symbol>
+			<Symbol>p_top</Symbol>
+			<Symbol>p_bot</Symbol>
+			<Symbol>p_x</Symbol>
+			<Symbol>p_y</Symbol>
+			<Symbol>p01_arcs</Symbol>
+			<Symbol>i</Symbol>
+			<Symbol>j</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>
