@@ -1,26 +1,3 @@
-.. Discussion with Joris on the AIMMS PRO dependency for multi-timezone.
-.. [9:51 AM] Joris Koster
-..     Ik weet niet psies of het relevant is, maar de PRO server gebruikt de timezone van de hostmachine. Dus in cloud is dat UTC. On premise hangt 't af van de timezone van de server
-​.. [9:52 AM] Joris Koster
-..     dus logs, en schedules enzo zijn in die timezone
-​.. [9:52 AM] Chris Kuip
-..     goeie
-​.. [9:52 AM] Joris Koster
-..     date-time-stamp  van cases, etc.
-​.. [9:52 AM] Chris Kuip
-..     Zie je die dan als gebruiker?
-​.. [9:52 AM] Chris Kuip
-..     (webui apps)
-​.. [9:53 AM] Joris Koster
-..     ja als je winui gebruikt
-​.. [9:53 AM] Joris Koster
-..     en load-case dialog
-​.. [9:53 AM] Chris Kuip
-..     dan wel ja.
-​.. [9:53 AM] Joris Koster
-..     webui weet ik niet psies
-.. 
-
 Multi timezone applications 
 ============================
 
