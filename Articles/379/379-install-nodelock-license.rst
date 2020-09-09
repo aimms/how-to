@@ -4,28 +4,52 @@ Install nodelock single user developer license
    :description: This article explains how to install an AIMMS Developer license for a single user with a nodelock.
    :keywords: nodelock, developer, license, install
 
-This article explains how to install an AIMMS Developer license for a single user with a nodelock.
+This article explains how to install an AIMMS Developer license for a single user **with a nodelock**.
 
-To use the nodelock license:
+Prerequisite:
 
-1. Install AIMMS (downloads of AIMMS can be found at https://www.aimms.com/support/downloads/).
+Install AIMMS (downloads of AIMMS can be found on our `Downloads <https://www.aimms.com/support/downloads/>`_ page).
 
-2. Start up AIMMS
+To install the nodelock license:
 
-3. If no license has been specified, a dialog will open automatically, if you already have another license running for AIMMS, you should use the menu Tools > License > License Configuration… and click "Install License…" to specify a new license.
+#. Start AIMMS.
 
-4. Select "Install a Single User AIMMS License" and click "Next"
+#. If no license is installed, a dialog will open automatically. If you previously installed a license, use the menu *Tools > License > License Configuration* and click *Install License* to specify a new license.
 
-5. Type the license number as specified in the email you received from AIMMS Licensing, and click Next
+#. Select *Install a Single User AIMMS License* and click *Next*.
 
-6. Select "I have received an activation code ..." and click "Next"
+#. Enter your License Number (given in the email you received from AIMMS Licensing) and click *Next*.
 
-7. Copy and Paste the Activation Code as specified in the email you received from AIMMS Licensing, in the Activation Code field and click Next
+#. Select *I have received an activation code* and click *Next*.
 
-8. Select Personal Nodelock and click Next unless you are sure you want a machine nodelock (see the release notes, AIMMS_release.pdf from the AIMMS\Doc folder for a further explanation.
+#. Copy and paste your Activation Code (given in the email you received from AIMMS Licensing) click *Next*.
 
-9. Click Finish
+#. Select *Personal Nodelock* and click *Next* (unless you are sure you want a machine nodelock - see the notes regarding Nodelocks below).
 
-10. If you already have another license specified, move the new license to the top with the "Move Up" button and make sure the checkbox at the beginning of the item is checked. The next time you start up AIMMS this license will be used.
+#. Click *Finish*.
 
-In case of any problems during the installation, activation, or running of AIMMS, please contact us at support@aimms.com.
+Your new license is installed.
+
+If you previously installed another license, move the **new license** to the top with the *Move Up* button and tick the checkbox. The next time you start up AIMMS this license will be used.
+
+In case of any problems during the installation, activation, or running AIMMS, please contact `AIMMS Support <mailto:support@aimms.com>`_.
+
+.. topic:: Nodelocks
+
+   You have the choice to request a personal nodelock or a machine nodelock.
+
+   A personal nodelock must be requested online, a machine nodelock can be
+   requested online or offline.
+
+   Personal nodelocks are intended for use by a single AIMMS user, who still
+   wishes to have the freedom to use AIMMS on multiple computers.
+
+   Machine nodelocks are intended for permanent use on a single computer. They
+   are recommended for server applications, and can also be used for personal
+   use if you are sure you will be using Aimms on a single computer, or do not
+   have internet access.
+
+   You can switch your personal nodelock to a machine nodelock at any
+   time.
+
+   For more information, see the `AIMMS Users' Guide <https://documentation.aimms.com/aimms_user.html>`_ (section 2.6.1).
