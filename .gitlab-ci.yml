@@ -39,6 +39,7 @@ build:
 deploy:
   stage: deploy
   script:
+    - sphinx-build -b html . _build 
     - rsync -rt _build/html/ support@data.aimms.com:/home/aimms/www/how-to.aimms.com
   tags: 
     - ubuntu
