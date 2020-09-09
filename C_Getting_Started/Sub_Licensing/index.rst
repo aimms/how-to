@@ -23,6 +23,8 @@ Here you can find help with license set up and troubleshooting license errors. I
    /Articles/304/304-transfer-license-server
    /Articles/108/108-kb02-link-solvers
    /Articles/108/108-kb17-nodelock-offline-activation
+   /Articles/378/378-single-user-developer-license
+   /Articles/379/379-install-nodelock-license
 
 
 
