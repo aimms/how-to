@@ -32,14 +32,14 @@ spellcheck:
 build:
   stage: build
   script:
-    - sphinx-build -W -b html . _build 
+    - sphinx-build -W -b html . _build/html 
   tags: 
     - ubuntu
 
 deploy:
   stage: deploy
   script:
-    - sphinx-build -b html . _build 
+    - sphinx-build -b html . _build/html 
     - rsync -rt _build/html/ support@data.aimms.com:/home/aimms/www/how-to.aimms.com
   tags: 
     - ubuntu
