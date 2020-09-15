@@ -6,6 +6,7 @@ Recently added
 ==============
 
 .. keep most recent 10-12 articles
+.. Added 09 sep 2020: 362
 .. Added 26 aug 2020: 375
 .. Added 15 July 2020: 373, 374
 .. Added 19 June 2020: 228
@@ -15,6 +16,7 @@ Recently added
 .. Added 14 Feb 2020: 108-10, 108-09, 108-07
 
 
+* :doc:`/Articles/362/362-multi-timezone`
 * :doc:`/Articles/375/375-library-function-procedure`
 * :doc:`/Articles/373/373-pro-scaling-options`
 * :doc:`/Articles/374/374-pro-backup-and-continuity`
