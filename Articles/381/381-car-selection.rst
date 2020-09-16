@@ -8,8 +8,7 @@ Direct download link (right-click and Save link as...):
 :download:`Car Selection <model/CarSelection.zip>`
 
 
-Go to the example on GitHub:
-https://github.com/aimms/examples/tree/master/Application%20Examples/Car%20Selection
+.. Go to the example on GitHub: https://github.com/aimms/examples/tree/master/Application%20Examples/Car%20Selection
 
 
 In this AIMMS project the use of pictures as nodes in a network is illustrated. These pictures are stored inside the project as so-called project user files. Project user files can only be reached in developer mode, through the menu bar command: Tools - Project User Files.

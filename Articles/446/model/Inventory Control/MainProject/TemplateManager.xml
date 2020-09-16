@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<TemplateManager>
+	<Template Name="Size Template" PageGUID="EFC78260-E2F4-443C-8060-7E8CEF174FFF" CrossLibraryDuplicate="66E08D8C-5677-49B5-970F-BB85475A48BE|6A8815C4-5811-47AB-BC76-82C3180C1295|Size Template">
+		<Template Name="Navigation Template" PageGUID="266AFAA9-13AD-4FFB-A846-4332BD556CBE" CrossLibraryDuplicate="66E08D8C-5677-49B5-970F-BB85475A48BE|3241DDB1-55C5-441B-9DC8-359086631B74|Navigation Template">
+			<Template Name="Background Info Template" PageGUID="1A6922BD-4215-40A0-A68B-4E24A9ADB07F" CrossLibraryDuplicate="66E08D8C-5677-49B5-970F-BB85475A48BE|153A8CDB-E916-4F3B-B652-41C25F2C9CB5|Background Info Template">
+				<Page Name="AIMMS Demo - An Inventory Control Problem" PageGUID="48AA9711-5DE8-455A-B312-C3C93F0E1FFF" />
+			</Template>
+			<Page Name="Inventory Control Problem - Input Page" PageGUID="A63698C4-3098-4452-B01D-5D7A56648B2D" />
+			<Page Name="Inventory Control Problem - Output Page" PageGUID="6DF015B1-C23C-4808-9EEC-F84AB6E2D098" />
+		</Template>
+	</Template>
+	<Page Name="All Data Pages" PageGUID="8EE91E38-4383-4A08-91AF-890D6CE11CE9" />
+</TemplateManager>

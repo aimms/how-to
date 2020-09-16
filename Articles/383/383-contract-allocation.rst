@@ -6,8 +6,6 @@ Contract Allocation
 
 Direct download AIMMS Project :download:`Contract Allocation.zip <model/Contract Allocation.zip>`
 
-.. :download:`ContractAllocation.zip <https://download.aimms.com/aimms/download/examples/ContractAllocation.zip>`
-
 .. Go to the example on GitHub: https://github.com/aimms/examples/tree/master/Application%20Examples/Contract%20Allocation
 
 In this model we have a set of contracts, where every contract represents an amount of commodity that has to be supplied. The objective is to determine which of the producers will take care of which contract such that the total costs are minimal, under the following conditions:

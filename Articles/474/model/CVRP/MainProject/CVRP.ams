@@ -1,0 +1,310 @@
+## ams_version=1.0
+
+Model Main_VRP {
+    Comment: {
+        "Capacitated Vehicle Routing Problem
+        
+        Problem type:
+        MIP (medium)
+        
+        Keywords:
+        Incumbent callback, network object
+        
+        Description:
+        The Vehicle Routing Problem (VRP) deals with the distribution of goods between depots
+        and customers using vehicles. In the Capacitated VRP the vehicles have a limited
+        capacity. The model formulation in this project uses the three-index vehicle flow
+        model of Toth and Vigo (2002), denoted by VRP4 on pp. 15-16. In this project two
+        variants on this formulation are used. In the first variant the constraint (1.33) is
+        replaced by the Miller-Tucker-Zemlin constraints (1.37) and (1.38). In the second
+        variant it is replaced by the subtour elimination constraints (1.36).
+        
+        This project uses the data instance \'E-n23-k3\' from the Christofides and Eilon
+        set on http://neo.lcc.uma.es/vrp/
+        
+        References:
+        Toth, P., and D. Vigo, An Overview of Vehicle Routing Problems, In: The Vehicle
+        Routing Problem, P. Toth and D. Vigo (eds), SIAM Monographs on Discrete Mathematics
+        and Applications, Philadelphia, 2002, pp. 1-26."
+    }
+    Set PossibleFormulations {
+        Definition: {
+            { 'Miller-Tucker-Zemlin', 'Subtour elimination' }
+        }
+        Comment: {
+            "The possible formulations that can be used:
+            (1) the generalized Miller-Tucker-Zemlin subtour elimination constraints;
+            (2) the \"normal\" subtour elimination constraint."
+        }
+    }
+    ElementParameter Formulation {
+        Range: PossibleFormulations;
+        InitialData: 'Miller-Tucker-Zemlin';
+        Comment: {
+            "Specifies the formulation used. the generalized Miller-Tucker-Zemlin subtour elimination
+            constraints are used. Otherwise, the \"normal\" subtour elimination
+            constraint."
+        }
+    }
+    Parameter NumberOfCustomers {
+        Range: integer;
+        InitialData: 13;
+    }
+    Set CustomersAndDepot {
+        SubsetOf: Integers;
+        Index: i, j;
+        Definition: {
+            { 1 .. NumberOfCustomers }
+        }
+    }
+    ElementParameter Depot {
+        Range: CustomersAndDepot;
+        InitialData: 1;
+    }
+    Set Customers {
+        SubsetOf: CustomersAndDepot;
+        Index: c;
+        Definition: CustomersAndDepot - Depot;
+    }
+    Parameter CustomersDemand {
+        IndexDomain: (i);
+    }
+    Parameter NumberOfVehicles {
+        Range: integer;
+        InitialData: 4;
+    }
+    Set Vehicles {
+        SubsetOf: Integers;
+        Index: k, Vehicle;
+        Definition: {
+            { 1 .. NumberOfVehicles }
+        }
+    }
+    Parameter XCoordinate {
+        IndexDomain: (i);
+    }
+    Parameter YCoordinate {
+        IndexDomain: (i);
+    }
+    Parameter Distance {
+        IndexDomain: (i,j);
+    }
+    Parameter LoadCapacity {
+        InitialData: 6000;
+    }
+    Variable X {
+        IndexDomain: (i,j,k) | i <> j;
+        Range: binary;
+        Comment: "Indicates if vehicle k uses arc (i,j).";
+    }
+    Variable Y {
+        IndexDomain: (i,k);
+        Range: binary;
+        Comment: "Takes value 1 if customer i is served by vehicle k.";
+    }
+    Variable U {
+        IndexDomain: (i,k) | Formulation='Miller-Tucker-Zemlin';
+        Range: free;
+        Comment: "Subtour elimination variable used in the Miller-Tucker-Zemlin constraints.";
+    }
+    Variable TotalCost {
+        Range: free;
+        Definition: sum( (i,j), Distance(i,j) * sum( k, X(i,j,k) ) );
+    }
+    Constraint CustomerAssignment {
+        IndexDomain: i | i <> Depot;
+        Definition: sum( k, Y(i,k) ) = 1;
+        Comment: "Imposes that each customer is visited exactly once.";
+    }
+    Constraint VehiclesConstraint {
+        Definition: sum( k, Y(Depot,k) ) = NumberOfVehicles;
+    }
+    Constraint IndegreeConstraint {
+        IndexDomain: (i,k);
+        Definition: sum( j, X(i,j,k) ) = Y(i,k);
+        Comment: "The same vehicle enters and leaves a given customer.";
+    }
+    Constraint OutdegreeConstraint {
+        IndexDomain: (i,k);
+        Definition: sum( j, X(j,i,k) ) = Y(i,k);
+        Comment: "The same vehicle enters and leaves a given customer.";
+    }
+    Constraint CapacityRestriction {
+        IndexDomain: (k);
+        Definition: sum( i, CustomersDemand(i) * Y(i,k) ) <= LoadCapacity;
+        Comment: "The capacity restriction for each vehicle k.";
+    }
+    Constraint SubtourEliminationMKZ1 {
+        IndexDomain: (i,j,k) | Formulation='Miller-Tucker-Zemlin' and i<>Depot and j<>Depot and i<>j;
+        Definition: U(i,k) - U(j,k) + LoadCapacity * X(i,j,k) <= LoadCapacity - CustomersDemand(j);
+        Comment: "Miller-Tucker-Zemlin Subtour elimination constraint (1.37).";
+    }
+    Constraint SubtourEliminationMKZ2 {
+        IndexDomain: (i,k) | Formulation='Miller-Tucker-Zemlin' and i<>Depot;
+        Definition: CustomersDemand(i) <= U(i,k) <= LoadCapacity;
+        Comment: "Miller-Tucker-Zemlin Subtour elimination constraint (1.38).";
+    }
+    Constraint SubtourElimination {
+        IndexDomain: (s,k) | Formulation='Subtour elimination';
+        Definition: sum( (i,j) | SubsetIndicator(s,i) and SubsetIndicator(s,j), X(i,j,k) ) <= sum( i, SubsetIndicator(s,i) ) - 1;
+        Comment: "Subtour elimination constraints (1.36).";
+    }
+    MathematicalProgram LeastCost {
+        Objective: TotalCost;
+        Direction: minimize;
+        Constraints: AllConstraints;
+        Variables: AllVariables;
+        Type: MIP;
+    }
+    Section Subtours {
+        Set SubtourCombinations {
+            SubsetOf: Integers;
+            Index: s;
+        }
+        Parameter SubsetIndicator {
+            IndexDomain: (s,i);
+        }
+        Parameter NumberOfSubtours {
+            Range: integer;
+        }
+        Procedure CreateSubsets {
+            Body: {
+                empty SubtourCombinations, CurrentSubset, SubsetIndicator;
+                
+                LastPosition := Last(c);
+                
+                comb := 0;
+                
+                repeat
+                
+                	CurrentPosition := LastPosition;
+                
+                	while CurrentPosition and CurrentSubset(CurrentPosition) do
+                		CurrentPosition -= 1;
+                	endwhile;
+                
+                	break when (CurrentPosition = Depot);
+                
+                	CurrentSubset(CurrentPosition) := 1;
+                	CurrentSubset(c | CurrentPosition < c) := 0;
+                
+                	if ( sum( c, CurrentSubset(c) ) >= 2 ) then
+                		comb +=1;
+                		SubtourCombinations += comb;
+                		SubsetIndicator(comb, c) := CurrentSubset(c);
+                	endif;
+                
+                endrepeat;
+            }
+            Parameter comb;
+            Parameter CurrentSubset {
+                IndexDomain: (c);
+            }
+            ElementParameter LastPosition {
+                Range: Customers;
+            }
+            Parameter CurrentPosition {
+                Range: integer;
+            }
+        }
+    }
+    Section Page {
+        ElementParameter Xcolor {
+            IndexDomain: (k);
+            Range: AllColors;
+        }
+        Parameter XCoordMax {
+            Definition: {
+                if ( max( i, XCoordinate(i) ) > 0 ) then
+                	max( i, XCoordinate(i) ) * 1.08
+                else
+                	max( i, XCoordinate(i) ) * 0.92
+                endif
+            }
+        }
+        Parameter XCoordMin {
+            Definition: {
+                if ( min( i, XCoordinate(i) ) > 0 ) then
+                	min( i, XCoordinate(i) ) * 0.92
+                else
+                	min( i, XCoordinate(i) ) * 1.08
+                endif
+            }
+        }
+        Parameter YCoordMax {
+            Definition: {
+                if ( max( i, YCoordinate(i) ) > 0 ) then
+                	max( i, YCoordinate(i) ) * 1.08
+                else
+                	max( i, YCoordinate(i) ) * 0.92
+                endif
+            }
+        }
+        Parameter YCoordMin {
+            Definition: {
+                if ( min( i, YCoordinate(i) ) > 0 ) then
+                	min( i, YCoordinate(i) ) * 0.92
+                else
+                	min( i, YCoordinate(i) ) * 1.08
+                endif
+            }
+        }
+        Procedure DetermineColors {
+            Body: {
+                for (k) do
+                	switch (k) do
+                		1:
+                			Xcolor(k) := 'red';
+                		2:
+                			Xcolor(k) := 'blue';
+                		3:
+                			Xcolor(k) := 'green';
+                		4:
+                			Xcolor(k) := 'yellow';
+                		5:
+                			Xcolor(k) := 'cyan';
+                		6:
+                			Xcolor(k) := 'magenta';
+                		7:
+                			Xcolor(k) := 'navy blue';
+                		default:
+                			Xcolor(k) := Element( AllColors, k );
+                	endswitch;
+                endfor;
+            }
+        }
+        Procedure IncumbentCallback {
+            Body: {
+                RetrieveCurrentVariableValues( AllVariables );
+                
+                DetermineColors;
+                
+                PageRefreshAll;
+            }
+        }
+    }
+    Procedure MainInitialization;
+    Procedure MainExecution {
+        Body: {
+            ShowProgressWindow;
+            
+            empty X, Y, TotalCost;
+            PageRefreshAll;
+            
+            if ( Formulation = 'Subtour elimination' ) then
+            	CreateSubsets;
+            endif;
+            
+            LeastCost.CallbackNewIncumbent := 'IncumbentCallback';
+            
+            solve LeastCost;
+            
+            DetermineColors;
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+    }
+}

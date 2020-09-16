@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Project AimmsVersion="4.6.4.277 unicode x86" ProjectUUID="5C3A7624-0856-442F-B98D-95EBDD8D3178">
+	<ModelFileName>LargestSmallPolygon.ams</ModelFileName>
+	<AutoSaveAndBackup>
+		<DataBackup AtRegularInterval="true" EveryNMinutes="15" NumBackupsDatedToday="3" NumDaysBeforeToday="3" />
+	</AutoSaveAndBackup>
+</Project>
