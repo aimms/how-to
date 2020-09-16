@@ -1,10 +1,9 @@
 Transportation: Piecewise linear transportation
 ==================================================
 
-Direct download AIMMS Project :download:`PiecewiseLinearTransportation.zip <https://download.aimms.com/aimms/download/examples/PiecewiseLinearTransportation.zip>`
+Direct download AIMMS Project :download:`PiecewiseLinearTransportation.zip <model/PiecewiseLinearTransportation.zip>`
 
-Go to the example on GitHub:
-https://github.com/aimms/examples/tree/master/Practical%20Examples/Transportation/PiecewiseLinearTransportation
+.. Go to the example on GitHub: https://github.com/aimms/examples/tree/master/Practical%20Examples/Transportation/PiecewiseLinearTransportation
 
 Problem type:
 MIP (small)
