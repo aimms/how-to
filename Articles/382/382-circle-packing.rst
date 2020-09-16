@@ -1,5 +1,6 @@
 Circle Packing
 ================
+
 .. meta::
    :keywords: Circle Packing, Multistart Algorithm, Network Object
    :description: In this AIMMS project different circle packing problems are solved.

@@ -87,7 +87,7 @@ Related resources
 
   * :doc:`../265/265-settings-for-errors-and-warnings`
 
-  * :doc:`Error handling example model <../../examples/functional/error-handling/>`
+  * :doc:`Error handling example model <../414/414-error-handling/>`
   
   * Chapter "Raising and handling warnings and errors" of the `AIMMS Language Reference <https://download.aimms.com/aimms/download/manuals/AIMMS3LR_ExecutionStatements.pdf>`_
 
