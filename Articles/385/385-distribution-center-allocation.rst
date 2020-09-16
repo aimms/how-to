@@ -6,8 +6,7 @@ Distribution Center Allocation
 
 Direct download AIMMS Project :download:`Distribution Center Allocation.zip <model/Distribution Center Allocation.zip>`
 
-Go to the example on GitHub:
-https://github.com/aimms/examples/tree/master/Application%20Examples/Distribution%20Center%20Allocation
+.. Go to the example on GitHub: https://github.com/aimms/examples/tree/master/Application%20Examples/Distribution%20Center%20Allocation
 
 This example looks at some common ways to determine the location of distribution centers. It shows how you can determine the location of one distribution center using a center of gravity approach, the location of one distribution center minimizing the expected transportation cost, and the selection from multiple (candidate) locations to minimize the expected transportation cost or the maximum transportation time.
 

@@ -7,8 +7,7 @@ Horizon
 
 Direct download AIMMS Project :download:`Horizon.zip <model/Horizon.zip>`
 
-Go to the example on GitHub:
-https://github.com/aimms/examples/tree/master/Functional%20Examples/Horizon
+.. Go to the example on GitHub: https://github.com/aimms/examples/tree/master/Functional%20Examples/Horizon
 
 This AIMMS project illustrates the basic behavior of horizons in AIMMS. Through this example project you can learn how to create a horizon which consists of three separate sub-intervals
 - a past interval
