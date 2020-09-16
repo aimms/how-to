@@ -5,7 +5,7 @@ Car Selection
    :description: In this AIMMS project the use of pictures as nodes in a network is illustrated.
 
 Direct download link (right-click and Save link as...):
-:download:`Car Selection <https://download.aimms.com/aimms/download/examples/CarSelection.zip>`
+:download:`Car Selection <model/CarSelection.zip>`
 
 
 Go to the example on GitHub:

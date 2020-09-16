@@ -4,25 +4,25 @@ Application Examples
 The application examples listed below represent complete AIMMS-style application with a corresponding end-user UI.
 
 .. toctree::
-  :maxdepth: 1
-  :titlesonly:
+   :maxdepth: 1
+   :titlesonly:
   
-  car-selection
-  circle-packing
-  contract-allocation
-  data-reconciliation
-  distribution-center-allocation
-  economic-exchange-equilibrium
-  employee-scheduling
-  flow-shop
-  gate-assignment
-  knapsack-problem
-  life-cycle-consumption
-  project-analysis
-  railway-stock
-  sudoku
-  traffic-equilibrium
-  transport-model
-  traveling-salesman
+   /Articles/381/381-car-selection
+   /Articles/382/382-circle-packing
+   /Articles/383/383-contract-allocation
+   /Articles/384/384-data-reconciliation
+   /Articles/385/385-distribution-center-allocation
+   /Articles/386/386-economic-exchange-equilibrium
+   /Articles/387/387-employee-scheduling
+   /Articles/388/388-flow-shop
+   /Articles/389/389-gate-assignment
+   /Articles/390/390-knapsack-problem
+   /Articles/391/391-life-cycle-consumption
+   /Articles/392/392-project-analysis
+   /Articles/393/393-railway-stock
+   /Articles/394/394-sudoku
+   /Articles/395/395-traffic-equilibrium
+   /Articles/396/396-transport-model
+   /Articles/397/397-traveling-salesman
 
    
