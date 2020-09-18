@@ -20,6 +20,7 @@ Here you can find help with license set up and troubleshooting license errors. I
    /Articles/89/89-academic-license
    /Articles/105/105-adding-named-user-licenses
    /Articles/106/106-install-network-license
+   /Articles/106/106-install-network-license-client
    /Articles/304/304-transfer-license-server
    /Articles/108/108-kb02-link-solvers
    /Articles/108/108-kb17-nodelock-offline-activation

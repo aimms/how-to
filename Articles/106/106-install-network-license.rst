@@ -20,7 +20,7 @@
 
 .. BEGIN CONTENT
 
-Install and Configure a Network License
+Configure a Network License
 ============================================
 
 .. meta::
@@ -32,17 +32,19 @@ How to install a Network License with the Network License Server.
 Installing the Network License Server
 -------------------------------------
 
-A network license is administrated by the Network License Server.
+A network license is administrated by the Network License Server on a server computer.
 
 1. Download the **Network License Server** from `AIMMS Downloads <https://www.aimms.com/support/downloads/#aimms-other-download>`_.
 
 2. Run the `AimmsLicenseServer...msi` installation file and follow the prompts in the Installation Wizard.
 
-    
+  
 
+Installing the Network License via License Manager
+--------------------------------------------------
 
-Installing the Network License
-------------------------------
+See also :doc:`Install the Network License on a client computer <106-install-network-license-client>`.
+
 
 1. 
     Run the **AIMMS License Manager**.
