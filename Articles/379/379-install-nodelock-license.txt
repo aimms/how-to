@@ -32,7 +32,7 @@ Your new license is installed.
 
 If you previously installed another license, move the **new license** to the top with the *Move Up* button and tick the checkbox. The next time you start up AIMMS this license will be used.
 
-In case of any problems during the installation, activation, or running AIMMS, please contact `AIMMS Support <mailto:support@aimms.com>`_.
+In case of any problems during the installation, activation, or running of AIMMS, please contact `AIMMS Support <mailto:support@aimms.com>`_.
 
 .. topic:: Nodelocks
 

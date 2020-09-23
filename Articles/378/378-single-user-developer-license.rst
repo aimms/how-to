@@ -1,10 +1,10 @@
-Install named single user developer license
+Install single user developer license
 ============================================
 .. meta::
-   :description: This article explains how to install an AIMMS Developer license for a named single user.
-   :keywords: license, activation, install, developer, named
+   :description: This article explains how to install an AIMMS Developer license for a single user.
+   :keywords: license, activation, install, developer
 
-This article explains how to install an AIMMS Developer license for a **named** single user.
+This article explains how to install an AIMMS Developer license for a single user.
 
 Prerequisite:
 
@@ -32,4 +32,4 @@ Your new license is installed.
 
 If you previously installed another license, move the **new license** to the top with the *Move Up* button and tick the checkbox. The next time you start up AIMMS this license will be used.
 
-In case of any problems during installation, activation, or running AIMMS, please contact `AIMMS Support <mailto:support@aimms.com>`_.
+In case of any problems during installation, activation, or running of AIMMS, please contact `AIMMS Support <mailto:support@aimms.com>`_.
