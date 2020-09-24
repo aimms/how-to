@@ -100,11 +100,7 @@ this is done with respect to the local timezone including daylight saving (if an
 Check out the example
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The example can be experienced by:
-
-*   downloading it :download:`here <model/SupportPlanning.zip>`, or
-
-*   launching the ``SupportPlanning`` application from a cloud environment.
+The example can be experienced by downloading it :download:`here <model/SupportPlanning.zip>`.
 
 Upon start it looks like:
 
@@ -173,7 +169,7 @@ In this section, at the implementation level, the multi timezone aspects of the 
 The modeling timezone
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As described above, we choose one timezone in the model, and name the parameter containing it ``ep_modelTimezone``.
+As described above, we choose one timezone in the model, and name the parameter containing it ``ep_modelTimezone`` with range :aimms:set:`AllTimeZones`.
 In addition, we initialize the choice: UTC.
 
 .. code-block:: aimms
@@ -576,6 +572,8 @@ which breaks down as follows:
 Timezone selector 
 ^^^^^^^^^^^^^^^^^^^^^^
 
+Te timezone selector is part of the `Time Zone Settings <https://documentation.aimms.com/webui/time-zone-setting.html#time-zone-settings>`_ feature of the WebUI.
+
 The timezone selector is a predefined widget manipulating the element parameter ``webui::DisplayTimeZone``.
 You can enable this widget via the Application settings / Application Extensions panel:
 
@@ -658,7 +656,7 @@ Using the following Gantt Chart specification
 .. image:: images/GCEmployeePlanningDef.png
     :align: center
 
-Here the reference time is defined as follows:
+Here the reference time is defined, using :aimms:func:`ConvertReferenceDate`, as follows:
 
 .. code-block:: aimms
     :linenos:
