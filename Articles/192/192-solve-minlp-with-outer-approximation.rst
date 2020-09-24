@@ -5,8 +5,11 @@ Solve MINLP problems with AOA
    :description: AOA is a good method to solve mixed integer nonlinear mathematical programming problems.
    :keywords: AOA, nonlinear, mixed integer, mathematical programming, solving
 
+.. index:: AOA, MINLP, GMP
 
-For solving Mixed Integer Nonlinear Programming (MINLP) problems AIMMS offers, besides the solvers BARON and KNITRO, the AIMMS Outer Approximation algorithm, or AOA for short.
+In addition to BARON and KNITRO, you can also use the AIMMS Outer Approximation Algorithm (AOA) to solve mixed integer nonlinear programming (MINLP) problems in AIMMS. 
+
+.. For solving Mixed Integer Nonlinear Programming (MINLP) problems AIMMS offers, besides the solvers BARON and KNITRO, the AIMMS Outer Approximation algorithm, or AOA for short.
 
 There exist two versions of the AOA algorithm in AIMMS. The old version is available as a solver which calls the module OuterApproximation and was developed before GMP functionality was added to AIMMS. The new version uses GMP functions and has been implemented in the module GMPOuterApproximation. You can install this system module via *Menu > Settings > Install System Module* and select the GMP Outer Approximation Module to be installed. GMP-AOA is not a solver and cannot be called using the normal ``solve`` statement. Instead you should use:
 
