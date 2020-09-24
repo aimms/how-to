@@ -187,7 +187,7 @@ Output
 Further reading
 -----------------
 
-See also the `manual <https://manual.aimms.com/pro/api.html>`_
+See also the `manual <https://documentation.aimms.com/pro/api.html>`_
 
 
    

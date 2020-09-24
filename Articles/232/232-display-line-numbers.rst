@@ -9,9 +9,6 @@ Display Line Numbers in the Editor
 
     This article was originally posted to the AIMMS Tech Blog.
 
-.. <link>https://berthier.design/aimmsbackuptech/2012/05/08/displaying-line-numbers-in-the-editor-of-the-aimms-ide/</link>
-.. <pubDate>Tue, 08 May 2012 15:18:27 +0000</pubDate>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=1209</guid>
 
 By default, line numbers are hidden in the Editor in the AIMMS IDE. However, you can enable line numbers in settings. 
 

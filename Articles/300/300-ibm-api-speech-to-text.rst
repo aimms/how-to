@@ -153,7 +153,7 @@ Options
 
 You can also use options to set characteristics for the request.
 
-From `AIMMS Documentation: HTTP Client Library <https://manual.aimms.com/httpclient/api.html>`_ we learn that we can set ``requestTimeout``.
+From `AIMMS Documentation: HTTP Client Library <https://documentation.aimms.com/httpclient/api.html>`_ we learn that we can set ``requestTimeout``.
 In some cases, like in this example, the API treatment is too long for the ``requestTimeout`` to be respected. In that case, you can set more time for the request to execute using this option.
 
 .. code-block:: aimms

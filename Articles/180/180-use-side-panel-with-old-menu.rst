@@ -44,7 +44,7 @@ We recommend not to add sidepanel pages as subpages. If a sidepanel page is adde
 Related Topics
 ------------------
 
-* `AIMMS Documentation: Sidepanels <https://manual.aimms.com/webui/page-manager.html#id6>`_
+* `AIMMS Documentation: Sidepanels <https://documentation.aimms.com/webui/page-manager.html#id6>`_
 
 
 

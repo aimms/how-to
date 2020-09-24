@@ -9,9 +9,6 @@ Color a Map with Constraint Programming
 
     This article was originally posted to the AIMMS Tech Blog.
 
-.. <link>https://berthier.design/aimmsbackuptech/2012/12/05/coloring-the-states-of-the-usa/</link>
-.. <pubDate>Wed, 05 Dec 2012 14:28:44 +0000</pubDate>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=2303</guid>
 
 .. figure:: images/United_States_orthographic.png
 

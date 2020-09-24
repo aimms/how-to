@@ -408,7 +408,7 @@ The code of this procedure is as follows:
 
 The choice to set the names of photo files using the ``SP_id(I_p)`` parameter is arbitrary. The result is that every file name is the ID of the concerned photo in Flickr. (If you chose to use title of photos, for example, unsupported special characters may be included.)
 
-The choice of the destination **MainProject/WebUI/resources//images/** refers to the use of `WebUI image widget <https://manual.aimms.com/webui/image-widget.html>`_.
+The choice of the destination **MainProject/WebUI/resources//images/** refers to the use of `WebUI image widget <https://documentation.aimms.com/webui/image-widget.html>`_.
 
 Congratulations, we finally reached our goal!
 
@@ -437,7 +437,7 @@ Related Topics
 * **AIMMS How-To**: :doc:`../294/294-Online-XML-HTTP-library`
 * **AIMMS How-To**: :doc:`../293/293-extracting-data-from-XML`
 * **AIMMS How-to**: :doc:`../296/296-obtaining-geographic-data-through-the-google-api`
-* **AIMMS manual**: `WebUI image widget tutorial <https://manual.aimms.com/webui/image-widget.html>`_
+* **AIMMS manual**: `WebUI image widget tutorial <https://documentation.aimms.com/webui/image-widget.html>`_
 
 References
 -------------

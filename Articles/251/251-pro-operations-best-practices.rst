@@ -12,10 +12,7 @@ Overview: Best Practices for Operating AIMMS PRO
 
     This article was originally posted to the AIMMS Tech Blog.
 
-.. <link>https://berthier.design/aimmsbackuptech/2014/11/19/professionally-operating-your-aimms-pro-platform/</link>
-.. <pubDate>Wed, 19 Nov 2014 10:55:01 +0000</pubDate>
-.. <guid isPermaLink="false">http://techblog.aimms.com/?p=4074</guid>
-       
+      
 As AIMMS applications move from desktops to PRO platforms and start to play a larger role for a larger number of users, it is important to adopt the best practices for operating server-based business applications.
 
 

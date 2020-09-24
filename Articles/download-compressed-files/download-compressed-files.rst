@@ -101,7 +101,7 @@ You may now open your WebUI, and insert a download widget that you will link wit
 
 .. seealso::
     
-    https://manual.aimms.com/webui/download-widget.html
+    https://documentation.aimms.com/webui/download-widget.html
 
 
 Elevate your formulation to PRO

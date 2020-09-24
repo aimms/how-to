@@ -58,7 +58,7 @@ The output is the same as when using Java. See :doc:`98-starting-job-aimms-pro-a
 Further reading
 -----------------
 
-See also the `manual <https://manual.aimms.com/pro/api.html>`_
+See also the `manual <https://documentation.aimms.com/pro/api.html>`_
 
 
 

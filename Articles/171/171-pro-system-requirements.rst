@@ -5,7 +5,7 @@ Size AIMMS PRO Server Hardware
    :description: Estimating equipment size for AIMMS PRO Server
    :keywords: AIMMS PRO, server, memory, requirements
 
-`The AIMMS PRO documentation <https://manual.aimms.com/pro/system-requirements.html>`_ details the minimum system requirements for client-side and server-side machines used for AIMMS PRO. However, the memory and CPU requirements of the back-end server where all the solve procedures are executed is heavily dependent on the size of your AIMMS model(s).
+`The AIMMS PRO documentation <https://documentation.aimms.com/pro/system-requirements.html>`_ details the minimum system requirements for client-side and server-side machines used for AIMMS PRO. However, the memory and CPU requirements of the back-end server where all the solve procedures are executed is heavily dependent on the size of your AIMMS model(s).
 
 This article will help you determine the system requirements of the server-side machine.
 
@@ -62,7 +62,7 @@ Summary
 
 Based on the calculations, a server machine for the above example use case will need at least 17 GB memory and 7 cores. You have to remember that this is one possible configuration and not necessarily the best one. Having fewer concurrent solver sessions than concurrent data sessions will result in a waiting time for some of the users. Depending on the runtime of the solve procedure and the acceptable waiting times for your users, choose the number of concurrent solver sessions that you want to purchase. The server size will also increase with each additional solver session added to the configuration. 
 
-Read more about the queueing on AIMMS PRO `here <https://manual.aimms.com/pro/config-sections.html#queue-priority-settings>`_
+Read more about the queueing on AIMMS PRO `here <https://documentation.aimms.com/pro/config-sections.html#queue-priority-settings>`_
 
 
 .. todo:: 

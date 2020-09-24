@@ -118,7 +118,7 @@ Related topics
 
 *  AIMMS Knowledge: :doc:`../105/105-adding-named-user-licenses`
 *  AIMMS Documentation: `Network License Server Manual <https://download.aimms.com/aimms/download/data/LicenseServer/AIMMS_net.pdf>`_ 
-*  AIMMS Documentation: `License Server Installation and Configuration <https://manual.aimms.com/pro/license-server.html>`_ 
+*  AIMMS Documentation: `License Server Installation and Configuration <https://documentation.aimms.com/pro/license-server.html>`_ 
 
 .. END CONTENT
 

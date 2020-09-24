@@ -33,7 +33,9 @@ It works as executing the command line: ``"C:\Program Files\upzip.exe D:\data\ar
 
     Execute("C:\\ProgramFiles\\unzip.exe", "D:\\data\\archive\\inputfile01.zip -d D:\\temp\\files\\");
 
-Instead of using double quoted strings, you can also use string parameters to generate a command line dynamically based on data in your AIMMS model. You can find more details on the Execute function in the `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_.
+Instead of using double quoted strings, you can also use string parameters to generate a command line dynamically based on data in your AIMMS model. See also :aimms:func:`Execute`
+
+
 
 Running Your Own Code
 ---------------------
@@ -46,7 +48,9 @@ You can also use the Execute function to run your own code written in programmin
     MyCommandLine := FormatString("-jar RetrieveData.jar %s %s",ID, RequestDate);
     Execute("java", MyCommandLine );
 
-where "MyCommandLine", "ID" and "RequestData" are string parameters in AIMMS. "ID" and "RequestDate" take dynamic value at run time, and "MyCommandLine" is generated based on these values.  Please refer to the `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_ for more information on the "FormatString" function.
+where "MyCommandLine", "ID" and "RequestData" are string parameters in AIMMS. "ID" and "RequestDate" take dynamic value at run time, and "MyCommandLine" is generated based on these values.  See also :aimms:func:`FormatString`.
+
+.. Please refer to the `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_ for more information on the "FormatString" function.
 
 Similarly, you can use the Execute function to call Python to run a ".py" file. Please note that in both cases, the environment variables are set properly. Otherwise, you need to specify the full path where Java.exe or Python.exe is installed.
 

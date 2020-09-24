@@ -9,10 +9,6 @@ Model Variables with Limited Values
 
     This article was originally posted to the AIMMS Tech Blog.
     
-.. <link>https://berthier.design/aimmsbackuptech/2012/08/17/modeling-variables-with-limited-number-of-possible-values/</link>
-.. <pubDate>Fri, 17 Aug 2012 08:36:52 +0000</pubDate>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=1695</guid>
-
  
 In this article we'll learn how to model a variable that can only take a limited set of values, for example: 
 

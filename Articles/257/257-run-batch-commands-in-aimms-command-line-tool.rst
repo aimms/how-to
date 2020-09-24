@@ -9,10 +9,6 @@ Run Batch Commands with AIMMS Command Line Tool
 
     This article was originally posted to the AIMMS Tech Blog.
 
-.. <link>https://berthier.design/aimmsbackuptech/2012/06/22/aimms-command-line-tool/</link>
-.. <pubDate>Thu, 21 Jun 2012 23:58:59 +0000</pubDate>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=1453</guid>
-
 In the integrated environment, or on a Linux system, you can control an AIMMS project externally using a command line tool.
 
 To start using the command line tool open the terminal and run ``AimmsCmd ExampleProject.aimms``.

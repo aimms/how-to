@@ -81,7 +81,7 @@ Specify an SMTP server which you are allowed to access (i.e., your corporate mai
 
 You can add multiple recipients to the same email by repeating the ``email::AddRecipientTo`` statement, or use ``email::AddRecipientCC`` or ``email::AddRecipientBCC`` to CC or BCC additional recipients. 
 
-See details in AIMMS Documentation: `Email Client API <https://manual.aimms.com/emailclient/api.html>`_.
+See details in AIMMS Documentation: `Email Client API <https://documentation.aimms.com/emailclient/api.html>`_.
 
 .. End create email
 
@@ -133,7 +133,7 @@ To specify any other file attachments::
 
 Read more about creating templates for your message in AIMMS Knowledge: :doc:`../111/111-creating-email-templates`.
 
-For a full list of functions available, read AIMMS Documentation: `Email Client API <https://manual.aimms.com/emailclient/api.html>`_.
+For a full list of functions available, read AIMMS Documentation: `Email Client API <https://documentation.aimms.com/emailclient/api.html>`_.
 
 .. End images and attachments
 
@@ -148,7 +148,7 @@ Related topics
 ---------------
 
 *  AIMMS Knowledge: :doc:`../111/111-creating-email-templates`
-*  AIMMS Documentation: `Email Client Library <https://manual.aimms.com/emailclient/index.html>`_ 
+*  AIMMS Documentation: `Email Client Library <https://documentation.aimms.com/emailclient/index.html>`_ 
 
 .. END CONTENT
 

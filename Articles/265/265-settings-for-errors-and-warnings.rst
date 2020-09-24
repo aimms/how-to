@@ -9,10 +9,6 @@ Customize Settings for Errors and Warnings
 
     This article was originally posted to the AIMMS Tech Blog.
 
-.. <pubDate>Mon, 24 Nov 2014 15:47:28 +0000</pubDate>
-.. <guid isPermaLink="false">http://techblog.aimms.com/?p=4229</guid>
-.. <link>https://berthier.design/aimmsbackuptech/2014/11/24/under-control-managing-errors-and-warnings-within-aimms/</link>
-
 
 This article explains how you can control errors and warnings within AIMMS. We'll include some useful tips to create better models.
 

@@ -5,11 +5,6 @@ Animation with colors in AIMMS
 =====================================
 
 
-..       <link>https://berthier.design/aimmsbackuptech/2013/04/02/animation-with-colors-in-aimms/</link>
-..       <pubDate>Tue, 02 Apr 2013 13:06:06 +0000</pubDate>
-..       <dc:creator><![CDATA[]]></dc:creator>
-..       <guid isPermaLink="false">http://blog.aimms.com/?p=2803</guid>
-
 
 In this Article, we will show how you can use the user color related
 functions UserColorAdd and UserColorDelete in AIMMS to create an

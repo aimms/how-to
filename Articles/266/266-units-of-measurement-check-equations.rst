@@ -9,10 +9,6 @@ Check Computations with Units of Measurement
 
     This article was originally posted to the AIMMS Tech Blog.
 
-.. <link>https://berthier.design/aimmsbackuptech/2012/09/18/units-of-measurement-part-1-are-your-computations-correct/</link>
-.. <pubDate>Tue, 18 Sep 2012 05:46:31 +0000</pubDate>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=1658</guid>
-
 
 .. image:: images/Eureka.gif
 

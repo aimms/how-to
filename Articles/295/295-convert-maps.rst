@@ -32,7 +32,7 @@ Timeline
 
 When using AIMMS 4.61 and higher, existing Map widgets in your apps will remain the old version (V1) but any new Map widgets added are in the new version (V2).
 
-AIMMS releases after **the end of November 2019** will not support projects using the `older version <https://manual.aimms.com/webui/map-widget-old-style.html>`_ of this feature.
+AIMMS releases after **the end of November 2019** will not support projects using the `older version <https://documentation.aimms.com/webui/map-widget-old-style.html>`_ of this feature.
 
 To use AIMMS versions released after that date, you will need to be sure that you have upgraded any pages in your WebUI app using Map widgets.
 
@@ -47,4 +47,4 @@ The upgrade for this feature is manual, but quite simple.
 For V2, you must separate the Latitude and Longitude into two separate identifiers declared in the model. These were contained in one identifier in V1.
 All other identifiers that you used with V1 will work for V2.
 
-Please refer to `AIMMS Documentation: Maps Widget <https://manual.aimms.com/webui/map-widget.html>`_ for further details about this widget.
+Please refer to `AIMMS Documentation: Maps Widget <https://documentation.aimms.com/webui/map-widget.html>`_ for further details about this widget.

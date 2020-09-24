@@ -24,7 +24,7 @@ Clicking ``No`` avoids AIMMS PRO, but this soon becomes annoying. To avoid this 
       endif ;
    endif ;
 
-The disadvantage of using ``ProjectDeveloperMode()`` is that it disallows the combination of AIMMS PRO and the AIMMS IDE for `AIMMS PRO debugging <https://manual.aimms.com/pro/debugging-pro.html>`_. What we actually want, is to connect to AIMMS PRO, when a connection is available, and otherwise use our own machine to solve the mathematical program.
+The disadvantage of using ``ProjectDeveloperMode()`` is that it disallows the combination of AIMMS PRO and the AIMMS IDE for `AIMMS PRO debugging <https://documentation.aimms.com/pro/debugging-pro.html>`_. What we actually want, is to connect to AIMMS PRO, when a connection is available, and otherwise use our own machine to solve the mathematical program.
  
 To check whether we are connected to an AIMMS PRO session or not, we use the function ``PRO::GetPROEndPoint()``. The function ``PRO::GetPROEndPoint()`` returns the URL, or the 'end point', of the AIMMS PRO server the AIMMS instance is running on. If the current AIMMS instance is not running on an AIMMS PRO server, an empty string is returned.
 
@@ -40,7 +40,7 @@ We change the body of the ``pr_Solve`` procedure by replacing the test ``not Pro
    endif ;
 
         
-The ``pro::DelegateToServer`` statement is executed only if the current AIMMS instance is connected to an AIMMS PRO server. If not, it is skipped and the remaining procedure is executed in the AIMMS IDE. This way, we avoid the annoying dialog mentioned above, but still enable `AIMMS PRO debugging <https://manual.aimms.com/pro/debugging-pro.html>`_ when needed.
+The ``pro::DelegateToServer`` statement is executed only if the current AIMMS instance is connected to an AIMMS PRO server. If not, it is skipped and the remaining procedure is executed in the AIMMS IDE. This way, we avoid the annoying dialog mentioned above, but still enable `AIMMS PRO debugging <https://documentation.aimms.com/pro/debugging-pro.html>`_ when needed.
 
 The AIMMS project for running Flowshop example can be downloaded from: :download:`3. Flow Shop - Enable development testing <downloads/3. Flow Shop - Enable development testing.zip>`.
 

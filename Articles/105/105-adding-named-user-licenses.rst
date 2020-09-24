@@ -65,7 +65,7 @@ Related topics
 .. *  AIMMS Knowledge: :doc:`../106/106-install-network-license`
 
 *  AIMMS Documentation: `Network License Server Manual <https://download.aimms.com/aimms/download/data/LicenseServer/AIMMS_net.pdf>`_ 
-*  AIMMS Documentation: `License Server Installation and Configuration <https://manual.aimms.com/pro/license-server.html>`_ 
+*  AIMMS Documentation: `License Server Installation and Configuration <https://documentation.aimms.com/pro/license-server.html>`_ 
 
 .. END CONTENT
 

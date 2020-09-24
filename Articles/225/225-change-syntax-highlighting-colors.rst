@@ -9,11 +9,7 @@ Change Syntax Highlighting and Display Options
 
     This article was originally posted to the AIMMS Tech Blog.
 
-.. <link>https://berthier.design/aimmsbackuptech/2012/06/18/changing-colors-for-different-identifier-types-in-aimms-ide/</link>
-.. <pubDate>Mon, 18 Jun 2012 13:02:10 +0000</pubDate>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=1211</guid>
 
-..  <![CDATA[[caption id="attachment_1428" align="alignright" width="362" caption="Display variables in green"]<img src="http://techblog.aimms.com/wp-content/uploads/sites/5/2012/06/variables_in_green.png" alt="Display variables in green" title="Display variables in green" width="362" height="151" class="size-full wp-image-1428" />[/caption]In an <a href="http://blog.aimms.com/2012/05/displaying-line-numbers-in-the-editor-of-the-aimms-ide/" title="Displaying line numbers in the editor of the AIMMS IDE">earlier blog article</a> I already showed that you can toggle the display of line numbering in the AIMMS IDE editor by changing one of the IDE editor settings.
 
 AIMMS uses a default syntax highlighting theme to help you quickly interpret a definition visually in the AIMMS Editor. 
 

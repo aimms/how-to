@@ -9,10 +9,6 @@ Monitor Identifiers for Changes
 
     This article was originally posted to the AIMMS Tech Blog.
 
-.. <link>https://berthier.design/aimmsbackuptech/2013/04/10/monitoring-identifiers-for-changes/</link>
-.. <pubDate>Wed, 10 Apr 2013 09:06:23 +0000</pubDate>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=2829</guid>
-
 .. sidebar:: Monitor
 
     .. image:: images/monitor.jpg

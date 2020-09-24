@@ -44,7 +44,7 @@ Related topics:
 ---------------
 
 *  AIMMS Knowledge: :doc:`../104/104-using-email-client-library`
-*  AIMMS Documentation: `Email Client Library <https://manual.aimms.com/emailclient/index.html>`_ 
+*  AIMMS Documentation: `Email Client Library <https://documentation.aimms.com/emailclient/index.html>`_ 
 
 .. END CONTENT
 

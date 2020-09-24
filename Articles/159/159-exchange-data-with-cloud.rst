@@ -178,7 +178,7 @@ gateways to receive incoming VPN connections.
 
 Related Topics
 ----------------
-* **AIMMS Documentation:** `AIMMS Cloud Platform <https://manual.aimms.com/cloud/>`_
+* **AIMMS Documentation:** `AIMMS Cloud Platform <https://documentation.aimms.com/cloud/>`_
 
 
 

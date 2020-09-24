@@ -1,8 +1,6 @@
 :orphan:Determine the calling procedure =========================================
 .. meta::   :description: How to customize syntax highlighting colors and other Editor display options used in the AIMMS IDE.   :keywords: Syntax, highlighting, identifier, color, display, editor, settings.. note::    This article was originally posted to the AIMMS Tech Blog.    .. note::    This article is obsolete; there is an intrinsic function, named CallerNode, to capture this functionality.
-.. <link>https://berthier.design/aimmsbackuptech/2012/06/11/determine-the-calling-procedure/</link>
-.. <pubDate>Mon, 11 Jun 2012 15:03:34 +0000</pubDate>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=1378</guid>
+
 ..  <![CDATA[[caption id="attachment_1411" align="alignleft" width="239" caption="Determine calling procedure"]<img src="http://techblog.aimms.com/wp-content/uploads/sites/5/2012/06/determine_calling_procedure.png" alt="Determine calling procedure" title="Determine calling procedure" width="239" height="231" class="size-full wp-image-1411" />[/caption]For something we were working on, we had to find a way to determine which procedure was calling the current procedure. .. figure:: images/determine_calling_procedure.png    Determine calling procedureFor something we were working on, we had to find a way to determine which procedure was calling the current procedure. 
 One very trivial way would be to introduce an additional argument for
 the procedure in which the calling procedure must provide its name. The

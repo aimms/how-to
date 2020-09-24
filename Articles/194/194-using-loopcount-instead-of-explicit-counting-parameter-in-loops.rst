@@ -1,8 +1,6 @@
 Using LoopCount instead of explicit counting parameter in loops ====================================================================
 .. meta::   :description: Repetition sometimes needed, iterative construct preferred, loop counts reduce need of coding.   :keywords: Iterative, repetition, loop count, sum, for, while, parameter.. note::    This article was originally posted to the AIMMS Tech Blog.
-.. <link>https://berthier.design/aimmsbackuptech/2012/04/11/using-loopcount-instead-of-explicit-counting-parameter-in-loops/</link>
-.. <pubDate>Wed, 11 Apr 2012 12:18:14 +0000</pubDate>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=1126</guid>
+
 There are cases where you want to execute some set of statements in an AIMMS procedure a couple of times. If you want to execute the statements :math:`n` times, the trivial (but not very smart) way would be to just copy the statements :math:`n` times.
 A better approach, which I guess is used most often, is to use a repetitive loop (for, while, repeat) and declare a new local parameter for this procedure that will be used to keep track of how many iterations have been done in the loop. To execute a block of statements :math:`n` times, you will first have to initialize this counter parameter to 0 or 1 (depending on your preference to start counting at 0 or 1) and then use a while-loop with a termination criteria to execute the statements repetitively. Furthermore, you must also ensure that you increment the value of your local counter parameter with one in each iteration. So if you declare the additional parameter ``p_LoopCounter``, the required code will look like:
 .. code-block:: aimms    :linenos:

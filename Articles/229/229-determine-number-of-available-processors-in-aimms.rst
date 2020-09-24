@@ -1,7 +1,5 @@
 :orphan:Determine number of available processors in AIMMS==================================================
 .. meta::   :description: Determine the number of CPUs available on the current computer.   :keywords: CPU's available, Windows, Linux.. note::    This article was originally posted to the AIMMS Tech Blog.
-.. <link>https://berthier.design/aimmsbackuptech/2012/06/28/determine-number-of-available-processors-in-aimms/</link>
-.. <pubDate>Thu, 28 Jun 2012 15:31:18 +0000</pubDate>.. <guid isPermaLink="false">http://blog.aimms.com/?p=1448</guid>
 .. figure:: images/HowManyCores.jpg    Number of cores in computerThere are situations where you would like to know the number of CPU cores you have available in your computer. 
 For example in the project that I worked out in the earlier blog post Solve problems in parallel with asynchronous solver sessions, I showed how you can start up multiple asynchronous solver sessions in AIMMS to solve multiple different problems simultaneously (if your license allowed for this).
 In such cases, you typically do not want to have more simultaneous sessions running than the number of cores present in your computer. The operating system (Windows or Linux) provides information that allows you to find the number of cores.
