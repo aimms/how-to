@@ -24,13 +24,6 @@ Model Main_Model {
 	ElementParameter epErr {
 		Range: errh::PendingErrors;
 	}
-	Set sHosts {
-		Index: iHost;
-		Definition: data{'Docker Desktop', Azure};
-	}
-	ElementParameter epHost {
-		Range: sHosts;
-	}
 	Section DataIO {
 		DeclarationSection jsonIO {
 			StringParameter spMapName {
@@ -48,7 +41,7 @@ Model Main_Model {
 		}
 		Procedure prWriteJSON {
 			Body: {
-				spOutFile := "pretty.json";
+				spOutFile := "input.json";
 				spMapName := "outMap";
 				spMapFile := "apiCalls//outMap.xml";
 				
@@ -87,15 +80,7 @@ Model Main_Model {
 		DeclarationSection apiCall {
 			StringParameter spReqID;
 			StringParameter spURL {
-				Definition: {
-					if not epHost then
-					"http://127.0.0.1:8000"
-					elseif epHost = 'Azure' then
-					"https://aimmscall.azurewebsites.net"
-					else
-					"http://localhost:8000/"
-					endif
-				}
+				InitialData: "http://localhost:8000/";
 			}
 			StringParameter spResponseFile;
 			StringParameter spBody;
