@@ -1,0 +1,238 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [],
+                "name": "home",
+                "slug": "home"
+              }
+            ],
+            "name": "Main Project",
+            "slug": "main_project"
+          }
+        ],
+        "name": "root",
+        "slug": "root"
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "but",
+          "gridArea": "Unassigned widgets",
+          "dndId": "area-abut3"
+        },
+        {
+          "widgetUri": "Switch-table-1",
+          "gridArea": "area-b",
+          "dndId": "area-bSwitch-table-10"
+        },
+        {
+          "widgetUri": "table-1",
+          "gridArea": "area-b",
+          "dndId": "area-btable-11"
+        },
+        {
+          "widgetUri": "scalar-1",
+          "gridArea": "area-a",
+          "dndId": "area-ascalar-12"
+        },
+        {
+          "widgetUri": "Switch-scalar-1",
+          "gridArea": "area-a",
+          "dndId": "area-aSwitch-scalar-14"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout1"
+    },
+    "maxcolumns": {
+      "literal": 8
+    },
+    "widgets": {
+      "literal": [
+        {
+          "layoutInfo": {
+            "height": "1",
+            "width": "2"
+          },
+          "uri": "scalar-1"
+        },
+        {
+          "layoutInfo": {
+            "height": "2",
+            "width": "2"
+          },
+          "uri": "table-1"
+        },
+        {
+          "layoutInfo": {
+            "height": "1",
+            "width": "2"
+          },
+          "uri": "Switch-scalar-1"
+        },
+        {
+          "layoutInfo": {
+            "height": "2",
+            "width": "2"
+          },
+          "uri": "Switch-table-1"
+        },
+        {
+          "uri": "but",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/but": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "MainExecution"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "title": {
+      "literal": "but"
+    }
+  },
+  "widgets/scalar-1": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_1"
+        ]
+      }
+    },
+    "title": {
+      "literal": "scalar-1"
+    }
+  },
+  "widgets/Switch-scalar-1": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_1"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Switch-scalar-1"
+    }
+  },
+  "widgets/Switch-table-1": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_2"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_2": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "aggregated": [],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "rowHeader": [
+          "i"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_2"
+          },
+          "width": 17.08410636982066
+        }
+      ]
+    },
+    "title": {
+      "literal": "Switch-table-1"
+    }
+  },
+  "widgets/table-1": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_2"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_1": "1",
+        "p_2": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "aggregated": [],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "rowHeader": [
+          "i"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_2"
+          },
+          "width": 14.8
+        }
+      ]
+    },
+    "title": {
+      "literal": "table-1"
+    }
+  }
+}
