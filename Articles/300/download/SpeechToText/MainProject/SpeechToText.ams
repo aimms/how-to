@@ -136,7 +136,7 @@ Model Main_SpeechToText {
 					               "/" + pro::ModelName + ".apikey", 
 					localPath   :  "speechToText.apikey");
 				read from file "speechToText.apikey" ;
-				FileDelete( "peechToText.apikey" );
+				FileDelete( "speechToText.apikey" );
 			else
 				read from file "../speechToText.apikey" ;
 			endif ;
