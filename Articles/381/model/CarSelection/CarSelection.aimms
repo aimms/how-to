@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<References AIMMS_Version="4.75.1.0 (x64)">
+<References AIMMS_Version="4.75.3.6 (x64)">
 	<MainProject Path="MainProject" />
 	<Library Path="_Example Style Library" />
 </References>

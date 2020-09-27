@@ -1,15 +1,11 @@
 Car Selection
 =====================
+
 .. meta::
    :keywords: Project User Files, Mixed Integer Programming model, MIP, Matching Problem, Network object, Nodes and arcs, Bitmap
    :description: In this AIMMS project the use of pictures as nodes in a network is illustrated.
 
-Direct download link (right-click and Save link as...):
-:download:`Car Selection <model/CarSelection.zip>`
-
-
-.. Go to the example on GitHub: https://github.com/aimms/examples/tree/master/Application%20Examples/Car%20Selection
-
+Direct download AIMMS Project: :download:`Car Selection <model/CarSelection.zip>`
 
 In this AIMMS project the use of pictures as nodes in a network is illustrated. These pictures are stored inside the project as so-called project user files. Project user files can only be reached in developer mode, through the menu bar command: Tools - Project User Files.
 
