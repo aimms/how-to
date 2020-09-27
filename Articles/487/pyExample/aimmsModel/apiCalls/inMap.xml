@@ -1,0 +1,13 @@
+<AimmsJSONMapping>
+    <ObjectMapping>
+        <ArrayMapping name="clusters">
+            <ValueMapping iterative-binds-to="iLoc" iterative-existing="1" maps-to="pCluster(iLoc)"/>
+        </ArrayMapping>
+        <ArrayMapping name="lat">
+            <ValueMapping iterative-binds-to="iCentroid" maps-to="pCenLat(iCentroid)"/>
+        </ArrayMapping>
+        <ArrayMapping name="lon">
+            <ValueMapping iterative-binds-to="iCentroid" maps-to="pCenLon(iCentroid)"/>
+        </ArrayMapping>
+    </ObjectMapping>
+</AimmsJSONMapping>

@@ -1,0 +1,209 @@
+## ams_version=1.0
+
+Model Main_Model {
+	Set sLocations {
+		Index: iLoc, jLoc;
+		webui::AnnotationsIdentifier: ;
+	}
+	Parameter pSize {
+		IndexDomain: iLoc;
+	}
+	Parameter pLatitude {
+		IndexDomain: iLoc;
+	}
+	Parameter pLongitude {
+		IndexDomain: iLoc;
+	}
+	Parameter pNumClusters {
+		InitialData: 8;
+		Comment: "4 divisions in each conference";
+	}
+	StringParameter spWarning {
+		InitialData: "Click on Cluster Locations";
+	}
+	ElementParameter epErr {
+		Range: errh::PendingErrors;
+	}
+	Section DataIO {
+		DeclarationSection jsonIO {
+			StringParameter spMapName {
+				InitialData: "coordinates";
+			}
+			StringParameter spMapFile {
+				InitialData: "apiCalls//outMap.xml";
+			}
+			StringParameter spOutFile {
+				InitialData: "pretty.json";
+			}
+			StringParameter spInFile {
+				InitialData: "clustOutput.json";
+			}
+		}
+		Procedure prWriteJSON {
+			Body: {
+				spOutFile := "input.json";
+				spMapName := "outMap";
+				spMapFile := "apiCalls//outMap.xml";
+				
+				dex::AddMapping(
+					mappingName : spMapName , 
+					mappingFile : spMapFile );
+				
+				dex::WriteToFile(
+					dataFile    : spOutFile , 
+					mappingName : spMapName , 
+					pretty      :  1);
+			}
+			Comment: "write out a file pretty.json using apiCalls//outMap.xml as the mapping file";
+		}
+		Procedure prReadJSON {
+			Body: {
+				spInFile := "clustOutput.json";
+				spMapName := "clustIn";
+				spMapFile := "apiCalls//inMap.xml";
+				
+				dex::AddMapping(
+					mappingName : spMapName , 
+					mappingFile : spMapFile );
+				
+				dex::ReadFromFile(
+					dataFile         : spInFile, 
+					mappingName      : spMapName , 
+					emptyIdentifiers :  0, 
+					resetCounters    :  1);
+				
+				!py script returns the centroid index number for each location, 0 through pNumClusters-1. We increase that by 1 for easy manipulation in AIMMS
+				pCluster(iLoc) += 1;
+			}
+			Comment: "read from file clustOutput.json using apiCalls//inMap.xml as the mapping file";
+		}
+		DeclarationSection apiCall {
+			StringParameter spReqID;
+			StringParameter spURL {
+				InitialData: "http://localhost:8000/";
+			}
+			StringParameter spResponseFile;
+			StringParameter spBody;
+			Parameter pResponseCode;
+			StringParameter spRequestHeaders {
+				IndexDomain: web::httpHeader;
+			}
+		}
+		Procedure prCallAPI {
+			Body: {
+				block
+				!starting request
+				web::request_create(requestId : spReqID );
+				web::request_setURL(spReqID, spURL);
+				web::request_setMethod(spReqID, "GET");
+				!as we want to send data in a file. Set 2nd argument to 'None' if you only need to pass a scalar value
+				web::request_setRequestBody(spReqID, 'File', spOutFile);
+				!as we want to send a json file and default expectation is a txt file
+				web::request_getHeaders(spReqID, spRequestHeaders);
+				spRequestHeaders['Content-Type'] := "application/json";
+				web::request_setHeaders(spReqID, spRequestHeaders);
+				web::request_setResponseBody(spReqID, 'File', spInFile);
+				!call the api
+				web::request_invoke(spReqID, pResponseCode);
+				web::request_close(spReqID);
+				
+				onerror epErr do
+					spWarning := "Make sure your api server is running";
+					!errh::Message(epErr);
+					errh::MarkAsHandled(epErr);
+				endblock;
+			}
+		}
+	}
+	Section Clustering {
+		Set sCentroids {
+			Index: iCentroid;
+			Parameter: epCentroid;
+		}
+		Set sSelectedLocs {
+			SubsetOf: sLocations;
+			Index: isLoc;
+			Parameter: epSLoc;
+			Definition: {
+				{iLoc|pArcs(iLoc, epCentroid)}
+			}
+		}
+		Parameter pCenLat {
+			IndexDomain: iCentroid;
+		}
+		Parameter pCenLon {
+			IndexDomain: iCentroid;
+		}
+		Parameter pCluster {
+			IndexDomain: iLoc;
+		}
+		Parameter pArcs {
+			IndexDomain: (iLoc, iCentroid);
+			Definition: Ord(iCentroid) = pCluster(iLoc);
+		}
+		Parameter pCenSize {
+			IndexDomain: iCentroid;
+			Definition: sum[iLoc, pArcs(iLoc, iCentroid)];
+		}
+		StringParameter spTableTitle {
+			Definition: {
+				if epCentroid then
+				FormatString("Locs assigned to Centroid-%e", epCentroid)
+				else
+				"Click on a centroid"
+				endif
+			}
+		}
+		Procedure prCluster {
+			Body: {
+				prWriteJSON;
+				prCallAPI;
+				if pResponseCode = 200 then
+				prReadJSON;
+				spWarning := FormatString("Called %s", spURL);
+				endif;
+				
+				FileDelete(spInFile);
+				FileDelete(spOutFile);
+			}
+			Comment: "write data to json, invoke api, read api result from json, delete the json files";
+		}
+		Procedure prReset {
+			Body: {
+				empty Clustering;
+				spWarning := "Click on Cluster Locations";
+			}
+		}
+	}
+	Procedure MainInitialization {
+		Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+	}
+	Procedure PostMainInitialization {
+		Comment: {
+			"Add initialization statements here that require that the libraries are already initialized properly,
+			or add statements that require the Data Management module to be initialized."
+		}
+	}
+	Procedure MainExecution;
+	Procedure PreMainTermination {
+		Body: {
+			return DataManagementExit();
+		}
+		Comment: {
+			"Add termination statements here that require all libraries to be still alive.
+			Return 1 if you allow the termination sequence to continue.
+			Return 0 if you want to cancel the termination sequence."
+		}
+	}
+	Procedure MainTermination {
+		Body: {
+			return 1;
+		}
+		Comment: {
+			"Add termination statements here that do not require all libraries to be still alive.
+			Return 1 to allow the termination sequence to continue.
+			Return 0 if you want to cancel the termination sequence.
+			It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+		}
+	}
+}
