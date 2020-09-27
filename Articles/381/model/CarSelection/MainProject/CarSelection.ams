@@ -64,7 +64,7 @@ Model Main_CarSelection {
 			Set s_firstNames {
 				Text: "List of first names";
 				Index: i_fn;
-				Definition: data{'Edith', 'John', 'Lisa', 'Gregory', 'Ann', 'Paul', 'Victor', 'Mary', 'Carl', 'Judith'};
+				Comment: "data{\'Edith\', \'John\', \'Lisa\', \'Gregory\', \'Ann\', \'Paul\', \'Victor\', \'Mary\', \'Carl\', \'Judith\'}";
 			}
 			Set s_lastNames {
 				Text: "List of last names";
@@ -102,7 +102,7 @@ Model Main_CarSelection {
 			Parameter p_nameExistsFull {
 				Text: "The number after the names";
 			}
-			Procedure pr_GenerateNewName {
+			Procedure pr_generateNewName {
 				Arguments: (sp_newName);
 				Body: {
 					sp_newName := "";
@@ -139,7 +139,7 @@ Model Main_CarSelection {
 					Property: Output;
 				}
 			}
-			Procedure pr_GenerateNewCarPicture {
+			Procedure pr_generateNewCarPicture {
 				Arguments: (p_currentCar,sp_picturePath);
 				Body: {
 					ep_currentCarPicture := Element(s_carPictures,1) ++ (p_currentCar-1);
@@ -153,7 +153,7 @@ Model Main_CarSelection {
 					Property: Input;
 				}
 			}
-			Procedure pr_GenerateNewCarName {
+			Procedure pr_generateNewCarName {
 				Arguments: (p_currentCar,sp_newName);
 				Body: {
 					ep_currentCarPicture := Element(s_carPictures,1) ++ (p_currentCar-1);
@@ -171,13 +171,13 @@ Model Main_CarSelection {
 					Property: Output;
 				}
 			}
-			Procedure pr_ModifyMaxCars {
+			Procedure pr_modifyMaxCars {
 				Body: {
 					if (Card(s_cars) < p_maxCars) then
 					        while (Card(s_cars) < p_maxCars) do
 					                pr_GenerateNewCarName(Card(s_cars)+1,sp_newName);
 					                SetElementAdd(s_cars,ep_currentCar,sp_newName);
-					                pr_GenerateNewCarPicture(Card(s_cars),sp_carPictureName(ep_currentCar));
+					                pr_generateNewCarPicture(Card(s_cars),sp_carPictureName(ep_currentCar));
 					        endwhile;
 					else
 					        while (Card(s_cars) > p_maxCars) do
@@ -185,17 +185,17 @@ Model Main_CarSelection {
 					        endwhile;
 					endif;
 					
-					pr_GeneratePossiblePairs;
+					pr_generatePossiblePairs;
 				}
 				Comment: "The procedure modifies the Cars set according to the value of the \'p_maxCars\' parameter.";
 				StringParameter sp_newName;
 			}
-			Procedure pr_ModifyMaxParticipants {
+			Procedure pr_modifyMaxParticipants {
 				Body: {
 					sp_newName := "";
 					if (Card(s_participants) < p_maxParticipants) then
 					        while (Card(s_participants) < p_maxParticipants) do
-					               pr_GenerateNewName(sp_newName);
+					               pr_generateNewName(sp_newName);
 					               SetElementAdd(s_participants,ep_currentParticipant,sp_newName);
 					        endwhile;
 					else
@@ -216,7 +216,7 @@ Model Main_CarSelection {
 					        endwhile;
 					endif;
 					
-					pr_GeneratePossiblePairs;
+					pr_generatePossiblePairs;
 				}
 				Comment: "The procedure modifies the Participants set according to the value of the \'p_maxParticipants\' parameter.";
 				StringParameter sp_newName;
@@ -224,7 +224,7 @@ Model Main_CarSelection {
 				Parameter p_spacePostion;
 			}
 		}
-		Procedure pr_GeneratePossiblePairs {
+		Procedure pr_generatePossiblePairs {
 			Body: {
 				empty p01_possibleAssignments;
 				
@@ -319,8 +319,11 @@ Model Main_CarSelection {
 		}
 	}
 	Section Application_initialization_execution_and_termination {
-		Procedure MainInitialization {
+		Procedure MainInitialization;
+		Procedure PostMainInitialization {
 			Body: {
+				pr_readJSON();
+				
 				option seed := 36420;
 				empty s_cars;
 				empty s_participants;
@@ -331,21 +334,20 @@ Model Main_CarSelection {
 				while (loopcount <= p_maxCars) do
 				        pr_GenerateNewCarName(loopcount,sp_newName);
 				        SetElementAdd(s_cars,ep_currentCar,sp_newName);
-				        pr_GenerateNewCarPicture(loopcount,sp_carPictureName(ep_currentCar));
+				        pr_generateNewCarPicture(loopcount,sp_carPictureName(ep_currentCar));
 				endwhile;
 				while (loopcount <= p_maxParticipants) do
-				        pr_GenerateNewName(sp_newName);
+				        pr_generateNewName(sp_newName);
 				        SetElementAdd(s_participants,ep_currentParticipant,sp_newName);
 				endwhile;
 				
-				pr_GeneratePossiblePairs;
+				pr_generatePossiblePairs;
 				
 				ep_selectedCar             := first(s_cars);
 				ep_selectedParticipant     := first(s_participants);
 			}
 			StringParameter sp_newName;
 		}
-		Procedure PostMainInitialization;
 		Procedure MainExecution {
 			Body: {
 				solve mp_CarSelection;
@@ -359,6 +361,33 @@ Model Main_CarSelection {
 		Procedure MainTermination {
 			Body: {
 				return 1;
+			}
+		}
+	}
+	Section data_serialization {
+		Procedure pr_writeJSON {
+			Body: {
+				if not "InitialDataMapping" in dex::Mappings then
+					dex::AddMapping(
+						mappingName :  "InitialDataMapping", 
+						mappingFile :  "Mappings/InitialDataMapping.xml");
+				endif ;
+				dex::WriteToFile(
+					dataFile    :  "InitialData/InitialData.json", 
+					mappingName :  "InitialDataMapping", 
+					pretty      :  1);
+			}
+		}
+		Procedure pr_readJSON {
+			Body: {
+				if not "InitialDataMapping" in dex::Mappings then
+					dex::AddMapping(
+						mappingName :  "InitialDataMapping", 
+						mappingFile :  "Mappings/InitialDataMapping.xml");
+				endif ;
+				dex::ReadFromFile(
+					dataFile    :  "InitialData/InitialData.json", 
+					mappingName :  "InitialDataMapping") ;
 			}
 		}
 	}
