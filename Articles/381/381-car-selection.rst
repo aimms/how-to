@@ -53,6 +53,8 @@ The mathematical formulation is as follows:
 |     | :math:`\sum_{c,p} X_{c,p}`                 | The number of matches      | 5.   |
 +-----+--------------------------------------------+----------------------------+------+
 
+
+
 Remarks:
 
 #.  The :math:`A_{c,p}` is the set of arcs, according to which assignment is permitted.
