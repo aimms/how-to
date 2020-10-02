@@ -47,8 +47,10 @@ intersphinx_mapping = {'functionreference': ('https://documentation.aimms.com/fu
 
 if os.name != 'nt':
 
-#Import spelling extension
+    #Import spelling and last updated date extension if on gitlab
     extensions.append('sphinx_sitemap')
+    extension.append('sphinx_last_updated_by_git')
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -79,13 +81,7 @@ author = u'AIMMS'
 
 # includes these texts at the end of all source .rsts, helpful for using repetitive replacements 
 
-rst_epilog = """
-.. |date| date:: %B, %Y
-
-.. |time| date:: %H:%M
-
-Last Updated: |date|
-"""
+#rst_epilog = ""
 
 # include these texts at the beginning of all source .rsts, use only for HTML builds to update last updated date. 
 
