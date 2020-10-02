@@ -185,7 +185,7 @@ Lastly we check that the stock available is a non-negative integer:
         errh::MarkAsHandled(err);
     endblock;
 
-Note the use of error handling here, as the AIMMS intrinsic functions ``Val`` and ``Mod`` may throw an error upon invalid input.
+Note the use of error handling here, as the AIMMS intrinsic functions :any:`Val` and :any:`Mod` may throw an error upon invalid input.
 
 The next step details the last procedures required for the form.
 

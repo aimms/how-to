@@ -4,7 +4,7 @@ Data for Optimization Libaries
 An AIMMS library can be reused in other projects. To solve an optimization problem in a library we're dealing with two abstraction mechanisms:
 
 * Procedures where sets transferred via the arguments have different meanings.
-* Declare global variables and constraints with a fixed index domain within the library, and use subsets of ``AllConstraints`` and ``AllVariables`` locally within that library.
+* Declare global variables and constraints with a fixed index domain within the library, and use subsets of :any:`AllConstraints` and :any:`AllVariables` locally within that library.
 
 These two abstraction mechanisms do not work together naturally.
 

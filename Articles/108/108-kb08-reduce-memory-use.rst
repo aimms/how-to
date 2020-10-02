@@ -33,7 +33,7 @@ Reducing memory requirements
 
 First, check the amount of memory in generated mathematical programs. 
 
-The predeclared set ``AllGeneratedMathematicalPrograms`` contains the names of the generated mathematical programs. You can use the intrinsic function ``GMP::Instance::GetMemoryUsed`` for each of the elements as follows:
+The predeclared set :any:`AllGeneratedMathematicalPrograms` contains the names of the generated mathematical programs. You can use the intrinsic function :any:`GMP::Instance::GetMemoryUsed` for each of the elements as follows:
 
 .. code-block:: aimms
     :linenos:
@@ -41,7 +41,7 @@ The predeclared set ``AllGeneratedMathematicalPrograms`` contains the names of t
     p_MemInUseGMP := sum( indexGeneratedMathematicalPrograms, 
         gmp::Instance::GetMemoryUsed( indexGeneratedMathematicalPrograms ) );
 
-You can use ``GMP::Instance::Delete`` to delete generated mathematical programs as follows:
+You can use :any:`GMP::Instance::Delete` to delete generated mathematical programs as follows:
 
 .. code-block:: aimms
     :linenos:

@@ -82,7 +82,7 @@ Options were introduced to handle different encodings for different IO:
 #.  Datatable character encoding.
     This option is no longer in use and can safely be set to its default.
 
-NB: Possible values for these option are the elements in the predeclared set ``AllCharacterEncodings``.
+NB: Possible values for these option are the elements in the predeclared set :any:`AllCharacterEncodings`.
 
 Converting ASCII based apps to using UTF8
 -----------------------------------------

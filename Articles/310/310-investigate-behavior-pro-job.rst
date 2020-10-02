@@ -75,7 +75,7 @@ Remarks about the above code:
 
 #. ``pro::ManagedSessionInputCaseIdentifierSet`` is initialized to :aimms:set:`AllIdentifiers`
 
-#. ``pro::ManagedSessionRemoveFromCaseIdentifierSet`` is initialized to ``AllDefinedParameters``
+#. ``pro::ManagedSessionRemoveFromCaseIdentifierSet`` is initialized to :any:`AllDefinedParameters`
 
 #. Thus, by default defined parameters are not transferred, but defined sets are. Evaluating the definitions of these sets may still take significant time. If so, the AIMMS profiler will identify the sets that take significant time. Some of these sets can be safely added to ``pro::ManagedSessionRemoveFromCaseIdentifierSet``. For instance, those with dimension 2 or higher, as illustrated by adding the following assignment to ``PostMainInitialization``:
 
@@ -257,7 +257,7 @@ We change this to:
     }
 
 .. note::
-     ``ProfilerCollectAllData`` is available since AIMMS 4.68
+     :any:`ProfilerCollectAllData` is available since AIMMS 4.68
 
 In addition, we also set the option ``communicate_warnings_to_end_users`` to ``on``.
 

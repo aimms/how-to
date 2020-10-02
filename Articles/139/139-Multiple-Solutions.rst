@@ -28,7 +28,7 @@ By setting this option to a very large value, you can instruct the solver to sto
       solve NQueensPlan;
    endblock;
 
-After the solve is finished, you can use the AIMMS function ``GMP::Solution::SendToModel`` to transfer the solution values from the GMP solution repository to the variables in your project. This approach does require that for every variable ``X`` in your problem, you introduce a new parameter ``X2`` that has the same index domain as ``X`` with an index added for indexing the solutions. In our example, this parameter is ``XValueInSolution``.
+After the solve is finished, you can use the AIMMS function :any:`GMP::Solution::SendToModel` to transfer the solution values from the GMP solution repository to the variables in your project. This approach does require that for every variable ``X`` in your problem, you introduce a new parameter ``X2`` that has the same index domain as ``X`` with an index added for indexing the solutions. In our example, this parameter is ``XValueInSolution``.
 
 .. code-block:: aimms
 

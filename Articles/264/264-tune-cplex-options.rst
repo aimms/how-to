@@ -27,7 +27,7 @@ To help you out, CPLEX has some automatic tuning options. In AIMMS, you can acce
 
 As the names already suggest, the first function will tune the CPLEX options for a set of LP/MPS files. As an argument, you will have to specify the directory containing the LP/MPS files. The second function will tune the options based on one single GMP, which you will have to provide as an argument. 
 
-The function ``GMP::Tuning::TuneSingleGMP`` works like the other GMP function, so the solver to use is already known. In case of the function ``GMP::Tuning::TuneMultipleMPS``, you must also provide which solver to use as an argument.
+The function :any:`GMP::Tuning::TuneSingleGMP` works like the other GMP function, so the solver to use is already known. In case of the function :any:`GMP::Tuning::TuneMultipleMPS`, you must also provide which solver to use as an argument.
 
 In order to create the MPS files for multiple instances of your problem, you can set the project setting :menuselection:`General > MPS` under the ``CPLEX`` specific solver options to *At every solve*. Each time you solve an instance of your problem, the solver will generate a MPS file.
 
@@ -35,7 +35,7 @@ In order to create the MPS files for multiple instances of your problem, you can
 The other options to provide are the following:
 
 
-   * ``FixedOptions``: A subset of the set ``AllOptions`` that are to be considered unchangeable and for which the current project options will be used
+   * ``FixedOptions``: A subset of the set :any:`AllOptions` that are to be considered unchangeable and for which the current project options will be used
 
    * ``ApplyTunedSettings``: A binary argument indicating whether the found tuned option settings should be set in the project options
 

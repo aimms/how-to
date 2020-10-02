@@ -103,7 +103,7 @@ Or in another case, you already have the Parameter but you would like to create 
 
     PositionOfPlayer(p) := First(ps|PlayerAtPosition(p, ps));
 
-Here AIMMS operator "``First``" is used to find the first position the player plays at. This operator depends on the assumption that each player only plays at one position.  In another situation, where I want to know all the Quarterback players, statement ``First(p|PlayerAtPosition(p, ps))`` won't help me since there are more than one player plays Quarterback. In this case I need create a set ``AllQuarterbacks``, make it a ``subset`` of Players, index ``allqb`` and define it as the following.
+Here AIMMS operator ":any:`First`" is used to find the first position the player plays at. This operator depends on the assumption that each player only plays at one position.  In another situation, where I want to know all the Quarterback players, statement ``First(p|PlayerAtPosition(p, ps))`` won't help me since there are more than one player plays Quarterback. In this case I need create a set ``AllQuarterbacks``, make it a ``subset`` of Players, index ``allqb`` and define it as the following.
 
 .. image:: images/Screenshot_26.png
  

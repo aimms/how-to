@@ -53,10 +53,10 @@ Note that after executing this statement, the option setting may unexpectedly be
 The OPTION statement is documented in the `AIMMS language reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_, section "The OPTION and PROPERTY statements".
 
 
-``OptionSetValue`` and ``OptionSetString`` procedures
+:any:`OptionSetValue` and :any:`OptionSetString` procedures
 -----------------------------------------------------------
 
-A slightly more modern way of setting option values is using the procedures ``OptionSetValue`` and ``OptionSetString``.
+A slightly more modern way of setting option values is using the procedures :any:`OptionSetValue` and :any:`OptionSetString`.
 An equivalent to the option statement in the previous section is:
 
 .. code-block:: aimms

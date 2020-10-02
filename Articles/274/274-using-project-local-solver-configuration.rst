@@ -25,7 +25,7 @@ are available for your current project.
 You can change the default solver for each type of mathematical program via the
 solver configuration screen (accessible from the *Settings*
 menu). You can temporarily overrule this default
-by modifying the ``CurrentSolver`` element
+by modifying the :any:`CurrentSolver` element
 parameter or with a ``where`` clause with the solve statement.
 Read more details about how to do so in the article :doc:`../178/178-change-default-solver`. 
 
