@@ -124,7 +124,7 @@ To avoid coding errors and maintenance issues from doing this manually, AIMMS ha
    Each database table is monitored separately, so you need a separate monitor for each table. 
    We need runtime libraries because each monitor has a reference to a set, not the value of a set. 
    
-By automating the use of ``ReferencedIdentifiers`` and ``DatachangeMonitors`` we avoid maintenance problems.
+By automating the use of :any:`ReferencedIdentifiers` and ``DatachangeMonitors`` we avoid maintenance problems.
 
 Example of runtime library 
 ----------------------------
@@ -177,7 +177,7 @@ An explanation of the contents for the database table ``db_ab`` follows below. I
     
 * line 2: The prefix. Here, acronym of the runtime library name in lower case.
 
-* line 6: The sets and parameters referenced in the first database table, constructed using the function ``ReferencedIdentifiers``.
+* line 6: The sets and parameters referenced in the first database table, constructed using the function :any:`ReferencedIdentifiers`.
 
 * line 4-7: A set declaration and definition for the identifiers referenced in the first table. 
 

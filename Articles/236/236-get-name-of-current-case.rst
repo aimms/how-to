@@ -9,16 +9,16 @@ Get Name of an AIMMS Case
 
     This article was originally posted to the AIMMS Tech Blog.
 
-This article explains how to get the name of the current case, or more generally, any case denoted by an element in the predefined set ``AllCases``. You can use the case-related AIMMS functions to achieve this.
+This article explains how to get the name of the current case, or more generally, any case denoted by an element in the predefined set :any:`AllCases`. You can use the case-related AIMMS functions to achieve this.
 
 In AIMMS you have the option to store the data for all or some identifiers in so-called AIMMS cases. Within the AIMMS language there is support for saving and loading cases. 
 
-All of these functions work with an element parameter in the predefined set ``AllCases``, which is a subset of the set ``Integers``. 
+All of these functions work with an element parameter in the predefined set :any:`AllCases`, which is a subset of the set :any:`Integers`. 
 
 
-As the predefined set ``AllCases`` is a subset of ``Integers``, you can't get the name of the current (or any other case) directly. You will have to use the string parameter ``CaseFileURL`` provided in the AIMMS language to obtain the name of a case referenced by an element in the set ``AllCases``.
+As the predefined set :any:`AllCases` is a subset of :any:`Integers`, you can't get the name of the current (or any other case) directly. You will have to use the string parameter :any:`CaseFileURL` provided in the AIMMS language to obtain the name of a case referenced by an element in the set :any:`AllCases`.
 
-In the following code, ``ep_Case`` denotes an element parameter in the set ``AllCases`` and ``sp_CaseName`` is a string parameter, which will be used for storing the name.
+In the following code, ``ep_Case`` denotes an element parameter in the set :any:`AllCases` and ``sp_CaseName`` is a string parameter, which will be used for storing the name.
 
 .. code-block:: aimms
     :linenos:

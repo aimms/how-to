@@ -39,7 +39,7 @@ These identifiers are initialized in ``PostMainInitialization`` like this:
 
 The first identifier, ``p_NumberOfDifferentKindOfFruit``, has a definition, and it not logical to write that to a text file which is also used as an input file.
 
-So to write all identifiers in the section ``CommonDeclarationsForDataExchange`` that can also be used as input, we construct a subset of ``AllIdentifiers``, say ``s_outputSet`` as follows:
+So to write all identifiers in the section ``CommonDeclarationsForDataExchange`` that can also be used as input, we construct a subset of :any:`AllIdentifiers`, say ``s_outputSet`` as follows:
 
 .. code-block:: aimms
 

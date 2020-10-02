@@ -34,7 +34,7 @@ These variables have distinct values and are inverses of each other:
     cp::AllDifferent(s,Employee(s,d))
     cp::Channel( s, Employee(s,d), e, Shift(e,d) )
 
-Here the ``cp::Channel`` constraint enforces that ``Employee`` and ``Shift`` are each other's inverse.
+Here the :any:`cp::Channel` constraint enforces that ``Employee`` and ``Shift`` are each other's inverse.
 
 First solve
 -----------
@@ -127,7 +127,7 @@ The previous solves produced an answer instantaneously, but we now had to wait m
 
 The first technique is to reduce the symmetry. In our example, changing who is actually nurse A, B, C, or D does not matter. So we might as well fix the solution of the first day; this fixing will not really change the problem, just reduce the search space.
 
-The second technique is to add redundant constraints. A redundant constraint is a constraint that can be derived from the other constraints and helps to reduce the search. In our example, the minimum found is 6. By observing that each working shift requires at least two nurses, there are at least two shift changes for the working shift, we can also derive the minimum is 6. Actually, you may want to point out to me that the two ``cp::AllDifferent`` constraints given in the base model are also redundant.
+The second technique is to add redundant constraints. A redundant constraint is a constraint that can be derived from the other constraints and helps to reduce the search. In our example, the minimum found is 6. By observing that each working shift requires at least two nurses, there are at least two shift changes for the working shift, we can also derive the minimum is 6. Actually, you may want to point out to me that the two :any:`cp::AllDifferent` constraints given in the base model are also redundant.
 
 Applying these two techniques, gives us instantaneous feedback again.
 

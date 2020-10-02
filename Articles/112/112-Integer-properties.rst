@@ -82,7 +82,7 @@ and
     if P_anInteger then DialogMessage("It is true!") endif;
     !returns TRUE
 
-If neither of the two properties are set, then you will get a warning whenever the new compiler encounters an ambiguity. We recommended that you then make the proper selection when declaring a subset of ``Integers``. 
+If neither of the two properties are set, then you will get a warning whenever the new compiler encounters an ambiguity. We recommended that you then make the proper selection when declaring a subset of :any:`Integers`. 
 
 .. warning:: 
 
