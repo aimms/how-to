@@ -49,7 +49,7 @@ if os.name != 'nt':
 
     #Import spelling and last updated date extension if on gitlab
     extensions.append('sphinx_sitemap')
-    extension.append('sphinx_last_updated_by_git')
+    extensions.append('sphinx_last_updated_by_git')
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
