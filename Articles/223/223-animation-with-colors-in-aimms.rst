@@ -20,7 +20,7 @@ green.
 
 By letting each point take the next color in every iteration of the
 animation, you end up with an animation. You can generate user colors
-programmatically with the intrinsic procedure ``UserColorAdd``. This
+programmatically with the intrinsic procedure :any:`UserColorAdd`. This
 procedure takes 4 arguments: the first one is the name of the new user
 color and the other three arguments are the values for the
 Red/Green/Blue components (all values between 0 and 255).

@@ -29,7 +29,7 @@ Now, I will answer the above questions in reverse order:
 
 * ``lpu=last(LargePowerUnits), lpu+1`` is the empty element. Even though there is another power unit in the super set, it is not large. If you want to obtain the next element with respect to the set ``PowerUnits``, you can use the index ``pu``, and the expression becomes ``pu+1``.
 * ``wd=last(WorkingDays), wd+1`` is the empty element. Even though there is a Saturday after Friday, in this example Saturday is not a working day. If you view the set ``WorkingDays`` as a cyclic set, you may want to use the ``++1`` operation instead, and the expression becomes ``wd++1``.
-* ``i=last(S), i+1``, is the empty element, even though ``S`` is a subset of ``Integers``. For the same reasons as above and with the similar remedies.
+* ``i=last(S), i+1``, is the empty element, even though ``S`` is a subset of :any:`Integers`. For the same reasons as above and with the similar remedies.
 
 In mathematics, these elements correspond to integer numbers in the infinite set :math:`\mathbb{Z}`. Thus "+1" operation on an integer element resulting in the empty element may come as a surprise. However, when only considering finite sets, as AIMMS does, which may consist of names and numbers, this allows for a consistent definition of the next and previous operators.
 

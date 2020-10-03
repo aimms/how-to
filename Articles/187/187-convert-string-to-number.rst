@@ -38,7 +38,7 @@ The example illustrates how to use the ``val`` function:
 To ensure the execution is not halted when the string or element you are trying to convert does not represent a number (like the last case in the above example), you can use :doc:`error handling functions </Articles/191/191-handle-errors-and-warnings>`.
 
 
-Note that if you make your set a subset of the predefined set ``Integers`` you don't have to use the ``val`` function for conversion, but you can directly use an index or an element parameter of this set as a number.
+Note that if you make your set a subset of the predefined set :any:`Integers` you don't have to use the ``val`` function for conversion, but you can directly use an index or an element parameter of this set as a number.
 
 Related Topics
 --------------

@@ -53,7 +53,7 @@ In the declaration below, the variables and constraints that make up the mathema
             Definition: AllVariables * Flowshop_Mathematical_Program_Declarations;
         }
 
-To determine which identifiers make up the mathematical program instance we need to know which identifiers are referenced in the variable and constraint definitions. We use the function ``ReferencedIdentifiers`` for this as follows:
+To determine which identifiers make up the mathematical program instance we need to know which identifiers are referenced in the variable and constraint definitions. We use the function :any:`ReferencedIdentifiers` for this as follows:
 
     .. code-block:: aimms
 
@@ -107,7 +107,7 @@ Further reading
 
 #. See also the section on input and output case definitions in `AIMMS PRO documentation <https://documentation.aimms.com/pro/appl-state.html#id1>`_
 
-#. The descriptions of the functions ``ReferencedIdentifiers`` and ``SectionIdentifiers`` in `AIMMS PRO Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_ .
+#. The descriptions of the functions :any:`ReferencedIdentifiers` and :any:`SectionIdentifiers` in `AIMMS PRO Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_ .
 
 You can download the example: 
 :download:`2a. Flow Shop - ReducedCases <downloads/2a. Flow Shop - ReducedCases.zip>`.

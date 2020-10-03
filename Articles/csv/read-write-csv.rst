@@ -174,7 +174,7 @@ The following attributes are supported:
 
 #. ``Width``. This attribute is optional. This attribute controls the width when **writing** numeric data to a CSV file.
 
-#. ``Precision``. This attribute is optional. This attribute controls the precision when **writing** numeric data to a CSV file.
+#. :any:`Precision`. This attribute is optional. This attribute controls the precision when **writing** numeric data to a CSV file.
 
 Example:
 

@@ -55,7 +55,7 @@ These steps are explained in detail below.
 Select cases to compare
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Use the predeclared set ``CurrentCaseSelection`` for all cases you selected to be compared.
+Use the predeclared set :any:`CurrentCaseSelection` for all cases you selected to be compared.
 Declare as follows:
 
 .. code-block:: aimms
@@ -74,8 +74,8 @@ This set is filled using the dialog of the "Data Manager" tool of the AIMMS WebU
 Once a user filled this set, he can select the case for the schedule shown in the top Gantt Chart, 
 and similarly, the case for the schedule shown in the bottom Gantt Chart.
 
-This is simply a matter of element parameters selecting a value in  ``CurrentCaseSelection``.
-The scalar widget, for elements in ``AllCases`` shows the case name; so we don't have to do the number-to-name conversion ourselves here.
+This is simply a matter of element parameters selecting a value in  :any:`CurrentCaseSelection`.
+The scalar widget, for elements in :any:`AllCases` shows the case name; so we don't have to do the number-to-name conversion ourselves here.
 
 The element parameters are declared as follows:
 
@@ -116,7 +116,7 @@ The WebUI requires identifier references for the start and duration of the Gantt
         Definition: IndexCurrentCaseSelection.p_GCJobDuration(j, m);
     }
 
-Here we see the index ``IndexCurrentCaseSelection`` again, varying over all cases in ``CurrentCaseSelection``. 
+Here we see the index ``IndexCurrentCaseSelection`` again, varying over all cases in :any:`CurrentCaseSelection`. 
 In the definition of these two parameters it is followed by a "."; hence the name dot-notation. 
 The "." is then followed by an ordinary identifier reference.
 

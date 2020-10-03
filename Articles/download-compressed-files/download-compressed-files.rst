@@ -21,10 +21,10 @@ Start in developer mode
 
 As you may know, AIMMS is capable of executing any executable program available on its running environment through the :code:`Execute` function. AIMMS running environment may refer to your computer when using AIMMS in developer mode, your server computers when you are using AIMMS PRO and AIMMS computers when you are on the AIMMS Cloud. 
 
-Calling the ``Execute`` intrinsic function
+Calling the :any:`Execute` intrinsic function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You may download the ``7za.exe`` executable from https://www.7-zip.org/download.html, and put it in your project folder. Say you have several files to download in a folder ``FilesToDownload`` in your project folder. As described in https://sevenzip.osdn.jp/chm/cmdline/syntax.htm, you may use the ``Execute`` function as follows. 
+You may download the ``7za.exe`` executable from https://www.7-zip.org/download.html, and put it in your project folder. Say you have several files to download in a folder ``FilesToDownload`` in your project folder. As described in https://sevenzip.osdn.jp/chm/cmdline/syntax.htm, you may use the :any:`Execute` function as follows. 
 
 
 .. code-block:: aimms
@@ -52,7 +52,7 @@ As you may see, we asked AIMMS to execute a program called ``7za.exe`` located i
     * ``archive2.zip`` = the archive path. This will create the archive file in the project folder
     * ``.\FilesToDownload\*`` = the folder to add (any files or sub folder) regardless of their name (because we specified ``*`` at the end)
 
-* As a 3rd argument of the ``Execute`` function, we asked AIMMS to wait until the called program, ``7za.exe``, has finished his job.
+* As a 3rd argument of the :any:`Execute` function, we asked AIMMS to wait until the called program, ``7za.exe``, has finished his job.
 
 
 * We finished by assigning a string parameter to `"Ready to test Existence"`, notifying us about the end of the zipping process.
@@ -107,7 +107,7 @@ You may now open your WebUI, and insert a download widget that you will link wit
 Elevate your formulation to PRO
 +++++++++++++++++++++++++++++++
 
-Knowing how works the ``Execute`` function, you may call any executable program in your system PATH, or by specifying the absolute path on your server, such as: ``C:\Program Files (x86)\MyProgram\MyProgram.exe``. However, mind to create the archive somewhere the download procedure may access. In the following example, I take into account both situation, PRO on Windows or PRO on Linux. 
+Knowing how works the :any:`Execute` function, you may call any executable program in your system PATH, or by specifying the absolute path on your server, such as: ``C:\Program Files (x86)\MyProgram\MyProgram.exe``. However, mind to create the archive somewhere the download procedure may access. In the following example, I take into account both situation, PRO on Windows or PRO on Linux. 
 
 I will thus simply improve my **MainExecution** procedure as follows:
 
@@ -124,7 +124,7 @@ I will thus simply improve my **MainExecution** procedure as follows:
 .. note:: 
 
     * For windows, I assumed you bundled the ``7za.exe`` program with your AIMMS project in the aimmspack. As explained above, an alternative would be to install a zip program on your Windows Server accessible from the PATH, or  
-    * The ``AimmsStringConstants`` intrinsic string parameter provides a list of system constants, such as ``'platform'`` (Windows, Linux) or ``'architecture'`` (x64, x86). Please refer to the `Function Reference <https://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_ for further details.
+    * The :any:`AimmsStringConstants` intrinsic string parameter provides a list of system constants, such as ``'platform'`` (Windows, Linux) or ``'architecture'`` (x64, x86). Please refer to the `Function Reference <https://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_ for further details.
     
 And I will improve my **Download** procedure as well:
 
@@ -149,7 +149,7 @@ As you may have noticed, when running on PRO server, we took care to copy the ar
 
 .. note::
 
-    The ``ProjectDeveloperMode`` intrinsic function detects if a project is in developer or end-user mode (when opened on PRO, a project is automatically in end-user mode)
+    The :any:`ProjectDeveloperMode` intrinsic function detects if a project is in developer or end-user mode (when opened on PRO, a project is automatically in end-user mode)
 
 Et voilà! 
 

@@ -22,13 +22,13 @@ Functions of data change monitor
 
 The data change monitor has the following intrinsic functions:
 
-* ``DataChangeMonitorCreate``: Create a new monitor and get a reference to it.
+* :any:`DataChangeMonitorCreate`: Create a new monitor and get a reference to it.
 
-* ``DataChangeMonitorDelete``: Delete an existing monitor by its reference.
+* :any:`DataChangeMonitorDelete`: Delete an existing monitor by its reference.
 
-* ``DataChangeMonitorReset``: Reset a monitor indicated by a reference.
+* :any:`DataChangeMonitorReset`: Reset a monitor indicated by a reference.
 
-* ``DataChangeMonitorHasChanged``: Check whether values have changed.
+* :any:`DataChangeMonitorHasChanged`: Check whether values have changed.
 
 Creating data change monitor
 ----------------------------
@@ -46,7 +46,7 @@ In the example code below, ``s_WatchedIdentifiers`` is a subset of :aimms:set:`A
     !Create a name that will be the ID for this data change monitor
     sp_DataChangeMonitorID := "Monitor parameters" ; 
 
-Then, use the intrinsic function ``DataChangeMonitorCreate`` as shown below:
+Then, use the intrinsic function :any:`DataChangeMonitorCreate` as shown below:
 
 .. code-block:: aimms
     :linenos:
@@ -85,7 +85,7 @@ It's a good practice to delete any pre-existing monitor with the same name befor
 
 Checking the data for changes
 -----------------------------
-After you create the data change monitor, you can query it with the intrinsic function ``DataChangeMonitorHasChanged`` to check if the data monitored by it has changed. See the example below:
+After you create the data change monitor, you can query it with the intrinsic function :any:`DataChangeMonitorHasChanged` to check if the data monitored by it has changed. See the example below:
 
 .. code-block:: aimms
     :linenos:

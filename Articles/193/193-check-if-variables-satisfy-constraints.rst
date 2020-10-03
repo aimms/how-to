@@ -10,7 +10,7 @@ This article explains how to check whether a given combination of value assignme
 
 You could add an assignment constraint for each of your variables that fixes the variable to the given value and then solve the model again. If the solver returns with the status infeasible, you know that these variable values do not satisfy all constraints.
 
-Or, better yet, use the GMP function ``GMP::Solution::Check``.
+Or, better yet, use the GMP function :any:`GMP::Solution::Check`.
 
 Suppose we have the following simple model:
 
