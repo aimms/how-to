@@ -189,12 +189,16 @@ You can download the example AIMMS project below:
 
 * :download:`HttpFood.zip <download/HttpFood.zip>` 
 
+* A variation, whereby the data is read to AIMMS identifiers: :download:`HttpFoodIntegrated.zip <download/HttpFoodIntegrated.zip>` 
+
 
 Related Topics
 ---------------
 * **AIMMS How-To**: :doc:`../293/293-extracting-data-from-XML`
 * **AIMMS Documentation**: `HTTP client library <https://documentation.aimms.com/httpclient/index.html>`_
 * **AIMMS Documentation**: `Add a library to your model <https://documentation.aimms.com/httpclient/library.html#adding-the-http-client-library-to-your-model>`_
+* **AIMMS Documentation**: `Data exchange library <https://documentation.aimms.com/dataexchange/index.html>`_
+
 
 References
 ------------------------------------

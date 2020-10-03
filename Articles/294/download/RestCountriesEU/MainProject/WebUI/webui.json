@@ -1,0 +1,193 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home",
+                "children": [
+                  {
+                    "name": "CountryData",
+                    "type": "pagev2-grid",
+                    "slug": "countrydata_1",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/countrydata_1": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "CountryData",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsCountryData0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout9"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "CountryData",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "pages/home": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "headers",
+          "layoutInfo": {
+            "width": "10",
+            "height": "4",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/CountryData": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_names",
+          "sp_alpha2Code",
+          "sp_alpha3Code",
+          "sp_topLevelDomain1",
+          "sp_topLevelDomain2",
+          "sp_topLevelDomain3"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_country"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "i_country",
+          "width": 10.18
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_alpha2Code"
+          },
+          "width": 16.39
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_names"
+          },
+          "width": 32.78
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_alpha3Code"
+          },
+          "width": 15.8
+        }
+      ]
+    },
+    "title": {
+      "literal": "Country Data"
+    }
+  },
+  "widgets/headers": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_httpRequestHeaders",
+          "sp_httpResponseHeaders"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "sp_httprequestheaders": "1",
+        "sp_httpresponseheaders": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "web::httpHeader"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "web::httpHeader",
+          "width": 31.4
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_httpRequestHeaders"
+          },
+          "width": 27.06
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_httpResponseHeaders"
+          },
+          "width": 47.73
+        }
+      ]
+    }
+  }
+}

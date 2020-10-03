@@ -1,0 +1,10 @@
+<AimmsXMLMapping>
+    <ElementObjectMapping name="breakfast_menu">
+        <ElementObjectMapping name="food" iterative-binds-to="i_food">
+            <ElementValueMapping name="name" maps-to="sp_foodName(i_food)"/>
+            <ElementValueMapping name="price" maps-to="sp_foodPrice(i_food)"/>
+            <ElementValueMapping name="description" maps-to="sp_foodDescription(i_food)"/>
+            <ElementValueMapping name="calories" maps-to="p_foodCalories(i_food)"/>
+        </ElementObjectMapping>
+    </ElementObjectMapping>
+</AimmsXMLMapping>
