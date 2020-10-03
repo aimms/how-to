@@ -7,17 +7,6 @@ How to connect AIMMS with Python
    :description: Integrating (data science) models built in Python with your AIMMS applications
    :keywords: python, integration, data science, machine learning, connectivity
 
-The usage of both optimization and machine learning algorithms in decision support applications is growing steadily. One example is to use a forecasting model to predict the expected demand and provide that as an input to a MIP model. 
-AIMMS is optimized for the development of apps based on MIP models and in this article, we will show you how to empower your AIMMS apps with machine learning models built in Python. This will let you leverage the availability of libraries like `scikit-learn <https://scikit-learn.org/stable/index.html>`_, `NumPy <https://numpy.org/>`_ and others in AIMMS as well. 
-
-Overview
------------
-
-:doc:`The HTTP Library section </C_Developer/Sub_Connectivity/sub_http/index>` contains examples like :doc:`Call Google Maps API <../296/296-obtaining-geographic-data-through-the-google-api>` and :doc:`Call IBM Image Recognition API <../301/301-Image-Recognition>` which show how to call web services in AIMMS. 
-We will use the same principles to call a Python model from AIMMS by floating the Python model as a web service. There are many packages available for this purpose and we will use `Flask <https://flask.palletsprojects.com/en/1.1.x/>`_ in our example which you can :download:`download here <pyExample.zip>`.
-
-.. note:: This how-to is not intended as a tutorial/endorsement for using Flask and Docker with AIMMS but to show one way of connecting AIMMS with models built in Python. Choose an architecture apt to your needs.
-
 The example contains a k-Means clustering model built in Python using scikit-learn which is floated as a REST API using Flask (`app`) and an AIMMS project (`aimmsModel`) which uses the `HTTP <https://documentation.aimms.com/httpclient/index.html>`_ and `DataExchange <https://documentation.aimms.com/dataexchange/index.html>`_ libraries to call the clustering model. We visualize this set up in the below image.
 
 .. image:: flow.png
@@ -175,13 +164,7 @@ The below commandline prompts will build a Docker image of the name `imageName:l
 
     docker run -d -p 8000:8000 --name "containerName" imageName
 
-The option ``-p 8000:8000`` exposes the port 8000 for the docker container and our AIMMS app can still access the Python model at http://localhost:8000/. A benefit of using docker is that once you build this image, you can use the same image to run/deploy the Flask app in multiple ways. 
-
-#. Run locally using Docker Desktop
-#. Deploy on-premise with `Kubernetes <https://www.docker.com/products/kubernetes>`_
-#. Deploy on Microsoft Azure as an `App Service / Web App <https://docs.microsoft.com/en-us/azure/devops/pipelines/apps/cd/deploy-docker-webapp?view=azure-devops&tabs=python>`_
-#. Deploy on other cloud offerings like `AWS ECS <https://aws.amazon.com/getting-started/hands-on/deploy-docker-containers/>`_ or `Google Cloud <https://cloud.google.com/compute/docs/containers/deploying-containers>`_. 
-
+The option ``-p 8000:8000`` exposes the port 8000 for the docker container and our AIMMS app can still access the Python model at http://localhost:8000/. 
 
 
 
