@@ -1,5 +1,4 @@
 stages:
-  - build
   - test
   - deploy
 
@@ -29,7 +28,7 @@ spellcheck:
     - ubuntu
 
 build:
-  stage: build
+  stage: test
   script:
     - sphinx-build -W -b html . _build/html 
   tags: 
