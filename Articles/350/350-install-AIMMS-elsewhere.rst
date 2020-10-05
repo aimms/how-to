@@ -93,7 +93,7 @@ Installing the license
 -----------------------
 
 *  You should have a valid AIMMS license to use AIMMS.  
-   If you do not have one yet, you can request a `free license <https://www.aimms.com/support/licensing/free-licenses/>`_
+   If you do not have one yet, you can request a `free license <https://www.aimms.com/support/licensing/academic-license/>`_
 
 *  Read all about `AIMMS licensing here <https://www.aimms.com/support/licensing/>`_  
 

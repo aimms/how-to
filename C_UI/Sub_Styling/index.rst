@@ -25,4 +25,4 @@ From the AIMMS Design System:
 
 * `3 Tips for a Better Page Layout <https://design-system.aimms.com/page-structure>`_
 
-.. Note:: CSS files to customize your WebUI projects are provided as-is and are not covered by our SLA policies. If you have any questions regarding this, we encourage you to post on `the AIMMS community <community.aimms.com>`_ 
+.. Note:: CSS files to customize your WebUI projects are provided as-is and are not covered by our SLA policies. If you have any questions regarding this, we encourage you to post on `the AIMMS community <https://community.aimms.com/>`_ 
