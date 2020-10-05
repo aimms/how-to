@@ -26,7 +26,7 @@ Before we begin, make sure you have done the following:
 Basics of IBM Cloud APIs
 -----------------------------------------------
 
-You can find information about this API in `IBM Cloud API Docs: Visual Recognition <https://cloud.ibm.com/apidocs/visual-recognition#classify-images>`_.
+You can find information about this API in `IBM Cloud API Docs: Visual Recognition <https://cloud.ibm.com/apidocs/visual-recognition/visual-recognition-v3#classify>`_.
 
 The Authentication system we'll be using is a simple API key.
 You can use a GET request using the URL of a photo, or a POST request to send the document to analyze to the server. (Here, we'll be using the POST request, explained in IBM docs in section *Methods > Classify images*.)
@@ -175,7 +175,7 @@ Form parameters
 
 In the given example, the form parameters are specified by writing ``-F parameter= value``. 
 
-From the `CURL documentation <https://curl.haxx.se/docs/httpscripting.html#The_HTTP_Protocol>`_  (in section **4.2 : GET** ) we learn that when you specify this kind of parameters in CURL, the client then redirects to another URL, i.e., the base URL plus the formatted form parameters.
+From the `CURL documentation <https://curl.haxx.se/docs/httpscripting.html>`_  (in section **4.2 : GET** ) we learn that when you specify this kind of parameters in CURL, the client then redirects to another URL, i.e., the base URL plus the formatted form parameters.
 
 We can also do the same thing in a different way in AIMMS. Let's transform the previous code and configure the form and query parameters.
 

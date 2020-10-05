@@ -27,7 +27,7 @@ incumbent solution forms a true solution of the TSP problem, as it contains only
 tour.
 
 This example contains several euclidean TSP instances from TSPLIB at:
-http://www.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/
+http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/
 
 Note:
 The lazy constraint callback is only supported by CPLEX and Gurobi.

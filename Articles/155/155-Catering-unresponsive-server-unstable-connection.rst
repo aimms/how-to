@@ -144,11 +144,11 @@ The real meat of this article is in the ``pr_ButtonComputation`` procedure where
 Further Reading
 ------------------
 
-* `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_: Section "Raising and handling warnings and errors"
+* `AIMMS The Language Reference <https://documentation.aimms.com/language-reference/procedural-language-components/execution-statements/raising-and-handling-warnings-and-errors.html>`__
 
-* `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_: Chapter "Error Handling Functions"
+* `AIMMS The Function Reference <https://documentation.aimms.com/functionreference/system-interaction/error-handling-functions/index.html>`__
 
-* `Error Handling Example <../../examples/functional/error-handling/>`_ 
+* :doc:`Error Handling Example <../414/414-error-handling>`
 
 
 
