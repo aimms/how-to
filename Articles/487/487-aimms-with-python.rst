@@ -1,5 +1,3 @@
-:orphan:
-
 How to connect AIMMS with Python
 ============================================
 
@@ -8,7 +6,7 @@ How to connect AIMMS with Python
    :keywords: python, integration, data science, machine learning, connectivity
 
 This article is part of a series of examples on how to connect AIMMS with models built in Python or R. 
-If you have not already, read :doc:`Connecting AIMMS with Data Science Models <../494/494-overview-aimms-ds-languages>` before continuing. 
+If you have not already, read :doc:`Connecting AIMMS with Data Science Models <../494/494-overview-aimms-ds-models>` before continuing. 
 
 In this article, we will show how to integrate an AIMMS app with a KMeans clustering model built in Python using `scikit-learn <https://scikit-learn.org/stable/modules/clustering.html#k-means>`_.
 The clustering model is used to identify centroids/centers of gravity in the network of nodes as shown below. 
