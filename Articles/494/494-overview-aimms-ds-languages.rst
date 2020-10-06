@@ -1,6 +1,6 @@
 :orphan:
 
-How to Integrate AIMMS with Models Built in Other Languages like Python or R
+How to Integrate AIMMS with Models Built in Languages like Python or R
 ==================================================================================
 
 .. meta::
@@ -14,12 +14,13 @@ AIMMS is optimized for the development of apps based on MIP models and in this a
 Overview
 -----------
 
-:doc:`The HTTP Library section </C_Developer/Sub_Connectivity/sub_http/index>` contains examples like :doc:`Call Google Maps API <../296/296-obtaining-geographic-data-through-the-google-api>` and :doc:`Call IBM Image Recognition API <../301/301-Image-Recognition>` which show how to call web services in AIMMS. 
-We will use the same principles to call an external model from AIMMS by exposing that model as a web service. We will publish a series of how-to articles explaining how AIMMS apps can be extended with models built in Python or R. 
+:doc:`The HTTP Library section </C_Developer/Sub_Connectivity/sub_http/index>` contains examples like :doc:`Call Google Maps API <../296/296-obtaining-geographic-data-through-the-google-api>` which show how to call web services in AIMMS. 
+We will use the same principles to call to extend an AIMMS app with models built in Python or R by exposing that model as a web service. 
+We will publish a series of how-to articles explaining how AIMMS apps can be extended with models built in Python or R. 
 While our examples will be limited to these two languages at this moment of time, we believe the same principles can be extended to most other languages used by the data science community (such as Julia). 
 There are many libraries/packages available in both Python and R to deploy models as web services. The choice of libraries/packages used by our team is arbitrary. 
 
-.. note:: These articles are not intended as a tutorial/endorsement for using any particular package or software tool. We show just one of many ways of connecting AIMMS with models built in Python or R. Choose an architecture that best fits your needs and/or the skill set available in your team.
+.. note:: These articles are not intended as a tutorial/endorsement for using any particular package or software tool. We show just one of many ways of exposing these models as web services. Choose an architecture that best fits your needs and/or the skill set available in your team.
 
 A diagram of the architecture we will use in our examples is shown below. 
 
@@ -28,13 +29,16 @@ A diagram of the architecture we will use in our examples is shown below.
 
 The different steps in this process are as below:
 
-#. Develop your model in Python/R as usual.
-#. Expose the model as a web service (eg. a REST API) which takes in input data from the client and returns the model results. `Flask in Python <https://flask.palletsprojects.com/en/1.1.x/>`_ and `Plumber in R <https://www.rplumber.io/>`_ are example packages you could use for this purpose. 
+#. Develop the model in Python/R as usual.
+#. Expose the model as a web service (eg. a REST API) which takes in input data from the client and returns the model results. `Flask in Python <https://flask.palletsprojects.com/en/1.1.x/>`_ and `Plumber in R <https://www.rplumber.io/>`_ are example packages that could be used for this purpose. 
 #. Use the DataExchange library to construct AIMMS procedures which read and write JSON files (or CSV/XML) compatible with the model built in Step 1. 
 #. Use the HTTP library functions to call the API built in Step 2 from AIMMS. This step will use the AIMMS procedures in Step 3 to prepare the data for the model and retrieve the results back into AIMMS.
-#. (Optional) If you have a number of use cases, it could be helpful to maintain a library of functions in Python/R/AIMMS to facilitate the data transformations. 
+#. (Optional) If there are numerous use cases, it could be helpful to maintain a library of functions in Python/R/AIMMS to facilitate the data transformations. 
 
-By following the above steps, you can have your Python/R model available as a local web service running on your computer. There are many ways to deploy this to have global access, using Docker is one of them and will be discussed further below. 
+By following the above steps, you can have your Python/R model available as a local web service running on your computer. 
+.. There are many ways to deploy this to have global access, using Docker is one of them and will be discussed further below. 
+
+.. _scripting-tools:
 
 Development Tools
 ---------------------

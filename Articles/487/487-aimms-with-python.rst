@@ -7,74 +7,96 @@ How to connect AIMMS with Python
    :description: Integrating (data science) models built in Python with your AIMMS applications
    :keywords: python, integration, data science, machine learning, connectivity
 
-The example contains a k-Means clustering model built in Python using scikit-learn which is floated as a REST API using Flask (`app`) and an AIMMS project (`aimmsModel`) which uses the `HTTP <https://documentation.aimms.com/httpclient/index.html>`_ and `DataExchange <https://documentation.aimms.com/dataexchange/index.html>`_ libraries to call the clustering model. We visualize this set up in the below image.
+This article is part of a series of examples on how to connect AIMMS with models built in Python or R. 
+If you have not already, read :doc:`Connecting AIMMS with Data Science Models <../494/494-overview-aimms-ds-languages>` before continuing. 
 
-.. image:: flow.png
+In this article, we will show how to integrate an AIMMS app with a KMeans clustering model built in Python using `scikit-learn <https://scikit-learn.org/stable/modules/clustering.html#k-means>`_.
+The clustering model is used to identify centroids/centers of gravity in the network of nodes as shown below. 
+
+.. image:: cluster.png
     :align: center
 
-The different steps required are outlined below.
+You can read more about how participants used clustering algorithms and MIP on our community: `AIMMS MOPTA 2020 Results <https://community.aimms.com/what-s-new-at-aimms-26/team-np-die-hard-from-university-of-edinburgh-wins-the-12th-aimms-mopta-optimization-modeling-competition-712>`_.
 
-#. Develop your model in Python as usual. 
-In this case, function ``mykMeans`` in `app/kmeansClust.py` takes coordinate data (latitude and longitude) as input and returns coordinates of the centroids and to which centroid do each individual input points belong to.
-#. Expose this function as an API. 
-Here we use Flask to float ``mykMeans`` in `app/main.py`.
-#. Use the DataExchange library to construct AIMMS procedures which read and write JSON files (or CSV/XML) compatible with the function in Step 1. 
-``prWriteJSON`` and ``prReadJSON`` use the mapping files in `aimmsModel/apiCalls` to exchange data between AIMMS and the API using JSON files.
-#. Use the HTTP library functions to call the API built in Step 2 from AIMMS. 
-Procedure ``prCallAPI`` uses the HTTP library functions to call the API floated in Step 2 and the data I/O procedures built in Step 3.
-#. (Optional) If you are developing both the Python and AIMMS models, you could write some data transformation functions in Python for ease of use. 
-`app/dataio.py` contains three such functions.
-
-Installing prerequisites
+Example and prerequisites
 ----------------------------
 
-We assume you have Python3 installed already. 
+The example AIMMS project and Python modules we will refer to in this article can be downloaded :download:`from here<pyExample.zip>`.
+The download contains:
 
-.. tip:: 
-    It is usually recommended to create a virtual environment so that your local Python installation is not changed. So use ``py -3 -m venv env`` to start a virtual environment. 
-    `Read more on Python.org <https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/>`_
+    #. `aimmsModel`: The AIMMS project folder which is initialized with geographical nodes around the Seattle area. 
+    #. `app`: The Python work directory which contains the KMeans model along with modules required for deploying the model as a web service using Flask.
+    #. `requirements.txt`: The list of Python packages required.
+    #. `Dockerfile`: A docker file you can use to create an image (more later). 
 
-This example requires the packages ``scikit-learn`` and ``Flask`` as outlined in the file `app/requirements.txt`. You can install these packages by using the commandline prompt::
+.. _installation:
 
+Installing prerequisites
+"""""""""""""""""""""""""""
+In addition to the prerequisites outlined in :ref:`scripting-tools`, you will need to install the below for this example. 
+
+#. AIMMS version 4.75.3 or higher: `Download AIMMS Developer <https://www.aimms.com/support/downloads/#aimms-dev-download>`_.
+#. The Python modules in the example are developed in `Python 3.8 <https://www.python.org/downloads/release/python-386/>`_.
+
+    .. tip:: 
+        It is usually recommended to create a virtual environment so that your local Python installation is not changed. 
+        
+        Use ``py -3 -m venv env`` to start a virtual environment. 
+        
+        `Read more on Python Docs <https://docs.python.org/3/library/venv.html>`_
+
+#. This example requires the packages ``scikit-learn`` and ``Flask`` as outlined in the file `requirements.txt`. You can install these packages by using the commandline prompt::
+    
     pip install -r requirements.txt --user
-
-
-Another useful tool to have is `Postman <https://www.postman.com/downloads/>`_ which lets you send API requests. We will use this tool to test our API.
 
 The Python model
 --------------------
 
 `app/kmeansClust.py` has the function ``mykMeans`` which takes in the number of clusters ``numClusters`` and latitude-longitude data ``coordData`` and fits a 
-`KMeans model <https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans>`_. The input data is retrieved from a JSON file by the function ``dataForCluster`` in `app/dataio.py`.
+`KMeans model <https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans>`_. 
+A sample input file is provided in `app/input.json`.
 
-.. literalinclude:: pyExample/input.json
+.. literalinclude:: pyExample/app/input.json
     :language: JSON
     :lines: 1-5, 166-169, 330-333
     :caption: Note that only some rows are displayed here
 
-``dataForCluster`` in `app/dataio.py` simply transforms the arrays ``latitude`` and ``longitude`` into an array of tuples.
+`app/dataio.py` contains functions which prepare the data for consumption by ``myKmeans`` and our AIMMS project. 
+For example, ``dataFromCluster`` retrieves data from the input.JSON and simply transforms the ``latitude`` and ``longitude`` arrays into an array of tuples.
 
-.. literalinclude:: pyExample/app/dataio.py
-    :language: python
-    :lines: 9-15
-    :lineno-start: 9
+.. .. literalinclude:: pyExample/app/dataio.py
+..     :language: python
+..     :lines: 9-15
+..     :lineno-start: 9
 
-In `app/main.py`, we use Flask modules and methods to float ``mykMeans`` as a web routine.
+In `app/main.py`, we use the Flask package to expose different Python functions as APIs.
 
 .. literalinclude:: pyExample/app/main.py
     :language: python
-    :lines: 1-11, 18-19
     :linenos:
+
+In this example, we have two APIs differentiated by the first argument of ``@app.route`` calls. 
+
+#. ``/hello`` will return "hello world". A simple test case. 
+#. ``/`` will run the input JSON file through the ``myKmeans`` function and return the output as a JSON file. 
 
 Running locally 
 """"""""""""""""""
 
-If you run the `app/main.py` in terminal (using ``python main.py``), Flask will start a local web server and the function ``mykMeans`` can be called as an API using the url http://localhost:8000/ or http://0.0.0.0:8000/ .
+If you run the `app/main.py` in terminal (using ``python main.py``), Flask will start a local web server. 
+You can test this server by typing in the url ``http://localhost:8000/hello`` in your browser. 
 
-You can now use the Postman app to call this API by pasting the contents of `input.json` in the Body attribute as shown below. It will return the output of ``mykMeans`` as a JSON object.
-
-.. image:: postman.png
+.. image:: test.png
     :align: center
+
+Now, testing the clustering function/API in a browser is not as straightforward as this one requires input data in the JSON format.
+We will use the Postman app to call this API by pasting the contents of `input.json` in the Body attribute as shown below. 
+It will return the output of ``mykMeans`` as a JSON object.
+
+.. image:: runCluster.png
+    :align: center
+
+Make sure to set the attributes in the Body tab as highlighted in the image. 
 
 The AIMMS model
 ------------------
@@ -117,6 +139,7 @@ Similarly, ``prReadJSON`` will use the mapping file `aimmsModel/apiCalls/inMap.x
     :emphasize-lines: 4, 7
 
 Note the difference between the first mapping (for ``pCluster``) and the remaining two. ``iterative-existing=1`` is added to the map of ``pCluster`` because the elements ``iLoc`` already exist, whereas for the other two - we are letting the DataExchange library create new elements in the set ``sCentroids``.
+Read more in `AIMMS Docs <https://documentation.aimms.com/dataexchange/mapping.html#the-iterative-binds-to-attribute>`_.
 
 Calling the API
 """""""""""""""""""
@@ -140,6 +163,7 @@ Now we simply use the HTTP library functions to make a GET call to the API creat
     web::request_setHeaders(spReqID, spRequestHeaders);
     web::request_setResponseBody(spReqID, 'File', spInFile);
 
+The highlighted lines 9-12 are equivalent to setting the body attributes in the Postman app. 
 Make sure that the url in ``spURL`` includes the appropriate `http://` or `https://` prefix. 
 
 Deployment
@@ -150,13 +174,25 @@ When the `app/main.py` file is run in terminal, a warning is displayed.
 .. image:: flask.png
     :align: center
 
-The app server running on http://localhost:8000 or http://0.0.0.0/8000 is available on your local machine and your AIMMS Developer instance but what about apps deployed to AIMMS PRO ? If your AIMMS PRO server is also running on the same machine, this Python model can be still be accessed using the same URLs. 
-However, that is **not a viable option** if you are using AIMMS Cloud and in addition to that Flask recommends that you don't use their development server for deployment and some deployment options are discussed on `their project website <https://flask.palletsprojects.com/en/1.1.x/deploying/>`_.
+The app server running on http://localhost:8000 or http://0.0.0.0/8000 is available on your local machine and to your AIMMS Developer instance but what about apps deployed to AIMMS PRO ? 
+If your AIMMS PRO server is also running on the same machine, this Python model can be still be accessed using the same url.
+However, that is **not a viable option** if you are using AIMMS Cloud. 
 
-We discuss another deployment option using `Docker <https://www.docker.com/>`_. The download includes a `Dockerfile` that you can use to create a Docker image. 
-You will need to install `Docker Desktop <https://www.docker.com/products/docker-desktop>`_ on your computer. 
+Some deployment options relevant to Flask are discussed on `their project website <https://flask.palletsprojects.com/en/1.1.x/deploying/>`_.
 
-The below commandline prompts will build a Docker image of the name `imageName:latest` and start a container. Read more about these options in `Docker Docs <https://docs.docker.com/engine/reference/commandline/build/>`_
+We will however discuss deploying this web app using Docker, which is in fact similar to (or uses the same principles) some of the options discussed in the above link. 
+
+.. literalinclude:: pyExample/Dockerfile
+    :language: docker
+    :linenos:
+    :emphasize-lines: 7-8, 11-12
+
+The image built using this Dockerfile uses `Tiangolo's nginx server <https://github.com/tiangolo/uwsgi-nginx-flask-docker/blob/master/docker-images/python3.8.dockerfile>`_ as a base and it comes with Python 3.8 already installed. 
+Lines 7-8 copy the Python modules we developed onto the base image and lines 11-12 install the packages required from the `requirements.txt` file. 
+The Dockerfile is basically automating the installation of prerequisites as outlined in :ref:`installation`.
+
+The below commandline prompts will build a Docker image of the name `imageName:latest` and start a container. 
+Read more about these options in `Docker Docs <https://docs.docker.com/engine/reference/commandline/build/>`_.
 
 .. code-block:: none
 
@@ -164,7 +200,7 @@ The below commandline prompts will build a Docker image of the name `imageName:l
 
     docker run -d -p 8000:8000 --name "containerName" imageName
 
-The option ``-p 8000:8000`` exposes the port 8000 for the docker container and our AIMMS app can still access the Python model at http://localhost:8000/. 
+Now, we can use the same urls ``http://localhost:8000/`` or ``http://localhost:8000/hello`` to access the Flask APIs, the only difference being they are hosted on Docker Desktop instead of Flask's development server. 
 
 
 
