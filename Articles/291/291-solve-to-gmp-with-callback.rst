@@ -50,7 +50,7 @@ The callback procedure itself is:
         }
     }
 
-As you can see, it uses the suffixes ``.bestbound`` and ``.Incumbent`` which are set before this procedure is invoked. 
+As you can see, it uses the suffixes `.bestbound <https://documentation.aimms.com/functionreference/suffices/mathematical-program-suffices/bestbound.html>`_ and `.Incumbent <https://documentation.aimms.com/functionreference/suffices/mathematical-program-suffices/incumbent.html>`_ which are set before this procedure is invoked. 
 
 An example solve results in the following progress window:
 
@@ -113,7 +113,7 @@ This is caused by the different interface for callbacks. We will handle that in 
 Adapting callbacks for GMP
 --------------------------------
 
-GMP style callback procedures have the input argument ``ep_session`` which is an element parameter in the set ``AllSolverSessions``. This gives you access to solver session specific information. The return value of the callback procedure should be ``0`` to stop solving, or ``1`` to continue solving.  
+GMP style callback procedures have the input argument ``ep_session`` which is an element parameter in the set :any:`AllSolverSessions`. This gives you access to solver session specific information. The return value of the callback procedure should be ``0`` to stop solving, or ``1`` to continue solving.  
 
 The best practice is to have an explicit return statement as the last statement of a callback procedure. This results in the following replacement of the ``pr_TimeCallback`` procedure.
 

@@ -208,11 +208,11 @@ There are two things to watch out for:
             Definition: first( IndexIntegers | exists( i | ( i, IndexIntegers, iSMI_E ) in sSetMappingRelation_E ) );
         }
     
-    When the set ``Integers`` is used as a component, then ``IndexIntegers`` is an index that varies over 2G elements. 
+    When the set :any:`Integers` is used as a component, then ``IndexIntegers`` is an index that varies over 2G elements. 
     An attempt to do so would trigger the error message ``The set Integers is too big to be used as the range of running index "IndexIntegers"``. 
     
     Therefore we should introduce a new set, say ``s_SomeIntegers`` and fill it using the integer elements actually used. 
-    Then we should replace the component ``Integers`` in the compound set, for instance as follows:
+    Then we should replace the component :any:`Integers` in the compound set, for instance as follows:
     
     .. code-block:: aimms
     
@@ -222,8 +222,8 @@ There are two things to watch out for:
             Index:  i_e ;
         }
     
-    The set ``s_SomeIntegers`` should not be declared to be a subset of the set ``Integers``.
-    Once the compound set conversion is complete, we can make ``s_SomeIntegers`` a subset of the set ``Integers``.
+    The set ``s_SomeIntegers`` should not be declared to be a subset of the set :any:`Integers`.
+    Once the compound set conversion is complete, we can make ``s_SomeIntegers`` a subset of the set :any:`Integers`.
 
 .. limitations and how to handle them:
 

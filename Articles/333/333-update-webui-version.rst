@@ -128,7 +128,7 @@ add the folder ``MainProject\WebUI`` afterwards
 AIMMS 4.46: Element Text
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-See also `presentation of element names <https://documentation.aimms.com/webui/folder.html#element-text>`_
+See also `presentation of element names <https://documentation.aimms.com/webui/multi-language.html#element-text>`_
 
 The names of elements in a table can be displayed with more elaborate names; for instance, when initials of people are used in a set, but you want to see in the tables their actual names.
 

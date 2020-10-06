@@ -32,7 +32,7 @@ All of these stop criteria are options in your AIMMS project. This means that th
      .. image:: images/stop-criteria-option-settings.png
          :align: center
 
-* Use the ``OptionSetValue`` or ``OPTION`` functions to modify the values of the options in a procedure. ``OptionSetValue`` will let you change the value for a single option while the ``OPTION`` statement lets you change multiple options in a single statement. 
+* Use the :any:`OptionSetValue` or ``OPTION`` functions to modify the values of the options in a procedure. :any:`OptionSetValue` will let you change the value for a single option while the ``OPTION`` statement lets you change multiple options in a single statement. 
 
     .. code-block:: aimms
 

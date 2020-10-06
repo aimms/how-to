@@ -84,11 +84,11 @@ You can call the procedure with the code below:
         }
     }
     
-To compare, call the procedure on both versions of the project, and then compare the output folders using a diff tool such as `WinMerge <winmerge.org>`_.
+To compare, call the procedure on both versions of the project, and then compare the output folders using a diff tool such as `WinMerge <https://winmerge.org/>`_.
 
 Now it's time to use that diff to figure out what happened.
 
-When definitions of sets and parameters haven't changed, output a subset of ``AllUpdatableIdentifiers``; these are the sets and parameters without definition.
+When definitions of sets and parameters haven't changed, output a subset of :any:`AllUpdatableIdentifiers`; these are the sets and parameters without definition.
 
 Let's say we're interested in the sets and parameters related to a particular mathematical program, such as the one below:
 

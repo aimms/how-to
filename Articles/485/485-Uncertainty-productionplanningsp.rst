@@ -27,6 +27,6 @@ References:
 Kall, P., S.W. Wallace, Stochastic Programming, John Wiley and Sons, Chichester,
 England, 1994.
 
-http://www.cenapad.unicamp.br/parque/manuais/OSL/oslweb/features/Stochast/node4
+https://www.cenapad.unicamp.br/parque/manuais/OSL/oslweb/features/Stochast/node4.htm
 
 

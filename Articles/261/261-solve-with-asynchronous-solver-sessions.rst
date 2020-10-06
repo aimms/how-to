@@ -53,7 +53,7 @@ How to implement asynchronous solves
 
 To use the asynchronous solver sessions, first create a
 GMP for your problem as explained in :doc:`../147/147-GMP-Intro`. You will manually create a Solver
-Session (instead of using ``GMP::Instance::Solve``) and instruct AIMMS to start executing this Solver Session.
+Session (instead of using :any:`GMP::Instance::Solve`) and instruct AIMMS to start executing this Solver Session.
 
 .. code::
 
@@ -128,7 +128,7 @@ Example download
 
 We have modified the original FlowShop example that comes with your AIMMS
 installation to demonstrate how the
-``GMP::SolverSession::AsynchronousExecute`` can be used to solve multiple
+:any:`GMP::SolverSession::AsynchronousExecute` can be used to solve multiple
 scenarios with multiple solver sessions. You can change the number of simultaneous sessions
 to see how using multiple sessions affects the time
 required for solving all scenarios. 
@@ -143,7 +143,7 @@ After opening the project, go to "*Open Demo Page*", then "*Multiple Scenarios P
 
     Not all solvers can be executed asynchronously.
     Please check the documentation for the
-    ``GMP::SolverSession::AsynchronousExecute`` function in the AIMMS Function
+    :any:`GMP::SolverSession::AsynchronousExecute` function in the AIMMS Function
     Reference of your installation to see which solvers can be executed
     asynchronously.
 

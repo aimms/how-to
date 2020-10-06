@@ -1,0 +1,92 @@
+/* This will replace all the checkboxes in with a "switch" */
+
+/* Hide the checkbox*/
+
+.tag-scalar .cell-wrapper input[type=checkbox][class*=boolean] {
+    height: 0;
+    width: 0;
+	visibility: hidden;
+    position:absolute;
+}
+
+.tag-scalar .cell-wrapper [type=checkbox][class*=boolean] label {
+	height:100%;
+	min-height:39px;
+	line-height:39px;
+	display:block;
+}
+
+/* Add the Slider area (outer rounded rectangle)*/
+
+.tag-scalar .cell-wrapper input[type=checkbox][class*=boolean] + span {
+	float:right;
+	left: -35%;
+	text-align: center;
+    margin:px 0 0;
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 40px;
+	height: 20px;
+	background: grey;
+	display: block;
+	border-radius: 20px;
+	position: relative;
+    font-size:0;
+}
+
+/* for table only
+.tag-table[data-widget\.uri="newtable"] .tag-scalar .cell-wrapper input[type=checkbox][class*=boolean] + span {
+    left: -20%;
+}
+*/
+
+/* Add the Switch (inner circle)*/
+
+.tag-scalar .cell-wrapper input[type=checkbox][class*=boolean] + span:after {
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 16px;
+	height: 16px;
+	background: #fff;
+	border-radius: 16px;
+	transition: 0.3s;
+}
+
+/* Change the background color when the switch is turned on.*/
+
+.tag-scalar .cell-wrapper input[type=checkbox][class*=boolean]:checked + span {
+	background: #004bff !important;
+}
+
+/* Change the opacity and mouse cursor when the switch is read-only.*/
+
+.tag-scalar .cell-wrapper input[type=checkbox][class*=boolean]:disabled + span {
+  opacity:0.3;
+	cursor:not-allowed;
+
+}
+
+/* Move the switch circle to the right when turned on.*/
+
+.tag-scalar .cell-wrapper input[type=checkbox][class*=boolean]:checked + span:after {
+	left: calc(100% - 2px);
+	transform: translateX(-100%);
+}
+
+/* Stretch the switch (increase the length of the inner circle) at the moment
+   that you click on it (holding your mouse down) to create animation effect.*/
+
+.tag-scalar .cell-wrapper input[type=checkbox][class*=boolean] + span:active:after {
+	width: 26px;
+}
+
+/* Hide A_____________A identifier as it is only used to make sure that the
+scalar widget is displayed as multiple scalars widget i.o. kpi.*/
+
+data-widget\.uri*="Switch"] [title*="_____"]+td,
+data-widget\.uri*="Switch"] [title*="_____"] {
+    visibility: hidden !important;
+}
+

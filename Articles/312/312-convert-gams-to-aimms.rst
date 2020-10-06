@@ -18,7 +18,7 @@ You can follow this procedure to convert a GAMS file to an AIMMS project:
 
 These steps are discussed in further detail below.
 
-This article uses an `example GAMS model <https://www.gams.com/products/gams/gams-language/#the-gams-language-at-a-glance/>`_.
+This article uses an `example GAMS model <https://www.gams.com/products/gams/gams-language#the-gams-language-at-a-glance>`_.
 
 Converting GMS to AIM file
 ----------------------------
