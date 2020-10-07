@@ -241,10 +241,12 @@ In AIMMS, we'll use the ``Authentication`` header and set a basic authentication
 
 Executing the complete code, our JSON file will be returned in the ``SP_responseFileName`` direction.
 
-Converting JSON to XML
------------------------------------------------
-In order to use the data from the IBM APIs in AIMMS, we need to convert JSON files to XML files. 
-You can follow the conversion process using a custom AIMMS library in :doc:`../283/283-convert-json-to-xml`.
+The JSON code can be directly read into the AIMMS model using the `Data Exchange <https://documentation.aimms.com/dataexchange/index.html>`_ library
+
+.. Converting JSON to XML
+.. -----------------------------------------------
+.. In order to use the data from the IBM APIs in AIMMS, we need to convert JSON files to XML files. 
+.. You can follow the conversion process using a custom AIMMS library in :doc:`../283/283-convert-json-to-xml`.
 
 Finally, to learn how to extract the XML data into AIMMS, read :doc:`../293/293-extracting-data-from-XML`.
 
