@@ -174,7 +174,7 @@ The prefixes encouraged are enumerated in the table below:
 +--------+--------------------------+
 | db     | database                 |
 +--------+--------------------------+
-| prdb   | database procedure       |
+| dbpr   | database procedure       |
 +--------+--------------------------+
 | pr     | procedure                |
 +--------+--------------------------+
