@@ -132,7 +132,7 @@ The prefixes encouraged are enumerated in the table below:
 +--------+--------------------------+
 | p      | parameter                |
 +--------+--------------------------+
-| p01    | binary parameter         |
+| bp     | binary parameter         |
 +--------+--------------------------+
 | ep     | element parameter        |
 +--------+--------------------------+
@@ -144,7 +144,7 @@ The prefixes encouraged are enumerated in the table below:
 +--------+--------------------------+
 | ev     | element variable         |
 +--------+--------------------------+
-| v01    | binary variable          |
+| bv     | binary variable          |
 +--------+--------------------------+
 | cv     | complementarity variable |
 +--------+--------------------------+
