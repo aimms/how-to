@@ -14,7 +14,7 @@ The clustering model is used to identify centroids/centers of gravity in the net
 .. image:: cluster.png
     :align: center
 
-You can read more about how participants used clustering algorithms and MIP on our community: `AIMMS MOPTA 2020 Results <https://community.aimms.com/what-s-new-at-aimms-26/team-np-die-hard-from-university-of-edinburgh-wins-the-12th-aimms-mopta-optimization-modeling-competition-712>`_.
+You can read more about how participants used clustering algorithms and MIP to solve a supply chain problem on our community: `AIMMS MOPTA 2020 Results <https://community.aimms.com/what-s-new-at-aimms-26/team-np-die-hard-from-university-of-edinburgh-wins-the-12th-aimms-mopta-optimization-modeling-competition-712>`_.
 
 Example and prerequisites
 ----------------------------
@@ -22,7 +22,7 @@ Example and prerequisites
 The example AIMMS project and Python modules we will refer to in this article can be downloaded :download:`from here<pyExample.zip>`.
 The download contains:
 
-    #. `aimmsModel`: The AIMMS project folder which is initialized with geographical nodes around the Seattle area. 
+    #. `aimmsModel`: The AIMMS project folder which is initialized with geographical nodes around the Greater Seattle area. 
     #. `app`: The Python work directory which contains the KMeans model along with modules required for deploying the model as a web service using Flask.
     #. `requirements.txt`: The list of Python packages required.
     #. `Dockerfile`: A docker file you can use to create an image (more later). 
@@ -33,7 +33,7 @@ Installing prerequisites
 """""""""""""""""""""""""""
 In addition to the prerequisites outlined in :ref:`scripting-tools`, you will need to install the below for this example. 
 
-#. AIMMS version 4.75.3 or higher: `Download AIMMS Developer <https://www.aimms.com/support/downloads/#aimms-dev-download>`_.
+#. The example project is developed using AIMMS version 4.75.3, so we recommend you use at least that version. `Download AIMMS Developer <https://www.aimms.com/support/downloads/#aimms-dev-download>`_. 
 #. The Python modules in the example are developed in `Python 3.8 <https://www.python.org/downloads/release/python-386/>`_.
 
     .. tip:: 
@@ -72,6 +72,7 @@ In `app/main.py`, we use the Flask package to expose different Python functions 
 .. literalinclude:: pyExample/app/main.py
     :language: python
     :linenos:
+    :emphasize-lines: 15
 
 In this example, we have two APIs differentiated by the first argument of ``@app.route`` calls. 
 
@@ -87,7 +88,7 @@ You can test this server by typing in the url ``http://localhost:8000/hello`` in
 .. image:: test.png
     :align: center
 
-Now, testing the clustering function/API in a browser is not as straightforward as this one requires input data in the JSON format.
+Now, testing the clustering function/API in a browser is not as straightforward as this one requires input data in the JSON format (as highlighted in line 15 in the above code-block).
 We will use the Postman app to call this API by pasting the contents of `input.json` in the Body attribute as shown below. 
 It will return the output of ``mykMeans`` as a JSON object.
 
@@ -99,11 +100,11 @@ Make sure to set the attributes in the Body tab as highlighted in the image.
 The AIMMS model
 ------------------
 
-The AIMMS project `aimmsModel` has the identifiers ``pLatitude(iLoc)``, ``pLongitude(iLoc)`` and ``pNumClusters`` which we need to write in a format similar to `input.json`. 
+The AIMMS project `aimmsModel` has the identifiers ``pLatitude(iLoc)``, ``pLongitude(iLoc)`` and ``pNumClusters`` which we need export in a format similar to `input.json`. 
 
 Data I/O
 """"""""""""
-``prWriteJSON`` creates the input file as the Python model expects and ``prReadJSON`` reads the result file into AIMMS. ``prWriteJSON`` uses the mapping file `aimmsModel/apiCalls/outMap.xml` to create this `input.json` file. 
+``prWriteJSON`` creates the input file as the Python model expects and ``prReadJSON`` reads the result file into AIMMS. 
 
 .. code-block:: aimms
 
@@ -120,13 +121,15 @@ Data I/O
 
 .. note:: It is not necessary that the `pretty` argument for ``dex::WriteToFile`` is set to 1 but it helps with readability of the json file, which is particularly helpful during development.
 
+``prWriteJSON`` uses the mapping file `aimmsModel/apiCalls/outMap.xml` to create this `input.json` file. 
+
 .. literalinclude:: pyExample/aimmsModel/apiCalls/outMap.xml
     :language: xml
     :lines: 1-6
     :linenos:
     :emphasize-lines: 3-5
 
-``ObjectMapping`` initializes a key-value tree inside which ``ValueMapping`` is the first node which holds the scalar parameter ``pNumClusters``. To write out indexed AIMMS identifiers, we can use the ``ArrayMapping`` like in line #4 which writes out ``pLatitude`` as an array value to the key `latitude`.
+``ObjectMapping`` initializes a key-value tree inside which ``ValueMapping`` is the first node which holds the scalar parameter ``pNumClusters``. To write out indexed AIMMS identifiers, we can use the ``ArrayMapping`` like in line 4 which writes out ``pLatitude`` as an array value to the key `latitude`.
 
 Similarly, ``prReadJSON`` will use the mapping file `aimmsModel/apiCalls/inMap.xml` to load the output of ``mykMeans`` into AIMMS identifiers ``pCluster(iLoc)``, ``pCenLat(iCentroid)`` and ``pCenLon(iCentroid)``.
 
@@ -136,7 +139,7 @@ Similarly, ``prReadJSON`` will use the mapping file `aimmsModel/apiCalls/inMap.x
     :linenos:
     :emphasize-lines: 4, 7
 
-Note the difference between the first mapping (for ``pCluster``) and the remaining two. ``iterative-existing=1`` is added to the map of ``pCluster`` because the elements ``iLoc`` already exist, whereas for the other two - we are letting the DataExchange library create new elements in the set ``sCentroids``.
+Note the difference between the first mapping (for ``pCluster``) and the remaining two. ``iterative-existing=1`` is added to the map of ``pCluster`` because the elements ``iLoc`` already exist in our project, whereas for the other two - we are letting the DataExchange library create new elements in the set ``sCentroids``.
 Read more in `AIMMS Docs <https://documentation.aimms.com/dataexchange/mapping.html#the-iterative-binds-to-attribute>`_.
 
 Calling the API
@@ -172,8 +175,8 @@ When the `app/main.py` file is run in terminal, a warning is displayed.
 .. image:: flask.png
     :align: center
 
-The app server running on http://localhost:8000 or http://0.0.0.0/8000 is available on your local machine and to your AIMMS Developer instance but what about apps deployed to AIMMS PRO ? 
-If your AIMMS PRO server is also running on the same machine, this Python model can be still be accessed using the same url.
+The app server running on http://localhost:8000 or http://0.0.0.0/8000 is available on your local machine and to your AIMMS Developer instance but what about apps deployed to AIMMS PRO or AIMMS Cloud? 
+.. If your AIMMS PRO server is also running on the same machine, this Python model can be still be accessed using the same url.
 However, that is **not a viable option** if you are using AIMMS Cloud. 
 
 Some deployment options relevant to Flask are discussed on `their project website <https://flask.palletsprojects.com/en/1.1.x/deploying/>`_.
@@ -190,6 +193,7 @@ Lines 7-8 copy the Python modules we developed onto the base image and lines 11-
 The Dockerfile is basically automating the installation of prerequisites as outlined in :ref:`installation`.
 
 The below commandline prompts will build a Docker image of the name `imageName:latest` and start a container. 
+Most text editors or IDEs (such as VS Code or PyCharm) have a Docker plugin now.
 Read more about these options in `Docker Docs <https://docs.docker.com/engine/reference/commandline/build/>`_.
 
 .. code-block:: none
@@ -198,7 +202,7 @@ Read more about these options in `Docker Docs <https://docs.docker.com/engine/re
 
     docker run -d -p 8000:8000 --name "containerName" imageName
 
-Now, we can use the same urls ``http://localhost:8000/`` or ``http://localhost:8000/hello`` to access the Flask APIs, the only difference being they are hosted on Docker Desktop instead of Flask's development server. 
+Now, we can use the same urls ``http://localhost:8000/`` or ``http://localhost:8000/hello`` to access the Flask APIs, the only difference being they are hosted on Docker Desktop instead of Flask's development server. Once you deploy this Docker image, your API will be available globally.
 
 
 

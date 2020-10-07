@@ -1,4 +1,4 @@
-# Pull a pre-built alpine docker image with nginx and python3 installed
+# Pull a pre-built docker image with nginx and python3 installed
 FROM tiangolo/uwsgi-nginx-flask:python3.8
 
 ENV LISTEN_PORT=8000
