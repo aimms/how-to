@@ -241,7 +241,7 @@ In AIMMS, we'll use the ``Authentication`` header and set a basic authentication
 
 Executing the complete code, our JSON file will be returned in the ``SP_responseFileName`` direction.
 
-The JSON code can be directly read into the AIMMS model using the `Data Exchange <https://documentation.aimms.com/dataexchange/index.html>`_ library
+The JSON code can be directly read into the AIMMS model using the `Data Exchange <https://documentation.aimms.com/dataexchange/index.html>`_ library.
 
 .. Converting JSON to XML
 .. -----------------------------------------------

@@ -92,11 +92,7 @@ JSON files
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Another popular format file for data transfer is JSON. 
-There are two ways to work with JSON files:
-
-#.  You can convert them to an XML file as detailed in :doc:`../283/283-convert-json-to-xml`. Subsequently, you can read the XML file as outlined in the section above.
-
-#.  You can use the `Data Exchange Library <https://documentation.aimms.com/dataexchange/index.html>`_ to read the JSON file directly.
+You can use the `Data Exchange Library <https://documentation.aimms.com/dataexchange/index.html>`_ to read the JSON file directly.
 
 IBM APIs use JSON files, so you can also find examples in :doc:`../300/300-ibm-api-speech-to-text` and :doc:`../301/301-Image-Recognition`.
 
@@ -118,5 +114,4 @@ Related topics
 * **AIMMS How-To**: :doc:`../302/302-get-google-maps-coordinates`
 * **AIMMS How-To**: :doc:`../296/296-obtaining-geographic-data-through-the-google-api`
 * **AIMMS How-To**: :doc:`../300/300-ibm-api-speech-to-text`
-* **AIMMS How-To**: :doc:`../283/283-convert-json-to-xml`
 
