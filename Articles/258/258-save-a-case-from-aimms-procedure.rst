@@ -25,7 +25,7 @@ you can introduce a new procedure, say ``SaveCase``, with a string parameter
 ``CaseName`` as an input argument. 
 
 This procedure requires a local element parameter named ``CaseReference`` with the
-range ``AllCases``. 
+range :any:`AllCases`. 
 
 The body argument of the procedure should
 contain the following code:

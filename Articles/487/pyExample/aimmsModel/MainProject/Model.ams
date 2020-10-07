@@ -149,8 +149,10 @@ Model Main_Model {
 			Definition: {
 				if epCentroid then
 				FormatString("Locs assigned to Centroid-%e", epCentroid)
-				else
+				elseif card(sCentroids) then
 				"Click on a centroid"
+				else
+				"Click on Cluster Locations"
 				endif
 			}
 		}
@@ -179,6 +181,9 @@ Model Main_Model {
 		Comment: "Add initialization statements here that do NOT require any library being initialized already.";
 	}
 	Procedure PostMainInitialization {
+		Body: {
+			spURL := "http://localhost:8000/";
+		}
 		Comment: {
 			"Add initialization statements here that require that the libraries are already initialized properly,
 			or add statements that require the Data Management module to be initialized."

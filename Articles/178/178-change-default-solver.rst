@@ -22,13 +22,13 @@ The picture above shows an example screenshot, where CPLEX 12.6.3 is used as the
 Setting Default Solvers in a Procedure
 -------------------------------------------
 
-Alternatively, you can modify the default solvers programmatically in an AIMMS procedure. You can do so by modifying the contents of the predefined AIMMS element parameter ``CurrentSolver``. This element parameter is indexed over the ``IndexMathematicalProgrammingTypes`` and has the range ``AllSolvers``. This means that for each mathematical program type, you can select one solver.
+Alternatively, you can modify the default solvers programmatically in an AIMMS procedure. You can do so by modifying the contents of the predefined AIMMS element parameter :any:`CurrentSolver`. This element parameter is indexed over the ``IndexMathematicalProgrammingTypes`` and has the range :any:`AllSolvers`. This means that for each mathematical program type, you can select one solver.
 
 Changes made to this element parameter are not persistent, meaning you will loose any changes you made to it after closing AIMMS if you do not store it yourself.
 
 .. warning::
     
-   The data of ``CurrentSolver`` is not stored when saving a case. This might have an impact on your communication with the AIMMS PRO server.
+   The data of :any:`CurrentSolver` is not stored when saving a case. This might have an impact on your communication with the AIMMS PRO server.
 
 To change the default solver for LP problems to GUROBI 8.0 for all subsequent solve statements, you can use the following code in a procedure::
 
@@ -38,12 +38,12 @@ To change the default solver for LP problems to GUROBI 8.0 for all subsequent so
       raise error "Solver GUROBI 8.0 is not present" ;
    endif ; 
 
-The if block in the above code changes the solver to GUROBI 8.0 only if it is available on your computer. The function ``StringToElement`` will return 1 if GUROBI 8.0 is present in the set ``AllSolvers`` and 0 otherwise. By using a conditional statement to set the solver, you can avoid a compilation error in case the project is opened on a computer without GUROBi 8.0. 
+The if block in the above code changes the solver to GUROBI 8.0 only if it is available on your computer. The function :any:`StringToElement` will return 1 if GUROBI 8.0 is present in the set :any:`AllSolvers` and 0 otherwise. By using a conditional statement to set the solver, you can avoid a compilation error in case the project is opened on a computer without GUROBi 8.0. 
 
 Overriding Default Solvers in a Procedure
 ----------------------------------------------
 
-The data of ``CurrentSolver`` is applied to the default solver for each problem type. You can also override these defaults for each separate ``solve`` statement using the ``where`` keyword as shown below.
+The data of :any:`CurrentSolver` is applied to the default solver for each problem type. You can also override these defaults for each separate ``solve`` statement using the ``where`` keyword as shown below.
 
 .. code-block:: aimms 
 

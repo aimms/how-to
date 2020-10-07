@@ -167,7 +167,7 @@ You'll also need to assign *annotations* to data identifiers you want to style i
 .. image:: images/Linechart-element-styling.png
 
 
-See `Data-Dependent Styling <https://documentation.aimms.com/webui/folder.html#data-dependent-styling>`_ for more details.
+See `Data-Dependent Styling <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_ for more details.
 
 
 .. Styling elements
@@ -236,7 +236,7 @@ Related topics
 -----------------
 * **AIMMS Documentation:** `Widget Options <https://documentation.aimms.com/webui/widget-options.html>`_
 * **AIMMS Documentation:** `Line Chart Widget <https://documentation.aimms.com/webui/line-chart-widget.html>`_
-* **AIMMS Documentation:** `CSS Styling <https://documentation.aimms.com/webui/folder.html#css-styling>`_
+* **AIMMS Documentation:** `CSS Styling <https://documentation.aimms.com/webui/css-styling.html>`_
 
 .. END CONTENT
 

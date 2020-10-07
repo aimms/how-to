@@ -64,7 +64,6 @@ Model Main_CarSelection {
 			Set s_firstNames {
 				Text: "List of first names";
 				Index: i_fn;
-				Comment: "data{\'Edith\', \'John\', \'Lisa\', \'Gregory\', \'Ann\', \'Paul\', \'Victor\', \'Mary\', \'Carl\', \'Judith\'}";
 			}
 			Set s_lastNames {
 				Text: "List of last names";
@@ -318,6 +317,33 @@ Model Main_CarSelection {
 			}
 		}
 	}
+	Section Data_serialization {
+		Procedure pr_writeJSON {
+			Body: {
+				if not "InitialDataMapping" in dex::Mappings then
+					dex::AddMapping(
+						mappingName :  "InitialDataMapping", 
+						mappingFile :  "Mappings/InitialDataMapping.xml");
+				endif ;
+				dex::WriteToFile(
+					dataFile    :  "InitialData/InitialData.json", 
+					mappingName :  "InitialDataMapping", 
+					pretty      :  1);
+			}
+		}
+		Procedure pr_readJSON {
+			Body: {
+				if not "InitialDataMapping" in dex::Mappings then
+					dex::AddMapping(
+						mappingName :  "InitialDataMapping", 
+						mappingFile :  "Mappings/InitialDataMapping.xml");
+				endif ;
+				dex::ReadFromFile(
+					dataFile    :  "InitialData/InitialData.json", 
+					mappingName :  "InitialDataMapping") ;
+			}
+		}
+	}
 	Section Application_initialization_execution_and_termination {
 		Procedure MainInitialization;
 		Procedure PostMainInitialization {
@@ -361,33 +387,6 @@ Model Main_CarSelection {
 		Procedure MainTermination {
 			Body: {
 				return 1;
-			}
-		}
-	}
-	Section data_serialization {
-		Procedure pr_writeJSON {
-			Body: {
-				if not "InitialDataMapping" in dex::Mappings then
-					dex::AddMapping(
-						mappingName :  "InitialDataMapping", 
-						mappingFile :  "Mappings/InitialDataMapping.xml");
-				endif ;
-				dex::WriteToFile(
-					dataFile    :  "InitialData/InitialData.json", 
-					mappingName :  "InitialDataMapping", 
-					pretty      :  1);
-			}
-		}
-		Procedure pr_readJSON {
-			Body: {
-				if not "InitialDataMapping" in dex::Mappings then
-					dex::AddMapping(
-						mappingName :  "InitialDataMapping", 
-						mappingFile :  "Mappings/InitialDataMapping.xml");
-				endif ;
-				dex::ReadFromFile(
-					dataFile    :  "InitialData/InitialData.json", 
-					mappingName :  "InitialDataMapping") ;
 			}
 		}
 	}

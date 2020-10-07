@@ -9,6 +9,9 @@
     }
   },
   "pages/home": {
+    "maxcolumns": {
+      "literal": 10
+    },
     "widgets": {
       "literal": [
         {

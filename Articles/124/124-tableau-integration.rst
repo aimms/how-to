@@ -45,7 +45,7 @@ You can also imagine looking at the same data from within AIMMS while doing some
 Working with the DataLink library
 ---------------------------------
 
-The DataLink library is available from the library repository. This repository can be accessed via *AIMMS > File > LibraryManager*, and you can also find an `example project <https://download.aimms.com/aimms/download/data/Libraries/DataLinkExample.7z>`_ that demonstrates the use of the DataLink library. To see how the Tableau link works, let's take a look at the example project. I'll explain how to specify which identifiers in the model need to be written to a TDE file, how to actually generate a native Tableau TDE file, and how to upload a TDE file to a Tableau Server right from your model.
+The DataLink library is available from the library repository. This repository can be accessed via *AIMMS > File > LibraryManager*, and you can also find the `documentation with an example <https://documentation.aimms.com/datalink/index.html>`_ that demonstrates the use of the DataLink library. To see how the Tableau link works, let's take a look at the example project. I'll explain how to specify which identifiers in the model need to be written to a TDE file, how to actually generate a native Tableau TDE file, and how to upload a TDE file to a Tableau Server right from your model.
 
 Annotations
 ^^^^^^^^^^^^

@@ -13,7 +13,7 @@ The historically prevailing encoding is ASCII. For the values 1..127, the ASCII 
 
 To solve this problem, the `UNICODE consortium <http://www.unicode.org>`_ enumerated the characters into numbers called code points. A sequence of code points is subsequently stored to file using an encoding. Examples of such encodings are UTF16LE, widely used on Windows, UTF32LE, widely used on Linux, and UTF8, the currently preferred encoding and typically used in XML files.
 
-As more and more software vendors recognize the value of the `UTF8 <http://en.wikipedia.org/wiki/UTF-8>`_ encoding, UTF8 is becoming the dominant encoding worldwide. AIMMS follows this trend. However, not all software vendors are doing so, nor have all programs in use today been switched over to UTF8. In order to communicate with these legacy programs, AIMMS allows communication with them, using the attribute "encoding" of files and the optional argument "encoding" of ``FileRead``.
+As more and more software vendors recognize the value of the `UTF8 <http://en.wikipedia.org/wiki/UTF-8>`_ encoding, UTF8 is becoming the dominant encoding worldwide. AIMMS follows this trend. However, not all software vendors are doing so, nor have all programs in use today been switched over to UTF8. In order to communicate with these legacy programs, AIMMS allows communication with them, using the attribute "encoding" of files and the optional argument "encoding" of :any:`FileRead`.
 
 As a first example, the statement
 
