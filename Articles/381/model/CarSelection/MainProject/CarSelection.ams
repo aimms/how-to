@@ -11,40 +11,40 @@ Model Main_CarSelection {
 		}
 		Set s_participants {
 			Text: "The set of all participants";
-			Index: i_p;
+			Index: i_participant;
 		}
 		Parameter p_maxCars {
 			Text: "The total number of available cars";
 		}
 		Set s_cars {
 			Text: "The set of all cars";
-			Index: i_c;
+			Index: i_car;
 		}
-		Parameter p01_possibleAssignments {
-			IndexDomain: (i_p,i_c);
-			Text: "Participant i_p is interested in car i_c";
+		Parameter bp_possibleAssignments {
+			IndexDomain: (i_participant,i_car);
+			Text: "Participant i_participant is interested in car i_car";
 			Range: binary;
 		}
-		Variable v01_assignments {
-			IndexDomain: (i_p,i_c)  | p01_possibleAssignments(i_p,i_c);
+		Variable bv_assignments {
+			IndexDomain: (i_participant,i_car)  | bp_possibleAssignments(i_participant,i_car);
 			Text: "Participant i_p is assigned to car i_c";
 			Range: binary;
 		}
 		Variable v_totalCombinations {
 			Text: "The total number of assignments";
-			Definition: sum((i_p,i_c), v01_assignments(i_p,i_c));
+			Definition: sum((i_participant,i_car), bv_assignments(i_participant,i_car));
 		}
 		Constraint c_oneCarPerParticipant {
-			IndexDomain: (i_p);
+			IndexDomain: (i_participant);
 			Text: "Number of cars assigned to participant i_p is less than or equal to 1";
-			Definition: sum(i_c , v01_assignments(i_p,i_c)) <= 1;
+			Definition: sum(i_car , bv_assignments(i_participant,i_car)) <= 1;
 		}
 		Constraint c_oneParticipantPerCar {
-			IndexDomain: (i_c);
+			IndexDomain: (i_car);
 			Text: "Number of participants assigned to car i_c is less than or equal to 1";
-			Definition: sum(i_p , v01_assignments(i_p,i_c)) <= 1;
+			Definition: sum(i_participant , bv_assignments(i_participant,i_car)) <= 1;
 		}
-		MathematicalProgram mp_CarSelection {
+		MathematicalProgram mp_carSelection {
 			Objective: v_totalCombinations;
 			Direction: maximize;
 			Constraints: AllConstraints;
@@ -180,7 +180,7 @@ Model Main_CarSelection {
 					        endwhile;
 					else
 					        while (Card(s_cars) > p_maxCars) do
-					                s_cars -= last(i_c);
+					                s_cars -= last(i_car);
 					        endwhile;
 					endif;
 					
@@ -199,7 +199,7 @@ Model Main_CarSelection {
 					        endwhile;
 					else
 					        while (Card(s_participants) > p_maxParticipants) do
-					               sp_newName := FormatString("%e",last(i_p));
+					               sp_newName := FormatString("%e",last(i_participant));
 					               p_nameLength := StringLength(sp_newName);
 					               p_spacePostion := FindNthString(sp_newName," ",2);
 					               if (p_spacePostion) then
@@ -211,7 +211,7 @@ Model Main_CarSelection {
 					                                p01_nameExists(i_fn,i_ln) := 1;
 					                                p_nameExistsFull -= 1;
 					                        endif;
-					               s_participants -= last(i_p);
+					               s_participants -= last(i_participant);
 					        endwhile;
 					endif;
 					
@@ -225,56 +225,56 @@ Model Main_CarSelection {
 		}
 		Procedure pr_generatePossiblePairs {
 			Body: {
-				empty p01_possibleAssignments;
+				empty bp_possibleAssignments;
 				
-				p_wantedCarsSize(i_p) := 2 + Binomial(0.25, 4);
+				p_wantedCarsSize(i_participant) := 2 + Binomial(0.25, 4);
 				
 				empty s_wantedCars;
 				
-				for (i_p) do
+				for (i_participant) do
 				        repeat
-				                s_wantedCars(i_p) += Element(s_cars, 1 + round(uniform(0,p_maxCars)));
-				                break when loopcount = p_wantedCarsSize(i_p);
+				                s_wantedCars(i_participant) += Element(s_cars, 1 + round(uniform(0,p_maxCars)));
+				                break when loopcount = p_wantedCarsSize(i_participant);
 				        endrepeat;
 				endfor;
 				
-				p01_possibleAssignments(i_p,i_c) := i_c in s_wantedCars(i_p);
-				v01_assignments(i_p,i_c)  := 0;
+				bp_possibleAssignments(i_participant,i_car) := i_car in s_wantedCars(i_participant);
+				bv_assignments(i_participant,i_car)  := 0;
 				v_totalCombinations := 0;
 			}
 			Parameter p_wantedCarsSize {
-				IndexDomain: (i_p);
+				IndexDomain: (i_participant);
 				Text: "Number of cars that participants p will be interested in.";
 			}
 			Set s_wantedCars {
-				IndexDomain: (i_p);
+				IndexDomain: (i_participant);
 				SubsetOf: s_cars;
 				Text: "Set of cars that are wanted by participant p";
 			}
 		}
 		DeclarationSection Declaration_Interface {
 			Parameter p_participantPlaceX {
-				IndexDomain: (i_p);
+				IndexDomain: (i_participant);
 				Text: "The x-coordinate in the network of partipant p";
 				Definition: 10;
 			}
 			Parameter p_participantPlaceY {
-				IndexDomain: (i_p);
+				IndexDomain: (i_participant);
 				Text: "The y-coordinate in the network of partipant p";
-				Definition: 100 - 100*ord(i_p) / card(i_p);
+				Definition: 100 - 100*ord(i_participant) / card(i_participant);
 			}
 			Parameter p_carPlaceX {
-				IndexDomain: (i_c);
+				IndexDomain: (i_car);
 				Text: "The x-coordinate in the network of car c";
 				Definition: 100;
 			}
 			Parameter p_carPlaceY {
-				IndexDomain: (i_c);
+				IndexDomain: (i_car);
 				Text: "The y-coordinate in the network of car c";
-				Definition: 100 - 100*ord(i_c) / card(i_c);
+				Definition: 100 - 100*ord(i_car) / card(i_car);
 			}
 			StringParameter sp_carPictureName {
-				IndexDomain: i_c;
+				IndexDomain: i_car;
 				Text: "The location of the picture of car c";
 			}
 			ElementParameter ep_selectedParticipant {
@@ -289,7 +289,7 @@ Model Main_CarSelection {
 				SubsetOf: s_participants;
 				Text: "Participants that are interested in the selected car";
 				Definition: {
-					{ i_p | p01_possibleAssignments(i_p,ep_selectedCar)}
+					{ i_participant | bp_possibleAssignments(i_participant,ep_selectedCar)}
 				}
 			}
 			Set s_carsSubset {
@@ -297,7 +297,7 @@ Model Main_CarSelection {
 				Text: "Cars that are liked by the selected participant";
 				Index: cs;
 				Definition: {
-					{ i_c | p01_possibleAssignments(ep_selectedParticipant,i_c)}
+					{ i_car | bp_possibleAssignments(ep_selectedParticipant,i_car)}
 				}
 			}
 			Parameter p_pictureSize {
@@ -305,12 +305,12 @@ Model Main_CarSelection {
 				Definition: 525/p_maxCars;
 			}
 			StringParameter sp_possibleCars {
-				IndexDomain: (i_p);
-				Definition: FormatString("%e is interested in the following cars:", i_p);
+				IndexDomain: (i_participant);
+				Definition: FormatString("%e is interested in the following cars:", i_participant);
 			}
 			StringParameter sp_interestedParticipants {
-				IndexDomain: (i_c);
-				Definition: FormatString("The following participants are interested in: %e", i_c);
+				IndexDomain: (i_car);
+				Definition: FormatString("The following participants are interested in: %e", i_car);
 			}
 			ElementParameter ep_ACase {
 				Range: AllCases;
@@ -376,7 +376,8 @@ Model Main_CarSelection {
 		}
 		Procedure MainExecution {
 			Body: {
-				solve mp_CarSelection;
+				solve mp_carSelection;
+				display bp_possibleAssignments    ;
 			}
 		}
 		Procedure PreMainTermination {

@@ -1,14 +1,12 @@
-.. Naming convention
-
-AIMMS Naming Convention
-===========================
+Identifier Naming Convention
+=============================
 
 In this article, we present the identifier naming convention used in a growing portion of our How-To articles.
 It is presented as a motivated choice; we share the considerations that lead us to making this choice.
 Perhaps these considerations will help you to make an informed choice for the identifier naming convention you want to use (if any).
 Perhaps it even convinces you to follow the same convention. 
 
-.. The purpose of the naming convention presented
+
 
 The purpose of a naming convention
 --------------------------------------------------
@@ -24,7 +22,7 @@ There are several use cases for developing with AIMMS:
 #.  A second second use case of the AIMMS language is to create generic libraries, for instance the libraries as presented in the `AIMMS library repository <https://documentation.aimms.com/library-repository.html>`_.
 
 The choices made in this article focus on the first purpose.
-.. in the above list.
+
 
 Particular to Decision Support applications are constraint definitions.  Consider the following simple equality:
 
@@ -73,7 +71,6 @@ In other words, as a model builder, inspecting and analyzing a model, you will n
     In economic literature, these correspond to so-called endogenous variables.
     These unknowns are called ``variables`` in the AIMMS language.
 
-.. Approaches to distinguish parameters and variables
 
 Distinguishing parameters and variables
 ---------------------------------------------------
@@ -83,14 +80,18 @@ More modern approaches rely on the development environment to make such a distin
 
 *   Hovering: hovering over an identifier shows a tooltip with typing and other detail about the identifier.
 
-*   Syntax coloring: color an identifier based on its type, see also :doc:`Type based syntax coloring <../225/225-change-syntax-highlighting-colors>` which provides a tasteful coloring scheme distinguishing parameters from variables.
+    .. image:: images/hover.png
+        :align: center
+
+*   Syntax coloring: color an identifier based on its type, see also :doc:`Type based syntax coloring <../225/225-change-syntax-highlighting-colors>` which provides a tasteful coloring scheme distinguishing parameters (darkcyan) from variables (palevioletred).
+
+    .. image:: images/syntax-coloring.png
+        :align: center
 
 These two modern approaches are supported by the AIMMS IDE.  
 However, AIMMS models are not only presented in the AIMMS IDE, they are also part of other documentation for instance these How-To articles, in educational material, and in technical reports about the applications.
 
 Note that the IDE approach and the prefixing approach to distinguish between parameters and variables do not exclude each other, they complement each other.
-
-.. Identifier naming convention alternatives used elsewhere
 
 Other naming conventions in practice
 """""""""""""""""""""""""""""""""""""""""
@@ -202,7 +203,7 @@ The prefixes encouraged are enumerated in the table below:
     | efnc   | external function        |
     +--------+--------------------------+
 
-Further reading
+References
 -----------------
 
 * `Naming conventions overview on Medium <https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841>`_
