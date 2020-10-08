@@ -1,9 +1,13 @@
+:orphan:
+
 Convert JSON to XML
 =====================
 
 .. meta::
    :description: This article provides a custom AIMMS library for JSON to XML conversion.
    :keywords: xml, json, convert, extract
+   
+.. tip:: If you are reading this because you want to exchange data in an AIMMS model with a JSON file, you are probably better of using the `Data Exchange <https://documentation.aimms.com/dataexchange/index.html>`_ library.
 
 When you need input data from JSON files, you first need to convert JSON files to XML files to make the data compatible with AIMMS. 
 
