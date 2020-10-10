@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
-<References AIMMS_Version="4.74.8.15 (x64)">
+<References AIMMS_Version="4.75.3.6 (x64)">
 	<MainProject Path="MainProject" />
 	<Library System="true" Path="AimmsPro" />
 	<Library System="true" Path="AimmsWebUI" />
-	<Library System="true" Path="AIMMSXLLibrary" />
 	<RepositoryLibrary UUID="BDF54E1C-AF05-4D77-856C-F3C05F20FFB8" Name="DataExchange" Version="1.0.0.24" />
-	<RepositoryLibrary UUID="DABB08E6-6AD8-4118-B08B-46C1CBFAEA04" Name="HTTPClient" Version="1.0.2.44" />
+	<RepositoryLibrary UUID="DABB08E6-6AD8-4118-B08B-46C1CBFAEA04" Name="HTTPClient" Version="1.0.2.179" />
 </References>

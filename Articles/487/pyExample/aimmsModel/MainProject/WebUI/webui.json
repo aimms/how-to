@@ -10,7 +10,7 @@
   },
   "pages/home": {
     "maxcolumns": {
-      "literal": 8
+      "literal": 10
     },
     "widgets": {
       "literal": [
@@ -23,9 +23,17 @@
           }
         },
         {
-          "uri": "newLabel",
+          "uri": "scUrl",
           "layoutInfo": {
             "width": "6",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "newLabel",
+          "layoutInfo": {
+            "width": "10",
             "height": "1",
             "customPosition": ""
           }
@@ -38,18 +46,26 @@
           }
         },
         {
+          "uri": "locTable",
+          "layoutInfo": {
+            "width": "2",
+            "height": "4",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "centroids",
+          "layoutInfo": {
+            "width": "2",
+            "height": "3",
+            "customPosition": ""
+          }
+        },
+        {
           "uri": "Cluster Locations",
           "layoutInfo": {
             "width": "2",
             "height": "1"
-          }
-        },
-        {
-          "uri": "locTable",
-          "layoutInfo": {
-            "width": "2",
-            "height": "2",
-            "customPosition": ""
           }
         },
         {
@@ -60,6 +76,64 @@
           }
         }
       ]
+    }
+  },
+  "widgets/centroids": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "pCenLat",
+          "pCenLon",
+          "pCenSize"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "iCentroid"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "iCentroid",
+          "width": 13.16
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "pCenSize"
+          },
+          "width": 10.21
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "pCenLon"
+          },
+          "width": 11.99
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "pCenLat"
+          },
+          "width": 11.78
+        }
+      ]
+    },
+    "title": {
+      "literal": "Centroids"
     }
   },
   "widgets/Cluster Locations": {
@@ -136,10 +210,10 @@
       "literal": false
     },
     "center.latitude": {
-      "literal": 47.635783590864857
+      "literal": 47.60245929546312
     },
     "center.longitude": {
-      "literal": -121.83288574218752
+      "literal": -121.53625488281252
     },
     "nodes.__display_order__": {
       "literal": [
@@ -365,16 +439,16 @@
     "custom.column.widths": {
       "literal": [
         {
-          "type": "rowHeader",
-          "colKey": "isLoc",
-          "width": 20.317874692874697
-        },
-        {
           "type": "colHeader",
           "colKey": {
             "<IDENTIFIER-SET>": "pSize"
           },
           "width": 13.284875594073244
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "isLoc",
+          "width": 24.53
         }
       ]
     },
@@ -411,6 +485,21 @@
     },
     "title": {
       "literal": "Reset"
+    }
+  },
+  "widgets/scUrl": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "compact": {
+      "literal": 1
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "spURL"
+        ]
+      }
     }
   },
   "widgets/slideClusters": {

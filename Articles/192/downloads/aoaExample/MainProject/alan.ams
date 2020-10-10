@@ -1,0 +1,105 @@
+## ams_version=1.0
+
+Model Main_OuterApproximation {
+    Variable x1 {
+        Range: nonnegative;
+    }
+    Variable x2 {
+        Range: nonnegative;
+    }
+    Variable x3 {
+        Range: nonnegative;
+    }
+    Variable x4 {
+        Range: nonnegative;
+    }
+    Variable objvar;
+    Variable b6 {
+        Range: binary;
+    }
+    Variable b7 {
+        Range: binary;
+    }
+    Variable b8 {
+        Range: binary;
+    }
+    Variable b9 {
+        Range: binary;
+    }
+    Constraint e1 {
+        Definition: objvar = x1*(4*x1 + 3*x2 - x3) + x2*(3*x1 + 6*x2 + x3) + x3*(x2 - x1 + 10*x3);
+    }
+    Constraint e2 {
+        Definition: x1 + x2 + x3 + x4 =   1;
+    }
+    Constraint e3 {
+        Definition: 8*x1 + 9*x2 + 12*x3 + 7*x4 =   10;
+    }
+    Constraint e4 {
+        Definition: x1 - b6 <=  0;
+    }
+    Constraint e5 {
+        Definition: x2 - b7 <=  0;
+    }
+    Constraint e6 {
+        Definition: x3 - b8 <=  0;
+    }
+    Constraint e7 {
+        Definition: x4 - b9 <=  0;
+    }
+    Constraint e8 {
+        Definition: b6 + b7 + b8 + b9 <=  3;
+    }
+    MathematicalProgram alan {
+        Objective: objvar;
+        Direction: minimize;
+        Type: MINLP;
+    }
+    ElementParameter myGMP {
+        Range: AllGeneratedMathematicalPrograms;
+    }
+    Procedure MainInitialization;
+    Procedure MainExecution {
+        Body: {
+            myGMP := GMP::Instance::Generate( alan ) ;
+            
+            GMPOuterApprox::IterationMax := 10;
+            GMPOuterApprox::CreateStatusFile := 1;
+            
+            ! Best known solution: 2.9250
+            
+            GMPOuterApprox::DoOuterApproximation( myGMP );
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+    }
+    Module GMP_Outer_Approximation_Module {
+        SourceFile: "%AIMMSMODULES%\\GMPOuterApproximation.ams";
+        Comment: {
+            "This module contains two outer approximation algorithms for solving Mixed Integer
+            Nonlinear Problems (MINLP). The basic algorithm can be found in the section \'AOA
+            Basic Algorithm\' and is based on the following two papers:
+            
+             M.A. Duran and I.E. Grossmann, An outer-approximation algorithm for a class of
+             mixed-integer nonlinear programs, Mathematical Programming 36 (1986), pp. 307-339.
+            
+             J. Viswanathan and I.E. Grossmann, A combined penalty function and outer-approximation
+             method for MINLP optimization, Computers and Chemical Engineering 14 (1990), pp. 769-778.
+            
+            The basic algorithm can be used for convex and non-convex problems with general integer
+            variables.
+            
+            The section \'AOA Convex Algorithm\' contains a variant of the outer approximation algorithm
+            that uses a single tree search. In this way the sequential solving of several MIP\'s is
+            avoided. The algorithm is based on the paper:
+            
+             I. Quesada and I.E. Grossmann, An LP/NLP Based Branch and Bound Algorithm for Convex MINLP
+             Optimization Problems, Computers and Chemical Engineering 16 (1992), pp. 937-947.
+            
+            This algorithm can only be used for convex problems (with general integer variables)."
+        }
+    }
+}
