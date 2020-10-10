@@ -84,7 +84,7 @@ You can call the procedure with the code below:
         }
     }
     
-To compare, call the procedure on both versions of the project, and then compare the output folders using a diff tool such as `WinMerge <winmerge.org>`_.
+To compare, call the procedure on both versions of the project, and then compare the output folders using a diff tool such as `WinMerge <https://winmerge.org/>`_.
 
 Now it's time to use that diff to figure out what happened.
 
