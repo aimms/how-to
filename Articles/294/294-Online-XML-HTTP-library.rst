@@ -189,7 +189,7 @@ You can download the example AIMMS project below:
 
 * :download:`HttpFood.zip <download/HttpFood.zip>` 
 
-* A variation, whereby the data is read to AIMMS identifiers: :download:`HttpFoodIntegrated.zip <download/HttpFoodIntegrated.zip>` 
+* A variation, whereby the data from a JSON file is read to AIMMS identifiers: :download:`HttpFoodIntegrated.zip <download/HttpFoodIntegrated.zip>` 
 
 
 Related Topics

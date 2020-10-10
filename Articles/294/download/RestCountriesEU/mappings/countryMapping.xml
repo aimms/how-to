@@ -1,7 +1,7 @@
 <AimmsJSONMapping>
     <ArrayMapping iterative-reset="1">
         <ObjectMapping iterative-binds-to="i_country">
-            <ValueMapping name="name" maps-to="sp_names(i_country)"/>
+            <ValueMapping name-binds-to="i_ca" name-regex="population|area|gini" maps-to="p_countryAttributes(i_country,i_ca)"/>
             <ArrayMapping name="topLevelDomain"  iterative-reset="1">
                 <ValueMapping iterative-binds-to="i_domainNumber" maps-to="sp_topLevelDomain(i_country,i_domainNumber)"/> 
             </ArrayMapping>
@@ -22,17 +22,12 @@
             </ArrayMapping>
             <ArrayMapping name="languages"  iterative-reset="1">
                 <ObjectMapping iterative-binds-to="i_domainNumber">
-                    <ValueMapping name="iso639_1" maps-to="sp_languageIso6391(i_country,i_domainNumber)"/> 
-                    <ValueMapping name="iso639_2" maps-to="sp_languageIso6392(i_country,i_domainNumber)"/> 
-                    <ValueMapping name="name" maps-to="sp_languageName(i_country,i_domainNumber)"/> 
-                    <ValueMapping name="nativeName" maps-to="sp_languageNativeName(i_country,i_domainNumber)"/> 
+                    <ValueMapping name-binds-to="i_la" name-regex=".*" maps-to="sp_languageAttributes(i_country,i_domainNumber,i_la)"/> 
                 </ObjectMapping>
             </ArrayMapping>
             <ArrayMapping name="currencies"  iterative-reset="1">
                 <ObjectMapping iterative-binds-to="i_domainNumber">
-                    <ValueMapping name="code" maps-to="sp_currencyCode(i_country,i_domainNumber)"/> 
-                    <ValueMapping name="name" maps-to="sp_currencyName(i_country,i_domainNumber)"/> 
-                    <ValueMapping name="symbol" maps-to="sp_currencySymbol(i_country,i_domainNumber)"/> 
+                    <ValueMapping name-binds-to="i_cura" name-regex=".*" maps-to="sp_currencyAttributes(i_country,i_domainNumber,i_cura)"/> 
                 </ObjectMapping>
             </ArrayMapping>
             <ArrayMapping name="regionalBlocs"  iterative-reset="1">
@@ -48,30 +43,8 @@
                 </ObjectMapping>
             </ArrayMapping>
             <ObjectMapping name="translations">
-                <ValueMapping name="de" maps-to="sp_translationDe(i_country)"/> 
-                <ValueMapping name="es" maps-to="sp_translationEs(i_country)"/> 
-                <ValueMapping name="fr" maps-to="sp_translationFr(i_country)"/> 
-                <ValueMapping name="ja" maps-to="sp_translationJa(i_country)"/> 
-                <ValueMapping name="it" maps-to="sp_translationIt(i_country)"/> 
-                <ValueMapping name="br" maps-to="sp_translationBr(i_country)"/> 
-                <ValueMapping name="pt" maps-to="sp_translationPt(i_country)"/> 
-                <ValueMapping name="nl" maps-to="sp_translationNl(i_country)"/> 
-                <ValueMapping name="hr" maps-to="sp_translationHr(i_country)"/> 
-                <ValueMapping name="fa" maps-to="sp_translationFa(i_country)"/> 
+                <ValueMapping name-binds-to="i_tl" name-regex=".*" maps-to="sp_translations(i_country,i_tl)"/>
             </ObjectMapping>
-            <ValueMapping name="alpha2Code" maps-to="sp_alpha2Code(i_country)"/>
-            <ValueMapping name="alpha3Code" maps-to="sp_alpha3Code(i_country)"/>
-            <ValueMapping name="capital" maps-to="sp_capital(i_country)"/>
-            <ValueMapping name="region" maps-to="sp_region(i_country)"/>
-            <ValueMapping name="subregion" maps-to="sp_subregion(i_country)"/>
-            <ValueMapping name="population" maps-to="p_population(i_country)"/>
-            <ValueMapping name="demonym" maps-to="sp_demonym(i_country)"/>
-            <ValueMapping name="area" maps-to="p_area(i_country)"/>
-            <ValueMapping name="gini" maps-to="p_gini(i_country)"/>
-            <ValueMapping name="nativeName" maps-to="sp_nativeName(i_country)"/>
-            <ValueMapping name="numericCode" maps-to="sp_numericCode(i_country)"/>
-            <ValueMapping name="flag" maps-to="sp_flag(i_country)"/>
-            <ValueMapping name="cioc" maps-to="sp_cioc(i_country)"/>
         </ObjectMapping>
     </ArrayMapping>
 </AimmsJSONMapping>

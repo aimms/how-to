@@ -4,9 +4,16 @@ Model Main_RestCountriesEU {
 	DeclarationSection Country_Data_declarations {
 		Set s_countries {
 			Index: i_country;
+			webui::ElementTextIdentifier: sp_names;
 		}
-		StringParameter sp_names {
-			IndexDomain: i_country;
+		Set s_countryAttributes {
+			Index: i_ca;
+		}
+		StringParameter sp_countryAttributes {
+			IndexDomain: (i_country,i_ca);
+		}
+		Parameter p_countryAttributes {
+			IndexDomain: (i_country,i_ca);
 		}
 		Set s_domainNumbers {
 			SubsetOf: Integers;
@@ -15,6 +22,18 @@ Model Main_RestCountriesEU {
 		Set s_alternativeNumbers {
 			SubsetOf: Integers;
 			Index: i_alternative;
+		}
+		Set s_languageAttributes {
+			Index: i_la;
+		}
+		Set s_currencyAttributes {
+			Index: i_cura;
+		}
+		StringParameter sp_languageAttributes {
+			IndexDomain: (i_country,i_domainNumber,i_la);
+		}
+		StringParameter sp_currencyAttributes {
+			IndexDomain: (i_country,i_domainNumber,i_curA);
 		}
 		StringParameter sp_topLevelDomain {
 			IndexDomain: (i_country,i_domainNumber);
@@ -29,27 +48,6 @@ Model Main_RestCountriesEU {
 			IndexDomain: (i_country,i_domainNumber);
 		}
 		StringParameter sp_borders {
-			IndexDomain: (i_country,i_domainNumber);
-		}
-		StringParameter sp_currencyCode {
-			IndexDomain: (i_country,i_domainNumber);
-		}
-		StringParameter sp_currencyName {
-			IndexDomain: (i_country,i_domainNumber);
-		}
-		StringParameter sp_currencySymbol {
-			IndexDomain: (i_country,i_domainNumber);
-		}
-		StringParameter sp_languageIso6391 {
-			IndexDomain: (i_country,i_domainNumber);
-		}
-		StringParameter sp_languageIso6392 {
-			IndexDomain: (i_country,i_domainNumber);
-		}
-		StringParameter sp_languageName {
-			IndexDomain: (i_country,i_domainNumber);
-		}
-		StringParameter sp_languageNativeName {
 			IndexDomain: (i_country,i_domainNumber);
 		}
 		StringParameter sp_regionalBlockAcronym {
@@ -67,77 +65,18 @@ Model Main_RestCountriesEU {
 		Parameter p_latlng {
 			IndexDomain: (i_country,i_domainNumber);
 		}
-		StringParameter sp_alpha2Code {
-			IndexDomain: i_country;
+		Set s_translationLanguages {
+			Index: i_tl;
 		}
-		StringParameter sp_alpha3Code {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_capital {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_region {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_subregion {
-			IndexDomain: i_country;
-		}
-		Parameter p_population {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_demonym {
-			IndexDomain: i_country;
-		}
-		Parameter p_area {
-			IndexDomain: i_country;
-		}
-		Parameter p_gini {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_nativeName {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_numericCode {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_translationDe {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_translationEs {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_translationFr {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_translationJa {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_translationIt {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_translationBr {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_translationPt {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_translationNl {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_translationHr {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_translationFa {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_flag {
-			IndexDomain: i_country;
-		}
-		StringParameter sp_cioc {
-			IndexDomain: i_country;
+		StringParameter sp_translations {
+			IndexDomain: (i_country,i_tl);
 		}
 	}
 	DeclarationSection Country_WebUI_Declarations {
+		StringParameter sp_names {
+			IndexDomain: i_country;
+			Definition: sp_countryAttributes(i_country, 'name');
+		}
 		StringParameter sp_topLevelDomain1 {
 			IndexDomain: (i_country);
 			Definition: sp_topLevelDomain(i_country, '1');
@@ -199,13 +138,13 @@ Model Main_RestCountriesEU {
 				mappingName :  "countryMapping", 
 				mappingFile :  "mappings\\countryMapping.xml");
 			dex::ReadFromFile(
-				dataFile         :  "response.json",  ! from Postman!
+				dataFile         :  "country.json",  ! from Postman!
 				mappingName      :  "countryMapping", 
 				emptyIdentifiers :  0, 
 				resetCounters    :  1);
 		}
 	}
-	Section Application_initi {
+	Section Application_initialization_execution_and_termination {
 		Procedure MainInitialization {
 			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
 		}
@@ -215,7 +154,12 @@ Model Main_RestCountriesEU {
 				or add statements that require the Data Management module to be initialized."
 			}
 		}
-		Procedure MainExecution;
+		Procedure MainExecution {
+			Body: {
+				pr_handleHttpRequest();
+				pr_storeJsonDataInCountryIdentifiers();
+			}
+		}
 		Procedure PreMainTermination {
 			Body: {
 				return 1;

@@ -16,14 +16,25 @@
               {
                 "name": "home",
                 "slug": "home",
-                "children": [
-                  {
-                    "name": "CountryData",
-                    "type": "pagev2-grid",
-                    "slug": "countrydata_1",
-                    "children": []
-                  }
-                ]
+                "children": []
+              },
+              {
+                "name": "CountryData",
+                "type": "pagev2-grid",
+                "slug": "countrydata_1",
+                "children": []
+              },
+              {
+                "name": "Regional Block Names",
+                "type": "pagev2-grid",
+                "slug": "regional_block_names",
+                "children": []
+              },
+              {
+                "name": "Regional Block Acronyms",
+                "type": "pagev2-grid",
+                "slug": "regional_block_acronyms",
+                "children": []
               }
             ]
           }
@@ -71,6 +82,62 @@
             "width": "10",
             "height": "4",
             "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "pages/regional_block_acronyms": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "Regional Block Acronyms",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsRegional Block Acronyms0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout9"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Regional Block Acronyms",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "pages/regional_block_names": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "Regaional Block Names",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsRegaional Block Names0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout9"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Regaional Block Names",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
           }
         }
       ]
@@ -188,6 +255,96 @@
           "width": 47.73
         }
       ]
+    }
+  },
+  "widgets/Regaional Block Names": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_otherRegionalBlockNames"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_country",
+          "i_domainNumber"
+        ],
+        "colHeader": [
+          "i_alternative"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    }
+  },
+  "widgets/Regional Block Acronyms": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_otherRegionalBlockAcronyms"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_country",
+          "i_domainNumber"
+        ],
+        "colHeader": [
+          "i_alternative"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_alternative": "1"
+          },
+          "width": 14.11
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_alternative": "2"
+          },
+          "width": 15.6
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_alternative": "3"
+          },
+          "width": 15.2
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_domainNumber",
+          "width": 31.4
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_country",
+          "width": 37.53
+        }
+      ]
+    },
+    "title": {
+      "literal": "Other Regional Block Acronyms"
     }
   }
 }
