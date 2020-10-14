@@ -29,11 +29,12 @@ tour.
 This example contains several euclidean TSP instances from TSPLIB at:
 http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/
 
-Note:
-The lazy constraint callback is only supported by CPLEX and Gurobi.
+.. Note:
+
+   The lazy constraint callback is only supported by CPLEX and Gurobi.
 
 References:
-Applegate, D.L., R. E. Bixby, V. Chv�tal, and W. J. Cook, The Traveling Salesman
+Applegate, D.L., R. E. Bixby, V. Chvátal, and W. J. Cook, The Traveling Salesman
 Problem: A Computational Study, Princeton University Press, Princeton, 2007
 
 
