@@ -1,0 +1,23 @@
+﻿* AIMMS
+major_messages 1
+number_of_execution_threads 1
+time_messages 1
+* AOA
+* BARON 19
+* CBC 2.9
+* CONOPT 4.0
+* CPLEX 12.10
+"CPLEX 12.10".global_thread_limit 1
+* CPOptimizer 12.9
+* GUROBI 9.0
+* IPOPT 3.11
+* Knitro 11.0
+* Knitro 12.0
+* MINOS
+* ODH-CPLEX 4.0
+* PATH 4.7
+* SNOPT 7.2
+* XA 16
+* NETSOL
+* Environment
+Project_Title "AIMMS - A Flow Shop Problem - Generating scenarios"
