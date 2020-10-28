@@ -163,7 +163,7 @@
     "action": {
       "literal": {
         "type": "procedure",
-        "value": "gss::pr_ClearErrors"
+        "value": "gss::pr_clearErrors"
       }
     },
     "aimms.widget.type": {
@@ -177,7 +177,7 @@
     "action": {
       "literal": {
         "type": "procedure",
-        "value": "gss::pr_DownloadErrorData"
+        "value": "gss::pr_downloadErrorData"
       }
     },
     "aimms.widget.type": {
@@ -191,7 +191,7 @@
     "action": {
       "literal": {
         "type": "procedure",
-        "value": "gss::pr_DownloadErrorReport"
+        "value": "gss::pr_downloadErrorReport"
       }
     },
     "aimms.widget.type": {
@@ -208,15 +208,15 @@
     "contents": {
       "aimms": {
         "contents": [
-          "gss::sp_JobErrorMoments",
-          "gss::sp_JobErrorMessages"
+          "gss::sp_jobErrorMoments",
+          "gss::sp_jobErrorMessages"
         ]
       }
     },
     "contents.partition": {
       "literal": {
         "rowHeader": [
-          "gss::i_JobErrorMessageNumber"
+          "gss::i_jobErrorMessageNumber"
         ],
         "colHeader": [
           "<IDENTIFIER-SET>"
@@ -266,7 +266,7 @@
     },
     "store.focus.in": {
       "literal": {
-        "gss::i_JobErrorMessageNumber": "gss::ep_ErrorWarningSelectedMessage"
+        "gss::i_jobErrorMessageNumber": "gss::ep_errorWarningSelectedMessage"
       }
     },
     "title": {
@@ -308,62 +308,62 @@
             "identifier": "gss::ep_JobErrorAttributes",
             "slice": [
               {
-                "index": "gss::i_JobErrorMessageNumber",
+                "index": "gss::i_jobErrorMessageNumber",
                 "type": "element-parameter",
-                "value": "gss::ep_ErrorWarningSelectedMessage"
+                "value": "gss::ep_errorWarningSelectedMessage"
               },
               {
-                "index": "gss::i_StackPosition",
+                "index": "gss::i_stackPosition",
                 "type": "free",
-                "value": "gss::i_StackPosition"
+                "value": "gss::i_stackPosition"
               }
             ]
           },
           {
-            "identifier": "gss::ep_JobErrorNodes",
+            "identifier": "gss::ep_jobErrorNodes",
             "slice": [
               {
-                "index": "gss::i_JobErrorMessageNumber",
+                "index": "gss::i_jobErrorMessageNumber",
                 "type": "element-parameter",
-                "value": "gss::ep_ErrorWarningSelectedMessage"
+                "value": "gss::ep_errorWarningSelectedMessage"
               },
               {
-                "index": "gss::i_StackPosition",
+                "index": "gss::i_stackPosition",
                 "type": "free",
-                "value": "gss::i_StackPosition"
+                "value": "gss::i_stackPosition"
               }
             ]
           },
           {
-            "identifier": "gss::p_JobErrorLines",
+            "identifier": "gss::p_jobErrorLines",
             "slice": [
               {
-                "index": "gss::i_JobErrorMessageNumber",
+                "index": "gss::i_jobErrorMessageNumber",
                 "type": "element-parameter",
-                "value": "gss::ep_ErrorWarningSelectedMessage"
+                "value": "gss::ep_errorWarningSelectedMessage"
               },
               {
-                "index": "gss::i_StackPosition",
+                "index": "gss::i_stackPosition",
                 "type": "free",
-                "value": "gss::i_StackPosition"
+                "value": "gss::i_stackPosition"
               }
             ]
           },
           {
-            "identifier": "gss::ep_JobErrorSeverity",
+            "identifier": "gss::ep_jobErrorSeverity",
             "slice": [
               {
-                "index": "gss::i_JobErrorMessageNumber",
+                "index": "gss::i_jobErrorMessageNumber",
                 "type": "element-parameter",
-                "value": "gss::ep_ErrorWarningSelectedMessage"
+                "value": "gss::ep_errorWarningSelectedMessage"
               }
             ]
           }
         ],
         "contents": [
-          "gss::ep_JobErrorNodes",
+          "gss::ep_jobErrorNodes",
           "gss::ep_JobErrorAttributes",
-          "gss::p_JobErrorLines"
+          "gss::p_jobErrorLines"
         ]
       }
     },
@@ -373,8 +373,8 @@
     "contents.partition": {
       "literal": {
         "rowHeader": [
-          "gss::i_JobErrorMessageNumber",
-          "gss::i_StackPosition"
+          "gss::i_jobErrorMessageNumber",
+          "gss::i_stackPosition"
         ],
         "colHeader": [
           "<IDENTIFIER-SET>"
@@ -409,13 +409,13 @@
     },
     "store.focus.in": {
       "literal": {
-        "gss::i_StackPosition": "gss::ep_StackPos"
+        "gss::i_stackPosition": "gss::ep_stackPos"
       }
     },
     "title": {
       "aimms": {
         "contents": [
-          "gss::sp_TitleStackMessage"
+          "gss::sp_titleStackMessage"
         ],
         "slices": []
       }
@@ -452,7 +452,7 @@
     "time.reference": {
       "aimms": {
         "contents": [
-          "sp_RefTime"
+          "sp_refTime"
         ]
       }
     },
@@ -462,7 +462,7 @@
     "time.viewport.start": {
       "aimms": {
         "contents": [
-          "sp_RefTime"
+          "sp_refTime"
         ]
       }
     },
@@ -476,8 +476,8 @@
     "contents": {
       "aimms": {
         "contents": [
-          "p_GCJobStart",
-          "p_GCJobDuration"
+          "p_gcJobStart",
+          "p_gcJobDuration"
         ]
       }
     },
@@ -496,11 +496,11 @@
     "widgetactions": {
       "aimms": {
         "contents": [
-          "sp_GCWidgetActions"
+          "sp_gcWidgetActions"
         ],
         "slices": [
           {
-            "identifier": "sp_GCWidgetActions",
+            "identifier": "sp_gcWidgetActions",
             "slice": [
               {
                 "index": "i_gcwan",
@@ -528,12 +528,12 @@
     "contents": {
       "aimms": {
         "contents": [
-          "gss::p_JobProfilerData"
+          "gss::p_jobProfilerData"
         ],
         "prefix": "aimms",
         "slices": [
           {
-            "identifier": "gss::p_JobProfilerData",
+            "identifier": "gss::p_jobProfilerData",
             "slice": [
               {
                 "index": "IndexIdentifiers",
@@ -541,7 +541,7 @@
                 "value": "IndexIdentifiers"
               },
               {
-                "index": "gss::i_LineNumber",
+                "index": "gss::i_lineNumber",
                 "type": "fixed-element",
                 "value": "0"
               },
@@ -615,8 +615,8 @@
     },
     "store.focus.in": {
       "literal": {
-        "IndexIdentifiers": "gss::ep_ProfilerDataSelectedIdentifier",
-        "<IDENTIFIER-SET>": "gss::ep_ProfilerDataSelectedIdentifier"
+        "IndexIdentifiers": "gss::ep_profilerDataSelectedIdentifier",
+        "<IDENTIFIER-SET>": "gss::ep_profilerDataSelectedIdentifier"
       }
     },
     "title": {
@@ -654,7 +654,7 @@
     "contents": {
       "aimms": {
         "contents": [
-          "gss::p_JobProfilerData"
+          "gss::p_jobProfilerData"
         ],
         "prefix": "aimms",
         "partition": {
@@ -671,17 +671,17 @@
         },
         "slices": [
           {
-            "identifier": "gss::p_JobProfilerData",
+            "identifier": "gss::p_jobProfilerData",
             "slice": [
               {
                 "index": "IndexIdentifiers",
                 "type": "element-parameter",
-                "value": "gss::ep_ProfilerDataSelectedIdentifier"
+                "value": "gss::ep_profilerDataSelectedIdentifier"
               },
               {
-                "index": "gss::i_LineNumber",
+                "index": "gss::i_lineNumber",
                 "type": "subset",
-                "value": "gss::i_ActualLineNumber"
+                "value": "gss::i_actualLineNumber"
               },
               {
                 "index": "IndexProfilerTypes",
@@ -695,7 +695,7 @@
     },
     "contents.displaydomain": {
       "literal": {
-        "gss::p_jobprofilerdata": "1"
+        "gss::p_jobProfilerData": "1"
       }
     },
     "contents.numdecimals": {
@@ -705,7 +705,7 @@
       "literal": {
         "rowHeader": [
           "IndexIdentifiers",
-          "gss::i_LineNumber"
+          "gss::i_lineNumber"
         ],
         "colHeader": [
           "IndexProfilerTypes"
@@ -743,7 +743,7 @@
     "title": {
       "aimms": {
         "contents": [
-          "gss::sp_TitleProfilerDetail"
+          "gss::sp_titleProfilerDetail"
         ],
         "slices": []
       }
@@ -753,7 +753,7 @@
     "action": {
       "literal": {
         "type": "procedure",
-        "value": "gss::pr_UploadErrorData"
+        "value": "gss::pr_uploadErrorData"
       }
     },
     "aimms.widget.type": {
