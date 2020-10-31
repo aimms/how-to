@@ -42,7 +42,7 @@ Please note
 
 #.  Up till AIMMS Developer 4.76.3 and AIMMS PRO 2.36.1, TLS 1.2 was supported.  At the time of writing this article, TLS 1.2 is still
 
-    #.  the most `widely used transport layer security protocol <https://www.sans.org/reading-room/whitepapers/vpns/paper/39715#:~:text=TLS%201.2%20with%2064.6%25%20and,rates%20for%20modern%20TLS%20libraries.>`_
+    #.  the most `widely used transport layer security protocol <https://www.sans.org/reading-room/whitepapers/vpns/paper/39715>`_
 
     #.  considered to be `reasonably okay <https://www.howsmyssl.com/>`_
     
