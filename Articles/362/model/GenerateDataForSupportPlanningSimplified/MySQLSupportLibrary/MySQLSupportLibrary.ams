@@ -69,7 +69,6 @@ LibraryModule MySQLSupportLibrary {
 			StringParameter sp_file_context;
 			Parameter p_file_port;
 		}
-		Procedure pr_constructConnectionString;
 		Procedure pr_determineMySQLdriver {
 			Body: {
 				! Find all ODBC Drivers
