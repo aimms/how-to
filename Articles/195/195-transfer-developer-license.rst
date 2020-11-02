@@ -1,4 +1,4 @@
-.. |doc| image:: images/icons/Documentation.png
+
 .. |aimmsIcon| image:: images/icons/favicon.png
 			:scale: 15 %
 
