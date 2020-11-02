@@ -1,12 +1,4 @@
 
-.. IMAGES
-
-.. |project-options| image:: /images/project-options.jpg
-.. |appearance-options| image:: /images/appearance-options.jpg
-.. |change-ui| image:: /images/change-ui.jpg
-
-
-
 .. BEGIN CONTENT
 
 Enable the Page Manager

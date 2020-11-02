@@ -1,7 +1,4 @@
 
-.. |aimmsIcon| image:: images/icons/favicon.png
-			:scale: 15 %
-
 .. |aimms| image:: images/aimms-logo-s-rgb.png
 				:scale: 10 %
 				:target: https://aimms.com/
