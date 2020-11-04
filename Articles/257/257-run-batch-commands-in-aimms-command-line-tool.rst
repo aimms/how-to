@@ -89,7 +89,7 @@ By doing this, all the running results will be displayed on the command window. 
 
             import subprocess
 
-            path_to_AimmsCmd = 'C:\Users\<Your_User_Name>\AppData\Local\AIMMS\IFA\Aimms\<AIMMS_version>\Bin\AimmsCmd.exe'
+            path_to_AimmsCmd = 'C:\\Users\\Arthur.AIMMS\\AppData\\Local\\AIMMS\\IFA\\Aimms\\4.75.4.8-x64-VS2017\\Bin\\AimmsCmd.exe'
 
             command = path_to_AimmsCmd + ' StandAlone.aimms < cmds.txt > log.txt'
 
