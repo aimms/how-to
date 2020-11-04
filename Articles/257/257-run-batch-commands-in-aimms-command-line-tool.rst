@@ -75,12 +75,29 @@ By doing this, all the running results will be displayed on the command window. 
 
     AimmsCmd ExampleProject.aimms < cmds.txt > log.txt 
     
-.. note:: Windows powershell doesn't support the ``<`` operator to redirect input. You can get around that using:
+.. note:: 
+    
+    - Windows powershell doesn't support the ``<`` operator to redirect input. You can get around that using:
 
-    .. code-block:: none
-        :linenos:
+        .. code-block:: powershell
 
-        Get-Content cmds.txt | AimmsCmd.exe ExampleProject.aimms > log.txt
+            Get-Content cmds.txt | AimmsCmd.exe ExampleProject.aimms > log.txt
+
+    - Calling AIMMS from Python and printing the logs could be done using the following script and the `Download example`_
+
+        .. code-block:: Python
+
+            import subprocess
+
+            path_to_AimmsCmd = 'C:\Users\<Your_User_Name>\AppData\Local\AIMMS\IFA\Aimms\<AIMMS_version>\Bin\AimmsCmd.exe'
+
+            command = path_to_AimmsCmd + ' StandAlone.aimms < cmds.txt > log.txt'
+
+            ret = subprocess.call(command, shell=True)
+
+            log_file = open('log.txt','r')
+            print(log_file.read())
+            log_file.close()
 
 Download example
 -----------------
