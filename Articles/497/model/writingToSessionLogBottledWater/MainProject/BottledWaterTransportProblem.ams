@@ -1,0 +1,263 @@
+## ams_version=1.0
+
+Model Main_BottledWaterTransportProblem {
+	DeclarationSection data_Declaration {
+		Set s_bottlingLocations {
+			Index: i_bl;
+			Definition: data { Geneva, Copenhagen };
+		}
+		Set s_distributionCenter {
+			Index: i_dc;
+			Definition: data { Budapest, Paris };
+		}
+		Parameter p_dist {
+			IndexDomain: (i_bl,i_dc);
+			Definition: {
+				data { 
+					( Geneva,     Budapest ) : 1270,  
+					( Geneva,     Paris    ) : 541,  
+					( Copenhagen, Budapest ) : 1306,  
+					( Copenhagen, Paris    ) : 1223 
+				}
+			}
+		}
+		Parameter p_demand {
+			IndexDomain: i_dc;
+			Definition: {
+				data { 
+					Budapest : 1234,  
+					Paris    : 2345
+				}
+			}
+		}
+		Parameter p_supply {
+			IndexDomain: i_bl;
+			Definition: {
+				data { 
+					Geneva     : 1357,  
+					Copenhagen : 2222 
+				}
+			}
+		}
+	}
+	DeclarationSection model_declaration {
+		Variable v_transport {
+			IndexDomain: (i_bl,i_dc);
+			Range: nonnegative;
+		}
+		Variable v_totaltravelled {
+			Range: free;
+			Definition: sum( (i_bl, i_dc), p_dist(i_bl, i_dc) * v_transport(i_bl, i_dc) );
+		}
+		Constraint c_meetDemand {
+			IndexDomain: i_dc;
+			Definition: sum( i_bl, v_transport(i_bl, i_dc) ) >= p_demand( i_dc );
+		}
+		Constraint c_respectSupply {
+			IndexDomain: i_bl;
+			Definition: sum( i_dc, v_transport(i_bl, i_dc) ) <= p_supply(i_bl);
+		}
+		MathematicalProgram mp_transport {
+			Objective: v_totaltravelled;
+			Direction: minimize;
+			Constraints: AllConstraints;
+			Variables: AllVariables;
+			Type: Automatic;
+		}
+	}
+	Section logging {
+		Property: NoSave;
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: {
+				tick   ->s : #-># / 100,
+				second ->s : #->#,
+				minute ->s : #-># * 60,
+				hour   ->s : #-># * 3600,
+				day    ->s : #-># * 86400,
+				week   ->s : #-># * 604800,
+				month  ->s : #-># * 2628000,
+				year   ->s : #-># * 31536000,
+				century->s : #-># * 3153600000
+			}
+			Comment: "Expresses the value for the duration of periods.";
+		}
+		Parameter p_noLogLinesWritten {
+			InitialData: 0;
+		}
+		StringParameter sp_traceFilename {
+			InitialData: "log/trace.txt";
+		}
+		File f_traceFile {
+			Name: sp_traceFilename;
+			Device: Disk;
+			Mode: merge;
+		}
+		ElementParameter ep_traceTimezone {
+			Range: AllTimeZones;
+			InitialData: 'localDST';
+		}
+		Procedure pr_logMsg {
+			Arguments: (sp_msg);
+			Body: {
+				if pro::GetPROEndPoint() then
+					pro::management::LocalLogInfo( sp_msg );
+				else
+					if not p_noLogLinesWritten then
+						if fileExists( sp_traceFilename ) then
+							FileDelete( sp_traceFilename );
+						endif ;
+					endif ;
+					put f_traceFile ;
+					put sp_msg, / ;
+					putclose ;
+					p_noLogLinesWritten += 1 ;
+				endif ;
+			}
+			StringParameter sp_msg {
+				Property: Input;
+			}
+		}
+		Procedure pr_enter {
+			Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,sp_procEnterContextMessage);
+			Body: {
+				sp_procEnterTimestamp := CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')");
+				p_procEnterMemoryInUse := MemoryInUse();
+				sp_node := formatString("%e",CallerNode(1));
+				sp_fullMsg := formatString("Enter %s(%s) at %s [%.3n Mb] in use", 
+					sp_node, sp_procEnterContextMessage, 
+					MomentToString(
+						Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ(ep_traceTimezone)", 
+						unit          :  [s], 
+						ReferenceDate :  sp_procEnterTimestamp, 
+						Elapsed       :  0[s]), 
+					p_procEnterMemoryInUse );
+				pr_logMsg( sp_fullMsg );
+			}
+			StringParameter sp_procEnterTimestamp {
+				Property: InOut;
+			}
+			Parameter p_procEnterMemoryInUse {
+				Property: InOut;
+			}
+			StringParameter sp_procEnterContextMessage {
+				Property: Optional;
+				Comment: {
+					"If the traced procedure contains arguments, 
+					you may want to summarize these arguments here."
+				}
+			}
+			StringParameter sp_node;
+			StringParameter sp_fullMsg;
+		}
+		Procedure pr_leave {
+			Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,sp_msg);
+			Body: {
+				sp_leavingTime := CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')");
+				p_duration := StringToMoment(
+					Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')", 
+					Unit          :  [s], 
+					ReferenceDate :  sp_procEnterTimestamp, 
+					Timeslot      :  sp_leavingTime);
+				sp_node := formatString("%e",CallerNode(1));
+				p_leaveMemoryInUse := MemoryInUse();
+				sp_fullMsg := 
+					formatString( "Leave %s(%s) at %s [%.3n Mb] in use. ",
+						sp_node, sp_msg, 
+						MomentToString(
+							Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ(ep_traceTimezone)", 
+							unit          :  [s], 
+							ReferenceDate :  sp_leavingTime, 
+							Elapsed       :  0[s]), 
+						p_leaveMemoryInUse ) +
+					formatString( "Duration is %.3n [seconds] and memory %s is %n Mb.", 
+						p_duration,
+						if p_leaveMemoryInUse >= p_procEnterMemoryInUse then "increase" else "decrease" endif, 
+						abs( p_leaveMemoryInUse - p_procEnterMemoryInUse ) );
+				pr_logMsg( sp_fullMsg );
+			}
+			Parameter p_procEnterMemoryInUse {
+				Property: Input;
+			}
+			StringParameter sp_procEnterTimestamp {
+				Property: Input;
+			}
+			StringParameter sp_leavingTime;
+			Parameter p_duration {
+				Unit: s;
+			}
+			Parameter p_leaveMemoryInUse;
+			StringParameter sp_msg {
+				Property: Optional;
+			}
+			StringParameter sp_node;
+			StringParameter sp_fullMsg;
+		}
+	}
+	Procedure pr_doSolve {
+		Body: {
+			pr_enter(sp_enterTime,p_enterMemoryInUse);
+			solve mp_transport ;
+			pr_leave(sp_enterTime,p_enterMemoryInUse);
+		}
+		StringParameter sp_enterTime;
+		Parameter p_enterMemoryInUse;
+		Parameter p_delay;
+	}
+	Procedure pr_delegateSolve {
+		Body: {
+			if pro::GetPROEndPoint() then
+				if pro::DelegateToServer(
+					waitForCompletion  :  1, 
+					completionCallback :  'pro::session::loadResultsCallback' 
+				) then
+					return ;
+				endif ;
+			endif ;
+			
+			
+			pr_doSolve();
+		}
+	}
+	Section Application_initialization_execution_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure MainExecution {
+			Body: {
+				pr_enter(sp_enterTime,p_enterMemoryInUse);
+				pr_delegateSolve();
+				pr_leave(sp_enterTime,p_enterMemoryInUse);
+			}
+			StringParameter sp_enterTime;
+			Parameter p_enterMemoryInUse;
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+}

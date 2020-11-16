@@ -1,0 +1,124 @@
+## ams_version=1.0
+
+Model Main_BottledWater1 {
+	DeclarationSection data_Declaration {
+		Set s_bottlingLocations {
+			Index: i_bl;
+			Definition: data { Geneva, Copenhagen };
+		}
+		Set s_distributionCenter {
+			Index: i_dc;
+			Definition: data { Budapest, Paris };
+		}
+		Parameter p_dist {
+			IndexDomain: (i_bl,i_dc);
+			Definition: {
+				data { 
+					( Geneva,     Budapest ) : 1270,  
+					( Geneva,     Paris    ) : 541,  
+					( Copenhagen, Budapest ) : 1306,  
+					( Copenhagen, Paris    ) : 1223 
+				}
+			}
+		}
+		Parameter p_demand {
+			IndexDomain: i_dc;
+			Definition: {
+				data { 
+					Budapest : 1234,  
+					Paris    : 2345
+				}
+			}
+		}
+		Parameter p_supply {
+			IndexDomain: i_bl;
+			Definition: {
+				data { 
+					Geneva     : 1357,  
+					Copenhagen : 2222 
+				}
+			}
+		}
+	}
+	DeclarationSection model_declaration {
+		Variable v_transport {
+			IndexDomain: (i_bl,i_dc);
+			Range: nonnegative;
+		}
+		Variable v_totaltravelled {
+			Range: free;
+			Definition: sum( (i_bl, i_dc), p_dist(i_bl, i_dc) * v_transport(i_bl, i_dc) );
+		}
+		Constraint c_meetDemand {
+			IndexDomain: i_dc;
+			Definition: sum( i_bl, v_transport(i_bl, i_dc) ) >= p_demand( i_dc );
+		}
+		Constraint c_respectSupply {
+			IndexDomain: i_bl;
+			Definition: sum( i_dc, v_transport(i_bl, i_dc) ) <= p_supply(i_bl);
+		}
+		MathematicalProgram mp_transport {
+			Objective: v_totaltravelled;
+			Direction: minimize;
+			Constraints: AllConstraints;
+			Variables: AllVariables;
+			Type: Automatic;
+		}
+	}
+	Procedure pr_ME1 {
+		Body: {
+			pr_ME2();
+		}
+	}
+	Procedure pr_ME2 {
+		Body: {
+			solve mp_transport ;
+		}
+	}
+	Section Application_initialization_execution_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure MainExecution {
+			Body: {
+				if pro::GetPROEndPoint() then
+					if pro::DelegateToServer(
+						waitForCompletion  :  1, 
+						completionCallback :  'pro::session::loadResultsCallback' 
+					) then
+						return ;
+					endif ;
+				endif ;
+				
+				pr_ME1();
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+}

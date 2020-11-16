@@ -1,0 +1,5 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"s_BottlingSites" "s_bottlingLocations" "2020-11-14 10:24:48"
+"s_DistributionLocations" "s_distributionCenter" "2020-11-14 10:27:27"
+"i_bottle" "i_bl" "2020-11-14 10:27:41"
+"p_supplyI" "p_supply" "2020-11-14 10:36:05"
