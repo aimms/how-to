@@ -1,7 +1,7 @@
 Modeling Book Examples
 ========================
 
-The application examples listed below illustrate the models described in the `AIMMS Optimization Modeling Book <https://documentation.aimms.com/_downloads/AIMMS_modeling.pdf>`.
+The application examples listed below illustrate the models described in the `AIMMS Optimization Modeling Book <https://documentation.aimms.com/_downloads/AIMMS_modeling.pdf>`_.
 
 .. toctree::
    :maxdepth: 1
