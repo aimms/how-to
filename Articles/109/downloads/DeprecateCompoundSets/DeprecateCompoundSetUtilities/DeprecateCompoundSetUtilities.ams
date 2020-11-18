@@ -475,7 +475,10 @@ LibraryModule DeprecateCompoundSetUtilities {
                     if epSet = 'Integers' then
                     	rval := 'IndexIntegers' ;
                     else
-                    	if identifierType(epSet) <> 'set' then
+                    	if ( identifierType(epSet) <> 'set'      ) and
+                    	   ( identifierType(epSet) <> 'horizon'  ) and
+                    	   ( identifierType(epSet) <> 'calendar' ) 	   then
+                    	   	!DebuggerBreakpoint();
                     		raise error formatString("fncIndexForSet(): the %e is not a set for which an index can be found", epset) ;
                     	endif ;
                     

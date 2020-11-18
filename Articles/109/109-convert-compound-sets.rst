@@ -45,7 +45,7 @@ We provide a library with tools to identify compound sets based on these charact
 
 To identify compound sets in your application, 
 
-#. Download the attached :download:`AIMMS project download <downloads/DeprecateCompoundSets.zip>` and run it using AIMMS 4.54 or more recent.
+#. Download the attached :download:`AIMMS project download <downloads/DeprecateCompoundSets.zip>` and run it using AIMMS 4.54 or more recent but not more recent than AIMMS 4.72.
 
 #. Copy the ``DeprecateCompoundSetUtilities`` library to your AIMMS project.
 
