@@ -1,0 +1,282 @@
+## ams_version=1.0
+
+Model Main_barlegend {
+	Parameter pi {
+		InitialData: 3.14159265359;
+	}
+	Quantity SI_Time_Duration {
+		BaseUnit: s;
+		Conversions: {
+			century->s : #-># * 3153600000,
+			day    ->s : #-># * 86400,
+			hour   ->s : #-># * 3600,
+			minute ->s : #-># * 60,
+			month  ->s : #-># * 2628000,
+			second ->s : #->#,
+			tick   ->s : #-># / 100,
+			week   ->s : #-># * 604800,
+			year   ->s : #-># * 31536000
+		}
+		Comment: "Expresses the value for the duration of periods.";
+	}
+	DeclarationSection Index_link_declarations {
+		Set s_a {
+			Index: i_a;
+			Definition: ElementRange(1,6,prefix:"a");
+		}
+		Set s_b {
+			Index: i_b;
+			Definition: ElementRange(1,7,prefix:"b");
+		}
+		Set s_c {
+			Index: i_c;
+			Definition: {
+				!ElementRange(1,8,prefix:"c")
+				data { cat, camel, caterpillar, centipede, cheetah, chameleon, chicken, 
+				       chinchilla, chipmunk, cobra, cow, crab }
+			}
+		}
+		Parameter bp_a {
+			IndexDomain: i_a;
+			webui::AnnotationsIdentifier: sp_annotA;
+		}
+		Parameter bp_b {
+			IndexDomain: i_b;
+			webui::AnnotationsIdentifier: sp_annotB;
+		}
+		Parameter bp_c {
+			IndexDomain: i_c;
+			webui::AnnotationsIdentifier: sp_annotC;
+		}
+		StringParameter sp_palletteFamily {
+			Definition: "i-want-hue-normal";
+		}
+		StringParameter sp_palletteA {
+			Definition: formatString("%s-%i",sp_palletteFamily,card(s_a));
+		}
+		StringParameter sp_palletteB {
+			Definition: formatString("%s-%i",sp_palletteFamily,card(s_b));
+		}
+		StringParameter sp_palletteC {
+			Definition: formatString("%s-%i",sp_palletteFamily,card(s_c));
+		}
+		StringParameter sp_annotA {
+			IndexDomain: i_a;
+			Definition: {
+				formatString("%s-%i",
+					sp_palletteA,
+					if mod(ord(i_a),p_noCoiorsInPalette) 
+					then mod(ord(i_a),p_noCoiorsInPalette) 
+					else p_noCoiorsInPalette endif)
+			}
+		}
+		StringParameter sp_annotB {
+			IndexDomain: i_b;
+			Definition: {
+				formatString("%s-%i",
+					sp_palletteB,
+					if mod(ord(i_b),p_noCoiorsInPalette) 
+					then mod(ord(i_b),p_noCoiorsInPalette) 
+					else p_noCoiorsInPalette endif)
+			}
+		}
+		StringParameter sp_annotC {
+			IndexDomain: i_c;
+			Definition: {
+				formatString("%s-%i", 
+					sp_palletteC,
+					if mod(ord(i_c),p_noCoiorsInPalette) 
+					then mod(ord(i_c),p_noCoiorsInPalette) 
+					else p_noCoiorsInPalette endif )
+			}
+		}
+	}
+	DeclarationSection Bar_Chart_Declarations {
+		Parameter p_dat {
+			IndexDomain: (i_a,i_b,i_c);
+			webui::AnnotationsIdentifier: sp_annotDat;
+		}
+		StringParameter sp_annotDat {
+			IndexDomain: (i_a,i_b,i_c);
+			Definition: {
+				if bp_coloringAccordingToA then sp_annotA(i_a)
+				elseif bp_coloringAccordingToB then sp_annotB(i_b)
+				else sp_annotC(i_c)
+				endif
+			}
+		}
+	}
+	DeclarationSection Gantt_Chart_Declaration {
+		StringParameter sp_beg {
+			Definition: "2020-01-01 00";
+		}
+		StringParameter sp_end {
+			Definition: {
+				MomentToString(
+					Format        :  "%c%y-%m-%d %H", 
+					unit          :  [hour], 
+					ReferenceDate :  sp_beg, 
+					Elapsed       :  (card(s_a)+card(s_b)-1)[hour])
+			}
+		}
+		Parameter p_start {
+			IndexDomain: (i_a,i_b);
+			Definition: ord(i_a)+ord(i_b)-2;
+		}
+		Parameter p_duration {
+			IndexDomain: (i_a,i_b);
+			Definition: 1;
+			webui::AnnotationsIdentifier: sp_annotGC;
+			webui::ItemTextIdentifier: sp_ascpectC;
+		}
+		StringParameter sp_ascpectC {
+			IndexDomain: (i_a,i_b);
+			Definition: formatString("%e",ep_aspectC(i_a, i_b));
+		}
+		ElementParameter ep_aspectC {
+			IndexDomain: (i_a,i_b);
+			Range: s_c;
+			Definition: Element( s_c, round( uniform( 1, card( s_c ) ) ) );
+		}
+		StringParameter sp_annotGC {
+			IndexDomain: (i_a,i_b);
+			Definition: {
+				if bp_coloringAccordingToA then sp_annotA(i_a)
+				elseif bp_coloringAccordingToB then sp_annotB(i_b)
+				else sp_annotC(ep_aspectC(i_a, i_b))
+				endif
+			}
+		}
+	}
+	DeclarationSection Bubble_Chart_Declarations {
+		Parameter p_pos {
+			IndexDomain: (i_a,i_b);
+			Definition: (ord(i_a)-1) * card(s_b) + ord(i_b) - 1;
+		}
+		Parameter p_x {
+			IndexDomain: (i_a,i_b);
+			Definition: {
+				!p_radius * cos( (p_pos(i_a,i_b)/(card(s_a)*card(s_b)))*2*pi );
+				p_radius * ord(i_a)
+			}
+		}
+		Parameter p_y {
+			IndexDomain: (i_a,i_b);
+			Definition: {
+				!p_radius * sin( (p_pos(i_a,i_b)/(card(s_a)*card(s_b)))*2*pi );
+				p_radius * ord(i_b)
+			}
+		}
+		Parameter p_radius {
+			Definition: 50;
+		}
+		Parameter p_refsize {
+			InitialData: 10;
+		}
+		Parameter p_bubbleSize {
+			IndexDomain: (i_a,i_b);
+			webui::AnnotationsIdentifier: sp_annotGC;
+		}
+	}
+	Section WebUI_Support_Section {
+		DeclarationSection webui_support_declarations {
+			Parameter p_noCoiorsInPalette {
+				Definition: 12;
+			}
+			StringParameter sp_WidgetActions {
+				IndexDomain: (webui::indexWidgetExtension,webui::indexWidgetActionSpec);
+				Definition: {
+					{
+						('1', 'displaytext'): "Coloring according to A",  
+						('1', 'icon'       ): "aimms-pencil",             
+						('1', 'procedure'  ): "pr_coloringAccordingToA",  
+						('1', 'state'      ): "Active", 
+					
+						('2', 'displaytext'): "Coloring according to B",
+						('2', 'icon'       ): "aimms-pencil2",
+						('2', 'procedure'  ): "pr_coloringAccordingToB",
+						('2', 'state'      ): "Active",
+					
+						('3', 'displaytext'): "Coloring according to C",
+						('3', 'icon'       ): "aimms-pencil3",
+						('3', 'procedure'  ): "pr_coloringAccordingToC",
+						('3', 'state'      ): "Active"
+					}
+				}
+			}
+			Parameter bp_coloringAccordingToA {
+				Range: binary;
+				InitialData: 1;
+			}
+			Parameter bp_coloringAccordingToB {
+				Range: binary;
+				InitialData: 0;
+			}
+			Parameter bp_coloringAccordingToC {
+				Range: binary;
+				InitialData: 0;
+			}
+		}
+		Procedure pr_coloringAccordingToA {
+			Body: {
+				bp_coloringAccordingToA := 1;
+				bp_coloringAccordingToB := 0;
+				bp_coloringAccordingToC := 0;
+			}
+		}
+		Procedure pr_coloringAccordingToB {
+			Body: {
+				bp_coloringAccordingToA := 0;
+				bp_coloringAccordingToB := 1;
+				bp_coloringAccordingToC := 0;
+			}
+		}
+		Procedure pr_coloringAccordingToC {
+			Body: {
+				bp_coloringAccordingToA := 0;
+				bp_coloringAccordingToB := 0;
+				bp_coloringAccordingToC := 1;
+			}
+		}
+	}
+	Section Application_initialization_execution_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Body: {
+				p_dat(i_a, i_b, i_c) := uniform(1,2);
+				p_bubbleSize(i_a, i_b) := uniform(0.3,0.99);
+				bp_a(i_a) := 1 ;
+				bp_b(i_b) := 1 ;
+				bp_c(i_c) := 1 ;
+			}
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure MainExecution;
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+}

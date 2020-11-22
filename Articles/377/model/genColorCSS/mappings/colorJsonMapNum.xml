@@ -1,0 +1,5 @@
+<AimmsJSONMapping>
+    <ArrayMapping iterative-reset="1">
+        <ValueMapping iterative-binds-to="i_colorNo" maps-to="p_colorCode(i_colorNo)"/>
+    </ArrayMapping>
+</AimmsJSONMapping>
