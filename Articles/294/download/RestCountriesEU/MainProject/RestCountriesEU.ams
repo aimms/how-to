@@ -1,0 +1,185 @@
+## ams_version=1.0
+
+Model Main_RestCountriesEU {
+	DeclarationSection Country_Data_declarations {
+		Set s_countries {
+			Index: i_country;
+			webui::ElementTextIdentifier: sp_names;
+		}
+		Set s_countryAttributes {
+			Index: i_ca;
+		}
+		StringParameter sp_countryAttributes {
+			IndexDomain: (i_country,i_ca);
+		}
+		Parameter p_countryAttributes {
+			IndexDomain: (i_country,i_ca);
+		}
+		Set s_domainNumbers {
+			SubsetOf: Integers;
+			Index: i_domainNumber;
+		}
+		Set s_alternativeNumbers {
+			SubsetOf: Integers;
+			Index: i_alternative;
+		}
+		Set s_languageAttributes {
+			Index: i_la;
+		}
+		Set s_currencyAttributes {
+			Index: i_cura;
+		}
+		StringParameter sp_languageAttributes {
+			IndexDomain: (i_country,i_domainNumber,i_la);
+		}
+		StringParameter sp_currencyAttributes {
+			IndexDomain: (i_country,i_domainNumber,i_curA);
+		}
+		StringParameter sp_topLevelDomain {
+			IndexDomain: (i_country,i_domainNumber);
+		}
+		StringParameter sp_callingCodes {
+			IndexDomain: (i_country,i_domainNumber);
+		}
+		StringParameter sp_altSpellings {
+			IndexDomain: (i_country,i_domainNumber);
+		}
+		StringParameter sp_timezones {
+			IndexDomain: (i_country,i_domainNumber);
+		}
+		StringParameter sp_borders {
+			IndexDomain: (i_country,i_domainNumber);
+		}
+		StringParameter sp_regionalBlockAcronym {
+			IndexDomain: (i_country,i_domainNumber);
+		}
+		StringParameter sp_regionalBlockName {
+			IndexDomain: (i_country,i_domainNumber);
+		}
+		StringParameter sp_otherRegionalBlockAcronyms {
+			IndexDomain: (i_country,i_domainNumber,i_alternative);
+		}
+		StringParameter sp_otherRegionalBlockNames {
+			IndexDomain: (i_country,i_domainNumber,i_alternative);
+		}
+		Parameter p_latlng {
+			IndexDomain: (i_country,i_domainNumber);
+		}
+		Set s_translationLanguages {
+			Index: i_tl;
+		}
+		StringParameter sp_translations {
+			IndexDomain: (i_country,i_tl);
+		}
+	}
+	DeclarationSection Country_WebUI_Declarations {
+		StringParameter sp_names {
+			IndexDomain: i_country;
+			Definition: sp_countryAttributes(i_country, 'name');
+		}
+		StringParameter sp_topLevelDomain1 {
+			IndexDomain: (i_country);
+			Definition: sp_topLevelDomain(i_country, '1');
+		}
+		StringParameter sp_topLevelDomain2 {
+			IndexDomain: (i_country);
+			Definition: sp_topLevelDomain(i_country, '2');
+		}
+		StringParameter sp_topLevelDomain3 {
+			IndexDomain: (i_country);
+			Definition: sp_topLevelDomain(i_country, '3');
+		}
+	}
+	DeclarationSection http_work_declrations {
+		StringParameter sp_countryDataAsJSONFile;
+		StringParameter sp_jsonAsText;
+	}
+	StringParameter sp_requestURL;
+	StringParameter sp_requestId;
+	StringParameter sp_httpRequestHeaders {
+		IndexDomain: web::httpHeader;
+	}
+	StringParameter sp_httpResponseHeaders {
+		IndexDomain: web::httpHeader;
+	}
+	Parameter p_responseCode;
+	Procedure pr_handleHttpRequest {
+		Body: {
+			sp_requestURL:="https://restcountries.eu/rest/v2/all";
+			sp_countryDataAsJSONFile:="country.json";
+			
+			! structure request
+			web::request_create(sp_requestId);
+			web::request_setURL(sp_requestId,SP_requestURL );
+			web::request_setMethod(sp_requestId, "GET");
+			
+			! header
+			web::request_getHeaders(sp_requestId, sp_httpRequestHeaders); ! Get current headers
+			!sp_httpRequestHeaders['Accept'] := "application/json";         ! Override header entry 'accept'
+			!sp_httpRequestHeaders['Content-Type'] := "application/json";         ! Override header entry 'accept'
+			web::request_setHeaders(sp_requestId, sp_httpRequestHeaders); ! Set current headers
+			
+			!!output file
+			web::request_setResponseBody(sp_requestId, 'File', sp_countryDataAsJSONFile);
+			!sp_jsonAsText
+			!web::request_setResponseBody(sp_requestId,
+			
+			!invoke method
+			web::request_invoke(sp_requestId, p_responseCode);
+			if (p_responseCode <> 200) then
+			    raise error formatString("Web Request failed, response code = %i.", p_responseCode);
+			endif;
+			web::request_getResponseHeaders(sp_requestId, sp_httpResponseHeaders);
+		}
+	}
+	Procedure pr_storeJsonDataInCountryIdentifiers {
+		Body: {
+			dex::AddMapping(
+				mappingName :  "countryMapping", 
+				mappingFile :  "mappings\\countryMapping.xml");
+			dex::ReadFromFile(
+				dataFile         :  "country.json",  ! from Postman!
+				mappingName      :  "countryMapping", 
+				emptyIdentifiers :  0, 
+				resetCounters    :  1);
+		}
+	}
+	Section Application_initialization_execution_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure MainExecution {
+			Body: {
+				pr_handleHttpRequest();
+				pr_storeJsonDataInCountryIdentifiers();
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+}

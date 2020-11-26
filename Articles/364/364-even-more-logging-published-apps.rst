@@ -4,7 +4,7 @@ More logging of WinUI Published Applications
 To obtain more logging from a published WinUI application, the following steps are needed:
 
 #.  Run the application without logging, when this isn't done yet.
-    This will ensure that an encrypted copy of the publshed project is on the laptop of the enduser.
+    This will ensure that an encrypted copy of the published project is on the laptop of the end-user.
 
 #.  Ensure that the folder ``c:\temp`` exists.  This is the folder in which the log files will be placed.
 

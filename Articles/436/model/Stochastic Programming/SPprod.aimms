@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<References AIMMS_Version="4.61.2.2 (x64)">
+	<MainProject Path="MainProject" />
+	<Library Path="Scenario Tree Generation" />
+	<Library Path="_Example Style Library" />
+</References>

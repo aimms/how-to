@@ -7,7 +7,7 @@
 Overview
 ---------
 
-In AIMMS 4.68 we released the `Page Actions <https://manual.aimms.com/webui/page-settings.html#page-actions>`_ feature. This was previously offered as an experimental feature before its official release. 
+In AIMMS 4.68 we released the `Page Actions <https://documentation.aimms.com/webui/page-settings.html#page-actions>`_ feature. This was previously offered as an experimental feature before its official release. 
 
 The new version gives several benefits over the experimental version, including the following capabilities:
 
@@ -47,4 +47,4 @@ A quick way to get this data is to use the ``webui.json`` file.
 
 Once the string parameters are configured with index ``webui::indexPageActionSpec``, the Page Actions V1 will be overridden by the Page Actions V2 specified in the string parameter.
 
-Please refer to `AIMMS Documentation: Page Actions <https://manual.aimms.com/webui/page-settings.html#page-actions>`_ for further details about this feature.
+Please refer to `AIMMS Documentation: Page Actions <https://documentation.aimms.com/webui/page-settings.html#page-actions>`_ for further details about this feature.

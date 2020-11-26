@@ -5,15 +5,22 @@ Get More Log Information
    :description: This article explains how to increase the amount of log information.
    :keywords: log, troubleshoot
 
-As a modeler, you can find :doc:`detailed logs <../313/313-get-log-files>` to analyze an issue before reporting it to `AIMMS User Support <https://www.aimms.com/english/developers/support/report-issue/>`_ or on the `AIMMS Community <https://community.aimms.com/>`_.
+
+As a modeler, you can find :doc:`detailed logs <../313/313-get-log-files>` to analyze an issue before reporting it to `AIMMS User Support <https://www.aimms.com/support/#were-here-for-you>`_ or on the `AIMMS Community <https://community.aimms.com/>`_.
 
 AIMMS comes with loggers, a logging feature somewhat similar to the `log4j <https://logging.apache.org/log4j/2.x/>`_ technology.
+
+.. note:: 
+
+    The AIMMS log files are created by AIMMS staff and designed to be interpreted by AIMMS staff. 
+    The meaning of log entries may not be obvious. 
+    An error or warning message in the log file does NOT necessarily indicate a problem in the application. 
 
 A good tactic for analyzing these logs is to scan for ``[ERROR]`` or ``[WARN]``. 
 When an error or warning is related to the issue you are analyzing, check the lines just above it.
 
 
-Note that the AIMMS log files are designed to be interpreted by AIMMS staff, and their meaning is not always obvious. However, an error or warning message itself does NOT necessarily indicate a problem in the application. 
+
 
 This article provides two files that are templates in creating this information:
 

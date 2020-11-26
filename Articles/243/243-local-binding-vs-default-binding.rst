@@ -5,12 +5,6 @@ Local Binding vs. Default Binding
    :description: A comparison of two kinds of index binding.
    :keywords: index, binding, for statement, iterative operator
 
-
-
-.. <link>https://berthier.design/aimmsbackuptech/2012/09/13/local-binding-vs-default-binding/</link>
-.. <pubDate>Thu, 13 Sep 2012 00:18:17 +0000</pubDate>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=1889</guid>
-
 .. image:: images/rootSetSubset.png
 
 In this article we will compare two ways of defining index binding: local binding and default binding.

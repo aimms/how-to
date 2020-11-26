@@ -9,9 +9,6 @@ Color a Map with Constraint Programming
 
     This article was originally posted to the AIMMS Tech Blog.
 
-.. <link>https://berthier.design/aimmsbackuptech/2012/12/05/coloring-the-states-of-the-usa/</link>
-.. <pubDate>Wed, 05 Dec 2012 14:28:44 +0000</pubDate>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=2303</guid>
 
 .. figure:: images/United_States_orthographic.png
 
@@ -49,7 +46,7 @@ AIMMS offers an easy way to present the solution: just right-click on the variab
 
 In order to get a solution that can be more easily inspected, we should actually draw the map.
 
-Luckily, the `AIMMS GIS Support example <https://aimms.com/english/developers/resources/examples/functional-examples/gis/>`_ already contains a lot of GIS data about the states of the USA in the folder "US States GML Files", which we will use here.
+Luckily, the  :doc:`AIMMS GIS Support example<../418/418-gis-support>` already contains a lot of GIS data about the states of the USA in the folder "US States GML Files", which we will use here.
 
 Next, you should create a network object without any nodes or arcs; we are interested in its background. Initially, to view the entire world, the visible area and bounds are set to: left: -180, right: 180, top 90, bottom -90. More appropriate bounds can be set later on. In addition, remove the check mark on equal X and Y scale, otherwise these bounds will continue to be adapted to the actual aspect ratio of the object on screen.
 

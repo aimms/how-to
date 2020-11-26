@@ -1,0 +1,182 @@
+## ams_version=1.0
+
+Model Main_GenerateDataForSupportPlanning {
+	Convention: cnv_utc;
+	Procedure Procedure_1 {
+		Body: {
+			display ep_tzMumbai;
+		}
+	}
+	Parameter p_yearNo {
+		InitialData: 3;
+	}
+	StringParameter sp_timeslotFormat {
+		Definition: "%c%y-%m-%d %H:%M%TZ(ep_tzUTC)";
+	}
+	Quantity SI_Time_Duration {
+		BaseUnit: s;
+		Conversions: {
+			century->s : #-># * 3153600000,
+			day    ->s : #-># * 86400,
+			hour   ->s : #-># * 3600,
+			minute ->s : #-># * 60,
+			month  ->s : #-># * 2628000,
+			second ->s : #->#,
+			tick   ->s : #-># / 100,
+			week   ->s : #-># * 604800,
+			year   ->s : #-># * 31536000
+		}
+		Comment: "Expresses the value for the duration of periods.";
+	}
+	StringParameter sp_begYear {
+		Definition: formatString("20%02i-01-01 00:00",p_yearNo);
+	}
+	StringParameter sp_endYear {
+		Definition: formatString("20%02i-01-01 00:00",p_yearNo+1);
+		Comment: "timeslotCharacteristic";
+	}
+	Calendar cal_workBlocks {
+		Index: i_workBlock;
+		Unit: 240 * minute;
+		BeginDate: sp_begYear;
+		EndDate: sp_endYear;
+		TimeslotFormat: sp_timeslotFormat;
+	}
+	Calendar cal_minutes {
+		Index: i_minute;
+		Parameter: ep_minute;
+		Unit: minute;
+		BeginDate: "2020-01-01 00:00";
+		EndDate: "2021-01-01 00:00";
+		TimeslotFormat: sp_timeslotFormat;
+	}
+	Parameter p_noMinutes {
+		Definition: card( cal_minutes );
+	}
+	Convention cnv_utc {
+		TimeslotFormat: {
+			!cal_Slots      : "%c%y-%m-%d %H:%M%TZ(ep_tzUTC)",
+			cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(ep_tzUTC)"
+		}
+		Comment: "\"%c%y-%m-%d %H:%M%TZ(\'UTC\')\"";
+	}
+	Convention cnv_newZealand {
+		TimeslotFormat: {
+			!!cal_Slots      : "%c%y-%m-%d %H:%M%TZ(ep_tzNewZealand)",
+			cal_workBlocks : "%c%y-%m-%d %H:%M%TZ(ep_tzNewZealand)"
+		}
+		Comment: "\"%c%y-%m-%d %H:%M%TZ(\'UTC\')\"";
+	}
+	ElementParameter ep_tzNewZealand {
+		Range: AllTimeZones;
+		Definition: 'New Zealand Standard Time';
+	}
+	ElementParameter ep_tzMumbai {
+		Range: AllTimeZones;
+		Definition: 'India Standard Time';
+	}
+	ElementParameter ep_tzUTC {
+		Range: AllTimeZones;
+		Definition: 'UTC';
+	}
+	Parameter p {
+		Definition: card( cal_workBlocks );
+	}
+	StringParameter sp_connStr;
+	Parameter p_testdb;
+	Parameter p_day {
+		IndexDomain: i_workBlock;
+	}
+	Parameter p_demand {
+		IndexDomain: (i_workBlock);
+	}
+	Parameter p_dt {
+		IndexDomain: i_workBlock;
+		Definition: p_demand(i_workBlock);
+	}
+	Set s_Certifications {
+		Index: i_certification;
+		Definition: data { a, b, c, d, e };
+	}
+	Index i_cert {
+		Range: s_Certifications;
+	}
+	DatabaseTable db_Demand {
+		DataSource: sp_connStr;
+		TableName: "expected-demand-in-new-zealand-standard-time";
+		Convention: cnv_newZealand;
+		Mapping: {
+			"workblock"     --> i_workBlock,
+			"demand"        --> p_demand( i_workBlock )
+		}
+	}
+	Procedure pr_Test {
+		Body: {
+			pr_Connect();
+			pr_GenData();
+			pr_writeData();
+		}
+	}
+	Procedure pr_Connect {
+		Body: {
+			!MySQL::pr_connectionString(sp_connStr);
+			!sp_connStr := "data/newZealand.dsn";
+			sp_connStr := "data/nz.dsn";
+			p_testdb := TestDataSource(sp_connStr);
+			if not p_testdb then
+				raise error "unable to connect to database";
+			endif ;
+		}
+	}
+	Procedure pr_GenData {
+		Body: {
+			p_day(i_workblock) := TimeslotCharacteristic(
+				Timeslot       :  i_workblock, 
+				Characteristic :  'weekday', 
+				Timezone       :  'UTC', 
+				IgnoreDST      :  0);
+			p_demand(i_workBlock ) := 
+				if p_day(i_workBlock) <= 2 then 3
+				elseif p_day(i_workBlock) <= 5 then 2
+				else 1 endif ;
+		}
+	}
+	Procedure pr_writeData {
+		Body: {
+			write to table db_Demand ;
+		}
+	}
+	Section Application_initialization_execution_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure MainExecution;
+		Procedure PreMainTermination {
+			Body: {
+				return 1; ! This app doesn't use cases.
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+}

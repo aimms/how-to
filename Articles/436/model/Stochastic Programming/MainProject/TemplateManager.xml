@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<TemplateManager>
+	<Template Name="Size Template" PageGUID="711A8840-FB63-49D3-B49A-63CD297D1659" CrossLibraryDuplicate="66E08D8C-5677-49B5-970F-BB85475A48BE|6A8815C4-5811-47AB-BC76-82C3180C1295|Size Template">
+		<Template Name="Navigation Template" PageGUID="86C31DAB-882B-4B6B-8909-A66A672F6405" CrossLibraryDuplicate="66E08D8C-5677-49B5-970F-BB85475A48BE|3241DDB1-55C5-441B-9DC8-359086631B74|Navigation Template">
+			<Template Name="Background Info Template" PageGUID="D4CB2E6F-A506-4D21-8EA4-2AC664454BF5" CrossLibraryDuplicate="66E08D8C-5677-49B5-970F-BB85475A48BE|153A8CDB-E916-4F3B-B652-41C25F2C9CB5|Background Info Template">
+				<Page Name="AIMMS Demo" PageGUID="E7E59F17-3865-4E42-B596-4365EC81306D" />
+			</Template>
+			<Page Name="Stochastic Production Planning" PageGUID="A10D5AD4-36D1-4D9D-BC66-35FB587CA964" />
+			<Page Name="Scenario Tree View" PageGUID="CB5226B5-BA8F-4E1C-A78D-F1F79CC30978" />
+		</Template>
+	</Template>
+</TemplateManager>

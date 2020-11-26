@@ -1,0 +1,28 @@
+ 
+ 
+    C O N O P T 3   version 3.14V
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+    The model has 21 variables and 57 constraints
+    with 221 Jacobian elements, 200 of which are nonlinear.
+    The Hessian of the Lagrangian has 20 elements on the diagonal,
+    190 elements below the diagonal, and 20 nonlinear variables.
+ 
+ ** Warning **  The variance of the derivatives in the initial
+                point is large (= 4.6 ). A better initial
+                point, a better scaling, or better bounds on the
+                variables will probably help the optimization.
+ 
+ 
+ ** Optimal solution. Reduced gradient less than tolerance.
+ 
+ 
+ CONOPT time Total                            0.017 seconds
+   of which: Function evaluations             0.000 =  0.0%
+             1st Derivative evaluations       0.000 =  0.0%
+             2nd Derivative evaluations       0.000 =  0.0%
+             Directional 2nd Derivative       0.001 =  5.9%
+ 

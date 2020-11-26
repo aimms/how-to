@@ -1,0 +1,6 @@
+﻿sp_dateTimeFormatsWebUI := data {
+    'W. Europe Standard Time'         : "%d.%m.%c%y %H:%M%TZ(webui::DisplayTimeZone)|\"\"|\" DST\"|",
+    'North Asia East Standard Time'   : "%d.%m.%c%y %H:%M%TZ(webui::DisplayTimeZone)|\"\"|\" DST\"|",
+    'Central Brazilian Standard Time' : "%d/%m/%c%y %H:%M%TZ(webui::DisplayTimeZone)|\"\"|\" DST\"|",
+    'Pacific SA Standard Time'        : "%d/%m/%c%y %H:%M%TZ(webui::DisplayTimeZone)|\"\"|\" DST\"|"
+} ;

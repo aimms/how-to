@@ -42,7 +42,7 @@ With the error handling, you can catch this division-by-zero error and tell the 
 
 Error handling functionality in AIMMS is in the scope of the predefined module ``ErrorHandling`` with the prefix ``errh::``. 
 
-First, introduce a new element parameter with range ``errh::PendingErrors``. This element parameter can be declared locally for the procedure or globally in any declaration section.
+First, introduce a new element parameter with range :any:`errh::PendingErrors`. This element parameter can be declared locally for the procedure or globally in any declaration section.
 
 Once that's done, you can catch errors and provide custom error messages:
 
@@ -87,7 +87,7 @@ Related resources
 
   * :doc:`../265/265-settings-for-errors-and-warnings`
 
-  * `AIMMS example model <https://www.aimms.com/english/developers/resources/examples/functional-examples/error-handling/>`_
+  * :doc:`Error handling example model <../414/414-error-handling/>`
   
   * Chapter "Raising and handling warnings and errors" of the `AIMMS Language Reference <https://download.aimms.com/aimms/download/manuals/AIMMS3LR_ExecutionStatements.pdf>`_
 

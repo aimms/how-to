@@ -8,33 +8,33 @@ Model Main_Flow_Shop {
     Section Superfluous_Data {
         Procedure pr_fillDummy {
             Body: {
-                p_Dummy(i_d1, i_d2, i_d3):=(ord(i_d1)*ord(i_d2)*ord(i_d3))/(ord(i_d1)+ord(i_d2)+ord(i_d3));
+                p_dummy(i_d1, i_d2, i_d3):=(ord(i_d1)*ord(i_d2)*ord(i_d3))/(ord(i_d1)+ord(i_d2)+ord(i_d3));
             }
         }
-        Parameter p_DummySize {
+        Parameter p_dummySize {
             InitialData: {
                 ! 499 ! Set to 499 to generate 800+ Mb files ;-)
                 9 ! To get small amount of overhead.
             }
         }
-        Set s_Dummy {
+        Set s_dummy {
             SubsetOf: Integers;
             Index: i_d, i_d1, i_d2, i_d3;
-            Definition: ELementRange(0,p_DummySize);
+            Definition: ELementRange(0,p_dummySize);
         }
-        Parameter p_Dummy {
+        Parameter p_dummy {
             IndexDomain: (i_d1,i_d2,i_d3);
         }
-        Procedure pr_SaveSeemProCase {
+        Procedure pr_saveSeemProCase {
             Body: {
-                s_InputCaseIdentifierSet := 
+                s_inputCaseIdentifierSet := 
                     pro::ManagedSessionInputCaseIdentifierSet - 
                     pro::ManagedSessionRemoveFromCaseIdentifierSet ;
                 CaseFileSave(
                     url      :  "testcase.data", 
-                    contents :  s_InputCaseIdentifierSet);
+                    contents :  s_inputCaseIdentifierSet);
             }
-            Set s_InputCaseIdentifierSet {
+            Set s_inputCaseIdentifierSet {
                 SubsetOf: AllIdentifiers;
             }
         }
@@ -53,42 +53,42 @@ Model Main_Flow_Shop {
         Section Gantt_Chart {
             Procedure pr_prepInterface {
                 Body: {
-                    p_GCJobStart(j,m)  := v_StartTime( first(s | v01_JobSchedule(j,s)),m);
-                    p_GCJobDuration(j,m) := p_ProcesTime(j,m);
+                    p_gcJobStart(j,m)  := v_startTime( first(s | bv_jobSchedule(j,s)),m);
+                    p_gcJobDuration(j,m) := p_procesTime(j,m);
                 }
             }
-            StringParameter sp_RefTime {
+            StringParameter sp_refTime {
                 Definition: "2000-01-01 01:01:01";
             }
             StringParameter sp_EndTime {
                 Definition: "2000-01-07 01:01:01";
             }
-            Parameter p_GCJobStart {
+            Parameter p_gcJobStart {
                 IndexDomain: (j,m);
             }
-            Parameter p_GCJobDuration {
+            Parameter p_gcJobDuration {
                 IndexDomain: (j,m);
             }
-            StringParameter sp_JobDescription {
+            StringParameter sp_jobDescription {
                 IndexDomain: (j);
                 Text: "Description of jobs that can be used inside the Gantt Chart";
                 Definition: {
                     FormatString("J%i", ord(j));
                 }
             }
-            StringParameter sp_MachineDescription {
+            StringParameter sp_machineDescription {
                 IndexDomain: (m);
                 Text: "Description of machines that can be used inside the Gantt Chart";
                 Definition: {
                     FormatString("M%i", ord(m));
                 }
             }
-            Set s_GCWidgetActionNumbers {
+            Set s_gcWidgetActionNumbers {
                 SubsetOf: Integers;
                 Index: i_gcwan;
                 Definition: ElementRange(1,9);
             }
-            StringParameter sp_GCWidgetActions {
+            StringParameter sp_gcWidgetActions {
                 IndexDomain: (i_gcwan,webui::indexWidgetActionSpec);
                 Definition: {
                     data { 
@@ -101,75 +101,75 @@ Model Main_Flow_Shop {
             }
         }
     }
-    Parameter p_MaxJobs {
+    Parameter p_maxJobs {
         Text: "Number of elements in the set Jobs";
         Range: integer;
     }
-    Set s_Jobs {
+    Set s_jobs {
         Text: "Set of all Jobs";
         Index: j, j2;
         Definition: {
-            ElementRange(1,p_MaxJobs, prefix: "Job-");
+            ElementRange(1,p_maxJobs, prefix: "Job-");
         }
     }
-    Set s_Schedules {
+    Set s_schedules {
         Text: "Set of all schedules";
         Index: s;
         Definition: {
-            ElementRange(1,p_MaxJobs, prefix: "Pos-");
+            ElementRange(1,p_maxJobs, prefix: "Pos-");
         }
     }
-    Parameter p_MaxMachines {
+    Parameter p_maxMachines {
         Text: "Number of elements in the set Machines";
         Range: integer;
     }
-    Set s_Machines {
+    Set s_machines {
         Text: "Set of all machines";
         Index: m;
         Definition: {
-            ElementRange(1,p_MaxMachines, prefix: "M-");
+            ElementRange(1,p_maxMachines, prefix: "M-");
         }
     }
-    Parameter p_ProcesTime {
+    Parameter p_procesTime {
         IndexDomain: (j,m);
         Text: "Time required to process job j on machine m";
     }
-    Variable v01_JobSchedule {
+    Variable bv_jobSchedule {
         IndexDomain: (j,s);
         Text: "Determining the place of the job";
         Range: binary;
     }
-    Variable v_StartTime {
+    Variable v_startTime {
         IndexDomain: (s,m);
         Text: "The time at which job in schedule position s commences processing on machine m";
         Range: nonnegative;
     }
-    Constraint c_OneJobPerSchedule {
+    Constraint c_oneJobPerSchedule {
         IndexDomain: (s);
         Text: "Only one job is related to every schedule";
-        Definition: sum(j, v01_JobSchedule(j,s)) = 1;
+        Definition: sum(j, bv_jobSchedule(j,s)) = 1;
     }
-    Constraint c_OneSchedulePerJob {
+    Constraint c_oneSchedulePerJob {
         IndexDomain: (j);
         Text: "Only one schedule is related to every job";
-        Definition: sum(s, v01_JobSchedule(j,s)) = 1;
+        Definition: sum(s, bv_jobSchedule(j,s)) = 1;
     }
-    Constraint c_MachineStartTime {
-        IndexDomain: (s,m) | m <> last(s_Machines);
+    Constraint c_machineStartTime {
+        IndexDomain: (s,m) | m <> last(s_machines);
         Text: "The commencement of schedule s on machine m+1 is no earlier then its finish on machine m";
-        Definition: v_StartTime(s,m + 1) >=  v_StartTime(s,m) + sum(j, p_ProcesTime(j,m)*v01_JobSchedule(j,s));
+        Definition: v_startTime(s,m + 1) >=  v_startTime(s,m) + sum(j, p_procesTime(j,m)*bv_jobSchedule(j,s));
     }
-    Constraint c_ScheduleStartTime {
-        IndexDomain: (s,m) | s <> last(s_Schedules);
+    Constraint c_scheduleStartTime {
+        IndexDomain: (s,m) | s <> last(s_schedules);
         Text: "The commencement of schedule s + 1 on machine m is no earlier then the finish time of job j on machine m";
-        Definition: v_StartTime(s + 1,m) >=  v_StartTime(s,m) + sum(j, p_ProcesTime(j,m)*v01_JobSchedule(j,s));
+        Definition: v_startTime(s + 1,m) >=  v_startTime(s,m) + sum(j, p_procesTime(j,m)*bv_jobSchedule(j,s));
     }
-    Variable v_TimeSpan {
+    Variable v_timeSpan {
         Text: "Total time to process all jobs on all machines";
-        Definition: v_StartTime(Last(s),last(m)) + sum(j, p_ProcesTime(j,last(m))*v01_JobSchedule(j,Last(s)));
+        Definition: v_startTime(Last(s),last(m)) + sum(j, p_procesTime(j,last(m))*bv_jobSchedule(j,Last(s)));
     }
-    MathematicalProgram mp_FlowShopModel {
-        Objective: v_TimeSpan;
+    MathematicalProgram mp_flowShopModel {
+        Objective: v_timeSpan;
         Direction: minimize;
         Constraints: AllConstraints;
         Variables: AllVariables;
@@ -184,10 +184,10 @@ Model Main_Flow_Shop {
             Body: {
                 pr_fillDummy();
                 
-                p_MaxJobs 	:= 4;
-                p_MaxMachines 	:= 8;
+                p_maxJobs 	:= 4;
+                p_maxMachines 	:= 8;
                 
-                pr_GenerateData;
+                pr_generateData;
             }
         }
         Procedure MainExecution;
@@ -202,24 +202,24 @@ Model Main_Flow_Shop {
             }
         }
     }
-    Procedure pr_GenerateData {
+    Procedure pr_generateData {
         Body: {
-            p_ProcesTime(j,m) := round(Uniform(1,20));
+            p_procesTime(j,m) := round(Uniform(1,20));
         }
     }
-    Procedure pr_WorkSolve {
+    Procedure pr_workSolve {
         Body: {
             gss::pr_AppendMessage(
             	FormatString("Going to solve flowshop for %i jobs on %i machines",
-            		p_MaxJobs, p_MaxMachines));
+            		p_maxJobs, p_maxMachines));
             !delay(1);
             
             Empty AllVariables;
-            pr_GenerateData();
+            pr_generateData();
             
             raise warning "Cry wolf." ;
             
-            solve mp_FlowShopModel  ;
+            solve mp_flowShopModel  ;
             
             raise warning "Hi, hi, false alarm.";
             
@@ -233,10 +233,10 @@ Model Main_Flow_Shop {
             
             gss::pr_AppendMessage(
             	FormatString("Finished solving flowshop for %i jobs on %i machines",
-            		p_MaxJobs, p_MaxMachines));
+            		p_maxJobs, p_maxMachines));
         }
     }
-    Procedure pr_Solve {
+    Procedure pr_solve {
         Body: {
             if pro::GetPROEndPoint() then
             	if pro::DelegateToServer( waitForCompletion  :  1, 
@@ -248,9 +248,9 @@ Model Main_Flow_Shop {
             gss::pr_GuardAndProfileServerJob( 'pr_WorkSolve' );
         }
     }
-    Procedure pr_BtnSolve {
+    Procedure pr_btnSolve {
         Body: {
-            pr_Solve();
+            pr_solve();
         }
     }
 }

@@ -9,10 +9,6 @@ Automatic Benders’ decomposition
 
 	This article was originally posted to the AIMMS Tech Blog.
 
-.. <link>https://berthier.design/aimmsbackuptech/2013/01/08/benders-decomposition-aimms-beta-version-available/</link>
-.. <pubDate>Tue, 08 Jan 2013 13:52:32 +0000</pubDate>
-.. <dc:creator><![CDATA[]]></dc:creator>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=2497</guid>
 
 
 `Benders’ decomposition <https://en.wikipedia.org/wiki/Benders%27_decomposition>`_ is an approach to solve complicated mathematical programming problems by splitting them into two, and thereby simplifying the solution process by (repeatedly) solving one master problem and one subproblem. If the problem contains integer variables then typically they become part of the master problem while the continuous variables become part of the subproblem. The classic approach of the Benders’ decomposition algorithm solves an alternating sequence of master problems and subproblems. Benders’ decomposition is mostly used for solving difficult MIP problems and stochastic programming problems.

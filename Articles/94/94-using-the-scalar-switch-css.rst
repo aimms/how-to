@@ -84,10 +84,10 @@ You will need an additional CSS snippet to properly render the switch in compact
 
 Related Topics
 -----------------
-* **AIMMS Documentation:** `Widget Options <https://manual.aimms.com/webui/widget-options.html>`_
-* **AIMMS Documentation:** `Scalar Widget <https://manual.aimms.com/webui/scalar-widget.html>`_
+* **AIMMS Documentation:** `Widget Options <https://documentation.aimms.com/webui/widget-options.html>`_
+* **AIMMS Documentation:** `Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_
 
-.. * **AIMMS Documentation:** `Developing Custom Widgets <https://manual.aimms.com/webui/own-widgets.html>`_
+.. * **AIMMS Documentation:** `Developing Custom Widgets <https://documentation.aimms.com/webui/own-widgets.html>`_
 
 .. END CONTENT
 

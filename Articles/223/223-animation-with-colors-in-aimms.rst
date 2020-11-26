@@ -5,11 +5,6 @@ Animation with colors in AIMMS
 =====================================
 
 
-..       <link>https://berthier.design/aimmsbackuptech/2013/04/02/animation-with-colors-in-aimms/</link>
-..       <pubDate>Tue, 02 Apr 2013 13:06:06 +0000</pubDate>
-..       <dc:creator><![CDATA[]]></dc:creator>
-..       <guid isPermaLink="false">http://blog.aimms.com/?p=2803</guid>
-
 
 In this Article, we will show how you can use the user color related
 functions UserColorAdd and UserColorDelete in AIMMS to create an
@@ -25,7 +20,7 @@ green.
 
 By letting each point take the next color in every iteration of the
 animation, you end up with an animation. You can generate user colors
-programmatically with the intrinsic procedure ``UserColorAdd``. This
+programmatically with the intrinsic procedure :any:`UserColorAdd`. This
 procedure takes 4 arguments: the first one is the name of the new user
 color and the other three arguments are the values for the
 Red/Green/Blue components (all values between 0 and 255).

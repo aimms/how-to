@@ -73,7 +73,7 @@ Some remarks on the above:
 #.  Lines 14-16. This example shows all days in a particular year, so the year number is the actual input.
 
 #.  Lines 17-19. The calendar begin date is captured by the string parameter ``sp_CalBeg``. 
-    It captures the first day of the year specified by the year number ``p_YearNumber``, so it is easily defined using ``FormatString``.
+    It captures the first day of the year specified by the year number ``p_YearNumber``, so it is easily defined using :any:`FormatString`.
 
 #.  Lines 20-22. The calendar end date is defined similarly via the string parameter ``sp_CalEnd``.
 
@@ -119,13 +119,13 @@ This is achieved because the calendar timeslots are mapped onto date/time fields
 Using current time
 ------------------
 
-AIMMS provides two functions to obtain the current time: ``CurrentToString`` and ``CurrentToTimeslot``.
+AIMMS provides two functions to obtain the current time: :any:`CurrentToString` and ``CurrentToTimeslot``.
 The difference is that the one is resulting in a string, the other a timeslot. Both are useful for our running example.
 
 Initializing the current year
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
-The function ``CurrentToString`` returns the current date/time formatted according its argument. 
+The function :any:`CurrentToString` returns the current date/time formatted according its argument. 
 So the current year can be initialized by the following statement:
 
 .. code-block:: aimms
@@ -134,18 +134,18 @@ So the current year can be initialized by the following statement:
 
 in the procedure ``MainInitialization``.
 
-Further information about the function ``CurrentToString`` can be found in AIMMS The Function Reference.
+Further information about the function :any:`CurrentToString` can be found in AIMMS The Function Reference.
 
 Obtaining the current day as element in Calendar
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The function ``CurrentToTimeSlot`` returns the timeslot in which we are "now" as illustrated in the next statement:
+The function :any:`CurrentToTimeSlot` returns the timeslot in which we are "now" as illustrated in the next statement:
 
 .. code-block:: aimms
 
     ep_day := CurrentToTimeSlot(Calendar : cal_daysInYear );
 
-Further information about the function ``CurrentToTimeSlot`` can be found in AIMMS The Function Reference.
+Further information about the function :any:`CurrentToTimeSlot` can be found in AIMMS The Function Reference.
 
 Creating subsets of a calendar based on characteristics of the timeslot
 ------------------------------------------------------------------------

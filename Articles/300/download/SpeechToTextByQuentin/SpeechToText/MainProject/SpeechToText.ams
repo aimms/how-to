@@ -1,0 +1,53 @@
+## ams_version=1.0
+
+Model Main_SpeechToText {
+    Parameter P_responseCode;
+    StringParameter SP_Coption {
+        IndexDomain: op;
+    }
+    Set S_Clientop {
+        Index: op;
+        Definition: DATA {requestTimeout};
+    }
+    StringParameter SP_requestId;
+    StringParameter SP_requestURI;
+    StringParameter SP_myHttpHeaders {
+        IndexDomain: web::httpHeader;
+    }
+    StringParameter SP_responseFileName;
+    StringParameter SP_requestFileName;
+    StringParameter SP_apikey;
+    StringParameter SP_authorization;
+    Procedure FromSpeechToText {
+        Body: {
+            ! indicate source and destination file
+            SP_requestFileName := "Space Shuttle Enterprise.mp3";
+            SP_responseFileName := "Answer.json";
+            SP_apikey:="YOUR_API_KEY";
+            
+            
+            !given on the IBMCloud website
+            SP_requestURI := "https://gateway-lon.watsonplatform.net/speech-to-text/api/v1/recognize?continuous=true";
+            
+            web::request_create(SP_requestId);
+            web::request_setURL(SP_requestId, SP_requestURI);
+            web::request_setMethod(SP_requestId, "POST");
+            web::request_getHeaders(SP_requestId, SP_myHttpHeaders);
+            !Authentification for the server
+            web::base64_encode( "apikey" + ":" + SP_apikey, SP_authorization);
+            SP_myHttpHeaders[ 'Authorization' ] := "Basic " + SP_authorization;
+            web::request_setHeaders(SP_requestId, SP_myHttpHeaders);
+            web::request_setRequestBody(SP_requestId, 'File', SP_requestFileName);
+            web::request_setResponseBody(SP_requestId, 'File', SP_responseFileName);
+            web::request_getOptions(SP_requestId,SP_Coption);
+            SP_Coption['requestTimeout'] := "50"; 
+            web::request_setOptions(SP_requestId, SP_Coption);
+            web::request_invoke(SP_requestId, P_responseCode);
+        }
+    }
+    Procedure FromJSONtoXML {
+        Body: {
+            jxml::ConvertFromJsonToXML("Answer.json","Answer.xml");
+        }
+    }
+}

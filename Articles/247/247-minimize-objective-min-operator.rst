@@ -10,9 +10,6 @@ Minimize Objective Containing a ``min`` Operator
 
     This article was originally posted to the AIMMS Tech Blog.
 
-..     <link>https://berthier.design/aimmsbackuptech/2012/03/23/minimizing-objective-containing-a-min-operator/</link>
-       <pubDate>Fri, 23 Mar 2012 15:01:28 +0000</pubDate>
-       <guid isPermaLink="false">http://blog.aimms.com/?p=860</guid>
 
 This article explains how to minimize an objective which contains a binary ``min`` operator. 
 

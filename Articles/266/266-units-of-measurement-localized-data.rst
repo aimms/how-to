@@ -9,10 +9,6 @@ Localize Units of Measurement per User
 
     This article was originally posted to the AIMMS Tech Blog.
 
-.. <link>https://berthier.design/aimmsbackuptech/2013/09/10/units-of-measurement-localized-interaction-on-numeric-data/</link>
-.. <pubDate>Tue, 10 Sep 2013 08:13:16 +0000</pubDate>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=2994</guid>
-
 .. sidebar:: Wikimedia commons: Measuring Tape Inch + CM
 
     .. image:: images/800px-Measuring_Tape_Inch+CM.jpg

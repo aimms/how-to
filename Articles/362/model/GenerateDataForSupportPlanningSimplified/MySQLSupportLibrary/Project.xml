@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<LibraryProject AimmsVersion="4.75.4.8 unicode x64" ProjectUUID="EF04DACA-A19C-4941-89D1-5076462ED0D3">
+	<ModelFileName>MySQLSupportLibrary.ams</ModelFileName>
+	<Prefix>MySQL</Prefix>
+	<DisplayName>MySQLSupportLibrary</DisplayName>
+</LibraryProject>

@@ -9,10 +9,6 @@ Run Batch Commands with AIMMS Command Line Tool
 
     This article was originally posted to the AIMMS Tech Blog.
 
-.. <link>https://berthier.design/aimmsbackuptech/2012/06/22/aimms-command-line-tool/</link>
-.. <pubDate>Thu, 21 Jun 2012 23:58:59 +0000</pubDate>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=1453</guid>
-
 In the integrated environment, or on a Linux system, you can control an AIMMS project externally using a command line tool.
 
 To start using the command line tool open the terminal and run ``AimmsCmd ExampleProject.aimms``.
@@ -79,12 +75,29 @@ By doing this, all the running results will be displayed on the command window. 
 
     AimmsCmd ExampleProject.aimms < cmds.txt > log.txt 
     
-.. note:: Windows powershell doesn't support the ``<`` operator to redirect input. You can get around that using:
+.. note:: 
+    
+    - Windows powershell doesn't support the ``<`` operator to redirect input. You can get around that using:
 
-    .. code-block:: none
-        :linenos:
+        .. code-block:: powershell
 
-        Get-Content cmds.txt | AimmsCmd.exe ExampleProject.aimms > log.txt
+            Get-Content cmds.txt | AimmsCmd.exe ExampleProject.aimms > log.txt
+
+    - Calling AIMMS from Python and printing the logs could be done using the following script and the `Download example`_
+
+        .. code-block:: Python
+
+            import subprocess
+
+            path_to_AimmsCmd = 'C:\\Users\\Arthur.AIMMS\\AppData\\Local\\AIMMS\\IFA\\Aimms\\4.75.4.8-x64-VS2017\\Bin\\AimmsCmd.exe'
+
+            command = path_to_AimmsCmd + ' StandAlone.aimms < cmds.txt > log.txt'
+
+            ret = subprocess.call(command, shell=True)
+
+            log_file = open('log.txt','r')
+            print(log_file.read())
+            log_file.close()
 
 Download example
 -----------------

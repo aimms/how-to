@@ -47,8 +47,13 @@ intersphinx_mapping = {'functionreference': ('https://documentation.aimms.com/fu
 
 if os.name != 'nt':
 
-#Import spelling extension
+    #Import spelling and last updated date extension if on gitlab
     extensions.append('sphinx_sitemap')
+    extensions.append('sphinx_last_updated_by_git')
+
+# A list of regular expressions that match URIs that should not be checked when doing a linkcheck build.   
+linkcheck_ignore = [r'http://localhost:\d+/?',r'http://0\.0\.0\.0[:/]\d+/?']
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -79,13 +84,7 @@ author = u'AIMMS'
 
 # includes these texts at the end of all source .rsts, helpful for using repetitive replacements 
 
-rst_epilog = """
-.. |date| date:: %B, %Y
-
-.. |time| date:: %H:%M
-
-Last Updated: |date|
-"""
+#rst_epilog = ""
 
 # include these texts at the beginning of all source .rsts, use only for HTML builds to update last updated date. 
 
@@ -307,14 +306,14 @@ def generate_redirects(app):
     #pdb.set_trace()
     path = os.path.join(app.srcdir, app.config.redirects_file)
     if not os.path.exists(path):
-        app.info("Could not find redirects file at '%s'" % path)
+        logger.info("Could not find redirects file at '%s'" % path)
         return
 
-    in_suffix = app.config.source_suffix.keys()[0]
+    in_suffix = list(app.config.source_suffix.keys())[0]
 
     # TODO(stephenfin): Add support for DirectoryHTMLBuilder
     if not type(app.builder) == builders.StandaloneHTMLBuilder:
-        app.warn("The 'sphinxcontrib-redirects' plugin is only supported "
+        logger.info("The 'sphinxcontrib-redirects' plugin is only supported "
                  "by the 'html' builder. Skipping...")
         return
     
@@ -349,7 +348,7 @@ def setup(sphinx):
    #To handle redirections
    handle_redirections = False
    if handle_redirections or os.name != 'nt':
-		sphinx.add_config_value('redirects_file', 'redirects', 'env')
-		sphinx.connect('builder-inited', generate_redirects)   
- 
+       sphinx.add_config_value('redirects_file', 'redirects', 'env')
+       sphinx.connect('builder-inited', generate_redirects)   
+
 highlight_language = 'aimms'

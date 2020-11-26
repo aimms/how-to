@@ -1,0 +1,35 @@
+
+p01_certified := data table 
+
+       ch1  ch2  ch3  ch4  ch5  ir1  ir2  ir3  ir4  ir5  ha1  ha2  ha3  ha4  ha5 
+    !  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
+    a    1    1         1         1    1         1              1    1         1
+    b    1    1    1         1         1    1         1              1    1     
+    c    1    1    1         1    1         1    1         1              1     
+    d         1    1         1         1    1         1         1               
+    e    1         1    1         1         1    1         1         1    1    1
+        ;
+
+ep_TimezoneEmployee := data 
+    { ch1 : 'Pacific SA Standard Time',  
+      ch2 : 'Pacific SA Standard Time',  
+      ch3 : 'Pacific SA Standard Time',
+      ch4 : 'Pacific SA Standard Time',
+      ch5 : 'Pacific SA Standard Time',
+
+      ir1 : 'North Asia East Standard Time'  ,  
+      ir2 : 'North Asia East Standard Time'  ,  
+      ir3 : 'North Asia East Standard Time'  ,
+      ir4 : 'North Asia East Standard Time'  ,
+      ir5 : 'North Asia East Standard Time'  ,
+
+      ha1 : 'W. Europe Standard Time' ,  
+      ha2 : 'W. Europe Standard Time' ,  
+      ha3 : 'W. Europe Standard Time' ,
+      ha4 : 'W. Europe Standard Time' ,
+      ha5 : 'W. Europe Standard Time'  
+    };
+
+
+
+

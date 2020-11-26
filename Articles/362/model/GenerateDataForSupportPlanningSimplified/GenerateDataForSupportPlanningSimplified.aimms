@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<References AIMMS_Version="4.75.4.8 (x64)">
+	<MainProject Path="MainProject" />
+	<Library Path="MySQLSupportLibrary" />
+	<Library System="true" Path="AimmsPro" />
+	<Library System="true" Path="AimmsWebUI" />
+</References>

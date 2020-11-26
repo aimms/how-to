@@ -1,6 +1,6 @@
 :orphan:
 
-As you already know, you can customize the appearance of widgets in AIMMS WebUI using CSS and `annotations <https://documentation.aimms.com/webui/folder.html#data-dependent-styling>`_ . Let us look at how these annotations are generated for a widget and the modifiers available for you to control your customizations.
+As you already know, you can customize the appearance of widgets in AIMMS WebUI using CSS and `annotations <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_ . Let us look at how these annotations are generated for a widget and the modifiers available for you to control your customizations.
 
 Annotations
 ---------------

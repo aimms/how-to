@@ -1,0 +1,104 @@
+## ams_version=1.0
+
+Model Main_time_ref {
+    Convention cnv_Metric {
+        PerQuantity: SI_Mass : kg;
+    }
+    Convention cnv_Imperial {
+        PerQuantity: SI_Mass : lb;
+    }
+    Quantity SI_Time_Duration {
+        BaseUnit: minute;
+        Conversions: {
+            s    ->minute : #-># / 60,
+            month->minute : #-># * 43800,
+            hour ->minute : #-># * 60,
+            day  ->minute : #-># * 1440,
+            week ->minute : #-># * 10080,
+            year ->minute : #-># * 525600
+        }
+        Comment: "Expresses the value for the duration of periods.";
+    }
+    Quantity SI_Mass {
+        BaseUnit: kg;
+        Conversions: lb->kg : #-># * 0.4535924;
+        Comment: "Expresses the value for the amount of matter.";
+    }
+    Set s_Locations {
+        Index: i_loc;
+    }
+    Calendar cal_min {
+        Index: i_Min;
+        Parameter: ep_min;
+        Unit: minute;
+        BeginDate: "2020-03-03 00:00:00";
+        EndDate: "2020-03-03 23:59:59";
+        TimeslotFormat: "%c%y-%m-%d %H:%M";
+        webui::ElementTextIdentifier: ;
+    }
+    Parameter p_Temperature {
+        IndexDomain: (i_loc,i_Min);
+    }
+    DatabaseTable db_Celsius {
+        DataSource: "data\\abc.dsn";
+        TableName: "TableAB";
+        Property: NoImplicitMapping;
+        Mapping: {
+            "Location"           -->i_loc,
+            "Moment"             -->i_Min,
+            "TemperatureCelsius" -->p_Temperature( i_loc, i_Min )
+        }
+    }
+    Procedure pr_dbRead {
+        Body: {
+            read from file "data/input.txt" ;
+        }
+        ElementParameter ep_StashTimezone {
+            Range: AllTimeZones;
+        }
+    }
+    Procedure pr_wrt {
+        Body: {
+            write p_Temperature to file "data/input.txt" ;
+        }
+    }
+    Section Main_Model_Procedures {
+        Procedure MainInitialization {
+            Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+        }
+        Procedure PostMainInitialization {
+            Body: {
+                pr_dbRead();
+            }
+            Comment: {
+                "Add initialization statements here that require that the libraries are already initialized properly,
+                or add statements that require the Data Management module to be initialized."
+            }
+            Parameter p_utcLow;
+            Parameter p_utcDef;
+            Parameter p_utcUpp;
+        }
+        Procedure MainExecution;
+        Procedure PreMainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that require all libraries to be still alive.
+                Return 1 if you allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence."
+            }
+        }
+        Procedure MainTermination {
+            Body: {
+                return 1;
+            }
+            Comment: {
+                "Add termination statements here that do not require all libraries to be still alive.
+                Return 1 to allow the termination sequence to continue.
+                Return 0 if you want to cancel the termination sequence.
+                It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+            }
+        }
+    }
+}

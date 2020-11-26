@@ -1,0 +1,113 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Read from W3Schools and place data in AIMMS Identifiers",
+          "layoutInfo": {
+            "width": "8",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "VariousServings",
+          "layoutInfo": {
+            "width": "8",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/Read from W3Schools and place data in AIMMS Identifiers": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "MainExecution"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "title": {
+      "literal": "Read from W3Schools and place data in AIMMS Identifiers"
+    }
+  },
+  "widgets/VariousServings": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_foodName",
+          "sp_foodDescription",
+          "sp_foodPrice",
+          "p_foodCalories"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_food"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_foodCalories"
+          },
+          "width": 11
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_foodPrice"
+          },
+          "width": 12.2
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_foodDescription"
+          },
+          "width": 106.65
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_foodName"
+          },
+          "width": 38.34
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_food",
+          "width": 9.19
+        }
+      ]
+    },
+    "title": {
+      "literal": "Food Servings"
+    }
+  }
+}

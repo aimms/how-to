@@ -29,7 +29,7 @@ If we would plot our parameter distribution we would end up with a uniform distr
  
 .. seealso::
     
-    |aimms| proposes a lot of other different distributions, listed `here <http://images.aimms.com/aimms/download/manuals/aimms3fr_distributionandcombinatoric.pdf>`_
+    AIMMS proposes a lot of other different distributions, listed below:
 
 	* |doc| https://documentation.aimms.com/functionreference/elementary-computational-operations/distribution-and-combinatoric-functions/index.html 
     

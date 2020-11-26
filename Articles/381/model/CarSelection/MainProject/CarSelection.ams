@@ -1,0 +1,394 @@
+## ams_version=1.0
+
+Model Main_CarSelection {
+	Comment: {
+		"Keywords:
+		Project User Files, Mixed Integer Programming model, MIP, Matching Problem, Network object, Nodes and arcs, Bitmap."
+	}
+	Section Model_Formulation {
+		Parameter p_maxParticipants {
+			Text: "The total number of participants";
+		}
+		Set s_participants {
+			Text: "The set of all participants";
+			Index: i_participant;
+		}
+		Parameter p_maxCars {
+			Text: "The total number of available cars";
+		}
+		Set s_cars {
+			Text: "The set of all cars";
+			Index: i_car;
+		}
+		Parameter bp_possibleAssignments {
+			IndexDomain: (i_participant,i_car);
+			Text: "Participant i_participant is interested in car i_car";
+			Range: binary;
+		}
+		Variable bv_assignments {
+			IndexDomain: (i_participant,i_car)  | bp_possibleAssignments(i_participant,i_car);
+			Text: "Participant i_p is assigned to car i_c";
+			Range: binary;
+		}
+		Variable v_totalCombinations {
+			Text: "The total number of assignments";
+			Definition: sum((i_participant,i_car), bv_assignments(i_participant,i_car));
+		}
+		Constraint c_oneCarPerParticipant {
+			IndexDomain: (i_participant);
+			Text: "Number of cars assigned to participant i_p is less than or equal to 1";
+			Definition: sum(i_car , bv_assignments(i_participant,i_car)) <= 1;
+		}
+		Constraint c_oneParticipantPerCar {
+			IndexDomain: (i_car);
+			Text: "Number of participants assigned to car i_c is less than or equal to 1";
+			Definition: sum(i_participant , bv_assignments(i_participant,i_car)) <= 1;
+		}
+		MathematicalProgram mp_carSelection {
+			Objective: v_totalCombinations;
+			Direction: maximize;
+			Constraints: AllConstraints;
+			Variables: AllVariables;
+			Text: "Assignment problem";
+			Type: MIP;
+		}
+	}
+	Section GUI_Section {
+		Section Names_and_Pictures {
+			ElementParameter ep_currentCar {
+				Range: s_cars;
+			}
+			ElementParameter ep_currentParticipant {
+				Range: s_participants;
+			}
+			Set s_firstNames {
+				Text: "List of first names";
+				Index: i_fn;
+			}
+			Set s_lastNames {
+				Text: "List of last names";
+				Index: i_ln;
+				Definition: data{'P','E','G','N','C','W','M','R','T'};
+			}
+			Set s_carPictures {
+				Text: "Set of car pictures";
+				Index: i_cp;
+				Parameter: ep_currentCarPicture;
+				Definition: ElementRange(1,25);
+			}
+			StringParameter ep_carPictureLocation {
+				IndexDomain: (i_cp);
+				Text: "Locations of the car pictures";
+				Definition: FormatString("<prj>:\Bitmaps\\cars\\car%i.jpg", ord(i_cp));
+			}
+			StringParameter sp_carNames {
+				IndexDomain: (i_cp);
+				Text: "Car names";
+				Definition: {
+					data
+					{ 01 : "Ford"    ,  02 : "Jaguar"      ,  03 : "Mitsubishi"    ,  04 : "Ferrari"    ,  05 : "BMW"           ,
+					  06 : "Nissan" ,  07 : "Jeep"          ,  08 : "Spyker"        ,  09 : "VW Beetle"     ,  10 : "Mini"      ,
+					  11 : "Toyota"       ,  12 : "Rover"         ,  13 : "Renault"       ,  14 : "Porsche"     ,  15 : "Audi"       ,
+					  16 : "Fiat"    ,  17 : "Land Rover"    ,  18 : "Peugeot"   ,  19 : "Lexus"       ,  20 : "Volvo"         ,
+					  21 : "Bentley"       ,  22 : "Seat"          ,  23 : "Suzuki",  24 : "Kia"           ,  25 : "Alfa Romeo"    }
+				}
+			}
+			Parameter p01_nameExists {
+				IndexDomain: (i_fn,i_ln);
+				Text: "Name exists";
+				Range: binary;
+			}
+			Parameter p_nameExistsFull {
+				Text: "The number after the names";
+			}
+			Procedure pr_generateNewName {
+				Arguments: (sp_newName);
+				Body: {
+					sp_newName := "";
+					if (prod((i_fn,i_ln),p01_nameExists(i_fn,i_ln)) = 1) then
+					        p_nameExistsFull += 1;
+					        p01_nameExists(i_fn,i_ln) := 0;
+					endif;
+					
+					while (sp_newName = "") do
+					        ep_firstName := Element(s_firstNames,Round(Uniform(1,Card(s_firstNames))));
+					        ep_lastName := Element(s_lastNames,Round(Uniform(1,Card(s_lastNames))));
+					        if not(p01_nameExists(ep_firstName,ep_lastName)) then
+					                p01_nameExists(ep_firstName,ep_lastName) := 1;
+					                if (p_nameExistsFull > 0) then
+					                        sp_newName := FormatString("%e %e %i",ep_firstName,ep_lastName,p_nameExistsFull);
+					                else
+					                        sp_newName := FormatString("%e %e",ep_firstName,ep_lastName);
+					                endif;
+					        endif;
+					endwhile;
+				}
+				Comment: {
+					"The procedure generates a new participant name. The first name and the last name are choosen by random numbers; if the name already exists, then new
+					random numbers are generated.
+					If every possible name combination is in use then the \'nameExist\' parameter will be emptied and a number will be append after the generated name."
+				}
+				ElementParameter ep_firstName {
+					Range: s_firstNames;
+				}
+				ElementParameter ep_lastName {
+					Range: s_lastNames;
+				}
+				StringParameter sp_newName {
+					Property: Output;
+				}
+			}
+			Procedure pr_generateNewCarPicture {
+				Arguments: (p_currentCar,sp_picturePath);
+				Body: {
+					ep_currentCarPicture := Element(s_carPictures,1) ++ (p_currentCar-1);
+					sp_picturePath := ep_carPictureLocation(ep_currentCarPicture);
+				}
+				Comment: "The procedure returns the location of the next car picture. If all the picture are in use, then the procedure jumps to the first element of the set.";
+				StringParameter sp_picturePath {
+					Property: Output;
+				}
+				Parameter p_currentCar {
+					Property: Input;
+				}
+			}
+			Procedure pr_generateNewCarName {
+				Arguments: (p_currentCar,sp_newName);
+				Body: {
+					ep_currentCarPicture := Element(s_carPictures,1) ++ (p_currentCar-1);
+					if (Card(s_cars) >= Card(s_carPictures)) then
+					        sp_newName := FormatString("%s %n",sp_carNames(ep_currentCarPicture),Ceil(Card(s_cars)/25));
+					else
+					        sp_newName := sp_carNames(ep_currentCarPicture);
+					endif;
+				}
+				Comment: "The procedure returns a car name according to the picture of the car. If there are more cars than pictures then a number will be append to the car name.";
+				Parameter p_currentCar {
+					Property: Input;
+				}
+				StringParameter sp_newName {
+					Property: Output;
+				}
+			}
+			Procedure pr_modifyMaxCars {
+				Body: {
+					if (Card(s_cars) < p_maxCars) then
+					        while (Card(s_cars) < p_maxCars) do
+					                pr_GenerateNewCarName(Card(s_cars)+1,sp_newName);
+					                SetElementAdd(s_cars,ep_currentCar,sp_newName);
+					                pr_generateNewCarPicture(Card(s_cars),sp_carPictureName(ep_currentCar));
+					        endwhile;
+					else
+					        while (Card(s_cars) > p_maxCars) do
+					                s_cars -= last(i_car);
+					        endwhile;
+					endif;
+					
+					pr_generatePossiblePairs;
+				}
+				Comment: "The procedure modifies the Cars set according to the value of the \'p_maxCars\' parameter.";
+				StringParameter sp_newName;
+			}
+			Procedure pr_modifyMaxParticipants {
+				Body: {
+					sp_newName := "";
+					if (Card(s_participants) < p_maxParticipants) then
+					        while (Card(s_participants) < p_maxParticipants) do
+					               pr_generateNewName(sp_newName);
+					               SetElementAdd(s_participants,ep_currentParticipant,sp_newName);
+					        endwhile;
+					else
+					        while (Card(s_participants) > p_maxParticipants) do
+					               sp_newName := FormatString("%e",last(i_participant));
+					               p_nameLength := StringLength(sp_newName);
+					               p_spacePostion := FindNthString(sp_newName," ",2);
+					               if (p_spacePostion) then
+					                p01_nameExists(StringToelement(s_firstNames,SubString(sp_newName,1,p_spacePostion-3)),StringToElement(s_lastNames,SubString(sp_newName,p_spacePostion-1, p_spacePostion-1))) := 0;
+					               else
+					                    p01_nameExists(StringToelement(s_firstNames,SubString(sp_newName,1,p_nameLength-2)),StringToElement(s_lastNames,SubString(sp_newName,p_nameLength, p_nameLength))) := 0;
+					               endif;
+					               if (sum((i_fn,i_ln),p01_nameExists(i_fn,i_ln)) = 0 and p_nameExistsFull > 0) then
+					                                p01_nameExists(i_fn,i_ln) := 1;
+					                                p_nameExistsFull -= 1;
+					                        endif;
+					               s_participants -= last(i_participant);
+					        endwhile;
+					endif;
+					
+					pr_generatePossiblePairs;
+				}
+				Comment: "The procedure modifies the Participants set according to the value of the \'p_maxParticipants\' parameter.";
+				StringParameter sp_newName;
+				Parameter p_nameLength;
+				Parameter p_spacePostion;
+			}
+		}
+		Procedure pr_generatePossiblePairs {
+			Body: {
+				empty bp_possibleAssignments;
+				
+				p_wantedCarsSize(i_participant) := 2 + Binomial(0.25, 4);
+				
+				empty s_wantedCars;
+				
+				for (i_participant) do
+				        repeat
+				                s_wantedCars(i_participant) += Element(s_cars, 1 + round(uniform(0,p_maxCars)));
+				                break when loopcount = p_wantedCarsSize(i_participant);
+				        endrepeat;
+				endfor;
+				
+				bp_possibleAssignments(i_participant,i_car) := i_car in s_wantedCars(i_participant);
+				bv_assignments(i_participant,i_car)  := 0;
+				v_totalCombinations := 0;
+			}
+			Parameter p_wantedCarsSize {
+				IndexDomain: (i_participant);
+				Text: "Number of cars that participants p will be interested in.";
+			}
+			Set s_wantedCars {
+				IndexDomain: (i_participant);
+				SubsetOf: s_cars;
+				Text: "Set of cars that are wanted by participant p";
+			}
+		}
+		DeclarationSection Declaration_Interface {
+			Parameter p_participantPlaceX {
+				IndexDomain: (i_participant);
+				Text: "The x-coordinate in the network of partipant p";
+				Definition: 10;
+			}
+			Parameter p_participantPlaceY {
+				IndexDomain: (i_participant);
+				Text: "The y-coordinate in the network of partipant p";
+				Definition: 100 - 100*ord(i_participant) / card(i_participant);
+			}
+			Parameter p_carPlaceX {
+				IndexDomain: (i_car);
+				Text: "The x-coordinate in the network of car c";
+				Definition: 100;
+			}
+			Parameter p_carPlaceY {
+				IndexDomain: (i_car);
+				Text: "The y-coordinate in the network of car c";
+				Definition: 100 - 100*ord(i_car) / card(i_car);
+			}
+			StringParameter sp_carPictureName {
+				IndexDomain: i_car;
+				Text: "The location of the picture of car c";
+			}
+			ElementParameter ep_selectedParticipant {
+				Text: "In interface selected participant";
+				Range: s_participants;
+			}
+			ElementParameter ep_selectedCar {
+				Text: "In interface selected car";
+				Range: s_cars;
+			}
+			Set s_participantsSubset {
+				SubsetOf: s_participants;
+				Text: "Participants that are interested in the selected car";
+				Definition: {
+					{ i_participant | bp_possibleAssignments(i_participant,ep_selectedCar)}
+				}
+			}
+			Set s_carsSubset {
+				SubsetOf: s_cars;
+				Text: "Cars that are liked by the selected participant";
+				Index: cs;
+				Definition: {
+					{ i_car | bp_possibleAssignments(ep_selectedParticipant,i_car)}
+				}
+			}
+			Parameter p_pictureSize {
+				Text: "Size of the picture in the interface";
+				Definition: 525/p_maxCars;
+			}
+			StringParameter sp_possibleCars {
+				IndexDomain: (i_participant);
+				Definition: FormatString("%e is interested in the following cars:", i_participant);
+			}
+			StringParameter sp_interestedParticipants {
+				IndexDomain: (i_car);
+				Definition: FormatString("The following participants are interested in: %e", i_car);
+			}
+			ElementParameter ep_ACase {
+				Range: AllCases;
+			}
+		}
+	}
+	Section Data_serialization {
+		Procedure pr_writeJSON {
+			Body: {
+				if not "InitialDataMapping" in dex::Mappings then
+					dex::AddMapping(
+						mappingName :  "InitialDataMapping", 
+						mappingFile :  "Mappings/InitialDataMapping.xml");
+				endif ;
+				dex::WriteToFile(
+					dataFile    :  "InitialData/InitialData.json", 
+					mappingName :  "InitialDataMapping", 
+					pretty      :  1);
+			}
+		}
+		Procedure pr_readJSON {
+			Body: {
+				if not "InitialDataMapping" in dex::Mappings then
+					dex::AddMapping(
+						mappingName :  "InitialDataMapping", 
+						mappingFile :  "Mappings/InitialDataMapping.xml");
+				endif ;
+				dex::ReadFromFile(
+					dataFile    :  "InitialData/InitialData.json", 
+					mappingName :  "InitialDataMapping") ;
+			}
+		}
+	}
+	Section Application_initialization_execution_and_termination {
+		Procedure MainInitialization;
+		Procedure PostMainInitialization {
+			Body: {
+				pr_readJSON();
+				
+				option seed := 36420;
+				empty s_cars;
+				empty s_participants;
+				p_maxCars         := 10;
+				p_maxParticipants := 10;
+				p_nameExistsFull := 0;
+				p01_nameExists(i_fn,i_ln) := 0;
+				while (loopcount <= p_maxCars) do
+				        pr_GenerateNewCarName(loopcount,sp_newName);
+				        SetElementAdd(s_cars,ep_currentCar,sp_newName);
+				        pr_generateNewCarPicture(loopcount,sp_carPictureName(ep_currentCar));
+				endwhile;
+				while (loopcount <= p_maxParticipants) do
+				        pr_generateNewName(sp_newName);
+				        SetElementAdd(s_participants,ep_currentParticipant,sp_newName);
+				endwhile;
+				
+				pr_generatePossiblePairs;
+				
+				ep_selectedCar             := first(s_cars);
+				ep_selectedParticipant     := first(s_participants);
+			}
+			StringParameter sp_newName;
+		}
+		Procedure MainExecution {
+			Body: {
+				solve mp_carSelection;
+				display bp_possibleAssignments    ;
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+		}
+	}
+}

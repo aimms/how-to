@@ -91,8 +91,8 @@ You can also find a more complex mapping example in :doc:`../296/296-obtaining-g
 JSON files
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Another popular format file for data transfer is JSON. Since JSON files aren't supported in AIMMS, you'll need to transform this JSON file into an XML file.
-To do so, you can follow the process detailed in :doc:`../283/283-convert-json-to-xml`.
+Another popular format file for data transfer is JSON. 
+You can use the `Data Exchange Library <https://documentation.aimms.com/dataexchange/index.html>`_ to read the JSON file directly.
 
 IBM APIs use JSON files, so you can also find examples in :doc:`../300/300-ibm-api-speech-to-text` and :doc:`../301/301-Image-Recognition`.
 
@@ -105,7 +105,8 @@ In some documentation, examples of requests are given in CURL. You can find out 
 Related topics
 ------------------------------------------------------------------------------------------
 
-* **AIMMS** `library documentation <https://documentation.aimms.com/httpclient/index.html>`_
+* **AIMMS** `HTTP library documentation <https://documentation.aimms.com/httpclient/index.html>`_
+* **AIMMS** `Data Exchange library documentation <https://documentation.aimms.com/dataexchange/index.html>`_
 * **AIMMS How-To**: :doc:`../294/294-Online-XML-HTTP-library`
 * **AIMMS How-To**: :doc:`../293/293-extracting-data-from-XML`
 * **AIMMS How-To**: :doc:`../298/298-use-flickr-api`
@@ -113,5 +114,4 @@ Related topics
 * **AIMMS How-To**: :doc:`../302/302-get-google-maps-coordinates`
 * **AIMMS How-To**: :doc:`../296/296-obtaining-geographic-data-through-the-google-api`
 * **AIMMS How-To**: :doc:`../300/300-ibm-api-speech-to-text`
-* **AIMMS How-To**: :doc:`../283/283-convert-json-to-xml`
 

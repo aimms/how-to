@@ -1,0 +1,77 @@
+* An AIMMS application has the following three pillars:
+  * Modeling / optimization
+  * Data management, typically ODBC, but also cases.
+  * User interface
+
+Let's call an application whereby the stakeholders are located in different timezones a multi-timezone application.
+
+The SupportPlanning application illustrates the multi-timezone aspect for all three pillars.
+* Modeling: cost function, people prefer to work during day time.
+* Data management - data read in and converted
+  Cases - to be done - each week should get its own solved case.
+* User interface - planning list per employee (table) and Gantt Chart
+
+You already know about user interfaces and about the data management.
+About user interfaces, you probably know more than I do.
+
+About Modeling:
+
+Consider three employees, located in timezones 8 hours apart, 
+For instance:
+New Zealand (Auckland,Wellington) utc+12
+Georgia (Tbilisi) utc+4
+Chile (Santiago) utc-4
+
+It is possible to let them work 24 hours and each works in day light, 
+and even with the same working hours ;-)
+
+About the running example:
+Consider expensive equipment (factories, power plants, ... )
+To give instant advise on incidents, or on near incidents, certified experts are needed.
+There are different certifications for these experts.
+Now the Challenge of SupportPlanning is to organise support 24/7 whereby three offices are involved:
+Sao Paolo, Johannesburg, and Singapore. 
+Together these three offices organize the certified support. 
+When to schedule which support employee is a rostering problem.
+To make use of day time as much as possible, 
+the cost of that employee is increased in his evening and even more in his night.
+
+About your best practices:
+* Database communication: indeed, when the choice of timezone for storing data is up to the model builder, then use UTC. 
+  However, when the choice is not up to the model builder, then show a good practice on converting; 
+  namely to use a convention.
+  Actually, that works quite well.
+  Choose India, Mumbai.
+
+* Storing cases
+  I think that using UTC is an excellent choice.  
+  Whenever an application moves to a different timezone, or expands its application to new timezones,
+  then the data will be unambiguous and can be read back.
+
+* Modeling: assumption, the modeler chooses the timezone for the application.
+  Indeed, it should be clear which timezone is used as reference timezone.
+  As all timezones are defined with respect to UTC, UTC is the natural choice for this reference timezone.
+
+  A, perhaps critical, question: do we assume all applications will be multi-timezone? 
+  Or will single timezone applications, using timezone 'local' for everything, 
+  still be supported, and even intended to be supported for the long run?
+  (if you ask me, multi-timezone will become more relevant; 
+  but I expect, single timezone to remain dominant in our clientele - 
+  do we need to bother our clients about multi-timezone when their application is actually single timezone.
+
+* WebUI: I experimented with it, and I like the approach.
+
+  Probably part of tickets in current sprint:
+  * Gantt Chart timeline at top of Gantt Chart
+  * Viewport selection, using element parameters
+
+* Unclear from your "best practices", how to handle locally preferred day/time formatting.
+  May I suggest to create a list of day formats (per country, or per timezone)?
+  (apparently a feature request for engine team).
+
+
+
+
+
+
+

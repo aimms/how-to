@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Project AimmsVersion="4.76.5.8 unicode x64" ProjectUUID="6AE83F60-8A7B-4877-B8C2-7E5453FCC316">
+	<ModelFileName>BottledWaterTransportProblem.ams</ModelFileName>
+	<AutoSaveAndBackup>
+		<DataBackup AtRegularInterval="true" EveryNMinutes="15" NumBackupsDatedToday="3" NumDaysBeforeToday="3" />
+	</AutoSaveAndBackup>
+</Project>

@@ -1,0 +1,5 @@
+﻿    p_Temperature(i_loc,i_Min) := data { 
+        ( Shanghai, '2020-03-03 01:01' ) : 12.350,  
+        ( Shanghai, '2020-03-03 04:04' ) : 13.560 
+    } ;
+

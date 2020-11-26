@@ -9,8 +9,6 @@ Add a Custom Startup Image in WinUI
 
 	This article was originally posted to the AIMMS Tech Blog.
 
-..       <link>https://berthier.design/aimmsbackuptech/2012/04/04/adding-a-custom-splashscreen-to-your-aimms-application/</link>
-..       <pubDate>Wed, 04 Apr 2012 12:03:19 +0000</pubDate>
                
 When you deploy your application, AIMMS uses a standard splash screen at startup as shown below. You have the option to customize this startup image for WinUI apps. 
 
@@ -24,7 +22,7 @@ Please note that you must use the bitmap (BMP) format, as AIMMS will only look f
 Example
 --------
 
-A custom startup image is used in the `Gate Assignment example project <https://aimms.com/english/developers/resources/examples/application-examples/gate-assignment/>`_:
+A custom startup image is used in the :doc:`Gate Assignment example project <../389/389-gate-assignment>`:
 
 .. image:: images/GateAssignment.bmp
    :align: center

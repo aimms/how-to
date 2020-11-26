@@ -1,0 +1,233 @@
+## ams_version=1.0
+
+Model Main_BottledWaterTransportProblem {
+	DeclarationSection data_Declaration {
+		Set s_bottlingLocations {
+			Index: i_bl;
+			Definition: data { Geneva, Copenhagen };
+		}
+		Set s_distributionCenter {
+			Index: i_dc;
+			Definition: data { Budapest, Paris };
+		}
+		Parameter p_dist {
+			IndexDomain: (i_bl,i_dc);
+			Definition: {
+				data { 
+					( Geneva,     Budapest ) : 1270,  
+					( Geneva,     Paris    ) : 541,  
+					( Copenhagen, Budapest ) : 1306,  
+					( Copenhagen, Paris    ) : 1223 
+				}
+			}
+		}
+		Parameter p_demand {
+			IndexDomain: i_dc;
+			Definition: {
+				data { 
+					Budapest : 1234,  
+					Paris    : 2345
+				}
+			}
+		}
+		Parameter p_supply {
+			IndexDomain: i_bl;
+			Definition: {
+				data { 
+					Geneva     : 1357,  
+					Copenhagen : 2222 
+				}
+			}
+		}
+	}
+	DeclarationSection model_declaration {
+		Variable v_transport {
+			IndexDomain: (i_bl,i_dc);
+			Range: nonnegative;
+		}
+		Variable v_totaltravelled {
+			Range: free;
+			Definition: sum( (i_bl, i_dc), p_dist(i_bl, i_dc) * v_transport(i_bl, i_dc) );
+		}
+		Constraint c_meetDemand {
+			IndexDomain: i_dc;
+			Definition: sum( i_bl, v_transport(i_bl, i_dc) ) >= p_demand( i_dc );
+		}
+		Constraint c_respectSupply {
+			IndexDomain: i_bl;
+			Definition: sum( i_dc, v_transport(i_bl, i_dc) ) <= p_supply(i_bl);
+		}
+		MathematicalProgram mp_transport {
+			Objective: v_totaltravelled;
+			Direction: minimize;
+			Constraints: AllConstraints;
+			Variables: AllVariables;
+			Type: Automatic;
+		}
+	}
+	Section Download_server_session_log {
+		StringParameter sp_serverSession;
+		Procedure pr_determineServerSession {
+			Body: {
+				sp_serverSession := pro::session::CurrentSession();
+			}
+		}
+		Procedure pr_getSessionLogFile {
+			Arguments: (sp_selectedSession,sp_baseSessionLogFilename,sp_originalSessionLogfileLocation);
+			Body: {
+				
+				EnvironmentGetString(
+					Key   :  "AIMMSPRO_DATADIR", 
+					Value :  sp_proDataDir);
+				sp_sessionLogDir := sp_proDataDir + "\\Log\\Sessions";
+				
+				DirectoryGetFiles(
+					directory       :  sp_sessionLogDir, 
+					filter          :  "*.log", 
+					filenames       :  sp_filenames(i_fileNumber), 
+					recursive       :  0);
+				
+				
+				ep_logFileNo := first( i_fileNumber | findString(sp_filenames(i_fileNumber), sp_serverSession ) );
+				if ep_logFileNo then
+					sp_baseSessionLogFilename := sp_filenames(ep_logFileNo) ;
+					sp_originalSessionLogfileLocation := sp_sessionLogDir + "\\" + sp_baseSessionLogFilename ;
+				else
+					sp_baseSessionLogFilename := "" ;
+					sp_originalSessionLogfileLocation := "" ;
+					raise warning "session log file for " + sp_serverSession + " not found." ;
+				endif ;
+			}
+			Comment: {
+				"find the location on the current 
+				AIMMS PRO on prem server of the session log file 
+				of session ep_selectedSession."
+			}
+			StringParameter sp_selectedSession {
+				Property: Input;
+			}
+			StringParameter sp_originalSessionLogfileLocation {
+				Property: Output;
+			}
+			StringParameter sp_proDataDir;
+			StringParameter sp_sessionLogDir;
+			Set s_fileNumbers {
+				SubsetOf: Integers;
+				Index: i_fileNumber;
+			}
+			StringParameter sp_filenames {
+				IndexDomain: i_filenumber;
+			}
+			ElementParameter ep_logFileNo {
+				Range: s_fileNumbers;
+			}
+			StringParameter sp_baseSessionLogFilename {
+				Property: Output;
+			}
+		}
+		Procedure pr_downloadSessionLog {
+			Arguments: (FileLocation,StatusCode,StatusDescription);
+			Body: {
+				block
+					if sp_serverSession then
+						pr_getSessionLogFile(sp_serverSession, sp_baseSessionLogfilename, sp_originalSessionLogfileLocation);
+						if sp_originalSessionLogfileLocation and
+						   sp_baseSessionLogfilename and
+						   sp_originalSessionLogfileLocation <> sp_baseSessionLogfilename then
+						   	fileLocation := sp_baseSessionLogfilename ;
+							FileCopy( sp_originalSessionLogfileLocation, fileLocation );
+				
+							sp_FileProcessSpecificFileName := webui::GetIOFilePath(FileLocation);
+							if fileLocation <> sp_FileProcessSpecificFileName then
+								fileCopy( fileLocation, sp_FileProcessSpecificFileName );
+							endif ;
+				
+							StatusCode := webui::ReturnStatusCode('CREATED');
+							StatusDescription := "Nice.";
+						else	
+							raise warning "session log file not found for session: " + sp_serverSession;
+							StatusCode := webui::ReturnStatusCode('ERROR');
+							StatusDescription := "Oops, " + "session log file not found for session: " + sp_serverSession;
+						endif ;
+					else
+						raise warning "No session to request a log file for";
+						StatusCode := webui::ReturnStatusCode('ERROR');
+						StatusDescription := "Oops, no server session specified";
+					endif ;
+				onerror ep_err do
+					if errh::Severity( ep_err ) <> 'warning' then
+						StatusCode := webui::ReturnStatusCode('ERROR');
+						StatusDescription := "Oops: " + errh::Message(ep_err) ;
+						errh::MarkAsHandled(ep_err);
+						break ; ! Trick to reporting one error.
+					endif ;
+				endblock ;
+			}
+			StringParameter FileLocation {
+				Property: Output;
+			}
+			Parameter StatusCode {
+				Property: Output;
+			}
+			StringParameter StatusDescription {
+				Property: Output;
+			}
+			StringParameter sp_FileProcessSpecificFileName;
+			ElementParameter ep_err {
+				Range: errh::PendingErrors;
+			}
+			StringParameter sp_originalSessionLogfileLocation;
+			StringParameter sp_baseSessionLogfilename;
+			Parameter p_slashFwd;
+			Parameter p_slashBwd;
+			Parameter p_slash;
+			Parameter p_len;
+		}
+	}
+	Section Application_initialization_execution_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure MainExecution {
+			Body: {
+				if pro::GetPROEndPoint() then
+					if pro::DelegateToServer(
+						waitForCompletion  :  1, 
+						completionCallback :  'pro::session::loadResultsCallback' 
+					) then
+						return ;
+					endif ;
+				endif ;
+				
+				solve mp_transport ;
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+}

@@ -1,0 +1,77 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "temperature",
+          "layoutInfo": {
+            "width": "4",
+            "height": "1",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/temperature": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_Temperature"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_loc",
+          "i_Min"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "i_loc",
+          "width": 19
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_Min",
+          "width": 26.2
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_Localtime"
+          },
+          "width": 24.8
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_Temperature"
+          },
+          "width": 17.64107142857143
+        }
+      ]
+    }
+  }
+}

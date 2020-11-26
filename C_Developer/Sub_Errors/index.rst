@@ -20,3 +20,8 @@ Get help debugging errors that arise during development. This section covers tro
    /Articles/191/191-handle-errors-and-warnings
    /Articles/265/265-settings-for-errors-and-warnings
    /Articles/292/292-identifying-error
+   /Articles/497/497-configuring-logging-aimms-pro-on-prem-sessions
+   /Articles/497/497-download-solver-session-log
+   /Articles/497/497-tracing-procedures
+   /Articles/497/497-writing-to-session-log
+   Troubleshooting/index

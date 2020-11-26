@@ -5,6 +5,8 @@ Interrupt the solver session
    :description: A method for stopping a solve process when "cancel" is not available.
    :keywords: solve, cancel, interrupt, webui, veil
 
+.. index:: solver, CPLEX
+
 
 Introduction
 ------------

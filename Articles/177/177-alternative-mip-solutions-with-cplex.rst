@@ -54,11 +54,11 @@ You will also need to set some CPLEX specific project options to instruct CPLEX 
 Retrieving the K Best Solutions
 ----------------------------------
 
-In order to show that the K solutions returned by the solution pool feature are not necessarily the K best solutions for the MIP problem,  we implemented an additional approach that uses the AIMMS function ``GMP::Instance::AddIntegerEliminationRows`` to exclude each found solution and solve the problem again. By solving the problem K times while excluding the previously found solutions each time, you will exactly get the K best solutions for your MIP problem.
+In order to show that the K solutions returned by the solution pool feature are not necessarily the K best solutions for the MIP problem,  we implemented an additional approach that uses the AIMMS function :any:`GMP::Instance::AddIntegerEliminationRows` to exclude each found solution and solve the problem again. By solving the problem K times while excluding the previously found solutions each time, you will exactly get the K best solutions for your MIP problem.
 
 This approach was also suggested in one of the comments on the original post by Paul, and as noted by Paul in his reply, the disadvantage of using this approach is that can be a lot slower. The reason is that you have to solve the complete problem every time from the beginning after you eliminated a solution.
 
-The following code demonstrates how to make use of the function ``GMP::Instance::AddIntegerEliminationRows`` to eliminate the last found solution. It will do this K times, each time solving the ``GMP`` indicated by the element parameter ``epGMP`` and storing the objective value in the parameter ``IntegerEliminationObjective``:
+The following code demonstrates how to make use of the function :any:`GMP::Instance::AddIntegerEliminationRows` to eliminate the last found solution. It will do this K times, each time solving the ``GMP`` indicated by the element parameter ``epGMP`` and storing the objective value in the parameter ``IntegerEliminationObjective``:
 
 .. code-block:: aimms
 

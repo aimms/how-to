@@ -9,11 +9,6 @@ Align Objects in WinUI
 
     This article was originally posted to the AIMMS Tech Blog.
 
-.. <link>https://berthier.design/aimmsbackuptech/2013/01/25/easily-align-multiple-objects-on-page/</link>
-.. <pubDate>Fri, 25 Jan 2013 13:56:23 +0000</pubDate>
-.. <guid isPermaLink="false">http://blog.aimms.com/?p=2560</guid>
-
-
 
 When creating a WinUI page for your AIMMS project you typically want to nicely align the page objects.
 

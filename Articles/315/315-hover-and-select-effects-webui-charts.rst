@@ -46,7 +46,7 @@ Each chart has 3 states:
 
 To customize the styles for these states, you'll need to add a CSS file in the folder ``MainProject\WebUI\resources\css``.
 
-You can use the chart in `WebUI Annotations - Widget and CSS support <https://manual.aimms.com/webui/folder.html#css-styling>`_ for a reference of elements and their corresponding CSS properties.
+You can use the chart in `WebUI Annotations - Widget and CSS support <https://documentation.aimms.com/webui/css-styling.html>`_ for a reference of elements and their corresponding CSS properties.
 
 .. topic:: Example CSS
 

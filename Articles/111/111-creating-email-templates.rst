@@ -22,7 +22,7 @@ To create a formatted HTML template, optionally with images, you can use a word 
 
 #. Format and compose your email body and add images in the document. 
 
-#. Save the document in your AIMMS project files. Save as ``.html (filtered)``, and save it again as ``.txt``.
+#. Save the document in your AIMMS project files. Save as ``.html (filtered)``, and save it again as :any:`.txt`.
 
 #. 
     If you included images, edit the image references in the HTML file.
@@ -44,7 +44,7 @@ Related topics:
 ---------------
 
 *  AIMMS Knowledge: :doc:`../104/104-using-email-client-library`
-*  AIMMS Documentation: `Email Client Library <https://manual.aimms.com/emailclient/index.html>`_ 
+*  AIMMS Documentation: `Email Client Library <https://documentation.aimms.com/emailclient/index.html>`_ 
 
 .. END CONTENT
 

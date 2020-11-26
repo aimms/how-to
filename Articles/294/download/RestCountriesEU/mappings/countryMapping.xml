@@ -1,0 +1,50 @@
+<AimmsJSONMapping>
+    <ArrayMapping iterative-reset="1">
+        <ObjectMapping iterative-binds-to="i_country">
+            <ValueMapping name-binds-to="i_ca" name-regex="population|area|gini" maps-to="p_countryAttributes(i_country,i_ca)"/>
+            <ArrayMapping name="topLevelDomain"  iterative-reset="1">
+                <ValueMapping iterative-binds-to="i_domainNumber" maps-to="sp_topLevelDomain(i_country,i_domainNumber)"/> 
+            </ArrayMapping>
+            <ArrayMapping name="callingCodes"  iterative-reset="1">
+                <ValueMapping iterative-binds-to="i_domainNumber" maps-to="sp_callingCodes(i_country,i_domainNumber)"/> 
+            </ArrayMapping>
+            <ArrayMapping name="altSpellings"  iterative-reset="1">
+                <ValueMapping iterative-binds-to="i_domainNumber" maps-to="sp_altSpellings(i_country,i_domainNumber)"/> 
+            </ArrayMapping>
+            <ArrayMapping name="latlng"  iterative-reset="1">
+                <ValueMapping iterative-binds-to="i_domainNumber" maps-to="p_latlng(i_country,i_domainNumber)"/> 
+            </ArrayMapping>
+            <ArrayMapping name="timezones"  iterative-reset="1">
+                <ValueMapping iterative-binds-to="i_domainNumber" maps-to="sp_timezones(i_country,i_domainNumber)"/> 
+            </ArrayMapping>
+            <ArrayMapping name="borders"  iterative-reset="1">
+                <ValueMapping iterative-binds-to="i_domainNumber" maps-to="sp_borders(i_country,i_domainNumber)"/> 
+            </ArrayMapping>
+            <ArrayMapping name="languages"  iterative-reset="1">
+                <ObjectMapping iterative-binds-to="i_domainNumber">
+                    <ValueMapping name-binds-to="i_la" name-regex=".*" maps-to="sp_languageAttributes(i_country,i_domainNumber,i_la)"/> 
+                </ObjectMapping>
+            </ArrayMapping>
+            <ArrayMapping name="currencies"  iterative-reset="1">
+                <ObjectMapping iterative-binds-to="i_domainNumber">
+                    <ValueMapping name-binds-to="i_cura" name-regex=".*" maps-to="sp_currencyAttributes(i_country,i_domainNumber,i_cura)"/> 
+                </ObjectMapping>
+            </ArrayMapping>
+            <ArrayMapping name="regionalBlocs"  iterative-reset="1">
+                <ObjectMapping iterative-binds-to="i_domainNumber">
+                    <ValueMapping name="acronym" maps-to="sp_regionalBlockAcronym(i_country,i_domainNumber)"/> 
+                    <ValueMapping name="name" maps-to="sp_regionalBlockName(i_country,i_domainNumber)"/> 
+                    <ArrayMapping name="otherAcronyms"  iterative-reset="1">
+                        <ValueMapping iterative-binds-to="i_alternative" maps-to="sp_otherRegionalBlockAcronyms(i_country,i_domainNumber,i_alternative)"/> 
+                    </ArrayMapping>
+                    <ArrayMapping name="otherNames"  iterative-reset="1">
+                        <ValueMapping iterative-binds-to="i_alternative" maps-to="sp_otherRegionalBlockNames(i_country,i_domainNumber,i_alternative)"/> 
+                    </ArrayMapping>
+                </ObjectMapping>
+            </ArrayMapping>
+            <ObjectMapping name="translations">
+                <ValueMapping name-binds-to="i_tl" name-regex=".*" maps-to="sp_translations(i_country,i_tl)"/>
+            </ObjectMapping>
+        </ObjectMapping>
+    </ArrayMapping>
+</AimmsJSONMapping>

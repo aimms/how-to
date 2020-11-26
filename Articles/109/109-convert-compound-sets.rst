@@ -45,7 +45,7 @@ We provide a library with tools to identify compound sets based on these charact
 
 To identify compound sets in your application, 
 
-#. Download the attached :download:`AIMMS project download <downloads/DeprecateCompoundSets.zip>` and run it using AIMMS 4.54 or more recent.
+#. Download the attached :download:`AIMMS project download <downloads/DeprecateCompoundSets.zip>` and run it using AIMMS 4.54 or more recent but not more recent than AIMMS 4.72.
 
 #. Copy the ``DeprecateCompoundSetUtilities`` library to your AIMMS project.
 
@@ -65,9 +65,9 @@ Replacing compound sets with set mapping
 
 .. sidebar:: Background: Idea behind conversion procedure
      
-    In the conversion process, :term:`compound data` identifier ``P`` has compound indexes in its index domain, while its shadow ``P_Shadow`` has the corresponding :term:`set mapping` indexes in its index domain. This is an **atomic shadow identifier** as it has only :term:`atomic index` es, some of which are set mapping indexes.
+    In the conversion process, :term:`compound data<Compound data>` identifier ``P`` has compound indexes in its index domain, while its shadow ``P_Shadow`` has the corresponding :term:`set mapping<Set mapping>` indexes in its index domain. This is an **atomic shadow identifier** as it has only :term:`atomic index<Atomic index>` es, some of which are set mapping indexes.
 
-    The ``dcsu`` library caches atomic :term:`shadow parameter` s in a runtime library while the compound data identifiers are transformed to atomic data identifiers. Additionally, there are temporary procedures in that runtime library to copy the data from the compound data identifiers to the atomic shadow parameters and later from the atomic shadow parameters to the transformed atomic data identifiers.
+    The ``dcsu`` library caches atomic :term:`shadow parameter<Shadow parameter>` s in a runtime library while the compound data identifiers are transformed to atomic data identifiers. Additionally, there are temporary procedures in that runtime library to copy the data from the compound data identifiers to the atomic shadow parameters and later from the atomic shadow parameters to the transformed atomic data identifiers.
 
 This conversion procedure explains how to convert compound sets to set mappings in your application. This ensures that your model will function in the same way but without compound sets.
 
@@ -208,11 +208,11 @@ There are two things to watch out for:
             Definition: first( IndexIntegers | exists( i | ( i, IndexIntegers, iSMI_E ) in sSetMappingRelation_E ) );
         }
     
-    When the set ``Integers`` is used as a component, then ``IndexIntegers`` is an index that varies over 2G elements. 
+    When the set :any:`Integers` is used as a component, then ``IndexIntegers`` is an index that varies over 2G elements. 
     An attempt to do so would trigger the error message ``The set Integers is too big to be used as the range of running index "IndexIntegers"``. 
     
     Therefore we should introduce a new set, say ``s_SomeIntegers`` and fill it using the integer elements actually used. 
-    Then we should replace the component ``Integers`` in the compound set, for instance as follows:
+    Then we should replace the component :any:`Integers` in the compound set, for instance as follows:
     
     .. code-block:: aimms
     
@@ -222,8 +222,8 @@ There are two things to watch out for:
             Index:  i_e ;
         }
     
-    The set ``s_SomeIntegers`` should not be declared to be a subset of the set ``Integers``.
-    Once the compound set conversion is complete, we can make ``s_SomeIntegers`` a subset of the set ``Integers``.
+    The set ``s_SomeIntegers`` should not be declared to be a subset of the set :any:`Integers`.
+    Once the compound set conversion is complete, we can make ``s_SomeIntegers`` a subset of the set :any:`Integers`.
 
 .. limitations and how to handle them:
 

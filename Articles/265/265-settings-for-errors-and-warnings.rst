@@ -9,10 +9,6 @@ Customize Settings for Errors and Warnings
 
     This article was originally posted to the AIMMS Tech Blog.
 
-.. <pubDate>Mon, 24 Nov 2014 15:47:28 +0000</pubDate>
-.. <guid isPermaLink="false">http://techblog.aimms.com/?p=4229</guid>
-.. <link>https://berthier.design/aimmsbackuptech/2014/11/24/under-control-managing-errors-and-warnings-within-aimms/</link>
-
 
 This article explains how you can control errors and warnings within AIMMS. We'll include some useful tips to create better models.
 
@@ -127,4 +123,4 @@ Related Topics
 --------------
 
 * :doc:`../191/191-handle-errors-and-warnings`.
-* For a full description of the AIMMS Error Handling functionality, please see the section "Raising and handling warnings and errors" in `Chapter Execution Statements <http://download.aimms.com/aimms/download/manuals/AIMMS3LR_ExecutionStatements.pdf>`_ of the AIMMS Language Reference and the description of the `Error Handling Functions <https://documentation.aimms.com/functionreference/system-interaction/error-handling-functions/index.html>`_ in the AIMMS Function Reference.
+* For a full description of the AIMMS Error Handling functionality, please see the section "Raising and handling warnings and errors" in `Chapter Execution Statements <https://download.aimms.com/aimms/download/manuals/AIMMS3LR_ExecutionStatements.pdf>`_ of the AIMMS Language Reference and the description of the `Error Handling Functions <https://documentation.aimms.com/functionreference/system-interaction/error-handling-functions/index.html>`_ in the AIMMS Function Reference.

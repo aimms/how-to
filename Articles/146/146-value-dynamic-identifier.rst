@@ -54,7 +54,7 @@ Now we can create a procedure, say ``pr_GetValueOfIdentifer`` that will get two 
 
     !If there already exists an identifier with the name
     !RuntimeLibrary, we must delete it first
-    if "RuntimeLibrary" in :aimms:set:`AllIdentifiers` then
+    if "RuntimeLibrary" in AllIdentifiers then
         me::Delete('RuntimeLibrary') ;
     endif ;
     

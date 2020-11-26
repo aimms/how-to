@@ -28,23 +28,23 @@ Model Main_SpeechToText {
 		}
 	}
 	DeclarationSection Declaration_http_call {
-		Parameter P_responseCode;
-		StringParameter SP_Coption {
+		Parameter p_responseCode;
+		StringParameter sp_Coption {
 			IndexDomain: op;
 		}
-		Set S_Clientop {
+		Set s_clientOp {
 			Index: op;
 			Definition: DATA {requestTimeout};
 		}
-		StringParameter SP_requestId;
-		StringParameter SP_requestURI;
-		StringParameter SP_myHttpHeaders {
+		StringParameter sp_requestId;
+		StringParameter sp_requestURI;
+		StringParameter sp_myHttpHeaders {
 			IndexDomain: web::httpHeader;
 		}
-		StringParameter SP_responseFileName;
-		StringParameter SP_requestFileName;
-		StringParameter SP_apikey;
-		StringParameter SP_authorization;
+		StringParameter sp_responseFileName;
+		StringParameter sp_requestFileName;
+		StringParameter sp_apikey;
+		StringParameter sp_authorization;
 	}
 	Procedure pr_uploadSpeech {
 		Arguments: (FileLocation,StatusCode,StatusDescription);
@@ -136,7 +136,7 @@ Model Main_SpeechToText {
 					               "/" + pro::ModelName + ".apikey", 
 					localPath   :  "speechToText.apikey");
 				read from file "speechToText.apikey" ;
-				FileDelete( "peechToText.apikey" );
+				FileDelete( "speechToText.apikey" );
 			else
 				read from file "../speechToText.apikey" ;
 			endif ;

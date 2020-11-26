@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<PageManager>
+	<Page Name="All Data Pages" PageGUID="8A5BE84D-BB8D-417C-9D46-C625C275A23D">
+		<Page Name="[Data Page] sp_otherRegionalBlockAcronyms" PageGUID="C2528622-4B0F-4573-B96E-500E8D593B06" />
+		<Page Name="[Data Page] sp_otherRegionalBlockNames" PageGUID="C17B040F-0305-4001-B0DB-E2C9F7986AA7" />
+		<Page Name="[Data Page] sp_languageAttributes" PageGUID="5BCB8D4F-34B3-406E-B3B7-B6D27FC2BB9E" />
+		<Page Name="[Data Page] sp_currencyAttributes" PageGUID="BEE83748-82CA-4B18-9669-979D9ACED302" />
+	</Page>
+</PageManager>

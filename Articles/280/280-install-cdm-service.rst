@@ -120,7 +120,7 @@ You can check whether this port is open using the command ``netstat -a`` on a CM
 
 .. https://www.tomshardware.com/news/how-to-open-firewall-ports-in-windows-10,36451.html
 
-
+.. Also make sure that the inbound rule for the windows firewall, allows an inbound rule for CDM.
 
 Linking the CDM service to a database
 ---------------------------------------------

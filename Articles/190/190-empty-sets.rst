@@ -29,7 +29,7 @@ Let's assume the following two identifiers:
    subset of  :  AllVariables
 
 
-As you can see, it holds that ``ActiveVariables`` :math:`\subseteq` :aimms:set:`AllVariables` :math:`\subseteq` :aimms:set:`AllIdentifiers` because the predefined set :aimms:set:`AllVariables` is defined in AIMMS to be a subset of ``AllVariablesConstraints``, which in turn is a subset of :aimms:set:`AllIdentifiers`. You can verify this by opening the attribute window of these predefined sets.
+As you can see, it holds that ``ActiveVariables`` :math:`\subseteq` :aimms:set:`AllVariables` :math:`\subseteq` :aimms:set:`AllIdentifiers` because the predefined set :aimms:set:`AllVariables` is defined in AIMMS to be a subset of :any:`AllVariablesConstraints`, which in turn is a subset of :aimms:set:`AllIdentifiers`. You can verify this by opening the attribute window of these predefined sets.
 
 This means that the ``empty`` statement behaves differently for ``NormalSet`` and ``ActiveVariables``, as explained below:
 

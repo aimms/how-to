@@ -1,0 +1,10 @@
+<AimmsJSONMapping>
+    <ObjectMapping>
+        <ArrayMapping name="array">
+            <ObjectMapping>
+                <ValueMapping name="firstName" binds-to="i_fn" force-dense="s_firstNames(i_fn)"/>
+            </ObjectMapping>
+        </ArrayMapping>
+    </ObjectMapping>
+</AimmsJSONMapping>
+

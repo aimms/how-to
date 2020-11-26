@@ -7,7 +7,7 @@ Upgrade an AIMMS PRO Installation
 
 The AIMMS PRO upgrade process is designed to be easy! 
 
-Use the installer available from the `AIMMS Downloads page <https://www.aimms.com/english/developers/downloads/download-aimms-pro/>`_.
+Use the installer available from the `AIMMS Downloads page <https://www.aimms.com/downloads#aimms-pro-download>`_.
 
 
 Prerequisites

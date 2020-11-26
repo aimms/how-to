@@ -93,4 +93,4 @@ After configuring both the string parameters in *Application settings > Workflow
 Related Topics
 ---------------
 
-* **AIMMS Documenation**: `Workflow Panel <https://manual.aimms.com/webui/application-settings.html#workflow-panel>`_
+* **AIMMS Documentation**: `Workflow Panel <https://documentation.aimms.com/webui/workflow-panels.html>`_

@@ -1,0 +1,92 @@
+## ams_version=1.0
+
+Model Main_HttpFood {
+	DeclarationSection Business_data_declaration {
+		Set s_foodNumbers {
+			SubsetOf: Integers;
+			Index: i_food;
+		}
+		StringParameter sp_foodName {
+			IndexDomain: i_food;
+		}
+		StringParameter sp_foodPrice {
+			IndexDomain: i_food;
+		}
+		StringParameter sp_foodDescription {
+			IndexDomain: i_food;
+		}
+		Parameter p_foodCalories {
+			IndexDomain: i_food;
+		}
+	}
+	DeclarationSection http_declaration {
+		StringParameter sp_outputFile;
+	}
+	Procedure pr_httpRequest {
+		Body: {
+			sp_requestURL:="https://www.w3schools.com/xml/simple.xml";
+			sp_outputFile:="Output.xml";
+			
+			! structure request
+			web::request_create(sp_requestId);
+			web::request_setURL(sp_requestId,SP_requestURL );
+			web::request_setMethod(sp_requestId, "GET");
+			
+			! header
+			web::request_getHeaders(sp_requestId, sp_httpHeaders); ! Get current headers
+			sp_httpHeaders['Accept'] := "application/xml";         ! Override header entry 'accept'
+			web::request_setHeaders(sp_requestId, sp_httpHeaders); ! Set current headers
+			
+			! Output file
+			web::request_setResponseBody(sp_requestId, 'File', sp_outputFile);
+			
+			! Invoke method
+			web::request_invoke(sp_requestId, p_responseCode);
+			
+			! Check response.
+			if (p_responseCode <> 200) then
+			    raise error "Web Request failed ";
+			endif;
+		}
+		DeclarationSection DeclarationRequest {
+			StringParameter sp_requestURL;
+			StringParameter sp_requestId;
+			Parameter p_responseCode;
+			StringParameter sp_httpHeaders {
+				IndexDomain: web::httpHeader;
+			}
+		}
+	}
+	Procedure pr_readOutput {
+		Body: {
+			dex::AddMapping(
+				mappingName :  "food", 
+				mappingFile :  "mappings\\foodMapping.xml");
+			dex::ReadFromFile(
+				dataFile         :  sp_outputFile, 
+				mappingName      :  "food", 
+				emptyIdentifiers :  0, 
+				resetCounters    :  1);
+		}
+	}
+	Section Application_Initialization_execution_and_termination {
+		Procedure MainInitialization;
+		Procedure PostMainInitialization;
+		Procedure MainExecution {
+			Body: {
+				pr_httpRequest();
+				pr_readOutput();
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+		}
+	}
+}

@@ -1,0 +1,175 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "maxcolumns": {
+      "literal": 10
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Solve",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "transport",
+          "layoutInfo": {
+            "width": "4",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "totalCost",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "ServerSessionId",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "DetermineServerSession",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "DownloadSessionLog",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/DetermineServerSession": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_determineServerSession"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "title": {
+      "literal": "DetermineServerSession"
+    }
+  },
+  "widgets/DownloadSessionLog": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_downloadSessionLog"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "title": {
+      "literal": "Download session log"
+    }
+  },
+  "widgets/ServerSessionId": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_serverSession"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Server session Id"
+    }
+  },
+  "widgets/Solve": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "MainExecution"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "title": {
+      "literal": "Solve"
+    }
+  },
+  "widgets/totalCost": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "v_totaltravelled"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Pellet kilometers"
+    }
+  },
+  "widgets/transport": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "v_transport"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_bl"
+        ],
+        "colHeader": [
+          "i_dc"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "i_bl",
+          "width": 27.6
+        }
+      ]
+    },
+    "default.column.width": {
+      "literal": 20
+    },
+    "title": {
+      "literal": "Pellets transported"
+    }
+  }
+}
