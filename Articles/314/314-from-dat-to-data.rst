@@ -58,3 +58,74 @@ but it now looks different:
     :align: center
 
 
+Converting procedure calls
+---------------------------
+
+The case and other data management procedures are not just renamed, 
+they also collect identifiers to be stored in a different way:
+
+#.  The ``Disk files and folders`` interface works with 
+
+    #.  CaseTypes and 
+    
+    #.  Data categories.
+
+    A case type may include data categories.
+    
+    More information about these data types can be found in the User Guide of AIMMS 3.
+
+#.  The ``Disk files and folders`` interface works with subsets of ``AllIdentifiers``, called ``CaseContentTypes``. 
+
+    A union of two sets results in a new set.  Thus ``CaseContentTypes`` are at least as generic as ``CaseTypes``.
+
+
+The API for working on cases is changed by changing from ``Single data manager file`` to ``Disk files and folders``.
+
+The functionality of the procedures in the column of the left is roughly, but not exactly, 
+the same as the functionality offered by the procedures in the column on the left in the following table:
+
++--------------------------+-----------------------------------------------------+
+| Single data manager file | Disk files and folders                              |
++==========================+=====================================================+
+| CaseNew                  | CaseCommandNew                                      |
++--------------------------+-----------------------------------------------------+
+| CaseFind                 | CaseFileURLtoElement                                |
++--------------------------+-----------------------------------------------------+
+| CaseLoadCurrent          | CaseCommandLoadAsActive                             |
++--------------------------+-----------------------------------------------------+
+| CaseMerge                | CaseCommandMergeIntoActive                          |
++--------------------------+-----------------------------------------------------+
+| CaseLoadCurrent          | CaseCommandLoadAsActive                             |
++--------------------------+-----------------------------------------------------+
+| CaseLoadIntoCurrent      | CaseCommandLoadIntoActive                           |
++--------------------------+-----------------------------------------------------+
+| CaseReadFromSingleFile   | CaseFileLoad                                        |
++--------------------------+-----------------------------------------------------+
+| CaseWriteToSingleFile    | CaseFileSave                                        |
++--------------------------+-----------------------------------------------------+
+| CaseSelect               | CaseDialogSelectForLoad or CaseDialogSelectForSave  |
++--------------------------+-----------------------------------------------------+
+| CaseGetCurrent           | ActiveCaseFile                                      |
++--------------------------+-----------------------------------------------------+
+| CaseSetCurrent           | CaseFileSetActive                                   |
++--------------------------+-----------------------------------------------------+
+| CaseSave                 | CaseCommandSave or CaseFileSave                     |
++--------------------------+-----------------------------------------------------+
+| CaseSaveAll              | CaseDialogConfirmAndSave and CaseCommandSave        |
++--------------------------+-----------------------------------------------------+
+| CaseSaveAs               | CaseCommandSaveAs                                   |
++--------------------------+-----------------------------------------------------+
+| CaseSelectMultiple       | CaseDialogSelectMultiple                            |
++--------------------------+-----------------------------------------------------+
+| CaseGetChangedStatus     | DataChangeMonitorHasChanged                         |
++--------------------------+-----------------------------------------------------+
+| CaseSetChangedStatus     | DataChangeMonitorCreate or DataChangeMonitorReset   |
++--------------------------+-----------------------------------------------------+
+| CaseGetType              | CaseFileGetContents                                 |
++--------------------------+-----------------------------------------------------+
+
+As ``Data categories``, ``Case Types``, ``Data sets``, and ``Data manager file`` 
+are no longer relevant when working with ``Disk files and folders``; 
+the corresponding API's are not supported with this option setting.
+
+
