@@ -28,8 +28,8 @@ Filled in portions of this error message are:
 
 #.  ``'a'`` Here "a" is the name of the element supposedly to contain duplicate information.
 
-Explanation
-------------
+One possible explanation
+--------------------------
 
 The article `Write to a database efficiently <https://how-to.aimms.com/Articles/343/343-use-metadata-in-write-to-table.html>`_ explains that there are two strategies available to AIMMS for writing to a table:
 
@@ -50,6 +50,14 @@ The default behavior of most ODBC drivers is that the return value of the UPDATE
 The default behavior of MySQL ODBC driver, however, is that the return value of the MySQL UPDATE statement reflects the number of records adapted. If the data in the database is the same as the data to be written via the UPDATE statement, then this statement has a return value of 0.
 
 AIMMS will interprete the return value of 0, as there are 0 rows matching the primary and issue a subsequent INSERT statement assuming that the failure is due to absence of the data. This is where the "duplicate entry" error message comes from.
+
+Other explanations
+------------------
+
+There are also other scenarios and write strategies in the AIMMS Database interface that rely on 
+the SQL Update statement to return the number of found rows instead of the number of affected rows.
+As these require even more intricate explanations, they are not included here.
+
 
 Resolution
 -----------
