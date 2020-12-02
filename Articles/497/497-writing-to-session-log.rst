@@ -6,7 +6,9 @@ This trace is a:
 
 #.  File in the log folder, when the application is started via AIMMS Developer.
 
-#.  Part of the session log, when the application is published on AIMMS PRO.
+#.  Part of the session log, when the application is published on AIMMS PRO on premise
+
+#.  File copied to AIMMS PRO storage, when the application is published on AIMMS Cloud.
 
 Running example
 ---------------
@@ -81,7 +83,8 @@ How to integrate
 -----------------
 
 The code explained and demoed above is contained in a separate section named: ``Logging`` of download offered above.
-See `Export code to another project <https://how-to.aimms.com/Articles/145/145-import-export-section.html>`_ for copying the code to your project.
+See `Export code to another project <https://how-to.aimms.com/Articles/145/145-import-export-section.html>`_ 
+for copying the code to your project.
 
 
 

@@ -1,0 +1,22 @@
+﻿* AIMMS
+database_foreign_key_handling assume
+database_string_valued_foreign_keys assume
+rounding_compatibility Aimms_3_7
+use_UTC_forCaseAndStartEndDate 1
+* AOA
+* BARON 19
+* CONOPT 4.0
+* CPLEX 12.10
+* CPOptimizer 12.10
+* GUROBI 9.0
+* IPOPT 3.11
+* Knitro 12.2
+* MINOS
+* ODH-CPLEX 4.0
+* ODH-CPLEX 5.0
+* PATH 4.7
+* SNOPT 7.2
+* XA 16
+* NETSOL
+* Environment
+Default_UI 0
