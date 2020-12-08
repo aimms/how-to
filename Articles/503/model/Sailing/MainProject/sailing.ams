@@ -1,0 +1,134 @@
+## ams_version=1.0
+
+Model Main_pom {
+	Set s_locs {
+		Index: i_loc, i_locFrom, i_locTo;
+		Definition: {
+			{ 
+				'Gulf of Fonseca' , 
+				'Puerto Ayora, Ecuador',
+				'Adamstown',
+				'Pape ete',
+				'Evans Bay, Wellington',
+				'Tasmania, Australia',
+				'Perth, Australia',
+				'Sri Lanka' ,
+				'Antalaha, Madagaskar',
+				'Cape Town, South Africa',
+				'Liberia',
+				'Natal, Brazil',
+				'Guadeloupe',
+				'Panama'
+			}
+		}
+	}
+	Parameter p_lat {
+		IndexDomain: i_loc;
+		Definition: {
+			{ 
+				'Gulf of Fonseca' :  13.125736, 
+				'Puerto Ayora, Ecuador' : -0.744946,
+				'Adamstown' : -25.065755,
+				'Pape ete' : -17.537747,
+				'Evans Bay, Wellington' : -41.297558,
+				'Tasmania, Australia' : -43.057490,
+				'Perth, Australia' : -32.016469,
+				'Sri Lanka' : 6.338218,
+				'Antalaha, Madagaskar' : -14.900405,
+				'Cape Town, South Africa' : -34.160117,
+				'Liberia' : 5.073413,
+				'Natal, Brazil' : -5.776346,
+				'Guadeloupe' : 16.224432,
+				'Panama' : 8.933099
+			}
+		}
+	}
+	Parameter p_lon {
+		IndexDomain: i_loc;
+		Definition: {
+			{ 
+				'Gulf of Fonseca'    :  -87.660906  , 
+				'Puerto Ayora, Ecuador' : -90.312767,
+				'Adamstown' : -130.100924,
+				'Pape ete' : -149.570851,
+				'Evans Bay, Wellington' : 174.810509,
+				'Tasmania, Australia' : 146.218590,
+				'Perth, Australia' : 115.740409,
+				'Sri Lanka' : 80.606132,
+				'Antalaha, Madagaskar' : 50.282581,
+				'Cape Town, South Africa' : 18.865838,
+				'Liberia' : -8.589254,
+				'Natal, Brazil' : -35.188944,
+				'Guadeloupe' : -61.695177,
+				'Panama' : -79.560320
+			
+			}
+		}
+	}
+	Parameter p_adaptedLon {
+		IndexDomain: i_loc;
+		Definition: {
+			if p_lon(i_loc) < ( p_centerLon - 180 ) then 
+				p_lon(i_loc) + 360
+			elseif p_lon(i_loc) > ( p_centerLon + 180 ) then
+				p_lon(i_loc) - 360
+			else
+				p_lon(i_loc)
+			endif
+		}
+	}
+	Parameter p_centerLat {
+		InitialData: 0;
+	}
+	Parameter p_centerLon {
+		InitialData: 0;
+	}
+	Parameter p_size {
+		IndexDomain: i_loc;
+		Definition: 1;
+	}
+	Parameter p_connections {
+		IndexDomain: (i_locFrom,i_locTo);
+		Definition: i_locFrom = i_locTo ++ 1;
+	}
+	Parameter p_adaptedConnections {
+		IndexDomain: (i_locFrom,i_locTo);
+		Definition: {
+			p_connections(i_locFrom, i_locTo) $
+				(abs(p_adaptedLon(i_locFrom)-p_adaptedLon(i_locTo))<250)
+		}
+	}
+	Section Application_initialization_execution_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure MainExecution;
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+}
