@@ -17,5 +17,7 @@ Disallow: https://how-to.aimms.com/Articles/286/286-mysql-odbc-driver-select.htm
 Disallow: https://how-to.aimms.com/Articles/336/webui-annotations.html
 Disallow: https://how-to.aimms.com/Articles/368/368-attempting-connect.html
 
+_static/sankey.html
+
 
 

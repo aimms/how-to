@@ -1,0 +1,464 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home",
+                "children": [],
+                "type": "page"
+              },
+              {
+                "name": "sp_settings",
+                "type": "sidepanel",
+                "slug": "settings_1",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "widget.visibility.greyout": {
+      "literal": false
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "imWidget",
+          "gridArea": "area-c",
+          "dndId": "area-cimWidget0"
+        },
+        {
+          "widgetUri": "tmComposition",
+          "gridArea": "area-b",
+          "dndId": "area-btmComposition1"
+        },
+        {
+          "widgetUri": "tbRequirements",
+          "gridArea": "area-a",
+          "dndId": "area-atbRequirements2"
+        },
+        {
+          "widgetUri": "tbComposition",
+          "gridArea": "area-a",
+          "dndId": "area-atbComposition3"
+        },
+        {
+          "widgetUri": "epHost",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsepHost4"
+        }
+      ]
+    },
+    "maxcolumns": {
+      "literal": 9
+    },
+    "primarypageaction": {
+      "aimms": {
+        "contents": [
+          "sp_primaryAction"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_primaryAction",
+            "slice": [
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_secondaryAction"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_secondaryAction",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "sidepanels": {
+      "aimms": {
+        "contents": [
+          "sp_sidePanels"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_sidePanels",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexSidePanelSpec",
+                "type": "free",
+                "value": "webui::indexSidePanelSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "tbRequirements",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "tbComposition",
+          "layoutInfo": {
+            "width": "6",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "tmComposition",
+          "layoutInfo": {
+            "width": "3",
+            "height": "3",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "tm2_composition",
+          "layoutInfo": {
+            "width": "3",
+            "height": "3",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "imWidget",
+          "layoutInfo": {
+            "width": "5",
+            "height": "3",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "pages/settings_1": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "sb_selectHost",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "s_status",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "s_host",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/imWidget": {
+    "aimms.widget.type": {
+      "literal": "image"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_image"
+        ]
+      }
+    }
+  },
+  "widgets/s_host": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_host"
+        ]
+      }
+    },
+    "multi.line": {
+      "literal": 1
+    }
+  },
+  "widgets/s_status": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_status"
+        ]
+      }
+    },
+    "multi.line": {
+      "literal": 1
+    }
+  },
+  "widgets/sb_selectHost": {
+    "aimms.widget.type": {
+      "literal": "selectionbox"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "ep_host"
+        ]
+      }
+    }
+  },
+  "widgets/tbComposition": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_alloyComposition",
+          "p_alloyCost",
+          "v_alloyPurchased"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "v_alloypurchased": "1"
+      }
+    },
+    "default.column.width": {
+      "literal": 13
+    },
+    "title": {
+      "literal": "Alloy Composition"
+    }
+  },
+  "widgets/tbRequirements": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_requirements",
+          "v_requirement"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_requirements": "p_requirements",
+        "v_requirement": "p_requirements"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_ele"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_requirements"
+          },
+          "width": 14.3
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_ele",
+          "width": 16.01
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "v_requirement"
+          },
+          "width": 13.45
+        }
+      ]
+    },
+    "title": {
+      "literal": "Requirements"
+    }
+  },
+  "widgets/tm2_composition": {
+    "aimms.widget.type": {
+      "literal": "treemap"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_finalComposition"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rectangles": [
+          "i_ele",
+          "i_alloy"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Final Composition"
+    },
+    "widget.visible": {
+      "aimms": {
+        "contents": [
+          "bp_2visible"
+        ]
+      }
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_widgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_widgetActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "widgets/tmComposition": {
+    "aimms.widget.type": {
+      "literal": "treemap"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_finalComposition"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rectangles": [
+          "i_alloy",
+          "i_ele"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Final Composition"
+    },
+    "widget.visible": {
+      "aimms": {
+        "contents": [
+          "bp_1visible"
+        ]
+      }
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_widgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_widgetActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
