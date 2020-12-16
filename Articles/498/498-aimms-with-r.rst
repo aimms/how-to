@@ -23,8 +23,6 @@ The model outputs the % composition of the final alloy - x% of Alloy A, y% of Al
 For example, using the provided data - a 60% Alloy B and 40% Alloy D mixture is the optimal way to create an alloy with 30% lead, 30% zinc, and 40% tin.
 
 This breakdown can already be visualized in AIMMS WebUI using the `treemap widget <https://documentation.aimms.com/webui/tree-map-widget.html>`_. 
-However, a treemap widget is not always the best choice to visualize multiple levels of breakdown as we have here. 
-One problem being you cannot easily visualize the final element composition. 
 
 .. figure:: tree.png
     :align: center
@@ -32,7 +30,9 @@ One problem being you cannot easily visualize the final element composition.
     
     Colors represent (a) alloys in the left image and (b) elements in the right image.
 
-We can also visualize the same data in a `Sankey diagram <https://en.wikipedia.org/wiki/Sankey_diagram>`_, which are typically used to visualize flows in multi-level networks. This way, we can see breakdown of the final alloy step by step.
+We can also visualize the same data in a `Sankey diagram <https://en.wikipedia.org/wiki/Sankey_diagram>`_, which are typically used to visualize flows in multi-level networks. 
+A `sankey widget` is not available in AIMMS and, instead of building a custom widget - one could use R (or Python) to generate the sankey diagram as an image. 
+This example shows that in addition to running machine learning models, data processing and transformations, R / Python can also be used to generate visualizations for your AIMMS WebUI application.
 
 .. figure:: sankey.png
     :scale: 70
@@ -115,7 +115,7 @@ In `run_api.py`, we use the ``plumber::plumb`` function to run (or plumb) the AP
 Running locally 
 """"""""""""""""""
 
-If you run the `run_api.R` file using ``source("run_api.R"), a local API server will be started.  
+If you run the `run_api.R` file using ``source("run_api.R")``, a local API server will be started.  
 You can test this server by typing in the url ``http://localhost:8000`` in your browser. 
 
 .. image:: test.png
