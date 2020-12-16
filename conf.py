@@ -169,7 +169,7 @@ html_theme_options = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_stat_html']
+# html_static_path = []
 
 
 # The following "context" is passed to templates in _templates folder
@@ -268,7 +268,7 @@ else:
 html_baseurl = 'https://how-to.aimms.com/'
 
 # adding path to non-rst files that go to the build
-html_extra_path = ['robots.txt', 'stat_html.txt']
+html_extra_path = ['robots.txt']
 
 #------------------------------------------------- Generate redirects from old URLs  ----------------------------------------------------------#
 
