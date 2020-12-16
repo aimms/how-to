@@ -146,21 +146,21 @@ Model Main_blendingModel {
 	}
 	Section sankeyChart {
 		DeclarationSection processSolution {
-			Parameter p_finalComposition {
+			Parameter p_finalContribution {
 				IndexDomain: (i_alloy, i_ele);
 				Unit: up_percent;
 				Definition: v_alloyPurchased(i_alloy) * p_alloyComposition(i_ele, i_alloy) / p_percent;
+			}
+			Set s_nodes {
+				SubsetOf: Integers;
+				Index: i_node, j_node;
+				Property: ElementsAreNumerical;
 			}
 			Parameter p_flows {
 				IndexDomain: (i_node, j_node)|i_node <> j_node;
 				Unit: up_percent;
 				dex::ColumnName: value;
 				dex::TableName: flows;
-			}
-			Set s_nodes {
-				SubsetOf: Integers;
-				Index: i_node, j_node;
-				Property: ElementsAreNumerical;
 			}
 			StringParameter sp_nodeNames {
 				IndexDomain: i_node;
@@ -206,7 +206,7 @@ Model Main_blendingModel {
 				populate p_flows with respective compositions:
 					- 0 is made up of alloys 4-x, represented by v_alloyPurchased
 					- Alloys 4-x are made up of the elements 1-3, represented by p_alloyComposition
-					  Multiply p_alloyComposition with v_alloyPurchased to get element composition of the final product
+					  Multiply p_alloyComposition with v_alloyPurchased to get element contribution to the final product
 				
 				sp_nodeNames is used to print the names on the chart
 				sp_nodeGroup is used to color the different nodes in the chart"
@@ -288,9 +288,12 @@ Model Main_blendingModel {
 					if ep_host = StringToElement(s_hosts, "local") then
 					"http://localhost:8000/"
 					else
-					"https://rsankey.azurewebsites.net/"
+					FormatString("https://%s/", sp_remoteURL)
 					endif
 				}
+			}
+			StringParameter sp_remoteURL {
+				InitialData: "rsankey.azurewebsites.net";
 			}
 			StringParameter sp_reqID;
 			StringParameter sp_URL {
@@ -338,7 +341,6 @@ Model Main_blendingModel {
 				!as we want to send a json file and default expectation is a txt file
 				web::request_getHeaders(sp_reqID, sp_requestHeaders);
 				sp_requestHeaders['Content-Type'] := "application/json";
-				sp_requestHeaders['Accept'] := "*/*";
 				web::request_setHeaders(sp_reqID, sp_requestHeaders);
 				web::request_setResponseBody(sp_reqID, 'File', sp_InFile);
 				!call the api
@@ -349,7 +351,7 @@ Model Main_blendingModel {
 					errh::MarkAsHandled(ep_err);
 				endblock;
 				
-				pr_connectionCheck;
+				pr_responseCheck;
 				if p_responseCode = 200 then
 				sp_image := "sankey.png";
 				FileCopy(sp_inFile, sp_path, 1);
@@ -370,7 +372,7 @@ Model Main_blendingModel {
 				web::request_invoke(sp_reqID, p_responseCode);
 				web::request_close(sp_reqID);
 				
-				pr_connectionCheck;
+				pr_responseCheck;
 				
 				onerror ep_err do
 					sp_status := "Something went wrong";
@@ -378,7 +380,7 @@ Model Main_blendingModel {
 				endblock;
 			}
 		}
-		Procedure pr_connectionCheck {
+		Procedure pr_responseCheck {
 			Body: {
 				if p_responseCode = 200 then
 				sp_status := "Connection established with API server";
@@ -413,7 +415,11 @@ Model Main_blendingModel {
 			   endif ;
 			endif ;
 			
-			solve mp_leastCost;
+			if projectdevelopermode() then
+			solve mp_leastCost where solver:='CBC 2.9';
+			else
+			solve mp_leastCost where solver:= 'CPLEX 12.10';
+			endif;
 		}
 	}
 	Procedure PreMainTermination {

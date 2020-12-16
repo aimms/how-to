@@ -4,5 +4,5 @@
 	<Library System="true" Path="AimmsPro" />
 	<Library System="true" Path="AimmsWebUI" />
 	<RepositoryLibrary UUID="BDF54E1C-AF05-4D77-856C-F3C05F20FFB8" Name="DataExchange" Version="1.1.0.12" />
-	<RepositoryLibrary UUID="DABB08E6-6AD8-4118-B08B-46C1CBFAEA04" Name="HTTPClient" Version="1.1.10000.3" Branch="develop" />
+	<RepositoryLibrary UUID="DABB08E6-6AD8-4118-B08B-46C1CBFAEA04" Name="HTTPClient" Version="1.1.0.6" />
 </References>

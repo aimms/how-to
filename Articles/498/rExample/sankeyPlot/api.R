@@ -4,8 +4,7 @@ healthCheck <- function() {
   return(msg)
 }
 
-
-source("sankey.R")
+source("model.R")
 
 #* Generate a sankey PNG
 #* @get /sankey
@@ -18,11 +17,9 @@ sankey = function(req) {
 
 #* Generate a sankey HTML
 #* @get /sankeyhtml
-#* @serializer contentType list(type='image/png')
 sankeyhtml = function(req, res) {
   inFile <- req$postBody
   file <- hSankey(inFile)
   include_html(file, res)
-  
 }
 

@@ -11,7 +11,6 @@ COPY sankeyPlot sankeyPlot
 WORKDIR sankeyPlot
 
 RUN R -e 'renv::restore()'
-
 RUN R -e "webshot::install_phantomjs(force = TRUE)"
 
 EXPOSE 8000

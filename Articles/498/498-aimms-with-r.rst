@@ -5,213 +5,199 @@ How to connect AIMMS with R
    :description: Integrating (data science) models built in R with your AIMMS applications
    :keywords: r, integration, data science, machine learning, connectivity, tidyverse, rstats, sankey
 
+.. |sankeyHTML| replace:: :download:`View interactive version here<images/sankey.html>`
+
+.. |blendingProblem| replace:: :doc:`Blending problem <../454/454-ChemicalEngineering-blendingproblem>`
+
 This article is part of a series of examples on how to connect AIMMS with models built in Python or R. 
 We recommend you read both :doc:`Connecting AIMMS with Data Science Models <../494/494-overview-aimms-ds-models>` and :doc:`How to connect AIMMS with Python <../487/487-aimms-with-python>` before continuing. 
 
-In this article, we will show how to extend an AIMMS app with a R model that generates a Sankey diagram using the `networkd3 <https://www.rdocumentation.org/packages/networkD3/versions/0.4>`_ package. The R model is exposed as a REST API using the `plumber <https://www.rplumber.io/index.html>`_ package. 
+In this article, we will show how to extend an AIMMS app with a R model that generates a Sankey diagram using the `networkd3 <https://www.rdocumentation.org/packages/networkD3/versions/0.4>`_ package. The R model is exposed as a REST API using the `Plumber package <https://www.rplumber.io/index.html>`_.
 
 Example 
 ------------
 
-We will use an implementation of the :doc:`Blending problem <../454/454-ChemicalEngineering-blendingproblem>`. This model is a classic application of linear programming - find what composition of alloys should be blended together to make a final alloy with the required properties. 
+We will use an implementation of the |blendingProblem|, a classic application of linear programming.
+The objective is to find what composition of alloys should be blended together to make a final alloy with the required properties, minimizing cost. 
 The model outputs the % composition of the final alloy - x% of Alloy A, y% of Alloy B, and so on. 
 For example, using the provided data - a 60% Alloy B and 40% Alloy D mixture is the optimal way to create an alloy with 30% lead, 30% zinc, and 40% tin.
 
-This breakdown can be visualized in AIMMS WebUI using the `treemap widget <https://documentation.aimms.com/webui/tree-map-widget.html>`_. However, a treemap widget is not always the best choice to visualize multiple levels of breakdown as we have here. One problem being you cannot use this visualization to easily verify if the element requirements are satisfied. 
+This breakdown can already be visualized in AIMMS WebUI using the `treemap widget <https://documentation.aimms.com/webui/tree-map-widget.html>`_. 
+However, a treemap widget is not always the best choice to visualize multiple levels of breakdown as we have here. 
+One problem being you cannot easily visualize the final element composition. 
 
 .. figure:: tree.png
     :align: center
-    :scale: 70
+    :scale: 60
     
     Colors represent (a) alloys in the left image and (b) elements in the right image.
 
-We can also visualize the same data in a `Sankey diagram <https://en.wikipedia.org/wiki/Sankey_diagram>`_, which are typically used to visualize flows in multi-level networks. This way, we can see breakdown of the final alloy step by step. 
+We can also visualize the same data in a `Sankey diagram <https://en.wikipedia.org/wiki/Sankey_diagram>`_, which are typically used to visualize flows in multi-level networks. This way, we can see breakdown of the final alloy step by step.
 
-.. image:: images/sankey.png
-    :target: /_static/sankey.html
+.. figure:: images/sankey.png
     :scale: 70
     :align: center
 
-.. raw:: html
+    |sankeyHTML|
 
-    <iframe src="/_static/sankey.html" height="345px" width="100%"></iframe>
-
-The example AIMMS project and R we will refer to in this article can be downloaded :download:`from here<pyExample.zip>`.
+The example AIMMS and R projects we will refer to in this article can be downloaded :download:`from here<rExample.zip>`.
 The download contains:
 
-    #. `aimmsModel`: The AIMMS project folder which is initialized with geographical nodes around the Greater Seattle area. 
-    #. `app`: The Python work directory which contains the KMeans model along with modules required for deploying the model as a web service using Flask.
-    #. `requirements.txt`: The list of Python packages required.
-    #. `Dockerfile`: A docker file you can use to create an image (more later). 
+    #. `blendingModel`: The AIMMS project folder which is an implementation of the |blendingProblem|.
+    #. `sankeyPlot`: The R project which contains three .R scripts, a `renv.lock` file, and a `test.json` file. (more later)
+    #. `Dockerfile`: The docker file to containerize this R project. 
 
-.. _installation:
+.. _rInstallation:
 
 Installing prerequisites
 """""""""""""""""""""""""""
 In addition to the prerequisites outlined in :ref:`scripting-tools`, you will need to install the below for this example. 
 
-#. The example project is developed using AIMMS version 4.75.3, so we recommend you use at least that version. `Download AIMMS Developer <https://www.aimms.com/support/downloads/#aimms-dev-download>`_. 
-#. The Python modules in the example are developed in `Python 3.8 <https://www.python.org/downloads/release/python-386/>`_.
-
-    .. tip:: 
-        It is usually recommended to create a virtual environment so that your local Python installation is not changed. 
-        
-        Use ``py -3 -m venv env`` to start a virtual environment. 
-        
-        `Read more on Python Docs <https://docs.python.org/3/library/venv.html>`_
-
-#. This example requires the packages ``scikit-learn`` and ``Flask`` as outlined in the file `requirements.txt`. You can install these packages by using the commandline prompt::
+#. The example project is developed using AIMMS version 4.76.8, so we recommend you use at least that version. `Download AIMMS Developer <https://www.aimms.com/support/downloads/#aimms-dev-download>`_. 
+#. AIMMS `HTTP Client Library <https://documentation.aimms.com/httpclient/index.html>`_: version 1.1.0.6 or above. 
+#. The R project in the example is developed in `R 4.0.3 <https://cran.r-project.org/bin/windows/base/>`_.
+#. ``renv`` package to install the dependencies captured in the 'renv.lock' file. `Read more <https://rstudio.github.io/renv/index.html>`_.
     
-    pip install -r requirements.txt --user
+    .. code-block:: r
 
-The Python model
+        #install renv
+        install.packages("renv")
+
+        #restore packages
+        renv::restore()
+
+    Running the ``renv::restore()`` command once will install all the packages required for this code to run. 
+
+    Using the `renv package` is one way to use virtual environments while working with R - to share reproducible projects and to not change the packages already on your computer. 
+
+The R project
 --------------------
 
-`app/kmeansClust.py` has the function ``mykMeans`` which takes in the number of clusters ``numClusters`` and latitude-longitude data ``coordData`` and fits a 
-`KMeans model <https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans>`_. 
-A sample input file is provided in `app/input.json`.
+The R project folder `sankeyPlot` contains three .R scripts - `model.R`, `api.R`, and `run_api.R`.
 
-.. literalinclude:: pyExample/app/input.json
-    :language: JSON
-    :lines: 1-5, 166-169, 330-333
-    :caption: Note that only some rows are displayed here
+`model.R` contains functions which take in a JSON file (in the required format) and return a sankey diagram in HTML and PNG formats, using the ``networkD3::sankeyNetwork`` function. 
+`sankeyNetwork <https://www.rdocumentation.org/packages/networkD3/versions/0.4/topics/sankeyNetwork>`_ requires two data frames as input - Links and Nodes, as shown below. 
+The ``group`` attribute of Nodes is optional but is used to control the coloring of the nodes but it is required that the ``source`` and ``target`` values in Links, and ``node`` in Nodes are 0 indexed integers.
 
-`app/dataio.py` contains functions which prepare the data for consumption by ``myKmeans`` and our AIMMS project. 
-For example, ``dataFromCluster`` retrieves data from the input.JSON and simply transforms the ``latitude`` and ``longitude`` arrays into an array of tuples.
+.. figure:: images/sankeyNetwork.png
+    :align: center
+    :Scale: 50
 
-.. .. literalinclude:: pyExample/app/dataio.py
-..     :language: python
-..     :lines: 9-15
-..     :lineno-start: 9
+    Input dataframes for the ``sankeyNetwork`` function.
 
-In `app/main.py`, we use the Flask package to expose different Python functions as APIs.
+A sample input file is provided in `sankeyPlot/test.json`. We use ``jsonlite::fromJSON()`` to import data from this file into R.
+So, running ``mySankey("test.json")`` will create the above sankey diagram (displayed in the `Viewer` pane of RStudio). ``hSankey("test.json")`` will return a .html file and ``iSankey("test.json")`` will return a .png file. 
 
-.. literalinclude:: pyExample/app/main.py
-    :language: python
+In `api.R`, we decorate different functions with special comments to expose them as API endpoints using the `plumber package <https://www.rplumber.io/index.html>`_. 
+
+.. literalinclude:: rExample/sankeyPlot/api.R
+    :language: r
     :linenos:
-    :emphasize-lines: 15
+    :lines: 7-16
+    :lineno-start: 7
+    :emphasize-lines: 4-5, 9
 
-In this example, we have two APIs differentiated by the first argument of ``@app.route`` calls. 
+Lines 11 and 15 are required to specify that the response of this API is a PNG image file. 
 
-#. ``/hello`` will return "hello world". A simple test case. 
-#. ``/`` will run the input JSON file through the ``myKmeans`` function and return the output as a JSON file. 
+In this example, we have three APIs differentiated by the name following the ``#* @get`` comments in lines: 1, 10, 19. Here we define all three endpoints as GET but plumber also supports other API endpoints like POST, PUT, etc. Read more on `plumber's documentation <https://www.rplumber.io/articles/routing-and-input.html>`_.
+
+#. ``/`` will return "hello world at _time" where _time is replaced by system time. A simple case to test the status of the API server. 
+#. ``/sankey`` will run the input JSON file through the ``iSankey`` function and return the output as a PNG image.
+#. ``/sankeyHTML`` will run the input JSON file through the ``hSankey`` function and return the output as a HTML file. 
+
+In `run_api.py`, we use the ``plumber::plumb`` function to run (or plumb) the API server built  in `api.R`. The port and host address are specified in line 4.
+
+.. literalinclude:: rExample/sankeyPlot/run_api.r
+    :language: r
+    :linenos:
+    :emphasize-lines: 4
 
 Running locally 
 """"""""""""""""""
 
-If you run the `app/main.py` in terminal (using ``python main.py``), Flask will start a local web server. 
-You can test this server by typing in the url ``http://localhost:8000/hello`` in your browser. 
+If you run the `run_api.R` file using ``source("run_api.R"), a local API server will be started.  
+You can test this server by typing in the url ``http://localhost:8000`` in your browser. 
 
 .. image:: test.png
     :align: center
 
-Now, testing the clustering function/API in a browser is not as straightforward as this one requires input data in the JSON format (as highlighted in line 15 in the above code-block).
-We will use the Postman app to call this API by pasting the contents of `input.json` in the Body attribute as shown below. 
-It will return the output of ``mykMeans`` as a JSON object.
+We will use the Postman application to test the other two APIs which need a JSON body as input. Paste the contents of `test.json` in the Body attribute as shown below. 
 
-.. image:: runCluster.png
+It will return the output in the bottom tab, as a PNG file or raw html code, depending on which API you call. 
+
+.. image:: postman.png
     :align: center
+    :scale: 80
 
-Make sure to set the attributes in the Body tab as highlighted in the image. 
+Make sure to set the attributes in the Body tab as `raw, JSON`. 
+If you click on `Send and Download` instead of `Send`, Postman will let you download the response file. 
 
-The AIMMS model
+The AIMMS project
 ------------------
 
-The AIMMS project `aimmsModel` has the identifiers ``pLatitude(iLoc)``, ``pLongitude(iLoc)`` and ``pNumClusters`` which we need export in a format similar to `input.json`. 
+The AIMMS project `blendingModel` has the input data and math model identifiers in declarations ``inputData`` and ``mathModel`` respectively. 
+
+Preparing data
+""""""""""""""""""
+``v_alloyPurchased(i_alloy)`` contains the % composition of the final alloy. 
+We need to use this identifier to prepare the input for the sankey API. 
+
+Section ``sankeyChart`` contains the declarations which hold the input data for the API. ``pr_createNodesFlows`` populates the set ``s_nodes`` and the identifiers indexed on this set - ``p_flows``, ``sp_nodeNames``, ``sp_nodeGroup``. 
 
 Data I/O
 """"""""""""
-``prWriteJSON`` creates the input file as the Python model expects and ``prReadJSON`` reads the result file into AIMMS. 
+``prWriteJSON`` creates the input file as the R model expects, using the 
+the mapping file `blendingModel/mappings/outMap.xml`. we export two dictionaries - nodes, and links and an array for the unit parameter ``up_percent``.
 
-.. code-block:: aimms
-
-    spOutFile := "input.json";
-    spMapName := "outMap";
-    spMapFile := "apiCalls//outMap.xml";
-
-    dex::AddMapping(spMapName , spMapFile);
-
-    dex::WriteToFile(
-	    dataFile    : spOutFile , 
-	    mappingName : spMapName , 
-	    pretty      :  1);
-
-.. note:: It is not necessary that the `pretty` argument for ``dex::WriteToFile`` is set to 1 but it helps with readability of the json file, which is particularly helpful during development.
-
-``prWriteJSON`` uses the mapping file `aimmsModel/apiCalls/outMap.xml` to create this `input.json` file. 
-
-.. literalinclude:: pyExample/aimmsModel/apiCalls/outMap.xml
+.. literalinclude:: rExample/blendingModel/mappings/outMap.xml
     :language: xml
-    :lines: 1-6
     :linenos:
-    :emphasize-lines: 3-5
+    :emphasize-lines: 5-6, 12-14, 17
 
-``ObjectMapping`` initializes a key-value tree inside which ``ValueMapping`` is the first node which holds the scalar parameter ``pNumClusters``. To write out indexed AIMMS identifiers, we can use the ``ArrayMapping`` like in line 4 which writes out ``pLatitude`` as an array value to the key `latitude`.
-
-Similarly, ``prReadJSON`` will use the mapping file `aimmsModel/apiCalls/inMap.xml` to load the output of ``mykMeans`` into AIMMS identifiers ``pCluster(iLoc)``, ``pCenLat(iCentroid)`` and ``pCenLon(iCentroid)``.
-
-.. literalinclude:: pyExample/aimmsModel/apiCalls/inMap.xml
-    :language: xml
-    :lines: 1-8
-    :linenos:
-    :emphasize-lines: 4, 7
-
-Note the difference between the first mapping (for ``pCluster``) and the remaining two. ``iterative-existing=1`` is added to the map of ``pCluster`` because the elements ``iLoc`` already exist in our project, whereas for the other two - we are letting the DataExchange library create new elements in the set ``sCentroids``.
-Read more in `AIMMS Docs <https://documentation.aimms.com/dataexchange/mapping.html#the-iterative-binds-to-attribute>`_.
+As ``p_flows`` has two indices, it has two ``binds-to`` arguments (lines 12-13) whereas ``sp_nodeGroup`` and ``sp_nodeNames`` have the same one index, they get a single ``binds-to`` argument (line 5). 
 
 Calling the API
 """""""""""""""""""
 
-Now we simply use the HTTP library functions to make a GET call to the API created in the previous section as shown in procedure ``prCallAPI``.
+Now we simply use the HTTP library functions to make a GET call to the APIs created in the previous section. ``pr_healthCheck`` to check the status of the API and ``pr_iSankey`` to call the ``/sankey`` endpoint.
+
+As the ``/sankey`` endpoint returns a PNG image, we do not need to read any data into AIMMS. Instead, we move the response file to the ``MainProject//WebUI//resources//images`` folder to be used by the `Image widget <https://documentation.aimms.com/webui/image-widget.html>`_, using :aimms:func:`FileMove`.
 
 .. code-block:: aimms
     :linenos:
-    :emphasize-lines: 8-11
-    :lineno-start: 2
+    :emphasize-lines: 4
+    :lineno-start: 28
 
-    !starting request
-    web::request_create(requestId : spReqID );
-    web::request_setURL(spReqID, spURL);
-    web::request_setMethod(spReqID, "GET");
-    !as we want to send data in a file. Set 2nd argument to 'None' if you only need to pass a scalar value
-    web::request_setRequestBody(spReqID, 'File', spOutFile);
-    !as we want to send a json file and default expectation is a txt file
-    web::request_getHeaders(spReqID, spRequestHeaders);
-    spRequestHeaders['Content-Type'] := "application/json";
-    web::request_setHeaders(spReqID, spRequestHeaders);
-    web::request_setResponseBody(spReqID, 'File', spInFile);
-
-The highlighted lines 9-12 are equivalent to setting the body attributes in the Postman app. 
-Make sure that the url in ``spURL`` includes the appropriate `http://` or `https://` prefix. 
+    pr_responseCheck;
+    if p_responseCode = 200 then
+        sp_image := "sankey.png";
+        FileMove(sp_inFile, sp_path, 1);
+    endif;
 
 Deployment
 -------------
 
-When the `app/main.py` file is run in terminal, a warning is displayed. 
+Running the `run_api.R` script starts an API server on the local/development machine, on http://localhost:8000 or http://0.0.0.0/8000. 
+These URLs will not be accessible to apps published on AIMMS PRO or AIMMS Cloud. 
 
-.. image:: flask.png
-    :align: center
+`Hosting Plumber <https://www.rplumber.io/articles/hosting.html>`_ discusses some deployment options. As we did with the Flask APIs in :doc:`How to connect AIMMS with Python <../487/487-aimms-with-python>`, we will use Docker to deploy the Plumber APIs as well.
 
-The app server running on http://localhost:8000 or http://0.0.0.0/8000 is available on your local machine and to your AIMMS Developer instance but what about apps deployed to AIMMS PRO or AIMMS Cloud? 
-.. If your AIMMS PRO server is also running on the same machine, this Python model can be still be accessed using the same url.
-However, that is **not a viable option** if you are using AIMMS Cloud. 
-
-Some deployment options relevant to Flask are discussed on `their project website <https://flask.palletsprojects.com/en/1.1.x/deploying/>`_.
-
-We will however discuss deploying this web app using Docker, which is in fact similar to (or uses the same principles) some of the options discussed in the above link. 
-
-.. literalinclude:: pyExample/Dockerfile
+.. literalinclude:: rExample/dockerfile
     :language: docker
     :linenos:
-    :emphasize-lines: 7-8, 11-12
+    :emphasize-lines: 1, 4-8, 13-14, 18
 
-The image built using this Dockerfile uses `Tiangolo's nginx server <https://github.com/tiangolo/uwsgi-nginx-flask-docker/blob/master/docker-images/python3.8.dockerfile>`_ as a base and it comes with Python 3.8 already installed. 
-Lines 7-8 copy the Python modules we developed onto the base image and lines 11-12 install the packages required from the `requirements.txt` file. 
-The Dockerfile is basically automating the installation of prerequisites as outlined in :ref:`installation`.
+The image built using this dockerfile uses `Rocker's RStudio <https://hub.docker.com/r/rocker/rstudio>`_ as a base. We use the `RStudio` version instead of the base `rocker` as some of the packages used in `model.R` need some dependencies that the base image does not have. 
+Similarly, we install other dependencies like ``curl`` and ``libsodium`` in Line 4. Typically, a base docker image that satisfies all our needs can be found on sources like `DockerHub <https://hub.docker.com/>`_ or `GitHub <https://github.com>`_. If not, we will have to build our own custom dockerfile like in this case. 
+
+Lines 7 and 8 install R packages ``remotes`` and ``renv``, only difference being in Line 8, we install a specific version of the package from the developer's repository instead of from CRAN. 
+
+You can install all the required packages using either of these methods, but we use the ``renv::restore()`` as we did during development in Line 13. 
+
+Line 18 will run the ``run_api.R`` script when a container built on this image is started. 
 
 The below commandline prompts will build a Docker image of the name `imageName:latest` and start a container. 
-Most text editors or IDEs (such as VS Code or PyCharm) have a Docker plugin now.
-Read more about these options in `Docker Docs <https://docs.docker.com/engine/reference/commandline/build/>`_.
+Building an image from this file takes up to 10 mins, bulk of the time being spent in installing the R packages. 
 
 .. code-block:: none
 
@@ -219,7 +205,14 @@ Read more about these options in `Docker Docs <https://docs.docker.com/engine/re
 
     docker run -d -p 8000:8000 --name "containerName" imageName
 
-Now, we can use the same urls ``http://localhost:8000/`` or ``http://localhost:8000/hello`` to access the Flask APIs, the only difference being they are hosted on Docker Desktop instead of Flask's development server. Once you deploy this Docker image, your API will be available globally.
+This docker image can now be pushed to a container registry on a cloud service provider like AWS or Azure, from where the API server can be hosted. 
+
+Further reading
+------------------
+
+* `Learn more about Plumber <https://rstudio.com/resources/webinars/expanding-r-horizons-integrating-r-with-plumber-apis/>`_
+* `Serving images as response for Plumber API <https://stackoverflow.com/questions/50033857/serve-arbitrary-image-files-through-plumber?noredirect=1&lq=1>`_
+* `Serving HTML files as response for Plumber APIs <https://github.com/rstudio/plumber/blob/master/tests/testthat/files/includes.R>`_
 
 
 
