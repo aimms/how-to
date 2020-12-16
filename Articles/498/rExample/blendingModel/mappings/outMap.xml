@@ -1,0 +1,19 @@
+<AimmsJSONMapping>
+    <ObjectMapping>
+        <ArrayMapping name="nodes">
+            <ObjectMapping>
+                <ValueMapping name="node" binds-to="i_node" />
+                <ValueMapping name="names" maps-to="sp_nodeNames(i_node)"/>
+                <ValueMapping name="group" maps-to="sp_nodeGroup(i_node)"/>
+            </ObjectMapping>
+        </ArrayMapping>
+        <ArrayMapping name="links">
+			<ObjectMapping>
+				<ValueMapping name="source" binds-to="i_node" />
+				<ValueMapping name="target" binds-to="j_node" />
+				<ValueMapping name="value" maps-to="p_flows(i_node,j_node)" />
+			</ObjectMapping>
+		</ArrayMapping>
+		<ValueMapping name="unit" maps-to="up_percent" />
+    </ObjectMapping>
+</AimmsJSONMapping>

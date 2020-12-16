@@ -24,4 +24,5 @@ We're aware that AIMMS is one of many tools in your workspace. This section prov
    sub_http/index
    /Articles/494/494-overview-aimms-ds-models
    /Articles/487/487-aimms-with-python
+   /Articles/498/498-aimms-with-r
 
