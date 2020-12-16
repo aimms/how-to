@@ -5,7 +5,7 @@ How to connect AIMMS with R
    :description: Integrating (data science) models built in R with your AIMMS applications
    :keywords: r, integration, data science, machine learning, connectivity, tidyverse, rstats, sankey
 
-.. |sankeyHTML| replace:: :download:`View interactive version here<images/sankey.html>`
+.. |sankeyHTML| replace:: :download:`View interactive version here<sankey.html>`
 
 .. |blendingProblem| replace:: :doc:`Blending problem <../454/454-ChemicalEngineering-blendingproblem>`
 
@@ -34,7 +34,7 @@ One problem being you cannot easily visualize the final element composition.
 
 We can also visualize the same data in a `Sankey diagram <https://en.wikipedia.org/wiki/Sankey_diagram>`_, which are typically used to visualize flows in multi-level networks. This way, we can see breakdown of the final alloy step by step.
 
-.. figure:: images/sankey.png
+.. figure:: sankey.png
     :scale: 70
     :align: center
 
@@ -79,7 +79,7 @@ The R project folder `sankeyPlot` contains three .R scripts - `model.R`, `api.R`
 `sankeyNetwork <https://www.rdocumentation.org/packages/networkD3/versions/0.4/topics/sankeyNetwork>`_ requires two data frames as input - Links and Nodes, as shown below. 
 The ``group`` attribute of Nodes is optional but is used to control the coloring of the nodes but it is required that the ``source`` and ``target`` values in Links, and ``node`` in Nodes are 0 indexed integers.
 
-.. figure:: images/sankeyNetwork.png
+.. figure:: sankeyNetwork.png
     :align: center
     :Scale: 50
 

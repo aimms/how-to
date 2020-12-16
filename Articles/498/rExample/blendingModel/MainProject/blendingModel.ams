@@ -293,7 +293,7 @@ Model Main_blendingModel {
 				}
 			}
 			StringParameter sp_remoteURL {
-				InitialData: "rsankey.azurewebsites.net";
+				Comment: "enter url for your deployed web app here.";
 			}
 			StringParameter sp_reqID;
 			StringParameter sp_URL {
@@ -354,8 +354,7 @@ Model Main_blendingModel {
 				pr_responseCheck;
 				if p_responseCode = 200 then
 				sp_image := "sankey.png";
-				FileCopy(sp_inFile, sp_path, 1);
-				FileDelete(sp_inFile);
+				FileMove(sp_inFile, sp_path, 1);
 				endif;
 				endif;
 			}
