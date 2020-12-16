@@ -107,7 +107,7 @@ In this example, we have three APIs differentiated by the name following the ``#
 
 In `run_api.py`, we use the ``plumber::plumb`` function to run (or plumb) the API server built  in `api.R`. The port and host address are specified in line 4.
 
-.. literalinclude:: rExample/sankeyPlot/run_api.r
+.. literalinclude:: rExample/sankeyPlot/run_api.R
     :language: r
     :linenos:
     :emphasize-lines: 4
