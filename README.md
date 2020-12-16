@@ -3,12 +3,11 @@
 Clone the repo on your computer
 ------------------------------------
 
-If you make it here, it means you have access right to the documentation git repo. Thus you may "clone" it somewhere on your computer ([like this](https://tortoisegit.org/docs/tortoisegit/tgit-dug-clone.html)) using `git@gitlab.aimms.com:aimms/documentation.git`. This will just copy all files from the gitlab server on your computer.
+If you make it here, it means you have access right to the How-To git repo. Thus you may "clone" it somewhere on your computer ([like this](https://tortoisegit.org/docs/tortoisegit/tgit-dug-clone.html)) using `git@gitlab.aimms.com:aimms/customer-support/aimms-how-to.git`. This will copy all files from the gitlab server onto your computer.
 
-You should end up with a folder structure similar to the following:
-![image](/uploads/f05b56c0ee19a4b045bd6c8a2aac8daf/image.png)
+Most of the content is located in the [Articles](/Articles) folder, where each article is inside a folder with a number, containing the article `RST` file and the attached resources (images, AIMMS project zip files, etc.). This number corresponds to a giltab ticket, where you can find more context and progress.
 
-You may notice that the documentation in itself (the text) is located in the folders from ``cdm`` till ``webui``. All the rest are actually configuration and support folders and files.
+The folder structure is meant for organising the content into sections on the website. You may find references to articles part of the [Articles](/Articles) folder in every index file. Putting articles in their dedicated [Articles](/Articles) folder enables us to display articles in several sections if needed.
 
 Build Locally the HTML documentation
 --------------------------------------
