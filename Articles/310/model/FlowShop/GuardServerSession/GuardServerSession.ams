@@ -8,7 +8,9 @@ LibraryModule Library_GuardServerSession {
 		- Declaration of time, preferably as SI_Time_Duration, including unit s.
 		- System library AIMMS PRO
 		- Repository library DataExchange
-		- AIMMS 4.76 or later"
+		- AIMMS 4.76 or later
+		
+		Test WebUI and WinUI apps in Cloud/Prem/Developer"
 	}
 	Section Public_Section {
 		Section WebUI_Support {
@@ -812,6 +814,7 @@ LibraryModule Library_GuardServerSession {
 					block ! Initialize logging
 						if pro::GetPROEndPoint() then
 							if pro::management::IsRunningOnCloud() then
+								! if DirectoryExists( "MainProject/WebUI" to be tested (WinUI apps might be ble to log to file version of session logs anyway).
 								bp_loggingOnCloud := 1 ;
 								bp_loggingToFile  := 1 ;
 							else
@@ -828,6 +831,8 @@ LibraryModule Library_GuardServerSession {
 							endif ;
 						endif ;
 					endblock ;
+					
+					! log file of a week old are to be deleted
 				}
 				Comment: {
 					"Add initialization statements here that require another library to be initialized already,
