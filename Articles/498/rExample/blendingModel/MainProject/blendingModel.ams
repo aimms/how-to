@@ -1,0 +1,446 @@
+## ams_version=1.0
+
+Model Main_blendingModel {
+	DeclarationSection inputData {
+		Quantity SI_Unitless {
+			BaseUnit: %;
+			Comment: "Expresses a dimensionless value.";
+		}
+		UnitParameter up_percent {
+			Quantity: SI_Unitless;
+			Definition: {
+				[%] ;
+			}
+		}
+		Quantity Currency {
+			BaseUnit: $;
+		}
+		Set s_alloysOnMarket {
+			Index: i_alloy;
+			Definition: {
+				data{
+				A,B,C,D,E,F,G,H,I
+				}
+			}
+		}
+		Set s_requiredElements {
+			Index: i_ele;
+			Definition: data{lead, zinc, tin};
+		}
+		Parameter p_requirements {
+			IndexDomain: (i_ele);
+			Unit: up_percent;
+			InitialData: data { lead : 30,  zinc : 30,  tin : 40 };
+		}
+		Parameter p_alloyComposition {
+			IndexDomain: (i_ele,i_alloy);
+			Unit: up_percent;
+			Definition: {
+				data
+				{ ( lead, A ) : 10,  ( lead, B ) : 10,  ( lead, C ) : 40,  ( lead, D ) : 60,  ( lead, E ) : 30,
+				  ( lead, F ) : 30,  ( lead, G ) : 30,  ( lead, H ) : 50,  ( lead, I ) : 20,  ( zinc, A ) : 10,
+				  ( zinc, B ) : 30,  ( zinc, C ) : 50,  ( zinc, D ) : 30,  ( zinc, E ) : 30,  ( zinc, F ) : 40,
+				  ( zinc, G ) : 20,  ( zinc, H ) : 40,  ( zinc, I ) : 30,  ( tin , A ) : 80,  ( tin , B ) : 60,
+				  ( tin , C ) : 10,  ( tin , D ) : 10,  ( tin , E ) : 40,  ( tin , F ) : 30,  ( tin , G ) : 50,
+				  ( tin , H ) : 10,  ( tin , I ) : 50 }
+			}
+		}
+		Parameter p_alloyCost {
+			IndexDomain: (i_alloy);
+			Unit: $;
+			Definition: {
+				data { A : 4.100,  B : 4.300,  C : 5.800,  D : 6.000,  E : 7.600,
+				       F : 7.500,  G : 7.300,  H : 6.900,  I : 7.300 }
+			}
+		}
+		Parameter p_percent {
+			Unit: up_percent;
+			Definition: 100;
+		}
+	}
+	DeclarationSection mathModel {
+		Variable v_alloyPurchased {
+			IndexDomain: (i_alloy);
+			Range: nonnegative;
+			Unit: up_percent;
+		}
+		Variable v_totalCost {
+			Range: free;
+			Unit: $;
+			Definition: sum(i_alloy, p_alloyCost(i_alloy)*v_alloyPurchased(i_alloy))/(1)[up_percent];
+		}
+		Variable v_requirement {
+			IndexDomain: i_ele;
+			Range: nonnegative;
+			Unit: up_percent;
+			Definition: sum[i_alloy, v_alloyPurchased(i_alloy) * p_alloyComposition(i_ele, i_alloy)] / p_percent;
+		}
+		Constraint c_purchaseConstraint {
+			IndexDomain: i_ele;
+			Unit: up_percent;
+			Definition: v_requirement(i_ele) >= p_requirements(i_ele);
+		}
+		Constraint c_materialBalance {
+			Unit: up_percent;
+			Definition: sum(i_alloy, v_alloyPurchased(i_alloy)) = p_percent;
+		}
+		MathematicalProgram mp_leastCost {
+			Objective: v_totalCost;
+			Direction: minimize;
+			Constraints: AllConstraints;
+			Variables: AllVariables;
+			Type: LP;
+		}
+	}
+	Procedure pr_reset {
+		Body: {
+			empty mathModel;
+			if FileExists(sp_path) then FileDelete(sp_path); endif;
+			empty sp_image;
+			empty sp_status;
+		}
+	}
+	Section userInterface {
+		StringParameter sp_primaryAction {
+			IndexDomain: webui::indexPageActionSpec;
+			Definition: data { displaytext : "Solve Model",  procedure : "pr_solvePlot",  state : "Active" };
+		}
+		StringParameter sp_secondaryAction {
+			IndexDomain: (webui::indexPageExtension, webui::indexPageActionSpec);
+			Definition: {
+				data 
+				{ ( 1, displaytext ) : "Reset"        ,  ( 1, icon        ) : "aimms-reset"  ,  ( 1, procedure   ) : "pr_reset"     ,
+				  ( 1, state       ) : "Active" }
+			}
+		}
+		StringParameter sp_sidePanels {
+			IndexDomain: (webui::indexPageExtension, webui::indexSidePanelSpec);
+			Definition: data { ( 1, displayText ) : "Settings",  ( 1, pageId ) : "settings_1",  ( 1, state ) : "Active" };
+		}
+		StringParameter sp_widgetActions {
+			IndexDomain: (webui::indexPageExtension, webui::indexWidgetActionSpec);
+			Definition: {
+				data 
+				{ ( 1, displaytext ) : "Switch view"     ,  ( 1, icon        ) : "aimms-rotate-ccw",  ( 1, procedure   ) : "pr_switchView",
+				  ( 1, state       ) : "Active"           }
+			}
+		}
+		Parameter bp_1visible {
+			Range: binary;
+			InitialData: 1;
+		}
+		Parameter bp_2visible {
+			Range: binary;
+			Definition: 1 - bp_1visible;
+		}
+		StringParameter sp_endPoint;
+		Procedure pr_switchView {
+			Body: {
+				if bp_1visible then
+				empty bp_1visible;
+				else
+				bp_1visible := 1;
+				endif;
+			}
+		}
+	}
+	Section sankeyChart {
+		DeclarationSection processSolution {
+			Parameter p_finalContribution {
+				IndexDomain: (i_alloy, i_ele);
+				Unit: up_percent;
+				Definition: v_alloyPurchased(i_alloy) * p_alloyComposition(i_ele, i_alloy) / p_percent;
+			}
+			Set s_nodes {
+				SubsetOf: Integers;
+				Index: i_node, j_node;
+				Property: ElementsAreNumerical;
+			}
+			Parameter p_flows {
+				IndexDomain: (i_node, j_node)|i_node <> j_node;
+				Unit: up_percent;
+				dex::ColumnName: value;
+				dex::TableName: flows;
+			}
+			StringParameter sp_nodeNames {
+				IndexDomain: i_node;
+				dex::TableName: nodes;
+			}
+			StringParameter sp_nodeGroup {
+				IndexDomain: i_node;
+				dex::TableName: nodes;
+			}
+		}
+		StringParameter sp_image;
+		StringParameter sp_path {
+			Definition: FormatString("MainProject//WebUI//resources//images//%s", sp_image);
+		}
+		StringParameter sp_live;
+		Procedure pr_createNodesFlows {
+			Body: {
+				empty s_nodes, p_flows, sp_nodeNames;
+				
+				s_nodes := elementRange(0, card(s_requiredElements), 1);
+				sp_nodeNames(0) := "Final";
+				sp_nodeGroup(0) := "final";
+				sp_nodeNames(i_node)|(ord(i_node)>1) := FormatString("%e", Element(s_requiredElements, ord(i_node)-1));
+				sp_nodeGroup(i_node)|(ord(i_node)>1) := "element";
+				
+				for i_alloy|v_alloyPurchased(i_alloy) do
+				_count := card(s_nodes);
+				s_nodes += _count;
+				sp_nodeNames(_count) := i_alloy;
+				p_flows(0, _count) := v_alloyPurchased(i_alloy);
+				p_flows(_count, i_node)|i_node > 0 := p_alloyComposition(Element(s_requiredElements, ord(i_node)-1), i_alloy)*v_alloyPurchased(i_alloy)/p_percent;
+				sp_nodeGroup(_count) := "alloy";
+				endfor;
+			}
+			Comment: {
+				"!creates data for the sankey plot
+				
+				populate s_nodes, as subset of integers with:
+					- 0 as the Final product
+					- 1-3 as the elements
+					- 4-x as the alloys utilized
+				
+				populate p_flows with respective compositions:
+					- 0 is made up of alloys 4-x, represented by v_alloyPurchased
+					- Alloys 4-x are made up of the elements 1-3, represented by p_alloyComposition
+					  Multiply p_alloyComposition with v_alloyPurchased to get element contribution to the final product
+				
+				sp_nodeNames is used to print the names on the chart
+				sp_nodeGroup is used to color the different nodes in the chart"
+			}
+			Parameter _count;
+		}
+		Procedure pr_open {
+			Body: {
+				DirectoryGetCurrent(_spRoot);
+				
+				!sp_live := FormatString("%sMainProject/WebUI/resources/sankey.html", _spRoot);
+				!sp_live := FindReplaceStrings(sp_live, ":", ":/");
+				
+				webui::OpenExternalLink(sp_live);
+			}
+			Comment: {
+				"procedure to call the /sankeyhtml method which returns the sankey chart in a HTML file
+				
+				open this local html file to view an interactive sankey object"
+			}
+			StringParameter _spRoot;
+			Parameter _pPosition;
+		}
+		Procedure pr_solvePlot {
+			Body: {
+				pr_reset;
+				MainExecution;
+				pr_WriteJSON;
+				pr_iSankey;
+			}
+			Comment: "solve model and call the /sankey method to get the sankey chart png";
+		}
+	}
+	Section dataIO {
+		DeclarationSection jsonIO {
+			StringParameter sp_mapName {
+				InitialData: "coordinates";
+			}
+			StringParameter sp_mapFile {
+				InitialData: "apiCalls//outMap.xml";
+			}
+			StringParameter sp_outFile {
+				InitialData: "pretty.json";
+			}
+			StringParameter sp_inFile {
+				InitialData: "sankey.png";
+			}
+		}
+		Procedure pr_WriteJSON {
+			Body: {
+				sp_OutFile := "out.json";
+				sp_MapName := "outMap";
+				sp_MapFile := "mappings//outMap.xml";
+				
+				dex::AddMapping(sp_mapName, sp_mapFile);
+				
+				pr_createNodesFlows;
+				
+				dex::WriteToFile(
+					dataFile    : sp_OutFile , 
+					mappingName : sp_MapName , 
+					pretty      :  1);
+			}
+			Comment: "write out a file pretty.json using apiCalls//outMap.xml as the mapping file";
+		}
+		DeclarationSection apiCall {
+			Set s_hosts {
+				Index: i_host;
+				Definition: data { local, remote };
+			}
+			ElementParameter ep_host {
+				Range: s_hosts;
+				InitialData: {
+					'local' ;
+				}
+			}
+			StringParameter sp_host {
+				Definition: {
+					if ep_host = StringToElement(s_hosts, "local") then
+					"http://localhost:8000/"
+					else
+					FormatString("https://%s/", sp_remoteURL)
+					endif
+				}
+			}
+			StringParameter sp_remoteURL {
+				Comment: "enter url for your deployed web app here.";
+			}
+			StringParameter sp_reqID;
+			StringParameter sp_URL {
+				InitialData: "http://localhost:8000/sankey";
+			}
+			StringParameter sp_responseFile;
+			StringParameter sp_body;
+			Parameter p_responseCode;
+			StringParameter sp_requestHeaders {
+				IndexDomain: web::httpHeader;
+			}
+			ElementParameter ep_err {
+				Range: errh::PendingErrors;
+			}
+			StringParameter sp_status;
+			Set s_resHeaderFields {
+				Index: i_hs;
+			}
+			Set s_reqeaderFields {
+				Index: i_hq;
+			}
+			StringParameter sp_resHeadAfter {
+				IndexDomain: i_hs;
+			}
+			StringParameter sp_reqHeadAfter {
+				IndexDomain: i_hq;
+			}
+		}
+		Procedure pr_iSankey {
+			Body: {
+				pr_healthCheck;
+				if p_responseCode = 200 then
+				
+				empty p_responseCode;
+				
+				sp_URL := FormatString("%ssankey", sp_host);
+				
+				block
+				!starting request
+				web::request_create(requestId : sp_reqID );
+				web::request_setURL(sp_reqID, sp_URL);
+				web::request_setMethod(sp_reqID, "GET");
+				!as we want to send data in a file. Set 2nd argument to 'None' if you only need to pass a scalar value
+				web::request_setRequestBody(sp_reqID, 'File', sp_OutFile);
+				!as we want to send a json file and default expectation is a txt file
+				web::request_getHeaders(sp_reqID, sp_requestHeaders);
+				sp_requestHeaders['Content-Type'] := "application/json";
+				web::request_setHeaders(sp_reqID, sp_requestHeaders);
+				web::request_setResponseBody(sp_reqID, 'File', sp_InFile);
+				!call the api
+				web::request_invoke(sp_reqID, p_responseCode);
+				web::request_close(sp_reqID);
+				onerror ep_err do
+					sp_status := "Something went wrong";
+					errh::MarkAsHandled(ep_err);
+				endblock;
+				
+				pr_responseCheck;
+				if p_responseCode = 200 then
+				sp_image := "sankey.png";
+				FileMove(sp_inFile, sp_path, 1);
+				endif;
+				endif;
+			}
+		}
+		Procedure pr_healthCheck {
+			Body: {
+				sp_URL := sp_host;
+				
+				block
+				!starting request
+				web::request_create(requestId : sp_reqID );
+				web::request_setURL(sp_reqID, sp_URL);
+				web::request_setMethod(sp_reqID, "GET");
+				web::request_invoke(sp_reqID, p_responseCode);
+				web::request_close(sp_reqID);
+				
+				pr_responseCheck;
+				
+				onerror ep_err do
+					sp_status := "Something went wrong";
+					errh::MarkAsHandled(ep_err);
+				endblock;
+			}
+		}
+		Procedure pr_responseCheck {
+			Body: {
+				if p_responseCode = 200 then
+				sp_status := "Connection established with API server";
+				else
+				sp_status := "The API server returned an error";
+				endif;
+			}
+		}
+	}
+	Procedure MainInitialization {
+		Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+	}
+	Procedure PostMainInitialization {
+		Body: {
+			if pro::GetPROEndPoint() then
+			ep_host := StringToElement(s_hosts, "remote");
+			endif;
+			
+			bp_1visible := 1;
+		}
+		Comment: {
+			"Add initialization statements here that require that the libraries are already initialized properly,
+			or add statements that require the Data Management module to be initialized."
+		}
+	}
+	Procedure MainExecution {
+		Body: {
+			if pro::GetPROEndPoint() then
+			   if pro::DelegateToServer( waitForCompletion  :  1,
+			      completionCallback :  'pro::session::LoadResultsCallBack' )
+			   then return 1;
+			   endif ;
+			endif ;
+			
+			if projectdevelopermode() then
+			solve mp_leastCost where solver:='CBC 2.9';
+			else
+			solve mp_leastCost where solver:= 'CPLEX 12.10';
+			endif;
+		}
+	}
+	Procedure PreMainTermination {
+		Body: {
+			if FileExists(sp_path) then FileDelete(sp_path); endif;
+			return DataManagementExit();
+		}
+		Comment: {
+			"Add termination statements here that require all libraries to be still alive.
+			Return 1 if you allow the termination sequence to continue.
+			Return 0 if you want to cancel the termination sequence."
+		}
+	}
+	Procedure MainTermination {
+		Body: {
+			return 1;
+		}
+		Comment: {
+			"Add termination statements here that do not require all libraries to be still alive.
+			Return 1 to allow the termination sequence to continue.
+			Return 0 if you want to cancel the termination sequence.
+			It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+		}
+	}
+}

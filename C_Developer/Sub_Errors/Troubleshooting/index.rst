@@ -19,6 +19,6 @@ This section covers troubleshooting undesired behavior in the use of AIMMS.
    /Articles/368/368-empty-webui-after-upgrade
    /Articles/489/489-access-open-error
    /Articles/496/496-tls-connection-version
-   /Articles/499/499-mysql-duplicate-records
 
+..   /Articles/499/499-mysql-duplicate-records
 ..   /Articles/368/368-attempting-connect
