@@ -45,6 +45,10 @@ The procedure ``MainExecution`` can be completed as follows:
 Should AIMMS report errors, simply check your input and make the
 necessary corrections.
 
+.. seealso::
+  
+  More docs on :doc:`suffices/mathematical-program-suffices/programstatus`
+
 .. rubric:: Right-mouse for help
 
 To obtain information about specific AIMMS keywords, you can use the
