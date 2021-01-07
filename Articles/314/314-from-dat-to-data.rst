@@ -74,7 +74,7 @@ they also collect identifiers to be stored in a different way:
     
     More information about these data types can be found in the User Guide of AIMMS 3.
 
-#.  The ``Disk files and folders`` interface works with subsets of ``AllIdentifiers``, called ``CaseContentTypes``. 
+#.  The ``Disk files and folders`` interface works with subsets of :any:`AllIdentifiers`, called ``CaseContentTypes``. 
 
     A union of two sets results in a new set.  Thus ``CaseContentTypes`` are at least as generic as ``CaseTypes``.
 
