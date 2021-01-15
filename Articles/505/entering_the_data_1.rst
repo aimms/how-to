@@ -1,3 +1,5 @@
+.. include:: local-css.css
+
 .. _ch:tut:entering_the_data_1:
 
 .. |data-page-button| image:: ./Figs/Bmp/data-page-button.bmp

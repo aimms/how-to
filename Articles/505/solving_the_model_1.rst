@@ -1,3 +1,5 @@
+.. include:: local-css.css
+
 .. _ch:tut:solving_the_model_1:
 
 Solving the Model

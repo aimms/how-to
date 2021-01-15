@@ -1,3 +1,5 @@
+.. include:: local-css.css
+
 .. _ch:tut:building_the_model_1:
 
 .. |new-project-button| image:: ./Figs/Bmp/new-project-button.bmp
