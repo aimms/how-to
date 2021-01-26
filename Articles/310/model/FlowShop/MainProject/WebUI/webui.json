@@ -163,7 +163,7 @@
     "action": {
       "literal": {
         "type": "procedure",
-        "value": "gss::pr_clearErrors"
+        "value": "gss::pr_dataSessionClearErrors"
       }
     },
     "aimms.widget.type": {
@@ -208,8 +208,9 @@
     "contents": {
       "aimms": {
         "contents": [
-          "gss::sp_jobErrorMoments",
-          "gss::sp_jobErrorMessages"
+          "gss::ep_shownJobErrorSeverity",
+          "gss::sp_shownJobErrorMoments",
+          "gss::sp_shownJobErrorMessages"
         ]
       }
     },
@@ -223,18 +224,6 @@
         ],
         "aggregated": []
       }
-    },
-    "contents.sorting": {
-      "literal": [
-        {
-          "partIndex": 0,
-          "partOffsets": [
-            -1,
-            0
-          ],
-          "mode": "increasing"
-        }
-      ]
     },
     "custom.column.widths": {
       "literal": [
@@ -251,14 +240,14 @@
         {
           "type": "colHeader",
           "colKey": {
-            "<IDENTIFIER-SET>": "gss::sp_JobErrorMoments"
+            "<IDENTIFIER-SET>": "gss::sp_shownJobErrorMoments"
           },
           "width": 30.937815126050418
         },
         {
           "type": "colHeader",
           "colKey": {
-            "<IDENTIFIER-SET>": "gss::sp_JobErrorMessages"
+            "<IDENTIFIER-SET>": "gss::sp_shownJobErrorMessages"
           },
           "width": 150.33929313929313
         }
@@ -305,7 +294,7 @@
       "aimms": {
         "slices": [
           {
-            "identifier": "gss::ep_JobErrorAttributes",
+            "identifier": "gss::ep_shownJobErrorAttributes",
             "slice": [
               {
                 "index": "gss::i_jobErrorMessageNumber",
@@ -320,7 +309,7 @@
             ]
           },
           {
-            "identifier": "gss::ep_jobErrorNodes",
+            "identifier": "gss::ep_shownJobErrorNodes",
             "slice": [
               {
                 "index": "gss::i_jobErrorMessageNumber",
@@ -335,7 +324,7 @@
             ]
           },
           {
-            "identifier": "gss::p_jobErrorLines",
+            "identifier": "gss::p_shownJobErrorLines",
             "slice": [
               {
                 "index": "gss::i_jobErrorMessageNumber",
@@ -350,21 +339,37 @@
             ]
           },
           {
-            "identifier": "gss::ep_jobErrorSeverity",
+            "identifier": "gss::ep_shownJobErrorAttributes",
             "slice": [
               {
                 "index": "gss::i_jobErrorMessageNumber",
                 "type": "element-parameter",
                 "value": "gss::ep_errorWarningSelectedMessage"
+              },
+              {
+                "index": "gss::i_stackPosition",
+                "type": "free",
+                "value": "gss::i_stackPosition"
               }
             ]
           }
         ],
         "contents": [
-          "gss::ep_jobErrorNodes",
-          "gss::ep_JobErrorAttributes",
-          "gss::p_jobErrorLines"
-        ]
+          "gss::ep_shownJobErrorNodes",
+          "gss::ep_shownJobErrorAttributes",
+          "gss::p_shownJobErrorLines"
+        ],
+        "prefix": "aimms",
+        "partition": {
+          "rowHeader": [
+            "gss::i_jobErrorMessageNumber",
+            "gss::i_stackPosition"
+          ],
+          "colHeader": [
+            "<IDENTIFIER-SET>"
+          ],
+          "aggregated": []
+        }
       }
     },
     "contents.numdecimals": {
@@ -528,12 +533,12 @@
     "contents": {
       "aimms": {
         "contents": [
-          "gss::p_jobProfilerData"
+          "gss::p_shownJobProfilerData"
         ],
         "prefix": "aimms",
         "slices": [
           {
-            "identifier": "gss::p_jobProfilerData",
+            "identifier": "gss::p_shownJobProfilerData",
             "slice": [
               {
                 "index": "IndexIdentifiers",
@@ -615,8 +620,7 @@
     },
     "store.focus.in": {
       "literal": {
-        "IndexIdentifiers": "gss::ep_profilerDataSelectedIdentifier",
-        "<IDENTIFIER-SET>": "gss::ep_profilerDataSelectedIdentifier"
+        "IndexIdentifiers": "gss::ep_profilerDataSelectedIdentifier"
       }
     },
     "title": {
@@ -654,7 +658,7 @@
     "contents": {
       "aimms": {
         "contents": [
-          "gss::p_jobProfilerData"
+          "gss::p_shownJobProfilerData"
         ],
         "prefix": "aimms",
         "partition": {
@@ -671,7 +675,7 @@
         },
         "slices": [
           {
-            "identifier": "gss::p_jobProfilerData",
+            "identifier": "gss::p_shownJobProfilerData",
             "slice": [
               {
                 "index": "IndexIdentifiers",

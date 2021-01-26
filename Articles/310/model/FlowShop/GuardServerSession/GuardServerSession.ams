@@ -140,8 +140,35 @@ LibraryModule Library_GuardServerSession {
 		Section PRO_Support;
 		Section Guarding {
 			Section Generic {
+				Section GSS_Error_WebUI_Support {
+					Property: NoSave;
+					Parameter p_shownJobProfilerData {
+						IndexDomain: (IndexIdentifiers,i_lineNumber,IndexProfilerTypes );
+					}
+					StringParameter sp_shownJobErrorMessages {
+						IndexDomain: i_jobErrorMessageNumber;
+					}
+					StringParameter sp_shownJobErrorMoments {
+						IndexDomain: i_jobErrorMessageNumber;
+					}
+					ElementParameter ep_shownJobErrorSeverity {
+						IndexDomain: i_jobErrorMessageNumber;
+						Range: s_messageLevels;
+					}
+					ElementParameter ep_shownJobErrorNodes {
+						IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
+						Range: AllSymbols;
+					}
+					ElementParameter ep_shownJobErrorAttributes {
+						IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
+						Range: AllAttributeNames;
+					}
+					Parameter p_shownJobErrorLines {
+						IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
+					}
+				}
 				Parameter p_maxNoErrorsPerSession {
-					InitialData: 50000;
+					InitialData: 10000;
 				}
 				Set s_jobErrorMessageNumbers {
 					SubsetOf: Integers;
