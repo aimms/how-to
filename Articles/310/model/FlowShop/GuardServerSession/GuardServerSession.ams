@@ -145,7 +145,7 @@ LibraryModule Library_GuardServerSession {
 					ElementParameter ep_shownSession {
 						Range: s_trackedSessions;
 						InitialData: '';
-						Comment: "By convention, if the shown session is \'\' then the running data session is selected.";
+						Comment: "By convention, if the shown session is the first then the running data session is selected.";
 					}
 					Parameter p_shownJobProfilerData {
 						IndexDomain: (IndexIdentifiers,i_lineNumber,IndexProfilerTypes );
@@ -317,8 +317,9 @@ LibraryModule Library_GuardServerSession {
 				Procedure pr_appendError {
 					Arguments: (ep_err,sp_prefix);
 					Body: {
+						gss::pr_enter(sp_gssTime, p_gssMiU, errh::Message(ep_err));
 						if pro::GetPROEndPoint() then
-							if pro::CurrentDelegationLevel() then
+							if pro::IsRunningAtServer() then
 								pr_appendErrorJob(ep_err,sp_prefix);
 							else
 								pr_appendErrorDataSession(ep_err,sp_prefix);
@@ -326,6 +327,7 @@ LibraryModule Library_GuardServerSession {
 						else
 							pr_appendErrorDataSession(ep_err,sp_prefix);
 						endif ;
+						gss::pr_leave(sp_gssTime, p_gssMiU, errh::Message(ep_err));
 					}
 					Comment: "Store the error in the data structures of the library.";
 					ElementParameter ep_err {
@@ -344,12 +346,16 @@ LibraryModule Library_GuardServerSession {
 						Property: Optional;
 					}
 					StringParameter sp_msg;
+					DeclarationSection gss_logging_declarations {
+						StringParameter sp_gssTime;
+						Parameter p_gssMiU;
+					}
 				}
 				Procedure pr_appendMessage {
 					Arguments: (sp_msg,ep_lev);
 					Body: {
 						if pro::GetPROEndPoint() then
-							if pro::CurrentDelegationLevel() then
+							if pro::IsRunningAtServer() then
 								pr_appendMessageJob(sp_msg,ep_lev);
 							else
 								pr_appendMessageDataSession(sp_msg,ep_lev);
@@ -418,27 +424,34 @@ LibraryModule Library_GuardServerSession {
 					}
 					Parameter p_trackedJobProfilerData {
 						IndexDomain: (i_trackedSession,IndexIdentifiers,i_lineNumber,IndexProfilerTypes );
+						InitialData: data{};
 					}
 					StringParameter sp_trackedJobErrorMessages {
 						IndexDomain: (i_trackedSession,i_jobErrorMessageNumber);
+						InitialData: data {};
 					}
 					StringParameter sp_trackedJobErrorMoments {
 						IndexDomain: (i_trackedSession,i_jobErrorMessageNumber);
+						InitialData: data {};
 					}
 					ElementParameter ep_trackedJobErrorSeverity {
 						IndexDomain: (i_trackedSession,i_jobErrorMessageNumber);
 						Range: s_messageLevels;
+						InitialData: data {};
 					}
 					ElementParameter ep_trackedJobErrorNodes {
 						IndexDomain: (i_trackedSession,i_jobErrorMessageNumber,i_stackPosition);
 						Range: AllSymbols;
+						InitialData: data{};
 					}
 					ElementParameter ep_trackedJobErrorAttributes {
 						IndexDomain: (i_trackedSession,i_jobErrorMessageNumber,i_stackPosition);
 						Range: AllAttributeNames;
+						InitialData: data {};
 					}
 					Parameter p_trackedJobErrorLines {
 						IndexDomain: (i_trackedSession,i_jobErrorMessageNumber,i_stackPosition);
+						InitialData: data {};
 					}
 				}
 				Procedure pr_saveTrackedSessionData {
@@ -455,6 +468,7 @@ LibraryModule Library_GuardServerSession {
 							raise error "pr_saveTrackedSessionData() unable to create effective session id";
 						endif ;
 						
+						!DebuggerBreakpoint();
 						p_trackedJobProfilerData(ep_trackedSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes) := p_jobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes);
 						
 						sp_trackedJobErrorMessages(ep_trackedSession, i_jobErrorMessageNumber) := sp_jobErrorMessages(i_jobErrorMessageNumber);
@@ -652,27 +666,34 @@ LibraryModule Library_GuardServerSession {
 					}
 					Parameter p_dataSessionProfilerData {
 						IndexDomain: (IndexIdentifiers,i_lineNumber,IndexProfilerTypes );
+						InitialData: data{};
 					}
 					StringParameter sp_dataSessionErrorMessages {
 						IndexDomain: i_dataSessionErrorMessageNumber;
+						InitialData: data{};
 					}
 					StringParameter sp_dataSessionErrorMoments {
 						IndexDomain: i_dataSessionErrorMessageNumber;
+						InitialData: data{};
 					}
 					ElementParameter ep_dataSessionErrorSeverity {
 						IndexDomain: i_dataSessionErrorMessageNumber;
 						Range: s_messageLevels;
+						InitialData: data{};
 					}
 					ElementParameter ep_dataSessionErrorNodes {
 						IndexDomain: (i_dataSessionErrorMessageNumber,i_stackPosition);
 						Range: AllSymbols;
+						InitialData: data {};
 					}
 					ElementParameter ep_dataSessionErrorAttributes {
 						IndexDomain: (i_dataSessionErrorMessageNumber,i_stackPosition);
 						Range: AllAttributeNames;
+						InitialData: data {};
 					}
 					Parameter p_dataSessionErrorLines {
 						IndexDomain: (i_dataSessionErrorMessageNumber,i_stackPosition);
+						InitialData: data {};
 					}
 				}
 				DeclarationSection data_session_summary {
@@ -706,6 +727,7 @@ LibraryModule Library_GuardServerSession {
 					Arguments: (ep_err,sp_prefix);
 					Body: {
 						! Increase the number of recorded error messages.
+						pr_enter(sp_gssTime, p_gssMiU, errh::Message(ep_err));
 						pr_newIncidentDataSession();
 						
 						ep_jobErrorMessageNumber := ep_dataSessionIncident ;
@@ -733,6 +755,7 @@ LibraryModule Library_GuardServerSession {
 						else
 							p_NoErrors += 1 ;
 						endif ;
+						gss::pr_leave(sp_gssTime, p_gssMiU, errh::Message(ep_err));
 					}
 					Comment: "Store the error in the data structures of the library.";
 					ElementParameter ep_err {
@@ -751,6 +774,10 @@ LibraryModule Library_GuardServerSession {
 						Property: Optional;
 					}
 					StringParameter sp_msg;
+					DeclarationSection gss_logging_declarations {
+						StringParameter sp_gssTime;
+						Parameter p_gssMiU;
+					}
 				}
 				Procedure pr_appendMessageDataSession {
 					Arguments: (sp_msg,ep_lev);
@@ -845,8 +872,6 @@ LibraryModule Library_GuardServerSession {
 							! output case identifier set are profiled.
 							update pro::ManagedSessionOutputCaseIdentifierSet;
 						
-							pr_saveModelLogFile();
-						
 						onerror ep_err do
 						
 							pr_appendError( ep_err );
@@ -860,6 +885,8 @@ LibraryModule Library_GuardServerSession {
 							ProfilerData       :  p_jobProfilerData, 
 							GrossTimeThreshold :  0, 
 							NetTimeThreshold   :  0);
+						
+						pr_saveModelLogFile();
 					}
 					Comment: {
 						"!sp_thisSession
@@ -878,6 +905,7 @@ LibraryModule Library_GuardServerSession {
 					Arguments: (ep_err,sp_prefix);
 					Body: {
 						! Increase the number of recorded error messages.
+						pr_enter(sp_gssTime, p_gssMiU, errh::Message(ep_err));
 						pr_newIncidentJob();
 						ep_jobErrorMessageNumber := ep_jobIncident;
 						
@@ -904,6 +932,7 @@ LibraryModule Library_GuardServerSession {
 						else
 							p_NoErrors += 1 ;
 						endif ;
+						gss::pr_leave(sp_gssTime, p_gssMiU, errh::Message(ep_err));
 					}
 					Comment: "Store the error in the data structures of the library.";
 					ElementParameter ep_err {
@@ -922,6 +951,10 @@ LibraryModule Library_GuardServerSession {
 						Property: Optional;
 					}
 					StringParameter sp_msg;
+					DeclarationSection gss_logging_declarations {
+						StringParameter sp_gssTime;
+						Parameter p_gssMiU;
+					}
 				}
 				Procedure pr_appendMessageJob {
 					Arguments: (sp_msg,ep_lev);
@@ -1049,25 +1082,45 @@ LibraryModule Library_GuardServerSession {
 			StringParameter sp_traceFilename {
 				InitialData: "logging.txt";
 			}
+			StringParameter sp_downloadModelLogTitle {
+				Definition: formatString("Download model log file of shown session %e", gss::ep_shownSession);
+			}
 			Procedure pr_openPageErrorWarningProfiler {
 				Body: {
-					ep_shownSession := '' ;
+					ep_shownSession := first( s_trackedSessions );
+					
+					ProfilerCollectAllData(
+						ProfilerData       :  p_dataSessionProfilerData, 
+						GrossTimeThreshold :  0, 
+						NetTimeThreshold   :  0);
+					
+					p_trackedJobProfilerData(ep_shownSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes) := p_dataSessionProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes);
+					sp_trackedJobErrorMessages(ep_shownSession, i_jobErrorMessageNumber) := sp_dataSessionErrorMessages(i_jobErrorMessageNumber);
+					sp_trackedJobErrorMoments(ep_shownSession, i_jobErrorMessageNumber) := sp_dataSessionErrorMoments(i_jobErrorMessageNumber);
+					ep_trackedJobErrorSeverity(ep_shownSession, i_jobErrorMessageNumber) := ep_dataSessionErrorSeverity(i_jobErrorMessageNumber);
+					ep_trackedJobErrorNodes(ep_shownSession, i_jobErrorMessageNumber, i_stackPosition) := ep_dataSessionErrorNodes(i_jobErrorMessageNumber, i_stackPosition);
+					ep_trackedJobErrorAttributes(ep_shownSession, i_jobErrorMessageNumber, i_stackPosition) := ep_dataSessionErrorAttributes(i_jobErrorMessageNumber, i_stackPosition);
+					p_trackedJobErrorLines(ep_shownSession, i_jobErrorMessageNumber, i_stackPosition) := p_dataSessionErrorLines(i_jobErrorMessageNumber, i_stackPosition);
 				}
 			}
 			Procedure pr_logMsgTraceFile {
-				Arguments: (sp_msg,ep_lev);
+				Arguments: (sp_argMsg,ep_lev);
 				Body: {
-					if ep_lev >= ep_tracinglevel then
+					!if ep_lev >= ep_tracinglevel then
+						if pro::GetPROEndPoint() then
+							pro::management::LocalLogInfo("pr_logMsgTraceFile(): sp_traceFilename = " + sp_traceFilename + " sp_argMsg = " + sp_argMsg );
+						endif ;
 						put f_traceFile ;
-						put sp_msg, / ;
+						put sp_argMsg, / ;
 						putclose ;
 						p_noLogLinesWritten += 1 ;
-					endif ;
+					!endif ;
+					!
 				}
 				Comment: {
 					"Trace to the log file; this procedure should not be called before PostLibraryInitialization finished."
 				}
-				StringParameter sp_msg {
+				StringParameter sp_argMsg {
 					Property: Input;
 				}
 				ElementParameter ep_lev {
@@ -1079,25 +1132,26 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_logMsg {
 				Arguments: (sp_msg,ep_lev);
 				Body: {
-					if ep_lev >= ep_tracingLevel then
-						if bp_loggingToFile then
+					!if ep_lev >= ep_tracingLevel then
+					!	if bp_loggingToFile then
 							pr_logMsgTraceFile(sp_msg,ep_lev);
-						else
-							switch ep_lev do
-								'error', 'warn': 
-									pro::management::LocalLogError( sp_msg );
-								'info': 
-									pro::management::LocalLogInfo( sp_msg );
-								'debug': 
-									pro::management::LocalLogDebug( sp_msg );
-								'trace': 
-									pro::management::LocalLogTrace( sp_msg );
-								default:
-									raise warning "Unknown message level: " + ep_lev ;
-									pro::management::LocalLogInfo( sp_msg );
-							endswitch ;
-						endif ;
-					endif ;
+					!	else
+					!		switch ep_lev do
+					!			'error', 'warn': 
+					!				pro::management::LocalLogError( sp_msg );
+					!			'info': 
+					!				pro::management::LocalLogInfo( sp_msg );
+					!			'debug': 
+					!				pro::management::LocalLogDebug( sp_msg );
+					!			'trace': 
+					!				pro::management::LocalLogTrace( sp_msg );
+					!			default:
+					!				raise warning "Unknown message level: " + ep_lev ;
+					!				pro::management::LocalLogInfo( sp_msg );
+					!		endswitch ;
+					!	endif ;
+					!endif ;
+					!
 				}
 				Comment: {
 					"Trace to the log file; this procedure should not be called before PostLibraryInitialization finished."
@@ -1117,8 +1171,8 @@ LibraryModule Library_GuardServerSession {
 					sp_procEnterTimestamp := CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')");
 					p_procEnterMemoryInUse := MemoryInUse();
 					sp_node := formatString("%e",CallerNode(1));
-					sp_fullMsg := formatString("%s Enter %s(%s) at %s [%.3n Mb] in use", 
-						sp_thisSession, sp_node, sp_procEnterContextMessage, 
+					sp_fullMsg := formatString("Enter %s(%s) at %s [%.3n Mb] in use", 
+						sp_node, sp_procEnterContextMessage, 
 						MomentToString(
 							Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ(gss::ep_traceTimezone)", 
 							unit          :  [s], 
@@ -1159,8 +1213,8 @@ LibraryModule Library_GuardServerSession {
 					sp_node := formatString("%e",CallerNode(1));
 					p_leaveMemoryInUse := MemoryInUse();
 					sp_fullMsg := 
-						formatString( "%s Leave %s(%s) at %s [%.3n Mb] in use. ",
-							sp_thisSession, sp_node, sp_msg, 
+						formatString( "Leave %s(%s) at %s [%.3n Mb] in use. ",
+							sp_node, sp_msg, 
 							MomentToString(
 								Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ(gss::ep_traceTimezone)", 
 								unit          :  [s], 
@@ -1234,25 +1288,45 @@ LibraryModule Library_GuardServerSession {
 				Body: {
 					Block
 						!FileLocation := "circle.png";
+						sp_slash := "/" ;
+						if ep_shownSession <> first( s_trackedSessions ) then
+							! The first tracked session is the data session.
+							! The other session, are server sessions, and they are stored
+							! in /Userdata/<env>/<user>/<model>/<ver>/tracings" + 
+							sp_proStorageFilename := sp_slash + "Userdata" + sp_slash + 
+								pro::GetPROEnvironment() + sp_slash + 
+								pro::GetPROUserName()    + sp_slash + 
+								pro::ModelName           + sp_slash + 
+								pro::modelversion        + sp_slash + 
+								"tracings"               + sp_slash + 
+								ep_shownSession          + ".modelLog";
+							sp_localTraceFilename := "tracings" + sp_slash + ep_shownSession + ".modelLog" ;
+							! Copy the .modelLog file from AIMMS PRO storage to the folder "tracings".
+							pro::RetrieveFileFromCentralStorage(
+								storagePath :  sp_proStorageFilename, 
+								localPath   :  sp_localTraceFilename);
+						else
+							sp_localTraceFilename := sp_traceFilename ;
+						endif ;
 						if pro::GetPROEndPoint() then
-							if FileExists( sp_traceFilename ) then
-								pro::management::LocalLogInfo("pr_downloadModelLog(): sp_traceFilename = " + sp_traceFilename + " and that file exists." );
+							if FileExists( sp_localTraceFilename ) then
+								pro::management::LocalLogInfo("pr_downloadModelLog(): sp_traceFilename = " + sp_localTraceFilename + " and that file exists." );
 							else
-								pro::management::LocalLogInfo("pr_downloadModelLog(): sp_traceFilename = " + sp_traceFilename + " but that file does not exist." );
+								pro::management::LocalLogInfo("pr_downloadModelLog(): sp_traceFilename = " + sp_localTraceFilename + " but that file does not exist." );
 							endif ;
 						endif ;
-						p_slashFwd := FindNthString( sp_traceFilename, "/", -1 );
-						p_slashBwd := FindNthString( sp_traceFilename, "\\", -1 );
+						p_slashFwd := FindNthString( sp_localTraceFilename, "/", -1 );
+						p_slashBwd := FindNthString( sp_localTraceFilename, "\\", -1 );
 						p_slash := max( p_slashFwd, p_slashBwd);
 						gss::pr_logMsg(formatString("p_slashFwd = %i, p_slashBwd = %i, p_slash = %i", p_slashFwd, p_slashBwd, p_slash ));
 						if p_slash then
-							p_len := StringLength( sp_traceFilename );
-							fileLocation := SubString( sp_traceFilename, p_slash+1, p_len); 
+							p_len := StringLength( sp_localTraceFilename );
+							fileLocation := SubString( sp_localTraceFilename, p_slash+1, p_len); 
 							gss::pr_logMsg(formatString("sp_traceFilename = \"%s\", fileLocation = \"%s\"", 
 								sp_traceFilename, fileLocation ));		
-							FileCopy( sp_traceFilename, fileLocation );
+							FileCopy( sp_localTraceFilename, fileLocation );
 						else
-							fileLocation := sp_traceFilename;
+							fileLocation := sp_localTraceFilename;
 						endif ;
 						if pro::GetPROEndPoint() then
 							pro::management::LocalLogInfo("pr_downloadModelLog(): fileLocation = " + fileLocation);
@@ -1276,6 +1350,8 @@ LibraryModule Library_GuardServerSession {
 						endif ;
 					EndBlock ;
 				}
+				StringParameter sp_proStorageFilename;
+				StringParameter sp_localTraceFilename;
 				StringParameter FileLocation {
 					Property: Output;
 				}
@@ -1293,6 +1369,7 @@ LibraryModule Library_GuardServerSession {
 				Parameter p_slashBwd;
 				Parameter p_slash;
 				Parameter p_len;
+				StringParameter sp_slash;
 			}
 		}
 	}
@@ -1312,8 +1389,13 @@ LibraryModule Library_GuardServerSession {
 					
 					pr_GetThisSession(); 
 					
+					
 					block ! Initialize logging
 						if pro::GetPROEndPoint() then
+							if not pro::IsRunningAtServer() then
+								ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
+					
+							endif ;
 							if pro::management::IsRunningOnCloud() then
 								! if DirectoryExists( "MainProject/WebUI" to be tested (WinUI apps might be ble to log to file version of session logs anyway).
 								bp_loggingOnCloud := 1 ;
@@ -1346,6 +1428,9 @@ LibraryModule Library_GuardServerSession {
 				Comment: {
 					"Add initialization statements here that require another library to be initialized already,
 					or add statements that require the Data Management module to be initialized."
+				}
+				ElementParameter ep_trackedSession {
+					Range: s_trackedSessions;
 				}
 			}
 			Procedure PreLibraryTermination {
@@ -1573,7 +1658,7 @@ LibraryModule Library_GuardServerSession {
 					f_traceFile.pagewidth := 32000 ;
 					putclose f_traceFile ;
 					put f_traceFile;
-					put "Opening log file ", sp_traceFilename, "at ", CurrentToSTring("%c%y-%m-%d %H:%M:%S"), / ;
+					put "Opening log file ", sp_traceFilename, " at ", CurrentToSTring("%c%y-%m-%d %H:%M:%S"), / ;
 					putclose ;
 					gss::pr_setTracingLevel('trace'); ! Force all logging.
 				}
@@ -1583,6 +1668,7 @@ LibraryModule Library_GuardServerSession {
 					if pro::GetPROEndPoint() then
 						if pro::ReadArguments('_pro-webui-session-id') then
 							sp_thisSession := pro::ReadArguments('_pro-webui-session-id');
+					
 						else
 							sp_thisSession := pro::ReadArguments('_pro-session-id');
 						endif ;
@@ -1620,6 +1706,19 @@ LibraryModule Library_GuardServerSession {
 				}
 				StringParameter sp_slash;
 				StringParameter sp_proStorageFileName;
+			}
+			Procedure pr_artificialDataGSSPage {
+				Body: {
+					block
+						raise warning "Cry wolf" ;
+					onerror ep_err do
+						gss::pr_appendError(ep_err);
+						errh::MarkAsHandled(ep_err);
+					endblock ;
+				}
+				ElementParameter ep_err {
+					Range: errh::PendingErrors;
+				}
 			}
 			StringParameter sp_tracingsFoiderName {
 				Definition: "tracings";

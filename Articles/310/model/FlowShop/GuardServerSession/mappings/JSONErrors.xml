@@ -3,15 +3,15 @@
         <ArrayMapping name="errors">
             <ObjectMapping>
                 <ValueMapping name="errno" binds-to="gss::i_jobErrorMessageNumber"/>
-                <ValueMapping name="msg" maps-to="gss::sp_jobErrorMessages(gss::i_jobErrorMessageNumber)"/>
-                <ValueMapping name="moment" maps-to="gss::sp_jobErrorMoments(gss::i_jobErrorMessageNumber)"/>
-                <ValueMapping name="severity" maps-to="gss::ep_jobErrorSeverity(gss::i_jobErrorMessageNumber)"/>
+                <ValueMapping name="msg" maps-to="gss::sp_shownJobErrorMessages(gss::i_jobErrorMessageNumber)"/>
+                <ValueMapping name="moment" maps-to="gss::sp_shownJobErrorMoments(gss::i_jobErrorMessageNumber)"/>
+                <ValueMapping name="severity" maps-to="gss::ep_sp_shownJobErrorSeverity(gss::i_jobErrorMessageNumber)"/>
                 <ArrayMapping name="positions">
                     <ObjectMapping>
                         <ValueMapping name="errpos" binds-to="gss::i_stackPosition"/>
-                        <ValueMapping name="node" maps-to="gss::ep_jobErrorNodes(gss::i_jobErrorMessageNumber,gss::i_stackPosition)"/>
-                        <ValueMapping name="attr" maps-to="gss::ep_jobErrorAttributes(gss::i_jobErrorMessageNumber,gss::i_stackPosition)"/>
-                        <ValueMapping name="line" maps-to="gss::p_jobErrorLines(gss::i_jobErrorMessageNumber,gss::i_stackPosition)"/>
+                        <ValueMapping name="node" maps-to="gss::ep_sp_shownJobErrorNodes(gss::i_jobErrorMessageNumber,gss::i_stackPosition)"/>
+                        <ValueMapping name="attr" maps-to="gss::ep_sp_shownJobErrorAttributes(gss::i_jobErrorMessageNumber,gss::i_stackPosition)"/>
+                        <ValueMapping name="line" maps-to="gss::p_sp_shownJobErrorLines(gss::i_jobErrorMessageNumber,gss::i_stackPosition)"/>
                     </ObjectMapping>
                 </ArrayMapping>
             </ObjectMapping>
