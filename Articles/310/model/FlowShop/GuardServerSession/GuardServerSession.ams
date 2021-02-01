@@ -26,6 +26,28 @@ LibraryModule Library_GuardServerSession {
 					}
 				}
 			}
+			StringParameter sp_itemActionMessageStack {
+				IndexDomain: (webui::indexWidgetItemActionSpec, webui::indexPageExtension, webui::indexWidgetActionSpec);
+				Definition: {
+					{
+						('gss::ep_shownJobErrorSeverity', '1', 'displaytext' ) : "Model explorer",  
+						('gss::ep_shownJobErrorSeverity', '1', 'icon'        ) : "aimms-glasses",  
+						('gss::ep_shownJobErrorSeverity', '1', 'procedure'   ) : "gss::pr_OpenIdentifierOnStack",  
+						('gss::ep_shownJobErrorSeverity', '1', 'state'       ) : "Active" ,
+					
+						('gss::sp_shownJobErrorMoments',  '1', 'displaytext' ) : "Model explorer",  
+						('gss::sp_shownJobErrorMoments',  '1', 'icon'        ) : "aimms-glasses",  
+						('gss::sp_shownJobErrorMoments',  '1', 'procedure'   ) : "gss::pr_OpenIdentifierOnStack",  
+						('gss::sp_shownJobErrorMoments',  '1', 'state'       ) : "Active" ,
+					
+						('gss::sp_shownJobErrorMessages',  '1', 'displaytext' ) : "Model explorer",  
+						('gss::sp_shownJobErrorMessages',  '1', 'icon'        ) : "aimms-glasses",  
+						('gss::sp_shownJobErrorMessages',  '1', 'procedure'   ) : "gss::pr_OpenIdentifierOnStack",  
+						('gss::sp_shownJobErrorMessages',  '1', 'state'       ) : "Active" 
+					
+					}
+				}
+			}
 			StringParameter sp_widgetActionMessageList {
 				IndexDomain: (webui::indexPageExtension, webui::indexWidgetActionSpec);
 				Definition: {
@@ -37,6 +59,27 @@ LibraryModule Library_GuardServerSession {
 					}
 				}
 			}
+			StringParameter sp_itemActionMessageList {
+				IndexDomain: (webui::indexWidgetItemActionSpec, webui::indexPageExtension, webui::indexWidgetActionSpec);
+				Definition: {
+					{
+						('gss::ep_shownJobErrorNodes',     '1', 'displaytext' ) : "Model explorer",  
+						('gss::ep_shownJobErrorNodes',     '1', 'icon'        ) : "aimms-glasses",  
+						('gss::ep_shownJobErrorNodes',     '1', 'procedure'   ) : "gss::pr_OpenIdentifierOnMessageList",  
+						('gss::ep_shownJobErrorNodes',     '1', 'state'       ) : "Active",
+					
+						('gss::ep_shownJobErrorAttributes', '1', 'displaytext' ) : "Model explorer",  
+						('gss::ep_shownJobErrorAttributes', '1', 'icon'        ) : "aimms-glasses",  
+						('gss::ep_shownJobErrorAttributes', '1', 'procedure'   ) : "gss::pr_OpenIdentifierOnMessageList",  
+						('gss::ep_shownJobErrorAttributes', '1', 'state'       ) : "Active",
+					
+						('gss::p_shownJobErrorLines',       '1', 'displaytext' ) : "Model explorer",  
+						('gss::p_shownJobErrorLines',       '1', 'icon'        ) : "aimms-glasses",  
+						('gss::p_shownJobErrorLines',       '1', 'procedure'   ) : "gss::pr_OpenIdentifierOnMessageList",  
+						('gss::p_shownJobErrorLines',       '1', 'state'       ) : "Active"  
+					}
+				}
+			}
 			StringParameter sp_widgetActionIdentifierProfiler {
 				IndexDomain: (webui::indexPageExtension, webui::indexWidgetActionSpec);
 				Definition: {
@@ -45,6 +88,17 @@ LibraryModule Library_GuardServerSession {
 						('1', 'icon'        ) : "aimms-glasses",  
 						('1', 'procedure'   ) : "gss::pr_OpenProfiledIdentifier",  
 						('1', 'state'       ) : "Active"  
+					}
+				}
+			}
+			StringParameter sp_itemActionIdentifierProfiler {
+				IndexDomain: (webui::indexWidgetItemActionSpec, webui::indexPageExtension, webui::indexWidgetActionSpec);
+				Definition: {
+					{
+						('gss::p_shownJobProfilerData', '1', 'displaytext' ) : "Model explorer",  
+						('gss::p_shownJobProfilerData', '1', 'icon'        ) : "aimms-glasses",  
+						('gss::p_shownJobProfilerData', '1', 'procedure'   ) : "gss::pr_OpenProfiledIdentifier",  
+						('gss::p_shownJobProfilerData', '1', 'state'       ) : "Active"  
 					}
 				}
 			}
@@ -232,7 +286,9 @@ LibraryModule Library_GuardServerSession {
 				}
 				Procedure pr_openProfiledIdentifier {
 					Body: {
-						IdentifierShowAttributes( ep_profilerDataSelectedIdentifier );
+						if ep_profilerDataSelectedIdentifier then
+							IdentifierShowAttributes( ep_profilerDataSelectedIdentifier );
+						endif ;
 					}
 				}
 				Procedure pr_openIdentifierOnStack {
@@ -246,15 +302,17 @@ LibraryModule Library_GuardServerSession {
 							endif ;
 							if ep_errorWarningSelectedMessage and ep_StackPos then
 								IdentifierShowAttributes(  
-									ep_jobErrorNodes( ep_errorWarningSelectedMessage, ep_stackPos ));
+									ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, ep_stackPos ));
 							endif ;
 						endif ;
 					}
 				}
 				Procedure pr_openIdentifierOnMessageList {
 					Body: {
-						IdentifierShowAttributes(  
-							ep_jobErrorNodes( ep_errorWarningSelectedMessage, 1 ));
+						if ep_errorWarningSelectedMessage and ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, 1 ) then
+							IdentifierShowAttributes(  
+								ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, 1 ));
+						endif ;
 					}
 				}
 				Procedure pr_initErrorHandlingDownloadUploadButtons {
@@ -421,6 +479,22 @@ LibraryModule Library_GuardServerSession {
 				DeclarationSection tracked_sessions_error_and_profiler_data {
 					Set s_trackedSessions {
 						Index: i_trackedSession;
+						webui::ElementTextIdentifier: gss::sp_trackedSessionDescription;
+					}
+					StringParameter sp_trackedSessionDescription {
+						IndexDomain: i_trackedSession;
+						Definition: {
+							if i_trackedSession = first( s_trackedSessions ) then
+								formatString("%e : data session", i_trackedSession )
+							else
+								formatString("%e : %s",
+									i_trackedSession, 
+									sp_sessionGivenDescriptions( i_trackedSession ) )
+							endif
+						}
+					}
+					StringParameter sp_sessionGivenDescriptions {
+						IndexDomain: i_trackedSession;
 					}
 					Parameter p_trackedJobProfilerData {
 						IndexDomain: (i_trackedSession,IndexIdentifiers,i_lineNumber,IndexProfilerTypes );
@@ -460,15 +534,11 @@ LibraryModule Library_GuardServerSession {
 						if not sp_sessionID then
 							raise error "pr_saveTrackedSessionData() unable to store session data without identification" ;
 						endif ;
-						if sp_sessionID in s_trackedSessions then
-							raise warning "pr_saveTrackedSessionData() Overriding session data for " + sp_sessionID + "." ;
-						endif ;
 						ep_trackedSession := stringToElement( s_trackedSessions, sp_sessionID, create:1);
 						if not ep_trackedSession then
 							raise error "pr_saveTrackedSessionData() unable to create effective session id";
 						endif ;
 						
-						!DebuggerBreakpoint();
 						p_trackedJobProfilerData(ep_trackedSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes) := p_jobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes);
 						
 						sp_trackedJobErrorMessages(ep_trackedSession, i_jobErrorMessageNumber) := sp_jobErrorMessages(i_jobErrorMessageNumber);
@@ -484,11 +554,6 @@ LibraryModule Library_GuardServerSession {
 					}
 					ElementParameter ep_trackedSession {
 						Range: s_trackedSessions;
-					}
-				}
-				Procedure pr_saveTracings {
-					Body: {
-						pr_saveTrackedSessionData( sp_serverSessionId );
 					}
 				}
 				Procedure pr_uploadErrorData {
@@ -520,7 +585,7 @@ LibraryModule Library_GuardServerSession {
 						
 							gss::pr_initErrorHandlingDownloadUploadButtons( ep_stat, statusCode,  statusDescription, bp_download:1 );
 						
-							fileLocation := "Errors.json";
+							fileLocation := formatString("%e.errors.json", ep_shownSession );
 						
 							! we store the location of the file in string parameter sp_FinalLocation
 							sp_finalLocation := webui::GetIOFilePath(fileLocation);
@@ -655,6 +720,27 @@ LibraryModule Library_GuardServerSession {
 						Name: sp_filename;
 						Device: Disk;
 						Mode: replace;
+					}
+				}
+				Procedure pr_describeTrackedSession {
+					Arguments: (sp_session,sp_descr);
+					Body: {
+						if not sp_session then
+							raise error "gss::pr_describeTrackedSession(): sp_session not specified" ;
+						endif ;
+						
+						ep_locTrackedSession := StringToElement( s_trackedSessions , sp_session, create:1 );
+						
+						sp_sessionGivenDescriptions( ep_locTrackedSession ) := sp_descr ;
+					}
+					StringParameter sp_session {
+						Property: Input;
+					}
+					StringParameter sp_descr {
+						Property: Input;
+					}
+					ElementParameter ep_locTrackedSession {
+						Range: s_trackedSessions;
 					}
 				}
 			}
@@ -1659,6 +1745,11 @@ LibraryModule Library_GuardServerSession {
 					putclose f_traceFile ;
 					put f_traceFile;
 					put "Opening log file ", sp_traceFilename, " at ", CurrentToSTring("%c%y-%m-%d %H:%M:%S"), / ;
+					if pro::GetPROEndPoint() then
+						put "Solver session handling request ", pro::workerRequestDescription, / ;
+					else
+						put "Data session ", / ;
+					endif ;
 					putclose ;
 					gss::pr_setTracingLevel('trace'); ! Force all logging.
 				}

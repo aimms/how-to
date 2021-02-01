@@ -5,16 +5,41 @@
                 <ValueMapping name="errno" binds-to="gss::i_jobErrorMessageNumber"/>
                 <ValueMapping name="msg" maps-to="gss::sp_shownJobErrorMessages(gss::i_jobErrorMessageNumber)"/>
                 <ValueMapping name="moment" maps-to="gss::sp_shownJobErrorMoments(gss::i_jobErrorMessageNumber)"/>
-                <ValueMapping name="severity" maps-to="gss::ep_sp_shownJobErrorSeverity(gss::i_jobErrorMessageNumber)"/>
+                <ValueMapping name="severity" maps-to="gss::ep_shownJobErrorSeverity(gss::i_jobErrorMessageNumber)"/>
                 <ArrayMapping name="positions">
                     <ObjectMapping>
                         <ValueMapping name="errpos" binds-to="gss::i_stackPosition"/>
-                        <ValueMapping name="node" maps-to="gss::ep_sp_shownJobErrorNodes(gss::i_jobErrorMessageNumber,gss::i_stackPosition)"/>
-                        <ValueMapping name="attr" maps-to="gss::ep_sp_shownJobErrorAttributes(gss::i_jobErrorMessageNumber,gss::i_stackPosition)"/>
-                        <ValueMapping name="line" maps-to="gss::p_sp_shownJobErrorLines(gss::i_jobErrorMessageNumber,gss::i_stackPosition)"/>
+                        <ValueMapping name="node" maps-to="gss::ep_shownJobErrorNodes(gss::i_jobErrorMessageNumber,gss::i_stackPosition)"/>
+                        <ValueMapping name="attr" maps-to="gss::ep_shownJobErrorAttributes(gss::i_jobErrorMessageNumber,gss::i_stackPosition)"/>
+                        <ValueMapping name="line" maps-to="gss::p_shownJobErrorLines(gss::i_jobErrorMessageNumber,gss::i_stackPosition)"/>
                     </ObjectMapping>
                 </ArrayMapping>
             </ObjectMapping>
         </ArrayMapping>
+
+        <!-- p_shownJobProfilerData(IndexIdentifiers,i_lineNumber,IndexProfilerTypes ) -->
+        <ArrayMapping name="identifiers">
+            <ObjectMapping>
+                <ValueMapping name="idno" binds-to="IndexIdentifiers"/>
+
+                <ArrayMapping name="lineNumbers">
+                    <ObjectMapping>
+                        <ValueMapping name="lineno" binds-to="gss::i_lineNumber"/>
+
+                        <ArrayMapping name="ProfilerTypes">
+                            <ObjectMapping>
+                                <ValueMapping name="protype" binds-to="IndexProfilerTypes"/>
+
+                                <ValueMapping name="profiler" maps-to="gss::p_shownJobProfilerData(IndexIdentifiers,gss::i_lineNumber,IndexProfilerTypes)"/>
+
+                            </ObjectMapping>
+                        </ArrayMapping>
+
+                    </ObjectMapping>
+                </ArrayMapping>
+
+            </ObjectMapping>
+        </ArrayMapping>
+        
     </ObjectMapping>
 </AimmsJSONMapping>

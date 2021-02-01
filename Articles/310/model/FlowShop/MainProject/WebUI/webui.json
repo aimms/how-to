@@ -10,22 +10,22 @@
           {
             "children": [
               {
+                "children": [],
+                "name": "home",
+                "slug": "home"
+              },
+              {
+                "name": "ServerJobMessagesProfilerInfo",
+                "type": "page",
+                "slug": "serverjobmessagesprofilerinfo_1",
                 "children": [
-                  {
-                    "name": "ServerJobMessagesProfilerInfo",
-                    "type": "page",
-                    "slug": "serverjobmessagesprofilerinfo_1",
-                    "children": []
-                  },
                   {
                     "name": "ErrorPanel",
                     "type": "sidepanel",
                     "slug": "errorpanel_1",
                     "children": []
                   }
-                ],
-                "name": "home",
-                "slug": "home"
+                ]
               }
             ],
             "name": "Main Project",
@@ -75,6 +75,9 @@
           }
         }
       ]
+    },
+    "aimms.widget.type": {
+      "literal": "sidepanel"
     }
   },
   "pages/home": {
@@ -119,8 +122,16 @@
     }
   },
   "pages/serverjobmessagesprofilerinfo_1": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
     "maxcolumns": {
       "literal": 12
+    },
+    "onload": {
+      "aimms": {
+        "run": "gss::pr_openPageErrorWarningProfiler"
+      }
     },
     "widgets": {
       "literal": [
@@ -155,6 +166,35 @@
             "height": "2",
             "customPosition": ""
           }
+        },
+        {
+          "uri": "ShownSession",
+          "layoutInfo": {
+            "width": "8",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "DownloadModelLog",
+          "layoutInfo": {
+            "width": "4",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "downloadErrorWarningData",
+          "layoutInfo": {
+            "width": "4",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "DownloadErrorReport",
+          "layoutInfo": {
+            "width": "4",
+            "height": "1"
+          }
         }
       ]
     }
@@ -185,6 +225,47 @@
     },
     "title": {
       "literal": "Download Error Data"
+    }
+  },
+  "widgets/DownloadErrorReport": {
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "title": {
+      "literal": "Download error report shown session"
+    }
+  },
+  "widgets/downloadErrorWarningData": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "gss::pr_downloadErrorData"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "title": {
+      "literal": "Download error data shown session"
+    }
+  },
+  "widgets/DownloadModelLog": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "gss::pr_downloadModelLog"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "gss::sp_downloadModelLogTitle"
+        ],
+        "slices": []
+      }
     }
   },
   "widgets/DownloadReport": {
@@ -750,6 +831,21 @@
           "gss::sp_titleProfilerDetail"
         ],
         "slices": []
+      }
+    }
+  },
+  "widgets/ShownSession": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "compact": {
+      "literal": 1
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "gss::ep_shownSession"
+        ]
       }
     }
   },
