@@ -961,6 +961,12 @@ LibraryModule Library_GuardServerSession {
 				}
 			}
 			Section Guard_server_session {
+				DeclarationSection controlServerSessionData {
+					ElementParameter ep_tracinglevel {
+						Range: s_messageLevels;
+						InitialData: 'info';
+					}
+				}
 				DeclarationSection serverSessionErrorData {
 					ElementParameter ep_jobIncident {
 						Range: s_jobErrorMessageNumbers;
@@ -1240,15 +1246,15 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_logMsgTraceFile {
 				Arguments: (sp_argMsg,ep_lev);
 				Body: {
-					!if ep_lev >= ep_tracinglevel then
-						if pro::GetPROEndPoint() then
-							pro::management::LocalLogInfo("pr_logMsgTraceFile(): sp_traceFilename = " + sp_traceFilename + " sp_argMsg = " + sp_argMsg );
-						endif ;
+					if ep_lev >= ep_tracinglevel then
+					!	if pro::GetPROEndPoint() then
+					!		pro::management::LocalLogInfo("pr_logMsgTraceFile(): sp_traceFilename = " + sp_traceFilename + " sp_argMsg = " + sp_argMsg );
+					!	endif ;
 						put f_traceFile ;
 						put sp_argMsg, / ;
 						putclose ;
 						p_noLogLinesWritten += 1 ;
-					!endif ;
+					endif ;
 					!
 				}
 				Comment: {
@@ -1266,7 +1272,7 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_logMsg {
 				Arguments: (sp_msg,ep_lev);
 				Body: {
-					!if ep_lev >= ep_tracingLevel then
+					if ep_lev >= ep_tracingLevel then
 					!	if bp_loggingToFile then
 							pr_logMsgTraceFile(sp_msg,ep_lev);
 					!	else
@@ -1284,7 +1290,7 @@ LibraryModule Library_GuardServerSession {
 					!				pro::management::LocalLogInfo( sp_msg );
 					!		endswitch ;
 					!	endif ;
-					!endif ;
+					endif ;
 					!
 				}
 				Comment: {
@@ -1795,7 +1801,6 @@ LibraryModule Library_GuardServerSession {
 						put "This file contains the log of an AIMMS Developer session ", / ;
 					endif ;
 					putclose ;
-					!gss::pr_setTracingLevel('trace'); ! Force all logging.
 				}
 			}
 			Procedure pr_GetThisSession {
@@ -1860,10 +1865,6 @@ LibraryModule Library_GuardServerSession {
 			}
 			StringParameter sp_thisSession {
 				InitialData: "this-session";
-			}
-			ElementParameter ep_tracinglevel {
-				Range: s_messageLevels;
-				InitialData: 'info';
 			}
 			Parameter p_noLogLinesWritten {
 				InitialData: 0;
