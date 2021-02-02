@@ -90,7 +90,9 @@ Selected remarks:
 Using ``Log4View`` to analyze ``.xml`` log files
 -----------------------------------------------------
 
-``Log4View`` is a utility to analyze XML log files available at `log4view.com <https://www.log4view.com/download-en>`_.
+.. available at `log4view.com <https://www.log4view.com/download-en>`_.
+
+``Log4View`` is a utility to analyze XML log files. 
 The community edition of ``Log4View`` is sufficient to analyze one XML log file at a time.
 
 With the Log4View utility you can filter the output of selected loggers, as shown in the image below.
