@@ -196,82 +196,106 @@ LibraryModule Library_GuardServerSession {
 			Section Generic {
 				Section GSS_Error_WebUI_Support {
 					Property: NoSave;
-					ElementParameter ep_shownSession {
-						Range: s_trackedSessions;
-						InitialData: '';
-						Comment: "By convention, if the shown session is the first then the running data session is selected.";
-					}
-					Parameter p_shownJobProfilerData {
-						IndexDomain: (IndexIdentifiers,i_lineNumber,IndexProfilerTypes );
-						Definition: {
-							if ep_shownSession then
-								p_trackedJobProfilerData(ep_shownSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
-							else
-								p_dataSessionProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
-							endif
+					DeclarationSection Declaration_selection_shown_session {
+						ElementParameter ep_shownSession {
+							Range: s_trackedSessions;
+							InitialData: '';
+							Comment: "By convention, if the shown session is the first then the running data session is selected.";
+							webui::UponChangeProcedure: pr_uponChangeShownSession;
+						}
+						StringParameter sp_titleErrorWarningMessagesTable {
+							Definition: formatString("Error and warning messages for session %s", sp_shownSessionDescription);
 						}
 					}
-					StringParameter sp_shownJobErrorMessages {
-						IndexDomain: i_jobErrorMessageNumber;
-						Definition: {
-							if ep_shownSession then
-								sp_trackedJobErrorMessages(ep_shownSession, i_jobErrorMessageNumber)
-							else
-								sp_dataSessionErrorMessages(i_jobErrorMessageNumber)
-							endif
+					Procedure pr_uponChangeShownSession {
+						Body: {
+							empty Shown_session_data_exchange ;
+							
+							sp_shownSessionDescription :=
+								if ep_shownSession = first( s_trackedSessions ) then
+									"data session"
+								else
+									sp_sessionGivenDescriptions(ep_shownSession)
+								endif ;
+							
+							p_shownJobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes ) := 
+								if ep_shownSession <> first( s_trackedSessions ) then
+									p_trackedJobProfilerData(ep_shownSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
+								else
+									p_dataSessionProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
+								endif;
+							
+							sp_shownJobErrorMessages(i_jobErrorMessageNumber) := 
+								if ep_shownSession <> first( s_trackedSessions ) then
+									sp_trackedJobErrorMessages(ep_shownSession, i_jobErrorMessageNumber)
+								else
+									sp_dataSessionErrorMessages(i_jobErrorMessageNumber)
+								endif ;
+							
+							sp_shownJobErrorMoments(i_jobErrorMessageNumber) := 
+								if ep_shownSession <> first( s_trackedSessions ) then
+									sp_trackedJobErrorMoments(ep_shownSession, i_jobErrorMessageNumber)
+								else
+									sp_dataSessionErrorMoments(i_jobErrorMessageNumber)
+								endif;
+							
+							ep_shownJobErrorSeverity(i_jobErrorMessageNumber) := 
+								if ep_shownSession <> first( s_trackedSessions ) then
+									ep_trackedJobErrorSeverity(ep_shownSession, i_jobErrorMessageNumber)
+								else
+									ep_dataSessionErrorSeverity(i_jobErrorMessageNumber)
+								endif;
+							
+							ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition) := 
+								if ep_shownSession <> first( s_trackedSessions ) then
+									ep_trackedJobErrorNodes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
+								else
+									ep_dataSessionErrorNodes(i_jobErrorMessageNumber,i_stackPosition)
+								endif;
+							
+							ep_shownJobErrorAttributes(i_jobErrorMessageNumber, i_stackPosition) := 
+								if ep_shownSession <> first( s_trackedSessions ) then
+									ep_trackedJobErrorAttributes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
+								else
+									ep_dataSessionErrorAttributes(i_jobErrorMessageNumber,i_stackPosition)
+								endif;
+							
+							p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition) := 
+								if ep_shownSession <> first( s_trackedSessions ) then
+									p_trackedJobErrorLines(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
+								else
+									p_dataSessionErrorLines(i_jobErrorMessageNumber,i_stackPosition)
+								endif;
 						}
 					}
-					StringParameter sp_shownJobErrorMoments {
-						IndexDomain: i_jobErrorMessageNumber;
-						Definition: {
-							if ep_shownSession then
-								sp_trackedJobErrorMoments(ep_shownSession, i_jobErrorMessageNumber)
-							else
-								sp_dataSessionErrorMoments(i_jobErrorMessageNumber)
-							endif
+					Procedure pr_clearShownSession;
+					DeclarationSection Shown_session_data_exchange {
+						StringParameter sp_shownSessionDescription {
+							InitialData: "";
 						}
-					}
-					ElementParameter ep_shownJobErrorSeverity {
-						IndexDomain: i_jobErrorMessageNumber;
-						Range: s_messageLevels;
-						Definition: {
-							if ep_shownSession then
-								ep_trackedJobErrorSeverity(ep_shownSession, i_jobErrorMessageNumber)
-							else
-								ep_dataSessionErrorSeverity(i_jobErrorMessageNumber)
-							endif
+						Parameter p_shownJobProfilerData {
+							IndexDomain: (IndexIdentifiers,i_lineNumber,IndexProfilerTypes );
 						}
-					}
-					ElementParameter ep_shownJobErrorNodes {
-						IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
-						Range: AllSymbols;
-						Definition: {
-							if ep_shownSession then
-								ep_trackedJobErrorNodes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
-							else
-								ep_dataSessionErrorNodes(i_jobErrorMessageNumber,i_stackPosition)
-							endif
+						StringParameter sp_shownJobErrorMessages {
+							IndexDomain: i_jobErrorMessageNumber;
 						}
-					}
-					ElementParameter ep_shownJobErrorAttributes {
-						IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
-						Range: AllAttributeNames;
-						Definition: {
-							if ep_shownSession then
-								ep_trackedJobErrorAttributes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
-							else
-								ep_dataSessionErrorAttributes(i_jobErrorMessageNumber,i_stackPosition)
-							endif
+						StringParameter sp_shownJobErrorMoments {
+							IndexDomain: i_jobErrorMessageNumber;
 						}
-					}
-					Parameter p_shownJobErrorLines {
-						IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
-						Definition: {
-							if ep_shownSession then
-								p_trackedJobErrorLines(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
-							else
-								p_dataSessionErrorLines(i_jobErrorMessageNumber,i_stackPosition)
-							endif
+						ElementParameter ep_shownJobErrorSeverity {
+							IndexDomain: i_jobErrorMessageNumber;
+							Range: s_messageLevels;
+						}
+						ElementParameter ep_shownJobErrorNodes {
+							IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
+							Range: AllSymbols;
+						}
+						ElementParameter ep_shownJobErrorAttributes {
+							IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
+							Range: AllAttributeNames;
+						}
+						Parameter p_shownJobErrorLines {
+							IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
 						}
 					}
 				}
@@ -311,7 +335,7 @@ LibraryModule Library_GuardServerSession {
 					Body: {
 						if ep_errorWarningSelectedMessage and ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, 1 ) then
 							IdentifierShowAttributes(  
-								ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, 1 ));
+								ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, ep_stackPos ));
 						endif ;
 					}
 				}
@@ -495,6 +519,7 @@ LibraryModule Library_GuardServerSession {
 					}
 					StringParameter sp_sessionGivenDescriptions {
 						IndexDomain: i_trackedSession;
+						InitialData: data {};
 					}
 					Parameter p_trackedJobProfilerData {
 						IndexDomain: (i_trackedSession,IndexIdentifiers,i_lineNumber,IndexProfilerTypes );
@@ -559,13 +584,35 @@ LibraryModule Library_GuardServerSession {
 				Procedure pr_uploadErrorData {
 					Arguments: (fileLocation,statusCode,statusDescription);
 					Body: {
-						sp_fileUploadLocation := webui::GetIOFilePath(fileLocation);
-						! The file is uploaded to the process specific temporary folder. 
+						block
+							pr_logMsg(formatString("Uploading file %s", fileLocation),'info');
+							sp_fileUploadLocation := webui::GetIOFilePath(fileLocation);
+							! The file is uploaded to the process specific temporary folder. 
 						
-						pr_readErrorDataFromJSONFile(sp_fileUploadLocation);
+							!pr_readErrorDataFromJSONFile(sp_fileUploadLocation);
+							empty Shown_session_data_exchange;
+							ep_trackedSession := StringToElement( s_trackedSessions, fileLocation, create:1);
+							read from file sp_fileUploadLocation ;
+							sp_sessionGivenDescriptions( ep_trackedSession ) := sp_shownSessionDescription ;
+							p_trackedJobProfilerData(ep_trackedSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes) := p_shownJobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes);
+							sp_trackedJobErrorMessages(ep_trackedSession, i_jobErrorMessageNumber) := sp_shownJobErrorMessages(i_jobErrorMessageNumber);
+							sp_trackedJobErrorMoments(ep_trackedSession, i_jobErrorMessageNumber) := sp_shownJobErrorMoments(i_jobErrorMessageNumber);
+							ep_trackedJobErrorSeverity(ep_trackedSession, i_jobErrorMessageNumber) := ep_shownJobErrorSeverity(i_jobErrorMessageNumber);
+							ep_trackedJobErrorNodes(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition);
+							ep_trackedJobErrorAttributes(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := ep_shownJobErrorAttributes(i_jobErrorMessageNumber, i_stackPosition);
+							p_trackedJobErrorLines(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition);
+							ep_shownSession := ep_trackedSession ;
 						
-						statusCode := webui::ReturnStatusCode('OK');
-						statusDescription := "Nice.";
+							statusCode := webui::ReturnStatusCode('OK');
+							statusDescription := "Succesfully uploaded file "+fileLocation;
+						onerror ep_err do
+							gss::pr_appendError(ep_err);
+							errh::MarkAsHandled(ep_err);
+							if errh::Severity(ep_err) <> 'warning' then
+								statusCode := webui::ReturnStatusCode('ERROR');
+								statusDescription := "Failed to upload file " + fileLocation ;
+							endif ;
+						endblock ;
 					}
 					StringParameter sp_fileUploadLocation;
 					StringParameter fileLocation {
@@ -577,6 +624,12 @@ LibraryModule Library_GuardServerSession {
 					StringParameter statusDescription {
 						Property: Output;
 					}
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
+					ElementParameter ep_trackedSession {
+						Range: s_trackedSessions;
+					}
 				}
 				Procedure pr_downloadErrorData {
 					Arguments: (fileLocation,statusCode,statusDescription);
@@ -585,14 +638,18 @@ LibraryModule Library_GuardServerSession {
 						
 							gss::pr_initErrorHandlingDownloadUploadButtons( ep_stat, statusCode,  statusDescription, bp_download:1 );
 						
-							fileLocation := formatString("%e.errors.json", ep_shownSession );
+							!fileLocation := formatString("%e.errors.json", ep_shownSession );
+							fileLocation := formatString("%e.errors", ep_shownSession );
 						
 							! we store the location of the file in string parameter sp_FinalLocation
 							sp_finalLocation := webui::GetIOFilePath(fileLocation);
 						
 							! writing the string parameter FinalLocation to a text file
-							! write serverSessionProfilerErrorData to file sp_finalLocation ;
-							pr_writeErrorDataToJSONFile( sp_finalLocation );
+							sp_shownSessionDescription := sp_sessionGivenDescriptions( ep_shownSession );
+							block where single_column_display := 1;
+								write Shown_session_data_exchange to file sp_finalLocation ;
+							endblock ;
+							! pr_writeErrorDataToJSONFile( sp_finalLocation );
 						
 							! checking if the previous write statement was successful or not
 							if FileExists(sp_finalLocation) then
@@ -649,7 +706,7 @@ LibraryModule Library_GuardServerSession {
 							sp_finalLocation := webui::GetIOFilePath(fileLocation);
 						
 							! writing the string parameter FinalLocation to a text file
-							pr_reportCurrentErrorsToTextFile(sp_finalLocation);
+							pr_reportCurrentErrorsToTextFile( sp_finalLocation );
 						
 							! checking if the previous write statement was successful or not
 							if FileExists(sp_finalLocation) then
@@ -700,13 +757,13 @@ LibraryModule Library_GuardServerSession {
 						block where listing_page_width := 32000 ;
 							f_out.pagewidth := 32000 ;
 							put f_out;
-							for i_jobErrorMessageNumber do
-								put     ep_jobErrorSeverity(i_jobErrorMessageNumber), " ", 
-									sp_jobErrorMoments( i_jobErrorMessageNumber), " : ",
-									sp_jobErrorMessages(i_jobErrorMessageNumber), / ;
-								for i_stackPosition | p_jobErrorLines(i_jobErrorMessageNumber, i_stackPosition) do
-									put "    ", p_jobErrorLines(i_jobErrorMessageNumber, i_stackPosition):4:0, 
-									" : ", ep_jobErrorNodes(i_jobErrorMessageNumber, i_stackPosition):0, / ;
+							for i_jobErrorMessageNumber | sp_shownJobErrorMessages(i_jobErrorMessageNumber) do
+								put     ep_shownJobErrorSeverity(i_jobErrorMessageNumber), " ", 
+									sp_shownJobErrorMoments( i_jobErrorMessageNumber), " : ",
+									sp_shownJobErrorMessages(i_jobErrorMessageNumber), / ;
+								for i_stackPosition | p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition) do
+									put "    ", p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition):4:0, 
+									" : ", ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition):0, / ;
 								endfor ;
 								put / ;
 							endfor ;
@@ -813,7 +870,6 @@ LibraryModule Library_GuardServerSession {
 					Arguments: (ep_err,sp_prefix);
 					Body: {
 						! Increase the number of recorded error messages.
-						pr_enter(sp_gssTime, p_gssMiU, errh::Message(ep_err));
 						pr_newIncidentDataSession();
 						
 						ep_jobErrorMessageNumber := ep_dataSessionIncident ;
@@ -841,7 +897,6 @@ LibraryModule Library_GuardServerSession {
 						else
 							p_NoErrors += 1 ;
 						endif ;
-						gss::pr_leave(sp_gssTime, p_gssMiU, errh::Message(ep_err));
 					}
 					Comment: "Store the error in the data structures of the library.";
 					ElementParameter ep_err {
@@ -860,10 +915,6 @@ LibraryModule Library_GuardServerSession {
 						Property: Optional;
 					}
 					StringParameter sp_msg;
-					DeclarationSection gss_logging_declarations {
-						StringParameter sp_gssTime;
-						Parameter p_gssMiU;
-					}
 				}
 				Procedure pr_appendMessageDataSession {
 					Arguments: (sp_msg,ep_lev);
@@ -917,6 +968,7 @@ LibraryModule Library_GuardServerSession {
 					StringParameter sp_serverSessionId;
 					Parameter p_jobProfilerData {
 						IndexDomain: (IndexIdentifiers,i_lineNumber,IndexProfilerTypes );
+						InitialData: data {};
 					}
 					StringParameter sp_jobErrorMessages {
 						IndexDomain: i_jobErrorMessageNumber;
@@ -991,7 +1043,6 @@ LibraryModule Library_GuardServerSession {
 					Arguments: (ep_err,sp_prefix);
 					Body: {
 						! Increase the number of recorded error messages.
-						pr_enter(sp_gssTime, p_gssMiU, errh::Message(ep_err));
 						pr_newIncidentJob();
 						ep_jobErrorMessageNumber := ep_jobIncident;
 						
@@ -1018,7 +1069,6 @@ LibraryModule Library_GuardServerSession {
 						else
 							p_NoErrors += 1 ;
 						endif ;
-						gss::pr_leave(sp_gssTime, p_gssMiU, errh::Message(ep_err));
 					}
 					Comment: "Store the error in the data structures of the library.";
 					ElementParameter ep_err {
@@ -1037,10 +1087,6 @@ LibraryModule Library_GuardServerSession {
 						Property: Optional;
 					}
 					StringParameter sp_msg;
-					DeclarationSection gss_logging_declarations {
-						StringParameter sp_gssTime;
-						Parameter p_gssMiU;
-					}
 				}
 				Procedure pr_appendMessageJob {
 					Arguments: (sp_msg,ep_lev);
@@ -1187,6 +1233,8 @@ LibraryModule Library_GuardServerSession {
 					ep_trackedJobErrorNodes(ep_shownSession, i_jobErrorMessageNumber, i_stackPosition) := ep_dataSessionErrorNodes(i_jobErrorMessageNumber, i_stackPosition);
 					ep_trackedJobErrorAttributes(ep_shownSession, i_jobErrorMessageNumber, i_stackPosition) := ep_dataSessionErrorAttributes(i_jobErrorMessageNumber, i_stackPosition);
 					p_trackedJobErrorLines(ep_shownSession, i_jobErrorMessageNumber, i_stackPosition) := p_dataSessionErrorLines(i_jobErrorMessageNumber, i_stackPosition);
+					
+					pr_uponChangeShownSession();
 				}
 			}
 			Procedure pr_logMsgTraceFile {
@@ -1311,7 +1359,7 @@ LibraryModule Library_GuardServerSession {
 							p_duration,
 							if p_leaveMemoryInUse >= p_procEnterMemoryInUse then "increase" else "decrease" endif, 
 							abs( p_leaveMemoryInUse - p_procEnterMemoryInUse ) );
-					pr_logMsg( sp_fullMsg );
+					pr_logMsg( sp_fullMsg, 'debug' );
 				}
 				Comment: {
 					"Trace leaving of procedure to the log file; this procedure should not be called before PostLibraryInitialization finished."
@@ -1394,22 +1442,12 @@ LibraryModule Library_GuardServerSession {
 						else
 							sp_localTraceFilename := sp_traceFilename ;
 						endif ;
-						if pro::GetPROEndPoint() then
-							if FileExists( sp_localTraceFilename ) then
-								pro::management::LocalLogInfo("pr_downloadModelLog(): sp_traceFilename = " + sp_localTraceFilename + " and that file exists." );
-							else
-								pro::management::LocalLogInfo("pr_downloadModelLog(): sp_traceFilename = " + sp_localTraceFilename + " but that file does not exist." );
-							endif ;
-						endif ;
 						p_slashFwd := FindNthString( sp_localTraceFilename, "/", -1 );
 						p_slashBwd := FindNthString( sp_localTraceFilename, "\\", -1 );
 						p_slash := max( p_slashFwd, p_slashBwd);
-						gss::pr_logMsg(formatString("p_slashFwd = %i, p_slashBwd = %i, p_slash = %i", p_slashFwd, p_slashBwd, p_slash ));
 						if p_slash then
 							p_len := StringLength( sp_localTraceFilename );
 							fileLocation := SubString( sp_localTraceFilename, p_slash+1, p_len); 
-							gss::pr_logMsg(formatString("sp_traceFilename = \"%s\", fileLocation = \"%s\"", 
-								sp_traceFilename, fileLocation ));		
 							FileCopy( sp_localTraceFilename, fileLocation );
 						else
 							fileLocation := sp_localTraceFilename;
@@ -1480,7 +1518,6 @@ LibraryModule Library_GuardServerSession {
 						if pro::GetPROEndPoint() then
 							if not pro::IsRunningAtServer() then
 								ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
-					
 							endif ;
 							if pro::management::IsRunningOnCloud() then
 								! if DirectoryExists( "MainProject/WebUI" to be tested (WinUI apps might be ble to log to file version of session logs anyway).
@@ -1491,6 +1528,7 @@ LibraryModule Library_GuardServerSession {
 								bp_loggingToFile  := 1 ;
 							endif ;
 						else
+							ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
 							bp_loggingOnCloud := 0 ;
 							bp_loggingToFile  := 1 ;
 						endif ;
@@ -1746,12 +1784,18 @@ LibraryModule Library_GuardServerSession {
 					put f_traceFile;
 					put "Opening log file ", sp_traceFilename, " at ", CurrentToSTring("%c%y-%m-%d %H:%M:%S"), / ;
 					if pro::GetPROEndPoint() then
-						put "Solver session handling request ", pro::workerRequestDescription, / ;
+						if pro::openedAsWorker then
+							put "This file contains the log of a data session on behalf of ", 
+								pro::GetPROUserName(), "@", pro::GetPROEnvironment(), / ;
+						else
+							put "This file contains the log of a solver session handling request ", 
+								pro::workerRequestDescription, / ;
+						endif ;
 					else
-						put "Data session ", / ;
+						put "This file contains the log of an AIMMS Developer session ", / ;
 					endif ;
 					putclose ;
-					gss::pr_setTracingLevel('trace'); ! Force all logging.
+					!gss::pr_setTracingLevel('trace'); ! Force all logging.
 				}
 			}
 			Procedure pr_GetThisSession {
