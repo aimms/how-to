@@ -3,5 +3,6 @@
 	<ExcludedFile>backup</ExcludedFile>
 	<ExcludedFile>log</ExcludedFile>
 	<ExcludedFile>PROTemp</ExcludedFile>
-	<ExcludedFile>ThirdSaveLabel</ExcludedFile>
+	<ExcludedFile>tracings</ExcludedFile>
+	<ExcludedFile>Library Repository (local copy)</ExcludedFile>
 </ExportSettings>

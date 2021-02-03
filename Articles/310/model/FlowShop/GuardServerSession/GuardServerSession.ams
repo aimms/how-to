@@ -1031,6 +1031,7 @@ LibraryModule Library_GuardServerSession {
 							NetTimeThreshold   :  0);
 						
 						pr_saveModelLogFile();
+						pro::management::LocalLogInfo("pr_guardAndProfileServerJob(): saved model log file = "  );
 					}
 					Comment: {
 						"!sp_thisSession
@@ -1135,6 +1136,17 @@ LibraryModule Library_GuardServerSession {
 						Range: s_messageLevels;
 						Default: 'info';
 						Property: Optional;
+					}
+				}
+				Procedure LoadResultsCallBack {
+					Arguments: (sp_requestID);
+					Body: {
+						
+						pro::session::LoadResultsCallBack(sp_requestID);
+						gss::pr_saveTrackedSessionData( sp_requestID );
+					}
+					StringParameter sp_requestID {
+						Property: Input;
 					}
 				}
 			}
@@ -1273,25 +1285,8 @@ LibraryModule Library_GuardServerSession {
 				Arguments: (sp_msg,ep_lev);
 				Body: {
 					if ep_lev >= ep_tracingLevel then
-					!	if bp_loggingToFile then
-							pr_logMsgTraceFile(sp_msg,ep_lev);
-					!	else
-					!		switch ep_lev do
-					!			'error', 'warn': 
-					!				pro::management::LocalLogError( sp_msg );
-					!			'info': 
-					!				pro::management::LocalLogInfo( sp_msg );
-					!			'debug': 
-					!				pro::management::LocalLogDebug( sp_msg );
-					!			'trace': 
-					!				pro::management::LocalLogTrace( sp_msg );
-					!			default:
-					!				raise warning "Unknown message level: " + ep_lev ;
-					!				pro::management::LocalLogInfo( sp_msg );
-					!		endswitch ;
-					!	endif ;
+						pr_logMsgTraceFile(sp_msg,ep_lev);
 					endif ;
-					!
 				}
 				Comment: {
 					"Trace to the log file; this procedure should not be called before PostLibraryInitialization finished."
@@ -1415,9 +1410,6 @@ LibraryModule Library_GuardServerSession {
 			}
 			Procedure pr_setLoggingToModelLog {
 				Arguments: (bp_ltf);
-				Body: {
-					bp_loggingToFile := bp_ltf ;
-				}
 				Parameter bp_ltf {
 					Range: binary;
 					Property: Input;
@@ -1519,40 +1511,29 @@ LibraryModule Library_GuardServerSession {
 					
 					pr_GetThisSession(); 
 					
-					
 					block ! Initialize logging
 						if pro::GetPROEndPoint() then
+							pro::Initialize();
 							if not pro::IsRunningAtServer() then
 								ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
 							endif ;
-							if pro::management::IsRunningOnCloud() then
-								! if DirectoryExists( "MainProject/WebUI" to be tested (WinUI apps might be ble to log to file version of session logs anyway).
-								bp_loggingOnCloud := 1 ;
-								bp_loggingToFile  := 1 ;
-							else
-								bp_loggingOnCloud := 0 ;
-								bp_loggingToFile  := 1 ;
-							endif ;
 						else
 							ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
-							bp_loggingOnCloud := 0 ;
-							bp_loggingToFile  := 1 ;
 						endif ;
 					
 						if sp_thisSession then
-							sp_traceFilename := sp_tracingsFoiderName + "/" + sp_thisSession + ".modelLog" ;
+							sp_traceFilename := sp_tracingsFolderName + "/" + sp_thisSession + ".modelLog" ;
 						endif ;
 					
-						if bp_loggingToFile then
-							if not  DirectoryExists( sp_tracingsFoiderName ) then
-								DirectoryCreate( sp_tracingsFoiderName );
-							endif ;
-							if fileExists( sp_traceFilename ) then
-								FileDelete( sp_traceFilename );
-							endif ;
+						if not  DirectoryExists( sp_tracingsFolderName ) then
+							DirectoryCreate( sp_tracingsFolderName );
+						endif ;
+						if fileExists( sp_traceFilename ) then
+							FileDelete( sp_traceFilename );
 						endif ;
 					endblock ;
 					pr_openLogFile();
+					
 					! log file of a week old are to be deleted
 				}
 				Comment: {
@@ -1785,6 +1766,11 @@ LibraryModule Library_GuardServerSession {
 		Section Logging_utilities {
 			Procedure pr_openLogFile {
 				Body: {
+					if pro::GetPROEndPoint() then
+						pro::management::LocalLogInfo(formatString(
+							"pr_openLogFile(): sp_thisSession = %s, sp_traceFilename = %s", 
+							sp_thisSession, sp_traceFilename ));
+					endif ;
 					f_traceFile.pagewidth := 32000 ;
 					putclose f_traceFile ;
 					put f_traceFile;
@@ -1812,6 +1798,8 @@ LibraryModule Library_GuardServerSession {
 						else
 							sp_thisSession := pro::ReadArguments('_pro-session-id');
 						endif ;
+						pro::management::LocalLogInfo(formatString(
+							"pr_GetThisSession(): sp_thisSession = %s", sp_thisSession ));
 					else
 						sp_thisSession := CurrentToString("%c%y%m%dT%H%M%S%t%TZ('UTC')");
 					endif ;
@@ -1830,6 +1818,9 @@ LibraryModule Library_GuardServerSession {
 						pro::SaveFileToCentralStorage(
 							localPath     :  sp_fn, 
 							storagePath   :  sp_proStorageFileName);
+						pro::management::LocalLogInfo(formatString(
+							"pr_actuallySaveModelLogFile(): pro::SaveFileToCentralStorage(%s,%s)",
+							sp_fn, sp_proStorageFileName));
 					else
 						pro::management::LocalLogInfo(
 							"pr_actuallySaveModelLogFile() sp_fn = " + 
@@ -1860,7 +1851,7 @@ LibraryModule Library_GuardServerSession {
 					Range: errh::PendingErrors;
 				}
 			}
-			StringParameter sp_tracingsFoiderName {
+			StringParameter sp_tracingsFolderName {
 				Definition: "tracings";
 			}
 			StringParameter sp_thisSession {
@@ -1879,18 +1870,6 @@ LibraryModule Library_GuardServerSession {
 				InitialData: {
 					'LocalDST'
 					! 'UTC'
-				}
-			}
-			Parameter bp_loggingOnCloud {
-				Range: binary;
-				InitialData: 0;
-			}
-			Parameter bp_loggingToFile {
-				Range: binary;
-				InitialData: 1;
-				Comment: {
-					"Both vi AIMMS Developer, and when running in the cloud, this binary will be initialized to 1.
-					0 otherwise."
 				}
 			}
 		}

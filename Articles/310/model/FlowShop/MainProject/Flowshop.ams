@@ -192,7 +192,8 @@ Model Main_Flow_Shop {
 	Section MainModelProcedures {
 		Procedure MainInitialization {
 			Body: {
-				!ProfilerStart();
+				ProfilerStart();
+				gss::ep_tracinglevel := 'trace' ;
 			}
 		}
 		Procedure PostMainInitialization {
@@ -224,6 +225,14 @@ Model Main_Flow_Shop {
 	}
 	Procedure pr_workSolve {
 		Body: {
+			gss::pr_enter(sp_gssTime, p_gssMiU);
+			
+			gss::pr_logMsg("pro::workerQueueID = " + pro::workerQueueID, 'error');
+			gss::pr_logMsg("pro::workerSessionID = " + pro::workerSessionID, 'warn');
+			gss::pr_logMsg("pro::workerDelegationLevel = " + pro::workerDelegationLevel,'info');
+			gss::pr_logMsg("pro::openedAsWorker = " + pro::openedAsWorker, 'debug' );
+			gss::pr_logMsg("pro::workerCallbackCalled = " + pro::workerCallbackCalled, 'trace' );
+			
 			gss::pr_AppendMessage(
 				FormatString("Going to solve flowshop for %i jobs on %i machines",
 					p_maxJobs, p_maxMachines));
@@ -238,9 +247,9 @@ Model Main_Flow_Shop {
 			
 			raise warning "Hi, hi, false alarm.";
 			
-			gss::pr_SaveState(
-				sp_Label              :  "ThirdSaveLabel", 
-				s_SelectedIdentifiers :  Superfluous_Data);
+			!gss::pr_SaveState(
+			!	sp_Label              :  "ThirdSaveLabel", 
+			!	s_SelectedIdentifiers :  Superfluous_Data);
 			
 			pr_prepInterface;
 			
@@ -249,13 +258,18 @@ Model Main_Flow_Shop {
 			gss::pr_AppendMessage(
 				FormatString("Finished solving flowshop for %i jobs on %i machines",
 					p_maxJobs, p_maxMachines));
+			gss::pr_leave(sp_gssTime, p_gssMiU);
+		}
+		DeclarationSection gss_logging_declarations {
+			StringParameter sp_gssTime;
+			Parameter p_gssMiU;
 		}
 	}
 	Procedure pr_solve {
 		Body: {
 			if pro::GetPROEndPoint() then
 				if pro::DelegateToServer( waitForCompletion  :  1, 
-							  completionCallback :  'pro::session::LoadResultsCallBack' ) then	
+							  completionCallback :  'gss::LoadResultsCallBack' ) then	
 					return 1;
 				endif ;
 			endif ;

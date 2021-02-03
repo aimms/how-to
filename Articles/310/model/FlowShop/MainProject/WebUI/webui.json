@@ -176,6 +176,13 @@
           }
         },
         {
+          "uri": "UploadErrorWarningData",
+          "layoutInfo": {
+            "width": "4",
+            "height": "1"
+          }
+        },
+        {
           "uri": "DownloadModelLog",
           "layoutInfo": {
             "width": "4",
@@ -183,14 +190,14 @@
           }
         },
         {
-          "uri": "downloadErrorWarningData",
+          "uri": "DownloadErrorReport",
           "layoutInfo": {
             "width": "4",
             "height": "1"
           }
         },
         {
-          "uri": "DownloadErrorReport",
+          "uri": "downloadErrorWarningData",
           "layoutInfo": {
             "width": "4",
             "height": "1"
@@ -340,7 +347,12 @@
       }
     },
     "title": {
-      "literal": "Error and Warning messages"
+      "aimms": {
+        "contents": [
+          "gss::sp_titleErrorWarningMessagesTable"
+        ],
+        "slices": []
+      }
     },
     "widgetactions": {
       "aimms": {
@@ -861,6 +873,20 @@
     },
     "title": {
       "literal": "Upload Error Data"
+    }
+  },
+  "widgets/UploadErrorWarningData": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "gss::pr_uploadErrorData"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "upload"
+    },
+    "title": {
+      "literal": "Upload Error Warning Data"
     }
   }
 }
