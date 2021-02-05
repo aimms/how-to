@@ -54,7 +54,7 @@ herein below.
 
 All through this tutorial and your AIMMS learning journey, you may refer to the following AIMMS resources:
 
-- `Common AIMMS Shortcuts Keys <https://how-to.aimms.com/Articles/186/186-keyboard-shortcuts-for-aimms.html>`__. 
+- :doc:`../186/186-keyboard-shortcuts-for-aimms`. 
 
 - Search through all AIMMS resources using our `Support Center page <https://www.aimms.com/support/>`__.
 

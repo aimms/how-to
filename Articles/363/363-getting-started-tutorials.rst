@@ -8,7 +8,7 @@ Tutorial for Beginners
 -------------------------
 The Tutorial for Beginners is a one-hour tutorial designed as the bare minimum needed to build simple models using the AIMMS Model Explorer. Data values are entered manually using data pages, and you can build a page with objects to view and modify the data. 
 
-* `Download the Tutorial for Beginners <https://download.aimms.com/aimms/download/references/AIMMS_tutorial_beginner.pdf>`_
+* :doc:`../505/index`
 
 
 Tutorial for Professionals
