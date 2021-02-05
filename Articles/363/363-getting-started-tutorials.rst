@@ -31,6 +31,8 @@ Below you can download a zip file containing the auxiliary project files mention
  
 .. note::
 	The Tutorial for Professionals uses compound sets, which is a deprecated feature only available in older AIMMS versions. We are working to update this tutorial to be compatible with the newest versions of AIMMS.
+	
+	You may join the `AIMMS Academy <https://academy.aimms.com/>`_ to benefit from an up to date course.
 
 AIMMS learning game
 ---------------------
