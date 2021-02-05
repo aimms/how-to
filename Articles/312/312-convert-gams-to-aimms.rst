@@ -32,7 +32,7 @@ A.  If you do not have AIMMS 3.14 installed, then:
 
             mklink /D "C:\ProgramData\Paragon Decision Technology" C:\ProgramData\AIMMS
 
-    #.  Download and install `AIMMS 3.14 <https://download.aimms.com/aimms/download/data/3.14/5.53/Aimms-3.14.5.53-x86.exe>`_  
+    #.  Download and install :download:`AIMMS 3.14 <https://download.aimms.com/aimms/download/data/3.14/5.53/Aimms-3.14.5.53-x86.exe>`  
     
     After creating and restarting your project with AIMMS 3.14, it should look like:
 
@@ -96,9 +96,9 @@ A.  Open the project again using AIMMS 3.14.
 
 Converting AIMMS 3 to current AIMMS version
 -------------------------------------------
-A.  Install the `current version of AIMMS <https://www.aimms.com/support/downloads>`_ (or the AIMMS 4 version you prefer to use).
+A.  Downlaod and install the :download:`AIMMS version 4.9.4 <https://download.aimms.com/aimms/download/data/4.9/4.68/Aimms-4.9.4.68-x64.exe>`.
 
-#.  Open the project with the new version of AIMMS.
+#.  Open the project with the AIMMS version 4.9.4.
 
     .. image:: images/OpenProjectUsing4-9.png
         :align: center
@@ -108,7 +108,9 @@ A.  Install the `current version of AIMMS <https://www.aimms.com/support/downloa
     .. image:: images/OkWarningConversion.png
         :align: center
 
-#.  Now you can switch the ``.dat`` files (used with AIMMS 3.14) to the ``.data`` files offered with newer versions of AIMMS:
+#.  Now you can switch the ``.dat`` files (used with AIMMS 3.14) to the ``.data`` files offered with newer versions of AIMMS. 
+    
+    Go to :menuselection:`Settings → Project Options... → Options with nondefault value` :
 
     .. image:: images/settingOptionsDataManagerStyle.png
         :align: center
