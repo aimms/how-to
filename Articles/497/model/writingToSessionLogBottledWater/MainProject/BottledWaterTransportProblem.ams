@@ -97,21 +97,39 @@ Model Main_BottledWaterTransportProblem {
 			Range: AllTimeZones;
 			InitialData: 'localDST';
 		}
+		Procedure pr_logMsgTraceFile {
+			Arguments: (sp_msg);
+			Body: {
+				if not p_noLogLinesWritten then
+					if fileExists( sp_traceFilename ) then
+						FileDelete( sp_traceFilename );
+					endif ;
+				endif ;
+				put f_traceFile ;
+				put sp_msg, / ;
+				putclose ;
+				p_noLogLinesWritten += 1 ;
+			}
+			StringParameter sp_msg {
+				Property: Input;
+			}
+		}
 		Procedure pr_logMsg {
 			Arguments: (sp_msg);
 			Body: {
 				if pro::GetPROEndPoint() then
-					pro::management::LocalLogInfo( sp_msg );
-				else
-					if not p_noLogLinesWritten then
-						if fileExists( sp_traceFilename ) then
-							FileDelete( sp_traceFilename );
-						endif ;
+					if pro::management::IsRunningOnCloud() then
+						! When running as a publihed app in the cloud, 
+						! Tracing is sent to a separate file; to be save 
+						! during PreMainTermination.
+						pr_logMsgTraceFile(sp_msg);
+					else
+						! Running as a published app on an AIMMS PRO on Premise platform.
+						! Writing directly in the session log.
+						pro::management::LocalLogInfo( sp_msg );
 					endif ;
-					put f_traceFile ;
-					put sp_msg, / ;
-					putclose ;
-					p_noLogLinesWritten += 1 ;
+				else
+					pr_logMsgTraceFile(sp_msg);
 				endif ;
 			}
 			StringParameter sp_msg {

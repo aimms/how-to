@@ -1,0 +1,3 @@
+s_variants := data { a, b, c };
+p_dt1 := data { a : 1, b : 2, c : 3 };
+sp_nm1 := data { a : "aap", b : "noot", c : "mies" };

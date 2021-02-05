@@ -1,0 +1,194 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "CrossingThePacific",
+          "layoutInfo": {
+            "width": "8",
+            "height": "3",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/CrossingThePacific": {
+    "aimms.widget.type": {
+      "literal": "map-v2"
+    },
+    "arcs.__display_order__": {
+      "literal": [
+        "arcs.0"
+      ]
+    },
+    "arcs.0": {
+      "aimms": {
+        "contents": [
+          "p_adaptedConnections"
+        ],
+        "slices": [
+          {
+            "identifier": "p_adaptedConnections",
+            "slice": [
+              {
+                "index": "i_locFrom",
+                "type": "free",
+                "value": "i_locFrom"
+              },
+              {
+                "index": "i_locTo",
+                "type": "free",
+                "value": "i_locTo"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "arcs.0.label.hide": {
+      "literal": true
+    },
+    "arcs.0.line.straight": {
+      "literal": true
+    },
+    "arcs.0.value": {
+      "literal": {
+        "identifier": "p_connAdapted",
+        "slice": [
+          {
+            "index": "i_locFrom",
+            "type": "free",
+            "value": "i_locFrom"
+          },
+          {
+            "index": "i_locTo",
+            "type": "free",
+            "value": "i_locTo"
+          }
+        ]
+      }
+    },
+    "center.latitude": {
+      "aimms": {
+        "contents": [
+          "p_centerLat"
+        ],
+        "slices": []
+      }
+    },
+    "center.longitude": {
+      "aimms": {
+        "contents": [
+          "p_centerLon"
+        ],
+        "slices": []
+      }
+    },
+    "nodes.__display_order__": {
+      "literal": [
+        "nodes.0"
+      ]
+    },
+    "nodes.0": {
+      "aimms": {
+        "contents": [
+          "p_adaptedLon",
+          "p_lat",
+          "p_size"
+        ],
+        "slices": [
+          {
+            "identifier": "p_adaptedLon",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "free",
+                "value": "i_loc"
+              }
+            ]
+          },
+          {
+            "identifier": "p_lat",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "free",
+                "value": "i_loc"
+              }
+            ]
+          },
+          {
+            "identifier": "p_size",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "free",
+                "value": "i_loc"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "nodes.0.index": {
+      "literal": {
+        "identifier": "i_loc"
+      }
+    },
+    "nodes.0.latitude": {
+      "literal": {
+        "identifier": "p_lat",
+        "slice": [
+          {
+            "index": "i_loc",
+            "type": "free",
+            "value": "i_loc"
+          }
+        ]
+      }
+    },
+    "nodes.0.longitude": {
+      "literal": {
+        "identifier": "p_adaptedLon",
+        "slice": [
+          {
+            "index": "i_loc",
+            "type": "free",
+            "value": "i_loc"
+          }
+        ]
+      }
+    },
+    "nodes.0.maximumreferencesize": {
+      "literal": 10
+    },
+    "nodes.0.size": {
+      "literal": {
+        "identifier": "p_size",
+        "slice": [
+          {
+            "index": "i_loc",
+            "type": "free",
+            "value": "i_loc"
+          }
+        ]
+      }
+    },
+    "title": {
+      "literal": "Sailing across the world"
+    },
+    "zoom": {
+      "literal": 2
+    }
+  }
+}

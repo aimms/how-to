@@ -3,12 +3,11 @@
 Clone the repo on your computer
 ------------------------------------
 
-If you make it here, it means you have access right to the documentation git repo. Thus you may "clone" it somewhere on your computer ([like this](https://tortoisegit.org/docs/tortoisegit/tgit-dug-clone.html)) using `git@gitlab.aimms.com:aimms/documentation.git`. This will just copy all files from the gitlab server on your computer.
+If you make it here, it means you have access right to the How-To git repo. Thus you may "clone" it somewhere on your computer ([like this](https://tortoisegit.org/docs/tortoisegit/tgit-dug-clone.html)) using `git@gitlab.aimms.com:aimms/customer-support/aimms-how-to.git`. This will copy all files from the gitlab server onto your computer.
 
-You should end up with a folder structure similar to the following:
-![image](/uploads/f05b56c0ee19a4b045bd6c8a2aac8daf/image.png)
+Most of the content is located in the [Articles](/Articles) folder, where each article is inside a folder with a number, containing the article `RST` file and the attached resources (images, AIMMS project zip files, etc.). This number corresponds to a giltab ticket, where you can find more context and progress.
 
-You may notice that the documentation in itself (the text) is located in the folders from ``cdm`` till ``webui``. All the rest are actually configuration and support folders and files.
+The folder structure is meant for organising the content into sections on the website. You may find references to articles part of the [Articles](/Articles) folder in every index file. Putting articles in their dedicated [Articles](/Articles) folder enables us to display articles in several sections if needed.
 
 Build Locally the HTML documentation
 --------------------------------------
@@ -22,31 +21,85 @@ Build Locally the HTML documentation
 After installing all the above requirements, please go to the location of your previously cloned documentation folder:
  * Open a console prompt from this location, using ``ATL+D`` and typing ``cmd`` in the URL of your file explorer (awesome)
  * run ``make html`` (the first time, this may take some time, like 20 secs. progress is shown in your console)
-![image](/uploads/af294070a540237ba141ac325763febd/image.png) You may also run `python3 -msphinx . _build/html` (to be sure to use a specific python version). [More docs](https://www.sphinx-doc.org/en/master/man/sphinx-build.html)
+ > 💡 You may also run `python3 -msphinx . _build/html` (to be sure to use a specific python version). [More docs](https://www.sphinx-doc.org/en/master/man/sphinx-build.html)
 
-**Analysis:**
+<details>
+<summary>
+<b>Click me to show an example 👇</b>
+</summary>
+![image](/uploads/af294070a540237ba141ac325763febd/image.png) 
+
 * As you may see at the bottom of the wonderfully colored prompt, **your html pages are in `_build\html` folder**, located in the current working directory (the same as always). You may check the build by opening any of those.
 * The red text are warnings (any error would actually break the building process, as in AIMMS): **Those warnings should be avoided**. Most of the time, this is due to a misuse of sphinx. You may correct them yourself, because your are awesome. Or let them be because your don't understand them. In any case, through your development please mind that **you should avoid to create any new warnings** (ask around if you don't understand)
- * Be aware to make title underline longer than the title itself (warning would look like the above cmd prompt image)
-* **warning** file names are case sensitive on linux, and not on windows. Thus, your build may break on gitlab, and not locally on your computer. 
+* Be aware to make title underline longer than the title itself (warning would look like the above cmd prompt image)
+* ⚠️ file names are case sensitive on linux, and not on windows. Thus, your build may break on gitlab, and not locally on your computer. 
 
-> **Note 1:** GitLab is following exactly the same process when building the documentation in the pipeline. This is documented in the .gitlab-ci.yml file.
+</details>
 
-> **Note 2:** When pushing to the **master branch only**, the repo is built and **pushed (merged) to documentation.aimms.com**.
+> **💡1:** GitLab CI is following exactly the same process when building the documentation in the pipeline. This is defined in the [.gitlab-ci.yml](.gitlab-ci.yml) file. More details below
 
-Prereq's to build a PDF version (optional) 
--------------------------------------------
+> **⚠️2:** When pushing to the **master branch only**, the repo is built and **pushed (merged) to [how-to.aimms.com](https://how-to.aimms.com/)**.
 
-You can use the ``make latexpdf`` command to locally create a .pdf from the .rst source files.
+> **⚠️3:** If any warning is raised on gitlab, **the pipeline fails**
 
-First, make sure you installed Latex - https://miktex.org/howto/install-miktex
 
-Then, to get the AIMMS code to look right, you need to run this:
-   
-   ``python -m pip install aimms-pygments-style``
- 
-   This will install an extension enabling latex to find the AIMMS style sheet define in the following open source repo 
-   https://gitlab.com/ArthurdHerbemont/aimms-pygments-style. Please contribute if you think you can improve it ! :)
+The Pipeline
+-
+
+Every push to gitlab remote will run a pipeline. This pipeline first "Test" stage contains 3 different jobs as defined in [.gitlab-ci.yml](.gitlab-ci.yml)
+
+![image](https://gitlab.aimms.com/aimms/documentation/-/wikis/uploads/cc98f149f3858630e6a760a35c9e0c98/image.png)
+
+| job name | description | condition |
+| ------ | ------ | ----- |
+| ``build`` | builds the docs using the latest sphinx version | ❌ If any warning is raised, the job and pipeline fails |
+| ``linkcheck`` | checks every external link **and** anchor | ❌ If any link **or** anchor is broken, the job and pipeline fails |
+| ``spellcheck`` | checks the spelling of every word | ⚠️ If any spelling is broken, the job fails, but this job is **allowed to fail** |
+
+<details>
+<summary>
+ <b>If <code>build</code> fails on gitlab, but not locally, what should I do ? 👇</b>
+</summary>
+
+1. look at the error/warning in the pipeline
+1. Upgrade your sphinx version and sphinx-aimms-theme version (`python -mpip --upgrade sphinx`)
+1. Linux filenames are case sensitive. Double check
+</details>
+
+<details>
+<summary>
+<b>If <code>linkcheck</code> fails on gitlab, but not locally, what should I do ? 👇</b>
+</summary>
+
+1. if `build` also fails, go to fix ``build`` first
+1. look at the error/warning in the pipeline
+   1. fix your broken link
+   1. fix expired link, cause website no more reachable - Thanks for your help !
+1. Fix links locally using `make linkcheck` or `python -msphinx -b linkcheck . _build/html`
+1. upgrade your sphinx version and sphinx-aimms-theme version (`python -mpip --upgrade sphinx sphinx-aimms-theme`)
+1. re-run the job in gitlab: **some links might be temporarily not reachable**
+1. If there is a link you want to **ignore**, put it 
+``` 
+``example.com`` 
+```
+</details>
+
+**If ``spellcheck`` fails, what should I do ?**
+
+- Don't bother ☺️
+
+**When pushing to the master branch**
+
+A push to master will run the pipeline and, if the `Test` stage is successful, it will copy the docs to [how-to.aimms.com](https://how-to.aimms.com/)
+
+If the pipeline fails, no copy will happen, thus website stays unchanged
+
+**Notes**
+1. If there is a link you want to **ignore**, put it 
+``` 
+``example.com`` 
+```
+
 
 Style guide
 ==============
@@ -201,3 +254,17 @@ Use this to add contents of an entire file in the repo to your document as a sni
 
 http://docutils.sourceforge.net/docs/ref/rst/directives.html#include
 
+
+Prereq's to build a PDF version (optional) 
+-------------------------------------------
+
+You can use the ``make latexpdf`` command to locally create a .pdf from the .rst source files.
+
+First, make sure you installed Latex - https://miktex.org/howto/install-miktex
+
+Then, to get the AIMMS code to look right, you need to run this:
+   
+   ``python -m pip install aimms-pygments-style``
+ 
+   This will install an extension enabling latex to find the AIMMS style sheet define in the following open source repo 
+   https://gitlab.com/ArthurdHerbemont/aimms-pygments-style. Please contribute if you think you can improve it ! :)

@@ -69,8 +69,8 @@ We decided to explore the usage of Docker in our examples to take advantage of t
 Examples
 ------------
 
-#. Using scikit-learn's KMeans clustering in an AIMMS app to find centers of gravity in a demand network: :doc:`Connecting AIMMS with Python <../487/487-aimms-with-python>`.
-#. Create a Sankey Diagram using R to visualize network flows in an AIMMS app: *coming soon*
+#. Using scikit-learn's KMeans clustering in an AIMMS app to find centers of gravity in a demand network: :doc:`How to Connect AIMMS with Python <../487/487-aimms-with-python>`.
+#. Create a Sankey Diagram using R to visualize network flows in an AIMMS app: :doc:`How to Connect AIMMS with R <../498/498-aimms-with-r>`.
 
 
 

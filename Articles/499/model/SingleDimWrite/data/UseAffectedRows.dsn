@@ -1,0 +1,6 @@
+[ODBC]
+DRIVER=MySQL ODBC 8.0 Unicode Driver
+UID=ChrisKuip
+PWD=jd#4YnD54%fdS!
+DATABASE=odoo35554
+PORT=13306
