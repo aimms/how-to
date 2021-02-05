@@ -13,7 +13,7 @@ Entering set data
 .. rubric:: Manual data entry
 
 Since this tutorial only contains little data, you are asked to enter it
-manually. (In the tutorial for professionals, data is imported from a
+manually. (In the "My first AIMMS app" tutorial on the academy, data is imported from a
 database.) In this section you will encounter a standard data entry
 facility. Each identifier has an associated data page that you can use
 both to view data and to enter data.

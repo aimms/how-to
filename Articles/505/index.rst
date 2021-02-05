@@ -15,7 +15,7 @@ following opportunities are immediately available.
    working knowledge of the system and its language. One tutorial is
    intended for beginners (the current one you are reading), 
    while `the other <https://academy.aimms.com/course/view.php?id=45>`__ 
-   is aimed at more advanced users of AIMMS. You may register on the `AIMMS Academy <http://academy.aimms.com/>`__ to use it.
+   is aimed at building a first full application. You may register on the `AIMMS Academy <http://academy.aimms.com/>`__ to use it.
 
 -  There is an `example library <https://how-to.aimms.com/examples/index.html>`__ with a variety of examples to illustrate
    simple and advanced applications together with particular aspects of
@@ -46,9 +46,8 @@ herein below.
 
 .. raw:: html
     
-    <div style="max-width=100%">
-    <iframe src="https://www.youtube.com/embed/videoseries?list=PLZqh3oAyX6qlV23t7c-McVJA-rHQHjnKD" frameborder="0" style="width: -webkit-fill-available;height: -webkit-fill-available;" allowfullscreen></iframe>
-    </div>
+  <a href="https://www.youtube.com/watch?list=PLZqh3oAyX6qlV23t7c-McVJA-rHQHjnKD&v=hK8UKxTp0KY&feature=emb_logo&ab_channel=%C3%81lvaroGarc%C3%ADaS%C3%A1nchez">
+  <p class="fa fa-play-circle" style="color: brown;font-weight: bold;" > AIMMS Video Tutorial for beginners</p></a>
    
 
 .. rubric:: Support resources

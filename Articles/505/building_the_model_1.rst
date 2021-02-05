@@ -29,11 +29,13 @@ Starting a new project
 
 All current versions of AIMMS are provided as an installation free software. Instead of creating a 
 directory in the *Program Files* and a dedicated launch icon, an execution file for the AIMMS 
-versions that you have downloaded and run is stored in your local user directory. You can download the latest version of AIMMS from the `download section on our website <https://www.aimms.com/support/downloads/#aimms-dev-download>`_
+versions that you have downloaded and run is stored in your local user directory. You can download the latest version of AIMMS from the `download section on our website <https://www.aimms.com/support/downloads/#aimms-dev-download>`__
 
 .. rubric:: The AIMMS Launcher
 
-The AIMMS Launcher is a useful tool which enables you to easily run, manage, and navigate through all of the AIMMS versions on your computer. The AIMMS Launcher automatically creates a launch icon on your desktop to easily access and launch any version of AIMMS that you have available on your computer. The AIMMS Launcher is also available on the download section of our website.
+The AIMMS Launcher is a useful tool which enables you to easily run, manage, and navigate through all of the AIMMS versions on your computer. 
+The AIMMS Launcher automatically creates a launch icon on your desktop to easily access and launch any version of AIMMS that you have available on your computer. 
+The AIMMS Launcher is also available on `the download section of our website <https://www.aimms.com/support/downloads/#aimms-other-download>`__.
 
 .. rubric:: Starting AIMMS
 

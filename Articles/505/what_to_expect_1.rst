@@ -99,6 +99,7 @@ mathematical program to be built.
 
 .. figure:: Figs/Png/netherlands.png
    :name: fg:tut:nederland
+   :align: center
 
    The Netherlands
 

@@ -49,7 +49,7 @@ necessary corrections.
 
 .. seealso::
   
-  More docs on :doc:`suffices/mathematical-program-suffices/programstatus`
+  More docs on :doc:`suffices/mathematical-program-suffices/programstatus`, :any:`if`, :ref:`empty`
 
 .. rubric:: Right-mouse for help
 
