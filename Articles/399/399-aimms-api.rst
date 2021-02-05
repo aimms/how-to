@@ -11,7 +11,7 @@ Direct download AIMMS Project :download:`AIMMS API.zip <model/AIMMS API.zip>`
 
 This AIMMS project illustrates the basic use of the AIMMS API in an external DLL.
 
-The model contained in this example project refers to the external C function illustrated in Section 25.1 of the AIMMS Language Reference, and its associated declaration in an AIMMS model.
+The model contained in this example project refers to the external C function illustrated in `the AIMMS Language Reference <https://documentation.aimms.com/language-reference/advanced-language-components/the-aimms-programming-interface/introduction.html>`__, and its associated declaration in an AIMMS model.
 
 For illustration this demo uses a tiny dataset for a small set of Cities, and a single parameter TransportCost, both initialized in the model. On the demo page you can extend the set of Cities, and introduce additional non-zero elements for the identifier TransportCost.
 
