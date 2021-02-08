@@ -1,0 +1,181 @@
+/* 
+   Section 1: giving the colors in the color palette a name.
+   Note: this is not supported in IE11
+*/
+:root {
+    --planning-qualitative-color-0: #eeeeee ;
+    --planning-qualitative-color-1: #8dd3c7 ;
+    --planning-qualitative-color-2: #ffffb3 ;
+    --planning-qualitative-color-3: #bebada ;
+    --planning-qualitative-color-4: #fb8072 ;
+    --planning-qualitative-color-5: #80b1d3 ;
+    --planning-qualitative-color-6: #fdb462 ;
+    --planning-qualitative-color-7: #b3de69 ;
+    --planning-qualitative-color-8: #fccde5 ;
+    --planning-qualitative-color-9: #d9d9d9 ;
+    --planning-qualitative-color-10: #bc80bd ;
+    --planning-qualitative-color-11: #ccebc5 ;
+    --planning-qualitative-color-12: #ffed6f ;
+}
+
+/*
+    Section 2: Associating the annotations with color names for bar chart widget.
+*/
+.annotation-qualitative-0{
+        fill: var(--planning-qualitative-color-0);
+}
+
+.annotation-qualitative-1{
+        fill: var(--planning-qualitative-color-1);
+}
+
+.annotation-qualitative-2{
+        fill: var(--planning-qualitative-color-2);
+}
+
+.annotation-qualitative-3{
+        fill: var(--planning-qualitative-color-3);
+}
+
+.annotation-qualitative-4{
+        fill: var(--planning-qualitative-color-4);
+}
+
+.annotation-qualitative-5{
+        fill: var(--planning-qualitative-color-5);
+}
+
+.annotation-qualitative-6{
+        fill: var(--planning-qualitative-color-6);
+}
+
+.annotation-qualitative-7{
+        fill: var(--planning-qualitative-color-7);
+}
+
+.annotation-qualitative-8{
+        fill: var(--planning-qualitative-color-8);
+}
+
+.annotation-qualitative-9{
+        fill: var(--planning-qualitative-color-9);
+}
+
+.annotation-qualitative-10{
+        fill: var(--planning-qualitative-color-10);
+}
+
+.annotation-qualitative-11{
+        fill: var(--planning-qualitative-color-11);
+}
+
+.annotation-qualitative-12{
+        fill: var(--planning-qualitative-color-12);
+}
+
+/*
+    Section 3: Associating the annotations with colors for legend widget.
+*/
+
+.aimms-widget.tag-legend-widget .annotation-qualitative-1{
+        background: var(--planning-qualitative-color-1); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative-2{
+        background: var(--planning-qualitative-color-2); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative-3{
+        background: var(--planning-qualitative-color-3); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative-4{
+        background: var(--planning-qualitative-color-4); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative-5{
+        background: var(--planning-qualitative-color-5); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative-6{
+        background: var(--planning-qualitative-color-6); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative-7{
+        background: var(--planning-qualitative-color-7); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative-8{
+        background: var(--planning-qualitative-color-8); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative-9{
+        background: var(--planning-qualitative-color-9); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative-10{
+        background: var(--planning-qualitative-color-10); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative-11{
+        background: var(--planning-qualitative-color-11); 
+}
+
+.aimms-widget.tag-legend-widget .annotation-qualitative-12{
+        background: var(--planning-qualitative-color-12); 
+}
+
+/*
+    Section 4: Associating the annotations with colors for table widget.
+*/
+
+.aimms-widget.tag-table-widget .annotation-qualitative-1{
+        background: var(--planning-qualitative-color-1); 
+}
+
+.aimms-widget.tag-table-widget .annotation-qualitative-2{
+        background: var(--planning-qualitative-color-2); 
+}
+
+.aimms-widget.tag-table-widget .annotation-qualitative-3{
+        background: var(--planning-qualitative-color-3); 
+}
+
+.aimms-widget.tag-table-widget .annotation-qualitative-4{
+        background: var(--planning-qualitative-color-4); 
+}
+
+.aimms-widget.tag-table-widget .annotation-qualitative-5{
+        background: var(--planning-qualitative-color-5); 
+}
+
+.aimms-widget.tag-table-widget .annotation-qualitative-6{
+        background: var(--planning-qualitative-color-6); 
+}
+
+.aimms-widget.tag-table-widget .annotation-qualitative-7{
+        background: var(--planning-qualitative-color-7); 
+}
+
+.aimms-widget.tag-table-widget .annotation-qualitative-8{
+        background: var(--planning-qualitative-color-8); 
+}
+
+.aimms-widget.tag-table-widget .annotation-qualitative-9{
+        background: var(--planning-qualitative-color-9); 
+}
+
+.aimms-widget.tag-table-widget .annotation-qualitative-10{
+        background: var(--planning-qualitative-color-10); 
+}
+
+.aimms-widget.tag-table-widget .annotation-qualitative-11{
+        background: var(--planning-qualitative-color-11); 
+}
+
+.aimms-widget.tag-table-widget .annotation-qualitative-12{
+        background: var(--planning-qualitative-color-12); 
+}
+
+
+

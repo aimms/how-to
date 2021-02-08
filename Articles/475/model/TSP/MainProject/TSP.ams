@@ -246,6 +246,10 @@ Model Main_TSP {
     }
     Procedure ResetCase {
         Body: {
+            empty x, tour;
+            
+            MonitoredIdentifiers := AllIdentifiers - Declaration_Model * AllIdentifiers;
+            
             DataChangeMonitorReset( DataManagementMonitorID, MonitoredIdentifiers );
         }
         Comment: {
@@ -254,7 +258,6 @@ Model Main_TSP {
         }
         Set MonitoredIdentifiers {
             SubsetOf: AllIdentifiers;
-            InitialData: AllIdentifiers - Declaration_Model * AllIdentifiers;
         }
     }
 }

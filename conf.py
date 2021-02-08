@@ -42,8 +42,9 @@ extensions = ['sphinx.ext.doctest',
 	  'sphinx.builders.linkcheck',
     'sphinx_aimms_theme']
   
-intersphinx_mapping = {'functionreference': ('https://documentation.aimms.com/functionreference/',
-                                  (None,'objects-functionreference.inv'))}
+intersphinx_mapping = {'fr': ('https://documentation.aimms.com/functionreference/',
+                                  (None,'objects-functionreference.inv')),
+                       'lr': ('https://documentation.aimms.com/language-reference/',None),}
 
 if os.name != 'nt':
 
@@ -165,6 +166,7 @@ html_theme_options = {
 
  }
 
+html_last_updated_fmt = '%b %d, %Y'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -352,3 +354,4 @@ def setup(sphinx):
        sphinx.connect('builder-inited', generate_redirects)   
 
 highlight_language = 'aimms'
+numfig = True

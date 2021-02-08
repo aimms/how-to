@@ -17,7 +17,8 @@ Recently added
 .. Added 12 March 2020: 331
 .. Added 14 Feb 2020: 108-10, 108-09, 108-07
 
-
+* :doc:`/Articles/377/377-link-legend-colors`
+* :doc:`/Articles/377/377-add-color-palettes`
 * :doc:`/Articles/490/490-naming-convention`
 * :doc:`/Articles/487/487-aimms-with-python`
 * :doc:`/Articles/494/494-overview-aimms-ds-models`

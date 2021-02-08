@@ -8,7 +8,9 @@ LibraryModule Library_GuardServerSession {
 		- Declaration of time, preferably as SI_Time_Duration, including unit s.
 		- System library AIMMS PRO
 		- Repository library DataExchange
-		- AIMMS 4.76 or later"
+		- AIMMS 4.76 or later
+		
+		Test WebUI and WinUI apps in Cloud/Prem/Developer"
 	}
 	Section Public_Section {
 		Section WebUI_Support {
@@ -528,7 +530,7 @@ LibraryModule Library_GuardServerSession {
 				StringParameter sp_msg;
 			}
 			Procedure pr_appendMessage {
-				Arguments: (sp_msg);
+				Arguments: (sp_msg,ep_lev);
 				Body: {
 					! Increase the number of recorded error messages.
 					s_jobErrorMessageNumbers += card(s_jobErrorMessageNumbers) + 1;
@@ -537,7 +539,7 @@ LibraryModule Library_GuardServerSession {
 					! Record the message and severity.
 					sp_jobErrorMessages(ep_jobErrorMessageNumber) := sp_msg;
 					sp_jobErrorMoments( ep_jobErrorMessageNumber) := CurrentToString("%c%y-%m-%d %H:%M:%S:%T");
-					ep_jobErrorSeverity(ep_jobErrorMessageNumber) := 'logging';
+					ep_jobErrorSeverity(ep_jobErrorMessageNumber) := ep_lev;
 					
 					! Record the entire stack of error positions
 					p_errStackHeight := callerNumberOfLocations();
@@ -563,6 +565,11 @@ LibraryModule Library_GuardServerSession {
 				}
 				StringParameter sp_msg {
 					Property: Input;
+				}
+				ElementParameter ep_lev {
+					Range: s_messageLevels;
+					Default: 'info';
+					Property: Optional;
 				}
 			}
 			Procedure pr_openProfiledIdentifier {
@@ -812,6 +819,7 @@ LibraryModule Library_GuardServerSession {
 					block ! Initialize logging
 						if pro::GetPROEndPoint() then
 							if pro::management::IsRunningOnCloud() then
+								! if DirectoryExists( "MainProject/WebUI" to be tested (WinUI apps might be ble to log to file version of session logs anyway).
 								bp_loggingOnCloud := 1 ;
 								bp_loggingToFile  := 1 ;
 							else
@@ -828,6 +836,8 @@ LibraryModule Library_GuardServerSession {
 							endif ;
 						endif ;
 					endblock ;
+					
+					! log file of a week old are to be deleted
 				}
 				Comment: {
 					"Add initialization statements here that require another library to be initialized already,

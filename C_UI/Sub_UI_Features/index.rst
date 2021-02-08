@@ -13,7 +13,7 @@ This section contains explanations of various UI features available when buildin
     
 .. toctree::
    :maxdepth: 1
-    
+
    /Articles/123/123-WebUI-FORMS
    /Articles/279/279-gantt-chart-scroll
    /Articles/503/503-sailing
@@ -24,6 +24,8 @@ This section contains explanations of various UI features available when buildin
    /Articles/309/309-workflow-panel-element-and-string-parameters
    /Articles/322/322-combine-bar-line-chart
    /Articles/338/338-viewing-schedules-different-scenarios
+   /Articles/377/377-add-color-palettes
+   /Articles/377/377-link-legend-colors
 
 
 
