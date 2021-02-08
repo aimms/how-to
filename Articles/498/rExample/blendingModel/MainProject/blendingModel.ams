@@ -414,11 +414,7 @@ Model Main_blendingModel {
 			   endif ;
 			endif ;
 			
-			if projectdevelopermode() then
-			solve mp_leastCost where solver:='CBC 2.9';
-			else
-			solve mp_leastCost where solver:= 'CPLEX 12.10';
-			endif;
+			solve mp_leastCost;
 		}
 	}
 	Procedure PreMainTermination {
