@@ -20,21 +20,34 @@ Model Main_barlegend {
 		Comment: "Expresses the value for the duration of periods.";
 	}
 	DeclarationSection Index_link_declarations {
+		Parameter p_noA {
+			Range: {
+				{2..89}
+			}
+			InitialData: 6;
+			webui::UponChangeProcedure: pr_uponSetSizeChange;
+		}
+		Parameter p_noB {
+			Range: {
+				{2..89}
+			}
+			InitialData: 7;
+			webui::UponChangeProcedure: pr_uponSetSizeChange;
+		}
+		Parameter p_noC {
+			InitialData: 3;
+		}
 		Set s_a {
 			Index: i_a;
-			Definition: ElementRange(1,6,prefix:"a");
+			Definition: ElementRange(1,p_noA,prefix:"a");
 		}
 		Set s_b {
 			Index: i_b;
-			Definition: ElementRange(1,7,prefix:"b");
+			Definition: ElementRange(1,p_noB,prefix:"b");
 		}
 		Set s_c {
 			Index: i_c;
-			Definition: {
-				!ElementRange(1,8,prefix:"c")
-				data { cat, camel, caterpillar, centipede, cheetah, chameleon, chicken, 
-				       chinchilla, chipmunk, cobra, cow, crab }
-			}
+			Definition: ElementRange(1,p_noC,prefix:"c");
 		}
 		Parameter bp_a {
 			IndexDomain: i_a;
@@ -52,13 +65,13 @@ Model Main_barlegend {
 			Definition: "i-want-hue-normal";
 		}
 		StringParameter sp_palletteA {
-			Definition: formatString("%s-%i",sp_palletteFamily,card(s_a));
+			Definition: formatString("%s-%i",sp_palletteFamily,fnc_nextFib(card(s_a)));
 		}
 		StringParameter sp_palletteB {
-			Definition: formatString("%s-%i",sp_palletteFamily,card(s_b));
+			Definition: formatString("%s-%i",sp_palletteFamily,fnc_nextFib(card(s_b)));
 		}
 		StringParameter sp_palletteC {
-			Definition: formatString("%s-%i",sp_palletteFamily,card(s_c));
+			Definition: formatString("%s-%i",sp_palletteFamily,fnc_nextFib(card(s_c)));
 		}
 		StringParameter sp_annotA {
 			IndexDomain: i_a;
@@ -178,6 +191,48 @@ Model Main_barlegend {
 			webui::AnnotationsIdentifier: sp_annotGC;
 		}
 	}
+	Function fnc_nextFib {
+		Arguments: (p_num);
+		Body: {
+			s_fibpos := elementRange(1,9);
+			p_fibs := data { 
+				1 : 2,
+				2 : 3,
+				3 : 5,
+				4 : 8,
+				5 : 13,
+				6 : 21,
+				7 : 34,
+				8 : 55,
+				9 : 89 };
+			p_rval := min( i_fibpos | p_fibs( i_fibpos ) >= p_num, p_fibs( i_fibpos ) );
+			fnc_nextFib := p_rval ;
+		}
+		Comment: {
+			"Return the smallest fibonacci number greater or equal than the input number.
+			Simplified implementation."
+		}
+		Parameter p_num {
+			Property: Input;
+		}
+		Set s_fibpos {
+			SubsetOf: Integers;
+			Index: i_fibpos;
+		}
+		Parameter p_fibs {
+			IndexDomain: i_fibpos;
+		}
+		Parameter p_rval;
+	}
+	Procedure pr_uponSetSizeChange {
+		Body: {
+			p_dat(i_a, i_b, i_c) := uniform(1,2);
+			p_bubbleSize(i_a, i_b) := uniform(0.3,0.99);
+			bp_a(i_a) := 1 ;
+			bp_b(i_b) := 1 ;
+			bp_c(i_c) := 1 ;
+		}
+	}
 	Section WebUI_Support_Section {
 		DeclarationSection webui_support_declarations {
 			Parameter p_noCoiorsInPalette {
@@ -245,11 +300,7 @@ Model Main_barlegend {
 		}
 		Procedure PostMainInitialization {
 			Body: {
-				p_dat(i_a, i_b, i_c) := uniform(1,2);
-				p_bubbleSize(i_a, i_b) := uniform(0.3,0.99);
-				bp_a(i_a) := 1 ;
-				bp_b(i_b) := 1 ;
-				bp_c(i_c) := 1 ;
+				pr_uponSetSizeChange();
 			}
 			Comment: {
 				"Add initialization statements here that require that the libraries are already initialized properly,

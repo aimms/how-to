@@ -1,12 +1,20 @@
+:orphan:
+
 Playing with the legend widget
 ===============================
+
+.. Topsites:
+.. https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3 The classic site for creating color schemes.
+.. https://medialab.github.io/iwanthue/ Generates anything you want, but make sure you know what you want ;-)
+
+.. https://blog.datawrapper.de/colorguide/#9 Provides a good overview
+
+
 
 .. https://colorspace.r-forge.r-project.org/articles/hcl_palettes.html
 .. http://tsitsul.in/blog/coloropt/
 .. https://seaborn.pydata.org/tutorial/color_palettes.html 
 .. https://carto.com/carto-colors/ (premium)
-.. https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3 The classic site for creating color schemes.
-.. https://medialab.github.io/iwanthue/ Generates anything you want, but make sure you know what you want ;-)
 .. https://lisacharlotterost.de/2016/04/22/Colors-for-DataVis/ nice overview of various color palette sites.
 
 This article plays with annotations to relate:

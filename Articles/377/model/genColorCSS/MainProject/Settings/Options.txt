@@ -3,6 +3,7 @@ rounding_compatibility Aimms_3_7
 use_UTC_forCaseAndStartEndDate 1
 * AOA
 * BARON 19
+* CBC 2.9
 * CONOPT 4.0
 * CPLEX 12.10
 * CPOptimizer 12.10
@@ -10,7 +11,6 @@ use_UTC_forCaseAndStartEndDate 1
 * IPOPT 3.11
 * Knitro 12.2
 * MINOS
-* ODH-CPLEX 4.0
 * ODH-CPLEX 5.0
 * PATH 4.7
 * SNOPT 7.2
@@ -18,4 +18,3 @@ use_UTC_forCaseAndStartEndDate 1
 * NETSOL
 * Environment
 Project_Title "genColorCSS"
-Default_UI 0

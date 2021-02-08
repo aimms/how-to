@@ -1,4 +1,5 @@
 {
+  "version": "4.67.0",
   "application": {
     "aimms.widget.type": {
       "literal": "application"
@@ -7,5 +8,44 @@
       "literal": "NOT_ALLOWED"
     }
   },
-  "version": "4.67.0"
+  "pages/home": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "paletteBarChart",
+          "layoutInfo": {
+            "width": "6",
+            "height": "2"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/paletteBarChart": {
+    "aimms.widget.type": {
+      "literal": "barchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_value"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_barNo"
+        ],
+        "grouped": [],
+        "stacked": [],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Show bars to compare colors"
+    }
+  }
 }
