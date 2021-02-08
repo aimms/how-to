@@ -1,0 +1,502 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "widget.visibility.greyout": {
+      "literal": false
+    }
+  },
+  "pages/home": {
+    "maxcolumns": {
+      "literal": 10
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "bc",
+          "layoutInfo": {
+            "width": "4",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "bc_1",
+          "layoutInfo": {
+            "width": "4",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Setsizes",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "gc",
+          "layoutInfo": {
+            "width": "4",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "tb",
+          "layoutInfo": {
+            "width": "4",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "aaa",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "bbb",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "ccc",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "lines",
+          "layoutInfo": {
+            "width": "10",
+            "height": "1",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/aaa": {
+    "aimms.widget.type": {
+      "literal": "legend"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "bp_a"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Legend on A"
+    },
+    "widget.visible": {
+      "aimms": {
+        "contents": [
+          "bp_coloringAccordingToA"
+        ]
+      }
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_WidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_WidgetActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetExtension",
+                "type": "free",
+                "value": "webui::indexWidgetExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "widgets/bbb": {
+    "aimms.widget.type": {
+      "literal": "legend"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "bp_b"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Legend on B"
+    },
+    "widget.visible": {
+      "aimms": {
+        "contents": [
+          "bp_coloringAccordingToB"
+        ]
+      }
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_WidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_WidgetActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetExtension",
+                "type": "free",
+                "value": "webui::indexWidgetExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "widgets/bc": {
+    "aimms.widget.type": {
+      "literal": "barchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_bubbleSize"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_a",
+          "i_c"
+        ],
+        "grouped": [],
+        "stacked": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Bar chart, stacked over B"
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_WidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_WidgetActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetExtension",
+                "type": "free",
+                "value": "webui::indexWidgetExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "widgets/bc_1": {
+    "aimms.widget.type": {
+      "literal": "bubblechart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_x",
+          "p_y",
+          "p_bubbleSize"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "bubbles": [
+          "i_a",
+          "i_b"
+        ],
+        "columns": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "maximumreferencesize": {
+      "aimms": {
+        "contents": [
+          "p_refsize"
+        ],
+        "slices": []
+      }
+    },
+    "title": {
+      "literal": "Bubble chart"
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_WidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_WidgetActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetExtension",
+                "type": "free",
+                "value": "webui::indexWidgetExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "widgets/ccc": {
+    "aimms.widget.type": {
+      "literal": "legend"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "bp_c"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Legend on C"
+    },
+    "widget.visible": {
+      "aimms": {
+        "contents": [
+          "bp_coloringAccordingToC"
+        ]
+      }
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_WidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_WidgetActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetExtension",
+                "type": "free",
+                "value": "webui::indexWidgetExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "widgets/gc": {
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_start",
+          "p_bubbleSize"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "resources": [
+          "i_b"
+        ],
+        "jobs": [
+          "<IDENTIFIER-SET>",
+          "i_a"
+        ],
+        "aggregated": []
+      }
+    },
+    "time.reference": {
+      "aimms": {
+        "contents": [
+          "sp_beg"
+        ]
+      }
+    },
+    "time.resolution": {
+      "literal": 1
+    },
+    "time.viewport.end": {
+      "aimms": {
+        "contents": [
+          "sp_end"
+        ]
+      }
+    },
+    "time.viewport.start": {
+      "aimms": {
+        "contents": [
+          "sp_beg"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Gantt Chart"
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_WidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_WidgetActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetExtension",
+                "type": "free",
+                "value": "webui::indexWidgetExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "widgets/lines": {
+    "aimms.widget.type": {
+      "literal": "linechart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_bubbleSize"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_a"
+        ],
+        "stacked": [],
+        "overlays": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Line chart"
+    }
+  },
+  "widgets/Setsizes": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_noA",
+          "p_noB",
+          "p_noC",
+          "bp_useColorBlindFriendly"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "title": {
+      "literal": "Set sizes"
+    }
+  },
+  "widgets/tb": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_bubbleSize"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_a"
+        ],
+        "colHeader": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Table"
+    }
+  }
+}
