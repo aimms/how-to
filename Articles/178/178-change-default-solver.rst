@@ -19,6 +19,13 @@ The trivial approach to change the default solver for each type of problem is to
 
 The picture above shows an example screenshot, where CPLEX 12.6.3 is used as the default solver for problems of the type LP. By double-clicking on any of the X's in the LP column, you can make the corresponding solver the default for LP problems. Any changes you make to the default solvers via this configuration screen are persistent between your AIMMS sessions: if you close your AIMMS application and start it again, the same default settings are used.
 
+.. Note::
+
+    In AIMMS Cloud, only the most recent versions of the supported solvers are available by default. 
+    For example, in the above screenshot - `CPLEX 12.6.3` is not available out of the box for use on AIMMS Cloud as `CPLEX 12.7.1` is available. 
+    To use an older version of the solver (like `CPLEX 12.6.3`), you need to ``Export`` the Solver configuration which will create a ``solvers.slv`` file in your project root directory. 
+    Make sure to include this file in the .aimmspack export and you will be able to use previous versions of the solvers as well. 
+
 Setting Default Solvers in a Procedure
 -------------------------------------------
 
