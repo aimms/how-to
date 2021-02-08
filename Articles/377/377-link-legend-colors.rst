@@ -1,5 +1,3 @@
-:orphan:
-
 Playing with the legend widget
 ===============================
 
@@ -8,7 +6,7 @@ Playing with the legend widget
 .. https://medialab.github.io/iwanthue/ Generates anything you want, but make sure you know what you want ;-)
 
 .. https://blog.datawrapper.de/colorguide/#9 Provides a good overview
-
+.. https://medium.com/nightingale/how-to-create-brand-colors-for-data-visualization-style-guidelines-dbd69c586dd9
 
 
 .. https://colorspace.r-forge.r-project.org/articles/hcl_palettes.html
@@ -17,11 +15,29 @@ Playing with the legend widget
 .. https://carto.com/carto-colors/ (premium)
 .. https://lisacharlotterost.de/2016/04/22/Colors-for-DataVis/ nice overview of various color palette sites.
 
-This article plays with annotations to relate:
+The legend widget links names to colors.  
 
-#.  The colors documented in the legend widget, to 
+.. image:: images/legend.png
+    :align: center
 
-#.  The colors of the objects shown in graphical widgets such as the bar chart, the bubble chart and the Gantt chart.
+The intent of a legend is that whenever a data item on a page is seen with a color in that legend, that data item is to be associated with that name.
+We can color the data items simply via their index, for instance in the following page all data items are indexed on index `i_b`:
+
+.. image:: images/charts-colored-on-index-b.png
+    :align: center
+    
+So, whenever on that page, we see a green data item, we're supposed to associate that with element 'b2'.
+
+Generalizing a bit, data items can be categorized, say according to the elements in set `s_C`. Based on this data we can color as well.
+The same page will now look as follows:
+
+
+.. image:: images/charts-colored-on-categorization-c.png
+    :align: center
+    
+So whenever on that page, we see a green data item, we're supposed to associate that with category 'c2'
+
+The remainder of this article shows how such consistent coloring is obtained in the WebUI.
 
 The running example
 ---------------------
@@ -30,6 +46,7 @@ The example used is just an abstract example with no relation to a reality and :
 
 In this example there are three indices: ``i_a``, ``i_b`` and ``i_c``.
 There are also three legend widgets, corresponding to each of the indices, but only one of these three is visible.
+The menu in each widget let's you choose between the index / category used for coloring.
 
 #.  Using legend A. With this legend we focus on the aspect ``A`` of the data for visual differentiation.
 
@@ -49,134 +66,33 @@ There are also three legend widgets, corresponding to each of the indices, but o
         :align: center
         
     As you can see, index ``i_c`` covers some aspect of a bubble or a job in the Gantt chart.
-
-The .css file
--------------
-
-In the ``colors.css``, stored in the folder ``MainProject/WebUI/resources/css`` contains three sections.
-In the first section, each hexadecimal code in a list is given a name, as follows:
-
-.. code-block:: css
-    :linenos:
-
-    --planning-qualitative-color-01: #8dd3c7 ;
-
-Next, we color the areas of the graphical data visualization widgets, bar chart, bubble chart, and Gantt chart; according to the guide lines in the `WebUI documentation <https://documentation.aimms.com/webui/css-styling.html#widgets-and-css-properties-supported-for-annotations>`_.
-
-.. code-block:: css
-    :linenos:
-
-    .annotation-qualitative01{
-            fill: var(--planning-qualitative-color-01);
-    }
-
-Same for the legend widget, except that the background of the squares is used.
-
-.. code-block:: css
-    :linenos:
-
-    .aimms-widget.tag-legend-widget .annotation-qualitative01{
-            background: var(--planning-qualitative-color-01); 
-    }
-
-
-
-Defining the annotations
-------------------------
-
-When you opened the ``colors.css`` file in a text editor, you'll see that there are essentially twelve colors available in the palette given. We do not count color 0, as that is just broken white. So  we use 
-
-.. code-block:: aimms
-    :linenos:
-
-    Parameter p_noCoiorsInPalette {
-        Definition: 12;
-    }
     
-in the following.
+In the right upper widget, you can select the size of each of the three sets involved.
+Experience teaches us that a legend with a lot of colors; it becomes hard to find the name associated with a color of a data item.
+As experience is an excellent teacher; I prefer to let him do his job. Hence, the barlegend app allows up to 89 elements per set.
 
 
-Now we can map a position is the set of interest onto an annotation as follows:
+Selecting color per data item
+-----------------------------
 
-.. code-block:: aimms
-    :linenos:
+To color an item according to some index, there are several steps:
 
-    StringParameter sp_annotA {
-        IndexDomain: i_a;
-        Definition: {
-            formatString("qualitative%02i",
-                if mod(ord(i_a),p_noCoiorsInPalette) 
-                then mod(ord(i_a),p_noCoiorsInPalette) 
-                else p_noCoiorsInPalette endif)
-        }
-    }
+#.  The app genColorCSS, discussed in :doc:`genColorCSS article<../377/377-add-color-palettes>` 
+    is used to generate CSS color files in the "i-want-hue" subfolder of `barlegend/MainProject/WebUI/resources/css`.
 
-And similarly, for aspects B and C.
-By using binary parameters, say ``bp_coloringAccordingToA``, ``bp_coloringAccordingToB``, and ``bp_coloringAccordingToC`` to select the aspect we want the legend to focus on, we can subsequently construct a annotation string parameter for the bar chart as follows:
+#.  In each css file in this "i-want-hue" sub folder, a palette is defined. 
+    A palette contains several colors. 
+    Each color is linked to various CSS rules, a rule for each type of widget.
+    For details see also the `genColorCSS article` .
 
-.. code-block:: aimms
-    :linenos:
+#.  In the AIMMS model, several steps are taken:
 
-    StringParameter sp_annotDat {
-        IndexDomain: (i_a,i_b,i_c);
-        Definition: {
-            if bp_coloringAccordingToA then sp_annotA(i_a)
-            elseif bp_coloringAccordingToB then sp_annotB(i_b)
-            else sp_annotC(i_c)
-            endif
-        }
-    }
-
-
-Note that, if our data parameter of interest has an index domain condition, we should use the same index domain condition in the annotations string parameter as well.
-
-The widgets
------------
-
-The legend
-^^^^^^^^^^^^
-
-There are three legend widgets, for each of the aspects ``A``, ```B``, and ``C`` one. Their contents is a binary parameter, respectively ``bp_a(i_a)``, ``bp_b(i_b)``, and ``bp_c(i_c)``. Note that each of these binary parameters has a corresponding annotation string parameter.  These annotation, are linked to a CSS rule, as specified above.
-
-The bar chart
-^^^^^^^^^^^^^^
-
-The bar chart is indexed over ``i_a``, and ``i_c``; but is stacked over ``i_b``. The annotation string parameter used is specified above.
-
-The bubble and Gantt charts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The bubbles shown form a circle. The Gantt forms is a simple schedule.
-
-In the running example, the annotations identifier happen to be the same, and are declared as follows:
-
-.. code-block:: aimms
-    :linenos:
-
-    StringParameter sp_annotGC {
-        IndexDomain: (i_a,i_b);
-        Definition: {
-            if bp_coloringAccordingToA then sp_annotA(i_a)
-            elseif bp_coloringAccordingToB then sp_annotB(i_b)
-            else sp_annotC(ep_aspectC(i_a, i_b))
-            endif
-        }
-    }
-
-wich is very similar to ``sp_annotDat(i_a,i_b,i_c)``, except that aspect ``C`` depends on aspects ``A`` and ``B``.
-
-Here ``ep_aspectC(i_a, i_b)`` is defined as:
-
-.. code-block:: aimms
-    :linenos:
-
-    ElementParameter ep_aspectC {
-        IndexDomain: (i_a,i_b);
-        Range: s_c;
-        Definition: Element( s_c, mod( ord(i_a)+ord(i_b), card(s_c) ) + 1 );
-    }
-
-This latter definition is just to have some data relating aspect ``C`` to ``A`` and ``B``.
-
-
+    #.  A palette family is chosen. Here we have the option to choose between a normal palette, and a color blind friendly palette.
+    
+    #.  A palette size is chosen, this size depends on the number of elements in the sets A, B, and C.
+        The generated files provided with the apps come in the sizes: 2, 3, 5, 8, 13, 21, 34, 55, and 89 colors (the start of the Fibonacci sequence).
+        The smallest palette is chosen that covers the elements in that set.
+        
+    #.  The color in the palette is chosen.  
+        This is simply the color number offset.
 

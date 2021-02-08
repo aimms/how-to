@@ -37,6 +37,10 @@ Model Main_barlegend {
 		Parameter p_noC {
 			InitialData: 3;
 		}
+		Parameter bp_useColorBlindFriendly {
+			Range: binary;
+			InitialData: 0;
+		}
 		Set s_a {
 			Index: i_a;
 			Definition: ElementRange(1,p_noA,prefix:"a");
@@ -62,7 +66,13 @@ Model Main_barlegend {
 			webui::AnnotationsIdentifier: sp_annotC;
 		}
 		StringParameter sp_palletteFamily {
-			Definition: "i-want-hue-normal";
+			Definition: {
+				if bp_useColorBlindFriendly then
+					"i-want-hue-colorblind-friendly"
+				else
+					"i-want-hue-normal"
+				endif
+			}
 		}
 		StringParameter sp_palletteA {
 			Definition: formatString("%s-%i",sp_palletteFamily,fnc_nextFib(card(s_a)));
@@ -101,21 +111,6 @@ Model Main_barlegend {
 					if mod(ord(i_c),p_noCoiorsInPalette) 
 					then mod(ord(i_c),p_noCoiorsInPalette) 
 					else p_noCoiorsInPalette endif )
-			}
-		}
-	}
-	DeclarationSection Bar_Chart_Declarations {
-		Parameter p_dat {
-			IndexDomain: (i_a,i_b,i_c);
-			webui::AnnotationsIdentifier: sp_annotDat;
-		}
-		StringParameter sp_annotDat {
-			IndexDomain: (i_a,i_b,i_c);
-			Definition: {
-				if bp_coloringAccordingToA then sp_annotA(i_a)
-				elseif bp_coloringAccordingToB then sp_annotB(i_b)
-				else sp_annotC(i_c)
-				endif
 			}
 		}
 	}
@@ -191,6 +186,7 @@ Model Main_barlegend {
 			webui::AnnotationsIdentifier: sp_annotGC;
 		}
 	}
+	DeclarationSection Line_Chart_Declarations;
 	Function fnc_nextFib {
 		Arguments: (p_num);
 		Body: {
@@ -226,7 +222,6 @@ Model Main_barlegend {
 	}
 	Procedure pr_uponSetSizeChange {
 		Body: {
-			p_dat(i_a, i_b, i_c) := uniform(1,2);
 			p_bubbleSize(i_a, i_b) := uniform(0.3,0.99);
 			bp_a(i_a) := 1 ;
 			bp_b(i_b) := 1 ;

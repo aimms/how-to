@@ -37,7 +37,7 @@
           "uri": "Setsizes",
           "layoutInfo": {
             "width": "2",
-            "height": "1",
+            "height": "2",
             "customPosition": ""
           }
         },
@@ -61,7 +61,7 @@
           "uri": "aaa",
           "layoutInfo": {
             "width": "2",
-            "height": "3",
+            "height": "2",
             "customPosition": ""
           }
         },
@@ -69,7 +69,7 @@
           "uri": "bbb",
           "layoutInfo": {
             "width": "2",
-            "height": "3",
+            "height": "2",
             "customPosition": ""
           }
         },
@@ -77,7 +77,15 @@
           "uri": "ccc",
           "layoutInfo": {
             "width": "2",
-            "height": "3",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "lines",
+          "layoutInfo": {
+            "width": "10",
+            "height": "1",
             "customPosition": ""
           }
         }
@@ -413,6 +421,35 @@
       }
     }
   },
+  "widgets/lines": {
+    "aimms.widget.type": {
+      "literal": "linechart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_bubbleSize"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_a"
+        ],
+        "stacked": [],
+        "overlays": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Line chart"
+    }
+  },
   "widgets/Setsizes": {
     "aimms.widget.type": {
       "literal": "scalar"
@@ -422,7 +459,8 @@
         "contents": [
           "p_noA",
           "p_noB",
-          "p_noC"
+          "p_noC",
+          "bp_useColorBlindFriendly"
         ]
       }
     },

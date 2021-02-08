@@ -12,9 +12,14 @@ Model Main_genColorCSS {
 		Parameter p_value {
 			IndexDomain: i_barNo;
 			Definition: 2;
+			webui::AnnotationsIdentifier: sp_barAnnot;
 		}
 		StringParameter sp_barAnnot {
 			IndexDomain: i_barNo;
+			Definition: formatString("%s-%i",sp_shownPaletteName,ord(i_barNo));
+		}
+		StringParameter sp_shownPaletteName {
+			Definition: formatString("i-want-hue-normal-%i", p_noBars);
 		}
 	}
 	StringParameter sp_inputFolder;
@@ -49,8 +54,10 @@ Model Main_genColorCSS {
 			
 			! The input folder contains small json files with hex codes.
 			! The output folder contains CCS generated files to be used in an AIMMS app.
-			sp_inputFolder  :=  "input-fib-i-want-hue-normal-data";
-			sp_outputFolder := "output-fib-i-want-hue-normal-data";
+			!sp_inputFolder  :=  "input-fib-i-want-hue-normal-data";
+			!sp_outputFolder := "output-fib-i-want-hue-normal-data";
+			sp_inputFolder  :=  "json-inputs";
+			sp_outputFolder :=  "MainProject/WebUI/resources/css/i-want-hue";
 			
 			! Get names of input files
 			DirectoryGetFiles( 
@@ -181,6 +188,33 @@ Model Main_genColorCSS {
 					put "}", / ;
 				endfor ;
 			endblock ;
+			
+			block ! Here comes section 5
+				put /, "/*", / ;
+				put "    Section 5: Associating the annotations with colors for line chart.", / ;
+				put "*/", / ;
+			endblock ;
+			
+			block ! Section 5: CSS rules to fill lines and circles in the linechart widget
+				put ".aimms-widget.tag-linechart   path.annotation-"+sp_paletteName+"-0{", / ;
+				put "    stroke: var(--"+sp_paletteName+"-color-0);", / ;
+				put "}", / ;
+				put ".aimms-widget.tag-linechart circle.annotation-"+sp_paletteName+"-0{", / ;
+				put "    stroke: var(--"+sp_paletteName+"-color-0);", / ;
+				put "    fill:   var(--"+sp_paletteName+"-color-0);", / ;
+				put "}", / ;
+				for i_colorNo do
+					put formatString(".aimms-widget.tag-linechart   path.annotation-%s-%e{",sp_paletteName,i_colorNo), / ;
+					put formatString("    stroke: var(--%s-color-%e);",sp_paletteName,i_colorNo), / ;
+					put "}", / ;
+					put formatString(".aimms-widget.tag-linechart circle.annotation-%s-%e{",sp_paletteName,i_colorNo), / ;
+					put formatString("    stroke: var(--%s-color-%e);",sp_paletteName,i_colorNo), / ;
+					put formatString("    fill:   var(--%s-color-%e);",sp_paletteName,i_colorNo), / ;
+					put "}", / ;
+				endfor ;
+			endblock ;
+			
+			
 			
 			putclose ;
 		}

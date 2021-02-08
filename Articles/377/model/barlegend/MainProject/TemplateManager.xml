@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <TemplateManager>
 	<Page Name="All Data Pages" PageGUID="51040FCA-69BD-4C02-ABEA-E6359BC6B28A" />
-	<Page Name="[Data Page] sp_annotDat" PageGUID="401D2020-AE98-4782-879B-E2C9560DC1A2" />
+	<Page Name="[Data Page] sp_annotDat" PageGUID="401D2020-AE98-4782-879B-E2C9560DC1A2" Marked="true" />
 </TemplateManager>
