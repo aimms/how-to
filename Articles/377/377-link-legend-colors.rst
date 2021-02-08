@@ -1,5 +1,5 @@
-Playing with the legend widget
-===============================
+Consistent data coloring on an AIMMS WebUI page
+==================================================
 
 .. Topsites:
 .. https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3 The classic site for creating color schemes.
