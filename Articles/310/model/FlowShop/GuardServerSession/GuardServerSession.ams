@@ -117,15 +117,31 @@ LibraryModule Library_GuardServerSession {
 				IndexDomain: (webui::indexApplicationExtension,webui::indexStatusBarSpec);
 				Definition: {
 					{
-						('1', 'header'   ): "Messages",
-						('1', 'icon'     ): "aimms-power", 
-						('1', 'color'    ): "", 
-						('1', 'text'     ): 
-							FormatString("%i messages, %i warnings, and %i errors",
-								p_noLogMessages, p_noWarnings, p_noErrors), 
-						('1', 'tooltip'  ): "", 
-						('1', 'procedure'): "", 
-						('1', 'state'    ): if card(s_jobErrorMessageNumbers) then "Active" else "Hidden" endif 
+					
+						( '6', 'header'    ) : "", ! (Optional) The Header/Title text you want to display for the status message.
+						( '6', 'icon'      ) : ! (Optional) The icon you want to display for the respective message.
+							if gss::p_noErrors then "aimms-sad"   
+							elseif gss::p_noWarnings then "aimms-wondering" 
+							else "aimms-smile" 
+							endif, 
+						( '6', 'color'     ) : ! (Optional) The color you want to display for the icon.
+							if gss::p_noErrors  then "red"  
+							elseif gss::p_noWarnings then "orange"   
+							else "green" 
+							endif,
+						( '6', 'text'      ) : ! (REQUIRED) The text you want to display for the status message.
+							FormatString("%i warnings and %i errors", 
+								gss::p_noWarnings, gss::p_noErrors ), 
+						( '6', 'tooltip'   ) : ! (Optional) Tooltip to be displayed when the user hovers over the respective status message.
+							if gss::p_noSignificantMessages then "Please visit the error handling page for details on the warnings and errors" 
+							else "Don't worry, be happy" 
+							endif,                
+						( '6', 'procedure' ) : ! (Optional) The procedure you want to call when the respective status message is clicked.
+							if gss::p_noSignificantMessages then "gss::pr_openErrorHandlingPage" 
+							else "gss::pr_openErrorHandlingPage" 
+							endif,                
+						( '6', 'state'     ) : "Active" ! (Optional) Active (displayed and clickable), Inactive (displayed and not clickable) and Hidden (not displayed). By default, the state is Hidden.
+					
 					}
 				}
 			}
@@ -136,7 +152,7 @@ LibraryModule Library_GuardServerSession {
 				Definition: FormatString("Profiler data for %e", ep_profilerDataSelectedIdentifier);
 			}
 			StringParameter sp_titleStackMessage {
-				Definition: FormatString("Stack of \"%s\"", sp_jobErrorMessages( ep_errorWarningSelectedMessage ) );
+				Definition: FormatString("Stack of \"%s\"", sp_shownJobErrorMessages( ep_errorWarningSelectedMessage ) );
 			}
 			ElementParameter ep_profilerDataSelectedIdentifier {
 				Range: AllIdentifiers;
@@ -190,8 +206,22 @@ LibraryModule Library_GuardServerSession {
 				Range: binary;
 				Definition: ProjectDeveloperMode;
 			}
+			Procedure pr_openErrorHandlingPage {
+				Body: {
+					webui::OpenPage(pageId : 'gss_page' );
+				}
+			}
 		}
-		Section PRO_Support;
+		Section PRO_Support {
+			Set s_inputCaseIdentifiers {
+				SubsetOf: AllIdentifiers;
+				Definition: controlServerSessionData;
+			}
+			Set s_outputCaseIdentifiers {
+				SubsetOf: AllIdentifiers;
+				Definition: serverSessionErrorData;
+			}
+		}
 		Section Guarding {
 			Section Generic {
 				Section GSS_Error_WebUI_Support {
@@ -1508,6 +1538,7 @@ LibraryModule Library_GuardServerSession {
 			Procedure PostLibraryInitialization {
 				Body: {
 					CurrentInputs -=  serverSessionErrorData;
+					CurrentInputs -= Shown_session_data_exchange ;
 					
 					pr_GetThisSession(); 
 					

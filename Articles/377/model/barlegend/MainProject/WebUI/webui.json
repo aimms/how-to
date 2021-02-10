@@ -136,6 +136,9 @@
           }
         ]
       }
+    },
+    "name": {
+      "literal": "aaa"
     }
   },
   "widgets/bbb": {
@@ -182,6 +185,9 @@
           }
         ]
       }
+    },
+    "name": {
+      "literal": "bbb"
     }
   },
   "widgets/bc": {
@@ -236,6 +242,9 @@
           }
         ]
       }
+    },
+    "name": {
+      "literal": "bc"
     }
   },
   "widgets/bc_1": {
@@ -297,6 +306,9 @@
           }
         ]
       }
+    },
+    "name": {
+      "literal": "bc_1"
     }
   },
   "widgets/ccc": {
@@ -343,6 +355,9 @@
           }
         ]
       }
+    },
+    "name": {
+      "literal": "ccc"
     }
   },
   "widgets/gc": {
@@ -419,6 +434,9 @@
           }
         ]
       }
+    },
+    "name": {
+      "literal": "gc"
     }
   },
   "widgets/lines": {
@@ -448,6 +466,9 @@
     },
     "title": {
       "literal": "Line chart"
+    },
+    "name": {
+      "literal": "lines"
     }
   },
   "widgets/Setsizes": {
@@ -469,6 +490,9 @@
     },
     "title": {
       "literal": "Set sizes"
+    },
+    "name": {
+      "literal": "Setsizes"
     }
   },
   "widgets/tb": {
@@ -497,6 +521,9 @@
     },
     "title": {
       "literal": "Table"
+    },
+    "name": {
+      "literal": "tb"
     }
   }
 }
