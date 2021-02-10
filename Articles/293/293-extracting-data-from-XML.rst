@@ -196,7 +196,7 @@ Related topics
 
 * **AIMMS How-To**: :doc:`../294/294-Online-XML-HTTP-library`
 
-* **AIMMS Documentation**: `Read and write XML <https://download.aimms.com/aimms/download/manuals/AIMMS3LR_XMLReadWrite.pdf>`_
+* **AIMMS Documentation**: `Read and write XML <https://documentation.aimms.com/language-reference/data-communication-components/reading-and-writing-xml-data/index.html>`_
 
 * **W3Schools**: `What is XML <https://www.w3schools.com/xml/xml_whatis.asp>`_
 

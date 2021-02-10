@@ -1,4 +1,8 @@
-﻿Analyze Infeasible Nonlinear Problems
+﻿:orphan:
+
+.. cannot find the webinar link, so removing from toctree
+
+Analyze Infeasible Nonlinear Problems
 =======================================
 
 .. meta::

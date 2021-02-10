@@ -13,6 +13,9 @@ Gurobi offers different kinds of on-premise licenses:
 
 This article outlines the process to connect AIMMS for each kind of Gurobi license. 
 
+.. note::
+    Your AIMMS license must be configured with a `Gurobi Link` component to be able to connect with your Gurobi installation. Check your license configuration in the AIMMS Tools menu: *Tools -> License -> License Configuration*.
+
 Single machine
 -----------------
 

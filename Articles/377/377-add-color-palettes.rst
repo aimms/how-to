@@ -114,6 +114,10 @@ Steps to translate JSON to CSS
 
 The :download:`genColorCSS application <model/genColorCSS.zip>` is a small app that translates a collection of JSON files to corresponding CSS files.
  
+.. note:: 
+
+    Only AIMMS developer works with dynamic collections of `.js` and `.css` files in the subfolder `resources` of `MainProject/WebUI`. 
+    Therefore `genColorCSS` does not work when published on AIMMS PRO.
 
 
 Suggested reading

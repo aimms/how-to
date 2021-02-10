@@ -121,6 +121,6 @@ Under the hood, the set ``s_mpCons`` is recomputed removing the constraint ``c_P
 Related Topics
 ----------------
 
-* `AIMMS Documentation: Predeclared identifiers <https://download.aimms.com/aimms/download/manuals/AIMMS3FR_PredeclaredModel.pdf>`_
+* `AIMMS Documentation: Predeclared identifiers <https://documentation.aimms.com/functionreference/predefined-identifiers/index.html>`_
 
-* `AIMMS Documentation: Mathematical Programs <https://download.aimms.com/aimms/download/manuals/AIMMS3LR_SolvingMathematicalPrograms.pdf>`_
+* `AIMMS Documentation: Mathematical Programs <https://documentation.aimms.com/language-reference/optimization-modeling-components/solving-mathematical-programs/index.html>`_

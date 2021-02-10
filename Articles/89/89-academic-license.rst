@@ -75,6 +75,10 @@ Solution:
 
     Your license status returns to normal.  
 
+.. note::
+    To cancel/reset a pending activation on Linux machines, you need to delete all the files related to the specific license in the sub-folders of ``usr/local/AIMMS``: Config, Licenses, and Nodelocks. 
+
+
 .. mine shows "error" in status, not "normal"
 
 3. 

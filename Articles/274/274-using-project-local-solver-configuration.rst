@@ -5,29 +5,28 @@ Create Local Solver Configuration
    :description: Changing solver configuration per project
    :keywords: Solver, configuration, Project
 
-.. note::
+.. Feb2021: removed sidebar pic, techblog note, added sections and removed reference to end user licenses. 
 
-    This article was originally posted to the AIMMS Tech Blog.
+.. .. note::
 
-
-.. sidebar:: Preferences
-
-    .. image:: images/preferences.png
-
-              
-
+..     This article was originally posted to the AIMMS Tech Blog.
 
 Normally, the list of solvers available via the solver configuration
 screen is the same for all projects opened with the same version of
-AIMMS. In this article, we'll see how to overrule the solvers that
+AIMMS. 
+In this article, we'll see how to overrule the solvers that
 are available for your current project.
 
 You can change the default solver for each type of mathematical program via the
 solver configuration screen (accessible from the *Settings*
-menu). You can temporarily overrule this default
+menu). 
+You can temporarily overrule this default
 by modifying the :any:`CurrentSolver` element
 parameter or with a ``where`` clause with the solve statement.
 Read more details about how to do so in the article :doc:`../178/178-change-default-solver`. 
+
+Solver Configuration File
+-----------------------------
 
 You can overrule the default list of solvers for a specific project by
 providing a plain text file named ``solvers.slv``.
@@ -45,14 +44,18 @@ An example of what it may contain is the following:
 
 Any line starting with a ! is considered a comment line. The different
 columns give the name of the solver, the DLL to use, and for which type
-of mathematical programs this solver is the default solver. If you save
-the above into a file named ``solvers.slv`` in your project directory, the
+of mathematical programs this solver is the default solver. 
+If you save the above into a file named ``solvers.slv`` in your project directory, the
 next time you start this project you will only see the three CPLEX
 solvers in the solver configuration screen.
 
+Exporting from AIMMS
+-------------------------
+
 Alternatively, open the *solver configuration* screen and press the
-*export* button to create a ``solvers.slv`` file in your current project
-directory. A notification appears when the solver
+``Export`` button to create a ``solvers.slv`` file in your current project
+directory. 
+A notification appears when the solver
 configuration has been successfully exported to a local solver
 configuration file.
 
@@ -62,9 +65,6 @@ solver configuration.
 
 If a ``solvers.slv`` file is present in your project directory, any changes
 you make in the solver configuration screen is saved in this ``solvers.slv``
-file and not in the global configuration for your current AIMMS version.
-
-Requirements
---------------
-The end user must have a license including rights to use this solver, and the solver DLL must be installed. 
+file. 
+This configuration applies only to that project and not globally for the AIMMS version you are using. 
 

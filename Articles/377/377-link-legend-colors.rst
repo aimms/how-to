@@ -96,3 +96,6 @@ To color an item according to some index, there are several steps:
     #.  The color in the palette is chosen.  
         This is simply the color number offset.
 
+
+
+    
