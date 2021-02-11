@@ -1,4 +1,3 @@
-:orphan:
 Install UI of GuardServerSession Library
 =========================================
 
@@ -131,8 +130,9 @@ After adding the library to your project, you can start building a User Interfac
         :align: center
 
 
+#.  Status bar
 
-
+    The status bar should be set to `gss::sp_messageStatusBar`
 
 
 
