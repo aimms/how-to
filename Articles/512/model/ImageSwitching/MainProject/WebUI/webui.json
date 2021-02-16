@@ -188,7 +188,7 @@
     "action": {
       "literal": {
         "type": "procedure",
-        "value": "UploadImage"
+        "value": "pr_uploadImage"
       }
     },
     "aimms.widget.type": {

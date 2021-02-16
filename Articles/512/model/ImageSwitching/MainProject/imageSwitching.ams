@@ -15,14 +15,14 @@ Model Main_imageSwitching {
 			"MainProject\\WebUI\\resources\\images\\display.jpg"
 		}
 	}
-	Parameter ImageID;
+	Parameter p_imageId;
 	Procedure pr_show1 {
 		Body: {
 			!copies image 1.jpg from root to the images folder and overwrites display.jpg 
 			sp_image := "1.jpg";
 			FileCopy(sp_image, sp_path, 1);
-			sp_display := formatstring("display.jpg?id=%n",ImageID); 
-			ImageID += 1;
+			sp_display := formatstring("display.jpg?id=%n",p_imageid); 
+			p_imageid += 1;
 		}
 	}
 	Procedure pr_show2 {
@@ -30,35 +30,35 @@ Model Main_imageSwitching {
 			!copies image 2.jpg from root to the images folder and overwrites display.jpg 
 			sp_image := "2.jpg";
 			FileCopy(sp_image, sp_path, 1);
-			sp_display := formatstring("display.jpg?id=%n",ImageID); 
-			ImageID += 1;
+			sp_display := formatstring("display.jpg?id=%n",p_imageid); 
+			p_imageid += 1;
 		}
 	}
-	Procedure UploadImage {
-		Arguments: (UploadedFileName,StatusCode,StatusDescription);
+	Procedure pr_uploadImage {
+		Arguments: (sp_uploadedfilename,p_statuscode,sp_statusdescription);
 		Body: {
-			FileDestination := "MainProject\\WebUI\\resources\\images\\display.jpg"; !same as sp_path
-			FileCopy(webui::GetIOFilePath(UploadedFileName),FileDestination,1);
-			statusCode := webui::ReturnStatusCode('OK');
-			statusDescription := "Image successfully uploaded!";
-			FileDelete(UploadedFileName);
-			sp_display := formatstring("display.jpg?id=%n",ImageID); 
-			ImageID += 1;
+			sp_filedestination := "MainProject\\WebUI\\resources\\images\\display.jpg"; !same as sp_path
+			FileCopy(webui::GetIOFilePath(sp_uploadedfilename),sp_filedestination,1);
+			p_statuscode := webui::ReturnStatusCode('OK');
+			sp_statusdescription := "Image successfully uploaded!";
+			FileDelete(sp_uploadedfilename);
+			sp_display := formatstring("display.jpg?id=%n",p_imageid); 
+			p_imageid += 1;
 		}
-		StringParameter UploadedFileName {
+		StringParameter sp_uploadedFileName {
 			Property: Input;
 		}
-		Parameter StatusCode {
+		Parameter p_statusCode {
 			Property: Output;
 		}
-		StringParameter StatusDescription {
+		StringParameter sp_statusDescription {
 			Property: Output;
 		}
-		StringParameter FileDestination;
+		StringParameter sp_fileDestination;
 	}
 	Procedure MainInitialization {
 		Body: {
-			ImageID := 0;
+			p_imageid := 0;
 		}
 		Comment: "Add initialization statements here that do NOT require any library being initialized already.";
 	}
