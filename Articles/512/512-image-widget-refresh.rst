@@ -4,7 +4,7 @@ Refreshing an Image widget without changing the file name
 In versions earlier than 4.77, a widget on a page would be refreshed if new assignments or definition updates were applied to any of the identifiers used in the widget, *even if the actual values of those identifiers were not actually changed*. With the performance improvement from version 4.77, a widget will *only* be refreshed if the data of the identifiers in the widget *has actually changed*.
 
 This improvement will prevent many unnecessary refreshes of widgets directly showing the data of such identifiers. 
-However, with the image widget this improvement will cause a problem when the contents of an image file has changed and the same image file name is assigned to the identifier holding the image name of the image widget. 
+However, with the image widget, this improvement will cause a problem when the contents of an image file has changed and the same image filename is assigned to the identifier holding the image name of the image widget. 
 In the old situation, because of the re-assignment of the same value, this would trigger a refresh of the widget, causing the new content of the image file to be displayed. 
 With the improvement, the widget will not be refreshed, as the image file name remains identical.
 
@@ -19,7 +19,7 @@ The below code is probably how you would trigger a refresh of the image widget w
     sp_displayImage := "" ;
     sp_displayImage := sp_temp ;
 
-where ``sp_displayImage`` is the string parameter used in the image widget and ``sp_temp`` is a string paramter to temporarily hold the value of ``sp_displayImage``.
+where ``sp_displayImage`` is the string parameter used in the image widget and ``sp_temp`` is a string parameter to temporarily hold the value of ``sp_displayImage``.
 
 New way to trigger a refresh
 ------------------------------------
@@ -36,9 +36,9 @@ There are two ways to address this problem:
     sp_displayImage := FormatString("ImageName.jpg?id=%n", p_imageId); 
     p_imageId += 1;
 
-  where ``sp_displayImage`` is the string parameter used in the image widget and ``p_imageId`` is a parameter. Each time the image is updated, for example using an upload widget to replace ``ImageName.jpg`` on disk with a new image, the widget automatically gets updated.The above mentioned code is called in the upload procedure.
+  where ``sp_displayImage`` is the string parameter used in the image widget and ``p_imageId`` is a parameter. Each time the image is updated, for example using an upload widget to replace ``ImageName.jpg`` on disk with a new image, the widget automatically gets updated. The above mentioned code is called in the upload procedure.
 
-Example dowload
+Example download
 ----------------
 
 Please open this :download:`AIMMS project <model/ImageSwitching.zip>` to view the example.
