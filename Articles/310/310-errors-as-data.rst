@@ -1,8 +1,10 @@
 Errors as data
 ==============
 
-The overall appreciation of an application is strongly influenced by the effort and time it takes to resolve software incidents (errors).
-The effort and resolution time can be reduced by providing to the point error report to the end-user and other specialists timely and easily.
+The end-user is a specialist in the application domain for which the application is designed. 
+An application is built by specialists with other skills, including AIMMS and Operations Research.
+This is why the error messages that occur in AIMMS applications may be better tailored for the perusal of the specialists in the team of the end-user.
+This article discusses how to transfer error messages that occured in a deployed AIMMS application to the specialists in the team of the end-user.
 
 .. image:: images/errors-as-data.png
     :align: center
