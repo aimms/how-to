@@ -111,7 +111,7 @@ Model Main_Flow_Shop {
 						( 1, icon        ) : "aimms-blog2",  
 						( 1, procedure   ) : "pr_BtnSolve",  
 						( 1, state       ) : "Active" 
-						}
+					}
 				}
 			}
 		}
@@ -227,37 +227,27 @@ Model Main_Flow_Shop {
 		Body: {
 			gss::pr_enter(sp_gssTime, p_gssMiU);
 			
-			gss::pr_logMsg("pro::workerQueueID = " + pro::workerQueueID, 'error');
-			gss::pr_logMsg("pro::workerSessionID = " + pro::workerSessionID, 'warn');
-			gss::pr_logMsg("pro::workerDelegationLevel = " + pro::workerDelegationLevel,'info');
-			gss::pr_logMsg("pro::openedAsWorker = " + pro::openedAsWorker, 'debug' );
-			gss::pr_logMsg("pro::workerCallbackCalled = " + pro::workerCallbackCalled, 'trace' );
-			
 			gss::pr_AppendMessage(
 				FormatString("Going to solve flowshop for %i jobs on %i machines",
 					p_maxJobs, p_maxMachines));
-			!delay(1);
 			
 			Empty AllVariables;
-			pr_generateData();
+			!pr_generateData();
 			
 			raise warning "Cry wolf." ;
 			
 			solve mp_flowShopModel  ;
 			
+			delay(1);
+			
 			raise warning "Hi, hi, false alarm.";
 			
-			!gss::pr_SaveState(
-			!	sp_Label              :  "ThirdSaveLabel", 
-			!	s_SelectedIdentifiers :  Superfluous_Data);
-			
-			pr_prepInterface;
-			
-			!delay(1);
+			!pr_prepInterface;
 			
 			gss::pr_AppendMessage(
 				FormatString("Finished solving flowshop for %i jobs on %i machines",
 					p_maxJobs, p_maxMachines));
+			
 			gss::pr_leave(sp_gssTime, p_gssMiU);
 		}
 		DeclarationSection gss_logging_declarations {
@@ -279,7 +269,21 @@ Model Main_Flow_Shop {
 	}
 	Procedure pr_btnSolve {
 		Body: {
-			pr_solve();
+			gss::pr_enter(sp_gssTime, p_gssMiU);
+			block 
+				pr_solve();
+			onerror ep_err do
+				gss::pr_appendError( ep_err );
+				errh::MarkAsHandled( ep_err );
+			endblock ;
+			gss::pr_leave(sp_gssTime, p_gssMiU);
+		}
+		DeclarationSection gss_logging_declarations {
+			StringParameter sp_gssTime;
+			Parameter p_gssMiU;
+		}
+		ElementParameter ep_err {
+			Range: errh::PendingErrors;
 		}
 	}
 }

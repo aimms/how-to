@@ -15,19 +15,19 @@ LibraryModule Library_GuardServerSession {
 	Section Public_Section {
 		Section WebUI_Support {
 			Property: NoSave;
-			StringParameter sp_widgetActionMessageStack {
+			StringParameter sp_widgetActionMessageList {
 				IndexDomain: (webui::indexPageExtension, webui::indexWidgetActionSpec);
 				Definition: {
 					{
 						('1', 'displaytext' ) : "Model explorer",  
 						('1', 'icon'        ) : "aimms-glasses",  
-						('1', 'procedure'   ) : "gss::pr_OpenIdentifierOnStack",  
+						('1', 'procedure'   ) : "gss::pr_OpenIdentifierOnMessageList",  
 						('1', 'state'       ) : "Active"  
 					}
 				}
-				Comment: "Defines the menu of the table";
+				Comment: "Definition of the menu for table ErrorWarningMessageTable on page \"GSS page\".";
 			}
-			StringParameter sp_itemActionMessageStack {
+			StringParameter sp_itemActionMessageList {
 				IndexDomain: (webui::indexWidgetItemActionSpec, webui::indexPageExtension, webui::indexWidgetActionSpec);
 				Definition: {
 					{
@@ -48,21 +48,25 @@ LibraryModule Library_GuardServerSession {
 					
 					}
 				}
+				Comment: "Defines the item actions on the table ErrorWarningMessageTable on page \"GSS page\"";
 			}
-			StringParameter sp_widgetActionMessageList {
+			StringParameter sp_widgetActionMessageStack {
 				IndexDomain: (webui::indexPageExtension, webui::indexWidgetActionSpec);
 				Definition: {
 					{
 						('1', 'displaytext' ) : "Model explorer",  
 						('1', 'icon'        ) : "aimms-glasses",  
-						('1', 'procedure'   ) : "gss::pr_OpenIdentifierOnMessageList",  
+						('1', 'procedure'   ) : "gss::pr_OpenIdentifierOnStack",  
 						('1', 'state'       ) : "Active"  
 					}
 				}
+				Comment: "Defines the menu of the table ErrorWarningStack on the GSS Page.";
 			}
-			StringParameter sp_itemActionMessageList {
+			StringParameter sp_itemActionMessageStack {
 				IndexDomain: (webui::indexWidgetItemActionSpec, webui::indexPageExtension, webui::indexWidgetActionSpec);
 				Definition: {
+					
+					
 					{
 						('gss::ep_shownJobErrorNodes',     '1', 'displaytext' ) : "Model explorer",  
 						('gss::ep_shownJobErrorNodes',     '1', 'icon'        ) : "aimms-glasses",  
@@ -80,6 +84,7 @@ LibraryModule Library_GuardServerSession {
 						('gss::p_shownJobErrorLines',       '1', 'state'       ) : "Active"  
 					}
 				}
+				Comment: "Defines the item actions for the table ErrorWarningStack on the GSS Page";
 			}
 			StringParameter sp_widgetActionIdentifierProfiler {
 				IndexDomain: (webui::indexPageExtension, webui::indexWidgetActionSpec);
@@ -91,6 +96,7 @@ LibraryModule Library_GuardServerSession {
 						('1', 'state'       ) : "Active"  
 					}
 				}
+				Comment: "Defines the widget actions for table JobProfilerData";
 			}
 			StringParameter sp_itemActionIdentifierProfiler {
 				IndexDomain: (webui::indexWidgetItemActionSpec, webui::indexPageExtension, webui::indexWidgetActionSpec);
@@ -102,6 +108,7 @@ LibraryModule Library_GuardServerSession {
 						('gss::p_shownJobProfilerData', '1', 'state'       ) : "Active"  
 					}
 				}
+				Comment: "Defines the item actions for the table JobProfilerData on page \"GSS page\"";
 			}
 			StringParameter sp_SidePanelErrorPage {
 				IndexDomain: (webui::indexApplicationExtension,webui::indexSidePanelSpec);
@@ -134,30 +141,35 @@ LibraryModule Library_GuardServerSession {
 							FormatString("%i warnings and %i errors", 
 								gss::p_noWarnings, gss::p_noErrors ), 
 						( '6', 'tooltip'   ) : ! (Optional) Tooltip to be displayed when the user hovers over the respective status message.
-							if gss::p_noSignificantMessages then "Please visit the error handling page for details on the warnings and errors" 
+							if gss::p_noSignificantMessages then "Please visit the page \"GSS page\" for details on the warnings and errors" 
 							else "Don't worry, be happy" 
 							endif,                
 						( '6', 'procedure' ) : ! (Optional) The procedure you want to call when the respective status message is clicked.
 							if gss::p_noSignificantMessages then "gss::pr_openErrorHandlingPage" 
 							else "gss::pr_openErrorHandlingPage" 
-							endif,                
+							endif,
 						( '6', 'state'     ) : "Active" ! (Optional) Active (displayed and clickable), Inactive (displayed and not clickable) and Hidden (not displayed). By default, the state is Hidden.
 					
 					}
 				}
-			}
-			StringParameter sp_errorWarningMessageMenu {
-				IndexDomain: (webui::indexPageExtension, webui::indexWidgetActionSpec);
+				Comment: "The message";
 			}
 			StringParameter sp_titleProfilerDetail {
 				Definition: FormatString("Profiler data for %e", ep_profilerDataSelectedIdentifier);
+				Comment: "The title for the table LineBasedProfilerData on page \"GSS page\".";
 			}
 			StringParameter sp_titleStackMessage {
 				Definition: FormatString("Stack of \"%s\"", sp_shownJobErrorMessages( ep_errorWarningSelectedMessage ) );
+				Comment: "Title for the table \"ErrorWarningStack\" on page \"GSS page\"";
 			}
 			ElementParameter ep_profilerDataSelectedIdentifier {
 				Range: AllIdentifiers;
 				InitialData: '';
+				Comment: {
+					"Links the tables JobProfilerData and LineBasedProfilerData
+					Via store focus in table JobProfilerData ep_profilerSelectedData is set
+					Via identifier settings in table LineBasedProfilerData the profiler details of that procedure are shown."
+				}
 			}
 			ElementParameter ep_errorWarningSelectedMessage {
 				Range: s_jobErrorMessageNumbers;
@@ -341,33 +353,57 @@ LibraryModule Library_GuardServerSession {
 				}
 				Procedure pr_openProfiledIdentifier {
 					Body: {
-						if ep_profilerDataSelectedIdentifier then
-							IdentifierShowAttributes( ep_profilerDataSelectedIdentifier );
-						endif ;
+						block
+							if ep_profilerDataSelectedIdentifier then
+								IdentifierShowAttributes( ep_profilerDataSelectedIdentifier );
+							endif ;
+						onerror ep_err do
+							pr_appendError( ep_err );
+							errh::MarkAsHandled( ep_err );
+						endblock ;
+					}
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
 					}
 				}
 				Procedure pr_openIdentifierOnStack {
 					Body: {
-						if card(s_jobErrorMessageNumbers) then
-							if not ep_errorWarningSelectedMessage then
-								ep_errorWarningSelectedMessage := last( s_jobErrorMessageNumbers );
+						block 
+							if card(s_jobErrorMessageNumbers) then
+								if not ep_errorWarningSelectedMessage then
+									ep_errorWarningSelectedMessage := last( s_jobErrorMessageNumbers );
+								endif ;
+								if not ep_StackPos then
+									ep_StackPos := first( s_stackPositions );
+								endif ;
+								if ep_errorWarningSelectedMessage and ep_StackPos then
+									IdentifierShowAttributes(  
+										ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, ep_stackPos ));
+								endif ;
 							endif ;
-							if not ep_StackPos then
-								ep_StackPos := first( s_stackPositions );
-							endif ;
-							if ep_errorWarningSelectedMessage and ep_StackPos then
-								IdentifierShowAttributes(  
-									ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, ep_stackPos ));
-							endif ;
-						endif ;
+						onerror ep_err do
+							pr_appendError( ep_err );
+							errh::MarkAsHandled( ep_err );
+						endblock ;
+					}
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
 					}
 				}
 				Procedure pr_openIdentifierOnMessageList {
 					Body: {
-						if ep_errorWarningSelectedMessage and ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, 1 ) then
-							IdentifierShowAttributes(  
-								ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, ep_stackPos ));
-						endif ;
+						block 
+							if ep_errorWarningSelectedMessage and ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, 1 ) then
+								IdentifierShowAttributes(  
+									ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, ep_stackPos ));
+							endif ;
+						onerror ep_err do
+							pr_appendError( ep_err );
+							errh::MarkAsHandled( ep_err );
+						endblock ;
+					}
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
 					}
 				}
 				Procedure pr_initErrorHandlingDownloadUploadButtons {
@@ -430,7 +466,8 @@ LibraryModule Library_GuardServerSession {
 				Procedure pr_appendError {
 					Arguments: (ep_err,sp_prefix);
 					Body: {
-						gss::pr_enter(sp_gssTime, p_gssMiU, errh::Message(ep_err));
+						ep_logLev := if errh::Severity(ep_err) = 'warning' then 'warn' else 'error' endif;
+						pr_logMsg( errh::Message(ep_err), ep_logLev );
 						if pro::GetPROEndPoint() then
 							if pro::IsRunningAtServer() then
 								pr_appendErrorJob(ep_err,sp_prefix);
@@ -440,7 +477,6 @@ LibraryModule Library_GuardServerSession {
 						else
 							pr_appendErrorDataSession(ep_err,sp_prefix);
 						endif ;
-						gss::pr_leave(sp_gssTime, p_gssMiU, errh::Message(ep_err));
 					}
 					Comment: "Store the error in the data structures of the library.";
 					ElementParameter ep_err {
@@ -459,6 +495,9 @@ LibraryModule Library_GuardServerSession {
 						Property: Optional;
 					}
 					StringParameter sp_msg;
+					ElementParameter ep_logLev {
+						Range: s_messageLevels;
+					}
 					DeclarationSection gss_logging_declarations {
 						StringParameter sp_gssTime;
 						Parameter p_gssMiU;
@@ -680,7 +719,6 @@ LibraryModule Library_GuardServerSession {
 							block where single_column_display := 1;
 								write Shown_session_data_exchange to file sp_finalLocation ;
 							endblock ;
-							! pr_writeErrorDataToJSONFile( sp_finalLocation );
 						
 							! checking if the previous write statement was successful or not
 							if FileExists(sp_finalLocation) then
@@ -1628,34 +1666,6 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_sampleProc {
 				Body: {
 					! Do not delete this procedure, it is used as default of element parameter gss::ep_Work.
-				}
-			}
-			Procedure pr_writeErrorDataToJSONFile {
-				Arguments: (sp_finalLocation);
-				Body: {
-					dex::AddMapping("JSONERRORmap","GuardServerSession/mappings/JSONErrors.xml");
-					dex::WriteToFile(
-						dataFile    :  sp_finalLocation, 
-						mappingName :  "JSONERRORmap", 
-						pretty      :  1);
-				}
-				StringParameter sp_finalLocation {
-					Property: Input;
-				}
-			}
-			Procedure pr_readErrorDataFromJSONFile {
-				Arguments: (sp_finalLocation);
-				Body: {
-					dex::AddMapping("JSONERRORmap","GuardServerSession/mappings/JSONErrors.xml");
-					dex::ReadFromFile(
-						dataFile    	 :  sp_finalLocation, 
-						mappingName 	 :  "JSONERRORmap", 
-						emptyIdentifiers :  0, 
-						emptySets        :  0, 
-						resetCounters    :  1);
-				}
-				StringParameter sp_finalLocation {
-					Property: Input;
 				}
 			}
 			Procedure pr_newIncidentDataSession {
