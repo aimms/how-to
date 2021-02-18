@@ -25,6 +25,7 @@ LibraryModule Library_GuardServerSession {
 						('1', 'state'       ) : "Active"  
 					}
 				}
+				Comment: "Defines the menu of the table";
 			}
 			StringParameter sp_itemActionMessageStack {
 				IndexDomain: (webui::indexWidgetItemActionSpec, webui::indexPageExtension, webui::indexWidgetActionSpec);
@@ -1034,10 +1035,9 @@ LibraryModule Library_GuardServerSession {
 						block
 							empty serverSessionErrorData ;
 							sp_serverSessionId := sp_thisSession ;
-							pro::management::LocalLogInfo("pr_guardAndProfileServerJob(): sp_serverSessionId = " + sp_serverSessionId );
 						
 							! Ensure that the error recorded and profiler data are transmitted via the output case:
-							pro::ManagedSessionOutputCaseIdentifierSet += serverSessionErrorData ;
+							pro::ManagedSessionOutputCaseIdentifierSet += s_outputCaseIdentifiers ;
 						
 							! Actual work.
 							apply( ep_work);
@@ -1061,11 +1061,12 @@ LibraryModule Library_GuardServerSession {
 							NetTimeThreshold   :  0);
 						
 						pr_saveModelLogFile();
-						pro::management::LocalLogInfo("pr_guardAndProfileServerJob(): saved model log file = "  );
 					}
 					Comment: {
-						"!sp_thisSession
-						!gss::sp_serverSessionId"
+						"To be called when a job is delegated; it will ensure that :
+						1) Errors and warnings issued during the execution of the actual work in procedure ep_work are collected.
+						2) That profiling information during the execution of the procedure ep_work is collected
+						3) That the logging is saved and stored in AIMMS PRO Storage."
 					}
 					ElementParameter ep_err {
 						Range: errh::PendingErrors;

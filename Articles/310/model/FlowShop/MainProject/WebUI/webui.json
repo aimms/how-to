@@ -15,7 +15,7 @@
                 "slug": "home"
               },
               {
-                "name": "ServerJobMessagesProfilerInfo",
+                "name": "GSS page",
                 "type": "page",
                 "slug": "serverjobmessagesprofilerinfo_1",
                 "children": [
@@ -34,6 +34,30 @@
         ],
         "name": "root",
         "slug": "root"
+      }
+    },
+    "statusmessages": {
+      "aimms": {
+        "contents": [
+          "gss::sp_messageStatusBar"
+        ],
+        "slices": [
+          {
+            "identifier": "gss::sp_messageStatusBar",
+            "slice": [
+              {
+                "index": "webui::indexApplicationExtension",
+                "type": "free",
+                "value": "webui::indexApplicationExtension"
+              },
+              {
+                "index": "webui::indexStatusBarSpec",
+                "type": "free",
+                "value": "webui::indexStatusBarSpec"
+              }
+            ]
+          }
+        ]
       }
     },
     "theme.classic": {

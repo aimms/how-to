@@ -16,11 +16,11 @@ This section offers best practices to build and deploy applications using AIMMS 
    :maxdepth: 1
 
    /Articles/310/310-job-transparancy
-   /Articles/310/310-investigate-behavior-pro-job
    /Articles/310/310-errors-as-data
    /Articles/321/321-state-server-session
    /Articles/310/310-install-ui-gss
    /Articles/310/310-integrate-gss-server-job
+   /Articles/310/310-investigate-behavior-pro-job
 
 
 
