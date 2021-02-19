@@ -154,13 +154,17 @@ LibraryModule Library_GuardServerSession {
 				}
 				Comment: "The message";
 			}
-			StringParameter sp_titleProfilerDetail {
-				Definition: FormatString("Profiler data for %e", ep_profilerDataSelectedIdentifier);
-				Comment: "The title for the table LineBasedProfilerData on page \"GSS page\".";
+			StringParameter sp_titleErrorWarningMessagesTable {
+				Definition: formatString("Error and warning messages for session %s", sp_shownSessionDescription);
+				Comment: "The title of the table \"ErrorWarningMessageTable\" on page \"GSS page\".";
 			}
 			StringParameter sp_titleStackMessage {
 				Definition: FormatString("Stack of \"%s\"", sp_shownJobErrorMessages( ep_errorWarningSelectedMessage ) );
 				Comment: "Title for the table \"ErrorWarningStack\" on page \"GSS page\"";
+			}
+			StringParameter sp_titleProfilerDetail {
+				Definition: FormatString("Profiler data for %e", ep_profilerDataSelectedIdentifier);
+				Comment: "The title for the table LineBasedProfilerData on page \"GSS page\".";
 			}
 			ElementParameter ep_profilerDataSelectedIdentifier {
 				Range: AllIdentifiers;
@@ -174,54 +178,61 @@ LibraryModule Library_GuardServerSession {
 			ElementParameter ep_errorWarningSelectedMessage {
 				Range: s_jobErrorMessageNumbers;
 				InitialData: '';
+				Comment: {
+					"Links the tables ErrorWarningMessageTable and ErrorWarningStack on page \"GSS page\"
+					- In table ErrorWarningMessageTable it is a store focus on the message selected.
+					- In table ErrorWarningStack it is used to slice on the selected message."
+				}
 			}
 			ElementParameter ep_stackPos {
 				Range: s_stackPositions;
 				InitialData: '';
-			}
-			Parameter p_noSignificantMessages {
-				Definition: p_noLogMessages + p_NoWarnings + p_NoErrors;
+				Comment: {
+					"In table \"ErrorWarningStack\" on page \"GSS page\", it is used to store the selected position on the stack.
+					In procedure gss::pr_openIdentifierOnStack it is used to select the attribute window to open."
+				}
 			}
 			Set s_messageLevels {
 				Index: i_messageLevel;
 				Definition: {
 					data { trace, debug, info, warn, error, fatal } ;
 				}
+				Comment: "The message levels for tracing";
 			}
 			Set s_lineNumbers {
 				SubsetOf: Integers;
 				Index: i_lineNumber;
 				Definition: ElementRange(0,1000);
+				Comment: "Used for profiler data, line number index.";
 			}
 			Set s_positiveLineNumbers {
 				SubsetOf: s_lineNumbers;
 				Index: i_positiveLineNumber;
 				Definition: ElementRange(1,1000);
+				Comment: "Used for profiling data, see";
 			}
 			Set s_actualLinenumbers {
 				SubsetOf: s_lineNumbers;
 				Index: i_actualLineNumber;
 				Definition: ElementRange(1,if ep_lastHitLine then ep_lastHitLine else 1 endif);
 			}
-			Parameter ep_lastHitLine {
-				Definition: {
-					last( i_positiveLineNumber | 
-						p_jobProfilerData(ep_profilerDataSelectedIdentifier, 
-						i_positiveLineNumber, 'hits'))
-				}
-			}
 			Set s_stackPositions {
 				SubsetOf: Integers;
 				Index: i_stackPosition;
 				Definition: ElementRange(1,255);
 			}
-			Parameter bp_uploadErrorDataVisible {
-				Range: binary;
-				Definition: ProjectDeveloperMode;
-			}
 			Procedure pr_openErrorHandlingPage {
 				Body: {
-					webui::OpenPage(pageId : 'gss_page' );
+					block 
+						webui::OpenPage(pageId : 'gss_page' );
+					onerror ep_err do
+						pr_appendError( ep_err );
+						errh::MarkAsHandled( ep_err );
+					endblock ;
+				}
+				Comment: "Opens the page \"GSS page\" upon clicking the GSS notification/status bar (at the bottom of the screen).";
+				ElementParameter ep_err {
+					Range: errh::PendingErrors;
 				}
 			}
 		}
@@ -229,119 +240,140 @@ LibraryModule Library_GuardServerSession {
 			Set s_inputCaseIdentifiers {
 				SubsetOf: AllIdentifiers;
 				Definition: controlServerSessionData;
+				Comment: {
+					"The set of identifiers in the GSS library that should be part of an \"input case\". 
+					The \"input case\" is the case transferred from the client session to the solver session upon start of the solver session."
+				}
 			}
 			Set s_outputCaseIdentifiers {
 				SubsetOf: AllIdentifiers;
 				Definition: serverSessionErrorData;
+				Comment: {
+					"The data in the GSS library that is to be added to the output case.
+					The output case is the case transferred from a solver session to the data session upon completion of that solver session."
+				}
 			}
 		}
 		Section Guarding {
-			Section Generic {
-				Section GSS_Error_WebUI_Support {
-					Property: NoSave;
-					DeclarationSection Declaration_selection_shown_session {
-						ElementParameter ep_shownSession {
-							Range: s_trackedSessions;
-							InitialData: '';
-							Comment: "By convention, if the shown session is the first then the running data session is selected.";
-							webui::UponChangeProcedure: pr_uponChangeShownSession;
-						}
-						StringParameter sp_titleErrorWarningMessagesTable {
-							Definition: formatString("Error and warning messages for session %s", sp_shownSessionDescription);
-						}
-					}
-					Procedure pr_uponChangeShownSession {
-						Body: {
-							empty Shown_session_data_exchange ;
-							
-							sp_shownSessionDescription :=
-								if ep_shownSession = first( s_trackedSessions ) then
-									"data session"
-								else
-									sp_sessionGivenDescriptions(ep_shownSession)
-								endif ;
-							
-							p_shownJobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes ) := 
-								if ep_shownSession <> first( s_trackedSessions ) then
-									p_trackedJobProfilerData(ep_shownSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
-								else
-									p_dataSessionProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
-								endif;
-							
-							sp_shownJobErrorMessages(i_jobErrorMessageNumber) := 
-								if ep_shownSession <> first( s_trackedSessions ) then
-									sp_trackedJobErrorMessages(ep_shownSession, i_jobErrorMessageNumber)
-								else
-									sp_dataSessionErrorMessages(i_jobErrorMessageNumber)
-								endif ;
-							
-							sp_shownJobErrorMoments(i_jobErrorMessageNumber) := 
-								if ep_shownSession <> first( s_trackedSessions ) then
-									sp_trackedJobErrorMoments(ep_shownSession, i_jobErrorMessageNumber)
-								else
-									sp_dataSessionErrorMoments(i_jobErrorMessageNumber)
-								endif;
-							
-							ep_shownJobErrorSeverity(i_jobErrorMessageNumber) := 
-								if ep_shownSession <> first( s_trackedSessions ) then
-									ep_trackedJobErrorSeverity(ep_shownSession, i_jobErrorMessageNumber)
-								else
-									ep_dataSessionErrorSeverity(i_jobErrorMessageNumber)
-								endif;
-							
-							ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition) := 
-								if ep_shownSession <> first( s_trackedSessions ) then
-									ep_trackedJobErrorNodes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
-								else
-									ep_dataSessionErrorNodes(i_jobErrorMessageNumber,i_stackPosition)
-								endif;
-							
-							ep_shownJobErrorAttributes(i_jobErrorMessageNumber, i_stackPosition) := 
-								if ep_shownSession <> first( s_trackedSessions ) then
-									ep_trackedJobErrorAttributes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
-								else
-									ep_dataSessionErrorAttributes(i_jobErrorMessageNumber,i_stackPosition)
-								endif;
-							
-							p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition) := 
-								if ep_shownSession <> first( s_trackedSessions ) then
-									p_trackedJobErrorLines(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
-								else
-									p_dataSessionErrorLines(i_jobErrorMessageNumber,i_stackPosition)
-								endif;
-						}
-					}
-					Procedure pr_clearShownSession;
-					DeclarationSection Shown_session_data_exchange {
-						StringParameter sp_shownSessionDescription {
-							InitialData: "";
-						}
-						Parameter p_shownJobProfilerData {
-							IndexDomain: (IndexIdentifiers,i_lineNumber,IndexProfilerTypes );
-						}
-						StringParameter sp_shownJobErrorMessages {
-							IndexDomain: i_jobErrorMessageNumber;
-						}
-						StringParameter sp_shownJobErrorMoments {
-							IndexDomain: i_jobErrorMessageNumber;
-						}
-						ElementParameter ep_shownJobErrorSeverity {
-							IndexDomain: i_jobErrorMessageNumber;
-							Range: s_messageLevels;
-						}
-						ElementParameter ep_shownJobErrorNodes {
-							IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
-							Range: AllSymbols;
-						}
-						ElementParameter ep_shownJobErrorAttributes {
-							IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
-							Range: AllAttributeNames;
-						}
-						Parameter p_shownJobErrorLines {
-							IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
-						}
+			Comment: "This section is about guarding server sessions and managing error data.";
+			Section GSS_Error_WebUI_Support {
+				Property: NoSave;
+				DeclarationSection Declaration_selection_shown_session {
+					ElementParameter ep_shownSession {
+						Range: s_trackedSessions;
+						InitialData: '';
+						Comment: "By convention, if the shown session is the first then the running data session is selected.";
+						webui::UponChangeProcedure: pr_uponChangeShownSession;
 					}
 				}
+				Procedure pr_uponChangeShownSession {
+					Body: {
+						empty Shown_session_data_exchange ;
+						
+						sp_shownSessionDescription :=
+							if ep_shownSession = first( s_trackedSessions ) then
+								"data session"
+							else
+								sp_sessionGivenDescriptions(ep_shownSession)
+							endif ;
+						
+						p_shownJobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes ) := 
+							if ep_shownSession <> first( s_trackedSessions ) then
+								p_trackedJobProfilerData(ep_shownSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
+							else
+								p_dataSessionProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
+							endif;
+						
+						sp_shownJobErrorMessages(i_jobErrorMessageNumber) := 
+							if ep_shownSession <> first( s_trackedSessions ) then
+								sp_trackedJobErrorMessages(ep_shownSession, i_jobErrorMessageNumber)
+							else
+								sp_dataSessionErrorMessages(i_jobErrorMessageNumber)
+							endif ;
+						
+						sp_shownJobErrorMoments(i_jobErrorMessageNumber) := 
+							if ep_shownSession <> first( s_trackedSessions ) then
+								sp_trackedJobErrorMoments(ep_shownSession, i_jobErrorMessageNumber)
+							else
+								sp_dataSessionErrorMoments(i_jobErrorMessageNumber)
+							endif;
+						
+						ep_shownJobErrorSeverity(i_jobErrorMessageNumber) := 
+							if ep_shownSession <> first( s_trackedSessions ) then
+								ep_trackedJobErrorSeverity(ep_shownSession, i_jobErrorMessageNumber)
+							else
+								ep_dataSessionErrorSeverity(i_jobErrorMessageNumber)
+							endif;
+						
+						ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition) := 
+							if ep_shownSession <> first( s_trackedSessions ) then
+								ep_trackedJobErrorNodes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
+							else
+								ep_dataSessionErrorNodes(i_jobErrorMessageNumber,i_stackPosition)
+							endif;
+						
+						ep_shownJobErrorAttributes(i_jobErrorMessageNumber, i_stackPosition) := 
+							if ep_shownSession <> first( s_trackedSessions ) then
+								ep_trackedJobErrorAttributes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
+							else
+								ep_dataSessionErrorAttributes(i_jobErrorMessageNumber,i_stackPosition)
+							endif;
+						
+						p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition) := 
+							if ep_shownSession <> first( s_trackedSessions ) then
+								p_trackedJobErrorLines(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
+							else
+								p_dataSessionErrorLines(i_jobErrorMessageNumber,i_stackPosition)
+							endif;
+					}
+					Comment: {
+						"This procedure takes care of the following:
+						When the element parameter ep_shownSession is modified in the dropdown, 
+						the contents of all tables on page \"GSS page\" should be adapted accordingly."
+					}
+				}
+				DeclarationSection Shown_session_data_exchange {
+					StringParameter sp_shownSessionDescription {
+						InitialData: "";
+						Comment: {
+							"- When the shown session is the data session, then the phrase \"data session\"
+							- When the shown session is a solver session, then the description (if any) of that solver session.
+							This string parameter is used in titles and so on."
+						}
+					}
+					Parameter p_shownJobProfilerData {
+						IndexDomain: (IndexIdentifiers,i_lineNumber,IndexProfilerTypes );
+						Comment: "The profiler data shown on the GSS page in the tables JobProfilerData and LineBasedProfilerData.";
+					}
+					StringParameter sp_shownJobErrorMessages {
+						IndexDomain: i_jobErrorMessageNumber;
+						Comment: "The error messages shown in the table ErrorWarningMessageTable on page \"GSS page\"";
+					}
+					StringParameter sp_shownJobErrorMoments {
+						IndexDomain: i_jobErrorMessageNumber;
+						Comment: "The moment the error was recorded for each of the errors in the table ErrorWarningMessageTable on the page \"GSS page\"";
+					}
+					ElementParameter ep_shownJobErrorSeverity {
+						IndexDomain: i_jobErrorMessageNumber;
+						Range: s_messageLevels;
+						Comment: "The severity of the error for each of the errors in the table \"ErrorWarningMessageTable\" on the page \"GSS page\".";
+					}
+					ElementParameter ep_shownJobErrorNodes {
+						IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
+						Range: AllSymbols;
+						Comment: "For the selected error / warning the identifiers on the execution stack in the table \"ErrorWarningStack\" on page \"GSS page\"";
+					}
+					ElementParameter ep_shownJobErrorAttributes {
+						IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
+						Range: AllAttributeNames;
+					}
+					Parameter p_shownJobErrorLines {
+						IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
+					}
+				}
+			}
+			Section Utility_section {
+				Comment: "Catchall section.";
 				Parameter p_maxNoErrorsPerSession {
 					InitialData: 10000;
 				}
@@ -1566,6 +1598,20 @@ LibraryModule Library_GuardServerSession {
 	}
 	Section Private_Section {
 		Property: NoSave;
+		Section WebUI_helpers {
+			Parameter p_noSignificantMessages {
+				Definition: p_noLogMessages + p_NoWarnings + p_NoErrors;
+				Comment: "This is a helper in the status bar";
+			}
+			Parameter ep_lastHitLine {
+				Definition: {
+					last( i_positiveLineNumber | 
+						p_jobProfilerData(ep_profilerDataSelectedIdentifier, 
+						i_positiveLineNumber, 'hits'))
+				}
+				Comment: "The line numbers visible in the table LineBasedProfilerData";
+			}
+		}
 		Section Main_Library_procedures {
 			Procedure LibraryInitialization {
 				Body: {
