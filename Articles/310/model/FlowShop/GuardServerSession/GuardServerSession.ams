@@ -268,68 +268,76 @@ LibraryModule Library_GuardServerSession {
 				}
 				Procedure pr_uponChangeShownSession {
 					Body: {
-						empty Shown_session_data_exchange ;
+						block 
+							empty Shown_session_data_exchange ;
 						
-						sp_shownSessionDescription :=
-							if ep_shownSession = first( s_trackedSessions ) then
-								"data session"
-							else
-								sp_sessionGivenDescriptions(ep_shownSession)
-							endif ;
+							sp_shownSessionDescription :=
+								if ep_shownSession = first( s_trackedSessions ) then
+									"data session"
+								else
+									sp_sessionGivenDescriptions(ep_shownSession)
+								endif ;
 						
-						p_shownJobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes ) := 
-							if ep_shownSession <> first( s_trackedSessions ) then
-								p_trackedJobProfilerData(ep_shownSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
-							else
-								p_dataSessionProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
-							endif;
+							p_shownJobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes ) := 
+								if ep_shownSession <> first( s_trackedSessions ) then
+									p_trackedJobProfilerData(ep_shownSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
+								else
+									p_dataSessionProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
+								endif;
 						
-						sp_shownJobErrorMessages(i_jobErrorMessageNumber) := 
-							if ep_shownSession <> first( s_trackedSessions ) then
-								sp_trackedJobErrorMessages(ep_shownSession, i_jobErrorMessageNumber)
-							else
-								sp_dataSessionErrorMessages(i_jobErrorMessageNumber)
-							endif ;
+							sp_shownJobErrorMessages(i_jobErrorMessageNumber) := 
+								if ep_shownSession <> first( s_trackedSessions ) then
+									sp_trackedJobErrorMessages(ep_shownSession, i_jobErrorMessageNumber)
+								else
+									sp_dataSessionErrorMessages(i_jobErrorMessageNumber)
+								endif ;
 						
-						sp_shownJobErrorMoments(i_jobErrorMessageNumber) := 
-							if ep_shownSession <> first( s_trackedSessions ) then
-								sp_trackedJobErrorMoments(ep_shownSession, i_jobErrorMessageNumber)
-							else
-								sp_dataSessionErrorMoments(i_jobErrorMessageNumber)
-							endif;
+							sp_shownJobErrorMoments(i_jobErrorMessageNumber) := 
+								if ep_shownSession <> first( s_trackedSessions ) then
+									sp_trackedJobErrorMoments(ep_shownSession, i_jobErrorMessageNumber)
+								else
+									sp_dataSessionErrorMoments(i_jobErrorMessageNumber)
+								endif;
 						
-						ep_shownJobErrorSeverity(i_jobErrorMessageNumber) := 
-							if ep_shownSession <> first( s_trackedSessions ) then
-								ep_trackedJobErrorSeverity(ep_shownSession, i_jobErrorMessageNumber)
-							else
-								ep_dataSessionErrorSeverity(i_jobErrorMessageNumber)
-							endif;
+							ep_shownJobErrorSeverity(i_jobErrorMessageNumber) := 
+								if ep_shownSession <> first( s_trackedSessions ) then
+									ep_trackedJobErrorSeverity(ep_shownSession, i_jobErrorMessageNumber)
+								else
+									ep_dataSessionErrorSeverity(i_jobErrorMessageNumber)
+								endif;
 						
-						ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition) := 
-							if ep_shownSession <> first( s_trackedSessions ) then
-								ep_trackedJobErrorNodes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
-							else
-								ep_dataSessionErrorNodes(i_jobErrorMessageNumber,i_stackPosition)
-							endif;
+							ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition) := 
+								if ep_shownSession <> first( s_trackedSessions ) then
+									ep_trackedJobErrorNodes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
+								else
+									ep_dataSessionErrorNodes(i_jobErrorMessageNumber,i_stackPosition)
+								endif;
 						
-						ep_shownJobErrorAttributes(i_jobErrorMessageNumber, i_stackPosition) := 
-							if ep_shownSession <> first( s_trackedSessions ) then
-								ep_trackedJobErrorAttributes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
-							else
-								ep_dataSessionErrorAttributes(i_jobErrorMessageNumber,i_stackPosition)
-							endif;
+							ep_shownJobErrorAttributes(i_jobErrorMessageNumber, i_stackPosition) := 
+								if ep_shownSession <> first( s_trackedSessions ) then
+									ep_trackedJobErrorAttributes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
+								else
+									ep_dataSessionErrorAttributes(i_jobErrorMessageNumber,i_stackPosition)
+								endif;
 						
-						p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition) := 
-							if ep_shownSession <> first( s_trackedSessions ) then
-								p_trackedJobErrorLines(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
-							else
-								p_dataSessionErrorLines(i_jobErrorMessageNumber,i_stackPosition)
-							endif;
+							p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition) := 
+								if ep_shownSession <> first( s_trackedSessions ) then
+									p_trackedJobErrorLines(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
+								else
+									p_dataSessionErrorLines(i_jobErrorMessageNumber,i_stackPosition)
+								endif;
+						onerror ep_err do
+							pr_appendError( ep_err );
+							errh::MarkAsHandled( ep_err );
+						endblock ;
 					}
 					Comment: {
 						"This procedure takes care of the following:
 						When the element parameter ep_shownSession is modified in the dropdown, 
 						the contents of all tables on page \"GSS page\" should be adapted accordingly."
+					}
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
 					}
 				}
 				DeclarationSection Shown_session_data_exchange {
@@ -366,245 +374,30 @@ LibraryModule Library_GuardServerSession {
 					ElementParameter ep_shownJobErrorAttributes {
 						IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
 						Range: AllAttributeNames;
+						Comment: {
+							"The active attribute of the identifiers that are on the execution stack shown 
+							in the table \"ErrorWarningStack\" on the page \"GSS page\""
+						}
 					}
 					Parameter p_shownJobErrorLines {
 						IndexDomain: (i_jobErrorMessageNumber,i_stackPosition);
-					}
-				}
-			}
-			Section Utility_section {
-				Comment: "Catchall section.";
-				Parameter p_maxNoErrorsPerSession {
-					InitialData: 10000;
-				}
-				Set s_jobErrorMessageNumbers {
-					SubsetOf: Integers;
-					Index: i_jobErrorMessageNumber, i_dataSessionErrorMessageNumber;
-					Property: ElementsAreNumerical;
-					Definition: ElementRange(1,p_maxNoErrorsPerSession);
-				}
-				Procedure pr_openProfiledIdentifier {
-					Body: {
-						block
-							if ep_profilerDataSelectedIdentifier then
-								IdentifierShowAttributes( ep_profilerDataSelectedIdentifier );
-							endif ;
-						onerror ep_err do
-							pr_appendError( ep_err );
-							errh::MarkAsHandled( ep_err );
-						endblock ;
-					}
-					ElementParameter ep_err {
-						Range: errh::PendingErrors;
-					}
-				}
-				Procedure pr_openIdentifierOnStack {
-					Body: {
-						block 
-							if card(s_jobErrorMessageNumbers) then
-								if not ep_errorWarningSelectedMessage then
-									ep_errorWarningSelectedMessage := last( s_jobErrorMessageNumbers );
-								endif ;
-								if not ep_StackPos then
-									ep_StackPos := first( s_stackPositions );
-								endif ;
-								if ep_errorWarningSelectedMessage and ep_StackPos then
-									IdentifierShowAttributes(  
-										ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, ep_stackPos ));
-								endif ;
-							endif ;
-						onerror ep_err do
-							pr_appendError( ep_err );
-							errh::MarkAsHandled( ep_err );
-						endblock ;
-					}
-					ElementParameter ep_err {
-						Range: errh::PendingErrors;
-					}
-				}
-				Procedure pr_openIdentifierOnMessageList {
-					Body: {
-						block 
-							if ep_errorWarningSelectedMessage and ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, 1 ) then
-								IdentifierShowAttributes(  
-									ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, ep_stackPos ));
-							endif ;
-						onerror ep_err do
-							pr_appendError( ep_err );
-							errh::MarkAsHandled( ep_err );
-						endblock ;
-					}
-					ElementParameter ep_err {
-						Range: errh::PendingErrors;
-					}
-				}
-				Procedure pr_initErrorHandlingDownloadUploadButtons {
-					Arguments: (ep_stat,statusCode,statusDescription,bp_download);
-					Body: {
-						ep_stat := '';
-						statusCode := if bp_download then webui::ReturnStatusCode('CREATED') else webui::ReturnStatusCode('OK') endif ;
-						statusDescription := "Nice.";
-						
-						! Best practice: declare ep_stat inside the calling procedure.
-					}
-					ElementParameter ep_stat {
-						Range: errh::AllErrorSeverities;
-						Property: Output;
-					}
-					Parameter statusCode {
-						Property: Output;
-					}
-					StringParameter statusDescription {
-						Property: Output;
-					}
-					Parameter bp_download {
-						Property: Optional;
-					}
-				}
-				Procedure pr_uploadDownloadWidgetErrorHandling {
-					Arguments: (ep_err, ep_stat, statusCode, statusDescription);
-					Body: {
-						! Ensure that the single message shown to the user is the first error, and if there is none: the first warning.
-						if errh::Severity(ep_err) = 'warning' then
-							if ep_stat = '' then
-								statusDescription := "OK, but note: " + errh::Message( ep_err );
-								ep_stat := 'warning';
-							endif ;
-						else
-							statusCode := webui::ReturnStatusCode('ERROR');
-							if ep_stat <> 'error' then
-								statusDescription := "Better luck next time: " + errh::Message( ep_err );
-								ep_stat := 'error';
-							endif;
-						endif ;
-						
-						! Best practice: declare ep_err and ep_stat inside the calling procedure.
-					}
-					ElementParameter ep_err {
-						Range: errh::PendingErrors;
-						Property: Input;
-					}
-					ElementParameter ep_stat {
-						Range: errh::AllErrorSeverities;
-						Property: InOut;
-					}
-					Parameter statusCode {
-						Property: InOut;
-					}
-					StringParameter statusDescription {
-						Property: InOut;
-					}
-				}
-				Procedure pr_appendError {
-					Arguments: (ep_err,sp_prefix);
-					Body: {
-						ep_logLev := if errh::Severity(ep_err) = 'warning' then 'warn' else 'error' endif;
-						pr_logMsg( errh::Message(ep_err), ep_logLev );
-						if pro::GetPROEndPoint() then
-							if pro::IsRunningAtServer() then
-								pr_appendErrorJob(ep_err,sp_prefix);
-							else
-								pr_appendErrorDataSession(ep_err,sp_prefix);
-							endif ;
-						else
-							pr_appendErrorDataSession(ep_err,sp_prefix);
-						endif ;
-					}
-					Comment: "Store the error in the data structures of the library.";
-					ElementParameter ep_err {
-						Range: errh::PendingErrors;
-						Property: Input;
-					}
-					Parameter p_errStackHeight;
-					Parameter p_errStackPos;
-					ElementParameter ep_stackPosition {
-						Range: s_stackPositions;
-					}
-					ElementParameter ep_jobErrorMessageNumber {
-						Range: s_jobErrorMessageNumbers;
-					}
-					StringParameter sp_prefix {
-						Property: Optional;
-					}
-					StringParameter sp_msg;
-					ElementParameter ep_logLev {
-						Range: s_messageLevels;
-					}
-					DeclarationSection gss_logging_declarations {
-						StringParameter sp_gssTime;
-						Parameter p_gssMiU;
-					}
-				}
-				Procedure pr_appendMessage {
-					Arguments: (sp_msg,ep_lev);
-					Body: {
-						if pro::GetPROEndPoint() then
-							if pro::IsRunningAtServer() then
-								pr_appendMessageJob(sp_msg,ep_lev);
-							else
-								pr_appendMessageDataSession(sp_msg,ep_lev);
-							endif ;
-						else
-							pr_appendMessageDataSession(sp_msg,ep_lev);
-						endif ;
-					}
-					Comment: "Store the error in the data structures of the library.";
-					Parameter p_errStackHeight;
-					Parameter p_errStackPos;
-					ElementParameter ep_stackPosition {
-						Range: s_stackPositions;
-					}
-					ElementParameter ep_jobErrorMessageNumber {
-						Range: s_jobErrorMessageNumbers;
-					}
-					StringParameter sp_msg {
-						Property: Input;
-					}
-					ElementParameter ep_lev {
-						Range: s_messageLevels;
-						Default: 'info';
-						Property: Optional;
-					}
-				}
-				Procedure pr_globalErrorHandler {
-					Arguments: (ep_err);
-					Body: {
-						pr_appendError(ep_err );
-						
-						if bp_locSeenErrorsAreHandled then
-							errh::MarkAsHandled( ep_err );
-						endif ;
-					}
-					ElementParameter ep_err {
-						Range: errh::PendingErrors;
-						Property: Input;
-					}
-					ElementParameter ep_jobErrorMessageNumber {
-						Range: s_jobErrorMessageNumbers;
-					}
-					Parameter p_errStackHeight;
-					Parameter p_errStackPos;
-					ElementParameter ep_stackPosition {
-						Range: s_stackPositions;
-					}
-				}
-				Procedure pr_seenErrorsAreHandled {
-					Arguments: (bp_areHandled);
-					Body: {
-						bp_locSeenErrorsAreHandled := bp_areHandled ;
-					}
-					Parameter bp_areHandled {
-						Range: binary;
-						Default: 1;
-						Property: Input;
+						Comment: {
+							"The active line of the identifiers that are on the execution stack shown 
+							in the table \"ErrorWarningStack\" on the page \"GSS page\""
+						}
 					}
 				}
 			}
 			Section Tracked_sessions {
 				Property: NoSave;
+				Comment: {
+					"This section collects the error and profiler data coming from 
+					data session, solver sessions and from uploaded sessions."
+				}
 				DeclarationSection tracked_sessions_error_and_profiler_data {
 					Set s_trackedSessions {
 						Index: i_trackedSession;
+						Comment: "The names of all sessions tracked.";
 						webui::ElementTextIdentifier: gss::sp_trackedSessionDescription;
 					}
 					StringParameter sp_trackedSessionDescription {
@@ -618,41 +411,53 @@ LibraryModule Library_GuardServerSession {
 									sp_sessionGivenDescriptions( i_trackedSession ) )
 							endif
 						}
+						Comment: {
+							"The element description is the name of the sessio ( a guid ) extended with the description of the job given 
+							by the call to pro::DelegateServer"
+						}
 					}
 					StringParameter sp_sessionGivenDescriptions {
 						IndexDomain: i_trackedSession;
 						InitialData: data {};
+						Comment: "Maintain the description given of the sessions collected.";
 					}
 					Parameter p_trackedJobProfilerData {
 						IndexDomain: (i_trackedSession,IndexIdentifiers,i_lineNumber,IndexProfilerTypes );
 						InitialData: data{};
+						Comment: "Jobprofiler data, now per tracked session";
 					}
 					StringParameter sp_trackedJobErrorMessages {
 						IndexDomain: (i_trackedSession,i_jobErrorMessageNumber);
 						InitialData: data {};
+						Comment: "Error messages, per tracked session";
 					}
 					StringParameter sp_trackedJobErrorMoments {
 						IndexDomain: (i_trackedSession,i_jobErrorMessageNumber);
 						InitialData: data {};
+						Comment: "tracked per session, the moments the error occurred";
 					}
 					ElementParameter ep_trackedJobErrorSeverity {
 						IndexDomain: (i_trackedSession,i_jobErrorMessageNumber);
 						Range: s_messageLevels;
 						InitialData: data {};
+						Comment: "Tracked per session, the severity of each error";
 					}
 					ElementParameter ep_trackedJobErrorNodes {
 						IndexDomain: (i_trackedSession,i_jobErrorMessageNumber,i_stackPosition);
 						Range: AllSymbols;
 						InitialData: data{};
+						Comment: "Tracked per session, the stack of identifiers";
 					}
 					ElementParameter ep_trackedJobErrorAttributes {
 						IndexDomain: (i_trackedSession,i_jobErrorMessageNumber,i_stackPosition);
 						Range: AllAttributeNames;
 						InitialData: data {};
+						Comment: "Tracked per session, the stack of attribes per error";
 					}
 					Parameter p_trackedJobErrorLines {
 						IndexDomain: (i_trackedSession,i_jobErrorMessageNumber,i_stackPosition);
 						InitialData: data {};
+						Comment: "Tracked per session, per error, the stack of line numbers";
 					}
 				}
 				Procedure pr_saveTrackedSessionData {
@@ -691,19 +496,21 @@ LibraryModule Library_GuardServerSession {
 							sp_fileUploadLocation := webui::GetIOFilePath(fileLocation);
 							! The file is uploaded to the process specific temporary folder. 
 						
-							!pr_readErrorDataFromJSONFile(sp_fileUploadLocation);
 							empty Shown_session_data_exchange;
 							ep_trackedSession := StringToElement( s_trackedSessions, fileLocation, create:1);
 							read from file sp_fileUploadLocation ;
-							sp_sessionGivenDescriptions( ep_trackedSession ) := sp_shownSessionDescription ;
-							p_trackedJobProfilerData(ep_trackedSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes) := p_shownJobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes);
-							sp_trackedJobErrorMessages(ep_trackedSession, i_jobErrorMessageNumber) := sp_shownJobErrorMessages(i_jobErrorMessageNumber);
-							sp_trackedJobErrorMoments(ep_trackedSession, i_jobErrorMessageNumber) := sp_shownJobErrorMoments(i_jobErrorMessageNumber);
-							ep_trackedJobErrorSeverity(ep_trackedSession, i_jobErrorMessageNumber) := ep_shownJobErrorSeverity(i_jobErrorMessageNumber);
-							ep_trackedJobErrorNodes(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition);
-							ep_trackedJobErrorAttributes(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := ep_shownJobErrorAttributes(i_jobErrorMessageNumber, i_stackPosition);
-							p_trackedJobErrorLines(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition);
-							ep_shownSession := ep_trackedSession ;
+						
+							block ! Copy the data loaded in from the case in the Tracked session container.
+								sp_sessionGivenDescriptions( ep_trackedSession ) := sp_shownSessionDescription ;
+								p_trackedJobProfilerData(ep_trackedSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes) := p_shownJobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes);
+								sp_trackedJobErrorMessages(ep_trackedSession, i_jobErrorMessageNumber) := sp_shownJobErrorMessages(i_jobErrorMessageNumber);
+								sp_trackedJobErrorMoments(ep_trackedSession, i_jobErrorMessageNumber) := sp_shownJobErrorMoments(i_jobErrorMessageNumber);
+								ep_trackedJobErrorSeverity(ep_trackedSession, i_jobErrorMessageNumber) := ep_shownJobErrorSeverity(i_jobErrorMessageNumber);
+								ep_trackedJobErrorNodes(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition);
+								ep_trackedJobErrorAttributes(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := ep_shownJobErrorAttributes(i_jobErrorMessageNumber, i_stackPosition);
+								p_trackedJobErrorLines(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition);
+								ep_shownSession := ep_trackedSession ;
+							endblock ;
 						
 							statusCode := webui::ReturnStatusCode('OK');
 							statusDescription := "Succesfully uploaded file "+fileLocation;
@@ -716,7 +523,6 @@ LibraryModule Library_GuardServerSession {
 							endif ;
 						endblock ;
 					}
-					StringParameter sp_fileUploadLocation;
 					StringParameter fileLocation {
 						Property: Input;
 					}
@@ -726,11 +532,12 @@ LibraryModule Library_GuardServerSession {
 					StringParameter statusDescription {
 						Property: Output;
 					}
-					ElementParameter ep_err {
-						Range: errh::PendingErrors;
-					}
+					StringParameter sp_fileUploadLocation;
 					ElementParameter ep_trackedSession {
 						Range: s_trackedSessions;
+					}
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
 					}
 				}
 				Procedure pr_downloadErrorData {
@@ -760,11 +567,11 @@ LibraryModule Library_GuardServerSession {
 								! displaying the status message as All perfect instead of the default "File ready to download"
 								StatusDescription := "All perfect!";
 						
-							else    !if previous write statement was not successful
+							else    ! if previous write statement was not successful
 						
 								! setting the statusCode to 'ERROR' and the download widget will not show the Get button anymore
 								statusCode := webui::ReturnStatusCode('ERROR');
-								!displaying a custom error message
+								! displaying a custom error message
 								statusDescription := "Something went wrong when creating the file.";
 						
 							endif;
@@ -778,6 +585,7 @@ LibraryModule Library_GuardServerSession {
 						
 						endblock ;
 					}
+					Comment: "Download profiler and error data of the selected data or solver session to file.";
 					StringParameter fileLocation {
 						Property: Output;
 					}
@@ -835,6 +643,7 @@ LibraryModule Library_GuardServerSession {
 						
 						endblock ;
 					}
+					Comment: "Download the error data in a readable report.";
 					StringParameter fileLocation {
 						Property: Output;
 					}
@@ -850,55 +659,6 @@ LibraryModule Library_GuardServerSession {
 					}
 					ElementParameter ep_stat {
 						Range: errh::AllErrorSeverities;
-					}
-				}
-				Procedure pr_reportCurrentErrorsToTextFile {
-					Arguments: (sp_filename);
-					Body: {
-						block where listing_page_width := 32000 ;
-							f_out.pagewidth := 32000 ;
-							put f_out;
-							for i_jobErrorMessageNumber | sp_shownJobErrorMessages(i_jobErrorMessageNumber) do
-								put     ep_shownJobErrorSeverity(i_jobErrorMessageNumber), " ", 
-									sp_shownJobErrorMoments( i_jobErrorMessageNumber), " : ",
-									sp_shownJobErrorMessages(i_jobErrorMessageNumber), / ;
-								for i_stackPosition | p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition) do
-									put "    ", p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition):4:0, 
-									" : ", ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition):0, / ;
-								endfor ;
-								put / ;
-							endfor ;
-							putclose ;
-						endblock ;
-					}
-					StringParameter sp_filename {
-						Property: Input;
-					}
-					File f_out {
-						Name: sp_filename;
-						Device: Disk;
-						Mode: replace;
-					}
-				}
-				Procedure pr_describeTrackedSession {
-					Arguments: (sp_session,sp_descr);
-					Body: {
-						if not sp_session then
-							raise error "gss::pr_describeTrackedSession(): sp_session not specified" ;
-						endif ;
-						
-						ep_locTrackedSession := StringToElement( s_trackedSessions , sp_session, create:1 );
-						
-						sp_sessionGivenDescriptions( ep_locTrackedSession ) := sp_descr ;
-					}
-					StringParameter sp_session {
-						Property: Input;
-					}
-					StringParameter sp_descr {
-						Property: Input;
-					}
-					ElementParameter ep_locTrackedSession {
-						Range: s_trackedSessions;
 					}
 				}
 			}
@@ -1242,11 +1002,250 @@ LibraryModule Library_GuardServerSession {
 				Procedure LoadResultsCallBack {
 					Arguments: (sp_requestID);
 					Body: {
-						
-						pro::session::LoadResultsCallBack(sp_requestID);
-						gss::pr_saveTrackedSessionData( sp_requestID );
+						block
+							pro::session::LoadResultsCallBack(sp_requestID);
+							gss::pr_saveTrackedSessionData( sp_requestID );
+						onerror ep_err do
+							pr_appendError( ep_err );
+							errh::MarkAsHandled( ep_err );
+						endblock ;
+					}
+					Comment: {
+						"The normal load results callback and store error and profiler data of the solver session
+						in the Tracked sessions container."
 					}
 					StringParameter sp_requestID {
+						Property: Input;
+					}
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
+				}
+			}
+			Section Utility_section {
+				Comment: "Catchall section.";
+				Parameter p_maxNoErrorsPerSession {
+					InitialData: 10000;
+				}
+				Set s_jobErrorMessageNumbers {
+					SubsetOf: Integers;
+					Index: i_jobErrorMessageNumber, i_dataSessionErrorMessageNumber;
+					Property: ElementsAreNumerical;
+					Definition: ElementRange(1,p_maxNoErrorsPerSession);
+				}
+				Procedure pr_openProfiledIdentifier {
+					Body: {
+						block
+							if ep_profilerDataSelectedIdentifier then
+								IdentifierShowAttributes( ep_profilerDataSelectedIdentifier );
+							endif ;
+						onerror ep_err do
+							pr_appendError( ep_err );
+							errh::MarkAsHandled( ep_err );
+						endblock ;
+					}
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
+				}
+				Procedure pr_openIdentifierOnStack {
+					Body: {
+						block 
+							if card(s_jobErrorMessageNumbers) then
+								if not ep_errorWarningSelectedMessage then
+									ep_errorWarningSelectedMessage := last( s_jobErrorMessageNumbers );
+								endif ;
+								if not ep_StackPos then
+									ep_StackPos := first( s_stackPositions );
+								endif ;
+								if ep_errorWarningSelectedMessage and ep_StackPos then
+									IdentifierShowAttributes(  
+										ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, ep_stackPos ));
+								endif ;
+							endif ;
+						onerror ep_err do
+							pr_appendError( ep_err );
+							errh::MarkAsHandled( ep_err );
+						endblock ;
+					}
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
+				}
+				Procedure pr_openIdentifierOnMessageList {
+					Body: {
+						block 
+							if ep_errorWarningSelectedMessage and ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, 1 ) then
+								IdentifierShowAttributes(  
+									ep_shownJobErrorNodes( ep_errorWarningSelectedMessage, ep_stackPos ));
+							endif ;
+						onerror ep_err do
+							pr_appendError( ep_err );
+							errh::MarkAsHandled( ep_err );
+						endblock ;
+					}
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
+				}
+				Procedure pr_initErrorHandlingDownloadUploadButtons {
+					Arguments: (ep_stat,statusCode,statusDescription,bp_download);
+					Body: {
+						ep_stat := '';
+						statusCode := if bp_download then webui::ReturnStatusCode('CREATED') else webui::ReturnStatusCode('OK') endif ;
+						statusDescription := "Nice.";
+						
+						! Best practice: declare ep_stat inside the calling procedure.
+					}
+					ElementParameter ep_stat {
+						Range: errh::AllErrorSeverities;
+						Property: Output;
+					}
+					Parameter statusCode {
+						Property: Output;
+					}
+					StringParameter statusDescription {
+						Property: Output;
+					}
+					Parameter bp_download {
+						Property: Optional;
+					}
+				}
+				Procedure pr_uploadDownloadWidgetErrorHandling {
+					Arguments: (ep_err, ep_stat, statusCode, statusDescription);
+					Body: {
+						! Ensure that the single message shown to the user is the first error, and if there is none: the first warning.
+						if errh::Severity(ep_err) = 'warning' then
+							if ep_stat = '' then
+								statusDescription := "OK, but note: " + errh::Message( ep_err );
+								ep_stat := 'warning';
+							endif ;
+						else
+							statusCode := webui::ReturnStatusCode('ERROR');
+							if ep_stat <> 'error' then
+								statusDescription := "Better luck next time: " + errh::Message( ep_err );
+								ep_stat := 'error';
+							endif;
+						endif ;
+						
+						! Best practice: declare ep_err and ep_stat inside the calling procedure.
+					}
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+						Property: Input;
+					}
+					ElementParameter ep_stat {
+						Range: errh::AllErrorSeverities;
+						Property: InOut;
+					}
+					Parameter statusCode {
+						Property: InOut;
+					}
+					StringParameter statusDescription {
+						Property: InOut;
+					}
+				}
+				Procedure pr_appendError {
+					Arguments: (ep_err,sp_prefix);
+					Body: {
+						ep_logLev := if errh::Severity(ep_err) = 'warning' then 'warn' else 'error' endif;
+						pr_logMsg( errh::Message(ep_err), ep_logLev );
+						if pro::GetPROEndPoint() then
+							if pro::IsRunningAtServer() then
+								pr_appendErrorJob(ep_err,sp_prefix);
+							else
+								pr_appendErrorDataSession(ep_err,sp_prefix);
+							endif ;
+						else
+							pr_appendErrorDataSession(ep_err,sp_prefix);
+						endif ;
+					}
+					Comment: "Store the error in the data structures of the library.";
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+						Property: Input;
+					}
+					Parameter p_errStackHeight;
+					Parameter p_errStackPos;
+					ElementParameter ep_stackPosition {
+						Range: s_stackPositions;
+					}
+					ElementParameter ep_jobErrorMessageNumber {
+						Range: s_jobErrorMessageNumbers;
+					}
+					StringParameter sp_prefix {
+						Property: Optional;
+					}
+					StringParameter sp_msg;
+					ElementParameter ep_logLev {
+						Range: s_messageLevels;
+					}
+					DeclarationSection gss_logging_declarations {
+						StringParameter sp_gssTime;
+						Parameter p_gssMiU;
+					}
+				}
+				Procedure pr_appendMessage {
+					Arguments: (sp_msg,ep_lev);
+					Body: {
+						if pro::GetPROEndPoint() then
+							if pro::IsRunningAtServer() then
+								pr_appendMessageJob(sp_msg,ep_lev);
+							else
+								pr_appendMessageDataSession(sp_msg,ep_lev);
+							endif ;
+						else
+							pr_appendMessageDataSession(sp_msg,ep_lev);
+						endif ;
+					}
+					Comment: "Store the error in the data structures of the library.";
+					Parameter p_errStackHeight;
+					Parameter p_errStackPos;
+					ElementParameter ep_stackPosition {
+						Range: s_stackPositions;
+					}
+					ElementParameter ep_jobErrorMessageNumber {
+						Range: s_jobErrorMessageNumbers;
+					}
+					StringParameter sp_msg {
+						Property: Input;
+					}
+					ElementParameter ep_lev {
+						Range: s_messageLevels;
+						Default: 'info';
+						Property: Optional;
+					}
+				}
+				Procedure pr_globalErrorHandler {
+					Arguments: (ep_err);
+					Body: {
+						pr_appendError(ep_err );
+						
+						if bp_locSeenErrorsAreHandled then
+							errh::MarkAsHandled( ep_err );
+						endif ;
+					}
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+						Property: Input;
+					}
+					ElementParameter ep_jobErrorMessageNumber {
+						Range: s_jobErrorMessageNumbers;
+					}
+					Parameter p_errStackHeight;
+					Parameter p_errStackPos;
+					ElementParameter ep_stackPosition {
+						Range: s_stackPositions;
+					}
+				}
+				Procedure pr_seenErrorsAreHandled {
+					Arguments: (bp_areHandled);
+					Body: {
+						bp_locSeenErrorsAreHandled := bp_areHandled ;
+					}
+					Parameter bp_areHandled {
+						Range: binary;
+						Default: 1;
 						Property: Input;
 					}
 				}
@@ -1708,6 +1707,34 @@ LibraryModule Library_GuardServerSession {
 				IndexDomain: i_errorSeverity;
 				Range: s_messageLevels;
 				Definition: data { 'severe' : 'fatal', 'error' : 'error', 'warning' : 'warn' };
+			}
+			Procedure pr_reportCurrentErrorsToTextFile {
+				Arguments: (sp_filename);
+				Body: {
+					block where listing_page_width := 32000 ;
+						f_out.pagewidth := 32000 ;
+						put f_out;
+						for i_jobErrorMessageNumber | sp_shownJobErrorMessages(i_jobErrorMessageNumber) do
+							put     ep_shownJobErrorSeverity(i_jobErrorMessageNumber), " ", 
+								sp_shownJobErrorMoments( i_jobErrorMessageNumber), " : ",
+								sp_shownJobErrorMessages(i_jobErrorMessageNumber), / ;
+							for i_stackPosition | p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition) do
+								put "    ", p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition):4:0, 
+								" : ", ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition):0, / ;
+							endfor ;
+							put / ;
+						endfor ;
+						putclose ;
+					endblock ;
+				}
+				StringParameter sp_filename {
+					Property: Input;
+				}
+				File f_out {
+					Name: sp_filename;
+					Device: Disk;
+					Mode: replace;
+				}
 			}
 			Procedure pr_sampleProc {
 				Body: {
