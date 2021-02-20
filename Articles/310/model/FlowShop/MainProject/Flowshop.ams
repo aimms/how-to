@@ -223,6 +223,43 @@ Model Main_Flow_Shop {
 			p_procesTime(j,m) := round(Uniform(1,20));
 		}
 	}
+	Procedure pr_GC_LoadResultsCallback {
+		Arguments: (sp_requestID);
+		Body: {
+			gss::LoadResultsCallBack(sp_requestID);
+			pr_prepInterface();
+		}
+		StringParameter sp_requestID {
+			Property: Input;
+		}
+	}
+	Section MyTest {
+		Set s_identifiersSavedInCase {
+			SubsetOf: AllIdentifiers;
+			InitialData: {
+				data 
+				    { 'gss::s_inputCaseIdentifiers' ,
+				      'gss::s_outputCaseIdentifiers',
+				      'gss::ep_tracinglevel'        ,
+				      'gss::sp_serverSessionId'     ,
+				      'gss::p_jobProfilerData'      ,
+				      'gss::sp_jobErrorMessages'    ,
+				      'gss::sp_jobErrorMoments'     ,
+				      'gss::ep_jobErrorSeverity'    ,
+				      'gss::ep_jobErrorNodes'       ,
+				      'gss::ep_jobErrorAttributes'  ,
+				      'gss::p_jobErrorLines'        }
+			}
+		}
+		Procedure pr_findIdentifiersSavedInCase {
+			Body: {
+				s_identifiersSavedInCase := 
+					{ indexIdentifiers | not gss::fnc_hasPropertyNoSave( IndexIdentifiers ) } *
+					( allparameters + allsets + allvariables + allconstraints + AllMathematicalPrograms ) *
+					Library_GuardServerSession ;
+			}
+		}
+	}
 	Procedure pr_workSolve {
 		Body: {
 			gss::pr_enter(sp_gssTime, p_gssMiU);
@@ -232,7 +269,6 @@ Model Main_Flow_Shop {
 					p_maxJobs, p_maxMachines));
 			
 			Empty AllVariables;
-			!pr_generateData();
 			
 			raise warning "Cry wolf." ;
 			
@@ -241,8 +277,6 @@ Model Main_Flow_Shop {
 			delay(1);
 			
 			raise warning "Hi, hi, false alarm.";
-			
-			!pr_prepInterface;
 			
 			gss::pr_AppendMessage(
 				FormatString("Finished solving flowshop for %i jobs on %i machines",
@@ -258,8 +292,9 @@ Model Main_Flow_Shop {
 	Procedure pr_solve {
 		Body: {
 			if pro::GetPROEndPoint() then
-				if pro::DelegateToServer( waitForCompletion  :  1, 
-							  completionCallback :  'gss::LoadResultsCallBack' ) then	
+				if pro::DelegateToServer( 
+					waitForCompletion  :  1, 
+					completionCallback :  'pr_GC_LoadResultsCallback' ) then	
 					return 1;
 				endif ;
 			endif ;

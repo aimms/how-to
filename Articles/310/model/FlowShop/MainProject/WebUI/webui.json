@@ -63,6 +63,9 @@
     "theme.classic": {
       "literal": false
     },
+    "timezonesetting": {
+      "literal": true
+    },
     "widget.visibility.greyout": {
       "literal": true
     }

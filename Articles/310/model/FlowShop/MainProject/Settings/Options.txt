@@ -1,5 +1,7 @@
 ﻿* AIMMS
 communicate_warnings_to_end_users 1
+single_column_display 1
+use_UTC_forCaseAndStartEndDate 1
 * AOA
 * BARON 19
 * CONOPT 4.0
