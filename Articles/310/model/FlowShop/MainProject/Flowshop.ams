@@ -293,6 +293,7 @@ Model Main_Flow_Shop {
 		Body: {
 			if pro::GetPROEndPoint() then
 				if pro::DelegateToServer( 
+					requestDescription :  formatString( "Flowshop for %i jobs and %i machines", p_maxJobs, p_maxMachines ),
 					waitForCompletion  :  1, 
 					completionCallback :  'pr_GC_LoadResultsCallback' ) then	
 					return 1;

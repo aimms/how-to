@@ -11,6 +11,10 @@ The following needs to be considered:
 
 #.  Change in identifier sets used for the input and output cases.
 
+#.  Change in actions 
+
+#.  Change in User Interface, see :doc:`instructions<../310/310-install-ui-gss>`
+
 
 We will use the attached AIMMS project as an example for this section. 
 

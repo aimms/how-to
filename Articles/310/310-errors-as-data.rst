@@ -1,6 +1,8 @@
 Errors as data
 ==============
 
+.. note:: Alternative title: Error handling for organizations.
+
 The end-user is a specialist in the application domain of the application. 
 The application and data are provided by specialists with other skills.
 Many error messages can be tackled by the end-user; but not all. 

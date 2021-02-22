@@ -38,9 +38,9 @@ After adding the library to your project, you can start building a User Interfac
 
         Widget Extensions:
 
-        #.  Widget actions: `gss::sp_widgetActionMessageStack`
+        #.  Widget actions: `gss::sp_widgetActionMessageList`
 
-        #.  Item actions: `gss::sp_itemActionMessageStack`
+        #.  Item actions: `gss::sp_itemActionMessageList`
 
     #.  Table `JobProfilerData`, 4 cols 2 rows titled: `"Identifier based Profiler Data"`
 
@@ -53,6 +53,12 @@ After adding the library to your project, you can start building a User Interfac
         Identifier Settings > Set slicing per index
 
         #.  `gss::i_lineNumber` --> fixed element `'0'`
+        
+        Widget Extensions:
+
+        #.  Widget actions: `gss::sp_widgetActionIdentifierProfiler`
+        
+        #.  Item actions: `gss::sp_itemActionIdentifierProfiler`
 
     #.  Table `ErrorWarningStack`, 8 cols, 2 rows, titled: `gss::sp_titleStackMessage`
 
@@ -76,9 +82,9 @@ After adding the library to your project, you can start building a User Interfac
 
         Widget Extensions:
 
-        #.  Widget actions: `gss::sp_widgetActionMessageList`
+        #.  Widget actions: `gss::sp_widgetActionMessageStack`
 
-        #.  Item actions: `gss::sp_itemActionMessageList`
+        #.  Item actions: `gss::sp_itemActionMessageStack`
 
     #.  Table `LineBasedProfilerData`, 4 cols, 2 rows, titled: `gss::sp_titleProfilerDetail`
 
@@ -132,7 +138,7 @@ After adding the library to your project, you can start building a User Interfac
 
 #.  Status bar
 
-    The status bar should be set to `gss::sp_messageStatusBar`
+    The status bar should be set to `gss::sp_messageStatusBar`, or to a string parameter that contains this parameter.
 
 
 

@@ -262,6 +262,12 @@
     }
   },
   "widgets/DownloadErrorReport": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "gss::pr_downloadErrorReport"
+      }
+    },
     "aimms.widget.type": {
       "literal": "download"
     },

@@ -658,6 +658,7 @@ LibraryModule Library_GuardServerSession {
 							sp_finalLocation := webui::GetIOFilePath(fileLocation);
 						
 							! writing the string parameter FinalLocation to a text file
+							pr_openPageErrorWarningProfiler();
 							pr_reportCurrentErrorsToTextFile( sp_finalLocation );
 						
 							! checking if the previous write statement was successful or not
@@ -1550,15 +1551,17 @@ LibraryModule Library_GuardServerSession {
 			}
 			Procedure pr_saveModelLogFile {
 				Body: {
-					sp_slash := "/" ;
-					sp_proStorageFolderName := sp_slash + "Userdata" + sp_slash + 
-						pro::GetPROEnvironment() + sp_slash + 
-						pro::GetPROUserName()    + sp_slash + 
-						pro::ModelName           + sp_slash + 
-						pro::modelversion        ;
-					pr_ensurePath( sp_proStorageFolderName );
+					if pro::GetPROEndPoint() then
+						sp_slash := "/" ;
+						sp_proStorageFolderName := sp_slash + "Userdata" + sp_slash + 
+							pro::GetPROEnvironment() + sp_slash + 
+							pro::GetPROUserName()    + sp_slash + 
+							pro::ModelName           + sp_slash + 
+							pro::modelversion        ;
+						pr_ensurePath( sp_proStorageFolderName );
 					
-					pr_actuallySaveModelLogFile( sp_traceFilename, sp_proStorageFolderName );
+						pr_actuallySaveModelLogFile( sp_traceFilename, sp_proStorageFolderName );
+					endif ;
 				}
 				Comment: "Save the log file in AIMMS PRO storage.";
 				StringParameter sp_proStorageFileName;
@@ -1707,6 +1710,7 @@ LibraryModule Library_GuardServerSession {
 			}
 			Procedure PostLibraryInitialization {
 				Body: {
+					! The error data shown should not be modified in the User Interface.
 					CurrentInputs -= serverSessionErrorData;
 					CurrentInputs -= Shown_session_data_exchange ;
 					
@@ -1734,16 +1738,18 @@ LibraryModule Library_GuardServerSession {
 						endif ;
 					endblock ;
 					pr_openLogFile();
-					bp_ogv := OptionGetValue("Use UTC forcaseandstartenddate", 
-						p_optLow, p_optCur, p_optDef, p_optUpp );
-					if not bp_ogv then
-						raise error "my bad" ;
-					endif ;
-					if p_optCur <> 1 then 
-						raise warning 
+					
+					block ! Ensure option "Use UTC forcaseandstartenddate" is turned on.
+						bp_ogv := OptionGetValue("Use UTC forcaseandstartenddate", 
+							p_optLow, p_optCur, p_optDef, p_optUpp );
+						if not bp_ogv then
+							raise error "my bad" ;
+						endif ;
+						if p_optCur <> 1 then raise warning 
 							"The option \"Use UTC forcaseandstartenddate\" should be turned on"+
 							" for correct logging of time in the library GuardServerSession." ;
-					endif ;
+						endif ;
+					endblock ;
 					! log file of a week old are to be deleted
 				}
 				Comment: {

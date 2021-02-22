@@ -1,5 +1,5 @@
-Job transparancy
-==================
+Post mortem analysis
+====================
 
 A solver session (job) in AIMMS PRO runs headless; there is no UI or developer environment that enables direct interfacing with that job.
 In this section, several tools are discussed to analyze behavior and errors occurring in both data session and solver sessions.
