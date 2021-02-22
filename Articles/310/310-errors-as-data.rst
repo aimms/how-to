@@ -1,7 +1,5 @@
-Errors as data
-==============
-
-.. note:: Alternative title: Error handling for organizations.
+Error and Profiling Results as Data
+========================================
 
 The end-user is a specialist in the application domain of the application. 
 The application and data are provided by specialists with other skills.

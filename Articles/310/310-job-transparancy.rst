@@ -1,48 +1,61 @@
-Post mortem analysis
-====================
+Incident handling for organizations
+=============================================
 
-A solver session (job) in AIMMS PRO runs headless; there is no UI or developer environment that enables direct interfacing with that job.
-In this section, several tools are discussed to analyze behavior and errors occurring in both data session and solver sessions.
+Thanks to extensive checking and clear reporting of incidents; end-users can handle several incidents themselves.
+For other incidents, they may need to turn to their colleagues; asking these colleagues questions about the incidents similar to the following:
 
-The `GuardServerSession` library, with prefix `gss` offers other methods to analyze data session and solver sessions.
+#.  `Do you know, why I was not able to read the data?`
+
+    The causes are several, for instance: it might be a reconfiguration of the database, a broken internet connection, or something else entirely.
+
+    The colleague that helps the end-user with this question, may very well benefit from clear error messages.
+
+#.  `Do you know, why I had to wait a lot longer before the solution appeared?`
+
+    Again, the causes are several, for instance: slow internet connection used to obtain data, 
+    the solution algorithm needed significantly more time for this instance, or something else entirely.
+
+    The colleague that helps the end-user with this question, may very well benefit from profiling information.
+
+#.  `I cannot explain the results I'm now seeing. Can you?`
+
+    It is pointless to even begin to enumerate the potential causes.
+
+    The colleague that helps the end-user with this question, may very well benefit from a log of the actions taken by the end-user.
+
+Together, the error information, the profiling information, and the action log will be called the session history in the below.
+The purpose of the session history is to reduce the time and effort for resolving the incidents that occurred during the session and 
+which the end-user didn't handle.
+
+The information flow around the application now looks as follows:
+
+.. image:: images/session-history.png
+    :align: center
+
+The `GuardServerSession` library, with prefix `gss`, is designed, among others, to work with session histories.
 This library provides the following methods:
 
-#.  :doc:`Errors as data<../310/310-errors-as-data>`
+#.  :doc:`Error and Profiling Results as Data<../310/310-errors-as-data>`
 
-    The end-user is a specialist in the application domain of the application. 
-    That application is built by specialists with other skills, including AIMMS and Operations Research.
-    Data for that application is provided by specialists with yet other skills.
-    Many error messages can be tackled by the end-user; but not all. 
-    For the remaining messages other specialists need to be consulted.
-    This article is about sharing the error messages between the end-user and the other specialists in that team.
+    The error handling procedures of the `GuardServerSession` library turn incidents into data that is stored in AIMMS' sets and parameters.
+    The function :aimms:func:`ProfilerCollectAllData` does the same for profilerdata.
+    This article discusses:
+
+    #.  the data flow of this information, and how it can be shared, and
+
+    #.  how the application needs to be adapted to retrieve this information.
 
 #.  :doc:`Tracing<../497/497-tracing-procedures>`  
 
-    In the previous article, the stack of procedures was presented; which is an in-depth answer to the question: what was happening during the occurrence of the error.
-    In this article, we are discussing the tracing of procedures during a data session or a solver session. 
-    Essentially, this is a wide answer to the question: how did we get to the situation whereby the error could occur.
-    Like the previous article; essential here is the sharing of information between the end-user and the other specialists involved.
+    The action logs are stored in files with the extension `.actionLog`.
+    This articles discusses:
 
-#.  :doc:`Profiling<../310/310-investigate-behavior-pro-job>` 
+    #.  where the `.actionLog` files are store in AIMMS PRO Storage, and
 
-    Profiling statements and procedures provides insights into the runtimes of these statements and procedures. 
-    Consequently, insight is provided in the actual bottlenecks of the application.
-    An end-user on the other hand; typically just expresses which actions seem to take unneccessry long.
-    By now, you'll get the drift of this series of articles; the `GuardServerSession` library 
-    provides a means for sharing concrete profiling information between the end-user and other team members.
+    #.  how the application needs to be adapted to generate these logs.
 
-#.  :doc:`State serializing<../321/321-state-server-session>`
+A User Interface for the `GuardServerSession` library can be built following these :doc:`instructions<../310/310-install-ui-gss>`
 
-    The state of a session is mostly comprised by the values of the sets, parameters, and variables. 
-    To compare a stable version of your project to a version that is in development, at some point you may want to compare the data of 
-    some sets, parameters, and variables. This article discusses how to do this.
-
-A User Interface for the `GuardServerSession` library can be built using these :doc:`instructions<../310/310-install-ui-gss>`
-
-`Debugging PRO-enabled Projects <https://documentation.aimms.com/pro/debugging-pro.html>`_ 
-is achieved by connecting  AIMMS Developer to AIMMS PRO. 
-The data session, or even the server session, is then actually run in AIMMS Developer; the circumstances are similar, but not exactly the same.
-In addition, this form of analysis requires a reproducible example, and does not provide any "after the fact" information.
 
 
 
