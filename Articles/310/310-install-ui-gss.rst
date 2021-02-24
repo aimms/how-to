@@ -124,13 +124,15 @@ After adding the library to your project, you can start building a User Interfac
 
         title: `"Download error data shown session"`
 
-#.  Run procedures 
+#.  To visually guide the adaption of the width of the columns of the tables, please run:
     
     #.  `gss::pr_artificialDataGSSPage` to have an artificial warning message and 
     
     #.  `gss::pr_openPageErrorWarningProfiler` to ensure the GSS Page tables are filled properly.
     
-    Now the page should look as follows:
+    And then start manually adapting the column widths such that the contents fit neatly.
+    
+#.  Feedback step: now the page should look as follows:
 
     .. image:: images/gss-page-design.png
         :align: center

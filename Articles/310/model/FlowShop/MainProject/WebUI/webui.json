@@ -293,7 +293,7 @@
     "action": {
       "literal": {
         "type": "procedure",
-        "value": "gss::pr_downloadModelLog"
+        "value": "gss::pr_downloadActionLog"
       }
     },
     "aimms.widget.type": {
@@ -302,7 +302,7 @@
     "title": {
       "aimms": {
         "contents": [
-          "gss::sp_downloadModelLogTitle"
+          "gss::sp_downloadActionLogTitle"
         ],
         "slices": []
       }

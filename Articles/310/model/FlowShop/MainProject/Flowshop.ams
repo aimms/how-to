@@ -305,14 +305,15 @@ Model Main_Flow_Shop {
 	}
 	Procedure pr_btnSolve {
 		Body: {
-			gss::pr_enter(sp_gssTime, p_gssMiU);
+			gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 			block 
+				raise warning "Don't look down" ;
 				pr_solve();
 			onerror ep_err do
 				gss::pr_appendError( ep_err );
 				errh::MarkAsHandled( ep_err );
 			endblock ;
-			gss::pr_leave(sp_gssTime, p_gssMiU);
+			gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 		}
 		DeclarationSection gss_logging_declarations {
 			StringParameter sp_gssTime;

@@ -13,23 +13,26 @@ LibraryModule Library_GuardServerSession {
 		Test WebUI and WinUI apps in Cloud/Prem/Developer"
 	}
 	Section Public_Section {
-		Procedure pr_nada {
+		Procedure pr_actionTemplate {
 			Body: {
-				pr_enter(sp_gssTime, p_gssMiU);
+				pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 				block 
 					! Call procedure to do the actual work.
 				onerror ep_err do
-					pr_appendError( ep_err );
+					gss::pr_appendError( ep_err );
 					errh::MarkAsHandled( ep_err );
 				endblock ;
-				pr_leave(sp_gssTime, p_gssMiU);
+				pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 			}
+			Comment: "Sample action procedure";
 			DeclarationSection gss_logging_declarations {
 				StringParameter sp_gssTime;
 				Parameter p_gssMiU;
 			}
-			ElementParameter ep_err {
-				Range: errh::PendingErrors;
+			DeclarationSection error_reference_declaration {
+				ElementParameter ep_err {
+					Range: errh::PendingErrors;
+				}
 			}
 		}
 		Section WebUI_Support {
@@ -262,7 +265,8 @@ LibraryModule Library_GuardServerSession {
 				Definition: controlServerSessionData;
 				Comment: {
 					"The set of identifiers in the GSS library that should be part of an \"input case\". 
-					The \"input case\" is the case transferred from the client session to the solver session upon start of the solver session."
+					The \"input case\" is the case transferred from the client session to the solver session upon start of the solver session.
+					Please ensure that pro::ManagedSessionInputCaseIdentifierSet contains the data from s_inputCaseIdentifiers"
 				}
 			}
 			Set s_outputCaseIdentifiers {
@@ -270,7 +274,9 @@ LibraryModule Library_GuardServerSession {
 				Definition: serverSessionErrorData;
 				Comment: {
 					"The data in the GSS library that is to be added to the output case.
-					The output case is the case transferred from a solver session to the data session upon completion of that solver session."
+					The output case is the case transferred from a solver session to the data session upon completion of that solver session.
+					Please ensure that the set pro::ManagedSessionOutputCaseIdentifierSet contains the elements from 
+					s_outputCaseIdentifiers before the delegated procedure returns in each solver session."
 				}
 			}
 		}
@@ -288,7 +294,7 @@ LibraryModule Library_GuardServerSession {
 				}
 				Procedure pr_uponChangeShownSession {
 					Body: {
-						gss::pr_enter(sp_gssTime, p_gssMiU, 
+						gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info', 
 							formatString("Going to show %e", 
 								ep_shownSession));
 						block 
@@ -353,7 +359,7 @@ LibraryModule Library_GuardServerSession {
 							pr_appendError( ep_err );
 							errh::MarkAsHandled( ep_err );
 						endblock ;
-						gss::pr_leave(sp_gssTime, p_gssMiU, 
+						gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info', 
 							formatString("Now the error and profiler tables show %e with description %s", 
 								ep_shownSession, sp_shownSessionDescription));
 					}
@@ -521,7 +527,7 @@ LibraryModule Library_GuardServerSession {
 				Procedure pr_uploadErrorData {
 					Arguments: (fileLocation,statusCode,statusDescription);
 					Body: {
-						gss::pr_enter(sp_gssTime, p_gssMiU);
+						gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 						block
 							pr_logMsg(formatString("Uploading file %s", fileLocation),'info');
 							sp_fileUploadLocation := webui::GetIOFilePath(fileLocation);
@@ -553,7 +559,7 @@ LibraryModule Library_GuardServerSession {
 								statusDescription := "Failed to upload file " + fileLocation ;
 							endif ;
 						endblock ;
-						gss::pr_leave(sp_gssTime, p_gssMiU);
+						gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 					}
 					DeclarationSection gss_logging_declarations {
 						StringParameter sp_gssTime;
@@ -579,7 +585,7 @@ LibraryModule Library_GuardServerSession {
 				Procedure pr_downloadErrorData {
 					Arguments: (fileLocation,statusCode,statusDescription);
 					Body: {
-						gss::pr_enter(sp_gssTime, p_gssMiU);
+						gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 						block
 						
 							gss::pr_initErrorHandlingDownloadUploadButtons( ep_stat, statusCode,  statusDescription, bp_download:1 );
@@ -621,7 +627,7 @@ LibraryModule Library_GuardServerSession {
 							errh::MarkAsHandled(ep_err);
 						
 						endblock ;
-						gss::pr_leave(sp_gssTime, p_gssMiU);
+						gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 					}
 					Comment: "Download profiler and error data of the selected data or solver session to file.";
 					StringParameter fileLocation {
@@ -648,7 +654,7 @@ LibraryModule Library_GuardServerSession {
 				Procedure pr_downloadErrorReport {
 					Arguments: (fileLocation,statusCode,statusDescription);
 					Body: {
-						gss::pr_enter(sp_gssTime, p_gssMiU);
+						gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 						block 
 							gss::pr_initErrorHandlingDownloadUploadButtons( ep_stat, statusCode,  statusDescription, bp_download:1 );
 						
@@ -686,7 +692,7 @@ LibraryModule Library_GuardServerSession {
 							errh::MarkAsHandled(ep_err);
 						
 						endblock ;
-						gss::pr_leave(sp_gssTime, p_gssMiU);
+						gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 					}
 					Comment: "Download the error data in a readable report.";
 					DeclarationSection gss_logging_declarations {
@@ -954,7 +960,7 @@ LibraryModule Library_GuardServerSession {
 							GrossTimeThreshold :  0, 
 							NetTimeThreshold   :  0);
 						
-						pr_saveModelLogFile();
+						pr_saveActionLogFile();
 					}
 					Comment: {
 						"To be called when a job is delegated; it will ensure that :
@@ -1402,11 +1408,12 @@ LibraryModule Library_GuardServerSession {
 			StringParameter sp_traceFilename {
 				InitialData: "logging.txt";
 			}
-			StringParameter sp_downloadModelLogTitle {
+			StringParameter sp_downloadActionLogTitle {
 				Definition: formatString("Download model log file of shown session %e", gss::ep_shownSession);
 			}
 			Procedure pr_openPageErrorWarningProfiler {
 				Body: {
+					pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 					ep_shownSession := first( s_trackedSessions );
 					
 					ProfilerCollectAllData(
@@ -1423,8 +1430,18 @@ LibraryModule Library_GuardServerSession {
 					p_trackedJobErrorLines(ep_shownSession, i_jobErrorMessageNumber, i_stackPosition) := p_dataSessionErrorLines(i_jobErrorMessageNumber, i_stackPosition);
 					
 					pr_uponChangeShownSession();
+					pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 				}
 				Comment: "The procedure that is run upon opening the page \"GSS page\"";
+				DeclarationSection gss_logging_declarations {
+					StringParameter sp_gssTime;
+					Parameter p_gssMiU;
+				}
+				DeclarationSection error_reference_declaration {
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
+				}
 			}
 			Procedure pr_logMsgTraceFile {
 				Arguments: (sp_argMsg,ep_lev);
@@ -1468,7 +1485,7 @@ LibraryModule Library_GuardServerSession {
 				}
 			}
 			Procedure pr_enter {
-				Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,sp_procEnterContextMessage);
+				Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_logLev,sp_procEnterContextMessage);
 				Body: {
 					sp_procEnterTimestamp := CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')");
 					p_procEnterMemoryInUse := MemoryInUse();
@@ -1481,7 +1498,7 @@ LibraryModule Library_GuardServerSession {
 							ReferenceDate :  sp_procEnterTimestamp, 
 							Elapsed       :  0[s]), 
 						p_procEnterMemoryInUse );
-					pr_logMsg( sp_fullMsg, 'debug' );
+					pr_logMsg( sp_fullMsg, ep_logLev );
 				}
 				Comment: {
 					"Trace entry of procedure to the log file; this procedure should not be called before PostLibraryInitialization finished."
@@ -1502,9 +1519,14 @@ LibraryModule Library_GuardServerSession {
 				StringParameter sp_node;
 				StringParameter sp_fullMsg;
 				StringParameter sp_proc;
+				ElementParameter ep_logLev {
+					Range: s_messageLevels;
+					Default: 'debug';
+					Property: Optional;
+				}
 			}
 			Procedure pr_leave {
-				Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,sp_msg);
+				Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_logLev,sp_msg);
 				Body: {
 					sp_leavingTime := CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')");
 					p_duration := StringToMoment(
@@ -1527,7 +1549,7 @@ LibraryModule Library_GuardServerSession {
 							p_duration,
 							if p_leaveMemoryInUse >= p_procEnterMemoryInUse then "increase" else "decrease" endif, 
 							abs( p_leaveMemoryInUse - p_procEnterMemoryInUse ) );
-					pr_logMsg( sp_fullMsg, 'debug' );
+					pr_logMsg( sp_fullMsg, ep_logLev );
 				}
 				Comment: {
 					"Trace leaving of procedure to the log file; this procedure should not be called before PostLibraryInitialization finished."
@@ -1548,8 +1570,13 @@ LibraryModule Library_GuardServerSession {
 				}
 				StringParameter sp_node;
 				StringParameter sp_fullMsg;
+				ElementParameter ep_logLev {
+					Range: s_messageLevels;
+					Default: 'debug';
+					Property: Optional;
+				}
 			}
-			Procedure pr_saveModelLogFile {
+			Procedure pr_saveActionLogFile {
 				Body: {
 					if pro::GetPROEndPoint() then
 						sp_slash := "/" ;
@@ -1560,7 +1587,7 @@ LibraryModule Library_GuardServerSession {
 							pro::modelversion        ;
 						pr_ensurePath( sp_proStorageFolderName );
 					
-						pr_actuallySaveModelLogFile( sp_traceFilename, sp_proStorageFolderName );
+						pr_actuallySaveActionLogFile( sp_traceFilename, sp_proStorageFolderName );
 					endif ;
 				}
 				Comment: "Save the log file in AIMMS PRO storage.";
@@ -1579,7 +1606,7 @@ LibraryModule Library_GuardServerSession {
 					Property: Input;
 				}
 			}
-			Procedure pr_downloadModelLog {
+			Procedure pr_downloadActionLog {
 				Arguments: (FileLocation,StatusCode,StatusDescription);
 				Body: {
 					Block
@@ -1595,9 +1622,9 @@ LibraryModule Library_GuardServerSession {
 								pro::ModelName           + sp_slash + 
 								pro::modelversion        + sp_slash + 
 								"tracings"               + sp_slash + 
-								ep_shownSession          + ".modelLog";
-							sp_localTraceFilename := "tracings" + sp_slash + ep_shownSession + ".modelLog" ;
-							! Copy the .modelLog file from AIMMS PRO storage to the folder "tracings".
+								ep_shownSession          + ".actionLog";
+							sp_localTraceFilename := "tracings" + sp_slash + ep_shownSession + ".actionLog" ;
+							! Copy the .actionLog file from AIMMS PRO storage to the folder "tracings".
 							pro::RetrieveFileFromCentralStorage(
 								storagePath :  sp_proStorageFilename, 
 								localPath   :  sp_localTraceFilename);
@@ -1614,13 +1641,7 @@ LibraryModule Library_GuardServerSession {
 						else
 							fileLocation := sp_localTraceFilename;
 						endif ;
-						if pro::GetPROEndPoint() then
-							pro::management::LocalLogInfo("pr_downloadModelLog(): fileLocation = " + fileLocation);
-						endif ;
 						sp_fullFileLocation := webui::GetIOFilePath(FileLocation);
-						if pro::GetPROEndPoint() then
-							pro::management::LocalLogInfo("pr_downloadModelLog(): sp_fullFileLocation = " + sp_fullFileLocation);
-						endif ;
 						if FileLocation <> sp_fullFileLocation then
 							FileCopy( FileLocation, sp_fullFileLocation );
 						endif ;
@@ -1727,7 +1748,7 @@ LibraryModule Library_GuardServerSession {
 						endif ;
 					
 						if sp_thisSession then
-							sp_traceFilename := sp_tracingsFolderName + "/" + sp_thisSession + ".modelLog" ;
+							sp_traceFilename := sp_tracingsFolderName + "/" + sp_thisSession + ".actionLog" ;
 						endif ;
 					
 						if not  DirectoryExists( sp_tracingsFolderName ) then
@@ -1769,19 +1790,6 @@ LibraryModule Library_GuardServerSession {
 			}
 			Procedure PreLibraryTermination {
 				Body: {
-					!if pro::GetPROEndPoint() then
-					!	pro::Initialize();
-					!
-					!	if pro::CurrentDelegationLevel() then ! Only for solver sessions.
-					!
-					!		if FileExists( sp_traceFilename ) then
-					!
-					!			pr_saveModelLogFile();
-					!
-					!		endif ;
-					!
-					!	endif ;
-					!endif ;
 					
 					return 1;
 				}
@@ -1998,22 +2006,17 @@ LibraryModule Library_GuardServerSession {
 		Section Logging_utilities {
 			Procedure pr_openLogFile {
 				Body: {
-					if pro::GetPROEndPoint() then
-						pro::management::LocalLogInfo(formatString(
-							"pr_openLogFile(): sp_thisSession = %s, sp_traceFilename = %s", 
-							sp_thisSession, sp_traceFilename ));
-					endif ;
 					f_traceFile.pagewidth := 32000 ;
 					putclose f_traceFile ;
 					put f_traceFile;
 					put "Opening log file ", sp_traceFilename, " at ", CurrentToSTring("%c%y-%m-%d %H:%M:%S"), / ;
 					if pro::GetPROEndPoint() then
 						if pro::openedAsWorker then
-							put "This file contains the log of a data session on behalf of ", 
-								pro::GetPROUserName(), "@", pro::GetPROEnvironment(), / ;
-						else
 							put "This file contains the log of a solver session handling request ", 
 								pro::workerRequestDescription, / ;
+						else
+							put "This file contains the log of a data session on behalf of ", 
+								pro::GetPROUserName(), "@", pro::GetPROEnvironment(), / ;
 						endif ;
 					else
 						put "This file contains the log of an AIMMS Developer session ", / ;
@@ -2043,7 +2046,7 @@ LibraryModule Library_GuardServerSession {
 					When not on PRO, use timestamp."
 				}
 			}
-			Procedure pr_actuallySaveModelLogFile {
+			Procedure pr_actuallySaveActionLogFile {
 				Arguments: (sp_fn,sp_folder);
 				Body: {
 					sp_slash := "/" ;
@@ -2053,17 +2056,17 @@ LibraryModule Library_GuardServerSession {
 							localPath     :  sp_fn, 
 							storagePath   :  sp_proStorageFileName);
 						pro::management::LocalLogInfo(formatString(
-							"pr_actuallySaveModelLogFile(): pro::SaveFileToCentralStorage(%s,%s)",
+							"pr_actuallySaveActionLogFile(): pro::SaveFileToCentralStorage(%s,%s)",
 							sp_fn, sp_proStorageFileName));
 					else
 						pro::management::LocalLogInfo(
-							"pr_actuallySaveModelLogFile() sp_fn = " + 
+							"pr_actuallySaveActionLogFile() sp_fn = " + 
 							sp_fn + 
 							" does not exist."
 						);
 					endif ;
 				}
-				Comment: "Helper procedure of pr_saveModelLogFile.";
+				Comment: "Helper procedure of pr_saveActionLogFile.";
 				StringParameter sp_fn {
 					Property: Input;
 				}
@@ -2075,14 +2078,14 @@ LibraryModule Library_GuardServerSession {
 			}
 			Procedure pr_artificialDataGSSPage {
 				Body: {
-					pr_enter(sp_gssTime, p_gssMiU);
+					pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 					block
 						raise warning "Cry wolf" ;
 					onerror ep_err do
 						gss::pr_appendError(ep_err);
 						errh::MarkAsHandled(ep_err);
 					endblock ;
-					pr_leave(sp_gssTime, p_gssMiU);
+					pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 				}
 				Comment: {
 					"Run this procedure to obtain some contents with which to tailor the 
