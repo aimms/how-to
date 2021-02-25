@@ -1,4 +1,5 @@
-﻿*.aimmslockfile
+﻿*.actionLog
+*.aimmslockfile
 *.aimmspack
 *.7z
 *.aux

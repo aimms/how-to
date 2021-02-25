@@ -193,7 +193,7 @@ Model Main_Flow_Shop {
 		Procedure MainInitialization {
 			Body: {
 				ProfilerStart();
-				gss::ep_tracinglevel := 'trace' ;
+				gss::ep_tracingFilterlevel := 'trace' ;
 			}
 		}
 		Procedure PostMainInitialization {
@@ -206,7 +206,11 @@ Model Main_Flow_Shop {
 				pr_generateData;
 			}
 		}
-		Procedure MainExecution;
+		Procedure MainExecution {
+			Body: {
+				aimmsunit::RunSelectedTestSuites;
+			}
+		}
 		Procedure PreMainTermination {
 			Body: {
 				return 1;
@@ -233,36 +237,13 @@ Model Main_Flow_Shop {
 			Property: Input;
 		}
 	}
-	Section MyTest {
-		Set s_identifiersSavedInCase {
-			SubsetOf: AllIdentifiers;
-			InitialData: {
-				data 
-				    { 'gss::s_inputCaseIdentifiers' ,
-				      'gss::s_outputCaseIdentifiers',
-				      'gss::ep_tracinglevel'        ,
-				      'gss::sp_serverSessionId'     ,
-				      'gss::p_jobProfilerData'      ,
-				      'gss::sp_jobErrorMessages'    ,
-				      'gss::sp_jobErrorMoments'     ,
-				      'gss::ep_jobErrorSeverity'    ,
-				      'gss::ep_jobErrorNodes'       ,
-				      'gss::ep_jobErrorAttributes'  ,
-				      'gss::p_jobErrorLines'        }
-			}
-		}
-		Procedure pr_findIdentifiersSavedInCase {
-			Body: {
-				s_identifiersSavedInCase := 
-					{ indexIdentifiers | not gss::fnc_hasPropertyNoSave( IndexIdentifiers ) } *
-					( allparameters + allsets + allvariables + allconstraints + AllMathematicalPrograms ) *
-					Library_GuardServerSession ;
-			}
-		}
-	}
 	Procedure pr_workSolve {
 		Body: {
 			gss::pr_enter(sp_gssTime, p_gssMiU);
+			
+			gss::pr_AppendMessage(
+				FormatString("Request description is %s",
+					pro::workerRequestDescription));
 			
 			gss::pr_AppendMessage(
 				FormatString("Going to solve flowshop for %i jobs on %i machines",

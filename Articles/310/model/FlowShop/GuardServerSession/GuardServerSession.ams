@@ -883,7 +883,7 @@ LibraryModule Library_GuardServerSession {
 						"Contains parameters that are used to control GSS library in server sessions.
 						They are passed along in the input case."
 					}
-					ElementParameter ep_tracinglevel {
+					ElementParameter ep_tracingFilterlevel {
 						Range: s_messageLevels;
 						InitialData: 'info';
 						Comment: "The tracing level used during the session.";
@@ -933,6 +933,7 @@ LibraryModule Library_GuardServerSession {
 					Arguments: (ep_work);
 					Body: {
 						block
+							pr_openLogFile();
 							empty serverSessionErrorData ;
 							sp_serverSessionId := sp_thisSession ;
 						
@@ -1446,7 +1447,7 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_logMsgTraceFile {
 				Arguments: (sp_argMsg,ep_lev);
 				Body: {
-					if ep_lev >= ep_tracinglevel then
+					if ep_lev >= ep_tracingFilterlevel then
 						put f_traceFile ;
 						put sp_argMsg, / ;
 						putclose ;
@@ -1466,19 +1467,19 @@ LibraryModule Library_GuardServerSession {
 				}
 			}
 			Procedure pr_logMsg {
-				Arguments: (sp_msg,ep_lev);
+				Arguments: (sp_message,ep_messageImportance);
 				Body: {
-					if ep_lev >= ep_tracingLevel then
-						pr_logMsgTraceFile(sp_msg,ep_lev);
+					if ep_messageImportance >= ep_tracingFilterlevel then
+						pr_logMsgTraceFile(sp_message,ep_messageImportance);
 					endif ;
 				}
 				Comment: {
 					"Trace to the log file; this procedure should not be called before PostLibraryInitialization finished."
 				}
-				StringParameter sp_msg {
+				StringParameter sp_message {
 					Property: Input;
 				}
-				ElementParameter ep_lev {
+				ElementParameter ep_messageImportance {
 					Range: s_messageLevels;
 					Default: 'trace';
 					Property: Optional;
@@ -1504,10 +1505,10 @@ LibraryModule Library_GuardServerSession {
 					"Trace entry of procedure to the log file; this procedure should not be called before PostLibraryInitialization finished."
 				}
 				StringParameter sp_procEnterTimestamp {
-					Property: InOut;
+					Property: Output;
 				}
 				Parameter p_procEnterMemoryInUse {
-					Property: InOut;
+					Property: Output;
 				}
 				StringParameter sp_procEnterContextMessage {
 					Property: Optional;
@@ -1598,7 +1599,7 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_setTracingLevel {
 				Arguments: (ep_newLev);
 				Body: {
-					ep_tracinglevel := ep_newLev;
+					ep_tracingFilterlevel := ep_newLev;
 				}
 				Comment: "Filter all tracing messages with a level lower than the argument value.";
 				ElementParameter ep_newLev {
@@ -1758,7 +1759,18 @@ LibraryModule Library_GuardServerSession {
 							FileDelete( sp_traceFilename );
 						endif ;
 					endblock ;
-					pr_openLogFile();
+					
+					! Open log file for data session or AIMMS Developer session.
+					if pro::GetPROEndPoint() then
+						if pro::openedAsWorker then
+							! pr_openLogFile();
+							! The log file for a server session is opened at the beginning of pr_guardAndProfileServerJob().
+						else
+							pr_openLogFile();
+						endif ;
+					else
+						pr_openLogFile();
+					endif ;
 					
 					block ! Ensure option "Use UTC forcaseandstartenddate" is turned on.
 						bp_ogv := OptionGetValue("Use UTC forcaseandstartenddate", 
