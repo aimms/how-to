@@ -1,5 +1,6 @@
 ﻿* AIMMS
 communicate_warnings_to_end_users 1
+maximal_number_of_warnings_reported 1000
 rounding_compatibility Aimms_3_7
 single_column_display 1
 use_UTC_forCaseAndStartEndDate 1

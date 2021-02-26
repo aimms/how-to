@@ -870,7 +870,12 @@
       }
     },
     "title": {
-      "literal": "Identifier based Profiler Data"
+      "aimms": {
+        "contents": [
+          "gss::sp_titleProfilerOverview"
+        ],
+        "slices": []
+      }
     },
     "widgetactions": {
       "aimms": {

@@ -2,9 +2,7 @@ Error and Profiling Results as Data
 ========================================
 
 Error and profiler data can be stored in AIMMS' sets and parameters; then serialized and thereby shared between members of the same team.
-This is also featured by the `GuardServerSession` library. This article discusses:
-
-#.  How the `GuardServerSession` library achieves sharing of this data.
+This is also featured by the ``GuardServerSession`` library. This article discusses how the ``GuardServerSession`` library achieves sharing of this data.
 
 Data flow of error information
 --------------------------------
@@ -22,25 +20,71 @@ There are two paths from "red" to "blue" for this error information, depending o
 Data flow for errors created in a data session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#.  Data session errors are collected by the error handler `gss::pr_appendError` in the orange box "Data session errors" `gss::dataSessionProfilerErrorData`.
+#.  Data session errors are collected by the error handler ``gss::pr_appendError`` in the orange box "Data session errors" ``gss::dataSessionProfilerErrorData``.
 
-#.  When the WebUI page `GSS page` is opened, the yellow box is copied to the blue box, making the errors visible to the end-user.
+#.  When the WebUI page ``GSS page`` is opened, the yellow box is copied to the blue box, making the errors visible to the end-user.
 
 Data flow for errors created in a solver session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#.  Solver session errors are collected by the error handler `gss::pr_appendError` in the purple box "Solver session errors" `gss::serverSessionErrorData`.
+#.  Solver session errors are collected by the error handler ``gss::pr_appendError`` in the purple box "Solver session errors" ``gss::serverSessionErrorData``.
 
 #.  When the output case is loaded, this error information is loaded in the data session (to identifiers with the same name).
 
 #.  Immediately after, this error information is copied to a slice in the green big box "Solver sessions and uploaded sessions".
 
-#.  When the WebUI page `GSS page` is opened, and the selection drop down selects this solver session, this error information is copied to the blue box (and shown).
+#.  When the WebUI page ``GSS page`` is opened, and the selection drop down selects this solver session, this error information is copied to the blue box (and shown).
 
 Data flow of profiler information
 ---------------------------------
 
 The profiler information is captured at the end of a solver session, or at the start of opening the "GSS page".
 Then it follows the same path as the error information through the application before it is shown.
+
+
+Identifiers to be used in your app for Errors and Profiling results as data
+--------------------------------------------------------------------------------
+
+Both the procedures, the relevant collector is for the data session: `gss::dataSessionProfilerErrorData`, for a server session: `gss::serverSessionErrorData`.
+
+#.  The procedure ``pr_appendError(ep_err,sp_prefix)`` appends the error to the open error collector.
+
+    Arguments:
+
+    #.  Input element parameter ``ep_err`` with range ``errh::PendingErrors``.  This is a reference to the error to be handled.
+
+    #.  Input string parameter ``sp_prefix``.  This can be used to prefix the error message stored from the message of the error referenced by ``ep_err``
+
+    Throws exceptions: None
+
+    Return value: None.
+
+#.  The procedure ``pr_appendMessage(sp_msg,ep_lev)`` Appends the message `sp_msg` to the open error collector.
+
+    Arguments:
+
+    #.  Input string parameter ``sp_msg``.  The message to be stored.
+
+    #.  Input element parameter ``ep_lev`` with range ``gss::s_messageLevels`` and default ``'info'``.  The importance level of the message ``sp_msg``.
+
+    Throws exceptions: None
+
+    Return value: None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

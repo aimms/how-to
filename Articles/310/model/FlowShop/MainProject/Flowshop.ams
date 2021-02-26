@@ -193,7 +193,7 @@ Model Main_Flow_Shop {
 		Procedure MainInitialization {
 			Body: {
 				ProfilerStart();
-				gss::ep_tracingFilterlevel := 'trace' ;
+				gss::pr_setTracinglevel( 'trace' );
 			}
 		}
 		Procedure PostMainInitialization {
@@ -206,11 +206,7 @@ Model Main_Flow_Shop {
 				pr_generateData;
 			}
 		}
-		Procedure MainExecution {
-			Body: {
-				aimmsunit::RunSelectedTestSuites;
-			}
-		}
+		Procedure MainExecution;
 		Procedure PreMainTermination {
 			Body: {
 				return 1;

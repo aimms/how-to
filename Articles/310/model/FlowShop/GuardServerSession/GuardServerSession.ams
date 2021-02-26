@@ -189,6 +189,9 @@ LibraryModule Library_GuardServerSession {
 				Definition: FormatString("Profiler data for %e", ep_profilerDataSelectedIdentifier);
 				Comment: "The title for the table LineBasedProfilerData on page \"GSS page\".";
 			}
+			StringParameter sp_titleProfilerOverview {
+				Definition: "Identifier based Profiler Data";
+			}
 			ElementParameter ep_profilerDataSelectedIdentifier {
 				Range: AllIdentifiers;
 				InitialData: '';
@@ -533,21 +536,7 @@ LibraryModule Library_GuardServerSession {
 							sp_fileUploadLocation := webui::GetIOFilePath(fileLocation);
 							! The file is uploaded to the process specific temporary folder. 
 						
-							empty Shown_session_data_exchange;
-							ep_trackedSession := StringToElement( s_trackedSessions, fileLocation, create:1);
-							read from file sp_fileUploadLocation ;
-						
-							block ! Copy the data loaded in from the case in the Tracked session container.
-								sp_sessionGivenDescriptions( ep_trackedSession ) := sp_shownSessionDescription ;
-								p_trackedJobProfilerData(ep_trackedSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes) := p_shownJobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes);
-								sp_trackedJobErrorMessages(ep_trackedSession, i_jobErrorMessageNumber) := sp_shownJobErrorMessages(i_jobErrorMessageNumber);
-								sp_trackedJobErrorMoments(ep_trackedSession, i_jobErrorMessageNumber) := sp_shownJobErrorMoments(i_jobErrorMessageNumber);
-								ep_trackedJobErrorSeverity(ep_trackedSession, i_jobErrorMessageNumber) := ep_shownJobErrorSeverity(i_jobErrorMessageNumber);
-								ep_trackedJobErrorNodes(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition);
-								ep_trackedJobErrorAttributes(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := ep_shownJobErrorAttributes(i_jobErrorMessageNumber, i_stackPosition);
-								p_trackedJobErrorLines(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition);
-								ep_shownSession := ep_trackedSession ;
-							endblock ;
+							pr_uploadErrorDataWork( sp_fileUploadLocation );
 						
 							statusCode := webui::ReturnStatusCode('OK');
 							statusDescription := "Succesfully uploaded file "+fileLocation;
@@ -565,6 +554,11 @@ LibraryModule Library_GuardServerSession {
 						StringParameter sp_gssTime;
 						Parameter p_gssMiU;
 					}
+					DeclarationSection error_reference_declaration {
+						ElementParameter ep_err {
+							Range: errh::PendingErrors;
+						}
+					}
 					StringParameter fileLocation {
 						Property: Input;
 					}
@@ -575,12 +569,38 @@ LibraryModule Library_GuardServerSession {
 						Property: Output;
 					}
 					StringParameter sp_fileUploadLocation;
-					ElementParameter ep_trackedSession {
-						Range: s_trackedSessions;
+				}
+				Procedure pr_uploadErrorDataWinUI {
+					Body: {
+						pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						block 
+							p_retFileSelect := FileSelect(
+								filename  :  sp_filename, 
+								directory :  "", 
+								extension :  ".error", 
+								title     :  "Please select error and profiler file");
+							if p_retFileSelect then
+								pr_uploadErrorDataWork( sp_filename);
+							else
+								raise warning "No file selected for uploading error and profiler data"
+							endif ;
+						onerror ep_err do
+							gss::pr_appendError( ep_err );
+							errh::MarkAsHandled( ep_err );
+						endblock ;
+						pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 					}
-					ElementParameter ep_err {
-						Range: errh::PendingErrors;
+					DeclarationSection gss_logging_declarations {
+						StringParameter sp_gssTime;
+						Parameter p_gssMiU;
 					}
+					DeclarationSection error_reference_declaration {
+						ElementParameter ep_err {
+							Range: errh::PendingErrors;
+						}
+					}
+					StringParameter sp_fileName;
+					Parameter p_retFileSelect;
 				}
 				Procedure pr_downloadErrorData {
 					Arguments: (fileLocation,statusCode,statusDescription);
@@ -1291,6 +1311,7 @@ LibraryModule Library_GuardServerSession {
 						Range: s_messageLevels;
 						Default: 'info';
 						Property: Optional;
+						Comment: "Importance level of message.";
 					}
 				}
 				Procedure pr_globalErrorHandler {
@@ -1824,6 +1845,34 @@ LibraryModule Library_GuardServerSession {
 			}
 		}
 		Section Guard_utilities {
+			Section Private_Tracked_session {
+				Procedure pr_uploadErrorDataWork {
+					Arguments: (sp_filename);
+					Body: {
+						empty Shown_session_data_exchange;
+						ep_trackedSession := StringToElement( s_trackedSessions, sp_filename, create:1);
+						read from file sp_filename ;
+						
+						block ! Copy the data loaded in from the case in the Tracked session container.
+							sp_sessionGivenDescriptions( ep_trackedSession ) := sp_shownSessionDescription ;
+							p_trackedJobProfilerData(ep_trackedSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes) := p_shownJobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes);
+							sp_trackedJobErrorMessages(ep_trackedSession, i_jobErrorMessageNumber) := sp_shownJobErrorMessages(i_jobErrorMessageNumber);
+							sp_trackedJobErrorMoments(ep_trackedSession, i_jobErrorMessageNumber) := sp_shownJobErrorMoments(i_jobErrorMessageNumber);
+							ep_trackedJobErrorSeverity(ep_trackedSession, i_jobErrorMessageNumber) := ep_shownJobErrorSeverity(i_jobErrorMessageNumber);
+							ep_trackedJobErrorNodes(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition);
+							ep_trackedJobErrorAttributes(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := ep_shownJobErrorAttributes(i_jobErrorMessageNumber, i_stackPosition);
+							p_trackedJobErrorLines(ep_trackedSession, i_jobErrorMessageNumber, i_stackPosition) := p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition);
+							ep_shownSession := ep_trackedSession ;
+						endblock ;
+					}
+					StringParameter sp_filename {
+						Property: Input;
+					}
+					ElementParameter ep_trackedSession {
+						Range: s_trackedSessions;
+					}
+				}
+			}
 			Parameter bp_locSeenErrorsAreHandled {
 				Range: binary;
 				InitialData: 0;

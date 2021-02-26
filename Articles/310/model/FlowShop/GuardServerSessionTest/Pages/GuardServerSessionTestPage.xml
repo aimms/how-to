@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2021-02-26 06:47:20">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>9EF703FD-F30E-4568-8729-CE419A549A12</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Button">
+		<Location top="24" left="48" bottom="102" right="306" />
+		<TabOrder>1</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Run all unit tests"</Title>
+		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>gsst::pr_runAllUnitTests</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>gsst::pr_runAllUnitTests</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

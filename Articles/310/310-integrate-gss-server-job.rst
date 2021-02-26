@@ -1,8 +1,6 @@
 Integrate GuardServerSession library with your application
 ===========================================================
 
-.. todo:: remarks about input case identifier and output case identifiers from GSS.
-
 This article describes how to integrate the delegation of your jobs with the `GuardServerSession` library.
 
 The following needs to be considered:
@@ -69,25 +67,26 @@ We change this to:
 
 Remarks on the highlighted lines:
 
-* Line 3: The procedure `gss::LoadResultsCallBack` will call `pro::session::LoadResultsCallBack(sp_requestID)` and 
+* Line 3: The procedure ``gss::LoadResultsCallBack`` will call ``pro::session::LoadResultsCallBack(sp_requestID)`` and 
   subsequently copy the error and profiling information to the tracked sessions container.
-* Line 8: Instead of directly calling the workhorse, we guard with the procedure `gss::pr_GuardAndProfileServerJob`.
+
+* Line 8: Instead of directly calling the workhorse, we guard with the procedure ``gss::pr_GuardAndProfileServerJob``.
   This procedure will handle all error during execution and at the end collect profiling information.
 
 Change in input and output cases
 ---------------------------------
 
-The set of identifiers saved in a case by the data session as input for the solver session is stored in `pro::ManagedSessionInputCaseIdentifierSet`.
-The set of identifiers saved in a case by the solver session for the data session is stored in `pro::ManagedSessionOutputCaseIdentifierSet`.
+The set of identifiers saved in a case by the data session as input for the solver session is stored in ``pro::ManagedSessionInputCaseIdentifierSet``.
+The set of identifiers saved in a case by the solver session for the data session is stored in ``pro::ManagedSessionOutputCaseIdentifierSet``.
 
-When your application does not adapt these sets from their default contents before integrating with the `GuardServerSession` library; 
+When your application does not adapt these sets from their default contents before integrating with the ``GuardServerSession`` library; 
 you do not need to do so after the integration either.
 
 When your application does adapt these sets from their default contents, then please add
 
-#.  `s_inputCaseIdentifiers` to `pro::ManagedSessionInputCaseIdentifierSet` in the data session.
+#.  ``s_inputCaseIdentifiers`` to ``pro::ManagedSessionInputCaseIdentifierSet`` in the data session.
 
-#.  `s_outputCaseIdentifiers` to `pro::ManagedSessionOutputCaseIdentifierSet` in each solver session.
+#.  ``s_outputCaseIdentifiers`` to ``pro::ManagedSessionOutputCaseIdentifierSet``  in each solver session.
 
 Change in actions
 -------------------- 
@@ -124,12 +123,12 @@ Each such invoked procedure should have the following pattern:
 
 Remarks:
 
-* Lines 3 and 10: `pr_enter` and `pr_leave` these are used to generate contents for the `.actionLog` File. 
+* Lines 3 and 10: ``pr_enter`` and ``pr_leave`` these are used to generate contents for the ``.actionLog`` File. 
   :doc:`This article<../497/497-tracing-procedures>` explains the workings of these procedures.
   
 * Lines 4, 6, and 9 delineate the business logic (line 5) from the error handling logic (lines 7,8).
 
-* Line 7: The procedure `gss::pr_appendError` stores the information of each error in the error container of the active session.
+* Line 7: The procedure ``gss::pr_appendError`` stores the information of each error in the error container of the active session.
 
 * Line 8: Mark the error as handled; the action procedure is usually the bottom of an execution stack - 
           so it is the bottom of the error handling stack as well.
@@ -147,5 +146,8 @@ Some optional recommended application changes
     As an aside, the default of the option ``communicate_warnings_to_end_users`` makes 
     sense if extensive error handling measures are not taken in the application.
     Best practice is still to add extensive checking and careful error catching to your application.
+
+#.  The option ``Maximal number of warnings reported`` is switched to a high setting, for instance 1000.
+
 
 
