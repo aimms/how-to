@@ -1,14 +1,14 @@
 The User Interface to the GSS Library
 ======================================
 
-The user interface is shown in the `GSS page` below:
+The user interface is shown in the `GSS Session History Management` below:
 
 .. image:: images/gss-page.png
     :align: center
 
 Remarks:
 
-#.  The `GSS page` opens by clicking the GSS status bar.
+#.  The `GSS Session History Management` opens by clicking the GSS status bar.
 
 #.  The upper table on the left shows the error messages, with severity and creation moment.
 

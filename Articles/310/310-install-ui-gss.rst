@@ -5,7 +5,7 @@ This article is a brief set of instructions to create the User Interface for wor
 
 After adding the library to your project, you can start building a User Interface to that library.
 
-#.  Create page ``GSS Page``
+#.  Create page ``GSS Session History Management``
 
     Properties: 
     
@@ -120,7 +120,7 @@ After adding the library to your project, you can start building a User Interfac
 
     #.  Download ``DownloadErrorWarningData``, 4 columns, 1 row.
 
-        procedure: ``pr_downloadErrorData``
+        procedure: ``gss::pr_downloadErrorData``
 
         title: ``"Download error data shown session"``
 
@@ -128,7 +128,7 @@ After adding the library to your project, you can start building a User Interfac
     
     #.  ``gss::pr_artificialDataGSSPage`` to have an artificial warning message and 
     
-    #.  ``gss::pr_openPageErrorWarningProfiler`` to ensure the GSS Page tables are filled properly.
+    #.  ``gss::pr_openPageErrorWarningProfiler`` to ensure the GSS Session History Management tables are filled properly.
     
     And then start manually adapting the column widths such that the contents fit neatly.
     

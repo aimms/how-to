@@ -22,7 +22,7 @@ Data flow for errors created in a data session
 
 #.  Data session errors are collected by the error handler ``gss::pr_appendError`` in the orange box "Data session errors" ``gss::dataSessionProfilerErrorData``.
 
-#.  When the WebUI page ``GSS page`` is opened, the yellow box is copied to the blue box, making the errors visible to the end-user.
+#.  When the WebUI page ``GSS Session History Management`` is opened, the yellow box is copied to the blue box, making the errors visible to the end-user.
 
 Data flow for errors created in a solver session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -33,12 +33,12 @@ Data flow for errors created in a solver session
 
 #.  Immediately after, this error information is copied to a slice in the green big box "Solver sessions and uploaded sessions".
 
-#.  When the WebUI page ``GSS page`` is opened, and the selection drop down selects this solver session, this error information is copied to the blue box (and shown).
+#.  When the WebUI page ``GSS Session History Management`` is opened, and the selection drop down selects this solver session, this error information is copied to the blue box (and shown).
 
 Data flow of profiler information
 ---------------------------------
 
-The profiler information is captured at the end of a solver session, or at the start of opening the "GSS page".
+The profiler information is captured at the end of a solver session, or at the start of opening the "GSS Session History Management".
 Then it follows the same path as the error information through the application before it is shown.
 
 

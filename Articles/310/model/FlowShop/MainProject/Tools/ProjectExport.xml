@@ -4,5 +4,6 @@
 	<ExcludedFile>log</ExcludedFile>
 	<ExcludedFile>PROTemp</ExcludedFile>
 	<ExcludedFile>tracings</ExcludedFile>
+	<ExcludedFile>pro_arguments_.txt</ExcludedFile>
 	<ExcludedFile>Library Repository (local copy)</ExcludedFile>
 </ExportSettings>

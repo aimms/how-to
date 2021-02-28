@@ -15,9 +15,9 @@
                 "slug": "home"
               },
               {
-                "name": "GSS page",
+                "name": "GSS Session History Management",
                 "type": "page",
-                "slug": "GSS_page",
+                "slug": "gss_session_history_management",
                 "children": [
                   {
                     "name": "ErrorPanel",
@@ -107,7 +107,7 @@
       "literal": "sidepanel"
     }
   },
-  "pages/GSS_page": {
+  "pages/gss_session_history_management": {
     "aimms.widget.type": {
       "literal": "page"
     },
@@ -245,6 +245,9 @@
     },
     "title": {
       "literal": "ClearError"
+    },
+    "name": {
+      "literal": "ClearError"
     }
   },
   "widgets/DownloadData": {
@@ -259,6 +262,9 @@
     },
     "title": {
       "literal": "Download Error Data"
+    },
+    "name": {
+      "literal": "DownloadData"
     }
   },
   "widgets/DownloadErrorReport": {
@@ -273,6 +279,9 @@
     },
     "title": {
       "literal": "Download error report shown session"
+    },
+    "name": {
+      "literal": "DownloadErrorReport"
     }
   },
   "widgets/downloadErrorWarningData": {
@@ -287,6 +296,9 @@
     },
     "title": {
       "literal": "Download error data shown session"
+    },
+    "name": {
+      "literal": "downloadErrorWarningData"
     }
   },
   "widgets/DownloadModelLog": {
@@ -306,6 +318,9 @@
         ],
         "slices": []
       }
+    },
+    "name": {
+      "literal": "DownloadModelLog"
     }
   },
   "widgets/DownloadReport": {
@@ -320,6 +335,9 @@
     },
     "title": {
       "literal": "Download Error Report"
+    },
+    "name": {
+      "literal": "DownloadReport"
     }
   },
   "widgets/ErrorWarningMessageTable": {
@@ -458,6 +476,9 @@
           }
         ]
       }
+    },
+    "name": {
+      "literal": "ErrorWarningMessageTable"
     }
   },
   "widgets/ErrorWarningStack": {
@@ -665,6 +686,9 @@
           }
         ]
       }
+    },
+    "name": {
+      "literal": "ErrorWarningStack"
     }
   },
   "widgets/GanttChart_Flowshop": {
@@ -741,6 +765,9 @@
     },
     "title": {
       "literal": "Flow shop Gantt Chart"
+    },
+    "name": {
+      "literal": "GanttChart_Flowshop"
     }
   },
   "widgets/JobProfilerData": {
@@ -900,6 +927,9 @@
           }
         ]
       }
+    },
+    "name": {
+      "literal": "JobProfilerData"
     }
   },
   "widgets/LineBasedProfilerData": {
@@ -1002,6 +1032,9 @@
         ],
         "slices": []
       }
+    },
+    "name": {
+      "literal": "LineBasedProfilerData"
     }
   },
   "widgets/ShownSession": {
@@ -1017,6 +1050,9 @@
           "gss::ep_shownSession"
         ]
       }
+    },
+    "name": {
+      "literal": "ShownSession"
     }
   },
   "widgets/UploadErrorData": {
@@ -1031,6 +1067,9 @@
     },
     "title": {
       "literal": "Upload Error Data"
+    },
+    "name": {
+      "literal": "UploadErrorData"
     }
   },
   "widgets/UploadErrorWarningData": {
@@ -1045,6 +1084,9 @@
     },
     "title": {
       "literal": "Upload Error Warning Data"
+    },
+    "name": {
+      "literal": "UploadErrorWarningData"
     }
   }
 }

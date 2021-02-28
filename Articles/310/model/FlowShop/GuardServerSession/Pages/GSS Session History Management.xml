@@ -4,6 +4,9 @@
 	<ProjectUUID>2E3D40FC-CE49-45B3-9165-530BE1EE8E94</ProjectUUID>
 	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
 	<Background Inherited="true" />
+	<Action>
+		<EntryProcedure>gss::pr_openPageErrorWarningProfiler</EntryProcedure>
+	</Action>
 	<PageObject Type="Table">
 		<Location top="66" left="18" bottom="348" right="576" />
 		<TabOrder>7</TabOrder>
@@ -15,19 +18,22 @@
 			<Identifier>gss::ep_shownJobErrorSeverity( gss::i_jobErrorMessageNumber-&gt;gss::ep_errorWarningSelectedMessage )</Identifier>
 			<FirstColumn>1</FirstColumn>
 			<HeaderText>"Severity"</HeaderText>
-			<NumberFormat Width="10" Decimals="0" Alignment="Left" />
+			<NumberFormat Width="8" Decimals="0" Alignment="Left" />
+			<ProcedureUponDblClick>gss::pr_openIdentifierOnMessageList</ProcedureUponDblClick>
 		</ExplicitIdentifier>
 		<ExplicitIdentifier>
-			<Identifier>gss::sp_jobErrorMoments( gss::i_jobErrorMessageNumber-&gt;gss::ep_errorWarningSelectedMessage )</Identifier>
+			<Identifier>gss::sp_shownJobErrorMoments( gss::i_jobErrorMessageNumber-&gt;gss::ep_errorWarningSelectedMessage )</Identifier>
 			<FirstColumn>1</FirstColumn>
 			<HeaderText>"Moment"</HeaderText>
-			<NumberFormat Width="10" Decimals="0" Alignment="Left" />
+			<NumberFormat Width="19" Decimals="0" Alignment="Left" />
+			<ProcedureUponDblClick>gss::pr_openIdentifierOnMessageList</ProcedureUponDblClick>
 		</ExplicitIdentifier>
 		<ExplicitIdentifier>
-			<Identifier>gss::sp_jobErrorMessages( gss::i_jobErrorMessageNumber-&gt;gss::ep_errorWarningSelectedMessage )</Identifier>
+			<Identifier>gss::sp_shownJobErrorMessages( gss::i_jobErrorMessageNumber-&gt;gss::ep_errorWarningSelectedMessage )</Identifier>
 			<FirstColumn>1</FirstColumn>
 			<HeaderText>"Message"</HeaderText>
 			<NumberFormat Width="80" Decimals="0" Alignment="Left" />
+			<ProcedureUponDblClick>gss::pr_openIdentifierOnMessageList</ProcedureUponDblClick>
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Scalar">
@@ -67,19 +73,22 @@
 			<Identifier>gss::ep_shownJobErrorNodes( gss::ep_errorWarningSelectedMessage, gss::i_stackPosition )</Identifier>
 			<Permutation>[1,0]</Permutation>
 			<FirstColumn>2</FirstColumn>
-			<NumberFormat Width="15" Decimals="0" />
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<ProcedureUponDblClick>gss::pr_openIdentifierOnStack</ProcedureUponDblClick>
 		</ExplicitIdentifier>
 		<ExplicitIdentifier>
 			<Identifier>gss::ep_shownJobErrorAttributes( gss::ep_errorWarningSelectedMessage, gss::i_stackPosition )</Identifier>
 			<Permutation>[1,0]</Permutation>
 			<FirstColumn>2</FirstColumn>
-			<NumberFormat Width="15" Decimals="0" />
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+			<ProcedureUponDblClick>gss::pr_openIdentifierOnStack</ProcedureUponDblClick>
 		</ExplicitIdentifier>
 		<ExplicitIdentifier>
 			<Identifier>gss::p_shownJobErrorLines( gss::ep_errorWarningSelectedMessage, gss::i_stackPosition )</Identifier>
 			<Permutation>[1,0]</Permutation>
 			<FirstColumn>2</FirstColumn>
-			<NumberFormat Width="7" Decimals="3" />
+			<NumberFormat Width="7" Decimals="0" Alignment="Center" />
+			<ProcedureUponDblClick>gss::pr_openIdentifierOnStack</ProcedureUponDblClick>
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Scalar">
@@ -131,6 +140,9 @@
 		<Contents>
 			<Explicit_Identifier>
 				<Identifier ID="4110">gss::p_shownJobProfilerData( IndexIdentifiers, '0', IndexProfilerTypes )</Identifier>
+				<Procedures_Assertions>
+					<On_Double_Click ID="4183">gss::pr_openIdentifierOnStack</On_Double_Click>
+				</Procedures_Assertions>
 			</Explicit_Identifier>
 		</Contents>
 		<Indices>
@@ -194,14 +206,28 @@
 		<ButtonType>Text</ButtonType>
 		<Title>"Upload Error Warning Data"</Title>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>gss::pr_uploadErrorDataWinUI</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Button">
 		<Location top="744" left="18" bottom="774" right="288" />
 		<TabOrder>10</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
-		<Title>"Upload Error Warning Data"</Title>
+		<Title>gss::sp_downloadActionLogTitle</Title>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>gss::pr_downloadActionLogWinUI</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Button">
 		<Location top="744" left="600" bottom="774" right="924" />
@@ -216,7 +242,7 @@
 		<TabOrder>12</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
-		<Title>"Upload Error Warning Data"</Title>
+		<Title>"Download error report"</Title>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
 	</PageObject>
 	<UsedReferences>
@@ -230,12 +256,18 @@
 			<Symbol>gss::ep_errorWarningSelectedMessage</Symbol>
 			<Symbol>gss::ep_shownSession</Symbol>
 			<Symbol>gss::p_shownJobProfilerData</Symbol>
+			<Symbol>gss::sp_shownJobErrorMessages</Symbol>
+			<Symbol>gss::sp_shownJobErrorMoments</Symbol>
 			<Symbol>gss::ep_shownJobErrorSeverity</Symbol>
 			<Symbol>gss::ep_shownJobErrorNodes</Symbol>
 			<Symbol>gss::ep_shownJobErrorAttributes</Symbol>
 			<Symbol>gss::p_shownJobErrorLines</Symbol>
-			<Symbol>gss::sp_jobErrorMessages</Symbol>
-			<Symbol>gss::sp_jobErrorMoments</Symbol>
+			<Symbol>gss::pr_uploadErrorDataWinUI</Symbol>
+			<Symbol>gss::pr_openIdentifierOnStack</Symbol>
+			<Symbol>gss::pr_openIdentifierOnMessageList</Symbol>
+			<Symbol>gss::sp_downloadActionLogTitle</Symbol>
+			<Symbol>gss::pr_openPageErrorWarningProfiler</Symbol>
+			<Symbol>gss::pr_downloadActionLogWinUI</Symbol>
 			<Symbol>gss::i_lineNumber</Symbol>
 			<Symbol>gss::i_stackPosition</Symbol>
 			<Symbol>gss::i_jobErrorMessageNumber</Symbol>
