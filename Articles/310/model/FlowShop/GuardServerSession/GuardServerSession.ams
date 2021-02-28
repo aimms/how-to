@@ -301,63 +301,7 @@ LibraryModule Library_GuardServerSession {
 							formatString("Going to show %e", 
 								ep_shownSession));
 						block 
-							empty Shown_session_data_exchange ;
-						
-							sp_shownSessionDescription :=
-								if ep_shownSession = first( s_trackedSessions ) then
-									"data session"
-								else
-									sp_sessionGivenDescriptions(ep_shownSession)
-								endif ;
-						
-							p_shownJobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes ) := 
-								if ep_shownSession <> first( s_trackedSessions ) then
-									p_trackedJobProfilerData(ep_shownSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
-								else
-									p_dataSessionProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
-								endif;
-						
-							sp_shownJobErrorMessages(i_jobErrorMessageNumber) := 
-								if ep_shownSession <> first( s_trackedSessions ) then
-									sp_trackedJobErrorMessages(ep_shownSession, i_jobErrorMessageNumber)
-								else
-									sp_dataSessionErrorMessages(i_jobErrorMessageNumber)
-								endif ;
-						
-							sp_shownJobErrorMoments(i_jobErrorMessageNumber) := 
-								if ep_shownSession <> first( s_trackedSessions ) then
-									sp_trackedJobErrorMoments(ep_shownSession, i_jobErrorMessageNumber)
-								else
-									sp_dataSessionErrorMoments(i_jobErrorMessageNumber)
-								endif;
-						
-							ep_shownJobErrorSeverity(i_jobErrorMessageNumber) := 
-								if ep_shownSession <> first( s_trackedSessions ) then
-									ep_trackedJobErrorSeverity(ep_shownSession, i_jobErrorMessageNumber)
-								else
-									ep_dataSessionErrorSeverity(i_jobErrorMessageNumber)
-								endif;
-						
-							ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition) := 
-								if ep_shownSession <> first( s_trackedSessions ) then
-									ep_trackedJobErrorNodes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
-								else
-									ep_dataSessionErrorNodes(i_jobErrorMessageNumber,i_stackPosition)
-								endif;
-						
-							ep_shownJobErrorAttributes(i_jobErrorMessageNumber, i_stackPosition) := 
-								if ep_shownSession <> first( s_trackedSessions ) then
-									ep_trackedJobErrorAttributes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
-								else
-									ep_dataSessionErrorAttributes(i_jobErrorMessageNumber,i_stackPosition)
-								endif;
-						
-							p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition) := 
-								if ep_shownSession <> first( s_trackedSessions ) then
-									p_trackedJobErrorLines(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
-								else
-									p_dataSessionErrorLines(i_jobErrorMessageNumber,i_stackPosition)
-								endif;
+							pr_showSelectedSessionInUI();
 						onerror ep_err do
 							pr_appendError( ep_err );
 							errh::MarkAsHandled( ep_err );
@@ -610,7 +554,6 @@ LibraryModule Library_GuardServerSession {
 						
 							gss::pr_initErrorHandlingDownloadUploadButtons( ep_stat, statusCode,  statusDescription, bp_download:1 );
 						
-							!fileLocation := formatString("%e.errors.json", ep_shownSession );
 							fileLocation := formatString("%e.errors", ep_shownSession );
 						
 							! we store the location of the file in string parameter sp_FinalLocation
@@ -618,26 +561,17 @@ LibraryModule Library_GuardServerSession {
 						
 							! writing the string parameter FinalLocation to a text file
 							sp_shownSessionDescription := sp_sessionGivenDescriptions( ep_shownSession );
-							block where single_column_display := 1;
-								write Shown_session_data_exchange to file sp_finalLocation ;
-							endblock ;
+							pr_downloadErrorDataWork( sp_finalLocation );
 						
 							! checking if the previous write statement was successful or not
-							if FileExists(sp_finalLocation) then
-						
-								! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
-								StatusCode := webui::ReturnStatusCode('CREATED');
-								! displaying the status message as All perfect instead of the default "File ready to download"
-								StatusDescription := "All perfect!";
-						
-							else    ! if previous write statement was not successful
-						
-								! setting the statusCode to 'ERROR' and the download widget will not show the Get button anymore
-								statusCode := webui::ReturnStatusCode('ERROR');
-								! displaying a custom error message
-								statusDescription := "Something went wrong when creating the file.";
-						
+							if not FileExists(sp_finalLocation) then
+								raise error FormatString("Error creating error data file %s", sp_finalLocation );
 							endif;
+						
+							! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
+							StatusCode := webui::ReturnStatusCode('CREATED');
+							! displaying the status message as All perfect instead of the default "File ready to download"
+							StatusDescription := "Succesfully downloaded error data file to " + fileLocation ;
 						
 						onerror ep_err do
 						
@@ -671,6 +605,38 @@ LibraryModule Library_GuardServerSession {
 						Parameter p_gssMiU;
 					}
 				}
+				Procedure pr_downloadErrorDataFileWinUI {
+					Body: {
+						pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						block 
+							if FileSelectNew(
+									filename  :  sp_filename, 
+									directory :  "", 
+									extension :  ".errors", 
+									title     :  "Please select filename for error report") then
+								pr_downloadErrorDataWork( sp_filename );
+							else
+								raise warning "User cancelled out of dialog to create error report" ;
+							endif ;
+						onerror ep_err do
+							gss::pr_appendError( ep_err );
+							errh::MarkAsHandled( ep_err );
+						endblock ;
+						pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					}
+					DeclarationSection local_Declarations {
+						StringParameter sp_filename;
+					}
+					DeclarationSection gss_logging_declarations {
+						StringParameter sp_gssTime;
+						Parameter p_gssMiU;
+					}
+					DeclarationSection error_reference_declaration {
+						ElementParameter ep_err {
+							Range: errh::PendingErrors;
+						}
+					}
+				}
 				Procedure pr_downloadErrorReport {
 					Arguments: (fileLocation,statusCode,statusDescription);
 					Body: {
@@ -684,25 +650,18 @@ LibraryModule Library_GuardServerSession {
 							sp_finalLocation := webui::GetIOFilePath(fileLocation);
 						
 							! writing the string parameter FinalLocation to a text file
-							pr_openPageErrorWarningProfiler();
 							pr_reportCurrentErrorsToTextFile( sp_finalLocation );
 						
 							! checking if the previous write statement was successful or not
-							if FileExists(sp_finalLocation) then
-						
-								! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
-								StatusCode := webui::ReturnStatusCode('CREATED');
-								! displaying the status message as All perfect instead of the default "File ready to download"
-								StatusDescription := "All perfect!";
-						
-							else    !if previous write statement was not successful
-						
-								! setting the statusCode to 'ERROR' and the download widget will not show the Get button anymore
-								statusCode := webui::ReturnStatusCode('ERROR');
-								!displaying a custom error message
-								statusDescription := "Something went wrong when creating the file.";
-						
+							if not FileExists(sp_finalLocation) then
+								raise error FormatString("Error creating error report to file %s", sp_finalLocation );
 							endif;
+						
+							! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
+							StatusCode := webui::ReturnStatusCode('CREATED');
+							! displaying the status message as All perfect instead of the default "File ready to download"
+							StatusDescription := "Succesfully downloaded error report of data session to " + fileLocation ;
+						
 						
 						onerror ep_err do
 						
@@ -736,7 +695,100 @@ LibraryModule Library_GuardServerSession {
 						Range: errh::AllErrorSeverities;
 					}
 				}
-				Procedure pr_downloadErrorReportWinUI;
+				Procedure pr_downloadErrorReportSidePanel {
+					Arguments: (fileLocation,statusCode,statusDescription);
+					Body: {
+						gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						block 
+							gss::pr_initErrorHandlingDownloadUploadButtons( ep_stat, statusCode,  statusDescription, bp_download:1 );
+						
+							fileLocation := "usage.errorLogging";
+						
+							! we store the location of the file in string parameter FinalLocation
+							sp_finalLocation := webui::GetIOFilePath(fileLocation);
+						
+							! writing the string parameter FinalLocation to a text file
+							pr_openPageErrorWarningProfiler();
+							pr_reportCurrentErrorsToTextFile( sp_finalLocation );
+						
+							! checking if the previous write statement was successful or not
+							if not FileExists(sp_finalLocation) then
+								raise error FormatString("Error creating error report to file %s", sp_finalLocation );
+							endif;
+						
+							! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
+							StatusCode := webui::ReturnStatusCode('CREATED');
+							! displaying the status message as All perfect instead of the default "File ready to download"
+							StatusDescription := "Succesfully downloaded error report of data session to " + fileLocation ;
+						
+						onerror ep_err do
+						
+							gss::pr_appendError(ep_err);
+							gss::pr_uploadDownloadWidgetErrorHandling( ep_err, ep_stat, statusCode, statusDescription); 
+						
+							errh::MarkAsHandled(ep_err);
+						
+						endblock ;
+						gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					}
+					Comment: {
+						"Download the error data in a readable report.
+						Invoked via sidepanel."
+					}
+					DeclarationSection gss_logging_declarations {
+						StringParameter sp_gssTime;
+						Parameter p_gssMiU;
+					}
+					StringParameter fileLocation {
+						Property: Output;
+					}
+					Parameter statusCode {
+						Property: Output;
+					}
+					StringParameter statusDescription {
+						Property: Output;
+					}
+					StringParameter sp_finalLocation;
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
+					ElementParameter ep_stat {
+						Range: errh::AllErrorSeverities;
+					}
+				}
+				Procedure pr_downloadErrorReportWinUI {
+					Body: {
+						pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						block 
+							if FileSelectNew(
+									filename  :  sp_filename, 
+									directory :  "", 
+									extension :  ".errorLogging", 
+									title     :  "Please select filename for error report") then
+								pr_reportCurrentErrorsToTextFile( sp_filename );
+							else
+								pr_downloadErrorDataWork( sp_filename );
+								raise warning "User cancelled out of dialog to create error report" ;
+							endif ;
+						onerror ep_err do
+							gss::pr_appendError( ep_err );
+							errh::MarkAsHandled( ep_err );
+						endblock ;
+						pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					}
+					DeclarationSection local_Declarations {
+						StringParameter sp_filename;
+					}
+					DeclarationSection gss_logging_declarations {
+						StringParameter sp_gssTime;
+						Parameter p_gssMiU;
+					}
+					DeclarationSection error_reference_declaration {
+						ElementParameter ep_err {
+							Range: errh::PendingErrors;
+						}
+					}
+				}
 			}
 			Section Data_session {
 				Property: NoSave;
@@ -1437,22 +1489,11 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_openPageErrorWarningProfiler {
 				Body: {
 					pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					
 					ep_shownSession := first( s_trackedSessions );
+					pr_storeErrorProfilerDataFromDataSessionInTrackedSessions();
+					pr_showSelectedSessionInUI();
 					
-					ProfilerCollectAllData(
-						ProfilerData       :  p_dataSessionProfilerData, 
-						GrossTimeThreshold :  0, 
-						NetTimeThreshold   :  0);
-					
-					p_trackedJobProfilerData(ep_shownSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes) := p_dataSessionProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes);
-					sp_trackedJobErrorMessages(ep_shownSession, i_jobErrorMessageNumber) := sp_dataSessionErrorMessages(i_jobErrorMessageNumber);
-					sp_trackedJobErrorMoments(ep_shownSession, i_jobErrorMessageNumber) := sp_dataSessionErrorMoments(i_jobErrorMessageNumber);
-					ep_trackedJobErrorSeverity(ep_shownSession, i_jobErrorMessageNumber) := ep_dataSessionErrorSeverity(i_jobErrorMessageNumber);
-					ep_trackedJobErrorNodes(ep_shownSession, i_jobErrorMessageNumber, i_stackPosition) := ep_dataSessionErrorNodes(i_jobErrorMessageNumber, i_stackPosition);
-					ep_trackedJobErrorAttributes(ep_shownSession, i_jobErrorMessageNumber, i_stackPosition) := ep_dataSessionErrorAttributes(i_jobErrorMessageNumber, i_stackPosition);
-					p_trackedJobErrorLines(ep_shownSession, i_jobErrorMessageNumber, i_stackPosition) := p_dataSessionErrorLines(i_jobErrorMessageNumber, i_stackPosition);
-					
-					pr_uponChangeShownSession();
 					pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 				}
 				Comment: "The procedure that is run upon opening the page \"GSS Session History Management\"";
@@ -1900,6 +1941,17 @@ LibraryModule Library_GuardServerSession {
 						Range: s_trackedSessions;
 					}
 				}
+				Procedure pr_downloadErrorDataWork {
+					Arguments: (sp_finalLocation);
+					Body: {
+						block where single_column_display := 1;
+							write Shown_session_data_exchange to file sp_finalLocation ;
+						endblock ;
+					}
+					StringParameter sp_finalLocation {
+						Property: Input;
+					}
+				}
 			}
 			Parameter bp_locSeenErrorsAreHandled {
 				Range: binary;
@@ -1915,6 +1967,22 @@ LibraryModule Library_GuardServerSession {
 			}
 			ElementParameter ep_jobIncident {
 				Range: s_jobErrorMessageNumbers;
+			}
+			Procedure pr_storeErrorProfilerDataFromDataSessionInTrackedSessions {
+				Body: {
+					ProfilerCollectAllData(
+						ProfilerData       :  p_dataSessionProfilerData, 
+						GrossTimeThreshold :  0, 
+						NetTimeThreshold   :  0);
+					
+					p_trackedJobProfilerData(ep_shownSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes) := p_dataSessionProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes);
+					sp_trackedJobErrorMessages(ep_shownSession, i_jobErrorMessageNumber) := sp_dataSessionErrorMessages(i_jobErrorMessageNumber);
+					sp_trackedJobErrorMoments(ep_shownSession, i_jobErrorMessageNumber) := sp_dataSessionErrorMoments(i_jobErrorMessageNumber);
+					ep_trackedJobErrorSeverity(ep_shownSession, i_jobErrorMessageNumber) := ep_dataSessionErrorSeverity(i_jobErrorMessageNumber);
+					ep_trackedJobErrorNodes(ep_shownSession, i_jobErrorMessageNumber, i_stackPosition) := ep_dataSessionErrorNodes(i_jobErrorMessageNumber, i_stackPosition);
+					ep_trackedJobErrorAttributes(ep_shownSession, i_jobErrorMessageNumber, i_stackPosition) := ep_dataSessionErrorAttributes(i_jobErrorMessageNumber, i_stackPosition);
+					p_trackedJobErrorLines(ep_shownSession, i_jobErrorMessageNumber, i_stackPosition) := p_dataSessionErrorLines(i_jobErrorMessageNumber, i_stackPosition);
+				}
 			}
 			Procedure pr_reportCurrentErrorsToTextFile {
 				Arguments: (sp_filename);
@@ -1945,6 +2013,67 @@ LibraryModule Library_GuardServerSession {
 					Name: sp_filename;
 					Device: Disk;
 					Mode: replace;
+				}
+			}
+			Procedure pr_showSelectedSessionInUI {
+				Body: {
+					empty Shown_session_data_exchange ;
+					
+					sp_shownSessionDescription :=
+						if ep_shownSession = first( s_trackedSessions ) then
+							"data session"
+						else
+							sp_sessionGivenDescriptions(ep_shownSession)
+						endif ;
+					
+					p_shownJobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes ) := 
+						if ep_shownSession <> first( s_trackedSessions ) then
+							p_trackedJobProfilerData(ep_shownSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
+						else
+							p_dataSessionProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes)
+						endif;
+					
+					sp_shownJobErrorMessages(i_jobErrorMessageNumber) := 
+						if ep_shownSession <> first( s_trackedSessions ) then
+							sp_trackedJobErrorMessages(ep_shownSession, i_jobErrorMessageNumber)
+						else
+							sp_dataSessionErrorMessages(i_jobErrorMessageNumber)
+						endif ;
+					
+					sp_shownJobErrorMoments(i_jobErrorMessageNumber) := 
+						if ep_shownSession <> first( s_trackedSessions ) then
+							sp_trackedJobErrorMoments(ep_shownSession, i_jobErrorMessageNumber)
+						else
+							sp_dataSessionErrorMoments(i_jobErrorMessageNumber)
+						endif;
+					
+					ep_shownJobErrorSeverity(i_jobErrorMessageNumber) := 
+						if ep_shownSession <> first( s_trackedSessions ) then
+							ep_trackedJobErrorSeverity(ep_shownSession, i_jobErrorMessageNumber)
+						else
+							ep_dataSessionErrorSeverity(i_jobErrorMessageNumber)
+						endif;
+					
+					ep_shownJobErrorNodes(i_jobErrorMessageNumber, i_stackPosition) := 
+						if ep_shownSession <> first( s_trackedSessions ) then
+							ep_trackedJobErrorNodes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
+						else
+							ep_dataSessionErrorNodes(i_jobErrorMessageNumber,i_stackPosition)
+						endif;
+					
+					ep_shownJobErrorAttributes(i_jobErrorMessageNumber, i_stackPosition) := 
+						if ep_shownSession <> first( s_trackedSessions ) then
+							ep_trackedJobErrorAttributes(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
+						else
+							ep_dataSessionErrorAttributes(i_jobErrorMessageNumber,i_stackPosition)
+						endif;
+					
+					p_shownJobErrorLines(i_jobErrorMessageNumber, i_stackPosition) := 
+						if ep_shownSession <> first( s_trackedSessions ) then
+							p_trackedJobErrorLines(ep_shownSession, i_jobErrorMessageNumber,i_stackPosition)
+						else
+							p_dataSessionErrorLines(i_jobErrorMessageNumber,i_stackPosition)
+						endif;
 				}
 			}
 			Procedure pr_sampleProc {

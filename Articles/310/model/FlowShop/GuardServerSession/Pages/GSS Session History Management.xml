@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Page Version="4000" TimeStamp="2021-02-26 06:47:20">
+<Page Version="4000" TimeStamp="2021-02-28 14:50:51">
 	<PageEditSize Type="Inherited" />
 	<ProjectUUID>2E3D40FC-CE49-45B3-9165-530BE1EE8E94</ProjectUUID>
 	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
@@ -234,8 +234,15 @@
 		<TabOrder>11</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
-		<Title>"Upload Error Warning Data"</Title>
+		<Title>"Download Error Warning Data"</Title>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>gss::pr_downloadErrorDataFileWinUI</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Button">
 		<Location top="744" left="306" bottom="774" right="576" />
@@ -244,6 +251,13 @@
 		<ButtonType>Text</ButtonType>
 		<Title>"Download error report"</Title>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>gss::pr_downloadErrorReportWinUI</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
 	</PageObject>
 	<UsedReferences>
 		<Model>
@@ -263,6 +277,7 @@
 			<Symbol>gss::ep_shownJobErrorAttributes</Symbol>
 			<Symbol>gss::p_shownJobErrorLines</Symbol>
 			<Symbol>gss::pr_uploadErrorDataWinUI</Symbol>
+			<Symbol>gss::pr_downloadErrorReportWinUI</Symbol>
 			<Symbol>gss::pr_openIdentifierOnStack</Symbol>
 			<Symbol>gss::pr_openIdentifierOnMessageList</Symbol>
 			<Symbol>gss::sp_downloadActionLogTitle</Symbol>
@@ -271,6 +286,7 @@
 			<Symbol>gss::i_lineNumber</Symbol>
 			<Symbol>gss::i_stackPosition</Symbol>
 			<Symbol>gss::i_jobErrorMessageNumber</Symbol>
+			<Symbol>gss::pr_downloadErrorDataFileWinUI</Symbol>
 		</Model>
 	</UsedReferences>
 </Page>
