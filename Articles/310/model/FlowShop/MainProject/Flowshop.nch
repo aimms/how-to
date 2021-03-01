@@ -81,3 +81,6 @@
 "pr_BtnSolve" "prbtnSolve" "2020-10-19 12:01:51"
 "prbtnSolve" "pr_btnSolve" "2020-10-19 12:01:55"
 "gss::SI_Time_Duration" "SI_Time_Duration" "2020-12-01 12:58:52"
+"InterfaceStartTime" "p_interfaceStartTime" "2021-03-01 06:49:55"
+"InterfaceProcesTime" "p_iInterfaceProcesTime" "2021-03-01 06:50:10"
+"p_iInterfaceProcesTime" "p_interfaceProcesTime" "2021-03-01 06:50:17"

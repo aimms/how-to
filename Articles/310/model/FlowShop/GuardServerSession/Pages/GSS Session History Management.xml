@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Page Version="4000" TimeStamp="2021-02-28 14:50:51">
+<Page Version="4000" TimeStamp="2021-03-01 08:44:17">
 	<PageEditSize Type="Inherited" />
 	<ProjectUUID>2E3D40FC-CE49-45B3-9165-530BE1EE8E94</ProjectUUID>
 	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
@@ -197,6 +197,7 @@
 		<ExplicitIdentifier>
 			<Identifier>gss::ep_shownSession</Identifier>
 			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+			<ProcedureUponChange>gss::pr_uponChangeShownSession</ProcedureUponChange>
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Button">
@@ -269,6 +270,7 @@
 			<Symbol>gss::ep_profilerDataSelectedIdentifier</Symbol>
 			<Symbol>gss::ep_errorWarningSelectedMessage</Symbol>
 			<Symbol>gss::ep_shownSession</Symbol>
+			<Symbol>gss::pr_uponChangeShownSession</Symbol>
 			<Symbol>gss::p_shownJobProfilerData</Symbol>
 			<Symbol>gss::sp_shownJobErrorMessages</Symbol>
 			<Symbol>gss::sp_shownJobErrorMoments</Symbol>
@@ -277,6 +279,7 @@
 			<Symbol>gss::ep_shownJobErrorAttributes</Symbol>
 			<Symbol>gss::p_shownJobErrorLines</Symbol>
 			<Symbol>gss::pr_uploadErrorDataWinUI</Symbol>
+			<Symbol>gss::pr_downloadErrorDataFileWinUI</Symbol>
 			<Symbol>gss::pr_downloadErrorReportWinUI</Symbol>
 			<Symbol>gss::pr_openIdentifierOnStack</Symbol>
 			<Symbol>gss::pr_openIdentifierOnMessageList</Symbol>
@@ -286,7 +289,6 @@
 			<Symbol>gss::i_lineNumber</Symbol>
 			<Symbol>gss::i_stackPosition</Symbol>
 			<Symbol>gss::i_jobErrorMessageNumber</Symbol>
-			<Symbol>gss::pr_downloadErrorDataFileWinUI</Symbol>
 		</Model>
 	</UsedReferences>
 </Page>

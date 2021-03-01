@@ -453,6 +453,7 @@ LibraryModule Library_GuardServerSession {
 						if not ep_trackedSession then
 							raise error "pr_saveTrackedSessionData() unable to create effective session id";
 						endif ;
+						pr_logMsg("s_trackedSessions = "+s_trackedSessions);
 						
 						p_trackedJobProfilerData(ep_trackedSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes) := p_jobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes);
 						
@@ -534,6 +535,7 @@ LibraryModule Library_GuardServerSession {
 						endblock ;
 						pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 					}
+					Comment: "Upload error and profiler data procedure Used in WinUI GSS Session History Management page";
 					DeclarationSection gss_logging_declarations {
 						StringParameter sp_gssTime;
 						Parameter p_gssMiU;
@@ -609,23 +611,26 @@ LibraryModule Library_GuardServerSession {
 					Body: {
 						pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 						block 
-							if FileSelectNew(
-									filename  :  sp_filename, 
-									directory :  "", 
-									extension :  ".errors", 
-									title     :  "Please select filename for error report") then
-								pr_downloadErrorDataWork( sp_filename );
-							else
-								raise warning "User cancelled out of dialog to create error report" ;
-							endif ;
+							pr_getDownloadFolder( /* output */ sp_downloadFolder );
+							sp_outfn := 
+								if ep_shownSession then 
+									formatString("%e.errors", ep_shownSession ) 
+								else 
+									"usage.errors" 
+								endif ;
+							sp_filename := sp_downloadFolder + "\\" + sp_outfn ;
+							pr_downloadErrorDataWork( sp_filename );
 						onerror ep_err do
 							gss::pr_appendError( ep_err );
 							errh::MarkAsHandled( ep_err );
 						endblock ;
 						pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 					}
+					Comment: "Download error and profiler data procedure Used in WinUI GSS Session History Management page";
 					DeclarationSection local_Declarations {
 						StringParameter sp_filename;
+						StringParameter sp_downloadFolder;
+						StringParameter sp_outfn;
 					}
 					DeclarationSection gss_logging_declarations {
 						StringParameter sp_gssTime;
@@ -644,7 +649,7 @@ LibraryModule Library_GuardServerSession {
 						block 
 							gss::pr_initErrorHandlingDownloadUploadButtons( ep_stat, statusCode,  statusDescription, bp_download:1 );
 						
-							fileLocation := "usage.errorLogging";
+							fileLocation := if ep_shownSession then formatString("%e.errorLogging", ep_shownSession ) else "usage.errorLogging" endif ;
 						
 							! we store the location of the file in string parameter FinalLocation
 							sp_finalLocation := webui::GetIOFilePath(fileLocation);
@@ -659,9 +664,9 @@ LibraryModule Library_GuardServerSession {
 						
 							! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
 							StatusCode := webui::ReturnStatusCode('CREATED');
+						
 							! displaying the status message as All perfect instead of the default "File ready to download"
 							StatusDescription := "Succesfully downloaded error report of data session to " + fileLocation ;
-						
 						
 						onerror ep_err do
 						
@@ -673,7 +678,7 @@ LibraryModule Library_GuardServerSession {
 						endblock ;
 						gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 					}
-					Comment: "Download the error data in a readable report.";
+					Comment: "Download the error data in a readable report, invoked via the WebUI GSS Session History Management page";
 					DeclarationSection gss_logging_declarations {
 						StringParameter sp_gssTime;
 						Parameter p_gssMiU;
@@ -760,24 +765,23 @@ LibraryModule Library_GuardServerSession {
 					Body: {
 						pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 						block 
-							if FileSelectNew(
-									filename  :  sp_filename, 
-									directory :  "", 
-									extension :  ".errorLogging", 
-									title     :  "Please select filename for error report") then
-								pr_reportCurrentErrorsToTextFile( sp_filename );
-							else
-								pr_downloadErrorDataWork( sp_filename );
-								raise warning "User cancelled out of dialog to create error report" ;
-							endif ;
+							pr_getDownloadFolder( /* output */ sp_downloadFolder );
+							sp_outfn := if ep_shownSession then formatString("%e.errorLogging", ep_shownSession ) else "usage.errorLogging" endif ;
+							sp_filename := sp_downloadFolder + "\\" + sp_outfn ;
+						
+							pr_reportCurrentErrorsToTextFile( sp_filename );
+						
 						onerror ep_err do
 							gss::pr_appendError( ep_err );
 							errh::MarkAsHandled( ep_err );
 						endblock ;
 						pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 					}
+					Comment: "Download the error dat as a readable report, invoked via WinUI GSS Session History Management page";
 					DeclarationSection local_Declarations {
 						StringParameter sp_filename;
+						StringParameter sp_downloadFolder;
+						StringParameter sp_outfn;
 					}
 					DeclarationSection gss_logging_declarations {
 						StringParameter sp_gssTime;
@@ -1146,6 +1150,7 @@ LibraryModule Library_GuardServerSession {
 				Procedure LoadResultsCallBack {
 					Arguments: (sp_requestID);
 					Body: {
+						pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 						block
 							pro::session::LoadResultsCallBack(sp_requestID);
 							gss::pr_saveTrackedSessionData( sp_requestID );
@@ -1153,10 +1158,15 @@ LibraryModule Library_GuardServerSession {
 							pr_appendError( ep_err );
 							errh::MarkAsHandled( ep_err );
 						endblock ;
+						pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 					}
 					Comment: {
 						"The normal load results callback and store error and profiler data of the solver session
 						in the Tracked sessions container."
+					}
+					DeclarationSection gss_logging_declarations {
+						StringParameter sp_gssTime;
+						Parameter p_gssMiU;
 					}
 					StringParameter sp_requestID {
 						Property: Input;
@@ -1672,55 +1682,26 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_downloadActionLog {
 				Arguments: (FileLocation,StatusCode,StatusDescription);
 				Body: {
-					Block
-						!FileLocation := "circle.png";
-						sp_slash := "/" ;
-						if ep_shownSession <> first( s_trackedSessions ) then
-							! The first tracked session is the data session.
-							! The other session, are server sessions, and they are stored
-							! in /Userdata/<env>/<user>/<model>/tracings" + 
-							sp_proStorageFilename := sp_slash + "Userdata" + sp_slash + 
-								pro::GetPROEnvironment() + sp_slash + 
-								pro::GetPROUserName()    + sp_slash + 
-								pro::ModelName           + sp_slash + 
-								"tracings"               + sp_slash + 
-								ep_shownSession          + ".actionLog";
-							sp_localTraceFilename := "tracings" + sp_slash + ep_shownSession + ".actionLog" ;
-							! Copy the .actionLog file from AIMMS PRO storage to the folder "tracings".
-							pro::RetrieveFileFromCentralStorage(
-								storagePath :  sp_proStorageFilename, 
-								localPath   :  sp_localTraceFilename);
-						else
-							sp_localTraceFilename := sp_traceFilename ;
-						endif ;
-						p_slashFwd := FindNthString( sp_localTraceFilename, "/", -1 );
-						p_slashBwd := FindNthString( sp_localTraceFilename, "\\", -1 );
-						p_slash := max( p_slashFwd, p_slashBwd);
-						if p_slash then
-							p_len := StringLength( sp_localTraceFilename );
-							fileLocation := SubString( sp_localTraceFilename, p_slash+1, p_len); 
-							FileCopy( sp_localTraceFilename, fileLocation );
-						else
-							fileLocation := sp_localTraceFilename;
-						endif ;
+					block
+						pr_downloadActionLogWork( /* inout */ fileLocation );
+					
 						sp_fullFileLocation := webui::GetIOFilePath(FileLocation);
 						if FileLocation <> sp_fullFileLocation then
 							FileCopy( FileLocation, sp_fullFileLocation );
 						endif ;
 					
 						StatusCode := webui::ReturnStatusCode('CREATED');
-						StatusDescription := "Nice.";
-					OnError ep_err Do
+						StatusDescription := formatString( "Succesfully downloaded action log %s", fileLocation);
+					onerror ep_err Do
 						if errh::Severity( ep_err ) <> 'warning' then
 							StatusCode := webui::ReturnStatusCode('ERROR');
 							StatusDescription := "Oops: " + errh::Message(ep_err) ;
 							errh::MarkAsHandled(ep_err);
 							break ; ! Trick to reporting one error.
 						endif ;
-					EndBlock ;
+					endblock ;
 				}
-				StringParameter sp_proStorageFilename;
-				StringParameter sp_localTraceFilename;
+				Comment: "Download action log WebUI button GSS Session History Management page.";
 				StringParameter FileLocation {
 					Property: Output;
 				}
@@ -1734,29 +1715,26 @@ LibraryModule Library_GuardServerSession {
 				ElementParameter ep_err {
 					Range: errh::PendingErrors;
 				}
-				Parameter p_slashFwd;
-				Parameter p_slashBwd;
-				Parameter p_slash;
-				Parameter p_len;
-				StringParameter sp_slash;
 			}
 			Procedure pr_downloadActionLogWinUI {
 				Body: {
 					pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 					block 
-						p_retFSN := FileSelectNew(
-							filename  :  sp_outfn, 
-							directory :  "", 
-							extension :  ".actionLog", 
-							title     :  "Please select filename for actionlog");
 						pr_downloadActionLogWork(sp_outfn);
-						! Call procedure to do the actual work.
+						pr_getDownloadFolder( /* output */ sp_downloadFolder );
+					
+						if not FileCopy( sp_outfn, sp_downloadFolder + "\\" + sp_outfn ) then
+							raise error FormatString( 
+								"Unable to copy %s to download folder : %s", 
+								sp_outfn, CurrentErrorMessage );
+						endif ;
 					onerror ep_err do
 						gss::pr_appendError( ep_err );
 						errh::MarkAsHandled( ep_err );
 					endblock ;
 					pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 				}
+				Comment: "Download action log procedure Used in WinUI GSS Session History Management page";
 				DeclarationSection gss_logging_declarations {
 					StringParameter sp_gssTime;
 					Parameter p_gssMiU;
@@ -1766,6 +1744,7 @@ LibraryModule Library_GuardServerSession {
 						Range: errh::PendingErrors;
 					}
 				}
+				StringParameter sp_downloadFolder;
 				Parameter p_retFSN;
 				StringParameter sp_outfn;
 			}
@@ -1825,7 +1804,6 @@ LibraryModule Library_GuardServerSession {
 					! The error data shown should not be modified in the User Interface.
 					CurrentInputs -= serverSessionErrorData;
 					CurrentInputs -= Shown_session_data_exchange ;
-					
 					pr_GetThisSession(); 
 					
 					block ! Initialize logging
@@ -1944,6 +1922,9 @@ LibraryModule Library_GuardServerSession {
 				Procedure pr_downloadErrorDataWork {
 					Arguments: (sp_finalLocation);
 					Body: {
+						if not sp_finalLocation then
+							raise error "A file without a name cannot be written to";
+						endif ;
 						block where single_column_display := 1;
 							write Shown_session_data_exchange to file sp_finalLocation ;
 						endblock ;
@@ -2108,7 +2089,7 @@ LibraryModule Library_GuardServerSession {
 				Comment: "Get error possition for a new incident in a solver session (job).";
 			}
 		}
-		Section Inspect_utilities {
+		Section AIMMS_PRO_utilities {
 			Procedure pr_ensurePath {
 				Arguments: (sp_path);
 				Body: {
@@ -2221,15 +2202,27 @@ LibraryModule Library_GuardServerSession {
 				}
 			}
 		}
-		Section Logging_utilities {
-			Section Section_1 {
-				Procedure pr_downloadActionLogWork {
-					Arguments: (sp_filename);
-					StringParameter sp_filename {
-						Property: Input;
-					}
+		Section Generic_utilities {
+			Procedure pr_getDownloadFolder {
+				Arguments: (sp_downloadFolderName);
+				Body: {
+					EnvironmentGetString(
+						Key   :  "USERPROFILE", 
+						Value :  sp_userProfile);
+					if not sp_userProfile then
+						sp_downloadFolderName := "c:\temp" ;
+						raise warning "fnc_getDownloadFolder(): Unable to obtain USERPROFILE" ;
+					else
+						sp_downloadFolderName := sp_userProfile + "\\downloads" ;
+					endif ;
 				}
+				StringParameter sp_downloadFolderName {
+					Property: Output;
+				}
+				StringParameter sp_userProfile;
 			}
+		}
+		Section Logging_utilities {
 			Procedure pr_openLogFile {
 				Body: {
 					f_traceFile.pagewidth := 32000 ;
@@ -2251,14 +2244,60 @@ LibraryModule Library_GuardServerSession {
 				}
 				Comment: "Open log file and add identifying first few lines.";
 			}
+			Procedure pr_downloadActionLogWork {
+				Arguments: (sp_filename);
+				Body: {
+					sp_slash := "/" ;
+					if ep_shownSession <> first( s_trackedSessions ) then
+						! The first tracked session is the data session.
+						! The other session, are server sessions, and they are stored
+						! in /Userdata/<env>/<user>/<model>/tracings" + 
+						sp_proStorageFilename := sp_slash + "Userdata" + sp_slash + 
+							pro::GetPROEnvironment() + sp_slash + 
+							pro::GetPROUserName()    + sp_slash + 
+							pro::ModelName           + sp_slash + 
+							sp_tracingsFolderName    + sp_slash + 
+							ep_shownSession          + ".actionLog";
+						sp_localTraceFilename := sp_tracingsFolderName + sp_slash + ep_shownSession + ".actionLog" ;
+						! Copy the .actionLog file from AIMMS PRO storage to the folder "tracings".
+						pro::RetrieveFileFromCentralStorage(
+							storagePath :  sp_proStorageFilename, 
+							localPath   :  sp_localTraceFilename);
+					else
+						sp_localTraceFilename := sp_traceFilename ;
+					endif ;
+					p_slashFwd := FindNthString( sp_localTraceFilename, "/", -1 );
+					p_slashBwd := FindNthString( sp_localTraceFilename, "\\", -1 );
+					p_slash := max( p_slashFwd, p_slashBwd);
+					if p_slash then
+						p_len := StringLength( sp_localTraceFilename );
+						sp_filename := SubString( sp_localTraceFilename, p_slash+1, p_len); 
+						FileCopy( sp_localTraceFilename, sp_filename );
+					else
+						sp_filename := sp_localTraceFilename;
+					endif ;
+				}
+				StringParameter sp_filename {
+					Property: InOut;
+				}
+				StringParameter sp_slash;
+				StringParameter sp_proStorageFilename;
+				StringParameter sp_localTraceFilename;
+				Parameter p_slashFwd;
+				Parameter p_slashBwd;
+				Parameter p_slash;
+				Parameter p_len;
+			}
 			Procedure pr_GetThisSession {
 				Body: {
 					if pro::GetPROEndPoint() then
 						if pro::ReadArguments('_pro-webui-session-id') then
 							sp_thisSession := pro::ReadArguments('_pro-webui-session-id');
-					
 						else
 							sp_thisSession := pro::ReadArguments('_pro-session-id');
+							if not sp_thisSession then ! When AIMMS Developer is started with a connection to AIMMS PRO.
+								sp_thisSession := CurrentToString("%c%y%m%dT%H%M%S%t%TZ('UTC')");
+							endif ;
 						endif ;
 						pro::management::LocalLogInfo(formatString(
 							"pr_GetThisSession(): sp_thisSession = %s", sp_thisSession ));

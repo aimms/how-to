@@ -71,6 +71,7 @@ Model Main_Flow_Shop {
 					p_gcJobStart(j,m)  := v_startTime( first(s | bv_jobSchedule(j,s)),m);
 					p_gcJobDuration(j,m) := p_procesTime(j,m);
 				}
+				Comment: "Prepare parameters used in WebUI Gantt Chart.";
 			}
 			StringParameter sp_refTime {
 				Definition: "2000-01-01 01:01:01";
@@ -114,6 +115,21 @@ Model Main_Flow_Shop {
 					}
 				}
 			}
+		}
+	}
+	Section WinUI_support {
+		Parameter p_interfaceStartTime {
+			IndexDomain: (j,m);
+		}
+		Parameter p_interfaceProcesTime {
+			IndexDomain: (s,m);
+		}
+		Procedure pr_prepInterfaceWinUI {
+			Body: {
+				p_interfaceStartTime(j,m)  := v_startTime( first(s | bv_jobSchedule(j,s)),m);
+				p_interfaceProcesTime(s,m) := sum (j | bv_jobSchedule(j,s), p_procesTime(j,m));
+			}
+			Comment: "Set parameters used in WinUI Gantt Chart.";
 		}
 	}
 	Parameter p_maxJobs {
@@ -286,6 +302,7 @@ Model Main_Flow_Shop {
 			block 
 				raise warning "Don't look down" ;
 				pr_solve();
+				raise warning "Look up, it is raining ;-)" ;
 			onerror ep_err do
 				gss::pr_appendError( ep_err );
 				errh::MarkAsHandled( ep_err );
