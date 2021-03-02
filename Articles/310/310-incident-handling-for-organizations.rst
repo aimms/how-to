@@ -52,7 +52,7 @@ There are four articles on changing the application to make use of the ``GuardSe
 
 #.  how the application needs to be adapted to retrieve this information, see :doc:`eroror handling instructions<../310/310-errors-as-data>`
 
-    The error handling procedures of the `GuardServerSession` library turn incidents into data that is stored in AIMMS' sets and parameters.
+    The error handling procedures of the ``GuardServerSession`` library turn incidents into data that is stored in AIMMS' sets and parameters.
     The function :aimms:func:`ProfilerCollectAllData` does the same for profilerdata.
     This article discusses how the data flow of this information, and how it can be shared.
 

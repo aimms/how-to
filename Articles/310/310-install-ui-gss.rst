@@ -128,7 +128,7 @@ After adding the library to your project, you can start building a User Interfac
     
     #.  ``gss::pr_artificialDataGSSPage`` to have an artificial warning message and 
     
-    #.  ``gss::pr_openPageErrorWarningProfiler`` to ensure the GSS Session History Management tables are filled properly.
+    #.  ``gss::pr_openPageErrorWarningProfiler`` to ensure the ``GSS Session History Management`` tables are filled properly.
     
     And then start manually adapting the column widths such that the contents fit neatly.
     

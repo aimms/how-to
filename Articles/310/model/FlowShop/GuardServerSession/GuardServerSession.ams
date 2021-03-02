@@ -15,14 +15,14 @@ LibraryModule Library_GuardServerSession {
 	Section Public_Section {
 		Procedure pr_actionTemplate {
 			Body: {
-				pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+				gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 				block 
 					! Call procedure to do the actual work.
 				onerror ep_err do
 					gss::pr_appendError( ep_err );
 					errh::MarkAsHandled( ep_err );
 				endblock ;
-				pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+				gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
 			}
 			Comment: "Sample action procedure";
 			DeclarationSection gss_logging_declarations {

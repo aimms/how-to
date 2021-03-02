@@ -1,14 +1,23 @@
 The User Interface to the GSS Library
 ======================================
 
-The user interface is shown in the `GSS Session History Management` below:
+The User Interface for developers the user manage the Session History easily.
+The Session History consists of the following components:
+
+#.  Errors as data - we want both an overview of the errors in a session, as per error a stack of active identifiers such as defined parameters and procedures.
+
+#.  Profiler data - we want both an overview of the time taken by these 
+
+#.  Log files - those are not captured by tables, just by text editors :-( .
+
+The user interface is shown in the ``GSS Session History Management`` below:
 
 .. image:: images/gss-page.png
     :align: center
 
 Remarks:
 
-#.  The `GSS Session History Management` opens by clicking the GSS status bar.
+#.  The ``GSS Session History Management`` opens by clicking the GSS status bar.
 
 #.  The upper table on the left shows the error messages, with severity and creation moment.
 

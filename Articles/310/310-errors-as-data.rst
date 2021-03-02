@@ -38,7 +38,7 @@ Data flow for errors created in a solver session
 Data flow of profiler information
 ---------------------------------
 
-The profiler information is captured at the end of a solver session, or at the start of opening the "GSS Session History Management".
+The profiler information is captured at the end of a solver session, or at the start of opening the ``GSS Session History Management``.
 Then it follows the same path as the error information through the application before it is shown.
 
 
