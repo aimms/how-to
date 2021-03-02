@@ -1,4 +1,4 @@
-Incident handling for organizations
+Incident Handling for Organizations
 =============================================
 
 Thanks to extensive checking and clear reporting of incidents; end-users can handle several incidents themselves.
