@@ -24,6 +24,12 @@
                     "type": "sidepanel",
                     "slug": "errorpanel_1",
                     "children": []
+                  },
+                  {
+                    "name": "GSS Incident report",
+                    "type": "dialog",
+                    "slug": "gss_incident_report",
+                    "children": []
                   }
                 ]
               }
@@ -105,6 +111,35 @@
     },
     "aimms.widget.type": {
       "literal": "sidepanel"
+    }
+  },
+  "pages/gss_incident_report": {
+    "aimms.widget.type": {
+      "literal": "dialog"
+    },
+    "maxcolumns": {
+      "literal": 6
+    },
+    "maxrows": {
+      "literal": 3
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "IncidentSummary",
+          "layoutInfo": {
+            "width": "4",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "downloadIncidentSummary",
+          "layoutInfo": {
+            "width": "4",
+            "height": "1"
+          }
+        }
+      ]
     }
   },
   "pages/gss_session_history_management": {
@@ -299,6 +334,22 @@
     },
     "name": {
       "literal": "downloadErrorWarningData"
+    }
+  },
+  "widgets/downloadIncidentSummary": {
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "name": {
+      "literal": "downloadIncidentSummary"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "gss::sp_titleDowloadIncidentSummary"
+        ],
+        "slices": []
+      }
     }
   },
   "widgets/DownloadModelLog": {
@@ -768,6 +819,32 @@
     },
     "name": {
       "literal": "GanttChart_Flowshop"
+    }
+  },
+  "widgets/IncidentSummary": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "gss::sp_incidentSummarySuppliedByEndUser"
+        ]
+      }
+    },
+    "multi.line": {
+      "literal": 1
+    },
+    "name": {
+      "literal": "IncidentSummary"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "gss::sp_incidentSummaryTitle"
+        ],
+        "slices": []
+      }
     }
   },
   "widgets/JobProfilerData": {

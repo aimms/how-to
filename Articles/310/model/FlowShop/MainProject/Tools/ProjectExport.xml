@@ -3,6 +3,10 @@
 	<ExcludedFile>backup</ExcludedFile>
 	<ExcludedFile>log</ExcludedFile>
 	<ExcludedFile>PROTemp</ExcludedFile>
+	<ExcludedFile>PROTemp-1DD77791</ExcludedFile>
 	<ExcludedFile>tracings</ExcludedFile>
+	<ExcludedFile>IncidentSummary.zip</ExcludedFile>
+	<ExcludedFile>pro_arguments.txt</ExcludedFile>
+	<ExcludedFile>PROLog.cfg</ExcludedFile>
 	<ExcludedFile>Library Repository (local copy)</ExcludedFile>
 </ExportSettings>

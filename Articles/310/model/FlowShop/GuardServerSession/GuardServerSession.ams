@@ -35,6 +35,139 @@ LibraryModule Library_GuardServerSession {
 				}
 			}
 		}
+		Section Incident_reporting {
+			Property: NoSave;
+			Procedure pr_openIncidentSummary {
+				Body: {
+					gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					block 
+						! Call procedure to do the actual work.
+						webui::OpenDialogPage(
+							pageId  :  'gss_incident_report', 
+							title   :  "Incident report dialog", 
+							actions :  s_incidentSummaryActions, 
+							onDone  :  'gss::pr_incidentSummaryOndone');
+					onerror ep_err do
+						gss::pr_appendError( ep_err );
+						errh::MarkAsHandled( ep_err );
+					endblock ;
+					gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+				}
+				Comment: "Invoked via status bar. It will open a dialog where a user can write up some details and submit.";
+				DeclarationSection gss_logging_declarations {
+					StringParameter sp_gssTime;
+					Parameter p_gssMiU;
+				}
+				DeclarationSection error_reference_declaration {
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
+				}
+			}
+			Procedure pr_incidentSummaryOndone {
+				Arguments: (sp_action);
+				Body: {
+					gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info', sp_logDetail: sp_action);
+					block 
+						! Nothing to do.
+					onerror ep_err do
+						gss::pr_appendError( ep_err );
+						errh::MarkAsHandled( ep_err );
+					endblock ;
+					gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info', sp_logDetail: sp_action);
+				}
+				Comment: "Invoked by OnDone in the WebUI dialog page.";
+				DeclarationSection gss_logging_declarations {
+					StringParameter sp_gssTime;
+					Parameter p_gssMiU;
+					StringParameter sp_action {
+						Property: Input;
+					}
+				}
+				DeclarationSection error_reference_declaration {
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
+				}
+			}
+			Procedure pr_downloadIncidentSummary {
+				Arguments: (fileLocation,statusCode,statusDescription);
+				Body: {
+					gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					block
+					
+						gss::pr_initErrorHandlingDownloadUploadButtons( ep_stat, statusCode,  statusDescription, bp_download:1 );
+					
+						pr_workCreateIncidentSummary(/* output */ fileLocation);
+						sp_finalLocation := webui::GetIOFilePath(fileLocation);
+						if fileLocation <> sp_finalLocation then
+							if not FileCopy( fileLocation, sp_finalLocation ) then
+								raise error formatString("downloadIncidentSummary() Error copying file %s: %s",
+									fileLocation, CurrentErrorMessage );
+							endif ;
+						endif ;
+					
+						! checking if the previous write statement was successful or not
+						if not FileExists(sp_finalLocation) then
+							raise error FormatString("Error creating error data file %s", sp_finalLocation );
+						endif;
+					
+						! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
+						StatusCode := webui::ReturnStatusCode('CREATED');
+						! displaying the status message as All perfect instead of the default "File ready to download"
+						StatusDescription := "Succesfully downloaded error data file to " + fileLocation ;
+					
+					onerror ep_err do
+					
+						gss::pr_appendError(ep_err);
+						gss::pr_uploadDownloadWidgetErrorHandling( ep_err, ep_stat, statusCode, statusDescription); 
+					
+						errh::MarkAsHandled(ep_err);
+					
+					endblock ;
+					gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+				}
+				Comment: "Download profiler and error data of the selected data or solver session to file.";
+				StringParameter fileLocation {
+					Property: Output;
+				}
+				Parameter statusCode {
+					Property: Output;
+				}
+				StringParameter statusDescription {
+					Property: Output;
+				}
+				StringParameter sp_finalLocation;
+				ElementParameter ep_stat {
+					Range: errh::AllErrorSeverities;
+				}
+				ElementParameter ep_err {
+					Range: errh::PendingErrors;
+				}
+				DeclarationSection gss_logging_declarations {
+					StringParameter sp_gssTime;
+					Parameter p_gssMiU;
+				}
+			}
+			Set s_incidentSummaryActions {
+				Definition: data { Cancel, Submit };
+				Comment: "helper set for WebUI Incident summary dialog";
+			}
+			StringParameter sp_incidentSummaryTitle {
+				Definition: "Please summarize the incident below";
+				Comment: "Title for scalar widget in WebUI Incident Summary dialog.";
+			}
+			StringParameter sp_incidentSummarySuppliedByEndUser {
+				InitialData: "Please replacing this text with an actual summary of the issue at hand";
+				Comment: {
+					"Text entered by end-user about what was unexpected.
+					Used in the incident summary dialog."
+				}
+			}
+			StringParameter sp_titleDowloadIncidentSummary {
+				Definition: "Download incident summary";
+			}
+		}
 		Section WebUI_Support {
 			Property: NoSave;
 			StringParameter sp_widgetActionMessageList {
@@ -168,8 +301,10 @@ LibraryModule Library_GuardServerSession {
 							else "Don't worry, be happy" 
 							endif,                
 						( '6', 'procedure' ) : ! (Optional) The procedure you want to call when the respective status message is clicked.
-							if gss::p_noSignificantMessages then "gss::pr_openErrorHandlingPage" 
-							else "gss::pr_openErrorHandlingPage" 
+							if bp_isConnectedToPro then
+								"gss::pr_openIncidentSummary"
+							else
+								"gss::pr_openErrorHandlingPage"
 							endif,
 						( '6', 'state'     ) : "Active" ! (Optional) Active (displayed and clickable), Inactive (displayed and not clickable) and Hidden (not displayed). By default, the state is Hidden.
 					
@@ -1559,13 +1694,13 @@ LibraryModule Library_GuardServerSession {
 				}
 			}
 			Procedure pr_enter {
-				Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_logLev,sp_procEnterContextMessage);
+				Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_logLev,sp_logDetail);
 				Body: {
 					sp_procEnterTimestamp := CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')");
 					p_procEnterMemoryInUse := MemoryInUse();
 					sp_node := formatString("%e",CallerNode(1));
 					sp_fullMsg := formatString("Enter %s(%s) at %s [%.3n Mb] in use", 
-						sp_node, sp_procEnterContextMessage, 
+						sp_node, sp_logDetail, 
 						MomentToString(
 							Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ(gss::ep_traceTimezone)", 
 							unit          :  [s], 
@@ -1583,7 +1718,7 @@ LibraryModule Library_GuardServerSession {
 				Parameter p_procEnterMemoryInUse {
 					Property: Output;
 				}
-				StringParameter sp_procEnterContextMessage {
+				StringParameter sp_logDetail {
 					Property: Optional;
 					Comment: {
 						"If the traced procedure contains arguments, 
@@ -1600,7 +1735,7 @@ LibraryModule Library_GuardServerSession {
 				}
 			}
 			Procedure pr_leave {
-				Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_logLev,sp_msg);
+				Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_logLev,sp_logDetail);
 				Body: {
 					sp_leavingTime := CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')");
 					p_duration := StringToMoment(
@@ -1612,7 +1747,7 @@ LibraryModule Library_GuardServerSession {
 					p_leaveMemoryInUse := MemoryInUse();
 					sp_fullMsg := 
 						formatString( "Leave %s(%s) at %s [%.3n Mb] in use. ",
-							sp_node, sp_msg, 
+							sp_node, sp_logDetail, 
 							MomentToString(
 								Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ(gss::ep_traceTimezone)", 
 								unit          :  [s], 
@@ -1639,7 +1774,7 @@ LibraryModule Library_GuardServerSession {
 					Unit: s;
 				}
 				Parameter p_leaveMemoryInUse;
-				StringParameter sp_msg {
+				StringParameter sp_logDetail {
 					Property: Optional;
 				}
 				StringParameter sp_node;
@@ -1790,6 +1925,10 @@ LibraryModule Library_GuardServerSession {
 				}
 				Comment: "To define the line numbers visible in the table LineBasedProfilerData";
 			}
+			Parameter bp_isConnectedToPro {
+				Range: binary;
+				InitialData: 0;
+			}
 		}
 		Section Main_Library_procedures {
 			Procedure LibraryInitialization {
@@ -1812,6 +1951,7 @@ LibraryModule Library_GuardServerSession {
 							if not pro::IsRunningAtServer() then
 								ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
 							endif ;
+							bp_isConnectedToPro := 1 ;
 						else
 							ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
 						endif ;
@@ -1888,6 +2028,115 @@ LibraryModule Library_GuardServerSession {
 					Return 1 to allow the termination sequence to continue.
 					Return 0 if you want to cancel the termination sequence.
 					It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+				}
+			}
+		}
+		Section Incident_Summary_Utilities {
+			Procedure pr_workCreateIncidentSummary {
+				Arguments: (sp_createdFile);
+				Body: {
+					if AimmsStringConstants('Platform') = "Linux" then
+						sp_slash := "/" ;
+					else
+						sp_slash := "\\" ;
+					endif ;
+					
+					block ! Ensure the proper session is selected
+						ep_shownSession := first( s_trackedSessions );
+						pr_storeErrorProfilerDataFromDataSessionInTrackedSessions();
+						pr_showSelectedSessionInUI();
+					endblock ;
+					
+					
+					block ! Ensure a folder exists to put materials in
+						if not DirectoryExists( sp_incidentSummaryFolderName ) then
+							if not DirectoryCreate( sp_incidentSummaryFolderName ) then
+								raise error formatString( 
+									"CreateIncidentSummary(): Unable to create folder %s: %s",
+										sp_incidentSummaryFolderName, CurrentErrorMessage );
+							endif ;
+						endif ;
+					endblock ;
+					
+					block ! Write summary text 
+						sp_summaryTextFilename := sp_incidentSummaryFolderName + sp_slash + "summary.txt" ;
+						put f_summaryText ;
+						put formatString("Summary of incident reported by %s@%s at %s of data session %s",
+							pro::GetPROUserName(), pro::GetPROEnvironment(),
+							CurrentToString("%c%y-%m-%d %H:%M:%S"), sp_thisSession),
+							/, / ;
+						put sp_incidentSummarySuppliedByEndUser, /, /;
+					
+						! Todo: list of session ids of server sessions (see tracked sessions)
+					
+						putclose ;
+					endblock ;
+					
+					block ! Write Error report
+						sp_errorReportFilename := sp_incidentSummaryFolderName + sp_slash + "errorReport.txt" ;
+						pr_reportCurrentErrorsToTextFile( sp_errorReportFilename );
+					endblock ;
+					
+					block ! Write Profiler and Errors as Data file
+						sp_profilerErrorDataFilename := sp_incidentSummaryFolderName + sp_slash + "ProfilerAndErrorData.errors" ;
+						pr_downloadErrorDataWork( sp_profilerErrorDataFilename );
+					endblock ;
+					
+					block ! Copy the trace/actionLog file
+						sp_actionLogFilename  := sp_incidentSummaryFolderName + sp_slash + "action.log" ;
+						if not FileCopy(
+								source      :  sp_tracefilename, 
+								destination :  sp_actionLogFilename, 
+								confirm     :  0) then
+							raise error formatString("CreateIncidentSummary(): Unable to copy action log - FileCopy(from: %s, to: %s): %s",
+								sp_tracefilename, sp_actionLogFilename, CurrentErrorMessage );
+						endif ;
+					endblock ;
+					
+					block ! Copy the case file
+						sp_caseFilename  := sp_incidentSummaryFolderName + sp_slash + "dataSession.data" ;
+						if not CaseFileSave(
+								url      :  sp_caseFilename, 
+								contents :  AllIdentifiers) then
+							raise error formatString("CreateIncidentSummary(): Unable to save data to \"%s\": %s",
+								sp_caseFilename, CurrentErrorMessage );
+						endif ;
+					endblock ;
+					
+					block ! Zip it
+						if AimmsStringConstants('Platform') = "Linux" then
+							sp_createdFile := "IncidentSummary.tar";
+							if FileExists( sp_createdFile ) then
+								FileDelete( sp_createdFile );
+							endif ;
+							Execute("tar", "cvf "+sp_createdFile+ " ./IncidentMaterials/*", wait:1) ;
+						else
+							sp_createdFile := "IncidentSummary.zip";
+							if FileExists( sp_createdFile ) then
+								FileDelete( sp_createdFile );
+							endif ;
+							Execute("7za.exe", "a "+sp_createdFile+ " .\\IncidentMaterials\\*", wait:1) ;
+						endif ;
+					endblock ;
+				}
+				Comment: "Workhorse when an incident summary is to be created.";
+				StringParameter sp_slash;
+				StringParameter sp_incidentSummaryFolderName {
+					InitialData: "IncidentMaterials";
+				}
+				File f_summaryText {
+					Name: sp_summaryTextFilename;
+					Device: Disk;
+					Mode: replace;
+				}
+				StringParameter sp_summaryTextFilename;
+				StringParameter sp_errorReportFilename;
+				StringParameter sp_profilerErrorDataFilename;
+				StringParameter sp_actionLogFilename;
+				StringParameter sp_caseFilename;
+				StringParameter sp_zipCommand;
+				StringParameter sp_createdFile {
+					Property: Output;
 				}
 			}
 		}
