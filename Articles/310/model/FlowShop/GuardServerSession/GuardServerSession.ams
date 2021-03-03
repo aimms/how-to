@@ -2105,17 +2105,17 @@ LibraryModule Library_GuardServerSession {
 					
 					block ! Zip it
 						if AimmsStringConstants('Platform') = "Linux" then
-							sp_createdFile := "IncidentSummary.tar";
+							sp_createdFile := "IncidentSummary.tar.gz";
 							if FileExists( sp_createdFile ) then
 								FileDelete( sp_createdFile );
 							endif ;
-							Execute("tar", "cvf "+sp_createdFile+ " ./IncidentMaterials/*", wait:1) ;
+							Execute("tar", "-czvf " + sp_createdFile + " IncidentMaterials", wait:1) ;
 						else
 							sp_createdFile := "IncidentSummary.zip";
 							if FileExists( sp_createdFile ) then
 								FileDelete( sp_createdFile );
 							endif ;
-							Execute("7za.exe", "a "+sp_createdFile+ " .\\IncidentMaterials\\*", wait:1) ;
+							Execute("7za.exe", "a " + sp_createdFile + " .\\IncidentMaterials\\*", wait:1) ;
 						endif ;
 					endblock ;
 				}

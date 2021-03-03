@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2021-03-01 06:50:19">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>CDFB6C8D-067D-4490-BB30-D0174299E222</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Gantt Chart">
+		<Location top="66" left="30" bottom="288" right="618" />
+		<TabOrder>2</TabOrder>
+		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ColorScheme Number="0" />
+		<Y-Labels>true</Y-Labels>
+		<X-Labels>true</X-Labels>
+		<VerticalGridLines>true</VerticalGridLines>
+		<StatusLine>true</StatusLine>
+		<TimeRange>
+			<Upper>v_timeSpan</Upper>
+			<GridPoints>8</GridPoints>
+		</TimeRange>
+		<IndexLocations>
+			<RowDomain>m</RowDomain>
+			<LegendDomain>j</LegendDomain>
+		</IndexLocations>
+		<TaskGroup>
+			<Domain>p_procesTime( j, m )</Domain>
+			<Start>p_interfaceStartTime( j, m )</Start>
+			<Duration>p_procesTime( j, m )</Duration>
+		</TaskGroup>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="300" left="450" bottom="336" right="618" />
+		<TabOrder>1</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Solve"</Title>
+		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_btnSolve</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_prepInterfaceWinUI</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="12" left="30" bottom="60" right="258" />
+		<TabOrder>3</TabOrder>
+		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>p_maxJobs</Identifier>
+			<NumberFormat Width="3" Decimals="0" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>p_maxMachines</Identifier>
+			<NumberFormat Width="3" Decimals="0" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="300" left="30" bottom="336" right="198" />
+		<TabOrder>1</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Session History Management"</Title>
+		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<ActionSequence>
+			<Action Type="LinkedPage">
+				<Page ProjectGUID="2E3D40FC-CE49-45B3-9165-530BE1EE8E94" PageGUID="E94A7721-DFEE-4FFE-A72C-C4115E972623" Name="GSS Session History Management" />
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>p_maxJobs</Symbol>
+			<Symbol>p_maxMachines</Symbol>
+			<Symbol>p_procesTime</Symbol>
+			<Symbol>v_timeSpan</Symbol>
+			<Symbol>pr_btnSolve</Symbol>
+			<Symbol>j</Symbol>
+			<Symbol>m</Symbol>
+			<Symbol>pr_prepInterfaceWinUI</Symbol>
+			<Symbol>p_interfaceStartTime</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>
