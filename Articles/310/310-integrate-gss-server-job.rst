@@ -77,7 +77,7 @@ The set of identifiers saved in a case by the solver session for the data sessio
 If your application does not adapt these sets from their default contents (as described in :doc:`AIMMS How-To: Reduce Exchange Between Client and Solver Sessions<../reduce-client-server-exchange/reduce-client-server-exchange>`) before integrating with the ``GuardServerSession`` library,  
 you do not need to do so after the integration either.
 
-if your application does adapt these sets from their default contents, then please add:
+if your application does modify these sets from their default contents, then please add:
 
     #.  ``s_inputCaseIdentifiers`` to ``pro::ManagedSessionInputCaseIdentifierSet`` in the data session.
 
@@ -131,7 +131,7 @@ Remarks:
 Some optional recommended application changes
 ---------------------------------------------------
 
-#.  Include the function :aimms:func:`ProfilerStart` at the top of your ``MainInitialization`` procedure. 
+#.  Include the function :aimms:func:`ProfilerStart` at the top of your ``MainInitialization`` procedure.
     This will ensure that profiling information can be gathered and shared.
 
 #.  Set the option ``communicate_warnings_to_end_users`` to ``on``.

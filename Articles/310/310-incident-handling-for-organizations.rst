@@ -1,4 +1,4 @@
-Incident handling for organizations
+Incident Handling for Organizations
 =============================================
 
 Thanks to extensive checking and clear reporting of incidents; end-users can handle several incidents themselves.
@@ -46,7 +46,7 @@ Guard Server Session Library
 The ``GuardServerSession`` library, with prefix ``gss``, is designed, amongst others, to work with session histories.
 This library provides the following methods:
 
-The following four articles describe how to modify your application to make of the ``GuardServerSession`` library. 
+The following four articles describe how to modify your application to utilize the ``GuardServerSession`` library. 
 
 #.  :doc:`Integration instructions<../310/310-integrate-gss-server-job>`:  to integrate the ``GuardServerSession`` library with your application, in particular how to adapt the delegation to server session.
 
