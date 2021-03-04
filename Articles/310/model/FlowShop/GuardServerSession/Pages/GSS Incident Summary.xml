@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2021-03-02 20:43:53">
+	<PageEditSize Type="Specified">
+		<Size Width="500" Height="300" />
+	</PageEditSize>
+	<ProjectUUID>2E3D40FC-CE49-45B3-9165-530BE1EE8E94</ProjectUUID>
+	<Title>"GSS Incident Summary"</Title>
+	<IsDialogPage>true</IsDialogPage>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Scalar">
+		<Location top="36" left="18" bottom="126" right="462" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>gss::sp_incidentSummarySuppliedByEndUser</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="138" left="24" bottom="186" right="234" />
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Download incident summary"</Title>
+		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>gss::sp_incidentSummarySuppliedByEndUser</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

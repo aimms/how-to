@@ -149,6 +149,44 @@ LibraryModule Library_GuardServerSession {
 					Parameter p_gssMiU;
 				}
 			}
+			Procedure pr_downloadIncidentSummaryWinUI {
+				Body: {
+					gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					block 
+						pr_getDownloadFolder(sp_downloadFolder);
+						pr_workCreateIncidentSummary(sp_createdFile);
+						sp_filename := sp_downloadFolder + "\\" + sp_createdFile ;
+						FileCopy( sp_createdFile, sp_filename );
+					onerror ep_err do
+						gss::pr_appendError( ep_err );
+						errh::MarkAsHandled( ep_err );
+					endblock ;
+					gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+				}
+				DeclarationSection local_declarations {
+					StringParameter sp_downloadFolder;
+					StringParameter sp_createdFile;
+					StringParameter sp_filename;
+				}
+				DeclarationSection gss_logging_declarations {
+					StringParameter sp_gssTime;
+					Parameter p_gssMiU;
+				}
+				DeclarationSection error_reference_declaration {
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
+				}
+			}
+			Procedure pr_buttonSessionHistoryManagementWinUI {
+				Body: {
+					if ProjectDeveloperMode() then
+						PageOpen("GSS Session History Management");
+					else
+						PageOpen("GSS Incident Summary");
+					endif ;
+				}
+			}
 			Set s_incidentSummaryActions {
 				Definition: data { Cancel, Submit };
 				Comment: "helper set for WebUI Incident summary dialog";
@@ -2105,17 +2143,17 @@ LibraryModule Library_GuardServerSession {
 					
 					block ! Zip it
 						if AimmsStringConstants('Platform') = "Linux" then
-							sp_createdFile := "IncidentSummary.tar";
+							sp_createdFile := "IncidentSummary.tar.gz";
 							if FileExists( sp_createdFile ) then
 								FileDelete( sp_createdFile );
 							endif ;
-							Execute("tar", "cvf "+sp_createdFile+ " ./IncidentMaterials/*", wait:1) ;
+							Execute("tar", "-czvf " + sp_createdFile + " IncidentMaterials", wait:1) ;
 						else
 							sp_createdFile := "IncidentSummary.zip";
 							if FileExists( sp_createdFile ) then
 								FileDelete( sp_createdFile );
 							endif ;
-							Execute("7za.exe", "a "+sp_createdFile+ " .\\IncidentMaterials\\*", wait:1) ;
+							Execute("7za.exe", "a " + sp_createdFile + " .\\IncidentMaterials\\*", wait:1) ;
 						endif ;
 					endblock ;
 				}

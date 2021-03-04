@@ -9,6 +9,7 @@
 *.dvi
 *.err
 *.errorLogging
+*.errors
 *.err.txt
 *.exp
 *.gz
@@ -36,6 +37,9 @@ _build
 backup
 shadowData
 atomicData
+IncidentMaterials
+IncidentSummary.zip
+PROLog.cfg
 Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets/IdentifiersWithShadows.txt
 Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets/forward/example.data
 Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets/msd.ams
