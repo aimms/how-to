@@ -1,130 +1,127 @@
 Install UI of GuardServerSession Library
 =========================================
 
-This article is a brief set of instructions to create the User Interface for working with library GuardServerSession.
+This article is a brief set of instructions to create the user interface for working with the ``GuardServerSession`` library. 
 
-After adding the library to your project, you can start building a User Interface to that library.
+After adding the library to your project, you can start building a user interface to that library in WebUI. 
 
-#.  Create page ``GSS Session History Management``
+We can use the same example as discussed in the previous article of this series, :doc:`AIMMS How-To: Integrate GuardServerSession <../310/310-integrate-gss-server-job>`. Download here :download:`FlowShop.zip <model/FlowShop.zip>` 
 
-    Properties: 
+The rest of this article details the WebUI page ``GSS Session History Management`` in this project and how you can replicate this functionality in your application. 
+
+The page ``GSS Session History Management`` has ``Action Upon Load`` set to ``gss::pr_openPageErrorWarningProfiler``.
     
-    #.  Maxcolumns: 12
+.. tip::
     
-    #.  Action Upon Load: ``gss::pr_openPageErrorWarningProfiler``
-    
-    If you have a multi page application, you probably want to add this page to the group of "developer" or "control" pages in your application.
+    If you have a multi page application, you might want to add this page to the group of "developer" or "control" pages in your application.
 
+Status bar of your app should be set to ``gss::sp_messageStatusBar``, or to a string parameter that contains this information.
 
-#.  On that page create widgets:
+Widgets
+-------------------------
 
-    #.  Table ``ErrorWarningMessageTable``, 8 cols, 2 rows, titled: ``gss::sp_titleErrorWarningMessagesTable``
+Below are the widgets recommended to build a user interface for the ``GuardServerSession`` library.
 
-        Contents: 
+#.  Table ``ErrorWarningMessageTable``, titled: ``gss::sp_titleErrorWarningMessagesTable``
+
+    #. Contents: 
 
         #.  ``gss::ep_shownJobErrorSeverity``
-
         #.  ``gss::sp_shownJobErrorMoments``
-
         #.  ``gss::sp_shownJobErrorMessages``
 
-        Pivoting: 
+    #. Pivoting: 
 
         #.  Rows: ``gss::i_jobErrorMessageNumber``
+        #.  Cols: ``<Identifiers>``
 
-        #.  Cols: <Identifiers>
+    #. Store focus: 
 
-        Store focus: ``gss::i_shownJobErrorMessageNumber`` to ``gss::ep_errorWarningSelectedNessage``
+        ``gss::i_shownJobErrorMessageNumber`` to ``gss::ep_errorWarningSelectedNessage``
 
-        Widget Extensions:
+    #. Widget Extensions:
 
-        #.  Widget actions: ``gss::sp_widgetActionMessageList``
+        #. Widget actions: ``gss::sp_widgetActionMessageList``
 
-        #.  Item actions: ``gss::sp_itemActionMessageList``
+        #. Item actions: ``gss::sp_itemActionMessageList``
 
-    #.  Table ``JobProfilerData``, 4 cols 2 rows titled: ``sp_titleProfilerOverview``
+#.  Table ``JobProfilerData``, titled: ``sp_titleProfilerOverview``
 
-        Contents: ``gss::p_shownJobProfilerData``
+    #. Contents: ``gss::p_shownJobProfilerData``
 
-        Store Focus:
+    #. Store Focus:
 
-        #.  IndexIdentifiers --> ``gss::ep_profilerDataSelectedIdentifier``
+        ``IndexIdentifiers`` --> ``gss::ep_profilerDataSelectedIdentifier``
 
-        Identifier Settings > Set slicing per index
+    #. Identifier Settings > Set slicing per index
 
-        #.  ``gss::i_lineNumber`` --> fixed element ``'0'``
-        
-        Widget Extensions:
+        ``gss::i_lineNumber`` --> fixed element ``'0'``
+    
+    #. Widget Extensions:
 
         #.  Widget actions: ``gss::sp_widgetActionIdentifierProfiler``
-        
+    
         #.  Item actions: ``gss::sp_itemActionIdentifierProfiler``
 
-    #.  Table ``ErrorWarningStack``, 8 cols, 2 rows, titled: ``gss::sp_titleStackMessage``
+#.  Table ``ErrorWarningStack``, titled: ``gss::sp_titleStackMessage``
 
-        Contents:
+    #. Contents:
 
         #.  ``gss::ep_shownJobErrorNodes``
-
         #.  ``gss::ep_shownJobErrorAttributes``
-
         #.  ``gss::p_shownJobErrorLines``
 
-        Identifier settings:
+    #. Identifier settings:
 
         For all three, slice type index ``gss::i_jobErrorMessageNumber`` to element parameter ``gss::ep_errorWarningSelectedMessage``
 
-        no decimals: 0
+    #. no decimals: 0
 
-        Store Focus:
+    #. Store Focus:
 
-        #.  ``gss::i_stackPosition`` --> ``gss::ep_stackPos``
+        ``gss::i_stackPosition`` --> ``gss::ep_stackPos``
 
-        Widget Extensions:
+    #. Widget Extensions:
 
         #.  Widget actions: ``gss::sp_widgetActionMessageStack``
-
         #.  Item actions: ``gss::sp_itemActionMessageStack``
 
-    #.  Table ``LineBasedProfilerData``, 4 cols, 2 rows, titled: ``gss::sp_titleProfilerDetail``
+#.  Table ``LineBasedProfilerData``, titled: ``gss::sp_titleProfilerDetail``
 
-        Contents: 
+    #. Contents: 
 
         ``gss::p_shownJobProfilerData``
 
-        Identifier Setttings - Set slicing per index
+    #. Identifier Settings - Set slicing per index
 
-        #.  index ``gss::IndexIdentifiers`` --> element parameter ``gss::ep_profilerDataSelectedIdentifier``
+        index ``gss::IndexIdentifiers`` --> element parameter ``gss::ep_profilerDataSelectedIdentifier``
 
-    #.  scalar ``shownSession`` 8 cols, 1 row
+#.  Scalar widget ``shownSession``:
 
-        Contents: ``ep_shownSession``
+    Contents: ``ep_shownSession``
 
-    #.  upload ``UploadErrorWarningData``, 4 columns, 1 row.
+#.  Upload widget ``UploadErrorWarningData``, titled "Upload Error Warning data":
 
-        procedure: ``gss::pr_uploadErrorData``
+    procedure: ``gss::pr_uploadErrorData``
 
-        title: "Upload Error Warning Data"
+#.  Download widget ``DownloadModelLog``, titled ``gss::sp_downloadModelLogTitle``:
 
-    #.  Download ``DownloadModelLog``, 4 columns, 1 row.
+    procedure: ``gss::pr_downloadModelLog``
 
-        procedure: ``gss::pr_downloadModelLog``
+#.  Download widget ``DownloadErrorReport``, titled "Download error report for current session": 
 
-        title: ``gss::sp_downloadModelLogTitle``
+    procedure: ``gss::pr_downloadErrorReport``
 
-    #.  Download ``DownloadErrorReport``, 4 columns, 1 row.
+    .. title: ``"Download error report shown session"``
+    .. what do mean by shown session ? 
 
-        procedure: ``gss::pr_downloadErrorReport``
+#.  Download widget ``DownloadErrorWarningData``, titled "Download error data for current session":
 
-        title: ``"Download error report shown session"``
+    procedure: ``gss::pr_downloadErrorData``
 
-    #.  Download ``DownloadErrorWarningData``, 4 columns, 1 row.
-
-        procedure: ``gss::pr_downloadErrorData``
-
-        title: ``"Download error data shown session"``
-
-#.  To visually guide the adaption of the width of the columns of the tables, please run:
+Testing
+-----------
+To visually guide the adaption of the width of the columns of the tables, please run:
     
     #.  ``gss::pr_artificialDataGSSPage`` to have an artificial warning message and 
     
@@ -132,15 +129,18 @@ After adding the library to your project, you can start building a User Interfac
     
     And then start manually adapting the column widths such that the contents fit neatly.
     
-#.  Feedback step: now the page should look as follows:
+Now the page should look as follows:
 
     .. image:: images/gss-page-design.png
         :align: center
 
 
-#.  Status bar
+Further Reading
+---------------------
 
-    The status bar should be set to ``gss::sp_messageStatusBar``, or to a string parameter that contains this parameter.
+This article is part of the series :doc:`Indicident Handling for Organizations<../310/310-incident-handling-for-organizations>`.
+
+The next article in this series discusses how to use the error handling functionality of the ``GuardServerSession`` library: :doc:`Error Handling as Data<../310/310-errors-as-data>`
 
 
 

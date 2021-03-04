@@ -12,8 +12,6 @@ The following steps need to be considered:
 
     #.  Change in actions 
 
-    #.  Change in interface, see :doc:`UI for GSS<../310/310-install-ui-gss>`
-
 Adding the library
 --------------------
 
@@ -77,7 +75,7 @@ The set of identifiers saved in a case by the solver session for the data sessio
 If your application does not adapt these sets from their default contents (as described in :doc:`AIMMS How-To: Reduce Exchange Between Client and Solver Sessions<../reduce-client-server-exchange/reduce-client-server-exchange>`) before integrating with the ``GuardServerSession`` library,  
 you do not need to do so after the integration either.
 
-if your application does adapt these sets from their default contents, then please add:
+if your application does modify these sets from their default contents, then please add:
 
     #.  ``s_inputCaseIdentifiers`` to ``pro::ManagedSessionInputCaseIdentifierSet`` in the data session.
 
@@ -131,7 +129,7 @@ Remarks:
 Some optional recommended application changes
 ---------------------------------------------------
 
-#.  Include the function :aimms:func:`ProfilerStart` at the top of your ``MainInitialization`` procedure. 
+#.  Include the function :aimms:func:`ProfilerStart` at the top of your ``MainInitialization`` procedure.
     This will ensure that profiling information can be gathered and shared.
 
 #.  Set the option ``communicate_warnings_to_end_users`` to ``on``.
@@ -143,6 +141,13 @@ Some optional recommended application changes
     Best practice is still to add extensive checking and careful error catching to your application.
 
 #.  The option ``maximal_number_of_warnings_reported`` is switched to a high setting, like 1000.
+
+Further Reading
+---------------------
+
+This article is part of the series :doc:`Indicident Handling for Organizations<../310/310-incident-handling-for-organizations>`.
+
+The next article in this series discusses how to build a user interface to use the ``GuardServerSession`` library: :doc:`UI for GSS<../310/310-install-ui-gss>`
 
 
 
