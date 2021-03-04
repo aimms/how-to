@@ -23,13 +23,22 @@
 	</PageObject>
 	<PageObject Type="Button">
 		<Location top="138" left="24" bottom="186" right="234" />
+		<TabOrder>2</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>"Download incident summary"</Title>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>gss::pr_downloadIncidentSummaryWinUI</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
 	</PageObject>
 	<UsedReferences>
 		<Model>
+			<Symbol>gss::pr_downloadIncidentSummaryWinUI</Symbol>
 			<Symbol>gss::sp_incidentSummarySuppliedByEndUser</Symbol>
 		</Model>
 	</UsedReferences>

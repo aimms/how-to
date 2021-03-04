@@ -3,6 +3,7 @@
 	<ExcludedFile>backup</ExcludedFile>
 	<ExcludedFile>IncidentMaterials</ExcludedFile>
 	<ExcludedFile>log</ExcludedFile>
+	<ExcludedFile>MainProject\WebUI</ExcludedFile>
 	<ExcludedFile>PROTemp</ExcludedFile>
 	<ExcludedFile>tracings</ExcludedFile>
 	<ExcludedFile>IncidentSummary.zip</ExcludedFile>
