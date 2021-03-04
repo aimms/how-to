@@ -144,7 +144,7 @@ html_theme_options = {
     'logo_only': True,
     'display_version': False,
     'prev_next_buttons_location': 'bottom',
-    'style_external_links': False,
+    'style_external_links': True,
     # 'vcs_pageview_mode': '',
     # Toc options
     'collapse_navigation': False,

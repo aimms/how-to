@@ -12,8 +12,6 @@ The following steps need to be considered:
 
     #.  Change in actions 
 
-    #.  Change in interface, see :doc:`UI for GSS<../310/310-install-ui-gss>`
-
 Adding the library
 --------------------
 
@@ -143,6 +141,13 @@ Some optional recommended application changes
     Best practice is still to add extensive checking and careful error catching to your application.
 
 #.  The option ``maximal_number_of_warnings_reported`` is switched to a high setting, like 1000.
+
+Further Reading
+---------------------
+
+This article is part of the series :doc:`Indicident Handling for Organizations<../310/310-incident-handling-for-organizations>`.
+
+The next article in this series discusses how to build a user interface to use the ``GuardServerSession`` library: :doc:`UI for GSS<../310/310-install-ui-gss>`
 
 
 
