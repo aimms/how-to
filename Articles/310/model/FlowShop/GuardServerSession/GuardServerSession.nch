@@ -26,3 +26,5 @@
 "gss::Inspect_utilities" "gss::AIMMS_PRO_utilities" "2021-03-01 08:44:15"
 "gss::Copy_pr_actionTemplate" "gss::pr_incidentSummaryOndone" "2021-03-02 07:27:50"
 "gss::Copy_pr_downloadErrorData" "gss::pr_downloadIncidentSummary" "2021-03-02 20:43:51"
+"gss::sp_downloadActionLogTitle" "gss::sp_titleDownloadActionLog" "2021-03-04 23:03:24"
+"gss::Copy_sp_titleDownloadActionLog" "gss::sp_titleDownloadErrorReport" "2021-03-04 23:10:11"

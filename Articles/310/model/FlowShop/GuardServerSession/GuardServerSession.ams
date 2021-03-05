@@ -351,7 +351,10 @@ LibraryModule Library_GuardServerSession {
 				Comment: "The message";
 			}
 			StringParameter sp_titleErrorWarningMessagesTable {
-				Definition: formatString("Error and warning messages for session %s", sp_shownSessionDescription);
+				Definition: {
+					formatString("Error and warning messages for %s: %e", sp_shownSessionDescription,
+					gss::ep_shownSession)
+				}
 				Comment: "The title of the table \"ErrorWarningMessageTable\" on page \"GSS Session History Management\".";
 			}
 			StringParameter sp_titleStackMessage {
@@ -364,6 +367,12 @@ LibraryModule Library_GuardServerSession {
 			}
 			StringParameter sp_titleProfilerOverview {
 				Definition: "Identifier based Profiler Data";
+			}
+			StringParameter sp_titleDownloadActionLog {
+				Definition: formatString("Download model log file of selected session: %e", gss::ep_shownSession);
+			}
+			StringParameter sp_titleDownloadErrorReport {
+				Definition: formatString("Download error report of selected session:%e", gss::ep_shownSession);
 			}
 			ElementParameter ep_profilerDataSelectedIdentifier {
 				Range: AllIdentifiers;
@@ -381,6 +390,16 @@ LibraryModule Library_GuardServerSession {
 					"Links the tables ErrorWarningMessageTable and ErrorWarningStack on page \"GSS Session History Management\"
 					- In table ErrorWarningMessageTable it is a store focus on the message selected.
 					- In table ErrorWarningStack it is used to slice on the selected message."
+				}
+			}
+			StringParameter sp_sidePanel {
+				IndexDomain: (webui::indexPageExtension, webui::indexSidePanelSpec);
+				Definition: {
+					data 
+					{ ( 1, displayText ) : "Settings",
+					  ( 1, pageId      ) : "sp_controls_1",
+					  ( 1, tooltip     ) : "Control displayed session",
+					  ( 1, state       ) : "active" }
 				}
 			}
 			ElementParameter ep_stackPos {
@@ -432,6 +451,27 @@ LibraryModule Library_GuardServerSession {
 				Comment: "Opens the page \"GSS Session History Management\" upon clicking the GSS notification/status bar (at the bottom of the screen).";
 				ElementParameter ep_err {
 					Range: errh::PendingErrors;
+				}
+			}
+			Procedure pr_openPageErrorWarningProfiler {
+				Body: {
+					pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					
+					ep_shownSession := first( s_trackedSessions );
+					pr_storeErrorProfilerDataFromDataSessionInTrackedSessions();
+					pr_showSelectedSessionInUI();
+					
+					pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+				}
+				Comment: "The procedure that is run upon opening the page \"GSS Session History Management\"";
+				DeclarationSection gss_logging_declarations {
+					StringParameter sp_gssTime;
+					Parameter p_gssMiU;
+				}
+				DeclarationSection error_reference_declaration {
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
 				}
 			}
 		}
@@ -554,7 +594,6 @@ LibraryModule Library_GuardServerSession {
 					Set s_trackedSessions {
 						Index: i_trackedSession;
 						Comment: "The names of all sessions tracked.";
-						webui::ElementTextIdentifier: gss::sp_trackedSessionDescription;
 					}
 					StringParameter sp_trackedSessionDescription {
 						IndexDomain: i_trackedSession;
@@ -1666,30 +1705,6 @@ LibraryModule Library_GuardServerSession {
 			StringParameter sp_traceFilename {
 				InitialData: "logging.txt";
 			}
-			StringParameter sp_downloadActionLogTitle {
-				Definition: formatString("Download model log file of shown session %e", gss::ep_shownSession);
-			}
-			Procedure pr_openPageErrorWarningProfiler {
-				Body: {
-					pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
-					
-					ep_shownSession := first( s_trackedSessions );
-					pr_storeErrorProfilerDataFromDataSessionInTrackedSessions();
-					pr_showSelectedSessionInUI();
-					
-					pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
-				}
-				Comment: "The procedure that is run upon opening the page \"GSS Session History Management\"";
-				DeclarationSection gss_logging_declarations {
-					StringParameter sp_gssTime;
-					Parameter p_gssMiU;
-				}
-				DeclarationSection error_reference_declaration {
-					ElementParameter ep_err {
-						Range: errh::PendingErrors;
-					}
-				}
-			}
 			Procedure pr_logMsgTraceFile {
 				Arguments: (sp_argMsg,ep_lev);
 				Body: {
@@ -1945,6 +1960,29 @@ LibraryModule Library_GuardServerSession {
 					Property: Input;
 				}
 				Parameter bp_retval;
+			}
+			Procedure pr_artificialDataGSSPage {
+				Body: {
+					pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					block
+						raise warning "Cry wolf" ;
+					onerror ep_err do
+						gss::pr_appendError(ep_err);
+						errh::MarkAsHandled(ep_err);
+					endblock ;
+					pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+				}
+				Comment: {
+					"Run this procedure to obtain some contents with which to tailor the 
+					table ErrorWarningMessageTable and JobProfilerData"
+				}
+				ElementParameter ep_err {
+					Range: errh::PendingErrors;
+				}
+				DeclarationSection gss_logging_declarations {
+					StringParameter sp_gssTime;
+					Parameter p_gssMiU;
+				}
 			}
 		}
 	}
@@ -2627,29 +2665,6 @@ LibraryModule Library_GuardServerSession {
 				}
 				StringParameter sp_slash;
 				StringParameter sp_proStorageFileName;
-			}
-			Procedure pr_artificialDataGSSPage {
-				Body: {
-					pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
-					block
-						raise warning "Cry wolf" ;
-					onerror ep_err do
-						gss::pr_appendError(ep_err);
-						errh::MarkAsHandled(ep_err);
-					endblock ;
-					pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
-				}
-				Comment: {
-					"Run this procedure to obtain some contents with which to tailor the 
-					table ErrorWarningMessageTable and JobProfilerData"
-				}
-				ElementParameter ep_err {
-					Range: errh::PendingErrors;
-				}
-				DeclarationSection gss_logging_declarations {
-					StringParameter sp_gssTime;
-					Parameter p_gssMiU;
-				}
 			}
 			StringParameter sp_tracingsFolderName {
 				Definition: "tracings";

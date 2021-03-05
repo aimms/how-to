@@ -11,6 +11,7 @@ The data flow of errors to support this user interface is organized as follows:
 
 .. image:: images/error-data-flow.png
     :align: center
+    :scale: 80
     
 The red triangles are a stream of warnings and errors. 
 These errors move via various steps upwards towards the blue box of errors shown in the User Interface.
