@@ -317,4 +317,10 @@ Model Main_Flow_Shop {
 			Range: errh::PendingErrors;
 		}
 	}
+	Procedure pr_generateTest {
+		Body: {
+			gss::pr_artificialDataGSSPage;
+			gss::pr_openPageErrorWarningProfiler;
+		}
+	}
 }

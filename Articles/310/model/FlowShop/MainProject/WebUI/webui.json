@@ -16,7 +16,7 @@
               },
               {
                 "name": "GSS Session History Management",
-                "type": "page",
+                "type": "pagev2-grid",
                 "slug": "gss_session_history_management",
                 "children": [
                   {
@@ -29,6 +29,12 @@
                     "name": "GSS Incident report",
                     "type": "dialog",
                     "slug": "gss_incident_report",
+                    "children": []
+                  },
+                  {
+                    "name": "sp_controls",
+                    "type": "sidepanel",
+                    "slug": "sp_controls_1",
                     "children": []
                   }
                 ]
@@ -74,6 +80,55 @@
     },
     "widget.visibility.greyout": {
       "literal": true
+    }
+  },
+  "layouts/custom_5702d503-3fe9-4d6c-9f4e-e302155388ef": {
+    "definition": {
+      "literal": {
+        "componentName": "Grid",
+        "props": {
+          "gridTemplateColumns": "1fr 1fr 1fr",
+          "gridTemplateRows": "1fr 1fr",
+          "gridTemplateAreas": "\"area-a area-a area-b\" \"area-c area-c area-d\""
+        },
+        "items": [
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-a",
+              "name": "Area A",
+              "gridAutoFlow": "row"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-b",
+              "name": "Area B",
+              "gridAutoFlow": "column"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-c",
+              "name": "Area C",
+              "gridAutoFlow": "row"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-d",
+              "name": "Area D",
+              "gridAutoFlow": "row"
+            }
+          }
+        ]
+      }
+    },
+    "displayName": {
+      "literal": "Layout5 Copy"
     }
   },
   "pages/errorpanel_1": {
@@ -144,7 +199,59 @@
   },
   "pages/gss_session_history_management": {
     "aimms.widget.type": {
-      "literal": "page"
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "LineBasedProfilerData",
+          "gridArea": "area-d",
+          "dndId": "area-eLineBasedProfilerData6"
+        },
+        {
+          "widgetUri": "ErrorWarningStack",
+          "gridArea": "area-c",
+          "dndId": "area-cErrorWarningStack0"
+        },
+        {
+          "widgetUri": "DownloadErrorReport",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsDownloadErrorReport1"
+        },
+        {
+          "widgetUri": "DownloadModelLog",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsDownloadModelLog2"
+        },
+        {
+          "widgetUri": "downloadErrorWarningData",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsdownloadErrorWarningData3"
+        },
+        {
+          "widgetUri": "UploadErrorWarningData",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsUploadErrorWarningData4"
+        },
+        {
+          "widgetUri": "ShownSession",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsShownSession5"
+        },
+        {
+          "widgetUri": "JobProfilerData",
+          "gridArea": "area-b",
+          "dndId": "area-bJobProfilerData7"
+        },
+        {
+          "widgetUri": "ErrorWarningMessageTable",
+          "gridArea": "area-a",
+          "dndId": "area-aErrorWarningMessageTable8"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "custom_5702d503-3fe9-4d6c-9f4e-e302155388ef"
     },
     "maxcolumns": {
       "literal": 12
@@ -152,6 +259,30 @@
     "onload": {
       "aimms": {
         "run": "gss::pr_openPageErrorWarningProfiler"
+      }
+    },
+    "sidepanels": {
+      "aimms": {
+        "contents": [
+          "gss::sp_sidePanel"
+        ],
+        "slices": [
+          {
+            "identifier": "gss::sp_sidePanel",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexSidePanelSpec",
+                "type": "free",
+                "value": "webui::indexSidePanelSpec"
+              }
+            ]
+          }
+        ]
       }
     },
     "widgets": {
@@ -268,6 +399,47 @@
       ]
     }
   },
+  "pages/sp_controls_1": {
+    "widgets": {
+      "literal": [
+        {
+          "uri": "sc_currentSession",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "dl_modelLog",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "dl_errorLog",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "dl_modeldata",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "ul_errordata",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
   "widgets/ClearError": {
     "action": {
       "literal": {
@@ -283,6 +455,39 @@
     },
     "name": {
       "literal": "ClearError"
+    }
+  },
+  "widgets/dl_errorLog": {
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "name": {
+      "literal": "dl_errorLog"
+    },
+    "title": {
+      "literal": "Download Model Log"
+    }
+  },
+  "widgets/dl_modeldata": {
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "name": {
+      "literal": "dl_modeldata"
+    },
+    "title": {
+      "literal": "Download Error Data"
+    }
+  },
+  "widgets/dl_modelLog": {
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "name": {
+      "literal": "dl_modelLog"
+    },
+    "title": {
+      "literal": "Download Error Report"
     }
   },
   "widgets/DownloadData": {
@@ -312,11 +517,16 @@
     "aimms.widget.type": {
       "literal": "download"
     },
-    "title": {
-      "literal": "Download error report shown session"
-    },
     "name": {
       "literal": "DownloadErrorReport"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "gss::sp_titleDownloadErrorReport"
+        ],
+        "slices": []
+      }
     }
   },
   "widgets/downloadErrorWarningData": {
@@ -371,7 +581,7 @@
     "title": {
       "aimms": {
         "contents": [
-          "gss::sp_downloadActionLogTitle"
+          "gss::sp_titleDownloadActionLog"
         ],
         "slices": []
       }
@@ -477,13 +687,6 @@
         {
           "type": "colHeader",
           "colKey": {
-            "<IDENTIFIER-SET>": "gss::sp_shownJobErrorMessages"
-          },
-          "width": 150.33929313929313
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
             "<IDENTIFIER-SET>": "gss::ep_shownJobErrorSeverity"
           },
           "width": 13.47
@@ -494,8 +697,18 @@
             "<IDENTIFIER-SET>": "gss::sp_shownJobErrorMoments"
           },
           "width": 40.21
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::sp_shownJobErrorMessages"
+          },
+          "width": 174.02
         }
       ]
+    },
+    "name": {
+      "literal": "ErrorWarningMessageTable"
     },
     "store.focus.in": {
       "literal": {
@@ -533,9 +746,6 @@
           }
         ]
       }
-    },
-    "name": {
-      "literal": "ErrorWarningMessageTable"
     }
   },
   "widgets/ErrorWarningStack": {
@@ -1120,6 +1330,31 @@
       "literal": "LineBasedProfilerData"
     }
   },
+  "widgets/sc_currentSession": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "gss::ep_shownSession",
+          "gss::sp_shownSessionDescription"
+        ]
+      }
+    },
+    "contents.labels.visible": {
+      "literal": 0
+    },
+    "multi.line": {
+      "literal": 1
+    },
+    "name": {
+      "literal": "sc_currentSession"
+    },
+    "title": {
+      "literal": "Selection Session & Type"
+    }
+  },
   "widgets/ShownSession": {
     "aimms.widget.type": {
       "literal": "scalar"
@@ -1136,6 +1371,17 @@
     },
     "name": {
       "literal": "ShownSession"
+    }
+  },
+  "widgets/ul_errordata": {
+    "aimms.widget.type": {
+      "literal": "upload"
+    },
+    "name": {
+      "literal": "ul_errordata"
+    },
+    "title": {
+      "literal": "Upload Error data"
     }
   },
   "widgets/UploadErrorData": {
