@@ -1,6 +1,9 @@
 Error and Profiling Results as Data
 ========================================
 
+This article is a companion article to :doc:`Incident Handling for Organizations<../310/310-incident-handling-for-organizations>`
+
+
 Error and profiler data can be stored in AIMMS' sets and parameters; then serialized and thereby shared between members of the same team.
 This is also featured by the ``GuardServerSession`` library. This article discusses how the ``GuardServerSession`` library achieves sharing of this data.
 

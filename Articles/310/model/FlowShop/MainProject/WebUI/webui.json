@@ -438,6 +438,9 @@
           }
         }
       ]
+    },
+    "aimms.widget.type": {
+      "literal": "sidepanel"
     }
   },
   "widgets/ClearError": {
@@ -458,6 +461,12 @@
     }
   },
   "widgets/dl_errorLog": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "gss::pr_downloadActionLog"
+      }
+    },
     "aimms.widget.type": {
       "literal": "download"
     },
@@ -469,6 +478,12 @@
     }
   },
   "widgets/dl_modeldata": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "gss::pr_downloadErrorData"
+      }
+    },
     "aimms.widget.type": {
       "literal": "download"
     },
@@ -480,6 +495,12 @@
     }
   },
   "widgets/dl_modelLog": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "gss::pr_downloadErrorReport"
+      }
+    },
     "aimms.widget.type": {
       "literal": "download"
     },
@@ -1374,6 +1395,12 @@
     }
   },
   "widgets/ul_errordata": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "gss::pr_uploadErrorData"
+      }
+    },
     "aimms.widget.type": {
       "literal": "upload"
     },

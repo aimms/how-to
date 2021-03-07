@@ -1,6 +1,9 @@
 The User Interface to the GSS Library
 ======================================
 
+This article is a companion article to :doc:`Incident Handling for Organizations<../310/310-incident-handling-for-organizations>`
+
+
 The User Interface for developers the user manage the Session History easily.
 The Session History consists of the following components:
 

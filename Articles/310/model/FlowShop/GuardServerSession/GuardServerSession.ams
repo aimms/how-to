@@ -1705,33 +1705,13 @@ LibraryModule Library_GuardServerSession {
 			StringParameter sp_traceFilename {
 				InitialData: "logging.txt";
 			}
-			Procedure pr_logMsgTraceFile {
-				Arguments: (sp_argMsg,ep_lev);
-				Body: {
-					if ep_lev >= ep_tracingFilterlevel then
-						put f_traceFile ;
-						put sp_argMsg, / ;
-						putclose ;
-					endif ;
-					!
-				}
-				Comment: {
-					"Trace to the log file; this procedure should not be called before PostLibraryInitialization finished."
-				}
-				StringParameter sp_argMsg {
-					Property: Input;
-				}
-				ElementParameter ep_lev {
-					Range: s_messageLevels;
-					Default: 'trace';
-					Property: Optional;
-				}
-			}
 			Procedure pr_logMsg {
 				Arguments: (sp_message,ep_messageImportance);
 				Body: {
 					if ep_messageImportance >= ep_tracingFilterlevel then
-						pr_logMsgTraceFile(sp_message,ep_messageImportance);
+						pr_logMsgTraceFile(formatString("%s [%e] %s", 
+							CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ(gss::ep_traceTimezone)"),
+							ep_messageImportance, sp_message), ep_messageImportance);
 					endif ;
 				}
 				Comment: {
@@ -1752,15 +1732,16 @@ LibraryModule Library_GuardServerSession {
 					sp_procEnterTimestamp := CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')");
 					p_procEnterMemoryInUse := MemoryInUse();
 					sp_node := formatString("%e",CallerNode(1));
-					sp_fullMsg := formatString("Enter %s(%s) at %s [%.3n Mb] in use", 
-						sp_node, sp_logDetail, 
+					sp_fullMsg := formatString("%s [%e] Enter %s(%s) [%.3n Mb] in use", 
 						MomentToString(
 							Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ(gss::ep_traceTimezone)", 
 							unit          :  [s], 
 							ReferenceDate :  sp_procEnterTimestamp, 
 							Elapsed       :  0[s]), 
+						ep_logLev,
+						sp_node, sp_logDetail, 
 						p_procEnterMemoryInUse );
-					pr_logMsg( sp_fullMsg, ep_logLev );
+					pr_logMsgTraceFile( sp_fullMsg, ep_logLev );
 				}
 				Comment: {
 					"Trace entry of procedure to the log file; this procedure should not be called before PostLibraryInitialization finished."
@@ -1799,19 +1780,19 @@ LibraryModule Library_GuardServerSession {
 					sp_node := formatString("%e",CallerNode(1));
 					p_leaveMemoryInUse := MemoryInUse();
 					sp_fullMsg := 
-						formatString( "Leave %s(%s) at %s [%.3n Mb] in use. ",
-							sp_node, sp_logDetail, 
+						formatString( "%s [%e] Leave %s(%s) [%.3n Mb] in use. ",
 							MomentToString(
 								Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ(gss::ep_traceTimezone)", 
 								unit          :  [s], 
 								ReferenceDate :  sp_leavingTime, 
 								Elapsed       :  0[s]), 
+							ep_logLev, sp_node, sp_logDetail, 
 							p_leaveMemoryInUse ) +
 						formatString( "Duration is %.3n [seconds] and memory %s is %n Mb.", 
 							p_duration,
 							if p_leaveMemoryInUse >= p_procEnterMemoryInUse then "increase" else "decrease" endif, 
 							abs( p_leaveMemoryInUse - p_procEnterMemoryInUse ) );
-					pr_logMsg( sp_fullMsg, ep_logLev );
+					pr_logMsgTraceFile( sp_fullMsg, ep_logLev );
 				}
 				Comment: {
 					"Trace leaving of procedure to the log file; this procedure should not be called before PostLibraryInitialization finished."
@@ -2568,6 +2549,28 @@ LibraryModule Library_GuardServerSession {
 					putclose ;
 				}
 				Comment: "Open log file and add identifying first few lines.";
+			}
+			Procedure pr_logMsgTraceFile {
+				Arguments: (sp_argMsg,ep_lev);
+				Body: {
+					if ep_lev >= ep_tracingFilterlevel then
+						put f_traceFile ;
+						put sp_argMsg, / ;
+						putclose ;
+					endif ;
+					!
+				}
+				Comment: {
+					"Trace to the log file; this procedure should not be called before PostLibraryInitialization finished."
+				}
+				StringParameter sp_argMsg {
+					Property: Input;
+				}
+				ElementParameter ep_lev {
+					Range: s_messageLevels;
+					Default: 'trace';
+					Property: Optional;
+				}
 			}
 			Procedure pr_downloadActionLogWork {
 				Arguments: (sp_filename);

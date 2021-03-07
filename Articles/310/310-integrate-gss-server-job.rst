@@ -1,6 +1,9 @@
 Integrate GuardServerSession library with your AIMMS Application
 ==================================================================
 
+This article is a companion article to :doc:`Incident Handling for Organizations<../310/310-incident-handling-for-organizations>`
+
+
 This article describes how to use the `GuardServerSession` library to delegate jobs from your AIMMS app. 
 The following steps need to be considered:
 
@@ -147,7 +150,7 @@ Further Reading
 
 This article is part of the series :doc:`Indicident Handling for Organizations<../310/310-incident-handling-for-organizations>`.
 
-The next article in this series discusses how to build a user interface to use the ``GuardServerSession`` library: :doc:`UI for GSS<../310/310-install-ui-gss>`
+The next article in this series discusses how to build a user interface to use the ``GuardServerSession`` library: :doc:`UI for GSS<../310/310-install-gss-ui-for-specialists>`
 
 
 

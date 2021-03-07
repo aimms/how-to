@@ -50,7 +50,7 @@ The following four articles describe how to modify your application to utilize t
 
 #.  :doc:`Integration instructions<../310/310-integrate-gss-server-job>`:  to integrate the ``GuardServerSession`` library with your application, in particular how to adapt the delegation to server session.
 
-#.  :doc:`UI for GSS<../310/310-install-ui-gss>`: to build a user interface for the ``GuardServerSession`` library.
+#.  :doc:`UI for GSS<../310/310-install-gss-ui-for-specialists>`: to build a user interface for the ``GuardServerSession`` library.
 
 #.  :doc:`Error handling<../310/310-errors-as-data>`: how the application needs to be adapted to retrieve this information. 
 

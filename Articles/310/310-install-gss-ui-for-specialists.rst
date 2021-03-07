@@ -1,6 +1,9 @@
 Install UI of GuardServerSession Library
 =========================================
 
+This article is a companion article to :doc:`Incident Handling for Organizations<../310/310-incident-handling-for-organizations>`
+
+
 This article is a brief set of instructions to create the user interface for working with the ``GuardServerSession`` library. 
 
 After adding the library to your project, you can start building a user interface to that library in WebUI. 

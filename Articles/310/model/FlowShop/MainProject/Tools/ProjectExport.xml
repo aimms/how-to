@@ -3,11 +3,10 @@
 	<ExcludedFile>backup</ExcludedFile>
 	<ExcludedFile>IncidentMaterials</ExcludedFile>
 	<ExcludedFile>log</ExcludedFile>
-	<ExcludedFile>MainProject\WebUI</ExcludedFile>
 	<ExcludedFile>PROTemp</ExcludedFile>
 	<ExcludedFile>tracings</ExcludedFile>
-	<ExcludedFile>IncidentSummary.zip</ExcludedFile>
 	<ExcludedFile>pro_arguments_.txt</ExcludedFile>
-	<ExcludedFile>PROLog.cfg</ExcludedFile>
+	<ExcludedFile>ProfilerAndErrorData-1615114034.errors</ExcludedFile>
+	<ExcludedFile>ProfilerAndErrorData-1615114243.errors</ExcludedFile>
 	<ExcludedFile>Library Repository (local copy)</ExcludedFile>
 </ExportSettings>

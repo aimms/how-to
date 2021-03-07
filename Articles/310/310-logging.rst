@@ -1,11 +1,31 @@
 The action log
 ===============
 
+This article is a companion article to :doc:`Incident Handling for Organizations<../310/310-incident-handling-for-organizations>`
+
+
 The action log is like any other log file, it contains the output of tracing statements.
 The ``GuardServersession`` library manages these logfiles.
 
 The action log is stored in .actionLog files in the subfolder tracings of the project folder. 
 At the end of a solver session saved in AIMMS PRO storage at `/userdata/<env>/<user>/<appname>/tracings/<session-id>.actionLog`
+
+.. code-block:: none
+    :linenos:
+
+    Opening log file tracings/17e09d17fced71e69d40f4218de81c65.actionLog at 2021-03-07 11:57:33
+    This file contains the log of a data session on behalf of chris@AIMMS
+    2021-03-07 11:57:36:35 [info] Enter pr_btnSolve() [51.066 Mb] in use
+    2021-03-07 11:57:39:26 [info] Enter gss::LoadResultsCallBack() [51.473 Mb] in use
+    2021-03-07 11:57:39:32 [trace] s_trackedSessions = { 17e09d17fced71e69d40f4218de81c65, 170b23fe-06cd-4ad9-b1f2-e710e8b8c2ee }
+    2021-03-07 11:57:39:33 [info] Leave gss::LoadResultsCallBack() [51.934 Mb] in use. Duration is 0.070 [seconds] and memory increase is 0.461 Mb.
+    2021-03-07 11:57:39:34 [warn] Warning: Don't look down.
+    2021-03-07 11:57:39:35 [warn] Warning: Look up, it is raining ;-).
+    2021-03-07 11:57:39:35 [info] Leave pr_btnSolve() [52.059 Mb] in use. Duration is 3 [seconds] and memory increase is 0.992 Mb.
+    2021-03-07 11:57:47:57 [info] Enter gss::pr_openIncidentSummary() [52.082 Mb] in use
+    2021-03-07 11:57:47:58 [info] Leave gss::pr_openIncidentSummary() [52.090 Mb] in use. Duration is 0.010 [seconds] and memory increase is 0.008 Mb.
+    2021-03-07 11:58:05:26 [info] Enter gss::pr_downloadIncidentSummary() [52.137 Mb] in use
+
 
 
 Relevant identifiers for logging
@@ -101,13 +121,6 @@ Relevant identifiers for logging
 
     Return value: None.
 
-    Example tracing output (together with pr_Leave): 
-
-    .. code-block:: none
-        :linenos:
-
-        Enter pr_workSolve() at 2021-02-24 15:38:23:51 [43.766 Mb] in use
-        Leave pr_workSolve() at 2021-02-24 15:38:24:54 [49.070 Mb] in use. Duration is 1.030 [seconds] and memory increase is 5.305 Mb.
 
 
 
