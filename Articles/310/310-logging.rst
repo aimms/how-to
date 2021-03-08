@@ -3,29 +3,52 @@ The action log
 
 This article is a companion article to :doc:`Incident Handling for Organizations<../310/310-incident-handling-for-organizations>`
 
+The action log is part of the Session History. 
+Where the Profiling information and errors as data provide deep insight into an incident, 
+the action log provides insight into what happened before.
 
 The action log is like any other log file, it contains the output of tracing statements.
-The ``GuardServersession`` library manages these logfiles.
+The ``GuardServersession`` library manages these log files.
 
-The action log is stored in .actionLog files in the subfolder tracings of the project folder. 
-At the end of a solver session saved in AIMMS PRO storage at `/userdata/<env>/<user>/<appname>/tracings/<session-id>.actionLog`
+The action log is stored in .actionLog files in the sub folder tracings of the project folder. 
+At the end of a solver session saved in AIMMS PRO storage at ``/userdata/<env>/<user>/<appname>/tracings/<session-id>.actionLog``.
+
+The following is a sample small action log:
 
 .. code-block:: none
     :linenos:
+    :emphasize-lines: 3,9
 
-    Opening log file tracings/17e09d17fced71e69d40f4218de81c65.actionLog at 2021-03-07 11:57:33
+    Opening log file tracings/d942c7adf9460ee3f4f2a0de1ed0833b.actionLog at 2021-03-08 14:25:20
     This file contains the log of a data session on behalf of chris@AIMMS
-    2021-03-07 11:57:36:35 [info] Enter pr_btnSolve() [51.066 Mb] in use
-    2021-03-07 11:57:39:26 [info] Enter gss::LoadResultsCallBack() [51.473 Mb] in use
-    2021-03-07 11:57:39:32 [trace] s_trackedSessions = { 17e09d17fced71e69d40f4218de81c65, 170b23fe-06cd-4ad9-b1f2-e710e8b8c2ee }
-    2021-03-07 11:57:39:33 [info] Leave gss::LoadResultsCallBack() [51.934 Mb] in use. Duration is 0.070 [seconds] and memory increase is 0.461 Mb.
-    2021-03-07 11:57:39:34 [warn] Warning: Don't look down.
-    2021-03-07 11:57:39:35 [warn] Warning: Look up, it is raining ;-).
-    2021-03-07 11:57:39:35 [info] Leave pr_btnSolve() [52.059 Mb] in use. Duration is 3 [seconds] and memory increase is 0.992 Mb.
-    2021-03-07 11:57:47:57 [info] Enter gss::pr_openIncidentSummary() [52.082 Mb] in use
-    2021-03-07 11:57:47:58 [info] Leave gss::pr_openIncidentSummary() [52.090 Mb] in use. Duration is 0.010 [seconds] and memory increase is 0.008 Mb.
-    2021-03-07 11:58:05:26 [info] Enter gss::pr_downloadIncidentSummary() [52.137 Mb] in use
+    2021-03-08 14:25:24:72 [info ] Enter pr_btnSolve() [51.125 Mb] in use
+    2021-03-08 14:25:27:55 [debug] Enter gss::LoadResultsCallBack() [51.457 Mb] in use
+    2021-03-08 14:25:27:60 [trace] s_trackedSessions = { d942c7adf9460ee3f4f2a0de1ed0833b, c78864a3-babf-4015-ae41-38de854fa0a3 }
+    2021-03-08 14:25:27:61 [debug] Leave gss::LoadResultsCallBack() [51.770 Mb] in use. Duration is 0.060 [seconds] and memory increase is 0.313 Mb.
+    2021-03-08 14:25:27:62 [warn ] 2021-03-08 14:25:24:00: Warning: Don't look down.
+    2021-03-08 14:25:27:62 [warn ] 2021-03-08 14:25:27:00: Warning: Look up, it is raining ;-).
+    2021-03-08 14:25:27:63 [info ] Leave pr_btnSolve() [51.895 Mb] in use. Duration is 2.910 [seconds] and memory increase is 0.770 Mb.
 
+Remarks:
+
+#.  First two lines summarizing which session is logged.
+
+#.  The actual logging consists of three columns:
+
+    #.  Date time
+
+    #.  Importance level of messages
+
+    #.  The actual message
+
+#.  ``[warn]`` Lines 7, 8: Warnings first issued, then handled.  The timestamp in the date time column is the time the warning was handled. 
+    The timestamp in the message column is the timestamp the warning was created.
+
+#.  ``[info]`` Lines 3, 9: An action - a procedure invoked via the WebUI by the end-user. These lines are marked here.
+
+#.  ``[debug]`` Lines 4, 6: The procedure is invoked by program logic (call back server session).
+    
+#.  ``[trace]`` Line 5: requesting and printing a bit of state is typically done at message importance level ``'trace'``
 
 
 Relevant identifiers for logging

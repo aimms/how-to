@@ -1,17 +1,21 @@
-The User Interface to the GSS Library
+The GSS User Interface for specialists
 ======================================
 
-This article is a companion article to :doc:`Incident Handling for Organizations<../310/310-incident-handling-for-organizations>`
+This article is a companion article to :doc:`Incident Handling for Organizations<../310/310-incident-handling-for-organizations>`. 
+It describes the User Interface for specialists supporting end-users of the application at hand.
 
-
-The User Interface for developers the user manage the Session History easily.
+The User Interface for specialists let them investigate the components of a Session History easily.
 The Session History consists of the following components:
 
-#.  Errors as data - we want both an overview of the errors in a session, as per error a stack of active identifiers such as defined parameters and procedures.
+#.  Incident summary, as supplied by the end user
 
-#.  Profiler data - we want both an overview of the time taken by these 
+#.  Errors as data - we want both an overview of the errors in a session, and per error a stack of active identifiers such as defined parameters and procedures.
 
-#.  Log files - those are not captured by tables, just by text editors :-( .
+#.  Profiler data - we want both an overview of the time taken per procedure, and an overview of the statements in the procedure selected. 
+
+#.  Log files - those are not captured by tables, just by text editors.
+
+#.  Case file, containing the contents of the sets, parameters and variables at the moment the incident was reported by the end-user.
 
 The user interface is shown in the ``GSS Session History Management`` below:
 
@@ -30,7 +34,7 @@ Remarks:
         :align: center
 
     When right-clicking on an entry in that table, with AIMMS Developer, you can open the attribute window of the indicated procedure.
-    
+
 #.  The upper table on the right shows the profiler data per identifier.
 
 #.  The lower table on the right shows the profiler data per lines for the selected identifier.

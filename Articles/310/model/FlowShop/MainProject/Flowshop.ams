@@ -298,7 +298,7 @@ Model Main_Flow_Shop {
 	}
 	Procedure pr_btnSolve {
 		Body: {
-			gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+			gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 			block 
 				raise warning "Don't look down" ;
 				pr_solve();
@@ -307,7 +307,7 @@ Model Main_Flow_Shop {
 				gss::pr_appendError( ep_err );
 				errh::MarkAsHandled( ep_err );
 			endblock ;
-			gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+			gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 		}
 		DeclarationSection gss_logging_declarations {
 			StringParameter sp_gssTime;
