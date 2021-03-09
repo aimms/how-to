@@ -7,13 +7,13 @@ This article is a companion article to :doc:`Incident Handling for Organizations
 This article describes how to use the `GuardServerSession` library to delegate jobs from your AIMMS app. 
 The following steps need to be considered:
 
-    #.  Adding the library
+#.  Adding the library
 
-    #.  Change in delegation
+#.  Change in delegation
 
-    #.  Change in input and output cases.
+#.  Change in input and output cases.
 
-    #.  Change in actions 
+#.  Change in actions 
 
 Adding the library
 --------------------

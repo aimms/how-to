@@ -78,13 +78,13 @@ Relevant identifiers for logging
 
     .. note:: This parameter is part of the input case sent from the data session to a solver session.
 
-#.  Procedure ``gss::pr_setTracinglevel(ep_newLev)``
+#.  Procedure ``gss::pr_setTracinglevel(ep_newTracingFilterLevel)``
 
     Use this procedure to set the `gss::ep_tracingFilterlevel`
 
     Arguments:
 
-    #.  Element parameter ``ep_newLev``, with range ``gss::s_messageLevels``
+    #.  Element parameter ``ep_newTracingFilterLevel``, with range ``gss::s_messageLevels``
 
     Throws exceptions: None
 
@@ -101,11 +101,11 @@ Relevant identifiers for logging
 
     #.  ``ep_messageImportance`` An optional element parameter with range ``s_MessageLevels`` and default ``'trace'``.
 
-    Throws exceptions: None
+    Throws exceptions: None.
 
     Return value: None.
 
-#.  Procedure ``gss::pr_enter(sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_logLev,sp_procEnterContextMessage)``
+#.  Procedure ``gss::pr_enter(sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_messageImportance,sp_logDetail)``
 
     Log the entry of a procedure, including when the procedure was entered and how much memory was in use.
     In addition, it stores the entry time and the memory in use at entry in the output arguments ``sp_procEnterTimestamp`` and ``p_procEnterMemoryInUse``.
@@ -118,27 +118,27 @@ Relevant identifiers for logging
 
     #.  ``p_procEnterMemoryInUse`` An output parameter that contains the amount of memory in use upon when the encompassing procedure was entered.
 
-    #.  ``ep_logLev`` optional default ``'debug'`` 
+    #.  ``ep_messageImportance`` optional default ``'debug'`` 
         The importance of logging the entry of the encompassing procedure.  
         For procedures that are actions, it is recommended to use the value ``'info'``.
 
-    #.  ``sp_procEnterContextMessage`` optional, default: empty
+    #.  ``sp_logDetail`` optional, default: empty
 
     Throws exceptions: None
 
     Return value: None.
 
-#.  Procedure ``gss::pr_leave(sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_logLev,sp_msg)``
+#.  Procedure ``gss::pr_leave(sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_messageImportance,sp_logDetail)``
 
     #.  ``sp_procEnterTimestamp`` An input parameter that contains the encompassing procedure entry time according to timezone ``'UTC'``
 
     #.  ``p_procEnterMemoryInUse`` An input parameter that contains the amount of memory in use upon when the encompassing procedure was entered.
 
-    #.  ``ep_logLev`` optional default ``'debug'``
+    #.  ``ep_messageImportance`` optional default ``'debug'``
         The importance of logging the leaving of the encompassing procedure.  
         For procedures that are actions, it is recommended to use the value ``'info'``.
 
-    #.  ``sp_procEnterContextMessage``  optional, default: empty
+    #.  ``sp_logDetail``  optional, default: empty
 
     Throws exceptions: None
 
@@ -176,14 +176,14 @@ For actions, please follow the following template:
 
     Procedure pr_actionTemplate {
         Body: {
-            pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+            pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
             block 
                 ! Call procedure to do the actual work.
             onerror ep_err do
                 gss::pr_appendError( ep_err );
                 errh::MarkAsHandled( ep_err );
             endblock ;
-            pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+            pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
         }
         Comment: "Sample action procedure";
         DeclarationSection gss_logging_declarations {

@@ -1845,12 +1845,16 @@ LibraryModule Library_GuardServerSession {
 				StringParameter sp_slash;
 			}
 			Procedure pr_setTracingLevel {
-				Arguments: (ep_newLev);
+				Arguments: (ep_newTracingFilterLevel);
 				Body: {
-					ep_tracingFilterlevel := ep_newLev;
+					if ep_newTracingFilterLevel then
+						ep_tracingFilterlevel := ep_newTracingFilterLevel;
+					else
+						raise error "pr_setTracingLevel(): no actual level supplied.";
+					endif ;
 				}
 				Comment: "Filter all tracing messages with a level lower than the argument value.";
-				ElementParameter ep_newLev {
+				ElementParameter ep_newTracingFilterLevel {
 					Range: s_messageLevels;
 					Property: Input;
 				}
@@ -2558,9 +2562,9 @@ LibraryModule Library_GuardServerSession {
 				Comment: "Open log file and add identifying first few lines.";
 			}
 			Procedure pr_logMsgTraceFile {
-				Arguments: (sp_argMsg,ep_lev);
+				Arguments: (sp_argMsg,ep_messageImportance);
 				Body: {
-					if ep_lev >= ep_tracingFilterlevel then
+					if ep_messageImportance >= ep_tracingFilterlevel then
 						put f_traceFile ;
 						put sp_argMsg, / ;
 						putclose ;
@@ -2573,7 +2577,7 @@ LibraryModule Library_GuardServerSession {
 				StringParameter sp_argMsg {
 					Property: Input;
 				}
-				ElementParameter ep_lev {
+				ElementParameter ep_messageImportance {
 					Range: s_messageLevels;
 					Default: 'trace';
 					Property: Optional;
