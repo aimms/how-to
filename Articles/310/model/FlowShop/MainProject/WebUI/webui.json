@@ -173,7 +173,7 @@
       "literal": "dialog"
     },
     "maxcolumns": {
-      "literal": 6
+      "literal": 8
     },
     "maxrows": {
       "literal": 3
@@ -181,14 +181,29 @@
     "widgets": {
       "literal": [
         {
-          "uri": "IncidentSummary",
+          "uri": "ErrorAndWarningMessages",
           "layoutInfo": {
-            "width": "4",
+            "width": "8",
             "height": "2"
           }
         },
         {
+          "uri": "IncidentSummary",
+          "layoutInfo": {
+            "width": "4",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
           "uri": "downloadIncidentSummary",
+          "layoutInfo": {
+            "width": "4",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "ClearDataSessionErrors",
           "layoutInfo": {
             "width": "4",
             "height": "1"
@@ -443,6 +458,28 @@
       "literal": "sidepanel"
     }
   },
+  "widgets/ClearDataSessionErrors": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "gss::pr_clearDataSessionErrors"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "ClearDataSessionErrors"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "gss::sp_titleClearDataSessionErrors"
+        ],
+        "slices": []
+      }
+    }
+  },
   "widgets/ClearError": {
     "action": {
       "literal": {
@@ -626,6 +663,62 @@
     },
     "name": {
       "literal": "DownloadReport"
+    }
+  },
+  "widgets/ErrorAndWarningMessages": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "gss::ep_dataSessionErrorSeverity",
+          "gss::sp_dataSessionErrorMoments",
+          "gss::sp_dataSessionErrorMessages"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "gss::i_dataSessionErrorMessageNumber"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::ep_dataSessionErrorSeverity"
+          },
+          "width": 11.42
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::sp_dataSessionErrorMoments"
+          },
+          "width": 32.79
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::sp_dataSessionErrorMessages"
+          },
+          "width": 145.2
+        }
+      ]
+    },
+    "name": {
+      "literal": "ErrorAndWarningMessages"
+    },
+    "title": {
+      "literal": "Errors and warnings encountered"
     }
   },
   "widgets/ErrorWarningMessageTable": {

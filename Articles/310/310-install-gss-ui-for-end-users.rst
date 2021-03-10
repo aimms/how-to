@@ -11,9 +11,25 @@ In this article it is explained how to create the dialog page in which the end u
 
     If not, you may want to change the webui.json file by replacing the new element you see with ``gss_incident_report``.
 
-#.  The size of the dialog should be ``medium``.
+#.  The size of the dialog should be ``large``.
 
-#.  On this page, create a scalar widget, named  ``IncidentSummary``
+#.  First create a table, titled "Errors and warnings encountered".
+
+    Contents:
+
+    #.  ``gss::sp_dataSessionErrorMoments``
+
+    #.  ``gss::ep_dataSessionErrorSeverity``
+
+    #.  ``gss::sp_dataSessionErrorMessages``
+
+    Pivot:
+
+    *   Rows:: ``i_dataSessionErrorMessageNumber``
+
+    *   Columns: ``<IDENTIFIER-SET>``
+
+#.  Create a scalar widget, named  ``IncidentSummary``
 
     #.  size: 4 columns, 2 rows.
 
@@ -26,3 +42,15 @@ In this article it is explained how to create the dialog page in which the end u
     #.  Enable Multi-line to 1
 
     #.  Title to ``gss::sp_incidentSummaryTitle``
+    
+#.  Add a download widget named downloadIncidentSummary (4 columns, 1 row)
+
+    #.  Procedure ``gss::pr_downloadIncidentSummary``
+    
+    #.  Title:  ``gss::sp_incidentSummaryTitle``
+    
+#.  Add a button named ClearDataSessionErrors (4 columns, 1 row)
+
+    #.  Procedure: ``gss::pr_clearDataSessionErrors``
+
+    #.  Title:  ``gss::sp_titleClearDataSessionErrors``

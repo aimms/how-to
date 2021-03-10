@@ -127,7 +127,7 @@ LibraryModule Library_GuardServerSession {
 					endblock ;
 					gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 				}
-				Comment: "Download profiler and error data of the selected data or solver session to file.";
+				Comment: "Download Incident Summary / Session History.";
 				StringParameter fileLocation {
 					Property: Output;
 				}
@@ -187,6 +187,14 @@ LibraryModule Library_GuardServerSession {
 					endif ;
 				}
 			}
+			Procedure pr_clearDataSessionErrors {
+				Body: {
+					empty sp_dataSessionErrorMessages, sp_dataSessionErrorMoments,
+						ep_dataSessionErrorSeverity, ep_dataSessionErrorNodes,
+						ep_dataSessionErrorAttributes, p_dataSessionErrorLines ;
+					ep_dataSessionIncident := '' ;
+				}
+			}
 			Set s_incidentSummaryActions {
 				Definition: data { Cancel, Submit };
 				Comment: "helper set for WebUI Incident summary dialog";
@@ -197,8 +205,8 @@ LibraryModule Library_GuardServerSession {
 			}
 			StringParameter sp_incidentSummarySuppliedByEndUser {
 				InitialData: {
-					"Please replace this text with an actual summary of the issue at hand.\n" 
-					"Please describe what you did not expect."
+					"You can replace this text with a summary of the actual problem.\n" 
+					"Tip: be explicit about what you did not expect."
 				}
 				Comment: {
 					"Text entered by end-user about what was unexpected.
@@ -207,6 +215,9 @@ LibraryModule Library_GuardServerSession {
 			}
 			StringParameter sp_titleDowloadIncidentSummary {
 				Definition: "Download incident summary";
+			}
+			StringParameter sp_titleClearDataSessionErrors {
+				Definition: "Clear all these errors and warnings";
 			}
 		}
 		Section WebUI_Support {
@@ -423,7 +434,7 @@ LibraryModule Library_GuardServerSession {
 			Set s_lineNumbers {
 				SubsetOf: Integers;
 				Index: i_lineNumber;
-				Definition: ElementRange(0,1000);
+				Definition: ElementRange(0,10000);
 				Comment: "Used for profiler data, line number index.";
 			}
 			Set s_positiveLineNumbers {
@@ -2011,6 +2022,7 @@ LibraryModule Library_GuardServerSession {
 					! The error data shown should not be modified in the User Interface.
 					CurrentInputs -= serverSessionErrorData;
 					CurrentInputs -= Shown_session_data_exchange ;
+					CurrentInputs -= dataSessionProfilerErrorData ;
 					pr_GetThisSession(); 
 					
 					block ! Initialize logging
@@ -2183,7 +2195,7 @@ LibraryModule Library_GuardServerSession {
 							if FileExists( sp_createdFile ) then
 								FileDelete( sp_createdFile );
 							endif ;
-							Execute("7za.exe", "a " + sp_createdFile + " .\\IncidentMaterials\\*", wait:1) ;
+							Execute("GuardServerSession\\bin\\7za.exe", "a " + sp_createdFile + " .\\IncidentMaterials\\*", wait:1) ;
 						endif ;
 					endblock ;
 				}

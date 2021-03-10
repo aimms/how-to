@@ -12,8 +12,11 @@ and the download button will download the session history consisting of incident
 
 Remarks:
 
-#.  The description is a multi-line text, but does not support mark-up or adding images.
+#.  The table titled "Errors and warning encountered" contain the errors and warning encountered in the data session.
 
-#.  Pressing the download button to create a single file containing relevant information.
+#.  The text widget titled "Please summarize the incident below", allows the end-user to enter a multi-line text. 
+    However, mark-up and adding images, attaching files is not allowed.
+
+#.  Pressing the download button to create a single file containing the session history.
 
 To create this page, please :doc:`follow this link<../310/310-install-gss-ui-for-end-users>`.
