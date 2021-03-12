@@ -1,5 +1,8 @@
 ﻿* AIMMS
 communicate_warnings_to_end_users 1
+constraint_listing 3
+constraint_listing_printed_when 0
+constraint_listing_variable_values 1
 major_messages 1
 maximal_number_of_warnings_reported 1000
 rounding_compatibility Aimms_3_7

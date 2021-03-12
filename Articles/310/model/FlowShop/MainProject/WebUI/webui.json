@@ -311,14 +311,6 @@
           }
         },
         {
-          "uri": "JobProfilerData",
-          "layoutInfo": {
-            "width": "4",
-            "height": "2",
-            "customPosition": ""
-          }
-        },
-        {
           "uri": "ErrorWarningStack",
           "layoutInfo": {
             "width": "8",
@@ -367,6 +359,13 @@
           "uri": "downloadErrorWarningData",
           "layoutInfo": {
             "width": "4",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "JobProfilerData",
+          "layoutInfo": {
+            "width": "2",
             "height": "1"
           }
         }
@@ -817,7 +816,7 @@
           "colKey": {
             "<IDENTIFIER-SET>": "gss::sp_shownJobErrorMessages"
           },
-          "width": 174.02
+          "width": 135.48
         }
       ]
     },
@@ -1186,13 +1185,9 @@
     },
     "contents": {
       "aimms": {
-        "contents": [
-          "gss::p_shownJobProfilerData"
-        ],
-        "prefix": "aimms",
         "slices": [
           {
-            "identifier": "gss::p_shownJobProfilerData",
+            "identifier": "gss::p_shownJobProfilerHits",
             "slice": [
               {
                 "index": "IndexIdentifiers",
@@ -1203,15 +1198,57 @@
                 "index": "gss::i_lineNumber",
                 "type": "fixed-element",
                 "value": "0"
+              }
+            ]
+          },
+          {
+            "identifier": "gss::p_shownJobProfilerGross",
+            "slice": [
+              {
+                "index": "IndexIdentifiers",
+                "type": "free",
+                "value": "IndexIdentifiers"
               },
               {
-                "index": "IndexProfilerTypes",
+                "index": "gss::i_lineNumber",
+                "type": "fixed-element",
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "identifier": "gss::p_shownJobProfilerNetto",
+            "slice": [
+              {
+                "index": "IndexIdentifiers",
                 "type": "free",
-                "value": "IndexProfilerTypes"
+                "value": "IndexIdentifiers"
+              },
+              {
+                "index": "gss::i_lineNumber",
+                "type": "fixed-element",
+                "value": "0"
               }
             ]
           }
-        ]
+        ],
+        "contents": [
+          "gss::p_shownJobProfilerHits",
+          "gss::p_shownJobProfilerGross",
+          "gss::p_shownJobProfilerNetto"
+        ],
+        "prefix": "aimms",
+        "partition": {
+          "rowHeader": [
+            "IndexIdentifiers"
+          ],
+          "colHeader": [
+            "<IDENTIFIER-SET>"
+          ],
+          "aggregated": [
+            "webui::ffn"
+          ]
+        }
       }
     },
     "contents.numdecimals": {
@@ -1223,24 +1260,12 @@
           "IndexIdentifiers"
         ],
         "colHeader": [
-          "IndexProfilerTypes"
+          "<IDENTIFIER-SET>"
         ],
         "aggregated": [
-          "<IDENTIFIER-SET>"
+          "webui::ffn"
         ]
       }
-    },
-    "contents.sorting": {
-      "literal": [
-        {
-          "partIndex": 0,
-          "partOffsets": [
-            -1,
-            2
-          ],
-          "mode": "decreasing"
-        }
-      ]
     },
     "contextmenu": {
       "aimms": {
@@ -1276,42 +1301,37 @@
         {
           "type": "colHeader",
           "colKey": {
-            "IndexProfilerTypes": "net time"
+            "<IDENTIFIER-SET>": "gss::p_shownJobProfilerNetto"
           },
-          "width": 16.53061224489796
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "IndexProfilerTypes": "gross time"
-          },
-          "width": 18
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "IndexProfilerTypes": "hits"
-          },
-          "width": 10.599999999999998
+          "width": 12.7
         },
         {
           "type": "rowHeader",
           "colKey": "IndexIdentifiers",
-          "width": 49.62449174838555
+          "width": 51.27
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::p_shownJobProfilerHits"
+          },
+          "width": 16.04
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::p_shownJobProfilerGross"
+          },
+          "width": 15.62
         }
       ]
+    },
+    "name": {
+      "literal": "JobProfilerData"
     },
     "store.focus.in": {
       "literal": {
         "IndexIdentifiers": "gss::ep_profilerDataSelectedIdentifier"
-      }
-    },
-    "title": {
-      "aimms": {
-        "contents": [
-          "gss::sp_titleProfilerOverview"
-        ],
-        "slices": []
       }
     },
     "widgetactions": {
@@ -1337,9 +1357,6 @@
           }
         ]
       }
-    },
-    "name": {
-      "literal": "JobProfilerData"
     }
   },
   "widgets/LineBasedProfilerData": {
@@ -1348,25 +1365,9 @@
     },
     "contents": {
       "aimms": {
-        "contents": [
-          "gss::p_shownJobProfilerData"
-        ],
-        "prefix": "aimms",
-        "partition": {
-          "rowHeader": [
-            "IndexIdentifiers",
-            "gss::i_LineNumber"
-          ],
-          "colHeader": [
-            "IndexProfilerTypes"
-          ],
-          "aggregated": [
-            "<IDENTIFIER-SET>"
-          ]
-        },
         "slices": [
           {
-            "identifier": "gss::p_shownJobProfilerData",
+            "identifier": "gss::p_shownJobProfilerHits",
             "slice": [
               {
                 "index": "IndexIdentifiers",
@@ -1377,15 +1378,61 @@
                 "index": "gss::i_lineNumber",
                 "type": "subset",
                 "value": "gss::i_actualLineNumber"
+              }
+            ]
+          },
+          {
+            "identifier": "gss::p_shownJobProfilerGross",
+            "slice": [
+              {
+                "index": "IndexIdentifiers",
+                "type": "element-parameter",
+                "value": "gss::ep_profilerDataSelectedIdentifier"
               },
               {
-                "index": "IndexProfilerTypes",
-                "type": "free",
-                "value": "IndexProfilerTypes"
+                "index": "gss::i_lineNumber",
+                "type": "subset",
+                "value": "gss::i_actualLineNumber"
+              }
+            ]
+          },
+          {
+            "identifier": "gss::p_shownJobProfilerNetto",
+            "slice": [
+              {
+                "index": "IndexIdentifiers",
+                "type": "element-parameter",
+                "value": "gss::ep_profilerDataSelectedIdentifier"
+              },
+              {
+                "index": "gss::i_lineNumber",
+                "type": "subset",
+                "value": "gss::i_actualLineNumber"
               }
             ]
           }
-        ]
+        ],
+        "contents": [
+          "gss::p_shownJobProfilerHits",
+          "gss::p_shownJobProfilerGross",
+          "gss::p_shownJobProfilerNetto"
+        ],
+        "prefix": "aimms",
+        "partition": {
+          "rowHeader": [
+            "IndexIdentifiers",
+            "gss::i_lineNumber"
+          ],
+          "colHeader": [
+            "IndexProfilerTypes",
+            "<IDENTIFIER-SET>"
+          ],
+          "aggregated": []
+        },
+        "displaydomain": {
+          "gss::p_jobProfilerData": "1"
+        },
+        "numdecimals": 3
       }
     },
     "contents.displaydomain": {
@@ -1403,11 +1450,10 @@
           "gss::i_lineNumber"
         ],
         "colHeader": [
-          "IndexProfilerTypes"
-        ],
-        "aggregated": [
+          "IndexProfilerTypes",
           "<IDENTIFIER-SET>"
-        ]
+        ],
+        "aggregated": []
       }
     },
     "custom.column.widths": {
@@ -1432,8 +1478,32 @@
             "IndexProfilerTypes": "hits"
           },
           "width": 13.333333333333333
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::p_shownJobProfilerHits"
+          },
+          "width": 15.62
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::p_shownJobProfilerGross"
+          },
+          "width": 13.54
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::p_shownJobProfilerNetto"
+          },
+          "width": 13.12
         }
       ]
+    },
+    "name": {
+      "literal": "LineBasedProfilerData"
     },
     "title": {
       "aimms": {
@@ -1442,9 +1512,6 @@
         ],
         "slices": []
       }
-    },
-    "name": {
-      "literal": "LineBasedProfilerData"
     }
   },
   "widgets/sc_currentSession": {

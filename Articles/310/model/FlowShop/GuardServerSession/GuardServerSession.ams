@@ -310,10 +310,23 @@ LibraryModule Library_GuardServerSession {
 				IndexDomain: (webui::indexWidgetItemActionSpec, webui::indexPageExtension, webui::indexWidgetActionSpec);
 				Definition: {
 					{
-						('gss::p_shownJobProfilerData', '1', 'displaytext' ) : "Model explorer",  
-						('gss::p_shownJobProfilerData', '1', 'icon'        ) : "aimms-glasses",  
-						('gss::p_shownJobProfilerData', '1', 'procedure'   ) : "gss::pr_OpenProfiledIdentifier",  
-						('gss::p_shownJobProfilerData', '1', 'state'       ) : "Active"  
+						('gss::p_shownJobProfilerHits', '1', 'displaytext' ) : "Model explorer",  
+						('gss::p_shownJobProfilerHits', '1', 'icon'        ) : "aimms-glasses",  
+						('gss::p_shownJobProfilerHits', '1', 'procedure'   ) : "gss::pr_OpenProfiledIdentifier",  
+						('gss::p_shownJobProfilerHits', '1', 'state'       ) : "Active" ,
+					
+						('gss::p_shownJobProfilerGross', '1', 'displaytext' ) : "Model explorer",  
+						('gss::p_shownJobProfilerGross', '1', 'icon'        ) : "aimms-glasses",  
+						('gss::p_shownJobProfilerGross', '1', 'procedure'   ) : "gss::pr_OpenProfiledIdentifier",  
+						('gss::p_shownJobProfilerGross', '1', 'state'       ) : "Active" ,
+					
+						('gss::p_shownJobProfilerNetto', '1', 'displaytext' ) : "Model explorer",  
+						('gss::p_shownJobProfilerNetto', '1', 'icon'        ) : "aimms-glasses",  
+						('gss::p_shownJobProfilerNetto', '1', 'procedure'   ) : "gss::pr_OpenProfiledIdentifier",  
+						('gss::p_shownJobProfilerNetto', '1', 'state'       ) : "Active" 
+					
+					
+					
 					}
 				}
 				Comment: "Defines the item actions for the table JobProfilerData on page \"GSS Session History Management\"";
@@ -333,32 +346,47 @@ LibraryModule Library_GuardServerSession {
 				IndexDomain: (webui::indexApplicationExtension,webui::indexStatusBarSpec);
 				Definition: {
 					{
+						( '5', 'header'    ) : "",  
+						( '5', 'icon'      ) : "aimms-chip" ,
+						( '5', 'color'     ) :  
+							if p_memoryInUse > 3500 then "red"  
+							elseif p_memoryInUse > 3000  then "orange"   
+							else "green" 
+							endif,
+						( '5', 'text'      ) : 
+							FormatString("There is %n Mb in use (peak: %n Mb)", 
+								p_memoryInUse, p_peakMemoryInUse ), 
+						( '5', 'tooltip'   ) : "",
+						( '5', 'procedure' ) : "",
+						( '5', 'state'     ) : "Active" , 
 					
-						( '6', 'header'    ) : "", ! (Optional) The Header/Title text you want to display for the status message.
-						( '6', 'icon'      ) : ! (Optional) The icon you want to display for the respective message.
+						( '6', 'header'    ) : "",  
+						( '6', 'icon'      ) :  
 							if gss::p_noErrors then "aimms-sad"   
 							elseif gss::p_noWarnings then "aimms-wondering" 
 							else "aimms-smile" 
 							endif, 
-						( '6', 'color'     ) : ! (Optional) The color you want to display for the icon.
+						( '6', 'color'     ) :  
 							if gss::p_noErrors  then "red"  
 							elseif gss::p_noWarnings then "orange"   
 							else "green" 
 							endif,
-						( '6', 'text'      ) : ! (REQUIRED) The text you want to display for the status message.
+						( '6', 'text'      ) :  
 							FormatString("%i warnings and %i errors", 
 								gss::p_noWarnings, gss::p_noErrors ), 
-						( '6', 'tooltip'   ) : ! (Optional) Tooltip to be displayed when the user hovers over the respective status message.
+						( '6', 'tooltip'   ) :  
 							if gss::p_noSignificantMessages then "Please visit the page \"GSS Session History Management\" for details on the warnings and errors" 
 							else "Don't worry, be happy" 
 							endif,                
-						( '6', 'procedure' ) : ! (Optional) The procedure you want to call when the respective status message is clicked.
+						( '6', 'procedure' ) :  
 							if bp_isConnectedToPro then
 								"gss::pr_openIncidentSummary"
 							else
 								"gss::pr_openErrorHandlingPage"
 							endif,
-						( '6', 'state'     ) : "Active" ! (Optional) Active (displayed and clickable), Inactive (displayed and not clickable) and Hidden (not displayed). By default, the state is Hidden.
+						( '6', 'state'     ) : "Active"  
+					
+					
 					
 					}
 				}
@@ -380,7 +408,7 @@ LibraryModule Library_GuardServerSession {
 				Comment: "The title for the table LineBasedProfilerData on page \"GSS Session History Management\".";
 			}
 			StringParameter sp_titleProfilerOverview {
-				Definition: "Identifier based Profiler Data";
+				Definition: "Identifier based Profiler Data [s]";
 			}
 			StringParameter sp_titleDownloadActionLog {
 				Definition: formatString("Download model log file of selected session: %e", gss::ep_shownSession);
@@ -561,6 +589,7 @@ LibraryModule Library_GuardServerSession {
 					}
 					Parameter p_shownJobProfilerData {
 						IndexDomain: (IndexIdentifiers,i_lineNumber,IndexProfilerTypes );
+						InitialData: data {};
 						Comment: "The profiler data shown on the \"GSS Session History Management\" page in the tables JobProfilerData and LineBasedProfilerData.";
 					}
 					StringParameter sp_shownJobErrorMessages {
@@ -595,6 +624,23 @@ LibraryModule Library_GuardServerSession {
 							"The active line of the identifiers that are on the execution stack shown 
 							in the table \"ErrorWarningStack\" on the page \"GSS Session History Management\""
 						}
+					}
+				}
+				DeclarationSection Shown_profiler_columns {
+					Parameter p_shownJobProfilerHits {
+						IndexDomain: (IndexIdentifiers,i_lineNumber );
+						Definition: p_shownJobProfilerData(IndexIdentifiers, gss::i_lineNumber, 'hits');
+						Comment: "The profiler data shown on the \"GSS Session History Management\" page in the tables JobProfilerData and LineBasedProfilerData.";
+					}
+					Parameter p_shownJobProfilerNetto {
+						IndexDomain: (IndexIdentifiers,i_lineNumber );
+						Definition: p_shownJobProfilerData(IndexIdentifiers, gss::i_lineNumber, 'net time');
+						Comment: "The profiler data shown on the \"GSS Session History Management\" page in the tables JobProfilerData and LineBasedProfilerData.";
+					}
+					Parameter p_shownJobProfilerGross {
+						IndexDomain: (IndexIdentifiers,i_lineNumber );
+						Definition: p_shownJobProfilerData(IndexIdentifiers, gss::i_lineNumber, 'gross time');
+						Comment: "The profiler data shown on the \"GSS Session History Management\" page in the tables JobProfilerData and LineBasedProfilerData.";
 					}
 				}
 			}
@@ -1684,7 +1730,7 @@ LibraryModule Library_GuardServerSession {
 						for i_someIdWithData do
 							s_singleTonSet := {};
 							s_singleTonSet += i_someIdWithData ;
-							sp_filename := spfnc_fileFriendlyName( i_someIdWithData );
+							sp_filename := fnc_fileFriendlyName( i_someIdWithData );
 							sp_fullFilename := sp_label + "\\" + sp_filename;
 							write s_singleTonSet to file sp_fullFilename ;
 							if pro::GetPROEndPoint() then
@@ -1749,6 +1795,7 @@ LibraryModule Library_GuardServerSession {
 				Body: {
 					sp_procEnterTimestamp := CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')");
 					p_procEnterMemoryInUse := MemoryInUse();
+					pr_setMemoryInUse( p_procEnterMemoryInUse ); 
 					sp_node := formatString("%e",CallerNode(1));
 					sp_fullMsg := formatString("%s [%5e] Enter %s(%s) [%.3n Mb] in use", 
 						MomentToString(
@@ -1797,6 +1844,7 @@ LibraryModule Library_GuardServerSession {
 						Timeslot      :  sp_leavingTime);
 					sp_node := formatString("%e",CallerNode(1));
 					p_leaveMemoryInUse := MemoryInUse();
+					pr_setMemoryInUse( p_leaveMemoryInUse );
 					sp_fullMsg := 
 						formatString( "%s [%5e] Leave %s(%s) [%.3n Mb] in use. ",
 							MomentToString(
@@ -1999,7 +2047,7 @@ LibraryModule Library_GuardServerSession {
 			Parameter ep_lastHitLine {
 				Definition: {
 					last( i_positiveLineNumber | 
-						p_jobProfilerData(ep_profilerDataSelectedIdentifier, 
+						p_shownJobProfilerData(ep_profilerDataSelectedIdentifier, 
 						i_positiveLineNumber, 'hits'))
 				}
 				Comment: "To define the line numbers visible in the table LineBasedProfilerData";
@@ -2072,6 +2120,9 @@ LibraryModule Library_GuardServerSession {
 						endif ;
 					endblock ;
 					! log file of a week old are to be deleted
+					
+					
+					pr_setMemoryInUse( MemoryInUse() );
 				}
 				Comment: {
 					"Add initialization statements here that require another library to be initialized already,
@@ -2430,14 +2481,14 @@ LibraryModule Library_GuardServerSession {
 					Property: Input;
 				}
 			}
-			Function spfnc_fileFriendlyName {
+			Function fnc_fileFriendlyName {
 				Arguments: (ep_id);
 				Range: string;
 				Body: {
 					sp_retVal := formatString("%e", ep_id );
 					sp_retVal := FindReplaceStrings( sp_retVal, ":", "_" );
 					
-					spfnc_fileFriendlyName := sp_retVal ;
+					fnc_fileFriendlyName := sp_retVal ;
 				}
 				Comment: "Replace : chars with _ chars to obtain name that is a valid file name.";
 				ElementParameter ep_id {
@@ -2715,6 +2766,26 @@ LibraryModule Library_GuardServerSession {
 				Comment: {
 					"Tracing time zone.
 					See ticket 11"
+				}
+			}
+		}
+		Section Memory_in_use {
+			Parameter p_memoryInUse {
+				InitialData: 0;
+			}
+			Parameter p_peakMemoryInUse {
+				InitialData: 0;
+			}
+			Procedure pr_setMemoryInUse {
+				Arguments: (p_argNewmemoryInUse);
+				Body: {
+					p_memoryInUse := p_argNewmemoryInUse;
+					if p_peakMemoryInUse < p_argNewmemoryInUse then
+						p_peakMemoryInUse := p_argNewmemoryInUse ;
+					endif ;
+				}
+				Parameter p_argNewmemoryInUse {
+					Property: Input;
 				}
 			}
 		}

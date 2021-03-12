@@ -50,7 +50,13 @@ Below are the widgets recommended to build a user interface for the ``GuardServe
 
 #.  Table ``JobProfilerData``, titled: ``sp_titleProfilerOverview``
 
-    #. Contents: ``gss::p_shownJobProfilerData``
+    #. Contents: 
+    
+        #.  ``gss::p_shownJobProfilerHits``
+
+        #.  ``gss::p_shownJobProfilerGross``
+
+        #.  ``gss::p_shownJobProfilerNetto``
 
     #. Store Focus:
 

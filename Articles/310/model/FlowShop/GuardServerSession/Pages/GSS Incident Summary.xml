@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Page Version="4000" TimeStamp="2021-03-04 23:10:13">
+<Page Version="4000" TimeStamp="2021-03-10 13:32:02">
 	<PageEditSize Type="Specified">
 		<Size Width="800" Height="300" />
 	</PageEditSize>
@@ -38,6 +38,7 @@
 	</PageObject>
 	<PageObject Type="Table">
 		<Location top="6" left="18" bottom="114" right="774" />
+		<TabOrder>4</TabOrder>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
@@ -57,12 +58,13 @@
 		<ExplicitIdentifier>
 			<Identifier>gss::sp_dataSessionErrorMessages( gss::i_dataSessionErrorMessageNumber )</Identifier>
 			<FirstColumn>1</FirstColumn>
-			<HeaderText>"mesage"</HeaderText>
+			<HeaderText>"message"</HeaderText>
 			<NumberFormat Width="80" Decimals="0" Alignment="Left" />
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Button">
 		<Location top="222" left="558" bottom="270" right="774" />
+		<TabOrder>3</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
 		<Title>gss::sp_titleClearDataSessionErrors</Title>
@@ -78,9 +80,9 @@
 	<UsedReferences>
 		<Model>
 			<Symbol>gss::pr_downloadIncidentSummaryWinUI</Symbol>
+			<Symbol>gss::pr_clearDataSessionErrors</Symbol>
 			<Symbol>gss::sp_incidentSummarySuppliedByEndUser</Symbol>
 			<Symbol>gss::sp_titleClearDataSessionErrors</Symbol>
-			<Symbol>gss::pr_clearDataSessionErrors</Symbol>
 			<Symbol>gss::sp_dataSessionErrorMessages</Symbol>
 			<Symbol>gss::sp_dataSessionErrorMoments</Symbol>
 			<Symbol>gss::ep_dataSessionErrorSeverity</Symbol>

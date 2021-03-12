@@ -51,6 +51,7 @@ Remarks:
 #.  ``[trace]`` Line 5: requesting and printing a bit of state is typically done at message importance level ``'trace'``
 
 
+
 Relevant identifiers for logging
 --------------------------------
 
@@ -76,7 +77,14 @@ Relevant identifiers for logging
     So when this tracing filter level is kept at its default, 
     messages with importance 'debug' or 'trace' will not be logged.
 
-    .. note:: This parameter is part of the input case sent from the data session to a solver session.
+    .. note:: 
+
+        #.  This parameter is part of the input case sent from the data session to a solver session.
+            Therefore, setting the logging level in the data session, will affect the logging in the solver sessions.
+
+        #.  At the beginning of a session, this parameter is initialized to ``'info'``. 
+            So when this tracing filter level is kept at its default, 
+            messages with importance ``'debug'`` or ``'trace'`` will not be logged.
 
 #.  Procedure ``gss::pr_setTracinglevel(ep_newTracingFilterLevel)``
 
