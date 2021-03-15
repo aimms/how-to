@@ -1,13 +1,18 @@
-[[_TOC_]]
+# Table of Contents
+* [Clone and Navigate the repo on your computer](#clone-and-navigate-the-repo-on-your-computer)
+* [Build Locally the HTML documentation](#build-locally-the-html-documentation)
+* [The Pipeline (optional)](#the-pipeline)
+* [Style guide](#style-guide)
+* [Prereq's to build a PDF version (optional)](#prereqs-to-build-a-pdf-version-optional)
 
-Clone the repo on your computer
-------------------------------------
+Clone and Navigate the repo on your computer
+---------------------------------------------
 
-If you make it here, it means you have access right to the How-To git repo. Thus you may "clone" it somewhere on your computer ([like this](https://tortoisegit.org/docs/tortoisegit/tgit-dug-clone.html)) using `git@gitlab.aimms.com:aimms/customer-support/aimms-how-to.git`. This will copy all files from the gitlab server onto your computer.
+If you make it here, it means you have access right to the How-To git repo. Thus you may "clone" it somewhere on your computer ([like this](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository). This will copy all files from the server onto your computer.
 
 Most of the content is located in the [Articles](/Articles) folder, where each article is inside a folder with a number, containing the article `RST` file and the attached resources (images, AIMMS project zip files, etc.). This number corresponds to a giltab ticket, where you can find more context and progress.
 
-The folder structure is meant for organising the content into sections on the website. You may find references to articles part of the [Articles](/Articles) folder in every index file. Putting articles in their dedicated [Articles](/Articles) folder enables us to display articles in several sections if needed.
+The folder structure is meant to organize the content into sections on the website. You may find references to articles part of the [Articles](/Articles) folder in every index file. Putting articles in their dedicated [Articles](/Articles) folder enables us to display articles in several sections if needed.
 
 Build Locally the HTML documentation
 --------------------------------------
@@ -19,20 +24,19 @@ Build Locally the HTML documentation
  - [AIMMS code blocks for PDF](https://gitlab.com/ArthurdHerbemont/aimms-pygments-style) (run `python3 -m pip install aimms-pygments-style`) 
 
 After installing all the above requirements, please go to the location of your previously cloned documentation folder:
- * Open a console prompt from this location, using ``ATL+D`` and typing ``cmd`` in the URL of your file explorer (awesome)
- * run ``make html`` (the first time, this may take some time, like 20 secs. progress is shown in your console)
+ * Open a console prompt from this location, using ``ATL+D`` and typing ``cmd`` in the URL of your file explorer (Windows)
+ * run ``make html`` (the first time, it may take some time, around 20 secs. progress is shown in your console)
  > 💡 You may also run `python3 -msphinx . _build/html` (to be sure to use a specific python version). [More docs](https://www.sphinx-doc.org/en/master/man/sphinx-build.html)
 
 <details>
 <summary>
-<b>Click me to show an example 👇</b>
+<b>Click me to show more info on console output 👇</b>
 </summary>
-![image](/uploads/af294070a540237ba141ac325763febd/image.png) 
 
 * As you may see at the bottom of the wonderfully colored prompt, **your html pages are in `_build\html` folder**, located in the current working directory (the same as always). You may check the build by opening any of those.
 * The red text are warnings (any error would actually break the building process, as in AIMMS): **Those warnings should be avoided**. Most of the time, this is due to a misuse of sphinx. You may correct them yourself, because your are awesome. Or let them be because your don't understand them. In any case, through your development please mind that **you should avoid to create any new warnings** (ask around if you don't understand)
-* Be aware to make title underline longer than the title itself (warning would look like the above cmd prompt image)
-* ⚠️ file names are case sensitive on linux, and not on windows. Thus, your build may break on gitlab, and not locally on your computer. 
+* Be aware to make title underline longer than the title itself 
+* ⚠️ file names are case sensitive on linux, and not on windows. Thus, your build may break on gitlab/github, and not locally on your computer. 
 
 </details>
 
@@ -102,7 +106,7 @@ If the pipeline fails, no copy will happen, thus website stays unchanged
 
 
 Style guide
-==============
+-
 
 **Guidelines**
 
