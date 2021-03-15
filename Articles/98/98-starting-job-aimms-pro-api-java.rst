@@ -12,8 +12,10 @@ Prerequisites
 #. Get a Java environment for development, such as `IntelliJ IDEA <https://www.jetbrains.com/idea/>`_ . 
    Here we'll assume you're just using the 64-bit version.
 
-#. Get the latest official JDK from the Oracle website: `Download JDK <https://www.oracle.com/java/technologies/javase-jdk11-downloads.html>`_
-   More information about JDK can be found in Oracle's documentation: `JDK Documentation <https://docs.oracle.com/en/java/javase/11/>`_
+#. Get the latest official JDK from the Oracle 
+   website: `Download JDK <https://www.oracle.com/java/technologies/javase-jdk11-downloads.html>`_
+   More information about JDK can be found in Oracle's 
+   documentation: `JDK Documentation <https://docs.oracle.com/en/java/javase/11/>`_
 
 #. Get `AIMMS PRO API <https://documentation.aimms.com/pro/api.html>`_ **via your AIMMS PRO Portal**.
 
