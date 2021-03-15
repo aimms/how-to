@@ -217,6 +217,7 @@ Model Main_Flow_Shop {
 			Body: {
 				ProfilerStart();
 				gss::pr_setTracinglevel( 'trace' );
+				gss::pr_setReplicationSessionLog( 1 );
 			}
 		}
 		Procedure PostMainInitialization {

@@ -152,7 +152,15 @@ Relevant identifiers for logging
 
     Return value: None.
 
+#.  Procedure ``pr_setReplicationSessionLog(bp_doReplicate)``
 
+    This procedure allows you to turn on/off replication of the action log to the session log.
+    
+    Arguments:
+    
+    #.  ``bp_doReplicate`` When 1, the action log will be replicated from the action to the session log. 
+    
+        
 
 
 Recommended use

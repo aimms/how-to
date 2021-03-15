@@ -1918,6 +1918,17 @@ LibraryModule Library_GuardServerSession {
 					Property: Input;
 				}
 			}
+			Procedure pr_setReplicationSessionLog {
+				Arguments: (bp_doReplicate);
+				Body: {
+					bp_replicateInSessionLog := bp_doReplicate;
+				}
+				Comment: "Use this function to turn on replication of the contents of the action log to the session log.";
+				Parameter bp_doReplicate {
+					Range: binary;
+					Property: Input;
+				}
+			}
 			Procedure pr_downloadActionLog {
 				Arguments: (FileLocation,StatusCode,StatusDescription);
 				Body: {
@@ -2631,6 +2642,19 @@ LibraryModule Library_GuardServerSession {
 						put f_traceFile ;
 						put sp_argMsg, / ;
 						putclose ;
+						if bp_replicateInSessionLog then
+							if pro::GetPROEndPoint() then
+								pro::management::LocalLogInfo(  sp_argMsg );
+					!			switch ep_messageImportance do
+					!				'trace':   pro::management::LocalLogTrace( sp_argMsg );
+					!				'debug':   pro::management::LocalLogDebug( sp_argMsg );
+					!				'info':    pro::management::LocalLogInfo(  sp_argMsg );
+					!				'warn':    pro::management::LocalLogInfo(  sp_argMsg );
+					!				'error':   pro::management::LocalLogError( sp_argMsg );
+					!				default:   pro::management::LocalLogInfo(  sp_argMsg );
+					!			endswitch ;
+							endif ;
+						endif ;
 					endif ;
 					!
 				}
@@ -2767,6 +2791,10 @@ LibraryModule Library_GuardServerSession {
 					"Tracing time zone.
 					See ticket 11"
 				}
+			}
+			Parameter bp_replicateInSessionLog {
+				Range: binary;
+				InitialData: 0;
 			}
 		}
 		Section Memory_in_use {

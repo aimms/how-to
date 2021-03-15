@@ -99,11 +99,17 @@ Below are the widgets recommended to build a user interface for the ``GuardServe
 
     #. Contents: 
 
-        ``gss::p_shownJobProfilerData``
+        #.  ``gss::p_shownJobProfilerHits``
+
+        #.  ``gss::p_shownJobProfilerGross``
+
+        #.  ``gss::p_shownJobProfilerNetto``
 
     #. Identifier Settings - Set slicing per index
 
         index ``gss::IndexIdentifiers`` --> element parameter ``gss::ep_profilerDataSelectedIdentifier``
+        
+        index 
 
 #.  Scalar widget ``shownSession``:
 
