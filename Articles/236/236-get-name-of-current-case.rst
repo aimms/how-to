@@ -18,7 +18,7 @@ All of these functions work with an element parameter in the predefined set :any
 
 As the predefined set :any:`AllCases` is a subset of :any:`Integers`, you can't get the name of the current (or any other case) directly. You will have to use the string parameter :any:`CaseFileURL` provided in the AIMMS language to obtain the name of a case referenced by an element in the set :any:`AllCases`.
 
-In the following code, ``ep_Case`` denotes an element parameter in the set :any:`AllCases` and ``sp_CaseName`` is a string parameter, which will be used for storing the name.
+In the following code, ``ep_Case`` denotes an element parameter in the set :any:`AllCases`.
 
 .. code-block:: aimms
     :linenos:
@@ -31,7 +31,7 @@ In the following code, ``ep_Case`` denotes an element parameter in the set :any:
 
 If successful, the above call will store the name of the case referred to by the element parameter in the string parameter that is provided as the second argument.
 
-Please see the sections "Case Management Related Identifiers" and "Case management" in the `AIMMS Function Reference <https://documentation.aimms.com/aimms_func.html>`_ for more information about these functions.
+Please see the sections :doc:`fr:predefined-identifiers/case-management-related-identifiers/index` and :doc:`fr:data-management/case-management/index` in the `AIMMS Function Reference <https://documentation.aimms.com/aimms_func.html>`_ for more information about these functions.
 
  
 
