@@ -1999,6 +1999,20 @@ LibraryModule Library_GuardServerSession {
 				StringParameter sp_outfn;
 			}
 		}
+		Section Tracking_memory_in_use {
+			Procedure pr_setMemoryInUse {
+				Arguments: (p_argNewmemoryInUse);
+				Body: {
+					p_memoryInUse := p_argNewmemoryInUse;
+					if p_peakMemoryInUse < p_argNewmemoryInUse then
+						p_peakMemoryInUse := p_argNewmemoryInUse ;
+					endif ;
+				}
+				Parameter p_argNewmemoryInUse {
+					Property: Input;
+				}
+			}
+		}
 		Section Additional_utilities {
 			Function fnc_hasPropertyNosave {
 				Arguments: (ep_id);
@@ -2631,9 +2645,31 @@ LibraryModule Library_GuardServerSession {
 					else
 						put "This file contains the log of an AIMMS Developer session ", / ;
 					endif ;
+					
+					block ! log arguments
+						p_argno := 1 ;
+						repeat 
+							bp_argExists := SessionArgument( p_argno, sp_arg );
+							if not bp_argExists then
+								break ;
+							endif ;
+							put p_argno:0, " ", sp_arg, / ;
+							p_argno += 1 ;
+						endrepeat ;
+						for pro::cl do
+							put pro::cl:20, ": ", pro::ReadArguments(pro::CL), /;
+						endfor ;
+					endblock ;
+					
+					
 					putclose ;
 				}
 				Comment: "Open log file and add identifying first few lines.";
+				DeclarationSection Debugging_Declarations {
+					Parameter p_argno;
+					Parameter bp_argExists;
+					StringParameter sp_arg;
+				}
 			}
 			Procedure pr_logMsgTraceFile {
 				Arguments: (sp_argMsg,ep_messageImportance);
@@ -2803,18 +2839,6 @@ LibraryModule Library_GuardServerSession {
 			}
 			Parameter p_peakMemoryInUse {
 				InitialData: 0;
-			}
-			Procedure pr_setMemoryInUse {
-				Arguments: (p_argNewmemoryInUse);
-				Body: {
-					p_memoryInUse := p_argNewmemoryInUse;
-					if p_peakMemoryInUse < p_argNewmemoryInUse then
-						p_peakMemoryInUse := p_argNewmemoryInUse ;
-					endif ;
-				}
-				Parameter p_argNewmemoryInUse {
-					Property: Input;
-				}
 			}
 		}
 	}

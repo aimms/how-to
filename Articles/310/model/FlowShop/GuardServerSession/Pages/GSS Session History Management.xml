@@ -8,10 +8,16 @@
 	<ResizeData>
 		<MainArea Line="PercentageFromLeft" Value="0.49375">
 			<LeftArea Line="PercentageFromTop" Value="0.457286432161">
-				<BottomArea Line="FixedFromBottom" Value="89" />
+				<TopArea Line="FixedFromTop" Value="49" />
+				<BottomArea Line="FixedFromBottom" Value="89">
+					<TopArea Line="FixedFromTop" Value="47" />
+				</BottomArea>
 			</LeftArea>
-			<RightArea Line="PercentageFromTop" Value="0.45351758794">
-				<BottomArea Line="FixedFromBottom" Value="91" />
+			<RightArea Line="PercentageFromTop" Value="0.454773869347">
+				<TopArea Line="FixedFromTop" Value="48" />
+				<BottomArea Line="FixedFromBottom" Value="91">
+					<TopArea Line="FixedFromTop" Value="48" />
+				</BottomArea>
 			</RightArea>
 		</MainArea>
 	</ResizeData>
@@ -20,7 +26,7 @@
 		<EntryProcedure>gss::pr_openPageErrorWarningProfiler</EntryProcedure>
 	</Action>
 	<PageObject Type="Table">
-		<Location top="66" left="14" bottom="354" right="366" />
+		<Location top="60" left="18" bottom="348" right="376" />
 		<TabOrder>7</TabOrder>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
@@ -49,7 +55,7 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="29" left="14" bottom="60" right="366" />
+		<Location top="6" left="18" bottom="37" right="376" />
 		<TabOrder>1</TabOrder>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
@@ -62,7 +68,7 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="378" left="14" bottom="414" right="372" />
+		<Location top="372" left="18" bottom="403" right="376" />
 		<TabOrder>2</TabOrder>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
@@ -75,7 +81,7 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Table">
-		<Location top="420" left="14" bottom="702" right="378" />
+		<Location top="420" left="18" bottom="702" right="376" />
 		<TabOrder>3</TabOrder>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
@@ -104,7 +110,7 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="30" left="408" bottom="66" right="772" />
+		<Location top="6" left="414" bottom="37" right="784" />
 		<TabOrder>4</TabOrder>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
@@ -117,7 +123,7 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="384" left="414" bottom="414" right="774" />
+		<Location top="372" left="414" bottom="403" right="784" />
 		<TabOrder>5</TabOrder>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
@@ -130,7 +136,7 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Table">
-		<Location top="420" left="408" bottom="702" right="778" />
+		<Location top="420" left="414" bottom="702" right="784" />
 		<TabOrder>6</TabOrder>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
@@ -159,7 +165,7 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Pivot Table">
-		<Location top="72" left="408" bottom="354" right="772" />
+		<Location top="60" left="414" bottom="348" right="784" />
 		<TabOrder>8</TabOrder>
 		<ObjectUUID>37E78650-ECE8-4024-8F1E-E26517E5E84C</ObjectUUID>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
@@ -229,7 +235,7 @@
 		</Grid_Area>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="714" left="18" bottom="750" right="378" />
+		<Location top="714" left="18" bottom="750" right="376" />
 		<TabOrder>13</TabOrder>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
@@ -243,7 +249,7 @@
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="714" left="408" bottom="744" right="778" />
+		<Location top="714" left="414" bottom="744" right="784" />
 		<TabOrder>9</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>
@@ -273,7 +279,7 @@
 		</ActionSequence>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="750" left="414" bottom="780" right="778" />
+		<Location top="750" left="414" bottom="780" right="784" />
 		<TabOrder>11</TabOrder>
 		<LeaveOnEnter>false</LeaveOnEnter>
 		<ButtonType>Text</ButtonType>

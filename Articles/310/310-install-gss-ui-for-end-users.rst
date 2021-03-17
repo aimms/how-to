@@ -25,7 +25,7 @@ In this article it is explained how to create the dialog page in which the end u
 
     Pivot:
 
-    *   Rows:: ``i_dataSessionErrorMessageNumber``
+    *   Rows: ``i_dataSessionErrorMessageNumber``
 
     *   Columns: ``<IDENTIFIER-SET>``
 

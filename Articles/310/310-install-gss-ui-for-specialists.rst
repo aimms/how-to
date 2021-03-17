@@ -107,9 +107,8 @@ Below are the widgets recommended to build a user interface for the ``GuardServe
 
     #. Identifier Settings - Set slicing per index
 
-        index ``gss::IndexIdentifiers`` --> element parameter ``gss::ep_profilerDataSelectedIdentifier``
-        
-        index 
+        index ``IndexIdentifiers`` --> element parameter ``gss::ep_profilerDataSelectedIdentifier``
+
 
 #.  Scalar widget ``shownSession``:
 
@@ -119,9 +118,9 @@ Below are the widgets recommended to build a user interface for the ``GuardServe
 
     procedure: ``gss::pr_uploadErrorData``
 
-#.  Download widget ``DownloadModelLog``, titled ``gss::sp_downloadModelLogTitle``:
+#.  Download widget ``DownloadModelLog``, titled ``gss::sp_titleDownloadActionLog``:
 
-    procedure: ``gss::pr_downloadModelLog``
+    procedure: ``gss::pr_downloadActionLog``
 
 #.  Download widget ``DownloadErrorReport``, titled "Download error report for current session": 
 
