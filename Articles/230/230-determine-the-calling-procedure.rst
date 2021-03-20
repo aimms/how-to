@@ -13,11 +13,8 @@ Determine the calling procedure
     
 .. note::
 
-    This article is obsolete; there is an intrinsic function, named CallerNode, to capture this functionality.
+    This article is obsolete; there is an intrinsic function, named :any:`CallerNode`, to capture this functionality.
 
-
-
-..  <![CDATA[[caption id="attachment_1411" align="alignleft" width="239" caption="Determine calling procedure"]<img src="http://techblog.aimms.com/wp-content/uploads/sites/5/2012/06/determine_calling_procedure.png" alt="Determine calling procedure" title="Determine calling procedure" width="239" height="231" class="size-full wp-image-1411" />[/caption]For something we were working on, we had to find a way to determine which procedure was calling the current procedure. 
 
 .. figure:: images/determine_calling_procedure.png
 
