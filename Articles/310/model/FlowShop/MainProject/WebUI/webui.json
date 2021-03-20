@@ -20,12 +20,6 @@
                 "slug": "gss_session_history_management",
                 "children": [
                   {
-                    "name": "ErrorPanel",
-                    "type": "sidepanel",
-                    "slug": "errorpanel_1",
-                    "children": []
-                  },
-                  {
                     "name": "GSS Incident report",
                     "type": "dialog",
                     "slug": "gss_incident_report",
@@ -129,43 +123,6 @@
     },
     "displayName": {
       "literal": "Layout5 Copy"
-    }
-  },
-  "pages/errorpanel_1": {
-    "widgets": {
-      "literal": [
-        {
-          "uri": "DownloadReport",
-          "layoutInfo": {
-            "width": "2",
-            "height": "1"
-          }
-        },
-        {
-          "uri": "DownloadData",
-          "layoutInfo": {
-            "width": "2",
-            "height": "1"
-          }
-        },
-        {
-          "uri": "UploadErrorData",
-          "layoutInfo": {
-            "width": "2",
-            "height": "1"
-          }
-        },
-        {
-          "uri": "ClearError",
-          "layoutInfo": {
-            "width": "2",
-            "height": "1"
-          }
-        }
-      ]
-    },
-    "aimms.widget.type": {
-      "literal": "sidepanel"
     }
   },
   "pages/gss_incident_report": {
@@ -376,30 +333,6 @@
     "aimms.widget.type": {
       "literal": "page"
     },
-    "sidepanels": {
-      "aimms": {
-        "contents": [
-          "gss::sp_SidePanelErrorPage"
-        ],
-        "slices": [
-          {
-            "identifier": "gss::sp_SidePanelErrorPage",
-            "slice": [
-              {
-                "index": "webui::indexApplicationExtension",
-                "type": "free",
-                "value": "webui::indexApplicationExtension"
-              },
-              {
-                "index": "webui::indexSidePanelSpec",
-                "type": "free",
-                "value": "webui::indexSidePanelSpec"
-              }
-            ]
-          }
-        ]
-      }
-    },
     "widgets": {
       "literal": [
         {
@@ -479,23 +412,6 @@
       }
     }
   },
-  "widgets/ClearError": {
-    "action": {
-      "literal": {
-        "type": "procedure",
-        "value": "gss::pr_dataSessionClearErrors"
-      }
-    },
-    "aimms.widget.type": {
-      "literal": "button"
-    },
-    "title": {
-      "literal": "ClearError"
-    },
-    "name": {
-      "literal": "ClearError"
-    }
-  },
   "widgets/dl_errorLog": {
     "action": {
       "literal": {
@@ -545,23 +461,6 @@
     },
     "title": {
       "literal": "Download Error Report"
-    }
-  },
-  "widgets/DownloadData": {
-    "action": {
-      "literal": {
-        "type": "procedure",
-        "value": "gss::pr_downloadErrorData"
-      }
-    },
-    "aimms.widget.type": {
-      "literal": "download"
-    },
-    "title": {
-      "literal": "Download Error Data"
-    },
-    "name": {
-      "literal": "DownloadData"
     }
   },
   "widgets/DownloadErrorReport": {
@@ -645,23 +544,6 @@
     },
     "name": {
       "literal": "DownloadModelLog"
-    }
-  },
-  "widgets/DownloadReport": {
-    "action": {
-      "literal": {
-        "type": "procedure",
-        "value": "gss::pr_downloadErrorReport"
-      }
-    },
-    "aimms.widget.type": {
-      "literal": "download"
-    },
-    "title": {
-      "literal": "Download Error Report"
-    },
-    "name": {
-      "literal": "DownloadReport"
     }
   },
   "widgets/ErrorAndWarningMessages": {
@@ -1518,6 +1400,9 @@
     "aimms.widget.type": {
       "literal": "scalar"
     },
+    "compact": {
+      "literal": 0
+    },
     "contents": {
       "aimms": {
         "contents": [
@@ -1572,23 +1457,6 @@
     },
     "title": {
       "literal": "Upload Error data"
-    }
-  },
-  "widgets/UploadErrorData": {
-    "action": {
-      "literal": {
-        "type": "procedure",
-        "value": "gss::pr_uploadErrorData"
-      }
-    },
-    "aimms.widget.type": {
-      "literal": "upload"
-    },
-    "title": {
-      "literal": "Upload Error Data"
-    },
-    "name": {
-      "literal": "UploadErrorData"
     }
   },
   "widgets/UploadErrorWarningData": {

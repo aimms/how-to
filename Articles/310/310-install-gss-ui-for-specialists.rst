@@ -1,16 +1,59 @@
 Install UI of GuardServerSession Library
 =========================================
 
-This article is a companion article to :doc:`Incident Handling for Organizations<../310/310-incident-handling-for-organizations>`
-
-
-This article is a brief set of instructions to create the user interface for working with the ``GuardServerSession`` library. 
+This article is a companion article to :doc:`Incident Handling for Organizations<../310/310-incident-handling-for-organizations>` and to 
+:doc:`The GSS User Interface for specialists<../310/310-gss-ui-for-specialists>`. 
+It contains a set of instructions to create the user interface for specialists working with the ``GuardServerSession`` library. 
 
 After adding the library to your project, you can start building a user interface to that library in WebUI. 
 
-We can use the same example as discussed in the previous article of this series, :doc:`AIMMS How-To: Integrate GuardServerSession <../310/310-integrate-gss-server-job>`. Download here :download:`FlowShop.zip <model/FlowShop.zip>` 
-
 The rest of this article details the WebUI page ``GSS Session History Management`` in this project and how you can replicate this functionality in your application. 
+
+Sidepanel
+----------
+
+In this section, we create a sidepanel page first. This sidepanel wil be used in the actual UI for specialists.
+
+Create a side panel page with name ``sp_controls``. 
+Check the ``MainProject/WebUI/webui.json`` file; the page ``sp_controls`` should have "slug": ``sp_controls_1``.  
+If not, the slug needs to be renamed at two places in the ``webui.json`` file (with a closed AIMMS).
+
+Widgets on side panel
+^^^^^^^^^^^^^^^^^^^^^^
+
+We start adding widget to the side panel as follows:
+
+#.  Scalar widget ``shownSession``, titled: ``Selection Session & Type``
+
+    Contents: 
+
+    #.  ``gss::ep_shownSession``
+
+    #.  ``gss::sp_shownSessionDescription``
+
+    Miscellaneous property "Enable multi line": 1.
+
+#.  Upload widget ``UploadErrorWarningData``, titled "Upload Error Warning data":
+
+    procedure: ``gss::pr_uploadErrorData``
+
+#.  Download widget ``DownloadModelLog``, titled ``gss::sp_titleDownloadActionLog``:
+
+    procedure: ``gss::pr_downloadActionLog``
+
+#.  Download widget ``DownloadErrorReport``, titled "Download error report for current session": 
+
+    procedure: ``gss::pr_downloadErrorReport``
+
+    .. title: ``"Download error report shown session"``
+    .. what do mean by shown session ? 
+
+#.  Download widget ``DownloadErrorWarningData``, titled "Download error data for current session":
+
+    procedure: ``gss::pr_downloadErrorData``
+    
+Main UI for specialists
+------------------------
 
 The page ``GSS Session History Management`` has ``Action Upon Load`` set to ``gss::pr_openPageErrorWarningProfiler``.
     
@@ -21,7 +64,7 @@ The page ``GSS Session History Management`` has ``Action Upon Load`` set to ``gs
 Status bar of your app should be set to ``gss::sp_messageStatusBar``, or to a string parameter that contains this information.
 
 Widgets
--------------------------
+^^^^^^^^^^^
 
 Below are the widgets recommended to build a user interface for the ``GuardServerSession`` library.
 
@@ -110,28 +153,7 @@ Below are the widgets recommended to build a user interface for the ``GuardServe
         index ``IndexIdentifiers`` --> element parameter ``gss::ep_profilerDataSelectedIdentifier``
 
 
-#.  Scalar widget ``shownSession``:
 
-    Contents: ``ep_shownSession``
-
-#.  Upload widget ``UploadErrorWarningData``, titled "Upload Error Warning data":
-
-    procedure: ``gss::pr_uploadErrorData``
-
-#.  Download widget ``DownloadModelLog``, titled ``gss::sp_titleDownloadActionLog``:
-
-    procedure: ``gss::pr_downloadActionLog``
-
-#.  Download widget ``DownloadErrorReport``, titled "Download error report for current session": 
-
-    procedure: ``gss::pr_downloadErrorReport``
-
-    .. title: ``"Download error report shown session"``
-    .. what do mean by shown session ? 
-
-#.  Download widget ``DownloadErrorWarningData``, titled "Download error data for current session":
-
-    procedure: ``gss::pr_downloadErrorData``
 
 Testing
 -----------
@@ -154,8 +176,7 @@ Further Reading
 
 This article is part of the series :doc:`Indicident Handling for Organizations<../310/310-incident-handling-for-organizations>`.
 
-The next article in this series discusses how to use the error handling functionality of the ``GuardServerSession`` library: :doc:`Error Handling as Data<../310/310-errors-as-data>`
-
+ 
 
 
 

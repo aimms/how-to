@@ -331,17 +331,6 @@ LibraryModule Library_GuardServerSession {
 				}
 				Comment: "Defines the item actions for the table JobProfilerData on page \"GSS Session History Management\"";
 			}
-			StringParameter sp_SidePanelErrorPage {
-				IndexDomain: (webui::indexApplicationExtension,webui::indexSidePanelSpec);
-				Definition: {
-					{
-						( '1', 'displayText' ) : if p_noSignificantMessages then FormatString("%i msgs", p_noSignificantMessages ) else "" endif,
-						( '1', 'pageId'      ) : if p_noSignificantMessages then "errorpanel_1"                                    else "" endif,
-						( '1', 'tooltip'     ) : if p_noSignificantMessages then "Error handling"                                  else "" endif,  
-						( '1', 'state'       ) : if p_noSignificantMessages then "Active"                                          else "" endif 
-					}
-				}
-			}
 			StringParameter sp_messageStatusBar {
 				IndexDomain: (webui::indexApplicationExtension,webui::indexStatusBarSpec);
 				Definition: {
