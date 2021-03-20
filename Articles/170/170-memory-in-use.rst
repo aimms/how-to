@@ -23,7 +23,7 @@ Several other functions are available to check the memory used by specific ident
 
 .. tip::
 
-   The **Rebuild** statement allows to return the memory occupied by permutations.
+   The :any:`rebuild <rebuild>` statement allows to return the memory occupied by permutations.
 
 Memory used by AIMMS identifiers 
 -----------------------------------
