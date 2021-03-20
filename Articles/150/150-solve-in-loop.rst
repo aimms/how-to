@@ -23,9 +23,9 @@ The example project and Excel input files can be downloaded from the links below
 Logic of the iterative operation
 -------------------------------------
 
-The flow of a procedure to solve a math program multiple times is shown on the right. These operations can be done using any iterative operator like ``for`` or ``while``. The loop starts by selecting the first input file from the list of files to be iterated through. 
+The flow of a procedure to solve a math program multiple times is shown on the right. These operations can be done using any iterative operator like :any:`for` or :any:`while`. The loop starts by selecting the first input file from the list of files to be iterated through. 
 
-When using a ``while`` loop, you must initialize the iterator before the loop block is written. This is not necessary when using a ``for`` loop because it uses a set index in AIMMS.
+When using a :any:`while` loop, you must initialize the iterator before the loop block is written. This is not necessary when using a :any:`for` loop because it uses a set index in AIMMS.
 
 .. figure:: images/flow-logic.png
    :align: center
@@ -33,7 +33,7 @@ When using a ``while`` loop, you must initialize the iterator before the loop bl
 
    Logic of the iterative operation
 
-In the example, we use a ``for`` loop:
+In the example, we use a :any:`for` loop:
 
 .. code-block:: aimms
 

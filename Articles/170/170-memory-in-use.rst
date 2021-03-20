@@ -56,7 +56,7 @@ Analyzing memory used by GMPs
 
 The function :aimms:func:`GMP::Instance::GetMemoryUsed` returns the memory used by a generated mathematical program (GMP). The set :aimms:set:`AllGeneratedMathematicalPrograms` is another handy tool you can use to monitor memory use. The larger the size of this set, the more the number of generated mathematical programs managed by your application, and you may want to release the memory they occupy using the intrinsic function :aimms:procedure:`GMP::Instance::Delete`. 
 
-You can retrieve the memory used by all the math programs in :aimms:set:`AllGeneratedMathematicalPrograms` by declaring a parameter over the index ``IndexGeneratedMathematicalPrograms`` and using the :aimms:func:`GMP::Instance::GetMemoryUsed` function in a ``for`` loop as illustrated in lines 6-12 in the below code. Lines 13-18 consist a procedure to delete all the GMPs in your project. 
+You can retrieve the memory used by all the math programs in :aimms:set:`AllGeneratedMathematicalPrograms` by declaring a parameter over the index ``IndexGeneratedMathematicalPrograms`` and using the :aimms:func:`GMP::Instance::GetMemoryUsed` function in a :any:`for` loop as illustrated in lines 6-12 in the below code. Lines 13-18 consist a procedure to delete all the GMPs in your project. 
 
 .. code-block:: aimms
    :linenos:
