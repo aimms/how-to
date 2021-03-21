@@ -59,9 +59,9 @@ Main UI for specialists
 ------------------------
 
 The page ``GSS Session History Management`` has ``Action Upon Load`` set to ``gss::pr_openPageErrorWarningProfiler``.
-    
+
 .. tip::
-    
+
     If you have a multi page application, you might want to add this page to the group of "developer" or "control" pages in your application.
 
 Make the page a grid page and give it standard layout 5, 
