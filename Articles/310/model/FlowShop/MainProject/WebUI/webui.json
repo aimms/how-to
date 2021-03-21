@@ -12,7 +12,8 @@
               {
                 "children": [],
                 "name": "home",
-                "slug": "home"
+                "slug": "home",
+                "type": "pagev2-grid"
               },
               {
                 "name": "GSS Session History Management",
@@ -70,7 +71,7 @@
       "literal": false
     },
     "timezonesetting": {
-      "literal": true
+      "literal": false
     },
     "widget.visibility.greyout": {
       "literal": true
@@ -223,7 +224,7 @@
       ]
     },
     "layoutId": {
-      "literal": "custom_5702d503-3fe9-4d6c-9f4e-e302155388ef"
+      "literal": "Layout5"
     },
     "maxcolumns": {
       "literal": 12
@@ -284,42 +285,6 @@
           }
         },
         {
-          "uri": "ShownSession",
-          "layoutInfo": {
-            "width": "8",
-            "height": "1",
-            "customPosition": ""
-          }
-        },
-        {
-          "uri": "UploadErrorWarningData",
-          "layoutInfo": {
-            "width": "4",
-            "height": "1"
-          }
-        },
-        {
-          "uri": "DownloadModelLog",
-          "layoutInfo": {
-            "width": "4",
-            "height": "1"
-          }
-        },
-        {
-          "uri": "DownloadErrorReport",
-          "layoutInfo": {
-            "width": "4",
-            "height": "1"
-          }
-        },
-        {
-          "uri": "downloadErrorWarningData",
-          "layoutInfo": {
-            "width": "4",
-            "height": "1"
-          }
-        },
-        {
           "uri": "JobProfilerData",
           "layoutInfo": {
             "width": "2",
@@ -331,7 +296,19 @@
   },
   "pages/home": {
     "aimms.widget.type": {
-      "literal": "page"
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "GanttChart_Flowshop",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsGanttChart_Flowshop0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout9"
     },
     "widgets": {
       "literal": [
@@ -463,45 +440,6 @@
       "literal": "Download Error Report"
     }
   },
-  "widgets/DownloadErrorReport": {
-    "action": {
-      "literal": {
-        "type": "procedure",
-        "value": "gss::pr_downloadErrorReport"
-      }
-    },
-    "aimms.widget.type": {
-      "literal": "download"
-    },
-    "name": {
-      "literal": "DownloadErrorReport"
-    },
-    "title": {
-      "aimms": {
-        "contents": [
-          "gss::sp_titleDownloadErrorReport"
-        ],
-        "slices": []
-      }
-    }
-  },
-  "widgets/downloadErrorWarningData": {
-    "action": {
-      "literal": {
-        "type": "procedure",
-        "value": "gss::pr_downloadErrorData"
-      }
-    },
-    "aimms.widget.type": {
-      "literal": "download"
-    },
-    "title": {
-      "literal": "Download error data shown session"
-    },
-    "name": {
-      "literal": "downloadErrorWarningData"
-    }
-  },
   "widgets/downloadIncidentSummary": {
     "action": {
       "literal": {
@@ -522,28 +460,6 @@
         ],
         "slices": []
       }
-    }
-  },
-  "widgets/DownloadModelLog": {
-    "action": {
-      "literal": {
-        "type": "procedure",
-        "value": "gss::pr_downloadActionLog"
-      }
-    },
-    "aimms.widget.type": {
-      "literal": "download"
-    },
-    "title": {
-      "aimms": {
-        "contents": [
-          "gss::sp_titleDownloadActionLog"
-        ],
-        "slices": []
-      }
-    },
-    "name": {
-      "literal": "DownloadModelLog"
     }
   },
   "widgets/ErrorAndWarningMessages": {
@@ -691,14 +607,14 @@
           "colKey": {
             "<IDENTIFIER-SET>": "gss::sp_shownJobErrorMoments"
           },
-          "width": 40.21
+          "width": 34.17
         },
         {
           "type": "colHeader",
           "colKey": {
             "<IDENTIFIER-SET>": "gss::sp_shownJobErrorMessages"
           },
-          "width": 135.48
+          "width": 54.37
         }
       ]
     },
@@ -1216,6 +1132,14 @@
         "IndexIdentifiers": "gss::ep_profilerDataSelectedIdentifier"
       }
     },
+    "title": {
+      "aimms": {
+        "contents": [
+          "gss::sp_titleProfilerOverview"
+        ],
+        "slices": []
+      }
+    },
     "widgetactions": {
       "aimms": {
         "contents": [
@@ -1424,24 +1348,6 @@
       "literal": "Selection Session & Type"
     }
   },
-  "widgets/ShownSession": {
-    "aimms.widget.type": {
-      "literal": "scalar"
-    },
-    "compact": {
-      "literal": 1
-    },
-    "contents": {
-      "aimms": {
-        "contents": [
-          "gss::ep_shownSession"
-        ]
-      }
-    },
-    "name": {
-      "literal": "ShownSession"
-    }
-  },
   "widgets/ul_errordata": {
     "action": {
       "literal": {
@@ -1457,23 +1363,6 @@
     },
     "title": {
       "literal": "Upload Error data"
-    }
-  },
-  "widgets/UploadErrorWarningData": {
-    "action": {
-      "literal": {
-        "type": "procedure",
-        "value": "gss::pr_uploadErrorData"
-      }
-    },
-    "aimms.widget.type": {
-      "literal": "upload"
-    },
-    "title": {
-      "literal": "Upload Error Warning Data"
-    },
-    "name": {
-      "literal": "UploadErrorWarningData"
     }
   }
 }

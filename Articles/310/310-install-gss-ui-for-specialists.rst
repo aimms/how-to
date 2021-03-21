@@ -16,7 +16,10 @@ In this section, we create a sidepanel page first. This sidepanel wil be used in
 
 Create a side panel page with name ``sp_controls``. 
 Check the ``MainProject/WebUI/webui.json`` file; the page ``sp_controls`` should have "slug": ``sp_controls_1``.  
-If not, the slug needs to be renamed at two places in the ``webui.json`` file (with a closed AIMMS).
+If not, the slug needs to be renamed at two places in the ``webui.json`` file (with AIMMS closed).
+
+Status bar of your app should be set to ``gss::sp_messageStatusBar``, or to a string parameter that contains this information.
+
 
 Widgets on side panel
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -61,10 +64,13 @@ The page ``GSS Session History Management`` has ``Action Upon Load`` set to ``gs
     
     If you have a multi page application, you might want to add this page to the group of "developer" or "control" pages in your application.
 
-Status bar of your app should be set to ``gss::sp_messageStatusBar``, or to a string parameter that contains this information.
+Make the page a grid page and give it standard layout 5, 
+see `Grid Layout for beautiful and consistent looking applications <https://community.aimms.com/aimms-webui-44/grid-layout-for-beautiful-and-consistent-looking-applications-728>`_
 
-Widgets
-^^^^^^^^^^^
+The page extensions > side panels property should be set to ```gss::sp_sidePanel``.
+
+Add the following Widgets
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Below are the widgets recommended to build a user interface for the ``GuardServerSession`` library.
 
@@ -90,6 +96,8 @@ Below are the widgets recommended to build a user interface for the ``GuardServe
         #. Widget actions: ``gss::sp_widgetActionMessageList``
 
         #. Item actions: ``gss::sp_itemActionMessageList``
+        
+    Move this widget to Area A of the grid page
 
 #.  Table ``JobProfilerData``, titled: ``sp_titleProfilerOverview``
 
@@ -115,6 +123,9 @@ Below are the widgets recommended to build a user interface for the ``GuardServe
     
         #.  Item actions: ``gss::sp_itemActionIdentifierProfiler``
 
+    Move this widget to Area B of the grid page
+
+
 #.  Table ``ErrorWarningStack``, titled: ``gss::sp_titleStackMessage``
 
     #. Contents:
@@ -138,6 +149,8 @@ Below are the widgets recommended to build a user interface for the ``GuardServe
         #.  Widget actions: ``gss::sp_widgetActionMessageStack``
         #.  Item actions: ``gss::sp_itemActionMessageStack``
 
+    Move this widget to Area C of the grid page
+
 #.  Table ``LineBasedProfilerData``, titled: ``gss::sp_titleProfilerDetail``
 
     #. Contents: 
@@ -152,31 +165,24 @@ Below are the widgets recommended to build a user interface for the ``GuardServe
 
         index ``IndexIdentifiers`` --> element parameter ``gss::ep_profilerDataSelectedIdentifier``
 
-
+    Move this widget to Area D of the grid page
 
 
 Testing
 -----------
+
 To visually guide the adaption of the width of the columns of the tables, please run:
-    
+
     #.  ``gss::pr_artificialDataGSSPage`` to have an artificial warning message and 
-    
+
     #.  ``gss::pr_openPageErrorWarningProfiler`` to ensure the ``GSS Session History Management`` tables are filled properly.
-    
+
     And then start manually adapting the column widths such that the contents fit neatly.
-    
+
 Now the page should look as follows:
 
     .. image:: images/gss-page-design.png
         :align: center
-
-
-Further Reading
----------------------
-
-This article is part of the series :doc:`Indicident Handling for Organizations<../310/310-incident-handling-for-organizations>`.
-
- 
 
 
 
