@@ -215,6 +215,8 @@ Model Main_Flow_Shop {
 	Section MainModelProcedures {
 		Procedure MainInitialization {
 			Body: {
+				
+				
 				ProfilerStart();
 				gss::pr_setTracinglevel( 'trace' );
 				gss::pr_setReplicationSessionLog( 1 );

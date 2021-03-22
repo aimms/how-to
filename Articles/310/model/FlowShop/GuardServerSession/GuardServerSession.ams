@@ -2070,12 +2070,16 @@ LibraryModule Library_GuardServerSession {
 				Range: binary;
 				InitialData: 0;
 			}
+			Parameter bp_isWorkerSession {
+				InitialData: 0;
+			}
 		}
 		Section Main_Library_procedures {
 			Procedure LibraryInitialization {
 				Body: {
 					ep_jobIncident := '' ;
 					ep_dataSessionIncident := '' ;
+					pr_GetThisSession();
 				}
 				Comment: "Add initialization statements here that do not require any other library being initialized already.";
 			}
@@ -2085,42 +2089,7 @@ LibraryModule Library_GuardServerSession {
 					CurrentInputs -= serverSessionErrorData;
 					CurrentInputs -= Shown_session_data_exchange ;
 					CurrentInputs -= dataSessionProfilerErrorData ;
-					pr_GetThisSession(); 
 					
-					block ! Initialize logging
-						if pro::GetPROEndPoint() then
-							pro::Initialize();
-							if not pro::IsRunningAtServer() then
-								ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
-							endif ;
-							bp_isConnectedToPro := 1 ;
-						else
-							ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
-						endif ;
-					
-						if sp_thisSession then
-							sp_traceFilename := sp_tracingsFolderName + "/" + sp_thisSession + ".actionLog" ;
-						endif ;
-					
-						if not  DirectoryExists( sp_tracingsFolderName ) then
-							DirectoryCreate( sp_tracingsFolderName );
-						endif ;
-						if fileExists( sp_traceFilename ) then
-							FileDelete( sp_traceFilename );
-						endif ;
-					endblock ;
-					
-					! Open log file for data session or AIMMS Developer session.
-					if pro::GetPROEndPoint() then
-						if pro::openedAsWorker then
-							! pr_openLogFile();
-							! The log file for a server session is opened at the beginning of pr_guardAndProfileServerJob().
-						else
-							pr_openLogFile();
-						endif ;
-					else
-						pr_openLogFile();
-					endif ;
 					
 					block ! Ensure option "Use UTC forcaseandstartenddate" is turned on.
 						bp_ogv := OptionGetValue("Use UTC forcaseandstartenddate", 
@@ -2141,9 +2110,6 @@ LibraryModule Library_GuardServerSession {
 				Comment: {
 					"Add initialization statements here that require another library to be initialized already,
 					or add statements that require the Data Management module to be initialized."
-				}
-				ElementParameter ep_trackedSession {
-					Range: s_trackedSessions;
 				}
 				Parameter bp_ogv {
 					Range: binary;
@@ -2623,8 +2589,8 @@ LibraryModule Library_GuardServerSession {
 					putclose f_traceFile ;
 					put f_traceFile;
 					put "Opening log file ", sp_traceFilename, " at ", CurrentToSTring("%c%y-%m-%d %H:%M:%S"), / ;
-					if pro::GetPROEndPoint() then
-						if pro::openedAsWorker then
+					if bp_isConnectedToPro then
+						if bp_isWorkerSession then
 							put "This file contains the log of a solver session handling request ", 
 								pro::workerRequestDescription, / ;
 						else
@@ -2635,30 +2601,10 @@ LibraryModule Library_GuardServerSession {
 						put "This file contains the log of an AIMMS Developer session ", / ;
 					endif ;
 					
-					block ! log arguments
-						p_argno := 1 ;
-						repeat 
-							bp_argExists := SessionArgument( p_argno, sp_arg );
-							if not bp_argExists then
-								break ;
-							endif ;
-							put p_argno:0, " ", sp_arg, / ;
-							p_argno += 1 ;
-						endrepeat ;
-						for pro::cl do
-							put pro::cl:20, ": ", pro::ReadArguments(pro::CL), /;
-						endfor ;
-					endblock ;
-					
-					
 					putclose ;
 				}
 				Comment: "Open log file and add identifying first few lines.";
-				DeclarationSection Debugging_Declarations {
-					Parameter p_argno;
-					Parameter bp_argExists;
-					StringParameter sp_arg;
-				}
+				DeclarationSection Debugging_Declarations;
 			}
 			Procedure pr_logMsgTraceFile {
 				Arguments: (sp_argMsg,ep_messageImportance);
@@ -2741,25 +2687,82 @@ LibraryModule Library_GuardServerSession {
 			}
 			Procedure pr_GetThisSession {
 				Body: {
-					if pro::GetPROEndPoint() then
-						if pro::ReadArguments('_pro-webui-session-id') then
-							sp_thisSession := pro::ReadArguments('_pro-webui-session-id');
-						else
-							sp_thisSession := pro::ReadArguments('_pro-session-id');
-							if not sp_thisSession then ! When AIMMS Developer is started with a connection to AIMMS PRO.
-								sp_thisSession := CurrentToString("%c%y%m%dT%H%M%S%t%TZ('UTC')");
+					bp_nextArgIsSessionId := 0 ;
+					bp_isConnectedToPro := 0 ;
+					bp_isWorkerSession := 0 ;
+					sp_thisSession := "" ;
+					block ! loop over arguments to find the session id.
+						p_argno := 1 ;
+						repeat 
+							bp_argExists := SessionArgument( p_argno, sp_arg );
+							if not bp_argExists then
+								break ;
 							endif ;
-						endif ;
-						pro::management::LocalLogInfo(formatString(
-							"pr_GetThisSession(): sp_thisSession = %s", sp_thisSession ));
-					else
+							if bp_nextArgIsSessionId then
+								sp_thisSession := sp_arg ;
+								break ;
+							elseif sp_arg = "_pro-session-id" then
+								bp_nextArgIsSessionId := 1 ;
+								bp_isWorkerSession := 1 ;
+								bp_isConnectedToPro := 1 ;
+							elseif sp_arg = "_pro-webui-session-id" then
+								bp_nextArgIsSessionId := 1 ;
+								bp_isConnectedToPro := 1 ;
+							endif ;
+							p_argno += 1 ;
+						endrepeat ;
+					endblock ;
+					if not sp_thisSession then
 						sp_thisSession := CurrentToString("%c%y%m%dT%H%M%S%t%TZ('UTC')");
+					endif ;
+					
+					
+					block ! Initialize logging
+						if bp_isConnectedToPro then
+							if not bp_isWorkerSession then
+								ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
+							endif ;
+						else
+							ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
+						endif ;
+					
+						if sp_thisSession then
+							sp_traceFilename := sp_tracingsFolderName + "/" + sp_thisSession + ".actionLog" ;
+						endif ;
+					
+						if not  DirectoryExists( sp_tracingsFolderName ) then
+							DirectoryCreate( sp_tracingsFolderName );
+						endif ;
+						if fileExists( sp_traceFilename ) then
+							FileDelete( sp_traceFilename );
+						endif ;
+					endblock ;
+					
+					! Open log file for data session or AIMMS Developer session.
+					if bp_isConnectedToPro then
+						if bp_isWorkerSession then
+							! pr_openLogFile();
+							! The log file for a server session is opened at the beginning of pr_guardAndProfileServerJob().
+						else
+							pr_openLogFile();
+						endif ;
+					else
+						pr_openLogFile();
 					endif ;
 				}
 				Comment: {
 					"Get the unique identifier of this session. 
 					Whenever possible, align with AIMMS PRO - to make matching with AIMMS PRO generated logging information easier.
 					When not on PRO, use timestamp."
+				}
+				Parameter p_argno;
+				Parameter bp_argExists;
+				StringParameter sp_arg;
+				ElementParameter ep_trackedSession {
+					Range: s_trackedSessions;
+				}
+				Parameter bp_nextArgIsSessionId {
+					Range: binary;
 				}
 			}
 			Procedure pr_actuallySaveActionLogFile {
