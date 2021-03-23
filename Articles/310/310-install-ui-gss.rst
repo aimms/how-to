@@ -9,7 +9,10 @@ We can use the same example as discussed in the previous article of this series,
 
 The rest of this article details the WebUI page ``GSS Session History Management`` in this project and how you can replicate this functionality in your application. 
 
-The page ``GSS Session History Management`` has ``Action Upon Load`` set to ``gss::pr_openPageErrorWarningProfiler``.
+.. image:: images/gss-page-design.png
+:align: center
+
+The page ``GSS Session History Management`` in the attached example uses a custom grid layout and has ``Action Upon Load`` set to ``gss::pr_openPageErrorWarningProfiler``.
     
 .. tip::
     
@@ -128,12 +131,6 @@ To visually guide the adaption of the width of the columns of the tables, please
     #.  ``gss::pr_openPageErrorWarningProfiler`` to ensure the ``GSS Session History Management`` tables are filled properly.
     
     And then start manually adapting the column widths such that the contents fit neatly.
-    
-Now the page should look as follows:
-
-    .. image:: images/gss-page-design.png
-        :align: center
-
 
 Further Reading
 ---------------------
