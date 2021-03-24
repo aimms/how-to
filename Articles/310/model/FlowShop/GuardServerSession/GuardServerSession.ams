@@ -1768,7 +1768,7 @@ LibraryModule Library_GuardServerSession {
 					endif ;
 				}
 				Comment: {
-					"Trace to the log file; this procedure should not be called before PostLibraryInitialization finished."
+					"Trace to the log file; this procedure should not be called before LibraryInitialization finished."
 				}
 				StringParameter sp_message {
 					Property: Input;
@@ -1798,7 +1798,7 @@ LibraryModule Library_GuardServerSession {
 					pr_logMsgTraceFile( sp_fullMsg, ep_messageImportance );
 				}
 				Comment: {
-					"Trace entry of procedure to the log file; this procedure should not be called before PostLibraryInitialization finished."
+					"Trace entry of procedure to the log file; this procedure should not be called before LibraryInitialization finished."
 				}
 				StringParameter sp_procEnterTimestamp {
 					Property: Output;
@@ -1850,7 +1850,7 @@ LibraryModule Library_GuardServerSession {
 					pr_logMsgTraceFile( sp_fullMsg, ep_messageImportance );
 				}
 				Comment: {
-					"Trace leaving of procedure to the log file; this procedure should not be called before PostLibraryInitialization finished."
+					"Trace leaving of procedure to the log file; this procedure should not be called before LibraryInitialization finished."
 				}
 				Parameter p_procEnterMemoryInUse {
 					Property: Input;
@@ -2570,8 +2570,8 @@ LibraryModule Library_GuardServerSession {
 						Key   :  "USERPROFILE", 
 						Value :  sp_userProfile);
 					if not sp_userProfile then
-						sp_downloadFolderName := "c:\temp" ;
-						raise warning "fnc_getDownloadFolder(): Unable to obtain USERPROFILE" ;
+						sp_downloadFolderName := "c:\\temp" ;
+						raise warning "pr_getDownloadFolder(): Unable to obtain USERPROFILE" ;
 					else
 						sp_downloadFolderName := sp_userProfile + "\\downloads" ;
 					endif ;
@@ -2630,7 +2630,7 @@ LibraryModule Library_GuardServerSession {
 					!
 				}
 				Comment: {
-					"Trace to the log file; this procedure should not be called before PostLibraryInitialization finished."
+					"Trace to the log file; this procedure should not be called before LibraryInitialization finished."
 				}
 				StringParameter sp_argMsg {
 					Property: Input;

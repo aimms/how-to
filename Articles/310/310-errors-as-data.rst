@@ -47,12 +47,14 @@ The profiler information is captured at the end of a solver session, or at the s
 Then it follows the same path as the error information through the application before it is shown.
 
 
-Converting errors and profiling info to data
+Converting errors to data
 ------------------------------------------------------
 
 Use the procedures ``pr_appendError`` and ``pr_appendMessage`` to convert errors and messages respectively to data in AIMMS identifiers.
 The identifiers in which this data is stored are located in:
+
     #. ``gss::dataSessionProfilerErrorData`` for data sessions
+
     #. ``gss::serverSessionErrorData`` for server sessions
 
 .. Both the procedures, the relevant collector is for the data session: `gss::dataSessionProfilerErrorData`, for a server session: `gss::serverSessionErrorData`.
@@ -84,6 +86,13 @@ The identifiers in which this data is stored are located in:
 
     Return value: None.
 
+Converting profiling information to data
+------------------------------------------
+
+By adding :aimms:func:`ProfilerStart` to ``MainInitialization`` the AIMMS process will start collecting profiling information.
+
+The ``GuardServerSession`` library uses :aimms:func:`ProfilerCollectAllData` to collect the profiling information; 
+no need to add calls to this procedure in your application.
 
 
 
