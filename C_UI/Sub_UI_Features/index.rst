@@ -26,6 +26,7 @@ This section contains explanations of various UI features available when buildin
    /Articles/338/338-viewing-schedules-different-scenarios
    /Articles/377/377-add-color-palettes
    /Articles/377/377-link-legend-colors
+   /Articles/512/512-image-widget-refresh
 
 
 

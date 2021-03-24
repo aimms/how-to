@@ -15,14 +15,14 @@ LibraryModule Library_GuardServerSession {
 	Section Public_Section {
 		Procedure pr_actionTemplate {
 			Body: {
-				gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+				gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 				block 
 					! Call procedure to do the actual work.
 				onerror ep_err do
 					gss::pr_appendError( ep_err );
 					errh::MarkAsHandled( ep_err );
 				endblock ;
-				gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+				gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 			}
 			Comment: "Sample action procedure";
 			DeclarationSection gss_logging_declarations {
@@ -39,7 +39,7 @@ LibraryModule Library_GuardServerSession {
 			Property: NoSave;
 			Procedure pr_openIncidentSummary {
 				Body: {
-					gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 					block 
 						! Call procedure to do the actual work.
 						webui::OpenDialogPage(
@@ -51,7 +51,7 @@ LibraryModule Library_GuardServerSession {
 						gss::pr_appendError( ep_err );
 						errh::MarkAsHandled( ep_err );
 					endblock ;
-					gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 				}
 				Comment: "Invoked via status bar. It will open a dialog where a user can write up some details and submit.";
 				DeclarationSection gss_logging_declarations {
@@ -67,14 +67,14 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_incidentSummaryOndone {
 				Arguments: (sp_action);
 				Body: {
-					gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info', sp_logDetail: sp_action);
+					gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info', sp_logDetail: sp_action);
 					block 
 						! Nothing to do.
 					onerror ep_err do
 						gss::pr_appendError( ep_err );
 						errh::MarkAsHandled( ep_err );
 					endblock ;
-					gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info', sp_logDetail: sp_action);
+					gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info', sp_logDetail: sp_action);
 				}
 				Comment: "Invoked by OnDone in the WebUI dialog page.";
 				DeclarationSection gss_logging_declarations {
@@ -93,7 +93,7 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_downloadIncidentSummary {
 				Arguments: (fileLocation,statusCode,statusDescription);
 				Body: {
-					gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 					block
 					
 						gss::pr_initErrorHandlingDownloadUploadButtons( ep_stat, statusCode,  statusDescription, bp_download:1 );
@@ -125,9 +125,9 @@ LibraryModule Library_GuardServerSession {
 						errh::MarkAsHandled(ep_err);
 					
 					endblock ;
-					gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 				}
-				Comment: "Download profiler and error data of the selected data or solver session to file.";
+				Comment: "Download Incident Summary / Session History.";
 				StringParameter fileLocation {
 					Property: Output;
 				}
@@ -151,7 +151,7 @@ LibraryModule Library_GuardServerSession {
 			}
 			Procedure pr_downloadIncidentSummaryWinUI {
 				Body: {
-					gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 					block 
 						pr_getDownloadFolder(sp_downloadFolder);
 						pr_workCreateIncidentSummary(sp_createdFile);
@@ -161,7 +161,7 @@ LibraryModule Library_GuardServerSession {
 						gss::pr_appendError( ep_err );
 						errh::MarkAsHandled( ep_err );
 					endblock ;
-					gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 				}
 				DeclarationSection local_declarations {
 					StringParameter sp_downloadFolder;
@@ -187,6 +187,14 @@ LibraryModule Library_GuardServerSession {
 					endif ;
 				}
 			}
+			Procedure pr_clearDataSessionErrors {
+				Body: {
+					empty sp_dataSessionErrorMessages, sp_dataSessionErrorMoments,
+						ep_dataSessionErrorSeverity, ep_dataSessionErrorNodes,
+						ep_dataSessionErrorAttributes, p_dataSessionErrorLines ;
+					ep_dataSessionIncident := '' ;
+				}
+			}
 			Set s_incidentSummaryActions {
 				Definition: data { Cancel, Submit };
 				Comment: "helper set for WebUI Incident summary dialog";
@@ -196,7 +204,10 @@ LibraryModule Library_GuardServerSession {
 				Comment: "Title for scalar widget in WebUI Incident Summary dialog.";
 			}
 			StringParameter sp_incidentSummarySuppliedByEndUser {
-				InitialData: "Please replacing this text with an actual summary of the issue at hand";
+				InitialData: {
+					"You can replace this text with a summary of the actual problem.\n" 
+					"Tip: be explicit about what you did not expect."
+				}
 				Comment: {
 					"Text entered by end-user about what was unexpected.
 					Used in the incident summary dialog."
@@ -204,6 +215,9 @@ LibraryModule Library_GuardServerSession {
 			}
 			StringParameter sp_titleDowloadIncidentSummary {
 				Definition: "Download incident summary";
+			}
+			StringParameter sp_titleClearDataSessionErrors {
+				Definition: "Clear all these errors and warnings";
 			}
 		}
 		Section WebUI_Support {
@@ -296,55 +310,72 @@ LibraryModule Library_GuardServerSession {
 				IndexDomain: (webui::indexWidgetItemActionSpec, webui::indexPageExtension, webui::indexWidgetActionSpec);
 				Definition: {
 					{
-						('gss::p_shownJobProfilerData', '1', 'displaytext' ) : "Model explorer",  
-						('gss::p_shownJobProfilerData', '1', 'icon'        ) : "aimms-glasses",  
-						('gss::p_shownJobProfilerData', '1', 'procedure'   ) : "gss::pr_OpenProfiledIdentifier",  
-						('gss::p_shownJobProfilerData', '1', 'state'       ) : "Active"  
+						('gss::p_shownJobProfilerHits', '1', 'displaytext' ) : "Model explorer",  
+						('gss::p_shownJobProfilerHits', '1', 'icon'        ) : "aimms-glasses",  
+						('gss::p_shownJobProfilerHits', '1', 'procedure'   ) : "gss::pr_OpenProfiledIdentifier",  
+						('gss::p_shownJobProfilerHits', '1', 'state'       ) : "Active" ,
+					
+						('gss::p_shownJobProfilerGross', '1', 'displaytext' ) : "Model explorer",  
+						('gss::p_shownJobProfilerGross', '1', 'icon'        ) : "aimms-glasses",  
+						('gss::p_shownJobProfilerGross', '1', 'procedure'   ) : "gss::pr_OpenProfiledIdentifier",  
+						('gss::p_shownJobProfilerGross', '1', 'state'       ) : "Active" ,
+					
+						('gss::p_shownJobProfilerNetto', '1', 'displaytext' ) : "Model explorer",  
+						('gss::p_shownJobProfilerNetto', '1', 'icon'        ) : "aimms-glasses",  
+						('gss::p_shownJobProfilerNetto', '1', 'procedure'   ) : "gss::pr_OpenProfiledIdentifier",  
+						('gss::p_shownJobProfilerNetto', '1', 'state'       ) : "Active" 
+					
+					
+					
 					}
 				}
 				Comment: "Defines the item actions for the table JobProfilerData on page \"GSS Session History Management\"";
-			}
-			StringParameter sp_SidePanelErrorPage {
-				IndexDomain: (webui::indexApplicationExtension,webui::indexSidePanelSpec);
-				Definition: {
-					{
-						( '1', 'displayText' ) : if p_noSignificantMessages then FormatString("%i msgs", p_noSignificantMessages ) else "" endif,
-						( '1', 'pageId'      ) : if p_noSignificantMessages then "errorpanel_1"                                    else "" endif,
-						( '1', 'tooltip'     ) : if p_noSignificantMessages then "Error handling"                                  else "" endif,  
-						( '1', 'state'       ) : if p_noSignificantMessages then "Active"                                          else "" endif 
-					}
-				}
 			}
 			StringParameter sp_messageStatusBar {
 				IndexDomain: (webui::indexApplicationExtension,webui::indexStatusBarSpec);
 				Definition: {
 					{
+						( '5', 'header'    ) : "",  
+						( '5', 'icon'      ) : "aimms-chip" ,
+						( '5', 'color'     ) :  
+							if p_memoryInUse > 3500 then "red"  
+							elseif p_memoryInUse > 3000  then "orange"   
+							else "green" 
+							endif,
+						( '5', 'text'      ) : 
+							FormatString("There is %n Mb in use (peak: %n Mb)", 
+								p_memoryInUse, p_peakMemoryInUse ), 
+						( '5', 'tooltip'   ) : "",
+						( '5', 'procedure' ) : "",
+						( '5', 'state'     ) : "Active" , 
 					
-						( '6', 'header'    ) : "", ! (Optional) The Header/Title text you want to display for the status message.
-						( '6', 'icon'      ) : ! (Optional) The icon you want to display for the respective message.
+						( '6', 'header'    ) : "",  
+						( '6', 'icon'      ) :  
 							if gss::p_noErrors then "aimms-sad"   
 							elseif gss::p_noWarnings then "aimms-wondering" 
 							else "aimms-smile" 
 							endif, 
-						( '6', 'color'     ) : ! (Optional) The color you want to display for the icon.
+						( '6', 'color'     ) :  
 							if gss::p_noErrors  then "red"  
 							elseif gss::p_noWarnings then "orange"   
 							else "green" 
 							endif,
-						( '6', 'text'      ) : ! (REQUIRED) The text you want to display for the status message.
+						( '6', 'text'      ) :  
 							FormatString("%i warnings and %i errors", 
 								gss::p_noWarnings, gss::p_noErrors ), 
-						( '6', 'tooltip'   ) : ! (Optional) Tooltip to be displayed when the user hovers over the respective status message.
+						( '6', 'tooltip'   ) :  
 							if gss::p_noSignificantMessages then "Please visit the page \"GSS Session History Management\" for details on the warnings and errors" 
 							else "Don't worry, be happy" 
 							endif,                
-						( '6', 'procedure' ) : ! (Optional) The procedure you want to call when the respective status message is clicked.
+						( '6', 'procedure' ) :  
 							if bp_isConnectedToPro then
 								"gss::pr_openIncidentSummary"
 							else
 								"gss::pr_openErrorHandlingPage"
 							endif,
-						( '6', 'state'     ) : "Active" ! (Optional) Active (displayed and clickable), Inactive (displayed and not clickable) and Hidden (not displayed). By default, the state is Hidden.
+						( '6', 'state'     ) : "Active"  
+					
+					
 					
 					}
 				}
@@ -366,7 +397,7 @@ LibraryModule Library_GuardServerSession {
 				Comment: "The title for the table LineBasedProfilerData on page \"GSS Session History Management\".";
 			}
 			StringParameter sp_titleProfilerOverview {
-				Definition: "Identifier based Profiler Data";
+				Definition: "Identifier based Profiler Data [s]";
 			}
 			StringParameter sp_titleDownloadActionLog {
 				Definition: formatString("Download model log file of selected session: %e", gss::ep_shownSession);
@@ -420,7 +451,7 @@ LibraryModule Library_GuardServerSession {
 			Set s_lineNumbers {
 				SubsetOf: Integers;
 				Index: i_lineNumber;
-				Definition: ElementRange(0,1000);
+				Definition: ElementRange(0,10000);
 				Comment: "Used for profiler data, line number index.";
 			}
 			Set s_positiveLineNumbers {
@@ -455,13 +486,13 @@ LibraryModule Library_GuardServerSession {
 			}
 			Procedure pr_openPageErrorWarningProfiler {
 				Body: {
-					pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 					
 					ep_shownSession := first( s_trackedSessions );
 					pr_storeErrorProfilerDataFromDataSessionInTrackedSessions();
 					pr_showSelectedSessionInUI();
 					
-					pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 				}
 				Comment: "The procedure that is run upon opening the page \"GSS Session History Management\"";
 				DeclarationSection gss_logging_declarations {
@@ -510,7 +541,7 @@ LibraryModule Library_GuardServerSession {
 				}
 				Procedure pr_uponChangeShownSession {
 					Body: {
-						gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info', 
+						gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info', 
 							formatString("Going to show %e", 
 								ep_shownSession));
 						block 
@@ -519,7 +550,7 @@ LibraryModule Library_GuardServerSession {
 							pr_appendError( ep_err );
 							errh::MarkAsHandled( ep_err );
 						endblock ;
-						gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info', 
+						gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info', 
 							formatString("Now the error and profiler tables show %e with description %s", 
 								ep_shownSession, sp_shownSessionDescription));
 					}
@@ -547,6 +578,7 @@ LibraryModule Library_GuardServerSession {
 					}
 					Parameter p_shownJobProfilerData {
 						IndexDomain: (IndexIdentifiers,i_lineNumber,IndexProfilerTypes );
+						InitialData: data {};
 						Comment: "The profiler data shown on the \"GSS Session History Management\" page in the tables JobProfilerData and LineBasedProfilerData.";
 					}
 					StringParameter sp_shownJobErrorMessages {
@@ -581,6 +613,23 @@ LibraryModule Library_GuardServerSession {
 							"The active line of the identifiers that are on the execution stack shown 
 							in the table \"ErrorWarningStack\" on the page \"GSS Session History Management\""
 						}
+					}
+				}
+				DeclarationSection Shown_profiler_columns {
+					Parameter p_shownJobProfilerHits {
+						IndexDomain: (IndexIdentifiers,i_lineNumber );
+						Definition: p_shownJobProfilerData(IndexIdentifiers, gss::i_lineNumber, 'hits');
+						Comment: "The profiler data shown on the \"GSS Session History Management\" page in the tables JobProfilerData and LineBasedProfilerData.";
+					}
+					Parameter p_shownJobProfilerNetto {
+						IndexDomain: (IndexIdentifiers,i_lineNumber );
+						Definition: p_shownJobProfilerData(IndexIdentifiers, gss::i_lineNumber, 'net time');
+						Comment: "The profiler data shown on the \"GSS Session History Management\" page in the tables JobProfilerData and LineBasedProfilerData.";
+					}
+					Parameter p_shownJobProfilerGross {
+						IndexDomain: (IndexIdentifiers,i_lineNumber );
+						Definition: p_shownJobProfilerData(IndexIdentifiers, gss::i_lineNumber, 'gross time');
+						Comment: "The profiler data shown on the \"GSS Session History Management\" page in the tables JobProfilerData and LineBasedProfilerData.";
 					}
 				}
 			}
@@ -687,7 +736,7 @@ LibraryModule Library_GuardServerSession {
 				Procedure pr_uploadErrorData {
 					Arguments: (fileLocation,statusCode,statusDescription);
 					Body: {
-						gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 						block
 							pr_logMsg(formatString("Uploading file %s", fileLocation),'info');
 							sp_fileUploadLocation := webui::GetIOFilePath(fileLocation);
@@ -705,7 +754,7 @@ LibraryModule Library_GuardServerSession {
 								statusDescription := "Failed to upload file " + fileLocation ;
 							endif ;
 						endblock ;
-						gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 					}
 					DeclarationSection gss_logging_declarations {
 						StringParameter sp_gssTime;
@@ -729,7 +778,7 @@ LibraryModule Library_GuardServerSession {
 				}
 				Procedure pr_uploadErrorDataWinUI {
 					Body: {
-						pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 						block 
 							p_retFileSelect := FileSelect(
 								filename  :  sp_filename, 
@@ -745,7 +794,7 @@ LibraryModule Library_GuardServerSession {
 							gss::pr_appendError( ep_err );
 							errh::MarkAsHandled( ep_err );
 						endblock ;
-						pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 					}
 					Comment: "Upload error and profiler data procedure Used in WinUI GSS Session History Management page";
 					DeclarationSection gss_logging_declarations {
@@ -763,7 +812,7 @@ LibraryModule Library_GuardServerSession {
 				Procedure pr_downloadErrorData {
 					Arguments: (fileLocation,statusCode,statusDescription);
 					Body: {
-						gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 						block
 						
 							gss::pr_initErrorHandlingDownloadUploadButtons( ep_stat, statusCode,  statusDescription, bp_download:1 );
@@ -795,7 +844,7 @@ LibraryModule Library_GuardServerSession {
 							errh::MarkAsHandled(ep_err);
 						
 						endblock ;
-						gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 					}
 					Comment: "Download profiler and error data of the selected data or solver session to file.";
 					StringParameter fileLocation {
@@ -821,7 +870,7 @@ LibraryModule Library_GuardServerSession {
 				}
 				Procedure pr_downloadErrorDataFileWinUI {
 					Body: {
-						pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 						block 
 							pr_getDownloadFolder( /* output */ sp_downloadFolder );
 							sp_outfn := 
@@ -836,7 +885,7 @@ LibraryModule Library_GuardServerSession {
 							gss::pr_appendError( ep_err );
 							errh::MarkAsHandled( ep_err );
 						endblock ;
-						pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 					}
 					Comment: "Download error and profiler data procedure Used in WinUI GSS Session History Management page";
 					DeclarationSection local_Declarations {
@@ -857,7 +906,7 @@ LibraryModule Library_GuardServerSession {
 				Procedure pr_downloadErrorReport {
 					Arguments: (fileLocation,statusCode,statusDescription);
 					Body: {
-						gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 						block 
 							gss::pr_initErrorHandlingDownloadUploadButtons( ep_stat, statusCode,  statusDescription, bp_download:1 );
 						
@@ -888,7 +937,7 @@ LibraryModule Library_GuardServerSession {
 							errh::MarkAsHandled(ep_err);
 						
 						endblock ;
-						gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 					}
 					Comment: "Download the error data in a readable report, invoked via the WebUI GSS Session History Management page";
 					DeclarationSection gss_logging_declarations {
@@ -915,7 +964,7 @@ LibraryModule Library_GuardServerSession {
 				Procedure pr_downloadErrorReportSidePanel {
 					Arguments: (fileLocation,statusCode,statusDescription);
 					Body: {
-						gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 						block 
 							gss::pr_initErrorHandlingDownloadUploadButtons( ep_stat, statusCode,  statusDescription, bp_download:1 );
 						
@@ -946,7 +995,7 @@ LibraryModule Library_GuardServerSession {
 							errh::MarkAsHandled(ep_err);
 						
 						endblock ;
-						gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 					}
 					Comment: {
 						"Download the error data in a readable report.
@@ -975,7 +1024,7 @@ LibraryModule Library_GuardServerSession {
 				}
 				Procedure pr_downloadErrorReportWinUI {
 					Body: {
-						pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 						block 
 							pr_getDownloadFolder( /* output */ sp_downloadFolder );
 							sp_outfn := if ep_shownSession then formatString("%e.errorLogging", ep_shownSession ) else "usage.errorLogging" endif ;
@@ -987,7 +1036,7 @@ LibraryModule Library_GuardServerSession {
 							gss::pr_appendError( ep_err );
 							errh::MarkAsHandled( ep_err );
 						endblock ;
-						pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 					}
 					Comment: "Download the error dat as a readable report, invoked via WinUI GSS Session History Management page";
 					DeclarationSection local_Declarations {
@@ -1362,7 +1411,7 @@ LibraryModule Library_GuardServerSession {
 				Procedure LoadResultsCallBack {
 					Arguments: (sp_requestID);
 					Body: {
-						pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						gss::pr_enter(sp_gssTime, p_gssMiU );
 						block
 							pro::session::LoadResultsCallBack(sp_requestID);
 							gss::pr_saveTrackedSessionData( sp_requestID );
@@ -1370,7 +1419,7 @@ LibraryModule Library_GuardServerSession {
 							pr_appendError( ep_err );
 							errh::MarkAsHandled( ep_err );
 						endblock ;
-						pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+						gss::pr_leave(sp_gssTime, p_gssMiU );
 					}
 					Comment: {
 						"The normal load results callback and store error and profiler data of the solver session
@@ -1520,8 +1569,12 @@ LibraryModule Library_GuardServerSession {
 				Procedure pr_appendError {
 					Arguments: (ep_err,sp_prefix);
 					Body: {
-						ep_logLev := if errh::Severity(ep_err) = 'warning' then 'warn' else 'error' endif;
-						pr_logMsg( errh::Message(ep_err), ep_logLev );
+						ep_messageImportance := if errh::Severity(ep_err) = 'warning' then 'warn' else 'error' endif;
+						pr_logMsg( 
+							formatString("%s: %s", 
+								errh::CreationTime( ep_err, "%c%y-%m-%d %H:%M:%S:%t%TZ(gss::ep_traceTimezone)" ), 
+								errh::Message(ep_err)), 
+							ep_messageImportance );
 						if pro::GetPROEndPoint() then
 							if pro::IsRunningAtServer() then
 								pr_appendErrorJob(ep_err,sp_prefix);
@@ -1549,7 +1602,7 @@ LibraryModule Library_GuardServerSession {
 						Property: Optional;
 					}
 					StringParameter sp_msg;
-					ElementParameter ep_logLev {
+					ElementParameter ep_messageImportance {
 						Range: s_messageLevels;
 					}
 					DeclarationSection gss_logging_declarations {
@@ -1558,16 +1611,16 @@ LibraryModule Library_GuardServerSession {
 					}
 				}
 				Procedure pr_appendMessage {
-					Arguments: (sp_msg,ep_lev);
+					Arguments: (sp_message,ep_messageImportance);
 					Body: {
 						if pro::GetPROEndPoint() then
 							if pro::IsRunningAtServer() then
-								pr_appendMessageJob(sp_msg,ep_lev);
+								pr_appendMessageJob(sp_message,ep_messageImportance);
 							else
-								pr_appendMessageDataSession(sp_msg,ep_lev);
+								pr_appendMessageDataSession(sp_message,ep_messageImportance);
 							endif ;
 						else
-							pr_appendMessageDataSession(sp_msg,ep_lev);
+							pr_appendMessageDataSession(sp_message,ep_messageImportance);
 						endif ;
 					}
 					Comment: "Store the error in the data structures of the library.";
@@ -1579,10 +1632,10 @@ LibraryModule Library_GuardServerSession {
 					ElementParameter ep_jobErrorMessageNumber {
 						Range: s_jobErrorMessageNumbers;
 					}
-					StringParameter sp_msg {
+					StringParameter sp_message {
 						Property: Input;
 					}
-					ElementParameter ep_lev {
+					ElementParameter ep_messageImportance {
 						Range: s_messageLevels;
 						Default: 'info';
 						Property: Optional;
@@ -1666,7 +1719,7 @@ LibraryModule Library_GuardServerSession {
 						for i_someIdWithData do
 							s_singleTonSet := {};
 							s_singleTonSet += i_someIdWithData ;
-							sp_filename := spfnc_fileFriendlyName( i_someIdWithData );
+							sp_filename := fnc_fileFriendlyName( i_someIdWithData );
 							sp_fullFilename := sp_label + "\\" + sp_filename;
 							write s_singleTonSet to file sp_fullFilename ;
 							if pro::GetPROEndPoint() then
@@ -1705,33 +1758,13 @@ LibraryModule Library_GuardServerSession {
 			StringParameter sp_traceFilename {
 				InitialData: "logging.txt";
 			}
-			Procedure pr_logMsgTraceFile {
-				Arguments: (sp_argMsg,ep_lev);
-				Body: {
-					if ep_lev >= ep_tracingFilterlevel then
-						put f_traceFile ;
-						put sp_argMsg, / ;
-						putclose ;
-					endif ;
-					!
-				}
-				Comment: {
-					"Trace to the log file; this procedure should not be called before PostLibraryInitialization finished."
-				}
-				StringParameter sp_argMsg {
-					Property: Input;
-				}
-				ElementParameter ep_lev {
-					Range: s_messageLevels;
-					Default: 'trace';
-					Property: Optional;
-				}
-			}
 			Procedure pr_logMsg {
 				Arguments: (sp_message,ep_messageImportance);
 				Body: {
 					if ep_messageImportance >= ep_tracingFilterlevel then
-						pr_logMsgTraceFile(sp_message,ep_messageImportance);
+						pr_logMsgTraceFile(formatString("%s [%5e] %s", 
+							CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ(gss::ep_traceTimezone)"),
+							ep_messageImportance, sp_message), ep_messageImportance);
 					endif ;
 				}
 				Comment: {
@@ -1747,20 +1780,22 @@ LibraryModule Library_GuardServerSession {
 				}
 			}
 			Procedure pr_enter {
-				Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_logLev,sp_logDetail);
+				Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_messageImportance,sp_logDetail);
 				Body: {
 					sp_procEnterTimestamp := CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')");
 					p_procEnterMemoryInUse := MemoryInUse();
+					pr_setMemoryInUse( p_procEnterMemoryInUse ); 
 					sp_node := formatString("%e",CallerNode(1));
-					sp_fullMsg := formatString("Enter %s(%s) at %s [%.3n Mb] in use", 
-						sp_node, sp_logDetail, 
+					sp_fullMsg := formatString("%s [%5e] Enter %s(%s) [%.3n Mb] in use", 
 						MomentToString(
 							Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ(gss::ep_traceTimezone)", 
 							unit          :  [s], 
 							ReferenceDate :  sp_procEnterTimestamp, 
 							Elapsed       :  0[s]), 
+						ep_messageImportance,
+						sp_node, sp_logDetail, 
 						p_procEnterMemoryInUse );
-					pr_logMsg( sp_fullMsg, ep_logLev );
+					pr_logMsgTraceFile( sp_fullMsg, ep_messageImportance );
 				}
 				Comment: {
 					"Trace entry of procedure to the log file; this procedure should not be called before PostLibraryInitialization finished."
@@ -1781,14 +1816,14 @@ LibraryModule Library_GuardServerSession {
 				StringParameter sp_node;
 				StringParameter sp_fullMsg;
 				StringParameter sp_proc;
-				ElementParameter ep_logLev {
+				ElementParameter ep_messageImportance {
 					Range: s_messageLevels;
 					Default: 'debug';
 					Property: Optional;
 				}
 			}
 			Procedure pr_leave {
-				Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_logLev,sp_logDetail);
+				Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_messageImportance,sp_logDetail);
 				Body: {
 					sp_leavingTime := CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')");
 					p_duration := StringToMoment(
@@ -1798,20 +1833,21 @@ LibraryModule Library_GuardServerSession {
 						Timeslot      :  sp_leavingTime);
 					sp_node := formatString("%e",CallerNode(1));
 					p_leaveMemoryInUse := MemoryInUse();
+					pr_setMemoryInUse( p_leaveMemoryInUse );
 					sp_fullMsg := 
-						formatString( "Leave %s(%s) at %s [%.3n Mb] in use. ",
-							sp_node, sp_logDetail, 
+						formatString( "%s [%5e] Leave %s(%s) [%.3n Mb] in use. ",
 							MomentToString(
 								Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ(gss::ep_traceTimezone)", 
 								unit          :  [s], 
 								ReferenceDate :  sp_leavingTime, 
 								Elapsed       :  0[s]), 
+							ep_messageImportance, sp_node, sp_logDetail, 
 							p_leaveMemoryInUse ) +
 						formatString( "Duration is %.3n [seconds] and memory %s is %n Mb.", 
 							p_duration,
 							if p_leaveMemoryInUse >= p_procEnterMemoryInUse then "increase" else "decrease" endif, 
 							abs( p_leaveMemoryInUse - p_procEnterMemoryInUse ) );
-					pr_logMsg( sp_fullMsg, ep_logLev );
+					pr_logMsgTraceFile( sp_fullMsg, ep_messageImportance );
 				}
 				Comment: {
 					"Trace leaving of procedure to the log file; this procedure should not be called before PostLibraryInitialization finished."
@@ -1832,7 +1868,7 @@ LibraryModule Library_GuardServerSession {
 				}
 				StringParameter sp_node;
 				StringParameter sp_fullMsg;
-				ElementParameter ep_logLev {
+				ElementParameter ep_messageImportance {
 					Range: s_messageLevels;
 					Default: 'debug';
 					Property: Optional;
@@ -1857,13 +1893,28 @@ LibraryModule Library_GuardServerSession {
 				StringParameter sp_slash;
 			}
 			Procedure pr_setTracingLevel {
-				Arguments: (ep_newLev);
+				Arguments: (ep_newTracingFilterLevel);
 				Body: {
-					ep_tracingFilterlevel := ep_newLev;
+					if ep_newTracingFilterLevel then
+						ep_tracingFilterlevel := ep_newTracingFilterLevel;
+					else
+						raise error "pr_setTracingLevel(): no actual level supplied.";
+					endif ;
 				}
 				Comment: "Filter all tracing messages with a level lower than the argument value.";
-				ElementParameter ep_newLev {
+				ElementParameter ep_newTracingFilterLevel {
 					Range: s_messageLevels;
+					Property: Input;
+				}
+			}
+			Procedure pr_setReplicationSessionLog {
+				Arguments: (bp_doReplicate);
+				Body: {
+					bp_replicateInSessionLog := bp_doReplicate;
+				}
+				Comment: "Use this function to turn on replication of the contents of the action log to the session log.";
+				Parameter bp_doReplicate {
+					Range: binary;
 					Property: Input;
 				}
 			}
@@ -1906,7 +1957,7 @@ LibraryModule Library_GuardServerSession {
 			}
 			Procedure pr_downloadActionLogWinUI {
 				Body: {
-					pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 					block 
 						pr_downloadActionLogWork(sp_outfn);
 						pr_getDownloadFolder( /* output */ sp_downloadFolder );
@@ -1920,7 +1971,7 @@ LibraryModule Library_GuardServerSession {
 						gss::pr_appendError( ep_err );
 						errh::MarkAsHandled( ep_err );
 					endblock ;
-					pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 				}
 				Comment: "Download action log procedure Used in WinUI GSS Session History Management page";
 				DeclarationSection gss_logging_declarations {
@@ -1935,6 +1986,20 @@ LibraryModule Library_GuardServerSession {
 				StringParameter sp_downloadFolder;
 				Parameter p_retFSN;
 				StringParameter sp_outfn;
+			}
+		}
+		Section Tracking_memory_in_use {
+			Procedure pr_setMemoryInUse {
+				Arguments: (p_argNewmemoryInUse);
+				Body: {
+					p_memoryInUse := p_argNewmemoryInUse;
+					if p_peakMemoryInUse < p_argNewmemoryInUse then
+						p_peakMemoryInUse := p_argNewmemoryInUse ;
+					endif ;
+				}
+				Parameter p_argNewmemoryInUse {
+					Property: Input;
+				}
 			}
 		}
 		Section Additional_utilities {
@@ -1963,14 +2028,14 @@ LibraryModule Library_GuardServerSession {
 			}
 			Procedure pr_artificialDataGSSPage {
 				Body: {
-					pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 					block
 						raise warning "Cry wolf" ;
 					onerror ep_err do
 						gss::pr_appendError(ep_err);
 						errh::MarkAsHandled(ep_err);
 					endblock ;
-					pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+					pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 				}
 				Comment: {
 					"Run this procedure to obtain some contents with which to tailor the 
@@ -1996,7 +2061,7 @@ LibraryModule Library_GuardServerSession {
 			Parameter ep_lastHitLine {
 				Definition: {
 					last( i_positiveLineNumber | 
-						p_jobProfilerData(ep_profilerDataSelectedIdentifier, 
+						p_shownJobProfilerData(ep_profilerDataSelectedIdentifier, 
 						i_positiveLineNumber, 'hits'))
 				}
 				Comment: "To define the line numbers visible in the table LineBasedProfilerData";
@@ -2005,12 +2070,16 @@ LibraryModule Library_GuardServerSession {
 				Range: binary;
 				InitialData: 0;
 			}
+			Parameter bp_isWorkerSession {
+				InitialData: 0;
+			}
 		}
 		Section Main_Library_procedures {
 			Procedure LibraryInitialization {
 				Body: {
 					ep_jobIncident := '' ;
 					ep_dataSessionIncident := '' ;
+					pr_GetThisSession();
 				}
 				Comment: "Add initialization statements here that do not require any other library being initialized already.";
 			}
@@ -2019,42 +2088,8 @@ LibraryModule Library_GuardServerSession {
 					! The error data shown should not be modified in the User Interface.
 					CurrentInputs -= serverSessionErrorData;
 					CurrentInputs -= Shown_session_data_exchange ;
-					pr_GetThisSession(); 
+					CurrentInputs -= dataSessionProfilerErrorData ;
 					
-					block ! Initialize logging
-						if pro::GetPROEndPoint() then
-							pro::Initialize();
-							if not pro::IsRunningAtServer() then
-								ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
-							endif ;
-							bp_isConnectedToPro := 1 ;
-						else
-							ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
-						endif ;
-					
-						if sp_thisSession then
-							sp_traceFilename := sp_tracingsFolderName + "/" + sp_thisSession + ".actionLog" ;
-						endif ;
-					
-						if not  DirectoryExists( sp_tracingsFolderName ) then
-							DirectoryCreate( sp_tracingsFolderName );
-						endif ;
-						if fileExists( sp_traceFilename ) then
-							FileDelete( sp_traceFilename );
-						endif ;
-					endblock ;
-					
-					! Open log file for data session or AIMMS Developer session.
-					if pro::GetPROEndPoint() then
-						if pro::openedAsWorker then
-							! pr_openLogFile();
-							! The log file for a server session is opened at the beginning of pr_guardAndProfileServerJob().
-						else
-							pr_openLogFile();
-						endif ;
-					else
-						pr_openLogFile();
-					endif ;
 					
 					block ! Ensure option "Use UTC forcaseandstartenddate" is turned on.
 						bp_ogv := OptionGetValue("Use UTC forcaseandstartenddate", 
@@ -2068,13 +2103,13 @@ LibraryModule Library_GuardServerSession {
 						endif ;
 					endblock ;
 					! log file of a week old are to be deleted
+					
+					
+					pr_setMemoryInUse( MemoryInUse() );
 				}
 				Comment: {
 					"Add initialization statements here that require another library to be initialized already,
 					or add statements that require the Data Management module to be initialized."
-				}
-				ElementParameter ep_trackedSession {
-					Range: s_trackedSessions;
 				}
 				Parameter bp_ogv {
 					Range: binary;
@@ -2191,7 +2226,7 @@ LibraryModule Library_GuardServerSession {
 							if FileExists( sp_createdFile ) then
 								FileDelete( sp_createdFile );
 							endif ;
-							Execute("7za.exe", "a " + sp_createdFile + " .\\IncidentMaterials\\*", wait:1) ;
+							Execute("GuardServerSession\\bin\\7za.exe", "a " + sp_createdFile + " .\\IncidentMaterials\\*", wait:1) ;
 						endif ;
 					endblock ;
 				}
@@ -2426,14 +2461,14 @@ LibraryModule Library_GuardServerSession {
 					Property: Input;
 				}
 			}
-			Function spfnc_fileFriendlyName {
+			Function fnc_fileFriendlyName {
 				Arguments: (ep_id);
 				Range: string;
 				Body: {
 					sp_retVal := formatString("%e", ep_id );
 					sp_retVal := FindReplaceStrings( sp_retVal, ":", "_" );
 					
-					spfnc_fileFriendlyName := sp_retVal ;
+					fnc_fileFriendlyName := sp_retVal ;
 				}
 				Comment: "Replace : chars with _ chars to obtain name that is a valid file name.";
 				ElementParameter ep_id {
@@ -2554,8 +2589,8 @@ LibraryModule Library_GuardServerSession {
 					putclose f_traceFile ;
 					put f_traceFile;
 					put "Opening log file ", sp_traceFilename, " at ", CurrentToSTring("%c%y-%m-%d %H:%M:%S"), / ;
-					if pro::GetPROEndPoint() then
-						if pro::openedAsWorker then
+					if bp_isConnectedToPro then
+						if bp_isWorkerSession then
 							put "This file contains the log of a solver session handling request ", 
 								pro::workerRequestDescription, / ;
 						else
@@ -2565,9 +2600,46 @@ LibraryModule Library_GuardServerSession {
 					else
 						put "This file contains the log of an AIMMS Developer session ", / ;
 					endif ;
+					
 					putclose ;
 				}
 				Comment: "Open log file and add identifying first few lines.";
+				DeclarationSection Debugging_Declarations;
+			}
+			Procedure pr_logMsgTraceFile {
+				Arguments: (sp_argMsg,ep_messageImportance);
+				Body: {
+					if ep_messageImportance >= ep_tracingFilterlevel then
+						put f_traceFile ;
+						put sp_argMsg, / ;
+						putclose ;
+						if bp_replicateInSessionLog then
+							if pro::GetPROEndPoint() then
+								pro::management::LocalLogInfo(  sp_argMsg );
+					!			switch ep_messageImportance do
+					!				'trace':   pro::management::LocalLogTrace( sp_argMsg );
+					!				'debug':   pro::management::LocalLogDebug( sp_argMsg );
+					!				'info':    pro::management::LocalLogInfo(  sp_argMsg );
+					!				'warn':    pro::management::LocalLogInfo(  sp_argMsg );
+					!				'error':   pro::management::LocalLogError( sp_argMsg );
+					!				default:   pro::management::LocalLogInfo(  sp_argMsg );
+					!			endswitch ;
+							endif ;
+						endif ;
+					endif ;
+					!
+				}
+				Comment: {
+					"Trace to the log file; this procedure should not be called before PostLibraryInitialization finished."
+				}
+				StringParameter sp_argMsg {
+					Property: Input;
+				}
+				ElementParameter ep_messageImportance {
+					Range: s_messageLevels;
+					Default: 'trace';
+					Property: Optional;
+				}
 			}
 			Procedure pr_downloadActionLogWork {
 				Arguments: (sp_filename);
@@ -2615,25 +2687,82 @@ LibraryModule Library_GuardServerSession {
 			}
 			Procedure pr_GetThisSession {
 				Body: {
-					if pro::GetPROEndPoint() then
-						if pro::ReadArguments('_pro-webui-session-id') then
-							sp_thisSession := pro::ReadArguments('_pro-webui-session-id');
-						else
-							sp_thisSession := pro::ReadArguments('_pro-session-id');
-							if not sp_thisSession then ! When AIMMS Developer is started with a connection to AIMMS PRO.
-								sp_thisSession := CurrentToString("%c%y%m%dT%H%M%S%t%TZ('UTC')");
+					bp_nextArgIsSessionId := 0 ;
+					bp_isConnectedToPro := 0 ;
+					bp_isWorkerSession := 0 ;
+					sp_thisSession := "" ;
+					block ! loop over arguments to find the session id.
+						p_argno := 1 ;
+						repeat 
+							bp_argExists := SessionArgument( p_argno, sp_arg );
+							if not bp_argExists then
+								break ;
 							endif ;
-						endif ;
-						pro::management::LocalLogInfo(formatString(
-							"pr_GetThisSession(): sp_thisSession = %s", sp_thisSession ));
-					else
+							if bp_nextArgIsSessionId then
+								sp_thisSession := sp_arg ;
+								break ;
+							elseif sp_arg = "_pro-session-id" then
+								bp_nextArgIsSessionId := 1 ;
+								bp_isWorkerSession := 1 ;
+								bp_isConnectedToPro := 1 ;
+							elseif sp_arg = "_pro-webui-session-id" then
+								bp_nextArgIsSessionId := 1 ;
+								bp_isConnectedToPro := 1 ;
+							endif ;
+							p_argno += 1 ;
+						endrepeat ;
+					endblock ;
+					if not sp_thisSession then
 						sp_thisSession := CurrentToString("%c%y%m%dT%H%M%S%t%TZ('UTC')");
+					endif ;
+					
+					
+					block ! Initialize logging
+						if bp_isConnectedToPro then
+							if not bp_isWorkerSession then
+								ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
+							endif ;
+						else
+							ep_trackedSession := stringToElement( s_trackedSessions, sp_thisSession, create:1);
+						endif ;
+					
+						if sp_thisSession then
+							sp_traceFilename := sp_tracingsFolderName + "/" + sp_thisSession + ".actionLog" ;
+						endif ;
+					
+						if not  DirectoryExists( sp_tracingsFolderName ) then
+							DirectoryCreate( sp_tracingsFolderName );
+						endif ;
+						if fileExists( sp_traceFilename ) then
+							FileDelete( sp_traceFilename );
+						endif ;
+					endblock ;
+					
+					! Open log file for data session or AIMMS Developer session.
+					if bp_isConnectedToPro then
+						if bp_isWorkerSession then
+							! pr_openLogFile();
+							! The log file for a server session is opened at the beginning of pr_guardAndProfileServerJob().
+						else
+							pr_openLogFile();
+						endif ;
+					else
+						pr_openLogFile();
 					endif ;
 				}
 				Comment: {
 					"Get the unique identifier of this session. 
 					Whenever possible, align with AIMMS PRO - to make matching with AIMMS PRO generated logging information easier.
 					When not on PRO, use timestamp."
+				}
+				Parameter p_argno;
+				Parameter bp_argExists;
+				StringParameter sp_arg;
+				ElementParameter ep_trackedSession {
+					Range: s_trackedSessions;
+				}
+				Parameter bp_nextArgIsSessionId {
+					Range: binary;
 				}
 			}
 			Procedure pr_actuallySaveActionLogFile {
@@ -2690,6 +2819,18 @@ LibraryModule Library_GuardServerSession {
 					"Tracing time zone.
 					See ticket 11"
 				}
+			}
+			Parameter bp_replicateInSessionLog {
+				Range: binary;
+				InitialData: 0;
+			}
+		}
+		Section Memory_in_use {
+			Parameter p_memoryInUse {
+				InitialData: 0;
+			}
+			Parameter p_peakMemoryInUse {
+				InitialData: 0;
 			}
 		}
 	}

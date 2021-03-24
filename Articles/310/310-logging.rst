@@ -1,11 +1,55 @@
 The action log
 ===============
 
-The action log is like any other log file, it contains the output of tracing statements.
-The ``GuardServersession`` library manages these logfiles.
+This article is a companion article to :doc:`Incident Handling for Organizations<../310/310-incident-handling-for-organizations>`
 
-The action log is stored in .actionLog files in the subfolder tracings of the project folder. 
-At the end of a solver session saved in AIMMS PRO storage at `/userdata/<env>/<user>/<appname>/tracings/<session-id>.actionLog`
+The action log is part of the Session History. 
+Where the Profiling information and errors as data provide deep insight into an incident, 
+the action log provides insight into what happened before.
+
+The action log is like any other log file, it contains the output of tracing statements.
+The ``GuardServersession`` library manages these log files.
+
+The action log is stored in .actionLog files in the sub folder tracings of the project folder. 
+At the end of a solver session saved in AIMMS PRO storage at ``/userdata/<env>/<user>/<appname>/tracings/<session-id>.actionLog``.
+
+The following is a sample small action log:
+
+.. code-block:: none
+    :linenos:
+    :emphasize-lines: 3,9
+
+    Opening log file tracings/d942c7adf9460ee3f4f2a0de1ed0833b.actionLog at 2021-03-08 14:25:20
+    This file contains the log of a data session on behalf of chris@AIMMS
+    2021-03-08 14:25:24:72 [info ] Enter pr_btnSolve() [51.125 Mb] in use
+    2021-03-08 14:25:27:55 [debug] Enter gss::LoadResultsCallBack() [51.457 Mb] in use
+    2021-03-08 14:25:27:60 [trace] s_trackedSessions = { d942c7adf9460ee3f4f2a0de1ed0833b, c78864a3-babf-4015-ae41-38de854fa0a3 }
+    2021-03-08 14:25:27:61 [debug] Leave gss::LoadResultsCallBack() [51.770 Mb] in use. Duration is 0.060 [seconds] and memory increase is 0.313 Mb.
+    2021-03-08 14:25:27:62 [warn ] 2021-03-08 14:25:24:00: Warning: Don't look down.
+    2021-03-08 14:25:27:62 [warn ] 2021-03-08 14:25:27:00: Warning: Look up, it is raining ;-).
+    2021-03-08 14:25:27:63 [info ] Leave pr_btnSolve() [51.895 Mb] in use. Duration is 2.910 [seconds] and memory increase is 0.770 Mb.
+
+Remarks:
+
+#.  First two lines summarizing which session is logged.
+
+#.  The actual logging consists of three columns:
+
+    #.  Date time
+
+    #.  Importance level of messages
+
+    #.  The actual message
+
+#.  ``[warn]`` Lines 7, 8: Warnings first issued, then handled.  The timestamp in the date time column is the time the warning was handled. 
+    The timestamp in the message column is the timestamp the warning was created.
+
+#.  ``[info]`` Lines 3, 9: An action - a procedure invoked via the WebUI by the end-user. These lines are marked here.
+
+#.  ``[debug]`` Lines 4, 6: The procedure is invoked by program logic (call back server session).
+    
+#.  ``[trace]`` Line 5: requesting and printing a bit of state is typically done at message importance level ``'trace'``
+
 
 
 Relevant identifiers for logging
@@ -33,15 +77,22 @@ Relevant identifiers for logging
     So when this tracing filter level is kept at its default, 
     messages with importance 'debug' or 'trace' will not be logged.
 
-    .. note:: This parameter is part of the input case sent from the data session to a solver session.
+    .. note:: 
 
-#.  Procedure ``gss::pr_setTracinglevel(ep_newLev)``
+        #.  This parameter is part of the input case sent from the data session to a solver session.
+            Therefore, setting the logging level in the data session, will affect the logging in the solver sessions.
+
+        #.  At the beginning of a session, this parameter is initialized to ``'info'``. 
+            So when this tracing filter level is kept at its default, 
+            messages with importance ``'debug'`` or ``'trace'`` will not be logged.
+
+#.  Procedure ``gss::pr_setTracinglevel(ep_newTracingFilterLevel)``
 
     Use this procedure to set the `gss::ep_tracingFilterlevel`
 
     Arguments:
 
-    #.  Element parameter ``ep_newLev``, with range ``gss::s_messageLevels``
+    #.  Element parameter ``ep_newTracingFilterLevel``, with range ``gss::s_messageLevels``
 
     Throws exceptions: None
 
@@ -58,11 +109,11 @@ Relevant identifiers for logging
 
     #.  ``ep_messageImportance`` An optional element parameter with range ``s_MessageLevels`` and default ``'trace'``.
 
-    Throws exceptions: None
+    Throws exceptions: None.
 
     Return value: None.
 
-#.  Procedure ``gss::pr_enter(sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_logLev,sp_procEnterContextMessage)``
+#.  Procedure ``gss::pr_enter(sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_messageImportance,sp_logDetail)``
 
     Log the entry of a procedure, including when the procedure was entered and how much memory was in use.
     In addition, it stores the entry time and the memory in use at entry in the output arguments ``sp_procEnterTimestamp`` and ``p_procEnterMemoryInUse``.
@@ -75,40 +126,41 @@ Relevant identifiers for logging
 
     #.  ``p_procEnterMemoryInUse`` An output parameter that contains the amount of memory in use upon when the encompassing procedure was entered.
 
-    #.  ``ep_logLev`` optional default ``'debug'`` 
+    #.  ``ep_messageImportance`` optional default ``'debug'`` 
         The importance of logging the entry of the encompassing procedure.  
         For procedures that are actions, it is recommended to use the value ``'info'``.
 
-    #.  ``sp_procEnterContextMessage`` optional, default: empty
+    #.  ``sp_logDetail`` optional, default: empty
 
     Throws exceptions: None
 
     Return value: None.
 
-#.  Procedure ``gss::pr_leave(sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_logLev,sp_msg)``
+#.  Procedure ``gss::pr_leave(sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_messageImportance,sp_logDetail)``
 
     #.  ``sp_procEnterTimestamp`` An input parameter that contains the encompassing procedure entry time according to timezone ``'UTC'``
 
     #.  ``p_procEnterMemoryInUse`` An input parameter that contains the amount of memory in use upon when the encompassing procedure was entered.
 
-    #.  ``ep_logLev`` optional default ``'debug'``
+    #.  ``ep_messageImportance`` optional default ``'debug'``
         The importance of logging the leaving of the encompassing procedure.  
         For procedures that are actions, it is recommended to use the value ``'info'``.
 
-    #.  ``sp_procEnterContextMessage``  optional, default: empty
+    #.  ``sp_logDetail``  optional, default: empty
 
     Throws exceptions: None
 
     Return value: None.
 
-    Example tracing output (together with pr_Leave): 
+#.  Procedure ``pr_setReplicationSessionLog(bp_doReplicate)``
 
-    .. code-block:: none
-        :linenos:
-
-        Enter pr_workSolve() at 2021-02-24 15:38:23:51 [43.766 Mb] in use
-        Leave pr_workSolve() at 2021-02-24 15:38:24:54 [49.070 Mb] in use. Duration is 1.030 [seconds] and memory increase is 5.305 Mb.
-
+    This procedure allows you to turn on/off replication of the action log to the session log.
+    
+    Arguments:
+    
+    #.  ``bp_doReplicate`` When 1, the action log will be replicated from the action to the session log. 
+    
+        
 
 
 Recommended use
@@ -140,14 +192,14 @@ For actions, please follow the following template:
 
     Procedure pr_actionTemplate {
         Body: {
-            pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+            pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
             block 
                 ! Call procedure to do the actual work.
             onerror ep_err do
                 gss::pr_appendError( ep_err );
                 errh::MarkAsHandled( ep_err );
             endblock ;
-            pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+            pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
         }
         Comment: "Sample action procedure";
         DeclarationSection gss_logging_declarations {

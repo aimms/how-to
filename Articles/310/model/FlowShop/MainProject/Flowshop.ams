@@ -111,7 +111,14 @@ Model Main_Flow_Shop {
 						( 1, displaytext ) : "Optimize",  
 						( 1, icon        ) : "aimms-blog2",  
 						( 1, procedure   ) : "pr_BtnSolve",  
-						( 1, state       ) : "Active" 
+						( 1, state       ) : "Active"  ,
+					
+						( 2, displaytext ) : "EmptyAction",  
+						( 2, icon        ) : "aimms-bubble-blocked",  
+						( 2, procedure   ) : "pr_action",  
+						( 2, state       ) : "Active"  
+					
+					
 					}
 				}
 			}
@@ -208,8 +215,11 @@ Model Main_Flow_Shop {
 	Section MainModelProcedures {
 		Procedure MainInitialization {
 			Body: {
+				
+				
 				ProfilerStart();
 				gss::pr_setTracinglevel( 'trace' );
+				gss::pr_setReplicationSessionLog( 1 );
 			}
 		}
 		Procedure PostMainInitialization {
@@ -234,6 +244,43 @@ Model Main_Flow_Shop {
 			}
 		}
 	}
+	Procedure pr_action {
+		Body: {
+			gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
+			block 
+				pr_workAction();
+			onerror ep_err do
+				gss::pr_appendError( ep_err );
+				errh::MarkAsHandled( ep_err );
+			endblock ;
+			gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
+		}
+		DeclarationSection gss_logging_declarations {
+			StringParameter sp_gssTime;
+			Parameter p_gssMiU;
+		}
+		DeclarationSection error_reference_declaration {
+			ElementParameter ep_err {
+				Range: errh::PendingErrors;
+			}
+		}
+	}
+	Procedure pr_workAction {
+		Body: {
+			pr_helperAction();
+		}
+	}
+	Procedure pr_helperAction {
+		Body: {
+			gss::pr_enter(sp_gssTime, p_gssMiU);
+			gss::pr_appendMessage("Trying to help out here");
+			gss::pr_leave(sp_gssTime, p_gssMiU);
+		}
+		DeclarationSection gss_logging_declarations {
+			StringParameter sp_gssTime;
+			Parameter p_gssMiU;
+		}
+	}
 	Procedure pr_generateData {
 		Body: {
 			p_procesTime(j,m) := round(Uniform(1,20));
@@ -243,7 +290,6 @@ Model Main_Flow_Shop {
 		Arguments: (sp_requestID);
 		Body: {
 			gss::LoadResultsCallBack(sp_requestID);
-			pr_prepInterface();
 		}
 		StringParameter sp_requestID {
 			Property: Input;
@@ -298,16 +344,18 @@ Model Main_Flow_Shop {
 	}
 	Procedure pr_btnSolve {
 		Body: {
-			gss::pr_enter(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+			gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 			block 
 				raise warning "Don't look down" ;
+				gss::pr_appendMessage( "Let it rain");
 				pr_solve();
+				pr_prepInterface();
 				raise warning "Look up, it is raining ;-)" ;
 			onerror ep_err do
 				gss::pr_appendError( ep_err );
 				errh::MarkAsHandled( ep_err );
 			endblock ;
-			gss::pr_leave(sp_gssTime, p_gssMiU, ep_logLev: 'info');
+			gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 		}
 		DeclarationSection gss_logging_declarations {
 			StringParameter sp_gssTime;

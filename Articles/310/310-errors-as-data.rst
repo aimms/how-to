@@ -1,8 +1,11 @@
 Error and Profiling Results as Data
 ========================================
 
-Error and profiler data can be stored in AIMMS' sets and parameters; then serialized and thereby shared between members of the same team.
-This is also featured by the ``GuardServerSession`` library. This article discusses how the ``GuardServerSession`` library achieves sharing of this data.
+This article is a companion article to :doc:`Incident Handling for Organizations<../310/310-incident-handling-for-organizations>`.
+Error and profiler data are stored in AIMMS' sets and parameters; then serialized. 
+This way, they are shared between the end-users and specialists that use the application at hand.
+This article discusses how this information flows through the ``GuardServerSession`` library and which procedures can be used to 
+store error information.
 
 Data flow of error information
 --------------------------------
@@ -16,7 +19,8 @@ The data flow of errors to support this user interface is organized as follows:
 The red triangles are a stream of warnings and errors. 
 These errors move via various steps upwards towards the blue box of errors shown in the User Interface.
 
-There are two paths from "red" to "blue" for this error information, depending on whether the errors are generated inside the data session or in a solver session.
+There are two paths from "red" to "blue" for this error information, 
+depending on whether the errors are generated inside the data session or in a solver session.
 
 Data session errors
 """"""""""""""""""""""
@@ -57,9 +61,11 @@ The identifiers in which this data is stored are located in:
 
     Arguments:
 
-    #.  Input element parameter ``ep_err`` with range ``errh::PendingErrors``.  This is a reference to the error to be handled.
+    #.  Input element parameter ``ep_err`` with range ``errh::PendingErrors``.  
+        This is a reference to the error to be handled.
 
-    #.  Input string parameter ``sp_prefix``.  This can be used to prefix the error message stored from the message of the error referenced by ``ep_err``
+    #.  Input string parameter ``sp_prefix``.  
+        This can be used to prefix the error message stored from the message of the error referenced by ``ep_err``.
 
     Throws exceptions: None
 
@@ -71,7 +77,8 @@ The identifiers in which this data is stored are located in:
 
     #.  Input string parameter ``sp_msg``.  The message to be stored.
 
-    #.  Input element parameter ``ep_lev`` with range ``gss::s_messageLevels`` and default ``'info'``.  The importance level of the message ``sp_msg``.
+    #.  Input element parameter ``ep_lev`` with range ``gss::s_messageLevels`` and default ``'info'``.  
+        The importance level of the message ``sp_msg``.
 
     Throws exceptions: None
 

@@ -64,7 +64,7 @@ Other techniques
 Other techniques to determine the consecutive ranges include:
 
     * Using ``axll::ReadSet`` with a sufficiently large range and using :aimms:func:`errh::Message` functions to retrieve the cell in which reading stopped from the warning message generated. 
-    * Using a ``while`` loop in combination with ``axll::ReadSingleValue`` and stop the loop when an empty cell is encountered. 
+    * Using a :any:`while` loop in combination with ``axll::ReadSingleValue`` and stop the loop when an empty cell is encountered. 
 
 To use existing functions and avoid custom procedures for data input, follow these guidelines:
 
