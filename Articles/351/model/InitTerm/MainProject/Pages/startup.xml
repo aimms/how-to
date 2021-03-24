@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2021-03-24 07:43:03">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>3A3D94FE-1B6B-4C88-972D-868A6E60263C</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<Action>
+		<EntryProcedure>pr_openPageWinUI</EntryProcedure>
+		<ExitProcedure>pr_closePageWinUI</ExitProcedure>
+	</Action>
+	<PageObject Type="Scalar">
+		<Location top="48" left="54" bottom="84" right="234" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>p_visits</Identifier>
+			<NumberFormat Width="7" Decimals="0" Scientific="IfTooSmallorLarge" Alignment="Center" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="90" left="54" bottom="126" right="234" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Solve"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_solve</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="132" left="54" bottom="168" right="234" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Bye"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_actionFinish</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>p_visits</Symbol>
+			<Symbol>pr_openPageWinUI</Symbol>
+			<Symbol>pr_closePageWinUI</Symbol>
+			<Symbol>pr_actionFinish</Symbol>
+			<Symbol>pr_solve</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

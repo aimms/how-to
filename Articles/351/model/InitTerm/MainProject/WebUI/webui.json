@@ -1,0 +1,165 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "onload": {
+      "aimms": {
+        "run": "pr_openPageWebUI"
+      }
+    },
+    "pageleave": {
+      "aimms": {
+        "run": "pr_closePageWebUI"
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Session info",
+          "layoutInfo": {
+            "width": "4",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "visit",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "solve",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "xyo",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "Bye",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/Bye": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_actionFinish"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "Bye"
+    },
+    "title": {
+      "literal": "Bye"
+    }
+  },
+  "widgets/Session info": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "bp_isConnectedToPro",
+          "bp_isWorkerSession",
+          "sp_thisSession",
+          "p_visits"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "name": {
+      "literal": "Session info"
+    },
+    "title": {
+      "literal": "Session info"
+    }
+  },
+  "widgets/solve": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_solve"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "solve"
+    },
+    "title": {
+      "literal": "solve"
+    }
+  },
+  "widgets/visit": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "compact": {
+      "literal": 1
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_visits"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "name": {
+      "literal": "visit"
+    }
+  },
+  "widgets/xyo": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "x",
+          "y",
+          "o"
+        ]
+      }
+    },
+    "name": {
+      "literal": "xyo"
+    },
+    "title": {
+      "literal": "Variable values"
+    }
+  }
+}
