@@ -438,6 +438,9 @@
           }
         }
       ]
+    },
+    "aimms.widget.type": {
+      "literal": "sidepanel"
     }
   },
   "widgets/ClearError": {

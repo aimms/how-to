@@ -18,23 +18,23 @@ These errors move via various steps upwards towards the blue box of errors shown
 
 There are two paths from "red" to "blue" for this error information, depending on whether the errors are generated inside the data session or in a solver session.
 
-Data flow for errors created in a data session
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Data session errors
+""""""""""""""""""""""
 
-#.  Data session errors are collected by the error handler ``gss::pr_appendError`` in the orange box "Data session errors" ``gss::dataSessionProfilerErrorData``.
+#. Errors occurring in the data session are collected by the error handler ``gss::pr_appendError`` in ``gss::dataSessionProfilerErrorData`` which represents the orange box "Data session errors"
 
-#.  When the WebUI page ``GSS Session History Management`` is opened, the yellow box is copied to the blue box, making the errors visible to the end-user.
+#.  When the WebUI page ``GSS Session History Management`` is opened, the data in the orange box is copied to the blue box, making the error data visible to the end-user.
 
-Data flow for errors created in a solver session
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Solver session errors
+"""""""""""""""""""""""""
 
-#.  Solver session errors are collected by the error handler ``gss::pr_appendError`` in the purple box "Solver session errors" ``gss::serverSessionErrorData``.
+#. Errors in solver sessions are collected by the error handler ``gss::pr_appendError`` in ``gss::serverSessionErrorData`` which represents the purple box "Solver session errors".
 
 #.  When the output case is loaded, this error information is loaded in the data session (to identifiers with the same name).
 
-#.  Immediately after, this error information is copied to a slice in the green big box "Solver sessions and uploaded sessions".
+#.  Immediately after, this error information is copied to a slice in the green big box "Solver sessions and uploaded sessions" by the procedure ``gss::pr_saveTrackedSessionData``.
 
-#.  When the WebUI page ``GSS Session History Management`` is opened, and the selection drop down selects this solver session, this error information is copied to the blue box (and shown).
+#.  In the WebUI page ``GSS Session History Management``, the selection widget controls which session's error data is displayed. When you select a sessionID in the drop down, the corresponding error information is copied to the blue box and displayed.
 
 Data flow of profiler information
 ---------------------------------
@@ -43,10 +43,15 @@ The profiler information is captured at the end of a solver session, or at the s
 Then it follows the same path as the error information through the application before it is shown.
 
 
-Identifiers to be used in your app for Errors and Profiling results as data
---------------------------------------------------------------------------------
+Converting errors and profiling info to data
+------------------------------------------------------
 
-Both the procedures, the relevant collector is for the data session: `gss::dataSessionProfilerErrorData`, for a server session: `gss::serverSessionErrorData`.
+Use the procedures ``pr_appendError`` and ``pr_appendMessage`` to convert errors and messages respectively to data in AIMMS identifiers.
+The identifiers in which this data is stored are located in:
+    #. ``gss::dataSessionProfilerErrorData`` for data sessions
+    #. ``gss::serverSessionErrorData`` for server sessions
+
+.. Both the procedures, the relevant collector is for the data session: `gss::dataSessionProfilerErrorData`, for a server session: `gss::serverSessionErrorData`.
 
 #.  The procedure ``pr_appendError(ep_err,sp_prefix)`` appends the error to the open error collector.
 
@@ -60,7 +65,7 @@ Both the procedures, the relevant collector is for the data session: `gss::dataS
 
     Return value: None.
 
-#.  The procedure ``pr_appendMessage(sp_msg,ep_lev)`` Appends the message `sp_msg` to the open error collector.
+#.  The procedure ``pr_appendMessage(sp_msg,ep_lev)`` Appends the message ``sp_msg`` to the open error collector.
 
     Arguments:
 
