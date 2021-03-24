@@ -38,7 +38,7 @@ during the session and were not handled by the end-user.
 
 The information flow around the application now looks as follows:
 
-.. image:: images/session-history.png
+.. image:: images/210319_Guardserversession_v2.jpg
     :align: center
 
 Guard Server Session Library
