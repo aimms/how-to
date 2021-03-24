@@ -1,4 +1,4 @@
-.. image:: ../../../Images/exchange-128.png
+.. image:: /Images/exchange-128.png
    :scale: 100
    :align: right
    :alt: AIMMS HTTP Library Help & Support

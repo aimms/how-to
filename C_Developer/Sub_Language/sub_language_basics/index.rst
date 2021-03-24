@@ -1,4 +1,4 @@
-.. image:: ../../../Images/code-file-128.png
+.. image:: /Images/code-file-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Language Help & Support

@@ -1,4 +1,4 @@
-.. image:: ../../Images/browser-128.png
+.. image:: /Images/browser-128.png
    :scale: 100
    :align: right
    :alt: AIMMS UI Functions Help & Support

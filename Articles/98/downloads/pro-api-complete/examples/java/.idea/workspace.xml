@@ -4,8 +4,8 @@
     <list default="true" id="b1798d36-e539-4e3d-a706-6741ef9fda83" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/../../../../98-starting-job-aimms-pro-api-csharp.rst" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../../98-starting-job-aimms-pro-api-java.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../images/AdaptingConnectionDetails.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../images/ProjectSDKIsNotDefinedRepairing.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$//Images/AdaptingConnectionDetails.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../..//Images/ProjectSDKIsNotDefinedRepairing.PNG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../../../C_Deployment/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../C_Deployment/index.rst" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />

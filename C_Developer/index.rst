@@ -1,4 +1,4 @@
-.. image:: ../Images/school-supplies-128.png
+.. image:: /Images/school-supplies-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Developer Help & Support

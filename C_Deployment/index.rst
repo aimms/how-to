@@ -1,4 +1,4 @@
-.. image:: ../Images/network-care-128.png
+.. image:: /Images/network-care-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Deployment Help & Support

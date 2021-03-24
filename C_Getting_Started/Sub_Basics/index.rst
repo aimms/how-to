@@ -1,4 +1,4 @@
-.. image:: ../../Images/apple-book-128.png
+.. image:: /Images/apple-book-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Basics Help & Support

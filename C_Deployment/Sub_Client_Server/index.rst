@@ -1,4 +1,4 @@
-.. image:: ../../Images/synchronize-128.png
+.. image:: /Images/synchronize-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Client-Server Communication Help & Support

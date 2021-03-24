@@ -1,5 +1,5 @@
 
-.. image:: ../../Images/network-128.png
+.. image:: /Images/network-128.png
    :scale: 100
    :align: right
    :alt: AIMMS PRO Help & Support
