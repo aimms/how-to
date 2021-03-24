@@ -17,6 +17,9 @@ Recently added
 .. Added 12 March 2020: 331
 .. Added 14 Feb 2020: 108-10, 108-09, 108-07
 
+    
+
+* :doc:`/Articles/351/351-app-initialization-termination-with-libraries`
 * :doc:`/Articles/512/512-image-widget-refresh`
 * :doc:`/Articles/377/377-link-legend-colors`
 * :doc:`/Articles/377/377-add-color-palettes`
