@@ -7,7 +7,7 @@ Measuring Page Load time
 
 #. Create the file ``MainProject/WebUI/resources/experimental-features.conf`` if it doesn't exist.
 
-#. Add the line ``_aimms_only_boomr 1`` to that file.
+#. Add the line ``_aimms_only_perf_boomr 1`` to that file.
 
 #. Start app, WebUI.
 
