@@ -159,8 +159,8 @@ A batch file quickly becomes more convenient, if you do this more than once.  Co
     rem Assuming here LoggerConfig.xml still writes to the fixed folder c:\temp,
     rem we move the create logfile from this folder to the current folder.
     rem Because of this fixed location, we can only debug one AIMMS project at a time!
-    copy c:\temp\aimms-log.xml log
-    del c:\temp\aimms-log.xml
+    rem copy c:\temp\aimms-log.xml log
+    rem del c:\temp\aimms-log.xml
     
     pause
 
@@ -178,8 +178,9 @@ Selected remarks about the about this ``.bat`` file:
     The trick in this statement is that it is applied to every ``.aimms`` file in the folder. 
     As there is usually only one such file, this works out nicely.
 
-*   Line 28,29 The XML file appender only writes to a file with an absolute path. 
-    Therefore we copy the XML log file to the place it belongs: the log folder of the project.
+*   Line 28,29 The XML file appender may be configured to write to a file with an absolute path. 
+    In that case, uncomment these two lines, such that we copy the XML log file to the place it belongs: 
+    the log folder of the project.
 
 *   Line 31: By pausing we can see the log in the command window opened. 
     It might be useful to check whether the ``.bat`` execution worked properly on your system.
