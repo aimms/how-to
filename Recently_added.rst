@@ -17,6 +17,7 @@ Recently added
 .. Added 12 March 2020: 331
 .. Added 14 Feb 2020: 108-10, 108-09, 108-07
 
+* :doc:`/Articles/310/310-incident-handling-for-organizations`
 * :doc:`/Articles/512/512-image-widget-refresh`
 * :doc:`/Articles/377/377-link-legend-colors`
 * :doc:`/Articles/377/377-add-color-palettes`
