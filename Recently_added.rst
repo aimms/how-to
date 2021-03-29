@@ -22,13 +22,14 @@ Recently added
 * :doc:`/Articles/377/377-link-legend-colors`
 * :doc:`/Articles/377/377-add-color-palettes`
 * :doc:`/Articles/490/490-naming-convention`
+* :doc:`/Articles/498/498-aimms-with-r`
 * :doc:`/Articles/487/487-aimms-with-python`
 * :doc:`/Articles/494/494-overview-aimms-ds-models`
 * :doc:`/Articles/362/362-multi-timezone`
 * :doc:`/Articles/375/375-library-function-procedure`
 * :doc:`/Articles/373/373-pro-scaling-options`
-* :doc:`/Articles/374/374-pro-backup-and-continuity`
 
+.. * :doc:`/Articles/374/374-pro-backup-and-continuity`
 .. * :doc:`/Articles/228/228-data-ranges`
 .. * :doc:`/Articles/343/343-use-metadata-in-write-to-table`
 .. * :doc:`/Articles/344/344-sparse-execution-for-write-to-table`

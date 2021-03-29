@@ -22,5 +22,8 @@ These topics help you to use the HTTP Library with your AIMMS project.
    /Articles/298/298-use-flickr-api
    /Articles/300/300-ibm-api-speech-to-text
    /Articles/301/301-Image-Recognition
+   /Articles/494/494-overview-aimms-ds-models
+   /Articles/487/487-aimms-with-python
+   /Articles/498/498-aimms-with-r
 
    
