@@ -14,7 +14,7 @@ asking these specialists questions about the incidents similar to the following:
 #.  `Do you know, why I had to wait a lot longer before the solution appeared?`
 
     Again, the causes are several, for instance: slow internet connection used to obtain data, 
-    the solution algorithm needed significantly more time for this instance, or something else entirely.
+    the solution algorithm needed significantly more time for this instance or something else entirely.
 
     The specialist that helps the end-user with this question, may very well benefit from profiling information.
 
@@ -24,16 +24,16 @@ asking these specialists questions about the incidents similar to the following:
 
     #.  What have you done, my friend?
 
-    #.  My friend, would you mind sharing the data, such that I can see for my self?
+    #.  My friend, would you mind sharing the data, such that I can see for myself?
 
-    The specialist that helps the end-user with this question, may very well benefit from:
+    The specialist that helps the end-user with this question may very well benefit from:
 
     #.  a log of the actions taken by the end-user, or
 
     #.  a case file containing a copy of the data the end-user saw.
 
-Let's call the error and profiling information, the action log, and the case file together the session history.
-The purpose of sharing the session history is to reduce the time and effort for resolving those incidents that occurred 
+Let's call the error and profiling information, the action log, and the case file together, the session history.
+The purpose of sharing the session history is to reduce the time and effort for resolving those incidents that occurred
 during the session and were not handled by the end-user.
 
 The information flow around the application now looks as follows:
@@ -64,7 +64,7 @@ This library can be discussed from the perspective of internal mechanisms, or fr
     #.  :doc:`Integration instructions<../310/310-integrate-gss-server-job>`:  to integrate the ``GuardServerSession`` library with your application, 
         in particular how to adapt the delegation to server session.
 
-    #.  :doc:`UI for end users<../310/310-install-gss-ui-for-end-users>`: to build a user interface for end users.
+    #.  :doc:`UI for end users<../310/310-install-gss-ui-for-end-users>`: to build a user interface for end-users.
 
     #.  :doc:`UI for specialists<../310/310-install-gss-ui-for-specialists>`: to build a user interface for specialists.
 

@@ -18,7 +18,7 @@ The following steps need to be considered:
 Adding the library
 --------------------
 
-A copy of the library can obtained from here: :download:`GSS Library download <model/GuardServerSession.zip>`.
+A copy of the library can be obtained from here: :download:`GSS Library download <model/GuardServerSession.zip>`.
 See also :doc:`AIMMS How-To: Add AIMMS Libraries<../84/84-using-libraries>`.
 
 This library is dependent on the libraries:

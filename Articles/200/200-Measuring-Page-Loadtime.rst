@@ -18,9 +18,9 @@ Measuring Page Load time
         <script>window.experimental_features={"map-v2":true,"compact-scalar":true,"page-action":true,"_aimms_only_perf_boomr":true}</script>
 
     Should contain: ``"_aimms_only_perf_boomr":true``
-    
+
     Close the page source.
-    
+
 #. Open the browser inspector. If it is docked in the current window, undock it.
 
 #. Select tab "console", as indicated by the blue oval in the picture below.

@@ -72,7 +72,7 @@ Relevant identifiers for logging
 
 #.  Element parameter ``gss::ep_tracingFilterlevel`` with range ``gss::s_messageLevels``
 
-    The tracing filter level: any log message with an importance below this filter level will not be logged.
+    The tracing filter level: any log message with importance below this filter level will not be logged.
     At the beginning of a session, this parameter is initialized to `'info'`. 
     So when this tracing filter level is kept at its default, 
     messages with importance 'debug' or 'trace' will not be logged.
@@ -80,7 +80,7 @@ Relevant identifiers for logging
     .. note:: 
 
         #.  This parameter is part of the input case sent from the data session to a solver session.
-            Therefore, setting the logging level in the data session, will affect the logging in the solver sessions.
+            Therefore, setting the logging level in the data session will affect the logging in the solver sessions.
 
         #.  At the beginning of a session, this parameter is initialized to ``'info'``. 
             So when this tracing filter level is kept at its default, 

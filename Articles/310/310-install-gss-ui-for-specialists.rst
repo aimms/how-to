@@ -12,16 +12,16 @@ The rest of this article details the WebUI page ``GSS Session History Management
 Sidepanel
 ----------
 
-In this section, we create a sidepanel page first. This sidepanel wil be used in the actual UI for specialists.
+In this section, we create a sidepanel page first. This sidepanel will be used in the actual UI for specialists.
 
 Create a side panel page with name ``sp_controls``. 
 Check the ``MainProject/WebUI/webui.json`` file; the page ``sp_controls`` should have "slug": ``sp_controls_1``.  
 If not, the slug needs to be renamed at two places in the ``webui.json`` file (with AIMMS closed).
 
-Status bar of your app should be set to ``gss::sp_messageStatusBar``, or to a string parameter that contains this information.
+The status bar of your app should be set to ``gss::sp_messageStatusBar``, or to a string parameter that contains this information.
 
 
-Widgets on side panel
+Widgets on sidepanel
 ^^^^^^^^^^^^^^^^^^^^^^
 
 We start adding widget to the side panel as follows:
@@ -48,8 +48,6 @@ We start adding widget to the side panel as follows:
 
     procedure: ``gss::pr_downloadErrorReport``
 
-    .. title: ``"Download error report shown session"``
-    .. what do mean by shown session ? 
 
 #.  Download widget ``DownloadErrorWarningData``, titled "Download error data for current session":
 
@@ -62,7 +60,7 @@ The page ``GSS Session History Management`` has ``Action Upon Load`` set to ``gs
 
 .. tip::
     
-    If you have a multi page application, you might want to add this page to the group of "developer" or "control" pages in your application.
+    If you have a multi-page application, you might want to add this page to the group of "developer" or "control" pages in your application.
 
 Make the page a grid page and give it standard layout 5, 
 see `Grid Layout for beautiful and consistent looking applications <https://community.aimms.com/aimms-webui-44/grid-layout-for-beautiful-and-consistent-looking-applications-728>`_

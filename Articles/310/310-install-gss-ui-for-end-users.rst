@@ -1,10 +1,10 @@
-Install GSS interface for end users
+Install GSS interface for end-users
 =====================================
 
 This article is a companion article to :doc:`Incident Handling for Organizations<../310/310-incident-handling-for-organizations>` and to 
 :doc:`The GSS End User interface for end users<../310/310-gss-ui-for-end-users>`.
 
-In this article it is explained how to create the dialog page in which the end user can submit an incident report.
+In this article, it is explained how to create the dialog page in which the end-user can submit an incident report.
 
 #.  Create a dialog page, preferably below the page GSS Session History Management, named ``GSS Incident report``.
     The set ``webui::AllDialogPages`` should now contain ``gss_incident_report``.

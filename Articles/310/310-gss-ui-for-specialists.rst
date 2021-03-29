@@ -4,10 +4,10 @@ The GSS User Interface for specialists
 This article is a companion article to :doc:`Incident Handling for Organizations<../310/310-incident-handling-for-organizations>`. 
 It describes the User Interface for specialists supporting end-users of the application at hand.
 
-The User Interface for specialists let them investigate the components of a Session History easily.
+The User Interface for specialists lets them investigate the components of a Session History easily.
 The Session History consists of the following components:
 
-#.  Incident summary, as supplied by the end user
+#.  Incident summary, as supplied by the end-user
 
 #.  Errors as data - we want both an overview of the errors in a session, and per error a stack of active identifiers such as defined parameters and procedures.
 
@@ -15,7 +15,7 @@ The Session History consists of the following components:
 
 #.  Log files - those are not captured by tables, just by text editors.
 
-#.  Case file, containing the contents of the sets, parameters and variables at the moment the incident was reported by the end-user.
+#.  Case file, containing the contents of the sets, parameters, and variables at the moment the incident was reported by the end-user.
 
 The user interface is shown in the ``GSS Session History Management`` below:
 
@@ -37,7 +37,7 @@ Remarks:
 
 #.  The upper table on the right shows the profiler data per identifier.
 
-#.  The lower table on the right shows the profiler data per lines for the selected identifier.
+#.  The lower table on the right shows the profiler data per line for the selected identifier.
 
 #.  The selection drop-down in the green rectangle is used to select the session shown. 
     The collection of sessions to choose from consists of:
@@ -48,7 +48,7 @@ Remarks:
 
     #.  The uploaded sessions
 
-#.  In the orange rectangles in the lower right there is an upload and a download button for error data.
+#.  In the orange rectangles in the lower right, there is an upload and a download button for error data.
 
     #.  The download button is intended to be used by the end-user that wants to share an error report with the data and model specialists in her team.
 
