@@ -156,6 +156,7 @@ LibraryModule Library_GuardServerSession {
 						pr_getDownloadFolder(sp_downloadFolder);
 						pr_workCreateIncidentSummary(sp_createdFile);
 						sp_filename := sp_downloadFolder + "\\" + sp_createdFile ;
+						sp_filename := fnc_nonExistingFilename( sp_filename );
 						FileCopy( sp_createdFile, sp_filename );
 					onerror ep_err do
 						gss::pr_appendError( ep_err );
@@ -335,6 +336,32 @@ LibraryModule Library_GuardServerSession {
 				IndexDomain: (webui::indexApplicationExtension,webui::indexStatusBarSpec);
 				Definition: {
 					{
+						( '4', 'header'    ) : "",  
+						( '4', 'icon'      ) : "",
+						( '4', 'color'     ) : "",
+						( '4', 'text'      ) : "Paths" , 
+						( '4', 'tooltip'   ) : 
+							"<table>" +
+								"<TR>" +
+									"<TD>" + "Current: " + "</TD>"  +
+									"<TD>" + sp_currentFolder + "</TD>"  +
+								"</TR>" +
+								"<TR>" +
+									"<TD>" + "Startup: " + "</TD>"  +
+									"<TD>" + sp_startupFolder + "</TD>"  +
+								"</TR>" +
+								"<TR>" +
+									"<TD>" + "sp_locationZip: " + "</TD>"  +
+									"<TD>" + sp_locationZip  + "</TD>"  +
+								"</TR>" +
+								"<TR>" +
+									"<TD>" + "PRO_TEMP: " + "</TD>"  +
+									"<TD>" + pro::GetPROTempFolder  + "</TD>"  +
+								"</TR>" +
+							"</table>",
+						( '4', 'procedure' ) : "gss::pr_getCurDir",
+						( '4', 'state'     ) : "Active" , 
+					
 						( '5', 'header'    ) : "",  
 						( '5', 'icon'      ) : "aimms-chip" ,
 						( '5', 'color'     ) :  
@@ -2079,7 +2106,8 @@ LibraryModule Library_GuardServerSession {
 				Body: {
 					ep_jobIncident := '' ;
 					ep_dataSessionIncident := '' ;
-					pr_GetThisSession();
+					pr_getThisSession();
+					pr_getModelLibraryAndBinPaths();
 				}
 				Comment: "Add initialization statements here that do not require any other library being initialized already.";
 			}
@@ -2215,22 +2243,23 @@ LibraryModule Library_GuardServerSession {
 					endblock ;
 					
 					block ! Zip it
+						CurrentErrorMessage := "" ;
+						sp_createdFile := "IncidentSummary.zip";
+						if FileExists( sp_createdFile ) then
+							FileDelete( sp_createdFile );
+						endif ;
 						if AimmsStringConstants('Platform') = "Linux" then
-							sp_createdFile := "IncidentSummary.tar.gz";
-							if FileExists( sp_createdFile ) then
-								FileDelete( sp_createdFile );
-							endif ;
-							Execute("tar", "-czvf " + sp_createdFile + " IncidentMaterials", wait:1) ;
+							Execute( "zip", "-r " + sp_createdFile + " IncidentMaterials", wait:1) ;
 						else
-							sp_createdFile := "IncidentSummary.zip";
-							if FileExists( sp_createdFile ) then
-								FileDelete( sp_createdFile );
-							endif ;
-							Execute("GuardServerSession\\bin\\7za.exe", "a " + sp_createdFile + " .\\IncidentMaterials\\*", wait:1) ;
+							Execute( "powershell \"Compress-Archive -Path IncidentMaterials -DestinationPath IncidentSummary.zip\"", wait:1);
+						endif ;
+						if not FileExists( sp_createdFile ) then
+							raise error "Unable to create " + sp_createdFile + ": " + CurrentErrorMessage ;
 						endif ;
 					endblock ;
 				}
 				Comment: "Workhorse when an incident summary is to be created.";
+				StringParameter sp_prevCurrentFolder;
 				StringParameter sp_slash;
 				StringParameter sp_incidentSummaryFolderName {
 					InitialData: "IncidentMaterials";
@@ -2581,6 +2610,77 @@ LibraryModule Library_GuardServerSession {
 				}
 				StringParameter sp_userProfile;
 			}
+			Function fnc_nonExistingFilename {
+				Arguments: (sp_filename);
+				Range: string;
+				Body: {
+					! split the filename in a base part and an extension part, such that we insert " (no)" in between if needed.
+					p_dot := FindNthString( sp_filename, ".", -1 );
+					if p_dot > 1 then
+						sp_extension := substring( sp_filename, p_dot, StringLength( sp_filename ) );
+						sp_baseFilename := substring( sp_filename, 1, p_dot -1 );
+					else
+						sp_extension := "" ;
+						sp_baseFilename := sp_filename ;
+					endif ;
+					
+					p_cnt := 0 ;
+					while FileExists( sp_filename ) do
+						p_cnt += 1 ;
+						sp_filename := formatString("%s (%i)%s", sp_baseFilename, p_cnt, sp_extension );
+					endwhile ;
+					fnc_nonExistingFilename := sp_filename ;
+				}
+				Comment: {
+					"Ensure that the file sp_filename doesn\'t exist yet.
+					If it exists, then create a <file> (no).<ext> variation of the filename 
+					such as you often see in download folders."
+				}
+				StringParameter sp_extension;
+				Parameter p_cnt;
+				Parameter p_dot;
+				StringParameter sp_filename {
+					Property: Input;
+				}
+				StringParameter sp_baseFilename;
+			}
+			Section Various_paths {
+				StringParameter sp_currentFolder;
+				StringParameter sp_startupFolder;
+				StringParameter sp_locationZip;
+			}
+			Procedure pr_getModelLibraryAndBinPaths {
+				Body: {
+					DirectoryGetCurrent( sp_startupFolder );
+					sp_currentFolder := sp_startupFolder ;
+					if AimmsStringConstants('Platform') = "Windows" then
+						DirectoryGetFiles(
+							directory       :  sp_startupFolder, 
+							filter          :  "*.exe", 
+							filenames       :  sp_fileNames, 
+							recursive       :  1, 
+							attributeFilter :  {});
+						for i_fileNo do
+							if FindString(sp_fileNames(i_fileNo),"7za.exe",caseSensitive:0) then
+								sp_locationZip := sp_startupFolder + sp_fileNames(i_fileNo);
+								break ;
+							endif ;
+						endfor ;
+					endif ;
+				}
+				Set s_fileNumbers {
+					SubsetOf: Integers;
+					Index: i_fileNo;
+				}
+				StringParameter sp_fileNames {
+					IndexDomain: i_fileNo;
+				}
+			}
+			Procedure pr_getCurDir {
+				Body: {
+					DirectoryGetCurrent( sp_currentFolder );
+				}
+			}
 		}
 		Section Logging_utilities {
 			Procedure pr_openLogFile {
@@ -2685,7 +2785,7 @@ LibraryModule Library_GuardServerSession {
 				Parameter p_slash;
 				Parameter p_len;
 			}
-			Procedure pr_GetThisSession {
+			Procedure pr_getThisSession {
 				Body: {
 					bp_nextArgIsSessionId := 0 ;
 					bp_isConnectedToPro := 0 ;

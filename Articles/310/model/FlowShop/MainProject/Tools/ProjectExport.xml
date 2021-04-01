@@ -3,8 +3,10 @@
 	<ExcludedFile>backup</ExcludedFile>
 	<ExcludedFile>IncidentMaterials</ExcludedFile>
 	<ExcludedFile>log</ExcludedFile>
+	<ExcludedFile>MainProject\WebUI</ExcludedFile>
 	<ExcludedFile>PROTemp</ExcludedFile>
 	<ExcludedFile>tracings</ExcludedFile>
+	<ExcludedFile>IncidentSummary.zip</ExcludedFile>
 	<ExcludedFile>pro_arguments_.txt</ExcludedFile>
 	<ExcludedFile>_Local_Libs_</ExcludedFile>
 </ExportSettings>

@@ -187,31 +187,6 @@
           "dndId": "area-cErrorWarningStack0"
         },
         {
-          "widgetUri": "DownloadErrorReport",
-          "gridArea": "Unassigned widgets",
-          "dndId": "Unassigned widgetsDownloadErrorReport1"
-        },
-        {
-          "widgetUri": "DownloadModelLog",
-          "gridArea": "Unassigned widgets",
-          "dndId": "Unassigned widgetsDownloadModelLog2"
-        },
-        {
-          "widgetUri": "downloadErrorWarningData",
-          "gridArea": "Unassigned widgets",
-          "dndId": "Unassigned widgetsdownloadErrorWarningData3"
-        },
-        {
-          "widgetUri": "UploadErrorWarningData",
-          "gridArea": "Unassigned widgets",
-          "dndId": "Unassigned widgetsUploadErrorWarningData4"
-        },
-        {
-          "widgetUri": "ShownSession",
-          "gridArea": "Unassigned widgets",
-          "dndId": "Unassigned widgetsShownSession5"
-        },
-        {
           "widgetUri": "JobProfilerData",
           "gridArea": "area-b",
           "dndId": "area-bJobProfilerData7"
@@ -324,6 +299,9 @@
     }
   },
   "pages/sp_controls_1": {
+    "aimms.widget.type": {
+      "literal": "sidepanel"
+    },
     "widgets": {
       "literal": [
         {
@@ -360,11 +338,15 @@
             "width": "2",
             "height": "1"
           }
+        },
+        {
+          "uri": "IncidentSummary_1",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
         }
       ]
-    },
-    "aimms.widget.type": {
-      "literal": "sidepanel"
     }
   },
   "widgets/ClearDataSessionErrors": {
@@ -975,6 +957,23 @@
         ],
         "slices": []
       }
+    }
+  },
+  "widgets/IncidentSummary_1": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "gss::pr_openIncidentSummary"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "IncidentSummary (1)"
+    },
+    "title": {
+      "literal": "Incident Summary"
     }
   },
   "widgets/JobProfilerData": {
