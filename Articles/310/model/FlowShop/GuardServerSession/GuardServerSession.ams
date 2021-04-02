@@ -1823,6 +1823,8 @@ LibraryModule Library_GuardServerSession {
 						sp_node, sp_logDetail, 
 						p_procEnterMemoryInUse );
 					pr_logMsgTraceFile( sp_fullMsg, ep_messageImportance );
+					
+					pr_checkCurrentFolder();
 				}
 				Comment: {
 					"Trace entry of procedure to the log file; this procedure should not be called before LibraryInitialization finished."
@@ -1875,6 +1877,8 @@ LibraryModule Library_GuardServerSession {
 							if p_leaveMemoryInUse >= p_procEnterMemoryInUse then "increase" else "decrease" endif, 
 							abs( p_leaveMemoryInUse - p_procEnterMemoryInUse ) );
 					pr_logMsgTraceFile( sp_fullMsg, ep_messageImportance );
+					
+					pr_checkCurrentFolder();
 				}
 				Comment: {
 					"Trace leaving of procedure to the log file; this procedure should not be called before LibraryInitialization finished."
@@ -2653,20 +2657,21 @@ LibraryModule Library_GuardServerSession {
 				Body: {
 					DirectoryGetCurrent( sp_startupFolder );
 					sp_currentFolder := sp_startupFolder ;
-					if AimmsStringConstants('Platform') = "Windows" then
-						DirectoryGetFiles(
-							directory       :  sp_startupFolder, 
-							filter          :  "*.exe", 
-							filenames       :  sp_fileNames, 
-							recursive       :  1, 
-							attributeFilter :  {});
-						for i_fileNo do
-							if FindString(sp_fileNames(i_fileNo),"7za.exe",caseSensitive:0) then
-								sp_locationZip := sp_startupFolder + sp_fileNames(i_fileNo);
-								break ;
-							endif ;
-						endfor ;
-					endif ;
+					!if AimmsStringConstants('Platform') = "Windows" then
+					!	DirectoryGetFiles(
+					!		directory       :  sp_startupFolder, 
+					!		filter          :  "*.exe", 
+					!		filenames       :  sp_fileNames, 
+					!		recursive       :  1, 
+					!		attributeFilter :  {});
+					!	for i_fileNo do
+					!		if FindString(sp_fileNames(i_fileNo),"7za.exe",caseSensitive:0) then
+					!			sp_locationZip := sp_startupFolder + sp_fileNames(i_fileNo);
+					!			break ;
+					!		endif ;
+					!	endfor ;
+					!endif ;
+					!
 				}
 				Set s_fileNumbers {
 					SubsetOf: Integers;
@@ -2931,6 +2936,36 @@ LibraryModule Library_GuardServerSession {
 			}
 			Parameter p_peakMemoryInUse {
 				InitialData: 0;
+			}
+		}
+		Section Internal_checks {
+			Section Current_Directory_Check {
+				Parameter bp_warningIssuedChangeCurrentDirectory {
+					Range: binary;
+					InitialData: 0;
+				}
+				Procedure pr_checkCurrentFolder {
+					Body: {
+						if not bp_warningIssuedChangeCurrentDirectory then
+							DirectoryGetCurrent( sp_currentFolder );
+							if sp_currentFolder <> sp_startupFolder then
+								raise warning formatString("Unexpected change in the current folder from %s to %s",
+									sp_startupFolder, sp_currentFolder) ;
+								bp_warningIssuedChangeCurrentDirectory := 1;
+							endif ;
+						endif ;
+					}
+					Comment: {
+						"AIMMS only supports DirectoryGetCurrent and not DirectorySetCurrent; 
+						because the AIMMS process needs to have the current directory constant -
+						namely the folder in which the .aimms is located.  
+						This folder is also known as the project folder.
+						
+						This function verifies that the current directory is still the same as the 
+						directory in which the AIMMS process started.
+						This function is called in gss::pr_enter, and gss::pr_leave."
+					}
+				}
 			}
 		}
 	}
