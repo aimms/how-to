@@ -360,7 +360,7 @@ LibraryModule Library_GuardServerSession {
 								"</TR>" +
 							"</table>",
 						( '4', 'procedure' ) : "gss::pr_getCurDir",
-						( '4', 'state'     ) : "Active" , 
+						( '4', 'state'     ) : "Inactive" , 
 					
 						( '5', 'header'    ) : "",  
 						( '5', 'icon'      ) : "aimms-chip" ,
@@ -1916,6 +1916,8 @@ LibraryModule Library_GuardServerSession {
 						pr_ensurePath( sp_proStorageFolderName );
 					
 						pr_actuallySaveActionLogFile( sp_traceFilename, sp_proStorageFolderName );
+					
+						pr_saveLogfilesProTempfolder();
 					endif ;
 				}
 				Comment: "Save the log file in AIMMS PRO storage.";
@@ -2183,6 +2185,7 @@ LibraryModule Library_GuardServerSession {
 					else
 						sp_slash := "\\" ;
 					endif ;
+					sp_fwdSlash := "/" ;
 					
 					block ! Ensure the proper session is selected
 						ep_shownSession := first( s_trackedSessions );
@@ -2277,6 +2280,38 @@ LibraryModule Library_GuardServerSession {
 								pro::RetrieveFileFromCentralStorage( sp_proStorageFileName, sp_actionLogFilename );
 							endblock ;
 					
+							block ! Copy the contents of bucket /UserData/<env>/<user>/<prj>/<ep_shownSession>/
+								sp_bucketName := sp_fwdSlash + "Userdata" + sp_fwdSlash + 
+									pro::GetPROEnvironment() + sp_fwdSlash + 
+									pro::GetPROUserName()    + sp_fwdSlash + 
+									pro::ModelName           + sp_fwdSlash +
+									ep_shownSession          ;
+								empty s_filenumbers ;
+								pr_getFiles( sp_bucketName, s_fileNumbers, sp_fileNames, sp_fileTimes, p_fileSizes );
+								pro::management::LocalLogInfo(formatString("Copy the contents of bucket: %s", sp_bucketName));
+								for i_fileNo do
+									pro::management::LocalLogInfo("    Retrieving: " + sp_fileNames(i_fileNo));
+								endfor ;
+								for i_fileNo do
+									sp_fn := sp_fileNames( i_fileNo );
+									p_slashPos1 := findNthString( sp_fn, "/", -1);
+									p_slashPos2 := findNthString( sp_fn, "\\", -1);
+									p_slashPos := max( p_slashPos1, p_slashPos2 );
+									sp_baseFilename := substring( sp_fn, p_slashPos + 1, StringLength( sp_fn ) );
+					!				sp_proStorageFileName := sp_slash + "Userdata" + sp_slash + 
+					!					pro::GetPROEnvironment() + sp_slash + 
+					!					pro::GetPROUserName()    + sp_slash + 
+					!					pro::ModelName           + sp_slash +
+					!					ep_shownSession          + sp_slash +
+					!					sp_fileNames( i_fileNo ) ;
+									sp_proStorageFileName := sp_fileNames( i_fileNo );
+									sp_fn := sp_incidentSummaryFolderName + sp_slash + ep_shownSession + sp_slash + sp_baseFilename  ;
+									pro::management::LocalLogInfo(formatString("RetrieveFileFromCentralStorage(from: %s, to: %s)", 
+										sp_proStorageFileName, sp_fn));
+									pro::RetrieveFileFromCentralStorage( sp_proStorageFileName, sp_fn );
+								endfor ;
+							endblock ;
+					
 						endfor ;
 					endblock ;
 					
@@ -2287,6 +2322,7 @@ LibraryModule Library_GuardServerSession {
 				Comment: "Workhorse when an incident summary is to be created.";
 				StringParameter sp_prevCurrentFolder;
 				StringParameter sp_slash;
+				StringParameter sp_fwdSlash;
 				StringParameter sp_incidentSummaryFolderName {
 					InitialData: "IncidentMaterials";
 				}
@@ -2305,6 +2341,26 @@ LibraryModule Library_GuardServerSession {
 					Property: Output;
 				}
 				StringParameter sp_proStorageFileName;
+				StringParameter sp_bucketName;
+				Set s_fileNumbers {
+					SubsetOf: Integers;
+					Index: i_fileNo;
+				}
+				StringParameter sp_fileNames {
+					IndexDomain: i_fileNo;
+				}
+				StringParameter sp_fileTimes {
+					IndexDomain: i_fileNo;
+				}
+				Parameter p_fileSizes {
+					IndexDomain: i_fileNo;
+				}
+				StringParameter sp_fn;
+				Parameter p_slashPos1;
+				Parameter p_slashPos2;
+				Parameter p_slashPos;
+				Parameter p_strLen;
+				StringParameter sp_baseFilename;
 			}
 		}
 		Section Guard_utilities {
@@ -2717,6 +2773,294 @@ LibraryModule Library_GuardServerSession {
 					Property: Input;
 				}
 			}
+			Section Utilities_from_Copy_Files_From_Server {
+				StringParameter spMySlash {
+					Definition: "/";
+				}
+				Procedure pr_GetFolders {
+					Arguments: (spInpPath,sFolderNumbers,sFolderNames);
+					Body: {
+						if not pro::GetPROEndPoint() then return; endif ;
+						
+						pro::NormalizeStoragePath(spInpPath);
+						ret := pro::storage::ListBuckets(
+							path       :  spInpPath, 
+							BucketSet  :  sLocBucketSet, 
+							BucketSize :  pLocBucketSize, 
+							BucketAuth :  spLocBucketAuth, 
+							BucketDate :  spLocBucketDate);
+						empty sFolderNumbers;                	
+						for i_bs do
+							SetElementAdd(sFolderNumbers,eFN,FormatString("%i",card(sFolderNumbers)+1));
+							if eFN <> last( sFolderNumbers ) then raise error "internal error" ; endif ;
+							sFolderNames(eFN) := i_bs ;
+						endfor ;
+						return card(sLocBucketSet);
+					}
+					Set sFolderNumbers {
+						Index: iFN;
+						Parameter: eFN;
+						Property: Output;
+					}
+					StringParameter spInpPath {
+						Property: Input;
+					}
+					StringParameter sFolderNames {
+						IndexDomain: iFN;
+						Property: Output;
+					}
+					DeclarationSection Local_declarations {
+						Parameter ret;
+						Set sLocBucketSet {
+							Index: i_bs;
+						}
+						Parameter pLocBucketSize {
+							IndexDomain: i_bs;
+						}
+						StringParameter spLocBucketAuth {
+							IndexDomain: i_bs;
+						}
+						StringParameter spLocBucketDate {
+							IndexDomain: i_bs;
+						}
+					}
+				}
+				Procedure pr_GetAllDirectories {
+					Arguments: (spInpPath,sAllDirectoryNumbers,spAllDirectoryNames);
+					Body: {
+						block ! Initialize Directory List to "only root directory"
+							sAllDirectoryNumbers := data { 1 };
+							eADN := first( sAllDirectoryNumbers );
+							spAllDirectoryNames(eADN) := spInpPath ;
+							pNoVisitedDirectories := 0 ;
+							pLastDirectoryToBeVisited := 1 ;
+						endblock ;
+						
+						while pNoVisitedDirectories < pLastDirectoryToBeVisited do
+						
+							DialogProgress(
+								formatString("Phase 1, obtaining folders %i of %i handled", pNoVisitedDirectories, pLastDirectoryToBeVisited),
+								100 * ( pNoVisitedDirectories / pLastDirectoryToBeVisited ) );
+						
+							! Move to the next folder
+							pNoVisitedDirectories += 1;
+							eADN := pNoVisitedDirectories ;
+							spCurrentDirectory := spAllDirectoryNames(eADN);
+						
+							! Get the directory names inside spCurrentDirectory
+							res := pr_GetFolders( spCurrentDirectory, sRecentDirectoryNumbers, spRecentDirectoryNames );
+							pNoRegisteredDirectoryNames := 0 ;
+							while pNoRegisteredDirectoryNames < res do
+								pNoRegisteredDirectoryNames += 1 ;
+								eRDN := pNoRegisteredDirectoryNames ;
+								sAllDirectoryNumbers += ( pLastDirectoryToBeVisited + pNoRegisteredDirectoryNames );
+								eADN := ( pLastDirectoryToBeVisited + pNoRegisteredDirectoryNames );
+								spAllDirectoryNames( eADN ) := spCurrentDirectory + spMySlash + spRecentDirectoryNames( eRDN );
+							endwhile ; 
+							pLastDirectoryToBeVisited += res ;
+						
+						endwhile ;
+					}
+					StringParameter spInpPath {
+						Property: Input;
+					}
+					Set sAllDirectoryNumbers {
+						SubsetOf: Integers;
+						Index: iADN;
+						Parameter: eADN;
+						Property: ElementsAreLabels;
+					}
+					StringParameter spAllDirectoryNames {
+						IndexDomain: iADN;
+						Property: Output;
+					}
+					DeclarationSection Local_declarations {
+						Parameter pNoVisitedDirectories;
+						Parameter pLastDirectoryToBeVisited;
+						Parameter pLastFileToBeVisited;
+						StringParameter spCurrentDirectory;
+						Set sRecentDirectoryNumbers {
+							SubsetOf: Integers;
+							Index: iRDN;
+							Parameter: eRDN;
+							Property: ElementsAreLabels;
+						}
+						StringParameter spRecentDirectoryNames {
+							IndexDomain: iRDN;
+						}
+						Parameter pNoRegisteredDirectoryNames;
+						Parameter res;
+					}
+				}
+				Procedure pr_GetFiles {
+					Arguments: (spInpPath,sFileNumbers,spFileNames,spFileTimes,pFileSizes);
+					Body: {
+						if not pro::GetPROEndPoint() then return; endif ;
+						
+						ret := pro::storage::ListObjects(spInpPath,sChildrenObj,spChildrenObjName,spChildrenObjType,pChildrenObjSize,spChildrenObjAuth);
+						!if not handleError(ret) then return 0; endif; 
+						res := card( sChildrenObj );
+						for CURPATH_OBJ do
+							sFileNumbers += ord( CURPATH_OBJ );
+							ep_fin := last( sFileNumbers );
+							spFileNames( ep_fin ) := spInpPath + spMySlash + CURPATH_OBJ ;
+							spFullFileName := spInpPath + CURPATH_OBJ ;
+							pro::storage::ListVersions(
+								path        :  spInpPath, 
+								objectLabel :  CURPATH_OBJ, 
+								VersionSet  :  sVer, 
+								VersionSize :  pVerSize, 
+								BucketDate  :  spVerFileTimes );
+							eVer := last(sVer);
+							spFileTimes(ep_fin) := spVerFileTimes(eVer);
+							pFileSizes(ep_fin) := PVerSize(eVer);
+						endfor ;
+					}
+					DeclarationSection Argument_Declarations {
+						StringParameter spInpPath {
+							Property: Input;
+						}
+						Set sFileNumbers {
+							SubsetOf: Integers;
+							Index: iFN;
+							Property: ElementsAreLabels;
+						}
+						StringParameter spFileNames {
+							IndexDomain: iFN;
+							Property: Output;
+						}
+						StringParameter spFileTimes {
+							IndexDomain: iFN;
+							Property: Output;
+						}
+						Parameter pFileSizes {
+							IndexDomain: iFN;
+							Property: Output;
+						}
+					}
+					DeclarationSection Local_Declarations {
+						ElementParameter ep_fin {
+							Range: sFileNumbers;
+						}
+						Parameter ret;
+						Parameter res;
+						Set sVer {
+							Index: iVer;
+							Parameter: eVer;
+						}
+						Parameter pVerSize {
+							IndexDomain: iVer;
+						}
+						StringParameter spVerFileTimes {
+							IndexDomain: iVer;
+						}
+						Set sChildrenObj {
+							Index: CURPATH_OBJ;
+							Parameter: ChildrenObjElement;
+						}
+						StringParameter spFullFileName;
+						StringParameter spChildrenObjName {
+							IndexDomain: CURPATH_OBJ;
+						}
+						StringParameter spChildrenObjType {
+							IndexDomain: CURPATH_OBJ;
+						}
+						Parameter pChildrenObjSize {
+							IndexDomain: CURPATH_OBJ;
+						}
+						StringParameter spChildrenObjAuth {
+							IndexDomain: CURPATH_OBJ;
+						}
+					}
+				}
+				Procedure pr_GetAllFiles {
+					Arguments: (spInpPath,sFileNumbers,spFileNames,spFileTimes,pFileSizes);
+					Body: {
+						pr_GetAllDirectories(
+							spInpPath            :  spInpPath, 
+							sAllDirectoryNumbers :  sAllDirectoryNumbers, 
+							spAllDirectoryNames  :  spAllDirectoryNames);
+						p_noFolders := card( sAllDirectoryNumbers );
+						
+						for iADN do
+						
+							empty sLocFilenumbers ;
+							eFN := last( sFileNumbers );
+						
+							DialogProgress(
+								formatString("Phase 2, obtaining files, %e of %i folders handled, %e Files handled", 
+								iADN, p_noFolders, eFN),
+								100 * ( iADN / p_noFolders ) );
+						
+							pr_GetFiles( spAllDirectoryNames(iADN), sLocFilenumbers, 
+								spLocFilenames, spLocFiletimes, pLocFilesizes );
+							for iLFN do
+								sFileNumbers += if eFN then val( eFN ) else 0 endif + val( iLFN );
+								eNFN := last( sFilenumbers );
+								spFilenames( eNFN ) := spLocFilenames( iLFN );
+								spFileTimes( eNFN ) := spLocFiletimes( iLFN );
+								 pFileSizes( eNFN ) :=  pLocFileSizes( iLFN );
+							endfor ;
+						
+						endfor ;
+					}
+					DeclarationSection Argument_Declarations {
+						StringParameter spInpPath {
+							Property: Input;
+						}
+						Set sFileNumbers {
+							SubsetOf: Integers;
+							Index: iFN;
+							Parameter: eFN, eNFN;
+							Property: ElementsAreLabels;
+						}
+						StringParameter spFileNames {
+							IndexDomain: iFN;
+							Property: Output;
+						}
+						StringParameter spFileTimes {
+							IndexDomain: iFN;
+							Property: Output;
+						}
+						Parameter pFileSizes {
+							IndexDomain: iFN;
+							Property: Output;
+						}
+					}
+					DeclarationSection Local_Declarations {
+						Set sAllDirectoryNumbers {
+							SubsetOf: Integers;
+							Index: iADN;
+							Parameter: eADN;
+							Property: ElementsAreLabels;
+						}
+						StringParameter spAllDirectoryNames {
+							IndexDomain: iADN;
+						}
+						Set sLocFileNumbers {
+							SubsetOf: Integers;
+							Index: iLFN;
+							Parameter: eLFN;
+							Property: ElementsAreLabels;
+						}
+						StringParameter spLocFilenames {
+							IndexDomain: iLFN;
+						}
+						StringParameter spLocFiletimes {
+							IndexDomain: iLFN;
+						}
+						Parameter pLocFilesizes {
+							IndexDomain: iLFN;
+						}
+						Parameter p_noFolders;
+					}
+				}
+				Procedure NIY {
+					Body: {
+						raise error "Not Implemented Yet";
+					}
+				}
+			}
 		}
 		Section Logging_utilities {
 			Procedure pr_openLogFile {
@@ -2930,6 +3274,50 @@ LibraryModule Library_GuardServerSession {
 				}
 				StringParameter sp_slash;
 				StringParameter sp_proStorageFileName;
+			}
+			Procedure pr_saveLogfilesProTempfolder {
+				Body: {
+					DirectoryGetFiles(
+						directory       :  pro::GetPROTempFolder(), 
+						filter          :  "", 
+						filenames       :  sp_filenames, 
+						recursive       :  0, 
+						attributeFilter :  {});
+					sp_slash := "/" ;
+					sp_folder := sp_slash + "Userdata" + sp_slash + 
+							pro::GetPROEnvironment() + sp_slash + 
+							pro::GetPROUserName()    + sp_slash + 
+							pro::ModelName           + sp_slash + 
+							sp_thisSession           + sp_slash
+							;
+					block ! Tracing the saving of log files.
+						pro::management::LocalLogInfo(formatString(
+							"pr_saveLogfilesProTempfolder(): pro::GetPROTempFolder() = %s, sp_folder = %s",
+							pro::GetPROTempFolder(), sp_folder));
+						for i_fileNo do
+							pro::management::LocalLogInfo("    Saving: " + sp_filenames(i_fileNo));
+						endfor ;
+					endblock ;
+					
+					for i_fileNo do
+						sp_fn := pro::GetPROTempFolder() + sp_slash + sp_filenames(i_fileNo );
+						sp_proStorageFileName := sp_folder + sp_filenames(i_fileNo );
+						pro::SaveFileToCentralStorage(
+							localPath     :  sp_fn, 
+							storagePath   :  sp_proStorageFileName);	
+					endfor ;
+				}
+				Set s_fileNumbers {
+					SubsetOf: Integers;
+					Index: i_fileNo;
+				}
+				StringParameter sp_filenames {
+					IndexDomain: i_fileNo;
+				}
+				StringParameter sp_fn;
+				StringParameter sp_proStorageFileName;
+				StringParameter sp_folder;
+				StringParameter sp_slash;
 			}
 			StringParameter sp_tracingsFolderName {
 				Definition: "tracings";
