@@ -351,12 +351,12 @@ LibraryModule Library_GuardServerSession {
 									"<TD>" + sp_startupFolder + "</TD>"  +
 								"</TR>" +
 								"<TR>" +
-									"<TD>" + "sp_locationZip: " + "</TD>"  +
-									"<TD>" + sp_locationZip  + "</TD>"  +
-								"</TR>" +
-								"<TR>" +
 									"<TD>" + "PRO_TEMP: " + "</TD>"  +
 									"<TD>" + pro::GetPROTempFolder  + "</TD>"  +
+								"</TR>" +
+								"<TR>" +
+									"<TD>" + "BucketBasePath: " + "</TD>"  +
+									"<TD>" + pro::session::BucketBasePath  + "</TD>"  +
 								"</TR>" +
 							"</table>",
 						( '4', 'procedure' ) : "gss::pr_getCurDir",
@@ -2215,6 +2215,17 @@ LibraryModule Library_GuardServerSession {
 						putclose ;
 					endblock ;
 					
+					block ! Copy the case file
+						sp_caseFilename  := sp_incidentSummaryFolderName + sp_slash + "dataSession.data" ;
+						if not CaseFileSave(
+								url      :  sp_caseFilename, 
+								contents :  AllIdentifiers) then
+							raise error formatString("CreateIncidentSummary(): Unable to save data to \"%s\": %s",
+								sp_caseFilename, CurrentErrorMessage );
+						endif ;
+					endblock ;
+					
+					
 					block ! Write Error report
 						sp_errorReportFilename := sp_incidentSummaryFolderName + sp_slash + "errorReport.txt" ;
 						pr_reportCurrentErrorsToTextFile( sp_errorReportFilename );
@@ -2236,31 +2247,42 @@ LibraryModule Library_GuardServerSession {
 						endif ;
 					endblock ;
 					
-					block ! Copy the case file
-						sp_caseFilename  := sp_incidentSummaryFolderName + sp_slash + "dataSession.data" ;
-						if not CaseFileSave(
-								url      :  sp_caseFilename, 
-								contents :  AllIdentifiers) then
-							raise error formatString("CreateIncidentSummary(): Unable to save data to \"%s\": %s",
-								sp_caseFilename, CurrentErrorMessage );
-						endif ;
+					block ! For each solver session, write the error report, profiler/error data, and action log to a sub folder of IncidentSummary.
+						for i_trackedSession | i_trackedSession <> first(s_trackedSessions) do
+							ep_shownSession := i_trackedSession;
+							pr_showSelectedSessionInUI();
+					
+							if not DirectoryExists( sp_incidentSummaryFolderName + sp_slash + ep_shownSession ) then
+								DirectoryCreate( sp_incidentSummaryFolderName + sp_slash + ep_shownSession );
+							endif ;
+					
+							block ! Write Error report
+								sp_errorReportFilename := sp_incidentSummaryFolderName + sp_slash + ep_shownSession + sp_slash + "errorReport.txt" ;
+								pr_reportCurrentErrorsToTextFile( sp_errorReportFilename );
+							endblock ;
+					
+							block ! Write Profiler and Errors as Data file
+								sp_profilerErrorDataFilename := sp_incidentSummaryFolderName + sp_slash + ep_shownSession + sp_slash + "ProfilerAndErrorData.errors" ;
+								pr_downloadErrorDataWork( sp_profilerErrorDataFilename );
+							endblock ;
+					
+							block ! Copy the trace/actionLog file
+								sp_actionLogFilename  := sp_incidentSummaryFolderName + sp_slash + ep_shownSession + sp_slash + "action.log" ;
+								sp_proStorageFileName := sp_slash + "Userdata" + sp_slash + 
+									pro::GetPROEnvironment() + sp_slash + 
+									pro::GetPROUserName()    + sp_slash + 
+									pro::ModelName           + sp_slash +
+									"tracings"               + sp_slash +
+									ep_shownSession          + ".actionLog" ;
+								pro::RetrieveFileFromCentralStorage( sp_proStorageFileName, sp_actionLogFilename );
+							endblock ;
+					
+						endfor ;
 					endblock ;
 					
-					block ! Zip it
-						CurrentErrorMessage := "" ;
-						sp_createdFile := "IncidentSummary.zip";
-						if FileExists( sp_createdFile ) then
-							FileDelete( sp_createdFile );
-						endif ;
-						if AimmsStringConstants('Platform') = "Linux" then
-							Execute( "zip", "-r " + sp_createdFile + " IncidentMaterials", wait:1) ;
-						else
-							Execute( "powershell \"Compress-Archive -Path IncidentMaterials -DestinationPath IncidentSummary.zip\"", wait:1);
-						endif ;
-						if not FileExists( sp_createdFile ) then
-							raise error "Unable to create " + sp_createdFile + ": " + CurrentErrorMessage ;
-						endif ;
-					endblock ;
+					
+					sp_createdFile := "IncidentSummary.zip" ;
+					pr_zipFolderToFile( sp_incidentSummaryFolderName, sp_createdFile );
 				}
 				Comment: "Workhorse when an incident summary is to be created.";
 				StringParameter sp_prevCurrentFolder;
@@ -2282,6 +2304,7 @@ LibraryModule Library_GuardServerSession {
 				StringParameter sp_createdFile {
 					Property: Output;
 				}
+				StringParameter sp_proStorageFileName;
 			}
 		}
 		Section Guard_utilities {
@@ -2651,27 +2674,11 @@ LibraryModule Library_GuardServerSession {
 			Section Various_paths {
 				StringParameter sp_currentFolder;
 				StringParameter sp_startupFolder;
-				StringParameter sp_locationZip;
 			}
 			Procedure pr_getModelLibraryAndBinPaths {
 				Body: {
 					DirectoryGetCurrent( sp_startupFolder );
 					sp_currentFolder := sp_startupFolder ;
-					!if AimmsStringConstants('Platform') = "Windows" then
-					!	DirectoryGetFiles(
-					!		directory       :  sp_startupFolder, 
-					!		filter          :  "*.exe", 
-					!		filenames       :  sp_fileNames, 
-					!		recursive       :  1, 
-					!		attributeFilter :  {});
-					!	for i_fileNo do
-					!		if FindString(sp_fileNames(i_fileNo),"7za.exe",caseSensitive:0) then
-					!			sp_locationZip := sp_startupFolder + sp_fileNames(i_fileNo);
-					!			break ;
-					!		endif ;
-					!	endfor ;
-					!endif ;
-					!
 				}
 				Set s_fileNumbers {
 					SubsetOf: Integers;
@@ -2684,6 +2691,30 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_getCurDir {
 				Body: {
 					DirectoryGetCurrent( sp_currentFolder );
+				}
+			}
+			Procedure pr_zipFolderToFile {
+				Arguments: (sp_folderName,sp_destinationFile);
+				Body: {
+					CurrentErrorMessage := "" ;
+					sp_destinationFile := "IncidentSummary.zip";
+					if FileExists( sp_destinationFile ) then
+						FileDelete( sp_destinationFile );
+					endif ;
+					if AimmsStringConstants('Platform') = "Linux" then
+						Execute( "zip", "-r " + sp_destinationFile + " " + sp_folderName , wait:1) ;
+					else
+						Execute( "powershell \"Compress-Archive -Path "+ sp_folderName+" -DestinationPath "+sp_destinationFile+"\"", wait:1);
+					endif ;
+					if not FileExists( sp_destinationFile ) then
+						raise error "Unable to create " + sp_destinationFile + ": " + CurrentErrorMessage ;
+					endif ;
+				}
+				StringParameter sp_folderName {
+					Property: Input;
+				}
+				StringParameter sp_destinationFile {
+					Property: Input;
 				}
 			}
 		}
