@@ -27,7 +27,10 @@
     </appender>
 
     <appender name="MyXMLFileAppender" class="org.apache.log4j.FileAppender">
-        <param name="File" value="c:/temp/aimms-log.xml" />
+        <!-- The following File element assumes you start AIMMS with the current directory equal to the project directory.
+             If not, please adapt the path of the .xml file to a fixed path.
+        -->
+        <param name="File" value="log/aimms-log.xml" />
         <param name="Append" value="true" />
         <layout class="org.apache.log4j.XMLLayout"/>
     </appender>  
@@ -116,7 +119,7 @@
     <root>
         <priority value="info" />
         <appender-ref ref="MyFileAppender" />
-        <!-- <appender-ref ref="MyXMLFileAppender" /> -->
+        <appender-ref ref="MyXMLFileAppender" />
         <!-- <appender-ref ref="stdout" /> -->
     </root>
 

@@ -1,4 +1,4 @@
-.. image:: ../../Images/settings-128.png
+.. image:: /Images/settings-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Settings Help & Support

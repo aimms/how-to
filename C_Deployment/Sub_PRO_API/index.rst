@@ -1,4 +1,4 @@
-.. image:: ../../Images/server-128.png
+.. image:: /Images/server-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Server Commands Help & Support

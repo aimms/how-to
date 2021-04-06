@@ -24,8 +24,29 @@
             "width": "2",
             "height": "1"
           }
+        },
+        {
+          "uri": "doTest",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
         }
       ]
+    }
+  },
+  "widgets/doTest": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_Test"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "title": {
+      "literal": "doTest"
     }
   },
   "widgets/ep": {
@@ -38,6 +59,20 @@
           "ep_tzMumbai"
         ]
       }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "<IDENTIFIER-SET>",
+          "width": 26.69
+        },
+        {
+          "type": "colHeader",
+          "colKey": {},
+          "width": 21.81
+        }
+      ]
     }
   },
   "widgets/p": {

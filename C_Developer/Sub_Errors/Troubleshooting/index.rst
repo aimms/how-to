@@ -1,4 +1,4 @@
-.. image:: ../../../Images/error-128.png
+.. image:: /Images/error-128.png
    :scale: 100
    :align: right
    :alt: Support specific errors

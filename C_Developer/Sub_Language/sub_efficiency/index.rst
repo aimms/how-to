@@ -1,4 +1,4 @@
-.. image:: ../../../Images/gauge-128.png
+.. image:: /Images/gauge-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Execution Efficiency Help & Support

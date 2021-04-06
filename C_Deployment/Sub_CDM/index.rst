@@ -1,5 +1,5 @@
 
-.. image:: ../../Images/internal-network-128.png
+.. image:: /Images/internal-network-128.png
    :scale: 100
    :align: right
    :alt: AIMMS CDM Help & Support

@@ -25,8 +25,8 @@ for /f "usebackq delims=|" %%f in (`dir /b *.aimms`) do %AIMMSEXECUTABLE% --logc
 rem Assuming here LoggerConfig.xml still writes to the fixed folder c:\temp,
 rem we move the create logfile from this folder to the current folder.
 rem Because of this fixed location, we can only debug one AIMMS project at a time!
-copy c:\temp\aimms-log.xml log
-del c:\temp\aimms-log.xml
+rem copy c:\temp\aimms-log.xml log
+rem del c:\temp\aimms-log.xml
 
 pause
 

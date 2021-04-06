@@ -1,4 +1,4 @@
-.. image:: ../../Images/paint-tool-128.png
+.. image:: /Images/paint-tool-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Styling Help & Support

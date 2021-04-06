@@ -1,19 +1,30 @@
 ﻿* AIMMS
 communicate_warnings_to_end_users 1
+constraint_listing 3
+constraint_listing_printed_when 0
+constraint_listing_variable_values 1
+major_messages 1
+maximal_number_of_warnings_reported 1000
+rounding_compatibility Aimms_3_7
+single_column_display 1
+time_messages 1
+use_UTC_forCaseAndStartEndDate 1
 * AOA
-* BARON 19
-* CBC 2.9
+* BARON 21
 * CONOPT 4.0
-* CPLEX 12.6.3
-* CPLEX 12.9
-* CPOptimizer 12.9
-* GUROBI 7.5
-* GUROBI 8.1
-* IPOPT 3.11
-* Knitro 11.0
-* Knitro 12.0
+* CONOPT 4.1
+* CPLEX 12.10
+* CPLEX 20.1
+* CPOptimizer 12.10
+* CPOptimizer 20.1
+* GUROBI 9.0
+* GUROBI 9.1
+* Knitro 12.2
+* Knitro 12.3
 * MINOS
 * ODH-CPLEX 4.0
+* ODH-CPLEX 5.0
+* ODH-CPLEX 5.3
 * PATH 4.7
 * SNOPT 7.2
 * XA 16
@@ -23,4 +34,5 @@ communicate_warnings_to_end_users 1
 "Knitro 10.3".Status_file_display 1
 * NETSOL
 * Environment
-Project_Title "Flowshop model - with superfluous parameter"
+Project_Title "Flowshop model - demo - errors as data"
+Startup_Page "Flowshop"

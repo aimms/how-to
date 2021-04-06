@@ -10,22 +10,29 @@
           {
             "children": [
               {
+                "children": [],
+                "name": "home",
+                "slug": "home",
+                "type": "pagev2-grid"
+              },
+              {
+                "name": "GSS Session History Management",
+                "type": "pagev2-grid",
+                "slug": "gss_session_history_management",
                 "children": [
                   {
-                    "name": "ServerJobMessagesProfilerInfo",
-                    "type": "page",
-                    "slug": "serverjobmessagesprofilerinfo_1",
+                    "name": "GSS Incident report",
+                    "type": "dialog",
+                    "slug": "gss_incident_report",
                     "children": []
                   },
                   {
-                    "name": "ErrorPanel",
+                    "name": "sp_controls",
                     "type": "sidepanel",
-                    "slug": "errorpanel_1",
+                    "slug": "sp_controls_1",
                     "children": []
                   }
-                ],
-                "name": "home",
-                "slug": "home"
+                ]
               }
             ],
             "name": "Main Project",
@@ -36,64 +43,185 @@
         "slug": "root"
       }
     },
+    "statusmessages": {
+      "aimms": {
+        "contents": [
+          "gss::sp_messageStatusBar"
+        ],
+        "slices": [
+          {
+            "identifier": "gss::sp_messageStatusBar",
+            "slice": [
+              {
+                "index": "webui::indexApplicationExtension",
+                "type": "free",
+                "value": "webui::indexApplicationExtension"
+              },
+              {
+                "index": "webui::indexStatusBarSpec",
+                "type": "free",
+                "value": "webui::indexStatusBarSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "theme.classic": {
+      "literal": false
+    },
+    "timezonesetting": {
       "literal": false
     },
     "widget.visibility.greyout": {
       "literal": true
     }
   },
-  "pages/errorpanel_1": {
+  "layouts/custom_5702d503-3fe9-4d6c-9f4e-e302155388ef": {
+    "definition": {
+      "literal": {
+        "componentName": "Grid",
+        "props": {
+          "gridTemplateColumns": "1fr 1fr 1fr",
+          "gridTemplateRows": "1fr 1fr",
+          "gridTemplateAreas": "\"area-a area-a area-b\" \"area-c area-c area-d\""
+        },
+        "items": [
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-a",
+              "name": "Area A",
+              "gridAutoFlow": "row"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-b",
+              "name": "Area B",
+              "gridAutoFlow": "column"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-c",
+              "name": "Area C",
+              "gridAutoFlow": "row"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-d",
+              "name": "Area D",
+              "gridAutoFlow": "row"
+            }
+          }
+        ]
+      }
+    },
+    "displayName": {
+      "literal": "Layout5 Copy"
+    }
+  },
+  "pages/gss_incident_report": {
+    "aimms.widget.type": {
+      "literal": "dialog"
+    },
+    "maxcolumns": {
+      "literal": 8
+    },
+    "maxrows": {
+      "literal": 3
+    },
     "widgets": {
       "literal": [
         {
-          "uri": "DownloadReport",
+          "uri": "ErrorAndWarningMessages",
           "layoutInfo": {
-            "width": "2",
+            "width": "8",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "IncidentSummary",
+          "layoutInfo": {
+            "width": "4",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "downloadIncidentSummary",
+          "layoutInfo": {
+            "width": "4",
             "height": "1"
           }
         },
         {
-          "uri": "DownloadData",
+          "uri": "ClearDataSessionErrors",
           "layoutInfo": {
-            "width": "2",
-            "height": "1"
-          }
-        },
-        {
-          "uri": "UploadErrorData",
-          "layoutInfo": {
-            "width": "2",
-            "height": "1"
-          }
-        },
-        {
-          "uri": "ClearError",
-          "layoutInfo": {
-            "width": "2",
+            "width": "4",
             "height": "1"
           }
         }
       ]
     }
   },
-  "pages/home": {
+  "pages/gss_session_history_management": {
     "aimms.widget.type": {
-      "literal": "page"
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "LineBasedProfilerData",
+          "gridArea": "area-d",
+          "dndId": "area-eLineBasedProfilerData6"
+        },
+        {
+          "widgetUri": "ErrorWarningStack",
+          "gridArea": "area-c",
+          "dndId": "area-cErrorWarningStack0"
+        },
+        {
+          "widgetUri": "JobProfilerData",
+          "gridArea": "area-b",
+          "dndId": "area-bJobProfilerData7"
+        },
+        {
+          "widgetUri": "ErrorWarningMessageTable",
+          "gridArea": "area-a",
+          "dndId": "area-aErrorWarningMessageTable8"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout5"
+    },
+    "maxcolumns": {
+      "literal": 12
+    },
+    "onload": {
+      "aimms": {
+        "run": "gss::pr_openPageErrorWarningProfiler"
+      }
     },
     "sidepanels": {
       "aimms": {
         "contents": [
-          "gss::sp_SidePanelErrorPage"
+          "gss::sp_sidePanel"
         ],
         "slices": [
           {
-            "identifier": "gss::sp_SidePanelErrorPage",
+            "identifier": "gss::sp_sidePanel",
             "slice": [
               {
-                "index": "webui::indexApplicationExtension",
+                "index": "webui::indexPageExtension",
                 "type": "free",
-                "value": "webui::indexApplicationExtension"
+                "value": "webui::indexPageExtension"
               },
               {
                 "index": "webui::indexSidePanelSpec",
@@ -108,34 +236,9 @@
     "widgets": {
       "literal": [
         {
-          "uri": "GanttChart_Flowshop",
-          "layoutInfo": {
-            "width": "6",
-            "height": "2",
-            "customPosition": ""
-          }
-        }
-      ]
-    }
-  },
-  "pages/serverjobmessagesprofilerinfo_1": {
-    "maxcolumns": {
-      "literal": 12
-    },
-    "widgets": {
-      "literal": [
-        {
           "uri": "ErrorWarningMessageTable",
           "layoutInfo": {
             "width": "8",
-            "height": "2",
-            "customPosition": ""
-          }
-        },
-        {
-          "uri": "JobProfilerData",
-          "layoutInfo": {
-            "width": "4",
             "height": "2",
             "customPosition": ""
           }
@@ -155,25 +258,137 @@
             "height": "2",
             "customPosition": ""
           }
+        },
+        {
+          "uri": "JobProfilerData",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
         }
       ]
     }
   },
-  "widgets/ClearError": {
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "GanttChart_Flowshop",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsGanttChart_Flowshop0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout9"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "GanttChart_Flowshop",
+          "layoutInfo": {
+            "width": "6",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "pages/sp_controls_1": {
+    "aimms.widget.type": {
+      "literal": "sidepanel"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "sc_currentSession",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "dl_modelLog",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "dl_errorLog",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "dl_modeldata",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "ul_errordata",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "IncidentSummary_1",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/ClearDataSessionErrors": {
     "action": {
       "literal": {
         "type": "procedure",
-        "value": "gss::pr_clearErrors"
+        "value": "gss::pr_clearDataSessionErrors"
       }
     },
     "aimms.widget.type": {
       "literal": "button"
     },
+    "name": {
+      "literal": "ClearDataSessionErrors"
+    },
     "title": {
-      "literal": "ClearError"
+      "aimms": {
+        "contents": [
+          "gss::sp_titleClearDataSessionErrors"
+        ],
+        "slices": []
+      }
     }
   },
-  "widgets/DownloadData": {
+  "widgets/dl_errorLog": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "gss::pr_downloadActionLog"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "name": {
+      "literal": "dl_errorLog"
+    },
+    "title": {
+      "literal": "Download Model Log"
+    }
+  },
+  "widgets/dl_modeldata": {
     "action": {
       "literal": {
         "type": "procedure",
@@ -183,11 +398,14 @@
     "aimms.widget.type": {
       "literal": "download"
     },
+    "name": {
+      "literal": "dl_modeldata"
+    },
     "title": {
       "literal": "Download Error Data"
     }
   },
-  "widgets/DownloadReport": {
+  "widgets/dl_modelLog": {
     "action": {
       "literal": {
         "type": "procedure",
@@ -197,8 +415,89 @@
     "aimms.widget.type": {
       "literal": "download"
     },
+    "name": {
+      "literal": "dl_modelLog"
+    },
     "title": {
       "literal": "Download Error Report"
+    }
+  },
+  "widgets/downloadIncidentSummary": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "gss::pr_downloadIncidentSummary"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "name": {
+      "literal": "downloadIncidentSummary"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "gss::sp_titleDowloadIncidentSummary"
+        ],
+        "slices": []
+      }
+    }
+  },
+  "widgets/ErrorAndWarningMessages": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "gss::ep_dataSessionErrorSeverity",
+          "gss::sp_dataSessionErrorMoments",
+          "gss::sp_dataSessionErrorMessages"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "gss::i_dataSessionErrorMessageNumber"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::ep_dataSessionErrorSeverity"
+          },
+          "width": 11.42
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::sp_dataSessionErrorMoments"
+          },
+          "width": 32.79
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::sp_dataSessionErrorMessages"
+          },
+          "width": 145.2
+        }
+      ]
+    },
+    "name": {
+      "literal": "ErrorAndWarningMessages"
+    },
+    "title": {
+      "literal": "Errors and warnings encountered"
     }
   },
   "widgets/ErrorWarningMessageTable": {
@@ -208,8 +507,9 @@
     "contents": {
       "aimms": {
         "contents": [
-          "gss::sp_jobErrorMoments",
-          "gss::sp_jobErrorMessages"
+          "gss::ep_shownJobErrorSeverity",
+          "gss::sp_shownJobErrorMoments",
+          "gss::sp_shownJobErrorMessages"
         ]
       }
     },
@@ -230,11 +530,40 @@
           "partIndex": 0,
           "partOffsets": [
             -1,
-            0
+            1
           ],
           "mode": "increasing"
         }
       ]
+    },
+    "contextmenu": {
+      "aimms": {
+        "contents": [
+          "gss::sp_itemActionMessageList"
+        ],
+        "slices": [
+          {
+            "identifier": "gss::sp_itemActionMessageList",
+            "slice": [
+              {
+                "index": "webui::indexWidgetItemActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetItemActionSpec"
+              },
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
     },
     "custom.column.widths": {
       "literal": [
@@ -251,18 +580,28 @@
         {
           "type": "colHeader",
           "colKey": {
-            "<IDENTIFIER-SET>": "gss::sp_JobErrorMoments"
+            "<IDENTIFIER-SET>": "gss::ep_shownJobErrorSeverity"
           },
-          "width": 30.937815126050418
+          "width": 13.47
         },
         {
           "type": "colHeader",
           "colKey": {
-            "<IDENTIFIER-SET>": "gss::sp_JobErrorMessages"
+            "<IDENTIFIER-SET>": "gss::sp_shownJobErrorMoments"
           },
-          "width": 150.33929313929313
+          "width": 34.17
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::sp_shownJobErrorMessages"
+          },
+          "width": 54.37
         }
       ]
+    },
+    "name": {
+      "literal": "ErrorWarningMessageTable"
     },
     "store.focus.in": {
       "literal": {
@@ -270,7 +609,12 @@
       }
     },
     "title": {
-      "literal": "Error and Warning messages"
+      "aimms": {
+        "contents": [
+          "gss::sp_titleErrorWarningMessagesTable"
+        ],
+        "slices": []
+      }
     },
     "widgetactions": {
       "aimms": {
@@ -305,7 +649,7 @@
       "aimms": {
         "slices": [
           {
-            "identifier": "gss::ep_JobErrorAttributes",
+            "identifier": "gss::ep_shownJobErrorAttributes",
             "slice": [
               {
                 "index": "gss::i_jobErrorMessageNumber",
@@ -320,7 +664,7 @@
             ]
           },
           {
-            "identifier": "gss::ep_jobErrorNodes",
+            "identifier": "gss::ep_shownJobErrorNodes",
             "slice": [
               {
                 "index": "gss::i_jobErrorMessageNumber",
@@ -335,7 +679,7 @@
             ]
           },
           {
-            "identifier": "gss::p_jobErrorLines",
+            "identifier": "gss::p_shownJobErrorLines",
             "slice": [
               {
                 "index": "gss::i_jobErrorMessageNumber",
@@ -350,21 +694,37 @@
             ]
           },
           {
-            "identifier": "gss::ep_jobErrorSeverity",
+            "identifier": "gss::ep_shownJobErrorAttributes",
             "slice": [
               {
                 "index": "gss::i_jobErrorMessageNumber",
                 "type": "element-parameter",
                 "value": "gss::ep_errorWarningSelectedMessage"
+              },
+              {
+                "index": "gss::i_stackPosition",
+                "type": "free",
+                "value": "gss::i_stackPosition"
               }
             ]
           }
         ],
         "contents": [
-          "gss::ep_jobErrorNodes",
-          "gss::ep_JobErrorAttributes",
-          "gss::p_jobErrorLines"
-        ]
+          "gss::ep_shownJobErrorNodes",
+          "gss::ep_shownJobErrorAttributes",
+          "gss::p_shownJobErrorLines"
+        ],
+        "prefix": "aimms",
+        "partition": {
+          "rowHeader": [
+            "gss::i_jobErrorMessageNumber",
+            "gss::i_stackPosition"
+          ],
+          "colHeader": [
+            "<IDENTIFIER-SET>"
+          ],
+          "aggregated": []
+        }
       }
     },
     "contents.numdecimals": {
@@ -380,6 +740,35 @@
           "<IDENTIFIER-SET>"
         ],
         "aggregated": []
+      }
+    },
+    "contextmenu": {
+      "aimms": {
+        "contents": [
+          "gss::sp_itemActionMessageStack"
+        ],
+        "slices": [
+          {
+            "identifier": "gss::sp_itemActionMessageStack",
+            "slice": [
+              {
+                "index": "webui::indexWidgetItemActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetItemActionSpec"
+              },
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
       }
     },
     "custom.column.widths": {
@@ -404,6 +793,20 @@
             "<IDENTIFIER-SET>": "gss::ep_JobErrorNodes"
           },
           "width": 53.9887659574468
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::ep_shownJobErrorNodes"
+          },
+          "width": 58.57
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::ep_shownJobErrorAttributes"
+          },
+          "width": 15.22
         }
       ]
     },
@@ -443,6 +846,9 @@
           }
         ]
       }
+    },
+    "name": {
+      "literal": "ErrorWarningStack"
     }
   },
   "widgets/GanttChart_Flowshop": {
@@ -519,6 +925,55 @@
     },
     "title": {
       "literal": "Flow shop Gantt Chart"
+    },
+    "name": {
+      "literal": "GanttChart_Flowshop"
+    }
+  },
+  "widgets/IncidentSummary": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "gss::sp_incidentSummarySuppliedByEndUser"
+        ]
+      }
+    },
+    "contents.labels.visible": {
+      "literal": 0
+    },
+    "multi.line": {
+      "literal": 1
+    },
+    "name": {
+      "literal": "IncidentSummary"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "gss::sp_incidentSummaryTitle"
+        ],
+        "slices": []
+      }
+    }
+  },
+  "widgets/IncidentSummary_1": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "gss::pr_openIncidentSummary"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "IncidentSummary (1)"
+    },
+    "title": {
+      "literal": "Incident Summary"
     }
   },
   "widgets/JobProfilerData": {
@@ -527,13 +982,9 @@
     },
     "contents": {
       "aimms": {
-        "contents": [
-          "gss::p_jobProfilerData"
-        ],
-        "prefix": "aimms",
         "slices": [
           {
-            "identifier": "gss::p_jobProfilerData",
+            "identifier": "gss::p_shownJobProfilerHits",
             "slice": [
               {
                 "index": "IndexIdentifiers",
@@ -544,15 +995,57 @@
                 "index": "gss::i_lineNumber",
                 "type": "fixed-element",
                 "value": "0"
+              }
+            ]
+          },
+          {
+            "identifier": "gss::p_shownJobProfilerGross",
+            "slice": [
+              {
+                "index": "IndexIdentifiers",
+                "type": "free",
+                "value": "IndexIdentifiers"
               },
               {
-                "index": "IndexProfilerTypes",
+                "index": "gss::i_lineNumber",
+                "type": "fixed-element",
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "identifier": "gss::p_shownJobProfilerNetto",
+            "slice": [
+              {
+                "index": "IndexIdentifiers",
                 "type": "free",
-                "value": "IndexProfilerTypes"
+                "value": "IndexIdentifiers"
+              },
+              {
+                "index": "gss::i_lineNumber",
+                "type": "fixed-element",
+                "value": "0"
               }
             ]
           }
-        ]
+        ],
+        "contents": [
+          "gss::p_shownJobProfilerHits",
+          "gss::p_shownJobProfilerGross",
+          "gss::p_shownJobProfilerNetto"
+        ],
+        "prefix": "aimms",
+        "partition": {
+          "rowHeader": [
+            "IndexIdentifiers"
+          ],
+          "colHeader": [
+            "<IDENTIFIER-SET>"
+          ],
+          "aggregated": [
+            "webui::ffn"
+          ]
+        }
       }
     },
     "contents.numdecimals": {
@@ -564,63 +1057,87 @@
           "IndexIdentifiers"
         ],
         "colHeader": [
-          "IndexProfilerTypes"
+          "<IDENTIFIER-SET>"
         ],
         "aggregated": [
-          "<IDENTIFIER-SET>"
+          "webui::ffn"
         ]
       }
     },
-    "contents.sorting": {
-      "literal": [
-        {
-          "partIndex": 0,
-          "partOffsets": [
-            -1,
-            1
-          ],
-          "mode": "decreasing"
-        }
-      ]
+    "contextmenu": {
+      "aimms": {
+        "contents": [
+          "gss::sp_itemActionIdentifierProfiler"
+        ],
+        "slices": [
+          {
+            "identifier": "gss::sp_itemActionIdentifierProfiler",
+            "slice": [
+              {
+                "index": "webui::indexWidgetItemActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetItemActionSpec"
+              },
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
     },
     "custom.column.widths": {
       "literal": [
         {
           "type": "colHeader",
           "colKey": {
-            "IndexProfilerTypes": "net time"
+            "<IDENTIFIER-SET>": "gss::p_shownJobProfilerNetto"
           },
-          "width": 16.53061224489796
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "IndexProfilerTypes": "gross time"
-          },
-          "width": 18
-        },
-        {
-          "type": "colHeader",
-          "colKey": {
-            "IndexProfilerTypes": "hits"
-          },
-          "width": 10.599999999999998
+          "width": 12.7
         },
         {
           "type": "rowHeader",
           "colKey": "IndexIdentifiers",
-          "width": 49.62449174838555
+          "width": 51.27
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::p_shownJobProfilerHits"
+          },
+          "width": 16.04
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::p_shownJobProfilerGross"
+          },
+          "width": 15.62
         }
       ]
     },
+    "name": {
+      "literal": "JobProfilerData"
+    },
     "store.focus.in": {
       "literal": {
-        "IndexIdentifiers": "gss::ep_profilerDataSelectedIdentifier",
-        "<IDENTIFIER-SET>": "gss::ep_profilerDataSelectedIdentifier"
+        "IndexIdentifiers": "gss::ep_profilerDataSelectedIdentifier"
       }
     },
     "title": {
-      "literal": "Identifier based Profiler Data"
+      "aimms": {
+        "contents": [
+          "gss::sp_titleProfilerOverview"
+        ],
+        "slices": []
+      }
     },
     "widgetactions": {
       "aimms": {
@@ -653,25 +1170,9 @@
     },
     "contents": {
       "aimms": {
-        "contents": [
-          "gss::p_jobProfilerData"
-        ],
-        "prefix": "aimms",
-        "partition": {
-          "rowHeader": [
-            "IndexIdentifiers",
-            "gss::i_LineNumber"
-          ],
-          "colHeader": [
-            "IndexProfilerTypes"
-          ],
-          "aggregated": [
-            "<IDENTIFIER-SET>"
-          ]
-        },
         "slices": [
           {
-            "identifier": "gss::p_jobProfilerData",
+            "identifier": "gss::p_shownJobProfilerHits",
             "slice": [
               {
                 "index": "IndexIdentifiers",
@@ -682,15 +1183,61 @@
                 "index": "gss::i_lineNumber",
                 "type": "subset",
                 "value": "gss::i_actualLineNumber"
+              }
+            ]
+          },
+          {
+            "identifier": "gss::p_shownJobProfilerGross",
+            "slice": [
+              {
+                "index": "IndexIdentifiers",
+                "type": "element-parameter",
+                "value": "gss::ep_profilerDataSelectedIdentifier"
               },
               {
-                "index": "IndexProfilerTypes",
-                "type": "free",
-                "value": "IndexProfilerTypes"
+                "index": "gss::i_lineNumber",
+                "type": "subset",
+                "value": "gss::i_actualLineNumber"
+              }
+            ]
+          },
+          {
+            "identifier": "gss::p_shownJobProfilerNetto",
+            "slice": [
+              {
+                "index": "IndexIdentifiers",
+                "type": "element-parameter",
+                "value": "gss::ep_profilerDataSelectedIdentifier"
+              },
+              {
+                "index": "gss::i_lineNumber",
+                "type": "subset",
+                "value": "gss::i_actualLineNumber"
               }
             ]
           }
-        ]
+        ],
+        "contents": [
+          "gss::p_shownJobProfilerHits",
+          "gss::p_shownJobProfilerGross",
+          "gss::p_shownJobProfilerNetto"
+        ],
+        "prefix": "aimms",
+        "partition": {
+          "rowHeader": [
+            "IndexIdentifiers",
+            "gss::i_lineNumber"
+          ],
+          "colHeader": [
+            "IndexProfilerTypes",
+            "<IDENTIFIER-SET>"
+          ],
+          "aggregated": []
+        },
+        "displaydomain": {
+          "gss::p_jobProfilerData": "1"
+        },
+        "numdecimals": 3
       }
     },
     "contents.displaydomain": {
@@ -708,11 +1255,10 @@
           "gss::i_lineNumber"
         ],
         "colHeader": [
-          "IndexProfilerTypes"
-        ],
-        "aggregated": [
+          "IndexProfilerTypes",
           "<IDENTIFIER-SET>"
-        ]
+        ],
+        "aggregated": []
       }
     },
     "custom.column.widths": {
@@ -737,8 +1283,32 @@
             "IndexProfilerTypes": "hits"
           },
           "width": 13.333333333333333
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::p_shownJobProfilerHits"
+          },
+          "width": 15.62
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::p_shownJobProfilerGross"
+          },
+          "width": 13.54
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "gss::p_shownJobProfilerNetto"
+          },
+          "width": 13.12
         }
       ]
+    },
+    "name": {
+      "literal": "LineBasedProfilerData"
     },
     "title": {
       "aimms": {
@@ -749,7 +1319,35 @@
       }
     }
   },
-  "widgets/UploadErrorData": {
+  "widgets/sc_currentSession": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "compact": {
+      "literal": 0
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "gss::ep_shownSession",
+          "gss::sp_shownSessionDescription"
+        ]
+      }
+    },
+    "contents.labels.visible": {
+      "literal": 0
+    },
+    "multi.line": {
+      "literal": 1
+    },
+    "name": {
+      "literal": "sc_currentSession"
+    },
+    "title": {
+      "literal": "Selection Session & Type"
+    }
+  },
+  "widgets/ul_errordata": {
     "action": {
       "literal": {
         "type": "procedure",
@@ -759,8 +1357,11 @@
     "aimms.widget.type": {
       "literal": "upload"
     },
+    "name": {
+      "literal": "ul_errordata"
+    },
     "title": {
-      "literal": "Upload Error Data"
+      "literal": "Upload Error data"
     }
   }
 }

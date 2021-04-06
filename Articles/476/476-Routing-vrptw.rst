@@ -20,8 +20,8 @@ the customer.
 The model formulation follows Desrochers et al. (1988), pp. 67-68.
 
 By default this project uses the data instance 'R106.25' from the Solomon set at:
-  - http://w.cba.neu.edu/~msolomon/problems.htm
-  - http://neo.lcc.uma.es/vrp/vrp-instances/
+#.  `http://w.cba.neu.edu/~msolomon/problems.htm`
+#.  `http://neo.lcc.uma.es/vrp/vrp-instances/`
   
 More instances are available as cases.
 

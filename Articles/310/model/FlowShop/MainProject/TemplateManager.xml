@@ -5,4 +5,5 @@
 			<Template Name="Background Info Template" PageGUID="1857AB9E-EA37-47EC-8AB4-1275230E5B2B" CrossLibraryDuplicate="66E08D8C-5677-49B5-970F-BB85475A48BE|153A8CDB-E916-4F3B-B652-41C25F2C9CB5|Background Info Template" />
 		</Template>
 	</Template>
+	<Page Name="Flowshop" PageGUID="B32E7B48-EED4-4581-AA19-2EA35077985A" />
 </TemplateManager>

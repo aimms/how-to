@@ -43,7 +43,7 @@ To install the license:
     .. image:: images/1a-already-other-license-part-1.png
         :align: center
 
-    Click ``Instal License...``
+    Click ``Install License...``
 
     .. image:: images/1a-already-other-license-part-2.png
         :align: center

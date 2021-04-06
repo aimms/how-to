@@ -1,4 +1,4 @@
-.. image:: ../Images/time-machine-128.png
+.. image:: /Images/time-machine-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Deprecations Help & Support

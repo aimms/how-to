@@ -2,11 +2,6 @@
 
 Model Main_GenerateDataForSupportPlanning {
 	Convention: cnv_utc;
-	Procedure Procedure_1 {
-		Body: {
-			display ep_tzMumbai;
-		}
-	}
 	Parameter p_yearNo {
 		InitialData: 3;
 	}
@@ -148,6 +143,9 @@ Model Main_GenerateDataForSupportPlanning {
 	}
 	Section Application_initialization_execution_and_termination {
 		Procedure MainInitialization {
+			Body: {
+				profilerstart();
+			}
 			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
 		}
 		Procedure PostMainInitialization {

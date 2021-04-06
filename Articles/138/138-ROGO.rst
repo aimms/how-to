@@ -20,7 +20,10 @@
 
     .. image:: images/rogo1.gif
 
-The ROGO puzzle, `rogopuzzle <http://www.rogopuzzle.co.nz>`_, challenges players to find a good path on a board, pick up treasures, and avoid pitfalls. This puzzle, and its corresponding iPhone app, were originally developed in New Zealand. In this article, I'll explain a method for solving ROGO puzzles using constraint programming in AIMMS.
+The ROGO puzzle, see ``http://www.rogopuzzle.co.nz>`` or ``createmaths.net``, 
+challenges players to find a good path on a board, pick up treasures, and avoid pitfalls. 
+This puzzle, and its corresponding iPhone app, were originally developed in New Zealand. 
+In this article, I'll explain a method for solving ROGO puzzles using constraint programming in AIMMS.
 
 
 

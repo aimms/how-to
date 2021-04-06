@@ -1,5 +1,5 @@
 
-.. image:: ../../../Images/calculator-128.png
+.. image:: /Images/calculator-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Solvers Help & Support
