@@ -5,25 +5,31 @@ When an AIMMS application is launched, the initialization procedures are execute
 Likewise, when the app is shut down the termination procedures are executed. 
 See also `this section in the language reference <https://documentation.aimms.com/language-reference/data-communication-components/data-initialization-verification-and-control/model-initialization-and-termination.html#sec-data-init>`_
 
-If you want some action to happen each time you open the app, say reading data from an external file - 
+If you want some action to happen each time you open the app, say reading data from a database - 
 you can refer to the corresponding AIMMS procedure in one of the initialization procedures. 
-But which one? What if your read procedure is in a different library?
+A thoughtful model builder, before coding, may consider the questions:
 
-We use this article to give you a better understanding of the initialization and termination of an AIMMS app
-such that you can answer the following questions:
+#.  But which initialization procedure (design)?  
 
-#.  Which are the steps you can use to initialize an application? 
+#.  And what are the consequences of placing such a call in an initialization procedure (evaluate)?
 
-#.  When can you rely on a library to be initialized?
+#.  And does it make sense to place a data read procedure in the initialization (evaluate)?
 
-#.  Does the order in which libraries are declared matter to the initialization and termination of an application?
+The purpose of this article to give you a better understanding of the initialization and termination of an AIMMS app.
+With this understanding, you can provide an informed answer to the above questions and to the questions below, in the context of the app being developed:
 
-#.  Do initialization and termination depend on the way the application is deployed?
+#.  Which are the initialization procedures available to an application (knowledge)? 
 
-#.  How to stop a running application?
+#.  When can you rely on a library to be initialized (understanding)?
 
-In this article, the above questions are not answered directly, 
-but the answer follows by creating a small app and testing with it as presented below.
+#.  Does the order in which libraries are declared matter to the initialization and termination of an application (understanding)?
+
+#.  Do initialization and termination depend on the way the application is deployed (knowledge)?
+
+#.  How to stop a running application (knowledge)?
+
+In this article, the above questions are not answered directly. 
+But the answer follows by creating a small app and testing with it as presented below.
 
 Example application to do the analysis
 ---------------------------------------
@@ -107,61 +113,58 @@ Deployment dependent actions taken
 
 The following lists which actions are taken by application start or application finish:
 
-+----------------------------+-----------+-------+-------+--------+----------+
-|                            | Developer | WinUI | WebUI | Solver | AimmsCmd |
-+============================+===========+=======+=======+========+==========+
-| initialData                |  +        |   +   |  +    |    +   |    +     |
-+----------------------------+-----------+-------+-------+--------+----------+
-| MainInitialization         |  +        |   +   |  +    |    +   |    +     |
-+----------------------------+-----------+-------+-------+--------+----------+
-| LibraryInitialization      |  +        |   +   |  +    |    +   |    +     |
-+----------------------------+-----------+-------+-------+--------+----------+
-| Load of startup case       |  +        |   +   |  +    |    +   |    +     |
-+----------------------------+-----------+-------+-------+--------+----------+
-| PostMainInitialization     |  +        |   +   |  +    |    +   |    +     |
-+----------------------------+-----------+-------+-------+--------+----------+
-| PostLibraryInitialization  |  +        |   +   |  +    |    +   |    +     |
-+----------------------------+-----------+-------+-------+--------+----------+
-| Startup procedure          |  +        |   +   |  +    |    +   |    +     |
-+----------------------------+-----------+-------+-------+--------+----------+
-| Page open  of WinUI page   |  +        |   +   |       |        |          |
-+----------------------------+-----------+-------+-------+--------+----------+
-| Page close of WinUI page   |  +        |   +   |       |        |          |
-+----------------------------+-----------+-------+-------+--------+----------+
-| Page open  of WebUI page   |           |       |  +    |        |          |
-+----------------------------+-----------+-------+-------+--------+----------+
-| Page close  of WebUI page  |           |       |       |        |          |
-+----------------------------+-----------+-------+-------+--------+----------+
-| Read input case            |           |       |       |    +   |          |
-+----------------------------+-----------+-------+-------+--------+----------+
-| Write output case          |           |       |       |    +   |          |
-+----------------------------+-----------+-------+-------+--------+----------+
-| PreLibraryTermination      |  +        |   +   |  +    |    +   |    +     |
-+----------------------------+-----------+-------+-------+--------+----------+
-| PreMainTermination         |  +        |   +   |  +    |    +   |    +     |
-+----------------------------+-----------+-------+-------+--------+----------+
-| LibraryTermination         |  +        |   +   |  +    |    +   |    +     |
-+----------------------------+-----------+-------+-------+--------+----------+
-| MainTermination            |  +        |   +   |  +    |    +   |    +     |
-+----------------------------+-----------+-------+-------+--------+----------+
++----------------------------+-----------+-------+--------+-------+----------+
+|                            | Developer | WebUI | Solver | WinUI | AimmsCmd |
++============================+===========+=======+========+=======+==========+
+| initialData                |  +        |  +    |    +   |   +   |    +     |
++----------------------------+-----------+-------+--------+-------+----------+
+| MainInitialization         |  +        |  +    |    +   |   +   |    +     |
++----------------------------+-----------+-------+--------+-------+----------+
+| LibraryInitialization      |  +        |  +    |    +   |   +   |    +     |
++----------------------------+-----------+-------+--------+-------+----------+
+| Load of startup case       |  +        |  +    |    +   |   +   |    +     |
++----------------------------+-----------+-------+--------+-------+----------+
+| PostMainInitialization     |  +        |  +    |    +   |   +   |    +     |
++----------------------------+-----------+-------+--------+-------+----------+
+| PostLibraryInitialization  |  +        |  +    |    +   |   +   |    +     |
++----------------------------+-----------+-------+--------+-------+----------+
+| Startup procedure          |  +        |  +    |    +   |   +   |    +     |
++----------------------------+-----------+-------+--------+-------+----------+
+| Page open  of WinUI page   |  +        |       |        |   +   |          |
++----------------------------+-----------+-------+--------+-------+----------+
+| Page close of WinUI page   |  +        |       |        |   +   |          |
++----------------------------+-----------+-------+--------+-------+----------+
+| Page open  of WebUI page   |           |  +    |        |       |          |
++----------------------------+-----------+-------+--------+-------+----------+
+| Page close  of WebUI page  |           |       |        |       |          |
++----------------------------+-----------+-------+--------+-------+----------+
+| Read input case            |           |       |    +   |       |          |
++----------------------------+-----------+-------+--------+-------+----------+
+| Write output case          |           |       |    +   |       |          |
++----------------------------+-----------+-------+--------+-------+----------+
+| PreLibraryTermination      |  +        |  +    |    +   |   +   |    +     |
++----------------------------+-----------+-------+--------+-------+----------+
+| PreMainTermination         |  +        |  +    |    +   |   +   |    +     |
++----------------------------+-----------+-------+--------+-------+----------+
+| LibraryTermination         |  +        |  +    |    +   |   +   |    +     |
++----------------------------+-----------+-------+--------+-------+----------+
+| MainTermination            |  +        |  +    |    +   |   +   |    +     |
++----------------------------+-----------+-------+--------+-------+----------+
 
 The columns of the above table are:
 
 #.  AIMMS Developer: the actions taken by AIMMS Developer by opening and closing the ``InitTerm`` application.
 
-#.  WinUI: the actions taken by a WinUI application published on AIMMS PRO by opening and closing the ``InitTerm`` application.
-
-    .. note:: A published WinUI app can be closed in two ways:
-
-        #.  By running the procedure ``ExitAimms``
-
-        #.  By closing the window.
-
 #.  WebUI: the actions taken by a WebUI application published on AIMMS PRO by opening and closing the ``InitTerm`` application.
+
+    .. tip:: Many users appreciate a quick start of an application as this will as this will put them at ease knowing that the system is up and running.
+             In addition, they appreciate progress information during a long running data read procedure, perhaps via 
+             `webui::SetProgressMessage <https://documentation.aimms.com/webui/library.html#setprogressmessage>`_.
+             Please consider placing long running data read procedures as an explicit action to be invoked by the user.
 
     .. note:: A published WebUI app can be closed in two ways:
 
-        #.  By running the procedure ``pro::sessionmanager::FinishSession()``
+        #.  By running the procedure ``pro::sessionmanager::FinishSession()``.
 
         #.  By closing all browser tabs, and waiting a minute.
 
@@ -170,6 +173,18 @@ The columns of the above table are:
     #.  The input case is the case constructed by the data session (WinUI or WebUI) to provide input to the solver session.
 
     #.  The output case is the case constructed by the solver session to pass the results to the data session.
+
+    .. tip:: It may be redundant to read in data in an initialization procedure of a solver session when that data is also provided in the input case.
+
+#.  WinUI: the actions taken by a WinUI application published on AIMMS PRO by opening and closing the ``InitTerm`` application.
+
+    .. note:: WinUI is not available in the community edition and it is on the `deprecate list <https://documentation.aimms.com/deprecation-table.html#deprecated-and-end-of-life>`_
+
+    .. note:: A published WinUI app can be closed in two ways:
+
+        #.  By running the procedure ``ExitAimms``.
+
+        #.  By closing the window.
 
 #.  AimmsCmd: Running the ``InitTerm`` application via AimmsCmd and just opening and closing it.
 
