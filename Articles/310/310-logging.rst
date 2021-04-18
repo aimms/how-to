@@ -97,7 +97,7 @@ Relevant identifiers for logging
     Throws exceptions: None
 
     Return value: None.
-
+    
 #.  Procedure ``gss::pr_logMsg(sp_message,ep_messageImportance)``
 
     Writes ``sp_message`` to the action log file provided the importance of the message ``ep_messageImportance`` 
@@ -160,6 +160,20 @@ Relevant identifiers for logging
     
     #.  ``bp_doReplicate`` When 1, the action log will be replicated from the action to the session log. 
     
+#.  Set ``gss::s_Settings``
+
+    Elements:
+    
+    #.  ``DownloadFolder``: Override for the download folder to be used when the WinUI downloads an incident summary.
+
+#.  Procedure ``gss::pr_setSetting(ep_setting,sp_value)``
+
+    Set the setting ``ep_setting`` to value ``sp_value``
+
+#.  Procedure ``gss::pr_getSetting(ep_setting,sp_value)``
+
+    Retrieve the setting ``ep_setting`` and store in ``sp_value``
+
         
 
 

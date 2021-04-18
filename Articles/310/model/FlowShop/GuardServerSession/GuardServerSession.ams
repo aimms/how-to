@@ -38,7 +38,11 @@ LibraryModule Library_GuardServerSession {
 		Section Settings {
 			Set s_Settings {
 				Index: i_setting;
-				Definition: data { DownloadFolder };
+				Definition: {
+					data { 
+						DownloadFolder ! Setting for downloads of files (in WinUI only).
+					}
+				}
 			}
 			StringParameter sp_settingValue {
 				IndexDomain: i_setting;
@@ -46,11 +50,18 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_setSetting {
 				Arguments: (ep_setting,sp_value);
 				Body: {
+					gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'debug', 
+						sp_logdetail:formatString("(%e, %s)", ep_setting, sp_value));
 					switch ep_setting do
 						'DownloadFolder': sp_settingValue('DownloadFolder') := sp_value ;
 						default:
 							raise warning formatString("Setting for %s not implemented",ep_setting) ;
 					endswitch ;
+					gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'debug');
+				}
+				DeclarationSection gss_logging_declarations {
+					StringParameter sp_gssTime;
+					Parameter p_gssMiU;
 				}
 				ElementParameter ep_setting {
 					Range: s_Settings;
@@ -63,11 +74,14 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_getSetting {
 				Arguments: (ep_setting,sp_value);
 				Body: {
+					gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'debug');
 					switch ep_setting do
 						'DownloadFolder': sp_value := sp_settingValue('DownloadFolder');
 						default:
 							raise warning formatString("Setting for %s not implemented",ep_setting) ;
 					endswitch ;
+					gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'debug', 
+						sp_logdetail:formatString("(%e, %s)", ep_setting, sp_value));
 				}
 				ElementParameter ep_setting {
 					Range: s_Settings;
@@ -76,6 +90,10 @@ LibraryModule Library_GuardServerSession {
 				StringParameter sp_value {
 					Property: Output;
 				}
+			}
+			DeclarationSection gss_logging_declarations {
+				StringParameter sp_gssTime;
+				Parameter p_gssMiU;
 			}
 		}
 		Section Incident_reporting {
