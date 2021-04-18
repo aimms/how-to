@@ -35,6 +35,49 @@ LibraryModule Library_GuardServerSession {
 				}
 			}
 		}
+		Section Settings {
+			Set s_Settings {
+				Index: i_setting;
+				Definition: data { DownloadFolder };
+			}
+			StringParameter sp_settingValue {
+				IndexDomain: i_setting;
+			}
+			Procedure pr_setSetting {
+				Arguments: (ep_setting,sp_value);
+				Body: {
+					switch ep_setting do
+						'DownloadFolder': sp_settingValue('DownloadFolder') := sp_value ;
+						default:
+							raise warning formatString("Setting for %s not implemented",ep_setting) ;
+					endswitch ;
+				}
+				ElementParameter ep_setting {
+					Range: s_Settings;
+					Property: Input;
+				}
+				StringParameter sp_value {
+					Property: Input;
+				}
+			}
+			Procedure pr_getSetting {
+				Arguments: (ep_setting,sp_value);
+				Body: {
+					switch ep_setting do
+						'DownloadFolder': sp_value := sp_settingValue('DownloadFolder');
+						default:
+							raise warning formatString("Setting for %s not implemented",ep_setting) ;
+					endswitch ;
+				}
+				ElementParameter ep_setting {
+					Range: s_Settings;
+					Property: Input;
+				}
+				StringParameter sp_value {
+					Property: Output;
+				}
+			}
+		}
 		Section Incident_reporting {
 			Property: NoSave;
 			Procedure pr_openIncidentSummary {
@@ -154,6 +197,12 @@ LibraryModule Library_GuardServerSession {
 					gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 					block 
 						pr_getDownloadFolder(sp_downloadFolder);
+						if not DirectoryExists( sp_downloadFolder ) then
+							if not directorySelect( sp_downloadFolder ) then
+								raise error 
+									formatString("User cancelled or error: %s", CurrentErrorMessage);
+							endif ;
+						endif ;
 						pr_workCreateIncidentSummary(sp_createdFile);
 						sp_filename := sp_downloadFolder + "\\" + sp_createdFile ;
 						sp_filename := fnc_nonExistingFilename( sp_filename );
@@ -2678,20 +2727,26 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_getDownloadFolder {
 				Arguments: (sp_downloadFolderName);
 				Body: {
-					EnvironmentGetString(
-						Key   :  "USERPROFILE", 
-						Value :  sp_userProfile);
-					if not sp_userProfile then
-						sp_downloadFolderName := "c:\\temp" ;
-						raise warning "pr_getDownloadFolder(): Unable to obtain USERPROFILE" ;
+					pr_getSetting('DownloadFolder', sp_downloadOverride);
+					if sp_downloadOverride then
+						sp_downloadFolderName := sp_downloadOverride ;
 					else
-						sp_downloadFolderName := sp_userProfile + "\\downloads" ;
+						EnvironmentGetString(
+							Key   :  "USERPROFILE", 
+							Value :  sp_userProfile);
+						if not sp_userProfile then
+							sp_downloadFolderName := "c:\\temp" ;
+							raise warning "pr_getDownloadFolder(): Unable to obtain USERPROFILE" ;
+						else
+							sp_downloadFolderName := sp_userProfile + "\\downloads" ;
+						endif ;
 					endif ;
 				}
 				StringParameter sp_downloadFolderName {
 					Property: Output;
 				}
 				StringParameter sp_userProfile;
+				StringParameter sp_downloadOverride;
 			}
 			Function fnc_nonExistingFilename {
 				Arguments: (sp_filename);
