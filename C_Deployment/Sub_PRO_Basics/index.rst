@@ -1,5 +1,5 @@
 
-.. image:: ../../Images/network-128.png
+.. image:: /Images/network-128.png
    :scale: 100
    :align: right
    :alt: AIMMS PRO Help & Support
@@ -19,8 +19,6 @@ This section offers best practices to build and deploy applications using AIMMS 
    /Articles/120/120-pro-user-groups
    /Articles/341/341-PRO-Concurrent-Users
    /Articles/251/251-pro-operations-best-practices
-   /Articles/310/310-investigate-behavior-pro-job
-   /Articles/321/321-state-server-session
    /Articles/80/80-receive-messages
    /Articles/117/117-Uploading-and-Downloading-files
    /Articles/115/115-Securing-File-Access

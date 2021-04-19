@@ -1,5 +1,5 @@
 
-.. image:: ../../../Images/calculator-128.png
+.. image:: /Images/calculator-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Solvers Help & Support
@@ -29,7 +29,6 @@ Mathematical Programming solution algorithms, solvers for short, are the muscles
    /Articles/116/116-Benders-CPLEX
    /Articles/126/126-TSP-Lazy-Constraints
    /Articles/136/136-Infeasible-Unbounded
-   /Articles/130/130-Infeasible-Nonlinear-Problems
    /Articles/178/178-change-default-solver
    /Articles/274/274-using-project-local-solver-configuration
    /Articles/192/192-solve-minlp-with-outer-approximation
@@ -37,3 +36,5 @@ Mathematical Programming solution algorithms, solvers for short, are the muscles
    /Articles/276/276-multi-objective-approach
    /Articles/264/264-tune-cplex-options
    /Articles/261/261-solve-with-asynchronous-solver-sessions
+
+.. /Articles/130/130-Infeasible-Nonlinear-Problems

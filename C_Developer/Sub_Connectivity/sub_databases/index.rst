@@ -1,4 +1,4 @@
-.. image:: ../../../Images/database-128.png
+.. image:: /Images/database-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Database Help & Support

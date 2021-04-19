@@ -18,14 +18,20 @@ Recently added
 .. Added 14 Feb 2020: 108-10, 108-09, 108-07
 
 
+* :doc:`/Articles/351/351-app-initialization-termination-with-libraries`
+* :doc:`/Articles/310/310-incident-handling-for-organizations`
+* :doc:`/Articles/512/512-image-widget-refresh`
+* :doc:`/Articles/377/377-link-legend-colors`
+* :doc:`/Articles/377/377-add-color-palettes`
 * :doc:`/Articles/490/490-naming-convention`
+* :doc:`/Articles/498/498-aimms-with-r`
 * :doc:`/Articles/487/487-aimms-with-python`
 * :doc:`/Articles/494/494-overview-aimms-ds-models`
 * :doc:`/Articles/362/362-multi-timezone`
 * :doc:`/Articles/375/375-library-function-procedure`
 * :doc:`/Articles/373/373-pro-scaling-options`
-* :doc:`/Articles/374/374-pro-backup-and-continuity`
 
+.. * :doc:`/Articles/374/374-pro-backup-and-continuity`
 .. * :doc:`/Articles/228/228-data-ranges`
 .. * :doc:`/Articles/343/343-use-metadata-in-write-to-table`
 .. * :doc:`/Articles/344/344-sparse-execution-for-write-to-table`

@@ -17,7 +17,6 @@ Model Main_Project_Analysis {
         }
         Set Arcs {
             SubsetOf: (Nodes, Nodes);
-            Index: ac;
             Definition: {
                 data
                 { ( A , B   ), ( B , C   ), ( C , D   ), ( C , E   ), ( C , I   ), ( D , G   ), ( E , F   ), ( E , H   ), ( F , J   ),

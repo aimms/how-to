@@ -1,4 +1,4 @@
-How to Integrate AIMMS with Models Built in Languages like Python or R
+Integrate AIMMS with Models Built in Languages like Python or R
 ==================================================================================
 
 .. meta::

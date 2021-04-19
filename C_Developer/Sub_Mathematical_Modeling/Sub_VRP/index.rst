@@ -1,4 +1,4 @@
-.. image:: ../../../Images/EDFJ3.png
+.. image:: /Images/EDFJ3.png
    :scale: 100
    :align: right
    :alt: Vehicle Routing sample library

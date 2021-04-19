@@ -144,7 +144,7 @@ html_theme_options = {
     'logo_only': True,
     'display_version': False,
     'prev_next_buttons_location': 'bottom',
-    'style_external_links': False,
+    'style_external_links': True,
     # 'vcs_pageview_mode': '',
     # Toc options
     'collapse_navigation': False,
@@ -163,6 +163,9 @@ html_theme_options = {
     'algolia_appkey': '0fc935020f8088e762190434cffaee41',
     'algolia_indexname':'aimms_how-to',
     'algolia_hitsperpage': 10,
+    'display_help_and_feedback' : True,
+    'is_github' : True,
+    'repo_url' : "https://github.com/aimms/how-to",
 
  }
 

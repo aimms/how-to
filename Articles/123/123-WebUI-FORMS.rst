@@ -147,7 +147,7 @@ The check procedure is called as soon as we save the data. It has two arguments,
 
 Selected checks of this procedure are presented below.
 
-The first ``if`` in the code below checks new element names. A new name does not exist; and this corresponds to an empty ``P_SKUFORM_Selection``. The second ``if`` in the code below checks whether the name already exists.
+The first :any:`if` in the code below checks new element names. A new name does not exist; and this corresponds to an empty ``P_SKUFORM_Selection``. The second :any:`if` in the code below checks whether the name already exists.
 
 .. code-block:: aimms
 

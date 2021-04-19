@@ -1,4 +1,4 @@
-.. image:: ../../Images/key-128.png
+.. image:: /Images/key-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Licensing Help & Support

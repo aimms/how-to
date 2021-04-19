@@ -1,4 +1,4 @@
-.. image:: ../../../Images/books-128.png
+.. image:: /Images/books-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Libraries Help & Support

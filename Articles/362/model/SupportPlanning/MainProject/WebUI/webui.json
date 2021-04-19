@@ -30,6 +30,12 @@
                     "children": []
                   }
                 ]
+              },
+              {
+                "name": "deamand data",
+                "type": "page",
+                "slug": "deamand_data",
+                "children": []
               }
             ]
           }
@@ -47,6 +53,25 @@
     },
     "widget.visibility.greyout": {
       "literal": true
+    }
+  },
+  "pages/deamand_data": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "layoutId": {
+      "literal": "Layout1"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "demandDataTAble",
+          "layoutInfo": {
+            "width": "2",
+            "height": "3"
+          }
+        }
+      ]
     }
   },
   "pages/home": {
@@ -157,6 +182,18 @@
           }
         }
       ]
+    }
+  },
+  "widgets/demandDataTAble": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_demand"
+        ]
+      }
     }
   },
   "widgets/downloadJobTableAsExcel": {

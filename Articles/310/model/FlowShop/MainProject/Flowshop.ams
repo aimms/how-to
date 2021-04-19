@@ -71,6 +71,7 @@ Model Main_Flow_Shop {
 					p_gcJobStart(j,m)  := v_startTime( first(s | bv_jobSchedule(j,s)),m);
 					p_gcJobDuration(j,m) := p_procesTime(j,m);
 				}
+				Comment: "Prepare parameters used in WebUI Gantt Chart.";
 			}
 			StringParameter sp_refTime {
 				Definition: "2000-01-01 01:01:01";
@@ -110,10 +111,32 @@ Model Main_Flow_Shop {
 						( 1, displaytext ) : "Optimize",  
 						( 1, icon        ) : "aimms-blog2",  
 						( 1, procedure   ) : "pr_BtnSolve",  
-						( 1, state       ) : "Active" 
-						}
+						( 1, state       ) : "Active"  ,
+					
+						( 2, displaytext ) : "EmptyAction",  
+						( 2, icon        ) : "aimms-bubble-blocked",  
+						( 2, procedure   ) : "pr_action",  
+						( 2, state       ) : "Active"  
+					
+					
+					}
 				}
 			}
+		}
+	}
+	Section WinUI_support {
+		Parameter p_interfaceStartTime {
+			IndexDomain: (j,m);
+		}
+		Parameter p_interfaceProcesTime {
+			IndexDomain: (s,m);
+		}
+		Procedure pr_prepInterfaceWinUI {
+			Body: {
+				p_interfaceStartTime(j,m)  := v_startTime( first(s | bv_jobSchedule(j,s)),m);
+				p_interfaceProcesTime(s,m) := sum (j | bv_jobSchedule(j,s), p_procesTime(j,m));
+			}
+			Comment: "Set parameters used in WinUI Gantt Chart.";
 		}
 	}
 	Parameter p_maxJobs {
@@ -192,7 +215,11 @@ Model Main_Flow_Shop {
 	Section MainModelProcedures {
 		Procedure MainInitialization {
 			Body: {
-				!ProfilerStart();
+				
+				
+				ProfilerStart();
+				gss::pr_setTracinglevel( 'trace' );
+				gss::pr_setReplicationSessionLog( 1 );
 			}
 		}
 		Procedure PostMainInitialization {
@@ -217,45 +244,97 @@ Model Main_Flow_Shop {
 			}
 		}
 	}
+	Procedure pr_action {
+		Body: {
+			gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
+			block 
+				pr_workAction();
+			onerror ep_err do
+				gss::pr_appendError( ep_err );
+				errh::MarkAsHandled( ep_err );
+			endblock ;
+			gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
+		}
+		DeclarationSection gss_logging_declarations {
+			StringParameter sp_gssTime;
+			Parameter p_gssMiU;
+		}
+		DeclarationSection error_reference_declaration {
+			ElementParameter ep_err {
+				Range: errh::PendingErrors;
+			}
+		}
+	}
+	Procedure pr_workAction {
+		Body: {
+			pr_helperAction();
+		}
+	}
+	Procedure pr_helperAction {
+		Body: {
+			gss::pr_enter(sp_gssTime, p_gssMiU);
+			gss::pr_appendMessage("Trying to help out here");
+			gss::pr_leave(sp_gssTime, p_gssMiU);
+		}
+		DeclarationSection gss_logging_declarations {
+			StringParameter sp_gssTime;
+			Parameter p_gssMiU;
+		}
+	}
 	Procedure pr_generateData {
 		Body: {
 			p_procesTime(j,m) := round(Uniform(1,20));
 		}
 	}
+	Procedure pr_GC_LoadResultsCallback {
+		Arguments: (sp_requestID);
+		Body: {
+			gss::LoadResultsCallBack(sp_requestID);
+		}
+		StringParameter sp_requestID {
+			Property: Input;
+		}
+	}
 	Procedure pr_workSolve {
 		Body: {
+			gss::pr_enter(sp_gssTime, p_gssMiU);
+			
+			gss::pr_AppendMessage(
+				FormatString("Request description is %s",
+					pro::workerRequestDescription));
+			
 			gss::pr_AppendMessage(
 				FormatString("Going to solve flowshop for %i jobs on %i machines",
 					p_maxJobs, p_maxMachines));
-			!delay(1);
 			
 			Empty AllVariables;
-			pr_generateData();
 			
 			raise warning "Cry wolf." ;
 			
 			solve mp_flowShopModel  ;
 			
+			delay(1);
+			
 			raise warning "Hi, hi, false alarm.";
-			
-			gss::pr_SaveState(
-				sp_Label              :  "ThirdSaveLabel", 
-				s_SelectedIdentifiers :  Superfluous_Data);
-			
-			pr_prepInterface;
-			
-			!delay(1);
 			
 			gss::pr_AppendMessage(
 				FormatString("Finished solving flowshop for %i jobs on %i machines",
 					p_maxJobs, p_maxMachines));
+			
+			gss::pr_leave(sp_gssTime, p_gssMiU);
+		}
+		DeclarationSection gss_logging_declarations {
+			StringParameter sp_gssTime;
+			Parameter p_gssMiU;
 		}
 	}
 	Procedure pr_solve {
 		Body: {
 			if pro::GetPROEndPoint() then
-				if pro::DelegateToServer( waitForCompletion  :  1, 
-							  completionCallback :  'pro::session::LoadResultsCallBack' ) then	
+				if pro::DelegateToServer( 
+					requestDescription :  formatString( "Flowshop for %i jobs and %i machines", p_maxJobs, p_maxMachines ),
+					waitForCompletion  :  1, 
+					completionCallback :  'pr_GC_LoadResultsCallback' ) then	
 					return 1;
 				endif ;
 			endif ;
@@ -265,7 +344,31 @@ Model Main_Flow_Shop {
 	}
 	Procedure pr_btnSolve {
 		Body: {
-			pr_solve();
+			gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
+			block 
+				raise warning "Don't look down" ;
+				gss::pr_appendMessage( "Let it rain");
+				pr_solve();
+				pr_prepInterface();
+				raise warning "Look up, it is raining ;-)" ;
+			onerror ep_err do
+				gss::pr_appendError( ep_err );
+				errh::MarkAsHandled( ep_err );
+			endblock ;
+			gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
+		}
+		DeclarationSection gss_logging_declarations {
+			StringParameter sp_gssTime;
+			Parameter p_gssMiU;
+		}
+		ElementParameter ep_err {
+			Range: errh::PendingErrors;
+		}
+	}
+	Procedure pr_generateTest {
+		Body: {
+			gss::pr_artificialDataGSSPage;
+			gss::pr_openPageErrorWarningProfiler;
 		}
 	}
 }

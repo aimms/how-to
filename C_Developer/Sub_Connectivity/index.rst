@@ -1,4 +1,4 @@
-.. image:: ../../Images/connection-128.png
+.. image:: /Images/connection-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Data Connection Help & Support
@@ -20,9 +20,6 @@ We're aware that AIMMS is one of many tools in your workspace. This section prov
 
    sub_databases/index
    sub_excel_csv/index
-   sub_other_functions/index
    sub_http/index
-   /Articles/494/494-overview-aimms-ds-models
-   /Articles/487/487-aimms-with-python
-   /Articles/498/498-aimms-with-r
+   sub_other_functions/index
 

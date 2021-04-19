@@ -1,4 +1,4 @@
-.. image:: ../Images/web-design-128.png
+.. image:: /Images/web-design-128.png
    :scale: 100
    :align: right
    :alt: AIMMS UI Help & Support

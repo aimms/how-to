@@ -1,4 +1,4 @@
-How to connect AIMMS with Python
+Integrate AIMMS with Python
 ============================================
 
 .. meta::

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ExportSettings>
+	<ExcludedFile>backup</ExcludedFile>
+	<ExcludedFile>log</ExcludedFile>
+	<ExcludedFile>PROTemp</ExcludedFile>
+	<ExcludedFile>InitTerm-001-webui-2021318_121856-403e046ebfae93eae941379d85df1212-1.onprem.log</ExcludedFile>
+	<ExcludedFile>InitTerm-001-webui-2021319_8190-403e046ebfae93eae941379d85df1212-1.cloud.log</ExcludedFile>
+	<ExcludedFile>RunCmdLine.bat</ExcludedFile>
+	<ExcludedFile>RunCmdLine.inp</ExcludedFile>
+	<ExcludedFile>RunCmdLine.out</ExcludedFile>
+	<ExcludedFile>RunOnly.bat</ExcludedFile>
+	<ExcludedFile>visit-aimms-developer-WinUI.txt</ExcludedFile>
+	<ExcludedFile>visit-from-published-WinUI-app.txt</ExcludedFile>
+	<ExcludedFile>visit-run-only.txt</ExcludedFile>
+	<ExcludedFile>visit.txt</ExcludedFile>
+</ExportSettings>

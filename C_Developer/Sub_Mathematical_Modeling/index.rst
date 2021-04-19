@@ -1,4 +1,4 @@
-.. image:: ../../Images/bricks-128.png
+.. image:: /Images/bricks-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Modeling Help & Support

@@ -1,4 +1,4 @@
-.. image:: ../../../Images/spreadsheet-file-128.png
+.. image:: /Images/spreadsheet-file-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Excel/CSV Help & Support

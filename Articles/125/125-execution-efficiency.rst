@@ -9,10 +9,10 @@
 The time spent by AIMMS applications can be divided into AIMMS execution time ( including evaluation parameters with definition, executing procedures, generate matrix for solvers, etc), the time spent by solvers, and the I/O time.  Here are some coding tricks that help you improve AIMMS execution time.
 
 
-1. Avoid ``for`` Loop
----------------------
+1. Avoid :any:`for` Loop
+--------------------------
 
-Use bulk execution of assignment as much as possible. If a ``for`` loop is necessary, try to minimize calculation inside the loop. For example,
+Use bulk execution of assignment as much as possible. If a :any:`for` loop is necessary, try to minimize calculation inside the loop. For example,
 
 .. code-block:: aimms
 

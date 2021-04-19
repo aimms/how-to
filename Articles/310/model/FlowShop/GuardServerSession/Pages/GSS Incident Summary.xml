@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2021-03-10 13:32:02">
+	<PageEditSize Type="Specified">
+		<Size Width="800" Height="300" />
+	</PageEditSize>
+	<ProjectUUID>2E3D40FC-CE49-45B3-9165-530BE1EE8E94</ProjectUUID>
+	<Title>"GSS Incident Summary"</Title>
+	<IsDialogPage>true</IsDialogPage>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Scalar">
+		<Location top="120" left="18" bottom="210" right="774" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>gss::sp_incidentSummarySuppliedByEndUser</Identifier>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="222" left="18" bottom="270" right="228" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Download incident summary"</Title>
+		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>gss::pr_downloadIncidentSummaryWinUI</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Table">
+		<Location top="6" left="18" bottom="114" right="774" />
+		<TabOrder>4</TabOrder>
+		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>gss::ep_dataSessionErrorSeverity( gss::i_dataSessionErrorMessageNumber )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<HeaderText>"Severity"</HeaderText>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>gss::sp_dataSessionErrorMoments( gss::i_dataSessionErrorMessageNumber )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<HeaderText>"Moment"</HeaderText>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>gss::sp_dataSessionErrorMessages( gss::i_dataSessionErrorMessageNumber )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<HeaderText>"message"</HeaderText>
+			<NumberFormat Width="80" Decimals="0" Alignment="Left" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="222" left="558" bottom="270" right="774" />
+		<TabOrder>3</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>gss::sp_titleClearDataSessionErrors</Title>
+		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>gss::pr_clearDataSessionErrors</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>gss::pr_downloadIncidentSummaryWinUI</Symbol>
+			<Symbol>gss::pr_clearDataSessionErrors</Symbol>
+			<Symbol>gss::sp_incidentSummarySuppliedByEndUser</Symbol>
+			<Symbol>gss::sp_titleClearDataSessionErrors</Symbol>
+			<Symbol>gss::sp_dataSessionErrorMessages</Symbol>
+			<Symbol>gss::sp_dataSessionErrorMoments</Symbol>
+			<Symbol>gss::ep_dataSessionErrorSeverity</Symbol>
+			<Symbol>gss::i_dataSessionErrorMessageNumber</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

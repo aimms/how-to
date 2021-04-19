@@ -1,0 +1,6 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"MyTest" "gsst::MyTest" "2021-02-25 07:51:49"
+"pr_findIdentifiersSavedInCase" "gsst::pr_findIdentifiersSavedInCase" "2021-02-25 07:51:49"
+"s_identifiersSavedInCase" "gsst::s_identifiersSavedInCase" "2021-02-25 07:51:49"
+"gsst::Copy_s_identifiersSavedInCase" "gsst::s_identifiersSavedInCaseCheck" "2021-02-25 07:52:53"
+"gsst::MyTest" "gsst::Test_NoSave_Still_properly_applied" "2021-02-26 06:47:18"

@@ -1,4 +1,4 @@
-How to connect AIMMS with R
+Integrate AIMMS with R
 ============================================
 
 .. meta::

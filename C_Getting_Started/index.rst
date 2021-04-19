@@ -1,5 +1,5 @@
 
-.. image:: ../Images/rocket-128.png
+.. image:: /Images/rocket-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Getting Started Help & Support

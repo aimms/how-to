@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<PageManager>
+	<Page Name="GSS Session History Management" PageGUID="E94A7721-DFEE-4FFE-A72C-C4115E972623" />
+	<Page Name="GSS Incident Summary" PageGUID="5FAD97A8-8419-4806-9A8D-4FE09418CE13" />
+</PageManager>

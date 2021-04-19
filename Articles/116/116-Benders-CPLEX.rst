@@ -22,8 +22,8 @@ Using the Benders algorithm in CPLEX can be very easy, at least for MIP problem
 You can also specify the decomposition of the variables yourself, and in case of an LP or a stochastic model this is a necessary step. To tell CPLEX that you want to use your own decomposition you should set the option 'Benders strategy' to 'User' or "Worker' (there is a difference between both settings, see the AIMMS Help for details). To specify the decomposition, you should use the function :any:`GMP::Column::SetDecomposition`. This is demonstrated in the AIMMS example :doc:`Network Ring Design <../483/483-Uncertainty-networkringdesign>` in which a 2-stage stochastic integer program is solved using the Benders algorithm of CPLEX.
 
 The Benders algorithm of CPLEX 12.7 is the third built-in Benders decomposition algorithm available in AIMMS, after the 
-`stochastic Benders algorithm <https://download.aimms.com/aimms/download/manuals/AIMMS3LR_StochasticProgramming.pdf>`_ and the 
-`automatic Benders decomposition algorithm <https://download.aimms.com/aimms/download/manuals/AIMMS3LR_BendersDecomposition.pdf>`_. 
+`Stochastic Benders Algorithm <https://documentation.aimms.com/language-reference/optimization-modeling-components/stochastic-programming/index.html#chap-stoch>`_ and the 
+`Automatic Benders Decomposition Algorithm <https://documentation.aimms.com/language-reference/optimization-modeling-components/automatic-benders-decomposition/index.html>`_. 
 (These two algorithms can be used with any linear solver while obviously CPLEX Benders can only be used with CPLEX.) To clarify which algorithm is suitable for which problem type, I have created the following table.
 
 +------------------------+-----------------------+----------------------+-----------------------+--------------------------+

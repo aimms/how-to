@@ -1,4 +1,4 @@
-.. image:: ../../../Images/code-file-128.png
+.. image:: /Images/code-file-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Language Help & Support
@@ -15,6 +15,7 @@ These topics cover what you need to get started programming your model in AIMMS 
    :maxdepth: 1
 
    /Articles/490/490-naming-convention 
+   /Articles/351/351-app-initialization-termination-with-libraries 
    /Articles/119/119-Reproducible-Random-Sequence 
    /Articles/194/194-using-loopcount-instead-of-explicit-counting-parameter-in-loops
    /Articles/150/150-solve-in-loop

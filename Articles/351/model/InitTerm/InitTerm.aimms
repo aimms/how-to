@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<References AIMMS_Version="4.78.4.13 (x64)">
+	<MainProject Path="MainProject" />
+	<Library System="true" Path="AimmsPro" />
+	<Library System="true" Path="AimmsWebUI" />
+	<Library Path="libA" />
+	<Library Path="libB" />
+	<Library Path="libC" />
+	<Library Path="libD" />
+</References>
