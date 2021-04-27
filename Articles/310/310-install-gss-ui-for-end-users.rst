@@ -13,7 +13,9 @@ In this article, it is explained how to create the dialog page in which the end-
 
 #.  The size of the dialog should be ``large``.
 
-#.  First create a table, titled "Errors and warnings encountered".
+#.  First create a table ``ErrorWarningTable``, titled "Errors and warnings encountered".
+
+    size 8 cols 1 rows
 
     Contents:
 
@@ -47,7 +49,7 @@ In this article, it is explained how to create the dialog page in which the end-
 
     #.  Procedure ``gss::pr_downloadIncidentSummary``
     
-    #.  Title:  ``gss::sp_incidentSummaryTitle``
+    #.  Title:  ``gss::sp_titleDowloadIncidentSummary``
     
 #.  Add a button named ClearDataSessionErrors (4 columns, 1 row)
 
