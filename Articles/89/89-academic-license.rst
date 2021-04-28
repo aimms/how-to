@@ -110,12 +110,23 @@ Ensure you are connected to your university network and try activation again.
 
 If the IP subnet error occurs even when connected to your university network, contact AIMMS Support by sending an e-mail to support@aimms.com and provide the following information:
 
-* Your name
-* Email address used for registration
-* License number
-* Activation code
-* Academic domain
-* IP subnet - Go to an IP checker such as `checkip.dyndns.org <http://checkip.dyndns.org/>`_ or `whatismyipaddress.com <https://whatismyipaddress.com/>`_ and copy the public IP address you see there.
+*   Your name
+
+*   Email address used for registration
+
+*   License number
+
+*   Activation code
+
+*   Academic domain
+
+*   IP subnet - Go to an IP checker such as 
+
+    *   **checkip.dyndns.org**: ``http://checkip.dyndns.org/`` or 
+
+    *   **whatismyipaddress.com**: ``https://whatismyipaddress.com/`` and 
+
+    copy the public IP address you see there.
 
 Our support team can then verify the information and update your license activation range to resolve the error.
 
