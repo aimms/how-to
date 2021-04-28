@@ -2102,6 +2102,7 @@ LibraryModule Library_GuardServerSession {
 			}
 		}
 		Section Tracking_memory_in_use {
+			Property: nosave;
 			Procedure pr_setMemoryInUse {
 				Arguments: (p_argNewmemoryInUse);
 				Body: {
@@ -2116,6 +2117,7 @@ LibraryModule Library_GuardServerSession {
 			}
 		}
 		Section Request_management {
+			Property: nosave;
 			Procedure pr_openRequestManagement {
 				Body: {
 					pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
@@ -3461,6 +3463,7 @@ LibraryModule Library_GuardServerSession {
 			}
 		}
 		Section progress_Window {
+			Property: nosave;
 			Parameter p_progressCoilWidth {
 				InitialData: 40;
 			}
@@ -3574,6 +3577,8 @@ LibraryModule Library_GuardServerSession {
 			Parameter p_Bestbound {
 				IndexDomain: i_timeSlot;
 			}
+			Parameter p_progressLinechartLower;
+			Parameter p_progressLinechartUpper;
 			StringParameter sp_beginTime;
 			StringParameter sp_endTime;
 			Parameter p_watchedSessionNotRunning {
@@ -3873,6 +3878,11 @@ LibraryModule Library_GuardServerSession {
 					        p_BestBound(ep_timeElement) := Val(sp_value(ep_timeElement,'Best Bound'));
 					        pr_logMsg(formatString("for %e: gap=%n, inc=%n, bb=%n", ep_timeElement, p_GAP(ep_timeElement), p_Incumbent(ep_timeElement), p_BestBound(ep_timeElement)),'debug');
 					        sp_chartLabel := "GAP Evolution:";
+					        if card( s_items ) = 1 then
+					        	if p_Incumbent(ep_timeElement) > p_BestBound(ep_timeElement) then
+					        	else
+					        	endif ;
+					        endif ;
 					else
 					        p_GAP(ep_timeElement) := Val(sp_value(ep_timeElement,'Objective'));
 					        sp_chartLabel := "Objective:";
@@ -3910,6 +3920,8 @@ LibraryModule Library_GuardServerSession {
 					IndexDomain: i_argItem;
 					Property: Input;
 				}
+				Parameter p_linechartLow;
+				Parameter p_linechartUpp;
 			}
 			Procedure pr_showProgress {
 				Body: {
