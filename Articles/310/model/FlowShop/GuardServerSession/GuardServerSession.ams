@@ -4450,6 +4450,10 @@ LibraryModule Library_GuardServerSession {
 			Parameter bp_isWorkerSession {
 				InitialData: 0;
 			}
+			Parameter bp_isVerifySession {
+				Range: binary;
+				InitialData: 0;
+			}
 		}
 		Section Main_Library_procedures {
 			Procedure LibraryInitialization {
@@ -4457,13 +4461,18 @@ LibraryModule Library_GuardServerSession {
 					ep_jobIncident := '' ;
 					ep_dataSessionIncident := '' ;
 					pr_getThisSession();
-					pr_getModelLibraryAndBinPaths();
+					if not bp_isVerifySession then
+						pr_getModelLibraryAndBinPaths();
+					endif ;
 				}
 				Comment: "Add initialization statements here that do not require any other library being initialized already.";
 			}
 			Procedure PostLibraryInitialization {
 				Body: {
 					! The error data shown should not be modified in the User Interface.
+					if bp_isVerifySession then
+						return ;
+					endif ;
 					CurrentInputs -= serverSessionErrorData;
 					CurrentInputs -= Shown_session_data_exchange ;
 					CurrentInputs -= dataSessionProfilerErrorData ;
@@ -5578,6 +5587,7 @@ LibraryModule Library_GuardServerSession {
 					bp_nextArgIsSessionId := 0 ;
 					bp_isConnectedToPro := 0 ;
 					bp_isWorkerSession := 0 ;
+					bp_isVerifySession := 0 ;
 					sp_thisSession := "" ;
 					block ! loop over arguments to find the session id.
 						p_argno := 1 ;
@@ -5588,7 +5598,6 @@ LibraryModule Library_GuardServerSession {
 							endif ;
 							if bp_nextArgIsSessionId then
 								sp_thisSession := sp_arg ;
-								break ;
 							elseif sp_arg = "_pro-session-id" then
 								bp_nextArgIsSessionId := 1 ;
 								bp_isWorkerSession := 1 ;
@@ -5596,10 +5605,15 @@ LibraryModule Library_GuardServerSession {
 							elseif sp_arg = "_pro-webui-session-id" then
 								bp_nextArgIsSessionId := 1 ;
 								bp_isConnectedToPro := 1 ;
+							elseif sp_arg = "verify" then
+								bp_isVerifySession := 1 ;
 							endif ;
 							p_argno += 1 ;
 						endrepeat ;
 					endblock ;
+					if bp_isVerifySession then
+						return ;
+					endif ;
 					if not sp_thisSession then
 						sp_thisSession := CurrentToString("%c%y%m%dT%H%M%S%t%TZ('UTC')");
 					endif ;
