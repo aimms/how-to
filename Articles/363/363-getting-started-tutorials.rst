@@ -3,12 +3,16 @@ Getting Started Tutorials
 
 As a beginner AIMMS user, the best starting point is the Tutorials.
  
+.. toctree::
+    
+    /Articles/505/index
 
-Tutorial for Beginners
--------------------------
+.. Tutorial for Beginners
+.. -------------------------
+
 The Tutorial for Beginners is a one-hour tutorial designed as the bare minimum needed to build simple models using the AIMMS Model Explorer. Data values are entered manually using data pages, and you can build a page with objects to view and modify the data. 
 
-* :doc:`../505/index`
+.. * :doc:`../505/index`
 
 AIMMS Learning Game
 ---------------------
@@ -51,7 +55,7 @@ Witch Apprentice Downloads
  
 .. note::
 	
-	`AIMMS Academy <https://academy.aimms.com/>`_ if free to join and has more learning resources available.
+    More learning resources are available on `AIMMS Academy <https://academy.aimms.com/>`_.
 
     We have deprecated `The Tutorial for Professionals` resource from our website. 
 
