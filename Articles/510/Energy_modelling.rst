@@ -1,13 +1,24 @@
-Energy Modelling
+Power Systems Planning - Methods and Applications
 =================
 
+Text on timescales and application of power systems planning
+
+.. image: : 
+	:align: center
+
+Comment: figure of the planning timescales
 ..  **********************************
 	Comment: The filename may need to be changed to reflect what is discussed here
 
-	Power system optimisation: Unit Commitment
-	--------------------------------------------
+Text on short-term operations planning timescales - UC and OPF
+	
+	
 
-	In this example, we will see how the problem of Unit Commitment (UC) in a power system can be implemented and solved in AIMMS. In the following, we will first review the UC problem, and then we will see its implementation in AIMMS.
+
+Power system optimisation: Unit Commitment
+--------------------------------------------
+
+In this example, we will see how the problem of Unit Commitment (UC) in a power system can be implemented and solved in AIMMS. In the following, we will first review the UC problem, and then we will see its implementation in AIMMS.
 
 	.. note:: For more information about the classic UC problem see {}.
 
