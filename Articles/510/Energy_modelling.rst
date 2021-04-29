@@ -11,9 +11,8 @@ Normally we say that the *UC* and *OPF* problems belong to the class of *Short T
 
 A graphical representation of the various timescales of different power systems planning problems is shown below:
 
-Figure of the timescale
-
-.. image::
+.. image:: figures/system_planning_timeline.png
+	:align: center
 
 Unit Commitment
 ----------------
