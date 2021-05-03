@@ -16,42 +16,49 @@ OPF is an optimisation problem. The objective function, as mentioned above, is n
 
 
 .. math::
-	f(x)= \displaystyle\sum_{i=1}^{ng} f_c (P^{\{ i\}}_g) \label{objective} \tag{1} 
+	f(x)= \displaystyle\sum_{i=1}^{ng} f_c (P^{\{ i\}}_g) 
+        :label: objective  
 
 
 where :math:`ng` is the number of generators, :math:`f_c` is the cost for each generator and :math:`x` is the vector of the optimisation variables, which are bus powers and voltages:
 
 .. math::
-
-	x={[P_g, Q_g, V_a, V_m]}^T \label{x} \tag{2} 
+	x={[P_g, Q_g, V_a, V_m]}^T 
+        :label: x  
 	
-There are of course some constraints in this optimisation problem: active and reactive power balance equations for all buses, limits on transmission lines, and also upper and lower limits for the vector of state variables :math:`x`. These constraints are shown in equations below respectively:
+The following constraints are defined for the standard AC OPF problem formulation: 
 
 .. math:: 
-
-	S_{bus}(x)+S_d-S_g=0  \label{PowerBalance} \tag{3}
+	S_{bus}(x)+S_d-S_g=0  
+        :label: PowerBalance 
 	
 where
 
 .. math:: 
-
-	S_{bus}(X)=[V]{I_{bus}}^*=[V]{{Y}_{bus}}^*V^*  \label{con_s} 
+	S_{bus}(X)=[V][I_{bus}^{*}]=[V]({Y}_{bus}^{*})V^{*}  
+        :label: con_s 
 
 .. math:: 
-
-		({P_f}^{\{ i\}}(x))^2+{\left({Q_f}^{\lbrace i\rbrace}(x)\right)}^2 \leq {\left({S}^{\lbrace i\rbrace}_{{L}}\right)}^2 \label{con_Pf} \tag{4}
+	({P_f}^{\{ i\}}(x))^2+{\left({Q_f}^{\lbrace i\rbrace}(x)\right)}^2 \leq {\left({S}^{\lbrace i\rbrace}_{{L}}\right)}^2 
+        :label: con_Pf 
 
 .. math::
-		{\left({P_t}^{\lbrace i\rbrace}(x)\right)}^2+{\left({Q_t}^{\lbrace i\rbrace}(x)\right)}^2 \leq {\left({S}^{\lbrace i\rbrace}_{{L}}\right)}^2 \label{con_Pt} \tag{5} 
+	{\left({P_t}^{\lbrace i\rbrace}(x)\right)}^2+{\left({Q_t}^{\lbrace i\rbrace}(x)\right)}^2 \leq {\left({S}^{\lbrace i\rbrace}_{{L}}\right)}^2 
+        :label: con_Pt 
+
+* Equation :eq:`PowerBalance` corresponds to the nodal Active and Reactive power balances for each node in the system. 
+
+* Equation :eq:`con_s` is the definition of the nodal complex power from which nodal Active and Reactive power injections at each node can be calculated. 
+
+* Equations :eq:`con_Pf` and :eq:`con_Pt` are the allowable total power carrying capacity limit of transmission lines. 
 	
 
 The optimisation problem can therefore be written as below:
 
 .. math::
-	\begin{align}
-		\text{minimize } f(x)	\\
-		\text{subject to } (\ref{PowerBalance})-(\ref{con_Pt})
-	\end{align}
+	\min f(x)	\\
+
+Which is subject to satisfying constraints :eq:`PowerBalance`, :eq:`con_Pf`, and :eq:`con_Pt`.
 	
 	
 OPF Implementation in AIMMS
