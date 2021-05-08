@@ -18,6 +18,7 @@ Recently added
 .. Added 14 Feb 2020: 108-10, 108-09, 108-07
 
 
+* :doc:`/Articles/517/517-runtime-functions-with-arguments`
 * :doc:`/Articles/351/351-app-initialization-termination-with-libraries`
 * :doc:`/Articles/310/310-incident-handling-for-organizations`
 * :doc:`/Articles/512/512-image-widget-refresh`

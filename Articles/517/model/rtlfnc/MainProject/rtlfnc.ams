@@ -1,0 +1,190 @@
+## ams_version=1.0
+
+Model Main_rtlfnc {
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: minute->s : #-># * 60;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsWebUI.
+				
+				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
+			}
+		}
+	}
+	Parameter p_inp;
+	Parameter p_res;
+	Procedure pr_buttonAction {
+		Body: {
+			if not ep_sqrtLibrary then
+				pr_CreateSQRTLib();
+			endif ;
+			p_res := apply( ep_sqrtFunction, p_inp );
+		}
+	}
+	Section Manage_SQRT_runtime_library {
+		Function fnc_template {
+			Arguments: (a);
+			Body: {
+				fnc_template := a ;
+			}
+			Parameter a {
+				Property: Input;
+			}
+		}
+		ElementParameter ep_sqrtLibrary {
+			Range: AllIdentifiers;
+			InitialData: '';
+		}
+		ElementParameter ep_sqrtFunction {
+			Range: AllIdentifiers;
+			Default: 'fnc_template';
+			InitialData: '';
+		}
+		Procedure pr_CreateSQRTLib {
+			Body: {
+				sp_sqrtFuncLibraryName := "SqrtFuncLibrary" ;
+				sp_sqrtFuncLibraryPrefix := "sf" ;
+				
+				block ! Remove the runtime library if it already exists.
+					ep_sqrtLibrary := StringToElement( AllIdentifiers, sp_sqrtFuncLibraryName, create: 0 );
+					if ep_sqrtLibrary then
+						me::Delete( ep_sqrtLibrary );
+						ep_sqrtLibrary := '' ;
+					endif ;
+				endblock ;
+				
+				block ! Create library.
+					ep_sqrtLibrary := me::CreateLibrary(
+						libraryName :  sp_sqrtFuncLibraryName, 
+						prefixName  :  sp_sqrtFuncLibraryPrefix);
+					if not ep_sqrtLibrary then
+						raise error "Unable to create runtime library " + sp_sqrtFuncLibraryName + ": " + CurrentErrorMessage ;
+					endif ;
+					! Set the property "nosave", unless you are sure you want the runtime data in cases.
+					if not me::SetAttribute(
+							runtimeId :  ep_sqrtLibrary, 
+							attr      :  'property', 
+							txt       :  "nosave") then
+						raise error "Unable to set the property nosave for the runtime library: " + sp_sqrtFuncLibraryName + ": " + CurrentErrorMessage ;
+					endif ;
+				endblock ;
+				
+				block ! Create function
+					ep_sqrtFunction := me::Create(
+						name     :  "testSQRT", 
+						newType  :  'Function', 
+						parentId :  ep_sqrtLibrary, 
+						pos      :  0);
+					if not ep_sqrtFunction then
+						raise error "Unable to create runtime function " + "testSQRT" + ": " + CurrentErrorMessage ;
+					endif ;
+					if not me::SetAttribute(
+							runtimeId :  ep_sqrtFunction, 
+							attr      :  'arguments', 
+							txt       :  "a") then
+						raise error "Unable to set arguments attribute of function " + "testSQRT" + ": " + CurrentErrorMessage ;
+					endif ;
+					if not me::SetAttribute(
+							runtimeId :  ep_sqrtFunction, 
+							attr      :  'body', 
+							txt       :  "testSQRT := if a <= 0 then 0 else sqrt(a) endif ;") then
+						raise error "Unable to set arguments attribute of function " + "testSQRT" + ": " + CurrentErrorMessage ;
+					endif ;
+				
+					! Create declaration section, first in the library
+					ep_sqrtDeclLocalFunction := me::Create(
+						name     :  "testSQRT_argument_declarations", 
+						newType  :  'declaration', 
+						parentId :  ep_sqrtLibrary, 
+						pos      :  0);
+					if not ep_sqrtDeclLocalFunction then
+						raise error "Unable to create declaration section: " + CurrentErrorMessage ;
+					endif ;
+					! Add the argument to the declaration section
+					ep_sqrtArgFunc := me::Create(
+						name     :  "a", 
+						newType  :  'parameter', 
+						parentId :  ep_sqrtDeclLocalFunction, 
+						pos      :  0);
+					if not ep_sqrtArgFunc then
+						raise error "Unable to create argument: " + CurrentErrorMessage ;
+					endif ;
+					if not me::SetAttribute(
+							runtimeId :  ep_sqrtArgFunc, 
+							attr      :  'property', 
+							txt       :  "input") then
+						raise error "Unable to set property input for argument a of function: " + CurrentErrorMessage ;
+					endif ;
+				
+					! Now the trick: move the declaration section local to the function.
+					if not me::Move(
+							runtimeId :  ep_sqrtDeclLocalFunction, 
+							parentId  :  ep_sqrtFunction, 
+							pos       :  0) then
+						raise error "Unable to move declaration section local to function: " + CurrentErrorMessage ;
+					endif ;
+				
+					! The values of the element parameters ep_sqrtDeclLocalFunction and ep_sqrtArgFunc are no longer valid.
+					ep_sqrtDeclLocalFunction := '' ;
+					ep_sqrtArgFunc := '' ;
+				
+				endblock ;
+				
+				me::Compile( ep_sqrtLibrary );
+			}
+			StringParameter sp_sqrtFuncLibraryName;
+			StringParameter sp_sqrtFuncLibraryPrefix;
+			ElementParameter ep_sqrtDeclLocalFunction {
+				Range: AllIdentifiers;
+				InitialData: '';
+			}
+			ElementParameter ep_sqrtArgFunc {
+				Range: AllIdentifiers;
+				InitialData: '';
+			}
+		}
+	}
+	Section Application_initialization_execution_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Body: {
+				CurrentInputs -= data { p_res } ;
+			}
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure MainExecution;
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+}
