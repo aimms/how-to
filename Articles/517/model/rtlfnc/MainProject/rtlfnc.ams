@@ -51,6 +51,9 @@ Model Main_rtlfnc {
 			Body: {
 				sp_sqrtFuncLibraryName := "SqrtFuncLibrary" ;
 				sp_sqrtFuncLibraryPrefix := "sf" ;
+				sp_funcName := "testSQRT" ;
+				sp_funcBody := "testSQRT := if a <= 0 then 0 else sqrt(a) endif ;" ;
+				sp_funcArg := "a" ;
 				
 				block ! Remove the runtime library if it already exists.
 					ep_sqrtLibrary := StringToElement( AllIdentifiers, sp_sqrtFuncLibraryName, create: 0 );
@@ -78,24 +81,24 @@ Model Main_rtlfnc {
 				
 				block ! Create function
 					ep_sqrtFunction := me::Create(
-						name     :  "testSQRT", 
+						name     :  sp_funcName, 
 						newType  :  'Function', 
 						parentId :  ep_sqrtLibrary, 
 						pos      :  0);
 					if not ep_sqrtFunction then
-						raise error "Unable to create runtime function " + "testSQRT" + ": " + CurrentErrorMessage ;
+						raise error "Unable to create runtime function " + sp_funcName + ": " + CurrentErrorMessage ;
 					endif ;
 					if not me::SetAttribute(
 							runtimeId :  ep_sqrtFunction, 
 							attr      :  'arguments', 
-							txt       :  "a") then
-						raise error "Unable to set arguments attribute of function " + "testSQRT" + ": " + CurrentErrorMessage ;
+							txt       :  sp_funcArg) then
+						raise error "Unable to set arguments attribute of function " + sp_funcName + ": " + CurrentErrorMessage ;
 					endif ;
 					if not me::SetAttribute(
 							runtimeId :  ep_sqrtFunction, 
 							attr      :  'body', 
-							txt       :  "testSQRT := if a <= 0 then 0 else sqrt(a) endif ;") then
-						raise error "Unable to set arguments attribute of function " + "testSQRT" + ": " + CurrentErrorMessage ;
+							txt       :  sp_funcBody ) then
+						raise error "Unable to set body attribute of function " + sp_funcName + ": " + CurrentErrorMessage ;
 					endif ;
 				
 					! Create declaration section, first in the library
@@ -109,18 +112,18 @@ Model Main_rtlfnc {
 					endif ;
 					! Add the argument to the declaration section
 					ep_sqrtArgFunc := me::Create(
-						name     :  "a", 
+						name     :  sp_funcArg, 
 						newType  :  'parameter', 
 						parentId :  ep_sqrtDeclLocalFunction, 
 						pos      :  0);
 					if not ep_sqrtArgFunc then
-						raise error "Unable to create argument: " + CurrentErrorMessage ;
+						raise error "Unable to create argument " + sp_funcArg + ": " + CurrentErrorMessage ;
 					endif ;
 					if not me::SetAttribute(
 							runtimeId :  ep_sqrtArgFunc, 
 							attr      :  'property', 
 							txt       :  "input") then
-						raise error "Unable to set property input for argument a of function: " + CurrentErrorMessage ;
+						raise error "Unable to set property input for argument " + sp_funcArg + " of function: " + CurrentErrorMessage ;
 					endif ;
 				
 					! Now the trick: move the declaration section local to the function.
@@ -141,6 +144,9 @@ Model Main_rtlfnc {
 			}
 			StringParameter sp_sqrtFuncLibraryName;
 			StringParameter sp_sqrtFuncLibraryPrefix;
+			StringParameter sp_funcName;
+			StringParameter sp_funcBody;
+			StringParameter sp_funcArg;
 			ElementParameter ep_sqrtDeclLocalFunction {
 				Range: AllIdentifiers;
 				InitialData: '';
