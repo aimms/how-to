@@ -6,7 +6,7 @@ Get More Log Information
    :keywords: log, troubleshoot
 
 
-As a modeler, you can find :doc:`detailed logs <../313/313-get-log-files>` to analyze an issue before reporting it to `AIMMS User Support <https://www.aimms.com/support/#were-here-for-you>`_ or on the `AIMMS Community <https://community.aimms.com/>`_.
+As a modeler, you can find :doc:`detailed logs <../313/313-get-log-files>` to analyze an issue before reporting it to `AIMMS User Support <https://www.aimms.com/support/>`_ or on the `AIMMS Community <https://community.aimms.com/>`_.
 
 AIMMS comes with loggers, a logging feature somewhat similar to the `log4j <https://logging.apache.org/log4j/2.x/>`_ technology.
 
