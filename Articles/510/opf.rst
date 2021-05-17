@@ -59,7 +59,12 @@ The optimisation problem can therefore be written as below:
 	\min f(x)	\\
 
 Which is subject to satisfying constraints :eq:`PowerBalance`, :eq:`con_Pf`, and :eq:`con_Pt`.
-	
+
+Also, note that we have using Matpower's Branch Model [2] for modelling the network branches. Figure below shows the branch model, where the branch parameters are marked on the diagram. :math:`rs` and :math:`xs` are the series resistance and reactance, respectively. The total charging susceptance :math:`bc` together with these series elements forms the standard :math:`\pi` transmission line model. The transformer tap ratio has a magnitude :math:`m_a` and phase shift angle *theta_sh*.
+
+.. image:: figures/branch_model.png
+    :align: center
+
 	
 OPF Implementation in AIMMS
 -------------------------------	
