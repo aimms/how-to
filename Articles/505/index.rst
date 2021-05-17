@@ -1,6 +1,6 @@
 .. _ch:tut:Introduction:
 
-Tutorial for beginners [🕑 1h]
+Tutorial for Beginners
 ================================
 
 *A One-Hour Tutorial for Beginners*
