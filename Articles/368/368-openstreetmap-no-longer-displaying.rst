@@ -51,7 +51,11 @@ Aimms Menu > Help > Contents and Index, and then search for GIS.
 Selected other services
 -------------------------
 
-#.  Bing provides their service free or subscripted, see also: `Microsoft Bing Maps Platform APIs Terms Of Use <https://www.microsoft.com/en-us/maps/product>`_ and `Microsoft Bing licensing options <https://www.microsoft.com/en-us/maps/licensing/licensing-options>`_
+.. see also: Microsoft Bing Maps Platform APIs Terms Of Use <https://www.microsoft.com/en-us/maps/product>`_ and `Microsoft Bing licensing options <https://www.microsoft.com/en-us/maps/licensing/licensing-options>`_
+
+
+#.  Bing provides their service free or subscripted.
+
 
     .. note:: Nowadays most web services use an apikey to log in, instead of a username/password. The apikey can be filled in in the username field in the Authentication of a GIS Source:
 

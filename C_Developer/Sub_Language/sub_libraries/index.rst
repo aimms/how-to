@@ -20,3 +20,4 @@ Libraries save time and provide valuable resources when developing apps. You can
    /Articles/146/146-value-dynamic-identifier
    /Articles/132/132-Repetive-Patterns-Model-Edit 
    /Articles/131/131-Formulas-as-Data
+   /Articles/517/517-runtime-functions-with-arguments

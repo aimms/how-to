@@ -63,6 +63,7 @@ Alternatively, AIMMS can provide this solution as a managed service where we bui
 
 *Figure 2 – Accessing the application database in the AIMMS Cloud Platform*
 
+
 .. seealso::
 
    See https://dev.mysql.com/doc/index-connectors.html for details how to connect to MySQL databases.
