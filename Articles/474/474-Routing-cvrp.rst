@@ -25,7 +25,7 @@ replaced by the Miller-Tucker-Zemlin constraints (1.37) and (1.38). In the secon
 variant it is replaced by the subtour elimination constraints (1.36).
 
 This project uses the data instance 'E-n23-k3' from the Christofides and Eilon
-set at http://neo.lcc.uma.es/vrp/
+set at https://neo.lcc.uma.es/vrp/
 
 References:
 Toth, P., and D. Vigo, An Overview of Vehicle Routing Problems, In: The Vehicle
