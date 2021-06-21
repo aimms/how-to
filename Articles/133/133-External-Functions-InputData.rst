@@ -1,4 +1,4 @@
-﻿Exchange Data with External Source
+Exchange Data with External Source
 ========================================
 
 .. meta::
@@ -102,7 +102,7 @@ Let's check each of the attributes of this external function.
 
 * First, the file in which the DLL is stored. Here, ``DLL_Filename`` is a string parameter that is defined based on the running platform, 32 or 64 bits (See also https://how-to.aimms.com/Articles/download-compressed-files/download-compressed-files.html#elevate-your-formulation-to-pro)
 * Second, the return type, which is typically an ``int`` or a ``double``.
-* Third, the character encoding - we compiled it using wide chars (by defining the preprocessor macro UNICODE) which corresponds to the UTF16-LE encoding on Windows. See also http://www.unicode.org/.
+* Third, the character encoding - we compiled it using wide chars (by defining the preprocessor macro UNICODE) which corresponds to the UTF16-LE encoding on Windows. See also https://home.unicode.org/.
 * Fourth and most importantly, the body call. We know the name of the C++ function to be called, as we have developed the library ourselves. However, when a DLL is supplied to you, you can check the available functions using depends.exe from http://www.dependencywalker.com. In addition, you will need to map the arguments. More information about this can be found in the AIMMS Language Reference (starting in the paragraph "The BODY CALL attribute").
 
 Step 2, wrapping it in an AIMMS procedure
