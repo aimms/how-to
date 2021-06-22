@@ -34,16 +34,28 @@ Model Main_ReadRelationIndexedSet {
 	}
 	Parameter bp_indicatorAB {
 		IndexDomain: (i_a,i_b);
+		Range: binary;
+	}
+	StringParameter sp_primaryAction {
+		IndexDomain: webui::indexPageActionSpec;
+		Definition: {
+			{
+				'displaytext' : "Read from database",  
+				'icon'        : "aimms-database3",  
+				'procedure'   : "pr_readRelationIndexedSet",  
+				'state'       : "Active"
+			}
+		}
 	}
 	DatabaseProcedure dbpr_addColumnOne {
-		DataSource: "data\\one.dsn";
+		DataSource: sp_datasource;
 		SqlQuery: {
 			"select A, B, 1 as one from AB ;"
 		}
 		Property: UseResultSet;
 		Mapping: {
-			"A" --> i_a,
-			"B" --> i_b,
+			"A"   --> i_a,
+			"B"   --> i_b,
 			"one" --> bp_indicatorAB(i_a,i_b)
 		}
 	}
@@ -59,6 +71,9 @@ Model Main_ReadRelationIndexedSet {
 			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
 		}
 		Procedure PostMainInitialization {
+			Body: {
+				sp_datasource := "data\\one.dsn" ;
+			}
 			Comment: {
 				"Add initialization statements here that require that the libraries are already initialized properly,
 				or add statements that require the Data Management module to be initialized."
