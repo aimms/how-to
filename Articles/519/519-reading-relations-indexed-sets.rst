@@ -1,5 +1,5 @@
-Reading relations and indexed sets
-======================================
+Reading relations and indexed sets from databases
+=================================================
 
 AIMMS does not support reading relations and indexed sets directly using the READ FROM TABLE statement.
 Therefore a table in a database such as
