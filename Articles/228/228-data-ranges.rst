@@ -32,6 +32,11 @@ This works for most cases, but be aware:
 * if data extends beyond the large estimate provided, it is lost. 
 * if two different data ranges are in the same column/row separated by empty cells or a header row, results are unreliable. 
 
+.. seealso:: 
+
+  - :any:`axll::ReadSet`
+  - :any:`axll::ReadList`
+
 AXLL Functions
 ----------------
 

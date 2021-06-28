@@ -44,7 +44,8 @@ extensions = ['sphinx.ext.doctest',
   
 intersphinx_mapping = {'fr': ('https://documentation.aimms.com/functionreference/',
                                   (None,'objects-functionreference.inv')),
-                       'lr': ('https://documentation.aimms.com/language-reference/',None),}
+                       'lr': ('https://documentation.aimms.com/language-reference/',None),
+                       'aimmsxllibrary': ('https://documentation.aimms.com/aimmsxllibrary/',None),}
 
 if os.name != 'nt':
 
