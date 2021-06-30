@@ -10,6 +10,8 @@
 
     <!-- Section 1: Appenders -->
 
+    
+    <!-- Use this appender when logging on the AIMMS Cloud -->
     <appender name="stdout" class="org.apache.log4j.ConsoleAppender"> 
         <param name="Target" value="System.out"/> 
         <layout class="org.apache.log4j.PatternLayout"> 
@@ -97,8 +99,13 @@
     </logger>
 
     <!--- Database logging -->
+    <!--- See also https://documentation.aimms.com/release-notes.html#aimms-improvements -->
     <logger name="AIMMS.Database">
-        <!--- Exchanging data with ODBC data sources -->
+        <!--- Exchanging data with ODBC data sources, the log levels are as follows:
+            o Info: model level
+            o DEBUG: statement level
+            o TRACE: field level
+          -->
         <level value="info"/>
     </logger>
     <logger name="AIMMS.Database.dbms.SqlExecuter">
@@ -117,7 +124,6 @@
     <!-- Section 3: Final configuration -->
     <root>
         <priority value="info" />
-
 
         <!-- Use this if you want to use your favorite text editor to inspect your log, created using AIMMS Developer -->
         <!-- <appender-ref ref="MyFileAppender" /> --> 

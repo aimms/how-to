@@ -13,7 +13,7 @@ This logging feature is somewhat similar to the `log4j <https://logging.apache.o
 
 This article will:
 
-#.  Introduce terminology regarding logging, 
+#.  introduce terminology regarding logging, 
 
 #.  eplain, how to control the logging,
 
@@ -28,7 +28,7 @@ Terminology
 #.  **Logger** A logger is a tracing facility built in a software component.
 
 #.  **Logger naming** A logger is usually named after the component in which it is built. 
-    For sub-components, the tracing element is usually named ``<main component>.<sub component>`` and so on.
+    For sub-components, the logger is usually named ``<main component>.<sub component>`` and so on.
 
 #.  **Log level** Both a logger and a message have a level associated with it. 
     When the message level is equal to or greater than the level of the logger, it is written to file.
@@ -44,17 +44,16 @@ Terminology
     #.  *Warn* Exceptions that can be continued from
 
     #.  *Error* Exceptions that should be handled, by a higher layer in the program, by the modeler, or by the user
-    
- 
-    .. note:: Levels Trace and Debug can significantly decrease application performance, and do not provide much use to the modeler. Therefore we don't recommend to enable them unless instructed by AIMMS Support.
+
+    .. note:: Levels Trace and Debug can significantly decrease application performance and fill up your disk, and do not provide much use to the modeler. Therefore we don't recommend to enable them unless instructed by AIMMS Staff.
 
 #.  **Appender** There are three appenders available:
 
-    #.  To generate output to AIMMS Cloud
+    #.  to generate output to AIMMS Cloud,
     
-    #.  To generate text output, and
+    #.  to generate text output, and
     
-    #.  To generate XML output.
+    #.  to generate XML output.
 
     In the configuration file provided, the text output is activated; but explained how to reconfigure for the other outputs.
 
@@ -66,6 +65,9 @@ Control of the logging
 This article provides a sample ``LoggerConfig.xml`` that is a template in creating this information.
 This file configures how much output several loggers provide during an AIMMS session.
 This template can be downloaded :download:` and extracted from this LoggerConfig.zip file <LoggerConfig.zip>` 
+
+The :download:`a zip file containing a logger config template can be downloaded here <LoggerConfig.zip>`.
+This zip file 
 
 .. note:: 
 
@@ -83,20 +85,21 @@ There are three sections in the file ``LoggerConfig.xml``
 
     #.  TXT output, which allows you to inspect the results using your favorite text editor.
     
-        *MyFileAppender* A text file appender, which sent output to the local file ``log/aimms-log.txt``.
+        *MyFileAppender* A plain text file appender, which sent output to the local file ``log/aimms-log.txt``.
 
     #.  XML, which allows you to make selections of the log after the fact using a suitable viewer.
     
-        *MyXMLFileAppender* An XML text file appender, which sents its output to the file ``c:/temp/aimms-log.xml``
+        *MyXMLFileAppender* An XML text file appender, which sends its output to the file ``log/aimms-log.xml``
 
 
 #.  **Loggers**
 
-    There are various loggers, and each logger has its own default level.
+    There are various loggers, and each logger has its own default level. 
+    The most typical loggers are presented in the template ``LoggerConfig.xml``.
 
 #.  **Final configuration**
 
-    This section is used to select the appenders to be used.  Normally, you'll just use one, and comment out the other.
+    This section is used to select the appenders to be used.  Normally, you'll just use one, and comment out the others.
 
 
 Inspecting logging information
@@ -150,11 +153,14 @@ With the Log4View utility you can filter the output of selected loggers, as show
 .. image:: images/log4view.png
     :align: center
 
-.. Using AWS to inspect logs created on the AIMMS Cloud
-.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. 
-.. To be written.
-.. 
+Using AWS to inspect logs created on the AIMMS Cloud
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The AWS logging information is only accessible to staff from AIMMS User Support.
+Please find a snapshot of the information below.
+
+.. image:: images/aws-logging-snapshot.png
+    :align: center
 
 
 Further reading
