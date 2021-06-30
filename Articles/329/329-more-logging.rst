@@ -15,9 +15,9 @@ This article will:
 
 #.  introduce terminology regarding logging, 
 
-#.  eplain, how to control the logging,
+#.  explain, how to control the logging,
 
-#.  detail inspecting the created log information, and 
+#.  share how the created logs can be inspected, and 
 
 #.  provide some hints on further reading.
 
@@ -64,8 +64,6 @@ Control of the logging
 
 This article provides a sample ``LoggerConfig.xml`` that is a template in creating this information.
 This file configures how much output several loggers provide during an AIMMS session.
-This template can be downloaded :download:` and extracted from this LoggerConfig.zip file <LoggerConfig.zip>` 
-
 The :download:`a zip file containing a logger config template can be downloaded here <LoggerConfig.zip>`.
 This zip file contains the ``LoggerConfig.xml`` file.
 
@@ -136,7 +134,8 @@ Selected remarks:
 *   Line 1: I referenced the procedure ``guipro::progress::NextCheck`` outside the library ``AimmsProGUI``.
     This error message appeared in the AIMMS IDE as well.
 
-*   Lines 2-4 I have set the level of the logger ``AIMMS.Trace.Procedure`` to trace. 
+*   Lines 2-4 I have set the level of the logger ``AIMMS.Trace.Procedure`` to info. 
+    Putting that logger to trace will show all procedure calls.
     You can see the message pattern ``Date{yyyy-MM-dd HH:mm:ss,SSS} ExecutionThread [MessageLevel] {Logger} Message``.  
 
  
@@ -156,7 +155,7 @@ With the Log4View utility you can filter the output of selected loggers, as show
 Using AWS to inspect logs created on the AIMMS Cloud
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The AWS logging information is only accessible to staff from AIMMS User Support.
+The AWS logging information is only accessible to AIMMS staff.
 Please find a snapshot of the information below.
 
 .. image:: images/aws-logging-snapshot.png

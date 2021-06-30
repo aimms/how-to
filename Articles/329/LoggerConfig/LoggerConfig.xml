@@ -44,7 +44,8 @@
     </logger>
     <logger name="AIMMS.Trace.Procedure">
         <!--- Tracing entering and leaving AIMMS Procedures.
-              Put this logger to trace if you need this information.
+              * Info: procedure calls outside a loop are logged.
+              * Trace: all procedure calls are logged.
         -->
         <level value="info"/>
     </logger>
