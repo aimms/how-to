@@ -67,12 +67,12 @@ This file configures how much output several loggers provide during an AIMMS ses
 This template can be downloaded :download:` and extracted from this LoggerConfig.zip file <LoggerConfig.zip>` 
 
 The :download:`a zip file containing a logger config template can be downloaded here <LoggerConfig.zip>`.
-This zip file 
+This zip file contains the ``LoggerConfig.xml`` file.
 
 .. note:: 
 
     Evolution: With AIMMS 4.80 and newer, it is sufficient to place the ``LoggerConfig.xml`` in the project folder.  
-    As you may know, this in the same folder as the ``.aimms`` file.
+    As you may know, this in the same folder as the where the ``.aimms`` file is located.
     When are you are using AIMMS 4.79 or older, please check :doc:`dated logging technology <../329/329-vintage-more-logging>` to obtain similar logging, just less detailed and less conveniently configurable.
 
 There are three sections in the file ``LoggerConfig.xml``
