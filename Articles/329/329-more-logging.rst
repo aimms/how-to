@@ -15,6 +15,8 @@ This article will:
 
 #.  introduce terminology regarding logging, 
 
+#.  inform, how to start logging,
+
 #.  explain, how to control the logging,
 
 #.  share how the created logs can be inspected, and 
@@ -59,6 +61,25 @@ Terminology
 
 Next we will discuss how to control the logging, both where it goes, and how much is written.
 
+Start logging
+-------------
+
+To start logging, place a logger configuration file named ``LoggerConfig.xml`` in the AIMMS Project folder.  
+As you may know, the AIMMS project folder is the folder that contains the ``.aimms`` file of the AIMMS project.
+You will need to start AIMMS by either:
+
+#.  start AIMMS by double clicking the ``.aimms`` file, or
+
+#.  by right-clicking the ``.aimms`` file and selecting the AIMMS Developer release of choice.
+
+To configure the Windows explorer with this default action on ``.aimms`` files, and the adding of the context menu item, the `AIMMS Launcher <https://download.aimms.com/aimms/download/data/AIMMSLauncher/AIMMSLauncher-latest.exe>`_ needs to have beeen run once.
+
+.. note:: 
+
+    Evolution: With AIMMS 4.80 and newer the above is sufficient to start logging.
+    When are you are using AIMMS 4.79 or older, please check :doc:`dated logging technology <../329/329-vintage-more-logging>` to obtain similar logging, just less detailed and less conveniently activated and configurable.
+
+
 Control of the logging
 --------------------------
 
@@ -67,11 +88,6 @@ This file configures how much output several loggers provide during an AIMMS ses
 The :download:`a zip file containing a logger config template can be downloaded here <LoggerConfig.zip>`.
 This zip file contains the ``LoggerConfig.xml`` file.
 
-.. note:: 
-
-    Evolution: With AIMMS 4.80 and newer, it is sufficient to place the ``LoggerConfig.xml`` in the project folder.  
-    As you may know, this in the same folder as the where the ``.aimms`` file is located.
-    When are you are using AIMMS 4.79 or older, please check :doc:`dated logging technology <../329/329-vintage-more-logging>` to obtain similar logging, just less detailed and less conveniently configurable.
 
 There are three sections in the file ``LoggerConfig.xml``
 
