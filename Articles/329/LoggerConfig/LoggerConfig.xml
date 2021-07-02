@@ -38,7 +38,6 @@
     </appender>  
 
     <!-- Section 2: Loggers -->
-
     <logger name="AIMMS.Trace" >
         <level value="warn"/>
     </logger>
@@ -52,6 +51,14 @@
     <logger name="ModularCompiler">
         <!--- The AIMMS Compiler -->
         <level value="info"/> 
+    </logger>
+    <logger name="autolib">
+        <!--- The handler of the AIMMS repository of libraries
+              Warn (default) only log exceptions.
+              Info - Wat the handler does
+              Trace - Details of how the handler does it.
+        -->
+        <level value="warn"/> 
     </logger>
     <logger name="AIMMS.Engine" >
         <!--- The multi-threaded AIMMS Engine -->
