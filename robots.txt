@@ -6,6 +6,7 @@ Disallow: https://how-to.aimms.com/How to use this, man.html
 Disallow: https://how-to.aimms.com/Articles/122/122-AXLL-Library.html
 Disallow: https://how-to.aimms.com/Articles/160/160-super-slicing.html
 Disallow: https://how-to.aimms.com/Articles/166/166-shared-user-files.html
+Disallow: https://how-to.aimms.com/Articles/180/180-use-side-panel-with-old-menu.html
 Disallow: https://how-to.aimms.com/Articles/200/200-Measuring-Page-Loadtime.html
 Disallow: https://how-to.aimms.com/Articles/223/223-animation-with-colors-in-aimms.html
 Disallow: https://how-to.aimms.com/Articles/229/229-determine-number-of-available-processors-in-aimms.html

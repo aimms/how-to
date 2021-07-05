@@ -1,3 +1,7 @@
+:orphan:
+
+.. orphaned because the information is outdated.
+
 .. belongs in WebUI/CSS
 
 Using Sidepanels with the Old WebUI Theme
