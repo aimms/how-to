@@ -15,7 +15,8 @@ before_script:
 linkcheck:
   stage: test
   script:
-  - python3 -msphinx -W -b linkcheck . _build/linkcheck
+  - python3 -msphinx -W --keep-going -b linkcheck . _build/linkcheck
+  allow_failure: true
   tags: 
     - ubuntu
   retry: 1
@@ -23,7 +24,7 @@ linkcheck:
 spellcheck:
   stage: test
   script:
-  - python3 -msphinx -W -b spelling . _build/spelling
+  - python3 -msphinx -W --keep-going -b spelling . _build/spelling
   allow_failure: true
   tags: 
     - ubuntu

@@ -21,7 +21,7 @@ The workflow for integrating external Excel files with your AIMMS model is illus
 
 |axll-workflow|
 
-The AimmsXLLibrary is a collection of functions to do this and more. It is provided as a system library and you can add it to your project from the library manager, as detailed in :doc:`../84/84-using-libraries`
+The AimmsXLLibrary is a collection of functions to do this and more. It is part of the library repository and you can add it to your project from the library manager, as detailed in :doc:`../84/84-using-libraries`
 
 You can read/write data both in tabular (a list or composite table) or matrix formats. Matrix formats are particularly popular when solving network problems because you need the distances between each nodes in your network and this is typically represented in the form of a distance matrix. 
 
@@ -43,7 +43,7 @@ To close an Excel file or to remove it from memory::
 
     axll::CloseWorkBook(WorkbookFilename : "filename.xlsx" );
 
-A call to the function ``axll::OpenWorkBook`` will raise an error if that file was already opened before. So, checking if the file is already open or closing it before opening is recommended. There are three options for you to choose from:
+A call to the function :any:`axll::OpenWorkBook` will raise an error if that file was already opened before. So, checking if the file is already open or closing it before opening is recommended. There are three options for you to choose from:
 
 .. code-block:: aimms
     
@@ -77,7 +77,7 @@ Reading data
 
 Many functions are available to read different kinds of data from an Excel file. Most commonly used are:
 
-#. ``axll::ReadSet``: Read in data to a set. Data in Excel is in a single column or a single row::
+#. :any:`axll::ReadSet` Read in data to a set. Data in Excel is in a single column or a single row::
     
     axll::ReadSet(
             SetReference              : sSetinAIMMS , 
@@ -85,7 +85,7 @@ Many functions are available to read different kinds of data from an Excel file.
             ExtendSuperSets           :  1, 
             MergeWithExistingElements :  0, 
             SkipEmptyCells            :  0);
-#. ``axll::ReadList``: Read in data to an indexed parameter. Data in Excel must be in a list / composite table format::
+#. :any:`axll::ReadList` Read in data to an indexed parameter. Data in Excel must be in a list / composite table format::
 
     axll::ReadList(
             IdentifierReference    : paraminAIMMS , 
@@ -94,7 +94,7 @@ Many functions are available to read different kinds of data from an Excel file.
             ModeForUnknownElements :  0, 
             MergeWithExistingData  :  0);
 
-#. ``axll::ReadTable``: Read in data to an indexed parameter (with 2+ indices in the index domain). Data in Excel must be in a matrix format::
+#. :any:`axll::ReadTable` Read in data to an indexed parameter (with 2+ indices in the index domain). Data in Excel must be in a matrix format::
 
     axll::ReadTable(
 	    IdentifierReference    :  multidimParamInAIMMS , 
@@ -104,31 +104,32 @@ Many functions are available to read different kinds of data from an Excel file.
 	    ModeForUnknownElements :  0, 
 	    MergeWithExistingData  :  0);
 
-#. ``axll::ReadSingleValue``: Read in data to a scalar parameter. Data in Excel is in a single cell::
+#. :any:`axll::ReadSingleValue` Read in data to a scalar parameter. Data in Excel is in a single cell::
 
     axll::ReadSingleValue(
 	    ScalarReference : scalarParaminAIMMS , 
 	    Cell            : "A1" );
 
-By setting a different value for the `ModeForUnknownElements` argument of ``ReadList or ReadTable``, you can skip the call to ``ReadSet``. 
+By setting a different value for the :any:`axll::ReadList::ModeForUnknownElements` argument of :any:`axll::ReadList` or :any:`axll::ReadTable`, you can skip the call to :any:`axll::ReadSet`. 
 
 .. note::
 
-    The `IdentifierReference` in ``ReadTable`` must be an AIMMS identifier with 2+ (at least 2) indices in its index domain.
+    The :any:`axll::ReadTable::IdentifierReference` in :any:`axll::ReadTable` must be an AIMMS identifier with 2+ (at least 2) indices in its index domain.
+
 
 Writing data
 -----------------------
 
 Similar to reading data, many functions are available to write out data to Excel files. Commonly used are:
 
-#. ``axll::WriteSet``: Writes out the contents of a set to a single column/row::
+#. :any:`axll::WriteSet`: Writes out the contents of a set to a single column/row::
 
     axll::WriteSet(
 	    SetReference       : sSetinAIMMS , 
 	    SetRange           : "A2:A33" , 
 	    AllowRangeOverflow :  0);
 
-#. ``axll::WriteCompositeTable``: Writes out an indexed identifier in the composite table format, very convenient to use::
+#. :any:`axll::WriteCompositeTable`: Writes out an indexed identifier in the composite table format, very convenient to use::
 
     axll::WriteCompositeTable(
 	    IdentifierReference : multidimParamInAIMMS , 
@@ -136,7 +137,7 @@ Similar to reading data, many functions are available to write out data to Excel
 	    WriteZeros          :  0, 
 	    WriteIndexNames     :  1);
 
-#. ``axll::WriteTable``: Writes out an indexed identifier in the matrix format, more options to control::
+#. :any:`axll::WriteTable`: Writes out an indexed identifier in the matrix format, more options to control::
 
     axll::WriteTable(
             IdentifierReference     : multidimParamInAIMMS,
@@ -149,17 +150,17 @@ Similar to reading data, many functions are available to write out data to Excel
             IncludeEmptyColumns     : 0,
             IncludeEmptyRowsColumns : 0);
 
-#. ``axll::WriteSingleValue``: Writes out a scalar identifier to a single cell in Excel::
+#. :any:`axll::WriteSingleValue`: Writes out a scalar identifier to a single cell in Excel::
 
     axll::WriteSingleValue(
 	    ScalarReference : scalarParaminAIMMS , 
 	    Cell            : "A1" );
 
-There is no ``axll::WriteList`` but a one-dimensional identifier with ``WriteCompositeTable`` will you give the same result. An alternative is to use ``WriteSet`` and ``FillList``. 
+There is no ``WriteList`` but a one-dimensional identifier with :any:`axll::WriteCompositeTable` will you give the same result. An alternative is to use :any:`axll::WriteSet` and :any:`axll::FillList`. 
 
 .. note:: 
 
-    `IdentifierReference` in ``WriteTable`` must be a 2+ dimensional identifier but for ``WriteCompositeTable``, 1+ is sufficient. 
+    :any:`axll::WriteTable::IdentifierReference` in :any:`axll::WriteTable` must be a 2+ dimensional identifier but for :any:`axll::WriteCompositeTable`, 1+ is sufficient. 
 
 Example 
 -------------

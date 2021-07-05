@@ -7,7 +7,7 @@ The CVRP Library can solve Capacitated Vehicle Routing Problems (CVRP). There ar
 Creating Datasets
 -----------------
 
-There are a lot of examples of CVRP’s available on the internet (for example on this website: http://neo.lcc.uma.es/vrp/vrp-instances/). However, these data sets mostly contain more than 20 nodes. The Explicit Dantzig-Fulkerson-Johnson formulation isn’t capable of solving problems that big. So in AIMMS I made a procedure that created 30 datasets with 8 to 20 nodes.  
+There are a lot of examples of CVRP’s available on the internet (for example on this website: https://neo.lcc.uma.es/vrp/vrp-instances/). However, these data sets mostly contain more than 20 nodes. The Explicit Dantzig-Fulkerson-Johnson formulation isn’t capable of solving problems that big. So in AIMMS I made a procedure that created 30 datasets with 8 to 20 nodes.  
 The datasets contain **8 nodes, 10 nodes, 12 nodes, 15 nodes, 17 nodes or 20 nodes**. There are 5 files for each amount of nodes. The following data is randomly generated: the amount of vehicles, the x-coordinates and y-coordinates of the nodes, the demand of the nodes and the capacity of the vehicles. The function ``Uniform(min,max)`` is used and will choose a random number between two values. The data is selected as follows:
 
 -	**p_NumberOfVehicles**: A random number between 2 and 1/3 of the amount of nodes. 
