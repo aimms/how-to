@@ -45,9 +45,11 @@ Please note
     #.  the most `widely used transport layer security protocol <https://www.sans.org/reading-room/whitepapers/vpns/paper/39715>`_
 
     #.  considered to be `reasonably okay <https://www.howsmyssl.com/>`_
-    
+
     There is a clear trend of increasing adoption of TLS 1.3.
 
 #.  Servers securing their connection using TLS 1.2 are still supported by AIMMS PRO 2.36.2 and AIMMS Developer 4.76.4. 
     In short, when a client supports TLS 1.3, it also support TLS 1.2.
 
+#.  WinUI applications published on AIMMS PRO may also be affected by organizations enforcing TLS 1.2 or TLS 1.3, 
+    see :doc:`Evolution of AIMMS using Transport Layer Security<../520/520-evolution-of-transport-layer-security>`

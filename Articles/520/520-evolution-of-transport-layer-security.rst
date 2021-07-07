@@ -53,26 +53,46 @@ Consuming REST-API
 
 .. note:: The error message text: ``SSL_connect: SSL:336032814: SSL routines: SSL23_GET_SERVER_HELLO: tlsv1 alert protocol version`` .
 
-AIMMS Evolution related to TLS evolution
+See also :doc:`Error message tlsv1 alert protocol version <../496/496-tls-connection-version>`
+
+Relating evolutions
 -----------------------------------------
 
-#.  AIMMS:
+AIMMS Evolution related to TLS evolution is as follows:
 
-    #.  All AIMMS 4 releases support TLS 1.0 - TLS 1.2.
+
+#.  AIMMS Developer:
+
+    #.  All AIMMS 4 releases support TLS 1.0, TLS 1.1, and TLS 1.2.
     
     #.  Since AIMMS 4.76.4, also TLS 1.3 is supported.
     
 #.  AIMMS PRO:
 
-    #.  All AIMMS PRO releases support TLS 1.0 - TLS 1.2.
-    
-    #.  Since AIMMS PRO 2.37.2 also TLS 1.3 is supported.
+    #.  The PRO AppLauncher, a separate component, supports TLS 1.0 and TLS 1.1 for all versions of AIMMS PRO.
+        This component is needed to start WinUI applications.
 
-Best practice
--------------
+    #.  The other components of AIMMS PRO, support TLS 1.0, TLS 1.1, and TLS 1.2.
+
+    #.  Since AIMMS PRO 2.37.2, TLS 1.3 is supported for all components of AIMMS PRO.
+
+Upgrading to AIMMS PRO 2.37.2 or later:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When AIMMS PRO is upgraded from before AIMMS PRO 2.37.2 to AIMMS PRO 2.37.2 or later; the PRO AppLauncher that supports TLS 1.3 also becomes available.
+For End-Users of WinUI applications to make use of this AppLauncher, they will need to 
+
+*   download (AIMMS PRO Portal > Help > Getting started > Button Download App Launcher) and 
+
+*   install it (by running the downloaded executable).
+
+.. note:: This AppLauncher requires the .NET Framework 4.0 or later, and to leverage TLS 1.3, it requires the .NET Framework 4.7 or later.
+
+Best practice   
+------------------------
 
 Regrettably, enforcing TLS 1.2 or TLS 1.3 is sometimes seen as a necessary part of an emergency response by an IT department to a security incident.
-To avoid being taken off guard by such a justifiable requirement, 
+To avoid being taken off guard by such an understandable response, 
 it is best practice to proactively switch to AIMMS PRO 2.37.2 (or later) and AIMMS 4.76.4 (or later).
 
 .. note:: The good news: when your application is deployed on AIMMS Cloud, TLS 1.3 is available!
