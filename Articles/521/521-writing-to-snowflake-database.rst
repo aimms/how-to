@@ -4,9 +4,9 @@ Writing to a Snowflake database
 .. Execution error while evaluating the assignment statement for "sp_connectionString" on line 1 in user-defined function section "PostMainInitialization". Error with SQLCreateConnectionString(ODBC, SnowflakeDSIIDriver, tna31667.snowflakecomputing.com, DEMO_DB, aimms): ODBC Driver 'SnowflakeDSIIDriver' is not installed on this system. For a list of available ODBC drivers, please refer to the AIMMS functions SQLNumberOfDrivers and SQLDriverName.
 
 `Snowflake <https://www.snowflake.com/>`_ is a modern cloud based data warehousing company, see `Wikipedia <https://en.wikipedia.org/wiki/Snowflake_Inc.>`_.
-Its databases can be accessed via ODBC, and a corresponding ODBC driver is available for `download <https://docs.snowflake.com/en/user-guide/odbc-download.html>`_.
+Its databases can be accessed via ODBC, and a corresponding ODBC driver is available for `download on their website<https://docs.snowflake.com/en/user-guide/odbc-download.html>`_.
 
-Creating schema's without specifying the widths of columns may lead you to encounter the following phrase in an AIMMS error message: ``Streaming value for bind variable not supported``.  In this trouble shooting article, a running example is used to:
+Creating schema's without specifying the widths of columns may lead to you encountering the following phrase in an AIMMS error message: ``Streaming value for bind variable not supported``.  In this article, a running example is used to:
 
 #.  :ref:`reproduction`  : Illustrate how the error message is reproduced.
 
@@ -23,7 +23,7 @@ First we create a table without being explicit about the column widths:
 
     create table "DEMO_DB"."PUBLIC" . "HowTo521" ( "NAME" VARCHAR, "AGE" INT ) ; 
 
-By asking for the design of the table created in the Swowflake Web Interface:
+Looking at the table created in Swowflake's web interface:
 
 .. image:: images/asking-design-table-how-to-521.png
     :align: center
@@ -33,12 +33,11 @@ We observe that the created table has the following design:
 .. image:: images/created-design-table-how-to-521.png
     :align: center
 
-The default width for VARCHAR of 16777216 is used for this table.
+The default width for ``VARCHAR``, 16777216 is used for this table.
 
 Using the following declarations in the AIMMS model:
 
 .. code-block:: aimms
-    :linenos:
 
     DeclarationSection HowTo521 {
         Set s_names {
@@ -63,7 +62,6 @@ Using the following declarations in the AIMMS model:
 And running the following procedure:
 
 .. code-block:: aimms
-    :linenos:
 
     Procedure pr_writeHT521 {
         Body: {
@@ -73,8 +71,10 @@ And running the following procedure:
 
 We encounter the following error message:
 
-.. note:: ``Error writing to database table "db_unknownPeopleWithAge": ODBC[21] : HY000 [Snowflake][Snowflake] (21)``
-          ``Streaming value for bind variable not supported: 2``     .
+.. code-block:: none
+    
+    Error writing to database table "db_unknownPeopleWithAge": ODBC[21] : HY000 [Snowflake][Snowflake] (21)
+    ``Streaming value for bind variable not supported: 2``.
 
 Thusfar the reproduction of the error message. Let's continue with a potential remedy.
 
@@ -83,9 +83,9 @@ Thusfar the reproduction of the error message. Let's continue with a potential r
 Remedy
 ---------
 
-The remedy chosen here is to reduce the column width of the column "NAME".
+The remedy chosen here is to explicitly specify the width of the column "NAME".
 
-At the time of writing this article, reducing the column width seemed only possible by first dropping the column and then recreating it with an explicit width as follows.
+At the time of writing this article, changing the column width seemed only possible by first dropping the column and then recreating it with an explicit width as follows.
 
 First drop the column name: 
 
@@ -93,7 +93,7 @@ First drop the column name:
 
     alter table "DEMO_DB"."PUBLIC" . "HowTo521" drop column "NAME"  ; 
 
-Then create it with a proper width:
+Then create it with a specific width:
 
 .. code-block:: sql
 
@@ -104,12 +104,17 @@ Checking the design of the altered table:
 .. image:: images/altered-design-table-how-to-521.png
     :align: center
 
-Writing again, asking for the data:
+
+Viewing the data after executing the AIMMS procedure ``pr_writeHT521`` again: 
+
+.. Writing again, asking for the data:
 
 .. image:: images/altered-design-data-table-how-to-521.png
     :align: center
 
 We see that the remedy worked.
+
+.. instead of "we see that the rememdy worked", can we include a couple lines explaining why this worked ? For example, Snowflake by default creates columns with width xyz, which is different from other database providers like MySQL, SQL server. AIMMS is incompatible with such a large column width.
 
 
 
