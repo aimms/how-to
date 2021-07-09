@@ -4,7 +4,7 @@ Writing to a Snowflake database
 .. Execution error while evaluating the assignment statement for "sp_connectionString" on line 1 in user-defined function section "PostMainInitialization". Error with SQLCreateConnectionString(ODBC, SnowflakeDSIIDriver, tna31667.snowflakecomputing.com, DEMO_DB, aimms): ODBC Driver 'SnowflakeDSIIDriver' is not installed on this system. For a list of available ODBC drivers, please refer to the AIMMS functions SQLNumberOfDrivers and SQLDriverName.
 
 `Snowflake <https://www.snowflake.com/>`_ is a modern cloud based data warehousing company, see `Wikipedia <https://en.wikipedia.org/wiki/Snowflake_Inc.>`_.
-Its databases can be accessed via ODBC, and a corresponding ODBC driver is available for `download on their website<https://docs.snowflake.com/en/user-guide/odbc-download.html>`_.
+Its databases can be accessed via ODBC, and a corresponding ODBC driver is available for `download on their website <https://docs.snowflake.com/en/user-guide/odbc-download.html>`_.
 
 Creating schema's without specifying the widths of columns may lead to you encountering the following phrase in an AIMMS error message: ``Streaming value for bind variable not supported``.  In this article, a running example is used to:
 
@@ -38,6 +38,7 @@ The default width for ``VARCHAR``, 16777216 is used for this table.
 Using the following declarations in the AIMMS model:
 
 .. code-block:: aimms
+    :linenos:
 
     DeclarationSection HowTo521 {
         Set s_names {
@@ -73,7 +74,7 @@ We encounter the following error message:
 
 .. code-block:: none
     
-    Error writing to database table "db_unknownPeopleWithAge": ODBC[21] : HY000 [Snowflake][Snowflake] (21)
+    ``Error writing to database table "db_unknownPeopleWithAge": ODBC[21] : HY000 [Snowflake][Snowflake] (21)``
     ``Streaming value for bind variable not supported: 2``.
 
 Thusfar the reproduction of the error message. Let's continue with a potential remedy.
@@ -112,9 +113,9 @@ Viewing the data after executing the AIMMS procedure ``pr_writeHT521`` again:
 .. image:: images/altered-design-data-table-how-to-521.png
     :align: center
 
-We see that the remedy worked.
+We see that the remedy worked; specifying a specific width turned out to be sufficient.
+The default of used by Snowflake of 16777216 turns out to be too much.
 
-.. instead of "we see that the rememdy worked", can we include a couple lines explaining why this worked ? For example, Snowflake by default creates columns with width xyz, which is different from other database providers like MySQL, SQL server. AIMMS is incompatible with such a large column width.
 
 
 
