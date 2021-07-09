@@ -6,6 +6,7 @@ Disallow: https://how-to.aimms.com/How to use this, man.html
 Disallow: https://how-to.aimms.com/Articles/122/122-AXLL-Library.html
 Disallow: https://how-to.aimms.com/Articles/160/160-super-slicing.html
 Disallow: https://how-to.aimms.com/Articles/166/166-shared-user-files.html
+Disallow: https://how-to.aimms.com/Articles/180/180-use-side-panel-with-old-menu.html
 Disallow: https://how-to.aimms.com/Articles/200/200-Measuring-Page-Loadtime.html
 Disallow: https://how-to.aimms.com/Articles/223/223-animation-with-colors-in-aimms.html
 Disallow: https://how-to.aimms.com/Articles/229/229-determine-number-of-available-processors-in-aimms.html
@@ -15,6 +16,7 @@ Disallow: https://how-to.aimms.com/Articles/233/233-display-multiple-identifiers
 Disallow: https://how-to.aimms.com/Articles/285/285-DatabaseConnection.html
 Disallow: https://how-to.aimms.com/Articles/286/286-mysql-odbc-driver-select.html
 Disallow: https://how-to.aimms.com/Articles/323/323-pro-storage-auth.html
+Disallow: https://how-to.aimms.com/Articles/329/329-vintage-more-logging.html
 Disallow: https://how-to.aimms.com/Articles/336/webui-annotations.html
 Disallow: https://how-to.aimms.com/Articles/368/368-attempting-connect.html
 Disallow: https://how-to.aimms.com/Articles/499/499-mysql-duplicate-records.html

@@ -19,8 +19,14 @@
                 "children": [
                   {
                     "name": "SKU",
-                    "type": "page",
+                    "type": "pagev2-grid",
                     "slug": "sku_1",
+                    "children": []
+                  },
+                  {
+                    "name": "SKU Temp",
+                    "type": "page",
+                    "slug": "sku_temp",
                     "children": []
                   }
                 ]
@@ -34,7 +40,84 @@
       "literal": "NOT_ALLOWED"
     }
   },
+  "layouts/custom_a0ef1e72-a42c-495b-b955-27d569bc8aff": {
+    "definition": {
+      "literal": {
+        "componentName": "Grid",
+        "props": {
+          "gridTemplateColumns": "1fr 2fr",
+          "gridTemplateRows": "1fr",
+          "gridTemplateAreas": "\"area-a area-b\""
+        },
+        "items": [
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-a",
+              "name": "Area Master",
+              "gridAutoFlow": "row"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-b",
+              "name": "Area Detail",
+              "gridAutoFlow": "row"
+            }
+          }
+        ]
+      }
+    },
+    "displayName": {
+      "literal": "Layout master detail"
+    }
+  },
   "pages/sku_1": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "ScalarSKUDetail",
+          "gridArea": "area-b",
+          "dndId": "area-aScalarSKUDetail0"
+        },
+        {
+          "widgetUri": "LegendSKUMaster",
+          "gridArea": "area-a",
+          "dndId": "area-aLegendSKUMaster1"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "custom_a0ef1e72-a42c-495b-b955-27d569bc8aff"
+    },
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_SKUFORM_SecondaryPageActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_SKUFORM_SecondaryPageActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "widgets": {
       "literal": [
         {
@@ -54,6 +137,53 @@
       ]
     }
   },
+  "pages/sku_temp": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_SKUFORM_SecondaryPageActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_SKUFORM_SecondaryPageActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "LegendSKUMaster_1",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2"
+          }
+        },
+        {
+          "uri": "ScalarSKUDetail_1",
+          "layoutInfo": {
+            "width": "4",
+            "height": "2"
+          }
+        }
+      ]
+    }
+  },
   "widgets/LegendSKUMaster": {
     "aimms.widget.type": {
       "literal": "legend"
@@ -61,9 +191,30 @@
     "contents": {
       "aimms": {
         "contents": [
-          "P_SKUFORM_Selection"
+          "bp_SKUFORM_Selection"
         ]
       }
+    },
+    "title": {
+      "literal": "SKUFORM Master View"
+    },
+    "name": {
+      "literal": "LegendSKUMaster"
+    }
+  },
+  "widgets/LegendSKUMaster_1": {
+    "aimms.widget.type": {
+      "literal": "legend"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "bp_SKUFORM_Selection"
+        ]
+      }
+    },
+    "name": {
+      "literal": "LegendSKUMaster (1)"
     },
     "title": {
       "literal": "SKUFORM Master View"
@@ -84,32 +235,33 @@
         ]
       }
     },
+    "name": {
+      "literal": "ScalarSKUDetail"
+    },
     "title": {
       "literal": "SKUFORM Detail View"
+    }
+  },
+  "widgets/ScalarSKUDetail_1": {
+    "aimms.widget.type": {
+      "literal": "scalar"
     },
-    "widgetactions": {
+    "contents": {
       "aimms": {
         "contents": [
-          "sp_SKUFORM_WidgetActions"
-        ],
-        "slices": [
-          {
-            "identifier": "sp_SKUFORM_WidgetActions",
-            "slice": [
-              {
-                "index": "i_SKUFORM_WidgetActionNumber",
-                "type": "free",
-                "value": "i_SKUFORM_WidgetActionNumber"
-              },
-              {
-                "index": "webui::indexWidgetActionSpec",
-                "type": "free",
-                "value": "webui::indexWidgetActionSpec"
-              }
-            ]
-          }
+          "webui_runtime::SKUForm_P_Stock",
+          "webui_runtime::SKUForm_EP_Color",
+          "webui_runtime::SKUForm_P_Volume",
+          "webui_runtime::SKUForm_SP_Manufacturer",
+          "webui_runtime::SKUForm_SP_SKUFORM_InternalName"
         ]
       }
+    },
+    "name": {
+      "literal": "ScalarSKUDetail (1)"
+    },
+    "title": {
+      "literal": "SKUFORM Detail View"
     }
   }
 }
