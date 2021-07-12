@@ -20,7 +20,7 @@ A graphical representation of the various timescales of different power systems 
    
    Figure 1 - Timelines for various Power System Planning Problems
 
-.. note:: For a more expansive formulation of the power system optimum operations planning problems we suggest reviewing the MATPOWER - MOST User's Manual [1]
+.. note:: For a more expansive formulation of the power system optimum operations planning problems we suggest reviewing the `MATPOWER - MOST User's Manual <https://matpower.org/docs/MOST-manual.pdf>`__
 
 Tutorials
 -----------
@@ -34,5 +34,4 @@ We have included two AIMMS tutorials for formulating and solving the above power
 
 .. note:: The UC tutorial is currently under construction but you can still use the page above to get an idea of the standard formulation of the UC problem which you can implement in AIMMS. 
 
-***************************
 	

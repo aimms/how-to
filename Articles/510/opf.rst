@@ -3,7 +3,7 @@ Optimal Power Flow (OPF)
 
 In this example, we will see how the problem of Optimal Power Flow (OPF) in a power system can be implemented and solved in AIMMS. In the following, we will first review the OPF problem, and then we will see its implementation in AIMMS.
 
-.. note:: For more information about the OPF problem modelling and data format used here, see authors' publication [1] and/or MATPOWER's documentation [2].
+.. note:: For more information about the OPF problem modelling and data format used here, see authors' publication [#1]_ and/or MATPOWER's documentation [#2]_.
 
 OPF problem
 --------------------------
@@ -60,7 +60,7 @@ The optimisation problem can therefore be written as below:
 
 Which is subject to satisfying constraints :eq:`PowerBalance`, :eq:`con_Pf`, and :eq:`con_Pt`.
 
-Also, note that we have using Matpower's Branch Model [2] for modelling the network branches. Figure below shows the branch model, where the branch parameters are marked on the diagram. :math:`rs` and :math:`xs` are the series resistance and reactance, respectively. The total charging susceptance :math:`bc` together with these series elements forms the standard :math:`\pi` transmission line model. The transformer tap ratio has a magnitude :math:`m_a` and phase shift angle *theta_sh*.
+Also, note that we have using Matpower's Branch Model [#2]_ for modelling the network branches. Figure below shows the branch model, where the branch parameters are marked on the diagram. :math:`rs` and :math:`xs` are the series resistance and reactance, respectively. The total charging susceptance :math:`bc` together with these series elements forms the standard :math:`\pi` transmission line model. The transformer tap ratio has a magnitude :math:`m_a` and phase shift angle *theta_sh*.
 
 
 .. figure:: figures/branch_model.png
@@ -82,6 +82,15 @@ OPF implementation for the IEEE 14-bus system can be downloaded from :download:`
 
 The list of identifiers used in this project are shown below. These will be explained in the following.
 
+.. raw:: html
+  
+  <style>
+    div.small-equ mjx-container {
+      font-size: 100% !important;
+    }
+  </style>
+
+.. rst-class:: small_equ
 
 .. math::
 
@@ -162,12 +171,9 @@ We have also defined other auxiliary variables that we will need later on in our
     :align: center
 
  
-References
-============
-[1] Alvarez-Bustos, A., Kazemtabrizi, B., Shahbazi, M. and Acha-Daza, E., 2021. Universal branch model for the solution of optimal power flows in hybrid AC/DC grids. International Journal of Electrical Power & Energy Systems, 126, p.106543.
-doi: 10.1016/j.ijepes.2020.106543
+.. rubric:: References
 
 
-[2] R. D. Zimmerman, C. E. Murillo-Sanchez. MATPOWER User's Manual, Version 7.1. 2020.
-[Online]. Available: https://matpower.org/docs/MATPOWER-manual-7.1.pdf
-doi: 10.5281/zenodo.4074122
+.. [#1] Alvarez-Bustos, A., Kazemtabrizi, B., Shahbazi, M. and Acha-Daza, E., 2021. Universal branch model for the solution of optimal power flows in hybrid AC/DC grids. International Journal of Electrical Power & Energy Systems, 126, p.106543. doi: 10.1016/j.ijepes.2020.106543
+
+.. [#2] R. D. Zimmerman, C. E. Murillo-Sanchez. MATPOWER User's Manual, Version 7.1. 2020. [Online]. Available: https://matpower.org/docs/MATPOWER-manual-7.1.pdf doi: 10.5281/zenodo.4074122
