@@ -16,43 +16,58 @@ OPF is an optimisation problem. The objective function, as mentioned above, is n
 
 
 .. math::
-	f(x)= \displaystyle\sum_{i=1}^{ng} f_c (P^{\{ i\}}_g) \label{objective} \tag{1} 
+	f(x)= \displaystyle\sum_{i=1}^{ng} f_c (P^{\{ i\}}_g) 
+        :label: objective  
 
 
 where :math:`ng` is the number of generators, :math:`f_c` is the cost for each generator and :math:`x` is the vector of the optimisation variables, which are bus powers and voltages:
 
 .. math::
-
-	x={[P_g, Q_g, V_a, V_m]}^T \label{x} \tag{2} 
+	x={[P_g, Q_g, V_a, V_m]}^T 
+        :label: x  
 	
-There are of course some constraints in this optimisation problem: active and reactive power balance equations for all buses, limits on transmission lines, and also upper and lower limits for the vector of state variables :math:`x`. These constraints are shown in equations below respectively:
+The following constraints are defined for the standard AC OPF problem formulation: 
 
 .. math:: 
-
-	S_{bus}(x)+S_d-S_g=0  \label{PowerBalance} \tag{3}
+	S_{bus}(x)+S_d-S_g=0  
+        :label: PowerBalance 
 	
 where
 
 .. math:: 
-
-	S_{bus}(X)=[V]{I_{bus}}^*=[V]{{Y}_{bus}}^*V^*  \label{con_s} 
+	S_{bus}(X)=[V][I_{bus}^{*}]=[V]({Y}_{bus}^{*})V^{*}  
+        :label: con_s 
 
 .. math:: 
-
-		({P_f}^{\{ i\}}(x))^2+{\left({Q_f}^{\lbrace i\rbrace}(x)\right)}^2 \leq {\left({S}^{\lbrace i\rbrace}_{{L}}\right)}^2 \label{con_Pf} \tag{4}
+	({P_f}^{\{ i\}}(x))^2+{\left({Q_f}^{\lbrace i\rbrace}(x)\right)}^2 \leq {\left({S}^{\lbrace i\rbrace}_{{L}}\right)}^2 
+        :label: con_Pf 
 
 .. math::
-		{\left({P_t}^{\lbrace i\rbrace}(x)\right)}^2+{\left({Q_t}^{\lbrace i\rbrace}(x)\right)}^2 \leq {\left({S}^{\lbrace i\rbrace}_{{L}}\right)}^2 \label{con_Pt} \tag{5} 
+	{\left({P_t}^{\lbrace i\rbrace}(x)\right)}^2+{\left({Q_t}^{\lbrace i\rbrace}(x)\right)}^2 \leq {\left({S}^{\lbrace i\rbrace}_{{L}}\right)}^2 
+        :label: con_Pt 
+
+* Equation :eq:`PowerBalance` corresponds to the nodal Active and Reactive power balances for each node in the system. 
+
+* Equation :eq:`con_s` is the definition of the nodal complex power from which nodal Active and Reactive power injections at each node can be calculated. 
+
+* Equations :eq:`con_Pf` and :eq:`con_Pt` are the allowable total power carrying capacity limit of transmission lines. 
 	
 
 The optimisation problem can therefore be written as below:
 
 .. math::
-	\begin{align}
-		\text{minimize } f(x)	\\
-		\text{subject to } (\ref{PowerBalance})-(\ref{con_Pt})
-	\end{align}
-	
+	\min f(x)	\\
+
+Which is subject to satisfying constraints :eq:`PowerBalance`, :eq:`con_Pf`, and :eq:`con_Pt`.
+
+Also, note that we have using Matpower's Branch Model [2] for modelling the network branches. Figure below shows the branch model, where the branch parameters are marked on the diagram. :math:`rs` and :math:`xs` are the series resistance and reactance, respectively. The total charging susceptance :math:`bc` together with these series elements forms the standard :math:`\pi` transmission line model. The transformer tap ratio has a magnitude :math:`m_a` and phase shift angle *theta_sh*.
+
+
+.. figure:: figures/branch_model.png
+    :scale: 40%
+    :align: center
+
+    The network branch model
 	
 OPF Implementation in AIMMS
 -------------------------------	
@@ -64,6 +79,34 @@ OPF implementation for the IEEE 14-bus system can be downloaded from :download:`
 	Alvarez-Bustos, A., Kazemtabrizi, B., Shahbazi, M. and Acha-Daza, E., 2021. Universal branch model for the solution of optimal power flows in hybrid AC/DC grids. International Journal of Electrical Power & Energy Systems, 126, p.106543.
 	
 	doi: 10.1016/j.ijepes.2020.106543
+
+The list of identifiers used in this project are shown below. These will be explained in the following.
+
+
+.. math::
+
+   \begin{align}
+   & \textbf{Indices:} \\
+   &&& \text{$b$} & & \text{Buses} \\
+   &&& \text{$g$} & & \text{Generators}\\
+   &&& \text{$l$} & & \text{Lines (branches)} \\
+   &&& \text{$cc$} & & \text{Cost Coefficients} \\[0.5pc]
+   & \textbf{Parameters:} \\
+   &&& \text{$VmMax, VmMin$} & & \text{Maximum and minimum voltage for bus $b$} \\
+   &&& \text{$PL, QL$} & & \text{Load active and reactive power for bus $b$} \\
+   &&& \text{$GShunt, BShunt$} & & \text{Conductance and susceptance at bus $b$} \\
+   &&& \text{$Pmin, Pmax, Qmin, Qmax$} & & \text{Maximum and minimum active and reactive powers for generator $g$} \\
+   &&& \text{$PCostCoeff, QCostCoeff$} & & \text{Cost coefficients for generator $g$} \\
+   &&& \text{$GenLoc$} & & \text{Location of generator $g$ in the set of buses} \\
+   &&& \text{$rs , xs$} & & \text{Branch series resistance and reactance for branch $l$} \\
+   &&& \text{$bc$} & & \text{Branch shunt susceptance for branch $l$} \\
+   &&& \text{$RateA$} & & \text{Maximum power (or current) for branch $l$} \\
+   &&& \text{$ma , ThetaSh$} & & \text{Branch model transformer turn ratio parameters for branch $l$} \\
+   &&& \text{$fb, tb$} & & \text{From and To buses for each branch $l$, from the set of buses}\\[0.5pc]
+   & \textbf{Variables:} \\
+   &&& \text{$Vm , Va$} & & \text{Voltage magnitude and phase angle for bus $b$} \\
+   &&& \text{$Pg , Qg$} & & \text{Active and Reactive powers for generator $g$} \\[0.5pc]
+   \end{align}
 
 The project consists of different parts, which are explained below:
 
