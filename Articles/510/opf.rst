@@ -1,3 +1,16 @@
+.. raw:: html
+
+  <style>
+    div.duration.docutils.container {
+      float: right;
+    }
+  </style>
+ 
+.. container:: duration
+    
+  .. image:: Department_of_Engineering_Full_Colour.svg
+      :target: https://www.durham.ac.uk/departments/academic/engineering/
+
 Optimal Power Flow (OPF)
 =============================
 
@@ -71,7 +84,7 @@ Also, note that we have using Matpower's Branch Model [#2]_ for modelling the ne
 	
 OPF Implementation in AIMMS
 -------------------------------	
-OPF implementation for the IEEE 14-bus system can be downloaded from :download:`here <OPF.zip>`.
+OPF implementation for the IEEE 14-bus system can be downloaded from :download:`here <OPF AIMMS Model.zip>`.
 
 .. note:: 
 	We request that works that use this project cite the paper below:
@@ -119,7 +132,10 @@ The list of identifiers used in this project are shown below. These will be expl
 
 The project consists of different parts, which are explained below:
 
-**1- Sets:** we have buses, generators and branches in our power system. These are defined and shown using *sets*. For example, the set of all buses in the IEEE 14-bus system is defined as shown in the figure below. Buses here are numbered from B1 to B14. An index ``b`` is defined to represent this set. Similarly, an index ``l`` refers to all branches (lines) in our system.
+1- Sets 
+++++++++++++++
+
+We have buses, generators and branches in our power system. These are defined and shown using *sets*. For example, the set of all buses in the IEEE 14-bus system is defined as shown in the figure below. Buses here are numbered from B1 to B14. An index ``b`` is defined to represent this set. Similarly, an index ``l`` refers to all branches (lines) in our system.
 
 .. image:: figures/set1.png
     :align: center
@@ -130,7 +146,10 @@ You can see that the generation costs are also defined as a set of three values 
 .. math::
 	f_c (P^{\{ i\}}_g)= 	CC1_i {(P^{\{ i\}}_g)}^2 + CC2_i{(P^{\{ i\}}_g)} +CC3_i
 	
-**2- Case data:** The information about the system can be added here. For example, for adding :math:`r_s` values of branch data, a new parameter rs is added and the index domain is defined as ``l`` which is previously defined as the index for branches (in Sets). Figure below shows has this can be done:
+2- Case data
+++++++++++++++++++++
+
+The information about the system can be added here. For example, for adding :math:`r_s` values of branch data, a new parameter ``rs`` is added and the index domain is defined as ``l`` which is previously defined as the index for branches (in Sets). Figure below shows has this can be done:
 
 .. image:: figures/rs.png
     :align: center
@@ -138,13 +157,16 @@ You can see that the generation costs are also defined as a set of three values 
 
 .. |current_data_icon| image:: figures/current_data.png
 	
-Now if you click on "Current data" (|current_data_icon|), the :math:`r_s` values can be easily added as shown below. Note that because we have defined the domain for :math:`r_s` as ``l``, therefore AIMMS automatically asks for rs values for all branches in our system.
+By checking the data of the ``rs`` parameter (``CTRL + D`` or ``RIGHT CLICK`` → **Data...**), the :math:`r_s` values can be easily added as shown below. Note that because we have defined the domain for :math:`r_s` as ``l``, therefore AIMMS automatically asks for ``rs`` values for all branches in our system.
 
 
  .. image:: figures/rs_data.png
     :align: center
 
-**3- Variables:** The next step is to define the variables, and their limits. The main variables in our optimisation problem are :math:`x ={[P_g, Q_g, V_a, V_m]}^T`. These are defined as shown in the figure below. Note that AIMMS makes it very easy to define the variables over the right domain. For example, as we have one :math:`V_a` and one :math:`V_m` for each bus, we have set the ``index domain`` for these variables as ``b``, which is the index for the Set `Bus`. Similarly, :math:`P_g` and :math:`Q_g` are defined over the domain `Gen`.
+3- Variables
+++++++++++++++++++++
+
+The next step is to define the variables, and their limits. The main variables in our optimisation problem are :math:`x ={[P_g, Q_g, V_a, V_m]}^T`. These are defined as shown in the figure below. Note that AIMMS makes it very easy to define the variables over the right domain. For example, as we have one :math:`V_a` and one :math:`V_m` for each bus, we have set the `index domain` for these variables as ``b``, which is the index for the Set ``Bus``. Similarly, :math:`P_g` and :math:`Q_g` are defined over the domain ``Gen``.
 
 .. image:: figures/main_variables.png
     :align: center
@@ -153,21 +175,35 @@ We have also defined other auxiliary variables that we will need later on in our
 
 .. For the complete formulation of the power flow problem, you can either check MATPOWER's manual, or authors' paper [1].
 
-**4- Constraints:** Defining the constraints is very straightforward. As an example, the figure below shows how the inequality constraints of eq. (4) can be implemented. Again it is worth noting that by setting the index domain correctly, we have applied the inequality power constraint to all the branches in our system.
+4- Constraints
+++++++++++++++++++++
+
+Defining the constraints is very straightforward. As an example, the figure below shows how the inequality constraints of :eq:`con_s` can be implemented. Again it is worth noting that by setting the `index domain` correctly, we have applied the inequality power constraint to all the branches in our system.
 
 .. image:: figures/ineq_constraints.png
     :align: center
 	
-**5- The objective function:** the objective function is defined in the ``mathematical program`` named as *OPF*. The objective is to minimise the varialbe *GenCost* which is defined to calculate the total generation cost of the system.
+5- The objective function
+++++++++++++++++++++++++++
+
+the objective function is defined in the `mathematical program` identifier named as *OPF*. The objective is to minimise the variable ``GenCost`` which is defined to calculate the total generation cost of the system.
 
 .. image:: figures/objective_function.png
     :align: center
 	
-**6- Initialisation and Main Execution:** The problem is initialised and then solved here.
+6- Initialisation and Main Execution
++++++++++++++++++++++++++++++++++++++
 
-**7- Pages:** AIMMS also makes it easy to design a GUI for interating with the optimisation problem. For details of how this can be done, refer to the relevant AIMMS tutorials. Here, as shown in figure below, the opf_solution_page is designed to show the solution variables.
+The problem is initialised in the ``PostMainInitialization`` pre-build procedure and then solved in the ``MainExecution``.
 
-.. image:: figures/opf_solution_page.png
+.. seealso:: :ref:`postmaininitialization` 
+
+7- Pages
++++++++++++++
+
+AIMMS also makes it easy to design a data page for interacting with the optimisation problem. For details of how this can be done, refer to `this WebUI Tutorial <https://documentation.aimms.com/webui/quick-start.html>`_. Here, as shown in figure below, the `OPF Solution` page is designed to show the solution variables.
+
+.. image:: figures/opf_solution_page_webui.png
     :align: center
 
  

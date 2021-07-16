@@ -1,0 +1,264 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2021-04-18 09:05:23">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>70D356AD-AC87-4BA5-B70C-DF185A6ABC75</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Table">
+		<Location top="288" left="990" bottom="432" right="1266" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>PCostCoeff( g, cc )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="10" Decimals="5" Alignment="Right" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Table">
+		<Location top="42" left="606" bottom="648" right="984" />
+		<TabOrder>2</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>PL( b )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="7" Decimals="3" Alignment="Right" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>QL( b )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="7" Decimals="2" Alignment="Right" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>VmMin( b )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="5" Decimals="2" Alignment="Right" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>Vm( b )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="5" Decimals="2" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>VmMax( b )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="5" Decimals="2" Alignment="Right" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>BShunt( b )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="7" Decimals="4" Alignment="Center" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Table">
+		<Location top="42" left="990" bottom="282" right="1266" />
+		<TabOrder>3</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>Pmin( g )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="9" Decimals="4" Alignment="Right" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>Pmax( g )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="9" Decimals="4" Alignment="Right" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>Qmin( g )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="9" Decimals="4" Alignment="Right" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>Qmax( g )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="9" Decimals="4" Alignment="Right" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Table">
+		<Location top="42" left="6" bottom="648" right="456" />
+		<TabOrder>4</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>fb( l )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="7" Decimals="0" Alignment="Right" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>tb( l )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="7" Decimals="0" Alignment="Right" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>rs( l )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="7" Decimals="4" Alignment="Right" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>xs( l )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="7" Decimals="4" Alignment="Right" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>bc( l )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="7" Decimals="4" Alignment="Right" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>ma( l )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="5" Decimals="2" Alignment="Right" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>RateA( l )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="9" Decimals="3" Alignment="Right" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Table">
+		<Location top="438" left="990" bottom="582" right="1266" />
+		<TabOrder>5</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>QCostCoeff( g, cc )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="10" Decimals="5" Alignment="Right" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="162" left="1272" bottom="204" right="1410" />
+		<TabOrder>6</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Solve OPF"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>MainExecution</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="114" left="1272" bottom="156" right="1410" />
+		<TabOrder>7</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Initialise"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>PostMainInitialization</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="0" left="12" bottom="24" right="192" />
+		<StaticText>Case Data</StaticText>
+		<Alignment>Center</Alignment>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="24" left="198" bottom="48" right="342" />
+		<StaticText>Branch Parameters</StaticText>
+		<Alignment>Center</Alignment>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="24" left="660" bottom="48" right="804" />
+		<StaticText>Bus Parameters</StaticText>
+		<Alignment>Center</Alignment>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="24" left="1038" bottom="48" right="1182" />
+		<StaticText>Generator Parameters</StaticText>
+		<Alignment>Center</Alignment>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Table">
+		<Location top="42" left="1272" bottom="72" right="1410" />
+		<TabOrder>9</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>Sbase</Identifier>
+			<FirstColumn>0</FirstColumn>
+			<NumberFormat Width="4" Decimals="0" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="24" left="1272" bottom="48" right="1362" />
+		<StaticText>MW Base</StaticText>
+		<Alignment>Center</Alignment>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Table">
+		<Location top="78" left="1272" bottom="108" right="1410" />
+		<TabOrder>8</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>GenCost</Identifier>
+			<FirstColumn>0</FirstColumn>
+			<NumberFormat Width="10" Decimals="4" Alignment="Center" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>Sbase</Symbol>
+			<Symbol>VmMax</Symbol>
+			<Symbol>VmMin</Symbol>
+			<Symbol>PL</Symbol>
+			<Symbol>QL</Symbol>
+			<Symbol>BShunt</Symbol>
+			<Symbol>Pmax</Symbol>
+			<Symbol>Pmin</Symbol>
+			<Symbol>Qmax</Symbol>
+			<Symbol>Qmin</Symbol>
+			<Symbol>PCostCoeff</Symbol>
+			<Symbol>QCostCoeff</Symbol>
+			<Symbol>fb</Symbol>
+			<Symbol>tb</Symbol>
+			<Symbol>rs</Symbol>
+			<Symbol>xs</Symbol>
+			<Symbol>bc</Symbol>
+			<Symbol>RateA</Symbol>
+			<Symbol>ma</Symbol>
+			<Symbol>Vm</Symbol>
+			<Symbol>GenCost</Symbol>
+			<Symbol>PostMainInitialization</Symbol>
+			<Symbol>MainExecution</Symbol>
+			<Symbol>b</Symbol>
+			<Symbol>g</Symbol>
+			<Symbol>l</Symbol>
+			<Symbol>cc</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

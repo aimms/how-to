@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2018-11-05 12:31:25">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>3AC5991C-EEF2-45B6-AFF8-6A596FC5349A</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Text">
+		<Location top="0" left="12" bottom="30" right="294" />
+		<StaticText>Case57-14-AC Voltage Profile</StaticText>
+		<Alignment>Center</Alignment>
+		<Font GUID="B0667223-F963-46F0-A458-86DA17ECE351" Name="Title" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="2D Chart">
+		<Location top="30" left="6" bottom="474" right="1218" />
+		<TabOrder>1</TabOrder>
+		<Border Style="InShadow" Width="2" />
+		<X_Axis>
+			<Domain ID="1004">b</Domain>
+		</X_Axis>
+		<Y_Axis>
+			<Identifier>
+				<Value ID="2007">Vm( b )</Value>
+			</Identifier>
+			<Scale>
+				<Data_minimum ID="2033">0</Data_minimum>
+				<Data_maximum ID="2034">1.5</Data_maximum>
+			</Scale>
+		</Y_Axis>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>Vm</Symbol>
+			<Symbol>b</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>
