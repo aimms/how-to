@@ -1,3 +1,16 @@
+.. raw:: html
+
+  <style>
+    div.duration.docutils.container {
+      float: right;
+    }
+  </style>
+ 
+.. container:: duration
+    
+  .. image:: Department_of_Engineering_Full_Colour.svg
+      :target: https://www.durham.ac.uk/departments/academic/engineering/
+
 Unit Commitment
 ================
 
@@ -59,6 +72,5 @@ References
 ============
 
 [1] Zimmerman, R. D., and Murillo-Sanchez, C. E., 2020, MATPOWER Optimal Scheduling Tool - MOST 1.1 User's Manual
-	
-	***************************
+
 	
