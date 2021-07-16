@@ -1,0 +1,100 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "primarypageaction": {
+      "aimms": {
+        "contents": [
+          "sp_primaryAction"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_primaryAction",
+            "slice": [
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "bp_indicatorAB",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/bp_indicatorAB": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "bp_indicatorAB"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_a"
+        ],
+        "colHeader": [
+          "i_b"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_b": "window"
+          },
+          "width": 17.5
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "i_b": "door"
+          },
+          "width": 11.22
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_a",
+          "width": 18.44
+        }
+      ]
+    },
+    "name": {
+      "literal": "bp_indicatorAB"
+    },
+    "title": {
+      "literal": "Relation indicator"
+    }
+  }
+}

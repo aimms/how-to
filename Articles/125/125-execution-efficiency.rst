@@ -90,7 +90,7 @@ These are some general rules.
 In practice, lots of the performance improvements are done on by trial and error.  
 And AIMMS diagnostic tools, such as Debugger, Profiler, and Identifier Cardinalities Viewer can help with identifying the performance bottleneck. 
 You can refer to  `AIMMS The Users's Guide <https://documentation.aimms.com/_downloads/AIMMS_user.pdf>`_    for how to use them. 
-And more insights of AIMMS execution engine can be found in chapters "The AIMMS Sparse Execution Engine" and "Execution Efficiency Cookbook" of `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_   .
+And more insights of AIMMS execution engine can be found in chapters :doc:`sparse-execution/the-aimms-sparse-execution-engine/index` and :doc:`sparse-execution/execution-efficiency-cookbook/index`.
 
 
 
