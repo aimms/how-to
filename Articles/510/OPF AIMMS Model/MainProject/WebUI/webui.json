@@ -339,7 +339,7 @@
       "literal": "Branch Power Profile"
     },
     "title": {
-      "literal": "case 14 Branch Power Profile"
+      "literal": "Case14 Branch Power Profile"
     }
   },
   "widgets/Bus": {
@@ -761,7 +761,7 @@
       "literal": false
     },
     "title": {
-      "literal": "Case57-14-AC Voltage Profile"
+      "literal": "Case14 Voltage Profile"
     },
     "yaxis.max": {
       "literal": 1.5

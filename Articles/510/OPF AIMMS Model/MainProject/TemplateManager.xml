@@ -1,7 +1,1 @@
 <?xml version="1.0"?>
-<TemplateManager>
-	<Page Name="Case Data" PageGUID="DA3C93FF-C566-4659-9F47-CB72B4E1BDF0" />
-	<Page Name="OPF Solution" PageGUID="4F7A8147-F7A5-4B2D-962A-EB6F8F221622" />
-	<Page Name="OPF Voltage Profile" PageGUID="EFB73BAE-8BAF-4AE2-B737-A9CA4D16CAC7" />
-	<Page Name="OPF Power Profile" PageGUID="B63EC64F-59B6-4C30-96AF-A65C904BD214" />
-</TemplateManager>

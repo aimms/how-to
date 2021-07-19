@@ -54,7 +54,8 @@ We have included two AIMMS tutorials for formulating and solving the above power
       :target: https://www.durham.ac.uk/departments/academic/engineering/
       :width: 30%
  
-  These tutorials were made available thanks to great work of `Pr. Bezhad Kazemtabrizi <https://www.durham.ac.uk/staff/behzad-kazemtabrizi/>`_ and `Pr. Mahmoud Shahbazi <https://www.durham.ac.uk/staff/mahmoud-shahbazi/>`_ from the Durham University.
+  These tutorials were made available thanks to great work of `Dr. Bezhad Kazemtabrizi <https://www.durham.ac.uk/staff/behzad-kazemtabrizi/>`_, `Dr. Mahmoud Shahbazi <https://www.durham.ac.uk/staff/mahmoud-shahbazi/>`_ and `Dr. Abraham Alvarez-Bustos <https://www.linkedin.com/in/aalvarezb/?originalSubdomain=uk>`_ from the Durham University.
+  
 
 
 

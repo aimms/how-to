@@ -45,3 +45,4 @@ time_messages 1
 * NETSOL
 * Environment
 Startup_Case "data\case14_pglib.data"
+Default_UI 0
