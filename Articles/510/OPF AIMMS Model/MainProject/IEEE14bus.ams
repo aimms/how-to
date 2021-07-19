@@ -153,44 +153,44 @@ Model OPF_IEEE_14_bus {
 		}
 		Section CalculationData {
 			DeclarationSection BranchVariables {
-				Variable RYff {
+				Parameter RYff {
 					IndexDomain: l;
 					Range: free;
 					Definition: (rs(l)/((rs(l)^2)+(xs(l)^2)))*(1/((ma(l))^2));
 				}
-				Variable RYft {
+				Parameter RYft {
 					IndexDomain: l;
 					Range: free;
 					Definition: {
 						(-rs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*cos(ThetaSh(l))-(xs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*sin(ThetaSh(l));
 					}
 				}
-				Variable RYtf {
+				Parameter RYtf {
 					IndexDomain: l;
 					Range: free;
 					Definition: (-rs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*cos(ThetaSh(l))   +    (xs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*sin(ThetaSh(l));
 				}
-				Variable RYtt {
+				Parameter RYtt {
 					IndexDomain: l;
 					Range: free;
 					Definition: rs(l)/((rs(l)^2)+(xs(l)^2));
 				}
-				Variable IYff {
+				Parameter IYff {
 					IndexDomain: l;
 					Range: free;
 					Definition: ((-xs(l)/((rs(l)^2)+(xs(l)^2)))+(bc(l)/2))*(1/((ma(l))^2));
 				}
-				Variable IYft {
+				Parameter IYft {
 					IndexDomain: l;
 					Range: free;
 					Definition: (-rs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*sin(ThetaSh(l))+(xs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*cos(ThetaSh(l));
 				}
-				Variable IYtf {
+				Parameter IYtf {
 					IndexDomain: l;
 					Range: free;
 					Definition: (rs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*sin(ThetaSh(l))    +    (xs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*cos(ThetaSh(l));
 				}
-				Variable IYtt {
+				Parameter IYtt {
 					IndexDomain: l;
 					Range: free;
 					Definition: -xs(l)/((rs(l)^2)+(xs(l)^2))+(bc(l)/2);
@@ -295,19 +295,7 @@ Model OPF_IEEE_14_bus {
 			Qg(g) := (Qmax(g)+Qmin(g))/2;
 			ma(l):=maMax(l);
 			
-			
 			!Initialise Extra Variables
-			RYff(l):=(rs(l)/((rs(l)^2)+(xs(l)^2)))*(1/((ma(l))^2));
-			RYft(l):=(-rs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*cos(ThetaSh(l))-(xs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*sin(ThetaSh(l));
-			RYtf(l):=(-rs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*cos(ThetaSh(l))   +    (xs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*sin(ThetaSh(l));
-			RYtt(l):=rs(l)/((rs(l)^2)+(xs(l)^2));
-			
-			IYff(l):=((-xs(l)/((rs(l)^2)+(xs(l)^2)))+(bc(l)/2))*(1/((ma(l))^2));
-			IYft(l):=(-rs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*sin(ThetaSh(l))+(xs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*cos(ThetaSh(l));
-			IYtf(l):=(rs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*sin(ThetaSh(l))    +    (xs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*cos(ThetaSh(l));
-			IYtt(l):=-xs(l)/((rs(l)^2)+(xs(l)^2))+(bc(l)/2);
-			
-			
 			Pf(l) :=RYff(l)*((Vm(fb(l)))^2)+RYft(l)*(Vm(fb(l)))*(Vm(tb(l)))*cos((Va(fb(l)))-(Va(tb(l))))+IYft(l)*(Vm(fb(l)))*(Vm(tb(l)))*sin((Va(fb(l)))-(Va(tb(l))));
 			Pt(l) :=((Vm(tb(l)))^2)*RYtt(l) + (Vm(tb(l)))*(Vm(fb(l)))*RYtf(l)*cos( (Va(tb(l)))-(Va(fb(l))) ) + (Vm(tb(l)))*(Vm(fb(l)))*IYtf(l)*sin( (Va(tb(l)))-(Va(fb(l))) );
 			Qf(l) :=-IYff(l)*((Vm(fb(l)))^2) - IYft(l)*(Vm(fb(l)))*(Vm(tb(l)))*cos( (Va(fb(l)))-(Va(tb(l))) ) + RYft(l)*(Vm(fb(l)))*(Vm(tb(l)))*sin( (Va(fb(l)))-(Va(tb(l))) );
