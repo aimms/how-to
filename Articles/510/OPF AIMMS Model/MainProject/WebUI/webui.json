@@ -1,0 +1,770 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "OPF Solution",
+                "slug": "home",
+                "children": []
+              },
+              {
+                "name": "Case Data",
+                "type": "page",
+                "slug": "opf_solution",
+                "children": []
+              },
+              {
+                "name": "OPF Voltage Profile",
+                "type": "page",
+                "slug": "opf_voltage",
+                "children": []
+              },
+              {
+                "name": "OPF Power Profile",
+                "type": "page",
+                "slug": "new_page",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "maxcolumns": {
+      "literal": 11
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Branch Power",
+          "layoutInfo": {
+            "width": "4",
+            "height": "4",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Bus Voltage",
+          "layoutInfo": {
+            "width": "2",
+            "height": "4",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Generation",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "MW Base_1",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Initialise_1",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "Solve OPF_1",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "PCost",
+          "layoutInfo": {
+            "width": "3",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Qcost",
+          "layoutInfo": {
+            "width": "3",
+            "height": "1",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "pages/new_page": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "Branch Power Profile",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsBranch Power Profile0"
+        }
+      ]
+    },
+    "maxcolumns": {
+      "literal": 10
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Branch Power Profile",
+          "layoutInfo": {
+            "width": "8",
+            "height": "3",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "pages/opf_solution": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Branch",
+          "layoutInfo": {
+            "width": "4",
+            "height": "4",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Bus",
+          "layoutInfo": {
+            "width": "3",
+            "height": "4",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Generator",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "PCostCoeff",
+          "layoutInfo": {
+            "width": "3",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Qcostcoeff",
+          "layoutInfo": {
+            "width": "3",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "MW Base",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "Initialise",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "Solve OPF",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "pages/opf_voltage": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "maxcolumns": {
+      "literal": 10
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Voltage",
+          "layoutInfo": {
+            "width": "8",
+            "height": "3",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/Branch": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "fb",
+          "tb",
+          "rs",
+          "xs",
+          "bc",
+          "ma",
+          "RateA"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "l"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "Branch"
+    },
+    "title": {
+      "literal": "Branch Parameters"
+    }
+  },
+  "widgets/Branch Power": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "fb",
+          "tb",
+          "Pf",
+          "Qf",
+          "Pt",
+          "Qt",
+          "Sf",
+          "St",
+          "RateA"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "l"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "Branch Power"
+    },
+    "title": {
+      "literal": "Branch Power Injections"
+    }
+  },
+  "widgets/Branch Power Profile": {
+    "aimms.widget.type": {
+      "literal": "barchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "Sf",
+          "St",
+          "RateA"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "l"
+        ],
+        "grouped": [
+          "<IDENTIFIER-SET>"
+        ],
+        "stacked": [],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "Branch Power Profile"
+    },
+    "title": {
+      "literal": "Case14 Branch Power Profile"
+    }
+  },
+  "widgets/Bus": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "PL",
+          "QL",
+          "VmMin",
+          "Vm",
+          "VmMax",
+          "BShunt"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "b"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "Bus"
+    },
+    "title": {
+      "literal": "Bus Parameters"
+    }
+  },
+  "widgets/Bus Voltage": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "Va",
+          "Vm"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "va": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "b"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "Bus Voltage"
+    },
+    "title": {
+      "literal": "Bus Voltage"
+    }
+  },
+  "widgets/Generation": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "Pg",
+          "Qg",
+          "Pmax",
+          "Qmin",
+          "Qmax"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "g"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "Generation"
+    },
+    "title": {
+      "literal": "Generation Results"
+    }
+  },
+  "widgets/Generator": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "Pmin",
+          "Pmax",
+          "Qmin",
+          "Qmax"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "pmin": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "g"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "Generator"
+    },
+    "title": {
+      "literal": "Generator Parameters"
+    }
+  },
+  "widgets/Initialise": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "PostMainInitialization"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "Initialise"
+    },
+    "title": {
+      "literal": "Initialise"
+    }
+  },
+  "widgets/Initialise_1": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "PostMainInitialization"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "Initialise (1)"
+    },
+    "title": {
+      "literal": "Initialise"
+    }
+  },
+  "widgets/MW Base": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "Sbase",
+          "GenCost"
+        ]
+      }
+    },
+    "name": {
+      "literal": "MW Base"
+    },
+    "title": {
+      "literal": "MW Base"
+    }
+  },
+  "widgets/MW Base_1": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "Sbase",
+          "GenCost"
+        ]
+      }
+    },
+    "name": {
+      "literal": "MW Base (1)"
+    },
+    "title": {
+      "literal": "MW Base"
+    }
+  },
+  "widgets/PCost": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "PCostCoeff"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "pcostcoeff": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "g"
+        ],
+        "colHeader": [
+          "cc"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "name": {
+      "literal": "PCost"
+    },
+    "title": {
+      "literal": "Active Power Cost Coefficients"
+    }
+  },
+  "widgets/PCostCoeff": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "PCostCoeff"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "pcostcoeff": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "g"
+        ],
+        "colHeader": [
+          "cc"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "name": {
+      "literal": "PCostCoeff"
+    },
+    "title": {
+      "literal": "Active Power Cost Coefficients"
+    }
+  },
+  "widgets/Qcost": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "QCostCoeff"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "qcostcoeff": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "g"
+        ],
+        "colHeader": [
+          "cc"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "name": {
+      "literal": "Qcost"
+    },
+    "title": {
+      "literal": "Reactive Power Cost Coefficients"
+    }
+  },
+  "widgets/Qcostcoeff": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "QCostCoeff"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "qcostcoeff": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "g"
+        ],
+        "colHeader": [
+          "cc"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "name": {
+      "literal": "Qcostcoeff"
+    },
+    "title": {
+      "literal": "Reactive Power Cost Coefficients"
+    }
+  },
+  "widgets/Solve OPF": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "MainExecution"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "Solve OPF"
+    },
+    "title": {
+      "literal": "Solve OPF"
+    }
+  },
+  "widgets/Solve OPF_1": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "MainExecution"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "Solve OPF (1)"
+    },
+    "title": {
+      "literal": "Solve OPF"
+    }
+  },
+  "widgets/Voltage": {
+    "aimms.widget.type": {
+      "literal": "linechart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "Vm"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "b"
+        ],
+        "stacked": [],
+        "overlays": [],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "name": {
+      "literal": "Voltage"
+    },
+    "show.area": {
+      "literal": false
+    },
+    "title": {
+      "literal": "Case14 Voltage Profile"
+    },
+    "yaxis.max": {
+      "literal": 1.5
+    }
+  }
+}
