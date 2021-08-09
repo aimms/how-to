@@ -34,16 +34,16 @@ In the procedure, first I would like to have AIMMS point to the file so I can re
     endif;
 
 I used a String Parameter ``WorkBookName`` to take the file name. 
-The code in the "if-else" statement is to avoid opening the workbook again if it is already opened. If it was already opened, I would just select it by calling ``axll::SelectWorkBook`` function; otherwise,I would open the file by the ``axll::OpenWorkBook`` function.
+The code in the :any:`if` statement is to avoid opening the workbook again if it is already opened. If it was already opened, I would just select it by calling :any:`axll::SelectWorkBook` function; otherwise,I would open the file by the :any:`axll::OpenWorkBook` function.
 
-The next thing is to use ``axll::SelectSheet`` to set the sheet I am going to use.
+The next thing is to use :any:`axll::SelectSheet` to set the sheet I am going to use.
 
 .. code-block:: aimms
 
     axll::SelectSheet("free-zipcode-database-Primary");
 
     
-Then I use ``axll::ReadSet`` function to read value for set ``sZipCode``.
+Then I use :any:`axll::ReadSet` function to read value for set ``sZipCode``.
 
 .. code-block:: aimms
 
@@ -52,12 +52,12 @@ Then I use ``axll::ReadSet`` function to read value for set ``sZipCode``.
         SetRange        : "A2:A42523",
         ExtendSuperSets : 1);
 
-The first argument, ``SetReference``, is the set name. The second argument, ``SetRange``, is the range in Excel. The third argument, ``ExtendSuperSets``, is telling AIMMS to extend this set's super set when the elements read in this Excel are not part of the super set.
+The first argument, :any:`axll::ReadSet::SetReference`, is the set name. The second argument, :any:`axll::ReadSet::SetRange`, is the range in Excel. The third argument, :any:`axll::ReadSet::ExtendSuperSets`, is telling AIMMS to extend this set's super set when the elements read in this Excel are not part of the super set.
 
 Adding Parameters
 ------------------
 
-Next, I want to make sure I can read the following data in two dimensional parameters ``Coordinates(z,iLonLat)``, by using ``axll::ReadTable``.
+Next, I want to make sure I can read the following data in two dimensional parameters ``Coordinates(z,iLonLat)``, by using :any:`axll::ReadTable`.
 
 .. code-block:: aimms
 
@@ -75,7 +75,7 @@ In case you have an identifier with more dimensions, ``RowHeaderRange`` is the r
         :scale: 150 %
         
 
-Then the ``axll::ReadTable`` statement will be:
+Then the :any:`axll::ReadTable` statement will be:
 
 .. code-block:: aimms
 
@@ -85,7 +85,7 @@ Then the ``axll::ReadTable`` statement will be:
         ColumnHeaderRange   : "E4:K7",
         DataRange           : "E8:K18");
         
-Continuing with the zip code example. I then use ``axll::ReadSet`` to read in data for set ``sState``.
+Continuing with the zip code example. I then use :any:`axll::ReadSet` to read in data for set ``sState``.
 
 .. code-block:: aimms
 
@@ -94,7 +94,7 @@ Continuing with the zip code example. I then use ``axll::ReadSet`` to read in da
         SetRange        : "D2:D42523",
         ExtendSuperSets : 1);
 
-And ``axll::ReadList`` to read in data ``ZipCodeState(z)``, which holds the state name that each zip code belongs to.
+And :any:`axll::ReadList` to read in data ``ZipCodeState(z)``, which holds the state name that each zip code belongs to.
 
 .. code-block:: aimms
 
@@ -103,12 +103,12 @@ And ``axll::ReadList`` to read in data ``ZipCodeState(z)``, which holds the stat
         RowHeaderRange      : "A2:A42523",
         DataRange           : "D2:D42523");
          
-``axll::ReadList`` is designed for reading in data which is represented as lists in Excel. 
-So it is only with RowHeaderRange. The following Excel Sheet is an example with ``"A8:D17"`` as ``RowHeaderRange`` and ``"E8:E17"`` as DataRange.
+:any:`axll::ReadList` is designed for reading in data which is represented as lists in Excel. 
+So it is only with ``RowHeaderRange``. The following Excel Sheet is an example with ``"A8:D17"`` as ``RowHeaderRange`` and ``"E8:E17"`` as DataRange.
 
 .. image:: images/Excel4-e1465308154550.png
 
-At this point, everything I need to use in my model is in there, so I use ``axll::CloseWorkBook`` to close the workbook.
+At this point, everything I need to use in my model is in there, so I use :any:`axll::CloseWorkBook` to close the workbook.
 
 .. code-block:: aimms
 

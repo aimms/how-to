@@ -1,0 +1,129 @@
+## ams_version=1.0
+
+Model Main_snowflake {
+	DeclarationSection Connection {
+		StringParameter sp_connectionString;
+		Parameter p_test;
+	}
+	Section Section_1 {
+		Procedure pr_writeHT521 {
+			Body: {
+				write to table db_unknownPeopleWithAge ;
+			}
+		}
+		DeclarationSection HowTo521 {
+			Set s_names {
+				Index: i_name;
+				Definition: data { jane, joe, jill };
+			}
+			Parameter p_age {
+				IndexDomain: i_name;
+				Definition: data { jane : 22, joe : 63, jill : 19 };
+			}
+			DatabaseTable db_unknownPeopleWithAge {
+				DataSource: sp_connectionString;
+				TableName: "HowTo521";
+				Owner: "PUBLIC";
+				Mapping: {
+					"NAME" -->i_name,
+					"AGE"   -->p_age
+				}
+			}
+		}
+	}
+	Set s_dataPoints {
+		Index: i_dp;
+		Definition: data{e-1 .. e-5};
+	}
+	Parameter p_data {
+		IndexDomain: i_dp;
+		Definition: ord(i_dp);
+	}
+	DatabaseTable db_snowflake {
+		DataSource: sp_connectionString;
+		TableName: "AIMMS";
+		Owner: "PUBLIC";
+		Mapping: {
+			"MY_INDEX" -->i_dp,
+			"MY_VAL"   -->p_data
+		}
+	}
+	Section Application_initialization_execution_and_termination {
+		Procedure MainInitialization {
+			Body: {
+				ProfilerStart();
+			}
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Body: {
+				sp_connectionString := SQLCreateConnectionString(
+					DatabaseInterface              : 'ODBC' , 
+					DriverName                     : "SnowflakeDSIIDriver" , 
+					ServerName                     : "tna31667.snowflakecomputing.com" , 
+					DatabaseName                   : "DEMO_DB" , 
+					UserId                         : "aimms" , 
+					Password                       : "s3#hWy6zT*DZ3t" , 
+					AdditionalConnectionParameters :  );
+				
+				p_test := TestDataSource(
+					Datasource  :  sp_connectionString , 
+					interactive :  0, 
+					timeout     :  3);
+				
+				if p_test then
+					StatusMessage("Connection successful");
+				else
+					StatusMessage("Connection not established");
+				endif;
+			}
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure MainExecution {
+			Body: {
+				write to table db_snowflake in insert mode;
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: minute->s : #-># * 60;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsWebUI.
+				
+				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
+			}
+		}
+	}
+}

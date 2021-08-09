@@ -20,7 +20,6 @@ This section contains explanations of various UI features available when buildin
    /Articles/95/95-change-default-ui
    /Articles/235/235-change-chart-view
    /Articles/download-compressed-files/download-compressed-files
-   /Articles/180/180-use-side-panel-with-old-menu
    /Articles/309/309-workflow-panel-element-and-string-parameters
    /Articles/322/322-combine-bar-line-chart
    /Articles/338/338-viewing-schedules-different-scenarios

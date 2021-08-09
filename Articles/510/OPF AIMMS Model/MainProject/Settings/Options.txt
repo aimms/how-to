@@ -1,0 +1,48 @@
+﻿* AIMMS
+major_messages 1
+progress_compilation 1
+progress_execution 1
+progress_solution 1
+progress_time_interval 1
+time_messages 1
+* AOA
+* BARON 21
+* CBC 2.9
+* CONOPT 3.14V
+* CONOPT 4.0
+"CONOPT 4.0".Status_file_display 3
+"CONOPT 4.0".Write_to_standard_output 3
+* CONOPT 4.1
+* CPLEX 12.10
+* CPLEX 12.9
+* CPLEX 20.1
+* CPOptimizer 12.10
+* CPOptimizer 12.9
+* CPOptimizer 20.1
+* GUROBI 8.1
+* GUROBI 9.0
+* GUROBI 9.1
+* IPOPT 3.11
+"IPOPT 3.11".Print_all_available_algorithmic_options 1
+"IPOPT 3.11".Print_all_user_selected_options 1
+"IPOPT 3.11".Status_file 1
+* Knitro 11.1
+* Knitro 12.2
+* Knitro 12.3
+* MINOS
+"MINOS".Print_to_log_file 1
+"MINOS".Solution_progress 1
+* ODH-CPLEX 4.0
+* ODH-CPLEX 5.0
+* ODH-CPLEX 5.3
+* PATH 4.7
+* SNOPT 7.2
+* XA 16
+* Knitro 12.0
+"Knitro 12.0".MIP_output_level 1
+"Knitro 12.0".Multi_algorithm_output 1
+"Knitro 12.0".Status_file_display 6
+* NETSOL
+* Environment
+Startup_Case "data\case14_pglib.data"
+Default_UI 0

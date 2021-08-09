@@ -17,7 +17,8 @@ Recently added
 .. Added 12 March 2020: 331
 .. Added 14 Feb 2020: 108-10, 108-09, 108-07
 
-
+* :doc:`/Articles/520/520-evolution-of-transport-layer-security`
+* :doc:`/Articles/519/519-reading-relations-indexed-sets`
 * :doc:`/Articles/517/517-runtime-functions-with-arguments`
 * :doc:`/Articles/351/351-app-initialization-termination-with-libraries`
 * :doc:`/Articles/310/310-incident-handling-for-organizations`

@@ -1,0 +1,7 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"Main_caseBase" "Main_casePegase1354" "2020-01-02 14:40:52"
+"Alpha" "Alpha1" "2020-02-19 12:33:35"
+"Beta" "Beta2" "2020-02-19 12:33:42"
+"Gamma" "Gamma3" "2020-02-19 12:33:47"
+"MinCost" "OPF" "2020-02-19 12:40:17"
+"Main_casePegase1354" "OPF_IEEE_14_bus" "2021-02-15 00:08:17"

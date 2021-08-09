@@ -1,0 +1,358 @@
+## ams_version=1.0
+
+Model OPF_IEEE_14_bus {
+	Comment: {
+		"Authors: Mahmoud Shahbazi (mahmoud.shahbazi@durham.ac.uk), Abraham Alvarez-Bustos
+		
+		We request that works that use this project cite the paper below:
+		
+		Alvarez-Bustos, A., Kazemtabrizi, B., Shahbazi, M. and Acha-Daza, E., 2021. Universal branch model for the solution of optimal power flows in hybrid AC/DC grids. International Journal of Electrical Power & Energy Systems, 126, p.106543.
+		doi: 10.1016/j.ijepes.2020.106543"
+	}
+	Section Data_Model {
+		DeclarationSection sets {
+			Set Bus {
+				Index: b;
+				OrderBy: user;
+				Definition: {
+					data{
+					B1 , B2 , B3 , B4 , B5 , B6 , B7 , B8 , B9 , B10 , B11 , B12 , B13 , B14 
+					}
+				}
+			}
+			Set Gen {
+				Index: g;
+				Definition: ElementRange(1,5, Prefix: "G");
+			}
+			Set Line {
+				Index: l;
+				Definition: ElementRange(1,20, Prefix: "L");
+			}
+			Set CostCoefficient {
+				Index: cc;
+				Definition: {
+					! (n2)x^2 + (n1)x +n0 MATPOWER Style
+					! CC1 x^2 + CC2x +CC3 AIMMS Style
+					ElementRange(1,3, Prefix: "CC")
+				}
+			}
+		}
+		Section CaseData {
+			DeclarationSection MVABase {
+				Parameter Sbase {
+					Definition: {
+						!The base is in MVA
+						100;
+					}
+				}
+				Parameter Pi {
+					Definition: {
+						3.14159265359
+						!used for the calculation of losses
+					}
+				}
+			}
+			DeclarationSection Buses {
+				Parameter VmMax {
+					IndexDomain: b;
+				}
+				Parameter VmMin {
+					IndexDomain: b;
+				}
+				Parameter PL {
+					IndexDomain: b;
+				}
+				Parameter QL {
+					IndexDomain: b;
+				}
+				Parameter GShunt {
+					IndexDomain: b;
+				}
+				Parameter BShunt {
+					IndexDomain: b;
+				}
+			}
+			DeclarationSection Generators {
+				ElementParameter GenLoc {
+					IndexDomain: g;
+					Range: Bus;
+				}
+				Parameter Pmax {
+					IndexDomain: g;
+				}
+				Parameter Pmin {
+					IndexDomain: g;
+				}
+				Parameter Qmax {
+					IndexDomain: g;
+				}
+				Parameter Qmin {
+					IndexDomain: g;
+				}
+				Parameter PCostCoeff {
+					IndexDomain: (g,cc);
+				}
+				Parameter QCostCoeff {
+					IndexDomain: (g,cc);
+				}
+			}
+			DeclarationSection Branches {
+				ElementParameter fb {
+					IndexDomain: l;
+					Range: Bus;
+				}
+				ElementParameter tb {
+					IndexDomain: l;
+					Range: Bus;
+				}
+				Parameter rs {
+					IndexDomain: l;
+				}
+				Parameter xs {
+					IndexDomain: l;
+				}
+				Parameter bc {
+					IndexDomain: l;
+				}
+				Parameter RateA {
+					IndexDomain: l;
+				}
+				Parameter ma {
+					IndexDomain: l;
+				}
+				Parameter maMax {
+					IndexDomain: l;
+				}
+				Parameter maMin {
+					IndexDomain: l;
+				}
+				Parameter ThetaSh {
+					IndexDomain: l;
+				}
+			}
+		}
+	}
+	Section Math_Model {
+		DeclarationSection OptVarBasic {
+			Variable Va {
+				IndexDomain: b;
+				Range: free;
+			}
+			Variable Vm {
+				IndexDomain: b;
+				Range: [VmMin(b), VmMax(b)];
+			}
+			Variable Pg {
+				IndexDomain: g;
+				Range: [Pmin(g), Pmax(g)];
+			}
+			Variable Qg {
+				IndexDomain: g;
+				Range: [Qmin(g), Qmax(g)];
+			}
+		}
+		Section CalculationData {
+			DeclarationSection BranchVariables {
+				Parameter RYff {
+					IndexDomain: l;
+					Range: free;
+					Definition: (rs(l)/((rs(l)^2)+(xs(l)^2)))*(1/((ma(l))^2));
+				}
+				Parameter RYft {
+					IndexDomain: l;
+					Range: free;
+					Definition: {
+						(-rs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*cos(ThetaSh(l))-(xs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*sin(ThetaSh(l));
+					}
+				}
+				Parameter RYtf {
+					IndexDomain: l;
+					Range: free;
+					Definition: (-rs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*cos(ThetaSh(l))   +    (xs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*sin(ThetaSh(l));
+				}
+				Parameter RYtt {
+					IndexDomain: l;
+					Range: free;
+					Definition: rs(l)/((rs(l)^2)+(xs(l)^2));
+				}
+				Parameter IYff {
+					IndexDomain: l;
+					Range: free;
+					Definition: ((-xs(l)/((rs(l)^2)+(xs(l)^2)))+(bc(l)/2))*(1/((ma(l))^2));
+				}
+				Parameter IYft {
+					IndexDomain: l;
+					Range: free;
+					Definition: (-rs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*sin(ThetaSh(l))+(xs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*cos(ThetaSh(l));
+				}
+				Parameter IYtf {
+					IndexDomain: l;
+					Range: free;
+					Definition: (rs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*sin(ThetaSh(l))    +    (xs(l)/((ma(l))*((rs(l)^2)+(xs(l)^2))))*cos(ThetaSh(l));
+				}
+				Parameter IYtt {
+					IndexDomain: l;
+					Range: free;
+					Definition: -xs(l)/((rs(l)^2)+(xs(l)^2))+(bc(l)/2);
+				}
+			}
+			DeclarationSection PowerInjectionVariables {
+				Variable Pf {
+					IndexDomain: l;
+					Range: free;
+					Definition: RYff(l)*((Vm(fb(l)))^2)+RYft(l)*(Vm(fb(l)))*(Vm(tb(l)))*cos((Va(fb(l)))-(Va(tb(l))))+IYft(l)*(Vm(fb(l)))*(Vm(tb(l)))*sin((Va(fb(l)))-(Va(tb(l))));
+				}
+				Variable Pt {
+					IndexDomain: l;
+					Range: free;
+					Definition: ((Vm(tb(l)))^2)*RYtt(l) + (Vm(tb(l)))*(Vm(fb(l)))*RYtf(l)*cos( (Va(tb(l)))-(Va(fb(l))) ) + (Vm(tb(l)))*(Vm(fb(l)))*IYtf(l)*sin( (Va(tb(l)))-(Va(fb(l))) );
+				}
+				Variable Qf {
+					IndexDomain: l;
+					Range: free;
+					Definition: -IYff(l)*((Vm(fb(l)))^2) - IYft(l)*(Vm(fb(l)))*(Vm(tb(l)))*cos( (Va(fb(l)))-(Va(tb(l))) ) + RYft(l)*(Vm(fb(l)))*(Vm(tb(l)))*sin( (Va(fb(l)))-(Va(tb(l))) );
+				}
+				Variable Qt {
+					IndexDomain: l;
+					Range: free;
+					Definition: -1*((Vm(tb(l)))^2)*IYtt(l) - (Vm(tb(l)))*(Vm(fb(l)))*IYtf(l)*cos( (Va(tb(l)))-(Va(fb(l))) ) + (Vm(tb(l)))*(Vm(fb(l)))*RYtf(l)*sin( (Va(tb(l)))-(Va(fb(l))) );
+				}
+				Variable Sf {
+					IndexDomain: l;
+					Range: free;
+					Definition: sqrt(Pf(l)^2 + Qf(l)^2);
+				}
+				Variable St {
+					IndexDomain: l;
+					Range: free;
+					Definition: sqrt(Pt(l)^2 + Qt(l)^2);
+				}
+			}
+		}
+		Section CaseConstraint {
+			DeclarationSection EqualityConstraints {
+				Constraint VaSlack {
+					Definition: {
+						Va('B1')=0; !Reference Bus
+					}
+				}
+				Constraint Pbal {
+					IndexDomain: b;
+					Definition: sum[l|fb(l)=b,Pf(l)]        + sum[l|tb(l)=b,Pt(l)      ] + PL(b)       - sum[g|GenLoc(g)=b, Pg(g)] = 0;
+				}
+				Constraint Qbal {
+					IndexDomain: b;
+					Definition: sum[l|fb(l)=b,Qf(l)       ] + sum[l|tb(l)=b,Qt(l)      ] + QL(b)       - sum[g|GenLoc(g)=b, Qg(g)      ] - (BShunt(b)*      (Vm(b)^2)) = 0;
+				}
+			}
+			DeclarationSection InequalityConstraints {
+				Constraint hSf {
+					IndexDomain: l;
+					Definition: {
+						Pf(l)^2 + Qf(l)^2  <= RateA(l)^2
+						!( (Pf(l)*Sbase)^2 + (Qf(l)*Sbase)^2 ) <= (RateA(l)*Sbase)^2
+					}
+				}
+				Constraint hSt {
+					IndexDomain: l;
+					Definition: {
+						Pt(l)^2 + Qt(l)^2 <= RateA(l)^2
+						!( (Pt(l)*Sbase)^2 + (Qt(l)*Sbase)^2 ) <= (RateA(l)*Sbase)^2
+					}
+				}
+			}
+		}
+		DeclarationSection ObjectiveFunction {
+			Variable GenCost {
+				Range: free;
+				Definition: sum[g,PCostCoeff(g,'CC1')*   (Pg(g)*Sbase)^2 + PCostCoeff(g,'CC2')*   (Pg(g)*Sbase) + PCostCoeff(g,'CC3')];
+			}
+			Variable SystemLosses {
+				Range: free;
+				Definition: sum[l,abs((Pf(l)*Sbase)+(Pt(l)*Sbase))];
+			}
+			MathematicalProgram OPF {
+				Objective: GenCost;
+				Direction: minimize;
+				Constraints: AllConstraints;
+				Variables: AllVariables;
+				Type: Automatic;
+			}
+		}
+	}
+	Procedure MainInitialization {
+		Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+	}
+	Procedure PostMainInitialization {
+		Body: {
+			CaseFileLoad("data/case14_pglib.data");
+			
+			!Initialise Voltages
+			Vm(b):=(VmMax(b)+VmMin(b))/2; !voltage control
+			Va(b):=0;
+			!Initialise Generators
+			Pg(g) := (Pmax(g)+Pmin(g))/2;
+			Qg(g) := (Qmax(g)+Qmin(g))/2;
+			ma(l):=maMax(l);
+			
+			!Initialise Extra Variables
+			Pf(l) :=RYff(l)*((Vm(fb(l)))^2)+RYft(l)*(Vm(fb(l)))*(Vm(tb(l)))*cos((Va(fb(l)))-(Va(tb(l))))+IYft(l)*(Vm(fb(l)))*(Vm(tb(l)))*sin((Va(fb(l)))-(Va(tb(l))));
+			Pt(l) :=((Vm(tb(l)))^2)*RYtt(l) + (Vm(tb(l)))*(Vm(fb(l)))*RYtf(l)*cos( (Va(tb(l)))-(Va(fb(l))) ) + (Vm(tb(l)))*(Vm(fb(l)))*IYtf(l)*sin( (Va(tb(l)))-(Va(fb(l))) );
+			Qf(l) :=-IYff(l)*((Vm(fb(l)))^2) - IYft(l)*(Vm(fb(l)))*(Vm(tb(l)))*cos( (Va(fb(l)))-(Va(tb(l))) ) + RYft(l)*(Vm(fb(l)))*(Vm(tb(l)))*sin( (Va(fb(l)))-(Va(tb(l))) );
+			Qt(l) :=-1*((Vm(tb(l)))^2)*IYtt(l) - (Vm(tb(l)))*(Vm(fb(l)))*IYtf(l)*cos( (Va(tb(l)))-(Va(fb(l))) ) + (Vm(tb(l)))*(Vm(fb(l)))*RYtf(l)*sin( (Va(tb(l)))-(Va(fb(l))) );
+			Sf(l) :=sqrt(Pf(l)^2 + Qf(l)^2);
+			St(l) :=sqrt(Pt(l)^2 + Qt(l)^2);
+			
+			!Initialise Objective function
+			GenCost :=sum[g,PCostCoeff(g,'CC1')*(Pg(g)*Sbase)^2 + PCostCoeff(g,'CC2')*(Pg(g)*Sbase) + PCostCoeff(g,'CC3')];
+			SystemLosses := sum[l,abs((Pf(l)*Sbase)+(Pt(l)*Sbase))];
+		}
+		Comment: {
+			"Add initialization statements here that require that the libraries are already initialized properly,
+			or add statements that require the Data Management module to be initialized."
+		}
+	}
+	Procedure MainExecution {
+		Body: {
+			Solve OPF;
+		}
+	}
+	Procedure PreMainTermination {
+		Body: {
+			return DataManagementExit();
+		}
+		Comment: {
+			"Add termination statements here that require all libraries to be still alive.
+			Return 1 if you allow the termination sequence to continue.
+			Return 0 if you want to cancel the termination sequence."
+		}
+	}
+	Procedure MainTermination {
+		Body: {
+			return 1;
+		}
+		Comment: {
+			"Add termination statements here that do not require all libraries to be still alive.
+			Return 1 to allow the termination sequence to continue.
+			Return 0 if you want to cancel the termination sequence.
+			It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+		}
+	}
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: minute->s : #-># * 60;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsWebUI.
+				
+				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
+			}
+		}
+	}
+}
