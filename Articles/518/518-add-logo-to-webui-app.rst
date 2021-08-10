@@ -1,3 +1,5 @@
+:orphan:
+
 Add logo to WebUI app
 ======================
 
@@ -40,21 +42,26 @@ In case you want to tweak the .css file for your application:
 
 #.  On line 7: you can fill in the name of the image of your logo. Acceptable file format is ``.png``.
 
-#.  Lines 8,9 define the size of the icon on screen. Do / don't tweak with: ...
+#.  Lines 9,10 define the size of the icon on screen. 
 
-#.  To retain aspect ratio use...
+    For instance, halving the width results in:
 
-#.  Line 10 specifies the space between the Menu-icon and the app-logo.  Increasing that to 80px looks as follows:
+    .. image:: images/halving-width.png
+        :align: center
+        
+    Note that aspect ratio of the image is kept.
+
+#.  Line 11 specifies the space between the Menu-icon and the app-logo.  Increasing that to 80px looks as follows:
 
     .. image:: images/increasing-margin-left.png
         :align: center
 
-#.  Line 11 specifies the space between the logo and the app-name.  Increasing that to 87px looks as follows:
+#.  Line 12 specifies the space between the logo and the app-name.  Increasing that to 87px looks as follows:
 
     .. image:: images/increasing-margin-right.png
         :align: center
 
-#.  Line 12 options are: 
+#.  Line 13 options are: 
 
     #.  ``middle`` (advised)
     
@@ -63,3 +70,10 @@ In case you want to tweak the .css file for your application:
     #.  ``bottom``
     
 #.  Line 13: transform.  The options can be found at: 
+
+
+.. Questions:
+.. Lines 8,9: Is it correct that aspect ratio is kept? 
+..            Should the advise therefore be to actually obtain width of image and compute line... as ...
+..            To retain aspect ratio use... / To ignore the aspect ratio use...
+.. Line 13: good ref?
