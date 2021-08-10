@@ -50,7 +50,7 @@ We have included two AIMMS tutorials for formulating and solving the above power
 
 .. admonition:: Acknowlegment
 
-  .. image:: Department_of_Engineering_Full_Colour.svg
+  .. image:: Department_of_Engineering_Full_Colour.png
       :target: https://www.durham.ac.uk/departments/academic/engineering/
       :width: 30%
  
