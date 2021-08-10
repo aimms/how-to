@@ -10,7 +10,7 @@ Send and Receive Messages
 
 .. sidebar:: ListeningConnectionId
 
-    .. image:: images/159915.svg
+    .. image:: images/159915.png
 
 This article is a follow up of :doc:`80-schedule-jobs`
 

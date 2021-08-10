@@ -8,7 +8,7 @@
  
 .. container:: duration
     
-  .. image:: Department_of_Engineering_Full_Colour.svg
+  .. image:: Department_of_Engineering_Full_Colour.png
       :target: https://www.durham.ac.uk/departments/academic/engineering/
 
 
