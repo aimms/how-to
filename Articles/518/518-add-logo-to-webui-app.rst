@@ -5,7 +5,7 @@ Add logo to WebUI app
 
 This short article illustrates adding a logo to an AIMMS WebUI application.
 
-Please :download:`The AIMMS 4.81 sample application <model/truckMaker.zip>` to experiment with the example.
+Please download :download:`The AIMMS 4.81 sample application <model/truckMaker.zip>` to experiment with the example.
 
 As provided the top bar of the app looks as follows:
 
@@ -35,7 +35,7 @@ Contents of the folder ``<project>\MainProject\WebUI\resources\css`` are the ico
         transform: translateY(-3px);
     }
 
-In case you want to tweak the .css file for your application:
+Some remarks about the above code, in case you want to adopt and adapt the above .css file for your application:
 
 #.  Lines 1-3: This code is needed such that the space taken up for the icon is nicely aligned with other elements presented in the top bar of the application. 
     We advise against changing these lines.
@@ -50,6 +50,8 @@ In case you want to tweak the .css file for your application:
         :align: center
         
     Note that aspect ratio of the image is kept.
+    
+    You probably want to set the width to <image-width>/(<image-height>/22) and keep the height as in the example ``.css`` file.
 
 #.  Line 11 specifies the space between the Menu-icon and the app-logo.  Increasing that to 80px looks as follows:
 
@@ -64,14 +66,25 @@ In case you want to tweak the .css file for your application:
 #.  Line 13 options are: 
 
     #.  ``middle`` (advised)
-    
-    #.  ``top``
-    
+
+        .. image:: images/as-delivered-icon.png
+            :align: center
+
+    #.  ``top`` 
+
+        .. image:: images/verticle-align-top.png
+            :align: center
+
     #.  ``bottom``
     
-#.  Line 13: transform.  The options can be found at: 
+        .. image:: images/verticle-align-bottom.png
+            :align: center
 
+    As you can see, when the image nicely fits the region it is presented in, the difference, if any, is hardly noticeable.
 
+#.  Line 13: Examples of the numerous transformations supported by the `transform property <https://www.w3schools.com/cssref/css3_pr_transform.asp>`_ are rotating, scaling, and moving. 
+
+ 
 .. Questions:
 .. Lines 8,9: Is it correct that aspect ratio is kept? 
 ..            Should the advise therefore be to actually obtain width of image and compute line... as ...

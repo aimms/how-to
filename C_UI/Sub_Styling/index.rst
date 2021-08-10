@@ -21,6 +21,8 @@ This section contains tips for customizing the appearance of your AIMMS user int
    /Articles/221/221-adding-a-custom-splash-screen
    /Articles/234/234-align-multiple-objects-winui
 
+..   /Articles/518/518-add-logo-to-webui-app
+
 From the AIMMS Design System:
 
 * `3 Tips for a Better Page Layout <https://design-system.aimms.com/page-structure>`_
