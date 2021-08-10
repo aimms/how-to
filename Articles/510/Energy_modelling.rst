@@ -8,7 +8,7 @@
  
 .. container:: duration
     
-  .. image:: Department_of_Engineering_Full_Colour.png
+  .. image:: Department_of_Engineering_Full_Colour.svg
       :target: https://www.durham.ac.uk/departments/academic/engineering/
 
 
@@ -46,11 +46,12 @@ We have included two AIMMS tutorials for formulating and solving the above power
    opf
    UC
 
+
 .. note:: The UC tutorial is currently under construction but you can still use the page above to get an idea of the standard formulation of the UC problem which you can implement in AIMMS. 
 
 .. admonition:: Acknowlegment
 
-  .. image:: Department_of_Engineering_Full_Colour.png
+  .. image:: Department_of_Engineering_Full_Colour.svg
       :target: https://www.durham.ac.uk/departments/academic/engineering/
       :width: 30%
  
