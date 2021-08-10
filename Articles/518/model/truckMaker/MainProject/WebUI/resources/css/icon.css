@@ -1,0 +1,40 @@
+/* This adds an icon in front of the application name in the header
+ *
+ * Add an icon that is at least 23 pixels wide and 22 pixels high.
+ * icons will automatically be resized to fit, so any larger icon
+ * will always fit.
+ *
+ * If you have an icon that is much wider than it is high,
+ * you could try increasing the "width" value below to make
+ * it more visible.
+ */
+
+.theme-aimms header h1 .pages .app-name {
+  margin-top:5px; /* this fixes the alignment with the icon */
+}
+
+.theme-aimms header h1 .pages .app-name::before {
+  content: ' ';
+  background: url(icon.png) no-repeat center/contain;
+  float: left;
+  width: 23px;
+  height: 22px;
+  margin-left: 0px;
+  margin-right: 7px;
+  vertical-align: middle;
+  transform: translateY(-3px);
+}
+
+
+/* original specification:
+.theme-aimms header h1 .pages .app-name::before {
+  content: ' ';
+  background: url(icon.png) no-repeat center/contain;
+  float: left;
+  width: 23px;
+  height: 22px;
+  margin-right: 7px;
+  vertical-align: middle;
+  transform: translateY(-3px);
+}
+*/
