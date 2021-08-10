@@ -74,5 +74,6 @@
    C_Deployment/index
    C_Evolution/index
    examples/index
-   Recently_added
+
+..   Recently_added
    
