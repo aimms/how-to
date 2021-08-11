@@ -9,11 +9,18 @@ Please download :download:`The AIMMS 4.81 sample application <model/truckMaker.z
 
 As provided the top bar of the app looks as follows:
 
-.. image:: images/as-delivered-icon.png
+.. image:: images/left-upper-with-icon.png
     :align: center
 
+To achieve this, the following two files:
 
-Contents of the folder ``<project>\MainProject\WebUI\resources\css`` are the icon file ``icon.png`` and the css file ``icon.css``.
+#.  ``icon.png``
+
+#.  ``icon.css``
+
+have been added to the folder ``<project>\MainProject\WebUI\resources\css``.
+Of course you should replace ``icon.png`` by an image file of your liking. 
+The contents of the ``icon.css`` are presented below and then discussed.
 
 .. code-block:: css
     :linenos:
@@ -35,7 +42,7 @@ Contents of the folder ``<project>\MainProject\WebUI\resources\css`` are the ico
         transform: translateY(-3px);
     }
 
-Some remarks about the above code, in case you want to adopt and adapt the above .css file for your application:
+Some remarks about the above code, in case you want to adopt and adapt the above ``.css`` file for your application:
 
 #.  Lines 1-3: This code is needed such that the space taken up for the icon is nicely aligned with other elements presented in the top bar of the application. 
     We advise against changing these lines.
@@ -51,7 +58,7 @@ Some remarks about the above code, in case you want to adopt and adapt the above
         
     Note that aspect ratio of the image is kept.
     
-    You probably want to set the width to <image-width>/(<image-height>/22) and keep the height as in the example ``.css`` file.
+    You probably want to set the width to <image-width>/(<image-height>/22) of the image of your logo and keep the height as in the example ``.css`` file.
 
 #.  Line 11 specifies the space between the Menu-icon and the app-logo.  Increasing that to 80px looks as follows:
 
@@ -63,7 +70,7 @@ Some remarks about the above code, in case you want to adopt and adapt the above
     .. image:: images/increasing-margin-right.png
         :align: center
 
-#.  Line 13 options are: 
+#.  Line 13 specifies that image should be vertically aligned in the middle of the available space. The options are: 
 
     #.  ``middle`` (advised)
 
