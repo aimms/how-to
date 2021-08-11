@@ -1,15 +1,17 @@
-.. raw:: html
+.. only:: html
 
-  <style>
-    div.duration.docutils.container {
-      float: right;
-    }
-  </style>
- 
-.. container:: duration
-    
-  .. image:: Department_of_Engineering_Full_Colour.svg
-      :target: https://www.durham.ac.uk/departments/academic/engineering/
+  .. raw:: html
+
+    <style>
+      div.duration.docutils.container {
+        float: right;
+      }
+    </style>
+   
+  .. container:: duration
+      
+    .. image:: Department_of_Engineering_Full_Colour.svg
+        :target: https://www.durham.ac.uk/departments/academic/engineering/
 
 Optimal Power Flow (OPF)
 =============================
