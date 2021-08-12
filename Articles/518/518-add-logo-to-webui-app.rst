@@ -50,6 +50,8 @@ Some remarks about the above code, in case you want to adopt and adapt the above
 
 #.  On line 7: you can fill in the name of the image of your logo. 
     A few examples of acceptable file formats are ``.png``, ``.jpg``, and ``.gif``.
+    
+    The phrase "center/contain" will ensure that your icon always adjusts to fit within the width/height you set on lines 9 and 10, while maintaining the correct aspect ratio.
 
 #.  Lines 9,10 define the size of the area on the screen in which to place the logo. 
 
@@ -79,6 +81,16 @@ Tips on tweaking
 -----------------
 
 #.  It goes without saying that you should replace ``diversity-logo.png`` by an image file containing the logo of choice. 
+
+    It is advised to keep the size of the image file small; after all, the image will be part of .aimmspacks and every user will have to download the image upon first time opening of the application.
+    
+    For instance, the logo created from the original image displayed below is:
+
+    *   Selecting a portion of the image,
+
+    *   Resized, and
+
+    *   Background removed.
 
 #.  In AIMMS Developer you can tweak the file ``icon.css`` and then refresh the browser page to see the result without having to restart the project.
 
