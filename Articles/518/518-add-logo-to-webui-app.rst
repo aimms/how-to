@@ -37,7 +37,7 @@ The contents of the ``icon.css`` are presented below and then discussed.
         content: '';
         background: url(diversity-logo.png) no-repeat center/contain;
         float: left;
-        width: 83.2px;
+        width: 108.4px;
         height: 28px;
         margin-left: 0px;
         margin-right: 7px;
@@ -49,7 +49,7 @@ Some remarks about the above code, in case you want to adopt and adapt the above
 #.  Lines 1-3: This code is needed such that the app name is nicely aligned vertically with the logo.
 
 #.  On line 7: you can fill in the name of the image of your logo. 
-    Examples of acceptable file formats are ``.png``, ``.jpg``, ``.gif``, ``.svg``, and ``.WebP``.
+    A few examples of acceptable file formats are ``.png``, ``.jpg``, and ``.gif``.
 
 #.  Lines 9,10 define the size of the area on the screen in which to place the logo. 
 
@@ -60,8 +60,8 @@ Some remarks about the above code, in case you want to adopt and adapt the above
 
     As you can see, the aspect ratio of the image is kept.
 
-    In the example, the dimension of the image is 3533 x 1189. 
-    Therefore, by using height 28 and width 3533 / ( 1189 / 28 ) = 83.2 the image is completely filling the area alotted.
+    In the example, the dimension of the image is 240 x 62. 
+    Therefore, by using height 28 and width 240 / ( 62 / 28 ) = 108.4 the image is completely filling the area alotted.
 
 #.  Line 11 specifies the space between the Menu-icon and the app-logo.  Increasing that to 80px looks as follows:
 
