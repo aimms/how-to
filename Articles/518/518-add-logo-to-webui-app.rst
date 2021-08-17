@@ -14,7 +14,7 @@ The top bar of this app looks as follows (snapshot taken with a browser zoom of 
 
 To achieve this, the following two files:
 
-#.  ``diversity-logo.png``
+#.  ``Placeholder logo@2x.png``
 
 #.  ``icon.css``
 
@@ -37,7 +37,7 @@ The contents of the ``icon.css`` are presented below and then discussed.
         content: '';
         background: url(diversity-logo.png) no-repeat center/contain;
         float: left;
-        width: 108.4px;
+        width: 124px;
         height: 28px;
         margin-left: 0px;
         margin-right: 7px;
@@ -62,8 +62,8 @@ Some remarks about the above code, in case you want to adopt and adapt the above
 
     As you can see, the aspect ratio of the image is kept.
 
-    In the example, the dimension of the image is 240 x 62. 
-    Therefore, by using height 28 and width 240 / ( 62 / 28 ) = 108.4 the image is completely filling the area alotted.
+    In the example, the dimension of the image is 354 x 80. 
+    Therefore, by using height 28 and width 354 / ( 80 / 28 ) = 124 the image is completely filling the area alotted.
 
 #.  Line 11 specifies the space between the Menu-icon and the app-logo.  Increasing that to 80px looks as follows:
 

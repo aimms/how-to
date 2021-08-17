@@ -1,6 +1,6 @@
 ## ams_version=1.0
 
-Model Main_Diversity {
+Model Main_ourBusinessBespoke {
 	Section Quantities_and_Units {
 		Comment: {
 			"This section contains all the units and quantities that are added automatically by AIMMS.
