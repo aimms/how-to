@@ -87,10 +87,17 @@ The problem can be solved by introducing a new parameter SumCondition(i,j,k) an
 
 These are some general rules. 
 
-In practice, lots of the performance improvements are done on by trial and error.  
-And AIMMS diagnostic tools, such as Debugger, Profiler, and Identifier Cardinalities Viewer can help with identifying the performance bottleneck. 
-You can refer to  `AIMMS The Users's Guide <https://documentation.aimms.com/_downloads/AIMMS_user.pdf>`_    for how to use them. 
-And more insights of AIMMS execution engine can be found in chapters :doc:`sparse-execution/the-aimms-sparse-execution-engine/index` and :doc:`sparse-execution/execution-efficiency-cookbook/index`.
+Improving skills
+----------------
+
+In practice, lots of the performance improvements are done by trial and error. 
+To improve upon that time consuming process you can:
+
+#.  Use the AIMMS diagnostic tools, such as `Debugger <https://documentation.aimms.com/user-guide/creating-and-managing-a-model/debugging-and-profiling-an-aimms-model/the-aimms-debugger.html>`_, `Profiler <https://documentation.aimms.com/user-guide/creating-and-managing-a-model/debugging-and-profiling-an-aimms-model/the-aimms-profiler.html>`_, and `Identifier Cardinalities Viewer <https://documentation.aimms.com/user-guide/creating-and-managing-a-model/debugging-and-profiling-an-aimms-model/observing-identifier-cardinalities.html>`_ to identify performance bottlenecks. 
+ 
+#.  Read about the underlying technology to obtain insights in the AIMMS execution engine in the AIMMS Language Reference Chapters :doc:`sparse-execution/the-aimms-sparse-execution-engine/index` and :doc:`sparse-execution/execution-efficiency-cookbook/index`.
+
+#.  Train yourself using the AIMMS Academy master course `Execution Efficiency <https://academy.aimms.com/mod/page/view.php?id=1267>`_.
 
 
 
