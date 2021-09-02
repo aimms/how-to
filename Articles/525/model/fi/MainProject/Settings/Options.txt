@@ -1,0 +1,24 @@
+﻿* AIMMS
+rounding_compatibility Aimms_3_7
+use_UTC_forCaseAndStartEndDate 1
+* AOA
+* BARON 21
+* CONOPT 4.0
+* CONOPT 4.1
+* CPLEX 12.10
+* CPLEX 20.1
+* CPOptimizer 12.10
+* CPOptimizer 20.1
+* GUROBI 9.0
+* GUROBI 9.1
+* Knitro 12.2
+* Knitro 12.3
+* MINOS
+* ODH-CPLEX 4.0
+* ODH-CPLEX 5.0
+* ODH-CPLEX 5.3
+* PATH 4.7
+* SNOPT 7.2
+* XA 16
+* NETSOL
+* Environment
