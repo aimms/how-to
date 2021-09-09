@@ -1,71 +1,173 @@
 ## ams_version=1.0
 
 Model Main_WhoAmI {
-    Section GetUserNameAndRoles {
-        DeclarationSection User_and_Group_Declarations {
-            StringParameter sp_Env;
-            StringParameter sp_Usr;
-            StringParameter sp_Bucket;
-            Set s_UsrGroups {
-                Index: i_ug;
-            }
-            StringParameter sp_UsrGroupNames {
-                IndexDomain: i_ug;
-            }
-        }
-        Procedure pr_GetUserNameRoles {
-            Body: {
-                if pro::GetPROEndPoint() then
-                	pro::Initialize();
-                	pro::GetCurrentUserInfo(
-                		environment   :  sp_env, 
-                		username      :  sp_usr, 
-                		userBucket    :  sp_Bucket, 
-                		userGroups    :  s_UsrGroups, 
-                		userGroupname :  sp_UsrGroupNames);
-                else
-                	Empty User_and_Group_Declarations;
-                	sp_env := "ROOT" ;
-                	sp_usr := "MeMyselfAndI" ;
-                	sp_Bucket := "Userdata" + "/" + sp_env + "/" + sp_usr ;
-                	s_UsrGroups := data { 1 } ;
-                	sp_UsrGroupNames := data { 1 : "Admin" } ;
-                endif ;
-            }
-        }
-    }
-    Procedure MainInitialization {
-        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
-    }
-    Procedure PostMainInitialization {
-        Body: {
-             pr_GetUserNameRoles();
-        }
-        Comment: {
-            "Add initialization statements here that require that the libraries are already initialized properly,
-            or add statements that require the Data Management module to be initialized."
-        }
-    }
-    Procedure MainExecution;
-    Procedure PreMainTermination {
-        Body: {
-            return 1;
-        }
-        Comment: {
-            "Add termination statements here that require all libraries to be still alive.
-            Return 1 if you allow the termination sequence to continue.
-            Return 0 if you want to cancel the termination sequence."
-        }
-    }
-    Procedure MainTermination {
-        Body: {
-            return 1;
-        }
-        Comment: {
-            "Add termination statements here that do not require all libraries to be still alive.
-            Return 1 to allow the termination sequence to continue.
-            Return 0 if you want to cancel the termination sequence.
-            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
-        }
-    }
+	Section GetUserNameAndRoles {
+		Procedure pr_msg {
+			Arguments: (sp_msg);
+			Body: {
+				pro::management::LocalLogInfo( sp_msg );
+			}
+			StringParameter sp_msg {
+				Property: Input;
+			}
+		}
+		DeclarationSection data_session_User_and_Group_Declarations {
+			StringParameter sp_ds_Env;
+			StringParameter sp_ds_Usr;
+			StringParameter sp_ds_Bucket;
+			Set s_ds_UsrGroups {
+				Index: i_ds_ug;
+			}
+			StringParameter sp_ds_UsrGroupNames {
+				IndexDomain: i_ds_ug;
+			}
+		}
+		DeclarationSection server_session_User_and_Group_Declarations {
+			StringParameter sp_ss_Env;
+			StringParameter sp_ss_Usr;
+			StringParameter sp_ss_Bucket;
+			Set s_ss_UsrGroups {
+				Index: i_ss_ug;
+			}
+			StringParameter sp_ss_UsrGroupNames {
+				IndexDomain: i_ss_ug;
+			}
+			Set s_grpSet {
+				Index: i_g;
+			}
+			StringParameter sp_grpName {
+				IndexDomain: i_g;
+			}
+			Parameter p_gcuRetCode;
+		}
+		Procedure pr_GetUserNameRoles {
+			Body: {
+				Empty data_session_User_and_Group_Declarations;
+				if pro::GetPROEndPoint() then
+					pro::GetCurrentUserInfo(
+						environment   :  sp_ds_Env, 
+						username      :  sp_ds_Usr, 
+						userBucket    :  sp_ds_Bucket, 
+						userGroups    :  s_ds_UsrGroups, 
+						userGroupname :  sp_ds_UsrGroupNames);
+				
+					pro::ManagedSessionInputCaseIdentifierSet  := server_session_User_and_Group_Declarations ;
+					pr_delegateGetUserNamesRoles();
+				else
+					sp_ds_Env := "ROOT" ;
+					sp_ds_Usr := "MeMyselfAndI" ;
+					sp_ds_Bucket := "Userdata" + "/" + sp_ds_Env + "/" + sp_ds_Usr ;
+					s_ds_UsrGroups := data { 1 } ;
+					sp_ds_UsrGroupNames(i_ds_ug) := data { 1 : "Admin" } ;
+					pr_SolverSessionGetUserNameRoles();
+				endif ;
+			}
+		}
+		Procedure pr_delegateGetUserNamesRoles {
+			Body: {
+				if pro::GetPROEndPoint() then
+					if pro::DelegateToServer( waitForCompletion  :  1, 
+							completionCallback :  'pro::session::LoadResultsCallBack' ) then  
+						return 1;
+					endif ;
+				endif ;
+				
+				pr_SolverSessionGetUserNameRoles();
+				pro::ManagedSessionOutputCaseIdentifierSet := server_session_User_and_Group_Declarations ;
+			}
+		}
+		Procedure pr_SolverSessionGetUserNameRoles {
+			Body: {
+				Empty server_session_User_and_Group_Declarations;
+				p_gcuRetCode := pro::authentication::GetCurrentUserGroupList(s_grpSet,sp_grpName);
+				if pro::GetPROEndPoint() then
+					pro::GetCurrentUserInfo(
+						environment   :  sp_ss_Env, 
+						username      :  sp_ss_Usr, 
+						userBucket    :  sp_ss_Bucket, 
+						userGroups    :  s_ss_UsrGroups, 
+						userGroupname :  sp_ss_UsrGroupNames);
+					pr_msg( formatString("solver session env: %s", sp_ss_Env ) );
+					pr_msg( formatString("solver session usr: %s", sp_ss_Usr ) );
+					pr_msg( formatString("solver session buc: %s", sp_ss_Bucket ) );
+					sp_grp := s_ss_UsrGroups ;
+					pr_msg( formatString("solver session grp: %s", sp_grp ) );
+					for i_ss_ug do
+						pr_msg( formatString("solver session env: %s", sp_ss_UsrGroupNames( i_ss_ug ) ) );
+					endfor ;
+				else
+					sp_ss_Env := "ROOT" ;
+					sp_ss_Usr := "MeMyselfAndI" ;
+					sp_ss_Bucket := "Userdata" + "/" + sp_ds_Env + "/" + sp_ds_Usr ;
+					s_ss_UsrGroups := data { 1 } ;
+					sp_ss_UsrGroupNames(i_ss_ug) := data { 1 : "Admin" } ;
+				endif ;
+			}
+			StringParameter sp_grp;
+		}
+	}
+	Section WebUI_Deployment {
+		StringParameter sp_primaryPageAction {
+			IndexDomain: webui::indexPageActionSpec;
+			Definition: {
+				{
+					'displaytext' : "WhoAmI",
+					'icon'        : "aimms-reading",
+					'procedure'   : "pr_GetUserNameRoles",
+					'state'       : "Active"
+				}
+			}
+		}
+	}
+	Procedure MainInitialization {
+		Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+	}
+	Procedure PostMainInitialization {
+		Body: {
+			!pr_GetUserNameRoles();
+		}
+		Comment: {
+			"Add initialization statements here that require that the libraries are already initialized properly,
+			or add statements that require the Data Management module to be initialized."
+		}
+	}
+	Procedure MainExecution;
+	Procedure PreMainTermination {
+		Body: {
+			return 1;
+		}
+		Comment: {
+			"Add termination statements here that require all libraries to be still alive.
+			Return 1 if you allow the termination sequence to continue.
+			Return 0 if you want to cancel the termination sequence."
+		}
+	}
+	Procedure MainTermination {
+		Body: {
+			return 1;
+		}
+		Comment: {
+			"Add termination statements here that do not require all libraries to be still alive.
+			Return 1 to allow the termination sequence to continue.
+			Return 0 if you want to cancel the termination sequence.
+			It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+		}
+	}
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: minute->s : #-># * 60;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsWebUI.
+				
+				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
+			}
+		}
+	}
 }
