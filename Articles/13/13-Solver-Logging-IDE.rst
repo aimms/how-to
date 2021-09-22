@@ -15,7 +15,7 @@ Get started with log files
 The first option is to set the option ``solver_listing_messages`` to ``all``. 
 By just setting this option, a solver will generate a small log file with the name ``<solver name>.sta`` in the folder ``log``.
 The first solve of an AIMMS session will create the file, subsequent solves will append to the file. 
-To generate a log file, I used the Flow Shop problem with 14 jobs and 20 machines and solved it using CPLEX 12.8 on my desktop.
+To generate a log file, we used the :any:`/Articles/388/388-flow-shop` example with 14 jobs and 20 machines and solved it using CPLEX 12.8 on my desktop.
 
 .. literalinclude:: resources/0_CPLEX_12.8.sta 
     :name: cplex 12.8.sta
