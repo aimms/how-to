@@ -196,7 +196,7 @@ References and further reading
 
 #.  `Language reference: Model Initialization and Termination <https://documentation.aimms.com/language-reference/data-communication-components/data-initialization-verification-and-control/model-initialization-and-termination.html#sec-data-init>`_
 
-#.  The Help on the options in the category Project > Startup & authorization:
+#.  The Help on the options in the category `Project > Startup & authorization`:
 
     #.  startup case
 
@@ -204,10 +204,9 @@ References and further reading
 
     #.  startup page
 
-#.  AIMMS The User's guide, Chapter 18:
+#.  AIMMS The User's guide:
 
-    #.  Section 1: AIMMS Command line options
+    #.  :doc:`miscellaneous/calling-aimms/aimms-command-line-options`
 
-    #.  Section 3: The AIMMS command-line options
 
 

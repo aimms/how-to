@@ -33,7 +33,7 @@ In this dialog, you can specify one of the following three types of encryption:
 
 #. **Key-based encryption:** results in an end-user version of your application that can only be run by users whose public key was present in the key folder that was specified during encryption. The users need to store their private key in the ``ApplicationKeys`` folder on their local system or, in case a license server is being used, on the system on which the license server is running. (An basic explanation of public and private keys can be found `here <https://technet.microsoft.com/en-us/library/cc962028.aspx>`_ under the heading Public Key Encryption.) The end-user can generate such a pair through the *Tools > License > Generate Public/Private Key Pair* menu. The public key can then be shared with the developer.
 
-Next to the type of encryption, you can also specify the license number information or expiration date. (More information can be found in the Chapter "Project Security" of the AIMMS User guide) The information that you specify here, will be stored as part of your project in the file ``..\\MainProject\\Settings\\EndUserEncryption.xml``.
+Next to the type of encryption, you can also specify the license number information or expiration date. (More information can be found in :doc:`miscellaneous/project-security/index`) The information that you specify here, will be stored as part of your project in the file ``..\\MainProject\\Settings\\EndUserEncryption.xml``.
 
 After you click *OK* in this dialog, AIMMS will show a second dialog where you can specify which files AIMMS should exclude from the Aimmspack. This information is stored in the file ``..\\MainProject\\Tools\\ProjectExport.xml``. The information in these two files will be used, as default, the next time you create an Aimmspack.
 
@@ -66,7 +66,7 @@ For example, if you have a project with two libraries (Protected Library 1 and P
     xcopy "Fully Encrypted\Protected Library 1\*.*" "Partially Encrypted \Protected Library 1\*.*" /s /y
     xcopy "Fully Encrypted\Protected Library 2\*.*" "Partially Encrypted \Protected Library 2\*.*" /s /y 
 
-The rest of the model will be accessible for everybody. More information can be found in the chapter "Project Security" of the `AIMMS User Guide <https://documentation.aimms.com/aimms_user.html>`_.
+The rest of the model will be accessible for everybody. More information can be found in :doc:`miscellaneous/project-security/index`.
 
 
 

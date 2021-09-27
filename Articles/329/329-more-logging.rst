@@ -187,8 +187,8 @@ Further reading
 
 * Save state  :doc:`Data state solver session<../321/321-state-server-session>`
 
-* The AIMMS Debugger, see AIMMS The User's Guide: Chapter "Debugging and Profiling an Aimms Model"
+* The AIMMS Debugger, see :doc:`creating-and-managing-a-model/debugging-and-profiling-an-aimms-model/index`
 
-* Command-line options, see AIMMS The User's Guide: Chapter "Calling Aimms"
+* Command-line options, see :any:`miscellaneous/calling-aimms/index`
 
 

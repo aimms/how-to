@@ -16,7 +16,7 @@
 
 There are situations where you would like to know the duration of execution of an AIMMS code-block. 
 In AIMMS Developer, you can do this easily by using the built-in Profiler, accessed through `Tools -> Diagnostic Tools -> Profiler`. 
-This profiler will provide you with information about how long each statement in an execution took, as well as how long the evaluation of the definition of a parameter took. More information about the profiler can be found in the `AIMMS The User's Guide <https://documentation.aimms.com/_downloads/AIMMS_user.pdf>`_ Chapter "Debugging and Profiling an AIMMS Model".
+This profiler will provide you with information about how long each statement in an execution took, as well as how long the evaluation of the definition of a parameter took. More information about the profiler can be found in :doc:`creating-and-managing-a-model/debugging-and-profiling-an-aimms-model/the-aimms-profiler`.
 
 You can also start the profiler programmatically using the function :aimms:func:`ProfilerStart`. 
 It is common to make a call to this function in the initialization procedures so that you can always have the profiler available while developing an AIMMS application.

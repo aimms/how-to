@@ -13,7 +13,7 @@ There are several ways to find out why your model is infeasible. This article pr
 
 Math Program Inspector
 --------------------------
-The Math Program Inspector contains a collection of tools that can help you to find the cause of errors in your linear model. See the `AIMMS User's Guide: Math Program Inspector`.
+The Math Program Inspector contains a collection of tools that can help you to find the cause of errors in your linear model. See the :doc:`creating-and-managing-a-model/the-math-program-inspector/index`.
 
 
 Infeasibility Finder

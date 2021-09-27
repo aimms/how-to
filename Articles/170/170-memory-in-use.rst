@@ -95,11 +95,11 @@ AIMMS maintains a mapping between elements (strings) and numbers per root set. T
 Related Topics
 --------------------
 
-* `AIMMS User's Guide <https://documentation.aimms.com/_downloads/AIMMS_user.pdf>`_: Section "Observing identifier cardinalities"
+* :doc:`creating-and-managing-a-model/debugging-and-profiling-an-aimms-model/observing-identifier-cardinalities`
 
-* `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_: Chapter "Execution Efficiency Cookbook", Section "Reducing the number of elements"
+* :doc:`sparse-execution/execution-efficiency-cookbook/index` and :doc:`sparse-execution/execution-efficiency-cookbook/reducing-the-number-of-elements`
 
-* `AIMMS Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_
+* :doc:`fr:index`
     
 * :doc:`../134/134-Monitoring-Memory-Use`
 
