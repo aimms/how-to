@@ -25,7 +25,7 @@ For each factory ``i``, the above indexed subset ``LargestTransportCities(i)`` w
 
 
 
-For more information about the *Order by* attribute and sorted sets, see the chapter Set Expressions in the `AIMMS Language Reference <https://download.aimms.com/aimms/download/manuals/AIMMS3_LRB.pdf>`_.
+For more information about the *Order by* attribute and sorted sets, see :doc:`non-procedural-language-components/set-set-element-and-string-expressions/set-expressions`.
 
 
 

@@ -124,7 +124,7 @@ I will thus simply improve my **MainExecution** procedure as follows:
 .. note:: 
 
     * For windows, I assumed you bundled the ``7za.exe`` program with your AIMMS project in the aimmspack. As explained above, an alternative would be to install a zip program on your Windows Server accessible from the PATH, or  
-    * The :any:`AimmsStringConstants` intrinsic string parameter provides a list of system constants, such as ``'platform'`` (Windows, Linux) or ``'architecture'`` (x64, x86). Please refer to the `Function Reference <https://download.aimms.com/aimms/download/manuals/AIMMS_func.pdf>`_ for further details.
+    * The :any:`AimmsStringConstants` intrinsic string parameter provides a list of system constants, such as ``'platform'`` (Windows, Linux) or ``'architecture'`` (x64, x86).
     
 And I will improve my **Download** procedure as well:
 

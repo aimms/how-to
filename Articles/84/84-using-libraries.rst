@@ -10,7 +10,7 @@ In the context of the AIMMS environment, a library is an AIMMS project that can 
 
 Each library in AIMMS contains a subset of project files. You can divide a large project into smaller sub-projects, enabling multiple developers to collaborate easily by sharing parts which are relevant to the entire project.
 
-Read more about libraries in the `AIMMS User Manual <https://download.aimms.com/aimms/download/manuals/AIMMS3UG_OrganizingProjectInLibraries.pdf>`_.
+Read more about libraries in :doc:`introduction-to-aimms/collaborative-project-development/library-projects-and-the-library-manager`.
 
 To Add a new library
 -------------------------
