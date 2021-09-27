@@ -49,7 +49,7 @@ Infeasibility analysis
 ----------------------
 In the chapter Solving Mathematical Programs in the AIMMS Language Reference, there is a section 'Infeasibility analysis'. In this section another way to find infeasibilities is explained. The used method is based on adding excess variables to your model and AIMMS offers support to automatically extend your mathematical program with excess variables during the generation of the matrix for the solver. 
 
-See also `AIMMS Language Reference: Solving Mathematical Programs`.
+See also :doc:`optimization-modeling-components/solving-mathematical-programs/index`.
 
 
 AIMMS Presolver
@@ -65,4 +65,4 @@ If your model is nonlinear then you can let the AIMMS Presolver try to detect th
 
 3. Open the listing file found at *File > Open > Listing File*, or in the log-folder of your AIMMS project (``*.lis``).  
 
-See also `AIMMS Language Reference: Advanced Methods for Nonlinear Programs`.
+See also :doc:`optimization-modeling-components/advanced-methods-for-nonlinear-programs/index`.
