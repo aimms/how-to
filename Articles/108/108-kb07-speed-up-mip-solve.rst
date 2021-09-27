@@ -28,7 +28,7 @@ Priorities
 --------------
 If your model includes natural priorities (because some decisions follow from or follow up other decisions), you could decide to make use of these priorities. 
 
-See also the `AIMMS Language Reference: Variable and Constraint Declaration`, section (x.1.1) The PRIORITY, NONVAR and RELAX STATUS attributes.
+See also :any:`sec:var.var.solver-attr`.
 
 Starting solution
 -----------------
