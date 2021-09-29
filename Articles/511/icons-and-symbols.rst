@@ -17,7 +17,7 @@ Icons and symbols
 Icon set
 ---------
 
-Most icons in the AIMMS interface are based the `IcoMoon ultimate pack <https://icomoon.io/#preview-ultimate>`_.
+Most icons in the AIMMS interface are based on the `IcoMoon ultimate pack <https://icomoon.io/preview-ultimate.html>`_.
 
 In total, 1600 icons are available in this set. For details, see the `Icomoon website <https://icomoon.io/>`_.
 

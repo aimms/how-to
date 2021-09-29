@@ -36,7 +36,7 @@ When customizing an application to the visual identity of a customer, we advise 
 3. Change the color of the line separating the header and the canvas to a customer’s brand color.
 
 Optionally, change the primary color (AIMMS Blue, #004BFF) to a customer’s brand color. 
-Use `this tool to check the color contrast <https://contrast-ratio.com/#white-on-%23004BFF>`__ 
+Use `this tool to check the color contrast <https://contrast-ratio.com/>`__ 
 to be sure that the color is dark enough to function as a background for white text.
 
 In most cases, the default AIMMS color palette will be sufficient to create an application. 
