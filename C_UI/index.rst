@@ -19,6 +19,7 @@ AIMMS offers two User Interface builders: the classic WinUI for applications tha
     
    Sub_UI_Features/index
    Sub_Styling/index
+   ../Articles/511/index
 
 See also: `AIMMS Design System <https://design-system.aimms.com/>`_
 
