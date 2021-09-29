@@ -1,0 +1,165 @@
+## ams_version=1.0
+
+LibraryModule refdIds {
+	Prefix: ri;
+	Interface: Public_declarations;
+	Section Public_declarations {
+		Procedure ComputeReferencedIdentifiers {
+			Arguments: (s_checkIds,bp_isUsedInModel,bp_isUsedInWinUI,bp_isUsedInWebUI);
+			Body: {
+				block ! Search in the model
+					s_attributesSearched := AllAttributeNames - data { Interface, Comment } ;
+					for IndexIdentifiers do
+						_s_helper := { IndexIdentifiers } ;
+						_s_referencedIdentifiers := 
+							ReferencedIdentifiers(
+								searchIdentSet :  _s_helper, 
+								searchAttrSet  :  s_attributesSearched, 
+								recursive      :  0);
+						_s_addedSets := {} ;
+						for _i_ri | IdentifierType( _i_ri ) = 'index'  do
+							_ep_referencedSet := indexRange( _i_ri ) ;
+							if _ep_referencedSet in AllIdentifiers then
+								_s_addedSets += _ep_referencedSet ;
+							endif ;
+						endfor ;
+						_s_referencedIdentifiers += _s_addedSets ;
+						is_uses( IndexIdentifiers ) := _s_referencedIdentifiers ;
+					endfor ;
+					bp_uses( i_fromId, i_toId ) := i_toId in is_uses( i_fromId );
+					bp_isUsedInModel( i_ci ) := exists( i_fromId | bp_uses( i_fromId, i_ci ) );
+				endblock ;
+				
+				block ! Search in the WinUI
+					empty bp_isUsedInWinUI ;
+					_bp_pga := PageGetAll( _s_pages );
+					if _bp_pga then
+						for _i_pg do
+							sp_pageName := formatString( "%e", _i_pg );
+							_bp_pgui := PageGetUsedIdentifiers( sp_pageName, s_identifiersOnPage );
+							if not _bp_pgui then
+								raise warning "Obtaining identifiers from page " + sp_pageName + " failed: " + CurrentErrorMessage ;
+							endif ;
+							bp_isUsedInWinUI( i_iop ) := 1;
+						endfor ;
+					endif ;
+				endblock ;
+				
+				block ! Search in the WebUI
+					empty bp_isUsedInWebUI ;
+					_sp_fn := ".\\MainProject\\WebUI\\webui.json" ;
+					if FileExists( _sp_fn ) then
+						_sp_webuiText := FileRead( _sp_fn );
+						bp_isUsedInWebUI( i_ci ) := 1 $ FindString( _sp_webuiText, i_ci, caseSensitive: 0, wordOnly: 1 );
+					endif ;
+				endblock ;
+			}
+			DeclarationSection model_locDecls {
+				Set s_attributesSearched {
+					SubsetOf: AllAttributeNames;
+				}
+				Set _s_helper {
+					SubsetOf: AllSymbols;
+				}
+				Set _s_addedSets {
+					SubsetOf: AllIdentifiers;
+				}
+				Set _s_referencedIdentifiers {
+					SubsetOf: AllSymbols;
+					Index: _i_ri;
+				}
+				ElementParameter _ep_referencedSet {
+					Range: AllSymbols;
+				}
+				Set s_checkIds {
+					SubsetOf: AllIdentifiers;
+					Index: i_ci;
+					Property: Input;
+				}
+				Parameter bp_uses {
+					IndexDomain: (i_fromId, i_toId);
+					Range: binary;
+				}
+				Parameter bp_isUsedInModel {
+					IndexDomain: i_ci;
+					Range: binary;
+					Property: Output;
+				}
+				Parameter bp_isUsedInWinUI {
+					IndexDomain: i_ci;
+					Range: binary;
+					Property: Output;
+				}
+				Parameter bp_isUsedInWebUI {
+					IndexDomain: i_ci;
+					Range: binary;
+					Property: Output;
+				}
+			}
+			DeclarationSection winui_locDecls {
+				Set _s_pages {
+					Index: _i_pg;
+				}
+				StringParameter sp_pageName;
+				Parameter _bp_pga {
+					Comment: "Return value for PageGetAll call.";
+				}
+				Parameter _bp_pgui {
+					Comment: "Return value for PageGetUsedIdentifiers call";
+				}
+			}
+			DeclarationSection webui_locDecls {
+				StringParameter _sp_webuiText;
+				StringParameter _sp_fn;
+			}
+		}
+	}
+	Section Private_declarations {
+		Set s_identifiersOnPage {
+			SubsetOf: AllIdentifiers;
+			Index: i_iop;
+		}
+		Set is_uses {
+			IndexDomain: IndexIdentifiers;
+			SubsetOf: AllSymbols;
+		}
+		Index i_fromId {
+			Range: AllIdentifiers;
+		}
+		Index i_toId {
+			Range: AllIdentifiers;
+		}
+		Section Library_initialization_and_termination {
+			Procedure LibraryInitialization {
+				Comment: "Add initialization statements here that do not require any other library being initialized already.";
+			}
+			Procedure PostLibraryInitialization {
+				Comment: {
+					"Add initialization statements here that require another library to be initialized already,
+					or add statements that require the Data Management module to be initialized."
+				}
+			}
+			Procedure PreLibraryTermination {
+				Body: {
+					return 1;
+				}
+				Comment: {
+					"Add termination statements here that require all other libraries to be still alive.
+					Return 1 if you allow the termination sequence to continue.
+					Return 0 if you want to cancel the termination sequence."
+				}
+			}
+			Procedure LibraryTermination {
+				Body: {
+					return 1;
+				}
+				Comment: {
+					"Add termination statements here that do not require other libraries to be still alive.
+					Return 1 to allow the termination sequence to continue.
+					Return 0 if you want to cancel the termination sequence.
+					It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+				}
+			}
+		}
+	}
+}

@@ -108,7 +108,7 @@ The example model used in this article can be downloaded below:
 Further reading
 ----------------
 
-* `AIMMS User Guide <https://documentation.aimms.com/aimms_user.html>`_, Section "The AIMMS command line tool".
+* :doc:`miscellaneous/calling-aimms/the-aimms-command-line-tool`
 
 
 

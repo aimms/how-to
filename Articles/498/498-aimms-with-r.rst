@@ -161,7 +161,7 @@ Calling the API
 
 Now we simply use the HTTP library functions to make a GET call to the APIs created in the previous section. ``pr_healthCheck`` to check the status of the API and ``pr_iSankey`` to call the ``/sankey`` endpoint.
 
-As the ``/sankey`` endpoint returns a PNG image, we do not need to read any data into AIMMS. Instead, we move the response file to the ``MainProject//WebUI//resources//images`` folder to be used by the `Image widget <https://documentation.aimms.com/webui/image-widget.html>`_, using :aimms:func:`filemove`.
+As the ``/sankey`` endpoint returns a PNG image, we do not need to read any data into AIMMS. Instead, we move the response file to the ``MainProject//WebUI//resources//images`` folder to be used by the `Image widget <https://documentation.aimms.com/webui/image-widget.html>`_, using :any:`FileMove`.
 
 .. code-block:: aimms
     :linenos:

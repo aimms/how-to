@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2021-08-31 08:37:11">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>95C8DBBA-E9AF-404D-B7AA-EF2EC1446E04</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Composite Table">
+		<Location top="54" left="102" bottom="384" right="582" />
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Domain>
+			<Identifier>p_dat( i_c )</Identifier>
+			<Index Name="i_c" />
+		</Domain>
+		<ExplicitIdentifier>
+			<Identifier>p_dat( i_c )</Identifier>
+			<NumberFormat Width="5" Decimals="0" Alignment="Center" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>p_sqr( i_c )</Identifier>
+			<NumberFormat Width="8" Decimals="0" Alignment="Center" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>p_dat</Symbol>
+			<Symbol>p_sqr</Symbol>
+			<Symbol>i_c</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

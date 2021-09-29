@@ -15,7 +15,7 @@ This change was made for several reasons.
 
 *  Case files (``.data``) avoid the risk of data corruption in one case affecting other cases stored in the same file. 
 
-* Storing multiple case files in a folder makes it easy to copy cases from multiple users in the same folder, and compare scenarios. (See the `AIMMS User's Guide <https://documentation.aimms.com/aimms_user.html>`_, Section "Managing multiple case selections".)
+* Storing multiple case files in a folder makes it easy to copy cases from multiple users in the same folder, and compare scenarios. (See :doc:`data-management/case-management/managing-multiple-case-selections`)
 
 
 In projects created with AIMMS version before 3.14, a single data manager file (``.dat``) contains zero, one or more cases. From AIMMS version 3.14, a case file (``.data``) only stores one case, but multiple cases may be stored in the same folder. 
@@ -72,7 +72,7 @@ they also collect identifiers to be stored in a different way:
 
     A case type may include data categories.
     
-    More information about these data types can be found in the User Guide of AIMMS 3.
+    More information about these data types can be found in :doc:`ug:index`.
 
 #.  The ``Disk files and folders`` interface works with subsets of :any:`AllIdentifiers`, called ``CaseContentTypes``. 
 

@@ -41,3 +41,4 @@ These topics cover what you need to get started programming your model in AIMMS 
    /Articles/266/266-units-of-measurement-localized-data
    /Articles/258/258-save-a-case-from-aimms-procedure
    /Articles/290/290-identifying-differences
+   /Articles/525/525-finding-unused-identifiers

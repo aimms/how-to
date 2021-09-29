@@ -16,6 +16,7 @@ This section contains tips for customizing the appearance of your AIMMS user int
    :maxdepth: 1
     
    /Articles/49/49-webui-css-color
+   /Articles/518/518-add-logo-to-webui-app
    /Articles/315/315-hover-and-select-effects-webui-charts
    /Articles/94/94-using-the-scalar-switch-css
    /Articles/221/221-adding-a-custom-splash-screen

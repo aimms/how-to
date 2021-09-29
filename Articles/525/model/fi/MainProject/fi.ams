@@ -1,0 +1,116 @@
+## ams_version=1.0
+
+Model Main_fi {
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: minute->s : #-># * 60;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsWebUI.
+				
+				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
+			}
+		}
+	}
+	Set s_chars {
+		Index: i_c;
+		Definition: data { a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z };
+	}
+	Parameter p_dat {
+		IndexDomain: i_c;
+		Definition: ord(i_c);
+	}
+	Parameter p_sqr {
+		IndexDomain: i_c;
+		Definition: sqr(p_dat(i_c));
+	}
+	Parameter p_cub {
+		IndexDomain: i_c;
+	}
+	Procedure pr_do {
+		Body: {
+			display p_dat, p_sqr ;
+		}
+	}
+	Section Application_initialization_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+	Section Test_section_find_identifiers {
+		DeclarationSection Identifier_Search_Declarations {
+			Set s_setSearched {
+				SubsetOf: AllIdentifiers;
+				Index: i_ci;
+			}
+			Set s_unused {
+				SubsetOf: AllIdentifiers;
+			}
+			Parameter bp_one {
+				IndexDomain: i_ci;
+				Definition: 1;
+			}
+			Parameter bp_isUsedInModel {
+				IndexDomain: i_ci;
+			}
+			Parameter bp_isUsedInWinUI {
+				IndexDomain: i_ci;
+			}
+			Parameter bp_isUsedInWebUI {
+				IndexDomain: i_ci;
+			}
+		}
+		Procedure pr_fu {
+			Body: {
+				s_setSearched := 
+					( Main_fi - Test_section_find_identifiers ) * 
+					( AllProcedures + AllParameters + AllSets ) ;
+				
+				ri::ComputeReferencedIdentifiers( s_setSearched, 
+					bp_isUsedInModel, bp_isUsedInWinUI, bp_isUsedInWebUI );
+				
+				display { bp_one, bp_isUsedInModel, bp_isUsedInWinUI, bp_isUsedInWebUI } ;
+				
+				s_unused := { i_ci | 
+					( not bp_isUsedInModel( i_ci ) ) and 
+					( not bp_isUsedInWinUI( i_ci ) ) and 
+					( not bp_isUsedInWebUI( i_ci ) )     };
+				
+				display s_unused ;
+			}
+		}
+	}
+}

@@ -15,13 +15,17 @@ The basic problem illustrated in this example is a simple multi-period productio
 
 In this example periods are mapped to stages. For instance, 
 
-period-1   period-2   period-3   period-4
-stage-1    stage-2    stage-3    stage-4 
+.. code-block:: none
+
+   period-1   period-2   period-3   period-4
+   stage-1    stage-2    stage-3    stage-4 
 
 may be such a mapping. However, the following mapping is also meaningful:
 
-period-1   period-2   period-3   period-4
-stage-1    stage-2    stage-2    stage-3
+.. code-block:: none
+
+   period-1   period-2   period-3   period-4
+   stage-1    stage-2    stage-2    stage-3
 
 This means that decisions for periods 2 and 3 are taken in the same stage 2, so we have a 4-period deterministic model, but a 3-stage stochastic model.
 

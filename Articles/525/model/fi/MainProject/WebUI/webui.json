@@ -1,0 +1,61 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "SomeData",
+          "layoutInfo": {
+            "width": "2",
+            "height": "5",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/SomeData": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_dat",
+          "p_sqr"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_c"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "SomeData"
+    },
+    "title": {
+      "literal": "A few squares"
+    }
+  }
+}
