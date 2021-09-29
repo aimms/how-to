@@ -40,7 +40,7 @@ The workflow is as below:
 
 #. Define the ``completionCallback`` argument of ``pro::DelegateToServer`` call as this procedure to trigger the retrieval. 
 
-#. Create a procedure to load the case file corresponding to the retrieved ``RequestID`` and link it secondary page actions. 
+#. Create a procedure to load the case file corresponding to the retrieved ``RequestID`` and link it to an action in a secondary page. 
 
 Retrieving the ``RequestID``
 """""""""""""""""""""""""""""""
