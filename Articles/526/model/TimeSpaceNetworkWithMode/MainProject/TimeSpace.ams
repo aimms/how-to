@@ -1,0 +1,163 @@
+## ams_version=1.0
+
+Model Main_TimeSpace {
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: minute->s : #-># * 60;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsWebUI.
+				
+				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
+			}
+		}
+	}
+	DeclarationSection Declarations_common_to_both_approaches {
+		Set s_timePeriods {
+			Index: i_tp;
+			Comment: "A discrete set of time periods.";
+		}
+		Set s_nodes {
+			Index: i_node, i_nodeFrom, i_nodeTo;
+		}
+		Set s_arcModes {
+			Index: i_mode;
+			Definition: ElementRange(1,3,prefix:"mode-1");
+		}
+		Parameter p_initialStock {
+			IndexDomain: i_node;
+			Comment: "Stock at the beginning of the first period";
+		}
+		Variable v_stock {
+			IndexDomain: (i_tp,i_node);
+			Range: nonnegative;
+			Comment: "Stock at *end* of period i_tp";
+		}
+	}
+	DeclarationSection Declarations_particular_to_component_based_approach {
+		Parameter bp_arcs {
+			IndexDomain: (i_nodeFrom,i_nodeTo,i_mode);
+			Range: binary;
+			Comment: "1 iff an arc from i_nodeFrom to i_nodeTo exists.";
+		}
+		Parameter p_cost1 {
+			IndexDomain: (i_nodeFrom,i_nodeTo,i_mode)|bp_arcs(i_nodeFrom, i_nodeTo,i_mode);
+			Comment: "Cost to transport over the arc defined by i_nodeFrom, and i_nodeTo.";
+		}
+		Variable v_flow1 {
+			IndexDomain: (i_tp, i_nodeFrom, i_nodeTo, i_mode) | bp_arcs(i_nodeFrom, i_nodeTo, i_mode);
+			Range: nonnegative;
+			Comment: "Flow out of i_nodeFrom into i_nodeTo during period i_tp.";
+		}
+		Constraint c_stockBalance1 {
+			IndexDomain: (i_tp, i_node);
+			Definition: {
+				v_stock(i_tp,i_node) ! Stock at end of period i_tp
+					=
+					if i_tp = first( s_timePeriods ) then
+						p_initialStock(i_node)
+					else
+						v_stock( i_tp - 1, i_node ) ! Stock at end of previous period
+					endif 
+					+
+					sum( (i_nodeFrom,i_mode), v_flow1(i_tp, i_nodeFrom, i_node, i_mode) ) ! Total flow into i_node during period i_tp
+					-
+					sum( (i_nodeTo,i_mode), v_flow1(i_tp, i_node, i_nodeTo, i_mode) ) ! Total flow out of i_node during period i_tp
+			}
+		}
+		Variable v_obj1 {
+			Range: free;
+			Definition: {
+				sum( (i_tp, i_nodeFrom, i_nodeTo, i_mode), 
+					v_flow1(i_tp, i_nodeFrom, i_nodeTo, i_mode) * p_cost1( i_nodeFrom, i_nodeTo, i_mode ) )
+			}
+		}
+	}
+	DeclarationSection Declarations_particular_to_reference_based_approach {
+		Set s_arcIds {
+			Index: i_arc;
+		}
+		ElementParameter ep_arcNodeFrom {
+			IndexDomain: i_arc;
+			Range: s_nodes;
+		}
+		ElementParameter ep_arcNodeTo {
+			IndexDomain: i_arc;
+			Range: s_nodes;
+		}
+		ElementParameter ep_arcMode {
+			IndexDomain: i_arc;
+			Range: s_arcModes;
+		}
+		Parameter p_cost2 {
+			IndexDomain: (i_arc);
+			Comment: "Cost to transport one unit over arc i_arc taking into account its ep_arcNodeFrom, its ep_arcNodeTo, and its ep_arcMode";
+		}
+		Variable v_flow2 {
+			IndexDomain: (i_tp,i_arc);
+			Range: nonnegative;
+		}
+		Constraint c_stockBalance2 {
+			IndexDomain: (i_tp,i_node);
+			Definition: {
+				v_stock(i_tp,i_node) ! Stock at end of period i_tp
+					=
+					if i_tp = first( s_timePeriods ) then
+						p_initialStock(i_node)
+					else
+						v_stock( i_tp - 1, i_node ) ! Stock at end of previous period
+					endif 
+					+
+					sum( i_arc | ep_arcNodeTo(i_arc) = i_node, 
+						v_flow2(i_tp, i_arc ) ) ! Total flow into i_node during period i_tp
+					-
+					sum( i_arc | ep_arcNodefrom(i_arc) = i_node, 
+						v_flow2(i_tp, i_arc ) ) ! Total flow out of i_node during period i_tp
+			}
+		}
+		Variable v_obj2 {
+			Range: free;
+			Definition: sum( (i_tp, i_arc), v_flow2( i_tp, i_arc ) * p_cost2( i_arc ) );
+		}
+	}
+	Section Application_initialization_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				!return DataManagementExit();
+				return 1 ; ! This app does not work with AIMMS cases; so we don't need DataManagementExit.
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+	Procedure MainExecution;
+}

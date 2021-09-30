@@ -1,0 +1,238 @@
+## ams_version=1.0
+
+Model Main_TimeSpace {
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: minute->s : #-># * 60;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsWebUI.
+				
+				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
+			}
+		}
+	}
+	DeclarationSection Declarations_common_to_both_approaches {
+		Set s_timePeriods {
+			Index: i_tp;
+			Comment: "A discrete set of time periods.";
+		}
+		Set s_nodes {
+			Index: i_node, i_nodeFrom, i_nodeTo;
+		}
+		Parameter p_initialStock {
+			IndexDomain: i_node;
+			Comment: "Stock at the beginning of the first period";
+		}
+		Variable v_stock {
+			IndexDomain: (i_tp,i_node);
+			Range: nonnegative;
+			Comment: "Stock at *end* of period i_tp";
+		}
+	}
+	DeclarationSection Common_database_declarations {
+		StringParameter sp_connectionString {
+			Definition: "data/TimeSpaceNetworkData.dsn";
+		}
+		DatabaseTable db_locations {
+			DataSource: sp_connectionString;
+			TableName: "Locations";
+			Mapping: {
+				"Name"          -->i_node,
+				"Initial stock" -->p_initialStock( i_node )
+			}
+		}
+	}
+	Procedure pr_writeCommon {
+		Body: {
+			write to table db_locations in dense mode ;
+		}
+	}
+	DeclarationSection Declarations_for_component_based_approach {
+		Parameter bp_arcs {
+			IndexDomain: (i_nodeFrom,i_nodeTo);
+			Range: binary;
+			Comment: "1 iff an arc from i_nodeFrom to i_nodeTo exists.";
+		}
+		Parameter p_cost1 {
+			IndexDomain: (i_nodeFrom,i_nodeTo);
+			Comment: "Cost to transport over the arc defined by i_nodeFrom, and i_nodeTo.";
+		}
+		Variable v_flow1 {
+			IndexDomain: (i_tp, i_nodeFrom, i_nodeTo) | bp_arcs(i_nodeFrom, i_nodeTo);
+			Range: nonnegative;
+			Comment: "Flow out of i_nodeFrom into i_nodeTo during period i_tp.";
+		}
+		Constraint c_stockBalance1 {
+			IndexDomain: (i_tp, i_node);
+			Definition: {
+				v_stock(i_tp,i_node) ! Stock at end of period i_tp
+					=
+					if i_tp = first( s_timePeriods ) then
+						p_initialStock(i_node)
+					else
+						v_stock( i_tp - 1, i_node ) ! Stock at end of previous period
+					endif 
+					+
+					sum( i_nodeFrom, v_flow1(i_tp, i_nodeFrom, i_node) ) ! Total flow into i_node during period i_tp
+					-
+					sum( i_nodeTo, v_flow1(i_tp, i_node, i_nodeTo) ) ! Total flow out of i_node during period i_tp
+			}
+		}
+		Variable v_obj1 {
+			Range: free;
+			Definition: {
+				sum( (i_tp, i_nodeFrom, i_nodeTo), 
+					v_flow1(i_tp, i_nodeFrom, i_nodeTo) * p_cost1( i_nodeFrom, i_nodeTo ) )
+			}
+		}
+	}
+	DeclarationSection database_declarations_for_component_based_approach {
+		DatabaseTable db_arcs1 {
+			DataSource: sp_connectionString;
+			TableName: "Arcs";
+			Mapping: {
+				"arcId"          -->i_arc,
+				"from"           -->ep_arcNodeFrom( i_arc ),
+				"to"             -->ep_arcNodeTo( i_arc ),
+				"flow unit cost" -->p_cost2( i_arc )
+			}
+		}
+	}
+	Procedure pr_writeComponents {
+		Body: {
+			!update sp_connectionString;
+			empty db_arcs1;
+			write to table db_arcs1 ;
+		}
+	}
+	DeclarationSection Declarations_for_reference_based_approach {
+		Set s_arcIds {
+			Index: i_arc;
+		}
+		ElementParameter ep_arcNodeFrom {
+			IndexDomain: i_arc;
+			Range: s_nodes;
+		}
+		ElementParameter ep_arcNodeTo {
+			IndexDomain: i_arc;
+			Range: s_nodes;
+		}
+		Parameter p_cost2 {
+			IndexDomain: (i_arc);
+			Comment: "Cost to transport one unit over arc i_arc taking into account its ep_arcNodeFrom, its ep_arcNodeTo, and its ep_arcMode";
+		}
+		Variable v_flow2 {
+			IndexDomain: (i_tp,i_arc);
+			Range: nonnegative;
+		}
+		Constraint c_stockBalance2 {
+			IndexDomain: (i_tp,i_node);
+			Definition: {
+				v_stock(i_tp,i_node) ! Stock at end of period i_tp
+					=
+					if i_tp = first( s_timePeriods ) then
+						p_initialStock(i_node)
+					else
+						v_stock( i_tp - 1, i_node ) ! Stock at end of previous period
+					endif 
+					+
+					sum( i_arc | ep_arcNodeTo(i_arc) = i_node, 
+						v_flow2(i_tp, i_arc ) ) ! Total flow into i_node during period i_tp
+					-
+					sum( i_arc | ep_arcNodefrom(i_arc) = i_node, 
+						v_flow2(i_tp, i_arc ) ) ! Total flow out of i_node during period i_tp
+			}
+		}
+		Variable v_obj2 {
+			Range: free;
+			Definition: sum( (i_tp, i_arc), v_flow2( i_tp, i_arc ) * p_cost2( i_arc ) );
+		}
+	}
+	DeclarationSection Declarations_for_set_semantic_support_of_reference_based_approach {
+		ElementParameter ep_arbitraryArc {
+			Range: s_arcIds;
+		}
+		ElementParameter ep_maxFlowArc {
+			Range: s_arcIds;
+		}
+		Set s_orderedArcsByFlow {
+			SubsetOf: s_arcIds;
+			OrderBy: user;
+		}
+		Set s_outgoingArcs {
+			IndexDomain: i_node;
+			SubsetOf: s_arcIds;
+		}
+	}
+	Section Application_initialization_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Body: {
+				read from file "data/input.txt" ;
+				
+				bp_arcs(i_nodeFrom, i_nodeTo) += bp_arcs(i_nodeTo, i_nodeFrom);
+				p_cost1(i_nodeFrom, i_nodeTo) += p_cost1(i_nodeTo, i_nodeFrom);
+				
+				for ( (i_nodeFrom, i_nodeTo) | bp_arcs(i_nodeFrom, i_nodeTo) ) do
+					SetElementAdd(
+						Setname :  s_arcIds, 
+						Elempar :  ep_newArc, 
+						Newname :  formatString("arc%03i",card(s_arcIds)+1) );
+					ep_arcNodeFrom(ep_newArc) := i_nodeFrom ;
+					ep_arcNodeTo(ep_newArc) := i_nodeTo ;
+					p_cost2(ep_newArc) := p_cost1(i_nodeFrom, i_nodeTo);
+				endfor ;
+				display {ep_arcNodeFrom,ep_arcNodeTo,p_cost2};
+			}
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+			ElementParameter ep_newArc {
+				Range: s_arcIds;
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				!return DataManagementExit();
+				return 1 ; ! This app does not work with AIMMS cases; so we don't need DataManagementExit.
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+	Procedure MainExecution {
+		Body: {
+			ep_arbitraryArc := Element( s_arcIds, round( uniform(1, card( s_arcIds ) ) ) );
+			
+			ep_maxFlowArc := argMax( i_arc, sum( i_tp, v_flow2(i_tp, i_arc) ) );
+			
+			s_orderedArcsByFlow := NBest( i_arc, sum( i_tp, v_flow2(i_tp, i_arc) ), 4 );
+			
+			s_outgoingArcs( i_node ) := { i_arc | ep_arcNodeFrom( i_arc ) = i_node };
+		}
+	}
+}

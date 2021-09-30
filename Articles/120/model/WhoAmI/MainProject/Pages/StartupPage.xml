@@ -1,37 +1,39 @@
 <?xml version="1.0"?>
-<Page Version="4000" TimeStamp="2019-11-22 07:41:22">
+<Page Version="4000" TimeStamp="2021-09-02 13:47:32">
 	<PageEditSize Type="Inherited" />
 	<ProjectUUID>6A3A0E1D-07CB-450D-A88F-CB5165E955F3</ProjectUUID>
 	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
 	<Background Inherited="true" />
 	<PageObject Type="Scalar">
 		<Location top="54" left="48" bottom="150" right="372" />
+		<TabOrder>4</TabOrder>
 		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<Layout>Text-Value</Layout>
 		<SeparatorSign>=</SeparatorSign>
 		<ExplicitIdentifier>
-			<Identifier>sp_Env</Identifier>
+			<Identifier>sp_ds_Env</Identifier>
 			<NumberFormat Width="40" Decimals="0" Alignment="Left" ShowDefaults="true" />
 		</ExplicitIdentifier>
 		<ExplicitIdentifier>
-			<Identifier>sp_Usr</Identifier>
+			<Identifier>sp_ds_Usr</Identifier>
 			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
 		</ExplicitIdentifier>
 		<ExplicitIdentifier>
-			<Identifier>sp_Bucket</Identifier>
+			<Identifier>sp_ds_Bucket</Identifier>
 			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
 		</ExplicitIdentifier>
 	</PageObject>
 	<PageObject Type="Table">
 		<Location top="54" left="396" bottom="150" right="774" />
+		<TabOrder>1</TabOrder>
 		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
 		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
 		<BackgroundColor RGB="#ffffff" />
 		<RowIndentation>3</RowIndentation>
 		<ExplicitIdentifier>
-			<Identifier>sp_UsrGroupNames( i_ug )</Identifier>
+			<Identifier>sp_ds_UsrGroupNames( i_ds_ug )</Identifier>
 			<FirstColumn>1</FirstColumn>
 			<NumberFormat Width="15" Decimals="0" />
 		</ExplicitIdentifier>
@@ -48,13 +50,78 @@
 		<Font GUID="2A210F3A-8F95-4798-A888-9936B8D34599" Name="Arial12b" />
 		<TextColor RGB="#000000" />
 	</PageObject>
+	<PageObject Type="Button">
+		<Location top="330" left="60" bottom="396" right="378" />
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"WhoAmI"</Title>
+		<Font GUID="944651F2-F035-4D34-8410-A871DD338E8B" Name="ArialNarrow14b" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_GetUserNameRoles</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="168" left="48" bottom="264" right="372" />
+		<TabOrder>4</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>sp_ss_Env</Identifier>
+			<NumberFormat Width="40" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_ss_Env</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>sp_ss_Bucket</Identifier>
+			<NumberFormat Width="15" Decimals="0" Alignment="Left" ShowDefaults="true" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Table">
+		<Location top="168" left="396" bottom="264" right="774" />
+		<TabOrder>1</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<RowIndentation>3</RowIndentation>
+		<ExplicitIdentifier>
+			<Identifier>sp_ss_UsrGroupNames( i_ss_ug )</Identifier>
+			<FirstColumn>1</FirstColumn>
+			<NumberFormat Width="15" Decimals="0" />
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="84" left="798" bottom="108" right="1122" />
+		<StaticText>For data session</StaticText>
+		<Font GUID="2A210F3A-8F95-4798-A888-9936B8D34599" Name="Arial12b" />
+		<TextColor RGB="#000000" />
+	</PageObject>
+	<PageObject Type="Text">
+		<Location top="204" left="798" bottom="228" right="1122" />
+		<StaticText>For solver session</StaticText>
+		<Font GUID="2A210F3A-8F95-4798-A888-9936B8D34599" Name="Arial12b" />
+		<TextColor RGB="#000000" />
+	</PageObject>
 	<UsedReferences>
 		<Model>
-			<Symbol>sp_Env</Symbol>
-			<Symbol>sp_Usr</Symbol>
-			<Symbol>sp_Bucket</Symbol>
-			<Symbol>sp_UsrGroupNames</Symbol>
-			<Symbol>i_ug</Symbol>
+			<Symbol>sp_ds_Env</Symbol>
+			<Symbol>sp_ds_Usr</Symbol>
+			<Symbol>sp_ds_Bucket</Symbol>
+			<Symbol>sp_ds_UsrGroupNames</Symbol>
+			<Symbol>pr_GetUserNameRoles</Symbol>
+			<Symbol>i_ds_ug</Symbol>
+			<Symbol>sp_ss_Env</Symbol>
+			<Symbol>sp_ss_Bucket</Symbol>
+			<Symbol>sp_ss_UsrGroupNames</Symbol>
+			<Symbol>i_ss_ug</Symbol>
 		</Model>
 	</UsedReferences>
 </Page>

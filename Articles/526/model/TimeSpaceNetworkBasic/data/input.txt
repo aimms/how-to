@@ -1,0 +1,22 @@
+﻿s_nodes := data { Paris, Stockholm, Madrid, Berlin, Rome };
+
+p_initialStock(i_node) := data { Paris : 10, Stockholm : 9, Madrid : 0, Berlin: 0, Rome : 0 };
+
+bp_arcs(i_nodeFrom,i_nodeTo) := data table
+           Paris  Stockholm  Madrid  Berlin  Rome
+Paris               1         1        1  
+Stockholm                     1                1
+Madrid                                 1       1
+Berlin                                         1
+Rome
+;
+
+p_cost1(i_nodeFrom,i_nodeTo) := data table
+           Paris  Stockholm  Madrid  Berlin  Rome
+Paris               3         4        5  
+Stockholm                     6                9
+Madrid                                 8       8
+Berlin                                         2
+Rome
+;
+

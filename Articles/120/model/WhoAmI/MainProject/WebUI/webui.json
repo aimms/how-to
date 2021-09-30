@@ -9,6 +9,65 @@
     }
   },
   "pages/home": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "Solver session groups in AIMMS PRO",
+          "gridArea": "area-d",
+          "dndId": "area-dSolver session groups in AIMMS PRO0"
+        },
+        {
+          "widgetUri": "grpNa,mes",
+          "gridArea": "area-d",
+          "dndId": "Unassigned widgetsgrpNa,mes5"
+        },
+        {
+          "widgetUri": "Solver session identity in AIMMS PRO",
+          "gridArea": "area-c",
+          "dndId": "area-cSolver session identity in AIMMS PRO1"
+        },
+        {
+          "widgetUri": "GroupIdentityInfo",
+          "gridArea": "area-b",
+          "dndId": "area-bGroupIdentityInfo2"
+        },
+        {
+          "widgetUri": "ScalarIdentityInfo",
+          "gridArea": "area-a",
+          "dndId": "area-aScalarIdentityInfo3"
+        },
+        {
+          "widgetUri": "WhoAmI",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsWhoAmI4"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout5"
+    },
+    "primarypageaction": {
+      "aimms": {
+        "contents": [
+          "sp_primaryPageAction"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_primaryPageAction",
+            "slice": [
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "widgets": {
       "literal": [
         {
@@ -24,25 +83,27 @@
             "width": "2",
             "height": "2"
           }
+        },
+        {
+          "uri": "WhoAmI",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "Solver session identity in AIMMS PRO",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "Solver session groups in AIMMS PRO",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "grpNa,mes",
+          "layoutInfo": {}
         }
       ]
-    }
-  },
-  "widgets/ScalarIdentityInfo": {
-    "aimms.widget.type": {
-      "literal": "scalar"
-    },
-    "contents": {
-      "aimms": {
-        "contents": [
-          "sp_Env",
-          "sp_Usr",
-          "sp_Bucket"
-        ]
-      }
-    },
-    "title": {
-      "literal": "Identity in AIMMS PRO"
     }
   },
   "widgets/GroupIdentityInfo": {
@@ -52,14 +113,14 @@
     "contents": {
       "aimms": {
         "contents": [
-          "sp_UsrGroupNames"
+          "sp_ds_UsrGroupNames"
         ]
       }
     },
     "contents.partition": {
       "literal": {
         "rowHeader": [
-          "i_ug"
+          "i_ds_ug"
         ],
         "colHeader": [
           "<IDENTIFIER-SET>"
@@ -75,11 +136,148 @@
             "<IDENTIFIER-SET>": "sp_UsrGroupNames"
           },
           "width": 30.8519003931848
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_ds_UsrGroupNames"
+          },
+          "width": 58.29
         }
       ]
     },
+    "name": {
+      "literal": "GroupIdentityInfo"
+    },
     "title": {
       "literal": "AIMMS PRO Groups I'm in"
+    }
+  },
+  "widgets/grpNa,mes": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_grpName"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_g"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "grpNa,mes"
+    },
+    "title": {
+      "literal": "Output of pro::authentication::GetCurrentUserGroupList"
+    }
+  },
+  "widgets/ScalarIdentityInfo": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_ds_Env",
+          "sp_ds_Usr",
+          "sp_ds_Bucket"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Identity in AIMMS PRO"
+    },
+    "name": {
+      "literal": "ScalarIdentityInfo"
+    }
+  },
+  "widgets/Solver session groups in AIMMS PRO": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_ss_UsrGroupNames"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_ss_ug"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_ss_UsrGroupNames"
+          },
+          "width": 64.45
+        }
+      ]
+    },
+    "name": {
+      "literal": "Solver session groups in AIMMS PRO"
+    },
+    "title": {
+      "literal": "AIMMS PRO Groups user is in during solver session"
+    }
+  },
+  "widgets/Solver session identity in AIMMS PRO": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_ss_Env",
+          "sp_ss_Usr",
+          "sp_ss_Bucket",
+          "p_gcuRetCode"
+        ]
+      }
+    },
+    "name": {
+      "literal": "Solver session identity in AIMMS PRO"
+    },
+    "title": {
+      "literal": "Identity used in Solver Session"
+    }
+  },
+  "widgets/WhoAmI": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_GetUserNameRoles"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "WhoAmI"
+    },
+    "title": {
+      "literal": "WhoAmI"
     }
   }
 }
