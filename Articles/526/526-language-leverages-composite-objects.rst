@@ -1,9 +1,9 @@
-Deploying AIMMS semantics for elements to composite objects
+Deploying AIMMS set semantics to composite objects
 =================================================================
 
 This is a companion article to :doc:`Identifying Composite Objects in Mathematical Programming Modeling <../526/526-modeling-composite-objects>`.
 
-AIMMS set semantics provides extensive functionality on sets and elements, including:
+AIMMS set semantics provides extensive functionality on sets and elements, including amongst others:
 
 #.  `element parameters <https://documentation.aimms.com/language-reference/non-procedural-language-components/parameter-declaration/index.html>`_,
 
@@ -33,18 +33,23 @@ The component based approach is sufficient to support the above mentioned functi
 
 As each reference element is an element in an AIMMS set, and a reference element references a composite object; the reference based approach for composite objects can be used in conjunction with AIMMS set semantics.
 
+As the set ``s_arcIds`` is an ordinary set, so we can use it everywhere an AIMMS set can be used; for instance in the following declarations:
 
 .. code-block:: aimms
     :linenos:
 
     DeclarationSection Declarations_for_set_semantic_support_of_reference_based_approach {
+        Parameter p_totArcFlow {
+            IndexDomain: i_arc;
+        }
         ElementParameter ep_arbitraryArc {
             Range: s_arcIds;
         }
-        ElementParameter ep_maxFlowArc {
+        ElementParameter ep_maxOutFlowArc {
+            IndexDomain: i_node;
             Range: s_arcIds;
         }
-        Set s_orderedArcsByFlow {
+        Set s_fewOrderedArcsByFlow {
             SubsetOf: s_arcIds;
             OrderBy: user;
         }
@@ -54,20 +59,39 @@ As each reference element is an element in an AIMMS set, and a reference element
         }
     }
 
+With these declarations, the existing AIMMS language can be used:
 
 .. code-block:: aimms
     :linenos:
 
     Procedure MainExecution {
         Body: {
-            ep_arbitraryArc := Element( s_arcIds, round( uniform(1, card( s_arcIds ) ) ) );
-            
-            ep_maxFlowArc := argMax( i_arc, sum( i_tp, v_flow2(i_tp, i_arc) ) );
-            
-            s_orderedArcsByFlow := NBest( i_arc, sum( i_tp, v_flow2(i_tp, i_arc) ), 4 );
-            
-            s_outgoingArcs( i_node ) := { i_arc | ep_arcNodeFrom( i_arc ) = i_node };
+            p_totArcFlow(i_arc) := sum( i_tp, v_flow2(i_tp, i_arc) );
+
+            ep_arbitraryArc := Element( s_arcIds, 
+                round( uniform(1, card( s_arcIds ) ) ) );
+
+            ep_maxOutFlowArc(i_node) := 
+                argMax( i_arc | ep_arcNodeFrom( i_arc ) = i_node, 
+                    p_totArcFlow(i_arc) );
+
+            s_fewOrderedArcsByFlow := NBest( i_arc, p_totArcFlow(i_arc), 4 );
+
+            s_outgoingArcs( i_node ) := 
+                { i_arc | ep_arcNodeFrom( i_arc ) = i_node };
         }
     }
+
+Remarks on the above code:
+
+#.  Line 3: Ordinary summation.
+
+#.  Line 5,6: Just selecting an arbitrary arc.
+
+#.  Line 8-10: Here we can select the outgoing arc over which the maximum flow is per node.
+
+#.  Line 12: Using the NBest operator, we can select a few arcs based on flow amount.
+
+#.  Line 14.15: Filling an indexed set; for each node the set of outgoing arcs.
 
 

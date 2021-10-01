@@ -51,7 +51,7 @@ And then the writing to that table is done using the following code:
 .. code-block:: aimms
     :linenos:
 
-    Procedure pr_writeArcsComponentBased {
+    Procedure pr_writeComponentBasedToDatabase {
         Body: {
             write to table db_arcs1 ;
         }
@@ -80,7 +80,7 @@ As the reference based approach is closely linked to database design for objects
 .. code-block:: aimms
     :linenos:
 
-    Procedure pr_writeArcsReferenceBased {
+    Procedure pr_writeReferenceBasedToDatabase {
         Body: {
             write to table db_arcs2 ;
         }

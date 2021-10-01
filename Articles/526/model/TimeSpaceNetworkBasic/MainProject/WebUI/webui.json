@@ -1,11 +1,163 @@
 {
+  "version": "4.67.0",
   "application": {
     "aimms.widget.type": {
       "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home",
+                "type": "pagev2-grid",
+                "children": [
+                  {
+                    "name": "Component based data",
+                    "type": "pagev2-grid",
+                    "slug": "component_based_data",
+                    "children": []
+                  },
+                  {
+                    "name": "Reference based data",
+                    "type": "pagev2-grid",
+                    "slug": "reference_based_data",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     "theme.classic": {
       "literal": "NOT_ALLOWED"
     }
   },
-  "version": "4.67.0"
+  "pages/component_based_data": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "flow cost",
+          "gridArea": "area-b",
+          "dndId": "Unassigned widgetsflow cost1"
+        },
+        {
+          "widgetUri": "valid arcs",
+          "gridArea": "area-a",
+          "dndId": "area-avalid arcs0"
+        }
+      ]
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "valid arcs",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "flow cost",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "valid arcs",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsvalid arcs0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout1"
+    },
+    "widgets": {
+      "literal": []
+    }
+  },
+  "widgets/flow cost": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_cost1"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_cost1": "bp_arcs"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_nodeTo",
+          "i_nodeFrom"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_cost1"
+          },
+          "width": 22.29
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_nodeTo",
+          "width": 21.48
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_nodeFrom",
+          "width": 19.25
+        }
+      ]
+    },
+    "name": {
+      "literal": "flow cost"
+    }
+  },
+  "widgets/valid arcs": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "bp_arcs"
+        ]
+      }
+    },
+    "name": {
+      "literal": "valid arcs"
+    }
+  }
 }
