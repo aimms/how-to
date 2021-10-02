@@ -1,20 +1,22 @@
-Identifying Composite Objects in Mathematical Programming Modeling
+Modeling composite objects
 ================================================================== 
 
-Most real world objects referenced in a model are identified by their name or natural number in a sequence.
-Two examples are: 
-
-*   Locations: a unique name of that location suffices to identify the object at hand.
-
-*   Periods: a period number in a sequence of periods suffices to identify the object at hand.
-
-In an AIMMS model, these objects are referenced by elements in sets: the set of locations and the set of periods respectively.
-These sets contain atomic elements; there is no further structure to these elements.
+Many sets in AIMMS models refer to atomic objecs; there is no further structure to the objects referenced.
+Examples are locations and period numbers.
 
 In contrast, an arc is identified by its components: its source and destination locations.
+This make an arc a composite object.
 
-Compound sets are no longer available in AIMMS, so how to conveniently model composite objects such as arcs in an AIMMS model?
-In this how-to article, two approaches will be discussed that both provide an answer to this question.  
+How to model such composite objects in AIMMS, as compound sets are no longer available in AIMMS?
+
+In this how-to article two approaches are presented: the component based approach and the reference based approach. 
+The component based approach is in widespread use and the reference based approach is inspired by database design.
+
+This article introduces both approaches and how they are used in the definition of variables and constraints for a mathematical program.
+In addition, both approaches can be used in :doc:`composite database exchange<../526/526-composite-exchange-database>`. 
+Moreover, both approaches can be used in :doc:`data reporting in the WebUI<../526/526-reporting-data-over-composite-objects>`.
+
+However, unlike the component based approach, the reference based approach turns out to be able to use the :doc:`AIMMS Set functionality<../526/526-language-leverages-composite-objects>` and for :doc:`hierarchical composite objects<../526/526-hierarchical-composite-objects>`.
 
 Both approaches will be illustrated by a single running example, which will be introduced next.
 
@@ -23,10 +25,10 @@ The running example
 
 We want to develop a time space network: a network with flows over arcs for discrete time periods.
 Each arc has a from node and a to node.
-The flow over an arc has a cost, possibly 0.
-There is a stock balance for each node, as each node has incoming arcs (perhaps 0), and outgoing arcs (perhaps 0), and a min and a max on the amount of inventory (both possibly 0).
+The flow over an arc has a cost.
+There is a stock balance for each node, as each node has incoming arcs, and outgoing arcs, and a min and a max on the amount of inventory.
 
-Let's first specify some identifiers that are independent of the case selected:
+Let's first specify some identifiers that are independent of the approach selected:
 
 Common identifiers
 ^^^^^^^^^^^^^^^^^^
@@ -53,7 +55,7 @@ Remarks on the above code:
 
 #.  Line 1: As usual in mathematical programming modeling, we discretize time to a discrete set of periods.
 
-#.  Line 2: As numbers are sufficient, the set is made a subset of the set ``Integers``; thereby ensuring that the elements are ordered as expected.
+#.  Line 2: As numbers are sufficient, the set is made a subset of the set ``Integers``; thereby ensuring that the elements are ordered as expected. See also :doc:`../112/112-Integer-properties`
 
 #.  Line 5: The nodes are locations, and only the name of each location is needed to identify a node.
 

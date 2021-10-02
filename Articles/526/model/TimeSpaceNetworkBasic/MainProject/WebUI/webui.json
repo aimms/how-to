@@ -147,7 +147,8 @@
     "contents": {
       "aimms": {
         "contents": [
-          "p_cost2"
+          "p_cost2",
+          "v_flow2"
         ]
       }
     },
@@ -162,7 +163,8 @@
           "i_arc"
         ],
         "colHeader": [
-          "<IDENTIFIER-SET>"
+          "<IDENTIFIER-SET>",
+          "i_tp"
         ],
         "aggregated": []
       }
@@ -186,6 +188,9 @@
           "width": 28.42
         }
       ]
+    },
+    "default.column.width": {
+      "literal": 15
     },
     "name": {
       "literal": "Arc data"
@@ -232,7 +237,8 @@
     "contents": {
       "aimms": {
         "contents": [
-          "p_cost1"
+          "p_cost1",
+          "v_flow1"
         ]
       }
     },
@@ -244,11 +250,12 @@
     "contents.partition": {
       "literal": {
         "rowHeader": [
-          "i_nodeTo",
-          "i_nodeFrom"
+          "i_nodeFrom",
+          "i_nodeTo"
         ],
         "colHeader": [
-          "<IDENTIFIER-SET>"
+          "<IDENTIFIER-SET>",
+          "i_tp"
         ],
         "aggregated": []
       }
@@ -273,6 +280,9 @@
           "width": 19.25
         }
       ]
+    },
+    "default.column.width": {
+      "literal": 15
     },
     "name": {
       "literal": "flow cost"

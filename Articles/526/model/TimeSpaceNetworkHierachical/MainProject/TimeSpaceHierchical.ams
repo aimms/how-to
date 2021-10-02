@@ -19,7 +19,21 @@ Model Main_TimeSpaceHierchical {
 		}
 	}
 	DeclarationSection Node_decls {
-		Set s_locations;
+		Set s_locations {
+			Index: i_loc;
+		}
+		Set s_productionLocations {
+			SubsetOf: s_locations;
+			Definition: {
+				{ i_loc | exists( i_node | ep_nodeLocation(i_node) = i_loc and ep_nodeType( i_node ) = 'Production' ) }
+			}
+		}
+		Set s_distributionLocations {
+			SubsetOf: s_locations;
+			Definition: {
+				{ i_loc | exists( i_node | ep_nodeLocation(i_node) = i_loc and ep_nodeType( i_node ) = 'Distribution' ) }
+			}
+		}
 		Set s_nodeTypes {
 			Definition: data { Production, Distribution };
 		}
@@ -42,6 +56,20 @@ Model Main_TimeSpaceHierchical {
 			IndexDomain: i_node;
 			Comment: "Stock at the beginning of the first period";
 		}
+		StringParameter sp_nodeName {
+			IndexDomain: i_node;
+			Definition: {
+				if p_noNodesPerLocation(ep_nodeLocation( i_node)) = 1 then
+					formatString("%e", ep_nodeLocation( i_node) )
+				else
+					formatString("%e (%e)", ep_nodeLocation( i_node), ep_nodeType( i_node ) )
+				endif
+			}
+		}
+		Parameter p_noNodesPerLocation {
+			IndexDomain: i_loc;
+			Definition: Count( i_node | ep_nodeLocation(i_node) = i_loc );
+		}
 	}
 	DeclarationSection Arc_decls {
 		Set s_arcIds {
@@ -59,6 +87,15 @@ Model Main_TimeSpaceHierchical {
 		Parameter p_cost {
 			IndexDomain: (i_arc);
 			Comment: "Cost to transport one unit over arc i_arc taking into account its ep_arcNodeFrom, its ep_arcNodeTo, and its ep_arcMode";
+		}
+		StringParameter sp_arcName {
+			IndexDomain: i_arc;
+			Definition: {
+				formatString( "%s %s %s", 
+					sp_nodeName( ep_arcNodeFrom( i_arc ) ), 
+					character( 10230 ), ! Long right arrow (unicode char).
+					sp_nodeName( ep_arcNodeTo(   i_arc ) ) )
+			}
 		}
 	}
 	DeclarationSection Set_decls {
@@ -210,15 +247,6 @@ Model Main_TimeSpaceHierchical {
 				Range: binary;
 				Definition: {
 					pr_defArcDef();
-				}
-			}
-			StringParameter sp_arcName {
-				IndexDomain: i_arc;
-				Definition: {
-					formatString( "%e %s %e", 
-						ep_arcNodeFrom( i_arc ), 
-						character( 10230 ), ! Right arrow unicode.
-						ep_arcNodeTo(   i_arc ) )
 				}
 			}
 		}

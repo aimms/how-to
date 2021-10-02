@@ -103,7 +103,8 @@
     "contents": {
       "aimms": {
         "contents": [
-          "p_cost"
+          "p_cost",
+          "v_flow"
         ]
       }
     },
@@ -118,7 +119,8 @@
           "i_arc"
         ],
         "colHeader": [
-          "<IDENTIFIER-SET>"
+          "<IDENTIFIER-SET>",
+          "i_tp"
         ],
         "aggregated": []
       }
@@ -126,16 +128,16 @@
     "custom.column.widths": {
       "literal": [
         {
-          "type": "rowHeader",
-          "colKey": "i_arc",
-          "width": 41.65
-        },
-        {
           "type": "colHeader",
           "colKey": {
             "<IDENTIFIER-SET>": "p_cost2"
           },
           "width": 15.06
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_arc",
+          "width": 47.87
         }
       ]
     },
