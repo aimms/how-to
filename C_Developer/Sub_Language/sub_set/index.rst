@@ -18,6 +18,7 @@ These topics cover what you need to use the set semantics in the AIMMS language 
    /Articles/526/526-composite-exchange-database
    /Articles/526/526-language-leverages-composite-objects
    /Articles/526/526-reporting-data-over-composite-objects
+   /Articles/526/526-hierarchical-composite-objects
    /Articles/141/141-element-after-last
    /Articles/112/112-Integer-properties
    /Articles/175/175-select-variables-and-constraints-for-math-program

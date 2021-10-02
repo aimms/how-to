@@ -161,6 +161,7 @@ Model Main_TimeSpace {
 		DeclarationSection Declarations_for_reference_based_approach {
 			Set s_arcIds {
 				Index: i_arc;
+				webui::ElementTextIdentifier: sp_arcName( i_arc );
 			}
 			ElementParameter ep_arcNodeFrom {
 				IndexDomain: i_arc;
@@ -198,25 +199,6 @@ Model Main_TimeSpace {
 						v_production(i_tp, i_node)
 						-
 						p_demand(i_tp, i_node)
-				}
-				Comment: {
-					"v_stock(i_tp,i_node) ! Stock at end of period i_tp
-						=
-						if i_tp = first( s_timePeriods ) then
-							p_initialStock(i_node)
-						else
-							v_stock( i_tp - 1, i_node ) ! Stock at end of previous period
-						endif 
-						+
-						sum( i_arc | bp_isIncomingArc(i_node, i_arc), ! i_arc in s_incomingArcs(i_node), ! ep_arcNodeTo(i_arc) = i_node, 
-							v_flow2( i_tp, i_arc ) ) ! Total flow into i_node during period i_tp
-						-
-						sum( i_arc | bp_isOutgoingArc(i_node, i_arc), ! i_arc in s_outgoingArcs(i_node), ! ep_arcNodefrom(i_arc) = i_node, 
-							v_flow2( i_tp, i_arc ) ) ! Total flow out of i_node during period i_tp
-						+
-						v_production(i_tp, i_node)
-						-
-						p_demand(i_tp, i_node)"
 				}
 			}
 			Variable v_obj2 {
@@ -313,6 +295,34 @@ Model Main_TimeSpace {
 				
 				s_outgoingArcs( i_node ) := { i_arc | ep_arcNodeFrom( i_arc ) = i_node };
 				s_incomingArcs( i_node ) := { i_arc | ep_arcNodeTo( i_arc ) = i_node };
+			}
+		}
+		DeclarationSection WebUI_deployment {
+			Parameter bp_arcsDef {
+				IndexDomain: (i_nodeFrom,i_nodeTo);
+				Range: binary;
+				Definition: {
+					pr_defArcDef();
+				}
+			}
+			StringParameter sp_arcName {
+				IndexDomain: i_arc;
+				Definition: {
+					formatString( "%e %s %e", 
+						ep_arcNodeFrom( i_arc ), 
+						character( 10230 ), ! Right arrow unicode.
+						ep_arcNodeTo(   i_arc ) )
+				}
+			}
+		}
+		Procedure pr_defArcDef {
+			Body: {
+				bp_arcsDefTmp( i_arc, ep_arcNodeFrom( i_arc ), ep_arcNodeTo( i_arc ) ) := 1;
+				bp_arcsDef(i_nodeFrom, i_nodeTo ) := exists( i_arc | bp_arcsDefTmp(i_arc, i_nodeFrom, i_nodeTo) );
+			}
+			Parameter bp_arcsDefTmp {
+				IndexDomain: (i_arc,i_nodeFrom,i_nodeTo);
+				Range: binary;
 			}
 		}
 	}

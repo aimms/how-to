@@ -92,6 +92,139 @@
       "literal": []
     }
   },
+  "pages/reference_based_data": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "Arc data",
+          "gridArea": "area-b",
+          "dndId": "Unassigned widgetsArc data2"
+        },
+        {
+          "widgetUri": "Arcs Set in Table",
+          "gridArea": "area-a",
+          "dndId": "area-aArcs Set in Table0"
+        },
+        {
+          "widgetUri": "Allowed Arcs",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsAllowed Arcs1"
+        }
+      ]
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Allowed Arcs",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "Arcs Set in Table",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "Arc data",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "widgets/Allowed Arcs": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "name": {
+      "literal": "Allowed Arcs"
+    }
+  },
+  "widgets/Arc data": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_cost2"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_cost2": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_arc"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_cost2"
+          },
+          "width": 15.46
+        },
+        {
+          "type": "rowHeader",
+          "width": 13.92
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_arc",
+          "width": 28.42
+        }
+      ]
+    },
+    "name": {
+      "literal": "Arc data"
+    },
+    "title": {
+      "literal": "Arc data"
+    }
+  },
+  "widgets/Arcs Set in Table": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "bp_arcsDef"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_nodeFrom"
+        ],
+        "colHeader": [
+          "i_nodeTo"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "name": {
+      "literal": "Arcs Set in Table"
+    },
+    "title": {
+      "literal": " Arc set in tabular form"
+    }
+  },
   "widgets/flow cost": {
     "aimms.widget.type": {
       "literal": "table"
@@ -143,6 +276,9 @@
     },
     "name": {
       "literal": "flow cost"
+    },
+    "title": {
+      "literal": "Arc data"
     }
   },
   "widgets/valid arcs": {
@@ -156,8 +292,24 @@
         ]
       }
     },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_nodeFrom"
+        ],
+        "colHeader": [
+          "i_nodeTo"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
     "name": {
       "literal": "valid arcs"
+    },
+    "title": {
+      "literal": "Arc condition in tabular form"
     }
   }
 }

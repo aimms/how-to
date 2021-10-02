@@ -1,0 +1,39 @@
+﻿p_arcCapacity := 4 ;
+
+s_locations := data { Paris, Stockholm, Madrid, Berlin, Rome };
+
+s_nodeIds := data { node-1, node-2, node-3, node-4, node-5, node-6 };
+ep_nodeLocation := data { node-1 : Paris,      node-2 : Paris,        node-3 : Stockholm,  node-4 : Madrid,       node-5: Berlin,       node-6 : Rome         };
+ep_nodeType     := data { node-1 : Production, node-2 : Distribution, node-3 : Production, node-4 : Distribution, node-5: Distribution, node-6 : Distribution };
+
+p_initialStock(i_node)  := data { node-1 : 10, node-3 : 9 };
+
+p_productionCap(i_node) := data { node-1 :  7, node-3 : 7 }; 
+
+p_demand(i_tp,i_node) := data table 
+            node-2  node-4  node-5  node-6
+      tp-1   1        2       3       4
+      tp-2   2        3       4       5
+      tp-3   3        4       5       6 
+;
+
+bp_arcs(i_nodeFrom,i_nodeTo) := data table
+           node-1  node-2 node-3  node-4  node-5  node-6
+node-1               1      1         1        1  
+node-2                      1         1        1
+node-3                                1                1
+node-4                                         1       1
+node-5                                                 1
+node-6
+;
+
+p_cost1(i_nodeFrom,i_nodeTo) := data table
+           node-1    node-2 node-3    node-4  node-5  node-6
+node-1                  0    3         4        5  
+node-2                       3         4        5  
+node-3                                 6                9
+node-4                                          8       8
+node-5                                                  2
+node-6                
+;
+

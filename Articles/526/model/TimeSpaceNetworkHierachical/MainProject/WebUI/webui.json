@@ -1,0 +1,180 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "Reference based data",
+                "type": "pagev2-grid",
+                "slug": "reference_based_data",
+                "children": []
+              },
+              {
+                "name": "home",
+                "slug": "home",
+                "type": "pagev2-grid",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": []
+    },
+    "layoutId": {
+      "literal": "Layout1"
+    },
+    "widgets": {
+      "literal": []
+    }
+  },
+  "pages/reference_based_data": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "Arc data",
+          "gridArea": "area-b",
+          "dndId": "Unassigned widgetsArc data2"
+        },
+        {
+          "widgetUri": "Arcs Set in Table",
+          "gridArea": "area-a",
+          "dndId": "area-aArcs Set in Table0"
+        },
+        {
+          "widgetUri": "Allowed Arcs",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsAllowed Arcs1"
+        }
+      ]
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Allowed Arcs",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "Arcs Set in Table",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "Arc data",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "widgets/Allowed Arcs": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "name": {
+      "literal": "Allowed Arcs"
+    }
+  },
+  "widgets/Arc data": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_cost"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_cost": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_arc"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "i_arc",
+          "width": 41.65
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_cost2"
+          },
+          "width": 15.06
+        }
+      ]
+    },
+    "name": {
+      "literal": "Arc data"
+    },
+    "title": {
+      "literal": "Arc data"
+    }
+  },
+  "widgets/Arcs Set in Table": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "bp_arcsDef"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_nodeFrom"
+        ],
+        "colHeader": [
+          "i_nodeTo"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "name": {
+      "literal": "Arcs Set in Table"
+    },
+    "title": {
+      "literal": " Arc set in tabular form"
+    }
+  }
+}

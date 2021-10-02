@@ -1,0 +1,300 @@
+## ams_version=1.0
+
+Model Main_TimeSpaceHierchical {
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: minute->s : #-># * 60;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsWebUI.
+				
+				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
+			}
+		}
+	}
+	DeclarationSection Node_decls {
+		Set s_locations;
+		Set s_nodeTypes {
+			Definition: data { Production, Distribution };
+		}
+		Set s_nodeIds {
+			Index: i_node, i_nodeFrom, i_nodeTo;
+		}
+		ElementParameter ep_nodeLocation {
+			IndexDomain: i_node;
+			Range: s_locations;
+		}
+		ElementParameter ep_nodeType {
+			IndexDomain: i_node;
+			Range: s_nodeTypes;
+		}
+		Parameter p_initialStock {
+			IndexDomain: i_node;
+			Comment: "Stock at the beginning of the first period";
+		}
+		Parameter p_productionCap {
+			IndexDomain: i_node;
+			Comment: "Stock at the beginning of the first period";
+		}
+	}
+	DeclarationSection Arc_decls {
+		Set s_arcIds {
+			Index: i_arc;
+			webui::ElementTextIdentifier: sp_arcName( i_arc );
+		}
+		ElementParameter ep_arcNodeFrom {
+			IndexDomain: i_arc;
+			Range: s_nodeIds;
+		}
+		ElementParameter ep_arcNodeTo {
+			IndexDomain: i_arc;
+			Range: s_nodeIds;
+		}
+		Parameter p_cost {
+			IndexDomain: (i_arc);
+			Comment: "Cost to transport one unit over arc i_arc taking into account its ep_arcNodeFrom, its ep_arcNodeTo, and its ep_arcMode";
+		}
+	}
+	DeclarationSection Set_decls {
+		Set s_timePeriods {
+			Index: i_tp;
+			Definition: ElementRange(1,3,prefix:"tp-");
+			Comment: "A discrete set of time periods.";
+		}
+	}
+	DeclarationSection Parameter_decls {
+		Parameter p_demand {
+			IndexDomain: (i_tp,i_node);
+		}
+		Parameter p_arcCapacity {
+			InitialData: 6;
+		}
+	}
+	Section Math_prog_solve {
+		DeclarationSection math_prog_decls {
+			Variable v_flow {
+				IndexDomain: (i_tp,i_arc);
+				Range: [0, p_arcCapacity];
+			}
+			Variable v_stock {
+				IndexDomain: (i_tp,i_node);
+				Range: nonnegative;
+				Comment: "Stock at *end* of period i_tp";
+			}
+			Variable v_production {
+				IndexDomain: (i_tp,i_node);
+				Range: [0, p_productionCap(i_node)];
+			}
+			Constraint c_stockBalance {
+				IndexDomain: (i_tp,i_node);
+				Definition: {
+					v_stock(i_tp,i_node) ! Stock at end of period i_tp
+						=
+						if i_tp = first( s_timePeriods ) then
+							p_initialStock(i_node)
+						else
+							v_stock( i_tp - 1, i_node ) ! Stock at end of previous period
+						endif 
+						+
+						sum( i_arc | ep_arcNodeTo(i_arc) = i_node, 
+							v_flow( i_tp, i_arc ) ) ! Total flow into i_node during period i_tp
+						-
+						sum( i_arc | ep_arcNodefrom(i_arc) = i_node, 
+							v_flow( i_tp, i_arc ) ) ! Total flow out of i_node during period i_tp
+						+
+						v_production(i_tp, i_node)
+						-
+						p_demand(i_tp, i_node)
+				}
+			}
+			Variable v_obj {
+				Range: free;
+				Definition: {
+					sum( (i_tp,i_node), v_production(i_tp, i_node) * 8 ) ! Cost of producing.
+					+
+					sum( (i_tp, i_arc), v_flow( i_tp, i_arc ) * p_cost( i_arc ) ) ! Cost of transporting.
+				}
+			}
+			MathematicalProgram mp_Hierarch {
+				Objective: v_obj;
+				Direction: minimize;
+				Constraints: AllConstraints;
+				Variables: AllVariables;
+				Type: Automatic;
+			}
+		}
+		Procedure pr_solve {
+			Body: {
+				solve mp_Hierarch ;
+			}
+		}
+	}
+	Section Text_input_output_section {
+		Procedure pr_writeDataAsText {
+			Body: {
+				put outf ;
+				
+					! First the scalars:
+					display p_arcCapacity ;
+				
+					! The sets with atomic elements
+					display s_locations ;
+				
+					! The node data
+					display { ep_nodeLocation(i_node), ep_nodeType(i_node), p_initialStock(i_node), p_productionCap(i_node) };
+				
+					! The arc data
+					display { ep_arcNodeFrom(i_arc), ep_arcNodeTo(i_arc), p_cost(i_arc) };
+				
+					! Higher dimension data
+					display p_demand ;
+				
+				putclose ;
+			}
+			File outf {
+				Name: "data/echo.txt";
+				Device: Disk;
+				Mode: replace;
+			}
+		}
+	}
+	Section database_sections {
+		Procedure pr_writeCommon {
+			Body: {
+				write to table db_locations in dense mode ;
+			}
+		}
+		Procedure pr_writeReferenceBasedToDatabase {
+			Body: {
+				update sp_connectionString;
+				empty db_arcs2;
+				write to table db_arcs2 ;
+			}
+		}
+		DeclarationSection Common_database_declarations {
+			StringParameter sp_connectionString {
+				Definition: "data/TimeSpaceNetworkData.dsn";
+			}
+			DatabaseTable db_locations {
+				DataSource: sp_connectionString;
+				TableName: "Locations";
+				Mapping: {
+					"Name"          -->i_node,
+					"Initial stock" -->p_initialStock( i_node )
+				}
+			}
+		}
+		DeclarationSection database_decls {
+			DatabaseTable db_arcs2 {
+				DataSource: sp_connectionString;
+				TableName: "ArcsReferenceBased";
+				Mapping: {
+					"arcId"          --> i_arc,
+					"from"           --> ep_arcNodeFrom( i_arc ),
+					"to"             --> ep_arcNodeTo( i_arc ),
+					"flow unit cost" --> p_cost( i_arc )
+				}
+			}
+		}
+	}
+	Section WebUI_section {
+		DeclarationSection WebUI_deployment {
+			Parameter bp_arcsDef {
+				IndexDomain: (i_nodeFrom,i_nodeTo);
+				Range: binary;
+				Definition: {
+					pr_defArcDef();
+				}
+			}
+			StringParameter sp_arcName {
+				IndexDomain: i_arc;
+				Definition: {
+					formatString( "%e %s %e", 
+						ep_arcNodeFrom( i_arc ), 
+						character( 10230 ), ! Right arrow unicode.
+						ep_arcNodeTo(   i_arc ) )
+				}
+			}
+		}
+		Procedure pr_defArcDef {
+			Body: {
+				bp_arcsDefTmp( i_arc, ep_arcNodeFrom( i_arc ), ep_arcNodeTo( i_arc ) ) := 1;
+				bp_arcsDef(i_nodeFrom, i_nodeTo ) := exists( i_arc | bp_arcsDefTmp(i_arc, i_nodeFrom, i_nodeTo) );
+			}
+			Parameter bp_arcsDefTmp {
+				IndexDomain: (i_arc,i_nodeFrom,i_nodeTo);
+			}
+		}
+	}
+	Section Application_initialization_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Parameter bp_arcs {
+			IndexDomain: (i_nodeFrom,i_nodeTo);
+		}
+		Parameter p_cost1 {
+			IndexDomain: (i_nodeFrom,i_nodeTo);
+		}
+		Procedure PostMainInitialization {
+			Body: {
+				read from file "data/input.txt" ;
+				
+				!bp_arcs(i_nodeFrom, i_nodeTo) += bp_arcs(i_nodeTo, i_nodeFrom);
+				!p_cost1(i_nodeFrom, i_nodeTo) += p_cost1(i_nodeTo, i_nodeFrom);
+				!
+				!for ( (i_nodeFrom, i_nodeTo) | bp_arcs(i_nodeFrom, i_nodeTo) ) do
+				!	SetElementAdd(
+				!		Setname :  s_arcIds, 
+				!		Elempar :  ep_newArc, 
+				!		Newname :  formatString("arc%03i",card(s_arcIds)+1) );
+				!	ep_arcNodeFrom(ep_newArc) := i_nodeFrom ;
+				!	ep_arcNodeTo(ep_newArc) := i_nodeTo ;
+				!	p_cost(ep_newArc) := p_cost1(i_nodeFrom, i_nodeTo);
+				!endfor ;
+				!display {ep_arcNodeFrom,ep_arcNodeTo,p_cost};
+				!
+			}
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+			ElementParameter ep_newArc {
+				Range: s_arcIds;
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				!return DataManagementExit();
+				return 1 ; ! This app does not work with AIMMS cases; so we don't need DataManagementExit.
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+	Procedure MainExecution {
+		Body: {
+			pr_solve();
+		}
+	}
+}
