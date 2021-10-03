@@ -1,9 +1,9 @@
-Deploying AIMMS set semantics to composite objects
+Deploying AIMMS set functionality to composite objects
 =================================================================
 
-This is a companion article to :doc:`Identifying Composite Objects in Mathematical Programming Modeling <../526/526-modeling-composite-objects>`.
+This is a companion article to :doc:`../526/526-modeling-composite-objects`.
 
-AIMMS set semantics provides extensive functionality on sets and elements, including amongst others:
+AIMMS provides extensive functionality on sets and elements, including, among others:
 
 #.  `element parameters <https://documentation.aimms.com/language-reference/non-procedural-language-components/parameter-declaration/index.html>`_,
 
@@ -15,8 +15,10 @@ AIMMS set semantics provides extensive functionality on sets and elements, inclu
 
 #.  `indexed sets <https://documentation.aimms.com/language-reference/non-procedural-language-components/set-declaration/set-declaration-and-attributes.html#indexed-sets>`_.
 
+The :download:`AIMMS 4.82 project download <model/TimeSpaceNetworkBasic.zip>`
 
-Can these semantics be used in the two approaches to model composite objects?
+
+Can this functionality be used in the two approaches to model composite objects?
 
 The component based approach to support AIMMS set semantics for composite objects
 ----------------------------------------------------------------------------------- 
@@ -33,7 +35,7 @@ The component based approach is sufficient to support the above mentioned functi
 
 As each reference element is an element in an AIMMS set, and a reference element references a composite object; the reference based approach for composite objects can be used in conjunction with AIMMS set semantics.
 
-As the set ``s_arcIds`` is an ordinary set, so we can use it everywhere an AIMMS set can be used; for instance in the following declarations:
+As the set ``s_arcIds`` is an ordinary set, we can use it everywhere an AIMMS set can be used; for instance in the following declarations:
 
 .. code-block:: aimms
     :linenos:
@@ -86,12 +88,15 @@ Remarks on the above code:
 
 #.  Line 3: Ordinary summation.
 
-#.  Line 5,6: Just selecting an arbitrary arc.
+#.  Line 5, 6: Just selecting an arbitrary arc.
 
 #.  Line 8-10: Here we can select the outgoing arc over which the maximum flow is per node.
 
 #.  Line 12: Using the NBest operator, we can select a few arcs based on flow amount.
 
-#.  Line 14.15: Filling an indexed set; for each node the set of outgoing arcs.
+#.  Line 14, 15: Filling an indexed set; for each node the set of outgoing arcs.
 
+Summary
+-------------
 
+Clearly, the reference based approach is superior to the component based approach when set operations are relevant for a collection of composite objects.

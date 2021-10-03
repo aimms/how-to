@@ -1,11 +1,13 @@
-Composite objects in a mathematical programming model exchanged with a database
+ODBC data exchange of composite objects 
 ================================================================================
 
-This is a companion article to :doc:`Identifying Composite Objects in Mathematical Programming Modeling <../526/526-modeling-composite-objects>`.
+This is a companion article to :doc:`../526/526-modeling-composite-objects`.
 
 The two modeling approaches in that article lead to different structuring of the data.
 As ODBC databases are frequently used to exchange data with mathematical programming applications,
 it is worthwhile to check how to exchange data using the two modeling approaches for composite objects.
+
+The :download:`AIMMS 4.82 project download <model/TimeSpaceNetworkBasic.zip>`
 
 Data table declaration in SQLite
 ---------------------------------
@@ -39,10 +41,10 @@ First the datatable is declared in AIMMS as follows:
         DataSource: sp_connectionString;
         TableName: "ArcsComponentBased";
         Mapping: {
-            "from"           -->i_nodeFrom,
-            "to"             -->i_nodeTo,
-            "flow unit cost" -->p_cost1( i_nodeFrom, i_nodeTo ),
-            "arcId"          -->ep_backRef(i_nodeFrom, i_nodeTo)
+            "from"           --> i_nodeFrom,
+            "to"             --> i_nodeTo,
+            "flow unit cost" --> p_cost1( i_nodeFrom, i_nodeTo ),
+            "arcId"          --> ep_backRef(i_nodeFrom, i_nodeTo)
         }
     }
 
@@ -70,10 +72,10 @@ As the reference based approach is closely linked to database design for objects
         DataSource: sp_connectionString;
         TableName: "ArcsReferenceBased";
         Mapping: {
-            "arcId"          -->i_arc,
-            "from"           -->ep_arcNodeFrom( i_arc ),
-            "to"             -->ep_arcNodeTo( i_arc ),
-            "flow unit cost" -->p_cost2( i_arc )
+            "arcId"          --> i_arc,
+            "from"           --> ep_arcNodeFrom( i_arc ),
+            "to"             --> ep_arcNodeTo( i_arc ),
+            "flow unit cost" --> p_cost2( i_arc )
         }
     }
 
@@ -89,4 +91,4 @@ As the reference based approach is closely linked to database design for objects
 Summary
 -----------
 
-Exchanging data with databases is pretty straightforward in both the component and reference based approach to handle composite objects.
+Exchanging data with databases is can be done for both the component and reference based approach to handle composite objects.

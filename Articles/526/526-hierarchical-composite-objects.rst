@@ -4,9 +4,13 @@ Hierarchical composite objects
 Can a component in a composite object be a composite object itself? 
 Is it possible to hierarchically construct composite objects and use the AIMMS language which is an algebraic language?
 
-The reference based approach permits this.  In this article a small example will be presented.
+The component based approach supports this by recursively enumerating all components in all declarations over the sets of composite objects. This article will not present a worked example as the details drag on and on.
 
+The reference based approach permits this.  
 This article is a companion article to :doc:`../526/526-modeling-composite-objects` and refines the running example introduced there.
+
+The :download:`AIMMS 4.82 project download <model/TimeSpaceNetworkHierachical.zip>`
+
 
 The refinement of the running example
 --------------------------------------
@@ -21,7 +25,7 @@ So why don't we structure the arcs and nodes as follows:
 .. image:: images/composite-objects.png
     :align: center
 
-The declarations in AIMMS, are first the node type and its components:
+The node type is declared in AIMMS as follows:
 
 .. code-block:: aimms
     :linenos:
@@ -44,10 +48,7 @@ The declarations in AIMMS, are first the node type and its components:
         Range: s_nodeTypes;
     }
 
-.. code-block:: aimms
-    :linenos:
-
-And then the arc type and its components.
+And then the arc type is declared as follows.
 
 .. code-block:: aimms
     :linenos:
@@ -97,9 +98,9 @@ This can be improved in the reporting, as the screenshot of a WebUI widget of th
 .. image:: images/hierarchy-list.png
     :align: center
 
-This is achieved using the following report naming of nodes and arcs:
+This is achieved using the following report naming of nodes and arcs (ie the element text annotation):
 
-In the node name definition, we assume that the decision maker / end user knows which node type is used for each location, 
+In the node name definition, we assume that the decision maker / end user knows which facility type is used for each location, 
 except when there are multiple facilities in one location.
 
 .. code-block:: aimms

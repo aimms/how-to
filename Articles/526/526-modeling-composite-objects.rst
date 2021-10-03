@@ -7,18 +7,20 @@ Examples are locations and period numbers.
 In contrast, an arc is identified by its components: its source and destination locations.
 This make an arc a composite object.
 
-How to model such composite objects in AIMMS, as compound sets are no longer available in AIMMS?
+How to model such composite objects in AIMMS, as compound sets are no longer available?
 
 In this how-to article two approaches are presented: the component based approach and the reference based approach. 
 The component based approach is in widespread use and the reference based approach is inspired by database design.
+This article discusses how these approaches are used in the definition of variables and constraints.
 
-This article introduces both approaches and how they are used in the definition of variables and constraints for a mathematical program.
-In addition, both approaches can be used in :doc:`composite database exchange<../526/526-composite-exchange-database>`. 
-Moreover, both approaches can be used in :doc:`data reporting in the WebUI<../526/526-reporting-data-over-composite-objects>`.
+.. In addition, both approaches can be used in :doc:`ODBC data exchange<../526/526-composite-exchange-database>`. 
+.. Moreover, both approaches can be used in :doc:`WebUI data reporting<../526/526-reporting-data-over-composite-objects>`.
+.. 
+.. However, unlike the component based approach, the reference based approach turns out to be able to use the :doc:`AIMMS extensive  set functionality<../526/526-language-leverages-composite-objects>` and for :doc:`hierarchical composite objects<../526/526-hierarchical-composite-objects>`.
 
-However, unlike the component based approach, the reference based approach turns out to be able to use the :doc:`AIMMS Set functionality<../526/526-language-leverages-composite-objects>` and for :doc:`hierarchical composite objects<../526/526-hierarchical-composite-objects>`.
+The :download:`AIMMS 4.82 project download <model/TimeSpaceNetworkBasic.zip>`
 
-Both approaches will be illustrated by a single running example, which will be introduced next.
+But first the running example:
 
 The running example
 --------------------
@@ -53,13 +55,13 @@ We start with a set of discrete time periods and a set of locations.
 
 Remarks on the above code:
 
-#.  Line 1: As usual in mathematical programming modeling, we discretize time to a discrete set of periods.
+#.  Line 1: As usual in mathematical programming modeling, time is modeled as a discrete set of periods.
 
 #.  Line 2: As numbers are sufficient, the set is made a subset of the set ``Integers``; thereby ensuring that the elements are ordered as expected. See also :doc:`../112/112-Integer-properties`
 
 #.  Line 5: The nodes are locations, and only the name of each location is needed to identify a node.
 
-#.  Line 6: In some parts of the model, multiple references to the set ``s_nodes`` with overlapping scope are needed, so multiple indices are declared for this set.
+#.  Line 6: In some parts of the model, multiple references to the set ``s_nodes`` are needed.  These references have an overlapping scope. So multiple indices are declared for this set.
 
 Parameters and variables
 """"""""""""""""""""""""""
@@ -75,18 +77,14 @@ Data and variables are defined over these sets as usual, for instance to track s
     }
     Variable v_stock {
         IndexDomain: (i_tp,i_node);
-        Range: [p_nodeLower(i_node),p_nodeUpper(i_node)];
-        Comment: "Stock at *end* of period i_tp";
+        Range: nonnegative;
+        Comment: "Stock at end of period i_tp";
     }
-
-Remarks on the above code:
-
-#.  When at a location no stock is kept, the parameters ``p_nodeLower``, and ``p_nodeUpper`` are both 0.
 
 To model composite objects such arcs, there are two modeling approaches.  
 The first one, that uses the components of a composite object directly, is introduced in the next section.
 
-Component based Approach: Identifying composite objects via their components
+Component based approach: Identifying composite objects via their components
 ---------------------------------------------------------------------------------
 
 In this section the socalled **Component based Approach** for identifying composite objects in 
@@ -132,8 +130,8 @@ This is repeated in the modeling of the decision variable how much is flowing th
 
     Variable v_flow1 {
         IndexDomain: (i_tp, i_nodeFrom, i_nodeTo) | bp_arcs(i_nodeFrom, i_nodeTo);
-        Range: nonnegative;
-        Comment: "Flow out of i_nodeFrom into i_nodeTo during period i_tp provided arc (i_nodeFrom, i_nodeTo) exists.";
+        Range: [0, p_arcCapacity];
+        Comment: "Flow out of i_nodeFrom into i_nodeTo during period i_tp.";
     }
 
 Note that the above formulation permits a transport with 0 cost over an existing arc.
@@ -148,8 +146,8 @@ Based on the above declarations, a stock balance for each node, time period, can
         Definition: {
             v_stock(i_tp,i_node) ! Stock at end of period i_tp
                 =
-                if i_tp = first( s_timePeriods ) then  
-                    p_initialStock(i_node) ! Stock at beginning of first period
+                if i_tp = first( s_timePeriods ) then
+                    p_initialStock(i_node)
                 else
                     v_stock( i_tp - 1, i_node ) ! Stock at end of previous period
                 endif 
@@ -159,10 +157,14 @@ Based on the above declarations, a stock balance for each node, time period, can
                 -
                 sum( i_nodeTo, 
                     v_flow1(i_tp, i_node, i_nodeTo) ) ! Total flow out of i_node during period i_tp
+                +
+                v_production(i_tp, i_node)
+                -
+                p_demand(i_tp, i_node)
         }
     }
 
-Selected remarks about the above code, especially lines 12, 13 and 15,16:
+Selected remarks about the above code, especially lines 12, 13 and 15, 16:
 
 #.  On the one hand, the index ``i_node`` that is given scope in the index domain of the constraint (line 2), is elegantly used in  ``v_flow1(i_tp, i_nodeFrom, i_node)`` and in ``v_flow1(i_tp, i_node, i_nodeTo)`` to select only the flows over the arcs that go into, respectively out of the node ``i_node``.
 
@@ -181,9 +183,9 @@ Similar remarks can be made for the contribution to the objective of the flow co
         }
     }
 
-.. note:: Clearly approach 1 is an existing approach of modeling composite objects.
+.. note:: The approach outlined in this section is an existing approach of modeling composite objects.
 
-Reference based Approach: Identifying composite objects via a reference element
+Reference based approach: Identifying composite objects via a reference element
 -------------------------------------------------------------------------------------------
 
 In this section a second modeling technique for identifying composite objects is illustrated using reference elements.
@@ -249,14 +251,18 @@ The stock definition starts out to be the same, but the contributing parts (infl
                 endif 
                 +
                 sum( i_arc | ep_arcNodeTo(i_arc) = i_node, 
-                    v_flow2(i_tp, i_arc ) ) ! Total flow into i_node during period i_tp
+                    v_flow2( i_tp, i_arc ) ) ! Total flow into i_node during period i_tp
                 -
                 sum( i_arc | ep_arcNodefrom(i_arc) = i_node, 
-                    v_flow2(i_tp, i_arc ) ) ! Total flow out of i_node during period i_tp
+                    v_flow2( i_tp, i_arc ) ) ! Total flow out of i_node during period i_tp
+                +
+                v_production(i_tp, i_node)
+                -
+                p_demand(i_tp, i_node)
         }
     }
     
-Selected remarks about the above code, especially lines 12, 13 and 15,16:
+Selected remarks about the above code, especially lines 12, 13 and 15, 16:
 
 #.  As the variable ``v_flow2`` is not indexed over nodes, but over arcs, we can not filter the arcs simply by referencing the ``i_node`` in the arguments of ``v_flow2``.
 
@@ -272,7 +278,7 @@ Finally, the contribution of the flow cost to the objective is more concise than
         Definition: sum( (i_tp, i_arc), v_flow2( i_tp, i_arc ) * p_cost2( i_arc ) );
     }
 
-.. note:: Approach 2 is closely related to existing practice in the design of some databases, whereby each row a unique number is assigned and the data of the row is accessed via that identification number.
+.. note:: The approach outlined in this section is closely related to existing practice in the design of some databases, whereby each row a unique number is assigned and the data of the row is accessed via that identification number.
 
 A brief comparison of the two approaches
 -----------------------------------------
@@ -289,24 +295,24 @@ Advantage of the second approach:
 
 #.  it leads to more concise modeling, especially when the components are not relevant to the definition at hand. This is illustrated by comparing the variable definitions of ``v_obj1`` and ``v_obj2``.
 
-#.  expressions that involve a selecting a subset of composite objects (for instance the subset of arcs going into a selected node), can be explicitly formulated as such (by using the index i_arc), instead of relying on the reader to remember that in the index domain condition the restriction is added that it is defined over that set of composite objects (restricting to bp_arc(i_nodeFrom,i_nodeTo)).
+#.  expressions that involve a selecting a subset of composite objects (for instance the subset of arcs going into a selected node), can be explicitly formulated as such (by using the index i_arc), instead of relying on the reader to remember that in the index domain condition the restriction is added that it is defined over that set of composite objects (restricting to ``bp_arc(i_nodeFrom,i_nodeTo)``).
 
 Related articles
 --------------------
 
-This how to article is the first in a group of small articles.
+This how to article is the first in a group of small articles. Other articles are:
 
 #.  To illustrate that the concepts presented are an extension of existing practices, 
     we illustrate that the relation between the mathematical programming modeling techniques and existing database design practices.
-    See :doc:`/Articles/526/526-composite-exchange-database`
+    See :doc:`/Articles/526/526-composite-exchange-database`.
+    
+#.  To illustrate that the concepts presented are also applicable in the creation of an end user interface, see :doc:`/Articles/526/526-reporting-data-over-composite-objects`.
 
-#.  To illustrate that the concepts presented can be used throughout the modeling language, 
-    the use of element parameters and indexed sets
-    See :doc:`/Articles/526/526-language-leverages-composite-objects`
+#.  To illustrate that the reference based approach can be used throughout the modeling language, 
+    including the use of element parameters, ordered sets, and indexed sets
+    see :doc:`/Articles/526/526-language-leverages-composite-objects`
 
+#.  The last article in this group illustrates that the reference based approach can be used hierarchically, see :doc:`/Articles/526/526-hierarchical-composite-objects`.
 
-References
-------------
-
-#. `The difference between composite and compound <https://wikidiff.com/composite/compound>`_
+#.  As an aside, check `the difference between composite and compound <https://wikidiff.com/composite/compound>`_
 

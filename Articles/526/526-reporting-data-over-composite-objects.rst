@@ -1,7 +1,11 @@
 Reporting data over composite objects
 ======================================
 
-This is a companion article to :doc:`Identifying Composite Objects in Mathematical Programming Modeling <../526/526-modeling-composite-objects>`.
+This is a companion article to :doc:`../526/526-modeling-composite-objects`.
+
+In this article a tabular and a composite table are presented based on data from both the component and reference based approaches.
+
+The :download:`AIMMS 4.82 project download <model/TimeSpaceNetworkBasic.zip>`
 
 
 Creating tabular and composite tables with the composite approach
@@ -89,3 +93,7 @@ To get the data for all arcs including zeros, the display domain needs specifica
 .. image:: images/reference-list-option-setting.png
     :align: center
 
+Summary
+-------------------
+
+Reporting data from the component based and the reference based approach is almost similar; except that the arc names can be more elaborate in the reference based approach.
