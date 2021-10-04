@@ -25,6 +25,9 @@ So why don't we structure the arcs and nodes as follows:
 .. image:: images/composite-objects.png
     :align: center
 
+Declaring and using the node type
+---------------------------------
+
 The node type is declared in AIMMS as follows:
 
 .. code-block:: aimms
@@ -34,7 +37,12 @@ The node type is declared in AIMMS as follows:
         Index: i_loc;
     }
     Set s_nodeTypes {
+        Index: i_nt;
         Definition: data { Production, Distribution };
+    }
+    StringParameter sp_shortTypeName {
+        IndexDomain: i_nt;
+        Definition: data { Production : "PR",  Distribution : "DC" };
     }
     Set s_nodeIds {
         Index: i_node, i_nodeFrom, i_nodeTo;
@@ -47,8 +55,23 @@ The node type is declared in AIMMS as follows:
         IndexDomain: i_node;
         Range: s_nodeTypes;
     }
+    
+With these declarations, we can define the set of ``s_productionNodes`` as follows:
 
-And then the arc type is declared as follows.
+.. code-block:: aimms
+    :linenos:
+
+    Set s_productionNodes {
+        SubsetOf: s_nodeIds;
+        Definition: {
+            { i_node | ep_nodeType(i_node) = 'Production' }
+        }
+    }
+
+Declaring and using the arc type
+---------------------------------
+
+The arc type is declared as before, namely as follows:
 
 .. code-block:: aimms
     :linenos:
@@ -65,6 +88,22 @@ And then the arc type is declared as follows.
         IndexDomain: i_arc;
         Range: s_nodeIds;
     }
+    
+With the declaration of both nodes and arcs, we can select the arcs coming from a production location as follows:
+
+.. code-block:: aimms
+    :linenos:
+
+    Set s_arcsComingFromProduction {
+        SubsetOf: s_arcIds;
+        Index: i_pa;
+        Definition: {
+            { i_arc | ep_nodeType( ep_arcNodeFrom(i_arc) ) = 'Production' }
+        }
+    }
+
+Text input data
+------------------
 
 Part of the input for this model can be presented as AIMMS Composite tables as follows:
 
@@ -92,6 +131,9 @@ Part of the input for this model can be presented as AIMMS Composite tables as f
     ...    
     ;
 
+Reporting the node and arc names
+--------------------------------
+
 Clearly, as we have to look up the interpretation of a node name, it is not immediately clear what an arc is.
 This can be improved in the reporting, as the screenshot of a WebUI widget of the solution shows below:
 
@@ -112,7 +154,8 @@ except when there are multiple facilities in one location.
             if p_noNodesPerLocation(ep_nodeLocation( i_node)) = 1 then
                 formatString("%e", ep_nodeLocation( i_node) )
             else
-                formatString("%e (%e)", ep_nodeLocation( i_node), ep_nodeType( i_node ) )
+                formatString("%e (%s)", ep_nodeLocation( i_node), 
+                    sp_shortTypeName( ep_nodeType( i_node ) ) )
             endif
         }
     }
@@ -131,5 +174,55 @@ Once we have a clarifying node name, we can use that node name in the arc name a
                 sp_nodeName( ep_arcNodeTo(   i_arc ) ) )
         }
     }
+
+Comparing deprecated compound sets and the reference based approach
+--------------------------------------------------------------------
+
+An advantage of the reference based approach:
+The reference based approach allows for hierarchical construction of objects as illustrated in this article.
+This was not offered in the now deprecated compound sets.
+
+A functionality of the deprecated compound sets:
+The deprecated compound sets allowed to declare per composite object but also to use the component based approach in expressions.
+
+.. code-block:: aimms
+    :linenos:
+
+    Set s_nodes {
+        Index: i_node, i_nodeFrom, i_nodeTo;
+    }
+    Set s_arcs {
+        SubsetOf: (s_nodes, s_nodes);
+        Tags: (afrom, ato);
+        Index: i_arc;
+    }
+    Variable v_flow {
+        IndexDomain: i_arc;
+        Range: free;
+    }
+    Parameter p_totFlowCompBased {
+        Definition: sum( (i_nodeFrom, i_nodeTo), v_flow(i_nodeFrom, i_nodeTo) );
+    }
+    Parameter p_totFlowRefBased {
+        Definition: sum( i_arc, v_flow(i_arc) );
+    }
+    Parameter p_totInFlowCompBased {
+        IndexDomain: i_node;
+        Definition: sum( i_nodeFrom, v_flow(i_nodeFrom, i_node) );
+    }
+    Parameter p_totInFlowRefBased {
+        IndexDomain: i_node;
+        Definition: sum( i_arc | i_arc.ato = i_node, v_flow(i_arc) );
+    }
+
+On lines 14 and 21 the component based approach is used in using ``v_flow``.
+On lines 17 and 25 the reference based approach is used in using ``v_flow``.
+
+Whether or not mixing the component and reference based approach is an advantage is debatable. 
+In :doc:`../526/526-modeling-composite-objects` it is shown that using the reference based approach is clearer.  
+Even when selecting arcs using element parameters or tags to refer to the components of a composite object.
+
+
+
 
 

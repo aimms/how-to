@@ -35,7 +35,12 @@ Model Main_TimeSpaceHierchical {
 			}
 		}
 		Set s_nodeTypes {
+			Index: i_nt;
 			Definition: data { Production, Distribution };
+		}
+		StringParameter sp_shortTypeName {
+			IndexDomain: i_nt;
+			Definition: data { Production : "PR",  Distribution : "DC" };
 		}
 		Set s_nodeIds {
 			Index: i_node, i_nodeFrom, i_nodeTo;
@@ -62,13 +67,19 @@ Model Main_TimeSpaceHierchical {
 				if p_noNodesPerLocation(ep_nodeLocation( i_node)) = 1 then
 					formatString("%e", ep_nodeLocation( i_node) )
 				else
-					formatString("%e (%e)", ep_nodeLocation( i_node), ep_nodeType( i_node ) )
+					formatString("%e (%s)", ep_nodeLocation( i_node), sp_shortTypeName( ep_nodeType( i_node ) ) )
 				endif
 			}
 		}
 		Parameter p_noNodesPerLocation {
 			IndexDomain: i_loc;
 			Definition: Count( i_node | ep_nodeLocation(i_node) = i_loc );
+		}
+		Set s_productionNodes {
+			SubsetOf: s_nodeIds;
+			Definition: {
+				{ i_node | ep_nodeType(i_node) = 'Production' }
+			}
 		}
 	}
 	DeclarationSection Arc_decls {
@@ -95,6 +106,13 @@ Model Main_TimeSpaceHierchical {
 					sp_nodeName( ep_arcNodeFrom( i_arc ) ), 
 					character( 10230 ), ! Long right arrow (unicode char).
 					sp_nodeName( ep_arcNodeTo(   i_arc ) ) )
+			}
+		}
+		Set s_arcsComingFromProduction {
+			SubsetOf: s_arcIds;
+			Index: i_pa;
+			Definition: {
+				{ i_arc | ep_nodeType( ep_arcNodeFrom(i_arc) ) = 'Production' }
 			}
 		}
 	}
