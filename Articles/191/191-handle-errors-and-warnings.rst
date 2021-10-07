@@ -89,5 +89,5 @@ Related resources
 
   * :doc:`Error handling example model <../414/414-error-handling/>`
   
-  * Chapter "Raising and handling warnings and errors" of the `AIMMS Language Reference <https://documentation.aimms.com/language-reference/procedural-language-components/execution-statements/raising-and-handling-warnings-and-errors.html>`_
+  * :doc:`procedural-language-components/execution-statements/raising-and-handling-warnings-and-errors`
 

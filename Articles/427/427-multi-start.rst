@@ -15,7 +15,7 @@ In a pure multistart algorithm many local searches will converge to the same loc
 
 A function with many local maxima is used in this example. The actual shape of the function can be changed via "Generate Function" button. By clicking "Find Maximum" button, the multi-start algorithm is called to find the maximum solution. Then the "Sample Points View" page shows start points and the solution each reaches; and the "Cluster View" page shows each cluster and its range. Please note depending on the NLP algorithm, two close start points can lead to different optimal solutions, which may cause the clusters to overlap with each other. 
 
-The Multistart module can be added via menu "Settings" - "Install System Module...". More details of the algorithm can be found in chapter "Advanced Methods for Nonlinear Programs" in the AIMMS Language Reference.
+The Multistart module can be added via menu "Settings" - "Install System Module...". More details of the algorithm can be found in :doc:`optimization-modeling-components/advanced-methods-for-nonlinear-programs/index`.
 
 Keywords:
 Nonlinear Programming, NLP, Multistart Algorithm, GMP, Module

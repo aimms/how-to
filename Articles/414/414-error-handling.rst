@@ -15,7 +15,7 @@ It can be that certain parts of your application are especially sensitive to err
 
 Besides these specific areas where local error handling might be useful, it is also possible that (in another area of your application) an unexpected error occurs. This example contains a generic library called 'Error Handler' that can be used in any AIMMS application to offer a user friendly way for end-users to report any unexpected AIMMS errors to the application developer. The usage of the library is described in the library node in the model tree. The 'Global Error Handling' page contains buttons to trigger various execution errors. For each execution error an error handler dialog will be opened that allows you to generate an e-mail. The e-mail contains specific information about the error, the reporter, and the AIMMS session that is used.
 
-For a full description of the AIMMS Error Handling functionality, please see the section "Raising and handling warnings and errors" in Chapter "Execution Statements" of the AIMMS Language Reference and the description of the "Error Handling Functions" in the AIMMS Function Reference.
+For a full description of the AIMMS Error Handling functionality, please see :doc:`procedural-language-components/execution-statements/raising-and-handling-warnings-and-errors` and :doc:`system-interaction/error-handling-functions/index`.
 
 Keywords:
 Error Handling, Error Handler

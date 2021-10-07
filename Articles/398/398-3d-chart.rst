@@ -12,7 +12,7 @@ This example illustrates some of the possibilities of the 3D Chart in AIMMS. Lik
 
 The slider object is also used in this example. With the slider you can assign a value to a scalar parameter. 
 
-The second 3D Chart example is based on the Complementarity Model example available in the AIMMS Language Reference, Chapter Mixed Complementarity Problems, section COMPLEMENTARITY VARIABLE declaration and attributes. 
+The second 3D Chart example is based on the Complementarity Model example available in :doc:`optimization-modeling-components/mixed-complementarity-problems/complementaryvariable-declaration-and-attributes`. 
 
 Keywords:
 3D Chart, Slider, Complementarity model, Complementarity variable

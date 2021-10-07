@@ -268,8 +268,6 @@ here.
 Further information
 ---------------------
 
-Units can not only be used to convert from one unit to another but also
-to check for unit consistency. Further information about the use of
-units in AIMMS can be found in the AIMMS Language Reference, Chapter 31:
-"Units of Measurement". 
+- Units can not only be used to convert from one unit to another but also to check for unit consistency. Further information about the use of units in AIMMS can be found in :doc:`advanced-language-components/units-of-measurement/index`. 
+- `Unit of measurement training <https://academy.aimms.com/course/view.php?id=9>`_ on the `AIMMS Academy <https://academy.aimms.com/>`_
 

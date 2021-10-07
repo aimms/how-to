@@ -59,7 +59,9 @@ If included before the solve statement in your project, the procedure ``pr_NewTi
 
 Step 1B Retrieve the information passed on by the solver to the AIMMS solver session.
 
-In our example, we want to display only the best bound and incumbent objective value of the MIP. So, the body of ``pr_NewTimeCallback`` consists of a procedure with two arguments - FlowShopModel.bestbound and FlowShopModel.Incumbent. You can retrieve values of any of the mathematical program suffices which are listed and explained in chapter "Mathematical Program Suffices" of `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_.
+In our example, we want to display only the best bound and incumbent objective value of the MIP. 
+So, the body of ``pr_NewTimeCallback`` consists of a procedure with two arguments - FlowShopModel.bestbound and FlowShopModel.Incumbent. 
+You can retrieve values of any of the mathematical program suffices which are listed and explained in :doc:`suffices/mathematical-program-suffices/index`.
 
     .. code-block:: aimms
 
