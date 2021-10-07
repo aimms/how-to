@@ -47,9 +47,9 @@ As you can see from this schema, both a customer and a product have an ``Id``.  
 
     In words: For each ``CustomerId``, it should be in the set of all ``Id`` in the table ``Customers``.
 
-*   :math:`\forall {\tt ProjectId}: {\tt ProjectId} \in \{Project.Id\}` 
+*   :math:`\forall {\tt ProductId}: {\tt ProductId} \in \{Product.Id\}` 
 
-    In words: For each ``ProjectId``, it should be in the set of all ``Id`` in the table ``Projects``.
+    In words: For each ``ProductId``, it should be in the set of all ``Id`` in the table ``Products``.
 
 Foreign keys relations
 ------------------------
@@ -247,7 +247,7 @@ In our example, tables are best written to with the options ``Database_foreign_k
                 database_string_valued_foreign_keys := 'ignore'  ;
 
         write to table db_Customers ;
-        write to table db_Projects ;
+        write to table db_Products ;
 
     endblock ;
 
