@@ -6,7 +6,8 @@ Selecting Pages for Workflow Panels
 
 .. important::
 
-   Workflow Panels are available in AIMMS version 4.68 as an Experimental Feature. Please reach out to `User Support <mailto:support@aimms.com>`_ on how to enable Experimental Features.
+   - Workflow Panels are available in AIMMS version 4.68 as an Experimental Feature. Please reach out to `User Support <mailto:support@aimms.com>`_ on how to enable Experimental Features.
+   - A Workflow panels tutorial is available in the `WebUI Advanced User Interactions <https://academy.aimms.com/course/view.php?id=57>`__ course on `the AIMMS Academy <https://academy.aimms.com/>`__.
 
 You can use element and string parameters to reduce errors while configuring the steps for Workflows. For example, this helps you avoid entering a wrong ``pageId``, or adding a Side Panel ``pageId`` or Dialog ``pageId``.
 
