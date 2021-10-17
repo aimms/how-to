@@ -151,6 +151,9 @@
           }
         }
       ]
+    },
+    "aimms.widget.type": {
+      "literal": "page"
     }
   },
   "pages/planning_employees": {
@@ -194,6 +197,9 @@
           "p_demand"
         ]
       }
+    },
+    "name": {
+      "literal": "demandDataTAble"
     }
   },
   "widgets/downloadJobTableAsExcel": {
@@ -208,6 +214,9 @@
     },
     "title": {
       "literal": "Download Job Table in Excel"
+    },
+    "name": {
+      "literal": "downloadJobTableAsExcel"
     }
   },
   "widgets/EmployeePlanning": {
@@ -234,6 +243,9 @@
         "aggregated": []
       }
     },
+    "name": {
+      "literal": "EmployeePlanning"
+    },
     "time.reference": {
       "aimms": {
         "contents": [
@@ -258,6 +270,13 @@
       "aimms": {
         "contents": [
           "sp_EmpPlanViewportStart"
+        ]
+      }
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
         ]
       }
     },
@@ -294,6 +313,9 @@
         "aggregated": []
       }
     },
+    "name": {
+      "literal": "SkillCoverage"
+    },
     "time.reference": {
       "aimms": {
         "contents": [
@@ -318,6 +340,13 @@
       "aimms": {
         "contents": [
           "sp_EmpPlanViewportStart"
+        ]
+      }
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
         ]
       }
     },
@@ -364,6 +393,9 @@
         ],
         "slices": []
       }
+    },
+    "name": {
+      "literal": "startWork"
     }
   },
   "widgets/WorkblockTimezonMapping": {
@@ -495,6 +527,9 @@
     },
     "title": {
       "literal": "Timezone workblock cost derivation"
+    },
+    "name": {
+      "literal": "WorkblockTimezonMapping"
     }
   }
 }
