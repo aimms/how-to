@@ -179,21 +179,35 @@ There are some remarks regarding the above code:
 
 #.  Line 10: For each of the identifiers of interest, we check whether it is present in the referenced identifier incidence matrix.
 
-Caveat
+Caveats
 ^^^^^^^^^^^^^^
 
-The above code omits identifiers that are used as an element in the set :any:`AllIdentifiers`.
-For instance, in the following declaration of an element parameter, the procedure ``pr_myProc`` is used 
-to determine the signature of procedures that can be assigned to element parameter ``ep_someProc`` and 
-subsequently be applied.
+#.  The above code omits identifiers that are used as an element in the set :any:`AllIdentifiers`.
+    For instance, in the following declaration of an element parameter, the procedure ``pr_myProc`` is used 
+    to determine the signature of procedures that can be assigned to element parameter ``ep_someProc`` and 
+    subsequently be applied.
 
-.. code-block:: aimms
-    :linenos:
+    .. code-block:: aimms
+        :linenos:
 
-    ElementParameter ep_someProc {
-        Range: AllProcedures;
-        Default: 'pr_myProc'
-    }
+        ElementParameter ep_someProc {
+            Range: AllProcedures;
+            Default: 'pr_myProc'
+        }
+
+#.  The identifiers referenced in the annotation are not foud.  For instance:
+
+    .. code-block:: aimms
+        :linenos:
+
+        Parameter p_a {
+            webui::UponChangeProcedure: pr_uponChangeA;
+        }
+
+    Finding the references of ``p_a`` will not find ``pr_uponChangeA``, 
+    because ``webui::UponChangeProcedure`` is not an element of ``AllAttributeNames``.
+    
+.. See also customer ticket 4364
 
 
 Are identifiers used in the WinUI?
