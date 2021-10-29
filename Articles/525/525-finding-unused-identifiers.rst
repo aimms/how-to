@@ -49,8 +49,14 @@ The code illustrated in this article is based on an artificial model whereby:
 
 To :download:`this AIMMS 4.81 project download <model/fi.zip>` 
 
-Most of the code is in a small library ``refids`` that can be copied to your project.
+Most of the code is in a small library ``refIds`` that can be copied to your project.
 In addition, the zip file contains the file ``fu.ams``, which is an example of using the library.
+
+It is easy to copy a library and a section, as explained in these two references:
+
+*   Adding a library to your project: `Library projects and the library manager <https://documentation.aimms.com/user-guide/introduction-to-aimms/collaborative-project-development/library-projects-and-the-library-manager.html>`_ 
+
+*   Adding code from a section: :doc:`../145/145-import-export-section`
 
 Using the library in your application
 -------------------------------------
@@ -58,7 +64,7 @@ Using the library in your application
 An AIMMS application consists of at least a model, and may also contain a WinUI user interface, and may contain a WebUI user interface.
 
 To search for identifiers in these three major software components is different.
-That is why the library ``refids`` has a procedure that has 
+That is why the library ``refIds`` has a procedure that has 
 
 #.  As input a set of identifiers for which we would like to know whether they are used or not.
 
