@@ -33,7 +33,7 @@ Installing prerequisites
 """""""""""""""""""""""""""
 In addition to the prerequisites outlined in :ref:`scripting-tools`, you will need to install the below for this example. 
 
-#. The example project is developed using AIMMS version 4.75.3, so we recommend you use at least that version. `Download AIMMS Developer <https://www.aimms.com/support/downloads/#aimms-dev-download>`_. 
+#. The example project is developed using AIMMS version 4.82.6, so we recommend you use at least that version. `Download AIMMS Developer <https://www.aimms.com/support/downloads/#aimms-dev-download>`_. 
 #. The Python modules in the example are developed in `Python 3.8 <https://www.python.org/downloads/release/python-386/>`_.
 
     .. tip:: 
@@ -91,6 +91,8 @@ You can test this server by typing in the url ``http://localhost:8000/hello`` in
 Now, testing the clustering function/API in a browser is not as straightforward as this one requires input data in the JSON format (as highlighted in line 15 in the above code-block).
 We will use the Postman app to call this API by pasting the contents of `input.json` in the Body attribute as shown below. 
 It will return the output of ``mykMeans`` as a JSON object.
+
+.. note:: The clustering method in ``main.py`` has been updated to use "POST" instead of "GET" as displayed in the below screenshot.
 
 .. image:: runCluster.png
     :align: center
@@ -155,7 +157,7 @@ Now we simply use the HTTP library functions to make a GET call to the API creat
     !starting request
     web::request_create(requestId : spReqID );
     web::request_setURL(spReqID, spURL);
-    web::request_setMethod(spReqID, "GET");
+    web::request_setMethod(spReqID, "POST");
     !as we want to send data in a file. Set 2nd argument to 'None' if you only need to pass a scalar value
     web::request_setRequestBody(spReqID, 'File', spOutFile);
     !as we want to send a json file and default expectation is a txt file
