@@ -134,6 +134,9 @@
     },
     "title": {
       "literal": "Centroids"
+    },
+    "name": {
+      "literal": "centroids"
     }
   },
   "widgets/Cluster Locations": {
@@ -147,6 +150,9 @@
       "literal": "button"
     },
     "title": {
+      "literal": "Cluster Locations"
+    },
+    "name": {
       "literal": "Cluster Locations"
     }
   },
@@ -384,7 +390,7 @@
     },
     "nodes.1.size": {
       "literal": {
-        "identifier": "pClusterSize",
+        "identifier": "pCenSize",
         "slice": [
           {
             "index": "iCentroid",
@@ -399,6 +405,9 @@
     },
     "zoom": {
       "literal": 8
+    },
+    "name": {
+      "literal": "locMap"
     }
   },
   "widgets/locTable": {
@@ -459,6 +468,9 @@
         ],
         "slices": []
       }
+    },
+    "name": {
+      "literal": "locTable"
     }
   },
   "widgets/newLabel": {
@@ -471,6 +483,9 @@
           "spWarning"
         ]
       }
+    },
+    "name": {
+      "literal": "newLabel"
     }
   },
   "widgets/Reset": {
@@ -484,6 +499,9 @@
       "literal": "button"
     },
     "title": {
+      "literal": "Reset"
+    },
+    "name": {
       "literal": "Reset"
     }
   },
@@ -500,6 +518,9 @@
           "spURL"
         ]
       }
+    },
+    "name": {
+      "literal": "scUrl"
     }
   },
   "widgets/slideClusters": {
@@ -527,6 +548,9 @@
     },
     "title": {
       "literal": "Set # of Clusters"
+    },
+    "name": {
+      "literal": "slideClusters"
     }
   }
 }

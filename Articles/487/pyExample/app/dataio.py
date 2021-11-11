@@ -14,7 +14,7 @@ def dataForCluster(fileName:str):
         myCluster.append([float(lat[i])])
         myCluster[i].append(float(lon[i]))
 
-    return numClusters, myCluster
+    return numClusters, myCluster, lat, lon
 
 def dataFromDict(dic:dict):
     """ takes the request.get_json dictionary and returns numClusters as int, latitude, longitude as float and also returns a tuple of lat, lon"""

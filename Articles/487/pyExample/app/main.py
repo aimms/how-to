@@ -9,7 +9,7 @@ app = Flask(__name__)
 def hello_world():
     return "hello world"
 
-@app.route('/', methods=["GET"])
+@app.route('/', methods=["POST"])
 
 def aimms_call():
     ourInput = request.get_json()

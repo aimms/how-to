@@ -95,7 +95,7 @@ Model Main_Model {
 				!starting request
 				web::request_create(requestId : spReqID );
 				web::request_setURL(spReqID, spURL);
-				web::request_setMethod(spReqID, "GET");
+				web::request_setMethod(spReqID, "POST");
 				!as we want to send data in a file. Set 2nd argument to 'None' if you only need to pass a scalar value
 				web::request_setRequestBody(spReqID, 'File', spOutFile);
 				!as we want to send a json file and default expectation is a txt file
@@ -209,6 +209,23 @@ Model Main_Model {
 			Return 1 to allow the termination sequence to continue.
 			Return 0 if you want to cancel the termination sequence.
 			It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+		}
+	}
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: minute->s : #-># * 60;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsWebUI.
+				
+				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
+			}
 		}
 	}
 }
