@@ -12,7 +12,7 @@ You can follow this procedure to convert a GAMS file to an AIMMS project:
 
 #. Download AIMMS 3.14 and convert the .gms file to a .aim file.
 
-#. Download current AIMMS version and convert the old AIMMS project to a modern one using .ams file.
+#. Download current AIMMS version and convert the old AIMMS project to a modern one using ``.ams`` file.
 
 #. Open the newly converted project in current version of AIMMS.
 
