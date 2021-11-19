@@ -48,7 +48,7 @@ Step 1A Instruct the solver to provide the progress information periodically.
 
 We use the mathematical program suffix ``CallbackTime`` for this purpose. In the context of the current running example, the mathematical program is FlowShopModel and the user defined procedure, ``NewTimeCallback`` is assigned to the ``CallbackTime``.
 
-The predefined ``option`` statement lets you alter the project options in a procedure. We set the interval to update the progress information as 1 second by referring to the ``progress_time_interval`` option. You can also change this option by, Settings -> Project Options -> AIMMS -> Progress Options
+The predefined ``option`` statement lets you alter the project options in a procedure. We set the interval to update the progress information as 1 second by referring to the ``progress_time_interval`` option. You can also change this option by, Settings → Project Options → AIMMS → Progress Options
 
 If included before the solve statement in your project, the procedure ``pr_NewTimeCallback`` is executed every 1 second. 
 

@@ -7,7 +7,7 @@ from sklearn.cluster import KMeans
 def mykMeans(input:dict):
     """ takes the input file name and runs kmeans, returns a dictionary with lat, lon and clusters of the centroids"""
 
-    numClusters, coordData = dataio.dataFromDict(input)
+    numClusters, coordData, lat, lon = dataio.dataFromDict(input)
 
 # %%
     myCluster = KMeans(numClusters)
