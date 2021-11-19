@@ -16,7 +16,7 @@ This example illustrates two external DLLs (complete with source) that allow you
 
 The email interface makes use of the Simple MAPI API provided by Windows in Mapi32.dll. You can only use it if a MAPI compliant email client (such as Outlook) is installed on your computer.
 
-The sound interface makes use of the Win32 PlaySound function. You can use it, for instance, to play .wav files from within your model upon particular user interaction.
+The sound interface makes use of the Win32 PlaySound function. You can use it, for instance, to play ``.wav`` files from within your model upon particular user interaction.
 
 In the respective source directories you will find the C source files of both interfaces to AIMMS, as well as the Visual Studio 2010 projects that were used to build the DLLs providing the interfaces.
 

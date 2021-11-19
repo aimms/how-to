@@ -29,7 +29,7 @@ To install SQLite ODBC driver, please refer to the following website, and downlo
 
 `SQLite ODBC Driver <http://www.ch-werner.de/sqliteodbc>`__ (external link)
 
-Then just run the .exe and follow the instructions.
+Then just run the ``.exe`` and follow the instructions.
 
 .. note:: This driver is open source under a BSD-type license. You may read the `license terms <http://www.ch-werner.de/sqliteodbc/license.terms>`_ for details.
 
@@ -65,7 +65,7 @@ Generate the connection file
 To read one database, AIMMS needs to know the name of the driver it should use and the location of your SQLite database. There are 3 different ways to give those indications to an AIMMS database identifier:
 
 * By generating a **.dsn file**, that you will store somewhere on your computer (almost equivalent to a text file .txt) and link it to your AIMMS identifier
-* By generating a **system ``.dsn`` file**, that your computer will store for you in a specific place
+* By generating a **system** ``.dsn`` **file**, that your computer will store for you in a specific place
 * By creating a **connection string**, that will have the same role as a ``.dsn`` file, but directly written into the AIMMS application. This appears to be particularly useful when, for instance, a password is needed to read a certain database, and you don't want to rewrite it each time you open your application or the database.
 
 Generate a ``.dsn`` file connected to your SQLite database

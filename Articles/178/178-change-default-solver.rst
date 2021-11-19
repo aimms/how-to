@@ -23,7 +23,7 @@ The picture above shows an example screenshot, where CPLEX 12.6.3 is used as the
     For example, in the above screenshot - `CPLEX 12.6.3` is not available out of the box for use on AIMMS Cloud as `CPLEX 12.7.1` is available. 
     
     To use an older version of the solver (like `CPLEX 12.6.3`), you need to ``Export`` the Solver configuration which will create a ``solvers.slv`` file in your project root directory. 
-    Make sure to include this file in the .aimmspack export and you will be able to use previous versions of the solvers as well. 
+    Make sure to include this file in the ``.aimmspack`` export and you will be able to use previous versions of the solvers as well. 
 
     See also: :doc:`../274/274-using-project-local-solver-configuration`. 
 

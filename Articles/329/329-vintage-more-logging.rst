@@ -28,7 +28,7 @@ About ``RunWithExtraLogging.bat``
 To activate the ``LoggerConfig.xml`` the command line option ``--logcfg`` should be used. 
 You can enter the entire command from the command prompt.
 
-A batch file quickly becomes more convenient, if you do this more than once.  Consider the following .bat file:
+A batch file quickly becomes more convenient, if you do this more than once.  Consider the following ``.bat`` file:
 
 .. code-block:: winbatch
     :linenos:

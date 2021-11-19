@@ -10,7 +10,7 @@ the action log provides insight into what happened before.
 The action log is like any other log file, it contains the output of tracing statements.
 The ``GuardServersession`` library manages these log files.
 
-The action log is stored in .actionLog files in the sub folder tracings of the project folder. 
+The action log is stored in ``.actionLog`` files in the sub folder tracings of the project folder. 
 At the end of a solver session saved in AIMMS PRO storage at ``/userdata/<env>/<user>/<appname>/tracings/<session-id>.actionLog``.
 
 The following is a sample small action log:
