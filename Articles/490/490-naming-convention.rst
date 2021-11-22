@@ -28,7 +28,7 @@ Particular to Decision Support applications are constraint definitions.  Conside
 
 .. math::
 
-    `p {\ } q = r`
+     p {\ } q = r 
 
 where:
 
@@ -211,3 +211,5 @@ References
 * `Hungarian notation <https://en.wikipedia.org/wiki/Hungarian_notation>`_
 
 * :doc:`Type based syntax coloring <../225/225-change-syntax-highlighting-colors>`
+
+* Blog post: `Data Scientists, Your Variable Names Are a Mess. Clean Up Your Code <https://builtin.com/data-science/variable-names>`_

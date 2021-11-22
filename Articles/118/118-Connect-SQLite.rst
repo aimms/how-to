@@ -215,7 +215,7 @@ For further reading, please refer to the following related links :
 AIMMS materials
 --------------------
 
-* `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_: Chapter 27 - Communicating With Databases
+* :doc:`data-communication-components/communicating-with-databases/index`
 
 * :aimms:func:`SQLCreateConnectionString`  
 

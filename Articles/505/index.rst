@@ -23,8 +23,8 @@ following opportunities are immediately available.
 
 -  There are three *references* on AIMMS
 
-      - `The User's Guide <https://documentation.aimms.com/_downloads/AIMMS_user.pdf>`__ to introduce you to AIMMS and its development environment, 
-      - `The Language Reference <https://documentation.aimms.com/language-reference/index.html>`__ to describe the modeling language in detail, and
+      - :doc:`ug:index` to introduce you to AIMMS and its development environment, 
+      - :doc:`lr:index` to describe the modeling language in detail, and
       - `Optimization Modeling <https://manual.aimms.com/_downloads/AIMMS_modeling.pdf>`__ to enable you to become familiar with building models.
 
 .. rubric:: :math:`\ldots` for beginners

@@ -140,9 +140,9 @@ This should give the desired result as shown at the end of our user story.
 Further reading
 -------------------------------
 
-#.  Section "Case referencing from within the language" in Chapter "Case Management" in AIMMS The User's Guide.
+#.  :doc:`data-management/case-management/managing-multiple-case-selections`
 
-#.  AIMMS The Language Reference, search for "dot notation" and "case referencing"
+#.  AIMMS The Language Reference, search for "Case referencing" in :doc:`preliminaries/language-preliminaries/lexical-conventions`
 
 #.  `The WebUI widget <https://documentation.aimms.com/webui/gantt-chart-widget.html#gantt-chart-widget>`_
 

@@ -44,7 +44,9 @@ extensions = ['sphinx.ext.doctest',
   
 intersphinx_mapping = {'fr': ('https://documentation.aimms.com/functionreference/',
                                   (None,'objects-functionreference.inv')),
+                       'docs': ('https://documentation.aimms.com/',None),
                        'lr': ('https://documentation.aimms.com/language-reference/',None),
+                       'ug': ('https://documentation.aimms.com/user-guide/',None),
                        'aimmsxllibrary': ('https://documentation.aimms.com/aimmsxllibrary/',None),}
 
 if os.name != 'nt':
@@ -54,7 +56,7 @@ if os.name != 'nt':
     extensions.append('sphinx_last_updated_by_git')
 
 # A list of regular expressions that match URIs that should not be checked when doing a linkcheck build.   
-linkcheck_ignore = [r'http://localhost:\d+/?',r'http://0\.0\.0\.0[:/]\d+/?']
+linkcheck_ignore = [r'http://localhost:\d+/?',r'http://0\.0\.0\.0[:/]\d+/?',r'https://www\.cenapad\.unicamp\.br/*']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -157,8 +159,8 @@ html_theme_options = {
     'home_page_title': 'AIMMS How-To',
     'home_page_description': "AIMMS How-To is a support knowledge base for everyone involved in projects that use AIMMS. You'll find help tutorials, best practices, and practical guidance for using AIMMS software.",
     'display_community_embeddable' : Display_3rd_Party_Extensions,
-    'google_analytics_id' : 'UA-1290545-14',
-    'generate_google_analytics' : Display_3rd_Party_Extensions,
+    'google_tag_manager_id': 'GTM-5T37RFM',
+    'generate_google_tag_manager' : Display_3rd_Party_Extensions,
     'display_algolia_search': Display_3rd_Party_Extensions,
     'algolia_appid': 'BH4D9OD16A',
     'algolia_appkey': '0fc935020f8088e762190434cffaee41',

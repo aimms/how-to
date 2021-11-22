@@ -87,7 +87,7 @@ Some remarks on the above:
     The only part not parametrized is that it is by day, and not by some number of days, or by some unit of measurement. 
     However, to change the granularity of a decision support application, changing it from day to month, or to hours, is quite rare.
 
-AIMMS The Language Reference, Chapter "Time-Based Modeling", section "Calendars" provides further details on declaring Calendars.
+:doc:`advanced-language-components/time-based-modeling/calendars` page provides further details on declaring Calendars.
 
 Relating calendars in AIMMS to date/time columns in databases
 -------------------------------------------------------------
@@ -119,7 +119,7 @@ This is achieved because the calendar timeslots are mapped onto date/time fields
 Using current time
 ------------------
 
-AIMMS provides two functions to obtain the current time: :any:`CurrentToString` and ``CurrentToTimeslot``.
+AIMMS provides two functions to obtain the current time: :any:`CurrentToString` and :any:`CurrentToTimeSlot`.
 The difference is that the one is resulting in a string, the other a timeslot. Both are useful for our running example.
 
 Initializing the current year
@@ -164,7 +164,7 @@ AIMMS views Saturday as day number 6 and Sunday as day number 7 in a week. Thus 
         }
     }
 
-Further information about the function ``TimesloCharacteristic`` can be found in AIMMS The Function Reference.
+Further information about the function :any:`TimeSlotCharacteristic` can be found in AIMMS The Function Reference.
 
 The running example is contained in: :download:`AIMMS project download <model/CalendarDemo.zip>` 
 

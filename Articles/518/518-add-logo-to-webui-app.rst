@@ -63,7 +63,7 @@ Some remarks about the above code, in case you want to adopt and adapt the above
     As you can see, the aspect ratio of the image is kept.
 
     In the example, the dimension of the image is 354 x 80. 
-    Therefore, by using height 28 and width 354 / ( 80 / 28 ) = 124, the image is completely filling the area alotted.
+    Therefore, by using height 28 and width 354 / ( 80 / 28 ) = 124, the image is completely filling the area allotted.
 
 #.  Line 11 specifies the space between the Menu-icon and the app-logo.  Increasing that to 80px looks as follows:
 

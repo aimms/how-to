@@ -305,13 +305,11 @@ Download the attached project for an example.
 Related Topics
 ----------------
 
-* `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_: Section "Runtime Libraries and the Model Edit Functions"
+* :doc:`advanced-language-components/model-structure-and-modules/runtime-libraries-and-the-model-edit-functions`
 
-* `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_: 
+* :doc:`data-management/data-change-monitor-functions/index`
 
-   * Chapter "Data Change Monitor Functions"   
-   
-   * Function "ReferencedIdentifiers"
+* :any:`ReferencedIdentifiers`
 
 
 

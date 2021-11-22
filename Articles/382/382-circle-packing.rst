@@ -24,7 +24,7 @@ In this illustrative AIMMS project, three different circle packing problems are 
 
 These models have been developed based on, and thanks to, reference materials by János D. Pintér and Frank J. Kampas.
 
-The Multistart module can be added via menu "Settings" - "Install System Module...". More details of the algorithm can be found in chapter "Advanced Methods for Nonlinear Programs" in the AIMMS Language Reference.
+The Multistart module can be added via menu "Settings" - "Install System Module...". More details of the algorithm can be found in :doc:`optimization-modeling-components/advanced-methods-for-nonlinear-programs/index`.
            
 Keywords:
 Circle Packing, Multistart Algorithm, Network Object

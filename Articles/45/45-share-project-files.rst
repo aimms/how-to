@@ -52,13 +52,13 @@ The resulting ZIP file will contain all of the project files in a more portable 
 
    To save a data case go to *Data > Save Case as*.
 
-   For details see **AIMMS Documentation**: `Case Management <https://download.aimms.com/aimms/download/manuals/AIMMS3UG_CaseManagement.pdf>`_
+   For details see :doc:`data-management/case-management/index`
 
 
 Related Topics
 ----------------
 
-* **AIMMS Documentation**: `Getting Started <https://download.aimms.com/aimms/download/manuals/AIMMS3UG_GettingStarted.pdf>`_
+* :doc:`../505/index`
 
 * **AIMMS Knowledge**: :doc:`../151/151-version-control-aimmspack-backup`
 

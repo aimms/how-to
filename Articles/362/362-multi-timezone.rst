@@ -572,7 +572,7 @@ which breaks down as follows:
 Timezone selector 
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Te timezone selector is part of the `Time Zone Settings <https://documentation.aimms.com/webui/time-zone-setting.html#time-zone-settings>`_ feature of the WebUI.
+The timezone selector is part of the `Time Zone Settings <https://documentation.aimms.com/webui/time-zone-setting.html#time-zone-settings>`_ feature of the WebUI.
 
 The timezone selector is a predefined widget manipulating the element parameter ``webui::DisplayTimeZone``.
 You can enable this widget via the Application settings / Application Extensions panel:

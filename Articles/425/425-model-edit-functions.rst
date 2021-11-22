@@ -19,7 +19,7 @@ On each demo page, a different functionality is shown. Details on these function
 
 - Reading data tables from an Excel sheet where the information is in an arbitrary order. The user can specify the row, column and data ranges, and to which AIMMS indices the row/column ranges should match. Furthermore, the user can specify to which AIMMS parameter the data should be assigned.
 
-More information about the Model Edit Functions can be found in the AIMMS Language Reference: Chapter Model Structures and Modules, Section Runtime Libraries and the Model Edit Functions.
+More information about the Model Edit Functions can be found in :doc:`advanced-language-components/model-structure-and-modules/runtime-libraries-and-the-model-edit-functions`.
 
 Keywords: 
 Model Edit Functions, me::, Runtime Libraries, Excel.
