@@ -13,12 +13,9 @@ These topics cover what you need to use the set semantics in the AIMMS language 
 
 .. toctree::
    :maxdepth: 1
-
-   /Articles/526/526-modeling-composite-objects
-   /Articles/526/526-composite-exchange-database
-   /Articles/526/526-language-leverages-composite-objects
-   /Articles/526/526-reporting-data-over-composite-objects
-   /Articles/526/526-hierarchical-composite-objects
+   
+   composite/index
+   time/index
    /Articles/141/141-element-after-last
    /Articles/112/112-Integer-properties
    /Articles/175/175-select-variables-and-constraints-for-math-program
@@ -26,7 +23,5 @@ These topics cover what you need to use the set semantics in the AIMMS language 
    /Articles/108/108-kb10-simple-set-compound-set-relation
    /Articles/188/188-use-nbest-operator
    /Articles/190/190-empty-sets
-   /Articles/189/189-using-calendars-in-aimms
-   /Articles/362/362-multi-timezone
 
 

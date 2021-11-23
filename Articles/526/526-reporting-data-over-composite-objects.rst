@@ -7,7 +7,6 @@ In this article a tabular and a composite table are presented based on data from
 
 The :download:`AIMMS 4.82 project download <model/TimeSpaceNetworkBasic.zip>`
 
-
 Creating tabular and composite tables with the composite approach
 ------------------------------------------------------------------
 
@@ -25,8 +24,6 @@ To get the data for all arcs including zeros, the display domain needs specifica
 
 .. image:: images/component-list-option-setting.png
     :align: center
-
-
 
 Creating tabular and composite tables with the reference approach
 ------------------------------------------------------------------
