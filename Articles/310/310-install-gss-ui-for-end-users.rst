@@ -9,7 +9,7 @@ In this article, it is explained how to create the dialog page in which the end-
 #.  Create a dialog page, preferably below the page GSS Session History Management, named ``GSS Incident report``.
     The set ``webui::AllDialogPages`` should now contain ``gss_incident_report``.
 
-    If not, you may want to change the webui.json file by replacing the new element you see with ``gss_incident_report``.
+    If not, you may want to change the ``webui.json`` file by replacing the new element you see with ``gss_incident_report``.
 
 #.  The size of the dialog should be ``large``.
 
