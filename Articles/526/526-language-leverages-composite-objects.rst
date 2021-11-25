@@ -28,12 +28,12 @@ The component based approach is not sufficient to support the above mentioned fu
 The first three functionalities enumerated above result in single elements; so they cannot be used to select multiple components, whereby each component is an element in itself.
 The last three functionalities enumerated above result in subsets of a single set of varying length ; so they cannot be used to select multiple components whereby the elements may come from different sets.
 
-The reference based approach to support AIMMS set semantics for composite objects
------------------------------------------------------------------------------------ 
+The reference element based approach to support AIMMS set semantics for composite objects
+------------------------------------------------------------------------------------------- 
 
-The component based approach is sufficient to support the above mentioned functionalities.
+The reference element based approach is sufficient to support the above mentioned functionalities.
 
-As each reference element is an element in an AIMMS set, and a reference element references a composite object; the reference based approach for composite objects can be used in conjunction with AIMMS set semantics.
+As each reference element is an element in an AIMMS set, and a reference element references a composite object; the reference element based approach for composite objects can be used in conjunction with AIMMS set semantics. This is illustrated in the remainder of this section.
 
 As the set ``s_arcIds`` is an ordinary set, we can use it everywhere an AIMMS set can be used; for instance in the following declarations:
 
@@ -99,4 +99,4 @@ Remarks on the above code:
 Summary
 -------------
 
-Clearly, the reference based approach is superior to the component based approach when set operations are relevant for a collection of composite objects.
+Clearly, the reference element based approach is superior to the component based approach when set operations are relevant for a collection of composite objects.

@@ -24,7 +24,7 @@ Data table declaration in SQLite
     )
 
 As this table is about data of arcs, and arcs are considered to be identifiable objects, the practice is followed 
-to have a single column as primary key for this table.
+to have a single column as the primary key for this table.
 
 
 Database writing in the component based approach
@@ -32,7 +32,7 @@ Database writing in the component based approach
 
 To accomodate the column ``arcId`` in the datase table, an artificial element is created for each valid combination of ``(i_nodeFrom, i_nodeTo)`` and stored in the element parameter ``ep_backRef(i_nodeFrom, i_nodeTo)``. 
 With this element parameter, writing to a database table in AIMMS is straightforward.
-First the datatable is declared in AIMMS as follows:
+First, the database table is declared in AIMMS as follows:
 
 .. code-block:: aimms
     :linenos:
@@ -60,10 +60,10 @@ And then the writing to that table is done using the following code:
     }
 
 
-Database writing in the reference based approach
-------------------------------------------------------
+Database writing in the reference element based approach
+----------------------------------------------------------
 
-As the reference based approach is closely linked to database design for objects, there is no need to create additional identifiers.
+As the reference element based approach is closely linked to database design for objects, there is no need to create additional identifiers.
 
 .. code-block:: aimms
     :linenos:
@@ -91,4 +91,4 @@ As the reference based approach is closely linked to database design for objects
 Summary
 -----------
 
-Exchanging data with databases is can be done for both the component and reference based approach to handle composite objects.
+Exchanging data with databases is can be done for both the component based and reference element based approaches to handle composite objects.

@@ -79,6 +79,12 @@ Model Main_ArcExecutionEfficiency {
 		Parameter p_flow {
 			IndexDomain: (i_tp,i_pg,i_arc);
 		}
+		Parameter bp_isArc {
+			IndexDomain: (i_nodeFrom,i_nodeTo);
+		}
+		Parameter p_flowComponent {
+			IndexDomain: (i_tp,i_pg,i_nodeFrom,i_nodeTo)|bp_isArc(i_nodeFrom, i_nodeTo);
+		}
 		Parameter p_noTimeperiods {
 			InitialData: 200;
 		}
@@ -106,11 +112,13 @@ Model Main_ArcExecutionEfficiency {
 					ep_arc := last(s_arcIds);
 					ep_arcNodeFrom(ep_arc) := i_node ;
 					ep_arcNodeTo(ep_arc) := i_nodeTo ;
+					bp_isArc(i_node,i_nodeTo) := 1;
 				endfor ;
 				ep_arc := '';
 			endfor ;
 			
 			p_flow(i_tp, i_pg, i_arc) := 1;
+			p_flowComponent(i_tp, i_pg, i_nodeFrom, i_nodeTo) := 1;
 		}
 	}
 	Parameter p_inflow1 {
@@ -120,6 +128,12 @@ Model Main_ArcExecutionEfficiency {
 		IndexDomain: (i_tp,i_pg,i_node);
 	}
 	Parameter p_inflow3 {
+		IndexDomain: (i_tp,i_pg,i_node);
+	}
+	Parameter p_inflow4 {
+		IndexDomain: (i_tp,i_pg,i_node);
+	}
+	Parameter p_inflow5 {
 		IndexDomain: (i_tp,i_pg,i_node);
 	}
 	Parameter p_inflowDiff12 {
@@ -139,12 +153,20 @@ Model Main_ArcExecutionEfficiency {
 			p_inflow3(i_tp,i_pg,i_node) := 
 				sum( (i_arc, i_nodeFrom) | bp_arcRelation(i_arc, i_nodeFrom, i_node), 
 					p_flow(i_tp, i_pg, i_arc) );
+			p_inflow4(i_tp,i_pg,i_node) := 
+				sum( i_nodeFrom | bp_isArc(i_nodeFrom, i_node), 
+					p_flowComponent(i_tp, i_pg, i_nodeFrom, i_node) );
+			p_inflow5(i_tp,i_pg,i_node) := 
+				sum( i_nodeFrom,  
+					p_flowComponent(i_tp, i_pg, i_nodeFrom, i_node) );
 		}
 	}
 	Section Application_initialization_and_termination {
 		Procedure MainInitialization {
 			Body: {
 				profilerStart();
+				pr_generateTestProblem();
+				update ;
 			}
 			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
 		}

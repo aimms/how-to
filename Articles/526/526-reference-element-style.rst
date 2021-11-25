@@ -21,29 +21,27 @@ this article compares a few modeling styles with respect to:
 
 #.  **Modeling flexibility**. 
 
-    Flexibility in the application is important; how much effort is needed to update an application when a change in the structure is made? Regarding composite objects, a potential change is adding a component to the composite object - does it become necessary to edit every piece of source where the composite object is use?
+    Flexibility in the application is important; how much effort is needed to update an application when a change in the structure is made? Regarding composite objects, a potential change is adding a component to the composite object - does it become necessary to edit every piece of source where the composite object is used?
 
     In this article, a mode of transportation is added to the composite object arc. 
     We will then discuss, for each modeling style, how much effort is needed for every reference to the composite object arc.
 
 #.  **Execution efficiency**.
 
-    The snappiness of the application when making small changes, the overall wait time when searching for a good solution; they are in part determined by how the assignments and constraints are formulated.
+    The snappiness of the application when making small changes, the overall wait time when searching for a good solution; are in part determined by how the assignments and constraints are formulated.
 
-    In this article, we will discuss the efficiency of some styles, and also present alternatives when bottlenecks are encountered; similar to AIMMS Academy course "Execution Efficiency".
+    In this article, a small model is used to measure the relative efficiency of the three styles. 
+    As a bonus, the component based approach is also part of these measurements.
 
-#.  **Reading and writing data**.
 
-    Only AIMMS ODBC is discussed here, and examples are presented and briefly discussed.
-
-The various modeling styles are presented in the next section, and then each of the evaluation criteria presented above is used to evaluate in a separate section. Finally, we present a brief summary.
+The various modeling styles are presented in the next section, and then each of the evaluation criteria presented above is used to evaluate in a separate section. Finally, we present a brief summary and discussion.
 
 The modeling styles
 ---------------------
 
 This article details three different modeling styles:
 
-#.  **The multiple element parameter style**; this is the style used in main article and companion articles. 
+#.  **The multiple element parameter style**; this is the style used in the main article and companion articles. 
     Using this style, arcs are declared as follows:
 
     .. code-block:: aimms
@@ -55,12 +53,12 @@ This article details three different modeling styles:
         ElementParameter ep_arcNodeFrom {
             IndexDomain: i_arc;
             Range: s_nodes;
-            comment: "Return the node from which the arc 'i_arc' flows";
+            Comment: "Return the node from which the arc 'i_arc' flows";
         }
         ElementParameter ep_arcNodeTo {
             IndexDomain: i_arc;
             Range: s_nodes;
-            comment: "Return the node to which the arc 'i_arc' flows";
+            Comment: "Return the node to which the arc 'i_arc' flows";
         }
 
     There is an element parameter for every component in the composite object.
@@ -77,16 +75,15 @@ This article details three different modeling styles:
         Parameter bp_arcIsFromNode {
             IndexDomain: (i_arc,i_node);
             Range: binary;
-            comment: "The arc 'i_arc' flows out of node 'i_node'";
+            Comment: "The arc 'i_arc' flows out of node 'i_node'";
         }
         Parameter bp_arcIsToNode {
             IndexDomain: (i_arc,i_node);
             Range: binary;
-            comment: "The arc 'i_arc' flows towards node 'i_node'";
+            Comment: "The arc 'i_arc' flows towards node 'i_node'";
         }
 
     There is a two-dimensional binary parameter for every component in the composite object.
-    We will discuss the equivalence of the first two modeling styles in the section on "Execution Efficiency".
 
 #.  **The single encompassing binary parameter style**; this style is similar to relational tables.
     Using this style, arcs are declared as follows:
@@ -100,7 +97,7 @@ This article details three different modeling styles:
         Parameter bp_arcRelation {
             IndexDomain: (i_arc,i_fromNode,i_toNode);
             Range: binary;
-            comment: "The arc 'i_arc' flows out of 'i_fromNode' towards 'i_toNode'";
+            Comment: "The arc 'i_arc' flows out of 'i_fromNode' towards 'i_toNode'";
         }
 
     There is one entry in this parameter for every arc.
@@ -134,7 +131,7 @@ We start with a set of discrete time periods and a set of locations.
 Parameters and variables
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Data and variables are defined over these sets as usual, for instance to track stock over time there is an initial stock and a variable modeling stock:
+Data and variables are defined over these sets as usual, for instance,to track stock over time there is an initial stock and a variable modeling stock:
 
 .. code-block:: aimms
     :linenos:
@@ -284,7 +281,7 @@ On line 12, the condition becomes: ``bp_arcRelation(i_arc,i_fromNode,i_node)`` w
 Modeling flexibility
 ---------------------
 
-Flexibility is tested here by changing the structure of an arc. Each arcs gets an additional mode of transport.
+Flexibility is tested here by changing the structure of an arc. Each arc gets an additional mode of transport.
 
 .. code-block:: aimms
     :linenos:
@@ -309,7 +306,7 @@ The arcs are extended with an additional element parameter, as follows:
 
 Regarding the stock balance; the formulation stays the same. 
 
-Note however, if different modes of transport are allowed between two nodes, there are now multiple arcs between those nodes, thereby increasing the number of inflow arcs and the number of outflow arcs for a particular node.
+Note, however, if different modes of transport are allowed between two nodes, there are now multiple arcs between those nodes, thereby increasing the number of inflow arcs and the number of outflow arcs for a particular node.
 
 Flexibility: The multiple binary parameter style
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
@@ -373,44 +370,47 @@ As ``bp_arcRelation(i_arc,i_fromNode,i_node,i_tMode)`` has an additional index, 
 Execution efficiency
 -----------------------
 
-Two aspects are relevant to efficiency:
+When comparing execution efficiency, doing an actual test is a good starting point.
+The three styles are tested regarding execution efficiency and also compared to the component based approach.
+To make the comparison meaningful, the running example is slightly modified:
 
-#.  Memory use
+*   A set of product groups with index ``i_pg`` is added, 
 
-#.  Execution time
+*   The flow is modeled as a parameter ``p_flow(i_tp, i_pg, i_arc)`` with a flow of 1 for every element.
 
-When considering execution efficiency, it is best to have a concrete example to play around with.
-To avoid having to generate a solve a large linear program, the running example is adapted.
+*   The index ``i_tp`` (time periods) varies over a set with 200 elements, the index ``i_pg`` (product groups) varies over a set of 100 elements, the index ``i_node`` varies over a set with 1000 elements, and the index ``i_arc`` varies over a set with 5000 elements.
 
-Adapted running example
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+This leads to the following comparison of execution times:
 
-Efficiency: The multiple element parameter style
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+.. image:: images/ExecutionEfficiency4b.png
+    :align: center
 
-Efficiency: The multiple binary parameter style
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+where
 
-Efficiency: The single encompassing binary parameter style
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+#.  The ``p_inflow1`` is computed using the reference element approach with the *multiple element parameter style*
 
-Best of both worlds
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+#.  The ``p_inflow2`` is computed using the reference element approach with the *multiple binary parameter style*
 
-How can binary parameters be created automatically from the element parameters.
+#.  The ``p_inflow3`` is computed using the reference element approach with the *single encompassing binary parameter style*
 
-Reading and writing data
+#.  The ``p_inflow4`` is computed using the component approach and selecting from nodes in the summation operator.
+
+#.  The ``p_inflow5`` is computed using the component approach, and leaving the selection of the from nodes to the index domain condition in the declaration of ``p_flowComponent``, thus avoiding a duplicate selection of from nodes.
+
+In this test, the reference element based approach (``p_inflow1``, ``p_inflow2``, and ``p_inflow3``) performs significantly superior to the component based approach (``p_inflow4``, ``p_inflow5``).
+
+In addition, within the reference element based approach, the formulation using *multiple element parameter style* is the fastest, but the timings of the three styles are close.
+
+To play around with this example, you can download the :download:`AIMMS 4.82 project here <model/ArcExecutionEfficiency.zip>`.
+
+
+Summary and discussion
 --------------------------
 
-IO: The multiple element parameter style
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+To summarize: 
 
-IO: The multiple binary parameter style
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+From the tests on the reference element approach presented in this article, the style: **The multiple element parameter style** clearly performs best overall.
 
-IO: The single encompassing binary parameter style
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+To discuss:
 
-
-Summary
----------
+At the time of writing this article, the reference element based approach to composite objects is not in widespread use; thus the tests presented above are admittedly artificial. The author is looking forward to applications whereby the reference element based approach is actually used in practice, such that a comparison of styles, and perhaps also a comparison to the component based approach can be made that is closer to actual modeling practice.

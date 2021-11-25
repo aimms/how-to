@@ -3,7 +3,7 @@ Reporting data over composite objects
 
 This is a companion article to :doc:`../526/526-modeling-composite-objects`.
 
-In this article a tabular and a composite table are presented based on data from both the component and reference based approaches.
+In this article, a tabular and a composite table are presented based on data from both the component and reference element based approaches.
 
 The :download:`AIMMS 4.82 project download <model/TimeSpaceNetworkBasic.zip>`
 
@@ -15,12 +15,12 @@ A tabular display of the arcs allowed based on node sets is presented easily by 
 .. image:: images/component-tabular.png
     :align: center
 
-The following is a display of all data defined over all arcs
+The following is a display of all data defined over arcs
 
 .. image:: images/component-list.png
     :align: center
 
-To get the data for all arcs including zeros, the display domain needs specification as follows:
+To get the data for all arcs including zeros, the display domain needs specifications as follows:
 
 .. image:: images/component-list-option-setting.png
     :align: center
@@ -85,7 +85,7 @@ To create the row names in this list, an element text annotation can be used.
 
 Note that such arc descriptions are not available for the component based approach as element text annotation is per single set only.
 
-To get the data for all arcs including zeros, the display domain needs specification as follows:
+To get the data for all arcs including zeros, the display domain needs specifications as follows:
 
 .. image:: images/reference-list-option-setting.png
     :align: center
@@ -93,4 +93,4 @@ To get the data for all arcs including zeros, the display domain needs specifica
 Summary
 -------------------
 
-Reporting data from the component based and the reference based approach is almost similar; except that the arc names can be more elaborate in the reference based approach.
+Reporting data from the component based and the reference element based approach is almost similar; except that the arc names can be more elaborate in the reference element based approach.

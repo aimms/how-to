@@ -1,22 +1,17 @@
 Modeling composite objects
 ================================================================== 
 
-Many sets in AIMMS models refer to atomic objecs; there is no further structure to the objects referenced.
+Many sets in AIMMS models refer to atomic objects; there is no further structure to the objects referenced.
 Examples are locations and period numbers.
 
 In contrast, an arc is identified by its components: its source and destination locations.
-This make an arc a composite object.
+This makes an arc a composite object.
 
 How to model such composite objects in AIMMS, as compound sets are no longer available?
 
-In this how-to article two approaches are presented: the component based approach and the reference based approach. 
-The component based approach is in widespread use and the reference based approach is inspired by database design.
+In this how-to article two approaches are presented: the component based approach and the reference element based approach. 
+The component based approach is in widespread use and the reference element based approach is inspired by database design.
 This article discusses how these approaches are used in the definition of variables and constraints.
-
-.. In addition, both approaches can be used in :doc:`ODBC data exchange<../526/526-composite-exchange-database>`. 
-.. Moreover, both approaches can be used in :doc:`WebUI data reporting<../526/526-reporting-data-over-composite-objects>`.
-.. 
-.. However, unlike the component based approach, the reference based approach turns out to be able to use the :doc:`AIMMS extensive  set functionality<../526/526-language-leverages-composite-objects>` and for :doc:`hierarchical composite objects<../526/526-hierarchical-composite-objects>`.
 
 The :download:`AIMMS 4.82 project download <model/TimeSpaceNetworkBasic.zip>`
 
@@ -35,7 +30,7 @@ Let's first specify some identifiers that are independent of the approach select
 Common identifiers
 ^^^^^^^^^^^^^^^^^^
 
-In this sub section, the identifiers common to both cases are briefly introduced.
+In this subsection, the identifiers common to both cases are briefly introduced.
 
 Sets
 """""
@@ -66,7 +61,7 @@ Remarks on the above code:
 Parameters and variables
 """"""""""""""""""""""""""
 
-Data and variables are defined over these sets as usual, for instance to track stock over time there is an initial stock and a variable modeling stock:
+Data and variables are defined over these sets as usual, for instance, to track stock over time there is an initial stock and a variable modeling stock:
 
 .. code-block:: aimms
     :linenos:
@@ -81,18 +76,20 @@ Data and variables are defined over these sets as usual, for instance to track s
         Comment: "Stock at end of period i_tp";
     }
 
-To model composite objects such arcs, there are two modeling approaches.  
+To model composite objects such as arcs, there are two modeling approaches.  
 The first one, that uses the components of a composite object directly, is introduced in the next section.
 
 Component based approach: Identifying composite objects via their components
 ---------------------------------------------------------------------------------
 
-In this section the socalled **Component based Approach** for identifying composite objects in 
+In this section the so-called **Component based Approach** for identifying composite objects in 
 mathematical programming applications is illustrated via its use in the running example.
+
+.. note:: The approach outlined in this section is an existing approach to modeling composite objects with which you are most likely already familiar. It is stated here to clarify the difference with the reference element approach introduced below.
 
 By identifying a composite object via its components, we need to:
 
-#.  Refer explicitly to the components, in our running example these components are the from node and the to node.
+#.  Refer explicitly to the components, in our running example, these components are the from node and the to node.
 
 #.  Limit in the code to the existing combinations.
 
@@ -134,12 +131,13 @@ This is repeated in the modeling of the decision variable how much is flowing th
         Comment: "Flow out of i_nodeFrom into i_nodeTo during period i_tp.";
     }
 
-Note that the above formulation permits a transport with 0 cost over an existing arc.
+Note that the above formulation permits a transport with 0 costs over an existing arc.
 
 Based on the above declarations, a stock balance for each node, time period, can be written as follows:
 
 .. code-block:: aimms
     :linenos:
+    :emphasize-lines: 12,13,15,16
 
     Constraint c_stockBalance1 {
         IndexDomain: (i_tp, i_node);
@@ -164,7 +162,7 @@ Based on the above declarations, a stock balance for each node, time period, can
         }
     }
 
-Selected remarks about the above code, especially lines 12, 13 and 15, 16:
+Selected remarks about the above code, especially the highlighted lines:
 
 #.  On the one hand, the index ``i_node`` that is given scope in the index domain of the constraint (line 2), is elegantly used in  ``v_flow1(i_tp, i_nodeFrom, i_node)`` and in ``v_flow1(i_tp, i_node, i_nodeTo)`` to select only the flows over the arcs that go into, respectively out of the node ``i_node``.
 
@@ -183,12 +181,11 @@ Similar remarks can be made for the contribution to the objective of the flow co
         }
     }
 
-.. note:: The approach outlined in this section is an existing approach of modeling composite objects.
 
-Reference based approach: Identifying composite objects via a reference element
+Reference element based approach: Identifying composite objects via a reference element
 -------------------------------------------------------------------------------------------
 
-In this section a second modeling technique for identifying composite objects is illustrated using reference elements.
+In this section, a second modeling technique for identifying composite objects is illustrated using reference elements.
 Arcs can be enumerated by numbering them and putting these numbers in a separate set:
 
 .. code-block:: aimms
@@ -238,6 +235,7 @@ The stock definition starts out to be the same, but the contributing parts (infl
 
 .. code-block:: aimms
     :linenos:
+    :emphasize-lines: 12,13,15,16
 
     Constraint c_stockBalance2 {
         IndexDomain: (i_tp,i_node);
@@ -262,7 +260,7 @@ The stock definition starts out to be the same, but the contributing parts (infl
         }
     }
     
-Selected remarks about the above code, especially lines 12, 13 and 15, 16:
+Selected remarks about the above code, especially highlighted lines:
 
 #.  As the variable ``v_flow2`` is not indexed over nodes, but over arcs, we can not filter the arcs simply by referencing the ``i_node`` in the arguments of ``v_flow2``.
 
@@ -278,7 +276,7 @@ Finally, the contribution of the flow cost to the objective is more concise than
         Definition: sum( (i_tp, i_arc), v_flow2( i_tp, i_arc ) * p_cost2( i_arc ) );
     }
 
-.. note:: The approach outlined in this section is closely related to existing practice in the design of some databases, whereby each row a unique number is assigned and the data of the row is accessed via that identification number.
+.. note:: The approach outlined in this section is closely related to existing practice in the design of some databases, whereby to each row a unique number is assigned and the data of the row is accessed via that identification number.
 
 A brief comparison of the two approaches
 -----------------------------------------
@@ -289,13 +287,13 @@ Neither approach is really novel:
 
 #.  The second approach has clear roots in the design of databases.
 
-Advantage of the first approach: it is close to existing modeling practices; and when ordering of the composite objects and selecting one or more specific objects is not relevant to the application, it works out fine.
+Advantage of the first approach: it is close to existing modeling practices, and when ordering of the composite objects and selecting one or more specific objects is not relevant to the application, it works out fine.
 
-Advantage of the second approach: 
+Advantage of the reference element approach: 
 
-#.  it leads to more concise modeling, especially when the components are not relevant to the definition at hand. This is illustrated by comparing the variable definitions of ``v_obj1`` and ``v_obj2``.
+#.  It leads to more concise modeling, especially when some components are not relevant to the definition at hand. This is illustrated by comparing the variable definitions of ``v_obj1`` and ``v_obj2``.
 
-#.  expressions that involve a selecting a subset of composite objects (for instance the subset of arcs going into a selected node), can be explicitly formulated as such (by using the index i_arc), instead of relying on the reader to remember that in the index domain condition the restriction is added that it is defined over that set of composite objects (restricting to ``bp_arc(i_nodeFrom,i_nodeTo)``).
+#.  Expressions that involve selecting a subset of composite objects (for instance the subset of arcs going into a selected node), can be explicitly formulated as such (by using the index i_arc), instead of relying on the reader to remember that in the index domain condition the restriction is added that it is defined over that set of composite objects (restricting to ``bp_arc(i_nodeFrom,i_nodeTo)``).
 
 Related articles
 --------------------
@@ -308,11 +306,13 @@ This how to article is the first in a group of small articles. Other articles ar
     
 #.  To illustrate that the concepts presented are also applicable in the creation of an end user interface, see :doc:`/Articles/526/526-reporting-data-over-composite-objects`.
 
-#.  To illustrate that the reference based approach can be used throughout the modeling language, 
+#.  To illustrate that the reference element based approach can be used throughout the modeling language, 
     including the use of element parameters, ordered sets, and indexed sets
     see :doc:`/Articles/526/526-language-leverages-composite-objects`
 
-#.  The last article in this group illustrates that the reference based approach can be used hierarchically, see :doc:`/Articles/526/526-hierarchical-composite-objects`.
+#.  An important advantage of the reference element based approach is that it can be used hierarchically, see :doc:`/Articles/526/526-hierarchical-composite-objects`.
+
+#.  As the last article in this group, different styles implementing the reference element based approach are compared for clarity and flexibility.  In addition, the execution efficiency of the reference element based approach is compared to execution efficiency of the component approach; with results that might surprise you.
 
 #.  As an aside, check `the difference between composite and compound <https://wikidiff.com/composite/compound>`_
 

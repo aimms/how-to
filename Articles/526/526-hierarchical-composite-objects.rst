@@ -6,7 +6,7 @@ Is it possible to hierarchically construct composite objects and use the AIMMS l
 
 The component based approach supports this by recursively enumerating all components in all declarations over the sets of composite objects. This article will not present a worked example as the details drag on and on.
 
-The reference based approach permits this.  
+The reference element based approach permits this.  
 This article is a companion article to :doc:`../526/526-modeling-composite-objects` and refines the running example introduced there.
 
 The :download:`AIMMS 4.82 project download <model/TimeSpaceNetworkHierachical.zip>`
@@ -15,7 +15,7 @@ The :download:`AIMMS 4.82 project download <model/TimeSpaceNetworkHierachical.zi
 The refinement of the running example
 --------------------------------------
 
-The running example refers to 6 locations which are also nodes: ParisP, ParisD, Stockholm, Madrid, Berlin, and Rome.
+The running example refers to 6 locations that are also nodes: ParisP, ParisD, Stockholm, Madrid, Berlin, and Rome.
 The first two nodes are located in Paris, one being a Production and the other a Distribution node.
 
 Each node actually has two components: the location and the facility type. 
@@ -175,11 +175,11 @@ Once we have a clarifying node name, we can use that node name in the arc name a
         }
     }
 
-Comparing deprecated compound sets and the reference based approach
---------------------------------------------------------------------
+Comparing deprecated compound sets and the reference element based approach
+------------------------------------------------------------------------------
 
-An advantage of the reference based approach:
-The reference based approach allows for hierarchical construction of objects as illustrated in this article.
+An advantage of the reference element based approach:
+The reference element based approach allows for hierarchical construction of objects as illustrated in this article.
 This was not offered in the now deprecated compound sets.
 
 A functionality of the deprecated compound sets:
@@ -216,13 +216,8 @@ The deprecated compound sets allowed to declare per composite object but also to
     }
 
 On lines 14 and 21 the component based approach is used in using ``v_flow``.
-On lines 17 and 25 the reference based approach is used in using ``v_flow``.
+On lines 17 and 25 the reference element based approach is used in using ``v_flow``.
 
-Whether or not mixing the component and reference based approach is an advantage is debatable. 
-In :doc:`../526/526-modeling-composite-objects` it is shown that using the reference based approach is clearer.  
+Whether or not mixing the component and reference element based approach is an advantage is debatable. 
+In :doc:`../526/526-modeling-composite-objects` it is shown that using the reference element based approach is clearer.  
 Even when selecting arcs using element parameters or tags to refer to the components of a composite object.
-
-
-
-
-
