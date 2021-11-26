@@ -312,7 +312,7 @@ This how to article is the first in a group of small articles. Other articles ar
 
 #.  An important advantage of the reference element based approach is that it can be used hierarchically, see :doc:`/Articles/526/526-hierarchical-composite-objects`.
 
-#.  As the last article in this group, different styles implementing the reference element based approach are compared for clarity and flexibility.  In addition, the execution efficiency of the reference element based approach is compared to execution efficiency of the component approach; with results that might surprise you.
+#.  As the last article in this group, :doc:`/Articles/526/526-reference-element-style`, compares different styles implementing the reference element based approach for clarity and flexibility.  In addition, the execution efficiency of the reference element based approach is compared to execution efficiency of the component approach; with results that might surprise you.
 
 #.  As an aside, check `the difference between composite and compound <https://wikidiff.com/composite/compound>`_
 
