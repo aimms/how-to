@@ -2,6 +2,7 @@
 * [Clone and Navigate the repo on your computer](#clone-and-navigate-the-repo-on-your-computer)
 * [Build Locally the HTML documentation](#build-locally-the-html-documentation)
 * [The Pipeline (optional)](#the-pipeline)
+* [The Staging environnement](#the-staging-environnement)
 * [Style guide](#style-guide)
 * [Prereq's to build a PDF version (optional)](#prereqs-to-build-a-pdf-version-optional)
 
@@ -103,6 +104,20 @@ If the pipeline fails, no copy will happen, thus website stays unchanged
 ``` 
 ``example.com`` 
 ```
+
+The Staging environnement
+-
+
+Thanks to [this part of the in gitlab-ci.yml](.gitlab-ci.yml#L39), every branch "NameOfMyBranch" will create a staging website at ``https://how-to.aimms.com/staging/NameOfMyBranch``, except the master branch.
+
+This can be particularily useful to share a draft of your new article.
+
+This folder is hidden to search engines (through the [robot.txt](.robot.txt#L23)), meaning nobody can access it, except if one knows the link.
+
+**Warning**: As soon as there is a commit to the master branch, the staging subfolder is cleaned (removed). This ensures we are not overloading the server.
+To re-generate your branch website, just re-run your branch ``build_and_staging`` job !
+
+
 
 
 Style guide
