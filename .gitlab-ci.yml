@@ -36,7 +36,18 @@ build:
   tags: 
     - ubuntu
 
-deploy:
+build_and_staging:
+  stage: build
+  script:
+    - sphinx-build -M html . _build
+    - ssh support@data.aimms.com mkdir -p /home/aimms/www/how-to.aimms.com/staging/${CI_COMMIT_BRANCH}
+    - rsync -rt --delete-excluded _build/html/ support@data.aimms.com:/home/aimms/www/how-to.aimms.com/staging/${CI_COMMIT_BRANCH}
+  tags: 
+    - ubuntu
+  except:
+    - master
+
+build_and_deploy:
   stage: deploy
   script:
     - sphinx-build -b html . _build/html 
