@@ -32,12 +32,12 @@ spellcheck:
 build:
   stage: test
   script:
-    - sphinx-build -W -b html . _build/html 
+    - sphinx-build -W --keep-going -b html . _build/html 
   tags: 
     - ubuntu
 
 build_and_staging:
-  stage: build
+  stage: deploy
   script:
     - sphinx-build -M html . _build
     - ssh support@data.aimms.com mkdir -p /home/aimms/www/how-to.aimms.com/staging/${CI_COMMIT_BRANCH}
