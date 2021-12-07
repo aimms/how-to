@@ -67,6 +67,14 @@
     <logger name="AIMMS.gui" >
         <level value="warn"/>
     </logger>
+    <logger name="AIMMS.caseIO.reading" >
+        <!--- With TRACE file positions are logged -->
+        <level value="info"/>
+    </logger>
+    <logger name="AIMMS.caseIO.writing" >
+        <!--- With TRACE file positions are logged -->
+        <level value="info"/>
+    </logger>
     <logger name="ARMI" >
         <level value="info"/>
     </logger>
