@@ -74,7 +74,7 @@ title = 'AIMMS How-To'
 
 # General information about the project.
 project = title
-copyright = u'2019, AIMMS'
+copyright = u'2019-2021, AIMMS'
 author = u'AIMMS'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -277,87 +277,6 @@ html_baseurl = 'https://how-to.aimms.com/'
 
 # adding path to non-rst files that go to the build
 html_extra_path = ['robots.txt']
-
-#------------------------------------------------- Generate redirects from old URLs  ----------------------------------------------------------#
-
-redirects_file = "WebSite_Redirection_Mapping/redirection_map.txt"
-
-"""
-    sphinxcontrib.redirects
-    ~~~~~~~~~~~~~~~~~~~~~~~
-    Generate redirects for moved pages when using the HTML builder.
-    See the README file for details. https://github.com/sphinx-contrib/redirects/blob/master/sphinxcontrib/redirects/__init__.py
-    :copyright: Copyright 2017 by Stephen Finucane <stephen@that.guru>
-    :license: BSD, see LICENSE for details.
-"""
-
-TEMPLATE = """<html>
-  <head><meta http-equiv="refresh" content="0; url=/%s"/></head>
-</html>
-"""
-
-def generate_redirects(app):
-    
-    logger = logging.getLogger(__name__)
-    
-    #only if not on Linux (Gitlab computers)
-    if os.name == 'nt':
-        #Generates the mapping file out of Git logs by launching a batch script, Assuming you have git installed on your computer... 
-        try:
-            subprocess.call([r'WebSite_Redirection_Mapping\\Run_generate_redirection_map.bat'], stdout=open(os.devnull, 'wb'))
-            logger.info("Redirection map file has been written in WebSite_Redirection_Mapping\\redirection_map_full.txt")
-        except:
-            logger.warning("Website Mapping file couldn't be generated. Please debug the generate_redirects() function in conf.py. Redirection mapping is ignored.")
-            pass
-            return
-        
-    #pdb.set_trace()
-    path = os.path.join(app.srcdir, app.config.redirects_file)
-    if not os.path.exists(path):
-        logger.info("Could not find redirects file at '%s'" % path)
-        return
-
-    in_suffix = list(app.config.source_suffix.keys())[0]
-
-    # TODO(stephenfin): Add support for DirectoryHTMLBuilder
-    if not type(app.builder) == builders.StandaloneHTMLBuilder:
-        logger.info("The 'sphinxcontrib-redirects' plugin is only supported "
-                 "by the 'html' builder. Skipping...")
-        return
-    
-    
-    logger.info("Redirection Generation has started..." )
-    redirects_counter = 0
-    with open(path) as redirects:
-        for line in redirects.readlines():
-            from_path, to_path = line.rstrip().split('\t')
-            redirects_counter += 1
-            #To have an overview of all the redirections generated, enable logs :)
-            #logger.info("Redirecting '%s' to '%s'" % (from_path, to_path))
-            
-            from_path = from_path.replace(in_suffix, '.html')
-            to_path_prefix = '..%s' % os.path.sep * (
-                len(from_path.split(os.path.sep)) - 1)
-            to_path = to_path_prefix + to_path.replace(in_suffix, '.html')
-
-            redirected_filename = os.path.join(app.builder.outdir, from_path)
-            redirected_directory = os.path.dirname(redirected_filename)
-            if not os.path.exists(redirected_directory):
-                os.makedirs(redirected_directory)
-
-            with open(redirected_filename, 'w') as f:
-                f.write(TEMPLATE % to_path)
-                
-    logger.info("Redirection Generation has finished successfully! With %i redirections" % redirects_counter )
-    
-# The setup function here is picked up by sphinx at each build. You may input any cool change here, like syntax highlighting or redirects
-def setup(sphinx):
-	
-   #To handle redirections
-   handle_redirections = False
-   if handle_redirections or os.name != 'nt':
-       sphinx.add_config_value('redirects_file', 'redirects', 'env')
-       sphinx.connect('builder-inited', generate_redirects)   
 
 highlight_language = 'aimms'
 numfig = True
