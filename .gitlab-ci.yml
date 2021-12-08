@@ -51,7 +51,7 @@ build_and_deploy:
   stage: deploy
   script:
     - sphinx-build -b html . _build/html 
-    - ssh support@data.aimms.com rm -r /home/aimms/www/how-to.aimms.com/staging/
+    - ssh support@data.aimms.com rm -f -r /home/aimms/www/how-to.aimms.com/staging/
     - rsync -rt _build/html/ support@data.aimms.com:/home/aimms/www/how-to.aimms.com
   tags: 
     - ubuntu
