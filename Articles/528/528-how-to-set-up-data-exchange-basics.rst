@@ -4,7 +4,7 @@
    :keywords: aimms, data, exchange
 
 How to integrate the Data Exchange Library
-============================
+============================================
 
 The Data Exchange Library allows you to connect data in a given format (like JSON, XML, table-based CSV/Excel) to your AIMMS model by using a mapping file. This allows you to consume and provide REST API's. You can find more documentation on the Data Exchange Library via `this link <https://documentation.aimms.com/dataexchange/index.html>`_.
 
@@ -28,11 +28,13 @@ For this how-to we've created a very simple mapping file with a simple JSON-base
 .. image:: images/data-exchange-1.png
    :scale: 50
    :align: center
+   
 `The mapping file`
    
 .. image:: images/data-exchange-2.png
    :scale: 50
    :align: center
+   
 `The data file in JSON format`
 
 To use a mapping in a procedure, you must first read the mapping file into your model. You do this by setting up a procedure in which you call the AddMapping function:

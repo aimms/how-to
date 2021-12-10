@@ -4,7 +4,7 @@
    :alt: AIMMS Data Exchange Library Help & Support
    
 Data Exchange Library
-=================
+=======================
 
 .. meta::
    :description: Help and support with using the Data Exchange library in AIMMS.
