@@ -21,19 +21,19 @@ Prerequisites
 
 Basic setup
 --------------
-All functions from the library are referenced and described on this page.
+All functions from the library are referenced and described on `this article <https://documentation.aimms.com/dataexchange/api.html>`__.
 
 For this how-to we've created a very simple mapping file with a simple JSON-based data file:
 
 .. image:: images/data-exchange1.png
-   :scale: 50
-   :align: left
+   :scale: 70
+   :align: center
    
 `The mapping file`
    
 .. image:: images/data-exchange2.png
-   :scale: 50
-   :align: left
+   :scale: 70
+   :align: center
    
 `The data file in JSON format`
 
@@ -48,14 +48,14 @@ After this is done without errors or warnings, you can use the ReadFromFile func
 In our model it looks like this:
 
 .. image:: images/data-exchange3.png
-   :scale: 50
-   :align: left
+   :scale: 70
+   :align: center
 
 If this procedure is run succesfully you will see that the data from the data source is imported as specified in the mapping file:
 
 .. image:: images/data-exchange4.png
-   :scale: 50
-   :align: left
+   :scale: 70
+   :align: center
 
 This is the most basic setup for integrating and using the Data Exchange Library in your model. 
 
