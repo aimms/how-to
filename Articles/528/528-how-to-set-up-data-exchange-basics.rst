@@ -12,9 +12,9 @@ The Data Exchange Library allows you to connect data in a given format (like JSO
 Prerequisites
 --------------
 
-#. Make sure you have the Data Exchange Library installed. Visit `this article <https://documentation.aimms.com/library-repository/getting-started.html>`__ for instructions on how to do this.
+#. Make sure you have the Data Exchange Library installed. Visit `this article <https://documentation.aimms.com/general-library/getting-started.html>`__ for instructions on how to do this.
 
-#. Have a mapping file ready and place it somewhere in your project, preferably in a folder called 'Mappings'. Visit `this article <https://documentation.aimms.com/dataexchange/mapping.html>`__ to read more about mappings and how to write one for your specific situation. Note that you can also `generate a mapping file automatically for your project <https://documentation.aimms.com/dataexchange/standard.html>`__.
+#. Have a mapping file ready and place it somewhere in your project, preferably in a folder called 'Mappings'. Visit `this article <https://documentation.aimms.com/dataexchange/mapping.html>`__ to read more about mappings and how to write one for your specific situation. Note that you can also `generate a mapping file automatically for your project <https://documentation.aimms.com/dataexchange/standard.html#creating-your-own-annotation-based-formats>`__.
 
 #. Have a data file ready and place it somewhere in your project, preferably in a folder called 'Data'. This is the data you want to read into the model.
 
@@ -27,13 +27,13 @@ For this how-to we've created a very simple mapping file with a simple JSON-base
 
 .. image:: images/data-exchange1.png
    :scale: 50
-   :align: center
+   :align: left
    
 `The mapping file`
    
 .. image:: images/data-exchange2.png
    :scale: 50
-   :align: center
+   :align: left
    
 `The data file in JSON format`
 
@@ -49,13 +49,13 @@ In our model it looks like this:
 
 .. image:: images/data-exchange3.png
    :scale: 50
-   :align: center
+   :align: left
 
 If this procedure is run succesfully you will see that the data from the data source is imported as specified in the mapping file:
 
 .. image:: images/data-exchange4.png
    :scale: 50
-   :align: center
+   :align: left
 
 This is the most basic setup for integrating and using the Data Exchange Library in your model. 
 
