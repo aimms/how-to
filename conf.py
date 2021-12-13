@@ -22,6 +22,7 @@ from sphinx.builders import html as builders
 from sphinx.util import logging
 #import pdb
 import subprocess
+import sphinx_aimms_theme
 
 
 # sys.path.insert(0, os.path.abspath('.'))
@@ -60,6 +61,13 @@ linkcheck_ignore = [r'http://localhost:\d+/?',r'http://0\.0\.0\.0[:/]\d+/?',r'ht
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
+
+# Getting the spelling word list from the sphinx-aimms-theme
+spelling_word_list_filename = os.path.join(os.path.dirname(sphinx_aimms_theme.__file__),"spelling_wordlist.txt")
+
+from spellingFilters import ProperNounsFilter
+
+spelling_filters = ['enchant.tokenize.URLFilter','spellingFilters.ProperNounsFilter']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
