@@ -235,7 +235,7 @@ In the running example, this cost computation is handled in the section ``determ
 
 The procedure ``pr_determineCostCoefficients`` computes the cost ``p_cost(i_Employee,i_workBlock)`` in four steps:
 
-#.  First compute the shift of each workblock, depending on the timezone. 
+#.  First compute the shift of each work block, depending on the timezone. 
     This again, consists of three sub-steps:
 
     #.  Determine the starting time using the AIMMS intrinsic function :aimms:func:`TimeSlotToString` as follows:
@@ -462,7 +462,7 @@ Cases contain timeslots and may be created by a user in one timezone and opened 
 To avoid confusion, the timeslots in cases should be saved with respect to the timezone UTC and 
 read back using this timezone.
 
-To enforce this, the option 'use UTC forCaseAndStartEndDate' should be set to 'on'.
+To enforce this, the option 'use UTC ``forCaseAndStartEndDate``' should be set to 'on'.
 
 As this option is not present in the option tree of the project options, 
 you will need to search for it in the project option setting dialog:

@@ -13,7 +13,7 @@ animation of the heat map that is displayed on the right.
 The goal is to create an animation that will morph the picture such that
 each point that starts out as green ends up as red and vice versa.
 
-On the left you can see a small screencast of the final animation we
+On the left you can see a small screen recording of the final animation we
 want to achieve. In order to do this, I have created 765 (3x255) user
 colors in a specific palette that fades from red to green to red to
 green.

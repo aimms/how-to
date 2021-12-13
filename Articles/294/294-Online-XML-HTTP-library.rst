@@ -128,7 +128,7 @@ The ``web::HttpHeader`` index contains the following elements:
 
 	* **Accept-Encoding** indicates to the server what kind of compression you support. In AIMMS, it should always be "identity" (default value) which means that no compression is allowed.			
 
-	* **Authorization** contains identification informations required to connect to the server. The identification can also be done through a parameter in the URL address, depending on the server security.
+	* **Authorization** contains identification information required to connect to the server. The identification can also be done through a parameter in the URL address, depending on the server security.
 
 	* **Cache-Control**  specifies directives for caching mechanisms in both requests and responses.
 

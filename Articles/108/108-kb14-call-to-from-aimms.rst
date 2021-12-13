@@ -55,11 +55,11 @@ Can I call AIMMS from Java?
 Yes, our AIMMS PRO API has native bindings for Java, so you can use those to make calls to AIMMS directly.
 
 Can I use my ``.NET`` component within AIMMS?
-+++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++
 No, but you could write your own C++ ``.dll`` that accesses your .NET component through the AIMMS PRO API.
 
 Can I use my C++ ``.dll`` component within AIMMS?
-+++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++
 Yes, if the exposed routines follow the AIMMS guidelines this is possible.
 
 Can I use my Java component within AIMMS?

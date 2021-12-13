@@ -48,7 +48,7 @@ Input Arguments         Type                Index  Index Domain
 **s_Formulations**      Set                      
 **s_Nodes**             Set                 i, j       
 **p_NumberOfVehicles**  Parameter                    
-**p01_MaxorExact**      Parameter (binair)
+**p01_MaxorExact**      Parameter (binary)
 **p_Distance**          Parameter                  (i, j)       
 **p_Demand**            Parameter                  ( i )         
 **p_Capacity**          Parameter                  ( k )
@@ -68,7 +68,7 @@ The set ``s_Nodes`` contains the depot and all costumers. ``p_MaxorExact`` is a 
 Output Arguments        Type                Index  Index Domain
 ======================  ==================  =====  ==================
 **p_TotalDistance**     Parameter                
-**p01_x**               Parameter (binair)         (i, j, k) | i <> j  
+**p01_x**               Parameter (binary)         (i, j, k) | i <> j  
 **p_StartServing** *    Parameter                  ( i )
 **p_BoundTotalDist**    Parameter
 **sp_SolverStatus**     String Parameter

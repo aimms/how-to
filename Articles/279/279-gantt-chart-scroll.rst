@@ -101,8 +101,5 @@ The example can be downloaded below.
 
 
 
-
-
-
-
-
+.. spelling::
+    timebar

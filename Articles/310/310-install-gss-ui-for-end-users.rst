@@ -45,7 +45,7 @@ In this article, it is explained how to create the dialog page in which the end-
 
     #.  Title to ``gss::sp_incidentSummaryTitle``
     
-#.  Add a download widget named downloadIncidentSummary (4 columns, 1 row)
+#.  Add a download widget named ``downloadIncidentSummary`` (4 columns, 1 row)
 
     #.  Procedure ``gss::pr_downloadIncidentSummary``
     

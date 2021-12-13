@@ -183,7 +183,7 @@ then we can limit the database IO to just inserting those rows as follows:
         }
     }
     
-Some data entry applictions explicitly track which data is newly entered, which data is modified, and which data is left untouched.
+Some data entry applications explicitly track which data is newly entered, which data is modified, and which data is left untouched.
 
 When we start with the ``p_Dat`` table in the section `Write in Replace mode`_ and only insert one element ``p_Dat('a3','b3') = 33``, this will result in only one SQL insert statement executed. 
 The AIMMS data is shown here:

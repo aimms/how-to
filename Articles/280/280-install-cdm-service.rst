@@ -143,7 +143,7 @@ As alternative, you can use one of the following database vendors:
 #. **SQL Server**.  Copy and adapt the example file ``ConfigExamples/CDMConfig - SQLServer.xml``. 
 
 To copy and adapt the example means to copy example file 
-over the file ``CDMConfig.xml`` and replace the elements host, port, database, servername, instancename, user, and password 
+over the file ``CDMConfig.xml`` and replace the elements ``host``, ``port``, ``database``, ``servername``, ``instancename``, ``user``, and ``password`` 
 with actual contents. The ``{}`` and ``[]`` should be removed. A ``{}`` is mandatory, a ``[]`` is optional.
 
 .. note:: When the CDM service is running, and you want to change the configuration, 

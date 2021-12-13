@@ -15,7 +15,7 @@ To start using the command line tool open the terminal and run ``AimmsCmd Exampl
 
 .. note::
     
-    If ``AimmsCmd`` program is not part of your environnement variables, you may find ``AimmsCmd`` in 
+    If ``AimmsCmd`` program is not part of your environment variables, you may find ``AimmsCmd`` in 
     
     ``C:\Users\<Your_User_Name>\AppData\Local\AIMMS\IFA\Aimms\<AIMMS_version>\Bin\AimmsCmd.exe``
 
@@ -77,7 +77,7 @@ By doing this, all the running results will be displayed on the command window. 
     
 .. note:: 
     
-    - Windows powershell doesn't support the ``<`` operator to redirect input. You can get around that using:
+    - Windows Powershell doesn't support the ``<`` operator to redirect input. You can get around that using:
 
         .. code-block:: powershell
 

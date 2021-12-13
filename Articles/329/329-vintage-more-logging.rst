@@ -69,7 +69,7 @@ Selected remarks about the about this ``.bat`` file:
 
 *   The file provided is just a template to be tailored as needed.
 
-*   Line 1: We keep the echo-ing on; such that we can see afterward whether the ``.bat`` file worked as expected.
+*   Line 1: We keep the echoing on; such that we can see afterward whether the ``.bat`` file worked as expected.
 
 *   Lines 10-16: Search the folder ``%localappdata%\AIMMS\IFA\Aimms\`` for the latest AIMMS installed. 
     For me, this doesn't work as I still have AIMMS 4.9 installed. 
