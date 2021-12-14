@@ -50,7 +50,7 @@ You can also use the Execute function to run your own code written in programmin
 
 where ``MyCommandLine``, ``ID`` and ``RequestData`` are string parameters in AIMMS. ``ID`` and ``RequestDate`` take dynamic value at run time, and ``MyCommandLine`` is generated based on these values.  See also :aimms:func:`FormatString`.
 
-.. Please refer to the `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_ for more information on the :any:`FormatString` function.
+.. Please refer to the `AIMMS The Function Reference <https://documentation.aimms.com/functionreference/>`_ for more information on the :any:`FormatString` function.
 
 Similarly, you can use the Execute function to call Python to run a ``.py`` file. Please note that in both cases, the environment variables are set properly. Otherwise, you need to specify the full path where ``Java.exe`` or ``Python.exe`` is installed.
 
