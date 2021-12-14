@@ -18,6 +18,7 @@ This section covers topics related to expressing a model in the AIMMS programmin
    :maxdepth: 1
 
    sub_language_basics/index
+   sub_set/index
    sub_efficiency/index
    sub_libraries/index
    Sub_Solvers/index
