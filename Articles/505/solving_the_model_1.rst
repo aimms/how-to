@@ -54,7 +54,7 @@ necessary corrections.
 .. rubric:: Right-mouse for help
 
 To obtain information about specific AIMMS keywords, you can use the
-right-mouse popup menu to open the AIMMS documentation on the
+right-mouse pop up menu to open the AIMMS documentation on the
 appropriate page with a single click. For instance, you can obtain help
 on the `ProgramStatus` keyword as follows:
 

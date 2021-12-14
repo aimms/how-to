@@ -122,7 +122,7 @@ License server logs
 ---------------------
 
 The licensing log files can be found in the folder ``C:\ProgramData\AIMMS\Logging\`` 
-and the log files are called ``LicenseServer.log`` ``LicenseServer.log.1`` thru ``LicenseServer.log.10`` 
+and the log files are called ``LicenseServer.log`` ``LicenseServer.log.1`` through ``LicenseServer.log.10`` 
 
 The license logging can be configured using ``LicenseServerLogging.xml`` in that same folder.
 

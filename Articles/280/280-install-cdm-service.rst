@@ -100,7 +100,7 @@ Now we can install CDM.
 
 #. Open a command prompt with elevated rights (run as administrator).
 
-#. cd to the created folder
+#. ``cd`` to the created folder
 
 #. Execute the command ``CDMService.exe --install``
 

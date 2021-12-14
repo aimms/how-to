@@ -166,3 +166,7 @@ Further reading
     Hentenryck
     Kodratoff
     al
+
+.. spelling::
+
+    al

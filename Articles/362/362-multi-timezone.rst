@@ -612,7 +612,7 @@ The first data widget is a table containing, per employee, a sequence of start m
         .. image:: images/TableContainingTimeslotsHamburg.png
             :align: center
 
-        The employee is german, and his local timezone is ``'W. Europe Standard Time'``.
+        The employee is German, and his local timezone is ``'W. Europe Standard Time'``.
         According to that timezone, his second job starts on ``21.08.2020 10:00 DST``.
 
 Thus there are changes in:
