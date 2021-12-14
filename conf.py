@@ -66,7 +66,7 @@ templates_path = ['_templates']
 # Getting the spelling word list from the sphinx-aimms-theme
 spelling_word_list_filename = [os.path.join(os.path.dirname(sphinx_aimms_theme.__file__),"spelling_wordlist.txt"), 'custom-spelling.txt']
 
-from spellingFilters import ProperNounsFilter
+from .spellingFilters import ProperNounsFilter
 
 spelling_filters = ['enchant.tokenize.URLFilter','spellingFilters.ProperNounsFilter']
 
