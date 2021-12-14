@@ -21,11 +21,9 @@ import sys
 from sphinx.builders import html as builders
 from sphinx.util import logging
 #import pdb
-import subprocess
 import sphinx_aimms_theme
 
-
-# sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('.'))
 
 # -- General configuration ------------------------------------------------
 
