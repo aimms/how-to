@@ -1,0 +1,54 @@
+﻿    p_arcCapacity := 4 ;
+ 
+    s_locations := data { Paris, Stockholm, Madrid, Berlin, Rome } ;
+ 
+Composite table:
+    i_node    ep_nodeLocation(i_node)  ep_nodeType(i_node)  p_initialStock(i_node)  p_productionCap(i_node)
+!   ------    -----------------------  -------------------  ----------------------  -----------------------
+    node-1    Paris                    Production                               10                        7
+    node-2    Paris                    Distribution
+    node-3    Stockholm                Production                                9                        7
+    node-4    Madrid                   Distribution
+    node-5    Berlin                   Distribution
+    node-6    Rome                     Distribution
+    ;
+ 
+Composite table:
+    i_arc     ep_arcNodeFrom(i_arc)  ep_arcNodeTo(i_arc)  p_cost(i_arc)
+!   ------    ---------------------  -------------------  -------------
+    arc001    node-1                 node-2
+    arc002    node-1                 node-3                           3
+    arc003    node-1                 node-4                           4
+    arc004    node-1                 node-5                           5
+    arc005    node-2                 node-1
+    arc006    node-2                 node-3                           3
+    arc007    node-2                 node-4                           4
+    arc008    node-2                 node-5                           5
+    arc009    node-3                 node-1                           3
+    arc010    node-3                 node-2                           3
+    arc011    node-3                 node-4                           6
+    arc012    node-3                 node-6                           9
+    arc013    node-4                 node-1                           4
+    arc014    node-4                 node-2                           4
+    arc015    node-4                 node-3                           6
+    arc016    node-4                 node-5                           8
+    arc017    node-4                 node-6                           8
+    arc018    node-5                 node-1                           5
+    arc019    node-5                 node-2                           5
+    arc020    node-5                 node-4                           8
+    arc021    node-5                 node-6                           2
+    arc022    node-6                 node-3                           9
+    arc023    node-6                 node-4                           8
+    arc024    node-6                 node-5                           2
+    ;
+ 
+ 
+    p_demand := data table
+      node-2  node-4  node-5  node-6
+   !  ------  ------  ------  ------
+tp-1       1       2       3       4
+tp-2       2       3       4       5
+tp-3       3       4       5       6
+    ;
+ 
+ 

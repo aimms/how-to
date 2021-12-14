@@ -20,11 +20,10 @@ Disallow: https://how-to.aimms.com/Articles/329/329-vintage-more-logging.html
 Disallow: https://how-to.aimms.com/Articles/336/webui-annotations.html
 Disallow: https://how-to.aimms.com/Articles/368/368-attempting-connect.html
 Disallow: https://how-to.aimms.com/Articles/499/499-mysql-duplicate-records.html
+Disallow: /staging/
 
 
 Disallow: https://how-to.aimms.com/Articles/518/518-add-logo-to-webui-app.html
-
-_static/sankey.html
 
 
 

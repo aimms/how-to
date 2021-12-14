@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<References AIMMS_Version="4.78.4.13 (x64)">
+<References AIMMS_Version="4.82.7.10 (x64)">
 	<MainProject Path="MainProject" />
 	<Library System="true" Path="AimmsPro" />
 	<Library System="true" Path="AimmsWebUI" />
 	<Library Path="GuardServerSession" />
-	<Library Path=".\GuardServerSessionTest" />
+	<Library Path="GuardServerSessionTest" />
 	<RepositoryLibrary UUID="7A2E765C-2A09-4456-8583-C7AF9DE0484D" Name="AIMMSUnitTest" Version="1.0.0.112" />
 </References>

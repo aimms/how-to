@@ -1,0 +1,201 @@
+## ams_version=1.0
+
+Model Main_ArcExecutionEfficiency {
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: minute->s : #-># * 60;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsWebUI.
+				
+				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
+			}
+		}
+	}
+	DeclarationSection Model_Declaration {
+		Parameter p_noNodes {
+			InitialData: 1000;
+		}
+		Set s_nodes {
+			Index: i_node, i_nodeFrom, i_nodeTo;
+			Definition: ElementRange(1,p_noNodes);
+		}
+		Parameter p_noOutgoingNodes {
+			InitialData: 5;
+		}
+		Set s_outgoingNodes {
+			IndexDomain: i_node;
+			SubsetOf: s_nodes;
+			OrderBy: user;
+		}
+		Parameter p_x {
+			IndexDomain: i_node;
+		}
+		Parameter p_y {
+			IndexDomain: i_node;
+		}
+		Parameter p_dist {
+			IndexDomain: (i_nodeFrom, i_nodeTo);
+			Definition: sqrt( sqr( p_x(i_nodeFrom) - p_x(i_nodeTo) ) + sqr( p_y(i_nodeFrom) - p_y(i_nodeTo) ) );
+		}
+		Set s_arcIds {
+			SubsetOf: Integers;
+			Index: i_arc;
+			Parameter: ep_arc;
+		}
+		ElementParameter ep_arcNodeFrom {
+			IndexDomain: i_arc;
+			Range: s_nodes;
+			Comment: "Return the node from which the arc \'i_arc\' flows";
+		}
+		ElementParameter ep_arcNodeTo {
+			IndexDomain: i_arc;
+			Range: s_nodes;
+			Comment: "Return the node to which the arc \'i_arc\' flows";
+		}
+		Parameter bp_arcIsNodeFrom {
+			IndexDomain: (i_arc,i_node);
+			Range: binary;
+			Definition: ep_arcNodeFrom(i_arc) = i_node;
+		}
+		Parameter bp_arcIsNodeTo {
+			IndexDomain: (i_arc,i_node);
+			Range: binary;
+			Definition: ep_arcNodeTo(i_arc) = i_node;
+		}
+		Parameter bp_arcRelation {
+			IndexDomain: (i_arc,i_nodeFrom,i_nodeTo);
+			Definition: {
+				bp_arcIsNodeFrom(i_arc, i_nodeFrom) and
+				bp_arcIsNodeTo(i_arc, i_nodeTo)
+			}
+		}
+		Parameter p_flow {
+			IndexDomain: (i_tp,i_pg,i_arc);
+		}
+		Parameter bp_isArc {
+			IndexDomain: (i_nodeFrom,i_nodeTo);
+		}
+		Parameter p_flowComponent {
+			IndexDomain: (i_tp,i_pg,i_nodeFrom,i_nodeTo)|bp_isArc(i_nodeFrom, i_nodeTo);
+		}
+		Parameter p_noTimeperiods {
+			InitialData: 200;
+		}
+		Parameter p_noProductGroups {
+			InitialData: 100;
+		}
+		Set s_timePeriods {
+			Index: i_tp;
+			Definition: ElementRange(1,p_noTimeperiods);
+		}
+		Set s_productGroups {
+			Index: i_pg;
+			Definition: ElementRange(1,p_noProductGroups);
+		}
+	}
+	Procedure pr_generateTestProblem {
+		Body: {
+			p_x(i_node) := uniform(0,1000);
+			p_y(i_node) := uniform(0,1000);
+			s_outgoingNodes(i_node) := Nbest(i_nodeTo, -p_dist(i_node,i_nodeTo), p_noOutgoingNodes ); 
+			
+			for i_node do
+				for i_nodeTo in s_outgoingNodes(i_node) do
+					s_arcIds += card(s_arcIds)+1;
+					ep_arc := last(s_arcIds);
+					ep_arcNodeFrom(ep_arc) := i_node ;
+					ep_arcNodeTo(ep_arc) := i_nodeTo ;
+					bp_isArc(i_node,i_nodeTo) := 1;
+				endfor ;
+				ep_arc := '';
+			endfor ;
+			
+			p_flow(i_tp, i_pg, i_arc) := 1;
+			p_flowComponent(i_tp, i_pg, i_nodeFrom, i_nodeTo) := 1;
+		}
+	}
+	Parameter p_inflow1 {
+		IndexDomain: (i_tp,i_pg,i_node);
+	}
+	Parameter p_inflow2 {
+		IndexDomain: (i_tp,i_pg,i_node);
+	}
+	Parameter p_inflow3 {
+		IndexDomain: (i_tp,i_pg,i_node);
+	}
+	Parameter p_inflow4 {
+		IndexDomain: (i_tp,i_pg,i_node);
+	}
+	Parameter p_inflow5 {
+		IndexDomain: (i_tp,i_pg,i_node);
+	}
+	Parameter p_inflowDiff12 {
+		IndexDomain: (i_tp,i_pg,i_node);
+		Definition: p_inflow1(i_tp, i_pg, i_node) - p_inflow2(i_tp, i_pg, i_node);
+	}
+	Parameter p_inflowDiff23 {
+		IndexDomain: (i_tp,i_pg,i_node);
+		Definition: p_inflow2(i_tp, i_pg, i_node) - p_inflow3(i_tp, i_pg, i_node);
+	}
+	Procedure MainExecution {
+		Body: {
+			p_inflow1(i_tp,i_pg,i_node) := 
+				sum( i_arc | ep_arcNodeTo(i_arc) = i_node, p_flow(i_tp, i_pg, i_arc) );
+			p_inflow2(i_tp,i_pg,i_node) := 
+				sum( i_arc | bp_arcIsNodeTo(i_arc, i_node), p_flow(i_tp, i_pg, i_arc) );
+			p_inflow3(i_tp,i_pg,i_node) := 
+				sum( (i_arc, i_nodeFrom) | bp_arcRelation(i_arc, i_nodeFrom, i_node), 
+					p_flow(i_tp, i_pg, i_arc) );
+			p_inflow4(i_tp,i_pg,i_node) := 
+				sum( i_nodeFrom | bp_isArc(i_nodeFrom, i_node), 
+					p_flowComponent(i_tp, i_pg, i_nodeFrom, i_node) );
+			p_inflow5(i_tp,i_pg,i_node) := 
+				sum( i_nodeFrom,  
+					p_flowComponent(i_tp, i_pg, i_nodeFrom, i_node) );
+		}
+	}
+	Section Application_initialization_and_termination {
+		Procedure MainInitialization {
+			Body: {
+				profilerStart();
+				pr_generateTestProblem();
+				update ;
+			}
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+}
