@@ -18,7 +18,7 @@ The two GMP functions used in this example are:
 		
 The first procedure can be used to solve a single MPS file and the latter one is to tune one or more MPS files. 
 
-For the detailed explanations regarding the usage of the procedures, please refer to :any:`algorithmic-capabilities/the-gmp-library/gmp_tuning-procedures-and-functions/`
+For the detailed explanations regarding the usage of the procedures, please refer to :any:`algorithmic-capabilities/the-gmp-library/gmp_tuning-procedures-and-functions/index`
 In order to solve a single MPS file, you need to open the page "Solve Single MPS File". On this page you first select an MPS file, set its MIP GAP, and select a solver among CPLEX, GUROBI, CBC and XA. Press the button "Solve Without Tuning" to run the model. 
 
 You can tune one or a set of MPS files. The page "Tune Single MPS File" allows you to first tune a selected MPS file, and then solve it with tuned options. 
