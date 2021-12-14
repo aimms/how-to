@@ -14,7 +14,7 @@ In this AIMMS project different circle packing problems are solved.
 
 An object packing is a non-overlapping arrangement of a collection of objects in a container set; an optimized packing meets a specific optimality criterion. This general problem statement includes the frequently studied special cases in which identical circles (with an unknown, maximized radius) are to be packed into the unit square or the unit circle. A similar - but generally more difficult - problem is the packing of an arbitrary collection of circles in an optimized circle (with minimal radius).
 
-To solve object packing problems numerically, we often need nonlinear optimization tools. In the case of circle packings listed above, we have to handle non-convex models, therefore the multi-start algorithm can be used as a suitable tool.
+To solve object packing problems numerically, we often need nonlinear optimization tools. In the case of the circle packing listed above, we have to handle non-convex models, therefore the multi-start algorithm can be used as a suitable tool.
 
 In this illustrative AIMMS project, three different circle packing problems are solved: 
 

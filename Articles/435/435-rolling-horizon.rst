@@ -13,7 +13,7 @@ This example illustrates the use of horizons and calendars. A time-based model i
 
 The model is solved in two ways. The first way is solving it using rolling horizon. The second way is to solve it using the calendar model. 
 
-Rolling horizon is a method in which the model is solved in several submodels. This can be usefull when the computational times of the calendar based model are very large. By solving several smaller submodels, the total computational time can be decreased.
+Rolling horizon is a method in which the model is solved in several submodels. This can be useful when the computational times of the calendar based model are very large. By solving several smaller submodels, the total computational time can be decreased.
 
 The model that is used, is a production - stock model. The model determines how many chocolate bars need to be produced every week and how many should be stored into stock such that the demand is satisfied.
 

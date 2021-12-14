@@ -37,8 +37,8 @@ The memory and CPU usage of a single data session multiplied by the maximum numb
 
 .. math::
 
-    memory_required(GB) \geq peak_memory_data_session * number_data_sessions + peak_memory_solver_session * number_solver_sessions + 3
-    cores_required \geq avg_cpu_usage_data_session * number_data_sessions + avg_cpu_usage_solver_session * number_solver_sessions + 1
+    memory\_required(GB) \geq peak\_memory\_data\_session * number\_data\_sessions \linebreak+ peak\_memory\_solver\_session * number\_solver\_sessions + 3\linebreak
+    cores_required \geq avg_cpu_usage_data_session * number_data_sessions \linebreak+ avg_cpu_usage_solver_session * number_solver_sessions + 1
 
 Example
 -------------
@@ -58,8 +58,8 @@ Substituting these numbers in the above equations, we get:
 
 .. math:: 
 
-    memory_required \geq 0.5 GB * 20 + 2 GB * 2 + 3 \eq 17 GB
-    cores_required  \geq 0.2 * 20 + 1 * 2 + 1 \eq 7
+    memory_required \geq 0.5 GB * 20 + 2 GB * 2 + 3 = 17 GB\linebreak
+    cores_required  \geq 0.2 * 20 + 1 * 2 + 1 = 7
 
 Summary
 -----------

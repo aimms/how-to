@@ -56,7 +56,7 @@ In addition to the prerequisites outlined in :ref:`scripting-tools`, you will ne
 #. The example project is developed using AIMMS version 4.76.8, so we recommend you use at least that version. `Download AIMMS Developer <https://www.aimms.com/support/downloads/#aimms-dev-download>`_. 
 #. AIMMS `HTTP Client Library <https://documentation.aimms.com/httpclient/index.html>`_: version 1.1.0.6 or above. 
 #. The R project in the example is developed in `R 4.0.3 <https://cran.r-project.org/bin/windows/base/>`_.
-#. ``renv`` package to install the dependencies captured in the 'renv.lock' file. `Read more <https://rstudio.github.io/renv/index.html>`_.
+#. ``renv`` package to install the dependencies captured in the ``renv.lock`` file. `Read more <https://rstudio.github.io/renv/index.html>`_.
     
     .. code-block:: r
 
@@ -116,7 +116,7 @@ Running locally
 """"""""""""""""""
 
 If you run the `run_api.R` file using ``source("run_api.R")``, a local API server will be started.  
-You can test this server by typing in the url ``http://localhost:8000`` in your browser. 
+You can test this server by typing in the URL ``http://localhost:8000`` in your browser. 
 
 .. image:: test.png
     :align: center
@@ -196,8 +196,8 @@ You can install all the required packages using either of these methods, but we 
 
 Line 18 will run the ``run_api.R`` script when a container built on this image is started. 
 
-The below commandline prompts will build a Docker image of the name `imageName:latest` and start a container. 
-Building an image from this file takes up to 10 mins, bulk of the time being spent in installing the R packages. 
+The below command line prompts will build a Docker image of the name `imageName:latest` and start a container. 
+Building an image from this file takes up to 10 minutes, bulk of the time being spent in installing the R packages. 
 
 .. code-block:: none
 
@@ -217,3 +217,6 @@ Further reading
 
 
 
+.. spelling::
+    
+	sankey

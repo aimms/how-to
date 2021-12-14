@@ -153,7 +153,7 @@ Link an AIMMS application to a running CDM service
 ----------------------------------------------------------------
 
 Here ``cdm::serverURI`` should be set to ``tcp://CDMServiceHostName:19999`` where 19999 is the port number.  
-This port number may be chosen differently, as long as it matches the <listenport> entry in the xml configuration file.
+This port number may be chosen differently, as long as it matches the ``<listenport>`` entry in the xml configuration file.
 
 Below is an example of CDM startup code that connects to an existing shared CDM service, whether the application is opened as a deployed application or as an application in the AIMMS IDE.
 

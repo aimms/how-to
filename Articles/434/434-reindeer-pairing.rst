@@ -16,7 +16,7 @@ The GUI of this AIMMS project illustrates the use of a network object with a bac
 - Choose left or right perspective in order to order the reindeer either using the order in the set of left reindeer (Lefty) or right reindeer (Righty).
 - Choose a solution to view a different solution.
 
-The art work used in the background is graciously provided by Dixie Allen. She retains the copy right of it: Art � Dixie Allan, webclipart.about.com
+The art work used in the background is graciously provided by Dixie Allen. She retains the copy right of it: Art © Dixie Allan.
 
 Keywords:
 Stable marriage problem, network object, constraint programming, channel constraint, if-then constraint

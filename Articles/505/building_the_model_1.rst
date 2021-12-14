@@ -87,7 +87,7 @@ display the initial model tree shown in
 
 .. seealso::
   
-  For more infromation on ``MainInitialization`` and ``MainExecution`` predefined procedures, you may investigate :doc:`lr:data-communication-components/data-initialization-verification-and-control/model-initialization-and-termination`
+  For more information on ``MainInitialization`` and ``MainExecution`` predefined procedures, you may investigate :doc:`lr:data-communication-components/data-initialization-verification-and-control/model-initialization-and-termination`
    
 Entering sets and indices
 --------------------------

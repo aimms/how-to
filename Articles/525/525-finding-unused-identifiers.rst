@@ -201,7 +201,7 @@ Caveats
             Default: 'pr_myProc'
         }
 
-#.  The identifiers referenced in the annotation are not foud.  For instance:
+#.  The identifiers referenced in the annotation are not found.  For instance:
 
     .. code-block:: aimms
         :linenos:

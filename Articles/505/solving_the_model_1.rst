@@ -115,7 +115,7 @@ You have computed and solved your first optimization model with AIMMS. Congrats 
 
 You are now able to use the very basics of AIMMS software.
 
-Continue to learn on the `AIMMS Academy <http://academy.aimms.com/>`__, and enrol to a `more advanced course <https://academy.aimms.com/course/view.php?id=45>`__. 
+Continue to learn on the `AIMMS Academy <http://academy.aimms.com/>`__, and enroll to a `more advanced course <https://academy.aimms.com/course/view.php?id=45>`__. 
 This course will dig deeper in modeling using AIMMS, building a Web User Interface and communicating with an excel file or a database.
 
 See you there ! 😁

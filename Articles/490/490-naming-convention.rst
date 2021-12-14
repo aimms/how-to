@@ -83,7 +83,7 @@ More modern approaches rely on the development environment to make such a distin
     .. image:: images/hover.png
         :align: center
 
-*   Syntax coloring: color an identifier based on its type, see also :doc:`Type based syntax coloring <../225/225-change-syntax-highlighting-colors>` which provides a tasteful coloring scheme distinguishing parameters (darkcyan) from variables (palevioletred).
+*   Syntax coloring: color an identifier based on its type, see also :doc:`Type based syntax coloring <../225/225-change-syntax-highlighting-colors>` which provides a tasteful coloring scheme distinguishing parameters (``darkcyan``) from variables (``palevioletred``).
 
     .. image:: images/syntax-coloring.png
         :align: center
@@ -211,3 +211,17 @@ References
 * `Hungarian notation <https://en.wikipedia.org/wiki/Hungarian_notation>`_
 
 * :doc:`Type based syntax coloring <../225/225-change-syntax-highlighting-colors>`
+
+.. spelling::
+    
+    ep
+    ev
+    bv
+    cv
+    uc
+    qnt
+    cnv
+    dbpr
+    fnc
+    epr
+    efnc

@@ -98,5 +98,5 @@ Tips on tweaking
 Logo attribution
 ------------------
 
-The placeholder logo used in this article was created by Paul Wolfs from Total Design (www.totaldesign.com).
+The placeholder logo used in this article was created by Paul Wolfs from Total Design (http://www.totaldesign.com).
 
