@@ -75,6 +75,10 @@
         <!--- With TRACE file positions are logged -->
         <level value="info"/>
     </logger>
+    <logger name="AIMMS.aimmsmutex" >
+        <!--- With TRACE acquiring and releasing the mutex is logged -->
+        <level value="info"/>
+    </logger>
     <logger name="ARMI" >
         <level value="info"/>
     </logger>
