@@ -62,11 +62,9 @@ linkcheck_ignore = [r'http://localhost:\d+/?',r'http://0\.0\.0\.0[:/]\d+/?',r'ht
 templates_path = ['_templates']
 
 # Getting the spelling word list from the sphinx-aimms-theme
-spelling_word_list_filename = [os.path.join(os.path.dirname(sphinx_aimms_theme.__file__),"spelling_wordlist.txt"), 'custom-spelling.txt']
+spelling_word_list_filename = [os.path.join(os.path.dirname(sphinx_aimms_theme.__file__),"spelling_wordlist.txt")]
 
-import AIMMSspellingFilters
-
-spelling_filters = ['enchant.tokenize.URLFilter','AIMMSspellingFilters.ProperNounsFilter']
+spelling_filters = ['enchant.tokenize.URLFilter','sphinx_aimms_theme.AIMMSspellingFilters.ProperNounsFilter']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
