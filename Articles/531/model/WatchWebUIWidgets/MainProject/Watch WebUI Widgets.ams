@@ -1,0 +1,236 @@
+## ams_version=1.0
+
+Model Main_Watch_WebUI_Widgets {
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: {
+				minute->s : #-># * 60,
+				century->s : #-># * 3153600000,
+				day->s : #-># * 86400,
+				hour->s : #-># * 3600,
+				month->s : #-># * 2628000,
+				second->s : #-># ,
+				tick->s : #-># / 100,
+				week->s : #-># * 604800,
+				year->s : #-># * 31536000
+			}
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsWebUI.
+				
+				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
+			}
+		}
+	}
+	Section WebUI_globals {
+		StringParameter sp_wwwWorkflow {
+			IndexDomain: (webui::indexWorkflowOrder,webui::indexWorkflowSpec);
+			Definition: {
+				{
+					('1', 'title') : "Demos" , ! (Optional) The title for the Workflow to be displayed on top of the Workflow Panel.
+					('1', 'style') : ""   ! (CURRENTLY NOT IN USE) When styles or themes are introduced for the Workflow Panel, this attribute will hold that value.
+				}
+			}
+		}
+		StringParameter sp_wwwWorkflowSteps {
+			IndexDomain: (webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec);
+			Definition: {
+				{
+					( '1', '1', 'displayText'       ) : "Welcome",  
+					( '1', '1', 'icon'              ) : "aimms-happy",  
+					( '1', '1', 'pageId'            ) : "home", 
+					( '1', '1', 'tooltip'           ) : "Shows a text widget welcoming you to this app", 
+					( '1', '1', 'workflowPageState' ) : "Active", 
+					( '1', '1', 'pageDataState'     ) : "", 
+					( '1', '1', 'redirectPageId'    ) : "home", 
+				
+					( '1', '2', 'displayText'       ) : "Map", 
+					( '1', '2', 'icon'              ) : "aimms-map", 
+					( '1', '2', 'pageId'            ) : "map", 
+					( '1', '2', 'tooltip'           ) : "Shows a map widgets with some German cities", 
+					( '1', '2', 'workflowPageState' ) : "Active", 
+					( '1', '2', 'pageDataState'     ) : "", 
+					( '1', '2', 'redirectPageId'    ) : "home" 
+				
+				
+				
+				}
+			}
+		}
+		StringParameter sp_wwwStatusBar {
+			IndexDomain: (webui::indexApplicationExtension,webui::indexStatusBarSpec);
+			Definition: {
+				{
+					( '1', 'header'    ) : "",
+					( '1', 'icon'      ) : "aimms-glass", 
+					( '1', 'color'     ) : "red", 
+					( '1', 'text'      ) : "Watch WebUI Widgets 1.0 using AIMMS 4.83",
+					( '1', 'tooltip'   ) : "",
+					( '1', 'procedure' ) : "",
+					( '1', 'state'     ) : "Inactive"
+				}
+			}
+		}
+	}
+	Section Map_Widget_section {
+		DeclarationSection WebUI_Page_and_Widget_support {
+			StringParameter sp_mapSidePanel;
+			StringParameter sp_locationIcon {
+				IndexDomain: i_loc;
+				Definition: {
+					if i_loc in s_sources then
+						"aimms-factory"
+					elseif i_loc in s_destinations then
+						"aimms-store"
+					else
+						"aimms-width"
+					endif ;
+				}
+			}
+			Parameter p_size {
+				IndexDomain: i_loc;
+			}
+		}
+		DeclarationSection Data_for_the_map_widget {
+			Set s_locations {
+				Index: i_loc, i_locFrom, i_locTo;
+				webui::TooltipIdentifier: ;
+			}
+			Parameter p_noLocations {
+				Definition: card( s_locations );
+			}
+			Parameter p_noSourceLocations {
+				InitialData: 3;
+			}
+			Parameter p_noDestinationLocations {
+				InitialData: 7;
+			}
+			Parameter p_latitude {
+				IndexDomain: i_loc;
+			}
+			Parameter p_longitude {
+				IndexDomain: i_loc;
+			}
+			Set s_sources {
+				SubsetOf: s_locations;
+				Index: i_locSource;
+				Definition: {
+					{ i_loc | ord(i_loc) <= p_noSourceLocations }
+				}
+			}
+			Set s_intermediate {
+				SubsetOf: s_locations;
+				Index: i_locIntermediate;
+				Definition: {
+					{ i_loc | ( ord(i_loc) > p_noSourceLocations ) and ( ord(i_loc) <= p_noLocations - p_noDestinationLocations ) }
+				}
+			}
+			Set s_destinations {
+				SubsetOf: s_locations;
+				Index: i_locDestination;
+				Definition: {
+					{ i_loc | ord(i_loc) > p_noLocations - p_noDestinationLocations }
+				}
+			}
+			Parameter p_dist {
+				IndexDomain: (i_locFrom,i_locTo);
+				Definition: {
+					! Formula also present on http://www.movable-type.co.uk/scripts/latlong.html section Spherical Law of Cosines.
+					!calculate distance from haversine formulas
+					 ((6371.0 )*arccos[cos(radians(90 - P_latitude(i_locFrom)))*
+					                   cos(radians(90 - P_latitude(i_locTo))) 
+					               + 
+						           sin(radians(90 - P_latitude(i_locFrom)))* 
+					                   sin(radians(90 - P_latitude(i_locTo)))*
+					                   cos(radians(p_longitude(i_locFrom)-p_longitude(i_locTo)))
+					              ] )  ;
+				}
+			}
+			Set s_nearIntermediates {
+				IndexDomain: i_loc;
+				SubsetOf: s_locations;
+				OrderBy: user;
+				Definition: Nbest( i_locIntermediate, -p_dist( i_loc, i_locIntermediate ), 2 );
+			}
+			Parameter bp_arcHelp {
+				IndexDomain: (i_locFrom,i_locTo);
+				Definition: {
+					1 $ ( ( i_locTo in s_nearIntermediates( i_locFrom ) ) and 1 )
+					!( ( i_locFrom in s_sources ) or ( i_locFrom in s_destinations ) ) )
+				}
+			}
+			Parameter bp_arc {
+				IndexDomain: (i_locFrom,i_locTo);
+				Definition: {
+					!( p_size( i_locFrom ) + p_size( i_locTo ) ) $
+					( ( bp_arcHelp(i_locFrom, i_locTo) or bp_arcHelp(i_locTo, i_locFrom) ) and
+					  ( ( ord(i_locFrom ) < ord(i_locTo)                            ) or 
+					    ( i_locFrom in s_intermediate and i_locTo in s_Intermediate )    )      )
+				}
+			}
+		}
+		Procedure pr_openPageMap {
+			Body: {
+				pr_readMapData();
+			}
+			Comment: "This procedure is run upon opening page \"mapDemo\"";
+		}
+		Procedure pr_readMapData {
+			Body: {
+				empty s_locations ;
+				
+				dex::AddMapping(
+					mappingName :  "fewCitiesLatLongCSV", 
+					mappingFile :  "mappings/fewCitiesLatLongCSV.xml") ;
+				
+				dex::ReadFromFile(
+					dataFile         :  "data/twentyGermanCities.csv", 
+					mappingName      :  "fewCitiesLatLongCSV", 
+					emptyIdentifiers :  1, 
+					emptySets        :  1, 
+					resetCounters    :  1);
+				
+				p_size(i_loc) := round( uniform( 2, 8 ) );
+			}
+		}
+	}
+	Section Application_initialization_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1 ; ! Cases are not used in this app. DataManagementExit();
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+	Procedure MainExecution;
+}

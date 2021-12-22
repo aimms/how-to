@@ -1,0 +1,368 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home",
+                "type": "pagev2-grid",
+                "children": []
+              },
+              {
+                "name": "map",
+                "type": "pagev2-grid",
+                "slug": "map",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "statusmessages": {
+      "aimms": {
+        "contents": [
+          "sp_wwwStatusBar"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_wwwStatusBar",
+            "slice": [
+              {
+                "index": "webui::indexApplicationExtension",
+                "type": "free",
+                "value": "webui::indexApplicationExtension"
+              },
+              {
+                "index": "webui::indexStatusBarSpec",
+                "type": "free",
+                "value": "webui::indexStatusBarSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "workflows.configuration": {
+      "aimms": {
+        "contents": [
+          "sp_wwwWorkflowSteps"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_wwwWorkflowSteps",
+            "slice": [
+              {
+                "index": "webui::indexWorkflowOrder",
+                "type": "free",
+                "value": "webui::indexWorkflowOrder"
+              },
+              {
+                "index": "webui::indexNoOfPages",
+                "type": "free",
+                "value": "webui::indexNoOfPages"
+              },
+              {
+                "index": "webui::indexWorkflowPageSpec",
+                "type": "free",
+                "value": "webui::indexWorkflowPageSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "workflows.information": {
+      "aimms": {
+        "contents": [
+          "sp_wwwWorkflow"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_wwwWorkflow",
+            "slice": [
+              {
+                "index": "webui::indexWorkflowOrder",
+                "type": "free",
+                "value": "webui::indexWorkflowOrder"
+              },
+              {
+                "index": "webui::indexWorkflowSpec",
+                "type": "free",
+                "value": "webui::indexWorkflowSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "WelcomeText",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsWelcomeText0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout9"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "WelcomeText",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/map": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "mapDemo",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsmapDemo0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "onload": {
+      "aimms": {
+        "run": "pr_openPageMap"
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "mapDemo",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "widgets/mapDemo": {
+    "aimms.widget.type": {
+      "literal": "map-v2"
+    },
+    "arcs.__display_order__": {
+      "literal": [
+        "arcs.0"
+      ]
+    },
+    "arcs.0": {
+      "aimms": {
+        "contents": [
+          "bp_arc"
+        ],
+        "slices": [
+          {
+            "identifier": "bp_arc",
+            "slice": [
+              {
+                "index": "i_locFrom",
+                "type": "free",
+                "value": "i_locFrom"
+              },
+              {
+                "index": "i_locTo",
+                "type": "free",
+                "value": "i_locTo"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "arcs.0.label.hide": {
+      "literal": true
+    },
+    "arcs.0.line.straight": {
+      "literal": true
+    },
+    "arcs.0.value": {
+      "literal": {
+        "identifier": "bp_arc",
+        "slice": [
+          {
+            "index": "i_locFrom",
+            "type": "free",
+            "value": "i_locFrom"
+          },
+          {
+            "index": "i_locTo",
+            "type": "free",
+            "value": "i_locTo"
+          }
+        ]
+      }
+    },
+    "arcs.0.width.dynamic": {
+      "literal": true
+    },
+    "center.latitude": {
+      "literal": 50.69935280343021
+    },
+    "center.longitude": {
+      "literal": 8.768949288491461
+    },
+    "name": {
+      "literal": "mapDemo"
+    },
+    "nodes.__display_order__": {
+      "literal": [
+        "nodes.0"
+      ]
+    },
+    "nodes.0": {
+      "aimms": {
+        "contents": [
+          "p_longitude",
+          "p_latitude",
+          "p_size",
+          "sp_locationIcon"
+        ],
+        "slices": [
+          {
+            "identifier": "p_longitude",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "free",
+                "value": "i_loc"
+              }
+            ]
+          },
+          {
+            "identifier": "p_latitude",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "free",
+                "value": "i_loc"
+              }
+            ]
+          },
+          {
+            "identifier": "p_size",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "free",
+                "value": "i_loc"
+              }
+            ]
+          },
+          {
+            "identifier": "sp_locationIcon",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "free",
+                "value": "i_loc"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "nodes.0.icon": {
+      "literal": {
+        "identifier": "sp_locationIcon",
+        "slice": [
+          {
+            "index": "i_loc",
+            "type": "free",
+            "value": "i_loc"
+          }
+        ]
+      }
+    },
+    "nodes.0.index": {
+      "literal": {
+        "identifier": "i_loc"
+      }
+    },
+    "nodes.0.latitude": {
+      "literal": {
+        "identifier": "p_latitude",
+        "slice": [
+          {
+            "index": "i_loc",
+            "type": "free",
+            "value": "i_loc"
+          }
+        ]
+      }
+    },
+    "nodes.0.longitude": {
+      "literal": {
+        "identifier": "p_longitude",
+        "slice": [
+          {
+            "index": "i_loc",
+            "type": "free",
+            "value": "i_loc"
+          }
+        ]
+      }
+    },
+    "nodes.0.maximumreferencesize": {
+      "literal": 10
+    },
+    "nodes.0.size": {
+      "literal": {
+        "identifier": "p_size",
+        "slice": [
+          {
+            "index": "i_loc",
+            "type": "free",
+            "value": "i_loc"
+          }
+        ]
+      }
+    },
+    "title": {
+      "literal": "Demo map widget"
+    },
+    "zoom": {
+      "literal": 7
+    }
+  },
+  "widgets/WelcomeText": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div><span style=\"font-size: 32px;\">Welcome to the Watch WebUI Widgets app.</span></div><div><br></div><div>This app illustrates various features of selected Widgets.</div><div>Each page focuses on a single widget type, but other widgets may be shown to support that illustration.</div><div><br></div><div>The first page is about the map widget.</div>"
+    },
+    "name": {
+      "literal": "WelcomeText"
+    }
+  }
+}
