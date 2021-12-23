@@ -162,9 +162,5 @@ Further reading
 
 .. spelling::
 
-    Dincbas
-    Simonis
-    Hentenryck
-    Kodratoff
     al
     
