@@ -26,7 +26,7 @@ Before we begin, make sure you have done the following:
 Basics of IBM Cloud APIs
 -----------------------------------------------
 
-You can find information about this API in `IBM Cloud API Docs: Visual Recognition <https://cloud.ibm.com/apidocs/visual-recognition/visual-recognition-v3#classify>`_.
+You can find information about this API in `IBM Cloud API Docs: Visual Recognition <https://cloud.ibm.com/docs/swift?topic=swift-recognition>`_.
 
 The Authentication system we'll be using is a simple API key.
 You can use a GET request using the URL of a photo, or a POST request to send the document to analyze to the server. (Here, we'll be using the POST request, explained in IBM docs in section *Methods > Classify images*.)
