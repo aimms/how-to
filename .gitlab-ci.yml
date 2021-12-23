@@ -25,7 +25,6 @@ spellcheck:
   stage: test
   script:
   - python3 -msphinx -W --keep-going -b spelling . _build/spelling
-  allow_failure: true
   tags: 
     - ubuntu
 
