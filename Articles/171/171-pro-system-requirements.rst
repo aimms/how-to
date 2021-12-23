@@ -61,11 +61,11 @@ Substituting these numbers in the above equations, we get:
 
 .. math:: 
 
-    memory_required \geq 0.5 GB * 20 + 2 GB * 2 + 3 = 17 GB
+    memory\_required \geq 0.5 GB * 20 + 2 GB * 2 + 3 = 17 GB
     
 .. math:: 
 
-    cores_required  \geq 0.2 * 20 + 1 * 2 + 1 = 7
+    cores\_required  \geq 0.2 * 20 + 1 * 2 + 1 = 7
 
 Summary
 -----------
