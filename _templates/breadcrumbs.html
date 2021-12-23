@@ -1,0 +1,29 @@
+{# Import the theme's layout. #} {% extends "!breadcrumbs.html" %} 
+
+{% block right_side_panel %}
+  {% for doc in parents %} 
+    {% if doc.title == "Examples" %}
+      <style>
+      @media (max-width: 1000px)  { div.community-edition {display: none;}}
+      div.community-edition a.btn {
+        background: #fff;
+        color: #004bff!important;
+        font-family: "AvenirNextLTPro-Medium",Arial,sans-serif;
+        border: 1px solid #004bff;}
+      div.community-edition a.btn:hover {
+        background: #004bff;
+        color: #fff!important;}
+      div.community-edition a.btn:active {
+        box-shadow: none;
+        padding: 15px 30px;}
+      </style>
+      <div class="community-edition">
+        
+        <a href="https://licensing.cloud.aimms.com/license/community.htm" class="btn float-right" >Download community edition</a>
+
+      </div>
+    {% endif %}
+  {% endfor %} 
+  
+    {{ super() }}
+{% endblock %}
