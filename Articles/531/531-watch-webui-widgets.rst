@@ -13,3 +13,9 @@ Notes the purpose of the app, the required version of AIMMS, and lists the avail
 
 Map
 ---
+
+Example
+^^^^^^^^
+
+OxyGem is a Oxygen distillation and bottling company in Germany.  
+It has separate locations for distillation, pumping, and bottling. 

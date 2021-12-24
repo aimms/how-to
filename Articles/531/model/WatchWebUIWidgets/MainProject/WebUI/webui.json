@@ -23,7 +23,26 @@
                 "name": "map",
                 "type": "pagev2-grid",
                 "slug": "map",
-                "children": []
+                "children": [
+                  {
+                    "name": "location-detail",
+                    "type": "pagev2-grid-dialog",
+                    "slug": "location-detail",
+                    "children": []
+                  },
+                  {
+                    "name": "map-config-panel",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "map-config-panel",
+                    "children": []
+                  },
+                  {
+                    "name": "map-explain-panel",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "map-explain-panel",
+                    "children": []
+                  }
+                ]
               }
             ]
           }
@@ -136,6 +155,43 @@
       ]
     }
   },
+  "pages/location-detail": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-dialog"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "InOut",
+          "gridArea": "area-a",
+          "dndId": "area-aInOut1"
+        },
+        {
+          "widgetUri": "scalar-size-location",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsscalar-size-location0"
+        }
+      ]
+    },
+    "maxcolumns": {
+      "literal": 3
+    },
+    "maxrows": {
+      "literal": 2
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "InOut",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "scalar-size-location",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
   "pages/map": {
     "aimms.widget.type": {
       "literal": "pagev2-grid"
@@ -157,6 +213,30 @@
         "run": "pr_openPageMap"
       }
     },
+    "sidepanels": {
+      "aimms": {
+        "contents": [
+          "sp_mapSidePanel"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_mapSidePanel",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexSidePanelSpec",
+                "type": "free",
+                "value": "webui::indexSidePanelSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "widgets": {
       "literal": [
         {
@@ -164,6 +244,139 @@
           "layoutInfo": {}
         }
       ]
+    }
+  },
+  "pages/map-config-panel": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "mapDemoScalars",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsmapDemoScalars0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "mapDemoScalars",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/map-explain-panel": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "mapExplain",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsmapExplain0"
+        }
+      ]
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "mapExplain",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "widgets/InOut": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_inputOutputData"
+        ],
+        "prefix": "aimms",
+        "partition": {
+          "rowHeader": [
+            "i_loc"
+          ],
+          "colHeader": [
+            "i_io"
+          ],
+          "aggregated": [
+            "<IDENTIFIER-SET>"
+          ]
+        },
+        "displaydomain": {
+          "p_inputoutputdata": "1"
+        },
+        "numdecimals": 0,
+        "slices": [
+          {
+            "identifier": "p_inputOutputData",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "subset",
+                "value": "i_locConnected"
+              },
+              {
+                "index": "i_io",
+                "type": "free",
+                "value": "i_io"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_inputoutputdata": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_loc"
+        ],
+        "colHeader": [
+          "i_io"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "i_loc",
+          "width": 25.94
+        }
+      ]
+    },
+    "name": {
+      "literal": "InOut"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_locationDetailIOtitle"
+        ],
+        "slices": []
+      }
     }
   },
   "widgets/mapDemo": {
@@ -178,11 +391,11 @@
     "arcs.0": {
       "aimms": {
         "contents": [
-          "bp_arc"
+          "p_arc"
         ],
         "slices": [
           {
-            "identifier": "bp_arc",
+            "identifier": "p_arc",
             "slice": [
               {
                 "index": "i_locFrom",
@@ -200,14 +413,22 @@
       }
     },
     "arcs.0.label.hide": {
-      "literal": true
+      "aimms": {
+        "contents": [
+          "bp_showConnections"
+        ],
+        "slices": []
+      }
     },
     "arcs.0.line.straight": {
       "literal": true
     },
+    "arcs.0.numdecimals": {
+      "literal": 0
+    },
     "arcs.0.value": {
       "literal": {
-        "identifier": "bp_arc",
+        "identifier": "p_arc",
         "slice": [
           {
             "index": "i_locFrom",
@@ -226,10 +447,44 @@
       "literal": true
     },
     "center.latitude": {
-      "literal": 50.69935280343021
+      "literal": 51.397984623162219
     },
     "center.longitude": {
-      "literal": 8.768949288491461
+      "literal": 10.526766953201245
+    },
+    "contextmenu": {
+      "aimms": {
+        "contents": [
+          "sp_mapLocationItemActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_mapLocationItemActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetItemActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetItemActionSpec"
+              },
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "heatmaps.__display_order__": {
+      "literal": [
+        "heatmaps.0"
+      ]
     },
     "name": {
       "literal": "mapDemo"
@@ -244,7 +499,7 @@
         "contents": [
           "p_longitude",
           "p_latitude",
-          "p_size",
+          "p_locationSize",
           "sp_locationIcon"
         ],
         "slices": [
@@ -269,7 +524,7 @@
             ]
           },
           {
-            "identifier": "p_size",
+            "identifier": "p_locationSize",
             "slice": [
               {
                 "index": "i_loc",
@@ -305,7 +560,13 @@
     },
     "nodes.0.index": {
       "literal": {
-        "identifier": "i_loc"
+        "identifier": "i_loc",
+        "focus": [
+          {
+            "index": "i_loc",
+            "value": "ep_selectedLocation"
+          }
+        ]
       }
     },
     "nodes.0.latitude": {
@@ -333,11 +594,16 @@
       }
     },
     "nodes.0.maximumreferencesize": {
-      "literal": 10
+      "aimms": {
+        "contents": [
+          "p_relativeSize"
+        ],
+        "slices": []
+      }
     },
     "nodes.0.size": {
       "literal": {
-        "identifier": "p_size",
+        "identifier": "p_locationSize",
         "slice": [
           {
             "index": "i_loc",
@@ -350,8 +616,122 @@
     "title": {
       "literal": "Demo map widget"
     },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_mapWidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_mapWidgetActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "zoom": {
       "literal": 7
+    }
+  },
+  "widgets/mapDemoScalars": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_locationSizeLower",
+          "p_locationSizeUpper",
+          "p_penaltyUnmetDemand",
+          "p_productionUnitCost",
+          "p_transportationUnitCost",
+          "p_capDepot",
+          "p_capProduction",
+          "p_capPipe",
+          "p_relativeSize"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_capdepot": "0",
+        "p_locationsizelower": "0",
+        "p_locationsizeupper": "0"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "name": {
+      "literal": "mapDemoScalars"
+    },
+    "title": {
+      "literal": "App settings"
+    }
+  },
+  "widgets/mapExplain": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div>The German company OxyGem fills oxygen tanks.&nbsp;It has separate locations to</div><div><br></div><div>* <img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAuCAYAAABTTPsKAAAA3UlEQVRoge2ZMQ7DIAxFSdWbciTP+DbsvgInaacORSGG4N+Wxm+LQPDkj2KUbKWUR1iI27cFRnFhNC6MxoXRLCd81ybEGN+eU0owmR6Wq7ALo3FhNKbCzGy53C4mwiISmDnknC2WO2RaWEQCEXXJagn0JDQlzMyBiNR5WgIjCamdrkXdAVu8Ejg7XjMsPLKBVrUz535YuFdWS6A3oRrz97CIHMpo4xrmwloCI+d1j2t3uk/gwmhcGI0Lo3FhNMsJb61fBjMXFAtaX5j+p8K/ynIVdmE0LozGhdEsJ/wEp5dZUaYBxRAAAAAASUVORK5CYII=\">&nbsp;Distillate oxygen</div><div>* <img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAvCAYAAAB6zDPWAAABB0lEQVRoge2YMQ7DIAxFf6seyMrKbZKZ0zDDbbz7CjlJO7WqopZgGqdC8lsJ8PIFhuSyrusdg3D9t4AGl7XCZa1wWSuGkr3VGpdlOcsDAJBzrrYPlazLWlFds1v21pQW7Z4YKlmXtcJlrXBZK1zWCtUJdvYtbMtQybqsFRf/fWSEWraU8vOkvWOoZEspYOauid5h5i7h5jp7dI19vvQ0TSCipj67yYqI2WHAzEgpQUSanq9WAxFBSukwuRoxxt2Eh6oGu3X2U7q/fuVul1VLqkBDskSEGCNCCP12FXLOzRusqRoQ0WvAI0oXAIQQMM+zqo/qiqgd/Bs9ooDfDexwWStc1gqXteIBCQtQoEoABjUAAAAASUVORK5CYII=\">&nbsp;Pump oxygen</div><div>* <img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAxCAYAAABDEFA9AAAA6UlEQVRoge2XsQ3EIAxFndMNlJ2oMw0149Air8Akd1WaKMHmlA/nyK+MkPz0hIAstdYPGeE1W6AHl0XhsihcFoUp2be0gJkpxgiV2LaN1nUV14llSym3CN0xoynLzJRzvkWoRc6ZmFlc15QdUbVn1qXsqKo7mrqXsiOrameeyo6uuiPVPZWdUVUz+1R2RlXNbFM3WJdsSolSSrDvEs8tOxtTsov/ioMQ37NERCEEqIT2ZDBV1mVRqPbsEWmPofa4qbIui8JlUfx0GqBvtCtMlW2+ukYXlM7v55T9N0yVdVkULovCZVG4LIov/QdiOJzg/m0AAAAASUVORK5CYII=\">&nbsp;Bottle oxygen</div><div><br></div><div>Lately, due to the corona crisis, there is significantly more demand.&nbsp;However, the demand cannot be met.  To the management of Oxygem, this is a very unpleasant  surprise; the distillation factories are&nbsp; quite capable, and can handle together far greater demands.</div><div><br></div><div>Your task is to determine the cause of the unmet demand and advise on a remedy.</div><div><br></div><div>Hopefully, this map widget will help you in your analysis. It features:</div><div><br></div><div>* Item menu, left click - right click on one of the&nbsp; icons, and you will get a menu of the actions you can do on a location.</div><div>* widget menu, identified by the hamburger menu in the right upper of the map widget. Here you can solve the optimization problem underlying&nbsp;</div><div>* in the control side panel, various settings can be adapted.</div><div><br></div><div>More information on the actions available in the How-To article associated with this example.</div><div><br></div><div>One tip: start with solving the optimization problem.</div>"
+    },
+    "name": {
+      "literal": "mapExplain"
+    }
+  },
+  "widgets/scalar-size-location": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "slices": [
+          {
+            "identifier": "p_locationSize",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "element-parameter",
+                "value": "ep_selectedLocation"
+              }
+            ]
+          },
+          {
+            "identifier": "v_unmetDemand",
+            "slice": [
+              {
+                "index": "i_locTo",
+                "type": "element-parameter",
+                "value": "ep_selectedLocation"
+              }
+            ]
+          }
+        ],
+        "contents": [
+          "p_locationSize",
+          "v_unmetDemand"
+        ],
+        "prefix": "aimms",
+        "numdecimals": 0
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "name": {
+      "literal": "scalar-size-location"
     }
   },
   "widgets/WelcomeText": {
@@ -359,7 +739,7 @@
       "literal": "text"
     },
     "contents": {
-      "literal": "<div><span style=\"font-size: 32px;\">Welcome to the Watch WebUI Widgets app.</span></div><div><br></div><div>This app illustrates various features of selected Widgets.</div><div>Each page focuses on a single widget type, but other widgets may be shown to support that illustration.</div><div><br></div><div>The first page is about the map widget.</div>"
+      "literal": "<div><span style=\"font-size: 32px;\">Welcome to the Watch WebUI Widgets app.</span></div><div><br></div><div>This app illustrates various features of selected Widgets.</div><div>Each page focuses on a single widget type, but other widgets may be shown to support that illustration.</div><div><br></div><div>The first page is about the map widget.</div><div><br></div><div><br></div><div><br></div><div><br></div><div><span style=\"font-size: 32px;\">Wonderful WebUI Widgets World Watch</span></div>"
     },
     "name": {
       "literal": "WelcomeText"

@@ -77,10 +77,34 @@ Model Main_Watch_WebUI_Widgets {
 				}
 			}
 		}
+		Set s_okCancel {
+			Definition: data { OK, Cancel };
+		}
 	}
 	Section Map_Widget_section {
 		DeclarationSection WebUI_Page_and_Widget_support {
-			StringParameter sp_mapSidePanel;
+			StringParameter sp_mapSidePanel {
+				IndexDomain: (webui::indexPageExtension,webui::indexSidePanelSpec);
+				Definition: {
+					{
+					
+						('1', 'displayText' ) : "Control",
+						('1', 'pageId'      ) : "map-config-panel",
+						('1', 'tooltip'     ) : "",
+						('1', 'icon'        ) : "",
+						('1', 'iconcolor'   ) : "",
+						('1', 'state'       ) : "Active",
+					
+						('2', 'displayText' ) : "Story",
+						('2', 'pageId'      ) : "map-explain-panel",
+						('2', 'tooltip'     ) : "",
+						('2', 'icon'        ) : "",
+						('2', 'iconcolor'   ) : "",
+						('2', 'state'       ) : "Active"
+					
+					}
+				}
+			}
 			StringParameter sp_locationIcon {
 				IndexDomain: i_loc;
 				Definition: {
@@ -93,8 +117,40 @@ Model Main_Watch_WebUI_Widgets {
 					endif ;
 				}
 			}
-			Parameter p_size {
-				IndexDomain: i_loc;
+			ElementParameter ep_selectedLocation {
+				Range: s_locations;
+				InitialData: '';
+			}
+			StringParameter sp_mapWidgetActions {
+				IndexDomain: (webui::indexPageExtension,webui::indexWidgetActionSpec);
+				Definition: {
+					{
+					
+						('1', 'displaytext' ) : "Initialize", 
+						('1', 'icon'        ) : "aimms-broom", 
+						('1', 'procedure'   ) : "pr_mapInit", 
+						('1', 'state'       ) : "Active", 
+					
+						('2', 'displaytext' ) : "Solve", 
+						('2', 'icon'        ) : "aimms-spinner9", 
+						('2', 'procedure'   ) : "pr_mapSolve", 
+						('2', 'state'       ) : "Active", 
+					
+						('3', 'displaytext' ) : "Edit", 
+						('3', 'icon'        ) : "aimms-quill3", 
+						('3', 'procedure'   ) : "pr_mapEdit", 
+						('3', 'state'       ) : "Hidden"
+					
+					}
+				}
+			}
+			Parameter bp_showConnections {
+				Range: binary;
+				InitialData: 1;
+			}
+			Parameter bp_hideConnections {
+				Range: binary;
+				Definition: 1 - bp_showConnections;
 			}
 		}
 		DeclarationSection Data_for_the_map_widget {
@@ -116,6 +172,18 @@ Model Main_Watch_WebUI_Widgets {
 			}
 			Parameter p_longitude {
 				IndexDomain: i_loc;
+			}
+			Parameter p_locationSizeLower {
+				InitialData: 2;
+			}
+			Parameter p_locationSizeUpper {
+				Definition: max( p_capDepot, p_capProduction );
+			}
+			Parameter p_locationSize {
+				IndexDomain: i_loc;
+				Range: nonnegative;
+				webui::AnnotationsIdentifier: sp_locationAnnotation;
+				webui::TooltipIdentifier: sp_locationTooltip;
 			}
 			Set s_sources {
 				SubsetOf: s_locations;
@@ -156,30 +224,158 @@ Model Main_Watch_WebUI_Widgets {
 				IndexDomain: i_loc;
 				SubsetOf: s_locations;
 				OrderBy: user;
-				Definition: Nbest( i_locIntermediate, -p_dist( i_loc, i_locIntermediate ), 2 );
+				Definition: {
+					Nbest( i_locIntermediate, -p_dist( i_loc, i_locIntermediate ), 
+						if i_loc in s_sources then 3 else 2 endif )
+				}
 			}
 			Parameter bp_arcHelp {
 				IndexDomain: (i_locFrom,i_locTo);
+				Range: binary;
 				Definition: {
 					1 $ ( ( i_locTo in s_nearIntermediates( i_locFrom ) ) and 1 )
 					!( ( i_locFrom in s_sources ) or ( i_locFrom in s_destinations ) ) )
 				}
 			}
-			Parameter bp_arc {
+			Parameter bp_connections {
 				IndexDomain: (i_locFrom,i_locTo);
+				Range: binary;
 				Definition: {
-					!( p_size( i_locFrom ) + p_size( i_locTo ) ) $
-					( ( bp_arcHelp(i_locFrom, i_locTo) or bp_arcHelp(i_locTo, i_locFrom) ) and
+					( ( i_locFrom <> i_locTo                                             ) and
+					  ( bp_arcHelp(i_locFrom, i_locTo) or bp_arcHelp(i_locTo, i_locFrom) ) and
 					  ( ( ord(i_locFrom ) < ord(i_locTo)                            ) or 
 					    ( i_locFrom in s_intermediate and i_locTo in s_Intermediate )    )      )
 				}
+			}
+			Parameter p_arc {
+				IndexDomain: (i_locFrom,i_locTo);
+				Definition: {
+					if bp_showConnections then
+						bp_connections(i_locFrom, i_locTo)
+					else
+						v_flow(i_locFrom, i_locTo)
+					endif
+				}
+			}
+			Parameter p_totUnmetDemand {
+				Definition: sum( i_locDestination, v_unmetDemand(i_locDestination) );
+			}
+			StringParameter sp_locationType {
+				IndexDomain: i_loc;
+				Definition: {
+					if i_loc in s_sources then
+						"distillation"
+					elseif i_loc in s_intermediate then
+						"pumping"
+					else
+						"bottling"
+					endif
+				}
+			}
+			StringParameter sp_locationAnnotation {
+				IndexDomain: i_loc;
+				Definition: {
+					if ( i_loc in s_sources  ) and p_totUnmetDemand then
+						if v_prod(i_loc) = p_locationSize(i_loc) then
+							"atproductioncapacity"
+						else
+							""
+						endif
+					elseif ( i_loc in s_intermediate ) and p_totUnmetDemand then
+						if v_depotInflow(i_loc) = p_locationSize(i_loc) then
+							"atpumpingcapacity"
+						else
+							""
+						endif
+					else
+						if v_unmetDemand(i_loc) then
+							"unmetdemand"
+						else
+							""
+						endif
+					endif
+				}
+			}
+			StringParameter sp_locationTooltip {
+				IndexDomain: i_loc;
+				Definition: {
+					"<div align=\"left\">"  +
+					"<Table>" +
+					        "<TR>"  +
+					                "<TD>"  +
+					                                "<B> Name : </B>" +
+					                "</TD>" +
+					                "<TD>"  +
+					                                formatString("%e", i_loc) +
+					                "</TD>" +
+					        "</TR>" +
+					        "<TR>"  +
+					                "<TD>"  +
+					                                "<B> Type : </B>" +
+					                "</TD>" +
+					                "<TD>"  +
+					                                sp_locationType( i_loc ) +
+					                "</TD>" +
+					        "</TR>" +
+					        "<TR>"  +
+					                "<TD>"  +
+					                                "<B> " + 
+					                                if i_loc in s_sources then
+					                                	"Capacity"
+					                                elseif i_loc in s_intermediate then 
+					                                	"Capacity"
+					                                else
+					                                	"Demand"
+					                                endif
+					                                + " : </B>" +
+					                "</TD>" +
+					                "<TD>"  +
+					                                p_locationSize(i_loc) +
+					                "</TD>" +
+					        "</TR>"  +
+					        if sum( i_locFrom, v_prod(i_locFrom ) ) then
+					        "<TR>"  +
+					                "<TD>"  +
+					                                "<B> " + 
+					                                if i_loc in s_sources then
+					                                	"Production"
+					                                elseif i_loc in s_intermediate then 
+					                                	"Flow"
+					                                else
+					                                	"Unmet demand"
+					                                endif
+					                                + " : </B>" +
+					                "</TD>" +
+					                "<TD>"  +
+					                                if i_loc in s_sources then
+					                                	v_prod(i_loc)
+					                                elseif i_loc in s_intermediate then 
+					                                	sum( i_locFrom, v_flow(i_locFrom, i_loc) )
+					                                else
+					                                	v_unmetDemand(i_loc)
+					                                endif +
+					                "</TD>" +
+					        "</TR>"  
+					        else "" endif 
+					        +
+					"</Table>"
+				}
+			}
+			Parameter p_relativeSize {
+				InitialData: 20;
 			}
 		}
 		Procedure pr_openPageMap {
 			Body: {
 				pr_readMapData();
+				if not ep_selectedLocation then
+					ep_selectedLocation := first( s_locations );
+				endif ;
 			}
-			Comment: "This procedure is run upon opening page \"mapDemo\"";
+			Comment: {
+				"This procedure is run upon opening page \"mapDemo\"
+				It will initialize the data shown on that page."
+			}
 		}
 		Procedure pr_readMapData {
 			Body: {
@@ -196,7 +392,293 @@ Model Main_Watch_WebUI_Widgets {
 					emptySets        :  1, 
 					resetCounters    :  1);
 				
-				p_size(i_loc) := round( uniform( 2, 8 ) );
+				pr_initSizes();
+			}
+		}
+		Procedure pr_initSizes {
+			Body: {
+				
+				p_locationSize(i_locSource) !| ( p_locationSize(i_locSource) = 0 ) 
+					:= p_capProduction ;
+				
+				p_locationSize(i_locDestination) ! | ( p_locationSize(i_locDestination) = 0 ) 
+					:= round( uniform( p_locationSizeLower /* + ( p_locationSizeUpper - p_locationSizeLower ) / 4 */, p_locationSizeUpper - ( p_locationSizeUpper - p_locationSizeLower ) / 3 ) );
+				
+				p_locationSize(i_locIntermediate) ! | ( p_locationSize(i_locIntermediate) = 0 ) 
+					:= p_capDepot ;
+				
+				empty s_mapDemoVariables  ;
+				
+				bp_showConnections := 1 ; ! Now showing connections instead of flows.
+			}
+		}
+		Procedure pr_mapInit {
+			Body: {
+				
+				pr_initSizes();
+			}
+		}
+		Procedure pr_mapSolve {
+			Body: {
+				pr_solveMapDemo();
+			}
+		}
+		Procedure pr_mapEdit;
+		Section map_demo_math_model {
+			Parameter p_productionUnitCost {
+				InitialData: 1;
+			}
+			Parameter p_transportationUnitCost {
+				InitialData: 1;
+			}
+			Parameter p_penaltyUnmetDemand {
+				InitialData: 1000;
+			}
+			Parameter p_capPipe {
+				InitialData: 10;
+			}
+			Parameter p_capDepot {
+				InitialData: 30;
+			}
+			Parameter p_capProduction {
+				InitialData: 40;
+			}
+			Variable v_flow {
+				IndexDomain: (i_locFrom,i_locTo) | bp_connections(i_locFrom, i_locTo);
+				Range: [0, p_capPipe];
+			}
+			Variable v_prod {
+				IndexDomain: (i_loc) | i_loc in s_sources;
+				Range: [0, p_locationSize(i_loc)];
+			}
+			Variable v_cost {
+				Range: free;
+				Definition: {
+					sum( i_loc, p_productionUnitCost * v_prod(i_loc) )
+					+
+					sum( (i_locFrom, i_locTo), p_transportationUnitCost * v_flow(i_locFrom, i_locTo) )
+					+
+					sum( i_locTo, p_penaltyUnmetDemand * v_unmetDemand(i_locTo) )
+				}
+			}
+			Variable v_depotInflow {
+				IndexDomain: i_loc | i_loc in s_intermediate;
+				Range: [0, p_locationSize(i_loc)];
+				Definition: sum( i_locFrom, v_flow(i_locFrom, i_loc) );
+			}
+			Variable v_depotOutflow {
+				IndexDomain: i_loc | i_loc in s_intermediate;
+				Range: [0, p_locationSize(i_loc)];
+				Definition: sum( i_locTo, v_flow(i_loc, i_locTo) );
+			}
+			Variable v_unmetDemand {
+				IndexDomain: i_locTo| ( i_locTo in s_destinations );
+				Range: nonnegative;
+			}
+			Constraint c_meetDemand {
+				IndexDomain: i_locTo | ( i_locTo in s_destinations );
+				Definition: {
+					sum( i_locFrom, v_flow( i_locFrom, i_locTo ) ) + v_unmetDemand( i_locTo ) 
+					= 
+					p_locationSize( i_locTo )
+				}
+			}
+			Constraint c_balancePumps {
+				IndexDomain: i_loc | i_loc in s_intermediate;
+				Definition: {
+					v_depotInflow(i_loc)
+					=
+					v_depotOutflow(i_loc)
+				}
+			}
+			Constraint c_supplyNeeded {
+				IndexDomain: i_loc | i_loc in s_sources;
+				Definition: sum( i_locTo, v_flow(i_loc, i_locTo) ) = v_prod( i_loc );
+			}
+			Set s_mapDemoVariables {
+				SubsetOf: AllVariables;
+				Definition: map_demo_math_model * AllVariables;
+			}
+			Set s_mapDemoConstraints {
+				SubsetOf: AllConstraints;
+				Definition: map_demo_math_model * AllConstraints;
+			}
+			MathematicalProgram mp_mapDemo {
+				Objective: v_cost;
+				Direction: minimize;
+				Constraints: AllConstraints;
+				Variables: AllVariables;
+				Type: Automatic;
+			}
+			Procedure pr_solveMapDemo {
+				Body: {
+					solve mp_mapDemo ;
+					bp_showConnections := 0 ; ! Now showing flows instead of connections.
+					
+					!p_locationSize(i_loc)| ( i_loc in s_sources ) :=
+					!	if v_prod(i_loc) < p_locationSizeLower then 
+					!		p_locationSizeLower
+					!	elseif v_prod(i_loc) > p_locationSizeUpper then 
+					!		p_locationSizeUpper
+					!	else
+					!		v_prod(i_loc)
+					!	endif ;
+					!
+					!p_locationSize(i_loc)| ( i_loc in s_intermediate ) :=
+					!	if v_depotInflow(i_loc) < p_locationSizeLower then 
+					!		p_locationSizeLower
+					!	elseif v_depotInflow(i_loc) > p_locationSizeUpper then 
+					!		p_locationSizeUpper
+					!	else
+					!		v_depotInflow(i_loc)
+					!	endif ;
+					!
+				}
+			}
+		}
+		Section item_actions_locations {
+			StringParameter sp_mapLocationItemActions {
+				IndexDomain: (webui::indexWidgetItemActionSpec,webui::indexPageExtension,webui::indexWidgetActionSpec);
+				Definition: {
+					{
+						('p_locationSize', '1', 'displaytext') : formatString("Increase %s %e by 1", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
+						('p_locationSize', '1', 'icon'       ) : "aimms-volume-increase2",
+						('p_locationSize', '1', 'procedure'  ) : "pr_locSizeIncrease1",
+						('p_locationSize', '1', 'state'      ) : "Active",
+					
+						('p_locationSize', '2', 'displaytext') : formatString("Increase %s %e by 5", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
+						('p_locationSize', '2', 'icon'       ) : "aimms-volume-increase",
+						('p_locationSize', '2', 'procedure'  ) : "pr_locSizeIncrease5",
+						('p_locationSize', '2', 'state'      ) : "Active",
+					
+						('p_locationSize', '3', 'displaytext') : formatString("Decrease %s %e by 1", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
+						('p_locationSize', '3', 'icon'       ) : "aimms-volume-decrease2",
+						('p_locationSize', '3', 'procedure'  ) : "pr_locSizeDecrease1",
+						('p_locationSize', '3', 'state'      ) : "Active",
+					
+						('p_locationSize', '4', 'displaytext') : formatString("Decrease %s %e by 5", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
+						('p_locationSize', '4', 'icon'       ) : "aimms-volume-decrease",
+						('p_locationSize', '4', 'procedure'  ) : "pr_locSizeDecrease5",
+						('p_locationSize', '4', 'state'      ) : "Active",
+					
+						('p_locationSize', '5', 'displaytext') : formatString("Edit %e", ep_selectedLocation),
+						('p_locationSize', '5', 'icon'       ) : "aimms-quill",
+						('p_locationSize', '5', 'procedure'  ) : "pr_locSizeDetails",
+						('p_locationSize', '5', 'state'      ) : "Active"
+					}
+				}
+			}
+			Procedure pr_locSizeIncrease1 {
+				Body: {
+					! The affected node is selected via the store focus, see https://documentation.aimms.com/webui/map-widget.html#store-focus-hover-and-select-for-nodes
+					p_ub := if ep_selectedLocation in s_sources then 2 * p_capProduction
+					        elseif ep_selectedLocation in s_intermediate then 2 * p_capDepot
+					        else p_capProduction endif ;
+					if p_locationSize(ep_selectedLocation) + 1 > p_ub then
+						raise warning 
+							"Exceeding upper bound " + p_ub + 
+							" at location size " + ep_selectedLocation ;
+						p_locationSize(ep_selectedLocation) := p_ub ;
+					else
+						p_locationSize(ep_selectedLocation) += 1 ;
+					endif ;
+				}
+				Parameter p_ub;
+			}
+			Procedure pr_locSizeIncrease5 {
+				Body: {
+					! The affected node is selected via the store focus, see https://documentation.aimms.com/webui/map-widget.html#store-focus-hover-and-select-for-nodes
+					p_ub := if ep_selectedLocation in s_sources then 2 * p_capProduction
+					        elseif ep_selectedLocation in s_intermediate then 2 * p_capDepot
+					        else p_capProduction endif ;
+					if p_locationSize(ep_selectedLocation) + 5 > p_ub then
+						raise warning 
+							"Exceeding upper bound " + p_ub + 
+							" at location size " + ep_selectedLocation ;
+						p_locationSize(ep_selectedLocation) := p_ub ;
+					else
+						p_locationSize(ep_selectedLocation) += 5 ;
+					endif ;
+				}
+				Parameter p_ub;
+			}
+			Procedure pr_locSizeDecrease1 {
+				Body: {
+					! The affected node is selected via the store focus, see https://documentation.aimms.com/webui/map-widget.html#store-focus-hover-and-select-for-nodes
+					p_lb := 2 ;
+					if p_locationSize(ep_selectedLocation) - 1 < p_lb then
+						raise warning 
+							"Exceeding lower bound " + p_lb + 
+							" at location size " + ep_selectedLocation ;
+						p_locationSize(ep_selectedLocation) := p_lb ;
+					else
+						p_locationSize(ep_selectedLocation) -= 1 ;
+					endif ;
+				}
+				Parameter p_lb;
+			}
+			Procedure pr_locSizeDecrease5 {
+				Body: {
+					! The affected node is selected via the store focus, see https://documentation.aimms.com/webui/map-widget.html#store-focus-hover-and-select-for-nodes
+					p_lb := 2 ;
+					if p_locationSize(ep_selectedLocation) - 5 < p_lb then
+						raise warning 
+							"Exceeding lower bound " + p_lb + 
+							" at location size " + ep_selectedLocation ;
+						p_locationSize(ep_selectedLocation) := p_lb ;
+					else
+						p_locationSize(ep_selectedLocation) -= 5 ;
+					endif ;
+				}
+				Parameter p_lb;
+			}
+			Section location_detail_dialog_page {
+				Set s_inputOutput {
+					Index: i_io;
+					Definition: data { input, output };
+				}
+				Set s_connectedLocations {
+					SubsetOf: s_locations;
+					Index: i_locConnected;
+					Definition: {
+						{ i_loc | p_arc(ep_selectedLocation, i_loc) or p_arc(i_loc, ep_selectedLocation) }
+					}
+					Comment: "Locations connected to ep_selectedLocation";
+				}
+				Parameter p_inputOutputData {
+					IndexDomain: (i_loc,i_io);
+					Definition: {
+						if i_io = 'input' then
+							v_flow(i_loc, ep_selectedLocation)
+						else
+							v_flow(ep_selectedLocation, i_loc)
+						endif
+					}
+				}
+				StringParameter sp_locationDetailIOtitle {
+					Definition: formatString("Locations connected to %e", ep_selectedLocation);
+				}
+				Procedure pr_locSizeDetails {
+					Body: {
+						!raise error "todo" ;
+						! page-id: location-detail
+						CurrentInputs -= data { p_inputOutputData };
+						webui::OpenDialogPage(
+							pageId  :  'location-detail', 
+							title   :  
+								formatString("Details for %s \"%e\"", 
+									sp_locationType(ep_selectedLocation),
+									ep_selectedLocation ),
+							actions :  s_okCancel, 
+							onDone  :  'pr_completeLocSizeDetails');
+					}
+				}
+				Procedure pr_completeLocSizeDetails {
+					Arguments: (sp_answer);
+					StringParameter sp_answer {
+						Property: Input;
+					}
+				}
 			}
 		}
 	}
@@ -205,6 +687,10 @@ Model Main_Watch_WebUI_Widgets {
 			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
 		}
 		Procedure PostMainInitialization {
+			Body: {
+				! Workaround for gitlab ticket 4555:
+				Empty p_latitude, p_longitude ;
+			}
 			Comment: {
 				"Add initialization statements here that require that the libraries are already initialized properly,
 				or add statements that require the Data Management module to be initialized."
