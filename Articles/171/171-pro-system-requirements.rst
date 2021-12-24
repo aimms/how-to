@@ -35,27 +35,37 @@ The key components to consider for a WebUI application are
 
 The memory and CPU usage of a single data session multiplied by the maximum number of data sessions gives the peak resource requirement by the data sessions. Likewise for the solver sessions. In addition to the data and solver sessions, the AIMMS PRO Server installation has its own requirements of 3 GB memory and 1 core of CPU. 
 
-**memory_required(GB) >= peak_memory_data_session * number_data_sessions + peak_memory_solver_session * number_solver_sessions + 3**
+.. math::
 
-**cores_required >= avg_cpu_usage_data_session * number_data_sessions + avg_cpu_usage_solver_session * number_solver_sessions + 1**
+    memory\_required(GB) \geq peak\_memory\_data\_session * number\_data\_sessions \\ + peak\_memory\_solver\_session * number\_solver\_sessions + 3 \\
+    
+.. math::
+
+    cores\_required \geq avg\_cpu\_usage\_data\_session * number\_data\_sessions \\ + avg\_cpu\_usage\_solver\_session * number\_solver\_sessions + 1
 
 Example
 -------------
 
 Let us consider a typical application for 20 concurrent data sessions and 2 concurrent solver sessions with metrics as below: 
 
-* peak_memory_data_session = 0.5 GB
-* peak_memory_solver_session = 2 GB 
-* avg_cpu_usage_data_session = 0.2 core
-* avg_cpu_usage_solver_session = 1 core 
-* max_number_data_sessions = 20 
-* max_number_of_solver_sessions = 2
+.. code-block:: none
+
+    peak_memory_data_session = 0.5 GB
+    peak_memory_solver_session = 2 GB
+    avg_cpu_usage_data_session = 0.2 core
+    avg_cpu_usage_solver_session = 1 core
+    max_number_data_sessions = 20
+    max_number_of_solver_sessions = 2
 
 Substituting these numbers in the above equations, we get: 
 
-**memory_required >= 0.5 GB * 20 + 2 GB * 2 + 3 = 17 GB**
+.. math:: 
 
-**cores_required >= 0.2*20 + 1*2 + 1 = 7**
+    memory\_required \geq 0.5 GB * 20 + 2 GB * 2 + 3 = 17 GB
+    
+.. math:: 
+
+    cores\_required  \geq 0.2 * 20 + 1 * 2 + 1 = 7
 
 Summary
 -----------

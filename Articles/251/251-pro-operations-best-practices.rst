@@ -42,7 +42,7 @@ In AIMMS 4 and above, the entire model is saved in text files and can thus be st
 
 We recommend the use of a distributed VCS like Git. With Git you can have the entire repository on your local machine, commits are initially just stored locally, and you can branch and merge locally without making those branches public. This aspect is just a matter of installing the Git-related software and starting to use it.
 
-To be able to share, Git also supports the capability to pull/push some or all branches to a central repository. If other people also pushed to the branch(es) you are pushing to, you first have to pull in those commits, after which merging (and possibly conflict resolution) takes place locally, and you can push the merged branch back to the central repo. For infrastructure needs, you would need to consult your IT (and to make it easy: there are virtual appliances that set up a central Git server with authentication and authorization). 
+To be able to share, Git also supports the capability to pull/push some or all branches to a central repository. If other people also pushed to the branch(es) you are pushing to, you first have to pull in those commits, after which merging (and possibly conflict resolution) takes place locally, and you can push the merged branch back to the central repository. For infrastructure needs, you would need to consult your IT (and to make it easy: there are virtual appliances that set up a central Git server with authentication and authorization). 
 
 Alternatively, there are companies like Atlassian, GitHub, GitLab, and others which offer hosted solutions where you get private repositories hosted in the cloud, with integrated issue tracker support (where issues can be linked to commits and vice versa).
 

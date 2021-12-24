@@ -11,7 +11,7 @@ Direct download AIMMS Project :download:`Stochastic Programming.zip <model/Stoch
 
 This example illustrates AIMMS capabilities for stochastic programming support. Starting from an existing deterministic LP or MIP model, AIMMS can create a stochastic model automatically, without the need to reformulate constraint definitions. One only needs to provide a scenario tree and stochastic input data as well as to assign decisions to different stages. Once these elements have been specified, any changes made in the deterministic formulation propagate automatically to its stochastic counterpart.
 
-The basic problem illustrated in this example is a simple multi-period production and inventory planning model. In the deterministic case demand is known with certainty for each period and production and stock levels for all periods are decided upon at once. In the stochastic case however, demand for time periods is uncertain and crystalizes in a number of stages. The stages may naturally coincide with the time periods from the deterministic model, but this does not have to be the case. In general, one stage in the stochastic model may consist of multiple periods from the deterministic model.
+The basic problem illustrated in this example is a simple multi-period production and inventory planning model. In the deterministic case demand is known with certainty for each period and production and stock levels for all periods are decided upon at once. In the stochastic case however, demand for time periods is uncertain and crystallizes in a number of stages. The stages may naturally coincide with the time periods from the deterministic model, but this does not have to be the case. In general, one stage in the stochastic model may consist of multiple periods from the deterministic model.
 
 In this example periods are mapped to stages. For instance, 
 
@@ -41,7 +41,7 @@ In particular, we assume that stochastic demand can take values in three confide
 
 From within the graphical interface one can modify deterministic input data, the mapping of periods to stages (along the guidelines provided above) or the ranges (and chances) for different confidence intervals in order to study their effect on the model outcomes. 
 When the period to stage mapping is changed, the procedure that assigns decisions to stages should be subsequently run as well (before creating the scenario tree). 
-Also, after experimenting with different values, data can be re-initialized using procedures behind intialization buttons.
+Also, after experimenting with different values, data can be re-initialized using procedures behind initialization buttons.
 
 After a scenario tree has been created, it can be viewed on the "Scenario Tree View" page. 
 After creating scenario trees using at least two methods, one tree can be selected for viewing at a time.

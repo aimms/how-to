@@ -40,7 +40,7 @@ You can also change the styling of comments, keywords, and other elements. In th
 
     Editor settings for AIMMS elements
 
-You can also import/export your style settings as .xml to share with others in your organization. Use the *Import* and *Export* buttons in the *Editor Settings* dialog.
+You can also import/export your style settings as ``.xml`` to share with others in your organization. Use the *Import* and *Export* buttons in the *Editor Settings* dialog.
 
 AIMMS' in-house Editor settings (as seen in How-To articles and User Support training materials) are available for download in the file below. 
 

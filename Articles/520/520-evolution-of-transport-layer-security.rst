@@ -86,7 +86,7 @@ For End-Users of WinUI applications to make use of this AppLauncher, they will n
 
 *   install it (by running the downloaded executable).
 
-.. note:: This AppLauncher requires the .NET Framework 4.0 or later, and to leverage TLS 1.3, it requires the .NET Framework 4.7 or later.
+.. note:: This AppLauncher requires the ``.NET`` Framework 4.0 or later, and to leverage TLS 1.3, it requires the ``.NET`` Framework 4.7 or later.
 
 Best practice   
 ------------------------

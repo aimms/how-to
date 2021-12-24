@@ -43,7 +43,7 @@ In addition to the prerequisites outlined in :ref:`scripting-tools`, you will ne
         
         `Read more on Python Docs <https://docs.python.org/3/library/venv.html>`_
 
-#. This example requires the packages ``scikit-learn`` and ``Flask`` as outlined in the file `requirements.txt`. You can install these packages by using the commandline prompt::
+#. This example requires the packages ``scikit-learn`` and ``Flask`` as outlined in the file `requirements.txt`. You can install these packages by using the command line prompt::
     
     pip install -r requirements.txt --user
 
@@ -83,7 +83,7 @@ Running locally
 """"""""""""""""""
 
 If you run the `app/main.py` in terminal (using ``python main.py``), Flask will start a local web server. 
-You can test this server by typing in the url ``http://localhost:8000/hello`` in your browser. 
+You can test this server by typing in the URL ``http://localhost:8000/hello`` in your browser. 
 
 .. image:: test.png
     :align: center
@@ -167,7 +167,7 @@ Now we simply use the HTTP library functions to make a GET call to the API creat
     web::request_setResponseBody(spReqID, 'File', spInFile);
 
 The highlighted lines 9-12 are equivalent to setting the body attributes in the Postman app. 
-Make sure that the url in ``spURL`` includes the appropriate `http://` or `https://` prefix. 
+Make sure that the URL in ``spURL`` includes the appropriate `http://` or `https://` prefix. 
 
 Deployment
 -------------
@@ -178,7 +178,7 @@ When the `app/main.py` file is run in terminal, a warning is displayed.
     :align: center
 
 The app server running on http://localhost:8000 or http://0.0.0.0/8000 is available on your local machine and to your AIMMS Developer instance but what about apps deployed to AIMMS PRO or AIMMS Cloud? 
-.. If your AIMMS PRO server is also running on the same machine, this Python model can be still be accessed using the same url.
+.. If your AIMMS PRO server is also running on the same machine, this Python model can be still be accessed using the same URL.
 However, that is **not a viable option** if you are using AIMMS Cloud. 
 
 Some deployment options relevant to Flask are discussed on `their project website <https://flask.palletsprojects.com/en/1.1.x/deploying/>`_.
@@ -194,7 +194,7 @@ The image built using this Dockerfile uses `Tiangolo's nginx server <https://git
 Lines 7-8 copy the Python modules we developed onto the base image and lines 11-12 install the packages required from the `requirements.txt` file. 
 The Dockerfile is basically automating the installation of prerequisites as outlined in :ref:`installation`.
 
-The below commandline prompts will build a Docker image of the name `imageName:latest` and start a container. 
+The below command line prompts will build a Docker image of the name `imageName:latest` and start a container. 
 Most text editors or IDEs (such as VS Code or PyCharm) have a Docker plugin now.
 Read more about these options in `Docker Docs <https://docs.docker.com/engine/reference/commandline/build/>`_.
 
@@ -204,7 +204,7 @@ Read more about these options in `Docker Docs <https://docs.docker.com/engine/re
 
     docker run -d -p 8000:8000 --name "containerName" imageName
 
-Now, we can use the same urls ``http://localhost:8000/`` or ``http://localhost:8000/hello`` to access the Flask APIs, the only difference being they are hosted on Docker Desktop instead of Flask's development server. Once you deploy this Docker image, your API will be available globally.
+Now, we can use the same URLs ``http://localhost:8000/`` or ``http://localhost:8000/hello`` to access the Flask APIs, the only difference being they are hosted on Docker Desktop instead of Flask's development server. Once you deploy this Docker image, your API will be available globally.
 
 
 

@@ -207,7 +207,7 @@ main model:
         Convention: ep_GuiConv;
     }
 
-There are various ways to set ep_guiConv per user. For instance, during
+There are various ways to set ``ep_guiConv`` per user. For instance, during
 login or as a parameter that can be set at runtime. Please note that the
 convention attribute will only appear when there are conventions
 declared inside the model. Now it's time to test if we can use the

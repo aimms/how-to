@@ -52,7 +52,7 @@ Generate mapping file
 -----------------------
 The easiest way to get a template for your mapping based on your current model, is to auto-generate a mapping through the :token:`dex::GenerateDatasetMappings` function. This generates standardized table- and Excelsheet mappings based on the :token:`dex::Dataset`, :token:`dex::TableName`, and :token:`dex::ColumnName` annotations. The generated mappings are then stored in the :token:`Mappings/Generated` subfolder of the project folder.
 
-In this example we needed to add the Dataset/TableName/ColumnName annotations to the related identifiers. We were only able to do so by moving the identifiers (holding the same index) that are relevant for our JSON datafile into a new declaration and assign the correct dex annotations to this declaration. For the parameter identifiers we've added column-names. 
+In this example we needed to add the Dataset/TableName/ColumnName annotations to the related identifiers. We were only able to do so by moving the identifiers (holding the same index) that are relevant for our JSON data file into a new declaration and assign the correct dex annotations to this declaration. For the parameter identifiers we've added column-names. 
 
 .. image:: images/data-exchange-1.png
    :scale: 70
@@ -84,7 +84,7 @@ After auto-generating the mappings by running the :token:`dex::GenerateDatasetMa
 	</AimmsJSONMapping>
 
 
-We have to make a few small changes to this file, as we are working with an array-oriented dataset that holds objects. Hence we removed the first <ObjectMapping> tag. We can also remove the "name=rows" element from the <ArrayMapping> tag. Furthermode we had to change the name 'l' to 'city' for the first valuemapping as that is the correct name of the property in the JSON file. We couldn't define this name in the annotations within the model as this specific identifier is a set that refers to an index:
+We have to make a few small changes to this file, as we are working with an array-oriented dataset that holds objects. Hence we removed the first ``<ObjectMapping>`` tag. We can also remove the "name=rows" element from the ``<ArrayMapping>`` tag. Furthermode we had to change the name 'l' to 'city' for the first ``<ValueMapping>>`` as that is the correct name of the property in the JSON file. We couldn't define this name in the annotations within the model as this specific identifier is a set that refers to an index:
 
 .. code-block:: xml
 
@@ -110,7 +110,7 @@ Basic setup
 
         All functions from the library are referenced and described on `this article <https://documentation.aimms.com/dataexchange/api.html>`__.
 
-For this how-to we use the abovementioned JSON-based data file that holds data from two cities. For every city in the array we will need the name, langitude, longitude and the population and match these items to their respective identifiers in the model, as defined in the mapping file.
+For this how-to we use the above-mentioned JSON-based data file that holds data from two cities. For every city in the array we will need the name, latitude, longitude and the population and match these items to their respective identifiers in the model, as defined in the mapping file.
 
 To use the mapping in a procedure, you must first read the mapping file into your model. You do this by setting up a procedure in which you call the AddMapping function:
 
@@ -126,7 +126,7 @@ In our model the implementation looks like this:
    :scale: 70
    :align: center
 
-If this procedure is run succesfully you will see that the data from the data source is imported as specified in the mapping file:
+If this procedure is run successfully you will see that the data from the data source is imported as specified in the mapping file:
 
 .. image:: images/data-exchange-4.png
    :scale: 70
@@ -136,6 +136,6 @@ This is the most basic setup for integrating and using the Data Exchange Library
 
 
 
+.. spelling::
 
-
-
+    dex

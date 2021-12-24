@@ -43,7 +43,7 @@ Terminology
     #.  *Trace* Typically intermediate results, and indications of where execution is.
         This output typically requires detailed knowledge of the AIMMS implementation to make sense.
 
-    #.  *Debug* Typically input echo-ing and computed results
+    #.  *Debug* Typically input echoing and computed results
 
     #.  *Info* Summaries of what is computed, such as a matrix size overview.
 
@@ -53,7 +53,7 @@ Terminology
 
     .. note:: Levels Trace and Debug can significantly decrease application performance and fill up your disk, and do not provide much use to the modeler. Therefore we don't recommend to enable them unless instructed by AIMMS Staff.
 
-#.  **Appender** There are three appenders available:
+#.  **Appender** There are three ``appenders`` available:
 
     #.  to generate output to AIMMS Cloud,
     
@@ -76,7 +76,7 @@ You will need to start AIMMS by either:
 
 #.  by right-clicking the ``.aimms`` file and selecting the AIMMS Developer release of choice.
 
-To configure the Windows explorer with this default action on ``.aimms`` files, and the adding of the context menu item, the `AIMMS Launcher <https://download.aimms.com/aimms/download/data/AIMMSLauncher/AIMMSLauncher-latest.exe>`_ needs to have beeen run once.
+To configure the Windows explorer with this default action on ``.aimms`` files, and the adding of the context menu item, the `AIMMS Launcher <https://download.aimms.com/aimms/download/data/AIMMSLauncher/AIMMSLauncher-latest.exe>`_ needs to have been run once.
 
 .. note:: 
 
@@ -99,7 +99,7 @@ There are three sections in the file ``LoggerConfig.xml``
 
     You can tailor it to write to
 
-    #.  To stdout, required for AIMMS Cloud,
+    #.  To ``stdout``, required for AIMMS Cloud,
 
     #.  TXT output, which allows you to inspect the results using your favorite text editor.
     

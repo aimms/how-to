@@ -45,7 +45,7 @@ For example, an S&OP app menu follows the steps that are industry standard (Gart
 Page hierarchy
 -----------------
 
-Pages in AIMMS follow a hiearchical structure, with Top pages and Child pages. 
+Pages in AIMMS follow a hierarchical structure, with Top pages and Child pages. 
 Top pages are on a different level than Child pages and are perceived differently by users. 
 Therefore, the type of information they contain should be different.
 

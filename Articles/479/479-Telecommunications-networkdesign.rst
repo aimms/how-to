@@ -15,7 +15,7 @@ Description:
 Network design problems deal with the selection of a subset of edges in
 an existing network, such that for a set of commodities the given demand
 for each commodity can be transported from its origin to its destination,
-at minumum cost. In the capacitated network design problem the edges have
+at minimum cost. In the capacitated network design problem the edges have
 (fixed) capacities. Network design problems arise in telecommunications
 and transportation planning.
 

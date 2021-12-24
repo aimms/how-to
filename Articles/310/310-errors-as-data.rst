@@ -38,7 +38,7 @@ Solver session errors
 
 #.  Immediately after, this error information is copied to a slice in the green big box "Solver sessions and uploaded sessions" by the procedure ``gss::pr_saveTrackedSessionData``.
 
-#.  In the WebUI page ``GSS Session History Management``, the selection widget controls which session's error data is displayed. When you select a sessionID in the drop down, the corresponding error information is copied to the blue box and displayed.
+#.  In the WebUI page ``GSS Session History Management``, the selection widget controls which session's error data is displayed. When you select a ``sessionID`` in the drop down, the corresponding error information is copied to the blue box and displayed.
 
 Data flow of profiler information
 ---------------------------------
