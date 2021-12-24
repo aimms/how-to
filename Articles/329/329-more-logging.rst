@@ -11,6 +11,10 @@ As a modeler, you can find :doc:`detailed logs <../313/313-get-log-files>` to an
 When desired or needed, AIMMS can provide more logging information. For this purpose, AIMMS comes with loggers.
 This logging feature is somewhat similar to the `log4j <https://logging.apache.org/log4j/2.x/>`_ technology.
 
+.. note:: 
+
+    Security notice, see:  `Apache log4j vulnerability does not affect AIMMS software <https://community.aimms.com/aimms-pro-cloud-platform-43/apache-log4j-vulnerability-does-not-affect-aimms-software-1123>`_
+
 This article will:
 
 #.  introduce terminology regarding logging, 
