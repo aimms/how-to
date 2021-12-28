@@ -17,7 +17,7 @@ Recently added
 .. Added 12 March 2020: 331
 .. Added 14 Feb 2020: 108-10, 108-09, 108-07
 
-* :doc:`/Articles/531/531-watch-webui-widgets`
+* :doc:`/Articles/531/531-experience-wonderful-webui-widgets`
 * :doc:`/Articles/526/526-modeling-composite-objects`
 * :doc:`/Articles/525/525-finding-unused-identifiers`
 * :doc:`/Articles/518/518-add-logo-to-webui-app`
