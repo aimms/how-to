@@ -82,14 +82,14 @@ can be found in :ref:`deployment-exchange-data-more-details`.
 Option 3 : accessing a remote database
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This case applies when you have a remote database, either in your own data center or elsewhere with a cloud provider. Please be aware that you might experience performance degradataion because of latency and/or bandwidth limitations, most noticable in apps that require a lot of database interaction when the user is interacting with the app. But in many cases we see this work well. 
+This case applies when you have a remote database, either in your own data center or elsewhere with a cloud provider. Please be aware that you might experience performance degradation because of latency and/or bandwidth limitations, most noticeable in apps that require a lot of database interaction when the user is interacting with the app. But in many cases we see this work well. 
 
 Technically there currently are two options: with or without VPN. 
 
 For the VPN route, AIMMS needs to add a load balancer to the VPC on the AIMMS Cloud Platform. 
 Your IT team then needs to complete the parametrization and VPN tunnel set-up, as described `here <https://documentation.aimms.com/cloud/db-config.html#adding-a-vpn-connection>`__. 
 You can then configure your network access such that the AIMMS apps in the AIMMS Cloud Platform can directly access the required database on your premises, 
-in your datacenter or in the cloud. AIMMS database support functions in our modeling language can be found `here <https://documentation.aimms.com/functionreference/data-management/database-functions/>`__. 
+in your data center or in the cloud. AIMMS database support functions in our modeling language can be found `here <https://documentation.aimms.com/functionreference/data-management/database-functions/>`__. 
 
 |on-premise-db| 
 

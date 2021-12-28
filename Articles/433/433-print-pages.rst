@@ -15,7 +15,7 @@ There are often tables that are larger than one page. These tables can be printe
 In that case AIMMS can determine the pages needed to print the complete table, filling up a whole page, before starting on a new page. 
 For many objects the user can describe how that object should be printed. Some object you may want to see on every page (for example a bitmap object containing the company logo), 
 while other objects you may want to "spread over pages" and let AIMMS decide on how may pages it needs to display all data (for example with composite tables). 
-A button will never be printed on a printpage, it is only visible on screen.
+A button will never be printed on a print page, it is only visible on screen.
 
 (The action behind the "Print buttons" is such that nothing is sent to the printer, unless explicitly selected in a dialog box. Normally, the output is sent to a postscript file (``*.ps``).)
 

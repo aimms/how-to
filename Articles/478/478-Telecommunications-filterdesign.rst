@@ -12,9 +12,9 @@ Keywords:
 FIR, conic programming, second-order cone, SOCP.
 
 Description:
-Minimax dB linear phase lowpass filter design. The problem is to find the
+Minimax dB linear phase low-pass filter design. The problem is to find the
 filter weights for a finite impulse response (FIR) filter. This model forms
-an approximation by discretizing the frequency variable (omega) resulting
+an approximation by transforming the frequency variable (omega) into discrete values resulting
 in a second-order cone programming (SOCP) problem. SOCP problems can be
 solved by CPLEX and Gurobi.
 

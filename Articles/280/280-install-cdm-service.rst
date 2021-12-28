@@ -100,7 +100,7 @@ Now we can install CDM.
 
 #. Open a command prompt with elevated rights (run as administrator).
 
-#. cd to the created folder
+#. ``cd`` to the created folder
 
 #. Execute the command ``CDMService.exe --install``
 
@@ -143,7 +143,7 @@ As alternative, you can use one of the following database vendors:
 #. **SQL Server**.  Copy and adapt the example file ``ConfigExamples/CDMConfig - SQLServer.xml``. 
 
 To copy and adapt the example means to copy example file 
-over the file ``CDMConfig.xml`` and replace the elements host, port, database, servername, instancename, user, and password 
+over the file ``CDMConfig.xml`` and replace the elements ``host``, ``port``, ``database``, ``servername``, ``instancename``, ``user``, and ``password`` 
 with actual contents. The ``{}`` and ``[]`` should be removed. A ``{}`` is mandatory, a ``[]`` is optional.
 
 .. note:: When the CDM service is running, and you want to change the configuration, 
@@ -153,7 +153,7 @@ Link an AIMMS application to a running CDM service
 ----------------------------------------------------------------
 
 Here ``cdm::serverURI`` should be set to ``tcp://CDMServiceHostName:19999`` where 19999 is the port number.  
-This port number may be chosen differently, as long as it matches the <listenport> entry in the xml configuration file.
+This port number may be chosen differently, as long as it matches the ``<listenport>`` entry in the xml configuration file.
 
 Below is an example of CDM startup code that connects to an existing shared CDM service, whether the application is opened as a deployed application or as an application in the AIMMS IDE.
 

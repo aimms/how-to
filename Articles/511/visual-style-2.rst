@@ -21,7 +21,7 @@ The AIMMS visual style
 
 .. image:: images/01-1024x595.png
 
-The AIMMS logo has transparant layers and sharp edges. This serves as the inspiration for the visual style of the interface, 
+The AIMMS logo has transparent layers and sharp edges. This serves as the inspiration for the visual style of the interface, 
 like the sharp corners of widgets and the use of overlapping grey surfaces.
 
 .. image:: images/Logo.png

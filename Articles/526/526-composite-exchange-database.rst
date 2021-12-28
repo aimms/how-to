@@ -30,7 +30,7 @@ to have a single column as the primary key for this table.
 Database writing in the component based approach
 ------------------------------------------------------
 
-To accomodate the column ``arcId`` in the datase table, an artificial element is created for each valid combination of ``(i_nodeFrom, i_nodeTo)`` and stored in the element parameter ``ep_backRef(i_nodeFrom, i_nodeTo)``. 
+To accomodate the column ``arcId`` in the database table, an artificial element is created for each valid combination of ``(i_nodeFrom, i_nodeTo)`` and stored in the element parameter ``ep_backRef(i_nodeFrom, i_nodeTo)``. 
 With this element parameter, writing to a database table in AIMMS is straightforward.
 First, the database table is declared in AIMMS as follows:
 

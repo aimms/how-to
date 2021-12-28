@@ -107,7 +107,7 @@ Further reading
 
 #. See also the section on input and output case definitions in `AIMMS PRO documentation <https://documentation.aimms.com/pro/appl-state.html#id1>`_
 
-#. The descriptions of the functions :any:`ReferencedIdentifiers` and :any:`SectionIdentifiers` in `AIMMS PRO Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_ .
+#. The descriptions of the functions :any:`ReferencedIdentifiers` and :any:`SectionIdentifiers`.
 
 You can download the example: 
 :download:`2a. Flow Shop - ReducedCases <downloads/2a. Flow Shop - ReducedCases.zip>`.

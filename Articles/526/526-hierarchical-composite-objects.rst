@@ -140,7 +140,7 @@ This can be improved in the reporting, as the screenshot of a WebUI widget of th
 .. image:: images/hierarchy-list.png
     :align: center
 
-This is achieved using the following report naming of nodes and arcs (ie the element text annotation):
+This is achieved using the following report naming of nodes and arcs (i.e. the element text annotation):
 
 In the node name definition, we assume that the decision maker / end user knows which facility type is used for each location, 
 except when there are multiple facilities in one location.

@@ -20,7 +20,7 @@ The external program "Model Edit API.exe" performs the following steps:
 - sets, parameters, variables, constraints, and a math program;
 - a procedure (named 'Solve_Transport') that initializes the data, solves the model, and writes the data (including the solution) to a file.
 
-3) It exports the model to a .ams file.
+3) It exports the model to a ``.ams`` file.
 4) It writes a log file, in which you can see whether the steps above were successful.
 
 The source of the external program "Model Edit API.exe" is displayed on the Source tab on the demo page and it is contained in the Source directory that comes with this example.

@@ -34,3 +34,6 @@ vol. 16, 1988, pp. 65-84
 .. meta::
    :keywords: Incumbent callback, network object
 
+.. spelling::
+
+    al

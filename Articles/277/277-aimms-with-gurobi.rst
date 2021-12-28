@@ -19,7 +19,7 @@ This article outlines the process to connect AIMMS for each kind of Gurobi licen
 Single machine
 -----------------
 
-#. Locate the gurobi.lic file (usually, `C:\\gurobi\\gurobi.lic`)
+#. Locate the ``gurobi.lic`` file (usually, `C:\\gurobi\\gurobi.lic`)
 #. Set the environment variable GRB_LICENSE_FILE to point to the exact location of this file
 
    .. image:: grb_license.png

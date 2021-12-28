@@ -160,9 +160,7 @@ Further reading
 
 .. below are spelling exceptions only for this document
 
-.. spelling:
-    Dincbas
-    Simonis
-    Hentenryck
-    Kodratoff
+.. spelling::
+
     al
+    

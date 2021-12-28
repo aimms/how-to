@@ -87,7 +87,7 @@ display the initial model tree shown in
 
 .. seealso::
   
-  For more infromation on ``MainInitialization`` and ``MainExecution`` predefined procedures, you may investigate :doc:`lr:data-communication-components/data-initialization-verification-and-control/model-initialization-and-termination`
+  For more information on ``MainInitialization`` and ``MainExecution`` predefined procedures, you may investigate :doc:`lr:data-communication-components/data-initialization-verification-and-control/model-initialization-and-termination`
    
 Entering sets and indices
 --------------------------
@@ -398,7 +398,7 @@ You can create a view window by executing the following steps:
 
   - press the **Identifier Selector** button |identifier-selector-button| on the toolbar,
   - select the `Identifiers with Definition` node, and
-  - use the right mouse and select the **Open With...** command from the popup menu (see :numref:`fg:tut:identifier_selector`).
+  - use the right mouse and select the **Open With...** command from the pop up menu (see :numref:`fg:tut:identifier_selector`).
 
 .. figure:: ./Figs/Bmp/identifier-selector.bmp
    :alt: Identifier Selector window

@@ -7,7 +7,7 @@ Copy Folder Operations in PRO Storage
 
 This article provides for the source of four utility apps to operate on AIMMS PRO storage.
 
-To access the apps, create an .aimmspack from these sources and publish them on your AIMMS PRO system.
+To access the apps, create an ``.aimmspack`` from these sources and publish them on your AIMMS PRO system.
 
 The app sources are available for download in the sections below:
 

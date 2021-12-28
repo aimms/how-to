@@ -13,7 +13,7 @@ Multistart, Starting point, GMP, 3D chart, Network object
 
 Description:
 This example demonstrates the AIMMS multistart algorithm. On the first
-page the heat map of the non-convex objective funtion is plotted. On
+page the heat map of the non-convex objective function is plotted. On
 the second page the impact of starting points is demonstrated. On the
 third and last page the multistart algorithm is demonstrated step by
 step.

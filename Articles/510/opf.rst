@@ -214,6 +214,12 @@ AIMMS also makes it easy to design a data page for interacting with the optimisa
 
 .. [#1] Alvarez-Bustos, A., Kazemtabrizi, B., Shahbazi, M. and Acha-Daza, E., 2021. Universal branch model for the solution of optimal power flows in hybrid AC/DC grids. International Journal of Electrical Power & Energy Systems, 126, p.106543. doi: 10.1016/j.ijepes.2020.106543
 
-.. [#2] R. D. Zimmerman, C. E. Murillo-Sanchez. MATPOWER User's Manual, Version 7.1. 2020. [Online]. Available: https://matpower.org/docs/MATPOWER-manual-7.1.pdf doi: 10.5281/zenodo.4074122
+.. [#2] R. D. Zimmerman, C. E. Murillo-Sanchez. MATPOWER User's Manual, Version 7.1. 2020. [Online]. Available:  `MATPOWER-manual-7.1.pdf <https://matpower.org/docs/MATPOWER-manual-7.1.pdf>`_  doi: 10.5281/zenodo.4074122
 
 .. [#3] Von Meier, A., Electric Power Systems - A Conceptual Introduction (2006) - Wiley, DOI: 10.1002/0470036427 - Chapter 7 - Power Flow Analysis
+
+.. spelling::
+    
+	doi
+    ijepes
+    zenodo

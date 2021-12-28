@@ -19,7 +19,7 @@ There are several use cases for working with JSON and XML files:
     If that is your use case, you are likely better off using the `Data Exchange Library <https://documentation.aimms.com/dataexchange/index.html>`_
 
 #.  You want to convert a JSON file to an XML file, but you do not want to exchange the data in those files with AIMMS identifiers in your model.
-    Perhaps the library from 2018 is still usefull for you: :doc:`XML JSON conversion article<../283/283-convert-json-to-xml-original>`
+    Perhaps the library from 2018 is still useful for you: :doc:`XML JSON conversion article<../283/283-convert-json-to-xml-original>`
 
 
 

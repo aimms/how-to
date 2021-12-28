@@ -203,7 +203,7 @@ When you select an element, the mapping tool gives you access to a list of attri
 Here, we can't bind the elements ``origin_address`` or ``destination_address`` to a set because their ``occurrence`` attribute equals "optional/many" and their position in the root node. Meanwhile, if we bind an index to the ``status`` element from the Element folder, we would not be able to map the ``origin_address`` to a parameter of this index.
 Therefore, we cannot use ``origin_address`` and ``destination_address`` as indices to have parameters ``Distance(origin_address, destination_address)`` and ``Duration(origin_address, destination_address)`` with this XML file. 
 
-Instead, we will use virtual attributes. These attributes aren't part of the XML file but can be simulated. The virtual attributes are an enumeration of contents of the root element. For example, the second element in ``destination_address`` will have a virtual attribute value of 2 and the third element will have a value 3. Thus, 2 will become the ID for the 2nd destination_address: "The atomium".
+Instead, we will use virtual attributes. These attributes aren't part of the XML file but can be simulated. The virtual attributes are an enumeration of contents of the root element. For example, the second element in ``destination_address`` will have a virtual attribute value of 2 and the third element will have a value 3. Thus, 2 will become the ID for the 2\ :sup:`nd`\  destination_address: "The atomium".
 
 Given the structure of the XML, the virtual attribute for ``row`` will also correspond to the origin ID for the travel and the virtual attribute for ``element`` will correspond to the travel destination ID.
 
@@ -275,3 +275,8 @@ Related Topics
 * **AIMMS How-To**: :doc:`../293/293-extracting-data-from-XML`
 * `Google Maps Developer Guide <https://developers.google.com/maps/documentation/distance-matrix/intro>`_. 
 
+
+.. spelling::
+
+    atomium
+	

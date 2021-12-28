@@ -55,7 +55,7 @@ A sample call is below:
     util::pr_CheckDefinitions(pro::ManagedSessionInputCaseIdentifierSet);
     
 Here we check all definitions of the sets and parameters that are passed in input case to the solver session.
-Note that by default in modern versions of AIMMS and of AIMMS PRO most if not all parameter defitions are avoided anyway.
+Note that by default in modern versions of AIMMS and of AIMMS PRO most if not all parameter definition are avoided anyway.
 
 Example download
 ------------------

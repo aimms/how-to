@@ -27,7 +27,7 @@ In the interface we use `Montserrat <https://fonts.google.com/specimen/Montserra
 
 Montserrat is a typeface with a lot of character, but not the best for small sizes on screen, because it is quite wide, has sharp corners and a low x-height. 
 It is therefore used for the menu, titles and anything that can be considered branding. 
-In case it is important for developers to use a client’s housestyle, only replacing Montserrat is usually sufficient.
+In case it is important for developers to use a client’s house-style, only replacing Montserrat is usually sufficient.
 
 For smaller sizes and displaying information we use the typefaces Roboto and Roboto Condensed by Google. 
 This family is optimized for display on screens, for example because of its high x-height and round shapes. 

@@ -51,7 +51,7 @@ Applying the query parameter to switch between images
 
 If you are switching between a set of maybe two or three images, you could use defined query parameters for each image. This prevents downloading the image each time the image is updated.
 
-For example, if you update the image widget with either an image of "OK" or "ERROR", you can use ``sp_displayImage := "ImageName.jpg?id=OK";`` and ``sp_displayImage := "ImageName.jpg?id=ERROR";`` for the respective images, after you've updated "ImageName.jpg" whith the appropriate OK or ERROR image. 
+For example, if you update the image widget with either an image of "OK" or "ERROR", you can use ``sp_displayImage := "ImageName.jpg?id=OK";`` and ``sp_displayImage := "ImageName.jpg?id=ERROR";`` for the respective images, after you've updated ``ImageName.jpg`` with the appropriate OK or ERROR image. 
 
 The code of the ``pr_showOK`` procedure would look like the following:
 

@@ -13,7 +13,7 @@ Benders Decomposition, GMP, Reading numbers from text file, Warehouse location
 
 Description:
 Capacitated facility location problems deal with locating an undetermined
-number of facilities in order to serve customers, at minumum cost. The
+number of facilities in order to serve customers, at minimum cost. The
 potential facility locations and the customer zones are considered fixed
 points in a network.
 
@@ -35,3 +35,8 @@ problem
 .. meta::
    :keywords: Benders Decomposition, GMP, Reading numbers from text file, Warehouse location
 
+.. spelling::
+    
+	capa
+	capb
+	capc
