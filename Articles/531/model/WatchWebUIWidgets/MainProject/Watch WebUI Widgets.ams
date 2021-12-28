@@ -362,7 +362,7 @@ Model Main_Watch_WebUI_Widgets {
 				}
 			}
 			Parameter p_relativeSize {
-				InitialData: 20;
+				InitialData: 40;
 			}
 		}
 		Procedure pr_openPageMap {
@@ -689,7 +689,7 @@ Model Main_Watch_WebUI_Widgets {
 		Procedure PostMainInitialization {
 			Body: {
 				! Workaround for gitlab ticket 4555:
-				Empty p_latitude, p_longitude ;
+				Empty p_latitude, p_longitude, p_locationSize ;
 			}
 			Comment: {
 				"Add initialization statements here that require that the libraries are already initialized properly,
