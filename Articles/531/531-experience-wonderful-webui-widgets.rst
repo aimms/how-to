@@ -33,7 +33,7 @@ Your partner is good at making AIMMS applications, so she created a WebUI in fro
 
 Your tools are as follows:
 
-#.  **The widget actions**:  You can find the hamburger menui in the right upper corner of the map widget:
+#.  **The widget actions**:  You can find the hamburger menu in the right upper corner of the map widget:
 
     .. image:: images/map-widget-menu.png
         :align: center
