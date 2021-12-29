@@ -50,7 +50,7 @@ Prerequisites
 
 Generate mapping file
 -----------------------
-The easiest way to get a template for your mapping based on your current model, is to auto-generate a mapping through the :token:`dex::GenerateDatasetMappings` function. This generates standardized table- and Excelsheet mappings based on the :token:`dex::Dataset`, :token:`dex::TableName`, and :token:`dex::ColumnName` annotations. The generated mappings are then stored in the :token:`Mappings/Generated` subfolder of the project folder.
+The easiest way to get a template for your mapping based on your current model, is to auto-generate a mapping through the :any:`dex::GenerateDatasetMappings` function. This generates standardized table- and Excelsheet mappings based on the ``dex::Dataset``, ``dex::TableName``, and ``dex::ColumnName`` annotations. The generated mappings are then stored in the ``Mappings/Generated`` subfolder of the project folder.
 
 In this example we needed to add the Dataset/TableName/ColumnName annotations to the related identifiers. We were only able to do so by moving the identifiers (holding the same index) that are relevant for our JSON data file into a new declaration and assign the correct dex annotations to this declaration. For the parameter identifiers we've added column-names. 
 
@@ -66,7 +66,7 @@ In this example we needed to add the Dataset/TableName/ColumnName annotations to
 
 *The annotations on identifier-level*
 
-After auto-generating the mappings by running the :token:`dex::GenerateDatasetMappings` procedure, we can find the mapping file for JSON sparse mapping. Without edits, it looks like this:
+After auto-generating the mappings by running the :any:`dex::GenerateDatasetMappings` procedure, we can find the mapping file for JSON sparse mapping. Without edits, it looks like this:
 
 .. code-block:: xml
 
@@ -108,17 +108,13 @@ Basic setup
 
 .. note::
 
-        All functions from the library are referenced and described on `this article <https://documentation.aimms.com/dataexchange/api.html>`__.
+        All functions from the library are referenced and described on `this page <https://documentation.aimms.com/dataexchange/api.html>`__.
 
 For this how-to we use the above-mentioned JSON-based data file that holds data from two cities. For every city in the array we will need the name, latitude, longitude and the population and match these items to their respective identifiers in the model, as defined in the mapping file.
 
-To use the mapping in a procedure, you must first read the mapping file into your model. You do this by setting up a procedure in which you call the AddMapping function:
+To use the mapping in a procedure, you must first read the mapping file into your model. You do this by setting up a procedure in which you call the :any:`dex::AddMapping` function.
 
-.. js:function::  dex::AddMapping(mappingName,mappingFile)
-
-After this is done without errors or warnings, you can use the ReadFromFile function to read the data from the specified data source:
-
-.. js:function::  dex::ReadFromFile(dataFile,mappingName,emptyIdentifiers,emptySets,resetCounters)
+After this is done without errors or warnings, you can use the :any:`dex::ReadFromFile` function to read the data from the specified data source.
 
 In our model the implementation looks like this:
 
