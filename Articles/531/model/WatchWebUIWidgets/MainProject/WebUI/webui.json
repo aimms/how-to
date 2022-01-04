@@ -43,6 +43,12 @@
                     "children": []
                   }
                 ]
+              },
+              {
+                "name": "Gantt",
+                "type": "pagev2-grid",
+                "slug": "gantt",
+                "children": []
               }
             ]
           }
@@ -128,6 +134,69 @@
           }
         ]
       }
+    }
+  },
+  "pages/gantt": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "orderDetails",
+          "gridArea": "area-b",
+          "dndId": "Unassigned widgetsorderDetails1"
+        },
+        {
+          "widgetUri": "ganttDemo",
+          "gridArea": "area-a",
+          "dndId": "area-aganttDemo0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout1"
+    },
+    "onload": {
+      "aimms": {
+        "run": "pr_pageopen_Gantt_startUpProcedure"
+      }
+    },
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_ganttPageSecondaryActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_ganttPageSecondaryActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "ganttDemo",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "orderDetails",
+          "layoutInfo": {}
+        }
+      ]
     }
   },
   "pages/home": {
@@ -291,6 +360,88 @@
           "layoutInfo": {}
         }
       ]
+    }
+  },
+  "widgets/ganttDemo": {
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_WebUIGNTStartTime",
+          "p_WebUIGNTDuration"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "resources": [
+          "i_al"
+        ],
+        "jobs": [
+          "<IDENTIFIER-SET>",
+          "i_o"
+        ],
+        "aggregated": []
+      }
+    },
+    "contextmenu": {
+      "aimms": {
+        "contents": [
+          "sp_ganttItemActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_ganttItemActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetItemActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetItemActionSpec"
+              },
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "name": {
+      "literal": "ganttDemo"
+    },
+    "store.focus.in": {
+      "literal": {
+        "i_o": "ep_selectedOrder"
+      }
+    },
+    "time.reference": {
+      "aimms": {
+        "contents": [
+          "begHourCal"
+        ]
+      }
+    },
+    "time.resolution": {
+      "literal": 1
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Order production schedule"
     }
   },
   "widgets/InOut": {
@@ -689,6 +840,134 @@
     },
     "name": {
       "literal": "mapExplain"
+    }
+  },
+  "widgets/orderDetails": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "bp_orderScheduledByHuman",
+          "EP_OrderProduct",
+          "EP_OrderProductType",
+          "P_OrderQuantity",
+          "EP_OrderDeliveryDate",
+          "ep_orderStartDate",
+          "ep_orderProductionLine"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "ep_d_orderdeliverydate": "1",
+        "ep_d_orderproduct": "1",
+        "ep_orderproducttype": "1",
+        "p_d_orderquantity": "1",
+        "bp_orderscheduledbyhuman": "1",
+        "ep_orderproductionline": "1",
+        "ep_orderstartdate": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_o"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "EP_OrderProductionLine"
+          },
+          "width": 19.37
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "EP_OrderStartDate"
+          },
+          "width": 22.88
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "EP_D_OrderDeliveryDate"
+          },
+          "width": 20.87
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "P_D_OrderQuantity"
+          },
+          "width": 19.58
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "EP_OrderProductType"
+          },
+          "width": 16.45
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "EP_D_OrderProduct"
+          },
+          "width": 17.7
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "BP_OrderScheduledManually"
+          },
+          "width": 23.37
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "P_OrderQuantity"
+          },
+          "width": 13.12
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "EP_OrderDeliveryDate"
+          },
+          "width": 19.46
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "EP_OrderProduct"
+          },
+          "width": 15
+        }
+      ]
+    },
+    "name": {
+      "literal": "orderDetails"
+    },
+    "store.focus.in": {
+      "literal": {
+        "i_o": "ep_selectedOrder"
+      }
+    },
+    "title": {
+      "literal": "Order details"
     }
   },
   "widgets/scalar-size-location": {

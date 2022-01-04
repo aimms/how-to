@@ -1,0 +1,31 @@
+/* The locations with unmet demand should be marked with a red background. */
+.annotation-unmetdemand {
+    fill: #ff471a;!important
+    background: #ff471a;!important
+}
+
+
+.annotation-atproductioncapacity {
+    fill: #ffe0b3;!important
+    background: #ffe0b3;!important
+}
+
+.annotation-atpumpingcapacity {
+    fill: #ffe0b3;!important
+    background: #ffe0b3;!important
+}
+
+
+
+
+
+
+/*
+    The default of AIMMS Map Widget V2 is to draw the nodes first, and then the arcs,
+    which obfuscates any icons that are drawn fo rthe nodes.
+
+    This .css file forces nodes to be drawn upon arcs instead of visa versa.
+*/
+[class*="leaflet-nodes-"] {
+    z-index: 600 !important;
+}
