@@ -48,7 +48,26 @@
                 "name": "Gantt",
                 "type": "pagev2-grid",
                 "slug": "gantt",
-                "children": []
+                "children": [
+                  {
+                    "name": "job-detail",
+                    "type": "pagev2-grid-dialog",
+                    "slug": "job-detail",
+                    "children": []
+                  },
+                  {
+                    "name": "gantt-config-panel",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "gantt-config-panel",
+                    "children": []
+                  },
+                  {
+                    "name": "gantt-explain-panel",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "gantt-explain-panel",
+                    "children": []
+                  }
+                ]
               }
             ]
           }
@@ -219,6 +238,31 @@
       "literal": [
         {
           "uri": "WelcomeText",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/job-detail": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-dialog"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "JobDetails",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsJobDetails0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "JobDetails",
           "layoutInfo": {}
         }
       ]
@@ -525,6 +569,110 @@
       "aimms": {
         "contents": [
           "sp_locationDetailIOtitle"
+        ],
+        "slices": []
+      }
+    }
+  },
+  "widgets/JobDetails": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "slices": [
+          {
+            "identifier": "EP_OrderProduct",
+            "slice": [
+              {
+                "index": "i_o",
+                "type": "element-parameter",
+                "value": "ep_selectedOrder"
+              }
+            ]
+          },
+          {
+            "identifier": "EP_OrderProductType",
+            "slice": [
+              {
+                "index": "i_o",
+                "type": "element-parameter",
+                "value": "ep_selectedOrder"
+              }
+            ]
+          },
+          {
+            "identifier": "EP_OrderDeliveryDate",
+            "slice": [
+              {
+                "index": "i_o",
+                "type": "element-parameter",
+                "value": "ep_selectedOrder"
+              }
+            ]
+          },
+          {
+            "identifier": "P_OrderQuantity",
+            "slice": [
+              {
+                "index": "i_o",
+                "type": "element-parameter",
+                "value": "ep_selectedOrder"
+              }
+            ]
+          },
+          {
+            "identifier": "ep_orderStartDate",
+            "slice": [
+              {
+                "index": "i_o",
+                "type": "element-parameter",
+                "value": "ep_selectedOrder"
+              }
+            ]
+          },
+          {
+            "identifier": "ep_orderProductionLine",
+            "slice": [
+              {
+                "index": "i_o",
+                "type": "element-parameter",
+                "value": "ep_selectedOrder"
+              }
+            ]
+          }
+        ],
+        "contents": [
+          "EP_OrderProduct",
+          "bp_orderScheduledByHuman",
+          "EP_OrderProductType",
+          "EP_OrderDeliveryDate",
+          "P_OrderQuantity",
+          "ep_orderStartDate",
+          "ep_orderProductionLine"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "bp_orderscheduledbyhuman": "1",
+        "ep_orderproducttype": "1",
+        "ep_orderdeliverydate": "1",
+        "p_orderquantity": "1",
+        "ep_orderstartdate": "1",
+        "ep_orderproductionline": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "name": {
+      "literal": "JobDetails"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_scalarWidgetDialogPageTitle"
         ],
         "slices": []
       }

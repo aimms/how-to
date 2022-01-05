@@ -738,6 +738,11 @@ Model Main_Watch_WebUI_Widgets {
 				}
 				Set S_OrderNumbers {
 					Index: i_o;
+					webui::ElementTextIdentifier: s_productNames;
+				}
+				StringParameter sp_orderName {
+					IndexDomain: i_o;
+					Definition: formatString("%e",i_o);
 				}
 				Set S_ProductTypes {
 					Index: i_pt;
@@ -852,6 +857,26 @@ Model Main_Watch_WebUI_Widgets {
 					}
 				}
 			}
+			StringParameter sp_ganttChartSidePanel {
+				IndexDomain: (webui::indexPageExtension,webui::indexSidePanelSpec);
+				Definition: {
+					{
+						('1', 'displayText' ) : "Control",
+						('1', 'pageId'      ) : "gantt-config-panel",
+						('1', 'tooltip'     ) : "",
+						('1', 'icon'        ) : "",
+						('1', 'iconcolor'   ) : "",
+						('1', 'state'       ) : "Active",
+					
+						('2', 'displayText' ) : "Story",
+						('2', 'pageId'      ) : "gantt-explain-panel",
+						('2', 'tooltip'     ) : "",
+						('2', 'icon'        ) : "",
+						('2', 'iconcolor'   ) : "",
+						('2', 'state'       ) : "Active"
+					}
+				}
+			}
 			Section Gantt_Chart_Handling {
 				Section item_actions_gantt_chart {
 					StringParameter sp_ganttItemActions {
@@ -888,6 +913,11 @@ Model Main_Watch_WebUI_Widgets {
 								('p_WebUIGNTDuration', '6', 'procedure'  ) : "pr_editJob",
 								('p_WebUIGNTDuration', '6', 'state'      ) : "Active"
 							}
+						}
+					}
+					StringParameter sp_scalarWidgetDialogPageTitle {
+						Definition: {
+							formatString("Edit %e", ep_selectedOrder );
 						}
 					}
 					Procedure pr_moveToFront {
