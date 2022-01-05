@@ -1,6 +1,6 @@
 .aimms-widget [data-widget\.uri=ganttDemo] .bar.annotation-manualJob {
 	stroke-width: 4px ;
-	stroke:red ;
+	stroke:blue ;
 }
 
 .aimms-widget [data-widget\.uri=ganttDemo] .bar.annotation-freeJob {

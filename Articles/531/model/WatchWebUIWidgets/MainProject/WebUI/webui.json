@@ -155,6 +155,39 @@
       }
     }
   },
+  "layouts/custom_fe6fb944-9dac-46fe-9801-51e6415d21cd": {
+    "definition": {
+      "literal": {
+        "componentName": "Grid",
+        "props": {
+          "gridTemplateColumns": "1fr",
+          "gridTemplateRows": "1fr 1fr",
+          "gridTemplateAreas": "\"area-a\" \"area-b\""
+        },
+        "items": [
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-a",
+              "name": "Area A",
+              "gridAutoFlow": "column"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-b",
+              "name": "Area B",
+              "gridAutoFlow": "row"
+            }
+          }
+        ]
+      }
+    },
+    "displayName": {
+      "literal": "Layout1 Copy"
+    }
+  },
   "pages/gantt": {
     "aimms.widget.type": {
       "literal": "pagev2-grid"
@@ -162,19 +195,24 @@
     "bindings": {
       "literal": [
         {
+          "widgetUri": "selectedOrder",
+          "gridArea": "Unassigned widgets",
+          "dndId": "area-bselectedOrder1"
+        },
+        {
           "widgetUri": "orderDetails",
           "gridArea": "area-b",
-          "dndId": "Unassigned widgetsorderDetails1"
+          "dndId": "area-borderDetails0"
         },
         {
           "widgetUri": "ganttDemo",
           "gridArea": "area-a",
-          "dndId": "area-aganttDemo0"
+          "dndId": "area-aganttDemo2"
         }
       ]
     },
     "layoutId": {
-      "literal": "Layout1"
+      "literal": "custom_fe6fb944-9dac-46fe-9801-51e6415d21cd"
     },
     "onload": {
       "aimms": {
@@ -213,6 +251,10 @@
         },
         {
           "uri": "orderDetails",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "selectedOrder",
           "layoutInfo": {}
         }
       ]
@@ -644,7 +686,7 @@
         ],
         "contents": [
           "EP_OrderProduct",
-          "bp_orderScheduledByHuman",
+          "bp_orderScheduledByLivingCreature",
           "EP_OrderProductType",
           "EP_OrderDeliveryDate",
           "P_OrderQuantity",
@@ -655,7 +697,7 @@
     },
     "contents.displaydomain": {
       "literal": {
-        "bp_orderscheduledbyhuman": "1",
+        "bp_orderscheduledbylivingcreature": "1",
         "ep_orderproducttype": "1",
         "ep_orderdeliverydate": "1",
         "p_orderquantity": "1",
@@ -997,13 +1039,15 @@
     "contents": {
       "aimms": {
         "contents": [
-          "bp_orderScheduledByHuman",
+          "bp_orderScheduledByLivingCreature",
           "EP_OrderProduct",
           "EP_OrderProductType",
           "P_OrderQuantity",
           "EP_OrderDeliveryDate",
           "ep_orderStartDate",
-          "ep_orderProductionLine"
+          "ep_orderProductionLine",
+          "p_d_startHour",
+          "p_d_duration"
         ]
       }
     },
@@ -1013,7 +1057,7 @@
         "ep_d_orderproduct": "1",
         "ep_orderproducttype": "1",
         "p_d_orderquantity": "1",
-        "bp_orderscheduledbyhuman": "1",
+        "bp_orderscheduledbylivingcreature": "1",
         "ep_orderproductionline": "1",
         "ep_orderstartdate": "1"
       }
@@ -1103,6 +1147,20 @@
             "<IDENTIFIER-SET>": "EP_OrderProduct"
           },
           "width": 15
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_d_startHour"
+          },
+          "width": 16.45
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_d_duration"
+          },
+          "width": 18.54
         }
       ]
     },
@@ -1159,6 +1217,17 @@
     },
     "name": {
       "literal": "scalar-size-location"
+    }
+  },
+  "widgets/selectedOrder": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "compact": {
+      "literal": 1
+    },
+    "name": {
+      "literal": "selectedOrder"
     }
   },
   "widgets/WelcomeText": {

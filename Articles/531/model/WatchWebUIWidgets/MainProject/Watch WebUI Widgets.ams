@@ -543,30 +543,35 @@ Model Main_Watch_WebUI_Widgets {
 				IndexDomain: (webui::indexWidgetItemActionSpec,webui::indexPageExtension,webui::indexWidgetActionSpec);
 				Definition: {
 					{
-						('p_locationSize', '1', 'displaytext') : formatString("Increase %s %e by 1", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
-						('p_locationSize', '1', 'icon'       ) : "aimms-volume-increase2",
-						('p_locationSize', '1', 'procedure'  ) : "pr_locSizeIncrease1",
-						('p_locationSize', '1', 'state'      ) : "Active",
+						('p_locationSize', '1', 'displaytext') : "Debug",
+						('p_locationSize', '1', 'icon'       ) : "aimms-bug",
+						('p_locationSize', '1', 'procedure'  ) : "pr_locDebug",
+						('p_locationSize', '1', 'state'      ) : "Hide",
 					
-						('p_locationSize', '2', 'displaytext') : formatString("Increase %s %e by 5", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
-						('p_locationSize', '2', 'icon'       ) : "aimms-volume-increase",
-						('p_locationSize', '2', 'procedure'  ) : "pr_locSizeIncrease5",
+						('p_locationSize', '2', 'displaytext') : formatString("Increase %s %e by 1", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
+						('p_locationSize', '2', 'icon'       ) : "aimms-volume-increase2",
+						('p_locationSize', '2', 'procedure'  ) : "pr_locSizeIncrease1",
 						('p_locationSize', '2', 'state'      ) : "Active",
 					
-						('p_locationSize', '3', 'displaytext') : formatString("Decrease %s %e by 1", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
-						('p_locationSize', '3', 'icon'       ) : "aimms-volume-decrease2",
-						('p_locationSize', '3', 'procedure'  ) : "pr_locSizeDecrease1",
+						('p_locationSize', '3', 'displaytext') : formatString("Increase %s %e by 5", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
+						('p_locationSize', '3', 'icon'       ) : "aimms-volume-increase",
+						('p_locationSize', '3', 'procedure'  ) : "pr_locSizeIncrease5",
 						('p_locationSize', '3', 'state'      ) : "Active",
 					
-						('p_locationSize', '4', 'displaytext') : formatString("Decrease %s %e by 5", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
-						('p_locationSize', '4', 'icon'       ) : "aimms-volume-decrease",
-						('p_locationSize', '4', 'procedure'  ) : "pr_locSizeDecrease5",
+						('p_locationSize', '4', 'displaytext') : formatString("Decrease %s %e by 1", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
+						('p_locationSize', '4', 'icon'       ) : "aimms-volume-decrease2",
+						('p_locationSize', '4', 'procedure'  ) : "pr_locSizeDecrease1",
 						('p_locationSize', '4', 'state'      ) : "Active",
 					
-						('p_locationSize', '5', 'displaytext') : formatString("Edit %e", ep_selectedLocation),
-						('p_locationSize', '5', 'icon'       ) : "aimms-quill",
-						('p_locationSize', '5', 'procedure'  ) : "pr_locSizeDetails",
-						('p_locationSize', '5', 'state'      ) : "Active"
+						('p_locationSize', '5', 'displaytext') : formatString("Decrease %s %e by 5", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
+						('p_locationSize', '5', 'icon'       ) : "aimms-volume-decrease",
+						('p_locationSize', '5', 'procedure'  ) : "pr_locSizeDecrease5",
+						('p_locationSize', '5', 'state'      ) : "Active",
+					
+						('p_locationSize', '6', 'displaytext') : formatString("Edit %e", ep_selectedLocation),
+						('p_locationSize', '6', 'icon'       ) : "aimms-quill",
+						('p_locationSize', '6', 'procedure'  ) : "pr_locSizeDetails",
+						('p_locationSize', '6', 'state'      ) : "Active"
 					}
 				}
 			}
@@ -586,6 +591,11 @@ Model Main_Watch_WebUI_Widgets {
 					endif ;
 				}
 				Parameter p_ub;
+			}
+			Procedure pr_locDebug {
+				Body: {
+					display ep_selectedLocation ;
+				}
 			}
 			Procedure pr_locSizeIncrease5 {
 				Body: {
@@ -738,7 +748,7 @@ Model Main_Watch_WebUI_Widgets {
 				}
 				Set S_OrderNumbers {
 					Index: i_o;
-					webui::ElementTextIdentifier: s_productNames;
+					webui::ElementTextIdentifier: sp_orderName;
 				}
 				StringParameter sp_orderName {
 					IndexDomain: i_o;
@@ -778,7 +788,7 @@ Model Main_Watch_WebUI_Widgets {
 					Range: HourCalendar;
 					InitialData: data {};
 				}
-				Parameter bp_orderScheduledByHuman {
+				Parameter bp_orderScheduledByLivingCreature {
 					IndexDomain: i_o;
 					Range: binary;
 					InitialData: data {};
@@ -815,10 +825,21 @@ Model Main_Watch_WebUI_Widgets {
 					Range: HourCalendar;
 					Definition: EP_OrderDeliveryDate(i_o);
 				}
+				Parameter p_d_startHour {
+					IndexDomain: i_o;
+					Unit: hour;
+					Definition: sum( i_al , p_WebUIGNTStartTime( i_al, i_o ) );
+				}
+				Parameter p_d_duration {
+					IndexDomain: i_o;
+					Unit: hour;
+					Definition: sum( i_al , p_WebUIGNTDuration( i_al, i_o ) );
+				}
 			}
 			DeclarationSection Input_Controls {
 				ElementParameter ep_selectedOrder {
 					Range: S_OrderNumbers;
+					InitialData: '';
 				}
 				ElementParameter e_selectedStartTime {
 					Range: HourCalendar;
@@ -852,7 +873,7 @@ Model Main_Watch_WebUI_Widgets {
 					{
 						( '1', 'displaytext' ) : "Optimize",
 						( '1', 'icon'        ) : "aimms-pacman",
-						( '1', 'procedure'   ) : "SolveMixedIntegerProgrammingProblem",
+						( '1', 'procedure'   ) : "pr_SolveMixedIntegerProgrammingProblem",
 						( '1', 'state'       ) : "Active"
 					}
 				}
@@ -883,35 +904,40 @@ Model Main_Watch_WebUI_Widgets {
 						IndexDomain: (webui::indexWidgetItemActionSpec,webui::indexPageExtension,webui::indexWidgetActionSpec);
 						Definition: {
 							{
-								('p_WebUIGNTDuration', '1', 'displaytext') : "Move to front",
-								('p_WebUIGNTDuration', '1', 'icon'       ) : "aimms-first",
-								('p_WebUIGNTDuration', '1', 'procedure'  ) : "pr_moveToFront",
-								('p_WebUIGNTDuration', '1', 'state'      ) : if bp_orderScheduledByHuman( ep_selectedOrder ) then "Active" else "Inactive" endif,
+								('p_WebUIGNTDuration', '1', 'displaytext') : "Debug",
+								('p_WebUIGNTDuration', '1', 'icon'       ) : "aimms-bug",
+								('p_WebUIGNTDuration', '1', 'procedure'  ) : "pr_jobDebug",
+								('p_WebUIGNTDuration', '1', 'state'      ) : "Hide",
 							
-								('p_WebUIGNTDuration', '2', 'displaytext') : "Delay until deadline",
-								('p_WebUIGNTDuration', '2', 'icon'       ) : "aimms-last",
-								('p_WebUIGNTDuration', '2', 'procedure'  ) : "pr_delayUntilDeadline",
-								('p_WebUIGNTDuration', '2', 'state'      ) : if bp_orderScheduledByHuman( ep_selectedOrder ) then "Active" else "Inactive" endif,
+								('p_WebUIGNTDuration', '2', 'displaytext') : formatString("Move order %e to front", ep_selectedOrder),
+								('p_WebUIGNTDuration', '2', 'icon'       ) : "aimms-first",
+								('p_WebUIGNTDuration', '2', 'procedure'  ) : "pr_moveToFront",
+								('p_WebUIGNTDuration', '2', 'state'      ) : if bp_orderScheduledByLivingCreature( ep_selectedOrder ) then "Active" else "Inactive" endif,
 							
-								('p_WebUIGNTDuration', '3', 'displaytext') : "Allow scheduling by living creature",
-								('p_WebUIGNTDuration', '3', 'icon'       ) : "aimms-grab",
-								('p_WebUIGNTDuration', '3', 'procedure'  ) : "pr_scheduleByLivingCreature",
-								('p_WebUIGNTDuration', '3', 'state'      ) : if not bp_orderScheduledByHuman( ep_selectedOrder ) then "Active" else "Inactive" endif,
+								('p_WebUIGNTDuration', '3', 'displaytext') : formatString("Delay order %e until deadline", ep_selectedOrder),
+								('p_WebUIGNTDuration', '3', 'icon'       ) : "aimms-last",
+								('p_WebUIGNTDuration', '3', 'procedure'  ) : "pr_delayUntilDeadline",
+								('p_WebUIGNTDuration', '3', 'state'      ) : if bp_orderScheduledByLivingCreature( ep_selectedOrder ) then "Active" else "Inactive" endif,
 							
-								('p_WebUIGNTDuration', '4', 'displaytext') : "Allow scheduling by optimization algorithm",
-								('p_WebUIGNTDuration', '4', 'icon'       ) : "aimms-music",
-								('p_WebUIGNTDuration', '4', 'procedure'  ) : "pr_scheduleByOptimizationAlgorithm",
-								('p_WebUIGNTDuration', '4', 'state'      ) : if bp_orderScheduledByHuman( ep_selectedOrder ) then "Active" else "Inactive" endif,
+								('p_WebUIGNTDuration', '4', 'displaytext') : formatString("Allow scheduling of %e by living creature", ep_selectedOrder),
+								('p_WebUIGNTDuration', '4', 'icon'       ) : "aimms-grab",
+								('p_WebUIGNTDuration', '4', 'procedure'  ) : "pr_scheduleByLivingCreature",
+								('p_WebUIGNTDuration', '4', 'state'      ) : if not bp_orderScheduledByLivingCreature( ep_selectedOrder ) then "Active" else "Inactive" endif,
 							
-								('p_WebUIGNTDuration', '5', 'displaytext') : "Delete",
-								('p_WebUIGNTDuration', '5', 'icon'       ) : "aimms-bin",
-								('p_WebUIGNTDuration', '5', 'procedure'  ) : "pr_deleteJob",
-								('p_WebUIGNTDuration', '5', 'state'      ) : "Active",
+								('p_WebUIGNTDuration', '5', 'displaytext') : formatString( "Allow scheduling of %e by optimization algorithm", ep_selectedOrder),
+								('p_WebUIGNTDuration', '5', 'icon'       ) : "aimms-music",
+								('p_WebUIGNTDuration', '5', 'procedure'  ) : "pr_scheduleByOptimizationAlgorithm",
+								('p_WebUIGNTDuration', '5', 'state'      ) : if bp_orderScheduledByLivingCreature( ep_selectedOrder ) then "Active" else "Inactive" endif,
 							
-								('p_WebUIGNTDuration', '6', 'displaytext') : "Edit",
-								('p_WebUIGNTDuration', '6', 'icon'       ) : "aimms-quill",
-								('p_WebUIGNTDuration', '6', 'procedure'  ) : "pr_editJob",
-								('p_WebUIGNTDuration', '6', 'state'      ) : "Active"
+								('p_WebUIGNTDuration', '6', 'displaytext') : formatString("Delete order %e", ep_selectedOrder),
+								('p_WebUIGNTDuration', '6', 'icon'       ) : "aimms-bin",
+								('p_WebUIGNTDuration', '6', 'procedure'  ) : "pr_deleteJob",
+								('p_WebUIGNTDuration', '6', 'state'      ) : "Active",
+							
+								('p_WebUIGNTDuration', '7', 'displaytext') : formatString("Edit order %e", ep_selectedOrder),
+								('p_WebUIGNTDuration', '7', 'icon'       ) : "aimms-quill",
+								('p_WebUIGNTDuration', '7', 'procedure'  ) : "pr_editJob",
+								('p_WebUIGNTDuration', '7', 'state'      ) : "Active"
 							}
 						}
 					}
@@ -920,25 +946,64 @@ Model Main_Watch_WebUI_Widgets {
 							formatString("Edit %e", ep_selectedOrder );
 						}
 					}
+					Procedure pr_jobDebug {
+						Body: {
+							display ep_selectedOrder ;
+						}
+					}
 					Procedure pr_moveToFront {
 						Body: {
-							if ep_selectedOrder and bp_orderScheduledByHuman( ep_selectedOrder ) then
-							
+							if ep_selectedOrder and bp_orderScheduledByLivingCreature( ep_selectedOrder ) then
+								ep_lineSelectedOrder := first( i_al | p_WebUIGNTStartTime(i_al, ep_selectedOrder) );
+								if ep_lineSelectedOrder then ! otherwise it is already at the front and it doesn't need to be moved.
+									p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) := timeZoneOffsetNeededForWebUIGanttCharts ;
+									repeat
+										! There is an overlapping order, scheduled by a living creature, if the start of that overlapping order is during the selected order, or if the start of the selected order is during that overlapping order.
+										ep_overlappingOrer := 
+											first( i_o | bp_orderScheduledByLivingCreature( i_o )                                                                                                                                                     and 
+												( i_o <> ep_selectedOrder                                                                                                                                                                       ) and
+												( ( ( p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) <= p_WebUIGNTStartTime( ep_lineSelectedOrder, i_o )                                                               ) and 
+												    ( p_WebUIGNTStartTime( ep_lineSelectedOrder, i_o ) < p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) + p_WebUIGNTDuration( ep_lineSelectedOrder, ep_selectedOrder ) )     ) or 
+												  ( ( p_WebUIGNTStartTime( ep_lineSelectedOrder, i_o ) <= p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder )                                                               ) and
+												    ( p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) < p_WebUIGNTStartTime( ep_lineSelectedOrder, i_o ) + p_WebUIGNTDuration( ep_lineSelectedOrder, i_o )              )     )    )    );
+										if ep_overlappingOrer then
+											! If there is an overlapping order, then move the selected order to the end of the overlapping order (and continue to check for another overlap).
+											p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) := p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_overlappingOrer ) + p_WebUIGNTDuration( ep_lineSelectedOrder, ep_overlappingOrer );
+										else
+											break ; ! repeat loop.
+										endif ;
+									endrepeat ;
+									ep_orderStartDate( ep_selectedOrder ) := 
+										MomentToTimeSlot(
+											Calendar      :  HourCalendar, 
+											ReferenceDate :  startHour, 
+											Elapsed       :  p_WebUIGNTStartTime(ep_lineSelectedOrder, ep_selectedOrder) - timeZoneOffsetNeededForWebUIGanttCharts );
+								endif ;
 							endif ;
+						}
+						Comment: {
+							"Moves the selected manually scheduled job to the front of the queue for the line it is on.
+							It should not overlap with existing manually scheduled jobs!"
+						}
+						ElementParameter ep_lineSelectedOrder {
+							Range: S_AvailableLines;
+						}
+						ElementParameter ep_overlappingOrer {
+							Range: S_OrderNumbers;
 						}
 					}
 					Procedure pr_delayUntilDeadline;
 					Procedure pr_scheduleByLivingCreature {
 						Body: {
 							if ep_selectedOrder then
-								bp_orderScheduledByHuman( ep_selectedOrder ) := 1 ;
+								bp_orderScheduledByLivingCreature( ep_selectedOrder ) := 1 ;
 							endif ;
 						}
 					}
 					Procedure pr_scheduleByOptimizationAlgorithm {
 						Body: {
 							if ep_selectedOrder then
-								bp_orderScheduledByHuman( ep_selectedOrder ) := 0 ;
+								bp_orderScheduledByLivingCreature( ep_selectedOrder ) := 0 ;
 							endif ;
 						}
 					}
@@ -1007,7 +1072,7 @@ Model Main_Watch_WebUI_Widgets {
 					StringParameter WebUIGNTDuration_anno {
 						IndexDomain: (i_al,i_o)|p_WebUIGNTDuration(i_al,i_o);
 						Definition: {
-							if bp_orderScheduledByHuman(i_o) then
+							if bp_orderScheduledByLivingCreature(i_o) then
 								"manualJob"
 							else
 								"freeJob"
@@ -1097,32 +1162,32 @@ Model Main_Watch_WebUI_Widgets {
 				DeclarationSection WebUI_Order_Info_Identifiers {
 					Parameter BP_D_OrderScheduledManuallyUsable {
 						IndexDomain: i_o;
-						Definition: bp_orderScheduledByHuman(i_o) and ep_orderStartDate(i_o) and ep_orderProductionLine(i_o);
+						Definition: bp_orderScheduledByLivingCreature(i_o) and ep_orderStartDate(i_o) and ep_orderProductionLine(i_o);
 					}
 				}
-				Procedure PrepWebUIGanttChartIdentifiers {
+				Procedure pr_prepWebUIGanttChartIdentifiers {
 					Body: {
-						empty p_WebUIGNTStartTime ;
+						p_WebUIGNTStartTime(i_al, i_o)|(not bp_orderScheduledByLivingCreature(i_o)) := 0;
 						
-						p_WebUIGNTStartTime(i_al, i_o)|startTimeActivity(i_al, i_o) :=
+						p_WebUIGNTStartTime(i_al, i_o)|(ep_startTimeActivity(i_al, i_o) and (not bp_orderScheduledByLivingCreature(i_o))):=
 							TimeslotToMoment(
 								Calendar      :  HourCalendar,
 								ReferenceDate :  startHour,
-								Timeslot      :  startTimeActivity(i_al, i_o)) + timeZoneOffsetNeededForWebUIGanttCharts ;
+								Timeslot      :  ep_startTimeActivity(i_al, i_o)) + timeZoneOffsetNeededForWebUIGanttCharts ;
 						p_hist_WebUIGNTStartTime(i_al, i_o) := p_WebUIGNTStartTime(i_al, i_o);
 						
-						p_WebUIGNTDuration(i_al, i_o) := durationActivity(i_al, i_o);
+						p_WebUIGNTDuration(i_al, i_o)|(not bp_orderScheduledByLivingCreature(i_o)) := p_durationActivity(i_al, i_o);
 						
 						!CurrentInputs -= data { 'p_WebUIGNTDuration' } ;
 						
-						PrepWebUIOrderInfoFromSolution();
+						pr_prepWebUIOrderInfoFromSolution();
 					}
 				}
-				Procedure PrepWebUIOrderInfoFromSolution {
+				Procedure pr_prepWebUIOrderInfoFromSolution {
 					Body: {
 						for i_al do 
-							ep_orderStartDate(i_o) | startTimeActivity(i_al, i_o)      := startTimeActivity(i_al, i_o);
-							ep_orderProductionLine(i_o) | startTimeActivity(i_al, i_o) := i_al ;
+							ep_orderStartDate(     i_o) | (ep_startTimeActivity(i_al, i_o) and (not bp_orderScheduledByLivingCreature(i_o))) := ep_startTimeActivity(i_al, i_o);
+							ep_orderProductionLine(i_o) | (ep_startTimeActivity(i_al, i_o) and (not bp_orderScheduledByLivingCreature(i_o))) := i_al ;
 						endfor ;
 					}
 				}
@@ -1165,20 +1230,20 @@ Model Main_Watch_WebUI_Widgets {
 							   endif ;	   
 						p_WebUIGNTDuration(i_al, i_o) | BP_D_OrderScheduledManuallyUsable(i_o)  				 
 							:= if i_al = ep_orderProductionLine(i_o) then 
-								ActivityLength(i_al, i_o)
+								p_ActivityLength(i_al, i_o)
 							   else
 							   	0
 							   endif ;
 						
-						startTimeActivity(i_al, i_o) | BP_D_OrderScheduledManuallyUsable(i_o)  				 
+						ep_startTimeActivity(i_al, i_o) | BP_D_OrderScheduledManuallyUsable(i_o)  				 
 							:= if i_al = ep_orderProductionLine(i_o) then 
 								ep_orderStartDate(i_o)
 							   else
 							   	startHour
 							   endif ;
-						durationActivity(i_al, i_o) | BP_D_OrderScheduledManuallyUsable(i_o)  				 
+						p_durationActivity(i_al, i_o) | BP_D_OrderScheduledManuallyUsable(i_o)  				 
 							:= if i_al = ep_orderProductionLine(i_o) then 
-								ActivityLength(i_al, i_o)
+								p_ActivityLength(i_al, i_o)
 							   else
 							   	0
 							   endif ;
@@ -1196,7 +1261,7 @@ Model Main_Watch_WebUI_Widgets {
 				Parameter time_limit_in_seconds {
 					InitialData: 60;
 				}
-				Parameter ActivityLength {
+				Parameter p_ActivityLength {
 					IndexDomain: (i_al,i_o);
 					Unit: hour;
 					Definition: Ceil( P_OrderQuantity(i_o) / P_Capac(i_al, EP_ProductType( EP_OrderProduct( i_o ) ) ) );
@@ -1204,7 +1269,7 @@ Model Main_Watch_WebUI_Widgets {
 				Parameter ActivityLengthM1 {
 					IndexDomain: (i_al,i_o);
 					Unit: hour;
-					Definition: ActivityLength(i_al, i_o)-1[hour];
+					Definition: p_ActivityLength(i_al, i_o)-1[hour];
 				}
 				Parameter InterruptFlag {
 					InitialData: 0;
@@ -1217,34 +1282,32 @@ Model Main_Watch_WebUI_Widgets {
 				}
 			}
 			Section Mixed_Integer_Programming_Scheduling_Model {
-				Procedure SolveMixedIntegerProgrammingProblem {
+				Procedure pr_SolveMixedIntegerProgrammingProblem {
 					Body: {
 						
 						ep_StartNoOverlap(i_al, i_o, i_hc) := i_hc-ActivityLengthM1(i_al, i_o)/1[hour]  ;
 						ep_StartNoOverlap(i_al, i_o, i_hc) | ( ep_StartNoOverlap(i_al, i_o, i_hc) = '' ) := startHour ;
 						
-						!MachineSchedulingMixedIntegerProgrammingFormulation.CallbackNewIncumbent := 'MIP_incumbentCallback' ;
-						!MachineSchedulingMixedIntegerProgrammingFormulation.CallbackTime         := 'MIP_TimeCallback' ;
 						if pro::PROEndPoint then
 							pro::ManagedSessionInputCaseIdentifierSet :=
 								AllMathematicalPrograms +
-								AllMixedIntegerProgrammingVariables +
-								AllMixedIntegerProgrammingConstraints +
-								ReferencedIdentifiers( AllMixedIntegerProgrammingVariables, AllAttributeNames, 1) +
-								ReferencedIdentifiers( AllMixedIntegerProgrammingConstraints, AllAttributeNames, 1) ;
+								s_allMixedIntegerProgrammingVariables +
+								s_allMixedIntegerProgrammingConstraints +
+								ReferencedIdentifiers( s_allMixedIntegerProgrammingVariables, AllAttributeNames, 1) +
+								ReferencedIdentifiers( s_allMixedIntegerProgrammingConstraints, AllAttributeNames, 1) ;
 							DelegateSolveMixedIntegerProgrammingProblem();
 						else
-							WorkSolveMixedIntegerProgrammingProblem();
+							pr_workSolveMixedIntegerProgrammingProblem();
 						endif ;
 						
 						! Remove small values (noise) from CPLEX/MIP solution
-						SelectProcutionLine(i_al, i_o) | ( SelectProcutionLine(i_al, i_o) and ( abs( SelectProcutionLine(i_al, i_o) <= 0.1 ) ) ) := 0 ;
-						StartProductionOnProductionLine(i_al,i_o,i_hc) | ( StartProductionOnProductionLine(i_al,i_o,i_hc) and
-						   ( abs( StartProductionOnProductionLine(i_al,i_o,i_hc) ) <= 0.1 ) ) := 0 ;
+						v_selectProcutionLine(i_al, i_o) | ( v_selectProcutionLine(i_al, i_o) and ( abs( v_selectProcutionLine(i_al, i_o) <= 0.1 ) ) ) := 0 ;
+						v_startProductionOnProductionLine(i_al,i_o,i_hc) | ( v_startProductionOnProductionLine(i_al,i_o,i_hc) and
+						   ( abs( v_startProductionOnProductionLine(i_al,i_o,i_hc) ) <= 0.1 ) ) := 0 ;
 						
 						ComputeMakeSpan;
 						
-						PrepGanttChartIdentifiersFromMIPSolution ;
+						pr_PrepGanttChartIdentifiersFromMIPSolution ;
 					}
 				}
 				Procedure DelegateSolveMixedIntegerProgrammingProblem {
@@ -1254,55 +1317,37 @@ Model Main_Watch_WebUI_Widgets {
 								waitForCompletion:1) then
 							return ;
 						endif ;
-						WorkSolveMixedIntegerProgrammingProblem();
-						pro::ManagedSessionOutputCaseIdentifierSet := AllMixedIntegerProgrammingVariables ;
+						pr_workSolveMixedIntegerProgrammingProblem();
+						pro::ManagedSessionOutputCaseIdentifierSet := s_allMixedIntegerProgrammingVariables ;
 					}
 				}
-				Procedure WorkSolveMixedIntegerProgrammingProblem {
+				Procedure pr_workSolveMixedIntegerProgrammingProblem {
 					Body: {
-						!MachineSchedulingMixedIntegerProgrammingFormulation.CallbackNewIncumbent := 'MIP_incumbentCallback' ;
-						!MachineSchedulingMixedIntegerProgrammingFormulation.CallbackTime         := 'MIP_TimeCallback' ;
-						solve MachineSchedulingMixedIntegerProgrammingFormulation ; !  where time_limit := time_limit_in_seconds ;
+						solve mp_machineSchedulingMixedIntegerProgrammingFormulation ; !  where time_limit := time_limit_in_seconds ;
 					}
 				}
-				Procedure MIP_incumbentCallback {
-					Body: {
-						RetrieveCurrentVariableValues(AllMixedIntegerProgrammingVariables) ;
-						ComputeMakeSpan;
-						PrepGanttChartIdentifiersFromMIPSolution ;
-						PageRefreshAll ;
-						if InterruptFlag then
-							MachineSchedulingMixedIntegerProgrammingFormulation.CallbackReturnStatus := 'abort';
-						endif ;
-					}
-				}
-				Procedure MIP_TimeCallback {
-					Body: {
-						if InterruptFlag then
-							MachineSchedulingMixedIntegerProgrammingFormulation.CallbackReturnStatus := 'abort';
-						endif ;
-					}
-				}
-				Procedure PrepGanttChartIdentifiersFromMIPSolution {
+				Procedure pr_PrepGanttChartIdentifiersFromMIPSolution {
 					Body: {
 						! For WinUI
-						empty durationActivity, startTimeActivity ;
-						for (i_al, i_o) | SelectProcutionLine(i_al, i_o) do
-							for i_hc | StartProductionOnProductionLine(i_al, i_o, i_hc) do
-								startTimeActivity(i_al, i_o) :=  i_hc ;
+						!empty durationActivity, startTimeActivity ;
+						p_durationActivity( ( i_al, i_o) | not bp_orderScheduledByLivingCreature( i_o ) ) := 0 ;
+						ep_startTimeActivity( ( i_al, i_o) | not bp_orderScheduledByLivingCreature( i_o ) ) := '' ;
+						for (i_al, i_o) | ( v_selectProcutionLine(i_al, i_o) and ( not bp_orderScheduledByLivingCreature( i_o ) ) ) do
+							for i_hc | v_startProductionOnProductionLine(i_al, i_o, i_hc) do
+								ep_startTimeActivity(i_al, i_o) :=  i_hc ;
 							endfor ;
-							durationActivity(i_al, i_o) := ActivityLength(i_al, i_o);
+							p_durationActivity(i_al, i_o) := p_ActivityLength(i_al, i_o);
 						endfor ;
 						
 						! For WebUI
-						PrepWebUIGanttChartIdentifiers ;
+						pr_prepWebUIGanttChartIdentifiers ;
 					}
 				}
 				Procedure ComputeMakeSpan {
 					Body: {
 						empty ep_jobends ;
-						for (i_al,i_o,i_hc) | StartProductionOnProductionLine(i_al,i_o,i_hc) do
-							ep_jobEnds(i_al,i_o) := i_hc + ActivityLength(i_al, i_o)/1[hour];
+						for (i_al,i_o,i_hc) | v_startProductionOnProductionLine(i_al,i_o,i_hc) do
+							ep_jobEnds(i_al,i_o) := i_hc + p_ActivityLength(i_al, i_o)/1[hour];
 						endfor ;
 						ep_LineEnds(i_al) := max( i_o, ep_jobends( i_al, i_o) );
 						
@@ -1327,11 +1372,11 @@ Model Main_Watch_WebUI_Widgets {
 						IndexDomain: i_al;
 						Range: HourCalendar;
 					}
-					Parameter pureFormulation {
+					Parameter bp_pureFormulation {
 						Range: binary;
 						InitialData: 0;
 					}
-					Parameter domStartProductionProductionLine {
+					Parameter bp_domStartProductionProductionLine {
 						IndexDomain: (i_al,i_o,i_hc);
 						Definition: {
 							1 $ ( ( ( i_hc + ActivityLengthM1(i_al, i_o)/1[hour] ) <= EP_OrderDeliveryDate(i_o) ) or 
@@ -1340,100 +1385,100 @@ Model Main_Watch_WebUI_Widgets {
 					}
 				}
 				DeclarationSection MIP_scheduling_declarations {
-					Variable obj {
+					Variable v_obj {
 						Range: free;
 						Unit: hour;
 						Comment: "sum( i_al,  LineTotalSpan(i_al) )";
 					}
-					Constraint objDef {
-						IndexDomain: | ( not pureFormulation );
+					Constraint c_objDef {
+						IndexDomain: | ( not bp_pureFormulation );
 						Unit: hour;
 						Definition: {
-							obj = sum( ( i_al, i_o, i_hc), 
-							     CostOfStartingOrder(i_al, i_o, i_hc) )
+							v_obj = sum( ( i_al, i_o, i_hc), 
+							     v_costOfStartingOrder(i_al, i_o, i_hc) )
 						}
 					}
-					Variable SelectProcutionLine {
+					Variable v_selectProcutionLine {
 						IndexDomain: (i_al,i_o);
 						Range: binary;
 						Comment: "For every order i_o select precisely one production line i_al";
 					}
-					Variable LineTotalSpan {
-						IndexDomain: i_al | pureFormulation;
+					Variable v_lineTotalSpan {
+						IndexDomain: i_al | bp_pureFormulation;
 						Range: free;
 						Unit: hour;
-						Definition: sum( ( i_o, i_hc), CostOfStartingOrder(i_al, i_o, i_hc) );
+						Definition: sum( ( i_o, i_hc), v_costOfStartingOrder(i_al, i_o, i_hc) );
 					}
-					Variable StartProductionOnProductionLine {
-						IndexDomain: (i_al, i_o, i_hc) | domStartProductionProductionLine(i_al, i_o, i_hc);
+					Variable v_startProductionOnProductionLine {
+						IndexDomain: (i_al, i_o, i_hc) | bp_domStartProductionProductionLine(i_al, i_o, i_hc);
 						Range: binary;
 					}
-					Variable CostOfStartingOrder {
-						IndexDomain: (i_al,i_o,i_hc) | domStartProductionProductionLine(i_al, i_o, i_hc);
+					Variable v_costOfStartingOrder {
+						IndexDomain: (i_al,i_o,i_hc) | bp_domStartProductionProductionLine(i_al, i_o, i_hc);
 						Range: free;
 						Unit: hour;
-						Definition: ((ord(i_hc))[hour]+ActivityLength(i_al, i_o))  * StartProductionOnProductionLine(i_al, i_o, i_hc);
+						Definition: ((ord(i_hc))[hour]+p_ActivityLength(i_al, i_o))  * v_startProductionOnProductionLine(i_al, i_o, i_hc);
 					}
-					Constraint EnsureAnOrderIsHandledOnOneProductionLineOnly {
+					Constraint c_ensureAnOrderIsHandledOnOneProductionLineOnly {
 						IndexDomain: i_o;
-						Definition: sum( i_al, SelectProcutionLine(i_al, i_o) ) = 1;
+						Definition: sum( i_al, v_selectProcutionLine(i_al, i_o) ) = 1;
 					}
-					Constraint EnsureEachOrderIsStartedOnlyOnce {
+					Constraint c_ensureEachOrderIsStartedOnlyOnce {
 						IndexDomain: (i_al,i_o);
 						Definition: {
-							sum( i_hc, StartProductionOnProductionLine(i_al, i_o, i_hc) ) = 
-							     SelectProcutionLine(i_al, i_o)
+							sum( i_hc, v_startProductionOnProductionLine(i_al, i_o, i_hc) ) = 
+							     v_selectProcutionLine(i_al, i_o)
 						}
 					}
-					Constraint EnsureThereIsNoOverlapOnAnyLine {
+					Constraint c_ensureThereIsNoOverlapOnAnyLine {
 						IndexDomain: (i_al,i_hc);
 						Definition: {
 							sum((i_o,i_hc1)| 
 							      (ep_StartNoOverlap(i_al, i_o, i_hc)<=i_hc1) and 
 							      (i_hc1<=i_hc), 
-							  StartProductionOnProductionLine(i_al, i_o, i_hc1)) 
+							  v_startProductionOnProductionLine(i_al, i_o, i_hc1)) 
 							  <=1
 						}
 					}
-					Constraint MIPListenToManualScheduling {
+					Constraint c_MIPListenToManualScheduling {
 						IndexDomain: i_o | BP_D_OrderScheduledManuallyUsable(i_o);
 						Definition: {
-							StartProductionOnProductionLine( 
+							v_startProductionOnProductionLine( 
 							     ep_orderProductionLine(i_o), i_o, 
 							     ep_orderStartDate(i_o) ) = 1
 						}
 					}
-					Constraint JobsEndBeforemakespan {
-						IndexDomain: i_al | pureFormulation;
+					Constraint c_JobsEndBeforemakespan {
+						IndexDomain: i_al | bp_pureFormulation;
 						Unit: hour;
-						Definition: LineTotalSpan(i_al) <= obj;
+						Definition: v_lineTotalSpan(i_al) <= v_obj;
 					}
 				}
 				DeclarationSection Mixed_Integer_Programming_Administration_Declarations {
-					Set AllMixedIntegerProgrammingVariables {
+					Set s_allMixedIntegerProgrammingVariables {
 						SubsetOf: AllVariables;
 						Definition: ( Mixed_Integer_Programming_Scheduling_Model   ) * AllVariables;
 					}
-					Set AllMixedIntegerProgrammingConstraints {
+					Set s_allMixedIntegerProgrammingConstraints {
 						SubsetOf: AllConstraints;
 						Definition: ( Mixed_Integer_Programming_Scheduling_Model   ) * AllConstraints;
 					}
-					MathematicalProgram MachineSchedulingMixedIntegerProgrammingFormulation {
-						Objective: obj;
+					MathematicalProgram mp_machineSchedulingMixedIntegerProgrammingFormulation {
+						Objective: v_obj;
 						Direction: minimize;
-						Constraints: AllMixedIntegerProgrammingConstraints;
-						Variables: AllMixedIntegerProgrammingVariables;
+						Constraints: s_allMixedIntegerProgrammingConstraints;
+						Variables: s_allMixedIntegerProgrammingVariables;
 						Type: Automatic;
 					}
 				}
 			}
 		}
 		Section Section_1 {
-			ElementParameter startTimeActivity {
+			ElementParameter ep_startTimeActivity {
 				IndexDomain: (i_al,i_o);
 				Range: HourCalendar;
 			}
-			Parameter durationActivity {
+			Parameter p_durationActivity {
 				IndexDomain: (i_al,i_o);
 				Unit: hour;
 			}
@@ -1446,7 +1491,7 @@ Model Main_Watch_WebUI_Widgets {
 					! Read from file "Example1 5 machines 50 orders.txt" ;
 					Read from file "Example2 3 machines 15 orders.txt" ;
 					!read from file "MachineConfig.txt"
-					bp_orderScheduledByHuman(i_o) := 0 ;
+					bp_orderScheduledByLivingCreature(i_o) := 0 ;
 					
 					!Empty EP_OrderStartDate, EP_OrderProductionLine;
 				}
