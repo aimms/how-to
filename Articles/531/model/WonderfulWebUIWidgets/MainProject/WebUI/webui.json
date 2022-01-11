@@ -68,6 +68,12 @@
                     "children": []
                   }
                 ]
+              },
+              {
+                "name": "Development Support",
+                "type": "pagev2-grid",
+                "slug": "development_support",
+                "children": []
               }
             ]
           }
@@ -100,6 +106,9 @@
     },
     "theme.classic": {
       "literal": "NOT_ALLOWED"
+    },
+    "ui.editable": {
+      "literal": 0
     },
     "workflows.configuration": {
       "aimms": {
@@ -188,6 +197,36 @@
       "literal": "Layout1 Copy"
     }
   },
+  "pages/development_support": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "textGantChartStory",
+          "gridArea": "Unassigned widgets",
+          "dndId": "area-btextGantChartStory0"
+        },
+        {
+          "widgetUri": "DevelopmentSupportScalars",
+          "gridArea": "area-a",
+          "dndId": "area-aDevelopmentSupportScalars1"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout1"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "DevelopmentSupportScalars",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
   "pages/gantt": {
     "aimms.widget.type": {
       "literal": "pagev2-grid"
@@ -243,6 +282,30 @@
         ]
       }
     },
+    "sidepanels": {
+      "aimms": {
+        "contents": [
+          "sp_ganttChartSidePanel"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_ganttChartSidePanel",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexSidePanelSpec",
+                "type": "free",
+                "value": "webui::indexSidePanelSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "widgets": {
       "literal": [
         {
@@ -255,6 +318,39 @@
         },
         {
           "uri": "selectedOrder",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/gantt-config-panel": {
+    "widgets": {
+      "literal": []
+    },
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    }
+  },
+  "pages/gantt-explain-panel": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "textGantChartStory",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetstextGantChartStory0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "textGantChartStory",
           "layoutInfo": {}
         }
       ]
@@ -448,6 +544,21 @@
       ]
     }
   },
+  "widgets/DevelopmentSupportScalars": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "bp_developmentSupport"
+        ]
+      }
+    },
+    "name": {
+      "literal": "DevelopmentSupportScalars"
+    }
+  },
   "widgets/ganttDemo": {
     "aimms.widget.type": {
       "literal": "ganttchart"
@@ -512,12 +623,19 @@
     "time.reference": {
       "aimms": {
         "contents": [
-          "begHourCal"
+          "sp_begHourCal"
         ]
       }
     },
     "time.resolution": {
       "literal": 1
+    },
+    "time.viewport.start": {
+      "aimms": {
+        "contents": [
+          "sp_begHourCal"
+        ]
+      }
     },
     "timezone": {
       "aimms": {
@@ -622,76 +740,15 @@
     },
     "contents": {
       "aimms": {
-        "slices": [
-          {
-            "identifier": "EP_OrderProduct",
-            "slice": [
-              {
-                "index": "i_o",
-                "type": "element-parameter",
-                "value": "ep_selectedOrder"
-              }
-            ]
-          },
-          {
-            "identifier": "EP_OrderProductType",
-            "slice": [
-              {
-                "index": "i_o",
-                "type": "element-parameter",
-                "value": "ep_selectedOrder"
-              }
-            ]
-          },
-          {
-            "identifier": "EP_OrderDeliveryDate",
-            "slice": [
-              {
-                "index": "i_o",
-                "type": "element-parameter",
-                "value": "ep_selectedOrder"
-              }
-            ]
-          },
-          {
-            "identifier": "P_OrderQuantity",
-            "slice": [
-              {
-                "index": "i_o",
-                "type": "element-parameter",
-                "value": "ep_selectedOrder"
-              }
-            ]
-          },
-          {
-            "identifier": "ep_orderStartDate",
-            "slice": [
-              {
-                "index": "i_o",
-                "type": "element-parameter",
-                "value": "ep_selectedOrder"
-              }
-            ]
-          },
-          {
-            "identifier": "ep_orderProductionLine",
-            "slice": [
-              {
-                "index": "i_o",
-                "type": "element-parameter",
-                "value": "ep_selectedOrder"
-              }
-            ]
-          }
-        ],
         "contents": [
-          "EP_OrderProduct",
-          "bp_orderScheduledByLivingCreature",
-          "EP_OrderProductType",
-          "EP_OrderDeliveryDate",
-          "P_OrderQuantity",
-          "ep_orderStartDate",
-          "ep_orderProductionLine"
+          "ep_dpProduct",
+          "ep_dpProductType",
+          "p_dpAmount",
+          "p_dpOderLength",
+          "ep_dpProductionStart",
+          "ep_dpDueDate",
+          "ep_dpProductionLine",
+          "bp_dpManuallyScheduled"
         ]
       }
     },
@@ -699,10 +756,13 @@
       "literal": {
         "bp_orderscheduledbylivingcreature": "1",
         "ep_orderproducttype": "1",
-        "ep_orderdeliverydate": "1",
+        "ep_orderdeliveryduedate": "1",
         "p_orderquantity": "1",
         "ep_orderstartdate": "1",
-        "ep_orderproductionline": "1"
+        "ep_orderproductionline": "1",
+        "p_dpamount": "bp_showAmount",
+        "p_dpoderlength": "bp_showOrderLength",
+        "ep_dpduedate": "bp_showAmount"
       }
     },
     "contents.numdecimals": {
@@ -1040,14 +1100,15 @@
       "aimms": {
         "contents": [
           "bp_orderScheduledByLivingCreature",
-          "EP_OrderProduct",
-          "EP_OrderProductType",
-          "P_OrderQuantity",
-          "EP_OrderDeliveryDate",
+          "ep_orderProduct",
+          "ep_orderProductType",
+          "p_orderQuantity",
+          "p_orderLength",
+          "ep_orderDeliveryDueDate",
           "ep_orderStartDate",
           "ep_orderProductionLine",
           "p_d_startHour",
-          "p_d_duration"
+          "p_d_deadlineHour"
         ]
       }
     },
@@ -1059,7 +1120,13 @@
         "p_d_orderquantity": "1",
         "bp_orderscheduledbylivingcreature": "1",
         "ep_orderproductionline": "1",
-        "ep_orderstartdate": "1"
+        "ep_orderstartdate": "1",
+        "p_d_deadlinehour": "bp_developmentSupport",
+        "p_d_duration": "bp_developmentSupport",
+        "p_d_starthour": "bp_developmentSupport",
+        "p_orderlength": "1",
+        "p_orderquantity": "bp_orderScheduledByOptimizationAlgorithm",
+        "ep_orderdeliveryduedate": "bp_orderScheduledByOptimizationAlgorithm"
       }
     },
     "contents.numdecimals": {
@@ -1074,6 +1141,35 @@
           "<IDENTIFIER-SET>"
         ],
         "aggregated": []
+      }
+    },
+    "contextmenu": {
+      "aimms": {
+        "contents": [
+          "sp_ganttItemActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_ganttItemActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetItemActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetItemActionSpec"
+              },
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
       }
     },
     "custom.column.widths": {
@@ -1153,19 +1249,50 @@
           "colKey": {
             "<IDENTIFIER-SET>": "p_d_startHour"
           },
-          "width": 16.45
+          "width": 22.54
         },
         {
           "type": "colHeader",
           "colKey": {
             "<IDENTIFIER-SET>": "p_d_duration"
           },
-          "width": 18.54
+          "width": 20.43
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_d_deadlineHour"
+          },
+          "width": 23.97
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "ep_orderDeliveryDueDate"
+          },
+          "width": 18.95
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_orderLength"
+          },
+          "width": 12.05
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "ep_orderProductType"
+          },
+          "width": 20.29
         }
       ]
     },
     "name": {
       "literal": "orderDetails"
+    },
+    "show.units": {
+      "literal": 0
     },
     "store.focus.in": {
       "literal": {
@@ -1230,12 +1357,23 @@
       "literal": "selectedOrder"
     }
   },
+  "widgets/textGantChartStory": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div><span style=\"font-size: 18px;\">Gantt Chart Story</span></div><div><br></div><div>Scheduling tasks is often a collaboration between a humansand an optimization algorithm.</div><div><br></div><div>By pressing the PacMan the optimization algorithm will schedule the tasks it is allowed to schedule (those with a green border).</div><div><br></div><div>By pressing the ..a new task is created; either an order to make or maintenance task.</div><div><br></div><div>Can you create and schedule a maintenance task for each of the three machines taking two hours each, not overlapping, but on the same day?</div>"
+    },
+    "name": {
+      "literal": "textGantChartStory"
+    }
+  },
   "widgets/WelcomeText": {
     "aimms.widget.type": {
       "literal": "text"
     },
     "contents": {
-      "literal": "<div><span style=\"font-size: 32px;\">Welcome to the Watch WebUI Widgets app.</span></div><div><br></div><div>This app illustrates various features of selected Widgets.</div><div>Each page focuses on a single widget type, but other widgets may be shown to support that illustration.</div><div><br></div><div>The first page is about the map widget.</div><div><br></div><div><br></div><div><br></div><div><br></div><div><span style=\"font-size: 32px;\">Wonderful WebUI Widgets World Watch</span></div>"
+      "literal": "<div><span style=\"font-size: 32px;\">Welcome to the Wonderful WebUI Widgets app.</span></div><div><br></div><div>This app illustrates various features of selected Widgets.</div><div>Each page focuses on a single widget type, but other widgets may be shown to support that illustration.</div><div><br></div><div>The first page is about the map widget.</div><div><br></div><div><br></div><div><br></div><div><br></div><div><span style=\"font-size: 32px;\">Wonderful WebUI Widgets</span></div>"
     },
     "name": {
       "literal": "WelcomeText"

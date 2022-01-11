@@ -3,6 +3,7 @@ rounding_compatibility Aimms_3_7
 use_UTC_forCaseAndStartEndDate 1
 * AOA
 * BARON 21
+* CBC 2.9
 * CONOPT 4.0
 * CONOPT 4.1
 * CPLEX 12.10
@@ -23,6 +24,6 @@ use_UTC_forCaseAndStartEndDate 1
 * XA 16
 * NETSOL
 * Environment
-Project_Title "Watch WebUI Widgets"
+Project_Title "Wonderful WebUI Widgets"
 Default_UI 0
 Open_WebUI_on_Startup 1

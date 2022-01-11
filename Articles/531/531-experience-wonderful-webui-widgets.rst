@@ -1,7 +1,7 @@
-Watch Wonderful WebUI Widgets
-==============================
+Experience Wonderful WebUI Widgets
+=======================================
 
-This article briefly documents the pages of the :download:`Watch WebUI Widgets <model/WatchWebUIWidgets.zip>` app. 
+This article briefly documents the pages of the :download:`Watch WebUI Widgets <model/WonderfulWebUIWidgets.zip>` app. 
 
 .. simplemaps references: 
 .. https://simplemaps.com/data/world-cities
