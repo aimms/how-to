@@ -101,6 +101,13 @@ Using the DEX, this same procedure can be shortened to using only three methods.
 
 On line 1 we build the newRequest by setting the needed parameters (name of the request, the URL, the callback method and the optional parameter for the responseFile since we want to retrieve a file). An important note to make here is that we need to set up a callback procedure for the response to be stored and processed in. In our example we've simply copied the prototype for ``dex::EmptyCallback`` as it is available in the library, pasted it into our main project and gave it a more logical name. Running the procedure 'pr_dexRequest' will now give the same result as the previously described procedure: Output.xml is placed in the project folder.
 
+In our project the setup looks like this (where procedure Mapping_Import holds the code as in the previous code block):
+
+.. image:: images/dex-with-callback.png
+   :scale: 70
+   :align: center
+
+
 
 
 Retrieving & processing JSON
@@ -221,8 +228,14 @@ Another way to do this is by using the file as a `memory stream <https://documen
 	1
 	);
  
-If you want to use the memory stream that will delete itself after the request however, you will need to place the ``dex::ReadFromFile`` within the created callback procedure. This way you ensure that the request (and the file in the memory stream) still exists at the moment of processing it.
+If you want to use the memory stream that will delete itself after the request however, you will need to place the ``dex::ReadFromFile`` within the created callback procedure. This way you ensure that the request (and the file in the memory stream) still exists at the moment of processing it:
 
+.. image:: images/dex-procedure-in-callback.png
+   :scale: 70
+   :align: center
+
+
+In all these examples you will see that running the procedure Mapping_Import results in the data being mapped to the identifiers as defined in the mapping.
 
 
 .. spelling::
