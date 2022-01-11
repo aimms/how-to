@@ -89,10 +89,16 @@ MIP Problems
 +============+==============================+=======================+
 | CPLEX      | MIP display                  | Display each nth node |
 +------------+------------------------------+-----------------------+
+| ODH-CPLEX  | Status display               | Yes                   |
++------------+------------------------------+-----------------------+
+|            | MIP display                  | Display each nth node |
++------------+------------------------------+-----------------------+
 | GUROBI     | Output file                  | yes                   |
 +------------+------------------------------+-----------------------+
 | CBC        | Status File                  | File                  |
 +------------+------------------------------+-----------------------+
+
+.. note:: For ODH-CPLEX, setting the option ``MIP display`` requires setting the option ``Status display`` to ``Yes``.
 
 NLP Problems
 ++++++++++++
