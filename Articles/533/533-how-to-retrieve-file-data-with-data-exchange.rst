@@ -235,4 +235,5 @@ If you want to use the memory stream that will delete itself after the request h
 	responseFile
 	responsefile
 	dexRequest
+	hashtag
 	
