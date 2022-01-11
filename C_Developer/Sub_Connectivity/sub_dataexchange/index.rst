@@ -15,5 +15,6 @@ These topics help you to use the Data Exchange Library with your AIMMS project.
    :maxdepth: 1
 
    /Articles/528/528-how-to-set-up-data-exchange-basics
+   /Articles/533/533-how-to-retrieve-file-data-with-data-exchange
 
    
