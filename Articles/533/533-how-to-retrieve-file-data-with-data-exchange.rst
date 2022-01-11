@@ -14,9 +14,9 @@ Prerequisites
 
 #. Make sure you have the Data Exchange Library installed and that it is updated to the most recent version. Visit `this article <https://documentation.aimms.com/general-library/getting-started.html>`__ for instructions on how to do this.
 
-#. If you want the full procedure to work, make sure you have the mapping file ready and placed in your project and correctly implemented in the procedure. See this how-to for more instructions. 
+#. If you want the full procedure to work, make sure you have the mapping file ready and placed in your project and correctly implemented in the procedure. See this how-to for more instructions.  
 
-#. Just as a reminder, the data file that we will implement has JSON-formatted data that looks like this:
+#. Just as a reminder, the `data file <https://how-to.aimms.com/_static/simplemaps-worldcities-basic.json>`__ that we will implement has JSON-formatted data that looks like this:
 
 .. code-block:: json
 
@@ -125,7 +125,7 @@ Now that we've seen how to retrieve a file, let's try to retrieve and process th
 	1,
 	);
 
-We have made the JSON-file available :download:`here <download/simplemaps-worldcities-basic.json>` so we can use this URL to access the file directly. The easiest implementation would therefore be to use the direct URL in the ``dex::ReadFromFile``:
+We have made the JSON-file available `here <https://how-to.aimms.com/_static/simplemaps-worldcities-basic.json>`__ so we can use this URL to access the file directly. The easiest implementation would therefore be to use the direct URL in the ``dex::ReadFromFile``:
 
 .. code-block:: aimms
     :linenos:
@@ -137,7 +137,7 @@ We have made the JSON-file available :download:`here <download/simplemaps-worldc
 
 
 	dex::ReadFromFile(
-	"<url comes here>",
+	"https://how-to.aimms.com/_static/simplemaps-worldcities-basic.json",
 	"WorldCitiesMapping",
 	1,
 	1,
@@ -160,7 +160,7 @@ Let's pretend this is not possible or not desirable and we want to retrieve the 
 
 	dex::client::NewRequest(
 	"getFile",
-	"<url comes here>",
+	"https://how-to.aimms.com/_static/simplemaps-worldcities-basic.json",
 	'DEXCallback',
 	responsefile:"Output.json"
 	);
