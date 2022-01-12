@@ -1,0 +1,13 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"sp_Env" "sp_ds_Env" "2021-09-02 13:21:41"
+"sp_Usr" "sp_ds_Usr" "2021-09-02 13:21:47"
+"sp_Bucket" "sp_ds_Bucket" "2021-09-02 13:21:54"
+"sp_UsrGroupNames" "sp_ds_UsrGroupNames" "2021-09-02 13:22:05"
+"s_UsrGroups" "s_ds_UsrGroups" "2021-09-02 13:22:10"
+"Copy_sp_Env" "sp_ss_Env" "2021-09-02 13:22:17"
+"Copy_sp_Usr" "sp_ss_Usr" "2021-09-02 13:22:25"
+"Copy_sp_Bucket" "sp_ss_Bucket" "2021-09-02 13:22:33"
+"Copy_s_UsrGroups" "s_ss_UsrGroups" "2021-09-02 13:22:39"
+"Copy_sp_UsrGroupNames" "sp_ss_UsrGroupNames" "2021-09-02 13:22:46"
+"i_ug" "i_ds_ug" "2021-09-02 13:23:20"
+"Copy_pr_GetUserNameRoles" "pr_SolverSessionGetUserNameRoles" "2021-09-02 13:47:30"

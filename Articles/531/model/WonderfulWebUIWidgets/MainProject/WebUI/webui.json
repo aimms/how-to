@@ -315,10 +315,6 @@
         {
           "uri": "orderDetails",
           "layoutInfo": {}
-        },
-        {
-          "uri": "selectedOrder",
-          "layoutInfo": {}
         }
       ]
     }
@@ -848,10 +844,10 @@
       "literal": true
     },
     "center.latitude": {
-      "literal": 51.18798683903831
+      "literal": 51.04484764446179
     },
     "center.longitude": {
-      "literal": 9.541526172229144
+      "literal": 9.283447265625002
     },
     "contextmenu": {
       "aimms": {
@@ -1015,7 +1011,12 @@
       }
     },
     "title": {
-      "literal": "Demo map widget"
+      "aimms": {
+        "contents": [
+          "sp_mapWidgetTitle"
+        ],
+        "slices": []
+      }
     },
     "widgetactions": {
       "aimms": {
@@ -1362,7 +1363,7 @@
       "literal": "text"
     },
     "contents": {
-      "literal": "<div><span style=\"font-size: 18px;\">Gantt Chart Story</span></div><div><br></div><div>Scheduling tasks is often a collaboration between a humansand an optimization algorithm.</div><div><br></div><div>By pressing the PacMan the optimization algorithm will schedule the tasks it is allowed to schedule (those with a green border).</div><div><br></div><div>By pressing the ..a new task is created; either an order to make or maintenance task.</div><div><br></div><div>Can you create and schedule a maintenance task for each of the three machines taking two hours each, not overlapping, but on the same day?</div>"
+      "literal": "<div>The Levram company operates three production lines, nick named King Kong, Hercules, and Antman.&nbsp; Each production line handles an order as a single task: stopping a task halfway leads to clogging and other problems. Even though all three lines can handle all types of orders, King Kong is more suited to handling orders with large items, Antman is more suited to handling orders with small items, and Hercules is somewhat in between.</div><div><br></div><div>As a production planner, you were notified yesterday by Quality Control that there will be a surprise inspection on 2016-05-10 between 08:00 and 14:00 on all three production lines.&nbsp;They expect each production line to be halted for at least two hours to do the inspection. Of course, Business Development wants the production to be interrupted minimally.</div><div><br></div><div>Hopefully, the Gantt Chart widget will help you in replanning existing orders. </div><div><br></div><div>This widget distinguishes between two types of tasks:</div><div><br></div><div>* Production tasks, where a product type, amount, and Due date are specified.</div><div>* Maintenance tasks (product type none), where a start time, duration, and production line are specified.</div><div><br></div><div>In addition, tasks can be scheduled in two ways:</div><div>* Manually, these tasks have a blue border and can be dragged across the Gantt Chart. In addition, there are more Right Mouse menu actions available for these tasks.</div><div>* By the internal scheduler of the application, which minimizes the  makespan of all tasks. This internal schedular is invoked by clicking Optimize in the lower right menu.</div><div><br></div><div>Upon opening the Gantt Chart page, the existing workload is read in.&nbsp; In addition, you can create new tasks, by selecting the \"new job\" action in the lower right menu.</div>"
     },
     "name": {
       "literal": "textGantChartStory"
@@ -1373,7 +1374,7 @@
       "literal": "text"
     },
     "contents": {
-      "literal": "<div><span style=\"font-size: 32px;\">Welcome to the Wonderful WebUI Widgets app.</span></div><div><br></div><div>This app illustrates various features of selected Widgets.</div><div>Each page focuses on a single widget type, but other widgets may be shown to support that illustration.</div><div><br></div><div>The first page is about the map widget.</div><div><br></div><div><br></div><div><br></div><div><br></div><div><span style=\"font-size: 32px;\">Wonderful WebUI Widgets</span></div>"
+      "literal": "<div><span style=\"font-size: 32px;\">Welcome to Wonderful WebUI Widgets.</span></div><div><br></div><div>AIMMS is designed for interactive optimization applications.</div><div>To let you experience these applications, this application provides some one-page examples.</div><div>Each page has a short story with a question and it is designed to help you answer this question within a few minutes.</div><div>The story can be found in the side panel of that page.</div><div><br></div><div>The first page illustrates the map widget by letting you analyze the supply chain within an organization.</div><div><br></div><div>The second page illustrates the Gantt Chart by letting you plan maintenance tasks on production lines.</div><div><br></div>"
     },
     "name": {
       "literal": "WelcomeText"

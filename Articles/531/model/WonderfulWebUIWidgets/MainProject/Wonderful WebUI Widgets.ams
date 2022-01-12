@@ -221,6 +221,9 @@ Model Main_Wonderful_WebUI_Widgets {
 				Range: binary;
 				Definition: 1 - bp_showConnections;
 			}
+			StringParameter sp_mapWidgetTitle {
+				Definition: "Oxygem network for distilling and bottling oxygen";
+			}
 		}
 		DeclarationSection Data_for_the_map_widget {
 			Set s_locations {
@@ -990,7 +993,7 @@ Model Main_Wonderful_WebUI_Widgets {
 						('1', 'tooltip'     ) : "",
 						('1', 'icon'        ) : "",
 						('1', 'iconcolor'   ) : "",
-						('1', 'state'       ) : "Active",
+						('1', 'state'       ) : "Hidden",
 					
 						('2', 'displayText' ) : "Story",
 						('2', 'pageId'      ) : "gantt-explain-panel",
