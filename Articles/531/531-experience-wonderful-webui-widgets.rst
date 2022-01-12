@@ -60,20 +60,15 @@ Unexpected because there is a significant surplus capacity at their distillation
 
 Can you advise OxyGem management on how to adapt the network to cater for this increased demand?
 
-Operation
-^^^^^^^^^^ 
+To help you answer this question, a map widget is provided.  Its operation is presented below.
+
+Operating the map widget
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The map widgets opens with a network showing the available connections.
 The capacity of the distillation and pumping nodes, and the demand of the bottling nodes is reflected in the size of the corresponding icons.
 
 Your tools are as follows:
-
-#.  **Hovering**: 
-    By hovering over a node, a small table is presented as a tooltip.
-    Which looks, for instance, as follows: 
-
-    .. image:: images/map-widget-tooltip.png
-        :align: center
 
 #.  **The widget actions**:  You can find the hamburger menu in the right upper corner of the map widget:
 
@@ -86,7 +81,14 @@ Your tools are as follows:
 
     #.  Solve: optimize the flows over the existing network.
 
-#.  **The app settings**:
+#.  **Hovering**: 
+    By hovering over a node, a small table is presented as a tooltip.
+    Which looks, for instance, as follows: 
+
+    .. image:: images/map-widget-tooltip.png
+        :align: center
+
+#.  **Control**:
 
     This is a side panel, and in this side panel some configuration parameters of the network can be specified. Notably:
 
@@ -94,7 +96,7 @@ Your tools are as follows:
     
     #.  The production capacity of the distillation units
 
-#.  **The item menus**:
+#.  **The item menu**:
 
 
 In addition, the app auto colors:
