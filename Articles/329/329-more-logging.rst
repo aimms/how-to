@@ -53,7 +53,9 @@ Terminology
 
     .. note:: Levels Trace and Debug can significantly decrease application performance and fill up your disk, and do not provide much use to the modeler. Therefore we don't recommend to enable them unless instructed by AIMMS Staff.
 
-#.  **Appender** There are three ``appenders`` available:
+#.  **Appender** There are four ``appenders`` available:
+
+    #.  to generate output for server sessions and WebUI data session on AIMMS PRO on Premise,
 
     #.  to generate output to AIMMS Cloud,
     

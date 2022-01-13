@@ -855,30 +855,6 @@
     "aimms.widget.type": {
       "literal": "ganttchart"
     },
-    "time.reference": {
-      "aimms": {
-        "contents": [
-          "sp_refTime"
-        ]
-      }
-    },
-    "time.resolution": {
-      "literal": 1
-    },
-    "time.viewport.start": {
-      "aimms": {
-        "contents": [
-          "sp_refTime"
-        ]
-      }
-    },
-    "time.viewport.end": {
-      "aimms": {
-        "contents": [
-          "sp_EndTime"
-        ]
-      }
-    },
     "contents": {
       "aimms": {
         "contents": [
@@ -898,6 +874,43 @@
         ],
         "aggregated": []
       }
+    },
+    "name": {
+      "literal": "GanttChart_Flowshop"
+    },
+    "time.reference": {
+      "aimms": {
+        "contents": [
+          "sp_refTime"
+        ]
+      }
+    },
+    "time.resolution": {
+      "literal": 1
+    },
+    "time.viewport.end": {
+      "aimms": {
+        "contents": [
+          "sp_EndTime"
+        ]
+      }
+    },
+    "time.viewport.start": {
+      "aimms": {
+        "contents": [
+          "sp_refTime"
+        ]
+      }
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Flow shop Gantt Chart"
     },
     "widgetactions": {
       "aimms": {
@@ -922,12 +935,6 @@
           }
         ]
       }
-    },
-    "title": {
-      "literal": "Flow shop Gantt Chart"
-    },
-    "name": {
-      "literal": "GanttChart_Flowshop"
     }
   },
   "widgets/IncidentSummary": {

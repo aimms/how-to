@@ -9,8 +9,22 @@
     -->
 
     <!-- Section 1: Appenders -->
-
     
+    <!-- Use this appender when logging on AIMMS PRO for a solver session, or for a WebUI data session -->
+    <appender class="org.apache.log4j.rolling.RollingFileAppender" name="logfile">
+        <rollingPolicy class="org.apache.log4j.rolling.FixedWindowRollingPolicy">
+            <param value="${AIMMSPRO_DATADIR}/Log/Sessions/%X{projectName}-%X{projectVersion}-%X{startupMode}-%X{timeStamp}-%X{sessionId}-%i.log" name="FileNamePattern"/>
+            <param value="1" name="MinIndex"/>
+            <param value="10" name="MaxIndex"/>
+        </rollingPolicy>
+        <triggeringPolicy class="org.apache.log4j.rolling.SizeBasedTriggeringPolicy">
+            <param value="50MB" name="MaxFileSize"/>
+        </triggeringPolicy>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param value="%d{ISO8601} %t [%p] {%c} %m%n" name="ConversionPattern"/>
+        </layout>           
+    </appender>
+
     <!-- Use this appender when logging on the AIMMS Cloud -->
     <appender name="stdout" class="org.apache.log4j.ConsoleAppender"> 
         <param name="Target" value="System.out"/> 
@@ -45,6 +59,13 @@
         <!--- Tracing entering and leaving AIMMS Procedures.
               * Info: procedure calls outside a loop are logged.
               * Trace: all procedure calls are logged.
+        -->
+        <level value="info"/>
+    </logger>
+    <logger name="AIMMS.Trace.Statement">
+        <!---  
+              * Info: No tracing of statements (default)
+              * Trace: entering/leaving all statements are logged (serious disk filler).
         -->
         <level value="info"/>
     </logger>
@@ -145,12 +166,15 @@
     <root>
         <priority value="info" />
 
+        <!-- Use this appender when logging on AIMMS PRO for a solver session, or for a WebUI data session -->
+        <!-- <appender-ref ref="logfile" /> --> 
+
         <!-- Use this if you want to use your favorite text editor to inspect your log, created using AIMMS Developer -->
-        <!-- <appender-ref ref="MyFileAppender" /> --> 
+        <appender-ref ref="MyFileAppender" />
 
 
         <!-- Use this if you want Log4View to inspect your log, created using AIMMS Developer -->
-        <appender-ref ref="MyXMLFileAppender" /> 
+        <!-- <appender-ref ref="MyXMLFileAppender" />  --> 
 
 
         <!-- Use this for applications published on AIMMS Cloud -->
