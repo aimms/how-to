@@ -844,10 +844,10 @@
       "literal": true
     },
     "center.latitude": {
-      "literal": 51.04484764446179
+      "literal": 51.04139389812637
     },
     "center.longitude": {
-      "literal": 9.283447265625002
+      "literal": 9.294433593750002
     },
     "contextmenu": {
       "aimms": {
@@ -1043,7 +1043,7 @@
       }
     },
     "zoom": {
-      "literal": 7
+      "literal": 6
     }
   },
   "widgets/mapDemoScalars": {

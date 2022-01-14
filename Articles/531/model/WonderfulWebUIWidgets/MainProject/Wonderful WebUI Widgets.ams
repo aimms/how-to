@@ -1010,33 +1010,6 @@ Model Main_Wonderful_WebUI_Widgets {
 			}
 			Section Gantt_Chart_Handling {
 				Section item_actions_gantt_chart {
-					Set s_ganttItemActionIdentifiers {
-						SubsetOf: AllIdentifiers;
-						Definition: {
-							data  {
-								bp_orderScheduledByLivingCreature,
-								ep_orderProduct,
-								p_orderLength,
-								ep_orderProductType,
-								p_orderQuantity,
-								ep_orderDeliveryDueDate,
-								ep_orderProductionLine,
-								ep_orderStartDate,
-								p_WebUIGNTDuration,
-								p_WebUIGNTStartTime
-							}
-						}
-					}
-					StringParameter sp_ganttItemActions {
-						IndexDomain: (webui::indexWidgetItemActionSpec,webui::indexPageExtension,webui::indexWidgetActionSpec);
-						Definition: {
-							if webui::indexWidgetItemActionSpec in s_ganttItemActionIdentifiers then
-								sp_ganttSpecItemActions('p_WebUIGNTDuration', webui::indexPageExtension, webui::indexWidgetActionSpec)
-							else
-								""
-							endif
-						}
-					}
 					StringParameter sp_ganttSpecItemActions {
 						IndexDomain: (webui::indexWidgetItemActionSpec,webui::indexPageExtension,webui::indexWidgetActionSpec);
 						Definition: {
@@ -1078,12 +1051,30 @@ Model Main_Wonderful_WebUI_Widgets {
 							}
 						}
 					}
-					StringParameter sp_scalarWidgetDialogPageTitle {
+					Set s_ganttItemActionIdentifiers {
+						SubsetOf: AllIdentifiers;
 						Definition: {
-							if ep_dpProduct then
-								formatString("Edit order %e", ep_selectedOrder )
+							data  {
+								bp_orderScheduledByLivingCreature,
+								ep_orderProduct,
+								p_orderLength,
+								ep_orderProductType,
+								p_orderQuantity,
+								ep_orderDeliveryDueDate,
+								ep_orderProductionLine,
+								ep_orderStartDate,
+								p_WebUIGNTDuration,
+								p_WebUIGNTStartTime
+							}
+						}
+					}
+					StringParameter sp_ganttItemActions {
+						IndexDomain: (webui::indexWidgetItemActionSpec,webui::indexPageExtension,webui::indexWidgetActionSpec);
+						Definition: {
+							if webui::indexWidgetItemActionSpec in s_ganttItemActionIdentifiers then
+								sp_ganttSpecItemActions('p_WebUIGNTDuration', webui::indexPageExtension, webui::indexWidgetActionSpec)
 							else
-								"Create new order/job"
+								""
 							endif
 						}
 					}
@@ -1449,6 +1440,15 @@ Model Main_Wonderful_WebUI_Widgets {
 					Range: binary;
 					Definition: 1-bp_showAmount;
 				}
+				StringParameter sp_scalarWidgetDialogPageTitle {
+					Definition: {
+						if ep_dpProduct then
+							formatString("Edit order %e", ep_selectedOrder )
+						else
+							"Create new order/job"
+						endif
+					}
+				}
 				Procedure pr_addNewJob {
 					Body: {
 						bp_dpManuallyScheduled := 0 ;
@@ -1673,6 +1673,7 @@ Model Main_Wonderful_WebUI_Widgets {
 					ElementParameter ep_StartNoOverlap {
 						IndexDomain: (i_al,i_o,i_hc);
 						Range: HourCalendar;
+						InitialData: data {};
 					}
 					ElementParameter ep_lineEnds {
 						IndexDomain: i_al;

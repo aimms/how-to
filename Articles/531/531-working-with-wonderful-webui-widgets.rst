@@ -5,7 +5,7 @@
 .. |oxygem-bottling| image:: images/oxygem-bottling.png
 
 
-Experience Wonderful WebUI Widgets
+Working with Wonderful WebUI Widgets
 =======================================
 
 Purpose
@@ -14,10 +14,10 @@ Purpose
 AIMMS is designed for building bespoke interactive optimization applications. 
 To let you experience such an interactive optimization application, 
 the :download:`Wonderful WebUI Widgets <model/WonderfulWebUIWidgets.zip>` application 
-provides some examples whereby optimization helps an end user to do analysis or scheduling.
+provides some examples whereby optimization helps an end-user to do analysis or scheduling.
 Each example takes just a few minutes of your precious time 
 to give you an impression on how an interactive optimization application 
-can support end users, such as analysts or planners, in their activities.
+can support end-users, such as analysts or planners, in their activities.
 
 Feel free to run the ``Wonderful WebUI Widgets`` application 
 using the `AIMMS Community Edition <https://licensing.cloud.aimms.com/license/community.htm>`_.
@@ -33,7 +33,7 @@ Welcome
 
 The Welcome page introduces the ``Wonderful WebUI Widgets`` application 
 and provides an overview of the available pages.
-To the left of that page there is a Workflow allowing you to easily navigate between the examples incorporated.
+To the left of that page, there is a Workflow allowing you to easily navigate between the examples incorporated.
 
 Map
 ---
@@ -41,7 +41,7 @@ Map
 Story
 ^^^^^^^^
 
-OxyGem is a Oxygen distillation and bottling company in Germany.  
+OxyGem is an oxygen distillation and bottling company in Germany.  
 Amongst others, the company provides oxygen tanks for industry (welding), tourism (diving), and health care (breathing).
 There are separate locations for 
 
@@ -53,7 +53,7 @@ There are separate locations for
 
 The distillation and bottling locations are owned, but the pipes and pumps between the locations are rented. 
 
-Its network functioned well for years; usually demand could be met. 
+Its network functioned well for years; usually, demand could be met. 
 Lately, however, due to the corona crisis, the demand for oxygen tanks has significantly grown, and sometimes there is unmet demand. 
 This is a painful and unexpected surprise to management. 
 Unexpected because there is a significant surplus capacity at their distillation locations.
@@ -65,8 +65,8 @@ To help you answer this question, a map widget is provided.  Its operation is pr
 Operating the map widget
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The map widgets opens with a network showing the available connections.
-The capacity of the distillation and pumping nodes, and the demand of the bottling nodes is reflected in the size of the corresponding icons.
+The map widget opens with a network showing the available connections.
+The capacity of the distillation and pumping nodes and the demand of the bottling nodes is reflected in the size of the corresponding icons.
 
 Your tools are as follows:
 
@@ -92,7 +92,7 @@ Your tools are as follows:
 
 #.  **Control**:
 
-    This is a side panel, and in this side panel some configuration parameters of the network can be specified. Notably:
+    This is a side panel, and in this side panel, some configuration parameters of the network can be specified. Notably:
 
     #.  The cost coefficients for unmet demand, production unit capacity, and oxygen transportation
 
@@ -112,7 +112,7 @@ In addition, the app auto colors:
 
 * In red, those bottling stations that do not have enough oxygen to meet demand
 
-* In orange, those pumping and distillation locations that are at their capacity.
+* In orange, those pumping and distillation locations are at their capacity.
 
 .. tip:: You may want to start with optimizing the flow over the given network to identify the existing bottlenecks.
 
@@ -123,7 +123,7 @@ In addition, the app auto colors:
 Gantt
 -----
 
-The Levram company operates three production lines, nick named 
+The Levram company operates three production lines, nicknamed 
 
 #.  King Kong, 
 
@@ -150,6 +150,9 @@ Of course, Business Development wants the production to be interrupted minimally
 Hopefully, the Gantt page will help you in replanning existing orders.
 
 The Gantt Chart page contains a Gantt Chart and a table.
+The jobs that are scheduled by the optimization algorithm have a black border.  
+The jobs that can be dragged to a suited position by a human scheduler have a blue border.
+
 
 #.  **Page actions**: in the lower right there is a menu containing two page actions:
 
@@ -161,8 +164,21 @@ The Gantt Chart page contains a Gantt Chart and a table.
 
     .. image:: images/gantt-widget-tooltip.png
         :align: center
+        
+#.  Clicking left and then right brings up a menu.  
+    Some actions will be greyed, and thereby not available, depending on the properties of the task selected:
 
-The jobs that are scheduled by the optimization algorithm have a black border.  
-The jobs that can be dragged to a suited position by a human scheduler have a blue border.
+    .. image:: images/edit-gantt-menu.png
+        :align: center
 
-
+    #.  Move the task to the first possible position, only applicable to manually scheduled tasks.
+    
+    #.  Move the task to the deadline, only applicable to manually scheduled tasks.
+    
+    #.  Allow order to be scheduled by a living creature.
+    
+    #.  Allow order to be scheduled by an optimization algorithm.
+    
+    #.  Delete the order
+    
+    #.  Open a dialog page to edit the properties of the task.
