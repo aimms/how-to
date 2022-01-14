@@ -121,7 +121,7 @@ There are some remarks regarding the above definition:
 
 #.  It is admittedly lengthy, but having this length and indentation, makes the structure apparent.
 
-#.  Lines 38-61 are part of an if-then-else-endif expression; based on a condition, a row is added to the tooltip table.
+#.  Lines 38-61 are part of an if-then-else expression; based on a condition, a row is added to the tooltip table.
 
 Detail context menu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
@@ -321,3 +321,7 @@ And then we can easily replicate the data of ``sp_ganttSpecItemActions`` for eac
 
 
 Author's note: I really enjoyed creating this small AIMMS application.
+
+.. spelling:: 
+
+    endif

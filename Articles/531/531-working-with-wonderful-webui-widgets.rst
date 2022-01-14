@@ -147,7 +147,7 @@ As a production planner, you were notified yesterday by Quality Control that the
 They expect each production line to be halted for at least two hours to do the inspection. 
 Of course, Business Development wants the production to be interrupted minimally.
 
-Hopefully, the Gantt page will help you in replanning existing orders.
+Hopefully, the Gantt page will help you in planning existing orders.
 
 The Gantt Chart page contains a Gantt Chart and a table.
 The jobs that are scheduled by the optimization algorithm have a black border.  
@@ -174,11 +174,15 @@ The jobs that can be dragged to a suited position by a human scheduler have a bl
     #.  Move the task to the first possible position, only applicable to manually scheduled tasks.
     
     #.  Move the task to the deadline, only applicable to manually scheduled tasks.
-    
+
     #.  Allow order to be scheduled by a living creature.
-    
+
     #.  Allow order to be scheduled by an optimization algorithm.
-    
+
     #.  Delete the order
-    
+
     #.  Open a dialog page to edit the properties of the task.
+
+.. spelling:: 
+
+    greyed
