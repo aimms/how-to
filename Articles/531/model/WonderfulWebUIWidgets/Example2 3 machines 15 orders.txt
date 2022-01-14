@@ -1,4 +1,4 @@
-﻿    sp_begHourCal := "2016-05-09 00:00" ;
+﻿    !sp_begHourCal := "2016-05-09 00:00" ;
 
     p_numberOfDaysInCalendar := 7 ;
 

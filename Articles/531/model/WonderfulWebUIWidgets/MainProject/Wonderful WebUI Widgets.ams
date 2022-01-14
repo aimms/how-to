@@ -774,24 +774,24 @@ Model Main_Wonderful_WebUI_Widgets {
 					Definition: "%c%y-%m-%d %H";
 				}
 				StringParameter sp_begHourCal {
-					InitialData: "2016-05-09 00";
+					Definition: "2016-05-09 00:00";
+				}
+				StringParameter sp_endHourCal {
+					Definition: {
+						!MomentToString(
+						!	Format        :  sp_fmtHourCal,
+						!	unit          :  [hour],
+						!	ReferenceDate :  sp_begHourCal,
+						!	Elapsed       :  (p_numberOfDaysInCalendar*24) [hour]);
+					}
 				}
 			}
 			DeclarationSection Actual_Calendar_declaration {
-				StringParameter endHourCal {
-					Definition: {
-						MomentToString(
-							Format        :  sp_fmtHourCal,
-							unit          :  [hour],
-							ReferenceDate :  sp_begHourCal,
-							Elapsed       :  (p_numberOfDaysInCalendar*24) [hour])
-					}
-				}
 				Calendar HourCalendar {
 					Index: i_hc, i_hc1, i_hc2;
 					Unit: hour;
 					BeginDate: sp_begHourCal;
-					EndDate: endHourCal;
+					EndDate: sp_endHourCal;
 					TimeslotFormat: sp_fmtHourCal;
 				}
 				ElementParameter startHour {
@@ -802,12 +802,9 @@ Model Main_Wonderful_WebUI_Widgets {
 					Range: HourCalendar;
 					Definition: last(HourCalendar);
 				}
-				Parameter timeZoneOffsetNeededForWebUIGanttCharts {
+				Parameter p_timeZoneOffsetNeededForWebUIGanttCharts {
 					Unit: minute;
 					Definition: TimeZoneOffSet( 'UTC', 'LocalDST', UseDST: 1 );
-				}
-				Parameter granulWinUICal {
-					InitialData: 3;
 				}
 			}
 		}
@@ -917,7 +914,7 @@ Model Main_Wonderful_WebUI_Widgets {
 						TimeslotToMoment(
 							Calendar      :  HourCalendar,
 							ReferenceDate :  startHour,
-							Timeslot      :  ep_orderDeliveryDueDate(i_o)) + timeZoneOffsetNeededForWebUIGanttCharts ;
+							Timeslot      :  ep_orderDeliveryDueDate(i_o)) + p_timeZoneOffsetNeededForWebUIGanttCharts ;
 					}
 					Comment: "Only visible when bp_developmentSupport";
 				}
@@ -1088,7 +1085,7 @@ Model Main_Wonderful_WebUI_Widgets {
 							if ep_selectedOrder and bp_orderScheduledByLivingCreature( ep_selectedOrder ) then
 								ep_lineSelectedOrder := first( i_al | p_WebUIGNTStartTime(i_al, ep_selectedOrder) );
 								if ep_lineSelectedOrder then ! otherwise it is already at the front and it doesn't need to be moved.
-									p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) := timeZoneOffsetNeededForWebUIGanttCharts ;
+									p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) := p_timeZoneOffsetNeededForWebUIGanttCharts ;
 									repeat
 										! There is an overlapping order, scheduled by a living creature, if the start of that overlapping order is during the selected order, or if the start of the selected order is during that overlapping order.
 										ep_overlappingOrer := 
@@ -1109,7 +1106,7 @@ Model Main_Wonderful_WebUI_Widgets {
 										MomentToTimeSlot(
 											Calendar      :  HourCalendar, 
 											ReferenceDate :  startHour, 
-											Elapsed       :  p_WebUIGNTStartTime(ep_lineSelectedOrder, ep_selectedOrder) - timeZoneOffsetNeededForWebUIGanttCharts );
+											Elapsed       :  p_WebUIGNTStartTime(ep_lineSelectedOrder, ep_selectedOrder) - p_timeZoneOffsetNeededForWebUIGanttCharts );
 								endif ;
 							endif ;
 						}
@@ -1150,7 +1147,7 @@ Model Main_Wonderful_WebUI_Widgets {
 										MomentToTimeSlot(
 											Calendar      :  HourCalendar, 
 											ReferenceDate :  startHour, 
-											Elapsed       :  p_WebUIGNTStartTime(ep_lineSelectedOrder, ep_selectedOrder) - timeZoneOffsetNeededForWebUIGanttCharts );
+											Elapsed       :  p_WebUIGNTStartTime(ep_lineSelectedOrder, ep_selectedOrder) - p_timeZoneOffsetNeededForWebUIGanttCharts );
 								endif ;
 							endif ;
 						}
@@ -1206,7 +1203,7 @@ Model Main_Wonderful_WebUI_Widgets {
 								MomentToTimeSlot(
 									Calendar      :  HourCalendar, 
 									ReferenceDate :  startHour, 
-									Elapsed       :  p_WebUIGNTStartTime(ep_orderProductionLine( ep_modifiedOrder ), ep_modifiedOrder) - timeZoneOffsetNeededForWebUIGanttCharts );
+									Elapsed       :  p_WebUIGNTStartTime(ep_orderProductionLine( ep_modifiedOrder ), ep_modifiedOrder) - p_timeZoneOffsetNeededForWebUIGanttCharts );
 							ep_startTimeActivity(ep_orderProductionLine( ep_modifiedOrder ), ep_modifiedOrder) := ep_orderStartDate( ep_modifiedOrder ) ;
 						
 						
@@ -1226,7 +1223,7 @@ Model Main_Wonderful_WebUI_Widgets {
 								Format        :  "%c%y-%m-%d %H:00", 
 								unit          :  [hour], 
 								ReferenceDate :  sp_begHourCal, 
-								Elapsed       :  timeZoneOffsetNeededForWebUIGanttCharts)
+								Elapsed       :  p_timeZoneOffsetNeededForWebUIGanttCharts)
 						}
 					}
 					Parameter p_WebUIGNTStartTime {
@@ -1362,7 +1359,7 @@ Model Main_Wonderful_WebUI_Widgets {
 							TimeslotToMoment(
 								Calendar      :  HourCalendar,
 								ReferenceDate :  startHour,
-								Timeslot      :  ep_startTimeActivity(i_al, i_o)) + timeZoneOffsetNeededForWebUIGanttCharts ;
+								Timeslot      :  ep_startTimeActivity(i_al, i_o)) + p_timeZoneOffsetNeededForWebUIGanttCharts ;
 						p_hist_WebUIGNTStartTime(i_al, i_o) := p_WebUIGNTStartTime(i_al, i_o);
 						
 						p_WebUIGNTDuration(i_al, i_o)|(not bp_orderScheduledByLivingCreature(i_o)) := p_durationActivity(i_al, i_o);
@@ -1551,7 +1548,7 @@ Model Main_Wonderful_WebUI_Widgets {
 							TimeslotToMoment(
 								Calendar      :  HourCalendar,
 								ReferenceDate :  startHour,
-								Timeslot      :  ep_dpProductionStart) + timeZoneOffsetNeededForWebUIGanttCharts ;
+								Timeslot      :  ep_dpProductionStart) + p_timeZoneOffsetNeededForWebUIGanttCharts ;
 						
 						p_WebUIGNTDuration(ep_dpProductionLine, ep_job) := p_orderLength(ep_job);
 					}
@@ -1839,6 +1836,13 @@ Model Main_Wonderful_WebUI_Widgets {
 				
 				
 				pr_initContext();
+				
+				sp_endHourCal := ! Should use a definition for sp_endHourCal instead.
+					MomentToString(
+						Format        :  sp_fmtHourCal,
+						unit          :  [hour],
+						ReferenceDate :  sp_begHourCal,
+						Elapsed       :  (p_numberOfDaysInCalendar*24) [hour]);
 			}
 			Comment: {
 				"Add initialization statements here that require that the libraries are already initialized properly,

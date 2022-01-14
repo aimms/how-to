@@ -90,3 +90,5 @@
 "sp_jobComputedReadOnly" "sp_jobComputedReadOnlyFlags" "2022-01-11 16:40:06"
 "Copy_bp_orderScheduledByLivingCreature" "bp_orderScheduledByOptimizationAlgorithm" "2022-01-11 16:46:08"
 "Copy_sp_ganttItemActions" "sp_ganttSpecItemActions" "2022-01-11 17:48:48"
+"endHourCal" "sp_endHourCal" "2022-01-14 17:54:09"
+"timeZoneOffsetNeededForWebUIGanttCharts" "p_timeZoneOffsetNeededForWebUIGanttCharts" "2022-01-14 17:59:50"
