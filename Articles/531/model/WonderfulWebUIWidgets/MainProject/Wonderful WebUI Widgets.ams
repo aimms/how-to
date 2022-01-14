@@ -879,6 +879,10 @@ Model Main_Wonderful_WebUI_Widgets {
 					Range: binary;
 					Definition: 1 - bp_orderScheduledByLivingCreature(i_o);
 				}
+				Parameter bp_isProductionOrder {
+					IndexDomain: i_o;
+					Definition: ep_orderProduct(i_o) <> ep_productNone;
+				}
 				ElementParameter ep_orderProductionLine {
 					IndexDomain: i_o;
 					Range: S_AvailableLines;

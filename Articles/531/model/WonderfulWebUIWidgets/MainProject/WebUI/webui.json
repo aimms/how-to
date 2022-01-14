@@ -1069,7 +1069,8 @@
       "literal": {
         "p_capdepot": "0",
         "p_locationsizelower": "0",
-        "p_locationsizeupper": "0"
+        "p_locationsizeupper": "0",
+        "p_relativesize": "bp_developmentSupport"
       }
     },
     "contents.numdecimals": {
@@ -1126,8 +1127,8 @@
         "p_d_duration": "bp_developmentSupport",
         "p_d_starthour": "bp_developmentSupport",
         "p_orderlength": "1",
-        "p_orderquantity": "bp_orderScheduledByOptimizationAlgorithm",
-        "ep_orderdeliveryduedate": "bp_orderScheduledByOptimizationAlgorithm"
+        "p_orderquantity": "bp_isProductionOrder",
+        "ep_orderdeliveryduedate": "bp_isProductionOrder"
       }
     },
     "contents.numdecimals": {

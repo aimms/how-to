@@ -88,15 +88,24 @@ Your tools are as follows:
     .. image:: images/map-widget-tooltip.png
         :align: center
 
+    .. tip:: hovering over a bottling location with an orange background will give you the unmet demand for that location.
+
 #.  **Control**:
 
     This is a side panel, and in this side panel some configuration parameters of the network can be specified. Notably:
 
     #.  The cost coefficients for unmet demand, production unit capacity, and oxygen transportation
-    
-    #.  The production capacity of the distillation units
+
+    #.  The pipe capacity
 
 #.  **The item menu**:
+
+    By clicking first left, and then right on one of the nodes, a tailored item menu pops up:
+    
+    #.  For distillation and pumping locations, the capacity can be increased or decreased by 1 or 5.
+        For bottling locations, the demand can be increased or decreased by 1 or 5.
+        
+    #.  The properties of the location can be inspected and edited.
 
 
 In addition, the app auto colors:
@@ -110,4 +119,50 @@ In addition, the app auto colors:
 
 .. simplemaps references: 
 .. https://simplemaps.com/data/world-cities
+
+Gantt
+-----
+
+The Levram company operates three production lines, nick named 
+
+#.  King Kong, 
+
+#.  Hercules, and 
+
+#.  Antman.  
+
+Each production line handles an order as a single task: stopping a task halfway leads to clogging and other problems. 
+Even though all three lines can handle all types of orders, King Kong is more suited to handling orders with large items, 
+Antman is more suited to handling orders with small items, and Hercules is somewhat in between. 
+Based on order amount, type, and production line, the app will compute the time needed to complete the order. 
+
+Normally the orders are scheduled by an optimization algorithm, but each order can be scheduled by manually.
+
+In between handling orders, there can be maintenance tasks (product "none" made). 
+The duration of these tasks need to be specified manually.
+Normally maintenance tasks are scheduled manually.
+
+As a production planner, you were notified yesterday by Quality Control that there will be a surprise inspection on 
+2016-05-10 between 08:00 and 14:00 on all three production lines. 
+They expect each production line to be halted for at least two hours to do the inspection. 
+Of course, Business Development wants the production to be interrupted minimally.
+
+Hopefully, the Gantt page will help you in replanning existing orders.
+
+The Gantt Chart page contains a Gantt Chart and a table.
+
+#.  **Page actions**: in the lower right there is a menu containing two page actions:
+
+    #.  **Pacman**: This invokes an optimization algorithm scheduling tasks.
+    
+    #.  **New**: A dialog page is opened allowing you to create a new task.
+    
+#.  Hovering over a job will show a tooltip as follows:
+
+    .. image:: images/gantt-widget-tooltip.png
+        :align: center
+
+The jobs that are scheduled by the optimization algorithm have a black border.  
+The jobs that can be dragged to a suited position by a human scheduler have a blue border.
+
 
