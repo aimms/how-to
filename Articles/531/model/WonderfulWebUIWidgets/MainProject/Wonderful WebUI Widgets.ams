@@ -279,17 +279,21 @@ Model Main_Wonderful_WebUI_Widgets {
 				}
 			}
 			Parameter p_dist {
-				IndexDomain: (i_locFrom,i_locTo);
+				IndexDomain: (i_locFrom,i_locTo)|i_locFrom<>i_locTo;
 				Definition: {
 					! Formula also present on http://www.movable-type.co.uk/scripts/latlong.html section Spherical Law of Cosines.
 					!calculate distance from haversine formulas
-					 ((6371.0 )*arccos[cos(radians(90 - P_latitude(i_locFrom)))*
+					if i_locFrom<>i_locTo then
+					        ((6371.0 )*arccos[cos(radians(90 - P_latitude(i_locFrom)))*
 					                   cos(radians(90 - P_latitude(i_locTo))) 
 					               + 
 						           sin(radians(90 - P_latitude(i_locFrom)))* 
 					                   sin(radians(90 - P_latitude(i_locTo)))*
 					                   cos(radians(p_longitude(i_locFrom)-p_longitude(i_locTo)))
-					              ] )  ;
+					              ] )  
+					else
+						0
+					endif
 				}
 			}
 			Set s_nearIntermediates {
@@ -492,7 +496,22 @@ Model Main_Wonderful_WebUI_Widgets {
 		}
 		Procedure pr_mapSolve {
 			Body: {
-				pr_solveMapDemo();
+				if pro::GetPROEndPoint() then
+					if pro::management::IsRunningOnCloud() then
+						pro::solverlease::solveModel( 'mp_mapDemo' );
+					else
+						pro::ManagedSessionInputCaseIdentifierSet :=
+							AllMathematicalPrograms +
+							s_mapDemoVariables +
+							s_mapDemoConstraints +
+							ReferencedIdentifiers( s_mapDemoVariables, AllAttributeNames, 1) +
+							ReferencedIdentifiers( s_mapDemoConstraints, AllAttributeNames, 1) ;
+						pr_delegateMapDemo();
+					endif ;
+				else
+					pr_solveMapDemo();
+				endif ;
+				bp_showConnections := 0 ; ! Now showing flows instead of connections.
 			}
 		}
 		Procedure pr_mapEdit;
@@ -582,29 +601,22 @@ Model Main_Wonderful_WebUI_Widgets {
 				Variables: AllVariables;
 				Type: Automatic;
 			}
+			Procedure pr_delegateMapDemo {
+				Body: {
+					if pro::DelegateToServer( 
+							waitForCompletion  :  1, 
+							completionCallback :  'pro::session::LoadResultsCallBack' ) then  
+						return 1;
+					endif ;
+					
+					pr_solveMapDemo();
+					
+					pro::ManagedSessionOutputCaseIdentifierSet := s_mapDemoVariables ;
+				}
+			}
 			Procedure pr_solveMapDemo {
 				Body: {
 					solve mp_mapDemo ;
-					bp_showConnections := 0 ; ! Now showing flows instead of connections.
-					
-					!p_locationSize(i_loc)| ( i_loc in s_sources ) :=
-					!	if v_prod(i_loc) < p_locationSizeLower then 
-					!		p_locationSizeLower
-					!	elseif v_prod(i_loc) > p_locationSizeUpper then 
-					!		p_locationSizeUpper
-					!	else
-					!		v_prod(i_loc)
-					!	endif ;
-					!
-					!p_locationSize(i_loc)| ( i_loc in s_intermediate ) :=
-					!	if v_depotInflow(i_loc) < p_locationSizeLower then 
-					!		p_locationSizeLower
-					!	elseif v_depotInflow(i_loc) > p_locationSizeUpper then 
-					!		p_locationSizeUpper
-					!	else
-					!		v_depotInflow(i_loc)
-					!	endif ;
-					!
 				}
 			}
 		}
@@ -1592,13 +1604,17 @@ Model Main_Wonderful_WebUI_Widgets {
 						ep_StartNoOverlap(i_al, i_o, i_hc) | ( ep_StartNoOverlap(i_al, i_o, i_hc) = '' ) := startHour ;
 						
 						if pro::PROEndPoint then
-							pro::ManagedSessionInputCaseIdentifierSet :=
-								AllMathematicalPrograms +
-								s_allMixedIntegerProgrammingVariables +
-								s_allMixedIntegerProgrammingConstraints +
-								ReferencedIdentifiers( s_allMixedIntegerProgrammingVariables, AllAttributeNames, 1) +
-								ReferencedIdentifiers( s_allMixedIntegerProgrammingConstraints, AllAttributeNames, 1) ;
-							pr_delegateSolveMixedIntegerProgrammingProblem();
+							if pro::management::IsRunningOnCloud() then
+								pro::solverlease::solveModel( 'mp_machineSchedulingMixedIntegerProgrammingFormulation' );
+							else
+								pro::ManagedSessionInputCaseIdentifierSet :=
+									AllMathematicalPrograms +
+									s_allMixedIntegerProgrammingVariables +
+									s_allMixedIntegerProgrammingConstraints +
+									ReferencedIdentifiers( s_allMixedIntegerProgrammingVariables, AllAttributeNames, 1) +
+									ReferencedIdentifiers( s_allMixedIntegerProgrammingConstraints, AllAttributeNames, 1) ;
+								pr_delegateSolveMixedIntegerProgrammingProblem();
+							endif ;
 						else
 							pr_workSolveMixedIntegerProgrammingProblem();
 						endif ;
