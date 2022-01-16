@@ -381,9 +381,9 @@ In AIMMS 4.70 Identifier based tailoring of the identifier ``X`` to:
     In AIMMS 4.72 the annotation ``webui::FlagsIdentifier`` is used.
     Note that in the example provided, you cannot change the value for Annet, because the read-only flag is set.
     
-#.  X_tooltips --> webui::TooltipIdentifier
+#.  X_tooltips --> ``webui::TooltipIdentifier``
 
-#.  X_text --> ? webui::ItemTextIdentifier, not demoed here, requires Gantt Chart.
+#.  X_text --> ? ``webui::ItemTextIdentifier``, not demoed here, requires Gantt Chart.
 
 In the following image use is made of a flag and a tooltip identifier. 
 

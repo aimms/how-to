@@ -80,7 +80,7 @@ See :doc:`../145/145-import-export-section`
 
 .. note::
 
-    If your model already contains ``SI_Time quantity``, just update it so that the units second and tick (1/100th of one second) are defined (either as conversion, or as base unit).
+    If your model already contains ``SI_Time quantity``, just update it so that the units second and tick (1/100\ :sup:`th`\  of one second) are defined (either as conversion, or as base unit).
     Also, delete the ``SI_Time_Duration`` imported in the ``stopwatch_support`` section. 
 
 Example project

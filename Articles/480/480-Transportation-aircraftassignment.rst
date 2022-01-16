@@ -11,7 +11,7 @@ LP (small)
 
 Description
 --------------
-Maximization of profits of allocating aircrafts.
+Maximization of profits of allocating aircraft.
 
 Sources
 ---------

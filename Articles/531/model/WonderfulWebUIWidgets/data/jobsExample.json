@@ -1,0 +1,177 @@
+{
+	"array1": [
+		{
+			"prodname": "pr1",
+			"producType": "small"
+		},
+		{
+			"prodname": "pr2",
+			"producType": "medium"
+		},
+		{
+			"prodname": "pr3",
+			"producType": "large"
+		},
+		{
+			"prodname": "pr4",
+			"producType": "large"
+		},
+		{
+			"prodname": "pr5",
+			"producType": "medium"
+		},
+		{
+			"prodname": "pr6",
+			"producType": "small"
+		},
+		{
+			"prodname": "None",
+			"producType": "maintenance"
+		}
+	],
+	"array2": [
+		{
+			"order": "1",
+			"product": "pr5",
+			"quantity": 120.0,
+			"duedate": "2016-05-10 15"
+		},
+		{
+			"order": "2",
+			"product": "pr1",
+			"quantity": 60.0,
+			"duedate": "2016-05-11 19"
+		},
+		{
+			"order": "3",
+			"product": "pr2",
+			"quantity": 40.0,
+			"duedate": "2016-05-11 04"
+		},
+		{
+			"order": "4",
+			"product": "pr3",
+			"quantity": 10.0,
+			"duedate": "2016-05-11 15"
+		},
+		{
+			"order": "5",
+			"product": "pr4",
+			"quantity": 120.0,
+			"duedate": "2016-05-11 12"
+		},
+		{
+			"order": "6",
+			"product": "pr5",
+			"quantity": 60.0,
+			"duedate": "2016-05-10 03"
+		},
+		{
+			"order": "7",
+			"product": "pr3",
+			"quantity": 120.0,
+			"duedate": "2016-05-11 04"
+		},
+		{
+			"order": "8",
+			"product": "pr1",
+			"quantity": 20.0,
+			"duedate": "2016-05-10 23"
+		},
+		{
+			"order": "9",
+			"product": "pr5",
+			"quantity": 80.0,
+			"duedate": "2016-05-11 21"
+		},
+		{
+			"order": "10",
+			"product": "pr1",
+			"quantity": 100.0,
+			"duedate": "2016-05-11 09"
+		},
+		{
+			"order": "11",
+			"product": "pr2",
+			"quantity": 70.0,
+			"duedate": "2016-05-10 05"
+		},
+		{
+			"order": "12",
+			"product": "pr5",
+			"quantity": 100.0,
+			"duedate": "2016-05-10 03"
+		},
+		{
+			"order": "13",
+			"product": "pr6",
+			"quantity": 10.0,
+			"duedate": "2016-05-11 18"
+		},
+		{
+			"order": "14",
+			"product": "pr6",
+			"quantity": 10.0,
+			"duedate": "2016-05-10 18"
+		},
+		{
+			"order": "15",
+			"product": "pr2",
+			"quantity": 20.0,
+			"duedate": "2016-05-10 03"
+		}
+	],
+	"array3": [
+		{
+			"line": "King Kong",
+			"array4": [
+				{
+					"prodtype": "small",
+					"capac": 2.0
+				},
+				{
+					"prodtype": "medium",
+					"capac": 5.0
+				},
+				{
+					"prodtype": "large",
+					"capac": 10.0
+				}
+			]
+		},
+		{
+			"line": "Hercules",
+			"array4": [
+				{
+					"prodtype": "small",
+					"capac": 5.0
+				},
+				{
+					"prodtype": "medium",
+					"capac": 5.0
+				},
+				{
+					"prodtype": "large",
+					"capac": 5.0
+				}
+			]
+		},
+		{
+			"line": "Ant Man",
+			"array4": [
+				{
+					"prodtype": "small",
+					"capac": 10.0
+				},
+				{
+					"prodtype": "medium",
+					"capac": 5.0
+				},
+				{
+					"prodtype": "large",
+					"capac": 2.0
+				}
+			]
+		}
+	]
+}

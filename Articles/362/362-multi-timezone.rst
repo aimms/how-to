@@ -235,7 +235,7 @@ In the running example, this cost computation is handled in the section ``determ
 
 The procedure ``pr_determineCostCoefficients`` computes the cost ``p_cost(i_Employee,i_workBlock)`` in four steps:
 
-#.  First compute the shift of each workblock, depending on the timezone. 
+#.  First compute the shift of each work block, depending on the timezone. 
     This again, consists of three sub-steps:
 
     #.  Determine the starting time using the AIMMS intrinsic function :aimms:func:`TimeSlotToString` as follows:
@@ -462,7 +462,7 @@ Cases contain timeslots and may be created by a user in one timezone and opened 
 To avoid confusion, the timeslots in cases should be saved with respect to the timezone UTC and 
 read back using this timezone.
 
-To enforce this, the option 'use UTC forCaseAndStartEndDate' should be set to 'on'.
+To enforce this, the option 'use UTC ``forCaseAndStartEndDate``' should be set to 'on'.
 
 As this option is not present in the option tree of the project options, 
 you will need to search for it in the project option setting dialog:
@@ -572,7 +572,7 @@ which breaks down as follows:
 Timezone selector 
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Te timezone selector is part of the `Time Zone Settings <https://documentation.aimms.com/webui/time-zone-setting.html#time-zone-settings>`_ feature of the WebUI.
+The timezone selector is part of the `Time Zone Settings <https://documentation.aimms.com/webui/time-zone-setting.html#time-zone-settings>`_ feature of the WebUI.
 
 The timezone selector is a predefined widget manipulating the element parameter ``webui::DisplayTimeZone``.
 You can enable this widget via the Application settings / Application Extensions panel:
@@ -612,7 +612,7 @@ The first data widget is a table containing, per employee, a sequence of start m
         .. image:: images/TableContainingTimeslotsHamburg.png
             :align: center
 
-        The employee is german, and his local timezone is ``'W. Europe Standard Time'``.
+        The employee is German, and his local timezone is ``'W. Europe Standard Time'``.
         According to that timezone, his second job starts on ``21.08.2020 10:00 DST``.
 
 Thus there are changes in:

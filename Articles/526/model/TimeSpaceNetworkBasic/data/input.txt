@@ -1,0 +1,35 @@
+﻿p_arcCapacity := 4 ;
+
+s_nodes := data { ParisP, ParisD, Stockholm, Madrid, Berlin, Rome };
+
+p_initialStock(i_node) := data { ParisP : 10, Stockholm : 9 };
+
+p_productionCap(i_node) := data { ParisP : 7, Stockholm : 7 }; 
+
+p_demand(i_tp,i_node) := data table 
+            ParisD  Madrid  Berlin  Rome
+      tp-1   1        2       3       4
+      tp-2   2        3       4       5
+      tp-3   3        4       5       6 
+;
+
+bp_arcs(i_nodeFrom,i_nodeTo) := data table
+           ParisP  ParisD Stockholm  Madrid  Berlin  Rome
+ParisP               1      1         1        1  
+ParisD                      1         1        1
+Stockholm                             1                1
+Madrid                                         1       1
+Berlin                                                 1
+Rome
+;
+
+p_cost1(i_nodeFrom,i_nodeTo) := data table
+           ParisP    ParisD Stockholm  Madrid  Berlin  Rome
+ParisP                  0    3         4        5  
+ParisD                       3         4        5  
+Stockholm                              6                9
+Madrid                                          8       8
+Berlin                                                  2
+Rome                
+;
+

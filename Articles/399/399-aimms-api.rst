@@ -19,7 +19,7 @@ The call to the external DLL will retrieve all data for the parameter TransportC
 
 .. note::
    
-   The import library "libaimms.lib" that is provided in the AIMMS API directory of your installation, is compiled for Visual Studio 2005. If you are using a different C compiler, please create a dummy "libaimms.dll" DLL from the file "libaimms.c" provided in the Source directory of this project. Subsequently, you can use the import library "libaimms.lib" created by your compiler to execute the link step successfully.
+   The import library ``libaimms.lib`` that is provided in the AIMMS API directory of your installation, is compiled for Visual Studio 2005. If you are using a different C compiler, please create a dummy ``libaimms.dll`` DLL from the file ``libaimms.c`` provided in the Source directory of this project. Subsequently, you can use the import library ``libaimms.lib`` created by your compiler to execute the link step successfully.
 
 Keywords:
 AIMMS API, external DLL

@@ -25,21 +25,32 @@ spellcheck:
   stage: test
   script:
   - python3 -msphinx -W --keep-going -b spelling . _build/spelling
-  allow_failure: true
   tags: 
     - ubuntu
 
 build:
   stage: test
   script:
-    - sphinx-build -W -b html . _build/html 
+    - sphinx-build -W --keep-going -b html . _build/html 
   tags: 
     - ubuntu
 
-deploy:
+build_and_staging:
+  stage: deploy
+  script:
+    - sphinx-build -M html . _build
+    - ssh support@data.aimms.com mkdir -p /home/aimms/www/how-to.aimms.com/staging/${CI_COMMIT_BRANCH}
+    - rsync -rt --delete-excluded _build/html/ support@data.aimms.com:/home/aimms/www/how-to.aimms.com/staging/${CI_COMMIT_BRANCH}
+  tags: 
+    - ubuntu
+  except:
+    - master
+
+build_and_deploy:
   stage: deploy
   script:
     - sphinx-build -b html . _build/html 
+    - ssh support@data.aimms.com rm -f -r /home/aimms/www/how-to.aimms.com/staging/
     - rsync -rt _build/html/ support@data.aimms.com:/home/aimms/www/how-to.aimms.com
   tags: 
     - ubuntu

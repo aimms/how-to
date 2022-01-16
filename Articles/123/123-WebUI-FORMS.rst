@@ -244,7 +244,7 @@ Selected remarks about the above code:
 If both conditions of line 1 and line 2 are true, then an existing element is re-created, which is not allowed.
 
 
-Check data of sku string property:
+Check data of SKU string property:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Next we check that the manufacturer is specified and the length is at least 3.
@@ -259,7 +259,7 @@ Next we check that the manufacturer is specified and the length is at least 3.
 
 Here we just enforce that the manufacturer name is at least three characters.
 
-Check data of sku integer property:
+Check data of SKU integer property:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Lastly we check that the stock available is a non-negative integer:
@@ -422,7 +422,7 @@ With this phrase adapting, the form now looks as follows:
     4 Basic widget placing - translated names
 
 
-Making the page resizeable using grid layout
+Making the page resizable using grid layout
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Once we have created the widgets with the necessary information, we enhance the page by using the `grid layout feature of WebUI <https://documentation.aimms.com/webui/webui-grid-pages.html>`_.
@@ -442,7 +442,7 @@ Selected remarks about the grid layout here:
 
 *   Lines 13, and 22: the areas are named to the end-user ``Area Master``, and ``Area Detail``.
 
-And with the widgets moved to the respective areas, we get the following resizeable page:
+And with the widgets moved to the respective areas, we get the following resizable page:
 
 .. image:: images/4-Basic-widget-placing-using-grid-layout.png
     :align: center

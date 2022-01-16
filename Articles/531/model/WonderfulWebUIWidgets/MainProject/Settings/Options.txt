@@ -1,0 +1,12 @@
+﻿* AIMMS
+rounding_compatibility Aimms_3_7
+use_UTC_forCaseAndStartEndDate 1
+warning_not_initialized strict_warning_default
+* AOA
+* CBC 2.9
+* IPOPT 3.11
+* NETSOL
+* Environment
+Project_Title "Wonderful WebUI Widgets"
+Default_UI 0
+Open_WebUI_on_Startup 1

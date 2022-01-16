@@ -97,7 +97,7 @@ Retrieving and mapping XML data
 --------------------------------
 We want to know the location of the AIMMS office in Haarlem. After executing the request procedure, we get in the ``SP_responseFile`` direction the XML answer from the API.
 
-Using the `XSD generator from Freeformatter.com <https://www.freeformatter.com/xsd-generator.html>`_, we can get the XSD file required to use the AIMMS XML schema Mapping tool. Let's put this XSD file in the root of our project, with the name "googlecoord.xsd". 
+Using the `XSD generator from Freeformatter.com <https://www.freeformatter.com/xsd-generator.html>`_, we can get the XSD file required to use the AIMMS XML schema Mapping tool. Let's put this XSD file in the root of our project, with the name "``googlecoord.xsd``". 
 
 The XML Schema mapping tool generates an AXM file from an XSD file to map the data into AIMMS identifiers.
 
@@ -107,7 +107,7 @@ We want to do the following mapping:
 
 * ``Geometry/location/lat`` **Maps-to** ``P_lat``
 * ``Geometry/location/lng`` **Maps-to** ``P_long``
-* put **every Read-filter attribute to 0** except for the objects used (lat,lng,geometry,location,result)
+* put **every Read-filter attribute to 0** except for the objects used ``(lat,lng,geometry,location,result)``
 
 Then, by using the ``READXML`` method, we can extract the coordinates we want into AIMMS.
 

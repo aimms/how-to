@@ -77,7 +77,7 @@ Selecting color per data item
 
 To color an item according to some index, there are several steps:
 
-#.  The app genColorCSS, discussed in :doc:`genColorCSS article<../377/377-add-color-palettes>` 
+#.  The app ``genColorCSS``, discussed in :doc:`genColorCSS article<../377/377-add-color-palettes>` 
     is used to generate CSS color files in the "i-want-hue" subfolder of `barlegend/MainProject/WebUI/resources/css`.
 
 #.  In each css file in this "i-want-hue" sub folder, a palette is defined. 
@@ -97,5 +97,6 @@ To color an item according to some index, there are several steps:
         This is simply the color number offset.
 
 
+.. spelling::
 
-    
+    barlegend

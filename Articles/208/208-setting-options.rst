@@ -50,7 +50,7 @@ An example is:
     
 Note that after executing this statement, the option setting may unexpectedly be saved to the file ``MainProject/Settings/Options.txt`` when you save the project.
 
-The OPTION statement is documented in the `AIMMS language reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_, section "The OPTION and PROPERTY statements".
+See also :doc:`procedural-language-components/execution-statements/the-option-and-property-statements`.
 
 
 :any:`OptionSetValue` and :any:`OptionSetString` procedures
@@ -66,7 +66,7 @@ An equivalent to the option statement in the previous section is:
 The advantage of this method over the option statement is that there is more flexibility; both arguments can be any valid expression.
 However, as with the option statement, you may unexpectedly save these settings in the file ``MainProject/Settings/Options.txt``.
 
-The procedures operating on options are documented in the `AIMMS function reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_, Chapter "Option manipulation".
+The procedures operating on options are documented in :doc:`system-interaction/option-manipulation/index`.
 
 Temporarily change option value
 -------------------------------
@@ -82,7 +82,7 @@ Following our example, the syntax is as follows:
 
 As the setting is reverted at the ``endblock statement``, you do not have to worry that the setting is saved unexpectedly.
 
-The block statement is documented in the `AIMMS language reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_, section "The BLOCK statement".
+See also :ref:`block`.
 
 
 

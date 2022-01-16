@@ -16,7 +16,7 @@ This indicates an error in setting up a connection whereby there is a mismatch i
 Explanation
 ------------
 
-The `transport layer security (TLS) <https://en.wikipedia.org/wiki/Transport_Layer_Security>`_ is designed to provide communication securtiy.
+The `transport layer security (TLS) <https://en.wikipedia.org/wiki/Transport_Layer_Security>`_ is designed to provide communication security.
 When a server secures its connection using TLS 1.3, the client needs to be able to handle TLS 1.3. 
 
 Various versions of TLS, including the advantages of version 1.3, are further detailed in:
@@ -34,7 +34,7 @@ To make use of this upgrade, you will need to take the following actions:
 
 #.  Switch to AIMMS Developer 4.76.4 or later, see `this AIMMS Developer release note <https://documentation.aimms.com/release-notes.html#aimms-4-76-4-release-october-28-2020-build-4-76-4-11>`_
 
-#.  When you publish your applictions on AIMMS PRO, you will need AIMMS PRO version 2.36.2 or later, see `this AIMMS PRO release note <https://documentation.aimms.com/pro-release-notes.html#aimms-pro-2-36-2-release>`_
+#.  When you publish your applications on AIMMS PRO, you will need AIMMS PRO version 2.36.2 or later, see `this AIMMS PRO release note <https://documentation.aimms.com/pro-release-notes.html#aimms-pro-2-36-2-release>`_
 
 
 Please note
@@ -53,3 +53,7 @@ Please note
 
 #.  WinUI applications published on AIMMS PRO may also be affected by organizations enforcing TLS 1.2 or TLS 1.3, 
     see :doc:`Evolution of AIMMS using Transport Layer Security<../520/520-evolution-of-transport-layer-security>`
+
+.. spelling::
+    
+	tlsv

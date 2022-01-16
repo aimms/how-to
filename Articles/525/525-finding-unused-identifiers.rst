@@ -49,8 +49,14 @@ The code illustrated in this article is based on an artificial model whereby:
 
 To :download:`this AIMMS 4.81 project download <model/fi.zip>` 
 
-Most of the code is in a small library ``refids`` that can be copied to your project.
+Most of the code is in a small library ``refIds`` that can be copied to your project.
 In addition, the zip file contains the file ``fu.ams``, which is an example of using the library.
+
+It is easy to copy a library and a section, as explained in these two references:
+
+*   Adding a library to your project: `Library projects and the library manager <https://documentation.aimms.com/user-guide/introduction-to-aimms/collaborative-project-development/library-projects-and-the-library-manager.html>`_ 
+
+*   Adding code from a section: :doc:`../145/145-import-export-section`
 
 Using the library in your application
 -------------------------------------
@@ -58,7 +64,7 @@ Using the library in your application
 An AIMMS application consists of at least a model, and may also contain a WinUI user interface, and may contain a WebUI user interface.
 
 To search for identifiers in these three major software components is different.
-That is why the library ``refids`` has a procedure that has 
+That is why the library ``refIds`` has a procedure that has 
 
 #.  As input a set of identifiers for which we would like to know whether they are used or not.
 
@@ -179,21 +185,35 @@ There are some remarks regarding the above code:
 
 #.  Line 10: For each of the identifiers of interest, we check whether it is present in the referenced identifier incidence matrix.
 
-Caveat
+Caveats
 ^^^^^^^^^^^^^^
 
-The above code omits identifiers that are used as an element in the set :any:`AllIdentifiers`.
-For instance, in the following declaration of an element parameter, the procedure ``pr_myProc`` is used 
-to determine the signature of procedures that can be assigned to element parameter ``ep_someProc`` and 
-subsequently be applied.
+#.  The above code omits identifiers that are used as an element in the set :any:`AllIdentifiers`.
+    For instance, in the following declaration of an element parameter, the procedure ``pr_myProc`` is used 
+    to determine the signature of procedures that can be assigned to element parameter ``ep_someProc`` and 
+    subsequently be applied.
 
-.. code-block:: aimms
-    :linenos:
+    .. code-block:: aimms
+        :linenos:
 
-    ElementParameter ep_someProc {
-        Range: AllProcedures;
-        Default: 'pr_myProc'
-    }
+        ElementParameter ep_someProc {
+            Range: AllProcedures;
+            Default: 'pr_myProc'
+        }
+
+#.  The identifiers referenced in the annotation are not found.  For instance:
+
+    .. code-block:: aimms
+        :linenos:
+
+        Parameter p_a {
+            webui::UponChangeProcedure: pr_uponChangeA;
+        }
+
+    Finding the references of ``p_a`` will not find ``pr_uponChangeA``, 
+    because ``webui::UponChangeProcedure`` is not an element of ``AllAttributeNames``.
+    
+.. See also customer ticket 4364
 
 
 Are identifiers used in the WinUI?

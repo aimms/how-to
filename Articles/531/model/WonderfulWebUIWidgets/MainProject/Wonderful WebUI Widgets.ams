@@ -1,0 +1,1875 @@
+## ams_version=1.0
+
+Model Main_Wonderful_WebUI_Widgets {
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: hour;
+			Conversions: {
+				minute ->hour : #-># / 60,
+				century->hour : #-># * 876000,
+				day    ->hour : #-># * 24,
+				s      ->hour : #-># / 3600,
+				month  ->hour : #-># * 730,
+				second ->hour : #-># / 3600,
+				tick   ->hour : #-># / 360000,
+				week   ->hour : #-># * 168,
+				year   ->hour : #-># * 8760
+			}
+			Comment: "Expresses the value for the duration of periods.";
+		}
+		Quantity SI_Unitless {
+			BaseUnit: -;
+			Conversions: %->- : #-># / 100;
+			Comment: "Expresses a dimensionless value.";
+		}
+	}
+	Section WebUI_globals {
+		Procedure pr_initContext {
+			Body: {
+				DirectoryGetCurrent( sp_startupFolder );
+				AimmsRevisionString( sp_AimmsRevision );
+				sp_context := 
+					formatString(
+						"Wonderful WebUI Widgets 1.0 using AIMMS %s in folder %s",
+						sp_AimmsRevision, sp_startupFolder );
+			}
+		}
+		StringParameter sp_startupFolder {
+			InitialData: "";
+		}
+		StringParameter sp_AimmsRevision {
+			InitialData: "4.83";
+		}
+		StringParameter sp_wwwWorkflow {
+			IndexDomain: (webui::indexWorkflowOrder,webui::indexWorkflowSpec);
+			Definition: {
+				{
+					('1', 'title') : "Demos" , ! (Optional) The title for the Workflow to be displayed on top of the Workflow Panel.
+					('1', 'style') : ""   ! (CURRENTLY NOT IN USE) When styles or themes are introduced for the Workflow Panel, this attribute will hold that value.
+				}
+			}
+		}
+		StringParameter sp_wwwWorkflowSteps {
+			IndexDomain: (webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec);
+			Definition: {
+				{
+					( '1', '1', 'displayText'       ) : "Welcome",  
+					( '1', '1', 'icon'              ) : "aimms-happy",  
+					( '1', '1', 'pageId'            ) : "home", 
+					( '1', '1', 'tooltip'           ) : "Shows a text widget welcoming you to this app", 
+					( '1', '1', 'workflowPageState' ) : "Active", 
+					( '1', '1', 'pageDataState'     ) : "", 
+					( '1', '1', 'redirectPageId'    ) : "home", 
+				
+					( '1', '2', 'displayText'       ) : "Map", 
+					( '1', '2', 'icon'              ) : "aimms-map", 
+					( '1', '2', 'pageId'            ) : "map", 
+					( '1', '2', 'tooltip'           ) : "Shows a map widget with the OxyGem network", 
+					( '1', '2', 'workflowPageState' ) : "Active", 
+					( '1', '2', 'pageDataState'     ) : "", 
+					( '1', '2', 'redirectPageId'    ) : "home",
+				
+					( '1', '3', 'displayText'       ) : "Gantt", 
+					( '1', '3', 'icon'              ) : "aimms-align-left", 
+					( '1', '3', 'pageId'            ) : "gantt", 
+					( '1', '3', 'tooltip'           ) : "Shows a Gantt chart widget to schedule some tasks", 
+					( '1', '3', 'workflowPageState' ) : "Active", 
+					( '1', '3', 'pageDataState'     ) : "", 
+					( '1', '3', 'redirectPageId'    ) : "home" 
+				
+				
+				
+				}
+			}
+		}
+		Set s_okCancel {
+			Definition: data { OK, Cancel };
+		}
+		Parameter bp_developmentSupport {
+			Range: binary;
+			InitialData: 0;
+		}
+		DeclarationSection StatusBar {
+			StringParameter sp_context;
+			StringParameter sp_statusTooltip {
+				Definition: {
+					"<div align=\"left\">"  +
+					"<Table>" +
+					        "<TR>"  +
+					                "<TD>"  +
+					                                "<B> Name : </B>" +
+					                "</TD>" +
+					                "<TD>"  +
+					                                "Wonderful WebUI Widgets" +
+					                "</TD>" +
+					        "</TR>" +
+					        "<TR>"  +
+					                "<TD>"  +
+					                                "<B> AIMMS : </B>" +
+					                "</TD>" +
+					                "<TD>"  +
+					                                sp_AimmsRevision +
+					                "</TD>" +
+					        "</TR>" +
+					        "<TR>"  +
+					                "<TD>"  +
+					                                "<B> Folder : </B>" +
+					                "</TD>" +
+					                "<TD>"  +
+					                                sp_startupFolder +
+					                "</TD>" +
+					        "</TR>" +
+					        "<TR>"  +
+					                "<TD>"  +
+					                                "<B> Status : </B>" +
+					                "</TD>" +
+					                "<TD>"  +
+					                                if ProjectDeveloperMode then "AIMMS Developer" else "deployed" endif +
+					                "</TD>" +
+					        "</TR>" +
+					"</Table>"
+				}
+			}
+			StringParameter sp_wwwStatusBar {
+				IndexDomain: (webui::indexApplicationExtension,webui::indexStatusBarSpec);
+				Definition: {
+					{
+						( '1', 'header'    ) : "",
+						( '1', 'icon'      ) : "aimms-glass", 
+						( '1', 'color'     ) : "red", 
+						( '1', 'text'      ) : sp_context,
+						( '1', 'tooltip'   ) : sp_statusTooltip,
+						( '1', 'procedure' ) : "",
+						( '1', 'state'     ) : "Inactive"
+					}
+				}
+			}
+		}
+	}
+	Section Map_Widget_section {
+		DeclarationSection WebUI_Page_and_Widget_support {
+			StringParameter sp_mapSidePanel {
+				IndexDomain: (webui::indexPageExtension,webui::indexSidePanelSpec);
+				Definition: {
+					{
+					
+						('1', 'displayText' ) : "Control",
+						('1', 'pageId'      ) : "map-config-panel",
+						('1', 'tooltip'     ) : "",
+						('1', 'icon'        ) : "",
+						('1', 'iconcolor'   ) : "",
+						('1', 'state'       ) : "Active",
+					
+						('2', 'displayText' ) : "Story",
+						('2', 'pageId'      ) : "map-explain-panel",
+						('2', 'tooltip'     ) : "",
+						('2', 'icon'        ) : "",
+						('2', 'iconcolor'   ) : "",
+						('2', 'state'       ) : "Active"
+					
+					}
+				}
+			}
+			StringParameter sp_locationIcon {
+				IndexDomain: i_loc;
+				Definition: {
+					if i_loc in s_sources then
+						"aimms-factory"
+					elseif i_loc in s_destinations then
+						"aimms-store"
+					else
+						"aimms-width"
+					endif ;
+				}
+			}
+			ElementParameter ep_selectedLocation {
+				Range: s_locations;
+				InitialData: '';
+			}
+			StringParameter sp_mapWidgetActions {
+				IndexDomain: (webui::indexPageExtension,webui::indexWidgetActionSpec);
+				Definition: {
+					{
+					
+						('1', 'displaytext' ) : "Initialize", 
+						('1', 'icon'        ) : "aimms-broom", 
+						('1', 'procedure'   ) : "pr_mapInit", 
+						('1', 'state'       ) : "Active", 
+					
+						('2', 'displaytext' ) : "Solve", 
+						('2', 'icon'        ) : "aimms-spinner9", 
+						('2', 'procedure'   ) : "pr_mapSolve", 
+						('2', 'state'       ) : "Active", 
+					
+						('3', 'displaytext' ) : "Edit", 
+						('3', 'icon'        ) : "aimms-quill3", 
+						('3', 'procedure'   ) : "pr_mapEdit", 
+						('3', 'state'       ) : "Hidden"
+					
+					}
+				}
+			}
+			Parameter bp_showConnections {
+				Range: binary;
+				InitialData: 1;
+			}
+			Parameter bp_hideConnections {
+				Range: binary;
+				Definition: 1 - bp_showConnections;
+			}
+			StringParameter sp_mapWidgetTitle {
+				Definition: "Oxygem network for distilling and bottling oxygen";
+			}
+		}
+		DeclarationSection Data_for_the_map_widget {
+			Set s_locations {
+				Index: i_loc, i_locFrom, i_locTo;
+				webui::TooltipIdentifier: ;
+			}
+			Parameter p_noLocations {
+				Definition: card( s_locations );
+			}
+			Parameter p_noSourceLocations {
+				InitialData: 3;
+			}
+			Parameter p_noDestinationLocations {
+				InitialData: 7;
+			}
+			Parameter p_latitude {
+				IndexDomain: i_loc;
+			}
+			Parameter p_longitude {
+				IndexDomain: i_loc;
+			}
+			Parameter p_locationSizeLower {
+				InitialData: 2;
+			}
+			Parameter p_locationSizeUpper {
+				Definition: max( p_capDepot, p_capProduction );
+			}
+			Parameter p_locationSize {
+				IndexDomain: i_loc;
+				Range: nonnegative;
+				webui::AnnotationsIdentifier: sp_locationAnnotation;
+				webui::TooltipIdentifier: sp_locationTooltip;
+			}
+			Set s_sources {
+				SubsetOf: s_locations;
+				Index: i_locSource;
+				Definition: {
+					{ i_loc | ord(i_loc) <= p_noSourceLocations }
+				}
+			}
+			Set s_intermediate {
+				SubsetOf: s_locations;
+				Index: i_locIntermediate;
+				Definition: {
+					{ i_loc | ( ord(i_loc) > p_noSourceLocations ) and ( ord(i_loc) <= p_noLocations - p_noDestinationLocations ) }
+				}
+			}
+			Set s_destinations {
+				SubsetOf: s_locations;
+				Index: i_locDestination;
+				Definition: {
+					{ i_loc | ord(i_loc) > p_noLocations - p_noDestinationLocations }
+				}
+			}
+			Parameter p_dist {
+				IndexDomain: (i_locFrom,i_locTo)|i_locFrom<>i_locTo;
+				Definition: {
+					! Formula also present on http://www.movable-type.co.uk/scripts/latlong.html section Spherical Law of Cosines.
+					!calculate distance from haversine formulas
+					if i_locFrom<>i_locTo then
+					        ((6371.0 )*arccos[cos(radians(90 - P_latitude(i_locFrom)))*
+					                   cos(radians(90 - P_latitude(i_locTo))) 
+					               + 
+						           sin(radians(90 - P_latitude(i_locFrom)))* 
+					                   sin(radians(90 - P_latitude(i_locTo)))*
+					                   cos(radians(p_longitude(i_locFrom)-p_longitude(i_locTo)))
+					              ] )  
+					else
+						0
+					endif
+				}
+			}
+			Set s_nearIntermediates {
+				IndexDomain: i_loc;
+				SubsetOf: s_locations;
+				OrderBy: user;
+				Definition: {
+					Nbest( i_locIntermediate, -p_dist( i_loc, i_locIntermediate ), 
+						if i_loc in s_sources then 3 else 2 endif )
+				}
+			}
+			Parameter bp_arcHelp {
+				IndexDomain: (i_locFrom,i_locTo);
+				Range: binary;
+				Definition: {
+					1 $ ( ( i_locTo in s_nearIntermediates( i_locFrom ) ) and 1 )
+					!( ( i_locFrom in s_sources ) or ( i_locFrom in s_destinations ) ) )
+				}
+			}
+			Parameter bp_connections {
+				IndexDomain: (i_locFrom,i_locTo);
+				Range: binary;
+				Definition: {
+					( ( i_locFrom <> i_locTo                                             ) and
+					  ( bp_arcHelp(i_locFrom, i_locTo) or bp_arcHelp(i_locTo, i_locFrom) ) and
+					  ( ( ord(i_locFrom ) < ord(i_locTo)                            ) or 
+					    ( i_locFrom in s_intermediate and i_locTo in s_Intermediate )    )      )
+				}
+			}
+			Parameter p_arc {
+				IndexDomain: (i_locFrom,i_locTo);
+				Definition: {
+					if bp_showConnections then
+						bp_connections(i_locFrom, i_locTo)
+					else
+						v_flow(i_locFrom, i_locTo)
+					endif
+				}
+			}
+			Parameter p_totUnmetDemand {
+				Definition: sum( i_locDestination, v_unmetDemand(i_locDestination) );
+			}
+			StringParameter sp_locationType {
+				IndexDomain: i_loc;
+				Definition: {
+					if i_loc in s_sources then
+						"distillation"
+					elseif i_loc in s_intermediate then
+						"pumping"
+					else
+						"bottling"
+					endif
+				}
+			}
+			StringParameter sp_locationAnnotation {
+				IndexDomain: i_loc;
+				Definition: {
+					if ( i_loc in s_sources  ) and p_totUnmetDemand then
+						if v_prod(i_loc) = p_locationSize(i_loc) then
+							"atproductioncapacity"
+						else
+							""
+						endif
+					elseif ( i_loc in s_intermediate ) and p_totUnmetDemand then
+						if v_depotInflow(i_loc) = p_locationSize(i_loc) then
+							"atpumpingcapacity"
+						else
+							""
+						endif
+					else
+						if v_unmetDemand(i_loc) then
+							"unmetdemand"
+						else
+							""
+						endif
+					endif
+				}
+			}
+			StringParameter sp_locationTooltip {
+				IndexDomain: i_loc;
+				Definition: {
+					"<div align=\"left\">"  +
+					"<Table>" +
+					        "<TR>"  +
+					                "<TD>"  +
+					                                "<B> Name : </B>" +
+					                "</TD>" +
+					                "<TD>"  +
+					                                formatString("%e", i_loc) +
+					                "</TD>" +
+					        "</TR>" +
+					        "<TR>"  +
+					                "<TD>"  +
+					                                "<B> Type : </B>" +
+					                "</TD>" +
+					                "<TD>"  +
+					                                sp_locationType( i_loc ) +
+					                "</TD>" +
+					        "</TR>" +
+					        "<TR>"  +
+					                "<TD>"  +
+					                                "<B> " + 
+					                                if i_loc in s_sources then
+					                                	"Capacity"
+					                                elseif i_loc in s_intermediate then 
+					                                	"Capacity"
+					                                else
+					                                	"Demand"
+					                                endif
+					                                + " : </B>" +
+					                "</TD>" +
+					                "<TD>"  +
+					                                p_locationSize(i_loc) +
+					                "</TD>" +
+					        "</TR>"  +
+					        if sum( i_locFrom, v_prod(i_locFrom ) ) then
+					        "<TR>"  +
+					                "<TD>"  +
+					                                "<B> " + 
+					                                if i_loc in s_sources then
+					                                	"Production"
+					                                elseif i_loc in s_intermediate then 
+					                                	"Flow"
+					                                else
+					                                	"Unmet demand"
+					                                endif
+					                                + " : </B>" +
+					                "</TD>" +
+					                "<TD>"  +
+					                                if i_loc in s_sources then
+					                                	v_prod(i_loc)
+					                                elseif i_loc in s_intermediate then 
+					                                	sum( i_locFrom, v_flow(i_locFrom, i_loc) )
+					                                else
+					                                	v_unmetDemand(i_loc)
+					                                endif +
+					                "</TD>" +
+					        "</TR>"  
+					        else "" endif 
+					        +
+					"</Table>"
+				}
+			}
+			Parameter p_relativeSize {
+				InitialData: 40;
+			}
+		}
+		Procedure pr_openPageMap {
+			Body: {
+				pr_readMapData();
+				if not ep_selectedLocation then
+					ep_selectedLocation := first( s_locations );
+				endif ;
+			}
+			Comment: {
+				"This procedure is run upon opening page \"mapDemo\"
+				It will initialize the data shown on that page."
+			}
+		}
+		Procedure pr_readMapData {
+			Body: {
+				empty s_locations ;
+				
+				dex::AddMapping(
+					mappingName :  "fewCitiesLatLongCSV", 
+					mappingFile :  "mappings/fewCitiesLatLongCSV.xml") ;
+				
+				dex::ReadFromFile(
+					dataFile         :  "data/twentyGermanCities.csv", 
+					mappingName      :  "fewCitiesLatLongCSV", 
+					emptyIdentifiers :  1, 
+					emptySets        :  1, 
+					resetCounters    :  1);
+				
+				pr_initSizes();
+			}
+		}
+		Procedure pr_initSizes {
+			Body: {
+				
+				p_locationSize(i_locSource) !| ( p_locationSize(i_locSource) = 0 ) 
+					:= p_capProduction ;
+				
+				p_locationSize(i_locDestination) ! | ( p_locationSize(i_locDestination) = 0 ) 
+					:= round( uniform( p_locationSizeLower /* + ( p_locationSizeUpper - p_locationSizeLower ) / 4 */, p_locationSizeUpper - ( p_locationSizeUpper - p_locationSizeLower ) / 3 ) );
+				
+				p_locationSize(i_locIntermediate) ! | ( p_locationSize(i_locIntermediate) = 0 ) 
+					:= p_capDepot ;
+				
+				empty s_mapDemoVariables  ;
+				
+				bp_showConnections := 1 ; ! Now showing connections instead of flows.
+			}
+		}
+		Procedure pr_mapInit {
+			Body: {
+				
+				pr_initSizes();
+			}
+		}
+		Procedure pr_mapSolve {
+			Body: {
+				if pro::GetPROEndPoint() then
+					if pro::management::IsRunningOnCloud() then
+						pro::solverlease::solveModel( 'mp_mapDemo' );
+					else
+						pro::ManagedSessionInputCaseIdentifierSet :=
+							AllMathematicalPrograms +
+							s_mapDemoVariables +
+							s_mapDemoConstraints +
+							ReferencedIdentifiers( s_mapDemoVariables, AllAttributeNames, 1) +
+							ReferencedIdentifiers( s_mapDemoConstraints, AllAttributeNames, 1) ;
+						pr_delegateMapDemo();
+					endif ;
+				else
+					pr_solveMapDemo();
+				endif ;
+				bp_showConnections := 0 ; ! Now showing flows instead of connections.
+			}
+		}
+		Procedure pr_mapEdit;
+		Section map_demo_math_model {
+			Parameter p_productionUnitCost {
+				InitialData: 1;
+			}
+			Parameter p_transportationUnitCost {
+				InitialData: 1;
+			}
+			Parameter p_penaltyUnmetDemand {
+				InitialData: 1000;
+			}
+			Parameter p_capPipe {
+				InitialData: 10;
+			}
+			Parameter p_capDepot {
+				InitialData: 30;
+			}
+			Parameter p_capProduction {
+				InitialData: 40;
+			}
+			Variable v_flow {
+				IndexDomain: (i_locFrom,i_locTo) | bp_connections(i_locFrom, i_locTo);
+				Range: [0, p_capPipe];
+			}
+			Variable v_prod {
+				IndexDomain: (i_loc) | i_loc in s_sources;
+				Range: [0, p_locationSize(i_loc)];
+			}
+			Variable v_cost {
+				Range: free;
+				Definition: {
+					sum( i_loc, p_productionUnitCost * v_prod(i_loc) )
+					+
+					sum( (i_locFrom, i_locTo), p_transportationUnitCost * v_flow(i_locFrom, i_locTo) )
+					+
+					sum( i_locTo, p_penaltyUnmetDemand * v_unmetDemand(i_locTo) )
+				}
+			}
+			Variable v_depotInflow {
+				IndexDomain: i_loc | i_loc in s_intermediate;
+				Range: [0, p_locationSize(i_loc)];
+				Definition: sum( i_locFrom, v_flow(i_locFrom, i_loc) );
+			}
+			Variable v_depotOutflow {
+				IndexDomain: i_loc | i_loc in s_intermediate;
+				Range: [0, p_locationSize(i_loc)];
+				Definition: sum( i_locTo, v_flow(i_loc, i_locTo) );
+			}
+			Variable v_unmetDemand {
+				IndexDomain: i_locTo| ( i_locTo in s_destinations );
+				Range: nonnegative;
+			}
+			Constraint c_meetDemand {
+				IndexDomain: i_locTo | ( i_locTo in s_destinations );
+				Definition: {
+					sum( i_locFrom, v_flow( i_locFrom, i_locTo ) ) + v_unmetDemand( i_locTo ) 
+					= 
+					p_locationSize( i_locTo )
+				}
+			}
+			Constraint c_balancePumps {
+				IndexDomain: i_loc | i_loc in s_intermediate;
+				Definition: {
+					v_depotInflow(i_loc)
+					=
+					v_depotOutflow(i_loc)
+				}
+			}
+			Constraint c_supplyNeeded {
+				IndexDomain: i_loc | i_loc in s_sources;
+				Definition: sum( i_locTo, v_flow(i_loc, i_locTo) ) = v_prod( i_loc );
+			}
+			Set s_mapDemoVariables {
+				SubsetOf: AllVariables;
+				Definition: map_demo_math_model * AllVariables;
+			}
+			Set s_mapDemoConstraints {
+				SubsetOf: AllConstraints;
+				Definition: map_demo_math_model * AllConstraints;
+			}
+			MathematicalProgram mp_mapDemo {
+				Objective: v_cost;
+				Direction: minimize;
+				Constraints: AllConstraints;
+				Variables: AllVariables;
+				Type: Automatic;
+			}
+			Procedure pr_delegateMapDemo {
+				Body: {
+					if pro::DelegateToServer( 
+							waitForCompletion  :  1, 
+							completionCallback :  'pro::session::LoadResultsCallBack' ) then  
+						return 1;
+					endif ;
+					
+					pr_solveMapDemo();
+					
+					pro::ManagedSessionOutputCaseIdentifierSet := s_mapDemoVariables ;
+				}
+			}
+			Procedure pr_solveMapDemo {
+				Body: {
+					solve mp_mapDemo ;
+				}
+			}
+		}
+		Section item_actions_locations {
+			StringParameter sp_mapLocationItemActions {
+				IndexDomain: (webui::indexWidgetItemActionSpec,webui::indexPageExtension,webui::indexWidgetActionSpec);
+				Definition: {
+					{
+						('p_locationSize', '1', 'displaytext') : "Debug",
+						('p_locationSize', '1', 'icon'       ) : "aimms-bug",
+						('p_locationSize', '1', 'procedure'  ) : "pr_locDebug",
+						('p_locationSize', '1', 'state'      ) : if bp_developmentSupport then "Active" else "Hide" endif,
+					
+						('p_locationSize', '2', 'displaytext') : formatString("Increase %s %e by 1", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
+						('p_locationSize', '2', 'icon'       ) : "aimms-volume-increase2",
+						('p_locationSize', '2', 'procedure'  ) : "pr_locSizeIncrease1",
+						('p_locationSize', '2', 'state'      ) : "Active",
+					
+						('p_locationSize', '3', 'displaytext') : formatString("Increase %s %e by 5", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
+						('p_locationSize', '3', 'icon'       ) : "aimms-volume-increase",
+						('p_locationSize', '3', 'procedure'  ) : "pr_locSizeIncrease5",
+						('p_locationSize', '3', 'state'      ) : "Active",
+					
+						('p_locationSize', '4', 'displaytext') : formatString("Decrease %s %e by 1", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
+						('p_locationSize', '4', 'icon'       ) : "aimms-volume-decrease2",
+						('p_locationSize', '4', 'procedure'  ) : "pr_locSizeDecrease1",
+						('p_locationSize', '4', 'state'      ) : "Active",
+					
+						('p_locationSize', '5', 'displaytext') : formatString("Decrease %s %e by 5", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
+						('p_locationSize', '5', 'icon'       ) : "aimms-volume-decrease",
+						('p_locationSize', '5', 'procedure'  ) : "pr_locSizeDecrease5",
+						('p_locationSize', '5', 'state'      ) : "Active",
+					
+						('p_locationSize', '6', 'displaytext') : formatString("Edit %e", ep_selectedLocation),
+						('p_locationSize', '6', 'icon'       ) : "aimms-quill",
+						('p_locationSize', '6', 'procedure'  ) : "pr_locSizeDetails",
+						('p_locationSize', '6', 'state'      ) : "Active"
+					}
+				}
+			}
+			Procedure pr_locSizeIncrease1 {
+				Body: {
+					! The affected node is selected via the store focus, see https://documentation.aimms.com/webui/map-widget.html#store-focus-hover-and-select-for-nodes
+					p_ub := if ep_selectedLocation in s_sources then 2 * p_capProduction
+					        elseif ep_selectedLocation in s_intermediate then 2 * p_capDepot
+					        else p_capProduction endif ;
+					if p_locationSize(ep_selectedLocation) + 1 > p_ub then
+						raise warning 
+							"Exceeding upper bound " + p_ub + 
+							" at location size " + ep_selectedLocation ;
+						p_locationSize(ep_selectedLocation) := p_ub ;
+					else
+						p_locationSize(ep_selectedLocation) += 1 ;
+					endif ;
+				}
+				Parameter p_ub;
+			}
+			Procedure pr_locDebug {
+				Body: {
+					display ep_selectedLocation ;
+				}
+			}
+			Procedure pr_locSizeIncrease5 {
+				Body: {
+					! The affected node is selected via the store focus, see https://documentation.aimms.com/webui/map-widget.html#store-focus-hover-and-select-for-nodes
+					p_ub := if ep_selectedLocation in s_sources then 2 * p_capProduction
+					        elseif ep_selectedLocation in s_intermediate then 2 * p_capDepot
+					        else p_capProduction endif ;
+					if p_locationSize(ep_selectedLocation) + 5 > p_ub then
+						raise warning 
+							"Exceeding upper bound " + p_ub + 
+							" at location size " + ep_selectedLocation ;
+						p_locationSize(ep_selectedLocation) := p_ub ;
+					else
+						p_locationSize(ep_selectedLocation) += 5 ;
+					endif ;
+				}
+				Parameter p_ub;
+			}
+			Procedure pr_locSizeDecrease1 {
+				Body: {
+					! The affected node is selected via the store focus, see https://documentation.aimms.com/webui/map-widget.html#store-focus-hover-and-select-for-nodes
+					p_lb := 2 ;
+					if p_locationSize(ep_selectedLocation) - 1 < p_lb then
+						raise warning 
+							"Exceeding lower bound " + p_lb + 
+							" at location size " + ep_selectedLocation ;
+						p_locationSize(ep_selectedLocation) := p_lb ;
+					else
+						p_locationSize(ep_selectedLocation) -= 1 ;
+					endif ;
+				}
+				Parameter p_lb;
+			}
+			Procedure pr_locSizeDecrease5 {
+				Body: {
+					! The affected node is selected via the store focus, see https://documentation.aimms.com/webui/map-widget.html#store-focus-hover-and-select-for-nodes
+					p_lb := 2 ;
+					if p_locationSize(ep_selectedLocation) - 5 < p_lb then
+						raise warning 
+							"Exceeding lower bound " + p_lb + 
+							" at location size " + ep_selectedLocation ;
+						p_locationSize(ep_selectedLocation) := p_lb ;
+					else
+						p_locationSize(ep_selectedLocation) -= 5 ;
+					endif ;
+				}
+				Parameter p_lb;
+			}
+			Section location_detail_dialog_page {
+				Set s_inputOutput {
+					Index: i_io;
+					Definition: data { input, output };
+				}
+				Set s_connectedLocations {
+					SubsetOf: s_locations;
+					Index: i_locConnected;
+					Definition: {
+						{ i_loc | p_arc(ep_selectedLocation, i_loc) or p_arc(i_loc, ep_selectedLocation) }
+					}
+					Comment: "Locations connected to ep_selectedLocation";
+				}
+				Parameter p_inputOutputData {
+					IndexDomain: (i_loc,i_io);
+					Definition: {
+						if i_io = 'input' then
+							v_flow(i_loc, ep_selectedLocation)
+						else
+							v_flow(ep_selectedLocation, i_loc)
+						endif
+					}
+				}
+				StringParameter sp_locationDetailIOtitle {
+					Definition: formatString("Locations connected to %e", ep_selectedLocation);
+				}
+				Procedure pr_locSizeDetails {
+					Body: {
+						!raise error "todo" ;
+						! page-id: location-detail
+						CurrentInputs -= data { p_inputOutputData };
+						webui::OpenDialogPage(
+							pageId  :  'location-detail', 
+							title   :  
+								formatString("Details for %s \"%e\"", 
+									sp_locationType(ep_selectedLocation),
+									ep_selectedLocation ),
+							actions :  s_okCancel, 
+							onDone  :  'pr_completeLocSizeDetails');
+					}
+				}
+				Procedure pr_completeLocSizeDetails {
+					Arguments: (sp_answer);
+					StringParameter sp_answer {
+						Property: Input;
+					}
+				}
+			}
+		}
+	}
+	Section Gantt_Widget_section {
+		Section TimeRepresentation {
+			DeclarationSection Control_Declarations {
+				StringParameter sp_fmtHourCal {
+					Definition: "%c%y-%m-%d %H";
+				}
+				StringParameter sp_begHourCal {
+					Definition: "2016-05-09 00:00";
+				}
+				StringParameter sp_endHourCal {
+					Definition: "2016-05-13 00:00";
+				}
+			}
+			DeclarationSection Actual_Calendar_declaration {
+				Calendar HourCalendar {
+					Index: i_hc, i_hc1, i_hc2;
+					Unit: hour;
+					BeginDate: sp_begHourCal;
+					EndDate: sp_endHourCal;
+					TimeslotFormat: sp_fmtHourCal;
+				}
+				ElementParameter startHour {
+					Range: HourCalendar;
+					Definition: first(HourCalendar);
+				}
+				ElementParameter lastHour {
+					Range: HourCalendar;
+					Definition: last(HourCalendar);
+				}
+				Parameter p_timeZoneOffsetNeededForWebUIGanttCharts {
+					Unit: minute;
+					Definition: TimeZoneOffSet( 'UTC', 'LocalDST', UseDST: 1 );
+				}
+			}
+		}
+		Section Input_Data {
+			DeclarationSection Input_Sets {
+				Set S_AvailableLines {
+					Index: i_al;
+				}
+				Set S_OrderNumbers {
+					Index: i_o;
+					webui::ElementTextIdentifier: sp_orderName;
+				}
+				StringParameter sp_orderName {
+					IndexDomain: i_o;
+					Definition: formatString("%e",i_o);
+				}
+				Set s_productTypes {
+					Index: i_pt;
+					Definition: data { small, medium, large, maintenance };
+				}
+				Set s_productNames {
+					Index: i_pn;
+				}
+			}
+			DeclarationSection Input_Parameters {
+				ElementParameter ep_productType {
+					IndexDomain: i_pn;
+					Range: s_productTypes;
+					InitialData: data {};
+				}
+				Parameter p_capac {
+					IndexDomain: (i_al,i_pt);
+					Unit: lpu/hour;
+					InitialData: data {};
+					Comment: "For each available line";
+				}
+				Parameter p_orderQuantity {
+					IndexDomain: i_o;
+					Unit: lpu;
+					InitialData: data {};
+				}
+				Parameter p_orderLength {
+					IndexDomain: i_o;
+					Unit: hour;
+					InitialData: data {};
+					Comment: {
+						"Input when order product is none, for instance with maintenance jobs.
+						otherwise output based on the production line and quantity."
+					}
+					webui::FlagsIdentifier: sp_jobComputedReadOnlyFlags;
+				}
+				ElementParameter ep_orderProduct {
+					IndexDomain: i_o;
+					Range: s_productNames;
+					InitialData: data {};
+				}
+				ElementParameter ep_orderDeliveryDueDate {
+					IndexDomain: (i_o);
+					Range: HourCalendar;
+					InitialData: data {};
+				}
+				Parameter bp_orderScheduledByLivingCreature {
+					IndexDomain: i_o;
+					Range: binary;
+					InitialData: data {};
+				}
+				Parameter bp_orderScheduledByOptimizationAlgorithm {
+					IndexDomain: i_o;
+					Range: binary;
+					Definition: 1 - bp_orderScheduledByLivingCreature(i_o);
+				}
+				Parameter bp_isProductionOrder {
+					IndexDomain: i_o;
+					Definition: ep_orderProduct(i_o) <> ep_productNone;
+				}
+				ElementParameter ep_orderProductionLine {
+					IndexDomain: i_o;
+					Range: S_AvailableLines;
+					InitialData: data {};
+					webui::FlagsIdentifier: sp_jobComputedReadOnlyFlags;
+				}
+				ElementParameter ep_orderStartDate {
+					IndexDomain: i_o;
+					Range: HourCalendar;
+					InitialData: data {};
+					webui::FlagsIdentifier: sp_jobComputedReadOnlyFlags;
+				}
+			}
+			DeclarationSection Input_Parameter_copies {
+				ElementParameter ep_orderProductType {
+					IndexDomain: i_o;
+					Range: s_productTypes;
+					Definition: ep_productType( ep_orderProduct( i_o ) );
+				}
+			}
+			DeclarationSection Model_Development_Support {
+				Parameter p_d_startHour {
+					IndexDomain: i_o;
+					Unit: hour;
+					Definition: sum( i_al , p_WebUIGNTStartTime( i_al, i_o ) );
+					Comment: "Only visible when bp_developmentSupport";
+				}
+				Parameter p_d_deadlineHour {
+					IndexDomain: i_o;
+					Unit: hour;
+					Definition: {
+						TimeslotToMoment(
+							Calendar      :  HourCalendar,
+							ReferenceDate :  startHour,
+							Timeslot      :  ep_orderDeliveryDueDate(i_o)) + p_timeZoneOffsetNeededForWebUIGanttCharts ;
+					}
+					Comment: "Only visible when bp_developmentSupport";
+				}
+			}
+			DeclarationSection Input_Controls {
+				ElementParameter ep_selectedOrder {
+					Range: S_OrderNumbers;
+					InitialData: '';
+				}
+				ElementParameter e_selectedStartTime {
+					Range: HourCalendar;
+				}
+				ElementParameter e_selectedProductionLine {
+					Range: S_AvailableLines;
+				}
+			}
+			DeclarationSection Job_Maintenance {
+				ElementParameter ep_productNone {
+					Range: s_productNames;
+					InitialData: '';
+				}
+				ElementParameter ep_productTypeMaintenance {
+					Range: s_productTypes;
+					InitialData: '';
+				}
+			}
+			Procedure pr_initializeForJobMaintenance {
+				Body: {
+					SetElementAdd(
+						Setname :  s_productNames, 
+						Elempar :  ep_productNone, 
+						Newname :  "None");
+					
+					ep_productTypeMaintenance := StringToElement(s_productTypes, "maintenance", create:0);
+					if not ep_productTypeMaintenance then
+						raise error "internal error" ;
+					endif ;
+					ep_productType( ep_productNone ) := ep_productTypeMaintenance ;
+				}
+			}
+		}
+		DeclarationSection Gantt_specific_UoM {
+			Quantity qnt_LocProductUnit {
+				BaseUnit: lpu;
+			}
+		}
+		Section WebUI_declarations {
+			Set AllPublicIdentifiers {
+				SubsetOf: AllIdentifiers;
+				Definition: {
+					( Main_Wonderful_WebUI_Widgets ) *
+					( AllSets + AllParameters + AllVariables + AllConstraints + AllProcedures )
+				}
+			}
+			StringParameter sp_ganttPageSecondaryActions {
+				IndexDomain: (webui::indexPageExtension,webui::indexPageActionSpec);
+				Definition: {
+					{
+						( '1', 'displaytext' ) : "Optimize",
+						( '1', 'icon'        ) : "aimms-pacman",
+						( '1', 'procedure'   ) : "pr_SolveMixedIntegerProgrammingProblem",
+						( '1', 'state'       ) : "Active",
+					
+						( '2', 'displaytext' ) : "new job",
+						( '2', 'icon'        ) : "aimms-new",
+						( '2', 'procedure'   ) : "pr_addNewJob",
+						( '2', 'state'       ) : "Active"
+					}
+				}
+			}
+			StringParameter sp_ganttChartSidePanel {
+				IndexDomain: (webui::indexPageExtension,webui::indexSidePanelSpec);
+				Definition: {
+					{
+						('1', 'displayText' ) : "Control",
+						('1', 'pageId'      ) : "gantt-config-panel",
+						('1', 'tooltip'     ) : "",
+						('1', 'icon'        ) : "",
+						('1', 'iconcolor'   ) : "",
+						('1', 'state'       ) : "Hidden",
+					
+						('2', 'displayText' ) : "Story",
+						('2', 'pageId'      ) : "gantt-explain-panel",
+						('2', 'tooltip'     ) : "",
+						('2', 'icon'        ) : "",
+						('2', 'iconcolor'   ) : "",
+						('2', 'state'       ) : "Active"
+					}
+				}
+			}
+			Section Gantt_Chart_Handling {
+				Section item_actions_gantt_chart {
+					StringParameter sp_ganttSpecItemActions {
+						IndexDomain: (webui::indexWidgetItemActionSpec,webui::indexPageExtension,webui::indexWidgetActionSpec);
+						Definition: {
+							{
+								('p_WebUIGNTDuration', '1', 'displaytext') : "Debug",
+								('p_WebUIGNTDuration', '1', 'icon'       ) : "aimms-bug",
+								('p_WebUIGNTDuration', '1', 'procedure'  ) : "pr_jobDebug",
+								('p_WebUIGNTDuration', '1', 'state'      ) : if bp_developmentSupport then "Active" else "Hide" endif,
+							
+								('p_WebUIGNTDuration', '2', 'displaytext') : formatString("Move order %e to front", ep_selectedOrder),
+								('p_WebUIGNTDuration', '2', 'icon'       ) : "aimms-first",
+								('p_WebUIGNTDuration', '2', 'procedure'  ) : "pr_moveToFront",
+								('p_WebUIGNTDuration', '2', 'state'      ) : if bp_orderScheduledByLivingCreature( ep_selectedOrder ) then "Active" else "Inactive" endif,
+							
+								('p_WebUIGNTDuration', '3', 'displaytext') : formatString("Delay order %e until deadline", ep_selectedOrder),
+								('p_WebUIGNTDuration', '3', 'icon'       ) : "aimms-last",
+								('p_WebUIGNTDuration', '3', 'procedure'  ) : "pr_delayUntilDeadline",
+								('p_WebUIGNTDuration', '3', 'state'      ) : if bp_orderScheduledByLivingCreature( ep_selectedOrder ) then "Active" else "Inactive" endif,
+							
+								('p_WebUIGNTDuration', '4', 'displaytext') : formatString("Allow scheduling of %e by living creature", ep_selectedOrder),
+								('p_WebUIGNTDuration', '4', 'icon'       ) : "aimms-grab",
+								('p_WebUIGNTDuration', '4', 'procedure'  ) : "pr_scheduleByLivingCreature",
+								('p_WebUIGNTDuration', '4', 'state'      ) : if not bp_orderScheduledByLivingCreature( ep_selectedOrder ) then "Active" else "Inactive" endif,
+							
+								('p_WebUIGNTDuration', '5', 'displaytext') : formatString( "Allow scheduling of %e by optimization algorithm", ep_selectedOrder),
+								('p_WebUIGNTDuration', '5', 'icon'       ) : "aimms-music",
+								('p_WebUIGNTDuration', '5', 'procedure'  ) : "pr_scheduleByOptimizationAlgorithm",
+								('p_WebUIGNTDuration', '5', 'state'      ) : if bp_orderScheduledByLivingCreature( ep_selectedOrder ) then "Active" else "Inactive" endif,
+							
+								('p_WebUIGNTDuration', '6', 'displaytext') : formatString("Delete order %e", ep_selectedOrder),
+								('p_WebUIGNTDuration', '6', 'icon'       ) : "aimms-bin",
+								('p_WebUIGNTDuration', '6', 'procedure'  ) : "pr_deleteJob",
+								('p_WebUIGNTDuration', '6', 'state'      ) : "Active",
+							
+								('p_WebUIGNTDuration', '7', 'displaytext') : formatString("Edit order %e", ep_selectedOrder),
+								('p_WebUIGNTDuration', '7', 'icon'       ) : "aimms-quill",
+								('p_WebUIGNTDuration', '7', 'procedure'  ) : "pr_editJob",
+								('p_WebUIGNTDuration', '7', 'state'      ) : "Active"
+							}
+						}
+					}
+					Set s_ganttItemActionIdentifiers {
+						SubsetOf: AllIdentifiers;
+						Definition: {
+							data  {
+								bp_orderScheduledByLivingCreature,
+								ep_orderProduct,
+								p_orderLength,
+								ep_orderProductType,
+								p_orderQuantity,
+								ep_orderDeliveryDueDate,
+								ep_orderProductionLine,
+								ep_orderStartDate,
+								p_WebUIGNTDuration,
+								p_WebUIGNTStartTime
+							}
+						}
+					}
+					StringParameter sp_ganttItemActions {
+						IndexDomain: (webui::indexWidgetItemActionSpec,webui::indexPageExtension,webui::indexWidgetActionSpec);
+						Definition: {
+							if webui::indexWidgetItemActionSpec in s_ganttItemActionIdentifiers then
+								sp_ganttSpecItemActions('p_WebUIGNTDuration', webui::indexPageExtension, webui::indexWidgetActionSpec)
+							else
+								""
+							endif
+						}
+					}
+					Procedure pr_jobDebug {
+						Body: {
+							display ep_selectedOrder ;
+						}
+					}
+					Procedure pr_moveToFront {
+						Body: {
+							if ep_selectedOrder and bp_orderScheduledByLivingCreature( ep_selectedOrder ) then
+								ep_lineSelectedOrder := first( i_al | p_WebUIGNTStartTime(i_al, ep_selectedOrder) );
+								if ep_lineSelectedOrder then ! otherwise it is already at the front and it doesn't need to be moved.
+									p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) := p_timeZoneOffsetNeededForWebUIGanttCharts ;
+									repeat
+										! There is an overlapping order, scheduled by a living creature, if the start of that overlapping order is during the selected order, or if the start of the selected order is during that overlapping order.
+										ep_overlappingOrer := 
+											first( i_o | bp_orderScheduledByLivingCreature( i_o )                                                                                                                                                     and 
+												( i_o <> ep_selectedOrder                                                                                                                                                                       ) and
+												( ( ( p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) <= p_WebUIGNTStartTime( ep_lineSelectedOrder, i_o )                                                               ) and 
+												    ( p_WebUIGNTStartTime( ep_lineSelectedOrder, i_o ) < p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) + p_WebUIGNTDuration( ep_lineSelectedOrder, ep_selectedOrder ) )     ) or 
+												  ( ( p_WebUIGNTStartTime( ep_lineSelectedOrder, i_o ) <= p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder )                                                               ) and
+												    ( p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) < p_WebUIGNTStartTime( ep_lineSelectedOrder, i_o ) + p_WebUIGNTDuration( ep_lineSelectedOrder, i_o )              )     )    )    );
+										if ep_overlappingOrer then
+											! If there is an overlapping order, then move the selected order to the end of the overlapping order (and continue to check for another overlap).
+											p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) := p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_overlappingOrer ) + p_WebUIGNTDuration( ep_lineSelectedOrder, ep_overlappingOrer );
+										else
+											break ; ! repeat loop.
+										endif ;
+									endrepeat ;
+									ep_orderStartDate( ep_selectedOrder ) := 
+										MomentToTimeSlot(
+											Calendar      :  HourCalendar, 
+											ReferenceDate :  startHour, 
+											Elapsed       :  p_WebUIGNTStartTime(ep_lineSelectedOrder, ep_selectedOrder) - p_timeZoneOffsetNeededForWebUIGanttCharts );
+								endif ;
+							endif ;
+						}
+						Comment: {
+							"Moves the selected manually scheduled job to the front of the queue for the line it is on.
+							It should not overlap with existing manually scheduled jobs!"
+						}
+						ElementParameter ep_lineSelectedOrder {
+							Range: S_AvailableLines;
+						}
+						ElementParameter ep_overlappingOrer {
+							Range: S_OrderNumbers;
+						}
+					}
+					Procedure pr_delayUntilDeadline {
+						Body: {
+							if ep_selectedOrder and bp_orderScheduledByLivingCreature( ep_selectedOrder ) then
+								ep_lineSelectedOrder := first( i_al | p_WebUIGNTStartTime(i_al, ep_selectedOrder) );
+								if ep_lineSelectedOrder then ! otherwise it is already at the front and it doesn't need to be moved.
+									p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) := p_d_deadlineHour(ep_selectedOrder) - p_WebUIGNTDuration(ep_lineSelectedOrder, ep_selectedOrder) ;
+									repeat
+										! There is an overlapping order, scheduled by a living creature, if the start of that overlapping order is during the selected order, or if the start of the selected order is during that overlapping order.
+										ep_overlappingOrer := 
+											last( i_o | bp_orderScheduledByLivingCreature( i_o )                                                                                                                                                      and 
+												( i_o <> ep_selectedOrder                                                                                                                                                                       ) and
+												( ( ( p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) <= p_WebUIGNTStartTime( ep_lineSelectedOrder, i_o )                                                               ) and 
+												    ( p_WebUIGNTStartTime( ep_lineSelectedOrder, i_o ) < p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) + p_WebUIGNTDuration( ep_lineSelectedOrder, ep_selectedOrder ) )     ) or 
+												  ( ( p_WebUIGNTStartTime( ep_lineSelectedOrder, i_o ) <= p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder )                                                               ) and
+												    ( p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) < p_WebUIGNTStartTime( ep_lineSelectedOrder, i_o ) + p_WebUIGNTDuration( ep_lineSelectedOrder, i_o )              )     )    )    );
+										if ep_overlappingOrer then
+											! If there is an overlapping order, then move the selected order just before the overlapping order (and continue to check for another overlap).
+											p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_selectedOrder ) := p_WebUIGNTStartTime( ep_lineSelectedOrder, ep_overlappingOrer ) - p_WebUIGNTDuration( ep_lineSelectedOrder, ep_selectedOrder );
+										else
+											break ; ! repeat loop.
+										endif ;
+									endrepeat ;
+									ep_orderStartDate( ep_selectedOrder ) := 
+										MomentToTimeSlot(
+											Calendar      :  HourCalendar, 
+											ReferenceDate :  startHour, 
+											Elapsed       :  p_WebUIGNTStartTime(ep_lineSelectedOrder, ep_selectedOrder) - p_timeZoneOffsetNeededForWebUIGanttCharts );
+								endif ;
+							endif ;
+						}
+						ElementParameter ep_lineSelectedOrder {
+							Range: S_AvailableLines;
+						}
+						ElementParameter ep_overlappingOrer {
+							Range: S_OrderNumbers;
+						}
+					}
+					Procedure pr_scheduleByLivingCreature {
+						Body: {
+							if ep_selectedOrder then
+								bp_orderScheduledByLivingCreature( ep_selectedOrder ) := 1 ;
+							endif ;
+						}
+					}
+					Procedure pr_scheduleByOptimizationAlgorithm {
+						Body: {
+							if ep_selectedOrder then
+								bp_orderScheduledByLivingCreature( ep_selectedOrder ) := 0 ;
+							endif ;
+						}
+					}
+					Procedure pr_deleteJob {
+						Body: {
+							!P_OrderQuantity(ep_selectedOrder) := 0;
+							!EP_OrderProduct(ep_selectedOrder) := '';
+							!EP_OrderDeliveryDate(ep_selectedOrder) := '';
+							!bp_orderScheduledByLivingCreature(ep_selectedOrder) := 0;
+							!ep_orderProductionLine(ep_selectedOrder) := '';
+							!ep_orderStartDate(ep_selectedOrder) := '';
+							S_OrderNumbers -= ep_selectedOrder ;
+							ep_selectedOrder := '';
+							cleandependents S_OrderNumbers ;
+						}
+					}
+				}
+				Procedure pr_UponChange_WebUIGNTDuration;
+				Procedure pr_UponChange_WebUIGNTStartTime {
+					Body: {
+						!DebuggerBreakpoint();
+						ep_modifiedOrder := first( i_o | not forall( i_al, 
+							p_hist_WebUIGNTStartTime(i_al, i_o) = p_WebUIGNTStartTime(i_al, i_o) ) );
+						if ep_modifiedOrder then
+						
+							! set EP_OrderStartDate(i_o) and EP_OrderProductionLine(i_o)
+							ep_ModifiedProductionLine := first( i_al |
+								p_hist_WebUIGNTStartTime(i_al, ep_modifiedOrder) <> p_WebUIGNTStartTime(i_al, ep_modifiedOrder) );
+						 	p_hist_WebUIGNTStartTime(i_al, ep_modifiedOrder) := p_WebUIGNTStartTime(i_al, ep_modifiedOrder);
+						 	ep_orderProductionLine( ep_modifiedOrder ) := first( i_al |p_WebUIGNTStartTime(i_al, ep_modifiedOrder) );
+							ep_orderStartDate( ep_modifiedOrder ) := 
+								MomentToTimeSlot(
+									Calendar      :  HourCalendar, 
+									ReferenceDate :  startHour, 
+									Elapsed       :  p_WebUIGNTStartTime(ep_orderProductionLine( ep_modifiedOrder ), ep_modifiedOrder) - p_timeZoneOffsetNeededForWebUIGanttCharts );
+							ep_startTimeActivity(ep_orderProductionLine( ep_modifiedOrder ), ep_modifiedOrder) := ep_orderStartDate( ep_modifiedOrder ) ;
+						
+						
+						endif ;
+					}
+					ElementParameter ep_ModifiedProductionLine {
+						Range: S_AvailableLines;
+					}
+					ElementParameter ep_modifiedOrder {
+						Range: S_OrderNumbers;
+					}
+				}
+				DeclarationSection WebUI_Gantt_Chart_Declarations {
+					StringParameter begHourCalWebUI {
+						Definition: {
+							MomentToString(
+								Format        :  "%c%y-%m-%d %H:00", 
+								unit          :  [hour], 
+								ReferenceDate :  sp_begHourCal, 
+								Elapsed       :  p_timeZoneOffsetNeededForWebUIGanttCharts)
+						}
+					}
+					Parameter p_WebUIGNTStartTime {
+						IndexDomain: (i_al,i_o);
+						Unit: hour;
+						InitialData: data {};
+						webui::FlagsIdentifier: sp_jobComputedReadOnlyFlags;
+						webui::UponChangeProcedure: pr_UponChange_WebUIGNTStartTime;
+					}
+					Parameter p_hist_WebUIGNTStartTime {
+						IndexDomain: (i_al,i_o);
+						Unit: hour;
+					}
+					Parameter p_WebUIGNTDuration {
+						IndexDomain: (i_al,i_o);
+						Unit: hour;
+						InitialData: data {};
+						webui::AnnotationsIdentifier: sp_WebUIGNTDuration_anno;
+						webui::FlagsIdentifier: sp_jobComputedReadOnlyFlags;
+						webui::ItemTextIdentifier: sp_jobText;
+						webui::TooltipIdentifier: sp_jobTooltip;
+						webui::UponChangeProcedure: pr_UponChange_WebUIGNTDuration;
+					}
+					StringParameter sp_WebUIGNTDuration_anno {
+						IndexDomain: (i_al,i_o)|p_WebUIGNTDuration(i_al,i_o);
+						Definition: {
+							if bp_orderScheduledByLivingCreature(i_o) then
+								"manualJob"
+							else
+								"freeJob"
+							endif
+						}
+					}
+					StringParameter sp_jobText {
+						IndexDomain: (i_al,i_o)|p_WebUIGNTDuration(i_al, i_o);
+						Definition: {
+							if p_WebUIGNTDuration(i_al, i_o) < 1[hour] then
+								""
+							elseif p_WebUIGNTDuration(i_al, i_o) < 3[hour] then
+								formatString("o %e",i_o)
+							elseif p_WebUIGNTDuration(i_al, i_o) < 8[hour] then
+								formatString("order %e",i_o)
+							else
+								formatString("order %e: %e %i lpu",
+									i_o, ep_orderProductType(i_o),
+									p_orderQuantity(i_o))
+							endif
+						}
+					}
+					StringParameter sp_jobTooltip {
+						IndexDomain: (i_al,i_o)|p_WebUIGNTDuration(i_al, i_o);
+						Definition: {
+							"<div align=\"left\">"  +
+							"<Table>" +
+							        "<TR>"  +
+							                "<TD>"  +
+							                        "<B> order : </B>" +
+							                "</TD>" +
+							                "<TD>"  +
+							                        formatString("%e", i_o) +
+							                "</TD>" +
+							                "<TD>"  +
+							                        "<B> " + 
+							                             	"Start"
+							                        + " : </B>" +
+							                "</TD>" +
+							                "<TD>"  +
+							                        formatString("%e",ep_orderStartDate(i_o)) +
+							                "</TD>" +
+							        "</TR>" 
+							        +
+							        "<TR>"  +
+							                "<TD>"  +
+							                        "<B> Product : </B>" +
+							                "</TD>" +
+							                "<TD>"  +
+							                        ep_orderProduct( i_o ) +
+							                "</TD>" +
+							                "<TD>"  +
+							                        "<B> " +                                 
+							                              	"Line "
+							                        + " : </B>" +
+							                "</TD>" +
+							                "<TD>"  +
+							                        formatString("%e",ep_orderProductionLine(i_o)) +
+							                "</TD>" +
+							        "</TR>" 
+							        +
+							        "<TR>"  +
+							                "<TD>"  +
+							                        "<B> " + 
+							                              	"Amount"
+							                        + " : </B>" +
+							                "</TD>" +
+							                "<TD>"  +
+							                        p_orderQuantity(i_o) +
+							                "</TD>" +
+							                "<TD>"  +
+							                        "<B> " + 
+							                               	"Duration "
+							                        + " : </B>" +
+							                "</TD>" +
+							                "<TD>"  +
+							                        formatString("%i",p_WebUIGNTDuration(i_al,i_o)) +
+							                "</TD>" +
+							        "</TR>"  
+							        +
+							"</Table>"
+						}
+					}
+					StringParameter sp_jobComputedReadOnlyFlags {
+						IndexDomain: i_o;
+						Definition: {
+							if bp_orderScheduledByLivingCreature(i_o) then
+								""
+							else
+								"readOnly"
+							endif
+						}
+					}
+				}
+				DeclarationSection WebUI_Order_Info_Identifiers {
+					Parameter BP_D_OrderScheduledManuallyUsable {
+						IndexDomain: i_o;
+						Definition: bp_orderScheduledByLivingCreature(i_o) and ep_orderStartDate(i_o) and ep_orderProductionLine(i_o);
+					}
+				}
+				Procedure pr_prepWebUIGanttChartIdentifiers {
+					Body: {
+						p_WebUIGNTStartTime(i_al, i_o)|(not bp_orderScheduledByLivingCreature(i_o)) := 0;
+						
+						p_WebUIGNTStartTime(i_al, i_o)|(ep_startTimeActivity(i_al, i_o) and (not bp_orderScheduledByLivingCreature(i_o))):=
+							TimeslotToMoment(
+								Calendar      :  HourCalendar,
+								ReferenceDate :  startHour,
+								Timeslot      :  ep_startTimeActivity(i_al, i_o)) + p_timeZoneOffsetNeededForWebUIGanttCharts ;
+						p_hist_WebUIGNTStartTime(i_al, i_o) := p_WebUIGNTStartTime(i_al, i_o);
+						
+						p_WebUIGNTDuration(i_al, i_o)|(not bp_orderScheduledByLivingCreature(i_o)) := p_durationActivity(i_al, i_o);
+						
+						pr_prepWebUIOrderInfoFromSolution();
+					}
+				}
+				Procedure pr_prepWebUIOrderInfoFromSolution {
+					Body: {
+						for i_al do 
+							ep_orderStartDate(     i_o) | (ep_startTimeActivity(i_al, i_o) and (not bp_orderScheduledByLivingCreature(i_o))) := ep_startTimeActivity(i_al, i_o);
+							ep_orderProductionLine(i_o) | (ep_startTimeActivity(i_al, i_o) and (not bp_orderScheduledByLivingCreature(i_o))) := i_al ;
+							p_orderLength(         i_o) | (ep_startTimeActivity(i_al, i_o) and (not bp_orderScheduledByLivingCreature(i_o))) := p_WebUIGNTDuration(i_al, i_o);
+						endfor ;
+					}
+				}
+				Function fnc_computeJobDuration {
+					Arguments: (ep_prd, p_qnt, ep_line);
+					Unit: hour;
+					Body: {
+						fnc_computeJobDuration := Ceil( p_qnt /$ p_capac(ep_line, ep_productType( ep_prd ) ) );
+					}
+					ElementParameter ep_prd {
+						Range: s_productNames;
+						Property: Input;
+					}
+					Parameter p_qnt {
+						Unit: lpu;
+						Property: Input;
+					}
+					ElementParameter ep_line {
+						Range: S_AvailableLines;
+						Property: Input;
+					}
+				}
+				Parameter bp_dpManuallyScheduled {
+					Range: binary;
+					InitialData: 0;
+				}
+				ElementParameter ep_dpProduct {
+					Range: s_productNames;
+					InitialData: '';
+				}
+				ElementParameter ep_dpProductType {
+					Range: s_productTypes;
+					Definition: ep_productType( ep_dpProduct );
+				}
+				Parameter p_dpAmount {
+					Unit: lpu;
+					InitialData: 0;
+				}
+				Parameter p_dpOderLength {
+					Unit: hour;
+				}
+				ElementParameter ep_dpDueDate {
+					Range: HourCalendar;
+				}
+				ElementParameter ep_dpProductionStart {
+					Range: HourCalendar;
+				}
+				ElementParameter ep_dpProductionLine {
+					Range: S_AvailableLines;
+				}
+				Parameter bp_showAmount {
+					Range: binary;
+					Definition: {
+						if formatString("%e",ep_dpProduct) = "None" then
+							0
+						else
+							1
+						endif
+					}
+				}
+				Parameter bp_showOrderLength {
+					Range: binary;
+					Definition: 1-bp_showAmount;
+				}
+				StringParameter sp_scalarWidgetDialogPageTitle {
+					Definition: {
+						if ep_dpProduct then
+							formatString("Edit order %e", ep_selectedOrder )
+						else
+							"Create new order/job"
+						endif
+					}
+				}
+				Procedure pr_addNewJob {
+					Body: {
+						bp_dpManuallyScheduled := 0 ;
+						ep_dpProduct := '' ;
+						p_dpAmount := 0 ;
+						p_dpOderLength := 0 ;
+						ep_dpDueDate := '' ;
+						ep_dpProductionStart := '' ;
+						ep_dpProductionLine := '' ;
+						webui::OpenDialogPage(
+							pageId  :  'job-detail', 
+							title   :  "Create new job", 
+							actions :  s_okCancel, 
+							onDone  :  'pr_perhapsAddJob');
+					}
+				}
+				Procedure pr_editJob {
+					Body: {
+						bp_dpManuallyScheduled := bp_orderScheduledByLivingCreature(ep_selectedOrder);
+						ep_dpProduct :=  ep_orderProduct(ep_selectedOrder);
+						p_dpAmount := p_orderQuantity(ep_selectedOrder);
+						p_dpOderLength := 
+							if ep_dpProduct =  ep_productNone then
+								p_orderLength(ep_selectedOrder)
+							else
+								fnc_computeJobDuration(ep_dpProduct,p_dpAmount,ep_dpProductionLine)
+							endif ;
+						ep_dpDueDate := ep_orderDeliveryDueDate(ep_selectedOrder);
+						ep_dpProductionStart := ep_orderStartDate(ep_selectedOrder) ;
+						ep_dpProductionLine := ep_orderProductionLine(ep_selectedOrder);
+						webui::OpenDialogPage(
+							pageId  :  'job-detail', 
+							title   :  "Create new job", 
+							actions :  s_okCancel, 
+							onDone  :  'pr_perhapsEditJob');
+					}
+					Comment: "Put the existing data of the selected job in";
+				}
+				Procedure pr_perhapsAddJob {
+					Arguments: (sp_msg);
+					Body: {
+						if sp_msg = "OK" then
+							!DebuggerBreakpoint();
+							ep_lastJob := last( S_OrderNumbers );
+							if ep_lastJob then
+								!ep_newJob := StringToElement( S_OrderNumbers, formatString("%i", val( ep_lastJob ) + 1 ) );
+								SetElementAdd(
+									Setname :  S_OrderNumbers, 
+									Elempar :  ep_newJob, 
+									Newname :  formatString("%i", val( ep_lastJob ) + 1 ) );
+							else
+								!ep_newJob := StringToElement( S_OrderNumbers, "1" );
+								SetElementAdd(
+									Setname :  S_OrderNumbers, 
+									Elempar :  ep_newJob, 
+									Newname :  "1" );
+							endif ;
+							pr_commitEditJob(ep_newJob);
+						endif ;
+					}
+					StringParameter sp_msg {
+						Property: Input;
+					}
+					ElementParameter ep_lastJob {
+						Range: S_OrderNumbers;
+					}
+					ElementParameter ep_newJob {
+						Range: S_OrderNumbers;
+					}
+				}
+				Procedure pr_perhapsEditJob {
+					Arguments: (sp_msg);
+					Body: {
+						if sp_msg = "OK" then
+							pr_commitEditJob(ep_selectedOrder);
+						endif ;
+					}
+					StringParameter sp_msg {
+						Property: Input;
+					}
+				}
+				Procedure pr_commitEditJob {
+					Arguments: (ep_job);
+					Body: {
+						bp_orderScheduledByLivingCreature(ep_job) := bp_dpManuallyScheduled ;
+						ep_orderProduct(ep_job) := ep_dpProduct ;
+						p_orderQuantity(ep_job) := p_dpAmount ;
+						p_orderLength(ep_job) :=
+							if ep_dpProduct =  ep_productNone then
+								p_dpOderLength
+							else
+								fnc_computeJobDuration( ep_dpProduct, p_dpAmount, ep_dpProductionLine )
+							endif ;
+						ep_orderDeliveryDueDate(ep_job) := ep_dpDueDate ;
+						ep_orderStartDate(ep_job) := ep_dpProductionStart ;
+						ep_startTimeActivity(ep_dpProductionLine, ep_job) := ep_dpProductionStart ;
+						ep_orderProductionLine(ep_job) := ep_dpProductionLine ;
+						
+						p_WebUIGNTStartTime(ep_dpProductionLine, ep_job) := 
+							TimeslotToMoment(
+								Calendar      :  HourCalendar,
+								ReferenceDate :  startHour,
+								Timeslot      :  ep_dpProductionStart) + p_timeZoneOffsetNeededForWebUIGanttCharts ;
+						
+						p_WebUIGNTDuration(ep_dpProductionLine, ep_job) := p_orderLength(ep_job);
+					}
+					ElementParameter ep_job {
+						Range: S_OrderNumbers;
+						Property: Input;
+					}
+				}
+			}
+		}
+		Section Scheduling_Solution_Procedures {
+			DeclarationSection Scheduling_Support_Identifiers {
+				Parameter p_ActivityLength {
+					IndexDomain: (i_al,i_o);
+					Unit: hour;
+					Definition: {
+						if EP_OrderProduct(i_o) = ep_productNone then
+							p_orderLength(i_o)
+						else 
+							Ceil( p_orderQuantity(i_o) / p_capac(i_al, ep_productType( ep_orderProduct( i_o ) ) ) )
+						endif ;
+					}
+				}
+				Parameter p_activityLengthM1 {
+					IndexDomain: (i_al,i_o);
+					Unit: hour;
+					Definition: p_ActivityLength(i_al, i_o)-1[hour];
+				}
+			}
+			DeclarationSection Scheduing_Common_Variables_and_Constraints {
+				Variable Makespan {
+					Range: free;
+					Unit: hour;
+				}
+			}
+			Section Mixed_Integer_Programming_Scheduling_Model {
+				Procedure pr_SolveMixedIntegerProgrammingProblem {
+					Body: {
+						
+						ep_StartNoOverlap(i_al, i_o, i_hc) := i_hc-p_activityLengthM1(i_al, i_o)/1[hour]  ;
+						ep_StartNoOverlap(i_al, i_o, i_hc) | ( ep_StartNoOverlap(i_al, i_o, i_hc) = '' ) := startHour ;
+						
+						if pro::PROEndPoint then
+							if pro::management::IsRunningOnCloud() then
+								pro::solverlease::solveModel( 'mp_machineSchedulingMixedIntegerProgrammingFormulation' );
+							else
+								pro::ManagedSessionInputCaseIdentifierSet :=
+									AllMathematicalPrograms +
+									s_allMixedIntegerProgrammingVariables +
+									s_allMixedIntegerProgrammingConstraints +
+									ReferencedIdentifiers( s_allMixedIntegerProgrammingVariables, AllAttributeNames, 1) +
+									ReferencedIdentifiers( s_allMixedIntegerProgrammingConstraints, AllAttributeNames, 1) ;
+								pr_delegateSolveMixedIntegerProgrammingProblem();
+							endif ;
+						else
+							pr_workSolveMixedIntegerProgrammingProblem();
+						endif ;
+						
+						! Remove small values (noise) from CPLEX/MIP solution
+						v_selectProcutionLine(i_al, i_o) | ( v_selectProcutionLine(i_al, i_o) and ( abs( v_selectProcutionLine(i_al, i_o) <= 0.1 ) ) ) := 0 ;
+						v_startProductionOnProductionLine(i_al,i_o,i_hc) | ( v_startProductionOnProductionLine(i_al,i_o,i_hc) and
+						   ( abs( v_startProductionOnProductionLine(i_al,i_o,i_hc) ) <= 0.1 ) ) := 0 ;
+						
+						pr_computeMakeSpan;
+						
+						pr_PrepGanttChartIdentifiersFromMIPSolution ;
+					}
+				}
+				Procedure pr_delegateSolveMixedIntegerProgrammingProblem {
+					Body: {
+						if pro::DelegateToServer(
+								completionCallback: 'pro::session::LoadResultsCallback',
+								waitForCompletion:1) then
+							return ;
+						endif ;
+						pr_workSolveMixedIntegerProgrammingProblem();
+						pro::ManagedSessionOutputCaseIdentifierSet := s_allMixedIntegerProgrammingVariables ;
+					}
+				}
+				Procedure pr_workSolveMixedIntegerProgrammingProblem {
+					Body: {
+						solve mp_machineSchedulingMixedIntegerProgrammingFormulation ;
+					}
+				}
+				Procedure pr_PrepGanttChartIdentifiersFromMIPSolution {
+					Body: {
+						! For WinUI
+						!empty durationActivity, startTimeActivity ;
+						p_durationActivity( ( i_al, i_o) | not bp_orderScheduledByLivingCreature( i_o ) ) := 0 ;
+						ep_startTimeActivity( ( i_al, i_o) | not bp_orderScheduledByLivingCreature( i_o ) ) := '' ;
+						for (i_al, i_o) | ( v_selectProcutionLine(i_al, i_o) and ( not bp_orderScheduledByLivingCreature( i_o ) ) ) do
+							for i_hc | v_startProductionOnProductionLine(i_al, i_o, i_hc) do
+								ep_startTimeActivity(i_al, i_o) :=  i_hc ;
+							endfor ;
+							p_durationActivity(i_al, i_o) := p_ActivityLength(i_al, i_o);
+						endfor ;
+						
+						! For WebUI
+						pr_prepWebUIGanttChartIdentifiers ;
+					}
+				}
+				Procedure pr_computeMakeSpan {
+					Body: {
+						empty ep_jobends ;
+						for (i_al,i_o,i_hc) | v_startProductionOnProductionLine(i_al,i_o,i_hc) do
+							ep_jobEnds(i_al,i_o) := i_hc + p_ActivityLength(i_al, i_o)/1[hour];
+						endfor ;
+						ep_LineEnds(i_al) := max( i_o, ep_jobends( i_al, i_o) );
+						
+						makespan := max( i_al, ep_lineEnds(i_al) - starthour );
+					}
+					ElementParameter ep_jobends {
+						IndexDomain: (i_al,i_o);
+						Range: HourCalendar;
+					}
+				}
+				Procedure ReadMachineConfig {
+					Body: {
+						read from file "MachineConfig.txt";
+					}
+				}
+				DeclarationSection Mixed_Integer_Programming_Support_Identifiers {
+					ElementParameter ep_StartNoOverlap {
+						IndexDomain: (i_al,i_o,i_hc);
+						Range: HourCalendar;
+						InitialData: data {};
+					}
+					ElementParameter ep_lineEnds {
+						IndexDomain: i_al;
+						Range: HourCalendar;
+					}
+					Parameter bp_pureFormulationObjective {
+						Range: binary;
+						InitialData: 0;
+						Comment: {
+							"When 
+							  0 : The objective is defined via constraint c_objDef via a cost function
+							  1 : The objective is the make span computed by checking for the last job."
+						}
+					}
+					Parameter bp_domStartProductionProductionLine {
+						IndexDomain: (i_al,i_o,i_hc);
+						Definition: {
+							1 $ ( ( ( i_hc + p_activityLengthM1(i_al, i_o)/1[hour] ) <= ep_orderDeliveryDueDate(i_o) ) or 
+							      ( BP_D_OrderScheduledManuallyUsable(i_o)                                           )    )
+						}
+					}
+				}
+				DeclarationSection MIP_scheduling_declarations {
+					Variable v_obj {
+						Range: free;
+						Unit: hour;
+						Comment: "sum( i_al,  LineTotalSpan(i_al) )";
+					}
+					Constraint c_objDef {
+						IndexDomain: | ( not bp_pureFormulationObjective );
+						Unit: hour;
+						Definition: {
+							v_obj = sum( ( i_al, i_o, i_hc), 
+							     v_costOfStartingOrder(i_al, i_o, i_hc) )
+						}
+					}
+					Variable v_selectProcutionLine {
+						IndexDomain: (i_al,i_o);
+						Range: binary;
+						Comment: "For every order i_o select precisely one production line i_al";
+					}
+					Variable v_lineTotalSpan {
+						IndexDomain: i_al | bp_pureFormulationObjective;
+						Range: free;
+						Unit: hour;
+						Definition: sum( ( i_o, i_hc), v_costOfStartingOrder(i_al, i_o, i_hc) );
+					}
+					Variable v_startProductionOnProductionLine {
+						IndexDomain: (i_al, i_o, i_hc) | bp_domStartProductionProductionLine(i_al, i_o, i_hc);
+						Range: binary;
+					}
+					Variable v_costOfStartingOrder {
+						IndexDomain: (i_al,i_o,i_hc) | bp_domStartProductionProductionLine(i_al, i_o, i_hc);
+						Range: free;
+						Unit: hour;
+						Definition: ((ord(i_hc))[hour]+p_ActivityLength(i_al, i_o))  * v_startProductionOnProductionLine(i_al, i_o, i_hc);
+					}
+					Constraint c_ensureAnOrderIsHandledOnOneProductionLineOnly {
+						IndexDomain: i_o;
+						Definition: sum( i_al, v_selectProcutionLine(i_al, i_o) ) = 1;
+					}
+					Constraint c_ensureEachOrderIsStartedOnlyOnce {
+						IndexDomain: (i_al,i_o);
+						Definition: {
+							sum( i_hc, v_startProductionOnProductionLine(i_al, i_o, i_hc) ) = 
+							     v_selectProcutionLine(i_al, i_o)
+						}
+					}
+					Constraint c_ensureThereIsNoOverlapOnAnyLine {
+						IndexDomain: (i_al,i_hc);
+						Definition: {
+							sum((i_o,i_hc1)| 
+							      (ep_StartNoOverlap(i_al, i_o, i_hc)<=i_hc1) and 
+							      (i_hc1<=i_hc), 
+							  v_startProductionOnProductionLine(i_al, i_o, i_hc1)) 
+							  <=1
+						}
+					}
+					Constraint c_MIPListenToManualScheduling {
+						IndexDomain: i_o | BP_D_OrderScheduledManuallyUsable(i_o);
+						Definition: {
+							v_startProductionOnProductionLine( 
+							     ep_orderProductionLine(i_o), i_o, 
+							     ep_orderStartDate(i_o) ) = 1
+						}
+					}
+					Constraint c_JobsEndBeforemakespan {
+						IndexDomain: i_al | bp_pureFormulationObjective;
+						Unit: hour;
+						Definition: v_lineTotalSpan(i_al) <= v_obj;
+					}
+				}
+				DeclarationSection Mixed_Integer_Programming_Administration_Declarations {
+					Set s_allMixedIntegerProgrammingVariables {
+						SubsetOf: AllVariables;
+						Definition: ( Mixed_Integer_Programming_Scheduling_Model   ) * AllVariables;
+					}
+					Set s_allMixedIntegerProgrammingConstraints {
+						SubsetOf: AllConstraints;
+						Definition: ( Mixed_Integer_Programming_Scheduling_Model   ) * AllConstraints;
+					}
+					MathematicalProgram mp_machineSchedulingMixedIntegerProgrammingFormulation {
+						Objective: v_obj;
+						Direction: minimize;
+						Constraints: s_allMixedIntegerProgrammingConstraints;
+						Variables: s_allMixedIntegerProgrammingVariables;
+						Type: Automatic;
+					}
+				}
+			}
+		}
+		Section Section_1 {
+			ElementParameter ep_startTimeActivity {
+				IndexDomain: (i_al,i_o);
+				Range: HourCalendar;
+			}
+			Parameter p_durationActivity {
+				IndexDomain: (i_al,i_o);
+				Unit: hour;
+			}
+			Procedure pr_writeJSONData {
+				Body: {
+					dex::AddMapping(
+						mappingName :  "fewJobsJSON", 
+						mappingFile :  "mappings/fewJobsJSON.xml") ;
+					
+					dex::WriteToFile(
+						dataFile    :  "data/jobsExample.json", 
+						mappingName :  "fewJobsJSON", 
+						pretty      :  1);
+				}
+			}
+			Procedure pr_readJSONData {
+				Body: {
+					dex::AddMapping(
+						mappingName :  "fewJobsJSON", 
+						mappingFile :  "mappings/fewJobsJSON.xml") ;
+					
+					dex::ReadFromFile(
+						dataFile         :  "data/jobsExample.json", 
+						mappingName      :  "fewJobsJSON", 
+						emptyIdentifiers :  0, 
+						emptySets        :  0, 
+						resetCounters    :  0);
+				}
+			}
+			Procedure pr_pageopen_Gantt_startUpProcedure {
+				Body: {
+					pr_readJSONData();
+					pr_initializeForJobMaintenance();
+				}
+			}
+		}
+	}
+	Section Application_initialization_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Body: {
+				! Workaround for gitlab ticket 4555:
+				Empty p_latitude, p_longitude, p_locationSize ;
+				
+				
+				pr_initContext();
+			}
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1 ; ! Cases are not used in this app. DataManagementExit();
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+	Procedure MainExecution;
+}

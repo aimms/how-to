@@ -14,6 +14,8 @@ This section contains explanations of various UI features available when buildin
 .. toctree::
    :maxdepth: 1
 
+   /Articles/531/531-working-with-wonderful-webui-widgets
+   /Articles/531/531-create-wonderful-webui-widgets
    /Articles/123/123-WebUI-FORMS
    /Articles/279/279-gantt-chart-scroll
    /Articles/503/503-sailing

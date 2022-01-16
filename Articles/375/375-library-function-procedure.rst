@@ -40,7 +40,7 @@ There are three remarks on this organization:
 
 #.  To make it visually clear which parts of the library require coordination before they can be changed, 
     and which parts can be freely changed, 
-    the contents ar separated in a ``Public_Section`` and a ``Private_Section``.
+    the contents are separated in a ``Public_Section`` and a ``Private_Section``.
 
 #.  The library initialization and termination procedures are executed during application initialization and termination. 
     Many library implementers do not expect such procedures to be called explicitly from the main model, or from other libraries. 

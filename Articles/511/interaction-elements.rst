@@ -67,3 +67,6 @@ Following this convention ensures a constant experience. Users can predict the p
 
 .. image:: images/ButtonPositioning-1024x675.png
 
+.. spelling::
+    
+	amsterdam

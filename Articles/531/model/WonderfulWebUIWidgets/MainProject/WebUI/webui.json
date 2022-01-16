@@ -1,0 +1,1384 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home",
+                "type": "pagev2-grid",
+                "children": []
+              },
+              {
+                "name": "map",
+                "type": "pagev2-grid",
+                "slug": "map",
+                "children": [
+                  {
+                    "name": "location-detail",
+                    "type": "pagev2-grid-dialog",
+                    "slug": "location-detail",
+                    "children": []
+                  },
+                  {
+                    "name": "map-config-panel",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "map-config-panel",
+                    "children": []
+                  },
+                  {
+                    "name": "map-explain-panel",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "map-explain-panel",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Gantt",
+                "type": "pagev2-grid",
+                "slug": "gantt",
+                "children": [
+                  {
+                    "name": "job-detail",
+                    "type": "pagev2-grid-dialog",
+                    "slug": "job-detail",
+                    "children": []
+                  },
+                  {
+                    "name": "gantt-config-panel",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "gantt-config-panel",
+                    "children": []
+                  },
+                  {
+                    "name": "gantt-explain-panel",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "gantt-explain-panel",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Development Support",
+                "type": "pagev2-grid",
+                "slug": "development_support",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "statusmessages": {
+      "aimms": {
+        "contents": [
+          "sp_wwwStatusBar"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_wwwStatusBar",
+            "slice": [
+              {
+                "index": "webui::indexApplicationExtension",
+                "type": "free",
+                "value": "webui::indexApplicationExtension"
+              },
+              {
+                "index": "webui::indexStatusBarSpec",
+                "type": "free",
+                "value": "webui::indexStatusBarSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "ui.editable": {
+      "literal": 0
+    },
+    "workflows.configuration": {
+      "aimms": {
+        "contents": [
+          "sp_wwwWorkflowSteps"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_wwwWorkflowSteps",
+            "slice": [
+              {
+                "index": "webui::indexWorkflowOrder",
+                "type": "free",
+                "value": "webui::indexWorkflowOrder"
+              },
+              {
+                "index": "webui::indexNoOfPages",
+                "type": "free",
+                "value": "webui::indexNoOfPages"
+              },
+              {
+                "index": "webui::indexWorkflowPageSpec",
+                "type": "free",
+                "value": "webui::indexWorkflowPageSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "workflows.information": {
+      "aimms": {
+        "contents": [
+          "sp_wwwWorkflow"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_wwwWorkflow",
+            "slice": [
+              {
+                "index": "webui::indexWorkflowOrder",
+                "type": "free",
+                "value": "webui::indexWorkflowOrder"
+              },
+              {
+                "index": "webui::indexWorkflowSpec",
+                "type": "free",
+                "value": "webui::indexWorkflowSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "layouts/custom_fe6fb944-9dac-46fe-9801-51e6415d21cd": {
+    "definition": {
+      "literal": {
+        "componentName": "Grid",
+        "props": {
+          "gridTemplateColumns": "1fr",
+          "gridTemplateRows": "1fr 1fr",
+          "gridTemplateAreas": "\"area-a\" \"area-b\""
+        },
+        "items": [
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-a",
+              "name": "Area A",
+              "gridAutoFlow": "column"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-b",
+              "name": "Area B",
+              "gridAutoFlow": "row"
+            }
+          }
+        ]
+      }
+    },
+    "displayName": {
+      "literal": "Layout1 Copy"
+    }
+  },
+  "pages/development_support": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "textGantChartStory",
+          "gridArea": "Unassigned widgets",
+          "dndId": "area-btextGantChartStory0"
+        },
+        {
+          "widgetUri": "DevelopmentSupportScalars",
+          "gridArea": "area-a",
+          "dndId": "area-aDevelopmentSupportScalars1"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout1"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "DevelopmentSupportScalars",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/gantt": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "selectedOrder",
+          "gridArea": "Unassigned widgets",
+          "dndId": "area-bselectedOrder1"
+        },
+        {
+          "widgetUri": "orderDetails",
+          "gridArea": "area-b",
+          "dndId": "area-borderDetails0"
+        },
+        {
+          "widgetUri": "ganttDemo",
+          "gridArea": "area-a",
+          "dndId": "area-aganttDemo2"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "custom_fe6fb944-9dac-46fe-9801-51e6415d21cd"
+    },
+    "onload": {
+      "aimms": {
+        "run": "pr_pageopen_Gantt_startUpProcedure"
+      }
+    },
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_ganttPageSecondaryActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_ganttPageSecondaryActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "sidepanels": {
+      "aimms": {
+        "contents": [
+          "sp_ganttChartSidePanel"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_ganttChartSidePanel",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexSidePanelSpec",
+                "type": "free",
+                "value": "webui::indexSidePanelSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "ganttDemo",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "orderDetails",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/gantt-config-panel": {
+    "widgets": {
+      "literal": []
+    },
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    }
+  },
+  "pages/gantt-explain-panel": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "textGantChartStory",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetstextGantChartStory0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "textGantChartStory",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "WelcomeText",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsWelcomeText0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout9"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "WelcomeText",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/job-detail": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-dialog"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "JobDetails",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsJobDetails0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "JobDetails",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/location-detail": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-dialog"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "InOut",
+          "gridArea": "area-a",
+          "dndId": "area-aInOut1"
+        },
+        {
+          "widgetUri": "scalar-size-location",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsscalar-size-location0"
+        }
+      ]
+    },
+    "maxcolumns": {
+      "literal": 3
+    },
+    "maxrows": {
+      "literal": 2
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "InOut",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "scalar-size-location",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/map": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "mapDemo",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsmapDemo0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "onload": {
+      "aimms": {
+        "run": "pr_openPageMap"
+      }
+    },
+    "sidepanels": {
+      "aimms": {
+        "contents": [
+          "sp_mapSidePanel"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_mapSidePanel",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexSidePanelSpec",
+                "type": "free",
+                "value": "webui::indexSidePanelSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "mapDemo",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/map-config-panel": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "mapDemoScalars",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsmapDemoScalars0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "mapDemoScalars",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/map-explain-panel": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "mapExplain",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsmapExplain0"
+        }
+      ]
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "mapExplain",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "widgets/DevelopmentSupportScalars": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "bp_developmentSupport"
+        ]
+      }
+    },
+    "name": {
+      "literal": "DevelopmentSupportScalars"
+    }
+  },
+  "widgets/ganttDemo": {
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_WebUIGNTStartTime",
+          "p_WebUIGNTDuration"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "resources": [
+          "i_al"
+        ],
+        "jobs": [
+          "<IDENTIFIER-SET>",
+          "i_o"
+        ],
+        "aggregated": []
+      }
+    },
+    "contextmenu": {
+      "aimms": {
+        "contents": [
+          "sp_ganttItemActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_ganttItemActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetItemActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetItemActionSpec"
+              },
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "name": {
+      "literal": "ganttDemo"
+    },
+    "store.focus.in": {
+      "literal": {
+        "i_o": "ep_selectedOrder"
+      }
+    },
+    "time.reference": {
+      "aimms": {
+        "contents": [
+          "sp_begHourCal"
+        ]
+      }
+    },
+    "time.resolution": {
+      "literal": 1
+    },
+    "time.viewport.start": {
+      "aimms": {
+        "contents": [
+          "sp_begHourCal"
+        ]
+      }
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Order production schedule"
+    }
+  },
+  "widgets/InOut": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_inputOutputData"
+        ],
+        "prefix": "aimms",
+        "partition": {
+          "rowHeader": [
+            "i_loc"
+          ],
+          "colHeader": [
+            "i_io"
+          ],
+          "aggregated": [
+            "<IDENTIFIER-SET>"
+          ]
+        },
+        "displaydomain": {
+          "p_inputoutputdata": "1"
+        },
+        "numdecimals": 0,
+        "slices": [
+          {
+            "identifier": "p_inputOutputData",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "subset",
+                "value": "i_locConnected"
+              },
+              {
+                "index": "i_io",
+                "type": "free",
+                "value": "i_io"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_inputoutputdata": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_loc"
+        ],
+        "colHeader": [
+          "i_io"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "i_loc",
+          "width": 25.94
+        }
+      ]
+    },
+    "name": {
+      "literal": "InOut"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_locationDetailIOtitle"
+        ],
+        "slices": []
+      }
+    }
+  },
+  "widgets/JobDetails": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "ep_dpProduct",
+          "ep_dpProductType",
+          "p_dpAmount",
+          "p_dpOderLength",
+          "ep_dpProductionStart",
+          "ep_dpDueDate",
+          "ep_dpProductionLine",
+          "bp_dpManuallyScheduled"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "bp_orderscheduledbylivingcreature": "1",
+        "ep_orderproducttype": "1",
+        "ep_orderdeliveryduedate": "1",
+        "p_orderquantity": "1",
+        "ep_orderstartdate": "1",
+        "ep_orderproductionline": "1",
+        "p_dpamount": "bp_showAmount",
+        "p_dpoderlength": "bp_showOrderLength",
+        "ep_dpduedate": "bp_showAmount"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "name": {
+      "literal": "JobDetails"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_scalarWidgetDialogPageTitle"
+        ],
+        "slices": []
+      }
+    }
+  },
+  "widgets/mapDemo": {
+    "aimms.widget.type": {
+      "literal": "map-v2"
+    },
+    "arcs.__display_order__": {
+      "literal": [
+        "arcs.0"
+      ]
+    },
+    "arcs.0": {
+      "aimms": {
+        "contents": [
+          "p_arc"
+        ],
+        "slices": [
+          {
+            "identifier": "p_arc",
+            "slice": [
+              {
+                "index": "i_locFrom",
+                "type": "free",
+                "value": "i_locFrom"
+              },
+              {
+                "index": "i_locTo",
+                "type": "free",
+                "value": "i_locTo"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "arcs.0.label.hide": {
+      "aimms": {
+        "contents": [
+          "bp_showConnections"
+        ],
+        "slices": []
+      }
+    },
+    "arcs.0.line.straight": {
+      "literal": true
+    },
+    "arcs.0.numdecimals": {
+      "literal": 0
+    },
+    "arcs.0.value": {
+      "literal": {
+        "identifier": "p_arc",
+        "slice": [
+          {
+            "index": "i_locFrom",
+            "type": "free",
+            "value": "i_locFrom"
+          },
+          {
+            "index": "i_locTo",
+            "type": "free",
+            "value": "i_locTo"
+          }
+        ]
+      }
+    },
+    "arcs.0.width.dynamic": {
+      "literal": true
+    },
+    "center.latitude": {
+      "literal": 49.095452162534829
+    },
+    "center.longitude": {
+      "literal": 13.491210937500002
+    },
+    "contextmenu": {
+      "aimms": {
+        "contents": [
+          "sp_mapLocationItemActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_mapLocationItemActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetItemActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetItemActionSpec"
+              },
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "heatmaps.__display_order__": {
+      "literal": [
+        "heatmaps.0"
+      ]
+    },
+    "name": {
+      "literal": "mapDemo"
+    },
+    "nodes.__display_order__": {
+      "literal": [
+        "nodes.0"
+      ]
+    },
+    "nodes.0": {
+      "aimms": {
+        "contents": [
+          "p_longitude",
+          "p_latitude",
+          "p_locationSize",
+          "sp_locationIcon"
+        ],
+        "slices": [
+          {
+            "identifier": "p_longitude",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "free",
+                "value": "i_loc"
+              }
+            ]
+          },
+          {
+            "identifier": "p_latitude",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "free",
+                "value": "i_loc"
+              }
+            ]
+          },
+          {
+            "identifier": "p_locationSize",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "free",
+                "value": "i_loc"
+              }
+            ]
+          },
+          {
+            "identifier": "sp_locationIcon",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "free",
+                "value": "i_loc"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "nodes.0.icon": {
+      "literal": {
+        "identifier": "sp_locationIcon",
+        "slice": [
+          {
+            "index": "i_loc",
+            "type": "free",
+            "value": "i_loc"
+          }
+        ]
+      }
+    },
+    "nodes.0.index": {
+      "literal": {
+        "identifier": "i_loc",
+        "focus": [
+          {
+            "index": "i_loc",
+            "value": "ep_selectedLocation"
+          }
+        ]
+      }
+    },
+    "nodes.0.latitude": {
+      "literal": {
+        "identifier": "p_latitude",
+        "slice": [
+          {
+            "index": "i_loc",
+            "type": "free",
+            "value": "i_loc"
+          }
+        ]
+      }
+    },
+    "nodes.0.longitude": {
+      "literal": {
+        "identifier": "p_longitude",
+        "slice": [
+          {
+            "index": "i_loc",
+            "type": "free",
+            "value": "i_loc"
+          }
+        ]
+      }
+    },
+    "nodes.0.maximumreferencesize": {
+      "aimms": {
+        "contents": [
+          "p_relativeSize"
+        ],
+        "slices": []
+      }
+    },
+    "nodes.0.size": {
+      "literal": {
+        "identifier": "p_locationSize",
+        "slice": [
+          {
+            "index": "i_loc",
+            "type": "free",
+            "value": "i_loc"
+          }
+        ]
+      }
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_mapWidgetTitle"
+        ],
+        "slices": []
+      }
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_mapWidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_mapWidgetActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "zoom": {
+      "literal": 5
+    }
+  },
+  "widgets/mapDemoScalars": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_locationSizeLower",
+          "p_locationSizeUpper",
+          "p_penaltyUnmetDemand",
+          "p_productionUnitCost",
+          "p_transportationUnitCost",
+          "p_capDepot",
+          "p_capProduction",
+          "p_capPipe",
+          "p_relativeSize"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_capdepot": "0",
+        "p_locationsizelower": "0",
+        "p_locationsizeupper": "0",
+        "p_relativesize": "bp_developmentSupport"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "name": {
+      "literal": "mapDemoScalars"
+    },
+    "title": {
+      "literal": "App settings"
+    }
+  },
+  "widgets/mapExplain": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div>The German company OxyGem fills oxygen tanks.&nbsp;It has separate locations to</div><div><br></div><div>* <img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAuCAYAAABTTPsKAAAA3UlEQVRoge2ZMQ7DIAxFSdWbciTP+DbsvgInaacORSGG4N+Wxm+LQPDkj2KUbKWUR1iI27cFRnFhNC6MxoXRLCd81ybEGN+eU0owmR6Wq7ALo3FhNKbCzGy53C4mwiISmDnknC2WO2RaWEQCEXXJagn0JDQlzMyBiNR5WgIjCamdrkXdAVu8Ejg7XjMsPLKBVrUz535YuFdWS6A3oRrz97CIHMpo4xrmwloCI+d1j2t3uk/gwmhcGI0Lo3FhNMsJb61fBjMXFAtaX5j+p8K/ynIVdmE0LozGhdEsJ/wEp5dZUaYBxRAAAAAASUVORK5CYII=\">&nbsp;Distillate oxygen</div><div>* <img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAvCAYAAAB6zDPWAAABB0lEQVRoge2YMQ7DIAxFf6seyMrKbZKZ0zDDbbz7CjlJO7WqopZgGqdC8lsJ8PIFhuSyrusdg3D9t4AGl7XCZa1wWSuGkr3VGpdlOcsDAJBzrrYPlazLWlFds1v21pQW7Z4YKlmXtcJlrXBZK1zWCtUJdvYtbMtQybqsFRf/fWSEWraU8vOkvWOoZEspYOauid5h5i7h5jp7dI19vvQ0TSCipj67yYqI2WHAzEgpQUSanq9WAxFBSukwuRoxxt2Eh6oGu3X2U7q/fuVul1VLqkBDskSEGCNCCP12FXLOzRusqRoQ0WvAI0oXAIQQMM+zqo/qiqgd/Bs9ooDfDexwWStc1gqXteIBCQtQoEoABjUAAAAASUVORK5CYII=\">&nbsp;Pump oxygen</div><div>* <img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAxCAYAAABDEFA9AAAA6UlEQVRoge2XsQ3EIAxFndMNlJ2oMw0149Air8Akd1WaKMHmlA/nyK+MkPz0hIAstdYPGeE1W6AHl0XhsihcFoUp2be0gJkpxgiV2LaN1nUV14llSym3CN0xoynLzJRzvkWoRc6ZmFlc15QdUbVn1qXsqKo7mrqXsiOrameeyo6uuiPVPZWdUVUz+1R2RlXNbFM3WJdsSolSSrDvEs8tOxtTsov/ioMQ37NERCEEqIT2ZDBV1mVRqPbsEWmPofa4qbIui8JlUfx0GqBvtCtMlW2+ukYXlM7v55T9N0yVdVkULovCZVG4LIov/QdiOJzg/m0AAAAASUVORK5CYII=\">&nbsp;Bottle oxygen</div><div><br></div><div>Lately, due to the corona crisis, there is significantly more demand.&nbsp;However, the demand cannot be met.  To the management of Oxygem, this is a very unpleasant  surprise; the distillation factories are&nbsp; quite capable, and can handle together far greater demands.</div><div><br></div><div>Your task is to determine the cause of the unmet demand and advise on a remedy.</div><div><br></div><div>Hopefully, this map widget will help you in your analysis. It features:</div><div><br></div><div>* Item menu, left click - right click on one of the&nbsp; icons, and you will get a menu of the actions you can do on a location.</div><div>* widget menu, identified by the hamburger menu in the right upper of the map widget. Here you can solve the underlying&nbsp;optimization problem.</div><div>* in the control side panel, various settings can be adapted.</div><div><br></div><div>More information on the actions available in the How-To article associated with this example.</div><div><br></div><div>One tip: start with solving the optimization problem.</div>"
+    },
+    "name": {
+      "literal": "mapExplain"
+    }
+  },
+  "widgets/orderDetails": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "bp_orderScheduledByLivingCreature",
+          "ep_orderProduct",
+          "ep_orderProductType",
+          "p_orderQuantity",
+          "p_orderLength",
+          "ep_orderDeliveryDueDate",
+          "ep_orderStartDate",
+          "ep_orderProductionLine",
+          "p_d_startHour",
+          "p_d_deadlineHour"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "ep_d_orderdeliverydate": "1",
+        "ep_d_orderproduct": "1",
+        "ep_orderproducttype": "1",
+        "p_d_orderquantity": "1",
+        "bp_orderscheduledbylivingcreature": "1",
+        "ep_orderproductionline": "1",
+        "ep_orderstartdate": "1",
+        "p_d_deadlinehour": "bp_developmentSupport",
+        "p_d_duration": "bp_developmentSupport",
+        "p_d_starthour": "bp_developmentSupport",
+        "p_orderlength": "1",
+        "p_orderquantity": "bp_isProductionOrder",
+        "ep_orderdeliveryduedate": "bp_isProductionOrder"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_o"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "contextmenu": {
+      "aimms": {
+        "contents": [
+          "sp_ganttItemActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_ganttItemActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetItemActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetItemActionSpec"
+              },
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "EP_OrderProductionLine"
+          },
+          "width": 19.37
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "EP_OrderStartDate"
+          },
+          "width": 22.88
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "EP_D_OrderDeliveryDate"
+          },
+          "width": 20.87
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "P_D_OrderQuantity"
+          },
+          "width": 19.58
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "EP_OrderProductType"
+          },
+          "width": 16.45
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "EP_D_OrderProduct"
+          },
+          "width": 17.7
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "BP_OrderScheduledManually"
+          },
+          "width": 23.37
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "P_OrderQuantity"
+          },
+          "width": 13.12
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "EP_OrderDeliveryDate"
+          },
+          "width": 19.46
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "EP_OrderProduct"
+          },
+          "width": 15
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_d_startHour"
+          },
+          "width": 22.54
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_d_duration"
+          },
+          "width": 20.43
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_d_deadlineHour"
+          },
+          "width": 23.97
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "ep_orderDeliveryDueDate"
+          },
+          "width": 18.95
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_orderLength"
+          },
+          "width": 12.05
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "ep_orderProductType"
+          },
+          "width": 20.29
+        }
+      ]
+    },
+    "name": {
+      "literal": "orderDetails"
+    },
+    "show.units": {
+      "literal": 0
+    },
+    "store.focus.in": {
+      "literal": {
+        "i_o": "ep_selectedOrder"
+      }
+    },
+    "title": {
+      "literal": "Order details"
+    }
+  },
+  "widgets/scalar-size-location": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "slices": [
+          {
+            "identifier": "p_locationSize",
+            "slice": [
+              {
+                "index": "i_loc",
+                "type": "element-parameter",
+                "value": "ep_selectedLocation"
+              }
+            ]
+          },
+          {
+            "identifier": "v_unmetDemand",
+            "slice": [
+              {
+                "index": "i_locTo",
+                "type": "element-parameter",
+                "value": "ep_selectedLocation"
+              }
+            ]
+          }
+        ],
+        "contents": [
+          "p_locationSize",
+          "v_unmetDemand"
+        ],
+        "prefix": "aimms",
+        "numdecimals": 0
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "name": {
+      "literal": "scalar-size-location"
+    }
+  },
+  "widgets/selectedOrder": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "compact": {
+      "literal": 1
+    },
+    "name": {
+      "literal": "selectedOrder"
+    }
+  },
+  "widgets/textGantChartStory": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div>The Levram company operates three production lines, nick named King Kong, Hercules, and Antman.&nbsp; Each production line handles an order as a single task: stopping a task halfway leads to clogging and other problems. Even though all three lines can handle all types of orders, King Kong is more suited to handling orders with large items, Antman is more suited to handling orders with small items, and Hercules is somewhat in between.</div><div><br></div><div>As a production planner, you were notified yesterday by Quality Control that there will be a surprise inspection on 2016-05-10 between 08:00 and 14:00 on all three production lines.&nbsp;They expect each production line to be halted for at least two hours to do the inspection. Of course, Business Development wants the production to be interrupted minimally.</div><div><br></div><div>Hopefully, the Gantt Chart widget will help you in replanning existing orders. </div><div><br></div><div>This widget distinguishes between two types of tasks:</div><div><br></div><div>* Production tasks, where a product type, amount, and Due date are specified.</div><div>* Maintenance tasks (product type none), where a start time, duration, and production line are specified.</div><div><br></div><div>In addition, tasks can be scheduled in two ways:</div><div>* Manually, these tasks have a blue border and can be dragged across the Gantt Chart. In addition, there are more Right Mouse menu actions available for these tasks.</div><div>* By the internal scheduler of the application, which minimizes the  makespan of all tasks. This internal schedular is invoked by clicking Optimize in the lower right menu.</div><div><br></div><div>Upon opening the Gantt Chart page, the existing workload is read in.&nbsp; In addition, you can create new tasks, by selecting the \"new job\" action in the lower right menu.</div>"
+    },
+    "name": {
+      "literal": "textGantChartStory"
+    }
+  },
+  "widgets/WelcomeText": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div><span style=\"font-size: 32px;\">Welcome to Wonderful WebUI Widgets.</span></div><div><br></div><div>AIMMS is designed for interactive optimization applications.</div><div>To let you experience these applications, this application provides some one-page examples.</div><div>Each page has a short story with a question and it is designed to help you answer this question within a few minutes.</div><div>The story can be found in the side panel of that page.</div><div><br></div><div>The first page illustrates the map widget by letting you analyze the supply chain within an organization.</div><div><br></div><div>The second page illustrates the Gantt Chart by letting you plan maintenance tasks on production lines.</div><div><br></div>"
+    },
+    "name": {
+      "literal": "WelcomeText"
+    }
+  }
+}

@@ -29,7 +29,7 @@ To install SQLite ODBC driver, please refer to the following website, and downlo
 
 `SQLite ODBC Driver <http://www.ch-werner.de/sqliteodbc>`__ (external link)
 
-Then just run the .exe and follow the instructions.
+Then just run the ``.exe`` and follow the instructions.
 
 .. note:: This driver is open source under a BSD-type license. You may read the `license terms <http://www.ch-werner.de/sqliteodbc/license.terms>`_ for details.
 
@@ -65,21 +65,21 @@ Generate the connection file
 To read one database, AIMMS needs to know the name of the driver it should use and the location of your SQLite database. There are 3 different ways to give those indications to an AIMMS database identifier:
 
 * By generating a **.dsn file**, that you will store somewhere on your computer (almost equivalent to a text file .txt) and link it to your AIMMS identifier
-* By generating a **system .dsn file**, that your computer will store for you in a specific place
-* By creating a **connection string**, that will have the same role as a .dsn file, but directly written into the AIMMS application. This appears to be particularly useful when, for instance, a password is needed to read a certain database, and you don't want to rewrite it each time you open your application or the database.
+* By generating a **system** ``.dsn`` **file**, that your computer will store for you in a specific place
+* By creating a **connection string**, that will have the same role as a ``.dsn`` file, but directly written into the AIMMS application. This appears to be particularly useful when, for instance, a password is needed to read a certain database, and you don't want to rewrite it each time you open your application or the database.
 
-Generate a .dsn file connected to your SQLite database
+Generate a ``.dsn`` file connected to your SQLite database
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Every database has its own .dsn file, so you need to generate one for each of your databases. In addition to that, every ODBC driver has a different .dsn file structure.
+Every database has its own ``.dsn`` file, so you need to generate one for each of your databases. In addition to that, every ODBC driver has a different ``.dsn`` file structure.
 
-To generate the appropriate .dsn file from your SQLite ODBC driver, please select the tab "File DSN" from the ODBC Data Sources administrator (the one that we opened just before to check that the installation was completed). Then click the "Add" button in the upper right of the window. You should see this pop-up window:
+To generate the appropriate ``.dsn`` file from your SQLite ODBC driver, please select the tab "File DSN" from the ODBC Data Sources administrator (the one that we opened just before to check that the installation was completed). Then click the "Add" button in the upper right of the window. You should see this pop-up window:
 
 .. image:: images/4odbc.png
 
 Select the driver you want to use (in our case, SQLite3 ODBC Driver) and click "Next".
 
-At this point, the computer is asking you the name of the .dsn file you want to create. Here, it is named "test".
+At this point, the computer is asking you the name of the ``.dsn`` file you want to create. Here, it is named "test".
 
 .. image:: images/5odbc.png
 
@@ -87,14 +87,14 @@ After that, you will have access to the 'SQLite ODBC Driver Connect', which fina
 
 .. image:: images/8odbc.png
 
-After clicking OK, you should see a new .dsn file (named ``test`` here) in the file explorer of your ODBC Data Source Administrator.
+After clicking OK, you should see a new ``.dsn`` file (named ``test`` here) in the file explorer of your ODBC Data Source Administrator.
 
 Then you may go directly to the section fill-out-db-table-id_ in order to complete the connection with your AIMMS database.
 
-Generate a .dsn system file connected to your SQLite database
+Generate a ``.dsn`` system file connected to your SQLite database
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To generate the appropriate .dsn System file from your SQLite ODBC driver, please reach the tab "System DSN" from the ODBC Data Sources administrator (the one that we've opened just before to check that the installation was completed).
+To generate the appropriate ``.dsn`` System file from your SQLite ODBC driver, please reach the tab "System DSN" from the ODBC Data Sources administrator (the one that we've opened just before to check that the installation was completed).
 
 * click Add in the upper right of the window.
 * Select SQLite3 ODBC Driver as shown below.
@@ -156,20 +156,20 @@ Let's start a super simple new AIMMS project, containing only one Database Table
 * Activate the **Data Source** wizard,
 
 
-+-------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-| Link    Type                  |        Action                                                                                                                                 |
-+===============================+===============================================================================================================================================+
-| Link with a .dsn file         | * Choose the **Select File Data Source…** command in the menu that pops up,                                                                   |
-|                               | * Select your DSN file ("*dsn*" in our case).                                                                                                 |
-|                               | * Press the **Save**                                                                                                                          |
-+-------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-| Link with a System .dsn file  |  * Choose the **Select User/System Data Source…** command in the menu that pops up,                                                           |
-|                               |  * Select your DSN System file (``chinook SQLite3`` in our case).                                                                             |
-|                               |  * Press the **Save**                                                                                                                         |
-+-------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-| Link with a connection string |  * Choose the **Select String Parameter/Connection String…** command in the menu that pops up,                                                |
-|                               |  * Select the String Parameter |sp| you've just created (named ``ConnectionString`` in our case)                                              |
-+-------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
++-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+| Link    Type                      |        Action                                                                                                                                 |
++===================================+===============================================================================================================================================+
+| Link with a ``.dsn`` file         | * Choose the **Select File Data Source…** command in the menu that pops up,                                                                   |
+|                                   | * Select your DSN file ("*dsn*" in our case).                                                                                                 |
+|                                   | * Press the **Save**                                                                                                                          |
++-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+| Link with a System ``.dsn`` file  |  * Choose the **Select User/System Data Source…** command in the menu that pops up,                                                           |
+|                                   |  * Select your DSN System file (``chinook SQLite3`` in our case).                                                                             |
+|                                   |  * Press the **Save**                                                                                                                         |
++-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+| Link with a connection string     |  * Choose the **Select String Parameter/Connection String…** command in the menu that pops up,                                                |
+|                                   |  * Select the String Parameter |sp| you've just created (named ``ConnectionString`` in our case)                                              |
++-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -208,14 +208,14 @@ Please `tell us <https://community.aimms.com/aimms-developer-12/how-to-link-an-s
 Summary
 ----------
 
-In this article we installed the SQLite driver, and linked our SQLite database to an AIMMS database table identifier |db| that we now may further use in our AIMMS application. We presented 3 different ways to link the database, namely the .dsn file, the system .dsn file and the connection string. We finally concluded by verifying that we were able to read our SQLite database through our AIMMS  database table identifier.
+In this article we installed the SQLite driver, and linked our SQLite database to an AIMMS database table identifier |db| that we now may further use in our AIMMS application. We presented 3 different ways to link the database, namely the ``.dsn`` file, the system ``.dsn`` file and the connection string. We finally concluded by verifying that we were able to read our SQLite database through our AIMMS  database table identifier.
 
 For further reading, please refer to the following related links :
 
 AIMMS materials
 --------------------
 
-* `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_: Chapter 27 - Communicating With Databases
+* :doc:`data-communication-components/communicating-with-databases/index`
 
 * :aimms:func:`SQLCreateConnectionString`  
 

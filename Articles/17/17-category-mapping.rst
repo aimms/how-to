@@ -6,7 +6,7 @@ Model category mapping of items
    :keywords: category, map, mapping, lookup
 
 
-Very often, you will find yourselves having to define a certain property for an item based on its category. For example, cost($) of an item based on the size of that item (small, medium, or large). This is similar to using lookups in `Excel` to create a map from the size-cost table to the list of items. This article will show you how to model such a category mapping in AIMMS.
+Very often, you will find yourselves having to define a certain property for an item based on its category. For example, cost($) of an item based on the size of that item (small, medium, or large). This is similar to using a ``lookup`` function in `Excel` to create a map from the size-cost table to the list of items. This article will show you how to model such a category mapping in AIMMS.
 
 Use Case
 ---------

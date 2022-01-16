@@ -29,7 +29,7 @@ A diagram of the architecture we will use in our examples is shown below.
 The different steps in this process are as below:
 
 #. Develop the model in Python/R as usual.
-#. Expose the model as a web service (eg. a REST API) which takes in input data from the client and returns the model results. `Flask in Python <https://flask.palletsprojects.com/en/1.1.x/>`_ and `Plumber in R <https://www.rplumber.io/>`_ are example libraries that could be used for this purpose. 
+#. Expose the model as a web service (example: a REST API) which takes in input data from the client and returns the model results. `Flask in Python <https://flask.palletsprojects.com/en/1.1.x/>`_ and `Plumber in R <https://www.rplumber.io/>`_ are example libraries that could be used for this purpose. 
 #. Use the `DataExchange library <https://documentation.aimms.com/dataexchange/index.html>`_ to construct AIMMS procedures which read and write JSON files (or CSV/XML) compatible with the model built in Step 1. 
 #. Use the `HTTP library <https://documentation.aimms.com/httpclient/index.html>`_ functions to call the API built in Step 2 from AIMMS. This step will use the AIMMS procedures in Step 3 to prepare the data for the API and retrieve the results back into AIMMS.
 #. (Optional) If there are numerous use cases, it could be helpful to maintain a library of functions in Python/R/AIMMS to facilitate the data transformations. 
@@ -69,7 +69,7 @@ We decided to explore the usage of Docker in our examples to take advantage of t
 Examples
 ------------
 
-#. Using scikit-learn's KMeans clustering in an AIMMS app to find centers of gravity in a demand network: :doc:`How to Connect AIMMS with Python <../487/487-aimms-with-python>`.
+#. Using `scikit-learn's` KMeans clustering in an AIMMS app to find centers of gravity in a demand network: :doc:`How to Connect AIMMS with Python <../487/487-aimms-with-python>`.
 #. Create a Sankey Diagram using R to visualize network flows in an AIMMS app: :doc:`How to Connect AIMMS with R <../498/498-aimms-with-r>`.
 
 

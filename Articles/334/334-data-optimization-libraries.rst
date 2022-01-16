@@ -13,7 +13,6 @@ This article explains how we can bring these two abstraction mechanisms together
 The Transport Problem searches for the best way to transport goods from a couple of sources to sinks. 
 
 .. image:: Images/TransportProblem.png
-   :scale: 50 %
 
 
 Transferring data

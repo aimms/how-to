@@ -34,7 +34,7 @@ Please note that launching the installation of a Microsoft Access Database Engin
 
     > AccessDatabaseEngine_X64.exe /passive
 
-In order to use the new driver from your AIMMS project for connecting to an Access database, you need to adjust the Data Source Name (.dsn) file associated with your Access database. Typically that .dsn file contains something like:
+In order to use the new driver from your AIMMS project for connecting to an Access database, you need to adjust the Data Source Name (.dsn) file associated with your Access database. Typically that ``.dsn`` file contains something like:
 
 .. code-block:: none
 

@@ -1,0 +1,7 @@
+<AimmsCSVMapping>
+    <RowMapping name="table1">
+        <ColumnMapping name="city" binds-to="i_loc"/>
+        <ColumnMapping name="lat" maps-to="p_latitude(i_loc)"/>
+        <ColumnMapping name="lng" maps-to="p_longitude(i_loc)"/>
+    </RowMapping>
+</AimmsCSVMapping>

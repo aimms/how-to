@@ -160,7 +160,7 @@ For this request, you'll need several objects:
     
     }
 
-We can specify the direction for the outputfile using the ``SP_OutputFile`` string parameter.
+We can specify the direction for the output file using the ``SP_OutputFile`` string parameter.
 
 .. code-block:: aimms
 

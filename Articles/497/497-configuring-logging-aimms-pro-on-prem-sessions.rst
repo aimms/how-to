@@ -88,7 +88,7 @@ This logger will trace starting and finishing of AIMMS procedures. An excerpt fr
 Also provided
 --------------
 
-The following .zip file contains a ``LoggerConfig.xml`` that can be added to any project.  You will need to add the loggers you deem necessary, or are advised to you.
+The following ZIP file contains a ``LoggerConfig.xml`` that can be added to any project.  You will need to add the loggers you deem necessary, or are advised to you.
 
 :download:`AIMMS project download <model/loggerConfigOnPremise.zip>` 
 

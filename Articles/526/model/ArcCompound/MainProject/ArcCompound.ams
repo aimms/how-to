@@ -1,0 +1,61 @@
+## ams_version=1.0
+
+Model Main_ArcCompound {
+    Set s_nodes {
+        Index: i_node, i_nodeFrom, i_nodeTo;
+    }
+    Set s_arcs {
+        SubsetOf: (s_nodes, s_nodes);
+        Tags: (afrom, ato);
+        Index: i_arc;
+    }
+    Variable v_flow {
+        IndexDomain: i_arc;
+        Range: free;
+    }
+    Parameter p_totFlowCompBased {
+        Definition: sum( (i_nodeFrom, i_nodeTo), v_flow(i_nodeFrom, i_nodeTo) );
+    }
+    Parameter p_totFlowRefBased {
+        Definition: sum( i_arc, v_flow(i_arc) );
+    }
+    Parameter p_totInFlowCompBased {
+        IndexDomain: i_node;
+        Definition: sum( i_nodeFrom, v_flow(i_nodeFrom, i_node) );
+    }
+    Parameter p_totInFlowRefBased {
+        IndexDomain: i_node;
+        Definition: sum( i_arc | i_arc.ato = i_node, v_flow(i_arc) );
+    }
+    Procedure MainInitialization {
+        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+    }
+    Procedure PostMainInitialization {
+        Comment: {
+            "Add initialization statements here that require that the libraries are already initialized properly,
+            or add statements that require the Data Management module to be initialized."
+        }
+    }
+    Procedure MainExecution;
+    Procedure PreMainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that require all libraries to be still alive.
+            Return 1 if you allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence."
+        }
+    }
+    Procedure MainTermination {
+        Body: {
+            return 1;
+        }
+        Comment: {
+            "Add termination statements here that do not require all libraries to be still alive.
+            Return 1 to allow the termination sequence to continue.
+            Return 0 if you want to cancel the termination sequence.
+            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+        }
+    }
+}

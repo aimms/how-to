@@ -1,10 +1,17 @@
 Get Log Files
 ========================================================================
+
 .. meta::
    :description: This article explains where you can find various log files in your project.
    :keywords: log, troubleshoot
 
-Things don't always go according to plan. Sometimes the log files can answer **What happened?** 
+Things don't always go according to plan. 
+Sometimes the log files can answer **What happened?** 
+
+.. note:: 
+
+    Security notice, see:  `Apache log4j vulnerability does not affect AIMMS software <https://community.aimms.com/aimms-pro-cloud-platform-43/apache-log4j-vulnerability-does-not-affect-aimms-software-1123>`_
+
 
 This article explains where you can find various log files in your project.
 
@@ -122,7 +129,7 @@ License server logs
 ---------------------
 
 The licensing log files can be found in the folder ``C:\ProgramData\AIMMS\Logging\`` 
-and the log files are called ``LicenseServer.log`` ``LicenseServer.log.1`` thru ``LicenseServer.log.10`` 
+and the log files are called ``LicenseServer.log`` ``LicenseServer.log.1`` through ``LicenseServer.log.10`` 
 
 The license logging can be configured using ``LicenseServerLogging.xml`` in that same folder.
 
@@ -152,11 +159,15 @@ After this change, the license service needs to be restarted as follows:
 #.  Start the AIMMS PRO services stopped in the first step.
     It may take one or two minutes before the service is started.
 
-
-
-
 Related Topics
 ----------------
 
-* **AIMMS Documentation**: `PRO Log Management <https://documentation.aimms.com/pro/admin-config-2.html>`_
-* **AIMMS How-To**: `Retrieve Solver Log Files in AIMMS PRO <https://how-to.aimms.com/Articles/13/13-Solver-Logging-PRO.html>`_
+#.  **AIMMS Documentation**: `PRO Log Management <https://documentation.aimms.com/pro/admin-config-2.html>`_
+
+#.  **AIMMS How-To**: 
+
+    #.  :doc:`Retrieve Solver Log Files in AIMMS PRO <../13/13-Solver-Logging-PRO>`
+
+    #.  :doc:`../329/329-more-logging`
+
+

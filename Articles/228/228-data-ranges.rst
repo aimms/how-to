@@ -4,7 +4,7 @@ Determine Data Ranges in Excel Files
 You can provide Excel cell ranges as input data to AIMMS AXLL functions. 
 Here we show how to adapt when the ranges are unknown, for example, when end users upload Excel files as input in the AIMMS app.
 
-We include a :download:`modified version <exampleNFL.zip>` of the exampleNFL project used in :doc:`../85/85-using-axll-library`.
+We include a :download:`modified version <exampleNFL.zip>` of the example project used in :doc:`../85/85-using-axll-library`.
 
 Sufficiently large ranges
 ---------------------------

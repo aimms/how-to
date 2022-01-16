@@ -111,7 +111,7 @@ You can download the example from :download:`AIMMS Project Download <ReadingExce
 
 .. #. This library doesn't make any assumptions about the placing of data in columns.
 
-.. #. For more information about these functions, see: `AIMMS The Function Reference <https://documentation.aimms.com/_downloads/AIMMS_func.pdf>`_: Chapter "Spreadsheet Functions".
+.. #. For more information about these functions, see: `AIMMS The Function Reference <https://documentation.aimms.com/functionreference/>`_: Chapter "Spreadsheet Functions".
  
 
 AXLL functions and procedures
