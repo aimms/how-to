@@ -779,9 +779,6 @@ Model Main_Wonderful_WebUI_Widgets {
 	Section Gantt_Widget_section {
 		Section TimeRepresentation {
 			DeclarationSection Control_Declarations {
-				Parameter p_numberOfDaysInCalendar {
-					InitialData: 4;
-				}
 				StringParameter sp_fmtHourCal {
 					Definition: "%c%y-%m-%d %H";
 				}
@@ -789,13 +786,7 @@ Model Main_Wonderful_WebUI_Widgets {
 					Definition: "2016-05-09 00:00";
 				}
 				StringParameter sp_endHourCal {
-					Definition: {
-						!MomentToString(
-						!	Format        :  sp_fmtHourCal,
-						!	unit          :  [hour],
-						!	ReferenceDate :  sp_begHourCal,
-						!	Elapsed       :  (p_numberOfDaysInCalendar*24) [hour]);
-					}
+					Definition: "2016-05-13 00:00";
 				}
 			}
 			DeclarationSection Actual_Calendar_declaration {
@@ -1807,35 +1798,35 @@ Model Main_Wonderful_WebUI_Widgets {
 				IndexDomain: (i_al,i_o);
 				Unit: hour;
 			}
-			Procedure pr_ReadBaseData {
+			Procedure pr_writeJSONData {
 				Body: {
-					!read from file "MachineConfig.txt";
-					!numberOfDaysInCalendar := 3 ;
-					!read from file "ProductInfo.txt" ;
-					!read from file "OrderBook.txt";
-					! Read from file "Example1 5 machines 50 orders.txt" ;
-					Read from file "Example2 3 machines 15 orders.txt" in merge mode ;
+					dex::AddMapping(
+						mappingName :  "fewJobsJSON", 
+						mappingFile :  "mappings/fewJobsJSON.xml") ;
 					
-					!read from file "MachineConfig.txt"
-					!bp_orderScheduledByLivingCreature(i_o) := 0 ;
+					dex::WriteToFile(
+						dataFile    :  "data/jobsExample.json", 
+						mappingName :  "fewJobsJSON", 
+						pretty      :  1);
 				}
 			}
-			Procedure pr_writeAnotherBaseData {
+			Procedure pr_readJSONData {
 				Body: {
-					block where single_column_display := 1, listing_number_precision := 12, listing_number_width := 20 ;
-						write
-							sp_begHourCal, p_numberOfDaysInCalendar,
-							S_AvailableLines, p_capac,
-							s_productNames, ep_productType,
-							ep_orderProduct, p_orderQuantity, ep_orderDeliveryDueDate
-						to file
-							"Example2 3 machines xx orders.txt" ;
-					endblock ;
+					dex::AddMapping(
+						mappingName :  "fewJobsJSON", 
+						mappingFile :  "mappings/fewJobsJSON.xml") ;
+					
+					dex::ReadFromFile(
+						dataFile         :  "data/jobsExample.json", 
+						mappingName      :  "fewJobsJSON", 
+						emptyIdentifiers :  0, 
+						emptySets        :  0, 
+						resetCounters    :  0);
 				}
 			}
 			Procedure pr_pageopen_Gantt_startUpProcedure {
 				Body: {
-					pr_ReadBaseData();
+					pr_readJSONData();
 					pr_initializeForJobMaintenance();
 				}
 			}
@@ -1852,13 +1843,6 @@ Model Main_Wonderful_WebUI_Widgets {
 				
 				
 				pr_initContext();
-				
-				sp_endHourCal := ! Should use a definition for sp_endHourCal instead.
-					MomentToString(
-						Format        :  sp_fmtHourCal,
-						unit          :  [hour],
-						ReferenceDate :  sp_begHourCal,
-						Elapsed       :  (p_numberOfDaysInCalendar*24) [hour]);
 			}
 			Comment: {
 				"Add initialization statements here that require that the libraries are already initialized properly,

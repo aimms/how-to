@@ -1,0 +1,31 @@
+<AimmsJSONMapping>
+    <ObjectMapping>
+        <ArrayMapping name="array1" iterative-reset="1">
+            <ObjectMapping>
+                <ValueMapping name="prodname" binds-to="i_pn"/>
+                <ValueMapping name="producType" maps-to="ep_productType(i_pn)"/>
+            </ObjectMapping>
+        </ArrayMapping>
+        <ArrayMapping name="array2">
+            <ObjectMapping>
+                <ValueMapping name="order" binds-to="i_o"/>
+                <ValueMapping name="product" maps-to="ep_orderProduct(i_o)"/>
+                <ValueMapping name="quantity" maps-to="p_orderQuantity(i_o)"/>
+                <ValueMapping name="duedate" maps-to="ep_orderDeliveryDueDate(i_o)"/>
+            </ObjectMapping>
+        </ArrayMapping>
+        <ArrayMapping name="array3">
+            <ObjectMapping>
+                <ValueMapping name="line" binds-to="i_al"/>
+                <ArrayMapping name="array4">
+                    <ObjectMapping>
+                        <ValueMapping name="prodtype" binds-to="i_pt"/>
+                        <ValueMapping name="capac" maps-to="p_capac(i_al,i_pt)"/>
+                    </ObjectMapping>
+                </ArrayMapping>
+            </ObjectMapping>
+        </ArrayMapping>
+        <!--
+        -->
+    </ObjectMapping>
+</AimmsJSONMapping>
