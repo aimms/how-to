@@ -259,4 +259,4 @@ In all these examples you will see that running the procedure Mapping_Import res
 	responsefile
 	dexRequest
 	hashtag
-	
+	statuscode
