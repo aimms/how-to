@@ -23,7 +23,6 @@ Disallow: https://how-to.aimms.com/Articles/499/499-mysql-duplicate-records.html
 Disallow: /staging/
 
 
-Disallow: https://how-to.aimms.com/Articles/518/518-add-logo-to-webui-app.html
 
 
 
