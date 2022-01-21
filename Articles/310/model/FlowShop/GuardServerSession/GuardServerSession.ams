@@ -531,11 +531,12 @@ LibraryModule Library_GuardServerSession {
 			StringParameter sp_sidePanel {
 				IndexDomain: (webui::indexPageExtension, webui::indexSidePanelSpec);
 				Definition: {
-					data 
-					{ ( 1, displayText ) : "Settings",
-					  ( 1, pageId      ) : "sp_controls_1",
-					  ( 1, tooltip     ) : "Control displayed session",
-					  ( 1, state       ) : "active" }
+					{ 
+						( '1', 'displayText' ) : "Settings",
+					  	( '1', 'pageId'      ) : "sp_controls_1",
+					  	( '1', 'tooltip'     ) : "Control displayed session",
+					  	( '1', 'state'       ) : "active" 
+					}
 				}
 			}
 			ElementParameter ep_stackPos {
@@ -2562,6 +2563,7 @@ LibraryModule Library_GuardServerSession {
 					
 					        pr_loadResponseAction();
 					
+					
 					        return 1;
 					endif;
 					
@@ -2702,7 +2704,7 @@ LibraryModule Library_GuardServerSession {
 						
 							(  '3', 'displaytext') : "Terminate this session",  
 							(  '3', 'icon'       ) : "aimms-stop",  
-							(  '3', 'procedure'  ) : "wgss::pr_terminateSelected",  
+							(  '3', 'procedure'  ) : "gss::pr_terminateSelected",  
 							(  '3', 'state'      ) : "Active",
 						
 							(  '4', 'displaytext') : "Delete this session", 
@@ -2743,7 +2745,7 @@ LibraryModule Library_GuardServerSession {
 										"Inactive"
 									endif
 								else
-									"active"
+									""
 								endif
 							else
 								sp_itemActionsRequestManagerBase(webui::indexPageExtension, webui::indexWidgetActionSpec) 
@@ -2752,6 +2754,7 @@ LibraryModule Library_GuardServerSession {
 							""
 						endif
 					}
+					Comment: "ensure ep_selectedSession is set in the request manager using Store Focus.";
 				}
 				StringParameter sp_widgetActionsRequestManager {
 					IndexDomain: (webui::indexWidgetExtension, webui::indexWidgetActionSpec);
@@ -3124,6 +3127,8 @@ LibraryModule Library_GuardServerSession {
 				}
 				Procedure pr_loadRequestResponse {
 					Body: {
+						DebuggerBreakpoint();
+						
 						if ep_selectedSession = '' then return 0; endif;
 						
 						pro::session::SetSessionData(ep_selectedSession, 
@@ -3141,6 +3146,8 @@ LibraryModule Library_GuardServerSession {
 						
 						p_ret := pr_loadResponse(ep_selectedSession);
 						if not (p_ret) then return 0; endif;
+						
+						gss::pr_saveTrackedSessionData( ep_selectedSession );
 					}
 					Parameter p_ret;
 				}
@@ -3443,7 +3450,7 @@ LibraryModule Library_GuardServerSession {
 		}
 		Section progress_Window {
 			Property: NoSave;
-			Parameter p_progressCoilWidth {
+			Parameter p_progressColWidth {
 				InitialData: 40;
 			}
 			ElementParameter ep_watchedSession {
@@ -3472,7 +3479,7 @@ LibraryModule Library_GuardServerSession {
 				Definition: card( s_timeSlots );
 			}
 			Parameter p_noProgressShownTimeSlotsTarget {
-				InitialData: 5;
+				InitialData: 3;
 			}
 			Parameter p_progressShowTimeSlotsDivisor {
 				Definition: Max(1, ceil( p_noTimeSlots / p_noProgressShownTimeSlotsTarget ) );
@@ -3511,6 +3518,16 @@ LibraryModule Library_GuardServerSession {
 				Index: i_item;
 				Parameter: ep_ItemElement;
 				OrderBy: p_itemOrder(i_item);
+			}
+			Set s_shownItemsRunningSession {
+				SubsetOf: s_items;
+				Index: i_shownItem;
+				Definition: {
+					s_items 
+						- StringToElement(s_items,"LastUpdate") 
+						- StringToElement(s_items,"Request") 
+						- StringToElement(s_items,"UserName")
+				}
 			}
 			Parameter p_noGapObjDevShownTimeSlotsTarget {
 				InitialData: 20;
@@ -3586,18 +3603,18 @@ LibraryModule Library_GuardServerSession {
 					        if (ep_gmp <> '') then
 					                ep_mpType := GMP::Instance::GetMathematicalProgrammingType(ep_gmp);
 					
-					                SetElementAdd(s_items,ep_ItemElement,"# Constraints");
+					                SetElementAdd(s_items,ep_ItemElement,"# Rows");
 					                sp_value('worker',ep_ItemElement) := FormatString("%i",GMP::Instance::GetNumberOfRows(ep_gmp));
 					
-					                SetElementAdd(s_items,ep_ItemElement,"# Variables");
+					                SetElementAdd(s_items,ep_ItemElement,"# Cols");
 					                if (ep_mpType='MIP' or ep_mpType='MIQP' or ep_mpType='MIQCP' or ep_mpType='COP' or ep_mpType='CSP') then
-					                	sp_value('worker',ep_ItemElement) := FormatString("%i\t(%i integer)",GMP::Instance::GetNumberOfColumns(ep_gmp),
+					                	sp_value('worker',ep_ItemElement) := FormatString("%i (%i int)", GMP::Instance::GetNumberOfColumns(ep_gmp),
 					                	                                                     GMP::Instance::GetNumberOfIntegerColumns(ep_gmp));
 					                else
 					                	sp_value('worker',ep_ItemElement) := FormatString("%i",GMP::Instance::GetNumberOfColumns(ep_gmp));
 					                endif;
 					
-					                SetElementAdd(s_items,ep_ItemElement,"# Nonzeros");
+					                SetElementAdd(s_items,ep_ItemElement,"# NZ");
 					                sp_value('worker',ep_ItemElement) := FormatString("%i",GMP::Instance::GetNumberOfNonzeros(ep_gmp));
 					
 					                SetElementAdd(s_items,ep_ItemElement,"Solver");
@@ -3608,18 +3625,18 @@ LibraryModule Library_GuardServerSession {
 					                        sp_value('worker',ep_ItemElement) := GMP::Solution::GetObjective(ep_gmp,1);
 					
 					                elseif (ep_mpType='MIP' or ep_mpType='MIQP' or ep_mpType='MIQCP') then
-					                		p_bestBnd := GMP::Solution::GetBestBound(ep_gmp,1);
-					                		if ( MapVal( p_bestBnd ) ) then
-					                			p_bestBnd := na;
-					                		elseif ( Abs( p_bestBnd ) >= 1e50 ) then
-					                			p_bestBnd := na;
-					                		endif;
+					        		p_bestBnd := GMP::Solution::GetBestBound(ep_gmp,1);
+					        		if ( MapVal( p_bestBnd ) ) then
+					        			p_bestBnd := na;
+					        		elseif ( Abs( p_bestBnd ) >= 1e50 ) then
+					        			p_bestBnd := na;
+					        		endif;
 					
 					                        SetElementAdd(s_items,ep_ItemElement,"Best Bound");
 					                        sp_value('worker',ep_ItemElement) := FormatString("%<4.2f",p_bestBnd);
 					
 					                        SetElementAdd(s_items,ep_ItemElement,"Incumbent");
-					                        sp_value('worker',ep_ItemElement) := FormatString("%<4.2f",GMP::Solution::GetObjective(ep_gmp,1));
+					                        sp_value('worker',ep_ItemElement) := FormatString("%<4.2f",GMP::Solution::GetObjective(ep_gmp,1)); ! May need to use p_incumbent.
 					
 					                        SetElementAdd(s_items,ep_ItemElement,"Gap");
 					                        sp_value('worker',ep_ItemElement) := FormatString("%<3.1f",100*Abs((GMP::Solution::GetObjective(ep_gmp,1) - p_bestBnd)
@@ -3636,15 +3653,15 @@ LibraryModule Library_GuardServerSession {
 					                SetElementAdd(s_items,ep_ItemElement,"Program Status");
 					                sp_value('worker',ep_ItemElement) := GMP::Solution::GetProgramStatus(ep_gmp,1);
 					
-									if ( ep_mpType='COP' or ep_mpType='CSP') then
-										ep_currentMathematicalProgram := GMP::Instance::GetSymbolicMathematicalProgram(ep_gmp);
+							if ( ep_mpType='COP' or ep_mpType='CSP') then
+								ep_currentMathematicalProgram := GMP::Instance::GetSymbolicMathematicalProgram(ep_gmp);
 					
-										SetElementAdd(s_items,ep_ItemElement,"Branches");
+								SetElementAdd(s_items,ep_ItemElement,"Branches");
 					                	if pro::management::GetScalarSuffixValue(ep_currentMathematicalProgram,"NumberOfBranches",sp_tmpStr) then sp_value('worker',ep_ItemElement) := FormatString("%i",Val(sp_tmpStr)); endif;
 					
 					                	SetElementAdd(s_items,ep_ItemElement,"Failures");
 					                	if pro::management::GetScalarSuffixValue(ep_currentMathematicalProgram,"NumberOfFails",sp_tmpStr) then sp_value('worker',ep_ItemElement) := FormatString("%i",Val(sp_tmpStr)); endif;
-									else
+							else
 					                	SetElementAdd(s_items,ep_ItemElement,"Iterations");
 					                	sp_value('worker',ep_ItemElement) := FormatString("%i",GMP::Solution::GetIterationsUsed(ep_gmp,1));
 					                endif;
@@ -3932,7 +3949,15 @@ LibraryModule Library_GuardServerSession {
 						endif
 					}
 				}
-				StringParameter sp_chartLabel;
+				StringParameter sp_chartLabel {
+					InitialData: "";
+				}
+				StringParameter sp_titleGapEvolutionWidget {
+					Definition: {
+						formatString("%s showing %i data points out of %i", 
+							sp_chartLabel, card(s_gapObjDevTimeSlots), card(s_timeSlots) )
+					}
+				}
 				StringParameter sp_pauseResumeLabel {
 					Definition: {
 						if ep_watchedSession = "" then
@@ -4067,9 +4092,9 @@ LibraryModule Library_GuardServerSession {
 								! PRO Session
 								elseif i_item='SOLVER SESSION' then p_itemOrder(i_item):=200;
 								elseif i_item='EndPoint' then p_itemOrder(i_item):=201;
-								elseif i_item='# Constraints' then p_itemOrder(i_item):=202;
-								elseif i_item='# Variables' then p_itemOrder(i_item):=203;
-								elseif i_item='# Nonzeros' then p_itemOrder(i_item):=204;
+								elseif i_item='# Rows' then p_itemOrder(i_item):=202;
+								elseif i_item='# Cols' then p_itemOrder(i_item):=203;
+								elseif i_item='# NZ' then p_itemOrder(i_item):=204;
 								elseif i_item='Solver' then p_itemOrder(i_item):=205;
 								elseif i_item='Iterations' then p_itemOrder(i_item):=206;
 								elseif i_item='Nodes' then p_itemOrder(i_item):=207;
@@ -4295,6 +4320,17 @@ LibraryModule Library_GuardServerSession {
 			}
 		}
 		Section Additional_utilities {
+			DeclarationSection dialog_sets {
+				Set s_okDone {
+					Definition: data { ok, Done };
+				}
+				Set s_onDone {
+					Definition: data { OK, Cancel };
+				}
+				Set s_justOK {
+					Definition: data { OK };
+				}
+			}
 			Function fnc_hasPropertyNosave {
 				Arguments: (ep_id);
 				Body: {
@@ -4368,7 +4404,8 @@ LibraryModule Library_GuardServerSession {
 						p_scheduleAtUsesUTC := 0 ; ! Assume option use_UTC_forCaseAndStartEndDate is off.
 					endif ;
 					p_tmpSec := CurrentToMoment([s], "2021-01-01 00:00:00") ;
-					p_tmpSec += (p_noSeconds) [s];
+					!p_tmpSec += (p_noSeconds) [s];
+					p_tmpSec += p_noSeconds ;
 					if p_scheduleAtUsesUTC then
 						sp_launchDate := MomentToString( "%c%y-%m-%d %H:%M:%S%TZ('UTC')", [s], "2021-01-01 00:00:00", p_tmpSec );
 					else
@@ -4465,7 +4502,8 @@ LibraryModule Library_GuardServerSession {
 							'gss::p_CurrentStatus',  
 							'gss::bp_GotResults',
 							'sp_requestDescription',
-							'sp_requestProcedure'
+							'sp_requestProcedure',
+							'gss::sp_value'
 						};
 					endblock ;
 					
@@ -5815,17 +5853,8 @@ LibraryModule Library_GuardServerSession {
 			Parameter bp_isRunningOnCloud {
 				Range: binary;
 			}
-			Set s_okDone {
-				Definition: data { ok, Done };
-			}
 			StringParameter sp_beginHoursLastThreeMonths;
 			StringParameter sp_endHoursLastThreeMonths;
-			Set s_onDone {
-				Definition: data { OK, Cancel };
-			}
-			Set s_justOK {
-				Definition: data { OK };
-			}
 			StringParameter sp_TimeFmtLocalTimezone {
 				Definition: "%c%y-%m-%d %H:%M:%S%TZ('Local')";
 			}

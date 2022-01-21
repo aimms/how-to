@@ -36,3 +36,4 @@
 "gss::bp_warningIssued" "gss::bp_warningIssuedChangeCurrentDirectory" "2021-04-02 06:53:10"
 "gss::progress_Wdw" "gss::progress_Window" "2021-04-20 11:01:24"
 "gss::Copy_pr_guardAndProfileServerJob" "gss::pr_doGuardAndProfileServerJob" "2021-08-09 09:53:31"
+"gss::p_progressCoilWidth" "gss::p_progressColWidth" "2022-01-20 12:11:06"
