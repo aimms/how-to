@@ -79,7 +79,15 @@ Model Main_Wonderful_WebUI_Widgets {
 					( '1', '3', 'tooltip'           ) : "Shows a Gantt chart widget to schedule some tasks", 
 					( '1', '3', 'workflowPageState' ) : "Active", 
 					( '1', '3', 'pageDataState'     ) : "", 
-					( '1', '3', 'redirectPageId'    ) : "home" 
+					( '1', '3', 'redirectPageId'    ) : "home", 
+				
+					( '1', '4', 'displayText'       ) : "Combination", 
+					( '1', '4', 'icon'              ) : "aimms-stats-bars4", 
+					( '1', '4', 'pageId'            ) : "combinationchart", 
+					( '1', '4', 'tooltip'           ) : "Shows a Gantt chart widget to schedule some tasks", 
+					( '1', '4', 'workflowPageState' ) : "Active", 
+					( '1', '4', 'pageDataState'     ) : "", 
+					( '1', '4', 'redirectPageId'    ) : "home" 
 				
 				
 				
@@ -604,6 +612,7 @@ Model Main_Wonderful_WebUI_Widgets {
 			Procedure pr_delegateMapDemo {
 				Body: {
 					if pro::DelegateToServer( 
+							requestDescription :  "Oxygen bottling",
 							waitForCompletion  :  1, 
 							completionCallback :  'pro::session::LoadResultsCallBack' ) then  
 						return 1;
@@ -1623,8 +1632,9 @@ Model Main_Wonderful_WebUI_Widgets {
 				Procedure pr_delegateSolveMixedIntegerProgrammingProblem {
 					Body: {
 						if pro::DelegateToServer(
-								completionCallback: 'pro::session::LoadResultsCallback',
-								waitForCompletion:1) then
+								requestDescription :  "Plan the orders",
+								completionCallback :  'pro::session::LoadResultsCallback',
+								waitForCompletion  :  1 ) then
 							return ;
 						endif ;
 						pr_workSolveMixedIntegerProgrammingProblem();
@@ -1832,6 +1842,218 @@ Model Main_Wonderful_WebUI_Widgets {
 			}
 		}
 	}
+	Section Combination_Chart_Widget_section {
+		Section WebUI_thingies {
+			StringParameter sp_combinationChartPageSecondaryActions {
+				IndexDomain: (webui::indexPageExtension,webui::indexPageActionSpec);
+				Definition: {
+					{
+						( '1', 'displaytext' ) : "Optimize",
+						( '1', 'icon'        ) : "aimms-pacman",
+						( '1', 'procedure'   ) : "pr_optimizeAssignment",
+						( '1', 'state'       ) : "Active",
+					
+						( '2', 'displaytext' ) : "Clear",
+						( '2', 'icon'        ) : "aimms-broom",
+						( '2', 'procedure'   ) : "pr_clearAssignment",
+						( '2', 'state'       ) : "Active"
+					}
+				}
+			}
+			StringParameter sp_combinationChartSidePanel {
+				IndexDomain: (webui::indexPageExtension,webui::indexSidePanelSpec);
+				Definition: {
+					{
+						('1', 'displayText' ) : "Story",
+						('1', 'pageId'      ) : "bfjstory",
+						('1', 'tooltip'     ) : "",
+						('1', 'icon'        ) : "",
+						('1', 'iconcolor'   ) : "",
+						('1', 'state'       ) : "Active",
+					
+						('2', 'displayText' ) : "Hint",
+						('2', 'pageId'      ) : "bfjhint",
+						('2', 'tooltip'     ) : "",
+						('2', 'icon'        ) : "",
+						('2', 'iconcolor'   ) : "",
+						('2', 'state'       ) : "Active",
+					
+						('3', 'displayText' ) : "Spoiler",
+						('3', 'pageId'      ) : "bfjspoiler",
+						('3', 'tooltip'     ) : "",
+						('3', 'icon'        ) : "",
+						('3', 'iconcolor'   ) : "",
+						('3', 'state'       ) : "Active"
+					
+					
+					
+					}
+				}
+			}
+			StringParameter sp_titleAssignmentTable {
+				Definition: "Please assign bags of fruit to be carried by a youngster";
+			}
+		}
+		Section bobForJobData {
+			DeclarationSection Input_data_declarations {
+				Set s_strongPeople {
+					Index: i_sp, i_otherSp;
+				}
+				Parameter p_canCarry {
+					IndexDomain: i_sp;
+				}
+				Parameter p_totCarry {
+					Definition: sum( i_sp, p_canCarry(i_sp) );
+				}
+				Set s_items {
+					Index: i_item;
+				}
+				Parameter p_weight {
+					IndexDomain: i_item;
+				}
+				Parameter p_totWeight {
+					Definition: sum( i_item, p_weight(i_item) );
+				}
+			}
+			DeclarationSection bobForJob_model_formulation {
+				Variable v_assign {
+					IndexDomain: (i_item,i_sp);
+					Range: binary;
+				}
+				Constraint c_respectBinSize {
+					IndexDomain: i_sp;
+					Definition: sum( i_item, p_weight(i_item) * v_assign(i_item, i_sp) ) <= p_canCarry(i_sp);
+				}
+				Constraint c_isCarriedOnce {
+					IndexDomain: i_item;
+					Definition: sum( i_sp, v_assign(i_item, i_sp) ) = 1;
+				}
+				Constraint c_respectExistingAssignments {
+					IndexDomain: (i_item,i_sp)|p_assign(i_item, i_sp);
+					Definition: v_assign(i_item, i_sp) = p_assign(i_item, i_sp);
+				}
+				Set s_bobForJobVariables {
+					SubsetOf: AllVariables;
+					Definition: bobForJobData * AllVariables;
+				}
+				Set s_bobForJobConstraints {
+					SubsetOf: AllConstraints;
+					Definition: bobForJobData * AllConstraints;
+				}
+				MathematicalProgram mp_binPacking {
+					Direction: minimize;
+					Constraints: s_bobForJobConstraints;
+					Variables: s_bobForJobVariables;
+					Type: Automatic;
+				}
+			}
+			DeclarationSection bob_for_a_job_by_Js_scouting_team {
+				Parameter p_isCarrying {
+					IndexDomain: (i_item,i_sp);
+					Definition: p_assign(i_item, i_sp) * p_weight(i_item);
+				}
+				Parameter p_slack {
+					IndexDomain: i_sp;
+					Definition: p_canCarry(i_sp) - sum( i_item, p_isCarrying(i_item, i_sp) );
+					webui::AnnotationsIdentifier: sp_overloaded;
+				}
+				StringParameter sp_overloaded {
+					IndexDomain: i_sp;
+					Definition: {
+						if p_slack(i_sp) < 0 then
+							"overloaded"
+						else
+							""
+						endif
+					}
+				}
+				Parameter p_assign {
+					IndexDomain: (i_item,i_sp);
+					Range: binary;
+					webui::UponChangeProcedure: pr_uponChangeAssignment;
+				}
+			}
+		}
+		Procedure pr_init {
+			Body: {
+				s_strongPeople := data { Jack, Jane, Joey, Joan, John };
+				p_canCarry(i_sp) := data { Jack : 4, Jane : 5, Joey : 6, Joan : 7, John : 8 };  
+				s_items := data { appel, pear, mango, melon, banana,
+				                  strawberry, coconut, cherry, grapes, kiwi } ;
+				p_weight(i_item) := data { appel : 4, pear : 2, mango : 2, melon: 4, banana : 4,  
+				                  strawberry : 2, coconut : 6, cherry : 3, grapes : 2, kiwi : 1 } ;
+				
+				CurrentInputs -= data {p_canCarry, p_weight};
+				!pr_optimizeAssignment();
+			}
+		}
+		Procedure pr_clearAssignment {
+			Body: {
+				empty p_assign ;
+			}
+		}
+		Procedure pr_optimizeAssignment {
+			Body: {
+				if pro::PROEndPoint then
+					if pro::management::IsRunningOnCloud() then
+						pro::solverlease::solveModel( 'mp_binPacking' );
+					else
+						pro::ManagedSessionInputCaseIdentifierSet :=
+							bobForJobData +
+							AllMathematicalPrograms +
+							s_bobForJobVariables +
+							s_bobForJobConstraints +
+							ReferencedIdentifiers( s_bobForJobVariables, AllAttributeNames, 1) +
+							ReferencedIdentifiers( s_bobForJobConstraints, AllAttributeNames, 1) ;
+						pr_delegateOptimizeAssignment();
+					endif ;
+				else
+					pr_workOptimizeAssignment();
+				endif ;
+			}
+		}
+		Procedure pr_delegateOptimizeAssignment {
+			Body: {
+				if pro::DelegateToServer(
+						requestDescription: "Bob for a Job",
+						completionCallback: 'pro::session::LoadResultsCallback',
+						waitForCompletion:1) then
+					return ;
+				endif ;
+				pr_workSolveMixedIntegerProgrammingProblem();
+				pro::ManagedSessionOutputCaseIdentifierSet := s_bobForJobVariables + bob_for_a_job_by_Js_scouting_team ;
+			}
+		}
+		Procedure pr_workOptimizeAssignment {
+			Body: {
+				solve mp_binPacking ;
+				if mp_binPacking.ProgramStatus = 'Optimal' then
+					p_assign(i_item, i_sp) := round( v_assign(i_item, i_sp) );
+				else
+					display "too bad" ;
+				endif ;
+			}
+		}
+		Procedure pr_uponChangeAssignment {
+			Arguments: (haschanged,OldValue);
+			Body: {
+				for (i_item,i_sp) | hasChanged( i_item, i_sp ) do
+					if p_assign( i_item, i_sp ) then
+						! Clear other assignments for that item.
+						p_assign( i_item, i_otherSp ) | ( i_otherSp <> i_sp ) := 0 ;
+					endif ;
+				endfor ;
+			}
+			Parameter haschanged {
+				IndexDomain: (i_item,i_sp);
+				Property: Input;
+			}
+			Parameter OldValue {
+				IndexDomain: (i_item,i_sp);
+				Property: Input;
+			}
+		}
+	}
 	Section Application_initialization_and_termination {
 		Procedure MainInitialization {
 			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
@@ -1841,6 +2063,7 @@ Model Main_Wonderful_WebUI_Widgets {
 				! Workaround for gitlab ticket 4555:
 				Empty p_latitude, p_longitude, p_locationSize ;
 				
+				pr_init();
 				
 				pr_initContext();
 			}

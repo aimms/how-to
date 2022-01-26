@@ -4,6 +4,27 @@
     "aimms.widget.type": {
       "literal": "application"
     },
+    "browsername": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browsertimezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
+    "ignoredst": {
+      "aimms": {
+        "contents": [
+          "webui::IgnoreDST"
+        ]
+      }
+    },
     "pages": {
       "literal": {
         "name": "root",
@@ -70,6 +91,31 @@
                 ]
               },
               {
+                "name": "combinationchart",
+                "type": "pagev2-grid",
+                "slug": "combinationchart",
+                "children": [
+                  {
+                    "name": "BfJStory",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "bfjstory",
+                    "children": []
+                  },
+                  {
+                    "name": "BfJHint",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "bfjhint",
+                    "children": []
+                  },
+                  {
+                    "name": "BfJSpoiler",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "bfjspoiler",
+                    "children": []
+                  }
+                ]
+              },
+              {
                 "name": "Development Support",
                 "type": "pagev2-grid",
                 "slug": "development_support",
@@ -106,6 +152,20 @@
     },
     "theme.classic": {
       "literal": "NOT_ALLOWED"
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "timezone.dst.readonly": {
+      "aimms": {
+        "contents": [
+          "webui::DefaultDSTSettingForDisplayTimeZone"
+        ]
+      }
     },
     "ui.editable": {
       "literal": 0
@@ -164,6 +224,47 @@
       }
     }
   },
+  "layouts/custom_fceac872-766e-474d-b05b-c599e025a157": {
+    "definition": {
+      "literal": {
+        "componentName": "Grid",
+        "props": {
+          "gridTemplateColumns": "1fr 1fr",
+          "gridTemplateRows": "1fr 1fr",
+          "gridTemplateAreas": "\"area-a area-a\" \"area-b area-c\""
+        },
+        "items": [
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-a",
+              "name": "Area A",
+              "gridAutoFlow": "column"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-b",
+              "name": "Area B",
+              "gridAutoFlow": "row"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-c",
+              "name": "Area C",
+              "gridAutoFlow": "column"
+            }
+          }
+        ]
+      }
+    },
+    "displayName": {
+      "literal": "BobForAJob"
+    }
+  },
   "layouts/custom_fe6fb944-9dac-46fe-9801-51e6415d21cd": {
     "definition": {
       "literal": {
@@ -195,6 +296,181 @@
     },
     "displayName": {
       "literal": "Layout1 Copy"
+    }
+  },
+  "pages/bfjhint": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "BjFHintText",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsBjFHintText0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "BjFHintText",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/bfjspoiler": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "BjFSpoilerText",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsBjFSpoilerText0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "BjFSpoilerText",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/bfjstory": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "BfJStoryText",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsBfJStoryText0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "BfJStoryText",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/combinationchart": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "BobForAJob",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsBobForAJob3"
+        },
+        {
+          "widgetUri": "AssignItemsToPeople",
+          "gridArea": "area-b",
+          "dndId": "area-bAssignItemsToPeople0"
+        },
+        {
+          "widgetUri": "Items",
+          "gridArea": "area-c",
+          "dndId": "area-cItems1"
+        },
+        {
+          "widgetUri": "StrongPeople",
+          "gridArea": "area-c",
+          "dndId": "area-cStrongPeople2"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "custom_fceac872-766e-474d-b05b-c599e025a157"
+    },
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_combinationChartPageSecondaryActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_combinationChartPageSecondaryActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "sidepanels": {
+      "aimms": {
+        "contents": [
+          "sp_combinationChartSidePanel"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_combinationChartSidePanel",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexSidePanelSpec",
+                "type": "free",
+                "value": "webui::indexSidePanelSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Items",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "StrongPeople",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "AssignItemsToPeople",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "BobForAJob",
+          "layoutInfo": {}
+        }
+      ]
     }
   },
   "pages/development_support": {
@@ -233,11 +509,6 @@
     },
     "bindings": {
       "literal": [
-        {
-          "widgetUri": "selectedOrder",
-          "gridArea": "Unassigned widgets",
-          "dndId": "area-bselectedOrder1"
-        },
         {
           "widgetUri": "orderDetails",
           "gridArea": "area-b",
@@ -540,6 +811,145 @@
       ]
     }
   },
+  "widgets/AssignItemsToPeople": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_assign"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_assign": "1"
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_item"
+        ],
+        "colHeader": [
+          "i_sp"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "i_item",
+          "width": 17.26
+        }
+      ]
+    },
+    "name": {
+      "literal": "AssignItemsToPeople"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_titleAssignmentTable"
+        ],
+        "slices": []
+      }
+    }
+  },
+  "widgets/BfJStoryText": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div>You want to go to the market to sell your fruits.&nbsp; You have several bags of fruit, each with their own weight.</div><div><br></div><div>The scout group Js want to help you out for a Bob for Job. Each of the five youngsters in that group has its own limit in what he or she can carry.</div><div><br></div><div>As it so happens, the total weight of bags of fruit is exactly what the group can carry.&nbsp; So the bags needs to be divided carefully between the youngsters. You can do so by clicking in the assignment table in the lower left of the page.</div><div><br></div><div>By invoking the action \"Optimize\" in the lower right, the application will assign the remaining bags of fruit or declare that this is impossible.</div><div><br></div><div>Question 1: find a good assignment of bags of fruit to the various youngsters.</div><div><br></div><div>Question 2: Joey likes Kiwis very much, so he grabs the bag with Kiwis and offers to carry that bag to the market.&nbsp; Using the optimizer in the application, you quickly notice that the remaining bags cannot be divided among the youngsters.</div><div>Why cannot you the remaining bags be divided over the youngsters?</div><div><br></div><div>If you do not have an answer to question 2, you may want to check out the hint first, and eventually the spoiler.</div>"
+    },
+    "name": {
+      "literal": "BfJStoryText"
+    }
+  },
+  "widgets/BjFHintText": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div>The ladies carry an odd weight.</div>"
+    },
+    "name": {
+      "literal": "BjFHintText"
+    }
+  },
+  "widgets/BjFSpoilerText": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div>The answer to question 1 is simple, just press the optimize button.</div><div><br></div><div>The answer to question 2 is slightly more interesting: there are two people that can carry a weight with a value that is odd (as in not even).&nbsp; There are also two items with an odd weight. In addition, the total weight that is to be carried, is equal to the total weight that can be carried.&nbsp; This implies that the ladies should each carry one of the items with an odd weight. Because Joey took one of them away, the problem becomes infeasible and the answer to the question is no.</div>"
+    },
+    "name": {
+      "literal": "BjFSpoilerText"
+    }
+  },
+  "widgets/BobForAJob": {
+    "aimms.widget.type": {
+      "literal": "combinationchart"
+    },
+    "contents.__display_order__": {
+      "literal": [
+        "contents.0"
+      ]
+    },
+    "contents.0.identifier": {
+      "literal": {
+        "identifier": "p_isCarrying",
+        "slice": [
+          {
+            "index": "i_item",
+            "type": "free",
+            "value": "i_item"
+          },
+          {
+            "index": "i_sp",
+            "type": "free",
+            "value": "i_sp"
+          }
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_sp"
+        ],
+        "grouped": [],
+        "stacked": [
+          "i_item"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "name": {
+      "literal": "BobForAJob"
+    },
+    "title": {
+      "literal": "Bob for a Job"
+    },
+    "toggleDataLabels": {
+      "literal": true
+    },
+    "toggleLegend": {
+      "literal": true
+    }
+  },
   "widgets/DevelopmentSupportScalars": {
     "aimms.widget.type": {
       "literal": "scalar"
@@ -730,6 +1140,35 @@
       }
     }
   },
+  "widgets/Items": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_weight"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_item"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "Items"
+    }
+  },
   "widgets/JobDetails": {
     "aimms.widget.type": {
       "literal": "scalar"
@@ -844,7 +1283,7 @@
       "literal": true
     },
     "center.latitude": {
-      "literal": 49.095452162534829
+      "literal": 49.09545216253483
     },
     "center.longitude": {
       "literal": 13.491210937500002
@@ -1348,15 +1787,55 @@
       "literal": "scalar-size-location"
     }
   },
-  "widgets/selectedOrder": {
+  "widgets/StrongPeople": {
     "aimms.widget.type": {
-      "literal": "scalar"
+      "literal": "table"
     },
-    "compact": {
-      "literal": 1
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_canCarry",
+          "p_slack"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_slack": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_sp"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_canCarry"
+          },
+          "width": 12.91
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_sp",
+          "width": 16.64
+        }
+      ]
     },
     "name": {
-      "literal": "selectedOrder"
+      "literal": "StrongPeople"
     }
   },
   "widgets/textGantChartStory": {
@@ -1375,7 +1854,7 @@
       "literal": "text"
     },
     "contents": {
-      "literal": "<div><span style=\"font-size: 32px;\">Welcome to Wonderful WebUI Widgets.</span></div><div><br></div><div>AIMMS is designed for interactive optimization applications.</div><div>To let you experience these applications, this application provides some one-page examples.</div><div>Each page has a short story with a question and it is designed to help you answer this question within a few minutes.</div><div>The story can be found in the side panel of that page.</div><div><br></div><div>The first page illustrates the map widget by letting you analyze the supply chain within an organization.</div><div><br></div><div>The second page illustrates the Gantt Chart by letting you plan maintenance tasks on production lines.</div><div><br></div>"
+      "literal": "<div><span style=\"font-size: 32px;\">Welcome to Wonderful WebUI Widgets.</span></div><div><br></div><div>AIMMS is designed for interactive optimization applications.</div><div>To let you experience these applications, this application provides some one-page examples.</div><div>Each page has a short story with a question and it is designed to help you answer this question within a few minutes.</div><div>The story can be found in the side panel of that page.</div><div><br></div><div>The first page illustrates the map widget by letting you analyze the supply chain within an organization.</div><div><br></div><div>The second page illustrates the Gantt Chart by letting you plan maintenance tasks on production lines.</div><div><br></div><div>The third page illustrates the combination chart by letting you lead scouts in a Bob for a Job project.</div><div><br></div>"
     },
     "name": {
       "literal": "WelcomeText"
