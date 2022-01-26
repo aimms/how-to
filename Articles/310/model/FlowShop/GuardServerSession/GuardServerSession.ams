@@ -3363,7 +3363,9 @@ LibraryModule Library_GuardServerSession {
 					Body: {
 						pr_enter(sp_gssTime, p_gssMiU);
 						
-						pr_updateSessionList();
+						if pro::GetPROEndPoint() then
+							pr_updateSessionList();
+						endif ;
 						
 						pr_leave(sp_gssTime, p_gssMiU);
 					}
