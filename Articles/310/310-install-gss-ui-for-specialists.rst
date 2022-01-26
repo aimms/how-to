@@ -87,7 +87,7 @@ Below are the widgets recommended to build a user interface for the ``GuardServe
 
     #. Store focus: 
 
-        ``gss::i_shownJobErrorMessageNumber`` to ``gss::ep_errorWarningSelectedNessage``
+        ``gss::i_jobErrorMessageNumber`` to ``gss::ep_errorWarningSelectedNessage``
 
     #. Widget Extensions:
 
