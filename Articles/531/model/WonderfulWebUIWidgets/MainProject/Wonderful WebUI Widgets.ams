@@ -1893,11 +1893,150 @@ Model Main_Wonderful_WebUI_Widgets {
 			StringParameter sp_titleAssignmentTable {
 				Definition: "Please assign bags of fruit to be carried by a youngster";
 			}
+			StringParameter sp_titlebigcombiChart {
+				Definition: "Bob for a Job";
+			}
+			Section Item_actions_in_big_combi_chart {
+				Set s_personNumbers {
+					SubsetOf: Integers;
+					Index: i_persNo;
+					Definition: ElementRange(1,card(s_strongPeopleAndI));
+				}
+				ElementParameter ep_person {
+					IndexDomain: i_persNo;
+					Range: s_strongPeopleAndI;
+					Definition: Element( s_strongPeopleAndI, ord( i_persNo ) );
+				}
+				ElementParameter ep_storeFocusItem {
+					Range: s_items;
+					InitialData: '';
+				}
+				ElementParameter ep_storeFocusPerson {
+					Range: s_strongPeopleAndI;
+					InitialData: '';
+				}
+				ElementParameter ep_identifierForWidgetMenu {
+					Range: AllIdentifiers;
+					Definition: StringToElement(AllIdentifiers, "p_isCarrying", create:0);
+				}
+				StringParameter sp_bigcombiItemActions {
+					IndexDomain: (webui::indexWidgetItemActionSpec,webui::indexPageExtension,webui::indexWidgetActionSpec)|ord(webui::indexPageExtension)<=card(s_strongPeopleAndI);
+					Definition: {
+						if webui::indexWidgetItemActionSpec = ep_identifierForWidgetMenu then
+							sp_bigcombiWidgetActions(webui::indexPageExtension, webui::indexWidgetActionSpec)
+						else
+							""
+						endif
+						
+						
+						
+						!{
+						!	('p_isCarrying', '1', 'displaytext' ) : "Debug",
+						!	('p_isCarrying', '1', 'icon'        ) : "aimms-bug",
+						!	('p_isCarrying', '1', 'procedure'   ) : "pr_locDebug",
+						!	('p_isCarrying', '1', 'state'       ) : "Active"
+						!
+						!}
+					}
+					Comment: {
+						"{
+							(\'p_locationSize\', \'1\', \'displaytext\') : \"Debug\",
+							(\'p_locationSize\', \'1\', \'icon\'       ) : \"aimms-bug\",
+							(\'p_locationSize\', \'1\', \'procedure\'  ) : \"pr_locDebug\",
+							(\'p_locationSize\', \'1\', \'state\'      ) : if bp_developmentSupport then \"Active\" else \"Hide\" endif,
+						
+						}"
+					}
+				}
+				StringParameter sp_bigcombiWidgetActions {
+					IndexDomain: (webui::indexPageExtension,webui::indexWidgetActionSpec);
+					Definition: {
+						if ord(webui::indexPageExtension ) <= card( s_strongPeopleAndI ) then
+							if     webui::indexWidgetActionSpec = 'displaytext' then
+								formatString("Assigning %e from %e to %e",
+									ep_storeFocusItem,ep_storeFocusPerson,
+									ep_person(webui::indexPageExtension))
+							elseif webui::indexWidgetActionSpec = 'icon'        then
+								if webui::indexPageExtension = 1 then
+									"aimms-pencil"
+								else 
+									formatString("aimms-pencil%e", webui::indexPageExtension)
+								endif
+							elseif webui::indexWidgetActionSpec = 'procedure'   then
+								formatString("pr_assignFruitTo%e",
+									ep_person(webui::indexPageExtension))
+							elseif webui::indexWidgetActionSpec = 'state'       then
+								if ep_storeFocusPerson = ep_person(webui::indexPageExtension) then
+									"Hidden"
+								elseif ep_person(webui::indexPageExtension) = ep_meMyselfAndI then
+									"Active" ! Always allow assigning back.
+								elseif p_slack( ep_person(webui::indexPageExtension) ) >= p_weight( ep_storeFocusItem ) then
+									"Active"
+								else
+									"Inactive"
+								endif
+							else
+								""
+							endif
+						else
+							""
+						endif
+					}
+				}
+				Procedure pr_assignFruit {
+					Arguments: (ep_person);
+					Body: {
+						p_assign(ep_storeFocusItem, ep_storeFocusPerson) := 0 ;
+						p_assign(ep_storeFocusItem, ep_person) := 1 ;
+					}
+					ElementParameter ep_person {
+						Range: s_strongPeopleAndI;
+						Property: Input;
+					}
+				}
+				Procedure pr_assignFruitToJack {
+					Body: {
+						pr_assignFruit('Jack');
+					}
+				}
+				Procedure pr_assignFruitToJane {
+					Body: {
+						pr_assignFruit('Jane');
+					}
+				}
+				Procedure pr_assignFruitToJoey {
+					Body: {
+						pr_assignFruit('Joey');
+					}
+				}
+				Procedure pr_assignFruitToJoan {
+					Body: {
+						pr_assignFruit('Joan');
+					}
+				}
+				Procedure pr_assignFruitToJohn {
+					Body: {
+						pr_assignFruit('John');
+					}
+				}
+				Procedure pr_assignFruitToI {
+					Body: {
+						pr_assignFruit('I');
+					}
+				}
+			}
 		}
 		Section bobForJobData {
 			DeclarationSection Input_data_declarations {
+				Set s_strongPeopleAndI {
+					Index: i_spi;
+				}
 				Set s_strongPeople {
+					SubsetOf: s_strongPeopleAndI;
 					Index: i_sp, i_otherSp;
+				}
+				ElementParameter ep_meMyselfAndI {
+					Range: s_strongPeopleAndI;
 				}
 				Parameter p_canCarry {
 					IndexDomain: i_sp;
@@ -1949,18 +2088,26 @@ Model Main_Wonderful_WebUI_Widgets {
 			}
 			DeclarationSection bob_for_a_job_by_Js_scouting_team {
 				Parameter p_isCarrying {
-					IndexDomain: (i_item,i_sp);
-					Definition: p_assign(i_item, i_sp) * p_weight(i_item);
+					IndexDomain: (i_item,i_spi);
+					Definition: p_assign(i_item, i_spi) * p_weight(i_item);
 				}
 				Parameter p_slack {
-					IndexDomain: i_sp;
-					Definition: p_canCarry(i_sp) - sum( i_item, p_isCarrying(i_item, i_sp) );
+					IndexDomain: i_spi;
+					Definition: {
+						if i_spi <> ep_meMyselfAndI then
+							p_canCarry(i_spi) - sum( i_item, p_isCarrying(i_item, i_spi) )
+						else
+							0
+						endif
+					}
 					webui::AnnotationsIdentifier: sp_overloaded;
 				}
 				StringParameter sp_overloaded {
-					IndexDomain: i_sp;
+					IndexDomain: i_spi;
 					Definition: {
-						if p_slack(i_sp) < 0 then
+						if i_spi = ep_meMyselfAndI then
+							""
+						elseif p_slack(i_spi) < 0 then
 							"overloaded"
 						else
 							""
@@ -1968,7 +2115,7 @@ Model Main_Wonderful_WebUI_Widgets {
 					}
 				}
 				Parameter p_assign {
-					IndexDomain: (i_item,i_sp);
+					IndexDomain: (i_item,i_spi);
 					Range: binary;
 					webui::UponChangeProcedure: pr_uponChangeAssignment;
 				}
@@ -1976,6 +2123,7 @@ Model Main_Wonderful_WebUI_Widgets {
 		}
 		Procedure pr_init {
 			Body: {
+				s_strongPeopleAndI := data { Jack, Jane, Joey, Joan, John, I };
 				s_strongPeople := data { Jack, Jane, Joey, Joan, John };
 				p_canCarry(i_sp) := data { Jack : 4, Jane : 5, Joey : 6, Joan : 7, John : 8 };  
 				s_items := data { appel, pear, mango, melon, banana,
@@ -1984,12 +2132,16 @@ Model Main_Wonderful_WebUI_Widgets {
 				                  strawberry : 2, coconut : 6, cherry : 3, grapes : 2, kiwi : 1 } ;
 				
 				CurrentInputs -= data {p_canCarry, p_weight};
+				pr_clearAssignment();
 				!pr_optimizeAssignment();
 			}
 		}
 		Procedure pr_clearAssignment {
 			Body: {
-				empty p_assign ;
+				!empty p_assign ;
+				ep_meMyselfAndI := StringToElement( s_strongPeopleAndI, "I", create:0);
+				p_assign(i_item, i_sp) := 0 ;
+				p_assign(i_item, ep_meMyselfAndI) := 1 ;
 			}
 		}
 		Procedure pr_optimizeAssignment {

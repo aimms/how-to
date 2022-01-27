@@ -120,6 +120,12 @@
                 "type": "pagev2-grid",
                 "slug": "development_support",
                 "children": []
+              },
+              {
+                "name": "purecombi",
+                "type": "pagev2-grid",
+                "slug": "purecombi",
+                "children": []
               }
             ]
           }
@@ -811,6 +817,49 @@
       ]
     }
   },
+  "pages/purecombi": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "StoreFocusPerson",
+          "gridArea": "area-b",
+          "dndId": "area-bStoreFocusPerson0"
+        },
+        {
+          "widgetUri": "StoreFocusItem",
+          "gridArea": "area-b",
+          "dndId": "Unassigned widgetsStoreFocusItem2"
+        },
+        {
+          "widgetUri": "bigcombi",
+          "gridArea": "area-a",
+          "dndId": "area-abigcombi1"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout10"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "bigcombi",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "StoreFocusPerson",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "StoreFocusItem",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
   "widgets/AssignItemsToPeople": {
     "aimms.widget.type": {
       "literal": "table"
@@ -819,6 +868,38 @@
       "aimms": {
         "contents": [
           "p_assign"
+        ],
+        "prefix": "aimms",
+        "partition": {
+          "rowHeader": [
+            "i_item"
+          ],
+          "colHeader": [
+            "i_sp"
+          ],
+          "aggregated": [
+            "<IDENTIFIER-SET>"
+          ]
+        },
+        "displaydomain": {
+          "p_assign": "1"
+        },
+        "slices": [
+          {
+            "identifier": "p_assign",
+            "slice": [
+              {
+                "index": "i_item",
+                "type": "free",
+                "value": "i_item"
+              },
+              {
+                "index": "i_spi",
+                "type": "subset",
+                "value": "i_sp"
+              }
+            ]
+          }
         ]
       }
     },
@@ -870,6 +951,155 @@
     },
     "name": {
       "literal": "BfJStoryText"
+    }
+  },
+  "widgets/bigcombi": {
+    "aimms.widget.type": {
+      "literal": "combinationchart"
+    },
+    "contents.__display_order__": {
+      "literal": [
+        "contents.0",
+        "contents.1"
+      ]
+    },
+    "contents.0.identifier": {
+      "literal": {
+        "identifier": "p_isCarrying",
+        "slice": [
+          {
+            "index": "i_item",
+            "type": "free",
+            "value": "i_item"
+          },
+          {
+            "index": "i_spi",
+            "type": "free",
+            "value": "i_spi"
+          }
+        ]
+      }
+    },
+    "contents.1.identifier": {
+      "literal": {
+        "identifier": "p_slack",
+        "slice": [
+          {
+            "index": "i_spi",
+            "type": "free",
+            "value": "i_spi"
+          }
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_spi"
+        ],
+        "grouped": [],
+        "stacked": [
+          "i_item"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "contextmenu": {
+      "aimms": {
+        "contents": [
+          "sp_bigcombiItemActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_bigcombiItemActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetItemActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetItemActionSpec"
+              },
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "indices.__display_order__": {
+      "literal": [
+        "indices.0",
+        "indices.1"
+      ]
+    },
+    "indices.0.index": {
+      "literal": "i_spi"
+    },
+    "indices.0.storefocus": {
+      "literal": {
+        "identifier": "ep_storeFocusPerson"
+      }
+    },
+    "indices.1.index": {
+      "literal": "i_item"
+    },
+    "indices.1.storefocus": {
+      "literal": {
+        "identifier": "ep_storeFocusItem"
+      }
+    },
+    "name": {
+      "literal": "bigcombi"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_titlebigcombiChart"
+        ],
+        "slices": []
+      }
+    },
+    "toggleDataLabels": {
+      "literal": true
+    },
+    "toggleLegend": {
+      "literal": true
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_bigcombiWidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_bigcombiWidgetActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   "widgets/BjFHintText": {
@@ -1785,6 +2015,38 @@
     },
     "name": {
       "literal": "scalar-size-location"
+    }
+  },
+  "widgets/StoreFocusItem": {
+    "aimms.widget.type": {
+      "literal": "selectionbox-v2"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "ep_storeFocusItem"
+        ],
+        "slices": []
+      }
+    },
+    "name": {
+      "literal": "StoreFocusItem"
+    }
+  },
+  "widgets/StoreFocusPerson": {
+    "aimms.widget.type": {
+      "literal": "selectionbox-v2"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "ep_storeFocusPerson"
+        ],
+        "slices": []
+      }
+    },
+    "name": {
+      "literal": "StoreFocusPerson"
     }
   },
   "widgets/StrongPeople": {
