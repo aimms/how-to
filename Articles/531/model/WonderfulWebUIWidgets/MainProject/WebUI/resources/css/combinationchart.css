@@ -1,3 +1,10 @@
 .annotation-overloaded {
 	background:#F4AF96;
 }
+
+.annotation-hassomeslack {
+	fill:white; 
+	stroke:blue!Important; 
+	stroke-width:4px; 
+}
+

@@ -66,7 +66,7 @@ Model Main_Wonderful_WebUI_Widgets {
 					( '1', '1', 'redirectPageId'    ) : "home", 
 				
 					( '1', '2', 'displayText'       ) : "Map", 
-					( '1', '2', 'icon'              ) : "aimms-map", 
+					( '1', '2', 'icon'              ) : "aimms-earth", 
 					( '1', '2', 'pageId'            ) : "map", 
 					( '1', '2', 'tooltip'           ) : "Shows a map widget with the OxyGem network", 
 					( '1', '2', 'workflowPageState' ) : "Active", 
@@ -87,7 +87,15 @@ Model Main_Wonderful_WebUI_Widgets {
 					( '1', '4', 'tooltip'           ) : "Shows a Gantt chart widget to schedule some tasks", 
 					( '1', '4', 'workflowPageState' ) : "Active", 
 					( '1', '4', 'pageDataState'     ) : "", 
-					( '1', '4', 'redirectPageId'    ) : "home" 
+					( '1', '4', 'redirectPageId'    ) : "home",
+				
+					( '1', '5', 'displayText'       ) : "Pure Combi", 
+					( '1', '5', 'icon'              ) : "aimms-stats-bars2", 
+					( '1', '5', 'pageId'            ) : "purecombi", 
+					( '1', '5', 'tooltip'           ) : "Shows a Gantt chart widget to schedule some tasks", 
+					( '1', '5', 'workflowPageState' ) : "Active", 
+					( '1', '5', 'pageDataState'     ) : "", 
+					( '1', '5', 'redirectPageId'    ) : "home" 
 				
 				
 				
@@ -1871,19 +1879,27 @@ Model Main_Wonderful_WebUI_Widgets {
 						('1', 'iconcolor'   ) : "",
 						('1', 'state'       ) : "Active",
 					
-						('2', 'displayText' ) : "Hint",
-						('2', 'pageId'      ) : "bfjhint",
+						('2', 'displayText' ) : "Data",
+						('2', 'pageId'      ) : "bfjdata",
 						('2', 'tooltip'     ) : "",
 						('2', 'icon'        ) : "",
 						('2', 'iconcolor'   ) : "",
 						('2', 'state'       ) : "Active",
 					
-						('3', 'displayText' ) : "Spoiler",
-						('3', 'pageId'      ) : "bfjspoiler",
+					
+						('3', 'displayText' ) : "Hint",
+						('3', 'pageId'      ) : "bfjhint",
 						('3', 'tooltip'     ) : "",
 						('3', 'icon'        ) : "",
 						('3', 'iconcolor'   ) : "",
-						('3', 'state'       ) : "Active"
+						('3', 'state'       ) : "Active",
+					
+						('4', 'displayText' ) : "Spoiler",
+						('4', 'pageId'      ) : "bfjspoiler",
+						('4', 'tooltip'     ) : "",
+						('4', 'icon'        ) : "",
+						('4', 'iconcolor'   ) : "",
+						('4', 'state'       ) : "Active"
 					
 					
 					
@@ -1953,8 +1969,9 @@ Model Main_Wonderful_WebUI_Widgets {
 					Definition: {
 						if ord(webui::indexPageExtension ) <= card( s_strongPeopleAndI ) then
 							if     webui::indexWidgetActionSpec = 'displaytext' then
-								formatString("Assigning %e from %e to %e",
+								formatString("%e: %e%s%e",
 									ep_storeFocusItem,ep_storeFocusPerson,
+									character(10140),
 									ep_person(webui::indexPageExtension))
 							elseif webui::indexWidgetActionSpec = 'icon'        then
 								if webui::indexPageExtension = 1 then
@@ -1963,8 +1980,8 @@ Model Main_Wonderful_WebUI_Widgets {
 									formatString("aimms-pencil%e", webui::indexPageExtension)
 								endif
 							elseif webui::indexWidgetActionSpec = 'procedure'   then
-								formatString("pr_assignFruitTo%e",
-									ep_person(webui::indexPageExtension))
+								formatString("%s::pr_assignFruitTo%e", 
+									sp_runtimeLibraryPrefix, webui::indexPageExtension)
 							elseif webui::indexWidgetActionSpec = 'state'       then
 								if ep_storeFocusPerson = ep_person(webui::indexPageExtension) then
 									"Hidden"
@@ -1994,36 +2011,6 @@ Model Main_Wonderful_WebUI_Widgets {
 						Property: Input;
 					}
 				}
-				Procedure pr_assignFruitToJack {
-					Body: {
-						pr_assignFruit('Jack');
-					}
-				}
-				Procedure pr_assignFruitToJane {
-					Body: {
-						pr_assignFruit('Jane');
-					}
-				}
-				Procedure pr_assignFruitToJoey {
-					Body: {
-						pr_assignFruit('Joey');
-					}
-				}
-				Procedure pr_assignFruitToJoan {
-					Body: {
-						pr_assignFruit('Joan');
-					}
-				}
-				Procedure pr_assignFruitToJohn {
-					Body: {
-						pr_assignFruit('John');
-					}
-				}
-				Procedure pr_assignFruitToI {
-					Body: {
-						pr_assignFruit('I');
-					}
-				}
 			}
 		}
 		Section bobForJobData {
@@ -2039,7 +2026,7 @@ Model Main_Wonderful_WebUI_Widgets {
 					Range: s_strongPeopleAndI;
 				}
 				Parameter p_canCarry {
-					IndexDomain: i_sp;
+					IndexDomain: i_spi;
 				}
 				Parameter p_totCarry {
 					Definition: sum( i_sp, p_canCarry(i_sp) );
@@ -2056,16 +2043,28 @@ Model Main_Wonderful_WebUI_Widgets {
 			}
 			DeclarationSection bobForJob_model_formulation {
 				Variable v_assign {
-					IndexDomain: (i_item,i_sp);
+					IndexDomain: (i_item,i_spi);
 					Range: binary;
 				}
+				Variable v_totAssignedToMe {
+					Range: free;
+					Definition: sum( i_item, p_weight(i_item) * v_assign(i_item, ep_meMyselfAndI ) );
+				}
 				Constraint c_respectBinSize {
-					IndexDomain: i_sp;
-					Definition: sum( i_item, p_weight(i_item) * v_assign(i_item, i_sp) ) <= p_canCarry(i_sp);
+					IndexDomain: i_spi;
+					Definition: {
+						sum( i_item, p_weight(i_item) * v_assign(i_item, i_spi) ) 
+						<= 
+						if i_spi = ep_meMyselfAndI then
+							sum( i_item, p_weight( i_item ) )
+						else
+							p_canCarry(i_spi)
+						endif
+					}
 				}
 				Constraint c_isCarriedOnce {
 					IndexDomain: i_item;
-					Definition: sum( i_sp, v_assign(i_item, i_sp) ) = 1;
+					Definition: sum( i_spi, v_assign(i_item, i_spi) ) = 1;
 				}
 				Constraint c_respectExistingAssignments {
 					IndexDomain: (i_item,i_sp)|p_assign(i_item, i_sp);
@@ -2080,6 +2079,7 @@ Model Main_Wonderful_WebUI_Widgets {
 					Definition: bobForJobData * AllConstraints;
 				}
 				MathematicalProgram mp_binPacking {
+					Objective: v_totAssignedToMe;
 					Direction: minimize;
 					Constraints: s_bobForJobConstraints;
 					Variables: s_bobForJobVariables;
@@ -2090,6 +2090,14 @@ Model Main_Wonderful_WebUI_Widgets {
 				Parameter p_isCarrying {
 					IndexDomain: (i_item,i_spi);
 					Definition: p_assign(i_item, i_spi) * p_weight(i_item);
+					webui::TooltipIdentifier: sp_isCarryingTooltip;
+				}
+				StringParameter sp_isCarryingTooltip {
+					IndexDomain: (i_item,i_spi)|p_isCarrying(i_item, i_spi);
+					Definition: {
+						formatString("A bag of %e weighing %i is carried by %e",
+							i_item, p_isCarrying(i_item, i_spi), i_spi)
+					}
 				}
 				Parameter p_slack {
 					IndexDomain: i_spi;
@@ -2100,7 +2108,23 @@ Model Main_Wonderful_WebUI_Widgets {
 							0
 						endif
 					}
-					webui::AnnotationsIdentifier: sp_overloaded;
+					webui::AnnotationsIdentifier: sp_slackAnnot;
+					webui::TooltipIdentifier: sp_slackTooltip;
+				}
+				StringParameter sp_slackTooltip {
+					IndexDomain: i_spi;
+					Definition: {
+						if i_spi <> ep_meMyselfAndI then
+							!formatString("A bag of %e weighing %i is carried by %e"
+							formatString("%e can carry %i more", i_spi, p_slack(i_spi) )
+						else
+							""
+						endif
+					}
+				}
+				StringParameter sp_slackAnnot {
+					IndexDomain: i_spi|p_slack(i_spi);
+					Definition: "hassomeslack";
 				}
 				StringParameter sp_overloaded {
 					IndexDomain: i_spi;
@@ -2134,7 +2158,52 @@ Model Main_Wonderful_WebUI_Widgets {
 				CurrentInputs -= data {p_canCarry, p_weight};
 				pr_clearAssignment();
 				!pr_optimizeAssignment();
+				pr_combiCreateRuntimeLibrary();
 			}
+		}
+		DeclarationSection Runtime_library_declarations {
+			StringParameter sp_runtimeLibraryName {
+				Definition: "WonderfulWebUIWidgetRuntimeLibrary";
+			}
+			StringParameter sp_runtimeLibraryPrefix {
+				Definition: "wwwrt";
+			}
+		}
+		Procedure pr_combiCreateRuntimeLibrary {
+			Body: {
+				ep_runtimeLib := StringToElement( AllIdentifiers, sp_runtimeLibraryName );
+				if ep_runtimeLib then
+					me::Delete( ep_runtimeLib );
+					ep_runtimeLib := '' ;
+					ep_runtimeLib := '' ;
+				endif ;
+				
+				ep_runtimeLib := me::CreateLibrary( sp_runtimeLibraryName, sp_runtimeLibraryPrefix );
+				
+				for i_persNo do
+					ep_proc := me::Create(
+						name     :  formatString("pr_assignFruitTo%i",i_persNo), 
+						newType  :  'procedure', 
+						parentId :  ep_runtimeLib, 
+						pos      :  ord(i_persNo));
+					sp_body := formatString("pr_assignFruit(ep_person(\'%e\'));\n",i_persNo);
+					me::SetAttribute(
+						runtimeId :  ep_proc, 
+						attr      :  'body', 
+						txt       :  sp_body);
+				endfor ;
+				me::Compile(ep_runtimeLib);
+			}
+			ElementParameter ep_runtimeLib {
+				Range: AllIdentifiers;
+			}
+			ElementParameter ep_prefix {
+				Range: AllIdentifiers;
+			}
+			ElementParameter ep_proc {
+				Range: AllIdentifiers;
+			}
+			StringParameter sp_body;
 		}
 		Procedure pr_clearAssignment {
 			Body: {
@@ -2180,7 +2249,7 @@ Model Main_Wonderful_WebUI_Widgets {
 			Body: {
 				solve mp_binPacking ;
 				if mp_binPacking.ProgramStatus = 'Optimal' then
-					p_assign(i_item, i_sp) := round( v_assign(i_item, i_sp) );
+					p_assign(i_item, i_spi) := round( v_assign(i_item, i_spi) );
 				else
 					display "too bad" ;
 				endif ;

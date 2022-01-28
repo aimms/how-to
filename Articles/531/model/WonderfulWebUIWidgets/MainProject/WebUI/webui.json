@@ -116,15 +116,22 @@
                 ]
               },
               {
-                "name": "Development Support",
-                "type": "pagev2-grid",
-                "slug": "development_support",
-                "children": []
-              },
-              {
                 "name": "purecombi",
                 "type": "pagev2-grid",
                 "slug": "purecombi",
+                "children": [
+                  {
+                    "name": "BfJData",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "bfjdata",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Development Support",
+                "type": "pagev2-grid",
+                "slug": "development_support",
                 "children": []
               }
             ]
@@ -302,6 +309,58 @@
     },
     "displayName": {
       "literal": "Layout1 Copy"
+    }
+  },
+  "pages/bfjdata": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "StoreFocusPerson",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsStoreFocusPerson0"
+        },
+        {
+          "widgetUri": "StoreFocusItem",
+          "gridArea": "Unassigned widgets",
+          "dndId": "area-aStoreFocusItem1"
+        },
+        {
+          "widgetUri": "Items_1",
+          "gridArea": "area-a",
+          "dndId": "area-aItems_12"
+        },
+        {
+          "widgetUri": "StrongPeople_1",
+          "gridArea": "area-a",
+          "dndId": "area-aStrongPeople_13"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "StoreFocusPerson",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "StoreFocusItem",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "StrongPeople_1",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "Items_1",
+          "layoutInfo": {}
+        }
+      ]
     }
   },
   "pages/bfjhint": {
@@ -841,20 +900,60 @@
       ]
     },
     "layoutId": {
-      "literal": "Layout10"
+      "literal": "Layout9"
+    },
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_combinationChartPageSecondaryActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_combinationChartPageSecondaryActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "sidepanels": {
+      "aimms": {
+        "contents": [
+          "sp_combinationChartSidePanel"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_combinationChartSidePanel",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexSidePanelSpec",
+                "type": "free",
+                "value": "webui::indexSidePanelSpec"
+              }
+            ]
+          }
+        ]
+      }
     },
     "widgets": {
       "literal": [
         {
           "uri": "bigcombi",
-          "layoutInfo": {}
-        },
-        {
-          "uri": "StoreFocusPerson",
-          "layoutInfo": {}
-        },
-        {
-          "uri": "StoreFocusItem",
           "layoutInfo": {}
         }
       ]
@@ -947,7 +1046,7 @@
       "literal": "text"
     },
     "contents": {
-      "literal": "<div>You want to go to the market to sell your fruits.&nbsp; You have several bags of fruit, each with their own weight.</div><div><br></div><div>The scout group Js want to help you out for a Bob for Job. Each of the five youngsters in that group has its own limit in what he or she can carry.</div><div><br></div><div>As it so happens, the total weight of bags of fruit is exactly what the group can carry.&nbsp; So the bags needs to be divided carefully between the youngsters. You can do so by clicking in the assignment table in the lower left of the page.</div><div><br></div><div>By invoking the action \"Optimize\" in the lower right, the application will assign the remaining bags of fruit or declare that this is impossible.</div><div><br></div><div>Question 1: find a good assignment of bags of fruit to the various youngsters.</div><div><br></div><div>Question 2: Joey likes Kiwis very much, so he grabs the bag with Kiwis and offers to carry that bag to the market.&nbsp; Using the optimizer in the application, you quickly notice that the remaining bags cannot be divided among the youngsters.</div><div>Why cannot you the remaining bags be divided over the youngsters?</div><div><br></div><div>If you do not have an answer to question 2, you may want to check out the hint first, and eventually the spoiler.</div>"
+      "literal": "<div>I want to go to the market to sell my fruits.&nbsp; I have several bags of fruit, each with their own weight in kg.&nbsp; In addition, I have a 20 kg provisional booth I will carry myself.</div><div><br></div><div>The scout group Js want to help me out for a Bob for Job. Each of the five youngsters in that group has its own limit in what he or she can carry.</div><div><br></div><div>As it so happens, the total weight of bags of fruit is exactly what the group can carry.&nbsp; So the bags needs to be divided carefully between the youngsters. You can advise me by  by left - right clicking on one of the bags in the combination chart, and selecting to which person the bag should be re-assigned.</div><div><br></div><div>By invoking the action \"Optimize\" in the lower right, the application will assign the remaining bags of fruit if that is possible.&nbsp; The other bags, and the booth, I need to carry myself.</div><div><br></div><div>When you don't assign bags yourself, but let the optimizer assign all bags, you will note that all bags will be assigned to youngsters and I only have to carry the booth.</div><div><br></div><div>Question: </div><div><br></div><div>Joey likes Kiwis very much, so he grabs the bag with Kiwis and offers to carry that bag to the market.&nbsp; Using the optimizer in the application, you quickly notice that the remaining bags cannot be divided among the youngsters and a bag of 2 kg is still assigned to me.</div><div><br></div><div>Why cannot you assign the remaining bags among the youngsters?</div><div><br></div><div>If you do not have an answer to this question, you may want to check out the hint first, and if that does not help  the spoiler.</div>"
     },
     "name": {
       "literal": "BfJStoryText"
@@ -959,8 +1058,8 @@
     },
     "contents.__display_order__": {
       "literal": [
-        "contents.0",
-        "contents.1"
+        "contents.1",
+        "contents.0"
       ]
     },
     "contents.0.identifier": {
@@ -1118,7 +1217,7 @@
       "literal": "text"
     },
     "contents": {
-      "literal": "<div>The answer to question 1 is simple, just press the optimize button.</div><div><br></div><div>The answer to question 2 is slightly more interesting: there are two people that can carry a weight with a value that is odd (as in not even).&nbsp; There are also two items with an odd weight. In addition, the total weight that is to be carried, is equal to the total weight that can be carried.&nbsp; This implies that the ladies should each carry one of the items with an odd weight. Because Joey took one of them away, the problem becomes infeasible and the answer to the question is no.</div>"
+      "literal": "<div>Spoiler / Answer.</div><div><br></div><div>As you know, adding two even numbers together will result in an even number.</div><div><br></div><div>Thus, to reach a weight with an odd number of kilos, there must be at least one bag weighing an odd number of kilos.</div><div><br></div><div>There are two people, the ladies actually, that can carry an odd number of kilos.&nbsp;</div><div><br></div><div>There are also just two bags weighing an odd number of kilos.</div><div><br></div><div>In addition, the total weight of fruit to be carried, 30 kg, exactly matches what the youngster can carry.</div><div><br></div><div>Combining this, the bags of fruit with an odd weight, Kiwi and Cherry, need to be assigned to the ladies if all bags are to be carried by the youngsters.</div><div><br></div>"
     },
     "name": {
       "literal": "BjFSpoilerText"
@@ -1397,6 +1496,35 @@
     },
     "name": {
       "literal": "Items"
+    }
+  },
+  "widgets/Items_1": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_weight"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_item"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "Items (1)"
     }
   },
   "widgets/JobDetails": {
@@ -2098,6 +2226,57 @@
     },
     "name": {
       "literal": "StrongPeople"
+    }
+  },
+  "widgets/StrongPeople_1": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_canCarry",
+          "p_slack"
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_slack": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_sp"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_canCarry"
+          },
+          "width": 12.91
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_sp",
+          "width": 16.64
+        }
+      ]
+    },
+    "name": {
+      "literal": "StrongPeople (1)"
     }
   },
   "widgets/textGantChartStory": {
