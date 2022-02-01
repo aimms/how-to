@@ -13,7 +13,13 @@
     <!-- Use this appender when logging on AIMMS PRO for a solver session, or for a WebUI data session -->
     <appender class="org.apache.log4j.rolling.RollingFileAppender" name="logfile">
         <rollingPolicy class="org.apache.log4j.rolling.FixedWindowRollingPolicy">
+
+            <!-- The following filenaming for log files is in use since AIMMS PRO 2.34.2 --> 
             <param value="${AIMMSPRO_DATADIR}/Log/Sessions/%X{projectName}-%X{projectVersion}-%X{startupMode}-%X{timeStamp}-%X{sessionId}-%i.log" name="FileNamePattern"/>
+
+            <!-- The following filenaming for log files is in use for AIMMS PRO 2.34.1 and older -->
+            <!-- <param name="FileNamePattern" value="${AIMMSPRO_DATADIR}/Log/Sessions/%X{sessionId}-%i.log"/> -->
+
             <param value="1" name="MinIndex"/>
             <param value="10" name="MaxIndex"/>
         </rollingPolicy>
