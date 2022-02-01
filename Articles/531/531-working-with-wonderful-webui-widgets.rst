@@ -19,14 +19,15 @@ Each example takes just a few minutes of your precious time
 to give you an impression on how an interactive optimization application 
 can support end-users, such as analysts or planners, in their activities.
 
-Feel free to run the ``Wonderful WebUI Widgets`` application 
-using the `AIMMS Community Edition <https://licensing.cloud.aimms.com/license/community.htm>`_.
+The ``Wonderful WebUI Widgets`` application requires at least AIMMS 4.84.
+As license, the `AIMMS Community Edition <https://licensing.cloud.aimms.com/license/community.htm>`_ suffices.
+
 
 We appreciate feedback about the ``Wonderful WebUI Widgets`` application 
 on the `AIMMS Community <https://community.aimms.com/>`_ 
 or by writing to `AIMMS User Support <support@aimms.com>`_.
 
-In the following, how to use each of the page of this application is briefly described.
+In the following, how to use each page is briefly described.
 
 Welcome
 -------
@@ -117,8 +118,6 @@ In addition, the app auto colors:
 .. tip:: You may want to start with optimizing the flow over the given network to identify the existing bottlenecks.
 
 
-.. simplemaps references: 
-.. https://simplemaps.com/data/world-cities
 
 Gantt
 -----
@@ -132,8 +131,14 @@ The Levram company operates three production lines, nicknamed
 #.  Antman.  
 
 Each production line handles an order as a single task: stopping a task halfway leads to clogging and other problems. 
-Even though all three lines can handle all types of orders, King Kong is more suited to handling orders with large items, 
-Antman is more suited to handling orders with small items, and Hercules is somewhat in between. 
+Even though all three lines can handle all types of orders, 
+
+* King Kong is more suited to handling orders with large items, 
+
+* Antman is more suited to handling orders with small items, and 
+
+* Hercules is somewhat in between. 
+
 Based on order amount, type, and production line, the app will compute the time needed to complete the order. 
 
 Normally the orders are scheduled by an optimization algorithm, but each order can be scheduled by manually.
@@ -182,6 +187,75 @@ The jobs that can be dragged to a suited position by a human scheduler have a bl
     #.  Delete the order
 
     #.  Open a dialog page to edit the properties of the task.
+
+Pure Combi
+----------------
+
+I want to go to the local market to sell fruit.  
+I have several bags of fruit (total 30 kg) and a provisional stand (20 kg) to showcase the fruit I'm selling.
+To get to the market, the scouting group Js, offered to do a Bob for a Job: carry the bags of fruit.
+Each of the youngsters that offered to help has his/her own limit in what that person can carry.
+Coincidentally, what the youngsters can carry together is also 30 kg. 
+Clearly, the bags they don't carry, I have to carry myself. 
+As I'm already carrying the booth, I don't want to carry bags of fruit in addition.
+
+The page opens as follows:
+
+.. image:: images/opening-combi-chart.png
+    :align: center
+    
+As you can see, all bags are still assigned to me, and 
+the youngsters have a slack indicating how much they can still carry.
+
+To assign a bag of fruit to a youngster, 
+you can right-click on the bag in the column chart and select the person assigned to carry the bag.
+
+.. image:: images/combi-right-click-to-assign.png
+    :align: center
+
+To quickly assign the remaining bags of fruit, you can use the optimizer. 
+The optimizer is invoked via the page actions, choice "optimize"
+which makes the screen look as follows:
+
+.. image:: images/optimal-assignment-combi-chart.png
+    :align: center
+
+Likely the slack of all youngsters is gone, as is the assignment of bags of fruit to me.
+
+You can reset the assignment by clicking the broom in the lower right.
+
+By just assigning kiwi to Joey, 
+
+.. image:: images/combi-widget-joey-grabs.png
+    :align: center
+
+and then optimizing, a solution similar to the one below is reached:
+
+.. image:: images/combi-widget-joey-grabs-optimize.png
+    :align: center
+
+As you can see, I still need to carry a bag of fruit.
+Can you explain why?
+
+Anyway, if you want you can see a hint or verify your solution via the side panels in the application.
+And it can get worse: 
+
+.. image:: images/bad-starting-combi-widget.png
+    :align: center
+
+With these assignments, I'm stuck with more than 10 kg of fruit to be carried by myself.
+
+
+
+
+
+
+
+
+
+
+
+
 
 .. spelling:: 
 

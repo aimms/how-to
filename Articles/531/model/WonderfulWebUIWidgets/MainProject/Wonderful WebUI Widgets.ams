@@ -38,6 +38,13 @@ Model Main_Wonderful_WebUI_Widgets {
 						sp_AimmsRevision, sp_startupFolder );
 			}
 		}
+		Procedure pr_toggleDeveloper {
+			Body: {
+				!DebuggerBreakpoint();
+				bp_developmentSupport := 1-bp_developmentSupport;
+				!display "Bye, bye from pr_toggleDeveloper()", bp_developmentSupport, "-------------" ;
+			}
+		}
 		StringParameter sp_startupFolder {
 			InitialData: "";
 		}
@@ -85,7 +92,7 @@ Model Main_Wonderful_WebUI_Widgets {
 					( '1', '4', 'icon'              ) : "aimms-stats-bars4", 
 					( '1', '4', 'pageId'            ) : "combinationchart", 
 					( '1', '4', 'tooltip'           ) : "Shows a Gantt chart widget to schedule some tasks", 
-					( '1', '4', 'workflowPageState' ) : "Active", 
+					( '1', '4', 'workflowPageState' ) : if bp_developmentSupport then "Active" else "" endif, 
 					( '1', '4', 'pageDataState'     ) : "", 
 					( '1', '4', 'redirectPageId'    ) : "home",
 				
@@ -159,8 +166,8 @@ Model Main_Wonderful_WebUI_Widgets {
 						( '1', 'color'     ) : "red", 
 						( '1', 'text'      ) : sp_context,
 						( '1', 'tooltip'   ) : sp_statusTooltip,
-						( '1', 'procedure' ) : "",
-						( '1', 'state'     ) : "Inactive"
+						( '1', 'procedure' ) : "pr_toggleDeveloper",
+						( '1', 'state'     ) : "Active"
 					}
 				}
 			}
@@ -1628,7 +1635,7 @@ Model Main_Wonderful_WebUI_Widgets {
 						endif ;
 						
 						! Remove small values (noise) from CPLEX/MIP solution
-						v_selectProcutionLine(i_al, i_o) | ( v_selectProcutionLine(i_al, i_o) and ( abs( v_selectProcutionLine(i_al, i_o) <= 0.1 ) ) ) := 0 ;
+						v_selectProductionLine(i_al, i_o) | ( v_selectProductionLine(i_al, i_o) and ( abs( v_selectProductionLine(i_al, i_o) <= 0.1 ) ) ) := 0 ;
 						v_startProductionOnProductionLine(i_al,i_o,i_hc) | ( v_startProductionOnProductionLine(i_al,i_o,i_hc) and
 						   ( abs( v_startProductionOnProductionLine(i_al,i_o,i_hc) ) <= 0.1 ) ) := 0 ;
 						
@@ -1660,7 +1667,7 @@ Model Main_Wonderful_WebUI_Widgets {
 						!empty durationActivity, startTimeActivity ;
 						p_durationActivity( ( i_al, i_o) | not bp_orderScheduledByLivingCreature( i_o ) ) := 0 ;
 						ep_startTimeActivity( ( i_al, i_o) | not bp_orderScheduledByLivingCreature( i_o ) ) := '' ;
-						for (i_al, i_o) | ( v_selectProcutionLine(i_al, i_o) and ( not bp_orderScheduledByLivingCreature( i_o ) ) ) do
+						for (i_al, i_o) | ( v_selectProductionLine(i_al, i_o) and ( not bp_orderScheduledByLivingCreature( i_o ) ) ) do
 							for i_hc | v_startProductionOnProductionLine(i_al, i_o, i_hc) do
 								ep_startTimeActivity(i_al, i_o) :=  i_hc ;
 							endfor ;
@@ -1732,7 +1739,7 @@ Model Main_Wonderful_WebUI_Widgets {
 							     v_costOfStartingOrder(i_al, i_o, i_hc) )
 						}
 					}
-					Variable v_selectProcutionLine {
+					Variable v_selectProductionLine {
 						IndexDomain: (i_al,i_o);
 						Range: binary;
 						Comment: "For every order i_o select precisely one production line i_al";
@@ -1755,13 +1762,13 @@ Model Main_Wonderful_WebUI_Widgets {
 					}
 					Constraint c_ensureAnOrderIsHandledOnOneProductionLineOnly {
 						IndexDomain: i_o;
-						Definition: sum( i_al, v_selectProcutionLine(i_al, i_o) ) = 1;
+						Definition: sum( i_al, v_selectProductionLine(i_al, i_o) ) = 1;
 					}
 					Constraint c_ensureEachOrderIsStartedOnlyOnce {
 						IndexDomain: (i_al,i_o);
 						Definition: {
 							sum( i_hc, v_startProductionOnProductionLine(i_al, i_o, i_hc) ) = 
-							     v_selectProcutionLine(i_al, i_o)
+							     v_selectProductionLine(i_al, i_o)
 						}
 					}
 					Constraint c_ensureThereIsNoOverlapOnAnyLine {
@@ -2011,12 +2018,56 @@ Model Main_Wonderful_WebUI_Widgets {
 						Property: Input;
 					}
 				}
+				DeclarationSection Runtime_library_declarations {
+					StringParameter sp_runtimeLibraryName {
+						Definition: "WonderfulWebUIWidgetRuntimeLibrary";
+					}
+					StringParameter sp_runtimeLibraryPrefix {
+						Definition: "wwwrt";
+					}
+				}
+				Procedure pr_combiCreateRuntimeLibrary {
+					Body: {
+						ep_runtimeLib := StringToElement( AllIdentifiers, sp_runtimeLibraryName );
+						if ep_runtimeLib then
+							me::Delete( ep_runtimeLib );
+							ep_runtimeLib := '' ;
+							ep_runtimeLib := '' ;
+						endif ;
+						
+						ep_runtimeLib := me::CreateLibrary( sp_runtimeLibraryName, sp_runtimeLibraryPrefix );
+						
+						for i_persNo do
+							ep_proc := me::Create(
+								name     :  formatString("pr_assignFruitTo%i",i_persNo), 
+								newType  :  'procedure', 
+								parentId :  ep_runtimeLib, 
+								pos      :  ord(i_persNo));
+							sp_body := formatString("pr_assignFruit(ep_person(\'%e\'));\n",i_persNo);
+							me::SetAttribute(
+								runtimeId :  ep_proc, 
+								attr      :  'body', 
+								txt       :  sp_body);
+						endfor ;
+						me::Compile(ep_runtimeLib);
+					}
+					ElementParameter ep_runtimeLib {
+						Range: AllIdentifiers;
+					}
+					ElementParameter ep_prefix {
+						Range: AllIdentifiers;
+					}
+					ElementParameter ep_proc {
+						Range: AllIdentifiers;
+					}
+					StringParameter sp_body;
+				}
 			}
 		}
 		Section bobForJobData {
 			DeclarationSection Input_data_declarations {
 				Set s_strongPeopleAndI {
-					Index: i_spi;
+					Index: i_spi, i_otherspi;
 				}
 				Set s_strongPeople {
 					SubsetOf: s_strongPeopleAndI;
@@ -2099,6 +2150,10 @@ Model Main_Wonderful_WebUI_Widgets {
 							i_item, p_isCarrying(i_item, i_spi), i_spi)
 					}
 				}
+				Parameter p_totCarrying {
+					IndexDomain: i_spi;
+					Definition: sum( i_item, p_assign(i_item, i_spi) * p_weight(i_item) );
+				}
 				Parameter p_slack {
 					IndexDomain: i_spi;
 					Definition: {
@@ -2141,74 +2196,72 @@ Model Main_Wonderful_WebUI_Widgets {
 				Parameter p_assign {
 					IndexDomain: (i_item,i_spi);
 					Range: binary;
+					webui::FlagsIdentifier: sp_assignFlags;
 					webui::UponChangeProcedure: pr_uponChangeAssignment;
+				}
+				Parameter bp_forbiddenAssignments {
+					IndexDomain: (i_item,i_spi);
+					Range: binary;
+					Definition: {
+						if ( i_spi = ep_meMyselfAndI ) then
+							if p_assign(i_item, i_spi) then
+								1
+							else
+								0
+							endif
+						else
+							if p_assign(i_item, i_spi) then
+								0
+							else
+								if p_totCarrying(i_spi) + p_weight( i_item ) > p_canCarry( i_spi ) then
+									1
+								else
+									0
+								endif
+							endif
+						endif
+					}
+					Comment: {
+						"An assignment is forbidden if the youngster gets overloaded.
+						the \"me\" can never be overloaded, so this column is always \"false\" (for this identifier)"
+					}
+				}
+				StringParameter sp_assignFlags {
+					IndexDomain: (i_item,i_spi);
+					Definition: {
+						if bp_forbiddenAssignments(i_item, i_spi) then
+							"readonly"
+						else
+							""
+						endif
+					}
+					Comment: "Just read only flags.";
 				}
 			}
 		}
-		Procedure pr_init {
+		Procedure pr_initCombiChartData {
 			Body: {
-				s_strongPeopleAndI := data { Jack, Jane, Joey, Joan, John, I };
+				s_strongPeopleAndI := data { Jack, Jane, Joey, Joan, John, me };
 				s_strongPeople := data { Jack, Jane, Joey, Joan, John };
 				p_canCarry(i_sp) := data { Jack : 4, Jane : 5, Joey : 6, Joan : 7, John : 8 };  
-				s_items := data { appel, pear, mango, melon, banana,
-				                  strawberry, coconut, cherry, grapes, kiwi } ;
-				p_weight(i_item) := data { appel : 4, pear : 2, mango : 2, melon: 4, banana : 4,  
-				                  strawberry : 2, coconut : 6, cherry : 3, grapes : 2, kiwi : 1 } ;
+				
+				s_items := data { 
+					melon, banana, strawberry, coconut, cherry, 
+					kiwi, apple, grapes, pear, mango };
+				p_weight(i_item) := data { 
+					kiwi : 1, apple : 4, cherry : 3, pear : 2, mango : 2, 
+					melon: 4, banana : 4, strawberry : 2, coconut : 6, grapes : 2 } ;
 				
 				CurrentInputs -= data {p_canCarry, p_weight};
+				
+				ep_meMyselfAndI := StringToElement( s_strongPeopleAndI, "me", create:0);
 				pr_clearAssignment();
-				!pr_optimizeAssignment();
 				pr_combiCreateRuntimeLibrary();
 			}
-		}
-		DeclarationSection Runtime_library_declarations {
-			StringParameter sp_runtimeLibraryName {
-				Definition: "WonderfulWebUIWidgetRuntimeLibrary";
-			}
-			StringParameter sp_runtimeLibraryPrefix {
-				Definition: "wwwrt";
-			}
-		}
-		Procedure pr_combiCreateRuntimeLibrary {
-			Body: {
-				ep_runtimeLib := StringToElement( AllIdentifiers, sp_runtimeLibraryName );
-				if ep_runtimeLib then
-					me::Delete( ep_runtimeLib );
-					ep_runtimeLib := '' ;
-					ep_runtimeLib := '' ;
-				endif ;
-				
-				ep_runtimeLib := me::CreateLibrary( sp_runtimeLibraryName, sp_runtimeLibraryPrefix );
-				
-				for i_persNo do
-					ep_proc := me::Create(
-						name     :  formatString("pr_assignFruitTo%i",i_persNo), 
-						newType  :  'procedure', 
-						parentId :  ep_runtimeLib, 
-						pos      :  ord(i_persNo));
-					sp_body := formatString("pr_assignFruit(ep_person(\'%e\'));\n",i_persNo);
-					me::SetAttribute(
-						runtimeId :  ep_proc, 
-						attr      :  'body', 
-						txt       :  sp_body);
-				endfor ;
-				me::Compile(ep_runtimeLib);
-			}
-			ElementParameter ep_runtimeLib {
-				Range: AllIdentifiers;
-			}
-			ElementParameter ep_prefix {
-				Range: AllIdentifiers;
-			}
-			ElementParameter ep_proc {
-				Range: AllIdentifiers;
-			}
-			StringParameter sp_body;
 		}
 		Procedure pr_clearAssignment {
 			Body: {
 				!empty p_assign ;
-				ep_meMyselfAndI := StringToElement( s_strongPeopleAndI, "I", create:0);
 				p_assign(i_item, i_sp) := 0 ;
 				p_assign(i_item, ep_meMyselfAndI) := 1 ;
 			}
@@ -2258,19 +2311,27 @@ Model Main_Wonderful_WebUI_Widgets {
 		Procedure pr_uponChangeAssignment {
 			Arguments: (haschanged,OldValue);
 			Body: {
-				for (i_item,i_sp) | hasChanged( i_item, i_sp ) do
-					if p_assign( i_item, i_sp ) then
+				for (i_item,i_spi) | hasChanged( i_item, i_spi ) do
+					if p_assign( i_item, i_spi ) then
 						! Clear other assignments for that item.
-						p_assign( i_item, i_otherSp ) | ( i_otherSp <> i_sp ) := 0 ;
+						p_assign( i_item, i_otherSpi ) | ( i_otherSpi <> i_spi ) := 0 ;
+					else
+						if i_spi = ep_meMyselfAndI then
+							! shouldn't happen, resetting.
+							p_assign( i_item, ep_meMyselfAndI ) := 1 ;
+						else
+							! if unassigned from a youngster, I have to carry the bag myself :-(
+							p_assign( i_item, ep_meMyselfAndI ) := 1 ;
+						endif ;
 					endif ;
 				endfor ;
 			}
 			Parameter haschanged {
-				IndexDomain: (i_item,i_sp);
+				IndexDomain: (i_item,i_spi);
 				Property: Input;
 			}
 			Parameter OldValue {
-				IndexDomain: (i_item,i_sp);
+				IndexDomain: (i_item,i_spi);
 				Property: Input;
 			}
 		}
@@ -2284,7 +2345,7 @@ Model Main_Wonderful_WebUI_Widgets {
 				! Workaround for gitlab ticket 4555:
 				Empty p_latitude, p_longitude, p_locationSize ;
 				
-				pr_init();
+				pr_initCombiChartData();
 				
 				pr_initContext();
 			}
