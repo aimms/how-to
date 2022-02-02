@@ -389,7 +389,7 @@ To invoke an assignment, the right mouse menu should be popped up at a colored r
 The right mouse menu contains an entry for each element in a set.
 The code shows how to generate these lines for an arbitrary set (to be kind to the end-user, please limit the size of such a set to no more than 10 elements).
 
-For each line in the menu, there should also be a corresponding procedure.
+For each line in the menu, there needs to be a corresponding procedure.
 To create the proper number of procedures, a runtime library is used.
 
 
