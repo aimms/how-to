@@ -2777,7 +2777,7 @@ LibraryModule Library_GuardServerSession {
 						
 							('4', 'displaytext') : "Delete marked",  
 							('4', 'icon'       ) : "aimms-bin", 
-							('4', 'procedure'  ) : "gsspr_removeMarked", 
+							('4', 'procedure'  ) : "gss::pr_removeMarked", 
 							('4', 'state'      ) : "Active", 
 						
 							('5', 'displaytext') : "mark all",  
@@ -3127,7 +3127,7 @@ LibraryModule Library_GuardServerSession {
 				}
 				Procedure pr_loadRequestResponse {
 					Body: {
-						DebuggerBreakpoint();
+						!DebuggerBreakpoint();
 						
 						if ep_selectedSession = '' then return 0; endif;
 						
@@ -3148,8 +3148,14 @@ LibraryModule Library_GuardServerSession {
 						if not (p_ret) then return 0; endif;
 						
 						gss::pr_saveTrackedSessionData( ep_selectedSession );
+						
+						if ep_loadResponseCallbackHook then
+							sp_requestId := sp_responseVersionID(ep_selectedSession);
+							apply( ep_loadResponseCallbackHook, sp_requestId );
+						endif ;
 					}
 					Parameter p_ret;
+					StringParameter sp_requestId;
 				}
 				Procedure pr_closeRequestManager {
 					Body: {
@@ -3447,6 +3453,10 @@ LibraryModule Library_GuardServerSession {
 				StringParameter sp_warningNonSavedData;
 				StringParameter sp_lastSessionNotification {
 					InitialData: "-";
+				}
+				ElementParameter ep_loadResponseCallbackHook {
+					Range: AllIdentifiers;
+					Default: 'gss::pr_responseProtocol';
 				}
 			}
 		}
@@ -5986,6 +5996,13 @@ LibraryModule Library_GuardServerSession {
 					Property: Input;
 				}
 				StringParameter sp_retval;
+			}
+			Procedure pr_emptyProc;
+			Procedure pr_responseProtocol {
+				Arguments: (sp_requestId);
+				StringParameter sp_requestId {
+					Property: Input;
+				}
 			}
 		}
 		Section Authorization_tools {
