@@ -7,9 +7,11 @@ you may want to scan :doc:`../531/531-working-with-wonderful-webui-widgets` firs
 Welcome and workflow
 --------------------
 
-It is good practice to provide a welcome `text <https://documentation.aimms.com/webui/text-widget.html>`_ to the end-user, 
-such that this user can, when needed, read about the operation of the app, and about expected actions.
-In addition, it is good practice to make the welcome page part of the workflow, such that the user feels guided right from the start.
+It is good practice to provide a welcome `text <https://documentation.aimms.com/webui/text-widget.html>`_ 
+to the end-user. 
+This way the end-user reads about the operation of the app and about expected actions.
+In addition, it is good practice to make the welcome page part of the workflow, 
+such that the user feels guided right from the start.
 
 Map page
 --------
@@ -196,7 +198,7 @@ There are three different data representations that need to be kept consistent:
 
 #.  Gantt Chart data: start and length of each task.
 
-#.  Coefficients used by optimization algorithm.
+#.  Coefficients used by the optimization algorithm.
 
 
 
@@ -205,7 +207,7 @@ Border: use of CSS
 
 We built on the intuition that 
 blue indicates "can be changed manually in this session" and that 
-black indicates "derived or computed data" and treated as readonly in this session.
+black indicates "derived or computed data" and is treated as read-only in this session.
 
 Specifying tooltips is similar to what is used for the map widget, and not repeated here.
 
@@ -267,7 +269,7 @@ Remarks:
 
 #.  Similar to the context menu in the map widget above.
 
-#.  Several actions are only available to job that can be scheduled manually.
+#.  Several actions are only available to a job that can be scheduled manually.
 
 #.  Every job can be edited.
 
@@ -313,6 +315,85 @@ And then we can easily replicate the data of ``sp_ganttSpecItemActions`` for eac
     }
 
 
+Pure combi page
+------------------
+
+Tooltip
+^^^^^^^^^
+
+a simple sentence for the tooltip suffices for this application, and a HTML table is not created.
+
+To make multiple identifiers accessible for the right mouse menu and the tooltip,
+the ``<IDENTIFIER-SET>`` index should not be placed in the ``Totals:`` pivot group.
+That is why the ``<IDENTIFIER-SET>`` is placed in the ``Stacked:`` pivot group.
+
+Slack, definition
+^^^^^^^^^^^^^^^^^^
+
+The slack is what can be carried minus what is already assigned to a youngster. 
+For the element ``'me'`` there is no slack - 
+in the story the "me" just carries the booth and the bags of fruit left behind by the youngsters myself 
+without regard to a maximum weight that can be carried.
+
+
+Visualizing slack
+^^^^^^^^^^^^^^^^^^^^
+
+item order
+""""""""""""""
+
+The item order is that the slack should be on top.
+
+The design of the column chart is such that items are placed in order of the set on top of each other; 
+so the first visible element will be at the bottom!
+
+.. image:: images/slack-order-bottom-to-top.png
+    :align: center
+
+As the ``<IDENTIFIER-SET>`` is in the ``Stacked:`` pivot group, this also applies to the order of the contents.
+By swapping this order, the columns look as follows (clearly not desired).
+
+.. image:: images/slack-order-bottom-to-top-wrong.png
+    :align: center
+
+White with blue border
+""""""""""""""""""""""""
+
+To give the impression of empty space to be filled a blue rectangle around a white box is used.
+This is achieved using the following .css code:
+
+.. code-block:: CSS
+    :linenos:
+
+    .annotation-hassomeslack {
+        fill:white; 
+        stroke:blue!Important; 
+        stroke-width:4px; 
+    }
+
+Remarks:
+
+* The annotation ``hassomeslack`` is added in the model.
+
+* The ``Important`` is needed to make this coloring of the borderline sufficiently specific to be accepted.
+
+Right mouse menu
+^^^^^^^^^^^^^^^^^^
+
+.. (index <Identifiers> not in Totals)
+
+This page has only one widget: the combination chart, introduced with AIMMS 4.84.
+The story is about assigning an item to an element in a set.
+To invoke an assignment, the right mouse menu should be popped up at a colored rectangle in the column chart.
+
+The right mouse menu contains an entry for each element in a set.
+The code shows how to generate these lines for an arbitrary set (to be kind to the end-user, please limit the size of such a set to no more than 10 elements).
+
+For each line in the menu, there needs to be a corresponding procedure.
+To create the proper number of procedures, a runtime library is used.
+
+
+
 
 
 .. Status bar
@@ -320,8 +401,9 @@ And then we can easily replicate the data of ``sp_ganttSpecItemActions`` for eac
 
 
 
-Author's note: I really enjoyed creating this small AIMMS application.
+.. Author's note: I really enjoyed creating this small AIMMS application.
 
 .. spelling:: 
 
     endif
+    combi

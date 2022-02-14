@@ -4,6 +4,41 @@
     "aimms.widget.type": {
       "literal": "application"
     },
+    "browsername": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browsertimezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
+    "ignoredst": {
+      "aimms": {
+        "contents": [
+          "webui::IgnoreDST"
+        ]
+      }
+    },
+    "page.combinationchart.visible": {
+      "aimms": {
+        "contents": [
+          "bp_developmentSupport"
+        ]
+      }
+    },
+    "page.development_support.visible": {
+      "aimms": {
+        "contents": [
+          "bp_developmentSupport"
+        ]
+      }
+    },
     "pages": {
       "literal": {
         "name": "root",
@@ -70,6 +105,44 @@
                 ]
               },
               {
+                "name": "combinationchart",
+                "type": "pagev2-grid",
+                "slug": "combinationchart",
+                "children": [
+                  {
+                    "name": "BfJStory",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "bfjstory",
+                    "children": []
+                  },
+                  {
+                    "name": "BfJHint",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "bfjhint",
+                    "children": []
+                  },
+                  {
+                    "name": "BfJSpoiler",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "bfjspoiler",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "purecombi",
+                "type": "pagev2-grid",
+                "slug": "purecombi",
+                "children": [
+                  {
+                    "name": "BfJData",
+                    "type": "pagev2-grid-sidepanel",
+                    "slug": "bfjdata",
+                    "children": []
+                  }
+                ]
+              },
+              {
                 "name": "Development Support",
                 "type": "pagev2-grid",
                 "slug": "development_support",
@@ -107,8 +180,22 @@
     "theme.classic": {
       "literal": "NOT_ALLOWED"
     },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "timezone.dst.readonly": {
+      "aimms": {
+        "contents": [
+          "webui::DefaultDSTSettingForDisplayTimeZone"
+        ]
+      }
+    },
     "ui.editable": {
-      "literal": 0
+      "literal": 1
     },
     "workflows.configuration": {
       "aimms": {
@@ -164,6 +251,47 @@
       }
     }
   },
+  "layouts/custom_fceac872-766e-474d-b05b-c599e025a157": {
+    "definition": {
+      "literal": {
+        "componentName": "Grid",
+        "props": {
+          "gridTemplateColumns": "1fr 1fr",
+          "gridTemplateRows": "1fr 1fr",
+          "gridTemplateAreas": "\"area-a area-a\" \"area-b area-c\""
+        },
+        "items": [
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-a",
+              "name": "Area A",
+              "gridAutoFlow": "column"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-b",
+              "name": "Area B",
+              "gridAutoFlow": "row"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-c",
+              "name": "Area C",
+              "gridAutoFlow": "column"
+            }
+          }
+        ]
+      }
+    },
+    "displayName": {
+      "literal": "BobForAJob"
+    }
+  },
   "layouts/custom_fe6fb944-9dac-46fe-9801-51e6415d21cd": {
     "definition": {
       "literal": {
@@ -195,6 +323,233 @@
     },
     "displayName": {
       "literal": "Layout1 Copy"
+    }
+  },
+  "pages/bfjdata": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "StoreFocusPerson",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsStoreFocusPerson0"
+        },
+        {
+          "widgetUri": "StoreFocusItem",
+          "gridArea": "Unassigned widgets",
+          "dndId": "area-aStoreFocusItem1"
+        },
+        {
+          "widgetUri": "Items_1",
+          "gridArea": "area-a",
+          "dndId": "area-aItems_12"
+        },
+        {
+          "widgetUri": "StrongPeople_1",
+          "gridArea": "area-a",
+          "dndId": "area-aStrongPeople_13"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "StoreFocusPerson",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "StoreFocusItem",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "StrongPeople_1",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "Items_1",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/bfjhint": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "BjFHintText",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsBjFHintText0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "BjFHintText",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/bfjspoiler": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "BjFSpoilerText",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsBjFSpoilerText0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "BjFSpoilerText",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/bfjstory": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid-sidepanel"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "BfJStoryText",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsBfJStoryText0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "BfJStoryText",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "pages/combinationchart": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "BobForAJob",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsBobForAJob3"
+        },
+        {
+          "widgetUri": "AssignItemsToPeople",
+          "gridArea": "area-b",
+          "dndId": "area-bAssignItemsToPeople0"
+        },
+        {
+          "widgetUri": "Items",
+          "gridArea": "area-c",
+          "dndId": "area-cItems1"
+        },
+        {
+          "widgetUri": "StrongPeople",
+          "gridArea": "area-c",
+          "dndId": "area-cStrongPeople2"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "custom_fceac872-766e-474d-b05b-c599e025a157"
+    },
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_combinationChartPageSecondaryActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_combinationChartPageSecondaryActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "sidepanels": {
+      "aimms": {
+        "contents": [
+          "sp_combinationChartSidePanel"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_combinationChartSidePanel",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexSidePanelSpec",
+                "type": "free",
+                "value": "webui::indexSidePanelSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Items",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "StrongPeople",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "AssignItemsToPeople",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "BobForAJob",
+          "layoutInfo": {}
+        }
+      ]
     }
   },
   "pages/development_support": {
@@ -233,11 +588,6 @@
     },
     "bindings": {
       "literal": [
-        {
-          "widgetUri": "selectedOrder",
-          "gridArea": "Unassigned widgets",
-          "dndId": "area-bselectedOrder1"
-        },
         {
           "widgetUri": "orderDetails",
           "gridArea": "area-b",
@@ -540,6 +890,498 @@
       ]
     }
   },
+  "pages/purecombi": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "StoreFocusPerson",
+          "gridArea": "area-b",
+          "dndId": "area-bStoreFocusPerson0"
+        },
+        {
+          "widgetUri": "StoreFocusItem",
+          "gridArea": "area-b",
+          "dndId": "Unassigned widgetsStoreFocusItem2"
+        },
+        {
+          "widgetUri": "bigcombi",
+          "gridArea": "area-a",
+          "dndId": "area-abigcombi1"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout9"
+    },
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_combinationChartPageSecondaryActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_combinationChartPageSecondaryActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "sidepanels": {
+      "aimms": {
+        "contents": [
+          "sp_combinationChartSidePanel"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_combinationChartSidePanel",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexSidePanelSpec",
+                "type": "free",
+                "value": "webui::indexSidePanelSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "bigcombi",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "widgets/AssignItemsToPeople": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_assign"
+        ],
+        "prefix": "aimms",
+        "partition": {
+          "rowHeader": [
+            "i_item"
+          ],
+          "colHeader": [
+            "i_sp"
+          ],
+          "aggregated": [
+            "<IDENTIFIER-SET>"
+          ]
+        },
+        "displaydomain": {
+          "p_assign": "1"
+        },
+        "slices": []
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_assign": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_item"
+        ],
+        "colHeader": [
+          "i_sp"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "contents.totals": {
+      "literal": [
+        {
+          "indexName": "i_item",
+          "operators": [
+            "sum_only_visible"
+          ]
+        }
+      ]
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "i_item",
+          "width": 17.26
+        }
+      ]
+    },
+    "default.column.width": {
+      "literal": 8
+    },
+    "name": {
+      "literal": "AssignItemsToPeople"
+    },
+    "store.focus.in": {
+      "literal": {
+        "i_item": "ep_storeFocusItem",
+        "i_spi": "ep_storeFocusPerson"
+      }
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_titleAssignmentTable"
+        ],
+        "slices": []
+      }
+    }
+  },
+  "widgets/BfJStoryText": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div>I want to go to the market to sell my fruits.&nbsp; I have several bags of fruit, each with their own weight in kg.&nbsp; In addition, I have a 20 kg provisional booth I will carry myself.</div><div><br></div><div>The scout group Js want to help me out for a Bob for Job. Each of the five youngsters in that group has its own limit in what he or she can carry.</div><div><br></div><div>As it so happens, the total weight of bags of fruit is exactly what the group can carry.&nbsp; So the bags needs to be divided carefully between the youngsters. You can advise me by  by left - right clicking on one of the bags in the combination chart, and selecting to which person the bag should be re-assigned.</div><div><br></div><div>By invoking the action \"Optimize\" in the lower right, the application will assign the remaining bags of fruit if that is possible.&nbsp; The other bags, and the booth, I need to carry myself.</div><div><br></div><div>When you don't assign bags yourself, but let the optimizer assign all bags, you will note that all bags will be assigned to youngsters and I only have to carry the booth.</div><div><br></div><div>Question: </div><div><br></div><div>Joey likes Kiwis very much, so he grabs the bag with Kiwis and offers to carry that bag to the market.&nbsp; Using the optimizer in the application, you quickly notice that the remaining bags cannot be divided among the youngsters and a bag of 2 kg is still assigned to me.</div><div><br></div><div>Why cannot you assign the remaining bags among the youngsters?</div><div><br></div><div>If you do not have an answer to this question, you may want to check out the hint first, and if that does not help  the spoiler.</div>"
+    },
+    "name": {
+      "literal": "BfJStoryText"
+    }
+  },
+  "widgets/bigcombi": {
+    "aimms.widget.type": {
+      "literal": "combinationchart"
+    },
+    "contents.__display_order__": {
+      "literal": [
+        "contents.0",
+        "contents.1"
+      ]
+    },
+    "contents.0.displaydomain": {
+      "literal": "1"
+    },
+    "contents.0.identifier": {
+      "literal": {
+        "identifier": "p_isCarrying",
+        "slice": [
+          {
+            "index": "i_item",
+            "type": "free",
+            "value": "i_item"
+          },
+          {
+            "index": "i_spi",
+            "type": "free",
+            "value": "i_spi"
+          }
+        ]
+      }
+    },
+    "contents.1.displaydomain": {
+      "literal": "1"
+    },
+    "contents.1.identifier": {
+      "literal": {
+        "identifier": "p_slack",
+        "slice": [
+          {
+            "index": "i_spi",
+            "type": "free",
+            "value": "i_spi"
+          }
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_spi"
+        ],
+        "grouped": [],
+        "stacked": [
+          "<IDENTIFIER-SET>",
+          "i_item"
+        ],
+        "aggregated": []
+      }
+    },
+    "contextmenu": {
+      "aimms": {
+        "contents": [
+          "sp_bigcombiItemActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_bigcombiItemActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetItemActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetItemActionSpec"
+              },
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "indices.__display_order__": {
+      "literal": [
+        "indices.0",
+        "indices.1"
+      ]
+    },
+    "indices.0.index": {
+      "literal": "i_spi"
+    },
+    "indices.0.storefocus": {
+      "literal": {
+        "identifier": "ep_storeFocusPerson"
+      }
+    },
+    "indices.1.index": {
+      "literal": "i_item"
+    },
+    "indices.1.storefocus": {
+      "literal": {
+        "identifier": "ep_storeFocusItem"
+      }
+    },
+    "name": {
+      "literal": "bigcombi"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_titlebigcombiChart"
+        ],
+        "slices": []
+      }
+    },
+    "toggleDataLabels": {
+      "literal": true
+    },
+    "toggleLegend": {
+      "literal": true
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_bigcombiWidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_bigcombiWidgetActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "widgets/BjFHintText": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div>The ladies carry an odd weight.</div>"
+    },
+    "name": {
+      "literal": "BjFHintText"
+    }
+  },
+  "widgets/BjFSpoilerText": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div>Spoiler / Answer.</div><div><br></div><div>As you know, adding two even numbers together will result in an even number.</div><div><br></div><div>Thus, to reach a weight with an odd number of kilos, there must be at least one bag weighing an odd number of kilos.</div><div><br></div><div>There are two people, the ladies actually, that can carry an odd number of kilos.&nbsp;</div><div><br></div><div>There are also just two bags weighing an odd number of kilos.</div><div><br></div><div>In addition, the total weight of fruit to be carried, 30 kg, exactly matches what the youngster can carry.</div><div><br></div><div>Combining this, the bags of fruit with an odd weight, Kiwi and Cherry, need to be assigned to the ladies if all bags are to be carried by the youngsters.</div><div><br></div>"
+    },
+    "name": {
+      "literal": "BjFSpoilerText"
+    }
+  },
+  "widgets/BobForAJob": {
+    "aimms.widget.type": {
+      "literal": "combinationchart"
+    },
+    "contents.__display_order__": {
+      "literal": [
+        "contents.0"
+      ]
+    },
+    "contents.0.displaydomain": {
+      "literal": "1"
+    },
+    "contents.0.identifier": {
+      "literal": {
+        "identifier": "p_isCarrying",
+        "slice": [
+          {
+            "index": "i_item",
+            "type": "free",
+            "value": "i_item"
+          },
+          {
+            "index": "i_spi",
+            "type": "free",
+            "value": "i_spi"
+          }
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "header": [
+          "i_sp",
+          "i_spi"
+        ],
+        "grouped": [],
+        "stacked": [
+          "<IDENTIFIER-SET>",
+          "i_item"
+        ],
+        "aggregated": []
+      }
+    },
+    "contextmenu": {
+      "aimms": {
+        "contents": [
+          "sp_bigcombiItemActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_bigcombiItemActions",
+            "slice": [
+              {
+                "index": "webui::indexWidgetItemActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetItemActionSpec"
+              },
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "indices.__display_order__": {
+      "literal": [
+        "indices.0",
+        "indices.1"
+      ]
+    },
+    "indices.0.index": {
+      "literal": "i_item"
+    },
+    "indices.0.storefocus": {
+      "literal": {
+        "identifier": "ep_storeFocusItem"
+      }
+    },
+    "indices.1.index": {
+      "literal": "i_spi"
+    },
+    "indices.1.storefocus": {
+      "literal": {
+        "identifier": "ep_storeFocusPerson"
+      }
+    },
+    "name": {
+      "literal": "BobForAJob"
+    },
+    "title": {
+      "literal": "Bob for a Job"
+    },
+    "toggleDataLabels": {
+      "literal": true
+    },
+    "toggleLegend": {
+      "literal": true
+    },
+    "widgetactions": {
+      "aimms": {
+        "contents": [
+          "sp_bigcombiWidgetActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_bigcombiWidgetActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexWidgetActionSpec",
+                "type": "free",
+                "value": "webui::indexWidgetActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
   "widgets/DevelopmentSupportScalars": {
     "aimms.widget.type": {
       "literal": "scalar"
@@ -730,6 +1572,87 @@
       }
     }
   },
+  "widgets/Items": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_weight"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_item"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "contents.totals": {
+      "literal": [
+        {
+          "indexName": "i_item",
+          "operators": [
+            "sum_only_visible"
+          ]
+        }
+      ]
+    },
+    "name": {
+      "literal": "Items"
+    },
+    "title": {
+      "literal": "The weight of each bag of fruit"
+    }
+  },
+  "widgets/Items_1": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_weight"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_item"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "contents.totals": {
+      "literal": [
+        {
+          "indexName": "i_item",
+          "operators": [
+            "sum_only_visible"
+          ]
+        }
+      ]
+    },
+    "name": {
+      "literal": "Items (1)"
+    }
+  },
   "widgets/JobDetails": {
     "aimms.widget.type": {
       "literal": "scalar"
@@ -844,7 +1767,7 @@
       "literal": true
     },
     "center.latitude": {
-      "literal": 49.095452162534829
+      "literal": 49.09545216253483
     },
     "center.longitude": {
       "literal": 13.491210937500002
@@ -1348,15 +2271,233 @@
       "literal": "scalar-size-location"
     }
   },
-  "widgets/selectedOrder": {
+  "widgets/StoreFocusItem": {
     "aimms.widget.type": {
-      "literal": "scalar"
+      "literal": "selectionbox-v2"
     },
-    "compact": {
-      "literal": 1
+    "contents": {
+      "aimms": {
+        "contents": [
+          "ep_storeFocusItem"
+        ],
+        "slices": []
+      }
     },
     "name": {
-      "literal": "selectedOrder"
+      "literal": "StoreFocusItem"
+    }
+  },
+  "widgets/StoreFocusPerson": {
+    "aimms.widget.type": {
+      "literal": "selectionbox-v2"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "ep_storeFocusPerson"
+        ],
+        "slices": []
+      }
+    },
+    "name": {
+      "literal": "StoreFocusPerson"
+    }
+  },
+  "widgets/StrongPeople": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_canCarry",
+          "p_slack"
+        ],
+        "prefix": "aimms",
+        "partition": {
+          "rowHeader": [
+            "i_sp"
+          ],
+          "colHeader": [
+            "<IDENTIFIER-SET>"
+          ],
+          "aggregated": []
+        },
+        "displaydomain": {
+          "p_slack": "1"
+        },
+        "numdecimals": 0,
+        "slices": [
+          {
+            "identifier": "p_canCarry",
+            "slice": [
+              {
+                "index": "i_spi",
+                "type": "subset",
+                "value": "i_sp"
+              }
+            ]
+          },
+          {
+            "identifier": "p_slack",
+            "slice": [
+              {
+                "index": "i_spi",
+                "type": "subset",
+                "value": "i_sp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_slack": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_sp"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "contents.totals": {
+      "literal": [
+        {
+          "indexName": "i_sp",
+          "operators": [
+            "sum_only_visible"
+          ]
+        }
+      ]
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_canCarry"
+          },
+          "width": 12.91
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_sp",
+          "width": 16.64
+        }
+      ]
+    },
+    "name": {
+      "literal": "StrongPeople"
+    },
+    "title": {
+      "literal": "What the youngsters can carry"
+    }
+  },
+  "widgets/StrongPeople_1": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_canCarry",
+          "p_slack"
+        ],
+        "prefix": "aimms",
+        "partition": {
+          "rowHeader": [
+            "i_sp"
+          ],
+          "colHeader": [
+            "<IDENTIFIER-SET>"
+          ],
+          "aggregated": []
+        },
+        "displaydomain": {
+          "p_slack": "1"
+        },
+        "numdecimals": 0,
+        "slices": [
+          {
+            "identifier": "p_canCarry",
+            "slice": [
+              {
+                "index": "i_spi",
+                "type": "subset",
+                "value": "i_sp"
+              }
+            ]
+          },
+          {
+            "identifier": "p_slack",
+            "slice": [
+              {
+                "index": "i_spi",
+                "type": "subset",
+                "value": "i_sp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "contents.displaydomain": {
+      "literal": {
+        "p_slack": "1"
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_sp"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "contents.totals": {
+      "literal": [
+        {
+          "indexName": "i_sp",
+          "operators": [
+            "sum_only_visible"
+          ]
+        }
+      ]
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "p_canCarry"
+          },
+          "width": 12.91
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "i_sp",
+          "width": 16.64
+        }
+      ]
+    },
+    "name": {
+      "literal": "StrongPeople (1)"
     }
   },
   "widgets/textGantChartStory": {
@@ -1375,7 +2516,7 @@
       "literal": "text"
     },
     "contents": {
-      "literal": "<div><span style=\"font-size: 32px;\">Welcome to Wonderful WebUI Widgets.</span></div><div><br></div><div>AIMMS is designed for interactive optimization applications.</div><div>To let you experience these applications, this application provides some one-page examples.</div><div>Each page has a short story with a question and it is designed to help you answer this question within a few minutes.</div><div>The story can be found in the side panel of that page.</div><div><br></div><div>The first page illustrates the map widget by letting you analyze the supply chain within an organization.</div><div><br></div><div>The second page illustrates the Gantt Chart by letting you plan maintenance tasks on production lines.</div><div><br></div>"
+      "literal": "<div><span style=\"font-size: 32px;\">Welcome to Wonderful WebUI Widgets.</span></div><div><br></div><div>AIMMS is designed for interactive optimization applications.</div><div>To let you experience these applications, this application provides some one-page examples.</div><div>Each page has a short story with a question and it is designed to help you answer this question within a few minutes.</div><div>The story can be found in the side panel of that page.</div><div><br></div><div>The first page illustrates the map widget by letting you analyze the supply chain within an organization.</div><div><br></div><div>The second page illustrates the Gantt Chart by letting you plan maintenance tasks on production lines.</div><div><br></div><div>The third page illustrates the combination chart by letting you lead scouts in a Bob for a Job project.</div><div><br></div>"
     },
     "name": {
       "literal": "WelcomeText"

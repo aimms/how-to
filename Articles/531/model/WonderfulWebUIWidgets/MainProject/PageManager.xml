@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<PageManager>
+	<Page Name="All Data Pages" PageGUID="463FBF50-A8DC-4E24-A7C2-D383992CA432">
+		<Page Name="[Data Page] p_isCarrying" PageGUID="1FD47748-7B82-4E1E-BCF0-4454A78C327B" />
+	</Page>
+</PageManager>
