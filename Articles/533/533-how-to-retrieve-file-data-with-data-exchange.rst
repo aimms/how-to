@@ -20,7 +20,7 @@ Prerequisites
 
 .. code-block:: json
 
-    [
+	[
 		{
 			"city": "Qal eh-ye Now",
 			"city_ascii": "Qal eh-ye",
@@ -83,27 +83,30 @@ Using the DEX, this same procedure can be shortened to using only three methods.
 .. code-block:: aimms
     :linenos:
     
-    dex::client::NewRequest(
-	"getFile",
-	"https://www.w3schools.com/xml/simple.xml",
-	'DEXCallback',
-	responsefile:"Output.xml"
+	dex::client::NewRequest(
+		"getFile",
+		"https://www.w3schools.com/xml/simple.xml",
+		'DEXCallback',
+		responsefile:"Output.xml"
 	);
 
 
 	dex::client::PerformRequest(
-	"getFile"
+		"getFile"
 	);
 
 	dex::client::WaitForResponses(
-	1000
+		1000
 	);
 
 On line 1 we build the new request by setting the needed parameters (name of the request, the URL, the callback method and the optional parameter for the response file since we want to retrieve a file). An important note to make here is that we need to set up a callback procedure for the response to be stored and processed in. In our example we've simply copied the prototype for ``dex::EmptyCallback`` as it is available in the library, pasted it into our main project and gave it a more logical name. 
 
-On line 9 we perform the request with the name as defined on line 2. We've added 3000 milliseconds to ``dex::client::WaitForResponses`` to make sure we wait for the incoming response before we call the callback.
+On line 9 we perform the request with the name as defined on line 2. The procedure ``dex::PerformRequest`` will be handled completely asynchronously, that is, the calling procedure will not wait for the request to be handled completely, but return as soon as the request is posted. This allows many HTTP requests to be executed simultaneously, enhancing the performance when a lot of calls need to be made.
 
-Optionally we could add the ``dex::client::CloseRequest`` to make sure the request is fully closed (note that this does not delete the response file).
+We've added 1000 milliseconds to ``dex::client::WaitForResponses`` to make sure that the calling procedure will give the request 1000 milliseconds to complete. Whenever the request is done, the callback ``DEXCallback`` will be called automatically. 
+
+When the callback has been called, the HTTP request will be deleted automatically (note that this does not delete the response file).
+Optionally we could add the ``dex::client::CloseRequest`` to make sure the request is also fully closed when, for instance, the HTTP cannot be completed for whatever reason.
 
 Running the procedure 'Mapping_Import' will now give the same result as the previously described procedure: Output.xml is placed in the project folder. In our project the setup looks like this (where procedure Mapping_Import holds the code as in the previous code block):
 
@@ -121,18 +124,18 @@ Now that we've seen how to retrieve a file, let's try to retrieve and process th
 .. code-block:: aimms
     :linenos:
     
-    dex::AddMapping(
-	"WorldCitiesMapping",
-	"Mappings/Generated/worldCities-TableWorldCities-JSON-Sparse.xml"
+	dex::AddMapping(
+		"WorldCitiesMapping",
+		"Mappings/Generated/worldCities-TableWorldCities-JSON-Sparse.xml"
 	);
 
 
 	dex::ReadFromFile(
-	"data/simplemaps-worldcities-basic-short.json",
-	"WorldCitiesMapping",
-	1,
-	1,
-	1
+		"data/simplemaps-worldcities-basic-short.json",
+		"WorldCitiesMapping",
+		1,
+		1,
+		1
 	);
 
 We have made the JSON-file available `here <https://how-to.aimms.com/_static/simplemaps-worldcities-basic.json>`__ so we can use this URL to access the file directly. The easiest implementation would therefore be to use the direct URL in the ``dex::ReadFromFile``:
@@ -140,18 +143,18 @@ We have made the JSON-file available `here <https://how-to.aimms.com/_static/sim
 .. code-block:: aimms
     :linenos:
     
-    dex::AddMapping(
-	"WorldCitiesMapping",
-	"Mappings/Generated/worldCities-TableWorldCities-JSON-Sparse.xml"
+	dex::AddMapping(
+		"WorldCitiesMapping",
+		"Mappings/Generated/worldCities-TableWorldCities-JSON-Sparse.xml"
 	);
 
 
 	dex::ReadFromFile(
-	"https://how-to.aimms.com/_static/simplemaps-worldcities-basic.json",
-	"WorldCitiesMapping",
-	1,
-	1,
-	1
+		"https://how-to.aimms.com/_static/simplemaps-worldcities-basic.json",
+		"WorldCitiesMapping",
+		1,
+		1,
+		1
 	);
 
 
@@ -163,33 +166,33 @@ Let's pretend this is not possible or not desirable and we want to retrieve the 
 .. code-block:: aimms
     :linenos:
     
-    dex::AddMapping(
-	"WorldCitiesMapping",
-	"Mappings/Generated/worldCities-TableWorldCities-JSON-Sparse.xml"
+	dex::AddMapping(
+		"WorldCitiesMapping",
+		"Mappings/Generated/worldCities-TableWorldCities-JSON-Sparse.xml"
 	);
 
 	dex::client::NewRequest(
-	"getFile",
-	"https://how-to.aimms.com/_static/simplemaps-worldcities-basic.json",
-	'DEXCallback',
-	responsefile:"Output.json"
+		"getFile",
+		"https://how-to.aimms.com/_static/simplemaps-worldcities-basic.json",
+		'DEXCallback',
+		responsefile:"Output.json"
 	);
 
 
 	dex::client::PerformRequest(
-	"getFile"
+		"getFile"
 	);
 
 	dex::client::WaitForResponses(
-	1000
+		1000
 	);
 
 	dex::ReadFromFile(
-	"Output.json", 
-	"WorldCitiesMapping", 
-	1, 
-	1, 
-	1
+		"Output.json", 
+		"WorldCitiesMapping", 
+		1, 
+		1, 
+		1
 	);
 	
 You will see that running this procedure loads the data from the JSON into the identifiers.
@@ -197,48 +200,48 @@ You will see that running this procedure loads the data from the JSON into the i
 Reading from memory stream
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Another way to do this is by using the file as a `memory stream <https://documentation.aimms.com/dataexchange/api.html#memory-streams>`_, with the advantage that the file isn't saved locally and you also have the option to delete the memory stream after the request is closed (using '##' instead of '#'). If you are using the singular # (thus not deleting automatically), you can re-use the example given in the previous paragraph and simply add the hashtag before the name of the response file:
+Another way to do this is by using the file as a `memory stream <https://documentation.aimms.com/dataexchange/api.html#memory-streams>`_, with the advantage that the file isn't saved locally and you also have the option to have the memory stream auto-deleted when the request is closed (using '##' instead of '#'). If you are using the singular # (thus not deleting automatically), you can re-use the example given in the previous paragraph and simply add the hashtag before the name of the response file:
 
 .. code-block:: aimms
     :linenos:
     
-    dex::AddMapping(
-	"WorldCitiesMapping",
-	"Mappings/Generated/worldCities-TableWorldCities-JSON-Sparse.xml"
+	dex::AddMapping(
+		"WorldCitiesMapping",
+		"Mappings/Generated/worldCities-TableWorldCities-JSON-Sparse.xml"
 	);
 
 	dex::client::NewRequest(
-	"getFile",
-	"https://how-to.aimms.com/_static/simplemaps-worldcities-basic.json",
-	'DEXCallback',
-	responsefile:"#Output.json"
+		"getFile",
+		"https://how-to.aimms.com/_static/simplemaps-worldcities-basic.json",
+		'DEXCallback',
+		responsefile:"#Output.json"
 	);
 
 
 	dex::client::PerformRequest(
-	"getFile"
+		"getFile"
 	);
 
 	dex::client::WaitForResponses(
-	1000
+		1000
 	);
 
 	dex::ReadFromFile(
-	"#Output.json", 
-	"WorldCitiesMapping", 
-	1, 
-	1, 
-	1
+		"#Output.json", 
+		"WorldCitiesMapping", 
+		1, 
+		1, 
+		1
 	);
 	
 	dex::DeleteStream(
-	"#Output.json"
+		"#Output.json"
 	);
 	
 	
 To remove the memory stream after handling your request (as to prevent memory leaks), you can call ``dex::DeleteStream`` with the parameter of the specific stream you've used like we did in our example or ``dex::DeleteAllStreams`` to remove all existing streams.
  
-If you want to use the memory stream that will delete itself after the request, you will need to place the ``dex::ReadFromFile`` within the created callback procedure. Once the related request is done, all the related data will be gone, including memory streams. By placing the procedure into the callback procedure you ensure that the needed data will still be available in the memory stream. It is recommended to check for the returned statuscode as to know if the request returned successfully before you continue with the procedure:
+If you want to use the memory stream that will delete itself after the request, you will need to place the call to ``dex::ReadFromFile`` within the created callback procedure, as the HTTP request is automatically deleted once the callback has been called, and hence also the auto-deleting memory streams will be gone. By placing the procedure into the callback procedure you ensure that the needed data will still be available in the memory stream. It is recommended to check for the returned statuscode as to know if the request returned successfully before you continue with the procedure:
 
 .. image:: images/dex-procedure-in-callback.png
    :scale: 70
