@@ -25,6 +25,8 @@ Build Locally the HTML documentation
  - [Sphinx AIMMS theme](https://gitlab.com/ArthurdHerbemont/sphinx-aimms-theme) (run `python3 -m pip install sphinx-aimms-theme`)
  - [AIMMS code blocks for PDF](https://gitlab.com/ArthurdHerbemont/aimms-pygments-style) (run `python3 -m pip install aimms-pygments-style`) 
 
+Depending on previous installations of python, the above command may be `py` or `python`, instead of `python3`.
+
 After installing all the above requirements, please go to the location of your previously cloned documentation folder:
  * Open a console prompt from this location, using ``ATL+D`` and typing ``cmd`` in the URL of your file explorer (Windows)
  * run ``make html`` (the first time, it may take some time, around 20 secs. progress is shown in your console)
@@ -65,6 +67,7 @@ After installing all the above requirements, please go to the location of your p
 * This identifies the files with errors (in the example above 12-generate-random-numbers.rst), the line with the error (in the example above line 10) and the spell error (in the example above disribution)
 * Sphinx will also create files with information on the spelling errors in the _build/spelling folder. Each failed rst file will have a corresponding spelling file.
 * Be aware that CI/CD will only allow deploy if the spelling presents no errors/warnings.
+* For reasons unkown, the spellcheck in gitlab (Linux environment) and on your local environment (probably Windwos) differs. In this case, you could get a clean check locally but not in the deploy process.
 
 </details>
 
@@ -151,8 +154,6 @@ This folder is hidden to search engines (through the [robot.txt](.robot.txt#L23)
 
 **Warning**: As soon as there is a commit to the master branch, the staging subfolder is cleaned (removed). This ensures we are not overloading the server.
 To re-generate your branch website, just re-run your branch ``build_and_staging`` job !
-
-
 
 
 Style guide
