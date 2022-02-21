@@ -72,6 +72,9 @@
         <!---  
               * Info: No tracing of statements (default)
               * Trace: entering/leaving all statements are logged (serious disk filler).
+              
+              * When the level is trace, and the hidden option statement_memory_impact_threshold is given a nonnegative value,
+              * increases and decreases of memory usage, exceeding the value given at statement_memory_impact_threshold, are also logged.
         -->
         <level value="info"/>
     </logger>

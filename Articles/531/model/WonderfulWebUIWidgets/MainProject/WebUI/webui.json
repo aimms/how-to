@@ -1395,6 +1395,9 @@
     },
     "name": {
       "literal": "DevelopmentSupportScalars"
+    },
+    "title": {
+      "literal": "This widget is used to add / suppress tdevelopment support"
     }
   },
   "widgets/ganttDemo": {
@@ -1767,10 +1770,10 @@
       "literal": true
     },
     "center.latitude": {
-      "literal": 49.09545216253483
+      "literal": 50.89397747065723
     },
     "center.longitude": {
-      "literal": 13.491210937500002
+      "literal": 10.204102098941805
     },
     "contextmenu": {
       "aimms": {
@@ -1966,7 +1969,7 @@
       }
     },
     "zoom": {
-      "literal": 5
+      "literal": 6
     }
   },
   "widgets/mapDemoScalars": {
