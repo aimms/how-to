@@ -52,7 +52,7 @@ Model Main_MovingUpAndDown {
                     sp_FileUploadLocation := webui::GetIOFilePath(FileLocation);
                     ! The file is uploaded to the process specific temporary folder. 
                     
-                    ! Now copy the uploaded file to Central Storage.
+                    ! Now copy the uploaded file to AIMMS PRO Storage.
                     pro::SaveFileToCentralStorage(
                     	localPath     :  sp_FileUploadLocation, 
                     	storagePath   :  sp_PublicDataExchangeFilename );
