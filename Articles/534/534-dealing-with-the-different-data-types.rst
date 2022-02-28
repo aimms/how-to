@@ -6,7 +6,8 @@
 Dealing with different data types in the DEX
 =============================================
 
-The Data Exchange Library (DEX) allows mapping to tree-based data formats in the following supported formats:
+The Data Exchange Library (DEX) allows mapping to and from tree-based data formats in the following supported formats:
+
 * JSON
 * XML
 * Table-based CSV
@@ -17,7 +18,7 @@ You can find more documentation about the DEX and formats on `this documentation
 
 In this how-to article we will explain how to implement the usage of these data formats in mapping files and, if applicable, format-specific requirements. The examples make clear that each mapping closely follows the structure of the file being described. Thus, if you know the format of the file to map, creating a corresponding mapping file for the Data Exchange Library is rather straightforward.
 
-We will show examples of mapping data into your AIMMS identifiers, but note that you can also write data from AIMMS identifiers into a specified datafile by using the function . An example of this is given for the Excelfile.
+We will show examples of mapping data into your AIMMS identifiers, but note that you can also write data from AIMMS identifiers into a specified datafile by using the function :any:`dex::WriteToFile`. An example of this is given for the Excelfile.
 
 Prerequisites
 --------------
@@ -31,11 +32,11 @@ Helpful remarks & frequent errors
 -----------------------------------
 
 * In general, your sources' data model should match 100% with the AIMMS model and translate as such in the mappingfile. This means that every element that you put into your mappingfile, should on an individual level match with the paired AIMMS identifier type. For example: an array should go into an indexed parameter.
-* Following the aforementioned, make sure that your parameter in AIMMS is set to the parameter type to cooncide with the data as it will be mapped to AIMMS. 
-* Mind that no errors or warnings will be given if the "name=" element is written incorrectly - the data will simply not map in this case.
+* Following the aforementioned, make sure that your parameter in AIMMS is set to the parameter type to align with the data as it will be mapped to AIMMS. 
+* Mind that no errors or warnings will be given if the "name=" element is written incorrectly in a tag in your mappingfile - the data will simply not map in this case.
 * The order of rows and columns should always be aligned with the order of the indices of the parameter.
-* A common known error is "The maps-to attribute 'x' for node 'y' refers to an non-existing identifier". In this case it is helpful to check if you have written the "maps-to" element correctly, including a possible index.
-* Another commonly known error is "The dimension of the maps-to attribute x for node y does not coincide with the specified numbers of indices". In this case the most probable cause is that the element is referring to an AIMMS-identifier that should have at least one index defined but where no index can be found (like for an indexed parameter), where the index is not properly named in the mappingfile or where more indices are expected than defined (or the other way around).
+* A common known error is *"The maps-to attribute 'x' for node 'y' refers to an non-existing identifier"*. In this case it is helpful to check if you have written the "maps-to" element correctly, including a possible index.
+* Another commonly known error is *"The dimension of the maps-to attribute x for node y does not coincide with the specified numbers of indices"*. In this case the most probable cause is that the element is referring to an AIMMS-identifier that should have at least one index defined but where no index can be found (like for an indexed parameter), where the index is not properly named in the mappingfile or where more indices are expected than defined (or the other way around).
 
 
 JSON mapping (importing data, one-dimensional identifier)
@@ -64,7 +65,7 @@ Suppose the following JSON-formatted data, saved in a folder called 'data' with 
         ]
     }
 
-This JSON file holds an object with three children, one of which is an array holding multiple structurally identical objects, bound to an index ``city``. A matching mappingfile, stored in a folder called 'Mappings' with name 'JSONMapping.xml', could look like: 
+This JSON-file holds an object with three children, one of which is an array holding multiple structurally identical objects, bound to an index ``city``. A matching mappingfile, stored in a folder called 'Mappings' with name 'JSONMapping.xml', could look like: 
 
 .. code-block:: xml
 
@@ -125,7 +126,7 @@ Assume the following XML-formatted data, stored in a folder 'data' with the name
         </array>
     </RootObject>
 
-It describes an XML file with an object with three hildren, one of which is another object holding multiple structurally identical values, bound to an index ``city``. A matching mappingfile, stored in a folder called 'Mappings' with name 'XMLMapping.xml', could look like: 
+It describes an XML file with an object with three children, one of which is another object holding multiple structurally identical values, bound to an index ``city``. A matching mappingfile, stored in a folder called 'Mappings' with name 'XMLMapping.xml', could look like: 
 
 .. code-block:: xml
 
@@ -176,14 +177,14 @@ Let's work with the following CSV-formatted data, in which we can see multiple r
 .. code-block:: xml
     
     country,city,lat,long
-	The Netherlands,Amsterdam,52.34996869
-	The Netherlands,The Hague,52.08003684
-	The Netherlands,Rotterdam,51.9199691
-	Belgium,Antwerpen,51.22037355
+    The Netherlands,Amsterdam,52.34996869
+    The Netherlands,The Hague,52.08003684
+    The Netherlands,Rotterdam,51.9199691
+    Belgium,Antwerpen,51.22037355
 
 Let's assume this file is saved in a folder 'data' and called 'data.csv'.
 
-The related mappingfile, in which the repetetive structure of multiple rows and their multiple named column leaf-nodes are being bound to :token:`country` and :token:`city`, or to multi-dimensional identifiers over these two indices, would look like this:
+The related mappingfile, in which the repetitive structure of multiple rows and their multiple named column leaf-nodes are being bound to ``country`` and ``city``, or to multi-dimensional identifiers over these two indices, would look like this:
 
 .. code-block:: xml
 
@@ -232,14 +233,14 @@ Assume the following mapping for an Excelfile, identifiable with the start- and 
                 <ColumnMapping name="country" binds-to="country"/>
                 <ColumnMapping name="city" binds-to="city"/>
                 <ColumnMapping name="lat" maps-to="lat(country,city)"/>
-				<ColumnMapping name="long" maps-to="long(country,city)"/>
+                <ColumnMapping name="long" maps-to="long(country,city)"/>
             </RowMapping>
         </SheetMapping>
     </AimmsExcelMapping>
 
 Just like the previous examples this mappingfile can be used to map data into AIMMS identifiers, but any mappingfile can also be used to generate a datafile - so the other way around. This mapping will create somewhat the same table as in the CSV example, but will now output the table to an Excel workbook with a sheet called ``Table1``. 
 
-To do so we need to also use the :any:`dex::ReadAllMappings` (or :any:`ReadMappings`) to read the ExcelMapping into the model so we can use it in the :any:`dex::WriteToFile`. The full procedure looks like this:
+To do so we need to also use the :any:`dex::ReadAllMappings` (or :any:`dex::ReadMappings`) to read the ExcelMapping into the model so we can use it in the :any:`dex::WriteToFile`. The full procedure looks like this:
 
 .. code-block:: aimms
     
@@ -292,11 +293,11 @@ This could then print:
 
 .. code-block:: xml
 
-           country  			city  		lat     
+           country  		city 		lat     
     0      The Netherlands   	Amsterdam 	52.34996869
     1      The Netherlands   	The Hague 	52.08003684
     2      The Netherlands   	Rotterdam  	51.9199691
-    3      Belgium   			Antwerp  	51.22037355
+    3      Belgium   		Antwerp  	51.22037355
 
 Here we see in the top row the names from the ``ColumnMapping`` of the mapping. In the left column are the row numbers added by python. The other columns are data read from file *filefromdex.parquet*.
 
@@ -308,8 +309,10 @@ Here we see in the top row the names from the ``ColumnMapping`` of the mapping. 
 	mappingfile
 	datafile
 	JSON-formatted
+	JSON-file
 	XML-structure
 	XML-formatted
 	parquet
 	parquetfile
 	pyarrows
+	dataframes
