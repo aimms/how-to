@@ -18,8 +18,8 @@ where JSON and XML are tree-based formats and the others are table-based formats
 
 When we look at the usage of these functions of the DEX, it is good to keep in mind that we're working with three components:
 
-* The AIMMS model (including identifiers)
-* The data file (a file as a sequence of bytes (arranged depending on the specific file format), whether imported into or exported from the AIMMS model)
+* The AIMMS model with its identifiers
+* The specific type of file with data whether imported into or exported from the AIMMS model
 * The mappingfile, which is basically the 'translator' between the aforementioned AIMMS model and data file, describing how the bytes in the file should be associated with the identifiers in the model. Typically you would see that nodes in mappings contain attributes for something in the model and something in the file.
 
 In this how-to article we will explain how to implement the usage of the data formats in mapping files and, if applicable, format-specific requirements. The examples make clear that each mapping closely follows the structure of the file being described. Thus, if you know the format of the file to map, creating a corresponding mapping file for the Data Exchange Library is rather straightforward. 
@@ -106,9 +106,9 @@ The procedure to read data into the model in AIMMS will be:
     	dex::ReadFromFile(
     		"data/data.json",		! data file
     		"JSONMapping",			! mapping name, as specified in AddMapping
-    		1,				! indicates whether all identifiers referred in the mapping should be emptied prior to reading the file
-    		1,				! indicates whether all domain- and range sets referred in the mapping should be emptied prior to reading the file
-    		1				! indicates whether to reset all counters for 'iterative-binds-to' indices prior to reading the file
+    		1,				! empty identifiers
+    		1,				! empty range sets
+    		1				! reset 'iterative-binds-to'
     	);
 
 Your model will look like this:
@@ -119,7 +119,7 @@ Your model will look like this:
 
 As you can see in the image, the data from the JSON-file is imported into the AIMMS-identifiers as prescribed by the mappingfile. The index ``city`` has been filled with the values Amsterdam, The Hague and Rotterdam and the parameter ``lat`` is using this index with the corresponding values as indicated in the mappingfile by the ``maps-to`` element. 
 
-In our example the ``maps-to`` element contains the value "lat(city)" - referring to the index name within the parantheses. If you would have left out the index name, the error *"The dimension of the maps-to attribute x for node y does not coincide with the specified numbers of indices"* would have occurred.
+In our example the ``maps-to`` element contains the value "lat(city)" - referring to the index name within the parentheses. If you would have left out the index name, the error *"The dimension of the maps-to attribute x for node y does not coincide with the specified numbers of indices"* would have occurred.
 
 The parameter ``Countries`` is defined as a string parameter within the AIMMS model, as to being able to hold string values.
 
@@ -171,9 +171,9 @@ AIMMS procedure to read data:
     	dex::ReadFromFile(
     		"data/data.xml",		! data file
     		"XMLMapping",			! mapping name, as specified in AddMapping
-    		1,				! indicates whether all identifiers referred in the mapping should be emptied prior to reading the file
-    		1,				! indicates whether all domain- and range sets referred in the mapping should be emptied prior to reading the file
-    		1				! indicates whether to reset all counters for 'iterative-binds-to' indices prior to reading the file
+    		1,				! empty identifiers
+    		1,				! empty range sets
+    		1				! reset 'iterative-binds-to'
     	);
 
 With result:
@@ -184,7 +184,7 @@ With result:
 
 The result is comparable to the result of the example of the JSON: the data from the XML is imported into the AIMMS-identifiers as prescribed by the mappingfile. The index ``city`` has been filled with the values Amsterdam, The Hague and Rotterdam and the parameter ``lat`` is using this index with the corresponding values as indicated in the mappingfile by the ``maps-to`` element. 
 
-In our example the ``maps-to`` element contains the value "lat(city)" - referring to the index name within the parantheses. If you would have left out the index name, the error *"The dimension of the maps-to attribute x for node y does not coincide with the specified numbers of indices"* would have occurred.
+In our example the ``maps-to`` element contains the value "lat(city)" - referring to the index name within the parentheses. If you would have left out the index name, the error *"The dimension of the maps-to attribute x for node y does not coincide with the specified numbers of indices"* would have occurred.
 
 The parameter ``Countries`` is defined as a string parameter within the AIMMS model, as to being able to hold string values.
 
@@ -192,7 +192,7 @@ The parameter ``Countries`` is defined as a string parameter within the AIMMS mo
 CSV mapping (importing data, n-dimensional identifier)
 ---------------------------------------------------------
 
-Let's work with the following CSV-formatted data, in which we can see multiple rows, each consisting of multiple named columns:
+Let's work with the following CSV-formatted data:
 
 .. code-block:: xml
     
@@ -228,9 +228,9 @@ The procedure in AIMMS:
     	dex::ReadFromFile(
     		"data/data.csv",		! data file
     		"CSVMapping",			! mapping name, as specified in AddMapping
-    		1,				! indicates whether all identifiers referred in the mapping should be emptied prior to reading the file
-    		1,				! indicates whether all domain- and range sets referred in the mapping should be emptied prior to reading the file
-    		1				! indicates whether to reset all counters for 'iterative-binds-to' indices prior to reading the file
+    		1,				! empty identifiers
+    		1,				! empty range sets
+    		1				! reset 'iterative-binds-to'
     	);
 
 With result:	
@@ -262,7 +262,7 @@ Assume the following mapping for an Excelfile, identifiable with the start- and 
 
 Just like the previous examples this mappingfile can be used to map data into AIMMS identifiers, but any mappingfile can also be used to write data to a datafile - so the other way around. This mapping will generate somewhat the same table as in the CSV example, but will now output the table to an Excel workbook with a sheet called ``Table1``. 
 
-To do so we need to also use the :any:`dex::ReadAllMappings` (or :any:`dex::ReadMappings` for specific mappings) to store succesfully read mappings in the set ``dex::Mappings`` so we can use it in :any:`dex::WriteToFile`. This is needed because the latter function uses a reference to a mappingname, based on the assumption that the mapping is already known in ``dex::Mappings``. The :any:`dex::ReadAllMappings` will scan the full Mappings folder in search of mappingfiles and automatically add found ones to the model (if no errors occur while reading it). The full procedure looks like this:
+To do so we need to also use the :any:`dex::ReadAllMappings` (or :any:`dex::ReadMappings` for specific mappings) to store successfully read mappings in the set ``dex::Mappings`` so we can use it in :any:`dex::WriteToFile`. This is needed because the latter function uses a reference to a mappingname, based on the assumption that the mapping is already known in ``dex::Mappings``. The :any:`dex::ReadAllMappings` will scan the full Mappings folder in search of mappingfiles and automatically add found ones to the model (if no errors occur while reading it). The full procedure looks like this:
 
 .. code-block:: aimms
     
@@ -271,7 +271,7 @@ To do so we need to also use the :any:`dex::ReadAllMappings` (or :any:`dex::Read
     dex::WriteToFile(
     	"output.xls",			! location + name of the output file
     	"ExcelMapping",			! mapping name
-    	1				! indicates whether to use a pretty writer
+    	1				! use a pretty writer
     );
 
 The output:
@@ -329,6 +329,7 @@ Here we see in the top row the names from the ``ColumnMapping`` of the mapping. 
     dex
     mappingfile
     mappingfiles
+    mappingname
     datafile
     JSON-formatted
     JSON-file
