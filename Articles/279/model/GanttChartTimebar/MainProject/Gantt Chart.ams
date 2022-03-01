@@ -1,214 +1,235 @@
 ## ams_version=1.0
 
 Model Main_Gantt_Chart {
-    DeclarationSection Units_of_Measurement {
-        Quantity SI_Time_Duration {
-            BaseUnit: hour;
-            Conversions: {
-                minute->hour : #-># / 60,
-                day   ->hour : #-># * 24
-            }
-            Comment: "Expresses the value for the duration of periods.";
-        }
-    }
-    Section Gantt_Chart_Control {
-        Set s_TimebarResourceSet {
-            Index: i_tb_res;
-            Parameter: ep_tb_selectedResource;
-            Definition: data {Timeline};
-        }
-        Set s_TimebarJobSet {
-            Index: i_tb_job;
-            Parameter: ep_tb_selectedJob;
-            Definition: data {Timebar};
-        }
-        StringParameter p_TimebarDuration_text {
-            IndexDomain: (i_tb_res,i_tb_job);
-        }
-        Parameter p_TimebarTimeStart {
-            IndexDomain: (i_tb_res,i_tb_job);
-            Unit: hour;
-        }
-        Parameter p_TimebarDuration {
-            IndexDomain: (i_tb_res,i_tb_job);
-            Unit: hour;
-        }
-        StringParameter sp_TimebarViewportStart;
-        StringParameter sp_TimebarViewportEnd;
-        Procedure pr_InitializeTimebarGanttChart {
-            Body: {
-                ! The view port of the Timebar Gantt Chart should allow for the maximum 
-                ! view port of the actual Gantt Chart.
-                sp_TimebarViewportStart := "2019-04-02 00";
-                sp_TimebarViewportEnd := "2019-04-06 00";
-                
-                ! There is only one resource/job so the element parameters are always set to this one.
-                ep_tb_selectedResource := first( s_TimebarResourceSet );
-                ep_tb_selectedJob := first( s_TimebarJobSet );
-                
-                ! The start/duration of the only job in the timebar Gantt Chart 
-                ! should be initialized the same as the controlled Gantt Chart Viewport was initialized.
-                ! In this example we assume for the sake of simplicity that the second day is ok.
-                p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob) := 1[day];
-                p_TimebarDuration(  ep_tb_selectedResource, ep_tb_selectedJob) := 1[day];
-                p_TimebarDuration_text(  ep_tb_selectedResource, ep_tb_selectedJob) := "Timebar";
-            }
-        }
-    }
-    Section Gantt_Chart_Section {
-        DeclarationSection Gantt_Chart_Declarations {
-            Set s_Tasks {
-                Index: i_t;
-                Parameter: SelectedTask;
-            }
-            Set s_Persons {
-                Index: i_p;
-            }
-            Set s_TaskTypes {
-                Index: i_tt;
-            }
-            ElementParameter ep_SelectedPerson {
-                Range: s_Persons;
-            }
-            ElementParameter ep_SelectedTask {
-                Range: s_Tasks;
-            }
-            ElementParameter ep_TaskTypeSelected {
-                Range: s_TaskTypes;
-            }
-            Parameter p01_SelectSomePeople {
-                IndexDomain: i_p;
-                Range: binary;
-            }
-            Parameter p_TaskStart {
-                IndexDomain: (i_t,i_tt,i_p);
-                Unit: hour;
-            }
-            Parameter p_TaskDuration {
-                IndexDomain: (i_t,i_tt,i_p);
-                Unit: hour;
-                webui::AnnotationsIdentifier: p_TaskDuration_text;
-            }
-            StringParameter p_TaskDuration_ToolTip {
-                IndexDomain: (i_t,i_tt,i_p);
-                Definition: {
-                    FormatString("The numbers %i and \n %i", 10, 20);
-                    !+
-                    !"<table><tr><td>Test this</td></tr></table>"
-                }
-            }
-            StringParameter p_TaskDuration_text {
-                IndexDomain: (i_t,i_tt,i_p);
-                Definition: {
-                    formatstring("%e's demand is %tn",i_t,p_TaskDuration(i_t,i_tt,i_p));
-                }
-            }
-            StringParameter sp_TaskDescription {
-                IndexDomain: i_t;
-            }
-            StringParameter sp_DescriptionOfSelectedTask {
-                Definition: sp_TaskDescription(SelectedTask);
-            }
-            StringParameter sp_SelectedViewPortStart {
-                Definition: {
-                    MomentTostring("%c%y-%m-%d %H", [hour], sp_TimebarViewportStart, 
-                    	p_TimebarTimeStart(ep_tb_selectedResource,ep_tb_selectedJob));
-                }
-            }
-            StringParameter sp_SelectedViewPortEnd {
-                Definition: {
-                    MomentTostring("%c%y-%m-%d %H", [hour], sp_TimebarViewportStart, 
-                    	p_TimebarTimeStart(ep_tb_selectedResource,ep_tb_selectedJob)+
-                    	p_TimebarDuration(ep_tb_selectedResource,ep_tb_selectedJob));
-                }
-            }
-        }
-        Procedure pr_InitializeGanttChartData {
-            Body: {
-                s_Tasks := ElementRange(1,28,prefix:"task-");
-                s_Persons := data { George, John, Paul, Ringo };
-                s_TaskTypes := data { 'daily scrum', meeting, refinement, lunch, programming, testing };
-                
-                empty p_TaskStart, p_TaskDuration;
-                
-                COMPOSITE TABLE
-                  i_t     i_tt              i_p      p_TaskStart p_TaskDuration
-                ! ------- ----------------- -------- ----------- --------------
-                  task-01 testing           George   9            1
-                  task-02 'daily scrum'     George   11           0.25
-                  task-03 lunch             George   12           1
-                  task-04 testing           George   14           1     
-                  task-05 testing           George   35           1
-                  task-06 'daily scrum'     George   36           0.25
-                  task-07 programming       John     10           1
-                  task-08 'daily scrum'     John     11           0.25
-                  task-09 lunch             John     14           0.5
-                  task-10 meeting           John     15           1
-                  task-11 testing           John     34           1
-                  task-12 'daily scrum'     John     36           0.25
-                  task-13 lunch             John     38           0.5
-                  task-14 refinement        John     39           1.5
-                  task-15 'daily scrum'     Paul     11           0.25
-                  task-16 lunch             Paul     13           0.5
-                  task-17 programming       Paul     14           3
-                  task-18 'daily scrum'     Paul     36           0.25
-                  task-19 lunch             Paul     37           0.5
-                  task-20 refinement        Paul     39           1.5
-                  task-21 programming       Ringo    8            2
-                  task-22 'daily scrum'     Ringo    11           0.25
-                  task-23 lunch             Ringo    13           0.5
-                  task-24 meeting           Ringo    15           1
-                  task-25 programming       Ringo    32           2
-                  task-26 'daily scrum'     Ringo    36           0.25
-                  task-27 lunch             Ringo    37           0.5
-                  task-28 refinement        Ringo    39           1.5
-                 ;
-                
-                 for ((i_t,i_tt,i_p) | p_TaskStart(i_t, i_tt, i_p)) do
-                 	sp_startTime := MomentToString("%m-%d-%c%y %H:%M",[hour],"2016-08-01 00",p_TaskStart(i_t,i_tt,i_p));
-                 	sp_endTime := MomentToString("%m-%d-%c%y %H:%M",[hour],"2016-08-01 00",p_TaskStart(i_t,i_tt,i_p)+p_TaskDuration(i_t, i_tt, i_p));
-                 	sp_TaskDescription(i_t) := FormatString("%e performs task %e from %s till %s",i_p,i_tt,sp_startTime,sp_endTime);
-                 endfor;
-                
-                p01_SelectSomePeople(i_p):=1;
-            }
-            StringParameter sp_startTime;
-            StringParameter sp_endTime;
-        }
-    }
-    Procedure MainInitialization {
-        Body: {
-            pr_InitializeTimebarGanttChart();
-            pr_InitializeGanttChartData();
-        }
-        Comment: "Add initialization statements here that do NOT require any library being initialized already.";
-    }
-    Procedure PostMainInitialization {
-        Comment: {
-            "Add initialization statements here that require that the libraries are already initialized properly,
-            or add statements that require the Data Management module to be initialized."
-        }
-    }
-    Procedure MainExecution;
-    Procedure PreMainTermination {
-        Body: {
-            return 1;
-        }
-        Comment: {
-            "Add termination statements here that require all libraries to be still alive.
-            Return 1 if you allow the termination sequence to continue.
-            Return 0 if you want to cancel the termination sequence."
-        }
-    }
-    Procedure MainTermination {
-        Body: {
-            return 1;
-        }
-        Comment: {
-            "Add termination statements here that do not require all libraries to be still alive.
-            Return 1 to allow the termination sequence to continue.
-            Return 0 if you want to cancel the termination sequence.
-            It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
-        }
-    }
+	DeclarationSection Units_of_Measurement {
+		Quantity SI_Time_Duration {
+			BaseUnit: hour;
+			Conversions: {
+				minute->hour : #-># / 60,
+				day->hour : #-># * 24,
+				s->hour : #-># / 3600,
+				century->hour : #-># * 876000,
+				month->hour : #-># * 730,
+				week->hour : #-># * 168,
+				year->hour : #-># * 8760
+			}
+			Comment: "Expresses the value for the duration of periods.";
+		}
+	}
+	Section Gantt_Chart_Control {
+		Set s_TimebarResourceSet {
+			Index: i_tb_res;
+			Parameter: ep_tb_selectedResource;
+			Definition: data {Timeline};
+		}
+		Set s_TimebarJobSet {
+			Index: i_tb_job;
+			Parameter: ep_tb_selectedJob;
+			Definition: data {Timebar};
+		}
+		StringParameter sp_TimebarDuration_text {
+			IndexDomain: (i_tb_res,i_tb_job);
+		}
+		Parameter p_TimebarTimeStart {
+			IndexDomain: (i_tb_res,i_tb_job);
+			Unit: hour;
+		}
+		Parameter p_TimebarDuration {
+			IndexDomain: (i_tb_res,i_tb_job);
+			Unit: hour;
+			webui::ItemTextIdentifier: sp_TimebarDuration_text;
+		}
+		StringParameter sp_TimebarViewportStart;
+		StringParameter sp_TimebarViewportEnd;
+		Procedure pr_InitializeTimebarGanttChart {
+			Body: {
+				! The view port of the Timebar Gantt Chart should allow for the maximum 
+				! view port of the actual Gantt Chart.
+				sp_today := CurrentToString("%c%y-%m-%d");
+				sp_yesterday := MomentToString(
+					Format        :  "%c%y-%m-%d", 
+					unit          :  [day], 
+					ReferenceDate :  sp_today, 
+					Elapsed       :  -1[day]);
+				sp_twoDaysAfterTomorrow := MomentToString(
+					Format        :  "%c%y-%m-%d", 
+					unit          :  [day], 
+					ReferenceDate :  sp_today, 
+					Elapsed       :  3[day]);
+				
+				sp_TimebarViewportStart := sp_yesterday            + " 00:00";
+				sp_TimebarViewportEnd   := sp_twoDaysAfterTomorrow + " 00:00";
+				
+				! There is only one resource/job so the element parameters are always set to this one.
+				ep_tb_selectedResource := first( s_TimebarResourceSet );
+				ep_tb_selectedJob      := first( s_TimebarJobSet );
+				
+				! The start/duration of the only job in the timebar Gantt Chart 
+				! should be initialized the same as the controlled Gantt Chart Viewport was initialized.
+				! In this example we assume for the sake of simplicity that the second day is ok.
+				p_TimebarTimeStart( ep_tb_selectedResource, ep_tb_selectedJob) := 1[day];
+				p_TimebarDuration(  ep_tb_selectedResource, ep_tb_selectedJob) := 1[day];
+				sp_TimebarDuration_text(  ep_tb_selectedResource, ep_tb_selectedJob) := "Timebar";
+			}
+			StringParameter sp_today;
+			StringParameter sp_yesterday;
+			StringParameter sp_twoDaysAfterTomorrow;
+		}
+	}
+	Section Gantt_Chart_Section {
+		DeclarationSection Gantt_Chart_Declarations {
+			Set s_Tasks {
+				Index: i_t;
+				Parameter: SelectedTask;
+			}
+			Set s_Persons {
+				Index: i_p;
+			}
+			Set s_TaskTypes {
+				Index: i_tt;
+			}
+			ElementParameter ep_SelectedPerson {
+				Range: s_Persons;
+			}
+			ElementParameter ep_SelectedTask {
+				Range: s_Tasks;
+			}
+			ElementParameter ep_TaskTypeSelected {
+				Range: s_TaskTypes;
+			}
+			Parameter p01_SelectSomePeople {
+				IndexDomain: i_p;
+				Range: binary;
+			}
+			Parameter p_TaskStart {
+				IndexDomain: (i_t,i_tt,i_p);
+				Unit: hour;
+			}
+			Parameter p_TaskDuration {
+				IndexDomain: (i_t,i_tt,i_p);
+				Unit: hour;
+				webui::AnnotationsIdentifier: sp_TaskDuration_text;
+			}
+			StringParameter p_TaskDuration_ToolTip {
+				IndexDomain: (i_t,i_tt,i_p);
+				Definition: {
+					FormatString("The numbers %i and \n %i", 10, 20);
+					!+
+					!"<table><tr><td>Test this</td></tr></table>"
+				}
+			}
+			StringParameter sp_TaskDuration_text {
+				IndexDomain: (i_t,i_tt,i_p);
+				Definition: {
+					formatstring("%e's demand is %tn",i_t,p_TaskDuration(i_t,i_tt,i_p));
+				}
+			}
+			StringParameter sp_TaskDescription {
+				IndexDomain: i_t;
+			}
+			StringParameter sp_DescriptionOfSelectedTask {
+				Definition: sp_TaskDescription(SelectedTask);
+			}
+			StringParameter sp_SelectedViewPortStart {
+				Definition: {
+					MomentTostring("%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)", [hour], sp_TimebarViewportStart, 
+						p_TimebarTimeStart(ep_tb_selectedResource,ep_tb_selectedJob));
+				}
+			}
+			StringParameter sp_SelectedViewPortEnd {
+				Definition: {
+					MomentTostring("%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)", [hour], sp_TimebarViewportStart, 
+						p_TimebarTimeStart(ep_tb_selectedResource,ep_tb_selectedJob)+
+						p_TimebarDuration(ep_tb_selectedResource,ep_tb_selectedJob));
+				}
+			}
+		}
+		Procedure pr_InitializeGanttChartData {
+			Body: {
+				s_Tasks := ElementRange(1,28,prefix:"task-");
+				s_Persons := data { George, John, Paul, Ringo };
+				s_TaskTypes := data { 'daily scrum', meeting, refinement, lunch, programming, testing };
+				
+				empty p_TaskStart, p_TaskDuration;
+				
+				COMPOSITE TABLE
+				  i_t     i_tt              i_p      p_TaskStart p_TaskDuration
+				! ------- ----------------- -------- ----------- --------------
+				  task-01 testing           George   9            1
+				  task-02 'daily scrum'     George   11           0.25
+				  task-03 lunch             George   12           1
+				  task-04 testing           George   14           1     
+				  task-05 testing           George   35           1
+				  task-06 'daily scrum'     George   36           0.25
+				  task-07 programming       John     10           1
+				  task-08 'daily scrum'     John     11           0.25
+				  task-09 lunch             John     14           0.5
+				  task-10 meeting           John     15           1
+				  task-11 testing           John     34           1
+				  task-12 'daily scrum'     John     36           0.25
+				  task-13 lunch             John     38           0.5
+				  task-14 refinement        John     39           1.5
+				  task-15 'daily scrum'     Paul     11           0.25
+				  task-16 lunch             Paul     13           0.5
+				  task-17 programming       Paul     14           3
+				  task-18 'daily scrum'     Paul     36           0.25
+				  task-19 lunch             Paul     37           0.5
+				  task-20 refinement        Paul     39           1.5
+				  task-21 programming       Ringo    8            2
+				  task-22 'daily scrum'     Ringo    11           0.25
+				  task-23 lunch             Ringo    13           0.5
+				  task-24 meeting           Ringo    15           1
+				  task-25 programming       Ringo    32           2
+				  task-26 'daily scrum'     Ringo    36           0.25
+				  task-27 lunch             Ringo    37           0.5
+				  task-28 refinement        Ringo    39           1.5
+				 ;
+				
+				 for ((i_t,i_tt,i_p) | p_TaskStart(i_t, i_tt, i_p)) do
+				 	sp_startTime := MomentToString("%m-%d-%c%y %H:%M",[hour],"2016-08-01 00",p_TaskStart(i_t,i_tt,i_p));
+				 	sp_endTime := MomentToString("%m-%d-%c%y %H:%M",[hour],"2016-08-01 00",p_TaskStart(i_t,i_tt,i_p)+p_TaskDuration(i_t, i_tt, i_p));
+				 	sp_TaskDescription(i_t) := FormatString("%e performs task %e from %s till %s",i_p,i_tt,sp_startTime,sp_endTime);
+				 endfor;
+				
+				p01_SelectSomePeople(i_p):=1;
+			}
+			StringParameter sp_startTime;
+			StringParameter sp_endTime;
+		}
+	}
+	Procedure MainInitialization {
+		Body: {
+			pr_InitializeTimebarGanttChart();
+			pr_InitializeGanttChartData();
+		}
+		Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+	}
+	Procedure PostMainInitialization {
+		Comment: {
+			"Add initialization statements here that require that the libraries are already initialized properly,
+			or add statements that require the Data Management module to be initialized."
+		}
+	}
+	Procedure MainExecution;
+	Procedure PreMainTermination {
+		Body: {
+			return 1;
+		}
+		Comment: {
+			"Add termination statements here that require all libraries to be still alive.
+			Return 1 if you allow the termination sequence to continue.
+			Return 0 if you want to cancel the termination sequence."
+		}
+	}
+	Procedure MainTermination {
+		Body: {
+			return 1;
+		}
+		Comment: {
+			"Add termination statements here that do not require all libraries to be still alive.
+			Return 1 to allow the termination sequence to continue.
+			Return 0 if you want to cancel the termination sequence.
+			It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+		}
+	}
 }
