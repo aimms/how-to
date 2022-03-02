@@ -130,15 +130,30 @@ Model Main_Gantt_Chart {
 			StringParameter sp_DescriptionOfSelectedTask {
 				Definition: sp_TaskDescription(SelectedTask);
 			}
+			Parameter bp_useUTCforSelectedViewport {
+				Range: binary;
+			}
+			ElementParameter ep_timezoneForSelectedViewport {
+				Range: AllTimeZones;
+				Definition: {
+					if bp_useUTCforSelectedViewport then
+						'UTC'
+					else
+						webui::WebApplicationTimeZone
+					endif
+				}
+			}
 			StringParameter sp_SelectedViewPortStart {
 				Definition: {
-					MomentTostring("%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)", [hour], sp_TimebarViewportStart, 
+					MomentTostring("%c%y-%m-%d %H:%M%TZ(ep_timezoneForSelectedViewport)", 
+						[hour], sp_TimebarViewportStart, 
 						p_TimebarTimeStart(ep_tb_selectedResource,ep_tb_selectedJob));
 				}
 			}
 			StringParameter sp_SelectedViewPortEnd {
 				Definition: {
-					MomentTostring("%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)", [hour], sp_TimebarViewportStart, 
+					MomentTostring("%c%y-%m-%d %H:%M%TZ(ep_timezoneForSelectedViewport)", 
+						[hour], sp_TimebarViewportStart, 
 						p_TimebarTimeStart(ep_tb_selectedResource,ep_tb_selectedJob)+
 						p_TimebarDuration(ep_tb_selectedResource,ep_tb_selectedJob));
 				}
@@ -205,10 +220,28 @@ Model Main_Gantt_Chart {
 		Comment: "Add initialization statements here that do NOT require any library being initialized already.";
 	}
 	Procedure PostMainInitialization {
+		Body: {
+			!webui::DisplayTimeZone := 'W. Europe Standard Time' ;
+			!webui::DisplayTimeZone := 'UTC' ;
+			block 
+				bp_ogv := OptionGetValue("Use UTC forcaseandstartenddate", 
+					p_optLow, p_optCur, p_optDef, p_optUpp );
+				if p_optCur then
+					bp_useUTCforSelectedViewport := 1 ;
+				else
+					bp_useUTCforSelectedViewport := 0 ;
+				endif ;
+			endblock ;
+		}
 		Comment: {
 			"Add initialization statements here that require that the libraries are already initialized properly,
 			or add statements that require the Data Management module to be initialized."
 		}
+		Parameter bp_ogv;
+		Parameter p_optLow;
+		Parameter p_optCur;
+		Parameter p_optDef;
+		Parameter p_optUpp;
 	}
 	Procedure MainExecution;
 	Procedure PreMainTermination {

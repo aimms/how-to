@@ -97,19 +97,50 @@ These two string parameters are defined as follows:
 .. code-block:: aimms
     :linenos:
 
+    Parameter bp_useUTCforSelectedViewport {
+        Range: binary;
+    }
+    ElementParameter ep_timezoneForSelectedViewport {
+        Range: AllTimeZones;
+        Definition: {
+            if bp_useUTCforSelectedViewport then
+                'UTC'
+            else
+                webui::WebApplicationTimeZone
+            endif
+        }
+    }
     StringParameter sp_SelectedViewPortStart {
         Definition: {
-            MomentTostring("%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)", [hour], sp_TimebarViewportStart, 
+            MomentTostring("%c%y-%m-%d %H:%M%TZ(ep_timezoneForSelectedViewport)", 
+                [hour], sp_TimebarViewportStart, 
                 p_TimebarTimeStart(ep_tb_selectedResource,ep_tb_selectedJob));
         }
     }
     StringParameter sp_SelectedViewPortEnd {
         Definition: {
-            MomentTostring("%c%y-%m-%d %H:%M%TZ(webui::WebApplicationTimeZone)", [hour], sp_TimebarViewportStart, 
+            MomentTostring("%c%y-%m-%d %H:%M%TZ(ep_timezoneForSelectedViewport)", 
+                [hour], sp_TimebarViewportStart, 
                 p_TimebarTimeStart(ep_tb_selectedResource,ep_tb_selectedJob)+
                 p_TimebarDuration(ep_tb_selectedResource,ep_tb_selectedJob));
         }
     }
+
+Here ``bp_useUTCforSelectedViewport`` is initialized using the following code:
+
+.. code-block:: aimms
+    :linenos:
+
+    block 
+        bp_ogv := OptionGetValue("Use UTC forcaseandstartenddate", 
+            p_optLow, p_optCur, p_optDef, p_optUpp );
+        if p_optCur then
+            bp_useUTCforSelectedViewport := 1 ;
+        else
+            bp_useUTCforSelectedViewport := 0 ;
+        endif ;
+    endblock ;
+
 
 Example project
 ------------------

@@ -23,5 +23,3 @@ use_UTC_forCaseAndStartEndDate 1
 * XA 16
 * NETSOL
 * Environment
-Identifiers_In_Model_Tree 4
-Identifiers_In_Model_Text 4

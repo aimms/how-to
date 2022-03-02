@@ -418,10 +418,10 @@
     "contents": {
       "aimms": {
         "contents": [
-          "sp_SelectedViewPortEnd",
           "sp_SelectedViewPortStart",
-          "sp_TimebarViewportEnd",
+          "sp_SelectedViewPortEnd",
           "sp_TimebarViewportStart",
+          "sp_TimebarViewportEnd",
           "webui::DisplayTimeZone",
           "webui::WebApplicationTimeZone"
         ]
