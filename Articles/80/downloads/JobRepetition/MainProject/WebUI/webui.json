@@ -1,0 +1,44 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "StartJobSequence",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/StartJobSequence": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_OnButtonStartServerSessions"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "title": {
+      "literal": "StartJobSequence"
+    },
+    "name": {
+      "literal": "StartJobSequence"
+    }
+  }
+}

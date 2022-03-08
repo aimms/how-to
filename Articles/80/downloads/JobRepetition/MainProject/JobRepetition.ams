@@ -1,0 +1,120 @@
+## ams_version=1.0
+
+Model Main_JobRepetition {
+	DeclarationSection Global_identifiers_not_saved_in_case {
+		Property: NoSave;
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: {
+				minute->s : #-># * 60,
+				second->s : #->#
+			}
+			Comment: "Expresses the value for the duration of periods.";
+		}
+		StringParameter sp_NextJobStart;
+		StringParameter sp_StdTimFmt {
+			Definition: "%c%y-%m-%d %H:%M:%S";
+		}
+		StringParameter sp_LocalTimFmt {
+			Definition: "%c%y-%m-%d %H:%M:%S%TZ('Local')";
+		}
+		ElementParameter ep_PayloadProcedure {
+			Range: AllProcedures;
+			Default: 'MainExecution';
+		}
+	}
+	Section Worker_procedures {
+		Procedure pr_Friesian {
+			Body: {
+				sp_Msg := FormatString("pr_Friesian(): At %s (UTC) delegation level is %i",
+					CurrentToString(sp_LocalTimFmt), pro::CurrentDelegationLevel() );
+				pro::management::LocalLogInfo(sp_Msg);
+			}
+			Comment: {
+				"Frisians are excellent work horses.
+				This is the procedure that \"actually performs the Job\""
+			}
+			StringParameter sp_Msg;
+		}
+	}
+	Section Server_session_sequence_generation {
+		Procedure pr_OnButtonStartServerSessions {
+			Body: {
+				ep_PayloadProcedure := StringToElement( AllProcedures, "pr_Friesian", create: 0 );
+				pr_IterativeJobScheduling(
+					maxDelegateLevel   :  4,
+					timeIncrement      :  2[second], 
+					epPayloadProcedure :  ep_PayloadProcedure);
+			}
+		}
+		Procedure pr_IterativeJobScheduling {
+			Arguments: (maxDelegateLevel,timeIncrement,epPayloadProcedure);
+			Body: {
+				if pro::CurrentDelegationLevel() < maxDelegateLevel then
+					if pro::DelegateToServer(
+							requestDescription :  formatString("The %i'th iteration of %e", 
+										pro::CurrentDelegationLevel()+1, epPayloadProcedure),
+							waitForCompletion  :  0,
+							completionCallback :  'pro::session::EmptyCallback',
+							delegationOverride :  pro::CurrentDelegationLevel() + 1,
+							scheduledAt        :  if pro::CurrentDelegationLevel() then MomentToString( sp_LocalTimFmt, [second], CurrentToString(sp_LocalTimFmt), timeIncrement ) else "" endif
+						) then
+						return 1 ;
+					endif ;
+				endif ;
+				
+				Apply( epPayloadProcedure );
+			}
+			Parameter maxDelegateLevel {
+				Property: Input;
+			}
+			Parameter timeIncrement {
+				Unit: second;
+				Property: Input;
+			}
+			ElementParameter epPayloadProcedure {
+				Range: AllProcedures;
+				Default: 'MainExecution';
+				Property: Input;
+			}
+		}
+	}
+	Section MainModelProcedures {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Body: {
+				if pro::GetPROEndPoint() then 
+					 pro::Initialize();
+				endif ;
+			}
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure MainExecution;
+		Procedure PreMainTermination {
+			Body: {
+				return 1 ;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+}

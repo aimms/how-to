@@ -26,15 +26,24 @@ Effectively, this realizes that the job at hand is solved regularly. As you can 
 
 To start this sequence, the following code is used.
 
-.. image:: images/pr_OnButtonStartServerSessions.PNG
+.. code-block:: aimms 
+    :linenos:
+
+    Procedure pr_OnButtonStartServerSessions {
+        Body: {
+            ep_PayloadProcedure := StringToElement( AllProcedures, "pr_Friesian", create: 0 );
+            pr_IterativeJobScheduling(
+                maxDelegateLevel   :  4,
+                timeIncrement      :  2[second], 
+                epPayloadProcedure :  ep_PayloadProcedure);
+        }
+    }
 
 Each line is explained as follows:
 
 #. Determine the payload procedure that should be executed by each solver session.  Here it is the ``pr_Friesian``, as Friesian horses are excellent workhorses.
 
 #. A call to the procedure that actually starts each solver session.
-
-#. When ``pr_IterativeJobScheduling`` is called by another procedure, then the argument ``delegateLevel`` should be 0.
 
 #. The number of server sessions started is controlled by ``maxDelegateLevel``
 
@@ -44,91 +53,67 @@ Each line is explained as follows:
 
 The center piece of the project is the procedure ``pr_IterativeJobScheduling``:
 
-    .. code-block:: aimms
+.. code-block:: aimms
+    :linenos:
     
-        Procedure pr_IterativeJobScheduling {
-            Arguments: (delegateLevel,maxDelegateLevel,timeIncrement,epPayloadProcedure);
-            Body: {
-                ! pro::DelegateToServer uses the *current* values of local arguments to create a call for a new solver session.
-                ! We modify the values of these arguments before calling pro::DelegateToServer
-                delegateLevel += 1 ;                                                       ! 1)
-                
-                spRequestDescription :=                                                    ! 2)
-                    formatString("Start %i'th iteration of %e at %s", 
-                    delegateLevel, epPayloadProcedure, sp_jobTime );
-
-                ! Switch to server sessions.
-                if delegateLevel = 1 then
-
-                    if pro::DelegateToServer(                                              ! 3)
-                            requestDescription :  spRequestDescription,
-                            waitForCompletion  :  0, 
-                            completionCallback :  'pro::session::EmptyCallback',
-                            delegationOverride :  delegateLevel  ) then
-                        return 1 ;
-                    endif ;
-
-                elseif delegateLevel <= maxDelegateLevel then   ! Schedule the next job.
-                
-                    sp_jobTime := MomentToString( sp_LocalTimFmt, [second],                 ! 4)
-                                        CurrentToString(sp_LocalTimFmt), timeIncrement );
-                                        
-                    pro::DelegateToServer(                                                ! 5)
-                        requestDescription :  spRequestDescription,
-                        waitForCompletion  :  0, 
+    Procedure pr_IterativeJobScheduling {
+        Arguments: (maxDelegateLevel,timeIncrement,epPayloadProcedure);
+        Body: {
+            if pro::CurrentDelegationLevel() < maxDelegateLevel then
+                if pro::DelegateToServer(
+                        requestDescription :  formatString("The %i'th iteration of %e",  pro::CurrentDelegationLevel()+1, epPayloadProcedure),
+                        waitForCompletion  :  0,
                         completionCallback :  'pro::session::EmptyCallback',
-                        delegationOverride :  delegateLevel,
-                        scheduledAt        :  sp_jobTime );
-
+                        delegationOverride :  pro::CurrentDelegationLevel() + 1,
+                        scheduledAt        :  if pro::CurrentDelegationLevel() then MomentToString( sp_LocalTimFmt, [second], CurrentToString(sp_LocalTimFmt), timeIncrement ) else "" endif
+                    ) then
+                    return 1 ;
                 endif ;
-
-                Apply( epPayloadProcedure );                                              ! 6)
+            endif ;
             
-                }
-                
-            Parameter delegateLevel {
-                Property: Input;
-            }
-            Parameter maxDelegateLevel {
-                Property: Input;
-            }
-            Parameter timeIncrement {
-                Unit: second;
-                Property: Input;
-            }
-            ElementParameter epPayloadProcedure {
-                Range: AllProcedures;
-                Default: 'MainExecution';
-                Property: Input;
-            }
-            StringParameter sp_jobTime;
-            StringParameter spRequestDescription;
+            Apply( epPayloadProcedure );  
         }
+        Parameter maxDelegateLevel {
+            Property: Input;
+        }
+        Parameter timeIncrement {
+            Unit: second;
+            Property: Input;
+        }
+        ElementParameter epPayloadProcedure {
+            Range: AllProcedures;
+            Default: 'MainExecution';
+            Property: Input;
+        }
+    }
 
     
 Each portion of the procedure code is explained below:
-        
-#. DelegateLevel increased, to indicate to AIMMS PRO that this is a valid iterative call.
-        
-#. Job description, to properly identify each job in the session logs.
-        
-#. The first job starts immediately, but is started from the WebUI session. The WebUI session should NOT execute the payload, that is why we have a test on the return of ``pro::DelegateToServer``
 
-#. Construct the next time the job is to be executed. By using the Local timezone, we avoid any ambiguities regarding daylight saving time; ``sp_LocalTimFmt = "%c%y-%m-%d %H:%M:%S%TZ('Local')"``
+#.  Line 4: Limit the number of recurring jobs.
+    When your application does not have a fixed number of jobs, 
+    you can remove this line and the argument ``maxDelegateLevel``.
 
-#. The iterative call, that might looks like a recursive call.
+#.  Line 6: ``requestDescription``: to properly identify each job in job overviews and in the session logs.
 
-#. This will execute the payload for each of the server sessions started.
+#.  Line 9: ``delegationOverride``: necessary to submit jobs from within server sessions.
+
+#.  Line 10: ``scheduleAt``: Construct the next time the job is to be executed.   
+    By using the Local timezone, ambiguities regarding daylight saving time are avoided.
+    Here ``sp_LocalTimFmt = "%c%y-%m-%d %H:%M:%S%TZ('Local')"``.
+
+#.  Line 16: This will execute the payload for each of the server sessions started.
+    The `APPLY <https://documentation.aimms.com/language-reference/procedural-language-components/procedures-and-functions/calls-to-procedures-and-functions.html#the-apply-operator>`_ operator is used here.
 
 To operate, the example that can be downloaded :download:`here <downloads/JobRepetition.zip>`.
 
-#. Create an .aimmspack, publish on your favorite AIMMS PRO system.
+#.  Create an .aimmspack, publish on your favorite AIMMS PRO system.
 
-#. Launch it and press the only button
+#.  Launch it and press the only button
 
-#. Close the app. Yes, once the sequence of server sessions is started, the WebUI of the enclosed example is no longer of use - it can be closed.
+#.  Close the app. Yes, once the sequence of server sessions is started, the WebUI of the enclosed example is no longer of use - it can be closed.
 
-#. Go to job tab in the AIMMS PRO portal and watch new jobs being created, queued, running, and finished.
+#.  Go to job tab in the AIMMS PRO portal and watch new jobs being created, queued, running, and finished.
 
 .. image:: images/PROJobs.png
 
