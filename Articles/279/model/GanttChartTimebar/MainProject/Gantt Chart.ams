@@ -32,12 +32,17 @@ Model Main_Gantt_Chart {
 		}
 		Parameter p_TimebarTimeStart {
 			IndexDomain: (i_tb_res,i_tb_job);
+			Range: [0, inf);
 			Unit: hour;
 		}
 		Parameter p_TimebarDuration {
 			IndexDomain: (i_tb_res,i_tb_job);
 			Unit: hour;
 			webui::ItemTextIdentifier: sp_TimebarDuration_text;
+		}
+		Parameter p_TimebarUpperbound {
+			Unit: hour;
+			InitialData: 24;
 		}
 		StringParameter sp_TimebarViewportStart;
 		StringParameter sp_TimebarViewportEnd;
@@ -59,6 +64,7 @@ Model Main_Gantt_Chart {
 				
 				sp_TimebarViewportStart := sp_yesterday            + " 00:00";
 				sp_TimebarViewportEnd   := sp_twoDaysAfterTomorrow + " 00:00";
+				p_TimebarUpperbound := (4 * 24)[hour];
 				
 				! There is only one resource/job so the element parameters are always set to this one.
 				ep_tb_selectedResource := first( s_TimebarResourceSet );

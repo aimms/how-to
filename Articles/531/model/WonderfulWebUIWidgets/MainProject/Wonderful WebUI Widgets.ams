@@ -121,7 +121,7 @@ Model Main_Wonderful_WebUI_Widgets {
 			StringParameter sp_statusTooltip {
 				Definition: {
 					"<div align=\"left\">"  +
-					"<Table>" +
+					"<Table style=\"margin:0;\">" +
 					        "<TR>"  +
 					                "<TD>"  +
 					                                "<B> Name : </B>" +
@@ -399,7 +399,7 @@ Model Main_Wonderful_WebUI_Widgets {
 				IndexDomain: i_loc;
 				Definition: {
 					"<div align=\"left\">"  +
-					"<Table>" +
+					"<Table style=\"margin:0;\">" +
 					        "<TR>"  +
 					                "<TD>"  +
 					                                "<B> Name : </B>" +
