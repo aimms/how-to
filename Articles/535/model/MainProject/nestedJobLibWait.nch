@@ -1,0 +1,8 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"s_sources" "s_fromCities" "2022-03-15 11:33:25"
+"s_sinks" "s_toCities" "2022-03-15 11:33:45"
+"s_fromCities" "s_origins" "2022-03-15 13:01:05"
+"s_toCities" "s_destinations" "2022-03-15 13:01:32"
+"pr_computeStaticData" "pr_prepGlobalJobData" "2022-03-15 13:25:56"
+"Main_nestedJob" "Main_nestedJobLib" "2022-03-16 11:47:09"
+"Main_nestedJobLib" "Main_nestedJobLibWait" "2022-03-16 12:31:50"

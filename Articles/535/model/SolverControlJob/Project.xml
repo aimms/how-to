@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<LibraryProject AimmsVersion="4.84.6.2 unicode x64" ProjectUUID="F7D1726C-A5A3-4A9E-85C3-1F6BEB6CCCB4">
+	<ModelFileName>SolverControlJob.ams</ModelFileName>
+	<Prefix>scj</Prefix>
+	<DisplayName>SolverControlJob</DisplayName>
+</LibraryProject>

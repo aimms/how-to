@@ -1,0 +1,224 @@
+## ams_version=1.0
+
+LibraryModule SolverControlJob {
+	Prefix: scj;
+	Interface: Public_Section;
+	Section Public_Section {
+		Section solver_control_job_input_output_declarations {
+			Comment: {
+				"This sections contains the declarations of identifiers that are both input to the 
+				solver control job as output from the solver control job."
+			}
+			DeclarationSection Declaration_1;
+		}
+		Section solver_control_job_input_declarations {
+			Comment: "This section contains the declarations of the identifiers that are input to the solver Control job.";
+			Set s_subJobNames {
+				Index: i_subJob;
+				Definition: ElementRange(1,3,prefix:"subjob-");
+			}
+			Parameter p_costCoeffByJob {
+				IndexDomain: (i_subJob,i_from,i_to);
+			}
+		}
+		Section solver_control_job_output_declarations {
+			Parameter p_solutionsPerJob {
+				IndexDomain: (i_subJob,i_from,i_to);
+			}
+			Parameter p_objectivesPerJob {
+				IndexDomain: i_subJob;
+			}
+		}
+		Section solver_control_job_private_declarations {
+			Comment: {
+				"This sections contains the declarations of the identifiers 
+				that are private to the solver control job"
+			}
+			Parameter p_noReceivedSolutions;
+			Parameter p_noSubmittedJobs;
+		}
+		Procedure pr_computeInputs {
+			Body: {
+				p_costCoeffByJob(i_subJob, i_from, i_to) := round(uniform(1,9));
+			}
+		}
+		Procedure pr_globSol {
+			Body: {
+				if pro::DelegateToServer(
+						requestDescription :  "solver control job",
+						waitForCompletion  :  0,
+						completionCallback :  'scj::pr_globSolCallback' 
+					) then
+					return 1 ;
+				endif ;
+				
+				pr_workGlobSol();
+			}
+		}
+		Procedure pr_globSolCallback {
+			Arguments: (sp_requestDescription);
+			Body: {
+				pr_trace(formatString("pr_globSolCallback(%s)",sp_requestDescription));
+				
+				! Load results from output case of subjob.
+				pro::session::LoadResultsCallBack(sp_requestDescription);
+				
+				! Opportunity to add some application specific code for receiving final solution here.
+			}
+			Comment: {
+				"The completion callback that uses information from the control job solver session and passes this to the client session.
+				Invoked at the end of the control job server session.
+				Executes in the process of the client session."
+			}
+			StringParameter sp_requestDescription {
+				Property: Input;
+			}
+		}
+	}
+	Section Private_Section {
+		Procedure pr_workGlobSol {
+			Body: {
+				! Step 1: prepare the sub job specific inputs.
+				pr_computeInputs();
+				
+				! Step 2: As soon as a first job is submitted, solutions may be received.
+				p_noReceivedSolutions := 0 ;
+				
+				! Step 3: submit the subjobs
+				pr_submitAllSubjobs();
+				
+				! Step 4: Define the output case for the global job.
+				pro::ManagedSessionOutputCaseIdentifierSet := 
+					solver_control_job_input_output_declarations + solver_control_job_output_declarations ;
+				
+				! Step 5: Wait until all sub jobs have submitted their solution.
+				pr_waitOnSubJobCompletion();
+				
+				if bp_tracing then
+					if pro::GetPROEndPoint() then
+						pro::management::LocalLogInfo(formatString("The set pro::ManagedSessionOutputCaseIdentifierSet contains the following %i outputs: ", 
+								card( pro::ManagedSessionOutputCaseIdentifierSet ) ) );
+						for indexIdentifiers | indexIdentifiers in pro::ManagedSessionOutputCaseIdentifierSet do
+							pro::management::LocalLogInfo(formatString("    %i: %e with card %i", 
+								ord( indexIdentifiers, pro::ManagedSessionOutputCaseIdentifierSet ), 
+								indexIdentifiers, card( indexIdentifiers ) ) );
+						endfor ;
+					endif ;
+				endif ;
+			}
+		}
+		Procedure pr_submitAllSubjobs {
+			Body: {
+				for ( i_subJob ) do
+				
+					! Compute sub job specific data
+					wsj::sp_thisJob := formatString("%e", i_subJob);
+					wsj::p_cost(i_from, i_to) := p_costCoeffByJob(i_subJob, i_from, i_to);
+				
+					! Each sub job get the data from the following sections:
+					pro::ManagedSessionInputCaseIdentifierSet := 
+						wsj::inputs_outputs_sub_job + 
+						wsj::inputs_sub_job + 
+						wsj::static_inputs_sub_job ;
+				
+					if bp_tracing then ! Tracing.
+						pr_trace(formatString("pr_submitAllSubjobs(), %e, Card p_cost = %i, card( s_origins ) = %i", 
+							i_subJob, card(wsj::p_cost), card( s_origins ) ) );
+						s_subjob_SolutionIdentifiers := wsj::inputs_outputs_sub_job + wsj::inputs_sub_job ;
+						if pro::GetPROEndPoint() then
+							pro::management::LocalLogInfo(formatString("pr_delegateSubSol(): The set s_subjob_SolutionIdentifiers contains the following %i inpputs: ", 
+									card( s_subjob_SolutionIdentifiers ) ) );
+							for indexIdentifiers | indexIdentifiers in s_subjob_SolutionIdentifiers do
+								pro::management::LocalLogInfo(formatString("    %i: %e with card %i", 
+									ord( indexIdentifiers, s_subjob_SolutionIdentifiers ), 
+									indexIdentifiers, card( indexIdentifiers ) ) );
+							endfor ;
+						endif ;
+					endif ;	
+				
+					pr_delegateSubSol();
+				
+				endfor ;
+				p_noSubmittedJobs := card( s_subJobNames );
+			}
+			Set s_subjob_SolutionIdentifiers {
+				SubsetOf: AllIdentifiers;
+				Index: i_sjSi;
+			}
+		}
+		Procedure pr_delegateSubSol {
+			Body: {
+				if pro::DelegateToServer(
+						requestDescription :  formatString("Sub job %s", wsj::sp_thisJob),
+						waitForCompletion  :  0,
+						completionCallback :  'wsj::pr_subSolCallback',
+						delegationOverride :  2 
+					) then
+					return 1 ;
+				endif ;
+				
+				wsj::pr_subSol();
+			}
+		}
+		Procedure pr_waitOnSubJobCompletion {
+			Body: {
+				p_timeout := 60 ;
+				sp_startTime := CurrentToString( "%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')" );
+				while p_noReceivedSolutions < p_noSubmittedJobs do
+					! p_noReceivedSolutions will be incremented via callbacks
+					delay( 1 );
+					pro::messaging::WaitForMessages('',0,0);
+					sp_now := CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')");
+					p_elapsedTime := StringToMoment(
+						Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')", 
+						Unit          :  [s], 
+						ReferenceDate :  sp_startTime, 
+						Timeslot      :  sp_now);
+					if p_elapsedTime > p_timeout then ! loop times out - some subjob likely not able to present solution.
+						break ;
+					endif ;
+				endwhile ;
+			}
+			Parameter p_timeout {
+				Unit: s;
+			}
+			StringParameter sp_startTime;
+			Parameter p_elapsedTime {
+				Unit: s;
+			}
+			StringParameter sp_now;
+		}
+		Section Library_initialization_and_termination {
+			Procedure LibraryInitialization {
+				Comment: "Add initialization statements here that do not require any other library being initialized already.";
+			}
+			Procedure PostLibraryInitialization {
+				Comment: {
+					"Add initialization statements here that require another library to be initialized already,
+					or add statements that require the Data Management module to be initialized."
+				}
+			}
+			Procedure PreLibraryTermination {
+				Body: {
+					return 1;
+				}
+				Comment: {
+					"Add termination statements here that require all other libraries to be still alive.
+					Return 1 if you allow the termination sequence to continue.
+					Return 0 if you want to cancel the termination sequence."
+				}
+			}
+			Procedure LibraryTermination {
+				Body: {
+					return 1;
+				}
+				Comment: {
+					"Add termination statements here that do not require other libraries to be still alive.
+					Return 1 to allow the termination sequence to continue.
+					Return 0 if you want to cancel the termination sequence.
+					It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+				}
+			}
+		}
+	}
+}

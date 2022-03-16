@@ -1,0 +1,136 @@
+## ams_version=1.0
+
+LibraryModule WorkerSubJob {
+	Prefix: wsj;
+	Interface: Public_Section;
+	Section Public_Section {
+		Section inputs_outputs_sub_job {
+			StringParameter sp_thisJob;
+		}
+		Section inputs_sub_job {
+			Parameter p_cost {
+				IndexDomain: (i_from,i_to);
+			}
+		}
+		Section static_inputs_sub_job {
+			Parameter p_supply {
+				IndexDomain: i_from;
+			}
+			Parameter p_demand {
+				IndexDomain: i_to;
+			}
+		}
+		Section outputs_sub_job {
+			Variable v_totCost {
+				Range: free;
+				Definition: sum( (i_from,i_to), p_cost(i_from, i_to) * v_transport(i_from, i_to) );
+			}
+			Variable v_transport {
+				IndexDomain: (i_from,i_to);
+				Range: nonnegative;
+			}
+		}
+		Procedure pr_subSol {
+			Body: {
+				solve mp_trnsport ;
+				
+				pro::ManagedSessionOutputCaseIdentifierSet := inputs_outputs_sub_job + outputs_sub_job ;
+			}
+			Parameter p_delay;
+			StringParameter sp_CaseFileName;
+			StringParameter sp_FullCaseFileName;
+			StringParameter sp_FullProStorageName;
+		}
+		Procedure pr_subSolCallback {
+			Arguments: (sp_requestDescription);
+			Body: {
+				
+				! Load results from output case of subjob.
+				pro::session::LoadResultsCallBack(sp_requestDescription);
+				
+				! Identify the subjob whose solutions is just read in.
+				ep_subJob := StringToElement( scj::s_subJobNames, sp_thisJob );
+				
+				! Store the solution of the sub job in the declarations of the global job.
+				scj::p_solutionsPerJob(ep_subJob, i_from, i_to) := v_transport(i_from, i_to);
+				scj::p_objectivesPerJob(ep_subJob) := v_totCost ;
+				
+				! Increment the number of subjobs that shared their solution with the global job.
+				scj::p_noReceivedSolutions += 1 ;
+				
+				if bp_tracing then
+					pr_trace(formatString("pr_subSolCallback(%s), 5, received solutions = %i",
+						sp_requestDescription, scj::p_noReceivedSolutions));
+				endif ;
+			}
+			Comment: "This procedure is activated upon completion of a subjob and runs in the process of the globJob";
+			StringParameter sp_requestDescription {
+				Property: Input;
+			}
+			ElementParameter ep_subJob {
+				Range: scj::s_subJobNames;
+			}
+		}
+	}
+	Section Private_Section {
+		Set s_subjob_SolutionIdentifiers {
+			SubsetOf: AllIdentifiers;
+			Index: i_sjSi;
+		}
+		Constraint c_respectSupply {
+			IndexDomain: i_from;
+			Definition: sum( i_to, v_transport(i_from, i_to) ) <= p_supply(i_from);
+		}
+		Constraint c_meetDemand {
+			IndexDomain: i_to;
+			Definition: sum( i_from, v_transport(i_from, i_to) ) >= p_demand(i_to);
+		}
+		Set s_trnsportVariables {
+			SubsetOf: AllVariables;
+			Definition: AllVariables * WorkerSubJob;
+		}
+		Set s_trnsportConstraints {
+			SubsetOf: AllConstraints;
+			Definition: AllConstraints * WorkerSubJob;
+		}
+		MathematicalProgram mp_trnsport {
+			Objective: v_totCost;
+			Direction: minimize;
+			Constraints: s_trnsportConstraints;
+			Variables: s_trnsportVariables;
+			Type: Automatic;
+		}
+		Section Library_initialization_and_termination {
+			Procedure LibraryInitialization {
+				Comment: "Add initialization statements here that do not require any other library being initialized already.";
+			}
+			Procedure PostLibraryInitialization {
+				Comment: {
+					"Add initialization statements here that require another library to be initialized already,
+					or add statements that require the Data Management module to be initialized."
+				}
+			}
+			Procedure PreLibraryTermination {
+				Body: {
+					return 1;
+				}
+				Comment: {
+					"Add termination statements here that require all other libraries to be still alive.
+					Return 1 if you allow the termination sequence to continue.
+					Return 0 if you want to cancel the termination sequence."
+				}
+			}
+			Procedure LibraryTermination {
+				Body: {
+					return 1;
+				}
+				Comment: {
+					"Add termination statements here that do not require other libraries to be still alive.
+					Return 1 to allow the termination sequence to continue.
+					Return 0 if you want to cancel the termination sequence.
+					It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+				}
+			}
+		}
+	}
+}

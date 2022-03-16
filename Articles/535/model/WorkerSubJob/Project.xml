@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<LibraryProject AimmsVersion="4.84.6.2 unicode x64" ProjectUUID="2E9806A2-F4C0-4A5B-8BDA-7B6B51938961">
+	<ModelFileName>WorkerSubJob.ams</ModelFileName>
+	<Prefix>wsj</Prefix>
+	<DisplayName>WorkerSubJob</DisplayName>
+</LibraryProject>
