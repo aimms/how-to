@@ -34,7 +34,9 @@ LibraryModule WorkerSubJob {
 			Body: {
 				solve mp_trnsport ;
 				
-				pro::ManagedSessionOutputCaseIdentifierSet := inputs_outputs_sub_job + outputs_sub_job ;
+				pro::ManagedSessionOutputCaseIdentifierSet := 
+					inputs_outputs_sub_job + 
+					outputs_sub_job ;
 			}
 			Parameter p_delay;
 			StringParameter sp_CaseFileName;

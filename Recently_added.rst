@@ -17,6 +17,7 @@ Recently added
 .. Added 12 March 2020: 331
 .. Added 14 Feb 2020: 108-10, 108-09, 108-07
 
+* :doc:`/Articles/535/535-waiting-for-sub-jobs-to-complete`
 * :doc:`/Articles/531/531-working-with-wonderful-webui-widgets`
 * :doc:`/Articles/526/526-modeling-composite-objects`
 * :doc:`/Articles/525/525-finding-unused-identifiers`

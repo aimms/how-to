@@ -22,11 +22,7 @@ Model Main_nestedJobLibWait {
 			Comment: "Expresses the value for the duration of periods.";
 		}
 	}
-	Section Developer_Controls {
-		Parameter bp_tracing {
-			InitialData: 1;
-		}
-	}
+	Section Developer_Controls;
 	Section Application_initialization_and_termination {
 		Procedure MainInitialization {
 			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
@@ -76,11 +72,16 @@ Model Main_nestedJobLibWait {
 		}
 	}
 	Section Tracing {
+		Parameter bp_tracing {
+			InitialData: 1;
+		}
 		Procedure pr_trace {
 			Arguments: (sp_msg);
 			Body: {
-				if pro::GetPROEndPoint() then
-					pro::management::LocalLogInfo(sp_msg);
+				if bp_tracing then
+					if pro::GetPROEndPoint() then
+						pro::management::LocalLogInfo(sp_msg);
+					endif ;
 				endif ;
 			}
 			StringParameter sp_msg {

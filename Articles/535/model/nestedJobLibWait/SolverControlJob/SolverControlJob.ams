@@ -89,7 +89,8 @@ LibraryModule SolverControlJob {
 				
 				! Step 4: Define the output case for the global job.
 				pro::ManagedSessionOutputCaseIdentifierSet := 
-					solver_control_job_input_output_declarations + solver_control_job_output_declarations ;
+					solver_control_job_input_output_declarations + 
+					solver_control_job_output_declarations ;
 				
 				! Step 5: Wait until all sub jobs have submitted their solution.
 				pr_waitOnSubJobCompletion();
@@ -162,19 +163,20 @@ LibraryModule SolverControlJob {
 		}
 		Procedure pr_waitOnSubJobCompletion {
 			Body: {
-				p_timeout := 60 ;
+				p_timeout := 60 /* seconds */ ; ! Should be configurable.
 				sp_startTime := CurrentToString( "%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')" );
 				while p_noReceivedSolutions < p_noSubmittedJobs do
-					! p_noReceivedSolutions will be incremented via callbacks
-					delay( 1 );
-					pro::messaging::WaitForMessages('',0,0);
+					! p_noReceivedSolutions is incremented when a sub job callback is processed by pro::messaging::WaitForMessages
+					pro::messaging::WaitForMessages("",0,10/* milli seconds */);
 					sp_now := CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')");
 					p_elapsedTime := StringToMoment(
 						Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')", 
 						Unit          :  [s], 
 						ReferenceDate :  sp_startTime, 
 						Timeslot      :  sp_now);
-					if p_elapsedTime > p_timeout then ! loop times out - some subjob likely not able to present solution.
+					pr_trace(formatString("p_noReceivedSolutions = %i, p_noSubmittedJobs = %i, elapsed = %n", 
+						p_noReceivedSolutions, p_noSubmittedJobs, p_elapsedTime ) );
+					if p_elapsedTime > p_timeout then ! waiting loop timed out - some subjob likely not able to present solution.
 						break ;
 					endif ;
 				endwhile ;
