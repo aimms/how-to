@@ -137,8 +137,6 @@ A.  Blue, the client session:
                 Procedure pr_globSolCallback {
                     Arguments: (sp_requestDescription);
                     Body: {
-                        pr_trace(formatString("pr_globSolCallback(%s)",sp_requestDescription));
-                        
                         ! Load results from output case of subjob.
                         pro::session::LoadResultsCallBack(sp_requestDescription);
                         
