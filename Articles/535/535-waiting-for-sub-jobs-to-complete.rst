@@ -24,7 +24,7 @@ An overview is requested by generating various scenarios, and comparing the runs
 
 The example to download: 
 
-:download:`AIMMS 4.86 project download <model/nestedJobLibWait.zip>`
+:download:`AIMMS 4.84 project download <model/nestedJobLibWait.zip>`
 
 
 Focus
@@ -367,7 +367,11 @@ Both CPLEX and AIMMS provide option settings that limit the number of threads us
 
 *   AIMMS: Number_of_execution_threads 
 
-.. note:: Important: For AIMMS Cloud this is not a consideration, as each job gets its own docker image and therefore can behaves as if it is the only active process 😉.
+.. note:: 
+
+    For the AIMMS Cloud this consideration is irrelevant. 
+    In the AIMMS Cloud each job gets its own docker image.
+    Therefore, such a job can behave as if it is the only active process 😉.
 
 
 
