@@ -1,9 +1,6 @@
 Waiting for sub jobs to complete
 =================================
 
-.. warning:: Article in draft
-
-
 Introduction
 --------------
 
