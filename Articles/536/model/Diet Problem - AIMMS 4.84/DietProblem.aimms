@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<References AIMMS_Version="4.84.6.2 (x64)">
+	<MainProject Path="MainProject" />
+	<Library System="true" Path="AimmsPro" />
+	<Library System="true" Path="AimmsWebUI" />
+	<RepositoryLibrary UUID="E26C298C-5EF6-42C5-B7B7-59ED3DF48D6F" Name="AimmsXLLibrary" Version="1.1.0.8" />
+	<RepositoryLibrary UUID="BDF54E1C-AF05-4D77-856C-F3C05F20FFB8" Name="DataExchange" Version="1.3.1.2" />
+</References>
