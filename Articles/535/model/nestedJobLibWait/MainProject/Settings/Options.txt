@@ -1,4 +1,7 @@
 ﻿* AIMMS
+major_messages 1
+rounding_compatibility Aimms_3_7
+time_messages 1
 use_UTC_forCaseAndStartEndDate 1
 * AOA
 * BARON 21
@@ -23,3 +26,5 @@ use_UTC_forCaseAndStartEndDate 1
 * XA 16
 * NETSOL
 * Environment
+Project_Title "nestedJobLibWait"
+Default_UI 0

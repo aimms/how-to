@@ -29,6 +29,7 @@ This section offers best practices to build and deploy applications using AIMMS 
    /Articles/155/155-Catering-unresponsive-server-unstable-connection
    /Articles/373/373-pro-scaling-options
    /Articles/374/374-pro-backup-and-continuity
+   /Articles/535/535-waiting-for-sub-jobs-to-complete
 
 
 

@@ -33,3 +33,5 @@
 "tt" "i_tt" "2019-05-08 13:57:44"
 "InitializeGanttChartData" "pr_InitializeGanttChartData" "2019-05-08 14:00:21"
 "p_TimebarDurationText" "p_TimebarDuration_text" "2019-05-08 14:33:58"
+"p_TimebarDuration_text" "sp_TimebarDuration_text" "2022-03-01 11:53:41"
+"p_TaskDuration_text" "sp_TaskDuration_text" "2022-03-01 11:54:27"

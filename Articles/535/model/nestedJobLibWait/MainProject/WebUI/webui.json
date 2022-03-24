@@ -1,0 +1,164 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "browsername": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browsertimezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
+    "ignoredst": {
+      "aimms": {
+        "contents": [
+          "webui::IgnoreDST"
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "timezone.dst.readonly": {
+      "aimms": {
+        "contents": [
+          "webui::DefaultDSTSettingForDisplayTimeZone"
+        ]
+      }
+    },
+    "ui.editable": {
+      "literal": 0
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "ActivateAllJobs",
+          "gridArea": "area-b",
+          "dndId": "Unassigned widgetsActivateAllJobs2"
+        },
+        {
+          "widgetUri": "objectives",
+          "gridArea": "area-c",
+          "dndId": "area-cobjectives0"
+        },
+        {
+          "widgetUri": "transports",
+          "gridArea": "area-a",
+          "dndId": "area-atransports1"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout10"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "transports",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "objectives",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "ActivateAllJobs",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "widgets/ActivateAllJobs": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "MainExecution"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "ActivateAllJobs"
+    },
+    "title": {
+      "literal": "ActivateAllJobs"
+    }
+  },
+  "widgets/objectives": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "scj::p_objectivesPerJob"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "scj::i_subJob"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "objectives"
+    }
+  },
+  "widgets/transports": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "scj::p_solutionsPerJob"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "scj::i_subJob",
+          "i_from"
+        ],
+        "colHeader": [
+          "i_to"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "name": {
+      "literal": "transports"
+    }
+  }
+}

@@ -51,7 +51,7 @@ Congrats! The installation is successful.
 Download an SQLite database sample to test
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In order to test our installation, you could use your own generated SQLite database, or download a sample on this website: `example db <https://www.sqlitetutorial.net/download/sqlite-sample-database>`_
+In order to test our installation, you could use your own generated SQLite database, or download a sample on this website: `example db <https://www.sqlitetutorial.net/wp-content/uploads/2018/03/chinook.zip>`_
 
 (click on the "SQLite Sample Database" download link). The downloaded database is named ``chinook.db``, and we will use it in the rest of this tutorial.
 

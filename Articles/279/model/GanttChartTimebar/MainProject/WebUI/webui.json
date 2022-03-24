@@ -1,0 +1,434 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "browsername": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browsertimezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
+    "ignoredst": {
+      "aimms": {
+        "contents": [
+          "webui::IgnoreDST"
+        ]
+      }
+    },
+    "pages": {
+      "literal": {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [],
+                "name": "home",
+                "slug": "home",
+                "type": "pagev2-grid"
+              }
+            ],
+            "name": "Main Project",
+            "slug": "main_project"
+          }
+        ],
+        "name": "root",
+        "slug": "root"
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "timezone.dst.readonly": {
+      "aimms": {
+        "contents": [
+          "webui::DefaultDSTSettingForDisplayTimeZone"
+        ]
+      }
+    },
+    "timezonesetting": {
+      "literal": true
+    }
+  },
+  "layouts/custom_85f4b6f6-3cf3-4a95-8e9a-b18223ef629b": {
+    "definition": {
+      "literal": {
+        "componentName": "Grid",
+        "props": {
+          "gridTemplateColumns": "3fr 1fr",
+          "gridTemplateRows": "1fr 3fr",
+          "gridTemplateAreas": "\"area-a area-b\" \"area-c area-d\""
+        },
+        "items": [
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-a",
+              "name": "Area A",
+              "gridAutoFlow": "row"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-b",
+              "name": "Area B",
+              "gridAutoFlow": "column"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-c",
+              "name": "Area C",
+              "gridAutoFlow": "row"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-d",
+              "name": "Area D",
+              "gridAutoFlow": "row"
+            }
+          }
+        ]
+      }
+    },
+    "displayName": {
+      "literal": "Layout5 Copy"
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "SelectingPeople",
+          "gridArea": "area-d",
+          "dndId": "area-dSelectingPeople0"
+        },
+        {
+          "widgetUri": "time strings",
+          "gridArea": "area-d",
+          "dndId": "Unassigned widgetstime strings4"
+        },
+        {
+          "widgetUri": "Task Distribution",
+          "gridArea": "area-c",
+          "dndId": "area-cTask Distribution1"
+        },
+        {
+          "widgetUri": "Gantt Values",
+          "gridArea": "area-b",
+          "dndId": "area-bGantt Values2"
+        },
+        {
+          "widgetUri": "GanttControl",
+          "gridArea": "area-a",
+          "dndId": "area-aGanttControl3"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "custom_85f4b6f6-3cf3-4a95-8e9a-b18223ef629b"
+    },
+    "maxcolumns": {
+      "literal": 12
+    },
+    "onload": {
+      "literal": {
+        "type": "procedure",
+        "value": "none"
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "layoutInfo": {
+            "customPosition": "",
+            "height": "1",
+            "width": "9"
+          },
+          "uri": "GanttControl"
+        },
+        {
+          "layoutInfo": {
+            "customPosition": "",
+            "height": "2",
+            "width": "9"
+          },
+          "uri": "Task Distribution"
+        },
+        {
+          "layoutInfo": {
+            "customPosition": "",
+            "height": "1",
+            "width": "2"
+          },
+          "uri": "Gantt Values"
+        },
+        {
+          "layoutInfo": {
+            "height": "2",
+            "width": "2"
+          },
+          "uri": "SelectingPeople"
+        },
+        {
+          "uri": "time strings",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "widgets/Gantt Values": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "ep_SelectedPerson",
+          "ep_TaskTypeSelected",
+          "ep_SelectedTask"
+        ]
+      }
+    },
+    "name": {
+      "literal": "Gantt Values"
+    }
+  },
+  "widgets/GanttControl": {
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_TimebarTimeStart",
+          "p_TimebarDuration"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "aggregated": [],
+        "jobs": [
+          "i_tb_res",
+          "<IDENTIFIER-SET>",
+          "i_tb_job"
+        ],
+        "resources": [
+          "i_tb_job",
+          "I_tb_res"
+        ]
+      }
+    },
+    "name": {
+      "literal": "GanttControl"
+    },
+    "store.focus.in": {
+      "literal": {
+        "i_tb_job": "ep_tb_selectedJob",
+        "i_tb_res": "ep_tb_selectedResource"
+      }
+    },
+    "time.reference": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportStart"
+        ]
+      }
+    },
+    "time.resolution": {
+      "literal": 1
+    },
+    "time.timeline": {
+      "literal": 1
+    },
+    "time.viewport.end": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportEnd"
+        ]
+      }
+    },
+    "time.viewport.start": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportStart"
+        ]
+      }
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Time Line Review"
+    }
+  },
+  "widgets/SelectingPeople": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p01_SelectSomePeople"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ],
+        "colHeader": [],
+        "rowHeader": [
+          "i_p"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "colKey": {
+            "<IDENTIFIER-SET>": "p01_SelectSomePeople"
+          },
+          "type": "colHeader",
+          "width": 19.77351590909091
+        }
+      ]
+    },
+    "name": {
+      "literal": "SelectingPeople"
+    }
+  },
+  "widgets/Task Distribution": {
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_TaskStart",
+          "p_TaskDuration"
+        ]
+      }
+    },
+    "contents.filters.in": {
+      "literal": [
+        {
+          "cubeId": "selectsomeppl.contents",
+          "cubeViewId": "contents"
+        }
+      ]
+    },
+    "contents.partition": {
+      "literal": {
+        "aggregated": [],
+        "jobs": [
+          "i_tt",
+          "i_t",
+          "i_t",
+          "i_tt",
+          "<IDENTIFIER-SET>"
+        ],
+        "resources": [
+          "i_p",
+          "i_p"
+        ]
+      }
+    },
+    "name": {
+      "literal": "Task Distribution"
+    },
+    "store.focus.in": {
+      "literal": {
+        "i_p": "ep_SelectedPerson",
+        "i_t": "ep_SelectedTask",
+        "i_tt": "ep_TaskTypeSelected"
+      }
+    },
+    "time.reference": {
+      "aimms": {
+        "contents": [
+          "sp_TimebarViewportStart"
+        ]
+      }
+    },
+    "time.resolution": {
+      "literal": 1
+    },
+    "time.timeline": {
+      "literal": 1
+    },
+    "time.viewport.end": {
+      "aimms": {
+        "contents": [
+          "sp_SelectedViewPortEnd"
+        ]
+      }
+    },
+    "time.viewport.start": {
+      "aimms": {
+        "contents": [
+          "sp_SelectedViewPortStart"
+        ]
+      }
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Task Distribution (Within Time Line Review)"
+    }
+  },
+  "widgets/time strings": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_SelectedViewPortStart",
+          "sp_SelectedViewPortEnd",
+          "sp_TimebarViewportStart",
+          "sp_TimebarViewportEnd",
+          "webui::DisplayTimeZone",
+          "webui::WebApplicationTimeZone"
+        ]
+      }
+    },
+    "name": {
+      "literal": "time strings"
+    }
+  }
+}

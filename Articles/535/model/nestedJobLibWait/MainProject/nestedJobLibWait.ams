@@ -1,0 +1,114 @@
+## ams_version=1.0
+
+Model Main_nestedJobLibWait {
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: {
+				minute->s : #-># * 60,
+				century->s : #-># * 3153600000,
+				day->s : #-># * 86400,
+				hour->s : #-># * 3600,
+				month->s : #-># * 2628000,
+				second->s : #-># ,
+				tick->s : #-># / 100,
+				week->s : #-># * 604800,
+				year->s : #-># * 31536000
+			}
+			Comment: "Expresses the value for the duration of periods.";
+		}
+	}
+	Section Developer_Controls;
+	Section Application_initialization_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+	Section App_wide_declarations {
+		Set s_cities {
+			Index: i_city;
+			Definition: s_origins + s_destinations;
+		}
+		Set s_origins {
+			SubsetOf: s_cities;
+			Index: i_from;
+			Definition: data { o1, o2 };
+		}
+		Set s_destinations {
+			SubsetOf: s_cities;
+			Index: i_to;
+			Definition: data { d1, d2 };
+		}
+	}
+	Section Tracing {
+		Parameter bp_tracing {
+			InitialData: 1;
+		}
+		Procedure pr_trace {
+			Arguments: (sp_msg);
+			Body: {
+				if bp_tracing then
+					if pro::GetPROEndPoint() then
+						pro::management::LocalLogInfo(sp_msg);
+					endif ;
+				endif ;
+			}
+			StringParameter sp_msg {
+				Property: Input;
+			}
+		}
+	}
+	Section app_flow {
+		Procedure pr_prepGlobalJobData {
+			Body: {
+				wsj::p_supply(i_from) := data { o1 : 5,  o2 : 8 };
+				wsj::p_demand(i_to) := data { d1 : 6,  d2 : 7 };
+			}
+			Comment: "prepare data for global job";
+		}
+		Procedure MainExecution {
+			Body: {
+				pr_prepGlobalJobData();
+				
+				pro::ManagedSessionInputCaseIdentifierSet := 
+					scj::solver_control_job_input_output_declarations + 
+					scj::solver_control_job_input_declarations +
+					wsj::static_inputs_sub_job ;
+				
+				scj::pr_globSol();
+			}
+			Comment: "This procedure runs in the client session.";
+		}
+	}
+}
