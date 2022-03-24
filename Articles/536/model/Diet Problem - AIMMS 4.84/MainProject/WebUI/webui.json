@@ -259,27 +259,37 @@
         {
           "widgetUri": "ulAXLL",
           "gridArea": "area-c",
-          "dndId": "Unassigned widgetsulAXLL8"
+          "dndId": "area-culAXLL4"
+        },
+        {
+          "widgetUri": "dlDEX",
+          "gridArea": "area-c",
+          "dndId": "area-cdlDEX5"
+        },
+        {
+          "widgetUri": "ulDEX",
+          "gridArea": "area-c",
+          "dndId": "Unassigned widgetsulDEX10"
         },
         {
           "widgetUri": "TextINput",
           "gridArea": "area-a",
-          "dndId": "area-aTextINput4"
+          "dndId": "area-aTextINput6"
         },
         {
           "widgetUri": "inpTab",
           "gridArea": "area-d",
-          "dndId": "area-dinpTab5"
+          "dndId": "area-dinpTab7"
         },
         {
           "widgetUri": "Input Min/max",
           "gridArea": "area-b",
-          "dndId": "area-bInput Min/max6"
+          "dndId": "area-bInput Min/max8"
         },
         {
           "widgetUri": "Input",
           "gridArea": "Unassigned widgets",
-          "dndId": "Unassigned widgetsInput7"
+          "dndId": "Unassigned widgetsInput9"
         }
       ]
     },
@@ -337,6 +347,14 @@
         },
         {
           "uri": "ulAXLL",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "dlDEX",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "ulDEX",
           "layoutInfo": {}
         }
       ]
@@ -513,7 +531,7 @@
     "action": {
       "literal": {
         "type": "procedure",
-        "value": "pr_downloadUsingAXLL"
+        "value": "pr_downloadAXLL"
       }
     },
     "aimms.widget.type": {
@@ -524,6 +542,23 @@
     },
     "title": {
       "literal": "Download using AXLL"
+    }
+  },
+  "widgets/dlDEX": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_downloadDex"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "name": {
+      "literal": "dlDEX"
+    },
+    "title": {
+      "literal": "Download using DEX"
     }
   },
   "widgets/inpTab": {
@@ -872,6 +907,23 @@
     },
     "title": {
       "literal": "Upload using AXLL"
+    }
+  },
+  "widgets/ulDEX": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_uploadDex"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "upload"
+    },
+    "name": {
+      "literal": "ulDEX"
+    },
+    "title": {
+      "literal": "Upload using DEX"
     }
   },
   "widgets/Units in menu": {

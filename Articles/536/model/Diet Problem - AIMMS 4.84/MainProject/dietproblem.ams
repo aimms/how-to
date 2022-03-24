@@ -369,7 +369,20 @@ Model Main_DietProblem {
 			}
 		}
 		Section AIMMSXLLibrary_based_reading_and_writing_data {
-			Procedure pr_downloadUsingAXLL {
+			Procedure pr_ensureEmptySheet {
+				Arguments: (sp_sheet);
+				Body: {
+					if axll::IsExistingSheet(sp_sheet) then
+						axll::DeleteSheet(sp_sheet);
+					endif ;
+					axll::CreateSheet(sp_sheet);
+					axll::SelectSheet(sp_sheet);
+				}
+				StringParameter sp_sheet {
+					Property: Input;
+				}
+			}
+			Procedure pr_downloadAXLL {
 				Arguments: (FileLocation,statusCode,statusDescription);
 				Body: {
 					block
@@ -410,19 +423,14 @@ Model Main_DietProblem {
 					StringParameter sp_fileLocation;
 				}
 			}
-			Procedure pr_ensureEmptySheet {
-				Arguments: (sp_sheet);
-				StringParameter sp_sheet {
-					Property: Input;
-				}
-			}
 			Procedure pr_workWriteAXLL {
 				Arguments: (sp_filename);
 				Body: {
 					! Open workbook sp_filename, move to sheet foodnutrient
-					axll::CreateNewWorkBook(sp_filename);
+					axll::CreateNewWorkBook(sp_filename,"foodnutrient");
 					
-					pr_ensureEmptySheet("foodnutrient");
+					!pr_ensureEmptySheet();
+					
 					axll::columnName(card(s_nutrients)+1, sp_endCol );
 					axll::WriteTable(
 						IdentifierReference     :  p_nutrientValuePerUnit, 
@@ -439,6 +447,83 @@ Model Main_DietProblem {
 						ScalarReference :  sp_singleValue, 
 						Cell            :  "A1");
 					
+					pr_ensureEmptySheet("food");
+					
+					sp_singleValue := "food" ;
+					axll::WriteSingleValue(
+						ScalarReference :  sp_singleValue, 
+						Cell            :  "A1");
+					axll::WriteSet(
+						SetReference       :  s_foodTypes, 
+						SetRange           :  formatString("A2:A%i", card(s_foodTypes)+1 ), 
+						AllowRangeOverflow :  0);
+					
+					sp_singleValue := "maxQnt" ;
+					axll::WriteSingleValue(
+						ScalarReference :  sp_singleValue, 
+						Cell            :  "B1");
+					axll::FillList(
+						IdentifierReference  :  p_maximumNumberOfServings, 
+						RowHeaderRange       :  formatString("A2:A%i", card(s_foodTypes)+1 ), 
+						DataRange            :  formatString("B2:B%i", card(s_foodTypes)+1 ), 
+						WriteZeros           :  1, 
+						clearExistingContent :  1);
+					
+					sp_singleValue := "Price" ;
+					axll::WriteSingleValue(
+						ScalarReference :  sp_singleValue, 
+						Cell            :  "C1");
+					axll::FillList(
+						IdentifierReference  :  p_pricePerUnit, 
+						RowHeaderRange       :  formatString("A2:A%i", card(s_foodTypes)+1 ), 
+						DataRange            :  formatString("C2:C%i", card(s_foodTypes)+1 ), 
+						WriteZeros           :  1, 
+						clearExistingContent :  1);
+					
+					sp_singleValue := "Weight" ;
+					axll::WriteSingleValue(
+						ScalarReference :  sp_singleValue, 
+						Cell            :  "D1");
+					axll::FillList(
+						IdentifierReference  :  p_weightOfFoodType, 
+						RowHeaderRange       :  formatString("A2:A%i", card(s_foodTypes)+1 ), 
+						DataRange            :  formatString("D2:D%i", card(s_foodTypes)+1 ), 
+						WriteZeros           :  1, 
+						clearExistingContent :  1);
+					
+					pr_ensureEmptySheet("nutrient");
+					
+					sp_singleValue := "nutrient" ;
+					axll::WriteSingleValue(
+						ScalarReference :  sp_singleValue, 
+						Cell            :  "A1");
+					axll::WriteSet(
+						SetReference       :  s_nutrients, 
+						SetRange           :  formatString("A2:A%i", card(s_nutrients)+1 ), 
+						AllowRangeOverflow :  0);
+					
+					sp_singleValue := "atMost" ;
+					axll::WriteSingleValue(
+						ScalarReference :  sp_singleValue, 
+						Cell            :  "B1");
+					axll::FillList(
+						IdentifierReference  :  p_maximumAllowanceOfNutrient, 
+						RowHeaderRange       :  formatString("A2:A%i", card(s_nutrients)+1 ), 
+						DataRange            :  formatString("B2:B%i", card(s_nutrients)+1 ), 
+						WriteZeros           :  1, 
+						clearExistingContent :  1);
+					
+					sp_singleValue := "atLeast" ;
+					axll::WriteSingleValue(
+						ScalarReference :  sp_singleValue, 
+						Cell            :  "C1");
+					axll::FillList(
+						IdentifierReference  :  p_minimumRequirementOfNutrient, 
+						RowHeaderRange       :  formatString("A2:A%i", card(s_nutrients)+1 ), 
+						DataRange            :  formatString("C2:C%i", card(s_nutrients)+1 ), 
+						WriteZeros           :  1, 
+						clearExistingContent :  1);
+					
 					axll::CloseWorkBook( sp_filename );
 				}
 				Set s_selectedData {
@@ -453,11 +538,68 @@ Model Main_DietProblem {
 			Procedure pr_workReadAXLL {
 				Arguments: (sp_filename);
 				Body: {
-					read from file sp_filename ;
+					axll::OpenWorkBook(sp_filename);
+					
+					axll::SelectSheet("foodnutrient");
+					p_lastColNumber := axll::LastUsedColumnNumber() ;
+					p_lastRowNumber := axll::LastUsedRowNumber() ;
+					axll::ColumnName(
+						colNumber :  p_lastColNumber, 
+						colName   :  sp_lastColNumber);
+					axll::ReadTable(
+						IdentifierReference    :  p_nutrientValuePerUnit, 
+						RowHeaderRange         :  formatString("A2:A%i",p_lastRowNumber), 
+						ColumnHeaderRange      :  formatString("B1:%s1",sp_lastColNumber), 
+						DataRange              :  formatString("B2:%s%i",sp_lastColNumber, p_lastRowNumber), 
+						ModeForUnknownElements :  1, 
+						MergeWithExistingData  :  0);
+					
+					axll::SelectSheet("food");
+					p_lastRowNumber := axll::LastUsedRowNumber() ;
+					axll::ReadList(
+						IdentifierReference    :  p_maximumNumberOfServings, 
+						RowHeaderRange         :  formatString("A2:A%i",p_lastRowNumber), 
+						DataRange              :  formatString("B2:B%i",p_lastRowNumber), 
+						ModeForUnknownElements :  1, 
+						MergeWithExistingData  :  0);
+					axll::ReadList(
+						IdentifierReference    :  p_pricePerUnit, 
+						RowHeaderRange         :  formatString("A2:A%i",p_lastRowNumber), 
+						DataRange              :  formatString("C2:C%i",p_lastRowNumber), 
+						ModeForUnknownElements :  1, 
+						MergeWithExistingData  :  0);
+					axll::ReadList(
+						IdentifierReference    :  p_weightOfFoodType, 
+						RowHeaderRange         :  formatString("A2:A%i",p_lastRowNumber), 
+						DataRange              :  formatString("D2:D%i",p_lastRowNumber), 
+						ModeForUnknownElements :  1, 
+						MergeWithExistingData  :  0);
+					
+					axll::SelectSheet("nutrient");
+					p_lastRowNumber := axll::LastUsedRowNumber() ;
+					axll::ReadList(
+						IdentifierReference    :  p_maximumAllowanceOfNutrient, 
+						RowHeaderRange         :  formatString("A2:A%i",p_lastRowNumber), 
+						DataRange              :  formatString("B2:B%i",p_lastRowNumber), 
+						ModeForUnknownElements :  1, 
+						MergeWithExistingData  :  0);
+					axll::ReadList(
+						IdentifierReference    :  p_minimumRequirementOfNutrient, 
+						RowHeaderRange         :  formatString("A2:A%i",p_lastRowNumber), 
+						DataRange              :  formatString("C2:C%i",p_lastRowNumber), 
+						ModeForUnknownElements :  1, 
+						MergeWithExistingData  :  0);
+					
+					
+					
+					axll::CloseWorkBook(sp_filename);
 				}
 				StringParameter sp_filename {
 					Property: Input;
 				}
+				StringParameter sp_lastColNumber;
+				Parameter p_lastColNumber;
+				Parameter p_lastRowNumber;
 			}
 			Procedure pr_uploadAXLL {
 				Arguments: (FileLocation,statusCode,statusDescription);
@@ -477,6 +619,125 @@ Model Main_DietProblem {
 					
 						statusCode := webui::ReturnStatusCode('Error');
 						statusDescription := formatString("Failed to upload and read using AIMMSXLLibrary \"%s\": %s", 
+							FileLocation, errh::Message( ep_err ) );
+						errh::MarkAsHandled( ep_err );
+					
+					endblock ;
+				}
+				DeclarationSection Argument_declarations {
+					StringParameter FileLocation {
+						Property: Input;
+					}
+					Parameter statusCode {
+						Property: Output;
+					}
+					StringParameter statusDescription {
+						Property: Output;
+					}
+				}
+				DeclarationSection Local_declarations {
+					StringParameter sp_fileLocation;
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
+				}
+			}
+		}
+		Section Data_Exchange_Library_based_reading_writing_data {
+			Procedure pr_downloadDex {
+				Arguments: (FileLocation,statusCode,statusDescription);
+				Body: {
+					block
+						FileLocation := "inputData.xlsx" ;
+						sp_fileLocation := webui::GetIOFilePath(FileLocation);
+					
+						pr_workWriteDex(sp_fileLocation);
+					
+						statusCode := webui::ReturnStatusCode('CREATED');
+						statusDescription := 
+							formatString("Succesfully downloaded Excel workbook using DEX \"%s\"", 
+								FileLocation );
+					
+					onerror ep_err do
+					
+						statusCode := webui::ReturnStatusCode('Error');
+						statusDescription := formatString("Failed to download Excel workbook using dex \"%s\": %s", 
+							FileLocation, errh::Message( ep_err ) );
+						errh::MarkAsHandled( ep_err );
+					
+					endblock ;
+				}
+				DeclarationSection Argument_declarations {
+					StringParameter FileLocation {
+						Property: Output;
+					}
+					Parameter statusCode {
+						Property: Output;
+					}
+					StringParameter statusDescription {
+						Property: Output;
+					}
+				}
+				DeclarationSection Local_declarations {
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
+					StringParameter sp_fileLocation;
+				}
+			}
+			Procedure pr_workWriteDex {
+				Arguments: (sp_filename);
+				Body: {
+					dex::AddMapping(
+						mappingName :  "dietDataXLS", 
+						mappingFile :  "mappings/dietDataXLS.xml");
+					dex::WriteToFile(
+						dataFile    :  sp_filename, 
+						mappingName :  "dietDataXLS", 
+						pretty      :  1);
+				}
+				Set s_selectedData {
+					SubsetOf: AllIdentifiers;
+				}
+				StringParameter sp_filename {
+					Property: Input;
+				}
+			}
+			Procedure pr_workReadDex {
+				Arguments: (sp_filename);
+				Body: {
+					dex::AddMapping(
+						mappingName :  "dietDataXLS", 
+						mappingFile :  "mappings/dietDataXLS.xml");
+					dex::ReadFromFile(
+						dataFile         :  sp_filename, 
+						mappingName      :  "dietDataXLS", 
+						emptyIdentifiers :  0, 
+						emptySets        :  0, 
+						resetCounters    :  0);
+				}
+				StringParameter sp_filename {
+					Property: Input;
+				}
+			}
+			Procedure pr_uploadDex {
+				Arguments: (FileLocation,statusCode,statusDescription);
+				Body: {
+					block
+						sp_fileLocation := webui::GetIOFilePath(FileLocation);
+					
+						pr_workReadDex( sp_fileLocation );
+					
+						FileDelete( sp_fileLocation );
+						StatusCode := webui::ReturnStatusCode('OK');
+						StatusDescription := 
+						 	formatString("Workbook \"%s\" was uploaded and read successfully using DEX",
+						 		sp_fileLocation);
+					
+					onerror ep_err do
+					
+						statusCode := webui::ReturnStatusCode('Error');
+						statusDescription := formatString("Failed to upload and read workbook using DEX \"%s\": %s", 
 							FileLocation, errh::Message( ep_err ) );
 						errh::MarkAsHandled( ep_err );
 					
