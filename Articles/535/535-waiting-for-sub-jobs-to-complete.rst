@@ -10,6 +10,14 @@ It may not be convenient, or appropriate, to let the client session organize the
 This article presents and discusses an example, whereby one control job manages several sub jobs. 
 In addition, results are presented in the client session when all jobs are finished.
 
+This article focuses on illustrating:
+
+*   Submitting sub jobs, whereby delegationOverride is used,
+
+*   waiting on the completion of sub jobs using the procedure ``pro::messaging::WaitForMessages``, and
+
+*   customizing completion callback procedures.
+
 The running example
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
