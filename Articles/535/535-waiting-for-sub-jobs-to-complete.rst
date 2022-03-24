@@ -12,7 +12,7 @@ In addition, results are presented in the client session when all jobs are finis
 
 This article focuses on illustrating:
 
-*   Submitting sub jobs, whereby delegationOverride is used,
+*   Submitting sub jobs, whereby ``delegationOverride`` is used,
 
 *   waiting on the completion of sub jobs using the procedure ``pro::messaging::WaitForMessages``, and
 
