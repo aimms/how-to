@@ -6,98 +6,83 @@ Model Main_DietProblem {
 		Diet problem, Blending problem, Unit-valued Parameter, Unit Parameter, Quantity, Unit conversion."
 	}
 	Section Model_Section {
-		Set FoodTypes {
-			Index: f;
+		Set s_foodTypes {
+			Index: i_f;
 			Definition: {
 				data 
 				    { 'Big Mac'             , 'Quarter Pounder'     , 'French Fries'        , Salad                 , 'Lowfat Milk'         ,
 				      'Coca Cola'           , 'Big Mac Menu'        , 'Quarter Pounder Menu', 'Vegetable Burger'    }
 			}
 		}
-		Parameter BP_selectedproducts {
-			IndexDomain: i;
-			Range: binary;
+		Set s_nutrients {
+			Index: i_n;
 		}
-		Variable Selectedproducts {
-			IndexDomain: i;
-			Range: binary;
+		Parameter p_nutrientValuePerUnit {
+			IndexDomain: (i_f,i_n);
+			Unit: up_unitNutrients(i_n);
 		}
-		Set Identifierss {
-			Index: i;
-			Definition: data { 'Nutritient Value', 'Servings', 'Weight (g)', 'PricePetUnit' };
+		Parameter p_maximumNumberOfServings {
+			IndexDomain: (i_f);
 		}
-		Set Nutrients {
-			Index: n;
-		}
-		Parameter NutrientValuePerUnit {
-			IndexDomain: (f,n);
-			Unit: UnitNutrients(n);
-		}
-		Parameter MaximumNumberOfServings {
-			IndexDomain: (f);
-		}
-		Parameter MaximumAllowanceOfNutrient {
-			IndexDomain: (n);
+		Parameter p_maximumAllowanceOfNutrient {
+			IndexDomain: (i_n);
 			Text: "Maximum Allowed";
-			Unit: UnitNutrients(n);
+			Unit: up_unitNutrients(i_n);
 		}
-		Parameter MinimumRequirementOfNutrient {
-			IndexDomain: (n);
+		Parameter p_minimumRequirementOfNutrient {
+			IndexDomain: (i_n);
 			Text: "Minimum Requirement";
-			Unit: UnitNutrients(n);
+			Unit: up_unitNutrients(i_n);
 		}
-		Parameter PricePerUnit {
-			IndexDomain: (f);
+		Parameter p_pricePerUnit {
+			IndexDomain: (i_f);
 			Unit: Hfl;
 		}
-		Parameter WeightOfFoodType {
-			IndexDomain: (f);
+		Parameter p_weightOfFoodType {
+			IndexDomain: (i_f);
 			Unit: g;
 		}
-		Variable TotalWeightOptimalDiet {
+		Variable v_totalWeightOptimalDiet {
 			Unit: g;
-			Definition: Sum[ f, WeightOfFoodType(f) * NumberOfUnitsInMenu(f)];
+			Definition: Sum[ i_f, p_weightOfFoodType(i_f) * v_numberOfUnitsInMenu(i_f)];
 		}
-		Variable TotalValueOfNutrientsInOptimalDiet {
-			IndexDomain: (n);
-			Unit: UnitNutrients(n);
-			Definition: Sum[ f, NutrientValuePerUnit(f,n) * NumberOfUnitsInMenu(f)];
+		Variable v_totalValueOfNutrientsInOptimalDiet {
+			IndexDomain: (i_n);
+			Unit: up_unitNutrients(i_n);
+			Definition: Sum[ i_f, p_nutrientValuePerUnit(i_f,i_n) * v_numberOfUnitsInMenu(i_f)];
 		}
-		Variable NumberOfUnitsInMenu {
-			IndexDomain: (f);
+		Variable v_numberOfUnitsInMenu {
+			IndexDomain: (i_f);
 			Range: {
-				{0..MaximumNumberOfServings(f)}
+				{0..p_maximumNumberOfServings(i_f)}
 			}
 		}
-		Variable TotalCost {
+		Variable v_totalCost {
 			Unit: Hfl;
 			Definition: {
-				Sum[ f, PricePerUnit(f) * NumberOfUnitsInMenu(f)];
+				Sum[ i_f, p_pricePerUnit(i_f) * v_numberOfUnitsInMenu(i_f)];
 			}
 		}
-		Constraint AllowanceConstraint {
-			IndexDomain: n | MaximumAllowanceOfNutrient(n);
-			Unit: UnitNutrients(n);
+		Constraint c_allowanceConstraint {
+			IndexDomain: i_n | p_maximumAllowanceOfNutrient(i_n);
+			Unit: up_unitNutrients(i_n);
 			Definition: {
-				Sum[ f, NutrientValuePerUnit(f,n) * NumberOfUnitsInMenu(f)] <= MaximumAllowanceOfNutrient(n);
+				Sum[ i_f, p_nutrientValuePerUnit(i_f,i_n) * v_numberOfUnitsInMenu(i_f)] <= p_maximumAllowanceOfNutrient(i_n);
 			}
 		}
-		Constraint RequirementConstraint {
-			IndexDomain: n | MinimumRequirementOfNutrient(n);
-			Unit: UnitNutrients(n);
+		Constraint c_requirementConstraint {
+			IndexDomain: i_n | p_minimumRequirementOfNutrient(i_n);
+			Unit: up_unitNutrients(i_n);
 			Definition: {
-				Sum[ f, NutrientValuePerUnit(f,n) * NumberOfUnitsInMenu(f)] >= MinimumRequirementOfNutrient(n);
+				Sum[ i_f, p_nutrientValuePerUnit(i_f,i_n) * v_numberOfUnitsInMenu(i_f)] >= p_minimumRequirementOfNutrient(i_n);
 			}
 		}
-		MathematicalProgram DietProblem {
-			Objective: TotalCost;
+		MathematicalProgram mp_dietProblem {
+			Objective: v_totalCost;
 			Direction: minimize;
 			Constraints: AllConstraints;
 			Variables: AllVariables;
 			Type: MIP;
-		}
-		ElementParameter ACase {
-			Range: AllCases;
 		}
 	}
 	Section Quantities_and_Units_Section {
@@ -125,11 +110,11 @@ Model Main_DietProblem {
 					Hfl -> Euro : # -> # * 0.4368932039
 				}
 			}
-			UnitParameter UnitNutrients {
-				IndexDomain: (n);
+			UnitParameter up_unitNutrients {
+				IndexDomain: (i_n);
 			}
 			StringParameter DefaultUnits {
-				IndexDomain: n;
+				IndexDomain: i_n;
 			}
 			Quantity SI_Time_Duration {
 				BaseUnit: s;
@@ -145,12 +130,12 @@ Model Main_DietProblem {
 		}
 	}
 	Section GUI_Section {
-		Set PossibleUnits {
+		Set s_possibleUnits {
 			Definition: data { g, kg, oz, j, kj, kcal };
 		}
-		Set PossibleUnitsByNutrients {
-			IndexDomain: (n);
-			SubsetOf: PossibleUnits;
+		Set s_possibleUnitsByNutrients {
+			IndexDomain: (i_n);
+			SubsetOf: s_possibleUnits;
 			Definition: {
 				data
 				    { Calories      : { j   , kj  , kcal } ,
@@ -160,11 +145,11 @@ Model Main_DietProblem {
 			}
 		}
 		Assertion CheckUnit {
-			IndexDomain: n;
-			Definition: StringToElement(PossibleUnits,UnitNutrients(n),0) in PossibleUnitsByNutrients(n) OR not UnitNutrients(n);
+			IndexDomain: i_n;
+			Definition: StringToElement(s_possibleUnits,up_unitNutrients(i_n),0) in s_possibleUnitsByNutrients(i_n) OR not up_unitNutrients(i_n);
 			Action: {
-				DialogMessage(FormatString("This unit is not allowed for this value (%e)", n),"Warning");
-				empty UnitNutrients(n)
+				DialogMessage(FormatString("This unit is not allowed for this value (%e)", i_n),"Warning");
+				empty up_unitNutrients(i_n)
 			}
 		}
 	}
@@ -230,13 +215,13 @@ Model Main_DietProblem {
 				endif ;
 			endif ;
 			
-			Solve DietProblem;
+			Solve mp_dietProblem;
 		}
 	}
 	Section Application_initialization_and_termination {
 		Procedure MainInitialization {
 			Body: {
-				Empty NumberOfUnitsInMenu, TotalCost, TotalValueOfNutrientsInOptimalDiet, TotalWeightOptimalDiet;
+				Empty v_numberOfUnitsInMenu, v_totalCost, v_totalValueOfNutrientsInOptimalDiet, v_totalWeightOptimalDiet;
 			}
 		}
 		Procedure PostMainInitialization;

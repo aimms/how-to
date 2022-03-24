@@ -446,16 +446,16 @@
     }
   },
   "widgets/Input Min/max": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
     "contents": {
       "aimms": {
         "contents": [
-          "MinimumRequirementOfNutrient",
-          "MaximumAllowanceOfNutrient"
+          "p_minimumRequirementOfNutrient",
+          "p_maximumAllowanceOfNutrient"
         ]
       }
-    },
-    "title": {
-      "literal": "Constraints"
     },
     "contents.numdecimals": {
       "literal": 0
@@ -466,13 +466,10 @@
           "<IDENTIFIER-SET>"
         ],
         "colHeader": [
-          "n"
+          "i_n"
         ],
         "aggregated": []
       }
-    },
-    "aimms.widget.type": {
-      "literal": "table"
     },
     "custom.column.widths": {
       "literal": [
@@ -498,16 +495,16 @@
           "width": 16.799999999999998
         },
         {
-          "type": "rowHeader",
-          "colKey": "<IDENTIFIER-SET>",
-          "width": 27.6
-        },
-        {
           "type": "colHeader",
           "colKey": {
             "n": "Fat"
           },
           "width": 7.199999999999999
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "<IDENTIFIER-SET>",
+          "width": 19.07
         }
       ]
     },
@@ -516,6 +513,9 @@
     },
     "name": {
       "literal": "Input Min/max"
+    },
+    "title": {
+      "literal": "Constraints"
     }
   },
   "widgets/Output": {
@@ -533,11 +533,11 @@
     "contents.partition": {
       "literal": {
         "rowHeader": [
-          "f"
+          "i_f"
         ],
         "colHeader": [
           "<IDENTIFIER-SET>",
-          "n"
+          "i_n"
         ],
         "aggregated": []
       }
@@ -612,10 +612,10 @@
     "contents": {
       "aimms": {
         "contents": [
-          "NutrientValuePerUnit",
-          "PricePerUnit",
-          "MaximumNumberOfServings",
-          "WeightOfFoodType"
+          "p_nutrientValuePerUnit",
+          "p_pricePerUnit",
+          "p_maximumNumberOfServings",
+          "p_weightOfFoodType"
         ]
       }
     },
@@ -693,7 +693,7 @@
     "contents": {
       "aimms": {
         "contents": [
-          "TotalCost"
+          "v_totalCost"
         ]
       }
     },
@@ -719,7 +719,7 @@
           "<IDENTIFIER-SET>"
         ],
         "colHeader": [
-          "n"
+          "i_n"
         ],
         "aggregated": []
       }
@@ -752,7 +752,7 @@
     "contents": {
       "aimms": {
         "contents": [
-          "TotalValueOfNutrientsInOptimalDiet"
+          "v_totalValueOfNutrientsInOptimalDiet"
         ]
       }
     },
@@ -784,7 +784,7 @@
     "contents": {
       "aimms": {
         "contents": [
-          "TotalWeightOptimalDiet"
+          "v_totalWeightOptimalDiet"
         ]
       }
     },
@@ -834,14 +834,14 @@
     "contents": {
       "aimms": {
         "contents": [
-          "NumberOfUnitsInMenu"
+          "v_numberOfUnitsInMenu"
         ]
       }
     },
     "contents.partition": {
       "literal": {
         "rowHeader": [
-          "f"
+          "i_f"
         ],
         "colHeader": [
           "<IDENTIFIER-SET>"
