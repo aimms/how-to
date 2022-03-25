@@ -1,8 +1,33 @@
 Exchanging data for a flexible set of properties
 =================================================
 
-On the one hand, optimization applications are made generic by formulating them over a set of ingredients, or a set of properties.
-On the other hand, the input is orderly presented in columns, one column for each ingredient or property.
+When creating a diet, care is taken to adhere to limits on selected ingredients.  
+The actual selection of ingredients depends on the person.
+For instance, some people need restrictions on salt and some people need restrictions on refined sugar. And so on.
+Also, the availability of products, and their fractions of these ingredients, varies over time and location.
+
+Thus the core information used to create a diet depends on a matrix that looks like this:
+
+.. image:: images/ExcelFoodNutrientTable.png
+    :align: center
+
+Whereby the collection of
+
+#.  foods, and
+
+#.  nutrients
+
+Vary.
+
+As derived in `AIMMS The modeling guide, chapter 10 <https://documentation.aimms.com/aimms_modeling.html>`_ this information is used in constraint formulations like:
+
+.. math:: 
+
+    \forall n: lb_n \leq \sum_f fr_{f,n} * srv_f \leq ub_n
+
+where lb is a lowerbound, fr is the fraction (table above), srv is the number of serving, and ub is the upperbound.
+
+The purpose of this article is illustrate the use of `Data Exchange Library <https://documentation.aimms.com/dataexchange/index.html>`_, and in particular the mapping attribute `name-bind-to <https://documentation.aimms.com/dataexchange/mapping.html#the-name-binds-to-attribute>`_, to flexibly and compactly specify the reading of the above type of tables.
 
 This article presents an example of exchanging such data with an AIMMS application.
 The purpose of this article is to illustrate the use of ``name-binds-to`` when reading an ``.xlsx`` or a ``.csv`` file using the Data Exchange library.
