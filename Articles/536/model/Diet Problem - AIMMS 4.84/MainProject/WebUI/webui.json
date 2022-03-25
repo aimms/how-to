@@ -269,27 +269,37 @@
         {
           "widgetUri": "ulDEX",
           "gridArea": "area-c",
-          "dndId": "Unassigned widgetsulDEX10"
+          "dndId": "area-culDEX6"
+        },
+        {
+          "widgetUri": "dlDexCF",
+          "gridArea": "area-c",
+          "dndId": "area-cdlDexCF7"
+        },
+        {
+          "widgetUri": "ulDEXCF",
+          "gridArea": "area-c",
+          "dndId": "Unassigned widgetsulDEXCF12"
         },
         {
           "widgetUri": "TextINput",
           "gridArea": "area-a",
-          "dndId": "area-aTextINput6"
+          "dndId": "area-aTextINput8"
         },
         {
           "widgetUri": "inpTab",
           "gridArea": "area-d",
-          "dndId": "area-dinpTab7"
+          "dndId": "area-dinpTab9"
         },
         {
           "widgetUri": "Input Min/max",
           "gridArea": "area-b",
-          "dndId": "area-bInput Min/max8"
+          "dndId": "area-bInput Min/max10"
         },
         {
           "widgetUri": "Input",
           "gridArea": "Unassigned widgets",
-          "dndId": "Unassigned widgetsInput9"
+          "dndId": "Unassigned widgetsInput11"
         }
       ]
     },
@@ -355,6 +365,14 @@
         },
         {
           "uri": "ulDEX",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "dlDexCF",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "ulDEXCF",
           "layoutInfo": {}
         }
       ]
@@ -559,6 +577,23 @@
     },
     "title": {
       "literal": "Download using DEX"
+    }
+  },
+  "widgets/dlDexCF": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_downloadDexCombFood"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "name": {
+      "literal": "dlDexCF"
+    },
+    "title": {
+      "literal": "Download using DEX combine Food"
     }
   },
   "widgets/inpTab": {
@@ -924,6 +959,23 @@
     },
     "title": {
       "literal": "Upload using DEX"
+    }
+  },
+  "widgets/ulDEXCF": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_uploadDexCombFood"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "upload"
+    },
+    "name": {
+      "literal": "ulDEXCF"
+    },
+    "title": {
+      "literal": "Upload using DEX combine food"
     }
   },
   "widgets/Units in menu": {

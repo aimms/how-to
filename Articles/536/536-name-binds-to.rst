@@ -2,7 +2,7 @@ Exchanging data for a flexible set of properties
 =================================================
 
 When creating a diet, care is taken to adhere to limits on selected ingredients.  
-The actual selection of ingredients depends on the person.
+The actual selection of ingredients that is important to a person depends on the person.
 For instance, some people need restrictions on salt and some people need restrictions on refined sugar. And so on.
 Also, the availability of products, and their fractions of these ingredients, varies over time and location.
 
@@ -23,14 +23,11 @@ As derived in `AIMMS The modeling guide, chapter 10 <https://documentation.aimms
 
 .. math:: 
 
-    \forall n: lb_n \leq \sum_f fr_{f,n} * srv_f \leq ub_n
+    \forall n: lb_n \leq \sum_f fr_{f,n} \times srv_f \leq ub_n
 
 where :math:`lb` is a lower bound, :math:`fr` is the fraction (table above), :math:`srv` is the number of serving, and :math:`ub` is the upper bound.
 
-The purpose of this article is illustrate the use of `Data Exchange Library <https://documentation.aimms.com/dataexchange/index.html>`_, and in particular the mapping attribute `name-bind-to <https://documentation.aimms.com/dataexchange/mapping.html#the-name-binds-to-attribute>`_, to flexibly and compactly specify the reading of the above type of tables.
-
-This article presents an example of exchanging such data with an AIMMS application.
-The purpose of this article is to illustrate the use of ``name-binds-to`` when reading an ``.xlsx`` or a ``.csv`` file using the Data Exchange library.
+The purpose of this article is illustrate the use of `Data Exchange Library <https://documentation.aimms.com/dataexchange/index.html>`_, and in particular the mapping attribute `name-bind-to <https://documentation.aimms.com/dataexchange/mapping.html#the-name-binds-to-attribute>`_, to flexibly and compactly specify exchanging data between EXCEL and AIMMS. 
 
 Running example
 ----------------
@@ -39,25 +36,118 @@ The running example is based on the :doc:`../441/441-diet-problem` example from 
 
 A selection of the declarations:
 
-Sets
-^^^^^^^^^^^^
-
 #.  Nutriets, index: :math:`n`.  In model: ``i_n`` in ``s_nutrients``
 
 #.  Food types, index: :math:`f`.  In model: ``i_f`` in ``s_foodTypes``
 
-Parameters
-^^^^^^^^^^^^
+#.  Fractions: Nutrient value per unit of food, :math:`fr_{f,n}`.  In model: ``p_nutrientValuePerUnit(i_f,i_n)``
 
-#.  Nutrient value per unit of food, :math:`v_{f,n}`.  In model: ``p_nutrientValuePerUnit(i_f,i_n)``
+The corresponding :download:`AIMMS 4.84 project can be downloaded here <model/Diet Problem - AIMMS 4.84.zip>` 
 
+Mapping file version 1
+-----------------------
 
+.. code-block:: xml
+    :linenos:
+    :emphasize-lines: 5,6
 
+    <?xml version="1.0"?>
+    <AimmsExcelMapping>
+        <ExcelSheetMapping name="foodnutrient">
+            <RowMapping>
+                <ColumnMapping name="food" binds-to="i_f" />
+                <ColumnMapping name-binds-to="i_n" name-regex=".*" maps-to="p_nutrientValuePerUnit(i_f,i_n)" />
+            </RowMapping>
+        </ExcelSheetMapping>
+        <ExcelSheetMapping name="food">
+            <RowMapping>
+                <ColumnMapping name="food" binds-to="i_f" />
+                <ColumnMapping name="maxQnt" maps-to="p_maximumNumberOfServings(i_f)" />
+                <ColumnMapping name="Price" maps-to="p_pricePerUnit(i_f)" />
+                <ColumnMapping name="Weight" maps-to="p_weightOfFoodType(i_f)" />
+            </RowMapping>
+        </ExcelSheetMapping>
+        <ExcelSheetMapping name="nutrient">
+            <RowMapping>
+                <ColumnMapping name="nutrient" binds-to="i_n" />
+                <ColumnMapping name="atMost" maps-to="p_maximumAllowanceOfNutrient(i_n)" />
+                <ColumnMapping name="atLeast" maps-to="p_minimumRequirementOfNutrient(i_n)" />
+            </RowMapping>
+        </ExcelSheetMapping>
+    </AimmsExcelMapping>
 
+Remarks:
 
+#.  The sheet ``foodnutrient`` is used for exchanging data with 
 
-See also
-* Modeling guide, Diet example.
-* DEX doc,
-* DEX binds to
-* 
+    Lines 5 and 6, define the data exchange for the parameter ``p_nutrientValuePerUnit(i_f,i_n)`` as follows:
+
+    *   rows, using ``<ColumnMapping name="food" binds-to="i_f" />``.  
+        This is the column type of mapping for `indices in CSV, EXCEL, and Parquet files  <https://documentation.aimms.com/dataexchange/using.html#example-excel-mapping>`_. 
+
+    *   cols, using an XML element consisting of the following portions:
+
+        #.  ``<ColumnMapping name-binds-to="i_n"`` 
+            This indicates that the names of columns, in row 1, are input for the index ``i_n``.
+
+        #.  ``name-regex=".*"`` 
+            This regular expression rule on the column names indicates that the column names can be used as is for the set ``s_nutrients``.  
+            More about `name-regex <https://documentation.aimms.com/dataexchange/mapping.html#the-name-binds-to-attribute>`_ as part of ``name-binds-to``.
+
+        #.  ``maps-to="p_nutrientValuePerUnit(i_f,i_n)" />``
+            As the indices ``i_f`` and ``i_n`` are now bound, the EXCEL content can be assigned to this parameter.
+
+#.  The sheets ``food`` and ``nutrient`` are used for exchanging data with the other parameters, indexed over ``i_f`` and ``i_n`` respectively.
+
+In this section, two sheets were used to present the data regarding the foods.
+One for the nutrients, and one for the other aspects of each food.
+It possible to combine these two sheets into one; provided the data for the nutrients is clearly identified.
+
+Mapping file version 2
+-----------------------
+
+By combining the information from the sheets ``foodnutrient`` and ``food``, we get a sheet that looks as follows:
+
+.. image:: images/ExcelFoodNutrientAspects.png
+    :align: center
+
+Note that the column names for the nutrients are now prefixed with ``nut-``.
+We use this in the mapping as specified below.
+
+.. code-block:: xml
+    :linenos:
+    :emphasize-lines: 11
+
+    <?xml version="1.0"?>
+    <AimmsExcelMapping>
+        <ExcelSheetMapping name="foodnutrient">
+            <RowMapping>
+                <ColumnMapping name="food" binds-to="i_f" />
+                <ColumnMapping name="maxQnt" maps-to="p_maximumNumberOfServings(i_f)" />
+                <ColumnMapping name="Price" maps-to="p_pricePerUnit(i_f)" />
+                <ColumnMapping name="Weight" maps-to="p_weightOfFoodType(i_f)" />
+                <ColumnMapping name-binds-to="i_n" 
+                    name-regex=".*" 
+                    name-regex-prefix="nut-" 
+                    maps-to="p_nutrientValuePerUnit(i_f,i_n)" />
+            </RowMapping>
+        </ExcelSheetMapping>
+        <ExcelSheetMapping name="nutrient">
+            <RowMapping>
+                <ColumnMapping name="nutrient" binds-to="i_n" />
+                <ColumnMapping name="atMost" maps-to="p_maximumAllowanceOfNutrient(i_n)" />
+                <ColumnMapping name="atLeast" maps-to="p_minimumRequirementOfNutrient(i_n)" />
+            </RowMapping>
+        </ExcelSheetMapping>
+    </AimmsExcelMapping>
+
+Remarks:
+
+#.  All that is indexed over ``food`` is now moved in the ``ExcelSheetMapping`` on lines 3-14.
+
+#.  Line 11: New is the prefix "nut-".  This prefix is used in two ways:
+
+    #.  To recognize a column that contains nutrient information.
+
+    #.  To remove the prefix from the column name before adding that name to the set ``s_nutrients``.
+

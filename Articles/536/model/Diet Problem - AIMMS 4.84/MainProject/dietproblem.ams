@@ -762,6 +762,125 @@ Model Main_DietProblem {
 				}
 			}
 		}
+		Section Data_Exchange_Library_based_reading_writing_data_combining_food_data {
+			Procedure pr_downloadDexCombFood {
+				Arguments: (FileLocation,statusCode,statusDescription);
+				Body: {
+					block
+						FileLocation := "inputDataCF.xlsx" ;
+						sp_fileLocation := webui::GetIOFilePath(FileLocation);
+					
+						pr_workWriteDexCombFood(sp_fileLocation);
+					
+						statusCode := webui::ReturnStatusCode('CREATED');
+						statusDescription := 
+							formatString("Succesfully downloaded Excel workbook using DEX \"%s\"", 
+								FileLocation );
+					
+					onerror ep_err do
+					
+						statusCode := webui::ReturnStatusCode('Error');
+						statusDescription := formatString("Failed to download Excel workbook using dex \"%s\": %s", 
+							FileLocation, errh::Message( ep_err ) );
+						errh::MarkAsHandled( ep_err );
+					
+					endblock ;
+				}
+				DeclarationSection Argument_declarations {
+					StringParameter FileLocation {
+						Property: Output;
+					}
+					Parameter statusCode {
+						Property: Output;
+					}
+					StringParameter statusDescription {
+						Property: Output;
+					}
+				}
+				DeclarationSection Local_declarations {
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
+					StringParameter sp_fileLocation;
+				}
+			}
+			Procedure pr_workWriteDexCombFood {
+				Arguments: (sp_filename);
+				Body: {
+					dex::AddMapping(
+						mappingName :  "dietDataXLSCombFood", 
+						mappingFile :  "mappings/dietDataXLSCombFood.xml");
+					dex::WriteToFile(
+						dataFile    :  sp_filename, 
+						mappingName :  "dietDataXLSCombFood", 
+						pretty      :  1);
+				}
+				Set s_selectedData {
+					SubsetOf: AllIdentifiers;
+				}
+				StringParameter sp_filename {
+					Property: Input;
+				}
+			}
+			Procedure pr_workReadDexCombFood {
+				Arguments: (sp_filename);
+				Body: {
+					dex::AddMapping(
+						mappingName :  "dietDataXLSCombFood", 
+						mappingFile :  "mappings/dietDataXLSCombFood.xml");
+					dex::ReadFromFile(
+						dataFile         :  sp_filename, 
+						mappingName      :  "dietDataXLSCombFood", 
+						emptyIdentifiers :  0, 
+						emptySets        :  0, 
+						resetCounters    :  0);
+				}
+				StringParameter sp_filename {
+					Property: Input;
+				}
+			}
+			Procedure pr_uploadDexCombFood {
+				Arguments: (FileLocation,statusCode,statusDescription);
+				Body: {
+					block
+						sp_fileLocation := webui::GetIOFilePath(FileLocation);
+					
+						pr_workReadDexCombFood( sp_fileLocation );
+					
+						FileDelete( sp_fileLocation );
+						StatusCode := webui::ReturnStatusCode('OK');
+						StatusDescription := 
+						 	formatString("Workbook \"%s\" was uploaded and read successfully using DEX",
+						 		sp_fileLocation);
+					
+					onerror ep_err do
+					
+						statusCode := webui::ReturnStatusCode('Error');
+						statusDescription := formatString("Failed to upload and read workbook using DEX \"%s\": %s", 
+							FileLocation, errh::Message( ep_err ) );
+						errh::MarkAsHandled( ep_err );
+					
+					endblock ;
+				}
+				DeclarationSection Argument_declarations {
+					StringParameter FileLocation {
+						Property: Input;
+					}
+					Parameter statusCode {
+						Property: Output;
+					}
+					StringParameter statusDescription {
+						Property: Output;
+					}
+				}
+				DeclarationSection Local_declarations {
+					StringParameter sp_fileLocation;
+					ElementParameter ep_err {
+						Range: errh::PendingErrors;
+					}
+				}
+			}
+		}
 	}
 	Procedure MainExecution {
 		Body: {
