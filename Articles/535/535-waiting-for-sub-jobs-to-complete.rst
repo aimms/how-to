@@ -10,6 +10,14 @@ It may not be convenient, or appropriate, to let the client session organize the
 This article presents and discusses an example, whereby one control job manages several sub jobs. 
 In addition, results are presented in the client session when all jobs are finished.
 
+This article focuses on illustrating:
+
+*   Submitting sub jobs, whereby ``delegationOverride`` is used,
+
+*   waiting on the completion of sub jobs using the procedure ``pro::messaging::WaitForMessages``, and
+
+*   customizing completion callback procedures.
+
 The running example
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -287,6 +295,7 @@ An example is provided in the following:
 
 .. code-block:: aimms 
     :linenos:
+    :emphasize-lines: 5
 
     p_timeout := 60 /* seconds */ ; ! Should be configurable.
     sp_startTime := CurrentToString( "%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')" );
