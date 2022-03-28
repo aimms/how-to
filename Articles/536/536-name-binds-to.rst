@@ -19,13 +19,6 @@ Whereby both the collection of
 
 vary.
 
-As derived in `AIMMS The modeling guide, chapter 10 <https://documentation.aimms.com/aimms_modeling.html>`_ this information is used in constraint formulations like:
-
-.. math:: 
-
-    \forall n: lb_n \leq \sum_f fr_{f,n} \times srv_f \leq ub_n
-
-where :math:`lb` is a lower bound, :math:`fr` is the fraction (table above), :math:`srv` is the number of serving, and :math:`ub` is the upper bound.
 
 The purpose of this article is illustrate the use of `Data Exchange Library <https://documentation.aimms.com/dataexchange/index.html>`_, and in particular the mapping attribute `name-bind-to <https://documentation.aimms.com/dataexchange/mapping.html#the-name-binds-to-attribute>`_, to flexibly and compactly specify exchanging data between EXCEL and AIMMS. 
 
@@ -82,26 +75,33 @@ Remarks:
 
     Lines 5 and 6, define the data exchange for the parameter ``p_nutrientValuePerUnit(i_f,i_n)`` as follows:
 
-    *   rows, using ``<ColumnMapping name="food" binds-to="i_f" />``.  
-        This is the column type of mapping for `indices in CSV, EXCEL, and Parquet files  <https://documentation.aimms.com/dataexchange/using.html#example-excel-mapping>`_. 
+    *   Rows are mapped to the ``s_foodTypes`` set.    
+        The ``<ColumnMapping/>`` element uses the following attributes:
 
-    *   cols, using an XML element consisting of the following portions:
+        #.  ``name="food"``: The row names are taken from the column with name ``food``
 
-        #.  ``<ColumnMapping name-binds-to="i_n"`` 
+        #.  ``binds-to="i_f"``: in the AIMMS model, these row names are mapped to element names in the set ``s_foodTypes`` as this set is the range of the index ``i_f``.
+
+        This mapping element is also used for `CSV and Parquet files <https://documentation.aimms.com/dataexchange/using.html#example-excel-mapping>`_. 
+
+    *   Columns are mapped to the ``s_nutrients`` set. 
+        The ``<ColumnMapping/>`` element uses the following attributes for this purpose:
+
+        #.  ``name-binds-to="i_n"`` 
             This indicates that the names of columns, in row 1, are input for the index ``i_n``.
 
         #.  ``name-regex=".*"`` 
             This regular expression rule on the column names indicates that the column names can be used as is for the set ``s_nutrients``.  
             More about `name-regex <https://documentation.aimms.com/dataexchange/mapping.html#the-name-binds-to-attribute>`_ as part of ``name-binds-to``.
 
-        #.  ``maps-to="p_nutrientValuePerUnit(i_f,i_n)" />``
+        #.  ``maps-to="p_nutrientValuePerUnit(i_f,i_n)"``
             As the indices ``i_f`` and ``i_n`` are now bound, the EXCEL content can be assigned to this parameter.
 
 #.  The sheets ``food`` and ``nutrient`` are used for exchanging data with the other parameters, indexed over ``i_f`` and ``i_n`` respectively.
 
 In this section, two sheets were used to present the data regarding the foods.
 One for the nutrients, and one for the other aspects of each food.
-It possible to combine these two sheets into one; provided the data for the nutrients is clearly identified.
+It is possible to combine these two sheets into one; provided the data for the nutrients is clearly identified.
 
 Mapping file version 2
 -----------------------
