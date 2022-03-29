@@ -1,6 +1,14 @@
 Exchanging data for a flexible set of properties
 =================================================
 
+Sometimes your data source consists of both column- and row-oriented data, showing data matrix-style. 
+For these setups you can still use a mapping file, using certain elements in your tags to guide the data to the correct identifier(s). 
+In this how-to, we’ll use an example to show you how to write the corresponding mapping files.
+
+
+Running example
+----------------
+
 When creating a diet, care is taken to adhere to limits on selected ingredients.  
 The actual selection of ingredients that is important to a person depends on the person.
 For instance, some people need restrictions on salt and some people need restrictions on refined sugar. And so on.
@@ -20,10 +28,8 @@ Whereby both the collection of
 vary.
 
 
-The purpose of this article is illustrate the use of `Data Exchange Library <https://documentation.aimms.com/dataexchange/index.html>`_, and in particular the mapping attribute `name-bind-to <https://documentation.aimms.com/dataexchange/mapping.html#the-name-binds-to-attribute>`_, to flexibly and compactly specify exchanging data between EXCEL and AIMMS. 
+The purpose of this article is to illustrate the use of `Data Exchange Library <https://documentation.aimms.com/dataexchange/index.html>`_, and in particular the mapping attribute `name-bind-to <https://documentation.aimms.com/dataexchange/mapping.html#the-name-binds-to-attribute>`_, to flexibly and compactly specify exchanging data between data source and AIMMS. In this example, the data source is an EXCEL workbook.
 
-Running example
-----------------
 
 The running example is based on the :doc:`../441/441-diet-problem` example from `AIMMS The modeling guide <https://documentation.aimms.com/aimms_modeling.html>`_.
 
@@ -71,9 +77,7 @@ Mapping file version 1
 
 Remarks:
 
-#.  The sheet ``foodnutrient`` is used for exchanging data with 
-
-    Lines 5 and 6, define the data exchange for the parameter ``p_nutrientValuePerUnit(i_f,i_n)`` as follows:
+#.  Lines 5,6: The sheet ``foodnutrient`` is used for exchanging data with the parameter ``p_nutrientValuePerUnit(i_f,i_n)`` as follows:
 
     *   Rows are mapped to the ``s_foodTypes`` set.    
         The ``<ColumnMapping/>`` element uses the following attributes:
