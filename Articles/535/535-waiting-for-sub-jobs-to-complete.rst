@@ -295,6 +295,7 @@ An example is provided in the following:
 
 .. code-block:: aimms 
     :linenos:
+    :emphasize-lines: 5
 
     p_timeout := 60 /* seconds */ ; ! Should be configurable.
     sp_startTime := CurrentToString( "%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')" );
