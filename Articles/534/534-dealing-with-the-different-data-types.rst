@@ -154,10 +154,12 @@ It describes an XML file with an object with three children, two of which are an
     <AimmsXMLMapping>
     <ElementObjectMapping name="RootObject">
         <ElementValueMapping name="country" maps-to="countries"/>
-        <ElementObjectMapping name="array">
+        <ElementObjectMapping name="arraylats">
             <ElementValueMapping name="lat" maps-to="lat(city)">
                 <AttributeMapping name="city" binds-to="city"/>
             </ElementValueMapping>
+        </ElementObjectMapping>
+        <ElementObjectMapping name="arraylongs">
             <ElementValueMapping name="long" maps-to="long(city)">
                 <AttributeMapping name="city" binds-to="city"/>
             </ElementValueMapping>
@@ -225,7 +227,7 @@ The related mappingfile, in which the repetitive structure of multiple rows and 
         </RowMapping>
     </AimmsCSVMapping>
 
-Note that the order of the elements is the same as the order of identifiers in AIMMS:
+Note that the order of the elements is the same as the order of identifiers in AIMMS. The procedure in AIMMS is:
 
 .. code-block:: aimms
     
@@ -304,7 +306,7 @@ Look at the following mapping for a Parquet format:
             <ColumnMapping name="country" binds-to="country"/>
             <ColumnMapping name="city" binds-to="city"/>
             <ColumnMapping name="lat" maps-to="d1(i,j)"/>
-			<ColumnMapping name="long" maps-to="d2(i,j)"/>
+            <ColumnMapping name="long" maps-to="d2(i,j)"/>
         </RowMapping>
     </AimmsParquetMapping>
 
