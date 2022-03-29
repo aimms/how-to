@@ -58,41 +58,43 @@ Suppose the following JSON-formatted data, saved in a folder called 'data' with 
 
     {
         "country": "The Netherlands",
-        "population": 17.440000,
         "array": [
             {
                 "city": "Amsterdam",
-                "lat": 52.34996869
+                "lat": 52.34996869,
+                "long": 4.916640176
             },
             {
                 "city": "The Hague",
-                "lat": 52.08003684
+                "lat": 52.08003684,
+                "long": 4.269961302
             },
             {
                 "city": "Rotterdam",
-                "lat": 51.9199691
+                "lat": 51.9199691,
+                "long": 4.479974323
             }
         ]
     }
 
-This JSON-file holds an object with three children, one of which is an array holding multiple structurally identical objects, bound to an index ``city``. A matching mappingfile, stored in a folder called 'Mappings' with name 'JSONMapping.xml', could look like: 
+This JSON-file holds an object with three children, one of which is an array holding multiple (structurally identical) objects, bound to an index ``city``. A matching mappingfile, stored in a folder called 'Mappings' with name 'JSONMapping.xml', could look like: 
 
 .. code-block:: xml
 
     <AimmsJSONMapping>
         <ObjectMapping>
-            <ValueMapping name="population" maps-to="population"/>
             <ValueMapping name="country" maps-to="countries"/>
             <ArrayMapping name="array">
                 <ObjectMapping>
                     <ValueMapping name="city" binds-to="city"/>
                     <ValueMapping name="lat" maps-to="lat(city)"/>
+                    <ValueMapping name="long" maps-to="long(city)"/>
                 </ObjectMapping>
             </ArrayMapping>
         </ObjectMapping>
     </AimmsJSONMapping>
 
-Note the start- and ending tags ``AimmsJSONMapping`` specific for JSON-formatted data. The ``ValueMapping`` is used for the children and the ``ArrayMapping`` holds its own ``ValueMapping`` tags for its elements. 
+Note the start- and ending tags ``AimmsJSONMapping`` specific for JSON-formatted data. The ``ValueMapping`` tags are used for children and the ``ArrayMapping`` holds its own ``ValueMapping`` tags for the children in its own array. 
 
 The procedure to read data into the model in AIMMS will be:
 
@@ -133,31 +135,37 @@ Assume the following XML-formatted data, stored in a folder 'data' with the name
 
     <RootObject>
         <country>The Netherlands</country>
-        <population>17.440000</population>
-        <array>
+        <arraylats>
             <lat city="Amsterdam">52.34996869</lat>
             <lat city="The Hague">52.08003684</lat>
             <lat city="Rotterdam">51.9199691</lat>
-        </array>
+        </arraylats>
+        <arraylongs>
+            <long city="Amsterdam">4.916640176</long>
+            <long city="The Hague">4.269961302</long>
+            <long city="Rotterdam">4.479974323</long>
+        </arraylongs>
     </RootObject>
 
-It describes an XML file with an object with three children, one of which is another object holding multiple structurally identical values, bound to an index ``city``. A matching mappingfile, stored in a folder called 'Mappings' with name 'XMLMapping.xml', could look like: 
+It describes an XML file with an object with three children, two of which are an array holding multiple structurally identical values, bound to an index ``city``. A matching mappingfile, stored in a folder called 'Mappings' with name 'XMLMapping.xml', could look like: 
 
 .. code-block:: xml
 
     <AimmsXMLMapping>
     <ElementObjectMapping name="RootObject">
         <ElementValueMapping name="country" maps-to="countries"/>
-        <ElementValueMapping name="population" maps-to="population"/>
         <ElementObjectMapping name="array">
             <ElementValueMapping name="lat" maps-to="lat(city)">
                 <AttributeMapping name="city" binds-to="city"/>
-             </ElementValueMapping>
+            </ElementValueMapping>
+            <ElementValueMapping name="long" maps-to="long(city)">
+                <AttributeMapping name="city" binds-to="city"/>
+            </ElementValueMapping>
         </ElementObjectMapping>
     </ElementObjectMapping>
-    </AimmsXMLMapping> 
+    </AimmsXMLMapping>  
     
-Note the start- and ending tags ``AimmsXMLMapping`` specific for XML-formatted data. Following the XML-structure of the datafile, the ``ElementValueMapping`` is used for the children and the ``ElementObjectMapping`` holds its own ``ElementValueMapping`` tags for elements. The ``AttributeMapping`` describes, with the ``binds-to`` element, the mapping for the index.
+Note the start- and ending tags ``AimmsXMLMapping`` specific for XML-formatted data. Following the XML-structure of the datafile, the ``ElementValueMapping`` is used for the children and the ``ElementObjectMapping`` holds its own ``ElementValueMapping`` tags for the children in its array. The ``AttributeMapping`` describes, with the ``binds-to`` element, the mapping for the index.
 
 AIMMS procedure to read data:
 
@@ -197,10 +205,10 @@ Let's work with the following CSV-formatted data:
 .. code-block:: xml
     
     country,city,lat,long
-    The Netherlands,Amsterdam,52.34996869
-    The Netherlands,The Hague,52.08003684
-    The Netherlands,Rotterdam,51.9199691
-    Belgium,Antwerpen,51.22037355
+    The Netherlands,Amsterdam,52.34996869,4.916640176
+    The Netherlands,The Hague,52.08003684,4.269961302
+    The Netherlands,Rotterdam,51.9199691,4.479974323
+    Belgium,Antwerpen,51.22037355,4.415017048
 
 Note that the first line in the CSV differs from the other rows; it contains the header with the names of the columns. These names will correspond to the value of the ``name`` attribute in the mappingfile. Let's assume this file is saved in a folder 'data' and called 'data.csv'.
 
@@ -213,10 +221,11 @@ The related mappingfile, in which the repetitive structure of multiple rows and 
             <ColumnMapping name="country" binds-to="country"/>
             <ColumnMapping name="city" binds-to="city"/>
             <ColumnMapping name="lat" maps-to="lat(country,city)"/>
+            <ColumnMapping name="long" maps-to="long(country,city)"/>
         </RowMapping>
     </AimmsCSVMapping>
 
-The procedure in AIMMS:
+Note that the order of the elements is the same as the order of identifiers in AIMMS:
 
 .. code-block:: aimms
     
@@ -295,6 +304,7 @@ Look at the following mapping for a Parquet format:
             <ColumnMapping name="country" binds-to="country"/>
             <ColumnMapping name="city" binds-to="city"/>
             <ColumnMapping name="lat" maps-to="d1(i,j)"/>
+			<ColumnMapping name="long" maps-to="d2(i,j)"/>
         </RowMapping>
     </AimmsParquetMapping>
 
@@ -315,11 +325,11 @@ This could then print:
 
 .. code-block:: xml
 
-           country  		city 		lat     
-    0      The Netherlands   	Amsterdam 	52.34996869
-    1      The Netherlands   	The Hague 	52.08003684
-    2      The Netherlands   	Rotterdam  	51.9199691
-    3      Belgium   		Antwerp  	51.22037355
+           country  		city 		lat 		long
+    0      The Netherlands   	Amsterdam 	52.34996869 	4.916640176
+    1      The Netherlands   	The Hague 	52.08003684 	4.269961302
+    2      The Netherlands   	Rotterdam  	51.9199691 	4.479974323
+    3      Belgium   		Antwerp  	51.22037355 	4.415017048
 
 Here we see in the top row the names from the ``ColumnMapping`` of the mapping. In the left column are the row numbers added by python. The other columns are data read from file *filefromdex.parquet*.
 
