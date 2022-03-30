@@ -1,4 +1,4 @@
-Exchanging data for a flexible set of properties
+How to create mappings for matrix-oriented data
 =================================================
 
 Sometimes your data source consists of both column- and row-oriented data, showing data matrix-style. 
