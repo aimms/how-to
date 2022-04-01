@@ -1,0 +1,856 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "browsername": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browsertimezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
+    "ignoredst": {
+      "aimms": {
+        "contents": [
+          "webui::IgnoreDST"
+        ]
+      }
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home_1",
+                "children": [],
+                "type": "pagev2-grid"
+              },
+              {
+                "name": "Input Data",
+                "slug": "input_data",
+                "children": [],
+                "type": "pagev2-grid"
+              },
+              {
+                "name": "Solve",
+                "slug": "solve_1",
+                "children": [],
+                "type": "pagev2-grid"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "palette.current": {
+      "literal": "default"
+    },
+    "theme.classic": {
+      "literal": false
+    },
+    "themes.current": {
+      "literal": "default"
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "timezone.dst.readonly": {
+      "aimms": {
+        "contents": [
+          "webui::DefaultDSTSettingForDisplayTimeZone"
+        ]
+      }
+    },
+    "widget.visibility.greyout": {
+      "literal": true
+    },
+    "workflows.configuration": {
+      "aimms": {
+        "contents": [
+          "sp_workflowSteps"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_workflowSteps",
+            "slice": [
+              {
+                "index": "webui::indexWorkflowOrder",
+                "type": "free",
+                "value": "webui::indexWorkflowOrder"
+              },
+              {
+                "index": "webui::indexNoOfPages",
+                "type": "free",
+                "value": "webui::indexNoOfPages"
+              },
+              {
+                "index": "webui::indexWorkflowPageSpec",
+                "type": "free",
+                "value": "webui::indexWorkflowPageSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "workflows.information": {
+      "aimms": {
+        "contents": [
+          "sp_workflow"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_workflow",
+            "slice": [
+              {
+                "index": "webui::indexWorkflowOrder",
+                "type": "free",
+                "value": "webui::indexWorkflowOrder"
+              },
+              {
+                "index": "webui::indexWorkflowSpec",
+                "type": "free",
+                "value": "webui::indexWorkflowSpec"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "layouts/custom_58a65323-6dcd-4306-a1c8-def1d632ee90": {
+    "definition": {
+      "literal": {
+        "componentName": "Grid",
+        "props": {
+          "gridTemplateColumns": "1fr 1fr",
+          "gridTemplateRows": "1fr 1fr",
+          "gridTemplateAreas": "\"area-a area-b\" \"area-c area-d\""
+        },
+        "items": [
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-a",
+              "name": "Area A",
+              "gridAutoFlow": "row"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-b",
+              "name": "Area B",
+              "gridAutoFlow": "row"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-c",
+              "name": "Area C",
+              "gridAutoFlow": "row"
+            }
+          },
+          {
+            "componentName": "WidgetArea",
+            "props": {
+              "gridArea": "area-d",
+              "name": "Area D",
+              "gridAutoFlow": "row"
+            }
+          }
+        ]
+      }
+    },
+    "displayName": {
+      "literal": "Layout5SolveAndResults"
+    }
+  },
+  "pages/home_1": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "Text",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsText1"
+        },
+        {
+          "widgetUri": "Problem Descr",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsProblem Descr0"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout11"
+    },
+    "maxcolumns": {
+      "literal": 8
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Problem Descr",
+          "layoutInfo": {
+            "width": "8",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Text",
+          "layoutInfo": {
+            "width": "8",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "pages/input_data": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "TextINput",
+          "gridArea": "area-c",
+          "dndId": "area-aTextINput2"
+        },
+        {
+          "widgetUri": "Input Min/max",
+          "gridArea": "area-b",
+          "dndId": "area-bInput Min/max0"
+        },
+        {
+          "widgetUri": "Pivot",
+          "gridArea": "area-a",
+          "dndId": "area-aPivot1"
+        },
+        {
+          "widgetUri": "Input",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsInput3"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout2"
+    },
+    "maxcolumns": {
+      "literal": 8
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Input",
+          "layoutInfo": {
+            "width": "7",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Pivot",
+          "layoutInfo": {
+            "width": "4",
+            "height": "3",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Input Min/max",
+          "layoutInfo": {
+            "width": "3",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "TextINput",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "pages/solve_1": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "Totalvalue of nutrients",
+          "gridArea": "area-c",
+          "dndId": "area-cTotalvalue of nutrients0"
+        },
+        {
+          "widgetUri": "TotalCosts",
+          "gridArea": "area-b",
+          "dndId": "area-bTotalCosts2"
+        },
+        {
+          "widgetUri": "totalWeight",
+          "gridArea": "area-b",
+          "dndId": "area-dtotalWeight1"
+        },
+        {
+          "widgetUri": "Tekst",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsTekst3"
+        },
+        {
+          "widgetUri": "Output",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsOutput4"
+        },
+        {
+          "widgetUri": "Solve",
+          "gridArea": "Unassigned widgets",
+          "dndId": "Unassigned widgetsSolve5"
+        },
+        {
+          "widgetUri": "Units in menu",
+          "gridArea": "area-a",
+          "dndId": "area-aUnits in menu6"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "custom_58a65323-6dcd-4306-a1c8-def1d632ee90"
+    },
+    "maxcolumns": {
+      "literal": 8
+    },
+    "secondarypageactions": {
+      "aimms": {
+        "contents": [
+          "sp_secundaryActions"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_secundaryActions",
+            "slice": [
+              {
+                "index": "webui::indexPageExtension",
+                "type": "free",
+                "value": "webui::indexPageExtension"
+              },
+              {
+                "index": "webui::indexPageActionSpec",
+                "type": "free",
+                "value": "webui::indexPageActionSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Solve",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "Output",
+          "layoutInfo": {
+            "width": "6",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Tekst",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "TotalCosts",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "totalWeight",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Units in menu",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Totalvalue of nutrients",
+          "layoutInfo": {
+            "width": "3",
+            "height": "1",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/Input": {
+    "aimms.widget.type": {
+      "literal": "label"
+    },
+    "contents": {
+      "literal": "Input Data"
+    },
+    "name": {
+      "literal": "Input"
+    }
+  },
+  "widgets/Input Min/max": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_minimumRequirementOfNutrient",
+          "p_maximumAllowanceOfNutrient"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "colHeader": [
+          "i_n"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "n": "Calories"
+          },
+          "width": 12
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "n": "Protein"
+          },
+          "width": 9
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "n": "Carbohydrates"
+          },
+          "width": 16.799999999999998
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "n": "Fat"
+          },
+          "width": 7.199999999999999
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "<IDENTIFIER-SET>",
+          "width": 19.07
+        }
+      ]
+    },
+    "default.column.width": {
+      "literal": 12
+    },
+    "name": {
+      "literal": "Input Min/max"
+    },
+    "title": {
+      "literal": "Constraints"
+    }
+  },
+  "widgets/Output": {
+    "aimms.widget.type": {
+      "literal": "label"
+    },
+    "contents": {
+      "literal": "Output"
+    },
+    "name": {
+      "literal": "Output"
+    }
+  },
+  "widgets/Pivot": {
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_f"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>",
+          "i_n"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "PricePerUnit",
+            "n": "-"
+          },
+          "width": 9
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "MaximumNumberOfServings",
+            "n": "-"
+          },
+          "width": 8.399999999999999
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "NutrientValuePerUnit",
+            "n": "Fat"
+          },
+          "width": 10.6
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "WeightOfFoodType",
+            "n": "-"
+          },
+          "width": 12.600000000000004
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "f",
+          "width": 21.4
+        }
+      ]
+    },
+    "contents.filters.in": {
+      "literal": [
+        {
+          "cubeId": "Multise.contents",
+          "cubeViewId": "contents"
+        }
+      ]
+    },
+    "title": {
+      "literal": "Table input data"
+    },
+    "default.column.width": {
+      "literal": 12
+    },
+    "contents.sorting": {
+      "literal": [
+        {
+          "partIndex": 1,
+          "partOffsets": [
+            6,
+            -1
+          ],
+          "mode": "increasing"
+        }
+      ]
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_nutrientValuePerUnit",
+          "p_pricePerUnit",
+          "p_maximumNumberOfServings",
+          "p_weightOfFoodType"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "name": {
+      "literal": "Pivot"
+    }
+  },
+  "widgets/Problem Descr": {
+    "aimms.widget.type": {
+      "literal": "label"
+    },
+    "contents": {
+      "literal": "Problem Description of the Diet Problem"
+    },
+    "name": {
+      "literal": "Problem Descr"
+    }
+  },
+  "widgets/Solve": {
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "title": {
+      "literal": "Solve"
+    },
+    "procedure": {
+      "aimms": {
+        "run": "MainExecution"
+      }
+    },
+    "name": {
+      "literal": "Solve"
+    }
+  },
+  "widgets/Tekst": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div>Navigation </div><div><br></div><div><a href=\"Main%20Project/home\">Home</a></div><div><a href=\"Main%20Project/Input%20Data\">Input Data</a></div><div><a href=\"Main%20Project/Solve\">Solve</a></div>"
+    },
+    "name": {
+      "literal": "Tekst"
+    }
+  },
+  "widgets/Text": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div><span style=\"font-size: 32px;\">Problem description:</span></div><div><br></div><div>This example introduces a simplified diet problem. The example considers a small data set, which includes 9 different food types and 4 different nutrients. </div><div>The 9 food types form a small but representative selection of the McDonald’s menu. The 4 nutrients are calories, protein, fat, and carbohydrates. </div><div>The goal is to determine a daily diet to cover the afternoon and the evening meals.</div><div><br></div><div>This example illustrates how data consistency can be ensured through measurement units. </div><div>Another feature is the availability unit conventions that allow users with different backgrounds to view and enter data in their own choice of measurement units without having to change either the model or its data.</div><div><br></div><div>On the next page called <a href=\"Main%20Project/Input%20Data\">input data</a>, two tables are depicted. </div><div>The first table shows the nutrient values, price, and maximum number of servings per food type.  </div><div><br></div><div>Keywords:</div><div>Diet problem, Blending problem, Unit-valued parameter, Unit parameter, Quantity, Unit conversion.</div>"
+    },
+    "name": {
+      "literal": "Text"
+    }
+  },
+  "widgets/TextINput": {
+    "contents": {
+      "literal": "<div>In the table input data the rows represent the different food types. While the columns show the different attributes of the food types like- price ($), number of servings available, weight  and the four different Nutrient values( Calories, Protein, Fat and Carbohydrates) </div><div><br></div><div>In the table labeled Constraints, the different minimum or maximum value for certain nutrients is shown. </div>"
+    },
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "name": {
+      "literal": "TextINput"
+    }
+  },
+  "widgets/TotalCosts": {
+    "title": {
+      "literal": "Total Cost (Hfl)"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "v_totalCost"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents.partition": {
+      "literal": {
+        "keys": [],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "name": {
+      "literal": "TotalCosts"
+    }
+  },
+  "widgets/Totalvalue of nutrients": {
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "colHeader": [
+          "i_n"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "n": "Fat"
+          },
+          "width": 11.4
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "n": "Protein"
+          },
+          "width": 11.2
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "n": "Carbohydrates"
+          },
+          "width": 18
+        }
+      ]
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "v_totalValueOfNutrientsInOptimalDiet"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Outcome"
+    },
+    "default.column.width": {
+      "literal": 14
+    },
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents.filters.in": {
+      "literal": [
+        {
+          "cubeId": "Converter.contents",
+          "cubeViewId": "contents"
+        }
+      ]
+    },
+    "contents.numdecimals": {
+      "literal": 1
+    },
+    "name": {
+      "literal": "Totalvalue of nutrients"
+    }
+  },
+  "widgets/totalWeight": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "v_totalWeightOptimalDiet"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "title": {
+      "literal": "Total Weight (g)"
+    },
+    "contents.partition": {
+      "literal": {
+        "keys": [],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "name": {
+      "literal": "totalWeight"
+    }
+  },
+  "widgets/Units in menu": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "default.column.width": {
+      "literal": 15
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "f",
+          "width": 29.4
+        }
+      ]
+    },
+    "title": {
+      "literal": "Number of units"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "v_numberOfUnitsInMenu"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_f"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "Units in menu"
+    }
+  }
+}

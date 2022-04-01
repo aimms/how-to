@@ -1,0 +1,100 @@
+﻿    s_foodTypes := data 
+    { 'Big Mac'             ,
+      'Quarter Pounder'     ,
+      'French Fries'        ,
+      Salad                 ,
+      'Lowfat Milk'         ,
+      'Coca Cola'           ,
+      'Big Mac Menu'        ,
+      'Quarter Pounder Menu',
+      'Vegetable Burger'    } ;
+
+    s_nutrients := data 
+    { Calories     ,
+      Protein      ,
+      Fat          ,
+      Carbohydrates } ;
+
+
+    ( p_nutrientValuePerUnit ) [up_unitNutrients(i_n)] := data 
+    { ( 'Big Mac'             , Calories      ) :  479.000000000000,
+      ( 'Big Mac'             , Protein       ) :   25.000000000000,
+      ( 'Big Mac'             , Fat           ) :   22.000000000000,
+      ( 'Big Mac'             , Carbohydrates ) :   44.000000000000,
+      ( 'Quarter Pounder'     , Calories      ) :  517.000000000000,
+      ( 'Quarter Pounder'     , Protein       ) :   32.400000000000,
+      ( 'Quarter Pounder'     , Fat           ) :   25.000000000000,
+      ( 'Quarter Pounder'     , Carbohydrates ) :   40.400000000000,
+      ( 'French Fries'        , Calories      ) :  425.000000000000,
+      ( 'French Fries'        , Protein       ) :    5.000000000000,
+      ( 'French Fries'        , Fat           ) :   21.000000000000,
+      ( 'French Fries'        , Carbohydrates ) :   54.000000000000,
+      ( Salad                 , Calories      ) :   54.000000000000,
+      ( Salad                 , Protein       ) :    4.000000000000,
+      ( Salad                 , Fat           ) :    2.000000000000,
+      ( Salad                 , Carbohydrates ) :    5.000000000000,
+      ( 'Lowfat Milk'         , Calories      ) :  120.000000000000,
+      ( 'Lowfat Milk'         , Protein       ) :    9.000000000000,
+      ( 'Lowfat Milk'         , Fat           ) :    4.000000000000,
+      ( 'Lowfat Milk'         , Carbohydrates ) :   12.000000000000,
+      ( 'Coca Cola'           , Calories      ) :  184.000000000000,
+      ( 'Coca Cola'           , Carbohydrates ) :   46.000000000000,
+      ( 'Big Mac Menu'        , Calories      ) : 1202.400000000000,
+      ( 'Big Mac Menu'        , Protein       ) :   31.300000000000,
+      ( 'Big Mac Menu'        , Fat           ) :   48.700000000000,
+      ( 'Big Mac Menu'        , Carbohydrates ) :  158.500000000000,
+      ( 'Quarter Pounder Menu', Calories      ) : 1240.400000000000,
+      ( 'Quarter Pounder Menu', Protein       ) :   38.700000000000,
+      ( 'Quarter Pounder Menu', Fat           ) :   51.700000000000,
+      ( 'Quarter Pounder Menu', Carbohydrates ) :  154.900000000000,
+      ( 'Vegetable Burger'    , Calories      ) :  341.000000000000,
+      ( 'Vegetable Burger'    , Protein       ) :   11.700000000000,
+      ( 'Vegetable Burger'    , Fat           ) :   10.600000000000,
+      ( 'Vegetable Burger'    , Carbohydrates ) :   50.000000000000 } ;
+
+
+    p_maximumNumberOfServings := data 
+    { 'Big Mac'              : 2,
+      'Quarter Pounder'      : 2,
+      'French Fries'         : 2,
+      Salad                  : 2,
+      'Lowfat Milk'          : 2,
+      'Coca Cola'            : 2,
+      'Big Mac Menu'         : 2,
+      'Quarter Pounder Menu' : 2,
+      'Vegetable Burger'     : 2 } ;
+
+
+    ( p_maximumAllowanceOfNutrient ) [up_unitNutrients(i_n)] := data 
+    { Fat : 117 } ;
+
+
+    ( p_minimumRequirementOfNutrient ) [up_unitNutrients(i_n)] := data 
+    { Calories      : 3000,
+      Protein       :   65,
+      Carbohydrates :  375 } ;
+
+
+    ( p_pricePerUnit ) [Hfl] := data 
+    { 'Big Mac'              : 5.449999999455,
+      'Quarter Pounder'      : 4.949999999505,
+      'French Fries'         : 1.949999999805,
+      Salad                  : 3.949999999605,
+      'Lowfat Milk'          : 1.749999999825,
+      'Coca Cola'            : 2.749999999725,
+      'Big Mac Menu'         : 8.949999999105,
+      'Quarter Pounder Menu' : 8.949999999105,
+      'Vegetable Burger'     : 3.950000000000 } ;
+
+
+    ( p_weightOfFoodType ) [g] := data 
+    { 'Big Mac'              : 200,
+      'Quarter Pounder'      : 200,
+      'French Fries'         : 130,
+      Salad                  : 127,
+      'Lowfat Milk'          : 250,
+      'Coca Cola'            : 400,
+      'Big Mac Menu'         : 730,
+      'Quarter Pounder Menu' : 730,
+      'Vegetable Burger'     : 133 } ;
+

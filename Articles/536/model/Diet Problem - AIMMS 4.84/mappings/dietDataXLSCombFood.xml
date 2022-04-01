@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<AimmsExcelMapping>
+    <ExcelSheetMapping name="foodnutrient">
+        <RowMapping>
+            <ColumnMapping name="food" binds-to="i_f" />
+            <ColumnMapping name="maxQnt" maps-to="p_maximumNumberOfServings(i_f)" />
+            <ColumnMapping name="Price" maps-to="p_pricePerUnit(i_f)" />
+            <ColumnMapping name="Weight" maps-to="p_weightOfFoodType(i_f)" />
+            <ColumnMapping name-binds-to="i_n" 
+                name-regex=".*" 
+                name-regex-prefix="nut-" 
+                maps-to="p_nutrientValuePerUnit(i_f,i_n)" />
+        </RowMapping>
+    </ExcelSheetMapping>
+    <ExcelSheetMapping name="nutrient">
+        <RowMapping>
+            <ColumnMapping name="nutrient" binds-to="i_n" />
+            <ColumnMapping name="atMost" maps-to="p_maximumAllowanceOfNutrient(i_n)" />
+            <ColumnMapping name="atLeast" maps-to="p_minimumRequirementOfNutrient(i_n)" />
+        </RowMapping>
+    </ExcelSheetMapping>
+</AimmsExcelMapping>

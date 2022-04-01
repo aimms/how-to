@@ -1,0 +1,631 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "themes.current": {
+      "literal": "default"
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home_1",
+                "children": []
+              },
+              {
+                "name": "Input Data",
+                "slug": "input_data",
+                "children": []
+              },
+              {
+                "name": "Solve",
+                "slug": "solve_1",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "widget.visibility.greyout": {
+      "literal": true
+    },
+    "palette.current": {
+      "literal": "default"
+    }
+  },
+  "pages/home_1": {
+    "maxcolumns": {
+      "literal": 8
+    },
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Problem Descr",
+          "layoutInfo": {
+            "width": "8",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Text",
+          "layoutInfo": {
+            "width": "8",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/Problem Descr": {
+    "aimms.widget.type": {
+      "literal": "label"
+    },
+    "contents": {
+      "literal": "Problem Description of the Diet Problem"
+    },
+    "name": {
+      "literal": "Problem Descr"
+    }
+  },
+  "widgets/Text": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div>This example introduces a simplified diet problem. The example considers a small data set, which includes 9 different food types and 4 different nutrients. The 9 food types form a small but representative selection of the McDonald’s menu. The 4 nutrients are calories, protein, fat, and carbohydrates. The goal is to determine a daily diet to cover the afternoon and the evening meals.</div><div><br></div><div>This example illustrates how data consistency can be ensured through measurement units. Another feature is the availability unit conventions that allow users with different backgrounds to view and enter data in their own choice of measurement units without having to change either the model or its data.</div><div><br></div><div>On the next page called <a href=\"Main%20Project/Input%20Data\">input data</a>, two tables are depicted. The first table shows the nutrient values, price and maximum number of serving per food type.  </div><div><br></div><div>Keywords:</div><div>Diet problem, Blending problem, Unit-valued parameter, Unit parameter, Quantity, Unit conversion.</div>"
+    },
+    "name": {
+      "literal": "Text"
+    }
+  },
+  "pages/input_data": {
+    "maxcolumns": {
+      "literal": 8
+    },
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Input",
+          "layoutInfo": {
+            "width": "7",
+            "height": "1",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Pivot",
+          "layoutInfo": {
+            "width": "4",
+            "height": "3",
+            "customPosition": ""
+          }
+        },
+        {
+          "uri": "Input Min/max",
+          "layoutInfo": {
+            "width": "3",
+            "height": "1",
+            "customPosition": "",
+            "pos": {
+              "x": "530",
+              "y": "368"
+            }
+          }
+        },
+        {
+          "uri": "TextINput",
+          "layoutInfo": {
+            "width": "3",
+            "height": "2",
+            "customPosition": ""
+          }
+        }
+      ]
+    }
+  },
+  "widgets/Input": {
+    "aimms.widget.type": {
+      "literal": "label"
+    },
+    "contents": {
+      "literal": "Input Data"
+    },
+    "name": {
+      "literal": "Input"
+    }
+  },
+  "widgets/Pivot": {
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "f"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>",
+          "n"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "PricePerUnit",
+            "n": "-"
+          },
+          "width": 9
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "MaximumNumberOfServings",
+            "n": "-"
+          },
+          "width": 8.399999999999999
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "NutrientValuePerUnit",
+            "n": "Fat"
+          },
+          "width": 10.6
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "WeightOfFoodType",
+            "n": "-"
+          },
+          "width": 12.600000000000004
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "f",
+          "width": 21.4
+        }
+      ]
+    },
+    "contents.filters.in": {
+      "literal": [
+        {
+          "cubeId": "Multise.contents",
+          "cubeViewId": "contents"
+        }
+      ]
+    },
+    "title": {
+      "literal": "Table input data"
+    },
+    "default.column.width": {
+      "literal": 12
+    },
+    "contents.sorting": {
+      "literal": [
+        {
+          "partIndex": 1,
+          "partOffsets": [
+            6,
+            -1
+          ],
+          "mode": "increasing"
+        }
+      ]
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "NutrientValuePerUnit",
+          "PricePerUnit",
+          "MaximumNumberOfServings",
+          "WeightOfFoodType"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "name": {
+      "literal": "Pivot"
+    }
+  },
+  "widgets/Input Min/max": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "MinimumRequirementOfNutrient",
+          "MaximumAllowanceOfNutrient"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Constraints"
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "colHeader": [
+          "n"
+        ],
+        "aggregated": []
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "n": "Calories"
+          },
+          "width": 12
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "n": "Protein"
+          },
+          "width": 9
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "n": "Carbohydrates"
+          },
+          "width": 16.799999999999998
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "<IDENTIFIER-SET>",
+          "width": 27.6
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "n": "Fat"
+          },
+          "width": 7.199999999999999
+        }
+      ]
+    },
+    "default.column.width": {
+      "literal": 12
+    },
+    "name": {
+      "literal": "Input Min/max"
+    }
+  },
+  "widgets/TextINput": {
+    "contents": {
+      "literal": "<div>In the table input data the rows represent the different food types. While the columns show the different attributes of the food types like- price ($), number of servings available, weight  and the four different Nutrient values( Calories, Protein, Fat and Carbohydrates) </div><div><br></div><div>In the table labeled Constraints, the different minimum or maximum value for certain nutrients is shown. </div>"
+    },
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "name": {
+      "literal": "TextINput"
+    }
+  },
+  "pages/solve_1": {
+    "maxcolumns": {
+      "literal": 8
+    },
+    "aimms.widget.type": {
+      "literal": "page"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "Solve",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "Output",
+          "layoutInfo": {
+            "width": "6",
+            "height": "1",
+            "customPosition": "",
+            "pos": {
+              "x": "10",
+              "y": "548"
+            }
+          }
+        },
+        {
+          "uri": "Tekst",
+          "layoutInfo": {
+            "width": "2",
+            "height": "2",
+            "customPosition": "",
+            "pos": {
+              "x": "10",
+              "y": "530"
+            }
+          }
+        },
+        {
+          "uri": "TotalCosts",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1",
+            "customPosition": "",
+            "pos": {
+              "x": "270",
+              "y": "593"
+            }
+          }
+        },
+        {
+          "uri": "totalWeight",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1",
+            "customPosition": "",
+            "pos": {
+              "x": "10",
+              "y": "593"
+            }
+          }
+        },
+        {
+          "uri": "Units in menu",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1",
+            "customPosition": "",
+            "pos": {
+              "x": "790",
+              "y": "593"
+            }
+          }
+        },
+        {
+          "uri": "Totalvalue of nutrients",
+          "layoutInfo": {
+            "width": "3",
+            "height": "1",
+            "customPosition": "",
+            "pos": {
+              "x": "530",
+              "y": "593"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "widgets/Solve": {
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "title": {
+      "literal": "Solve"
+    },
+    "procedure": {
+      "aimms": {
+        "run": "MainExecution"
+      }
+    },
+    "name": {
+      "literal": "Solve"
+    }
+  },
+  "widgets/Output": {
+    "aimms.widget.type": {
+      "literal": "label"
+    },
+    "contents": {
+      "literal": "Output"
+    },
+    "name": {
+      "literal": "Output"
+    }
+  },
+  "widgets/Tekst": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div>Navigation </div><div><br></div><div><a href=\"Main%20Project/home\">Home</a></div><div><a href=\"Main%20Project/Input%20Data\">Input Data</a></div><div><a href=\"Main%20Project/Solve\">Solve</a></div>"
+    },
+    "name": {
+      "literal": "Tekst"
+    }
+  },
+  "widgets/TotalCosts": {
+    "title": {
+      "literal": "Total Cost (Hfl)"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "TotalCost"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents.partition": {
+      "literal": {
+        "keys": [],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "name": {
+      "literal": "TotalCosts"
+    }
+  },
+  "widgets/totalWeight": {
+    "contents": {
+      "aimms": {
+        "contents": [
+          "TotalWeightOptimalDiet"
+        ]
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "title": {
+      "literal": "Total Weight (g)"
+    },
+    "contents.partition": {
+      "literal": {
+        "keys": [],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "name": {
+      "literal": "totalWeight"
+    }
+  },
+  "widgets/Units in menu": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "default.column.width": {
+      "literal": 15
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "f",
+          "width": 29.4
+        }
+      ]
+    },
+    "title": {
+      "literal": "Number of units"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "NumberOfUnitsInMenu"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "f"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "Units in menu"
+    }
+  },
+  "widgets/Totalvalue of nutrients": {
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "colHeader": [
+          "n"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "n": "Fat"
+          },
+          "width": 11.4
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "n": "Protein"
+          },
+          "width": 11.2
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "n": "Carbohydrates"
+          },
+          "width": 18
+        }
+      ]
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "TotalValueOfNutrientsInOptimalDiet"
+        ]
+      }
+    },
+    "title": {
+      "literal": "Outcome"
+    },
+    "default.column.width": {
+      "literal": 14
+    },
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents.filters.in": {
+      "literal": [
+        {
+          "cubeId": "Converter.contents",
+          "cubeViewId": "contents"
+        }
+      ]
+    },
+    "contents.numdecimals": {
+      "literal": 1
+    },
+    "name": {
+      "literal": "Totalvalue of nutrients"
+    }
+  }
+}

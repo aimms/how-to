@@ -5,7 +5,7 @@ Diet Problem
    :keywords: Diet problem, Blending problem, Unit-valued parameter, Unit parameter, Quantity, Unit conversion, WebUI
    :description: This example illustrates how data consistency can be ensured through measurement units.
 
-Direct download AIMMS Project :download:`Diet Problem.zip <model/Diet Problem.zip>`
+Direct download AIMMS 4.84 Project :download:`Diet Problem.zip <model/Diet Problem - AIMMS 4.84.zip>`
 
 .. Go to the example on GitHub: https://github.com/aimms/examples/tree/master/Modeling%20Book/Diet%20Problem
 
