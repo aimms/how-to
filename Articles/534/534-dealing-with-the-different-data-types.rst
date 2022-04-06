@@ -305,8 +305,8 @@ Look at the following mapping for a Parquet format:
         <RowMapping name="table1">
             <ColumnMapping name="country" binds-to="country"/>
             <ColumnMapping name="city" binds-to="city"/>
-            <ColumnMapping name="lat" maps-to="d1(i,j)"/>
-            <ColumnMapping name="long" maps-to="d2(i,j)"/>
+            <ColumnMapping name="lat" maps-to="lat(country,city)"/>
+            <ColumnMapping name="long" maps-to="long(country,city)"/>
         </RowMapping>
     </AimmsParquetMapping>
 
