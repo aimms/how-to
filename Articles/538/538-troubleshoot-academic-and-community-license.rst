@@ -35,7 +35,7 @@ Possible issue: Expired license
 How to verify it?
 """"""""""""""""""""""
 
-The community license gets automatically extended if it has been used in the last 6 months before its expiy date, otherwise it expires. If you are not sure please contact support@aimms.com so we can check that for you.
+The community license gets automatically extended if it has been used in the last 6 months before its expiration date, otherwise it expires. If you are not sure please contact support@aimms.com so we can check that for you.
 
 Solution
 """"""""""
