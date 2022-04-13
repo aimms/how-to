@@ -1,0 +1,78 @@
+## ams_version=1.0
+
+Model Main_DriverList {
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: {
+				century->s : #-># * 3153600000,
+				year->s : #-># * 31536000,
+				month->s : #-># * 2628000,
+				week->s : #-># * 604800,
+				day->s : #-># * 86400,
+				hour->s : #-># * 3600,
+				minute->s : #-># * 60,
+				second->s : #-># ,
+				tick->s : #-># / 100
+			}
+			Comment: "Expresses the value for the duration of periods.";
+		}
+	}
+	Parameter p_noDrivers;
+	Set s_driverNumbers {
+		SubsetOf: Integers;
+		Index: i_driverNo;
+	}
+	StringParameter sp_driverNames {
+		IndexDomain: i_driverNo;
+	}
+	StringParameter sp_titleTableDriverNamesList {
+		Definition: formatString("On this host there are %i drivers", p_noDrivers );
+	}
+	Procedure MainInitialization {
+		Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+	}
+	Procedure PostMainInitialization {
+		Body: {
+			p_noDrivers := SQLNumberOfDrivers('ODBC');
+			if p_noDrivers then
+				s_driverNumbers := ElementRange( 1, p_noDrivers );
+			else
+				s_driverNumbers := {} ;
+			endif ;
+			for i_driverNo do
+				sp_driverNames(i_driverNo) := SQLDriverName('ODBC', val( i_driverNo ) );
+			endfor ;
+		}
+		Comment: {
+			"Add initialization statements here that require that the libraries are already initialized properly,
+			or add statements that require the Data Management module to be initialized."
+		}
+	}
+	Procedure MainExecution;
+	Procedure PreMainTermination {
+		Body: {
+			return 1;
+		}
+		Comment: {
+			"Add termination statements here that require all libraries to be still alive.
+			Return 1 if you allow the termination sequence to continue.
+			Return 0 if you want to cancel the termination sequence."
+		}
+	}
+	Procedure MainTermination {
+		Body: {
+			return 1;
+		}
+		Comment: {
+			"Add termination statements here that do not require all libraries to be still alive.
+			Return 1 to allow the termination sequence to continue.
+			Return 0 if you want to cancel the termination sequence.
+			It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+		}
+	}
+}
