@@ -1,0 +1,18 @@
+/* This adds an icon in front of the application name in the header
+ *
+ * Add an icon that is at least 23 pixels wide and 22 pixels high.
+ * icons will automatically be resized to fit, so any larger icon
+ * will always fit.
+ *
+ * If you have an icon that is much wider than it is high,
+ * you could try increasing the "width" value below to make
+ * it more visible.
+ *
+ * See also: https://documentation.aimms.com/webui/theming.html#a-special-case-the-application-logo
+ * See also: https://how-to.aimms.com/Articles/518/518-add-logo-to-webui-app.html
+ */
+ 
+:root {
+--bg_app-logo: 8px 50% / 175px 35px no-repeat url(/app-resources/resources/images/OurBusinessLogo.png);
+--spacing_app-logo_width: 190px;
+}
