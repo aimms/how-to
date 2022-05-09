@@ -127,7 +127,7 @@ Gilles Pesant "A Regular Language Membership Constraint for Finite Sequences of 
 
 .. below are spelling exceptions only for this document
 
-.. spelling:
+.. spelling::
     Pesant
     Hakan
     Kjellerstrand
