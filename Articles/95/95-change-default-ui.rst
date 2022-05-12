@@ -39,8 +39,12 @@ Alternately, you can also click on the option *Options with nondefault value* to
 .. image:: images/nondefault-value.png
    :align: center
 
-Save your project to save this setting. You can now open *Page Manager* with the ``F9`` key or from the menu in *Tools > Page Manager*.
+Save your project to save this setting. 
+
+After restarting AIMMS on the project, you can open *Page Manager* with the ``F9`` key or from the menu in *Tools > Page Manager*.
 
 
 .. END CONTENT
 
+.. Some of the options that have been changed only take effect after the project is restarted.
+.. Please save, close and re-open the project before continuing.
