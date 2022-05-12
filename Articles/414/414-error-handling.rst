@@ -20,3 +20,7 @@ For a full description of the AIMMS Error Handling functionality, please see :do
 Keywords:
 Error Handling, Error Handler
 
+.. tip::
+    
+    You may refer to our online training about error handling `following this link <https://academy.aimms.com/course/view.php?id=50>`__.
+
