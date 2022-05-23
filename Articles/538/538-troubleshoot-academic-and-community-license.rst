@@ -4,7 +4,7 @@ Academic and community licenses: No logon response from server
 Your situation
 -------------------------
 
-If you have requested an  `Academic <https://licensing.cloud.aimms.com/license/academic.htm>`_ or `Community <https://licensing.cloud.aimms.com/license/community.htm?utm_source=website&utm_medium=footer>`_ license on our website you have most probably received an e-mail from AIMMS Licensing containing instructions on how to instal AIMMS and use your license. In this e-mail there should also be a unique license URL you will need in order to be able to open AIMMS.  
+If you have requested an  `Academic <https://licensing.cloud.aimms.com/license/academic.htm>`_ or `Community <https://licensing.cloud.aimms.com/license/community.htm?utm_source=website&utm_medium=footer>`_ license on our website you have most probably received an e-mail from AIMMS Licensing containing instructions on how to install AIMMS and use your license. In this e-mail there should also be a unique license URL you will need in order to be able to open AIMMS.  
 
 In some cases however while launching AIMMS on your computer you get the error message below:
 
@@ -57,12 +57,12 @@ How to verify it?
 
 You can start by testing if the issue is: 
 
-- with your network -> try changing the network with and alternative network or even a mobile hotspot -> if one of the alternatives works there may be a network security mechanism in place.
+- with your network -> try changing the network with and alternative network or even a mobile Hot spot -> if one of the alternatives works there may be a network security mechanism in place.
 - with your computer -> try changing the computer -> if the alternative computer works for you there may be something blocking the web-socket connection on your machine.
 
 Solution
 """"""""""
 
-Depending on who owns the network or machine you are using please contact the relevant IT department and request for allowing the usage of web-socket connections to licensing.cloud.aimms.com.
+Depending on who owns the network or machine you are using please contact the relevant IT department and request for allowing the usage of web-socket connections to ``licensing.cloud.aimms.com``.
  
  
