@@ -19,7 +19,7 @@ The Transport Problem searches for the best way to transport goods from a couple
 
 .. image:: Images/TransportProblem.png
 
-:download:`AIMMS 4.69 project download <model/Practice.zip>` 
+:download:`AIMMS 4.69 project download <Model/Practice.zip>` 
 
 To run this model, load the case ``Data``, and then run procedure ``MainExecution``.
 
