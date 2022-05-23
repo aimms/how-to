@@ -91,3 +91,6 @@ Related resources
   
   * :doc:`procedural-language-components/execution-statements/raising-and-handling-warnings-and-errors`
 
+.. tip::
+    
+    You may refer to our online training about error handling `following this link <https://academy.aimms.com/course/view.php?id=50>`__.

@@ -68,5 +68,5 @@ Note that with solvers that don't directly support a solution pool, but do suppo
 
 .. below are spelling exceptions only for this document
 
-.. spelling:
+.. spelling::
    Hakan

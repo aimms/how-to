@@ -7,15 +7,24 @@ Convert Files from DAT to DATA
 
 Overview & comparison of file types
 -----------------------------------
-AIMMS 3.0 stores cases were in so-called "data manager files".  AIMMS 3.12 introduced the ``.data`` format as an alternative. 
+
+The timeline for replacing ``.dat`` with ``.data`` files is as follows:
+
+#.  AIMMS 3.0 stores cases were in so-called "data manager files".  
+
+#.  AIMMS 3.12 introduced the ``.data`` format as an alternative. 
+
+#.  AIMMS 4.85 is the **last** version of AIMMS that features both ``.dat`` and ``.data`` files.
 
 This change was made for several reasons.
 
-*  Data manager files (``.dat``) became difficult to manage when maintaining several cases.
+*  Data manager files (``.dat``) became bulky and thereby difficult to manage when maintaining several cases.
 
 *  Case files (``.data``) avoid the risk of data corruption in one case affecting other cases stored in the same file. 
 
-* Storing multiple case files in a folder makes it easy to copy cases from multiple users in the same folder, and compare scenarios. (See :doc:`data-management/case-management/managing-multiple-case-selections`)
+*  The AIMMS WebUI does not support ``.dat`` files.
+
+*  Storing multiple case files in a folder makes it easy to copy cases from multiple users in the same folder, and compare scenarios. (See :doc:`data-management/case-management/managing-multiple-case-selections`)
 
 
 In projects created with AIMMS version before 3.14, a single data manager file (``.dat``) contains zero, one or more cases. From AIMMS version 3.14, a case file (``.data``) only stores one case, but multiple cases may be stored in the same folder. 
