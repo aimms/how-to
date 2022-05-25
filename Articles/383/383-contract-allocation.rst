@@ -6,6 +6,9 @@ Contract Allocation
 
 Direct download AIMMS Project :download:`Contract Allocation.zip <model/Contract Allocation.zip>`
 
+.. image:: https://img.shields.io/badge/AIMMS_4.85-Contract_Alocation-blue
+   :target: :download:`Contract Allocation.zip <model/Contract Allocation.zip>`
+
 .. Go to the example on GitHub: https://github.com/aimms/examples/tree/master/Application%20Examples/Contract%20Allocation
 
 In this model we have a set of contracts, where every contract represents an amount of commodity that has to be supplied. The objective is to determine which of the producers will take care of which contract such that the total costs are minimal, under the following conditions:
@@ -21,13 +24,32 @@ In this model we have a set of contracts, where every contract represents an amo
 
 - The total cost associated with all the deliveries is minimal.
 
-In this example we used 10 northwestern states for the contracts and 5 cities from that region for the producers.
+In this example we used **10 northwestern states** for the contracts and **5 cities** from that region for the producers.
 
-The results are displayed in a bar chart.
+The results are displayed in a combination chart (stacked bar chart).
 
 This AIMMS project illustrates the use of a semi-continuous variable. A semi-continuous variable is either zero or within a certain range. This type of variables can be used in conditions like, whenever there is a transport this transport has a minimum size. 
 
-Keywords:
-Semi-continuous variables, Mixed Integer Programming model, MIP, bar Chart, table, colors
+The following WebUI features are used:
+
+- Text Widget
+
+- Image Widget
+
+- Workflow
+
+- Table Widget
+
+- Button Widget
+
+- Side Panel
+
+- Compact Scalar Widget
+
+- Combination Chart Widget
+
+- List Widget
+
+*Keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css.*
 
 
