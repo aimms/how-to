@@ -4,12 +4,13 @@ Contract Allocation
    :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, bar Chart, table, colors
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
-Direct download AIMMS Project :download:`Contract Allocation.zip <model/Contract Allocation.zip>`
-
-.. image:: https://img.shields.io/badge/AIMMS_4.85-Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.85-ZIP:_Contract_Alocation-blue
    :target: :download:`Contract Allocation.zip <model/Contract Allocation.zip>`
 
-.. Go to the example on GitHub: https://github.com/aimms/examples/tree/master/Application%20Examples/Contract%20Allocation
+.. image:: https://img.shields.io/badge/AIMMS_4.85-Github:_Contract_Alocation-blue
+   :target: :download:`Contract Allocation.zip <model/Contract Allocation.zip>`
+
+.. image:: https://img.shields.io/badge/UI-WebUI-sucess
 
 In this model we have a set of contracts, where every contract represents an amount of commodity that has to be supplied. The objective is to determine which of the producers will take care of which contract such that the total costs are minimal, under the following conditions:
 
