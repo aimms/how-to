@@ -6,7 +6,6 @@ Car Selection
    :description: In this AIMMS project the use of pictures as nodes in a network is illustrated.
 
 Direct download AIMMS Project: :download:`Car Selection <model/CarSelection.zip>`
-test.
 
 Story
 ---------
@@ -31,7 +30,7 @@ The mathematical formulation is as follows:
 +=====+============================================+============================+======+
 + Sets and indices:                                                                    |
 +-----+--------------------------------------------+----------------------------+------+
-+     | :math:`C`, :math:`c \in C_a`               | Cars                              |
++     | :math:`C`, :math:`c \in C`                 | Cars                              |
 +-----+--------------------------------------------+----------------------------+------+
 +     | :math:`P`, :math:`p \in P`                 | Persons                           |
 +-----+--------------------------------------------+----------------------------+------+
