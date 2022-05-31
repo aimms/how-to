@@ -6,6 +6,7 @@ Car Selection
    :description: In this AIMMS project the use of pictures as nodes in a network is illustrated.
 
 Direct download AIMMS Project: :download:`Car Selection <model/CarSelection.zip>`
+test.
 
 Story
 ---------

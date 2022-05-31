@@ -12,6 +12,10 @@ Contract Allocation
 
 .. image:: https://img.shields.io/badge/UI-WebUI-sucess
 
+
+Story
+-----
+
 In this model we have a set of contracts, where every contract represents an amount of commodity that has to be supplied. The objective is to determine which of the producers will take care of which contract such that the total costs are minimal, under the following conditions:
 
 
@@ -25,11 +29,31 @@ In this model we have a set of contracts, where every contract represents an amo
 
 - The total cost associated with all the deliveries is minimal.
 
-In this example we used **10 northwestern states** for the contracts and **5 cities** from that region for the producers.
 
-The results are displayed in a combination chart (stacked bar chart).
+Mathematical Model
+------------------
 
 This AIMMS project illustrates the use of a semi-continuous variable. A semi-continuous variable is either zero or within a certain range. This type of variables can be used in conditions like, whenever there is a transport this transport has a minimum size. 
+
+:math:`\frac{ \sum_{t=0}^{N}f(t,k) }{N}`
+
+
+:math:`A_{c,p} \in \{0..1\}`     
+
+
+
+Language 
+--------
+In this example we used **10 northwestern states** for the contracts and **5 cities** from that region for the producers. To import the data into our model, we are currently using DEX library through Excel (NothWesternStates.xlsx). 
+You can add more data freely without changing the sheets structure.  
+
+
+
+
+WebUI Features
+--------------
+
+The results are displayed in a combination chart (stacked bar chart).
 
 The following WebUI features are used:
 
@@ -51,6 +75,11 @@ The following WebUI features are used:
 
 - List Widget
 
+
+
+UI Styling
+----------
+
+
+
 *Keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css.*
-
-
