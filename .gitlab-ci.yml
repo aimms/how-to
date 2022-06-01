@@ -13,7 +13,8 @@ before_script:
   - python3.8 -mvenv ../myenv
   - source ../myenv/bin/activate
   - python3.8 -mpip install --upgrade  pip
-  - python3.8 -mpip install -U sphinx sphinx-aimms-theme sphinx-sitemap sphinx-last-updated-by-git sphinxcontrib-bibtex sphinxcontrib-spelling
+  - python3.8 -mpip install -U sphinx-aimms-theme sphinx-sitemap sphinx-last-updated-by-git sphinxcontrib-bibtex sphinxcontrib-spelling
+  - python3.8 -mpip install sphinx==4.5.0 --force-reinstall
 
 linkcheck:
   stage: test
