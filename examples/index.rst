@@ -27,6 +27,7 @@ You can browse our examples by category:
 .. toctree::
    :maxdepth: 1
 
+   /Articles/545/545-summary-examples-widgets
    application/index
    functional/index
    modeling-book/index
