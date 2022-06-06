@@ -5,13 +5,15 @@ Contract Allocation
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
 .. image:: https://img.shields.io/badge/AIMMS_4.85-ZIP:_Contract_Alocation-blue
-   :target: :download:`Contract Allocation.zip <model/Contract Allocation.zip>`
+   :target: https://github.com/aimms/contract-allocation/archive/refs/heads/main.zip
 
 .. image:: https://img.shields.io/badge/AIMMS_4.85-Github:_Contract_Alocation-blue
-   :target: :download:`Contract Allocation.zip <model/Contract Allocation.zip>`
+   :target: https://github.com/aimms/contract-allocation
 
 .. image:: https://img.shields.io/badge/UI-WebUI-sucess
 
+.. note::
+   AIMMS Community license is sufficient for working with this example.
 
 Story
 -----
@@ -105,13 +107,12 @@ This procedure will add and read the ``xml`` mapping available. Take a look at `
    ep_actualProducer := first(i_producer);
 
 .. seealso::
-   To understand in depth check out DEX documentation.
+   To understand in depth check out `DEX documentation <https://documentation.aimms.com/dataexchange/index.html>`_ .
 
 WebUI Features
 --------------
 
-On input page, 
-The results are displayed in a combination chart (stacked bar chart).
+On input page, if you click around the graphs, a highlighted cell will appear identifying the last clicked element. The results are displayed in a combination chart (stacked bar chart).
 
 The following WebUI features are used:
 
@@ -123,39 +124,131 @@ The following WebUI features are used:
 
 - Table Widget
 
-- Button Widget
+- Combination Chart Widget
+
+- Page Actions 
 
 - Side Panel
 
 - Compact Scalar Widget
 
-- Combination Chart Widget
-
 - List Widget
-
-
 
 UI Styling
 ----------
-For this project, we used a main css file named ``colors.css``, this . 
+For this project, we used a main css file named ``colors.css``, please check it out directly on the folder. Bellow there are the css files you will find with coments on what they change. 
 
-buttons.css
-^^^^^^^^^^^
-
-.. code-block:: css
-   :linenos:
-
-   .theme-aimms .aimms-widget .ui-button {
-         background-color: var(--primary);
-   }
-
-buttons.css
-^^^^^^^^^^^
+**workflow.css**
 
 .. code-block:: css
    :linenos:
 
-   /*This changes the background-color of the button widget*/
-   .theme-aimms .aimms-widget .ui-button {
-         background-color: var(--primary);
+   /*Change color of the active step*/
+   .workflow-panel .step-item.current {
+      box-shadow: inset 0.3125rem 0 0 var(--primary);
    }
+
+   /*Change color of the titles*/
+   .workflow-panel .step-item.active.complete .title, 
+   .workflow-panel .step-item.active.incomplete .title {
+      color: var(--primaryDark);
+   }
+
+   /*Change color of the icons*/
+   .workflow-panel .step-item.active.complete .icon, 
+   .workflow-panel .step-item.active.incomplete .icon {
+      color: var(--primaryDark);
+   }
+
+**textColor.css**
+
+.. code-block:: css
+   :linenos:
+
+   /*Change table text color*/
+   .tag-table .grid-viewport .cell:not(.flag-readOnly), 
+   html:not(.using-touch) .tag-table .grid-viewport .cell:not(.flag-readOnly) {
+      color: var(--primaryDark);
+   }
+
+   /*Change scalar text color*/
+   .tag-scalar .kpi .value {
+      color: var(--primaryDark);
+   }
+
+**body.css**
+
+.. code-block:: css
+   :linenos:
+
+   /*Add image on the background*/
+   .scroll-wrapper--pagev2 .page-container {
+      content: " ";
+      background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
+   }
+
+**header.css**
+
+.. code-block:: css
+   :linenos:
+
+   /*Add logo*/
+   .theme-aimms header.tag-application .pages > .app-name::before {
+      content: " ";
+      background: url(img/budgeting.png) no-repeat center/contain;
+      float: left;
+      width: 30px; /*image size*/
+      height: 30px; 
+      margin-right: 7px; /*space between logo and tittle*/
+      margin-top: -8px; /*move the logo down*/
+   }
+
+   .theme-aimms header.tag-application .pages > .app-name {
+      margin-top: 12px; /*move tittle down to be centered in the menu area*/
+   }
+
+   .theme-aimms header.tag-application {
+      border-bottom: 2px solid var(--primary);
+   }
+
+**combinationChart.css**
+
+.. code-block:: css
+   :linenos:
+
+   /*Change color of togglelegend of the combination chart*/
+   .togglelegend-button svg{
+      fill: var(--primaryDark);
+   }
+
+**sidePanel.css**
+
+.. code-block:: css
+   :linenos:
+
+   /*Change color after tab click*/
+   .sidepanel-container .sidepanel-tab.active {
+      background-color: var(--primary);
+   }
+
+   /*Change letter color on hover*/
+   .sidepanel-container .sidepanel-tab.active:hover {
+      color: white;
+   }
+
+   /*Change icon color*/
+   .sidepanel-container .sidepanel-tab .sidepanel-icon,
+   .sidepanel-container .sidepanel-tab:hover {
+      color: var(--primary);
+   }
+
+   /*Change color after all tabs*/
+   .sidepanel-container .sidepanel-tabs-container:after {
+      background: var(--primary);
+   }
+
+   /*Change the color bellow sidepanel tabs*/
+   .sidepanel-container {
+      background-color: rgba(249, 249, 249, 0.438)
+   }
+
