@@ -60,7 +60,7 @@ This AIMMS project illustrates the use of a semi-continuous variable. A semi-con
 +-----+------------------------------------------------------+-------------------------------------------+
 | **Variables:**                                                                                         |
 +-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`X_{p,c} \in \{M_{p}..10000\}`                 | amount of comodity delivered by p to c    |
+|     | :math:`X_{p,c} \in \{M_{p}..10000\}`                 | amount of commodity delivered by p to c   |
 +-----+------------------------------------------------------+-------------------------------------------+
 |     | :math:`Y_{p,c} \in \{o..1\}`                         | p produce to c                            |
 +-----+------------------------------------------------------+-------------------------------------------+
@@ -136,7 +136,7 @@ The following WebUI features are used:
 
 UI Styling
 ----------
-For this project, we used a main css file named ``colors.css``, please check it out directly on the folder. Bellow there are the css files you will find with coments on what they change. 
+For this project, we used a main css file named ``colors.css``, please check it out directly on the folder. Bellow there are the css files you will find with comments on what they change. 
 
 **workflow.css**
 
