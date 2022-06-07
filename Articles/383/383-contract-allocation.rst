@@ -87,7 +87,7 @@ You can add more data freely without changing the sheets structure.
 
 .. aimms:procedure:: pr_importExcelData
 
-This procedure will add and read the ``xml`` mapping available. Take a look at ``Mapping/Inputs.xml``.
+This procedure will add and read the ``xml`` mapping available. Take a look at ``Mappings/inputs.xml``.
 
 .. code-block:: aimms
    :linenos:
@@ -136,7 +136,7 @@ The following WebUI features are used:
 
 UI Styling
 ----------
-For this project, we used a main css file named ``colors.css``, please check it out directly on the folder. Bellow there are the css files you will find with comments on what they change. 
+For this project, we used a main css file named ``colors.css``, please check it out directly on the folder. Below there are the css files you will find with comments on what they change. 
 
 **workflow.css**
 
@@ -247,7 +247,7 @@ For this project, we used a main css file named ``colors.css``, please check it 
       background: var(--primary);
    }
 
-   /*Change the color bellow sidepanel tabs*/
+   /*Change the color below sidepanel tabs*/
    .sidepanel-container {
       background-color: rgba(249, 249, 249, 0.438)
    }
