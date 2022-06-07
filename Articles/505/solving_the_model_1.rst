@@ -119,3 +119,7 @@ Continue to learn on the `AIMMS Academy <http://academy.aimms.com/>`__, and enro
 This course will dig deeper in modeling using AIMMS, building a Web User Interface and communicating with an excel file or a database.
 
 See you there ! 😁
+
+.. spelling::
+    
+    popup

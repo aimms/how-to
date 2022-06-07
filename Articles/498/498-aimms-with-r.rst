@@ -219,4 +219,5 @@ Further reading
 
 .. spelling::
     
-	sankey
+    sankey
+    dataframes
