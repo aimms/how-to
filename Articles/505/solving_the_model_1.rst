@@ -66,7 +66,7 @@ on the `ProgramStatus` keyword as follows:
    :alt: A right-mouse popup menu
    :name: fg:tut:right_mouse_help
    
-   A right-mouse popup menu
+   A right-mouse pop-up menu
 
 .. seealso::
     
