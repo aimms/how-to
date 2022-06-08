@@ -136,6 +136,16 @@ UI Styling
 ----------
 For this project, we used a main css file named ``colors.css``, please check it out directly on the folder. Below there are the css files you will find with comments on what they change. 
 
+**icon.css**
+
+.. code-block:: css
+   :linenos:
+
+   :root {
+      --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/budgeting.png);
+      --spacing_app-logo_width: 45px;
+   }
+
 **workflow.css**
 
 .. code-block:: css
@@ -189,21 +199,6 @@ For this project, we used a main css file named ``colors.css``, please check it 
 
 .. code-block:: css
    :linenos:
-
-   /*Add logo*/
-   .theme-aimms header.tag-application .pages > .app-name::before {
-      content: " ";
-      background: url(img/budgeting.png) no-repeat center/contain;
-      float: left;
-      width: 30px; /*image size*/
-      height: 30px; 
-      margin-right: 7px; /*space between logo and tittle*/
-      margin-top: -8px; /*move the logo down*/
-   }
-
-   .theme-aimms header.tag-application .pages > .app-name {
-      margin-top: 12px; /*move tittle down to be centered in the menu area*/
-   }
 
    .theme-aimms header.tag-application {
       border-bottom: 2px solid var(--primary);
