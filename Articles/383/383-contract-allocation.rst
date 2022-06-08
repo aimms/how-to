@@ -12,8 +12,6 @@ Contract Allocation
 
 .. image:: https://img.shields.io/badge/UI-WebUI-sucess
 
-.. note::
-   AIMMS Community license is sufficient for working with this example.
 
 Story
 -----
@@ -252,3 +250,8 @@ For this project, we used a main css file named ``colors.css``, please check it 
       background-color: rgba(249, 249, 249, 0.438)
    }
 
+   
+Minimal Requirements
+--------------------   
+
+`AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
