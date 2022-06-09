@@ -40,7 +40,8 @@ extensions = ['sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
 	  'sphinx.builders.linkcheck',
     'sphinx_aimms_theme',
-    'sphinxcontrib.spelling']
+    'sphinxcontrib.spelling',
+    'sphinx_design']
   
 intersphinx_mapping = {'fr': ('https://documentation.aimms.com/functionreference/',
                                   (None,'objects-functionreference.inv')),

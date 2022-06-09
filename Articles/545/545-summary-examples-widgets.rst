@@ -7,76 +7,38 @@ Examples vs WebUI Widgets
 
 This page has a summary of the examples versus which WebUI features are used in them.
 
-Per example:
+.. dropdown:: Text Widget
 
-.. list-table:: 
-   :widths: 5 5 5 5 5 5 5 5 5 5
-   :header-rows: 1
+    * :doc:`../383/383-contract-allocation`
 
-   * - 
-     - Text Widget
-     - Image Widget
-     - Workflow
-     - Table Widget
-     - Combination Chart Widget
-     - Page Actions
-     - Side Panel
-     - Scalar Widget
-     - List Widget
-   * - `Contract Allocation <https://how-to.aimms.com/Articles/383/383-contract-allocation.html>`_
-     - :math:`\checkmark` 
-     - :math:`\checkmark` 
-     - :math:`\checkmark` 
-     - :math:`\checkmark` 
-     - :math:`\checkmark` 
-     - :math:`\checkmark` 
-     - :math:`\checkmark` 
-     - :math:`\checkmark` 
-     - :math:`\checkmark`
-   * - `Knapsack <https://how-to.aimms.com/Articles/390/390-knapsack-problem.html>`_
-     - Row 2, column 2
-     - Row 2, column 3
-     - Heading row 1, column 3
-     -
-     -
-     -
-     -
-     -
-     -
+.. dropdown:: Image Widget
 
-Per feature:
+    * :doc:`../383/383-contract-allocation`
 
-.. list-table:: 
-   :widths: 5 5 5
-   :header-rows: 1
+.. dropdown:: Workflow
 
-   * - 
-     - Contract Allocation
-     - Knapsack
-   * - **Text Widget**
-     - :math:`\checkmark` 
-     -
-   * - Image Widget
-     - :math:`\checkmark` 
-     -
-   * - Workflow
-     - :math:`\checkmark` 
-     -
-   * - Table Widget
-     - :math:`\checkmark` 
-     -
-   * - Combination Chart Widget
-     - :math:`\checkmark` 
-     -
-   * - Page Actions
-     - :math:`\checkmark` 
-     -
-   * - Side Panel
-     - :math:`\checkmark` 
-     -
-   * - Scalar Widget
-     - :math:`\checkmark` 
-     -
-   * - List Widget
-     - :math:`\checkmark` 
-     -
+    * :doc:`../383/383-contract-allocation`
+
+.. dropdown:: Table Widget
+
+    * :doc:`../383/383-contract-allocation`
+
+.. dropdown:: Combination Chart Widget
+
+    * :doc:`../383/383-contract-allocation`
+
+.. dropdown:: Page Actions 
+
+    * :doc:`../383/383-contract-allocation`
+
+.. dropdown:: Side Panel
+
+    * :doc:`../383/383-contract-allocation`
+
+.. dropdown:: Compact Scalar Widget
+
+    * :doc:`../383/383-contract-allocation`
+
+.. dropdown:: List Widget
+    
+    * :doc:`../383/383-contract-allocation`
