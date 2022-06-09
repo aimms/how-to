@@ -6,18 +6,36 @@ Combine Bar Chart and Line Chart
    :keywords: linechart, barchart, widget, WebUI, Application Specific Resource
 
 Sometimes you may want to combine a bar and linechart in one widget, a `blinechart <https://manual.aimms.com/webui/bar-line-chart-widget.html>`_. 
-This is introduced as a `new feature of AIMMS 4.76 <https://www.aimms.com/support/new-features/#Barline>`_
 
-In an older version of this article, a blinechart was offered as an application specific resource (ASR).
-If you are using that ASR, please switch to the blinechart provided in AIMMS 4.76 or newer, because:
+There are three ways to combine a line chart with a bar chart:
 
-#.  Functionality is consistent with other widgets
+#.  The `Combination Chart <https://documentation.aimms.com/webui/combination-chart-widget.html>`_ available from AIMMS 4.85 and onwards.  Using this widget is the best practice of combining a bar chart and a line chart.
 
-#.  Supports more than two identifiers
+#.  The `Bline chart <https://www.aimms.com/support/new-features/#Barline>`_ available since AIMMS 4.76. 
 
-#.  The widget is maintained over AIMMS versions
+#.  The Application specific resource (ASR) blinechart.  
+    If you are using that ASR, it is good practice to switch to the Combination Chart:
 
-To remove the deprecated blinechart from your project, please remove the folder ``blinechart`` from the folder ``MainProject\WebUI\resources\javascript``
+    #.  Functionality is consistent with other widgets
+
+    #.  Supports more than two identifiers
+
+    #.  The widget is maintained over AIMMS versions
+
+    To remove the deprecated blinechart from your project, please remove the folder ``blinechart`` from the folder ``MainProject\WebUI\resources\javascript``.
+    
+.. This is introduced as a `new feature of AIMMS 4.76 <https://www.aimms.com/support/new-features/#Barline>`_
+
+.. In an older version of this article, a blinechart was offered as an application specific resource (ASR).
+.. If you are using that ASR, please switch to the blinechart provided in AIMMS 4.76 or newer, because:
+.. 
+.. #.  Functionality is consistent with other widgets
+.. 
+.. #.  Supports more than two identifiers
+.. 
+.. #.  The widget is maintained over AIMMS versions
+.. 
+
 
 .. The example shown below has a single y-axis.
 .. 

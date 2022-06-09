@@ -83,7 +83,7 @@ The ``group`` attribute of Nodes is optional but is used to control the coloring
     :align: center
     :Scale: 50
 
-    Input dataframes for the ``sankeyNetwork`` function.
+    Input data frames for the ``sankeyNetwork`` function.
 
 A sample input file is provided in `sankeyPlot/test.json`. We use ``jsonlite::fromJSON()`` to import data from this file into R.
 So, running ``mySankey("test.json")`` will create the above sankey diagram (displayed in the `Viewer` pane of RStudio). ``hSankey("test.json")`` will return a .html file and ``iSankey("test.json")`` will return a .png file. 
@@ -219,4 +219,5 @@ Further reading
 
 .. spelling::
     
-	sankey
+    sankey
+    dataframes
