@@ -10,6 +10,9 @@ Contract Allocation
 .. image:: https://img.shields.io/badge/AIMMS_4.85-Github:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation
 
+.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
+   :target: https://community.aimms.com/aimms-webui-44/uptaded-contract-allocation-example-1253
+
 .. image:: https://img.shields.io/badge/UI-WebUI-sucess
 
 
