@@ -379,6 +379,7 @@ Both CPLEX and AIMMS provide option settings that limit the number of threads us
     In the AIMMS Cloud each job gets its own docker image.
     Therefore, such a job can behave as if it is the only active process 😉.
 
-
+.. spelling:: 
+    parallelization
 
 
