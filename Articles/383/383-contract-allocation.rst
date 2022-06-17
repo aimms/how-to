@@ -136,116 +136,114 @@ UI Styling
 ----------
 For this project, we used a main css file named ``colors.css``, please check it out directly on the folder. Below there are the css files you will find with comments on what they change. 
 
-.. tab-set::
-    .. tab-item:: icon.css
+**icon.css**
 
-      .. code-block:: css
-         :linenos:
+.. code-block:: css
+   :linenos:
 
-         :root {
-            --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/budgeting.png);
-            --spacing_app-logo_width: 45px;
-         }
+   :root {
+      --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/budgeting.png);
+      --spacing_app-logo_width: 45px;
+   }
 
-    .. tab-item:: workflow.css
+**workflow.css**
 
-      .. code-block:: css
-         :linenos:
+.. code-block:: css
+   :linenos:
 
-         /*Change color of the active step*/
-         .workflow-panel .step-item.current {
-            box-shadow: inset 0.3125rem 0 0 var(--primary);
-         }
+   /*Change color of the active step*/
+   .workflow-panel .step-item.current {
+      box-shadow: inset 0.3125rem 0 0 var(--primary);
+   }
 
-         /*Change color of the titles*/
-         .workflow-panel .step-item.active.complete .title, 
-         .workflow-panel .step-item.active.incomplete .title {
-            color: var(--primaryDark);
-         }
+   /*Change color of the titles*/
+   .workflow-panel .step-item.active.complete .title, 
+   .workflow-panel .step-item.active.incomplete .title {
+      color: var(--primaryDark);
+   }
 
-         /*Change color of the icons*/
-         .workflow-panel .step-item.active.complete .icon, 
-         .workflow-panel .step-item.active.incomplete .icon {
-            color: var(--primaryDark);
-         }
+   /*Change color of the icons*/
+   .workflow-panel .step-item.active.complete .icon, 
+   .workflow-panel .step-item.active.incomplete .icon {
+      color: var(--primaryDark);
+   }
 
+**textColor.css**
 
-    .. tab-item:: textColor.css
+.. code-block:: css
+   :linenos:
 
-      .. code-block:: css
-         :linenos:
+   /*Change table text color*/
+   .tag-table .grid-viewport .cell:not(.flag-readOnly), 
+   html:not(.using-touch) .tag-table .grid-viewport .cell:not(.flag-readOnly) {
+      color: var(--primaryDark);
+   }
 
-         /*Change table text color*/
-         .tag-table .grid-viewport .cell:not(.flag-readOnly), 
-         html:not(.using-touch) .tag-table .grid-viewport .cell:not(.flag-readOnly) {
-            color: var(--primaryDark);
-         }
+   /*Change scalar text color*/
+   .tag-scalar .kpi .value {
+      color: var(--primaryDark);
+   }
 
-         /*Change scalar text color*/
-         .tag-scalar .kpi .value {
-            color: var(--primaryDark);
-         }
+**body.css**
 
-    .. tab-item:: body.css
+.. code-block:: css
+   :linenos:
 
-      .. code-block:: css
-         :linenos:
+   /*Add image on the background*/
+   .scroll-wrapper--pagev2 .page-container {
+      content: " ";
+      background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
+   }
 
-         /*Add image on the background*/
-         .scroll-wrapper--pagev2 .page-container {
-            content: " ";
-            background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
-         }
+**header.css**
 
-    .. tab-item:: header.css
+.. code-block:: css
+   :linenos:
 
-      .. code-block:: css
-         :linenos:
+   .theme-aimms header.tag-application {
+      border-bottom: 2px solid var(--primary);
+   }
 
-         .theme-aimms header.tag-application {
-            border-bottom: 2px solid var(--primary);
-         }
+**combinationChart.css**
 
-    .. tab-item:: combinationChart.css
+.. code-block:: css
+   :linenos:
 
-      .. code-block:: css
-         :linenos:
+   /*Change color of togglelegend of the combination chart*/
+   .togglelegend-button svg{
+      fill: var(--primaryDark);
+   }
 
-         /*Change color of togglelegend of the combination chart*/
-         .togglelegend-button svg{
-            fill: var(--primaryDark);
-         }
+**sidePanel.css**
 
-    .. tab-item:: sidePanel.css
+.. code-block:: css
+   :linenos:
 
-      .. code-block:: css
-         :linenos:
+   /*Change color after tab click*/
+   .sidepanel-container .sidepanel-tab.active {
+      background-color: var(--primary);
+   }
 
-         /*Change color after tab click*/
-         .sidepanel-container .sidepanel-tab.active {
-            background-color: var(--primary);
-         }
+   /*Change letter color on hover*/
+   .sidepanel-container .sidepanel-tab.active:hover {
+      color: white;
+   }
 
-         /*Change letter color on hover*/
-         .sidepanel-container .sidepanel-tab.active:hover {
-            color: white;
-         }
+   /*Change icon color*/
+   .sidepanel-container .sidepanel-tab .sidepanel-icon,
+   .sidepanel-container .sidepanel-tab:hover {
+      color: var(--primary);
+   }
 
-         /*Change icon color*/
-         .sidepanel-container .sidepanel-tab .sidepanel-icon,
-         .sidepanel-container .sidepanel-tab:hover {
-            color: var(--primary);
-         }
+   /*Change color after all tabs*/
+   .sidepanel-container .sidepanel-tabs-container:after {
+      background: var(--primary);
+   }
 
-         /*Change color after all tabs*/
-         .sidepanel-container .sidepanel-tabs-container:after {
-            background: var(--primary);
-         }
-
-         /*Change the color below sidepanel tabs*/
-         .sidepanel-container {
-            background-color: rgba(249, 249, 249, 0.438)
-         }
+   /*Change the color below sidepanel tabs*/
+   .sidepanel-container {
+      background-color: rgba(249, 249, 249, 0.438)
+   }
 
    
 Minimal Requirements
