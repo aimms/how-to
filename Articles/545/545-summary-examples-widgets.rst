@@ -7,67 +7,38 @@ Examples vs WebUI Widgets
 
 This page has a summary of the examples versus which WebUI features are used in them.
 
-.. raw:: html
+.. dropdown:: Text Widget
 
-    <details style="border: solid 1px lightgray; border-radius: 5px; padding: 15px; ">
-    <summary style="cursor: pointer;"><strong>Text Widget</strong></summary><br>
-       <ul>
-            <li><a href="https://how-to.aimms.com/Articles/383/383-contract-allocation.html">Contract Allocation</a></li>
-        </ul>    
-    </details><br>
+    * :doc:`../383/383-contract-allocation`
 
-    <details style="border: solid 1px lightgray; border-radius: 5px; padding: 15px; ">
-    <summary style="cursor: pointer;"><strong>Image Widget</strong></summary><br>
-       <ul>
-            <li><a href="https://how-to.aimms.com/Articles/383/383-contract-allocation.html">Contract Allocation</a></li>
-        </ul>
-    </details><br>
+.. dropdown:: Image Widget
 
-    <details style="border: solid 1px lightgray; border-radius: 5px; padding: 15px; ">
-    <summary style="cursor: pointer;"><strong>Workflow</strong></summary><br>
-        <ul>
-            <li><a href="https://how-to.aimms.com/Articles/383/383-contract-allocation.html">Contract Allocation</a></li>
-        </ul>    
-    </details><br>
+    * :doc:`../383/383-contract-allocation`
 
-    <details style="border: solid 1px lightgray; border-radius: 5px; padding: 15px; ">
-    <summary style="cursor: pointer;"><strong>Table Widget</strong></summary><br>
-        <ul>
-            <li><a href="https://how-to.aimms.com/Articles/383/383-contract-allocation.html">Contract Allocation</a></li>
-        </ul>    
-    </details><br>
+.. dropdown:: Workflow
 
-    <details style="border: solid 1px lightgray; border-radius: 5px; padding: 15px; ">
-    <summary style="cursor: pointer;"><strong>Combination Chart Widget</strong></summary><br>
-        <ul>
-            <li><a href="https://how-to.aimms.com/Articles/383/383-contract-allocation.html">Contract Allocation</a></li>
-        </ul>    
-    </details><br>
+    * :doc:`../383/383-contract-allocation`
 
-    <details style="border: solid 1px lightgray; border-radius: 5px; padding: 15px; ">
-    <summary style="cursor: pointer;"><strong>Page Actions</strong></summary><br>
-        <ul>
-            <li><a href="https://how-to.aimms.com/Articles/383/383-contract-allocation.html">Contract Allocation</a></li>
-        </ul>    
-    </details><br>
+.. dropdown:: Table Widget
 
-    <details style="border: solid 1px lightgray; border-radius: 5px; padding: 15px; ">
-    <summary style="cursor: pointer;"><strong>Side Panel</strong></summary><br>
-        <ul>
-            <li><a href="https://how-to.aimms.com/Articles/383/383-contract-allocation.html">Contract Allocation</a></li>
-        </ul>    
-    </details><br>
+    * :doc:`../383/383-contract-allocation`
 
-    <details style="border: solid 1px lightgray; border-radius: 5px; padding: 15px; ">
-    <summary style="cursor: pointer;"><strong>Compact Scalar Widget</strong></summary><br>
-        <ul>
-            <li><a href="https://how-to.aimms.com/Articles/383/383-contract-allocation.html">Contract Allocation</a></li>
-        </ul>    
-    </details><br>
+.. dropdown:: Combination Chart Widget
 
-    <details style="border: solid 1px lightgray; border-radius: 5px; padding: 15px; ">
-    <summary style="cursor: pointer;"><strong>List Widget</strong></summary><br>
-        <ul>
-            <li><a href="https://how-to.aimms.com/Articles/383/383-contract-allocation.html">Contract Allocation</a></li>
-        </ul>    
-    </details><br>
+    * :doc:`../383/383-contract-allocation`
+
+.. dropdown:: Page Actions 
+
+    * :doc:`../383/383-contract-allocation`
+
+.. dropdown:: Side Panel
+
+    * :doc:`../383/383-contract-allocation`
+
+.. dropdown:: Compact Scalar Widget
+
+    * :doc:`../383/383-contract-allocation`
+
+.. dropdown:: List Widget
+    
+    * :doc:`../383/383-contract-allocation`
