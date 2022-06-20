@@ -170,8 +170,8 @@ For this project, we used a main css file named ``colors.css``, please check it 
          .workflow-panel .step-item.active.complete .icon, 
          .workflow-panel .step-item.active.incomplete .icon {
             color: var(--primaryDark);
+            border: 1px solid var(--primaryDark);
          }
-
 
     .. tab-item:: textColor.css
 
@@ -186,6 +186,11 @@ For this project, we used a main css file named ``colors.css``, please check it 
 
          /*Change scalar text color*/
          .tag-scalar .kpi .value {
+            color: var(--primaryDark);
+         }
+
+         /*Link color*/
+         .ql-snow a {  
             color: var(--primaryDark);
          }
 
@@ -219,6 +224,10 @@ For this project, we used a main css file named ``colors.css``, please check it 
             fill: var(--primaryDark);
          }
 
+         .togglelegend-button-active:hover svg g, .togglelegend-button-active svg g {
+            fill: var(--primary);    
+         }
+
     .. tab-item:: sidePanel.css
 
       .. code-block:: css
@@ -249,9 +258,53 @@ For this project, we used a main css file named ``colors.css``, please check it 
          .sidepanel-container {
             background-color: rgba(249, 249, 249, 0.438)
          }
-
-
    
+    .. tab-item:: button.css
+
+      .. code-block:: css
+         :linenos:
+
+         /*Change color of the busy button*/
+         .veil-msg.state-busy .ui-button {
+            background-color: var(--primary);
+         }
+   
+    .. tab-item:: pageAction.css
+
+      .. code-block:: css
+         :linenos:
+
+         .page-action-v2 .page-action-menu,
+         .page-action-v2 .page-action-menu.open {
+            background: var(--primaryDark);
+         }
+
+         .page-action-v2 .page-action-menu:hover,
+         .page-action-v2 .page-action-menu:hover {
+            background: var(--primary);
+         }
+
+         .page-action-v2 .page-action-holder .page-action-item .page-action-icon, 
+         .page-action-v2 .page-action-holder .page-action-item .page-action-letter {
+            background-color: var(--primaryDark);
+         }
+
+         .page-action-v2 .page-action-holder .page-action-item .page-action-icon:hover, 
+         .page-action-v2 .page-action-holder .page-action-item .page-action-letter:hover {
+            background-color: var(--primary);
+         }
+   
+    .. tab-item:: table.css
+
+      .. code-block:: css
+         :linenos:
+
+         .tag-table.focused .focus-cell {
+            box-shadow: inset 0 0 0 1px var(--primaryDark);
+         }
+
+
+
 Minimal Requirements
 --------------------   
 
