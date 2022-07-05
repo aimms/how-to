@@ -80,7 +80,6 @@ Language
 In this example we used 10 northwestern states for the contracts and 5 cities from that region for the producers. To import the data into our model, we are currently using DEX library through Excel (``NothWesternStates.xlsx``). 
 You can add more data freely without changing the sheets structure.  
 
-.. aimms:procedure:: pr_importExcelData
 
 This procedure will add and read the ``xml`` mapping available. Take a look at ``Mappings/inputs.xml``.
 
