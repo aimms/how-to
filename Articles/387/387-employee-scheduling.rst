@@ -82,8 +82,8 @@ Language
 WebUI Features
 --------------
 
-On master page, there are two 'hidden' features. First is that if you click with the right button on either table widgets, a small menu will appear with CRUD options for that set. And, the gantt chant is editable, ie. you can modify start time and duration directly into the graph!
-Both results page have similar funcionality, click around into the tables to see different views on the gantts and graphs. 
+On master page, there are two 'hidden' features. First is that if you click with the right button on either table widgets, a small menu will appear with CRUD options for that set. And, the Gantt chant is editable, i.e. you can modify start time and duration directly into the graph!
+Both results page have similar functionality, click around into the tables to see different views on the Gantts and graphs. 
 
 The following WebUI features are used:
 
