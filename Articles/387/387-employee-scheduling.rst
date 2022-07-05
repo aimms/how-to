@@ -28,7 +28,7 @@ The employees work in shifts and each position is primarily fulfilled by skilled
 Mathematical Model
 ------------------
 
-This AIMMS project illustrates the use of a semi-continuous variable. A semi-continuous variable is either zero or within a certain range. This type of variables can be used in conditions like, whenever there is a transport this transport has a minimum size. 
+SOMETHING HERE
 
 +-----+-------------------------------------------------------------------------------------+-------------------------------------------+
 |       Employee Scheduling Problem                                                                                                     |
@@ -49,9 +49,9 @@ This AIMMS project illustrates the use of a semi-continuous variable. A semi-con
 +-----+-------------------------------------------------------------------------------------+-------------------------------------------+
 |     | :math:`eD_{e,h} \in \{0..1\}`                                                       | employees' availability for shifts        |
 +-----+-------------------------------------------------------------------------------------+-------------------------------------------+
-|     | :math:`eH_{r,e,h,k} \in \{0..1\}`                                                   | employees' skills                         |
+|     | :math:`eH_{e,k} \in \{0..1\}`                                                       | employees' skills                         |
 +-----+-------------------------------------------------------------------------------------+-------------------------------------------+
-|     | :math:`eP_{r,e,h,k} \in \{0..1\}`                                                   | job preferences of the employees          |
+|     | :math:`eP_{r,e,h,k} \in \mathbb{R}`                                                 | job preferences of the employees          |
 +-----+-------------------------------------------------------------------------------------+-------------------------------------------+
 | **Variables:**                                                                                                                        |
 +-----+-------------------------------------------------------------------------------------+-------------------------------------------+
@@ -77,36 +77,13 @@ This AIMMS project illustrates the use of a semi-continuous variable. A semi-con
 Language 
 --------
 
-In this example we used 10 northwestern states for the contracts and 5 cities from that region for the producers. To import the data into our model, we are currently using DEX library through Excel (``NothWesternStates.xlsx``). 
-You can add more data freely without changing the sheets structure.  
-
-
-This procedure will add and read the ``xml`` mapping available. Take a look at ``Mappings/inputs.xml``.
-
-.. code-block:: aimms
-   :linenos:
-
-   dex::AddMapping(
-      mappingName :  "inputs", 
-      mappingFile :  "Mappings/inputs.xml");
-
-   dex::ReadFromFile(
-      dataFile         :  "NothWesternStates.xlsx", 
-      mappingName      :  "inputs", 
-      emptyIdentifiers :  1, 
-      emptySets        :  1, 
-      resetCounters    :  1);
-
-   ep_actualContract := first(i_contract);
-   ep_actualProducer := first(i_producer);
-
-.. seealso::
-   To understand in depth check out `DEX documentation <https://documentation.aimms.com/dataexchange/index.html>`_ .
+- TALK ABOUT DB CONNECTIONS
 
 WebUI Features
 --------------
 
-On input page, if you click around the graphs, a highlighted cell will appear identifying the last clicked element. The results are displayed in a combination chart (stacked bar chart).
+On master page, there are two 'hidden' features. First is that if you click with the right button on either table widgets, a small menu will appear with CRUD options for that set. And, the gantt chant is editable, ie. you can modify start time and duration directly into the graph!
+Both results page have similar funcionality, click around into the tables to see different views on the gantts and graphs. 
 
 The following WebUI features are used:
 
@@ -118,15 +95,17 @@ The following WebUI features are used:
 
 - Table Widget
 
+- Gantt Chart Widget
+
 - Combination Chart Widget
+
+- Item Actions
 
 - Page Actions 
 
 - Side Panel
 
-- Compact Scalar Widget
-
-- List Widget
+- Scalar Widget
 
 UI Styling
 ----------
@@ -139,7 +118,7 @@ For this project, we used a main css file named ``colors.css``, please check it 
          :linenos:
 
          :root {
-            --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/budgeting.png);
+            --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/schedule.png);
             --spacing_app-logo_width: 45px;
          }
 
@@ -149,8 +128,9 @@ For this project, we used a main css file named ``colors.css``, please check it 
          :linenos:
 
          /*Change color of the active step*/
-         .workflow-panel .step-item.current {
-            box-shadow: inset 0.3125rem 0 0 var(--primary);
+         .workflow-panel .step-item.current,
+         .workflow-panel.collapse .step-item.current {
+            box-shadow: inset 0.3125rem 0 0 var(--primaryDark);
          }
 
          /*Change color of the titles*/
@@ -192,10 +172,15 @@ For this project, we used a main css file named ``colors.css``, please check it 
       .. code-block:: css
          :linenos:
 
-         /*Add image on the background*/
+         /*Add logo on the background*/
          .scroll-wrapper--pagev2 .page-container {
             content: " ";
             background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
+         }
+
+         .widgetdiv .awf-dock.top {
+            border-bottom: 2px solid var(--primaryDark);
+            background: linear-gradient(180deg, rgba(255,255,255,1) 20%, var(--primary) 100%);
          }
 
     .. tab-item:: header.css
@@ -204,7 +189,7 @@ For this project, we used a main css file named ``colors.css``, please check it 
          :linenos:
 
          .theme-aimms header.tag-application {
-            border-bottom: 2px solid var(--primary);
+            border-bottom: 2px solid var(--primaryDark);
          }
 
     .. tab-item:: combinationChart.css
@@ -228,7 +213,7 @@ For this project, we used a main css file named ``colors.css``, please check it 
 
          /*Change color after tab click*/
          .sidepanel-container .sidepanel-tab.active {
-            background-color: var(--primary);
+            background-color: var(--primaryDark);
          }
 
          /*Change letter color on hover*/
@@ -239,27 +224,22 @@ For this project, we used a main css file named ``colors.css``, please check it 
          /*Change icon color*/
          .sidepanel-container .sidepanel-tab .sidepanel-icon,
          .sidepanel-container .sidepanel-tab:hover {
-            color: var(--primary);
+            color: var(--primaryDark);
          }
 
          /*Change color after all tabs*/
          .sidepanel-container .sidepanel-tabs-container:after {
-            background: var(--primary);
+            background: var(--primaryDark);
          }
 
          /*Change the color below sidepanel tabs*/
          .sidepanel-container {
-            background-color: rgba(249, 249, 249, 0.438)
+            background-color:   rgb(249, 249, 249);
+
          }
-   
-    .. tab-item:: button.css
 
-      .. code-block:: css
-         :linenos:
-
-         /*Change color of the busy button*/
-         .veil-msg.state-busy .ui-button {
-            background-color: var(--primary);
+         .sidepanel-active .sidepanel-container {
+            background-color:   rgba(249, 249, 249, 0);
          }
    
     .. tab-item:: pageAction.css
@@ -296,6 +276,14 @@ For this project, we used a main css file named ``colors.css``, please check it 
             box-shadow: inset 0 0 0 1px var(--primaryDark);
          }
 
+         .tag-table .cell.flag-number input{
+            text-align: center;
+         }
+
+         /*Change checkbox color*/
+         input.boolean-cell-editor-contents {
+            accent-color: var(--primaryDark);
+         }
 
 
 Minimal Requirements
