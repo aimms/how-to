@@ -126,7 +126,6 @@ The following WebUI features are used:
 
 - `Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
-- `Annotations <https://documentation.aimms.com/webui/css-styling.html>`_
 
 UI Styling
 ----------

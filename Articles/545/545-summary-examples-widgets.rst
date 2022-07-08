@@ -10,29 +10,36 @@ This page has a summary of the examples versus which WebUI features are used in 
 .. dropdown:: Text Widget
 
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../387/387-employee-scheduling`
 
 .. dropdown:: Image Widget
 
+    * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
 
 .. dropdown:: Workflow
 
+    * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
 
 .. dropdown:: Table Widget
 
+    * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
 
 .. dropdown:: Combination Chart Widget
 
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../387/387-employee-scheduling`
 
 .. dropdown:: Page Actions 
 
+    * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
 
 .. dropdown:: Side Panel
 
+    * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
 
 .. dropdown:: Compact Scalar Widget
@@ -42,3 +49,16 @@ This page has a summary of the examples versus which WebUI features are used in 
 .. dropdown:: List Widget
     
     * :doc:`../383/383-contract-allocation`
+
+.. dropdown:: Gantt Chart Widget
+
+    * :doc:`../387/387-employee-scheduling`
+
+.. dropdown:: Item Actions
+
+    * :doc:`../387/387-employee-scheduling`
+
+.. dropdown:: Scalar Widget
+
+    * :doc:`../387/387-employee-scheduling`
+
