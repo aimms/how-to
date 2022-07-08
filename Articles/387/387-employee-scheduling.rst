@@ -14,9 +14,6 @@ Employee Scheduling
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-webui-44/uptaded-contract-allocation-example-1253
 
-.. image:: https://img.shields.io/badge/UI-WebUI-sucess
-
-
 Story
 -----
 
@@ -77,35 +74,59 @@ SOMETHING HERE
 Language 
 --------
 
+SQLite 
+~~~~~~
 - TALK ABOUT DB CONNECTIONS
+
+.. note:: Need to go deeper into DB connections? `This course <https://academy.aimms.com/course/view.php?id=37>`_ is perfect for you!
+
+Annotations
+~~~~~~~~~~~
+
+On this project `annotation <https://documentation.aimms.com/webui/css-styling.html>`_ is used on the Combination Chart. For this, we added a new css file:
+
+.. code-block:: css
+   :linenos:
+
+   .annotation-red {
+      fill: var(--secondary);
+   }
+   .annotation-not-red {
+      fill: var(--primaryDark);
+   }
+
+Create into a string parameter the logic or define directly with the css class you want. Go to the identifier shown on the `Combination Chart <https://documentation.aimms.com/webui/combination-chart-widget.html>`_ and add that string parameter into ``webui::AnnotationsIdentifier``.  
 
 WebUI Features
 --------------
 
-On master page, there are two 'hidden' features. First is that if you click with the right button on either table widgets, a small menu will appear with CRUD options for that set. And, the Gantt chant is editable, i.e. you can modify start time and duration directly into the graph!
+On master page, there are two 'hidden' features. First is that if you click with the right button on either table widgets, a small menu will appear with `CRUD <https://pt.wikipedia.org/wiki/CRUD>`_ options for that set. 
+And, the Gantt chant is editable, i.e. you can modify start time and duration directly into the graph!
 Both results page have similar functionality, click around into the tables to see different views on the Gantts and graphs. 
 
 The following WebUI features are used:
 
-- Text Widget
+- `Text Widget <https://documentation.aimms.com/webui/text-widget.html>`_
 
-- Image Widget
+- `Image Widget <https://documentation.aimms.com/webui/image-widget.html>`_
 
-- Workflow
+- `Workflow <https://documentation.aimms.com/webui/workflow-panels.html>`_
 
-- Table Widget
+- `Table Widget <https://documentation.aimms.com/webui/table-widget.html>`_
 
-- Gantt Chart Widget
+- `Gantt Chart Widget <https://documentation.aimms.com/webui/gantt-chart-widget.html>`_
 
-- Combination Chart Widget
+- `Combination Chart Widget <https://documentation.aimms.com/webui/combination-chart-widget.html>`_
 
-- Item Actions
+- `Item Actions <https://documentation.aimms.com/webui/widget-options.html#item-actions>`_
 
-- Page Actions 
+- `Page Actions <https://documentation.aimms.com/webui/page-menu.html>`_ 
 
-- Side Panel
+- `Side Panel <https://documentation.aimms.com/webui/side-panels-grd-pages.html#side-panel-grid-pages>`_
 
-- Scalar Widget
+- `Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
+
+- `Annotations <https://documentation.aimms.com/webui/css-styling.html>`_
 
 UI Styling
 ----------
@@ -289,4 +310,5 @@ For this project, we used a main css file named ``colors.css``, please check it 
 Minimal Requirements
 --------------------   
 
-`AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
+`AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient and `ODBC instalation <https://how-to.aimms.com/Articles/118/118-Connect-SQLite.html>`_ is necessary for working with this example.
+
