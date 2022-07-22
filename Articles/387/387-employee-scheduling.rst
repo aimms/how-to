@@ -25,7 +25,14 @@ The employees work in shifts and each position is primarily fulfilled by skilled
 Mathematical Model
 ------------------
 
-SOMETHING HERE
+The mathematical programming model for this example is a variation of the `assignment problem <https://en.wikipedia.org/wiki/Assignment_problem>`_.
+The similarity is that people are assigned to tasks, the differences are 
+
+* that unmet demand is taken into account, 
+
+* multiple shifts, and 
+
+* the same skill is needed at different restaurants.
 
 +-----+-------------------------------------------------------------------------------------+-------------------------------------------+
 |       Employee Scheduling Problem                                                                                                     |
@@ -74,11 +81,144 @@ SOMETHING HERE
 Language 
 --------
 
-SQLite 
-~~~~~~
-- TALK ABOUT DB CONNECTIONS
+In this section a few highlights of the use of the AIMMS Language in the application are pointed out.
 
-.. note:: Need to go deeper into DB connections? `This course <https://academy.aimms.com/course/view.php?id=37>`_ is perfect for you!
+Structure
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This application structured its data nicely by using sections nested, as can be seen in the next screenshot.
+Each section at the leaf level contains a few identifiers which helps finding your way around the application.
+
+.. image:: images/model-explorer-section-structure.png
+    :align: center
+
+This structuring is meaningful; the structure can be used in the application, 
+for instance in a mathematical program declaration like:
+
+.. code-block:: aimms 
+    :linenos:
+
+    MathematicalProgram mp_minimizeCost {
+        Objective: v_totalCost;
+        Direction: minimize;
+        Constraints: s_employeeAssignmentConstraints;
+        Variables: s_employeeAssignmentVariables;
+        Type: Automatic;
+    }
+
+The set ``s_employeeAssignmentConstraints`` is constructed by intersecting the declarations inside the section ``Math_model`` with the predeclared :aimms:set:`AllConstraints`. 
+
+.. code-block:: aimms 
+    :linenos:
+
+    Set s_employeeAssignmentConstraints {
+        SubsetOf: AllConstraints;
+        Definition: AllConstraints * Math_Model;
+    }
+
+Such structuring eases grouping related constraints and variables together into a mathematical program; or rather,
+to work with multiple groups of constraints and variables and thereby defining multiple multiple mathematical programs in a single application.
+
+Database 
+~~~~~~~~~~~~~~~~~~~~~~
+
+The Employee Scheduling example persists its data in a database, a SQLite database.
+
+Connecting to the database
+""""""""""""""""""""""""""""""
+
+A SQLite database is just a file, and authentication is not needed, so a connection string can be build as follows:
+
+.. code-block:: aimms 
+    :linenos:
+
+    StringParameter sp_connectionString {
+        Definition: {
+            SQLCreateConnectionString (
+                DatabaseInterface              :  'odbc',
+                DriverName                     :  "SQLite3 ODBC Driver",
+                ServerName                     :  "", 
+                DatabaseName                   :  "inputs.db", !The path of your database
+                UserId                         :  "", 
+                Password                       :  "", 
+                AdditionalConnectionParameters :  "") ;
+        }
+    }
+
+Relating tables in the database to tables in the AIMMS model
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+An example of a table declaration in a SQLite database is illustrated in the next image:
+
+.. image:: images/employee-skill-SQLite-table.png
+    :align: center
+
+The AIMMS database declaration of the corresponding table is as follows:
+
+.. code-block:: aimms 
+    :linenos:
+
+    DatabaseTable db_readEmployeeSkills {
+        DataSource: sp_connectionString;
+        TableName: "employee_skill";
+        Mapping: {
+            "employee_id"      -->i_empl,
+            "skill_id"         -->i_sk,
+            "has_skill"        -->p_employeeHasSkill,
+            "skill_preference" -->p_employeeSkillPreference
+        }
+    }
+
+
+Once the connection string exists, the data in the tables is read by a database declaration and a read statement.
+If the data is changed in the user interface, the data is persisted using similar write statements.
+
+Reading from the database
+"""""""""""""""""""""""""""""
+
+
+As you can see, the column names of the table are used to relate to the AIMMS identifiers at hand.
+
+Transferring the data from the SQLite database to the AIMMS application is done using the following read statement:
+
+.. code-block:: aimms 
+    :linenos:
+
+    Procedure pr_readEmployeeSkillDB {
+        Body: {
+            empty Employee_Skill; 
+            
+            read from table db_readEmployeeSkills;
+        }
+    }
+    
+Note that ``Employee_Skill`` is a declaration section; all identifiers declared in that section will be emptied by the first statement in the procedure ``pr_readEmployeeSkillDB``;
+
+Writing to the database
+""""""""""""""""""""""""""
+
+
+Transferring the data from the AIMMS application to the SQLite database is done using the following write statement:
+
+.. code-block:: aimms 
+    :linenos:
+
+    Procedure pr_writeEmployeeSkillDB {
+        Body: {
+            write p_employeeHasSkill(i_empl, i_sk),
+                    p_employeeSkillPreference(i_empl, i_sk)
+                to table db_readEmployeeSkills in dense mode;
+        }
+    }
+
+References for using ODBC
+""""""""""""""""""""""""""""""
+
+#.  `Link an SQLite Database to a Project <https://how-to.aimms.com/Articles/118/118-Connect-SQLite.html>`_
+
+#.  `SQLCreateConnectionString <https://documentation.aimms.com/functionreference/data-management/database-functions/sqlcreateconnectionstring.html>`_
+
+#.  Need to go deeper into DB connections? `This course <https://academy.aimms.com/course/view.php?id=37>`_ is perfect for you!
 
 Annotations
 ~~~~~~~~~~~
