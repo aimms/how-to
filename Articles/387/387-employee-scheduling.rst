@@ -12,7 +12,7 @@ Employee Scheduling
    :target: https://github.com/aimms/employee-scheduling
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-webui-44/uptaded-contract-allocation-example-1253
+   :target: https://community.aimms.com/aimms-webui-44/updated-employee-scheduling-example-1291
 
 Story
 -----
