@@ -13,20 +13,7 @@ LibraryModule Library_GuardServerSessionTest {
 		Section Test_NoSave_Still_properly_applied {
 			Set s_identifiersSavedInCase {
 				SubsetOf: AllIdentifiers;
-				InitialData: {
-					data 
-					    { 'gss::s_inputCaseIdentifiers' ,
-					      'gss::s_outputCaseIdentifiers',
-					      'gss::ep_tracingFilterlevel'  ,
-					      'gss::sp_serverSessionId'     ,
-					      'gss::p_jobProfilerData'      ,
-					      'gss::sp_jobErrorMessages'    ,
-					      'gss::sp_jobErrorMoments'     ,
-					      'gss::ep_jobErrorSeverity'    ,
-					      'gss::ep_jobErrorNodes'       ,
-					      'gss::ep_jobErrorAttributes'  ,
-					      'gss::p_jobErrorLines'        }
-				}
+				InitialData: data {};
 			}
 			Set s_identifiersSavedInCaseCheck {
 				SubsetOf: AllIdentifiers;
@@ -42,7 +29,9 @@ LibraryModule Library_GuardServerSessionTest {
 					      'gss::ep_jobErrorSeverity'    ,
 					      'gss::ep_jobErrorNodes'       ,
 					      'gss::ep_jobErrorAttributes'  ,
-					      'gss::p_jobErrorLines'        }
+					      'gss::p_jobErrorLines'        ,
+					      'gss::s_Settings'             ,
+					      'gss::sp_settingValue'}
 				}
 			}
 			Set s_diffIdentifiersSavedInCase {
@@ -58,11 +47,36 @@ LibraryModule Library_GuardServerSessionTest {
 						{ indexIdentifiers | not gss::fnc_hasPropertyNoSave( IndexIdentifiers ) } *
 						( allparameters + allsets + allvariables + allconstraints + AllMathematicalPrograms ) *
 						Library_GuardServerSession ;
+					display s_diffIdentifiersSavedInCase ;
 					aimmsunit::AssertTrue( 
 						"Ensure the same GSS identifiers are still saved in a PRO Input / Output case",
 						card( s_diffIdentifiersSavedInCase ) = 0 );
 				}
 				aimmsunit::TestSuite: GSSunitTest;
+			}
+		}
+		Section Test_fnc_SetToString {
+			Procedure pr_testFnc_SetToString {
+				Body: {
+					s := data {} ;
+					sp_res := gss::fnc_SetToString( s );
+					aimmsunit::AssertTrue( "converting empty set to string", sp_res = "{ }" );
+					
+					s := data { one } ;
+					sp_res := gss::fnc_SetToString( s );
+					aimmsunit::AssertTrue( "converting singleton set to string", sp_res = "{ one }" );
+					
+					s := data { one, two } ;
+					sp_res := gss::fnc_SetToString( s );
+					aimmsunit::AssertTrue( "converting doubleton set to string", sp_res = "{ one, two }" );
+					
+					s := data { one, two, three } ;
+					sp_res := gss::fnc_SetToString( s );
+					aimmsunit::AssertTrue( "converting tripleton set to string", sp_res = "{ one, two, three }" );
+				}
+				aimmsunit::TestSuite: GSSunitTest;
+				Set s;
+				StringParameter sp_res;
 			}
 		}
 		Section Main_Library_procedures {

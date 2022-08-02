@@ -372,4 +372,20 @@ Model Main_Flow_Shop {
 			!
 		}
 	}
+	Procedure RunAllTests {
+		Body: {
+			if not DirectoryExists( "log" ) then 
+				DirectoryCreate( "log" );
+			endif ;
+			
+			ep_proc := StringToElement( AllIdentifiers, "aimmsunit::DetermineTestSuites",   create: 0 );
+			if ep_proc then Apply( ep_proc ); endif ;
+			ep_proc := StringToElement( AllIdentifiers, "aimmsunit::RunSelectedTestSuites", create: 0 );
+			if ep_proc then Apply( ep_proc ); endif ;
+		}
+		ElementParameter ep_proc {
+			Range: AllProcedures;
+			Default: 'MainExecution';
+		}
+	}
 }
