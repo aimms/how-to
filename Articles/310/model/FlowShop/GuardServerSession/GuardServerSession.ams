@@ -821,7 +821,7 @@ LibraryModule Library_GuardServerSession {
 						if not ep_trackedSession then
 							raise error "pr_saveTrackedSessionData() unable to create effective session id";
 						endif ;
-						pr_logMsg("s_trackedSessions = "+s_trackedSessions);
+						pr_logMsg("s_trackedSessions = "+fnc_setToString( s_trackedSessions ));
 						
 						p_trackedJobProfilerData(ep_trackedSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes) := p_jobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes);
 						
@@ -4477,6 +4477,7 @@ LibraryModule Library_GuardServerSession {
 					
 					fnc_SetToString := sp_retval ;
 				}
+				Comment: "Returns a string in the form { e1, e2, ... en } for elements e1, ..., en of set s_set";
 				Set s_set {
 					Property: Input;
 				}
