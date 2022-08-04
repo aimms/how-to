@@ -35,6 +35,7 @@ LibraryModule Library_StopwatchLibrary {
 					sp_StartTime := CurrentToString( "%c%y-%m-%d %H:%M:%S:%t" );
 				endif ;
 			}
+			Comment: "Marks \"now\" as the start of measuring wall clock time.";
 		}
 		Function fnc_elapsed {
 			Unit: s;
@@ -49,12 +50,16 @@ LibraryModule Library_StopwatchLibrary {
 					p_elapsedTime := StringToMoment(
 						Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')", 
 						Unit          :  [tick], 
-						ReferenceDate :  stopwatch::sp_startTime, 
+						ReferenceDate :  sp_startTime, 
 						Timeslot      :  sp_stopMoment);
 				else
 					p_elapsedTime := CurrentToMoment( [tick],  sp_StartTime );
 				endif ;
 				fnc_elapsed := p_elapsedTime ;
+			}
+			Comment: {
+				"Return the wallclock time, in seconds, since the last call to pr_start.
+				Note that pr_start is also called in PostLibraryInitialization."
 			}
 			StringParameter sp_stopMoment;
 			Parameter p_elapsedTime {
