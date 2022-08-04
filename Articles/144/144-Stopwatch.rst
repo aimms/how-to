@@ -64,22 +64,20 @@ Download the :download:`example AIMMS Project <downloads/Stopwatch.zip>`
 In this procedure, we use functions from the ``stopwatchLibrary`` to measure the time it took to execute ``pr_LongRunningProcedure``. 
 Line-6 is simply constructing a message using the stopwatch results. 
 
-stopwatchLibrary
+stopwatch Library
 -------------------
 
 Please :download:`Stopwatch Library<downloads/StopwatchLibrary.zip>` with prefix ``stopwatch`` and add it to your project.
 This library exposes a procedure and a function:
 
-#.  ``pr_start()`` Mark "now" as a starting point for measuring wallclock execution time.
+#.  ``pr_start()`` Mark "now" as a starting point for measuring wall clock execution time.
 
-#.  ``fnc_elapsed`` Return the wallclock time elapsed in seconds since the last call to ``pr_start()``
+#.  ``fnc_elapsed`` Return the wall clock time elapsed in seconds since the last call to ``pr_start()``
 
 History
 --------
 
-History:
-
-* Guido Diepen developed the first Stopwatch section and blogged about it.
+* In 2010, Guido Diepen developed the first Stopwatch section and blogged about it.
 
 * In 2022, Chris Kuip made a small library out of that section, to
 
