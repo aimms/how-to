@@ -43,7 +43,7 @@ To save it, we will need to copy it from that folder to AIMMS PRO storage:
 
     .. code-block:: aimms
         :linenos:
-        :emphasize-lines: 6-10
+        :emphasize-lines: 6-11
 
         Empty AllVariables;
         GenerateData();
