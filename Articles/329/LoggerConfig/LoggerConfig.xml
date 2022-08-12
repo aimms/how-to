@@ -149,7 +149,11 @@
     </logger>
 
     <!--- Database logging -->
-    <!--- See also https://documentation.aimms.com/release-notes.html#aimms-improvements -->
+    <!--- See also https://documentation.aimms.com/release-notes.html#aimms-improvements 
+          https://documentation.aimms.com/release-notes.html#id99
+          https://documentation.aimms.com/release-notes.html#id99:~:text=We%20updated%20the%20logging%20for%20the%20AIMMS%20database%20functionality.%20All%20database%2Drelated%20activity%20is%20now%20logged%20on%20child%20loggers%20of%20AIMMS
+          
+    -->
     <logger name="AIMMS.Database">
         <!--- Exchanging data with ODBC data sources, the log levels are as follows:
             o Info: model level

@@ -77,7 +77,7 @@ This library exposes a procedure and a function:
 History
 --------
 
-* In 2010, Guido Diepen developed the first Stopwatch section and blogged about it.
+* In 2011, Guido Diepen developed the first Stopwatch section and blogged about it.
 
 * In 2022, Chris Kuip made a small library out of that section, to
 
