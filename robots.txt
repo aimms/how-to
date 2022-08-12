@@ -23,6 +23,7 @@ Disallow: https://how-to.aimms.com/Articles/368/368-attempting-connect.html
 Disallow: https://how-to.aimms.com/Articles/499/499-mysql-duplicate-records.html
 Disallow: https://how-to.aimms.com/Articles/283/283-convert-json-to-xml.html
 Disallow: https://how-to.aimms.com/Articles/283/283-convert-json-to-xml-original.html
+Disallow: https://how-to.aimms.com/Articles/320/320-aimms-pro-usage-statistics.html
 Disallow: /staging/
 
 
