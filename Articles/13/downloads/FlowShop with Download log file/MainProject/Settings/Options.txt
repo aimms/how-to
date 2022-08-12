@@ -2,31 +2,29 @@
 major_messages 1
 solver_listing_messages 4
 time_messages 1
-* AOA
-* BARON 15
+* BARON 21
 * CBC 2.9
 "CBC 2.9".Status_file 1
-* CONOPT 3.14V
-"CONOPT 3.14V".Status_file_display 2
-* CONOPT 4.0
-* CPLEX 12.6.3
-* CPLEX 12.8
-* CPOptimizer 12.6.3
-* CPOptimizer 12.7
-* GUROBI 7.5
-* GUROBI 8.0
+* CONOPT 4.1
+* CPLEX 22.1
+"CPLEX 22.1".MIP_display 2
+* CPOptimizer 22.1
+* GUROBI 9.5
 * IPOPT 3.11
 "IPOPT 3.11".Status_file 1
-* Knitro 10.3
-"Knitro 10.3".Status_file_display 1
-* Knitro 11.0
+* Knitro 12.3
+* Knitro 13.1
 * MINOS
 "MINOS".Print_to_log_file 1
-* ODH-CPLEX 3.2
+* ODH-CPLEX 5.3
 * PATH 4.7
 * SNOPT 7.2
 "SNOPT 7.2".Print_output_file 1
 * XA 16
+* CONOPT 3.14V
+"CONOPT 3.14V".Status_file_display 2
+* Knitro 10.3
+"Knitro 10.3".Status_file_display 1
 * NETSOL
 * Environment
 Project_Title "Flowshop model - with download log file"

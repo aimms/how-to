@@ -51,13 +51,14 @@ To save it, we will need to copy it from that folder to AIMMS PRO storage:
         solve FlowShopModel  ;
 
         ! Copy the solver status file from the pro temp folder to AIMMS PRO Storage.
-        sp_SolverLogFilename := "CPLEX 12.9.sta" ;
+        sp_SolverLogFilename := formatString("%e.sta", CurrentSolver('MIP'));
+        sp_shortSolverLogFilename := "solver.log" ;
         sp_ProTempLocation := pro::PROTempFolder + "/" + sp_SolverLogFilename ;
-        sp_userLocation := "userdata/" + pro::PROEnvironment + "/" + pro::PROUserName + "/" + pro::ModelName + "/" + sp_SolverLogFilename ;
+        sp_userLocation := "userdata/" + pro::PROEnvironment + "/" + pro::PROUserName + "/" + pro::ModelName + "/" + sp_shortSolverLogFilename ;
         pro::SaveFileToCentralStorage( sp_ProTempLocation, sp_userLocation );
 
         prepInterface;        
-        
+
 Here the solver session has saved the solver log file to a location in AIMMS PRO storage that is reserved for the current user.
 On lines 6-10 were added just to save the log file to PRO storage.
 
@@ -76,15 +77,15 @@ The part not highlighted is taken literally from `Webui documentation <https://d
         Procedure prDownloadSolverLogFile {
             Arguments: (FileLocation,statusCode,statusDescription);
             Body: {
-                sp_SolverLogFilename := "CPLEX 12.9.sta" ;
-                FileLocation := sp_SolverLogFilename ;
-                
-                sp_FileLoc := webui::GetIOFilePath( sp_SolverLogFilename );
-                
-                sp_userLocation := "userdata/" + pro::PROEnvironment + "/" + pro::PROUserName + "/" + pro::ModelName + "/" + sp_SolverLogFilename;
-                
+                sp_shortSolverLogFilename := "solver.log" ;
+                FileLocation := sp_shortSolverLogFilename ;
+
+                sp_FileLoc := webui::GetIOFilePath( sp_shortSolverLogFilename );
+
+                sp_userLocation := "userdata/" + pro::PROEnvironment + "/" + pro::PROUserName + "/" + pro::ModelName + "/" + sp_shortSolverLogFilename;
+
                 pro::RetrieveFileFromCentralStorage( sp_userLocation, sp_FileLoc );
-                
+
                 if FileExists(sp_FileLoc) then
                     statusCode := webui::ReturnStatusCode('CREATED');
                     statusDescription := "Nice" ;
