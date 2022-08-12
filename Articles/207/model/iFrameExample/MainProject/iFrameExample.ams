@@ -1,0 +1,92 @@
+## ams_version=1.0
+
+Model Main_iFrameExample {
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: {
+				century->s : #-># * 3153600000,
+				year->s : #-># * 31536000,
+				month->s : #-># * 2628000,
+				week->s : #-># * 604800,
+				day->s : #-># * 86400,
+				hour->s : #-># * 3600,
+				minute->s : #-># * 60,
+				second->s : #-># ,
+				tick->s : #-># / 100
+			}
+			Comment: "Expresses the value for the duration of periods.";
+		}
+	}
+	Parameter bp_usePublishedResources {
+		Range: binary;
+		InitialData: 0;
+		Comment: {
+			"Before publication of an app, the resources are available at /app-resources/resources/
+			After  publication of an app, the resources are available at /app-resources/<app-name>/<app-version>/resources/
+			Initialized in PostMainInitialization"
+		}
+	}
+	StringParameter sp_publishedTableauLink {
+		Definition: "<iframe src=\"https://public.tableau.com/views/CBSSportsFantasyFootball2/RunningBacks?:showVizHome=no&:embed=true\" ></ifame>";
+	}
+	StringParameter sp_howto {
+		Definition: "<iframe src=\"https://how-to.aimms.com\"></ifame>";
+	}
+	StringParameter sp_localHTMLfile {
+		Definition: {
+			
+			"<iframe src=\"/app-resources" + 
+			if bp_usePublishedResources then
+				"/" + pro::ModelName + "/" + pro::ModelVersion + "/"
+			else
+			        "/"
+			endif +
+			"resources/images/539-which-odbc-drivers.html#which-odbc-drivers\"></iframe>"
+		}
+	}
+	Section Application_initialization_execution_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Body: {
+				if ProjectDeveloperMode then
+					bp_usePublishedResources := 0 ;
+				else
+					bp_usePublishedResources := 1 ;
+				endif ;
+			}
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure MainExecution;
+		Procedure PreMainTermination {
+			Body: {
+				return 1 ;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+}
