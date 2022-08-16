@@ -63,15 +63,15 @@ In this section a few highlights of the use of the AIMMS Language in the applica
 
 Solve
 ~~~~~~~~~
-test.
+In this section a few highlights of the use of the AIMMS Language in the application are pointed out.
 
 Solve Unbounded
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-test.
+In this section a few highlights of the use of the AIMMS Language in the application are pointed out.
 
 Solve Bounded
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-test.
+In this section a few highlights of the use of the AIMMS Language in the application are pointed out.
 
 
 WebUI Features
