@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<LibraryProject AimmsVersion="4.87.3.3 unicode x64" ProjectUUID="13A378FF-04F8-40E1-A133-90B7218983BF">
+	<ModelFileName>StopwatchLibrary.ams</ModelFileName>
+	<Prefix>stopwatch</Prefix>
+	<DisplayName>StopwatchLibrary</DisplayName>
+</LibraryProject>

@@ -1,41 +1,19 @@
 ## ams_version=1.0
 
 Model Main_Stopwatch {
-	Section Stopwatch_support {
+	Section Application_Units_of_Measurement {
 		Quantity SI_Time_Duration {
 			BaseUnit: s;
-			Conversions: tick->s : #-># / 100;
+			Conversions: {
+				tick  ->s : #-># / 100,
+				minute->s : #-># * 60,
+				hour  ->s : #-># * 3600,
+				day   ->s : #-># * 86400,
+				week  ->s : #-># * 604800,
+				month ->s : #-># * 2628000,
+				year  ->s : #-># * 31536000
+			}
 			Comment: "Expresses the value for the duration of periods.";
-		}
-		StringParameter sp_StartTime {
-			Comment: "Time the stopwatch was started";
-		}
-		Parameter p_ElapsedTime {
-			Unit: s;
-			Comment: {
-				"Time that has elapsed since the stopwatch was started. 
-				The value for this is updated by the StopStopwatch procedure."
-			}
-		}
-		StringParameter sp_RunTime;
-		Procedure pr_StartStopWatch {
-			Body: {
-				!Use the CurrentToString AIMMS function to store the current time
-				!in YYYY-MM-DD HH:MM:SS:TT format
-				sp_StartTime := CurrentToString( "%c%y-%m-%d %H:%M:%S:%t" );
-			}
-			Comment: "Set the starttime of the stopwatch";
-		}
-		Procedure pr_StopStopWatch {
-			Body: {
-				!Using the CurrentToMoment AIMMS function, we can ask for the number
-				!of ticks that have elapsed at the moment since the given StartTime
-				!(which was stored by calling the StartStopwatch procedure).
-				!Please note that we do not actually 'stop' the stopwatch, but only
-				!store the time elapsed.
-				p_ElapsedTime := CurrentToMoment( [tick],  sp_StartTime );
-			}
-			Comment: "Determine how many ticks have elapsed since the start of the stopwatch";
 		}
 	}
 	Procedure pr_LongRunningProcedure {
@@ -43,42 +21,56 @@ Model Main_Stopwatch {
 			dialogMessage("Press OK when you're bored watching this message.");
 		}
 	}
-	Procedure MainInitialization {
-		Comment: "Add initialization statements here that do NOT require any library being initialized already.";
-	}
-	Procedure PostMainInitialization {
-		Comment: {
-			"Add initialization statements here that require that the libraries are already initialized properly,
-			or add statements that require the Data Management module to be initialized."
-		}
-	}
 	Procedure MainExecution {
 		Body: {
-			pr_StartStopwatch ;
+			! Measuring time of some long running procedure.
+			stopwatch::pr_start() ;
 			pr_LongRunningProcedure  ;
-			pr_StopStopwatch ;
-			sp_RunTime := formatString("Execution of procedure took %n seconds", p_ElapsedTime );
+			p_elapsedTime := stopwatch::fnc_elapsed();
+			
+			! Reporting of that time, whereever.
+			sp_runTime := formatString("Execution of procedure took %n seconds", p_elapsedTime );
+			! DialogMessage(sp_runTime);
+		}
+		StringParameter sp_runTime;
+		Parameter p_elapsedTime {
+			Unit: s;
 		}
 	}
-	Procedure PreMainTermination {
-		Body: {
-			return 1;
+	Section Application_initializtion_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
 		}
-		Comment: {
-			"Add termination statements here that require all libraries to be still alive.
-			Return 1 if you allow the termination sequence to continue.
-			Return 0 if you want to cancel the termination sequence."
+		Procedure PostMainInitialization {
+			Body: {
+				return ;
+				!gmp::instance::CreateSolverSession
+			}
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
 		}
-	}
-	Procedure MainTermination {
-		Body: {
-			return 1;
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
 		}
-		Comment: {
-			"Add termination statements here that do not require all libraries to be still alive.
-			Return 1 to allow the termination sequence to continue.
-			Return 0 if you want to cancel the termination sequence.
-			It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
 		}
 	}
 }

@@ -1,0 +1,129 @@
+## ams_version=1.0
+
+LibraryModule Library_StopwatchLibrary {
+	Prefix: stopwatch;
+	Interface: Public_section;
+	RequiredUnits: SI_Time_Duration::s, SI_Time_Duration::tick;
+	Comment: {
+		"Before using this library, you may want to consider the alternative of 
+		using profilerStart and ProfilerCollectAllData.
+		For more information, see the function reference of these functions, and 
+		the discussion in https://how-to.aimms.com/Articles/144/144-Stopwatch.html.
+		
+		History:
+		- Guido Diepen developed the first Stopwatch section and blogged about it.
+		- In 2022, Chris Kuip made a small library out of that section, to
+		  - ease even further the adding of the functionality to an application, and
+		  - to cater for multi timezone support, see option Use_UTC_forcaseandstartenddate
+		
+		Required AIMMS Version: 4.79 or newer, as this library used the attribute \'required units\'.
+		
+		Assumption:
+		   The setting for option Use_UTC_forcaseandstartenddate is not changed at runtime.
+		   In other words, there is no option statement, OptionSetValue call, or 
+		   \'block where\' statement that modifies 
+		   the value of Use_UTC_forcaseandstartenddate at runtime."
+	}
+	Section Public_section {
+		Procedure pr_start {
+			Body: {
+				! Use the CurrentToString AIMMS function to store the current time
+				! in YYYY-MM-DD HH:MM:SS:TT format
+				if p_option_Use_UTC_forcaseandstartenddate_active then
+					sp_startTime := CurrentToString( "%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')" );
+				else
+					sp_StartTime := CurrentToString( "%c%y-%m-%d %H:%M:%S:%t" );
+				endif ;
+			}
+			Comment: "Marks \"now\" as the start of measuring wall clock time.";
+		}
+		Function fnc_elapsed {
+			Unit: s;
+			Body: {
+				! Using the CurrentToMoment AIMMS function, we can ask for the number
+				! of ticks that have elapsed at the moment since the given StartTime
+				! (which was stored by calling the StartStopwatch procedure).
+				! Please note that we do not actually 'stop' the stopwatch, but only
+				! store the time elapsed.
+				if p_option_Use_UTC_forcaseandstartenddate_active then
+					sp_stopMoment := CurrentToString( "%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')" );
+					p_elapsedTime := StringToMoment(
+						Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')", 
+						Unit          :  [tick], 
+						ReferenceDate :  sp_startTime, 
+						Timeslot      :  sp_stopMoment);
+				else
+					p_elapsedTime := CurrentToMoment( [tick],  sp_StartTime );
+				endif ;
+				fnc_elapsed := p_elapsedTime ;
+			}
+			Comment: {
+				"Return the wallclock time, in seconds, since the last call to pr_start.
+				Note that pr_start is also called in PostLibraryInitialization."
+			}
+			StringParameter sp_stopMoment;
+			Parameter p_elapsedTime {
+				Unit: s;
+				Comment: {
+					"Time that has elapsed since the stopwatch was started. 
+					The value for this is updated by the StopStopwatch procedure."
+				}
+			}
+		}
+	}
+	Section Private_section {
+		StringParameter sp_startTime {
+			Comment: "Time the stopwatch was started";
+		}
+		Parameter p_option_Use_UTC_forcaseandstartenddate_active;
+		Section Library_initialization_and_termination {
+			Procedure LibraryInitialization {
+				Comment: "Add initialization statements here that do not require any other library being initialized already.";
+			}
+			Procedure PostLibraryInitialization {
+				Body: {
+					block ! Ensure option "Use UTC forcaseandstartenddate" is turned on.
+						p_ogv := OptionGetValue("Use UTC forcaseandstartenddate", 
+							p_optLow, p_option_Use_UTC_forcaseandstartenddate_active, p_optDef, p_optUpp );
+						if not p_ogv then
+							raise error "Internal error, unable to obtain the value of the option \'Use UTC forcaseandstartenddate\'" ;
+						endif ;
+					endblock ;
+					
+					pr_start();
+					! Thus when fnc_elapsed() is called, without another call to pr_start(),
+					! a meaningful result will be returned, namely the time the session is active.
+				}
+				Comment: {
+					"Add initialization statements here that require another library to be initialized already,
+					or add statements that require the Data Management module to be initialized."
+				}
+				Parameter p_ogv;
+				Parameter p_optLow;
+				Parameter p_optDef;
+				Parameter p_optUpp;
+			}
+			Procedure PreLibraryTermination {
+				Body: {
+					return 1;
+				}
+				Comment: {
+					"Add termination statements here that require all other libraries to be still alive.
+					Return 1 if you allow the termination sequence to continue.
+					Return 0 if you want to cancel the termination sequence."
+				}
+			}
+			Procedure LibraryTermination {
+				Body: {
+					return 1;
+				}
+				Comment: {
+					"Add termination statements here that do not require other libraries to be still alive.
+					Return 1 to allow the termination sequence to continue.
+					Return 0 if you want to cancel the termination sequence.
+					It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+				}
+			}
+		}
+	}
+}

@@ -93,6 +93,7 @@ LibraryModule Library_GuardServerSession {
 				}
 			}
 			DeclarationSection gss_logging_declarations {
+				Property: NoSave;
 				StringParameter sp_gssTime;
 				Parameter p_gssMiU;
 			}
@@ -820,7 +821,7 @@ LibraryModule Library_GuardServerSession {
 						if not ep_trackedSession then
 							raise error "pr_saveTrackedSessionData() unable to create effective session id";
 						endif ;
-						pr_logMsg("s_trackedSessions = "+s_trackedSessions);
+						pr_logMsg("s_trackedSessions = "+fnc_setToString( s_trackedSessions ));
 						
 						p_trackedJobProfilerData(ep_trackedSession, IndexIdentifiers, i_lineNumber, IndexProfilerTypes) := p_jobProfilerData(IndexIdentifiers, i_lineNumber, IndexProfilerTypes);
 						
@@ -4189,6 +4190,7 @@ LibraryModule Library_GuardServerSession {
 			}
 		}
 		Section authorization {
+			Property: NoSave;
 			DeclarationSection Entity_Properties_Current_Authorized_Object {
 				Set s_currentEntity {
 					SubsetOf: s_PROEntity;
@@ -4333,6 +4335,7 @@ LibraryModule Library_GuardServerSession {
 		}
 		Section Additional_utilities {
 			DeclarationSection dialog_sets {
+				Property: NoSave;
 				Set s_okDone {
 					Definition: data { ok, Done };
 				}
@@ -4453,6 +4456,43 @@ LibraryModule Library_GuardServerSession {
 				Parameter p_scheduleAtUsesUTC;
 				Parameter p_def;
 				Parameter p_upp;
+			}
+			Function fnc_SetToString {
+				Arguments: (s_set);
+				Range: string;
+				Body: {
+					p_crd := card( s_set );
+					if p_crd = 0 then
+						sp_retval := "{ }" ;
+					elseif p_crd = 1 then
+						sp_retval := formatString( "{ %e }", first( s_set ) );
+					else
+						sp(i) := formatString("%e, ", i);
+						ep := first( s_set );
+						sp(ep) := formatString("{ %e, ", ep );
+						ep := last( s_set );
+						sp(ep) := formatString("%e }", ep );
+						sp_retval := sum( i, sp(i) );
+					endif ;
+					
+					fnc_SetToString := sp_retval ;
+				}
+				Comment: "Returns a string in the form { e1, e2, ... en } for elements e1, ..., en of set s_set";
+				Set s_set {
+					Property: Input;
+				}
+				Parameter p_crd;
+				ElementParameter ep {
+					Range: s_set;
+				}
+				Index i {
+					Range: s_set;
+				}
+				StringParameter sp {
+					IndexDomain: i;
+				}
+				StringParameter sp_retval;
+				StringParameter sp_elem;
 			}
 		}
 	}

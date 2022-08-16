@@ -1,0 +1,765 @@
+ <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+<title>Which ODBC Drivers &mdash; AIMMS How-To</title>
+
+ 
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/aimms_css/styles.css" type="text/css" />
+    <link rel="canonical" href="https://how-to.aimms.com/Articles/539/539-which-odbc-drivers.html" />
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Link an SQLite Database to a Project" href="../118/118-Connect-SQLite.html" />
+    <link rel="prev" title="Databases" href="../../C_Developer/Sub_Connectivity/sub_databases/index.html" />
+
+<link rel="shortcut icon" href="../../_static/favicon.ico"/>
+ 
+</head>
+
+<body class="wy-body-for-nav">
+   
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+<div role="search">
+    <h3><a href= "../../ContentIndex.html">HOW-TO</a></h3>
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form> 
+   
+</div> 
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../C_Getting_Started/index.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../C_Getting_Started/Sub_Basics/index.html">AIMMS Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../363/363-getting-started-tutorials.html">Getting Started Tutorials</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../505/index.html">Tutorial for Beginners</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../186/186-keyboard-shortcuts-for-aimms.html">Keyboard shortcuts for AIMMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../45/45-share-project-files.html">Share an AIMMS Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../350/350-install-AIMMS-elsewhere.html">Install AIMMS in another location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../218/218-develop-reliable-successful-aimms-app.html">Overview: Create a reliable and successful AIMMS application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../84/84-using-libraries.html">Add AIMMS Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../128/128-Intellectual-Property.html">Encrypt Projects to Protect Intellectual Property</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../151/151-version-control-aimmspack-backup.html">Overview: Model Sources, Version Control and aimmspack Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../C_Getting_Started/Sub_Settings/index.html">Program Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../145/145-import-export-section.html">Export Code to Another Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../232/232-display-line-numbers.html">Display Line Numbers in the Editor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../225/225-change-syntax-highlighting-colors.html">Change Syntax Highlighting and Display Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../135/135-UTF8-Encoding.html">Set Encoding Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../208/208-setting-options.html">Adjust Engine and Solver Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../C_Getting_Started/Sub_Licensing/index.html">Licensing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../378/378-single-user-developer-license.html">Install single user developer license</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../195/195-transfer-developer-license.html">Transfer a Developer License to Another Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../89/89-license-nodelock-error.html">Resolve License Error: Nodelock file is read-only</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../89/89-academic-license.html">Resolve License Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../108/108-kb02-link-solvers.html">How to link a solver to AIMMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../108/108-kb17-nodelock-offline-activation.html">Activate Machine Nodelock Offline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../C_Getting_Started/Sub_Licensing/network-license-server/index.html">Licensing using Network License Server</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../106/106-install-network-license.html">Configure a Network License</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../105/105-adding-named-user-licenses.html">Register Named Users in Network License Manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../106/106-install-network-license-client.html">Install the Network License on a client computer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../304/304-transfer-license-server.html">Migrate the AIMMS PRO License Server</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../C_Developer/index.html">AIMMS Developer</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../C_Developer/Sub_Connectivity/index.html">Data Connection</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../C_Developer/Sub_Connectivity/sub_databases/index.html">Databases</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Which ODBC Drivers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../118/118-Connect-SQLite.html">Link an SQLite Database to a Project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../129/129-MSACCESS-32bit-64bit.html">Install Side-by-Side Drivers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../185/185-connect-to-access-database.html">Connection string for Access database files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../157/157-write-selected-tables.html">Write Selected Database Tables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../343/343-use-metadata-in-write-to-table.html">Write to a database efficiently</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../344/344-sparse-execution-for-write-to-table.html">Write data to a table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../212/212-columns-added-to-dbtable.html">Adapt model when linked database table is modified</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../159/159-exchange-data-with-cloud.html">Exchange data with the AIMMS Cloud Platform</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../519/519-reading-relations-indexed-sets.html">Reading relations and indexed sets from databases</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../C_Developer/Sub_Connectivity/sub_excel_csv/index.html">Excel and CSV</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../85/85-using-axll-library.html">AIMMS Excel Library - AXLL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../197/197-reading-data-from-excel.html">Read Columns of Data from Excel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../csv/read-write-csv.html">Read and Write CSV Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../228/228-data-ranges.html">Determine Data Ranges in Excel Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../C_Developer/Sub_Connectivity/sub_http/index.html">HTTP Library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../306/306-http-client-library-overview.html">Overview: HTTP Client Library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../293/293-extracting-data-from-XML.html">Extract Data from an XML File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../294/294-Online-XML-HTTP-library.html">Extract XML File from a Server with the HTTP Library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../296/296-obtaining-geographic-data-through-the-google-api.html">Retrieve Geographic Data with Google Maps API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../302/302-get-google-maps-coordinates.html">Retrieve Geographic coordinates with Google Maps API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../298/298-use-flickr-api.html">Extract Photos Using the Flickr API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../300/300-ibm-api-speech-to-text.html">Convert Audio File with IBM API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../301/301-Image-Recognition.html">Use the IBM Image Recognition API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../494/494-overview-aimms-ds-models.html">Integrate AIMMS with Models Built in Languages like Python or R</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../487/487-aimms-with-python.html">Integrate AIMMS with Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../498/498-aimms-with-r.html">Integrate AIMMS with R</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../C_Developer/Sub_Connectivity/sub_dataexchange/index.html">Data Exchange Library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../528/528-how-to-set-up-data-exchange-basics.html">How to integrate the Data Exchange Library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../533/533-how-to-retrieve-file-data-with-data-exchange.html">How to use the Data Exchange Library for extracting files and data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../536/536-name-binds-to.html">How to create mappings for matrix-oriented data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../534/534-dealing-with-the-different-data-types.html">Dealing with different data types in the DEX</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../C_Developer/Sub_Connectivity/sub_other_functions/index.html">Other Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../111/111-creating-email-templates.html">Create Email Templates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../104/104-using-email-client-library.html">Overview: Email Client Library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../153/153-external-haversine.html">Create an External Function with Visual Studio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../133/133-External-Functions-InputData.html">Exchange Data with External Source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../114/114-execute.html">Run Executable Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../257/257-run-batch-commands-in-aimms-command-line-tool.html">Run Batch Commands with AIMMS Command Line Tool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../124/124-tableau-integration.html">Link AIMMS with Tableau</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../277/277-aimms-with-gurobi.html">Connect AIMMS with Gurobi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../108/108-kb14-call-to-from-aimms.html">Overview: Linking to AIMMS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../C_Developer/Sub_Mathematical_Modeling/index.html">Mathematical Modeling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../291/291-solve-to-gmp-with-callback.html">Adapt Solve Procedure with Callbacks for GMP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../226/226-color-a-map-with-constraint-programming.html">Color a Map with Constraint Programming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../138/138-ROGO.html">Use Constraint Programming to Solve ROGO Puzzle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../137/137-Small-Rostering.html">Optimize Shift Schedules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../142/142-Narrowing-Time-Windows.html">Reduce the Time Window for Scheduling Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../140/140-Scheduling-Project-Planning.html">Optimize Scheduling for Project Planning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../276/276-multi-objective-approach.html">Use a Multi-Objective Approach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../247/247-minimize-objective-min-operator.html">Minimize Objective Containing a <code class="docutils literal notranslate"><span class="pre">min</span></code> Operator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../249/249-model-variables-with-limited-values.html">Model Variables with Limited Values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../275/275-various-integer-linear-modeling-tricks.html">Various (integer) linear modeling tricks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../199/199-model-rounded-variable.html">Model a Rounded Variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../108/108-kb04-infeasible-model.html">Debug an Infeasible Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../108/108-kb07-speed-up-mip-solve.html">Speed Up MIP Solve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../108/108-kb11-mip-initial-solution.html">Providing an Initial Solution to MIP Solvers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../334/334-data-optimization-libraries.html">Data for Optimization Libaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../365/365-nonlinear-presolve.html">Nonlinear Presolve Algorithm in AIMMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../366/366-aoa-for-minlp.html">AIMMS Outer Approximation Algorithm for MINLP (using GMP functionality)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../367/367-convex-minlp.html">Solving convex MINLP problems with AIMMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../C_Developer/Sub_Mathematical_Modeling/Sub_VRP/index.html">Vehicle Routing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../332/332-routing-interface.html">Capacitated Vehicle Routing Problem Library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../332/332-Formulation-CVRP.html">Capacitated Vehicle Routing Problem formulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../332/332-Explicit-Dantzig-Fulkerson-Johnson-formulation.html">Explicit Dantzig-Fulkerson-Johnson formulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../332/332-Implicit-Dantzig-Fulkerson-Johnson.html">Implicit Dantzig-Fulkerson-Johnson formulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../332/332-Miller-Tucker-Zemlin-formulation.html">Miller-Tucker-Zemlin formulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../332/332-Time-Windows.html">Time Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../332/332-Comparing-Formulations.html">Testing the Library</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../C_Developer/Sub_Language/index.html">AIMMS Language</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../C_Developer/Sub_Language/sub_language_basics/index.html">AIMMS Language Basics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../121/121-set-index-element-parameter.html">Overview: Set, Subset, Index and Element Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../490/490-naming-convention.html">Identifier Naming Convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../351/351-app-initialization-termination-with-libraries.html">Application initialization and termination with libraries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../119/119-Reproducible-Random-Sequence.html">Standardize Random Data in Distribution Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../194/194-using-loopcount-instead-of-explicit-counting-parameter-in-loops.html">Using LoopCount instead of explicit counting parameter in loops</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../150/150-solve-in-loop.html">Solve in a Loop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../243/243-local-binding-vs-default-binding.html">Local Binding vs. Default Binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../17/17-category-mapping.html">Model category mapping of items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../250/250-monitoring-identifiers-for-changes.html">Monitor Identifiers for Changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../187/187-convert-string-to-number.html">Convert string to numerical value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../328/328-writing-reading-text-files.html">Write and Read AIMMS Data in Text Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../220/220-aborting-execution-of-aimms.html">Interrupt Execution During a Single Statement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../12/12-generate-random-numbers.html">Generate random numbers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../236/236-get-name-of-current-case.html">Get Name of an AIMMS Case</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../266/266-units-of-measurement-check-equations.html">Check Computations with Units of Measurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../266/266-units-of-measurement-localized-data.html">Localize Units of Measurement per User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../258/258-save-a-case-from-aimms-procedure.html">Save a Case from an AIMMS Procedure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../290/290-identifying-differences.html">Identify differences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../525/525-finding-unused-identifiers.html">Finding unused identifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../C_Developer/Sub_Language/sub_set/index.html">AIMMS sets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../C_Developer/Sub_Language/sub_set/composite/index.html">Composite objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../C_Developer/Sub_Language/sub_set/time/index.html">Representing time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../141/141-element-after-last.html">Element after Last</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../112/112-Integer-properties.html">Handling of Integer Sets and Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../175/175-select-variables-and-constraints-for-math-program.html">Select Constraints and Variables for a Math Program Declaration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../184/184-use-multiple-indices-for-set.html">Multiple indices for a set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../108/108-kb10-simple-set-compound-set-relation.html">Overview: types of Set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../188/188-use-nbest-operator.html">Overview: <code class="docutils literal notranslate"><span class="pre">NBest</span></code> Operator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../190/190-empty-sets.html">Remove elements from a set</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../C_Developer/Sub_Language/sub_efficiency/index.html">Execution Efficiency</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../108/108-kb09-improve-efficiency-and-performance.html">Analyze Long Execution Time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../144/144-Stopwatch.html">Measure Execution Time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../125/125-execution-efficiency.html">Optimize Execution Time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../108/108-kb08-reduce-memory-use.html">Reduce Memory Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../170/170-memory-in-use.html">Investigate Memory in Use</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../134/134-Monitoring-Memory-Use.html">Monitor Memory Usage and Leaks</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../C_Developer/Sub_Language/sub_libraries/index.html">Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../375/375-library-function-procedure.html">Library of functions and procedures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../216/216-effective-use-unit-test-library.html">Test Driven Development using the AIMMSUnitTest Library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../146/146-value-dynamic-identifier.html">Retrieve Value of Dynamic Identifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../132/132-Repetive-Patterns-Model-Edit.html">Repeat Data with Model Query and Model Edit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../131/131-Formulas-as-Data.html">Use Formulas as Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../517/517-runtime-functions-with-arguments.html">Runtime functions with arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../C_Developer/Sub_Language/Sub_Solvers/index.html">Solvers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../127/127-Progress-Window.html">Change the Frequency of Progress Updates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../13/13-Solver-Logging-IDE.html">Retrieve Solver Log Files in AIMMS Developer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../13/13-Solver-Logging-PRO.html">Retrieve Solver Log Files in AIMMS PRO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../147/147-GMP-Intro.html">Overview: Generated Mathematical Programs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../172/172-use-stop-criteria.html">Set Stop Criteria for Math Programs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../139/139-Multiple-Solutions.html">Generate Multiple Solutions with CP Optimizer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../177/177-alternative-mip-solutions-with-cplex.html">Use Alternative MIP Solutions with CPLEX Solution Pool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../224/224-automatic-benders-decomposition.html">Automatic Benders’ decomposition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../116/116-Benders-CPLEX.html">Solve with Benders Decomposition in CPLEX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../126/126-TSP-Lazy-Constraints.html">Solve with Lazy Constraints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../136/136-Infeasible-Unbounded.html">Debug Infeasible or Unbounded Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../178/178-change-default-solver.html">Change the Default Solvers Used</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../274/274-using-project-local-solver-configuration.html">Create Local Solver Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../192/192-solve-minlp-with-outer-approximation.html">Solve MINLP problems with AOA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../193/193-check-if-variables-satisfy-constraints.html">Check if variable values satisfy constraints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../276/276-multi-objective-approach.html">Use a Multi-Objective Approach</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../264/264-tune-cplex-options.html">Tune CPLEX Options from AIMMS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../261/261-solve-with-asynchronous-solver-sessions.html">Solve in parallel with Asynchronous Solver Sessions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../C_Developer/Sub_Errors/index.html">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../313/313-get-log-files.html">Get Log Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../329/329-more-logging.html">Get More Log Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../364/364-even-more-logging-published-apps.html">More logging of WinUI Published Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../191/191-handle-errors-and-warnings.html">Handle errors and warnings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../265/265-settings-for-errors-and-warnings.html">Customize Settings for Errors and Warnings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../292/292-identifying-error.html">Identify error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../497/497-configuring-logging-aimms-pro-on-prem-sessions.html">Configuring the logging of sessions ran on a AIMMS PRO on Premise</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../497/497-download-solver-session-log.html">Download Server Session Log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../497/497-tracing-procedures.html">Tracing procedures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../497/497-writing-to-session-log.html">In model tracing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../C_Developer/Sub_Errors/Troubleshooting/index.html">Trouble shooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../368/368-openstreetmap-no-longer-displaying.html">Openstreetmap images missing from network object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../368/368-one-drive.html">Storing project in One-Drive: A file cannot be created when it already exists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../368/368-empty-webui-after-upgrade.html">Empty WebUI after upgrade</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../489/489-access-open-error.html">Sudden Microsoft Access reporting: “make sure this is a valid datasource”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../496/496-tls-connection-version.html">Error message “tlsv1 alert protocol version”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../521/521-writing-to-snowflake-database.html">Writing to a Snowflake database</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../C_UI/index.html">Application UI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../C_UI/Sub_UI_Features/index.html">UI Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../531/531-working-with-wonderful-webui-widgets.html">Working with Wonderful WebUI Widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../531/531-create-wonderful-webui-widgets.html">Create Wonderful WebUI Widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../123/123-WebUI-FORMS.html">Create Forms in WebUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../279/279-gantt-chart-scroll.html">Zoom and Scroll in a Gantt Chart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../503/503-sailing.html">Sailing across the world</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../95/95-change-default-ui.html">Enable the Page Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../235/235-change-chart-view.html">Change Views of 2D Charts in a WinUI Page</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../download-compressed-files/download-compressed-files.html">Add Compressed Files for User Download</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../309/309-workflow-panel-element-and-string-parameters.html">Selecting Pages for Workflow Panels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../322/322-combine-bar-line-chart.html">Combine Bar Chart and Line Chart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../338/338-viewing-schedules-different-scenarios.html">Comparing schedules from scenarios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../377/377-add-color-palettes.html">Add qualitative color palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../377/377-link-legend-colors.html">Consistent data coloring on an AIMMS WebUI page</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../512/512-image-widget-refresh.html">Refreshing an Image widget without changing the file name</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../C_UI/Sub_Styling/index.html">Styling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../49/49-webui-css-color.html">Change Widget Styles with CSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../518/518-add-logo-to-webui-app.html">Adding a logo to an AIMMS WebUI app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../315/315-hover-and-select-effects-webui-charts.html">Change Hover and Select Effects for WebUI Charts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../94/94-using-the-scalar-switch-css.html">Display an On/Off Switch in Widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../221/221-adding-a-custom-splash-screen.html">Add a Custom Startup Image in WinUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../234/234-align-multiple-objects-winui.html">Align Objects in WinUI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../511/index.html">AIMMS Design System</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../511/introduction.html">Introduction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../511/towards-ux-2-0.html">Why UX 2.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../511/key-principles.html">Key principles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../511/user-insights.html">User insights</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../511/style.html">Style</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../511/visual-style-2.html">Visual style</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../511/interaction-principles.html">Interaction principles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../511/color.html">Color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../511/icons-and-symbols.html">Icons and symbols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../511/typography.html">Typography</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../511/interaction-elements.html">Interaction elements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../511/best-practices.html">Best Practices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../511/basic-principles.html">Basic principles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../511/app-structure.html">App structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../511/page-structure.html">Page Structure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../C_Deployment/index.html">Deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../C_Deployment/Sub_PRO_Basics/index.html">PRO Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../171/171-pro-system-requirements.html">Size AIMMS PRO Server Hardware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../120/120-pro-user-groups.html">Create PRO User Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../341/341-PRO-Concurrent-Users.html">Understanding Concurrent Usage on AIMMS PRO/Cloud</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../251/251-pro-operations-best-practices.html">Overview: Best Practices for Operating AIMMS PRO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../80/80-receive-messages.html">Send and Receive Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../117/117-Uploading-and-Downloading-files.html">Upload and Download Files on AIMMS PRO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../115/115-Securing-File-Access.html">Secure File Access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../323/323-pro-storage-folder.html">Copy Folder Operations in PRO Storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../299/299-change-account-pro.html">Change AIMMS PRO account</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../305/305-number-of-solves.html">Number of running and pending solver sessions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../308/308-migrate-pro-server-another-machine.html">Migrate PRO Server to Another Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../155/155-Catering-unresponsive-server-unstable-connection.html">Troubleshoot Unresponsive Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../373/373-pro-scaling-options.html">Scaling AIMMS PRO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../374/374-pro-backup-and-continuity.html">Protect AIMMS PRO installation for business continuity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../535/535-waiting-for-sub-jobs-to-complete.html">Waiting for sub jobs to complete</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../C_Deployment/Sub_Cloud_Basics/index.html">Cloud Platform Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../159/159-exchange-data-with-cloud.html">Exchange data with the AIMMS Cloud Platform</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../C_Deployment/Sub_Client_Server/index.html">Client-Server Communication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../331/331-responding-applications.html">Create responding applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../33/33-pro-deploy-app.html">Deploy an Application on AIMMS PRO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../32/32-pro-develop-app.html">Develop Multi-Platform Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../19/19-remove-veil.html">Keep WebUI Active During Solve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../40/40-data-server-load-results.html">Load solver session Results Manually</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../35/35-web-ui-progress-window.html">Use the Progress Window in WebUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../36/36-intermediate-solution.html">Show Intermediate Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../34/34-interrupt-server-session.html">Interrupt the solver session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../342/342-WebUI-Session-Timeout-Extension.html">Modifying Session Timeout Duration for WebUI Apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../42/42-data-session-changes.html">Communicate Data Changes in WebUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reduce-client-server-exchange/reduce-client-server-exchange.html">Reduce Exchange Between Client Session and solver session</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../C_Deployment/Sub_PRO_API/index.html">AIMMS PRO API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../98/98-starting-job-aimms-pro-api-java.html">Start a Job via PRO API using Java</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../98/98-starting-job-aimms-pro-api-csharp.html">Start a Job via PRO API using C#</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../80/80-schedule-jobs.html">Schedule Regular Jobs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../C_Deployment/Sub_CDM/index.html">Collaborative Data Management (CDM)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../280/280-install-cdm-service.html">Install CDM Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../289/289-logging-CDM.html">Log CDM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../C_Deployment/Sub_Job_Transparancy/index.html">Job Transparancy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../310/310-incident-handling-for-organizations.html">Incident Handling for Organizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../310/310-gss-ui-for-end-users.html">The GSS End User interface for end-users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../310/310-gss-ui-for-specialists.html">The GSS User Interface for specialists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../310/310-errors-as-data.html">Error and Profiling Results as Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../310/310-logging.html">The action log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../310/310-integrate-gss-server-job.html">Integrate GuardServerSession library with your AIMMS Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../310/310-install-gss-ui-for-end-users.html">Install GSS interface for end-users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../310/310-install-gss-ui-for-specialists.html">Install UI of GuardServerSession Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../321/321-state-server-session.html">Investigate state solver session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../310/310-investigate-behavior-pro-job.html">Investigate Behavior of AIMMS PRO Job</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../C_Evolution/index.html">Software Evolution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../520/520-evolution-of-transport-layer-security.html">Evolution of AIMMS using Transport Layer Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../312/312-convert-gams-to-aimms.html">Convert a GAMS Model or AIMMS 3 model to an AIMMS 4 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../109/109-deprecate-compound-sets-overview.html">Overview: Deprecation of Compound Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../109/109-convert-compound-sets.html">Prepare for the Deprecation of Compound Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../314/314-from-dat-to-data.html">Convert Files from DAT to DATA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../319/319-character-set-evolution-aimms.html">Using UNICODE in maintained AIMMS applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../295/295-convert-page-actions.html">Upgrade WebUI Page Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../295/295-convert-maps.html">Upgrade Old WebUI Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../317/317-upgrade-your-aimms-pro.html">Upgrade an AIMMS PRO Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../318/318-aimms-and-aimms-pro.html">Check Version Dependencies for AIMMS Developer and AIMMS PRO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../333/333-update-webui-version.html">Update WebUI to newer AIMMS version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../283/283-convert-json-to-xml.html">Convert JSON to XML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../283/283-convert-json-to-xml-original.html">Convert JSON to XML and visa versa</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/application/index.html">Application Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../381/381-car-selection.html">Car Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../382/382-circle-packing.html">Circle Packing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../383/383-contract-allocation.html">Contract Allocation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../384/384-data-reconciliation.html">Data Reconciliation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../385/385-distribution-center-allocation.html">Distribution Center Allocation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../386/386-economic-exchange-equilibrium.html">Economic Exchange Equilibrium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../387/387-employee-scheduling.html">Employee Scheduling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../388/388-flow-shop.html">Flow Shop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../389/389-gate-assignment.html">Gate Assignment problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../390/390-knapsack-problem.html">Knapsack Problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../391/391-life-cycle-consumption.html">Life Cycle Consumption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../392/392-project-analysis.html">Project Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../393/393-railway-stock.html">Railway Stock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../394/394-sudoku.html">Sudoku</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../395/395-traffic-equilibrium.html">Traffic Equilibrium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../396/396-transport-model.html">Transport Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../397/397-traveling-salesman.html">Traveling Salesman</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/functional/index.html">Functional Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../398/398-3d-chart.html">3D Chart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../399/399-aimms-api.html">AIMMS API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../400/400-arcs-and-nodes.html">Arcs and Nodes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../401/401-calendar.html">Calendar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../402/402-camping.html">Camping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../403/403-chance-constraints.html">Chance Constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../404/404-clock.html">Clock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../405/405-coloring.html">Coloring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../406/406-create-csv-file.html">Create CSV File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../407/407-database-inspection.html">Database Inspection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../408/408-database-interface-generation.html">Database Interface Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../409/409-datafeed.html">Data Feed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../410/410-date-aggregation.html">Date Aggregation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../411/411-distributed-solver-sessions.html">Distributed Solver Sessions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../412/412-distributions.html">Distributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../413/413-e-mail-and-sound-support.html">Email and Sound Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../414/414-error-handling.html">Error Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../415/415-experiment.html">Experiment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../416/416-external-procedure.html">External Procedure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../417/417-gantt-chart.html">Gantt Chart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../418/418-gis-support.html">GIS Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../419/419-goal-programming.html">Goal Programming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../420/420-horizon.html">Horizon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../421/421-indexed-page.html">Indexed Page</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../422/422-interrupt-aimms-externally.html">Interrupt AIMMS Externally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../423/423-linked-objects.html">Linked Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../424/424-model-edit-api.html">Model Edit API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../425/425-model-edit-functions.html">Model Edit Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../426/426-mps-functions.html">MPS Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../427/427-multi-start.html">Multi Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../428/428-nested-solve.html">Nested Solve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../429/429-oil-well-drilling.html">Oil Well Drilling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../430/430-page-resizability.html">Page Resizability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../431/431-pivot-table.html">Pivot Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../432/432-power-system-expansion-ro.html">Power System Expansion RO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../433/433-print-pages.html">Print Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../434/434-reindeer-pairing.html">Reindeer Pairing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../435/435-rolling-horizon.html">Rolling Horizon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../436/436-stochastic-programming.html">Stochastic Programming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../437/437-tea-consumption.html">Tea Consumption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../438/438-templates-and-navigation.html">Templates and Navigation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/modeling-book/index.html">Modeling Book Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../439/439-bandwidth-allocation.html">Bandwidth Allocation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../440/440-cutting-stock.html">Cutting Stock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../441/441-diet-problem.html">Diet Problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../442/442-employee-training.html">Employee Training</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../443/443-facility-location-choice.html">Facility Location Choice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../444/444-farm-planning.html">Farm Planning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../445/445-file-merge.html">File Merge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../446/446-inventory-control.html">Inventory Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../447/447-investment-portfolio-selection.html">Investment Portfolio Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../448/448-media-selection.html">Media Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../449/449-performance-assessment.html">Performance Assessment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../450/450-power-system-expansion.html">Power System Expansion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../451/451-refinery-pooling-planning.html">Refinery Pooling Planning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../452/452-telecommunication-network-design.html">Telecommunication Network Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../453/453-two-level-decision.html">Two Level Decision</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/practical/index.html">Practical Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../454/454-ChemicalEngineering-blendingproblem.html">Chemical Engineering: Blending problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../459/459-ChemicalEngineering-chemicalequilibrium.html">Chemical Engineering: Chemical Equilibrium problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../455/455-Energy-oilpipelinedesign.html">Energy: Oil pipeline design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../460/460-Energy-waterdistribution.html">Energy: Water Distribution Network Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../510/Energy_modelling.html">Power Systems Planning - Methods and Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../456/456-Engineering-2dstrippacking.html">Engineering: 2D Strip Packing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../461/461-Engineering-goddardrocket.html">Engineering: Goddard rocket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../462/462-Engineering-hangingchain.html">Engineering: Hanging chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../463/463-Engineering-largestsmallpolygon.html">Engineering: Largest small polygon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../464/464-Engineering-robotarm.html">Engineering: Robot arm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../465/465-Engineering-structuraloptimization.html">Engineering: Structural Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../457/457-Location-capacitatedwarehouselocation.html">Location: Capacitated warehouse location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../466/466-Location-cflp.html">Location: Capacitated facility location problem (CFLP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../458/458-LotSizing-multilevelbucket.html">Lot Sizing: Multi level bucket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../467/467-LotSizing-singlelevelbigbucket.html">Lot Sizing: Single level big bucket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../468/468-LotSizing-singlelevelsmallbucket.html">Lot Sizing: Single level small bucket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../469/469-LotSizing-singlelevelsmallbuckettwoitems.html">Lot Sizing: Single level small bucket with two items</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../470/470-Miscellaneous-asynchronoussolversessions.html">Miscellaneous: Asynchronous solver sessions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../471/471-Miscellaneous-multistart.html">Miscellaneous: Multistart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../472/472-MultipleSolutions-dice.html">Multiple Solutions: Dice problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../473/473-ProductionPlanning-machinescheduling.html">Production Planning: Machine scheduling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../474/474-Routing-cvrp.html">Routing: Capacitated Vehicle Routing Problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../475/475-Routing-tsp.html">Routing: Traveling Salesman Problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../476/476-Routing-vrptw.html">Routing: Capacitated Vehicle Routing Problem with Time Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../477/477-Telecommunications-delayconstrainedrouting.html">Telecommunications: Delay constrained routing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../478/478-Telecommunications-filterdesign.html">Telecommunications: Filter design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../479/479-Telecommunications-networkdesign.html">Telecommunications: Capacitated network design problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../480/480-Transportation-aircraftassignment.html">Transportation: Aircraft Assignment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../481/481-Transportation-aircraftlanding.html">Transportation: Aircraft landing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../482/482-Transportation-piecewiselineartransportation.html">Transportation: Piecewise linear transportation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../483/483-Uncertainty-networkringdesign.html">Uncertainty: Synchronous Optical Network Ring Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../484/484-Uncertainty-productionplanningro.html">Uncertainty: Production Planning - Robust Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../485/485-Uncertainty-productionplanningsp.html">Uncertainty: Production Planning - Stochastic Programming</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Recently_added.html">Recently added</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../ContentIndex.html">AIMMS How-To</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+              
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+     
+    <nav class="main-menu">
+        <a href="https://aimms.com/" class="logo"><img src="../../_static/AIMMS_logo_H_RGB.png" alt="AIMMS Logo" title="AIMMS Help &amp; Support"></a>
+        <ul id="menu-main-site-navigation-1">
+            <li><a href="https://community.aimms.com/">Community</a>
+                <ul>
+                    <li><a href="https://community.aimms.com/welcome-24">Welcome</a></li>
+                    <li><a href="https://community.aimms.com/product-q-a-4">Product Q&A</a></li>
+                    <li><a href="https://community.aimms.com/common-interests-38">Common Interests</a></li>
+                    <li><a href="https://community.aimms.com/product-updates-roadmap-36">Product Updates & Roadmap</a></li>
+                </ul>
+            </li>
+            <li><a href="https://documentation.aimms.com/">Documentation</a>
+                <ul>
+                    <li><a href="https://documentation.aimms.com/aimms_user.html">User Guide</a></li>
+                    <li><a href="https://documentation.aimms.com/language-reference/index.html">Language Reference</a></li>
+                    <li><a href="https://documentation.aimms.com/aimms_modeling.html">Modeling Guide</a></li>
+                    <li><a href="https://documentation.aimms.com/functionreference/index.html">Function Reference</a></li>
+                    <li><a href="https://documentation.aimms.com/webui/index.html">WebUI</a></li>
+                    <li><a href="https://documentation.aimms.com/pro/index.html">PRO Platform</a></li>
+                    <li><a href="https://documentation.aimms.com/cloud/index.html">Cloud Platform</a></li>
+                    <li><a href="https://documentation.aimms.com/library-repository.html">Library Repository</a></li>
+                </ul>
+            </li>
+            <li><a href="https://how-to.aimms.com/">How To</a>
+                <ul>
+                    <li><a href="https://how-to.aimms.com/C_Getting_Started/index.html">Getting Started</a></li>
+                    <li><a href="https://how-to.aimms.com/C_Developer/index.html">AIMMS Developer</a></li>
+                    <li><a href="https://how-to.aimms.com/C_UI/index.html">Application UI</a></li>
+                    <li><a href="https://how-to.aimms.com/C_Deployment/index.html">Deployment</a></li>
+                    <li><a href="https://how-to.aimms.com/C_Evolution/index.html">Software Evolution</a></li>
+                    <li><a href="https://how-to.aimms.com/examples/index.html">Examples</a></li>
+                    <li><a href="https://how-to.aimms.com/Recently_added.html">Recently Added</a></li>
+                </ul>
+            </li>
+            <li><a href="https://www.aimms.com/support/downloads/">Downloads</a></li>
+            <li><a>Release Notes</a>
+                <ul>
+                    <li><a href="https://documentation.aimms.com/release-notes.html">AIMMS Development RELEASE NOTES</a></li>
+                    <li><a href="https://documentation.aimms.com/pro-release-notes.html">AIMMS Deployment RELEASE NOTES</a></li>
+                    <li><a href="https://scnavigator-manual.aimms.com/release-notes.html">AIMMS SC App Store RELEASE NOTES</a></li>
+                </ul>
+            </li>
+    </nav>
+    
+    
+    
+        <ul class="wy-breadcrumbs">
+            
+            <li><a href="../../ContentIndex.html">How-To</a> &raquo;</li>
+            
+            <li><a href="../../C_Developer/index.html">AIMMS Developer</a> &raquo;</li>
+            
+            <li><a href="../../C_Developer/Sub_Connectivity/index.html">Data Connection</a> &raquo;</li>
+            
+            <li><a href="../../C_Developer/Sub_Connectivity/sub_databases/index.html">Databases</a> &raquo;</li>
+            
+            <li>Which ODBC Drivers</li>
+             
+            <li class="side-rate-review" style="float:right;">
+            
+            
+              <a class="fa fa-github" href="https://github.com/aimms/how-to/tree/master/Articles/539/539-which-odbc-drivers.rst"> Edit on Github</a>
+            
+            
+            </li>
+        </ul>
+
+        
+    
+    
+</div>
+
+
+   
+    
+   
+    
+   
+    
+   
+  
+    
+
+
+
+<div class="localtoc">
+    
+    <div class="caption"> 
+      
+      <a class="fa fa-exclamation-circle" href="#help-&-feedback" > Help & feedback</a>
+      <br><br>
+      
+      Table Of Contents</div>
+    <ul>
+<li><a class="reference internal" href="#">Which ODBC Drivers</a><ul>
+<li><a class="reference internal" href="#operating-the-app">Operating the app</a></li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+
+    
+</div>
+ 
+
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">  
+           <div itemprop="articleBody">
+             
+  <section id="which-odbc-drivers">
+<h1>Which ODBC Drivers<a class="headerlink" href="#which-odbc-drivers" title="Permalink to this headline"></a></h1>
+<p>Before making a connection using ODBC to a database, it is important to know which ODBC drivers are installed on the systems that will be used for your application.</p>
+<p>As you know, using the ODBC Windows control panel app, you can get a list of ODBC drivers installed.
+However, not all systems on which your application is to be run, may allow you to open this Windows control panel app.</p>
+<p>This article presents a small AIMMS app that shows the list of available ODBC drivers upon startup.</p>
+<p>This source of this AIMMS 4.85 project can be downloaded: <a class="reference download internal" download="" href="../../_downloads/baf242ed105bbb05a31fd74b58961202/DriverList.zip"><code class="xref download docutils literal notranslate"><span class="pre">ODBC</span> <span class="pre">Driver</span> <span class="pre">List</span> <span class="pre">project</span></code></a></p>
+<section id="operating-the-app">
+<h2>Operating the app<a class="headerlink" href="#operating-the-app" title="Permalink to this headline"></a></h2>
+<p>Upon opening, this app presents a list of ODBC drivers.
+For the AIMMS Cloud this list looks as follows:</p>
+<img alt="../../_images/aimms-sandbox-driver-list.png" class="align-center" src="../../_images/aimms-sandbox-driver-list.png" />
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://documentation.aimms.com/functionreference/data-management/database-functions/sqlnumberofdrivers.html">SQLNumberOfDrivers</a></p></li>
+<li><p><a class="reference external" href="https://documentation.aimms.com/functionreference/data-management/database-functions/sqldrivername.html">SQLDriverName</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div> 
+ <div style="margin-bottom: 1em;">Last updated: May 06, 2022 </div> 
+
+
+<br>
+<style>
+@media (min-width: 768px){
+  .right.container-help-feedback{ padding-left: 15px; border-left: 1px solid #dbdbdb;}
+}
+</style>
+<div class="admonition hint document" style="margin-bottom: 1em;" id="help-&-feedback">
+
+<p class="admonition-title">Help & Feedback</p>
+
+<div class="flex-container" style="display:flex; flex-wrap: wrap;">
+<div class="left container-help-feedback" style="position: relative; width: 100%;flex: 3 200px; padding-right:15px;" >
+<h3 style="font-weight: bold;">Docs</h3>
+<p>
+
+<a class="fa fa-github" href="https://github.com/aimms/how-to/blob/master/Articles/539/539-which-odbc-drivers.rst" target="_blank" > Edit this page</a> to fix an error or add an improvement in a pull request
+<br>
+<a class="fa fa-github" href="https://github.com/aimms/how-to/issues" target="_blank" > Create an issue</a> to suggest an improvement to this page
+
+
+
+</p>
+<h3 style="font-weight: bold;">Product</h3>
+<p style="padding-bottom:15px;">
+<a class="fa fa-users" href="https://community.aimms.com/topic/new" target="_blank" > Create a topic</a> if there's something you don't like about this feature
+<br>
+<a class="fa fa-users" href="https://community.aimms.com/ideas" target="_blank" > Propose functionality</a> by submitting a feature request
+</p>
+</div>
+
+<div class="right container-help-feedback" style="width: 100%; flex: 1 200px;">
+<h3 style="font-weight: bold;">Support</h3>
+<p>Not what you where looking for? <a class="fa fa-search" href="https://www.aimms.com/support/" target="_blank" style="font-weight: bold;" > Search the docs</a></p>
+<p>Remember we also have <a class="fa fa-users" href="https://community.aimms.com/ask-the-community-4" target="_blank" style="font-weight: bold;" > Community support</a></p>
+<p>Still having trouble ? <a href="mailto:support@aimms.com" > Reach out to us</a></p>
+</div><br>
+</div>
+</div>
+
+   
+
+
+          <footer>
+    
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        
+        <a href="../118/118-Connect-SQLite.html" class="btn btn-neutral float-right" title="Link an SQLite Database to a Project" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>  
+        <a href="../../C_Developer/Sub_Connectivity/sub_databases/index.html" class="btn btn-neutral float-left" title="Databases" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a> 
+    </div>
+    
+
+    <hr/>
+    <ul class="social">
+        <li><a href="https://facebook.com/aimms"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="https://twitter.com/aimms"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://www.linkedin.com/company/aimms"><i class="fa fa-linkedin"></i></a></li>
+        <li><a href="https://www.youtube.com/user/AIMMSChannel"><i class="fa fa-youtube"></i></a></li>
+    </ul>
+    <div class="links">
+        <div class="logo"><a href="https://aimms.com"><img src="../../_static/AIMMS_logo_H_RGB.png" alt="AIMMS"></a></div>
+        <div class="btn"><a href="https://community.aimms.com/">AIMMS COMMUNITY</a></div>
+        <div class="btn"><a href="https://documentation.aimms.com/">AIMMS DOCS</a></div>
+        <div><a href="https://aimms.com/english/disclaimer/">DISCLAIMER</a></div>
+        <div><a href="https://aimms.com/english/privacy-statement/">PRIVACY STATEMENT</a></div>
+    </div>
+
+    <div class="copy">© 1989 - 2022 AIMMS B.V.</div> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+
+
+
+ 
+
+
+  
+
+</body>
+</html>

@@ -4,6 +4,7 @@ Sitemap: https://how-to.aimms.com/sitemap.xml
 
 Disallow: https://how-to.aimms.com/How to use this, man.html
 Disallow: https://how-to.aimms.com/Articles/122/122-AXLL-Library.html
+Disallow: https://how-to.aimms.com/Articles/123/123-WebUI-FORMS-older-aimms.html
 Disallow: https://how-to.aimms.com/Articles/160/160-super-slicing.html
 Disallow: https://how-to.aimms.com/Articles/166/166-shared-user-files.html
 Disallow: https://how-to.aimms.com/Articles/180/180-use-side-panel-with-old-menu.html
@@ -20,6 +21,9 @@ Disallow: https://how-to.aimms.com/Articles/329/329-vintage-more-logging.html
 Disallow: https://how-to.aimms.com/Articles/336/webui-annotations.html
 Disallow: https://how-to.aimms.com/Articles/368/368-attempting-connect.html
 Disallow: https://how-to.aimms.com/Articles/499/499-mysql-duplicate-records.html
+Disallow: https://how-to.aimms.com/Articles/283/283-convert-json-to-xml.html
+Disallow: https://how-to.aimms.com/Articles/283/283-convert-json-to-xml-original.html
+Disallow: https://how-to.aimms.com/Articles/320/320-aimms-pro-usage-statistics.html
 Disallow: /staging/
 
 
