@@ -61,17 +61,37 @@ Language
 
 In this section a few highlights of the use of the AIMMS Language in the application are pointed out.
 
-Solve
-~~~~~~~~~
-In this section a few highlights of the use of the AIMMS Language in the application are pointed out.
+Types of Solve
+~~~~~~~~~~~~~~
+.. aimms:procedure:: pr_solveKnapsackModel
 
-Solve Unbounded
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-In this section a few highlights of the use of the AIMMS Language in the application are pointed out.
+This will solve the classic knapsack problem. Minimal range will be set as 0 and maximum will be set as 1 automatically. 
+   
+   .. code-block:: aimms
+      :linenos:
 
-Solve Bounded
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-In this section a few highlights of the use of the AIMMS Language in the application are pointed out.
+      p_itemRangeMin(i_item) := 0;
+      p_itemRangeMax(i_item) := 1;
+      
+.. aimms:procedure:: pr_solveKnapsackModelUnBounded
+
+This will solve the knapsack problem as unbounded. Minimal range will be set as 0 and maximum will be set as ``inf`` automatically. 
+   
+   .. code-block:: aimms
+      :linenos:
+
+      p_itemRangeMin(i_item) := 0;
+      p_itemRangeMax(i_item) := inf;   
+
+.. aimms:procedure:: pr_solveKnapsackModelBounded
+
+This will solve the knapsack problem with a integer bound. Minimal range will be set as 0 and maximum will be set by the inputed bound value. 
+   
+   .. code-block:: aimms
+      :linenos:
+
+      p_itemRangeMin(i_item) := 0;
+      p_itemRangeMax(i_item) := p_itemBound(i_item);
 
 
 WebUI Features
