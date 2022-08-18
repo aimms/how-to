@@ -34,7 +34,7 @@ This file has the following contents:
 Step 3
 ~~~~~~~~~
 
-Evaluate if your logo needs futher size analisys. If so, check for futher documentation about styling `here <https://documentation.aimms.com/webui/theming.html#a-special-case-the-application-logo>`_. 
+Evaluate if your logo needs further size analysis. If so, check for further documentation about styling `here <https://documentation.aimms.com/webui/theming.html#a-special-case-the-application-logo>`_. 
 
 .. note::
     When you want to achieve similar results using AIMMS 4.84 or older, please check out the now deprecated how-to article: :doc:`../518/518-add-logo-to-webui-app-481`
