@@ -13,8 +13,6 @@ Contract Allocation
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-webui-44/uptaded-contract-allocation-example-1253
 
-.. image:: https://img.shields.io/badge/UI-WebUI-sucess
-
 
 Story
 -----
@@ -117,23 +115,24 @@ On input page, if you click around the graphs, a highlighted cell will appear id
 
 The following WebUI features are used:
 
-- Text Widget
+- `Text Widget <https://documentation.aimms.com/webui/text-widget.html>`_
 
-- Image Widget
+- `Image Widget <https://documentation.aimms.com/webui/image-widget.html>`_
 
-- Workflow
+- `Workflow <https://documentation.aimms.com/webui/workflow-panels.html>`_
 
-- Table Widget
+- `Table Widget <https://documentation.aimms.com/webui/table-widget.html>`_
 
-- Combination Chart Widget
+- `Combination Chart Widget <https://documentation.aimms.com/webui/combination-chart-widget.html>`_
 
-- Page Actions 
+- `Page Actions <https://documentation.aimms.com/webui/page-menu.html>`_ 
 
-- Side Panel
+- `Side Panel <https://documentation.aimms.com/webui/side-panels-grd-pages.html#side-panel-grid-pages>`_
 
-- Compact Scalar Widget
+- `Compact Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
-- List Widget
+- `List Widget <https://documentation.aimms.com/webui/list-widget.html#list-widget>`_ 
+ 
 
 UI Styling
 ----------
