@@ -4,11 +4,11 @@ Knapsack Problem
    :keywords: Knapsack, Knapsack, Integer Programming, Binary Integer Programming, Cover Inequalities, Network Object
    :description: This example introduces a knapsack problem.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.86-ZIP:_Employee_Scheduling-blue
-   :target: https://github.com/aimms/employee-scheduling/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/AIMMS_4.87-ZIP:_Knapsack-blue
+   :target: https://github.com/aimms/knapsack/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.86-Github:_Employee_Scheduling-blue
-   :target: https://github.com/aimms/employee-scheduling
+.. image:: https://img.shields.io/badge/AIMMS_4.87-Github:_Knapsack-blue
+   :target: https://github.com/aimms/knapsack
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-webui-44/updated-employee-scheduling-example-1291
