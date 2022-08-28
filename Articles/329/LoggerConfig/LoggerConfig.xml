@@ -118,6 +118,15 @@
     <logger name="AimmsSession" >
         <level value="info"/>
     </logger>
+    <logger name="CDMService" >
+        <level value="warn"/>
+    </logger>
+    <logger name="CDMDB" >
+        <level value="warn"/>
+    </logger>
+    <logger name="CDM" >
+        <level value="warn"/>
+    </logger>
 
     <logger name="CubeEngine">
     <!--
@@ -147,6 +156,13 @@
         -->
       <level value="warn" />
     </logger>
+    <logger name="CubeEngineLink.JsonSupport">
+        <level value="error"/>
+    </logger>
+    <logger name="CubeEngineLink.WebUIServer.WebUIJsonServlet">
+        <level value="error"/>
+    </logger>
+
 
     <!--- Database logging -->
     <!--- See also https://documentation.aimms.com/release-notes.html#aimms-improvements 
