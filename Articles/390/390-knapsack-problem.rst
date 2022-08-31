@@ -16,7 +16,7 @@ Knapsack Problem
 Story
 -----
 
-This example introduces a knapsack problem. The example considers a data set of 16 items which can be included in the knapsack. The objective is to maximize the cumulated value of the items. The number of items is restricted by the maximum weight that can be carried in the knapsack. 
+This example introduces a knapsack problem. The example considers a data set of 16 items which can be included in the knapsack. The objective is to maximize the accumulated value of the items. The number of items is restricted by the maximum weight that can be carried in the knapsack. 
 
 
 Mathematical Model
@@ -33,9 +33,9 @@ In the classical knapsack problem, each item can be chosen only once. This examp
 +-----+--------------------------------------------+-------------------------------------------+
 | **Parameters:**                                                                              |
 +-----+--------------------------------------------+-------------------------------------------+
-|     | :math:`rI_{i} \in \mathbb{I}`              | minimum quantity                          |
+|     | :math:`rI_{i}, i \in \mathbb{I}`           | minimum quantity                          |
 +-----+--------------------------------------------+-------------------------------------------+
-|     | :math:`rA_{i} \in \mathbb{I}`              | maximum quantity                          |
+|     | :math:`rA_{i}, i \in \mathbb{I}`           | maximum quantity                          |
 +-----+--------------------------------------------+-------------------------------------------+
 |     | :math:`V_{i} \in \mathbb{R}`               | item price                                |
 +-----+--------------------------------------------+-------------------------------------------+
@@ -49,17 +49,20 @@ In the classical knapsack problem, each item can be chosen only once. This examp
 +-----+--------------------------------------------+-------------------------------------------+
 | **Constraints:**                                                                             |
 +-----+--------------------------------------------+-------------------------------------------+
-|  1  | :math:`\sum_{i} X_{i} * W_{i} \leq mW`     | satisfy weight                            |
+|  1  | :math:`\sum_{i} X_{i} * W_{i} \leq mW`     | respect knapsack capacity                 |
 +-----+--------------------------------------------+-------------------------------------------+
-| **Minimize:**                                                                                |
+| **Maximize:**                                                                                |
 +-----+--------------------------------------------+-------------------------------------------+
-|     | :math:`\sum_{i} (X_{i} * V_{i})`           | total cost                                |
+|     | :math:`\sum_{i} (X_{i} * V_{i})`           | total accumulated value                   |
 +-----+--------------------------------------------+-------------------------------------------+
 
 Language 
 --------
 
 In this section a few highlights of the use of the AIMMS Language in the application are pointed out.
+
+Let us start with modifying the type of solve, simply by modifying the bounds of the variables; 
+in other words, three types of model can be solved by only one algebraic specification of the model.
 
 Types of Solve
 ~~~~~~~~~~~~~~
