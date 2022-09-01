@@ -96,6 +96,26 @@ This will solve the knapsack problem with a integer bound. Minimal range will be
       p_itemRangeMin(i_item) := 0;
       p_itemRangeMax(i_item) := p_itemBound(i_item);
 
+Random Data
+~~~~~~~~~~~~
+.. aimms:procedure:: pr_randomizeData
+In order to make the example more playfull in therms of feature functionality, you can randomize data at any time. The procedure below is available on Page Actions. 
+
+   .. code-block:: aimms
+      :linenos:
+      
+      empty p_itemValue, p_itemWeight, p_itemBound;
+
+      p_itemValue(i_item) := uniform(0,200)*1[$];
+      p_itemWeight(i_item) := uniform(0[lb],p_maxWeightKnapsack/3);
+      p_itemBound(i_item) := ceil(uniform(0,10));
+
+
+Integration
+~~~~~~~~~~~~~~
+On this example, `AXLL library <https://documentation.aimms.com/aimmsxllibrary/index.html>`_ is used. 
+You can check both import and export procedures by looking for these: ``pr_readAll`` and ``pr_writeAll``.
+
 
 WebUI Features
 --------------
@@ -254,8 +274,8 @@ For this project, we used a main css file named ``colors.css``, please check it 
       .. code-block:: css
          :linenos:
 
-         .tag-table.focused .focus-cell {
-            box-shadow: inset 0 0 0 1px var(--primaryDark);
+         .tag-table.focused .cell.focus-cell {
+            box-shadow: inset 0 0 0 2px var(--primaryDark);
          }
 
          .tag-table .cell.flag-number input{
