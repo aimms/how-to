@@ -88,7 +88,7 @@ This will solve the knapsack problem as unbounded. Minimal range will be set as 
 
 .. aimms:procedure:: pr_solveKnapsackModelBounded
 
-This will solve the knapsack problem with a integer bound. Minimal range will be set as 0 and maximum will be set by the inputed bound value. 
+This will solve the knapsack problem with a integer bound. Minimal range will be set as 0 and maximum will be set by the bound value. 
    
    .. code-block:: aimms
       :linenos:
@@ -99,7 +99,7 @@ This will solve the knapsack problem with a integer bound. Minimal range will be
 Random Data
 ~~~~~~~~~~~~
 .. aimms:procedure:: pr_randomizeData
-In order to make the example more playfull in therms of feature functionality, you can randomize data at any time. The procedure below is available on Page Actions. 
+In order to make the example more playful in therms of feature functionality, you can randomize data at any time. The procedure below is available on Page Actions. 
 
    .. code-block:: aimms
       :linenos:
