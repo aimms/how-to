@@ -29,7 +29,7 @@ This section contains explanations of various UI features available when buildin
    /Articles/377/377-add-color-palettes
    /Articles/377/377-link-legend-colors
    /Articles/512/512-image-widget-refresh
-
+   /Articles/549/549-hiding-default-values
 
 
 
