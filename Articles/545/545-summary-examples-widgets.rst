@@ -11,40 +11,48 @@ This page has a summary of the examples versus which WebUI features are used in 
 
     * :doc:`../383/383-contract-allocation`
     * :doc:`../387/387-employee-scheduling`
+    * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Image Widget
 
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Workflow
 
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Table Widget
 
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Combination Chart Widget
 
     * :doc:`../383/383-contract-allocation`
     * :doc:`../387/387-employee-scheduling`
+    * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Page Actions 
 
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Side Panel
 
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Compact Scalar Widget
 
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: List Widget
     
@@ -57,8 +65,17 @@ This page has a summary of the examples versus which WebUI features are used in 
 .. dropdown:: Item Actions
 
     * :doc:`../387/387-employee-scheduling`
+    * :doc:`../390/390-knapsack-problem`
 
-.. dropdown:: Scalar Widget
+.. dropdown:: Scalar Widget 
 
     * :doc:`../387/387-employee-scheduling`
+    * :doc:`../390/390-knapsack-problem`
 
+.. dropdown:: Multiselect Widget
+    
+    * :doc:`../390/390-knapsack-problem`
+
+.. dropdown:: Slider Widget    
+
+    * :doc:`../390/390-knapsack-problem`
