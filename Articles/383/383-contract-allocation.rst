@@ -193,6 +193,12 @@ For this project, we used a main css file named ``colors.css``, please check it 
             color: var(--primaryDark);
          }
 
+         /*Change table default text color*/
+         .tag-table .grid-viewport .cell.flag-default, 
+         html:not(.using-touch) .tag-table .grid-viewport .cell.flag-default {
+            color: white;
+         }
+
     .. tab-item:: body.css
 
       .. code-block:: css
