@@ -28,8 +28,8 @@ You can browse our examples by category:
    :maxdepth: 1
 
    /Articles/545/545-summary-examples-widgets
-   application/index
-   functional/index
-   modeling-book/index
-   practical/index
+   Sub_Application/index
+   Sub_Functional/index
+   Sub_Modeling_Book/index
+   Sub_Practical/index
    
