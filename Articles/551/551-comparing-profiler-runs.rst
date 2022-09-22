@@ -87,3 +87,4 @@ Minimal Requirements
 
 .. spelling::
    github
+   runtimes
