@@ -11,13 +11,14 @@ Comparing Profiler Runs
    :target: https://github.com/aimms/profiler-run-compare
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-webui-44/uptaded-contract-allocation-example-1253
+   :target: https://community.aimms.com/aimms-developer-12/profilerruncompare-app-1328
 
 
 Introduction
 -------------
-This article is for modelers who want to compare profiler runs of deployed applications.
-
+For an existing application, especially one that has several features, a small change in data, environment, or code occasionally leads to unexpectedly different runtimes. 
+The location in the code of that application, where these differences manifest themselves, is not always obvious. 
+In such circumstances, comparing profiler results may be a useful next step to locate the code where the significant differences in runtimes manifest themselves.
 
 Instructions 
 -------------
@@ -82,6 +83,7 @@ Remarks:
 Minimal Requirements
 --------------------   
 
+`AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example. 
 
 .. spelling::
    github

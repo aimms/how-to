@@ -12,35 +12,41 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../383/383-contract-allocation`
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../390/390-knapsack-problem`
+    * :doc:`../550/550-demand-forecasting`
 
 .. dropdown:: Image Widget
 
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Workflow
 
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Table Widget
 
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Combination Chart Widget
 
     * :doc:`../383/383-contract-allocation`
     * :doc:`../387/387-employee-scheduling`
+    * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Page Actions 
 
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Side Panel
@@ -70,6 +76,7 @@ This page has a summary of the examples versus which WebUI features are used in 
 .. dropdown:: Scalar Widget 
 
     * :doc:`../387/387-employee-scheduling`
+    * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Multiselect Widget
@@ -79,3 +86,6 @@ This page has a summary of the examples versus which WebUI features are used in 
 .. dropdown:: Slider Widget    
 
     * :doc:`../390/390-knapsack-problem`
+
+.. dropdown:: Button Widget    
+    * :doc:`../550/550-demand-forecasting`
