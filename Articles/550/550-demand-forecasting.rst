@@ -1,8 +1,8 @@
 Demand Forecasting
 ===================
 .. meta::
-   :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
-   :description: This AIMMS project illustrates the use of a semi-continuous variable.
+   :keywords: aimms, forecast, demand, factory, library
+   :description: This example uses the forecasting library! 
 
 .. image:: https://img.shields.io/badge/AIMMS_4.88-ZIP:_Demand_Forecasting-blue
    :target: https://github.com/aimms/demand-forecasting/archive/refs/heads/main.zip
@@ -11,7 +11,7 @@ Demand Forecasting
    :target: https://github.com/aimms/demand-forecasting
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-webui-44/uptaded-contract-allocation-example-1253
+   :target: https://community.aimms.com/aimms-webui-44/new-demand-forecasting-example-1327
 
 
 Story
@@ -27,6 +27,7 @@ Language
 
 In this example, we are using the library called `Forecasting <https://documentation.aimms.com/forecasting/index.html>`_. 
 Library which have native a few forecast algorithms ready to use.  Here, we are exemplifying 6 functions. 
+It can be `installed <https://documentation.aimms.com/general-library/getting-started.html>`_ by selecting the library ``Forecasting`` from the AIMMS Library Repository.
 
 .. aimms:procedure:: pr_exampleExponentialSmoothing
 
