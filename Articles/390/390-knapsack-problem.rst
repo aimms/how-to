@@ -11,7 +11,7 @@ Knapsack Problem
    :target: https://github.com/aimms/knapsack
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://how-to.aimms.com/Articles/390/390-knapsack-problem.html#
+   :target: https://community.aimms.com/aimms-webui-44/updated-knapsack-problem-example-1319
    
 Story
 -----
