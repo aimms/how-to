@@ -73,6 +73,7 @@
    C_UI/index
    C_Deployment/index
    C_Evolution/index
-   examples/index
+   C_Examples/index
+   C_Toolkit/index
    Recently_added
    

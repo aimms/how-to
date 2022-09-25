@@ -20,8 +20,6 @@ This section contains explanations of various UI features available when buildin
    /Articles/123/123-WebUI-FORMS
    /Articles/279/279-gantt-chart-scroll
    /Articles/503/503-sailing
-   /Articles/95/95-change-default-ui
-   /Articles/235/235-change-chart-view
    /Articles/download-compressed-files/download-compressed-files
    /Articles/309/309-workflow-panel-element-and-string-parameters
    /Articles/322/322-combine-bar-line-chart
@@ -29,7 +27,7 @@ This section contains explanations of various UI features available when buildin
    /Articles/377/377-add-color-palettes
    /Articles/377/377-link-legend-colors
    /Articles/512/512-image-widget-refresh
-
+   /Articles/549/549-hiding-default-values
 
 
 
