@@ -5942,7 +5942,7 @@ LibraryModule Library_GuardServerSession {
 					It constructs the time string to be used when another procedure is to be scheduled.
 					
 					ScheduleAt interprets this string as in LocalDST when the option use_UTC_forCaseAndStartEndDate is off, and 
-					it interprets it as in UTC when the option use_UTC_forCaseAndStartEndDate is on.
+					it interprets it as in UTC when the option use_UTC_forCaseAndStartEndDate is on (though clock example seems to contradict this).
 					
 					Original code from guipro:currentToStringDelta
 					tmpSec := CurrentToMoment([s], \"2011-01-01 00:00:00\") ;
