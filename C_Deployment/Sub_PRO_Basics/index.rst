@@ -16,6 +16,7 @@ This section offers best practices to build and deploy applications using AIMMS 
    :maxdepth: 1
 
    /Articles/171/171-pro-system-requirements
+   /Articles/552/552-publishing-to-offline-serves
    /Articles/120/120-pro-user-groups
    /Articles/341/341-PRO-Concurrent-Users
    /Articles/251/251-pro-operations-best-practices
