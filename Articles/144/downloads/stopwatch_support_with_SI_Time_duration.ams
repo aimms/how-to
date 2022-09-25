@@ -1,6 +1,11 @@
 ## ams_version=1.0
 
 Section Stopwatch_support {
+	Quantity SI_Time_Duration {
+		BaseUnit: s;
+		Conversions: tick->s : #-># / 100;
+		Comment: "Expresses the value for the duration of periods.";
+	}
 	StringParameter sp_StartTime {
 		Comment: "Time the stopwatch was started";
 	}
