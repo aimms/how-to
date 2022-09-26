@@ -37,11 +37,18 @@ When the service is installed, you will need to identify the installation folder
 .. image:: images/PropertiesCDMService.png
     :align: center
 
-#. Open a command prompt (run as administrator)
+#.  Open a command prompt (run as administrator)
 
-#. ``cd`` to go to that folder
+#.  ``cd`` to go to that folder
 
-#. Execute ``CDMService.exe --uninstall``
+#.  If the Service name is ``CDMService`` then you can
+
+    *   Execute ``CDMService.exe --uninstall``
+
+    Otherwise you will have to use the name argument.  For Instance if your service is called CDMService19998, then:
+
+    *   Execute ``CDMService.exe --uninstall --name CDMService19998``
+
 
 Download the new CDM service executable
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
