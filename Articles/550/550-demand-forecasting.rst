@@ -300,6 +300,11 @@ Below described all UI modifications done on this example trough ``css`` files w
                 text-transform: uppercase;
             }
 
+            /*Change checkbox color*/
+            input.boolean-cell-editor-contents {
+                accent-color: var(--secondary);
+            }
+
     .. tab-item:: workflow.css
 
         .. code-block:: css
@@ -332,6 +337,11 @@ Below described all UI modifications done on this example trough ``css`` files w
             /*Link color*/
             .ql-snow a {  
                 color: var(--primaryDark);
+            }
+
+            /*Change checkbox color*/
+            input.boolean-cell-editor-contents {
+                accent-color: var(--secondary);
             }
 
 Minimal Requirements
