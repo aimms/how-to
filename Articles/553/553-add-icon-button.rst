@@ -14,7 +14,7 @@ To add a icon into your button as shown on the following image, you need to foll
 
 Step 1
 ~~~~~~~~~
-Add a ``css`` file named ``button.css`` in the folder ``./MainProject/WebUI/resources/stylesheets``. If you are using the Demand Forecasting project, you will realise that this file already exists. 
+Add a ``css`` file named ``button.css`` in the folder ``./MainProject/WebUI/resources/stylesheets``. If you are using the Demand Forecasting project, you will realize that this file already exists. 
 
 Step 2
 ~~~~~~~~~
@@ -43,7 +43,7 @@ Some remarks:
 
 - *font-family:* needs to be aimms-icons.
 
-- *content:* is the characther code of the selected icon. 
+- *content:* is the character code of the selected icon. 
 
 - *color:* color of the icon.
 
@@ -81,7 +81,7 @@ A side panel will appear. Click on the ``::before`` line. On 'Styles', a class w
 
 |    
 
-Copy the characther code and paste on your ``button.css`` file replacing the old characther code. Save and refresh the WebUI page. The icon will change. 
+Copy the character code and paste on your ``button.css`` file replacing the old character code. Save and refresh the WebUI page. The icon will change. 
 
 But now, how to add an unique icon to an specific button?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,3 +110,7 @@ to
 
 where *example* is the 'widget.uri' value. Save and refresh the WebUI page. 
 
+
+.. spelling::
+    aimms
+    uri
