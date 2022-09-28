@@ -61,17 +61,12 @@ Now, with the ``css`` file and the code above, if you either using the example o
 
 |
 
-To change the icon, go to `AIMMS Icons Reference List <https://documentation.aimms.com/_static/aimms-icons/icons-reference.html>`_. 
-
-Step 4
-~~~~~~~~~
-
-Select which icon you would like, and inspect it. 
+To change the icon, go to `AIMMS Icons Reference List <https://documentation.aimms.com/_static/aimms-icons/icons-reference.html>`_. Select which icon you would like, and inspect it. 
 
 .. image:: images/inspect.png
     :align: center
 
-Step 5
+Step 4
 ~~~~~~~~~
 
 A side panel will appear. Click on the ``::before`` line. On 'Styles', a class with content will appear as:
@@ -86,12 +81,12 @@ Copy the character code and paste on your ``button.css`` file replacing the old 
 But now, how to add an unique icon to an specific button?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Step 6
+Step 5
 ~~~~~~~~~
 
 Go to the settings on the button you want an icon added. On the advanced settings, copy the 'widget.uri' value. 
 
-Step 7
+Step 6
 ~~~~~~~~~
 
 Go back to the ``button.css`` file and change from
