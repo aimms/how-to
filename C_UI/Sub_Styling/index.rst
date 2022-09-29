@@ -20,6 +20,7 @@ This section contains tips for customizing the appearance of your AIMMS user int
    /Articles/315/315-hover-and-select-effects-webui-charts
    /Articles/94/94-using-the-scalar-switch-css
    /Articles/553/553-add-icon-button
+   /Articles/303/303-add-icon-menu-bar
 
 From the :doc:`/Articles/511/index`
 
