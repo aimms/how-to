@@ -1,0 +1,110 @@
+## ams_version=1.0
+
+Model Main_ibds {
+	DeclarationSection data_declarations {
+		Set s_a {
+			Index: i_a;
+			Definition: data { a, b, c, d, e, f };
+		}
+		Set s_d {
+			Index: i_d;
+			Definition: data { 1, 2, 3, 4, 5 };
+		}
+		Set s_f {
+			Index: i_f;
+			Definition: ElementRange(0,9,prefix:"f");
+		}
+		Parameter p_data {
+			IndexDomain: (i_a,i_d);
+			Definition: ord(i_a) + ord(i_d);
+		}
+		StringParameter sp_data {
+			IndexDomain: (i_a,i_d);
+			Definition: formatString("str %e %e", i_a, i_d);
+		}
+		ElementParameter ep_data {
+			IndexDomain: (i_a,i_d);
+			Range: s_f;
+			Definition: Element(s_f,  mod( ord(i_a) + ord(i_d), card(s_f) ) + 1 );
+		}
+	}
+	DeclarationSection database_declarations {
+		StringParameter sp_datasource;
+		DatabaseTable db_ds {
+			DataSource: sp_datasource;
+			TableName: "ad";
+		}
+	}
+	Section app_initialization_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Body: {
+				pr_makeConnection();
+			}
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+		Procedure pr_makeConnection {
+			Body: {
+				sp_datasource := "data\\abc.dsn" ;
+			}
+		}
+	}
+	Procedure pr_fillTable {
+		Body: {
+			for ( i_a, i_d ) do
+				DirectSql( sp_datasource,
+					formatString("INSERT INTO AD (a,d,p,s,e) values ('%e','%e',%i,'%s','%e')",
+						i_a, i_d, p_data(i_a,i_d), sp_data(i_a, i_d), ep_data(i_a, i_d) ) );
+			endfor ;
+		}
+	}
+	Procedure pr_emptyTable {
+		Body: {
+			DirectSQL( sp_datasource, "delete from ad ;" );
+		}
+	}
+	Procedure MainExecution;
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: minute->s : #-># * 60;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsWebUI.
+				
+				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
+			}
+		}
+	}
+}

@@ -25,6 +25,7 @@ These topics instruct how to link your AIMMS model to databases, such as MS Acce
    /Articles/212/212-columns-added-to-dbtable
    /Articles/159/159-exchange-data-with-cloud
    /Articles/519/519-reading-relations-indexed-sets
+   /Articles/554/554-direct-sql-example
 
 
 
