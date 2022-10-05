@@ -75,6 +75,7 @@ This page has a summary of the examples versus which WebUI features are used in 
 
 .. dropdown:: Scalar Widget 
 
+    * :doc:`../383/383-contract-allocation`
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
@@ -90,3 +91,15 @@ This page has a summary of the examples versus which WebUI features are used in 
 .. dropdown:: Button Widget    
     
     * :doc:`../550/550-demand-forecasting`
+
+.. dropdown:: Dialog Page
+    
+    * :doc:`../383/383-contract-allocation`
+
+.. dropdown:: Download Widget
+    
+    * :doc:`../383/383-contract-allocation`    
+
+.. dropdown:: Selection Box Widget
+    
+    * :doc:`../383/383-contract-allocation`    
