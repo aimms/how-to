@@ -148,18 +148,18 @@ Below there are the css files you will find with comments on what they change.
     .. tab-item:: colors.css
 
       .. code-block:: css
-      :linenos:
+         :linenos:
 
-      :root {
-         --primary: #3DDAB4;
-         --primaryDark: #00B569;
-         --primary90Transparent: #3ddab33b;
+         :root {
+            --primary: #3DDAB4;
+            --primaryDark: #00B569;
+            --primary90Transparent: #3ddab33b;
 
 
-         --color_bg_button_primary: var(--primaryDark);
-         --color_bg_button_primary_hover: var(--primary);
-         --color_text_edit-select-link: var(--primaryDark);
-      }
+            --color_bg_button_primary: var(--primaryDark);
+            --color_bg_button_primary_hover: var(--primary);
+            --color_text_edit-select-link: var(--primaryDark);
+         }
     
     .. tab-item:: icon.css
 
@@ -336,3 +336,9 @@ Minimal Requirements
 --------------------   
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
+
+.. spelling::
+   primaryDark
+   ddab
+   bg
+   
