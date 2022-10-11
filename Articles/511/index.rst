@@ -48,6 +48,7 @@ This is a living document that will be updated as we continue to develop AIMMS W
    :titlesonly:
    :hidden:
 
-   introduction
-   style
+   user-insights
+   using-buttons
+   interaction-principles
    best-practices

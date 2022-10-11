@@ -11,8 +11,6 @@
     }
   </style>
 
-Interaction elements
-==========================
 
 Buttons
 ---------

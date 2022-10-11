@@ -4,6 +4,27 @@
     "aimms.widget.type": {
       "literal": "application"
     },
+    "browsername": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browsertimezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
+    "ignoredst": {
+      "aimms": {
+        "contents": [
+          "webui::IgnoreDST"
+        ]
+      }
+    },
     "pages": {
       "literal": {
         "name": "root",
@@ -26,6 +47,20 @@
     },
     "theme.classic": {
       "literal": "NOT_ALLOWED"
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "timezone.dst.readonly": {
+      "aimms": {
+        "contents": [
+          "webui::DefaultDSTSettingForDisplayTimeZone"
+        ]
+      }
     }
   },
   "pages/home": {
@@ -137,6 +172,9 @@
     },
     "contents": {
       "literal": "1.jpg"
+    },
+    "name": {
+      "literal": "img1"
     }
   },
   "widgets/img2": {
@@ -193,6 +231,9 @@
     },
     "aimms.widget.type": {
       "literal": "upload"
+    },
+    "name": {
+      "literal": "Upload Image"
     }
   }
 }
