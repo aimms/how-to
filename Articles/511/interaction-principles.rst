@@ -42,7 +42,7 @@ To modify something in a widget, use the `Widget Actions <https://documentation.
 
 This ensures the canvas delivers a clear and focused display and input of data.
 
-For more information on buttons, see the chapter on :doc:`interaction-elements`
+For more information on buttons, see the chapter on :doc:`using-buttons`
 
 
 Principles about Pages

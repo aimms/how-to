@@ -21,7 +21,7 @@ Deliver value on the homepage
 
 .. image:: images/homepage-1024x647.png
 
-First impressions count! When talking about :doc:`Time to Value <key-principles>`, the homepage is essential in delivering value to users.
+First impressions count! The homepage is essential in delivering value to users.
 
 Here are some suggestions on making great homepages:
 
