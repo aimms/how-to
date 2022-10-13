@@ -11,9 +11,11 @@
     }
   </style>
 
+Using Buttons
+===============
 
-Buttons
----------
+Type of Buttons
+-----------------
 
 Buttons come in AIMMS WebUI come in three different varieties: Primary Buttons, Secondary Buttons and Text Buttons.
 
