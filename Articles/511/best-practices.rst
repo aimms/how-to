@@ -10,13 +10,13 @@ The convention for button positions in WebUI is to place the **Primary Button** 
 
 .. image:: images/PrimaryButton.png
   :align: center
-  :width: 400px
+  :width: 600px
 
 - **Secondary Buttons:** are used for less desirable actions, that do not bring the user forward. Examples are “Cancel”, “Disagree” or “Back”.
 
 .. image:: images/SecondaryButton.png
   :align: center
-  :width: 400px
+  :width: 600px
 
 
 Following this convention ensures a constant experience. Users can predict the purpose of the button based on its position, and spend less time thinking about where to click.
