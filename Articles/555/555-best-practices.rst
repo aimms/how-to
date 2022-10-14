@@ -8,13 +8,13 @@ The convention for button positions in WebUI is to place the **Primary Button** 
 
 - **Primary Buttons:** are used for the “happy path”: an action that brings the user closer to their goal. Examples are “Accept”, “Ok” or “Continue”. Therefore, ideally only one of these buttons is visible at a time.
 
-.. image:: images/PrimaryButton.png
+.. image:: images/PrimaryButton_new.png
   :align: center
   :width: 600px
 
 - **Secondary Buttons:** are used for less desirable actions, that do not bring the user forward. Examples are “Cancel”, “Disagree” or “Back”.
 
-.. image:: images/SecondaryButton.png
+.. image:: images/SecondaryButton_new.png
   :align: center
   :width: 600px
 
