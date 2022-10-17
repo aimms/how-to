@@ -3,7 +3,7 @@
 LibraryModule Library_GuardServerSession {
 	Prefix: gss;
 	Interface: Public_Section;
-	RequiredUnits: SI_Time_Duration::s, SI_Time_Duration::minute, SI_Time_Duration::hour;
+	RequiredUnits: SI_Time_Duration::s, SI_Time_Duration::minute, SI_Time_Duration::hour, SI_Time_Duration::month;
 	Comment: {
 		"Requirements:
 		- Declaration of time, preferably as SI_Time_Duration, including unit s.
