@@ -21,9 +21,7 @@ This section contains tips for customizing the appearance of your AIMMS user int
    /Articles/94/94-using-the-scalar-switch-css
    /Articles/553/553-add-icon-button
    /Articles/303/303-add-icon-menu-bar
-
-From the :doc:`/Articles/511/index`
-
-* :doc:`3 Tips for a Better Page Layout </Articles/511/page-structure>`
+   /Articles/556/556-dos-donts
+   /Articles/555/555-best-practices
 
 .. Note:: CSS files to customize your WebUI projects are provided as-is and are not covered by our SLA policies. If you have any questions regarding this, we encourage you to post on `the AIMMS community <https://community.aimms.com/>`_ 
