@@ -1,6 +1,20 @@
 Best Practices in your Application
 ===================================
 
+Happy Path
+---------------
+
+.. image:: images/HappyPath-1024x508.png
+  :align: center
+  :width: 500px
+
+|
+
+Guide users on the “Happy Path”: the route in the app that leads towards a successful outcome.
+
+Buttons that help the user on this path should be more prominent. 
+For example: an “OK” or “Go” button is solid, while a “Cancel” button that leads users away from the Happy Path is transparent with an outline.
+
 Button Positioning
 ---------------------
 
@@ -88,20 +102,6 @@ Users, whose language uses the Latin alphabet, read from left to right and top t
 Let’s say you have a table with numbers, a button and a chart visualizing the table. The most logical layout would be chart top left, table top right, button underneath the table.
 
 Source: `Abyssale <https://www.abyssale.com/>`_
-
-Happy Path
----------------
-
-.. image:: images/HappyPath-1024x508.png
-  :align: center
-  :width: 500px
-
-|
-
-Guide users on the “Happy Path”: the route in the app that leads towards a successful outcome.
-
-Buttons that help the user on this path should be more prominent. 
-For example: an “OK” or “Go” button is solid, while a “Cancel” button that leads users away from the Happy Path is transparent with an outline.
 
 Page Hierarchy
 -----------------
