@@ -439,7 +439,7 @@ LibraryModule Library_GuardServerSession {
 								"</TR>" +
 							"</table>",
 						( '4', 'procedure' ) : "gss::pr_getCurDir",
-						( '4', 'state'     ) : "Inactive" , 
+						( '4', 'state'     ) : "Hidden" , 
 					
 						( '5', 'header'    ) : "",  
 						( '5', 'icon'      ) : "aimms-chip" ,
@@ -479,9 +479,16 @@ LibraryModule Library_GuardServerSession {
 							else
 								"gss::pr_openErrorHandlingPage"
 							endif,
-						( '6', 'state'     ) : "Active"  
+						( '6', 'state'     ) : "Active",
 					
 					
+						('9', 'header'    ) : "",  
+						('9', 'icon'      ) : "aimms-exit",  
+						('9', 'color'     ) : "",  
+						('9', 'text'      ) : "Bye",  
+						('9', 'tooltip'   ) : "",  
+						('9', 'procedure' ) : "gss::pr_goodBye",  
+						('9', 'state'     ) : "Active"
 					
 					}
 				}
@@ -611,6 +618,20 @@ LibraryModule Library_GuardServerSession {
 						Range: errh::PendingErrors;
 					}
 				}
+			}
+			Procedure pr_goodBye {
+				Body: {
+					if pro::GetPROEndPoint() then
+						if DirectoryExists("./MainProject/WebUI") then
+							pro::sessionmanager::FinishSession();
+						else
+							ExitAimms();
+						endif ;
+					else
+						ExitAimms();
+					endif ;
+				}
+				Comment: "Stop data session via the door at the far lower right corner.";
 			}
 		}
 		Section PRO_Support {
@@ -1790,7 +1811,7 @@ LibraryModule Library_GuardServerSession {
 						if pro::GetPROEndPoint() then
 							pro::Initialize();
 							sp_slash := "/" ;
-							sp_proStorageFolderName := "/Userdata/" + 
+							sp_proStorageFolderName := "/UserData/" + 
 								pro::GetPROEnvironment() + sp_slash + 
 								pro::GetPROUserName()    + sp_slash + 
 								pro::ModelName           + sp_slash + 
@@ -1915,11 +1936,15 @@ LibraryModule Library_GuardServerSession {
 				Arguments: (sp_procEnterTimestamp,p_procEnterMemoryInUse,ep_messageImportance,sp_logDetail);
 				Body: {
 					sp_leavingTime := CurrentToString("%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')");
-					p_duration := StringToMoment(
-						Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')", 
-						Unit          :  [s], 
-						ReferenceDate :  sp_procEnterTimestamp, 
-						Timeslot      :  sp_leavingTime);
+					if sp_procEnterTimestamp then
+						p_duration := StringToMoment(
+							Format        :  "%c%y-%m-%d %H:%M:%S:%t%TZ('UTC')", 
+							Unit          :  [s], 
+							ReferenceDate :  sp_procEnterTimestamp, 
+							Timeslot      :  sp_leavingTime);
+					else
+						p_duration := 0 ;
+					endif ;
 					sp_node := formatString("%e",CallerNode(1));
 					p_leaveMemoryInUse := MemoryInUse();
 					pr_setMemoryInUse( p_leaveMemoryInUse );
@@ -1970,7 +1995,7 @@ LibraryModule Library_GuardServerSession {
 				Body: {
 					if pro::GetPROEndPoint() then
 						sp_slash := "/" ;
-						sp_proStorageFolderName := sp_slash + "Userdata" + sp_slash + 
+						sp_proStorageFolderName := sp_slash + "UserData" + sp_slash + 
 							pro::GetPROEnvironment() + sp_slash + 
 							pro::GetPROUserName()    + sp_slash + 
 							pro::ModelName           ;
@@ -4751,7 +4776,7 @@ LibraryModule Library_GuardServerSession {
 					
 							block ! Copy the trace/actionLog file
 								sp_actionLogFilename  := sp_incidentSummaryFolderName + sp_slash + ep_shownSession + sp_slash + "action.log" ;
-								sp_proStorageFileName := sp_slash + "Userdata" + sp_slash + 
+								sp_proStorageFileName := sp_slash + "UserData" + sp_slash + 
 									pro::GetPROEnvironment() + sp_slash + 
 									pro::GetPROUserName()    + sp_slash + 
 									pro::ModelName           + sp_slash +
@@ -4761,7 +4786,7 @@ LibraryModule Library_GuardServerSession {
 							endblock ;
 					
 							block ! Copy the contents of bucket /UserData/<env>/<user>/<prj>/<ep_shownSession>/
-								sp_bucketName := sp_fwdSlash + "Userdata" + sp_fwdSlash + 
+								sp_bucketName := sp_fwdSlash + "UserData" + sp_fwdSlash + 
 									pro::GetPROEnvironment() + sp_fwdSlash + 
 									pro::GetPROUserName()    + sp_fwdSlash + 
 									pro::ModelName           + sp_fwdSlash +
@@ -4778,7 +4803,7 @@ LibraryModule Library_GuardServerSession {
 									p_slashPos2 := findNthString( sp_fn, "\\", -1);
 									p_slashPos := max( p_slashPos1, p_slashPos2 );
 									sp_baseFilename := substring( sp_fn, p_slashPos + 1, StringLength( sp_fn ) );
-					!				sp_proStorageFileName := sp_slash + "Userdata" + sp_slash + 
+					!				sp_proStorageFileName := sp_slash + "UserData" + sp_slash + 
 					!					pro::GetPROEnvironment() + sp_slash + 
 					!					pro::GetPROUserName()    + sp_slash + 
 					!					pro::ModelName           + sp_slash +
@@ -5617,6 +5642,10 @@ LibraryModule Library_GuardServerSession {
 					endif ;
 					
 					putclose ;
+					if pro::GetPROEndPoint() then
+						pro::management::LocalLogInfo(formatString(
+							"pr_openLogFile(): Opened actionLog: %s", sp_traceFilename ) );
+					endif ;
 				}
 				Comment: "Open log file and add identifying first few lines.";
 				DeclarationSection Debugging_Declarations;
@@ -5663,8 +5692,8 @@ LibraryModule Library_GuardServerSession {
 					if ep_shownSession <> first( s_trackedSessions ) then
 						! The first tracked session is the data session.
 						! The other session, are server sessions, and they are stored
-						! in /Userdata/<env>/<user>/<model>/tracings" + 
-						sp_proStorageFilename := sp_slash + "Userdata" + sp_slash + 
+						! in /UserData/<env>/<user>/<model>/tracings" + 
+						sp_proStorageFilename := sp_slash + "UserData" + sp_slash + 
 							pro::GetPROEnvironment() + sp_slash + 
 							pro::GetPROUserName()    + sp_slash + 
 							pro::ModelName           + sp_slash + 
@@ -5716,6 +5745,7 @@ LibraryModule Library_GuardServerSession {
 							endif ;
 							if bp_nextArgIsSessionId then
 								sp_thisSession := sp_arg ;
+								bp_nextArgIsSessionId := 0 ;
 							elseif sp_arg = "_pro-session-id" then
 								bp_nextArgIsSessionId := 1 ;
 								bp_isWorkerSession := 1 ;
@@ -5748,6 +5778,11 @@ LibraryModule Library_GuardServerSession {
 					
 						if sp_thisSession then
 							sp_traceFilename := sp_tracingsFolderName + "/" + sp_thisSession + ".actionLog" ;
+							if pro::GetPROEndPoint() then
+								pro::management::LocalLogInfo(
+									formatString("pr_getThisSession(): sp_traceFilename = %s", 
+										sp_traceFilename) );
+							endif ;
 						endif ;
 					
 						if not  DirectoryExists( sp_tracingsFolderName ) then
@@ -5760,6 +5795,8 @@ LibraryModule Library_GuardServerSession {
 					
 					! Open log file for data session or AIMMS Developer session.
 					if bp_isConnectedToPro then
+						pro::management::LocalLogInfo(formatString(
+							"pr_getThisSession(): sp_traceFilename = %s", sp_traceFilename ) );
 						if bp_isWorkerSession then
 							! pr_openLogFile();
 							! The log file for a server session is opened at the beginning of pr_guardAndProfileServerJob().
@@ -5788,6 +5825,8 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_actuallySaveActionLogFile {
 				Arguments: (sp_fn,sp_folder);
 				Body: {
+					gss::pr_enter(sp_gssTime, p_gssMiU, ep_messageImportance: 'info',
+						formatString("%s, %s", sp_fn,sp_folder));
 					sp_slash := "/" ;
 					if fileExists( sp_fn ) then
 						sp_proStorageFileName := sp_folder + sp_slash + sp_fn ;
@@ -5804,16 +5843,25 @@ LibraryModule Library_GuardServerSession {
 							" does not exist."
 						);
 					endif ;
+					gss::pr_leave(sp_gssTime, p_gssMiU, ep_messageImportance: 'info');
 				}
 				Comment: "Helper procedure of pr_saveActionLogFile.";
-				StringParameter sp_fn {
-					Property: Input;
+				DeclarationSection Argument_declarations {
+					StringParameter sp_fn {
+						Property: Input;
+					}
+					StringParameter sp_folder {
+						Property: Input;
+					}
 				}
-				StringParameter sp_folder {
-					Property: Input;
+				DeclarationSection Local_declarations {
+					StringParameter sp_slash;
+					StringParameter sp_proStorageFileName;
 				}
-				StringParameter sp_slash;
-				StringParameter sp_proStorageFileName;
+				DeclarationSection gss_logging_declarations {
+					StringParameter sp_gssTime;
+					Parameter p_gssMiU;
+				}
 			}
 			Procedure pr_saveLogfilesProTempfolder {
 				Body: {
@@ -5824,7 +5872,7 @@ LibraryModule Library_GuardServerSession {
 						recursive       :  0, 
 						attributeFilter :  {});
 					sp_slash := "/" ;
-					sp_folder := sp_slash + "Userdata" + sp_slash + 
+					sp_folder := sp_slash + "UserData" + sp_slash + 
 							pro::GetPROEnvironment() + sp_slash + 
 							pro::GetPROUserName()    + sp_slash + 
 							pro::ModelName           + sp_slash + 
