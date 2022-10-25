@@ -17,6 +17,7 @@ A list of already available solvers will appear.
 
 .. image:: images/list-solver.png
     :align: center
+
 |
 
 Step 2
@@ -25,12 +26,14 @@ To add a new one, press the highlighted buttons below.
 
 .. image:: images/add-popup.png
     :align: center
+
 |
 
 You will see a list of solvers ``dll``. Select the needed one of find on your computer a new ``dll`` to add. 
 
 .. image:: images/list-dll.png
     :align: center
+
 |
 
 Step 3
