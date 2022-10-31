@@ -70,6 +70,70 @@ LibraryModule Library_StopwatchLibrary {
 				}
 			}
 		}
+		Procedure pr_scheduleOver {
+			Arguments: (p_noSeconds,ep_payLoad);
+			Body: {
+				block ! Sanity checks 
+					if p_noSeconds <= 0[s] then
+						raise error 
+							formatString("pr_scheduleOver(%n,%e): The number of seconds should be strictly positive.", 
+								p_noSeconds, ep_payLoad);
+					endif ;
+					if not ep_payLoad then
+						raise error 
+							formatString("pr_scheduleOver(%n,%e): Empty payload specified.", 
+								p_noSeconds, ep_payLoad);
+					endif ;
+				endblock ;
+				
+				
+				p_ogv := OptionGetValue(
+					OptionName :  "use_UTC_forCaseAndStartEndDate", 
+					Lower      :  p_low, 
+					Current    :  p_scheduleAtUsesUTC, 
+					Default    :  p_def, 
+					Upper      :  p_upp);
+				if not p_ogv then ! Option use_UTC_forCaseAndStartEndDate is introduced with AIMMS 4.75.
+					p_scheduleAtUsesUTC := 0 ; ! Assume option use_UTC_forCaseAndStartEndDate is off.
+				endif ;
+				p_tmpSec := CurrentToMoment([s], "2021-01-01 00:00:00") ;
+				p_tmpSec += p_noSeconds ;
+				if p_scheduleAtUsesUTC then
+					sp_launchDate := MomentToString( "%c%y-%m-%d %H:%M:%S%TZ('UTC')", [s], "2021-01-01 00:00:00", p_tmpSec );
+				else
+					sp_launchDate := MomentToString( "%c%y-%m-%d %H:%M:%S", [s], "2021-01-01 00:00:00", p_tmpSec );
+				endif ;
+				if not ScheduleAt(sp_launchDate, ep_payLoad) then
+				        raise error "Error scheduling procedure \'" + ep_payload + "\': " + CurrentErrorMessage code 'PRO-Error-scheduling-progress-procedure' ;
+				endif;
+			}
+			Comment: "Schedule a job in a couple of seconds.";
+			Parameter p_noSeconds {
+				Unit: s;
+				Property: Input;
+			}
+			ElementParameter ep_payLoad {
+				Range: AllProcedures;
+				Property: Input;
+			}
+			StringParameter sp_launchDate;
+			Parameter p_deltaSeconds;
+			Parameter p_tmpHour {
+				Range: integer;
+			}
+			Parameter p_tmpMin {
+				Range: integer;
+			}
+			Parameter p_tmpSec {
+				Range: integer;
+				Unit: s;
+			}
+			Parameter p_ogv;
+			Parameter p_low;
+			Parameter p_scheduleAtUsesUTC;
+			Parameter p_def;
+			Parameter p_upp;
+		}
 	}
 	Section Private_section {
 		StringParameter sp_startTime {
