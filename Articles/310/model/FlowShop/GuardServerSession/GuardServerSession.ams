@@ -5626,19 +5626,25 @@ LibraryModule Library_GuardServerSession {
 			Procedure pr_openLogFile {
 				Body: {
 					f_traceFile.pagewidth := 32000 ;
+					AimmsRevisionString( sp_ver ); 
 					putclose f_traceFile ;
 					put f_traceFile;
 					put "Opening log file ", sp_traceFilename, " at ", CurrentToSTring("%c%y-%m-%d %H:%M:%S"), / ;
 					if bp_isConnectedToPro then
 						if bp_isWorkerSession then
-							put "This file contains the log of a solver session handling request ", 
-								pro::workerRequestDescription, / ;
+							put "This file contains the log of a ", 
+							    pro::ModelName, "/", pro::ModelVersion,
+							    " solver session handling request ", 
+								pro::workerRequestDescription, " running AIMMS ", sp_ver, ".", / ;
 						else
-							put "This file contains the log of a data session on behalf of ", 
-								pro::GetPROUserName(), "@", pro::GetPROEnvironment(), / ;
+							put "This file contains the log of a ",
+							    pro::ModelName, "/", pro::ModelVersion,
+							    " data session on behalf of ", 
+								pro::GetPROUserName(), "@", pro::GetPROEnvironment(), 
+								" running AIMMS ", sp_ver, ".", / ;
 						endif ;
 					else
-						put "This file contains the log of an AIMMS Developer session ", / ;
+						put "This file contains the log of an AIMMS ",sp_ver," Developer session.", / ;
 					endif ;
 					
 					putclose ;
@@ -5648,7 +5654,9 @@ LibraryModule Library_GuardServerSession {
 					endif ;
 				}
 				Comment: "Open log file and add identifying first few lines.";
-				DeclarationSection Debugging_Declarations;
+				DeclarationSection Local_declarations {
+					StringParameter sp_ver;
+				}
 			}
 			Procedure pr_logMsgTraceFile {
 				Arguments: (sp_argMsg,ep_messageImportance);

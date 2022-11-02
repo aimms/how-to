@@ -2,9 +2,7 @@
 <ExportSettings>
 	<ExcludedFile>backup</ExcludedFile>
 	<ExcludedFile>log</ExcludedFile>
-	<ExcludedFile>MainProject\WebUI</ExcludedFile>
 	<ExcludedFile>PROTemp</ExcludedFile>
 	<ExcludedFile>tracings</ExcludedFile>
-	<ExcludedFile>LoggerConfig-working-only-server.xml</ExcludedFile>
 	<ExcludedFile>_Local_Libs_</ExcludedFile>
 </ExportSettings>
