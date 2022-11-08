@@ -48,10 +48,13 @@ This comes across as significantly more work then a procedure call.
 Is that necessary?
 It is **not**.  
 
-Using the AIMMS DataExchange library, from an openapi api specification, an AIMMS library can be generated; and this library can subsequently be copied to your AIMMS application, such that the application itself can communicate with the server using AIMMS data structures as visualized below:
+An OpenAPI specification can be converted to an AIMMS Library.
+That AIMMS Library can subsequently be used to communicate with, instead of the communication with the server.
+This eases the application development considerably, as the client no longer needs to translate to and from the data structures of the server. See below:
 
 .. image:: images/client-server-openapi-lib.png
     :align: center
+
 
 
 
@@ -75,4 +78,8 @@ References
 * List of OpenAPI sites: https://apis.guru/
 
 * Swagger: https://editor.swagger.io/
+
+.. spelling::
+    openapi
+    api
 
