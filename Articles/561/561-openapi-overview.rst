@@ -55,17 +55,20 @@ This eases the application development considerably, as the client no longer nee
 .. image:: images/client-server-openapi-lib.png
     :align: center
 
+#.  Creating and submitting a request to the OpenAPI generated library.
 
+#.  The OpenAPI generated library converts the request data to the format of the server and forwards the request.
 
+#.  The Server processes the request and sends the response to the OpenAPI generated library. 
+    The OpenAPI generated library translates the response to AIMMS data structures.
+    Subsequently, the OpenAPI generated library calls the response hook of the request.
 
-An important contribution of OpenAPI is that specifications of a server can be translated to a library in AIMMS.
-For this purpose, the  
+#.  The response hook is responsible for translating the data in the OpenAPI library to the datastructures 
+    of the application itself.
 
-`Many APIs <https://apis.guru/>`_ nowadays come with an `OpenAPI <https://www.openapis.org/>`_ specification.
-Tools such as `swagger <>`_ make effective use of such specifications to create libraries that can be used directly by clients.
-This enables an application developer to stay within the language of preference and make calls almost as if they are library calls in the native environment.
+Obtaining OpenAPI generated libraries
+-------------------------------------
 
-For AIMMS application developers, there 
 
 
 References

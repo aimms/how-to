@@ -14,5 +14,5 @@ These topics help you to use the Data Exchange Library with your AIMMS project.
 .. toctree::
    :maxdepth: 1
 
-   /Articles/561/561-overview-openapi
+   /Articles/561/561-openapi-overview
 
