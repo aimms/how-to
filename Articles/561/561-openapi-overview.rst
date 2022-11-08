@@ -63,7 +63,7 @@ This eases the application development considerably, as the client no longer nee
     The OpenAPI generated library translates the response to AIMMS data structures.
     Subsequently, the OpenAPI generated library calls the response hook of the request.
 
-#.  The response hook is responsible for translating the data in the OpenAPI library to the datastructures 
+#.  The response hook is responsible for translating the data in the OpenAPI library to the data structures 
     of the application itself.
 
 Obtaining OpenAPI generated libraries
