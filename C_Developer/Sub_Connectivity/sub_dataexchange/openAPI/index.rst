@@ -3,7 +3,7 @@
    :align: right
    :alt: AIMMS Data Exchange Library Help & Support
    
-Data Exchange Library
+OpenAPI
 =======================
 
 .. meta::

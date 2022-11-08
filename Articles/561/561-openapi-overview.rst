@@ -1,18 +1,29 @@
 Overview OpenAPI in AIMMS
 =========================
 
+Leveraging REST Services in an AIMMS application is significantly easier when an OpenAPI specification
+is provided for that service.   
+This article is the overview of a series of articles that illustrate how to leverage the power of OpenAPI 
+specifications in AIMMS models.
+
+Simplified Client Server model
+-------------------------------
+
 A simplified overview of Client Server model:
 
 .. image:: images/client-server.png
     :align: center
 
-From this image:
+Some remarks on this image:
 
 #.  The languages and software development environments used to develop both the client and the server are independent.
 
-#.  Over two decades of development on REST API includes the development of OpenAPI.
+#.  For AIMMS application developers there is a clear opportunity and a matter of concern. 
+    Both will be briefly addressed here.
 
-#.  For AIMMS application developers there is a clear opportunity and a matter of concern. Both will be briefly addressed here.
+In addition, please note that there is over two decades of developments regarding REST.
+One of the important results of those developments is the specification of OpenAPI; for over 3000 API's, an OpenAPI specification exists.
+That is why AIMMS leverages the power of these servers by creating AIMMS libraries to unlock these servers to AIMMS applications.
 
 Opportunity for AIMMS Application Developers
 ---------------------------------------------
@@ -44,7 +55,7 @@ Using the architecture above, this requires the client:
 
 * to translate the response from the server to local application data structures 
 
-This comes across as significantly more work then a procedure call. 
+This comes across as significantly more work than a procedure call. 
 Is that necessary?
 It is **not**.  
 
