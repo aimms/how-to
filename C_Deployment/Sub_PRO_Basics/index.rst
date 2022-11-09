@@ -31,6 +31,8 @@ This section offers best practices to build and deploy applications using AIMMS 
    /Articles/373/373-pro-scaling-options
    /Articles/374/374-pro-backup-and-continuity
    /Articles/535/535-waiting-for-sub-jobs-to-complete
+   /Articles/310/310-investigate-behavior-pro-job
+
 
 
 
