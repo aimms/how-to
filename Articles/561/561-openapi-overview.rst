@@ -6,6 +6,7 @@ is provided for that service.
 This article is the overview of a series of articles that illustrate how to leverage the power of OpenAPI 
 specifications in AIMMS models.
 
+
 Simplified Client Server model
 -------------------------------
 
