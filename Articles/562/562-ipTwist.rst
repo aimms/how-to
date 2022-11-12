@@ -168,3 +168,6 @@ Remarks:
 #.  Line 26: The service from ipTwist does not provide a schema for error messages.
     Instead, its OpenAPI spec documents how to handle status codes in case of failure.
     This is why a separate function is built to translate documented status code to explanations.
+
+.. spelling::
+   ipTwist
