@@ -1,5 +1,17 @@
 ipTwist
 =======
+.. meta::
+   :keywords: aimms, api, rest api, library, ip
+   :description: This example uses the rest api! 
+
+.. image:: https://img.shields.io/badge/AIMMS_4.89-ZIP:_ip-Twist-blue
+   :target: https://github.com/aimms/ip-twist/archive/refs/heads/main.zip
+
+.. image:: https://img.shields.io/badge/AIMMS_4.89-Github:_ip-Twist-blue
+   :target: https://github.com/aimms/ip-twist
+
+.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
+   :target: https://community.aimms.com/aimms-webui-44/new-demand-forecasting-example-1327
 
 Story
 ----------
