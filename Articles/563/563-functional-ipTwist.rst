@@ -4,15 +4,17 @@ Using an API with OpenAPI spec
 Story
 ----------
 
-`ipTwist service <https://iptwist.com/>`_ provides a service for GeoLocating; translating an IP Address to a location on the globe. 
+In this functional example, you will see a IP Locator. Here `ipTwist service <https://iptwist.com/>`_ provides a service for GeoLocating; translating an IP Address to a location on the globe. 
 
-For instance, the IP Address ``111.111.111.111`` will return Latitude 35.68, Longitude 136.69; which is in Tokyo, Japan.
+For instance, the IP Address ``111.111.111.111`` will return Latitude 35.68, Longitude 136.69; which is in Tokyo, Japan. Add your IP address and confirm where you are!
 
-`API gurus <https://apis.guru/>`_ lists shared Open API specifications, including the one from `ipTwist OpenAPI spec <https://api.apis.guru/v2/specs/iptwist.com/1.0.0/openapi.json>`_ . 
+.. note:: `API gurus <https://apis.guru/>`_ lists shared Open API specifications, including the one from `ipTwist OpenAPI spec <https://api.apis.guru/v2/specs/iptwist.com/1.0.0/openapi.json>`_ . 
 
 Language
 -----------
 
+While using REST APIs, you will need at least 3 procedures... 
+and link it to the Using an API with OpenAPI Spec article. 
 
 WebUI Features
 ---------------
