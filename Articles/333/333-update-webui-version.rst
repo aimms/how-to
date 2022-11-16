@@ -324,7 +324,7 @@ Declare a set for the filtering, including a new index:
         }
     }
 
-Next, we open the identifier attributes of the identifiers in the table, and filter by specifying the use of ``i_ve`` in the Identifier setttings > Set slicing per index:
+Next, we open the identifier attributes of the identifiers in the table, and filter by specifying the use of ``i_ve`` in the Identifier settings > Set slicing per index:
 
 .. image:: images/Aimms466Slicing.png
     :align: center
@@ -484,3 +484,4 @@ Related topics
 
 .. spelling::
     settings
+
