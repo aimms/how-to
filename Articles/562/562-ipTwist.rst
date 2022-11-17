@@ -15,7 +15,7 @@ This article illustrates how to:
 
 #.  make a request via such a library (arrow 1), and
 
-#.  handle a response from such a library (arrow 4).
+#.  handle a response from such a library (arrow 4). 
 
 
 The Story
