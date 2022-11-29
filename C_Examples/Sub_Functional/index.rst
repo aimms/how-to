@@ -48,5 +48,5 @@ The functional AIMMS examples listed below illustrate specific AIMMS features.
    /Articles/435/435-rolling-horizon
    /Articles/436/436-stochastic-programming
    /Articles/437/437-tea-consumption
-   /Articles/438/438-templates-and-navigation
+
                     
