@@ -61,7 +61,7 @@ The preparations needed come prepackaged in the ``LibraryInitialization`` routin
     endblock;
     dex::ReadMappings(libFolder, "Generated/openapi-ipTwist", 0);
 
-    ! Read server initialization data (e.g. service URL, api key, OAuth credentials)
+    ! Read server initialization data (e.g. service URL, API key, OAuth credentials)
     apiInitFile := "../api-init/openapi-ipTwist.txt";
     if FileExists(apiInitFile) then
         read from file apiInitFile;
@@ -71,7 +71,7 @@ Selected remarks about this code:
 
 *   Lines 1-8: The mapping files are in the subfolder ``./Mappings/Generated/openapi-ipTwist`` of the library folder.
 
-*   Lines 10-14: Read in ipTwist config information, such as server name and api Key.
+*   Lines 10-14: Read in ipTwist config information, such as server name and API Key.
 
 Example contents for the ``openapi-ipTwist.txt`` are as follows:
 
