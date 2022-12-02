@@ -1,7 +1,7 @@
 Using an API with OpenAPI spec
 ===============================
 
-:download:`AIMMS 4.88 project download <model/ipTwist.zip>` 
+:download:`AIMMS 4.90 project download <model/ipTwist.zip>` 
 
 An API with an OpenAPI 3.0 spec can be used to generate an AIMMS Library.
 This AIMMS Library can subsequently be used to ease interfacing the corresponding service significantly.
@@ -47,33 +47,43 @@ Then you can start the AIMMS Project, press the GeoLocate button on the lower ri
 Preparation
 -----------
 
-The preparations needed come prepackaged in the ```LibraryInitialization`` routine of the OpenAPI generated library ``openapi-ipTwist``:
+The preparations needed come prepackaged in the ``LibraryInitialization`` routine of the OpenAPI generated library ``openapi-ipTwist``:
 
 .. code-block:: aimms 
     :linenos:
 
     ! Read mapping files for this library.
-    DirectoryOfLibraryProject("openapi_ipTwist", sp_libFolder);
-    dex::ReadMappings(sp_libFolder, "Generated/openapi-ipTwist",0);
+    block
+        DirectoryOfLibraryProject("openapi_ipTwist", libFolder);
+    onerror err do
+        libFolder := "../libs/openapi-ipTwist/";
+        errh::MarkAsHandled(err);
+    endblock;
+    dex::ReadMappings(libFolder, "Generated/openapi-ipTwist", 0);
 
-    ! Read api key:
-    sp_keyFilename := "../keys/openapi-apikey-ipTwist.txt";
-    if FileExists( sp_keyFilename ) then
-        read from file sp_keyFilename ;
+    ! Read server initialization data (e.g. service URL, api key, OAuth credentials)
+    apiInitFile := "../api-init/openapi-ipTwist.txt";
+    if FileExists(apiInitFile) then
+        read from file apiInitFile;
     endif ;
-
-    ! Set server to the one and only:
-    ipTwist::api::APIServer := "https://iptwist.com";
 
 Selected remarks about this code:
 
-*   Lines 1-3: The mapping files are in the subfolder ``./Mappings/Generated/openapi-ipTwist`` of the library folder.
+*   Lines 1-8: The mapping files are in the subfolder ``./Mappings/Generated/openapi-ipTwist`` of the library folder.
 
-*   Lines 5-9: In case the API key is stored next to the project project folder, it is read in immediately.
+*   Lines 10-14: Read in ipTwist config information, such as server name and api Key.
 
-*   Lines 11-12: There is only one server implementing the ``ipTwist`` service, 
-    so the ``APIserver`` is initialized in the ``LibraryInitialization`` procedure.
+Example contents for the ``openapi-ipTwist.txt`` are as follows:
 
+.. code-block:: aimms 
+    :linenos:
+
+    ipTwist::api::APIServer :=  "https://iptwist.com" ;
+    ipTwist::api::APIKey('X-IPTWIST-TOKEN') := "" ;
+
+There is one server for the service ``ipTwist``, namely ``ipTwist.com``; so the server is specified in the initialization file.
+Of course, you can choose to enter your API key directly in this file.
+ 
 Calling the API
 ---------------
 
