@@ -17,7 +17,7 @@ translating the response provided by the server into AIMMS data (arrow 3) are ta
 
 The purpose of this article is to illustrate:
 
-#.  initialization of an openapi generated AIMMS library,
+#.  initialization of an OpenAPI generated AIMMS library,
 
 #.  make a request to such a library (arrow 1), and
 
@@ -199,11 +199,11 @@ Further information:
 --------------------
 
 *   `Generating API client code from an OpenAPI specification <https://documentation.aimms.com/dataexchange/openapi-client.html>`_ 
-     and encourages to `Move a runtime generated openapi library to a permanent library <https://documentation.aimms.com/dataexchange/openapi-client.html#moving-the-runtime-library-to-a-permanent-library>`_ .
+     and encourages to `Move a runtime generated OpenAPI library to a permanent library <https://documentation.aimms.com/dataexchange/openapi-client.html#moving-the-runtime-library-to-a-permanent-library>`_ .
 
 *   `API gurus <https://apis.guru/>`_ lists shared Open API specifications, including the one from `ipTwist OpenAPI spec <https://api.apis.guru/v2/specs/iptwist.com/1.0.0/openapi.json>`_ . 
 
-*   `Swagger <https://editor.swagger.io/>`_ provides an editor and viewer for openapi specifications.
+*   `Swagger <https://editor.swagger.io/>`_ provides an editor and viewer for OpenAPI specifications.
 
 
 .. spelling::
