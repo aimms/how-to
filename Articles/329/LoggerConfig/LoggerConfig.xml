@@ -61,6 +61,10 @@
     <logger name="AIMMS.Trace" >
         <level value="warn"/>
     </logger>
+    <logger name="AIMMS.Trace.DataDefinition" >
+        <!-- When set to debug, this logger will report on timings of individual definition evaluations -->
+        <level value="warn"/>
+    </logger>
     <logger name="AIMMS.Trace.Procedure">
         <!--- Tracing entering and leaving AIMMS Procedures.
               * Info: procedure calls outside a loop are logged.
@@ -100,6 +104,10 @@
     <logger name="AIMMS.caseIO.reading" >
         <!--- With TRACE file positions are logged -->
         <level value="info"/>
+    </logger>
+    <logger name="AIMMS.caseIO.reading.Timings" >
+        <!--- Set to trace, this logger will report on timings of reading case file per component. -->
+        <level value="warn"/>
     </logger>
     <logger name="AIMMS.caseIO.writing" >
         <!--- With TRACE file positions are logged -->
