@@ -38,11 +38,14 @@ Operating the application
 
 To operate the application, you first need to obtain an API key, from `https://iptwist.com/settings <https://iptwist.com/settings>`_
 
-Then you can start the AIMMS Project, press the GeoLocate button on the lower right of the page. You will be asked for an API key first, and then the IP address provided in the right upper will be GeoLocated.
+Then you can start the AIMMS Project, press the GeoLocate button on the lower right of the page. 
+You will be asked for an API key first. 
+Then the IP address provided in the right upper will be GeoLocated.
 
 .. image:: images/living-near-amsterdam.png
     :align: center
 
+Did you enter `your own <https://whatismyipaddress.com/>`_ IP address?
 
 Preparation
 -----------
@@ -125,13 +128,12 @@ Using the ``openapi_ipTwist`` library, handling the response is just as follows:
 
 .. code-block:: aimms 
     :linenos:
-    :emphasize-lines: 6-13
+    :emphasize-lines: 5-12
 
     switch ipTwist::api::CallStatusCode(ep_callInstance) do
 
         '200':
-            ! Success, copy data retrieved to application core data structures.
-            block ! Copy to data structures of scalar widget.
+            block ! Success, copy data retrieved to application core data structures.
                 sp_city         := ipTwist::_Response::city(        ep_callInstance);
                 sp_country      := ipTwist::_Response::country(     ep_callInstance);
                 sp_countryCode  := ipTwist::_Response::country_code(ep_callInstance);
@@ -166,18 +168,18 @@ Using the ``openapi_ipTwist`` library, handling the response is just as follows:
 
 Remarks:
 
-#.  Lines 6-13: This is where the application logic comes in again. 
+#.  Lines 6-12: This is where the application logic comes in again. 
     Here we copy the data from the ``openapi_ipTwist`` library into the data structures of the application.
 
-#.  Line 15: After the data is retrieved as needed, the data can be removed from the OpenAPI library.
+#.  Line 14: After the data is retrieved as needed, the data can be removed from the OpenAPI library.
 
-#.  Lines 17, 18: Use the data now in the core of the app.
+#.  Lines 16, 17: Use the data now in the core of the app.
 
-#.  Lines 21-27, and 29-34: try to be nice to the end-user by sharing information about a failure.
-    By sharing both the what the response tries to handle (context information), and the cause of failure provided by the service,
+#.  Lines 20-26, and 28-33: try to be nice to the end-user by sharing information about a failure.
+    By sharing both what the response tries to handle (context information), and the cause of failure provided by the service,
     you will increase the chance that the user is able to handle the failure self, or find the proper point of contact directly.
 
-#.  Line 27: The service provided by ipTwist does not provide a schema for error messages.
+#.  Line 26: The service provided by ipTwist does not provide a schema for error messages.
     Instead, its OpenAPI spec documents how to handle status codes in case of failure.
     This is why a separate function is built to translate documented status code to explanations.
 
