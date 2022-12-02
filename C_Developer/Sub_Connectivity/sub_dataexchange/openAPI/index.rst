@@ -15,4 +15,5 @@ These topics help you to use the Data Exchange Library with your AIMMS project.
    :maxdepth: 1
 
    /Articles/561/561-openapi-overview
+   /Articles/562/562-ipTwist
 
