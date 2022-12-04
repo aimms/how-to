@@ -45,7 +45,6 @@ Then the IP address provided in the right upper will be GeoLocated.
 .. image:: images/living-near-amsterdam.png
     :align: center
 
-Did you enter `your own <https://whatismyipaddress.com/>`_ IP address?
 
 Preparation
 -----------
