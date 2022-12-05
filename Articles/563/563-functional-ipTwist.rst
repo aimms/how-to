@@ -4,29 +4,52 @@ ipTwist
    :keywords: aimms, api, rest api, library, ip
    :description: This example uses the rest api! 
 
-.. image:: https://img.shields.io/badge/AIMMS_4.89-ZIP:_ip-Twist-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.89-ZIP:_ipTwist-blue
    :target: https://github.com/aimms/ip-twist/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.89-Github:_ip-Twist-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.89-Github:_ipTwist-blue
    :target: https://github.com/aimms/ip-twist
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-webui-44/new-demand-forecasting-example-1327
+   :target: https://community.aimms.com/math-or-optimization-modeling-39/using-an-api-with-openapi-specification-1368
 
 Story
 ----------
 
-In this functional example, you will see a IP Locator. Here `ipTwist service <https://iptwist.com/>`_ provides a service for GeoLocating; translating an IP Address to a location on the globe. 
 
+In this functional example, you will see a IP Locator. The site `ipTwist <https://iptwist.com/>`_ provides a service for WhoIs GeoLocating; translating an IP Address to a location on the globe. 
 For instance, the IP Address ``111.111.111.111`` will return Latitude 35.68, Longitude 136.69; which is in Tokyo, Japan. Add your IP address and confirm where you are!
-
-.. note:: `API gurus <https://apis.guru/>`_ lists shared Open API specifications, including the one from `ipTwist OpenAPI spec <https://api.apis.guru/v2/specs/iptwist.com/1.0.0/openapi.json>`_ . 
 
 Language
 -----------
 
-While using REST APIs, you will need at least 3 procedures... 
-and link it to the Using an API with OpenAPI Spec article. 
+Operating the Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To operate this example, you first need to obtain an API key, from `https://iptwist.com/settings <https://iptwist.com/settings>`_
+
+.. image:: images/obtain-api-key.png
+    :align: center
+| 
+
+Then you can start the AIMMS Project, press the GeoLocate button on the lower right of the page "Find IP". 
+
+.. image:: images/geolocateButton.png
+    :align: center
+
+| 
+
+You will be asked for an API key first. Then the IP address provided will be GeoLocated.
+
+.. image:: images/tokyo.png
+    :align: center
+
+|
+
+Using the API
+~~~~~~~~~~~~~
+
+While using REST APIs, you will need to **Prepare**, **Call the API** and **Handle the Response**. All three steps are detailed `here <https://how-to.aimms.com/Articles/562/562-ipTwist.html>`_.  
 
 WebUI Features
 ---------------
