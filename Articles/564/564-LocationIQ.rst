@@ -333,4 +333,5 @@ Here the utility procedure ``pr_handleResponsesFor`` is coded as follows:
         }
     }
 
- 
+.. spelling::
+   github
