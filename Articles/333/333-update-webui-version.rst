@@ -53,7 +53,7 @@ The versions listed below are the earliest versions to require the specified ada
 * `AIMMS 4.46: Element Text`_
 * `AIMMS 4.50: Annotations`_
 * `AIMMS 4.61: Map V2`_
-* `AIMMS 4.66: Filtering and new UX theme`_
+* `AIMMS 4.66: Widget Filtering`_
 * `AIMMS 4.67: Serialize WebUI specification with a single file`_
 * `AIMMS 4.71: Identifier based tailoring`_
 * `AIMMS 4.72: Data modifications`_
@@ -300,7 +300,7 @@ Some advantages of map V2 widgets over map v1 widgets are:
 
 *   :download:`After, using AIMMS 4.61 <model/AIMMS-4-60-map-v1/AIMMS-4.61/ShowGeocdes461.zip>`
 
-AIMMS 4.66: Filtering and new UX theme
+AIMMS 4.66: Widget filtering 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. Release note: The filtering of widgets, using the filter tab of a widget, did not always work correctly. Since we introduced slicing on identifiers in the WebUI quite a while ago, which is the preferred way of filtering, we decided to remove the filter tab from th widgets. If you have apps which rely on this functionality, they will continue to run as they did. Only if you want to make changes to the filtering, you should do so by either using the advanced options or by opening the model with an older AIMMS version which still has the filter tabs. We do recommend to consider using slicing on identifiers, though.
@@ -324,9 +324,9 @@ Declare a set for the filtering, including a new index:
         }
     }
 
-Next, we open the identifier attributes of the identifiers in the table, and filter by specifying the use of ``i_ve``:
+Next, we open the identifier attributes of the identifiers in the table, and filter by specifying the use of ``i_ve`` in the Identifier settings > Set slicing per index:
 
-.. image:: images/Aimms465Filter.png
+.. image:: images/Aimms466Slicing.png
     :align: center
 
 **Downloads:**
@@ -481,3 +481,7 @@ Related topics
 
 * **AIMMS How-To** :doc:`UI Features articles </C_UI/Sub_UI_Features/index>`
 * **AIMMS Documentation** `WebUI App Development <https://documentation.aimms.com/webui/webui-app-development.html>`_
+
+.. spelling::
+    settings
+

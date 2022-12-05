@@ -5,13 +5,14 @@ Model Main_Stopwatch {
 		Quantity SI_Time_Duration {
 			BaseUnit: s;
 			Conversions: {
-				tick  ->s : #-># / 100,
+				tick->s : #-># / 100,
 				minute->s : #-># * 60,
-				hour  ->s : #-># * 3600,
-				day   ->s : #-># * 86400,
-				week  ->s : #-># * 604800,
-				month ->s : #-># * 2628000,
-				year  ->s : #-># * 31536000
+				hour->s : #-># * 3600,
+				day->s : #-># * 86400,
+				week->s : #-># * 604800,
+				month->s : #-># * 2628000,
+				year->s : #-># * 31536000,
+				century->s : #-># * 3153600000
 			}
 			Comment: "Expresses the value for the duration of periods.";
 		}

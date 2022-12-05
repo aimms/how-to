@@ -191,7 +191,7 @@ Further reading
 
 * Guard solver session :doc:`Investigating behavior solver session<../310/310-investigate-behavior-pro-job>`
 
-* Save state  :doc:`Data state solver session<../321/321-state-server-session>`
+* Save state  `Data state solver session <https://documentation.aimms.com/guardserversession/state-server-session.html>`_
 
 * The AIMMS Debugger, see :doc:`creating-and-managing-a-model/debugging-and-profiling-an-aimms-model/index`
 

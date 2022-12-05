@@ -19,7 +19,5 @@ AIMMS offers two User Interface builders: the classic WinUI for applications tha
     
    Sub_UI_Features/index
    Sub_Styling/index
-   ../Articles/511/index
-
    
 *For AIMMS IDE and Editor Settings topics, see* :doc:`../C_Getting_Started/index`

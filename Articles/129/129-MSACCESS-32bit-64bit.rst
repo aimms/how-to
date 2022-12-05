@@ -52,7 +52,7 @@ This should be changed to look like (where the changes are highlighted):
     
     [ODBC]
     DRIVER=Microsoft Access Driver (*.mdb, *.accdb)
-    DBQ=.MyDB.mdb
+    DBQ=.\MyDB.mdb
     DriverId=25
     FIL=MS Access
     SafeTransactions=0
@@ -84,7 +84,7 @@ For the new driver this should be changed to look like (where the changes are hi
     
     [ODBC]
     DRIVER=Microsoft Access Text Driver (*.txt, *.csv)
-    DBQ=.DATA
+    DBQ=.\DATA
     UserCommitSync=Yes
     Threads=3
     SafeTransactions=0

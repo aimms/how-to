@@ -13,6 +13,7 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../550/550-demand-forecasting`
+    * :doc:`../563/563-functional-ipTwist`
 
 .. dropdown:: Image Widget
 
@@ -20,6 +21,7 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../383/383-contract-allocation`
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
+    * :doc:`../563/563-functional-ipTwist`
 
 .. dropdown:: Workflow
 
@@ -27,6 +29,7 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../383/383-contract-allocation`
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
+    * :doc:`../563/563-functional-ipTwist`
 
 .. dropdown:: Table Widget
 
@@ -48,6 +51,7 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../383/383-contract-allocation`
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
+    * :doc:`../563/563-functional-ipTwist`
 
 .. dropdown:: Side Panel
 
@@ -79,6 +83,7 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
+    * :doc:`../563/563-functional-ipTwist`
 
 .. dropdown:: Multiselect Widget
     
@@ -103,3 +108,7 @@ This page has a summary of the examples versus which WebUI features are used in 
 .. dropdown:: Selection Box Widget
     
     * :doc:`../383/383-contract-allocation`    
+    
+.. dropdown:: Map Widget    
+    
+    * :doc:`../563/563-functional-ipTwist`
