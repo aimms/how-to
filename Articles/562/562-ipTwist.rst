@@ -23,7 +23,7 @@ The purpose of this article is to illustrate:
 
 #.  handle a response from such a library (arrow 4).
 
-However, to make this concrete, an example is used, which is presented `here <https://iptwist.com/>`_. This example illustrates a IP Locator. Note that to work with this example you will need an API key, from `https://iptwist.com/settings <https://iptwist.com/settings>`_.
+However, to make this concrete, an example is used, which is presented `here <https://how-to.aimms.com/Articles/563/563-functional-ipTwist.html>`_. This example illustrates a IP Locator. Note that to work with this example you will need an API key, from `https://iptwist.com/settings <https://iptwist.com/settings>`_.
 
 .. image:: images/tokyo.png
     :align: center
