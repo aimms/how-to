@@ -1,7 +1,5 @@
-Using an API with OpenAPI spec
+Using an API with OpenAPI Spec
 ===============================
-
-:download:`AIMMS 4.90 project download <model/ipTwist.zip>` 
 
 An API with an OpenAPI 3.0 spec can be used to generate an AIMMS Library.
 This AIMMS Library can subsequently be used to ease interfacing the corresponding service significantly.
@@ -11,6 +9,8 @@ As you `know <https://how-to.aimms.com/Articles/561/561-openapi-overview.html>`_
 
 .. image:: images/client-server-openapi-lib.png
     :align: center
+
+|
 
 The translation of AIMMS data to the format accepted by the server (arrow 2), and 
 translating the response provided by the server into AIMMS data (arrow 3) are taken care of by a generated AIMMS library.
@@ -23,29 +23,12 @@ The purpose of this article is to illustrate:
 
 #.  handle a response from such a library (arrow 4).
 
-However, to make this concrete, an example is used, which is presented first.
+However, to make this concrete, an example is used, which is presented `here <https://how-to.aimms.com/Articles/563/563-functional-ipTwist.html>`_. This example illustrates a IP Locator. Note that to work with this example you will need an API key, from `https://iptwist.com/settings <https://iptwist.com/settings>`_.
 
-
-The Story
-----------
-
-The site `ipTwist <https://iptwist.com/>`_ provides a service for WhoIs GeoLocating; translating an IP Address to a location on the globe. 
-For instance, the IP Address ``111.111.111.111`` will return Latitude 35.68, Longitude 136.69; which is in Tokyo, Japan.
-
-
-Operating the application
--------------------------
-
-To operate the application, you first need to obtain an API key, from `https://iptwist.com/settings <https://iptwist.com/settings>`_
-
-Then you can start the AIMMS Project, press the GeoLocate button on the lower right of the page. 
-You will be asked for an API key first. 
-Then the IP address provided in the right upper will be GeoLocated.
-
-.. image:: images/living-near-amsterdam.png
+.. image:: images/tokyo.png
     :align: center
 
-Did you enter `your own <https://whatismyipaddress.com/>`_ IP address?
+|
 
 Preparation
 -----------
@@ -121,7 +104,9 @@ Remarks:
 
 #.  Line 11: Actually starting the request.
 
-Handling the response
+#. At ipTwist example, this procedure is called ``pr_GeolocateMakeRequest``.
+
+Handling the Response
 ----------------------
 
 Using the ``openapi_ipTwist`` library, handling the response is just as follows:
@@ -183,6 +168,7 @@ Remarks:
     Instead, its OpenAPI spec documents how to handle status codes in case of failure.
     This is why a separate function is built to translate documented status code to explanations.
 
+#. At ipTwist example, this procedure is called ``pr_GeolocateResponseHook``.
 
 Further information:
 --------------------

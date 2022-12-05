@@ -4,10 +4,10 @@ Contract Allocation
    :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.85-ZIP:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.88-ZIP:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.85-Github:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.88-Github:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -200,20 +200,38 @@ The following WebUI features are used:
 
 - `Side Panel <https://documentation.aimms.com/webui/side-panels-grd-pages.html#side-panel-grid-pages>`_
 
-- `Compact Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
+- `Scalar (and Compact) Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
 - `List Widget <https://documentation.aimms.com/webui/list-widget.html#list-widget>`_ 
 
+- `Dialog Page <https://documentation.aimms.com/webui/dialog-pages.html>`_ 
+
 - `Download Widget <https://documentation.aimms.com/webui/download-widget.html>`_ 
 
-- `Dialog Page <https://documentation.aimms.com/webui/dialog-pages.html>`_ 
- 
+- `Selection Box Widget <https://documentation.aimms.com/webui/selection-box-widget-v2.html>`_ 
+
 
 UI Styling
 ----------
-For this project, we used a main css file named ``colors.css``, please check it out directly on the folder. Below there are the css files you will find with comments on what they change. 
+Below there are the css files you will find with comments on what they change. 
 
 .. tab-set::
+    .. tab-item:: colors.css
+
+      .. code-block:: css
+         :linenos:
+
+         :root {
+            --primary: #3DDAB4;
+            --primaryDark: #00B569;
+            --primary90Transparent: #3ddab33b;
+
+
+            --color_bg_button_primary: var(--primaryDark);
+            --color_bg_button_primary_hover: var(--primary);
+            --color_text_edit-select-link: var(--primaryDark);
+         }
+    
     .. tab-item:: icon.css
 
       .. code-block:: css
@@ -389,3 +407,9 @@ Minimal Requirements
 --------------------   
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
+
+.. spelling::
+   primaryDark
+   ddab
+   bg
+   
