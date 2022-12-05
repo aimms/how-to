@@ -30,6 +30,7 @@ To operate this example, you first need to obtain an API key, from `https://iptw
 
 .. image:: images/obtain-api-key.png
     :align: center
+
 | 
 
 Then you can start the AIMMS Project, press the GeoLocate button on the lower right of the page "Find IP". 
