@@ -154,7 +154,7 @@ DirectSQL
 This example illustrates how to use :aimms:procedure:`DirectSQL` to export data. 
 Read more about `how to generage a DirectSQL procedure <https://how-to.aimms.com/Articles/554/554-direct-sql-example.html>`_. Access this feature per "All Solutions" table. 
 
-.. image:: images/DirectSQL.png
+.. image:: images/directSQL.png
     :align: center
 
 Multiple Solutions
