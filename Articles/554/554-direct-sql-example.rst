@@ -7,6 +7,7 @@ More flexibility is offered using the intrinsic procedure :aimms:procedure:`Dire
 With that, the procedure below illustrates an alternative for ``Write to Table ... in insert mode``:
 
 .. aimms:procedure:: pr_fillDatabase
+    
 This procedure will first create a connection string to the SQLite database, clean its previous values and then insert the current solve. 
 
 .. code-block:: aimms 
