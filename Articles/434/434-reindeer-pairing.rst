@@ -57,79 +57,129 @@ This AIMMS project illustrates the use of a `Contraint Programing <https://en.wi
 +=====+======================================================+===========================================+
 + **Sets and indices:**                                                                                  |
 +-----+------------------------------------------------------+-------------------------------------------+
-+     | :math:`P`, :math:`p \in P`                           | Producers                                 |
++     | :math:`R`, :math:`r \in R`                           | Rightys Reindeers                         |
 +-----+------------------------------------------------------+-------------------------------------------+
-+     | :math:`C`, :math:`c \in C`                           | Contracts                                 |
++     | :math:`L`, :math:`l \in L`                           | Leftys Reindeers                          |
++-----+------------------------------------------------------+-------------------------------------------+
++     | :math:`D`, :math:`d \in D`                           | Reindeers                                 |
 +-----+------------------------------------------------------+-------------------------------------------+
 | **Parameters:**                                                                                        |
 +-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`M_{p} \in \mathbb{R_{+}}`                     | minimal delivery                          |
+|     | :math:`Pl_{l,r} \in \mathbb{I}`                      | Leftys preferences                        |
 +-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`A_{p} \in \mathbb{R_{+}}`                     | available capacity                        |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`S_{c} \in \mathbb{R_{+}}`                     | contract size                             |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`N_{c} \in \mathbb{R_{+}}`                     | minimal number of contributors            |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`T_{p,c} \in \mathbb{R_{+}}`                   | delivery cost by p for c                  |
+|     | :math:`Pr_{r, l} \in \mathbb{I}`                     | Rightys preferences                       |
 +-----+------------------------------------------------------+-------------------------------------------+
 | **Variables:**                                                                                         |
 +-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`X_{p,c} \in \{0\} \cup \{M_{p}..10000\}`      | amount of commodity delivered by p to c   |
+|     | :math:`rP_{l} \in R`                                 | Right partner                             |
 +-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`Y_{p,c} \in \{0..1\}`                         | p produce to c                            |
+|     | :math:`lP_{r} \in L`                                 | Left partner                              |
 +-----+------------------------------------------------------+-------------------------------------------+
-| **Constraints:**                                                                                       |
-+-----+------------------------------------------------------+-------------------------------------------+
-|  1  | :math:`\forall p: \sum_c X_{p,c} \leq A_{p}`         | production capacity for p                 |
-+-----+------------------------------------------------------+-------------------------------------------+
-|  2  | :math:`\forall c: \sum_p X_{p,c} \geq S_{c}`         | demand fulfillment for c                  |
-+-----+------------------------------------------------------+-------------------------------------------+
-|  3  | :math:`\forall c: \sum_p X_{p,c} \geq N_{c}`         | minimal number of contributors to c       |
-+-----+------------------------------------------------------+-------------------------------------------+
-|  4  | :math:`\forall p, c: X_{p,c} \geq M_{p} * Y_{p,c}`   | if p delivers to c                        |
-+-----+------------------------------------------------------+-------------------------------------------+
-| **Minimize:**                                                                                          |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`\sum_{p,c} T_{p,c} * X_{p,c}`                 | The number of matches                     |
-+-----+------------------------------------------------------+-------------------------------------------+
+
+**Contraints:**
+
+1. Match Each Uniquely:
+
+.. code-block:: aimms
+   :linenos:
+
+   cp::Channel(
+      mapBinding        :  i_left,
+      map               :  ev_rightPartner(i_left),
+      inverseMapBinding :  i_right,
+      inverseMap        :  ev_leftPartner(i_right))
+
+2. Left Stable (i_left,i_right):
+
+.. code-block:: aimms
+   :linenos:
+
+   if p_def_preferenceRankLefty( i_left, i_right ) < p_def_preferenceRankLefty( i_left, ev_rightPartner( i_left ) ) then
+      p_def_preferenceRankRighty( i_right, ev_leftPartner( i_right ) ) < p_def_preferenceRankRighty( i_right, i_left )
+   endif;
+
+3. Right Stable (i_left,i_right):
+
+.. code-block:: aimms
+   :linenos:
+
+   if p_def_preferenceRankRighty( i_right, i_left ) < p_def_preferenceRankRighty( i_right, ev_leftPartner( i_right ) ) then
+      p_def_preferenceRankLefty( i_left, ev_rightPartner( i_left ) ) < p_def_preferenceRankLefty( i_left, i_right )
+   endif;
+
+Remarks:
+
+* *i_left* as *l*;
+* *i_right* as *r*;
+* *p_def_preferenceRankRighty* as *Pr*;
+* *p_def_preferenceRankLefty* as *Pl*;
+* *ev_rightPartner* as *rP*;
+* *ev_leftPartner* as *lP*;
 
 Language 
 --------
 
 Page Layout
 ~~~~~~~~~~~~
+Even though Page Layout can be a little more restrictive, it is possible to create complex structures such as:
 
+.. image:: images/compiled_layout.png
+    :align: center
+
+To develop this layout, first was done a draft plan, translated to this image:
+
+.. image:: images/areas.png
+    :align: center
+
+|
+
+Then when coding the layout, it was easier to define its structure by code, 
+
+   .. code-block:: aimms
+      :linenos:
+
+      "gridTemplateColumns": "2fr 1fr 1fr 1fr 1fr 1fr",
+      "gridTemplateRows": "5fr 2fr 2.2fr 2fr 2fr 2.2fr",
+      "gridTemplateAreas": "\"area-l area-a area-a area-a area-a area-a\" \"area-y area-y area-y area-y area-y area-y\" \"area-b area-c area-e area-g area-i area-z\" \"area-b area-c area-e area-g area-i area-k\" \"area-b area-d area-f area-h area-j area-k\" \"area-b area-d area-f area-h area-j area-x\""
+
+Resulting to our beautiful Reindeer Pairing page!
+
+.. image:: images/end_page.png
+    :align: center
+
+|
 
 DirectSQL
 ~~~~~~~~~~
-.. aimms:procedure:: pr_importExcelData
+This example illustrates how to use :aimms:procedure:`DirectSQL` to export data. 
+Read more about `how to generage a DirectSQL procedure <https://how-to.aimms.com/Articles/554/554-direct-sql-example.html>`_. Access this feature per "All Solutions" table. 
 
-This procedure will add and read the ``xml`` mapping available. Take a look at ``Mappings/inputs.xml``.
-
-.. code-block:: aimms
-   :linenos:
-
-   dex::AddMapping(
-      mappingName :  "inputs", 
-      mappingFile :  "Mappings/inputs.xml");
-
-   dex::ReadFromFile(
-      dataFile         :  "NothWesternStates.xlsx", 
-      mappingName      :  "inputs", 
-      emptyIdentifiers :  1, 
-      emptySets        :  1, 
-      resetCounters    :  1);
-
-   ep_actualContract := first(i_contract);
-   ep_actualProducer := first(i_producer);
-
+.. image:: images/DirectSQL.png
+    :align: center
 
 Multiple Solutions
 ~~~~~~~~~~~~~~~~~~~
 
-In this example we used 10 northwestern states for the contracts and 5 cities from that region for the producers. To import the data into our model, we are currently using DEX library through Excel (``NothWesternStates.xlsx``). 
-You can add more data freely without changing the sheets structure.  
+To ensure the solver will return multiple solutions, the option ``solution_storage_limit`` was set to 1000. 
+
+.. code-block:: aimms
+   :linenos:
+   :emphasize-lines: 1, 8, 11
+
+   option 'cpoptimizer 22.1'.'solution_storage_limit' := 1000 ;
+   solve mp_stableReindeerPairings where solution_limit := 1000, time_limit := 10 ;
+
+   ! Visit each solution in the solution repository of that generated mathematical program
+   ! and store these solutions in element parameters.
+   ! These element parameters can then be displayed in the GUI.
+   ep_loc_generatedModel := 'mp_stableReindeerPairings';
+   s_solutionSet := gmp::Solution::GetSolutionsSet(ep_loc_generatedModel);
+
+   for (i_sols) do
+      GMP::Solution::SendToModel(ep_loc_generatedModel, i_sols);
+      ep_variousLeftPartners(i_sols,i_right)  := ev_leftPartner(i_right);
+      ep_variousRightPartners(i_sols,i_left) := ev_rightPartner(i_left);
+   endfor;
 
 WebUI Features
 --------------
@@ -305,3 +355,5 @@ Minimal Requirements
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
 
 .. spelling::
+   reindeers
+   righties
