@@ -4,11 +4,11 @@ Reindeer Pairing
    :keywords: Stable marriage problem, network object, constraint programming, channel constraint, if-then constraint
    :description: This AIMMS project is an illustration of the stable marriage problem.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.88-ZIP:_Contract_Alocation-blue
-   :target: https://github.com/aimms/contract-allocation/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/AIMMS_4.89-ZIP:_Reindeer_Pairing-blue
+   :target: https://github.com/aimms/reindeer-pairing/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.88-Github:_Contract_Alocation-blue
-   :target: https://github.com/aimms/contract-allocation
+.. image:: https://img.shields.io/badge/AIMMS_4.89-Github:_Reindeer_Pairing-blue
+   :target: https://github.com/aimms/reindeer-pairing
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-webui-44/uptaded-contract-allocation-example-1253
