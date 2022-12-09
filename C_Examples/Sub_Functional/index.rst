@@ -45,7 +45,6 @@ The functional AIMMS examples listed below illustrate specific AIMMS features.
    /Articles/431/431-pivot-table
    /Articles/432/432-power-system-expansion-ro
    /Articles/433/433-print-pages
-   /Articles/434/434-reindeer-pairing
    /Articles/435/435-rolling-horizon
    /Articles/436/436-stochastic-programming
    /Articles/437/437-tea-consumption

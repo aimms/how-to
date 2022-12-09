@@ -20,6 +20,7 @@ The application examples listed below represent complete AIMMS-style application
    /Articles/391/391-life-cycle-consumption
    /Articles/392/392-project-analysis
    /Articles/393/393-railway-stock
+   /Articles/434/434-reindeer-pairing
    /Articles/394/394-sudoku
    /Articles/395/395-traffic-equilibrium
    /Articles/396/396-transport-model

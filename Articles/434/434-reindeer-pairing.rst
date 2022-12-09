@@ -1,5 +1,6 @@
 Reindeer Pairing
 =================
+
 .. meta::
    :keywords: Stable marriage problem, network object, constraint programming, channel constraint, if-then constraint
    :description: This AIMMS project is an illustration of the stable marriage problem.
@@ -11,7 +12,12 @@ Reindeer Pairing
    :target: https://github.com/aimms/reindeer-pairing
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-webui-44/uptaded-contract-allocation-example-1253
+   :target: https://community.aimms.com/aimms-webui-44/updated-reindeer-pairing-example-1370
+
+.. image:: images/project.gif
+    :align: center
+
+|
 
 Story
 -----
