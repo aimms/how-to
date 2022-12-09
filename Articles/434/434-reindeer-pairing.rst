@@ -119,36 +119,6 @@ Remarks:
 Language 
 --------
 
-Page Layout
-~~~~~~~~~~~~
-Even though Page Layout can be a little more restrictive, it is possible to create complex structures such as:
-
-.. image:: images/compiled_layout.png
-    :align: center
-
-To develop this layout, first was done a draft plan, translated to this image:
-
-.. image:: images/areas.png
-    :align: center
-
-|
-
-Then when coding the layout, it was easier to define its structure by code, 
-
-   .. code-block:: aimms
-      :linenos:
-
-      "gridTemplateColumns": "2fr 1fr 1fr 1fr 1fr 1fr",
-      "gridTemplateRows": "5fr 2fr 2.2fr 2fr 2fr 2.2fr",
-      "gridTemplateAreas": "\"area-l area-a area-a area-a area-a area-a\" \"area-y area-y area-y area-y area-y area-y\" \"area-b area-c area-e area-g area-i area-z\" \"area-b area-c area-e area-g area-i area-k\" \"area-b area-d area-f area-h area-j area-k\" \"area-b area-d area-f area-h area-j area-x\""
-
-Resulting to our beautiful Reindeer Pairing page!
-
-.. image:: images/end_page.png
-    :align: center
-
-|
-
 DirectSQL
 ~~~~~~~~~~
 This example illustrates how to use :aimms:procedure:`DirectSQL` to export data. 
@@ -197,6 +167,36 @@ The following WebUI features are used:
 - `Scalar (and Compact) Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
 - `Button Widget <https://documentation.aimms.com/webui/button-widget.html>`_
+
+Page Layout
+~~~~~~~~~~~~
+Even though Page Layout can be a little more restrictive, it is possible to create complex structures such as:
+
+.. image:: images/compiled_layout.png
+    :align: center
+
+To develop this layout, first was done a draft plan, translated to this image:
+
+.. image:: images/areas.png
+    :align: center
+
+|
+
+Then when coding the layout, it was easier to define its structure by code, 
+
+   .. code-block:: aimms
+      :linenos:
+
+      "gridTemplateColumns": "2fr 1fr 1fr 1fr 1fr 1fr",
+      "gridTemplateRows": "5fr 2fr 2.2fr 2fr 2fr 2.2fr",
+      "gridTemplateAreas": "\"area-l area-a area-a area-a area-a area-a\" \"area-y area-y area-y area-y area-y area-y\" \"area-b area-c area-e area-g area-i area-z\" \"area-b area-c area-e area-g area-i area-k\" \"area-b area-d area-f area-h area-j area-k\" \"area-b area-d area-f area-h area-j area-x\""
+
+Resulting to our beautiful Reindeer Pairing page!
+
+.. image:: images/end_page.png
+    :align: center
+
+|
 
 UI Styling
 ----------
