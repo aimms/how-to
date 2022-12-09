@@ -14,6 +14,7 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../563/563-functional-ipTwist`
+    * :doc:`../434/434-reindeer-pairing`
 
 .. dropdown:: Image Widget
 
@@ -22,6 +23,7 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../563/563-functional-ipTwist`
+    * :doc:`../434/434-reindeer-pairing`
 
 .. dropdown:: Workflow
 
@@ -30,6 +32,7 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../563/563-functional-ipTwist`
+    * :doc:`../434/434-reindeer-pairing`
 
 .. dropdown:: Table Widget
 
@@ -37,6 +40,7 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../383/383-contract-allocation`
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
+    * :doc:`../434/434-reindeer-pairing`
 
 .. dropdown:: Combination Chart Widget
 
@@ -84,6 +88,7 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../563/563-functional-ipTwist`
+    * :doc:`../434/434-reindeer-pairing`
 
 .. dropdown:: Multiselect Widget
     
@@ -96,6 +101,7 @@ This page has a summary of the examples versus which WebUI features are used in 
 .. dropdown:: Button Widget    
     
     * :doc:`../550/550-demand-forecasting`
+    * :doc:`../434/434-reindeer-pairing`
 
 .. dropdown:: Dialog Page
     
