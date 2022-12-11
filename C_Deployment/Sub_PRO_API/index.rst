@@ -10,11 +10,12 @@ AIMMS PRO API
    :description: Using PRO API to delegate and start jobs on the AIMMS PRO server
 
 
-.. Need some filler text!
+.. note::
+
+    Please use the `AIMMS PRO REST API <https://documentation.aimms.com/pro/rest-api.html#aimms-pro-rest-api>`_ for new projects instead.
 
 .. toctree::
    :maxdepth: 1
 
    /Articles/98/98-starting-job-aimms-pro-api-java
    /Articles/98/98-starting-job-aimms-pro-api-csharp
-   /Articles/80/80-schedule-jobs

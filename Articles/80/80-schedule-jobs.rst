@@ -61,11 +61,19 @@ The center piece of the project is the procedure ``pr_IterativeJobScheduling``:
         Body: {
             if pro::CurrentDelegationLevel() < maxDelegateLevel then
                 if pro::DelegateToServer(
-                        requestDescription :  formatString("The %i'th iteration of %e",  pro::CurrentDelegationLevel()+1, epPayloadProcedure),
+                        requestDescription :  
+                            formatString("The %i'th iteration of %e",  
+                                pro::CurrentDelegationLevel()+1, 
+                                epPayloadProcedure),
                         waitForCompletion  :  0,
                         completionCallback :  'pro::session::EmptyCallback',
                         delegationOverride :  pro::CurrentDelegationLevel() + 1,
-                        scheduledAt        :  if pro::CurrentDelegationLevel() then MomentToString( sp_LocalTimFmt, [second], CurrentToString(sp_LocalTimFmt), timeIncrement ) else "" endif
+                        scheduledAt        :  
+                            if pro::CurrentDelegationLevel() then 
+                                MomentToString( sp_LocalTimeFormat, [second], 
+                                    CurrentToString(sp_ReferenceTimeformat), 
+                                    timeIncrement ) 
+                            else "" endif
                     ) then
                     return 1 ;
                 endif ;
@@ -129,3 +137,45 @@ To operate, the example that can be downloaded :download:`here <downloads/JobRep
 
     * When you want to interrupt a sequence of server jobs, please terminate the scheduled session before terminating the running session.
 
+.. note::
+
+    The reference time format is initialized as follows:
+    
+    .. code-block:: aimms
+        :linenos:
+
+        Procedure PostMainInitialization {
+            Body: {
+                if pro::GetPROEndPoint() then 
+                     pro::Initialize();
+                endif ;
+                
+                block ! Determine the reference time format to be used in MomentToString.
+                    p_getOPG := OptionGetValue(
+                        OptionName :  "use_UTC_forCaseAndStartEndDate", 
+                        Lower      :  p_lower, 
+                        Current    :  p_current, 
+                        Default    :  p_default, 
+                        Upper      :  p_upper);
+                    if p_getOPG > 0 then
+                        if p_current > 0 then
+                            sp_ReferenceTimeformat := sp_UTCTimeFormat ;
+                        else
+                            sp_ReferenceTimeformat := sp_LocalTimeFormat ;
+                        endif ;
+                    else
+                        ! option not defined.  Assume local time format.
+                        sp_ReferenceTimeformat := sp_LocalTimeFormat ;
+                    endif ;
+                endblock ;
+            }
+            Comment: {
+                "Add initialization statements here that require that the libraries are already initialized properly,
+                or add statements that require the Data Management module to be initialized."
+            }
+            Parameter p_getOPG;
+            Parameter p_lower;
+            Parameter p_current;
+            Parameter p_default;
+            Parameter p_upper;
+        }

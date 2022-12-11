@@ -2,3 +2,5 @@
 "sp_UtcTimFmt" "sp_LocalTimFmt" "2018-10-26 06:23:28"
 "Copy_pr_IterativeJobScheduling" "pr_IterativeJobScheduling2" "2022-03-08 09:16:47"
 "pr_IterativeJobScheduling2" "pr_IterativeJobScheduling" "2022-03-08 09:37:03"
+"sp_LocalTimFmt" "sp_LocalTimeFormat" "2022-12-11 14:33:56"
+"sp_StdTimFmt" "sp_StandardTimeFormat" "2022-12-11 14:34:09"

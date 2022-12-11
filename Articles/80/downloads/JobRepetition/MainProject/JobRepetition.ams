@@ -12,22 +12,26 @@ Model Main_JobRepetition {
 			Comment: "Expresses the value for the duration of periods.";
 		}
 		StringParameter sp_NextJobStart;
-		StringParameter sp_StdTimFmt {
-			Definition: "%c%y-%m-%d %H:%M:%S";
-		}
-		StringParameter sp_LocalTimFmt {
-			Definition: "%c%y-%m-%d %H:%M:%S%TZ('Local')";
-		}
 		ElementParameter ep_PayloadProcedure {
 			Range: AllProcedures;
 			Default: 'MainExecution';
 		}
+		StringParameter sp_StandardTimeFormat {
+			Definition: "%c%y-%m-%d %H:%M:%S";
+		}
+		StringParameter sp_LocalTimeFormat {
+			Definition: "%c%y-%m-%d %H:%M:%S%TZ('Local')";
+		}
+		StringParameter sp_UTCTimeFormat {
+			Definition: "%c%y-%m-%d %H:%M:%S%TZ('UTC')";
+		}
+		StringParameter sp_ReferenceTimeformat;
 	}
 	Section Worker_procedures {
 		Procedure pr_Friesian {
 			Body: {
 				sp_Msg := FormatString("pr_Friesian(): At %s (UTC) delegation level is %i",
-					CurrentToString(sp_LocalTimFmt), pro::CurrentDelegationLevel() );
+					CurrentToString(sp_LocalTimeFormat), pro::CurrentDelegationLevel() );
 				pro::management::LocalLogInfo(sp_Msg);
 			}
 			Comment: {
@@ -57,7 +61,7 @@ Model Main_JobRepetition {
 							waitForCompletion  :  0,
 							completionCallback :  'pro::session::EmptyCallback',
 							delegationOverride :  pro::CurrentDelegationLevel() + 1,
-							scheduledAt        :  if pro::CurrentDelegationLevel() then MomentToString( sp_LocalTimFmt, [second], CurrentToString(sp_LocalTimFmt), timeIncrement ) else "" endif
+							scheduledAt        :  if pro::CurrentDelegationLevel() then MomentToString( sp_LocalTimeFormat, [second], CurrentToString(sp_LocalTimeFormat), timeIncrement ) else "" endif
 						) then
 						return 1 ;
 					endif ;
@@ -88,11 +92,35 @@ Model Main_JobRepetition {
 				if pro::GetPROEndPoint() then 
 					 pro::Initialize();
 				endif ;
+				
+				block ! Determine the reference time format to be used in MomentToString.
+					p_getOPG := OptionGetValue(
+						OptionName :  "use_UTC_forCaseAndStartEndDate", 
+						Lower      :  p_lower, 
+						Current    :  p_current, 
+						Default    :  p_default, 
+						Upper      :  p_upper);
+					if p_getOPG > 0 then
+						if p_current > 0 then
+							sp_ReferenceTimeformat := sp_UTCTimeFormat ;
+						else
+							sp_ReferenceTimeformat := sp_LocalTimeFormat ;
+						endif ;
+					else
+						! option not defined.  Assume local time format.
+						sp_ReferenceTimeformat := sp_LocalTimeFormat ;
+					endif ;
+				endblock ;
 			}
 			Comment: {
 				"Add initialization statements here that require that the libraries are already initialized properly,
 				or add statements that require the Data Management module to be initialized."
 			}
+			Parameter p_getOPG;
+			Parameter p_lower;
+			Parameter p_current;
+			Parameter p_default;
+			Parameter p_upper;
 		}
 		Procedure MainExecution;
 		Procedure PreMainTermination {
