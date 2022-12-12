@@ -6,6 +6,9 @@ Taking Multiple into account calling an OpenAPI REST API
 
 Calling a generated OpenAPI Library, the word "multiple" comes back in several ways:
 
+#.  The service can be provided by multiple servers, each one of them using a unique service URL.
+    For instance, the service can be provided from various regions.
+
 #.  A single service URL can service multiple endpoints, 
     for instance for for finding coordinates of an address, and 
     another for finding an address at some coordinates. 
@@ -77,6 +80,24 @@ Although these are text files, I find the following two tools more effective in 
 
         .. image:: images/valid-response-uses-media-type-schema.png
             :align: center
+
+The service URL
+----------------------
+
+LocationIQ provides its service from two locations by having two service URL's:
+
+#.  ``https://eu1.locationiq.com/v1``
+
+#.  ``https://us1.locationiq.com/v1``
+
+You can use one of these values in your ``../api-init/openapi-LocationIQ.txt`` file:
+
+.. code-block:: aimms 
+    :linenos:
+
+    LocationIQ::api::APIServer :=  "https://eu1.locationiq.com/v1" ;
+    LocationIQ::api::APIKey('key') := "<enter your api key here>" ;
+
 
 The first search call
 ------------------------
