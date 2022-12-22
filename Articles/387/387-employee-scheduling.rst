@@ -228,14 +228,25 @@ On this project `annotation <https://documentation.aimms.com/webui/css-styling.h
 .. code-block:: css
    :linenos:
 
-   .annotation-red {
+   .annotation-red-chart {
       fill: var(--secondary);
    }
-   .annotation-not-red {
+
+   .annotation-not-red-chart {
       fill: var(--primaryDark);
    }
 
+   .annotation-red-input  {
+      border: 3px solid red;
+      border-radius: 3px;
+   }
+   .annotation-green-input  {
+      border: 1px solid green;
+      border-radius: 3px;
+   }
+
 Create into a string parameter the logic or define directly with the css class you want. Go to the identifier shown on the `Combination Chart <https://documentation.aimms.com/webui/combination-chart-widget.html>`_ and add that string parameter into ``webui::AnnotationsIdentifier``.  
+The annotations used on the Combination Chart were ``red-chart`` and ``not-red-chart``. The other two (``green-input`` and ``red-input``) are used on ``sp_addEditElement`` to create a border when adding or editing elements. 
 
 WebUI Features
 --------------
