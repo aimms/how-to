@@ -76,6 +76,10 @@ The table below provides a list of shortcuts provided by AIMMS.
 +----------------------------------+----------------------------------------------------------------------------------------------------------+
 | ``Ctrl`` + ``U``                 | Uncomment the selected code                                                                              |
 +----------------------------------+----------------------------------------------------------------------------------------------------------+
+| ``Arrow Left``                   | Close node (Declaration, Section, Procedure...) when selected                                            |
++----------------------------------+----------------------------------------------------------------------------------------------------------+
+| ``Arrow Right``                  | Open node (Declaration, Section, Procedure...) when selected                                             |
++----------------------------------+----------------------------------------------------------------------------------------------------------+
 
 Another "shortcut" you may find handy is a way to quickly run a procedure other than the MainExecution (as this already has the keyboard shortcut F6).
 
