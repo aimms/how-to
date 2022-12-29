@@ -476,8 +476,19 @@ Model Main_CopyFilesFromServer {
 					spInpPath            :  spInpPath, 
 					sAllDirectoryNumbers :  sAllDirectoryNumbers, 
 					spAllDirectoryNames  :  spAllDirectoryNames);
-				p_noFolders := card( sAllDirectoryNumbers );
 				
+				pr_GetFiles( spInpPath, sLocFilenumbers, 
+					spLocFilenames, spLocFiletimes, pLocFilesizes );
+				for iLFN do
+					sFileNumbers += if eFN then val( eFN ) else 0 endif + val( iLFN );
+					eNFN := last( sFilenumbers );
+					spFilenames( eNFN ) := spLocFilenames( iLFN );
+					spFileTimes( eNFN ) := spLocFiletimes( iLFN );
+					 pFileSizes( eNFN ) :=  pLocFileSizes( iLFN );
+				endfor ;
+				
+				
+				p_noFolders := card( sAllDirectoryNumbers );
 				for iADN do
 				
 					empty sLocFilenumbers ;
@@ -593,6 +604,20 @@ Model Main_CopyFilesFromServer {
 			Return 1 to allow the termination sequence to continue.
 			Return 0 if you want to cancel the termination sequence.
 			It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+		}
+	}
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsProGUI."
+			}
 		}
 	}
 }
