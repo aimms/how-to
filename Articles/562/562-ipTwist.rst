@@ -181,5 +181,6 @@ Further information:
 *   `Swagger <https://editor.swagger.io/>`_ provides an editor and viewer for OpenAPI specifications.
 
 
-.. spelling::
+.. spelling:word-list::
+
    ipTwist

@@ -30,7 +30,7 @@ Furthermore, in our book :download:`Optimization Modeling <https://documentation
 
 
 
-.. spelling::
+.. spelling:word-list::
 
     formulettes
     formulette

@@ -215,5 +215,6 @@ Minimal Requirements
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example. 
 However, you will need API key, to receive an free API key to test, please access `ipTwist setttings <https://iptwist.com/settings>`_ and sign up. 
 
-.. spelling::
+.. spelling:word-list::
+
    ipTwist

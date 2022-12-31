@@ -12,5 +12,6 @@ in the .aimmspack by checking the ``_local_libs`` entry:
 
 By putting these libraries in the ``.aimmspack``, the AIMMS PRO server no longer needs to download the AIMMS Libraries in the AIMMS repository them when the ``.aimmspack`` is published.
 
-.. spelling::
+.. spelling:word-list::
+
     url

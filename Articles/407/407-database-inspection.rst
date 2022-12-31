@@ -38,6 +38,6 @@ If you want to learn how to read/write data from/to tables in a database, please
 Keywords:
 Database, Datasource, GetDataSourceProperty, SQLNumberOfColumns, SQLNumberOfTables, SQLColumnData, SQLTableName, SQL Query, Mapping, Database Info
 
-.. spelling::
+.. spelling:word-list::
 
     wildcards

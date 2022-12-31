@@ -20,6 +20,6 @@ Problem vpm5 from: Belvaux, G., L.A. Wolsey, Lotsizelib: A library of models
 and matrices for lot-sizing problems, Core discussion paper, Universite
 Catholique de Louvain, 1999.
 
-.. spelling::
-    
+.. spelling:word-list::
+
 	vpm

@@ -215,8 +215,8 @@ References
 * Blog post: `Data Scientists, Your Variable Names Are a Mess. Clean Up Your Code <https://builtin.com/data-science/variable-names>`_
 
 
-.. spelling::
-    
+.. spelling:word-list::
+
     ep
     ev
     bv

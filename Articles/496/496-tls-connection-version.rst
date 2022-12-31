@@ -54,6 +54,6 @@ Please note
 #.  WinUI applications published on AIMMS PRO may also be affected by organizations enforcing TLS 1.2 or TLS 1.3, 
     see :doc:`Evolution of AIMMS using Transport Layer Security<../520/520-evolution-of-transport-layer-security>`
 
-.. spelling::
-    
+.. spelling:word-list::
+
 	tlsv

@@ -97,6 +97,6 @@ To color an item according to some index, there are several steps:
         This is simply the color number offset.
 
 
-.. spelling::
+.. spelling:word-list::
 
     barlegend

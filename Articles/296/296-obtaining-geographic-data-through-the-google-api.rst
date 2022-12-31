@@ -276,7 +276,6 @@ Related Topics
 * `Google Maps Developer Guide <https://developers.google.com/maps/documentation/distance-matrix/intro>`_. 
 
 
-.. spelling::
+.. spelling:word-list::
 
     atomium
-	

@@ -251,7 +251,7 @@ If you want to use the memory stream that will delete itself after the request, 
 In all these examples you will see that running the procedure Mapping_Import results in the data being mapped to the identifiers as defined in the mapping.
 
 
-.. spelling::
+.. spelling:word-list::
 
     DEX
 	JSON-file
