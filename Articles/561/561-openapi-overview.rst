@@ -81,6 +81,15 @@ This eases the application development considerably, as the client no longer nee
 Obtaining OpenAPI generated libraries
 -------------------------------------
 
+See `Generating API clients from an OpenAPI specification <https://documentation.aimms.com/dataexchange/openapi-client.html#generating-api-clients-from-an-openapi-specification>`_
+
+Detail how-to's provided
+-------------------------
+
+#.  :doc:`previous article<../562/562-ipTwist>`
+
+#.  :doc:`previous article<../564/564-LocationIQ>`
+
 
 
 References
@@ -94,7 +103,8 @@ References
 
 * Swagger: https://editor.swagger.io/
 
-.. spelling::
+.. spelling:word-list::
+
     openapi
     api
 
