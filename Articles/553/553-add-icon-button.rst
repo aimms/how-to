@@ -106,6 +106,7 @@ to
 where *example* is the 'widget.uri' value. Save and refresh the WebUI page. 
 
 
-.. spelling::
+.. spelling:word-list::
+
     aimms
     uri

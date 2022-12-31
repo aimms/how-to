@@ -62,5 +62,6 @@ Results
 
 |
 
-.. spelling::
+.. spelling:word-list::
+
     css

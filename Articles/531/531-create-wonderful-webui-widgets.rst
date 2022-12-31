@@ -403,7 +403,7 @@ To create the proper number of procedures, a runtime library is used.
 
 .. Author's note: I really enjoyed creating this small AIMMS application.
 
-.. spelling:: 
+.. spelling:word-list::
 
     endif
     combi

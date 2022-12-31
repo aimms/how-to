@@ -482,6 +482,7 @@ Related topics
 * **AIMMS How-To** :doc:`UI Features articles </C_UI/Sub_UI_Features/index>`
 * **AIMMS Documentation** `WebUI App Development <https://documentation.aimms.com/webui/webui-app-development.html>`_
 
-.. spelling::
+.. spelling:word-list::
+
     settings
 

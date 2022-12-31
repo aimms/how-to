@@ -138,6 +138,6 @@ You can download the section (``.ams`` file) that contains this procedure and sa
 To use it, you'll need to :doc:`Import a section to your project <../145/145-import-export-section>`.  
 
 
-.. spelling::
+.. spelling:word-list::
 
     diff

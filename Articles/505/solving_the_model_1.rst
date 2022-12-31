@@ -120,6 +120,6 @@ This course will dig deeper in modeling using AIMMS, building a Web User Interfa
 
 See you there ! 😁
 
-.. spelling::
-    
+.. spelling:word-list::
+
     popup

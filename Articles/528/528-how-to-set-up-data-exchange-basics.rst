@@ -132,6 +132,6 @@ This is the most basic setup for integrating and using the Data Exchange Library
 
 
 
-.. spelling::
+.. spelling:word-list::
 
     dex

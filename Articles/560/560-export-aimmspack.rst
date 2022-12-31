@@ -29,5 +29,6 @@ To export a WebUI, please go to *Main Project* > *WebUI* and make sure the WebUI
 
 After this step, both aimmspack can be uploaded as usual. 
 
-.. spelling::
+.. spelling:word-list::
+
     aimmspack

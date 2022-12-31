@@ -73,6 +73,7 @@ The example app may look as follows upon opening:
 
     The reason is that the contents are cached on the client device, and the folder adaption provided by the AIMMS WebUI is not part of the iFrame widget.
 
-.. spelling::
+.. spelling:word-list::
+
     iframe
     iFrame

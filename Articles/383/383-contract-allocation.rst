@@ -408,7 +408,8 @@ Minimal Requirements
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
 
-.. spelling::
+.. spelling:word-list::
+
    primaryDark
    ddab
    bg

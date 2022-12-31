@@ -217,7 +217,7 @@ Further reading
 
 
 
-.. spelling::
-    
+.. spelling:word-list::
+
     sankey
     dataframes

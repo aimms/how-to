@@ -111,6 +111,7 @@ Use the same idea and continue doing for the other 5 pages. Your result will be:
     :align: center
 
 
-.. spelling::
+.. spelling:word-list::
+
     aimms
     uri
