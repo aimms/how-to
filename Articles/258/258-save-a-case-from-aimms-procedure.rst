@@ -24,9 +24,6 @@ To make it easier to save a case with any given name,
 you can introduce a new procedure, say ``SaveCase``, with a string parameter
 ``CaseName`` as an input argument. 
 
-This procedure requires a local element parameter named ``CaseReference`` with the
-range :any:`AllCases`. 
-
 The body argument of the procedure should
 contain the following code:
 
@@ -37,53 +34,15 @@ contain the following code:
     Procedure SaveCase {
         Arguments: (sp_CaseName);
         Body: {
-            OptionGetString("Data Management Style", sp_dms);
-            if sp_dms = "Disk Files and Folders" then
-            
-                ! Save the case in the folder "data".
-                if not DirectoryExists( "data" ) then
-                    DirectoryCreate("data");
-                endif ;
-                CaseFileSave( "data\\" + sp_CaseName, AllIdentifiers );
-            
-            else
-                ! First try to find a case with the name indicated by CaseName. 
-                ! If AIMMS can find this, it will store a reference to this case 
-                ! in the element parameter ep_CaseReference
-                if ( not CaseFind( sp_CaseName, ep_CaseReference ) ) then
-            
-                    ! If no case with the name indicated by CaseName could be found, then
-                    ! we try to create a case with this name. After creating the case, AIMMS
-                    ! will store a reference in the ep_CaseReference element parameter to the
-                    ! newly created case
-                    if ( not CaseCreate( sp_CaseName, ep_CaseReference ) ) then
-            
-                        ! If there was an error while creating the case, notify the developer
-                        ! by raising an error. If the raised error is not caught, AIMMS will
-                        ! display it in the error window.
-                        raise error "Could not create case with name " + sp_CaseName ;
-            
-                    endif;
-            
-                endif;
-            
-                ! If we got here, it means either a case with the indicated case name could be
-                ! found, or it was created. 
-                ! Now instruct AIMMS to set this case to be the current case
-                CaseSetCurrent( ep_CaseReference );
-            
-                ! And then instruct AIMMS to save the case
-                CaseSave( 0 );
-            
-            endif;
+            ! Save the case in the folder "data".
+            if not DirectoryExists( "data" ) then
+                DirectoryCreate("data");
+            endif ;
+            CaseFileSave( "data\\" + sp_CaseName, AllIdentifiers );
         }
         StringParameter sp_CaseName {
             Property: Input;
         }
-        ElementParameter ep_CaseReference {
-            Range: AllCases;
-        }
-        StringParameter sp_dms;
     }
 
 
