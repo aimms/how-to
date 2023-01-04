@@ -58,10 +58,10 @@ To save a case with the name "Case 1" from within any of your procedures, you ca
 
 :download:`AIMMS project download <model/ms.zip>` 
 
-Converting from .dat to .data
+Converting from dat to data
 ---------------------------------------------
 
-If you still work with .dat files, please convert to .data first. You may want to follow the instructions in
+If you still work with ``.dat`` files, please convert to ``.data`` first. You may want to follow the instructions in
 `our conversation guide <https://how-to.aimms.com/staging/hotfix/OldSaveCase/Articles/314/314-from-dat-to-data.html>`_.
 
 
