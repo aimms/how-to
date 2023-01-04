@@ -58,6 +58,13 @@ To save a case with the name "Case 1" from within any of your procedures, you ca
 
 :download:`AIMMS project download <model/ms.zip>` 
 
+Converting from .dat to .data
+---------------------------------------------
+
+If you still work with .dat files, please convert to .data first. You may want to follow the instructions in
+`our conversation guide <https://how-to.aimms.com/staging/hotfix/OldSaveCase/Articles/314/314-from-dat-to-data.html>`_.
+
+
 More about case related functions
 ---------------------------------------------
 To access contextual help from within AIMMS, 
@@ -67,6 +74,7 @@ To access contextual help from within AIMMS,
 3. Select the function name. 
 
 The AIMMS Function Reference will open at the page corresponding to the function.
+
 
 Related Topics
 ---------------
