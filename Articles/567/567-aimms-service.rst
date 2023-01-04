@@ -58,11 +58,11 @@ Some remarks about the highlighted lines:
 
 #.  Line 30: By specifying this line, the service ``equalParallelMachineTimeIndexedMIP`` is linked to the procedure ``pr_runTask``.
 
-#.  Line 8: The data is read from a file, using DEX functions.
-    The ``dex::api::RequestAttribute( 'request-data-path' )`` is the file path to the request body. 
+#.  Line 8: The request data is read from a file.
+    The string ``dex::api::RequestAttribute( 'request-data-path' )`` is the path to that file. 
 
-#.  Line 17: Similarly, the data is written to a file.
-    The ``dex::api::RequestAttribute( 'request-data-path' )`` is the file path to the request body. 
+#.  Line 17: Similarly, the response is written to a file.
+    The string ``dex::api::RequestAttribute( 'response-data-path' )`` is the path to that file. 
 
 Deploying an application on AIMMS Cloud
 ----------------------------------------
