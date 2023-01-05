@@ -1,20 +1,9 @@
 Python client
 ================
 
-:download:`Python 3.10 script <model/MachineSchedulingMIPTimeIndexedSolver.zip>` 
+:download:`Python 3.10 script <model/main.py>` 
 
 
-.. import requests - provides high level access to rest api.
-
-.. similarity json / pandas - dataframe / python dictionary
-
-.. Show three steps
-
-..  * Step 1 submit
-  
-..  * Step 2 poll till result
-  
-..  * Step 3 retrieve result
 
 To create a service, it helps to have a client available that can test that service.
 
