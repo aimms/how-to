@@ -22,8 +22,8 @@ Writing the procedure
 You can save a case in AIMMS using predefined case related functions. 
 
 To make it easier to save a case with any given name,
-you can introduce a new procedure, say ``SaveCase``, with a string parameter
-``CaseName`` as an input argument. 
+you can introduce a new procedure, say ``pr_saveCase``, with a string parameter
+``sp_in_caseName`` as an input argument. 
 
 The body argument of the procedure should
 contain the following code:
@@ -32,14 +32,14 @@ contain the following code:
 .. code-block:: aimms
     :linenos:
 
-    Procedure SaveCase {
+    Procedure pr_saveCase {
         Arguments: (sp_in_caseName);
         Body: {
             ! Save the case in the folder "data".
             if not DirectoryExists( "data" ) then
                 DirectoryCreate("data");
             endif ;
-            CaseFileSave("data\\" + sp_CaseName + ".data", AllIdentifiers);
+            CaseFileSave("data\\" + sp_in_caseName + ".data", AllIdentifiers);
         }
         StringParameter sp_in_caseName {
             Property: Input;
@@ -54,7 +54,7 @@ To save a case with the name "Case 1" from within any of your procedures, you ca
 .. code-block:: aimms
     :linenos:
 
-    SaveCase("Case 1") ; 
+    pr_saveCase("Case 1") ; 
 
 Upgrading an AIMMS project to a newer AIMMS release
 ----------------------------------------------------
