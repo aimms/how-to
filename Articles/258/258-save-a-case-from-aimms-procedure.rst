@@ -13,7 +13,8 @@ possible solution is to manually save a case
 after running each scenario. However, for several long-running scenarios, this is very tedious. 
 
 Instead, you can save cases automatically with a procedure. This way you can run
-a procedure that solves all your scenarios and saves cases after each solve, and let it run unattended.
+a procedure that solves all your scenarios and saves cases after each solve, and let it run unattended. 
+This is exemplified on `Employee Scheduling example <https://how-to.aimms.com/Articles/387/387-employee-scheduling.html>`_ . 
 
 Writing the procedure
 -----------------------------------
@@ -32,15 +33,15 @@ contain the following code:
     :linenos:
 
     Procedure SaveCase {
-        Arguments: (sp_CaseName);
+        Arguments: (sp_in_caseName);
         Body: {
             ! Save the case in the folder "data".
             if not DirectoryExists( "data" ) then
                 DirectoryCreate("data");
             endif ;
-            CaseFileSave( "data\\" + sp_CaseName, AllIdentifiers );
+            CaseFileSave("data\\" + sp_CaseName + ".data", AllIdentifiers);
         }
-        StringParameter sp_CaseName {
+        StringParameter sp_in_caseName {
             Property: Input;
         }
     }
@@ -54,9 +55,6 @@ To save a case with the name "Case 1" from within any of your procedures, you ca
     :linenos:
 
     SaveCase("Case 1") ; 
-
-
-:download:`AIMMS project download <model/ms.zip>` 
 
 Upgrading an AIMMS project to a newer AIMMS release
 ----------------------------------------------------
