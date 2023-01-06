@@ -17,4 +17,6 @@ These topics help you to use the Data Exchange Library with your AIMMS project.
    /Articles/561/561-openapi-overview
    /Articles/562/562-ipTwist
    /Articles/564/564-LocationIQ
+   /Articles/567/567-aimms-service
+   /Articles/567/567-python-client
 
