@@ -13,7 +13,8 @@ possible solution is to manually save a case
 after running each scenario. However, for several long-running scenarios, this is very tedious. 
 
 Instead, you can save cases automatically with a procedure. This way you can run
-a procedure that solves all your scenarios and saves cases after each solve, and let it run unattended.
+a procedure that solves all your scenarios and saves cases after each solve, and let it run unattended. 
+This is exemplified on `Employee Scheduling example <https://how-to.aimms.com/Articles/387/387-employee-scheduling.html>`_ . 
 
 Writing the procedure
 -----------------------------------
@@ -21,11 +22,8 @@ Writing the procedure
 You can save a case in AIMMS using predefined case related functions. 
 
 To make it easier to save a case with any given name,
-you can introduce a new procedure, say ``SaveCase``, with a string parameter
-``CaseName`` as an input argument. 
-
-This procedure requires a local element parameter named ``CaseReference`` with the
-range :any:`AllCases`. 
+you can introduce a new procedure, say ``pr_saveCase``, with a string parameter
+``sp_in_caseName`` as an input argument. 
 
 The body argument of the procedure should
 contain the following code:
@@ -34,56 +32,18 @@ contain the following code:
 .. code-block:: aimms
     :linenos:
 
-    Procedure SaveCase {
-        Arguments: (sp_CaseName);
+    Procedure pr_saveCase {
+        Arguments: (sp_in_caseName);
         Body: {
-            OptionGetString("Data Management Style", sp_dms);
-            if sp_dms = "Disk Files and Folders" then
-            
-                ! Save the case in the folder "data".
-                if not DirectoryExists( "data" ) then
-                    DirectoryCreate("data");
-                endif ;
-                CaseFileSave( "data\\" + sp_CaseName, AllIdentifiers );
-            
-            else
-                ! First try to find a case with the name indicated by CaseName. 
-                ! If AIMMS can find this, it will store a reference to this case 
-                ! in the element parameter ep_CaseReference
-                if ( not CaseFind( sp_CaseName, ep_CaseReference ) ) then
-            
-                    ! If no case with the name indicated by CaseName could be found, then
-                    ! we try to create a case with this name. After creating the case, AIMMS
-                    ! will store a reference in the ep_CaseReference element parameter to the
-                    ! newly created case
-                    if ( not CaseCreate( sp_CaseName, ep_CaseReference ) ) then
-            
-                        ! If there was an error while creating the case, notify the developer
-                        ! by raising an error. If the raised error is not caught, AIMMS will
-                        ! display it in the error window.
-                        raise error "Could not create case with name " + sp_CaseName ;
-            
-                    endif;
-            
-                endif;
-            
-                ! If we got here, it means either a case with the indicated case name could be
-                ! found, or it was created. 
-                ! Now instruct AIMMS to set this case to be the current case
-                CaseSetCurrent( ep_CaseReference );
-            
-                ! And then instruct AIMMS to save the case
-                CaseSave( 0 );
-            
-            endif;
+            ! Save the case in the folder "data".
+            if not DirectoryExists( "data" ) then
+                DirectoryCreate("data");
+            endif ;
+            CaseFileSave("data\\" + sp_in_caseName + ".data", AllIdentifiers);
         }
-        StringParameter sp_CaseName {
+        StringParameter sp_in_caseName {
             Property: Input;
         }
-        ElementParameter ep_CaseReference {
-            Range: AllCases;
-        }
-        StringParameter sp_dms;
     }
 
 
@@ -94,10 +54,14 @@ To save a case with the name "Case 1" from within any of your procedures, you ca
 .. code-block:: aimms
     :linenos:
 
-    SaveCase("Case 1") ; 
+    pr_saveCase("Case 1") ; 
 
+Upgrading an AIMMS project to a newer AIMMS release
+----------------------------------------------------
 
-:download:`AIMMS project download <model/ms.zip>` 
+If you still work with ``.dat`` files, please convert to ``.data`` first. You may want to follow the instructions in
+`our conversation guide <https://how-to.aimms.com/Articles/314/314-from-dat-to-data.html>`_.
+
 
 More about case related functions
 ---------------------------------------------
@@ -108,6 +72,7 @@ To access contextual help from within AIMMS,
 3. Select the function name. 
 
 The AIMMS Function Reference will open at the page corresponding to the function.
+
 
 Related Topics
 ---------------
