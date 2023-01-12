@@ -2,63 +2,57 @@ stages:
   - test
   - deploy
 
-before_script:
-  - curl "https://packages.gitlab.com/gpg.key" -o /tmp/omnibus_gitlab_gpg.key
-  - sudo apt-key add /tmp/omnibus_gitlab_gpg.key
-  - sudo rpm --import /tmp/omnibus_gitlab_gpg.key
-  - sudo apt-get install software-properties-common -y
-  - sudo add-apt-repository ppa:deadsnakes/ppa -y
-  - sudo apt-get update -y
-  - sudo apt-get install python3.8 python3.8-dev python3.8-venv python3-pip python3-venv python-enchant -y
-  - python3.8 -mvenv ../myenv
-  - source ../myenv/bin/activate
-  - python3.8 -mpip install --upgrade  pip
-  - python3.8 -mpip install -U sphinx-aimms-theme sphinx-sitemap sphinx-last-updated-by-git sphinxcontrib-bibtex sphinxcontrib-spelling sphinx_design
-  - python3.8 -mpip install sphinx==4.5.0 --force-reinstall
-
+.run_on_dockerhost: &run_on_dockerhost
+  tags:
+    - docker20
+  before_script:
+    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
+  image: gitlab.aimms.com:5050/other/dockerdev/documentation:latest
 
 linkcheck:
+  <<: *run_on_dockerhost
   stage: test
   script:
-  - python3 -msphinx -W --keep-going -b linkcheck . _build/linkcheck
+    - python3 -msphinx -W --keep-going -b linkcheck . _build/linkcheck
   allow_failure: true
-  tags: 
-    - ubuntu
   retry: 1
 
 spellcheck:
+  <<: *run_on_dockerhost
   stage: test
   script:
-  - python3 -msphinx -W --keep-going -b spelling . _build/spelling
-  tags: 
-    - ubuntu
+    - python3 -msphinx -W --keep-going -b spelling . _build/spelling
+  allow_failure: true
 
 build:
+  <<: *run_on_dockerhost
   stage: test
   script:
-    - sphinx-build -W --keep-going -b html . _build/html 
-  tags: 
-    - ubuntu
+    - sphinx-build -W --keep-going -b html . _build/html
 
 build_and_staging:
+  <<: *run_on_dockerhost
   stage: deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH != "master"
+      when: always
+    - when: never
   script:
     - sphinx-build -M html . _build
+    - bash load_ssh_key_for_deploy.sh
     - ssh support@data.aimms.com mkdir -p /home/aimms/www/how-to.aimms.com/staging/${CI_COMMIT_BRANCH}
     - rsync -rt --delete-excluded _build/html/ support@data.aimms.com:/home/aimms/www/how-to.aimms.com/staging/${CI_COMMIT_BRANCH}
-  tags: 
-    - ubuntu
-  except:
-    - master
 
 build_and_deploy:
+  <<: *run_on_dockerhost
   stage: deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: always
+    - when: never
   script:
-    - sphinx-build -b html . _build/html 
+    - sphinx-build -b html . _build/html
+    - bash load_ssh_key_for_deploy.sh
     - ssh support@data.aimms.com rm -f -r /home/aimms/www/how-to.aimms.com/staging/
     - rsync -rt _build/html/ support@data.aimms.com:/home/aimms/www/how-to.aimms.com
-  tags: 
-    - ubuntu
-  only:
-    - master
   retry: 1
