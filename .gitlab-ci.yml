@@ -15,14 +15,12 @@ linkcheck:
   script:
     - python3 -msphinx -W --keep-going -b linkcheck . _build/linkcheck
   allow_failure: true
-  retry: 1
 
 spellcheck:
   <<: *run_on_dockerhost
   stage: test
   script:
     - python3 -msphinx -W --keep-going -b spelling . _build/spelling
-  allow_failure: true
 
 build:
   <<: *run_on_dockerhost
@@ -55,4 +53,4 @@ build_and_deploy:
     - bash load_ssh_key_for_deploy.sh
     - ssh support@data.aimms.com rm -f -r /home/aimms/www/how-to.aimms.com/staging/
     - rsync -rt _build/html/ support@data.aimms.com:/home/aimms/www/how-to.aimms.com
-  retry: 1
+
