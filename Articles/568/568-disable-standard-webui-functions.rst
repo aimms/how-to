@@ -1,12 +1,13 @@
 Disable Standard WebUI Functions
 ================================
 
-Here are listed ``css`` code on how to hide standard features of WebUI. Note that this can not be done by widget, only by project. 
+Here are listed ``css`` code on how to hide standard features of WebUI. Note that this **cannot** be done by widget, only by project. 
 
 Download Image 
 ---------------
 
 To hide the Download button:
+
 .. code-block:: aimms 
     :linenos:
 
