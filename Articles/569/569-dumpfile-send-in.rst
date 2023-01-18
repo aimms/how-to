@@ -1,11 +1,11 @@
-Why send in dump file?
+Sending a dump file?
 ============================
 
 What?
 -----------------------
 A ``.dmp file``, pronounce as dump file, 
-is generated when ``AIMMS Developer`` encounters a severe internal error. 
-This may even force ``AIMMS Developer`` to close.
+is generated when AIMMS Developer encounters a severe internal error. 
+This may even force AIMMS Developer to close.
 
 Purpose
 -----------------------
@@ -14,10 +14,10 @@ The identification of a software glitch may ultimately lead to an improvement in
 
 Contents
 -----------------------
-A dump file created by ``AIMMS Developer`` upon a severe internal error contains the stacks of the execution threads. 
-Such a stack is information about the program logic of ``AIMMS Developer`` itself. 
+A dump file created by AIMMS Developer upon a severe internal error contains the stacks of the execution threads. 
+Such a stack is information about the program logic of AIMMS Developer itself. 
 
-A dump file created by ``AIMMS Developer`` upon severe internal error hardly contains any application data. 
+A dump file created by AIMMS Developer upon severe internal error hardly contains any application data. 
 The AIMMS Execution engine, when a severe internal error happens, touches some existing data to compute new data. 
 Some of this touched data is visible in a dump file.
 
@@ -25,8 +25,8 @@ More details of :doc:`dumpfile contents<../569/569-dumpfile-contents>`.
 
 Dialog
 -----------------------
-When ``AIMMS Developer`` encounters a severe internal error, but ``AIMMS Developer`` is not forced to close, 
-``AIMMS Developer`` will pop up a dialog like:
+When AIMMS Developer encounters a severe internal error, but AIMMS Developer is not forced to close, 
+AIMMS Developer will pop up a dialog like:
 
 .. figure:: images/severe-internal-error-dialogue.png
     :align: center
@@ -45,7 +45,7 @@ A best practice here is to specify the steps taken after data load.  For instanc
 
 Such a description is valuable in creating a reproducible example. 
 
-It is also understandably difficult to remember these steps as you, as a user of ``AIMMS Developer`` was focused on something else. 
+It is also understandably difficult to remember these steps as you, as a user of AIMMS Developer was focused on something else. 
 
 This is similar as to when you are hammering a nail into the wood and hit your thumb accidentally. 
 As a user of the hammer, you were focused on the nail, and will remember the form of the nail more easily 

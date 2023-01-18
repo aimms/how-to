@@ -1,4 +1,4 @@
-Dumpfile contents
+What is a dump file?
 =================================
 
 Upon a severe internal error, the running AIMMS executable will create a dump file.
@@ -7,7 +7,7 @@ This is a dump file, **without heaps**, using `technology provided by Microsoft 
 The contents of a dump file is primarily the execution stack of each thread during the severe internal error. 
 An execution stack is a list of active functions.
 
-As such, these stacks contain information about the state of ``AIMMS Developer`` itself; 
+As such, these stacks contain information about the state of AIMMS Developer itself; 
 they hardly contain information of the state of the application.
 
 However, the functions on the stack touch upon data of the application, 
@@ -36,7 +36,7 @@ The symbolic information necessary to make some sense out of a dump file is not 
 AIMMS analysis
 -----------------
 Only AIMMS staff has access to the dump files once they are sent in. 
-In addition, they have access to the AIMMS Source and the symbolic information used to create the ``AIMMS Developer`` executable.
+In addition, they have access to the AIMMS Source and the symbolic information used to create the AIMMS Developer executable.
 This is what they see from the above dump file:
 
 .. figure:: images/visual-studio-analysis-artificial-dump-file.png
