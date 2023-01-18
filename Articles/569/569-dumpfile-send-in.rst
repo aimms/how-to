@@ -1,4 +1,4 @@
-Why send in dumpfile?
+Why send in dump file?
 ============================
 
 What?
