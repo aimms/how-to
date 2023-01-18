@@ -5,7 +5,7 @@ Upon a severe internal error, the running AIMMS executable will create a dump fi
 This is a dump file, **without heaps**, using `technology provided by Microsoft <https://learn.microsoft.com/en-us/visualstudio/debugger/using-dump-files?view=vs-2022>`_.
 
 The contents of a dump file is primarily the execution stack of each thread during the severe internal error. 
-An execution stack is a list of active functions active.
+An execution stack is a list of active functions.
 
 As such, these stacks contain information about the state of ``AIMMS Developer`` itself; 
 they hardly contain information of the state of the application.
