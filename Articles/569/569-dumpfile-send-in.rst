@@ -63,6 +63,7 @@ In short: attempting to analyze dump files yourself is not an efficient use of y
 Cooperation
 -----------------------
 Based on a single dump file, there is usually not enough information to make a fix directly. 
+
 This is why we seek your cooperation, such that together (you and AIMMS staff), 
 a reproducible example might be constructed. 
 As AIMMS permits a myriad of interaction paths, it can be a time-consuming process to create a reproducible example.
