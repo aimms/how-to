@@ -38,7 +38,7 @@ More information can be found here at `AIMMS command line options <https://docum
 In order to publish an application to the AIMMS PRO Cloud server, you must first generate an aimmspack file from your project. More information can be found at `publishing applications documentation <https://documentation.aimms.com/pro/appl-man.html#publishing-applications>`_ .
 
 
-Observation: Using ``--export-to`` is the equivlaent to executing the “Export End User Project” using the last saved configuration of this project.
+Observation: Using ``--export-to`` is the equivalent to executing the “Export End User Project” using the last saved configuration of this project.
 
 .. note::
 
