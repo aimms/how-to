@@ -15,6 +15,18 @@ To hide the Download button:
         display: none;
     }
 
+.. grid:: 2
+
+    .. grid-item-card::  With css
+
+        .. image:: images/after_download.png
+            :align: center
+
+    .. grid-item-card::  Without css
+
+        .. image:: images/before_download.png
+            :align: center
+
 Add Filter Rule
 ------------------
 
@@ -27,6 +39,18 @@ To hide the Add Filter Rule button:
         display: none;
     }
 
+.. grid:: 2
+
+    .. grid-item-card::  With css
+
+        .. image:: images/after_filter.png
+            :align: center
+
+    .. grid-item-card::  Without css
+
+        .. image:: images/before_filter.png
+            :align: center
+
 Search Button
 -------------
 
@@ -36,6 +60,18 @@ Search Button
     .widgetdiv .awf-dock-button .search-support-content {
         visibility: hidden;
     }
+
+.. grid:: 2
+
+    .. grid-item-card::  With css
+
+        .. image:: images/after_search.png
+            :align: center
+
+    .. grid-item-card::  Without css
+
+        .. image:: images/before_search.png
+            :align: center    
 
 
 
