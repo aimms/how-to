@@ -93,6 +93,6 @@ For the details see this :download:`AIMMS 4.91 project download <model/MovingCol
 References
 -----------
 
-#.  `Reply from Edo <https://community.aimms.com/ideas/refresh-of-webui-page-1293?postid=258#post258>`_
+#.  This article is based on an idea from `Edo <https://community.aimms.com/ideas/refresh-of-webui-page-1293?postid=258#post258>`_
 
-#.   TSP opt-2 example, to be published 397.
+#.  TSP opt-2 example, see :doc:`../397/397-traveling-salesman`
