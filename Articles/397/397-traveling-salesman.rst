@@ -333,14 +333,7 @@ Minimal Requirements
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
 
-The exact method used, uses lazy constraints. As far as I know, this is only availabe with CPLEX and Gurobi.
-
-.. spelling:word-list::
-
-   primaryDark
-   ddab
-   bg
-
+The exact method used, uses lazy constraints. As far as I know, this is only available with CPLEX and Gurobi.
 
 References
 -----------
@@ -350,3 +343,13 @@ References
 #.  WinUI app for opt-2 heuristic: Marcel Hunting. (Old 397 article)
 
 #.  WinUI app for lazy constraints: Marcel Hunting. https://how-to.aimms.com/Articles/126/126-TSP-Lazy-Constraints.html#solve-with-lazy-constraints
+
+
+.. spelling:word-list::
+
+   primaryDark
+   haversine
+   ddab
+   bg
+
+
