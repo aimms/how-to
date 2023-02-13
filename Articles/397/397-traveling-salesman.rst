@@ -18,15 +18,29 @@ Traveling Salesman
 Story
 -----
 
-This example illustrates some of AIMMS control flow statements by means of the traveling salesman 2-opt heuristic. In the model tree, you will find some declarations to define the problem. In addition, you will find
+The Traveling Salesman Problem (TSP) is the problem of finding the best route given a set of locations and distances between those locations.
+
+It is widely researched for `several reasons <https://en.wikipedia.org/wiki/Travelling_salesman_problem>`_ including:
+
+#.  They are notoriously hard to solve to proven optimality. 
+
+#.  There is a wide range of practical applications.
+
+#.  There are various ways of solving TSP problems.
+
+The purpose of this example application is to illustrate some ways of solving a TSP.
+
+Implementation
+--------------
+
+This example illustrates some of AIMMS control flow statements by means of the traveling salesman 2-opt heuristic. In the model tree, you will find some declarations to define the problem. 
+In addition, you will find
 
 - A procedure and some declarations to compute and visualize an initial tour constructed by starting at some city and successively selecting the next city as the closest city not yet part of the tour.
 
 - A procedure and some declarations to compute and visualize an improved tour constructed by repetitively swapping those two arcs in the tour by means of the 2-opt heuristic that give the largest overall distance improvement, until no further improvement is possible or the iteration limit is reached.
 
 - A procedure and some declarations to compute and visualize an improved tour constructed by repetitively swapping the next arc in the (modified) tour with that neighbor arc which gives the largest distance improvement, until the iteration limit is reached or a full cycle over the tour gives no further improvement.
-
-When you run the procedures, the information in the progress window is updated by the functions in the GMP Progress Window library.
 
 
 Mathematical Model
@@ -39,53 +53,59 @@ This AIMMS project illustrates the use of a semi-continuous variable. A semi-con
 +=====+======================================================+===========================================+
 + **Sets and indices:**                                                                                  |
 +-----+------------------------------------------------------+-------------------------------------------+
-+     | :math:`P`, :math:`p \in P`                           | Producers                                 |
-+-----+------------------------------------------------------+-------------------------------------------+
-+     | :math:`C`, :math:`c \in C`                           | Contracts                                 |
++     | :math:`S`, :math:`i,j \in S`                         | Cities                                    |
 +-----+------------------------------------------------------+-------------------------------------------+
 | **Parameters:**                                                                                        |
 +-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`M_{p} \in \mathbb{R_{+}}`                     | minimal delivery                          |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`A_{p} \in \mathbb{R_{+}}`                     | available capacity                        |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`S_{c} \in \mathbb{R_{+}}`                     | contract size                             |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`N_{c} \in \mathbb{R_{+}}`                     | minimal number of contributors            |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`T_{p,c} \in \mathbb{R_{+}}`                   | delivery cost by p for c                  |
+|     | :math:`C_{i,j} \in \mathbb{R_{+}}`                   | Distance between cities                   |
 +-----+------------------------------------------------------+-------------------------------------------+
 | **Variables:**                                                                                         |
 +-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`X_{p,c} \in \{0\} \cup \{M_{p}..10000\}`      | amount of commodity delivered by p to c   |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`Y_{p,c} \in \{0..1\}`                         | p produce to c                            |
+|     | :math:`X_{i,j} \in \{0..1\} \forall i,j: i>j`        | Travel from i to j, or visa versa         |
 +-----+------------------------------------------------------+-------------------------------------------+
 | **Constraints:**                                                                                       |
 +-----+------------------------------------------------------+-------------------------------------------+
-|  1  | :math:`\forall p: \sum_c X_{p,c} \leq A_{p}`         | production capacity for p                 |
-+-----+------------------------------------------------------+-------------------------------------------+
-|  2  | :math:`\forall c: \sum_p X_{p,c} \geq S_{c}`         | demand fulfillment for c                  |
-+-----+------------------------------------------------------+-------------------------------------------+
-|  3  | :math:`\forall c: \sum_p X_{p,c} \geq N_{c}`         | minimal number of contributors to c       |
-+-----+------------------------------------------------------+-------------------------------------------+
-|  4  | :math:`\forall p, c: X_{p,c} \geq M_{p} * Y_{p,c}`   | if p delivers to c                        |
+|  1  | :math:`\forall j: \sum_i X_{i,j} + X_{i,j} = 1`      |                                           |
 +-----+------------------------------------------------------+-------------------------------------------+
 | **Minimize:**                                                                                          |
 +-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`\sum_{p,c} T_{p,c} * X_{p,c}`                 | The number of matches                     |
+|     | :math:`\sum_{i,j} C_{i,j} * X_{i,j}`                 | Total distance traveled                   |
 +-----+------------------------------------------------------+-------------------------------------------+
 
 Language 
 --------
 
-In this example we used 10 northwestern states for the contracts and 5 cities from that region for the producers. To import the data into our model, we are currently using DEX library through Excel (``NothWesternStates.xlsx``). 
-You can add more data freely without changing the sheets structure.  
+Case management.
+^^^^^^^^^^^^^^^^^^^^
 
+* Two cases supplied
+
+* You can create your own case, or adapt an existing case.
+
+
+Haversine
+^^^^^^^^^^
+
+Ref haversine formula.
+
+#.  `Haversine code <https://rosettacode.org/wiki/Haversine_formula>`_
+
+#.  :doc:`previous article<../153/153-external-haversine>`
+
+
+ScheduleAt
+^^^^^^^^^^
+
+Note precise up to 1 second.
+
+AIMMS Procedure :aimms:procedure:`ScheduleAt`
 
 
 WebUI Features
 --------------
+
+Please ref article 572.
+
 
 On input page, if you click around the graphs, a highlighted cell will appear identifying the last clicked element. The results are displayed in a combination chart (stacked bar chart).
 
@@ -107,11 +127,11 @@ The following WebUI features are used:
 
 - `Scalar (and Compact) Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
-- `List Widget <https://documentation.aimms.com/webui/list-widget.html#list-widget>`_ 
+- `List Widget <https://documentation.aimms.com/webui/list-widget.html#list-widget>`_  (Where?)
 
 - `Dialog Page <https://documentation.aimms.com/webui/dialog-pages.html>`_ 
 
-- `Download Widget <https://documentation.aimms.com/webui/download-widget.html>`_ 
+- `Download Widget <https://documentation.aimms.com/webui/download-widget.html>`_ (Where?)
 
 - `Selection Box Widget <https://documentation.aimms.com/webui/selection-box-widget-v2.html>`_ 
 
@@ -313,9 +333,20 @@ Minimal Requirements
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
 
+The exact method used, uses lazy constraints. As far as I know, this is only availabe with CPLEX and Gurobi.
+
 .. spelling:word-list::
 
    primaryDark
    ddab
    bg
-   
+
+
+References
+-----------
+
+#.  Generalization of TSP to vehicle routing: https://how-to.aimms.com/C_Developer/Sub_Mathematical_Modeling/Sub_VRP/index.html
+
+#.  WinUI app for opt-2 heuristic: Marcel Hunting. (Old 397 article)
+
+#.  WinUI app for lazy constraints: Marcel Hunting. https://how-to.aimms.com/Articles/126/126-TSP-Lazy-Constraints.html#solve-with-lazy-constraints
