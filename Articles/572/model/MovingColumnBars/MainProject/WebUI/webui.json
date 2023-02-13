@@ -1,0 +1,182 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "browsername": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browsertimezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
+    "ignoredst": {
+      "aimms": {
+        "contents": [
+          "webui::IgnoreDST"
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "timezone.dst.readonly": {
+      "aimms": {
+        "contents": [
+          "webui::DefaultDSTSettingForDisplayTimeZone"
+        ]
+      }
+    },
+    "ui.editable": {
+      "literal": 0
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "buttonStartSimulating",
+          "gridArea": "area-b",
+          "dndId": "area-bbuttonStartSimulating0"
+        },
+        {
+          "widgetUri": "buttonStopSimulating",
+          "gridArea": "area-b",
+          "dndId": "area-abuttonStopSimulating2"
+        },
+        {
+          "widgetUri": "combinationChartColumnLevels",
+          "gridArea": "area-a",
+          "dndId": "area-acombinationChartColumnLevels1"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout10"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "combinationChartColumnLevels",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "buttonStartSimulating",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "buttonStopSimulating",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/buttonStartSimulating": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_startSimulating"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "buttonStartSimulating"
+    },
+    "title": {
+      "literal": "buttonStartSimulating"
+    }
+  },
+  "widgets/buttonStopSimulating": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_stopSimulating"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "buttonStopSimulating"
+    },
+    "title": {
+      "literal": "buttonStopSimulating"
+    }
+  },
+  "widgets/combinationChartColumnLevels": {
+    "aimms.widget.type": {
+      "literal": "combinationchart"
+    },
+    "axis.y.0.max": {
+      "aimms": {
+        "contents": [
+          "p_barHigh"
+        ],
+        "slices": []
+      }
+    },
+    "axis.y.0.min": {
+      "aimms": {
+        "contents": [
+          "p_barLow"
+        ],
+        "slices": []
+      }
+    },
+    "axis.y.0.step": {
+      "literal": 1
+    },
+    "contents.__display_order__": {
+      "literal": [
+        "contents.0"
+      ]
+    },
+    "contents.0.identifier": {
+      "literal": {
+        "identifier": "p_level",
+        "slice": [
+          {
+            "index": "i_bar",
+            "type": "free",
+            "value": "i_bar"
+          }
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "name": {
+      "literal": "combinationChartColumnLevels"
+    }
+  }
+}

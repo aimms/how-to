@@ -1,0 +1,221 @@
+## ams_version=1.0
+
+Model Main_MovingColumnBars {
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: {
+				century->s : #-># * 3153600000,
+				year->s : #-># * 31536000,
+				month->s : #-># * 2628000,
+				week->s : #-># * 604800,
+				day->s : #-># * 86400,
+				hour->s : #-># * 3600,
+				minute->s : #-># * 60,
+				second->s : #-># ,
+				tick->s : #-># / 100
+			}
+			Comment: "Expresses the value for the duration of periods.";
+		}
+	}
+	Set s_bars {
+		Index: i_bar;
+		Definition: elementRange(0,9);
+	}
+	Parameter p_barHigh {
+		Definition: p_high + 1;
+	}
+	Parameter p_barLow {
+		Definition: p_low - 1;
+	}
+	Parameter p_high {
+		Definition: 50;
+	}
+	Parameter p_low {
+		Definition: 30;
+	}
+	Parameter p_level {
+		IndexDomain: i_bar;
+		Range: [p_low, p_high];
+	}
+	Parameter bp_stop {
+		Range: binary;
+		InitialData: 0;
+	}
+	Section Application_initialization_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure pr_startup {
+			Body: {
+				p_level(i_bar) := ( p_high + p_low  ) / 2 ;
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+	Section Leverage_WebUI {
+		Procedure pr_scheduleOver {
+			Arguments: (p_in_noSecs,ep_in_payLoad);
+			Body: {
+				block ! Sanity checks 
+					if p_in_noSecs <= 0[s] then
+						raise error 
+							formatString("pr_scheduleOver(%n,%e): The number of seconds should be strictly positive.", 
+								p_in_noSecs, ep_in_payLoad);
+					endif ;
+					if not ep_in_payLoad then
+						raise error 
+							formatString("pr_scheduleOver(%n,%e): Empty payload specified.", 
+								p_in_noSecs, ep_in_payLoad);
+					endif ;
+				endblock ;
+				
+				block ! Is reference date base on UTC?
+					p_loc_ogv 
+					:=  OptionGetValue(
+				            OptionName :  "use_UTC_forCaseAndStartEndDate", 
+				            Lower      :  p_loc_low, 
+				            Current    :  p_loc_scheduleAtUsesUTC, 
+				            Default    :  p_loc_def, 
+				            Upper      :  p_loc_lupp);
+				
+					if not p_loc_ogv then ! Option use_UTC_forCaseAndStartEndDate is introduced with AIMMS 4.75.
+						p_loc_scheduleAtUsesUTC := 0 ; ! Assume option use_UTC_forCaseAndStartEndDate is off.
+					endif ;
+				endblock ;
+				
+				sp_loc_refDate := "2023-01-01 00:00:00" ;
+				
+				if p_loc_scheduleAtUsesUTC then
+					sp_loc_now := CurrentToString("%c%y-%m-%d %H:%M:%S%TZ('UTC')");
+				else
+					sp_loc_now := CurrentToString("%c%y-%m-%d %H:%M:%S");
+				endif ;
+				
+				p_loc_tmpSec := CurrentToMoment([s], sp_loc_refDate) ;
+				p_loc_tmpSec += p_in_noSecs ;
+				
+				if p_loc_scheduleAtUsesUTC then
+					sp_loc_launchDate := MomentToString( "%c%y-%m-%d %H:%M:%S%TZ('UTC')", [s], sp_loc_refDate, p_loc_tmpSec );
+				else
+					sp_loc_launchDate := MomentToString( "%c%y-%m-%d %H:%M:%S", [s], sp_loc_refDate, p_loc_tmpSec );
+				endif ;
+				
+				! Nb ScheduleAt is precise up to a second.
+				if not ScheduleAt(sp_loc_launchDate, ep_in_payLoad) then
+				    raise error "Error scheduling procedure \'" + ep_in_payLoad + "\': " + CurrentErrorMessage code 'Schedule-at-procedure' ;
+				endif;
+			}
+			Comment: "Schedule a job in a couple of seconds.";
+			Parameter p_in_noSecs {
+				Unit: s;
+				Property: Input;
+			}
+			ElementParameter ep_in_payLoad {
+				Range: AllProcedures;
+				Property: Input;
+			}
+			StringParameter sp_loc_refDate;
+			StringParameter sp_loc_launchDate;
+			StringParameter sp_loc_now;
+			Parameter p_loc_tmpSec {
+				Range: integer;
+				Unit: s;
+			}
+			Parameter p_loc_ogv;
+			Parameter p_loc_low;
+			Parameter p_loc_scheduleAtUsesUTC;
+			Parameter p_loc_def;
+			Parameter p_loc_lupp;
+		}
+		Procedure pr_startSimulating {
+			Body: {
+				bp_stop := 0 ;
+				pr_nextIteration();
+			}
+		}
+		Procedure pr_stopSimulating {
+			Body: {
+				bp_stop := 1 ;
+			}
+		}
+		Procedure pr_iteration {
+			Body: {
+				p_change( i_bar ) := if Uniform(0,1) < 0.5 then -1 else 1 endif ;
+				p_level( i_bar ) := 
+					if ( p_level(i_bar) + p_change( i_bar ) < p_low  ) or 
+					   ( p_level(i_bar) + p_change( i_bar ) > p_high )    then
+						p_level(i_bar) - p_change(i_bar )
+					else
+						p_level(i_bar) + p_change(i_bar )
+					endif ;
+			}
+			Parameter p_change {
+				IndexDomain: i_bar;
+			}
+		}
+		Procedure pr_nextIteration {
+			Body: {
+				pr_iteration();
+				if not bp_stop then
+					pr_scheduleOver(
+						p_in_noSecs   :  1[s], 
+						ep_in_payLoad :  'pr_nextIteration');
+				endif ;
+			}
+		}
+	}
+	Section Leverage_WinUI {
+		ElementParameter ep_color {
+			IndexDomain: i_bar;
+			Range: AllColors;
+			Definition: Element( AllColors, ord(i_bar)+5);
+		}
+		Procedure pr_simulatingWinUI {
+			Body: {
+				bp_stop := 0 ;
+				while not bp_stop do
+					pr_iteration();
+					pageRefreshAll();
+					delay(1);
+				endwhile ;
+			}
+		}
+		Procedure pr_stopSimulatingWinUI {
+			Body: {
+				bp_stop := 1 ;
+			}
+		}
+	}
+	Procedure MainExecution;
+}
