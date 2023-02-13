@@ -394,7 +394,9 @@ Model Main_CopyFilesFromServer {
 				if not pro::GetPROEndPoint() then return; endif ;
 				
 				ret := pro::storage::ListObjects(spInpPath,sChildrenObj,spChildrenObjName,spChildrenObjType,pChildrenObjSize,spChildrenObjAuth);
-				!if not handleError(ret) then return 0; endif; 
+				if not pro::HandleError(ret,"pro::storage::ListObjects") then 
+					return 0; 
+				endif; 
 				res := card( sChildrenObj );
 				for CURPATH_OBJ do
 					sFileNumbers += ord( CURPATH_OBJ );
@@ -477,15 +479,15 @@ Model Main_CopyFilesFromServer {
 					sAllDirectoryNumbers :  sAllDirectoryNumbers, 
 					spAllDirectoryNames  :  spAllDirectoryNames);
 				
-				pr_GetFiles( spInpPath, sLocFilenumbers, 
-					spLocFilenames, spLocFiletimes, pLocFilesizes );
-				for iLFN do
-					sFileNumbers += if eFN then val( eFN ) else 0 endif + val( iLFN );
-					eNFN := last( sFilenumbers );
-					spFilenames( eNFN ) := spLocFilenames( iLFN );
-					spFileTimes( eNFN ) := spLocFiletimes( iLFN );
-					 pFileSizes( eNFN ) :=  pLocFileSizes( iLFN );
-				endfor ;
+				!pr_GetFiles( spInpPath, sLocFilenumbers, 
+				!	spLocFilenames, spLocFiletimes, pLocFilesizes );
+				!for iLFN do
+				!	sFileNumbers += if eFN then val( eFN ) else 0 endif + val( iLFN );
+				!	eNFN := last( sFilenumbers );
+				!	spFilenames( eNFN ) := spLocFilenames( iLFN );
+				!	spFileTimes( eNFN ) := spLocFiletimes( iLFN );
+				!	 pFileSizes( eNFN ) :=  pLocFileSizes( iLFN );
+				!endfor ;
 				
 				
 				p_noFolders := card( sAllDirectoryNumbers );
