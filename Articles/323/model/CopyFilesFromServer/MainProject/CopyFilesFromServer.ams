@@ -15,8 +15,23 @@ Model Main_CopyFilesFromServer {
 			Index: i_afn;
 			Property: ElementsAreLabels;
 		}
+		Set s_orderedFileNumbers {
+			SubsetOf: s_AllFileNumbers;
+			Index: i_oafn;
+			Property: ElementsAreLabels;
+			OrderBy: sp_AllFilenames(i_afn);
+			Definition: s_AllFileNumbers;
+		}
 		StringParameter sp_AllFilenames {
 			IndexDomain: i_afn;
+		}
+		Set s_allfilenames {
+			Index: i_filename;
+			Parameter: ep_newFilename;
+		}
+		Set s_duplicateFileNames {
+			SubsetOf: s_allfilenames;
+			Parameter: ep_newDuplicateFilename;
 		}
 		StringParameter sp_AllFiletimes {
 			IndexDomain: i_afn;
@@ -27,6 +42,22 @@ Model Main_CopyFilesFromServer {
 		Parameter p01_Selection {
 			IndexDomain: i_afn;
 			Range: binary;
+		}
+		Parameter bp_noDuplicates {
+			Definition: count( i_oafn | ( sp_AllFilenames(i_oafn) = sp_AllFilenames(i_oafn-1) ) );
+		}
+	}
+	Procedure pr_findDuplicates {
+		Body: {
+			empty s_allFilenames ;
+			empty s_duplicateFileNames ;
+			for i_afn do
+				if sp_AllFiletimes(i_afn) in s_allFilenames then
+					setElementAdd( s_duplicateFileNames, ep_newDuplicateFilename, sp_AllFilenames(i_afn) );
+				else
+					setElementAdd( s_allFilenames, ep_newFilename, sp_AllFilenames(i_afn) );
+				endif ;
+			endfor ;
 		}
 	}
 	Section Select_Folder_on_PRO_Storage {
@@ -393,26 +424,50 @@ Model Main_CopyFilesFromServer {
 			Body: {
 				if not pro::GetPROEndPoint() then return; endif ;
 				
-				ret := pro::storage::ListObjects(spInpPath,sChildrenObj,spChildrenObjName,spChildrenObjType,pChildrenObjSize,spChildrenObjAuth);
-				if not pro::HandleError(ret,"pro::storage::ListObjects") then 
-					return 0; 
-				endif; 
-				res := card( sChildrenObj );
-				for CURPATH_OBJ do
-					sFileNumbers += ord( CURPATH_OBJ );
-					ep_fin := last( sFileNumbers );
-					spFileNames( ep_fin ) := spInpPath + spMySlash + CURPATH_OBJ ;
-					spFullFileName := spInpPath + CURPATH_OBJ ;
-					pro::storage::ListVersions(
-						path        :  spInpPath, 
-						objectLabel :  CURPATH_OBJ, 
-						VersionSet  :  sVer, 
-						VersionSize :  pVerSize, 
-						BucketDate  :  spVerFileTimes );
-					eVer := last(sVer);
-					spFileTimes(ep_fin) := spVerFileTimes(eVer);
-					pFileSizes(ep_fin) := PVerSize(eVer);
-				endfor ;
+				bp_allFilesRead := 0 ;
+				p_startFileNo := 0 ;
+				p_filesPerCall := 1024 ;
+				p_totalReceivedFileNames := 0 ;
+				while not bp_allFilesRead do
+					empty sChildrenObj ;
+					ret := pro::storage::ListObjects(
+							path           :  spInpPath, 
+							ObjectSet      :  sChildrenObj, 
+							ObjectFileName :  spChildrenObjName, 
+							ObjectType     :  spChildrenObjType, 
+							ObjectSize     :  pChildrenObjSize, 
+							BucketAuth     :  spChildrenObjAuth, 
+							MaxKeys        :  p_filesPerCall, 
+							OffSet         :  p_totalReceivedFileNames, 
+							separator      :  "/");	
+					if not pro::HandleError(ret,"pro::storage::ListObjects") then 
+						return 0; 
+					endif; 
+					display sChildrenObj ;
+					p_filenamesReceivedThisCall := card( sChildrenObj );
+					for CURPATH_OBJ do
+						sFileNumbers += ( p_totalReceivedFileNames + ord( CURPATH_OBJ ) );
+						ep_fin := last( sFileNumbers );
+						spFileNames( ep_fin ) := spInpPath + spMySlash + CURPATH_OBJ ;
+						spFullFileName := spInpPath + CURPATH_OBJ ;
+						pro::storage::ListVersions(
+							path        :  spInpPath, 
+							objectLabel :  CURPATH_OBJ, 
+							VersionSet  :  sVer, 
+							VersionSize :  pVerSize, 
+							BucketDate  :  spVerFileTimes );
+						eVer := last(sVer);
+						spFileTimes(ep_fin) := spVerFileTimes(eVer);
+						pFileSizes(ep_fin) := PVerSize(eVer);
+					endfor ;
+					p_totalReceivedFileNames += p_filenamesReceivedThisCall ;
+					if p_filenamesReceivedThisCall < p_filesPerCall then
+						bp_allFilesRead := 1;
+					endif ;
+				!	if loopcount > 20 then
+				!		bp_allFilesRead := 1;
+				!	endif ;
+				endwhile ;
 			}
 			DeclarationSection Argument_Declarations {
 				StringParameter spInpPath {
@@ -441,11 +496,17 @@ Model Main_CopyFilesFromServer {
 					Range: sFileNumbers;
 				}
 				Parameter ret;
-				Parameter res;
+				Parameter p_filenamesReceivedThisCall;
+				Parameter p_totalReceivedFileNames;
 				Set sVer {
 					Index: iVer;
 					Parameter: eVer;
 				}
+				Parameter bp_allFilesRead {
+					Range: binary;
+				}
+				Parameter p_startFileNo;
+				Parameter p_filesPerCall;
 				Parameter pVerSize {
 					IndexDomain: iVer;
 				}
