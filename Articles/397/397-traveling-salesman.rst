@@ -28,13 +28,19 @@ It is widely researched for `several reasons <https://en.wikipedia.org/wiki/Trav
 
 #.  There are various ways of solving TSP problems.
 
-The purpose of this example application is to illustrate some ways of solving a TSP.
+The purpose of this example application is to illustrate some ways of solving a TSP. 
 
-Implementation
---------------
+
+Mathematical Model
+------------------
+
+In this example you will find both heuristic and MIP model for comparison. 
+
+Heuristic
+^^^^^^^^^^^^
 
 This example illustrates some of AIMMS control flow statements by means of the traveling salesman 2-opt heuristic. In the model tree, you will find some declarations to define the problem. 
-In addition, you will find
+In addition, you will find:
 
 - A procedure and some declarations to compute and visualize an initial tour constructed by starting at some city and successively selecting the next city as the closest city not yet part of the tour.
 
@@ -43,10 +49,11 @@ In addition, you will find
 - A procedure and some declarations to compute and visualize an improved tour constructed by repetitively swapping the next arc in the (modified) tour with that neighbor arc which gives the largest distance improvement, until the iteration limit is reached or a full cycle over the tour gives no further improvement.
 
 
-Mathematical Model
-------------------
+MIP
+^^^^
 
-This AIMMS project illustrates the use of a semi-continuous variable. A semi-continuous variable is either zero or within a certain range. This type of variables can be used in conditions like, whenever there is a transport this transport has a minimum size. 
+This AIMMS project illustrates the use of a semi-continuous variable. A semi-continuous variable is either zero or within a certain range. 
+This type of variables can be used in conditions like, whenever there is a transport this transport has a minimum size. 
 
 +-----+------------------------------------------------------+-------------------------------------------+
 |       Contract Allocation Problem                                                                      |
@@ -74,6 +81,10 @@ This AIMMS project illustrates the use of a semi-continuous variable. A semi-con
 
 Language 
 --------
+
+Rest API
+^^^^^^^^^^^^^^^^^^^^
+
 
 Case management.
 ^^^^^^^^^^^^^^^^^^^^
