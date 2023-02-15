@@ -111,14 +111,18 @@ Note precise up to 1 second.
 
 AIMMS Procedure :aimms:procedure:`ScheduleAt`
 
+Stopwatch Library
+^^^^^^^^^^^^^^^^^^
+
+To compare the execution time for each solve, 
 
 WebUI Features
 --------------
 
-Please ref article 572.
+**Please ref article 572.**
 
-
-On input page, if you click around the graphs, a highlighted cell will appear identifying the last clicked element. The results are displayed in a combination chart (stacked bar chart).
+This project you will find many 'hidden' and interesting features, for example, by right clicking on any node, you will be able to delete it specificly. 
+The status bar here is used to let the user know when the iteration run is in progress. The "Help" side panels document some of those features.   
 
 The following WebUI features are used:
 
@@ -128,8 +132,6 @@ The following WebUI features are used:
 
 - `Workflow <https://documentation.aimms.com/webui/workflow-panels.html>`_
 
-- `Table Widget <https://documentation.aimms.com/webui/table-widget.html>`_
-
 - `Combination Chart Widget <https://documentation.aimms.com/webui/combination-chart-widget.html>`_
 
 - `Page Actions <https://documentation.aimms.com/webui/page-menu.html>`_ 
@@ -138,13 +140,7 @@ The following WebUI features are used:
 
 - `Scalar (and Compact) Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
-- `List Widget <https://documentation.aimms.com/webui/list-widget.html#list-widget>`_  (Where?)
-
 - `Dialog Page <https://documentation.aimms.com/webui/dialog-pages.html>`_ 
-
-- `Download Widget <https://documentation.aimms.com/webui/download-widget.html>`_ (Where?)
-
-- `Selection Box Widget <https://documentation.aimms.com/webui/selection-box-widget-v2.html>`_ 
 
 
 UI Styling
@@ -152,31 +148,169 @@ UI Styling
 Below there are the css files you will find with comments on what they change. 
 
 .. tab-set::
+    .. tab-item:: annotations.css
+
+      .. code-block:: css
+         :linenos:
+
+         .annotation-node-done{
+            fill: var(--secondary);
+         }
+         .annotation-node-running{
+            fill: var(--secondary2);
+         }
+    
+    .. tab-item:: body.css
+
+      .. code-block:: text
+         :linenos:
+
+         /*Add logo on the background*/
+         .scroll-wrapper--pagev2 .page-container {
+            content: " ";
+            background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
+         }
+
+         /*Changing tittle to be uppercase*/
+         .title-addon {
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px var(--primaryDark);
+            color: whitesmoke;
+         }
+         
+         /*Changing button font*/
+         .ui-widget, .ui-widget button, .ui-widget input, .ui-widget select, .ui-widget textarea {
+            font-family: var(--font_headers),Montserrat,Roboto,Arial,Helvetica,sans-serif; 
+         }
+
+         /*Changing button size*/
+         .aimms-widget[data-widget\.uri="btn_addThisCity"]  .ui-button,
+         .aimms-widget[data-widget\.uri="btn_addByCountry"]  .ui-button,
+         .aimms-widget[data-widget\.uri="btn_addByLimity"]  .ui-button  {
+            width: 40px;
+         }
+
+
     .. tab-item:: colors.css
 
       .. code-block:: css
          :linenos:
 
          :root {
-            --primary: #3DDAB4;
-            --primaryDark: #00B569;
-            --primary90Transparent: #3ddab33b;
+            --primaryLight: #00A0C8;
+            --primary: #0082AA;
+            --primaryDark: #0A5078;
+            --secondaryDarker: #A00028;
+            --secondary: #C80A50;
+            --secondary2: #DC9600;
 
+            --bg_app-logo: 15px 50% / 50px 50px no-repeat url(/app-resources/resources/images/traveling.png);
+            --spacing_app-logo_width: 65px;
 
-            --color_bg_button_primary: var(--primaryDark);
-            --color_bg_button_primary_hover: var(--primary);
+            --color_border-divider_themed: var(--primary);
             --color_text_edit-select-link: var(--primaryDark);
+            --color_text_edit-select-link_hover: var(--primaryLight);
+            --color_bg_edit-select-link_inverted: var(--secondary);
+
+            --color_bg_button_primary: var(--primaryLight);
+            --color_text_button_primary: white;
+            --border_button_primary: 1px solid var(--primaryLight);
+
+            --color_bg_button_primary_hover: var(--primaryLight);
+            --color_text_button_primary_hover: var(--primaryDark);
+            --border_button_primary_hover: 1px solid var(--primaryDark);
+
+            --color_text_button_secondary: var(--secondary);
+            --border_button_secondary: 1px solid var(--secondary);
+            --color_text_button_secondary_hover: var(--primaryDark);
+            --border_button_secondary_hover: 1px solid var(--primaryDark);
+
+            --color_bg_widget-header: var(--primaryDark);
+            --border_widget-header: 3px solid var(--primary);
          }
-    
-    .. tab-item:: icon.css
+
+
+    .. tab-item:: sidePanel.css
 
       .. code-block:: css
          :linenos:
 
-         :root {
-            --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/budgeting.png);
-            --spacing_app-logo_width: 45px;
+         /*Changing label color*/
+         .tag-label>.label {
+            background: var(--primary);
          }
+
+         .sidepanel-container .sidepanel-tab.active {
+            background-color: var(--primaryDark);
+         }
+
+         .sidepanel-container .sidepanel-tab .sidepanel-icon, 
+         .sidepanel-container .sidepanel-tab:hover {
+            color: var(--primaryDark);
+         }
+
+         .sidepanel-container .sidepanel-tab.active{
+            color: var(--color_bg_widget-canvas,#fff);
+         } 
+
+         .sidepanel-container .sidepanel-tab {
+            height: 150px;
+         }
+
+
+    .. tab-item:: textColor.css
+
+      .. code-block:: css
+         :linenos:
+
+         /*Link color*/
+         .ql-snow a {  
+            color: var(--primaryDark);
+         }
+
+         /*Change checkbox color*/
+         input.boolean-cell-editor-contents {
+            accent-color: var(--primaryDark);
+         }
+
+         .aimms-widget .ui-button {
+            text-transform: uppercase;
+         }
+
+         /*Changing tittle to be uppercase*/
+         .title-addon,
+         .tag-label>.label,
+         .ui-dialog .ui-dialog-title,
+         .page-container__dialog-header .title,
+         .sidepanel-header .side-panel__header-text{
+            text-transform: uppercase;
+            text-shadow: 1px 1px 0px var(--primaryDark);
+            color: whitesmoke;
+         }
+
+         .tag-table .grid-viewport .cell:not(.flag-readOnly), html:not(.using-touch) .tag-table .grid-viewport .cell:not(.flag-readOnly) {
+            color: var(--primaryDark);
+         }
+
+         .widget-menu-container .widget-menu-items-wrapper .widget-menu-item .title {
+            color: var(--primaryDark);
+         }
+
+
+    .. tab-item:: widgetAction.css
+
+      .. code-block:: css
+         :linenos:
+
+         .widgetdiv .awf-dock-button .chrome-button.active, .widgetdiv .awf-dock-button .chrome-button.open {
+            background-color: var(--primaryDark);
+            color: #fff;
+         }
+
+         .widget-menu-container .widget-menu-items-wrapper .widget-menu-item:hover {
+            background: var(--primaryDark);
+         }
+
 
     .. tab-item:: workflow.css
 
@@ -184,7 +318,8 @@ Below there are the css files you will find with comments on what they change.
          :linenos:
 
          /*Change color of the active step*/
-         .workflow-panel .step-item.current {
+         .workflow-panel .step-item.current,
+         .workflow-panel.collapse .step-item.current {
             box-shadow: inset 0.3125rem 0 0 var(--primary);
          }
 
@@ -200,143 +335,6 @@ Below there are the css files you will find with comments on what they change.
             color: var(--primaryDark);
             border: 1px solid var(--primaryDark);
          }
-
-    .. tab-item:: textColor.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change table text color*/
-         .tag-table .grid-viewport .cell:not(.flag-readOnly), 
-         html:not(.using-touch) .tag-table .grid-viewport .cell:not(.flag-readOnly) {
-            color: var(--primaryDark);
-         }
-
-         /*Change scalar text color*/
-         .tag-scalar .kpi .value {
-            color: var(--primaryDark);
-         }
-
-         /*Link color*/
-         .ql-snow a {  
-            color: var(--primaryDark);
-         }
-
-         /*Change table default text color*/
-         .tag-table .grid-viewport .cell.flag-default, 
-         html:not(.using-touch) .tag-table .grid-viewport .cell.flag-default {
-            color: white;
-         }
-
-    .. tab-item:: body.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Add image on the background*/
-         .scroll-wrapper--pagev2 .page-container {
-            content: " ";
-            background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
-         }
-
-    .. tab-item:: header.css
-
-      .. code-block:: css
-         :linenos:
-
-         .theme-aimms header.tag-application {
-            border-bottom: 2px solid var(--primary);
-         }
-
-    .. tab-item:: combinationChart.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change color of togglelegend of the combination chart*/
-         .togglelegend-button svg{
-            fill: var(--primaryDark);
-         }
-
-         .togglelegend-button-active:hover svg g, .togglelegend-button-active svg g {
-            fill: var(--primary);    
-         }
-
-    .. tab-item:: sidePanel.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change color after tab click*/
-         .sidepanel-container .sidepanel-tab.active {
-            background-color: var(--primary);
-         }
-
-         /*Change letter color on hover*/
-         .sidepanel-container .sidepanel-tab.active:hover {
-            color: white;
-         }
-
-         /*Change icon color*/
-         .sidepanel-container .sidepanel-tab .sidepanel-icon,
-         .sidepanel-container .sidepanel-tab:hover {
-            color: var(--primary);
-         }
-
-         /*Change color after all tabs*/
-         .sidepanel-container .sidepanel-tabs-container:after {
-            background: var(--primary);
-         }
-
-         /*Change the color below sidepanel tabs*/
-         .sidepanel-container {
-            background-color: rgba(249, 249, 249, 0.438)
-         }
-   
-    .. tab-item:: button.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change color of the busy button*/
-         .veil-msg.state-busy .ui-button {
-            background-color: var(--primary);
-         }
-   
-    .. tab-item:: pageAction.css
-
-      .. code-block:: css
-         :linenos:
-
-         .page-action-v2 .page-action-menu,
-         .page-action-v2 .page-action-menu.open {
-            background: var(--primaryDark);
-         }
-
-         .page-action-v2 .page-action-menu:hover,
-         .page-action-v2 .page-action-menu:hover {
-            background: var(--primary);
-         }
-
-         .page-action-v2 .page-action-holder .page-action-item .page-action-icon, 
-         .page-action-v2 .page-action-holder .page-action-item .page-action-letter {
-            background-color: var(--primaryDark);
-         }
-
-         .page-action-v2 .page-action-holder .page-action-item .page-action-icon:hover, 
-         .page-action-v2 .page-action-holder .page-action-item .page-action-letter:hover {
-            background-color: var(--primary);
-         }
-   
-    .. tab-item:: table.css
-
-      .. code-block:: css
-         :linenos:
-
-         .tag-table.focused .focus-cell {
-            box-shadow: inset 0 0 0 1px var(--primaryDark);
-         }
-
 
 
 Minimal Requirements
