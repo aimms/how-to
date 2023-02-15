@@ -101,7 +101,7 @@ to
 .. code-block:: css
     :linenos:
 
-    .tag-button[data-name*="example"]::before
+    .tag-button[data-widget\.uri="example"]::before
 
 where *example* is the 'widget.uri' value. Save and refresh the WebUI page. 
 
