@@ -3,7 +3,7 @@ Traveling Salesman
 
 .. meta::
    :description: This example illustrates some of AIMMS control flow statements by means of the traveling salesman 2-opt heuristic.
-   :keywords: Algorithm, 2-opt heuristic, network object, traveling salesman problem, GMP, Progress Window.
+   :keywords: Algorithm, 2-opt heuristic, traveling salesman problem, GMP, Lazy constraint callback, subtour elimination constraints.
 
 .. image:: https://img.shields.io/badge/AIMMS_4.88-ZIP:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation/archive/refs/heads/main.zip
@@ -54,6 +54,12 @@ MIP
 
 This AIMMS project illustrates the use of a semi-continuous variable. A semi-continuous variable is either zero or within a certain range. 
 This type of variables can be used in conditions like, whenever there is a transport this transport has a minimum size. 
+
+In this example the (symmetric) Traveling Salesman Problem (TSP) is formulated using subtour elimination constraints. 
+The amount of subtour elimination constraints is exponential, and therefore they are added using a lazy constraint callback. 
+Lazy constraints are constraints that should be satisfied by any solution to the problem, but they are not generated upfront. 
+The lazy constraint callback checks whether the incumbent solution found by the solver contains subtours. 
+If yes, then subtour elimination constraints are added that forbid these subtours. If not, then the incumbent solution forms a true solution of the TSP problem, as it contains only one tour.
 
 +-----+------------------------------------------------------+-------------------------------------------+
 |       Contract Allocation Problem                                                                      |
@@ -340,19 +346,22 @@ Below there are the css files you will find with comments on what they change.
 Minimal Requirements
 --------------------   
 
-`AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
+`AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient to run the Heuristics, call the Rest API and check the available scenarios. 
+However, to run the MIP problem, you will need to buy a Developer License. 
 
-The exact method used, uses lazy constraints. As far as I know, this is only available with CPLEX and Gurobi.
+You will also need an API key from `PositionStack api <https://positionstack.com>`_. To receive an free API key to test, please sign up to the free plan `here <https://positionstack.com/signup>`_. 
+
 
 References
 -----------
 
-#.  Generalization of TSP to vehicle routing: https://how-to.aimms.com/C_Developer/Sub_Mathematical_Modeling/Sub_VRP/index.html
+#.  Generalization of TSP to `Vehicle Routing Problem <https://how-to.aimms.com/C_Developer/Sub_Mathematical_Modeling/Sub_VRP/index.html>`_
 
-#.  WinUI app for opt-2 heuristic: Marcel Hunting. (Old 397 article)
+#.  `Solve with Lazy Constraints <https://how-to.aimms.com/Articles/126/126-TSP-Lazy-Constraints.html#solve-with-lazy-constraints>`_ - Marcel Hunting. 
 
-#.  WinUI app for lazy constraints: Marcel Hunting. https://how-to.aimms.com/Articles/126/126-TSP-Lazy-Constraints.html#solve-with-lazy-constraints
+#. Applegate, D.L., R. E. Bixby, V. Chvátal, and W. J. Cook, The Traveling Salesman Problem: A Computational Study, Princeton University Press, Princeton, 2007
 
+.. seealso:: Here you will find several euclidean TSP instances from TSPLIB at: http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/
 
 .. spelling:word-list::
 
