@@ -5,10 +5,25 @@
    :description: How to measure efficiency of procedures with StopWatch function.
    :keywords: efficient, time, execute, stopwatch, watch, clock
 
+.. image:: https://img.shields.io/badge/AIMMS_4.88-ZIP:_ProfilerRunCompare-blue
+   :target: https://github.com/aimms/profiler-run-compare/archive/refs/heads/main.zip
+
+.. image:: https://img.shields.io/badge/AIMMS_4.88-Github:_ProfilerRunCompare-blue
+   :target: https://github.com/aimms/profiler-run-compare
+
+.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
+   :target: https://community.aimms.com/aimms-developer-12/profilerruncompare-app-1328
+
 .. image:: images/icons8-stopwatch-512.png
    :scale: 30
    :align: right
    :alt: Measure Execution Time
+
+Introduction
+--------------
+
+Instructions
+----------------
 
 ``MainExecution`` in this procedure shows the usage of the procedures built in the ``stopwatchLibrary`` library.
 
@@ -35,8 +50,8 @@ This library exposes a procedure and a function:
 
 #.  ``fnc_elapsed`` Return the wall clock time elapsed in seconds since the last call to ``pr_start()``
 
-History
---------
+Release Notes
+--------------
 
 * In 2011, Guido Diepen developed the first Stopwatch section and blogged about it.
 
@@ -45,6 +60,11 @@ History
   * ease even further the adding of the functionality to an application, and
 
   * to cater for multi timezone support, see option Use_UTC_forcaseandstartenddate
+
+Minimal Requirements
+----------------------
+
+`AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example. 
 
 
 
