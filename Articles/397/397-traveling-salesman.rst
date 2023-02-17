@@ -89,7 +89,7 @@ Language
 --------
 
 Rest API
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 
 Case management.
@@ -103,16 +103,36 @@ Case management.
 Haversine
 ^^^^^^^^^^
 
-Ref haversine formula.
+Input data for this project is the exact latitude and longitude of cities in the world. So, direct distance between the nodes will not provide a good aproximated distance. So here, is used the `Haversine formula <https://en.wikipedia.org/wiki/Haversine_formula>`_.
 
-#.  `Haversine code <https://rosettacode.org/wiki/Haversine_formula>`_
+Haversine formula is an equation important in navigation, 
+giving great-circle distances between two points on a sphere from their longitudes 
+and latitudes `[1] <https://how-to.aimms.com/Articles/397/397-traveling-salesman#references.html>`_.  
 
-#.  :doc:`previous article<../153/153-external-haversine>`
+The parameter that holds its value is: 
 
+.. code-block:: aimms
+
+   Parameter p_def_haversineDistance {
+      IndexDomain: (i_node1,i_node2) | i_node1 <> i_node2;
+      Text: "Distance from city i to city j";
+      Definition: {
+         ((6371.0 ) 
+         *   arccos(
+                     cos(radians(90 - P_latitude(i_node1)))
+                     * cos(radians(90 - P_latitude(i_node2))) 
+                     + 
+                     sin(radians(90 - P_latitude(i_node1)))
+                     * sin(radians(90 - P_latitude(i_node2)))
+                     * cos(radians(p_longitude(i_node1) - p_longitude(i_node2)))))
+      }
+   }
+
+.. seealso:: In this :doc:`article<../153/153-external-haversine>` there is another way to use Haversine by calling an external procedure on Visual Code. 
 
 ScheduleAt
 ^^^^^^^^^^
-
+**Please ref article 572.**
 Note precise up to 1 second.
 
 AIMMS Procedure :aimms:procedure:`ScheduleAt`
@@ -120,12 +140,11 @@ AIMMS Procedure :aimms:procedure:`ScheduleAt`
 Stopwatch Library
 ^^^^^^^^^^^^^^^^^^
 
-To compare the execution time for each solve, 
+To compare the execution time for each solve, Stopwatch Library was used, 
+for more documentation click `here <https://how-to.aimms.com/Articles/574/574-stopwatch-library.html>`_. 
 
 WebUI Features
 --------------
-
-**Please ref article 572.**
 
 This project you will find many 'hidden' and interesting features, for example, by right clicking on any node, you will be able to delete it specifically. 
 The status bar here is used to let the user know when the iteration run is in progress. The "Help" side panels document some of those features.   
@@ -138,15 +157,21 @@ The following WebUI features are used:
 
 - `Workflow <https://documentation.aimms.com/webui/workflow-panels.html>`_
 
-- `Combination Chart Widget <https://documentation.aimms.com/webui/combination-chart-widget.html>`_
+- `Map Widget <https://documentation.aimms.com/webui/map-widget.html>`_
 
-- `Page Actions <https://documentation.aimms.com/webui/page-menu.html>`_ 
-
-- `Side Panel <https://documentation.aimms.com/webui/side-panels-grd-pages.html#side-panel-grid-pages>`_
+- `Button Widget <https://documentation.aimms.com/webui/button-widget.html>`_
 
 - `Scalar (and Compact) Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
-- `Dialog Page <https://documentation.aimms.com/webui/dialog-pages.html>`_ 
+- `Side Panel <https://documentation.aimms.com/webui/side-panels-grd-pages.html#side-panel-grid-pages>`_
+
+- `Page Actions <https://documentation.aimms.com/webui/page-menu.html>`_ 
+
+- `Item Actions <https://documentation.aimms.com/webui/widget-options.html#item-actions>`_
+
+- `Combination Chart Widget <https://documentation.aimms.com/webui/combination-chart-widget.html>`_
+
+- `Status Bar <https://documentation.aimms.com/webui/status-bar.html>`_
 
 
 UI Styling
@@ -354,6 +379,8 @@ You will also need an API key from `PositionStack api <https://positionstack.com
 
 References
 -----------
+
+#.  `Haversine Theory <https://rosettacode.org/wiki/Haversine_formula>`_
 
 #.  Generalization of TSP to `Vehicle Routing Problem <https://how-to.aimms.com/C_Developer/Sub_Mathematical_Modeling/Sub_VRP/index.html>`_
 
