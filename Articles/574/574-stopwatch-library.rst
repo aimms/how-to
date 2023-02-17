@@ -12,9 +12,9 @@
    :target: https://github.com/aimms/stopwatch-library
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-developer-12/profilerruncompare-app-1328
+   :target: https://community.aimms.com/aimms-developer-12/stopwatch-library-1426
 
-.. image:: images/icons8-stopwatch-512.png
+.. image:: images/chronometer-watch.png
    :scale: 30
    :align: right
    :alt: Measure Execution Time
