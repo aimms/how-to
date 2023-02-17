@@ -21,7 +21,7 @@
 
 Introduction
 --------------
-This toolkit library is used to facilitate measuring specific blocks of code by using two prodecures, one to start the timer, and one to retrieve the execution time. 
+This toolkit library is used to facilitate measuring specific blocks of code by using two procedures, one to start the timer, and one to retrieve the execution time. 
 
 .. seealso:: In this `article <https://how-to.aimms.com/Articles/144/144-Stopwatch.html>`_ deeper explanations about how to measure execution time with and without this library can be found. 
 
