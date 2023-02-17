@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<References AIMMS_Version="4.87.7.5 (x64)">
-	<MainProject Path="MainProject" />
-	<Library Path="StopwatchLibrary" />
-</References>

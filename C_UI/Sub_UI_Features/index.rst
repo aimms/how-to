@@ -14,6 +14,7 @@ This section contains explanations of various UI features available when buildin
 .. toctree::
    :maxdepth: 1
 
+   /Articles/572/572-progress-webui
    /Articles/531/531-working-with-wonderful-webui-widgets
    /Articles/531/531-create-wonderful-webui-widgets
    /Articles/207/207-iframe-widget
@@ -29,6 +30,7 @@ This section contains explanations of various UI features available when buildin
    /Articles/512/512-image-widget-refresh
    /Articles/549/549-hiding-default-values
    /Articles/566/566-scalar-border-annotation
+   /Articles/568/568-disable-standard-webui-functions
 
 
 

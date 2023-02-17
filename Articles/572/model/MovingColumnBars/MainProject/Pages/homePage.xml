@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<Page Version="4000" TimeStamp="2023-02-13 10:51:13">
+	<PageEditSize Type="Inherited" />
+	<ProjectUUID>131A1508-61F8-48F0-9BDD-9DBD8EE8B2DC</ProjectUUID>
+	<TemplatesTabOrderPosition>1</TemplatesTabOrderPosition>
+	<Background Inherited="true" />
+	<PageObject Type="Bar Chart">
+		<Location top="30" left="24" bottom="570" right="750" />
+		<TabOrder>3</TabOrder>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<ColorScheme Number="0" />
+		<Title>true</Title>
+		<Legend>true</Legend>
+		<Y-Labels>true</Y-Labels>
+		<X-Labels>true</X-Labels>
+		<HorizontalGridLines>true</HorizontalGridLines>
+		<StatusLine>true</StatusLine>
+		<YRange Automatic="false">
+			<Lower>p_barLow</Lower>
+			<Upper>p_barHigh</Upper>
+		</YRange>
+		<ExplicitIdentifier>
+			<Identifier>p_level( i_bar )</Identifier>
+			<Color>ep_color( i_bar )</Color>
+		</ExplicitIdentifier>
+		<FillWithColor>true</FillWithColor>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="30" left="768" bottom="138" right="1026" />
+		<TabOrder>1</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Simulate"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_simulatingWinUI</Procedure>
+				<AbortOnError>true</AbortOnError>
+				<BackgroundRun>true</BackgroundRun>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<PageObject Type="Button">
+		<Location top="156" left="768" bottom="264" right="1026" />
+		<TabOrder>2</TabOrder>
+		<LeaveOnEnter>false</LeaveOnEnter>
+		<ButtonType>Text</ButtonType>
+		<Title>"Stop"</Title>
+		<Font GUID="00000000-0000-0000-0000-000000000001" Name="Main Font" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>pr_stopSimulatingWinUI</Procedure>
+				<AbortOnError>true</AbortOnError>
+			</Action>
+		</ActionSequence>
+	</PageObject>
+	<UsedReferences>
+		<Model>
+			<Symbol>p_barHigh</Symbol>
+			<Symbol>p_barLow</Symbol>
+			<Symbol>p_level</Symbol>
+			<Symbol>pr_simulatingWinUI</Symbol>
+			<Symbol>pr_stopSimulatingWinUI</Symbol>
+			<Symbol>i_bar</Symbol>
+			<Symbol>ep_color</Symbol>
+		</Model>
+	</UsedReferences>
+</Page>

@@ -17,7 +17,7 @@ have the profiler available while developing an AIMMS application.
 
 In addition, you can query the profiler using the procedure :aimms:func:`ProfilerCollectAllData`.
 
-.. seealso:: See all related functions related to Profiler in `AIMMS Function Reference - Development Support <https://documentation.aimms.com/functionreference/development-support/profiler-and-debugger/index.html>`_
+.. seealso:: See all related functions related to Profiler in `AIMMS Function Reference - Development Support <https://documentation.aimms.com/functionreference/development-support/profiler-and-debugger/index.html>`_.
 
 However, using the AIMMS Profiler has two rather minor disadvantages when measuring execution time:
 
@@ -27,17 +27,32 @@ However, using the AIMMS Profiler has two rather minor disadvantages when measur
     or the measuring of a piece of code executed when some condition is true.
 
 When fine control of measured execution time is needed, the `time functions of AIMMS can be used <https://documentation.aimms.com/functionreference/elementary-computational-operations/time-functions/>`_. 
-Based on those funtions a Stopwatch Library was created, more details and download here. 
+Based on those functions a `Stopwatch Library <https://how-to.aimms.com/Articles/574/574-stopwatch-library.html>`_ was created, more details and download here. 
 
 Example
 -------
 
-This example is developed on Traveling Salesman example by using Stopwatch Library.
+The `Stopwatch Library <https://how-to.aimms.com/Articles/574/574-stopwatch-library.html>`_ is used on `Traveling Salesman <https://how-to.aimms.com/Articles/397/397-traveling-salesman.html>`_ to measure the execution time of each type of solve. 
+The `Traveling Salesman <https://how-to.aimms.com/Articles/397/397-traveling-salesman.html>`_ procedures that use stopwatch functions are:
 
+* ``pr_findInitialTour``
 
+* ``pr_improveTourCyclic``
 
+* ``pr_improveTourSimultaneous``
 
+* ``pr_solveModel``
 
+* ``pr_solveRelaxedModel``
 
+And the method to use is simple:
 
+.. code-block:: aimms
+   :linenos:
+
+   stopwatch::pr_start() ;
+   
+   ! Any code
+
+   p_elapsedTime := stopwatch::fnc_elapsed();
 
