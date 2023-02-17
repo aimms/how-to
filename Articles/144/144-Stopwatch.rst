@@ -32,12 +32,27 @@ Based on those functions a Stopwatch Library was created, more details and downl
 Example
 -------
 
-This example is developed on Traveling Salesman example by using Stopwatch Library.
+The Stopwatch Library is used on Traveling Salesman to measure the execution time of each type of solve. 
+The Traveling Salesman procedures that use stopwatch functions are:
 
+* ``pr_findInitialTour``
 
+* ``pr_improveTourCyclic``
 
+* ``pr_improveTourSimultaneous``
 
+* ``pr_solveModel``
 
+* ``pr_solveRelaxedModel``
 
+And the method to use is simple:
 
+.. code-block:: aimms
+   :linenos:
+
+   stopwatch::pr_start() ;
+   
+   ! Any code
+
+   p_elapsedTime := stopwatch::fnc_elapsed();
 
