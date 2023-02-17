@@ -1,0 +1,188 @@
+## ams_version=1.0
+
+Model Main_DexExternalBinding {
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: {
+				century->s : #-># * 3153600000,
+				year->s : #-># * 31536000,
+				month->s : #-># * 2628000,
+				week->s : #-># * 604800,
+				day->s : #-># * 86400,
+				hour->s : #-># * 3600,
+				minute->s : #-># * 60,
+				second->s : #-># ,
+				tick->s : #-># / 100
+			}
+			Comment: "Expresses the value for the duration of periods.";
+		}
+	}
+	Section Get_Data_Filenames {
+		DeclarationSection Data_Filename_Declarations {
+			Set s_dataFileNumbers {
+				SubsetOf: Integers;
+				Index: i_dataFileNo;
+			}
+			StringParameter sp_dataFileNames {
+				IndexDomain: i_dataFileNo;
+			}
+		}
+		Procedure pr_getDataFilenames {
+			Body: {
+				DirectoryGetFiles(
+					directory       :  "data", 
+					filter          :  "*.json", 
+					filenames       :  sp_dataFileNames, 
+					recursive       :  0);
+			}
+		}
+	}
+	Section Get_Data_via_scalar_reads {
+		DeclarationSection Additional_declarations_for_scalar_reading {
+			Parameter p_prop1_scalar;
+			Parameter p_prop2_scalar;
+			StringParameter sp_prop3_scalar;
+		}
+		Procedure pr_getDataViaScalarReads {
+			Body: {
+				dex::AddMapping(
+					mappingName :  "streamScalarRead", 
+					mappingFile :  "Mappings/streamPropertiesScalarMappingJSON.xml");
+				
+				for i_dataFileNo do
+					sp_elemName := SubString(sp_dataFileNames(i_dataFileNo),1,StringLength(sp_dataFileNames(i_dataFileNo))-5);
+					SetElementAdd(
+						Setname :  s_streams, 
+						Elempar :  ep_anotherStream, 
+						Newname :  sp_elemName);
+				
+					dex::ReadFromFile(
+						dataFile         :  "data/" + sp_dataFileNames(i_dataFileNo), 
+						mappingName      :  "streamScalarRead");
+					p_prop1(ep_anotherStream) := p_prop1_scalar ;
+					p_prop2(ep_anotherStream) := p_prop2_scalar ;
+					sp_prop3(ep_anotherStream) := sp_prop3_scalar ;
+				
+				endfor ;
+			}
+			StringParameter sp_elemName;
+		}
+	}
+	DeclarationSection Streams_and_their_properties {
+		Set s_streams {
+			Index: i_stream;
+		}
+		ElementParameter ep_anotherStream {
+			Range: s_streams;
+		}
+		StringParameter p_prop1 {
+			IndexDomain: i_stream;
+		}
+		StringParameter p_prop2 {
+			IndexDomain: i_stream;
+		}
+		StringParameter sp_prop3 {
+			IndexDomain: i_stream;
+		}
+	}
+	Procedure pr_getDataViaExternalBinding {
+		Body: {
+			dex::AddMapping(
+				mappingName :  "streamExternalRead", 
+				mappingFile :  "Mappings/streamPropertiesExternalMappingJSON.xml");
+			
+			for i_dataFileNo do
+				sp_elemName := SubString(sp_dataFileNames(i_dataFileNo),1,StringLength(sp_dataFileNames(i_dataFileNo))-5);
+				SetElementAdd(
+					Setname :  s_streams, 
+					Elempar :  ep_anotherStream, 
+					Newname :  sp_elemName);
+			
+				dex::ReadFromFile(
+					dataFile         :  "data/" + sp_dataFileNames(i_dataFileNo), 
+					mappingName      :  "streamExternalRead");
+			
+			endfor ;
+		}
+		StringParameter sp_elemName;
+	}
+	Section Application_initialization_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+	Section Leverage_WebUI {
+		StringParameter sp_homePageSecondaryActions {
+			IndexDomain: (webui::indexPageExtension,webui::indexPageActionSpec);
+			Definition: {
+				{
+					( '1', 'displaytext' ) : "Clean",  
+					( '1', 'icon'        ) : "aimms-broom", 
+					( '1', 'procedure'   ) : "pr_clean", 
+					( '1', 'state'       ) : "Active",
+				
+					( '2', 'displaytext' ) : "Get files",  
+					( '2', 'icon'        ) : "aimms-cog3", 
+					( '2', 'procedure'   ) : "pr_getDataFilenames", 
+					( '2', 'state'       ) : "Active",
+				
+					( '3', 'displaytext' ) : "Reading slices DIY",  
+					( '3', 'icon'        ) : "aimms-car", 
+					( '3', 'procedure'   ) : "pr_getDataViaScalarReads", 
+					( '3', 'state'       ) : "Active",
+				
+					( '4', 'displaytext' ) : "Reading slidces using ExternalBinding",  
+					( '4', 'icon'        ) : "aimms-airplane2", 
+					( '4', 'procedure'   ) : "pr_getDataViaExternalBinding", 
+					( '4', 'state'       ) : "Active"
+				
+				}
+			}
+		}
+	}
+	Procedure MainExecution {
+		Body: {
+			
+			
+			for i_dataFileNo do
+			endfor ;
+		}
+	}
+	Procedure pr_clean {
+		Body: {
+			Empty s_streams ;
+		}
+	}
+}
