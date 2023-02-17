@@ -27,7 +27,7 @@ However, using the AIMMS Profiler has two rather minor disadvantages when measur
     or the measuring of a piece of code executed when some condition is true.
 
 When fine control of measured execution time is needed, the `time functions of AIMMS can be used <https://documentation.aimms.com/functionreference/elementary-computational-operations/time-functions/>`_. 
-Based on those funtions a Stopwatch Library was created, more details and download here. 
+Based on those functions a Stopwatch Library was created, more details and download here. 
 
 Example
 -------

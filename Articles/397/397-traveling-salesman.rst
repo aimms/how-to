@@ -127,7 +127,7 @@ WebUI Features
 
 **Please ref article 572.**
 
-This project you will find many 'hidden' and interesting features, for example, by right clicking on any node, you will be able to delete it specificly. 
+This project you will find many 'hidden' and interesting features, for example, by right clicking on any node, you will be able to delete it specifically. 
 The status bar here is used to let the user know when the iteration run is in progress. The "Help" side panels document some of those features.   
 
 The following WebUI features are used:
