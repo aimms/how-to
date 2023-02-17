@@ -98,10 +98,11 @@ Go back to the ``button.css`` file and change from
 
 to
 
-.. code-block:: css
+.. code-block:: text
     :linenos:
+    
+    .tag-button[data-widget\.uri="example"]::before
 
-    .tag-button[data-name*="example"]::before
 
 where *example* is the 'widget.uri' value. Save and refresh the WebUI page. 
 

@@ -33,12 +33,12 @@ Single machine
 Compute server
 ------------------
 
-If you have a `Gurobi compute server license <https://www.gurobi.com/documentation/8.1/quickstart_linux/setting_up_and_using_a_com.html>`_, follow the instructions depending on whether you are using AIMMS on a Gurobi client machine or the server itself. 
+If you have a `Gurobi compute server license <https://www.gurobi.com/documentation/10.0/quickstart_linux/setting_up_and_using_a_com.html>`_, follow the instructions depending on whether you are using AIMMS on a Gurobi client machine or the server itself. 
 
 Client on a different machine
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Create a Gurobi client license by following the instructions on `Gurobi: License File <https://www.gurobi.com/documentation/8.1/remoteservices/license_file.html>`_ 
+#. Create a Gurobi client license by following the instructions on `Gurobi: License File <https://www.gurobi.com/documentation/10.0/remoteservices/client_license_file.html>`_ 
 #. Place this file in the folder ``C:\\gurobi\\``
 
 The next steps are same as for a single machine license described in the previous section. 
@@ -46,7 +46,7 @@ The next steps are same as for a single machine license described in the previou
 Client is same as server machine
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you are running AIMMS on the same machine as Gurobi remote services, you will need to create a separate client license file again as described  on `Gurobi : Creating a Compute Server <https://www.gurobi.com/documentation/8.1/quickstart_windows/creating_a_compute_server_.html>`_
+If you are running AIMMS on the same machine as Gurobi remote services, you will need to create a separate client license file again as described  on `Gurobi : Creating a Compute Server <https://www.gurobi.com/documentation/10.0/quickstart_windows/creating_a_compute_server_.html>`_
 
 #. Place this license file in a different location than `C:\\gurobi\\`, say `C:\\Users\\Name\\Documents\\gurobi.lic` 
 #. Set the environment variable GRB_LICENSE_FILE to the file in `C:\\Users\\Name\\Documents\\`
