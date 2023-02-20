@@ -1,7 +1,7 @@
 Showing progress of long running algorithms
 =============================================
 
-Most users can be re-assured that a long running algorithm finishes by showing the progress that is being made.
+Most users can be re-assured that a long running algorithm is working by showing the progress that is being made.
 There are various ways of doing this. This article gives a brief overview and a detailed example of showing progress in data for the WebUI.
 
 WinUI:
@@ -89,6 +89,12 @@ Here `pr_scheduleOver` is a small wrapper around `ScheduleAt`, that schedules in
 
 For the details see this :download:`AIMMS 4.91 project download <model/MovingColumnBars.zip>` 
 
+A screenshot of this app: 
+
+.. figure:: images/MovingColumnBars.png
+    :align: center
+
+This app makes an arbitrary change in the levels by -1 or by +1 every second.
 
 References
 -----------
