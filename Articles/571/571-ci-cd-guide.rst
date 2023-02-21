@@ -1,12 +1,15 @@
+Using CI/CD with AIMMS
+======================
+
 What is CI/CD?
-===============
+--------------
 CI/CD introduces ongoing automation and continuous monitoring throughout the lifecycle of apps, from integration and testing phases to delivery and deployment. These are desirable characteristics to have in application development and can be implemented with the context of AIMMS. The below description seeks to provide the required steps to create a CI/CD pipeline for your AIMMS projects. Given the ample possibility of platforms to implement your pipeline, our guide is agnostic.
 
 Each pipeline can be setup in a way that better suits your companies needs, such as controlling when a new version is published in testing environment and when it will be published in production. This logic is not described below. We also do not discuss the triggers for each automated step, since this will be adapted to your companies context.
 
 
 Prerequisites / Assumptions
-============================
+----------------------------
 
 The source code for your project is kept in a repository that can be accessed by your CI/CD pipeline.
 There is an AIMMS license available on your CI/CD server.
@@ -14,7 +17,7 @@ You are using the AIMMS cloud environment and have the AIMMS Rest API services a
 Some alternatives may be presented below if one of the above is applicable to you
 
 CI - Building an AIMMSPACK
-==========================
+----------------------------
 
 Utilizing the AIMMS command line options, you can automate the process of building an aimmspack to be deployed. This is available for both Windows and Linux OS.
 
@@ -45,7 +48,7 @@ Observation: Using ``--export-to`` is the equivalent to executing the “Export 
 
 
 CI - Unit Test
-=========================
+------------------
 
 An integral part of quality assurance is unit testing. In the context of CI/CD, you may execute previously configured unit tests by using the AIMMS command line options.
 
@@ -73,13 +76,13 @@ Your pipeline can verify the log folder within the project to seek information f
     Unit testing can be an integral part of your development process. This can be achieved by simply running the unit tests when opening and/or closing the application in an development environment using the PostMainInitialization or PreMainTermination. More information on these topics can be found `in this document <https://documentation.aimms.com/language-reference/data-communication-components/data-initialization-verification-and-control/model-initialization-and-termination.html>`_ .
 
 CI - Acceptance testing
-=========================
+----------------------------
 
 Acceptance testing can go beyond running unit tests and includes UI manipulation to test your WebUI application. This requires additional third-party software to which AIMMS does not provide any direct integration or support towards. There are many options available and a simple search for “Web application testing framework” can provide you with options.
 
 
 CI - Scenario testing 
-=========================
+----------------------------
 
 The objective of scenario testing is to load the necessary input data (either a prepared case file or through an integration process), run this scenario, retrieve the results, and validate them. Given that these tests require more time, it is recommended to include them only in necessary steps of your CI/CD pipeline.
 
@@ -95,7 +98,7 @@ Using a scenario test can also validate that there are no new bugs causing infea
 
 
 CI - Integration testing 
-=========================
+----------------------------
 
 Integration testing involves validating that your application within the AIMMS Cloud environment is correctly integrated to other systems/solutions.
 
@@ -114,7 +117,7 @@ Some examples are
 
 
 CI - Testing within the cloud environment
-==========================================
+------------------------------------------------
 
 You may choose to conduct the above tests within the cloud environment. Do do so, you will be required to publish the application on the cloud and run specific procedures.
 
@@ -126,13 +129,13 @@ The general steps required to achieve this is
 We recommend that you do not make the test versions of your application accessible to end-users until they have been proved successful in the acceptance tests.
 
 CD - Release
-=============
+--------------
 
 Depending on how your pipeline is configured, releasing to production may require rebuilding your aimmspack. You can follow the same steps above.
 Release and feature notes, as well as version number control (which could not repeat itself) are also best practices for this.
 
 CD - Deployment on the cloud
-============================
+------------------------------
 
 Publishing and deployment of the application on the cloud can be achieved via the AIMMS PRO Rest API. Please follow the information on the `app management documenatation <https://documentation.aimms.com/pro/rest-api.html#managing-apps>`_ .
 
