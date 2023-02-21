@@ -98,7 +98,7 @@ Using a scenario test can also validate that there are no new bugs causing infea
 
 
 CI - Integration testing 
-----------------------------
+-------------------------------
 
 Integration testing involves validating that your application within the AIMMS Cloud environment is correctly integrated to other systems/solutions.
 
