@@ -24,12 +24,10 @@ Utilizing the AIMMS command line options, you can automate the process of buildi
 
 Windows example:
 .. code-block:: console
-
     Aimms.exe --export-to myaimmspack.aimmspack  “PROJECTPATH/PROJECTNAME.aimms”
 
 Linux example:
 .. code-block:: bash
-
     AimmsCmd --export-to myaimmspack.aimmspack  “PROJECTPATH/PROJECTNAME.aimms”
 
 More information can be found here at `AIMMS command line options <https://documentation.aimms.com/user-guide/miscellaneous/calling-aimms/aimms-command-line-options.html>`_ .
@@ -55,12 +53,10 @@ You can use the --run-only argument to specify a procedure to be run within AIMM
 
 Windows example:
 .. code-block:: console
-
     Aimms.exe “PROJECTPATH/PROJECTNAME.aimms” --run-only proc_unitTests
 
 Linux example:
 .. code-block:: bash
-
     AimmsCmd “PROJECTPATH/PROJECTNAME.aimms” --run-only proc_unitTests
 
 
