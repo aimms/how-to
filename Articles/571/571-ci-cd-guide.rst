@@ -103,6 +103,7 @@ CI - Integration testing
 Integration testing involves validating that your application within the AIMMS Cloud environment is correctly integrated to other systems/solutions.
 
 Some examples are
+
 * Running specific procedures in AIMMS that import/export data
 
   * Does the data import correctly? Does the output data export correctly? Testing networking.
