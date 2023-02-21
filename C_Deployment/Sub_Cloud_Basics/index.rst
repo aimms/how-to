@@ -18,3 +18,5 @@ Cloud Platform Basics
    :maxdepth: 1
 
    /Articles/159/159-exchange-data-with-cloud
+   /Articles/571/571-ci-cd-guide
+   
