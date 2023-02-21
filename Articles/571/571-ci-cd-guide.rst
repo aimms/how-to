@@ -66,7 +66,7 @@ Linux example:
 
 You can find more information on using the AIMMS unit test library can be found in this guide on `effective use of the unit test library <https://how-to.aimms.com/Articles/216/216-effective-use-unit-test-library.html#test-driven-development-using-the-aimmsunittest-library>`_ and `in our documentation <https://documentation.aimms.com/unit-test/index.html#unit-test-library>`_ .
 
-Your pipline can verify the log folder within the project to seek information from the generated xml log file regarding errors or warnings and deciding wether to continue with the deployment or not.
+Your pipeline can verify the log folder within the project to seek information from the generated xml log file regarding errors or warnings and deciding whether to continue with the deployment or not.
 
 .. note::
 
