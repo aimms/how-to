@@ -9,13 +9,9 @@ Prerequisites / Assumptions
 ============================
 
 The source code for your project is kept in a repository that can be accessed by your CI/CD pipeline.
-
 There is an AIMMS license available on your CI/CD server.
-
 You are using the AIMMS cloud environment and have the AIMMS Rest API services available.
-
-* Some alternatives may be presented below if one of the above is applicable to you
-
+Some alternatives may be presented below if one of the above is applicable to you
 
 CI - Building an AIMMSPACK
 ==========================
@@ -23,11 +19,15 @@ CI - Building an AIMMSPACK
 Utilizing the AIMMS command line options, you can automate the process of building an aimmspack to be deployed. This is available for both Windows and Linux OS.
 
 Windows example:
+
 .. code-block:: console
+
     Aimms.exe --export-to myaimmspack.aimmspack  “PROJECTPATH/PROJECTNAME.aimms”
 
 Linux example:
+
 .. code-block:: bash
+
     AimmsCmd --export-to myaimmspack.aimmspack  “PROJECTPATH/PROJECTNAME.aimms”
 
 More information can be found here at `AIMMS command line options <https://documentation.aimms.com/user-guide/miscellaneous/calling-aimms/aimms-command-line-options.html>`_ .
@@ -52,11 +52,15 @@ An integral part of quality assurance is unit testing. In the context of CI/CD, 
 You can use the --run-only argument to specify a procedure to be run within AIMMS (such as the tests).
 
 Windows example:
+
 .. code-block:: console
+
     Aimms.exe “PROJECTPATH/PROJECTNAME.aimms” --run-only proc_unitTests
 
 Linux example:
+
 .. code-block:: bash
+
     AimmsCmd “PROJECTPATH/PROJECTNAME.aimms” --run-only proc_unitTests
 
 
