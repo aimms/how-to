@@ -1,0 +1,7 @@
+<AimmsJSONMapping>
+    <ObjectMapping>
+        <ValueMapping name="prp1" maps-to="p_prop1_scalar"/>
+        <ValueMapping name="prp2" maps-to="p_prop2_scalar"/>
+        <ValueMapping name="prp3" maps-to="sp_prop3_scalar"/>
+    </ObjectMapping>
+</AimmsJSONMapping>
