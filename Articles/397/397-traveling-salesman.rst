@@ -95,15 +95,22 @@ Rest API
 Case management.
 ^^^^^^^^^^^^^^^^^^^^
 
-* Two cases supplied
+`Data Manager <https://documentation.aimms.com/webui/data-manager.html>`_ is a native feature in any WebUI aplication. 
+On this example, you will find 4 ready to use scenarios. 
 
-* You can create your own case, or adapt an existing case.
+* 100_BR
+* 200_BR
+* 100_ALL
+* 200_ALL
+
+Note that you can create your own case, or adapt an existing case. 
 
 
 Haversine
 ^^^^^^^^^^
 
-Input data for this project is the exact latitude and longitude of cities in the world. So, direct distance between the nodes will not provide a good aproximated distance. So here, is used the `Haversine formula <https://en.wikipedia.org/wiki/Haversine_formula>`_.
+Input data for this project is the exact latitude and longitude of cities in the world. So, direct distance between the nodes will not provide a good aproximated distance. 
+So here, is used the `Haversine formula <https://en.wikipedia.org/wiki/Haversine_formula>`_.
 
 Haversine formula is an equation important in navigation, 
 giving great-circle distances between two points on a sphere from their longitudes 
@@ -132,6 +139,7 @@ The parameter that holds its value is:
 
 ScheduleAt
 ^^^^^^^^^^
+
 **Please ref article 572.**
 Note precise up to 1 second.
 
