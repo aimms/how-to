@@ -98,10 +98,10 @@ Case management.
 `Data Manager <https://documentation.aimms.com/webui/data-manager.html>`_ is a native feature in any WebUI aplication. 
 On this example, you will find 4 ready to use scenarios. 
 
-* 100_BR
-* 200_BR
-* 100_ALL
-* 200_ALL
+* **100_BR:** 100 nodes on one country: Brazil. 
+* **200_BR:** 200 nodes on one country: Brazil.
+* **100_ALL:** 100 nodes in the world.
+* **200_ALL:** 200 nodes in the world. 
 
 Note that you can create your own case, or adapt an existing case. 
 
@@ -140,10 +140,51 @@ The parameter that holds its value is:
 ScheduleAt
 ^^^^^^^^^^
 
-**Please ref article 572.**
-Note precise up to 1 second.
+.. image:: images/heuristic_menu.png
+   :align: right
 
-AIMMS Procedure :aimms:procedure:`ScheduleAt`
+On Heuristic page, there are a few ways to run the different heuristics. You can find then on the Page Actions:
+
+* **Clear Solutions:** it will clear all heuristic solutions.
+* **Initial Solutions:** it will run the initial tour heuristic.
+* **Improved Simultaneous:** this will run the improved simultaneous tour with iteractions.
+* **Improved Cyclic:** this will run the improved cyclic tour with iteractions.
+* **Run All:** this will run all 3 heuristics without iterations. This run will be important when comparing execution time. 
+
+Both **Improved Simultaneous** and **Improved Cyclic** buttons will run iteratively. 
+This means that every iteration of the heuristic will be shown on the map. 
+It can take a while, so, if the nodes are orange, the heuristic is still running. Pink means that the run is complete. 
+
+This is possible by using :aimms:procedure:`ScheduleAt` native AIMMS procedure. 
+This is precise up to 1 second. Below, there is the procedure used to schedule each iteration.
+
+.. aimms:procedure:: pr_scheduleOver(p_in_noSecs,ep_in_payLoad)
+
+.. code-block:: aimms
+   :linenos:
+   :emphasize-lines: 9, 13
+
+   sp_loc_refDate := "2023-01-01 00:00:00" ;
+
+   p_loc_tmpSec := CurrentToMoment([s], sp_loc_refDate) ;
+   p_loc_tmpSec += p_in_noSecs ;
+
+   if p_loc_scheduleAtUsesUTC then
+      sp_loc_launchDate := MomentToString("%c%y-%m-%d %H:%M:%S%TZ('UTC')", [s], sp_loc_refDate, p_loc_tmpSec);
+   else
+      sp_loc_launchDate := MomentToString("%c%y-%m-%d %H:%M:%S", [s], sp_loc_refDate, p_loc_tmpSec);
+   endif ;
+
+   ! Nb ScheduleAt is precise up to a second.
+   if not ScheduleAt(sp_loc_launchDate, ep_in_payLoad) then
+      raise error "Error scheduling procedure \'" 
+                  + ep_in_payLoad 
+                  + "\': " 
+                  + CurrentErrorMessage 
+            code 'Schedule-at-procedure' ;
+   endif;
+
+.. seealso:: On this `article <https://how-to.aimms.com/Articles/572/572-progress-webui.html>`_ you will find how to create an iterative graph using :aimms:procedure:`ScheduleAt`.
 
 Stopwatch Library
 ^^^^^^^^^^^^^^^^^^
