@@ -91,6 +91,12 @@ Language
 Rest API
 ^^^^^^^^^^^^^
 
+API key
+=======
+
+`PositionStack <https://positionstack.com/>`_ is used on this example and you can sign up for a free api key. 
+So the first step required when using this project is adding your key on ``sp_def_apiKey``.
+
 
 Case management.
 ^^^^^^^^^^^^^^^^^^^^
@@ -104,7 +110,6 @@ On this example, you will find 4 ready to use scenarios.
 * **200_ALL:** 200 nodes in the world. 
 
 Note that you can create your own case, or adapt an existing case. 
-
 
 Haversine
 ^^^^^^^^^^
@@ -423,7 +428,8 @@ Minimal Requirements
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient to run the Heuristics, call the Rest API and check the available scenarios. 
 However, to run the MIP problem, you will need to buy a Developer License. 
 
-You will also need an API key from `PositionStack api <https://positionstack.com>`_. To receive an free API key to test, please sign up to the free plan `here <https://positionstack.com/signup>`_. 
+You will also need an API key from `PositionStack api <https://positionstack.com>`_. 
+To receive an free API key to test, please sign up to the `free plan <https://positionstack.com/signup>`_. 
 
 
 References
