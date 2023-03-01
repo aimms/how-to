@@ -103,7 +103,7 @@ So the first step required when using this project is adding your key on ``sp_de
 API Request
 ~~~~~~~~~~~~
 
-You can use the 'forward geocoding' functionality from the positionstack API to retrieve geo location data. 
+You can use the 'forward geocoding' functionality from the PositionStack API to retrieve geo location data. 
 Their `documentation <https://positionstack.com/documentation>`_ describes which parameters are required (and optional), 
 allowing you to build the request using the :aimms:procedure:`dex::client::NewRequest` method of DEX. 
 You will send the API key for authentication and as the query you will request the geo location based on a city name. 
@@ -565,4 +565,5 @@ References
    ddab
    bg
    api
-
+   geocoding
+   positionstack
