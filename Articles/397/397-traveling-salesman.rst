@@ -91,54 +91,59 @@ Language
 Rest API
 ^^^^^^^^^^^^^
 
-In this example we make use of an external Rest API to retrieve the relevant location data. We use the AIMMS Data Exchange Library (DEX) for sending out the requests and receiving and parsing the responses.
+In this example we make use of an external Rest API to retrieve the relevant location data. 
+We use the `AIMMS Data Exchange Library (DEX) <https://documentation.aimms.com/dataexchange/index.html>`_ for sending out the requests and receiving and parsing the responses.
 
-
-API key
-=======
+API Key
+~~~~~~~~~~ 
 
 `PositionStack <https://positionstack.com/>`_ is used on this example and you can sign up for a free api key. 
 So the first step required when using this project is adding your key on ``sp_def_apiKey``.
 
-API request
-=============
+API Request
+~~~~~~~~~~~~
 
-You can use the 'forward geocoding' functionality from the positionstack API to retrieve geo location data. Their `documentation <https://positionstack.com/documentation>`_ describes which parameters are required (and optional), allowing you to build the request using the NewRequest method of DEX. 
-You will send the API key for authentication and as the query you will request the geo location based on a city name. To make the query more specific, you can also send the country in which the city is located, and maximize the result to 1. To prevent unwanted errors replace any spaces in city names with the URL-friendly character '%20', as seen below:
+You can use the 'forward geocoding' functionality from the positionstack API to retrieve geo location data. 
+Their `documentation <https://positionstack.com/documentation>`_ describes which parameters are required (and optional), 
+allowing you to build the request using the :aimms:procedure:`dex::client::NewRequest` method of DEX. 
+You will send the API key for authentication and as the query you will request the geo location based on a city name. 
+To make the query more specific, you can also send the country in which the city is located, and maximize the result to 1.
+To prevent unwanted errors replace any spaces in city names with the URL-friendly character '%20', as seen below:
 
 .. code-block:: aimms
+   :linenos:
 
    sp_loc_requestId := "fetch" + sp_in_city;
 
-	sp_in_city := FindReplaceStrings(sp_in_city, " ", "%20");
+   sp_in_city := FindReplaceStrings(sp_in_city, " ", "%20");
 
-	sp_loc_urlCall 
-	:=  "http://api.positionstack.com/v1/forward?access_key=" + sp_def_apiKey 
-    + "&query=" + sp_in_city 
-    + "&limit=1"
-    + "&country=" + sp_countryAcronym(ep_in_cityCountry);
+   sp_loc_urlCall 
+   :=   "http://api.positionstack.com/v1/forward?access_key=" + sp_def_apiKey 
+         + "&query=" + sp_in_city 
+         + "&limit=1"
+         + "&country=" + sp_countryAcronym(ep_in_cityCountry);
 
-	dex::client::NewRequest(
-        sp_loc_requestId,
-        sp_loc_urlCall,
-        'dex::client::EmptyCallback',
-        responsefile:"out/Output.json",
-        tracefile:"Trace.xml");
+   dex::client::NewRequest(
+         sp_loc_requestId,
+         sp_loc_urlCall,
+         'dex::client::EmptyCallback',
+         responsefile:"out/Output.json",
+         tracefile:"Trace.xml");
 
-	dex::client::PerformRequest(sp_loc_requestId);
-	dex::client::WaitForResponses(2000); 
+   dex::client::PerformRequest(sp_loc_requestId);
+   dex::client::WaitForResponses(2000); 
 
-The DEX method 'PerformRequest' will send out the actual request (as defined in NewRequest by requestId) and the WaitForResponses forces the callback to be called synchronously.
-The fourth argument of NewRequest saves he responsefile in the folder 'out' and the fifth one saves a tracefile in case something goes wrong and you want to investigate.
+The DEX method :aimms:procedure:`dex::client::PerformRequest` will send out the actual request (as defined in :aimms:procedure:`dex::client::NewRequest` by ``requestId``) and the :aimms:procedure:`dex::client::WaitForResponses` forces the callback to be called synchronously.
+The fourth argument of :aimms:procedure:`dex::client::NewRequest` saves he ``responsefile`` in the folder 'out' and the fifth one saves a ``tracefile`` in case something goes wrong and you want to investigate.
 
-Mapping the results
-====================
+Mapping the Results
+~~~~~~~~~~~~~~~~~~~~~~
 
 After a successful request the geo location data will be in the file 'Output.json' in the out folder. It looks like this:
 
 .. code-block:: json
 
-    {
+   {
    "data": {
       "results": [
          {
@@ -160,27 +165,25 @@ After a successful request the geo location data will be in the file 'Output.jso
             "map_url": "http://map.positionstack.com/38.897675,-77.036547"
          }
       ]
-   }
-}
+   }}
 
 
 Now you can use a mapping file to instruct AIMMS how to map the data from the output file onto the data model.
-First AddMapping should be used to create/add the mapping to AIMMS:
+First :aimms:procedure:`dex::AddMapping` should be used to create/add the mapping to AIMMS:
 
 .. code-block:: aimms
+   :linenos:
 
    dex::AddMapping(
 	mappingName :  "LatLongMapping", 
 	mappingFile :  "Mappings/Generated/LatLongDataset.xml");
 	
-The mappingfile (based on the JSON output) looks as follows:
+The ``mappingfile`` (based on the JSON output) looks as follows:
 
 .. code-block:: xml
-    :linenos:
-    :emphasize-lines: 5,6
 
-    <?xml version="1.0"?>
-    <AimmsJSONMapping>
+   <?xml version="1.0"?>
+   <AimmsJSONMapping>
 	<ObjectMapping>
 		<ArrayMapping name="data">
 			<ObjectMapping>
@@ -194,23 +197,24 @@ The mappingfile (based on the JSON output) looks as follows:
 
 You can see that from the JSON array 'data' the 'name', 'latitude' and 'longitude' values are being mapped onto known/existing AIMMS identifiers within the model.
 
-Now that the mapping is defined, the ReadFromFile method can be used to actually read in the data of the file:
+Now that the mapping is defined, the :aimms:procedure:`dex::ReadFromFile` method can be used to actually read in the data of the file:
 
 .. code-block:: aimms
+   :linenos:
 
    dex::ReadFromFile(
-	dataFile         :  "out/Output.json", 
-	mappingName      :  "LatLongMapping", 
-	emptyIdentifiers :  1, 
-	emptySets        :  1, 
-	resetCounters    :  1);
+         dataFile         :  "out/Output.json", 
+         mappingName      :  "LatLongMapping", 
+         emptyIdentifiers :  1, 
+         emptySets        :  1, 
+         resetCounters    :  1);
 
-[Gabbi's magic :D]
+Done that, the node will appear on the Network page!
 
-Case management.
+Case Management
 ^^^^^^^^^^^^^^^^^^^^
 
-`Data Manager <https://documentation.aimms.com/webui/data-manager.html>`_ is a native feature in any WebUI aplication. 
+`Data Manager <https://documentation.aimms.com/webui/data-manager.html>`_ is a native feature in any WebUI application. 
 On this example, you will find 4 ready to use scenarios. 
 
 * **100_BR:** 100 nodes on one country: Brazil. 
@@ -223,7 +227,7 @@ Note that you can create your own case, or adapt an existing case.
 Haversine
 ^^^^^^^^^^
 
-Input data for this project is the exact latitude and longitude of cities in the world. So, direct distance between the nodes will not provide a good aproximated distance. 
+Input data for this project is the exact latitude and longitude of cities in the world. So, direct distance between the nodes will not provide a good approximate distance. 
 So here, is used the `Haversine formula <https://en.wikipedia.org/wiki/Haversine_formula>`_.
 
 Haversine formula is an equation important in navigation, 
@@ -261,8 +265,8 @@ On Heuristic page, there are a few ways to run the different heuristics. You can
 
 * **Clear Solutions:** it will clear all heuristic solutions.
 * **Initial Solutions:** it will run the initial tour heuristic.
-* **Improved Simultaneous:** this will run the improved simultaneous tour with iteractions.
-* **Improved Cyclic:** this will run the improved cyclic tour with iteractions.
+* **Improved Simultaneous:** this will run the improved simultaneous tour with iterations.
+* **Improved Cyclic:** this will run the improved cyclic tour with iterations.
 * **Run All:** this will run all 3 heuristics without iterations. This run will be important when comparing execution time. 
 
 Both **Improved Simultaneous** and **Improved Cyclic** buttons will run iteratively. 
@@ -560,5 +564,5 @@ References
    haversine
    ddab
    bg
-
+   api
 
