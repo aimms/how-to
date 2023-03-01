@@ -91,12 +91,121 @@ Language
 Rest API
 ^^^^^^^^^^^^^
 
+In this example we make use of an external Rest API to retrieve the relevant location data. We use the AIMMS Data Exchange Library (DEX) for sending out the requests and receiving and parsing the responses.
+
+
 API key
 =======
 
 `PositionStack <https://positionstack.com/>`_ is used on this example and you can sign up for a free api key. 
 So the first step required when using this project is adding your key on ``sp_def_apiKey``.
 
+API request
+=============
+
+You can use the 'forward geocoding' functionality from the positionstack API to retrieve geo location data. Their `documentation <https://positionstack.com/documentation>`_ describes which parameters are required (and optional), allowing you to build the request using the NewRequest method of DEX. 
+You will send the API key for authentication and as the query you will request the geo location based on a city name. To make the query more specific, you can also send the country in which the city is located, and maximize the result to 1. To prevent unwanted errors replace any spaces in city names with the URL-friendly character '%20', as seen below:
+
+.. code-block:: aimms
+
+   sp_loc_requestId := "fetch" + sp_in_city;
+
+	sp_in_city := FindReplaceStrings(sp_in_city, " ", "%20");
+
+	sp_loc_urlCall 
+	:=  "http://api.positionstack.com/v1/forward?access_key=" + sp_def_apiKey 
+    + "&query=" + sp_in_city 
+    + "&limit=1"
+    + "&country=" + sp_countryAcronym(ep_in_cityCountry);
+
+	dex::client::NewRequest(
+        sp_loc_requestId,
+        sp_loc_urlCall,
+        'dex::client::EmptyCallback',
+        responsefile:"out/Output.json",
+        tracefile:"Trace.xml");
+
+	dex::client::PerformRequest(sp_loc_requestId);
+	dex::client::WaitForResponses(2000); 
+
+The DEX method 'PerformRequest' will send out the actual request (as defined in NewRequest by requestId) and the WaitForResponses forces the callback to be called synchronously.
+The fourth argument of NewRequest saves he responsefile in the folder 'out' and the fifth one saves a tracefile in case something goes wrong and you want to investigate.
+
+Mapping the results
+====================
+
+After a successful request the geo location data will be in the file 'Output.json' in the out folder. It looks like this:
+
+.. code-block:: json
+
+    {
+   "data": {
+      "results": [
+         {
+            "latitude": 38.897675,
+            "longitude": -77.036547,
+            "label": "1600 Pennsylvania Avenue NW, Washington, DC, USA",
+            "name": "1600 Pennsylvania Avenue NW",
+            "type": "address",
+            "number": "1600",
+            "street": "Pennsylvania Avenue NW",
+            "postal_code": "20500",
+            "confidence": 1,
+            "region": "District of Columbia",
+            "region_code": "DC",
+            "administrative_area": null,
+            "neighbourhood": "White House Grounds",
+            "country": "United States",
+            "country_code": "US",
+            "map_url": "http://map.positionstack.com/38.897675,-77.036547"
+         }
+      ]
+   }
+}
+
+
+Now you can use a mapping file to instruct AIMMS how to map the data from the output file onto the data model.
+First AddMapping should be used to create/add the mapping to AIMMS:
+
+.. code-block:: aimms
+
+   dex::AddMapping(
+	mappingName :  "LatLongMapping", 
+	mappingFile :  "Mappings/Generated/LatLongDataset.xml");
+	
+The mappingfile (based on the JSON output) looks as follows:
+
+.. code-block:: xml
+    :linenos:
+    :emphasize-lines: 5,6
+
+    <?xml version="1.0"?>
+    <AimmsJSONMapping>
+	<ObjectMapping>
+		<ArrayMapping name="data">
+			<ObjectMapping>
+				<ValueMapping name="name" binds-to="i_int_city" />
+				<ValueMapping name="latitude" maps-to="p_int_latitude(i_int_city)" />
+				<ValueMapping name="longitude" maps-to="p_int_longitude(i_int_city)" />
+			</ObjectMapping>
+		</ArrayMapping>
+	</ObjectMapping>
+	</AimmsJSONMapping>
+
+You can see that from the JSON array 'data' the 'name', 'latitude' and 'longitude' values are being mapped onto known/existing AIMMS identifiers within the model.
+
+Now that the mapping is defined, the ReadFromFile method can be used to actually read in the data of the file:
+
+.. code-block:: aimms
+
+   dex::ReadFromFile(
+	dataFile         :  "out/Output.json", 
+	mappingName      :  "LatLongMapping", 
+	emptyIdentifiers :  1, 
+	emptySets        :  1, 
+	resetCounters    :  1);
+
+[Gabbi's magic :D]
 
 Case management.
 ^^^^^^^^^^^^^^^^^^^^
