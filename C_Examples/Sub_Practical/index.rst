@@ -29,7 +29,6 @@ The practical examples listed below illustrate applications of optimization mode
    /Articles/472/472-MultipleSolutions-dice
    /Articles/473/473-ProductionPlanning-machinescheduling
    /Articles/474/474-Routing-cvrp
-   /Articles/475/475-Routing-tsp
    /Articles/476/476-Routing-vrptw
    /Articles/477/477-Telecommunications-delayconstrainedrouting
    /Articles/478/478-Telecommunications-filterdesign

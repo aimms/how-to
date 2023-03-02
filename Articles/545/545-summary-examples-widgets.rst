@@ -15,6 +15,7 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../563/563-functional-ipTwist`
     * :doc:`../434/434-reindeer-pairing`
+    * :doc:`../397/397-traveling-salesman`
 
 .. dropdown:: Image Widget
 
@@ -24,6 +25,7 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../563/563-functional-ipTwist`
     * :doc:`../434/434-reindeer-pairing`
+    * :doc:`../397/397-traveling-salesman`
 
 .. dropdown:: Workflow
 
@@ -32,6 +34,7 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../563/563-functional-ipTwist`
+    * :doc:`../397/397-traveling-salesman`
     * :doc:`../434/434-reindeer-pairing`
 
 .. dropdown:: Table Widget
@@ -55,17 +58,20 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../383/383-contract-allocation`
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
+    * :doc:`../397/397-traveling-salesman`
     * :doc:`../563/563-functional-ipTwist`
 
 .. dropdown:: Side Panel
 
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../397/397-traveling-salesman`
     * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Compact Scalar Widget
 
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../397/397-traveling-salesman`
     * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: List Widget
@@ -79,6 +85,7 @@ This page has a summary of the examples versus which WebUI features are used in 
 .. dropdown:: Item Actions
 
     * :doc:`../387/387-employee-scheduling`
+    * :doc:`../397/397-traveling-salesman`
     * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Scalar Widget 
@@ -88,6 +95,7 @@ This page has a summary of the examples versus which WebUI features are used in 
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../563/563-functional-ipTwist`
+    * :doc:`../397/397-traveling-salesman`
     * :doc:`../434/434-reindeer-pairing`
 
 .. dropdown:: Multiselect Widget
@@ -101,6 +109,7 @@ This page has a summary of the examples versus which WebUI features are used in 
 .. dropdown:: Button Widget    
     
     * :doc:`../550/550-demand-forecasting`
+    * :doc:`../397/397-traveling-salesman`
     * :doc:`../434/434-reindeer-pairing`
 
 .. dropdown:: Dialog Page
@@ -117,4 +126,9 @@ This page has a summary of the examples versus which WebUI features are used in 
     
 .. dropdown:: Map Widget    
     
+    * :doc:`../397/397-traveling-salesman`
     * :doc:`../563/563-functional-ipTwist`
+
+.. dropdown:: Status Bar   
+
+    * :doc:`../397/397-traveling-salesman`
