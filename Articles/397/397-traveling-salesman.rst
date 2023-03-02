@@ -5,14 +5,14 @@ Traveling Salesman
    :description: This example illustrates some of AIMMS control flow statements by means of the traveling salesman 2-opt heuristic.
    :keywords: Algorithm, 2-opt heuristic, traveling salesman problem, GMP, Lazy constraint callback, subtour elimination constraints.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.88-ZIP:_Contract_Alocation-blue
-   :target: https://github.com/aimms/contract-allocation/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/AIMMS_4.90-ZIP:_Traveling_Salesman-blue
+   :target: https://github.com/aimms/traveling-salesman/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.88-Github:_Contract_Alocation-blue
-   :target: https://github.com/aimms/contract-allocation
+.. image:: https://img.shields.io/badge/AIMMS_4.90-Github:_Traveling_Salesman-blue
+   :target: https://github.com/aimms/traveling-salesman
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-webui-44/uptaded-contract-allocation-example-1253
+   :target: https://community.aimms.com/aimms-webui-44/updated-traveling-salesman-example-1433
 
 
 Story
@@ -52,9 +52,7 @@ In addition, you will find:
 MIP
 ^^^^
 
-This AIMMS project illustrates the use of a semi-continuous variable. A semi-continuous variable is either zero or within a certain range. 
-This type of variables can be used in conditions like, whenever there is a transport this transport has a minimum size. 
-
+This AIMMS project illustrates the use of a binary variables. 
 In this example the (symmetric) Traveling Salesman Problem (TSP) is formulated using subtour elimination constraints. 
 The amount of subtour elimination constraints is exponential, and therefore they are added using a lazy constraint callback. 
 Lazy constraints are constraints that should be satisfied by any solution to the problem, but they are not generated upfront. 
