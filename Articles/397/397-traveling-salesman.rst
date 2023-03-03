@@ -14,7 +14,11 @@ Traveling Salesman
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-webui-44/updated-traveling-salesman-example-1433
 
+.. image:: images/project.gif
+    :align: center
 
+|
+    
 Story
 -----
 
