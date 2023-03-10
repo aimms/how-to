@@ -64,7 +64,7 @@ The lazy constraint callback checks whether the incumbent solution found by the 
 If yes, then subtour elimination constraints are added that forbid these subtours. If not, then the incumbent solution forms a true solution of the TSP problem, as it contains only one tour.
 
 +-----+------------------------------------------------------+-------------------------------------------+
-|       Contract Allocation Problem                                                                      |
+|       Traveling Salesman Problem                                                                       |
 +=====+======================================================+===========================================+
 + **Sets and indices:**                                                                                  |
 +-----+------------------------------------------------------+-------------------------------------------+
@@ -541,8 +541,9 @@ Minimal Requirements
 --------------------   
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient to run the Heuristics, call the Rest API and check the available scenarios. 
-However, to run the MIP problem, you will need to buy a Developer License. 
+However, to run the MIP problem, you will need to buy a Developer License (see `LP and MIP Solver Features <https://documentation.aimms.com/platform/solvers/solvers.html#lp-and-mip-solver-features>`_). 
 
+A SQLite is used, to integrate that, you will need "SQLite3 ODBC Driver". 
 You will also need an API key from `PositionStack api <https://positionstack.com>`_. 
 To receive an free API key to test, please sign up to the `free plan <https://positionstack.com/signup>`_. 
 
