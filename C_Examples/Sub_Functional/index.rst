@@ -13,7 +13,6 @@ The functional AIMMS examples listed below illustrate specific AIMMS features.
    /Articles/401/401-calendar
    /Articles/402/402-camping
    /Articles/403/403-chance-constraints
-   /Articles/404/404-clock
    /Articles/405/405-coloring
    /Articles/406/406-create-csv-file
    /Articles/407/407-database-inspection
