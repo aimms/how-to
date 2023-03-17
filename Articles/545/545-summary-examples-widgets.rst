@@ -76,7 +76,7 @@ This page has a summary of the examples versus which WebUI features are used in 
 
 .. dropdown:: List Widget
     
-    * :doc:`../383/383-contract-allocation`
+    Nothing yet!
 
 .. dropdown:: Gantt Chart Widget
 

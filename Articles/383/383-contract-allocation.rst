@@ -4,16 +4,20 @@ Contract Allocation
    :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.88-ZIP:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.92-ZIP:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.88-Github:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.92-Github:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-webui-44/uptaded-contract-allocation-example-1253
 
+.. image:: images/project.gif
+    :align: center
 
+|
+   
 Story
 -----
 
@@ -202,8 +206,6 @@ The following WebUI features are used:
 
 - `Scalar (and Compact) Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
-- `List Widget <https://documentation.aimms.com/webui/list-widget.html#list-widget>`_ 
-
 - `Dialog Page <https://documentation.aimms.com/webui/dialog-pages.html>`_ 
 
 - `Download Widget <https://documentation.aimms.com/webui/download-widget.html>`_ 
@@ -216,56 +218,82 @@ UI Styling
 Below there are the css files you will find with comments on what they change. 
 
 .. tab-set::
-    .. tab-item:: colors.css
+   .. tab-item:: annotation.css
+
+      .. code-block:: css
+         :linenos:
+
+         .annotation-bkg-cell {
+            background: var(--primary90Transparent);
+         }
+
+         .annotation-bkg-cell-default {
+            background: var(--primary90Transparent);
+         }
+
+         .annotation-bkg-cell-default input{
+            color: transparent;
+         }
+
+   .. tab-item:: colors.css
 
       .. code-block:: css
          :linenos:
 
          :root {
+         /*---------------------------------------------------------------------
+               COLORS
+         ----------------------------------------------------------------------*/
             --primary: #3DDAB4;
             --primaryDark: #00B569;
             --primary90Transparent: #3ddab33b;
+
+         /*---------------------------------------------------------------------
+               LOGO
+         ----------------------------------------------------------------------*/
+            --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/budgeting.png);
+            --spacing_app-logo_width: 45px;
 
 
             --color_bg_button_primary: var(--primaryDark);
             --color_bg_button_primary_hover: var(--primary);
             --color_text_edit-select-link: var(--primaryDark);
+
+
+         /*---------------------------------------------------------------------
+               WORKFLOW
+         ----------------------------------------------------------------------*/
+            /* Header text*/
+            --color_workflow-header: #505767;
+               
+            /* Step background and content (text, icon) colors for the 4 states*/
+            /*current + current with error*/
+            --color_bg_workflow_current: var(--primaryDark);
+            --color_workflow_current: var(--color_text_inverted);
+            --color_bg_workflow_error-current: #d1454b;
+
+            /*active*/
+            --color_bg_workflow_active: #e6edff;
+            --color_workflow_active: var(--primaryDark);
+            
+            /*inactive*/
+            --color_bg_workflow_inactive: #dde0e8;
+            --color_workflow_inactive: #b0b5c2;
+            
+            /*error*/
+            --color_bg_workflow_error: #f9e9e9;
+            --color_workflow_error: #d1454b;
+            
+            /* Child indentation, border colors */
+            --spacing_workflow-child-indent: 1rem;
+            --color_workflow-item-divider: var(--primaryDark);
+            
+            /* Icon background, border, for non-error state */
+            --color_bg_workflow-icon: #ffffff;
+            --color_workflow-icon-border: var(--primaryDark);
          }
-    
-    .. tab-item:: icon.css
 
-      .. code-block:: css
-         :linenos:
-
-         :root {
-            --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/budgeting.png);
-            --spacing_app-logo_width: 45px;
-         }
-
-    .. tab-item:: workflow.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change color of the active step*/
-         .workflow-panel .step-item.current {
-            box-shadow: inset 0.3125rem 0 0 var(--primary);
-         }
-
-         /*Change color of the titles*/
-         .workflow-panel .step-item.active.complete .title, 
-         .workflow-panel .step-item.active.incomplete .title {
-            color: var(--primaryDark);
-         }
-
-         /*Change color of the icons*/
-         .workflow-panel .step-item.active.complete .icon, 
-         .workflow-panel .step-item.active.incomplete .icon {
-            color: var(--primaryDark);
-            border: 1px solid var(--primaryDark);
-         }
-
-    .. tab-item:: textColor.css
+   .. tab-item:: textColor.css
 
       .. code-block:: css
          :linenos:
@@ -292,7 +320,7 @@ Below there are the css files you will find with comments on what they change.
             color: white;
          }
 
-    .. tab-item:: body.css
+   .. tab-item:: body.css
 
       .. code-block:: css
          :linenos:
@@ -303,7 +331,7 @@ Below there are the css files you will find with comments on what they change.
             background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
          }
 
-    .. tab-item:: header.css
+   .. tab-item:: header.css
 
       .. code-block:: css
          :linenos:
@@ -312,7 +340,7 @@ Below there are the css files you will find with comments on what they change.
             border-bottom: 2px solid var(--primary);
          }
 
-    .. tab-item:: combinationChart.css
+   .. tab-item:: combinationChart.css
 
       .. code-block:: css
          :linenos:
@@ -326,7 +354,7 @@ Below there are the css files you will find with comments on what they change.
             fill: var(--primary);    
          }
 
-    .. tab-item:: sidePanel.css
+   .. tab-item:: sidePanel.css
 
       .. code-block:: css
          :linenos:
@@ -354,10 +382,14 @@ Below there are the css files you will find with comments on what they change.
 
          /*Change the color below sidepanel tabs*/
          .sidepanel-container {
-            background-color: rgba(249, 249, 249, 0.438)
+            background-color:   rgb(249, 249, 249);
+         }
+
+         .sidepanel-container .sidepanel-tab {
+            height: 180px;
          }
    
-    .. tab-item:: button.css
+   .. tab-item:: button.css
 
       .. code-block:: css
          :linenos:
@@ -367,7 +399,7 @@ Below there are the css files you will find with comments on what they change.
             background-color: var(--primary);
          }
    
-    .. tab-item:: pageAction.css
+   .. tab-item:: pageAction.css
 
       .. code-block:: css
          :linenos:
@@ -392,7 +424,7 @@ Below there are the css files you will find with comments on what they change.
             background-color: var(--primary);
          }
    
-    .. tab-item:: table.css
+   .. tab-item:: table.css
 
       .. code-block:: css
          :linenos:
