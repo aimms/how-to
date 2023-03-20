@@ -23,7 +23,7 @@ Prerequisites
    #. Move it to a convenient location, and unzip the archive
  
 
-Running the example
+Running the Example
 -------------------
 
 #.  First publish the example application.
@@ -55,10 +55,10 @@ Output
 
 The output is the same as when using Java. See :doc:`98-starting-job-aimms-pro-api-java`.
 
-Further reading
+Further Reading
 -----------------
 
-See also the `manual <https://documentation.aimms.com/pro/api.html>`_
+See also the `manual on PRO API <https://documentation.aimms.com/pro/api.html>`_.
 
 
 
