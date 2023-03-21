@@ -1,0 +1,379 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "browsername": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browsertimezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
+    "ignoredst": {
+      "aimms": {
+        "contents": [
+          "webui::IgnoreDST"
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "timezone.dst.readonly": {
+      "aimms": {
+        "contents": [
+          "webui::DefaultDSTSettingForDisplayTimeZone"
+        ]
+      }
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "Explanation",
+          "gridArea": "area-c",
+          "dndId": "area-cExplanation0"
+        },
+        {
+          "widgetUri": "API Client Token",
+          "gridArea": "area-d",
+          "dndId": "area-dAPI Client Token1"
+        },
+        {
+          "widgetUri": "OAuth Client Data",
+          "gridArea": "area-b",
+          "dndId": "area-bOAuth Client Data2"
+        },
+        {
+          "widgetUri": "User Info",
+          "gridArea": "area-a",
+          "dndId": "area-aUser Info3"
+        },
+        {
+          "widgetUri": "Retrieve User Info",
+          "gridArea": "area-a",
+          "dndId": "area-aRetrieve User Info4"
+        },
+        {
+          "widgetUri": "Azure Retrieve Users",
+          "gridArea": "area-a",
+          "dndId": "area-aAzure Retrieve Users5"
+        },
+        {
+          "widgetUri": "Azure C Retrieve User",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsAzure C Retrieve User6"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout5"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "User Info",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "Retrieve User Info",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "OAuth Client Data",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "API Client Token",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "Explanation",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "Azure Retrieve Users",
+          "layoutInfo": {}
+        },
+        {
+          "uri": "Azure C Retrieve User",
+          "layoutInfo": {}
+        }
+      ]
+    }
+  },
+  "widgets/API Client Token": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "dex::oauth::APIClientStringResponse",
+          "dex::oauth::APIClientIntResponse"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "<IDENTIFIER-SET>",
+          "dex::oauth::apidata"
+        ],
+        "colHeader": [
+          "dex::oauth::apicl"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "dex::oauth::apidata",
+          "width": 25.89
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "<IDENTIFIER-SET>",
+          "width": 43.04
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "dex::oauth::apicl": "MS"
+          },
+          "width": 156.26
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "dex::oauth::apicl": "Google"
+          },
+          "width": 89.79
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "dex::oauth::apicl": "MSACF"
+          },
+          "width": 82.61
+        }
+      ]
+    },
+    "name": {
+      "literal": "API Client Token"
+    },
+    "title": {
+      "literal": "Token Data"
+    }
+  },
+  "widgets/Azure C Retrieve User": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "AzureExample_ClientCredentialsFlow"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "Azure C Retrieve Button"
+    },
+    "title": {
+      "literal": " Azure Client Credentials Flow - Retrieve User"
+    }
+  },
+  "widgets/Azure Retrieve Users": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "AzureExample_AuthorizationCodeFlow"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "Azure Retrieve Button"
+    },
+    "title": {
+      "literal": "Azure Authorization Code Flow - Retrieve User"
+    }
+  },
+  "widgets/Explanation": {
+    "aimms.widget.type": {
+      "literal": "text"
+    },
+    "contents": {
+      "literal": "<div><br></div><div><span style=\"font-size: 18px;\">Preparing your model as an API client</span></div><div><br></div><ol><li>Register AIMMS as an API client in e.g. Azure AD or with Google.</li><li>Register the following redirect URLs for the app for desktop usage: http://localhost/oauth2/</li><li>Register the following redirect URLs for the app for PRO/Cloud: https://&lt;pro-server-dns&gt;/extensions/&lt;app-name&gt;/oauth2/</li><li> In the API Client Data table, enter the authorization, token and openID endpoints for Azure AD or Google</li><li>Enter the client id and secret that created during the client registration in Azure AD or Google</li><li>Enter the scopes for the functionality you want access to (for Azure AD you need the offline_access for a refresh token) </li></ol><div><br></div><div><span style=\"font-size: 18px;\">Retrieving the user info</span></div><div><br></div><ol><li>Press the Retrieve User Info button</li><li>If necessary, authorize yourself with the identity platform with with you registered AIMMS as an API client</li><li>Observe your user info appearing in the User Info table</li><li>Observe the access token and refresh token retrieved for obtaining your user info</li></ol>"
+    },
+    "name": {
+      "literal": "Explanation"
+    }
+  },
+  "widgets/OAuth Client Data": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "dex::oauth::APIClientStringData"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "dex::oauth::apidata"
+        ],
+        "colHeader": [
+          "dex::oauth::apicl"
+        ],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "dex::oauth::apicl": "MS"
+          },
+          "width": 159.58
+        },
+        {
+          "type": "rowHeader",
+          "colKey": "dex::oauth::apidata",
+          "width": 32.38
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "dex::oauth::apicl": "Google"
+          },
+          "width": 84.37
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "dex::oauth::apicl": "MSACF"
+          },
+          "width": 96.96
+        }
+      ]
+    },
+    "name": {
+      "literal": "OAuth Client Data"
+    },
+    "title": {
+      "literal": "API Client Data"
+    }
+  },
+  "widgets/Retrieve User Info": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "GoogleExample_AuthorizationCodeFlow"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "Google Retrieve Button"
+    },
+    "title": {
+      "literal": "Google Authorization Code Flow - Retrieve User"
+    }
+  },
+  "widgets/User Info": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "dex::oauth::APIUserInfo"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "dex::oauth::userinfo"
+        ],
+        "colHeader": [],
+        "aggregated": [
+          "<IDENTIFIER-SET>"
+        ]
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "rowHeader",
+          "colKey": "dex::oauth::userinfo",
+          "width": 39.27
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "dex::oauth::apicl": "MS"
+          },
+          "width": 89.48
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "dex::oauth::apicl": "Google"
+          },
+          "width": 62.91
+        },
+        {
+          "type": "colHeader",
+          "colKey": {
+            "dex::oauth::apicl": "MSACF"
+          },
+          "width": 69.31
+        }
+      ]
+    },
+    "hide.download.button": {
+      "literal": true
+    },
+    "name": {
+      "literal": "Display retrieved User Info"
+    },
+    "title": {
+      "literal": "User Info"
+    }
+  }
+}

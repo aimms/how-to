@@ -1,0 +1,8 @@
+    <AimmsJSONMapping>
+        <ObjectMapping>
+            <ValueMapping name="displayName" maps-to="sp_nameMS" />
+			<ValueMapping name="jobTitle" maps-to="sp_jobMS" />
+			<ValueMapping name="mail" maps-to="sp_mailMS" />
+			<ValueMapping name="mobilePhone" maps-to="sp_phoneMS" />
+        </ObjectMapping>
+    </AimmsJSONMapping>

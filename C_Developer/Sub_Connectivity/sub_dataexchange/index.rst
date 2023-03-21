@@ -18,5 +18,6 @@ These topics help you to use the Data Exchange Library with your AIMMS project.
    /Articles/533/533-how-to-retrieve-file-data-with-data-exchange
    /Articles/536/536-name-binds-to
    /Articles/534/534-dealing-with-the-different-data-types
+   /Articles/544/544-dex-and-oauth
 
    
