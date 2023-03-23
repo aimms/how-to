@@ -4,7 +4,7 @@
    :keywords: aimms, data, exchange, api, authorization, security, oauth
    
 
-Using OAuth2 for API authorization in DEX
+Using OAuth2 for API authorization with DEX
 =============================================
 
 .. image:: https://img.shields.io/badge/AIMMS_4.84-Minimum_AIMMS_Version_WebUI-brightgreen
@@ -178,7 +178,7 @@ Now we can create the request and add the bearer token:
 	!first create the request
 	dex::client::NewRequest(
 		"getUser",
-		"https://graph.microsoft.com/v1.0/users/Roxanna.Bindenga@aimms.com",
+		"https://graph.microsoft.com/v1.0/users/[identifier]",
 		'Callback',
 		responsefile:"Output.json",
 		tracefile:"Trace.xml"
@@ -192,20 +192,20 @@ As you can see we've added a Callback and are tracing the request of which we st
 .. code-block:: aimms
 
 	!perform the request
-		dex::client::PerformRequest(
-            "getUser"
-    );
+	dex::client::PerformRequest(
+		"getUser"
+	);
 
 	!wait for response
 	dex::client::WaitForResponses(
-            1000
-    );
+		1000
+	);
 
 	!close request properly
-		dex::client::CloseRequest(
-            "getUser"
+	dex::client::CloseRequest(
+		"getUser"
 	);
-		
+
 	!now read and map the data properly for WebUI
 	AzureExample_ReadData;
 
