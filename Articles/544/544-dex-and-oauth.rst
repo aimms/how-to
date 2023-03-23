@@ -67,7 +67,7 @@ If we take a look at the setup within AIMMS we see the following:
 			scope: "openid profile";
 		}
 
-The authorization endpoint, token endpoint and open ID endpoint should be provided by the API that requires authentication. The client ID and client secret are, in this example, provided by Google's OAuth 2.0 authentication system (as shown in the printscreen above). 
+The authorization endpoint, token endpoint and open ID endpoint should be provided by the API that requires authentication. The client ID and client secret are, in this example, provided by Google's OAuth 2.0 authentication system (as shown in the screenshot above). 
 
 Now, when we open the example project either locally or as an app uploaded on our cloud, we are able to run the procedure (in the WebUI by clicking the related button). The underlying procedure in AIMMS is:
 
@@ -150,7 +150,7 @@ The Client Credentials Code flow requires a slightly different setup to work. Yo
 .. image:: images/azure_step2c.png
    :align: center
 
-In AIMMS, we will work with the :any:`dex::NewRequest` functionality. We first create the client:
+In AIMMS, we will work with the :any:`dex::client::NewRequest` functionality. We first create the client:
 
 .. code-block:: aimms
     
@@ -232,3 +232,5 @@ If the request was performed successfully, the response data is now in Output.js
     AIMMS-identifiers
 	authorizationEndpoint
 	tokenEndpoint
+	openIDEndpoint
+	tenantID
