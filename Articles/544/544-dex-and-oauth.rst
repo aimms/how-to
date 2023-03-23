@@ -211,8 +211,6 @@ As you can see we've added a Callback and are tracing the request of which we st
 
 If the request was performed successfully, the response data is now in Output.json. Then we use a DEX-mapping to map the retrieved data onto the same parameters that we used for the previous requests as to be able to show it correctly in the WebUI.
 
-
-
 .. spelling::
 
     dex
