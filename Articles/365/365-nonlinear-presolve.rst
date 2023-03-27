@@ -98,5 +98,5 @@ Assume we have a linear constraint i that originally has the form
 
 (5) :math:`\sum_{j}a_{i,j}x_{j} \leq b_{i}` 
 
-.. spellcheck::
+.. spelling:word-list::
     doubleton
