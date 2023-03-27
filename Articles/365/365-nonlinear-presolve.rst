@@ -411,3 +411,4 @@ mixed-integer nonlinear programs: A theoretical and computational study,
     unary
     subinterval
     doubletons
+    whitepaper
