@@ -30,11 +30,11 @@ presolve algorithm for nonlinear problems in the modeling language AMPL [6].
 We have developed a nonlinear presolve algorithm in AIMMS with the goal to reduce the size of the problem
 and to tighten the variable bounds, which may help the solver to solve the problem faster. Besides BARON,
 all nonlinear solvers in AIMMS are local solvers, i.e. the solution found by the solver is a local solution and
-cannot be guaranteed to be a global solution. The presolve algorithm may help the solver in fi nding
+cannot be guaranteed to be a global solution. The presolve algorithm may help the solver in finding
 a better solution.
 
-A local solver might sometimes fail to fi nd a solution and then it is often not clear whether that is caused by
-the problem being infeasible or by the solver failing to fi nd a solution for a feasible problem. The presolve
+A local solver might sometimes fail to find a solution and then it is often not clear whether that is caused by
+the problem being infeasible or by the solver failing to find a solution for a feasible problem. The presolve
 algorithm may reveal inconsistent constraints and/or variable bounds and hence identify a problem as
 infeasible.
 
@@ -59,17 +59,15 @@ We consider the following constrained nonlinear optimization problem:
 
 where :math:`x \in \mathbb{R_{n}}`, :math:`f: \mathbb{R_{n}} \rightarrow \mathbb{R}`, :math:`g: \mathbb{R_{n}} \rightarrow \mathbb{R_{p}}`, 
 and :math:`d \in \mathbb{R_{p}}`, :math:`b \in \mathbb{R_{m}}`, :math:`A \in \mathbb{R_{nxm}}`. The constraints (2)
-represent the nonlinear constraints in the problem and the constraints
-(3) the linear constraints. The objective function in (1) might be
-linear or nonlinear. In this paper we focus on problems that contain
-only continuous variables, although our presolve algorithm can also be
+represent the nonlinear constraints in the problem and the constraints (3) the linear constraints. The objective function in (1) might be
+linear or nonlinear. In this paper we focus on problems that contain only continuous variables, although our presolve algorithm can also be
 used for problems that have integer variables.
 
 The nonlinear presolve algorithm will:
 
 -  Remove singleton rows by moving the bounds to the variables;
 
--  Tighten bounds of (primal) variables using linear and nonlinear    constraints;
+-  Tighten bounds of (primal) variables using linear and nonlinear constraints;
 
 -  Delete fixed variables;
 
@@ -80,15 +78,14 @@ The nonlinear presolve algorithm will:
 Singleton Rows
 ~~~~~~~~~~~~~~~~~
 
-A singleton row is a linear constraint that contains only one variable. An equality singleton row fi xes the
-variable to the right-hand-side value of the row, and unless this value confl icts with the current bounds of the
+A singleton row is a linear constraint that contains only one variable. An equality singleton row fixes the
+variable to the right-hand-side value of the row, and unless this value conflicts with the current bounds of the
 variable in which case the problem is infeasible, we can remove both the row and variable from the problem.
-An inequality singleton row introduces a new bound on the variable which can be redundant, tighter than
-an existing bound in which case we update the bound, or infeasible. Our presolve algorithm will remove all
-singleton rows.
+An inequality singleton row introduces a new bound on the variable which can be redundant, tighter than 
+an existing bound in which case we update the bound, or infeasible. Our presolve algorithm will remove all singleton rows.
 
-If a variable is fi xed then sometimes another row becomes a singleton row, and if that row is an equality row
-we can fi x the remaining variable and remove it from the problem. By repeating this process we can solve
+If a variable is fixed then sometimes another row becomes a singleton row, and if that row is an equality row
+we can fix the remaining variable and remove it from the problem. By repeating this process we can solve
 any triangular system of linear equations that is part of the problem.
 
 Bounds Tightening Using Linear Constraints
