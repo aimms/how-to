@@ -176,6 +176,7 @@ defined for :math:`y \in (-\infty, 0)`, which implies that :math:`x` should be i
 
 .. image:: images/figure1.png
     :align: center
+    
 Figure 1: Bound reduction using expression :math:`sqrt(ln(x))`.
 
 .. spelling:word-list::
