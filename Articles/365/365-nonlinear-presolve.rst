@@ -175,10 +175,9 @@ with :math:`x` unbounded. Figure 1 shows that then the :math:`ln(x)` sub-express
 defined for :math:`y \in (-\infty, 0)`, which implies that :math:`x` should be in the range :math:`[1, e^{4}]`.
 
 .. image:: images/figure1.png
-    :align: center
+    :align: left
 
-.. class:: center
-    Figure 1: Bound reduction using expression :math:`sqrt(ln(x))`.
+*Figure 1: Bound reduction using expression :math:`sqrt(ln(x))`.*
 
 If an expression is defined on a certain range only, then this range can sometimes be used to reduce a bound of a variable. 
 For example, the function :math:`sqrt(x-1)` is only defined for :math:`x \geq 1` and therefore the 
@@ -193,6 +192,37 @@ Consider for example the constraint:
 
 and let :math:`x` have a range of :math:`[e^4, e^16]`. 
 Then from Figure 2 it follows that the nonlinear expression has a range of :math:`[2,4]` which implies that :math:`y \leq 8`.
+
+.. image:: images/figure2.png
+    :align: left
+
+*Figure 2: Bounding expression :math:`sqrt(ln(x))`.*
+
+If an expression only contains unary operators then we only have to go through the tree from top to bottom once to get the bounds on the variables, 
+and back once to get bounds on the expression. For expressions that contain binary operators the bounding procedure is more complicated. 
+For example, consider the constraint
+
++-----+-----------------------------------------------------------------------------------+
+|     | :math:`ln(e^x * y^2) \leq 4`                                                      |
++-----+-----------------------------------------------------------------------------------+
+
+and let variable :math:`x` have range :math:`[0,\infty)` and variable :math:`y` be unbounded. 
+To process the multiplication operator we first have to bound the :math:`e^x * y^2` sub-expression and the :math:`e^x` and :math:`y^2` sub-expressions
+(Step 1 in Figure 3). Since expression :math:`e^x * y^2` has range :math:`(0, e^4]` and expression :math:`e^x` has range :math:`[1,\infty)` we can conclude
+that expression :math:`y^2` must have a range of :math:`(0, e^4]` which implies that :math:`y` is in the range :math:`[-e^2, e^2]` (see Step 2 in Figure 3).
+
+If a bound of one of the variables in the nonlinear part of a constraint changes we process that constraint again immediately. We stop if no
+bound was changed significantly. Like this we can solve the following constraint in one iteration of the algorithm:
+
++-----+-----------------------------------------------------------------------------------+
+|     | :math:`\sqrt x + x = 6`                                                           |
++-----+-----------------------------------------------------------------------------------+
+
+where :math:`x` is unbounded (free). 
+In the first step the algorithm will determine that :math:`x \geq 0` since :math:`\sqrt x` is not defined for :math:`x < 0`. 
+In the next step we get that :math:`x = 6 - \sqrt x \leq 6` and in the following step :math:`x = 6 - \sqrt x \geq 6 - \sqrt 6`. 
+Then we get :math:`x \leq 6 - \sqrt{6-\sqrt{6}}` and so on. 
+Both the upper and lower bound of :math:`x` will converge to 4 but we stop this iterative process if the relative change of one of the bounds is smaller than an epsilon.
 
 References
 -----------
