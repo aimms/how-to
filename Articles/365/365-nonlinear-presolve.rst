@@ -253,3 +253,4 @@ mixed-integer nonlinear programs: A theoretical and computational study,
 
 .. spelling:word-list::
     doubleton
+    nonconvex
