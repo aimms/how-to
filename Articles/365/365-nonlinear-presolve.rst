@@ -96,9 +96,10 @@ feasibility-based bounds tightening.
 
 Assume we have a linear constraint i that originally has the form:
 
-+-----+----------------------------------------------------+
-|  5  | :math:`\sum_{j}a_{ij}x_{j} \leq b_{i}`             |
-+-----+----------------------------------------------------+
++-----+-----------------------------------------------------------------------------------+
+|  5  | :math:`\sum_{j}a_{ij}x_{j} \leq b_{i}`                                            |
++-----+-----------------------------------------------------------------------------------+
+
 
 If we assume that all variables in this constraint have finite bounds then we can determine the following lower and upper limits on constraint :math:`i`:
 
@@ -129,13 +130,13 @@ If we face the last situation mentioned above, i.e., :math:`\underline{b_i} < b_
 bounds on a variable :math:`k` in constraint :math:`i`:
 
 +-----+-----------------------------------------------------------------------------------+
-|  8  | :math:`x_k \leq l_k +(b_i - \underline{b_i})/a_{ik}`   if :math:`a_{ik} > 0`      |
+|  8  | :math:`x_k \leq l_k +(b_i - \underline{b_i})/a_{ik}`, if :math:`a_{ik} > 0`       |
 +-----+-----------------------------------------------------------------------------------+
 
 and 
 
 +-----+-----------------------------------------------------------------------------------+
-|  9  | :math:`x_k \geq u_k +(b_i - \underline{b_i})/a_{ik}`   if :math:`a_{ik} < 0`      |
+|  9  | :math:`x_k \geq u_k +(b_i - \underline{b_i})/a_{ik}`, if :math:`a_{ik} < 0`       |
 +-----+-----------------------------------------------------------------------------------+
 
 If the upper bound given by (8) is smaller than the current lower bound of variable :math:`k` then the problem is infeasible. If it is smaller then
@@ -166,7 +167,16 @@ Note that if there are no linear terms in constraint (10) then :math:`\underline
 Nonlinear expressions in AIMMS are stored in an expression tree. By going through the expression tree from the top node to the leafs we can
 sometimes derive bounds on some of the variables in the expression. For example, assume we have the constraint 
 
-:math:`sqrt(ln(x)) \leq 2`
++-----+-----------------------------------------------------------------------------------+
+|     | :math:`sqrt(ln(x)) \leq 2`                                                        |
++-----+-----------------------------------------------------------------------------------+
+
+with :math:`x` unbounded. Figure 1 shows that then the :math:`ln(x)` sub-expression should be in the range :math:`[0,4]` since :math:`sqrt(y)` is not
+defined for :math:`y \in (-\infty, 0)`, which implies that :math:`x` should be in the range :math:`[1, e^{4}]`.
+
+.. image:: images/figure1.png
+    :align: center
+Figure 1: Bound reduction using expression :math:`sqrt(ln(x))`.
 
 .. spelling:word-list::
     doubleton
