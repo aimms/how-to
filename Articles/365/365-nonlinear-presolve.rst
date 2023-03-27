@@ -176,8 +176,80 @@ defined for :math:`y \in (-\infty, 0)`, which implies that :math:`x` should be i
 
 .. image:: images/figure1.png
     :align: center
-    
-Figure 1: Bound reduction using expression :math:`sqrt(ln(x))`.
+
+.. class:: center
+    Figure 1: Bound reduction using expression :math:`sqrt(ln(x))`.
+
+If an expression is defined on a certain range only, then this range can sometimes be used to reduce a bound of a variable. 
+For example, the function :math:`sqrt(x-1)` is only defined for :math:`x \geq 1` and therefore the 
+presolve algorithm will derive 1 as a lower bound for :math:`x`.
+
+If we reverse the order of going through an expression tree, hence going up starting from the leaf nodes, we can bound the expression. 
+Consider for example the constraint:
+
++-----+-----------------------------------------------------------------------------------+
+|     | :math:`y + sqrt(ln(x)) \leq 10`                                                   |
++-----+-----------------------------------------------------------------------------------+
+
+and let :math:`x` have a range of :math:`[e^4, e^16]`. 
+Then from Figure 2 it follows that the nonlinear expression has a range of :math:`[2,4]` which implies that :math:`y \leq 8`.
+
+References
+-----------
+
+[1] Andersen, E.D., K.D. Andersen, Presolving in linear programming,
+*Mathematical Programming* **71**\ (2), 1995, pp. 221-245.
+
+[2] Belotti, P., Lee, J., Liberti, L., Margot, F., Wächter, A.,
+Branching and bounds tightening techniques for non-convex MINLP,
+*Optimization Methods and Software* **24**\ (4), 2009, pp. 597-634.
+
+[3] Bisschop, J., M. Roelofs, *AIMMS Language reference, Version 3.11*,
+Paragon Decision Technology, Haarlem, 2011.
+
+[4] Brearley, A.L., G. Mitra, H.P. Williams, Analysis of mathematical
+programming problems prior to applying the simplex algorithm,
+*Mathematical Programming* **8**, 1975, pp. 54-83.
+
+[5] Drud, A.S., *CONOPT, A system for large scale nonlinear
+optimization, Reference manual for version 3.14*, ARKI Consulting and
+Development A/S, 2004.
+
+[6] Fourer, R., D.M. Gay, Experience with a primal presolve algorithm,
+in: *Large Scale Optimization: State of the Art*, W.W. Hager, D.W. Hearn
+and P.M. Pardalos (eds.), Kluwer Academic Publishers, 1994, pp. 135-154.
+
+[7] Gondzio, J., Presolve analysis of linear programs prior to applying
+the interior-point method, *INFORMS Journal on Computing* **9**, 1997,
+pp. 73-91.
+
+[8] Gould, N.I.M., Ph.L. Toint, Preprocessing for quadratic programming,
+*Mathematical Programming B* **100**\ (1), 2004, pp. 95-132.
+
+[9] Mészáros, C., U.H. Suhl, Advanced preprocessing techniques for
+linear and quadratic programming, *OR Spectrum* **25**\ (4), 2003, pp.
+575-595.
+
+[10] Nannicini, G., Belotti, P., Lee, J., Linderoth, J., Margot, F.,
+Waechter, A, A Probing Algorithm for MINLP with Failure Prediction by
+SVM, in: *CPAIOR 2011, LNCS Volume 6697*, T. Achterberg and J.C. Beck
+(eds.), 2011, pp. 154-169.
+
+[11] Ryoo, H.S., N.V. Sahinidis, Global optimization of nonconvex NLPs
+and MINLPs with applications in process design, *Computers & Chemical
+Engineering*, **19**\ (5), 1995, pp. 551-566.
+
+[12] Savelsbergh, M.W.P., Preprocessing and Probing Techniques for Mixed
+Integer Programming Problems, *ORSA Journal on Computing*\ **6**\ *,*
+1994, pp. 445-454.
+
+[13] Smith E. M., *On the optimal design of continuous processes*, PhD
+thesis, Imperial College of Science, Technology and Medicine, University
+of London, 1996.
+
+[14] Tawarmalani, M., N.V. Sahinidis, Global optimization of
+mixed-integer nonlinear programs: A theoretical and computational study,
+*Mathematical Programming* **99**\ (3), 2004, pp. 563-591.
 
 .. spelling:word-list::
     doubleton
