@@ -112,18 +112,61 @@ and
 |  7  | :math:`\overline{b_i} = \sum_{j \in P_i}a_{ij}u_j + \sum_{j \in N_i}a_{ij}l_j`    |
 +-----+-----------------------------------------------------------------------------------+
 
-where :math:`P_i = {j: a_{ij} > 0}` and :math:`N_i = {j: a_{ij} < 0}` define the sets of variables with a positive and a negative
+where :math:`P_i = \{j: a_{ij} > 0\}` and :math:`N_i = \{j: a_{ij} < 0\}` define the sets of variables with a positive and a negative
 coefficient in constraint :math:`i` respectively. By comparing the lower and upper limits of a constraint with the
 right-hand-side value we obtain one of the following situations:
 
--  Constraint (5) cannot be satisfied and is infeasible.
+-  :math:`\underline{b_i} > b_i`. Constraint (5) cannot be satisfied and is infeasible.
 
--  Constraint (5) can only be satisfied if all variables in the constraint are fixed on their lower bound if they have a positive
+-  :math:`\underline{b_i} = b_i`. Constraint (5) can only be satisfied if all variables in the constraint are fixed on their lower bound if they have a positive
    coefficient, or fixed on their upper bound if they have a negative coefficient. The constraint and all its variables can be removed from the problem.
 
--  Constraint (5) is redundant, i.e. will always be satisfied, and can be removed from the problem.
+-  :math:`\overline{b_i} \leq b_i`. Constraint (5) is redundant, i.e. will always be satisfied, and can be removed from the problem.
 
--  Constraint (5) cannot be eliminated but can often be used to improve the bounds of one or more variables as we will see below.
+-  :math:`\underline{b_i} < b_i < \overline{b_i}`. Constraint (5) cannot be eliminated but can often be used to improve the bounds of one or more variables as we will see below.
+
+If we face the last situation mentioned above, i.e., :math:`\underline{b_i} < b_i < \overline{b_i}`, then combining (5) with (6) gives the following
+bounds on a variable :math:`k` in constraint :math:`i`:
+
++-----+-----------------------------------------------------------------------------------+
+|  8  | :math:`x_k \leq l_k +(b_i - \underline{b_i})/a_{ik}`   if :math:`a_{ik} > 0`      |
++-----+-----------------------------------------------------------------------------------+
+
+and 
+
++-----+-----------------------------------------------------------------------------------+
+|  9  | :math:`x_k \geq u_k +(b_i - \underline{b_i})/a_{ik}`   if :math:`a_{ik} < 0`      |
++-----+-----------------------------------------------------------------------------------+
+
+If the upper bound given by (8) is smaller than the current lower bound of variable :math:`k` then the problem is infeasible. If it is smaller then
+the current upper bound of variable :math:`k`, we can update the upper bound for variable :math:`k`. A similar procedure can be applied to the lower bound as given by (9).
+
+Note that bounds (8) and (9) can only be derived if all bounds :math:`l_k` and :math:`u_j` in (6) are finite. But also if exactly one of the bounds in
+(6) is an infinite bound, we can still find an implied bound for the corresponding variable. Our algorithm also uses this technique but for the details we refer to [7].
+
+Bounds Tightening Using Nonlinear Constraints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We can rewrite a nonlinear constraint :math:`i` in (2) as
+
++-----+-----------------------------------------------------------------------------------+
+| 10  | \sum_{j}a_{ij}x_{j} + h_{i}(y) \leq d_{i}                                         |
++-----+-----------------------------------------------------------------------------------+
+
+separating the linear variables :math:`x` in this constraint from the nonlinear variables :math:`y`. As before, see (6) and (7), we can find lower
+and upper limits on the linear part of the constraint, and again we denote them by and respectively. For this constraint we can derive the
+following upper bound on the nonlinear term in (10):
+
++-----+-----------------------------------------------------------------------------------+
+| 11  | h_{i}(y) \leq d_{i} - \underline{b_i}                                             |
++-----+-----------------------------------------------------------------------------------+
+
+Note that if there are no linear terms in constraint (10) then :math:`\underline{b_i}=0`.
+
+Nonlinear expressions in AIMMS are stored in an expression tree. By going through the expression tree from the top node to the leafs we can
+sometimes derive bounds on some of the variables in the expression. For example, assume we have the constraint 
+
+:math:`sqrt(ln(x)) \leq 2`
 
 .. spelling:word-list::
     doubleton
