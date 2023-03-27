@@ -9,7 +9,7 @@ View the PDF file:
 Introduction
 ------------
 
-The AIMMS modeling language [3] is linked to many fi rst class solvers for solving optimization problems. All
+The AIMMS modeling language [3] is linked to many first class solvers for solving optimization problems. All
 linear solvers in AIMMS (CPLEX, XA, XPRESS, MOSEK) use a presolve algorithm whereby the problem input
 is examined for logical reduction opportunities. The goal is to reduce the size of the problem. A reduction in
 problem size in general leads to a reduction in total run time (including the time spent in the presolve
@@ -17,7 +17,7 @@ algorithm itself).
 
 Of all nonlinear solvers in AIMMS (CONOPT, KNITRO, MINOS, SNOPT, BARON, LGO, AOA) only CONOPT
 and BARON use preprocessing techniques. When CONOPT [5] solves a model, it tries to detect recursive
-or triangular equations that can be solved before the optimization is started. The equations identifi ed in
+or triangular equations that can be solved before the optimization is started. The equations identified in
 this way can be solved independent of the optimization, and they can therefore be removed from the
 optimization process. In BARON [14] range reduction is part of the branch and reduce algorithm and used
 at every node in the search tree.
@@ -35,8 +35,7 @@ a better solution.
 
 A local solver might sometimes fail to find a solution and then it is often not clear whether that is caused by
 the problem being infeasible or by the solver failing to find a solution for a feasible problem. The presolve
-algorithm may reveal inconsistent constraints and/or variable bounds and hence identify a problem as
-infeasible.
+algorithm may reveal inconsistent constraints and/or variable bounds and hence identify a problem as infeasible.
 
 Presolve Techniques
 ---------------------
@@ -71,7 +70,7 @@ The nonlinear presolve algorithm will:
 
 -  Delete fixed variables;
 
--  Remove one variable of a doubleton; and
+-  Remove one variable of a doubleton; 
 
 -  Delete redundant constraints.
 
@@ -98,3 +97,6 @@ feasibility-based bounds tightening.
 Assume we have a linear constraint i that originally has the form
 
 (5) :math:`\sum_{j}a_{i,j}x_{j} \leq b_{i}` 
+
+.. spellcheck::
+    doubleton
