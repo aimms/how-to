@@ -56,8 +56,8 @@ We consider the following constrained nonlinear optimization problem:
 |  4  | :math:`l \leq x \leq u`                            |
 +-----+----------------------------------------------------+
 
-where :math:`x \in \mathbb{R_{n}}`, :math:`f: \mathbb{R_{n}} \rightarrow \mathbb{R}`, :math:`g: \mathbb{R_{n}} \rightarrow \mathbb{R_{p}}`, 
-and :math:`d \in \mathbb{R_{p}}`, :math:`b \in \mathbb{R_{m}}`, :math:`A \in \mathbb{R_{nxm}}`. The constraints (2)
+where :math:`x \in \mathbb{R}_{n}`, :math:`f: \mathbb{R}_{n} \rightarrow \mathbb{R}`, :math:`g: \mathbb{R}_{n} \rightarrow \mathbb{R}_{p}`, 
+and :math:`d \in \mathbb{R}_{p}`, :math:`b \in \mathbb{R}_{m}`, :math:`A \in \mathbb{R}_{nxm}`. The constraints (2)
 represent the nonlinear constraints in the problem and the constraints (3) the linear constraints. The objective function in (1) might be
 linear or nonlinear. In this paper we focus on problems that contain only continuous variables, although our presolve algorithm can also be
 used for problems that have integer variables.
@@ -94,9 +94,36 @@ In the following analysis we use a linear “less than or equal to” constraint
 other constraint types. The technique described here is known in the global optimization literature as
 feasibility-based bounds tightening.
 
-Assume we have a linear constraint i that originally has the form
+Assume we have a linear constraint i that originally has the form:
 
-(5) :math:`\sum_{j}a_{i,j}x_{j} \leq b_{i}` 
++-----+----------------------------------------------------+
+|  5  | :math:`\sum_{j}a_{ij}x_{j} \leq b_{i}`             |
++-----+----------------------------------------------------+
+
+If we assume that all variables in this constraint have finite bounds then we can determine the following lower and upper limits on constraint :math:`i`:
+
++-----+-----------------------------------------------------------------------------------+
+|  6  | :math:`\underline{b_i} = \sum_{j \in P_i}a_{ij}l_j + \sum_{j \in N_i}a_{ij}u_j`   |
++-----+-----------------------------------------------------------------------------------+
+
+and
+
++-----+-----------------------------------------------------------------------------------+
+|  7  | :math:`\overline{b_i} = \sum_{j \in P_i}a_{ij}u_j + \sum_{j \in N_i}a_{ij}l_j`    |
++-----+-----------------------------------------------------------------------------------+
+
+where :math:`P_i = {j: a_{ij} > 0}` and :math:`N_i = {j: a_{ij} < 0}` define the sets of variables with a positive and a negative
+coefficient in constraint :math:`i` respectively. By comparing the lower and upper limits of a constraint with the
+right-hand-side value we obtain one of the following situations:
+
+-  Constraint (5) cannot be satisfied and is infeasible.
+
+-  Constraint (5) can only be satisfied if all variables in the constraint are fixed on their lower bound if they have a positive
+   coefficient, or fixed on their upper bound if they have a negative coefficient. The constraint and all its variables can be removed from the problem.
+
+-  Constraint (5) is redundant, i.e. will always be satisfied, and can be removed from the problem.
+
+-  Constraint (5) cannot be eliminated but can often be used to improve the bounds of one or more variables as we will see below.
 
 .. spelling:word-list::
     doubleton
