@@ -255,9 +255,8 @@ The Algorithm
 Below we present our presolve algorithm in pseudo-code. We denote by :math:`C` the set of all constraints in the problem, and by :math:`V` the set of
 variables that changed during the bound reduction step for some constraint :math:`c \in C`.
 
-.. code-block:: aimms 
-    :linenos:
-
+.. code-block:: text 
+    
     RemoveDoubletons
     for (c in C) do
         OutOfDate(c) := true;
