@@ -175,7 +175,7 @@ with :math:`x` unbounded. Figure 1 shows that then the :math:`ln(x)` sub-express
 defined for :math:`y \in (-\infty, 0)`, which implies that :math:`x` should be in the range :math:`[1, e^{4}]`.
 
 .. image:: images/figure1.png
-    :align: left
+    :align: center
 
 *Figure 1: Bound reduction using expression :math:`sqrt(ln(x))`.*
 
@@ -194,7 +194,7 @@ and let :math:`x` have a range of :math:`[e^4, e^16]`.
 Then from Figure 2 it follows that the nonlinear expression has a range of :math:`[2,4]` which implies that :math:`y \leq 8`.
 
 .. image:: images/figure2.png
-    :align: left
+    :align: center
 
 *Figure 2: Bounding expression :math:`sqrt(ln(x))`.*
 
@@ -225,7 +225,7 @@ Then we get :math:`x \leq 6 - \sqrt{6-\sqrt{6}}` and so on.
 Both the upper and lower bound of :math:`x` will converge to 4 but we stop this iterative process if the relative change of one of the bounds is smaller than an epsilon.
 
 .. image:: images/figure3.png
-    :align: left
+    :align: center
 
 *Figure 3: Bound reduction using expression :math:`ln(e^x∗y^2).`*
 
@@ -233,7 +233,7 @@ The presolve algorithm can handle expressions build up by the operators mentione
 that is not in this table then it will be ignored by the presolve algorithm. A constraint will also be ignored if it contains an external function.
 
 .. image:: images/table1.png
-    :align: left
+    :align: center
 
 *Table 1: Operators used by the presolve algorithm.*
 
@@ -255,7 +255,46 @@ The Algorithm
 Below we present our presolve algorithm in pseudo-code. We denote by :math:`C` the set of all constraints in the problem, and by :math:`V` the set of
 variables that changed during the bound reduction step for some constraint :math:`c \in C`.
 
+.. code-block:: aimms 
+    :linenos:
 
+    RemoveDoubletons
+    for (c in C) do
+        OutOfDate(c) := true;
+    endfor;
+
+    Iter := 1;
+    SomeConstraintOutOfData := true;
+    
+    while ( Iter ≤ MaxIter and SomeConstraintOutOfData ) do
+        SomeConstraintOutOfDate := false;
+        for ( c | OutOfDate(c) ) do
+            BoundChanged := DoBoundReduction( c, V );
+            if ( not IsLinear(c) ) then
+
+                /* Nonlinear constraint */
+                NonlinearBoundChanged := true;
+                while ( NonlinearBoundChanged ) do
+                    NonlinearBoundChanged := DoBoundReduction( c, V );
+                endwhile;
+            endif;
+        
+            OutOfDate(c) := false;
+        
+            if ( BoundChanged ) then
+                SomeConstraintOutOfData := true;
+                
+                for ( v V ) do
+                    /* If the bound of some variable changed then mark all constraints
+                    that contain this variable as out of date */
+                    MarkConstraintsAsOutOfDate( v )
+                endfor;
+            endif;
+        endfor;
+    endwhile;
+    RemoveDoubletons;
+    DeleteFixedVariables;
+    DeleteRedundantConstraints;
 
 Note that the algorithm removes doubletons before and after the loop for bound reductions.
 
