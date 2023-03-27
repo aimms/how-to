@@ -224,6 +224,87 @@ In the next step we get that :math:`x = 6 - \sqrt x \leq 6` and in the following
 Then we get :math:`x \leq 6 - \sqrt{6-\sqrt{6}}` and so on. 
 Both the upper and lower bound of :math:`x` will converge to 4 but we stop this iterative process if the relative change of one of the bounds is smaller than an epsilon.
 
+.. image:: images/figure3.png
+    :align: left
+
+*Figure 3: Bound reduction using expression :math:`ln(e^x∗y^2).`*
+
+The presolve algorithm can handle expressions build up by the operators mentioned in Table 1. If a nonlinear constraint contains an operator
+that is not in this table then it will be ignored by the presolve algorithm. A constraint will also be ignored if it contains an external function.
+
+.. image:: images/table1.png
+    :align: left
+
+*Table 1: Operators used by the presolve algorithm.*
+
+Doubletons
+~~~~~~~~~~
+
+If a problem contains a constraint of the form :math:`x = a ∗ y`, :math:`a \neq 0`, then the variables :math:`x` and :math:`y` define a doubleton. 
+If the presolve algorithm detects a doubleton then it will replace the variable :math:`x` by the term :math:`a*y` in every constraint in which :math:`x` appears, 
+and remove the variable :math:`x` from the problem.
+
+For some problems good initial values are given to the variables. In case the initial value given to :math:`x` does not match the initial value of
+:math:`y` according to the relationship :math:`x = a ∗ y`, it is unclear which initial value we should assign to :math:`y`. Preliminary test results showed
+that in such a case it is better not to remove the doubleton, and pass both variables to the solver with their own initial value. This has
+become the default behavior of our presolve algorithm regarding doubletons.
+
+The Algorithm
+~~~~~~~~~~~~~~~
+
+Below we present our presolve algorithm in pseudo-code. We denote by :math:`C` the set of all constraints in the problem, and by :math:`V` the set of
+variables that changed during the bound reduction step for some constraint :math:`c \in C`.
+
+
+
+Note that the algorithm removes doubletons before and after the loop for bound reductions.
+
+In AIMMS there are several options that can be used to influence which presolve techniques will be used by the algorithm. For instance a user
+can choose to only use linear constraints for reducing bounds, or to not remove doubletons.
+
+Possible Improvements
+----------------------
+
+Our presolve algorithm currently only uses feasibility-based bounds tightening. Our presolve algorithm could be extended with other bound
+tightening procedures. Optimality-based bounds tightening solves two linear programming problems for each variable to tighten bounds [2,13].
+Probing is a bound-tightening procedure often applied to mixed integer linear programming [12]. It explores the consequences of restricting a
+variable to a subinterval with the goal of tightening its bounds.
+Recently it has also been applied to mixed integer nonlinear programming [2,10]. A drawback of both procedures is that they are more time
+consuming than the feasibility-based bounds tightening procedure. We consider reduced-cost bound tightening [2,11] as less attractive.
+
+A variable bound tightened during the bound reduction step of a linear constraint is redundant. These redundant bounds make the problem more
+degenerate and might result in some solvers taking more iterations to solve the problem. To overcome this problem the presolve algorithm in
+AMPL [6] maintains two sets of variable bounds, namely the strongest bounds the algorithm can deduce and bounds that the algorithm does not
+know to be redundant with the constraints passed to the solver. In our algorithm we do not attempt to avoid degeneracy; clearly here there is
+some room for improvement.
+
+As a consequence of the presolve algorithm, dual information is lost. For the presolve algorithm in AMPL a method is described in [6] to
+recover the values of the dual variables for the eliminated constraints. The AMPL presolve algorithm, however, only uses linear constraints to
+reduce bounds and using nonlinear constraints makes the recovering of dual information more complicated. Our current algorithm does not
+recover dual information.
+
+Infeasibility Analysis
+----------------------
+
+In case the nonlinear presolve algorithm detects that a model is infeasible, it can (optionally) display an infeasibility analysis. The
+information displayed is the constraint that appeared to be infeasible and all other constraints that the nonlinear presolve algorithm used to
+reduce the bounds of the variables in this infeasible constraint. Also the reductions on the variable bounds in these constraints are shown.
+
+For many models the information displayed in the infeasibility analysis will help the modeler to quickly detect an error in the model. But for
+some models the amount of information can be large and will not be useful.
+
+Conclusions
+----------------------
+
+A nonlinear presolve algorithm is a valuable add-on for any modeling system. It can help to reduce the size of a model and to tighten the
+variable bounds, helping the nonlinear solver in finding a good solution. Preliminary test results have shown that for many models the
+model was solved faster or a better solution was found if the nonlinear presolve algorithm was used. On the other hand, for many models the
+solving time increased although the amount of reductions done was large.
+We suspect that this is caused by the models becoming more degenerated.
+
+The nonlinear presolve algorithm offers a tool to quickly detect inconsistencies in an infeasible model. Also this tool makes use of the
+expression trees of the nonlinear constraint to reduce variable bounds.
+
 References
 -----------
 
@@ -284,3 +365,4 @@ mixed-integer nonlinear programs: A theoretical and computational study,
 .. spelling:word-list::
     doubleton
     nonconvex
+    unary
