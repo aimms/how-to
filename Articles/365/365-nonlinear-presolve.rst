@@ -150,7 +150,7 @@ Bounds Tightening Using Nonlinear Constraints
 We can rewrite a nonlinear constraint :math:`i` in (2) as
 
 +-----+-----------------------------------------------------------------------------------+
-| 10  | \sum_{j}a_{ij}x_{j} + h_{i}(y) \leq d_{i}                                         |
+| 10  | :math:`\sum_{j}a_{ij}x_{j} + h_{i}(y) \leq d_{i}`                                 |
 +-----+-----------------------------------------------------------------------------------+
 
 separating the linear variables :math:`x` in this constraint from the nonlinear variables :math:`y`. As before, see (6) and (7), we can find lower
@@ -158,7 +158,7 @@ and upper limits on the linear part of the constraint, and again we denote them 
 following upper bound on the nonlinear term in (10):
 
 +-----+-----------------------------------------------------------------------------------+
-| 11  | h_{i}(y) \leq d_{i} - \underline{b_i}                                             |
+| 11  | :math:`h_{i}(y) \leq d_{i} - \underline{b_i}`                                     |
 +-----+-----------------------------------------------------------------------------------+
 
 Note that if there are no linear terms in constraint (10) then :math:`\underline{b_i}=0`.
