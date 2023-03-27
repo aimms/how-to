@@ -366,3 +366,5 @@ mixed-integer nonlinear programs: A theoretical and computational study,
     doubleton
     nonconvex
     unary
+    subinterval
+    doubletons
