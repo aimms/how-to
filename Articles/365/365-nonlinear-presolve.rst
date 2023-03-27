@@ -1,10 +1,15 @@
 Nonlinear Presolve Algorithm in AIMMS
 ========================================
 
-This paper describes the AIMMS presolve algorithm for nonlinear problems. This presolve algorithm uses standard techniques like removing singleton rows, deleting fixed variables and redundant constraints, and tightening variable bounds by using linear constraints. Our algorithm also uses the expression tree of nonlinear constraints to tighten variable bounds.
+**Author:** Marcel Hunting. 
 
-View the PDF file: 
-:download:`AIMMS-Whitepaper-Presolver.pdf`
+This paper describes the AIMMS presolve algorithm for nonlinear problems. 
+This presolve algorithm uses standard techniques like removing singleton rows, deleting fixed variables and redundant constraints, 
+and tightening variable bounds by using linear constraints. 
+Our algorithm also uses the expression tree of nonlinear constraints to tighten variable bounds.
+
+.. important::
+    To use this article as reference, please use the whitepaper PDF: :download:`Nonlinear-Presolve-Algorithm-in-AIMMS.pdf`.
 
 Introduction
 ------------
@@ -177,7 +182,7 @@ defined for :math:`y \in (-\infty, 0)`, which implies that :math:`x` should be i
 .. image:: images/figure1.png
     :align: center
 
-*Figure 1: Bound reduction using expression :math:`sqrt(ln(x))`.*
+Figure 1: Bound reduction using expression :math:`sqrt(ln(x))`.
 
 If an expression is defined on a certain range only, then this range can sometimes be used to reduce a bound of a variable. 
 For example, the function :math:`sqrt(x-1)` is only defined for :math:`x \geq 1` and therefore the 
@@ -196,7 +201,7 @@ Then from Figure 2 it follows that the nonlinear expression has a range of :math
 .. image:: images/figure2.png
     :align: center
 
-*Figure 2: Bounding expression :math:`sqrt(ln(x))`.*
+Figure 2: Bounding expression :math:`sqrt(ln(x))`.
 
 If an expression only contains unary operators then we only have to go through the tree from top to bottom once to get the bounds on the variables, 
 and back once to get bounds on the expression. For expressions that contain binary operators the bounding procedure is more complicated. 
@@ -227,7 +232,7 @@ Both the upper and lower bound of :math:`x` will converge to 4 but we stop this 
 .. image:: images/figure3.png
     :align: center
 
-*Figure 3: Bound reduction using expression :math:`ln(e^x∗y^2).`*
+Figure 3: Bound reduction using expression :math:`ln(e^x∗y^2).`
 
 The presolve algorithm can handle expressions build up by the operators mentioned in Table 1. If a nonlinear constraint contains an operator
 that is not in this table then it will be ignored by the presolve algorithm. A constraint will also be ignored if it contains an external function.
@@ -235,7 +240,7 @@ that is not in this table then it will be ignored by the presolve algorithm. A c
 .. image:: images/table1.png
     :align: center
 
-*Table 1: Operators used by the presolve algorithm.*
+Table 1: Operators used by the presolve algorithm.
 
 Doubletons
 ~~~~~~~~~~
@@ -256,7 +261,7 @@ Below we present our presolve algorithm in pseudo-code. We denote by :math:`C` t
 variables that changed during the bound reduction step for some constraint :math:`c \in C`.
 
 .. code-block:: text 
-    
+
     RemoveDoubletons
     for (c in C) do
         OutOfDate(c) := true;
