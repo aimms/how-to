@@ -198,10 +198,10 @@ Consider for example the constraint:
 and let :math:`x` have a range of :math:`[e^4, e^16]`. 
 Then from Figure 2 it follows that the nonlinear expression has a range of :math:`[2,4]` which implies that :math:`y \leq 8`.
 
-.. image:: images/figure2.png
+.. figure:: images/figure2.png
     :align: center
 
-Figure 2: Bounding expression :math:`sqrt(ln(x))`.
+    Figure 2: Bounding expression :math:`sqrt(ln(x))`.
 
 If an expression only contains unary operators then we only have to go through the tree from top to bottom once to get the bounds on the variables, 
 and back once to get bounds on the expression. For expressions that contain binary operators the bounding procedure is more complicated. 
@@ -229,18 +229,18 @@ In the next step we get that :math:`x = 6 - \sqrt x \leq 6` and in the following
 Then we get :math:`x \leq 6 - \sqrt{6-\sqrt{6}}` and so on. 
 Both the upper and lower bound of :math:`x` will converge to 4 but we stop this iterative process if the relative change of one of the bounds is smaller than an epsilon.
 
-.. image:: images/figure3.png
+.. figure:: images/figure3.png
     :align: center
 
-Figure 3: Bound reduction using expression :math:`ln(e^x∗y^2).`
+    Figure 3: Bound reduction using expression :math:`ln(e^x∗y^2).`
 
 The presolve algorithm can handle expressions build up by the operators mentioned in Table 1. If a nonlinear constraint contains an operator
 that is not in this table then it will be ignored by the presolve algorithm. A constraint will also be ignored if it contains an external function.
 
-.. image:: images/table1.png
+.. figure:: images/table1.png
     :align: center
 
-Table 1: Operators used by the presolve algorithm.
+    Table 1: Operators used by the presolve algorithm.
 
 Doubletons
 ~~~~~~~~~~
