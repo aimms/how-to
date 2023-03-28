@@ -61,6 +61,11 @@ We consider the following constrained nonlinear optimization problem:
 |  4  | :math:`l \leq x \leq u`                            |
 +-----+----------------------------------------------------+
 
+.. math:: Min \qquad f(x) \qquad (1)
+.. math:: s.t. \qquad g(x) \leq d \qquad (2) 
+.. math:: \qquad \qquad Ax \leq b \qquad (3)
+.. math:: \qquad \qquad l \leq x \leq u \qquad (4) 
+
 where :math:`x \in \mathbb{R}_{n}`, :math:`f: \mathbb{R}_{n} \rightarrow \mathbb{R}`, :math:`g: \mathbb{R}_{n} \rightarrow \mathbb{R}_{p}`, 
 and :math:`d \in \mathbb{R}_{p}`, :math:`b \in \mathbb{R}_{m}`, :math:`A \in \mathbb{R}_{nxm}`. The constraints (2)
 represent the nonlinear constraints in the problem and the constraints (3) the linear constraints. The objective function in (1) might be
@@ -105,15 +110,11 @@ Assume we have a linear constraint i that originally has the form:
 
 If we assume that all variables in this constraint have finite bounds then we can determine the following lower and upper limits on constraint :math:`i`:
 
-+-----+-----------------------------------------------------------------------------------+
-|  6  | :math:`\underline{b_i} = \sum_{j \in P_i}a_{ij}l_j + \sum_{j \in N_i}a_{ij}u_j`   |
-+-----+-----------------------------------------------------------------------------------+
+.. math:: \underline{b_i} = \sum_{j \in P_i}a_{ij}l_j + \sum_{j \in N_i}a_{ij}u_j \qquad (6)
 
 and
 
-+-----+-----------------------------------------------------------------------------------+
-|  7  | :math:`\overline{b_i} = \sum_{j \in P_i}a_{ij}u_j + \sum_{j \in N_i}a_{ij}l_j`    |
-+-----+-----------------------------------------------------------------------------------+
+.. math:: \overline{b_i} = \sum_{j \in P_i}a_{ij}u_j + \sum_{j \in N_i}a_{ij}l_j \qquad (7)
 
 where :math:`P_i = \{j: a_{ij} > 0\}` and :math:`N_i = \{j: a_{ij} < 0\}` define the sets of variables with a positive and a negative
 coefficient in constraint :math:`i` respectively. By comparing the lower and upper limits of a constraint with the
@@ -131,15 +132,11 @@ right-hand-side value we obtain one of the following situations:
 If we face the last situation mentioned above, i.e., :math:`\underline{b_i} < b_i < \overline{b_i}`, then combining (5) with (6) gives the following
 bounds on a variable :math:`k` in constraint :math:`i`:
 
-+-----+-----------------------------------------------------------------------------------+
-|  8  | :math:`x_k \leq l_k +(b_i - \underline{b_i})/a_{ik}`, if :math:`a_{ik} > 0`       |
-+-----+-----------------------------------------------------------------------------------+
+.. math:: x_k \leq l_k +(b_i - \underline{b_i})/a_{ik}, \qquad if a_{ik} > 0 \qquad (8)
 
 and 
 
-+-----+-----------------------------------------------------------------------------------+
-|  9  | :math:`x_k \geq u_k +(b_i - \underline{b_i})/a_{ik}`, if :math:`a_{ik} < 0`       |
-+-----+-----------------------------------------------------------------------------------+
+.. math:: x_k \geq u_k +(b_i - \underline{b_i})/a_{ik}, \qquad if a_{ik} < 0 \qquad (9)
 
 If the upper bound given by (8) is smaller than the current lower bound of variable :math:`k` then the problem is infeasible. If it is smaller then
 the current upper bound of variable :math:`k`, we can update the upper bound for variable :math:`k`. A similar procedure can be applied to the lower bound as given by (9).
@@ -152,34 +149,30 @@ Bounds Tightening Using Nonlinear Constraints
 
 We can rewrite a nonlinear constraint :math:`i` in (2) as
 
-+-----+-----------------------------------------------------------------------------------+
-| 10  | :math:`\sum_{j}a_{ij}x_{j} + h_{i}(y) \leq d_{i}`                                 |
-+-----+-----------------------------------------------------------------------------------+
+.. math:: \sum_{j}a_{ij}x_{j} + h_{i}(y) \leq d_{i} \qquad (10)
 
 separating the linear variables :math:`x` in this constraint from the nonlinear variables :math:`y`. As before, see (6) and (7), we can find lower
 and upper limits on the linear part of the constraint, and again we denote them by and respectively. For this constraint we can derive the
 following upper bound on the nonlinear term in (10):
 
-+-----+-----------------------------------------------------------------------------------+
-| 11  | :math:`h_{i}(y) \leq d_{i} - \underline{b_i}`                                     |
-+-----+-----------------------------------------------------------------------------------+
+.. math:: h_{i}(y) \leq d_{i} - \underline{b_i} \qquad (11)
 
 Note that if there are no linear terms in constraint (10) then :math:`\underline{b_i}=0`.
 
 Nonlinear expressions in AIMMS are stored in an expression tree. By going through the expression tree from the top node to the leafs we can
 sometimes derive bounds on some of the variables in the expression. For example, assume we have the constraint 
 
-+-----+-----------------------------------------------------------------------------------+
-|     | :math:`sqrt(ln(x)) \leq 2`                                                        |
-+-----+-----------------------------------------------------------------------------------+
+.. math:: sqrt(ln(x)) \leq 2
 
-with :math:`x` unbounded. Figure 1 shows that then the :math:`ln(x)` sub-expression should be in the range :math:`[0,4]` since :math:`sqrt(y)` is not
+with :math:`x` unbounded. :numref:`figure-01` shows that then the :math:`ln(x)` sub-expression should be in the range :math:`[0,4]` since :math:`sqrt(y)` is not
 defined for :math:`y \in (-\infty, 0)`, which implies that :math:`x` should be in the range :math:`[1, e^{4}]`.
+
+.. _figure-01:
 
 .. figure:: images/figure1.png
    :align: center
     
-   Figure 1: Bound reduction using expression :math:`sqrt(ln(x))`.
+   Bound reduction using expression :math:`sqrt(ln(x))`.
 
 If an expression is defined on a certain range only, then this range can sometimes be used to reduce a bound of a variable. 
 For example, the function :math:`sqrt(x-1)` is only defined for :math:`x \geq 1` and therefore the 
@@ -188,37 +181,33 @@ presolve algorithm will derive 1 as a lower bound for :math:`x`.
 If we reverse the order of going through an expression tree, hence going up starting from the leaf nodes, we can bound the expression. 
 Consider for example the constraint:
 
-+-----+-----------------------------------------------------------------------------------+
-|     | :math:`y + sqrt(ln(x)) \leq 10`                                                   |
-+-----+-----------------------------------------------------------------------------------+
+.. math:: y + sqrt(ln(x)) \leq 10
 
 and let :math:`x` have a range of :math:`[e^4, e^16]`. 
-Then from Figure 2 it follows that the nonlinear expression has a range of :math:`[2,4]` which implies that :math:`y \leq 8`.
+Then from :numref:`figure-02` it follows that the nonlinear expression has a range of :math:`[2,4]` which implies that :math:`y \leq 8`.
+
+.. _figure-02:
 
 .. figure:: images/figure2.png
     :align: center
 
-    Figure 2: Bounding expression :math:`sqrt(ln(x))`.
+    Bounding expression :math:`sqrt(ln(x))`.
 
 If an expression only contains unary operators then we only have to go through the tree from top to bottom once to get the bounds on the variables, 
 and back once to get bounds on the expression. For expressions that contain binary operators the bounding procedure is more complicated. 
 For example, consider the constraint
 
-+-----+-----------------------------------------------------------------------------------+
-|     | :math:`ln(e^x * y^2) \leq 4`                                                      |
-+-----+-----------------------------------------------------------------------------------+
+.. math:: ln(e^x * y^2) \leq 4
 
 and let variable :math:`x` have range :math:`[0,\infty)` and variable :math:`y` be unbounded. 
 To process the multiplication operator we first have to bound the :math:`e^x * y^2` sub-expression and the :math:`e^x` and :math:`y^2` sub-expressions
-(Step 1 in Figure 3). Since expression :math:`e^x * y^2` has range :math:`(0, e^4]` and expression :math:`e^x` has range :math:`[1,\infty)` we can conclude
-that expression :math:`y^2` must have a range of :math:`(0, e^4]` which implies that :math:`y` is in the range :math:`[-e^2, e^2]` (see Step 2 in Figure 3).
+(Step 1 in :numref:`figure-03`). Since expression :math:`e^x * y^2` has range :math:`(0, e^4]` and expression :math:`e^x` has range :math:`[1,\infty)` we can conclude
+that expression :math:`y^2` must have a range of :math:`(0, e^4]` which implies that :math:`y` is in the range :math:`[-e^2, e^2]` (see Step 2 in :numref:`figure-03`).
 
 If a bound of one of the variables in the nonlinear part of a constraint changes we process that constraint again immediately. We stop if no
 bound was changed significantly. Like this we can solve the following constraint in one iteration of the algorithm:
 
-+-----+-----------------------------------------------------------------------------------+
-|     | :math:`\sqrt x + x = 6`                                                           |
-+-----+-----------------------------------------------------------------------------------+
+.. math:: \sqrt x + x = 6
 
 where :math:`x` is unbounded (free). 
 In the first step the algorithm will determine that :math:`x \geq 0` since :math:`\sqrt x` is not defined for :math:`x < 0`. 
@@ -226,18 +215,22 @@ In the next step we get that :math:`x = 6 - \sqrt x \leq 6` and in the following
 Then we get :math:`x \leq 6 - \sqrt{6-\sqrt{6}}` and so on. 
 Both the upper and lower bound of :math:`x` will converge to 4 but we stop this iterative process if the relative change of one of the bounds is smaller than an epsilon.
 
+.. _figure-03:
+
 .. figure:: images/figure3.png
     :align: center
 
-    Figure 3: Bound reduction using expression :math:`ln(e^x∗y^2).`
+    Bound reduction using expression :math:`ln(e^x∗y^2).`
 
-The presolve algorithm can handle expressions build up by the operators mentioned in Table 1. If a nonlinear constraint contains an operator
+The presolve algorithm can handle expressions build up by the operators mentioned in :numref:`figure-04`. If a nonlinear constraint contains an operator
 that is not in this table then it will be ignored by the presolve algorithm. A constraint will also be ignored if it contains an external function.
+
+.. _figure-04:
 
 .. figure:: images/table1.png
     :align: center
 
-    Table 1: Operators used by the presolve algorithm.
+    Operators used by the presolve algorithm.
 
 Doubletons
 ~~~~~~~~~~
