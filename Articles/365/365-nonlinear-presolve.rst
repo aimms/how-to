@@ -101,10 +101,7 @@ feasibility-based bounds tightening.
 
 Assume we have a linear constraint i that originally has the form:
 
-+-----+-----------------------------------------------------------------------------------+
-|  5  | :math:`\sum_{j}a_{ij}x_{j} \leq b_{i}`                                            |
-+-----+-----------------------------------------------------------------------------------+
-
+.. math:: \sum_{j}a_{ij}x_{j} \leq b_{i} \qquad (5)
 
 If we assume that all variables in this constraint have finite bounds then we can determine the following lower and upper limits on constraint :math:`i`:
 
