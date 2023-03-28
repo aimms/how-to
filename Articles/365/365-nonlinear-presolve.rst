@@ -47,27 +47,13 @@ Presolve Techniques
 
 We consider the following constrained nonlinear optimization problem:
 
-+-----+----------------------------------------------------+
-| **Minimize:**                                            |
-+-----+----------------------------------------------------+
-|  1  | :math:`f(x)`                                       |
-+-----+----------------------------------------------------+
-| **Constraints:**                                         |
-+-----+----------------------------------------------------+
-|  2  | :math:`g(x) \leq d`                                |
-+-----+----------------------------------------------------+
-|  3  | :math:`Ax \leq b`                                  |
-+-----+----------------------------------------------------+
-|  4  | :math:`l \leq x \leq u`                            |
-+-----+----------------------------------------------------+
-
 .. math:: Min \qquad f(x) \qquad (1)
 .. math:: s.t. \qquad g(x) \leq d \qquad (2) 
 .. math:: \qquad \qquad Ax \leq b \qquad (3)
 .. math:: \qquad \qquad l \leq x \leq u \qquad (4) 
 
-where :math:`x \in \mathbb{R}_{n}`, :math:`f: \mathbb{R}_{n} \rightarrow \mathbb{R}`, :math:`g: \mathbb{R}_{n} \rightarrow \mathbb{R}_{p}`, 
-and :math:`d \in \mathbb{R}_{p}`, :math:`b \in \mathbb{R}_{m}`, :math:`A \in \mathbb{R}_{nxm}`. The constraints (2)
+where :math:`x \in \mathbb{R}^{n}`, :math:`f: \mathbb{R}^{n} \rightarrow \mathbb{R}`, :math:`g: \mathbb{R}^{n} \rightarrow \mathbb{R}^{p}`, 
+and :math:`d \in \mathbb{R}^{p}`, :math:`b \in \mathbb{R}^{m}`, :math:`A \in \mathbb{R}^{nxm}`. The constraints (2)
 represent the nonlinear constraints in the problem and the constraints (3) the linear constraints. The objective function in (1) might be
 linear or nonlinear. In this paper we focus on problems that contain only continuous variables, although our presolve algorithm can also be
 used for problems that have integer variables.
@@ -132,11 +118,11 @@ right-hand-side value we obtain one of the following situations:
 If we face the last situation mentioned above, i.e., :math:`\underline{b_i} < b_i < \overline{b_i}`, then combining (5) with (6) gives the following
 bounds on a variable :math:`k` in constraint :math:`i`:
 
-.. math:: x_k \leq l_k +(b_i - \underline{b_i})/a_{ik}, \qquad if a_{ik} > 0 \qquad (8)
+.. math:: x_k \leq l_k +(b_i - \underline{b_i})/a_{ik}, \qquad if \qquad a_{ik} > 0 \qquad (8)
 
 and 
 
-.. math:: x_k \geq u_k +(b_i - \underline{b_i})/a_{ik}, \qquad if a_{ik} < 0 \qquad (9)
+.. math:: x_k \geq u_k +(b_i - \underline{b_i})/a_{ik}, \qquad if \qquad a_{ik} < 0 \qquad (9)
 
 If the upper bound given by (8) is smaller than the current lower bound of variable :math:`k` then the problem is infeasible. If it is smaller then
 the current upper bound of variable :math:`k`, we can update the upper bound for variable :math:`k`. A similar procedure can be applied to the lower bound as given by (9).
@@ -183,7 +169,7 @@ Consider for example the constraint:
 
 .. math:: y + sqrt(ln(x)) \leq 10
 
-and let :math:`x` have a range of :math:`[e^4, e^16]`. 
+and let :math:`x` have a range of :math:`[e^4, e^{16}]`. 
 Then from :numref:`figure-02` it follows that the nonlinear expression has a range of :math:`[2,4]` which implies that :math:`y \leq 8`.
 
 .. _figure-02:
