@@ -179,10 +179,10 @@ sometimes derive bounds on some of the variables in the expression. For example,
 with :math:`x` unbounded. Figure 1 shows that then the :math:`ln(x)` sub-expression should be in the range :math:`[0,4]` since :math:`sqrt(y)` is not
 defined for :math:`y \in (-\infty, 0)`, which implies that :math:`x` should be in the range :math:`[1, e^{4}]`.
 
-.. image:: images/figure1.png
-    :align: center
+.. figure:: images/figure1.png
+   :align: center
     
-    Figure 1: Bound reduction using expression :math:`sqrt(ln(x))`.
+   Figure 1: Bound reduction using expression :math:`sqrt(ln(x))`.
 
 If an expression is defined on a certain range only, then this range can sometimes be used to reduce a bound of a variable. 
 For example, the function :math:`sqrt(x-1)` is only defined for :math:`x \geq 1` and therefore the 
