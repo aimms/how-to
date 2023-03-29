@@ -14,4 +14,4 @@ Timeout=
 NoTXN=0
 SyncPragma=
 StepAPI=0
-Database=data\\abc.db
+Database=..\\data\\abc.db

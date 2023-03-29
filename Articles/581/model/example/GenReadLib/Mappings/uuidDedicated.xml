@@ -1,0 +1,5 @@
+<AimmsJSONMapping>
+    <ArrayMapping iterative-reset="1">
+        <ValueMapping iterative-binds-to="DedicatedUUID::i_iter" maps-to="DedicatedUUID::sp_uuids(DedicatedUUID::i_iter)"/>
+    </ArrayMapping>
+</AimmsJSONMapping>

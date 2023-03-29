@@ -1,0 +1,116 @@
+## ams_version=1.0
+
+LibraryModule dataReadingLibrary {
+	Prefix: drl;
+	Interface: Public_Section;
+	Property: NoSave;
+	Section Public_Section {
+		DeclarationSection decls;
+		Procedure pr_readAll {
+			Body: {
+				sp_connectionString := "../data/abc.dsn";
+				thisTableAB::pr_ReadThis();
+				thisTableBC::pr_ReadThis();
+			}
+		}
+		StringParameter sp_connectionString;
+		Module modReadTableTableAB {
+			Prefix: thisTableAB;
+			DeclarationSection decls {
+				Set s_NamesA {
+					Index: i_NamesA;
+				}
+				Set s_NamesB {
+					Index: i_NamesB;
+				}
+				Parameter p_Vals1 {
+					IndexDomain: (i_NamesA, i_NamesB);
+				}
+				Parameter p_vals2 {
+					IndexDomain: (i_NamesA, i_NamesB);
+				}
+				StringParameter sp_vals3 {
+					IndexDomain: (i_NamesA, i_NamesB);
+				}
+				DatabaseTable db_TableAB {
+					DataSource: sp_connectionString;
+					TableName: "TableAB";
+					Mapping: {
+						"NamesA"-->i_NamesA,
+						"NamesB"-->i_NamesB,
+						"Vals1"-->p_Vals1(i_NamesA, i_NamesB),
+						"vals2"-->p_vals2(i_NamesA, i_NamesB),
+						"vals3"-->sp_vals3(i_NamesA, i_NamesB)
+					}
+				}
+			}
+			Procedure pr_readThis {
+				Body: {
+					read from table db_TableAB ;
+				}
+			}
+		}
+		Module modReadTableTableBC {
+			Prefix: thisTableBC;
+			DeclarationSection decls {
+				Set s_NamesB {
+					Index: i_NamesB;
+				}
+				Set s_NamesC {
+					Index: i_NamesC;
+				}
+				Parameter p_Vals3 {
+					IndexDomain: (i_NamesB, i_NamesC);
+				}
+				DatabaseTable db_TableBC {
+					DataSource: sp_connectionString;
+					TableName: "TableBC";
+					Mapping: {
+						"NamesB"-->i_NamesB,
+						"NamesC"-->i_NamesC,
+						"Vals3"-->p_Vals3(i_NamesB, i_NamesC)
+					}
+				}
+			}
+			Procedure pr_readThis {
+				Body: {
+					read from table db_TableBC ;
+				}
+			}
+		}
+	}
+	Section Private_Section {
+		Section Library_initialization_and_termination {
+			Procedure LibraryInitialization {
+				Comment: "Add initialization statements here that do not require any other library being initialized already.";
+			}
+			Procedure LibraryPostInitialization {
+				Comment: {
+					"Add initialization statements here that require another library to be initialized already,
+					or add statements that require the Data Management module to be initialized."
+				}
+			}
+			Procedure LibraryPreTermination {
+				Body: {
+					return 1;
+				}
+				Comment: {
+					"Add termination statements here that require all other libraries to be still alive.
+					Return 1 if you allow the termination sequence to continue.
+					Return 0 if you want to cancel the termination sequence."
+				}
+			}
+			Procedure LibraryTermination {
+				Body: {
+					return 1;
+				}
+				Comment: {
+					"Add termination statements here that do not require other libraries to be still alive.
+					Return 1 to allow the termination sequence to continue.
+					Return 0 if you want to cancel the termination sequence.
+					It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1."
+				}
+			}
+		}
+	}
+}
