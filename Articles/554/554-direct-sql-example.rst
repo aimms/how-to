@@ -4,7 +4,7 @@ DirectSQL Example
 Not all operations on ODBC databases can be done using the ``read from table`` and ``write to table`` statements.
 More flexibility is offered using the intrinsic procedure :aimms:procedure:`DirectSQL`. Please use the `Reindeer Pairing <https://how-to.aimms.com/Articles/434/434-reindeer-pairing.html>`_ example to experiment with this feature.
  
-With that, the procedure below illustrates an alternative for ``Write to Table ... in insert mode``:
+With that, the procedure below illustrates an alternative for ``write to table ... in insert mode``:
 
 .. aimms:procedure:: pr_fillDatabase
     
@@ -42,3 +42,6 @@ Remarks:
 * line 18: To pass the elements (``ep_variousRightPartners``), just fill in the data using :aimms:func:`FormatString`.
 
 * line 20: A SQL INSERT statement following the `SQL syntax <https://www.w3schools.com/sql/sql_insert.asp>`_ . ``possible_pairs`` is the name of the table of the Reindeer Pairing.
+
+.. seealso::
+    Do not know which driver is available? Check `this article <https://how-to.aimms.com/Articles/539/539-which-odbc-drivers.html#which-odbc-drivers>`_.
