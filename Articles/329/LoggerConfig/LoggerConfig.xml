@@ -86,6 +86,13 @@
         <!--- The AIMMS Compiler -->
         <level value="info"/> 
     </logger>
+    <logger name="AIMMS.compilation.needed">
+        <!--- tracking which identifiers need compilation. 
+              Default value info. 
+              When this logger is set to trace, an identifier that requires compilation before use is traced. 
+        -->
+        <level value="info"/> 
+    </logger>
     <logger name="autolib">
         <!--- The handler of the AIMMS repository of libraries
               Warn (default) only log exceptions.
