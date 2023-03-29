@@ -366,7 +366,7 @@ that it cannot handle constraints containing goniometric functions.
 
 Finally, the linear solvers CPLEX and MOSEK are capable of solving mixed
 integer quadratically constrained programming (MIQCP) problems and mixed
-integer second-orde cone programming (MISOCP) problems.
+integer second-order cone programming (MISOCP) problems.
 
 References
 -----------
@@ -398,3 +398,7 @@ outer-approximation method for MINLP optimization*, Computers and
 Chemical Engineering **14** (1990), pp. 769-778.
 
 .. spelling:word-list::
+    di
+    goniometric
+    linearizations
+    whitepaper
