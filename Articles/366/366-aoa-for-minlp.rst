@@ -65,9 +65,9 @@ be described in words as follows.
    infeasible or one of the termination criteria (e.g., iteration limit)
    is satisfied.
 
-A flow diagram of the algorithm is displayed in :numref:`figure-01`.
+A flow diagram of the algorithm is displayed in :numref:`figure-366-01`.
 
-.. _figure-01:
+.. _figure-366-01:
 
 .. figure:: images/figure1.png
     :align: center
@@ -169,14 +169,14 @@ Status File
 ~~~~~~~~~~~~~
 
 The status file shows information about the individual NLP and MIP solves, e.g., the objective value and the
-solution time. :numref:`figure-02` shows an example of the status file output.
+solution time. :numref:`figure-366-02` shows an example of the status file output.
 
 A ‘#’ behind the objective value of a NLP problem indicates that a new best integer solution has been found.
 In the example the algorithm finds an integer solution with objective value 3.6 at the first iteration, and a
 better integer solution with objective value of 2.925 at the second iteration which turns out to be the final
 (best) solution.
 
-.. _figure-02:
+.. _figure-366-02:
 
 .. figure:: images/figure2.png
     :align: center
