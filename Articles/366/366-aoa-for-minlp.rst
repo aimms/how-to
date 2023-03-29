@@ -7,7 +7,7 @@ This document describes how to use the GMP variant of the AIMMS Outer Approximat
 We show how the AOA algorithm can be combined with the nonlinear presolver and the multi-start algorithm.
 
 .. important::
-    To use this article as reference, please use the whitepaper PDF: :download:`AIMMS-Whitepaper-AOA.pdf`.
+    To use this article as reference, please use the whitepaper PDF: :download:`The-AIMMS-Outer-Approximation-Algorithm-for-MINLP.pdf`.
 
 Introduction
 ------------
