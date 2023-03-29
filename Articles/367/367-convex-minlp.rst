@@ -199,7 +199,7 @@ continuous to proof that the final solution is optimal.
 .. figure:: images/figure1.png
     :align: center
 
-    Example of COA status fi le output (minimization problem).
+    Example of COA status file output (minimization problem).
 
 Computational Study
 --------------------
@@ -345,3 +345,5 @@ Chemical Engineering **14** (1990), pp. 769-778.
     adata
     trimloss
     MIP
+    di
+    fo
