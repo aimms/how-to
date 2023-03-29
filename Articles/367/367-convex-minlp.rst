@@ -8,7 +8,7 @@ convex MINLP problems. We benchmark this algorithm against AOA which implements 
 approximation algorithm.
 
 .. important::
-    To use this article as reference, please use the whitepaper PDF: :download:`AIMMS-Whitepaper-COA.pdf`.
+    To use this article as reference, please use the whitepaper PDF: :download:`Solving-Convex-MINLP-Problems-with-AIMMS.pdf`.
 
 Introduction
 ------------
