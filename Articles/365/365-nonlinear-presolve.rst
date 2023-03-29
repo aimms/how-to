@@ -150,10 +150,10 @@ sometimes derive bounds on some of the variables in the expression. For example,
 
 .. math:: sqrt(ln(x)) \leq 2
 
-with :math:`x` unbounded. :numref:`figure-01` shows that then the :math:`ln(x)` sub-expression should be in the range :math:`[0,4]` since :math:`sqrt(y)` is not
+with :math:`x` unbounded. :numref:`figure-365-01` shows that then the :math:`ln(x)` sub-expression should be in the range :math:`[0,4]` since :math:`sqrt(y)` is not
 defined for :math:`y \in (-\infty, 0)`, which implies that :math:`x` should be in the range :math:`[1, e^{4}]`.
 
-.. _figure-01:
+.. _figure-365-01:
 
 .. figure:: images/figure1.png
    :align: center
@@ -170,9 +170,9 @@ Consider for example the constraint:
 .. math:: y + sqrt(ln(x)) \leq 10
 
 and let :math:`x` have a range of :math:`[e^4, e^{16}]`. 
-Then from :numref:`figure-02` it follows that the nonlinear expression has a range of :math:`[2,4]` which implies that :math:`y \leq 8`.
+Then from :numref:`figure-365-02` it follows that the nonlinear expression has a range of :math:`[2,4]` which implies that :math:`y \leq 8`.
 
-.. _figure-02:
+.. _figure-365-02:
 
 .. figure:: images/figure2.png
     :align: center
@@ -187,8 +187,8 @@ For example, consider the constraint
 
 and let variable :math:`x` have range :math:`[0,\infty)` and variable :math:`y` be unbounded. 
 To process the multiplication operator we first have to bound the :math:`e^x * y^2` sub-expression and the :math:`e^x` and :math:`y^2` sub-expressions
-(Step 1 in :numref:`figure-03`). Since expression :math:`e^x * y^2` has range :math:`(0, e^4]` and expression :math:`e^x` has range :math:`[1,\infty)` we can conclude
-that expression :math:`y^2` must have a range of :math:`(0, e^4]` which implies that :math:`y` is in the range :math:`[-e^2, e^2]` (see Step 2 in :numref:`figure-03`).
+(Step 1 in :numref:`figure-365-03`). Since expression :math:`e^x * y^2` has range :math:`(0, e^4]` and expression :math:`e^x` has range :math:`[1,\infty)` we can conclude
+that expression :math:`y^2` must have a range of :math:`(0, e^4]` which implies that :math:`y` is in the range :math:`[-e^2, e^2]` (see Step 2 in :numref:`figure-365-03`).
 
 If a bound of one of the variables in the nonlinear part of a constraint changes we process that constraint again immediately. We stop if no
 bound was changed significantly. Like this we can solve the following constraint in one iteration of the algorithm:
@@ -201,17 +201,17 @@ In the next step we get that :math:`x = 6 - \sqrt x \leq 6` and in the following
 Then we get :math:`x \leq 6 - \sqrt{6-\sqrt{6}}` and so on. 
 Both the upper and lower bound of :math:`x` will converge to 4 but we stop this iterative process if the relative change of one of the bounds is smaller than an epsilon.
 
-.. _figure-03:
+.. _figure-365-03:
 
 .. figure:: images/figure3.png
     :align: center
 
     Bound reduction using expression :math:`ln(e^x∗y^2).`
 
-The presolve algorithm can handle expressions build up by the operators mentioned in :numref:`figure-04`. If a nonlinear constraint contains an operator
+The presolve algorithm can handle expressions build up by the operators mentioned in :numref:`figure-365-04`. If a nonlinear constraint contains an operator
 that is not in this table then it will be ignored by the presolve algorithm. A constraint will also be ignored if it contains an external function.
 
-.. _figure-04:
+.. _figure-365-04:
 
 .. figure:: images/table1.png
     :align: center
