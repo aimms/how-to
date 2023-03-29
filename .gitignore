@@ -22,7 +22,6 @@
 *.obj
 *.out
 *.pdb
-*.pdf
 *.plg
 *.put
 *.pyc
