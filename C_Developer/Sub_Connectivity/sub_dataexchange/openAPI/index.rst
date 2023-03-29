@@ -19,4 +19,5 @@ These topics help you to use the Data Exchange Library with your AIMMS project.
    /Articles/564/564-LocationIQ
    /Articles/567/567-aimms-service
    /Articles/567/567-python-client
+   /Articles/581/581-static-lib-from-runtime-lib 
 
