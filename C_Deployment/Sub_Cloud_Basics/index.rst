@@ -19,4 +19,5 @@ Cloud Platform Basics
 
    /Articles/159/159-exchange-data-with-cloud
    /Articles/571/571-ci-cd-guide
+   /Articles/571/571-publish-run-delete
    
