@@ -5,7 +5,15 @@ This article provides an example of Python code that can be used to publish a pr
 
 Use case?
 --------------
-When using creating a CI/CD pipeline, it may be useful or required that a task be run on the AIMMS Cloud. The below example show the general steps required to achieve this. We utilize a random version number in order to avoid conflicts with already published apps. We delete the published application because the focus of the code is to run a task, not to publish the application for end-users.
+"When using a CI/CD pipeline" you may want to test the app as follows:
+
+* Publish
+
+* Run scenario
+
+* Cleanup (including removing the app)
+
+Below, you will find a code example of how to achieve this.
 
 .. code-block:: python
 
