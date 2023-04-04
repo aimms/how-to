@@ -1,0 +1,5 @@
+<AimmsJSONMapping>
+    <ObjectMapping>
+        <ValueMapping name="id" maps-to="sp_taskID"/>
+    </ObjectMapping>
+</AimmsJSONMapping>

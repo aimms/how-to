@@ -1,0 +1,19 @@
+<AimmsJSONMapping>
+    <ObjectMapping>
+        <ValueMapping name="obj" maps-to="v_timespan"/>
+        <ArrayMapping name="jobsched">
+            <ObjectMapping>
+                <ValueMapping name="j" binds-to="j"/>
+                <ValueMapping name="s" binds-to="s"/>
+                <ValueMapping name="v" maps-to="bv_jobSchedule(j,s)"/>
+            </ObjectMapping>
+        </ArrayMapping>
+        <ArrayMapping name="starttime">
+            <ObjectMapping>
+                <ValueMapping name="s" binds-to="s"/>
+                <ValueMapping name="m" binds-to="m"/>
+                <ValueMapping name="v" maps-to="v_startTime(s,m)"/>
+            </ObjectMapping>
+        </ArrayMapping>
+    </ObjectMapping>
+</AimmsJSONMapping>

@@ -1,5 +1,5 @@
 
-    ProcesTime(j,m) := data table 
+    p_procesTime(j,m) := data table 
        M-01  M-02  M-03  M-04  M-05  M-06  M-07  M-08  M-09  M-10  M-11  M-12
     !  ----  ----  ----  ----  ----  ----  ----  ----  ----  ----  ----  ----
 Job-1     6     8     8     5    17     9    12    13     3    16    19     6

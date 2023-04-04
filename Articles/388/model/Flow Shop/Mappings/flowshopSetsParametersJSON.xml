@@ -1,0 +1,11 @@
+<AimmsJSONMapping>
+    <ObjectMapping>
+        <ArrayMapping name="proctime">
+            <ObjectMapping>
+                <ValueMapping name="j" binds-to="j"/>
+                <ValueMapping name="m" binds-to="m"/>
+                <ValueMapping name="v" maps-to="p_procestime(j,m)"/>
+            </ObjectMapping>
+        </ArrayMapping>
+    </ObjectMapping>
+</AimmsJSONMapping>

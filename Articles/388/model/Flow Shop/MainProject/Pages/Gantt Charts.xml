@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Page Version="4000" TimeStamp="2015-11-12 22:05:22">
+<Page Version="4000" TimeStamp="2023-04-03 11:05:18">
 	<Location top="23" left="4" bottom="644" right="768" />
 	<PageEditSize Type="Inherited">
 		<Size Width="772" Height="622" />
@@ -9,7 +9,7 @@
 	<ResizeData>
 		<MainArea Line="FixedFromTop" Value="99">
 			<TopArea Line="FixedFromLeft" Value="200" />
-			<BottomArea Line="FixedFromLeft" Value="249">
+			<BottomArea Line="FixedFromLeft" Value="201">
 				<LeftArea Line="FixedFromTop" Value="204">
 					<BottomArea Line="FixedFromTop" Value="221" />
 				</LeftArea>
@@ -33,15 +33,15 @@
 		</TextColor>
 	</PageObject>
 	<PageObject Type="Button">
-		<Location top="492" left="6" bottom="519" right="192" />
-		<TabOrder>5</TabOrder>
+		<Location top="492" left="9" bottom="519" right="195" />
+		<TabOrder>6</TabOrder>
 		<ButtonType>Text</ButtonType>
-		<Title>"Solve Model"</Title>
+		<Title>"Solve Model using task"</Title>
 		<Font GUID="0BDEF216-23B3-4F0F-B5D6-83C5A7303CF9" Name="Buttons" />
 		<ActionSequence>
 			<Action Type="Run">
 				<RunWhat>SpecificProcecure</RunWhat>
-				<Procedure>MainExecution</Procedure>
+				<Procedure>pr_runTaskToSolveJobshopProblem</Procedure>
 				<AbortOnError>true</AbortOnError>
 				<BackgroundRun>true</BackgroundRun>
 			</Action>
@@ -87,58 +87,6 @@
 	</PageObject>
 	<PageObject Type="Gantt Chart">
 		<Location top="300" left="207" bottom="444" right="762" />
-		<TabOrder>6</TabOrder>
-		<TabStop>false</TabStop>
-		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
-		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
-		<BackgroundColor>
-			<UserColor GUID="CCB23DE4-D3C9-4647-BE46-7A1779576484">Background yellow</UserColor>
-		</BackgroundColor>
-		<ColorScheme Number="0" />
-		<Y-Labels>true</Y-Labels>
-		<X-Labels>true</X-Labels>
-		<VerticalGridLines>true</VerticalGridLines>
-		<StatusLine>true</StatusLine>
-		<TimeRange>
-			<Upper>TimeSpan</Upper>
-			<GridPoints>8</GridPoints>
-		</TimeRange>
-		<IndexLocations>
-			<RowDomain>m</RowDomain>
-			<LegendDomain>j</LegendDomain>
-		</IndexLocations>
-		<TaskGroup>
-			<Domain>ProcesTime( j, m )</Domain>
-			<Start>InterfaceStartTime( j, m )</Start>
-			<Duration>ProcesTime( j, m )</Duration>
-			<InsideBarText>JobDescription( j )</InsideBarText>
-		</TaskGroup>
-	</PageObject>
-	<PageObject Type="Scalar">
-		<Location top="237" left="207" bottom="288" right="480" />
-		<TabOrder>8</TabOrder>
-		<TabStop>false</TabStop>
-		<Font GUID="C82FBF27-1614-41C9-B718-A431388D2B5A" Name="General Text" />
-		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
-		<BackgroundColor RGB="#ffffff" />
-		<TextColor>
-			<UserColor GUID="23F33851-505F-45B5-AA1F-5360CB8B3EFB">Text Blue</UserColor>
-		</TextColor>
-		<Layout>Text-Value</Layout>
-		<SeparatorSign>=</SeparatorSign>
-		<ExplicitIdentifier>
-			<Identifier>MaxJobs</Identifier>
-			<NumberFormat Width="4" Decimals="0" Alignment="Center" ShowDefaults="true" />
-			<ProcedureUponChange>GenerateData</ProcedureUponChange>
-		</ExplicitIdentifier>
-		<ExplicitIdentifier>
-			<Identifier>MaxMachines</Identifier>
-			<NumberFormat Width="4" Decimals="0" Alignment="Center" ShowDefaults="true" />
-			<ProcedureUponChange>GenerateData</ProcedureUponChange>
-		</ExplicitIdentifier>
-	</PageObject>
-	<PageObject Type="Gantt Chart">
-		<Location top="447" left="207" bottom="591" right="762" />
 		<TabOrder>7</TabOrder>
 		<TabStop>false</TabStop>
 		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
@@ -152,22 +100,22 @@
 		<VerticalGridLines>true</VerticalGridLines>
 		<StatusLine>true</StatusLine>
 		<TimeRange>
-			<Upper>TimeSpan</Upper>
-			<GridPoints>10</GridPoints>
+			<Upper>v_timeSpan</Upper>
+			<GridPoints>8</GridPoints>
 		</TimeRange>
 		<IndexLocations>
-			<RowDomain>j</RowDomain>
-			<LegendDomain>m</LegendDomain>
+			<RowDomain>m</RowDomain>
+			<LegendDomain>j</LegendDomain>
 		</IndexLocations>
 		<TaskGroup>
-			<Domain>ProcesTime( j, m )</Domain>
+			<Domain>p_procesTime( j, m )</Domain>
 			<Start>InterfaceStartTime( j, m )</Start>
-			<Duration>ProcesTime( j, m )</Duration>
-			<InsideBarText>MachineDescription( m )</InsideBarText>
+			<Duration>p_procesTime( j, m )</Duration>
+			<InsideBarText>JobDescription( j )</InsideBarText>
 		</TaskGroup>
 	</PageObject>
 	<PageObject Type="Scalar">
-		<Location top="237" left="486" bottom="288" right="762" />
+		<Location top="237" left="207" bottom="288" right="480" />
 		<TabOrder>9</TabOrder>
 		<TabStop>false</TabStop>
 		<Font GUID="C82FBF27-1614-41C9-B718-A431388D2B5A" Name="General Text" />
@@ -179,7 +127,59 @@
 		<Layout>Text-Value</Layout>
 		<SeparatorSign>=</SeparatorSign>
 		<ExplicitIdentifier>
-			<Identifier>TimeSpan</Identifier>
+			<Identifier>p_maxJobs</Identifier>
+			<NumberFormat Width="4" Decimals="0" Alignment="Center" ShowDefaults="true" />
+			<ProcedureUponChange>GenerateData</ProcedureUponChange>
+		</ExplicitIdentifier>
+		<ExplicitIdentifier>
+			<Identifier>p_maxMachines</Identifier>
+			<NumberFormat Width="4" Decimals="0" Alignment="Center" ShowDefaults="true" />
+			<ProcedureUponChange>GenerateData</ProcedureUponChange>
+		</ExplicitIdentifier>
+	</PageObject>
+	<PageObject Type="Gantt Chart">
+		<Location top="447" left="207" bottom="591" right="762" />
+		<TabOrder>8</TabOrder>
+		<TabStop>false</TabStop>
+		<Font GUID="64997158-3D5B-41FC-BAC0-3F921D1A96BD" Name="default" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor>
+			<UserColor GUID="CCB23DE4-D3C9-4647-BE46-7A1779576484">Background yellow</UserColor>
+		</BackgroundColor>
+		<ColorScheme Number="0" />
+		<Y-Labels>true</Y-Labels>
+		<X-Labels>true</X-Labels>
+		<VerticalGridLines>true</VerticalGridLines>
+		<StatusLine>true</StatusLine>
+		<TimeRange>
+			<Upper>v_timeSpan</Upper>
+			<GridPoints>10</GridPoints>
+		</TimeRange>
+		<IndexLocations>
+			<RowDomain>j</RowDomain>
+			<LegendDomain>m</LegendDomain>
+		</IndexLocations>
+		<TaskGroup>
+			<Domain>p_procesTime( j, m )</Domain>
+			<Start>InterfaceStartTime( j, m )</Start>
+			<Duration>p_procesTime( j, m )</Duration>
+			<InsideBarText>MachineDescription( m )</InsideBarText>
+		</TaskGroup>
+	</PageObject>
+	<PageObject Type="Scalar">
+		<Location top="237" left="486" bottom="288" right="762" />
+		<TabOrder>10</TabOrder>
+		<TabStop>false</TabStop>
+		<Font GUID="C82FBF27-1614-41C9-B718-A431388D2B5A" Name="General Text" />
+		<Border Style="InShadow" Width="2" MarginTop="5" MarginRight="5" MarginBottom="5" MarginLeft="5" />
+		<BackgroundColor RGB="#ffffff" />
+		<TextColor>
+			<UserColor GUID="23F33851-505F-45B5-AA1F-5360CB8B3EFB">Text Blue</UserColor>
+		</TextColor>
+		<Layout>Text-Value</Layout>
+		<SeparatorSign>=</SeparatorSign>
+		<ExplicitIdentifier>
+			<Identifier>v_timeSpan</Identifier>
 			<NumberFormat Width="6" Decimals="1" Alignment="Center" ShowDefaults="true" />
 		</ExplicitIdentifier>
 	</PageObject>
@@ -233,12 +233,27 @@
 			</Action>
 		</ActionSequence>
 	</PageObject>
+	<PageObject Type="Button">
+		<Location top="459" left="9" bottom="486" right="195" />
+		<TabOrder>5</TabOrder>
+		<ButtonType>Text</ButtonType>
+		<Title>"Solve Model"</Title>
+		<Font GUID="0BDEF216-23B3-4F0F-B5D6-83C5A7303CF9" Name="Buttons" />
+		<ActionSequence>
+			<Action Type="Run">
+				<RunWhat>SpecificProcecure</RunWhat>
+				<Procedure>MainExecution</Procedure>
+				<AbortOnError>true</AbortOnError>
+				<BackgroundRun>true</BackgroundRun>
+			</Action>
+		</ActionSequence>
+	</PageObject>
 	<UsedReferences>
 		<Model>
-			<Symbol>MaxJobs</Symbol>
-			<Symbol>MaxMachines</Symbol>
-			<Symbol>ProcesTime</Symbol>
-			<Symbol>TimeSpan</Symbol>
+			<Symbol>p_maxJobs</Symbol>
+			<Symbol>p_maxMachines</Symbol>
+			<Symbol>p_procesTime</Symbol>
+			<Symbol>v_timeSpan</Symbol>
 			<Symbol>InterfaceStartTime</Symbol>
 			<Symbol>JobDescription</Symbol>
 			<Symbol>MachineDescription</Symbol>
@@ -246,6 +261,7 @@
 			<Symbol>GenerateData</Symbol>
 			<Symbol>j</Symbol>
 			<Symbol>m</Symbol>
+			<Symbol>pr_runTaskToSolveJobshopProblem</Symbol>
 		</Model>
 	</UsedReferences>
 </Page>

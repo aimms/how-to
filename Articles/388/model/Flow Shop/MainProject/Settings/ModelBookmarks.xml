@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<ModelBookmarks TimeStamp="2023-04-04 11:44:40">
+	<Category Name="callback status">
+		<Bookmark Node="pr_InquireStatusSolveFlowshopCallback" Attribute="body" LineNumber="20">
+			<TextLine>display "pr_InquireStatusSolveFlowshopCallback", sp_taskStatus ;</TextLine>
+		</Bookmark>
+	</Category>
+</ModelBookmarks>

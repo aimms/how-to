@@ -1,0 +1,156 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "browsername": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browsertimezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
+    "ignoredst": {
+      "aimms": {
+        "contents": [
+          "webui::IgnoreDST"
+        ]
+      }
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "Main Project",
+            "slug": "main_project",
+            "children": [
+              {
+                "name": "home",
+                "slug": "home",
+                "type": "pagev2-grid",
+                "children": []
+              },
+              {
+                "name": "GanttChart",
+                "type": "pagev2-grid",
+                "slug": "ganttchart",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "timezone.dst.readonly": {
+      "aimms": {
+        "contents": [
+          "webui::DefaultDSTSettingForDisplayTimeZone"
+        ]
+      }
+    }
+  },
+  "pages/ganttchart": {
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "GanttChartFlowshop",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsGanttChartFlowshop"
+        }
+      ]
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "GanttChartFlowshop",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    },
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    }
+  },
+  "widgets/GanttChartFlowshop": {
+    "aimms.widget.type": {
+      "literal": "ganttchart"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "pgc::p_GCJobStart",
+          "pgc::p_GCJobDuration"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "resources": [
+          "m"
+        ],
+        "jobs": [
+          "<IDENTIFIER-SET>",
+          "j"
+        ],
+        "aggregated": []
+      }
+    },
+    "name": {
+      "literal": "GanttChartFlowshop"
+    },
+    "time.reference": {
+      "aimms": {
+        "contents": [
+          "pgc::sp_referenceTime"
+        ]
+      }
+    },
+    "time.resolution": {
+      "literal": 24
+    },
+    "time.viewport.end": {
+      "aimms": {
+        "contents": [
+          "pgc::sp_viewportEndTime"
+        ]
+      }
+    },
+    "time.viewport.start": {
+      "aimms": {
+        "contents": [
+          "pgc::sp_viewportStartTime"
+        ]
+      }
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    }
+  }
+}
