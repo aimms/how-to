@@ -21,7 +21,7 @@ Below, you will find a code example of how to achieve this.
     import time
     import os
 
-    url = "https://YOURURL.aimms.cloud/pro-api/v1/"
+    url = "https://YOURURL-test.aimms.cloud/pro-api/v1/"
     url_scope = "applications"
     project_name = 'YOURPPROJECTNAME'
     project_version = time.strftime("%Y%m%d%H%M%S") #Creating a unique name for publishing
