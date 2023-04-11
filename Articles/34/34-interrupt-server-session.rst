@@ -1,4 +1,4 @@
-Interrupt the solver session
+Interrupt the Solver Session
 =============================
 
 .. meta::
@@ -11,7 +11,8 @@ Interrupt the solver session
 Introduction
 ------------
 
-We saw how to remove the "Busy" veil during a solve process in a :doc:`previous article<../19/19-remove-veil>` to let the user be in control of the application while a procedure execution is running in the background. However, we also lose the ability to interrupt this background process which was available as a "Cancel" button on the veil. This article will guide you on how to interrupt a procedure executing in the solver session when the veil has been disabled.
+We saw how to remove the "Busy" veil during a solve process in a :doc:`previous article<../19/19-remove-veil>` to let the user be in control of the application while a procedure execution is running in the background. However, we also lose the ability to interrupt this background process which was available as a "Cancel" button on the veil. 
+This article will guide you on how to interrupt a procedure executing in the solver session when the veil has been disabled.
 
 Implementation
 --------------
@@ -43,7 +44,7 @@ Now, you can link this procedure to a button in your WebUI application to be abl
 
 The example AIMMS project with the above demonstrated procedure implemented can be downloaded from :download:`8. Flow Shop - Interrupt <downloads/8. Flow Shop - Interrupt.zip>`.
 
-Further reading
+Further Reading
 ---------------
 
 An interruption is only one type of communication to a solver session.  A generic way to communicate data changes from the data session to the solver session is provided in :doc:`../42/42-data-session-changes`.
