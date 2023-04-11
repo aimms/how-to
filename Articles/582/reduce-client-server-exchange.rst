@@ -1,5 +1,5 @@
 
-Reduce Exchange Between Client Session and solver session
+Reduce Exchange Between Client Session and Solver Session
 ==========================================================
 
 .. meta::
@@ -10,7 +10,7 @@ As shown in :doc:`../33/33-pro-deploy-app`, part of the overhead in solving is c
 Especially, for short solves, the overhead can be relatively large.
 To reduce this overhead, we'll reduce the number of identifiers that need to be passed between these sessions.
 
-The identifiers needed by the solver session
+The Identifiers Needed by the Solver Session
 ----------------------------------------------
 
 There are three groups of identifiers needed by the solver session that can be provided by the client session:
@@ -102,7 +102,7 @@ Summary
 
 In this article, we've shown how to reduce the overhead of creating and communicating cases between the client session and the solver session.
 
-Further reading
+Further Reading
 ----------------
 
 #. See also the section on input and output case definitions in `AIMMS PRO documentation <https://documentation.aimms.com/pro/appl-state.html#id1>`_
