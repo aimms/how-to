@@ -25,7 +25,7 @@ Client-Server Communication
    /Articles/342/342-WebUI-Session-Timeout-Extension
    /Articles/42/42-data-session-changes
    /Articles/560/560-export-aimmspack
-   /Articles/reduce-client-server-exchange/reduce-client-server-exchange 
+   /Articles/582/582-reduce-client-server-exchange
 
 .. 33 has 1 and 2
 .. 32 has 3
