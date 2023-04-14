@@ -17,6 +17,8 @@ When you create a new AIMMS project, multiple folders and files are initialized.
 .. image:: images/new-project-folders.png
    :align: center
 
+|
+
 The below three files are always created and necessary to open an AIMMS project. 
 
 #. ``Demo.aimms`` : this is an executable (if the AIMMS Launcher is installed) file which launches the AIMMS Developer IDE. 
@@ -48,11 +50,10 @@ The resulting ZIP file will contain all of the project files in a more portable 
 
 .. note::
 
-   If you have imported data from external sources, such as Excel files or databases, it is also helpful to share a data case file in your project.
+   If you have imported data from external sources, such as Excel files or databases, 
+   it is also helpful to share a data case file in your project.
 
    To save a data case go to *Data > Save Case as*.
-
-   For details see :doc:`data-management/case-management/index`
 
 
 Related Topics
@@ -60,11 +61,11 @@ Related Topics
 
 * :doc:`../505/index`
 
-* **AIMMS Knowledge**: :doc:`../151/151-version-control-aimmspack-backup`
+* :doc:`../151/151-version-control-aimmspack-backup`
 
-* **AIMMS Knowledge**: :doc:`../145/145-import-export-section`
+* :doc:`../145/145-import-export-section`
 
-* **AIMMS Knowledge**: :doc:`../95/95-change-default-ui`
+* :doc:`../95/95-change-default-ui`
 
 
 
