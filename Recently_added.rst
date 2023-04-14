@@ -18,7 +18,7 @@ Recently added
 .. Added 14 Feb 2020: 108-10, 108-09, 108-07
 .. Added 21 March 2022: 535
 
-* :doc:`/Articles/571/571-ci-cd-guide.html`
+* :doc:`/Articles/571/571-ci-cd-guide`
 * :doc:`/Articles/571/571-publish-run-delete`
 * :doc:`/Articles/572/572-progress-webui`
 * :doc:`/Articles/567/567-python-client`
