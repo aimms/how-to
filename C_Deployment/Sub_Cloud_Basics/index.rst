@@ -1,15 +1,14 @@
-
 .. image:: /Images/cloud-checked-128.png
    :scale: 100
    :align: right
    :alt: AIMMS Cloud Help & Support
 
-Cloud Platform Basics
+Cloud Platform
 ===========================
 
 
 .. meta::
-   :description: Help and support getting started with AIMMS Cloud Platform.
+   :description: Help and support using the AIMMS Cloud Platform.
 
 
 .. Need some filler text!
