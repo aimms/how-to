@@ -86,7 +86,6 @@ This page has a summary of the examples versus which WebUI features are used in 
 
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../397/397-traveling-salesman`
-    * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Scalar Widget 
 
@@ -132,3 +131,4 @@ This page has a summary of the examples versus which WebUI features are used in 
 .. dropdown:: Status Bar   
 
     * :doc:`../397/397-traveling-salesman`
+    * :doc:`../390/390-knapsack-problem`

@@ -4,10 +4,10 @@ Knapsack Problem
    :keywords: Knapsack, Knapsack, Integer Programming, Binary Integer Programming, Cover Inequalities, Network Object
    :description: This example introduces a knapsack problem.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.87-ZIP:_Knapsack-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.93-ZIP:_Knapsack-blue
    :target: https://github.com/aimms/knapsack/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.87-Github:_Knapsack-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.93-Github:_Knapsack-blue
    :target: https://github.com/aimms/knapsack
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -41,7 +41,9 @@ In the classical knapsack problem, each item can be chosen only once. This examp
 +-----+--------------------------------------------+-------------------------------------------+
 |     | :math:`W_{i} \in \mathbb{R}`               | item weight                               |
 +-----+--------------------------------------------+-------------------------------------------+
-|     | :math:`mW \in \mathbb{R}`                  | knapsack weight                           |
+|     | :math:`mW \in \mathbb{R}`                  | maximum knapsack weight                   |
++-----+--------------------------------------------+-------------------------------------------+
+|     | :math:`mI \in \mathbb{I}`                  | maximum knapsack item                     |
 +-----+--------------------------------------------+-------------------------------------------+
 | **Variables:**                                                                               |
 +-----+--------------------------------------------+-------------------------------------------+
@@ -49,7 +51,9 @@ In the classical knapsack problem, each item can be chosen only once. This examp
 +-----+--------------------------------------------+-------------------------------------------+
 | **Constraints:**                                                                             |
 +-----+--------------------------------------------+-------------------------------------------+
-|  1  | :math:`\sum_{i} X_{i} * W_{i} \leq mW`     | respect knapsack capacity                 |
+|  1  | :math:`\sum_{i} X_{i} * W_{i} \leq mW`     | respect knapsack weight capacity          |
++-----+--------------------------------------------+-------------------------------------------+
+|  2  | :math:`\sum_{i} X_{i} \leq mI`             | respect knapsack item capacity            |
 +-----+--------------------------------------------+-------------------------------------------+
 | **Maximize:**                                                                                |
 +-----+--------------------------------------------+-------------------------------------------+
@@ -111,6 +115,8 @@ In order to make the example more playful in therms of feature functionality, yo
       p_itemWeight(i_item) := uniform(0[lb],p_maxWeightKnapsack/3);
       p_itemBound(i_item) := ceil(uniform(0,10));
 
+.. seealso::
+   In `this article <https://how-to.aimms.com/Articles/12/12-generate-random-numbers.html#generate-random-numbers>`_ you will find more details about how to randomize your data. 
 
 Integration
 ~~~~~~~~~~~~~~
@@ -135,8 +141,6 @@ The following WebUI features are used:
 
 - `Combination Chart Widget <https://documentation.aimms.com/webui/combination-chart-widget.html>`_
 
-- `Item Actions <https://documentation.aimms.com/webui/widget-options.html#item-actions>`_
-
 - `Page Actions <https://documentation.aimms.com/webui/page-menu.html>`_ 
 
 - `Side Panel <https://documentation.aimms.com/webui/side-panels-grd-pages.html#side-panel-grid-pages>`_
@@ -149,6 +153,8 @@ The following WebUI features are used:
 
 - `Slider Widget <https://documentation.aimms.com/webui/slider-widget.html#slider-widget>`_ 
 
+- `Status Bar <https://documentation.aimms.com/webui/status-bar.html>`_ 
+
 
 UI Styling
 ----------
@@ -156,38 +162,70 @@ UI Styling
 For this project, we used a main css file named ``colors.css``, please check it out directly on the folder. Below there are the css files you will find with comments on what they change. 
 
 .. tab-set::
-    .. tab-item:: icon.css
+    .. tab-item:: colors.css
 
       .. code-block:: css
          :linenos:
 
          :root {
+         /*---------------------------------------------------------------------
+               COLORS
+         ----------------------------------------------------------------------*/
+            --primary: #FF941E;
+            --primaryDark: #955511;
+            --primaryLight: #fff4e9;
+
+         /*---------------------------------------------------------------------
+               LOGO
+         ----------------------------------------------------------------------*/
             --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/knapsack-logo.png);
             --spacing_app-logo_width: 45px;
+
+            --color_bg_button_primary: var(--primaryDark);
+            --color_bg_button_primary_hover: var(--primary);
+            --color_text_edit-select-link: var(--primaryDark);
+
+
+         /*---------------------------------------------------------------------
+               WORKFLOW
+         ----------------------------------------------------------------------*/
+            /* Header text*/
+            --color_workflow-header: #505767;
+               
+            /* Step background and content (text, icon) colors for the 4 states*/
+            /*current + current with error*/
+            --color_bg_workflow_current: var(--primaryDark);
+            --color_workflow_current: var(--color_text_inverted);
+            --color_bg_workflow_error-current: #d1454b;
+
+            /*active*/
+            --color_bg_workflow_active: #e6edff;
+            --color_workflow_active: var(--primaryDark);
+            
+            /*inactive*/
+            --color_bg_workflow_inactive: #dde0e8;
+            --color_workflow_inactive: #b0b5c2;
+            
+            /*error*/
+            --color_bg_workflow_error: #f9e9e9;
+            --color_workflow_error: #d1454b;
+            
+            /*Child indentation, border colors*/
+            --spacing_workflow-child-indent: 1rem;
+            --color_workflow-item-divider: var(--primaryDark);
+            
+            /*Icon background, border, for non-error state*/
+            --color_bg_workflow-icon: #ffffff;
+            --color_workflow-icon-border: var(--primaryDark);
          }
 
-    .. tab-item:: workflow.css
+    .. tab-item:: annotations.css
 
       .. code-block:: css
          :linenos:
 
-         /*Change color of the active step*/
-         .workflow-panel .step-item.current,
-         .workflow-panel.collapse .step-item.current {
-            box-shadow: inset 0.3125rem 0 0 var(--primary);
-         }
-
-         /*Change color of the titles*/
-         .workflow-panel .step-item.active.complete .title, 
-         .workflow-panel .step-item.active.incomplete .title {
-            color: var(--primaryDark);
-         }
-
-         /*Change color of the icons*/
-         .workflow-panel .step-item.active.complete .icon, 
-         .workflow-panel .step-item.active.incomplete .icon {
-            color: var(--primaryDark);
-            border: 1px solid var(--primaryDark);
+         .annotation-different {
+            background: #ff921e2a;
          }
 
     .. tab-item:: textColor.css
@@ -206,7 +244,22 @@ For this project, we used a main css file named ``colors.css``, please check it 
             color: var(--primaryDark);
          }
 
+         /*Link color*/
+         .ql-snow a {  
+            color: var(--primaryDark) !important;
+         }
+
+         /*Change table default text color*/
+         .tag-table .grid-viewport .cell.flag-default, 
+         html:not(.using-touch) .tag-table .grid-viewport .cell.flag-default {
+            color: white;
+         }
+
          .tag-slider .slider-value {
+            color: var(--primaryDark);
+         }
+
+         .status-message.clickable:hover .status-display-text{
             color: var(--primaryDark);
          }
 
@@ -281,11 +334,6 @@ For this project, we used a main css file named ``colors.css``, please check it 
 
          .tag-table .cell.flag-number input{
             text-align: center;
-         }
-
-         /*Change checkbox color*/
-         input.boolean-cell-editor-contents {
-            accent-color: var(--primaryDark);
          }
 
     .. tab-item:: combinationChart.css
