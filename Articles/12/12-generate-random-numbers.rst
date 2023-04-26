@@ -10,10 +10,7 @@ This functionality was used to randomize input values for the `Knapsack example 
 
 .. seealso::
 	You can find the complete `list of functions available <https://documentation.aimms.com/functionreference/elementary-computational-operations/distribution-and-combinatoric-functions/index.html>`_. 
-	A few of them are:
-		- `Normal Distribution <https://en.wikipedia.org/wiki/Log-normal_distribution>`_
-		- `Log Normal Distribution <https://en.wikipedia.org/wiki/Log-normal_distribution>`_
-		- `Uniform <https://en.wikipedia.org/wiki/Continuous_uniform_distribution>`_
+	A few of them are: `Normal Distribution <https://en.wikipedia.org/wiki/Log-normal_distribution>`_, `Log Normal Distribution <https://en.wikipedia.org/wiki/Log-normal_distribution>`_ and `Uniform <https://en.wikipedia.org/wiki/Continuous_uniform_distribution>`_.
 
 Example
 -------
