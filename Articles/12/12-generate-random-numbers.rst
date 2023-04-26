@@ -6,7 +6,7 @@ Generate Random Numbers
 
 AIMMS has a number of distribution functions included, in order for you to be able to generate random numbers very efficiently. 
 This capability might be extremely useful when you want to quickly populate a multidimensional parameter. 
-This functonality was used to randomize input values for the `Knapsack example <https://how-to.aimms.com/Articles/390/390-knapsack-problem.html>`_, example that we will be using as an example here. 
+This functionality was used to randomize input values for the `Knapsack example <https://how-to.aimms.com/Articles/390/390-knapsack-problem.html>`_, example that we will be using as an example here. 
 
 .. seealso::
 	You can find the complete `list of functions available <https://documentation.aimms.com/functionreference/elementary-computational-operations/distribution-and-combinatoric-functions/index.html>`_. 
