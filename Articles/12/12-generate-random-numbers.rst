@@ -35,7 +35,7 @@ For this model, we would like to generate numbers for 3 parameters, so it would 
 To populate this data, the procedure ``pr_randomizeData`` was created:
 
 .. code-block:: aimms 
-	:lineos:
+	:linenos:
 
 	empty p_itemValue, p_itemWeight, p_itemBound;
 
