@@ -31,7 +31,9 @@ This section contains explanations of various UI features available when buildin
    /Articles/549/549-hiding-default-values
    /Articles/566/566-scalar-border-annotation
    /Articles/568/568-disable-standard-webui-functions
+   /Articles/578/578-uponchange-with-arguments
 
+   
 
 
 
