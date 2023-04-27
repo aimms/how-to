@@ -1,7 +1,7 @@
 Uponchange with Arguments
 =========================
 
-This article illustrates how to use ``uponchange`` annotation with arguments. This can be benefitial when there are block-editing and consistency check per value. 
+This article illustrates how to use ``uponchange`` annotation with arguments. This can be beneficial when there are block-editing and consistency check per value. 
 
 Note that this is a WebUI feature only. Changes on WinUI or directly on the AIMMS IDE will not trigger the ``uponchange`` procedure.
 
