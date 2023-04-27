@@ -1,16 +1,15 @@
 Uponchange with Arguments
 =========================
 
-This article illustrates how to use ``uponchange`` annotation with arguments. This can be benefitial  the project is on WebUI and block-editing is already availble on the current AIMMS version.   
-Running a procedure after a change in data, being string parameter, parameter or element parameter, 
+This article illustrates how to use ``uponchange`` annotation with arguments. This can be benefitial when there are block-editing and consistency check per value. 
 
-Note that this is a WebUI feature only. Changes on WinUI or directly on the AIMMS IDE will not trigger the ``uponchange`` procedure. 
+Note that this is a WebUI feature only. Changes on WinUI or directly on the AIMMS IDE will not trigger the ``uponchange`` procedure.
 
 Step 1
 ~~~~~~~~~
 
 Create a procedure with the following input arguments. Set both identifiers' index domain to the same index domain of the identifier to be triggered. 
-This case, a generic ``i_i``, ``i_j`` and ``i_k`` is used. 
+This case, a generic ``i_i``, ``i_j`` and ``i_k`` is used. Everytime that the user change one or multiple values, this procedure will be triggered.
 
 .. code-block:: aimms
 
@@ -27,11 +26,17 @@ This case, a generic ``i_i``, ``i_j`` and ``i_k`` is used.
         }
     }
 
-Everytime that the user change
+Remarks:
+
+- ``p_in_oldValue`` is a copy of the triggered identifier, so if the triggered one is a parameter, this will be also, same for other types of identifier.
+- ``bp_in_hasChanged`` is a binary argument that will return which values where changed.
+- Both arguments can be names as you wish, but always the first will return if it was changed and the second the old value of the identifier.
+
 
 Step 2
 ~~~~~~~~~
 
+When adding arguments to the ``uponchange`` procedure, consistency checks are possible, but you can also only let the customer knows what was just changed. 
 
 .. code-block:: aimms
     :linenos:
@@ -51,7 +56,8 @@ Step 2
     endfor;
 
 Remarks:
-- sp_whatHasChanged is used to clarify that only data selected will be changed. 
+
+- ``sp_whatHasChanged`` is used to clarify that only data selected was changed. 
 
 .. seealso::
     More documentation about `UponChange annotation <https://documentation.aimms.com/webui/widget-options.html#additional-identifier-properties>`_.
