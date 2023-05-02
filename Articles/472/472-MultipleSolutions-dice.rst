@@ -16,7 +16,7 @@ This example demonstrates several approaches to get multiple solutions when
 solving a MIP problem. These approaches are:
 
 - Using the incumbent (solver) callback;
-- Using the solution pool (only supported by CPLEX);
+- Using the solution pool (supported by CPLEX, Gurobi and ODH-CPLEX);
 - Repeatedly solve the problem forbidding the previous solutions.
 
 In the dice problem a set of three dice has to be designed by assigning an
