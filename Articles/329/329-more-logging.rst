@@ -174,13 +174,13 @@ With the Log4View utility you can filter the output of selected loggers, as show
 .. image:: images/log4view.png
     :align: center
 
-Using AWS to inspect logs created on the AIMMS Cloud
+Using Azure to inspect logs created on the AIMMS Cloud
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The AWS logging information is only accessible to AIMMS staff.
+The Azure logging information is only accessible to AIMMS staff.
 Please find a snapshot of the information below.
 
-.. image:: images/aws-logging-snapshot.png
+.. image:: images/azure-logging-snapshot.png
     :align: center
 
 
