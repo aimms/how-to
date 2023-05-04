@@ -211,7 +211,7 @@ The code to read the Excel data looks as follows:
 #. This library assumes that the data is presented in columns on the sheet; this library is less suited for data that is scattered on an Excel sheet.
 
 #. See also 
-   * :doc:`../csv/read-write-csv` and 
+   * :doc:`../586/586-read-write-csv` and 
    * `XLSProvider for datalink <https://documentation.aimms.com/datalink/providers.html#xlsprovider>`_
 
 
