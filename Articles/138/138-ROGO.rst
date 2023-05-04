@@ -6,6 +6,7 @@
    :keywords: ROGO, constraint
 
 .. figure:: images/ROGO.logo_.png
+    
     Creative Maths - A world of mathematicians
 
 .. sidebar:: ROGO Puzzle: avoid pitfalls, grab prizes within limit on steps
