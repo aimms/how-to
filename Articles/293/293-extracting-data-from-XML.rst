@@ -1,12 +1,14 @@
+.. warning:: 
+   Please note that the documentation you are currently viewing is for an older version of our technology. 
+   While it is still functional, we recommend upgrading to our latest and more efficient option to take advantage of all the improvements we've made.
+   See `DEX <https://documentation.aimms.com/dataexchange/index.html>`_.
+
 Extract Data from an XML File
-==================================================
+==============================
 
 .. meta::
    :description: Using AIMMS XML schema mapping tool to extract data.
    :keywords: xml, schema, xsd, axm
-
-
-.. note:: Note the modern alternative: `The data exchange library <https://documentation.aimms.com/dataexchange/index.html>`_
 
 In this article, we will learn how to extract data from an XML file using the AIMMS XML schema mapping tool.
 

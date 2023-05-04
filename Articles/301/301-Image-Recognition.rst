@@ -1,5 +1,10 @@
+.. warning:: 
+   Please note that the documentation you are currently viewing is for an older version of our technology. 
+   While it is still functional, we recommend upgrading to our latest and more efficient option to take advantage of all the improvements we've made.
+   
+
 Use the IBM Image Recognition API
-==================================================================================================
+===================================
 
 .. meta::
    :description: An overview of using IBM APIs with AIMMS in the context of image recognition.
