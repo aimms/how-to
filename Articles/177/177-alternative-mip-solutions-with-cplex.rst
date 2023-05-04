@@ -5,11 +5,6 @@ Use Alternative MIP Solutions with CPLEX Solution Pool
    :description: Provide an equivalent AIMMS model to the AMPL model by Paul Rubin on K best solutions.
    :keywords: solution pool, CPLEX, MIP, model
 
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
-
 In his blog post `K Best Solutions <http://orinanobworld.blogspot.com/2012/04/k-best-solutions.html>`_, Paul Rubin provides some information on how to obtain the **K best** solutions for a MIP model. 
 One of the approaches he discusses is the solution pool functionality of CPLEX. In this article, we demonstrate how to use the solution pool feature of CPLEX in AIMMS using the the same binary knapsack problem used by Paul.
 
