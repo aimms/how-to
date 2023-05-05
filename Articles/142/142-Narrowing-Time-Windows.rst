@@ -5,10 +5,6 @@
    :description: A scheduling example showing how to reduce the time window for smaller jobs.
    :keywords: scheduling, job, activities, resources
 
-.. note::
-
-	This article was originally posted to the AIMMS Tech Blog.
-
 
 .. sidebar:: Scheduling problem
 

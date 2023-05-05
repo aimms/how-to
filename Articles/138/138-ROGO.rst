@@ -5,15 +5,8 @@
    :description: A method for solving ROGO puzzles using constraint programming in AIMMS.
    :keywords: ROGO, constraint
 
-.. note::
-
-	This article was originally posted to the AIMMS Tech Blog.
-
-
-.. .. sidebar:: ROGO Puzzle: avoid pitfalls, grab prizes within limit on steps
-
 .. figure:: images/ROGO.logo_.png
-
+    
     Creative Maths - A world of mathematicians
 
 .. sidebar:: ROGO Puzzle: avoid pitfalls, grab prizes within limit on steps
