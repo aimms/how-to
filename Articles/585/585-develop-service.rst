@@ -48,7 +48,7 @@ remarks:
 
 * Lines 13-16: writing the output
 
-.. tip:: The proc `ProfilerStart <https://documentation.aimms.com/functionreference/development-support/profiler-and-debugger/profilerstart.html>`_ is called in ``MainInitialization`` enabling tracking task invocations, and task performance.
+.. tip:: The procedure `ProfilerStart <https://documentation.aimms.com/functionreference/development-support/profiler-and-debugger/profilerstart.html>`_ is called in ``MainInitialization`` enabling tracking task invocations, and task performance.
 
 definition of service
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -123,11 +123,9 @@ Let's assume that:
 
 Then the variations can be handled by the ``url_prefix``, by defining it as:
 
-``url_prefix``, the start of each of the url's used, is defined as
+#.  On Cloud: ``https://{cloud}//pro-api/v1/tasks/``
 
-#. On Cloud: ``https://{cloud}//pro-api/v1/tasks/``
-
-#. On local host: ``http://localhost:{port}/api/v1/tasks/``
+#.  On local host: ``http://localhost:{port}/api/v1/tasks/``
 
 With this prefix, the URL's for each of the steps in handling a task are:
 
