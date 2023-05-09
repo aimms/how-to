@@ -6,11 +6,6 @@ Overview: Model Sources, Version Control and aimmspack Files
    :description: An overview of model sources and using version control in AIMMS 4 applications.
    :keywords: version, control, source, aimmspack, encrypt, git
 
-.. note::
-
-	This article was originally posted to the AIMMS Tech Blog.
-
-
 In our current AIMMS 4.0 release we have introduced a number of fundamental, and sometimes breaking changes in managing the project sources, about which we got a lot of questions. In this article, I will describe these changes and also explain the rationale behind them.
 
 Binary versus text-only source files
