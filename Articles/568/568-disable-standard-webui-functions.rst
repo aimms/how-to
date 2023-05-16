@@ -8,7 +8,7 @@ Download Image
 
 To hide the Download button:
 
-.. code-block:: aimms 
+.. code-block:: css 
     :linenos:
 
     .widget-menu__items-wrapper .widget-menu__item[title="Download Image"] {
@@ -32,7 +32,7 @@ Add Filter Rule
 
 To hide the Add Filter Rule button:
 
-.. code-block:: aimms 
+.. code-block:: css 
     :linenos:
 
     .popup-menu .filter-items .filter-icon {
@@ -54,7 +54,7 @@ To hide the Add Filter Rule button:
 Search Button
 -------------
 
-.. code-block:: aimms 
+.. code-block:: css 
     :linenos:
 
     .widgetdiv .awf-dock-button .search-support-content {
@@ -73,6 +73,31 @@ Search Button
         .. image:: images/before_search.png
             :align: center    
 
+Upload Excel
+-------------
+
+To hide the Upload button:
+
+.. code-block:: css 
+    :linenos:
+
+    .widget-menu__container .widget-menu__item[title="Upload .xlsx"], 
+    .widget-menu__container .widget-menu__item[title="Upload .xlsx"] + .szh-menu__divider {
+        display: none;
+    }
+
+
+.. grid:: 2
+
+    .. grid-item-card::  With css
+
+        .. image:: images/after_upload.png
+            :align: center
+
+    .. grid-item-card::  Without css
+
+        .. image:: images/before_upload.png
+            :align: center    
 
 
 
