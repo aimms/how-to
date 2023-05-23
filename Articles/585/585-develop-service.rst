@@ -1,8 +1,17 @@
 Develop, Test, and Deploy a Service
 ===================================
 
-As a developer of a service; you want to have clients available that can test that service; both 
-during development of that service and thereafter, after deploying the service.
+As a developer of a service, you want to have clients available that can test that service, both the stages:
+
+* development of that service, and 
+
+* deployment of that service.
+
+Not only these two stages, but this article also illustrates:
+
+* service implemented using AIMMS, and
+
+* clients implemented in various languages that use that service.
 
 This article illustrates how to build a client app that can test your service; 
 both during development and when it is published. 
@@ -143,9 +152,7 @@ With this prefix, the URL's for each of the steps in handling a task are:
 Available Client implementations
 -----------------------------------
 
-#.  **Python**: The Python 3.10 client relies heavily on the `requests <https://requests.readthedocs.io/en/latest/>`_ module.
-
-    A Python app that tests the ``countStars`` service:  :download:`Python code <model/main.py>` 
+#.  **Python**: 
 
 #.  **AIMMS**: The AIMMS 4.94 client relies on the `AimmsDEX <https://documentation.aimms.com/dataexchange/index.html>`_ library.
 
