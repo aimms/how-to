@@ -19,8 +19,9 @@ Build Locally the HTML documentation
 --------------------------------------
 
 **Requirements:**
- - [Python 3.X](https://www.python.org/downloads/)
+ - [Python 3.X, but below 3.10](https://www.python.org/downloads/)
  - [Sphinx package](http://www.sphinx-doc.org/en/master/) (run `python3 -m pip install sphinx`)
+ - [Sphinx Design package](https://sphinx-design.readthedocs.io/en/latest/) (run `python3 -m pip install sphinx-design`)
  - [Sphinx Spelling package](https://sphinxcontrib-spelling.readthedocs.io/en/latest/) (run `python3 -m pip install sphinxcontrib.spelling`)
  - [Sphinx AIMMS theme](https://gitlab.com/ArthurdHerbemont/sphinx-aimms-theme) (run `python3 -m pip install sphinx-aimms-theme`)
  - [AIMMS code blocks for PDF](https://gitlab.com/ArthurdHerbemont/aimms-pygments-style) (run `python3 -m pip install aimms-pygments-style`) 
