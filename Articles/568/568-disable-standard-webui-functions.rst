@@ -45,7 +45,7 @@ To hide it globally:
 
 You could prefix this selector like this, to single out widgets by widget URI:
 
-.. code-block:: css 
+.. code-block:: text 
     :linenos:
 
     [data-widget\.uri="Cost Savings Table"] .awf-dock-button .search-support-content {
