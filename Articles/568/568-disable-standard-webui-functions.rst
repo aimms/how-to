@@ -45,14 +45,12 @@ To hide it globally:
 
 You could prefix this selector like this, to single out widgets by widget URI:
 
-.. raw:: html
+.. code-block:: css 
+    :linenos:
 
-    <div class="highlight-CSS notranslate"><div class="highlight"><pre>
-        [data-widget\.uri="Cost Savings Table"] .awf-dock-button .search-support-content {
-            visibility: hidden;
-        }
-    </pre></div>
-    </div>
+    [data-widget\.uri="Cost Savings Table"] .awf-dock-button .search-support-content {
+        visibility: hidden;
+    }
 
 Of course, replace the URI with your own, correct, URI.
 
@@ -68,8 +66,8 @@ Of course, replace the URI with your own, correct, URI.
         .. image:: images/before_search.png
             :align: center    
 
-Download Image,  Upload or Download Excel / Download CSV
---------------------------------------------------------
+Download Image,  Upload or Download Excel / Download CSV 
+----------------------------------------------------------
 
 To hide one of the 4 Download/Upload items, globally:
 
@@ -81,7 +79,7 @@ To hide one of the 4 Download/Upload items, globally:
         display: none;
     }
 
-Where ``upload-xlsx`` can be exchanged with ``download-xlxs``, ``download-csv`` and ``download-image``. ``help-me`` is a menu item that only App Developers might see, but it can be hidden too.
+Where ``upload-xlsx`` can be exchanged with ``download-xlsx``, ``download-csv`` and ``download-image``. ``help-me`` is a menu item that only App Developers might see, but it can be hidden too.
 
 Not all items will have a separator following them, but if there is one, the above css will also hide it. Remove the second selector if you need to keep the separator.
 
