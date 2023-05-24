@@ -54,7 +54,7 @@ You could prefix this selector like this, to single out widgets by widget URI:
     </pre></div>
     </div>
 
-Of course, replace the uri with your own, correct, uri.
+Of course, replace the URI with your own, correct, URI.
 
 .. grid:: 2
 
