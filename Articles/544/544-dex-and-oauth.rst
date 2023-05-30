@@ -7,13 +7,13 @@
 Using OAuth2 for API authorization with DEX
 =============================================
 
-.. image:: https://img.shields.io/badge/AIMMS_4.84-Minimum_AIMMS_Version_WebUI-brightgreen
-.. image:: https://img.shields.io/badge/AIMMS_2.41-Minimum_AIMMS_Version_PRO-brightgreen
+.. image:: https://img.shields.io/badge/AIMMS_4.90-Minimum_AIMMS_Version_WebUI-brightgreen
+.. image:: https://img.shields.io/badge/AIMMS_2.90-Minimum_AIMMS_Version_PRO-brightgreen
 
-.. image:: https://img.shields.io/badge/AIMMS_4.84/2/41-OAuth_Example-blue 
-	:target: model/OAuth example.zip
+.. image:: https://img.shields.io/badge/AIMMS_4.90/2/41-OAuth_Example-blue 
+	:target: download/OAuth-Example.zip
 
-With the Data Exchange Library (DEX) you can use `the OAuth2 protocol <https://documentation.aimms.com/dataexchange/rest-client.html#using-oauth2-for-api-authorization>`__ for the authentication procedure of API's. On this how-to page you can find more details on how this type of authorization works and the flow that comes with it. You can download the example projects to replicate the examples described below.
+With the Data Exchange Library (DEX) you can use `the OAuth2 protocol <https://documentation.aimms.com/dataexchange/rest-client.html#using-oauth2-for-api-authorization>`__ for the authentication procedure of API's. On this how-to page you can find more details on how this type of authorization works and the flows that come with it. You can download the example project to replicate the examples described below.
 
 In this article we will be demonstrating the two available options:
 
@@ -110,7 +110,7 @@ The correct scope(s) for the request should be added in the 'API permissions' se
 .. image:: images/azure_step2.png
    :align: center
 
-In the request we'll also need to add the 'offline_access' scope as defined by the documentation. 
+In the request we'll also add the 'offline_access' scope as defined by the documentation so we get a refresh token for extended access to resources. 
 If we take a look at the setup within AIMMS we see the following:
 
 .. code-block:: aimms
@@ -145,7 +145,7 @@ Now, when we open the example project either locally or as an app uploaded on ou
 Implementing the Client Credentials flow with Azure
 ------------------------------------------------------
 
-The Client Credentials Code flow requires a slightly different setup to work. You can reuse the client that was set up for the Authorization Code Flow, but we need to add two additional API Permissions within the Azure portal:
+The Client Credentials Code flow requires a slightly different setup to work. You can reuse the client that was set up for the Authorization Code Flow, but we need an additional API Permission within the Azure portal:
 
 .. image:: images/azure_step2c.png
    :align: center
@@ -187,7 +187,8 @@ Now we can create the request and add the bearer token:
 	!add bearer token
 	dex::oauth::AddBearerToken('MS', "getUser");
 
-As you can see we've added a Callback and are tracing the request of which we store the results in a file called Trace.xml. The actual response will be in Output.json. Both of these files can be accesses if you run the procedure(s) locally. Now we are ready to perform the request:
+As you can see we've added a reference to a Callback procedure, necessary for the request to be handled properly but which will also be used to map the retrieved results onto a string parameter (or catch any possible error and show the related message).
+We are also tracing the request of which we store the results in a file called Trace.xml. The actual response will be in Output.json. Both of these files can be accessed if you run the procedure(s) locally. Now we are ready to perform the request:
 
 .. code-block:: aimms
 
@@ -205,9 +206,6 @@ As you can see we've added a Callback and are tracing the request of which we st
 	dex::client::CloseRequest(
 		"getUser"
 	);
-
-	!now read and map the data properly for WebUI
-	AzureExample_ReadData;
 
 If the request was performed successfully, the response data is now in Output.json. Then we use a DEX-mapping to map the retrieved data onto the same parameters that we used for the previous requests as to be able to show it correctly in the WebUI.
 

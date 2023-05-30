@@ -1,8 +1,0 @@
-* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
-"InitializeOAuthClients" "GoogleExample" "2023-01-31 15:50:11"
-"Copy_GoogleExample" "AzureExample" "2023-01-31 16:14:44"
-"AzureExample" "AzureExample_AuthorizationCodeFlow" "2023-02-09 16:25:25"
-"GoogleExample" "GoogleExample_AuthorizationCodeFlow" "2023-02-09 16:25:34"
-"EmptyCallback" "Callback" "2023-02-09 16:25:59"
-"Procedure_1" "AzureExample_ReadData" "2023-02-14 16:12:18"
-"Section_1" "Azure_Authorization_Code_Flow" "2023-03-14 13:54:02"
