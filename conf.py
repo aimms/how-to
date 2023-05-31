@@ -30,7 +30,6 @@ sys.path.insert(0, os.path.abspath('.'))
 # If your documentation needs a minimal Sphinx version, state it here.
 #
 # needs_sphinx = '1.0'
-numfig = True
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -64,7 +63,7 @@ linkcheck_ignore = [r'http://localhost:\d+/?',r'http://0\.0\.0\.0[:/]\d+/?',r'ht
 templates_path = ['_templates']
 
 # Getting the spelling word list from the sphinx-aimms-theme
-spelling_word_list_filename = [os.path.join(os.path.dirname(sphinx_aimms_theme.__file__),"spelling_wordlist.txt"),"spelling_wordlist.txt" ]
+spelling_word_list_filename = [os.path.join(os.path.dirname(sphinx_aimms_theme.__file__),"spelling_wordlist.txt")]
 
 spelling_filters = ['enchant.tokenize.URLFilter','sphinx_aimms_theme.AIMMSspellingFilters.ProperNounsFilter']
 
@@ -110,7 +109,7 @@ rst_prolog = """
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = 'en'
+language = None
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
