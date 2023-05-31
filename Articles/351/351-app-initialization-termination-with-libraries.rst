@@ -212,5 +212,6 @@ References and further reading
 
 
 
-.. spelling::
+.. spelling:word-list::
+
     runonly

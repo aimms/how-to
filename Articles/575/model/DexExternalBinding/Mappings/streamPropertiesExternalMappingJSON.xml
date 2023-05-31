@@ -1,0 +1,8 @@
+<AimmsJSONMapping>
+    <ExternalBinding binds-to="i_stream" binding="ep_anotherStream"/>
+    <ObjectMapping>
+        <ValueMapping name="prp1" maps-to="p_prop1(i_stream)"/>
+        <ValueMapping name="prp2" maps-to="p_prop2(i_stream)"/>
+        <ValueMapping name="prp3" maps-to="sp_prop3(i_stream)"/>
+    </ObjectMapping>
+</AimmsJSONMapping>

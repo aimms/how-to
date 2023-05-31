@@ -1,5 +1,5 @@
-How to create mappings for matrix-oriented data
-=================================================
+How to create mappings for matrix-oriented data via name-binds-to
+===================================================================
 
 Sometimes your data source consists of both column- and row-oriented data, showing data matrix-style. 
 For these setups you can still use a mapping file, using certain elements in your tags to guide the data to the correct identifier(s). 

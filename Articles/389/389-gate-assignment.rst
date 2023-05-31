@@ -19,6 +19,6 @@ You may read Technical Report by G. Diepen et al. for details about the model an
 Keywords:
 Mixed Integer Programming, Linear Programming, Column Generation, GMP, Gate Assignment
 
-.. spelling::
+.. spelling:word-list::
 
     al

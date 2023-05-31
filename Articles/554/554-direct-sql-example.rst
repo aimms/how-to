@@ -2,33 +2,46 @@ DirectSQL Example
 ===================
 
 Not all operations on ODBC databases can be done using the ``read from table`` and ``write to table`` statements.
-More flexibility is offered using the intrinsic procedure :aimms:procedure:`DirectSQL`.
+More flexibility is offered using the intrinsic procedure :aimms:procedure:`DirectSQL`. Please use the `Reindeer Pairing <https://how-to.aimms.com/Articles/434/434-reindeer-pairing.html>`_ example to experiment with this feature.
+ 
+With that, the procedure below illustrates an alternative for ``write to table ... in insert mode``:
 
-The following small example illustrates an alternative for ``Write to Table ... in insert mode``: 
+.. aimms:procedure:: pr_fillDatabase
+    
+This procedure will first create a connection string to the SQLite database, clean its previous values and then insert the current solve. 
 
 .. code-block:: aimms 
     :linenos:
 
-    Procedure pr_fillTable {
-        Body: {
-            for ( i_a, i_d ) do
-                DirectSql( sp_datasource,
-                    formatString("INSERT INTO AD (a,d,p,s,e) values ('%e','%e',%i,'%s','%e')",
-                        i_a, i_d, p_data(i_a,i_d), sp_data(i_a, i_d), ep_data(i_a, i_d) ) );
-            endfor ;
-        }
-    }
+    sp_loc_datasource
+    :=  SQLCreateConnectionString (
+            DatabaseInterface              :  'odbc',
+            DriverName                     :  "SQLite3 ODBC Driver", !Your local drive
+            ServerName                     :  "", 
+            DatabaseName                   :  "pairing.db", !The path of your database
+            UserId                         :  "", 
+            Password                       :  "", 
+            AdditionalConnectionParameters :  "");
+
+    !delete all
+    DirectSQL(sp_loc_datasource, "delete from possible_pairs;");
+
+    !and fill again
+    for (i_sols, i_left) | ep_variousRightPartners(i_sols, i_left) do
+        sp_loc_insertCommand 
+        :=  FormatString("INSERT INTO possible_pairs (solution,left,right) values ('%e','%e','%e');",
+                        i_sols, i_left, ep_variousRightPartners(i_sols, i_left));
+
+        DirectSQL(sp_loc_datasource, sp_loc_insertCommand);
+    endfor ;
 
 Remarks:
 
-* line 4: Call to ``DirectSQL`` using an existing ODBC connection.
+* line 12: Call to ``DirectSQL`` using an existing ODBC connection to delete previous information on the database.
 
-* line 5: A SQL INSERT statement following the `SQL syntax <https://www.w3schools.com/sql/sql_insert.asp>`_ . 
-  ``AD`` is the name of a table here.
+* line 18: To pass the elements (``ep_variousRightPartners``), just fill in the data using :aimms:func:`FormatString`.
 
-* line 6: To pass numeric data (``p_data``), string data (``sp_data``), and element data (``ep_data``), 
-  just fill in the data using :aimms:func:`FormatString`.
-  
-Download:
+* line 20: A SQL INSERT statement following the `SQL syntax <https://www.w3schools.com/sql/sql_insert.asp>`_ . ``possible_pairs`` is the name of the table of the Reindeer Pairing.
 
-    :download:`AIMMS 4.88 project download <model/ibds.zip>` 
+.. seealso::
+    Do not know which driver is available? Check `this article <https://how-to.aimms.com/Articles/539/539-which-odbc-drivers.html#which-odbc-drivers>`_.

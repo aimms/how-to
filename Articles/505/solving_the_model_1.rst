@@ -74,7 +74,7 @@ on the `ProgramStatus` keyword as follows:
 
 .. rubric:: Running the procedure
 
-The procedure MainExecution is special in that there is a dedicated key, ``F5``
+The procedure MainExecution is special in that there is a dedicated key, ``F6``
 , to execute this procedure. For all other procedures you can use the
 right mouse button to select the **Run Procedure** command.
 
@@ -120,6 +120,6 @@ This course will dig deeper in modeling using AIMMS, building a Web User Interfa
 
 See you there ! 😁
 
-.. spelling::
-    
+.. spelling:word-list::
+
     popup

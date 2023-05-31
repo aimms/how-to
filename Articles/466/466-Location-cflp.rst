@@ -35,8 +35,8 @@ problem
 .. meta::
    :keywords: Benders Decomposition, GMP, Reading numbers from text file, Warehouse location
 
-.. spelling::
-    
+.. spelling:word-list::
+
 	capa
 	capb
 	capc

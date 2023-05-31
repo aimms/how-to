@@ -1,5 +1,9 @@
+.. warning:: 
+   Please note that the documentation you are currently viewing is for an older version of our technology. 
+   While it is still functional, we recommend upgrading to our latest and more efficient option to take advantage of all the improvements we've made.
+
 Overview: HTTP Client Library
-==================================================================================================
+===============================
 
 .. meta::
    :description: An overview of the HTTP Client Library and a guide to a few use cases.

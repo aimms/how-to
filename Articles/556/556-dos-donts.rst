@@ -44,6 +44,6 @@ Wording: Keep it Simple and Clear
 
 Names of Top Pages should be simple. Use a single word whenever possible: “Review”, “Analytics”, “Demand”, “Forecast”. This helps users to not feel overwhelmed.
 
-.. spelling::
-    
+.. spelling:word-list::
+
 	amsterdam

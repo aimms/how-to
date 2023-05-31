@@ -22,7 +22,6 @@
 *.obj
 *.out
 *.pdb
-*.pdf
 *.plg
 *.put
 *.pyc
@@ -40,6 +39,7 @@ atomicData
 IncidentMaterials
 IncidentSummary.zip
 PROLog.cfg
+Articles/388/model/Flow Shop/data
 Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets/IdentifiersWithShadows.txt
 Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets/forward/example.data
 Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets/msd.ams
@@ -50,12 +50,12 @@ Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets/secundary.txt
 /WebSite_Redirection_Mapping/redirection_map_full.txt
 .vs
 _pycache_
-backup
 Debug
 log
 PROtemp
 PROtemp-*
-_build
 Handouts/.vscode
 Handouts/_build/
 .Rproj.user
+/venv/
+/.idea/

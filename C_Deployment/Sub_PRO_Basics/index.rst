@@ -21,6 +21,7 @@ This section offers best practices to build and deploy applications using AIMMS 
    /Articles/341/341-PRO-Concurrent-Users
    /Articles/251/251-pro-operations-best-practices
    /Articles/80/80-receive-messages
+   /Articles/80/80-schedule-jobs
    /Articles/117/117-Uploading-and-Downloading-files
    /Articles/115/115-Securing-File-Access
    /Articles/323/323-pro-storage-folder
@@ -31,6 +32,8 @@ This section offers best practices to build and deploy applications using AIMMS 
    /Articles/373/373-pro-scaling-options
    /Articles/374/374-pro-backup-and-continuity
    /Articles/535/535-waiting-for-sub-jobs-to-complete
+   /Articles/310/310-investigate-behavior-pro-job
+
 
 
 

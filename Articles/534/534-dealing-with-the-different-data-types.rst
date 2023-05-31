@@ -34,15 +34,13 @@ Prerequisites
 #. A mapping file is necessary for mapping, preferably saved in a folder called 'Mappings'. Visit `this article <https://documentation.aimms.com/dataexchange/mapping.html>`__ to read more about mappings and how to write one for your specific situation. Note that you can also `generate a mapping file automatically for your project <https://documentation.aimms.com/dataexchange/standard.html#creating-your-own-annotation-based-formats>`__. 
 
 
-Helpful remarks & frequent errors
------------------------------------
+Helpful Remarks
+-----------------
 
 * In general, your sources' data model should match 100% with the AIMMS model and translate as such in the mappingfile. This means that every element that you put into your mappingfile, should on an individual level match with the paired AIMMS identifier type. For example: an array should go into an indexed parameter.
 * Following the aforementioned, make sure that your parameter in AIMMS is set to the parameter type to align with the data as it will be mapped to AIMMS. 
 * Mind that no errors or warnings will be given if the "name=" element is written incorrectly in a tag in your mappingfile - the data will simply not map in this case.
 * The order of rows and columns should always be aligned with the order of the indices of the parameter.
-* A common known error is *"The maps-to attribute 'x' for node 'y' refers to an non-existing identifier"*. In this case it is helpful to check if you have written the "maps-to" element correctly, including a possible index.
-* Another commonly known error is *"The dimension of the maps-to attribute x for node y does not coincide with the specified numbers of indices"*. In this case the most probable cause is that the element is referring to an AIMMS-identifier that should have at least one index defined but where no index can be found (like for an indexed parameter), where the index is not properly named in the mappingfile or where more indices are expected than defined (or the other way around).
 * Based on how AIMMS works it is not possible to reference an index in a mappingfile for a ``maps-to`` element of a parameter, without adding the mapping for that index itself. In other words: every referenced index in a mappingfile should have its own mapping element as well.
 * It probably speaks for itself at this point, but just as a reminder: when mapping to an index, make sure to reference the name of the index and not the name of the set.
 
@@ -336,7 +334,7 @@ This could then print:
 Here we see in the top row the names from the ``ColumnMapping`` of the mapping. In the left column are the row numbers added by python. The other columns are data read from file *filefromdex.parquet*.
 
 
-.. spelling::
+.. spelling:word-list::
 
     dex
     mappingfile

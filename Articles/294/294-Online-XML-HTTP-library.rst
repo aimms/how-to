@@ -1,10 +1,14 @@
+.. warning:: 
+   Please note that the documentation you are currently viewing is for an older version of our technology. 
+   While it is still functional, we recommend upgrading to our latest and more efficient option to take advantage of all the improvements we've made.
+   See `DEX <https://documentation.aimms.com/dataexchange/index.html>`_.
+
 Extract XML File from a Server with the HTTP Library
 =====================================================
 
 .. meta::
    :description: Using the AIMMS HTTP library to extract an XML file.
    :keywords: xml, http library
-
 
 
 In this article, we will create an HTTP request to extract a file from a server without an identification system using the AIMMS HTTP library.

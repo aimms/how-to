@@ -174,13 +174,13 @@ With the Log4View utility you can filter the output of selected loggers, as show
 .. image:: images/log4view.png
     :align: center
 
-Using AWS to inspect logs created on the AIMMS Cloud
+Using Azure to inspect logs created on the AIMMS Cloud
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The AWS logging information is only accessible to AIMMS staff.
+The Azure logging information is only accessible to AIMMS staff.
 Please find a snapshot of the information below.
 
-.. image:: images/aws-logging-snapshot.png
+.. image:: images/azure-logging-snapshot.png
     :align: center
 
 
@@ -191,7 +191,7 @@ Further reading
 
 * Guard solver session :doc:`Investigating behavior solver session<../310/310-investigate-behavior-pro-job>`
 
-* Save state  :doc:`Data state solver session<../321/321-state-server-session>`
+* Save state  `Data state solver session <https://documentation.aimms.com/guardserversession/state-server-session.html>`_
 
 * The AIMMS Debugger, see :doc:`creating-and-managing-a-model/debugging-and-profiling-an-aimms-model/index`
 

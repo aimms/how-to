@@ -4,10 +4,10 @@ Demand Forecasting
    :keywords: aimms, forecast, demand, factory, library
    :description: This example uses the forecasting library! 
 
-.. image:: https://img.shields.io/badge/AIMMS_4.88-ZIP:_Demand_Forecasting-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.91-ZIP:_Demand_Forecasting-blue
    :target: https://github.com/aimms/demand-forecasting/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.88-Github:_Demand_Forecasting-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.91-Github:_Demand_Forecasting-blue
    :target: https://github.com/aimms/demand-forecasting
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow

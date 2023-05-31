@@ -87,7 +87,7 @@ Remarks about the above code:
                         IdentifierDimension(indexIdentifiers) >= 2 };
 
 
-#. Please see :doc:`reduce client server exchange<../reduce-client-server-exchange/reduce-client-server-exchange>` on tips for assigning ``pro::ManagedSessionInputCaseIdentifierSet`` to just those that are relevant for the job at hand.
+#. Please see :doc:`reduce client server exchange<../582/582-reduce-client-server-exchange>` on tips for assigning ``pro::ManagedSessionInputCaseIdentifierSet`` to just those that are relevant for the job at hand.
 
 .. note:: *Software evolution*: ``pro::ManagedSessionRemoveFromCaseIdentifierSet`` is applied to reduce the set of identifiers transferred since AIMMS 4.59.2. 
 

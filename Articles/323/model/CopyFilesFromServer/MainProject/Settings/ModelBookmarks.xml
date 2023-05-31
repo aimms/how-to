@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<ModelBookmarks TimeStamp="2019-01-25 12:47:55">
+	<Category Name="working">
+		<Bookmark Node="pr_GetFolders" Attribute="body" LineNumber="1">
+			<TextLine>if not pro::GetPROEndPoint() then return; endif ;</TextLine>
+		</Bookmark>
+	</Category>
+</ModelBookmarks>

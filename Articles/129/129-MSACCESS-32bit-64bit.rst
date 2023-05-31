@@ -5,12 +5,6 @@
    :description: How to set up 32-bit and 64-bit Microsoft Access Drivers in parallel for AIMMS applications.
    :keywords: 32, 64, access, driver
 
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
-
- 
 Some years ago, before Microsoft Office 2010, life was – in some sense – easier for developers: Office was 32-bit, period. In our days, since the release of Microsoft Office 2010, things are a bit more complicated, as users can now have a machine with a 64-bit native version of Office installed as well. This means, for instance, that a 32-bit application using an ODBC driver to connect to an Access database might not work anymore, since the 32-bit ODBC driver might not exist on a machine with a 64-bit Office installation. In such a case, even though the user has a valid Office installation on his or her machine, the application may still display an error regarding the installation or the registration of the proper drivers on the local machine.
 
 In order to address such problems, Microsoft released a redistributable named *Microsoft Access Database Engine 2010 Redistributable*. This redistributable provides a 32-bit or a 64-bit version of the Microsoft Access Database Engine, which can be downloaded from the Microsoft Download Center:

@@ -4,8 +4,70 @@
     "aimms.widget.type": {
       "literal": "application"
     },
+    "browsername": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browsertimezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
+    "ignoredst": {
+      "aimms": {
+        "contents": [
+          "webui::IgnoreDST"
+        ]
+      }
+    },
+    "statusmessages": {
+      "aimms": {
+        "contents": [
+          "sp_statusBar"
+        ],
+        "slices": [
+          {
+            "identifier": "sp_statusBar",
+            "slice": [
+              {
+                "index": "webui::indexApplicationExtension",
+                "type": "free",
+                "value": "webui::indexApplicationExtension"
+              },
+              {
+                "index": "webui::indexStatusBarSpec",
+                "type": "free",
+                "value": "webui::indexStatusBarSpec"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "theme.classic": {
       "literal": "NOT_ALLOWED"
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "timezone.dst.readonly": {
+      "aimms": {
+        "contents": [
+          "webui::DefaultDSTSettingForDisplayTimeZone"
+        ]
+      }
+    },
+    "ui.editable": {
+      "literal": 0
     }
   },
   "pages/home": {
@@ -78,6 +140,9 @@
     },
     "title": {
       "literal": "Bye"
+    },
+    "widget.visible": {
+      "literal": 0
     }
   },
   "widgets/Session info": {

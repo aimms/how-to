@@ -248,15 +248,6 @@ With these assignments, I'm stuck with more than 10 kg of fruit to be carried by
 
 
 
-
-
-
-
-
-
-
-
-
-.. spelling:: 
+.. spelling:word-list::
 
     greyed

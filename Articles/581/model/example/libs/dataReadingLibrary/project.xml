@@ -1,0 +1,6 @@
+﻿<?xml version="1.0"?>
+<LibraryProject AimmsVersion="4.92.10.1 unicode x64" ProjectUUID="df458fea-ce02-11ed-b4b0-325096b39f47">
+    <ModelFileName>dataReadingLibrary.ams</ModelFileName>
+    <Prefix>drl</Prefix>
+    <DisplayName>dataReadingLibrary</DisplayName>
+</LibraryProject>

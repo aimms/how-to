@@ -29,7 +29,7 @@ Prerequisites
    
 .. note:: If you are on the AIMMS Cloud, you may directly use ``https://your-cloud-name.cloud.aimms.com/api-library/pro-api-complete.zip`` 
    
-Running the example
+Running the Example
 -------------------
 
 #.  First publish the example application.
@@ -184,12 +184,11 @@ Output
         * Lines 56-84 show how this abnormal termination is handled step by step.
     
         
-
-
-Further reading
+Further Reading
 -----------------
 
-See also the `manual <https://documentation.aimms.com/pro/api.html>`_
+See also the `manual on PRO API <https://documentation.aimms.com/pro/api.html>`_.
+
 
 
    

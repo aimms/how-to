@@ -15,8 +15,23 @@ Model Main_CopyFilesFromServer {
 			Index: i_afn;
 			Property: ElementsAreLabels;
 		}
+		Set s_orderedFileNumbers {
+			SubsetOf: s_AllFileNumbers;
+			Index: i_oafn;
+			Property: ElementsAreLabels;
+			OrderBy: sp_AllFilenames(i_afn);
+			Definition: s_AllFileNumbers;
+		}
 		StringParameter sp_AllFilenames {
 			IndexDomain: i_afn;
+		}
+		Set s_allfilenames {
+			Index: i_filename;
+			Parameter: ep_newFilename;
+		}
+		Set s_duplicateFileNames {
+			SubsetOf: s_allfilenames;
+			Parameter: ep_newDuplicateFilename;
 		}
 		StringParameter sp_AllFiletimes {
 			IndexDomain: i_afn;
@@ -27,6 +42,22 @@ Model Main_CopyFilesFromServer {
 		Parameter p01_Selection {
 			IndexDomain: i_afn;
 			Range: binary;
+		}
+		Parameter bp_noDuplicates {
+			Definition: count( i_oafn | ( sp_AllFilenames(i_oafn) = sp_AllFilenames(i_oafn-1) ) );
+		}
+	}
+	Procedure pr_findDuplicates {
+		Body: {
+			empty s_allFilenames ;
+			empty s_duplicateFileNames ;
+			for i_afn do
+				if sp_AllFiletimes(i_afn) in s_allFilenames then
+					setElementAdd( s_duplicateFileNames, ep_newDuplicateFilename, sp_AllFilenames(i_afn) );
+				else
+					setElementAdd( s_allFilenames, ep_newFilename, sp_AllFilenames(i_afn) );
+				endif ;
+			endfor ;
 		}
 	}
 	Section Select_Folder_on_PRO_Storage {
@@ -273,51 +304,184 @@ Model Main_CopyFilesFromServer {
 		StringParameter spMySlash {
 			Definition: "/";
 		}
-		Procedure pr_GetFolders {
-			Arguments: (spInpPath,sFolderNumbers,sFolderNames);
-			Body: {
-				if not pro::GetPROEndPoint() then return; endif ;
-				
-				pro::NormalizeStoragePath(spInpPath);
-				ret := pro::storage::ListBuckets(
-					path       :  spInpPath, 
-					BucketSet  :  sLocBucketSet, 
-					BucketSize :  pLocBucketSize, 
-					BucketAuth :  spLocBucketAuth, 
-					BucketDate :  spLocBucketDate);
-				empty sFolderNumbers;                	
-				for i_bs do
-					SetElementAdd(sFolderNumbers,eFN,FormatString("%i",card(sFolderNumbers)+1));
-					if eFN <> last( sFolderNumbers ) then raise error "internal error" ; endif ;
-					sFolderNames(eFN) := i_bs ;
-				endfor ;
-				return card(sLocBucketSet);
-			}
-			Set sFolderNumbers {
-				Index: iFN;
-				Parameter: eFN;
-				Property: Output;
-			}
-			StringParameter spInpPath {
-				Property: Input;
-			}
-			StringParameter sFolderNames {
-				IndexDomain: iFN;
-				Property: Output;
-			}
-			DeclarationSection Local_declarations {
-				Parameter ret;
-				Set sLocBucketSet {
-					Index: i_bs;
+		Section Section_1 {
+			Procedure pr_GetFolders {
+				Arguments: (spInpPath,sFolderNumbers,sFolderNames);
+				Body: {
+					if not pro::GetPROEndPoint() then return; endif ;
+					
+					pro::NormalizeStoragePath(spInpPath);
+					
+					p_totalFoldersRead := 0 ;
+					bp_finished := 0 ;
+					p_foldersPerCall := 1024 ;
+					empty sFolderNumbers;                	
+					while not bp_finished do
+						empty s_LocBucketSet ;
+						p_AimmsProCallReturnCode := pro::storage::ListBuckets(
+							path       :  spInpPath, 
+							BucketSet  :  s_LocBucketSet, 
+							BucketSize :  p_LocBucketSize, 
+							BucketAuth :  sp_LocBucketAuth, 
+							BucketDate :  sp_LocBucketDate, 
+							MaxKeys    :  p_foldersPerCall, 
+							OffSet     :  p_totalFoldersRead, 
+							separator  :  "/");
+						if not pro::HandleError(p_AimmsProCallReturnCode, "pro::storage::ListBuckets" ) then 
+							return 0; 
+						endif; 
+						for i_bs do
+							SetElementAdd(sFolderNumbers,eFN,FormatString("%i",card(sFolderNumbers)+1));
+							if eFN <> last( sFolderNumbers ) then raise error "internal error" ; endif ;
+							sFolderNames(eFN) := i_bs ;
+						endfor ;
+						p_foldersRead := card( s_LocBucketSet ) ;
+						p_totalFoldersRead += p_foldersRead ;
+						if p_foldersRead < p_foldersPerCall then
+							bp_finished := 1 ;
+						endif ;
+					endwhile ;
+					
+					return p_totalFoldersRead;
 				}
-				Parameter pLocBucketSize {
-					IndexDomain: i_bs;
+				Set sFolderNumbers {
+					Index: iFN;
+					Parameter: eFN;
+					Property: Output;
 				}
-				StringParameter spLocBucketAuth {
-					IndexDomain: i_bs;
+				StringParameter spInpPath {
+					Property: Input;
 				}
-				StringParameter spLocBucketDate {
-					IndexDomain: i_bs;
+				StringParameter sFolderNames {
+					IndexDomain: iFN;
+					Property: Output;
+				}
+				DeclarationSection Local_declarations {
+					Parameter p_AimmsProCallReturnCode;
+					Set s_LocBucketSet {
+						Index: i_bs;
+					}
+					Parameter p_LocBucketSize {
+						IndexDomain: i_bs;
+					}
+					StringParameter sp_LocBucketAuth {
+						IndexDomain: i_bs;
+					}
+					StringParameter sp_LocBucketDate {
+						IndexDomain: i_bs;
+					}
+					Parameter bp_finished;
+					Parameter p_foldersRead;
+					Parameter p_totalFoldersRead;
+					Parameter p_foldersPerCall;
+				}
+			}
+			Procedure pr_GetFiles {
+				Arguments: (sp_InpPath,s_FileNumbers,sp_FileNames,sp_FileTimes,p_FileSizes);
+				Body: {
+					if not pro::GetPROEndPoint() then return; endif ;
+					
+					bp_allFilesRead := 0 ;
+					p_startFileNo := 0 ;
+					p_filesPerCall := 1024 ;
+					p_totalReceivedFileNames := 0 ;
+					while not bp_allFilesRead do
+						empty s_childrenObj ;
+						p_AimmsProCallReturnCode := pro::storage::ListObjects(
+								path           :  sp_InpPath, 
+								ObjectSet      :  s_childrenObj, 
+								ObjectFileName :  sp_childrenObjName, 
+								ObjectType     :  sp_childrenObjType, 
+								ObjectSize     :  p_childrenObjSize, 
+								BucketAuth     :  sp_childrenObjAuth, 
+								MaxKeys        :  p_filesPerCall, 
+								OffSet         :  p_totalReceivedFileNames, 
+								separator      :  "/");	
+						if not pro::HandleError(p_AimmsProCallReturnCode,"pro::storage::ListObjects") then 
+							return 0; 
+						endif; 
+						p_filenamesReceivedThisCall := card( s_childrenObj );
+						for i_childObj do
+							s_FileNumbers += ( p_totalReceivedFileNames + ord( i_childObj ) );
+							ep_fin := last( s_FileNumbers );
+							sp_FileNames( ep_fin ) := sp_InpPath + spMySlash + i_childObj ;
+							sp_fullFileName := sp_InpPath + i_childObj ;
+							pro::storage::ListVersions(
+								path        :  sp_InpPath, 
+								objectLabel :  i_childObj, 
+								VersionSet  :  sVer, 
+								VersionSize :  p_verSize, 
+								BucketDate  :  sp_verFileTimes );
+							eVer := last(sVer);
+							sp_FileTimes(ep_fin) := sp_verFileTimes(eVer);
+							p_FileSizes(ep_fin) := p_verSize(eVer);
+						endfor ;
+						p_totalReceivedFileNames += p_filenamesReceivedThisCall ;
+						if p_filenamesReceivedThisCall < p_filesPerCall then
+							bp_allFilesRead := 1;
+						endif ;
+					endwhile ;
+				}
+				DeclarationSection Argument_Declarations {
+					StringParameter sp_InpPath {
+						Property: Input;
+					}
+					Set s_FileNumbers {
+						SubsetOf: Integers;
+						Index: iFN;
+						Property: ElementsAreLabels;
+					}
+					StringParameter sp_FileNames {
+						IndexDomain: iFN;
+						Property: Output;
+					}
+					StringParameter sp_FileTimes {
+						IndexDomain: iFN;
+						Property: Output;
+					}
+					Parameter p_FileSizes {
+						IndexDomain: iFN;
+						Property: Output;
+					}
+				}
+				DeclarationSection Local_Declarations {
+					ElementParameter ep_fin {
+						Range: s_FileNumbers;
+					}
+					Parameter p_AimmsProCallReturnCode;
+					Parameter p_filenamesReceivedThisCall;
+					Parameter p_totalReceivedFileNames;
+					Set sVer {
+						Index: iVer;
+						Parameter: eVer;
+					}
+					Parameter bp_allFilesRead {
+						Range: binary;
+					}
+					Parameter p_startFileNo;
+					Parameter p_filesPerCall;
+					Parameter p_verSize {
+						IndexDomain: iVer;
+					}
+					StringParameter sp_verFileTimes {
+						IndexDomain: iVer;
+					}
+					Set s_childrenObj {
+						Index: i_childObj;
+					}
+					StringParameter sp_fullFileName;
+					StringParameter sp_childrenObjName {
+						IndexDomain: i_childObj;
+					}
+					StringParameter sp_childrenObjType {
+						IndexDomain: i_childObj;
+					}
+					Parameter p_childrenObjSize {
+						IndexDomain: i_childObj;
+					}
+					StringParameter sp_childrenObjAuth {
+						IndexDomain: i_childObj;
+					}
 				}
 			}
 		}
@@ -388,87 +552,6 @@ Model Main_CopyFilesFromServer {
 				Parameter res;
 			}
 		}
-		Procedure pr_GetFiles {
-			Arguments: (spInpPath,sFileNumbers,spFileNames,spFileTimes,pFileSizes);
-			Body: {
-				if not pro::GetPROEndPoint() then return; endif ;
-				
-				ret := pro::storage::ListObjects(spInpPath,sChildrenObj,spChildrenObjName,spChildrenObjType,pChildrenObjSize,spChildrenObjAuth);
-				!if not handleError(ret) then return 0; endif; 
-				res := card( sChildrenObj );
-				for CURPATH_OBJ do
-					sFileNumbers += ord( CURPATH_OBJ );
-					ep_fin := last( sFileNumbers );
-					spFileNames( ep_fin ) := spInpPath + spMySlash + CURPATH_OBJ ;
-					spFullFileName := spInpPath + CURPATH_OBJ ;
-					pro::storage::ListVersions(
-						path        :  spInpPath, 
-						objectLabel :  CURPATH_OBJ, 
-						VersionSet  :  sVer, 
-						VersionSize :  pVerSize, 
-						BucketDate  :  spVerFileTimes );
-					eVer := last(sVer);
-					spFileTimes(ep_fin) := spVerFileTimes(eVer);
-					pFileSizes(ep_fin) := PVerSize(eVer);
-				endfor ;
-			}
-			DeclarationSection Argument_Declarations {
-				StringParameter spInpPath {
-					Property: Input;
-				}
-				Set sFileNumbers {
-					SubsetOf: Integers;
-					Index: iFN;
-					Property: ElementsAreLabels;
-				}
-				StringParameter spFileNames {
-					IndexDomain: iFN;
-					Property: Output;
-				}
-				StringParameter spFileTimes {
-					IndexDomain: iFN;
-					Property: Output;
-				}
-				Parameter pFileSizes {
-					IndexDomain: iFN;
-					Property: Output;
-				}
-			}
-			DeclarationSection Local_Declarations {
-				ElementParameter ep_fin {
-					Range: sFileNumbers;
-				}
-				Parameter ret;
-				Parameter res;
-				Set sVer {
-					Index: iVer;
-					Parameter: eVer;
-				}
-				Parameter pVerSize {
-					IndexDomain: iVer;
-				}
-				StringParameter spVerFileTimes {
-					IndexDomain: iVer;
-				}
-				Set sChildrenObj {
-					Index: CURPATH_OBJ;
-					Parameter: ChildrenObjElement;
-				}
-				StringParameter spFullFileName;
-				StringParameter spChildrenObjName {
-					IndexDomain: CURPATH_OBJ;
-				}
-				StringParameter spChildrenObjType {
-					IndexDomain: CURPATH_OBJ;
-				}
-				Parameter pChildrenObjSize {
-					IndexDomain: CURPATH_OBJ;
-				}
-				StringParameter spChildrenObjAuth {
-					IndexDomain: CURPATH_OBJ;
-				}
-			}
-		}
 		Procedure pr_GetAllFiles {
 			Arguments: (spInpPath,sFileNumbers,spFileNames,spFileTimes,pFileSizes);
 			Body: {
@@ -476,8 +559,19 @@ Model Main_CopyFilesFromServer {
 					spInpPath            :  spInpPath, 
 					sAllDirectoryNumbers :  sAllDirectoryNumbers, 
 					spAllDirectoryNames  :  spAllDirectoryNames);
-				p_noFolders := card( sAllDirectoryNumbers );
 				
+				!pr_GetFiles( spInpPath, sLocFilenumbers, 
+				!	spLocFilenames, spLocFiletimes, pLocFilesizes );
+				!for iLFN do
+				!	sFileNumbers += if eFN then val( eFN ) else 0 endif + val( iLFN );
+				!	eNFN := last( sFilenumbers );
+				!	spFilenames( eNFN ) := spLocFilenames( iLFN );
+				!	spFileTimes( eNFN ) := spLocFiletimes( iLFN );
+				!	 pFileSizes( eNFN ) :=  pLocFileSizes( iLFN );
+				!endfor ;
+				
+				
+				p_noFolders := card( sAllDirectoryNumbers );
 				for iADN do
 				
 					empty sLocFilenumbers ;
@@ -558,6 +652,9 @@ Model Main_CopyFilesFromServer {
 		}
 	}
 	Procedure MainInitialization {
+		Body: {
+			ProfilerStart();
+		}
 		Comment: "Add initialization statements here that do NOT require any library being initialized already.";
 	}
 	Procedure PostMainInitialization {
@@ -593,6 +690,20 @@ Model Main_CopyFilesFromServer {
 			Return 1 to allow the termination sequence to continue.
 			Return 0 if you want to cancel the termination sequence.
 			It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+		}
+	}
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsProGUI."
+			}
 		}
 	}
 }

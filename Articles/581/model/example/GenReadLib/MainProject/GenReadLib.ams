@@ -1,0 +1,665 @@
+## ams_version=1.0
+
+Model Main_GenReadLib {
+	StringParameter sp_libName {
+		Definition: "dataReadingLibrary";
+	}
+	StringParameter sp_prefix {
+		Definition: "drl";
+	}
+	Procedure pr_test {
+		Body: {
+			if not DirectoryExists( "../libs" ) then DirectoryCreate( "../libs"); endif ;
+			if not DirectoryExists( "../libs/" + sp_libName ) then DirectoryCreate( "../libs/" + sp_libName ); endif ;
+			
+			pr_createRuntimeLibrary();
+			pr_createProjectXML(
+				sp_argProjectFoldername :  "../libs/" + sp_libName, 
+				sp_argModelName         :  sp_libName, 
+				sp_prefix               :  sp_prefix);
+		}
+	}
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: {
+				century->s : #-># * 3153600000,
+				year->s : #-># * 31536000,
+				month->s : #-># * 2628000,
+				week->s : #-># * 604800,
+				day->s : #-># * 86400,
+				hour->s : #-># * 3600,
+				minute->s : #-># * 60,
+				second->s : #-># ,
+				tick->s : #-># / 100
+			}
+			Comment: "Expresses the value for the duration of periods.";
+		}
+	}
+	Section Application_initialization_and_termination {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure pr_startup {
+			Comment: "Ran at the end of initialization.";
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+	Section Generate_Runtime_Lib {
+		StringParameter sp_connectionString {
+			InitialData: "../data/abc.dsn";
+		}
+		ElementParameter ep_lib {
+			Range: AllIdentifiers;
+		}
+		Procedure pr_createRuntimeLibrary {
+			Body: {
+				block ! Sanity checks.
+					p_dbOk := TestDatasource( sp_connectionString, interactive: 0 );
+					if not p_dbOK then
+						raise error formatString("Unable to connect to %s; runtime library not created", sp_connectionString );
+					endif ;
+					p_noTables := SQLNumberOfTables( sp_connectionString );
+					if not p_noTables then
+						raise warning formatString("There are no tables fo %s; runtime library not created", sp_connectionString );
+						return ;
+					endif;
+				endblock ;
+				
+				block ! Remove existing runtime library (if any).
+					ep_decls := StringToElement( AllIdentifiers, sp_libName );
+					if ep_decls then
+						me::Delete( ep_decls );
+						ep_decls := '' ;
+					endif ;
+				endblock ;
+				
+				block ! Create the runtime library.
+					ep_lib := me::CreateLibrary( sp_libName, sp_prefix );
+					ep_public := me::Create(
+						name     :  "Public_Section", 
+						newType  :  'section', 
+						parentId :  ep_lib, 
+						pos      :  0);
+					ep_private := me::Create(
+						name     :  "Private_Section", 
+						newType  :  'section', 
+						parentId :  ep_lib, 
+						pos      :  0);
+					ep_appInitTerm := me::Create(
+						name     :  "Library_initialization and termination", 
+						newType  :  'section', 
+						parentId :  ep_private, 
+						pos      :  0);
+					block ! Create section Application initialization and termination
+						ep_privProc := me::Create("LibraryInitialization", 'procedure', ep_appInitTerm); 
+						me::SetAttribute(
+							runtimeId :  ep_privProc, 
+							attr      :  'comment', 
+							txt       :  "Add initialization statements here that do not require any other library being initialized already.");
+						ep_privProc := me::Create("LibraryPostInitialization", 'procedure', ep_appInitTerm); 
+						me::SetAttribute(
+							runtimeId :  ep_privProc, 
+							attr      :  'comment', 
+							txt       :  "Add initialization statements here that require another library to be initialized already,\n"+ 
+									"or add statements that require the Data Management module to be initialized.");
+						ep_privProc := me::Create("LibraryPreTermination", 'procedure', ep_appInitTerm); 
+						me::SetAttribute( ep_privProc, 'body', "return 1;" );
+						me::SetAttribute(
+							runtimeId :  ep_privProc, 
+							attr      :  'comment', 
+							txt       :  "Add termination statements here that require all other libraries to be still alive.\n"+
+									"Return 1 if you allow the termination sequence to continue.\n"+
+									"Return 0 if you want to cancel the termination sequence.");
+						ep_privProc := me::Create("LibraryTermination", 'procedure', ep_appInitTerm); 
+						me::SetAttribute( ep_privProc, 'body', "return 1;" );
+						me::SetAttribute(
+							runtimeId :  ep_privProc, 
+							attr      :  'comment', 
+							txt       :  "Add termination statements here that do not require other libraries to be still alive.\n"+
+									"Return 1 to allow the termination sequence to continue.\n"+
+									"Return 0 if you want to cancel the termination sequence.\n"+
+									"It is recommended to only use the procedure PreLibraryTermination to cancel the termination sequence and let this procedure always return 1.");
+					endblock ;
+					me::SetAttribute( ep_privProc, 'body', "return 1;" );
+					me::SetAttribute( ep_lib, 'interface', "Public_Section" );
+					me::SetAttribute( ep_lib, 'property', "nosave");
+					ep_decls := me::Create(
+						name     :  "decls", 
+						newType  :  'declaration', 
+						parentId :  ep_public, 
+						pos      :  0);
+					ep_proc := me::Create(
+						name     :  "pr_readAll", 
+						newType  :  'procedure', 
+						parentId :  ep_public, 
+						pos      :  0);
+					ep_connectionString := me::Create(
+						name     :  "sp_connectionString", 
+						newType  :  'string parameter', 
+						parentId :  ep_public, 
+						pos      :  0);
+				
+					! For each table, create a module.
+					sp_bodyLines := formatString("sp_connectionString := \"%s\";\n", sp_connectionString );
+					p_tableNo := 1 ;
+					while p_tableNo <= p_noTables do
+						sp_tableName := SQLTableName( sp_connectionString, p_tableNo );
+						! Create a module for this table.
+						pr_createRuntimeModuleTable( ep_public, sp_connectionString, sp_tableName, sp_modulePrefix );
+						sp_bodyLines += formatString("%s::pr_ReadThis();\n", sp_modulePrefix);
+						p_tableNo += 1 ;
+					endwhile ;
+				
+					me::SetAttribute( ep_proc, 'body', sp_bodyLines );
+					me::Compile( ep_lib );
+					me::ExportNode(
+						esection : ep_lib , 
+						filename : "../libs/" + sp_libName + "/" + sp_libName + ".ams");
+				
+					apply(ep_proc);
+				
+				
+				endblock ;
+			}
+			Parameter p_dbOk;
+			Parameter p_noTables;
+			Parameter p_tableNo;
+			StringParameter sp_tableName;
+			ElementParameter ep_public {
+				Range: AllIdentifiers;
+			}
+			ElementParameter ep_private {
+				Range: AllIdentifiers;
+			}
+			ElementParameter ep_appInitTerm {
+				Range: AllIdentifiers;
+			}
+			ElementParameter ep_privproc {
+				Range: AllIdentifiers;
+				Default: 'MainExecution';
+			}
+			ElementParameter ep_decls {
+				Range: AllIdentifiers;
+			}
+			ElementParameter ep_proc {
+				Range: AllIdentifiers;
+				Default: 'MainExecution';
+			}
+			ElementParameter ep_connectionString {
+				Range: AllIdentifiers;
+			}
+			StringParameter sp_bodyLines;
+			StringParameter sp_modulePrefix;
+		}
+		Procedure pr_createRuntimeModuleTable {
+			Arguments: (ep_lib,sp_connectionString,sp_tableName,sp_modulePrefix);
+			Body: {
+				p_noColumns := SQLNumberOfcolumns( sp_connectionString, sp_tableName );
+				if p_noColumns <= 0 then ! Sanity check.
+					raise error formatString("Cannot handle table (%s) without columns", p_noColumns);
+				endif ;
+				
+				block ! Create module and procedure to read table.
+					! Note: this will fail if the table name contains characters not suited for AIMMS identifiers.
+					ep_mod := me::Create(
+						name     :  formatString("modReadTable%s", sp_tableName),
+						newType  :  'module', 
+						parentId :  ep_lib, 
+						pos      :  0);
+					sp_modulePrefix := formatString("this%s", sp_TableName);
+					me::SetAttribute(
+						runtimeId :  ep_mod, 
+						attr      :  'prefix', 
+						txt       :  sp_modulePrefix);
+				
+					ep_decl := me::Create(
+						name     :  "decls" , 
+						newType  :  'declaration', 
+						parentId :  ep_mod, 
+						pos      :  0);
+				
+					sp_databaseTableName := formatString("db_%s", sp_tableName );
+					ep_proc := me::Create(
+						name     :  "pr_readThis", 
+						newType  :  'procedure', 
+						parentId :  ep_mod, 
+						pos      :  0);
+					me::SetAttribute(
+						runtimeId :  ep_proc, 
+						attr      :  'body', 
+						txt       :  formatString("read from table %s ;\n", sp_databaseTableName));
+				
+				endblock ;
+				
+				block ! Query columns about their name, whether they are primay, and their data type.
+					s_colNumbers := ElementRange(1,p_noColumns);
+					sp_colNames(i_colNo) := SQLColumnData(
+						Datasource           :  sp_connectionString, 
+						TableName            :  sp_tableName, 
+						ColumnNumber         :  val(i_colNo), 
+						ColumnCharacteristic :  'Name');
+					sp_dataTypes(i_colNo) := SQLColumnData(
+						Datasource           :  sp_connectionString, 
+						TableName            :  sp_tableName, 
+						ColumnNumber         :  val(i_colNo), 
+						ColumnCharacteristic :  'DataType');
+					bp_isNumeric(i_colNo) := 
+						( sp_dataTypes(i_colNo) = "REAL"    ) or
+						( sp_dataTypes(i_colNo) = "INTEGER" )    ;
+					sp_isPrimaryKeys(i_colNo) := SQLColumnData(
+						Datasource           :  sp_connectionString, 
+						TableName            :  sp_tableName, 
+						ColumnNumber         :  val(i_colNo), 
+						ColumnCharacteristic :  'IsPrimaryKey');
+					bp_isPrimary(i_colNo) := ( sp_isPrimaryKeys(i_colNo) = "Yes" );
+				
+					! display { sp_colNames, sp_dataTypes, bp_isNumeric, sp_isPrimaryKeys, bp_isPrimary } ;
+				endblock ;
+				
+				p_noPrimaries := card( bp_isPrimary );
+				if p_noPrimaries <= 0 then
+					raise error formatString("Unable to map selected columns of table %s to AIMMS index domains; there are no primary columns", sp_tableName);
+				endif ;
+				if p_noPrimaries = p_noColumns then
+					raise error formatString("Unable to map selected columns of table %s to AIMMS indexed parameters; there are no non-primary columns", sp_tableName);
+				endif ;
+				
+				block ! Constructs sets/indices in the runtime library and construct string to be used in index domain attributes.
+					s_primColNumbers := ElementRange(1,p_noPrimaries);
+					sp_indexDomainString := "";
+					p_primColsHandled := 0 ;
+					sp_mappingLines := "" ;
+					for i_colNo | bp_isPrimary(i_colNo)do
+				
+						! Create AIMMS set and index for that column.
+						ep_set := me::Create(
+							name     :  formatString("s_%s", sp_colNames( i_colNo ) ),
+							newType  :  'set', 
+							parentId :  ep_decl, 
+							pos      :  0);
+						me::SetAttribute(
+							runtimeId :  ep_set, 
+							attr      :  'index', 
+							txt       :  formatString("i_%s", sp_colNames( i_colNo ) ) );
+				
+						p_primColsHandled += 1 ;
+				
+						! Add the index to the index domain.
+						if p_noPrimaries = 1 then
+							sp_indexDomainString := formatString("i_%s", sp_colNames( i_colNo ) );
+						else
+							if p_primColsHandled = 1 then
+								sp_indexDomainString := "(" ;
+							endif ;
+							sp_indexDomainString += formatString("i_%s", sp_colNames( i_colNo ) );
+							if p_primColsHandled = p_noPrimaries then
+								sp_indexDomainString += ")";
+							else
+								sp_indexDomainString += ", ";
+							endif ;
+						endif ;
+				
+						! Add the index to the mapping lines.
+						! Example mapping line: "NamesA" -->i_name
+						sp_mappingLines += formatString("\"%s\"-->i_%s", sp_colNames( i_colNo ), sp_colNames( i_colNo ) ); 
+						sp_mappingLines += ",\n";
+				
+					endfor ; ! i_colNo 
+				
+					if p_noPrimaries = 1 then
+						sp_fullIndexDomainString := formatSTring("(%s)", sp_indexDomainString ) ;
+					else
+						sp_fullIndexDomainString := sp_indexDomainString ;
+					endif ;
+				
+				endblock ;
+				
+				block  ! Handle the non-primary columns
+				
+					p_noDerivativeColumns := p_noColumns - p_noPrimaries ;
+					p_noDerivativeColumnsHandled := 0;
+					for i_colNo | not bp_isPrimary(i_colNo)do
+				
+						if bp_isNumeric( i_colNo ) then
+							sp_parName := formatString("p_%s", sp_colNames( i_colno ) );
+							ep_par := me::Create(
+								name     :  sp_parName, 
+								newType  :  'parameter', 
+								parentId :  ep_decl, 
+								pos      :  0);
+						else
+							sp_parName := formatString("sp_%s", sp_colNames( i_colno ) );
+							ep_par := me::Create(
+								name     :  sp_parName, 
+								newType  :  'string parameter', 
+								parentId :  ep_decl, 
+								pos      :  0);
+						endif ;
+						me::SetAttribute(
+							runtimeId :  ep_par, 
+							attr      :  'index domain', 
+							txt       :  sp_indexDomainString);
+				
+						p_noDerivativeColumnsHandled += 1 ;
+				
+						sp_mappingLines += formatString("\"%s\"-->%s%s", sp_colNames( i_colNo ), sp_parName, sp_fullIndexDomainString  );
+				
+						if p_noDerivativeColumnsHandled < p_noDerivativeColumns then
+							sp_mappingLines += ",\n";
+						endif ;
+				
+					endfor ; ! i_colNo 
+				
+				endblock ;
+				
+				block ! Add the database declaration
+					ep_databaseTable := me::Create(
+						name     :  sp_databaseTableName, 
+						newType  :  'database table', 
+						parentId :  ep_decl, 
+						pos      :  0);
+					me::SetAttribute(
+						runtimeId :  ep_databaseTable, 
+						attr      :  'data source', 
+						txt       :  "sp_connectionString"); ! this should resolve to the "sp_connectionString" of the runtime library.
+					me::SetAttribute(
+						runtimeId :  ep_databaseTable, 
+						attr      :  'table name', 
+						txt       :  formatString("\"%s\"", sp_tableName)); 
+					me::SetAttribute(
+						runtimeId :  ep_databaseTable, 
+						attr      :  'mapping', 
+						txt       :  sp_mappingLines);   
+				
+				
+				endblock ;
+			}
+			Comment: {
+				"Create a module 
+				    inside the runtime library ep_lib,
+				    using connection sp_connectionString, and
+				    for the table sp_tableName."
+			}
+			DeclarationSection Argument_declarations {
+				StringParameter sp_tableName {
+					Property: Input;
+				}
+				StringParameter sp_connectionString {
+					Property: Input;
+				}
+				ElementParameter ep_lib {
+					Range: AllIdentifiers;
+					Property: Input;
+				}
+				StringParameter sp_modulePrefix {
+					Property: Output;
+				}
+			}
+			DeclarationSection Local_declarations {
+				ElementParameter ep_mod {
+					Range: AllIdentifiers;
+				}
+				ElementParameter ep_proc {
+					Range: AllIdentifiers;
+				}
+				ElementParameter ep_decl {
+					Range: AllIdentifiers;
+				}
+				Parameter p_noColumns;
+				Parameter p_colNo;
+				Set s_colNumbers {
+					SubsetOf: Integers;
+					Index: i_colNo;
+				}
+				ElementParameter ep_colNo {
+					Range: s_colNumbers;
+				}
+				StringParameter sp_colNames {
+					IndexDomain: i_colno;
+				}
+				StringParameter sp_dataTypes {
+					IndexDomain: i_colNo;
+				}
+				Parameter bp_isNumeric {
+					IndexDomain: i_colNo;
+					Range: binary;
+				}
+				Parameter bp_isPrimary {
+					IndexDomain: i_colNo;
+					Range: binary;
+				}
+				StringParameter sp_isPrimaryKeys {
+					IndexDomain: i_colno;
+				}
+				Parameter p_noPrimaries;
+				StringParameter sp_indexDomainString;
+				StringParameter sp_fullIndexDomainString;
+				StringParameter sp_mappingLines;
+				Set s_primColNumbers {
+					SubsetOf: Integers;
+				}
+				Parameter p_primColsHandled;
+				ElementParameter ep_set {
+					Range: AllIdentifiers;
+				}
+				ElementParameter ep_index {
+					Range: AllIdentifiers;
+				}
+				StringParameter sp_parName;
+				ElementParameter ep_par {
+					Range: AllIdentifiers;
+				}
+				Parameter p_noDerivativeColumns;
+				Parameter p_noDerivativeColumnsHandled;
+				StringParameter sp_databaseTableName;
+				ElementParameter ep_databaseTable {
+					Range: AllIdentifiers;
+				}
+			}
+		}
+	}
+	Section Persist_Runtime_Lib {
+		Procedure pr_createProjectXML {
+			Arguments: (sp_argProjectFoldername,sp_argModelName,sp_prefix);
+			Body: {
+				DedicatedUUID::pr_getUUID( sp_UUID );
+				AimmsRevisionString(
+					Version        :  sp_AIMMSVersion, 
+					NumberOfFields :  4);
+				sp_projectFilename := formatString("%s/project.xml", sp_argProjectFoldername);
+				put outf ;
+				put "<?xml version=\"1.0\"?>", / ;
+				put "<LibraryProject AimmsVersion=\"", 
+				    sp_AIMMSVersion, " unicode x64\" ProjectUUID=\"", 
+				    sp_UUID, "\">", / ;
+				put "    <ModelFileName>", sp_argModelName + ".ams", "</ModelFileName>", / ;
+				put "    <Prefix>", sp_prefix, "</Prefix>", / ;
+				put "    <DisplayName>", sp_argModelName, "</DisplayName>", / ;
+				put "</LibraryProject>", /;
+				putclose ;
+			}
+			DeclarationSection Argument_declaration {
+				StringParameter sp_argProjectFoldername {
+					Property: Input;
+				}
+				StringParameter sp_argModelName {
+					Property: Input;
+				}
+				StringParameter sp_prefix {
+					Property: Input;
+				}
+			}
+			DeclarationSection Local_declarations {
+				StringParameter sp_projectFilename;
+				StringParameter sp_AIMMSVersion;
+				StringParameter sp_UUID;
+				File outf {
+					Name: sp_projectFilename;
+					Device: Disk;
+					Mode: replace;
+				}
+			}
+		}
+		Module Dedicated_generateor_of_UUIDs {
+			Prefix: DedicatedUUID;
+			Set s_iterations {
+				Index: i_iter;
+			}
+			StringParameter sp_uuids {
+				IndexDomain: i_iter;
+			}
+			Procedure pr_getUUID {
+				Arguments: (sp_uuid);
+				Body: {
+					pr_makeRequest();
+					p_wfr := dex::client::WaitForResponses(100 /* milli seconds */);
+					while not p_wfr do
+						p_wfr := dex::client::WaitForResponses(100 /* milli seconds */);
+					endwhile ;
+					sp_uuid := sp_uuids( first( s_iterations ) );
+				}
+				DeclarationSection Argument_declarations {
+					StringParameter sp_uuid {
+						Property: Output;
+					}
+				}
+				DeclarationSection Local_declarations {
+					Parameter p_wfr;
+				}
+			}
+			Procedure pr_makeRequest {
+				Body: {
+					sp_theRequest := "getUUID";
+					dex::client::NewRequest(
+						theRequest   :  sp_theRequest, 
+						url          :  "https://www.uuidtools.com/api/generate/v1", 
+						callback     :  'DedicatedUUID::pr_callback', 
+						httpMethod   :  'GET', 
+						requestFile  :  "", 
+						responseFile :  "data/uuidDedicated.json", 
+						traceFile    :  "");
+					dex::client::PerformRequest(sp_theRequest);
+				}
+				Comment: "https://www.uuidtools.com/docs";
+				StringParameter sp_theRequest;
+				ElementParameter ep_callback {
+					Range: AllProcedures;
+				}
+			}
+			Procedure pr_callback {
+				Arguments: (theRequest,statusCode,errorCode);
+				Body: {
+					display "DedicatedUUID::pr_callback", theRequest, statusCode, errorCode;
+					
+					if statusCode = 200 then
+						dex::AddMapping(
+							mappingName :  "uuidDedicated", 
+							mappingFile :  "Mappings/uuidDedicated.xml");
+						dex::ReadFromFile(
+							dataFile         :  "data/uuidDedicated.json", 
+							mappingName      :  "uuidDedicated", 
+							emptyIdentifiers :  0, 
+							emptySets        :  0, 
+							resetCounters    :  0);
+					else
+						raise error 
+							formatString("DedicatedUUID::pr_callback(%s, %i, %i)", 
+								theRequest, statusCode, errorCode );
+					endif ;
+				}
+				StringParameter theRequest {
+					Property: Input;
+				}
+				Parameter statusCode {
+					Property: Input;
+				}
+				Parameter errorCode {
+					Property: Input;
+				}
+			}
+		}
+	}
+	Procedure MainExecution;
+	Module Template_Module {
+		Prefix: tm;
+		Comment: {
+			"This module is a manually created template of the type of module 
+			we want to create within a runtime library.
+			
+			By having a manually created working example it is easier to  
+			focus on the writing of the text that constitutes such a module."
+		}
+		Set s_NamesA {
+			Index: i_NamesA;
+		}
+		Set s_NamesB {
+			Index: i_NamesB;
+		}
+		Parameter p_Vals1 {
+			IndexDomain: (i_NamesA,i_NamesB);
+		}
+		Parameter p_Vals2 {
+			IndexDomain: (i_NamesA,i_NamesB);
+		}
+		StringParameter sp_vals3 {
+			IndexDomain: (i_NamesA,i_NamesB);
+		}
+		DatabaseTable db_tab {
+			DataSource: sp_connectionString;
+			TableName: "TableAB";
+			Mapping: {
+				"NamesA" -->i_NamesA,
+				"NamesB" -->i_NamesB,
+				"Vals1" -->p_vals1(i_NamesA,i_NamesB),
+				"Vals2" -->p_vals2(i_NamesA,i_NamesB),
+				"Vals3" -->sp_vals3(i_NamesA,i_NamesB)
+			}
+		}
+		Procedure pr_readThis {
+			Body: {
+				read from table db_tab ;
+			}
+		}
+		Procedure pr_writeSome {
+			Body: {
+				s_namesA := ElementRange(1,3,prefix:"a");
+				s_namesB := ElementRange(1,3,prefix:"b");
+				p_Vals1(i_NamesA, i_NamesB) := 1 / ( ord(i_NamesA) + ord(i_NamesB) );
+				p_Vals2(i_NamesA, i_NamesB) := ord(i_NamesA) + ord(i_NamesB);
+				sp_vals3(i_NamesA, i_NamesB) := formatString("%n + %n", p_Vals1(i_NamesA, i_NamesB), p_Vals2(i_NamesA, i_NamesB) );
+				write to table db_tab ;
+			}
+		}
+	}
+}

@@ -1,5 +1,6 @@
-Write to a database efficiently
+Write to a Database Efficiently
 =====================================
+
 .. meta::
     :description: Methods of writing data to a database and schema.
     :keywords: database, db, write, efficient, performance, foreign key, schema
@@ -38,7 +39,7 @@ In addition, we maintain the following information:
 
 This is represented in the following database schema.
 
-.. image:: images/two-to-many.png
+.. image:: images/343-database-schema.png
     :align: center
 
 As you can see from this schema, both a customer and a product have an ``Id``.  The table ``Orders`` refers to these ``Id`` s. In mathematics we have the following relations:

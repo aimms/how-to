@@ -1,6 +1,9 @@
-Retrieve Geographic Data with Google Maps API
-==================================================================================================
+.. warning:: 
+   Please note that the documentation you are currently viewing is for an older version of our technology. 
+   While it is still functional, we recommend upgrading to our latest and more efficient option to take advantage of all the improvements we've made.
 
+Retrieve Geographic Data with Google Maps API
+===============================================
 .. meta::
    :description: Using Google Maps API to return geographic data to an AIMMS project.
    :keywords: google, 
@@ -276,7 +279,6 @@ Related Topics
 * `Google Maps Developer Guide <https://developers.google.com/maps/documentation/distance-matrix/intro>`_. 
 
 
-.. spelling::
+.. spelling:word-list::
 
     atomium
-	

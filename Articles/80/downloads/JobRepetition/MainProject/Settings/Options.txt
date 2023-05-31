@@ -1,0 +1,19 @@
+﻿* AIMMS
+* BARON 21
+* CBC 2.9
+* CONOPT 4.1
+* CPLEX 22.1
+* CPOptimizer 22.1
+* GUROBI 10.0
+* GUROBI 9.5
+* IPOPT 3.11
+* Knitro 12.3
+* Knitro 13.1
+* MINOS
+* ODH-CPLEX 5.3
+* PATH 4.7
+* SNOPT 7.2
+* XA 16
+* NETSOL
+* Environment
+Project_Title "How To 80: JobRepetition"

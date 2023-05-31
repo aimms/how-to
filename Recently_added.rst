@@ -18,6 +18,14 @@ Recently added
 .. Added 14 Feb 2020: 108-10, 108-09, 108-07
 .. Added 21 March 2022: 535
 
+* :doc:`/Articles/571/571-ci-cd-guide`
+* :doc:`/Articles/571/571-publish-run-delete`
+* :doc:`/Articles/572/572-progress-webui`
+* :doc:`/Articles/567/567-python-client`
+* :doc:`/Articles/567/567-aimms-service`
+* :doc:`/Articles/566/566-scalar-border-annotation`
+* :doc:`/Articles/564/564-LocationIQ`
+* :doc:`/Articles/562/562-ipTwist`
 * :doc:`/Articles/207/207-iframe-widget`
 * :doc:`/Articles/536/536-name-binds-to`
 * :doc:`/Articles/535/535-waiting-for-sub-jobs-to-complete`
@@ -28,9 +36,9 @@ Recently added
 * :doc:`/Articles/525/525-finding-unused-identifiers`
 * :doc:`/Articles/518/518-add-logo-to-webui-app`
 * :doc:`/Articles/520/520-evolution-of-transport-layer-security`
-* :doc:`/Articles/519/519-reading-relations-indexed-sets`
-* :doc:`/Articles/517/517-runtime-functions-with-arguments`
 
+.. * :doc:`/Articles/519/519-reading-relations-indexed-sets`
+.. * :doc:`/Articles/517/517-runtime-functions-with-arguments`
 .. * :doc:`/Articles/351/351-app-initialization-termination-with-libraries`
 .. * :doc:`/Articles/310/310-incident-handling-for-organizations`
 .. * :doc:`/Articles/512/512-image-widget-refresh`

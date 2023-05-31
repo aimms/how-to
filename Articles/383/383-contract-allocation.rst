@@ -4,16 +4,20 @@ Contract Allocation
    :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.85-ZIP:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.94-ZIP:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.85-Github:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.94-Github:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-webui-44/uptaded-contract-allocation-example-1253
 
+.. image:: images/project.gif
+    :align: center
 
+|
+   
 Story
 -----
 
@@ -121,8 +125,8 @@ This procedure will generate all the possible mappings in DEX based on current i
 
    !Selecting the Excel mapping as initial value
    if not ep_selectedMapping then
-       ep_selectedMapping 
-       :=  First(i_generatedMappings | FindString(
+      ep_selectedMapping 
+      :=  First(i_generatedMappings | FindString(
                SearchString  :  i_generatedMappings, 
                Key           :  "excel", 
                CaseSensitive :  0, 
@@ -136,10 +140,11 @@ This procedure will generate all the possible mappings in DEX based on current i
 
    !Opening dialog page - no action on done - webui::NoOp1 does nothing
    webui::OpenDialogPage(
-       pageId  :  ep_pageId, 
-       title   :  "Export data", 
-       actions :  s_actions, 
-       onDone  :  'webui::NoOp1');
+      pageId  :  ep_pageId, 
+      title   :  "Export Data", 
+      actions :  s_actions, 
+      onDone  :  'webui::NoOp1');
+
     
 
 
@@ -150,30 +155,35 @@ This procedure will that will write the file and provide it for download using t
 .. code-block:: aimms
    :linenos:
 
-   ! writing the output file locally
-   dex::WriteToFile(
-       dataFile    :  sp_FileName, 
-       mappingName :  ep_selectedMapping, 
-       pretty      :  1);
-
    ! we want to download a file
-   FileLocation := sp_FileName;
+   sp_out_fileLocation := sp_FileName;
 
    ! we store the location of the file in string parameter FinalLocation
-   FinalLocation := webui::GetIOFilePath(FileLocation);
+   sp_loc_FinalLocation := webui::GetIOFilePath(sp_out_fileLocation);
+
+   ! writing the output file locally
+   dex::WriteToFile(
+      dataFile    :  sp_loc_FinalLocation, 
+      mappingName :  ep_selectedMapping, 
+      pretty      :  1);
 
    ! checking if the previous write statement was successful or not
-   if FileExists(FinalLocation) then
+   if FileExists(sp_loc_FinalLocation) then
+
       ! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
-      StatusCode := webui::ReturnStatusCode('CREATED');
+      p_out_statusCode := webui::ReturnStatusCode('CREATED');
       ! displaying the status message as Ready to download exported data! instead of the default "File ready to download"
-      StatusDescription := "Ready to download exported data!";
+      sp_out_statusDescription := "Ready to download exported data!";
+
    else    !if previous write statement was not successful
+
       ! setting the statusCode to 'ERROR' and the download widget will not show the Get button anymore
-      statusCode := webui::ReturnStatusCode('ERROR');
+      p_out_statusCode := webui::ReturnStatusCode('ERROR');
       !displaying a custom error message
-      statusDescription := "Something went wrong when creating the file.";
+      sp_out_statusDescription := "Something went wrong when creating the file.";
+
    endif;
+
 
 
 .. seealso::
@@ -200,54 +210,96 @@ The following WebUI features are used:
 
 - `Side Panel <https://documentation.aimms.com/webui/side-panels-grd-pages.html#side-panel-grid-pages>`_
 
-- `Compact Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
+- `Scalar (and Compact) Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
-- `List Widget <https://documentation.aimms.com/webui/list-widget.html#list-widget>`_ 
+- `Dialog Page <https://documentation.aimms.com/webui/dialog-pages.html>`_ 
 
 - `Download Widget <https://documentation.aimms.com/webui/download-widget.html>`_ 
 
-- `Dialog Page <https://documentation.aimms.com/webui/dialog-pages.html>`_ 
- 
+- `Selection Box Widget <https://documentation.aimms.com/webui/selection-box-widget-v2.html>`_ 
+
 
 UI Styling
 ----------
-For this project, we used a main css file named ``colors.css``, please check it out directly on the folder. Below there are the css files you will find with comments on what they change. 
+Below there are the css files you will find with comments on what they change. 
 
 .. tab-set::
-    .. tab-item:: icon.css
+   .. tab-item:: annotation.css
+
+      .. code-block:: css
+         :linenos:
+
+         .annotation-bkg-cell {
+            background: var(--primary90Transparent);
+         }
+
+         .annotation-bkg-cell-default {
+            background: var(--primary90Transparent);
+         }
+
+         .annotation-bkg-cell-default input{
+            color: transparent;
+         }
+
+   .. tab-item:: colors.css
 
       .. code-block:: css
          :linenos:
 
          :root {
+         /*---------------------------------------------------------------------
+               COLORS
+         ----------------------------------------------------------------------*/
+            --primary: #3DDAB4;
+            --primaryDark: #00B569;
+            --primary90Transparent: #3ddab33b;
+
+         /*---------------------------------------------------------------------
+               LOGO
+         ----------------------------------------------------------------------*/
             --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/budgeting.png);
             --spacing_app-logo_width: 45px;
+
+
+            --color_bg_button_primary: var(--primaryDark);
+            --color_bg_button_primary_hover: var(--primary);
+            --color_text_edit-select-link: var(--primaryDark);
+
+
+         /*---------------------------------------------------------------------
+               WORKFLOW
+         ----------------------------------------------------------------------*/
+            /* Header text*/
+            --color_workflow-header: #505767;
+               
+            /* Step background and content (text, icon) colors for the 4 states*/
+            /*current + current with error*/
+            --color_bg_workflow_current: var(--primaryDark);
+            --color_workflow_current: var(--color_text_inverted);
+            --color_bg_workflow_error-current: #d1454b;
+
+            /*active*/
+            --color_bg_workflow_active: #e6edff;
+            --color_workflow_active: var(--primaryDark);
+            
+            /*inactive*/
+            --color_bg_workflow_inactive: #dde0e8;
+            --color_workflow_inactive: #b0b5c2;
+            
+            /*error*/
+            --color_bg_workflow_error: #f9e9e9;
+            --color_workflow_error: #d1454b;
+            
+            /* Child indentation, border colors */
+            --spacing_workflow-child-indent: 1rem;
+            --color_workflow-item-divider: var(--primaryDark);
+            
+            /* Icon background, border, for non-error state */
+            --color_bg_workflow-icon: #ffffff;
+            --color_workflow-icon-border: var(--primaryDark);
          }
 
-    .. tab-item:: workflow.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change color of the active step*/
-         .workflow-panel .step-item.current {
-            box-shadow: inset 0.3125rem 0 0 var(--primary);
-         }
-
-         /*Change color of the titles*/
-         .workflow-panel .step-item.active.complete .title, 
-         .workflow-panel .step-item.active.incomplete .title {
-            color: var(--primaryDark);
-         }
-
-         /*Change color of the icons*/
-         .workflow-panel .step-item.active.complete .icon, 
-         .workflow-panel .step-item.active.incomplete .icon {
-            color: var(--primaryDark);
-            border: 1px solid var(--primaryDark);
-         }
-
-    .. tab-item:: textColor.css
+   .. tab-item:: textColor.css
 
       .. code-block:: css
          :linenos:
@@ -274,7 +326,7 @@ For this project, we used a main css file named ``colors.css``, please check it 
             color: white;
          }
 
-    .. tab-item:: body.css
+   .. tab-item:: body.css
 
       .. code-block:: css
          :linenos:
@@ -285,7 +337,7 @@ For this project, we used a main css file named ``colors.css``, please check it 
             background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
          }
 
-    .. tab-item:: header.css
+   .. tab-item:: header.css
 
       .. code-block:: css
          :linenos:
@@ -294,7 +346,7 @@ For this project, we used a main css file named ``colors.css``, please check it 
             border-bottom: 2px solid var(--primary);
          }
 
-    .. tab-item:: combinationChart.css
+   .. tab-item:: combinationChart.css
 
       .. code-block:: css
          :linenos:
@@ -308,7 +360,7 @@ For this project, we used a main css file named ``colors.css``, please check it 
             fill: var(--primary);    
          }
 
-    .. tab-item:: sidePanel.css
+   .. tab-item:: sidePanel.css
 
       .. code-block:: css
          :linenos:
@@ -336,10 +388,14 @@ For this project, we used a main css file named ``colors.css``, please check it 
 
          /*Change the color below sidepanel tabs*/
          .sidepanel-container {
-            background-color: rgba(249, 249, 249, 0.438)
+            background-color:   rgb(249, 249, 249);
+         }
+
+         .sidepanel-container .sidepanel-tab {
+            height: 180px;
          }
    
-    .. tab-item:: button.css
+   .. tab-item:: button.css
 
       .. code-block:: css
          :linenos:
@@ -349,7 +405,7 @@ For this project, we used a main css file named ``colors.css``, please check it 
             background-color: var(--primary);
          }
    
-    .. tab-item:: pageAction.css
+   .. tab-item:: pageAction.css
 
       .. code-block:: css
          :linenos:
@@ -374,7 +430,7 @@ For this project, we used a main css file named ``colors.css``, please check it 
             background-color: var(--primary);
          }
    
-    .. tab-item:: table.css
+   .. tab-item:: table.css
 
       .. code-block:: css
          :linenos:
@@ -389,3 +445,20 @@ Minimal Requirements
 --------------------   
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
+
+
+Release Notes
+--------------------   
+
+`v1.1 <https://github.com/aimms/contract-allocation/releases/tag/1.1>`_ (15/05/2023)
+   Updated to 4.94 and improved Input page for better UX flow. 
+
+`v1.0 <https://github.com/aimms/contract-allocation/releases/tag/1.0>`_ (17/03/2023)
+	First logged version with the new workflow structure and colors. 
+
+.. spelling:word-list::
+
+   primaryDark
+   ddab
+   bg
+   
