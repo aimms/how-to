@@ -10,8 +10,7 @@ Using OAuth2 for API authorization with DEX
 .. image:: https://img.shields.io/badge/AIMMS_4.90-Minimum_AIMMS_Version_WebUI-brightgreen
 .. image:: https://img.shields.io/badge/AIMMS_2.90-Minimum_AIMMS_Version_PRO-brightgreen
 
-.. image:: https://img.shields.io/badge/AIMMS_4.90/2/41-OAuth_Example-blue 
-	:target: download/OAuth-Example.zip
+:download:`OAuth example download <download/OAuth-Example.zip>`
 
 With the Data Exchange Library (DEX) you can use `the OAuth2 protocol <https://documentation.aimms.com/dataexchange/rest-client.html#using-oauth2-for-api-authorization>`__ for the authentication procedure of API's. On this how-to page you can find more details on how this type of authorization works and the flows that come with it. You can download the example project to replicate the examples described below.
 
