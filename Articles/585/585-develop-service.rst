@@ -1,7 +1,7 @@
 Develop, Test, and Deploy a Service
 ===================================
 
-As a developer of a service, you want to have clients available that can test that service, both the stages:
+As a developer of a service, you want to have client apps available that can test that service, both the stages:
 
 * development of that service, and 
 
@@ -20,8 +20,11 @@ both during development and when it is published.
 Story
 ------
 
-The service developed is intentionally trivial; count the number of ``*`` in a couple of lines.
-This story is chosen as it trivial to actually test whether the answer given is correct.
+The service developed is intentionally trivial; count the number of ``*``'s in a couple of lines.
+This story is chosen as it is trivial to test whether the response given by the service is correct.
+
+Note that a service implemented in AIMMS can also implement an interesting optimization model; 
+however, optimization applications are outside the scope of this article.
 
 Overview
 ----------
@@ -34,46 +37,7 @@ Overview
 
 
 
-The service
-------------
 
-The AIMMS app that provides the service: :download:`AIMMS 4.94 server project <model/CountTheStars.zip>` 
-
-implementing service
-^^^^^^^^^^^^^^^^^^^^^^
-
-We are assuming here that you have developed a service; to count the number of `*` is a dictionary of lines.
-
-.. image:: images/worker-proc.png
-    :align: center
-
-remarks:
-
-* The arguments denote the name of the input and output files.
-
-* Lines 3-8: reading of input
-
-* Line 10: the actual computation
-
-* Lines 13-16: writing the output
-
-.. tip:: The procedure `ProfilerStart <https://documentation.aimms.com/functionreference/development-support/profiler-and-debugger/profilerstart.html>`_ is called in ``MainInitialization`` enabling tracking task invocations, and task performance.
-
-definition of service
-^^^^^^^^^^^^^^^^^^^^^^
-
-A service is defined by associating a service name with an AIMMS procedure, as illustrated below:
-
-.. image:: images/service-asscociate-proc.png
-    :align: center
-
-Remarks:
-
-* The annotation ``dex::ServiceName`` associates the procedure ``pr_countTheStars`` with the service ``countStars``
-
-* Lines 1-2: copy the name of the input file and output file to local string parameters.
-
-* Line 6: Call the workhorse (see sub section above).
 
 Activating the service locally
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
