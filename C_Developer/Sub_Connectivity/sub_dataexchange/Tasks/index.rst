@@ -1,0 +1,30 @@
+.. image:: /Images/connection-128.png
+   :scale: 100
+   :align: right
+   :alt: AIMMS PRO REST API Help & Support
+   
+Tasks
+=======================
+
+.. meta::
+   :description: Help and support to Develop, Test, and Deploy a Service by using the **tasks** methods of the AIMMS PRO REST API
+
+These topics help you to 
+
+* develop,
+
+* test, and
+
+* deploy 
+
+a service, by using the **tasks methods** of the `AIMMS PRO REST API <https://documentation.aimms.com/cloud/rest-api.html>`_
+
+
+.. toctree::
+   :maxdepth: 1
+
+   /Articles/585/585-develop-service
+   /Articles/585/585-AIMMS-server-app
+   /Articles/585/585-Python-client
+   /Articles/585/585-AIMMS-client
+

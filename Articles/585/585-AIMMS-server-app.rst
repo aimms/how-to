@@ -1,19 +1,50 @@
-:orphan:
-Implement AIMMS Server app
-===========================
+AIMMS Server app
+=================
 
-This article is a sub article of :doc:`main article<../585/585-develop-service>`
-It describes the implementation of the service used:
+It describes the implementation of the services used:
 
-The service
-------------
+The AIMMS app that provides the service: :download:`AIMMS 4.95 server project <model/CountTheStars.zip>` 
 
-The AIMMS app that provides the service: :download:`AIMMS 4.94 server project <model/CountTheStars.zip>` 
+Defining the service
+------------------------
+
+A service is defined by associating a service name with an AIMMS procedure, as illustrated below:
+
+.. code-block:: aimms 
+    :linenos:
+    :emphasize-lines: 3,4,10
+
+    Procedure pr_countTheStarsJson {
+        Body: {
+            _sp_inp := dex::api::RequestAttribute( 'request-data-path'  ) ;
+            _sp_out := dex::api::RequestAttribute( 'response-data-path' ) ;
+            
+            pr_actuallyCountStarsJson( _sp_inp, _sp_out );
+            
+            return 1;
+        }
+        dex::ServiceName: countStarsJson;
+        StringParameter _sp_inp;
+        StringParameter _sp_out;
+    }
+
+Remarks:
+
+* Line 10: The annotation ``dex::ServiceName`` associates the procedure ``pr_countTheStars`` with the service ``countStars``.
+
+* Lines 3-4: 
+    When the procedure is invoked as a task, the string parameter  ``dex::api::RequestAttribute`` is available. 
+    Here it is used the name of the input file and output file to local string parameters.
+
+* Line 6: Call the workhorse (see sub section below).
+
+**Similar** procedures define the same service, but use other data formats, such as CSV, Excel, Parquet, and XML.
+In addition, there are similar procedures to generate an input file.
 
 implementing service
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
-We are assuming here that you have developed a service; to count the number of `*` is a dictionary of lines.
+We are assuming here that you have developed a service; to count the number of `*` in a dictionary of lines.
 
 .. code-block:: aimms 
     :linenos:
@@ -44,6 +75,7 @@ We are assuming here that you have developed a service; to count the number of `
                 mappingName :  "countedJSON", 
                 pretty      :  0);
             
+            ! Application specific return code.
             return 1;
         }
         StringParameter sp_input {
@@ -54,8 +86,6 @@ We are assuming here that you have developed a service; to count the number of `
         }
         Parameter _p_inputSize;
     }
-
-
 
 remarks:
 
@@ -69,18 +99,4 @@ remarks:
 
 .. tip:: The procedure `ProfilerStart <https://documentation.aimms.com/functionreference/development-support/profiler-and-debugger/profilerstart.html>`_ is called in ``MainInitialization`` enabling tracking task invocations, and task performance.
 
-definition of service
-^^^^^^^^^^^^^^^^^^^^^^
-
-A service is defined by associating a service name with an AIMMS procedure, as illustrated below:
-
-.. image:: images/service-asscociate-proc.png
-    :align: center
-
-Remarks:
-
-* The annotation ``dex::ServiceName`` associates the procedure ``pr_countTheStars`` with the service ``countStars``
-
-* Lines 1-2: copy the name of the input file and output file to local string parameters.
-
-* Line 6: Call the workhorse (see sub section above).
+ 

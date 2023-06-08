@@ -1,21 +1,32 @@
 Develop, Test, and Deploy a Service
 ===================================
 
-As a developer of a service, you want to have client apps available that can test that service, both the stages:
+.. Should be introduction, and just provide overview.
+.. Should introduce two applications:
+.. 1. CountTheStars
+.. 2. FlowshopDatabase
 
-* development of that service, and 
 
-* deployment of that service.
+There are several aspects to developing, testing and deploying a service.
+That is why this example consists of several components, and each component is described in a separate article.
 
-Not only these two stages, but this article also illustrates:
 
-* service implemented using AIMMS, and
 
-* clients implemented in various languages that use that service.
+Developing a service, requires:
 
-This article illustrates how to build a client app that can test your service; 
-both during development and when it is published. 
+#.  Implementation: An implementation of that service.  Which we will do using an AIMMS project. 
 
+#.  Usage: An example client application that uses that service.  Which we will do using applications in various programming languages.
+
+#.  Deployment:
+
+    There are two ways of deploying a service in an AIMMS project:
+    
+    #.  Via AIMMS Developer.  This is ideal for development of a service; `just start the service <https://documentation.aimms.com/dataexchange/rest-server.html#activating-the-rest-service>`_ 
+
+    #.  Via the AIMMS Cloud.  This is useful for users of the service that do not need access to the source code of that service.
+
+    
 
 Story
 ------
@@ -118,6 +129,6 @@ Available Client implementations
 
 #.  **Python**: 
 
-#.  **AIMMS**: The AIMMS 4.94 client relies on the `AimmsDEX <https://documentation.aimms.com/dataexchange/index.html>`_ library.
+#.  **AIMMS**: The AIMMS 4.95 client relies on the `AimmsDEX <https://documentation.aimms.com/dataexchange/index.html>`_ library.
 
     An AIMMS app that tests the ``countStars`` service: :download:`AIMMS 4.94 Client project <model/AimmsClient.zip>`
