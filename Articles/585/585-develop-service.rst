@@ -132,3 +132,15 @@ Available Client implementations
 #.  **AIMMS**: The AIMMS 4.95 client relies on the `AimmsDEX <https://documentation.aimms.com/dataexchange/index.html>`_ library.
 
     An AIMMS app that tests the ``countStars`` service: :download:`AIMMS 4.94 Client project <model/AimmsClient.zip>`
+    
+    
+References
+------------
+
+    #.  AIMMS PRO REST API method documentation:
+    
+        #. Obtain a .json file describing the `OpenAPI 3.0 specification of AIMMS PRO REST API <https://documentation.aimms.com/cloud/rest-api.html#:~:text=OpenAPI%20specification%20of%20the%20AIMMS%20PRO%20REST%20API>`_ for your AIMMS Cloud environment.
+        
+        #. Import that .json file using the online `Swagger Editor <https://editor-next.swagger.io/>`_
+        
+    #.  The `AIMMS DataExchange library <https://documentation.aimms.com/dataexchange/index.html>`_, in particular `Providing REST APIs <https://documentation.aimms.com/dataexchange/rest-server.html>`_.
