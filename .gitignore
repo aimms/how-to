@@ -50,13 +50,13 @@ Resources/Other/CompoundSets/Downloads/DeprecateCompoundSets/secundary.txt
 /WebSite_Redirection_Mapping/redirection_map_full.txt
 .vs
 _pycache_
-backup
 Debug
 log
 PROtemp
 PROtemp-*
-_build
 Handouts/.vscode
 Handouts/_build/
 .Rproj.user
 /Articles/585/Develop, Test, and Deploy a Service — AIMMS How-To.pdf
+/venv/
+/.idea/

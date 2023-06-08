@@ -4,10 +4,10 @@ Contract Allocation
    :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.93-ZIP:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.94-ZIP:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.93-Github:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.94-Github:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -125,8 +125,8 @@ This procedure will generate all the possible mappings in DEX based on current i
 
    !Selecting the Excel mapping as initial value
    if not ep_selectedMapping then
-       ep_selectedMapping 
-       :=  First(i_generatedMappings | FindString(
+      ep_selectedMapping 
+      :=  First(i_generatedMappings | FindString(
                SearchString  :  i_generatedMappings, 
                Key           :  "excel", 
                CaseSensitive :  0, 
@@ -140,10 +140,11 @@ This procedure will generate all the possible mappings in DEX based on current i
 
    !Opening dialog page - no action on done - webui::NoOp1 does nothing
    webui::OpenDialogPage(
-       pageId  :  ep_pageId, 
-       title   :  "Export data", 
-       actions :  s_actions, 
-       onDone  :  'webui::NoOp1');
+      pageId  :  ep_pageId, 
+      title   :  "Export Data", 
+      actions :  s_actions, 
+      onDone  :  'webui::NoOp1');
+
     
 
 
@@ -154,30 +155,35 @@ This procedure will that will write the file and provide it for download using t
 .. code-block:: aimms
    :linenos:
 
-   ! writing the output file locally
-   dex::WriteToFile(
-       dataFile    :  sp_FileName, 
-       mappingName :  ep_selectedMapping, 
-       pretty      :  1);
-
    ! we want to download a file
-   FileLocation := sp_FileName;
+   sp_out_fileLocation := sp_FileName;
 
    ! we store the location of the file in string parameter FinalLocation
-   FinalLocation := webui::GetIOFilePath(FileLocation);
+   sp_loc_FinalLocation := webui::GetIOFilePath(sp_out_fileLocation);
+
+   ! writing the output file locally
+   dex::WriteToFile(
+      dataFile    :  sp_loc_FinalLocation, 
+      mappingName :  ep_selectedMapping, 
+      pretty      :  1);
 
    ! checking if the previous write statement was successful or not
-   if FileExists(FinalLocation) then
+   if FileExists(sp_loc_FinalLocation) then
+
       ! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
-      StatusCode := webui::ReturnStatusCode('CREATED');
+      p_out_statusCode := webui::ReturnStatusCode('CREATED');
       ! displaying the status message as Ready to download exported data! instead of the default "File ready to download"
-      StatusDescription := "Ready to download exported data!";
+      sp_out_statusDescription := "Ready to download exported data!";
+
    else    !if previous write statement was not successful
+
       ! setting the statusCode to 'ERROR' and the download widget will not show the Get button anymore
-      statusCode := webui::ReturnStatusCode('ERROR');
+      p_out_statusCode := webui::ReturnStatusCode('ERROR');
       !displaying a custom error message
-      statusDescription := "Something went wrong when creating the file.";
+      sp_out_statusDescription := "Something went wrong when creating the file.";
+
    endif;
+
 
 
 .. seealso::
@@ -439,6 +445,16 @@ Minimal Requirements
 --------------------   
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
+
+
+Release Notes
+--------------------   
+
+`v1.1 <https://github.com/aimms/contract-allocation/releases/tag/1.1>`_ (15/05/2023)
+   Updated to 4.94 and improved Input page for better UX flow. 
+
+`v1.0 <https://github.com/aimms/contract-allocation/releases/tag/1.0>`_ (17/03/2023)
+	First logged version with the new workflow structure and colors. 
 
 .. spelling:word-list::
 

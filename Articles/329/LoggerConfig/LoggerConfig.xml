@@ -177,6 +177,9 @@
     <logger name="CubeEngineLink.WebUIServer.WebUIJsonServlet">
         <level value="error"/>
     </logger>
+    <logger name="CubeEngineLink.AimmsSession">
+        <level value="error"/>
+    </logger>
 
 
     <!--- Database logging -->
