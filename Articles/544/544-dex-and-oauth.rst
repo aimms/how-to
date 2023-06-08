@@ -208,7 +208,7 @@ We are also tracing the request of which we store the results in a file called T
 
 If the request was performed successfully, the response data is now in Output.json. Then we use a DEX-mapping to map the retrieved data onto the same parameters that we used for the previous requests as to be able to show it correctly in the WebUI.
 
-.. spelling::
+.. spelling:word-list::
 
     dex
     mappingfile
