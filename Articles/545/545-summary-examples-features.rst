@@ -189,6 +189,6 @@ This page has a summary of the examples versus AIMMS features used in them.
     
     Nothing yet!
 
-.. dropdown:: Named Views
+.. dropdown:: Widget Named Views
     
     Nothing yet!    
