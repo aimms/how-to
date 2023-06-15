@@ -12,7 +12,7 @@ Please use the `Contract Allocation <https://how-to.aimms.com/Articles/383/383-c
 
 Example
 --------
-On Contract Allocation example, contracts can be decided between a certain range. After the solve, adding the allocated contract values can be hard to be analized.
+On Contract Allocation example, contracts can be decided between a certain range. After the solve, adding the allocated contract values can be hard to be analyzed.
 To facilitate the user experience, the minimum and maximum range can be included, also color identification can be very helpful to highlight problems. To add a background color to an identifier per a condition, annotation is used.   
 
 Step 1
