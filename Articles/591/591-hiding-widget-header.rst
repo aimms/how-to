@@ -10,7 +10,7 @@ This article illustrates how to hide the widget header using ``css``. Please use
 Example
 --------
 
-To hide default values using ``css``, ie. from :numref:`figure-01-591` to :numref:`figure-02-591`: 
+To hide default values using ``css``, i.e. from :numref:`figure-01-591` to :numref:`figure-02-591`: 
 
 .. grid:: 2
 
@@ -52,4 +52,7 @@ This code snippet can be used to hide the widget header per widget, however, not
 the settings button of your widget will also disappear. 
 To edit the widget, comment the ``css`` lines and refresh your page. 
 
+.. spelling:word-list::
+    
+    i.e.
 
