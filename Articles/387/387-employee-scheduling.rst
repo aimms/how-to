@@ -5,10 +5,10 @@ Employee Scheduling
    :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.86-ZIP:_Employee_Scheduling-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.96-ZIP:_Employee_Scheduling-blue
    :target: https://github.com/aimms/employee-scheduling/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.86-Github:_Employee_Scheduling-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.96-Github:_Employee_Scheduling-blue
    :target: https://github.com/aimms/employee-scheduling
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -92,11 +92,12 @@ Each section at the leaf level contains a few identifiers which helps finding yo
 .. image:: images/model-explorer-section-structure.png
     :align: center
 
+|    
+
 This structuring is meaningful; the structure can be used in the application, 
 for instance in a mathematical program declaration like:
 
 .. code-block:: aimms 
-    :linenos:
 
     MathematicalProgram mp_minimizeCost {
         Objective: v_totalCost;
@@ -109,7 +110,6 @@ for instance in a mathematical program declaration like:
 The set ``s_employeeAssignmentConstraints`` is constructed by intersecting the declarations inside the section ``Math_model`` with the predeclared :aimms:set:`AllConstraints`. 
 
 .. code-block:: aimms 
-    :linenos:
 
     Set s_employeeAssignmentConstraints {
         SubsetOf: AllConstraints;
@@ -130,7 +130,6 @@ Connecting to the database
 A SQLite database is just a file, and authentication is not needed, so a connection string can be build as follows:
 
 .. code-block:: aimms 
-    :linenos:
 
     StringParameter sp_connectionString {
         Definition: {
@@ -153,10 +152,11 @@ An example of a table declaration in a SQLite database is illustrated in the nex
 .. image:: images/employee-skill-SQLite-table.png
     :align: center
 
+|
+
 The AIMMS database declaration of the corresponding table is as follows:
 
 .. code-block:: aimms 
-    :linenos:
 
     DatabaseTable db_readEmployeeSkills {
         DataSource: sp_connectionString;
@@ -176,13 +176,11 @@ If the data is changed in the user interface, the data is persisted using simila
 Reading from the database
 """""""""""""""""""""""""""""
 
-
 As you can see, the column names of the table are used to relate to the AIMMS identifiers at hand.
 
 Transferring the data from the SQLite database to the AIMMS application is done using the following read statement:
 
 .. code-block:: aimms 
-    :linenos:
 
     Procedure pr_readEmployeeSkillDB {
         Body: {
@@ -201,7 +199,6 @@ Writing to the database
 Transferring the data from the AIMMS application to the SQLite database is done using the following write statement:
 
 .. code-block:: aimms 
-    :linenos:
 
     Procedure pr_writeEmployeeSkillDB {
         Body: {
@@ -283,177 +280,65 @@ UI Styling
 For this project, we used a main css file named ``colors.css``, please check it out directly on the folder. Below there are the css files you will find with comments on what they change. 
 
 .. tab-set::
-    .. tab-item:: icon.css
+    .. tab-item:: theming.css
 
       .. code-block:: css
          :linenos:
 
          :root {
-            --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/schedule.png);
+            --primary: #CDE6FF;
+            --primaryDark: #3B92CC;
+            --primaryDarker: #0069af;
+            --primary90Transparent: #cde6ff36;
+            --secondary: #F44336;
+
+            --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/schedule.png); /*app logo*/
             --spacing_app-logo_width: 45px;
+            --color_border_app-header-divider: var(--primaryDark); /*line color after header*/
+
+            --color_bg_workflow_current: var(--primaryDark); /*bg color when step is selected*/
+            --color_workflow_active: var(--primaryDark); /*font and icon color when step is active*/
+
+            --color_bg_app-canvas: rgb(249, 249, 249); /*background color*/
+            --color_bg_widget-header: linear-gradient(180deg, rgba(255,255,255,1) 20%, var(--primary) 100%); /*widget header background color*/
+            --border_widget-header: 2px solid var(--primaryDark); /*line color after widget header*/
+
+            --color_text_edit-select-link: var(--primaryDark);
+
+            --color_bg_button_primary: var(--primaryDark);
+            --color_bg_button_primary_hover: var(--primaryDarker);
          }
 
-    .. tab-item:: workflow.css
+   
+    .. tab-item:: custom.css
 
       .. code-block:: css
          :linenos:
 
-         /*Change color of the active step*/
-         .workflow-panel .step-item.current,
-         .workflow-panel.collapse .step-item.current {
-            box-shadow: inset 0.3125rem 0 0 var(--primaryDark);
+         ..aimms-widget[data-widget\.uri="gnt_shiftGantt"] .awf-dock.top{
+            display: none;
          }
-
-         /*Change color of the titles*/
-         .workflow-panel .step-item.active.complete .title, 
-         .workflow-panel .step-item.active.incomplete .title {
-            color: var(--primaryDark);
-         }
-
-         /*Change color of the icons*/
-         .workflow-panel .step-item.active.complete .icon, 
-         .workflow-panel .step-item.active.incomplete .icon {
-            color: var(--primaryDark);
-            border: 1px solid var(--primaryDark);
-         }
-
-    .. tab-item:: textColor.css
+   
+    .. tab-item:: annotation.css
 
       .. code-block:: css
          :linenos:
 
-         /*Change table text color*/
-         .tag-table .grid-viewport .cell:not(.flag-readOnly), 
-         html:not(.using-touch) .tag-table .grid-viewport .cell:not(.flag-readOnly) {
-            color: var(--primaryDark);
+         .annotation-red-chart {
+            fill: var(--secondary);
          }
 
-         /*Change scalar text color*/
-         .tag-scalar .kpi .value {
-            color: var(--primaryDark);
-         }
-
-         /*Link color*/
-         .ql-snow a {  
-            color: var(--primaryDark);
-         }
-
-    .. tab-item:: body.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Add logo on the background*/
-         .scroll-wrapper--pagev2 .page-container {
-            content: " ";
-            background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
-         }
-
-         .widgetdiv .awf-dock.top {
-            border-bottom: 2px solid var(--primaryDark);
-            background: linear-gradient(180deg, rgba(255,255,255,1) 20%, var(--primary) 100%);
-         }
-
-    .. tab-item:: header.css
-
-      .. code-block:: css
-         :linenos:
-
-         .theme-aimms header.tag-application {
-            border-bottom: 2px solid var(--primaryDark);
-         }
-
-    .. tab-item:: combinationChart.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change color of togglelegend of the combination chart*/
-         .togglelegend-button svg{
+         .annotation-not-red-chart {
             fill: var(--primaryDark);
          }
 
-         .togglelegend-button-active:hover svg g, .togglelegend-button-active svg g {
-            fill: var(--primary);    
+         .annotation-red-input  {
+            border: 3px solid red;
+            border-radius: 3px;
          }
-
-    .. tab-item:: sidePanel.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change color after tab click*/
-         .sidepanel-container .sidepanel-tab.active {
-            background-color: var(--primaryDark);
-         }
-
-         /*Change letter color on hover*/
-         .sidepanel-container .sidepanel-tab.active:hover {
-            color: white;
-         }
-
-         /*Change icon color*/
-         .sidepanel-container .sidepanel-tab .sidepanel-icon,
-         .sidepanel-container .sidepanel-tab:hover {
-            color: var(--primaryDark);
-         }
-
-         /*Change color after all tabs*/
-         .sidepanel-container .sidepanel-tabs-container:after {
-            background: var(--primaryDark);
-         }
-
-         /*Change the color below sidepanel tabs*/
-         .sidepanel-container {
-            background-color:   rgb(249, 249, 249);
-
-         }
-
-         .sidepanel-active .sidepanel-container {
-            background-color:   rgba(249, 249, 249, 0);
-         }
-   
-    .. tab-item:: pageAction.css
-
-      .. code-block:: css
-         :linenos:
-
-         .page-action-v2 .page-action-menu,
-         .page-action-v2 .page-action-menu.open {
-            background: var(--primaryDark);
-         }
-
-         .page-action-v2 .page-action-menu:hover,
-         .page-action-v2 .page-action-menu:hover {
-            background: var(--primary);
-         }
-
-         .page-action-v2 .page-action-holder .page-action-item .page-action-icon, 
-         .page-action-v2 .page-action-holder .page-action-item .page-action-letter {
-            background-color: var(--primaryDark);
-         }
-
-         .page-action-v2 .page-action-holder .page-action-item .page-action-icon:hover, 
-         .page-action-v2 .page-action-holder .page-action-item .page-action-letter:hover {
-            background-color: var(--primary);
-         }
-   
-    .. tab-item:: table.css
-
-      .. code-block:: css
-         :linenos:
-
-         .tag-table.focused .focus-cell {
-            box-shadow: inset 0 0 0 1px var(--primaryDark);
-         }
-
-         .tag-table .cell.flag-number input{
-            text-align: center;
-         }
-
-         /*Change checkbox color*/
-         input.boolean-cell-editor-contents {
-            accent-color: var(--primaryDark);
+         .annotation-green-input  {
+            border: 1px solid green;
+            border-radius: 3px;
          }
 
 
@@ -462,3 +347,8 @@ Minimal Requirements
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient and `ODBC instalation <https://how-to.aimms.com/Articles/118/118-Connect-SQLite.html>`_ is necessary for working with this example.
 
+Release Notes
+--------------------   
+
+`v1.0 <https://github.com/aimms/employee-scheduling/releases/tag/1.0>`_ (30/06/2023)
+   Updated to 4.96 and using the new theming variables. 
