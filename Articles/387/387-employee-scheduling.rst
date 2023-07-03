@@ -352,3 +352,7 @@ Release Notes
 
 `v1.0 <https://github.com/aimms/employee-scheduling/releases/tag/1.0>`_ (30/06/2023)
    Updated to 4.96 and using the new theming variables. 
+    
+
+.. spelling:word-list::
+    theming
