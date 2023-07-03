@@ -43,7 +43,7 @@ You need the following ``css`` code snippet.
         display: none;
     }
 
-**Remarks:**
+Remarks:
 
 * ``gnt_shiftGantt`` is the name of the widget. 
 
