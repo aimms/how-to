@@ -312,7 +312,7 @@ For this project, we used a main css file named ``colors.css``, please check it 
    
     .. tab-item:: custom.css
 
-      .. code-block:: css
+      .. code-block:: text
          :linenos:
 
          ..aimms-widget[data-widget\.uri="gnt_shiftGantt"] .awf-dock.top{
