@@ -24,7 +24,7 @@ The Infeasibility Finder is available for the solvers CPLEX, GUROBI, XA, BARON a
 
 1. Set the following option in AIMMS:
 
-           *Solvers general > Standard reports > Solution > Infeasibility finder: On*
+           *Settings > Project Options > Solvers general > Standard reports > Solution > Infeasibility finder: On*
 
 
 2. After setting this option, run your model again. 
