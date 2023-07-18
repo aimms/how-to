@@ -18,6 +18,7 @@ Recently added
 .. Added 14 Feb 2020: 108-10, 108-09, 108-07
 .. Added 21 March 2022: 535
 
+* :doc:`/Articles/593/593-dollar-or-pipe`
 * :doc:`/Articles/591/591-hiding-widget-header`
 * :doc:`/Articles/336/336-using-annotations`
 * :doc:`/Articles/571/571-ci-cd-guide`
@@ -33,8 +34,7 @@ Recently added
 * :doc:`/Articles/535/535-waiting-for-sub-jobs-to-complete`
 * :doc:`/Articles/533/533-how-to-retrieve-file-data-with-data-exchange`
 * :doc:`/Articles/528/528-how-to-set-up-data-exchange-basics`
-* :doc:`/Articles/531/531-working-with-wonderful-webui-widgets`
-* :doc:`/Articles/526/526-modeling-composite-objects`
+
 
 .. * :doc:`/Articles/519/519-reading-relations-indexed-sets`
 .. * :doc:`/Articles/517/517-runtime-functions-with-arguments`
