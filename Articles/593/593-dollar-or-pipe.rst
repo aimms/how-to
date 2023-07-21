@@ -75,7 +75,7 @@ Discussion
 However, for historical reasons (mainly because we have supported GAMS language for a long time) this theoretical distinction between the two operators was never imposed by AIMMS, 
 and you could use ``$`` and ``|`` as if they mean the exact same thing. **You did not get an error if you used them incorrectly.**
 
-In the latest version of AIMMS this has changed. So you now do get a warning when you use ``$`` where a ``|`` was expected, and vice versa (and in future versions this will even be an error).
+In the **4.97** version of AIMMS this has changed. So you now do get a warning when you use ``$`` where a ``|`` was expected, and vice versa (and in future versions this will even be an error).
 The reason for this is that in older AIMMS versions there has always been an error in how these operators were interpreted and that the interpretation was not consistent.
 
 Let’s try to explain:
@@ -101,7 +101,7 @@ According to the precedence rules this should be executed similar to:
 
 However, if you try this in an older AIMMS version you will see that the assignment with the ``|`` operator has the exact same result as the assignment with the ``$`` operator.
 
-Of course we could have adapted the `Language Reference <https://documentation.aimms.com/language-reference/index.html>`_ on this, 
+Of course we could have adapted the `Language Reference <https://documentation.aimms.com/language-reference/non-procedural-language-components/numerical-and-logical-expressions/operator-precedence.html>`_ on this, 
 and just state there that ``|`` and ``$`` are exactly the same, but there is a funny thing with how this precedence rules behave within an index domain specification:
 
 .. code-block:: aimms
@@ -113,7 +113,7 @@ and just state there that ``|`` and ``$`` are exactly the same, but there is a f
 
 Both assignments are accepted in older AIMMS versions (and are semantically the same). 
 
-In other words, when not in an index domain specification both operators behave the same and follow the precedence of the ``|`` operator. 
+In other words, when in an index domain specification both operators behave the same and follow the precedence of the ``|`` operator. 
 When not in an index domain specification, so just somewhere in an expression, the two operators also behave as if they are the same but there they follow the precedence of the ``$`` operator.
 Because of this inconsistency and the fact that it has never really behaved as the Language Reference states, the new version of AIMMS is now very strict in where to use which operator. 
 So, if you have written this in your model:
