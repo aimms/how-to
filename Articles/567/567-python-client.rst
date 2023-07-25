@@ -103,7 +103,7 @@ Remarks:
 
 #.  Line 10: A ``GET`` on this service end point.
 
-#.  Line 11: The values ``status`` can take on are enumerated `here <https://documentation.aimms.com/dataexchange/rest-server.html#:~:text=where%20status%20can%20be%20any%20of>`_
+#.  Line 11: The values ``status`` can take on are enumerated `here <https://documentation.aimms.com/dataexchange/rest-server.html#specifying-rest-task-types-in-your-model>`_
 
 
 Obtain task response

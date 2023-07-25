@@ -65,7 +65,7 @@ Alternatively, AIMMS can provide this solution as a managed service where we bui
 
 .. seealso::
 
-   See https://dev.mysql.com/doc/index-connectors.html for details how to connect to MySQL databases.
+   See `documentation on connectors <https://dev.mysql.com/doc/index-connectors.html>`_ for details how to connect to MySQL databases.
 
 All traffic takes place via a VPN tunnel that is initiated from the
 on-premise environment, so there is no need to permit incoming
