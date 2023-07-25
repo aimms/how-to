@@ -40,10 +40,12 @@ Uploading and downloading files
 To detail the building blocks for the exchanging files between an AIMMS app and its environment, we need to distinguish two situations:
 
 * **For AIMMS WinUI apps**
-    The client side of the AIMMS app runs on the client device itself. The app has direct access to the user files via the file and directory functions such as :aimms:procedure:`FileCopy` and :aimms:procedure:`FileDelete`. See :doc:`system-interaction/file-and-directory-functions/index`.
+    The client side of the AIMMS app runs on the client device itself. 
+    The app has direct access to the user files via the file and directory functions such as :aimms:procedure:`FileCopy` and :aimms:procedure:`FileDelete`. See :doc:`system-interaction/file-and-directory-functions/index`.
 
 * **For AIMMS WebUI apps**
-    The app user interacts with the app via a Chrome Web browser, but the AIMMS app actually runs on a machine in the AIMMS PRO cluster. The AIMMS app has only direct access to the following files:
+    The app user interacts with the app via a Chrome Web browser, but the AIMMS app actually runs on the host of AIMMS PRO. 
+    The AIMMS app has only direct access to the following files:
 
     *   Those files that were packed in the corresponding ``.aimmspack`` 
 
@@ -104,20 +106,22 @@ There are also functions to create folders and to delete files and folders in th
 Exchanging files for an AIMMS WebUI app
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In AIMMS WebUI apps, the end-user interaction is done in a Chrome browser on one machine, while the Client Side execution of AIMMS procedures is done on another machine in the AIMMS PRO cluster.
+In AIMMS WebUI apps, the end-user interaction is done in a Chrome browser on one machine, while the Client Side execution of AIMMS procedures is done on the host of AIMMS PRO.
 
 The file communication architecture for a WebUI AIMMS application is shown in the diagram below.
 
 .. image:: images/download-upload.png
 
 
-#.   The Chrome Browser handles the interaction with the end-user. The Chrome browser can run on a device such as a smartphone, tablet, laptop, or desktop.
+#.  The Chrome Browser handles the interaction with the end-user. The Chrome browser can run on a device such as a smartphone, tablet, laptop, or desktop.
 
-#.   The AIMMS Client session running on a node in the AIMMS PRO Cluster. This AIMMS Client Session handles the execution of the statements in the model.
+#.  The AIMMS Client session running on the host of AIMMS PRO. 
+    This AIMMS Client Session handles the execution of the statements in the model.
 
-#.   The AIMMS PRO storage, disk space available to exchange files.
+#.  The AIMMS PRO storage, disk space available to exchange files.
 
-The AIMMS WebUI provides the `Upload Widget <https://documentation.aimms.com/webui/upload-widget.html?highlight=upload#upload-widget>`_ to transfer files from your device to the folder in which the AIMMS client session runs. In addition, it provides the `Download Widget <https://documentation.aimms.com/webui/download-widget.html#download-widget>`_ to transfer files the other way around.
+The AIMMS WebUI provides the `Upload Widget <https://documentation.aimms.com/webui/upload-widget.html?highlight=upload#upload-widget>`_ to transfer files from your device to the folder in which the AIMMS client session runs. 
+In addition, it provides the `Download Widget <https://documentation.aimms.com/webui/download-widget.html#download-widget>`_ to transfer files the other way around.
 
 
 

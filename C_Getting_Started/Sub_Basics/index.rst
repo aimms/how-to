@@ -24,3 +24,4 @@ These topics provide fundamentals about using and customizing AIMMS. Learn about
    /Articles/84/84-using-libraries
    /Articles/128/128-Intellectual-Property 
    /Articles/151/151-version-control-aimmspack-backup
+   /Articles/545/545-summary-examples-features

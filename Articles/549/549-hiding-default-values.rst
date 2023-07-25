@@ -1,6 +1,10 @@
 Hiding Default Values
 ======================
 
+.. meta::
+   :description: This article illustrates how to hide the default value using css.
+   :keywords:  default, hide
+
 This article illustrates how to hide the default value using ``css``.
 Please use the `Contract Allocation <https://how-to.aimms.com/Articles/383/383-contract-allocation.html>`_ example to experiment with this feature.
 

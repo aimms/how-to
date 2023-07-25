@@ -30,8 +30,10 @@ This section contains explanations of various UI features available when buildin
    /Articles/512/512-image-widget-refresh
    /Articles/549/549-hiding-default-values
    /Articles/566/566-scalar-border-annotation
+   /Articles/336/336-using-annotations
    /Articles/568/568-disable-standard-webui-functions
    /Articles/578/578-uponchange-with-arguments
+   /Articles/591/591-hiding-widget-header
 
    
 

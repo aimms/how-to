@@ -1,11 +1,11 @@
-Examples vs WebUI Widgets
+Examples vs Features
 =========================
 
 .. meta::
    :keywords: WebUI, features, Examples, Text Widget, Image Widget, Workflow, Table Widget, Combination Chart Widget, Page Actions, Side Panel, Scalar Widget, List Widget
-   :description: This page has a summary of the examples versus what WebUI Widgets.
+   :description: This page has a summary of the examples versus AIMMS features.
 
-This page has a summary of the examples versus which WebUI features are used in them.
+This page has a summary of the examples versus AIMMS features used in them.
 
 .. dropdown:: Text Widget
 
@@ -132,3 +132,63 @@ This page has a summary of the examples versus which WebUI features are used in 
 
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../390/390-knapsack-problem`
+
+.. dropdown:: Collaborative Data Management (CDM) Library
+    
+    Nothing yet!
+
+.. dropdown:: Data Exchange (DEX) Library
+    
+    Nothing yet!
+
+.. dropdown:: DataLink Library
+    
+    Nothing yet!
+
+.. dropdown:: Email Client Library
+    
+    Nothing yet!
+
+.. dropdown:: Forecasting Library
+    
+    * :doc:`../550/550-demand-forecasting`       
+
+.. dropdown:: GuardServerSession Library
+    
+    Nothing yet!
+
+.. dropdown:: HTTP Client Library
+    
+    Nothing yet!
+
+.. dropdown:: MultiSolve Library
+    
+    Nothing yet!
+
+.. dropdown:: RLink Library
+    
+    Nothing yet!
+
+.. dropdown:: Unit Test Library
+    
+    Nothing yet!
+
+.. dropdown:: AIMMSXL (AXLL) Library 
+    
+    Nothing yet!
+
+.. dropdown:: Rest API
+    
+    Nothing yet!
+
+.. dropdown:: SQLite Connection
+    
+    Nothing yet!
+
+.. dropdown:: CSS Annotations
+    
+    Nothing yet!
+
+.. dropdown:: Widget Named Views
+    
+    Nothing yet!    

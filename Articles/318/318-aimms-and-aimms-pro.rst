@@ -12,6 +12,8 @@ In addition, some functionality requires upgrades in both AIMMS Developer and in
 
 These version dependencies are listed below:
 
+#.  If you want to deploy AIMMS projects created using AIMMS 4.88 or newer, you will need AIMMS PRO 2.44 or newer.
+
 #.  ``pro::storage::ExistsObject`` and ``pro::storage::ExistsBucket`` require at least AIMMS PRO 2.33 and AIMMS Developer 4.69
 
 #.  If you want to deploy AIMMS Developer 4.66 or higher, you will need AIMMS PRO 2.28 or newer.

@@ -4,10 +4,10 @@ Contract Allocation
    :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.94-ZIP:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.95-ZIP:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.94-Github:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.95-Github:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -218,6 +218,8 @@ The following WebUI features are used:
 
 - `Selection Box Widget <https://documentation.aimms.com/webui/selection-box-widget-v2.html>`_ 
 
+- `CSS Annotations <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_
+
 
 UI Styling
 ----------
@@ -241,6 +243,18 @@ Below there are the css files you will find with comments on what they change.
             color: transparent;
          }
 
+         .annotation-reach-maximum {
+            background: rgba(255, 0, 0, 0.438);
+         }
+
+         .annotation-reach-minimum {
+            background: rgba(255, 255, 0, 0.438);
+         }
+
+         .annotation-between {
+            background: rgba(0, 128, 0, 0.438);
+         }
+
    .. tab-item:: colors.css
 
       .. code-block:: css
@@ -250,53 +264,53 @@ Below there are the css files you will find with comments on what they change.
          /*---------------------------------------------------------------------
                COLORS
          ----------------------------------------------------------------------*/
-            --primary: #3DDAB4;
-            --primaryDark: #00B569;
-            --primary90Transparent: #3ddab33b;
+         --primary: #3DDAB4;
+         --primaryDark: #00B569;
+         --primary90Transparent: #3ddab33b;
 
          /*---------------------------------------------------------------------
                LOGO
          ----------------------------------------------------------------------*/
-            --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/budgeting.png);
-            --spacing_app-logo_width: 45px;
+         --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/budgeting.png);
+         --spacing_app-logo_width: 45px;
 
 
-            --color_bg_button_primary: var(--primaryDark);
-            --color_bg_button_primary_hover: var(--primary);
-            --color_text_edit-select-link: var(--primaryDark);
+         --color_bg_button_primary: var(--primaryDark);
+         --color_bg_button_primary_hover: var(--primary);
+         --color_text_edit-select-link: var(--primaryDark);
 
 
          /*---------------------------------------------------------------------
                WORKFLOW
          ----------------------------------------------------------------------*/
-            /* Header text*/
-            --color_workflow-header: #505767;
-               
-            /* Step background and content (text, icon) colors for the 4 states*/
-            /*current + current with error*/
-            --color_bg_workflow_current: var(--primaryDark);
-            --color_workflow_current: var(--color_text_inverted);
-            --color_bg_workflow_error-current: #d1454b;
+         /* Header text*/
+         --color_workflow-header: #505767;
+            
+         /* Step background and content (text, icon) colors for the 4 states*/
+         /*current + current with error*/
+         --color_bg_workflow_current: var(--primaryDark);
+         --color_workflow_current: var(--color_text_inverted);
+         --color_bg_workflow_error-current: #d1454b;
 
-            /*active*/
-            --color_bg_workflow_active: #e6edff;
-            --color_workflow_active: var(--primaryDark);
-            
-            /*inactive*/
-            --color_bg_workflow_inactive: #dde0e8;
-            --color_workflow_inactive: #b0b5c2;
-            
-            /*error*/
-            --color_bg_workflow_error: #f9e9e9;
-            --color_workflow_error: #d1454b;
-            
-            /* Child indentation, border colors */
-            --spacing_workflow-child-indent: 1rem;
-            --color_workflow-item-divider: var(--primaryDark);
-            
-            /* Icon background, border, for non-error state */
-            --color_bg_workflow-icon: #ffffff;
-            --color_workflow-icon-border: var(--primaryDark);
+         /*active*/
+         --color_bg_workflow_active: #e6edff;
+         --color_workflow_active: var(--primaryDark);
+         
+         /*inactive*/
+         --color_bg_workflow_inactive: #dde0e8;
+         --color_workflow_inactive: #b0b5c2;
+         
+         /*error*/
+         --color_bg_workflow_error: #f9e9e9;
+         --color_workflow_error: #d1454b;
+         
+         /* Child indentation, border colors */
+         --spacing_workflow-child-indent: 1rem;
+         --color_workflow-item-divider: var(--primaryDark);
+         
+         /* Icon background, border, for non-error state */
+         --color_bg_workflow-icon: #ffffff;
+         --color_workflow-icon-border: var(--primaryDark);
          }
 
    .. tab-item:: textColor.css
@@ -436,7 +450,7 @@ Below there are the css files you will find with comments on what they change.
          :linenos:
 
          .tag-table.focused .focus-cell {
-            box-shadow: inset 0 0 0 1px var(--primaryDark);
+            box-shadow: inset 0 0 0 2px var(--primaryDark);
          }
 
 
@@ -449,6 +463,9 @@ Minimal Requirements
 
 Release Notes
 --------------------   
+
+`v1.2 <https://github.com/aimms/contract-allocation/releases/tag/1.2>`_ (15/06/2023)
+   Updated to 4.95 and added dependent styling using annotation on Results page. 
 
 `v1.1 <https://github.com/aimms/contract-allocation/releases/tag/1.1>`_ (15/05/2023)
    Updated to 4.94 and improved Input page for better UX flow. 
