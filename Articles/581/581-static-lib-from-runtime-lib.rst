@@ -145,7 +145,7 @@ Differences between runtime libraries and static libraries
 
 To take advantage of the differences between runtime libraries and static libraries, code for the following is generated as well:
 
-*   `Interface <https://documentation.aimms.com/language-reference/advanced-language-components/model-structure-and-modules/librarymodule-declaration-and-attributes.html#sec-module-library:~:text=of%20a%20library.-,The%20Interface%20attribute,-Through%20the%20Interface>`_ attribute.
+*   `Interface <https://documentation.aimms.com/language-reference/advanced-language-components/model-structure-and-modules/librarymodule-declaration-and-attributes.html#sec-module-library>`_ attribute.
     Here the identifiers declared in the ``Public Section`` are intended to be used from the outside, the contents of the interface attribute is ``Public_Section``.
 
 *   Use of `initialization and termination <https://how-to.aimms.com/Articles/351/351-app-initialization-termination-with-libraries.html>`_ procedures such as ``LibraryInitialization``, ``LibraryPostInitialization``,  ``LibraryPreTermination``,  and ``LibraryTermination``.  

@@ -25,7 +25,7 @@ These steps are detailed in the next sections.
 Submit task
 ------------
 
-According to the `AIMMS PRO REST API <https://documentation.aimms.com/pro/rest-api.html#aimms-pro-rest-api>`_ , 
+According to the `AIMMS PRO REST API <https://documentation.aimms.com/cloud/rest-api.html#aimms-pro-rest-api>`_ , 
 a post to the service end point ``/tasks/{app}/{ver}/{service}`` is required. 
 Easily achieved using python as follows:
 
@@ -103,7 +103,7 @@ Remarks:
 
 #.  Line 10: A ``GET`` on this service end point.
 
-#.  Line 11: The values ``status`` can take on are enumerated `here <https://documentation.aimms.com/dataexchange/rest-server.html#specifying-rest-task-types-in-your-model>`_
+#.  Line 11: The values ``status`` can take on are enumerated `here <https://documentation.aimms.com/dataexchange/rest-server.html#:~:text=where%20status%20can%20be%20any%20of>`_
 
 
 Obtain task response

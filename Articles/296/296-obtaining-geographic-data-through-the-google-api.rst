@@ -44,7 +44,7 @@ Specify these parameters by putting them at the end of the request URL:
 
 .. removed image (images/RequestFormat.png)
     
-As indicated in `Google Maps Developer Guide: Distance Matrix Requests <https://developers.google.com/maps/documentation/distance-matrix/overview#DistanceMatrixRequests>`_ the format should look like this:
+As indicated in `Google Maps Developer Guide: Distance Matrix Requests <https://developers.google.com/maps/documentation/distance-matrix/distance-matrix>`_ the format should look like this:
 
 .. raw:: html
 
