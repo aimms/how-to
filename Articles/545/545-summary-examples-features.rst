@@ -72,6 +72,7 @@ This page has a summary of the examples versus AIMMS features used in them.
 
     * :doc:`../383/383-contract-allocation`
     * :doc:`../397/397-traveling-salesman`
+    * :doc:`../387/387-employee-scheduling`
     * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: List Widget
@@ -90,7 +91,6 @@ This page has a summary of the examples versus AIMMS features used in them.
 .. dropdown:: Scalar Widget 
 
     * :doc:`../383/383-contract-allocation`
-    * :doc:`../387/387-employee-scheduling`
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../563/563-functional-ipTwist`
@@ -113,11 +113,17 @@ This page has a summary of the examples versus AIMMS features used in them.
 
 .. dropdown:: Dialog Page
     
+    * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`
 
 .. dropdown:: Download Widget
     
+    * :doc:`../387/387-employee-scheduling`
     * :doc:`../383/383-contract-allocation`    
+
+.. dropdown:: Upload Widget
+    
+    * :doc:`../387/387-employee-scheduling`
 
 .. dropdown:: Selection Box Widget
     
@@ -183,11 +189,11 @@ This page has a summary of the examples versus AIMMS features used in them.
 
 .. dropdown:: SQLite Connection
     
-    Nothing yet!
+    * :doc:`../387/387-employee-scheduling`
 
 .. dropdown:: CSS Annotations
     
-    Nothing yet!
+    * :doc:`../387/387-employee-scheduling`
 
 .. dropdown:: Widget Named Views
     
