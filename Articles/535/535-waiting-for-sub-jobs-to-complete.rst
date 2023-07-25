@@ -65,7 +65,7 @@ A.  Blue, the client session:
             <details style="border: solid 1px gray; border-radius: 5px;">
             <summary style="cursor: pointer;">How to: 👇</summary>
 
-        #.  Construct input case via `sections <https://documentation.aimms.com/language-reference/data-communication-components/data-initialization-verification-and-control/working-with-the-set-allidentifiers.html#:~:text=Predefined%20identifier%20sets>`_ and `pro::ManagedSessionInputCaseIdentifierSet <https://documentation.aimms.com/pro/appl-state.html#id1>`_.
+        #.  Construct input case via `sections <https://documentation.aimms.com/language-reference/data-communication-components/data-initialization-verification-and-control/working-with-the-set-allidentifiers.html>`_ and `pro::ManagedSessionInputCaseIdentifierSet <https://documentation.aimms.com/pro/appl-state.html#id1>`_.
 
             As an example consider the following excerpt from ``MainExecution``:
 

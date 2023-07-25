@@ -99,6 +99,4 @@ This app makes an arbitrary change in the levels by -1 or by +1 every second.
 References
 -----------
 
-#.  This article is based on an idea from `Edo <https://community.aimms.com/ideas/refresh-of-webui-page-1293?postid=258#post258>`_
-
 #.  TSP opt-2 example, see :doc:`../397/397-traveling-salesman`
