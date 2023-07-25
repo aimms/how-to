@@ -27,4 +27,5 @@ a service, by using the **tasks methods** of the `AIMMS PRO REST API <https://do
    /Articles/585/585-AIMMS-server-app
    /Articles/585/585-Python-client
    /Articles/585/585-AIMMS-client
+   /Articles/585/585-VBA-client
 
