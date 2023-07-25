@@ -298,17 +298,16 @@ Discrete Optimization **5** (2008), pp. 186-204.
 
 [4] Bussieck, M.R., A. S. Drud, and A. Meeraus, *MINLPLib – a collection
 of test models for mixed-integer nonlinear programming*, INFORMS Journal
-on Computing, 15 (2003). [Internet:
-http://www.gamsworld.org/minlp/index.htm].
+on Computing, 15 (2003). [Internet: https://www.minlplib.org/].
 
 [5] Byrd, R.H., J. Nocedal, R.A. Waltz, KNITRO: An Integrated Package
 for Nonlinear Optimization, in: *Large-Scale Nonlinear Optimization*, G.
 di Pillo and M. Roma (eds), Springer-Verlag, 2006, pp. 35-59.
 
 [6] CMU-IBM Cyber-Infrastructure for MINLP collaborative site.
-[Internet: http://www.minlp.org/].
+[Internet: https://www.minlp.org/].
 
-[7] **CMU-IBM Open source MINLP Project**. [Internet:
+[7] CMU-IBM Open source MINLP Project. [Internet:
 http://egon.cheme.cmu.edu/ibm/page.htm].
 
 [8] Duran, M.A., I.E. Grossmann, *An outer-approximation algorithm for a
@@ -324,7 +323,7 @@ Technology BV, 2011.
 
 [11] Leyffer, S., *MacMINLP: Test problems for mixed integer nonlinear
 programming*, 2003. [Internet:
-http://www.mcs.anl.gov/_leyffer/macminlp].
+https://wiki.mcs.anl.gov/leyffer/index.php/MacMINLP].
 
 [12] Quesada, I., I.E. Grossmann, *An LP/NLP Based Branch and Bound
 Algorithm for Convex MINLP Optimization Problems*, Computers and

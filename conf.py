@@ -168,6 +168,8 @@ html_theme_options = {
     'google_tag_manager_id': 'GTM-5T37RFM',
     'generate_google_tag_manager' : Display_3rd_Party_Extensions,
     'display_algolia_search': Display_3rd_Party_Extensions,
+    'aimms_support_menu_id': 'howto',
+    'generate_aimms_support_menu' : True,
     'algolia_appid': 'BH4D9OD16A',
     'algolia_appkey': '0fc935020f8088e762190434cffaee41',
     'algolia_indexname':'aimms_how-to',
