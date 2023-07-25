@@ -25,7 +25,7 @@ These steps are detailed in the next sections.
 Submit task
 ------------
 
-According to the `AIMMS PRO REST API <https://documentation.aimms.com/pro/rest-api.html#aimms-pro-rest-api>`_ , 
+According to the `AIMMS PRO REST API <https://documentation.aimms.com/cloud/rest-api.html#aimms-pro-rest-api>`_ , 
 a post to the service end point ``/tasks/{app}/{ver}/{service}`` is required. 
 Easily achieved using python as follows:
 
