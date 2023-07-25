@@ -206,7 +206,7 @@ For each service, we need to specify its:
 
 #.  Functionality. IIn the running example this would be: 
 
-    The service countStarsJson counts the number of asterisks in a list of strings.
+    The service ``countStarsJson`` counts the number of asterisks in a list of strings.
 
 #.  Expected input / request body. In the running example this would be:
 
@@ -229,3 +229,7 @@ With the DataExchange library, defining the interface is essentially a matter of
 #.  Selecting the procedure to run 
 
 It is good practice to implement unit tests and provide good and detailed documentation of your  services.
+
+.. spelling:word-list::
+
+    facto
