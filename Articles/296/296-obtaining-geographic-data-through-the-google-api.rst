@@ -32,7 +32,7 @@ Before we begin, there are a couple things you'll need to have in place.
 
 API requirements
 -----------------------------------------------
-We need information about the authentication required and the request format. As indicated in `Google Maps Developer Guide: Required Parameters <https://developers.google.com/maps/documentation/distance-matrix/overview#required-parameters>`_, these are required parameters for the request:
+We need information about the authentication required and the request format. As indicated in `Google Maps Developer Guide: Required Parameters <https://developers.google.com/maps/documentation/distance-matrix/distance-matrix#required-parameters>`_, these are required parameters for the request:
 
 .. removed image (images/MandatoryParameters.png)
 
