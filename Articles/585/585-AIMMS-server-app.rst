@@ -152,13 +152,16 @@ remarks:
 Testing the service
 -----------------------
 
-There are two types of tests:
+There are three types of tests:
 
 #. In the server app itself, also called unit tests.
 
-#. Tests using specifically developed clients.
+#. On the machine of the AIMMS app developer, using a client app for this purpose.
 
-Testing using clients will be discussed in the accompanying articles.
+#. On the AIMMS Cloud, and using a client app for this purpose.
+
+Performing unit tests
+^^^^^^^^^^^^^^^^^^^^^^
 
 An example of a unit test is the following:
 
@@ -192,12 +195,28 @@ Such unit tests verify that the server application still has the verified behavi
 
 More about unit tests can be found at:
 
-
 #.  https://documentation.aimms.com/unit-test/index.html
 
 #.  https://how-to.aimms.com/Articles/216/216-effective-use-unit-test-library.html
 
+Facilitating tests with client apps
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+To facilitate testing by client apps of the service, the service will need to be:
+
+#.  On local host:
+
+    To develop the AIMMS service itself, in AIMMS Developer the service can be started using 
+    `dex::api::StartAPIService <https://documentation.aimms.com/dataexchange/api.html#dex-api-StartAPIService>`_.
+    See also https://documentation.aimms.com/dataexchange/rest-server.html#activating-the-rest-service.
+
+#.  In the AIMMS Cloud:
+
+    After publishing an app ``app`` with version ``ver`` on the AIMMS Cloud, 
+    the service is started when a POST request of the above form is made; 
+    there is no need to call ``dex::api::StartAPIService`` from within the service app.
+
+Actual Testing using clients will be discussed in the accompanying articles.
 
 Documenting the service
 --------------------------
