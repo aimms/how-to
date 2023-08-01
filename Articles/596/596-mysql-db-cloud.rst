@@ -1,7 +1,7 @@
 Connecting to and using the AIMMS Cloud database
 =================================================
 
-This article describes several ways to connect to the AIMMS Cloud database. The AIMMS Cloud database is a MySQL database and is an optional addition to the AIMMS Cloud, intented for data storage and to interact with AIMMS applications uploaded to the same cloud. The link to the database always looks like this: [nameofyourcloud].db.aimms.cloud. This database is **not** publicly available, unless Option 3 is implemented. If you currently do not have this database, but you would like to use it, please `contact us <mailto:support@aimms.com>`__. 
+This article describes several ways to connect to the AIMMS Cloud database. The AIMMS Cloud database is a MySQL database and is an optional addition to the AIMMS Cloud, intended for data storage and to interact with AIMMS applications uploaded to the same cloud. The link to the database always looks like this: [nameofyourcloud].db.aimms.cloud. This database is **not** publicly available, unless Option 3 is implemented. If you currently do not have this database, but you would like to use it, please `contact us <mailto:support@aimms.com>`__. 
 
 After you have established a successful connection you can use the `Data Exchange Library to map the data correctly onto your AIMMS model <https://documentation.aimms.com/dataexchange/mapping.html#row-based-table-mapping-elements>`_. 
 You can also use AIMMS database functions to interact with the data. Examples can be found `here <https://how-to.aimms.com/Articles/344/344-sparse-execution-for-write-to-table.html#write-data-to-a-table>`_ and `here <https://how-to.aimms.com/Articles/554/554-direct-sql-example.html>`_.
@@ -72,3 +72,9 @@ Option 3: Use a VPN configuration
 
 If you want to access the database from any source outside of the AIMMS Cloud, a VPN is necessary. Consult our data integration page to determine if this is the best option for you, or `contact us <mailto:support@aimms.com>`__ directly if you want to know more about this option.
 
+.. spelling:word-list::
+
+    nameofyourcloud
+	aimms
+	hardcoded
+	hardcode
