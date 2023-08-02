@@ -1,10 +1,10 @@
 Connecting to and using the AIMMS Cloud database
 =================================================
 
-This article describes several ways to connect to the AIMMS Cloud database. The AIMMS Cloud database is a MySQL database and is an optional addition to the AIMMS Cloud, intended for data storage and to interact with AIMMS applications uploaded to the same cloud. The link to the database always looks like this: [nameofyourcloud].db.aimms.cloud. This database is **not** publicly available, unless Option 3 is implemented. If you currently do not have this database, but you would like to use it, please `contact us <mailto:support@aimms.com>`__. 
+This article describes several ways to connect to the AIMMS Cloud database. The AIMMS Cloud database is a MySQL database and is an optional addition to the AIMMS Cloud, intended for data storage and to interact with AIMMS applications uploaded to the same cloud. The link to the database always looks like this: [nameofyourcloud].db.aimms.cloud. This database is **not** publicly available unless Option 3 is implemented. If you currently do not have this database, but you would like to use it, please `contact us <mailto:support@aimms.com>`__. 
 
-After you have established a successful connection you can use the `Data Exchange Library to map the data correctly onto your AIMMS model <https://documentation.aimms.com/dataexchange/mapping.html#row-based-table-mapping-elements>`_. 
-You can also use AIMMS database functions to interact with the data. Examples can be found `here <https://how-to.aimms.com/Articles/344/344-sparse-execution-for-write-to-table.html#write-data-to-a-table>`_ and `here <https://how-to.aimms.com/Articles/554/554-direct-sql-example.html>`_.
+After you have established a successful connection we recommend using the `Data Exchange Library <https://documentation.aimms.com/dataexchange/sqldb.html>`_ to map the data correctly onto your AIMMS model.
+You can also use AIMMS database functions to interact with the data in the database - examples of their usage can be found `here <https://how-to.aimms.com/Articles/344/344-sparse-execution-for-write-to-table.html#write-data-to-a-table>`_ and `another one here <https://how-to.aimms.com/Articles/554/554-direct-sql-example.html>`_.
 
 Option 1: Use SQLCreateConnectionString
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -25,14 +25,13 @@ When you want to connect to the AIMMS Cloud database from an AIMMS application t
 
 Remarks:
 
-- There are multiple ODBC drivers available on the cloud that you can use for the 'driver' argument. With `this app <https://how-to.aimms.com/Articles/539/539-which-odbc-drivers.html#which-odbc-drivers>`_ (uploaded to the same cloud) you can get an overview of the available drivers. You can also use this app locally to get an overview of available drivers on your machine. If you are testing locally (e.g. with the DB Tunnel app open: see option 3), make sure to update the DriverName argument to match the driver of your local machine. 
-- All the data uploaded to the cloud, including any hardcoded usernames or passwords, is secured and safe. If you however don't want to hardcode the UserID and/or Password within the deployed AIMMS application, you can store these details in an external file within the project folder of your application.
+- There are multiple ODBC drivers available on the cloud that you can use for the 'driver' argument. With `this app <https://how-to.aimms.com/Articles/539/539-which-odbc-drivers.html#which-odbc-drivers>`_ (uploaded to the same cloud) you can get an overview of the available drivers. You can also use this app locally to get an overview of available drivers on your machine. If you are testing locally (e.g. with the DB Tunnel app open: see option 2), make sure to update the DriverName argument to match the driver of your local machine. 
 
 
 Option 2: Use the DB Tunnel app
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can use the AIMMS DB Tunnel app to open a connection from your local computer to the AIMMS Cloud database. This connection will only remain active for as long as you are logged into the AIMMS Cloud, the Tunnel App remained open and has not been stopped. You can download DB Tunnel App from `here <https://download.aimms.com/aimms/download/data/PRO/DBTunnel/>`_. 
+You can use the AIMMS DB Tunnel app to open a connection from your local computer to the AIMMS Cloud database. This connection will only remain active for as long as you are logged into the AIMMS Cloud, the Tunnel App remained open and has not been stopped. `Here you can download DB Tunnel App <https://download.aimms.com/aimms/download/data/PRO/DBTunnel/>`_. 
 
 All you need to do is publish this application with **AIMMS Version 4.66.2 or higher** on your PRO Portal and configure the Tunnel from the `Configuration <https://manual.aimms.com/pro/admin-config-1.html#tunnels>`_ menu. See also `Tunneling Support <https://manual.aimms.com/pro/tunneling.html>`_ for more details on Tunnels.
 
@@ -60,12 +59,12 @@ We have further enhanced DB Tunnel App such that it can report errors when it ca
 .. image:: images/dbtunnel_error.png
     :align: center
 
-We recommend using an application like `MySQL Workbench <https://how-to.aimms.com/Articles/344/344-sparse-execution-for-write-to-table.html#write-data-to-a-table>`_ to interact with the database once your connection is established. You can add a new connection there, filling out the highlighted details (port should be equal to what you set in your tunnel configuration on the cloud):
+We recommend using an application like `MySQL Workbench <https://dev.mysql.com/downloads/workbench/>`_ to interact with the database once your connection is established. You can add a new connection there, filling out the highlighted details (port should be equal to what you have set in your DB Tunnel App):
 
 .. image:: images/workbench.png
     :align: center
 	
-For the '' you can use 127.0.0.1, localhost or the link to your database ([nameofyourcloud].db.aimms.cloud).
+For the 'Hostname' you can use 127.0.0.1, localhost or the link to your database ([nameofyourcloud].db.aimms.cloud).
 
 Option 3: Use a VPN configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
