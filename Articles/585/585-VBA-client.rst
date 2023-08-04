@@ -1,35 +1,28 @@
 Using AIMMS Services with a VBA client
 ========================================
 
-Many people are used to Excel to model their business problems and 
-these Excel workbooks may contain the data required to instantiate an optimization problem.
-In addition, Excel comes with Visual Basic for Applications (VBA) permitting via the  
-WinHttp.WinHttpRequest.5.1 library to leverage REST API services.
-
-The power of AIMMS is to model and solve optimization problems.
-In a client-server architecture, on the AIMMS Cloud, this power is leveraged using AIMMS PRO REST API service.
-
-This article explains how to use Excel and VBA to leverage the optimization power of AIMMS.
-
-.. note:: 
-
-    This article also provides an alternative for the deprecation of ``aimmscom``.
-
-    Using AIMMS as an optimization tool inside an Excel workbook used to be facilitated 
-    via the Microsoft COM interface, see also 
-    `AIMMS COM <https://documentation.aimms.com/deprecation-table.html#:~:text=AIMMS%20COM%20is%20considered%20%E2%80%98old%E2%80%99%20architecture>`_ .
+AIMMS is an elaborate tool for modeling optimization problems.
+Excel is a popular tool to model business problems.  
+This article is about leveraging the power of AIMMS in EXCEL.
 
 
 Preparation
 --------------
 
+In addition, Excel comes with Visual Basic for Applications (VBA) permitting via the  
+WinHttp.WinHttpRequest.5.1 library to leverage REST API services.
+
 Preparing to create a VBA Client of your own using AIMMS PRO Rest API Tasks, you will have to:
 
 #.  Enable some libraries, via the Visual Basic Editor (Alt F11), Tools > References, most importantly:
 
-    * `Microsoft WinHTTP Services, version 5.1 <https://learn.microsoft.com/en-us/windows/win32/winhttp/about-winhttp>`_
+    *   `Microsoft WinHTTP Services, version 5.1 <https://learn.microsoft.com/en-us/windows/win32/winhttp/about-winhttp>`_
     
-    * `Microsoft Scripting Runtime <https://learn.microsoft.com/en-us/previous-versions/office/developer/office2000/aa155438(v=office.10)>`_
+        This library facilitates HTTP requests.
+    
+    *   `Microsoft Scripting Runtime <https://learn.microsoft.com/en-us/previous-versions/office/developer/office2000/aa155438(v=office.10)>`_
+    
+        Amongst others this library facilitates dictionaries.
     
     .. image:: images/vba-client-selected-tools-references.png
         :align: center
@@ -77,11 +70,113 @@ Initiate
 
 In this sub section, we'll handle submitting a request for executing a task using VBA.
 
+The code to initiate an AIMMS task is:
+
+.. code-block:: basic 
+    :linenos:
+
+    Sub RequestCountTheStars_usingWinHTTP51(apiURL As String, apiKey As String, useCloud As Integer, JsonString As String, ByRef taskId As String)
+    '
+    ' Use the WinHTTP51 library to actually do a POST on the apiURL for running a task.
+    '
+
+        ' Open the connection and set the method to POST
+        Http.Open "POST", apiURL, False
+
+        ' Set the request headers
+        If useCloud Then
+            Http.SetRequestHeader "apikey", apiKey
+        End If
+        Http.SetRequestHeader "Content-Type", "application/json"
+        
+        ' Send the request
+        Http.Send JsonString
+        
+        If Http.Status = 200 Then
+            ' Request successful
+            Dim JsonRT As String
+            JsonRT = Http.responseText
+            Dim Parsed As Object
+            Set Parsed = JsonConverter.ParseJson(JsonRT)
+            taskId = Parsed("id")
+        Else
+            Debug.Print "RequestCountTheStars(): Failure: " & Http.Status & " " & Http.StatusText
+        End If
+
+    End Sub
+
 Monitor
 ^^^^^^^^^^^^^^^^^^^^
 
+The code to monitor the task is:
+
+.. code-block:: basic 
+    :linenos:
+
+    Sub PollOnce_usingWinHTTP51(apiURL As String, apiKey As String, useCloud As Integer, ByRef taskStatus As String)
+    '
+    ' Use the WinHTTP51 library to do a get on the running task, to obtain a task status.
+    '
+
+        ' Open the connection and set the method to POST
+        Http.Open "GET", apiURL, False
+
+        ' Set the request headers
+        If useCloud Then
+            Http.SetRequestHeader "apikey", apiKey
+        End If
+        
+        ' Send the request
+        Http.Send
+        
+        If Http.Status = 200 Then
+            ' Request successful
+            Debug.Print Http.responseText
+            Dim JsonRT As String
+            JsonRT = Http.responseText
+            Debug.Print "PollOnce_usingWinHTTP51, response is: ", JsonRT
+            Dim Parsed As Object
+            Set Parsed = JsonConverter.ParseJson(JsonRT)
+            taskStatus = Parsed("status") ' Set output argument this procedure
+        Else
+            Debug.Print "PollOnce_usingWinHTTP51, Failure: " & Http.Status & " " & Http.StatusText
+        End If
+
+    End Sub
+
 Receive result
 ^^^^^^^^^^^^^^^^^^^^
+
+The code to receive the result is:
+
+    Sub ReceiveResponse_usingWinHTTP51(apiURL As String, apiKey As String, useCloud As Integer, ByRef noStars As Integer)
+    '
+    ' Do a GET on on the URL for receiveing the response of a task, thus finally getting the results of the task.
+    '
+        ' Open the connection and set the method to POST
+        Http.Open "GET", apiURL, False
+
+        ' Set the request headers
+        If useCloud Then
+            Http.SetRequestHeader "apikey", apiKey
+        End If
+        
+        ' Send the request
+        Http.Send
+        
+        If Http.Status = 200 Then
+            ' Request successful
+            Dim JsonRT As String
+            JsonRT = Http.responseText
+            Dim Parsed As Object
+            Set Parsed = JsonConverter.ParseJson(JsonRT)
+            noStars = Parsed("count")
+            Debug.Print "ReceiveResponse_usingWinHTTP51(): Received response, no stars = ", noStars
+        Else
+            Debug.Print "ReceiveResponse_usingWinHTTP51(): Failure: " & Http.Status & " " & Http.StatusText
+        End If
+
+    End Sub
 
 References
 ---------------
@@ -91,6 +186,22 @@ References
 #.  The `VBA JSON library <https://github.com/VBA-tools/VBA-JSON>`_
 
 #.  `Youtube video Use Excel VBA to Read API Data <https://www.youtube.com/watch?v=KZeYKZJzQIk>`_
+
+
+.. note:: 
+
+    This article also provides an alternative for the deprecation of ``aimmscom``.
+
+    Using AIMMS as an optimization tool inside an Excel workbook used to be facilitated 
+    via the Microsoft COM interface, see also 
+    `AIMMS COM <https://documentation.aimms.com/deprecation-table.html#:~:text=AIMMS%20COM%20is%20considered%20%E2%80%98old%E2%80%99%20architecture>`_ .
+
+
+
+Next
+-----------
+
+:doc:`../585/585-AIMMS-client`
 
 
 

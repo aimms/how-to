@@ -74,3 +74,9 @@ Next
 
 :doc:`../585/585-AIMMS-server-app`
 
+.. spelling:word-list::
+
+    apiKey
+    de
+    facto
+

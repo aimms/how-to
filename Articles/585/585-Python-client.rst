@@ -177,6 +177,9 @@ Next
 :doc:`../585/585-VBA-client`
 
 
+.. spelling:word-list::
+
+    apiKey
 
 
 
