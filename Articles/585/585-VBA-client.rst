@@ -1,9 +1,24 @@
-VBA client
-================
+Using AIMMS Services with a VBA client
+========================================
 
-Micosoft Office applications are used all over place; and they can invoke services via REST API.
+Many people are used to Excel to model their business problems and 
+these Excel workbooks may contain the data required to instantiate an optimization problem.
+In addition, Excel comes with Visual Basic for Applications (VBA) permitting via the  
+WinHttp.WinHttpRequest.5.1 library to leverage REST API services.
 
-.. note:: The `AIMMS COM <https://documentation.aimms.com/deprecation-table.html#:~:text=AIMMS%20COM%20is%20considered%20%E2%80%98old%E2%80%99%20architecture>`_ interface is Deprecated. Here an alternative is presented.
+The power of AIMMS is to model and solve optimization problems.
+In a client-server architecture, on the AIMMS Cloud, this power is leveraged using AIMMS PRO REST API service.
+
+This article explains how to use Excel and VBA to leverage the optimization power of AIMMS.
+
+.. note:: 
+
+    This article also provides an alternative for the deprecation of ``aimmscom``.
+
+    Using AIMMS as an optimization tool inside an Excel workbook used to be facilitated 
+    via the Microsoft COM interface, see also 
+    `AIMMS COM <https://documentation.aimms.com/deprecation-table.html#:~:text=AIMMS%20COM%20is%20considered%20%E2%80%98old%E2%80%99%20architecture>`_ .
+
 
 Preparation
 --------------
@@ -25,41 +40,47 @@ Preparing to create a VBA Client of your own using AIMMS PRO Rest API Tasks, you
 Workbook
 ----------
 
-In this section, a simple example of an end user interface of a VBA app that deploys the CountTheStars interface as implemented by an AIMMS app.
+In this section, a simple example of an end user interface of a VBA app that deploys the CountTheStars 
+interface as implemented by an AIMMS app.
 
-Sheet1
+
+FrontEnd
 ^^^^^^^^^^
+
+.. image:: images/ExcelFrontEndSheet.png
+    :align: center
 
 * Cell B1 will contain the status of the request
 
 * Cell B2 will contain the number of stars
 
-* There are two buttons, to be executed in sequence:
+* There is one button:
 
-  * Make a CSV file from Sheet2.
-  
   * Execute the ``CountTheSTars`` service.
 
-Sheet2
+RequestDataSheet
 ^^^^^^^^^^^^^^^^^^
 
 This sheet contains sample input data.
+
+.. image:: images/ExcelRequestDataSheet.png
+    :align: center
 
 
 VBA
 ----------
 
-There are three routines, detailed in separate subsection
+There are three steps, each detailed in separate subsection
 
-Submit
+Initiate
 ^^^^^^^^^^^^^^^^^^^^
 
 In this sub section, we'll handle submitting a request for executing a task using VBA.
 
-Poll
+Monitor
 ^^^^^^^^^^^^^^^^^^^^
 
-Receive
+Receive result
 ^^^^^^^^^^^^^^^^^^^^
 
 References

@@ -24,8 +24,10 @@ a service, by using the **tasks methods** of the `AIMMS PRO REST API <https://do
    :maxdepth: 1
 
    /Articles/585/585-develop-service
+   /Articles/585/585-development-architecture
+   /Articles/585/585-example-conventions
    /Articles/585/585-AIMMS-server-app
    /Articles/585/585-Python-client
-   /Articles/585/585-AIMMS-client
    /Articles/585/585-VBA-client
+   /Articles/585/585-AIMMS-client
 

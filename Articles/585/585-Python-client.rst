@@ -6,6 +6,8 @@ In a client-server architecture, on the AIMMS Cloud, this power is leveraged usi
 Solving optimization problems may require varying amounts of time, and 
 a client of an AIMMS Service needs to initiate, monitor, and retrieve results from such a service.
 
+Python is used in many existing data science projects.
+
 In this article, we will explore how to use AIMMS services with a Python application. 
 We will cover the steps a Python client needs to take to interact with the AIMMS Server app effectively. 
 Specifically, we will focus on:
@@ -54,10 +56,13 @@ The URL to initiate such a task has one of the following two formats:
 #.  ``http://localhost::{port}/api/v1/{service}``
 
     This will run the task in AIMMS Developer on the machine of the end-user.
+    The apiKey header should not be used when using localhost for the AIMMS service.
 
 #.  ``https://{cloud}.aimms.cloud/pro-api/v1/{app}/{ver}/{service}``
 
     This will run the task in the AIMMS Cloud.
+    An apiKey header is required for using an AIMMS service via the AIMMS Cloud.
+    See https://documentation.aimms.com/cloud/rest-api.html#api-keys-and-scopes to obtain an apiKey.
 
 In :doc:`Develop, Test, and Deploy a Service<../585/585-develop-service>` 
 it is discussed how to make the service available locally and in an AIMMS Cloud.
@@ -86,7 +91,7 @@ Again, we have two formats, depending on running a local service, or deploying a
 
     When running the service via the AIMMS Cloud.
 
-A GET to one of these two URL's will get the Python app a json string containing status of the following form (json pretty printed):
+A GET to one of these two URL's will result in a json string of the following form (json pretty printed):
 
 .. code-block:: json
 
@@ -106,11 +111,12 @@ Remarks:
 
 * The service is the service called.
 
-* The start time is in UTC
+* The start time is in UTC.
 
-* The status "finished" means normal completion
+* The status ``finished`` means normal completion. Other status values are: ``queued``, ``starting``, ``solving``.
 
-* The queue time is the time between submit and an AIMMS Cloud rest session actually start executing the procedure associated with the service.
+* The queue time is the time between submit and an AIMMS Cloud rest session 
+  actually start executing the procedure associated with the service.
 
 * The run time is the run time of the procedure associated with the service.
 
@@ -131,7 +137,7 @@ The actual Python code to monitor the task is a straight forward while loop:
 Retrieving results
 -------------------
 
-Once the status of a task is finished, its results can be requested.  The URL's are.
+Once the status of a task is ``finished``, its results can be requested.  The URL's are.
 
 #.  ``http://localhost::{port}/api/v1/{id}/response``
 
@@ -141,7 +147,7 @@ Once the status of a task is finished, its results can be requested.  The URL's 
 
     When running the service via the AIMMS Cloud.
 
-Doing a GET
+Doing a GET to this URL is coded as follows in Python:
 
 .. code-block:: python   
 
@@ -149,8 +155,10 @@ Doing a GET
 
 and then the results can be retrieved as follows:
 
-print(f"task response code: {task_response.status_code}")
-print(f"task response json: {task_response.json()}")
+.. code-block:: python   
+
+    print(f"task response code: {task_response.status_code}")
+    print(f"task response json: {task_response.json()}")
 
 
 Summary
@@ -161,6 +169,14 @@ By following the steps outlined in this article, you can initiate tasks in the A
 and retrieve the final results with ease. 
 The structured communication between the Python client and AIMMS Server ensures a smooth workflow, 
 even for tasks that may require significant processing time.
+
+
+Next
+-----------
+
+:doc:`../585/585-VBA-client`
+
+
 
 
 

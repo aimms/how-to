@@ -88,20 +88,21 @@ A service is defined by associating a service name with an AIMMS procedure, as i
 
 Remarks:
 
-* Line 10: The annotation ``dex::ServiceName`` associates the procedure ``pr_countTheStars`` with the service ``countStars``.
+*   Line 10: The annotation ``dex::ServiceName`` associates the procedure ``pr_countTheStars`` with the service ``countStars``.
 
-* Lines 3-4:  When the procedure is invoked as a task, the string parameter  ``dex::api::RequestAttribute`` 
-    is available. Here it is used the name of the input file and output file to local string parameters.
+*   Lines 3-4:  When the procedure is invoked as a task, the string parameter  ``dex::api::RequestAttribute`` 
+    is available. Here it is used to pass the names of the input and output files.
 
-* Line 6: Call the workhorse (see sub section below).
+*   Line 6: Call the workhorse (see sub section below).
 
-**Similar** procedures define the same service, but use other data formats, such as CSV, Excel, Parquet, and XML.
-In addition, there are similar procedures to generate an input file.
+**Similar** procedures in this example application define the same service, but use other data formats, such as CSV, Excel, Parquet, and XML.
+In addition, there are similar procedures to generate a sample input file in the various data formats.
 
 Implementing a service
 ----------------------
 
-We are assuming here that you have developed a service; to count the number of asterisks in a dictionary of lines.
+The actual working code developed is the function ``fnc_numberOfStars``. 
+Here the connection is made between that function and the procedure defining the service above.
 
 .. code-block:: aimms 
     :linenos:
@@ -143,7 +144,7 @@ remarks:
 
 * Lines 6-11: Reading of input
 
-* Line 13: The actual computation is a simple function call.
+* Line 13: The actual computation as a simple function call.
 
 * Lines 16-19: Writing the output
 
@@ -216,7 +217,8 @@ To facilitate testing by client apps of the service, the service will need to be
     the service is started when a POST request of the above form is made; 
     there is no need to call ``dex::api::StartAPIService`` from within the service app.
 
-Actual Testing using clients will be discussed in the accompanying articles.
+:doc:`../585/585-development-architecture` contains a more detailed overview of 
+the communication between the server app and the client apps.
 
 Documenting the service
 --------------------------
@@ -248,6 +250,15 @@ With the DataExchange library, defining the interface is essentially a matter of
 #.  Selecting the procedure to run 
 
 It is good practice to implement unit tests and provide good and detailed documentation of your  services.
+
+
+Next
+-----------
+
+:doc:`../585/585-Python-client`
+
+
+
 
 .. spelling:word-list::
 
