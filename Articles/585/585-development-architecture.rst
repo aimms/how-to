@@ -122,3 +122,7 @@ Next
 
 :doc:`../585/585-example-conventions`
 
+.. spelling:word-list::
+
+    apiKey
+
