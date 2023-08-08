@@ -1,0 +1,12 @@
+.. The Python 3.10 client relies on the `requests <https://requests.readthedocs.io/en/latest/>`_ module.
+
+.. A Python app that tests the ``countStars`` service:  :download:`Python code <model/main.py>` 
+
+Multiple clients can use the service at hand, which leads to the following:
+
+.. image:: images/server-to-several-clients.png
+    :align: center
+
+
+tableLines@contents: Number of entries has been cut off (as it exceeds 50000). 
+Please consider increasing the value of the 'WebUI_Maximum_Number_Of_Entries_In_Widget' option in your project settings.
