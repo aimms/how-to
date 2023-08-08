@@ -6,7 +6,7 @@ Develop, Test, and Deploy an AIMMS Service
 .. 1. CountTheStars
 .. 2. FlowshopDatabase
 
-:download:`Apps used to illustrate the development of services <model/AimmsClient.zip>`
+:download:`Apps used to illustrate the development of services <model/apps.zip>`
 
 
 Developing a useful and robust REST API service requires that it is carefully developed, tested, and deployed.
