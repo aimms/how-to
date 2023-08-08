@@ -21,5 +21,5 @@ These topics help you to use the Data Exchange Library with your AIMMS project.
    /Articles/534/534-dealing-with-the-different-data-types
    /Articles/544/544-dex-and-oauth
    openAPI/index
-   Tasks/index
+   DevelopService/index
 

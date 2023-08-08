@@ -3,8 +3,8 @@
    :align: right
    :alt: AIMMS PRO REST API Help & Support
    
-Tasks
-=======================
+Develop an AIMMS Service
+========================
 
 .. meta::
    :description: Help and support to Develop, Test, and Deploy a Service by using the **tasks** methods of the AIMMS PRO REST API
@@ -29,5 +29,4 @@ a service, by using the **tasks methods** of the `AIMMS PRO REST API <https://do
    /Articles/585/585-AIMMS-server-app
    /Articles/585/585-Python-client
    /Articles/585/585-VBA-client
-   /Articles/585/585-AIMMS-client
 

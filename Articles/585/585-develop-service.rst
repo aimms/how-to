@@ -76,8 +76,8 @@ Once a service is available it can be used. In this part, we present several cli
     app inside an Excel workbook is shown. 
     The VBA app uses the win HTTP 5.1 library.
 
-#.  **AIMMS**: See :doc:`../585/585-AIMMS-client` 
-    The AIMMS Client App presented illustrates selected stress tests for the service at hand.
+.. #.  **AIMMS**: See :doc:`../585/585-AIMMS-client` 
+..     The AIMMS Client App presented illustrates selected stress tests for the service at hand.
     
 References
 ------------

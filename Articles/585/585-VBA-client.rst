@@ -3,13 +3,13 @@ Using AIMMS Services with a VBA client
 
 AIMMS is an elaborate tool for modeling optimization problems.
 Excel is a popular tool to model business problems.  
-This article is about leveraging the power of AIMMS in EXCEL.
+This article is about leveraging the power of AIMMS in EXCEL via HTTP requests.
 
 
 Preparation
 --------------
 
-In addition, Excel comes with Visual Basic for Applications (VBA) permitting via the  
+Excel comes with Visual Basic for Applications (VBA) permitting via the  
 WinHttp.WinHttpRequest.5.1 library to leverage REST API services.
 
 Preparing to create a VBA Client of your own using AIMMS PRO Rest API Tasks, you will have to:
@@ -43,13 +43,13 @@ FrontEnd
 .. image:: images/ExcelFrontEndSheet.png
     :align: center
 
-* Cell B1 will contain the status of the request
+* Cell ``B1`` will contain the status of the request as it executes.
 
-* Cell B2 will contain the number of stars
+* Cell ``B2`` will contain the number of stars upon finishing the request.
 
-* There is one button:
+* Cells ``B4-B8`` contain some additional info.
 
-  * Execute the ``CountTheSTars`` service.
+* The button labeled "Count the stars" will execute the ``CountTheSTars`` service in the AIMMS app.
 
 RequestDataSheet
 ^^^^^^^^^^^^^^^^^^
@@ -63,7 +63,14 @@ This sheet contains sample input data.
 VBA
 ----------
 
-There are three steps, each detailed in separate subsection
+There are four steps, each detailed in separate subsection
+
+
+Preparation
+^^^^^^^^^^^^^^
+
+Via the subroutine ``getConfig`` the configuration to be tested is read in following 
+the conventions set out in :doc:`../585/585-example-conventions`
 
 Initiate
 ^^^^^^^^^^^^^^^^^^^^
@@ -71,6 +78,7 @@ Initiate
 In this sub section, we'll handle submitting a request for executing a task using VBA.
 
 The code to initiate an AIMMS task is:
+
 
 .. code-block:: basic 
     :linenos:
@@ -104,6 +112,11 @@ The code to initiate an AIMMS task is:
         End If
 
     End Sub
+
+Here the ``apiURL`` is obtained via the subroutine ``DetURLTaskPostRequest``, 
+following :doc:`../585/585-development-architecture` for constructing ``url_submit``.
+
+
 
 Monitor
 ^^^^^^^^^^^^^^^^^^^^
@@ -144,10 +157,17 @@ The code to monitor the task is:
 
     End Sub
 
+Here the ``apiURL`` is obtained via the subroutine ``PollOnceDetermineURL``, 
+following :doc:`../585/585-development-architecture` for constructing ``url_poll``.
+
+
 Receive result
 ^^^^^^^^^^^^^^^^^^^^
 
 The code to receive the result is:
+
+.. code-block:: basic 
+    :linenos:
 
     Sub ReceiveResponse_usingWinHTTP51(apiURL As String, apiKey As String, useCloud As Integer, ByRef noStars As Integer)
     '
@@ -178,6 +198,10 @@ The code to receive the result is:
 
     End Sub
 
+Here the ``apiURL`` is obtained via the subroutine ``ReceiveResponseDetermineURL``, 
+following :doc:`../585/585-development-architecture` for constructing ``url_response``.
+
+
 References
 ---------------
 
@@ -198,11 +222,7 @@ References
 
 
 
-Next
------------
-
-:doc:`../585/585-AIMMS-client`
-
+ 
 
 
 
