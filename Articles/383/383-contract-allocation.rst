@@ -119,6 +119,7 @@ For the custom Excel file import, you can either copy the structure from the def
 
    .. code-block:: aimms
       :linenos:
+      
       block ! import a custom Excel file 
          ! we store the location of the file in string parameter UploadLocation
          UploadLocation := webui::GetIOFilePath(FileLocation);
