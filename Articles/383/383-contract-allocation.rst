@@ -85,7 +85,7 @@ This AIMMS project illustrates the use of a semi-continuous variable. A semi-con
 Language 
 --------
 
-In this example, there are two main ways to import data: by a custom Excel file, and by a pre-defined Excel which is currently on the projectc's main directory. You can choose which one to use on the inputs page trought the import dialog page.
+In this example, there are two main ways to import data: by a custom Excel file, and by a pre-defined Excel which is currently on the project's main directory. You can choose which one to use on the inputs page through the import dialog page.
 
 For the default data import, you will be importing 10 northwestern states for the contracts and 5 cities from that region for the producers. You can add more data freely without changing the sheets structure.  
 
