@@ -15,6 +15,7 @@ These topics instruct how to link your AIMMS model to databases, such as MS Acce
 .. toctree::
    :maxdepth: 1
 
+   /Articles/596/596-mysql-db-cloud
    /Articles/539/539-which-odbc-drivers
    /Articles/118/118-Connect-SQLite
    /Articles/129/129-MSACCESS-32bit-64bit
