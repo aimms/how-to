@@ -4,7 +4,7 @@
    :keywords: aimms, data, exchange, api, authorization, security, oauth
    
 
-Using the AIMMS Cloud Azure Data Lake Storage for integrating data
+Use the AIMMS Cloud Azure Data Lake Storage for integrating data
 ===================================================================
 
 .. image:: https://img.shields.io/badge/DEX_2.1.2.5-Minimum_DEX_Version-brightgreen
@@ -12,9 +12,110 @@ Using the AIMMS Cloud Azure Data Lake Storage for integrating data
 
 :download:`OAuth example download <download/OAuth-Example.zip>`
 
-Every AIMMS Cloud comes with an Azure Data Lake Gen2 storage account (ADLS). The Data Exchange Library (DEX) `provides functions to easily communicate with it <https://documentation.aimms.com/dataexchange/dls.html>`__, allowing you to import and export data onto/from the storage account. This route makes it easier to e.g. share exported data with external sources, or to import external data. On this how-to page you can find a functional example flow of its usage.
+Every AIMMS Cloud comes with an Azure Data Lake Gen2 storage account (ADLS). The Data Exchange Library (DEX) `provides functions to easily communicate with it <https://documentation.aimms.com/dataexchange/dls.html>`__, allowing you to import and export data onto/from the storage account. This route makes it easier to e.g. share exported data with external sources, or to import external data.
 
-In this article we will be demonstrating the following flow:
+The process that will be demonstrated in this article will be:
+* creating a new container on the ADLS;
+* transferring a file to that newly generated container (making it externally available, or to be re-used again in the same or other AIMMS apps);
+* retrieving that same file again.
+
+There are three possible flows to achieve this:
+
+#. **Using our ADLS toolkit**, which can, when uploaded to the cloud, handle all these tasks by simply pressing the related buttons.
+
+#. **Using the ADLS-DEX route**, in which we will use DEX functions specifically made for the ADLS to handle the flow.
+
+#. **Using the native DEX functions**, which are the 'native' steps to be taken.
+
+We will discuss flows 2 and 3 in detail below. If you want to follow flow 1, please refer to the related toolkit page.
+
+Prerequisites
+--------------
+
+#. You need to have the Data Exchange Library installed. Visit `this article <https://documentation.aimms.com/general-library/getting-started.html>`__ for instructions on how to do this.
+
+#. It is also good to understand the structure of an Azure Data Lake Storage. You can refer to `this page to learn more about it <https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-namespace>`__, but important to know for this article is to look at the storage as if it's a file explorer. The 'folders' are referred to as containers or file systems. It is possible to create new folders within other folders, creating so called paths. Files are always uploaded into a specified container. Files are also referred to as 'blobs' in the context of a Data Lake storage.
+
+Flow 1: the ADLS-DEX route
+---------------------------
+
+There are multiple DEX functions available to easily achieve what we want as they are created specifically for usage with ADLS. In this route you don't have to worry about the creation of a SAS token for authentication (see below) or the arguments you'll need to input, as the functions themselves will take care of everything.
+
+2.1 Creating a new container
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Creating a new container (or, as called on the ADLS, 'file system') is easily done:
+
+.. code-block:: aimms
+    
+		!create a unique name for the container
+		dex::schema::CreateUUID(testFS);
+		testFS := "fs-" + testFS;
+		
+		!create the container with the above defined name
+		dex::dls::CreateFileSystem(testFS);
+
+Without errors, the container will be created with the given name. 
+
+1.2 Upload a file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Now we can continue with uploading a file from AIMMS to that newly created container on the ADLS:
+
+.. code-block:: aimms
+    
+		dex::dls::UploadFile(
+			testFS, 
+			"DLSData/Azure Data lake v1/Bill Of Material.parquet",
+			"test"
+		);
+
+The arguments provided are:
+
+* the name of the container we want to upload to (which in this example is still the value in 'testFS');
+* the local path of the file to upload;
+* optional: a string parameter holding the path prefix of the location within the file system/container to which the file must be uploaded. If this path does not exist yet, it will automatically be created.
+
+If you are unsure what the file system on the ADLS looks like, you can use:
+
+* :any:`dex::dls::ListFileSystems()` to obtain the currently existing file systems (or: containers) on the ADLS;
+* :any:`dex::dls::ListFiles()` to obtain the currently existing files within a given file system, including path(s) when applicable.
+
+Note that it is also possible, with :any:`dex::dls::UploadFiles()`, to upload a set of files. If there are any subfolders within that set, these will automatically be created within the storage.
+
+Without errors, the will be uploaded as specified. 
+
+1.3 Download a file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Now let's download that same file from the ADLS:
+
+.. code-block:: aimms
+    
+		dex::dls::DownloadFile(
+			testFS, 
+			"Bill Of Material.parquet", 
+			"downloads"
+		);
+
+The arguments provided are: 
+- the name of the container we want to download from (which in this example is still the value in 'testFS');
+- the path of the file (including the file name, or only the file name if it is in the main container) within the file system on the ADLS to download;
+- optional: string parameter holding the local directory to which the file must be downloaded. In our example it is to the folder 'downloads' in the project folder.
+
+Without errors, the file will be downloaded as specified. Now you can use a DEX mapping to map the data in the file onto your AIMMS model. 
+
+2.4  Map the downloaded data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Now that the file has been downloaded into the specified folder, we can use it to map the data onto our AIMMS model. 
+
+
+
+Flow 2: the more in-depth DEX route
+-------------------------------------
+
+For the more in-depth route we will be achieving the same result as the easy route but instead of using predefined and simplified DEX functions, we will be using the native DEX functions which are also underlying the DEX functions as used in the easy route. The flow looks as follows:
 
 #. **First we will create a SAS token**, which is necessary for a secured communication with the ADLS, and create a dedicated container to import/export data from and to;
 
@@ -23,186 +124,50 @@ In this article we will be demonstrating the following flow:
 #. lastly we will **map data from a parquet file on the ADLS onto our AIMMS model** so it can be used within the application.
 
 
-Prerequisites
---------------
+2.1 Creating a SAS token
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. You need to have the Data Exchange Library installed. Visit `this article <https://documentation.aimms.com/general-library/getting-started.html>`__ for instructions on how to do this.
+In this example we will be using predefined DEX functions to create a container (or as it is called in ADLS: 'file system'). 
 
+Using a SAS (shared access signature) token for authentication is the easiest way to manage containers and files on the ADLS. There are three types of SAS tokens, two of which are supported by DEX and which you can create by yourself or by using the related DEX functions (recommended):
 
-Creating a SAS token
-------------------------------------------------------
+#. **An account SAS**. This type of SAS token allows for delegation of permissions. The related DEX function is :any:`dex::client::az::AccountSASQueryString()`.  
 
-Using a SAS token is the easiest way to access containers and files on the ADLS. There are two ways to obtain a SAS token:
+#. **A service SAS**. This type of SAS token can be used to pre-define access to a specific container or directory within the storage. The related DEX functions are :any:`dex::client::az::ContainerSASQueryString()` (for access to a specific container) or :any:`dex::client::az::DirectorySASQueryString()`.
 
-#. Within the AIMMS Cloud, DEX will automatically extract the storage account name and access key of the Data Lake Storage account associated with your AIMMS Cloud account and place them in the parameters :any:`dex::dls::StorageAccount` and :any:`dex::dls::StorageAccessKey`. No additional implementation is required.
+For both of the types of SAS tokens, you will need the storage account name and the storage access key. There are three ways to obtain these details:
 
-#. When developing on your desktop, you can provide a storage account name and access key to any Data Lake Storage account manually by providing values for the string parameter dex::dls::StorageAccount and dex::dls::StorageAccessKey via the file api-init/Data_Lake_Storage.txt.
+#. Within the AIMMS Cloud, DEX will automatically extract the storage account name and access key of the Data Lake Storage account associated with your AIMMS Cloud account and place them in the parameters :any:`dex::dls::StorageAccount` and :any:`dex::dls::StorageAccessKey`. No additional implementation is required; you can use these parameters in your requests.
 
+#. When developing on your desktop, you can provide a storage account name and access key to any Data Lake Storage account manually by providing values for the string parameter dex::dls::StorageAccount and dex::dls::StorageAccessKey via the file api-init/Data_Lake_Storage.txt. You can retrieve these details by using our toolkit and upload it to your AIMMS Cloud.
 
+#. Avoid having to use the account access key by using our toolkit app to have a SAS token created for you.
 
-You can see in the section at the bottom left that we've added two redirect URI's; one for usage from the AIMMS Cloud (URI 1) and one for usage from a locally opened AIMMS PRO (URI 2), so the connection should work both from a local connection as well as from an AIMMS app uploaded to the cloud. 
+Another note to make here is that a function was introduced to help you with the 'expiryDate' argument: :any:`dex::client::az::ExpiryDateFromNow()`, allowing you to input the number of seconds you want the token to be valid. We advice you to keep this amount as 'short' as possible, preferably for as long as is needed for the request to complete.
 
-If we take a look at the setup within AIMMS we see the following:
+In our example we want to create a container and will use the Account SAS for that. We will have to input some arguments:
 
 .. code-block:: aimms
-    
-		!empty UserInfo_Data, just to make sure we start off clean
-		empty dex::oauth::UserInfo_Data;
-
-		!load data into an APIClient we name 'Google'
-		dex::oauth::APIClients := data { Google };
-		
+    		
 		!set data for 'Google'
-		dex::oauth::APIClientStringData('Google',dex::oauth::apidata) :=$ data { 
-			authorizationEndpoint : "https://accounts.google.com/o/oauth2/v2/auth", 
-			tokenEndpoint : "https://oauth2.googleapis.com/token", 
-			openIDEndpoint : "https://www.googleapis.com/oauth2/v3/userinfo",
-			clientId : "xxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com", 
-			clientSecret : "xxxxxx-xxxxxxxxxxxxxxx", 
-			scope: "openid profile";
-		}
-
-The authorization endpoint, token endpoint and open ID endpoint should be provided by the API that requires authentication. The client ID and client secret are, in this example, provided by Google's OAuth 2.0 authentication system (as shown in the screenshot above). 
-
-Now, when we open the example project either locally or as an app uploaded on our cloud, we are able to run the procedure (in the WebUI by clicking the related button). The underlying procedure in AIMMS is:
-
-.. code-block:: aimms
-    
-		InitializeOAuthClients;
-		dex::oauth::GetUserInfo('Google');
-
-This will first send us to the Google authentication screen, where we will have to select the profile to authenticate with:
-
-.. image:: images/google_step3.png
-   :align: center
-
-After that we will receive the message:
-
-.. image:: images/google_step4.png
-   :align: center
-
-When this request has processed, you will see the requested data is provided:
-
-.. image:: images/google_step5.png
-   :align: center
+		dex::client::az::AccountSASQueryString(
+			accessKey     :  dex::dls::StorageAccessKey, 
+			accountName   :  dex::dls::StorageAccount, 
+			services      :  "bf", 
+			resourceTypes :  "sco", 
+			permissions   :  "rcwdl", 
+			expiryDate    :  dex::client::az::ExpiryDateFromNow(600[s]), 
+			ip            :  "", 
+			queryString   :  AdditionalQueryParameters
+		);
 
 
-Implementing the Authorization Code flow with Azure
-------------------------------------------------------
+2.2 Create a parquet file and send it to the container
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For Azure, the `OAuth 2.0 authentication flow <https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow>`__ is kind of similar to the one from Google, but of course set up from a different context. In this case, we can find the App Registrations in the Azure Active Directory within the `Azure Portal <https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow>`__. Once you've created the registration of the app, you will receive the necessary details:
+In this example we will be using predefined DEX functions to create a container (or as it is called in ADLS: 'file system'). 
 
-.. image:: images/azure_step1.png
-   :align: center
-
-The secret can be found (or created, if none exists yet) under 'Certificates & secrets', or by simply clicking on the link next to 'Client credentials' in the above screenshot. Redirect URI's should be added under 'Authentication':
-
-.. image:: images/azure_step2a.png
-   :align: center
-
-The correct scope(s) for the request should be added in the 'API permissions' section. Since for the Authentication Code Flow we will retrieve the user data from the logged in user, we don't need admin consent and the User.Read permission should be sufficient:
-
-.. image:: images/azure_step2.png
-   :align: center
-
-In the request we'll also add the 'offline_access' scope as defined by the documentation so we get a refresh token for extended access to resources. 
-If we take a look at the setup within AIMMS we see the following:
-
-.. code-block:: aimms
-
-		!empty UserInfo_Data, just to make sure we start off clean
-		empty dex::oauth::UserInfo_Data;
-
-		!load data into an APIClient we name 'MSACF'
-		dex::oauth::APIClients := data { MSACF };
-		
-		!set data for 'MSACF'
-		dex::oauth::APIClientStringData('MS',dex::oauth::apidata) :=$ data { 
-			authorizationEndpoint : "https://login.microsoftonline.com/[tenantID]/oauth2/v2.0/authorize", 
-			tokenEndpoint : "https://login.microsoftonline.com/[tenantID]/oauth2/v2.0/token", 
-			openIDEndpoint : "https://graph.microsoft.com/v1.0/me",
-			clientId : "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx", 
-			clientSecret : "xxxxxxxxxxxxxxxxxxxx", 
-			scope: "offline_access https://graph.microsoft.com/User.Read"
-		};
-
-The same arguments as the previous example should be provided, but of course with different data. Note that the tenantID should be provided in both the authorizationEndpoint and tokenEndpoint.
-We also perform the same request but with a different argument because we changed the name of the client:
-
-.. code-block:: aimms
-    
-		InitializeOAuthClients;
-		dex::oauth::GetUserInfo('MSACF');
-
-Now, when we open the example project either locally or as an app uploaded on our cloud, we are able to run the procedure and/or use the button in the WebUI to retrieve the requested user data. 
-
-
-Implementing the Client Credentials flow with Azure
-------------------------------------------------------
-
-The Client Credentials Code flow requires a slightly different setup to work. You can reuse the client that was set up for the Authorization Code Flow, but we need an additional API Permission within the Azure portal:
-
-.. image:: images/azure_step2c.png
-   :align: center
-
-In AIMMS, we will work with the :any:`dex::client::NewRequest` functionality. We first create the client:
-
-.. code-block:: aimms
-    
-		!read mappings
-		dex::ReadAllMappings;
-
-		!empty UserInfo_Data, just to make sure we start off clean
-		empty dex::oauth::UserInfo_Data;
-
-		!create client
-		dex::oauth::APIClients := data { MS };
-		dex::oauth::APIClientStringData('MS',dex::oauth::apidata) :=$ data { 
-			tokenEndpoint : "https://login.microsoftonline.com/[tenantID]/oauth2/v2.0/token", 
-			clientId : "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx", 
-			clientSecret : "xxxxxxxxxxxxxxxxxxxx", 
-			scope: "https://graph.microsoft.com/.default"
-		};
-
-Note that you should input the tenant ID into to tokenEndpoint.
-The scope has changed to the .default graph scope. We also left out the authorizationEndpoint (as we will now use a bearer) and the openIDEndpoint. 
-Now we can create the request and add the bearer token:
-
-.. code-block:: aimms
-
-	!first create the request
-	dex::client::NewRequest(
-		"getUser",
-		"https://graph.microsoft.com/v1.0/users/[identifier]",
-		'Callback',
-		responsefile:"Output.json",
-		tracefile:"Trace.xml"
-	);
-
-	!add bearer token
-	dex::oauth::AddBearerToken('MS', "getUser");
-
-As you can see we've added a reference to a Callback procedure, necessary for the request to be handled properly but which will also be used to map the retrieved results onto a string parameter (or catch any possible error and show the related message).
-We are also tracing the request of which we store the results in a file called Trace.xml. The actual response will be in Output.json. Both of these files can be accessed if you run the procedure(s) locally. Now we are ready to perform the request:
-
-.. code-block:: aimms
-
-	!perform the request
-	dex::client::PerformRequest(
-		"getUser"
-	);
-
-	!wait for response
-	dex::client::WaitForResponses(
-		1000
-	);
-
-	!close request properly
-	dex::client::CloseRequest(
-		"getUser"
-	);
-
-If the request was performed successfully, the response data is now in Output.json. Then we use a DEX-mapping to map the retrieved data onto the same parameters that we used for the previous requests as to be able to show it correctly in the WebUI.
+Using a SAS 
 
 .. spelling:word-list::
 
@@ -225,4 +190,7 @@ If the request was performed successfully, the response data is now in Output.js
 	tokenEndpoint
 	openIDEndpoint
 	tenantID
+	SAS
 	ADLS
+	blobs
+	blob
