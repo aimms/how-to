@@ -10,8 +10,6 @@ Use the AIMMS Cloud Azure Data Lake Storage for integrating data
 .. image:: https://img.shields.io/badge/DEX_2.1.2.5-Minimum_DEX_Version-brightgreen
 .. image:: https://img.shields.io/badge/AIMMS_2.50.1-Minimum_AIMMS_Version_PRO-brightgreen
 
-:download:`OAuth example download <download/OAuth-Example.zip>`
-
 Every AIMMS Cloud comes with an Azure Data Lake Gen2 storage account (ADLS). The Data Exchange Library (DEX) `provides functions to easily communicate with it <https://documentation.aimms.com/dataexchange/dls.html>`__, allowing you to import and export data onto/from the storage account. This route makes it easier to e.g. share exported data with external sources, or to import external data.
 
 The process that will be demonstrated in this article will be:
@@ -27,7 +25,7 @@ There are three possible flows to achieve this:
 
 #. **Using the native DEX functions**, which are the 'native' steps to be taken.
 
-We will discuss flows 2 and 3 in detail below. If you want to follow flow 1, please refer to the related toolkit page.
+Only flow 2 will be discussed in detail below. If you want to follow flow 1, please refer to the related toolkit page.
 
 Prerequisites
 --------------
@@ -103,71 +101,12 @@ The arguments provided are:
 - the path of the file (including the file name, or only the file name if it is in the main container) within the file system on the ADLS to download;
 - optional: string parameter holding the local directory to which the file must be downloaded. In our example it is to the folder 'downloads' in the project folder.
 
-Without errors, the file will be downloaded as specified. Now you can use a DEX mapping to map the data in the file onto your AIMMS model. 
+Without errors, the file will be downloaded as specified. Now you can use a `DEX mapping to map the data in the file onto your AIMMS model <https://documentation.aimms.com/dataexchange/mapping.html>`__. 
 
-2.4  Map the downloaded data
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Now that the file has been downloaded into the specified folder, we can use it to map the data onto our AIMMS model. 
-
-
-
-Flow 2: the more in-depth DEX route
+DEX native functionalities
 -------------------------------------
 
-For the more in-depth route we will be achieving the same result as the easy route but instead of using predefined and simplified DEX functions, we will be using the native DEX functions which are also underlying the DEX functions as used in the easy route. The flow looks as follows:
-
-#. **First we will create a SAS token**, which is necessary for a secured communication with the ADLS, and create a dedicated container to import/export data from and to;
-
-#. then we will **create a parquet file and save it on the ADLS**, as an example on how to export data;
-
-#. lastly we will **map data from a parquet file on the ADLS onto our AIMMS model** so it can be used within the application.
-
-
-2.1 Creating a SAS token
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-In this example we will be using predefined DEX functions to create a container (or as it is called in ADLS: 'file system'). 
-
-Using a SAS (shared access signature) token for authentication is the easiest way to manage containers and files on the ADLS. There are three types of SAS tokens, two of which are supported by DEX and which you can create by yourself or by using the related DEX functions (recommended):
-
-#. **An account SAS**. This type of SAS token allows for delegation of permissions. The related DEX function is :any:`dex::client::az::AccountSASQueryString()`.  
-
-#. **A service SAS**. This type of SAS token can be used to pre-define access to a specific container or directory within the storage. The related DEX functions are :any:`dex::client::az::ContainerSASQueryString()` (for access to a specific container) or :any:`dex::client::az::DirectorySASQueryString()`.
-
-For both of the types of SAS tokens, you will need the storage account name and the storage access key. There are three ways to obtain these details:
-
-#. Within the AIMMS Cloud, DEX will automatically extract the storage account name and access key of the Data Lake Storage account associated with your AIMMS Cloud account and place them in the parameters :any:`dex::dls::StorageAccount` and :any:`dex::dls::StorageAccessKey`. No additional implementation is required; you can use these parameters in your requests.
-
-#. When developing on your desktop, you can provide a storage account name and access key to any Data Lake Storage account manually by providing values for the string parameter dex::dls::StorageAccount and dex::dls::StorageAccessKey via the file api-init/Data_Lake_Storage.txt. You can retrieve these details by using our toolkit and upload it to your AIMMS Cloud.
-
-#. Avoid having to use the account access key by using our toolkit app to have a SAS token created for you.
-
-Another note to make here is that a function was introduced to help you with the 'expiryDate' argument: :any:`dex::client::az::ExpiryDateFromNow()`, allowing you to input the number of seconds you want the token to be valid. We advice you to keep this amount as 'short' as possible, preferably for as long as is needed for the request to complete.
-
-In our example we want to create a container and will use the Account SAS for that. We will have to input some arguments:
-
-.. code-block:: aimms
-    		
-		!set data for 'Google'
-		dex::client::az::AccountSASQueryString(
-			accessKey     :  dex::dls::StorageAccessKey, 
-			accountName   :  dex::dls::StorageAccount, 
-			services      :  "bf", 
-			resourceTypes :  "sco", 
-			permissions   :  "rcwdl", 
-			expiryDate    :  dex::client::az::ExpiryDateFromNow(600[s]), 
-			ip            :  "", 
-			queryString   :  AdditionalQueryParameters
-		);
-
-
-2.2 Create a parquet file and send it to the container
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-In this example we will be using predefined DEX functions to create a container (or as it is called in ADLS: 'file system'). 
-
-Using a SAS 
+The ADLS-DEX-functions used in the above flow are built with DEX-native functions. If you are interested in learning more about the underlying functionalities, you can access the functions by right clicking on the procedure and select the Attributes.
 
 .. spelling:word-list::
 
@@ -194,3 +133,6 @@ Using a SAS
 	ADLS
 	blobs
 	blob
+	DEX-native
+	ADLS-DEX-functions
+	testFS
