@@ -180,4 +180,13 @@ From here it can be accessed from within an AIMMS application for further usage.
 	hash-based
 	SHA256
 	Base64
+	dlsaimms
+	yyyy
+	ddThh
+	ssZ
+	dlsaimmscontainer
+	fs
+	eb70-468f-ae4d-61fcdc115124ae
+	fcdc
+	abovementioned
 
