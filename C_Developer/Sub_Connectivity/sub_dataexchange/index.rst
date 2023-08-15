@@ -22,4 +22,5 @@ These topics help you to use the Data Exchange Library with your AIMMS project.
    /Articles/544/544-dex-and-oauth
    openAPI/index
    DevelopService/index
+   /Articles/595/595-accessing-the-azure-datalake-externally.rst
 
