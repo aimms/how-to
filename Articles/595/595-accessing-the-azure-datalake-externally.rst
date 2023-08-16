@@ -166,6 +166,9 @@ From here it can be accessed from within an AIMMS application for further usage.
 	blob
 	blockblob
 	dnsSuffix
+	dfs
+	eb
+	ae
 	sv
 	ss
 	srt
