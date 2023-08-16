@@ -272,12 +272,18 @@ The following WebUI features are used:
 
 - `Side Panel <https://documentation.aimms.com/webui/side-panels-grd-pages.html#side-panel-grid-pages>`_
 
-- `Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
+- `Compact Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
+
+- `Dialog Page <https://documentation.aimms.com/webui/dialog-pages.html>`_ 
+
+- `Upload Widget <https://documentation.aimms.com/webui/upload-widget.html>`_  
+
+- `Download Widget <https://documentation.aimms.com/webui/download-widget.html>`_  
 
 
 UI Styling
 ----------
-For this project, we used a main css file named ``colors.css``, please check it out directly on the folder. Below there are the css files you will find with comments on what they change. 
+Below there are the ``css`` files used on this project. They are separated by changes on the theme variables, annotations, and custom css changes that are not yet included to theme variables.
 
 .. tab-set::
     .. tab-item:: theming.css
@@ -299,7 +305,7 @@ For this project, we used a main css file named ``colors.css``, please check it 
             --color_bg_workflow_current: var(--primaryDark); /*bg color when step is selected*/
             --color_workflow_active: var(--primaryDark); /*font and icon color when step is active*/
 
-            --color_bg_app-canvas: rgb(249, 249, 249); /*background color*/
+            --color_bg_app-canvas: url(/app-resources/resources/images/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain; /*background color*/
             --color_bg_widget-header: linear-gradient(180deg, rgba(255,255,255,1) 20%, var(--primary) 100%); /*widget header background color*/
             --border_widget-header: 2px solid var(--primaryDark); /*line color after widget header*/
 
@@ -313,11 +319,18 @@ For this project, we used a main css file named ``colors.css``, please check it 
     .. tab-item:: custom.css
 
       .. code-block:: text
-         :linenos:
+        :linenos:
 
-         ..aimms-widget[data-widget\.uri="gnt_shiftGantt"] .awf-dock.top{
+        .aimms-widget[data-widget\.uri="gnt_shiftGantt"] .awf-dock.top{
             display: none;
-         }
+        }
+
+        .tag-label>.label {
+            background: linear-gradient(180deg, rgba(255,255,255,1) 20%, var(--primary) 100%);
+            border-bottom: 2px solid var(--primaryDark);
+            font-weight: bold;
+            color: var(--color_text_default);
+        }            
    
     .. tab-item:: annotation.css
 
@@ -349,6 +362,9 @@ Minimal Requirements
 
 Release Notes
 --------------------   
+
+`v1.1 <https://github.com/aimms/employee-scheduling/releases/tag/1.1>`_ (25/07/2023)
+   Save Case dialog is now Case Manager dialog, where you can save a copy of a scenario and also load it.
 
 `v1.0 <https://github.com/aimms/employee-scheduling/releases/tag/1.0>`_ (30/06/2023)
    Updated to 4.96 and using the new theming variables. 

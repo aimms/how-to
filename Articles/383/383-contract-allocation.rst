@@ -4,10 +4,10 @@ Contract Allocation
    :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.95-ZIP:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.96-ZIP:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.95-Github:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.96-Github:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -85,8 +85,9 @@ This AIMMS project illustrates the use of a semi-continuous variable. A semi-con
 Language 
 --------
 
-In this example we used 10 northwestern states for the contracts and 5 cities from that region for the producers. To import the data into our model, we are currently using DEX library through Excel (``NothWesternStates.xlsx``). 
-You can add more data freely without changing the sheets structure.  
+In this example, there are two main ways to import data: by a custom Excel file, and by a pre-defined Excel which is currently on the project's main directory. You can choose which one to use on the inputs page through the import dialog page.
+
+For the default data import, you will be importing 10 northwestern states for the contracts and 5 cities from that region for the producers. You can add more data freely without changing the sheets structure.  
 
 .. aimms:procedure:: pr_importExcelData
 
@@ -100,7 +101,7 @@ This procedure will add and read the ``xml`` mapping available. Take a look at `
       mappingFile :  "Mappings/inputs.xml");
 
    dex::ReadFromFile(
-      dataFile         :  "NothWesternStates.xlsx", 
+      dataFile         :  "DefaultData.xlsx", 
       mappingName      :  "inputs", 
       emptyIdentifiers :  1, 
       emptySets        :  1, 
@@ -108,6 +109,49 @@ This procedure will add and read the ``xml`` mapping available. Take a look at `
 
    ep_actualContract := first(i_contract);
    ep_actualProducer := first(i_producer);
+
+
+For the custom Excel file import, you can either copy the structure from the default data Excel or download the template file. Add your data, and then, use the upload button to select the Excel to import. 
+
+.. aimms:procedure:: pr_uploadFile
+
+   This procedure will make you select a Excel file on your computer to import. 
+
+   .. code-block:: aimms
+      :linenos:
+      
+      block ! import a custom Excel file 
+         ! we store the location of the file in string parameter UploadLocation
+         UploadLocation := webui::GetIOFilePath(FileLocation);
+
+         dex::AddMapping("inputs", "Mappings/inputs.xml");
+
+         if dex::ReadFromFile(
+            dataFile         :  UploadLocation, 
+            mappingName      :  "inputs", 
+            emptyIdentifiers :  1, 
+            emptySets        :  1, 
+            resetCounters    :  1)
+         then
+            ! if successful, statusCode is set to 'OK' which will trigger the WebUI to show the message below in a grey box
+            StatusCode := webui::ReturnStatusCode('OK');
+
+            ! displaying the status message, and logging it in the WebUI messages
+            StatusDescription := "File was uploaded and read successfully";
+
+            FileDelete(UploadLocation);
+         endif;       
+
+      onerror ep_err do
+         ! setting the statusCode to 'ERROR'
+         statusCode := webui::ReturnStatusCode('ERROR');
+
+         !displaying a custom error message
+         statusDescription := "Error when reading file " + errh::Message( ep_err );
+         errh::MarkAsHandled(ep_err) ;
+
+         FileDelete(UploadLocation);
+      endblock;
 
 
 We also use create a page action and a dialog for users to export the results to several different DEX supported formats (Excel, JSON, CSV, etc.). 
@@ -145,12 +189,10 @@ This procedure will generate all the possible mappings in DEX based on current i
       actions :  s_actions, 
       onDone  :  'webui::NoOp1');
 
-    
-
 
 .. aimms:procedure:: pr_exportExcelData
 
-This procedure will that will write the file and provide it for download using the `download widget <https://documentation.aimms.com/webui/download-widget.html>`_.
+This procedure will write the file and provide it for download using the `download widget <https://documentation.aimms.com/webui/download-widget.html>`_.
 
 .. code-block:: aimms
    :linenos:
@@ -185,7 +227,6 @@ This procedure will that will write the file and provide it for download using t
    endif;
 
 
-
 .. seealso::
    To understand in depth check out `DEX documentation <https://documentation.aimms.com/dataexchange/index.html>`_.
 
@@ -215,6 +256,10 @@ The following WebUI features are used:
 - `Dialog Page <https://documentation.aimms.com/webui/dialog-pages.html>`_ 
 
 - `Download Widget <https://documentation.aimms.com/webui/download-widget.html>`_ 
+
+- `Upload Widget <https://documentation.aimms.com/webui/upload-widget.html>`_ 
+
+- `Button Widget <https://documentation.aimms.com/webui/button-widget.html>`_ 
 
 - `Selection Box Widget <https://documentation.aimms.com/webui/selection-box-widget-v2.html>`_ 
 
@@ -463,6 +508,9 @@ Minimal Requirements
 
 Release Notes
 --------------------   
+
+`v1.3 <https://github.com/aimms/contract-allocation/releases/tag/1.3>`_ (09/08/2023)
+   Correcting download procedure, adding new options when importing data. 
 
 `v1.2 <https://github.com/aimms/contract-allocation/releases/tag/1.2>`_ (15/06/2023)
    Updated to 4.95 and added dependent styling using annotation on Results page. 
