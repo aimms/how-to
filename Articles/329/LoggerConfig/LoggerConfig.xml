@@ -196,6 +196,14 @@
           -->
         <level value="info"/>
     </logger>
+    <logger name="AIMMS.Database.a7idb">
+        <!--- initial analysis of the database read or write statement.
+            o Info: model level
+            o DEBUG: statement level
+            o TRACE: field level
+          -->
+        <level value="info"/>
+    </logger>
     <logger name="AIMMS.Database.dbms.SqlExecuter">
         <!-- Connecting wih ODBC data sources and managing transactions -->
         <level value="info"/>
