@@ -24,7 +24,7 @@ Before we put a file onto the storage, we will first use a request to retrieve a
 
 We can use `the GET request for listing file systems <https://learn.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/filesystem/list>`_ for this:
 
-.. code-block::
+.. code-block:: guess
 	
 	GET https://{accountName}.{dnsSuffix}/?resource=account
 
@@ -34,13 +34,13 @@ We can use `the GET request for listing file systems <https://learn.microsoft.co
 
 For our example the URI will look like this:
 
-.. code-block::
+.. code-block:: guess
 	
 	GET https://dlsaimms.dfs.core.windows.net/?resource=account
 
 Now for authentication we will need to add a SAS token. In our example we will use an Account SAS token. This token is added as an extension of the URI and consists of several parameters. We'll show what the full URI looks like here and then describe the parameters in more detail in the next chapter:
 
-.. code-block::
+.. code-block:: guess
 	
 	GET https://dlsaimms.dfs.core.windows.net/?resource=account&sv=2022-11-02&ss=b&srt=s&sp=l&se=2023-08-10T16%3A41%3A12Z&spr=https&sig=[signature]
 
@@ -95,7 +95,7 @@ Pushing a file to the ADLS
 
 We need to use `the PUT blob request <https://learn.microsoft.com/en-us/rest/api/storageservices/put-blob>`_ from the Azure Blob Service REST API as this API allows us to put a 'blob' (file) with contents into our ADLS:
 
-.. code-block::
+.. code-block:: guess
 
 	PUT https://myaccount.blob.core.windows.net/mycontainer/myblob
 
@@ -105,13 +105,13 @@ We need to use `the PUT blob request <https://learn.microsoft.com/en-us/rest/api
 
 Taking these arguments into consideration, the URI will look like:
 
-.. code-block::
+.. code-block:: guess
 
 	PUT https://dlsaimms.blob.core.windows.net/test/Location%20Definition.parquet
 
 Important to note here is that a required header needs to be added to this request:
 
-.. code-block::
+.. code-block:: guess
 
 	x-ms-blob-type: <BlockBlob ¦ PageBlob ¦ AppendBlob>
 
@@ -129,7 +129,7 @@ Of course we will also need to add our SAS token for authentication, consisting 
 
 Making our eventual request:
 
-.. code-block::
+.. code-block:: guess
 	
 	PUT https://dlsaimms.blob.core.windows.net/test/Location%20Definition.parquet?sv=2022-11-02&ss=bf&srt=o&sp=rwc&se=2023-08-15T12%3A08%3A29Z&spr=https&sig=[signature]
 
