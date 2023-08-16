@@ -85,7 +85,7 @@ Looking back to the example of getting the file systems, we are using the follow
 * **ss:** the service that this SAS gives access to. In this example, 'b' stands for 'blob', indicating access to the blob storage.
 * **srt:** specifies the signed resource types that are accessible. In this example we use the value 's' as we need access to the service-level API.
 * **sp:** the signed permissions for the account SAS. These need to match with the specified signed resource type; in this example it is 'l' as we are using the List request.
-* **se:** the end date of the SAS token, formatted as yyyy-mm-ddThh:mm:ssZ in UTC time (where, in our example, %3A is the HTML-friendly replacement of ':'). In DEX the function :any:`dex::client::az::ExpiryDateFromNow()` was introduced to ease the construction of this argument.
+* **se:** the end date of the SAS token, formatted as yyyy-mm-ddThh:mm:ssZ in UTC time (where, in our example, %3A is the HTML-friendly replacement of ':'). In DEX the function :any:`dex::client::az::ExpiryDateFromNow` was introduced to ease the construction of this argument.
 * **spr:** optional, but added here to specify we are making a https request.
 * **sig:** the value for the signature is a unique string that's constructed from the fields that must be verified to authorize the request. It is a hash-based message authentication code (HMAC) that's computed over the string-to-sign combined with the storage access key by using the SHA256 algorithm. The result of that is encoded by using Base64 encoding. There are tools available for this, but we highly recommend using our ADLS toolkit to create a SAS token. 
 
@@ -123,7 +123,7 @@ Of course we will also need to add our SAS token for authentication, consisting 
 * **ss** = bf (we want to access blob and file system)
 * **srt** = o (we are putting an Object so need access to an object-level API)
 * **sp** = rwc (we'll need Read, Write and Create permissions for this request)
-* **se** is the end date of the SAS token, formatted as yyyy-mm-ddThh:mm:ssZ in UTC time (where, in our example, %3A is the HTML-friendly replacement of ':'). In DEX the function :any:`dex::client::az::ExpiryDateFromNow()` was introduced to ease the construction of this argument
+* **se** is the end date of the SAS token, formatted as yyyy-mm-ddThh:mm:ssZ in UTC time (where, in our example, %3A is the HTML-friendly replacement of ':'). In DEX the function :any:`dex::client::az::ExpiryDateFromNow` was introduced to ease the construction of this argument
 * **spr** = optional, but added here to specify we are making a https request
 * **sig** = the string-to-sign is a unique string that's constructed from the abovementioned fields that must be verified to authorize the request. The signature is a hash-based message authentication code (HMAC) that's computed over the string-to-sign and storage access key by using the SHA256 algorithm, and then encoded by using Base64 encoding. There are tools available for this, but we highly recommend using our ADLS toolkit to create a SAS token
 
@@ -154,7 +154,7 @@ Some screenshots from Postman:
    The headers for the request, showing the required 'x-ms-blob-type' header
 
 If the request succeeded you will get a 201 Created response, meaning the file is now stored in the 'test'-container on the ADLS.
-From here it can be accessed from within an AIMMS application for further usage. You can read more about this process in :doc:`../594/594-adls-data-integration.rst`.
+From here it can be accessed from within an AIMMS application for further usage. You can read more about this process in <a future article>.
 
 
 .. spelling:word-list::
