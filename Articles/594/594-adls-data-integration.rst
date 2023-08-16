@@ -76,10 +76,10 @@ The arguments provided are:
 
 If you are unsure what the file system on the ADLS looks like, you can use:
 
-* :any:`dex::dls::ListFileSystems()` to obtain the currently existing file systems (or: containers) on the ADLS;
-* :any:`dex::dls::ListFiles()` to obtain the currently existing files within a given file system, including path(s) when applicable.
+* :any:`dex::dls::ListFileSystems` to obtain the currently existing file systems (or: containers) on the ADLS;
+* :any:`dex::dls::ListFiles` to obtain the currently existing files within a given file system, including path(s) when applicable.
 
-Note that it is also possible, with :any:`dex::dls::UploadFiles()`, to upload a set of files. If there are any subfolders within that set, these will automatically be created within the storage.
+Note that it is also possible, with :any:`dex::dls::UploadFiles`, to upload a set of files. If there are any subfolders within that set, these will automatically be created within the storage.
 
 Without errors, the will be uploaded as specified. 
 
