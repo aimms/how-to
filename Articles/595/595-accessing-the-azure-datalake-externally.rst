@@ -111,7 +111,7 @@ Taking these arguments into consideration, the URI will look like:
 
 Important to note here is that a required header needs to be added to this request:
 
-.. code-block:: guess
+.. code-block:: none
 
 	x-ms-blob-type: <BlockBlob ¦ PageBlob ¦ AppendBlob>
 
