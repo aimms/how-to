@@ -53,12 +53,12 @@ In short, a task is:
 
 The URL to initiate such a task has one of the following two formats:
 
-#.  ``http://localhost::{port}/api/v1/{service}``
+#.  ``http://localhost::{port}/api/v1/tasks/{service}``
 
     This will run the task in AIMMS Developer on the machine of the end-user.
     The apiKey header should not be used when using localhost for the AIMMS service.
 
-#.  ``https://{cloud}.aimms.cloud/pro-api/v1/{app}/{ver}/{service}``
+#.  ``https://{cloud}.aimms.cloud/pro-api/v1/tasks/{app}/{ver}/{service}``
 
     This will run the task in the AIMMS Cloud.
     An apiKey header is required for using an AIMMS service via the AIMMS Cloud.
@@ -83,11 +83,11 @@ With the id of a task, we can start monitoring:
 
 Again, we have two formats, depending on running a local service, or deploying a service on the cloud:
 
-#.  ``http://localhost::{port}/api/v1/{id}``
+#.  ``http://localhost::{port}/api/v1/tasks/{id}``
 
     When running the service locally.
 
-#.  ``https://{cloud}.aimms.cloud/pro-api/v1/{id}``
+#.  ``https://{cloud}.aimms.cloud/pro-api/v1/tasks/{id}``
 
     When running the service via the AIMMS Cloud.
 
@@ -139,11 +139,11 @@ Retrieving results
 
 Once the status of a task is ``finished``, its results can be requested.  The URL's are.
 
-#.  ``http://localhost::{port}/api/v1/{id}/response``
+#.  ``http://localhost::{port}/api/v1/tasks/{id}/response``
 
     When running the service locally.
 
-#.  ``https://{cloud}.aimms.cloud/pro-api/v1/{id}/response``
+#.  ``https://{cloud}.aimms.cloud/pro-api/v1/tasks/{id}/response``
 
     When running the service via the AIMMS Cloud.
 
