@@ -13,8 +13,11 @@ Use the AIMMS Cloud Azure Data Lake Storage for integrating data
 Every AIMMS Cloud comes with an Azure Data Lake Gen2 storage account (ADLS). The Data Exchange Library (DEX) `provides functions to easily communicate with it <https://documentation.aimms.com/dataexchange/dls.html>`__, allowing you to import and export data onto/from the storage account. This route makes it easier to e.g. share exported data with external sources, or to import external data.
 
 The process that will be demonstrated in this article will be:
+
 * creating a new container on the ADLS;
+
 * transferring a file to that newly generated container (making it externally available, or to be re-used again in the same or other AIMMS apps);
+
 * retrieving that same file again.
 
 There are three possible flows to achieve this:
