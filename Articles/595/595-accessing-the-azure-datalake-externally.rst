@@ -13,7 +13,7 @@ Prerequisites
 
 #. In this example we will be using `Postman <https://www.postman.com/>`_ to manage the requests. If you want to reproduce this example, or build a flow where you push data from an external source, we recommend having **some software or tool with which you can test and configure outgoing API requests**.
 
-#. You can use **our ADLS toolkit app** to validate the existing files and file structures on the ADLS (e.g. to check if the file you've sent is visible on the storage). 
+#. You can use **our ADLS toolkit app** to validate the existing files and file structures on the ADLS (e.g. to check if the file you've sent is visible on the storage). `Visit the toolkit page here <https://how-to.aimms.com/Articles/598/598-datalake-tools.html>`__.
 
 #. To communicate with the ADLS we are using the `related Azure Data Lake API <https://learn.microsoft.com/en-us/rest/api/storageservices/data-lake-storage-gen2>`_ and the `Azure Blob REST API <https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api>`_ - creating a **SAS token for each request for authentication**. We discuss SAS tokens in further detail in one of the chapters below, but for the creation of a SAS token it is necessary to be able to compute a string using the SHA256 algorithm, and to encode that string by using Base64 encoding. There are default tools available for this, but you can also use the ADLS toolkit app to create a SAS token.
 
@@ -77,7 +77,7 @@ A bit more information on SAS tokens
 
 A full overview of the description of the parameters that are used in a SAS token can be `found on this page <https://learn.microsoft.com/en-us/rest/api/storageservices/create-account-sas#construct-an-account-sas-uri>`_. Each request could require its own SAS token as the values of the parameters might change, depending on the service you are using (listing a file system requires a different level of access than putting a file, for example) or even the type of SAS token you are creating. If you are going to use the Azure Data Lake Storage API we `recommend reading through the related documentation about SAS tokens <https://learn.microsoft.com/en-us/rest/api/storageservices/delegate-access-with-shared-access-signature>`_.
 
-The signature part of a SAS token is secured using the storage account key. If you don't know the value of this key and cannot use the ADLS toolkit application to create a SAS for you, you can `contact support <mailto:support@aimms.com>`__.
+The signature part of a SAS token is secured using the storage account key. If you don't know the value of this key and cannot use the `ADLS toolkit application <https://how-to.aimms.com/Articles/598/598-datalake-tools.html>`__ to create a SAS for you, you can `contact support <mailto:support@aimms.com>`__.
 
 Looking back to the example of getting the file systems, we are using the following parameter-value combinations:
  
