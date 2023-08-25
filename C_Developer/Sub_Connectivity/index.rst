@@ -18,9 +18,9 @@ We're aware that AIMMS is one of many tools in your workspace. This section prov
 .. toctree::
    :maxdepth: 2
 
+   sub_dataexchange/index
    sub_databases/index
    sub_excel_csv/index
    sub_http/index
-   sub_dataexchange/index
    sub_other_functions/index
 

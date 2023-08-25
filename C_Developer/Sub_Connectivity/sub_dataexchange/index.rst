@@ -23,4 +23,5 @@ These topics help you to use the Data Exchange Library with your AIMMS project.
    /Articles/594/594-adls-data-integration
    openAPI/index
    DevelopService/index
+   /Articles/595/595-accessing-the-azure-datalake-externally.rst
 
