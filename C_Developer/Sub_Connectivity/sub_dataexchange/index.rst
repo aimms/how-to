@@ -20,6 +20,7 @@ These topics help you to use the Data Exchange Library with your AIMMS project.
    /Articles/575/575-external-binding
    /Articles/534/534-dealing-with-the-different-data-types
    /Articles/544/544-dex-and-oauth
+   /Articles/594/594-adls-data-integration
    openAPI/index
    DevelopService/index
 
