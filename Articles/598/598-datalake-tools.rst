@@ -1,8 +1,8 @@
 DataLake Tools
 ========================
 .. meta::
-   :keywords: datalake, azure, sas token, container
-   :description: This article is for modelers who want to compare profiler runs of deployed applications.
+   :keywords: datalake, azure, sas token, container, data integration, file system, file management
+   :description: This article is for developers who want to integrate the Azure Data Lake Storage as part of their AIMMS account.
 
 .. image:: https://img.shields.io/badge/AIMMS_4.96-ZIP:_ProfilerRunCompare-blue
    :target: https://github.com/aimms/profiler-run-compare/archive/refs/heads/main.zip
@@ -16,9 +16,14 @@ DataLake Tools
 
 Introduction
 -------------
-For an existing application, especially one that has several features, a small change in data, environment, or code occasionally leads to unexpectedly different runtimes. 
-The location in the code of that application, where these differences manifest themselves, is not always obvious. 
-In such circumstances, comparing profiler results may be a useful next step to locate the code where the significant differences in runtimes manifest themselves.
+Every AIMMS Cloud account is by default equipped with an Azure Data Lake Storage Gen2 (ADLS). You can use this storage account to store all types of files that you want to integrate with your AIMMS application. You can also use it to store files generated based on the output of your optimizations, as to make them available to an external source.
+
+The `Data Exchange Library <https://documentation.aimms.com/dataexchange/api.html#data-lake-storage-file-systems>`__ offers functions to easily interact with the ADLS.  
+
+This toolkit offers you the possibility to easily create a SAS token which is needed for authentication if you want to access the ADLS from an external source. It also allows you to fetch and manage the currently known file systems ('containers') on the ADLS and the paths (folders) and files in it. 
+
+Download this toolkit and upload it to your cloud. From there, there is no further need for authentication - the Data Exchange library will automatically extract the storage account name and access key of the Data Lake Storage account associated with your AIMMS Cloud account. Read more about the ADLS for the AIMMS Cloud `here <https://documentation.aimms.com/dataexchange/dls.html>`__. 
+
 
 Instructions 
 -------------
@@ -58,7 +63,7 @@ Configuring ADLS Page
 Minimal Requirements
 --------------------   
 
-To work with this toolkit, you will need a PRO Cloud account with a datalake.
+To work with this toolkit, you will need a PRO Cloud account with an Azure Data Lake Storage. You can check if your cloud account is equipped with one, open the uploaded toolkit on your cloud and go to the 'New SAS Token' section. If you see a name in the 'Storage Account' section, your account has an ADLS. If you do not see a name here, please contact AIMMS Support.
 
 .. spelling:word-list::
 
