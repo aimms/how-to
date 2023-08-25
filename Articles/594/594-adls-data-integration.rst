@@ -28,7 +28,7 @@ There are three possible flows to achieve this:
 
 #. **Using the native DEX functions**, which are the 'native' steps to be taken.
 
-Only flow 2 will be discussed in detail below. If you want to follow flow 1, please refer to the related toolkit page.
+Only flow 2 will be discussed in detail below. If you want to follow flow 1, please `refer to the toolkit page here <https://how-to.aimms.com/Articles/598/598-datalake-tools.html>`__.
 
 Prerequisites
 --------------
