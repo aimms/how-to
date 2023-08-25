@@ -73,7 +73,7 @@ If you don't know how to set your SAS Token, on ``3`` you will have further Azur
 Understanding 'Configuring ADLS' Page
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Upon entering this page, you will see the list of file system your datalake have. 
-You can create and delete file system trought the buttons on ``1``. Just be careful when deleting, this action cannot be undone!
+You can create and delete file system through the buttons on ``1``. Just be careful when deleting, this action cannot be undone!
 
 .. image:: images/configuring-adls.png
     :align: center
@@ -103,5 +103,5 @@ Release Notes
 .. spelling:word-list::
 
    github
-
+   datalake
    
