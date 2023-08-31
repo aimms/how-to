@@ -116,7 +116,7 @@ First we construct the observation.
 .. code-block:: python 
     :linenos:
 
-    # Acually an observation has many attributes, but we use only these two here.
+    # Usually an observation has many attributes, but we use only these two here.
     class Observation(BaseModel):
         comment: str  # An observed text
         target: int  # A verified zero / one whether this text is considered toxic.
@@ -161,7 +161,7 @@ Remarks:
 
 *   Line 2: Create the app, entry point for the provided services.
 
-Next, for every method, here just one, name its inputs and outputs, as specified using Pydantic:
+Next, for every path, here just one, name its inputs and outputs, as specified using Pydantic:
 
 .. code-block:: python 
     :linenos:
@@ -182,6 +182,11 @@ Deploying the Python Service with Uvicorn
 
 And now running the service using `Uvicorn <https://www.uvicorn.org/>`_
 
+.. code-block:: python 
+    :linenos:
+
+    if __name__ == "__main__":
+        uvicorn.run("main:app", host="", port=8000, log_level="info")
 
 Extras from the combo Pedantic, FastAPI and uvicorn
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -206,8 +211,8 @@ There are a few extras that come with this combo, and, admittedly, I've grown us
 
 #.  Get OpenAPI 3.1 specification.  
     An OpenAPI 3.1 specification of the interface can also be easily obtained, 
-    by doing a HTTP Get on ``http://localhost:8000/openapi.json``  and 
-    there are various `tools <https://openapi.tools/>`_ to work with such a specification.
+    by doing a HTTP Get on ``http://localhost:8000/openapi.json``. 
+    Note that there are various `tools <https://openapi.tools/>`_ to work with such a specification.
     
     Using `Postman <https://www.postman.com/>`_, obtaining such a specification looks as follows:
 
@@ -229,7 +234,8 @@ There are a few extras that come with this combo, and, admittedly, I've grown us
 AIMMS Integration
 -----------------
 
-The architecture of the AIMMS WebUI app regarding using this service :doc:`looks as follows<../561/561-openapi-overview>`
+The architecture of the AIMMS WebUI app, equipped with a generated OpenAPI library, regarding 
+using this service :doc:`looks as follows<../561/561-openapi-overview>`:
 
 .. image:: images/client-server-openapi-lib.png
     :align: center
@@ -346,7 +352,7 @@ Using Python Services in AIMMS Developer
 
 Remarks:
 
-#.  In the image above, the block from line 9 to 33 passes the data from the client to the interface. 
+#.  In the code fragment above, lines 11 to 23 pass the data from the client to the OpenAPI library. 
     This corresponds to action 1 in the image above. 
     
 #.  On line 40, the call to the OpenAPI library is made to convert its data structures (action 2 in the image above)
@@ -404,14 +410,14 @@ Remarks:
 The procedure ``pr_responseHookTuples`` specified above, looks a bit bulky, but the essence,
 for a successful call, verified by HTTP status code 200, is on line 13. 
 Subsequently, lines 14, 15 are used for the communication to the end-user.
-The remainder of this procedure is to notify and track when needed.
+The remainder of this procedure is to notify, handle errors, and track when needed.
 
 Regarding the above image: action 3 is taken care of by the ``callback`` procedure 
 declared next to the ``apiCall`` procedure called at the end of ``pr_callBiasInAITuples``.
 Action 4, corresponds to the procedure ``pr_responseHookTuples`` just discussed.
 
 The above provides a nice framework that can be used on a development machine.
-But how about deploying the apps created?  This will be discussed in the next chapter.
+But how about deploying the apps created? This will be discussed in the next chapter.
 
 Deploying Python Services on AIMMS Cloud
 -----------------------------------------------------
@@ -458,9 +464,9 @@ the service can be launched on the AIMMS Cloud using procedure ``pro::service::L
     :linenos:
 
     _p_retCodeLaunchService := pro::service::LaunchService(
-        connectionURI      :  _sp_remoteURL, ! output
-        jsonSpec           :  "biasInAIService/biasInAI.json", ! json file containing service configuration
-        storedApp          :  "pro://" + _sp_appStoragePath); ! location of the zip file containing the Python script.
+        connectionURI :  _sp_remoteURL,                   ! output, to address the service started.
+        jsonSpec      :  "biasInAIService/biasInAI.json", ! input, json file containing service configuration.
+        storedApp     :  "pro://" + _sp_appStoragePath);  ! input, location of the zip file containing the Python script.
 
 If this call is successful, there is one small statement that should not be forgotten, namely to specify which 
 server the generated OpenAPI AIMMS library should use:
