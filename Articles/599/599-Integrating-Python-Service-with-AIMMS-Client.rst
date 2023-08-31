@@ -188,7 +188,7 @@ Extras from the combo Pedantic, FastAPI and uvicorn
 
 There are a few extras that come with this combo, and, admittedly, I've grown used to those extras being present:
 
-#.  Get Swagger dynamic interface docs. By entering the URL ``http://localhost:8000/docs`` you will get the interface documentated.
+#.  Get Swagger dynamic interface docs. By entering the URL ``http://localhost:8000/docs`` you will get the interface documented.
     It looks as follows:
 
     .. raw:: html
@@ -481,8 +481,20 @@ Conclusion
 .. with Python services for advanced modeling and optimization. 
 .. Discuss potential use cases and future developments in this integration.
 
-Modern powerful tools from both Python (Pedantic, FastAPI, uvicorn), and 
-AIMMS (Data Exchange library, in particular, generating OpenAPI clients) make
-connecting a Python service to an AIMMS app relatively straightforward.
+Modern tools from 
 
+* Python, especially the libraries Pedantic, FastAPI, and uvicorn, 
 
+* AIMMS Data Exchange library, especially the generation of OpenAPI clients, and
+
+* AIMMS Cloud, especially the new feature to launch additional services
+
+make connecting a Python service to an AIMMS app, and 
+subsequently deploying the combo, relatively straightforward.
+
+.. spelling:word-list::
+
+   Pedantic
+   FastAPI
+   uvicorn
+   logit
