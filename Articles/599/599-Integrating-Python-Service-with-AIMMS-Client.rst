@@ -1,6 +1,10 @@
 Develop a Python service and integrate it into AIMMS
 =====================================================
 
+.. Call this feature an experimental feature.
+
+.. Show how to test Python/Aimms locally.
+
 In today's data-driven world, the integration of powerful  
 machine learning capabilities into optimization applications is becoming increasingly important. 
 This article explores the seamless integration of AIMMS  
@@ -418,6 +422,29 @@ Action 4, corresponds to the procedure ``pr_responseHookTuples`` just discussed.
 
 The above provides a nice framework that can be used on a development machine.
 But how about deploying the apps created? This will be discussed in the next chapter.
+
+Local testing
+------------------------------
+
+Once the AIMMS app and the Python app are finished, it is possible to test the combo on your development machine.
+
+First start the Python app, it should come up with something like:
+
+.. code-block:: none
+
+    INFO:     Started server process [6320]
+    INFO:     Waiting for application startup.
+    INFO:     Application startup complete.
+    INFO:     Uvicorn running on http://:8000 (Press CTRL+C to quit)
+
+After this you can start the AIMMS App in AIMMS Developer.
+Navigate to page ``results``, and enter a phrase for which you want the toxicity to be tested.
+Send it to the Python service by clicking on the two masks in the lower right of the screen.
+
+After a minute or so, the response should come back.
+
+Note that training takes place for every request made; there is no caching of the computed machine learning model built in yet. (Clearly one of our todo's).
+
 
 Deploying Python Services on AIMMS Cloud
 -----------------------------------------------------
