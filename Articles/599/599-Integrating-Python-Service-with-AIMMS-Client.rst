@@ -306,7 +306,7 @@ Using Python Services in AIMMS Developer
                 := element( s_ids, val( biasInAITuples::_BiasInAIInputTuples::_observations::i_observations ) );
                        
                 biasInAITuples::_BiasInAIInputTuples::_observations::comment_( ep_loc_callInstance, biasInAITuples::_BiasInAIInputTuples::_observations::i_observations) 
-                := sp_commentText( ep_loc_iterToId( biasInAITuples::_BiasInAIInputTuples::_observations::i_observations ) )
+                := sp_commentText( ep_loc_iterToId( biasInAITuples::_BiasInAIInputTuples::_observations::i_observations ) );
             
                 biasInAITuples::_BiasInAIInputTuples::_observations::target(ep_loc_callInstance, biasInAITuples::_BiasInAIInputTuples::_observations::i_observations) 
                 := bp_target( ep_loc_iterToId( biasInAITuples::_BiasInAIInputTuples::_observations::i_observations ) ) ;
@@ -381,9 +381,7 @@ Remarks:
                     raise error formatString("biasInAITuples::isToxic(%s)/%s failed ( status: %e, error: %e): %s",
                         sp_log_cmtShort,  ep_in_callInstance,
                         biasInAITuples::api::CallStatusCode(ep_in_callInstance), 
-                        biasInAITuples::api::CallErrorCode(ep_in_callInstance),
-                        "" ! Todo: work on the error elaboration!
-                        );
+                        biasInAITuples::api::CallErrorCode(ep_in_callInstance), "" );
             
             endswitch;
         }
@@ -487,7 +485,7 @@ Modern tools from
 
 * AIMMS Data Exchange library, especially the generation of OpenAPI clients, and
 
-* AIMMS Cloud, especially the new feature to launch additional services
+* AIMMS Cloud, especially the feature to launch additional services
 
 make connecting a Python service to an AIMMS app, and 
 subsequently deploying the combo, relatively straightforward.
