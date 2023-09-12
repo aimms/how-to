@@ -6,7 +6,7 @@ AIMMS PRO API
 
 .. note::
 
-   Please use the `AIMMS PRO REST API <https://documentation.aimms.com/pro/rest-api.html#aimms-pro-rest-api>`_ for new projects instead.
+   Please use the `AIMMS PRO REST API <https://documentation.aimms.com/cloud/rest-api.html#aimms-pro-rest-api>`_ for new projects instead.
 
 .. toctree::
    :maxdepth: 1
