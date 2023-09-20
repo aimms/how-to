@@ -7,10 +7,18 @@ Exchange data with the AIMMS Cloud Platform
 
 This document aims to introduce you to the options for exchanging data with the `AIMMS Cloud Platform <https://documentation.aimms.com/cloud/>`_.
 
-Via an Application Database 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Using the Azure Data Lake Storage Gen2 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Notify AIMMS that you would like to use this Application Database into your AIMMS Cloud, we will take the first steps to create the database. 
+Every AIMMS Cloud account is by default equipped with an Azure Data Lage Storage Gen2. It can be utilized for data integration by using the Azure API's. 
+An article describing this functionality in depth `can be found here <file:///C:/Users/Roxanna/Documents/git/how-to/_build/html/Articles/594/594-adls-data-integration.html>`_.
+You can find an article about `how to use it for data integration from an external source here <file:///C:/Users/Roxanna/Documents/git/how-to/_build/html/Articles/595/595-accessing-the-azure-datalake-externally.html>`_.
+
+
+Via an AIMMS Cloud Application Database 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Notify AIMMS that you would like to use the Application Database into your AIMMS Cloud, we will take the first steps to create the database. 
 With the database ready to use, your IT team then needs to complete the parametrization and VPN tunnel set-up, as described `in detail here <https://documentation.aimms.com/cloud/db-config.html>`__. 
 You can now put in place the writes and reads to and from the application database from your information systems. Feel free to `read more in depth  here <https://how-to.aimms.com/Articles/596/596-mysql-db-cloud.html>`_.
 
