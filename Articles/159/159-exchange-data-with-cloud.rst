@@ -11,8 +11,8 @@ Using the Azure Data Lake Storage Gen2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Every AIMMS Cloud account is by default equipped with an Azure Data Lage Storage Gen2. It can be utilized for data integration by using the Azure API's. 
-An article describing this functionality in depth `can be found here <file:///C:/Users/Roxanna/Documents/git/how-to/_build/html/Articles/594/594-adls-data-integration.html>`_.
-You can find an article about `how to use it for data integration from an external source here <file:///C:/Users/Roxanna/Documents/git/how-to/_build/html/Articles/595/595-accessing-the-azure-datalake-externally.html>`_.
+An article describing this functionality in depth `can be found here <https://how-to.aimms.com/Articles/594/594-adls-data-integration.html>`_.
+You can find an article about `how to use it for data integration from an external source here <https://how-to.aimms.com/Articles/595/595-accessing-the-azure-datalake-externally.html>`_.
 
 
 Via an AIMMS Cloud Application Database 
