@@ -161,7 +161,7 @@ Release and feature notes, as well as version number control (which can not repe
 CD - Deployment on the cloud
 ------------------------------
 
-Publishing and deployment of the application on the cloud can be achieved via the AIMMS PRO Rest API. Please follow the information on the `app management documentation <https://documentation.aimms.com/pro/rest-api.html#managing-apps>`_ .
+Publishing and deployment of the application on the cloud can be achieved via the AIMMS PRO Rest API. Please follow the information on the `app management documentation <https://documentation.aimms.com/cloud/rest-api.html#managing-apps>`_ .
 
 You can control which users can access to each application and version via the Rest API. 
 
