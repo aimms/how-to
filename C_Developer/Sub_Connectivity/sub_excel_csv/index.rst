@@ -10,7 +10,7 @@ AIMMSXL Library (AXLL)
    :description: Help and support with connecting AIMMS to Excel and CSV files using AXLL.
 
 
-Here you will find articles on how to connect your AIMMS aplication to Excel and CSV files using AXLL Library.
+Here you will find articles on how to connect your AIMMS application to Excel and CSV files using AXLL Library.
 
 .. toctree::
    :maxdepth: 1
