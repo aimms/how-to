@@ -3,8 +3,8 @@
    :align: right
    :alt: AIMMS Data Exchange Library Help & Support
    
-Data Exchange Library
-=======================
+Data Exchange Library (DEX)
+===========================
 
 .. meta::
    :description: Help and support with using the Data Exchange library in AIMMS.
