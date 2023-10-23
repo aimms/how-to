@@ -18,7 +18,6 @@ These topics instruct how to link your AIMMS model to databases, such as MS Acce
    /Articles/596/596-mysql-db-cloud
    /Articles/539/539-which-odbc-drivers
    /Articles/118/118-Connect-SQLite
-   /Articles/129/129-MSACCESS-32bit-64bit
    /Articles/185/185-connect-to-access-database
    /Articles/157/157-write-selected-tables
    /Articles/343/343-use-metadata-in-write-to-table
