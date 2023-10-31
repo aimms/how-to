@@ -21,6 +21,8 @@ AIMMS apps can be made available in various ways: Windows server, Linux server, 
    Sub_Client_Server/index
    Sub_PRO_API/index
    Sub_CDM/index
+   Sub_Miscellaneous/index
+
 
    
    

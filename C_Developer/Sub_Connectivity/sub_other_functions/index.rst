@@ -19,7 +19,6 @@ These topics cover connecting various other types of functions to your AIMMS pro
    /Articles/153/153-external-haversine
    /Articles/133/133-External-Functions-InputData
    /Articles/114/114-execute
-   /Articles/257/257-run-batch-commands-in-aimms-command-line-tool
    /Articles/124/124-tableau-integration
    /Articles/277/277-aimms-with-gurobi
    /Articles/108/108-kb14-call-to-from-aimms
