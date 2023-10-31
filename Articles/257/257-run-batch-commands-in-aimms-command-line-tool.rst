@@ -5,9 +5,6 @@ Run Batch Commands with AIMMS Command Line Tool
    :description:  A brief overview for using AIMMS Command Line Tool.
    :keywords: AimmsCmd, Batch, command line, cmd
 
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
 
 In the integrated environment, or on a Linux system, you can control an AIMMS project externally using a command line tool.
 
