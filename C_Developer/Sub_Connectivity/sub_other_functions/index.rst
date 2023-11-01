@@ -18,7 +18,6 @@ These topics cover connecting various other types of functions to your AIMMS pro
    /Articles/104/104-using-email-client-library
    /Articles/153/153-external-haversine
    /Articles/133/133-External-Functions-InputData
-   /Articles/114/114-execute
    /Articles/124/124-tableau-integration
    /Articles/277/277-aimms-with-gurobi
    /Articles/108/108-kb14-call-to-from-aimms

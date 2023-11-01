@@ -16,3 +16,4 @@ This section offers miscellaneous information about deployment in AIMMS.
    :maxdepth: 1
 
    /Articles/257/257-run-batch-commands-in-aimms-command-line-tool
+   /Articles/114/114-execute
