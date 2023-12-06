@@ -1,15 +1,20 @@
 Getting Started with AIMMS
 ===========================
 
-As a beginner AIMMS user, the best starting point is the `AIMMS E-Learning Center <https://aimms.getlearnworlds.com/developer-courses/>`_.
- 
+New coding with AIMMS? We advice you to start by Modeling with AIMMS trail of courses and then to the User Interface with AIMMS trail. 
+If you are not a beginner, you may prefer to start with other courses, either way, all available courses are listed at the `AIMMS E-Learning Center <https://aimms.getlearnworlds.com/developer-courses/>`_. 
+Below you can also find a modeling challenge to test your knowledge! 
+
 AIMMS E-Learning Center
 ------------------------
+
+These are the indicated trails. Please let us know if you are missing something! 
 
 .. card:: Modeling with AIMMS
 
     This trail of courses is for newcomers that wants to understand how to create a model in AIMMS. 
     Here you will also learn how to import data, and how to create a simple user interface.
+
     - `Modeling with AIMMS I <https://aimms.getlearnworlds.com/course/modeling-with-aimms-i>`_
     - `Modeling with AIMMS II <https://aimms.getlearnworlds.com/course/modeling-with-aimms-ii>`_
 
@@ -17,6 +22,7 @@ AIMMS E-Learning Center
 
     This trail of courses is all about user interface.
     Here you create an application using and understanding all widgets available in WebUI.
+
     - User Interface with AIMMS I - COMING SOON!
     - User Interface with AIMMS II - COMING SOON! 
 
@@ -27,7 +33,7 @@ AIMMS E-Learning Center
     - `Execution Efficiency <https://aimms.getlearnworlds.com/course/execution-efficiency>`_
     - Units of Measurement - COMING SOON!
 
-AIMMS Learning Game
+AIMMS Game Challenge
 ---------------------
 Extend your AIMMS knowledge and modeling skills with an AIMMS based-game. It follows a witch apprentice who rises in rank in the witches' guild by solving increasingly difficult modeling and AIMMS assignments.
 

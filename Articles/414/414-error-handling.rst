@@ -22,5 +22,5 @@ Error Handling, Error Handler
 
 .. tip::
     
-    You may refer to our online training about error handling `following this link <https://academy.aimms.com/course/view.php?id=50>`__.
+    You may refer to our online training about error handling `following this link <https://aimms.getlearnworlds.com/course/error-handling>`__.
 

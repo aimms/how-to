@@ -11,7 +11,7 @@ Customize Settings for Errors and Warnings
 
 .. tip::
     
-    You may refer to our online training about error handling `following this link <https://academy.aimms.com/course/view.php?id=50>`__.
+    You may refer to our online training about error handling `following this link <https://aimms.getlearnworlds.com/course/error-handling>`__.
 
 This article explains how you can control errors and warnings within AIMMS. We'll include some useful tips to create better models.
 
