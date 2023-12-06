@@ -1,18 +1,31 @@
-Getting Started Tutorials
-=========================
+Getting Started with AIMMS
+===========================
 
-As a beginner AIMMS user, the best starting point is the Tutorials.
+As a beginner AIMMS user, the best starting point is the `AIMMS E-Learning Center <https://aimms.getlearnworlds.com/developer-courses/>`_.
  
-.. toctree::
-    
-    /Articles/505/index
+AIMMS E-Learning Center
+------------------------
 
-.. Tutorial for Beginners
-.. -------------------------
+.. card:: Modeling with AIMMS
 
-The Tutorial for Beginners is a one-hour tutorial designed as the bare minimum needed to build simple models using the AIMMS Model Explorer. Data values are entered manually using data pages, and you can build a page with objects to view and modify the data. 
+    This trail of courses is for newcomers that wants to understand how to create a model in AIMMS. 
+    Here you will also learn how to import data, and how to create a simple user interface.
+    - `Modeling with AIMMS I <https://aimms.getlearnworlds.com/course/modeling-with-aimms-i>`_
+    - `Modeling with AIMMS II <https://aimms.getlearnworlds.com/course/modeling-with-aimms-ii>`_
 
-.. * :doc:`../505/index`
+.. card:: User Interface with AIMMS
+
+    This trail of courses is all about user interface.
+    Here you create an application using and understanding all widgets available in WebUI.
+    - User Interface with AIMMS I - COMING SOON!
+    - User Interface with AIMMS II - COMING SOON! 
+
+.. card:: Other Courses
+
+    - `Databases and Data Connection <https://aimms.getlearnworlds.com/course/databases-data-connection>`_
+    - `Error Handling <https://aimms.getlearnworlds.com/course/error-handling>`_
+    - `Execution Efficiency <https://aimms.getlearnworlds.com/course/execution-efficiency>`_
+    - Units of Measurement - COMING SOON!
 
 AIMMS Learning Game
 ---------------------
@@ -53,10 +66,5 @@ Witch Apprentice Downloads
 
 .. * :download:`Tutorial Project Files <downloads/AIMMSTutorialProjectFiles(64bit).zip>`
  
-.. note::
-	
-    More learning resources are available on `AIMMS Academy <https://academy.aimms.com/>`_.
-
-    We have deprecated `The Tutorial for Professionals` resource from our website. 
 
 
