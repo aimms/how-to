@@ -5,10 +5,6 @@ Handle errors and warnings
    :description: Error handling provides for a way of making your applications robust.
    :keywords: Error handling, throwing exceptions, guarded code, happy flow
 
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
 Errors in AIMMS
 ------------------
 
