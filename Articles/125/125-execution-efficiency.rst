@@ -97,7 +97,7 @@ To improve upon that time consuming process you can:
  
 #.  Read about the underlying technology to obtain insights in the AIMMS execution engine in the AIMMS Language Reference Chapters :doc:`sparse-execution/the-aimms-sparse-execution-engine/index` and :doc:`sparse-execution/execution-efficiency-cookbook/index`.
 
-#.  Train yourself using the AIMMS Academy master course `Execution Efficiency <https://academy.aimms.com/mod/page/view.php?id=1267>`_.
+#.  Train yourself doing `Execution Efficiency <https://aimms.getlearnworlds.com/course/execution-efficiency>`_ course at AIMMS E-Learning Center.
 
 
 

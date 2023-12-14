@@ -59,8 +59,6 @@ The resulting ZIP file will contain all of the project files in a more portable 
 Related Topics
 ----------------
 
-* :doc:`../505/index`
-
 * :doc:`../151/151-version-control-aimmspack-backup`
 
 * :doc:`../145/145-import-export-section`

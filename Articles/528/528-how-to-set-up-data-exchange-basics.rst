@@ -8,7 +8,7 @@ How to integrate the Data Exchange Library
 
 The Data Exchange Library (DEX) allows you to connect data in a given format (like JSON, XML, table-based CSV/Excel) to your AIMMS model by using a mapping file. These data formats are often used in REST APIs to communicate data. You can find more documentation on the Data Exchange Library via `this link <https://documentation.aimms.com/dataexchange/index.html>`_.
 
-For this how-to we will be working with the example that can be found as a download in `this tutorial <https://academy.aimms.com/mod/page/view.php?id=521>`_, where we build an optimization model to find the least-cost solution. Instead of integrating the data from an Excel file or from a database, we will be integrating the needed data from a JSON-file and use a mapping file to get the data to the correct identifier(s). The basic setup in this how-to can however be implemented for any tree-based data format.
+For this how-to we will be working with :download:`SW_UseCase.zip <model/SW_UseCase.zip>` example, where we build an optimization model to find the least-cost solution. Instead of integrating the data from an Excel file or from a database, we will be integrating the needed data from a JSON-file and use a mapping file to get the data to the correct identifier(s). The basic setup in this how-to can however be implemented for any tree-based data format.
 
 
 Prerequisites

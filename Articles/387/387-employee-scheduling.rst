@@ -215,7 +215,7 @@ References for using ODBC
 
 #.  `SQLCreateConnectionString <https://documentation.aimms.com/functionreference/data-management/database-functions/sqlcreateconnectionstring.html>`_
 
-#.  Need to go deeper into DB connections? `This course <https://academy.aimms.com/course/view.php?id=37>`_ is perfect for you!
+#.  Need to go deeper into DB connections? `This course <https://aimms.getlearnworlds.com/course/databases-data-connection>`_ is perfect for you!
 
 Annotations
 ~~~~~~~~~~~

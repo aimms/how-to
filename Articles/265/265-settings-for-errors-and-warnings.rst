@@ -5,13 +5,6 @@ Customize Settings for Errors and Warnings
    :description: Managing various error settings.
    :keywords: Error handling, option settings 
    
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
-.. tip::
-    
-    You may refer to our online training about error handling `following this link <https://academy.aimms.com/course/view.php?id=50>`__.
 
 This article explains how you can control errors and warnings within AIMMS. We'll include some useful tips to create better models.
 
@@ -122,6 +115,10 @@ cannot do anything to fix them.  You can override this behavior by setting the o
 
 .. image:: images/enduser.png
 
+.. tip::
+    
+    You may refer to our online training about error handling `following this link <https://aimms.getlearnworlds.com/course/error-handling>`__.
+    
 Related Topics
 --------------
 
