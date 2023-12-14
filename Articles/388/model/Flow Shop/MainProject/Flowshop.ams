@@ -559,7 +559,7 @@ Model Main_Flow_Shop {
 						pr_writeSetsParameters(sp_requestFilename);
 						dex::client::NewRequest(
 							theRequest   :  sp_theRequest, 
-							url          :  formatString("https://%s/pro-api/v1/tasks/%s/%s/flowshopSolver",
+							url          :  formatString("https://%s/pro-api/v2/tasks/%s/%s/flowshopSolver",
 										sp_AIMMSazureCloudName, sp_appName, sp_appVersion ),
 							callback     :  ep_callback, 
 							httpMethod   :  'POST', 
@@ -600,6 +600,7 @@ Model Main_Flow_Shop {
 							raise error "bah" ;
 							ep_nextPoll := 'pr_solveFlowshopInquireStatus';
 						endif ;
+						
 						apply( ep_nextPoll );
 						
 						
@@ -633,8 +634,8 @@ Model Main_Flow_Shop {
 					StringParameter sp_taskStatusErrorMessage;
 					StringParameter sp_taskStatusMessage;
 					StringParameter sp_taskStatusID;
-					StringParameter sp_taskStatusProjectName;
-					StringParameter sp_taskStatusProjectVersion;
+					StringParameter sp_taskStatusAppName;
+					StringParameter sp_taskStatusAppVersion;
 					Parameter p_taskStatusQueueTime;
 					Parameter p_taskStatusReturnCode;
 					Parameter p_taskStatusErrorCode;
@@ -644,7 +645,7 @@ Model Main_Flow_Shop {
 					}
 					StringParameter sp_taskStatusService;
 					StringParameter sp_taskStartTime;
-					StringParameter sp_taskStatus;
+					StringParameter sp_taskState;
 				}
 				Procedure pr_readTaskId {
 					Arguments: (sp_theRequest);
@@ -699,12 +700,12 @@ Model Main_Flow_Shop {
 							raise error "bluh" ;
 							ep_nextPoll := 'pr_solveFlowshopInquireStatus';
 						endif ;
-						display "pr_InquireStatusSolveFlowshopCallback", sp_taskStatus ;
-						if sp_taskStatus = "starting" or sp_taskStatus = "queued" then
+						display "pr_InquireStatusSolveFlowshopCallback", sp_taskState ;
+						if sp_taskState = "queued" or sp_taskState = "assigned" or sp_taskState = "running" or sp_taskState = "solving" then
 							stopwatch::pr_scheduleOver( 5[s], ep_nextPoll );
-						elseif sp_taskStatus = "finished" then
+						elseif sp_taskState = "completed" then
 							pr_runTaskFlowshopReceiveResult(sp_requestId);
-						elseif sp_taskStatus = "finished with errors" then
+						elseif sp_taskState = "failed" then
 							display "error finish pr_InquireStatusSolveFlowshopCallback", 
 								sp_requestId,p_statusCode,p_errorCode;
 						else
@@ -739,7 +740,7 @@ Model Main_Flow_Shop {
 						ep_callback := 'pr_InquireStatusSolveFlowshopCallback' ;
 						dex::client::NewRequest(
 							theRequest   :  sp_theRequest, 
-							url          :  formatString("https://%s/pro-api/v1/tasks/%s",
+							url          :  formatString("https://%s/pro-api/v2/tasks/%s",
 										sp_AIMMSazureCloudName, sp_taskID ),
 							callback     :  ep_callback, 
 							httpMethod   :  'GET', 
@@ -802,7 +803,7 @@ Model Main_Flow_Shop {
 						dex::client::NewRequest(
 							theRequest   :  sp_theRequest, 
 							url          :  
-								formatString("https://%s/pro-api/v1/tasks/%s/response",
+								formatString("https://%s/pro-api/v2/tasks/%s/response",
 									sp_AIMMSazureCloudName, sp_taskID ),
 							callback     :  ep_callback, 
 							httpMethod   :  'GET', 
@@ -1433,7 +1434,7 @@ Model Main_Flow_Shop {
 				
 				sp_body += "dex::client::NewRequest(\n" ;
 				sp_body += "    theRequest   :  \"poll"+sp_inst+"\", \n" ;
-				sp_body += "    url          :  formatString(\"https://%s/pro-api/v1/tasks/%s\",\n" ;
+				sp_body += "    url          :  formatString(\"https://%s/pro-api/v2/tasks/%s\",\n" ;
 				sp_body += "                           sp_AIMMSazureCloudName, sp_instTaskID('"+sp_inst+"') ),\n" ;
 				sp_body += "    callback     :  \'pr_InquireStatusSolveFlowshopCallback\', \n" ;
 				sp_body += "    httpMethod   :  'GET', \n" ;

@@ -76,11 +76,11 @@ The URL prefix
 
 Then the variations can be handled by the ``url_prefix``, by defining it as:
 
-#.  On Cloud: ``https://{cloud}/pro-api/v1/tasks/``
+#.  On Cloud: ``https://{cloud}/pro-api/v2/tasks/``
 
     #.  Needed: apiKey header when using this ``url_prefix``.
 
-#.  On local host: ``http://localhost:{port}/api/v1/tasks/``
+#.  On local host: ``http://localhost:{port}/api/v2/tasks/``
 
     #.  Don't provide apiKey header when using this ``url_prefix``.
 

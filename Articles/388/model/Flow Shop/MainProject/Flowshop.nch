@@ -29,3 +29,6 @@
 "sspwmact" "multtask" "2023-04-04 07:22:22"
 "sp_shownInst" "ep_shownInst" "2023-04-04 07:46:42"
 "multtask::Copy_sp_pollProcedureRuntimeLibname" "multtask::sp_pollProcedureRuntimeLibprefix" "2023-04-04 11:44:38"
+"sp_taskStatus" "sp_taskState" "2023-12-14 14:57:23"
+"sp_taskStatusProjectVersion" "sp_taskStatusAppVersion" "2023-12-14 14:57:42"
+"sp_taskStatusProjectName" "sp_taskStatusAppName" "2023-12-14 14:57:46"
