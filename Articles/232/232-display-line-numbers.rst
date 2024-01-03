@@ -1,13 +1,9 @@
 Display Line Numbers in the Editor
-======================================================
+====================================
 
 .. meta::
    :description: Changing editor settings to display line numbers in the AIMMS IDE.
    :keywords: Editor, settings, line numbers, goto line
-
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
 
 
 By default, line numbers are hidden in the Editor in the AIMMS IDE. However, you can enable line numbers in settings. 

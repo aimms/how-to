@@ -5,11 +5,6 @@ Interrupt Execution During a Single Statement
    :description: How to interrupt a long running assignment.
    :keywords: interrupt, long running 
 
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
-
 With AIMMS it is possible to interrupt long running executions with the keyboard shortcut ``CTRL+ Shift + S``. However, this shortcut key only works between two executed statements or two generated constraints, or between solver iterations while running the solve statement.
 
 A more powerful tool to interrupt is the AIMMS Interrupt Tool, which can also interrupt long running statements. 
@@ -27,7 +22,7 @@ The AIMMS Interrupt Tool is particularly useful if the execution of an assignmen
 
 Another useful case is when you are working on a large project and it is not clear which statement or constraint is taking so much time.
 
-Using the tool
+Using the Tool
 ------------------------------
 Use the AimmsInterrupt tool like this:
 
@@ -40,7 +35,3 @@ Use the AimmsInterrupt tool like this:
 .. image:: images/screenshot_aimmsinterrupt.png
 
 Please keep in mind that after you interrupt execution, you cannot rely on the data of parameter ``someParameter``, because the assignment statement was not finished.
-
-
-
-

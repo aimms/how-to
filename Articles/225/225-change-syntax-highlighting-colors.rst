@@ -5,11 +5,6 @@ Change Syntax Highlighting and Display Options
    :description: How to customize syntax highlighting colors and other Editor display options used in the AIMMS IDE.
    :keywords: Syntax, highlighting, identifier, color, display, editor, settings
 
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
-
 
 AIMMS uses a default syntax highlighting theme to help you quickly interpret a definition visually in the AIMMS Editor. 
 

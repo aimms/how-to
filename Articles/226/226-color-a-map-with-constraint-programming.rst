@@ -5,10 +5,6 @@ Color a Map with Constraint Programming
    :description: Using Constraint Programming in an exercise to color a map of the states of the USA.
    :keywords: Constraint Programming, network, color, map
 
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
 
 .. figure:: images/United_States_orthographic.png
 

@@ -5,16 +5,8 @@ Overview: Best Practices for Operating AIMMS PRO
    :description: How to professionally operate your AIMMS PRO system.
    :keywords: AIMMS PRO, backup, recovery
 
-.. .. image:: images/system-task-512.png
-..    :align: center
-
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
-      
+     
 As AIMMS applications move from desktops to PRO platforms and start to play a larger role for a larger number of users, it is important to adopt the best practices for operating server-based business applications.
-
 
 This article presents common best practices of application management as they apply to operating and maintaining AIMMS PRO platforms. These practices address how to deal with challenges like bugs, accidental project deletion, and hardware failures.
 
