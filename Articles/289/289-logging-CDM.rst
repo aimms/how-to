@@ -1,7 +1,3 @@
-.. image:: images/client-128.png
-   :scale: 100
-   :align: right  
-
 Log CDM
 ===============
 
