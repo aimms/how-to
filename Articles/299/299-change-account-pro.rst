@@ -1,4 +1,4 @@
-Change AIMMS PRO account
+Change AIMMS PRO Account
 =====================================================
 .. meta::
    :description: How to change the account AIMMS PRO is running on.

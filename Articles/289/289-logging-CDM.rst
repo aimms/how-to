@@ -1,4 +1,4 @@
-.. image:: images/search-property-256.png
+.. image:: images/client-128.png
    :scale: 100
    :align: right  
 
@@ -17,7 +17,9 @@ CDM logging can be turned on for both the client and the service.
 CDM Logging in the client
 --------------------------
 
-.. image:: images/client-128.png
+.. image:: images/search-property-256.png
+    :align: right
+
 
 
 Copy the file ``CDMLogConfig.cfg`` from the installation folder of the ``CDMService`` to the project folder.
@@ -54,6 +56,8 @@ CDM logging in the server
 --------------------------
 
 .. image:: images/server-128.png
+    :align: right
+
 
 The ``CDMServiceLogConfig.cfg`` set the loggers of ``CDMService`` and ``CDMDB`` to ``TRACE`` (the highlighted lines):
 

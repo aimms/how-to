@@ -1,4 +1,4 @@
-Identify differences
+Identify Differences
 =======================
 .. meta::
    :description: A trick for how to troubleshoot data differences with an AIMMS procedure and diff tool.
@@ -129,7 +129,7 @@ Then we can use the following to output all identifiers making up the mathematic
 In the above code, we include the variables because the bound information is essential to the mathematical program.  
 We also include the constraints; this may be obsolete unless you are interested in the shadow prices as well.
 
-Example download
+Example Download
 ------------------
 You can download the section (``.ams`` file) that contains this procedure and sample below:
 * :download:`TracingValues.ams <download/TracingValues.ams>` 

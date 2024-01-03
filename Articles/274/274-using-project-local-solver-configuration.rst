@@ -5,11 +5,6 @@ Create Local Solver Configuration
    :description: Changing solver configuration per project
    :keywords: Solver, configuration, Project
 
-.. Feb2021: removed sidebar pic, techblog note, added sections and removed reference to end user licenses. 
-
-.. .. note::
-
-..     This article was originally posted to the AIMMS Tech Blog.
 
 Normally, the list of solvers available via the solver configuration
 screen is the same for all projects opened with the same version of

@@ -1,4 +1,4 @@
-Adding a logo to an AIMMS WebUI app
+Adding a Logo to an AIMMS WebUI App
 ====================================
 
 This article illustrates adding a logo to an AIMMS WebUI application, using AIMMS 4.85 and newer. 

@@ -1,13 +1,9 @@
-Solve in parallel with Asynchronous Solver Sessions
+Solve in Parallel with Asynchronous Solver Sessions
 ==================================================================
 
 .. meta::
    :description: How to solve mathematical programs in parallel using asynchronous solver sessions.
    :keywords: asynchronous, solve, mathematical program, solver session, simultaneous
-
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
 
 
 In this article, we explain how to use the asynchronous solver sessions in AIMMS to solve multiple mathematical programs simultaneously, each using its own CPU core. 
