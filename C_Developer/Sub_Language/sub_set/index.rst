@@ -12,7 +12,7 @@ AIMMS sets
 These topics cover what you need to use the set semantics in the AIMMS language to its full potential. 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    
    composite/index
    time/index

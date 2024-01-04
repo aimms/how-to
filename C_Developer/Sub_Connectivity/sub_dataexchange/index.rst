@@ -12,7 +12,7 @@ Data Exchange Library (DEX)
 These topics help you to use the Data Exchange Library with your AIMMS project.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    /Articles/528/528-how-to-set-up-data-exchange-basics
    /Articles/533/533-how-to-retrieve-file-data-with-data-exchange

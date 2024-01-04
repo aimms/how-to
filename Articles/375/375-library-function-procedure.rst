@@ -1,4 +1,4 @@
-Library of functions and procedures
+Library of Functions and Procedures
 ===================================
 
 Creating libraries to share/reuse functionality in multiple projects is a powerful feature of AIMMS. 

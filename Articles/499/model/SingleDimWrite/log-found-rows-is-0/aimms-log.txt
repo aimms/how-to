@@ -1,7 +1,0 @@
-2020-11-27 10:37:57,780 0x000026a4 [INFO] {AIMMS.IO.AimmsSourceFileName} Source file: aimms
-2020-11-27 10:37:59,469 0x000026a4 [INFO] {AIMMS.IO.AimmsSourceFileName} Source file: MainProject\SingleDimWrite.ams
-2020-11-27 10:37:59,470 0x000026a4 [INFO] {AIMMS.IO.AimmsSourceFileName} Source file: C:\Users\chris\AppData\Local\AIMMS\IFA\Aimms\4.76.7.12-x64-VS2017\Libraries\AimmsPro\AimmsProLibrary.ams
-2020-11-27 10:37:59,470 0x000026a4 [INFO] {AIMMS.IO.AimmsSourceFileName} Source file: C:\Users\chris\AppData\Local\AIMMS\IFA\Aimms\4.76.7.12-x64-VS2017\Libraries\AimmsWebUI\AimmsWebUI.ams
-2020-11-27 10:37:59,470 0x000026a4 [INFO] {AIMMS.IO.AimmsSourceFileName} Source file: MySQLSupportLibrary\MySQLSupportLibrary.ams
-2020-11-27 10:38:04,255 0x000026a4 [INFO] {dbmsSqlApi.Database} connect( dbString = 'DRIVER={MySQL ODBC 8.0 Unicode Driver};SERVER=localhost;DATABASE=odoo35554;UID=ChrisKuip;FOUND_ROWS=0;port=13306', userName = '', password = <not logged>)
-2020-11-27 10:38:07,746 0x000026a4 [ERROR] {dbmsSqlApi.ErrorReporter} handleError('ODBC[1062] : 23000 [MySQL][ODBC 8.0(w) Driver][mysqld-5.6.44-log]Duplicate entry 'a' for key 'PRIMARY'', 1)
