@@ -12,7 +12,7 @@ Data Exchange Library (DEX)
 These topics help you to use the Data Exchange Library with your AIMMS project.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    /Articles/528/528-how-to-set-up-data-exchange-basics
    /Articles/533/533-how-to-retrieve-file-data-with-data-exchange
@@ -23,6 +23,6 @@ These topics help you to use the Data Exchange Library with your AIMMS project.
    /Articles/594/594-adls-data-integration
    /Articles/595/595-accessing-the-azure-datalake-externally
    /Articles/599/599-Integrating-Python-Service-with-AIMMS-Client
-   openAPI/index
-   DevelopService/index
+   Sub_OpenAPI/index
+   Sub_Develop_Service/index
 

@@ -1,4 +1,4 @@
-Remove elements from a set
+Remove Elements from a Set
 ==========================
 
 .. meta::
