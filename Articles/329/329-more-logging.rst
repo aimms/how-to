@@ -67,7 +67,7 @@ Terminology
 
 Next we will discuss how to control the logging, both where it goes, and how much is written.
 
-Start logging
+Start Logging
 -------------
 
 To start logging, place a logger configuration file named ``LoggerConfig.xml`` in the AIMMS Project folder.  
@@ -86,7 +86,7 @@ To configure the Windows explorer with this default action on ``.aimms`` files, 
     When are you are using AIMMS 4.79 or older, please check :doc:`dated logging technology <../329/329-vintage-more-logging>` to obtain similar logging, just less detailed and less conveniently activated and configurable.
 
 
-Control of the logging
+Control of the Logging
 --------------------------
 
 This article provides a sample ``LoggerConfig.xml`` that is a template in creating this information.
@@ -122,7 +122,7 @@ There are three sections in the file ``LoggerConfig.xml``
     This section is used to select the appenders to be used.  Normally, you'll just use one, and comment out the others.
 
 
-Inspecting logging information
+Inspecting Logging Information
 ------------------------------
 
 .. note:: 
@@ -135,8 +135,7 @@ A good tactic for analyzing these logs is to scan for ``[ERROR]`` or ``[WARN]``.
 When an error or warning is related to the issue you are analyzing, check the lines just above it.
 
 
-
-Using a text editor to analyze TXT log files
+Using a Text Editor to Analyze TXT Log Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Use a text editor to open the log file ``log/aimms-log.txt``. 
@@ -161,7 +160,7 @@ Selected remarks:
     You can see the message pattern ``Date{yyyy-MM-dd HH:mm:ss,SSS} ExecutionThread [MessageLevel] {Logger} Message``.  
 
  
-Using ``Log4View`` to analyze ``.xml`` log files
+Using ``Log4View`` to Analyze ``.xml`` Log Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. available at `log4view.com <https://www.log4view.com/download-en>`_.
@@ -174,7 +173,9 @@ With the Log4View utility you can filter the output of selected loggers, as show
 .. image:: images/log4view.png
     :align: center
 
-Using Azure to inspect logs created on the AIMMS Cloud
+|
+
+Using Azure to Inspect Logs Created on the AIMMS Cloud
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Azure logging information is only accessible to AIMMS staff.
@@ -183,8 +184,9 @@ Please find a snapshot of the information below.
 .. image:: images/azure-logging-snapshot.png
     :align: center
 
+|
 
-Further reading
+Further Reading
 ---------------
 
 * Get log files :doc:`The parent article<../313/313-get-log-files>`
