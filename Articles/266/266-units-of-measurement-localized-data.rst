@@ -5,15 +5,6 @@ Localize Units of Measurement per User
    :description: Having units of measurement enables displaying data according to convention of end user
    :keywords: Units of measurement, Imperial, Metric, scaling, displaying numbers
 
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
-.. sidebar:: Wikimedia commons: Measuring Tape Inch + CM
-
-    .. image:: images/800px-Measuring_Tape_Inch+CM.jpg
-
-    
 
 Optimization applications deal with numeric data. We find it easier to interpret when represented by
 familiar units of measurement.
