@@ -14,7 +14,6 @@ When you run your model, the following error message might occur:
         ``Memory limit exceeded``
 
 Other symptoms of reaching the memory limits of your machine can be:
-
 * It takes a long time to load or save a case.
 * It takes a long time to open a page.
 * AIMMS is running very slow.
@@ -23,12 +22,10 @@ Other symptoms of reaching the memory limits of your machine can be:
 Approaches
 ----------
 There are two approaches to handling this problem:
-
 * Increase the available (virtual) memory. A disadvantage of virtual memory is that your computer needs to swap files from the virtual RAM to the real RAM. 
-
 * Reduce the memory requirements of your application.
 
-Reducing memory requirements
+Reducing Memory Requirements
 -----------------------------
 
 First, check the amount of memory in generated mathematical programs. 
@@ -63,6 +60,6 @@ For those identifiers that use a lot of memory, decrease the memory usage:
 * Avoid saving identifiers in a case that do not need to be saved, using the ``NoSave`` property, or by specifying and using case content types that do not include these identifiers.
 * Use expressions instead of large identifiers on pages that take a long time to open, because then the expressions are only evaluated when necessary. This is especially useful when only a slice of a multi-dimensional identifier is shown.
 
-Preventing memory problems
+Preventing Memory Problems
 ---------------------------
 Throughout model development, you can prevent memory problems by using the Identifier Cardinalities tool to check regularly for identifiers with many non-zeros.

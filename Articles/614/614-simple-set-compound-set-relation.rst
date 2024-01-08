@@ -1,4 +1,4 @@
-Overview: types of Set
+Overview: Types of Set
 ======================== 
 
 .. meta::
@@ -16,7 +16,7 @@ When you declare a set in AIMMS, it is one of the following:
 * Subset
 * Relation
 
-Root set
+Root Set
 ^^^^^^^^^
 A collection of explicit names is called a root set. 
 
@@ -109,7 +109,6 @@ For a simple set, you can declare: zero, one, or more indices; and zero, one, or
 Compound Sets
 --------------
 A set that is both a relation and a simple set, is called a compound set. 
-
-Compound sets are no longer supported. See :doc:`../109/109-deprecate-compound-sets-overview`.
+**Compound sets are no longer supported. See :doc:`../109/109-deprecate-compound-sets-overview`.**
 
  

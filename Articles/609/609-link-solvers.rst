@@ -16,7 +16,7 @@ General Procedure
 
 Before linking a solver to AIMMS, ensure a solver license is valid and installed correctly. You should be able (and allowed) to run the solver stand-alone.
 
-Start AIMMS. Go to *Settings > Solver Configuration* and add the solver.
+Start AIMMS. Go to :menuselection:`Settings > Solver Configuration` and add the solver.
 
 Test if the solver is added correctly.
 
@@ -26,7 +26,7 @@ Linking CPLEX to AIMMS
 
 1. Make sure your CPLEX license is installed correctly, and you can run CPLEX stand-alone.
 
-2. Go to *Settings > Solver Configuration* and add the CPLEX solver ``libcpx*.dll``. 
+2. Go to :menuselection:`Settings > Solver Configuration` and add the CPLEX solver ``libcpx*.dll``. 
 
 Linking GUROBI to AIMMS
 -----------------------
@@ -37,7 +37,7 @@ Linking GUROBI to AIMMS
 
 (For example, if the license file ``gurobi.lic`` is in the directory ``C:\Gurobi``, then set ``GRB_LICENSE_FILE`` to ``C:\Gurobi\gurobi.lic``.) 
 
-3. Go to *Settings > Solver Configuration* and add the GUROBI solver ``libgrb*.dll``.
+3. Go to :menuselection:`Settings > Solver Configuration` and add the GUROBI solver ``libgrb*.dll``.
 
 Linking PATH to AIMMS
 -------------------------
@@ -46,11 +46,11 @@ Linking PATH to AIMMS
 
 2. Copy the file ``path*.dll`` to the subdirectory ``Solvers`` in AIMMS.
 
-3. Go to *Settings > Solver Configuration* and add the PATH solver ``libpath*.dll``.
+3. Go to :menuselection:`Settings > Solver Configuration` and add the PATH solver ``libpath*.dll``.
 
 Linking SNOPT or MINOS to AIMMS
 -----------------------------------
 
-Go to *Settings > Solver Configuration* and add the solver ``libsnopt*.dll`` or ``libminos.dll``.
+Go to :menuselection:`Settings > Solver Configuration` and add the solver ``libsnopt*.dll`` or ``libminos.dll``.
 
 (You don't have to copy a solver DLL file to the installation directory of AIMMS because the AIMMS installation already includes these files.)

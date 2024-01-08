@@ -20,6 +20,6 @@ These topics cover connecting various other types of functions to your AIMMS pro
    /Articles/133/133-External-Functions-InputData
    /Articles/124/124-tableau-integration
    /Articles/277/277-aimms-with-gurobi
-   /Articles/108/108-kb14-call-to-from-aimms
+   /Articles/616/616-call-to-from-aimms
    /Articles/586/586-read-write-csv
 

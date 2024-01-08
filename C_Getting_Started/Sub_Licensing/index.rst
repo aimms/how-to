@@ -19,8 +19,8 @@ Here you can find help with license set up and troubleshooting license errors. I
    /Articles/195/195-transfer-developer-license
    /Articles/89/89-license-nodelock-error
    /Articles/89/89-academic-license
-   /Articles/108/108-kb02-link-solvers
-   /Articles/108/108-kb17-nodelock-offline-activation
+   /Articles/609/609-link-solvers
+   /Articles/617/617-nodelock-offline-activation
    network-license-server/index
 
 

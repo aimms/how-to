@@ -16,30 +16,26 @@ You could try to run your model with a different MIP solver. For many MIP models
 
 Reformulation
 -------------
-If you have a weak LP-relaxation, you should look again at your model formulation. Maybe you can decrease the use of ‘Big M’ coefficients in your model, or maybe you can add some cuts.
+If you have a weak LP-relaxation, you should look again at your model formulation. Maybe you can decrease the use of Big M coefficients in your model, or maybe you can add some cuts.
 
 If you have a very large LP that takes a relatively long time to solve, you could try to solve the LPs on the nodes using the Barrier algorithm. 
 
-Go to *Settings > Project Options* set the following option: 
-
-        *Specific solvers > CPLEX X.X > MIP > MIP Method: Barrier*
+Go to :menuselection:`Settings > Project Options` set the following option: :menuselection:`Specific solvers > CPLEX X.X > MIP > MIP Method: Barrier`.
 
 Priorities
 --------------
-If your model includes natural priorities (because some decisions follow from or follow up other decisions), you could decide to make use of these priorities. 
+If your model includes natural priorities (because some decisions follow from or follow up other decisions), you could decide to make use of these priorities. See also :any:`sec:var.var.solver-attr`.
 
-See also :any:`sec:var.var.solver-attr`.
-
-Starting solution
+Starting Solution
 -----------------
 When you are able to create a good starting solution (e.g. using a heuristic), you can provide the solver with this solution to improve the solution process. 
 
 Note that this is only possible when you use CPLEX, GUROBI or CBC. 
 
-Go to *Settings > Project Options* set the following option: 
+Go to :menuselection:`Settings > Project Options` set the following option: 
 
-        * CPLEX X.X: *Specific solvers > CPLEX X.X > General > Advanced start: Use advanced basis*
+* CPLEX X.X: :menuselection:`Specific solvers > CPLEX X.X > General > Advanced start > Use advanced basis`
 
-        * GUROBI X.X: *Specific solvers > GUROBI X.X > MIP > MIP Start: Yes*
+* GUROBI X.X: :menuselection:`Specific solvers > GUROBI X.X > MIP > MIP Start > Yes`
 
-        * CBC X.X: *Specific solvers > CBC X.X > MIP > MIP Start: On*
+* CBC X.X: :menuselection:`Specific solvers > CBC X.X > MIP > MIP Start > On`
