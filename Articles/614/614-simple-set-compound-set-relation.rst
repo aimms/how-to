@@ -1,14 +1,11 @@
-Overview: Types of Set
+Types of Set
 ======================== 
 
 .. meta::
     :description: There are different types of set, each with its own use case.
     :keyword: set, simple set, root set, relation, calendar.
 
-A set is a collection of unique elements. In AIMMS, a set is finite.
-
-Types of Sets
---------------
+A set is a collection of unique elements. In AIMMS, a set is finite. 
 When you declare a set in AIMMS, it is one of the following:
 
 * Root set
@@ -109,6 +106,6 @@ For a simple set, you can declare: zero, one, or more indices; and zero, one, or
 Compound Sets
 --------------
 A set that is both a relation and a simple set, is called a compound set. 
-**Compound sets are no longer supported. See :doc:`../109/109-deprecate-compound-sets-overview`.**
+**Compound sets are no longer supported.** See :doc:`../109/109-deprecate-compound-sets-overview`.
 
  

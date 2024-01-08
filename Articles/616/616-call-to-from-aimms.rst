@@ -3,6 +3,7 @@ Linking to AIMMS
 This article provides information on possible interaction of AIMMS with other applications.
 
 There are two possible situations:
+
 * Calling AIMMS from different languages/applications
 * Calling different applications/languages from AIMMS
 

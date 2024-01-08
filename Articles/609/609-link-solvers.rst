@@ -34,8 +34,7 @@ Linking GUROBI to AIMMS
 1. Make sure your GUROBI license is installed correctly, and you can run GUROBI stand-alone.
 
 2. Set the environment variable ``GRB_LICENSE_FILE`` to point to the exact location of the license file. 
-
-(For example, if the license file ``gurobi.lic`` is in the directory ``C:\Gurobi``, then set ``GRB_LICENSE_FILE`` to ``C:\Gurobi\gurobi.lic``.) 
+For example, if the license file ``gurobi.lic`` is in the directory ``C:\Gurobi``, then set ``GRB_LICENSE_FILE`` to ``C:\Gurobi\gurobi.lic``.
 
 3. Go to :menuselection:`Settings > Solver Configuration` and add the GUROBI solver ``libgrb*.dll``.
 
@@ -52,5 +51,4 @@ Linking SNOPT or MINOS to AIMMS
 -----------------------------------
 
 Go to :menuselection:`Settings > Solver Configuration` and add the solver ``libsnopt*.dll`` or ``libminos.dll``.
-
 (You don't have to copy a solver DLL file to the installation directory of AIMMS because the AIMMS installation already includes these files.)
