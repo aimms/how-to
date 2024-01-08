@@ -1,4 +1,4 @@
-How to link a solver to AIMMS
+How to Link a Solver to AIMMS
 =============================
 
 If you have a license for a solver and your AIMMS license has the link to that solver (a so-called 'link-only' license), you can add that solver to your AIMMS. 
@@ -11,7 +11,7 @@ Currently, AIMMS provides links to the following solvers:
 * SNOPT
 * MINOS
 
-General procedure
+General Procedure
 -----------------
 
 Before linking a solver to AIMMS, ensure a solver license is valid and installed correctly. You should be able (and allowed) to run the solver stand-alone.
@@ -19,7 +19,6 @@ Before linking a solver to AIMMS, ensure a solver license is valid and installed
 Start AIMMS. Go to *Settings > Solver Configuration* and add the solver.
 
 Test if the solver is added correctly.
-
 
 
 Linking CPLEX to AIMMS
