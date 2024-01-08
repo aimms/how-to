@@ -24,28 +24,22 @@ Test if the solver is added correctly.
 Linking CPLEX to AIMMS
 ------------------------
 
-1. Make sure your CPLEX license is installed correctly, and you can run CPLEX stand-alone.
-
-2. Go to :menuselection:`Settings > Solver Configuration` and add the CPLEX solver ``libcpx*.dll``. 
+#. Make sure your CPLEX license is installed correctly, and you can run CPLEX stand-alone.
+#. Go to :menuselection:`Settings > Solver Configuration` and add the CPLEX solver ``libcpx*.dll``. 
 
 Linking GUROBI to AIMMS
 -----------------------
 
-1. Make sure your GUROBI license is installed correctly, and you can run GUROBI stand-alone.
-
-2. Set the environment variable ``GRB_LICENSE_FILE`` to point to the exact location of the license file. 
-For example, if the license file ``gurobi.lic`` is in the directory ``C:\Gurobi``, then set ``GRB_LICENSE_FILE`` to ``C:\Gurobi\gurobi.lic``.
-
-3. Go to :menuselection:`Settings > Solver Configuration` and add the GUROBI solver ``libgrb*.dll``.
+#. Make sure your GUROBI license is installed correctly, and you can run GUROBI stand-alone.
+#. Set the environment variable ``GRB_LICENSE_FILE`` to point to the exact location of the license file. For example, if the license file ``gurobi.lic`` is in the directory ``C:\Gurobi``, then set ``GRB_LICENSE_FILE`` to ``C:\Gurobi\gurobi.lic``.
+#. Go to :menuselection:`Settings > Solver Configuration` and add the GUROBI solver ``libgrb*.dll``.
 
 Linking PATH to AIMMS
 -------------------------
 
-1. Make sure your PATH license is installed correctly, and you can run PATH stand-alone.
-
-2. Copy the file ``path*.dll`` to the subdirectory ``Solvers`` in AIMMS.
-
-3. Go to :menuselection:`Settings > Solver Configuration` and add the PATH solver ``libpath*.dll``.
+#. Make sure your PATH license is installed correctly, and you can run PATH stand-alone.
+#. Copy the file ``path*.dll`` to the subdirectory ``Solvers`` in AIMMS.
+#. Go to :menuselection:`Settings > Solver Configuration` and add the PATH solver ``libpath*.dll``.
 
 Linking SNOPT or MINOS to AIMMS
 -----------------------------------
