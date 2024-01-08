@@ -1,4 +1,4 @@
-Update WebUI to newer AIMMS version
+Update WebUI to neededewer AIMMS Version
 ====================================
 .. meta::
     :description: How to adapt an older AIMMS project to changes in WebUI.

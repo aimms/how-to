@@ -3,7 +3,7 @@
    :description: How to set up data exchange within your AIMMS application.
    :keywords: aimms, data, exchange
 
-How to integrate the Data Exchange Library
+How to Integrate the Data Exchange Library
 ============================================
 
 The Data Exchange Library (DEX) allows you to connect data in a given format (like JSON, XML, table-based CSV/Excel) to your AIMMS model by using a mapping file. These data formats are often used in REST APIs to communicate data. You can find more documentation on the Data Exchange Library via `this link <https://documentation.aimms.com/dataexchange/index.html>`_.
