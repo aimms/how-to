@@ -13,7 +13,6 @@ The functional AIMMS examples listed below illustrate specific AIMMS features.
    /Articles/401/401-calendar
    /Articles/402/402-camping
    /Articles/403/403-chance-constraints
-   /Articles/405/405-coloring
    /Articles/407/407-database-inspection
    /Articles/408/408-database-interface-generation
    /Articles/409/409-datafeed
