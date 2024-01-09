@@ -36,7 +36,6 @@ The functional AIMMS examples listed below illustrate specific AIMMS features.
    /Articles/427/427-multi-start
    /Articles/428/428-nested-solve
    /Articles/429/429-oil-well-drilling
-   /Articles/431/431-pivot-table
    /Articles/432/432-power-system-expansion-ro
    /Articles/433/433-print-pages
    /Articles/435/435-rolling-horizon
