@@ -27,6 +27,13 @@ You can browse our examples by category:
 .. toctree::
    :maxdepth: 1
 
+   /Articles/383/383-contract-allocation
+   /Articles/387/387-employee-scheduling
+   /Articles/390/390-knapsack-problem
+   /Articles/434/434-reindeer-pairing
+   /Articles/397/397-traveling-salesman
+   /Articles/563/563-functional-ipTwist
+   /Articles/550/550-demand-forecasting
    Sub_Application/index
    Sub_Functional/index
    Sub_Modeling_Book/index

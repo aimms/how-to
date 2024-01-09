@@ -17,7 +17,6 @@ The functional AIMMS examples listed below illustrate specific AIMMS features.
    /Articles/408/408-database-interface-generation
    /Articles/409/409-datafeed
    /Articles/410/410-date-aggregation
-   /Articles/550/550-demand-forecasting
    /Articles/411/411-distributed-solver-sessions
    /Articles/412/412-distributions
    /Articles/413/413-e-mail-and-sound-support
@@ -29,7 +28,6 @@ The functional AIMMS examples listed below illustrate specific AIMMS features.
    /Articles/419/419-goal-programming
    /Articles/420/420-horizon
    /Articles/421/421-indexed-page
-   /Articles/563/563-functional-ipTwist
    /Articles/422/422-interrupt-aimms-externally
    /Articles/423/423-linked-objects
    /Articles/424/424-model-edit-api
@@ -44,5 +42,3 @@ The functional AIMMS examples listed below illustrate specific AIMMS features.
    /Articles/435/435-rolling-horizon
    /Articles/436/436-stochastic-programming
    /Articles/437/437-tea-consumption
-
-                    
