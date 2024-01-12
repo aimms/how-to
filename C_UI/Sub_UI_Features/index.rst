@@ -33,6 +33,7 @@ This section contains explanations of various UI features available when buildin
    /Articles/568/568-disable-standard-webui-functions
    /Articles/578/578-uponchange-with-arguments
    /Articles/591/591-hiding-widget-header
+   /Articles/608/608-centering-cells
 
    
 
