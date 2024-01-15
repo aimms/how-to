@@ -63,7 +63,7 @@ This example uses a combination of both procedures mentioned.
 
 .. code-block:: aimms
 
-   if pro::GetPROEndPoint() or ProjectDeveloperMode() then
+   if pro::GetPROEndPoint() or not ProjectDeveloperMode() then
       if pro::DelegateToServer( 
                waitForCompletion  :  1,
                completionCallback :  'pro::session::LoadResultsCallBack' )
@@ -71,6 +71,8 @@ This example uses a combination of both procedures mentioned.
          return 1;
       endif;
    endif;
+
+   solve mp_minimizeCost;
 
 `Contract Allocation <https://how-to.aimms.com/Articles/383/383-contract-allocation.html>`_ 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
