@@ -303,7 +303,7 @@ Below there are the ``css`` files used on this project. They are separated by ch
     .. tab-item:: theming.css
 
       .. code-block:: css
-         :linenos:
+        :linenos:
 
         :root {
             --primary: #CDE6FF;
@@ -356,7 +356,7 @@ Below there are the ``css`` files used on this project. They are separated by ch
     .. tab-item:: annotation.css
 
       .. code-block:: css
-         :linenos:
+        :linenos:
 
         .annotation-red-chart {
             fill: var(--secondary);
