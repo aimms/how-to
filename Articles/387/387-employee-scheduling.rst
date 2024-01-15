@@ -384,7 +384,7 @@ Minimal Requirements
 Release Notes
 --------------------   
 
-`v1.1 <https://github.com/aimms/employee-scheduling/releases/tag/1.2>`_ (15/01/2024)
+`v1.2 <https://github.com/aimms/employee-scheduling/releases/tag/1.2>`_ (15/01/2024)
    Ready to solve mathematical problem on AIMMS PRO. Centering all cells. 
 
 `v1.1 <https://github.com/aimms/employee-scheduling/releases/tag/1.1>`_ (25/07/2023)
