@@ -41,6 +41,17 @@ build_and_staging:
     - ssh support@data.aimms.com mkdir -p /home/aimms/www/how-to.aimms.com/staging/${CI_COMMIT_BRANCH}
     - rsync -rt --delete-excluded _build/html/ support@data.aimms.com:/home/aimms/www/how-to.aimms.com/staging/${CI_COMMIT_BRANCH}
 
+az_build_and_staging:
+  <<: *run_on_dockerhost
+  stage: deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH != "master"
+      when: on_success
+    - when: never
+  script:
+    - sphinx-build -b html . _build/html
+    - az storage copy -s "_build/html/*" --recursive --destination "${DESTINATION_URI}/${CI_COMMIT_BRANCH}" -- --overwrite=true
+
 build_and_deploy:
   <<: *run_on_dockerhost
   stage: deploy
@@ -63,4 +74,5 @@ az_deploy:
     - when: never
   script:
     - sphinx-build -b html . _build/html
+    - az storage remove -c "\$web/staging" --recursive
     - az storage copy -s '_build/html' --recursive --destination-container '$web' -- --overwrite=true --as-subdir=false
