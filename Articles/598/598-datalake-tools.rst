@@ -44,9 +44,10 @@ Application Preparation
 To use this application, you can either:
 
 **Use it on the cloud:** Download this toolkit and upload it to your cloud. From there, there is no further need for authentication - the Data Exchange library will automatically extract the storage account name and access key of the Data Lake Storage account associated with your AIMMS Cloud account. 
+Make sure to create the *aimmspack* with ``api-init`` folder unchecked. 
 Read more about the ADLS for the AIMMS Cloud `here <https://documentation.aimms.com/dataexchange/dls.html>`_. 
 
-**Use it locally:** Download this toolkit and open ``api-init/Data_Lake_Storage.txt``. Add your ``StorageAccessKey`` and ``StorageAccount`` replacing ``"add_name_here"`` string. Open the project. 
+**Use it locally:** Download this toolkit and open ``api-init/Data_Lake_Storage.txt``. Add your ``StorageAccount`` replacing ``"add_name_here"`` string. Open the project. 
 
 If you prepared the application correctly, by opening the application, you will see the 'Storage Account' name on the right bottom of your page. Without a 'Storage Account' name, nothing from this point on will work. 
 
@@ -96,3 +97,4 @@ Release Notes
 
    github
    datalake
+   aimmspack
