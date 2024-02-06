@@ -27,7 +27,7 @@ You can also use it to store files generated based on the output of your optimiz
 
 The `Data Exchange Library <https://documentation.aimms.com/dataexchange/api.html#data-lake-storage-file-systems>`__ offers functions to easily interact with the ADLS.  
 
-This toolkit offers you the possibility to easily create both Account SAS token and Container SAS Token, which is needed for authentication if you want to access the ADLS from an external source.
+This toolkit offers you the possibility to easily create both Account SAS Token and Container SAS Token, which is needed for authentication if you want to access the ADLS from an external source.
 
 Instructions 
 -------------
@@ -44,8 +44,7 @@ Application Preparation
 To use this application, you can either:
 
 **Use it on the cloud:** Download this toolkit and upload it to your cloud. From there, there is no further need for authentication - the Data Exchange library will automatically extract the storage account name and access key of the Data Lake Storage account associated with your AIMMS Cloud account. 
-Make sure to create the *aimmspack* with ``api-init`` folder unchecked. 
-Read more about the ADLS for the AIMMS Cloud `here <https://documentation.aimms.com/dataexchange/dls.html>`_. 
+Make sure to create the ``aimmspack`` with ``api-init`` folder unchecked. Read more about the ADLS for the AIMMS Cloud `here <https://documentation.aimms.com/dataexchange/dls.html>`_. 
 
 **Use it locally:** Download this toolkit and open ``api-init/Data_Lake_Storage.txt``. Add your ``StorageAccount`` replacing ``"add_name_here"`` string. Open the project. 
 
@@ -73,15 +72,15 @@ In the next subsection, the functionality of 'Container SAS Token' page will be 
 
 |
 
-To create a Account SAS Token, please input the required information on Inputs table. Click on the button below it.
-A new Account SAS Token will be generated and will appear on the bottom.
+To create a Container SAS Token, please input the required information on Inputs table. Note that a File System is required, but you can always fetch the latest File Systems by the 'Refresh File System' button. Once everything is set, click on the button below it.
+A new Container SAS Token will be generated and will appear on the bottom.
 
 Minimal Requirements
 --------------------
 
 To work with this toolkit, you will need a PRO Cloud account with an Azure Data Lake Storage. 
-You can check if your cloud account is equipped with one, open the uploaded toolkit on your cloud and see 'Storage Account' name set. 
-If you see a name in the 'Storage Account' section, your account has an ADLS. If you do not see a name here, please contact `AIMMS Support <support@aimms.com>`_.
+You can check if your Cloud account is equipped with a Data Lake by launching this app to your PRO Cloud and checking if 'Storage Account' has value. This can be found at the right bottom of any page. 
+If you do not see a name here, please contact `AIMMS Support <support@aimms.com>`_.
 
 
 Release Notes
