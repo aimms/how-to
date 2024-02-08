@@ -1,5 +1,5 @@
-DirectSQL Example
-===================
+How to Use Direct SQL Queries
+===============================
 
 Not all operations on ODBC databases can be done using the ``read from table`` and ``write to table`` statements.
 More flexibility is offered using the intrinsic procedure :aimms:procedure:`DirectSQL`. Please use the `Reindeer Pairing <https://how-to.aimms.com/Articles/434/434-reindeer-pairing.html>`_ example to experiment with this feature.
