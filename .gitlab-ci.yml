@@ -65,4 +65,4 @@ az_deploy:
     - sphinx-build -b html . _build/html
     - az storage copy -s '_build/html' --recursive --destination-container '$web' -- --overwrite=true --as-subdir=false
     - bash load_ssh_key_for_deploy.sh
-    - ssh support@data.aimms.com rm -f -r /home/aimms/www/how-to-staging/staging/
+    - ssh support@data.aimms.com rm -rf /home/aimms/www/how-to-staging/staging/
