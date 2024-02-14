@@ -19,7 +19,7 @@ DataLake Tools
    :align: right
    :alt: DataLake Tools
 
-Introduction
+Introduction 
 -------------
 Every AIMMS Cloud account is by default equipped with an Azure Data Lake Storage Gen2 (ADLS). 
 You can use this storage account to store all types of files that you want to integrate with your AIMMS application. 
