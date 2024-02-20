@@ -6,7 +6,7 @@ Zipping and unzipping on AIMMS Developer and on AIMMS Cloud
    :keywords: zip, unzip, compress, expand, 
 
 Downloading and uploading a collection of files is achieved by first compressing into a single file, 
-called an archive, and then transfering the archive from one machine to the other.
+called an archive, and then transferring the archive from one machine to the other.
 In this article, we will focus on the compression of a collection of files into a single archive, and 
 on the expansion of such an archive into a collection of files.
 
@@ -75,4 +75,9 @@ See also:
 .. * Upload function: Vraag aan Mischa
 
 .. * Download function: Vraag aan Mischa
+
+
+.. spelling:word-list::
+
+	powershell
 
