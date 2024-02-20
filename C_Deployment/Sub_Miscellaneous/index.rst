@@ -17,3 +17,4 @@ This section offers miscellaneous information about deployment in AIMMS.
 
    /Articles/257/257-run-batch-commands-in-aimms-command-line-tool
    /Articles/114/114-execute
+   /Articles/580/580-download-compressed-files
