@@ -1,4 +1,4 @@
-Zipping and unzipping on AIMMS Developer and on AIMMS Cloud
+Zipping and Unzipping on AIMMS Developer and on AIMMS Cloud
 ===========================================================================
 
 .. meta::
@@ -59,7 +59,8 @@ The buttons have the following actions:
 
 #. ``buttonOverviewCopiedFiles``: Lists all files in the project folder, including the files expanded from the archive by ``buttonUnzipDemo``
 
-See also:
+Further Reading
+-------------------
 
 * :doc:`Run executable files <../../Articles/114/114-execute>`
 
