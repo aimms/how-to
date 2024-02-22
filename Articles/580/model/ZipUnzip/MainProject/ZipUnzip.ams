@@ -1,0 +1,191 @@
+## ams_version=1.0
+
+Model Main_ZipUnzip {
+	Section Quantities_and_Units {
+		Comment: {
+			"This section contains all the units and quantities that are added automatically by AIMMS.
+			It is recommended to declare all your quantities here."
+		}
+		Quantity SI_Time_Duration {
+			BaseUnit: s;
+			Conversions: minute->s : #-># * 60;
+			Comment: {
+				"Expresses the value for the duration of periods.
+				
+				The unit s has been added automatically because it is a required unit for AimmsWebUI.
+				
+				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
+			}
+		}
+	}
+	Procedure pr_buttonZipDemo {
+		Body: {
+			pr_zipFolderToFile(
+				sp_folderName      :  "sampleFolder", 
+				sp_destinationFile :  "sampleFile.zip");
+		}
+	}
+	Procedure pr_buttonUnzipDemo {
+		Body: {
+			pr_unzipFileToFolder(
+				sp_fileName              :  "sampleFile.zip", 
+				sp_destinationFolderName :  "sampleCopyFolder");
+		}
+	}
+	Procedure pr_buttonOverviewCopiedFiles {
+		Body: {
+			
+			DirectoryGetFiles(
+				directory       :  ".", ! "./sampleCopyFolder", 
+				filter          :  "", 
+				filenames       :  sp_filenamesFileSampeCopyFolder, 
+				recursive       :  1);
+		}
+	}
+	DeclarationSection Declarations_for_copied_files {
+		StringParameter sp_titleTable {
+			Definition: "The files in the project folder, including the copied files in folder sampleCopyFolder";
+		}
+		Set s_filenumbersFileSampleCopyFolder {
+			SubsetOf: Integers;
+			Index: i_fnFSCF;
+		}
+		StringParameter sp_filenamesFileSampeCopyFolder {
+			IndexDomain: i_fnFSCF;
+		}
+	}
+	Procedure pr_zipFolderToFile {
+		Arguments: (sp_folderName,sp_destinationFile);
+		Body: {
+			CurrentErrorMessage := "" ;
+			if FileExists( sp_destinationFile ) then
+				FileDelete( sp_destinationFile );
+			endif ;
+			if AimmsStringConstants('Platform') = "Linux" then
+				Execute( "zip", "-r " + sp_destinationFile + " " + sp_folderName , wait:1) ;
+			else
+				Execute( "powershell \"Compress-Archive -Path "+ sp_folderName+" -DestinationPath "+sp_destinationFile+"\"", wait:1);
+			endif ;
+			if not FileExists( sp_destinationFile ) then
+				raise error "Unable to create " + sp_destinationFile + ": " + CurrentErrorMessage ;
+			endif ;
+		}
+		StringParameter sp_folderName {
+			Property: Input;
+		}
+		StringParameter sp_destinationFile {
+			Property: Input;
+		}
+	}
+	Procedure pr_downloadZipFile {
+		Arguments: (FileLocation,statusCode,statusDescription);
+		Body: {
+			block
+			
+				! we want to create a file to download - MyDownloadFile.txt
+				FileLocation := "sampleFile.zip";
+			
+				! we store the location of the file in string parameter FinalLocation
+				FinalLocation := webui::GetIOFilePath(FileLocation);
+			
+				! writing the string parameter FinalLocation to the text file
+				! write FinalLocation to file FinalLocation;
+				if FinalLocation <> FileLocation then
+					FileCopy( FileLocation, FinalLocation );
+				endif ;
+			
+				! checking if the previous write statement was successful or not
+				if FileExists(FinalLocation) then
+			
+					! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
+					StatusCode := webui::ReturnStatusCode('CREATED');
+					! displaying the status message as All perfect instead of the default "File ready to download"
+					StatusDescription := "All perfect!";
+			
+				else    ! if previous write statement was not successful
+			
+					! setting the statusCode to 'ERROR' and the download widget will not show the Get button anymore
+					statusCode := webui::ReturnStatusCode('ERROR');
+					!displaying a custom error message
+					statusDescription := "Something went wrong when creating the file.";
+			
+				endif;
+			
+			onerror _ep_err do
+			
+					! setting the statusCode to 'ERROR' and the download widget will not show the Get button anymore
+					statusCode := webui::ReturnStatusCode('ERROR');
+					!displaying a custom error message
+					statusDescription := formatString("Something went wrong when creating %s: %s", 
+						FileLocation, errh::Message( _ep_err ) );
+			
+			endblock ;
+		}
+		StringParameter FileLocation {
+			Property: Output;
+		}
+		Parameter statusCode {
+			Property: Output;
+		}
+		StringParameter statusDescription {
+			Property: Output;
+		}
+		StringParameter FinalLocation;
+		ElementParameter _ep_err {
+			Range: errh::PendingErrors;
+		}
+	}
+	Procedure pr_unzipFileToFolder {
+		Arguments: (sp_fileName,sp_destinationFolderName);
+		Body: {
+			CurrentErrorMessage := "" ;
+			if DirectoryExists( sp_destinationFolderName ) then
+				DirectoryDelete( sp_destinationFolderName );
+			endif ;
+			if AimmsStringConstants('Platform') = "Linux" then
+				Execute( "unzip", sp_fileName + " -d " + sp_destinationFolderName , wait:1) ;
+			else
+				Execute( "powershell \"Expand-Archive -Path "+ sp_fileName+" -DestinationPath "+sp_destinationFolderName+"\"", wait:1);
+			endif ;
+		}
+		StringParameter sp_fileName {
+			Property: Input;
+		}
+		StringParameter sp_destinationFolderName {
+			Property: Input;
+		}
+	}
+	Section app_start_and_finish {
+		Procedure MainInitialization {
+			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
+		}
+		Procedure PostMainInitialization {
+			Comment: {
+				"Add initialization statements here that require that the libraries are already initialized properly,
+				or add statements that require the Data Management module to be initialized."
+			}
+		}
+		Procedure PreMainTermination {
+			Body: {
+				return 1 ; !DataManagementExit();
+			}
+			Comment: {
+				"Add termination statements here that require all libraries to be still alive.
+				Return 1 if you allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence."
+			}
+		}
+		Procedure MainTermination {
+			Body: {
+				return 1;
+			}
+			Comment: {
+				"Add termination statements here that do not require all libraries to be still alive.
+				Return 1 to allow the termination sequence to continue.
+				Return 0 if you want to cancel the termination sequence.
+				It is recommended to only use the procedure PreMainTermination to cancel the termination sequence and let this procedure always return 1."
+			}
+		}
+	}
+	Procedure MainExecution;
+}

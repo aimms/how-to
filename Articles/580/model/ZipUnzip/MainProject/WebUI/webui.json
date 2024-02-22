@@ -1,0 +1,235 @@
+{
+  "version": "4.67.0",
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "browsername": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browsertimezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
+    "ignoredst": {
+      "aimms": {
+        "contents": [
+          "webui::IgnoreDST"
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    },
+    "timezone.dst.readonly": {
+      "aimms": {
+        "contents": [
+          "webui::DefaultDSTSettingForDisplayTimeZone"
+        ]
+      }
+    }
+  },
+  "pages/home": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "filenamesCopiedFiles",
+          "gridArea": "area-a",
+          "dndId": "area-afilenamesCopiedFiles0"
+        },
+        {
+          "widgetUri": "buttonZipDemo",
+          "gridArea": "area-b",
+          "dndId": "area-bbuttonZipDemo1"
+        },
+        {
+          "widgetUri": "downloadZipfile",
+          "gridArea": "area-b",
+          "dndId": "area-bdownloadZipfile2"
+        },
+        {
+          "widgetUri": "buttonUnzipDemo",
+          "gridArea": "area-b",
+          "dndId": "area-bbuttonUnzipDemo3"
+        },
+        {
+          "widgetUri": "buttonOverviewCopiedFiles",
+          "gridArea": "area-b",
+          "dndId": "area-bbuttonOverviewCopiedFiles4"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout10"
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "buttonZipDemo",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "downloadZipfile",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "buttonUnzipDemo",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "buttonOverviewCopiedFiles",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        },
+        {
+          "uri": "filenamesCopiedFiles",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/buttonOverviewCopiedFiles": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_buttonOverviewCopiedFiles"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "buttonOverviewCopiedFiles"
+    },
+    "title": {
+      "literal": "buttonOverviewCopiedFiles"
+    }
+  },
+  "widgets/buttonUnzipDemo": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_buttonUnzipDemo"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "buttonUnzipDemo"
+    },
+    "title": {
+      "literal": "buttonUnzipDemo"
+    }
+  },
+  "widgets/buttonZipDemo": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_buttonZipDemo"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "buttonZipDemo"
+    },
+    "title": {
+      "literal": "buttonZipDemo"
+    }
+  },
+  "widgets/downloadZipfile": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_downloadZipFile"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "download"
+    },
+    "name": {
+      "literal": "downloadZipfile"
+    }
+  },
+  "widgets/filenamesCopiedFiles": {
+    "aimms.widget.type": {
+      "literal": "table"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "sp_filenamesFileSampeCopyFolder"
+        ]
+      }
+    },
+    "contents.partition": {
+      "literal": {
+        "rowHeader": [
+          "i_fnFSCF"
+        ],
+        "colHeader": [
+          "<IDENTIFIER-SET>"
+        ],
+        "aggregated": []
+      }
+    },
+    "custom.column.widths": {
+      "literal": [
+        {
+          "type": "colHeader",
+          "colKey": {
+            "<IDENTIFIER-SET>": "sp_filenamesFileSampeCopyFolder"
+          },
+          "width": 86.87
+        }
+      ]
+    },
+    "name": {
+      "literal": "filenamesCopiedFiles"
+    },
+    "title": {
+      "aimms": {
+        "contents": [
+          "sp_titleTable"
+        ],
+        "slices": []
+      }
+    },
+    "views": {
+      "literal": {}
+    }
+  }
+}
