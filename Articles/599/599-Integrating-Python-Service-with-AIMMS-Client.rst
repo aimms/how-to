@@ -5,6 +5,7 @@ Develop a Python service and integrate it into AIMMS
 
 .. Show how to test Python/Aimms locally.
 
+
 In today's data-driven world, the integration of powerful  
 machine learning capabilities into optimization applications is becoming increasingly important. 
 This article explores the seamless integration of AIMMS  
@@ -32,6 +33,12 @@ The remainder of this article is organized as follows:
 
 #.  Third, we'll deploy the service using an AIMMS application.
 
+Download
+---------
+
+:download:`AIMMS 24.2 project download <model/example.zip>` 
+
+.. CK --> CK: see also Nirvana 0124.
 
 Story: Bias in AI
 -------------------------------
@@ -241,8 +248,13 @@ AIMMS Integration
 The architecture of the AIMMS WebUI app, equipped with a generated OpenAPI library, regarding 
 using this service :doc:`looks as follows<../561/561-openapi-overview>`:
 
-.. image:: images/client-server-openapi-lib.png
+.. _ref_figure_client_server_openapi:
+
+.. figure:: images/client-server-openapi-lib.png
     :align: center
+
+    Client with OpenAPI lib and Server architecture
+
 
 With this architecture, an AIMMS client only uses assignment statements to:
 
@@ -293,6 +305,9 @@ Using Python Services in AIMMS Developer
 .. Explain how AIMMS Developer can utilize Python services to extend modeling capabilities.
 .. Provide step-by-step instructions on how to integrate the Python service into AIMMS Developer.
 .. Include examples of how AIMMS models can interact with the Python service.
+
+Looking at :ref:`ref_figure_client_server_openapi` above, we start with action 1, 
+passing the data to the OpenAPI and initiating the request, action 2, implemented in the OpenAPI lib. 
 
 .. code-block:: aimms 
     :linenos:
@@ -361,6 +376,9 @@ Remarks:
     
 #.  On line 40, the call to the OpenAPI library is made to convert its data structures (action 2 in the image above)
     to the data structure format of the service, and to do make the Rest API call to the service.
+
+Once, the request is handled by the server, and the result is passed back to the client, action 3, 
+the response is handled, action 4, as follows:
 
 .. code-block:: aimms 
     :linenos:
@@ -443,76 +461,46 @@ Send it to the Python service by clicking on the two masks in the lower right of
 
 After a minute or so, the response should come back.
 
-Note that training takes place for every request made; there is no caching of the computed machine learning model built in yet. (Clearly one of our todo's).
+Note that training takes place for every request made; there is no caching of the computed machine learning model built in yet. 
+(Clearly one of our todo's).
 
 
 Deploying Python Services on AIMMS Cloud
 -----------------------------------------------------
 
-.. Discuss the benefits of deploying Python services on AIMMS Cloud.
-.. Offer a guide on deploying Python services to AIMMS Cloud.
-.. Highlight considerations for scalability and security when deploying on AIMMS Cloud.
+Deploying a Python app on AIMMS Cloud consists of copying it onto the AIMMS Cloud platform, and
+launching the application.
 
-To publish the Python app, the script should be published on AIMMS PRO storage, and
-the container, including the python interpreter and its libraries should be identified.
+In this how-to, the copying part is copying to AIMMS PRO storage, using AIMMS PRO storage functions such as:
 
-To identify the container in which the Python service runs, a json file is used, for instance 
-the following one:
+* ``pro::storage::ExistsObject``: Procedure that checks for the presence of a file.
 
-.. code-block:: json
-    :linenos:
+* ``pro::SaveFileToCentralStorage``: Actual procedure that copies.
 
-    {
-        "serviceId": "biasInAIService",
-        "image" : {
-            "name": "services/aimms-anaconda-service",
-            "tag" : "2022.10"
-        },
-        "appConfig": {
-            "argv" : [ "python3", "main.py" ],
-            "env"  : [
-            ],
-            "listenPort" : 8000
-        }
-    }
+* ``pro::DeleteStorageFile``: Actual procedure that deletes (old) versions.
 
-Here, the 
 
-*   ``serviceId`` describes the name to be used for the service
-
-*   ``image`` describes the container, here Python, Anaconda distribution 2022.10 is used.
-
-*   ``appConfig`` which interpreter to use, and which Python scripts.
-
-With this information, and the location of the uploaded zip file on AIMMS PRO storage containing the Python script,
-the service can be launched on the AIMMS Cloud using procedure ``pro::service::LaunchService``, as follows:
+Launching the Python app is achieved by the AIMMS PRO procedure ``pro::service::LaunchService`` as illustrated below:
 
 .. code-block:: aimms 
     :linenos:
 
-    _p_retCodeLaunchService := pro::service::LaunchService(
-        connectionURI :  _sp_remoteURL,                   ! output, to address the service started.
-        jsonSpec      :  "biasInAIService/biasInAI.json", ! input, json file containing service configuration.
-        storedApp     :  "pro://" + _sp_appStoragePath);  ! input, location of the zip file containing the Python script.
+	_p_retCodeLaunchService := pro::service::LaunchService(
+		connectionURI      :  _sp_remoteURL,                       ! output
+		serviceId          :  "biasInAIService",                   ! Service name
+		imageName          :  "services/aimms-anaconda-service",   ! Image name
+		imageTag           :  "2023.07-1",                         ! Image version tag
+		listenPort         :  8000,                                ! Port used
+		storedApp          :  _sp_storedApp,                       ! AIMMS PRO storage location
+		cmdLine            :  "python3 main.py"   );               ! Command line of app
 
-If this call is successful, there is one small statement that should not be forgotten, namely to specify which 
-server the generated OpenAPI AIMMS library should use:
+This starts the service and makes it accessible to the WebUI AIMMS app itself.
 
-.. code-block:: aimms 
-    :linenos:
-
-    biasInAITuples::api::APIServer := "http://" + _sp_remoteURL;
-
-Here ``_sp_remoteURL`` is output from the procedure ``pro::service::LaunchService``.
 
 Conclusion
 ------------
 
-.. Summarize the key takeaways, emphasizing the value of integrating AIMMS 
-.. with Python services for advanced modeling and optimization. 
-.. Discuss potential use cases and future developments in this integration.
-
-Modern tools from 
+Modern tools such as: 
 
 * Python, especially the libraries Pedantic, FastAPI, and uvicorn, 
 
@@ -529,3 +517,8 @@ subsequently deploying the combo, relatively straightforward.
    FastAPI
    uvicorn
    logit
+
+Reference
+----------
+
+#.  `Launching Python, R and other services <https://documentation.aimms.com/cloud/launch-service.html#launching-python-r-and-other-services>`_.
