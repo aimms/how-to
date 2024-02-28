@@ -1,4 +1,4 @@
-Writing to a Snowflake database
+Writing to a Snowflake Database
 ================================
 
 .. Execution error while evaluating the assignment statement for "sp_connectionString" on line 1 in user-defined function section "PostMainInitialization". Error with SQLCreateConnectionString(ODBC, SnowflakeDSIIDriver, tna31667.snowflakecomputing.com, DEMO_DB, aimms): ODBC Driver 'SnowflakeDSIIDriver' is not installed on this system. For a list of available ODBC drivers, please refer to the AIMMS functions SQLNumberOfDrivers and SQLDriverName.
@@ -28,17 +28,20 @@ Looking at the table created in Swowflake's web interface:
 .. image:: images/asking-design-table-how-to-521.png
     :align: center
 
+|
+
 We observe that the created table has the following design:
 
 .. image:: images/created-design-table-how-to-521.png
     :align: center
+
+|
 
 The default width for ``VARCHAR``, 16777216 is used for this table.
 
 Using the following declarations in the AIMMS model:
 
 .. code-block:: aimms
-    :linenos:
 
     DeclarationSection HowTo521 {
         Set s_names {
@@ -74,8 +77,8 @@ We encounter the following error message:
 
 .. code-block:: none
     
-    ``Error writing to database table "db_unknownPeopleWithAge": ODBC[21] : HY000 [Snowflake][Snowflake] (21)``
-    ``Streaming value for bind variable not supported: 2``.
+    Error writing to database table "db_unknownPeopleWithAge": ODBC[21] : HY000 [Snowflake][Snowflake] (21)
+    Streaming value for bind variable not supported: 2.
 
 Thusfar the reproduction of the error message. Let's continue with a potential remedy.
 
@@ -105,6 +108,7 @@ Checking the design of the altered table:
 .. image:: images/altered-design-table-how-to-521.png
     :align: center
 
+|
 
 Viewing the data after executing the AIMMS procedure ``pr_writeHT521`` again: 
 
@@ -113,9 +117,10 @@ Viewing the data after executing the AIMMS procedure ``pr_writeHT521`` again:
 .. image:: images/altered-design-data-table-how-to-521.png
     :align: center
 
+|
+
 We see that the remedy worked; specifying a specific width turned out to be sufficient.
 The default of used by Snowflake of 16777216 turns out to be too much.
 
-
-
-
+.. seealso::
+    AIMMS provides a Snowflake Library to facilitate its use within AIMMS. See the documentation `here <https://documentation.aimms.com/snowflake/index.html>`_.
