@@ -86,6 +86,9 @@ If you do not see a name here, please contact `AIMMS Support <support@aimms.com>
 Release Notes
 --------------------
 
+`v1.2 <https://github.com/aimms/datalake-tools/releases/tag/1.2>`_ (28/02/2024)
+   Adding missing parameter to the table. 
+
 `v1.1 <https://github.com/aimms/datalake-tools/releases/tag/1.1>`_ (08/02/2024)
    Both Account SAS Token and Container SAS Token are available to be created.
 
