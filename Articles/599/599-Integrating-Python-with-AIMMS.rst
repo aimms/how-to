@@ -1,128 +1,42 @@
-Develop a Python service and integrate it into AIMMS
+Creating and Connecting Python Service to AIMMS
 =====================================================
 
-.. Call this feature an experimental feature.
+In today's data-driven world, integrating robust machine learning capabilities into optimization applications is becoming increasingly important.
+This article explores the seamless fusion of AIMMS with a Python service using FastAPI, Pydantic, and Uvicorn. 
+Learn how to leverage this integration by creating an OpenAPI AIMMS library, deploying it in AIMMS Developer, and utilizing the resulting application on the AIMMS Cloud.
 
-.. Show how to test Python/Aimms locally.
-
-
-In today's data-driven world, the integration of powerful  
-machine learning capabilities into optimization applications is becoming increasingly important. 
-This article explores the seamless integration of AIMMS  
-with a Python service built using FastAPI, Pydantic, and Uvicorn. 
-We'll dive into how to leverage this service by creating an OpenAPI AIMMS library, and 
-deploy this library first in AIMMS Developer and subsequently use the resulting app on the AIMMS Cloud.
-
-
-Introduction
-----------------
-
-In the world of problem-solving, AIMMS serves as a reliable workhorse, helping organizations make data-driven decisions and streamline operations. 
-On the other hand, Python has earned its stripes as a go-to language for data manipulation and modeling. 
-When these two powerhouses combine forces, it's like unlocking a toolbox full of solutions. 
-Complex optimization challenges meet Python's adaptable strength, paving the way for practical solutions and improved efficiency.
-
-Join us on this journey as we unravel the art of bridging the gap between AIMMS and Python, 
-unlocking the potential for innovation and efficiency in your modeling endeavors.
+AIMMS serves as a reliable workhorse in problem-solving, aiding organizations in data-driven decisions. 
+Python, renowned for data manipulation and modeling, joins forces with AIMMS, unlocking a toolbox of solutions for complex optimization challenges. 
+Join us on this journey to explore the bridge between AIMMS and Python, unlocking innovation and efficiency in your modeling endeavors.
 
 The remainder of this article is organized as follows:
 
-#.  First, we'll present the story, the background against which the technology is illustrated.
+#.  We'll built the Python service.
 
-#.  Second, we'll built the Python service.
+#.  We'll deploy the service using an AIMMS application.
 
-#.  Third, we'll deploy the service using an AIMMS application.
+Example 
+----------------
 
-Download
----------
+This article illustrate procedures used in Bias in AI example. 
 
-:download:`AIMMS 24.2 project download <model/example.zip>` 
-
-.. CK --> CK: see also Nirvana 0124.
-
-Story: Bias in AI
--------------------------------
-
-.. https://www.kaggle.com/code/var0101/introduction-to-ai-ethics
-.. https://www.kaggle.com/code/alexisbcook/identifying-bias-in-ai/tutorial
-.. https://www.kaggle.com/code/alexisbcook/identifying-bias-in-ai
-
-The combination of machine learning and everyday applications is at the heart of modern tech advancements. 
-From predicting trends to powering self-driving cars, machine learning reshapes how we use data to make smarter choices. 
-But, hidden beneath its brilliance is a complex issue - bias within these algorithms.
-
-In this example, we illustrate Bias, by creating an AIMMS front-end to an existing Python application.
-The Python application is from
-`Kaggle <https://www.kaggle.com/>`_ who teaches about 
-`bias <https://www.kaggle.com/code/alexisbcook/identifying-bias-in-ai/tutorial>`_ in the context of 
-`ethics <https://www.kaggle.com/code/var0101/introduction-to-ai-ethics>`_.
-
-The AIMMS application uses the following steps:
-
-#.  Get a comment from a user to determine its toxicity
-
-#.  Read in training data
-
-#.  Select two columns from this training data: the comment and the toxicity
-
-#.  Pass the training data and the user entered comment to a Python service
-
-#.  The Python service returns whether it considers the user comment to be toxic or not.
-
-.. note:: 
-
-    This app demonstrates bias, which can be observed by entering comments like:
-
-    #.  ``black`` which is marked **toxic**, and  
-
-    #.  ``white`` which is marked **not toxic**.
-
-A few remarks on the choice of this example:
-
-*   This example is about checking whether there is bias in your data.  
-    At first, this may seem far fetched for Decision Support applications.
-    However, basing a decision on data that is not representative of your market is not a good idea!
-
-*   A practical aspect of this example is that the communication between two processes is relatively simple: a row of objects and a few scalars - that is all.
-    In practice, there is often significantly more detail to the structure of the data communication; 
-    however, that extra detail in structure will not make the flow of information easier to understand.
-
-Developing the Python service
+Creating the Python Service
 -----------------------------
-
-Machine learning core
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-The core of the Python app is based on materials from `Bias in AI <https://www.kaggle.com/code/alexisbcook/identifying-bias-in-ai/tutorial>`_.
-For the Machine Learning core it uses `scikit-learn <https://scikit-learn.org/stable/>`_, in particular:
-
-#.  `train_test_split <https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split>`_ Split arrays or matrices into random train and test subsets.
-
-#.  `CountVectorizer <https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer>`_ Convert a collection of text documents to a matrix of token counts.
-
-#.  `LogisticRegression <https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression>`_ Create Logistic Regression (aka logit, MaxEnt) classifier.
-
-How these utilities work in detail is outside the scope of this article.
-
-Information communicated
-^^^^^^^^^^^^^^^^^^^^^^^^
 
 The input (training data) to this machine learning code is an array of observations, 
 whereby each observation consists of a comment (a text string), and a target (a binary indicating toxic when 1).
-In addition, the input has a user-comment.  The purpose of the service is to predict whether this user comment is toxic or not.
+In addition, the input has a user-comment. The purpose of the service is to predict whether this user comment is toxic or not.
 
 The output to this machine learning code is a zero (not toxic) or one (toxic). 
 
 So how do we model these inputs and output?
 
 Data Modeling with Pydantic
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 `Pydantic <https://docs.pydantic.dev/latest/>`_ is renown for its data modeling. 
 This library is widely used for its data validation. 
-Here ``Basemodel`` is imported from ``Pydantic``.
-
-First we construct the observation.
+Here ``Basemodel`` is imported from ``Pydantic``. First we construct the observation.
 
 .. code-block:: python 
     :linenos:
@@ -154,21 +68,17 @@ With that we have the input modeled. Next, we define the class for the output, w
 
 
 Building the Python Service with FastAPI
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. Briefly mention the setup of the Python service with FastAPI, but focus on the core endpoints and functionalities relevant to AIMMS.
 
-Using `FastAPI <https://fastapi.tiangolo.com/>`_ the paths are easily defined.
-
-First create a global that represents the service, called ``app``.
+Using `FastAPI <https://fastapi.tiangolo.com/>`_ the paths are easily defined. First create a global that represents the service, called ``app``.
 
 .. code-block:: python 
     :linenos:
 
     # Create the application object
     app = FastAPI()
-
-Remarks:
 
 *   Line 2: Create the app, entry point for the provided services.
 
@@ -183,15 +93,13 @@ Next, for every path, here just one, name its inputs and outputs, as specified u
 
 
 *   Line 2: Define the path ``/compute``.
-
-*   Line 3: Actual function definition.
-    As Pydantic is used by FastAPI, this ensures that ``/compute`` input is validated against the data validation rules of ``BiasInAIInputTuples``.
+*   Line 3: Actual function definition. As Pydantic is used by FastAPI, this ensures that ``/compute`` input is validated against the data validation rules of ``BiasInAIInputTuples``.
     In addition, the output will be according to the class ``BiasInAIOutput``.
 
 Deploying the Python Service with Uvicorn
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-And now running the service using `Uvicorn <https://www.uvicorn.org/>`_
+And now running the service using `Uvicorn <https://www.uvicorn.org/>`_.
 
 .. code-block:: python 
     :linenos:
@@ -199,25 +107,17 @@ And now running the service using `Uvicorn <https://www.uvicorn.org/>`_
     if __name__ == "__main__":
         uvicorn.run("main:app", host="", port=8000, log_level="info")
 
-Extras from the combo Pedantic, FastAPI and uvicorn
+Extras from the Combo Pedantic, FastAPI and Uvicorn
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 There are a few extras that come with this combo, and, admittedly, I've grown used to those extras being present:
 
 #.  Get Swagger dynamic interface docs. By entering the URL ``http://localhost:8000/docs`` you will get the interface documented.
-    It looks as follows:
 
-    .. raw:: html
+    .. dropdown:: It looks as follows:
 
-        <details style="border: solid 1px gray; border-radius: 5px;">
-        <summary style="cursor: pointer;">Click me to see the screenshot 👇</summary>
-
-    .. image:: images/localhost-docs.png
-        :align: center
-
-    .. raw:: html
-    
-        </details>
+        .. image:: images/localhost-docs.png
+            :align: center
 
 
 #.  Get OpenAPI 3.1 specification.  
@@ -225,49 +125,36 @@ There are a few extras that come with this combo, and, admittedly, I've grown us
     by doing a HTTP Get on ``http://localhost:8000/openapi.json``. 
     Note that there are various `tools <https://openapi.tools/>`_ to work with such a specification.
     
-    Using `Postman <https://www.postman.com/>`_, obtaining such a specification looks as follows:
+    .. dropdown::  Using `Postman <https://www.postman.com/>`_, obtaining such a specification looks as follows:
 
-    .. raw:: html
-
-        <details style="border: solid 1px gray; border-radius: 5px;">
-        <summary style="cursor: pointer;">Click me to see the screenshot 👇</summary>
-
-    .. image:: images/postman-get-openapi.png
-        :align: center
-
-    .. raw:: html
-
-        </details>
+        .. image:: images/postman-get-openapi.png
+            :align: center
 
     We will be using this ``openapi.json`` file in the next chapter to base the communication by 
     the AIMMS client on.
 
-AIMMS Integration
------------------
+Integrating to AIMMS
+--------------------
 
 The architecture of the AIMMS WebUI app, equipped with a generated OpenAPI library, regarding 
 using this service :doc:`looks as follows<../561/561-openapi-overview>`:
 
-.. _ref_figure_client_server_openapi:
+.. _figure-01:
 
 .. figure:: images/client-server-openapi-lib.png
     :align: center
 
-    Client with OpenAPI lib and Server architecture
+    Client with OpenAPI lib and Server Architecture.
 
 
 With this architecture, an AIMMS client only uses assignment statements to:
-
 #.  Provide the input to the service at hand, and
-
 #.  Receive the output from that service.
 
 There is no need for the AIMMS app developer to write conversion specifications.
 
-How do we create such an AIMMS OpenAPI library?  This is discussed in the next section.
 
-
-Building a OpenAPI library from the Python app running as a service
+Building a OpenAPI Library from the Python App Running as a Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ``https//:8000/openapi.json`` provides a copy of the OpenAPI 3.1 specification of the interface created in the Python app.
@@ -283,21 +170,18 @@ Using this specification, an AIMMS Library is created using:
         explodeDefault  :  1, 
         generateXMLData :  0);
         
-Remarks:
 
-#.  Line 2: input, filename.
+* Line 2: input, filename.
+* Line 3: output, name of the library.
+* Line 4: And its prefix.
+* Line 5: The library generated permits asynchronous calls and able to maintain data of the REST API call history.
 
-#.  Line 3: output, name of the library
+.. seealso::
 
-#.  Line 4: And its prefix
+    Further information about generating such an AIMMS library:
 
-#.  Line 5: The library generated permits asynchronous calls and able to maintain data of the REST API call history.
-
-Further information about generating such an AIMMS library:
-
-#.  https://documentation.aimms.com/dataexchange/openapi-client.html#generating-api-clients-from-an-openapi-specification
-
-#.  https://documentation.aimms.com/dataexchange/api.html#dex-schema-GenerateClientFromOpenAPISpec
+    * `Generating API clients from an OpenAPI specification <https://documentation.aimms.com/dataexchange/openapi-client.html#generating-api-clients-from-an-openapi-specification>`_.
+    * `dex::schema::GenerateClientFromOpenAPISpec() documentation <https://documentation.aimms.com/dataexchange/api.html#dex-schema-GenerateClientFromOpenAPISpec>`_.
 
 Using Python Services in AIMMS Developer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -310,7 +194,6 @@ Looking at :ref:`ref_figure_client_server_openapi` above, we start with action 1
 passing the data to the OpenAPI and initiating the request, action 2, implemented in the OpenAPI lib. 
 
 .. code-block:: aimms 
-    :linenos:
 
     Procedure pr_callBiasInAITuples {
         Body: {
@@ -371,17 +254,14 @@ passing the data to the OpenAPI and initiating the request, action 2, implemente
 
 Remarks:
 
-#.  In the code fragment above, lines 11 to 23 pass the data from the client to the OpenAPI library. 
-    This corresponds to action 1 in the image above. 
-    
-#.  On line 40, the call to the OpenAPI library is made to convert its data structures (action 2 in the image above)
-    to the data structure format of the service, and to do make the Rest API call to the service.
+* In the code fragment above, lines 11 to 23 pass the data from the client to the OpenAPI library. This corresponds to action 1 in :numref:`figure-01`.
+
+* On line 40, the call to the OpenAPI library is made to convert its data structures (action 2 in the image above) to the data structure format of the service, and to do make the Rest API call to the service.
 
 Once, the request is handled by the server, and the result is passed back to the client, action 3, 
 the response is handled, action 4, as follows:
 
 .. code-block:: aimms 
-    :linenos:
 
     Procedure pr_responseHookTuples {
         Arguments: (ep_in_callInstance);
@@ -434,19 +314,18 @@ for a successful call, verified by HTTP status code 200, is on line 13.
 Subsequently, lines 14, 15 are used for the communication to the end-user.
 The remainder of this procedure is to notify, handle errors, and track when needed.
 
-Regarding the above image: action 3 is taken care of by the ``callback`` procedure 
+Regarding to :numref:`figure-01` : action 3 is taken care of by the ``callback`` procedure 
 declared next to the ``apiCall`` procedure called at the end of ``pr_callBiasInAITuples``.
 Action 4, corresponds to the procedure ``pr_responseHookTuples`` just discussed.
 
 The above provides a nice framework that can be used on a development machine.
-But how about deploying the apps created? This will be discussed in the next chapter.
 
-Local testing
+Local Testing
 ------------------------------
 
 Once the AIMMS app and the Python app are finished, it is possible to test the combo on your development machine.
 
-First start the Python app, it should come up with something like:
+First start the Python app *either using Pycharm with Python 3.11 as interpreter or Python 3.11 start main*, it should come up with something like:
 
 .. code-block:: none
 
@@ -471,7 +350,7 @@ Deploying Python Services on AIMMS Cloud
 Deploying a Python app on AIMMS Cloud consists of copying it onto the AIMMS Cloud platform, and
 launching the application.
 
-In this how-to, the copying part is copying to AIMMS PRO storage, using AIMMS PRO storage functions such as:
+In this article, the copying part is copying to AIMMS PRO Storage, using AIMMS PRO Storage functions such as:
 
 * ``pro::storage::ExistsObject``: Procedure that checks for the presence of a file.
 
@@ -484,8 +363,8 @@ Launching the Python app is achieved by the AIMMS PRO procedure ``pro::service::
 
 .. code-block:: aimms 
     :linenos:
-
-	_p_retCodeLaunchService := pro::service::LaunchService(
+    
+    _p_retCodeLaunchService := pro::service::LaunchService(
 		connectionURI      :  _sp_remoteURL,                       ! output
 		serviceId          :  "biasInAIService",                   ! Service name
 		imageName          :  "services/aimms-anaconda-service",   ! Image name
@@ -500,16 +379,12 @@ This starts the service and makes it accessible to the WebUI AIMMS app itself.
 Conclusion
 ------------
 
-Modern tools such as: 
+Modern tools such as: Python, especially the libraries Pedantic, FastAPI, and uvicorn, AIMMS Data Exchange library, especially the generation of OpenAPI clients,
+and AIMMS Cloud, especially the feature to launch additional services make connecting a Python service to an AIMMS app, and subsequently deploying the combo, relatively straightforward.
 
-* Python, especially the libraries Pedantic, FastAPI, and uvicorn, 
+.. seealso::
+    `Launching Python, R and other services <https://documentation.aimms.com/cloud/launch-service.html#launching-python-r-and-other-services>`_ documentation.
 
-* AIMMS Data Exchange library, especially the generation of OpenAPI clients, and
-
-* AIMMS Cloud, especially the feature to launch additional services
-
-make connecting a Python service to an AIMMS app, and 
-subsequently deploying the combo, relatively straightforward.
 
 .. spelling:word-list::
 
@@ -517,8 +392,3 @@ subsequently deploying the combo, relatively straightforward.
    FastAPI
    uvicorn
    logit
-
-Reference
-----------
-
-#.  `Launching Python, R and other services <https://documentation.aimms.com/cloud/launch-service.html#launching-python-r-and-other-services>`_.
