@@ -16,7 +16,7 @@ AIMMS is optimized for the development of apps based on MIP models and in this a
 Overview
 -----------
 
-:doc:`The HTTP Library section <https://how-to.aimms.com/C_Developer/Sub_Connectivity/sub_http/index.html>` contains examples like :doc:`Call Google Maps API <../296/296-obtaining-geographic-data-through-the-google-api>` which show how to call web services in AIMMS. 
+`The HTTP Library section <https://how-to.aimms.com/C_Developer/Sub_Connectivity/sub_http/index.html>`_ contains examples like :doc:`Call Google Maps API <../296/296-obtaining-geographic-data-through-the-google-api>` which show how to call web services in AIMMS. 
 We will use the same principles to extend an AIMMS app with models built in Python or R by exposing those models as web services. 
 
 We will publish a series of how-to articles explaining how AIMMS apps can be extended with models built in Python or R. 
