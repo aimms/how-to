@@ -18,7 +18,7 @@ The remainder of this article is organized as follows:
 Example 
 ----------------
 
-This article illustrate procedures used in Bias in AI example. 
+This article illustrate procedures used in `Bias in AI example <https://how-to.aimms.com/Articles/623/623-bias-in-ai.html>`_, please download it and test the following explanations. 
 
 Creating the Python Service
 -----------------------------
@@ -326,12 +326,14 @@ Once the AIMMS app and the Python app are finished, it is possible to test the c
 First start the Python app, this can be achieved by using Pycharm as interpreter or by starting the Python code from Command Prompt. 
 
     .. dropdown:: Starting from Command Prompt:
+
         At the ``bias-in-ai\PythonSource311`` folder, start Command Prompt and execute ``main.py``.
 
         .. figure:: images/py.png
             :align: center
 
     .. dropdown:: Using Pycharm:
+        
         Open ``main.py`` trought Pycharm and press the execute button.
 
         .. figure:: images/pycharm.png

@@ -12,7 +12,7 @@ Bias in AI
    :target: https://github.com/aimms/bias-in-ai
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/math-or-optimization-modeling-39/using-an-api-with-openapi-specification-1368
+   :target: https://community.aimms.com/aimms-support-updates-67/bias-in-ai-example-1642
 
 Story
 ----------
@@ -80,7 +80,7 @@ For the Machine Learning core it uses `scikit-learn <https://scikit-learn.org/st
 How these utilities work in detail is outside the scope of this article.
 
 .. seealso::
-    Here you can find specific explanations about how to create and connect a Python Service using AIMMS. 
+    Here you can find specific explanations about how to `create and connect a Python Service using AIMMS <https://how-to.aimms.com/Articles/599/599-Integrating-Python-with-AIMMS.html>`_. 
 
 WebUI Features
 ---------------
@@ -102,8 +102,6 @@ The following WebUI features are used:
 - `Page Actions <https://documentation.aimms.com/webui/page-menu.html>`_ 
 
 - `Treemap Widget <https://documentation.aimms.com/webui/tree-map-widget.html>`_ 
-
-- `Data Exchange (DEX) Library <https://documentation.aimms.com/dataexchange/index.html>`_
 
 
 UI Styling
@@ -191,7 +189,7 @@ Minimal Requirements
 However, you will need Python 3.11 installed. Pycharm is recommended but not required.   
 
 Release Notes
---------------------   
+--------------------
 
 `v1.0 <https://github.com/aimms/bias-in-ai/releases/tag/1.0>`_ (29/02/2024)
     First version launched!
