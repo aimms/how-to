@@ -14,6 +14,11 @@ Bias in AI
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-support-updates-67/bias-in-ai-example-1642
 
+.. image:: images/project.gif
+    :align: center
+
+|
+
 Story
 ----------
 
