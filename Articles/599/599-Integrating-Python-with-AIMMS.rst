@@ -334,7 +334,7 @@ First start the Python app, this can be achieved by using Pycharm as interpreter
 
     .. dropdown:: Using Pycharm:
         
-        Open ``main.py`` trought Pycharm and press the execute button.
+        Open ``main.py`` through Pycharm and press the execute button.
 
         .. figure:: images/pycharm.png
             :align: center
