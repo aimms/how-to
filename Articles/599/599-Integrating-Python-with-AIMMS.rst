@@ -137,7 +137,7 @@ Integrating to AIMMS
 The architecture of the AIMMS WebUI app, equipped with a generated OpenAPI library, regarding 
 using this service :doc:`looks as follows<../561/561-openapi-overview>`:
 
-.. _figure-01:
+.. _figure-599-01:
 
 .. figure:: images/client-server-openapi-lib.png
     :align: center
@@ -188,7 +188,7 @@ Using Python Services in AIMMS Developer
 .. Provide step-by-step instructions on how to integrate the Python service into AIMMS Developer.
 .. Include examples of how AIMMS models can interact with the Python service.
 
-Looking at :ref:`ref_figure_client_server_openapi` above, we start with action 1, 
+Looking at :ref:`figure-599-01` above, we start with action 1, 
 passing the data to the OpenAPI and initiating the request, action 2, implemented in the OpenAPI lib. 
 
 .. code-block:: aimms 
@@ -252,7 +252,7 @@ passing the data to the OpenAPI and initiating the request, action 2, implemente
 
 Remarks:
 
-* In the code fragment above, lines 11 to 23 pass the data from the client to the OpenAPI library. This corresponds to action 1 in :numref:`figure-01`.
+* In the code fragment above, lines 11 to 23 pass the data from the client to the OpenAPI library. This corresponds to action 1 in :numref:`figure-599-01`.
 
 * On line 40, the call to the OpenAPI library is made to convert its data structures (action 2 in the image above) to the data structure format of the service, and to do make the Rest API call to the service.
 
@@ -312,7 +312,7 @@ for a successful call, verified by HTTP status code 200, is on line 13.
 Subsequently, lines 14, 15 are used for the communication to the end-user.
 The remainder of this procedure is to notify, handle errors, and track when needed.
 
-Regarding to :numref:`figure-01` : action 3 is taken care of by the ``callback`` procedure 
+Regarding to :numref:`figure-599-01` : action 3 is taken care of by the ``callback`` procedure 
 declared next to the ``apiCall`` procedure called at the end of ``pr_callBiasInAITuples``.
 Action 4, corresponds to the procedure ``pr_responseHookTuples`` just discussed.
 
