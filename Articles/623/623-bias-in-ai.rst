@@ -198,4 +198,4 @@ Release Notes
 
 .. spelling:word-list::
 
-   
+   logit
