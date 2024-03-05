@@ -27,9 +27,7 @@ The input (training data) to this machine learning code is an array of observati
 whereby each observation consists of a comment (a text string), and a target (a binary indicating toxic when 1).
 In addition, the input has a user-comment. The purpose of the service is to predict whether this user comment is toxic or not.
 
-The output to this machine learning code is a zero (not toxic) or one (toxic). 
-
-So how do we model these inputs and output?
+The output to this machine learning code is a zero (not toxic) or one (toxic). So how do we model these inputs and output?
 
 Data Modeling with Pydantic
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -180,8 +178,8 @@ Using this specification, an AIMMS Library is created using:
 
     Further information about generating such an AIMMS library:
 
-    * `Generating API clients from an OpenAPI specification <https://documentation.aimms.com/dataexchange/openapi-client.html#generating-api-clients-from-an-openapi-specification>`_.
-    * `dex::schema::GenerateClientFromOpenAPISpec() documentation <https://documentation.aimms.com/dataexchange/api.html#dex-schema-GenerateClientFromOpenAPISpec>`_.
+    * `Generating API clients from an OpenAPI <https://documentation.aimms.com/dataexchange/openapi-client.html#generating-api-clients-from-an-openapi-specification>`_ specification.
+    * `dex::schema::GenerateClientFromOpenAPISpec() <https://documentation.aimms.com/dataexchange/api.html#dex-schema-GenerateClientFromOpenAPISpec>`_ documentation.
 
 Using Python Services in AIMMS Developer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -325,7 +323,21 @@ Local Testing
 
 Once the AIMMS app and the Python app are finished, it is possible to test the combo on your development machine.
 
-First start the Python app *either using Pycharm with Python 3.11 as interpreter or Python 3.11 start main*, it should come up with something like:
+First start the Python app, this can be achieved by using Pycharm as interpreter or by starting the Python code from Command Prompt. 
+
+    .. dropdown:: Starting from Command Prompt:
+        At the ``bias-in-ai\PythonSource311`` folder, start Command Prompt and execute ``main.py``.
+
+        .. figure:: images/py.png
+            :align: center
+
+    .. dropdown:: Using Pycharm:
+        Open ``main.py`` trought Pycharm and press the execute button.
+
+        .. figure:: images/pycharm.png
+            :align: center
+ 
+If successful, both options should come up with something like:
 
 .. code-block:: none
 
@@ -335,14 +347,11 @@ First start the Python app *either using Pycharm with Python 3.11 as interpreter
     INFO:     Uvicorn running on http://:8000 (Press CTRL+C to quit)
 
 After this you can start the AIMMS App in AIMMS Developer.
-Navigate to page ``results``, and enter a phrase for which you want the toxicity to be tested.
-Send it to the Python service by clicking on the two masks in the lower right of the screen.
 
-After a minute or so, the response should come back.
+Navigate to page ``Results``, and enter a phrase for which you want the toxicity to be tested.
+Send it to the Python service by clicking on the two masks in the lower right of the screen. After a minute or so, the response should come back.
 
 Note that training takes place for every request made; there is no caching of the computed machine learning model built in yet. 
-(Clearly one of our todo's).
-
 
 Deploying Python Services on AIMMS Cloud
 -----------------------------------------------------

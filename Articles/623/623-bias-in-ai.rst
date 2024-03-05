@@ -65,7 +65,6 @@ A few remarks on the choice of this example:
 Language
 -----------
 
-
 Machine Learning Core
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -79,6 +78,9 @@ For the Machine Learning core it uses `scikit-learn <https://scikit-learn.org/st
 #.  `LogisticRegression <https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression>`_: Create Logistic Regression (aka logit, MaxEnt) classifier.
 
 How these utilities work in detail is outside the scope of this article.
+
+.. seealso::
+    Here you can find specific explanations about how to create and connect a Python Service using AIMMS. 
 
 WebUI Features
 ---------------
