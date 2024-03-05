@@ -22,7 +22,7 @@ These topics help you to use the Data Exchange Library with your AIMMS project.
    /Articles/544/544-dex-and-oauth
    /Articles/594/594-adls-data-integration
    /Articles/595/595-accessing-the-azure-datalake-externally
-   /Articles/599/599-Integrating-Python-Service-with-AIMMS-Client
+   /Articles/599/599-Integrating-Python-with-AIMMS
    Sub_OpenAPI/index
    Sub_Develop_Service/index
 
