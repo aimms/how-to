@@ -122,7 +122,7 @@ For logging in AIMMS Developer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-#.  Make sure that the line containing ``<appender-ref ref="MyFileAppender" />`` in Section 3 of the ``LoggerConfig.xml`` file is the only uncommented line (without ``<!-- `` in front). Usually this is how you download the file; 
+#.  Make sure that the line containing ``<appender-ref ref="MyFileAppender"/>`` in Section 3 of the ``LoggerConfig.xml`` file is the only uncommented line (without ``<!-- `` in front). Usually this is how you download the file; 
 
 #.  Modify any of the log levels if needed or instructed by the AIMMS team and save the file;  
 
@@ -150,7 +150,7 @@ To configure the Windows explorer with this default action on ``.aimms`` files, 
 For logging of WebUI and solver sessions in AIMMS Cloud
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#.  Make sure that the line containing ``<appender-ref ref="stdout" />`` in Section 3 of the ``LoggerConfig.xml`` file is the only uncommented line (without ``<!-- `` in front);  
+#.  Make sure that the line containing ``<appender-ref ref="stdout"/>`` in Section 3 of the ``LoggerConfig.xml`` file is the only uncommented line (without ``<!-- `` in front);  
 
 #.  Modify any of the log levels if needed or instructed by the AIMMS team and save the file; 
 
