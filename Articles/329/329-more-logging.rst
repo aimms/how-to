@@ -122,9 +122,9 @@ For logging in AIMMS Developer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-#.  Make sure that the line containing ``<appender-ref ref="MyFileAppender"/>`` in Section 3 of the ``LoggerConfig.xml`` file is the only uncommented line (without ``<!--`` in front). Usually this is how you download the file; 
+#.  Make sure that the line containing ``<appender-ref ref="MyFileAppender"/>`` in Section 3 of the ``LoggerConfig.xml`` file is the only uncommented line (without ``<!--`` in front and ``-->`` at the back). Usually this is how you download the file; 
 
-#.  Modify any of the log levels if needed or instructed by the AIMMS team and save the file;  
+#.  Modify any of the log levels if needed or as instructed by the AIMMS team and save the file;  
 
 #.  Place the ``LoggerConfig.xml`` file in the AIMMS Project folder;  
 
@@ -150,7 +150,7 @@ To configure the Windows explorer with this default action on ``.aimms`` files, 
 For logging of WebUI and solver sessions in AIMMS Cloud
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#.  Make sure that the line containing ``<appender-ref ref="stdout"/>`` in Section 3 of the ``LoggerConfig.xml`` file is the only uncommented line (without ``<!--`` in front);  
+#.  Make sure that the line containing ``<appender-ref ref="stdout"/>`` in Section 3 of the ``LoggerConfig.xml`` file is the only uncommented line (without ``<!--`` in front and ``-->`` at the back);  
 
 #.  Modify any of the log levels if needed or instructed by the AIMMS team and save the file; 
 
@@ -171,8 +171,8 @@ For logging of WinUI sessions in AIMMS Cloud or in AIMMS PRO on premise
 
 #.  Amend the ``LoggerConfig.xml`` file the following way:
 
-- in Section 1 of the ``LoggerConfig.xml`` file: for ``<appender name = MyFileAppender>`` set ``value="C:\temp\aimms-log.txt"`` 
-- in Section 3 of the ``LoggerConfig.xml`` file: find the line ``<appender-ref ref="MyFileAppender" />`` and remove the comments in front of it. Make sure that this is the only uncommented line from Section 3. 
+- in Section 1 of the ``LoggerConfig.xml`` file: for ``<appender name = MyFileAppender>`` set ``value="C:\temp\aimms-log.txt"`` (instead of ``value="log/aimms-log.txt"``)
+- in Section 3 of the ``LoggerConfig.xml`` file: find the line ``<appender-ref ref="MyFileAppender" />`` and remove the comments in front of it, if any. Make sure that this is the only uncommented line from Section 3. 
 
 #.  Upload the ``LoggerConfig.xml`` file locally in the folder of the app. In my case it will look like this: ``C:\Users\Desislava\AppData\Local\AIMMS\PRO\dessie-test2.aimms.cloud\Tunnel app 40181\42ead7a8-0a46-4436-9092-4e86490380ee``;
 
