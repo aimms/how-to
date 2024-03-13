@@ -5,10 +5,10 @@ DataLake Tools
    :keywords: datalake, azure, sas token, container, data integration, file system, file management
    :description: This article is for developers who want to integrate the Azure Data Lake Storage as part of their AIMMS account.
 
-.. image:: https://img.shields.io/badge/AIMMS_24.1-ZIP:_DataLake Tools-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.2-ZIP:_DataLake Tools-blue
    :target: https://github.com/aimms/datalake-tools/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.1-Github:_DataLake Tools-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.2-Github:_DataLake Tools-blue
    :target: https://github.com/aimms/datalake-tools
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -72,8 +72,9 @@ In the next subsection, the functionality of 'Container SAS Token' page will be 
 
 |
 
-To create a Container SAS Token, please input the required information on Inputs table. Note that a File System is required, but you can always fetch the latest File Systems by the 'Refresh File System' button. Once everything is set, click on the button below it.
-A new Container SAS Token will be generated and will appear on the bottom.
+To create a Container SAS Token, please input the required information on Inputs table. Note that a File System is required, but you can always fetch the latest File Systems by the 'Refresh File System' button. 
+Here you have the opportunity to create and delete File Systems. If you prefer to create directly on Azure, here, you can update the File System list.
+Once everything is set, click on the button below it. A new Container SAS Token will be generated and will appear on the bottom.
 
 Minimal Requirements
 --------------------
@@ -85,6 +86,11 @@ If you do not see a name here, please contact `AIMMS Support <support@aimms.com>
 
 Release Notes
 --------------------
+
+`v1.3 <https://github.com/aimms/datalake-tools/releases/tag/1.3>`_ (13/03/2024)
+   Make the app more usable by allowing: the expiry time to be specified in days as well as seconds, 
+   choosing the right order of permissions for container SAS tokens, displaying SAS query string as well as SAS URL, 
+   creation and deletion of file systems (containers) within the storage account.
 
 `v1.2 <https://github.com/aimms/datalake-tools/releases/tag/1.2>`_ (28/02/2024)
    Adding missing parameter to the table. 
