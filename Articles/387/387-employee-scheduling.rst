@@ -14,6 +14,11 @@ Employee Scheduling
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-webui-44/updated-employee-scheduling-example-1291
 
+.. image:: images/project.gif
+    :align: center
+
+|
+
 Story
 -----
 

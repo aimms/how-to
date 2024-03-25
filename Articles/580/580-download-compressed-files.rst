@@ -1,172 +1,84 @@
-Add Compressed Files for User Download
-============================================
+Zipping and Unzipping on AIMMS Developer and on AIMMS Cloud
+===========================================================================
 
 .. meta::
-   :description: How to add compressed files to AIMMS PRO applications.
-   :keywords: zip, compress, download 
+   :description: How to zip, unzip using AIMMS Developer, AIMMS PRO and on AIMMS Cloud.
+   :keywords: zip, unzip, compress, expand, 
 
+Downloading and uploading a collection of files is achieved by first compressing into a single file, 
+called an archive, and then transferring the archive from one machine to the other.
+In this article, we will focus on the compression of a collection of files into a single archive, and 
+on the expansion of such an archive into a collection of files.
 
+The AIMMS core does not provide zipping and unzipping functionality natively; but 
 
-A download widget in the WebUI is able to point only a unique file name. Thus if you need to download multiple different files, you would need multiple download widgets. However, you may use ZIP files (or equivalent compressed format, such as TAR files on Linux). The question is, how to automatically generate a zip file out of several files thanks to AIMMS, such that your end-user would be able to download it from the End-user mode (WebUI) in one click? In developer mode, on PRO or on the AIMMS Cloud ?
+* Windows 10 and Windows 11 provide the powershell commands 
+  `Compress-Archive <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.archive/compress-archive?view=powershell-7.4>`_ and
+  `Expand-Archive <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.archive/expand-archive?view=powershell-7.4>`_
+* Most Linux distributions, including the Linux distribution used on the AIMMS Cloud, provide zip.
+  The use of zip is illustrated `here <https://www.geeksforgeeks.org/zip-command-in-linux-with-examples/>`_
 
+This can be leveraged using the :any:`Execute` procedure of AIMMS, for instance to create a zip archive as follows:
 
-.. contents:: Steps we will take
-    :local:
+.. code-block:: aimms 
+    :linenos:
 
-    
-|
+	if AimmsStringConstants('Platform') = "Linux" then
+		Execute( "zip", "-r " + sp_destinationFile + " " + sp_folderName , wait:1) ;
+	else
+		Execute( "powershell \"Compress-Archive -Path "+ sp_folderName+" -DestinationPath "+sp_destinationFile+"\"", wait:1);
+	endif ;
 
-Start in developer mode
-++++++++++++++++++++++++
+and to unpack such a zip archive into files as follows:
 
-As you may know, AIMMS is capable of executing any executable program available on its running environment through the :code:`Execute` function. AIMMS running environment may refer to your computer when using AIMMS in developer mode, your server computers when you are using AIMMS PRO and AIMMS computers when you are on the AIMMS Cloud. 
+.. code-block:: aimms 
+    :linenos:
 
-Calling the :any:`Execute` intrinsic function
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	if AimmsStringConstants('Platform') = "Linux" then
+		Execute( "unzip", sp_fileName + " -d " + sp_destinationFolderName , wait:1) ;
+	else
+		Execute( "powershell \"Expand-Archive -Path "+ sp_fileName+" -DestinationPath "+sp_destinationFolderName+"\"", wait:1);
+	endif ;
 
-You may download the ``7za.exe`` executable from https://www.7-zip.org/download.html, and put it in your project folder. Say you have several files to download in a folder ``FilesToDownload`` in your project folder. As described in https://sevenzip.osdn.jp/chm/cmdline/syntax.htm, you may use the :any:`Execute` function as follows. 
+The above is captured in an example project that can be obtained via the download:
 
+:download:`AIMMS 24.2 project download <model/ZipUnzip.zip>` 
 
-.. code-block:: aimms
+This project has the following interface:
 
-    Model Main_TarFiles {
-        
-        StringParameter TestPara {
-            InitialData: "Waiting...";
-        }
-        
-        Procedure MainExecution {
-            Body: {
+.. figure:: images/zipunzip-app.png
+    :align: center
 
-                Execute("7za.exe", "a archive2.zip .\FilesToDownload\*", wait: 1); !On windows
-                TestPara := "Ready to test Existence";
+The buttons have the following actions:
 
-            }
-        }
+#. ``buttonZipDemo``: Activates the procedure to zip, containing the ``zip`` and ``powerShell Compress-Archive`` example above.
 
-    
+#. ``Prepare download``: Download the zip file created by the ``buttonZipDemo``
 
-As you may see, we asked AIMMS to execute a program called ``7za.exe`` located in the project folder, provided some arguments:
+#. ``buttonUnzipDemo``: Activates the procedure to unzip, containing the ``unzip`` and ``powerShell Expand-Archive`` example above.
 
-    * ``a`` = `add` command
-    * ``archive2.zip`` = the archive path. This will create the archive file in the project folder
-    * ``.\FilesToDownload\*`` = the folder to add (any files or sub folder) regardless of their name (because we specified ``*`` at the end)
+#. ``buttonOverviewCopiedFiles``: Lists all files in the project folder, including the files expanded from the archive by ``buttonUnzipDemo``
 
-* As a 3rd argument of the :any:`Execute` function, we asked AIMMS to wait until the called program, ``7za.exe``, has finished his job.
-
-
-* We finished by assigning a string parameter to `"Ready to test Existence"`, notifying us about the end of the zipping process.
-
-You may verify that the archive was created in the project folder.
-
-
-.. warning::
-
-    Please mind to include the ``7za.exe`` in your project folder for this code to work. 
-
-.. note::
-    
-    * On Linux, you may also directly use ``Execute("tar", "cvf archivedossier.tar FilesToDownload/", wait: 1);``
-    
-
-
-    
-Configure WebUI download widget
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-You may now open your WebUI, and insert a download widget that you will link with the following typical download procedure, pointing at your newly created ``archive2.zip`` file:
-
-.. code-block:: aimms
-
-
-    Procedure DownloadTarArchive {
-        Arguments: (FileLocation,StatusCode,StatusDescription);
-        Body: {
-
-            FileLocation := "archive2.zip";
-
-            StatusCode := webui::ReturnStatusCode('CREATED');
-            StatusDescription := "Nice.";
-        }
-        StringParameter FileLocation {
-            Property: Output;
-        }
-        Parameter StatusCode {
-            Property: Output;
-        }
-        StringParameter StatusDescription {
-            Property: Output;
-        }
-    }
-
-.. seealso::
-    
-    https://documentation.aimms.com/webui/download-widget.html
-
-
-Elevate your formulation to PRO
-+++++++++++++++++++++++++++++++
-
-Knowing how works the :any:`Execute` function, you may call any executable program in your system PATH, or by specifying the absolute path on your server, such as: ``C:\Program Files (x86)\MyProgram\MyProgram.exe``. However, mind to create the archive somewhere the download procedure may access. In the following example, I take into account both situation, PRO on Windows or PRO on Linux. 
-
-I will thus simply improve my **MainExecution** procedure as follows:
-
-.. code-block:: aimms
-
-    if not AimmsStringConstants('platform')='Linux' then
-        execute("7za.exe", "a archive2.zip .\FilesToDownload\*", wait: 1); !On windows, nothing has changed here. (I considered you bundled the 7za.exe program with your AIMMS project in the aimmspack.)
-        TestPara := "Ready to test Existence";
-    else 
-        execute("tar", "cvf archive2.tar FilesToDownload/", wait: 1); !On Linux
-        TestPara := "Ready to test Existence";
-    endif;
-
-.. note:: 
-
-    * For windows, I assumed you bundled the ``7za.exe`` program with your AIMMS project in the aimmspack. As explained above, an alternative would be to install a zip program on your Windows Server accessible from the PATH, or  
-    * The :any:`AimmsStringConstants` intrinsic string parameter provides a list of system constants, such as ``'platform'`` (Windows, Linux) or ``'architecture'`` (x64, x86).
-    
-And I will improve my **Download** procedure as well:
-
-.. code-block:: aimms
-
-    if projectDeveloperMode then
-        FileLocation := "archive2.zip";
-        
-    elseif AimmsStringConstants('platform')='Linux' then
-        FileCopy("archive2.tar", webui::GetIOFilePath("archive2.tar"));
-        FileLocation := webui::GetIOFilePath("archive2.tar");
-        
-    else
-        FileCopy("archive2.zip", webui::GetIOFilePath("archive2.zip"));
-        FileLocation := webui::GetIOFilePath("archive2.zip");
-    endif;
-
-    StatusCode := webui::ReturnStatusCode('CREATED');
-    StatusDescription := "Nice.";
-
-As you may have noticed, when running on PRO server, we took care to copy the archive file created in the project folder in the "PRO-temp" folder by using ``webui::GetIOFilePath``, where the download widget will be able to access the file and make the End-User download it in his browser.
-
-.. note::
-
-    The :any:`ProjectDeveloperMode` intrinsic function detects if a project is in developer or end-user mode (when opened on PRO, a project is automatically in end-user mode)
-
-Et voilà! 
-
-.. note::
-
-    * You may use this implementation also on AIMMS Cloud, since AIMMS Cloud computers are operating on Linux.
-
-Downloadable example
-+++++++++++++++++++++
-
-Please find the AIMMS example project attached here :download:`DownloadMultipleFiles.zip<downloads/DownloadMultipleFiles.zip>`
-
-Related topics
-+++++++++++++++
+Further Reading
+-------------------
 
 * :doc:`Run executable files <../../Articles/114/114-execute>`
 
+* `Upload widget <https://documentation.aimms.com/webui/upload-widget.html>`_ 
+
+* `Download widget <https://documentation.aimms.com/webui/download-widget.html>`_
+
+* Datalake storage download: `dex::dls::DownloadFile <https://documentation.aimms.com/dataexchange/api.html#dex-dls-DownloadFile>`_ 
+
+* Datalake storage upload: `dex::dls::UploadFile <https://documentation.aimms.com/dataexchange/api.html#dex-dls-UploadFile>`_
 
 
+.. * Upload function: Vraag aan Mischa
+
+.. * Download function: Vraag aan Mischa
+
+
+.. spelling:word-list::
+
+	powershell
 

@@ -34,6 +34,7 @@ You can browse our examples by category:
    /Articles/397/397-traveling-salesman
    /Articles/563/563-functional-ipTwist
    /Articles/550/550-demand-forecasting
+   /Articles/623/623-bias-in-ai
    Sub_Application/index
    Sub_Functional/index
    Sub_Modeling_Book/index

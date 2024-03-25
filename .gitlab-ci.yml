@@ -32,14 +32,14 @@ build_and_staging:
   <<: *run_on_dockerhost
   stage: deploy
   rules:
-    - if: $CI_COMMIT_BRANCH != "master"
+    - if: $CI_COMMIT_BRANCH != "master" && $CI_MERGE_REQUEST_ID == null
       when: on_success
     - when: never
   script:
     - sphinx-build -M html . _build
     - bash load_ssh_key_for_deploy.sh
-    - ssh support@data.aimms.com mkdir -p /home/aimms/www/how-to.aimms.com/staging/${CI_COMMIT_BRANCH}
-    - rsync -rt --delete-excluded _build/html/ support@data.aimms.com:/home/aimms/www/how-to.aimms.com/staging/${CI_COMMIT_BRANCH}
+    - ssh support@data.aimms.com mkdir -p /home/aimms/www/how-to-staging/${CI_COMMIT_BRANCH}
+    - rsync -r --omit-dir-times --delete-excluded _build/html/ support@data.aimms.com:/home/aimms/www/how-to-staging/${CI_COMMIT_BRANCH}
 
 build_and_deploy:
   <<: *run_on_dockerhost
@@ -64,3 +64,5 @@ az_deploy:
   script:
     - sphinx-build -b html . _build/html
     - az storage copy -s '_build/html' --recursive --destination-container '$web' -- --overwrite=true --as-subdir=false
+    - bash load_ssh_key_for_deploy.sh
+    # - ssh support@data.aimms.com rm -f -r /home/aimms/www/how-to-staging/staging/
