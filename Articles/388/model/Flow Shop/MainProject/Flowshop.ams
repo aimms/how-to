@@ -53,7 +53,11 @@ Model Main_Flow_Shop {
 					mappingName :  "flowshopVariables", 
 					mappingFile :  "Mappings/flowshopVariablesJSON.xml");
 				
-				pr_readInputData();
+				if FileExists(sp_allInstancesFilename) then
+				    pr_readInputData();
+				else
+				    pr_writeInputData();
+				endif;
 			}
 		}
 		Procedure pr_startup {
@@ -484,7 +488,7 @@ Model Main_Flow_Shop {
 				Definition: "chriskuip.aimms.cloud";
 			}
 			StringParameter sp_apiKey {
-				Definition: "mxTn783u6BssZA4qUx+Wopv2b+/YeIy32v6BWiokz+8=";
+				Definition: "qhHxhDTquJ3b0idXNjtabHaUSe4TFZn6ffkmCpNQwHM=";
 			}
 			ElementParameter ep_callback {
 				Range: AllProcedures;
@@ -597,7 +601,7 @@ Model Main_Flow_Shop {
 								raise error "Internal error" ;
 							endif  ;
 						else
-							raise error "bah" ;
+							raise error "Unable to retrieve Flowshop" ;
 							ep_nextPoll := 'pr_solveFlowshopInquireStatus';
 						endif ;
 						
