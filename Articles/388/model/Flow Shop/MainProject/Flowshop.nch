@@ -32,3 +32,7 @@
 "sp_taskStatus" "sp_taskState" "2023-12-14 14:57:23"
 "sp_taskStatusProjectVersion" "sp_taskStatusAppVersion" "2023-12-14 14:57:42"
 "sp_taskStatusProjectName" "sp_taskStatusAppName" "2023-12-14 14:57:46"
+"Copy_pr_solveFlowshopCallback" "pr_pollCallback" "2024-04-09 12:02:04"
+"pr_runTaskToSolveJobshopProblem" "pr_submitTask" "2024-04-10 07:47:59"
+"task_status" "task_status_aka_polling" "2024-04-10 08:02:43"
+"Copy_pr_solveFlowshopReceiveResultsCallback" "pr_taskGetResultsCallback" "2024-04-10 08:29:17"

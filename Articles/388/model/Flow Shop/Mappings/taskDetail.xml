@@ -1,16 +1,17 @@
 <AimmsJSONMapping>
     <ObjectMapping>
-        <ValueMapping name="errorMessage"   maps-to="sp_taskStatusErrorMessage"/>
-        <ValueMapping name="message"        maps-to="sp_taskStatusMessage"/>
-        <ValueMapping name="id"             maps-to="sp_taskStatusID"/>
         <ValueMapping name="appName"        maps-to="sp_taskStatusAppName"/>
         <ValueMapping name="appVersion"     maps-to="sp_taskStatusAppVersion"/>
-        <ValueMapping name="queueTime"      maps-to="p_taskStatusQueueTime"/>
-        <ValueMapping name="errorCode"      maps-to="p_taskStatusErrorCode"/>
-        <ValueMapping name="returnCode"     maps-to="p_taskStatusReturnCode"/>
-        <ValueMapping name="runTime"        maps-to="p_taskStatusRuntime"/>
         <ValueMapping name="serviceName"    maps-to="sp_taskStatusService"/>
-        <ValueMapping name="starttime"      maps-to="sp_taskStartTime"/>
         <ValueMapping name="state"          maps-to="sp_taskState"/>
+        <ValueMapping name="runTime"        maps-to="p_taskStatusRuntime"/>
+        <ValueMapping name="queueTime"      maps-to="p_taskStatusQueueTime"/>
+        <ValueMapping name="returnCode"     maps-to="p_taskStatusReturnCode"/>
+        <ValueMapping name="errorMessage"   maps-to="sp_taskStatusErrorMessage"/>
+
+        <ValueMapping name="message"        maps-to="sp_taskStatusMessage"/>
+        <ValueMapping name="id"             maps-to="sp_taskStatusID"/>
+        <ValueMapping name="errorCode"      maps-to="p_taskStatusErrorCode"/>
+        <ValueMapping name="starttime"      maps-to="sp_taskStartTime"/>
     </ObjectMapping>
 </AimmsJSONMapping>

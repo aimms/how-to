@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ExportSettings>
+	<ExcludedFile>backup</ExcludedFile>
+	<ExcludedFile>log</ExcludedFile>
+	<ExcludedFile>MainProject\WebUI</ExcludedFile>
+	<ExcludedFile>es.ams</ExcludedFile>
+	<ExcludedFile>Solution.txt</ExcludedFile>
+	<ExcludedFile>_Local_Libs_</ExcludedFile>
+</ExportSettings>
