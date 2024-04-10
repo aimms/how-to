@@ -1,4 +1,4 @@
-Multiple indices for a set
+Multiple Indices for a Set
 ==========================
 
 .. meta::

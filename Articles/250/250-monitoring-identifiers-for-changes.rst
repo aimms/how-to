@@ -5,13 +5,6 @@ Monitor Identifiers for Changes
    :description: Tracking whether or not an identifier in a collection has changed.
    :keywords: monitor, track, identifier, change
 
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
-.. sidebar:: Monitor
-
-    .. image:: images/monitor.jpg
     
 By default, AIMMS asks you whether you want to save changes to data when you close your project. This behavior depends on which data categories and case type are currently active.
 

@@ -1,4 +1,4 @@
-Tracing procedures
+Tracing Procedures
 ==================
 
 This article is a follow up of :doc:`tracing<497-writing-to-session-log>`.

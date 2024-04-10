@@ -1,4 +1,4 @@
-Selecting Pages for Workflow Panels
+Selecting Pages for Workflow Panels 
 =======================================================
 .. meta::
    :description: How to use element and string parameters to configure Workflows more smoothly.
@@ -19,7 +19,7 @@ The procedure can be summarized as follows:
 
 Below we will discuss these steps in more detail.
  
-Selecting pages and redirect pages
+Selecting Pages and Redirect Pages
 ---------------------------------------
 1. First, let's create the element parameter to select the ``pageId`` and ``redirectpageId``.
 
@@ -41,7 +41,7 @@ c. Add a range of ``webui::AllRegularPages``.
 Now, in the data you can only select values for ``pageId`` and ``redirectpageId`` from drop-down menus where values are from the ``AllRegularPages`` set.
 
  
-Adding values for other properties
+Adding Values for Other Properties
 -------------------------------------
 2. Next let's create the string parameter to enter values for rest of the properties:
 
@@ -62,8 +62,7 @@ So the index domain will look like this:
  
 c. Go to the data and add values for the rest of the properties. Now you will not be able to add values to the ``pageId`` and ``redirectpageId``.
 
- 
-Selecting steps for the Workflow
+Selecting Steps for the Workflow
 ----------------------------------
 3. Finally we will create a string parameter that uses the above element and string parameter in combination to complete the data for the steps of the Workflows.
 
@@ -87,11 +86,8 @@ After configuring both the string parameters in *Application settings > Workflow
 .. image:: images/workflow-page-example.png
    :align: center
 
-.. page Route Optimization > Initialize Data in example project 
-.. Pratap will update the example project before we make it available for download
-
 
 Related Topics
 ---------------
 
-* **AIMMS Documentation**: `Workflow Panel <https://documentation.aimms.com/webui/workflow-panels.html>`_
+* More documentation about `Workflow Panel <https://documentation.aimms.com/webui/workflow-panels.html>`_.

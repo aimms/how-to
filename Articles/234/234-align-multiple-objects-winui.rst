@@ -1,14 +1,14 @@
+.. warning:: 
+   Please note that the documentation you are currently viewing is for an older version of our technology. 
+   While it is still functional, we recommend upgrading to our latest and more efficient option to take advantage of all the improvements we've made.
+   
+
 Align Objects in WinUI
-=====================================
+========================
 
 .. meta::
    :description: Taking care of alignment in your user interface.
    :keywords: User Interface, Windows, alignment, align, winui
-
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
 
 When creating a WinUI page for your AIMMS project you typically want to nicely align the page objects.
 

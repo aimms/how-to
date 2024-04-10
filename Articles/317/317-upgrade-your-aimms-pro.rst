@@ -6,7 +6,7 @@ Upgrade an AIMMS PRO Installation
 
 
 Even though, the AIMMS PRO installation and upgrade processes are designed to be easy, we advice 
-for first-time PRO installation or upgrade, contact our Support Team to ensure proper planning and support.
+for first-time PRO installation or upgrade, contact our `Support Team <support@aimms.com>`_ to ensure proper planning and support.
 
 Use the installer available from the `AIMMS Downloads page <https://www.aimms.com/downloads#aimms-pro-download>`_.
 

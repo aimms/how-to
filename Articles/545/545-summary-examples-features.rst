@@ -16,6 +16,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../563/563-functional-ipTwist`
     * :doc:`../434/434-reindeer-pairing`
     * :doc:`../397/397-traveling-salesman`
+    * :doc:`../623/623-bias-in-ai`
 
 .. dropdown:: Image Widget
 
@@ -26,6 +27,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../563/563-functional-ipTwist`
     * :doc:`../434/434-reindeer-pairing`
     * :doc:`../397/397-traveling-salesman`
+    * :doc:`../623/623-bias-in-ai`
 
 .. dropdown:: Workflow
 
@@ -36,6 +38,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../563/563-functional-ipTwist`
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../434/434-reindeer-pairing`
+    * :doc:`../623/623-bias-in-ai`
 
 .. dropdown:: Table Widget
 
@@ -44,6 +47,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../434/434-reindeer-pairing`
+    * :doc:`../623/623-bias-in-ai`
 
 .. dropdown:: Combination Chart Widget
 
@@ -60,6 +64,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../563/563-functional-ipTwist`
+    * :doc:`../623/623-bias-in-ai`
 
 .. dropdown:: Side Panel
 
@@ -68,12 +73,9 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../390/390-knapsack-problem`
 
-.. dropdown:: Compact Scalar Widget
+.. dropdown:: Treemap Widget
 
-    * :doc:`../383/383-contract-allocation`
-    * :doc:`../397/397-traveling-salesman`
-    * :doc:`../387/387-employee-scheduling`
-    * :doc:`../390/390-knapsack-problem`
+    * :doc:`../623/623-bias-in-ai`
 
 .. dropdown:: List Widget
     
@@ -96,6 +98,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../563/563-functional-ipTwist`
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../434/434-reindeer-pairing`
+    * :doc:`../623/623-bias-in-ai`
 
 .. dropdown:: Multiselect Widget
     
@@ -110,6 +113,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../434/434-reindeer-pairing`
+    * :doc:`../623/623-bias-in-ai`
 
 .. dropdown:: Dialog Page
     
@@ -145,7 +149,8 @@ This page has a summary of the examples versus AIMMS features used in them.
 
 .. dropdown:: Data Exchange (DEX) Library
     
-    Nothing yet!
+    * :doc:`../623/623-bias-in-ai`
+
 
 .. dropdown:: DataLink Library
     
@@ -191,9 +196,14 @@ This page has a summary of the examples versus AIMMS features used in them.
     
     * :doc:`../387/387-employee-scheduling`
 
+.. dropdown:: Python Connection
+    
+    * :doc:`../623/623-bias-in-ai`
+
 .. dropdown:: CSS Annotations
     
     * :doc:`../387/387-employee-scheduling`
+    * :doc:`../623/623-bias-in-ai`
 
 .. dropdown:: Widget Named Views
     

@@ -1,4 +1,4 @@
-Check if variable values satisfy constraints
+Check if Variable Values Satisfy Constraints
 ==============================================
 
 .. meta::

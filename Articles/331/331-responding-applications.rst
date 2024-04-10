@@ -1,4 +1,4 @@
-Create responding applications
+Create Responding Applications
 ===============================
 
 .. meta::

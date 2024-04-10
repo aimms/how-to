@@ -4,10 +4,10 @@ Contract Allocation
    :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.96-ZIP:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.2-ZIP:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.96-Github:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.2-Github:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -271,36 +271,7 @@ UI Styling
 Below there are the css files you will find with comments on what they change. 
 
 .. tab-set::
-   .. tab-item:: annotation.css
-
-      .. code-block:: css
-         :linenos:
-
-         .annotation-bkg-cell {
-            background: var(--primary90Transparent);
-         }
-
-         .annotation-bkg-cell-default {
-            background: var(--primary90Transparent);
-         }
-
-         .annotation-bkg-cell-default input{
-            color: transparent;
-         }
-
-         .annotation-reach-maximum {
-            background: rgba(255, 0, 0, 0.438);
-         }
-
-         .annotation-reach-minimum {
-            background: rgba(255, 255, 0, 0.438);
-         }
-
-         .annotation-between {
-            background: rgba(0, 128, 0, 0.438);
-         }
-
-   .. tab-item:: colors.css
+   .. tab-item:: theming.css
 
       .. code-block:: css
          :linenos:
@@ -313,17 +284,20 @@ Below there are the css files you will find with comments on what they change.
          --primaryDark: #00B569;
          --primary90Transparent: #3ddab33b;
 
-         /*---------------------------------------------------------------------
-               LOGO
-         ----------------------------------------------------------------------*/
-         --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/budgeting.png);
-         --spacing_app-logo_width: 45px;
 
+         --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/budgeting.png); /*app logo*/
+         --spacing_app-logo_width: 45px;
+         --color_border_app-header-divider: var(--primaryDark); /*line color after header*/
+         --color_bg_app-canvas: url(/app-resources/resources/images/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain; /*background color*/
+         --border_widget-header: 1px solid var(--primaryDark); /*line color after widget header*/
+
+         --color_bg_workflow_current: var(--primaryDark); /*bg color when step is selected*/
+         --color_workflow_active: var(--primaryDark); /*font and icon color when step is active*/
 
          --color_bg_button_primary: var(--primaryDark);
          --color_bg_button_primary_hover: var(--primary);
          --color_text_edit-select-link: var(--primaryDark);
-
+         --color_text_edit-select-link_hover:  var(--primary);
 
          /*---------------------------------------------------------------------
                WORKFLOW
@@ -358,26 +332,40 @@ Below there are the css files you will find with comments on what they change.
          --color_workflow-icon-border: var(--primaryDark);
          }
 
-   .. tab-item:: textColor.css
+
+   .. tab-item:: annotation.css
 
       .. code-block:: css
          :linenos:
 
-         /*Change table text color*/
-         .tag-table .grid-viewport .cell:not(.flag-readOnly), 
-         html:not(.using-touch) .tag-table .grid-viewport .cell:not(.flag-readOnly) {
-            color: var(--primaryDark);
+         .annotation-bkg-cell {
+            background: var(--primary90Transparent);
          }
 
-         /*Change scalar text color*/
-         .tag-scalar .kpi .value {
-            color: var(--primaryDark);
+         .annotation-bkg-cell-default {
+            background: var(--primary90Transparent);
          }
 
-         /*Link color*/
-         .ql-snow a {  
-            color: var(--primaryDark);
+         .annotation-bkg-cell-default input{
+            color: transparent;
          }
+
+         .annotation-reach-maximum {
+            background: rgba(255, 0, 0, 0.438);
+         }
+
+         .annotation-reach-minimum {
+            background: rgba(255, 255, 0, 0.438);
+         }
+
+         .annotation-between {
+            background: rgba(0, 128, 0, 0.438);
+         }
+
+   .. tab-item:: custom.css
+
+      .. code-block:: css
+         :linenos:
 
          /*Change table default text color*/
          .tag-table .grid-viewport .cell.flag-default, 
@@ -385,119 +373,12 @@ Below there are the css files you will find with comments on what they change.
             color: white;
          }
 
-   .. tab-item:: body.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Add image on the background*/
-         .scroll-wrapper--pagev2 .page-container {
-            content: " ";
-            background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
+         /*Centering cells*/
+         .tag-table .cell.flag-string .cell-wrapper, 
+         .tag-table .cell.flag-number input,
+         .tag-table .cell.flag-string input{
+            text-align: center;
          }
-
-   .. tab-item:: header.css
-
-      .. code-block:: css
-         :linenos:
-
-         .theme-aimms header.tag-application {
-            border-bottom: 2px solid var(--primary);
-         }
-
-   .. tab-item:: combinationChart.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change color of togglelegend of the combination chart*/
-         .togglelegend-button svg{
-            fill: var(--primaryDark);
-         }
-
-         .togglelegend-button-active:hover svg g, .togglelegend-button-active svg g {
-            fill: var(--primary);    
-         }
-
-   .. tab-item:: sidePanel.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change color after tab click*/
-         .sidepanel-container .sidepanel-tab.active {
-            background-color: var(--primary);
-         }
-
-         /*Change letter color on hover*/
-         .sidepanel-container .sidepanel-tab.active:hover {
-            color: white;
-         }
-
-         /*Change icon color*/
-         .sidepanel-container .sidepanel-tab .sidepanel-icon,
-         .sidepanel-container .sidepanel-tab:hover {
-            color: var(--primary);
-         }
-
-         /*Change color after all tabs*/
-         .sidepanel-container .sidepanel-tabs-container:after {
-            background: var(--primary);
-         }
-
-         /*Change the color below sidepanel tabs*/
-         .sidepanel-container {
-            background-color:   rgb(249, 249, 249);
-         }
-
-         .sidepanel-container .sidepanel-tab {
-            height: 180px;
-         }
-   
-   .. tab-item:: button.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change color of the busy button*/
-         .veil-msg.state-busy .ui-button {
-            background-color: var(--primary);
-         }
-   
-   .. tab-item:: pageAction.css
-
-      .. code-block:: css
-         :linenos:
-
-         .page-action-v2 .page-action-menu,
-         .page-action-v2 .page-action-menu.open {
-            background: var(--primaryDark);
-         }
-
-         .page-action-v2 .page-action-menu:hover,
-         .page-action-v2 .page-action-menu:hover {
-            background: var(--primary);
-         }
-
-         .page-action-v2 .page-action-holder .page-action-item .page-action-icon, 
-         .page-action-v2 .page-action-holder .page-action-item .page-action-letter {
-            background-color: var(--primaryDark);
-         }
-
-         .page-action-v2 .page-action-holder .page-action-item .page-action-icon:hover, 
-         .page-action-v2 .page-action-holder .page-action-item .page-action-letter:hover {
-            background-color: var(--primary);
-         }
-   
-   .. tab-item:: table.css
-
-      .. code-block:: css
-         :linenos:
-
-         .tag-table.focused .focus-cell {
-            box-shadow: inset 0 0 0 2px var(--primaryDark);
-         }
-
 
 
 Minimal Requirements
@@ -508,6 +389,9 @@ Minimal Requirements
 
 Release Notes
 --------------------   
+
+`v1.4 <https://github.com/aimms/contract-allocation/releases/tag/1.4>`_ (27/02/2024)
+   Upgrading AIMMS version, updating theme and fixing Default Data import.
 
 `v1.3 <https://github.com/aimms/contract-allocation/releases/tag/1.3>`_ (09/08/2023)
    Correcting download procedure, adding new options when importing data. 

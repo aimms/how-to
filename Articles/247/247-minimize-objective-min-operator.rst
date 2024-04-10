@@ -6,10 +6,6 @@ Minimize Objective Containing a ``min`` Operator
    :description: Some modeling tricks using min operator
    :keywords: Linear Programming, modeling, min, minimize
 
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
 
 This article explains how to minimize an objective which contains a binary ``min`` operator. 
 
@@ -22,7 +18,6 @@ For example, let's take a minimization objective containing the following term:
     :linenos:
 
     50 * min( p_par, v_var). 
-
 
 
 Adding parameters and variables
@@ -54,8 +49,8 @@ In case you are minimizing an objective that contains a binary ``max`` operator,
 #. :math:`\mathrm{v\_max\_param\_var} \ge \mathrm{v\_var}`
 
 
-Further reading
+Further Reading
 ---------------
-Recently, `Erwin Kalvelagen <https://yetanothermathprogrammingconsultant.blogspot.com/>`_ discussed a similar topic in his `max tricks <https://yetanothermathprogrammingconsultant.blogspot.com/2012/02/max-tricks.html>`_ blog post. 
+`Erwin Kalvelagen <https://yetanothermathprogrammingconsultant.blogspot.com/>`_ discussed a similar topic in his `max tricks <https://yetanothermathprogrammingconsultant.blogspot.com/2012/02/max-tricks.html>`_ blog post. 
 
 

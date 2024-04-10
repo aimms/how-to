@@ -17,13 +17,14 @@ These are the indicated trails. Please let us know if you are missing something!
 
     - `Modeling with AIMMS I <https://aimms.getlearnworlds.com/course/modeling-with-aimms-i>`_
     - `Modeling with AIMMS II <https://aimms.getlearnworlds.com/course/modeling-with-aimms-ii>`_
+    - Modeling with AIMMS III - COMING SOON!
 
 .. card:: User Interface with AIMMS
 
     This trail of courses is all about user interface.
     Here you create an application using and understanding all widgets available in WebUI.
 
-    - User Interface with AIMMS I - COMING SOON!
+    - `User Interface with AIMMS I <https://elearning.aimms.com/course/user-interface-with-aimms-i>`_
     - User Interface with AIMMS II - COMING SOON! 
 
 .. card:: Other Courses

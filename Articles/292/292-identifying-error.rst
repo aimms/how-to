@@ -1,5 +1,6 @@
-Identify error
+Identify Error
 ===================
+
 .. meta::
    :description: A trick for how to troubleshoot errors occurring during definition evaluation.
    :keywords: case, error, definition
@@ -59,8 +60,7 @@ Note that by default in modern versions of AIMMS and of AIMMS PRO most if not al
 
 Example download
 ------------------
-You can download the section (``.ams`` file) that contains this procedure and sample below:
-* :download:`CheckDefinitions.zip <download/CheckDefinitions.zip>` 
+You can download the section (``.ams`` file) that contains this procedure and sample below: :download:`CheckDefinitions.zip <download/CheckDefinitions.zip>` 
 
 
 To use it, you'll need to :doc:`Import a section to your project <../145/145-import-export-section>`.  

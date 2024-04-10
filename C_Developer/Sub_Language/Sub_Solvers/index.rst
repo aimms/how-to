@@ -38,4 +38,3 @@ Mathematical Programming solution algorithms, solvers for short, are the muscles
    /Articles/261/261-solve-with-asynchronous-solver-sessions
    /Articles/559/559-adding-solver
    
-.. /Articles/130/130-Infeasible-Nonlinear-Problems

@@ -7,8 +7,7 @@ Change Hover and Select Effects for WebUI Charts
 
 This article explains how to use CSS to customize the states of a chart or map widget on hover and on select.
 
-
-Default chart behavior
+Default Chart Behavior
 ------------------------
 These effects are the same for all the charts types. 
 

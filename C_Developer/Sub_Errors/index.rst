@@ -25,4 +25,4 @@ Get help debugging errors that arise during development. This section covers tro
    /Articles/497/497-writing-to-session-log
    /Articles/569/569-dumpfile-send-in
    /Articles/569/569-dumpfile-contents
-   Troubleshooting/index
+   Sub_Troubleshooting/index

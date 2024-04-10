@@ -5,14 +5,19 @@ Employee Scheduling
    :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.96-ZIP:_Employee_Scheduling-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.98-ZIP:_Employee_Scheduling-blue
    :target: https://github.com/aimms/employee-scheduling/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.96-Github:_Employee_Scheduling-blue
+.. image:: https://img.shields.io/badge/AIMMS_4.98-Github:_Employee_Scheduling-blue
    :target: https://github.com/aimms/employee-scheduling
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-webui-44/updated-employee-scheduling-example-1291
+
+.. image:: images/project.gif
+    :align: center
+
+|
 
 Story
 -----
@@ -124,7 +129,7 @@ Database
 
 The Employee Scheduling example persists its data in a database, a SQLite database.
 
-Connecting to the database
+Connecting to the Database
 """"""""""""""""""""""""""""""
 
 A SQLite database is just a file, and authentication is not needed, so a connection string can be build as follows:
@@ -134,17 +139,31 @@ A SQLite database is just a file, and authentication is not needed, so a connect
     StringParameter sp_connectionString {
         Definition: {
             SQLCreateConnectionString (
-                DatabaseInterface              :  'odbc',
-                DriverName                     :  "SQLite3 ODBC Driver",
-                ServerName                     :  "", 
-                DatabaseName                   :  "inputs.db", !The path of your database
-                UserId                         :  "", 
-                Password                       :  "", 
-                AdditionalConnectionParameters :  "") ;
+                    DatabaseInterface              :  'odbc',
+                    DriverName                     :  sp_def_driverName,
+                    ServerName                     :  "", 
+                    DatabaseName                   :  "inputs.db", !The path of your database
+                    UserId                         :  "", 
+                    Password                       :  "", 
+                    AdditionalConnectionParameters :  "") ;
         }
     }
 
-Relating tables in the database to tables in the AIMMS model
+Where ``sp_def_driverName`` is defined as:
+
+.. code-block:: aimms 
+
+    StringParameter sp_def_driverName {
+        Definition: {
+            if pro::GetPROEndPoint() or not ProjectDeveloperMode() then
+                "SQLite3"
+            else 
+                "SQLite3 ODBC Driver"    
+            endif;
+        }
+    }
+
+Relating Tables in the Database to Tables in the AIMMS Model
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 An example of a table declaration in a SQLite database is illustrated in the next image:
@@ -173,7 +192,7 @@ The AIMMS database declaration of the corresponding table is as follows:
 Once the connection string exists, the data in the tables is read by a database declaration and a read statement.
 If the data is changed in the user interface, the data is persisted using similar write statements.
 
-Reading from the database
+Reading from the Database
 """""""""""""""""""""""""""""
 
 As you can see, the column names of the table are used to relate to the AIMMS identifiers at hand.
@@ -192,7 +211,7 @@ Transferring the data from the SQLite database to the AIMMS application is done 
     
 Note that ``Employee_Skill`` is a declaration section; all identifiers declared in that section will be emptied by the first statement in the procedure ``pr_readEmployeeSkillDB``;
 
-Writing to the database
+Writing to the Database
 """"""""""""""""""""""""""
 
 
@@ -208,7 +227,7 @@ Transferring the data from the AIMMS application to the SQLite database is done 
         }
     }
 
-References for using ODBC
+References for Using ODBC
 """"""""""""""""""""""""""""""
 
 #.  `Link an SQLite Database to a Project <https://how-to.aimms.com/Articles/118/118-Connect-SQLite.html>`_
@@ -225,22 +244,22 @@ On this project `annotation <https://documentation.aimms.com/webui/css-styling.h
 .. code-block:: css
    :linenos:
 
-   .annotation-red-chart {
-      fill: var(--secondary);
-   }
+    .annotation-red-chart {
+        fill: var(--secondary);
+    }
 
-   .annotation-not-red-chart {
-      fill: var(--primaryDark);
-   }
+    .annotation-not-red-chart {
+        fill: var(--primaryDark);
+    }
 
-   .annotation-red-input  {
-      border: 3px solid red;
-      border-radius: 3px;
-   }
-   .annotation-green-input  {
-      border: 1px solid green;
-      border-radius: 3px;
-   }
+    .annotation-red-input  {
+        border: 3px solid red;
+        border-radius: 3px;
+    }
+    .annotation-green-input  {
+        border: 1px solid green;
+        border-radius: 3px;
+    }
 
 Create into a string parameter the logic or define directly with the css class you want. Go to the identifier shown on the `Combination Chart <https://documentation.aimms.com/webui/combination-chart-widget.html>`_ and add that string parameter into ``webui::AnnotationsIdentifier``.  
 The annotations used on the Combination Chart were ``red-chart`` and ``not-red-chart``. The other two (``green-input`` and ``red-input``) are used on ``sp_addEditElement`` to create a border when adding or editing elements. 
@@ -289,9 +308,9 @@ Below there are the ``css`` files used on this project. They are separated by ch
     .. tab-item:: theming.css
 
       .. code-block:: css
-         :linenos:
+        :linenos:
 
-         :root {
+        :root {
             --primary: #CDE6FF;
             --primaryDark: #3B92CC;
             --primaryDarker: #0069af;
@@ -313,7 +332,7 @@ Below there are the ``css`` files used on this project. They are separated by ch
 
             --color_bg_button_primary: var(--primaryDark);
             --color_bg_button_primary_hover: var(--primaryDarker);
-         }
+        }
 
    
     .. tab-item:: custom.css
@@ -331,28 +350,35 @@ Below there are the ``css`` files used on this project. They are separated by ch
             font-weight: bold;
             color: var(--color_text_default);
         }            
-   
+
+        /*Centering cells*/
+        .tag-table .cell.flag-string .cell-wrapper, 
+        .tag-table .cell.flag-number input,
+        .tag-table .cell.flag-string input{
+            text-align: center;
+        }
+
     .. tab-item:: annotation.css
 
       .. code-block:: css
-         :linenos:
+        :linenos:
 
-         .annotation-red-chart {
+        .annotation-red-chart {
             fill: var(--secondary);
-         }
+        }
 
-         .annotation-not-red-chart {
+        .annotation-not-red-chart {
             fill: var(--primaryDark);
-         }
+        }
 
-         .annotation-red-input  {
+        .annotation-red-input  {
             border: 3px solid red;
             border-radius: 3px;
-         }
-         .annotation-green-input  {
+        }
+        .annotation-green-input  {
             border: 1px solid green;
             border-radius: 3px;
-         }
+        }
 
 
 Minimal Requirements
@@ -362,6 +388,9 @@ Minimal Requirements
 
 Release Notes
 --------------------   
+
+`v1.2 <https://github.com/aimms/employee-scheduling/releases/tag/1.2>`_ (15/01/2024)
+   Ready to solve mathematical problem on AIMMS PRO. Centering all cells. 
 
 `v1.1 <https://github.com/aimms/employee-scheduling/releases/tag/1.1>`_ (25/07/2023)
    Save Case dialog is now Case Manager dialog, where you can save a copy of a scenario and also load it.

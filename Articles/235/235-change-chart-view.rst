@@ -1,14 +1,13 @@
+.. warning:: 
+   Please note that the documentation you are currently viewing is for an older version of our technology. 
+   While it is still functional, we recommend upgrading to our latest and more efficient option to take advantage of all the improvements we've made.
+   
 Change Views of 2D Charts in a WinUI Page
 ============================================
 
  .. meta::
    :description: How to change the view for 2D charts as an end user.
    :keywords: view, chart, user, scale, size, move
-
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
 
 The end user of a WinUI app can change the view of 2D charts (e.g. scaling or moving). This article describes the view options and shortcuts available.
 

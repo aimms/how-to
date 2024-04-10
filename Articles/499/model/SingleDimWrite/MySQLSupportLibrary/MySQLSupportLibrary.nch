@@ -1,8 +1,0 @@
-* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
-"msqlsl" "MySQL" "2020-08-10 09:36:12"
-"MySQL::sp_" "MySQL::sp_mySQLdriver" "2020-08-10 10:01:53"
-"MySQL::Copy_PostLibraryInitialization" "MySQL::pr_determineMySQLdriver" "2020-08-10 10:07:10"
-"MySQL::sp_file_serverName" "MySQL::sp_file_server" "2020-08-10 11:19:35"
-"MySQL::sp_file_dtabaseName" "MySQL::sp_file_database" "2020-08-10 11:19:44"
-"MySQL::sp_file_username" "MySQL::sp_file_user" "2020-08-10 11:19:48"
-"MySQL::p_file_portnumber" "MySQL::p_file_port" "2020-08-10 11:21:06"

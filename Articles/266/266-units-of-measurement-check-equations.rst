@@ -5,12 +5,6 @@ Check Computations with Units of Measurement
    :description: Formula checking using units of measurement is illustrated.
    :keywords: Units of Measurement, formula consistency
 
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
-
-.. image:: images/Eureka.gif
 
 A classical method to check equations is to use units of measurement.
 

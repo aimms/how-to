@@ -1,19 +1,19 @@
-Connection string for Access database files
+.. warning:: 
+   Please note that the documentation you are currently viewing is for an older version of our technology. 
+   While it is still functional, we recommend upgrading to our latest and more efficient option to take advantage of all the improvements we've made.
+
+Connection String for Access Database Files
 ============================================
 
 .. meta::
    :description: How to connect to a MS Access database file via the ODBC connection string.
    :keywords: MS ACCESS, ODBC, connection string
 
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
-
 AIMMS has the possibility to retrieve/store data from/into any ODBC datasource. You could provide a System/User/File DSN (in case of ODBC) pointing to the database as an input to AIMMS. You could also dynamically create a connection string instead of using a DSN file. 
 
 This article shows how to generate a connection string to connect to an Access database via the ODBC layer. 
 
-Advantages of the connection string
+Advantages of the Connection String
 ------------------------------------------
 
 When you deploy a project where the end-user can specify an Access database file, you have three options:
@@ -26,7 +26,7 @@ One advantage of creating a connection string instead of using DSN files is that
 
 These connection strings can be used in the *Data Source* attributes of all the database related identifiers AIMMS (e.g. tables, database procedures).
 
-Implementation of the procedure
+Implementation of the Procedure
 -------------------------------------
 
 To create a connection string for a given Access database file (``.mdb`` or ``.accdb``), the procedure ``CreateAccessFileConnectionString`` below uses the intrinsic AIMMS function :aimms:func:`SQLCreateConnectionString`. 
@@ -103,11 +103,3 @@ You can import the ``.ams`` file into a section of your model. Select an empty S
 :download:`CreateAccessFileConnectionString.ams <downloads/CreateAccessFileConnectionString.ams>`
 
 .. note:: Please do not forget to close the connection using the intrinsic procedure :aimms:func:`CloseDataSource` especially when long sessions may occur after data reading.
-
-.. Related materials
-.. -------------------
-
-.. * :doc:`../118/118-Connect-SQLite`: To build the mapping between AIMMS and database columns (database table identifier) 
- 
-
-

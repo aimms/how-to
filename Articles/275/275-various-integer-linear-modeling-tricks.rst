@@ -1,13 +1,10 @@
-Various (integer) linear modeling tricks
+Various (Integer) Linear Modeling Tricks
 ===========================================
 
 .. meta::
    :description: Various resources about integer and linear modeling tricks for efficiency.
    :keywords: resources, integer, linear, modeling, efficiency
 
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
 
 Modeling problems with an (integer) linear program sometimes requires some experience to recognize certain structures in the problem description that can be formulated in a linear way. 
 
@@ -27,7 +24,6 @@ which can be modeled with
 The document contains a lot more of such formulettes of varying complexity.
 
 Furthermore, in our book :download:`Optimization Modeling <https://documentation.aimms.com/_downloads/AIMMS_modeling.pdf>` you can also find various modeling tricks in the chapters :download:`Linear Programming Tricks <https://download.aimms.com/aimms/download/manuals/AIMMS3OM_LinearProgrammingTricks.pdf>` and :download:`Integer Programming Tricks <https://download.aimms.com/aimms/download/manuals/AIMMS3OM_IntegerProgrammingTricks.pdf>`. The Optimization Modeling book can either be found online via the link above, or you can find it under the Help menu after you started AIMMS.
-
 
 
 .. spelling:word-list::

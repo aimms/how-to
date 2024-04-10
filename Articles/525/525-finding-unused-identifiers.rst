@@ -2,7 +2,7 @@
 
 .. |search-all-icon| image:: images/search-all-icon.png
 
-Finding unused identifiers
+Finding Unused Identifiers
 ============================
 
 Applications that are around for a while clearly have value to the organization.

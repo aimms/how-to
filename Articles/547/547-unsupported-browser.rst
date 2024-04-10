@@ -1,4 +1,4 @@
-Unsupported browser
+Unsupported Browser
 ======================
 
 Nowadays, the version number of Chrome has three digits.  
@@ -6,6 +6,8 @@ Opening a WebUI using AIMMS 4.60 or older will get you the following message:
 
 .. image:: images/unsupported-browser-notification.png
     :align: center
+
+| 
 
 Your users can click away safely this message.
 

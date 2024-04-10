@@ -5,12 +5,8 @@ Tune CPLEX Options from AIMMS
    :description: How to automatically tune CPLEX Options from within AIMMS.
    :keywords: tune, CPLEX, Options, automatically
 
-.. note::
-
-    This article was originally posted to the AIMMS Tech Blog.
 
 The CPLEX solver has many options that influence the way CPLEX solves your model. For certain types of constraints and/or models, you can make an educated guess about which combination of options works best for your problem. However, sometimes you need more help.
-
 
 
 To help you out, CPLEX has some automatic tuning options. In AIMMS, you can access this CPLEX tuning tool via the following two functions:

@@ -5,11 +5,8 @@ Model Variables with Limited Values
    :description: Linearizing trick to model x in S = limited set of values.
    :keywords: algebraic modeling, constraints, linear, integer, discrete
 
-.. note::
+  
 
-    This article was originally posted to the AIMMS Tech Blog.
-    
- 
 In this article we'll learn how to model a variable that can only take a limited set of values, for example: 
 
 .. math:: x \in \{1.5 , 2.5, 4.5\}  

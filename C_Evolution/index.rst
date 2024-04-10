@@ -31,6 +31,7 @@ AIMMS software has evolved over time, to match arising user needs and changes in
    /Articles/333/333-update-webui-version
    /Articles/547/547-unsupported-browser
    /Articles/593/593-dollar-or-pipe
+   /Articles/46/46-change-aimms-version
    Sub_WinUI/index
 
 

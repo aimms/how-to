@@ -1,4 +1,4 @@
-Publishing to offline servers
+Publishing to Offline Servers
 ==============================
 
 The `AIMMS Repository Library <https://documentation.aimms.com/library-repository.html>`_ 
@@ -10,8 +10,9 @@ in the .aimmspack by checking the ``_local_libs`` entry:
 .. image:: images/including-local-libs.png
     :align: center
 
+|
+
 By putting these libraries in the ``.aimmspack``, the AIMMS PRO server no longer needs to download the AIMMS Libraries in the AIMMS repository them when the ``.aimmspack`` is published.
 
 .. spelling:word-list::
-
     url
