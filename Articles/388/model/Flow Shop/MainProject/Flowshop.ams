@@ -36,8 +36,8 @@ Model Main_Flow_Shop {
 			Body: {
 				ProfilerStart();
 				
-				p_maxJobs 	:= 7;
-				p_maxMachines 	:= 10;
+				p_maxJobs 	:= 14;
+				p_maxMachines 	:= 20;
 				
 				GenerateData;
 			}
@@ -91,7 +91,7 @@ Model Main_Flow_Shop {
 		Range: {
 			{2..p_limitMasterJobs}
 		}
-		InitialData: 10;
+		InitialData: 12;
 	}
 	Set s_jobs {
 		SubsetOf: s_masterJobs;
@@ -116,7 +116,7 @@ Model Main_Flow_Shop {
 		Range: {
 			{2..p_limitMasterMachines}
 		}
-		InitialData: 14;
+		InitialData: 16;
 	}
 	Set s_machines {
 		SubsetOf: s_masterMachines;
