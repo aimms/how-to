@@ -24,7 +24,7 @@ The Multiple Scenarios Parallel page will allow you to see the effect of using m
 
 This application also features the option to use AIMMS' Rest API features. 
 In order to use this feature you will need to publish this application on your AIMMS Cloud environment, configure the application based on your cloud information and use the "Solve Model using task" button in the demo page. 
-The identifiers that need to be updated are: sp_AIMMSazureCloudName, sp_apiKey, sp_appName and sp_appVersion. 
+The identifiers that need to be updated are: ``sp_AIMMSazureCloudName``, ``sp_apiKey``, ``sp_appName`` and ``sp_appVersion``. 
 
 Keywords:
 CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP, AIMMS PRO solver session, AIMMS Cloud task, Rest API
