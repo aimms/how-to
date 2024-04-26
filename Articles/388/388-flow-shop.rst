@@ -2,7 +2,7 @@ Flow Shop
 ===========
 
 .. meta::
-   :keywords: CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP
+   :keywords: CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP, Rest API, Endpoint
    :description: The goal in this example is to find a schedule such that the time to process all the jobs on all the machines is as small as possible.
 
 
@@ -22,7 +22,9 @@ Additionally, we show how asynchronous solver sessions in AIMMS can be used to s
 
 The Multiple Scenarios Parallel page will allow you to see the effect of using multiple parallel solver sessions on the time required for solving a set of scenarios. Please note that your license must support the use of multiple simultaneous solver sessions to use asynchronous execute of solver sessions. 
 
+This application also features the option to use AIMMS' Rest API features. 
+In order to use this feature you will need to publish this application on your AIMMS Cloud environment, configure the application based on your cloud information and use the "Solve Model using task" button in the demo page. 
+The identifiers that need to be updated are: sp_AIMMSazureCloudName, sp_apiKey, sp_appName and sp_appVersion. 
+
 Keywords:
-CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP
-
-
+CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP, AIMMS PRO solver session, AIMMS Cloud task, Rest API

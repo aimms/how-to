@@ -513,29 +513,24 @@ Model Main_Flow_Shop {
 		}
 		DeclarationSection DEX_declarations {
 			StringParameter sp_AIMMSazureCloudName {
-				Definition: "chriskuip.aimms.cloud";
+				Definition: "YourCloudAccount.aimms.cloud";
+				Comment: "Please add your own cloud account address in this string.";
 			}
 			StringParameter sp_apiKey {
-				Definition: {
-					! "mxTn783u6BssZA4qUx+Wopv2b+/YeIy32v6BWiokz+8="
-					"QdCPs7x2jrLzFAx7b6PyJw9g2gd/JfBPSgEJUx/pXlo="
-				}
+				Definition: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=";
+				Comment: "Please add your own Rest API Key generated via the AIMMS portal.";
 			}
 			ElementParameter ep_callback {
 				Range: AllProcedures;
 				Default: 'dex::client::EmptyCallback';
 			}
 			StringParameter sp_appName {
-				Definition: {
-					! "FlowshopSolver"
-					"FS"
-				}
+				Definition: "YouApplcationName";
+				Comment: "Please add your own application name corresponding to the one used when published on the cloud.";
 			}
 			StringParameter sp_appVersion {
-				Definition: {
-					! "002"
-					"0002"
-				}
+				Definition: "1.0";
+				Comment: "Please add your own version number corresponding to the one used when published on the cloud.";
 			}
 		}
 		Procedure pr_writeSetsParameters {
