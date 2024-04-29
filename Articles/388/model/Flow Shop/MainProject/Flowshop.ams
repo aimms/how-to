@@ -36,8 +36,8 @@ Model Main_Flow_Shop {
 			Body: {
 				ProfilerStart();
 				
-				p_maxJobs 	:= 7;
-				p_maxMachines 	:= 10;
+				p_maxJobs 	:= 14;
+				p_maxMachines 	:= 20;
 				
 				GenerateData;
 			}
@@ -53,7 +53,21 @@ Model Main_Flow_Shop {
 					mappingName :  "flowshopVariables", 
 					mappingFile :  "Mappings/flowshopVariablesJSON.xml");
 				
-				pr_readInputData();
+				if not  DirectoryExists("data") then 
+					DirectoryCreate("data");
+				endif ;
+				if not  DirectoryExists("data/input") then 
+					DirectoryCreate("data/input");
+				endif ;
+				if not  DirectoryExists("data/taskid") then 
+					DirectoryCreate("data/taskid");
+				endif ;
+				
+				if FileExists( sp_allInstancesFilename ) then
+					pr_readInputData();
+				else
+					pr_writeInputData();
+				endif ;
 			}
 		}
 		Procedure pr_startup {
@@ -77,7 +91,7 @@ Model Main_Flow_Shop {
 		Range: {
 			{2..p_limitMasterJobs}
 		}
-		InitialData: 7;
+		InitialData: 12;
 	}
 	Set s_jobs {
 		SubsetOf: s_masterJobs;
@@ -102,7 +116,7 @@ Model Main_Flow_Shop {
 		Range: {
 			{2..p_limitMasterMachines}
 		}
-		InitialData: 10;
+		InitialData: 16;
 	}
 	Set s_machines {
 		SubsetOf: s_masterMachines;
@@ -474,35 +488,54 @@ Model Main_Flow_Shop {
 		}
 	}
 	Section Solve_problem_using_AIMMS_Cloud_tasks {
+		Module Enforce_Synchronization {
+			Prefix: es;
+			Procedure pr_awaitResponses {
+				Arguments: (p_timeout,sp_msg);
+				Body: {
+					if not dex::client::WaitForResponses(p_timeout * 1000) then
+						raise warning sp_msg ;
+					endif ;
+				}
+				Parameter p_timeout {
+					Property: Input;
+				}
+				StringParameter sp_msg {
+					Property: Input;
+				}
+				Parameter _p_iterations;
+			}
+		}
 		Procedure pr_buttonSolveFlowshopUsingTask {
 			Body: {
-				pr_runTaskToSolveJobshopProblem("");
+				pr_runSingleTaskToSolveJobshopProblem();
 			}
 		}
 		DeclarationSection DEX_declarations {
 			StringParameter sp_AIMMSazureCloudName {
-				Definition: "chriskuip.aimms.cloud";
+				Definition: "YourCloudAccount.aimms.cloud";
+				Comment: "Please add your own cloud account address in this string.";
 			}
 			StringParameter sp_apiKey {
-				Definition: "mxTn783u6BssZA4qUx+Wopv2b+/YeIy32v6BWiokz+8=";
+				Definition: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=";
+				Comment: "Please add your own Rest API Key generated via the AIMMS portal.";
 			}
 			ElementParameter ep_callback {
 				Range: AllProcedures;
 				Default: 'dex::client::EmptyCallback';
 			}
-			StringParameter sp_theRequest;
 			StringParameter sp_appName {
-				Definition: "FlowshopSolver";
+				Definition: "YouApplcationName";
+				Comment: "Please add your own application name corresponding to the one used when published on the cloud.";
 			}
 			StringParameter sp_appVersion {
-				Definition: "002";
+				Definition: "1.0";
+				Comment: "Please add your own version number corresponding to the one used when published on the cloud.";
 			}
 		}
 		Procedure pr_writeSetsParameters {
 			Arguments: (sp_requestFilename);
 			Body: {
-				display "pr_writeSetsParameters", sp_requestFilename ;
-				
 				dex::WriteToFile(
 					dataFile    :  sp_requestFilename, 
 					mappingName :  "flowshopSetsParametersJSON", 
@@ -538,15 +571,32 @@ Model Main_Flow_Shop {
 					emptyIdentifiers :  0, 
 					emptySets        :  0, 
 					resetCounters    :  0);
+				GenerateInterface();
 			}
 		}
 		Section FrontEnd_declarations {
+			Procedure pr_runSingleTaskToSolveJobshopProblem {
+				Body: {
+					pr_submitTask("");
+					
+					_p_iteration := 1 ;
+					while not bp_taskFinished do
+						delay(2);
+						pr_taskPoll(); 
+						_p_iteration += 1 ;
+					endwhile ;
+					
+					pr_taskGetResults();
+					es::pr_awaitResponses(5,"retrieving task results timed out");
+				}
+				Parameter _p_iteration;
+			}
 			Section Submit_job {
-				Procedure pr_runTaskToSolveJobshopProblem {
+				Parameter bp_taskFinished;
+				Procedure pr_submitTask {
 					Arguments: (sp_inst);
 					Body: {
-						display "pr_runTaskToSolveJobshopProblem", sp_inst ;
-						
+						bp_taskFinished := 0 ; 
 						empty Task_Status_declarations ;
 						
 						if sp_inst then
@@ -555,57 +605,47 @@ Model Main_Flow_Shop {
 							sp_theRequest := "flowshop" ;
 						endif ;
 						ep_callback := 'pr_solveFlowshopCallback' ;
-						sp_requestFilename := "./data/input/" +sp_theRequest+".json";
-						pr_writeSetsParameters(sp_requestFilename);
+						_sp_requestFilename := "./data/input/" +sp_theRequest+".json";
+						pr_writeSetsParameters(_sp_requestFilename);
+						_sp_url := formatString("https://%s/pro-api/v2/tasks/%s/%s/flowshopSolver",
+										sp_AIMMSazureCloudName, sp_appName, sp_appVersion );
+						_sp_responseFilename := "./data/taskid/"+sp_theRequest+".json";
 						dex::client::NewRequest(
 							theRequest   :  sp_theRequest, 
-							url          :  formatString("https://%s/pro-api/v1/tasks/%s/%s/flowshopSolver",
-										sp_AIMMSazureCloudName, sp_appName, sp_appVersion ),
+							url          :  _sp_url,
 							callback     :  ep_callback, 
 							httpMethod   :  'POST', 
-							requestFile  :  sp_requestFilename,
-							responseFile :  "./data/taskid/"+sp_theRequest+".json",
-							traceFile    :  "" ); ! "./tracings/" + sp_theRequest + ".trace.txt" );
+							requestFile  :  _sp_requestFilename,
+							responseFile :  _sp_responseFilename,
+							traceFile    :  "" ); 
 						dex::client::AddRequestHeader(
 							theRequest  :  sp_theRequest, 
 							header      :  "apiKey", 
 							headerValue :  sp_apiKey);
-						
 						dex::client::PerformRequest(sp_theRequest);
+						
+						es::pr_awaitResponses(5,"submitting task timed out");
+						
+						dex::client::CloseRequest(sp_theRequest);
 					}
 					StringParameter sp_inst {
 						Property: Input;
 					}
-					StringParameter sp_requestFilename;
+					StringParameter _sp_requestFilename;
+					StringParameter _sp_url;
+					StringParameter _sp_responseFilename;
+					StringParameter sp_theRequest;
 				}
 				Procedure pr_solveFlowshopCallback {
 					Arguments: (sp_requestId,p_statusCode,p_errorCode);
 					Body: {
-						display "pr_solveFlowshopCallback", sp_requestId,p_statusCode,p_errorCode;
-						
-						pr_readTaskId(sp_requestId);
-						
-						ep_inst := StringToElement( s_instances, sp_requestID, create: 0 );
-						if ep_inst then
-							pr_registerTaskWithInstance( ep_inst, sp_taskID );
-						endif ;
-						
-						!pr_solveFlowshopInquireStatus();
-						if ep_inst then
-							ep_nextPoll := ep_pollProc(ep_inst);
-							if not ep_nextPoll then
-								raise error "Internal error" ;
-							endif  ;
+						if p_statusCode = 200 then
+							! It is OK.
+							pr_readTaskId(sp_requestId);
 						else
-							raise error "bah" ;
-							ep_nextPoll := 'pr_solveFlowshopInquireStatus';
+							raise error formatString("Error handling request %s, statusCode:%i, errorCode: %i", 
+								sp_requestId, p_statusCode, p_errorCode );
 						endif ;
-						apply( ep_nextPoll );
-						
-						
-						
-						
-						!pr_readVariables();
 					}
 					StringParameter sp_requestID {
 						Property: Input;
@@ -625,7 +665,7 @@ Model Main_Flow_Shop {
 					}
 				}
 			}
-			Section task_status {
+			Section task_status_aka_polling {
 				StringParameter sp_taskID {
 					InitialData: "";
 				}
@@ -633,8 +673,8 @@ Model Main_Flow_Shop {
 					StringParameter sp_taskStatusErrorMessage;
 					StringParameter sp_taskStatusMessage;
 					StringParameter sp_taskStatusID;
-					StringParameter sp_taskStatusProjectName;
-					StringParameter sp_taskStatusProjectVersion;
+					StringParameter sp_taskStatusAppName;
+					StringParameter sp_taskStatusAppVersion;
 					Parameter p_taskStatusQueueTime;
 					Parameter p_taskStatusReturnCode;
 					Parameter p_taskStatusErrorCode;
@@ -644,13 +684,76 @@ Model Main_Flow_Shop {
 					}
 					StringParameter sp_taskStatusService;
 					StringParameter sp_taskStartTime;
-					StringParameter sp_taskStatus;
+					StringParameter sp_taskState;
+				}
+				Procedure pr_taskPoll {
+					Body: {
+						_sp_request := "poll" ;
+						
+						_p_returnValue := 1; ! Indicates: keep polling. 
+						
+						_sp_url := formatString("https://%s/pro-api/v2/tasks/%s",
+										sp_AIMMSazureCloudName, sp_taskID  );
+						
+						dex::client::NewRequest(
+							theRequest   :  _sp_request, 
+							url          :  _sp_url, 
+							callback     :  'pr_pollCallback', 
+							httpMethod   :  'GET', 
+							requestFile  :  "", 
+							responseFile :  "data/pollResponse.json", 
+							traceFile    :  "");
+						dex::client::AddRequestHeader(
+							theRequest  :  _sp_request, 
+							header      :  "apiKey", 
+							headerValue :  sp_apiKey);
+						dex::client::PerformRequest(_sp_request);
+						
+						es::pr_awaitResponses(1, "polling timed out");
+						dex::client::CloseRequest(_sp_request);
+					}
+					Parameter _p_returnValue {
+						Comment: "0 indicates to stop polling.";
+					}
+					StringParameter _sp_request;
+					StringParameter _sp_url;
+					Parameter _p_iterations;
+				}
+				Procedure pr_pollCallback {
+					Arguments: (sp_requestId,p_statusCode,p_errorCode);
+					Body: {
+						if p_statusCode = 200 then
+							! It is OK.
+							pr_readTaskDetail(sp_statusFilename : "data/pollResponse.json" );
+							if sp_taskState = "failed"     or
+							   sp_taskState = "completed"      then
+							   	bp_taskFinished := 1;
+							endif ;
+						else
+							raise error formatString("Error handling polling request %s, statusCode:%i, errorCode: %i", 
+								sp_requestId, p_statusCode, p_errorCode );
+						endif ;
+					}
+					StringParameter sp_requestID {
+						Property: Input;
+					}
+					Parameter p_statusCode {
+						Property: Input;
+					}
+					Parameter p_errorCode {
+						Property: Input;
+					}
+					ElementParameter ep_inst {
+						Range: s_instances;
+					}
+					ElementParameter ep_nextPoll {
+						Range: AllProcedures;
+						Default: 'pr_solveFlowshopInquireStatus';
+					}
 				}
 				Procedure pr_readTaskId {
 					Arguments: (sp_theRequest);
 					Body: {
-						display "pr_readTaskId" , sp_theRequest ;
-						
 						dex::ReadFromFile(
 							dataFile         :  "./data/taskid/"+sp_theRequest+".json", 
 							mappingName      :  "id", 
@@ -665,7 +768,6 @@ Model Main_Flow_Shop {
 				Procedure pr_readTaskDetail {
 					Arguments: (sp_statusFilename);
 					Body: {
-						
 						dex::ReadFromFile(
 							dataFile         :  sp_statusFilename, 
 							mappingName      :  "taskDetail", 
@@ -699,12 +801,12 @@ Model Main_Flow_Shop {
 							raise error "bluh" ;
 							ep_nextPoll := 'pr_solveFlowshopInquireStatus';
 						endif ;
-						display "pr_InquireStatusSolveFlowshopCallback", sp_taskStatus ;
-						if sp_taskStatus = "starting" or sp_taskStatus = "queued" then
+						display "pr_InquireStatusSolveFlowshopCallback", sp_taskState ;
+						if sp_taskState = "queued" or sp_taskState = "assigned" or sp_taskState = "running" or sp_taskState = "solving" then
 							stopwatch::pr_scheduleOver( 5[s], ep_nextPoll );
-						elseif sp_taskStatus = "finished" then
+						elseif sp_taskState = "completed" then
 							pr_runTaskFlowshopReceiveResult(sp_requestId);
-						elseif sp_taskStatus = "finished with errors" then
+						elseif sp_taskState = "failed" then
 							display "error finish pr_InquireStatusSolveFlowshopCallback", 
 								sp_requestId,p_statusCode,p_errorCode;
 						else
@@ -735,35 +837,98 @@ Model Main_Flow_Shop {
 				}
 				Procedure pr_solveFlowshopInquireStatus {
 					Body: {
-						!sp_theRequest := "inquireStatusSolveFlowshop" ;
 						ep_callback := 'pr_InquireStatusSolveFlowshopCallback' ;
 						dex::client::NewRequest(
-							theRequest   :  sp_theRequest, 
-							url          :  formatString("https://%s/pro-api/v1/tasks/%s",
+							theRequest   :  _sp_request, 
+							url          :  formatString("https://%s/pro-api/v2/tasks/%s",
 										sp_AIMMSazureCloudName, sp_taskID ),
 							callback     :  ep_callback, 
 							httpMethod   :  'GET', 
 							requestFile  :  "",   
-							responseFile :  "./data/status/"+sp_theRequest+".json", 
+							responseFile :  "./data/status/"+_sp_request+".json", 
 							traceFile    :  "" );  
 						dex::client::AddRequestHeader(
-							theRequest  :  sp_theRequest, 
+							theRequest  :  _sp_request, 
 							header      :  "apiKey", 
 							headerValue :  sp_apiKey);
-						dex::client::PerformRequest(sp_theRequest);
+						dex::client::PerformRequest(_sp_request);
 					}
+					StringParameter _sp_request;
 				}
 			}
 			Section Receive_result {
+				Procedure pr_taskGetResults {
+					Body: {
+						_sp_request := "taskGetResults" ;
+						
+						_p_returnValue := 1; ! Indicates: keep polling. 
+						
+						_sp_url := formatString("https://%s/pro-api/v2/tasks/%s/response",
+										sp_AIMMSazureCloudName, sp_taskID  );
+						
+						dex::client::NewRequest(
+							theRequest   :  _sp_request, 
+							url          :  _sp_url, 
+							callback     :  'pr_taskGetResultsCallback', 
+							httpMethod   :  'GET', 
+							requestFile  :  "", 
+							responseFile :  "data/flowshopVariables.json", 
+							traceFile    :  "");
+						dex::client::AddRequestHeader(
+							theRequest  :  _sp_request, 
+							header      :  "apiKey", 
+							headerValue :  sp_apiKey);
+						dex::client::PerformRequest(_sp_request);
+						
+						
+						if bp_taskFinished then 
+							_p_returnValue := 0; ! Indicates: stop polling. 
+						endif ;
+						
+						return _p_returnValue ;
+					}
+					Parameter _p_returnValue {
+						Comment: "0 indicates to stop polling.";
+					}
+					StringParameter _sp_request;
+					StringParameter _sp_url;
+					Parameter _p_iterations;
+				}
+				Procedure pr_taskGetResultsCallback {
+					Arguments: (sp_requestId,p_statusCode,p_errorCode);
+					Body: {
+						if p_statusCode = 200 then
+							pr_readVariables();
+						else
+							raise error formatString("Error handling retreiving task response %s, statusCode:%i, errorCode: %i", 
+								sp_requestId, p_statusCode, p_errorCode );
+						endif ;
+					}
+					DeclarationSection Argument_declarations {
+						StringParameter sp_requestID {
+							Property: Input;
+						}
+						Parameter p_statusCode {
+							Property: Input;
+						}
+						Parameter p_errorCode {
+							Property: Input;
+						}
+					}
+					DeclarationSection Local_declarations {
+						ElementParameter ep_inst {
+							Range: s_instances;
+						}
+					}
+				}
 				Procedure pr_solveFlowshopReceiveResultsCallback {
 					Arguments: (sp_requestId,p_statusCode,p_errorCode);
 					Body: {
-						display "pr_solveFlowshopReceiveResultsCallback", sp_requestId,p_statusCode,p_errorCode;
 						
 						! if ok: a file containing something like {"id":"6e9b829c-7a34-4fa3-8fc6-da7707dbaddf"} is returned.
-						
-						pr_readVariables();
-						
+						if p_statusCode = 200 then
+							pr_readVariables();
+						endif ;
 						ep_inst := StringToElement( s_instances, sp_requestID, create: 0 );
 						if ep_inst then
 							! save variables in the output tables.
@@ -795,25 +960,26 @@ Model Main_Flow_Shop {
 					Arguments: (sp_theRequest);
 					Body: {
 						
-						pr_readTaskId(sp_theRequest);
+						!pr_readTaskId(sp_theRequest);
 						
-						sp_theRequest := "retrieveResultsFlowshop" ;
+						if not sp_theRequest then
+							sp_theRequest := "retrieveResultsFlowshop" ;	
+						endif ;
 						ep_callback := 'pr_solveFlowshopReceiveResultsCallback' ;
 						dex::client::NewRequest(
 							theRequest   :  sp_theRequest, 
 							url          :  
-								formatString("https://%s/pro-api/v1/tasks/%s/response",
+								formatString("https://%s/pro-api/v2/tasks/%s/response",
 									sp_AIMMSazureCloudName, sp_taskID ),
 							callback     :  ep_callback, 
 							httpMethod   :  'GET', 
 							requestFile  :  "",
 							responseFile :  "./data/flowshopVariables.json", 
-							traceFile    :  "" ); ! "./tracings/" + sp_theRequest + ".trace.txt" );
+							traceFile    :  "" ); 
 						dex::client::AddRequestHeader(
 							theRequest  :  sp_theRequest, 
 							header      :  "apiKey",
 							headerValue :  sp_apiKey);
-						
 						dex::client::PerformRequest(sp_theRequest);
 					}
 					StringParameter sp_theRequest {
@@ -1339,8 +1505,6 @@ Model Main_Flow_Shop {
 		}
 		Procedure pr_solveMultipleScenariosUsingTasks {
 			Body: {
-				block ! setup.
-				endblock ;
 				
 				block ! Submit all jobs as tasks.
 					bp_ready := 0 ;
@@ -1388,7 +1552,7 @@ Model Main_Flow_Shop {
 				
 				sp_inst := formatString("%e", ep_inst );
 				pr_createPollProcedure(ep_inst);
-				pr_runTaskToSolveJobshopProblem( sp_inst );
+				pr_submitTask( sp_inst );
 			}
 			DeclarationSection Argument_declarations {
 				Parameter p_mj {
@@ -1433,7 +1597,7 @@ Model Main_Flow_Shop {
 				
 				sp_body += "dex::client::NewRequest(\n" ;
 				sp_body += "    theRequest   :  \"poll"+sp_inst+"\", \n" ;
-				sp_body += "    url          :  formatString(\"https://%s/pro-api/v1/tasks/%s\",\n" ;
+				sp_body += "    url          :  formatString(\"https://%s/pro-api/v2/tasks/%s\",\n" ;
 				sp_body += "                           sp_AIMMSazureCloudName, sp_instTaskID('"+sp_inst+"') ),\n" ;
 				sp_body += "    callback     :  \'pr_InquireStatusSolveFlowshopCallback\', \n" ;
 				sp_body += "    httpMethod   :  'GET', \n" ;

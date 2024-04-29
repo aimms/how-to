@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<References AIMMS_Version="4.93.1.1 (x64)">
+<References AIMMS_Version="24.3.2.2 (x64)">
 	<MainProject Path="MainProject" />
 	<Library System="true" Path="AimmsPro" />
 	<Library System="true" Path="AimmsWebUI" />
-	<RepositoryLibrary UUID="BDF54E1C-AF05-4D77-856C-F3C05F20FFB8" Name="AimmsDEX" Version="2.1.0.6" />
+	<RepositoryLibrary UUID="BDF54E1C-AF05-4D77-856C-F3C05F20FFB8" Name="AimmsDEX" Version="24.2.1.6" />
 	<Library Path="_Example Style Library" />
 	<Library Path="StopwatchLibrary" />
 </References>

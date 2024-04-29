@@ -151,6 +151,9 @@
           "webui::DisplayTimeZone"
         ]
       }
+    },
+    "views": {
+      "literal": {}
     }
   }
 }
