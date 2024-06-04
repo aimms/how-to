@@ -66,3 +66,4 @@ Related Topics
 
 * :doc:`/Articles/178/178-change-default-solver`
 * :doc:`/Articles/208/208-setting-options`
+* `Gurobi Support on AIMMS Cloud Platform <https://documentation.aimms.com/cloud/gurobi-support.html>`_
