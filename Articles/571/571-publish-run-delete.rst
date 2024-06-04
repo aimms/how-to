@@ -22,8 +22,7 @@ Below, you will find a code example of how to achieve this.
     import os
 	
 	 
-    url = "https://YOURURL-test.aimms.cloud/pro-api/v1/"
-	# Tasks require the use of V2 of the PRO-API
+    url = "https://YOURURL-test.aimms.cloud/pro-api/v2/"
 	url_tasks = "https://YOURURL-test.aimms.cloud/pro-api/v2/" 
     url_scope = "applications"
     project_name = 'YOURPPROJECTNAME'
@@ -39,9 +38,10 @@ Below, you will find a code example of how to achieve this.
     headers = {
         'apiKey': 'YOURAPIKEY'
     }
-    payload = {'metadata': '{"name": "' + project_name + '", "description": "YOUR DESCRIPTION", "projectVersionId": "' +
+    payload = {'metadata': '{"name": "' + project_name + '", "description": "YOUR DESCRIPTION", "projectVersion": "' +
                 project_version + '", ' '"aimmsVersionId": "4.91.2.8-linux64-x64-cm_vc141", "projectCategory": "YOUR CATEGORY" }'}
     # replace 4.91.2.8-linux64-x64-cm_vc141 with the version you would like to use 
+    # you can view available versions of AIMMS via a Rest API call to /aimms-versions
 
     url_publish = url + '/' + url_scope
     response_publish = requests.request("POST", url_publish, headers=headers, data=payload, files=files)
