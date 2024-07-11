@@ -234,7 +234,7 @@ So here, is used the `Haversine formula <https://en.wikipedia.org/wiki/Haversine
 
 Haversine formula is an equation important in navigation, 
 giving great-circle distances between two points on a sphere from their longitudes 
-and latitudes `[1] <https://how-to.aimms.com/Articles/397/397-traveling-salesman#references.html>`_.  
+and latitudes `Haversine Theory <https://rosettacode.org/wiki/Haversine_formula>`_.  
 
 The parameter that holds its value is: 
 
@@ -557,7 +557,7 @@ References
 
 #.  `Solve with Lazy Constraints <https://how-to.aimms.com/Articles/126/126-TSP-Lazy-Constraints.html#solve-with-lazy-constraints>`_ - Marcel Hunting. 
 
-#. Applegate, D.L., R. E. Bixby, V. Chvátal, and W. J. Cook, The Traveling Salesman Problem: A Computational Study, Princeton University Press, Princeton, 2007
+#.  Applegate, D.L., R. E. Bixby, V. Chvátal, and W. J. Cook, The Traveling Salesman Problem: A Computational Study, Princeton University Press, Princeton, 2007
 
 .. seealso:: Here you will find several euclidean TSP instances from TSPLIB at: http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/
 

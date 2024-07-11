@@ -147,7 +147,7 @@ The general steps required to achieve this is
 
 * Control which users can access this version via the Rest API
 
-* Run specific tests using the AIMMS PRO Rest API based on predefined tasks within your project. You will start the task via the Rest API during the pipeline. Here is the `documenatation <https://documentation.aimms.com/cloud/rest-api.html#running-tasks>`_ and a `general overview <https://how-to.aimms.com/Articles/561/561-openapi-overview.html>`_ .
+* Run specific tests using the AIMMS PRO Rest API based on predefined tasks within your project. You will start the task via the Rest API during the pipeline. Here is the `documentation <https://documentation.aimms.com/cloud/tasks.html#running-tasks>`_ and a `general overview <https://how-to.aimms.com/Articles/561/561-openapi-overview.html>`_ .
 
 We recommend that you do not make the test versions of your application accessible to end-users until they have been validated in the acceptance tests. Hence you may want to delete versions used in tests like the above.
 
