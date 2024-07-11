@@ -10,7 +10,15 @@ Schedule Regular Jobs
 
 
 Some applications involve solving a mathematical program regularly, for instance every night or every ten minutes. 
-In this article, we'll discuss how an AIMMS job can reschedule itself, as depicted in the next picture.
+
+There are two mechanisms available to achieve this.
+
+#.  `Tasks v2 on AIMMS Cloud <https://documentation.aimms.com/cloud/tasks.html#schedule-task-s>`_ 
+    explains clearly how to achieve regular execution easily.
+
+#.  AIMMS PRO jobs that reschedule themselves. This may be a bit tricky and warrants a detailed example.
+
+In the remainder of this article, we'll discuss how an AIMMS job can reschedule itself, as depicted in the next picture.
 
 .. image:: images/DelegationLevel.png
 
