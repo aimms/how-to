@@ -173,7 +173,7 @@ html_theme_options = {
     'algolia_appid': 'IW8ZL7FCKQ',
     'algolia_appkey': '6673ed276a44e7ddcb8638d7c41cf2e3',
     'algolia_indexname':'aimms_how-to',
-    'algolia_hitsperpage': 10,
+    'algolia_hitsperpage': 20,
     'display_help_and_feedback' : True,
     'is_github' : True,
     'repo_url' : "https://github.com/aimms/how-to",
