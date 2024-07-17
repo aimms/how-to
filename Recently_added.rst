@@ -17,7 +17,7 @@ Recently added
 * :doc:`/Articles/567/567-aimms-service`
 * :doc:`/Articles/566/566-scalar-border-annotation`
 * :doc:`/Articles/564/564-LocationIQ`
-* :doc:`/Articles/562/562-ipTwist`
+* :doc:`/Articles/562/562-geolocation-abstractapi`
 * :doc:`/Articles/207/207-iframe-widget`
 * :doc:`/Articles/536/536-name-binds-to`
 * :doc:`/Articles/535/535-waiting-for-sub-jobs-to-complete`

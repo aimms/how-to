@@ -1,5 +1,6 @@
-ipTwist
-=======
+Geolocation AbstractAPI
+==============================
+
 .. meta::
    :keywords: aimms, api, rest api, library, ip
    :description: This example uses the rest api! 
@@ -17,8 +18,8 @@ Story
 ----------
 
 
-In this functional example, you will see a IP Locator. The site `ipTwist <https://iptwist.com/>`_ provides a service for WhoIs GeoLocating; translating an IP Address to a location on the globe. 
-For instance, the IP Address ``111.111.111.111`` will return Latitude 35.68, Longitude 136.69; which is in Tokyo, Japan. Add your IP address and confirm where you are!
+In this functional example, you will see a IP Locator. The site `geolocation.abstractapi <https://geolocation.abstractapi.com/>`_ provides a service for WhoIs GeoLocating; translating an IP Address to a location on the globe. 
+For instance, the IP Address ``111.111.111.111`` will return Latitude 33.169, Longitude 129.72; which is in Tokyo, Japan. Add your IP address and confirm where you are!
 
 Language
 -----------
@@ -26,7 +27,7 @@ Language
 Operating the Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To operate this example, you first need to obtain an API key, from `https://iptwist.com/settings <https://iptwist.com/settings>`_
+To operate this example, you first need to obtain an API key, from `Getting API key abstract api geolocation <https://https://app.abstractapi.com/api/ip-geolocation/tester>`_
 
 .. image:: images/obtain-api-key.png
     :align: center
@@ -50,7 +51,7 @@ You will be asked for an API key first. Then the IP address provided will be Geo
 Using the API
 ~~~~~~~~~~~~~
 
-While using REST APIs, you will need to **Prepare**, **Call the API** and **Handle the Response**. All three steps are detailed `here <https://how-to.aimms.com/Articles/562/562-ipTwist.html>`_.  
+While using REST APIs, you will need to **Prepare**, **Call the API** and **Handle the Response**. All three steps are detailed `here <https://how-to.aimms.com/Articles/562/562-geolocation-abstractapi.html>`_.  
 
 WebUI Features
 ---------------
@@ -213,7 +214,7 @@ Minimal Requirements
 ----------------------
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example. 
-However, you will need API key, to receive an free API key to test, please access `ipTwist setttings <https://iptwist.com/settings>`_ and sign up. 
+However, you will need API key, to receive an free API key to test, please access `abstractapi <https://app.abstractapi.com/api/ip-geolocation/tester>`_ and sign up. 
 
 .. spelling:word-list::
 

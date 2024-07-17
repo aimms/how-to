@@ -86,7 +86,7 @@ See `Generating API clients from an OpenAPI specification <https://documentation
 Detail how-to's provided
 -------------------------
 
-#.  :doc:`Introduction using single request <../562/562-ipTwist>`
+#.  :doc:`Introduction using single request <../562/562-geolocation-abstractapi>`
 
 #.  :doc:`Continue using multiple in various ways <../564/564-LocationIQ>`
 
