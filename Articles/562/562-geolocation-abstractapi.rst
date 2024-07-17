@@ -194,4 +194,6 @@ Further information:
 .. spelling:word-list::
 
    ipTwist
-   
+   geolocation
+   abstractapi
+   openapi
