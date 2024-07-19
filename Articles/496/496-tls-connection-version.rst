@@ -23,7 +23,7 @@ Various versions of TLS, including the advantages of version 1.3, are further de
 
 #.  By SSL in their `blog <https://www.ssl.com/blogs/need-know-tls-1-3>`_
 
-#.  And more extensively in `this blog <https://www.thesslstore.com/blog/tls-1-3-everything-possibly-needed-know/>`_
+#.  And more extensively in `this blog <https://en.wikipedia.org/wiki/Transport_Layer_Security>`_
 
 
 Solution

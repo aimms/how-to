@@ -135,9 +135,6 @@ There is a lot of literature and automated support on selecting and creating nic
     it comes with a lot of bells and whistles - and the tutorial to let you create palettes.
     It is fun to play around with the color space and see what kind of palettes are created.
     
-#.  This `Nightingale blog <https://medium.com/nightingale/how-to-create-brand-colors-for-data-visualization-style-guidelines-dbd69c586dd9>`_ discusses 
-    data visualization color palettes in combination with branding.
-
 The :download:`barlegend <model/barlegend.zip>` let's you play around with the color palettes discussed here.
 
 
