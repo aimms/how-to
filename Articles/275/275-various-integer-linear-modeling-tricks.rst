@@ -10,7 +10,7 @@ Modeling problems with an (integer) linear program sometimes requires some exper
 in the problem description that can be formulated in a linear way. 
 
 At the Naval Postgraduate School, Gerald Brown and Robert Dell developed a list of formulettes, and made these 
-available :download:`Formulating Integer Linear Programs: A Rogues’ Gallery <https://pubsonline.informs.org/doi/pdf/10.1287/ited.7.2.153>` .
+available :download:`Formulating Integer Linear Programs: A Rogues’ Gallery ``https://pubsonline.informs.org/doi/pdf/10.1287/ited.7.2.153`` .
 This article demystifies the art of formulating linear and integer linear programs. 
 This is achieved by introducing formulettes, which consist of a verbal description and 
 the constraints and variables that model this verbal description.

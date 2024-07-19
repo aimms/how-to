@@ -123,7 +123,7 @@ Further reading
 
 The interpretation of log files is discussed in:
 
-* LP  at https://pdfs.semanticscholar.org/b01f/ad44c20c372fdda95cbfb980c0d37302de07.pdf 
-* MIP at https://pubsonline.informs.org/doi/10.1287/educ.2014.0130 
+* LP  at ``https://pdfs.semanticscholar.org/b01f/ad44c20c372fdda95cbfb980c0d37302de07.pdf``
+* MIP at ``https://pubsonline.informs.org/doi/10.1287/educ.2014.0130``
 
 

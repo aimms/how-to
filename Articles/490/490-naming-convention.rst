@@ -206,7 +206,7 @@ The prefixes encouraged are enumerated in the table below:
 References
 -----------------
 
-* `Naming conventions overview on Medium <https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841>`_
+* `Naming conventions overview  <https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/>`_
 
 * `Hungarian notation <https://en.wikipedia.org/wiki/Hungarian_notation>`_
 

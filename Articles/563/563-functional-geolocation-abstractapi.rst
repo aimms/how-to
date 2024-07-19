@@ -18,7 +18,7 @@ Story
 ----------
 
 
-In this functional example, you will see a IP Locator. The site `geolocation.abstractapi <https://geolocation.abstractapi.com/>`_ provides a service for WhoIs GeoLocating; translating an IP Address to a location on the globe. 
+In this functional example, you will see a IP Locator. The site `geolocation.abstractapi <https://www.abstractapi.com/api/ip-geolocation-api/>`_ provides a service for WhoIs GeoLocating; translating an IP Address to a location on the globe. 
 For instance, the IP Address ``111.111.111.111`` will return Latitude 33.169, Longitude 129.72; which is in Tokyo, Japan. Add your IP address and confirm where you are!
 
 Language
