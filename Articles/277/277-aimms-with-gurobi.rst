@@ -27,7 +27,7 @@ Single machine
 
 #. In the Solver Configuration dialog box in AIMMS, click on Add and select the dll for the appropriate Gurobi version (`libgrb**.dll`)
 
-   .. image:: solver_config.png
+   .. image:: solver_config2.png
       :align: center
 
 Compute server
