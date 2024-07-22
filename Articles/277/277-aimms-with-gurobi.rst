@@ -33,25 +33,25 @@ Single machine
 Compute server
 ------------------
 
-If you have a `Gurobi compute server license <https://www.gurobi.com/documentation/10.0/quickstart_linux/setting_up_and_using_a_com.html>`_, follow the instructions depending on whether you are using AIMMS on a Gurobi client machine or the server itself. 
+For a Gurobi Compute Server, there are two types of license files: `server and client <https://support.gurobi.com/hc/en-us/articles/19282145783953-What-is-the-difference-between-a-server-and-client-license-file.html>`_.
+If you have a `Gurobi compute server license <https://support.gurobi.com/hc/en-us/articles/13390211932689-How-do-I-set-up-and-use-a-Compute-Server-license.html>`_, follow the instructions depending on whether you are using AIMMS on a Gurobi client machine or the server itself. 
 
 Client on a different machine
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Create a Gurobi client license by following the instructions on `Gurobi: License File <https://www.gurobi.com/documentation/10.0/remoteservices/client_license_file.html>`_ 
-#. Place this file in the folder ``C:\\gurobi\\``
-
-The next steps are same as for a single machine license described in the previous section. 
+#. Create a Gurobi client license by following the instructions on `Gurobi: License File <https://www.gurobi.com/documentation/11.0/remoteservices/client_license_file.html>`_ 
+#. Place this file in the folder ``C:\gurobi\``
+#. Set the environment variable GRB_LICENSE_FILE to point to the exact location of this file (see above).
+#. Set Gurobi as the default solver in the Solver Configuration dialog like in previous steps (see above).
 
 Client is same as server machine
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you are running AIMMS on the same machine as Gurobi remote services, you will need to create a separate client license file again as described  on `Gurobi : Creating a Compute Server <https://www.gurobi.com/documentation/10.0/quickstart_windows/creating_a_compute_server_.html>`_
+If you are running AIMMS on the same machine as Gurobi remote services, you will need to create a separate client license file again as described  on `Gurobi : Creating a Compute Server <https://support.gurobi.com/hc/en-us/articles/13415510571409-How-do-I-create-a-Compute-Server-client-license.html>`_
 
 #. Place this license file in a different location than `C:\\gurobi\\`, say `C:\\Users\\Name\\Documents\\gurobi.lic` 
 #. Set the environment variable GRB_LICENSE_FILE to the file in `C:\\Users\\Name\\Documents\\`
-
-Set Gurobi as the default solver in the Solver Configuration dialog like in previous steps. 
+#. Set Gurobi as the default solver in the Solver Configuration dialog like in previous steps (see above).
 
 
 AIMMS PRO with Gurobi 
