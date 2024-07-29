@@ -31,7 +31,9 @@ Remarks:
 Option 2: Use the DB Tunnel app
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can use the AIMMS DB Tunnel app to open a connection from your local computer to the AIMMS Cloud database. This connection will only remain active for as long as you are logged into the AIMMS Cloud, the Tunnel App remained open and has not been stopped. `Here you can download DB Tunnel App <https://download.aimms.com/aimms/download/data/PRO/DBTunnel/>`_. 
+You can use the AIMMS DB Tunnel app to open a connection from your local computer to the AIMMS Cloud database. This connection will only remain active for as long as you are logged into the AIMMS Cloud, the Tunnel App remained open and has not been stopped. 
+
+:download:`DB Tunnel app as AIMMS 4.74 aimmspack <downloads/DBTunnel AIMMS 4.74.aimmspack>`
 
 All you need to do is publish this application with **AIMMS Version 4.66.2 or higher** on your PRO Portal and configure the Tunnel from the `Configuration <https://manual.aimms.com/pro/admin-config-1.html#tunnels>`_ menu. See also `Tunneling Support <https://manual.aimms.com/pro/tunneling.html>`_ for more details on Tunnels.
 
@@ -59,7 +61,7 @@ We have further enhanced DB Tunnel App such that it can report errors when it ca
 .. image:: images/dbtunnel_error.png
     :align: center
 
-We recommend using an application like `MySQL Workbench <https://dev.mysql.com/downloads/workbench/>`_ to interact with the database once your connection is established. You can add a new connection there, filling out the highlighted details (port should be equal to what you have set in your DB Tunnel App):
+We recommend using an application like MySQL Workbench ``www.mysql.com/products/workbench`` to interact with the database once your connection is established. You can add a new connection there, filling out the highlighted details (port should be equal to what you have set in your DB Tunnel App):
 
 .. image:: images/workbench.png
     :align: center

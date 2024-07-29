@@ -13,7 +13,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../550/550-demand-forecasting`
-    * :doc:`../563/563-functional-ipTwist`
+    * :doc:`../563/563-functional-geolocation-abstractapi`
     * :doc:`../434/434-reindeer-pairing`
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../623/623-bias-in-ai`
@@ -24,7 +24,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../383/383-contract-allocation`
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
-    * :doc:`../563/563-functional-ipTwist`
+    * :doc:`../563/563-functional-geolocation-abstractapi`
     * :doc:`../434/434-reindeer-pairing`
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../623/623-bias-in-ai`
@@ -35,7 +35,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../383/383-contract-allocation`
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
-    * :doc:`../563/563-functional-ipTwist`
+    * :doc:`../563/563-functional-geolocation-abstractapi`
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../434/434-reindeer-pairing`
     * :doc:`../623/623-bias-in-ai`
@@ -63,7 +63,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../397/397-traveling-salesman`
-    * :doc:`../563/563-functional-ipTwist`
+    * :doc:`../563/563-functional-geolocation-abstractapi`
     * :doc:`../623/623-bias-in-ai`
 
 .. dropdown:: Side Panel
@@ -95,7 +95,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../383/383-contract-allocation`
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
-    * :doc:`../563/563-functional-ipTwist`
+    * :doc:`../563/563-functional-geolocation-abstractapi`
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../434/434-reindeer-pairing`
     * :doc:`../623/623-bias-in-ai`
@@ -136,7 +136,7 @@ This page has a summary of the examples versus AIMMS features used in them.
 .. dropdown:: Map Widget    
     
     * :doc:`../397/397-traveling-salesman`
-    * :doc:`../563/563-functional-ipTwist`
+    * :doc:`../563/563-functional-geolocation-abstractapi`
 
 .. dropdown:: Status Bar   
 

@@ -27,7 +27,7 @@ Preparing to create a VBA Client of your own using AIMMS PRO Rest API Tasks, you
     .. image:: images/vba-client-selected-tools-references.png
         :align: center
 
-#.  Download and `install The VBA JSON library <https://github.com/VBA-tools/VBA-JSON#installation>`_.
+#.  Download and `install The VBA JSON library <https://github.com/VBA-tools/VBA-JSON>`_.
 
 
 Workbook
@@ -217,8 +217,8 @@ References
     This article also provides an alternative for the deprecation of ``aimmscom``.
 
     Using AIMMS as an optimization tool inside an Excel workbook used to be facilitated 
-    via the Microsoft COM interface, see also 
-    `AIMMS COM <https://documentation.aimms.com/deprecation-table.html#:~:text=AIMMS%20COM%20is%20considered%20%E2%80%98old%E2%80%99%20architecture>`_ .
+    via the Microsoft COM interface, but is now deprecated, see also 
+    `Deprecation table <https://documentation.aimms.com/deprecation-table.html>`_ .
 
 
 

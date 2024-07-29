@@ -22,9 +22,10 @@ Solution
 
 In the article on the :doc:`evolution of the WebUI<../333/333-update-webui-version>` several steps are described.  By at least executing the following steps, the WebUI created is retained.
 
-#.  `Map V2 <https://how-to.aimms.com/Articles/333/333-update-webui-version.html#aimms-4-66-filtering-and-new-ux-theme>`_
+#.  `Switch to Map V2  
+<https://how-to.aimms.com/Articles/333/333-update-webui-version.html#aimms-4-61-map-v2>`_
 
-#.  `Filtering and new UX Theme <https://how-to.aimms.com/Articles/333/333-update-webui-version.html#aimms-4-66-filtering-and-new-ux-theme>`_
+#.  `Filtering and new UX Theme <https://how-to.aimms.com/Articles/333/333-update-webui-version.html#aimms-4-66-widget-filtering>`_
 
 #.  `Serialize WebUI specification with a single file <https://how-to.aimms.com/Articles/333/333-update-webui-version.html#aimms-4-67-serialize-webui-specification-with-a-single-file>`_
 

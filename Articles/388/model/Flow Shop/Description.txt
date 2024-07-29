@@ -22,5 +22,9 @@ There are three forms of parallel sessions demonstrated:
 2) When published on AIMMS PRO, and multiple AIMMS PRO Solver sessions are available, these solver sessions can be started in parallel.
 3) When published on AIMMS Cloud, similarly, multiple tasks can be started.
 
+This application also features the option to use AIMMS' Rest API features. 
+In order to use this feature you will need to publish this application on your AIMMS Cloud environment, configure the application based on your cloud information and use the "Solve Model using task" button in the demo page. 
+The identifiers that need to be updated are: sp_AIMMSazureCloudName, sp_apiKey, sp_appName and sp_appVersion. 
+
 Keywords:
 CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP, AIMMS PRO solver session, AIMMS Cloud task.

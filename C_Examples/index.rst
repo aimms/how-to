@@ -32,7 +32,7 @@ You can browse our examples by category:
    /Articles/390/390-knapsack-problem
    /Articles/434/434-reindeer-pairing
    /Articles/397/397-traveling-salesman
-   /Articles/563/563-functional-ipTwist
+   /Articles/563/563-functional-geolocation-abstractapi
    /Articles/550/550-demand-forecasting
    /Articles/623/623-bias-in-ai
    Sub_Application/index

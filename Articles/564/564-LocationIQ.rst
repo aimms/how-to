@@ -126,7 +126,7 @@ Making the request
 ^^^^^^^^^^^^^^^^^^^^^
 
 Making a request is coded in the procedure ``locationSearch::pr_makeRequest``.
-Note that this code is structured similarly to the API calling code `in the previous article <https://how-to.aimms.com/Articles/562/562-ipTwist.html#calling-the-api>`_.
+Note that this code is structured similarly to the API calling code `in the previous article <https://how-to.aimms.com/Articles/562/562-geolocation-abstractapi.html#calling-the-api>`_.
 
 .. code-block:: aimms 
     :linenos:

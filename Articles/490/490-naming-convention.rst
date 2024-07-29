@@ -96,7 +96,7 @@ Note that the IDE approach and the prefixing approach to distinguish between par
 Other naming conventions in practice
 """""""""""""""""""""""""""""""""""""""""
 
-There are `various alternatives <https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841>`_:
+There are `various alternatives <https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/>`_:
 
 #.  **camelCase** An identifier is named starting with a lower case letter, and if several words are used, each subsequent word is started with a capital. for instance ``priceIncrease``.
 
@@ -206,7 +206,7 @@ The prefixes encouraged are enumerated in the table below:
 References
 -----------------
 
-* `Naming conventions overview on Medium <https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841>`_
+* `Naming conventions overview  <https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/>`_
 
 * `Hungarian notation <https://en.wikipedia.org/wiki/Hungarian_notation>`_
 

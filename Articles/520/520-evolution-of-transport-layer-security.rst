@@ -108,4 +108,4 @@ References
 
 #.  `TLS 1.3 Is Here to Stay <https://www.ssl.com/blogs/need-know-tls-1-3>`_
 
-#.  `TLS 1.3: A Complete Overview <https://www.thesslstore.com/blog/tls-1-3-everything-possibly-needed-know/>`_
+#.  `TLS 1.3: Wikipedia <https://en.wikipedia.org/wiki/Transport_Layer_Security>`_

@@ -135,7 +135,7 @@ Related Topics
 
 * **AIMMS How-To**: :doc:`../120/120-pro-user-groups`
 
-* **AIMMS Documentation**: `WebUI <https://documentation.aimms.com/webui/index.html#webui>`_
+* **AIMMS Documentation**: `WebUI <https://documentation.aimms.com/webui/>`_
 
 * **AIMMS Documentation**: `AIMMS PRO <https://documentation.aimms.com/pro/index.html#pro-platform>`_
 
