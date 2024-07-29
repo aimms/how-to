@@ -83,7 +83,11 @@ We will cover their purpose below as well as if and how to modify them according
 
     Depending on what you would like to log there are different possible outputs:
 
-    #.  For logging of sessions on AIMMS Cloud -> ``stdout`` - this means that the cloud logs for a certain component will be increased (please note that cloud logs are accessible for AIMMS only),
+    #.  For logging of sessions on AIMMS Cloud -> ``stdout`` - this means that the cloud logs for a certain component will be increased (please note that cloud logs are accessible for AIMMS only, but you can request a copy - just send a request to support@aimms.com);
+
+
+    #.  For logging of sessions of AIMMS PRO on premise -> to the folder AimmsPRO/Log/Sessions (for a solver session or for a WebUI data session, not for a WinUI session);
+
 
     #.  For logging of activities in AIMMS Developer there are two options:
     
@@ -95,7 +99,7 @@ We will cover their purpose below as well as if and how to modify them according
     
         *MyXMLFileAppender* An XML text file appender, which sends its output to the file ``log/aimms-log.xml``
 
-    #.  For logging of sessions of AIMMS PRO on premise -> to the folder AimmsPRO/Log/Sessions (for a solver session or for a WebUI data session, not for a WinUI session)
+
 
     Unless instructed specifically by the AIMMS team please leave these as they are. The one(s) you choose to use will be defined in Section 3.
 
@@ -147,7 +151,7 @@ To configure the Windows explorer with this default action on ``.aimms`` files, 
     Evolution: With AIMMS 4.80 and newer the above is sufficient to start logging.
     When are you are using AIMMS 4.79 or older, please check :doc:`dated logging technology <../329/329-vintage-more-logging>` to obtain similar logging, just less detailed and less conveniently activated and configurable.
 
-For logging of WebUI and solver sessions in AIMMS Cloud
+For logging of WebUI, solver and rest sessions in AIMMS Cloud
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #.  Make sure that the line containing ``<appender-ref ref="stdout"/>`` in Section 3 of the ``LoggerConfig.xml`` file is the only uncommented line (without ``<!--`` in front and ``-->`` at the back);  
@@ -186,9 +190,8 @@ Inspecting Logging Information
 
 .. note:: 
 
-    The AIMMS log files are created by AIMMS staff and designed to be interpreted by AIMMS staff. 
-    The meaning of log entries may not be obvious. 
-    An error or warning message in the log file does NOT necessarily indicate a problem in the application. 
+     The logging is designed by developers of the AIMMS software for themselves - as aid in developing this software. This is why the interpretation of these log files may not be obvious. Therefore, definite interpretation should be left to those developers. You can request such analysis by sending in a request to support@aimms.com 
+     Most importantly, don't be unnecessarily alarmed: An error or warning message in the log file does NOT necessarily indicate a problem in the application. 
 
 A good tactic for analyzing these logs is to scan for ``[ERROR]`` or ``[WARN]``. 
 When an error or warning is related to the issue you are analyzing, check the lines just above it.
