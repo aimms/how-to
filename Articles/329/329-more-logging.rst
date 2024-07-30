@@ -196,8 +196,10 @@ Inspecting Logging Information
 
 .. note:: 
 
-     The logging is designed by developers of the AIMMS software for themselves - as aid in developing this software. This is why the interpretation of these log files may not be obvious. Therefore, definite interpretation should be left to those developers. You can request such analysis by sending in a request to support@aimms.com 
-     Most importantly, don't be unnecessarily alarmed: An error or warning message in the log file does NOT necessarily indicate a problem in the application. 
+    The logging is designed by developers of the AIMMS software for themselves - as aid in developing this software. This is why the interpretation of these log files may not be obvious. Therefore, definite interpretation should be left to those developers. You can request such analysis by sending in a request to support@aimms.com 
+    
+    Most importantly, don't be unnecessarily alarmed: An error or warning message in the log file does NOT necessarily indicate a problem in the application. 
+
 
 A good tactic for analyzing these logs is to scan for ``[ERROR]`` or ``[WARN]``. 
 When an error or warning is related to the issue you are analyzing, check the lines just above it.
