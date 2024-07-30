@@ -170,19 +170,23 @@ For logging of WebUI, solver and rest sessions in AIMMS Cloud
 For logging of WinUI sessions in AIMMS Cloud or in AIMMS PRO on premise
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
-#.  Make sure there is a ``C:/temp`` folder on the user’s local machine. If not, create one manually;
+#.  Make sure there is a ``C:/temp`` folder on the user’s local machine. If not, create one manually; 
 
 #.  Amend the ``LoggerConfig.xml`` file the following way:
 
-- in Section 1 of the ``LoggerConfig.xml`` file: for ``<appender name = MyFileAppender>`` set ``value="C:\temp\aimms-log.txt"`` (instead of ``value="log/aimms-log.txt"``)
-- in Section 3 of the ``LoggerConfig.xml`` file: find the line ``<appender-ref ref="MyFileAppender" />`` and remove the comments in front of it, if any. Make sure that this is the only uncommented line from Section 3. 
+    - in Section 1 of the ``LoggerConfig.xml`` file: for ``<appender name = MyFileAppender>`` set ``value="C:\temp\aimms-log.txt"`` (instead of ``value="log/aimms-log.txt"``)
 
-#.  Upload the ``LoggerConfig.xml`` file locally in the folder of the app. In my case it will look like this: ``C:\Users\Desislava\AppData\Local\AIMMS\PRO\dessie-test2.aimms.cloud\Tunnel app 40181\42ead7a8-0a46-4436-9092-4e86490380ee``;
+    - in Section 3 of the ``LoggerConfig.xml`` file: find the line ``<appender-ref ref="MyFileAppender" />`` and remove the comments in front of it, if any. Make sure that this is the only uncommented line from Section 3.
+
+#.  Upload the ``LoggerConfig.xml`` file locally in the folder of the app. In my case it will look like this: ``C:\Users\Desislava\AppData\Local\AIMMS\PRO\dessie-test2.aimms.cloud\Tunnel app 40181\42ead7a8-0a46-4436-9092-4e86490380ee``;  
+
 
 #.  Run the app on PRO or Cloud;
 
+
 #.  A file named ``aimms-log.txt`` will get created in ``C:\temp\`` containing logs from running the app. It will contain the log lines for the whole WinUI session.
+
+
 
 
 Inspecting Logging Information
