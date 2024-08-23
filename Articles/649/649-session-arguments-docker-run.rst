@@ -49,8 +49,8 @@ or using the ``\\`` character to split a single command:
 .. code-block:: none
 
     Aimms.exe myproj.aimms \
-    let scalpar \
-    45.67 run myproc
+    let scalpar 45.67  \
+	run myproc
     
 Apart from lack of syntactic sugaring, this command looks very similar to the above steering using AimmsCmd.
 
