@@ -25,7 +25,7 @@ For instance, to create a variant of Sqrt, do the following steps:
     .. image:: images/before-decl-sec-move.png
         :align: center
 
-#.  A call to ``me::move`` to move the declaration section below the function looks as follows:
+#.  A call to :aimms:func:`me::Move` to move the declaration section below the function looks as follows:
 
     .. code-block:: aimms
         :linenos:
