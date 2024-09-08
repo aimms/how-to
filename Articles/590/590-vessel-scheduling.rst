@@ -195,7 +195,7 @@ The route generation procedure is as follows:
 
 Because a route ``r'`` ends later than route ``r``, this procedure is finite.
 
-In order to determine the cost of a route, careful adminstration of each leg needs to be done 
+In order to determine the cost of a route, careful administration of each leg needs to be done 
 (sailing to the loading location, perhaps waiting, sailing to the delivery location).
 
 
@@ -406,4 +406,7 @@ Release Notes
    primaryDark
    ddab
    bg
-   
+   cargos
+   coords
+   haversine
+   combinatorially
