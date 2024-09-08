@@ -18,74 +18,193 @@ Vessel Scheduling
 Story
 -----
 
-In this practical example, an efficient plan is developed for delivering oil tankers already coupled with cargoes. 
-Prior to optimization, all possible routes are generated following data import. 
-Route creation considers each cargo's loading window to ensure timely delivery. 
-Subsequently, each cargo is assigned to either a time-chartered or voyage-chartered vessel within the model. 
+.. from Gabi: I copied what was already written, but i dont love it, since it explains the app not creates a background story. 
+.. So, feel free to shift that a little
+
+
+In this practical example, an efficient plan is developed for delivering large cargoes by oil tankers.
+
+The model operates under the assumption that each ship can carry only one cargo at a time and that 
+all vessels head directly to the loading port once the time horizon begins, 
+and as soon as a cargo is loaded, the vessel heads directly to the delivery location.
+
+Constraints include: 
+
+	*   cargo's are loaded inside the determined time window, 
+
+    *   each cargo being transported by only one vessel, and
+   
+    *   charter vessels being assigned to only one route at a time.
+
 The objective is to minimize costs for combinations of cargoes and routes.
 
-The model operates under several assumptions and constraints. 
-It assumes each ship can carry only one cargo at a time and that all vessels head directly to the loading port once the time horizon begins. 
-Constraints include: each cargo being transported by only one vessel, and charter vessels being assigned to only one route at a time.
+Approach used:
+^^^^^^^^^^^^^^^
 
-**Reference:** Gustavo Diz, Luiz Felipe Scavarda, Roger Rocha, Silvio Hamacher (2014) Decision Support System for PETROBRAS Ship Scheduling. Interfaces 44(6):555-566.
+Prior to optimization, all possible routes are generated following data import. 
+Route creation considers each cargo's loading window to ensure timely delivery. 
+
+Subsequently, during mathematical optimization, each cargo is assigned to 
+either a time-chartered or voyage-chartered vessel within the model. 
+
+Example:
+^^^^^^^^^
+
+A single vessel, ``vessel1``, located at Caracas, is to handle two cargos, labeled: ``a1`` and ``a2``.
+
+	#.	``a1`` load in Paramaribo, deliver in Sao Paolo
+	
+	#.  ``a2`` load in Montevideo, deliver in Rio de Janeiro.
+
+Then there are five potential routes:
+
+	#.	``vessel1_a1_a2``: with actions:
+
+		#.	Sail to Caracas to Paramaribo
+		
+		#.  Load Cargo ``a1``
+		
+		#.  Sail to Sao Paolo
+		
+		#.  Deliver Cargo ``a1``
+		
+		#.  Sail to Montevideo
+		
+		#.  Load Cargo ``a2``
+		
+		#.  Sail to Rio de Janeiro
+		
+		#.  Deliver Cargo ``a2``
+
+	#. 	``vessel1_a2_a1``: similar as ``vessel1_a1_a2``, just a different order of locations; 
+		and thus also different vessel sailing times and cargo pickup moments.
+	
+	#.  ``vessel1_a1``: ``vessel1`` only handles cargo ``a1``
+
+	#.  ``vessel1_a2``: ``vessel1`` only handles cargo ``a2``
+
+	#.  ``vessel1`` Remains at port Caracas
+
+Data overview
+^^^^^^^^^^^^^^
+
+The problem data contains:
+
+#.  Vessel data, including starting location, sailing cost
+
+#.  Cargo data, including loading and delivery port, cost for spot, or fixed cost, time window for pickup.
+
+#.  Location data, name, and GPS coords - from which haversine distances are derived.
+
+The solution data contains: 
+
+#.  Vessel, chosen route.
+
+#.  Cargo, when picked up, and by which vessel.
+
+#.  Routes, including the type, location and moment of each leg.
+
+
+**Reference:** Gustavo Diz, Luiz Felipe Scavarda, Roger Rocha, Silvio Hamacher (2014) Decision Support System for 
+PETROBRAS Ship Scheduling. Interfaces 44(6):555-566.
 
 Mathematical Model
 ------------------
 
-This AIMMS project illustrates the use of a semi-continuous variable. A semi-continuous variable is either zero or within a certain range. This type of variables can be used in conditions like, whenever there is a transport this transport has a minimum size. 
+To appreciate the complexity of the below mathematical formulation, it is important to note that the number of routes grows
+combinatorially with the number of cargos. For instance, with 7 vessels and 20 cargos, the number of routes can
+exceed half a million.
 
-+-----+------------------------------------------------------+-------------------------------------------+
-|       Contract Allocation Problem                                                                      |
-+=====+======================================================+===========================================+
-+ **Sets and indices:**                                                                                  |
-+-----+------------------------------------------------------+-------------------------------------------+
-+     | :math:`P`, :math:`p \in P`                           | Producers                                 |
-+-----+------------------------------------------------------+-------------------------------------------+
-+     | :math:`C`, :math:`c \in C`                           | Contracts                                 |
-+-----+------------------------------------------------------+-------------------------------------------+
-| **Parameters:**                                                                                        |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`M_{p} \in \mathbb{R_{+}}`                     | minimal delivery                          |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`A_{p} \in \mathbb{R_{+}}`                     | available capacity                        |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`S_{c} \in \mathbb{R_{+}}`                     | contract size                             |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`N_{c} \in \mathbb{R_{+}}`                     | minimal number of contributors            |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`T_{p,c} \in \mathbb{R_{+}}`                   | delivery cost by p for c                  |
-+-----+------------------------------------------------------+-------------------------------------------+
-| **Variables:**                                                                                         |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`X_{p,c} \in \{0\} \cup \{M_{p}..10000\}`      | amount of commodity delivered by p to c   |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`Y_{p,c} \in \{0..1\}`                         | p produce to c                            |
-+-----+------------------------------------------------------+-------------------------------------------+
-| **Constraints:**                                                                                       |
-+-----+------------------------------------------------------+-------------------------------------------+
-|  1  | :math:`\forall p: \sum_c X_{p,c} \leq A_{p}`         | production capacity for p                 |
-+-----+------------------------------------------------------+-------------------------------------------+
-|  2  | :math:`\forall c: \sum_p X_{p,c} \geq S_{c}`         | demand fulfillment for c                  |
-+-----+------------------------------------------------------+-------------------------------------------+
-|  3  | :math:`\forall c: \sum_p X_{p,c} \geq N_{c}`         | minimal number of contributors to c       |
-+-----+------------------------------------------------------+-------------------------------------------+
-|  4  | :math:`\forall p, c: X_{p,c} \geq M_{p} * Y_{p,c}`   | if p delivers to c                        |
-+-----+------------------------------------------------------+-------------------------------------------+
-| **Minimize:**                                                                                          |
-+-----+------------------------------------------------------+-------------------------------------------+
-|     | :math:`\sum_{p,c} T_{p,c} * X_{p,c}`                 | The number of matches                     |
-+-----+------------------------------------------------------+-------------------------------------------+
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+|                                                       Vessel Scheduling Model                                                             |
++=====+=============================================================+=======================================================================+
++ **Sets and indices:**                                                                                                                     |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
++     | :math:`v`, :math:`v \in Vessels`                            | Vessels                                                               |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
++     | :math:`c`, :math:`c \in Cargos`                             | Cargos                                                                |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
++     | :math:`r`, :math:`r \in Routes`                             | Routes                                                                |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+| **Parameters:**                                                                                                                           |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+|     | :math:`D_{v,r} \in \{ 0, 1 \}`                              | Route r used by vessel v ``p_def_domainAllocateVesselToRoute``        |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+|     | :math:`CR_{c,r} \in \{ 0, 1 \}`                             | Cargo c on route r  ``p_def_cargoesOnRoute``                          |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+|     | :math:`IC_{v} \in \mathbb{R_{+}}`                           | Idle cost for vessel v ``p_def_idleCostVesselNotUsed``                |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+|     | :math:`SC_{c} \in \mathbb{R_{+}}`                           | Cost cargo c handled on spot market ``p_spotCostVessel``              |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+|     | :math:`T_{r} \in \mathbb{R_{+}}`                            | Cost executing route r    ``p_def_operationalCostPerRoute``           |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+| **Variables:**                                                                                                                            |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+|     | :math:`a_{(v,r)|D_{v,r}} \in \{ 0, 1 \}`                    | allocate vessel v to route r   ``v_allocateVesselToRoute``            |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+|     | :math:`s_{c} \in \{0..1\}`                                  | cargo c is left to the spot market   ``bv_cargoOnCharteredVessel``    |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+|     | :math:`i_{v} \in \{0..1\}`                                  | vessel v remains idle   ``v_idleVessel``                              |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+| **Constraints:**                                                                                                                          |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+|  1  | :math:`\forall c: \sum_r a_{v,r} * CR_{c,r} + s_{c} = 1`    | Cargo on a single vessel, or left to spot market                      |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+|  2  | :math:`\forall v: \sum_r a_{v,r} + i_{v} = 1`               | Each vessel can take only one route, or is idle.                      |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+| **Minimize:**                                                                                                                             |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+|     | :math:`\sum_{v,r} T_{r} * a_{v,r} +`                        | Operational cost                                                      |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+|     | :math:`\sum_{v} IC_{v} * i_{v} +`                           | Unused vessel cost                                                    |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+|     | :math:`\sum_{c} SC_{p,c} * S_{c}`                           | Total cost of cargos left to the spot market                          |
++-----+-------------------------------------------------------------+-----------------------------------------------------------------------+
+
+
+
 
 Language 
 --------
 
-Talk about butons on homepage.
+.. From Gabi: Language: needs to be written completely, i'd like to talk about the route generation and performance, 
+.. since that is the project core.
+
+Solving the operations research problem of vessel scheduling is approached in this example by 
+first generating the routes, and subsequently solving the mathematical program.  
+The total time is dominated by the time needed to generate the routes.
+
+The route generation procedure is as follows:
+
+#.  For each vessel i, the idle route is generated: ``vessel<i>``.
+    Together they initialize the set of just generated routes, ``JG``.
+	
+#.  Move the set of just generated routes ``JG``, to the set of input routes ``IR``.
+
+#.  For each ``r`` in ``IR``, all cargos ``c`` are considered to be appended for a new route ``r'``.
+    A route ``r' = r_c`` is accepted if: 
+	
+	* ``c`` is not a part of ``r``,
+   
+    * ``c`` is picked up in its time window, and
+	
+	* ``c`` is delivered before the end of the horizon.
+	
+	All routes ``r'`` just generated, form the new set of just generated routes ``JG``.
+	If the set ``JG`` is empty, stop, otherwise continue with step 2.
+
+Because a route ``r'`` ends later than route ``r``, this procedure is finite.
+
+In order to determine the cost of a route, careful adminstration of each leg needs to be done 
+(sailing to the loading location, perhaps waiting, sailing to the delivery location).
+
+
 
 WebUI Features
 --------------
 
-On input page, if you click around the graphs, a highlighted cell will appear identifying the last clicked element. The results are displayed in a combination chart (stacked bar chart).
+On input page, if you click around the graphs, a highlighted cell will appear identifying the last clicked element. 
+The results are displayed in a combination chart (stacked bar chart).
 
 The following WebUI features are used:
 
@@ -210,7 +329,7 @@ Below there are the css files you will find with comments on what they change.
 
    .. tab-item:: custom.css
 
-      .. code-block:: css
+      .. code-block:: none
          :linenos:
 
          /*Centering cells*/
@@ -259,6 +378,22 @@ Minimal Requirements
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
 
+
+Integration
+--------------
+
+This section is largely based on the how-to articles in `Develop an AIMMS Service <https://how-to.aimms.com/C_Developer/Sub_Connectivity/sub_dataexchange/Sub_Develop_Service/index.html>`_.
+Selected differences will be pointed out:
+
+Produce service
+^^^^^^^^^^^^^^^^^^
+
+The service is named ``solveVesselScheduling`` and accepts an Excel workbook as input, and provides as response also an Excel workbook.
+
+Consume service
+^^^^^^^^^^^^^^^^
+
+Only a Python client is provided; and the requests call in that python app uses a ``files`` argument instead of a ``data`` argument.
 
 Release Notes
 --------------------   

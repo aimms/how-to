@@ -35,6 +35,7 @@ You can browse our examples by category:
    /Articles/563/563-functional-geolocation-abstractapi
    /Articles/550/550-demand-forecasting
    /Articles/623/623-bias-in-ai
+   /Articles/590/590-vessel-scheduling
    Sub_Application/index
    Sub_Functional/index
    Sub_Modeling_Book/index
