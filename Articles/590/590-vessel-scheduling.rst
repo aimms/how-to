@@ -27,7 +27,7 @@ Upon loading, each vessel proceeds directly to the delivery location within its 
 
 Constraints include:
 
-	* cargo's are loaded inside the determined time window,
+	* cargo\'s are loaded inside the determined time window,
    * each cargo being transported by only one vessel, and
    * charter vessels being assigned to only one route at a time.
 
@@ -47,13 +47,13 @@ exceed half a million.
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
 |                                                       Vessel Scheduling Model                                                                        |
 +=====+=============================================================+==================================================================================+
-+ **Sets and indices:**                                                                                                                                |
+| **Sets and indices:**                                                                                                                                |
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-+     | :math:`v`, :math:`v \in Vessels`                            | Vessels                                                                          |
+|     | :math:`v`, :math:`v \in Vessels`                            | Vessels                                                                          |
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-+     | :math:`c`, :math:`c \in Cargos`                             | Cargos                                                                           |
+|     | :math:`c`, :math:`c \in Cargos`                             | Cargos                                                                           |
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-+     | :math:`r`, :math:`r \in Routes`                             | Routes                                                                           |
+|     | :math:`r`, :math:`r \in Routes`                             | Routes                                                                           |
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
 | **Parameters:**                                                                                                                                      |
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
@@ -178,7 +178,7 @@ Selected differences will be pointed out:
 **Consume Service:** Only a Python client is provided; and the requests call in that python app uses a ``files`` argument instead of a ``data`` argument.
 
 WebUI Features
---------------
+---------------
 
 On input page, if you click around the graphs, a highlighted cell will appear identifying the last clicked element. 
 The results are displayed in a combination chart (stacked bar chart).
@@ -223,7 +223,8 @@ The following WebUI features are used:
 
 
 UI Styling
-----------
+------------
+
 Below there are the css files you will find with comments on what they change. 
 
 .. tab-set::
@@ -349,10 +350,8 @@ Below there are the css files you will find with comments on what they change.
             color: #505767;
          }
 
-
-
 Minimal Requirements
---------------------
+----------------------
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example. 
 To run the Python client, you will need to have Python installed, for this example we used Python 3.11. 
