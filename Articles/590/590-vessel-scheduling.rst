@@ -12,7 +12,7 @@ Vessel Scheduling
    :target: https://github.com/aimms/vessel-scheduling
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/
+   :target: https://community.aimms.com/aimms-support-updates-67/vessel-scheduling-example-1773
 
 |
    
