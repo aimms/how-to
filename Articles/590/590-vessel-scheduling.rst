@@ -1,5 +1,6 @@
 Vessel Scheduling
 =========================
+
 .. meta::
    :keywords: Decision Support System, Route Optimization, Petrobras Ship Scheduling, Cost-efficient Cargo Delivery, Mathematical Optimization Model, Vessel Allocation Algorithm, WebUI and Python Integration
    :description: In this practical example, an efficient plan is developed for delivering large cargoes using oil tankers.
@@ -24,11 +25,11 @@ The model assumes each ship can carry only one cargo at a time, and once the tim
 all vessels head directly to the loading port. 
 Upon loading, each vessel proceeds directly to the delivery location within its designated time window.
 
-Constraints include: 
+Constraints include:
 
-	*   cargo's are loaded inside the determined time window, 
-   *   each cargo being transported by only one vessel, and
-   *   charter vessels being assigned to only one route at a time.
+	* cargo's are loaded inside the determined time window,
+   * each cargo being transported by only one vessel, and
+   * charter vessels being assigned to only one route at a time.
 
 The objective is to minimize costs associated to combinations of cargoes and routes.
 
