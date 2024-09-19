@@ -1,8 +1,8 @@
 Vessel Scheduling
 =========================
 .. meta::
-   :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
-   :description: This AIMMS project illustrates the use of a semi-continuous variable.
+   :keywords: Decision Support System, Route Optimization, Petrobras Ship Scheduling, Cost-efficient Cargo Delivery, Mathematical Optimization Model, Vessel Allocation Algorithm, WebUI and Python Integration
+   :description: In this practical example, an efficient plan is developed for delivering large cargoes using oil tankers.
 
 .. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Vessel_Scheduling-blue
    :target: https://github.com/aimms/vessel-scheduling/archive/refs/heads/main.zip
@@ -354,16 +354,16 @@ Minimal Requirements
 --------------------
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example. 
-To run the Python client, you will need to have Python installed. 
+To run the Python client, you will need to have Python installed, for this example we used Python 3.11. 
 
 
 Release Notes
 --------------------
 
-`v1.1 <https://github.com/aimms/contract-allocation/releases/tag/1.1>`_ (15/08/2024)
+`v1.1 <https://github.com/aimms/vessel-scheduling/releases/tag/1.1>`_ (19/09/2024)
 	Performance of the route generation procedure was updated. Now you are able to solve using a Python call.
 
-`v1.0 <https://github.com/aimms/contract-allocation/releases/tag/1.0>`_ (15/08/2024)
+`v1.0 <https://github.com/aimms/vessel-scheduling/releases/tag/1.0>`_ (15/08/2024)
 	First version of this application. 
 
 .. spelling:word-list::
