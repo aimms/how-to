@@ -126,13 +126,13 @@ The actual Python code to monitor the task is a straight forward while loop:
 
 .. code-block:: python   
 
-    status = ""
-    print("Task status:")
-    while status != 'finished' and status != 'finished with errors':
-        time.sleep(5)
-        poll_response = requests.get(url_poll, headers=Headers)
-        status = poll_response.json()['status']
-        print("    " + status)
+	state = ""
+	print("Task state:")
+	while state != 'completed' and state != 'failed':
+		time.sleep(5)
+		poll_response = requests.get(url_poll, headers=Headers)
+		state = poll_response.json()['state']
+		print("    " + state)
 
 Retrieving results
 -------------------

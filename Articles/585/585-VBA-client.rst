@@ -43,7 +43,7 @@ FrontEnd
 .. image:: images/ExcelFrontEndSheet.png
     :align: center
 
-* Cell ``B1`` will contain the status of the request as it executes.
+* Cell ``B1`` will contain the state of the request as it executes.
 
 * Cell ``B2`` will contain the number of stars upon finishing the request.
 
@@ -128,7 +128,7 @@ The code to monitor the task is:
 
     Sub PollOnce_usingWinHTTP51(apiURL As String, apiKey As String, useCloud As Integer, ByRef taskStatus As String)
     '
-    ' Use the WinHTTP51 library to do a get on the running task, to obtain a task status.
+    ' Use the WinHTTP51 library to do a get on the running task, to obtain a task state.
     '
 
         ' Open the connection and set the method to POST
@@ -150,9 +150,9 @@ The code to monitor the task is:
             Debug.Print "PollOnce_usingWinHTTP51, response is: ", JsonRT
             Dim Parsed As Object
             Set Parsed = JsonConverter.ParseJson(JsonRT)
-            taskStatus = Parsed("status") ' Set output argument this procedure
+            taskState = Parsed("state") ' Set output argument this procedure
         Else
-            Debug.Print "PollOnce_usingWinHTTP51, Failure: " & Http.Status & " " & Http.StatusText
+            Debug.Print "PollOnce_usingWinHTTP51, Failure: " & Http.State & " " & Http.StatusText
         End If
 
     End Sub
