@@ -4,10 +4,10 @@ Contract Allocation
    :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
-.. image:: https://img.shields.io/badge/AIMMS_24.2-ZIP:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.2-Github:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Contract_Alocation-blue
    :target: https://github.com/aimms/contract-allocation
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -389,6 +389,9 @@ Minimal Requirements
 
 Release Notes
 --------------------   
+
+`v1.5 <https://github.com/aimms/contract-allocation/releases/tag/1.5>`_ (20/09/2024)
+   Upgrading AIMMS version and WebUI library version.
 
 `v1.4 <https://github.com/aimms/contract-allocation/releases/tag/1.4>`_ (27/02/2024)
    Upgrading AIMMS version, updating theme and fixing Default Data import.
