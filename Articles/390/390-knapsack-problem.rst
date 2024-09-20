@@ -4,10 +4,10 @@ Knapsack Problem
    :keywords: Knapsack, Knapsack, Integer Programming, Binary Integer Programming, Cover Inequalities, Network Object
    :description: This example introduces a knapsack problem.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.93-ZIP:_Knapsack-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Knapsack-blue
    :target: https://github.com/aimms/knapsack/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.93-Github:_Knapsack-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Knapsack-blue
    :target: https://github.com/aimms/knapsack
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -162,7 +162,7 @@ UI Styling
 For this project, we used a main css file named ``colors.css``, please check it out directly on the folder. Below there are the css files you will find with comments on what they change. 
 
 .. tab-set::
-    .. tab-item:: colors.css
+    .. tab-item:: theming.css
 
       .. code-block:: css
          :linenos:
@@ -171,52 +171,59 @@ For this project, we used a main css file named ``colors.css``, please check it 
          /*---------------------------------------------------------------------
                COLORS
          ----------------------------------------------------------------------*/
-            --primary: #FF941E;
-            --primaryDark: #955511;
-            --primaryLight: #fff4e9;
+         --primary: #FF941E;
+         --primaryDark: #955511;
+         --primaryLight: #fff4e9;
 
          /*---------------------------------------------------------------------
                LOGO
          ----------------------------------------------------------------------*/
-            --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/knapsack-logo.png);
-            --spacing_app-logo_width: 45px;
+         --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/knapsack-logo.png);
+         --spacing_app-logo_width: 45px;
+         --color_border_app-header-divider: var(--primaryDark); /*line color after header*/
 
-            --color_bg_button_primary: var(--primaryDark);
-            --color_bg_button_primary_hover: var(--primary);
-            --color_text_edit-select-link: var(--primaryDark);
+         --color_bg_app-canvas: url(/app-resources/resources/images/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain; /*background color*/
+         --color_bg_widget-header: #95551141; /*widget header background color*/
+         --border_widget-header: 2px solid var(--primaryDark); /*line color after widget header*/
+
+         --color_text_edit-select-link: var(--primaryDark);
+         --color_bg_button_primary: var(--primaryDark);
+         --color_bg_button_primary_hover: var(--primary);
+         --color_text_edit-select-link: var(--primaryDark);
 
 
          /*---------------------------------------------------------------------
                WORKFLOW
          ----------------------------------------------------------------------*/
-            /* Header text*/
-            --color_workflow-header: #505767;
-               
-            /* Step background and content (text, icon) colors for the 4 states*/
-            /*current + current with error*/
-            --color_bg_workflow_current: var(--primaryDark);
-            --color_workflow_current: var(--color_text_inverted);
-            --color_bg_workflow_error-current: #d1454b;
+         /* Header text*/
+         --color_workflow-header: #505767;
+            
+         /* Step background and content (text, icon) colors for the 4 states*/
+         /*current + current with error*/
+         --color_bg_workflow_current: var(--primaryDark);
+         --color_workflow_current: var(--color_text_inverted);
+         --color_bg_workflow_error-current: #d1454b;
 
-            /*active*/
-            --color_bg_workflow_active: #e6edff;
-            --color_workflow_active: var(--primaryDark);
-            
-            /*inactive*/
-            --color_bg_workflow_inactive: #dde0e8;
-            --color_workflow_inactive: #b0b5c2;
-            
-            /*error*/
-            --color_bg_workflow_error: #f9e9e9;
-            --color_workflow_error: #d1454b;
-            
-            /*Child indentation, border colors*/
-            --spacing_workflow-child-indent: 1rem;
-            --color_workflow-item-divider: var(--primaryDark);
-            
-            /*Icon background, border, for non-error state*/
-            --color_bg_workflow-icon: #ffffff;
-            --color_workflow-icon-border: var(--primaryDark);
+         /*active*/
+         --color_bg_workflow_active: #e6edff;
+         --color_workflow_active: var(--primaryDark);
+         
+         /*inactive*/
+         --color_bg_workflow_inactive: #dde0e8;
+         --color_workflow_inactive: #b0b5c2;
+         
+         /*error*/
+         --color_bg_workflow_error: #f9e9e9;
+         --color_workflow_error: #d1454b;
+         
+         /* Child indentation, border colors */
+         --spacing_workflow-child-indent: 1rem;
+         --color_workflow-item-divider: var(--primaryDark);
+         
+         /* Icon background, border, for non-error state */
+         --color_bg_workflow-icon: #ffffff;
+         --color_workflow-icon-border: var(--primaryDark);
+
          }
 
     .. tab-item:: annotations.css
@@ -228,31 +235,14 @@ For this project, we used a main css file named ``colors.css``, please check it 
             background: #ff921e2a;
          }
 
-    .. tab-item:: textColor.css
+    .. tab-item:: custom.css
 
       .. code-block:: css
          :linenos:
 
-         /*Change table text color*/
-         .tag-table .grid-viewport .cell:not(.flag-readOnly), 
-         html:not(.using-touch) .tag-table .grid-viewport .cell:not(.flag-readOnly) {
-            color: var(--primaryDark);
-         }
-
-         /*Change scalar text color*/
-         .tag-scalar .kpi .value {
-            color: var(--primaryDark);
-         }
-
          /*Link color*/
          .ql-snow a {  
             color: var(--primaryDark) !important;
-         }
-
-         /*Change table default text color*/
-         .tag-table .grid-viewport .cell.flag-default, 
-         html:not(.using-touch) .tag-table .grid-viewport .cell.flag-default {
-            color: white;
          }
 
          .tag-slider .slider-value {
@@ -263,132 +253,13 @@ For this project, we used a main css file named ``colors.css``, please check it 
             color: var(--primaryDark);
          }
 
-    .. tab-item:: pageAction.css
-
-      .. code-block:: css
-         :linenos:
-
-         .page-action-v2 .page-action-menu,
-         .page-action-v2 .page-action-menu.open {
-            background: var(--primaryDark);
-         }
-
-         .page-action-v2 .page-action-menu:hover,
-         .page-action-v2 .page-action-menu:hover {
-            background: var(--primary);
-         }
-
-         .page-action-v2 .page-action-holder .page-action-item .page-action-icon, 
-         .page-action-v2 .page-action-holder .page-action-item .page-action-letter {
-            background-color: var(--primaryDark);
-         }
-
-         .page-action-v2 .page-action-holder .page-action-item .page-action-icon:hover, 
-         .page-action-v2 .page-action-holder .page-action-item .page-action-letter:hover {
-            background-color: var(--primary);
-         }
-
-    .. tab-item:: sidePanel.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change color after tab click*/
-         .sidepanel-container .sidepanel-tab.active {
-            background-color: var(--primaryDark);
-         }
-
-         /*Change letter color on hover*/
-         .sidepanel-container .sidepanel-tab.active:hover {
-            color: white;
-         }
-
-         /*Change icon color*/
-         .sidepanel-container .sidepanel-tab .sidepanel-icon,
-         .sidepanel-container .sidepanel-tab:hover {
-            color: var(--primaryDark);
-         }
-
-         /*Change color after all tabs*/
-         .sidepanel-container .sidepanel-tabs-container:after {
-            background: var(--primaryDark);
-         }
-
-         /*Change the color below sidepanel tabs*/
-         .sidepanel-container {
-            background-color:   rgb(249, 249, 249);
-         }
-
-         .sidepanel-active .sidepanel-container {
-            background-color:   rgba(249, 249, 249, 0);
-         }
-
-    .. tab-item:: table.css
-
-      .. code-block:: css
-         :linenos:
-
-         .tag-table.focused .cell.focus-cell {
-            box-shadow: inset 0 0 0 2px var(--primaryDark);
-         }
-
-         .tag-table .cell.flag-number input{
-            text-align: center;
-         }
-
-    .. tab-item:: combinationChart.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change color of togglelegend of the combination chart*/
-         .togglelegend-button svg{
-            fill: var(--primaryDark);
-         }
-
-         .togglelegend-button-active:hover svg g, .togglelegend-button-active svg g {
-            fill: var(--primary);    
-         }       
-
-    .. tab-item:: header.css
-
-      .. code-block:: css
-         :linenos:
-
-         .theme-aimms header.tag-application {
-            border-bottom: 2px solid var(--primaryDark);
-         }
-
-    .. tab-item:: multiselect.css
-
-      .. code-block:: css
-         :linenos:
-
-         .tag-multiselect-widget .searchable-list li.active .checkbox:before{
-            border: 1px solid var(--primary);
-            background: var(--primary);
-         }
-         .awf-select-actions>div {
-            color: var(--primary);
-         }        
-
-    .. tab-item:: body.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Add logo on the background*/
-         .scroll-wrapper--pagev2 .page-container {
-            content: " ";
-            background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
-         }
-
-         .widgetdiv .awf-dock.top {
-            border-bottom: 2px solid var(--primaryDark);
-            background: var(--primaryLight);
-         }
-
 Minimal Requirements
 --------------------   
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
+
+Release Notes
+--------------------   
+
+`v1.0 <https://github.com/aimms/knapsack/releases/tag/1.0>`_ (20/09/2024)
+   First version.

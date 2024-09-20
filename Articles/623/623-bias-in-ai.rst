@@ -5,10 +5,10 @@ Bias in AI
    :keywords: python, dex, openapi, docker, bias
    :description: This examples connects AIMMS to Python. 
 
-.. image:: https://img.shields.io/badge/AIMMS_24.2-ZIP:_Bias_in_AI-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Bias_in_AI-blue
    :target: https://github.com/aimms/bias-in-ai/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.2-Github:_Bias_in_AI-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Bias_in_AI-blue
    :target: https://github.com/aimms/bias-in-ai
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -195,6 +195,9 @@ However, you will need Python 3.11 installed. Pycharm is recommended but not req
 
 Release Notes
 --------------------
+
+`v1.1 <https://github.com/aimms/bias-in-ai/releases/tag/1.1>`_ (20/09/2024)
+    Upgrading AIMMS version and WebUI library version.
 
 `v1.0 <https://github.com/aimms/bias-in-ai/releases/tag/1.0>`_ (29/02/2024)
     First version launched!

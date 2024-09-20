@@ -4,10 +4,10 @@ Demand Forecasting
    :keywords: aimms, forecast, demand, factory, library
    :description: This example uses the forecasting library! 
 
-.. image:: https://img.shields.io/badge/AIMMS_4.91-ZIP:_Demand_Forecasting-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Demand_Forecasting-blue
    :target: https://github.com/aimms/demand-forecasting/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.91-Github:_Demand_Forecasting-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Demand_Forecasting-blue
    :target: https://github.com/aimms/demand-forecasting
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -239,7 +239,7 @@ UI Styling
 Below described all UI modifications done on this example trough ``css`` files which can be found beneath ``MainProject/WebUI/resourses/stylesheets``. 
 
 .. tab-set::
-    .. tab-item:: colors.css
+    .. tab-item:: theming.css
 
         .. code-block:: css
             :linenos:
@@ -254,6 +254,8 @@ Below described all UI modifications done on this example trough ``css`` files w
 
                 --bg_app-logo: 15px 50% / 50px 50px no-repeat url(/app-resources/resources/images/forecast.png);
                 --spacing_app-logo_width: 60px;
+                --color_bg_app-canvas: url(/app-resources/resources/images/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain; /*background color*/
+                --color_border_app-header-divider: var(--primaryDark); /*line color after header*/
 
                 --color_border-divider_themed: var(--secondary);
                 --color_text_edit-select-link: var(--secondary);
@@ -267,84 +269,65 @@ Below described all UI modifications done on this example trough ``css`` files w
                 --border_button_secondary_hover: 1px solid var(--primary);
                 --color_bg_widget-header: var(--primaryLight);
                 --border_widget-header: 3px solid var(--primaryDark);
+
+                --color_bg_workflow_current: var(--primaryDark); /*bg color when step is selected*/
+                --color_workflow_active: var(--secondary); /*font and icon color when step is active*/
+                --color_workflow-icon-border: var(--secondary);
             }
 
-    .. tab-item:: body.css
+    .. tab-item:: custom.css
 
         .. code-block:: css
             :linenos:
 
-            /*Add logo on the background*/
-            .scroll-wrapper--pagev2 .page-container {
-                content: " ";
-                background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
+            a.page-link[href$="Story"]:before {
+                content: "";
+                display: block;
+                background: url("img/idea.png") no-repeat;
+                width: 20px;
+                height: 20px;
+                float: left;
+                margin: 0 6px 0 0;
             }
 
-            /*Changing tittle to be uppercase*/
-            .title-addon {
-                text-transform: uppercase;
-                text-shadow: 1px 1px 2px var(--secondaryLightest);
-            }
-            
-            /*Changing button font*/
-            .ui-widget, .ui-widget button, .ui-widget input, .ui-widget select, .ui-widget textarea {
-                font-family: var(--font_headers),Montserrat,Roboto,Arial,Helvetica,sans-serif; 
-            }
-
-    .. tab-item:: button.css
-
-        .. code-block:: css
-            :linenos:
-
-            .aimms-widget .ui-button {
-                text-transform: uppercase;
+            a.page-link[href$="Dashboard"]:before {
+                content: "";
+                display: block;
+                background: url("img/dash.png") no-repeat;
+                width: 20px;
+                height: 20px;
+                float: left;
+                margin: 0 6px 0 0;
             }
 
-            /*Change checkbox color*/
-            input.boolean-cell-editor-contents {
-                accent-color: var(--secondary);
+            a.page-link[href$="home"]:before {
+                content: "";
+                display: block;
+                background: url("img/home.png") no-repeat;
+                width: 20px;
+                height: 20px;
+                float: left;
+                margin: 0 6px 0 0;
             }
 
-    .. tab-item:: workflow.css
-
-        .. code-block:: css
-            :linenos:
-
-            /*Change color of the active step*/
-            .workflow-panel .step-item.current,
-            .workflow-panel.collapse .step-item.current {
-                box-shadow: inset 0.3125rem 0 0 var(--secondary);
+            a.page-link[href$="Examples"]:before {
+                content: "";
+                display: block;
+                background: url("img/example.png") no-repeat;
+                width: 20px;
+                height: 20px;
+                float: left;
+                margin: 0 6px 0 0;
             }
 
-            /*Change color of the titles*/
-            .workflow-panel .step-item.active.complete .title, 
-            .workflow-panel .step-item.active.incomplete .title {
-                color: var(--secondary);
-            }
-
-            /*Change color of the icons*/
-            .workflow-panel .step-item.active.complete .icon, 
-            .workflow-panel .step-item.active.incomplete .icon {
-                color: var(--secondary);
-                border: 2px solid var(--secondary);
-            }
-
-    .. tab-item:: textColor.css
-
-        .. code-block:: css
-            :linenos:
-
-            /*Link color*/
-            .ql-snow a {  
-                color: var(--primaryDark);
-            }
-
-            /*Change checkbox color*/
-            input.boolean-cell-editor-contents {
-                accent-color: var(--secondary);
-            }
 
 Minimal Requirements
 --------------------   
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example. 
+
+Release Notes
+--------------------   
+
+`v1.0 <https://github.com/aimms/demand-forecasting/releases/tag/1.0>`_ (20/09/2024)
+   First version.

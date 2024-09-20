@@ -5,10 +5,10 @@ Employee Scheduling
    :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.98-ZIP:_Employee_Scheduling-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Employee_Scheduling-blue
    :target: https://github.com/aimms/employee-scheduling/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.98-Github:_Employee_Scheduling-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Employee_Scheduling-blue
    :target: https://github.com/aimms/employee-scheduling
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -388,6 +388,9 @@ Minimal Requirements
 
 Release Notes
 --------------------   
+
+`v1.3 <https://github.com/aimms/employee-scheduling/releases/tag/1.3>`_ (20/09/2024)
+    Upgrading AIMMS version and WebUI library version.
 
 `v1.2 <https://github.com/aimms/employee-scheduling/releases/tag/1.2>`_ (15/01/2024)
    Ready to solve mathematical problem on AIMMS PRO. Centering all cells. 
