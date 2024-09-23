@@ -5,10 +5,10 @@ Traveling Salesman
    :description: This example illustrates some of AIMMS control flow statements by means of the traveling salesman 2-opt heuristic.
    :keywords: Algorithm, 2-opt heuristic, traveling salesman problem, GMP, Lazy constraint callback, subtour elimination constraints.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.90-ZIP:_Traveling_Salesman-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Traveling_Salesman-blue
    :target: https://github.com/aimms/traveling-salesman/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.90-Github:_Traveling_Salesman-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Traveling_Salesman-blue
    :target: https://github.com/aimms/traveling-salesman
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -360,40 +360,9 @@ Below there are the css files you will find with comments on what they change.
             fill: var(--secondary2);
          }
     
-    .. tab-item:: body.css
+    .. tab-item:: theming.css
 
       .. code-block:: text
-         :linenos:
-
-         /*Add logo on the background*/
-         .scroll-wrapper--pagev2 .page-container {
-            content: " ";
-            background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
-         }
-
-         /*Changing tittle to be uppercase*/
-         .title-addon {
-            text-transform: uppercase;
-            text-shadow: 2px 2px 0px var(--primaryDark);
-            color: whitesmoke;
-         }
-         
-         /*Changing button font*/
-         .ui-widget, .ui-widget button, .ui-widget input, .ui-widget select, .ui-widget textarea {
-            font-family: var(--font_headers),Montserrat,Roboto,Arial,Helvetica,sans-serif; 
-         }
-
-         /*Changing button size*/
-         .aimms-widget[data-widget\.uri="btn_addThisCity"]  .ui-button,
-         .aimms-widget[data-widget\.uri="btn_addByCountry"]  .ui-button,
-         .aimms-widget[data-widget\.uri="btn_addByLimity"]  .ui-button  {
-            width: 40px;
-         }
-
-
-    .. tab-item:: colors.css
-
-      .. code-block:: css
          :linenos:
 
          :root {
@@ -406,6 +375,8 @@ Below there are the css files you will find with comments on what they change.
 
             --bg_app-logo: 15px 50% / 50px 50px no-repeat url(/app-resources/resources/images/traveling.png);
             --spacing_app-logo_width: 65px;
+            --color_bg_app-canvas: url(/app-resources/resources/images/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain; /*background color*/
+            --color_border_app-header-divider: var(--primaryDark); /*line color after header*/
 
             --color_border-divider_themed: var(--primary);
             --color_text_edit-select-link: var(--primaryDark);
@@ -427,114 +398,14 @@ Below there are the css files you will find with comments on what they change.
 
             --color_bg_widget-header: var(--primaryDark);
             --border_widget-header: 3px solid var(--primary);
+            --color_text_widget-header: white;
+            
+            --color_bg_workflow_current: var(--primary); /*bg color when step is selected*/
+            --color_workflow_active: var(--primary); /*font and icon color when step is active*/
+
          }
 
 
-    .. tab-item:: sidePanel.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Changing label color*/
-         .tag-label>.label {
-            background: var(--primary);
-         }
-
-         .sidepanel-container .sidepanel-tab.active {
-            background-color: var(--primaryDark);
-         }
-
-         .sidepanel-container .sidepanel-tab .sidepanel-icon, 
-         .sidepanel-container .sidepanel-tab:hover {
-            color: var(--primaryDark);
-         }
-
-         .sidepanel-container .sidepanel-tab.active{
-            color: var(--color_bg_widget-canvas,#fff);
-         } 
-
-         .sidepanel-container .sidepanel-tab {
-            height: 150px;
-         }
-
-
-    .. tab-item:: textColor.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Link color*/
-         .ql-snow a {  
-            color: var(--primaryDark);
-         }
-
-         /*Change checkbox color*/
-         input.boolean-cell-editor-contents {
-            accent-color: var(--primaryDark);
-         }
-
-         .aimms-widget .ui-button {
-            text-transform: uppercase;
-         }
-
-         /*Changing tittle to be uppercase*/
-         .title-addon,
-         .tag-label>.label,
-         .ui-dialog .ui-dialog-title,
-         .page-container__dialog-header .title,
-         .sidepanel-header .side-panel__header-text{
-            text-transform: uppercase;
-            text-shadow: 1px 1px 0px var(--primaryDark);
-            color: whitesmoke;
-         }
-
-         .tag-table .grid-viewport .cell:not(.flag-readOnly), html:not(.using-touch) .tag-table .grid-viewport .cell:not(.flag-readOnly) {
-            color: var(--primaryDark);
-         }
-
-         .widget-menu-container .widget-menu-items-wrapper .widget-menu-item .title {
-            color: var(--primaryDark);
-         }
-
-
-    .. tab-item:: widgetAction.css
-
-      .. code-block:: css
-         :linenos:
-
-         .widgetdiv .awf-dock-button .chrome-button.active, .widgetdiv .awf-dock-button .chrome-button.open {
-            background-color: var(--primaryDark);
-            color: #fff;
-         }
-
-         .widget-menu-container .widget-menu-items-wrapper .widget-menu-item:hover {
-            background: var(--primaryDark);
-         }
-
-
-    .. tab-item:: workflow.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change color of the active step*/
-         .workflow-panel .step-item.current,
-         .workflow-panel.collapse .step-item.current {
-            box-shadow: inset 0.3125rem 0 0 var(--primary);
-         }
-
-         /*Change color of the titles*/
-         .workflow-panel .step-item.active.complete .title, 
-         .workflow-panel .step-item.active.incomplete .title {
-            color: var(--primaryDark);
-         }
-
-         /*Change color of the icons*/
-         .workflow-panel .step-item.active.complete .icon, 
-         .workflow-panel .step-item.active.incomplete .icon {
-            color: var(--primaryDark);
-            border: 1px solid var(--primaryDark);
-         }
 
 
 Minimal Requirements
@@ -560,6 +431,13 @@ References
 #.  Applegate, D.L., R. E. Bixby, V. Chvátal, and W. J. Cook, The Traveling Salesman Problem: A Computational Study, Princeton University Press, Princeton, 2007
 
 .. seealso:: Here you will find several euclidean TSP instances from TSPLIB at: http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/
+
+
+Release Notes
+--------------------   
+
+`v1.0 <https://github.com/aimms/traveling-salesman/releases/tag/1.0>`_ (20/09/2024)
+   First logged version with new WebUI library.
 
 .. spelling:word-list::
 
