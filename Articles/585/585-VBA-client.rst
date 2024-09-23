@@ -126,9 +126,9 @@ The code to monitor the task is:
 .. code-block:: basic 
     :linenos:
 
-    Sub PollOnce_usingWinHTTP51(apiURL As String, apiKey As String, useCloud As Integer, ByRef taskStatus As String)
+    Sub PollOnce_usingWinHTTP51(apiURL As String, apiKey As String, useCloud As Integer, ByRef taskState As String)
     '
-    ' Use the WinHTTP51 library to do a get on the running task, to obtain a task state.
+    ' Use the WinHTTP51 library to do a get on the running task, to obtain a task status.
     '
 
         ' Open the connection and set the method to POST
@@ -152,7 +152,7 @@ The code to monitor the task is:
             Set Parsed = JsonConverter.ParseJson(JsonRT)
             taskState = Parsed("state") ' Set output argument this procedure
         Else
-            Debug.Print "PollOnce_usingWinHTTP51, Failure: " & Http.State & " " & Http.StatusText
+            Debug.Print "PollOnce_usingWinHTTP51, Failure: " & Http.Status & " " & Http.StatusText
         End If
 
     End Sub
