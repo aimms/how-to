@@ -356,6 +356,9 @@ To run the Python client, you will need to have Python installed, for this examp
 Release Notes
 --------------------
 
+`v1.2 <https://github.com/aimms/vessel-scheduling/releases/tag/1.2>`_ (23/09/2024)
+	Added support for AimmsCmd, the task output now has three sheets, and the python now reads from the data folder inside the AIMMS Project. 
+
 `v1.1 <https://github.com/aimms/vessel-scheduling/releases/tag/1.1>`_ (19/09/2024)
 	Performance of the route generation procedure was updated. Now you are able to solve using a Python call.
 
