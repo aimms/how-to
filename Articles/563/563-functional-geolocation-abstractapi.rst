@@ -2,13 +2,13 @@ Geolocation AbstractAPI
 ==============================
 
 .. meta::
-   :keywords: aimms, api, rest api, library, ip
-   :description: This example uses the rest api! 
+   :keywords: aimms, api, rest api, library, ip, openapi, abstractapi, geolocation
+   :description: Discover accurate IP geolocation with AbstractAPI: pinpoint any IP address worldwide!
 
-.. image:: https://img.shields.io/badge/AIMMS_4.89-ZIP:_ipTwist-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Abstract_API-blue
    :target: https://github.com/aimms/ip-twist/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.89-Github:_ipTwist-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Abstract_API-blue
    :target: https://github.com/aimms/ip-twist
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -77,83 +77,20 @@ UI Styling
 Below described all UI modifications done on this example trough ``css`` files which can be found beneath ``MainProject/WebUI/resourses/stylesheets``. 
 
 .. tab-set::
-    .. tab-item:: workflow.css
+    .. tab-item:: custom.css
 
         .. code-block:: css
             :linenos:
-
-            /*Change color of the active step*/
-            .workflow-panel .step-item.current,
-            .workflow-panel.collapse .step-item.current {
-                box-shadow: inset 0.3125rem 0 0 var(--primary);
-            }
-
-            /*Change color of the titles*/
-            .workflow-panel .step-item.active.complete .title, 
-            .workflow-panel .step-item.active.incomplete .title {
-                color: var(--primaryLight);
-            }
-
-            /*Change color of the icons*/
-            .workflow-panel .step-item.active.complete .icon, 
-            .workflow-panel .step-item.active.incomplete .icon {
-                color: var(--primaryLight);
-                border: 1px solid var(--primaryLight);
-            }
-        
-    .. tab-item:: textColor.css
-
-        .. code-block:: css
-            :linenos:
-
-            /*Link color*/
-            .ql-snow a {  
-                color: var(--primaryLight) !important; 
-            }
-
-            /*Change checkbox color*/
-            input.boolean-cell-editor-contents {
-                accent-color: var(--primary);   
-            }
-
-            .aimms-widget .ui-button {
-                text-transform: uppercase;
-            }
 
             /*Changing tittle to be uppercase*/
             .title-addon,
             .ui-dialog .ui-dialog-title {
                 text-transform: uppercase;
                 text-shadow: 2px 2px 0px var(--primary);
-                color: whitesmoke;
             }
+    
 
-    .. tab-item:: pageAction.css
-
-        .. code-block:: css
-            :linenos:
-
-            .page-action-v2 .page-action-menu,
-            .page-action-v2 .page-action-menu.open {
-                background: var(--primary);
-            }
-
-            .page-action-v2 .page-action-menu:hover,
-            .page-action-v2 .page-action-menu:hover {
-                background: var(--primaryLight);
-            }
-
-            .page-action-v2 .page-action-holder .page-action-item .page-action-icon, 
-            .page-action-v2 .page-action-holder .page-action-item .page-action-letter {
-                background-color: var(--primary);
-            }
-
-            .page-action-v2 .page-action-holder .page-action-item .page-action-icon:hover, 
-            .page-action-v2 .page-action-holder .page-action-item .page-action-letter:hover {
-                background-color: var(--primaryLight);
-            }
-
-    .. tab-item:: colors.css
+    .. tab-item:: theming.css
 
         .. code-block:: css
             :linenos:
@@ -166,37 +103,58 @@ Below described all UI modifications done on this example trough ``css`` files w
                 --primary: #EB0000;
                 --primaryLightest: #FA91AD;
                 
-                --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/ipTwist.png);
+                --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/geoapi.png);
                 --spacing_app-logo_width: 45px;
+                --color_border_app-header-divider: var(--secondaryDark); /*line color after header*/
+                --color_bg_app-canvas: url(/app-resources/resources/images/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain; /*background color*/
 
                 --color_border-divider_themed: var(--primaryLight);
                 --color_text_edit-select-link: var(--primaryLight);
                 --color_text_edit-select-link_hover: var(--primary);
                 --color_bg_edit-select-link_inverted: var(--secondary);
-                --color_bg_button_primary: var(--secondary);
-                --color_bg_button_primary_hover: var(--secondaryLight);
+                --color_bg_button_primary: var(--primary);
+                --color_bg_button_primary_hover: var(--primaryLightest);
                 --color_text_button_secondary: var(--secondary);
                 --border_button_secondary: 1px solid var(--secondary);
                 --color_text_button_secondary_hover: var(--primary);
                 --border_button_secondary_hover: 1px solid var(--primary);
                 --color_bg_widget-header: var(--primary);
                 --border_widget-header: 3px solid var(--primaryLightest);
-            }
 
-    .. tab-item:: body.css
+                --color_text_widget-header:   whitesmoke;;
 
-        .. code-block:: css
-            :linenos:
+                /*---------------------------------------------------------------------
+                        WORKFLOW
+                ----------------------------------------------------------------------*/
+                /* Header text*/
+                --color_workflow-header: #505767;
+                    
+                /* Step background and content (text, icon) colors for the 4 states*/
+                /*current + current with error*/
+                --color_bg_workflow_current: var(--secondaryDark);
+                --color_workflow_current: var(--color_text_inverted);
+                --color_bg_workflow_error-current: #d1454b;
 
-            /*Add logo on the background*/
-            .scroll-wrapper--pagev2 .page-container {
-                content: " ";
-                background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
-            }
+                /*active*/
+                --color_bg_workflow_active: #e6edff;
+                --color_workflow_active: var(--secondaryDark);
+                
+                /*inactive*/
+                --color_bg_workflow_inactive: #dde0e8;
+                --color_workflow_inactive: #b0b5c2;
+                
+                /*error*/
+                --color_bg_workflow_error: #f9e9e9;
+                --color_workflow_error: #d1454b;
+                
+                /* Child indentation, border colors */
+                --spacing_workflow-child-indent: 1rem;
+                --color_workflow-item-divider: var(--secondaryDark);
+                
+                /* Icon background, border, for non-error state */
+                --color_bg_workflow-icon: #ffffff;
+                --color_workflow-icon-border: var(--secondaryDark);
 
-            /*Changing button font*/
-            .ui-widget, .ui-widget button, .ui-widget input, .ui-widget select, .ui-widget textarea {
-                font-family: var(--font_headers),Montserrat,Roboto,Arial,Helvetica,sans-serif; 
             }
 
     .. tab-item:: annotations.css
@@ -216,6 +174,16 @@ Minimal Requirements
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example. 
 However, you will need API key, to receive an free API key to test, please access `abstractapi <https://app.abstractapi.com/api/ip-geolocation/tester>`_ and sign up. 
 
+Release Notes
+--------------------
+
+`v1.0 <https://github.com/aimms/abstract-api/archive/refs/tags/1.0>`_ (24/09/2024)
+	First logged version of this application. 
+
+.. seealso::
+    * :doc:`../581/581-static-lib-from-runtime-lib`
+    * :doc:`../545/545-summary-examples-features`
+
 .. spelling:word-list::
 
-   ipTwist
+   
