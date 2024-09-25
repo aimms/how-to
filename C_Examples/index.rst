@@ -78,3 +78,7 @@ Functional Applications
    functional-applications/index
    legacy-applications/index
    
+.. spelling:word-list::
+   
+   geolocation
+   abstractapi
