@@ -118,12 +118,10 @@ This page has a summary of the examples versus AIMMS features used in them.
 .. dropdown:: Dialog Page
     
     * :doc:`../387/387-employee-scheduling`
-    * :doc:`../383/383-contract-allocation`
 
 .. dropdown:: Download Widget
     
     * :doc:`../387/387-employee-scheduling`
-    * :doc:`../383/383-contract-allocation`    
 
 .. dropdown:: Upload Widget
     
@@ -131,7 +129,7 @@ This page has a summary of the examples versus AIMMS features used in them.
 
 .. dropdown:: Selection Box Widget
     
-    * :doc:`../383/383-contract-allocation`    
+    Nothing yet! 
     
 .. dropdown:: Map Widget    
     
@@ -149,8 +147,8 @@ This page has a summary of the examples versus AIMMS features used in them.
 
 .. dropdown:: Data Exchange (DEX) Library
     
-    * :doc:`../623/623-bias-in-ai`
-
+    * :doc:`../623/623-bias-in-ai`    
+    * :doc:`../383/383-contract-allocation`
 
 .. dropdown:: DataLink Library
     
@@ -186,11 +184,11 @@ This page has a summary of the examples versus AIMMS features used in them.
 
 .. dropdown:: AIMMSXL (AXLL) Library 
     
-    Nothing yet!
+    * :doc:`../390/390-knapsack-problem`
 
 .. dropdown:: Rest API
     
-    Nothing yet!
+    * :doc:`../563/563-functional-geolocation-abstractapi`
 
 .. dropdown:: SQLite Connection
     
@@ -204,6 +202,8 @@ This page has a summary of the examples versus AIMMS features used in them.
     
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../623/623-bias-in-ai`
+    * :doc:`../390/390-knapsack-problem`
+    * :doc:`../383/383-contract-allocation`
 
 .. dropdown:: Widget Named Views
     

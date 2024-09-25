@@ -147,8 +147,6 @@ The following WebUI features are used:
 
 - `Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
-- `Compact Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
-
 - `Multiselect Widget <https://documentation.aimms.com/webui/selection-widgets.html>`_ 
 
 - `Slider Widget <https://documentation.aimms.com/webui/slider-widget.html#slider-widget>`_ 
@@ -260,6 +258,9 @@ Minimal Requirements
 
 Release Notes
 --------------------   
+
+`v1.1 <https://github.com/aimms/knapsack/releases/tag/1.1>`_ (24/09/2024)
+   Now you can run the different types of solve on PRO Portal.
 
 `v1.0 <https://github.com/aimms/knapsack/releases/tag/1.0>`_ (20/09/2024)
    First version.

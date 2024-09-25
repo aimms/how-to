@@ -85,44 +85,35 @@ This AIMMS project illustrates the use of a semi-continuous variable. A semi-con
 Language 
 --------
 
-In this example, there are two main ways to import data: by a custom Excel file, and by a pre-defined Excel which is currently on the project's main directory. You can choose which one to use on the inputs page through the import dialog page.
+In this example, there are two main ways to import data: by a custom Excel file, and by a pre-defined Excel which is currently on the project's main directory. 
+You can choose which one to use on any page trough the Page Action buttons.
 
-For the default data import, you will be importing 10 northwestern states for the contracts and 5 cities from that region for the producers. You can add more data freely without changing the sheets structure.  
+For the default data import, you will be importing 10 northwestern states for the contracts and 5 cities from that region for the producers. 
+You can add more data freely without changing the sheets structure. 
 
-.. aimms:procedure:: pr_importExcelData
+In this project, you will not find any Upload or Download Widget being used to integrate data, every integration, either import or export, was developed using the ``webui::RequestFileUpload`` and ``webui::RequestFileDownload``. Let's first understand the custom import procedure. 
 
-This procedure will add and read the ``xml`` mapping available. Take a look at ``Mappings/inputs.xml``.
+.. aimms:procedure:: pr_requestCustomExcel
 
-.. code-block:: aimms
-   :linenos:
+   Since we want to request the file upload via a Page Action, we need a procedure without any arguments, so this procedure will simply call ``webui::RequestFileUpload`` passing the procedure with the read functions. 
 
-   dex::AddMapping(
-      mappingName :  "inputs", 
-      mappingFile :  "Mappings/inputs.xml");
+   .. code-block:: aimms
+      :linenos:
 
-   dex::ReadFromFile(
-      dataFile         :  "DefaultData.xlsx", 
-      mappingName      :  "inputs", 
-      emptyIdentifiers :  1, 
-      emptySets        :  1, 
-      resetCounters    :  1);
-
-   ep_actualContract := first(i_contract);
-   ep_actualProducer := first(i_producer);
+      webui::RequestFileUpload(onDone :  'pr_uploadFile');
 
 
-For the custom Excel file import, you can either copy the structure from the default data Excel or download the template file. Add your data, and then, use the upload button to select the Excel to import. 
 
-.. aimms:procedure:: pr_uploadFile
+.. aimms:procedure:: pr_uploadFile(fname,StatusCode,StatusDescription)
 
-   This procedure will make you select a Excel file on your computer to import. 
+   Here we add the DEX mapping and read from the file the end-user selected. 
 
    .. code-block:: aimms
       :linenos:
       
       block ! import a custom Excel file 
          ! we store the location of the file in string parameter UploadLocation
-         UploadLocation := webui::GetIOFilePath(FileLocation);
+         UploadLocation := webui::GetIOFilePath(fname);
 
          dex::AddMapping("inputs", "Mappings/inputs.xml");
 
@@ -133,99 +124,58 @@ For the custom Excel file import, you can either copy the structure from the def
             emptySets        :  1, 
             resetCounters    :  1)
          then
-            ! if successful, statusCode is set to 'OK' which will trigger the WebUI to show the message below in a grey box
-            StatusCode := webui::ReturnStatusCode('OK');
 
             ! displaying the status message, and logging it in the WebUI messages
-            StatusDescription := "File was uploaded and read successfully";
+            sp_loc_message := "File was uploaded and read successfully";
+            webui::ShowMessage('info', sp_loc_message);
 
-            FileDelete(UploadLocation);
          endif;       
 
       onerror ep_err do
-         ! setting the statusCode to 'ERROR'
-         statusCode := webui::ReturnStatusCode('ERROR');
 
          !displaying a custom error message
-         statusDescription := "Error when reading file " + errh::Message( ep_err );
+         sp_loc_message := "Error when reading file " + errh::Message( ep_err );
+         webui::ShowMessage('error', sp_loc_message);
+
          errh::MarkAsHandled(ep_err) ;
 
-         FileDelete(UploadLocation);
       endblock;
 
 
-We also use create a page action and a dialog for users to export the results to several different DEX supported formats (Excel, JSON, CSV, etc.). 
-You can add more identifiers to be exported by using the DEX annotations.
+For exporting the results Excel, we do something similar:
 
-.. aimms:procedure:: pr_openExportPage
+.. aimms:procedure:: pr_requestResults
 
-This procedure will generate all the possible mappings in DEX based on current identifier DEX annotations. Details on how to setup annotations can be found `here <https://how-to.aimms.com/Articles/528/528-how-to-set-up-data-exchange-basics.html#generate-mapping-file>`_. It will also initialize identifiers used in our dialog and open that dialog page.
+   This procedure will generate all the possible mappings in DEX based on current identifier DEX annotations. Details on how to setup annotations can be found `here <https://how-to.aimms.com/Articles/528/528-how-to-set-up-data-exchange-basics.html#generate-mapping-file>`_. 
+   We will then make a copy of an empty Excel file to write our information. Then, using ``webui::RequestFileDownload`` to export.
 
-.. code-block:: aimms
-   :linenos:
+   .. code-block:: aimms
+      :linenos:
 
-   !Generating all possible mappings
-   dex::GenerateDatasetMappings();
+      dex::GenerateDatasetMappings();
 
-   !Selecting the Excel mapping as initial value
-   if not ep_selectedMapping then
-      ep_selectedMapping 
-      :=  First(i_generatedMappings | FindString(
-               SearchString  :  i_generatedMappings, 
-               Key           :  "excel", 
-               CaseSensitive :  0, 
-               WordOnly      :  0, 
-               IgnoreWhite   :  0));
-   endif;
+      sp_loc_fileName := "Results.xlsx";
 
-   !Defining Dialog and actions - Only done required
-   s_actions:= data { Done };
-   ep_pageId := 'export_page';
+      FileCopy("empty.xlsx", sp_loc_fileName);
 
-   !Opening dialog page - no action on done - webui::NoOp1 does nothing
-   webui::OpenDialogPage(
-      pageId  :  ep_pageId, 
-      title   :  "Export Data", 
-      actions :  s_actions, 
-      onDone  :  'webui::NoOp1');
+      ! writing the output file locally
+      dex::WriteToFile(
+         dataFile    :  sp_loc_fileName, 
+         mappingName :  ep_def_selectedMapping, 
+         pretty      :  1);
 
+      sp_loc_IOPath := webui::GetIOFilePath(sp_loc_fileName);
 
-.. aimms:procedure:: pr_exportExcelData
+      ! this is required so it works on the cloud
+      FileCopy(sp_loc_fileName, sp_loc_IOPath);
 
-This procedure will write the file and provide it for download using the `download widget <https://documentation.aimms.com/webui/download-widget.html>`_.
+      if FileExists(sp_loc_IOPath) then
+         webui::RequestFileDownload(sp_loc_IOPath);
+         webui::ShowMessage('info',"Export complete.");
 
-.. code-block:: aimms
-   :linenos:
-
-   ! we want to download a file
-   sp_out_fileLocation := sp_FileName;
-
-   ! we store the location of the file in string parameter FinalLocation
-   sp_loc_FinalLocation := webui::GetIOFilePath(sp_out_fileLocation);
-
-   ! writing the output file locally
-   dex::WriteToFile(
-      dataFile    :  sp_loc_FinalLocation, 
-      mappingName :  ep_selectedMapping, 
-      pretty      :  1);
-
-   ! checking if the previous write statement was successful or not
-   if FileExists(sp_loc_FinalLocation) then
-
-      ! if successful, statusCode is set to 'CREATED' which will trigger the download widget to show the Get button
-      p_out_statusCode := webui::ReturnStatusCode('CREATED');
-      ! displaying the status message as Ready to download exported data! instead of the default "File ready to download"
-      sp_out_statusDescription := "Ready to download exported data!";
-
-   else    !if previous write statement was not successful
-
-      ! setting the statusCode to 'ERROR' and the download widget will not show the Get button anymore
-      p_out_statusCode := webui::ReturnStatusCode('ERROR');
-      !displaying a custom error message
-      sp_out_statusDescription := "Something went wrong when creating the file.";
-
-   endif;
-
+      else
+         webui::ShowMessage('error',"Something went wrong when creating the file.");
+      endif;
 
 .. seealso::
    To understand in depth check out `DEX documentation <https://documentation.aimms.com/dataexchange/index.html>`_.
@@ -233,7 +183,7 @@ This procedure will write the file and provide it for download using the `downlo
 WebUI Features
 --------------
 
-On input page, if you click around the graphs, a highlighted cell will appear identifying the last clicked element. The results are displayed in a combination chart (stacked bar chart).
+On input page, if you click around the graphs, a highlighted cell will appear identifying the last clicked element. The results are displayed in a combination chart widget.
 
 The following WebUI features are used:
 
@@ -251,17 +201,7 @@ The following WebUI features are used:
 
 - `Side Panel <https://documentation.aimms.com/webui/side-panels-grd-pages.html#side-panel-grid-pages>`_
 
-- `Scalar (and Compact) Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
-
-- `Dialog Page <https://documentation.aimms.com/webui/dialog-pages.html>`_ 
-
-- `Download Widget <https://documentation.aimms.com/webui/download-widget.html>`_ 
-
-- `Upload Widget <https://documentation.aimms.com/webui/upload-widget.html>`_ 
-
-- `Button Widget <https://documentation.aimms.com/webui/button-widget.html>`_ 
-
-- `Selection Box Widget <https://documentation.aimms.com/webui/selection-box-widget-v2.html>`_ 
+- `Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
 - `CSS Annotations <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_
 
@@ -290,9 +230,6 @@ Below there are the css files you will find with comments on what they change.
          --color_border_app-header-divider: var(--primaryDark); /*line color after header*/
          --color_bg_app-canvas: url(/app-resources/resources/images/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain; /*background color*/
          --border_widget-header: 1px solid var(--primaryDark); /*line color after widget header*/
-
-         --color_bg_workflow_current: var(--primaryDark); /*bg color when step is selected*/
-         --color_workflow_active: var(--primaryDark); /*font and icon color when step is active*/
 
          --color_bg_button_primary: var(--primaryDark);
          --color_bg_button_primary_hover: var(--primary);
@@ -389,6 +326,9 @@ Minimal Requirements
 
 Release Notes
 --------------------   
+
+`v1.5 <https://github.com/aimms/contract-allocation/releases/tag/1.5>`_ (24/09/2024)
+   Fixing integration prolems (import and export) when using the project on AIMMS PRO Portal.
 
 `v1.5 <https://github.com/aimms/contract-allocation/releases/tag/1.5>`_ (20/09/2024)
    Upgrading AIMMS version and WebUI library version.

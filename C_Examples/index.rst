@@ -27,14 +27,14 @@ You can browse our examples by category:
 .. toctree::
    :maxdepth: 1
 
+   /Articles/623/623-bias-in-ai
    /Articles/383/383-contract-allocation
+   /Articles/550/550-demand-forecasting
    /Articles/387/387-employee-scheduling
+   /Articles/563/563-functional-geolocation-abstractapi
    /Articles/390/390-knapsack-problem
    /Articles/434/434-reindeer-pairing
    /Articles/397/397-traveling-salesman
-   /Articles/563/563-functional-geolocation-abstractapi
-   /Articles/550/550-demand-forecasting
-   /Articles/623/623-bias-in-ai
    /Articles/590/590-vessel-scheduling
    Sub_Application/index
    Sub_Functional/index
