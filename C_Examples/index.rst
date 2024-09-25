@@ -1,11 +1,13 @@
 Examples
 ===========
 
+This is the AIMMS gallery of projects! Feel free to download them from Github, play around and discuss in our Community. 
+
 Demo Applications
 --------------------
 
-.. grid:: 4
-   :gutter: 3
+.. grid:: 3
+   :gutter: 4
 
    .. grid-item-card:: Contract Allocation
       :img-top: ../Articles/383/images/project.gif
@@ -17,7 +19,7 @@ Demo Applications
       :img-top: ../Articles/387/images/project.gif
       :link: https://how-to.aimms.com/Articles/387/387-employee-scheduling.html
 
-      Test.
+      Optimizes employee assignments across a restaurant chain by finding the most cost-effective placement of skilled staff to meet varying demands while minimizing the impact of using less experienced workers.
 
    .. grid-item-card:: Knapsack
       :img-top: ../Articles/390/images/project.png
@@ -29,43 +31,43 @@ Demo Applications
       :img-top: ../Articles/434/images/project.gif
       :link: https://how-to.aimms.com/Articles/434/434-reindeer-pairing.html
 
-      Test.
+      Explores alternative pairings of Santa's reindeer based on their preferences to determine if better arrangements exist beyond the traditional Christmas lineup.
 
    .. grid-item-card:: Traveling Salesman
       :img-top: ../Articles/387/images/project.gif
       :link: https://how-to.aimms.com/Articles/397/397-traveling-salesman.html
 
-      Test.
+      Demonstrates various methods for solving the Traveling Salesman Problem (TSP), which seeks the optimal route among a set of locations based on distance.
 
    .. grid-item-card:: Vessel Scheduling
       :img-top: ../Articles/590/images/project.png
       :link: https://how-to.aimms.com/Articles/590/590-vessel-scheduling.html
 
-      Test.
+      Plans efficient cargo delivery with oil tankers, minimizing costs while ensuring each vessel carries one cargo within set time windows.
 
 Functional Applications
 -----------------------
 
-.. grid:: 4
+.. grid:: 3
    :gutter: 4
 
    .. grid-item-card:: Geolocation AbstractAPI
       :img-top: ../Articles/563/images/project.png
       :link: https://how-to.aimms.com/Articles/563/563-functional-geolocation-abstractapi.html
       
-      Test.
+      Demonstrates an IP Locator tool that uses the geolocation.abstractapi service to translate an IP address into a geographic location, allowing users to identify their location based on their IP address.
 
    .. grid-item-card:: Demand Forecasting
       :img-top: ../Articles/550/images/project.png
       :link: https://how-to.aimms.com/Articles/550/550-demand-forecasting.html
 
-      Test.
+      Analyses historical demand data from a cookie factory to forecast future demand. The goal is to create a dashboard with various forecasting algorithms to determine the best fit for the factory, improving understanding and reducing waste.
 
    .. grid-item-card:: Bias in AI
       :img-top: ../Articles/623/images/project.gif
       :link: https://how-to.aimms.com/Articles/623/623-bias-in-ai.html
 
-      Test.
+      Shows how machine learning bias can be illustrated by creating an AIMMS front-end for a Python application that teaches about ethics-related bias using data from Kaggle.
 
 .. toctree::
    :maxdepth: 1
