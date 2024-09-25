@@ -38,9 +38,7 @@ You can browse our examples by category:
       :link: https://example.com
       :link-alt: example.com
 
-        Header
-        ^^^
-        Content
+         Test.
 
    .. grid-item-card:: Knapsack
       :img-top: ../Articles/390/images/project.png
@@ -49,16 +47,12 @@ You can browse our examples by category:
 
          This example introduces a Knapsack problem where the goal is to maximize the total value of items placed in the knapsack, subject to a weight limit.
 
-
-
    .. grid-item-card:: Reindeer Pairing
       :img-top: ../Articles/387/images/project.gif
       :link: https://example.com
       :link-alt: example.com
 
-        Header
-        ^^^
-        Content
+         Test.
 
 .. toctree::
    :maxdepth: 1
@@ -67,5 +61,5 @@ You can browse our examples by category:
    /Articles/545/545-summary-examples-features
    demo-applications/index
    functional-applications/index
-   winui-applications/index
+   legacy-applications/index
    
