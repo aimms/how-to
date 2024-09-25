@@ -1,8 +1,8 @@
 Demo Applications
 ======================
 
-This is the AIMMS `open sourced <https://github.com/aimms>` demo project gallery! Feel free to use and learn from them - then, make them your own by furthering the development! 
-Do you have thoughts or suggestions? Please find us in our `Community <https://community.aimms.com/>`.
+This is the AIMMS `open sourced <https://github.com/aimms>`_ demo project gallery! Feel free to use and learn from them - then, make them your own by furthering the development! 
+Do you have thoughts or suggestions? Please find us in our `Community <https://community.aimms.com/>`_.
 
 
 .. grid:: 3
