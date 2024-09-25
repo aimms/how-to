@@ -1,19 +1,11 @@
 Examples
 ===========
 
-If you have any questions about AIMMS in general or about how to get the most out of AIMMS for your problem, you can ask
-them on our `community <https://community.aimms.com/>`_.
+Demo Applications
+--------------------
 
-This section contains several types of AIMMS examples:
-
-* Examples from the AIMMS Modeling Book
-* Functional examples demonstrating particular AIMMS features
-* AIMMS-style application examples including an end-user UI
-* Practical examples, including references to the articles on which each example is based
-
-
-.. grid:: 3
-   :gutter: 2
+.. grid:: 4
+   :gutter: 3
 
    .. grid-item-card:: Contract Allocation
       :img-top: ../Articles/383/images/project.gif
@@ -50,7 +42,13 @@ This section contains several types of AIMMS examples:
       :link: https://how-to.aimms.com/Articles/590/590-vessel-scheduling.html
 
       Test.
-   
+
+Functional Applications
+-----------------------
+
+.. grid:: 4
+   :gutter: 4
+
    .. grid-item-card:: Geolocation AbstractAPI
       :img-top: ../Articles/563/images/project.png
       :link: https://how-to.aimms.com/Articles/563/563-functional-geolocation-abstractapi.html
