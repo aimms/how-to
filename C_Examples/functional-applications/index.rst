@@ -17,7 +17,7 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
       :img-top: ../../Articles/550/images/project.png
       :link: https://how-to.aimms.com/Articles/550/550-demand-forecasting.html
 
-      Analyzes historical demand data from a cookie factory to forecast future demand. With the goal to analyse various forecasting algorithms to determine the best fit for the factory, improving understanding and reducing waste.
+      Analyzes historical demand data from a cookie factory to forecast future demand. With the goal to analyze various forecasting algorithms to determine the best fit for the factory, improving understanding and reducing waste.
 
    .. grid-item-card:: Bias in AI
       :img-top: ../../Articles/623/images/project.gif
