@@ -25,34 +25,31 @@ All examples are `on github <https://github.com/aimms/examples>`_ and can be dow
 You can browse our examples by category:
 
 .. grid:: 3
+   :gutter: 5
 
    .. grid-item-card:: Contract Allocation
       :img-top: ../Articles/383/images/project.gif
       :link: https://how-to.aimms.com/Articles/383/383-contract-allocation.html
-      :link-alt: https://how-to.aimms.com/Articles/383/383-contract-allocation.html
 
-         Contract Allocation project assigns producers to contracts to minimize total costs, ensuring demand is met, supply limits aren't exceeded, minimal contributions are respected, and each contract has a minimum number of suppliers.
+      Project assigns producers to contracts to minimize total costs, ensuring demand is met, supply limits aren't exceeded, minimal contributions are respected, and each contract has a minimum number of suppliers.
 
    .. grid-item-card:: Employee Scheduling
       :img-top: ../Articles/387/images/project.gif
       :link: https://example.com
-      :link-alt: example.com
 
-         Test.
+      Test.
 
    .. grid-item-card:: Knapsack
       :img-top: ../Articles/390/images/project.png
       :link: https://how-to.aimms.com/Articles/390/390-knapsack-problem.html
-      :link-alt: https://how-to.aimms.com/Articles/390/390-knapsack-problem.html
 
-         This example introduces a Knapsack problem where the goal is to maximize the total value of items placed in the knapsack, subject to a weight limit.
+      Problem where the goal is to maximize the total value of items placed in the knapsack, subject to a weight limit.
 
    .. grid-item-card:: Reindeer Pairing
       :img-top: ../Articles/387/images/project.gif
       :link: https://example.com
-      :link-alt: example.com
 
-         Test.
+      Test.
 
 .. toctree::
    :maxdepth: 1
