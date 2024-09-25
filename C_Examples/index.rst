@@ -25,7 +25,7 @@ All examples are `on github <https://github.com/aimms/examples>`_ and can be dow
 You can browse our examples by category:
 
 .. grid:: 3
-   :gutter: 5
+   :gutter: 2
 
    .. grid-item-card:: Contract Allocation
       :img-top: ../Articles/383/images/project.gif
@@ -35,7 +35,7 @@ You can browse our examples by category:
 
    .. grid-item-card:: Employee Scheduling
       :img-top: ../Articles/387/images/project.gif
-      :link: https://example.com
+      :link: https://how-to.aimms.com/Articles/387/387-employee-scheduling.html
 
       Test.
 
@@ -46,8 +46,37 @@ You can browse our examples by category:
       Problem where the goal is to maximize the total value of items placed in the knapsack, subject to a weight limit.
 
    .. grid-item-card:: Reindeer Pairing
+      :img-top: ../Articles/434/images/project.gif
+      :link: https://how-to.aimms.com/Articles/434/434-reindeer-pairing.html
+
+      Test.
+
+   .. grid-item-card:: Traveling Salesman
       :img-top: ../Articles/387/images/project.gif
-      :link: https://example.com
+      :link: https://how-to.aimms.com/Articles/397/397-traveling-salesman.html
+
+      Test.
+
+   .. grid-item-card:: Vessel Scheduling
+      :img-top: ../Articles/590/images/project.png
+      :link: https://how-to.aimms.com/Articles/590/590-vessel-scheduling.html
+
+      Test.
+   
+   .. grid-item-card:: Geolocation AbstractAPI
+      :img-top: ../Articles/563/images/project.png
+      :link: https://how-to.aimms.com/Articles/563/563-functional-geolocation-abstractapi.html
+      Test.
+
+   .. grid-item-card:: Demand Forecasting
+      :img-top: ../Articles/387/images/project.png
+      :link: https://how-to.aimms.com/Articles/550/550-demand-forecasting.html
+
+      Test.
+
+   .. grid-item-card:: Bias in AI
+      :img-top: ../Articles/623/images/project.gif
+      :link: https://how-to.aimms.com/Articles/623/623-bias-in-ai.html
 
       Test.
 
