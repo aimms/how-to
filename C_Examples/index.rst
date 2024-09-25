@@ -1,7 +1,8 @@
 Examples
 ===========
 
-This is the AIMMS gallery of projects! Feel free to download them from Github, play around and discuss in our Community. 
+This is the AIMMS `open sourced <https://github.com/aimms>` project gallery! Feel free to use and learn from them - then, make them your own by furthering the development! 
+Do you have thoughts or suggestions? Please find us in our `Community <https://community.aimms.com/>`.
 
 Demo Applications
 --------------------
@@ -34,7 +35,7 @@ Demo Applications
       Explores alternative pairings of Santa's reindeer based on their preferences to determine if better arrangements exist beyond the traditional Christmas lineup.
 
    .. grid-item-card:: Traveling Salesman
-      :img-top: ../Articles/387/images/project.gif
+      :img-top: ../Articles/397/images/project.gif
       :link: https://how-to.aimms.com/Articles/397/397-traveling-salesman.html
 
       Demonstrates various methods for solving the Traveling Salesman Problem (TSP), which seeks the optimal route among a set of locations based on distance.
@@ -61,7 +62,7 @@ Functional Applications
       :img-top: ../Articles/550/images/project.png
       :link: https://how-to.aimms.com/Articles/550/550-demand-forecasting.html
 
-      Analyses historical demand data from a cookie factory to forecast future demand. The goal is to create a dashboard with various forecasting algorithms to determine the best fit for the factory, improving understanding and reducing waste.
+      Analyses historical demand data from a cookie factory to forecast future demand. With the goal to analyse various forecasting algorithms to determine the best fit for the factory, improving understanding and reducing waste.
 
    .. grid-item-card:: Bias in AI
       :img-top: ../Articles/623/images/project.gif
