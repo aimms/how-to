@@ -348,6 +348,9 @@ Release Notes
 `v1.0 <https://github.com/aimms/contract-allocation/releases/tag/1.0>`_ (17/03/2023)
 	First logged version with the new workflow structure and colors. 
 
+.. seealso::
+   * :doc:`../545/545-summary-examples-features`
+
 .. spelling:word-list::
 
    primaryDark

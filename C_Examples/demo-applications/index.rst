@@ -47,6 +47,7 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
 
 .. toctree::
    :maxdepth: 1
+   :titlesonly:
    :hidden:
   
    /Articles/383/383-contract-allocation
