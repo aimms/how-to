@@ -11,18 +11,6 @@ This section contains several types of AIMMS examples:
 * AIMMS-style application examples including an end-user UI
 * Practical examples, including references to the articles on which each example is based
 
-Each example is stored in a separate folder containing:
-
-* An ``about.txt`` or ``description.txt`` file that briefly describes the model or functionality illustrated in the example
-* An ``.aimms`` file which listing the main project and all library folders included in the example
-* An ``.ams`` file containing the model source describing the AIMMS model
-
-The examples projects can only be opened in AIMMS 4.0 (or higher) through the ``.aimms`` file. To get an overview of the 
-underlying optimization model you can also directly view the ``.ams`` model source file.
-
-All examples are `on github <https://github.com/aimms/examples>`_ and can be downloaded in one :download:`AIMMS examples master file <https://github.com/aimms/examples/archive/master.zip>`. Or, you can clone the entire repository.
-
-You can browse our examples by category:
 
 .. grid:: 3
    :gutter: 2
@@ -66,10 +54,11 @@ You can browse our examples by category:
    .. grid-item-card:: Geolocation AbstractAPI
       :img-top: ../Articles/563/images/project.png
       :link: https://how-to.aimms.com/Articles/563/563-functional-geolocation-abstractapi.html
+      
       Test.
 
    .. grid-item-card:: Demand Forecasting
-      :img-top: ../Articles/387/images/project.png
+      :img-top: ../Articles/550/images/project.png
       :link: https://how-to.aimms.com/Articles/550/550-demand-forecasting.html
 
       Test.
