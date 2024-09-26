@@ -23,7 +23,7 @@ Demo Applications
       Optimizes employee assignments across a restaurant chain by finding the most cost-effective placement of skilled staff to meet varying demands while minimizing the impact of using less experienced workers.
 
    .. grid-item-card:: Knapsack
-      :img-top: ../Articles/390/images/project.png
+      :img-top: ../Articles/390/images/project-960-high.gif
       :link: https://how-to.aimms.com/Articles/390/390-knapsack-problem.html
 
       Problem where the goal is to maximize the total value of items placed in the knapsack, subject to a weight limit.
@@ -71,10 +71,9 @@ Functional Applications
       Shows how machine learning bias can be illustrated by creating an AIMMS front-end for a Python application that teaches about ethics-related bias using data from Kaggle.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
    :titlesonly:
    
-   /Articles/545/545-summary-examples-features
    demo-applications/index
    functional-applications/index
    legacy-applications/index
@@ -83,3 +82,4 @@ Functional Applications
    
    geolocation
    abstractapi
+   

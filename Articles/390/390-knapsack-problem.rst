@@ -13,6 +13,11 @@ Knapsack Problem
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-webui-44/updated-knapsack-problem-example-1319
    
+.. image:: images/project-1920-high.gif
+    :align: center
+
+|
+   
 Story
 -----
 

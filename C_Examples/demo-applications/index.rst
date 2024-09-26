@@ -21,7 +21,7 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
       Optimizes employee assignments across a restaurant chain by finding the most cost-effective placement of skilled staff to meet varying demands while minimizing the impact of using less experienced workers.
 
    .. grid-item-card:: Knapsack
-      :img-top: ../../Articles/390/images/project.png
+      :img-top: ../../Articles/390/images/project-960-high.gif
       :link: https://how-to.aimms.com/Articles/390/390-knapsack-problem.html
 
       Problem where the goal is to maximize the total value of items placed in the knapsack, subject to a weight limit.
