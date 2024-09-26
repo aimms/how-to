@@ -9,7 +9,7 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
    :gutter: 4
 
    .. grid-item-card:: Contract Allocation
-      :img-top: ../../Articles/383/images/project.gif
+      :img-top: ../../Articles/383/images/project-960-high.gif
       :link: https://how-to.aimms.com/Articles/383/383-contract-allocation.html
 
       Project assigns producers to contracts to minimize total costs, ensuring demand is met, supply limits aren't exceeded, minimal contributions are respected, and each contract has a minimum number of suppliers.
@@ -27,7 +27,7 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
       Problem where the goal is to maximize the total value of items placed in the knapsack, subject to a weight limit.
 
    .. grid-item-card:: Reindeer Pairing
-      :img-top: ../../Articles/434/images/project.gif
+      :img-top: ../../Articles/434/images/project-960-high.gif
       :link: https://how-to.aimms.com/Articles/434/434-reindeer-pairing.html
 
       Explores alternative pairings of Santa's reindeer based on their preferences to determine if better arrangements exist beyond the traditional Christmas lineup.
@@ -48,7 +48,6 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
 .. toctree::
    :maxdepth: 1
    :titlesonly:
-   :hidden:
   
    /Articles/383/383-contract-allocation
    /Articles/387/387-employee-scheduling

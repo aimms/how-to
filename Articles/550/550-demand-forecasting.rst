@@ -13,7 +13,7 @@ Demand Forecasting
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-webui-44/new-demand-forecasting-example-1327
 
-.. image:: images/project.gif
+.. image:: images/project-1920-high.gif
     :align: center
 
 |

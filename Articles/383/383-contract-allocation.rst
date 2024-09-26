@@ -13,7 +13,7 @@ Contract Allocation
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-webui-44/uptaded-contract-allocation-example-1253
 
-.. image:: images/project.gif
+.. image:: images/project-1920-high.gif
     :align: center
 
 |

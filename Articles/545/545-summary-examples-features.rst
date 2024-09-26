@@ -193,6 +193,7 @@ This page has a summary of the examples versus AIMMS features used in them.
 .. dropdown:: SQLite Connection
     
     * :doc:`../387/387-employee-scheduling`
+    * :doc:`../434/434-reindeer-pairing`
 
 .. dropdown:: Python Connection
     

@@ -5,16 +5,16 @@ Reindeer Pairing
    :keywords: Stable marriage problem, network object, constraint programming, channel constraint, if-then constraint
    :description: This AIMMS project is an illustration of the stable marriage problem.
 
-.. image:: https://img.shields.io/badge/AIMMS_4.89-ZIP:_Reindeer_Pairing-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Reindeer_Pairing-blue
    :target: https://github.com/aimms/reindeer-pairing/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.89-Github:_Reindeer_Pairing-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Reindeer_Pairing-blue
    :target: https://github.com/aimms/reindeer-pairing
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-webui-44/updated-reindeer-pairing-example-1370
 
-.. image:: images/project.gif
+.. image:: images/project-1920-high.gif
     :align: center
 
 |
@@ -170,7 +170,7 @@ The following WebUI features are used:
 
 - `Table Widget <https://documentation.aimms.com/webui/table-widget.html>`_
 
-- `Scalar (and Compact) Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
+- `Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
 - `Button Widget <https://documentation.aimms.com/webui/button-widget.html>`_
 
@@ -209,7 +209,7 @@ UI Styling
 Below there are the ``css`` files you will find with comments on what they change. 
 
 .. tab-set::
-    .. tab-item:: colors.css
+    .. tab-item:: theming.css
 
       .. code-block:: css
          :linenos:
@@ -223,142 +223,50 @@ Below there are the ``css`` files you will find with comments on what they chang
             --secondary2: #e9818d;
 
 
-            --bg_app-logo: 15px 50% / 50px 50px no-repeat url(/app-resources/resources/images/santa_logo.png);
-            --spacing_app-logo_width: 65px;
+            --bg_app-logo: 20px 50% / 30px 30px no-repeat url(/app-resources/resources/images/reindeer.png);
+            --spacing_app-logo_width: 50px;
+            --color_border_app-header-divider: var(--primaryDark); /*line color after header*/
+            --color_bg_app-canvas: url(/app-resources/resources/images/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain; /*background color*/
 
             --color_border-divider_themed: var(--primaryDark);
+            --color_bg_widget-header: var(--primaryDarker);
+            --border_widget-header: 3px solid var(--primaryDark);
+
+            --color_text_widget-header: white;
             --color_text_edit-select-link: var(--primaryDarker);
             --color_text_edit-select-link_hover: var(--primary);
             --color_bg_edit-select-link_inverted: var(--secondary);
+            --color_text_button_primary: white;
+            --color_text_button_primary_hover: var(--primaryDarker);
+            --color_text_button_secondary: var(--secondary);
+            --color_text_button_secondary_hover: var(--primaryDarker);
 
             --color_bg_button_primary: var(--primaryDark);
-            --color_text_button_primary: white;
-            --border_button_primary: 1px solid var(--primaryDark);
-
             --color_bg_button_primary_hover: var(--primary);
-            --color_text_button_primary_hover: var(--primaryDarker);
+
+            --border_button_primary: 1px solid var(--primaryDark);
             --border_button_primary_hover: 1px solid var(--primaryDarker);
 
-            --color_text_button_secondary: var(--secondary);
             --border_button_secondary: 1px solid var(--secondary);
-            --color_text_button_secondary_hover: var(--primaryDarker);
             --border_button_secondary_hover: 1px solid var(--primaryDarker);
 
-            --color_bg_widget-header: var(--primaryDarker);
-            --border_widget-header: 3px solid var(--primaryDark);
+            --color_bg_workflow_current: var(--primaryDarker); /*bg color when step is selected*/
+            --color_workflow_active: var(--primaryDarker); /*font and icon color when step is active*/
+            --color_workflow-icon-border: var(--primaryDarker);
          }
     
-    .. tab-item:: table.css
-
-      .. code-block:: css
-         :linenos:
-
-         .tag-table.focused .cell.focus-cell {
-            box-shadow: inset 0 0 0 2px var(--primaryDark);
-         }
-
-    .. tab-item:: body.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Add logo on the background*/
-         .scroll-wrapper--pagev2 .page-container {
-            content: " ";
-            background: url(img/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain;
-         }
-
-         /*Changing tittle to be uppercase*/
-         .title-addon {
-            text-transform: uppercase;
-            text-shadow: 2px 2px 0px var(--primaryDark);
-            color: whitesmoke;
-         }
-         
-         /*Changing button font*/
-         .ui-widget, .ui-widget button, .ui-widget input, .ui-widget select, .ui-widget textarea {
-            font-family: var(--font_headers),Montserrat,Roboto,Arial,Helvetica,sans-serif; 
-         }
-
-    .. tab-item:: textColor.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Link color*/
-         .ql-snow a {  
-            color: var(--primaryDarker);
-         }
-
-         /*Change checkbox color*/
-         input.boolean-cell-editor-contents {
-            accent-color: var(--primaryDarker);
-         }
-
-         .aimms-widget .ui-button {
-            text-transform: uppercase;
-         }
-
-         /*Changing tittle to be uppercase*/
-         .title-addon,
-         .ui-dialog .ui-dialog-title,
-         .page-container__dialog-header .title{
-            text-transform: uppercase;
-            text-shadow: 1px 1px 0px var(--primaryDarker);
-            color: whitesmoke;
-         }
-
-         .tag-table .grid-viewport .cell:not(.flag-readOnly), html:not(.using-touch) .tag-table .grid-viewport .cell:not(.flag-readOnly) {
-            color: var(--primaryDarker);
-         }
-
-         .widget-menu-container .widget-menu-items-wrapper .widget-menu-item .title {
-            color: var(--primaryDarker);
-         }
-
-    .. tab-item:: workflow.css
-
-      .. code-block:: css
-         :linenos:
-
-         /*Change color of the active step*/
-         .workflow-panel .step-item.current,
-         .workflow-panel.collapse .step-item.current {
-            box-shadow: inset 0.3125rem 0 0 var(--primaryDark);
-         }
-
-         /*Change color of the titles*/
-         .workflow-panel .step-item.active.complete .title, 
-         .workflow-panel .step-item.active.incomplete .title {
-            color: var(--primaryDarker);
-         }
-
-         /*Change color of the icons*/
-         .workflow-panel .step-item.active.complete .icon, 
-         .workflow-panel .step-item.active.incomplete .icon {
-            color: var(--primaryDarker);
-            border: 1px solid var(--primaryDarker);
-         }
-
-    .. tab-item:: widgetAction.css
-
-      .. code-block:: css
-         :linenos:
-
-         .widgetdiv .awf-dock-button .chrome-button.active, .widgetdiv .awf-dock-button .chrome-button.open {
-            background-color: var(--primaryDark);
-            color: #fff;
-         }
-
-         .widget-menu-container .widget-menu-items-wrapper .widget-menu-item:hover {
-            background: var(--primaryDark);
-         }
-  
+ 
 
 Minimal Requirements
 --------------------   
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
+
+Release Notes
+--------------------   
+
+`v1.0 <https://github.com/aimms/reindeer-pairing/releases/tag/1.0>`_ (26/09/2024)
+	First logged version. 
 
 .. spelling:word-list::
 

@@ -11,7 +11,7 @@ Demo Applications
    :gutter: 4
 
    .. grid-item-card:: Contract Allocation
-      :img-top: ../Articles/383/images/project.gif
+      :img-top: ../Articles/383/images/project-960-high.gif
       :link: https://how-to.aimms.com/Articles/383/383-contract-allocation.html
 
       Project assigns producers to contracts to minimize total costs, ensuring demand is met, supply limits aren't exceeded, minimal contributions are respected, and each contract has a minimum number of suppliers.
@@ -29,7 +29,7 @@ Demo Applications
       Problem where the goal is to maximize the total value of items placed in the knapsack, subject to a weight limit.
 
    .. grid-item-card:: Reindeer Pairing
-      :img-top: ../Articles/434/images/project.gif
+      :img-top: ../Articles/434/images/project-960-high.gif
       :link: https://how-to.aimms.com/Articles/434/434-reindeer-pairing.html
 
       Explores alternative pairings of Santa's reindeer based on their preferences to determine if better arrangements exist beyond the traditional Christmas lineup.
@@ -53,13 +53,13 @@ Functional Applications
    :gutter: 4
 
    .. grid-item-card:: Geolocation AbstractAPI
-      :img-top: ../Articles/563/images/project.gif
+      :img-top: ../Articles/563/images/project-960-high.gif
       :link: https://how-to.aimms.com/Articles/563/563-functional-geolocation-abstractapi.html
       
       Demonstrates an IP Locator tool that uses the geolocation.abstractapi service to translate an IP address into a geographic location, allowing users to identify their location based on their IP address.
 
    .. grid-item-card:: Demand Forecasting
-      :img-top: ../Articles/550/images/project.gif
+      :img-top: ../Articles/550/images/project-960-high.gif
       :link: https://how-to.aimms.com/Articles/550/550-demand-forecasting.html
 
       Analyzes historical demand data from a cookie factory to forecast future demand. With the goal to analyze various forecasting algorithms to determine the best fit for the factory, improving understanding and reducing waste.

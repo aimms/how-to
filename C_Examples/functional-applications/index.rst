@@ -8,13 +8,13 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
    :gutter: 4
 
    .. grid-item-card:: Geolocation AbstractAPI
-      :img-top: ../../Articles/563/images/project.gif
+      :img-top: ../../Articles/563/images/project-960-high.gif
       :link: https://how-to.aimms.com/Articles/563/563-functional-geolocation-abstractapi.html
       
       Demonstrates an IP Locator tool that uses the geolocation.abstractapi service to translate an IP address into a geographic location, allowing users to identify their location based on their IP address.
 
    .. grid-item-card:: Demand Forecasting
-      :img-top: ../../Articles/550/images/project.gif
+      :img-top: ../../Articles/550/images/project-960-high.gif
       :link: https://how-to.aimms.com/Articles/550/550-demand-forecasting.html
 
       Analyzes historical demand data from a cookie factory to forecast future demand. With the goal to analyze various forecasting algorithms to determine the best fit for the factory, improving understanding and reducing waste.
@@ -28,7 +28,6 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
 .. toctree::
    :maxdepth: 1
    :titlesonly:
-   :hidden:
 
    /Articles/563/563-functional-geolocation-abstractapi
    /Articles/550/550-demand-forecasting

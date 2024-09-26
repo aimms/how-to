@@ -14,7 +14,7 @@ Geolocation AbstractAPI
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/math-or-optimization-modeling-39/using-an-api-with-openapi-specification-1368
 
-.. image:: images/project.gif
+.. image:: images/project-1920-high.gif
     :align: center
 
 |
