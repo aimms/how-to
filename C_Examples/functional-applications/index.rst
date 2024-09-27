@@ -6,6 +6,7 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
    :titlesonly:
 
    /Articles/563/563-functional-geolocation-abstractapi
