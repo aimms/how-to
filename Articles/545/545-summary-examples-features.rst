@@ -55,6 +55,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
+    * :doc:`../397/397-traveling-salesman`
 
 .. dropdown:: Page Actions 
 
@@ -149,6 +150,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     
     * :doc:`../623/623-bias-in-ai`    
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../397/397-traveling-salesman`
 
 .. dropdown:: DataLink Library
     
@@ -194,6 +196,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     
     * :doc:`../387/387-employee-scheduling`
     * :doc:`../434/434-reindeer-pairing`
+    * :doc:`../397/397-traveling-salesman`
 
 .. dropdown:: Python Connection
     
@@ -205,6 +208,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../623/623-bias-in-ai`
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../383/383-contract-allocation`
+    * :doc:`../397/397-traveling-salesman`
 
 .. dropdown:: Widget Named Views
     
