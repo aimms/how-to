@@ -100,7 +100,7 @@ API Key
 ~~~~~~~~~~ 
 
 `PositionStack <https://positionstack.com/>`_ is used on this example and you can sign up for a free api key. 
-So the first step required when using this project is adding your key on ``sp_def_apiKey``.
+So the first step required when using this project is adding your key on ``sp_apiKey``.
 
 API Request
 ~~~~~~~~~~~~
@@ -330,7 +330,7 @@ The following WebUI features are used:
 
 - `Button Widget <https://documentation.aimms.com/webui/button-widget.html>`_
 
-- `Scalar (and Compact) Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
+- `Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
 - `Side Panel <https://documentation.aimms.com/webui/side-panels-grd-pages.html#side-panel-grid-pages>`_
 
@@ -435,6 +435,9 @@ References
 
 Release Notes
 --------------------   
+
+`v1.1 <https://github.com/aimms/traveling-salesman/releases/tag/1.1>`_ (30/09/2024)
+   Now you can run all types of solve on PRO Portal. Correct driver is set when using the API on Cloud PRO Portal. 
 
 `v1.0 <https://github.com/aimms/traveling-salesman/releases/tag/1.0>`_ (20/09/2024)
    First logged version with new WebUI library.
