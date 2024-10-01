@@ -118,15 +118,15 @@ This page has a summary of the examples versus AIMMS features used in them.
 
 .. dropdown:: Dialog Page
     
-    * :doc:`../387/387-employee-scheduling`
+    Nothing yet!     
 
 .. dropdown:: Download Widget
     
-    * :doc:`../387/387-employee-scheduling`
+    Nothing yet! 
 
 .. dropdown:: Upload Widget
     
-    * :doc:`../387/387-employee-scheduling`
+    Nothing yet!  
 
 .. dropdown:: Selection Box Widget
     

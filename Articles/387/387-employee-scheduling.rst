@@ -234,7 +234,7 @@ References for Using ODBC
 
 #.  `SQLCreateConnectionString <https://documentation.aimms.com/functionreference/data-management/database-functions/sqlcreateconnectionstring.html>`_
 
-#.  Need to go deeper into DB connections? `This course <https://aimms.getlearnworlds.com/course/databases-data-connection>`_ is perfect for you!
+#.  Need to go deeper into DB connections? `This course <https://elearning.aimms.com/course/databases-data-connection>`_ is perfect for you!
 
 Annotations
 ~~~~~~~~~~~
@@ -291,14 +291,6 @@ The following WebUI features are used:
 
 - `Side Panel <https://documentation.aimms.com/webui/side-panels-grd-pages.html#side-panel-grid-pages>`_
 
-- `Compact Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
-
-- `Dialog Page <https://documentation.aimms.com/webui/dialog-pages.html>`_ 
-
-- `Upload Widget <https://documentation.aimms.com/webui/upload-widget.html>`_  
-
-- `Download Widget <https://documentation.aimms.com/webui/download-widget.html>`_  
-
 
 UI Styling
 ----------
@@ -317,18 +309,19 @@ Below there are the ``css`` files used on this project. They are separated by ch
             --primary90Transparent: #cde6ff36;
             --secondary: #F44336;
 
-            --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/schedule.png); /*app logo*/
-            --spacing_app-logo_width: 45px;
+            --bg_app-logo: 25px 50% / 30px 30px no-repeat url(/app-resources/resources/images/schedule.png); /*app logo*/
+            --spacing_app-logo_width: 55px;
             --color_border_app-header-divider: var(--primaryDark); /*line color after header*/
 
             --color_bg_workflow_current: var(--primaryDark); /*bg color when step is selected*/
             --color_workflow_active: var(--primaryDark); /*font and icon color when step is active*/
 
             --color_bg_app-canvas: url(/app-resources/resources/images/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain; /*background color*/
-            --color_bg_widget-header: linear-gradient(180deg, rgba(255,255,255,1) 20%, var(--primary) 100%); /*widget header background color*/
-            --border_widget-header: 2px solid var(--primaryDark); /*line color after widget header*/
+            --color_bg_widget-header: linear-gradient(180deg, var(--primaryDark) 20%, var(--primaryDarker) 100%); /*widget header background color*/
+            --border_widget-header: 3px solid var(--primary); /*line color after widget header*/
 
             --color_text_edit-select-link: var(--primaryDark);
+            --color_text_widget-header: white;
 
             --color_bg_button_primary: var(--primaryDark);
             --color_bg_button_primary_hover: var(--primaryDarker);
@@ -349,13 +342,17 @@ Below there are the ``css`` files used on this project. They are separated by ch
             border-bottom: 2px solid var(--primaryDark);
             font-weight: bold;
             color: var(--color_text_default);
-        }            
+        }
 
         /*Centering cells*/
         .tag-table .cell.flag-string .cell-wrapper, 
         .tag-table .cell.flag-number input,
         .tag-table .cell.flag-string input{
             text-align: center;
+        }
+
+        input.boolean-cell-editor-contents {
+            accent-color: var(--primaryDark) /*boolean color*/
         }
 
     .. tab-item:: annotation.css
@@ -389,6 +386,9 @@ Minimal Requirements
 Release Notes
 --------------------   
 
+`v1.4 <https://github.com/aimms/employee-scheduling/releases/tag/1.4>`_ (30/09/2024)
+    Updating the Case Manager procedures to work istead of Upload and Download Widget to webui::RequestFileDownload and webui::RequestFileUpload.
+
 `v1.3 <https://github.com/aimms/employee-scheduling/releases/tag/1.3>`_ (20/09/2024)
     Upgrading AIMMS version and WebUI library version.
 
@@ -401,6 +401,8 @@ Release Notes
 `v1.0 <https://github.com/aimms/employee-scheduling/releases/tag/1.0>`_ (30/06/2023)
    Updated to 4.96 and using the new theming variables. 
     
+.. seealso::
+    * :doc:`../118/118-Connect-SQLite`
 
 .. spelling:word-list::
     theming
