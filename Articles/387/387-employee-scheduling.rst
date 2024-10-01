@@ -387,7 +387,7 @@ Release Notes
 --------------------   
 
 `v1.4 <https://github.com/aimms/employee-scheduling/releases/tag/1.4>`_ (30/09/2024)
-    Updating the Case Manager procedures to work istead of Upload and Download Widget to webui::RequestFileDownload and webui::RequestFileUpload.
+    Updating the Case Manager procedures to work instead of Upload and Download Widget to ``webui::RequestFileDownload`` and ``webui::RequestFileUpload``.
 
 `v1.3 <https://github.com/aimms/employee-scheduling/releases/tag/1.3>`_ (20/09/2024)
     Upgrading AIMMS version and WebUI library version.
@@ -406,3 +406,4 @@ Release Notes
 
 .. spelling:word-list::
     theming
+    webui
