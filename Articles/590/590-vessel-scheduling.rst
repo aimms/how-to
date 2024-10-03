@@ -29,10 +29,6 @@ Constraints include ensuring each cargo is loaded inside the determined time win
 
 The objective is to minimize costs associated to combinations of cargoes and routes.
 
-**Reference:** Gustavo Diz, Luiz Felipe Scavarda, Roger Rocha, Silvio Hamacher (2014) Decision Support System for 
-PETROBRAS Ship Scheduling. Interfaces 44(6):555-566.
-
-
 Mathematical Model
 ------------------
 
@@ -187,7 +183,7 @@ The following WebUI features are used:
 
 - `Workflow <https://documentation.aimms.com/webui/workflow-panels.html>`_
 
-- `Scalar (and Compact) Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
+- `Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
 - `Table Widget <https://documentation.aimms.com/webui/table-widget.html>`_
 
@@ -352,6 +348,11 @@ Minimal Requirements
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example. 
 To run the Python client, you will need to have Python installed, for this example we used Python 3.11. 
 
+References
+-----------
+
+#. Gustavo Diz, Luiz Felipe Scavarda, Roger Rocha, Silvio Hamacher (2014) Decision Support System for 
+PETROBRAS Ship Scheduling. Interfaces 44(6):555-566.
 
 Release Notes
 --------------------

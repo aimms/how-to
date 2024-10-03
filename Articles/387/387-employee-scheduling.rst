@@ -291,6 +291,8 @@ The following WebUI features are used:
 
 - `Side Panel <https://documentation.aimms.com/webui/side-panels-grd-pages.html#side-panel-grid-pages>`_
 
+- `CSS Annotations <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_
+
 
 UI Styling
 ----------

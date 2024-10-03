@@ -342,6 +342,7 @@ The following WebUI features are used:
 
 - `Status Bar <https://documentation.aimms.com/webui/status-bar.html>`_
 
+- `CSS Annotations <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_
 
 UI Styling
 ----------

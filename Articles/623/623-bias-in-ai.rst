@@ -108,6 +108,9 @@ The following WebUI features are used:
 
 - `Treemap Widget <https://documentation.aimms.com/webui/tree-map-widget.html>`_ 
 
+- `CSS Annotations <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_
+
+
 
 UI Styling
 ---------------
@@ -129,7 +132,8 @@ Below described all UI modifications done on this example trough ``css`` files w
             }
 
             .annotation-toxic-emoji input.boolean-cell-editor-contents,
-            .annotation-not-toxic-emoji input.boolean-cell-editor-contents{
+            .annotation-not-toxic-emoji input.boolean-cell-editor-contents,
+            .annotation-crossed-emoji input.boolean-cell-editor-contents{
                 visibility: hidden;
                 display: block;
             }
@@ -144,6 +148,10 @@ Below described all UI modifications done on this example trough ``css`` files w
                 background-size: auto 70% ;
             }
 
+            .annotation-crossed-emoji.cell {
+                background: white url(img/crossed.png) no-repeat 50%/contain;
+                background-size: auto 70% ;
+            }
         
     .. tab-item:: custom.css
 
@@ -196,7 +204,7 @@ However, you will need Python 3.11 installed. Pycharm is recommended but not req
 Release Notes
 --------------------
 
-`v1.1 <https://github.com/aimms/bias-in-ai/releases/tag/1.1>`_ (20/09/2024)
+`v1.1 <https://github.com/aimms/bias-in-ai/releases/tag/1.1>`_ (03/10/2024)
     Upgrading AIMMS version and WebUI library version.
 
 `v1.0 <https://github.com/aimms/bias-in-ai/releases/tag/1.0>`_ (29/02/2024)
