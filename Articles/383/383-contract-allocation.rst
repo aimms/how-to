@@ -327,7 +327,7 @@ Minimal Requirements
 Release Notes
 --------------------   
 
-`v1.5 <https://github.com/aimms/contract-allocation/releases/tag/1.5>`_ (24/09/2024)
+`v1.6 <https://github.com/aimms/contract-allocation/releases/tag/1.6>`_ (24/09/2024)
    Fixing integration problems (import and export) when using the project on AIMMS PRO Portal.
 
 `v1.5 <https://github.com/aimms/contract-allocation/releases/tag/1.5>`_ (20/09/2024)

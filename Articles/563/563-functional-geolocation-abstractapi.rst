@@ -182,7 +182,7 @@ However, you will need API key, to receive an free API key to test, please acces
 Release Notes
 --------------------
 
-`v1.0 <https://github.com/aimms/abstract-api/archive/refs/tags/1.0>`_ (24/09/2024)
+`v1.0 <https://github.com/aimms/abstract-api/releases/tag/1.0>`_ (24/09/2024)
 	First logged version of this application. 
 
 .. seealso::

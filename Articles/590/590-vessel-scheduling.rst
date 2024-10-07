@@ -351,11 +351,14 @@ To run the Python client, you will need to have Python installed, for this examp
 References
 -----------
 
-#. Gustavo Diz, Luiz Felipe Scavarda, Roger Rocha, Silvio Hamacher (2014) Decision Support System for 
+#.  Gustavo Diz, Luiz Felipe Scavarda, Roger Rocha, Silvio Hamacher (2014) Decision Support System for 
 PETROBRAS Ship Scheduling. Interfaces 44(6):555-566.
 
 Release Notes
 --------------------
+
+`v1.3 <https://github.com/aimms/vessel-scheduling/releases/tag/1.3>`_ (07/10/2024)
+	Fixing integration problems (import and export) when using the project on AIMMS PRO Portal.
 
 `v1.2 <https://github.com/aimms/vessel-scheduling/releases/tag/1.2>`_ (23/09/2024)
 	Added support for AimmsCmd, the task output now has three sheets, and the python now reads from the data folder inside the AIMMS Project. 
