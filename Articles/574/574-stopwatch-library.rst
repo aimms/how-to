@@ -133,7 +133,7 @@ you can use another stopwatch; leading to the code:
 The proc scheduleOver
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-This is a small frontend to :aimms:func:`ScheduleAt`, and accepts an elapsed time in seconds, (and a payload procedue):
+This is a small frontend to :aimms:func:`ScheduleAt`, and accepts an elapsed time in seconds, (and a payload procedure):
 
 .. code-block:: aimms
    :linenos:
@@ -173,7 +173,12 @@ Release Notes
 * In October 2024, Added ``Now``, ``ScheduleOver``, and the stopwatch optional argument to ``pr_start``, and ``pr_elapsed``.
 
 
+.. spelling:word-list::
 
+	ep
+	proc
+	frontend
+	func
 
 
 
