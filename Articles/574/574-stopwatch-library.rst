@@ -21,7 +21,8 @@
 
 Introduction
 --------------
-This toolkit library is used to facilitate measuring specific blocks of code by using two procedures, one to start the timer, and one to retrieve the execution time. 
+This toolkit library is used to facilitate measuring specific blocks of code by using two procedures, 
+one to start the timer, and one to retrieve the execution time. 
 
 .. seealso:: In this `article <https://how-to.aimms.com/Articles/144/144-Stopwatch.html>`_ deeper explanations about how to measure execution time with and without this library can be found. 
 
@@ -41,12 +42,13 @@ Adding the Library
 To add and use this library to your project, first download the code and after, 
 follow these steps on `how to add an existing library to a project <https://how-to.aimms.com/Articles/84/84-using-libraries.html#add-aimms-libraries>`_.
 
-Main Procedures
-~~~~~~~~~~~~~~~~~~~~~~~
+Main Procedures start and elapsed
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. aimms:procedure:: pr_start
+.. aimms:procedure:: pr_start(ep_stopwatch)
 
-This procedure will start the timer. No arguments needed. 
+This procedure will start the timer(ep_stopwatch). 
+Note that ``ep_stopwatch`` is optional, and usually not specified.
 
 .. code-block:: aimms
    :linenos:
@@ -59,9 +61,10 @@ This procedure will start the timer. No arguments needed.
       sp_StartTime := CurrentToString( "%c%y-%m-%d %H:%M:%S:%t" );
    endif;
 
-.. aimms:function:: fnc_elapsed
+.. aimms:function:: fnc_elapsed(ep_stopwatch)
 
-This procedure will stop the timer and return the total time in seconds. 
+This procedure will return the total time in seconds since the timer ``ep_stopwatch`` started.
+Note that ``ep_stopwatch`` is optional, and usually not specified.
 
 .. code-block:: aimms
    :linenos:
@@ -78,9 +81,19 @@ This procedure will stop the timer and return the total time in seconds.
    endif;
    fnc_elapsed := p_elapsedTime;
 
+There are ten stopwatches available.
 
-Example of Usage
-~~~~~~~~~~~~~~~~~~~~~~~
+.. code-block:: aimms
+   :linenos:
+
+	Set s_stopwatches {
+		Index: i_stopwatch;
+		Definition: ElementRange(0,9,prefix:"stopwatch-");
+	}
+
+
+Basic Example:
+""""""""""""""" 
 
 Below there is an example of usage for measuring ``pr_longRunningProcedure`` execution time. 
 Line-7 is simply constructing a message using the stopwatch results. 
@@ -89,13 +102,58 @@ Line-7 is simply constructing a message using the stopwatch results.
    :linenos:
 
    ! Measuring time of some long running procedure.
-   stopwatch::pr_start() ;
-   pr_longRunningProcedure  ;
+   stopwatch::pr_start();
+   pr_longRunningProcedure();
    p_elapsedTime := stopwatch::fnc_elapsed();
 
-   ! Reporting of that time, whereever.
+   ! Reporting of that time:
    sp_runTime := formatString("Execution of procedure took %n seconds", p_elapsedTime );
-   
+
+Ëxtended Example:
+"""""""""""""""""""" 
+
+The default stopwatch for both ``pr_start`` and ``fnc_elapsed`` is ``'stopwatch-0'``. 
+When this stopwatch is "in use", it is not possible to use this stopwatch for another 
+procedure, say ``pr_thisSpecificTask``. to measure the time spent on ``pr_thisSpecificTask``,
+you can use another stopwatch; leading to the code:
+
+.. code-block:: aimms
+   :linenos:
+
+   ! Measuring time of some long running procedure.
+   stopwatch::pr_start('stopwatch-1') ;
+   pr_thisSpecificTask();
+   p_elapsedTimeSpecific := stopwatch::fnc_elapsed('stopwatch-1');
+
+   ! Reporting of the time spent on a specific task:
+   sp_runTime := formatString("Execution of procedure pr_thisSpecificTask took %n seconds", 
+	   p_elapsedTimeSpecific );
+
+
+The proc scheduleOver
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is a small frontend to :aimms:func:`ScheduleAt`, and accepts an elapsed time in seconds, (and a payload procedue):
+
+.. code-block:: aimms
+   :linenos:
+
+	Procedure pr_scheduleOver {
+		Arguments: (p_noSeconds,ep_payLoad);
+	}
+
+The func Now
+~~~~~~~~~~~~~~~~~~
+
+The current time, up to seconds precise, timezone UTC is often used to mark moments, and log events.
+
+.. code-block:: aimms
+   :linenos:
+
+	Function fnc_now {
+		Range: string;
+	}
+
 Minimal Requirements
 ----------------------
 
@@ -112,6 +170,7 @@ Release Notes
 
   * to cater for multi timezone support, see option Use_UTC_forcaseandstartenddate
 
+* In October 2024, Added ``Now``, ``ScheduleOver``, and the stopwatch optional argument to ``pr_start``, and ``pr_elapsed``.
 
 
 
