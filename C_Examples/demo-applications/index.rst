@@ -27,7 +27,7 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
       Project assigns producers to contracts to minimize total costs, ensuring demand is met, supply limits aren't exceeded, minimal contributions are respected, and each contract has a minimum number of suppliers.
 
    .. grid-item-card:: Employee Scheduling
-      :img-top: ../../Articles/387/images/project.gif
+      :img-top: ../../Articles/387/images/project-960-high.gif
       :link: https://how-to.aimms.com/Articles/387/387-employee-scheduling.html
 
       Optimizes employee assignments across a restaurant chain by finding the most cost-effective placement of skilled staff to meet varying demands while minimizing the impact of using less experienced workers.
