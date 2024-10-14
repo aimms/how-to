@@ -278,7 +278,7 @@ It can take a while, so, if the nodes are orange, the heuristic is still running
 This is possible by using :aimms:procedure:`ScheduleAt` native AIMMS procedure. 
 This is precise up to 1 second. Below, there is the procedure used to schedule each iteration.
 
-.. aimms:procedure:: pr_scheduleOver(p_in_noSecs,ep_in_payLoad)
+.. aimms:procedure:: pr_scheduleAgain(p_in_noSecs,ep_in_payLoad)
 
 .. code-block:: aimms
    :linenos:
