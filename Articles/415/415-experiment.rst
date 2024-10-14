@@ -1,6 +1,10 @@
 Experiment
 ===========
 
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: Histogram, statistical functions, distribution functions, bar chart, composite table, table, scalar object
    :description: This AIMMS project illustrates how to perform and visualize an experiment in AIMMS.

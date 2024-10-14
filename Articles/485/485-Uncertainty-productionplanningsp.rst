@@ -1,5 +1,10 @@
 Uncertainty: Production Planning - Stochastic Programming
 ============================================================
+
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: Uncertain data, stochastic programming, scenarios
    :description: This example is to decide how much of each of the raw materials to purchase and stock for a refinery.

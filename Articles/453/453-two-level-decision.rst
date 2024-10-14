@@ -1,6 +1,10 @@
 Two Level Decision
 ===================
 
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: Environmental Economics, Stackelberg Games, Nonlinear Programming, NLP
    :description: In this example there government policy makers influence the behavior of several companies by implementing tax and subsidy policies.

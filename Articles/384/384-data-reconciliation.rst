@@ -1,5 +1,10 @@
 Data Reconciliation
 ========================
+
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: Template, NLP model, network object, selection object, table, composite table, assertion, indexed sets, model structure, page structure, quantities, units, XML
    :description: This demo illustrates a complete AIMMS application for the data reconcilitation of chemical processes.

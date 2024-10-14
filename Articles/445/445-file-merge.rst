@@ -1,6 +1,10 @@
 File Merge
 ===========
 
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: Linear Program, Network Program, Simplex Method, Column Generation, Mathematical Derivation, Customized Algorithm
    :description: This problem deals with merging two statistical database files.

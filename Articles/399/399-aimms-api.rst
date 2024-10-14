@@ -1,6 +1,10 @@
 AIMMS API
 =========
 
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: AIMMS API, external DLL
    :description: This AIMMS project illustrates the basic use of the AIMMS API in an external DLL.

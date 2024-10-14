@@ -1,6 +1,10 @@
 Railway Stock
 ====================
 
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: XML, network object, colors, compound set, calendar, time, tabbed page
    :description: This model illustrates the use of compound sets.

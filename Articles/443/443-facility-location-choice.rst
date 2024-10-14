@@ -1,6 +1,10 @@
 Facility Location Choice
 =========================
 
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: Distribution System Design, Integer Program, Mathematical Reformulation, Mathematical Derivation, Customized Algorithm, Benders decomposition, Auxiliary Model, Constraint Generation
    :description: This example considers the problem of selecting distribution centers along with their associated customer zones.

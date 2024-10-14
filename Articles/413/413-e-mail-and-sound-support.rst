@@ -1,5 +1,10 @@
 Email and Sound Support
 ========================
+
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: email, Sound, External procedure
    :description: This example illustrates two external DLLs that allow you to send email messages and play sounds from within your model.

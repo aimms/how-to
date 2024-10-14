@@ -1,5 +1,10 @@
 External Procedure
 =====================
+
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: External procedure, DLL
    :description: This model illustrates a very simple external procedure call, along with the C source of the external function called from within the model.

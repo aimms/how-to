@@ -1,6 +1,10 @@
 Flow Shop
 ===========
 
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP, Rest API, Endpoint
    :description: The goal in this example is to find a schedule such that the time to process all the jobs on all the machines is as small as possible.

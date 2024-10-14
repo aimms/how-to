@@ -1,6 +1,10 @@
 Arcs and Nodes
 ===============
 
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: Network model, Network object, Node and Arc formulation, SetElementAdd function
    :description: This example illustrates a simple network model with a GUI in which an end-user can graphically insert, delete and modify both nodes and arcs in the network.

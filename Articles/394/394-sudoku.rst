@@ -1,5 +1,10 @@
 Sudoku
 =========
+
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: Mixed Integer Programming, Mixed Integer Formulations, Multiple Solutions, GMP Functions, Pivot Table
    :description: Besides regular MIP solve, this example also allows you to use some solvers, such as CPLEX and BARON, to find multiple solutions.

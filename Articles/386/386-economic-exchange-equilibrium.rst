@@ -1,5 +1,10 @@
 Economic Exchange Equilibrium
 =================================
+
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: Utility Function, Equilibrium, Duality, Nonlinear System
    :description: This example models an economic exchange of a number of goods between a number of agents.

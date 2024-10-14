@@ -1,6 +1,10 @@
 Power System Expansion RO
 ============================
 
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: Linear Program, Uncertainty, Robust Optimization, Non-adjustable and Adjustable Decisions, Linear Decision Rules
    :description: This example implements a power system expansion model with uncertain electricity demand, covering a single time period.

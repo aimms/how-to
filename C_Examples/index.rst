@@ -12,7 +12,7 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
    
    demo-applications/index
    functional-applications/index
-   legacy-applications/index
+   winui-applications/index
 
 Demo Applications
 --------------------

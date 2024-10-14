@@ -1,4 +1,4 @@
-Legacy Applications
+WinUI Applications
 ========================
 
 The application examples listed below illustrate the models described in the `AIMMS Optimization Modeling Book <https://documentation.aimms.com/_downloads/AIMMS_modeling.pdf>`_.

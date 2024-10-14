@@ -1,6 +1,10 @@
 Lot Sizing: Single level small bucket with two items
 =====================================================
 
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 Direct download AIMMS Project :download:`SingleLevelSmallBucketTwoItems.zip <model/SingleLevelSmallBucketTwoItems.zip>`
 
 .. Go to the example on GitHub: https://github.com/aimms/examples/tree/master/Practical%20Examples/LotSizing/SingleLevelSmallBucketTwoItems

@@ -1,5 +1,10 @@
 Data Feed
 ===========
+
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: External Procedure, AIMMS API, table, Linear Program
    :description: This project illustrates how an independent data feed can pass data to and/or run procedures within an AIMMS project. 

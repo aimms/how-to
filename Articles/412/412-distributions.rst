@@ -1,5 +1,10 @@
 Distributions
 =============
+
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: Probability Distribution, Extreme Value Distribution Approximation, Distribution Operators, 2D Chart
    :description: This example shows the four distributions with shape parameter and lower bound (only): Pareto, Lognormal, Weibull and Gamma Distribution.

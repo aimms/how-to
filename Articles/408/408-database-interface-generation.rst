@@ -1,6 +1,10 @@
 Database Interface Generation
 ==============================
 
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: Database, Datasource, GetDataSourceProperty, SQLNumberOfColumns, SQLNumberOfTables, SQLColumnData, SQLTableName, Mapping, Database Info, Model Edit Functions
 	:description: This example shows you how the Model Edit functions can be used to generate a link to one or more database tables for your projects.
