@@ -42,8 +42,8 @@ Adding the Library
 To add and use this library to your project, first download the code and after, 
 follow these steps on `how to add an existing library to a project <https://how-to.aimms.com/Articles/84/84-using-libraries.html#add-aimms-libraries>`_.
 
-Main Procedures ``pr_start`` and ``fnc_elapsed``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Main Procedures 
+~~~~~~~~~~~~~~~~
 
 .. aimms:procedure:: pr_start(ep_stopwatch)
 
@@ -84,33 +84,27 @@ Note that ``ep_stopwatch`` is optional, and usually not specified.
 There are ten stopwatches available.
 
 .. code-block:: aimms
-   :linenos:
 
 	Set s_stopwatches {
 		Index: i_stopwatch;
 		Definition: ElementRange(0,9,prefix:"stopwatch-");
 	}
 
-
-The procedure ``pr_scheduleOver``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. aimms:function:: pr_scheduleOver
 
 This is a small frontend to :aimms:func:`ScheduleAt`, and accepts an elapsed time in seconds, (and a payload procedure):
 
 .. code-block:: aimms
-   :linenos:
 
 	Procedure pr_scheduleOver {
 		Arguments: (p_noSeconds,ep_payLoad);
 	}
 
-The function ``fnc_now``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. aimms:function:: fnc_now
 
 The current time, up to seconds precise, timezone UTC is often used to mark moments, and log events.
 
 .. code-block:: aimms
-   :linenos:
 
 	Function fnc_now {
 		Range: string;
