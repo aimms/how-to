@@ -90,7 +90,7 @@ There are ten stopwatches available.
 		Definition: ElementRange(0,9,prefix:"stopwatch-");
 	}
 
-.. aimms:function:: pr_scheduleOver
+.. aimms:procedure:: pr_scheduleOver
 
 This is a small frontend to :aimms:func:`ScheduleAt`, and accepts an elapsed time in seconds, (and a payload procedure):
 
