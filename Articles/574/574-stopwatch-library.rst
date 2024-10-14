@@ -42,8 +42,8 @@ Adding the Library
 To add and use this library to your project, first download the code and after, 
 follow these steps on `how to add an existing library to a project <https://how-to.aimms.com/Articles/84/84-using-libraries.html#add-aimms-libraries>`_.
 
-Main Procedures start and elapsed
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Main Procedures ``pr_start`` and ``fnc_elapsed``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. aimms:procedure:: pr_start(ep_stopwatch)
 
@@ -92,8 +92,32 @@ There are ten stopwatches available.
 	}
 
 
-Basic Example:
-""""""""""""""" 
+The procedure ``pr_scheduleOver``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is a small frontend to :aimms:func:`ScheduleAt`, and accepts an elapsed time in seconds, (and a payload procedure):
+
+.. code-block:: aimms
+   :linenos:
+
+	Procedure pr_scheduleOver {
+		Arguments: (p_noSeconds,ep_payLoad);
+	}
+
+The function ``fnc_now``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The current time, up to seconds precise, timezone UTC is often used to mark moments, and log events.
+
+.. code-block:: aimms
+   :linenos:
+
+	Function fnc_now {
+		Range: string;
+	}
+
+Basic Example
+~~~~~~~~~~~~~~~ 
 
 Below there is an example of usage for measuring ``pr_longRunningProcedure`` execution time. 
 Line-7 is simply constructing a message using the stopwatch results. 
@@ -109,8 +133,8 @@ Line-7 is simply constructing a message using the stopwatch results.
    ! Reporting of that time:
    sp_runTime := formatString("Execution of procedure took %n seconds", p_elapsedTime );
 
-Ëxtended Example:
-"""""""""""""""""""" 
+Extended Example
+~~~~~~~~~~~~~~~~~~ 
 
 The default stopwatch for both ``pr_start`` and ``fnc_elapsed`` is ``'stopwatch-0'``. 
 When this stopwatch is "in use", it is not possible to use this stopwatch for another 
@@ -129,31 +153,6 @@ you can use another stopwatch; leading to the code:
    sp_runTime := formatString("Execution of procedure pr_thisSpecificTask took %n seconds", 
 	   p_elapsedTimeSpecific );
 
-
-The proc scheduleOver
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-This is a small frontend to :aimms:func:`ScheduleAt`, and accepts an elapsed time in seconds, (and a payload procedure):
-
-.. code-block:: aimms
-   :linenos:
-
-	Procedure pr_scheduleOver {
-		Arguments: (p_noSeconds,ep_payLoad);
-	}
-
-The func Now
-~~~~~~~~~~~~~~~~~~
-
-The current time, up to seconds precise, timezone UTC is often used to mark moments, and log events.
-
-.. code-block:: aimms
-   :linenos:
-
-	Function fnc_now {
-		Range: string;
-	}
-
 Minimal Requirements
 ----------------------
 
@@ -162,6 +161,9 @@ Minimal Requirements
 Release Notes
 --------------
 
+`v1.3 <https://github.com/aimms/stopwatch-library/releases/tag/1.3>`_ (10/10/2024)
+   Added ``fnc_now``, ``pr_scheduleOver``, and the stopwatch optional argument to ``pr_start``, and ``pr_elapsed``.
+
 * In 2011, Guido Diepen developed the first Stopwatch section and blogged about it.
 
 * In 2022, Chris Kuip made a small library out of that section, to
@@ -169,8 +171,6 @@ Release Notes
   * ease even further the adding of the functionality to an application, and
 
   * to cater for multi timezone support, see option Use_UTC_forcaseandstartenddate
-
-* In October 2024, Added ``Now``, ``ScheduleOver``, and the stopwatch optional argument to ``pr_start``, and ``pr_elapsed``.
 
 
 .. spelling:word-list::
