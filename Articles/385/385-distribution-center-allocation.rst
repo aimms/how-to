@@ -1,5 +1,10 @@
 Distribution Center Allocation
 ==================================
+
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 .. meta::
    :keywords: Distribution Center Allocation, Center of Gravity, Minimize Expected Transportation Cost, Maximize Service Level, Excel, Spreadsheet, Network object, GIS, longitude, latitude, supply chain
    :description: This example looks at some common ways to determine the location of distribution centers in a supply chain.

@@ -17,6 +17,10 @@
 Power Systems Planning - Methods and Applications
 ======================================================
 
+.. warning::
+   This article references outdated technology and is provided for historical purposes only. 
+   It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
 
 In this document a brief overview of methods and applications of planning in power systems is outlined. Normally, power system planning is required for continuous safe and reliable operation of electricity grids as well as energy networks. In electric power systems, depending on the planning timescale, we can have both long-term planning problems concerning investment in infrastructure and procurement of additional capacity, and short-term planning problems concerning the optimisation of the operation of already existing infrastructure and assets within an electricity network. In this section we only consider short-term planning problems which come in two forms depending on their timescale and required outcome: 
 
