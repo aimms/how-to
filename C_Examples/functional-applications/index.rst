@@ -30,7 +30,7 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
       Analyzes historical demand data from a cookie factory to forecast future demand. With the goal to analyze various forecasting algorithms to determine the best fit for the factory, improving understanding and reducing waste.
 
    .. grid-item-card:: Bias in AI
-      :img-top: ../../Articles/623/images/project.gif
+      :img-top: ../../Articles/623/images/project-960-high.gif
       :link: https://how-to.aimms.com/Articles/623/623-bias-in-ai.html
 
       Shows how machine learning bias can be illustrated by creating an AIMMS front-end for a Python application that teaches about ethics-related bias using data from Kaggle.
