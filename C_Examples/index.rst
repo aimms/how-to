@@ -45,13 +45,13 @@ Demo Applications
       Explores alternative pairings of Santa's reindeer based on their preferences to determine if better arrangements exist beyond the traditional Christmas lineup.
 
    .. grid-item-card:: Traveling Salesman
-      :img-top: ../Articles/397/images/project.gif
+      :img-top: ../Articles/397/images/project-960-high.gif
       :link: https://how-to.aimms.com/Articles/397/397-traveling-salesman.html
 
       Demonstrates various methods for solving the Traveling Salesman Problem (TSP), which seeks the optimal route among a set of locations based on distance.
 
    .. grid-item-card:: Vessel Scheduling
-      :img-top: ../Articles/590/images/project.png
+      :img-top: ../Articles/590/images/project-960-high.gif
       :link: https://how-to.aimms.com/Articles/590/590-vessel-scheduling.html
 
       Plans efficient cargo delivery with oil tankers, minimizing costs while ensuring each vessel carries one cargo within set time windows.

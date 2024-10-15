@@ -14,6 +14,9 @@ Vessel Scheduling
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-support-updates-67/vessel-scheduling-example-1773
 
+.. image:: images/project-1920-high.gif
+   :align: center
+
 |
    
 Story
