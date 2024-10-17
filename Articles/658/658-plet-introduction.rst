@@ -85,8 +85,12 @@ while users benefit from clear progress updates and informative error messages.
 Architecture
 ^^^^^^^^^^^^
 
+The architecture consists of several components:
+
 .. image:: images/pletR-context.jpg
     :align: center
+
+#.  It starts with a service of interest, in the remainder called the **macro service**.
 
 
 Index
@@ -98,3 +102,6 @@ Index
    /Articles/658/658-pletR-application
    /Articles/658/658-plet-library
 
+.. spelling:word-list::
+
+   observability
