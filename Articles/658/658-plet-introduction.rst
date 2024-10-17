@@ -90,13 +90,19 @@ The architecture consists of several components:
 .. image:: images/pletR-context.jpg
     :align: center
 
-#.  It starts with a service of interest, in the remainder called the **macro service**.
+#.  A service of interest. Tasks executed by such a service are called **focus tasks** in the remainder.
 
-#.  The logging statement in this macro service record events in the MySQL database schema **plet**.
+#.  Logging statements executed by a focus task are recorded in the MySQL database schema **plet**.
 
 #.  The AIMMS application **pletR** reads that database, and provides:
 
-	#.  An 
+	#.  Overviews and details on the focus tasks ran.
+	
+	#.  Follow window on progress of a selected focus task.
+	
+    #.  A service that passes the followed progress on.
+
+#.  A client application that launches a focus task may subsequently use the follow service.
 
 
 Index
