@@ -92,6 +92,12 @@ The architecture consists of several components:
 
 #.  It starts with a service of interest, in the remainder called the **macro service**.
 
+#.  The logging statement in this macro service record events in the MySQL database schema **plet**.
+
+#.  The AIMMS application **pletR** reads that database, and provides:
+
+	#.  An 
+
 
 Index
 ^^^^^^^^^^^^
@@ -105,3 +111,6 @@ Index
 .. spelling:word-list::
 
    observability
+   gitignore
+   plet
+   pletR
