@@ -3,7 +3,7 @@ The library AimmsPLET
 
 The **AimmsPLET** library contains functions an AIMMS application with service for long running tasks
 could use to record interesting events.
-This library uses the prefix **plet**, and therefore often refered to as **plet** instead of **AimmsPLET**.
+This library uses the prefix **plet**, and therefore often referenced to as **plet** instead of **AimmsPLET**.
 
 .. image:: images/Historische_Steinwalzeim_Aboretum_Ellerhoop_large.jpg
     :align: center
@@ -75,7 +75,7 @@ Remarks:
 
 #.  Line 18: 
     Finish recording the task, it will also fill in the stop time for that task   
-    signalling any followers of that task to stop.
+    signaling any followers of that task to stop.
 
 #.  Line 22: 
     Mark this procedure as a service.
@@ -123,4 +123,4 @@ The provided functions are:
    plet
    errh
    gmp
-   
+   PendingErrors
