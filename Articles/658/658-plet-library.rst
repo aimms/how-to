@@ -11,3 +11,6 @@ The provided global identifiers are:
 
 The provided functions are:
 
+.. spelling:word-list::
+
+   gitignore

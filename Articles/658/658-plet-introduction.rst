@@ -96,14 +96,19 @@ The architecture consists of several components:
 
 #.  The AIMMS application **pletR** reads that database, and provides:
 
-	#.  Overviews and details on the focus tasks ran.
+	*   Overviews and details on the focus tasks ran.
 	
-	#.  Follow window on progress of a selected focus task.
+	*   Follow window on progress of a selected focus task.
 	
-    #.  A service that passes the followed progress on.
+    *   A service that passes the followed progress on, called **follow service** in the remainder.
 
 #.  A client application that launches a focus task may subsequently use the follow service.
 
+Additionally, the **pletR** application sets up 
+
+*   The database schema **plet**, and
+
+*   A regularly executed task, typically nightly, to delete outdated log information.
 
 Index
 ^^^^^^^^^^^^

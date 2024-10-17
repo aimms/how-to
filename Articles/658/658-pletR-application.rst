@@ -9,3 +9,6 @@ Provides monitoring
 
 Provides services
 
+.. spelling:word-list::
+
+   pletR
