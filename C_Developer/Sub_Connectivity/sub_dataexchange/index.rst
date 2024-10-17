@@ -25,4 +25,6 @@ These topics help you to use the Data Exchange Library with your AIMMS project.
    /Articles/599/599-Integrating-Python-with-AIMMS
    Sub_OpenAPI/index
    Sub_Develop_Service/index
+   /Articles/658/658-plet-introduction
+   
 
