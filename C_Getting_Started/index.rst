@@ -17,8 +17,6 @@ These topics provide fundamentals about using and customizing AIMMS. Learn about
 .. toctree::
    :maxdepth: 1
         
-   /Articles/232/232-display-line-numbers
-   /Articles/225/225-change-syntax-highlighting-colors
    /Articles/135/135-UTF8-Encoding
    /Articles/208/208-setting-options
    /Articles/609/609-link-solvers
