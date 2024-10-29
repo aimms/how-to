@@ -1,5 +1,5 @@
-Share an AIMMS Project
-========================
+Sharing AIMMS Project Files
+===========================
 
 .. meta::
    :keywords:
@@ -9,7 +9,7 @@ Share an AIMMS Project
 This article gives you an overview of the folder structure of an AIMMS project, and how to share your project with other developers.
 
 
-AIMMS project folder structure
+AIMMS Project Folder Structure
 ----------------------------------
 
 When you create a new AIMMS project, multiple folders and files are initialized. The project folder, or the root folder will have the name you specified (*Demo* in the below example). 
@@ -40,11 +40,11 @@ So, the ``<ModelFileName>`` in line #3 of the ``Project.xml`` file should always
 
 If any libraries are added to the project, additional files and folders will be created in the root folder or inside the MainProject folder. 
 
-Sharing a project
+Sharing a Project
 --------------------
 To share your project with other developers, you need to zip the entire project folder (not just the ``.aimms`` file). 
 
-Right-click on the project folder and go to *Send to > Compressed (zipped) folder*. 
+Right-click on the project folder and go to :menuselection:`Send to > Compressed (zipped) folder`. 
 
 The resulting ZIP file will contain all of the project files in a more portable format.
 
@@ -53,7 +53,7 @@ The resulting ZIP file will contain all of the project files in a more portable 
    If you have imported data from external sources, such as Excel files or databases, 
    it is also helpful to share a data case file in your project.
 
-   To save a data case go to *Data > Save Case as*.
+   To save a data case go to :menuselection:`Data > Save Case as`.
 
 
 Related Topics
