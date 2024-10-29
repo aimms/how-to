@@ -33,21 +33,24 @@ With this setting enabled, line numbers appear next to all attributes that span 
 
    Line numbers displayed in multiline attributes
 
-### Jump to Specific Line Number
+Jump to Specific Line Number
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can quickly navigate to a particular line number using the keyboard shortcut ``Ctrl + G`` or by selecting *Edit > Goto Line* in the menu. This will open a dialog where you can specify the line number to jump to.
+You can quickly navigate to a particular line number using the keyboard shortcut ``Ctrl + G`` or by selecting :menuselection:`Edit > Goto Line` in the menu. This will open a dialog where you can specify the line number to jump to.
 
 .. figure:: images/go-to-line.png
    :alt: Jump to specific line number by pressing Ctrl + G
 
-   Jump to specific line number by pressing Ctrl + G
+   Jump to specific line number by pressing ``Ctrl + G``
 
-**Note:** The *Goto Line* function is available even when line numbers are hidden.
+.. note::
+   
+   The :menuselection:`Goto Line` function is available even when line numbers are hidden.
 
 Customizing Syntax Highlighting
 -------------------------------
 
-AIMMS applies a default syntax highlighting theme to help you quickly interpret various elements in the Editor. However, you can modify the colors for different identifier types, such as variables or keywords, to suit your preferences.
+AIMMS Optimization Tooling applies a default syntax highlighting theme to help you quickly interpret various elements in the Editor. However, you can modify the colors for different identifier types, such as variables or keywords, to suit your preferences.
 
 For instance, in the following image, the variable ``Assignments`` is highlighted in green:
 
@@ -58,8 +61,8 @@ For instance, in the following image, the variable ``Assignments`` is highlighte
 
 To customize syntax highlighting:
 
-1. Go to *Settings > Editor Settings*. A settings dialog will appear.
-2. In the *Style Type* section on the left, select the identifier type you want to modify.
+1. Go to :menuselection:`Settings > Editor Settings`. A settings dialog will appear.
+2. In the :menuselection:`Style Type` section on the left, select the identifier type you want to modify.
 3. Adjust the display settings on the right to change the color, style (e.g., bold, italic, underline), or other attributes.
 
 .. figure:: images/editor-settings-style-identifier.png
@@ -67,17 +70,18 @@ To customize syntax highlighting:
 
    Editor settings for identifiers
 
-In addition to identifiers, you can customize the styling for comments, keywords, and other elements by selecting *AIMMS* in the *Style Type* section.
+In addition to identifiers, you can customize the styling for comments, keywords, and other elements by selecting :menuselection:`AIMMS` in the :menuselection:`Style Type` section.
 
 .. figure:: images/editor-settings-style-aimms.png
    :alt: Editor settings for AIMMS elements
 
    Editor settings for AIMMS elements
 
-### Importing and Exporting Style Settings
+Importing and Exporting Style Settings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can save your style settings as an ``.xml`` file, which allows you to share custom configurations with others in your organization. Use the *Import* and *Export* buttons in the *Editor Settings* dialog to manage these files.
+You can save your style settings as an ``.xml`` file, which allows you to share custom configurations with others in your organization. Use the :menuselection:`Import` and :menuselection:`Export` buttons in the :menuselection:`Editor Settings` dialog to manage these files.
 
-AIMMS' in-house Editor settings, as seen in How-To articles and User Support training materials, are available for download below:
+Below, you can download the Editor Settings used troughout How-To articles and E-Learning courses:
 
 :download:`AIMMS Editor Settings <downloads/EditorSettingsCommunity.xml>`
