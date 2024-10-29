@@ -71,6 +71,7 @@
     /Articles/363/363-getting-started-aimms
     C_Getting_Started/index
     licensing/index
+    aimms-ide/index
     C_Developer/index
     C_UI/index
     C_Deployment/index
