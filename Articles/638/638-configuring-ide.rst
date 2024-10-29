@@ -88,6 +88,6 @@ Importing and Exporting Style Settings
 
 You can save your style settings as an ``.xml`` file, which allows you to share custom configurations with others in your organization. Use the :menuselection:`Import` and :menuselection:`Export` buttons in the :menuselection:`Editor Settings` dialog to manage these files.
 
-Below, you can download the Editor Settings used troughout How-To articles and E-Learning courses:
+Below, you can download the Editor Settings used throughout How-To articles and E-Learning courses:
 
 :download:`AIMMS Editor Settings <downloads/EditorSettingsCommunity.xml>`

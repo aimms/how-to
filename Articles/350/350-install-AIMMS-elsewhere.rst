@@ -1,103 +1,79 @@
-Install AIMMS in another location
-=================================
+Installing AIMMS 
+=================
 
 .. meta::
-    :description: Installing AIMMS, making it available for all users, and perhaps even on a non-default location.
-    :keywords: AIMMS, Installation, all users, disk drive
+   :description: Guide to installing AIMMS in a custom location and making it available for all users.
+   :keywords: AIMMS, installation, all users, disk drive, custom location
 
-To install AIMMS on your own laptop is usually easy, just download the version of your choice from `our downloads page <https://www.aimms.com/support/downloads>`_ and run the self-extracting file, for instance ``Aimms-4.73.1.3-x64-VS2017.exe``.
-It will extract the actual program in ``%localappdata%\AIMMS\IFA\Aimms\`` and start it.
+Installing AIMMS is straightforward. Simply download your chosen version from the `AIMMS downloads page <https://www.aimms.com/support/downloads>`_ and run the installer, such as ``Aimms-4.73.1.3-x64-VS2017.exe``. This installs AIMMS in the default location: ``%localappdata%\AIMMS\IFA\Aimms\``.
 
-We also recommended to download and install the `AIMMS launcher <https://www.aimms.com/support/downloads#aimms-other-download>`_. 
-The latest version can be downloaded from the same page. 
-The functionalities of AIMMS Launcher are:
+We recommend also downloading and installing the `AIMMS Launcher <https://www.aimms.com/support/downloads#aimms-other-download>`_ from the same page. The AIMMS Launcher offers the following features:
 
-* Double click on a ``.aimms`` file will open the AIMMS project, with the AIMMS version that was used to last modify that project, or, if that AIMMS release cannot be found, using the most recent AIMMS version available on your computer.
-
-* Add the below options to the context menu when you right click on a ``.aimms`` file. 
+* Double-clicking a ``.aimms`` file opens the project with the AIMMS version that last modified it, or, if unavailable, the most recent installed version.
+* Right-clicking a ``.aimms`` file shows additional options to select a specific AIMMS version for that project.
 
 .. image:: images/aimms-right-click.png
-    :align: center
+   :align: center
 
-With these, you can choose from the AIMMS versions on your computer to launch that project and manage those AIMMS versions; to save disk space.
- 
-The above is sufficient for many people. In the remainder of this article we will discuss how to handle advanced requirements.
+In most cases, this setup suffices. For custom installation requirements, such as installation for all users or to a non-default location, see the sections below.
 
-Installing elsewhere
-----------------------
+Installing in a Custom Location
+-------------------------------
 
-For the following reasons, the default installation location may not be the preferred one:
+You may wish to install AIMMS outside of the default location in these scenarios:
 
-#.  Some organizations have a software policy that prohibits their users to install software in ``%localappdata%``.
+1. **Software Policies**: Your organization may restrict software installation to certain locations, disallowing ``%localappdata%``.
+2. **Disk Space**: Limited disk space on the default drive may necessitate installation on a different drive.
 
-#.  The available disk space on the drive with the ``users`` folder may be limited.
+Starting with AIMMS 4.38, you can install AIMMS in a shared location, like ``C:\Program Files (x86)\AIMMS\IFA``.
 
-You can then install AIMMS in a different location, like ``C:\Program Files (x86)\AIMMS\IFA``. 
-Installation for all users is available since AIMMS 4.38.
+### Ensuring AIMMS Launcher is Up-to-Date
 
-Check version of AIMMS Launcher
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Before you install elsewhere it is strongly recommended to install the most recent version of AIMMS Launcher.
-If you have already have AIMMS Launcher installed, check the version in its properties.
-For example, here is a version that is quite old: ``1.0.0.50``:
+Before proceeding, make sure you have the latest version of AIMMS Launcher. You can check your installed version by viewing its properties. For example, an outdated version might be labeled ``1.0.0.50``:
 
 .. image:: images/LauncherTooOld.png
-    :align: center
+   :align: center
 
-Downloading and installing the AIMMS Launcher again will upgrade the version as:
+Reinstalling the Launcher from the downloads page will update it:
 
 .. image:: images/LauncherRefreshed.png
-    :align: center
-    
-Also, you can install the AIMMS Launcher with elevated rights. 
-It will then be installed in ``C:\Program Files (x86)\AIMMS\IFA\AIMMSLauncher``
+   :align: center
 
-Installing on a different drive
-----------------------------------
+For installations requiring administrative access, install AIMMS Launcher with elevated rights. This will place it in ``C:\Program Files (x86)\AIMMS\IFA\AIMMSLauncher``.
 
-For reasons of disk space, you may want to install AIMMS on a different disk. 
+Installing on a Different Drive
+-------------------------------
 
-The AIMMS installer does not have built in functionality to install on another drive, but using a symbolic link, it is easy to realize.
+To save disk space, you may want to install AIMMS on a different drive. Although the installer doesn’t support custom drives directly, you can accomplish this using a symbolic link.
 
-First create a folder to install AIMMS on the other drive, in the example here drive ``D:``, and we use the folder ``D:\Program Files (x86)\AIMMS\IFA\Aimms``.
+1. Create a target folder for AIMMS on the other drive. In this example, use ``D:\Program Files (x86)\AIMMS\IFA\Aimms``.
 
-Next, using the MS DOS command prompt with elevated (administrator) rights:
+2. Open a command prompt with administrator rights, and navigate to ``C:\Program Files (x86)\AIMMS\IFA``. If this folder doesn’t exist, create it first.
 
-Navigate to ``C:\Program Files (x86)\AIMMS\IFA``.  
-If this folder does not exist, please create it.
+3. Run the following command to create a symbolic link:
 
-Then create a symbolic link as follows:
+   .. code-block:: none
 
-.. code-block:: none
+      mklink /D Aimms "D:\Program Files (x86)\AIMMS\IFA\Aimms"
 
-    mklink /D Aimms "D:\Program Files (x86)\AIMMS\IFA\Aimms"
+   This will produce the following output:
 
-which gives the following output:
+   .. code-block:: none
 
-.. code-block:: none
+      symbolic link created for Aimms <<===>> D:\Program Files (x86)\AIMMS\IFA\Aimms
 
-    symbolic link created for Aimms <<===>> D:\Program Files (x86)\AIMMS\IFA\Aimms
+For more information on symbolic links, see the `Microsoft documentation <https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/mklink>`_.
 
-More on symbolic links can be found `on Microsoft docs <https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/mklink>`_.
+### Installing AIMMS to the New Location
 
-Actually installing elsewhere
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+With the symbolic link in place, you’re ready to install AIMMS in the new location. Run the installer "as administrator" by right-clicking it and choosing "Run as administrator". AIMMS will install to the new location on the D Drive, making it accessible to all licensed users on the machine.
 
-With the above preparations, you are now ready to install AIMMS in a different location. 
-Just launch the installer "as administrator" by right clicking and selecting "as administrator".
+Installing the License
+----------------------
 
-It will install AIMMS in the D Drive folder and make AIMMS available to all licensed AIMMS users of that machine.
+To use AIMMS, you must have a valid license:
 
-Installing the license
------------------------
-
-*  You should have a valid AIMMS license to use AIMMS.  
-   If you do not have one yet, you can request a `free license <https://www.aimms.com/support/licensing/academic-license/>`_
-
-*  Read all about `AIMMS licensing here <https://www.aimms.com/support/licensing/>`_  
-
-*  When using multiple licenses, they can be managed using the `AIMMS Network License server <https://www.aimms.com/support/downloads#aimms-other-download>`_
-
-*  Further licensing `How-Tos <https://how-to.aimms.com/C_Getting_Started/Sub_Licensing/index.html>`_
-
+* If you don’t have one, request a `free academic license <https://www.aimms.com/support/licensing/academic-license/>`_.
+* Learn more about AIMMS licensing on the `AIMMS licensing page <https://www.aimms.com/support/licensing/>`_.
+* If managing multiple licenses, the `AIMMS Network License Server <https://www.aimms.com/support/downloads#aimms-other-download>`_ may be useful.
+* For additional licensing details, see the licensing `How-Tos <https://how-to.aimms.com/C_Getting_Started/Sub_Licensing/index.html>`_.
