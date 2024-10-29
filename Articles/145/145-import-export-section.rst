@@ -5,62 +5,52 @@ Export Code to Another Project
    :description: How to reuse parts of your code in another AIMMS model.
    :keywords: import, export, link, share, reuse, re-use
 
+.. image:: images/code.png
+    :align: right
 
-.. sidebar:: Re-using AIMMS source code.
+When building AIMMS models, you may often find components you’d like to reuse in other projects. 
+For highly reusable components, consider creating an AIMMS library or module. Refer to :doc:`creating-and-managing-a-model/the-model-explorer/creating-and-managing-models` for more details.
 
-    .. image:: images/code.png
-    		    	:align: center
+However, if you only need to export or import identifiers quickly, AIMMS provides a straightforward export/import feature.
 
-
-Sometimes there are parts of a model that you would like to re-use in another AIMMS model. 
-If it is a very generic component, you could choose to create an AIMMS library or an AIMMS module out of it. 
-Please see :doc:`creating-and-managing-a-model/the-model-explorer/creating-and-managing-models`. 
-In the cases that you only want to quickly export/import a set of identifiers once, you can also use the export/import functionality in AIMMS.
-
-Also, on this blog we will provide the AIMMS code where applicable as ``.ams`` files. You  can import these into your existing projects with the instructions found below. In some cases where the whole project is needed (and not only some snippets), we will provide the whole project as an a .zip file.
-
-Exporting a section
+Exporting a Section
 -------------------
 
-Before you start exporting, you should place all the identifiers you wish to export from your current model into one section in your AIMMS model. When you have done this, there are two possible ways of exporting this section:
+To begin exporting, first organize all identifiers you wish to export into a single section within your current AIMMS model. Then, you have two export methods:
 
-* Select the section in the model tree and select Export... in the edit menu
-* Use the source attribute of the section identifier to store the section in a separate file
+1. Select the section in the model tree and choose :menuselection:`Edit > Export...`.
+2. Use the source attribute of the section identifier to save it to a separate file.
 
-The first option has the advantage that it requires less steps.
-However, the second approach has the advantage that you can share code among projects.
+The first method is simpler, but the second allows for easier code sharing across projects. 
+By completing the second method’s steps, AIMMS will store all identifiers in the designated `.aim` or `.ams` file rather than in the main project file.
 
-If you do not perform the last two steps, all identifiers declared in the section will not be stored in the main project file anymore, but separately in the .aim or ``.ams`` file that you selected.
+To export a section to an `.ams` file:
 
-To export a copy of a section to a ``.ams`` file, just highlight the section in the model editor and then, via the AIMMS Menu, select export.
+1. Highlight the section in the model editor.
+2. Go to the AIMMS Menu and select :menuselection:`Edit > Export...`.
 
-To make a section available for sharing among projects, please use the following steps:
+To make a section shareable across projects, follow these steps:
 
-* Open attribute window of the section you wish to export
-* Select wizard button of the source file attribute
-* Select Write in the menu
-* Select the location you want to store the ``.ams`` file
-* Set the filename to what you want and press Save
+1. Open the attribute window of the section you wish to export.
+2. Click the wizard button next to the source file attribute.
+3. Choose :menuselection:`Write` from the menu.
+4. Select the desired storage location for the `.ams` file.
+5. Name the file, then click :menuselection:`Save`.
 
-
-
-Importing a section
+Importing a Section
 --------------------
 
-To import an ``.ams`` file, please use the following steps:
+To import an `.ams` file into your model:
 
-* Create a new section in your model that will hold the identifiers that will be imported
-* Select this section identifier in the model tree
-* In the Edit menu, select Import...
-* Select the ``.ams`` file that you want to import
+1. Create a new section to hold the imported identifiers.
+2. Select this section identifier in the model tree.
+3. In the Edit menu, choose :menuselection:`Edit > Import...`.
+4. Select the `.ams` file you wish to import.
 
-After this, AIMMS will present you with a dialog that shows which identifiers will be imported and which ones are conflicting with already existing identifiers in your model.
+AIMMS will display a dialog showing identifiers to be imported and any conflicts with existing identifiers.
 
 .. note::
-
-    When using the source file attribute of a section, you can store the contents of the section in a separate file (if you do not use the "Remove (keep subtree)..."). Please note that if you use an ``.ams`` file for the source file attribute, changes that are made to this text file with any other program (e.g. a text editor or version management system) while the AIMMS project is open will not be picked up by AIMMS! Only after you close and re-open the project, will these changes be visible in your project.
-
-
-
-
-
+    
+    If you use the source file attribute for a section, AIMMS stores its contents in a separate file unless “Remove (keep subtree)...” is selected.
+    Note that if changes are made to the `.ams` file outside AIMMS (e.g., in a text editor or version control system) while the project is open, 
+    they won’t be reflected in AIMMS until the project is closed and reopened.
