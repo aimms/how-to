@@ -17,9 +17,5 @@ This section covers topics of app development in the AIMMS IDE. Here are support
    /Articles/638/638-configuring-ide
    /Articles/350/350-install-AIMMS-elsewhere
    /Articles/45/45-share-project-files
-   /Articles/653/653-aimms-launcher
-   /Articles/654/654-aimms-interrupt
-
-    
     
     

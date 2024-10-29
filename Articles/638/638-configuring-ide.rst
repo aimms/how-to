@@ -22,6 +22,7 @@ To enable line numbers in the Editor:
 3. Set the :menuselection:`LineNumberMargin` option to :menuselection:`True`.
 
 .. figure:: images/editor-settings-misc-line-numbers.png
+   :align: center
    :alt: AIMMS IDE Editor settings
 
    AIMMS IDE Editor settings
@@ -29,6 +30,7 @@ To enable line numbers in the Editor:
 With this setting enabled, line numbers appear next to all attributes that span multiple lines, as shown below:
 
 .. figure:: images/multiline-attribute-field-with-linenumbers.png
+   :align: center
    :alt: Line numbers displayed in multiline attributes
 
    Line numbers displayed in multiline attributes
@@ -39,6 +41,7 @@ Jump to Specific Line Number
 You can quickly navigate to a particular line number using the keyboard shortcut ``Ctrl + G`` or by selecting :menuselection:`Edit > Goto Line` in the menu. This will open a dialog where you can specify the line number to jump to.
 
 .. figure:: images/go-to-line.png
+   :align: center
    :alt: Jump to specific line number by pressing Ctrl + G
 
    Jump to specific line number by pressing ``Ctrl + G``
@@ -55,6 +58,7 @@ AIMMS Optimization Tooling applies a default syntax highlighting theme to help y
 For instance, in the following image, the variable ``Assignments`` is highlighted in green:
 
 .. figure:: images/variables_in_green.png
+   :align: center
    :alt: Display variables in green
 
    Display variables in green
@@ -66,6 +70,7 @@ To customize syntax highlighting:
 3. Adjust the display settings on the right to change the color, style (e.g., bold, italic, underline), or other attributes.
 
 .. figure:: images/editor-settings-style-identifier.png
+   :align: center
    :alt: Editor settings for identifiers
 
    Editor settings for identifiers
@@ -73,6 +78,7 @@ To customize syntax highlighting:
 In addition to identifiers, you can customize the styling for comments, keywords, and other elements by selecting :menuselection:`AIMMS` in the :menuselection:`Style Type` section.
 
 .. figure:: images/editor-settings-style-aimms.png
+   :align: center
    :alt: Editor settings for AIMMS elements
 
    Editor settings for AIMMS elements
