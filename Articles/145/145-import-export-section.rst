@@ -5,11 +5,6 @@ Export Code to Another Project
    :description: How to reuse parts of your code in another AIMMS model.
    :keywords: import, export, link, share, reuse, re-use
 
-.. image:: images/code.png
-   :scale: 100
-   :align: right
-   :alt: AIMMS Licensing Help & Support
-
 When building AIMMS models, you may often find components you’d like to reuse in other projects. 
 For highly reusable components, consider creating an AIMMS library or module. Refer to :doc:`creating-and-managing-a-model/the-model-explorer/creating-and-managing-models` for more details.
 
