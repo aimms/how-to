@@ -2,69 +2,61 @@ Sharing AIMMS Project Files
 ===========================
 
 .. meta::
-   :keywords:
-   :description: Overview of files included in the project folder and how to share your AIMMS project with others, such as AIMMS developers or the AIMMS Support Team.
+   :keywords: AIMMS, project sharing, folder structure, project files, AIMMS Support
+   :description: Guide to AIMMS project folder structure and sharing your project with other developers or AIMMS Support.
 
-
-This article gives you an overview of the folder structure of an AIMMS project, and how to share your project with other developers.
-
+This article explains the structure of an AIMMS project folder and provides instructions for sharing your project files with others, such as developers or the AIMMS Support Team.
 
 AIMMS Project Folder Structure
-----------------------------------
+------------------------------
 
-When you create a new AIMMS project, multiple folders and files are initialized. The project folder, or the root folder will have the name you specified (*Demo* in the below example). 
+When you create a new AIMMS project, several essential folders and files are generated within the project root folder (named after your project; **Demo** in the example below).
 
 .. image:: images/new-project-folders.png
    :align: center
 
 |
 
-The below three files are always created and necessary to open an AIMMS project. 
+The following three files are always created and are essential for opening an AIMMS project:
 
-#. ``Demo.aimms`` : this is an executable (if the AIMMS Launcher is installed) file which launches the AIMMS Developer IDE. 
-#. ``Demo.ams`` : the model source file which contains all the identifier declarations created in an AIMMS project. Version control systems track this file to track changes made in your model. 
-#. ``Project.xml`` : contains information about the version of the AIMMS project and links the ``Demo.aimms`` file to the ``Demo.ams`` file. 
+1. **``Demo.aimms``**: An executable file that opens the AIMMS IDE when the AIMMS Launcher is installed.
+2. **``Demo.ams``**: The primary model source file containing all identifier declarations in your project. This file is essential for version control to track changes in your model.
+3. **``Project.xml``**: Stores project metadata, including the AIMMS version and links the ``Demo.aimms`` file to the ``Demo.ams`` file. A sample structure is shown below:
 
-.. code-block:: xml
-   :linenos:
+   .. code-block:: xml
+      :emphasize-lines: 3
+      :linenos:
 
-   <?xml version="1.0"?>
-   <Project AimmsVersion="4.63.2.5 unicode x64" ProjectUUID="D3D989F2-FB95-4F29-98E6-A56D9DD245A7">
-      <ModelFileName>Demo.ams</ModelFileName>
-      <AutoSaveAndBackup>
-         <DataBackup AtRegularInterval="true" EveryNMinutes="15" NumBackupsDatedToday="3" NumDaysBeforeToday="3" />
-      </AutoSaveAndBackup>
-   </Project>
+      <?xml version="1.0"?>
+      <Project AimmsVersion="24.5.8.5 unicode x64" ProjectUUID="74B0C523-8BD6-4BE1-B50B-66CA17BF886B">
+         <ModelFileName>Demo.ams</ModelFileName>
+         <AutoSaveAndBackup>
+            <DataBackup AtRegularInterval="true" EveryNMinutes="15" NumBackupsDatedToday="3" NumDaysBeforeToday="3" />
+         </AutoSaveAndBackup>
+      </Project>
 
-So, the ``<ModelFileName>`` in line #3 of the ``Project.xml`` file should always be same as the name of the ``.ams`` file, both of which are inside the MainProject folder. When you click on ``Demo.aimms`` file, it will load the ``Demo.ams`` file into the IDE as specified in the ``Project.xml`` file. 
 
-If any libraries are added to the project, additional files and folders will be created in the root folder or inside the MainProject folder. 
+   In line 3, ``<ModelFileName>`` should match the ``.ams`` file name. Clicking the ``Demo.aimms`` file loads the corresponding ``Demo.ams`` file in the IDE as specified in the ``Project.xml`` file.
+
+If additional libraries are added to the project, they will appear as extra files and folders within the main project folder.
 
 Sharing a Project
---------------------
-To share your project with other developers, you need to zip the entire project folder (not just the ``.aimms`` file). 
+-----------------
 
-Right-click on the project folder and go to :menuselection:`Send to > Compressed (zipped) folder`. 
+To share your project with other developers or AIMMS Support, compress the entire project folder (not just the ``.aimms`` file).
 
-The resulting ZIP file will contain all of the project files in a more portable format.
+1. Right-click the project folder and select :menuselection:`Send to > Compressed (zipped) folder`.
+   
+   This ZIP file will contain all necessary project files for easy sharing.
 
 .. note::
 
-   If you have imported data from external sources, such as Excel files or databases, 
-   it is also helpful to share a data case file in your project.
+   If your project imports data from external sources, like Excel files or databases, consider including a saved data case file. 
+   
+   To save a data case, navigate to :menuselection:`Data > Save Case as`.
 
-   To save a data case go to :menuselection:`Data > Save Case as`.
-
-
-Related Topics
-----------------
-
-* :doc:`../151/151-version-control-aimmspack-backup`
-
-* :doc:`../145/145-import-export-section`
-
-* :doc:`../95/95-change-default-ui`
-
-
-
-
+.. seealso::
+      
+   * :doc:`../151/151-version-control-aimmspack-backup`
+   * :doc:`../145/145-import-export-section`
+   * :doc:`../95/95-change-default-ui`
