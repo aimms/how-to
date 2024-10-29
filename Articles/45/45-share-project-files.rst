@@ -19,9 +19,9 @@ When you create a new AIMMS project, several essential folders and files are gen
 
 The following three files are always created and are essential for opening an AIMMS project:
 
-1. **``Demo.aimms``**: An executable file that opens the AIMMS IDE when the AIMMS Launcher is installed.
-2. **``Demo.ams``**: The primary model source file containing all identifier declarations in your project. This file is essential for version control to track changes in your model.
-3. **``Project.xml``**: Stores project metadata, including the AIMMS version and links the ``Demo.aimms`` file to the ``Demo.ams`` file. A sample structure is shown below:
+1. **Demo.aimms**: An executable file that opens the AIMMS IDE when the AIMMS Launcher is installed.
+2. **Demo.ams**: The primary model source file containing all identifier declarations in your project. This file is essential for version control to track changes in your model.
+3. **Project.xml**: Stores project metadata, including the AIMMS version and links the ``Demo.aimms`` file to the ``Demo.ams`` file. A sample structure is shown below:
 
    .. code-block:: xml
       :emphasize-lines: 3
@@ -49,11 +49,9 @@ To share your project with other developers or AIMMS Support, compress the entir
    
    This ZIP file will contain all necessary project files for easy sharing.
 
-.. note::
+   .. note::
 
-   If your project imports data from external sources, like Excel files or databases, consider including a saved data case file. 
-   
-   To save a data case, navigate to :menuselection:`Data > Save Case as`.
+      If your project imports data from external sources, like Excel files or databases, consider including a saved data case file. To save a data case, navigate to :menuselection:`Data > Save Case as`.
 
 .. seealso::
       
