@@ -83,7 +83,7 @@ More modern approaches rely on the development environment to make such a distin
     .. image:: images/hover.png
         :align: center
 
-*   Syntax coloring: color an identifier based on its type, see also :doc:`Type based syntax coloring <../225/225-change-syntax-highlighting-colors>` which provides a tasteful coloring scheme distinguishing parameters (``darkcyan``) from variables (``palevioletred``).
+*   Syntax coloring: color an identifier based on its type, see also :doc:`<../638/638-configuring-ide>` which provides a tasteful coloring scheme distinguishing parameters (``darkcyan``) from variables (``palevioletred``).
 
     .. image:: images/syntax-coloring.png
         :align: center
@@ -210,7 +210,7 @@ References
 
 * `Hungarian notation <https://en.wikipedia.org/wiki/Hungarian_notation>`_
 
-* :doc:`Type based syntax coloring <../225/225-change-syntax-highlighting-colors>`
+* :doc:`<../638/638-configuring-ide>`
 
 * Blog post: `Data Scientists, Your Variable Names Are a Mess. Clean Up Your Code <https://builtin.com/data-science/variable-names>`_
 
