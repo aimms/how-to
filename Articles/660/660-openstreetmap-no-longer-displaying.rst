@@ -1,4 +1,4 @@
-Openstreetmap images missing from network object
+Openstreetmap Images Missing from Network Object
 =================================================
 
 .. \\chrisk-pc\users\chris\OneDrive - AIMMS B.V\Bugs\From ChrisK-PC\OpenERP\761\DELTA Release v4.0.3 (Model in AIMMS 4.8).
@@ -39,16 +39,17 @@ Explanation
 
 OpenstreetMap provides a tile or WMS service free of charge. 
 The "free of charge" provision assumes a fair use policy; 
-if you are using the application heavily, you will need to take a subscription, see also `OpenstreetMap Acceptable Use Policy <https://wiki.openstreetmap.org/wiki/Acceptable_Use_Policy>`_
+if you are using the application heavily, you will need to take a subscription, 
+see also `OpenstreetMap Acceptable Use Policy <https://wiki.openstreetmap.org/wiki/Acceptable_Use_Policy>`_.
 
 Heavy use of other similar services by other providers will also require that you to take a subscription!
 
 The AIMMS WinUI provides software to deploy these GIS services but the AIMMS WinUI does not provide these services themselves.
 
 More information to change to a new service can be found via: 
-Aimms Menu > Help > Contents and Index, and then search for GIS.
+:menuselection:`Help > Contents and Index`, and then search for GIS.
 
-Selected other services
+Selected Other Services
 -------------------------
 
 .. see also: Microsoft Bing Maps Platform APIs Terms Of Use <https://www.microsoft.com/en-us/maps/product>`_ and `Microsoft Bing licensing options <https://www.microsoft.com/en-us/maps/licensing/licensing-options>`_
@@ -57,23 +58,27 @@ Selected other services
 #.  Bing provides their service free or subscripted.
 
 
-    .. note:: Nowadays most web services use an apikey to log in, instead of a username/password. The apikey can be filled in in the username field in the Authentication of a GIS Source:
+    .. note:: 
+        
+        Nowadays most web services use an apikey to log in, instead of a username/password. The apikey can be filled in in the username field in the Authentication of a GIS Source:
 
         .. image:: images/BingApiKeyUse.png
             :align: center
             
-        Here the `sp_BingApiKey` is a string parameter holding the apikey you received from Bing.
+        |
+
+        Here the ``sp_BingApiKey`` is a string parameter holding the apikey you received from Bing.
     
 #.  Mundialis provides the information together with OpenstreetMap:
 
     .. image:: images/mundialis.png
         :align: center
 
-    Please respect the copyright of OpenstreetMap by crediting them using the following link: `© OpenStreetMap Contributors <http://www.openstreetmap.org/copyright>`_ 
+    Please respect the copyright of OpenstreetMap by crediting them using the following link: `© OpenStreetMap Contributors <http://www.openstreetmap.org/copyright>`_.
 
-#.  Yahoo no longer provides a map tile server.  In the AIMMS WinUI, the type "Yahoo" is translated to "OpenstreetMap".
+#.  Yahoo no longer provides a map tile server. In the AIMMS WinUI, the type "Yahoo" is translated to "OpenstreetMap".
 
-Note that the above list is not exhaustive, see `Wikipedia <https://en.wikipedia.org/wiki/Web_Map_Service>`_
+Note that the above list is not exhaustive, see `Wikipedia <https://en.wikipedia.org/wiki/Web_Map_Service>`_.
 
 
 .. 

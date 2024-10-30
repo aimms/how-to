@@ -19,6 +19,6 @@ AIMMS software has evolved over time, to match arising user needs and changes in
    /Articles/95/95-change-default-ui
    /Articles/221/221-adding-a-custom-splash-screen
    /Articles/364/364-even-more-logging-published-apps
-
+   /Articles/660/660-openstreetmap-no-longer-displaying
 
 

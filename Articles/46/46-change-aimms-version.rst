@@ -4,7 +4,8 @@ Update the Project's AIMMS Version
     :description: How to change the AIMMS version of a project.
     :keywords: convert, adapt, update, webui, version, developer, release notes
 
-This article details how to change your project's AIMMS version. In the `Release Notes <https://documentation.aimms.com/release-notes.html>`_ section, AIMMS provides details of each change made in each AIMMS version.
+This article details how to change your project's AIMMS version. In the `Release Notes <https://documentation.aimms.com/release-notes.html>`_ section, 
+AIMMS provides details of each change made in each AIMMS version.
 
 Determining the Current AIMMS Version of Project
 --------------------------------------------------
@@ -44,7 +45,8 @@ If you already have the AIMMS version you want to upgrade to, double-click on it
 
 | 
 
-Here, you can manage all installed versions or install a new one. In this case, `24.1.2.3 <https://documentation.aimms.com/release-notes.html#aimms-24-1-3-release-january-26-2024-build-24-1-3-2>`_ was installed. Click ``Close``. 
+Here, you can manage all installed versions or install a new one. 
+In this case, `24.1.2.3 <https://documentation.aimms.com/release-notes.html#aimms-24-1-3-release-january-26-2024-build-24-1-3-2>`_ was installed. Click ``Close``. 
 Double-click on the newly installed version. 
 
 After selecting the version, AIMMS IDE will open. Select your project and save. Go back to the ``.aimms`` file in the root folder and check if the version is updated. 

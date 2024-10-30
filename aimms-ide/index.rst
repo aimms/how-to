@@ -12,10 +12,9 @@ This section covers topics of app development in the AIMMS IDE. Here are support
    :maxdepth: 1
    :titlesonly:
 
-   /Articles/186/186-keyboard-shortcuts-for-aimms
-   /Articles/145/145-import-export-section
-   /Articles/638/638-configuring-ide
    /Articles/350/350-install-AIMMS-elsewhere
+   /Articles/638/638-configuring-ide
+   /Articles/186/186-keyboard-shortcuts-for-aimms
    /Articles/45/45-share-project-files
-    
+   /Articles/145/145-import-export-section 
     

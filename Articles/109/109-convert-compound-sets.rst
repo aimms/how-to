@@ -1,5 +1,3 @@
-.. IMAGES
-
 .. |SetMappingDeclarations| image:: images/SetMappingDeclarations.png
 
 
@@ -10,15 +8,12 @@ Prepare for the Deprecation of Compound Sets
    :description: Procedure for adapting projects to remove compound sets.
    :keywords: compound, set, convert, adapt, deprecate
 
-.. note:: We are actively updating this topic during the deprecation stages. Your feedback is welcome and appreciated, as it may help others facing the same issue.
 
 .. _Section_Summary:
     
 Summary
 -------
-AIMMS will deprecate compound sets **soon after January 1, 2020**.
-
-The functionality of compound sets can be achieved with a :term:`set mapping<Set mapping>`. 
+AIMMS deprecated compound sets **in January 1, 2020**. The functionality of compound sets can be achieved with a :term:`set mapping<Set mapping>`. 
 
 This document provides a process to replace the compound sets with a set mapping.
 
@@ -28,11 +23,11 @@ This document provides a process to replace the compound sets with a set mapping
 
 * :ref:`Section-Terminology`
 
-For an overview of the rationale and timeline for deprecating compound sets, read **AIMMS Knowledge:** :doc:`109-deprecate-compound-sets-overview`
+For an overview of the rationale and timeline for deprecating compound sets, read :doc:`109-deprecate-compound-sets-overview`.
 
 .. _Section-Identify-Compound-Set: 
 
-Identifying compound sets in your application
+Identifying Compound Sets in your Application
 ---------------------------------------------
 
 A compound set is defined as one of these:
@@ -60,7 +55,7 @@ To identify compound sets in your application,
 
 .. _Section-Conversion-Procedure:
 
-Replacing compound sets with set mapping
+Replacing Compound Sets with Set Mapping
 ---------------------------------------------------
 
 .. sidebar:: Background: Idea behind conversion procedure
@@ -83,7 +78,6 @@ This conversion procedure explains how to convert compound sets to set mappings 
     
     The multitude of steps are too gradually transform the information in cases, pages, and model.
 
-|
 
 .. topic:: Overview of the conversion procedure
 
@@ -119,7 +113,7 @@ This conversion procedure explains how to convert compound sets to set mappings 
 
 .. _Step_conversion_Backup:
 
-Step 1: Create backups of your data
+Step 1: Create Backups of your Data
 ++++++++++++++++++++++++++++++++++++++
 
 The importance of creating backups before starting maintenance on your projects cannot be overemphasized.
@@ -130,7 +124,7 @@ The importance of creating backups before starting maintenance on your projects 
 
 .. _Step_conversion_use_Utility:
 
-Step 2: Add library DeprecateCompoundSetUtilities
+Step 2: Add Library DeprecateCompoundSetUtilities
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The :download:`AIMMS project download <downloads/DeprecateCompoundSets.zip>` provides an example app and utility library ``DeprecateCompoundSetUtilities``. 
@@ -238,7 +232,7 @@ There are two things to watch out for:
 
 .. _Step_conversion_Create_Set_Mapping_declarations:
 
-Step 4: Create Set Mapping declarations
+Step 4: Create Set Mapping Declarations
 ++++++++++++++++++++++++++++++++++++++++
 
 Now let's create a :term:`set mapping<Set mapping>` for each compound set in your model. Group set mappings according to namespace (main model, library or module).
@@ -266,7 +260,7 @@ Now is a good time to save the project, exit AIMMS, and create another backup co
 
 .. _Step_Conversion_Copy_Input_Cases:
 
-Step 5: Create shadow cases
+Step 5: Create Shadow Cases
 ++++++++++++++++++++++++++++++++++++++++
 
 :term:`Shadow cases<Shadow case>` are cases where the compound data is replaced by atomic shadow data.
@@ -285,13 +279,13 @@ You can convert multiple cases contained in one folder using the *Folder* option
 
 .. _Step_Conversion_Adapt_Model:
 
-Step 6: Adapt model to remove compound sets
+Step 6: Adapt Model to Remove Compound Sets
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 This section shows how to convert models using compound sets to use the set mappings created in :ref:`step 3 <Step_conversion_Create_Set_Mapping>` above.
 
-Example case
+Example Case
 ^^^^^^^^^^^^^^^
 
 In this conversion step we will use a running example that contains:
@@ -313,7 +307,7 @@ In this conversion step we will use a running example that contains:
 * A parameter :math:`Q1` declared over the index :math:`i`: :math:`Q1_i`
 
 
-Replace use of tags
+Replace Use of Tags
 ^^^^^^^^^^^^^^^^^^^
 The following Parameter contains a tag referencing a compound set:
 
@@ -337,7 +331,7 @@ You can replace it with a tag referencing a set mapping:
 
 
 
-Replace atomic indexes with set mapping index
+Replace Atomic Indexes with Set Mapping Index
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Consider the declaration of compound data parameter ``P``:
@@ -370,7 +364,7 @@ You can replace this definition by:
         Definition: sum(h|(i,j,k,h) in sMappingSet_C_Relation,p(h));
     }
 
-Replace the function Tuple
+Replace the Function Tuple
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The function ```Tuple`` is a predeclared function to create an element in a compound set from elements in the atomic sets that together form the domain of that compound set.
@@ -392,7 +386,7 @@ With the deprecation of compound sets, ``Tuple`` is no longer supported , and th
         
 .. _Step_Conversion_Move_Indexes:
 
-Step 7: Move compound indexes to set mapping sets
+Step 7: Move Compound Indexes to Set Mapping Sets
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 To ensure :term:`screen definitions<Screen definition>` are not broken, you must move indexes from the declarations of compound sets to the declaration of the corresponding set mapping set.
@@ -406,7 +400,7 @@ To move an index that is declared as part of a set declaration:
 
 .. _Step_Conversion_Backward_Copy:
 
-Step 8: Move shadow cases back to original cases
+Step 8: Move Shadow Cases Back to Original Cases
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 You can convert shadow cases created in :ref:`step 5 <Step_Conversion_Copy_Input_Cases>` back to the original case locations using the same tool in the ``DeprecateCompoundSetUtilities`` library.
@@ -424,7 +418,7 @@ You can convert multiple cases contained in one folder using the *Folder* option
 
 .. _Step_Conversion_Final:
 
-Step 9: Remove the library DeprecateCompoundSetUtilities
+Step 9: Remove the Library DeprecateCompoundSetUtilities
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Now that you have removed compound sets from your project, you can remove the library ``DeprecateCompoundSetUtililities``.
@@ -473,10 +467,5 @@ Glossary of Terms Used
     Shadow parameter
         Consider a parameter ``A``, then a **shadow parameter**, say ``A_Shadow``, is a parameter with the same element values. 
 
-
-
-.. topic:: Further support
-
-    For further information on the deprecation of compound sets, contact `AIMMS Support Team <mailto:support@aimms.com>`_.
 
 
