@@ -2,37 +2,51 @@ EV Charging Location
 =========================
 
 .. meta::
-   :keywords: Decision Support System, Route Optimization, Petrobras Ship Scheduling, Cost-efficient Cargo Delivery, Mathematical Optimization Model, Vessel Allocation Algorithm, WebUI and Python Integration
-   :description: In this practical example, an efficient plan is developed for delivering large cargoes using oil tankers.
+   :keywords: EV charging station optimization, Particle Swarm Optimization, urban EV infrastructure, electric vehicle charging, AIMMS, WebUI, sustainable transportation, cost-effective charging, urban planning, EV infrastructure model
+   :description: Optimize electric vehicle (EV) charging station placement and sizing with Particle Swarm Optimization to enhance accessibility, minimize costs, and support sustainable urban infrastructure.
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Vessel_Scheduling-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_EV_Charging_Locations-blue
    :target: https://github.com/aimms/ev-charging-locations/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Vessel_Scheduling-blue
+.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_EV_Charging_Locations-blue
    :target: https://github.com/aimms/ev-charging-locations
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/
 
-.. image:: images/project-1920-high.gif
-   :align: center
-
 |
    
 Story
 -----
+This example tackles the growing challenge of optimally placing and sizing electric vehicle (EV) 
+charging stations in urban environments. With EV adoption rising, particularly in the United States, 
+the need for accessible and cost-effective charging infrastructure is critical. Many EV owners rely on home charging, but the availability of well-positioned public charging stations supports market growth and alleviates "range anxiety," where drivers worry about running out of power before reaching a charger.
 
-
+The goal is to maximize accessibility and minimize infrastructure costs, taking into account location density, 
+demand patterns, and geographical constraints. To address this, the example uses the Vulture algorithm, a Particle Swarm Optimization (PSO) 
+method adept at solving non-linear, non-convex problems in continuous spaces. By effectively planning charging station deployment, 
+urban planners can enhance EV infrastructure, helping cities advance toward sustainability goals and facilitating the broader shift to cleaner transportation.
 
 Mathematical Model
 ------------------
+In the context of electric vehicle (EV) charging station optimization, the algorithm employs Particle Swarm Optimization (PSO) 
+to explore potential locations and sizes for charging stations. Each "particle" in the swarm represents a possible configuration, 
+and through iterative adjustments based on individual and collective experiences, the algorithm converges towards optimal solutions. 
+The approach effectively navigates complex, non-linear search spaces to enhance accessibility and minimize costs in EV infrastructure planning. 
 
-To appreciate the complexity of the below mathematical formulation, it is important to note that the number of routes grows
-combinatorially with the number of cargos. For instance, with 7 vessels and 20 cargos, the number of routes can
-exceed half a million.
+**Objective**
+Each charging station has a construction cost and maintenance cost. EVs incur a driving cost when traveling to and from a station, 
+as well as a charging cost for each unit of charge that is consumed. Penalty costs are added for EVs that fall out-of-range from their nearest charger. 
+The objective is to position and size the number of charging stations within the given continuous search space at the lowest cost.
+
+**Constraints**
+Several constraints must be applied to ensure that a practical solution can be found. There is an upper limit s_max on the number of stations that may 
+be constructed. Each station may contain a maximum of eight chargers. No more than one vehicle may wait for a charger at any given time and vehicles 
+may not exceed their range to reach a station. The demand for chargers is governed by the probability of an EV visiting a station. The demand for chargers 
+in a region can be estimated by taking the expected value of the probability of visiting a station multiplied by the number of vehicles in that region.
 
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|                                                       Vessel Scheduling Model                                                                        |
+|                                                       EV Charging Location Model                                                                     |
 +=====+=============================================================+==================================================================================+
 | **Sets and indices:**                                                                                                                                |
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
@@ -84,10 +98,6 @@ Language
 
 WebUI Features
 ---------------
-
-On input page, if you click around the graphs, a highlighted cell will appear identifying the last clicked element. 
-The results are displayed in a combination chart (stacked bar chart).
-
 The following WebUI features are used:
 
 - `Text Widget <https://documentation.aimms.com/webui/text-widget.html>`_
@@ -102,30 +112,13 @@ The following WebUI features are used:
 
 - `Page Actions <https://documentation.aimms.com/webui/page-menu.html>`_ 
 
-- `Item Actions <https://documentation.aimms.com/webui/widget-options.html#item-actions>`_
-
-- `Widget Actions <https://documentation.aimms.com/webui/widget-options.html#widget-actions>`_
-
-- `Side Panel <https://documentation.aimms.com/webui/side-panels-grd-pages.html#side-panel-grid-pages>`_
-
-- `Slider Widget <https://documentation.aimms.com/webui/slider-widget.html>`_
-
-- `Button Widget <https://documentation.aimms.com/webui/button-widget.html>`_ 
-
-- `Status Bar <https://documentation.aimms.com/webui/status-bar.html>`_
-
 - `Map Widget <https://documentation.aimms.com/webui/map-widget.html>`_
 
 - `Combination Chart Widget <https://documentation.aimms.com/webui/combination-chart-widget.html>`_
 
-- `Tabbed Widget <https://documentation.aimms.com/webui/tabbed-widget.html>`_
-
-- `Multiselect Widget <https://documentation.aimms.com/webui/selection-widgets.html>`_ 
-
-- `Gantt Chart Widget <https://documentation.aimms.com/webui/gantt-chart-widget.html>`_
-
 - `CSS Annotations <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_
 
+- `Label Widget <https://documentation.aimms.com/webui/label-widget.html>`_ 
 
 UI Styling
 ------------
@@ -139,75 +132,85 @@ Below there are the css files you will find with comments on what they change.
          :linenos:
 
          :root {
-            --primaryDark: #DA2063;
-            --primaryDarker: #FF4940;
-            --secondary90Transparent: #ff4a4023;
-            --secondary: #2E324F;
+            /*---------------------------------------------------------------------
+                  COLORS
+            ----------------------------------------------------------------------*/
+            --primary: #3DDAB4;
+            --primaryDark: #00B569;
+            --primary90Transparent: #3ddab33b;
 
-            --bg_app-logo: 15px 50% / 40px 40px no-repeat url(/app-resources/resources/images/schedule.png); /*app logo*/
-            --spacing_app-logo_width: 60px;
-            --color_border_app-header-divider: var(--secondary); /*line color after header*/
 
-            --color_workflow-item-divider: var(--secondary90Transparent); /*workflow step divider color*/
-            --color_bg_workflow_current: var(--primaryDark); /*bg color when step is selected*/
-            --color_workflow_active: var(--primaryDark); /*font and icon color when step is active*/
-            --color_workflow-icon-border: var(--primaryDark); /*round border of the step*/
-            --color_bg_workflow_active: #ff4a400e;;
-
+            --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/budgeting.png); /*app logo*/
+            --spacing_app-logo_width: 45px;
+            --color_border_app-header-divider: var(--primaryDark); /*line color after header*/
             --color_bg_app-canvas: url(/app-resources/resources/images/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain; /*background color*/
-            --color_bg_widget-header: linear-gradient(90deg, rgba(255,73,64,0.75) 0%, rgba(218,32,99,0.75)  100%); /*widget header background color*/
-            --border_widget-header: 2px solid var(--secondary); /*line color after widget header*/
-
-            --color_text_widget-header: var(--secondary); 
-            --color_text_edit-select-link: var(--primaryDark);
+            --border_widget-header: 1px solid var(--primaryDark); /*line color after widget header*/
 
             --color_bg_button_primary: var(--primaryDark);
-            --color_bg_button_primary_hover: var(--primaryDarker);
-         }
+            --color_bg_button_primary_hover: var(--primary);
+            --color_text_edit-select-link: var(--primaryDark);
+            --color_text_edit-select-link_hover:  var(--primary);
 
+            /*---------------------------------------------------------------------
+                  WORKFLOW
+            ----------------------------------------------------------------------*/
+            /* Header text*/
+            --color_workflow-header: #505767;
+               
+            /* Step background and content (text, icon) colors for the 4 states*/
+            /*current + current with error*/
+            --color_bg_workflow_current: var(--primaryDark);
+            --color_workflow_current: var(--color_text_inverted);
+            --color_bg_workflow_error-current: #d1454b;
+
+            /*active*/
+            --color_bg_workflow_active: #e6edff;
+            --color_workflow_active: var(--primaryDark);
+            
+            /*inactive*/
+            --color_bg_workflow_inactive: #dde0e8;
+            --color_workflow_inactive: #b0b5c2;
+            
+            /*error*/
+            --color_bg_workflow_error: #f9e9e9;
+            --color_workflow_error: #d1454b;
+            
+            /* Child indentation, border colors */
+            --spacing_workflow-child-indent: 1rem;
+            --color_workflow-item-divider: var(--primaryDark);
+            
+            /* Icon background, border, for non-error state */
+            --color_bg_workflow-icon: #ffffff;
+            --color_workflow-icon-border: var(--primaryDark);
+         }
 
    .. tab-item:: annotation.css
 
       .. code-block:: css
          :linenos:
 
-         /*Hide checkbox contents of delete and edit annotations*/
-         .annotation-edit-element input.boolean-cell-editor-contents,
-         .annotation-delete-element input.boolean-cell-editor-contents{
-            visibility: hidden;
-            display: block;	
+         .annotation-bkg-cell {
+            background: var(--primary90Transparent);
          }
 
-         .annotation-edit-element {
-            background: white url(img/pencil.png) no-repeat 50%/contain; 
-            background-size: auto 70% ;
+         .annotation-bkg-cell-default {
+            background: var(--primary90Transparent);
          }
 
-         .annotation-delete-element {
-            background: white url(img/minus.png) no-repeat 50%/contain; 
-            background-size: auto 50% ;
-
+         .annotation-bkg-cell-default input{
+            color: transparent;
          }
 
-         .annotation-NotInUse,
-         .annotation-DeliveringPort,
-         .annotation-VisibleLocations{
-            fill: #FE493F;
-            background: #FE493F !important;
+         .annotation-reach-maximum {
+            background: rgba(255, 0, 0, 0.438);
          }
 
-         .annotation-InUse,
-         .annotation-LoadingPort{
-            fill: #9E3869;
-            background: #9E3869 !important;
+         .annotation-reach-minimum {
+            background: rgba(255, 255, 0, 0.438);
          }
 
-         .annotation-not-fulfilled{
-            background: #ffc21b2c;
-         }
-
-         .annotation-highlight-cell {
-            background: var(--secondary90Transparent);
+         .annotation-between {
+            background: rgba(0, 128, 0, 0.438);
          }
 
    .. tab-item:: custom.css
@@ -215,57 +218,28 @@ Below there are the css files you will find with comments on what they change.
       .. code-block:: none
          :linenos:
 
+         /*Change table default text color*/
+         .tag-table .grid-viewport .cell.flag-default, 
+         html:not(.using-touch) .tag-table .grid-viewport .cell.flag-default {
+            color: white;
+         }
+
          /*Centering cells*/
-         .tag-table .cell.flag-string .cell-wrapper,
+         .tag-table .cell.flag-string .cell-wrapper, 
          .tag-table .cell.flag-number input,
          .tag-table .cell.flag-string input{
             text-align: center;
-         }
-
-         .tag-slider .slider-value {
-            color: var(--color_text_edit-select-link);
-         }
-
-         .widget-menu__item .title {
-            color: var(--color_text_app-footer);
-         }
-
-         .ql-snow a {
-            color: var(--color_text_edit-select-link) !important;
-         }
-
-         input.boolean-cell-editor-contents {
-            accent-color: var(--primaryDark) /*boolean color*/
-         }
-
-         .react-contextmenu .react-contextmenu-item .display-text {
-            color: inherit;
-         }
-
-         .aimms-widget[data-widget\.uri="scl_EditAddElements"] .awf-dock.top,
-         .aimms-widget[data-widget\.uri="msl_selecRoutes"] .awf-dock.top,
-         .aimms-widget[data-widget\.uri="MappingCargoesWithCollors_1"] .awf-dock.top,
-         .aimms-widget[data-widget\.uri="Vessel loading_1"] .awf-dock.top{
-            display: none;
-         }
-
-         .status-message:hover,
-         .status-message.clickable:hover .status-display-text { 
-            background-color: #ffcdcb2d;
-            color: #505767;
          }
 
 Minimal Requirements
 ----------------------
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example. 
-To run the Python client, you will need to have Python installed, for this example we used Python 3.11. 
 
 References
 -----------
 
-#.  Gustavo Diz, Luiz Felipe Scavarda, Roger Rocha, Silvio Hamacher (2014) Decision Support System for 
-PETROBRAS Ship Scheduling. Interfaces 44(6):555-566.
+
 
 Release Notes
 --------------------
@@ -275,10 +249,3 @@ Release Notes
 
 .. spelling:word-list::
 
-   primaryDark
-   ddab
-   bg
-   cargos
-   coords
-   haversine
-   combinatorially
