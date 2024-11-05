@@ -6,7 +6,7 @@ Convert Files from DAT to DATA
 
 
 Overview and Comparison of File Types
------------------------------------
+-----------------------------------------
 
 The timeline for replacing ``.dat`` with ``.data`` files is as follows:
 
