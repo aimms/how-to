@@ -55,7 +55,7 @@ Consuming REST-API
 
 See also :doc:`Error message tlsv1 alert protocol version <../496/496-tls-connection-version>`
 
-Relating evolutions
+Relating Evolutions
 -----------------------------------------
 
 AIMMS Evolution related to TLS evolution is as follows:
@@ -76,7 +76,7 @@ AIMMS Evolution related to TLS evolution is as follows:
 
     #.  Since AIMMS PRO 2.37.2, TLS 1.3 is supported for all components of AIMMS PRO.
 
-Upgrading to AIMMS PRO 2.37.2 or later:
+Upgrading to AIMMS PRO 2.37.2 or Later:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 When AIMMS PRO is upgraded from before AIMMS PRO 2.37.2 to AIMMS PRO 2.37.2 or later; the PRO AppLauncher that supports TLS 1.3 also becomes available.
@@ -88,7 +88,7 @@ For End-Users of WinUI applications to make use of this AppLauncher, they will n
 
 .. note:: This AppLauncher requires the ``.NET`` Framework 4.0 or later, and to leverage TLS 1.3, it requires the ``.NET`` Framework 4.7 or later.
 
-Best practice   
+Best Practice   
 ------------------------
 
 Regrettably, enforcing TLS 1.2 or TLS 1.3 is sometimes seen as a necessary part of an emergency response by an IT department to a security incident.
@@ -97,15 +97,10 @@ it is best practice to proactively switch to AIMMS PRO 2.37.2 (or later) and AIM
 
 .. note:: The good news: when your application is deployed on AIMMS Cloud, TLS 1.3 is available!
 
-References
-----------
+.. seealso::
 
-#.  `AIMMS PRO 2.37.2 release notes <https://documentation.aimms.com/pro-release-notes.html#aimms-pro-2-37-2-release>`_
-
-#.  `AIMMS 4.76.4 release notes <https://documentation.aimms.com/release-notes.html#aimms-4-76-4-release-october-28-2020-build-4-76-4-11>`_
-
-#.  `Wikipedia page on TLS <https://en.wikipedia.org/wiki/Transport_Layer_Security>`_
-
-#.  `TLS 1.3 Is Here to Stay <https://www.ssl.com/blogs/need-know-tls-1-3>`_
-
-#.  `TLS 1.3: Wikipedia <https://en.wikipedia.org/wiki/Transport_Layer_Security>`_
+    * `AIMMS PRO 2.37.2 release notes <https://documentation.aimms.com/pro-release-notes.html#aimms-pro-2-37-2-release>`_
+    * `AIMMS 4.76.4 release notes <https://documentation.aimms.com/release-notes.html#aimms-4-76-4-release-october-28-2020-build-4-76-4-11>`_
+    * `Wikipedia page on TLS <https://en.wikipedia.org/wiki/Transport_Layer_Security>`_
+    * `TLS 1.3 Is Here to Stay <https://www.ssl.com/blogs/need-know-tls-1-3>`_
+    * `TLS 1.3: Wikipedia <https://en.wikipedia.org/wiki/Transport_Layer_Security>`_
