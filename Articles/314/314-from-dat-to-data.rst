@@ -5,7 +5,7 @@ Convert Files from DAT to DATA
     :keywords: dat, data, data manager, case
 
 
-Overview & comparison of file types
+Overview and Comparison of File Types
 -----------------------------------
 
 The timeline for replacing ``.dat`` with ``.data`` files is as follows:
@@ -42,7 +42,7 @@ In projects created with AIMMS version before 3.14, a single data manager file (
 The default location of ``.data`` files, is the ``data`` subfolder of the project folder. (You can modify this with the project option ``Default data folder``.)
 
 
-Upgrading an AIMMS project to a newer AIMMS release
+Upgrading an AIMMS Project to a Newer AIMMS Release
 ---------------------------------------------------
 
 When upgrading AIMMS on a particular project, the data management style persists. 
@@ -54,6 +54,8 @@ For these upgraded projects, the data management style can be changed; it is a s
 .. image:: images/SwitchDataManagementStyle.png
     :align: center
 
+|
+
 After changing this setting; AIMMS needs to be closed and re-opened before the change takes effect properly. (Just closing and re-opening the project is not sufficient).
 
 After restarting AIMMS, the cases in data manager files can be extracted, by the dialog opened via:
@@ -61,13 +63,16 @@ After restarting AIMMS, the cases in data manager files can be extracted, by the
 .. image:: images/OpeningDataFile.png
     :align: center
 
+|
+
 but it now looks different:
 
 .. image:: images/ConvertingDatToData.png
     :align: center
 
+|
 
-Converting procedure calls
+Converting Procedure Calls
 ---------------------------
 
 The case and other data management procedures are not just renamed, 

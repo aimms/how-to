@@ -9,13 +9,13 @@ As a result, UIs developed using older versions of AIMMS need to be adapted to w
 
 This article covers changes in functionality of AIMMS WebUI and how to convert your UI to adapt to use these changes in your applications.
 
-Before you start
+Before you Start
 ---------------------------------------
 
 Save a copy of your project before you start upgrading.
 A good practice is using a source code management (version control) system.
 
-Determining the version of AIMMS
+Determining the Version of AIMMS
 --------------------------------------------------
 
 To know which changes may affect your project, check which version of AIMMS it is based on.
@@ -40,7 +40,7 @@ When the `AIMMS App Launcher <https://download.aimms.com/aimms/download/data/AIM
           To otherwise trigger this update, you can make a small change to the model text whenever you are upgrading your project UI to a newer version of AIMMS.
           For example, add (or remove) a space to ``MainTermination`` when using a newer version of AIMMS on a project. 
 
-Adapting for WebUI changes
+Adapting for WebUI Changes
 --------------------------------------
 
 Now we will discuss features removed from WebUI, and how to adapt those features when using later AIMMS versions.
@@ -60,7 +60,7 @@ The versions listed below are the earliest versions to require the specified ada
 
 Download examples are available in each section below.
 
-AIMMS 4.17: Sets in selection widget
+AIMMS 4.17: Sets in Selection Widget
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 AIMMS 4.16 is the last version where selection widget could contain AIMMS sets as contents (and pressing ``select all`` in the selection widget):
@@ -68,10 +68,11 @@ AIMMS 4.16 is the last version where selection widget could contain AIMMS sets a
 .. image:: images/Aimms416FilteringUsingSetInSelectionWidget.png
     :align: center
 
+|
+
 With AIMMS 4.17, you will need to add a zero one parameter, for instance something like:
 
 .. code-block:: aimms
-    :linenos:
 
     Parameter p01_Selector {
         IndexDomain: sn;
@@ -90,13 +91,15 @@ And then specifying such a parameter in the contents  (and pressing ``select all
 .. image:: images/Aimms417FilteringUsingSetInSelectionWidget.png
     :align: center
 
+|
+
 **Downloads:**
 
 *   :download:`Before, using AIMMS 4.16 <model/AIMMS-4-16-set-selection-widget/AIMMS-4.16/abc416.zip>`
 
 *   :download:`After, using AIMMS 4.17 <model/AIMMS-4-16-set-selection-widget/AIMMS-4.17/abc417.zip>`
 
-AIMMS 4.20: Starting browser
+AIMMS 4.20: Starting Browser
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 AIMMS 4.19 is the last version of AIMMS where the model developer had to manually start the browser using something like: ``localhost:12001/Aimms-WebUI/home``.
@@ -105,7 +108,7 @@ With AIMMS 4.20 onwards, starting the WebUI browser would start the browser dire
 
 True, no change is made to the project, but it did change the interaction of the model developer.
 
-AIMMS 4.40: WebUI folder position
+AIMMS 4.40: WebUI Folder Position
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 AIMMS 4.39 is the last version of AIMMS where the WebUI folder was located as a sub-folder of the project folder.
@@ -128,7 +131,7 @@ add the folder ``MainProject\WebUI`` afterwards
 AIMMS 4.46: Element Text
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-See also `presentation of element names <https://documentation.aimms.com/webui/multi-language.html#element-text>`_
+See also `presentation of element names <https://documentation.aimms.com/webui/multi-language.html#element-text>`_.
 
 The names of elements in a table can be displayed with more elaborate names; for instance, when initials of people are used in a set, but you want to see in the tables their actual names.
 
@@ -300,7 +303,7 @@ Some advantages of map V2 widgets over map v1 widgets are:
 
 *   :download:`After, using AIMMS 4.61 <model/AIMMS-4-60-map-v1/AIMMS-4.61/ShowGeocdes461.zip>`
 
-AIMMS 4.66: Widget filtering 
+AIMMS 4.66: Widget Filtering 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. Release note: The filtering of widgets, using the filter tab of a widget, did not always work correctly. Since we introduced slicing on identifiers in the WebUI quite a while ago, which is the preferred way of filtering, we decided to remove the filter tab from th widgets. If you have apps which rely on this functionality, they will continue to run as they did. Only if you want to make changes to the filtering, you should do so by either using the advanced options or by opening the model with an older AIMMS version which still has the filter tabs. We do recommend to consider using slicing on identifiers, though.
@@ -329,6 +332,8 @@ Next, we open the identifier attributes of the identifiers in the table, and fil
 .. image:: images/Aimms466Slicing.png
     :align: center
 
+|
+
 **Downloads:**
 
 *   :download:`Before, using AIMMS 4.65 <model/AIMMS-4-65-filter-ux/AIMMS-4.65/abc465.zip>`
@@ -336,7 +341,7 @@ Next, we open the identifier attributes of the identifiers in the table, and fil
 *   :download:`After, using AIMMS 4.66 <model/AIMMS-4-65-filter-ux/AIMMS-4.66/abc466.zip>`
 
 
-AIMMS 4.67: Serialize WebUI specification with a single file
+AIMMS 4.67: Serialize WebUI Specification with a Single File
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Up to AIMMS 4.66, the essence of the WebUI is serialized in three folders: 
@@ -366,13 +371,15 @@ The three folders are no longer used.
 
     When you are using a source code management system, you should remove the three folders from your source and add the file ``webui.json``.
 
+|
+
 **Downloads:**
 
 *   :download:`Before, using AIMMS 4.65 <model/AIMMS-4-66-webui-json/AIMMS-4.66/abcd466.zip>`
 
 *   :download:`After, using AIMMS 4.66 <model/AIMMS-4-66-webui-json/AIMMS-4.67/abcd467.zip>`
 
-AIMMS 4.71: Identifier based tailoring
+AIMMS 4.71: Identifier Based Tailoring
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In AIMMS 4.70 Identifier based tailoring of the identifier ``X`` to:
@@ -389,6 +396,8 @@ In the following image use is made of a flag and a tooltip identifier.
 
 .. image:: images/AIMMS470ReadOnlyToolTip.png
     :align: center
+
+|
 
 The flag identifier sets the data for ``p_associatedValues('a')`` to readonly, and tooltip for ``p_associatedValues('a')`` is ``"wears facemask"``. The difference between AIMMS 4.70 and AIMMS 4.71 is the selection of identifier where this is specified.
 
@@ -438,7 +447,7 @@ After this edit, the behavior of the application does not change; but the warnin
 
 
 
-AIMMS 4.72: Data modifications
+AIMMS 4.72: Data Modifications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In AIMMS 4.71, the procedure associated with changes in the data of ``p_associatedValues`` must be named ``uponchange_p_associatedValues``.  In AIMMS 4.72, you can select a procedure via an annotation.
@@ -476,11 +485,10 @@ In AIMMS 4.72, the procedure is linked using the annotation:
 
 *   :download:`After, using AIMMS 4.72 <model/AIMMS-4-71-data-modifications/AIMMS-4.72/abcdef472.zip>`
 
-Related topics
---------------
+.. seealso::
 
-* **AIMMS How-To** :doc:`UI Features articles </C_UI/Sub_UI_Features/index>`
-* **AIMMS Documentation** `WebUI App Development <https://documentation.aimms.com/webui/webui-app-development.html>`_
+    * :doc:`UI Features articles </C_UI/Sub_UI_Features/index>`
+    * `WebUI App Development <https://documentation.aimms.com/webui/webui-app-development.html>`_
 
 .. spelling:word-list::
 

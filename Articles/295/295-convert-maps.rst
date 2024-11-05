@@ -24,7 +24,7 @@ As of AIMMS 4.74, even more features are introduced including:
 * Annotation support for nodes and arcs
 * Heatmap
 
-See `WebUI Documentation: Map Widget <https://documentation.aimms.com/webui/map-widget.html>`_ for more details about these features.
+See `Map Widget documentation <https://documentation.aimms.com/webui/map-widget.html>`_ for more details about these features.
 
 
 Timeline
@@ -36,7 +36,7 @@ AIMMS releases after **the end of November 2019** will not support projects usin
 
 To use AIMMS versions released after that date, you will need to be sure that you have upgraded any pages in your WebUI app using Map widgets.
 
-Upgrading your project
+Upgrading your Project
 -----------------------
 
 The upgrade for this feature is manual, but quite simple. 
@@ -47,4 +47,4 @@ The upgrade for this feature is manual, but quite simple.
 For V2, you must separate the Latitude and Longitude into two separate identifiers declared in the model. These were contained in one identifier in V1.
 All other identifiers that you used with V1 will work for V2.
 
-Please refer to `AIMMS Documentation: Maps Widget <https://documentation.aimms.com/webui/map-widget.html>`_ for further details about this widget.
+Please refer to `Maps Widget documentation <https://documentation.aimms.com/webui/map-widget.html>`_ for further details about this widget.

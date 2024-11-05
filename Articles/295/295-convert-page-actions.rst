@@ -26,7 +26,7 @@ AIMMS releases after **the end of November 2019** will not support projects usin
 
 To use AIMMS versions released after that date, you will need to be sure that any pages in your WebUI app using Page Actions have been upgraded.
 
-Upgrading your project
+Upgrading your Project
 ----------------------
 
 To convert Page Actions from V1 to V2, you'll need to do the following:
@@ -47,4 +47,4 @@ A quick way to get this data is to use the ``webui.json`` file.
 
 Once the string parameters are configured with index ``webui::indexPageActionSpec``, the Page Actions V1 will be overridden by the Page Actions V2 specified in the string parameter.
 
-Please refer to `AIMMS Documentation: Page Actions <https://documentation.aimms.com/webui/page-settings.html#page-actions>`_ for further details about this feature.
+Please refer to `Page Actions <https://documentation.aimms.com/webui/page-settings.html#page-actions>`_ for further details about this feature.
