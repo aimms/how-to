@@ -26,7 +26,11 @@ scalable cloud-based deployment. Additionally, we share best practices for build
 
 
    
+.. spelling:word-list::
    
+   scalability
+   scalable
+
 
 
 
