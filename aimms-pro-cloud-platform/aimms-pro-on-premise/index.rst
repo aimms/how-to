@@ -1,11 +1,5 @@
-.. image:: /Images/AIMMSPROCloudPlatform.png
-   :scale: 120
-   :align: right
-   :alt: AIMMS PRO and Cloud Platform
-
 AIMMS PRO OnPremise
 =============================
-.. _ref-deployment:
 
 .. meta::
    :description: Help and support with deploying AIMMS applications.

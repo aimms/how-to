@@ -75,6 +75,7 @@
     C_Developer/index
     C_UI/index
     C_Deployment/index
+    aimms-pro-cloud-platform/index
     software-evolution/index
     C_Examples/index
     C_Toolkit/index
