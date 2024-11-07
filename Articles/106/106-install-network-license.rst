@@ -103,5 +103,6 @@ Users can access an AIMMS Network License while connected to the network from an
 .. seealso::
 
     * :doc:`../105/105-adding-named-user-licenses`
+    * :doc:`../106/106-install-network-license-client`
     * `Network License Server Manual <https://download.aimms.com/aimms/download/data/LicenseServer/AIMMS_net.pdf>`_ 
     * `License Server Installation and Configuration <https://documentation.aimms.com/pro/license-server.html>`_ 
