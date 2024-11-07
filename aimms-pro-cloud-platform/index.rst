@@ -3,7 +3,7 @@
    :align: right
    :alt: AIMMS PRO and Cloud Platform
 
-AIMMS PRO and Cloud Platform
+AIMMS PRO & Cloud Platform
 =============================
 
 .. meta::
