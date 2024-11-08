@@ -39,6 +39,7 @@ After publishing the application, you can in sequence:
 
 .. image:: images/solved-downloaded-session-log.png
     :align: center
+
 |
 
 Explaning the Download Code
