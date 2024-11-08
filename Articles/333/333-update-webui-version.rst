@@ -487,7 +487,7 @@ In AIMMS 4.72, the procedure is linked using the annotation:
 
 .. seealso::
 
-    * :doc:`UI Features articles </C_UI/Sub_UI_Features/index>`
+    * :doc:`UI Features articles </webui/styling/index>`
     * `WebUI App Development <https://documentation.aimms.com/webui/webui-app-development.html>`_
 
 .. spelling:word-list::
