@@ -104,6 +104,7 @@ After starting, the opening screen looks like this:
 .. image:: images/WhoAmI.png
     :align: center
 
+|
 
 You can take a screenshot when asked for credentials on AIMMS PRO and then close it. 
 

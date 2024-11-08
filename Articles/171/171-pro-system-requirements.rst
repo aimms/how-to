@@ -18,8 +18,9 @@ Key Components
 
 The key components to consider for a WebUI application are 
 
-#. Peak memory usage of the data session
-      * Can be monitored using the Windows Task Manager or the AIMMS Progress Window (the `Memory Used` metric)
+#. **Peak memory usage of the data session:**
+    
+    Can be monitored using the Windows Task Manager or the AIMMS Progress Window (the `Memory Used` metric)
 
 #. Peak memory usage of the solver session
       * Can be monitored using AIMMS Progress Window (the `Peak Mem` metric)
@@ -72,8 +73,9 @@ Summary
 
 Based on the calculations, a server machine for the above example use case will need at least 17 GB memory and 7 cores. You have to remember that this is one possible configuration and not necessarily the best one. Having fewer concurrent solver sessions than concurrent data sessions will result in a waiting time for some of the users. Depending on the runtime of the solve procedure and the acceptable waiting times for your users, choose the number of concurrent solver sessions that you want to purchase. The server size will also increase with each additional solver session added to the configuration. 
 
-Read more about the queueing on AIMMS PRO `here <https://documentation.aimms.com/pro/config-sections.html#queue-priority-settings>`_
-
+.. seealso::
+    
+    * `Queueing on AIMMS PRO <https://documentation.aimms.com/pro/config-sections.html#queue-priority-settings>`_
 
 .. todo:: 
 

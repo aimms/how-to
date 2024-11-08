@@ -27,6 +27,8 @@ Stop the AIMMS PRO Services from within the **AIMMS PRO Configurator**.
 .. image:: images/1_img.png
    :align: center
 
+|
+
 Backup the Configuration
 -----------------------------------------------
 
@@ -35,10 +37,13 @@ Backup the Configuration
 .. image:: images/2_img.png
    :align: center
 
+|
+
 2.	Go to the tab :menuselection:`PRO Configuration` and copy all settings in a text document, so that during PRO configuration on the new machine you can enter these settings again.
  
 .. image:: images/3_img.png
    :align: center
+|
 
 Install PRO on the New Machine
 --------------------------------------------------------
@@ -60,6 +65,8 @@ Configuring the New Installation
 
 .. image:: images/4_img.png
    :align: center
+
+|
 
 2.	Go to the tab :menuselection:`PRO Configuration` and enter the values that you saved from the original configuration, as detailed above.
 

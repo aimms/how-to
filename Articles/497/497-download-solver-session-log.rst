@@ -10,26 +10,23 @@ This article explains how to obtain the session log file of a solver session ran
     An error or warning message in the log file does NOT necessarily indicate a problem in the application. 
 
 
-Running example:
+Running Example
 -----------------
 
-The AIMMS project that contains the example can be :download:`downloaded here <model/downloadBottledWater.zip>`
+The AIMMS project that contains the example can be :download:`downloaded here <model/downloadBottledWater.zip>`.
 
-This example contains a small transport problem as an example: transporting pellets of bottled water.
+This example contains a small transport problem as an example: transporting pallets of bottled water.
 
-Operating the example
+Operating the Example
 ----------------------
 
-After publishing the application, you can (by pressing the three buttons in sequence):
+After publishing the application, you can in sequence:
 
-.. image:: images/solved-downloaded-session-log.png
-    :align: center
+1.  Solve the mathematical program.
 
-#.  Solve the mathematical program.
+2.  Determine the session id of the solver session just ran.
 
-#.  Determine the session id of the solver session just ran.
-
-    In the example supplied, the session id of the last solver session ran is obtained via 
+    In the example supplied, the session id of the last solver session ran is obtained via:
 
     .. code-block:: aimms
         :linenos:
@@ -38,10 +35,13 @@ After publishing the application, you can (by pressing the three buttons in sequ
 
     The procedure ``pro::sessionmanager::ListSessionSinceDate`` also provides a set of session id's.
 
-#.  Download the session log.  As the (WebUI) data session is running locally on the host of the AIMMS PRO server, it has access to this session log file.
+3.  Download the session log. As the WebUI data session is running locally on the host of the AIMMS PRO server, it has access to this session log file.
 
+.. image:: images/solved-downloaded-session-log.png
+    :align: center
+|
 
-Explaning the download code
+Explaning the Download Code
 --------------------------------
 
 AIMMS PRO on premise stores the session logs in the folder ``%AIMMSPRO_DATADIR%\Log\Sessions``.
@@ -88,13 +88,13 @@ As a first step, the complete filename of the session log is determined.
 
 Remarks on the above code:
 
-#.  Line 1-4: Obtain the session log folder.
+* Line 1-4: Obtain the session log folder.
 
-#.  line 6-10: Get a list of all session log files.
+* line 6-10: Get a list of all session log files.
 
-#.  Line 12: Determine the log file that contains the session id as part of its name.
+* Line 12: Determine the log file that contains the session id as part of its name.
 
-#.  Line 14,15: Construct full path of the log file for the session at hand.
+* Line 14,15: Construct full path of the log file for the session at hand.
 
 As a second step, copy the file to the project folder, then in the download template.
 
@@ -115,18 +115,17 @@ As a second step, copy the file to the project folder, then in the download temp
 
 Remarks on the above code:
 
-#.  Line 1: obtain the filename of the solver session log from the session id (see the first step discussed above).
+* Line 1: obtain the filename of the solver session log from the session id (see the first step discussed above).
 
-#.  Line 3: Copy the session log file to the project folder
+* Line 3: Copy the session log file to the project folder
 
-#.  Line 7: Copy the session log file to the process specific temporary folder.  
-    This is the folder where files are downloaded from.
+* Line 7: Copy the session log file to the process specific temporary folder. This is the folder where files are downloaded from.
 
-Integration in your own application
+Integration in your own Application
 -----------------------------------
 
 The code explained and demoed above is contained in a separate section named: ``Download server session log`` of download offered above.
-See `Export code to another project <https://how-to.aimms.com/Articles/145/145-import-export-section.html>`_ for copying the code to your project.
+See the article `"Export Code to Another Project" <https://how-to.aimms.com/Articles/145/145-import-export-section.html>`_ for copying the code to your project.
 Once you've copied the code, you need to add the following widgets:
 
 #.  button to obtain the session id, 
