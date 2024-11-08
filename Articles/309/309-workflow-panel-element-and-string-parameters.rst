@@ -27,11 +27,7 @@ a. Create an element parameter, let’s call it ``MyWorkflowStepsPages``, indexe
 
 b. Add a domain condition to index domain::
 
-.. code-block:: aimms
-   :linenos:
-
    (webui::indexWorkflowPageSpec = 'pageId' OR webui::indexWorkflowPageSpec = 'redirectpageId')
-
 
 So the index domain will look like this:
 
