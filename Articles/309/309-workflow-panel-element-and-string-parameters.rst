@@ -32,6 +32,7 @@ b. Add a domain condition to index domain::
 
    (webui::indexWorkflowPageSpec = 'pageId' OR webui::indexWorkflowPageSpec = 'redirectpageId')
 
+
 So the index domain will look like this:
 
 .. code-block:: aimms
@@ -40,11 +41,12 @@ So the index domain will look like this:
    (webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec) | 
    (webui::indexWorkflowPageSpec = 'pageId' OR webui::indexWorkflowPageSpec = 'redirectpageId')
 
+
 c. Add a range of ``webui::AllRegularPages``.
  
 Now, in the data you can only select values for ``pageId`` and ``redirectpageId`` from drop-down menus where values are from the ``AllRegularPages`` set.
 
- 
+
 Adding Values for Other Properties
 -------------------------------------
 Next let's create the string parameter to enter values for rest of the properties:
