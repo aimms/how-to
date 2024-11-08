@@ -43,6 +43,7 @@ Backup the Configuration
  
 .. image:: images/3_img.png
    :align: center
+
 |
 
 Install PRO on the New Machine
