@@ -25,7 +25,7 @@ Stop the Services
 Stop the AIMMS PRO Services from within the **AIMMS PRO Configurator**.
 
 .. image:: images/1_img.png
-   :aling: center
+   :align: center
 
 Backup the Configuration
 -----------------------------------------------
@@ -33,12 +33,12 @@ Backup the Configuration
 1.	Go to :menuselection:`Backup Management` and click :menuselection:`Backup Now`.
 
 .. image:: images/2_img.png
-   :aling: center
+   :align: center
 
 2.	Go to the tab :menuselection:`PRO Configuration` and copy all settings in a text document, so that during PRO configuration on the new machine you can enter these settings again.
  
 .. image:: images/3_img.png
-   :aling: center
+   :align: center
 
 Install PRO on the New Machine
 --------------------------------------------------------
@@ -59,7 +59,7 @@ Configuring the New Installation
 1.	Once the installation is done, you should be redirected to the page AIMMS PRO Configurator. If you changed the username/password/schema for the database user, please enter the same here.
 
 .. image:: images/4_img.png
-   :aling: center
+   :align: center
 
 2.	Go to the tab :menuselection:`PRO Configuration` and enter the values that you saved from the original configuration, as detailed above.
 
