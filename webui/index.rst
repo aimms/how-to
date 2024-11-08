@@ -1,4 +1,4 @@
-.. image:: /Images/WebUI.png
+.. image:: /Images/browser-128.png
    :scale: 120
    :align: right
    :alt: WebUI

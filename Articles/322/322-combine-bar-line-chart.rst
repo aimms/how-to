@@ -1,3 +1,4 @@
+:orphan:
 Combine Bar Chart and Line Chart
 =================================
 
