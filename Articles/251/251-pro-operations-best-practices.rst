@@ -1,4 +1,4 @@
-Overview: Best Practices for Operating AIMMS PRO
+Best Practices for Operating AIMMS PRO
 ====================================================
 
 .. meta::
@@ -40,7 +40,6 @@ Alternatively, there are companies like Atlassian, GitHub, GitLab, and others wh
 
 See :doc:`../151/151-version-control-aimmspack-backup` for a more in-depth explanation on the use of Version Control systems with AIMMS.
 
-.. :doc:`151-version-control-aimmspack-backup`
 
 Operating a Test Environment
 ----------------------------------------
@@ -91,11 +90,8 @@ Depending on the nature of your PRO applications you need to take appropriate me
 
 There is obviously a trade-off between the level of resilience and time required to recover and costs. Each business will have to make its own trade-offs here.
 
-See also our article :doc:`../374/374-pro-backup-and-continuity`.
+.. seealso::
 
-.. Conclusion
-.. -------------
-.. We have listed a few best practices here to raise awareness. We encourage you to connect with IT operations specialists to ensure that your AIMMS PRO project becomes and remains successful.
-
+   * :doc:`../374/374-pro-backup-and-continuity`
 
 

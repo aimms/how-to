@@ -22,6 +22,8 @@ AIMMS jobs are run on the PRO server with the name ``AimmsPROSession.exe``.
 .. image:: images/AimmsPROSession1.png
     :align: center
 
+|
+
 The default account for these jobs is ``SYSTEM``.
 
 To change the account for the service, you'll follow this process:
@@ -36,7 +38,7 @@ To change the account for the service, you'll follow this process:
 
 We'll go step-by-step in more detail below.
 
-Stopping the service in PRO
+Stopping the Service in PRO
 ---------------------------
 
 Before making changes to the service, it is a good idea to stop those services.
@@ -47,7 +49,9 @@ Log in as an admin on the PRO service and stop the services.
     :align: center
 
 
-Changing the service in Windows Services
+|
+
+Changing the Service in Windows Services
 -----------------------------------------
 #. Open up the Services app on your Windows system. (You can find it by typing "services" in the Windows menu search.)
 
@@ -58,19 +62,19 @@ Changing the service in Windows Services
        :align: center
     
     
-#. Right-click on the process and select *Properties* from the menu.
+#. Right-click on the process and select :menuselection:`Properties` from the menu.
 
     .. image:: images/SelectProperties0.png
        :align: center
 
-#. Go to the tab *Log On* and select the account the AIMMS PRO 2 service will use next time it is started.
+#. Go to the tab :menuselection:`Log On` and select the account the AIMMS PRO 2 service will use next time it is started.
 
     .. image:: images/PropertyTabLogOn0.png
        :align: center
     
-You can fill in another account, such as a service account.  Find out more in `Microsoft Documentation: Service accounts <https://docs.microsoft.com/en-us/windows/security/identity-protection/access-control/service-accounts>`_.
+You can fill in another account, such as a service account. Find out more in `Microsoft Documentation: Service accounts <https://docs.microsoft.com/en-us/windows/security/identity-protection/access-control/service-accounts>`_.
 
-Restarting the service in PRO
+Restarting the Service in PRO
 -----------------------------
 
 Log in again as an admin on the AIMMS PRO service and start the services again:
@@ -78,14 +82,17 @@ Log in again as an admin on the AIMMS PRO service and start the services again:
 .. image:: images/StartStopServices1b.png
     :align: center
 
+|
 
-Verifying the change in Windows Services
+Verifying the Change in Windows Services
 ----------------------------------------
 
 Open up the Services app again.
 
 .. image:: images/SelectAIMMSPROService1b.png
     :align: center
+
+|
 
 The service is now using the new account (in this example, ``chris``).
 
@@ -97,9 +104,11 @@ Start the same job again. Then open the Windows Task Manager and go to the *Deta
 .. image:: images/AimmsPROSession1b.png
     :align: center
 
+|
+
 The account used for this AIMMS job is now ``chris``.
 
-Test project
+Test Project
 ----------------
 
 To test for yourself, you can use the simple WinUI model :download:`WaitABit.zip <model/WaitABit.zip>`. 
