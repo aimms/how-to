@@ -18,5 +18,6 @@ Here, you can find documentation about it:
    :maxdepth: 1
 
    /Articles/106/106-install-network-license
+   /Articles/106/106-install-network-license-client
    /Articles/105/105-adding-named-user-licenses
    /Articles/304/304-transfer-license-server
