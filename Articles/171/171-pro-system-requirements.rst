@@ -19,20 +19,19 @@ Key Components
 The key components to consider for a WebUI application are 
 
 #. **Peak memory usage of the data session:**
-    
     Can be monitored using the Windows Task Manager or the AIMMS Progress Window (the `Memory Used` metric)
 
-#. Peak memory usage of the solver session
-      * Can be monitored using AIMMS Progress Window (the `Peak Mem` metric)
+#. **Peak memory usage of the solver session:**
+    Can be monitored using AIMMS Progress Window (the `Peak Mem` metric)
 
-#. Average CPU usage of a data session
-      * Can be monitored using the Windows Task Manager
+#. **Average CPU usage of a data session:**
+    Can be monitored using the Windows Task Manager
 
-#. Average CPU usage of the solver session
-      * Can be monitored using the Windows Task Manager
+#. **Average CPU usage of the solver session:**
+    Can be monitored using the Windows Task Manager
 
-#. Maximum number of concurrent data sessions
-#. Maximum number of concurrent solver sessions 
+#. **Maximum number of concurrent data sessions**
+#. **Maximum number of concurrent solver sessions** 
 
 The memory and CPU usage of a single data session multiplied by the maximum number of data sessions gives the peak resource requirement by the data sessions. Likewise for the solver sessions. In addition to the data and solver sessions, the AIMMS PRO Server installation has its own requirements of 3 GB memory and 1 core of CPU. 
 
