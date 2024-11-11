@@ -5,11 +5,7 @@ Comparing Schedules from Scenarios
 
 We want to compare schedules from different scenarios. We use a flowshop model example, which you can download from the link below.
 
-.. topic:: Download 
-    
-    :download:`Flow_shop_comparing_schedules <model/Flow_Shop_Comparing_schedules.zip>`
-
-|
+:download:`Flow_shop_comparing_schedules <model/Flow_Shop_Comparing_schedules.zip>`
 
 We'll show the result for the end user, and how to achieve it as a developer.
 
