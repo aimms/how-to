@@ -79,7 +79,6 @@ A side panel will appear. Click on the ``::before`` line. On 'Styles', a class w
 Copy the character code and paste on your ``button.css`` file replacing the old character code. Save and refresh the WebUI page. The icon will change. 
 
 But now, how to add an unique icon to an specific button?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Step 5
 ~~~~~~~~~

@@ -1,4 +1,4 @@
-Sailing across the world
+Sailing Across the World
 =========================
 
 A route across the world is made up of waypoints and legs between the waypoints.  
@@ -17,10 +17,14 @@ The project opens with the following screenshot:
 .. image:: images/route-0.png
     :align: center
 
+|
+
 After scrolling roughly 180 degrees, focusing on the other side of the planet, the route looks as follows:
 
 .. image:: images/route-180.png
     :align: center
+
+|
 
 Design
 ------------

@@ -10,8 +10,9 @@ This article presents an elegant trick to use one Gantt Chart to control the scr
 .. image:: images/Timebar.png
     :align: center
 
+|
 
-Creating a single bar
+Creating a Single Bar
 ----------------------
 
 The Gantt chart used to create the scrolling and zooming functionality is only one bar, 
@@ -88,7 +89,7 @@ These identifiers are initialized in the following procedure:
         StringParameter sp_twoDaysAfterTomorrow;
     }
 
-Defining the viewport
+Defining the Viewport
 ----------------------
 The beginning of the timebar defines the beginning of viewport of the lower Gantt Chart (``sp_SelectedViewPortStart``), 
 and similarly, the end the timebar defines the end of the viewport of the lower Gantt Chart (``sp_SelectedViewPortEnd``). 
@@ -142,7 +143,7 @@ Here ``bp_useUTCforSelectedViewport`` is initialized using the following code:
     endblock ;
 
 
-Example project
+Example Project
 ------------------
 The example can be downloaded below.
 
