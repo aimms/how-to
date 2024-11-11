@@ -1,409 +1,150 @@
-Create Wonderful WebUI Widgets
-===============================
+Working with Wonderful WebUI Widgets
+====================================
 
-In case you have not yet tried the Wonderful WebUI Widgets app yourself, 
-you may want to scan :doc:`../531/531-working-with-wonderful-webui-widgets` first.
+Purpose
+-------
 
-Welcome and workflow
---------------------
+AIMMS is designed for building bespoke interactive optimization applications.
+To let you experience such an application, the :download:`Wonderful WebUI Widgets <model/WonderfulWebUIWidgets.zip>` application provides examples demonstrating how optimization can support end-users, like analysts or planners, in their daily tasks. Each example takes just a few minutes to explore.
 
-It is good practice to provide a welcome `text <https://documentation.aimms.com/webui/text-widget.html>`_ 
-to the end-user. 
-This way the end-user reads about the operation of the app and about expected actions.
-In addition, it is good practice to make the welcome page part of the workflow, 
-such that the user feels guided right from the start.
+The ``Wonderful WebUI Widgets`` application requires AIMMS 4.84 or higher, and it works with the `AIMMS Community Edition <https://licensing.cloud.aimms.com/license/community.htm>`_ license.
 
-Map page
---------
+Feedback on the ``Wonderful WebUI Widgets`` application can be shared on the `AIMMS Community <https://community.aimms.com/>`_ or via `AIMMS User Support <support@aimms.com>`_.
 
-The latitude and longitude for the `map widget <https://documentation.aimms.com/webui/map-widget.html#map-widget>`_ 
-of arbitrarily selected German cities are extracted from data provided by `simplemaps <https://simplemaps.com/data/world-cities>`_.
+The following sections provide instructions for each page within the application.
 
-Icons for nodes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+Welcome
+-------
 
-The support for `icons on nodes <https://documentation.aimms.com/webui/map-widget.html#icons-for-nodes>`_ 
-makes it easy to specify the icons to be used on the nodes via a definition similar to the following:
+The Welcome page introduces the ``Wonderful WebUI Widgets`` application and provides an overview of the available pages. The page includes a navigation workflow on the left to help you move between different examples.
 
-.. code-block:: aimms
-    :linenos:
+Map
+---
 
-    StringParameter sp_locationIcon {
-        IndexDomain: i_loc;
-        Definition: {
-            if i_loc in s_sources then
-                "aimms-factory"
-            elseif i_loc in s_destinations then
-                "aimms-store"
-            else
-                "aimms-width"
-            endif ;
-        }
-    }
+**Story**
 
+OxyGem, a German oxygen distillation and bottling company, supplies oxygen tanks for industries like welding, diving, and healthcare. The company operates three main facilities:
 
-Detail tooltip
-^^^^^^^^^^^^^^^^^^
+#.  |oxygem-distillation| distillation,
 
-HTML can be used for `tooltips on nodes <https://documentation.aimms.com/webui/map-widget.html#tooltips-for-nodes>`_
-so a definition like the following is used:
+#.  |oxygem-pumping| pumping, and 
 
-.. code-block:: aimms
-    :linenos:
+#.  |oxygem-bottling| bottling.
 
-    StringParameter sp_locationTooltip {
-        IndexDomain: i_loc;
-        Definition: {
-            "<div align=\"left\">"  +
-            "<Table>" +
-                    "<TR>"  +
-                            "<TD>"  +
-                                            "<B> Name : </B>" +
-                            "</TD>" +
-                            "<TD>"  +
-                                            formatString("%e", i_loc) +
-                            "</TD>" +
-                    "</TR>" +
-                    "<TR>"  +
-                            "<TD>"  +
-                                            "<B> Type : </B>" +
-                            "</TD>" +
-                            "<TD>"  +
-                                            sp_locationType( i_loc ) +
-                            "</TD>" +
-                    "</TR>" +
-                    "<TR>"  +
-                            "<TD>"  +
-                                            "<B> " + 
-                                            if i_loc in s_sources then
-                                                "Capacity"
-                                            elseif i_loc in s_intermediate then 
-                                                "Capacity"
-                                            else
-                                                "Demand"
-                                            endif
-                                            + " : </B>" +
-                            "</TD>" +
-                            "<TD>"  +
-                                            p_locationSize(i_loc) +
-                            "</TD>" +
-                    "</TR>"  +
-                    if sum( i_locFrom, v_prod(i_locFrom ) ) then
-                    "<TR>"  +
-                            "<TD>"  +
-                                            "<B> " + 
-                                            if i_loc in s_sources then
-                                                "Production"
-                                            elseif i_loc in s_intermediate then 
-                                                "Flow"
-                                            else
-                                                "Unmet demand"
-                                            endif
-                                            + " : </B>" +
-                            "</TD>" +
-                            "<TD>"  +
-                                            if i_loc in s_sources then
-                                                v_prod(i_loc)
-                                            elseif i_loc in s_intermediate then 
-                                                sum( i_locFrom, v_flow(i_locFrom, i_loc) )
-                                            else
-                                                v_unmetDemand(i_loc)
-                                            endif +
-                            "</TD>" +
-                    "</TR>"  
-                    else "" endif 
-                    +
-            "</Table>"
-        }
-    }
+These facilities have operated efficiently for years, meeting demand under normal circumstances. However, due to the COVID-19 pandemic, demand has increased significantly, occasionally exceeding the network's capacity and resulting in unmet demand. Management seeks advice on optimizing the network to better cater to this increased demand.
 
-There are some remarks regarding the above definition:
+.. |oxygem-distillation| image:: images/oxygem-distillation.png
+.. |oxygem-pumping| image:: images/oxygem-pumping.png
+.. |oxygem-bottling| image:: images/oxygem-bottling.png
 
-#.  It uses the table syntax of HTML.
+**Operating the Map Widget**
 
-#.  It is admittedly lengthy, but having this length and indentation, makes the structure apparent.
+The map widget presents a network of connections with nodes representing OxyGem facilities. Node size reflects production capacity or demand at each location. Key tools include:
 
-#.  Lines 38-61 are part of an if-then-else expression; based on a condition, a row is added to the tooltip table.
+- **Widget Actions**: Found in the hamburger menu in the upper-right corner:
 
-Detail context menu
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+  - *Initialize*: Resets the network and randomizes demand.
+  - *Solve*: Optimizes flow across the network.
 
-.. code-block:: aimms
-    :linenos:
+  .. image:: images/map-widget-menu.png
+      :align: center
 
-    StringParameter sp_mapLocationItemActions {
-        IndexDomain: (webui::indexWidgetItemActionSpec,webui::indexPageExtension,webui::indexWidgetActionSpec);
-        Definition: {
-            {
-                ('p_locationSize', '1', 'displaytext') : "Debug",
-                ('p_locationSize', '1', 'icon'       ) : "aimms-bug",
-                ('p_locationSize', '1', 'procedure'  ) : "pr_locDebug",
-                ('p_locationSize', '1', 'state'      ) : if bp_developmentSupport then "Active" else "Hide" endif,
+- **Hovering**: Hovering over nodes displays a tooltip with details about the location, as shown below:
 
-                ('p_locationSize', '2', 'displaytext') : formatString("Increase %s %e by 1", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
-                ('p_locationSize', '2', 'icon'       ) : "aimms-volume-increase2",
-                ('p_locationSize', '2', 'procedure'  ) : "pr_locSizeIncrease1",
-                ('p_locationSize', '2', 'state'      ) : "Active",
+  .. image:: images/map-widget-tooltip.png
+      :align: center
 
-                ('p_locationSize', '3', 'displaytext') : formatString("Increase %s %e by 5", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
-                ('p_locationSize', '3', 'icon'       ) : "aimms-volume-increase",
-                ('p_locationSize', '3', 'procedure'  ) : "pr_locSizeIncrease5",
-                ('p_locationSize', '3', 'state'      ) : "Active",
+  .. tip:: Hovering over bottling locations with an orange background reveals unmet demand information.
 
-                ('p_locationSize', '4', 'displaytext') : formatString("Decrease %s %e by 1", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
-                ('p_locationSize', '4', 'icon'       ) : "aimms-volume-decrease2",
-                ('p_locationSize', '4', 'procedure'  ) : "pr_locSizeDecrease1",
-                ('p_locationSize', '4', 'state'      ) : "Active",
+- **Control Panel**: Adjust parameters like unmet demand costs, production unit capacity, and pipe capacity via the side panel.
 
-                ('p_locationSize', '5', 'displaytext') : formatString("Decrease %s %e by 5", if ep_selectedLocation in s_destinations then "demand" else "capacity" endif, ep_selectedLocation),
-                ('p_locationSize', '5', 'icon'       ) : "aimms-volume-decrease",
-                ('p_locationSize', '5', 'procedure'  ) : "pr_locSizeDecrease5",
-                ('p_locationSize', '5', 'state'      ) : "Active",
+- **Item Menu**: Accessed by left-then-right clicking on a node. Adjust capacities for distillation and pumping locations or demand for bottling locations.
 
-                ('p_locationSize', '6', 'displaytext') : formatString("Edit %e", ep_selectedLocation),
-                ('p_locationSize', '6', 'icon'       ) : "aimms-quill",
-                ('p_locationSize', '6', 'procedure'  ) : "pr_locSizeDetails",
-                ('p_locationSize', '6', 'state'      ) : "Active"
-            }
-        }
-    }
+  - The map auto-colors bottling stations with unmet demand in red, and those operating at capacity in orange.
 
-Some remarks on the above:
+  .. tip:: Start by optimizing flow over the network to identify bottlenecks.
 
-#.  A defined list is created using ``{ ... }``.  
-    Note the absence of the word ``data`` here.
-    It does require to put the element literals between single quotes (``''``). 
-    But then you can nicely use expressions behind the ``:``.
+Gantt
+-----
 
-    The advantage of this style of defining context menu behavior is that the small procedures 
-    that modify the data of the string parameter to fine control the behavior of such menus are no longer needed.
+Levram operates three production lines—King Kong, Hercules, and Antman. Each line specializes in handling specific order types, as follows:
 
-    This application uses a similar style for controlling the behavior workflow, status bar, widget menus, and page actions.
+- *King Kong*: Suited for large orders.
+- *Hercules*: Handles orders of medium size.
+- *Antman*: Specializes in smaller orders.
 
-#.  Line 5: Debug - to help test the application. 
-    The visibility of the item 
+Orders must be processed in full without interruptions. Occasionally, production lines must pause for maintenance or inspections, which are scheduled manually.
 
-#.  Line 10: :any:`formatstring` is used to make the descriptions of the menu items more to the point.
+Due to an upcoming inspection, production lines must halt briefly, and the Gantt page aids in planning this while minimizing disruption.
 
-Gantt page
+**Gantt Page Features**
+
+The Gantt Chart page displays tasks and maintenance schedules for each production line. Key features include:
+
+- **Page Actions**: Located in the lower right menu:
+  
+  - *Pacman*: Invokes the optimization algorithm to schedule tasks.
+  - *New*: Opens a dialog to create a new task.
+
+- **Hovering**: Displays tooltips with task details.
+
+  .. image:: images/gantt-widget-tooltip.png
+      :align: center
+
+- **Item Menu**: Accessed by left-then-right clicking on a task, enabling options to:
+
+  - Move tasks to the earliest possible position (manual tasks only).
+  - Move tasks to their deadline (manual tasks only).
+  - Switch scheduling type between manual and automated.
+  - Delete tasks.
+  - Edit task properties.
+
+  .. image:: images/edit-gantt-menu.png
+      :align: center
+
+Pure Combi
 ----------
 
+This example models a scenario where you need to transport bags of fruit (30 kg total) and a 20 kg display stand to a market. Several scouts offer to help carry the fruit, each with a specific carrying capacity, totaling 30 kg across all scouts. Any unassigned bags will need to be carried by you.
 
-Data representation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+**Page Operations**
 
-There are three different data representations that need to be kept consistent:
+The Pure Combi page opens with all bags assigned to you, displaying the scouts' remaining carrying capacity.
 
-#.  User data
+  .. image:: images/opening-combi-chart.png
+      :align: center
 
-#.  Gantt Chart data: start and length of each task.
+Key functions:
 
-#.  Coefficients used by the optimization algorithm.
+- **Right-click Assignment**: Assign bags to scouts by right-clicking on them in the column chart and selecting the scout's name.
 
+  .. image:: images/combi-right-click-to-assign.png
+      :align: center
 
+- **Optimize**: Use the optimizer (from page actions) to optimally assign bags, reducing your load.
 
-Border: use of CSS
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+  .. image:: images/optimal-assignment-combi-chart.png
+      :align: center
 
-We built on the intuition that 
-blue indicates "can be changed manually in this session" and that 
-black indicates "derived or computed data" and is treated as read-only in this session.
+  - The optimizer aims to assign all bags to scouts, eliminating the need for you to carry any.
 
-Specifying tooltips is similar to what is used for the map widget, and not repeated here.
+- **Reset**: Click the broom icon in the lower right to reset assignments.
 
-Context menu
-^^^^^^^^^^^^^^^^^^^^
+  By assigning specific bags and optimizing, you can explore different solutions. The app may leave you with a load if some scouts can't carry certain bags.
 
-The context menu is to be used for:
+  .. image:: images/combi-widget-joey-grabs.png
+      :align: center
 
-#.  The scheduled jobs in the Gantt Chart
+Hints and solution checks are available through side panels, as shown below:
 
-#.  Each column/row in the Order Details tab.
+  .. image:: images/combi-widget-joey-grabs-optimize.png
+      :align: center
 
-.. code-block:: aimms
-    :linenos:
+The following screenshot shows an alternate starting scenario with more than 10 kg of fruit still assigned to you:
 
-    StringParameter sp_ganttSpecItemActions {
-        IndexDomain: (webui::indexWidgetItemActionSpec,webui::indexPageExtension,webui::indexWidgetActionSpec);
-        Definition: {
-            {
-                ('p_WebUIGNTDuration', '1', 'displaytext') : "Debug",
-                ('p_WebUIGNTDuration', '1', 'icon'       ) : "aimms-bug",
-                ('p_WebUIGNTDuration', '1', 'procedure'  ) : "pr_jobDebug",
-                ('p_WebUIGNTDuration', '1', 'state'      ) : if bp_developmentSupport then "Active" else "Hide" endif,
-            
-                ('p_WebUIGNTDuration', '2', 'displaytext') : formatString("Move order %e to front", ep_selectedOrder),
-                ('p_WebUIGNTDuration', '2', 'icon'       ) : "aimms-first",
-                ('p_WebUIGNTDuration', '2', 'procedure'  ) : "pr_moveToFront",
-                ('p_WebUIGNTDuration', '2', 'state'      ) : if bp_orderScheduledByLivingCreature( ep_selectedOrder ) then "Active" else "Inactive" endif,
-            
-                ('p_WebUIGNTDuration', '3', 'displaytext') : formatString("Delay order %e until deadline", ep_selectedOrder),
-                ('p_WebUIGNTDuration', '3', 'icon'       ) : "aimms-last",
-                ('p_WebUIGNTDuration', '3', 'procedure'  ) : "pr_delayUntilDeadline",
-                ('p_WebUIGNTDuration', '3', 'state'      ) : if bp_orderScheduledByLivingCreature( ep_selectedOrder ) then "Active" else "Inactive" endif,
-            
-                ('p_WebUIGNTDuration', '4', 'displaytext') : formatString("Allow scheduling of %e by living creature", ep_selectedOrder),
-                ('p_WebUIGNTDuration', '4', 'icon'       ) : "aimms-grab",
-                ('p_WebUIGNTDuration', '4', 'procedure'  ) : "pr_scheduleByLivingCreature",
-                ('p_WebUIGNTDuration', '4', 'state'      ) : if not bp_orderScheduledByLivingCreature( ep_selectedOrder ) then "Active" else "Inactive" endif,
-            
-                ('p_WebUIGNTDuration', '5', 'displaytext') : formatString( "Allow scheduling of %e by optimization algorithm", ep_selectedOrder),
-                ('p_WebUIGNTDuration', '5', 'icon'       ) : "aimms-music",
-                ('p_WebUIGNTDuration', '5', 'procedure'  ) : "pr_scheduleByOptimizationAlgorithm",
-                ('p_WebUIGNTDuration', '5', 'state'      ) : if bp_orderScheduledByLivingCreature( ep_selectedOrder ) then "Active" else "Inactive" endif,
-            
-                ('p_WebUIGNTDuration', '6', 'displaytext') : formatString("Delete order %e", ep_selectedOrder),
-                ('p_WebUIGNTDuration', '6', 'icon'       ) : "aimms-bin",
-                ('p_WebUIGNTDuration', '6', 'procedure'  ) : "pr_deleteJob",
-                ('p_WebUIGNTDuration', '6', 'state'      ) : "Active",
-            
-                ('p_WebUIGNTDuration', '7', 'displaytext') : formatString("Edit order %e", ep_selectedOrder),
-                ('p_WebUIGNTDuration', '7', 'icon'       ) : "aimms-quill",
-                ('p_WebUIGNTDuration', '7', 'procedure'  ) : "pr_editJob",
-                ('p_WebUIGNTDuration', '7', 'state'      ) : "Active"
-            }
-        }
-    }
-
-Remarks:
-
-#.  Similar to the context menu in the map widget above.
-
-#.  Several actions are only available to a job that can be scheduled manually.
-
-#.  Every job can be edited.
-
-#.  The use of ``'p_WebUIGNTDuration'`` in the above definition implies: Only available to the Gantt Chart, so how to reuse this menu in the order table?
-
-Let's first identify the identifiers to be used, namely the ones in the columns:
-
-.. code-block:: aimms
-    :linenos:
-
-    Set s_ganttItemActionIdentifiers {
-        SubsetOf: AllIdentifiers;
-        Definition: {
-            data  {
-                bp_orderScheduledByLivingCreature,
-                ep_orderProduct,
-                p_orderLength,
-                ep_orderProductType,
-                p_orderQuantity,
-                ep_orderDeliveryDueDate,
-                ep_orderProductionLine,
-                ep_orderStartDate,
-                p_WebUIGNTDuration,
-                p_WebUIGNTStartTime
-            }
-        }
-    }
-
-And then we can easily replicate the data of ``sp_ganttSpecItemActions`` for each of these column names using the below definition:
-
-.. code-block:: aimms
-    :linenos:
-
-    StringParameter sp_ganttItemActions {
-        IndexDomain: (webui::indexWidgetItemActionSpec,webui::indexPageExtension,webui::indexWidgetActionSpec);
-        Definition: {
-            if webui::indexWidgetItemActionSpec in s_ganttItemActionIdentifiers then
-                sp_ganttSpecItemActions('p_WebUIGNTDuration', webui::indexPageExtension, webui::indexWidgetActionSpec)
-            else
-                ""
-            endif
-        }
-    }
-
-
-Pure combi page
-------------------
-
-Tooltip
-^^^^^^^^^
-
-a simple sentence for the tooltip suffices for this application, and a HTML table is not created.
-
-To make multiple identifiers accessible for the right mouse menu and the tooltip,
-the ``<IDENTIFIER-SET>`` index should not be placed in the ``Totals:`` pivot group.
-That is why the ``<IDENTIFIER-SET>`` is placed in the ``Stacked:`` pivot group.
-
-Slack, definition
-^^^^^^^^^^^^^^^^^^
-
-The slack is what can be carried minus what is already assigned to a youngster. 
-For the element ``'me'`` there is no slack - 
-in the story the "me" just carries the booth and the bags of fruit left behind by the youngsters myself 
-without regard to a maximum weight that can be carried.
-
-
-Visualizing slack
-^^^^^^^^^^^^^^^^^^^^
-
-item order
-""""""""""""""
-
-The item order is that the slack should be on top.
-
-The design of the column chart is such that items are placed in order of the set on top of each other; 
-so the first visible element will be at the bottom!
-
-.. image:: images/slack-order-bottom-to-top.png
-    :align: center
-
-As the ``<IDENTIFIER-SET>`` is in the ``Stacked:`` pivot group, this also applies to the order of the contents.
-By swapping this order, the columns look as follows (clearly not desired).
-
-.. image:: images/slack-order-bottom-to-top-wrong.png
-    :align: center
-
-White with blue border
-""""""""""""""""""""""""
-
-To give the impression of empty space to be filled a blue rectangle around a white box is used.
-This is achieved using the following .css code:
-
-.. code-block:: CSS
-    :linenos:
-
-    .annotation-hassomeslack {
-        fill:white; 
-        stroke:blue!Important; 
-        stroke-width:4px; 
-    }
-
-Remarks:
-
-* The annotation ``hassomeslack`` is added in the model.
-
-* The ``Important`` is needed to make this coloring of the borderline sufficiently specific to be accepted.
-
-Right mouse menu
-^^^^^^^^^^^^^^^^^^
-
-.. (index <Identifiers> not in Totals)
-
-This page has only one widget: the combination chart, introduced with AIMMS 4.84.
-The story is about assigning an item to an element in a set.
-To invoke an assignment, the right mouse menu should be popped up at a colored rectangle in the column chart.
-
-The right mouse menu contains an entry for each element in a set.
-The code shows how to generate these lines for an arbitrary set (to be kind to the end-user, please limit the size of such a set to no more than 10 elements).
-
-For each line in the menu, there needs to be a corresponding procedure.
-To create the proper number of procedures, a runtime library is used.
-
-
-
-
-
-.. Status bar
-.. -----------
-
-
-
-.. Author's note: I really enjoyed creating this small AIMMS application.
+  .. image:: images/bad-starting-combi-widget.png
+      :align: center
 
 .. spelling:word-list::
 
-    endif
-    combi
+    greyed
