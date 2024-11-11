@@ -150,7 +150,9 @@ We can model this by the string parameter:
 You'll also need to assign *annotations* to data identifiers you want to style in the CSS.
 
 .. image:: images/css-annotation.png
+    :align: center 
 
+|
     
 .. code-block:: aimms
 

@@ -1,4 +1,4 @@
-Add qualitative color palettes
+Add Qualitative Color Palettes
 ================================
 
 A practical aspect of data visualization is the choice of colors for the 
@@ -14,18 +14,20 @@ For instance a color palette for two colors may provide the following bar chart:
 .. image:: images/two-bars.png
     :align: center
 
+|
+
 and a color palette for five colors may provide the following bar chart:
 
 .. image:: images/five-bars.png
     :align: center
 
+|
+
 There are several sites, see references below, that provide the hex codes for a color palette.
 However, to color data items in AIMMS WebUI, annotations activating selected CSS rules are to be used.
 The next section focuses on translating hex codes in JSON to CSS rules that can be used in an AIMMS WebUI application.
 
-.. note: The hex codes for color palettes using in this article are obtained via `I want hue <https://medialab.github.io/iwanthue/>`_
-
-Converting JSON color palette to CSS rules for an AIMMS WebUI application
+Converting JSON Color Palette to CSS Rules for an AIMMS WebUI Application
 -----------------------------------------------------------------------------
 
 The hex codes for color palettes using in this article are obtained via `I want hue <https://medialab.github.io/iwanthue/>`_.
@@ -44,7 +46,7 @@ to select colors for items in the widgets.
 These annotations are matched against CSS rules.
 The CSS file that matches annotations with the colors from the above JSON file is as follows:
 
-.. code-block:: aimms
+.. code-block:: css
     :linenos:
 
     /*
@@ -87,7 +89,9 @@ The CSS file that matches annotations with the colors from the above JSON file i
         background: var(--i-want-hue-normal-2-color-2);
     }
 
-    ... and similar sections for table widget and linechart widget.
+    /*
+        and similar sections for table widget and linechart widget.
+    */
 
 
 
@@ -105,7 +109,7 @@ As you can see, it contains of several sections.  Some remarks:
 
 
 
-Steps to translate JSON to CSS
+Steps to Translate JSON to CSS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #.  Reading the JSON using `Data Exchange library <https://documentation.aimms.com/dataexchange/index.html>`_
@@ -120,7 +124,7 @@ The :download:`genColorCSS application <model/genColorCSS.zip>` is a small app t
     Therefore `genColorCSS` does not work when published on AIMMS PRO.
 
 
-Suggested reading
+Suggested Reading
 -----------------
 
 There is a lot of literature and automated support on selecting and creating nice qualitative color palettes. To name a few:
