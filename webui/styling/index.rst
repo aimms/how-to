@@ -9,6 +9,7 @@ This section contains tips for customizing the appearance of your AIMMS user int
 .. toctree::
    :maxdepth: 1
     
+   /Articles/531/531-working-with-wonderful-webui-widgets
    /Articles/531/531-create-wonderful-webui-widgets
    /Articles/377/377-add-color-palettes
    /Articles/377/377-link-legend-colors

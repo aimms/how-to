@@ -16,7 +16,6 @@ AIMMS offers two User Interface builders: the classic WinUI for applications tha
 .. toctree::
    :maxdepth: 1
     
-   /Articles/531/531-working-with-wonderful-webui-widgets
    core/index
    styling/index
    widgets/index
