@@ -1,5 +1,5 @@
 .. image:: /Images/time-machine-128.png
-   :scale: 100
+   :scale: 120
    :align: right
    :alt: AIMMS Deprecations Help & Support
 
@@ -11,8 +11,7 @@ Software Evolution
    :description: Help and support with adapting to changes in AIMMS IDE.
 
 
-
-AIMMS software has evolved over time, to match arising user needs and changes in the industry. As we make changes to available features, you may need guidance in upgrading software versions, or adapting your models. These topics help you prepare your apps for upgrades and deprecations.
+AIMMS Optimization Tooling has evolved over time, to match arising user needs and changes in the industry. As we make changes to available features, you may need guidance in upgrading software versions, or adapting your models. These topics help you prepare your apps for upgrades and deprecations.
 
 .. toctree::
    :maxdepth: 1

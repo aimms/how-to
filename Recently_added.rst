@@ -1,8 +1,8 @@
 .. image:: Images/shooting-star-128.png
    :align: right
-   :scale: 100
+   :scale: 120
 
-Recently added
+Recently Added
 ==============
 
 .. keep most recent 10-12 articles

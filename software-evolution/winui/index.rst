@@ -1,5 +1,5 @@
 .. image:: /Images/bricks-128.png
-   :scale: 100
+   :scale: 120
    :align: right
    :alt: AIMMS WinUI Informations
 
@@ -9,7 +9,7 @@ WinUI
 .. meta::
    :description: Help and support about WinUI features. 
 
-AIMMS software has evolved over time, to match arising user needs and changes in the industry. As we make changes to available features, you may need guidance in upgrading software versions, or adapting your models. These topics help you prepare your apps for upgrades and deprecations.
+AIMMS WinUI has evolved over time to WebUI to match arising user needs and changes in the industry. Here you can find articles about our legacy UI, WinUI.
 
 .. toctree::
    :maxdepth: 1
