@@ -69,13 +69,12 @@
     :hidden:
 
     /Articles/363/363-getting-started-aimms
-    C_Getting_Started/index
     licensing/index
     aimms-ide/index
-    C_Developer/index
+    aimms-language
+    algorithmic-capabilities/index 
     aimms-libraries/index
     aimms-pro-cloud-platform/index
-    algorithmic-capabilities/index 
     integrations-data-exchange/index
     webui/index
     software-evolution/index
