@@ -18,6 +18,7 @@ As more and more software vendors recognize the value of the `UTF8 <http://en.wi
 As a first example, the statement
 
 .. code-block:: aimms
+    :linenos:
 
     decodedText := FileRead( "HelloWorld.txt", selectedEncoding );
     
@@ -26,6 +27,7 @@ would read the file ``HelloWorld.txt`` using the encoding selected via the eleme
 As a second example, using the declaration:
 
 .. code-block:: aimms
+    :linenos:
 
     FILE:
        identifier :  smallTextFile
@@ -37,7 +39,8 @@ As a second example, using the declaration:
 the statements
 
 .. code-block:: aimms
-
+    :linenos:
+    
     put smallTextFile ;
     put decodedText ;
     putclose ;
