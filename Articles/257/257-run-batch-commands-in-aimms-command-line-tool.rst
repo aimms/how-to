@@ -101,7 +101,7 @@ By doing this, all the running results will be displayed on the command window. 
 .. seealso::
     
     * :doc:`miscellaneous/calling-aimms/the-aimms-command-line-tool`
-    * :any:`articles/580/580-download-compressed-files`
+    * :doc:`../580/580-download-compressed-files`
 
 
 
