@@ -1,22 +1,22 @@
-Zipping and Unzipping on AIMMS Developer and on AIMMS Cloud
-===========================================================================
+Zipping and Unzipping Files
+====================================
 
 .. meta::
    :description: How to zip, unzip using AIMMS Developer, AIMMS PRO and on AIMMS Cloud.
-   :keywords: zip, unzip, compress, expand, 
+   :keywords: zip, unzip, compress, expand, cloud
 
 Downloading and uploading a collection of files is achieved by first compressing into a single file, 
 called an archive, and then transferring the archive from one machine to the other.
 In this article, we will focus on the compression of a collection of files into a single archive, and 
 on the expansion of such an archive into a collection of files.
 
-The AIMMS core does not provide zipping and unzipping functionality natively; but 
+The AIMMS core does not provide zipping and unzipping functionality natively; but:
 
 * Windows 10 and Windows 11 provide the powershell commands 
   `Compress-Archive <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.archive/compress-archive?view=powershell-7.4>`_ and
-  `Expand-Archive <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.archive/expand-archive?view=powershell-7.4>`_
+  `Expand-Archive <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.archive/expand-archive?view=powershell-7.4>`_.
 * Most Linux distributions, including the Linux distribution used on the AIMMS Cloud, provide zip.
-  The use of zip is illustrated `here <https://www.geeksforgeeks.org/zip-command-in-linux-with-examples/>`_
+  The use of zip is illustrated `here <https://www.geeksforgeeks.org/zip-command-in-linux-with-examples/>`_.
 
 This can be leveraged using the :any:`Execute` procedure of AIMMS, for instance to create a zip archive as follows:
 
@@ -42,12 +42,14 @@ and to unpack such a zip archive into files as follows:
 
 The above is captured in an example project that can be obtained via the download:
 
-:download:`AIMMS 24.2 project download <model/ZipUnzip.zip>` 
+	:download:`AIMMS 24.2 project download <model/ZipUnzip.zip>` 
 
 This project has the following interface:
 
 .. figure:: images/zipunzip-app.png
     :align: center
+
+|
 
 The buttons have the following actions:
 
@@ -59,24 +61,15 @@ The buttons have the following actions:
 
 #. ``buttonOverviewCopiedFiles``: Lists all files in the project folder, including the files expanded from the archive by ``buttonUnzipDemo``
 
-Further Reading
--------------------
+.. seealso::
+	.. hlist::
+		:columns: 2
 
-* :doc:`Run executable files <../../Articles/114/114-execute>`
-
-* `Upload widget <https://documentation.aimms.com/webui/upload-widget.html>`_ 
-
-* `Download widget <https://documentation.aimms.com/webui/download-widget.html>`_
-
-* Datalake storage download: `dex::dls::DownloadFile <https://documentation.aimms.com/dataexchange/api.html#dex-dls-DownloadFile>`_ 
-
-* Datalake storage upload: `dex::dls::UploadFile <https://documentation.aimms.com/dataexchange/api.html#dex-dls-UploadFile>`_
-
-
-.. * Upload function: Vraag aan Mischa
-
-.. * Download function: Vraag aan Mischa
-
+		* :doc:`Run executable files <../../Articles/114/114-execute>`
+		* `Upload widget <https://documentation.aimms.com/webui/upload-widget.html>`_ 
+		* `Download widget <https://documentation.aimms.com/webui/download-widget.html>`_
+		* `dex::dls::DownloadFile <https://documentation.aimms.com/dataexchange/api.html#dex-dls-DownloadFile>`_ 
+		* `dex::dls::UploadFile <https://documentation.aimms.com/dataexchange/api.html#dex-dls-UploadFile>`_
 
 .. spelling:word-list::
 
