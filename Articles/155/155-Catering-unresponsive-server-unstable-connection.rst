@@ -41,7 +41,7 @@ We will now explain bottom up the procedure calls:
 The Delegate Procedure
 -----------------------------------------
 
-The code for the procedure that delegates work to the server is as follows in this example. More elaborate examples can be found in other articles in the category :ref:`Deployment<ref-deployment>`.
+The code for the procedure that delegates work to the server is as follows in this example. 
 
 .. code-block:: aimms
    :linenos:

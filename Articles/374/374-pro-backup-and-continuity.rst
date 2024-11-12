@@ -1,3 +1,4 @@
+:orphan:
 Protect AIMMS PRO installation for business continuity
 ======================================================
 

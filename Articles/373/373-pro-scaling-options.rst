@@ -1,3 +1,4 @@
+:orphan:
 Scaling AIMMS PRO
 ==================
 

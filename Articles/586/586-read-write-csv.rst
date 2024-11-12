@@ -1,3 +1,5 @@
+:orphan:
+
 .. warning:: 
    Please note that the `DataExchange Library <https://documentation.aimms.com/dataexchange/index.html>`_ offers a more flexible and significantly `more efficient method <https://documentation.aimms.com/dataexchange/using.html#example-csv-mapping>`_ for reading and writing CSV files. 
    Moreover, minor changes to such a mapping also provides for reading and writing using other data formats such as data sheets in an Excel workbook or Parquet files.
