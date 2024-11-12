@@ -80,7 +80,7 @@ By doing this, all the running results will be displayed on the command window. 
 
             Get-Content cmds.txt | AimmsCmd.exe ExampleProject.aimms > log.txt
 
-    - Calling AIMMS from Python and printing the logs could be done using the following script and the `Download example`_
+    - Calling AIMMS from Python and printing the logs could be done using the following script.
 
         .. code-block:: Python
 
@@ -96,7 +96,7 @@ By doing this, all the running results will be displayed on the command window. 
             print(log_file.read())
             log_file.close()
 
-        The example model used in this article can be downloaded here: :download:`model/StandAlone.zip`.
+        The example model used in this code snippet can be downloaded here: :download:`model/StandAlone.zip`.
 
 .. seealso::
     
