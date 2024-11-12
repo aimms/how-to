@@ -71,7 +71,7 @@
     /Articles/363/363-getting-started-aimms
     licensing/index
     aimms-ide/index
-    aimms-language
+    aimms-language/index
     algorithmic-capabilities/index 
     aimms-libraries/index
     aimms-pro-cloud-platform/index
