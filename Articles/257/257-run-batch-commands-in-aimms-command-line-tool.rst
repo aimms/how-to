@@ -16,7 +16,7 @@ To start using the command line tool open the terminal and run ``AimmsCmd Exampl
     
     ``C:\Users\<Your_User_Name>\AppData\Local\AIMMS\IFA\Aimms\<AIMMS_version>\Bin\AimmsCmd.exe``
 
-Basic commands available
+Basic Commands Available
 ------------------------
 AIMMS command line tool offers a the following commands.
 
@@ -44,7 +44,7 @@ AIMMS command line tool offers a the following commands.
 
         Quit;
         
-Running batch commands
+Running Batch Commands
 ----------------------
 Instead of running each command one by one, you can also run batch commands by writing all the commands you want to execute in a text file. 
 
@@ -96,16 +96,11 @@ By doing this, all the running results will be displayed on the command window. 
             print(log_file.read())
             log_file.close()
 
-Download example
------------------
-The example model used in this article can be downloaded below:
+        The example model used in this article can be downloaded here: :download:`model/StandAlone.zip`.
 
-* :download:`model/StandAlone.zip` 
-
-Further reading
-----------------
-
-* :doc:`miscellaneous/calling-aimms/the-aimms-command-line-tool`
+.. seealso::
+    
+    * :doc:`miscellaneous/calling-aimms/the-aimms-command-line-tool`
 
 
 

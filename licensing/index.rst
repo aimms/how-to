@@ -1,5 +1,5 @@
 .. image:: /Images/key-128.png
-   :scale: 100
+   :scale: 120
    :align: right
    :alt: AIMMS Licensing Help & Support
 

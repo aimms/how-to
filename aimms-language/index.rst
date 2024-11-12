@@ -1,17 +1,26 @@
 .. image:: /Images/AIMMSLanguage.png
    :scale: 120
    :align: right
-   :alt: AIMMS Language
+   :alt: AIMMS Licensing Help & Support
 
 AIMMS Language
 ========================
 
 .. meta::
-   :description: Help and support with building models and developing apps in AIMMS IDE.
+   :keywords: AIMMS language, modeling, optimization, decision-making, parameters, variables, constraints, linear programming, nonlinear programming, data-driven
+   :description: AIMMS language is a specialized modeling language that enables users to create precise and data-driven optimization models for real-world decision-making.
 
 
-This section covers topics of app development in the AIMMS IDE. Here are support guides to connect to external data sources, such as databases and Excel files. This section also includes practical advice for creating various types of models, and how to use solvers and interpret their results. You'll find plenty of help getting started with the AIMMS programming language, along with troubleshooting tips for errors.
+AIMMS language is a purpose-built modeling language designed to facilitate the creation of 
+complex mathematical optimization models within the AIMMS environment. 
+With a syntax that is both powerful and user-friendly, AIMMS language enables users to 
+define parameters, variables, constraints, and objective functions, representing real-world 
+decision problems with clarity and precision. It supports a range of optimization techniques—from 
+linear to nonlinear programming—and allows users to transform intricate calculations into actionable, 
+data-driven insights, making it invaluable in fields like supply chain, logistics, 
+and production optimization.
 
+Here you will find articles related to AIMMS Language separated in Coding, Modeling and Deploying:
 
 .. toctree::
    :maxdepth: 1
@@ -22,12 +31,3 @@ This section covers topics of app development in the AIMMS IDE. Here are support
    modeling/index
    deploying/index
     
-.. seealso::
-   .. hlist::
-      :columns: 2
-
-      * A list of
-      * short items
-      * that should be
-      * displayed
-      * horizontally
