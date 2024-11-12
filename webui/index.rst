@@ -17,7 +17,7 @@ Designed for ease of use, the WebUI allows users to build intuitive applications
 making complex insights accessible and actionable. With features like drag-and-drop widgets, interactive charts, and dynamic filtering, 
 AIMMS WebUI helps decision-makers engage directly with model outputs and data, enabling informed and timely decisions across industries like supply chain and logistics.    
 
-Here you will find articles about WebUI core fuctionalities, styling and widget settings:
+Here you will find articles about WebUI core functionalities, styling and widget settings:
 
 .. toctree::
    :maxdepth: 1
