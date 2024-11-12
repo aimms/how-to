@@ -73,13 +73,13 @@
     licensing/index
     aimms-ide/index
     C_Developer/index
-    webui/index
-    C_Deployment/index
+    aimms-libraries/index
     aimms-pro-cloud-platform/index
+    algorithmic-capabilities/index 
+    integrations-data-exchange/index
+    webui/index
     software-evolution/index
     C_Examples/index
     C_Toolkit/index
     Recently_added
 
-   
-   
