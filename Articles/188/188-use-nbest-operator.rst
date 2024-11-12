@@ -1,4 +1,4 @@
-Overview: ``NBest`` Operator
+``NBest`` Operator
 ============================
 
 .. meta::
@@ -13,7 +13,7 @@ The first argument for the ``NBest`` operator is the binding index; the result o
 
 The second argument is the sort criteria you want to use. Note that a higher value returned by this sort-criteria indicates a better value, i.e. ``NBest`` will sort the elements from largest to smallest. 
 
-The third argument is the number ``n``, indicating how many elements you are interested in (in this example, n = 3).
+The third argument is the number ``n``, indicating how many elements you are interested in (in this example, :math:`n = 3`).
 
 Note that you need to add a subset identifier to store the results (``LargestTransportCities`` in this case) and to set the *Order by* attribute to *user*. 
 
@@ -24,8 +24,11 @@ In the code below, ``LargestTransportCities`` is an indexed subset that is index
 For each factory ``i``, the above indexed subset ``LargestTransportCities(i)`` will contain the three customers to which the most amount is transported.
 
 
+.. seealso::
 
-For more information about the *Order by* attribute and sorted sets, see :doc:`non-procedural-language-components/set-set-element-and-string-expressions/set-expressions`.
+   * :doc:`non-procedural-language-components/set-set-element-and-string-expressions/set-expressions`
+   * `Function Last <https://documentation.aimms.com/functionreference/elementary-computational-operations/set-related-functions/last.html>`_
+   * `Function First <https://documentation.aimms.com/functionreference/elementary-computational-operations/set-related-functions/first.html>`_
 
 
 
