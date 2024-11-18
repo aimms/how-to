@@ -128,7 +128,7 @@ Language
 The EV station assignment algorithm is a critical component in optimizing the EV charging infrastructure. It ensures the allocation of EVs to the most suitable 
 charging stations by evaluating proximity, demand, and station capacities. Below are the four main steps in this algorithm:
 
-1. Calculate Distances ``pr_getDistances```:
+1. Calculate Distances ``pr_getDistances``:
 
    *  For each particle (potential station configuration), compute the distances between EV locations and individuals, considering a distance cutoff to filter out far locations.
 
@@ -141,7 +141,7 @@ The following three steps are all contained in the procedure ``pr_getClosest``:
 3. Initialize Allocation Count:
 
    *  Reset or initialize the counter that keeps track of station allocations.
-   
+
 4. Assign EVs to Stations:
 
    *  Iterate over all individuals and locations.
@@ -334,10 +334,6 @@ Minimal Requirements
 ----------------------
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example. 
-
-References
------------
-
 
 
 Release Notes
