@@ -129,15 +129,21 @@ The EV station assignment algorithm is a critical component in optimizing the EV
 charging stations by evaluating proximity, demand, and station capacities. Below are the four main steps in this algorithm:
 
 1. Calculate Distances ``pr_getDistances```:
+
    *  For each particle (potential station configuration), compute the distances between EV locations and individuals, considering a distance cutoff to filter out far locations.
 
 The following three steps are all contained in the procedure ``pr_getClosest``:
 
 2. Estimate Demand:
+
    *  Calculate the demand at each location using a function that factors in the number of EVs per location and their range, applying an exponential decay based on the deviation from a mean range value.
+
 3. Initialize Allocation Count:
+
    *  Reset or initialize the counter that keeps track of station allocations.
+   
 4. Assign EVs to Stations:
+
    *  Iterate over all individuals and locations.
    *  Attempt to assign EVs to the nearest available station that has not exceeded its maximum charger capacity.
    *  Use a threshold velocity to determine if the station's movement is negligible, in which case the assignment remains the same with a certain probability.
