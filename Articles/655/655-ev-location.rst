@@ -109,7 +109,7 @@ vector that determines the direction and magnitude of the particle's movement in
 velocities and positions based on their own experiences and those of their neighbors within the swarm. The update procedures are handled in ``updateVariations``.
 
 *Velocity Update*
-The velocity update guides particles towards the promising areas in the search space. The respecitve :math:`x,y` velocity of each particle is updated using the following formula:
+The velocity update guides particles towards the promising areas in the search space. The respective :math:`x,y` velocity of each particle is updated using the following formula:
 
 :math:`V_{i,s}^{new} = \omega \cdot V_{i,s}^{old} + \c_{1} \cdot (B_{i,s} - P_{i,s}^{old}) + \c_{2} \cdot (G_{s} - P_{i,s}^{old})`
 
