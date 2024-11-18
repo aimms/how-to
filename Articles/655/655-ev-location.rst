@@ -129,22 +129,22 @@ The EV station assignment algorithm is a critical component in optimizing the EV
 charging stations by evaluating proximity, demand, and station capacities. Below are the four main steps in this algorithm:
 
 1. Calculate Distances ``pr_getDistances```:
-   * For each particle (potential station configuration), compute the distances between EV locations and individuals, considering a distance cutoff to filter out far locations.
+   *  For each particle (potential station configuration), compute the distances between EV locations and individuals, considering a distance cutoff to filter out far locations.
 
 The following three steps are all contained in the procedure ``pr_getClosest``:
 
 2. Estimate Demand:
-   * Calculate the demand at each location using a function that factors in the number of EVs per location and their range, applying an exponential decay based on the deviation from a mean range value.
+   *  Calculate the demand at each location using a function that factors in the number of EVs per location and their range, applying an exponential decay based on the deviation from a mean range value.
 3. Initialize Allocation Count:
-   * Reset or initialize the counter that keeps track of station allocations.
+   *  Reset or initialize the counter that keeps track of station allocations.
 4. Assign EVs to Stations:
-   * Iterate over all individuals and locations.
-   * Attempt to assign EVs to the nearest available station that has not exceeded its maximum charger capacity.
-   * Use a threshold velocity to determine if the station's movement is negligible, in which case the assignment remains the same with a certain probability.
-   * If the nearest station cannot accommodate the demand, search for the next closest station.
-   * Update the allocation count for the selected station.
-   * If a suitable station is found, break the loop and continue with the next location.
-   * Set the distance for the allocated station to zero to prevent reassignment in the same iteration (as it falls out of the search domain).
+   *  Iterate over all individuals and locations.
+   *  Attempt to assign EVs to the nearest available station that has not exceeded its maximum charger capacity.
+   *  Use a threshold velocity to determine if the station's movement is negligible, in which case the assignment remains the same with a certain probability.
+   *  If the nearest station cannot accommodate the demand, search for the next closest station.
+   *  Update the allocation count for the selected station.
+   *  If a suitable station is found, break the loop and continue with the next location.
+   *  Set the distance for the allocated station to zero to prevent reassignment in the same iteration (as it falls out of the search domain).
  
 The EV station assignment algorithm dynamically assigns vehicles to stations. Once vehicles are assigned to stations, it is possible
 to evaluate the objective function, as all costs and penalties can be estimated.
