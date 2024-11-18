@@ -1,5 +1,5 @@
 EV Charging Location
-=========================
+====================
 
 .. meta::
    :keywords: EV charging station optimization, Particle Swarm Optimization, urban EV infrastructure, electric vehicle charging, AIMMS, WebUI, sustainable transportation, cost-effective charging, urban planning, EV infrastructure model
@@ -27,12 +27,14 @@ demand patterns, and geographical constraints. To address this, the example uses
 method adept at solving non-linear, non-convex problems in continuous spaces. By effectively planning charging station deployment, 
 urban planners can enhance EV infrastructure, helping cities advance toward sustainability goals and facilitating the broader shift to cleaner transportation.
 
+The problem was proposed as part of the `15th Annual AIMMS-MOPTA Optimization Modeling Competition <https://coral.ise.lehigh.edu/~mopta2023/competition>`_.
+
 Mathematical Model
 ------------------
-In the context of electric vehicle (EV) charging station optimization, the algorithm employs Particle Swarm Optimization (PSO) 
-to explore potential locations and sizes for charging stations. Each "particle" in the swarm represents a possible configuration, 
-and through iterative adjustments based on individual and collective experiences, the algorithm converges towards optimal solutions. 
-The approach effectively navigates complex, non-linear search spaces to enhance accessibility and minimize costs in EV infrastructure planning. 
+In the context of electric vehicle (EV) charging station optimization, the algorithm employs Particle Swarm Optimization (PSO) to explore potential 
+locations and sizes for charging stations. Each "particle" in the swarm represents a possible configuration, and through iterative adjustments based 
+on individual and collective experiences, the algorithm converges towards optimal solutions. The approach effectively navigates complex, non-linear 
+search spaces to enhance accessibility and minimize costs in EV infrastructure planning. 
 
 **Objective**
 Each charging station has a construction cost and maintenance cost. EVs incur a driving cost when traveling to and from a station, 
@@ -40,60 +42,132 @@ as well as a charging cost for each unit of charge that is consumed. Penalty cos
 The objective is to position and size the number of charging stations within the given continuous search space at the lowest cost.
 
 **Constraints**
-Several constraints must be applied to ensure that a practical solution can be found. There is an upper limit s_max on the number of stations that may 
-be constructed. Each station may contain a maximum of eight chargers. No more than one vehicle may wait for a charger at any given time and vehicles 
-may not exceed their range to reach a station. The demand for chargers is governed by the probability of an EV visiting a station. The demand for chargers 
-in a region can be estimated by taking the expected value of the probability of visiting a station multiplied by the number of vehicles in that region.
+Several constraints must be applied to ensure that a practical solution can be found. Each station may contain a maximum of eight chargers. 
+No more than one vehicle may wait for a charger at any given time and vehicles may not exceed their range to reach a station. 
+The demand for chargers is governed by the probability of an EV visiting a station. The demand for chargers in a region can be estimated by 
+taking the expected value of the probability of visiting a station multiplied by the number of vehicles in that region.
 
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|                                                       EV Charging Location Model                                                                     |
-+=====+=============================================================+==================================================================================+
-| **Sets and indices:**                                                                                                                                |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|     | :math:`v`, :math:`v \in Vessels`                            | Vessels                                                                          |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|     | :math:`c`, :math:`c \in Cargos`                             | Cargos                                                                           |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|     | :math:`r`, :math:`r \in Routes`                             | Routes                                                                           |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-| **Parameters:**                                                                                                                                      |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|     | :math:`D_{v,r} \in \{ 0, 1 \}`                              | Route :math:`r` used by vessel :math:`v`: ``p_def_domainAllocateVesselToRoute``  |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|     | :math:`CR_{c,r} \in \{ 0, 1 \}`                             | Cargo :math:`c` on route :math:`r`: ``p_def_cargoesOnRoute``                     |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|     | :math:`IC_{v} \in \mathbb{R_{+}}`                           | Idle cost for vessel :math:`v`: ``p_def_idleCostVesselNotUsed``                  |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|     | :math:`SC_{c} \in \mathbb{R_{+}}`                           | Cost cargo :math:`c` handled on spot market: ``p_spotCostVessel``                |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|     | :math:`T_{r} \in \mathbb{R_{+}}`                            | Cost executing route :math:`r`: ``p_def_operationalCostPerRoute``                |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-| **Variables:**                                                                                                                                       |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|     | :math:`a_{(v,r)|D_{v,r}} \in \{ 0, 1 \}`                    | allocate vessel :math:`v` to route :math:`r`: ``v_allocateVesselToRoute``        |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|     | :math:`s_{c} \in \{0..1\}`                                  | cargo :math:`c` is left to the spot market: ``bv_cargoOnCharteredVessel``        |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|     | :math:`i_{v} \in \{0..1\}`                                  | vessel :math:`v` remains idle: ``v_idleVessel``                                  |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-| **Constraints:**                                                                                                                                     |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|  1  | :math:`\forall c: \sum_r a_{v,r} * CR_{c,r} + s_{c} = 1`    | Cargo on a single vessel, or left to spot market                                 |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|  2  | :math:`\forall v: \sum_r a_{v,r} + i_{v} = 1`               | Each vessel can take only one route, or is idle                                  |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-| **Minimize:**                                                                                                                                        |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|     | :math:`\sum_{v,r} T_{r} * a_{v,r} +`                        | Operational cost                                                                 |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|     | :math:`\sum_{v} IC_{v} * i_{v} +`                           | Unused vessel cost                                                               |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
-|     | :math:`\sum_{c} SC_{p,c} * S_{c}`                           | Total cost of cargos left to the spot market                                     |
-+-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|                                                       EV Charging Location Model                                                                                                         |
++=====+=============================================================+======================================================================================================================+
+| **Sets and indices:**                                                                                                                                                                    |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`s`, :math:`s \in Stations`                           | Stations                                                                                                             |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`i`, :math:`i \in Individuals`                        | Individuals                                                                                                          |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`g`, :math:`g \in Generations`                        | Generations                                                                                                          |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`l`, :math:`l \in EV Locations`                       | EV Locations                                                                                                         |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+| **Important Problem Parameters:**                                                                                                                                                        |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`D_{l,i} \in \mathbb{R_{+}}`                          | Demand for Location :math:`l` for Indivdual :math:`i`: ``p_demand``                                                  |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`C_{m} \in \mathbb{R_{+}}`                            | Maintenance Cost :math:`C_{m}`: ``p_maintenanceCost``                                                                |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`C_{c} \in \mathbb{R_{+}}`                            | Construction Cost :math:`C_{c}`: ``p_constructionCost``                                                              |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`C_{d} \in \mathbb{R_{+}}`                            | Driving Cost per mile :math:`C_{d}`: ``p_drivingCostPerMile``                                                        |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`C_{h} \in \mathbb{R_{+}}`                            | Charging Cost per hour :math:`C_{h}`: ``p_chargingCostPerHour``                                                      |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`Q_{max} \in \mathbb{Z_{+}}`                          | Maximum chargers per station :math:`Q_{max}`: ``p_maxNumberChargersPerStation``                                      |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`R \in \mathbb{R_{+}}`                                | Mean vehicle range :math:`R`: ``p_meanVehicleRange``                                                                 |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+| **Important Model Parameters:**                                                                                                                                                          |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`\omega \in \mathbb{R_{+}}`                           | Inertia component :math:`\omega`: ``p_inertiaComponent``                                                             |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`\c_{1} \in \mathbb{R_{+}}`                           | Cognitive component :math:`\c_{1}`: ``p_cognitiveComponent``                                                         |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`\c_{2} \in \mathbb{R_{+}}`                           | Social component :math:`\c_{2}`: ``p_socialComponent``                                                               |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+| **Variables:**                                                                                                                                                                           |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`P_{i,s}^{x} \in \mathbb{R}`                          | :math:`x`-Position of station :math:`s` in individual :math:`i`: ``p_currentSolutionX``                              |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`P_{i,s}^{y} \in \mathbb{R}`                          | :math:`y`-Position of station :math:`s` in individual :math:`i`: ``p_currentSolutionY``                              |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`V_{i,s}^{x} \in \mathbb{R}`                          | :math:`x`-Velocity of station :math:`s` in individual :math:`i`: ``p_currentSolutionVelocityX``                      |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`V_{i,s}^{y} \in \mathbb{R}`                          | :math:`y`-Velocity of station :math:`s` in individual :math:`i`: ``p_currentSolutionVelocityY``                      |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`B_{i,s}^{x} \in \mathbb{R}`                          | :math:`x`-Position of the best local solution for station :math:`s` in individual :math:`i`: ``p_bestLocalSolutionX``|
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`B_{i,s}^{y} \in \mathbb{R}`                          | :math:`y`-Position of the best local solution for station :math:`s` in individual :math:`i`: ``p_bestLocalSolutionY``|
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`G_{s}^{x} \in \mathbb{R}`                            | :math:`x`-Position of the best global solution for station :math:`s`: ``p_bestGlobalSolutionX``                      |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+|     | :math:`G_{s}^{y} \in \mathbb{R}`                            | :math:`y`-Position of the best global solution for station :math:`s`: ``p_bestGlobalSolutionY``                      |
++-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
 
+**Variation Operations**
+Each particle (station) has two main attributes: position and velocity. The position corresponds to a potential solution to the optimization problem, and the velocity is a 
+vector that determines the direction and magnitude of the particle's movement in the search space. Throughout the optimization process, particles adjust their 
+velocities and positions based on their own experiences and those of their neighbors within the swarm. The update procedures are handled in ``updateVariations``.
 
-Language 
---------
+*Velocity Update*
+The velocity update guides particles towards the promising areas in the search space. The respecitve :math:`x,y` velocity of each particle is updated using the following formula:
+
+:math:`V_{i,s}^{new} = \omega \cdot V_{i,s}^{old} + \c_{1} \cdot (B_{i,s} - P_{i,s}^{old}) + \c_{2} \cdot (G_{s} - P_{i,s}^{old})`
+
+*Position Update*
+After calculating the new velocity, the particle updates its :math:`x,y` position in the search space to reflect this new velocity. 
+The position update is performed using the following formula:
+
+:math:`P_{i,s}^{new} = P_{i,s}^{old} + V_{i,s}^{new}`
+
+**Assigning EVs to Stations**
+The EV station assignment algorithm is a critical component in optimizing the EV charging infrastructure. It ensures the allocation of EVs to the most suitable 
+charging stations by evaluating proximity, demand, and station capacities. Below are the four main steps in this algorithm:
+
+1. Calculate Distances ``pr_getDistances```:
+* For each particle (potential station configuration), compute the distances between EV locations and individuals, considering a distance cutoff to filter out far locations.
+
+The following three steps are all contained in the procedure ``pr_getClosest``:
+2. Estimate Demand:
+* Calculate the demand at each location using a function that factors in the number of EVs per location and their range, applying an exponential decay based on the deviation from a mean range value.
+3. Initialize Allocation Count:
+* Reset or initialize the counter that keeps track of station allocations.
+4. Assign EVs to Stations:
+* Iterate over all individuals and locations.
+* Attempt to assign EVs to the nearest available station that has not exceeded its maximum charger capacity.
+* Use a threshold velocity to determine if the station's movement is negligible, in which case the assignment remains the same with a certain probability.
+* If the nearest station cannot accommodate the demand, search for the next closest station.
+* Update the allocation count for the selected station.
+* If a suitable station is found, break the loop and continue with the next location.
+* Set the distance for the allocated station to zero to prevent reassignment in the same iteration (as it falls out of the search domain).
+ 
+The EV station assignment algorithm dynamically assigns vehicles to stations. Once vehicles are assigned to stations, it is possible
+to evaluate the objective function, as all costs and penalties can be estimated.
+
+**PSO and Assignment Algorithm**
+Bringing the PSO and assignment algorithms together, the EV charging location problem is solved by taking the following steps
+  
+.. code-block:: none  
+  
+    // Initialize the problem
+    call pr_initializeProblem
+
+    for each generation do  
+        // Call the subroutine responsible for assignments 
+        call KNNSubroutine // This runs pr_getDistances, gets the ranges, and runs pr_getClosest
+      
+        // Evaluate the cost of the current solution
+        call evaluateCost  
+      
+        // Update the variations for the next generation  
+        call updateVariations  
+      
+        // Store the fitness for the current generation by taking the mean of the total objective cost  
+        // for all individuals in the generation  
+        generationalFitness[generation] = mean(individual in generation, totalObjectiveCost(individual))  
+      
+        // Update the global best fitness with the best global solution cost  
+        globalBestFitness[generation] = bestGlobalSolutionCost   
+    endfor  
 
 
 WebUI Features
