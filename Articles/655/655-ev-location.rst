@@ -36,12 +36,14 @@ locations and sizes for charging stations. Each "particle" in the swarm represen
 on individual and collective experiences, the algorithm converges towards optimal solutions. The approach effectively navigates complex, non-linear 
 search spaces to enhance accessibility and minimize costs in EV infrastructure planning. 
 
-**Objective**
+Objective
+~~~~~~~~~~~~~~~~~~~~~~
 Each charging station has a construction cost and maintenance cost. EVs incur a driving cost when traveling to and from a station, 
 as well as a charging cost for each unit of charge that is consumed. Penalty costs are added for EVs that fall out-of-range from their nearest charger. 
 The objective is to position and size the number of charging stations within the given continuous search space at the lowest cost.
 
-**Constraints**
+Constraints
+~~~~~~~~~~~~~~~~~~~~~~
 Several constraints must be applied to ensure that a practical solution can be found. Each station may contain a maximum of eight chargers. 
 No more than one vehicle may wait for a charger at any given time and vehicles may not exceed their range to reach a station. 
 The demand for chargers is governed by the probability of an EV visiting a station. The demand for chargers in a region can be estimated by 
@@ -80,9 +82,9 @@ taking the expected value of the probability of visiting a station multiplied by
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
 |     | :math:`\omega \in \mathbb{R_{+}}`                           | Inertia component :math:`\omega`: ``p_inertiaComponent``                                                             |
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-|     | :math:`\c_{1} \in \mathbb{R_{+}}`                           | Cognitive component :math:`\c_{1}`: ``p_cognitiveComponent``                                                         |
+|     | :math:`c_{1} \in \mathbb{R_{+}}`                           | Cognitive component :math:`c_{1}`: ``p_cognitiveComponent``                                                         |
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-|     | :math:`\c_{2} \in \mathbb{R_{+}}`                           | Social component :math:`\c_{2}`: ``p_socialComponent``                                                               |
+|     | :math:`c_{2} \in \mathbb{R_{+}}`                           | Social component :math:`c_{2}`: ``p_socialComponent``                                                               |
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
 | **Variables:**                                                                                                                                                                           |
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
@@ -103,71 +105,88 @@ taking the expected value of the probability of visiting a station multiplied by
 |     | :math:`G_{s}^{y} \in \mathbb{R}`                            | :math:`y`-Position of the best global solution for station :math:`s`: ``p_bestGlobalSolutionY``                      |
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
 
-**Variation Operations**
+
+Variation Operations
+~~~~~~~~~~~~~~~~~~~~~~
+
 Each particle (station) has two main attributes: position and velocity. The position corresponds to a potential solution to the optimization problem, and the velocity is a 
 vector that determines the direction and magnitude of the particle's movement in the search space. Throughout the optimization process, particles adjust their 
-velocities and positions based on their own experiences and those of their neighbors within the swarm. The update procedures are handled in ``updateVariations``.
+velocities and positions based on their own experiences and those of their neighbors within the swarm. The update procedures are handled in ``pr_updateVariations``.
 
-*Velocity Update*
 The velocity update guides particles towards the promising areas in the search space. The respective :math:`x,y` velocity of each particle is updated using the following formula:
 
-:math:`V_{i,s}^{new} = \omega \cdot V_{i,s}^{old} + \c_{1} \cdot (B_{i,s} - P_{i,s}^{old}) + \c_{2} \cdot (G_{s} - P_{i,s}^{old})`
+:math:`V_{i,s}^{new} = \omega \cdot V_{i,s}^{old} + c_{1} \cdot (B_{i,s} - P_{i,s}^{old}) + c_{2} \cdot (G_{s} - P_{i,s}^{old})`
 
-*Position Update*
 After calculating the new velocity, the particle updates its :math:`x,y` position in the search space to reflect this new velocity. 
 The position update is performed using the following formula:
 
 :math:`P_{i,s}^{new} = P_{i,s}^{old} + V_{i,s}^{new}`
 
-**Assigning EVs to Stations**
+Language
+------------------
+
 The EV station assignment algorithm is a critical component in optimizing the EV charging infrastructure. It ensures the allocation of EVs to the most suitable 
 charging stations by evaluating proximity, demand, and station capacities. Below are the four main steps in this algorithm:
 
 1. Calculate Distances ``pr_getDistances```:
-* For each particle (potential station configuration), compute the distances between EV locations and individuals, considering a distance cutoff to filter out far locations.
+   * For each particle (potential station configuration), compute the distances between EV locations and individuals, considering a distance cutoff to filter out far locations.
 
 The following three steps are all contained in the procedure ``pr_getClosest``:
+
 2. Estimate Demand:
-* Calculate the demand at each location using a function that factors in the number of EVs per location and their range, applying an exponential decay based on the deviation from a mean range value.
+   * Calculate the demand at each location using a function that factors in the number of EVs per location and their range, applying an exponential decay based on the deviation from a mean range value.
 3. Initialize Allocation Count:
-* Reset or initialize the counter that keeps track of station allocations.
+   * Reset or initialize the counter that keeps track of station allocations.
 4. Assign EVs to Stations:
-* Iterate over all individuals and locations.
-* Attempt to assign EVs to the nearest available station that has not exceeded its maximum charger capacity.
-* Use a threshold velocity to determine if the station's movement is negligible, in which case the assignment remains the same with a certain probability.
-* If the nearest station cannot accommodate the demand, search for the next closest station.
-* Update the allocation count for the selected station.
-* If a suitable station is found, break the loop and continue with the next location.
-* Set the distance for the allocated station to zero to prevent reassignment in the same iteration (as it falls out of the search domain).
+   * Iterate over all individuals and locations.
+   * Attempt to assign EVs to the nearest available station that has not exceeded its maximum charger capacity.
+   * Use a threshold velocity to determine if the station's movement is negligible, in which case the assignment remains the same with a certain probability.
+   * If the nearest station cannot accommodate the demand, search for the next closest station.
+   * Update the allocation count for the selected station.
+   * If a suitable station is found, break the loop and continue with the next location.
+   * Set the distance for the allocated station to zero to prevent reassignment in the same iteration (as it falls out of the search domain).
  
 The EV station assignment algorithm dynamically assigns vehicles to stations. Once vehicles are assigned to stations, it is possible
 to evaluate the objective function, as all costs and penalties can be estimated.
 
-**PSO and Assignment Algorithm**
-Bringing the PSO and assignment algorithms together, the EV charging location problem is solved by taking the following steps
+Bringing the PSO and assignment algorithms together, the EV charging location problem is solved by ``pr_runPSOAlgorithm``:
   
-.. code-block:: none  
-  
-    // Initialize the problem
-    call pr_initializeProblem
+.. code-block:: aimms  
+   :linenos:
 
-    for each generation do  
-        // Call the subroutine responsible for assignments 
-        call KNNSubroutine // This runs pr_getDistances, gets the ranges, and runs pr_getClosest
-      
-        // Evaluate the cost of the current solution
-        call evaluateCost  
-      
-        // Update the variations for the next generation  
-        call updateVariations  
-      
-        // Store the fitness for the current generation by taking the mean of the total objective cost  
-        // for all individuals in the generation  
-        generationalFitness[generation] = mean(individual in generation, totalObjectiveCost(individual))  
-      
-        // Update the global best fitness with the best global solution cost  
-        globalBestFitness[generation] = bestGlobalSolutionCost   
-    endfor  
+      pr_resetPSO;
+
+      !Initialize the problem
+      pr_initializeProblem;
+
+      p_is_first_generation := 1;
+
+      for (i_gen in s_def_generations) do
+         
+         !Call the subroutine responsible for assignments 
+         pr_KNNSubroutine; !This runs pr_getDistances, gets the ranges, and runs pr_getClosest
+         
+         !Evaluate the cost of the current solution
+         pr_evaluateCost;
+         
+         !Update the variations for the next generation  
+         pr_updateVariations;
+
+         !Store the fitness for the current generation by taking the mean of the 
+         !total objective cost for all individuals in the generation  
+         p_generationalFitness(i_gen) := mean(i_indv, p_totalObjectiveCost(i_indv));
+         
+         !Update the global best fitness with the best global solution cost
+         p_globalBestFitness(i_gen) := p_bestGlobalSolutionCost;
+
+         p_is_first_generation := 0;
+
+      endfor;
+
+      pr_updateDistancesForOutput;
+
+      ui::pr_calculateHistograms;
+      ui::pr_calculateSolutionPoints;
 
 
 WebUI Features
