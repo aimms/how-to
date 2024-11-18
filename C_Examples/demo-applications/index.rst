@@ -16,6 +16,7 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
    /Articles/434/434-reindeer-pairing
    /Articles/397/397-traveling-salesman
    /Articles/590/590-vessel-scheduling
+   /Articles/655/655-ev-location
 
 .. grid:: 3
    :gutter: 4
