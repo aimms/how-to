@@ -342,7 +342,7 @@ Minimal Requirements
 Release Notes
 --------------------
 
-`v1.0 <https://github.com/aimms/vessel-scheduling/releases/tag/1.0>`_ (15/08/2024)
+`v1.0 <https://github.com/aimms/ev-charging-locations/releases/tag/1.0>`_ (22/11/2024)
 	First version of this application. 
 
 .. spelling:word-list::
