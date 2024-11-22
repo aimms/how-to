@@ -14,8 +14,11 @@ EV Charging Location
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/
 
-|
-   
+.. image:: images/project-1920-high.gif
+    :align: center
+
+|   
+
 Story
 -----
 This example tackles the growing challenge of optimally placing and sizing electric vehicle (EV) 
