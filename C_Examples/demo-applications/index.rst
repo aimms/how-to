@@ -16,6 +16,7 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
    /Articles/434/434-reindeer-pairing
    /Articles/397/397-traveling-salesman
    /Articles/590/590-vessel-scheduling
+   /Articles/655/655-ev-location
 
 .. grid:: 3
    :gutter: 4
@@ -56,4 +57,8 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
 
       Plans efficient cargo delivery with oil tankers, minimizing costs while ensuring each vessel carries one cargo within set time windows.
 
+   .. grid-item-card:: EV Charging Location
+      :img-top: ../../Articles/655/images/project-960-high.gif
+      :link: https://how-to.aimms.com/Articles/655/655-ev-location.html
 
+      Optimizes the placement and sizing of EV charging stations using the PSO algorithm, balancing accessibility and infrastructure costs to support sustainability goals and address urban demand.
