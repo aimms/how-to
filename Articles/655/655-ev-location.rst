@@ -12,7 +12,7 @@ EV Charging Location
    :target: https://github.com/aimms/ev-charging-locations
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/
+   :target: https://community.aimms.com/aimms-support-updates-67/ev-charging-location-example-1793
 
 .. image:: images/project-1920-high.gif
     :align: center
