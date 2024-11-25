@@ -1,11 +1,11 @@
 :orphan:
 
-Adding a logo to an AIMMS WebUI app using AIMMS 4.84 and older
+Adding a Logo to an AIMMS WebUI App Using AIMMS 4.84 and Older
 ==============================================================
 
 This short article illustrates adding a logo to an AIMMS WebUI application.
 
-The example provided
+The Eample Provided
 ---------------------
 
 Please download :download:`The AIMMS 4.81 sample application <model/bespokeApp.zip>` to experiment with the example.
@@ -13,6 +13,8 @@ The top bar of this app looks as follows (snapshot taken with a browser zoom of 
 
 .. image:: images/left-upper-with-icon.png
     :align: center
+
+|
 
 To achieve this, the following two files:
 
@@ -22,7 +24,7 @@ To achieve this, the following two files:
 
 have been added to the folder ``<project>\MainProject\WebUI\resources\css``.
 
-The example explained
+The Example Explained
 ----------------------
 
 The contents of the ``icon.css`` are presented below and then discussed.
@@ -79,7 +81,7 @@ Some remarks about the above code, in case you want to adopt and adapt the above
 
 #.  Line 13: Examples of the numerous transformations supported by the `transform property <https://www.w3schools.com/cssref/css3_pr_transform.asp>`_ are rotating, scaling, and moving. 
 
-Tips on tweaking
+Tips on Tweaking
 -----------------
 
 #.  It goes without saying that you should replace ``Placeholder logo@2x.png`` by an image file containing the logo of choice. 
@@ -97,7 +99,7 @@ Tips on tweaking
 
     *   Second, move the icon up or down using the ``transform > translate`` attribute as illustrated on line 13.
 
-Logo attribution
+Logo Attribution
 ------------------
 
 The placeholder logo used in this article was created by Paul Wolfs from Total Design (http://www.totaldesign.com).

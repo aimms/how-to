@@ -60,5 +60,6 @@ Remarks:
 - ``sp_whatHasChanged`` is used to clarify that only data selected was changed. 
 
 .. seealso::
-    More documentation about `UponChange annotation <https://documentation.aimms.com/webui/widget-options.html#additional-identifier-properties>`_.
+    
+    * `UponChange annotation <https://documentation.aimms.com/webui/widget-options.html#additional-identifier-properties>`_.
 

@@ -64,18 +64,22 @@
 -----------------------------------------------------------
 
 .. toctree::
-   :maxdepth: 1
-   :titlesonly:
-   :hidden:
+    :maxdepth: 1
+    :titlesonly:
+    :hidden:
 
-   C_Getting_Started/index
-   C_Developer/index
-   C_UI/index
-   C_Deployment/index
-   C_Evolution/index
-   C_Examples/index
-   C_Toolkit/index
-   Recently_added
+    /Articles/363/363-getting-started-aimms
+    C_Getting_Started/index
+    licensing/index
+    aimms-ide/index
+    C_Developer/index
+    webui/index
+    C_Deployment/index
+    aimms-pro-cloud-platform/index
+    software-evolution/index
+    C_Examples/index
+    C_Toolkit/index
+    Recently_added
 
    
    

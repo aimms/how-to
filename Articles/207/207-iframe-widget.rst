@@ -1,4 +1,4 @@
-The iFrame widget
+The iFrame Widget
 ============================
 
 The `iframe html element <https://www.w3schools.com/tags/tag_iframe.asp>`_ is famous for its power of embedding other sites.
@@ -20,7 +20,7 @@ Downloads
 You can add the iframe widget to your collection of widgets to choose from by unzipping ``iFrameExample`` 
 and adding this to the folder ``./MainProject/WebUI/resources/javascript``.
 
-Example details
+Example Details
 ----------------
 
 The example app may look as follows upon opening:
@@ -28,6 +28,7 @@ The example app may look as follows upon opening:
 .. image:: images/example-app.png
     :align: center
 
+|
 
 #.  Content published on the internet can be shown using the iFrame widget, for instance as follows:
 
@@ -45,7 +46,6 @@ The example app may look as follows upon opening:
     you will need to refer to the folder:
 
     .. code-block:: aimms 
-        :linenos:
 
         StringParameter sp_localHTMLfile {
             Definition: {

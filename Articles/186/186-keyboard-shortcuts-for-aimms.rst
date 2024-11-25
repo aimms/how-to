@@ -1,5 +1,5 @@
-Keyboard shortcuts for AIMMS
-================================
+Keyboard Shortcuts
+==================
 
 Sometimes it is easier to work strictly with the keyboard than to switch to the mouse. There are a number of keyboard shortcuts available in AIMMS that allow for quick access to certain features within AIMMS.
 

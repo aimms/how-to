@@ -81,7 +81,7 @@ Add ``sp_def_bgColorActualContractFulfillment`` to the identifier will be used o
 Results
 ~~~~~~~
 
-.. image:: images/results.png
+.. figure:: images/results-1.png
     :align: center
 
 |

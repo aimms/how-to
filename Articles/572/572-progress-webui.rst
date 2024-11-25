@@ -1,10 +1,10 @@
-Showing progress of long running algorithms
+Showing Progress of Long Running Algorithms
 =============================================
 
 Most users can be re-assured that a long running algorithm is working by showing the progress that is being made.
 There are various ways of doing this. This article gives a brief overview and a detailed example of showing progress in data for the WebUI.
 
-WinUI:
+WinUI
 ------
 
 #.  Showing a progress bar using :aimms:function:`DialogProgress`
@@ -12,7 +12,7 @@ WinUI:
 #.  During the running of the algorithm, call :aimms:function:`PageRefreshAll`
 
 
-WebUI:
+WebUI
 ------
 
 #.  Showing progress message in the **busy** icon see `SetProgressMessage <https://documentation.aimms.com/webui/library.html#setprogressmessage>`_
@@ -20,10 +20,10 @@ WebUI:
 #.  Regularly scheduling the next portion of the algorithm using :aimms:procedure:`ScheduleAt`.  This requires rewriting the algorithm, which is illustrated in the next section.
 
 
-WinUI and WebUI showing progress
+WinUI and WebUI Showing Progress
 ------------------------------------
 
-WinUI example showing progress
+WinUI Example Showing Progress
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Showing the progress of an algorithm in WinUI is achieved by adding `PageRefreshAll` calls to the code, see line 6 below:
@@ -49,9 +49,9 @@ this can be done in the properties of the button activating the actual algorithm
 .. image:: images/winui-alg-runs-in-background.png
     :align: center
 
+|
 
-
-WebUI example showing progress
+WebUI Example Showing Progress
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 There is no equivalent to `PageRefreshAll` in the WebUI.  
@@ -94,9 +94,10 @@ A screenshot of this app:
 .. figure:: images/MovingColumnBars.png
     :align: center
 
+|
+
 This app makes an arbitrary change in the levels by -1 or by +1 every second.
 
-References
------------
+.. seealso::
 
-#.  TSP opt-2 example, see :doc:`../397/397-traveling-salesman`
+    * TSP opt-2 example, see :doc:`../397/397-traveling-salesman`.

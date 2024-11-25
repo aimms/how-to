@@ -13,8 +13,10 @@ Identifiers with binary range are displayed as checkboxes in table and scalar wi
 .. image:: images/binary-switch.png
     :align: center
     :scale: 80
-	
-Using CSS to render a switch
+
+|
+
+Using CSS to Render a Switch
 ----------------------------------------
 
 Like all application specific resources (ASR), you will need to place the corresponding CSS files in the ``MainProject\WebUI\resources`` folder. Note that the `resources` folder does not exist by default. You can create a folder named `css` for better organization of your files, making the final directory ``MainProject\WebUI\resources\css``.
@@ -33,61 +35,49 @@ To restrict this change to only table widgets instead of scalar widgets, simply 
         
         :download:`legacy-binary-switch.css <downloads/legacy-binary-switch.css>`
 
-Customizing the switch
+Customizing the Switch
 --------------------------
 You can modify the CSS used to make the switch in many ways. For example, to create the switch for pivot table widgets, to change the color of the switch, or apply the switch rules only to some widgets.
 
 To customize the behavior of the CSS for the switch, follow the guidelines below.
 
-Alignment of switch
+Alignment of Switch
 ^^^^^^^^^^^^^^^^^^^^^
 The horizontal alignment of the switch is center by default. However, this is depends on the width of the scalar widget / width of the columns in the table widget and you might need to adjust the code accordingly. Change the value of the ``left`` attribute (line #23 in the file binary-switch.css) to get the desired alignment.
 
 .. code-block:: css
+    :linenos:
 
     .cell-wrapper input[type=checkbox][class*=boolean] + span {
 	    float:right;
 	    left: -35%;
 
-Color of switch
+Color of Switch
 ^^^^^^^^^^^^^^^^^^^^^
 The color of the switch can be modified by editing the background color defined in the CSS snippet below. The default AIMMS blue color hexadecimal code is ``#004bff``. You can replace this color code in the CSS snippet.
 
 .. code-block:: css
+    :linenos:
     
     .cell-wrapper input[type=checkbox][class*=boolean]:checked + span {
 	    background: #004bff !important;
     }
 
-Compact scalar widget
+Compact Scalar Widget
 ^^^^^^^^^^^^^^^^^^^^^^^^
 You will need an additional CSS snippet to properly render the switch in compact scalar widgets. Add the below code at the end of your CSS file.
 
 .. code-block:: css
+    :linenos:
 
     .tag-scalar.compact-scalar input[type=checkbox][class*=boolean] + span {
         top: 8px;
     }
 
-.. Filter based on name
-.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. To display checkboxes in some cases and switches in others, you can define rules for that behavior based on the widget name. 
+.. seealso::
 
-.. The additional tag ``[data-widget\.uri*="Switch"]`` in all snippets identifies widgets containing "Switch" in their names, as shown in the example below.
-
-.. .. code-block:: none
-
-..     .tag-scalar[data-widget\.uri*="Switch"] .boolean-value-editor input {
-..     }
-
-.. This "filter" replaces the checkboxes with switches only when ``Switch`` is in the widget name. The filter is **case sensitive**.
-
-Related Topics
------------------
-* **AIMMS Documentation:** `Widget Options <https://documentation.aimms.com/webui/widget-options.html>`_
-* **AIMMS Documentation:** `Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_
-
-.. * **AIMMS Documentation:** `Developing Custom Widgets <https://documentation.aimms.com/webui/own-widgets.html>`_
+    * `Widget Options <https://documentation.aimms.com/webui/widget-options.html>`_
+    * `Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_
 
 .. END CONTENT
 

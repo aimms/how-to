@@ -8,28 +8,35 @@ Change Widget Styles with CSS
    
 .. todo:: Clarify difference between AIMMS set elements and HTML elements.
 
-This article uses the Line Chart as an example to show how CSS styling can be applied to WebUI widgets.
+This article uses the `Line Chart <https://documentation.aimms.com/webui/line-chart-widget.html>`_ as an example to show how CSS styling can be applied to WebUI widgets.
 
-In AIMMS WebUI, you can customize the appearance of elements using CSS. 
-
-The general format for naming and styling elements in CSS is shown in the example below.
+In AIMMS WebUI, you can customize the appearance of elements using CSS. The general format for naming and styling elements in CSS is shown in the example below.
 
 .. image:: images/css-format.png
+    :align: center 
+
+|
 
 Use as many of the selectors (such as ``.tag-barchart`` or ``.annotation-HomeSum``) as needed to specify when to apply the rule in the declaration (between curly brackets). 
 
 Using more selectors makes the rule more specific. Using fewer selectors makes the rule more general.
 
-Styling to highlight information
+Styling to Highlight Information
 --------------------------------
 
 First the question: why would we want to add styling? Consider the following image of two lines in a line chart. 
 
 .. image:: images/Linechart-no-styling.png
+    :align: center 
+
+|
 
 I don't know about you, but I have to look twice to see that the lines have a different color. So to make it easier for the viewer of such charts, I may want to add styling to highlight differences.
 
 .. image:: images/Linechart-identifier-styling.png
+    :align: center 
+
+|
 
 This is achieved using the following css code:
 
@@ -64,7 +71,7 @@ Line 1, the first selector, consists of the following portions:
 
 #. ``.annotation-p_HomeSum`` This selects element within the line chart that are used to display the identifier ``p_HomeSum``. 
 
-Styling options for Linecharts
+Styling Options for Linecharts
 ------------------------------
 
 The tables below reference some of the CSS selectors and properties that apply to Line Chart Widgets.
@@ -103,7 +110,7 @@ You'll also need to know the *properties* that can be controlled to customize th
 +-------------------------------------------+-----------------------------------------------+
 
 
-Identifying elements
+Identifying Elements
 ----------------------
 
 You need to know the *selectors* that the CSS file uses to identify particular widgets and elements in your WebUI page. 
@@ -111,6 +118,9 @@ You need to know the *selectors* that the CSS file uses to identify particular w
 A quick way to discover this is to right-click the widget in your web browser and click *Inspect*. You will see the source HTML code and CSS rules related to this element. This can help you to edit or write new rules in the CSS for particular elements. For instance, on a circle, you may get:
 
 .. image:: images/AnnotatinInfoCircle.png
+    :align: center 
+
+|
 
 
 Identifying circles by identifier, does not allow us to select a sub selection of circles.  
@@ -140,7 +150,9 @@ We can model this by the string parameter:
 You'll also need to assign *annotations* to data identifiers you want to style in the CSS.
 
 .. image:: images/css-annotation.png
+    :align: center 
 
+|
     
 .. code-block:: aimms
 
@@ -153,6 +165,7 @@ You'll also need to assign *annotations* to data identifiers you want to style i
 #. Reference the element in your style sheet, with a selector (``.annotation-whatever``). 
 
 .. code-block:: none
+    :linenos:
 
     .tag-linechart[data-widget\.uri="Linechart_HomeAway_ElementStyling"] circle.annotation-p_HomeSum.annotation-SignificantDiff{
             stroke: red;
@@ -165,78 +178,20 @@ You'll also need to assign *annotations* to data identifiers you want to style i
     }
 
 .. image:: images/Linechart-element-styling.png
+    :align: center 
 
+|
 
-See `Data-Dependent Styling <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_ for more details.
+    :download:`AIMMS project download of the above example <downloads/LineChartWidgetStyling.zip>` 
 
+    :download:`AIMMS project download for cell coloring in a table <downloads/CellColoring.zip>` 
 
-.. Styling elements
-.. ----------------
-.. 
-.. Here is an example with a line chart and a bar chart, each containing two parameters, ``HomeSum`` and ``AwaySum``. 
-.. 
-.. With default styling, the WebUI page looks like this:
-.. 
-.. .. image:: images/css-default.png
-.. 
-.. As you can see, ``HomeSum`` is represented in pink and ``AwaySum`` is represented in purple in both widget types.
-.. 
-.. Let's say you prefer more contrast, and want to make the ``AwaySum`` green. You can apply a general rule:
-.. 
-.. .. code-block:: css
-.. 
-..     .annotation-AwaySum{
-..         background: green;
-..         stroke: green;
-..         fill: green;        
-..     }
-.. 
-.. In the example above, ``.annotation-AwaySum`` refers to the *annotation* of the data identifier. 
-.. 
-.. This snippet defines the color for ``AwaySum`` in all of the widgets in your project as green. If you have multiple widgets containing ``AwaySum``, then data for ``AwaySum`` will always be green regardless of the widget type, as you can see in the image below. 
-.. 
-.. .. image:: images/css-general.png
-.. 
-.. Now you've decided that pink doesn't look good on a line chart. Now you can apply a specific rule:
-.. 
-.. .. code-block:: css
-.. 
-..     .tag-linechart .annotation-HomeSum{
-..         background: black;
-..         stroke: black;
-..         fill: black;
-..     }
-.. 
-.. In the example above, ``.tag-linechart`` refers to the widget type and ``.annotation-HomeSum`` refers to the annotation of the data identifier.
-.. 
-.. This snippet defines the color for ``HomeSum`` as black in all the line chart widgets.
-.. 
-.. .. image:: images/css-specific.png
-.. 
-.. Now you'd like to make another line chart named ``DashHomeSum`` where there should be a dashed line. The next example is even more specific:
-.. 
-.. .. code-block:: css
-.. 
-..     .tag-linechart[data-widget\.uri="DashHomeSum"] .annotation-HomeSum{
-..         stroke-dasharray: 4;
-..     }
-.. 
-.. In the example above, ``[data-widget\.uri="BlueHomeSum"]`` refers to the name of the widget and ``.annotation-HomeSum`` refers to the annotation of the data identifier. 
-.. 
-.. This snippet defines the line for ``HomeSum`` as dashed only in the bar chart widget with name ``DashHomeSum``.
-.. 
-.. .. image:: images/css-more-specific.png
+.. seealso::
 
-
-:download:`AIMMS project download of the above example <downloads/LineChartWidgetStyling.zip>` 
-
-:download:`AIMMS project download for cell coloring in a table <downloads/CellColoring.zip>` 
-
-Related topics
------------------
-* **AIMMS Documentation:** `Widget Options <https://documentation.aimms.com/webui/widget-options.html>`_
-* **AIMMS Documentation:** `Line Chart Widget <https://documentation.aimms.com/webui/line-chart-widget.html>`_
-* **AIMMS Documentation:** `CSS Styling <https://documentation.aimms.com/webui/css-styling.html>`_
+    * `Widget Options <https://documentation.aimms.com/webui/widget-options.html>`_
+    * `Line Chart Widget <https://documentation.aimms.com/webui/line-chart-widget.html>`_
+    * `CSS Styling <https://documentation.aimms.com/webui/css-styling.html>`_
+    * `Data-Dependent Styling <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_
 
 .. END CONTENT
 

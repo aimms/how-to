@@ -48,19 +48,17 @@ show a link to the load data page so users can easily continue on their way.
 
 Note that apps can have multiple types of users, and therefore also several user flows.
 
-.. image:: images/UserFlow.gif
+.. figure:: images/UserFlow.gif
   :align: center
 
-.. raw:: html
-  
-  <p align="center"><i>Notification after loading the configuration, inviting users to continue to the Data page.</i></p>
+  Notification after loading the configuration, inviting users to continue to the Data page.
 
 Page Structure
 -----------------
 
 Here are some recommendations on the layout and structure of pages within apps.
 
-Deliver value on the homepage
+Deliver Value on the Homepage
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. image:: images/homepage-1024x647.png
@@ -74,7 +72,7 @@ Here are some suggestions on making great homepages:
 - Show actions required from the user. For example, on the S&OP app users are asked to fill in their forecast data before a certain date. On the homepage of this app users see the current status of the process and if and when action is required from them.
 - Tailor different homepages to different user groups. When an app has multiple users or user groups, it can be valuable to create different versions of the homepage tailored to their needs. For example, a Sales Director sees a homepage focused on sales data and a CFO sees a homepage with an emphasis on financial information.
 
-A picture is worth a thousand words: visual impact is important
+A Picture is Worth a Thousand Words: Visual Impact is Important
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. image:: images/Homepage-1024x774.png
   :align: center
@@ -83,7 +81,7 @@ Visual impact helps in creating a positive user experience.
 Maps are a great example: whenever location is core to an app, maps can be a powerful visual means to improve user experience. 
 Infographics or charts related to the app can also serve this purpose.
 
-Page flow
+Page Flow
 ~~~~~~~~~~~~~~~
 .. image:: images/PageFlow-1024x659.png
   :align: center
@@ -92,7 +90,7 @@ User flows often follow a similar pattern: data goes in, is processed, and produ
 
 Layout can reflect this pattern: widgets about input on top, processing in the middle, output at the bottom.
 
-Visual hierarchy
+Visual Hierarchy
 ~~~~~~~~~~~~~~~~~~~~
 .. image:: images/1559100669207_z-1-1024x966.png
   :align: center
@@ -124,12 +122,10 @@ Less is more: sometimes multiple pages can be combined into one page.
 For example, a “load data” page and a “manage data” page can be merged into one page by adding one column. 
 Menus should be concise and help the user quickly find the right page.
 
-.. image:: images/less-is-more-768x348.png
+.. figure:: images/less-is-more-768x348.png
   :align: center
 
-.. raw:: html
-  
-  <p align="center"><i>Previously two pages, now only one: load and delete data on the same page.</i></p>
+  Previously two pages, now only one: load and delete data on the same page.
 
 
 

@@ -2,7 +2,7 @@
    Please note that the documentation you are currently viewing is for an older version of our technology. 
    While it is still functional, we recommend upgrading to our latest and more efficient option to take advantage of all the improvements we've made.
    
-More logging of WinUI Published Applications
+More Logging of WinUI Published Applications
 ===================================================
 
 To obtain more logging from a published WinUI application, the following steps are needed:

@@ -1,4 +1,4 @@
-Error message "tlsv1 alert protocol version"
+Error Message "tlsv1 alert protocol version"
 ===========================================================
 
 Symptom
@@ -37,7 +37,7 @@ To make use of this upgrade, you will need to take the following actions:
 #.  When you publish your applications on AIMMS PRO, you will need AIMMS PRO version 2.36.2 or later, see `this AIMMS PRO release note <https://documentation.aimms.com/pro-release-notes.html#aimms-pro-2-36-2-release>`_
 
 
-Please note
+Please Note
 -----------
 
 #.  Up till AIMMS Developer 4.76.3 and AIMMS PRO 2.36.1, TLS 1.2 was supported.  At the time of writing this article, TLS 1.2 is still

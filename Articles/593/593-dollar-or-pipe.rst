@@ -78,7 +78,7 @@ and you could use ``$`` and ``|`` as if they mean the exact same thing. **You di
 In the **4.97** version of AIMMS this has changed. So you now do get a warning when you use ``$`` where a ``|`` was expected, and vice versa (and in future versions this will even be an error).
 The reason for this is that in older AIMMS versions there has always been an error in how these operators were interpreted and that the interpretation was not consistent.
 
-Let’s try to explain:
+Let’s Try to Explain:
 ^^^^^^^^^^^^^^^^^^^^^
 
 A very important difference between the two operators is where they appear in the precedence order of operators. Take this example:

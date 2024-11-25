@@ -63,7 +63,7 @@ A.  Blue, the client session:
         .. raw:: html
 
             <details style="border: solid 1px gray; border-radius: 5px;">
-            <summary style="cursor: pointer;">How to: 👇</summary>
+            <summary style="cursor: pointer;">How to: 👇 (click to open text)</summary>
 
         #.  Construct input case via `sections <https://documentation.aimms.com/language-reference/data-communication-components/data-initialization-verification-and-control/working-with-the-set-allidentifiers.html>`_ and `pro::ManagedSessionInputCaseIdentifierSet <https://documentation.aimms.com/pro/appl-state.html#id1>`_.
 
@@ -116,7 +116,7 @@ A.  Blue, the client session:
         .. raw:: html
 
             <details style="border: solid 1px gray; border-radius: 5px;">
-            <summary style="cursor: pointer;">How to: 👇</summary>
+            <summary style="cursor: pointer;">How to: 👇 (click to open text)</summary>
             
         #.  The results of the solver session ``B.  Control Job.`` are to be put in the output case, and this is done in the session of that job.
             Thus the ``pro::ManagedSessionOutputCaseIdentifierSet`` needs to be assigned in the ``B.  Control Job.``.  
@@ -165,7 +165,7 @@ A.  Blue, the client session:
         .. raw:: html
 
             <details style="border: solid 1px gray; border-radius: 5px;">
-            <summary style="cursor: pointer;">How to: 👇</summary>
+            <summary style="cursor: pointer;">How to: 👇 (click to open text)</summary>
 
         #.  Construct input for a sub job.
 
@@ -186,7 +186,7 @@ A.  Blue, the client session:
 
             *   As this is an identifier in the library ``AimmsProLibrary```, and this library has the property ``NoSave`` set, the contents of this identifier in these two libraries is not accidentally overwritten by the transfer of data via a case.
 
-        #.  Start the sub job. This is done in the procedure ``scj::pr_delegateSubSol``.
+        #.  Start the sub job.  This is done in the procedure ``scj::pr_delegateSubSol``.
 
             .. code-block:: aimms 
                 :linenos:
@@ -220,7 +220,7 @@ A.  Blue, the client session:
         .. raw:: html
 
             <details style="border: solid 1px gray; border-radius: 5px;">
-            <summary style="cursor: pointer;">How to: 👇</summary>
+            <summary style="cursor: pointer;">How to: 👇 (click to open text)</summary>
 
         #.  Specify the output case to be constructed by a ``C. Sub job``.
             As you probably expect by now, this is done in the procedure ``wsj::pr_subsol`` as follows:

@@ -8,15 +8,8 @@ Log CDM
    
 CDM logging can be turned on for both the client and the service.
 
-|
-
-CDM Logging in the client
+CDM Logging in the Client
 --------------------------
-
-.. image:: images/search-property-256.png
-    :align: right
-
-
 
 Copy the file ``CDMLogConfig.cfg`` from the installation folder of the ``CDMService`` to the project folder.
 *Uncomment line 17 of this file*.
@@ -48,12 +41,8 @@ Copy the file ``CDMLogConfig.cfg`` from the installation folder of the ``CDMServ
 
 The output file ``CDMLog.xml`` is in the project folder.
 
-CDM logging in the server
+CDM Logging in the Server
 --------------------------
-
-.. image:: images/server-128.png
-    :align: right
-
 
 The ``CDMServiceLogConfig.cfg`` set the loggers of ``CDMService`` and ``CDMDB`` to ``TRACE`` (the highlighted lines):
 

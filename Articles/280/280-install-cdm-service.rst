@@ -15,13 +15,15 @@ When testing or deploying an application with multiple collaborating users a CDM
 The architecture that we want to achieve looks as follows:
 
 .. image:: images/cdm-architecture.jpg
+    :align: center
+    :scale: 50
 
 We will first focus on the central part of the above, namely to get a CDM service installed, next we will link it to a database and finally, we will illustrate an application directly connected to a CDM service.
 
 Installation of CDM Service
 -----------------------------------
 
-Uninstalling an older version of the CDM service
+Uninstalling an Older Version of the CDM Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 First make sure there is no other (older) CDM service installed on the target machine. 
@@ -30,18 +32,22 @@ You can check whether the CDM service is installed by starting the Windows Servi
 
 .. image:: images/ServicesIncludingCDM.png
     :align: center
-    :scale: 50
+    :scale: 70
+
+|
 
 When the service is installed, you will need to identify the installation folder by right-clicking on the service and selecting **Properties**.  This will show the following dialog and tell you from which folder it is installed:
 
 .. image:: images/PropertiesCDMService.png
     :align: center
 
+|
+
 #.  Open a command prompt (run as administrator)
 
 #.  ``cd`` to go to that folder
 
-#.  If the Service name is ``CDMService`` then you can
+#.  If the Service name is ``CDMService`` then you can:
 
     *   Execute ``CDMService.exe --uninstall``
 
@@ -50,7 +56,7 @@ When the service is installed, you will need to identify the installation folder
     *   Execute ``CDMService.exe --uninstall --name CDMService19998``
 
 
-Download the new CDM service executable
+Download the New CDM Service Executable
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. sidebar:: CDM Protocol
@@ -96,7 +102,7 @@ Let's start with downloading the executable on the machine that should run the C
 
     This is correct at the time of writing this article. To make sure the protocol is up to date, check the value of the string parameter ``cdm::WindowsServiceDownloadLocation`` which contains the URL for the download that corresponds to the protocol of your library. 
 
-Installing a new CDM service
+Installing a New CDM Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Now we can install CDM.
@@ -107,17 +113,17 @@ Now we can install CDM.
 
 #. Open a command prompt with elevated rights (run as administrator).
 
-#. ``cd`` to the created folder
+#. ``cd`` to the created folder.
 
-#. Execute the command ``CDMService.exe --install``
+#. Execute the command ``CDMService.exe --install``.
 
-#. Open the Windows Service Manager/Windows 10 services app
+#. Open the Windows Service Manager/Windows 10 services app.
 
-#. Open the properties of the CDM service
+#. Open the properties of the CDM service.
 
 #. Make sure the start up type is ``automatic``, and the service is started.
 
-Ensure the CDM service is accessible
+Ensure the CDM Service is Accessible
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Make sure that the port chosen, typically 19999, is open on the machine that hosts the CDM service. 
@@ -129,7 +135,7 @@ You can check whether this port is open using the command ``netstat -a`` on a CM
 
 .. Also make sure that the inbound rule for the windows firewall, allows an inbound rule for CDM.
 
-Linking the CDM service to a database
+Linking the CDM Service to a Database
 ---------------------------------------------
 
 The configuration file ``CDMConfig.xml`` contains the database type and optionally the database location, and optionally the authorization information.
@@ -156,7 +162,7 @@ with actual contents. The ``{}`` and ``[]`` should be removed. A ``{}`` is manda
 .. note:: When the CDM service is running, and you want to change the configuration, 
           you will need to stop and restart the service using the Windows Service Manager/Windows 10 services app.
 
-Link an AIMMS application to a running CDM service
+Link an AIMMS Application to a Running CDM Service
 ----------------------------------------------------------------
 
 Here ``cdm::serverURI`` should be set to ``tcp://CDMServiceHostName:19999`` where 19999 is the port number.  
@@ -185,7 +191,7 @@ Below is an example of CDM startup code that connects to an existing shared CDM 
     cdm::AutoPullCategory(cdm::cat) := 1;
     cdm::StartListeningToDataChanges;
 
-Download example
+Download Example
 -----------------
 
 The project download :download:`CDM-Connected-via-URI <model/CDM-Connected-via-URI.zip>` is a variation of the standard example for CDM.

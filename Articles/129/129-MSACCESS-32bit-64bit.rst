@@ -7,9 +7,8 @@
 
 Some years ago, before Microsoft Office 2010, life was – in some sense – easier for developers: Office was 32-bit, period. In our days, since the release of Microsoft Office 2010, things are a bit more complicated, as users can now have a machine with a 64-bit native version of Office installed as well. This means, for instance, that a 32-bit application using an ODBC driver to connect to an Access database might not work anymore, since the 32-bit ODBC driver might not exist on a machine with a 64-bit Office installation. In such a case, even though the user has a valid Office installation on his or her machine, the application may still display an error regarding the installation or the registration of the proper drivers on the local machine.
 
-In order to address such problems, Microsoft released a redistributable named *Microsoft Access Database Engine 2010 Redistributable*. This redistributable provides a 32-bit or a 64-bit version of the Microsoft Access Database Engine, which can be downloaded from the Microsoft Download Center:
-
-`Download drivers <http://www.microsoft.com/en-us/download/details.aspx?id=13255>`_
+In order to address such problems, Microsoft released a redistributable named *Microsoft Access Database Engine 2010 Redistributable*. This redistributable provides a 32-bit or a 64-bit version of the Microsoft Access Database Engine, 
+which can be downloaded from the Microsoft `Download Center <http://www.microsoft.com/en-us/download/details.aspx?id=13255>`_.
  
 So, for example, if you have a 32-bit application using a 32-bit ODBC driver on a machine with a 64-bit installation of Office 2010, you will need to install the 32-bit version of the Microsoft Access Database Engine as well.
 
@@ -17,16 +16,16 @@ Please note that launching the installation of a Microsoft Access Database Engin
 
 * To install the Microsoft Access Database Engine 32-bit on a machine running Office 2010 64-bit:
 
-.. code-block:: none
+    .. code-block:: none
 
-    > AccessDatabaseEngine.exe /passive
+        > AccessDatabaseEngine.exe /passive
 
 
 * To install the Microsoft Access Database Engine 64-bit on a machine running Office 2010 32-bit:
 
-.. code-block:: none
+    .. code-block:: none
 
-    > AccessDatabaseEngine_X64.exe /passive
+        > AccessDatabaseEngine_X64.exe /passive
 
 In order to use the new driver from your AIMMS project for connecting to an Access database, you need to adjust the Data Source Name (.dsn) file associated with your Access database. Typically that ``.dsn`` file contains something like:
 

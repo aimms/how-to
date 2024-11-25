@@ -14,6 +14,7 @@ In this article we explore how you can authorize access to information within yo
     * In :doc:`../117/117-Uploading-and-Downloading-files`, we'll cover transferring files.
     * In :doc:`../115/115-Securing-File-Access` we'll find out how to securely arrange file sharing.
 
+|
 
 AIMMS PRO is a multi-user environment, designed to host several Apps used by several end-users. Information is shared by these users via these applications. Depending on the role of the app user in the organization, selected information may or may not be accessible. For instance, a planner may change the production plan, that plan can be inspected by management, but is not accessible to the HRM staff.
 
@@ -65,6 +66,7 @@ For instance, using the declarations:
 The following call places the current user and his groups in the above declarations:
 
 .. code-block:: aimms
+    :linenos:
 
     ! Identify the current app user.
     pro::GetCurrentUserInfo(pro_cur_env, pro_cur_user,
@@ -73,6 +75,7 @@ The following call places the current user and his groups in the above declarati
 Now we use this information to check whether the current user is a planner, and if so, make the production plan data visible and modifiable.
 
 .. code-block:: aimms
+    :linenos:
 
     if exists( pug | pro_cur_GroupName( pug ) = "Planners" ) then 
         ! The current APP user is a member of 
@@ -91,7 +94,7 @@ Note that a user can be a member of multiple AIMMS PRO user groups; that is why 
 
 In this blog post we have considered restricting information to an AIMMS app user based on the roles assigned to that app user via the AIMMS PRO user groups. In the upcoming blog post in this series, we are going to discuss the building blocks for exchanging files between AIMMS PRO storage on the one hand and the storage system directly available to the app user.
 
-Sample app
+Sample App
 ----------
 
 A simple Who am I app: :download:`AIMMS project download <model/WhoAmI.zip>` 
@@ -101,14 +104,13 @@ After starting, the opening screen looks like this:
 .. image:: images/WhoAmI.png
     :align: center
 
+|
 
 You can take a screenshot when asked for credentials on AIMMS PRO and then close it. 
 
+.. seealso::
 
-Reference:
------------
-
-*  `AIMMS PRO <https://documentation.aimms.com/pro/index.html#pro-platform>`_
+    *  `AIMMS PRO <https://documentation.aimms.com/pro/index.html#pro-platform>`_
 
 
 
