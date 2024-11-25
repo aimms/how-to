@@ -93,27 +93,27 @@ The provided functions are:
 
 *   ``plet::pr_initTask``
 
-	Record starting of task, and start recording events for that task.
-	
+    Record starting of task, and start recording events for that task.
+    
 *   ``plet::pr_finishTask``
 
-	Record task finished.
-	
+    Record task finished.
+    
 *   ``plet::pr_log(sp_msg,p_lev)``
 
-	* ``sp_msg`` (input) The message to be logged.
-	
-	* ``p_lev`` (optional, default 3 (info)). The level of importance of the message.
+    * ``sp_msg`` (input) The message to be logged.
+    
+    * ``p_lev`` (optional, default 3 (info)). The level of importance of the message.
 
 *   ``plet::pr_errorHandler(ep_err)``
 
-	Record the incident, including stack trace, in the plet database.
+    Record the incident, including stack trace, in the plet database.
 
-	* ``ep_err`` (input in errh::PendingErrors) a reference to the incident.
+    * ``ep_err`` (input in errh::PendingErrors) a reference to the incident.
 
 *   ``plet::spl::pr_watchProgress(ep_gmp)``
 
-	* ``ep_gmp`` (input in AllGeneratedMathematicalPrograms), the mathematical program to be followed.
+    * ``ep_gmp`` (input in AllGeneratedMathematicalPrograms), the mathematical program to be followed.
 
 
 .. spelling:word-list::

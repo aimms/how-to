@@ -56,9 +56,9 @@ therefor the corresponding tables remain empty:
 Provides services
 ^^^^^^^^^^^^^^^^^^^^
 
-Currently, pletR provides only one service: ``taskTail``. 
+Currently, pletR provides two services: ``taskTail``, and  ``taskLog``. 
  
-The request of this service should provide the task id and number of lines requested. 
+The request of ``taskTail``  service should provide the task id and number of lines requested. 
 For instance:
 
 .. code-block:: json 
@@ -97,6 +97,26 @@ The response of this service provides the last few log lines. For instance:
                 "mom": "2024-10-04 09:27:37.000000",
                 "msg": "At 2024-10-04 09:27:37 handling warning: Warning: Inspecting mirrors is a job where I could really see myself!"
             }
+        ]
+    }
+
+
+The second service ``taskLog`` only needs the task id.
+It will generate a similar log file, just all lines, for instance:
+
+.. code-block:: json 
+    :linenos:
+
+    {
+        "tail": [
+            {
+                "task": "9aaa3808-78ab-467a-a9d0-6bd27a23af8d",
+                "line": "3",
+                "lev": 3.0,
+                "mom": "2024-10-04 09:27:37.000000",
+                "msg": "Diagnostic finish"
+            },
+            
         ]
     }
 
