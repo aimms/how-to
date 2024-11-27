@@ -55,10 +55,9 @@ Output
 
 The output is the same as when using Java. See :doc:`98-starting-job-aimms-pro-api-java`.
 
-Further Reading
------------------
+.. seealso::
 
-See also the `manual on PRO API <https://documentation.aimms.com/pro/api.html>`_.
+    * `Manual on PRO API <https://documentation.aimms.com/pro/api.html>`_
 
 
 

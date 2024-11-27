@@ -1,4 +1,4 @@
-Sudden Microsoft Access reporting: "make sure this is a valid datasource"
+Sudden Microsoft Access Reporting: "Make Sure this is a Valid Datasource"
 ==========================================================================
 
 Symptom
@@ -30,9 +30,8 @@ appears, this indicates an installation error.
 Fix
 -------
 
-The following tip from `stackoverflow <https://stackoverflow.com/questions/63911262/microsoft-access-driver-specified-driver-could-not-be-loaded-due-to-system-erro>`_ may help:
-
-Settings -> Add/Remove Programs-> Select "Microsoft Access database engine" and select Modify.
+The following tip from `stackoverflow <https://stackoverflow.com/questions/63911262/microsoft-access-driver-specified-driver-could-not-be-loaded-due-to-system-erro>`_ 
+may help: :menuselection:`Settings > Add/Remove Programs > Select "Microsoft Access Database Engine"` and select :menuselection:`Modify`.
 
 
 

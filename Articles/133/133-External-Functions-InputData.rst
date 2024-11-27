@@ -11,7 +11,7 @@ Data exchange is an essential part of every application. AIMMS supports various 
 
 This article shows how to create a data exchange link between a proprietary data format and AIMMS. The process is illustrated by using a concrete modeling exercise from the Constraint Programming example library CSPLIB.  
 
-The example
+The Example
 -----------
 
 The `constraint programming example library <http://www.csplib.org>`_, provides several concrete constraint programming modeling exercises, where, given a particular exercise, several input files are provided. Each such input file is a sequence of numbers. Consider the first modeling exercise: the famous car sequencing problem. The input format for the car sequencing problem, quoting the CSPLIB, is defined as:
@@ -45,7 +45,7 @@ To input the data into an AIMMS application, we want external functions that:
 * Open and close a text file, say ``openFileHandle`` and ``closeFileHandle``.
 * Get an integer from a file, say ``getInt``.
 
-Creating a DLL for external functions:
+Creating a DLL for External Functions
 --------------------------------------
 
 To declare functions in the DLL as *callable*, you will need the following macro:
@@ -133,6 +133,7 @@ Step 2, wrapping it in an AIMMS procedure
 By wrapping the external procedure in an ordinary procedure, we are able to define the error handling as we see fit. Now this procedure can be used to input the data. The following code fragment is taken from the function ReadData of the accompanying example:
 
 .. code-block:: aimms
+    :linenos:
 
     ! First line: number of cars; number of options; number of classes.
     pti::int(instanceFileHandle, nbCars);
@@ -148,7 +149,7 @@ As you can see from this example, the ``int`` procedure in the PlainTextInput li
 
 .. The AIMMS car sequencing application and the Visual Studio 2010 project that creates the ``PlainTextInput DLL`` are provided in the following zip file: [missing] Using Visual Studio you can build the DLL's. Using AIMMS 3.14 FR2 or later, either the 32 bits or 64 bits version, you can solve car sequencing problems using inputs specified according to the input format defined by CSPLIB. 
 
-Further reading
+Further Reading
 ---------------
 
 * `The AIMMS Language Reference <https://documentation.aimms.com/aimms_ref.html>`_ (Chapters "External Procedures and Functions" and "The AIMMS Programming Interface")

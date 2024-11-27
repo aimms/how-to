@@ -123,4 +123,5 @@ We see that the remedy worked; specifying a specific width turned out to be suff
 The default of used by Snowflake of 16777216 turns out to be too much.
 
 .. seealso::
-    AIMMS provides a Snowflake Library to facilitate its use within AIMMS. See the documentation `here <https://documentation.aimms.com/snowflake/index.html>`_.
+
+    * `AIMMS Snowflake Library <https://documentation.aimms.com/snowflake/index.html>`_ to facilitate its use within AIMMS 

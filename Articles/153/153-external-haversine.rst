@@ -61,7 +61,7 @@ After opening Visual Studio, in order:
     
     #. then change the "Precompiled Header" setting to "Not Using Precompiled Headers" option.
     
-Coding the function
+Coding the Function
 -------------------
 
 .. code-block:: cpp
@@ -117,7 +117,7 @@ Building using Visual Studio
 
 #. Press Build
 
-Verifying the build
+Verifying the Build
 -------------------------------------------------
 
 We need to verify that the .dll's built are valid 32 bit and 64 bit .dll's. 

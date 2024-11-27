@@ -8,9 +8,9 @@ However, not all systems on which your application is to be run, may allow you t
 
 This article presents a small AIMMS app that shows the list of available ODBC drivers upon startup.
 
-This source of this AIMMS 4.85 project can be downloaded: :download:`ODBC Driver List project <model/DriverList.zip>` 
+This source of this AIMMS 4.85 project can be downloaded: :download:`ODBC Driver List project <model/DriverList.zip>`.
 
-Operating the app
+Operating the App
 -----------------
 
 Upon opening, this app presents a list of ODBC drivers.
@@ -21,10 +21,8 @@ For the AIMMS Cloud this list looks as follows:
 
 | 
 
-See also
----------
+.. seealso::
 
-* `SQLNumberOfDrivers <https://documentation.aimms.com/functionreference/data-management/database-functions/sqlnumberofdrivers.html>`_
-
-* `SQLDriverName <https://documentation.aimms.com/functionreference/data-management/database-functions/sqldrivername.html>`_
+    * `SQLNumberOfDrivers <https://documentation.aimms.com/functionreference/data-management/database-functions/sqlnumberofdrivers.html>`_
+    * `SQLDriverName <https://documentation.aimms.com/functionreference/data-management/database-functions/sqldrivername.html>`_
 

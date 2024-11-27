@@ -1,12 +1,19 @@
-Connecting to and using the AIMMS Cloud database
+Connecting to and using the AIMMS Cloud Database
 =================================================
 
-This article describes several ways to connect to the AIMMS Cloud database. The AIMMS Cloud database is a MySQL database and is an optional addition to the AIMMS Cloud, intended for data storage and to interact with AIMMS applications uploaded to the same cloud. The link to the database always looks like this: [nameofyourcloud].db.aimms.cloud. This database is **not** publicly available unless Option 3 is implemented. If you currently do not have this database, but you would like to use it, please `contact us <mailto:support@aimms.com>`__. 
+This article describes several ways to connect to the AIMMS Cloud database. 
+The AIMMS Cloud database is a MySQL database and is an optional addition to the AIMMS Cloud, 
+intended for data storage and to interact with AIMMS applications uploaded to the same cloud. The link to the database always looks like this: 
+``[nameofyourcloud].db.aimms.cloud``. This database is **not** publicly available unless **Option 3** is implemented. If you currently do not have this database, 
+but you would like to use it, please `contact us <mailto:support@aimms.com>`__. 
 
-After you have established a successful connection we recommend using the `Data Exchange Library <https://documentation.aimms.com/dataexchange/sqldb.html>`_ to map the data correctly onto your AIMMS model.
-You can also use AIMMS database functions to interact with the data in the database - examples of their usage can be found `here <https://how-to.aimms.com/Articles/344/344-sparse-execution-for-write-to-table.html#write-data-to-a-table>`_ and `another one here <https://how-to.aimms.com/Articles/554/554-direct-sql-example.html>`_.
+After you have established a successful connection we recommend using the `Data Exchange Library <https://documentation.aimms.com/dataexchange/sqldb.html>`_ to map 
+the data correctly onto your AIMMS model.
+You can also use AIMMS database functions to interact with the data in the database - examples of their usage can be 
+found `here <https://how-to.aimms.com/Articles/344/344-sparse-execution-for-write-to-table.html#write-data-to-a-table>`_ 
+and `another one here <https://how-to.aimms.com/Articles/554/554-direct-sql-example.html>`_.
 
-Option 1: Use SQLCreateConnectionString
+Option 1: Use ``SQLCreateConnectionString``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When you want to connect to the AIMMS Cloud database from an AIMMS application that is uploaded to that same cloud, you can use the function :aimms:func:`SQLCreateConnectionString`:
@@ -25,13 +32,15 @@ When you want to connect to the AIMMS Cloud database from an AIMMS application t
 
 Remarks:
 
-- There are multiple ODBC drivers available on the cloud that you can use for the 'driver' argument. With `this app <https://how-to.aimms.com/Articles/539/539-which-odbc-drivers.html#which-odbc-drivers>`_ (uploaded to the same cloud) you can get an overview of the available drivers. You can also use this app locally to get an overview of available drivers on your machine. If you are testing locally (e.g. with the DB Tunnel app open: see option 2), make sure to update the DriverName argument to match the driver of your local machine. 
+- There are multiple ODBC drivers available on the cloud that you can use for the 'driver' argument. With `this app <https://how-to.aimms.com/Articles/539/539-which-odbc-drivers.html#which-odbc-drivers>`_ you can get an overview of the available drivers. 
+    - If uploaded into the AIMMS Cloud, you will see an overview of available drivers of your Cloud. 
+    - If used locally, you will see an overview of available drivers on your machine. If you are testing locally (e.g. with the DB Tunnel app open: see **Option 2**), make sure to update the DriverName argument to match the driver of your local machine.
 
 
-Option 2: Use the DB Tunnel app
+Option 2: Use the DB Tunnel App
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can use the AIMMS DB Tunnel app to open a connection from your local computer to the AIMMS Cloud database. This connection will only remain active for as long as you are logged into the AIMMS Cloud, the Tunnel App remained open and has not been stopped. 
+You can use the AIMMS DB Tunnel app to open a connection from your local computer to the AIMMS Cloud database. This connection will only remain active for as long as you are logged into the AIMMS Cloud, the Tunnel app remained open and has not been stopped. 
 
 :download:`DB Tunnel app as AIMMS 4.74 aimmspack <downloads/DBTunnel AIMMS 4.74.aimmspack>`
 
@@ -45,14 +54,18 @@ For example, if your app database is called ``example.db.aimms.cloud`` then your
 	
 .. image:: images/dbtunnelapp_new.png
     :align: center
-	
-Where '*TunnelName*' is URI Context Path and '*Local Port*' can be any port between **1 to 65536**. 
 
-You can Start/Stop Tunnel using **Start** and **Stop** buttons. Once you have provided '*TunnelName*' and '*Local Port*', you do not need to click **Start** or **Stop** each time. You can check '*Automatically connect at startup*' parameter, then tunnel can be started automatically upon launching the application. 
+|
+
+Where :menuselection:`TunnelName` is :menuselection:`URI Context Path` and :menuselection:`Local Port` can be any port between **1 to 65536**. 
+
+You can Start/Stop Tunnel using :menuselection:`Start` and :menuselection:`Stop` buttons. 
+Once you have provided :menuselection:`TunnelName` and :menuselection:`Local Port`, you do not need to click :menuselection:`Start` or :menuselection:`Stop` each time. 
+You can check :menuselection:`Automatically connect at startup` parameter, then tunnel can be started automatically upon launching the application. 
 
 When you close the application tunnel will be also closed.
 
-We have further enhanced DB Tunnel App such that it can report errors when it can not start the tunnel. Example scenarios/error messages are:
+We have further enhanced DB Tunnel app such that it can report errors when it can not start the tunnel. Example scenarios/error messages are:
 
 	* When the local port is already in use on the same machine by any other application. -- ``pro::tunnel::TunnelStart : while binding to tcp://localhost:3306``
 	* When AIMMS PRO User does not have access to the Tunnel. -- ``pro::tunnel::TunnelStart : Access denied``
@@ -61,14 +74,19 @@ We have further enhanced DB Tunnel App such that it can report errors when it ca
 .. image:: images/dbtunnel_error.png
     :align: center
 
-We recommend using an application like MySQL Workbench ``www.mysql.com/products/workbench`` to interact with the database once your connection is established. You can add a new connection there, filling out the highlighted details (port should be equal to what you have set in your DB Tunnel App):
+|
+
+We recommend using an application like `MySQL Workbench <www.mysql.com/products/workbench>`_ to interact with the database once your connection is established. 
+You can add a new connection there, filling out the highlighted details (port should be equal to what you have set in your DB Tunnel app):
 
 .. image:: images/workbench.png
     :align: center
-	
-For the 'Hostname' you can use 127.0.0.1, localhost or the link to your database ([nameofyourcloud].db.aimms.cloud).
 
-Option 3: Use a VPN configuration
+|
+
+For the :menuselection:`Hostname` you can use 127.0.0.1, localhost or the link to your database (``[nameofyourcloud].db.aimms.cloud``).
+
+Option 3: Use a VPN Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you want to access the database from any source outside of the AIMMS Cloud, a VPN is necessary. Consult our data integration page to determine if this is the best option for you, or `contact us <mailto:support@aimms.com>`__ directly if you want to know more about this option.

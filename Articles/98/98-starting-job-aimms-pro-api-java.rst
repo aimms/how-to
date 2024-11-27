@@ -184,10 +184,10 @@ Output
         * Lines 56-84 show how this abnormal termination is handled step by step.
     
         
-Further Reading
------------------
+.. seealso::
 
-See also the `manual on PRO API <https://documentation.aimms.com/pro/api.html>`_.
+    * `Manual on PRO API <https://documentation.aimms.com/pro/api.html>`_
+
 
 
 
