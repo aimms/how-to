@@ -177,6 +177,7 @@ Note also that the database contains less rows:
     :align: center
 
 |
+
 Insert Selection
 -------------------
 
