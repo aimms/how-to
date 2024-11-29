@@ -33,6 +33,7 @@ When you want to connect to the AIMMS Cloud database from an AIMMS application t
 Remarks:
 
 There are multiple ODBC drivers available on the cloud that you can use for the 'driver' argument. With `this app <https://how-to.aimms.com/Articles/539/539-which-odbc-drivers.html#which-odbc-drivers>`_ you can get an overview of the available drivers. 
+
     - If uploaded into the AIMMS Cloud, you will see an overview of available drivers of your Cloud. 
     - If used locally, you will see an overview of available drivers on your machine. If you are testing locally (e.g. with the DB Tunnel app open: see **Option 2**), make sure to update the DriverName argument to match the driver of your local machine.
 

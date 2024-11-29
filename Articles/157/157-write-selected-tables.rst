@@ -59,28 +59,6 @@ Here is an example with two database tables. The mechanism works the same for an
 
    * Line 4: We will do a recursive search, because we also want to write defined parameters when the data of one of the constituents of its definition is changed.
 
-.. sidebar:: DatachangeMonitors
-
-    Datachange monitors track whether data of a selection of identifiers was changed since the last time checked.
-
-    A datachange monitor consists of three components:
-
-    #. A name - for sake of identification.
-
-    #. A reference to an AIMMS set - by having a reference, a data change monitor can even monitor dynamic subsets of :aimms:set:`AllIdentifiers`.
-   
-    #. An internal component that maintains for each identifier and the referenced set the number of assignments since the last reset.
-
-    The AIMMS function reference describes the procedures operating on datachange monitors in detail:
-   
-    * :aimms:func:`DataChangeMonitorHasChanged` - returns 1 if the data of at least one identifier, or the data of the reference set itself, has changed.
-
-    * :aimms:func:`DataChangeMonitorCreate` - creates a new datachange monitor name and resets
-
-    * :aimms:func:`DataChangeMonitorReset` - resets a datachange monitor and links it to the same or another reference set
-
-    * :aimms:func:`DataChangeMonitorDelete` - allows for cleanup
-
 * Writing to table ``db_ab`` saves the data of ``i_a, i_b, p_AB1, p_AB2``. In other words, when the data of ``i_a, i_b, p_AB1, or p_AB2`` is changed, we want to write to table ``db_ab``.
 
 * Writing to table ``db_bc`` saves the data of ``i_b, i_c, p_BC1``. Again, when the data of ``i_b, i_c, p_BC1`` is changed, we want to write to table ``db_bc``.
@@ -122,6 +100,28 @@ To avoid coding errors and maintenance issues from doing this manually, AIMMS ha
    
 By automating the use of :any:`ReferencedIdentifiers` and ``DatachangeMonitors`` we avoid maintenance problems.
 
+.. sidebar:: DatachangeMonitors
+
+    Datachange monitors track whether data of a selection of identifiers was changed since the last time checked.
+
+    A datachange monitor consists of three components:
+
+    #. A name - for sake of identification.
+
+    #. A reference to an AIMMS set - by having a reference, a data change monitor can even monitor dynamic subsets of :aimms:set:`AllIdentifiers`.
+   
+    #. An internal component that maintains for each identifier and the referenced set the number of assignments since the last reset.
+
+    The AIMMS function reference describes the procedures operating on datachange monitors in detail:
+   
+    * :aimms:func:`DataChangeMonitorHasChanged` - returns 1 if the data of at least one identifier, or the data of the reference set itself, has changed.
+
+    * :aimms:func:`DataChangeMonitorCreate` - creates a new datachange monitor name and resets
+
+    * :aimms:func:`DataChangeMonitorReset` - resets a datachange monitor and links it to the same or another reference set
+
+    * :aimms:func:`DataChangeMonitorDelete` - allows for cleanup
+    
 Example of Runtime Library 
 ----------------------------
 

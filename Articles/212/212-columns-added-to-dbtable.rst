@@ -15,10 +15,14 @@ The Basic Model and Table
 .. image:: images/basicDatabaseTable.PNG
     :align: center
 
+|
+
 The schema of our database is represented above.
 
 .. image:: images/basicAimmsModel.PNG
     :align: center
+
+|
 
 The schema is captured by the AIMMS Database Table as shown above.
 
@@ -32,6 +36,8 @@ Now let's add the column ``regionNM`` to the database table as a derived column.
 .. image:: images/derivedExtensionDatabaseTable.PNG
     :align: center
 
+|
+
 .. note:: For the sake of efficiency, AIMMS caches the knowledge of the table structure of the tables it is connected to.
           When these table structures are changed while AIMMS is still open, the caches need to be updated.  
           The easiest way to do this is to close the project and open it again.
@@ -40,6 +46,8 @@ The extended structure is then captured in the AIMMS model as follows:
 
 .. image:: images/derivedExtensionAimmsModel.PNG
     :align: center
+
+|
 
 You can adapt the database table ``lpdata`` by using the wizard at the mapping and add the added link.
 When the region data is not used in the model, you can even ignore this step.
@@ -56,6 +64,8 @@ it's made a key column as shown in the following schema:
 
 .. image:: images/KeyExtensionDatabaseTable.PNG
     :align: center
+
+|
 
 There are two approaches to handling this in the AIMMS model:
 

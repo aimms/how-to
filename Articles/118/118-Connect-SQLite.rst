@@ -41,10 +41,14 @@ To verify that the driver is properly installed, please open the "Administrative
 .. image:: images/2odbc.png
     :align: center
 
+|
+
 Then open the "ODBC Data Sources (64-bit)" (or 32-bit) and reach the :menuselection:`Drivers` tab. Normally, you should find 3 new drivers, named **SQLite ODBC (UTF-8)**, **SQLite ODBC** and **SQLite3 ODBC**. The window may include other drivers (as Microsoft Access for example) :
 
 .. image:: images/3odbc.png
     :align: center
+
+|
 
 Congrats! The installation is successful.
 
@@ -80,6 +84,8 @@ Then click the :menuselection:`Add` button in the upper right of the window. You
 .. image:: images/4odbc.png
     :align: center
 
+|
+
 Select the driver you want to use (in our case, SQLite3 ODBC Driver) and click :menuselection:`Next`.
 
 At this point, the computer is asking you the name of the ``.dsn`` file you want to create. Here, it is named ``test``.
@@ -87,11 +93,15 @@ At this point, the computer is asking you the name of the ``.dsn`` file you want
 .. image:: images/5odbc.png
     :align: center
 
+|
+
 After that, you will have access to the 'SQLite ODBC Driver Connect', which finally asks you to browse and select your SQLite database. 
 In this example, the database is named ``chinook.db``.
 
 .. image:: images/8odbc.png
     :align: center
+
+|
 
 After clicking :menuselection:`OK`, you should see a new ``.dsn`` file (named ``test`` here) in the file explorer of your ODBC Data Source Administrator.
 
@@ -109,6 +119,8 @@ To generate the appropriate ``.dsn`` system file from your SQLite ODBC driver, p
 .. image:: images/7odbc.png
     :align: center
 
+|
+
 When the SQLite3 configuration window pops up:
 
 * define the System DSN file name (here, *chinook SQLite3*),
@@ -118,10 +130,14 @@ When the SQLite3 configuration window pops up:
 .. image:: images/8odbc.png
     :align: center
 
+|
+
 You should now see that there is a new System DSN file in the :menuselection:`System DSN` tab:
 
 .. image:: images/9odbc.png
     :align: center
+
+|
 
 Congrats! You may go directly to the `Fill out an AIMMS Database Table identifier`_ in order to complete the connection with your AIMMS database.
 
@@ -160,6 +176,8 @@ Let's start a super simple new AIMMS project, containing only one Database Table
 
 .. image:: images/10aimms.png
     :align: center
+
+|
 
 * Create a new Database Table,
 * Specify ``Table1``,
