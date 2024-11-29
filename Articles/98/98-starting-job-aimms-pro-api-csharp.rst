@@ -8,15 +8,15 @@ Start a Job via PRO API using C#
 Prerequisites
 --------------
 
-#. Get a C# environment for developing applications. Here we assume you're using Visual Studio. 
+#. Get a C# environment for developing applications. Here we assume you're using Visual Studio
 
-    If you don't have Visual Studio installed, you may get it on Microsoft's website: `Install Visual Studio <https://visualstudio.microsoft.com/vs/express/>`_.
+    If you don't have Visual Studio installed, you may get it on Microsoft's website: `Install Visual Studio <https://visualstudio.microsoft.com/vs/express/>`_
 
 #. Get `AIMMS PRO API <https://documentation.aimms.com/pro/api.html>`_ via AIMMS PRO Portal
 
    a. Log into AIMMS PRO
 
-   #. Go to *Help > getting started*
+   #. Go to :menuselection:`Help > Getting Started`
    
    #. Download AIMMS PRO API
 
@@ -35,18 +35,18 @@ Running the Example
     
         .. image:: images/AdaptingConnectionDetailsCS.png
     
-        * Line 14, ``PRO_ENDPOINT``: this might also be ``wss://your-cloud-name.cloud.aimms.com`` 
+        * Line 14, ``PRO_ENDPOINT``: this might also be ``wss://your-cloud-name.cloud.aimms.com``.
         
             #. when connection encrypted, start with ``wss`` (cloud systems are always encrypted).
             
-            #. when connection not encrypted, start with ``ws``
+            #. when connection not encrypted, start with ``ws``.
            
         
         * Lines 32-34, ``PRO_ENVIRONMENT``, ``USERNAME``, and ``USER_PASSWORD`` should have been supplied by your AIMMS PRO administrator.
         
         * Lines 38-39, ``PRO_APPLICATION_NAME``, ``PRO_APPLICATION_VERSION``, the name and version of the app as it is published.
 
-#.  Build the application using *Visual Studio Menu > Build > Build*.
+#.  Build the application using :menuselection:`Visual Studio Menu > Build > Build`.
 
 #.  Run the application.
 

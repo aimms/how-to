@@ -1,7 +1,7 @@
-Reading relations and indexed sets from databases
+Reading Relations and Indexed Sets from Databases
 =================================================
 
-AIMMS does not support reading relations and indexed sets directly using the READ FROM TABLE statement.
+AIMMS does not support reading relations and indexed sets directly using the ``READ FROM TABLE`` statement.
 Therefore a table in a database such as
 
 .. image:: images/data-sqlite-database.png
@@ -11,6 +11,8 @@ and with structure
 
 .. image:: images/data-sqlite-structure.png
     :align: center
+
+|
 
 cannot be directly copied to an AIMMS relation or an AIMMS indexed set. 
 
@@ -49,6 +51,8 @@ Subsequently, the result of that database procedure is read and converted to a r
 .. image:: images/read-convert-data.png
     :align: center
 
+|
+
 Remarks:
 
 * Line 1: Normal way of reading result set from a database procedure
@@ -57,7 +61,10 @@ Remarks:
 
 * Line 3: Converting the binary parameter to an indexed set
 
+.. seealso::
 
+    * :doc:`../554/554-direct-sql-example`
+    * `Employee Scheduling Example <https://how-to.aimms.com/Articles/387/387-employee-scheduling.html>`_
 
 
 

@@ -13,7 +13,7 @@ In an application with several database table, it is not very efficient to write
 
 To do so, you can use a combination of the function :aimms:func:`ReferencedIdentifiers`, the construct ``DatachangeMonitor``, and runtime libraries.
 
-Example of database tables
+Example of Database Tables
 --------------------------
 
 Here is an example with two database tables. The mechanism works the same for any number of database tables.
@@ -59,39 +59,6 @@ Here is an example with two database tables. The mechanism works the same for an
 
    * Line 4: We will do a recursive search, because we also want to write defined parameters when the data of one of the constituents of its definition is changed.
 
-* Writing to table ``db_ab`` saves the data of ``i_a, i_b, p_AB1, p_AB2``. In other words, when the data of ``i_a, i_b, p_AB1, or p_AB2`` is changed, we want to write to table ``db_ab``.
-
-* Writing to table ``db_bc`` saves the data of ``i_b, i_c, p_BC1``. Again, when the data of ``i_b, i_c, p_BC1`` is changed, we want to write to table ``db_bc``.
-
-This was the original procedure to write the data:
-
-.. code-block:: aimms
-   :linenos:
-
-    Procedure pr_OriginalDatabaseWriteProcedure {
-      Body: {
-               write to table db_ab;
-               write to table db_bc;
-      }
-   }
-
-However, we want to change it to something like this (in pseudo code):
-
-.. code-block:: none
-   :linenos:
-
-    Procedure pr_TargetDatabaseWriteProcedure {
-        Body: {
-            if a set or parameter referenced in db_ab is changed then
-                write to table db_ab;
-            endif ;
-
-            if a set or parameter referenced in db_bc is changed then
-                write to table db_bc;
-            endif ;
-        }
-    }
-
 .. sidebar:: DatachangeMonitors
 
     Datachange monitors track whether data of a selection of identifiers was changed since the last time checked.
@@ -114,6 +81,35 @@ However, we want to change it to something like this (in pseudo code):
 
     * :aimms:func:`DataChangeMonitorDelete` - allows for cleanup
 
+* Writing to table ``db_ab`` saves the data of ``i_a, i_b, p_AB1, p_AB2``. In other words, when the data of ``i_a, i_b, p_AB1, or p_AB2`` is changed, we want to write to table ``db_ab``.
+
+* Writing to table ``db_bc`` saves the data of ``i_b, i_c, p_BC1``. Again, when the data of ``i_b, i_c, p_BC1`` is changed, we want to write to table ``db_bc``.
+
+This was the original procedure to write the data:
+
+.. code-block:: aimms
+   :linenos:
+
+    Procedure pr_OriginalDatabaseWriteProcedure {
+      Body: {
+               write to table db_ab;
+               write to table db_bc;
+      }
+   }
+
+However, we want to change it to something like this (in pseudo code):
+
+.. code-block:: none
+   :linenos:
+
+   if a set or parameter referenced in db_ab is changed then
+         write to table db_ab;
+   endif ;
+
+   if a set or parameter referenced in db_bc is changed then
+         write to table db_bc;
+   endif ;
+   
 To avoid coding errors and maintenance issues from doing this manually, AIMMS has the following facilities:
 
 * The predeclared function :aimms:func:`ReferencedIdentifiers` (see sidebar) examines portions of AIMMS code and returns the identifiers referenced. 
@@ -126,7 +122,7 @@ To avoid coding errors and maintenance issues from doing this manually, AIMMS ha
    
 By automating the use of :any:`ReferencedIdentifiers` and ``DatachangeMonitors`` we avoid maintenance problems.
 
-Example of runtime library 
+Example of Runtime Library 
 ----------------------------
 
 Code writing runtime libraries are a bit abstract.
@@ -192,7 +188,7 @@ An explanation of the contents for the database table ``db_ab`` follows below. I
 * line 24: Reset the data change monitor.
 
 
-Create the runtime library 
+Create the Runtime Library 
 -----------------------------------
 
 .. code-block:: aimms
@@ -278,7 +274,7 @@ Notes:
 
 * ``sp_bodyLineWrite``, ``sp_bodyWriteProc`` we collect the text for the write procedure, as illustrated in the previous section.
 
-Call to write the database tables
+Call to Write the Database Tables
 -------------------------------------
 
 .. code-block:: aimms
@@ -294,22 +290,20 @@ Call to write the database tables
 
 Essentially just an apply statement of the procedure we created above.
 
-Example project
+Example Project
 -----------------
 
 Download the attached project for an example.
 
-*  :download:`AIMMS project <downloads/WriteOnlyAFewDatabaseTables.zip>` 
+:download:`AIMMS project <downloads/WriteOnlyAFewDatabaseTables.zip>` 
 
+.. seealso::
 
-Related Topics
-----------------
+   * :doc:`advanced-language-components/model-structure-and-modules/runtime-libraries-and-the-model-edit-functions`
 
-* :doc:`advanced-language-components/model-structure-and-modules/runtime-libraries-and-the-model-edit-functions`
+   * :doc:`data-management/data-change-monitor-functions/index`
 
-* :doc:`data-management/data-change-monitor-functions/index`
-
-* :any:`ReferencedIdentifiers`
+   * :any:`ReferencedIdentifiers`
 
 
 

@@ -20,7 +20,7 @@ In this article we discuss:
 *  Database schema design best practices
 
 
-An example project description
+Example Project Description
 ------------------------------------
 
 We are maintaining orders to be delivered.  Each order is identified by (the key columns):
@@ -52,7 +52,7 @@ As you can see from this schema, both a customer and a product have an ``Id``.  
 
     In words: For each ``ProductId``, it should be in the set of all ``Id`` in the table ``Products``.
 
-Foreign keys relations
+Foreign Keys Relations
 ------------------------
 
 The relations mentioned in the previous section are examples of consistent relations in a database. 
@@ -101,7 +101,7 @@ Given the above foreign constraints, there are at least two options available to
 .. tip:: It is generally considered to be good practice to enforce all Foreign Key relations; as it will enhance the quality of the data. Note that by enforcing these constraints in the database, any application that reads and modifies data in that database needs to adhere to these constraints. This is also true for AIMMS applications!
 
 
-Available strategies
+Available Strategies
 --------------------
 
 An AIMMS ``write to table`` statement will delete, update and insert some rows in a database table.
@@ -128,7 +128,7 @@ It can be more time consuming, as it needs to read a potentially large amount of
 To understand why this strategy is still needed, we need to take a close look at their behavior in combination with foreign keys.
 
 
-Choice of strategy and consequences for safety and efficiency
+Choice of Strategy and Consequences for Safety and Efficiency
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let's get back to the strategies introduced at the beginning of the previous section.
@@ -156,7 +156,7 @@ AIMMS uses the knowledge of whether Foreign Keys are present or not based on the
     "Yes", "A",  "Safe", "Less efficient strategy used"
     "No", "B", "Efficient", "Data loss"
 
-Are Foreign Keys constraints active on the table to be written?
+Are Foreign Keys Constraints Active on the Table to be Written?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 When writing to a table it is important to know whether the table at hand is used in a Foreign Key constraint:
@@ -187,7 +187,7 @@ When writing to a table it is important to know whether the table at hand is use
     The default of the option ``database_foreign_key_handling`` is ``'check'`` up to AIMMS 4.73 and is ``'ignore'`` for AIMMS 4.74 and upwards.
 
 
-Pros and cons of the setting 'check'
+Pros and Cons of the Setting 'check'
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The setting ``'check'`` has some clear advantages in terms of ease of use:
@@ -201,7 +201,7 @@ On the other hand, obtaining metadata via the ODBC function `SQLForeignKeys <htt
 This depends on the database vendor and the complexity of the database schema. 
 Thereby this initial overhead can be significant in the overall performance if there are several tables to be written, and for each table only one or a few rows to be persisted.
 
-Database schema design best practices
+Database Schema Design Best Practices
 ------------------------------------------------
 
 In this section, a practice is suggested to safely and efficiently write the data to the application database. 
@@ -215,7 +215,7 @@ To do so, we divide the schema into two layers of metadata:
 
 #.  The attribute data 
 
-Key data
+Key Data
 ^^^^^^^^^^^^
 
 The "key data" are tables that correspond to the sets and one-dimensional parameters declared over these sets. These tables are present as Parent Tables in Foreign Key relations. Examples are:
@@ -262,7 +262,7 @@ The following remarks apply to this code;
 * Efficiency is less important than correct behaviour, so we remove this from our considerations.
 
 
-Attribute data
+Attribute Data
 ^^^^^^^^^^^^^^^^^^
 
 The actual data, for instance, how much of which product is bought by which customer and when.
@@ -283,9 +283,7 @@ It is, therefore, safe to use efficient Strategy B for writing to these tables.
 
     Like key tables, the foreign keys of these tables only refer to keys in key tables.
 
+.. seealso::    
 
-Related topics
-------------------
-
-* :doc:`../344/344-sparse-execution-for-write-to-table`
+    * :doc:`../344/344-sparse-execution-for-write-to-table`
 

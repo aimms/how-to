@@ -44,4 +44,5 @@ Remarks:
 * line 20: A SQL INSERT statement following the `SQL syntax <https://www.w3schools.com/sql/sql_insert.asp>`_ . ``possible_pairs`` is the name of the table of the Reindeer Pairing.
 
 .. seealso::
-    Do not know which driver is available? Check `this article <https://how-to.aimms.com/Articles/539/539-which-odbc-drivers.html#which-odbc-drivers>`_.
+    
+    * Do not know which driver is available? Check `this article <https://how-to.aimms.com/Articles/539/539-which-odbc-drivers.html#which-odbc-drivers>`_.

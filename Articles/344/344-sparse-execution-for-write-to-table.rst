@@ -1,4 +1,4 @@
-Write data to a table
+Write Data to a Table
 ======================================
 .. meta::
     :description: Methods of writing data to a table.
@@ -16,20 +16,22 @@ This is why it is important to select the number of rows to be written (all or f
 
 * Insert a single row into a database table.
 
-An example project description
+Example Project Description
 ---------------------------------
 
 As we are viewing the same data over and over again; and want to focus on the difference between the various tactics, we use an abstract example. 
 
-.. topic:: Example project download
+.. topic:: Example Project Download
 
     Download the example AIMMS project for this article below:
 
-    * :download:`WriteSparse.zip <model/WriteSparse.zip>`
+    :download:`WriteSparse.zip <model/WriteSparse.zip>`
+
+|
 
 Two sets with a few elements: ``s_A`` and ``s_B`` with indices ``i_a`` and ``i_b`` respectively.
 
-In addition, there is a parameter ```p_Dat`` declared over these sets; which may or may not be sparse, may or may not be stored sparse in the database, or we may want to store just a modification.
+In addition, there is a parameter ``p_Dat`` declared over these sets; which may or may not be sparse, may or may not be stored sparse in the database, or we may want to store just a modification.
 
 We use SQLite with the following database table declaration:
 
@@ -61,11 +63,11 @@ The AIMMS data is mapped to this SQLite database table as follows:
     }
 
 
-Methods of writing data
+Methods of Writing Data
 -------------------------
 Below we discuss several methods for writing data to a table.
 
-Write in replace mode
+Write in Replace Mode
 ^^^^^^^^^^^^^^^^^^^^^
 
 The most direct way of writing data is:
@@ -80,7 +82,7 @@ The most direct way of writing data is:
         }
     }
 
-Line #3 in the above code block is is equivalent to:
+Line 3 in the above code block is is equivalent to:
 
 .. code-block:: aimms
 
@@ -92,10 +94,14 @@ Given the data in the table on the left of the following WebUI image:
 .. image:: images/writePlainWebUI.png
     :align: center
 
+|
+
 This will result in the following database table.
 
 .. image:: images/writePlainSQLiteDB.png
     :align: center
+
+|
 
 Remarks:
 
@@ -105,7 +111,7 @@ Remarks:
 
 .. add a paragraph explaining why this is called "Replace mode" ? does it empty the database table and insert new rows for all aimms indices with non-zero values ? 
 
-Write in dense mode
+Write in Dense Mode
 ^^^^^^^^^^^^^^^^^^^^^
 
 When we also want the zeros to be stored in the database table, we can use the "in dense mode" using the following code:
@@ -126,13 +132,16 @@ With this procedure, the data written and read back is illustrated in the left a
 .. image:: images/writeDenseWebUI.png
     :align: center
 
+|
+
 This is actually the same as in the previous section except that the number of rows written now is 25, as the 0.0's are also written. 
 
 .. image:: images/writeDenseSQLiteDB.png
     :align: center
 
+|
 
-Write selection
+Write Selection
 ^^^^^^^^^^^^^^^^^^^^
 
 In the above section, a lot of rows are written. 
@@ -160,11 +169,14 @@ Reading the data back results in the table on the right. Note that the table on 
 .. image:: images/writeSelectionWebUI.png
     :align: center
 
+|
+
 Note also that the database contains less rows:
 
 .. image:: images/writeSelectionSQLiteDB.png
     :align: center
 
+|
 Insert Selection
 -------------------
 
@@ -191,14 +203,18 @@ The AIMMS data is shown here:
 .. image:: images/insertSelectionWebUI.png
     :align: center
 
+|
+
 and the database table data is shown here:
 
 .. image:: images/insertSelectionSQLiteDB.png
     :align: center
 
+|
+
 Apparently, SQLite appends the new element to the end.
 
-Related topics
-------------------
+.. seealso::
 
-* :doc:`../343/343-use-metadata-in-write-to-table`
+    * :doc:`../343/343-use-metadata-in-write-to-table`
+    * `Employee Scheduling Example <https://how-to.aimms.com/Articles/387/387-employee-scheduling.html>`_

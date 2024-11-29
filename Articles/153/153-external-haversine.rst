@@ -55,11 +55,11 @@ After opening Visual Studio, in order:
 
 #. You may want to turn off precompiled headers:
 
-    #. Select your project, use the "Project -> Properties" menu and 
+    #. Select your project, use the :menuselection:`Project > Properties` menu and 
     
-    #. go to the "Configuration Properties -> C/C++ -> Precompiled Headers" section, 
+    #. go to the :menuselection:`Configuration Properties > C/C++ > Precompiled Headers` section, 
     
-    #. then change the "Precompiled Header" setting to "Not Using Precompiled Headers" option.
+    #. then change the :menuselection:`Precompiled Header` setting to :menuselection:`Not Using Precompiled Headers` option
     
 Coding the Function
 -------------------
@@ -102,7 +102,7 @@ Coding the Function
     }
 
 
-* Line 18-21: Helper function, convert angle from degrees to radians.
+* Line 18-21: Helper function, convert angle from degrees to radians
 
 * Line 22: Function declaration, use C calling convention
 
@@ -129,8 +129,8 @@ Installing is just unzipping. Then start the executable and browse the .dll
     .. image:: images/32BitsDependsCheck.PNG
       :align: center
 
-    ..
-
+    |
+    
     * Missing functions in MSVCR120.dll may be reported, but those are covered when starting AIMMS. 
     
     * Important are the functions exported, as highlighted in the red rectangle; at least Haversine needs to be there.  32 bits Win32 will prefix using an ``_`` and postfix using the @ sign and the number of bytes passed over the stack.  The Haversine functions passes four doubles, so the postfix @32 is to be expected.
@@ -140,7 +140,8 @@ Installing is just unzipping. Then start the executable and browse the .dll
 
     .. image:: images/64BitsDependsCheck.PNG
       :align: center
-    ..
+    
+    |
 
     * Missing functions in MSVCR120.dll may be reported, but those are covered when starting AIMMS. 
     

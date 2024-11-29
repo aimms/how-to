@@ -1,4 +1,4 @@
-Adapt model when linked database table is modified
+Adapt Model when Linked Database Table is Modified
 ======================================================
 
 .. meta::
@@ -9,25 +9,28 @@ AIMMS uses ODBC to connect to database tables.
 When database table columns are linked to AIMMS identifiers, adding columns to the table may require you to adapt the model.
 In this article, we'll show an example of how to adapt for changes in the database table definition.
 
-The basic model and table
+The Basic Model and Table
 --------------------------
 
 .. image:: images/basicDatabaseTable.PNG
+    :align: center
 
 The schema of our database is represented above.
 
 .. image:: images/basicAimmsModel.PNG
+    :align: center
 
 The schema is captured by the AIMMS Database Table as shown above.
 
 :download:`AIMMS project download <loadportdata - basic.zip>` 
 
-The added column is a derived column
+The Added Column is a Derived Column
 ------------------------------------
 
 Now let's add the column ``regionNM`` to the database table as a derived column. The database schema then looks as follows:
 
 .. image:: images/derivedExtensionDatabaseTable.PNG
+    :align: center
 
 .. note:: For the sake of efficiency, AIMMS caches the knowledge of the table structure of the tables it is connected to.
           When these table structures are changed while AIMMS is still open, the caches need to be updated.  
@@ -36,6 +39,7 @@ Now let's add the column ``regionNM`` to the database table as a derived column.
 The extended structure is then captured in the AIMMS model as follows:
 
 .. image:: images/derivedExtensionAimmsModel.PNG
+    :align: center
 
 You can adapt the database table ``lpdata`` by using the wizard at the mapping and add the added link.
 When the region data is not used in the model, you can even ignore this step.
@@ -43,7 +47,7 @@ When the region data is not used in the model, you can even ignore this step.
 :download:`AIMMS project download <loadportdata - ExtendedWithDerived.zip>` 
 
 
-The added column is a key column
+The Added Column is a Key Column
 --------------------------------
 
 This is more interesting. 
@@ -51,13 +55,15 @@ Following our running example, instead of making ``regionNM`` a derived column,
 it's made a key column as shown in the following schema:
 
 .. image:: images/KeyExtensionDatabaseTable.PNG
+    :align: center
 
 There are two approaches to handling this in the AIMMS model:
 
-Approach 1: the model selects only data of a single region
+Approach 1: the Model Selects Only Data of a Single Region
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: aimms
+    :linenos:
 
     DatabaseTable db_lpdata {
         DataSource: "data\\lpdata.dsn";
@@ -82,6 +88,7 @@ This is an alternative to selecting the region via the user interface.
 For the selected region, the data mapping becomes:
 
 .. code-block:: aimms
+    :linenos:
 
     DatabaseTable db_lpdataID {
         IndexDomain: i_reg;
@@ -98,14 +105,15 @@ The actual read statement becomes:
 
 .. code-block:: aimms
 
-    Read from table db_lpdataID(ep_SelectedRegion); ! Read in the data for the selected region.
+    read from table db_lpdataID(ep_SelectedRegion); ! Read in the data for the selected region.
 
-Approach 2: the model aggregates the data over all regions
+Approach 2: the Model Aggregates the Data over All Regions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The data mapping becomes:
 
 .. code-block:: aimms
+    :linenos:
 
     DatabaseTable db_lpdataAgg {
         DataSource: "data\\lpdata.dsn";
@@ -127,5 +135,10 @@ And the data is read and aggregated as follows:
 
 :download:`AIMMS project download <loadportdata - ExtendedWithKey.zip>` 
 
+.. seealso::
 
-
+    * :doc:`../343/343-use-metadata-in-write-to-table`
+    * :doc:`../539/539-which-odbc-drivers`
+    * :doc:`../554/554-direct-sql-example`
+    * `Databases and Data Connection free e-learning course <https://elearning.aimms.com/course/databases-data-connection>`_
+    * `Employee Scheduling Example <https://how-to.aimms.com/Articles/387/387-employee-scheduling.html>`_

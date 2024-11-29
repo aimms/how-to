@@ -21,7 +21,7 @@ Prerequisites
 
    a. Log into AIMMS PRO
 
-   #. Go to *Help > getting started*
+   #. Go to :menuselection:`Help > Getting Started`
    
    #. Download AIMMS PRO API
 
@@ -43,7 +43,7 @@ Running the Example
         
         To repair:
 
-        i. Click on the "Setup SDK"   to the right
+        i. Click on the :menuselection:`Setup SDK` to the right.
         
         #. Select the latest version without subversion, here ``11``.
         
@@ -56,17 +56,17 @@ Running the Example
     
         .. image:: images/AdaptingConnectionDetails.png
     
-        * Line 30, ``DEFAULT_ENDPOINT``: this might also be ``wss://your-cloud-name.cloud.aimms.com`` 
+        * Line 30, ``DEFAULT_ENDPOINT``: this might also be ``wss://your-cloud-name.cloud.aimms.com``.
         
             * when connection is encrypted, start with ``wss`` (cloud systems are always encrypted).
             
-            * when connection is not encrypted, start with ``ws``
+            * when connection is not encrypted, start with ``ws``.
         
         * Lines 32-34, ``DEFAULT_ENVIRONMENT``, ``DEFAULT_USERNAME``, and ``DEFAULT_PASSWORD`` should have been supplied by your AIMMS PRO administrator.
         
         * Lines 38-39, ``DEFAULT_APPLICATION_NAME``, ``DEFAULT_APPLICATION_VERSION``, the name and version of the app as it is published.
 
-    #.  Now you can start the demo via *IDEA menu > Run > Run*
+    #.  Now you can start the demo via :menuselection:`IDEA menu > Run > Run`.
 
 .. _pro-api-java-output:
 
