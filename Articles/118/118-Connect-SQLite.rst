@@ -169,15 +169,15 @@ Let's start a super simple new AIMMS project, containing only one Database Table
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
 | Link    Type                      |        Action                                                                                                                                 |
 +===================================+===============================================================================================================================================+
-| Link with a ``.dsn`` file         | * Choose the :menuselection:`Select File Data Source...` command in the menu that pops up,                                                                   |
+| Link with a ``.dsn`` file         | * Choose the :menuselection:`Select File Data Source...` command in the menu that pops up,                                                    |
 |                                   | * Select your DSN file ("*dsn*" in our case).                                                                                                 |
-|                                   | * Press the :menuselection:`Save`                                                                                                                          |
+|                                   | * Press the :menuselection:`Save`                                                                                                             |
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-| Link with a system ``.dsn`` file  |  * Choose the :menuselection:`Select User/System Data Source...` command in the menu that pops up,                                                           |
+| Link with a system ``.dsn`` file  |  * Choose the :menuselection:`Select User/System Data Source...` command in the menu that pops up,                                            |
 |                                   |  * Select your DSN System file (``chinook SQLite3`` in our case).                                                                             |
-|                                   |  * Press the :menuselection:`Save`                                                                                                                         |
+|                                   |  * Press the :menuselection:`Save`                                                                                                            |
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-| Link with a connection string     |  * Choose the :menuselection:`Select String Parameter/Connection String...` command in the menu that pops up,                                                |
+| Link with a connection string     |  * Choose the :menuselection:`Select String Parameter/Connection String...` command in the menu that pops up,                                 |
 |                                   |  * Select the String Parameter |sp| you've just created (named ``ConnectionString`` in our case)                                              |
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
 
