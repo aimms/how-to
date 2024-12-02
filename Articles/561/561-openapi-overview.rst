@@ -7,7 +7,7 @@ This article is the overview of a series of articles that illustrate how to leve
 specifications in AIMMS models.
 
 
-Simplified Client Server model
+Simplified Client Server Model
 -------------------------------
 
 A simplified overview of Client Server model:
@@ -34,9 +34,11 @@ An AIMMS application can be a client of other applications, and an AIMMS applica
 .. image:: images/app-is-client-and-server.png
     :align: center
 
-* Client: See https://documentation.aimms.com/dataexchange/rest-client.html
+.. seealso::
+    
+    * `Consuming REST APIs <https://documentation.aimms.com/dataexchange/rest-client.html>`_
 
-* Server: See https://documentation.aimms.com/dataexchange/rest-server.html
+    * `Providing REST APIs <https://documentation.aimms.com/dataexchange/rest-server.html>`_
 
 Not just one service provided, not just one service used; but multiple of both.
 Thus one application can be viewed as a node in a network:
@@ -44,7 +46,7 @@ Thus one application can be viewed as a node in a network:
 .. image:: images/app-has-multiple-clients-uses-multiple-servers.png
     :align: center
 
-Addressed matter of concern
+Addressed Matter of Concern
 ----------------------------
 
 The server defines its API. 
@@ -67,6 +69,8 @@ This eases the application development considerably, as the client no longer nee
 .. image:: images/client-server-openapi-lib.png
     :align: center
 
+|
+
 #.  Creating and submitting a request to the OpenAPI generated library.
 
 #.  The OpenAPI generated library converts the request data to the format of the server and forwards the request.
@@ -78,30 +82,24 @@ This eases the application development considerably, as the client no longer nee
 #.  The response hook is responsible for translating the data in the OpenAPI library to the data structures 
     of the application itself.
 
-Obtaining OpenAPI generated libraries
+Obtaining OpenAPI Generated Libraries
 -------------------------------------
 
 See `Generating API clients from an OpenAPI specification <https://documentation.aimms.com/dataexchange/openapi-client.html#generating-api-clients-from-an-openapi-specification>`_
 
-Detail how-to's provided
--------------------------
+.. seealso::
 
-#.  :doc:`Introduction using single request <../562/562-geolocation-abstractapi>`
+    * :doc:`Introduction using single request <../562/562-geolocation-abstractapi>`
 
-#.  :doc:`Continue using multiple in various ways <../564/564-LocationIQ>`
+    * :doc:`Continue using multiple in various ways <../564/564-LocationIQ>`
 
+    * Definition: https://en.wikipedia.org/wiki/Representational_state_transfer
 
+    * History: https://blog.readme.com/the-history-of-rest-apis/
 
-References
------------
+    * List of OpenAPI sites: https://apis.guru/
 
-* Definition: https://en.wikipedia.org/wiki/Representational_state_transfer
-
-* History: https://blog.readme.com/the-history-of-rest-apis/
-
-* List of OpenAPI sites: https://apis.guru/
-
-* Swagger: https://editor.swagger.io/
+    * Swagger: https://editor.swagger.io/
 
 .. spelling:word-list::
 

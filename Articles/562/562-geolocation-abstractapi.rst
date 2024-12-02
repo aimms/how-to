@@ -173,18 +173,17 @@ Remarks:
 
 #.  At ``geolacation.abstractapi`` example, this procedure is called ``pr_ResponseHook``.
 
-Further information:
---------------------
+.. seealso::
 
-*   `Generating API client code from an OpenAPI specification <https://documentation.aimms.com/dataexchange/openapi-client.html>`_  
-    The reference for creating and using OpenAPI generated AIMMS libraries.
+	*   `Generating API client code from an OpenAPI specification <https://documentation.aimms.com/dataexchange/openapi-client.html>`_  
+		The reference for creating and using OpenAPI generated AIMMS libraries.
 
-*   `API gurus <https://apis.guru/>`_ lists shared Open API specifications, including the one from `geolocation.abstractapi OpenAPI spec <https://api.apis.guru/v2/specs/abstractapi.com/geolocation/1.0.0/openapi.json>`_ . 
+	*   `API gurus <https://apis.guru/>`_ lists shared Open API specifications, including the one from `geolocation.abstractapi OpenAPI spec <https://api.apis.guru/v2/specs/abstractapi.com/geolocation/1.0.0/openapi.json>`_ . 
 
-*   `Swagger <https://editor.swagger.io/>`_ provides an editor and viewer for OpenAPI specifications.
+	*   `Swagger <https://editor.swagger.io/>`_ provides an editor and viewer for OpenAPI specifications.
 
 
-.. note:: 
+.. important:: 
 
 	The article is an adaptation of an earlier version whereby the server ``ipTwist.com`` was used.
 	Regrettably, this server no longer exists.
