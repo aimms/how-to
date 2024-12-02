@@ -12,7 +12,7 @@ These topics help you to
 
 * deploy 
 
-a service, by using the **tasks methods** of the `AIMMS PRO REST API <https://documentation.aimms.com/cloud/rest-api.html>`_
+a service, by using the **tasks methods** of the `AIMMS PRO REST API <https://documentation.aimms.com/cloud/rest-api.html>`_.
 
 
 .. toctree::
