@@ -1,4 +1,4 @@
-Creating an AIMMS Server app
+Creating an AIMMS Server App
 =============================
 
 There are several advantages to setting up a client-server architecture:
@@ -22,17 +22,17 @@ you want to take care of the following aspects:
 
 This article assumes you are familiar with 
 
-* Client-server architecture - see also :doc:`AIMMS OpenAPI Overview<../561/561-openapi-overview>`
+* Client-server architecture - see also: :doc:`AIMMS OpenAPI Overview<../561/561-openapi-overview>`
 
 * Using the AIMMS Cloud platform, including using applications and publishing applications - 
-  see also `AIMMS Cloud documentation <https://documentation.aimms.com/cloud/index.html>`_
+  see also: `AIMMS Cloud documentation <https://documentation.aimms.com/cloud/index.html>`_
 
 The application that is used to illustrate various concepts, is just counting the asterisks in a list of strings. 
 As such it is a "Hello World" type of application - 
 just illustrating technology and getting you started to with that technology.
 
 
-Functionalities of the application
+Functionalities of the Application
 ----------------------------------
 
 Let's start by describing the functionalities of the application:
@@ -63,7 +63,7 @@ Only one service will be detailed in this article, the others are small variatio
 The details of the other services can be found in the downloads.
 
 
-Defining the service
+Defining the Service
 ------------------------
 
 A service is defined by associating a service name with an AIMMS procedure, as illustrated below:
@@ -95,17 +95,16 @@ Remarks:
 
 *   Line 6: Call the workhorse (see sub section below).
 
-**Similar** procedures in this example application define the same service, but use other data formats, such as CSV, Excel, Parquet, and XML.
+Similar procedures in this example application define the same service, but use other data formats, such as CSV, Excel, Parquet, and XML.
 In addition, there are similar procedures to generate a sample input file in the various data formats.
 
-Implementing a service
+Implementing a Service
 ----------------------
 
 The actual working code developed is the function ``fnc_numberOfStars``. 
 Here the connection is made between that function and the procedure defining the service above.
 
 .. code-block:: aimms 
-    :linenos:
 
     Procedure pr_actuallyCountStarsJson {
         Arguments: (sp_input,sp_output);
@@ -138,7 +137,7 @@ Here the connection is made between that function and the procedure defining the
         }
     }
 
-remarks:
+Remarks:
 
 * Line 2: The arguments denote the name of the input and output files.
 
@@ -150,7 +149,7 @@ remarks:
 
 .. tip:: The procedure `ProfilerStart <https://documentation.aimms.com/functionreference/development-support/profiler-and-debugger/profilerstart.html>`_ is called in ``MainInitialization`` enabling tracking task invocations, and task performance.
 
-Testing the service
+Testing the Service
 -----------------------
 
 There are three types of tests:
@@ -161,13 +160,12 @@ There are three types of tests:
 
 #. On the AIMMS Cloud, and using a client app for this purpose.
 
-Performing unit tests
+Performing Unit Tests
 ^^^^^^^^^^^^^^^^^^^^^^
 
 An example of a unit test is the following:
 
 .. code-block:: aimms 
-    :linenos:
 
     Procedure pr_testCountJson {
         Body: {
@@ -196,11 +194,11 @@ Such unit tests verify that the server application still has the verified behavi
 
 More about unit tests can be found at:
 
-#.  https://documentation.aimms.com/unit-test/index.html
+#.  `Unit Test Library <https://documentation.aimms.com/unit-test/index.html>`_
 
-#.  https://how-to.aimms.com/Articles/216/216-effective-use-unit-test-library.html
+#.  `Test Driven Development using the AIMMSUnitTest Library <https://how-to.aimms.com/Articles/216/216-effective-use-unit-test-library.html>`_
 
-Facilitating tests with client apps
+Facilitating Tests with Client Apps
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To facilitate testing by client apps of the service, the service will need to be:
@@ -209,7 +207,7 @@ To facilitate testing by client apps of the service, the service will need to be
 
     To develop the AIMMS service itself, in AIMMS Developer the service can be started using 
     `dex::api::StartAPIService <https://documentation.aimms.com/dataexchange/api.html#dex-api-StartAPIService>`_.
-    See also https://documentation.aimms.com/dataexchange/rest-server.html#activating-the-rest-service.
+    See also `Activating the REST service <https://documentation.aimms.com/dataexchange/rest-server.html#activating-the-rest-service>`_ article.
 
 #.  In the AIMMS Cloud:
 
@@ -220,7 +218,7 @@ To facilitate testing by client apps of the service, the service will need to be
 :doc:`../585/585-development-architecture` contains a more detailed overview of 
 the communication between the server app and the client apps.
 
-Documenting the service
+Documenting the Service
 --------------------------
 
 For each service, we need to specify its:

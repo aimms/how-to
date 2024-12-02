@@ -40,7 +40,7 @@ given by the service is correct.
 Note that a service implemented in AIMMS can also implement an interesting optimization model; 
 however, optimization applications are outside the scope of this article series.
 
-Overview of associated articles
+Overview of Associated Articles
 --------------------------------
 
 There are two parts of this series of articles:
@@ -63,7 +63,7 @@ First Part: Developing the Service
     Coding and internal testing of the service is discussed here.
     In addition, we discuss how to deploy the service in two ways.
 
-Second Part: Available Client implementations
+Second Part: Available Client Implementations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Once a service is available it can be used. In this part, we present several clients to the same service:

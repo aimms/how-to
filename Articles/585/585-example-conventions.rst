@@ -1,9 +1,9 @@
-Conventions used in the examples provided
+Conventions Used in the Examples Provided
 ==========================================
 
 This article just enumerates some of the conventions used in the associated example apps.
 
-Steering the HTTP request
+Steering the HTTP Request
 -------------------------
 
 To test the example apps, also on different systems, configuration of an HTTP request is arranged via a few files
@@ -12,7 +12,7 @@ The three example clients all use this config folder to steer the HTTP requests 
 
 The parameters:
 
-Common configuration parameters:
+Common Configuration Parameters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
 The configuration is based on:
@@ -25,34 +25,34 @@ The configuration is based on:
     
     #.  ``1``: if the AIMMS Cloud is to be used for the service.
 
-Using the service on ``localhost``
+Using the Service on ``localhost``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
 When using the service on ``localhost``, there is only one additional parameter relevant, namely the port number:
 
 #.  ``port`` stored in ``port.txt``.  This integer parameter contains the port number.  
 
-Using the service on the AIMMS Cloud
+Using the Service on the AIMMS Cloud
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
 #.  ``cloud`` stored in ``cloud.txt``. This string parameter is a string which contains the name of an AIMMS cloud, for instance ``chriskuip.aimms.cloud``.
 
 #.  ``apiKey`` stored in ``apikey.txt``. This string parameter identifies and authorizes the user of the service.
-    See https://documentation.aimms.com/cloud/rest-api.html#api-keys-and-scopes to obtain an apiKey.
+    See `how to obtain an apiKey <https://documentation.aimms.com/cloud/rest-api.html#api-keys-and-scopes>`_.
 
 #.  ``app`` stored in ``app.txt``.  This string parameter contains the name of the app when published on an AIMMS cloud, here ``CountTheStars``.
 
 #.  ``ver`` stored in ``ver.txt`` This string parameter contains the version of the app at hand, for instance ``1.0.1.0``,
 
 
-Methods implemented by the example server App
+Methods Implemented by the Example Server App
 -----------------------------------------------
 
 In the example server app, there are two base methods implemented:
 
-* **countStars** Count the number of stars in a list of strings.
+* **countStars:** count the number of stars in a list of strings.
 
-* **generateStars** Generate a list of string with asterisks in it.
+* **generateStars:** generate a list of string with asterisks in it.
 
 Each of these base methods can use five different de facto standards for data exchange:
 

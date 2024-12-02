@@ -394,7 +394,7 @@ Modern tools such as: Python, especially the libraries Pedantic, FastAPI, and uv
 and AIMMS Cloud, especially the feature to launch additional services make connecting a Python service to an AIMMS app, and subsequently deploying the combo, relatively straightforward.
 
 .. seealso::
-    `Launching Python, R and other services <https://documentation.aimms.com/cloud/launch-service.html#launching-python-r-and-other-services>`_ documentation.
+    * `Launching Python, R and other services <https://documentation.aimms.com/cloud/launch-service.html#launching-python-r-and-other-services>`_ documentation.
 
 
 .. spelling:word-list::

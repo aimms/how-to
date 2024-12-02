@@ -1,4 +1,4 @@
-Development architecture of an AIMMS Service
+Development Architecture of an AIMMS Service
 ==============================================
 
 The development of an AIMMS service is based on the usual client-server architecture:
@@ -16,7 +16,7 @@ The important parts of this generic architecture to be detailed are:
 
 Each of these two parts will be detailed in a separate section below:
 
-Hosting the service
+Hosting the Service
 ---------------------
 
 An AIMMS service can be hosted on:
@@ -27,7 +27,7 @@ An AIMMS service can be hosted on:
 
 The specifics of hosting your application in these two environments are provided in the two subsections below:
 
-Using localhost to host your AIMMS service
+Using Localhost to Host your AIMMS Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
 Assuming the :doc:`services are defined <../585/585-AIMMS-server-app>` in your application you can activate the service 
@@ -39,58 +39,52 @@ After calling this procedure (for instance by running the procedure ``pr_startSe
 .. image:: images/netstat.png
     :align: center
 
+|
+
 You can configure the port number and max request size if needed, 
 see `this documentation <https://documentation.aimms.com/dataexchange/rest-server.html#activating-the-rest-service>`_ for details.
 
-Using AIMMS Cloud to host your AIMMS service
+Using AIMMS Cloud to Host your AIMMS Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Creating an ``.aimmspack`` from your server app and publishing it on an AIMMS cloud suffices to make the service available on that AIMMS Cloud.
 After publishing on an AIMMS Cloud, it is not needed to call ``dex::api::StartAPIService`` for activating the service.
 
-
-
-
-
-
-
-Communication by clients of an AIMMS service
+Communication by Clients of an AIMMS Service
 ---------------------------------------------
-
 
 The time needed to solve an optimization problem varies from seconds to hours.
 Therefor the service to solve an optimization problem is separated into the following steps:
 
-#.  **Submit**: Initiate the solving of an optimization problem by providing the necessary data.
+#.  **Submit:** Initiate the solving of an optimization problem by providing the necessary data.
 
-#.  **Monitor**: Regularly poll the status of the job at hand.
+#.  **Monitor:** Regularly poll the status of the job at hand.
 
-#.  **Retrieve**: Retrieve results.
+#.  **Retrieve:** Retrieve results.
 
 The server process that is initiated, monitored, and retrieved is called a task in AIMMS PRO REST API terminology.
 
- 
 
-The URL prefix
+The URL Prefix
 ^^^^^^^^^^^^^^^^^^^^
 
 Then the variations can be handled by the ``url_prefix``, by defining it as:
 
 #.  On Cloud: ``https://{cloud}/pro-api/v2/tasks/``
 
-    #.  Needed: apiKey header when using this ``url_prefix``.
+    *  Needed: apiKey header when using this ``url_prefix``.
 
 #.  On local host: ``http://localhost:{port}/api/v2/tasks/``
 
-    #.  Don't provide apiKey header when using this ``url_prefix``.
+    *  Don't provide apiKey header when using this ``url_prefix``.
 
 
-The HTTP requests
+The HTTP Requests
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 With this prefix, the HTTP requests are:
 
-#.  **Submit** Initiate a task.
+#.  **Submit:** Initiate a task.
 
     ``url_submit``, is the URL to submit a task:
 
@@ -103,18 +97,17 @@ With this prefix, the HTTP requests are:
     
     The response body is a task id, and this task id is used in the following steps.
 
-#.  **Monitor**  Monitor a task.
+#.  **Monitor:**  Monitor a task.
 
     ``url_poll``, is the URL to poll for the status of a task: ``{url_prefix}/{taskid}``
     
     There is no request body, and the response body is a Json file containing the task status amongst others.
 
-#.  **Retrieve** Retrieve response
+#.  **Retrieve:** Retrieve response
 
     ``url_response`` is the URL for the response of a task: ``{url_prefix}/{taskid}/response``
 
     There is no request body, and the response body is defined by the service at hand.
-
 
 
 Next

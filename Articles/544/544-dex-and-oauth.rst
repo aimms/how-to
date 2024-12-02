@@ -4,14 +4,13 @@
    :keywords: aimms, data, exchange, api, authorization, security, oauth
    
 
-Using OAuth2 for API authorization with DEX
+Using OAuth2 for API Authorization with DEX
 =============================================
 
-.. image:: https://img.shields.io/badge/AIMMS_4.90-Minimum_AIMMS_Version_WebUI-brightgreen
-.. image:: https://img.shields.io/badge/AIMMS_2.90-Minimum_AIMMS_Version_PRO-brightgreen
-
-:download:`OAuth example download <download/OAuth-Example.zip>`
-
+.. important::
+	- Minimum AIMMS PRO version: 2.90
+	- Minimum AIMMS WebUI version: 4.90
+	
 With the Data Exchange Library (DEX) you can use `the OAuth2 protocol <https://documentation.aimms.com/dataexchange/rest-client.html#using-oauth2-for-api-authorization>`__ for the authentication procedure of API's. On this how-to page you can find more details on how this type of authorization works and the flows that come with it. You can download the example project to replicate the examples described below.
 
 In this article we will be demonstrating the two available options:
@@ -20,6 +19,9 @@ In this article we will be demonstrating the two available options:
 
 #. **the Client Credentials flow**. This one is often used when it makes more sense to authenticate and authorize an app instead of a personal user login. This is the case for server-to-server/machine-to-machine communications where the client ID and client secret are used to authenticate and get access. 
 
+Please use the following project to follow this article along:
+
+	:download:`OAuth example download <download/OAuth-Example.zip>`
 
 Prerequisites
 --------------
@@ -29,7 +31,7 @@ Prerequisites
 #. You will need certain details from the API that needs authorization. This means either you are able to access/configure the API settings yourself, or you have access to someone who can do this for you. For the Client Credentials flow you'll need the client id, client secret, token endpoint and the scope. For the Authorization Code flow, these are the client id, client secret, token endpoint, scope, authorization endpoint and path part of the redirect URL where the used identity platform will need to forward the result to. 
 
 
-Implementing the Authorization Code flow with Google
+Implementing the Authorization Code Flow with Google
 ------------------------------------------------------
 
 In this example we use `Google's OpenID Connect API <https://developers.google.com/identity/openid-connect/openid-connect>`__, with the goal to obtain the logged-in Google user data within the AIMMS application. Because we are following the Authorization Code Flow, user consent is required. 
@@ -39,59 +41,70 @@ Through the `Google Cloud dashboard <https://console.cloud.google.com/>`__ we ha
 .. image:: images/google_step1.png
    :align: center
 
+|
+
 This provides us with some details we will need for the flow to work (see right top of the page):
 
 .. image:: images/google_step2.png
    :align: center
+
+|
 
 You can see in the section at the bottom left that we've added two redirect URI's; one for usage from the AIMMS Cloud (URI 1) and one for usage from a locally opened AIMMS PRO (URI 2), so the connection should work both from a local connection as well as from an AIMMS app uploaded to the cloud. 
 
 If we take a look at the setup within AIMMS we see the following:
 
 .. code-block:: aimms
+	:linenos:
     
-		!empty UserInfo_Data, just to make sure we start off clean
-		empty dex::oauth::UserInfo_Data;
+	!empty UserInfo_Data, just to make sure we start off clean
+	empty dex::oauth::UserInfo_Data;
 
-		!load data into an APIClient we name 'Google'
-		dex::oauth::APIClients := data { Google };
-		
-		!set data for 'Google'
-		dex::oauth::APIClientStringData('Google',dex::oauth::apidata) :=$ data { 
-			authorizationEndpoint : "https://accounts.google.com/o/oauth2/v2/auth", 
-			tokenEndpoint : "https://oauth2.googleapis.com/token", 
-			openIDEndpoint : "https://www.googleapis.com/oauth2/v3/userinfo",
-			clientId : "xxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com", 
-			clientSecret : "xxxxxx-xxxxxxxxxxxxxxx", 
-			scope: "openid profile";
-		}
+	!load data into an APIClient we name 'Google'
+	dex::oauth::APIClients := data { Google };
+	
+	!set data for 'Google'
+	dex::oauth::APIClientStringData('Google',dex::oauth::apidata) :=$ data { 
+		authorizationEndpoint : "https://accounts.google.com/o/oauth2/v2/auth", 
+		tokenEndpoint : "https://oauth2.googleapis.com/token", 
+		openIDEndpoint : "https://www.googleapis.com/oauth2/v3/userinfo",
+		clientId : "xxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com", 
+		clientSecret : "xxxxxx-xxxxxxxxxxxxxxx", 
+		scope: "openid profile";
+	}
 
 The authorization endpoint, token endpoint and open ID endpoint should be provided by the API that requires authentication. The client ID and client secret are, in this example, provided by Google's OAuth 2.0 authentication system (as shown in the screenshot above). 
 
 Now, when we open the example project either locally or as an app uploaded on our cloud, we are able to run the procedure (in the WebUI by clicking the related button). The underlying procedure in AIMMS is:
 
 .. code-block:: aimms
-    
-		InitializeOAuthClients;
-		dex::oauth::GetUserInfo('Google');
+    :linenos:
+
+	InitializeOAuthClients;
+	dex::oauth::GetUserInfo('Google');
 
 This will first send us to the Google authentication screen, where we will have to select the profile to authenticate with:
 
 .. image:: images/google_step3.png
    :align: center
 
+|
+
 After that we will receive the message:
 
 .. image:: images/google_step4.png
    :align: center
+
+|
 
 When this request has processed, you will see the requested data is provided:
 
 .. image:: images/google_step5.png
    :align: center
 
+|
 
-Implementing the Authorization Code flow with Azure
+Implementing the Authorization Code Flow with Azure
 ------------------------------------------------------
 
 For Azure, the `OAuth 2.0 authentication flow <https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow>`__ is kind of similar to the one from Google, but of course set up from a different context. In this case, we can find the App Registrations in the Azure Active Directory within the `Azure Portal <https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow>`__. Once you've created the registration of the app, you will receive the necessary details:
@@ -99,49 +112,57 @@ For Azure, the `OAuth 2.0 authentication flow <https://learn.microsoft.com/en-us
 .. image:: images/azure_step1.png
    :align: center
 
+|
+
 The secret can be found (or created, if none exists yet) under 'Certificates & secrets', or by simply clicking on the link next to 'Client credentials' in the above screenshot. Redirect URI's should be added under 'Authentication':
 
 .. image:: images/azure_step2a.png
    :align: center
+
+|
 
 The correct scope(s) for the request should be added in the 'API permissions' section. Since for the Authentication Code Flow we will retrieve the user data from the logged in user, we don't need admin consent and the User.Read permission should be sufficient:
 
 .. image:: images/azure_step2.png
    :align: center
 
+|
+
 In the request we'll also add the 'offline_access' scope as defined by the documentation so we get a refresh token for extended access to resources. 
 If we take a look at the setup within AIMMS we see the following:
 
 .. code-block:: aimms
+	:linenos:
 
-		!empty UserInfo_Data, just to make sure we start off clean
-		empty dex::oauth::UserInfo_Data;
+	!empty UserInfo_Data, just to make sure we start off clean
+	empty dex::oauth::UserInfo_Data;
 
-		!load data into an APIClient we name 'MSACF'
-		dex::oauth::APIClients := data { MSACF };
-		
-		!set data for 'MSACF'
-		dex::oauth::APIClientStringData('MS',dex::oauth::apidata) :=$ data { 
-			authorizationEndpoint : "https://login.microsoftonline.com/[tenantID]/oauth2/v2.0/authorize", 
-			tokenEndpoint : "https://login.microsoftonline.com/[tenantID]/oauth2/v2.0/token", 
-			openIDEndpoint : "https://graph.microsoft.com/v1.0/me",
-			clientId : "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx", 
-			clientSecret : "xxxxxxxxxxxxxxxxxxxx", 
-			scope: "offline_access https://graph.microsoft.com/User.Read"
-		};
+	!load data into an APIClient we name 'MSACF'
+	dex::oauth::APIClients := data { MSACF };
+	
+	!set data for 'MSACF'
+	dex::oauth::APIClientStringData('MS',dex::oauth::apidata) :=$ data { 
+		authorizationEndpoint : "https://login.microsoftonline.com/[tenantID]/oauth2/v2.0/authorize", 
+		tokenEndpoint : "https://login.microsoftonline.com/[tenantID]/oauth2/v2.0/token", 
+		openIDEndpoint : "https://graph.microsoft.com/v1.0/me",
+		clientId : "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx", 
+		clientSecret : "xxxxxxxxxxxxxxxxxxxx", 
+		scope: "offline_access https://graph.microsoft.com/User.Read"
+	};
 
 The same arguments as the previous example should be provided, but of course with different data. Note that the tenantID should be provided in both the authorizationEndpoint and tokenEndpoint.
 We also perform the same request but with a different argument because we changed the name of the client:
 
 .. code-block:: aimms
-    
-		InitializeOAuthClients;
-		dex::oauth::GetUserInfo('MSACF');
+    :linenos:
+
+	InitializeOAuthClients;
+	dex::oauth::GetUserInfo('MSACF');
 
 Now, when we open the example project either locally or as an app uploaded on our cloud, we are able to run the procedure and/or use the button in the WebUI to retrieve the requested user data. 
 
 
-Implementing the Client Credentials flow with Azure
+Implementing the Client Credentials Flow with Azure
 ------------------------------------------------------
 
 The Client Credentials Code flow requires a slightly different setup to work. You can reuse the client that was set up for the Authorization Code Flow, but we need an additional API Permission within the Azure portal:
@@ -149,30 +170,34 @@ The Client Credentials Code flow requires a slightly different setup to work. Yo
 .. image:: images/azure_step2c.png
    :align: center
 
+|
+
 In AIMMS, we will work with the :any:`dex::client::NewRequest` functionality. We first create the client:
 
 .. code-block:: aimms
-    
-		!read mappings
-		dex::ReadAllMappings;
+	:linenos:
 
-		!empty UserInfo_Data, just to make sure we start off clean
-		empty dex::oauth::UserInfo_Data;
+	!read mappings
+	dex::ReadAllMappings;
 
-		!create client
-		dex::oauth::APIClients := data { MS };
-		dex::oauth::APIClientStringData('MS',dex::oauth::apidata) :=$ data { 
-			tokenEndpoint : "https://login.microsoftonline.com/[tenantID]/oauth2/v2.0/token", 
-			clientId : "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx", 
-			clientSecret : "xxxxxxxxxxxxxxxxxxxx", 
-			scope: "https://graph.microsoft.com/.default"
-		};
+	!empty UserInfo_Data, just to make sure we start off clean
+	empty dex::oauth::UserInfo_Data;
+
+	!create client
+	dex::oauth::APIClients := data { MS };
+	dex::oauth::APIClientStringData('MS',dex::oauth::apidata) :=$ data { 
+		tokenEndpoint : "https://login.microsoftonline.com/[tenantID]/oauth2/v2.0/token", 
+		clientId : "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx", 
+		clientSecret : "xxxxxxxxxxxxxxxxxxxx", 
+		scope: "https://graph.microsoft.com/.default"
+	};
 
 Note that you should input the tenant ID into to tokenEndpoint.
 The scope has changed to the .default graph scope. We also left out the authorizationEndpoint (as we will now use a bearer) and the openIDEndpoint. 
 Now we can create the request and add the bearer token:
 
 .. code-block:: aimms
+	:linenos:
 
 	!first create the request
 	dex::client::NewRequest(
@@ -190,6 +215,7 @@ As you can see we've added a reference to a Callback procedure, necessary for th
 We are also tracing the request of which we store the results in a file called Trace.xml. The actual response will be in Output.json. Both of these files can be accessed if you run the procedure(s) locally. Now we are ready to perform the request:
 
 .. code-block:: aimms
+	:linenos:
 
 	!perform the request
 	dex::client::PerformRequest(

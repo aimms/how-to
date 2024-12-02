@@ -1,4 +1,4 @@
-Using AIMMS Services with a VBA client
+Using AIMMS Services with a VBA Client
 ========================================
 
 AIMMS is an elaborate tool for modeling optimization problems.
@@ -10,11 +10,11 @@ Preparation
 --------------
 
 Excel comes with Visual Basic for Applications (VBA) permitting via the  
-WinHttp.WinHttpRequest.5.1 library to leverage REST API services.
+``WinHttp.WinHttpRequest.5.1`` library to leverage REST API services.
 
 Preparing to create a VBA Client of your own using AIMMS PRO Rest API Tasks, you will have to:
 
-#.  Enable some libraries, via the Visual Basic Editor (Alt F11), Tools > References, most importantly:
+#.  Enable some libraries, via the Visual Basic Editor (``Alt + F11``), :menuselection:`Tools > References`, most importantly:
 
     *   `Microsoft WinHTTP Services, version 5.1 <https://learn.microsoft.com/en-us/windows/win32/winhttp/about-winhttp>`_
     
@@ -27,6 +27,8 @@ Preparing to create a VBA Client of your own using AIMMS PRO Rest API Tasks, you
     .. image:: images/vba-client-selected-tools-references.png
         :align: center
 
+    |
+
 #.  Download and `install The VBA JSON library <https://github.com/VBA-tools/VBA-JSON>`_.
 
 
@@ -36,12 +38,13 @@ Workbook
 In this section, a simple example of an end user interface of a VBA app that deploys the CountTheStars 
 interface as implemented by an AIMMS app.
 
-
 FrontEnd
 ^^^^^^^^^^
 
 .. image:: images/ExcelFrontEndSheet.png
     :align: center
+
+|
 
 * Cell ``B1`` will contain the state of the request as it executes.
 
@@ -161,7 +164,7 @@ Here the ``apiURL`` is obtained via the subroutine ``PollOnceDetermineURL``,
 following :doc:`../585/585-development-architecture` for constructing ``url_poll``.
 
 
-Receive result
+Receive Result
 ^^^^^^^^^^^^^^^^^^^^
 
 The code to receive the result is:
@@ -218,7 +221,7 @@ References
 
     Using AIMMS as an optimization tool inside an Excel workbook used to be facilitated 
     via the Microsoft COM interface, but is now deprecated, see also 
-    `Deprecation table <https://documentation.aimms.com/deprecation-table.html>`_ .
+    `Deprecation Table <https://documentation.aimms.com/deprecation-table.html>`_ .
 
 
 

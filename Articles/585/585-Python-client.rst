@@ -27,7 +27,7 @@ You will be able to harness the power AIMMS to perform complex tasks while seaml
 integrating them with your Python-based projects.
 
 
-Python app setup
+Python App Setup
 ----------------
 
 For the Python client app, the following libraries are used.
@@ -38,7 +38,7 @@ For the Python client app, the following libraries are used.
 
 *   **json**, used to construct json input files, see https://docs.python.org/3/library/json.html
 
-Initiating a task
+Initiating a Task
 -------------------
 
 In short, a task is:
@@ -62,7 +62,7 @@ The URL to initiate such a task has one of the following two formats:
 
     This will run the task in the AIMMS Cloud.
     An apiKey header is required for using an AIMMS service via the AIMMS Cloud.
-    See https://documentation.aimms.com/cloud/rest-api.html#api-keys-and-scopes to obtain an apiKey.
+    See `how to obtain an apiKey <https://documentation.aimms.com/cloud/rest-api.html#api-keys-and-scopes>`_.
 
 In :doc:`Develop, Test, and Deploy a Service<../585/585-develop-service>` 
 it is discussed how to make the service available locally and in an AIMMS Cloud.
@@ -76,7 +76,7 @@ The response is a json file of the following form:
 
 This id identifies the task at hand, and will be used in the next sections to query said task.
 
-Monitoring a task
+Monitoring a Task
 ------------------
 
 With the id of a task, we can start monitoring:
@@ -134,7 +134,7 @@ The actual Python code to monitor the task is a straight forward while loop:
 		state = poll_response.json()['state']
 		print("    " + state)
 
-Retrieving results
+Retrieving Results
 -------------------
 
 Once the status of a task is ``finished``, its results can be requested.  The URL's are.
