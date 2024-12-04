@@ -1,8 +1,5 @@
-Taking Multiple into account calling an OpenAPI REST API
+Taking Multiple into Account Calling an OpenAPI REST API
 ============================================================
-
-:download:`AIMMS 4.90 project download <model/LocationIQOpenAPIClient.zip>` 
-
 
 Calling a generated OpenAPI Library, the word "multiple" comes back in several ways:
 
@@ -26,7 +23,11 @@ Calling a generated OpenAPI Library, the word "multiple" comes back in several w
     Rate limits often depend on your license.
 
 This how-to article discusses modeling approaches for each of the above.
-Before going into the details of the above, we present an API to serve as the background of this article.
+Before going into the details of the above, we present an API to serve as the background of this article. 
+
+Please use the following project to follow this article:
+
+    :download:`AIMMS 4.90 project download <model/LocationIQOpenAPIClient.zip>` 
 
 
 The Story
@@ -34,7 +35,7 @@ The Story
 
 The service `Search by LocationIQ.com <https://locationiq.com/>`_ offers, `amongst others <https://locationiq.com/demo>`_, the following methods:
 
-*   **search**: Forward Geocoding: A free form address to Geographical coordinates,
+*   **Search**: A free form address to Geographical coordinates.
 
 *   **Matrix**: Compute distance, by time or length, between locations.
 
@@ -51,13 +52,13 @@ After that, we will focus on the **search** method, and do:
 
 *   Making multiple requests, and respecting the rate limit.
 
-The OpenAPI specification
+The OpenAPI Specification
 ---------------------------
 
 OpenAPI specifications can be found at various places, including `APIs.guru <https://apis.guru/>`_, `github <https://github.com/>`_,  and others.
 The one used in this article was found on `Github LocationIQ <https://github.com/>`_  
 
-Reading tips for an OpenAPI specification
+Reading Tips for an OpenAPI Specification
 ----------------------------------------------
 
 An OpenAPI specification is written in a ``.json`` or ``.yaml`` file. 
@@ -81,7 +82,7 @@ Although these are text files, I find the following two tools more effective in 
         .. image:: images/valid-response-uses-media-type-schema.png
             :align: center
 
-The service URL
+The Service URL
 ----------------------
 
 LocationIQ provides its service from two locations by having two service URL's:
@@ -99,7 +100,7 @@ You can use one of these values in your ``../api-init/openapi-LocationIQ.txt`` f
     LocationIQ::api::APIKey('key') := "<enter your api key here>" ;
 
 
-The first search call
+The First Search Call
 ------------------------
 
 When searching for a landmark, sometimes the same name is used at multiple places on the globe.
@@ -111,7 +112,6 @@ For instance, searching for ``Brandenburg Gate``, returns 3 locations, as illust
 The calling code that achieves this is:
 
 .. code-block:: aimms 
-    :linenos:
 
     Procedure pr_testWithOpenAPI_1 {
         Body: {
@@ -122,7 +122,7 @@ The calling code that achieves this is:
 
 The code for making a request, does not need to take multiple answers into account:
 
-Making the request
+Making the Request
 ^^^^^^^^^^^^^^^^^^^^^
 
 Making a request is coded in the procedure ``locationSearch::pr_makeRequest``.
@@ -163,7 +163,7 @@ Remarks:
 The code for handling a response, however, does need to take multiple answers into account:
 
 
-Handling the response
+Handling the Response
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Handling a response is coded in the procedure ``locationSearch::pr_responseHook``
@@ -226,17 +226,16 @@ Remarks:
     (``LocationIQ/Search(%s)`` filling in ``sp_addressString(ep_addr)``), 
     and information retrieved from the response.
 
-Making multiple requests and respecting rate limits
+Making Multiple Requests and Respecting Rate Limits
 ------------------------------------------------------
 
-Two calls
+Two Calls
 ^^^^^^^^^^^^^ 
 
 Let's start with making two calls. 
 Our input data is in ``locationSearch::sp_addressString(locationSearch::i_addressNo)``. 
 
 .. code-block:: aimms 
-    :linenos:
 
     Procedure pr_testWithOpenAPI_2 {
         Body: {
@@ -254,14 +253,13 @@ Handling the corresponding responses comes later, after the server finished proc
 Note that handling the response of request 2 may come before handling the response for request 1.
 This underlines the importance of parameters like ``ep_addressses``; it handles relating responses to their corresponding requests.
 
-Going over the limit
+Going Over the Limit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
 I usually develop with a free API key, so the rate limit is two calls per second. 
 What happens when I go over the limit?
 
 .. code-block:: aimms 
-    :linenos:
 
     Procedure pr_testWithOpenAPI_3 {
         Body: {
@@ -275,7 +273,7 @@ What happens when I go over the limit?
 Well, ``LocationIQ`` reports a rate limit exceeded.  
 My error message is as follows: ``LocationIQ/Search(Brandenburg Gate) failed. Code: 429, errNo: 0: Rate Limited Second.``
 
-Accepting a rate limit
+Accepting a Rate Limit
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Making a request takes almost no time, thus doing at most 2 calls per seconds 
@@ -353,6 +351,10 @@ Here the utility procedure ``pr_handleResponsesFor`` is coded as follows:
             }
         }
     }
+
+.. seealso::
+
+    * `AIMMS PRO REST API <https://documentation.aimms.com/cloud/rest-api.html#aimms-pro-rest-api>`_
 
 .. spelling:word-list::
 

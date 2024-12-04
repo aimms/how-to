@@ -34,6 +34,8 @@ An AIMMS application can be a client of other applications, and an AIMMS applica
 .. image:: images/app-is-client-and-server.png
     :align: center
 
+|
+
 .. seealso::
     
     * `Consuming REST APIs <https://documentation.aimms.com/dataexchange/rest-client.html>`_
@@ -45,6 +47,8 @@ Thus one application can be viewed as a node in a network:
 
 .. image:: images/app-has-multiple-clients-uses-multiple-servers.png
     :align: center
+
+|
 
 Addressed Matter of Concern
 ----------------------------

@@ -1,17 +1,18 @@
-Publishing an AIMMS service
+Publishing an AIMMS Service
 =============================
 
-:download:`AIMMS 4.90 project download <model/MachineSchedulingMIPTimeIndexedSolver.zip>` 
-
-This how-to is a Hello World type example illustrating how to create a service from an AIMMS procedure. 
+This article illustrates how to create a service from an AIMMS procedure. 
 It requires the following steps:
 
 #.  Create procedure that implements a task 
 
 #.  Publish the application
 
+Please use the following project to follow this article:
 
-Procedure implementing task
+    :download:`AIMMS 4.90 project download <model/MachineSchedulingMIPTimeIndexedSolver.zip>` 
+
+Procedure Implementing Task
 ---------------------------
 
 .. code-block:: aimms 
@@ -64,19 +65,18 @@ Some remarks about the highlighted lines:
 #.  Line 17: Similarly, the response is written to a file.
     The string ``dex::api::RequestAttribute( 'response-data-path' )`` is the path to that file. 
 
-Deploying an application on AIMMS Cloud
+Deploying an Application on AIMMS Cloud
 ----------------------------------------
 
-For AIMMS Clouds with Tasks enabled, it suffices to publish the .aimmspack on that cloud.
+For an AIMMS Cloud with Tasks enabled, it suffices to publish the ``.aimmspack`` on that cloud.
 
-Further reading
------------------
+.. seealso::
 
-* :doc:`../567/567-python-client` 
+    * :doc:`../567/567-python-client` 
 
-* `More on the new REST service for 'Tasks' <https://community.aimms.com/product-updates/more-on-the-new-rest-service-for-tasks-1354>`_
+    * `More on the new REST service for 'Tasks' <https://community.aimms.com/product-updates/more-on-the-new-rest-service-for-tasks-1354>`_
 
-* `REST Service for running solve jobs and other asynchronous jobs <https://community.aimms.com/product-updates/rest-service-for-running-solve-jobs-and-other-asynchronous-jobs-1345>`_
+    * `REST Service for running solve jobs and other asynchronous jobs <https://community.aimms.com/product-updates/rest-service-for-running-solve-jobs-and-other-asynchronous-jobs-1345>`_
 
 
 

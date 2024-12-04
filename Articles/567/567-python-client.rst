@@ -1,9 +1,5 @@
-Python client
+Python Client
 ================
-
-:download:`Python 3.10 script <model/main.py>` 
-
-
 
 To create a service, it helps to have a client available that can test that service.
 
@@ -20,9 +16,11 @@ The client has the following steps:
 
 #.  Report the solution.
 
-These steps are detailed in the next sections. 
+These steps are detailed in the next sections. Please use the following project to follow this article:
 
-Submit task
+    :download:`Python 3.10 script <model/main.py>` 
+
+Submit Task
 ------------
 
 According to the `AIMMS PRO REST API <https://documentation.aimms.com/cloud/rest-api.html#aimms-pro-rest-api>`_ , 
@@ -75,7 +73,7 @@ The string variables used are defined as follows:
  
 #.  ``requestDict`` contains the request body and is the actual input for the task.
 
-Polling task status
+Polling Task Status
 -------------------
 
 .. code-block:: python 
@@ -106,7 +104,7 @@ Remarks:
 #.  Line 11: The values ``status`` can take on are enumerated `here <https://documentation.aimms.com/dataexchange/rest-server.html#service-end-points-exposed>`_
 
 
-Obtain task response
+Obtain Task Response
 ---------------------
 
 .. code-block:: python 
@@ -123,22 +121,15 @@ Remarks:
 #.  Line 2: A get on the service end point ``/task/{id}/response`` is used to obtain the task response.
 
 
-Further reading
------------------
+.. seealso::
 
-#.  :doc:`../567/567-aimms-service` 
+    #.  :doc:`../567/567-aimms-service` 
 
-#.  `More on the new REST service for 'Tasks' <https://community.aimms.com/product-updates/more-on-the-new-rest-service-for-tasks-1354>`_
+    #.  `More on the new REST service for 'Tasks' <https://community.aimms.com/product-updates/more-on-the-new-rest-service-for-tasks-1354>`_
 
-#.  `REST Service for running solve jobs and other asynchronous jobs <https://community.aimms.com/product-updates/rest-service-for-running-solve-jobs-and-other-asynchronous-jobs-1345>`_
+    #.  `REST Service for running solve jobs and other asynchronous jobs <https://community.aimms.com/product-updates/rest-service-for-running-solve-jobs-and-other-asynchronous-jobs-1345>`_
 
-#.  Various Python packages:
-
-    #.  `Requests <https://requests.readthedocs.io/en/latest/>`_
-
-    #.  `Pandas <https://pandas.pydata.org/>`_
-
-    #.  `Plotly <https://plotly.com/python/>`_
+    #.  Various Python packages: `Requests <https://requests.readthedocs.io/en/latest/>`_, `Pandas <https://pandas.pydata.org/>`_, `Plotly <https://plotly.com/python/>`_
 
 
 .. spelling:word-list::
