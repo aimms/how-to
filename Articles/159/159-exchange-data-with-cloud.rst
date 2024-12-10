@@ -2,7 +2,7 @@
    :description: How to set up a framework for sending data via the AIMMS Cloud platform.
    :keywords: cloud, exchange, api, configure, network
 
-Exchange data with the AIMMS Cloud Platform
+Exchange Data with the AIMMS Cloud Platform
 ===========================================
 
 This document aims to introduce you to the options for exchanging data with the `AIMMS Cloud Platform <https://documentation.aimms.com/cloud/>`_.
@@ -63,7 +63,7 @@ The other route is without a VPN. This probably requires you to whitelist the IP
 The AIMMS apps will issue commands to the remote database in the same way as when you are using a VPN connection to a remote database.
 
 .. seealso::
-   There is a course about **Databases & Data Connection** on our Academy, let's get certified!
+   There is a free course about `Databases & Data Connection <https://elearning.aimms.com/course/databases-data-connection>`_ on our E-Learning, let's get certified!
 
 
 Via the AIMMS PRO Storage

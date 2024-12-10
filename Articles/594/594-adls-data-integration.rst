@@ -51,12 +51,12 @@ Creating a new container (or, as called on the ADLS, 'file system') is easily do
 .. code-block:: aimms
 	:linenos:
 
-		!create a unique name for the container
-		dex::schema::CreateUUID(testFS);
-		testFS := "fs-" + testFS;
-		
-		!create the container with the above defined name
-		dex::dls::CreateFileSystem(testFS);
+	!create a unique name for the container
+	dex::schema::CreateUUID(testFS);
+	testFS := "fs-" + testFS;
+	
+	!create the container with the above defined name
+	dex::dls::CreateFileSystem(testFS);
 
 Without errors, the container will be created with the given name. 
 
@@ -68,11 +68,11 @@ Now we can continue with uploading a file from AIMMS to that newly created conta
 .. code-block:: aimms
 	:linenos:
     
-		dex::dls::UploadFile(
-			testFS, 
-			"DLSData/Azure Data lake v1/Bill Of Material.parquet",
-			"test"
-		);
+	dex::dls::UploadFile(
+		testFS, 
+		"DLSData/Azure Data lake v1/Bill Of Material.parquet",
+		"test"
+	);
 
 The arguments provided are:
 
@@ -97,11 +97,11 @@ Now let's download that same file from the ADLS:
 .. code-block:: aimms
 	:linenos:
     
-		dex::dls::DownloadFile(
-			testFS, 
-			"Bill Of Material.parquet", 
-			"downloads"
-		);
+	dex::dls::DownloadFile(
+		testFS, 
+		"Bill Of Material.parquet", 
+		"downloads"
+	);
 
 The arguments provided are: 
 
