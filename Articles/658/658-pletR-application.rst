@@ -1,6 +1,8 @@
 The AIMMS application pletR
 ============================
 
+:download:`AIMMS 24.5 project download <model/pletR.zip>` 
+
 The AIMMS 24.5 application pletR administers, reports on, and follows the MySQL database **plet**.
 
 .. image:: images/cactus-cowboy-road-roller.png

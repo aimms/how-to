@@ -1,6 +1,9 @@
 The library AimmsPLET
 ======================
 
+:download:`AimmsPLET library download <model/AimmsPLET.zip>` 
+
+
 The **AimmsPLET** library contains functions an AIMMS application with service for long running tasks
 could use to record interesting events.
 This library uses the prefix **plet**, and therefore often referenced to as **plet** instead of **AimmsPLET**.
@@ -15,9 +18,9 @@ Installation
 The following steps are recommended to add the AimmsPLET library to your AIMMS application with 
 a service for long running tasks:
 
-#.  Add the library AimmsPLET by cloning from: 
+#.  Add the library AimmsPLET by cloning from: <copying above download>
 
-#.  Add libraries AimmsPLET depends on, currently only Stopwatch, see 
+#.  Add libraries AimmsPLET depends on, currently only Stopwatch, see :doc:`../574/574-stopwatch-library`.
 
 #.  Optionally add AimmsPLET and Stopwatch to the .gitignore of your AIMMS app.
 
