@@ -99,7 +99,7 @@ A GET to one of these two URL's will result in a json string of the following fo
         "id": "c46844d8-d544-476f-a25c-63ef61bd6fba",
         "service": "countStarsJson",
         "starttime": "2023-07-27T10:36:52Z",
-        "status": "finished",
+        "status": "completed",
         "queuetime": 0.002,
         "runtime": 0.099,
         "returncode": 1
@@ -113,7 +113,7 @@ Remarks:
 
 * The start time is in UTC.
 
-* The status ``finished`` means normal completion. Other status values are: ``queued``, ``starting``, ``solving``.
+* The status ``completed`` means normal completion. Other status values are: ``queued``, ``running``, ``solving``.
 
 * The queue time is the time between submit and an AIMMS Cloud rest session 
   actually start executing the procedure associated with the service.
@@ -137,7 +137,7 @@ The actual Python code to monitor the task is a straight forward while loop:
 Retrieving results
 -------------------
 
-Once the status of a task is ``finished``, its results can be requested.  The URL's are.
+Once the status of a task is ``completed``, its results can be requested.  The URL's are.
 
 #.  ``http://localhost::{port}/api/v2/tasks/{id}/response``
 
