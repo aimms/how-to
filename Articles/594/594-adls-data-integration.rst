@@ -4,11 +4,12 @@
    :keywords: aimms, data, exchange, api, authorization, security, oauth
    
 
-Use the AIMMS Cloud Azure Data Lake Storage for integrating data
+Data Integration with AIMMS Cloud Azure Data Lake Storage
 ===================================================================
 
-.. image:: https://img.shields.io/badge/DEX_2.1.2.5-Minimum_DEX_Version-brightgreen
-.. image:: https://img.shields.io/badge/AIMMS_2.50.1-Minimum_AIMMS_Version_PRO-brightgreen
+.. important::
+	- Minimum AIMMS PRO version: 2.50.1
+	- Minimum AIMMS DEX version: 2.1.2.5
 
 Every AIMMS Cloud comes with an Azure Data Lake Gen2 storage account (ADLS). The Data Exchange Library (DEX) `provides functions to easily communicate with it <https://documentation.aimms.com/dataexchange/dls.html>`__, allowing you to import and export data onto/from the storage account. This route makes it easier to e.g. share exported data with external sources, or to import external data.
 
@@ -37,18 +38,19 @@ Prerequisites
 
 #. It is also good to understand the structure of an Azure Data Lake Storage. You can refer to `this page to learn more about it <https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-namespace>`__, but important to know for this article is to look at the storage as if it's a file explorer. The 'folders' are referred to as containers or file systems. It is possible to create new folders within other folders, creating so called paths. Files are always uploaded into a specified container. Files are also referred to as 'blobs' in the context of a Data Lake storage.
 
-Flow 1: the ADLS-DEX route
+The ADLS-DEX Route
 ---------------------------
 
 There are multiple DEX functions available to easily achieve what we want as they are created specifically for usage with ADLS. In this route you don't have to worry about the creation of a SAS token for authentication (see below) or the arguments you'll need to input, as the functions themselves will take care of everything.
 
-2.1 Creating a new container
+Creating a New Container
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Creating a new container (or, as called on the ADLS, 'file system') is easily done:
 
 .. code-block:: aimms
-    
+	:linenos:
+
 		!create a unique name for the container
 		dex::schema::CreateUUID(testFS);
 		testFS := "fs-" + testFS;
@@ -58,12 +60,13 @@ Creating a new container (or, as called on the ADLS, 'file system') is easily do
 
 Without errors, the container will be created with the given name. 
 
-1.2 Upload a file
+Upload a File
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Now we can continue with uploading a file from AIMMS to that newly created container on the ADLS:
 
 .. code-block:: aimms
+	:linenos:
     
 		dex::dls::UploadFile(
 			testFS, 
@@ -73,7 +76,7 @@ Now we can continue with uploading a file from AIMMS to that newly created conta
 
 The arguments provided are:
 
-* the name of the container we want to upload to (which in this example is still the value in 'testFS');
+* the name of the container we want to upload to (which in this example is still the value in ``testFS``);
 * the local path of the file to upload;
 * optional: a string parameter holding the path prefix of the location within the file system/container to which the file must be uploaded. If this path does not exist yet, it will automatically be created.
 
@@ -86,12 +89,13 @@ Note that it is also possible, with :any:`dex::dls::UploadFiles`, to upload a se
 
 Without errors, the will be uploaded as specified. 
 
-1.3 Download a file
+Download a File
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Now let's download that same file from the ADLS:
 
 .. code-block:: aimms
+	:linenos:
     
 		dex::dls::DownloadFile(
 			testFS, 
@@ -100,16 +104,17 @@ Now let's download that same file from the ADLS:
 		);
 
 The arguments provided are: 
-- the name of the container we want to download from (which in this example is still the value in 'testFS');
-- the path of the file (including the file name, or only the file name if it is in the main container) within the file system on the ADLS to download;
-- optional: string parameter holding the local directory to which the file must be downloaded. In our example it is to the folder 'downloads' in the project folder.
+
+* the name of the container we want to download from (which in this example is still the value in ``testFS``);
+* the path of the file (including the file name, or only the file name if it is in the main container) within the file system on the ADLS to download;
+* optional: string parameter holding the local directory to which the file must be downloaded. In our example it is to the folder 'downloads' in the project folder.
 
 Without errors, the file will be downloaded as specified. Now you can use a `DEX mapping to map the data in the file onto your AIMMS model <https://documentation.aimms.com/dataexchange/mapping.html>`__. 
 
-DEX native functionalities
+DEX Native Functionalities
 -------------------------------------
 
-The ADLS-DEX-functions used in the above flow are built with DEX-native functions. If you are interested in learning more about the underlying functionalities, you can access the functions by right clicking on the procedure and select the Attributes.
+The ADLS-DEX-functions used in the above flow are built with DEX-native functions. If you are interested in learning more about the underlying functionalities, you can access the functions by right clicking on the procedure and select the ``Attributes``.
 
 .. spelling:word-list::
 

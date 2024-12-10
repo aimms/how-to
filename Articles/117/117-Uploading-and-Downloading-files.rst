@@ -5,16 +5,9 @@ Upload and Download Files on AIMMS PRO
    :description: Modeling for secure apps deployed on AIMMS PRO – Part 2: Uploading and Downloading files.
    :keywords: secure, upload, download
 
-This article explains how you can upload and download files to and from AIMMS PRO Storage.
+This article explains how you can upload and download files to and from AIMMS PRO Storage. Please use the following project to follow this article:
 
-.. topic:: File Sharing Series
-
-    This article is part of a series of three to enable AIMMS app developers to model file sharing securely. See also:
-
-    * In :doc:`../120/120-pro-user-groups`, we covered AIMMS PRO User groups and how they can be used to authorize access to information within your AIMMS Apps. 
-    * In :doc:`../115/115-Securing-File-Access` we'll find out how to securely arrange file sharing.
-
-
+    :download:`AIMMS project download <model/MovingUpAndDown.zip>` 
 
 Overview of AIMMS PRO Storage
 -------------------------------
@@ -34,7 +27,7 @@ Data that is shared among users is stored in ``/PublicData``. Cases that are int
 
 Following this structure, the default access rights are predictable. So, all files created within a group folder get the access rights of that group folder, unless specified otherwise.
 
-Uploading and downloading files
+Uploading and Downloading Files
 ------------------------------------
 
 To detail the building blocks for the exchanging files between an AIMMS app and its environment, we need to distinguish two situations:
@@ -55,7 +48,7 @@ To detail the building blocks for the exchanging files between an AIMMS app and 
 
 In a way, the second situation can be viewed as an extension of the first situation. We will detail the first situation first.
 
-Exchanging files for an AIMMS WinUI app
+Exchanging Files for an AIMMS WinUI App
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: images/win-ui-file-exchange-e1479732007875.png
@@ -103,7 +96,7 @@ It is a good practice to check if the file already exists in AIMMS PRO storage, 
 There are also functions to create folders and to delete files and folders in the "Central Storage" section of the PRO API library ``AimmProLibrary``.
 
 
-Exchanging files for an AIMMS WebUI app
+Exchanging Files for an AIMMS WebUI App
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In AIMMS WebUI apps, the end-user interaction is done in a Chrome browser on one machine, while the Client Side execution of AIMMS procedures is done on the host of AIMMS PRO.
@@ -124,21 +117,9 @@ The AIMMS WebUI provides the `Upload Widget <https://documentation.aimms.com/web
 In addition, it provides the `Download Widget <https://documentation.aimms.com/webui/download-widget.html#download-widget>`_ to transfer files the other way around.
 
 
+ .. seealso::
 
-Example project
-----------------
-An example app that lets you upload a file and download the same: :download:`AIMMS project download <model/MovingUpAndDown.zip>` 
-
-
-Related Topics
-----------------
-
-* **AIMMS How-To**: :doc:`../120/120-pro-user-groups`
-
-* **AIMMS Documentation**: `WebUI <https://documentation.aimms.com/webui/>`_
-
-* **AIMMS Documentation**: `AIMMS PRO <https://documentation.aimms.com/pro/index.html#pro-platform>`_
-
-
-
- 
+    * :doc:`../120/120-pro-user-groups`: covers about AIMMS PRO User groups and how they can be used to authorize access to information within your AIMMS Apps. 
+    * :doc:`../115/115-Securing-File-Access`: covers how to securely arrange file sharing.
+    * `WebUI Library <https://documentation.aimms.com/webui/>`_
+    * `AIMMS PRO Platform <https://documentation.aimms.com/pro/index.html#pro-platform>`_

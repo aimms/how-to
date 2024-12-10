@@ -16,11 +16,11 @@ To call AIMMS from different languages/applications, your options are as follows
 +====================+==========+===============+
 | AIMMS              | Yes      | AIMMS API     |
 +--------------------+----------+---------------+
-| .NET               | Yes      | AIMMS PRO API |
+| ``.NET``           | Yes      | AIMMS PRO API |
 +--------------------+----------+---------------+
 | Java               | Yes      | AIMMS PRO API |
 +--------------------+----------+---------------+
-| C++ (.dll)         | Yes      | AIMMS API     |
+| C++ (``.dll``)     | Yes      | AIMMS API     |
 +--------------------+----------+---------------+
  
 Calling from AIMMS
@@ -32,11 +32,11 @@ To call different applications/languages from AIMMS, your options are as follows
 +====================+============+===============+
 | AIMMS              | Yes        | AIMMS API     |
 +--------------------+------------+---------------+
-| .NET               | Indirectly | See FAQ below |
+| ``.NET``           | Indirectly | See FAQ below |
 +--------------------+------------+---------------+
 | Java               | Indirectly | See FAQ below |
 +--------------------+------------+---------------+
-| C++ (.dll)         | Yes        | AIMMS API     |
+| C++ (``.dll``)     | Yes        | AIMMS API     |
 +--------------------+------------+---------------+
  
 Frequently Asked Questions
@@ -44,9 +44,9 @@ Frequently Asked Questions
 The following FAQs supplement the information in the tables above:
 
 
-.. dropdown:: Can I Call AIMMS from .NET?
+.. dropdown:: Can I Call AIMMS from ``.NET``?
 
-    Yes, our AIMMS PRO API has native bindings for .NET, so you can use those to make calls to AIMMS directly.
+    Yes, our AIMMS PRO API has native bindings for ``.NET``, so you can use those to make calls to AIMMS directly.
 
 .. dropdown:: Can I Call AIMMS from C++?
 
