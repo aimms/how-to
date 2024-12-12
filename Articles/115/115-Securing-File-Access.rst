@@ -5,16 +5,7 @@ Secure File Access
    :description: Modeling for secure apps deployed on AIMMS PRO – Part 3: securing file access in AIMMS PRO storage.
    :keywords: secure, storage, access
 
-In this article, we will cover granting and denying access to files in AIMMS PRO storage.
-
-.. topic:: File Sharing Series
-
-    This article is part of a series of three to enable AIMMS app developers to model file sharing securely. See also:
-    
-    * In :doc:`../120/120-pro-user-groups`, covered authorization of AIMMS PRO users. 
-    * In :doc:`../117/117-Uploading-and-Downloading-files`, we covered transferring files.
-
-
+In this article, we will cover granting and denying access to files in AIMMS PRO Storage.
 
 AIMMS PRO storage organizes access per entity, whereby an entity is a user or a group of users. 
 We start with retrieving the set of entities and the group or user names associated with them. 
@@ -58,17 +49,10 @@ In the AIMMS PRO UI library, there are also helper functions to parse and build 
 called ``DeconstructAuthorizationString`` and ``ConstructAuthorizationString`` respectively. 
 These two functions are easy to use front-ends for the above atomic operations.
 
-Summary:
---------
 
-In this series of three blog posts we've shown:
+.. seealso:: 
 
-* the point and click interface available to AIMMS PRO App developers and AIMMS PRO administrators to grant or deny access to AIMMS PRO users and the AIMMS PRO support to query this information, 
-
-* the means available to transfer files between the user environment, the application running environment and the AIMMS PRO storage, and 
-
-* the means available to secure file access in AIMMS PRO storage. 
-
-Together, this allows for building AIMMS PRO apps that require secure file handling.
-
-
+    * :doc:`../120/120-pro-user-groups`: covers authorization of AIMMS PRO users. 
+    * :doc:`../117/117-Uploading-and-Downloading-files`: covers how to transfer files.
+    * `WebUI Library <https://documentation.aimms.com/webui/>`_
+    * `AIMMS PRO Platform <https://documentation.aimms.com/pro/index.html#pro-platform>`_

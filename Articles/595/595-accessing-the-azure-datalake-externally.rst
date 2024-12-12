@@ -1,5 +1,5 @@
-How to access the Azure Data Lake Storage from an external location
-=======================================================================
+Accessing Azure Data Lake Storage Externally
+================================================
 
 You can store structured and unstructured files on the **Azure Data Lake Storage Gen2 (ADLS)** that is, by default, part of your AIMMS Cloud account. On one hand this makes it easy to save the results from your optimization in a file and to expose that file through the ADLS so it can be picked up from an external location. It can also be used the other way around; to put files onto the ADLS that hold data that need to be used within your AIMMS model(s). 
 
@@ -17,7 +17,7 @@ Prerequisites
 
 #. To communicate with the ADLS we are using the `related Azure Data Lake API <https://learn.microsoft.com/en-us/rest/api/storageservices/data-lake-storage-gen2>`_ and the `Azure Blob REST API <https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api>`_ - creating a **SAS token for each request for authentication**. We discuss SAS tokens in further detail in one of the chapters below, but for the creation of a SAS token it is necessary to be able to compute a string using the SHA256 algorithm, and to encode that string by using Base64 encoding. There are default tools available for this, but you can also use the ADLS toolkit app to create a SAS token.
 
-Requesting a list of the file systems
+Requesting a List of the File Systems
 ---------------------------------------
 
 Before we put a file onto the storage, we will first use a request to retrieve a list of the currently available file systems (or: containers) on the ADLS as we'll need to put the file into one of these. 
@@ -72,7 +72,7 @@ A successful request will result in a JSON-formatted list of file systems on the
         }
 	]
 	
-A bit more information on SAS tokens
+A bit more Information on SAS Tokens
 ---------------------------------------
 
 A full overview of the description of the parameters that are used in a SAS token can be `found on this page <https://learn.microsoft.com/en-us/rest/api/storageservices/create-account-sas#construct-an-account-sas-uri>`_. Each request could require its own SAS token as the values of the parameters might change, depending on the service you are using (listing a file system requires a different level of access than putting a file, for example) or even the type of SAS token you are creating. If you are going to use the Azure Data Lake Storage API we `recommend reading through the related documentation about SAS tokens <https://learn.microsoft.com/en-us/rest/api/storageservices/delegate-access-with-shared-access-signature>`_.
@@ -90,7 +90,7 @@ Looking back to the example of getting the file systems, we are using the follow
 * **sig:** the value for the signature is a unique string that's constructed from the fields that must be verified to authorize the request. It is a hash-based message authentication code (HMAC) that's computed over the string-to-sign combined with the storage access key by using the SHA256 algorithm. The result of that is encoded by using Base64 encoding. There are tools available for this, but we highly recommend using our ADLS toolkit to create a SAS token. 
 
 
-Pushing a file to the ADLS
+Pushing a File to the ADLS
 ---------------------------------
 
 We need to use `the PUT blob request <https://learn.microsoft.com/en-us/rest/api/storageservices/put-blob>`_ from the Azure Blob Service REST API as this API allows us to put a 'blob' (file) with contents into our ADLS:
@@ -154,7 +154,7 @@ Some screenshots from Postman:
    The headers for the request, showing the required 'x-ms-blob-type' header
 
 If the request succeeded you will get a 201 Created response, meaning the file is now stored in the 'test'-container on the ADLS.
-From here it can be accessed from within an AIMMS application for further usage. You can read more about this process in <a future article>.
+From here it can be accessed from within an AIMMS application for further usage. 
 
 
 .. spelling:word-list::
