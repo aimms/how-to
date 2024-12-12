@@ -5,18 +5,15 @@
    :description: How to develop a shift scheduling application in AIMMS.
    :keywords: employee, roster, schedule, shift, staff
 
-
-.. sidebar:: Stock Exchange Dry Board.
-
-    .. image:: images/Stock-Exchange-Dry-Board-570618_77956939.jpg
-        :scale: 35%
-
-
 Solutions from rostering applications affect the daily life of the people rostered. Therefore, the application developers and planners iteratively improve the rostering applications and the quality of the solutions, often based on the feedback of those affected by the rosters created. The close link between the modeling language and GUI pages in AIMMS makes it easy to study the solutions and (re)formulate constraints.
 
 In this article, we describe how to develop a small rostering application in AIMMS. This application is based on an assignment given in "Integrated methods for Optimization" by John N. Hooker, section 2.2.5. 
 
-Description of the problem
+Please use the following project to follow this article:
+
+    :download:`AIMMS project download <downloads/Employee-Rostering-Week2.zip>` 
+
+Description of the Problem
 ----------------------------
 The problem is to create a weekly roster for 4 nurses to help in a home for the elderly. A day has three shifts: day, evening, and night. Each shift is staffed by one nurse, so one nurse is free each day. We try to balance the free days per nurse, require at least 16 hours between shifts, and minimize the nurses per particular shift, and the number of changes in staffing per shift.
 
@@ -29,6 +26,7 @@ A roster can be viewed in two ways, for each day ``d``:
 These variables have distinct values and are inverses of each other:
 
 .. code-block:: aimms
+    :linenos:
 
     cp::AllDifferent(e,Shift(e,d))
     cp::AllDifferent(s,Employee(s,d))
@@ -36,21 +34,23 @@ These variables have distinct values and are inverses of each other:
 
 Here the :any:`cp::Channel` constraint enforces that ``Employee`` and ``Shift`` are each other's inverse.
 
-First solve
+First Solve
 -----------
 So let's solve this base model. The solution is presented in the following two tables containing the variables:
 
 .. figure:: images/Solution-Base.png
+    :align: center
 
     Solution Base
 
 Which nurse do you think is better off, the one not earning anything, or one of those not having a free day to spend the earnings?
 
-Distributing free time, setting minimum free time
+Distributing Free Time, Setting Minimum Free Time
 -------------------------------------------------
 This is the first problem we have to resolve: to distribute free time evenly. We implement this by counting the free days per nurse, and ensure the result is stored in a bounded variable:
 
 .. code-block:: aimms
+    :linenos:
 
     FreeDays(e) -> { 1 ..2 },
     cp::Count(d,Shift(e,d),'free','=',FreeDays(e))
@@ -59,6 +59,7 @@ This is the first problem we have to resolve: to distribute free time evenly. We
 Let's solve this and take again a look at the solution:
 
 .. figure:: images/Solution-Base.png
+    :align: center
 
     Solution Free distributed
 
@@ -76,18 +77,20 @@ Inspecting the solution, we see that nurse C does the night shift on Wednesday a
 Here ``PermittedNextShifts`` is an Indexed Set with the following contents:
 
 .. image:: images/Permitted-Next-Shifts.png
+    :align: center
 
 Note the use of the circular ``++`` operator here: ``d++1``, is the next day, with one exception: ``'last day'++1`` is the first day.
 
 Let's solve this and see what the result is now:
 
 .. figure:: images/Applying-successor-shift-restriction.png
+    :align: center
 
     Applying successor shift restriction
 
 Checking the result; indeed there are now at least 16 hours between two shifts for every nurse. However, the current roster comes across as rather messy. More to the point: three different nurses are staffing each of the working shifts. There is a lot of change of staffing the shifts and elderly people do not like these changes. For starters, would it be possible to limit the number of nurses staffing these shifts to two?
 
-Limiting staffing changes
+Limiting Staffing Changes
 ---------------------------
 First, we introduce an element variable for each of the working shifts: ``ShiftValue(s,{1..2}) -> Employees``. For each day, the nurse staffing shift ``s`` should be equal to one of the values of ``ShiftValue``:
 
@@ -98,6 +101,7 @@ First, we introduce an element variable for each of the working shifts: ``ShiftV
 We are ready for the next iteration and then looking at the solution:
 
 .. figure:: images/Limited-to-two-nurses-per-shift.png
+    :align: center
 
     Limited to two nurses per shift
 
@@ -116,12 +120,13 @@ and minimizing that.
 With this objective we get the following solution:
 
 .. figure:: images/Minimal-staff-changes.png
+    :align: center
 
     Minimal staff changes
 
 But... There's still a problem...
 
-Optimizing solve time
+Optimizing Solve Time
 -----------------------
 The previous solves produced an answer instantaneously, but we now had to wait more than 5 seconds for the solution. We do not want to wait that long. It is possible to reduce the solve time again using the following two techniques.
 
@@ -130,12 +135,3 @@ The first technique is to reduce the symmetry. In our example, changing who is a
 The second technique is to add redundant constraints. A redundant constraint is a constraint that can be derived from the other constraints and helps to reduce the search. In our example, the minimum found is 6. By observing that each working shift requires at least two nurses, there are at least two shift changes for the working shift, we can also derive the minimum is 6. Actually, you may want to point out to me that the two :any:`cp::AllDifferent` constraints given in the base model are also redundant.
 
 Applying these two techniques, gives us instantaneous feedback again.
-
-Example download
------------------
-If you would like to experiment with the model, the AIMMS project is provided here.
-:download:`AIMMS project download <downloads/Employee-Rostering-Week2.zip>` 
-
-
-
-
