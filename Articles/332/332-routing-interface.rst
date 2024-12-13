@@ -48,16 +48,16 @@ Input and Output Arguments
 
 The input identifiers are:
 
-* |s| s_Formulations
-* |s| s_Nodes with ``i`` and ``j`` as indexes
-* |p| p_NumberOfVehicles
-* |p| p01_MaxorExact as a binary parameter
-* |p| p_Distance(i, j)       
-* |p| p_Demand(i)         
-* |p| p_Capacity(k)
-* |p| p_TWLowerBound(i) [1]
-* |p| p_TWUpperBound(i) [1]
-* |p| p_ServiceTime(i, j) [1]
+* |s| ``s_Formulations``
+* |s| ``s_Nodes`` with ``i`` and ``j`` as indexes
+* |p| ``p_NumberOfVehicles``
+* |p| ``p01_MaxorExact`` as a binary parameter
+* |p| ``p_Distance(i, j)``       
+* |p| ``p_Demand(i)``         
+* |p| ``p_Capacity(k)``
+* |p| ``p_TWLowerBound(i)`` [1]
+* |p| ``p_TWUpperBound(i)`` [1]
+* |p| ``p_ServiceTime(i, j)`` [1]
 
 ``s_Formulations`` should contain the formulation you want to use to solve the problem, choosing from:
 **Explicit Dantzig-Fulkerson-Johnson**, **Miller-Tucker-Zemlin**, **Implicit Dantzig-Fulkerson-Johnson** or **Time Windows**
@@ -68,13 +68,13 @@ When there is no road between two nodes, you can just leave the value for that d
 
 The output identifiers are: 
 
-* |p| p_TotalDistance                
-* |p| p01_x(i, j, k) where i <> j  as a binary parameter
-* |p| p_StartServing(i) [2]
-* |p| p_BoundTotalDist
-* |sp| sp_SolverStatus
-* |sp| sp_ProgramStatus
-* |p| p_SolverTime
+* |p| ``p_TotalDistance``                
+* |p| ``p01_x(i, j, k)`` where ``i <> j``  as a binary parameter
+* |p| ``p_StartServing(i)`` [2]
+* |p| ``p_BoundTotalDist``
+* |sp| ``sp_SolverStatus``
+* |sp| ``sp_ProgramStatus``
+* |p| ``p_SolverTime``
 
 ``p_TotalDistance`` is the total distance of the shortest route. ``p01_x`` is a binary variable with a value of ``1`` if the road from ``i`` to ``j`` is in the shortest route and is driven by vehicle ``k``. ``p_BoundTotalDist`` is the lower bound of the total distance. The last three arguments provide information on how the program was executed. 
 
