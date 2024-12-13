@@ -7,17 +7,21 @@ The CVRP Library can solve Capacitated Vehicle Routing Problems (CVRP). There ar
 Creating Datasets
 -----------------
 
-There are a lot of examples of CVRP’s available on the internet (for example on this website: https://neo.lcc.uma.es/vrp/vrp-instances/). However, these data sets mostly contain more than 20 nodes. The Explicit Dantzig-Fulkerson-Johnson formulation isn’t capable of solving problems that big. So in AIMMS I made a procedure that created 30 datasets with 8 to 20 nodes.  
-The datasets contain **8 nodes, 10 nodes, 12 nodes, 15 nodes, 17 nodes or 20 nodes**. There are 5 files for each amount of nodes. The following data is randomly generated: the amount of vehicles, the x-coordinates and y-coordinates of the nodes, the demand of the nodes and the capacity of the vehicles. The function ``Uniform(min,max)`` is used and will choose a random number between two values. The data is selected as follows:
+There are a lot of examples of CVRP’s available on the internet (for example on this website: https://neo.lcc.uma.es/vrp/vrp-instances/). 
+However, these data sets mostly contain more than 20 nodes. The Explicit Dantzig-Fulkerson-Johnson formulation isn’t capable of solving problems that big. 
+So, in AIMMS you will find a procedure which creates 30 datasets with 8 to 20 nodes.  
+The datasets contain **8 nodes, 10 nodes, 12 nodes, 15 nodes, 17 nodes or 20 nodes**. 
+There are 5 files for each amount of nodes. The following data is randomly generated: the amount of vehicles, the x-coordinates and y-coordinates of the nodes, 
+the demand of the nodes and the capacity of the vehicles. The function :any:`Uniform(min,max)` is used and will choose a random number between two values. The data is selected as follows:
 
--	**p_NumberOfVehicles**: A random number between 2 and 1/3 of the amount of nodes. 
--	**p_XCoordinate & p_YCoordinate**: Random numbers between -50 and 50.
--	**p_Demand**: Random numbers between 10 and 20. 
--	**p_Capacity**: The sum of all Demands divided by the number of vehicles. Then this number is multiplied by 1.25 to create some slack.
--	**ep_Depot**: The coordinates of the depot are (0,0) and the demand is also 0. 
+-	``p_NumberOfVehicles``: A random number between 2 and 1/3 of the amount of nodes. 
+-	``p_XCoordinate`` and ``p_YCoordinate``: Random numbers between -50 and 50.
+-	``p_Demand``: Random numbers between 10 and 20. 
+-	``p_Capacity``: The sum of all Demands divided by the number of vehicles. Then this number is multiplied by 1.25 to create some slack.
+-	``ep_Depot``: The coordinates of the depot are (0,0) and the demand is also 0. 
 
 
-Testing the datasets / results 
+Testing the Datasets/Results 
 ------------------------------
 
 The data sets were tested for the three different formulations. A maximum of an hour was set to solve the problem. There are three important things when looking at the results:
@@ -27,18 +31,18 @@ The data sets were tested for the three different formulations. A maximum of an 
 •	**Total distance**: What is the distance of the best route that has been found?
 
 
-Solver/Program status: 
+Solver/Program Status
 ^^^^^^^^^^^^^^^^^^^^^^
 
 **Explicit Dantzig-Fulkerson-Johnson:** 
 
--	The solver status for the datasets with 20 nodes is: TerminatedBySolver. This is probably due to the fact that datasets with 20 nodes are already too big for the Explicit Dantzig-Fulkerson-Johnson formulation. 
--	The solver status for two datasets (both with 17 nodes) is: ResourceInterrupt. They both have a solving time of an hour, which means that an hour wasn’t enough to find an optimal solution. 
--	The solver status of the remaining 23 datasets is: NormalCompletion. This means that an optimal solution has been found within an hour. 
+-	The solver status for the datasets with 20 nodes is: ``TerminatedBySolver``. This is probably due to the fact that datasets with 20 nodes are already too big for the Explicit Dantzig-Fulkerson-Johnson formulation. 
+-	The solver status for two datasets (both with 17 nodes) is: ``ResourceInterrupt``. They both have a solving time of an hour, which means that an hour wasn’t enough to find an optimal solution. 
+-	The solver status of the remaining 23 datasets is: ``NormalCompletion``. This means that an optimal solution has been found within an hour. 
 
 **Implicit Dantzig-Fulkerson-Johnson**
 
--	The solver status for four datasets (one with 17 nodes and three with 20 nodes) is: ResourceInterrupt. For these datasets an hour wasn’t enough to find an optimal solution.
+-	The solver status for four datasets (one with 17 nodes and three with 20 nodes) is: ``ResourceInterrupt``. For these datasets an hour wasn’t enough to find an optimal solution.
 -	The Remaining 26 datasets were completed normally.
 
 **Miller-Tucker-Zemlin**
@@ -46,7 +50,7 @@ Solver/Program status:
 -	All datasets were completed normally. 
 
 
-Solver/Program time: 
+Solver/Program Time
 ^^^^^^^^^^^^^^^^^^^^
 
 Most of the datasets were completed normally and an optimal solution was found. Comparing the distance of the best solutions would therefore not be useful (because they are all the same). It is however possible to compare the time it took to find that solution. 
@@ -57,18 +61,21 @@ The average time it took to find an optimal solution for a dataset with a certai
    :scale: 70%
    :align: center
 
+|
+
 It's easy to see that Miller Tucker Zemlin is generally the fastest formulation. Especially for the datasets with larger numbers of nodes.
 
-
-Creating larger datasets
+S
+Creating Larger Datasets
 ------------------------
 
-It is also interesting to compare results of larger datasets. The Explicit Dantzig-Fulkerson-Johnson formulation isn’t capable of solving problems of larger datasets, but the Implicit Dantzig-Fulkerson-Johnson formulation and the Miller-Tucker-Zemlin formulation can be compared. This time I used the same procedure to create 12 datasets with 40 to 100 nodes. 
+It is also interesting to compare results of larger datasets. The Explicit Dantzig-Fulkerson-Johnson formulation isn’t capable of solving problems of larger datasets, but the Implicit Dantzig-Fulkerson-Johnson formulation and the Miller-Tucker-Zemlin formulation can be compared. 
+This time the same procedure to create 12 datasets with 40 to 100 nodes was used. 
 The datasets contain **40 nodes, 60 nodes, 80 nodes or 100 nodes**. There are 3 files for each amount of nodes. The data is generated in the same way except for the number of vehicles. This time it is a random number between 2 and 1/10 of the amount of nodes. 
 
 
 
-Testing the datasets/results
+Testing the Datasets/Results
 ----------------------------
 
 The solver status for almost all the datasets was ResourceInterrupt and the program status was IntegerSolution. This means that an hour wasn’t enough to find an optimal solution, but a feasible integer solution is found. The solver time can therefore not be compared with each other (they are all an hour). However, you can see which formulation found a better solution within an hour by comparing the distance of the best found solution.
@@ -78,6 +85,8 @@ In the table below the distances are shown for the best solutions of both the fo
 .. image:: images/Results2.png
    :scale: 70%
    :align: center
+
+|
 
 The Implicit Dantzig-Fulkerson-Johnson formulation found better solutions for the datasets with 40 nodes. But the Miller-Tucker-Zemlin formulation found better solutions for all the other datasets. 
 

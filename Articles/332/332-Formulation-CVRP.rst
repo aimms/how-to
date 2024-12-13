@@ -1,12 +1,12 @@
 Capacitated Vehicle Routing Problem formulation
 ===============================================
 
-There is a library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**). It contains  different options of formulating the problem. The difference between these articles is how subtours are eliminated. The objective function and most of the constraints are the same for all four options and will be explained in this article.
+There is a library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**). It contains different options of formulating the problem. The difference between these articles is how subtours are eliminated. The objective function and most of the constraints are the same for all four options and will be explained in this article.
 
 .. image:: images/CVRP.png
    :align: center
 
-Linear integer programming model
+Linear Integer Programming Model
 --------------------------------
 
 A CVRP can be formulated as a linear integer programming model. The total distance of the route, where all costumers demands are met, should be minimized. 
@@ -25,29 +25,25 @@ The parameter :math:`d_{ij}` describes the distance from node :math:`i` to node 
 
 Every node should be entered and left once (expect for the depot) and by the same vehicle. The depot should be left and entered once by each vehicle. :math:`q_{i}` describes the demand of each costumer and :math:`Q` is the capacity of the vehicles. The sum of the demands of all costumers that vehicle :math:`k` will serve, should not exceed the capacity of vehicle :math:`k`. All these constraints can be formulated as follows:
 
-1. Vehicle leaves node that it enters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**1. Vehicle eaves node that it enters**
 
 Ensure that the number of times a vehicle enters a node is equal to the number of times it leaves that node:
 
 .. math:: \sum_{i = 1}^{n}{x_{ijk}} = \sum_{i = 1}^{n}{x_{jik}} \qquad \forall j \in \{1,...,n\}, \enspace k \in \{1,...,p\}
 
-2. Ensure that every node is entered once
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**2. Ensure that every node is entered once**
 
 .. math:: \sum_{k = 1}^{p}{\sum_{i = 1}^{n}{x_{ijk}}} = 1  \qquad \forall j \in \{2,...,n\}
 
 Together with the first constraint, it ensures that the every node is entered only once, and it is left by the same vehicle.
 
-3. Every vehicle leaves the depot
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**3. Every vehicle leaves the depot**
 
 .. math:: \sum_{j = 2}^{n}{x_{1jk}} = 1 \qquad \forall k \in \{1,...,p\}
 
 Together with constraint 1, we know that every vehicle arrives again at the depot.
 
-4. Capacity constraint
-^^^^^^^^^^^^^^^^^^^^^^
+**4. Capacity constraint**
 
 Respect the capacity of the vehicles. Note that all vehicles have the same capacity.
 
@@ -55,13 +51,13 @@ Respect the capacity of the vehicles. Note that all vehicles have the same capac
 
 The above constraints are formulated in the ``Common Constraints and Variables`` section in the CVRP Library.
 
-Eliminating subtours 
+Eliminating Subtours 
 -------------------------------
 
 However, a solution that satisfies the above constraints can still be infeasible to the actual problem; namely when the solution contains a subtour, as illustrated by the subtour through nodes 3, 4, and 5 below: 
 
 .. image:: images/Subtour.png
-   :scale: 35%
+   :scale: 50%
    :align: center
 
 The different formulations in the library are different ways of eliminating these subtours, and are discussed in detail in the following articles:
