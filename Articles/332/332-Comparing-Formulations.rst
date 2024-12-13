@@ -12,7 +12,7 @@ However, these data sets mostly contain more than 20 nodes. The Explicit Dantzig
 So, in AIMMS you will find a procedure which creates 30 datasets with 8 to 20 nodes.  
 The datasets contain **8 nodes, 10 nodes, 12 nodes, 15 nodes, 17 nodes or 20 nodes**. 
 There are 5 files for each amount of nodes. The following data is randomly generated: the amount of vehicles, the x-coordinates and y-coordinates of the nodes, 
-the demand of the nodes and the capacity of the vehicles. The function :any:`Uniform(min,max)` is used and will choose a random number between two values. The data is selected as follows:
+the demand of the nodes and the capacity of the vehicles. The function :any:`Uniform` is used and will choose a random number between two values. The data is selected as follows:
 
 -	``p_NumberOfVehicles``: A random number between 2 and 1/3 of the amount of nodes. 
 -	``p_XCoordinate`` and ``p_YCoordinate``: Random numbers between -50 and 50.
