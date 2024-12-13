@@ -65,9 +65,8 @@ The average time it took to find an optimal solution for a dataset with a certai
 
 It's easy to see that Miller Tucker Zemlin is generally the fastest formulation. Especially for the datasets with larger numbers of nodes.
 
-S
 Creating Larger Datasets
-------------------------
+--------------------------
 
 It is also interesting to compare results of larger datasets. The Explicit Dantzig-Fulkerson-Johnson formulation isn’t capable of solving problems of larger datasets, but the Implicit Dantzig-Fulkerson-Johnson formulation and the Miller-Tucker-Zemlin formulation can be compared. 
 This time the same procedure to create 12 datasets with 40 to 100 nodes was used. 

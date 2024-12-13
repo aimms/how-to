@@ -84,9 +84,9 @@ The output identifiers are:
 
 .. seealso::
 
-    * The general formulation of a CVRP used in the library is described in :doc:`332-Formulation-CVRP`
+    * The general formulation of a CVRP used in the library is described in :doc:`332-Formulation-CVRP`.
     * The four different formulations are explained in the following articles: :doc:`332-Explicit-Dantzig-Fulkerson-Johnson-formulation`, :doc:`332-Miller-Tucker-Zemlin-formulation`, :doc:`332-Implicit-Dantzig-Fulkerson-Johnson` and :doc:`332-Time-Windows`.
-    * The formulations comparison in :doc:`332-Comparing-Formulations`
+    * The formulations comparison in :doc:`332-Comparing-Formulations`.
 
 
 

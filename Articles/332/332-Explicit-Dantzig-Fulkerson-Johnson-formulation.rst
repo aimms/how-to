@@ -16,18 +16,24 @@ The set of nodes that makes a subtour is :math:`S = {3, 4, 5}`` and is a subset 
    :scale: 50%
    :align: center
 
+|
+
 This subset contains three nodes. The number of arcs between the nodes in this subset is also three, which is why it makes a subtour. If the number of arcs should be less than three, one arc should be removed. For example, the arc between node 3 and node 5.
 
 .. image:: images/EDFJ2.png
    :scale: 50%
    :align: center
-   
+
+|
+
 Now one arc has to go from node 3 to a node outside of the subset and another arc has to go from node 5 to a node outside of the subset. The following route can then be formed:
 
 .. image:: images/EDFJ3.png
    :scale: 50%
    :align: center
-   
+
+|
+
 There are two ways of explaining this way of eliminating subtours:
 
 1.	The number of arcs between nodes in the subset should be less than the number of nodes in that subset. 
@@ -36,7 +42,9 @@ There are two ways of explaining this way of eliminating subtours:
 .. image:: images/EDFJ4.png
    :scale: 50%
    :align: center
-   
+
+|
+
 The second explanation is used for the CVRP Library. To eliminate all possible subtours, it should apply to every subset that could be a subtour. 
 Subsets containing the depot cannot be subtours, for example :math:`S = {1, 9, 10, 11}`. This is just a regular tour for one of the vehicles. A subset with 0 or 1 element can also not be a subtour. 
 So it should apply to every possible subset of :math:`V` that has at least two elements and does not contain the depot. 
