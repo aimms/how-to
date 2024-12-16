@@ -20,7 +20,7 @@ However, using the :aimms:func:`Round` function in a constraint is not allowed i
 We can avoid such errors by declaring ``var1`` as an integer variable and using two auxiliary non-negative variables in a target constraint as shown below::
 
 .. code-block:: aimms
-
+    
     var1 = value + aux1 - aux2 
 
 Depending on the direction of your math program, you add (minimize) or subtract (maximize) the sum ``aux1+aux2`` to the objective function. This ensures that only one of ``aux1`` or ``aux2`` will take a non-zero value. 
@@ -38,6 +38,6 @@ Example
 Let ``value = 2.3``, whose closest integer value is 2. So we want ``var1 = 2``. This is situation 3 from above, so our constraint will result in::
     
 .. code-block:: aimms
-
+    
     var1 = 2.3 + 0 - 0.3 = 2
 

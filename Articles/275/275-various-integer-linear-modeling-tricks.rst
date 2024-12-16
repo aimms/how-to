@@ -17,7 +17,9 @@ the constraints and variables that model this verbal description.
 
 The first simple example of a formulette they provide is the following:
 
-    .. math:: For each unit of X_1, there must be at least 5 units of X_2
+.. code-block:: none  
+  
+    For each unit of :math:`X_1`, there must be at least 5 units of :math:`X_2`
 
 which can be modeled with
 
