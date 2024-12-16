@@ -90,7 +90,7 @@ configuration. It uses the system module ``OuterApproximation`` to call
 several procedures implemented in the module. To solve a mathematical
 program ``myMP`` you have to add the following code:
 
-.. code-block:: text 
+.. code-block:: aimms 
 
     myMP.CallbackAOA := 'OuterApprox::BasicAlgorithm';
     solve myMP;
@@ -102,7 +102,7 @@ language using GMP functions. The algorithm is available in the system
 module ``GMPOuterApproximation``. To use GMP-AOA you have to create an
 element parameter ``myGMP`` with range ``AllGeneratedMathematicalPrograms``, and add the following code:
 
-.. code-block:: text 
+.. code-block:: aimms 
 
     myGMP := GMP::Instance::Generate( myMP ) ;
     GMPOuterApprox::DoOuterApproximation( myGMP );
@@ -145,7 +145,7 @@ important control parameters (in AIMMS 3.12) are:
 To set the maximum number of iterations to 10 and create a status file
 you should add the following statements before the ``GMPOuterApprox::DoOuterApproximation`` call:
 
-.. code-block:: text 
+.. code-block:: aimms 
 
     GMPOuterApprox::IterationMax := 10;
     GMPOuterApprox::CreateStatusFile := 1;
@@ -284,7 +284,7 @@ optimal solution, you might consider calling AOA twice. The first solve
 with AOA is then used to find a solution which will be used as a good
 starting point for the second solve. For example:
 
-.. code-block:: text 
+.. code-block:: aimms 
 
     myGMP := GMP::Instance::Generate( myMP ) ;
 
@@ -311,7 +311,7 @@ include it in your project.
 Then in the procedure ``SolveNLPSubProblem`` of the GMP-AOA module replace
 the
 
-.. code-block:: text 
+.. code-block:: aimms 
 
     GMP::SolverSession::Execute( ssNLP ) ;
     GMP::Solution::RetrieveFromSolverSession( ssNLP, SolNumb ) ;
@@ -319,7 +319,7 @@ the
 
 part by:
 
-.. code-block:: text 
+.. code-block:: aimms 
 
     MulStart::DoMultiStart( GNLP, 10, 5 );   ! You can play with the input values
     GMP::Solution::RetrieveFromModel( GNLP, SolNumb ) ;
@@ -327,13 +327,13 @@ part by:
 
 Finally, add
 
-.. code-block:: text 
+.. code-block:: aimms 
 
     GMPOuterApprox::NLPUseInitialValues := 0;
 
 before you call
 
-.. code-block:: text 
+.. code-block:: aimms 
 
     GMPOuterApprox::DoOuterApproximation( myGMP );
 

@@ -1,4 +1,4 @@
-Solving convex MINLP problems with AIMMS
+Solving Convex MINLP Problems with AIMMS
 ==========================================
 
 **Author:** Marcel Hunting. 
@@ -149,7 +149,7 @@ Next you have to create an element parameter in your AIMMS project, say,
 mathematical program ``myMP`` that models a convex MINLP problem with
 AOA you should then call:
 
-.. code-block:: text 
+.. code-block:: aimms 
 
     myGMP := GMP::Instance::Generate( myMP ) ;
     GMPOuterApprox::IsConvex := 1;
@@ -160,7 +160,7 @@ module. Note that the user has to tell AIMMS that the problem is convex;
 AIMMS cannot detect whether a problem is convex. To use COA you should
 call:
 
-.. code-block:: text 
+.. code-block:: aimms 
 
     myGMP := GMP::Instance::Generate( myMP ) ;
     GMPOuterApprox:: DoConvexOuterApproximation( myGMP );
@@ -177,7 +177,7 @@ information, e.g., the objective value, as the algorithm solves the
 MINLP problem. To print out the status file you should add the following
 statement:
 
-.. code-block:: text 
+.. code-block:: aimms 
 
     GMPOuterApprox::CreateStatusFile := 1;
 
