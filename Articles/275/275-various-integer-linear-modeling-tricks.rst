@@ -19,7 +19,7 @@ The first simple example of a formulette they provide is the following:
 
 .. code-block:: none  
   
-    For each unit of :math:`X_1`, there must be at least 5 units of :math:`X_2`
+    For each unit of X1, there must be at least 5 units of X2
 
 which can be modeled with
 
