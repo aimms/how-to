@@ -236,7 +236,7 @@ The Algorithm
 Below we present our presolve algorithm in pseudo-code. We denote by :math:`C` the set of all constraints in the problem, and by :math:`V` the set of
 variables that changed during the bound reduction step for some constraint :math:`c \in C`.
 
-.. code-block:: aimms 
+.. code-block:: aimms
     :linenos:
 
     RemoveDoubletons
@@ -246,8 +246,8 @@ variables that changed during the bound reduction step for some constraint :math
 
     Iter := 1;
     SomeConstraintOutOfData := true;
-    
-    while ( Iter ≤ MaxIter and SomeConstraintOutOfData ) do
+
+    while ( Iter <= MaxIter and SomeConstraintOutOfData ) do
         SomeConstraintOutOfDate := false;
         for ( c | OutOfDate(c) ) do
             BoundChanged := DoBoundReduction( c, V );
