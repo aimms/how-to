@@ -17,11 +17,11 @@ the constraints and variables that model this verbal description.
 
 The first simple example of a formulette they provide is the following:
 
-    *For each unit of* :math:`X_1` *, there must be at least 5 units of* :math:`X_2`
+    .. math:: For each unit of X_1, there must be at least 5 units of X_2
 
 which can be modeled with
 
-:math:`5X_1 \le X_2`
+.. math:: 5X_1 \le X_2
 
 The document contains a lot more of such formulettes of varying complexity.
 

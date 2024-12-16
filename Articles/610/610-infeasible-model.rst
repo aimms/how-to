@@ -13,7 +13,11 @@ There are several ways to find out why your model is infeasible. This article pr
 
 Math Program Inspector
 --------------------------
-The Math Program Inspector contains a collection of tools that can help you to find the cause of errors in your linear model. See the :doc:`creating-and-managing-a-model/the-math-program-inspector/index`.
+The Math Program Inspector contains a collection of tools that can help you to find the cause of errors in your linear model. 
+
+.. seealso::
+    
+    * :doc:`creating-and-managing-a-model/the-math-program-inspector/index`
 
 
 Infeasibility Finder
@@ -45,7 +49,9 @@ Infeasibility Analysis
 In the chapter Solving Mathematical Programs in the AIMMS Language Reference, there is a section 'Infeasibility analysis'. In this section another way to find infeasibilities is explained. 
 The used method is based on adding excess variables to your model and AIMMS offers support to automatically extend your mathematical program with excess variables during the generation of the matrix for the solver. 
 
-See also :doc:`optimization-modeling-components/solving-mathematical-programs/index`.
+.. seealso::
+    
+    * :doc:`optimization-modeling-components/solving-mathematical-programs/index`
 
 
 AIMMS Presolver
@@ -58,4 +64,6 @@ If your model is nonlinear then you can let the AIMMS Presolver try to detect th
 
 3. Open the listing file found at :menuselection:`File > Open > Listing File`, or in the log-folder of your AIMMS project (``*.lis``).  
 
-See also :doc:`optimization-modeling-components/advanced-methods-for-nonlinear-programs/index`.
+.. seealso::
+    
+    * :doc:`optimization-modeling-components/advanced-methods-for-nonlinear-programs/index`
