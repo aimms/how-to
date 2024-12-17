@@ -43,5 +43,5 @@ Capacitated warehouse location, WebUI, Infeasible data
 .. spelling:word-list::
 
     SuspicionLevel
-    AnnotationsIdentifier
+    webui::AnnotationsIdentifier
     backgroundcolor
