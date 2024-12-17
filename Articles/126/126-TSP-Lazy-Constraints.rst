@@ -5,24 +5,18 @@
    :description: An example solving a Traveling Salesman Problem using lazy constraints.
    :keywords: lazy, constraints, salesman, tsp
 
-.. note::
 
-    This article was originally posted to the AIMMS Tech Blog.
+The famous **Travelling Salesman Problem** (TSP) deals with the following problem: given a list of cities and the distances between each pair of cities, a salesman has to find the shortest possible route to visit each city exactly once while returning to the origin city. One way to formulate the TSP is as follows:
 
-
-The famous **travelling salesman problem** (TSP) deals with the following problem: given a list of cities and the distances between each pair of cities, a salesman has to find the shortest possible route to visit each city exactly once while returning to the origin city. One way to formulate the TSP is as follows:
-
-.. code-block:: none
-
-          min    sum( (i,j), c(i,j)*x(i,j) )
-    (1)   s.t.   sum( i, x(i,j) + x(j,i) ) = 1   for all j
-                 x(i,j) binary                   for all i > j
+.. math:: min sum( (i,j), c(i,j)*x(i,j) )
+.. math:: s.t. sum( i, x(i,j) + x(j,i) ) = 1 \forall j (1)
+.. math:: x(i,j) binary \forall i > j
 
 Here ``x(i,j)`` equals 1 if the route from city ``i`` to city ``j`` is in the tour, and 0 otherwise. Note that this is the formulation for the symmetric TSP in which the distance from ``i`` to ``j`` equals the distance from ``j`` to ``i``. This formulation is not complete as it allows for subtours. One way to exclude these subtours is by using **subtour elimination constraints** (SECs for short):
 
-.. code-block:: none
+.. math:: sum( (i,j) | i in S and not j in S, x(i,j) + x(j,i) ) >= 2   \foralll S, 1 < |S| < n
 
-        sum( (i,j) | i in S and not j in S, x(i,j) + x(j,i) ) >= 2   for all S, 1 < |S| < n
+\left\{ \begin{array}{ll} 1 & \mathrm{if\ } x=4.5; \\ 0 & \mathrm{otherwise.}\end{array} \right.
 
 Here ``S`` is a subset of cities while ``n`` denotes the number of cities. This SEC enforces that at least one route is going from a city in set ``S`` to a city outside ``S``.
 
