@@ -58,7 +58,6 @@ Further Reading
 -------------------
      
 The AOA provided by AIMMS is among the best Mixed Integer Nonlinear programming solvers according to *"A review and comparison of solvers for convex MINLP"*, published in `Optimization and Engineering <https://www.springer.com/journal/11081>`_. 
-
 :download:`Download a copy <downloads/AReviewAndComparisonOfSolversForConvexMINLP.pdf>` or view it `on Springer <https://link.springer.com/article/10.1007/s11081-018-9411-8>`_.
 
 
