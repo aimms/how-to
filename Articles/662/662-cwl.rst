@@ -38,3 +38,10 @@ MainProject\WebUI\resources\css.
 Keywords:
 Capacitated warehouse location, WebUI, Infeasible data
 
+.. below are spelling exceptions only for this document
+
+.. spelling:word-list::
+
+    SuspicionLevel
+    AnnotationsIdentifier
+    backgroundcolor
