@@ -102,5 +102,4 @@ Mainly focus in model development in older AIMMS's versions.
    /Articles/394/394-sudoku
    /Articles/395/395-traffic-equilibrium
    /Articles/396/396-transport-model
-   /Articles/662/662-cwl
 
