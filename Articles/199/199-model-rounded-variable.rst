@@ -8,7 +8,7 @@ There might be cases where you need to model a variable ``var1`` as the closest 
 
 .. code-block:: aimms
     
-    var1 = Round(value)
+    var1 := Round(value)
 
 However, using the :aimms:func:`Round` function in a constraint is not allowed in a mixed integer program and results in an error message, especially if ``value`` is also a variable.
 
@@ -21,7 +21,7 @@ We can avoid such errors by declaring ``var1`` as an integer variable and using 
 
 .. code-block:: aimms
     
-    var1 = value + aux1 - aux2 
+    var1 := value + aux1 - aux2 
 
 Depending on the direction of your math program, you add (minimize) or subtract (maximize) the sum ``aux1+aux2`` to the objective function. This ensures that only one of ``aux1`` or ``aux2`` will take a non-zero value. 
 
@@ -39,5 +39,5 @@ Let ``value = 2.3``, whose closest integer value is 2. So we want ``var1 = 2``. 
     
 .. code-block:: aimms
     
-    var1 = 2.3 + 0 - 0.3 = 2
+    var1 := 2.3 + 0 - 0.3 = 2
 
