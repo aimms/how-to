@@ -1,0 +1,40 @@
+Capacitated Warehouse Location
+==============================
+
+.. warning::
+   This article references to technology that is not available yet in any released AIMMS version, and requires an early access version of AIMMS.
+   Please contact support@aimms.com for more information.
+
+.. meta::
+   :keywords: Capacitated warehouse location, WebUI, Infeasible data
+   :description:    This project illustrates AIMMS' capabilities to find data causing an infeasibility in a mathematical model.
+
+Direct download AIMMS Project :download:`CWL.zip <model/CWL.zip>`
+
+The capacitated warehouse location problem is the problem of locating a
+number of warehouses which have to service a set of customers, at minimum
+cost, where each customer has an associated demand and there are constraints
+on the total demand that can be met from a warehouse.
+
+This model is infeasible. The new procedure GMP::Instance::GetInfeasibleData
+is used to find the cause of the infeasibility. To run the project, first run
+the procedure MainExecution to solve the model (which will be infeasible) and
+next run the procedure FindInfData to find the infeasible data. The procedure
+FindInfData fills a HTML message explaining the cause of the infeasibility,
+and it fills the .SuspicionLevel suffix of all parameters involved in the
+infeasibility with values 'High', 'Medium' or 'Low'; it remains empty if the
+parameter is not involved.
+
+You can also run this project using the WebUI by pressing 'WebUI' in the menu
+bar (after opening the AIMMS project). This will open a web page. Press the
+'Solve' button to solve the model (it calls the procedure MainExecution), and
+press the 'FindInexactData' button to call the FindInfData to find the
+infeasible data. A text message will be displayed and several data cells will
+be colored. To color the cells, the webui::AnnotationsIdentifier attribute of
+the parameters Capacity, Demand and AllocationCost is used. The colors are
+specified in the file 'backgroundcolor.css' in the following subfolder:
+MainProject\WebUI\resources\css.
+
+Keywords:
+Capacitated warehouse location, WebUI, Infeasible data
+
