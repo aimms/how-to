@@ -9,11 +9,13 @@ In this article we will compare a multi-objective approach to separately solving
 
 Let's take for an example a problem trying to find a healthy diet for a reasonable price. First let's define our objectives:
 
-* Minimize calories: I'm trying to lose some weight, so my healthy diet should be low in calories.
+* minimize calories: I'm trying to lose some weight, so my healthy diet should be low in calories.
 
-* Minimize price: A reasonable price means that it doesn't have to be the absolute minimum, but should be within a close range.
+* minimize price: a reasonable price means that it doesn't have to be the absolute minimum, but should be within a close range.
 
-Of course, I want to include minimum/maximum requirements for nutrients such as proteins.
+Of course, I want to include minimum/maximum requirements for nutrients such as proteins. Please use the following project to follow this article:
+
+    :download:`DietProblem.zip <model/DietProblem.zip>` 
 
 Multi-Objective Approach
 -------------------------
@@ -21,7 +23,6 @@ Multi-Objective Approach
 Let's use the multi-objective feature available since AIMMS 4.65 and CPLEX 12.9. 
 
 .. code-block:: aimms
-    :linenos:
 
     Procedure SolveMultiObj {
         Body: {
@@ -70,14 +71,17 @@ Comparing Results
 The application has both WinUI and WebUI interfaces, but WebUI is featured in the following screenshots.
 
 .. figure:: images/mintotcost.png
+    :align: center
 
     Results after minimizing total cost
     
 .. figure:: images/mintotcalo.png
+    :align: center
 
     Results after minimizing total calories
     
 .. figure:: images/multiobj.png
+    :align: center
 
     Results after running multi objective
     
@@ -85,7 +89,7 @@ The objectives are summarized in the table below:
 
 +--------------------------+-------------+----------------+
 |                          | Cost        | Calories       |
-+--------------------------+-------------+----------------+
++==========================+=============+================+
 | Minimize total cost      |  21.85      |  2698.40       |
 +--------------------------+-------------+----------------+
 | Minimize total calories  |  29.80      |  2546.40       |
@@ -96,7 +100,10 @@ The objectives are summarized in the table below:
 As you can see, the multi-objective values are not as good as either of the individual objective values, but the multi-objective approach provides a good balance.
 
 You may also find the CPLEX log interesting, as found in the file ``log/cplex 12.9.sta``. 
-(See also :doc:`../13/13-Solver-Logging-IDE`.)
+
+.. seealso:: 
+
+    * :doc:`../13/13-Solver-Logging-IDE`
 
 .. code-block:: none
     :linenos:
@@ -106,12 +113,10 @@ You may also find the CPLEX log interesting, as found in the file ``log/cplex 12
     MIP - Integer optimal solution:  Objective = 2.1849999998e+01
     Solution time = 0.09 sec.  Iterations = 20  Nodes = 0
     
-    
     Solve problem 'MinCaloDietProblem' with 9 rows, 15 columns (0 binaries, 9 generals), and 83 nonzeros.
     
     MIP - Integer optimal solution:  Objective = 2.5464000000e+03
     Solution time = 0.02 sec.  Iterations = 13  Nodes = 0
-    
     
     Solve problem 'DietProblem' with 8 rows, 14 columns (0 binaries, 9 generals), and 73 nonzeros.
     
@@ -119,38 +124,21 @@ You may also find the CPLEX log interesting, as found in the file ``log/cplex 12
     
     Starting optimization #1 with priority 2.
     
-    
-    
     Finished optimization #1 with priority 2.
     Objective =  2.1849999998e+01,  Nodes = 0,  Time = 0.05 sec. (0.45 ticks)
     Cumulative statistics:  Nodes = 0,  Time 0.05 sec. (0.45 ticks)
-    
-    
+        
     Starting optimization #2 with priority 1.
-    
-    
     
     Finished optimization #2 with priority 1.
     Objective =  2.5764000000e+03,  Nodes = 0,  Time = 0.02 sec. (0.43 ticks)
     Cumulative statistics:  Nodes = 0,  Time 0.06 sec. (0.89 ticks)
-    
-    
     
     MIP - Multi-objective optimal
     Solution time = 0.08 sec.  Iterations = 43  Nodes = 0
 
 A breakdown of above log:
 
-#. lines 1 - 4 for the first solve (minimize total cost)
-
-#. lines 7 - 10 for the second solve (minimize total calories)
-
-#. lines 13 - 37 for the multi objective solve.
-
-Project download
-------------------
-
-The project can be downloaded below.
-
-    :download:`DietProblem.zip <model/DietProblem.zip>` 
-
+* lines 1 - 4 for the first solve (minimize total cost)
+* lines 6 - 9 for the second solve (minimize total calories)
+* lines 11 - 28 for the multi objective solve.
