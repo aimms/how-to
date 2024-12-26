@@ -14,7 +14,7 @@ Or, better yet, use the GMP function :any:`GMP::Solution::Check`.
 
 Suppose we have the following simple model:
 
-:math:`{min}x`
+:math:`\begin{align*} \max &\; x \\ \text{subject to} &\; \begin{alignedat}[t]{2} x & +{} & y &  \geq 5 \\ x &     &   &  \geq 0 \\ y &     &   & \geq 0 \end{alignedat} \end{align*`
 |
 :math:`x + y \ge 5`
 :math:`x,y \ge 0`
