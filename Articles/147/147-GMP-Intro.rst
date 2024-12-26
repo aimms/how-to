@@ -1,4 +1,4 @@
-﻿Overview: Generated Mathematical Programs
+﻿The Generated Mathematical Programs
 ==========================================
 
 .. meta::
@@ -27,6 +27,7 @@ The initial transition from using only standard Mathematical Program identifiers
 The original one-line solve statement now needs to be converted to the following two lines:
 
 .. code-block:: aimms
+    :linenos:
 
     ep_GenMathProgram := gmp::Instance::Generate(MathProgram) ;
     gmp::Instance::Solve(ep_GenMathProgram ) ;
@@ -34,8 +35,11 @@ The original one-line solve statement now needs to be converted to the following
 
 The first line generates the GMP and the second line solves this GMP. 
 With these two minor additions, you have moved to using GMP's. 
-For more information about what you can do with the GMP's, you can take a look at :doc:`optimization-modeling-components/implementing-advanced-algorithms-for-mathematical-programs/index` 
-and :doc:`algorithmic-capabilities/the-gmp-library/index`.
+
+.. seealso::
+    
+    * :doc:`optimization-modeling-components/implementing-advanced-algorithms-for-mathematical-programs/index` 
+    * :doc:`algorithmic-capabilities/the-gmp-library/index`
 
 Additional Information
 ----------------------- 
@@ -44,6 +48,7 @@ The exact workings of :any:`GMP::Instance::Solve` statement can actually be emul
 If you look at the Language Reference, you will see that you can emulate its behavior with the following calls:
 
 .. code-block:: aimms
+    :linenos:
 
     ! Create a solver session for ep_GenMathProgram, which will create an element
     ! in the set AllSolverSessions, and assign the newly created element

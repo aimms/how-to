@@ -31,18 +31,20 @@ We have a flow shop model that is solved by the following procedure ``pr_DoSolve
     Empty AllVariables;
     pr_GenerateData();
     empty s_Timepoints ;
+
     FlowShopModel.CallbackTime := 'pr_TimeCallback'; ! Solve style callback.
+
     block where progress_time_interval := 1 ;
         solve FlowShopModel;
     endblock ;
+
     pr_prepInterface;
 
-On line 4 a callback is activated for the flowshop model by setting the corresponding suffix for the mathematical program.
+On line 5 a callback is activated for the flowshop model by setting the corresponding suffix for the mathematical program.
 
 The callback procedure itself is:
 
 .. code-block:: aimms
-    :linenos:
 
     Procedure pr_TimeCallback {
         Body: {
@@ -57,11 +59,15 @@ An example solve results in the following progress window:
 .. image:: images/1-progress-window.png
     :align: center
 
+|
+
 As you can see, optimality is reached.
 
 .. topic:: Example Project 1
 
     If you want to replay this yourself, please download and run :download:`1.flowshop...zip <model/1.flowshop-solve-solve-cb.zip>` and press the solve button in the lower right corner.
+
+|
 
 Declaring the GMP
 ----------------------------------
@@ -69,7 +75,6 @@ Declaring the GMP
 The Generated Mathematical Programs are objects stored in AIMMS internally. Each object is given an identification as an element in the predeclared set :aimms:set:`AllGeneratedMathematicalPrograms`. We use an element parameter to store such an element after generating, so that we can reference it in later manipulations such as solving. The declaration is:
 
 .. code-block:: aimms
-    :linenos:
 
     ElementParameter ep_GMP {
         Range: AllGeneratedMathematicalPrograms;
@@ -84,17 +89,22 @@ With this declaration, we can simply convert.
     Empty AllVariables;
     pr_GenerateData();
     empty s_Timepoints ;
+
     FlowShopModel.CallbackTime := 'pr_TimeCallback'; ! Solve style callback.
+
     block where progress_time_interval := 1 ;
         ep_GMP := gmp::Instance::Generate( FlowShopModel );
         gmp::Instance::Solve( ep_GMP );
     endblock ;
+
     pr_prepInterface;
 
-The only difference in coding the solution procedure is then on lines 6 and 7, highlighted above. Running that procedure gives the unexpected result:
+The only difference in coding the solution procedure is then on lines 8 and 9, highlighted above. Running that procedure gives the unexpected result:
 
 .. image:: images/2-progress-window.png
     :align: center
+
+|
 
 As you can see, optimality is not reached; instead you'll get the following warning:
 
@@ -108,7 +118,7 @@ This is caused by the different interface for callbacks. We will handle that in 
 
     If you want to replay this yourself, please download and run :download:`2.flowshop...zip <model/2.flowshop-gmp-solve-cb.zip>` and press the solve button in the lower right corner.
 
-
+|
 
 Adapting Callbacks for GMP
 --------------------------------
@@ -118,7 +128,6 @@ GMP style callback procedures have the input argument ``ep_session`` which is an
 The best practice is to have an explicit return statement as the last statement of a callback procedure. This results in the following replacement of the ``pr_TimeCallback`` procedure.
 
 .. code-block:: aimms
-    :linenos:
 
     Procedure pr_TimeCallback {
         Arguments: (ep_session);
@@ -138,7 +147,6 @@ The best practice is to have an explicit return statement as the last statement 
 The solver session allows you to obtain various information from the session directly, but not the incumbent. Instead, we register the latest incumbent value ourselves when the solver finds a new incumbent solution. This requires the following additional procedure:
 
 .. code-block:: aimms
-    :linenos:
 
     Procedure pr_IncumbentCallback {
         Arguments: (ep_session);
@@ -180,9 +188,12 @@ After running the adapted model, the progress window shows the following results
 .. image:: images/3-progress-window.png
     :align: center
 
+|
+
 .. topic:: Example Project 3
 
     If you want to replay this yourself, please download and run :download:`3.flowshop...zip <model/3.flowshop-gmp-gmp-cb.zip>` and press the solve button in the lower right corner.
 
+|
 
 You have now converted the Solve statement to use GMP!
