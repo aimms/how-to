@@ -48,45 +48,45 @@ To actually tune the solver settings, you can use the following code:
 .. code-block:: aimms
     :linenos:
 
-   !Determines which options we consider to be unchangable by CPLEX
-   !It will use the current value for this setting in the project options.
-   !As an example, we will forbid the tuning of the setting mip_search_strategy.
+    !Determines which options we consider to be unchangable by CPLEX
+    !It will use the current value for this setting in the project options.
+    !As an example, we will forbid the tuning of the setting mip_search_strategy.
 
-   FixedOptions := { 'CPLEX 12.3::mip_search_strategy' } ;
+    FixedOptions := { 'CPLEX 12.3::mip_search_strategy' } ;
 
-   !First create the GMP out of the Math Program
+    !First create the GMP out of the Math Program
 
-   genMathProgram := GMP::Instance::Generate( MP );
-   
-   !Then call the TuneSingleGMP function, which will try to find a good
-   !combination of settings for the solver options for this instance.
-   !The settings that are in the set FixedOptions will not be considered
-   !for tuning.
-   !The found settings will be applied directly in the project settings
-   !and also will be written to the file "tuned_options_gmp.opt"
+    genMathProgram := GMP::Instance::Generate( MP );
+    
+    !Then call the TuneSingleGMP function, which will try to find a good
+    !combination of settings for the solver options for this instance.
+    !The settings that are in the set FixedOptions will not be considered
+    !for tuning.
+    !The found settings will be applied directly in the project settings
+    !and also will be written to the file "tuned_options_gmp.opt"
 
-   gmp::Tuning::TuneSingleGMP(
-      GMP                : genMathProgram , 
-      FixedOptions       : FixedOptions , 
-      ApplyTunedSettings : 1 , !Save found settings directly in project
-      OptionFileName     : "tuned_options_gmp.opt" ) ; !Store found settings in this file
+    gmp::Tuning::TuneSingleGMP(
+        GMP                : genMathProgram , 
+        FixedOptions       : FixedOptions , 
+        ApplyTunedSettings : 1 , !Save found settings directly in project
+        OptionFileName     : "tuned_options_gmp.opt" ) ; !Store found settings in this file
 
 
-   !This call will try to find a combination of settings for
-   !the solver options that are good for the set of MPS/LP files that 
-   !are found in the subdirectory mps-files in the directory of 
-   !the project. 
-   !The settings that are in the set FixedOptions will not be considered
-   !for tuning.
-   !The found settings will be applied directly in the project settings
-   !and also will be written to the file "tuned_options_gmp_mps.opt"
+    !This call will try to find a combination of settings for
+    !the solver options that are good for the set of MPS/LP files that 
+    !are found in the subdirectory mps-files in the directory of 
+    !the project. 
+    !The settings that are in the set FixedOptions will not be considered
+    !for tuning.
+    !The found settings will be applied directly in the project settings
+    !and also will be written to the file "tuned_options_gmp_mps.opt"
 
-   gmp::Tuning::TuneMultipleMPS(
-      DirectoryName      : "mps-files" , ! location of mps files, relative to project 
-      Solver             : 'CPLEX 12.3' ,! Which solver to use, in this case CPLEX 12.3 
-      FixedOptions       :  FixedOptions , !Consider these options unchangable. 
-      ApplyTunedSettings :  1 , !Save found settings directly in project 
-      OptionFileName     : "tuned_options_gmp_mps.opt" ) ;  !Store found settings in this file
+    gmp::Tuning::TuneMultipleMPS(
+        DirectoryName      : "mps-files" , ! location of mps files, relative to project 
+        Solver             : 'CPLEX 12.3' ,! Which solver to use, in this case CPLEX 12.3 
+        FixedOptions       :  FixedOptions , !Consider these options unchangable. 
+        ApplyTunedSettings :  1 , !Save found settings directly in project 
+        OptionFileName     : "tuned_options_gmp_mps.opt" ) ;  !Store found settings in this file
 
 
 
