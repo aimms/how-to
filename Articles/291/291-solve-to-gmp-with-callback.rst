@@ -20,7 +20,7 @@ As an experienced model builder, you may want to convert from solving using the 
 However, when callbacks are used on the mathematical program, the callback procedures need to be modified and activated differently when using GMP. 
 
 
-Original solve procedure
+Original Solve Procedure
 -------------------------
 
 We have a flow shop model that is solved by the following procedure ``pr_DoSolve`` with body:
@@ -110,7 +110,7 @@ This is caused by the different interface for callbacks. We will handle that in 
 
 
 
-Adapting callbacks for GMP
+Adapting Callbacks for GMP
 --------------------------------
 
 GMP style callback procedures have the input argument ``ep_session`` which is an element parameter in the set :any:`AllSolverSessions`. This gives you access to solver session specific information. The return value of the callback procedure should be ``0`` to stop solving, or ``1`` to continue solving.  

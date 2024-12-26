@@ -9,17 +9,8 @@ Tune CPLEX Options from AIMMS
 The CPLEX solver has many options that influence the way CPLEX solves your model. For certain types of constraints and/or models, you can make an educated guess about which combination of options works best for your problem. However, sometimes you need more help.
 
 
-To help you out, CPLEX has some automatic tuning options. In AIMMS, you can access this CPLEX tuning tool via the following two functions:
-
-
-.. code::
-
-    GMP::Tuning::TuneMultipleMPS
-
-.. code::
-
-    GMP::Tuning::TuneSingleGMP
-
+To help you out, CPLEX has some automatic tuning options. 
+In AIMMS, you can access this CPLEX tuning tool via the following two functions: :any:`GMP::Tuning::TuneMultipleMPS` and :any:`GMP::Tuning::TuneSingleGMP`.
 
 As the names already suggest, the first function will tune the CPLEX options for a set of LP/MPS files. As an argument, you will have to specify the directory containing the LP/MPS files. The second function will tune the options based on one single GMP, which you will have to provide as an argument. 
 
@@ -41,8 +32,7 @@ The other options to provide are the following:
 To use these functions, we first need the following declarations:
 
 
-.. code::
-
+.. code-block:: aimms
 
     Set FixedOptions {
         SubsetOf: AllOptions;
@@ -55,7 +45,8 @@ To use these functions, we first need the following declarations:
 
 To actually tune the solver settings, you can use the following code:
 
-.. code::
+.. code-block:: aimms
+    :linenos:
 
    !Determines which options we consider to be unchangable by CPLEX
    !It will use the current value for this setting in the project options.
@@ -63,7 +54,6 @@ To actually tune the solver settings, you can use the following code:
 
    FixedOptions := { 'CPLEX 12.3::mip_search_strategy' } ;
 
-   
    !First create the GMP out of the Math Program
 
    genMathProgram := GMP::Instance::Generate( MP );
@@ -76,13 +66,9 @@ To actually tune the solver settings, you can use the following code:
    !and also will be written to the file "tuned_options_gmp.opt"
 
    gmp::Tuning::TuneSingleGMP(
-
       GMP                : genMathProgram , 
-
       FixedOptions       : FixedOptions , 
-
       ApplyTunedSettings : 1 , !Save found settings directly in project
-
       OptionFileName     : "tuned_options_gmp.opt" ) ; !Store found settings in this file
 
 
@@ -96,21 +82,18 @@ To actually tune the solver settings, you can use the following code:
    !and also will be written to the file "tuned_options_gmp_mps.opt"
 
    gmp::Tuning::TuneMultipleMPS(
-
       DirectoryName      : "mps-files" , ! location of mps files, relative to project 
-
       Solver             : 'CPLEX 12.3' ,! Which solver to use, in this case CPLEX 12.3 
-
       FixedOptions       :  FixedOptions , !Consider these options unchangable. 
-
       ApplyTunedSettings :  1 , !Save found settings directly in project 
-
       OptionFileName     : "tuned_options_gmp_mps.opt" ) ;  !Store found settings in this file
 
 
 
 .. note::
     
-    Take care when tuning; always ensure that you have a few instances that are a good sample of the range of possible instances. If the instances you are tuning are not representative for all possible instances, you will tune to one specific instance but risk decreasing performance for all instances overall.
+    Take care when tuning; always ensure that you have a few instances that are a good sample of the range of possible instances. 
+    If the instances you are tuning are not representative for all possible instances, you will tune to one specific instance but 
+    risk decreasing performance for all instances overall.
 
 

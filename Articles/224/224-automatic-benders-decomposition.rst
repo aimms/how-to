@@ -44,7 +44,11 @@ stage) stochastic programming problems with a subproblem for each
 scenario.
 
 
-CPLEX nowadays provides its own Benders Decomposition. See :doc:`../116/116-Benders-CPLEX`.
+CPLEX nowadays provides its own Benders Decomposition. 
+
+.. seealso::
+    
+    * :doc:`../116/116-Benders-CPLEX`
 
 
 

@@ -37,7 +37,7 @@ With these two minor additions, you have moved to using GMP's.
 For more information about what you can do with the GMP's, you can take a look at :doc:`optimization-modeling-components/implementing-advanced-algorithms-for-mathematical-programs/index` 
 and :doc:`algorithmic-capabilities/the-gmp-library/index`.
 
-Additional information
+Additional Information
 ----------------------- 
 
 The exact workings of :any:`GMP::Instance::Solve` statement can actually be emulated in a couple of lower-level GMP statements. 
