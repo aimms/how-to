@@ -84,7 +84,7 @@ With this declaration, we can simply convert.
 
 .. code-block:: aimms
     :linenos:
-    :emphasize-lines: 6,7
+    :emphasize-lines: 8,9
 
     Empty AllVariables;
     pr_GenerateData();
