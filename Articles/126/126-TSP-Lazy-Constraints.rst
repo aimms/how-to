@@ -8,20 +8,20 @@
 
 The famous **Travelling Salesman Problem** (TSP) deals with the following problem: given a list of cities and the distances between each pair of cities, a salesman has to find the shortest possible route to visit each city exactly once while returning to the origin city. One way to formulate the TSP is as follows:
 
-.. math:: min sum( (i,j), c(i,j)*x(i,j) )
-.. math:: s.t. sum( i, x(i,j) + x(j,i) ) = 1 \forall j (1)
-.. math:: x(i,j) binary \forall i > j
+.. code-block:: none
 
-
-.. math:: \left\{ \begin{array}{ll} sum( i, x(i,j) + x(j,i) ) = 1 & \forall j \\ x(i,j) & \mathrm{binary\} \forall i > j \end{array} \right
+        min sum( (i,j), c(i,j)*x(i,j) )
+    (1) s.t. sum( i, x(i,j) + x(j,i) ) = 1   for all j
+             x(i,j) binary                   for all i > j
 
 Here :math:`x(i,j)` equals 1 if the route from city :math:`i` to city :math:`j` is in the tour, 
 and 0 otherwise. Note that this is the formulation for the symmetric TSP in which the distance from :math:`i` to :math:`j` equals the 
 distance from :math:`j` to :math:`i`. This formulation is not complete as it allows for subtours. 
 One way to exclude these subtours is by using **subtour elimination constraints** (SECs for short):
 
-.. math:: sum( (i,j) | i in S and not j in S, x(i,j) + x(j,i) ) >= 2   \foralll S, 1 < |S| < n
-
+.. code-block:: none
+    
+    sum( (i,j) | i in S and not j in S, x(i,j) + x(j,i) ) >= 2   for all S, 1 < |S| < n
 
 Here :math:`S` is a subset of cities while :math:`n` denotes the number of cities. 
 This SEC enforces that at least one route is going from a city in set :math:`S` to a city outside :math:`S`.
