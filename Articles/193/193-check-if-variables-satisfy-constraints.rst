@@ -14,9 +14,8 @@ Or, better yet, use the GMP function :any:`GMP::Solution::Check`.
 
 Suppose we have the following simple model:
 
-.. math:: \begin{align*} \max &\; x \\ \text{subject to} &\; \begin{alignedat}[t]{2} x & +{} & y &  \geq 5 \\ x &     &   &  \geq 0 \\ y &     &   & \geq 0 \end{alignedat} \end{align*}
+.. math:: \begin{align*} &\mathrm{min} \quad x \\[3pt] &\mathrm{s.t.} \quad \begin{array}[t]{r c r c r} x & + & y & \geq & 5 \\ x & & & \geq &  0 \\  & & y & \geq &  0 \end{array} \end{align*}
 
-.. math:: \begin{align*} &\mathrm{max} \quad 300x + 100y  \\[2pt] &\mathrm{s.t.} \quad \begin{array}[t]{r c r c r} 6x & + & 3y & \geq & 40 \\ x & - & 3y & \geq &  0 \\ x & + & \frac{1}{4}y & \geq &  4 \end{array} \end{align*}
 
 and we want to check whether the assignment :math:`x=1\ ,\ y=1` is actually a feasible solution. 
 
