@@ -8,7 +8,7 @@
 
 Some of the solvers in AIMMS, including the CP Optimizer solver for Constraint Programming problems, support not only returning a single (optimal) solution, but also a pool of feasible solutions.
 
-Some time ago, `Hakank's website <http://www.hakank.org>`_ has done a thorough in the article `"A first look at AIMMS + CP (AIMMS with Constraint Programming)"" <http://www.hakank.org/constraint_programming_blog/2012/11/a_first_look_at_aimmscp_aimms_with_constraint_programming.html>`_. 
+Some time ago, `Hakank's website <http://www.hakank.org>`_ has done a thorough in the article `"A first look at AIMMS + CP (AIMMS with Constraint Programming)" <http://www.hakank.org/constraint_programming_blog/2012/11/a_first_look_at_aimmscp_aimms_with_constraint_programming.html>`_. 
 One of the remarks posted at the end was that it was not completely clear how to obtain multiple solutions from the CP Optimizer solver.
 
 In this post we will show how to instruct the solver to create additional solutions and retrieve them to AIMMS after the solver execution is finished. We will use the N-Queens problems from Hakan's article as an example. 

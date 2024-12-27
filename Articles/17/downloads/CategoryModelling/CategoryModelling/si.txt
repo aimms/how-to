@@ -1,0 +1,147 @@
+{ L"SI_Length", 0, L"", L"Expresses the value of a distance.",
+ {
+  { L"m", 1, 0, 0, 0, L"Meter" },
+  { L"mile", 1609.344, 0, 0, 0, L"Mile" },
+  { L"ft", 0.3048, 0, 0, 0, L"Foot" },
+  { L"in", 0.0254, 0, 0, 0, L"Inch" },
+  { L"yd", 0.9144, 0, 0, 0, L"Yard" }
+
+ }
+},{ L"SI_Mass", 0, L"", L"Expresses the value for the amount of matter.",
+ {
+  { L"kg", 1, 0, 0, 0, L"Kilogram" },
+  { L"oz", 0.02834952, 0, 0, 0, L"Ounce" },
+  { L"lb", 0.4535924, 0, 0, 0, L"Pound" },
+  { L"g", 0.001, 0, 0, 0, L"Gram" },
+  { L"ton", 1000, 0, 0, 0, L"Ton" }
+
+ }
+},{ L"SI_Temperature", 0, L"", L"Expresses the value for degree of heat.",
+ {
+  { L"K", 1, 0, 0, 0, L"Degree Kelvin" },
+  { L"C", 1, 273.15, 0, 0, L"Degree Celcius" },
+  { L"F", 0.5555555556, 255.372222, 0, 0, L"Degree Fahrenheit" },
+  { L"R", 0.5555555556, 0, 0, 0, L"Degree Rankine" }
+
+ }
+},{ L"SI_Amount_of_Mass", 0, L"", L"Expresses the value for the quantity of substance.",
+ {
+  { L"mol", 1, 0, 0, 0, L"Mole" }
+
+ }
+},{ L"SI_Electric_Current", 0, L"", L"Expresses the value for the movement of electricity.",
+ {
+  { L"A", 1, 0, 0, 0, L"Ampere" }
+
+ }
+},{ L"SI_Luminous_Intensity", 0, L"", L"Expresses the value for the brightness.",
+ {
+  { L"cd", 1, 0, 0, 0, L"Candela" }
+
+ }
+},{ L"SI_Plane_Angle", 0, L"", L"Expresses the value of an angle in a plane.",
+ {
+  { L"rad", 1, 0, 0, 0, L"Radian" }
+
+ }
+},{ L"SI_Solid_Angle", 0, L"", L"Expresses the value of an angle in a solid.",
+ {
+  { L"sr", 1, 0, 0, 0, L"Sterradian" }
+
+ }
+},{ L"SI_Area", 0, L"m^2", L"Expresses the value of the extent of a surface.",
+ {
+  { L"m2", 1, 0, 0, 0, L"Square Meter" },
+  { L"acre", 4046.873, 0, 0, 0, L"Acre" },
+  { L"are", 100, 0, 0, 0, L"Are" },
+  { L"hectare", 10000, 0, 0, 0, L"Hectare" }
+
+ }
+},{ L"SI_Volume", 0, L"m^3", L"Expresses the value of solid content.",
+ {
+  { L"m3", 1, 0, 0, 0, L"Cubic Meter" },
+  { L"l", 0.001, 0, 0, 0, L"Liter" },
+  { L"barrel", 0.1589873, 0, 0, 0, L"Barrel" },
+  { L"gal", 0.003785412, 0, 0, 0, L"Gallon" },
+  { L"quart", 0.0009463529, 0, 0, 0, L"Quart" },
+  { L"pt", 0.0004731765, 0, 0, 0, L"Pint" },
+  { L"bft", 0.002359737, 0, 0, 0, L"Board Foot" },
+  { L"bushel", 0.03523907, 0, 0, 0, L"Bushel" },
+  { L"floz", 2.957353e-05, 0, 0, 0, L"Fluid Ounce" },
+  { L"cup", 0.0002365882, 0, 0, 0, L"Cup" },
+  { L"tablespoon", 1.478676e-05, 0, 0, 0, L"Tablespoon" },
+  { L"teaspoon", 4.928922e-06, 0, 0, 0, L"Teaspoon" }
+
+ }
+},{ L"SI_Force", 0, L"kg*m/s^2", L"Expresses the value for the change in the direction or velocity of the motion.",
+ {
+  { L"N", 1, 0, 0, 0, L"Newton" }
+
+ }
+},{ L"SI_Pressure", 0, L"kg/(m*s^2)", L"Expresses the value for the force that is applied per area unit.",
+ {
+  { L"Pa", 1, 0, 0, 0, L"Pascal" },
+  { L"atm", 101325, 0, 0, 0, L"Atmosphere" },
+  { L"bar", 100000, 0, 0, 0, L"Bar" },
+  { L"psi", 6894.757, 0, 0, 0, L"Psi" }
+
+ }
+},{ L"SI_Energy", 0, L"kg*m^2/s^2", L"Expresses the value for the capacity to do work.",
+ {
+  { L"J", 1, 0, 0, 0, L"Joule" },
+  { L"cal", 4.1868, 0, 0, 0, L"Calorie" },
+  { L"kWh", 3600000, 0, 0, 0, L"Kilowatt Hour" }
+
+ }
+},{ L"SI_Power", 0, L"kg*m^2/s^3", L"Expresses the value for the amount of energy per time unit.",
+ {
+  { L"W", 1, 0, 0, 0, L"Watt" }
+
+ }
+},{ L"SI_Electric_Potential", 0, L"kg*m^2/(A*s^3)", L"Expresses the value for the potential of electricity to do work.",
+ {
+  { L"V", 1, 0, 0, 0, L"Volt" }
+
+ }
+},{ L"SI_Electric_Resistance", 0, L"kg*m^2/(A^2*s^3)", L"Expresses the value for the effort it takes for electricity to move.",
+ {
+  { L"Ohm", 1, 0, 0, 0, L"Ohm" }
+
+ }
+},{ L"SI_Density", 0, L"kg/m^3", L"Expresses the value for the mass per volume unit.",
+ {
+  { L"kg/m^3", 1, 0, 0, 0, L"" },
+  { L"", 1, 0, 0, 0, L"" }
+
+ }
+},{ L"SI_Velocity", 0, L"m/s", L"Expresses the value for the change in distance per time unit.",
+ {
+  { L"m/s", 1, 0, 0, 0, L"" },
+  { L"", 1, 0, 0, 0, L"" }
+
+ }
+},{ L"SI_Acceleration", 0, L"m/s^2", L"Expresses the value for the change in velocity per time unit.",
+ {
+  { L"m/s^2", 1, 0, 0, 0, L"" },
+  { L"", 1, 0, 0, 0, L"" },
+  { L"g", 9.80665, 0, 0, 0, L"Free Fall" }
+
+ }
+},{ L"SI_Angular_Velocity", 0, L"rad/s", L"Expresses the value for the change in angle per time unit.",
+ {
+  { L"rad/s", 1, 0, 0, 0, L"" },
+  { L"", 1, 0, 0, 0, L"" }
+
+ }
+},{ L"SI_Frequency", 0, L"1/s", L"Expresses the value for the number of cycles per time unit.",
+ {
+  { L"Hz", 1, 0, 0, 0, L"Hertz" }
+
+ }
+},{ L"SI_Unitless", 0, L"", L"Expresses a dimensionless value.",
+ {
+  { L"-", 1, 0, 0, 0, L"" },
+  { L"%", 0.01, 0, 0, 0, L"Percent" }
+
+ }
+}

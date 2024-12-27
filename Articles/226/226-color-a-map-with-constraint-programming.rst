@@ -9,13 +9,13 @@ Color a Map with Constraint Programming
    This article references outdated technology and is provided for historical purposes only. 
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
    
+Map coloring is a very nice introductory problem to constraint programming. This article describes two aspects of creating a map coloring application: the problem itself, and the presentation of the solution.
+
 .. figure:: images/United_States_orthographic.png
     :align: center
     :scale: 50%
 
     Location United States of America
-
-Map coloring is a very nice introductory problem to constraint programming. This article describes two aspects of creating a map coloring application: the problem itself, and the presentation of the solution.
 
 Given a graph :math:`G=(V,E)` with vertices :math:`V` and edges :math:`E` in between, what is the minimum number of colors needed such that two adjacent vertices, :math:`v1` and :math:`v2`, have different colors? One obvious application of this problem is in the construction of maps with two adjacent regions that can easily be distinguished by their colors. 
 

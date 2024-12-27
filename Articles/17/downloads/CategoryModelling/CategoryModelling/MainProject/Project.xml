@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Project AimmsVersion="24.6.1.6 unicode x64" ProjectUUID="F47225A6-3A81-4E8A-B939-76B3D49DBD84">
+	<ModelFileName>CategoryModelling.ams</ModelFileName>
+	<AutoSaveAndBackup>
+		<DataBackup AtRegularInterval="true" EveryNMinutes="15" NumBackupsDatedToday="3" NumDaysBeforeToday="3" />
+	</AutoSaveAndBackup>
+</Project>

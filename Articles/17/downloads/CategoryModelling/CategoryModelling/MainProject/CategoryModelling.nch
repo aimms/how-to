@@ -1,0 +1,10 @@
+* The timestamps in this namechange file are stored in Coordinated universal time (UTC).
+"pCost" "pPrice" "2018-04-02 22:14:04"
+"sSizes" "s_sizes" "2024-12-27 18:35:52"
+"sOrders" "s_orders" "2024-12-27 18:35:56"
+"pPrice" "p_def_price" "2024-12-27 18:36:03"
+"epOrderSize" "ep_def_OrderSize" "2024-12-27 18:36:24"
+"s" "i_size" "2024-12-27 18:36:38"
+"o" "i_order" "2024-12-27 18:36:47"
+"pOrderCost" "p_def_orderCost_OPTION1" "2024-12-27 18:39:49"
+"Copy_p_def_orderCost_OPTION1" "p_def_orderCost_OPTION2" "2024-12-27 18:40:37"
