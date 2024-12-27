@@ -27,10 +27,10 @@ Setting Stop Criteria
 
 All of these stop criteria are options in your AIMMS project. This means that there are multiple ways of modifying them:
 
-* Modify the option in your Project Options. This will result in the same settings holding for all solve statements. You will find most of these options in *Settings -> Project options... -> Solvers general -> Stop criteria*
+* Modify the option in your Project Options. This will result in the same settings holding for all solve statements. You will find most of these options in :menuselection:`Settings > Project options... > Solvers general > Stop criteria`
   
-     .. image:: images/stop-criteria-option-settings.png
-         :align: center
+    .. image:: images/stop-criteria-option-settings.png
+        :align: center
 
 * Use the :any:`OptionSetValue` or ``OPTION`` functions to modify the values of the options in a procedure. :any:`OptionSetValue` will let you change the value for a single option while the ``OPTION`` statement lets you change multiple options in a single statement. 
 
@@ -39,7 +39,7 @@ All of these stop criteria are options in your AIMMS project. This means that th
        OptionSetValue(OptionName : "time_limit" , NewValue   : 10 );
        option time_limit := 10, MIP_Relative_Optimality_Tolerance := 0.1
 
-* Use the ``where`` keyword in a ``solve`` statement to modify an option for that particular solve only. For example, the solve process triggered by the below statement will be terminated after 10 seconds of execution or when the MIP_Relative_Optimality_Tolerance = 0.1, whichever happens first. 
+* Use the ``where`` keyword in a ``solve`` statement to modify an option for that particular solve only. For example, the solve process triggered by the below statement will be terminated after 10 seconds of execution or when the ``MIP_Relative_Optimality_Tolerance = 0.1``, whichever happens first. 
 
     .. code-block:: aimms
 

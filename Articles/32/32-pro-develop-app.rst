@@ -62,6 +62,7 @@ Most examples you will find here use the codes above or similar, below two examp
 This example uses a combination of both procedures mentioned. 
 
 .. code-block:: aimms
+   :linenos:
 
    if pro::GetPROEndPoint() or not ProjectDeveloperMode() then
       if pro::DelegateToServer( 
@@ -80,7 +81,8 @@ This example uses a combination of both procedures mentioned.
 Here is another way to delegate solves to the AIMMS PRO Cloud. 
 
 .. code-block:: aimms
-
+   :linenos:
+   
    if pro::GetPROEndPoint() then
       if pro::management::IsRunningOnCloud() then
          pro::solverlease::solveModel(
@@ -92,7 +94,8 @@ Here is another way to delegate solves to the AIMMS PRO Cloud.
    endif;
 
 .. seealso::
-   If you want to know how to keep the end user interface active while a solve procedure is in process. Please read  :doc:`../19/19-remove-veil`.
+   
+   * :doc:`../19/19-remove-veil`
 
 
 

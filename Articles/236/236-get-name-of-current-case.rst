@@ -27,7 +27,10 @@ In the following code, ``ep_Case`` denotes an element parameter in the set :any:
 
 If successful, the above call will store the name of the case referred to by the element parameter in the string parameter that is provided as the second argument.
 
-Please see the sections :doc:`fr:predefined-identifiers/case-management-related-identifiers/index` and :doc:`fr:data-management/case-management/index` in the `AIMMS Function Reference <https://documentation.aimms.com/aimms_func.html>`_ for more information about these functions.
+.. seealso::
+
+    * :doc:`fr:predefined-identifiers/case-management-related-identifiers/index` 
+    * :doc:`fr:data-management/case-management/index` 
 
  
 
