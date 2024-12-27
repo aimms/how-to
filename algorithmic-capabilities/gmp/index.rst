@@ -7,10 +7,10 @@ GMP
 .. toctree::
    :maxdepth: 1
    :titlesonly:
-
+   
+   /Articles/147/147-GMP-Intro
    /Articles/291/291-solve-to-gmp-with-callback
    /Articles/126/126-TSP-Lazy-Constraints
-   /Articles/147/147-GMP-Intro
    /Articles/192/192-solve-minlp-with-outer-approximation
    /Articles/264/264-tune-cplex-options
    /Articles/224/224-automatic-benders-decomposition

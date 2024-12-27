@@ -70,9 +70,9 @@ Finally, use the following code to check whether the assignment :math:`x=1\ ,\ y
 After running the above code, you will get the message that assignment :math:`x=1\ ,\ y=1` does not satisfy all the constraints.
 
 
-The example code above is available in a complete AIMMS project, attached below.
+The example code above is available in a complete AIMMS project:
 
-:download:`Check-Solution.aimmspack <downloads/Check-Solution.aimmspack>`
+    :download:`Check-Solution.aimmspack <downloads/Check-Solution.aimmspack>`
 
 
 
