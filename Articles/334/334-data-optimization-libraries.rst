@@ -10,20 +10,20 @@ These two abstraction mechanisms do not work together naturally.
 
 This article explains how we can bring these two abstraction mechanisms together using element parameters. 
 
-The running example
+The Running Example
 --------------------
 
-We'll use an example based on the **Transport Problem**. 
+We'll use an example based on the **Transport Problem**.  Please use the following project to follow this article:
+    
+    :download:`AIMMS 4.69 project download <Model/Practice.zip>` 
 
 The Transport Problem searches for the best way to transport goods from a couple of sources to sinks. 
 
 .. image:: Images/TransportProblem.png
 
-:download:`AIMMS 4.69 project download <Model/Practice.zip>` 
-
 To run this model, load the case ``Data``, and then run procedure ``MainExecution``.
 
-Transferring data
+Transferring Data
 -----------------
 A Transport Problem can be solved locally inside the library. 
 
@@ -38,6 +38,7 @@ The following **input data** is declared in the main model:
 This data must be transferred into the library to solve the problem. 
 
 Then, the following **output data** must be transferred back to the main model: 
+
 * ``p_TotalTransportCost``
 * ``p_Transport``
 
@@ -47,7 +48,7 @@ We'll use the procedure ``pr_SolveTransportProblem`` to complete the transfer in
 #. Transfer data from ``pr_SolveTransportProblem`` to the global ``Declaration`` of the ``Transport Library``.
 
 .. image:: Images/data.png
-   :scale: 50 %
+   :scale: 70%
 
 
 These steps are explained in more detail below.
@@ -60,13 +61,16 @@ Firstly, the procedure ``pr_SolveTransportProblem`` should contain local argumen
 
 .. image:: Images/Arguments.png
     :align: center
-    :scale: 60%
+    :scale: 80%
+
+|
 
 Now we can call the procedure from the main model. We must provide the input and output arguments in the right order to link them to the local arguments. 
 
 Call the procedure as follows:
     
 .. code-block:: aimms
+    :linenos:
 
     pl::pr_SolveTransportProblem(s_Sources, s_Sinks, p_Supply, p_Demand, p_TransportCost, 
     p_TotalTransportCost, p_Transport);
@@ -83,10 +87,10 @@ In the main model there is a parameter (``s_Supply``) that describes the supply 
 .. code-block:: aimms
    :linenos:
 
-    For i_locSo do
+    for i_locSo do
         SetElementAdd(s_libSources, ep_new1, i_locSo);
         ep_map1(ep_new1) := i_locSo;
-    EndFor;
+    endfor;
     p_libSupply(i_libSo) := p_locSupply( ep_map1(i_libSo));
 
 
@@ -102,10 +106,10 @@ The rest of the input data is transferred in a similar way.
 Then the Transport Problem is calculated and the output data is transferred back like this:
 
 .. code-block:: aimms
+   :linenos:
 
     p_locTotalTransportCost := v_libTotalTransportCost;
-    p_locTransport(ep_map1(i_libSo), ep_map2(i_libSi)) := 
-        v_libTransport(i_libSo,i_libSi);
+    p_locTransport(ep_map1(i_libSo), ep_map2(i_libSi)) := v_libTransport(i_libSo,i_libSi);
 
 
 

@@ -10,17 +10,19 @@ In the context of the AIMMS environment, a library is an AIMMS project that can 
 
 Each library in AIMMS contains a subset of project files. You can divide a large project into smaller sub-projects, enabling multiple developers to collaborate easily by sharing parts which are relevant to the entire project.
 
-Read more about libraries in :doc:`introduction-to-aimms/collaborative-project-development/library-projects-and-the-library-manager`.
+.. seealso::
 
-To Add a new library
+   * :doc:`introduction-to-aimms/collaborative-project-development/library-projects-and-the-library-manager`
+
+To Add a New Library
 -------------------------
 
-To add a new library to the current project, go to :menuselection:`File --> Library manager`.
+To add a new library to the current project, go to :menuselection:`File > Library Manager`.
 
 Select a library type:
 
 * New library
-   Creates a new library. Name your library and specify location in the *Library* tab. Customize subfolder or model name in the *Optional Naming* tab.
+   Creates a new library. Name your library and specify location in the :menuselection:`Library` tab. Customize subfolder or model name in the :menuselection:`Optional Naming` tab.
 
 * Existing library
    Selects a saved library folder. You may select from libraries shared with you.
@@ -40,16 +42,20 @@ Libraries have a bi-directional relationship with your project, unless encrypted
    For example, if you add the AXLL library which has a prefix ``axll``, you can invoke functions of this library in your code with ``axll::``. A drop-down list of available functions appears.
 
 
-Make a Library Read-only 
+Make a Library Read-Only 
 -------------------------
 
-System libraries like the ``AimmsWebUI`` or ``AimmsPROLibrary`` are read-only libraries. If you would like to turn one of your own library read-only, you may use the property attribute from Windows explorer 
+System libraries like the ``AimmsWebUI`` or ``AimmsPROLibrary`` are read-only libraries. If you would like to turn one of your own library read-only, you may use the property attribute 
+from Windows Explorer.
 
 .. image:: images/readonly.png
+   :align: center
+
+|
 
 .. note::
 
-    Note that a user will then still be able to see the source inside the library, but not changing it.
+   Note that a user will then still be able to see the source inside the library, but not changing it.
 
 
 .. END DOCUMENT
