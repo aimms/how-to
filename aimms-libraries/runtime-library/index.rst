@@ -4,7 +4,7 @@ Runtime Library
 .. meta::
    :description: The AIMMS Runtime Libraries are essential components that enable the execution of AIMMS applications without requiring the full AIMMS development environment. 
 
-The AIMMS Runtime Libraries are essential components that enable the execution of AIMMS applications without requiring the full AIMMS development environment. 
+The **AIMMS Runtime Libraries** are essential components that enable the execution of AIMMS applications without requiring the full AIMMS development environment. 
 These libraries provide the necessary runtime support to run optimization models and applications developed in AIMMS, ensuring consistent performance and functionality. 
 They are particularly useful for deploying AIMMS-based solutions to end-users, facilitating broader access to advanced analytics and optimization tools.
 

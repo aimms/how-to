@@ -20,6 +20,9 @@ We'll use an example based on the **Transport Problem**.  Please use the followi
 The Transport Problem searches for the best way to transport goods from a couple of sources to sinks. 
 
 .. image:: Images/TransportProblem.png
+    :align: center
+
+|
 
 To run this model, load the case ``Data``, and then run procedure ``MainExecution``.
 
