@@ -13,7 +13,11 @@ For example, if you had an element parameter ``ep_MySelectedSourceIdentifier`` w
 
 With MEF, it now is possible to create a procedure at runtime that retrieves the value of the identifier denoted by the element parameter. To keep this example easy, we demonstrate how you can do this for a scalar identifier, although an intrinsic function for this already exists. You can easily extend the example below to work on indexed identifiers also.
 
-For the example, we consider the following parameters and element parameters:
+Please use the following project to follow this article:
+
+    :download:`Example Download <downloads/ValueDynamicIdentifier.zip>`
+
+Consider the following parameters and element parameters:
 
 .. code-block:: aimms
 
@@ -47,6 +51,7 @@ The ``ep_RuntimeProcedure`` element parameter must have the default attribute se
 Now we can create a procedure, say ``pr_GetValueOfIdentifer`` that will get two arguments, the source identifier and the target identifier. This procedure will then first create a runtime procedure that does the assignment of the value of the source identifiers to the target identifier, and then execute this procedure with the apply statement. The code of the procedure is the following:
 
 .. code-block:: aimms
+    :linenos:
 
     !If there already exists an identifier with the name
     !RuntimeLibrary, we must delete it first
@@ -90,6 +95,7 @@ Please note that this procedure has two arguments, ``ep_Source`` and ``ep_Target
 The above procedure can now be called with the following example code:
 
 .. code-block:: aimms
+    :linenos:
 
     p_SourceParameter1 := 5 ;
     ep_SelectedSourceIdentifier := 'p_SourceParameter1' ;
@@ -98,6 +104,10 @@ The above procedure can now be called with the following example code:
 
     dialogmessage("Value = " + p_TargetValue) ;
 
-Keep in mind that the above code does not do any error checking. This means that you could try to assign the value of a string parameter to a numerical parameter, which would result in a runtime error. Other possibilities are that the body of the runtime procedure contains a syntax error, in which case the me::compile statement will result in an error. Please see the `AIMMS The Language Reference <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_ (section "Raising and handling warnings and errors") for more information on handling such errors with the AIMMS error handling.
+Keep in mind that the above code does not do any error checking. This means that you could try to assign the value of a string parameter to a numerical parameter, which would result in a runtime error. Other possibilities are that the body of the runtime procedure contains a syntax error, in which case the me::compile statement will result in an error. 
 
-A complete project containing the above source can be downloaded :download:`here <downloads/ValueDynamicIdentifier.zip>`.
+.. seealso::
+    
+    * `AIMMS The Language Reference (section "Raising and handling warnings and errors") <https://documentation.aimms.com/_downloads/AIMMS_ref.pdf>`_
+
+

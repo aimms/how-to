@@ -158,7 +158,7 @@ To persist the library, the following functions are used:
 Using the Library
 -------------------
 
-*   In the leveraging app, :menuselecion:`File > Library Manager` you can add the :menuselecion:`Existing Library`, by pointing to folder containing the library on your disk.  
+*   In the leveraging app, :menuselection:`File > Library Manager` you can add the :menuselection:`Existing Library`, by pointing to folder containing the library on your disk.  
     In the example, it is located in the ``libs`` folder next to the folders for the generation and leveraging apps. 
 
 *   Direct use by name: In the app ``LeverageReadLib``, the procedure ``MainExecution`` can directly reference an identifier in the generated static lib: ``drl::pr_readAll();``
