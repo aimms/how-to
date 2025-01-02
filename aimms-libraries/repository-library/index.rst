@@ -16,15 +16,9 @@ Here, you can find documentation about it:
    :titlesonly:
 
    aimmsxllibrary/index
-   cmd-library/index
    data-exchange-library/index
-   datalink-library/index
    email-client-library/index
-   forecasting-library/index
-   guard-server-session-library/index
    http_client_library/index
-   rlink-library/index
-   snowflake-library/index
    unit-test-library/index
    webui-library/index
    
