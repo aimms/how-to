@@ -1,4 +1,4 @@
-Runtime functions with arguments
+Runtime Functions with Arguments
 ==================================
 
 On the one hand AIMMS functions and procedures use local identifiers to hold the values of the arguments.
@@ -11,10 +11,14 @@ This short how-to presents a way to add local identifiers to AIMMS procedures an
 To create local identifiers, including procedure and function arguments, first create a global declaration section, 
 and, when finished, move the declaration section below the procedure or function being created.
 
-To show what happens:
+Please use the following project to follow this article:
+
+    :download:`Example Download <model/rtlfnc.zip>`
+
+To Show what Happens
 ----------------------
 
-For instance, to create a variant of Sqrt, do the following steps: 
+For instance, to create a variant of :any:`Sqrt`, do the following steps: 
 
 #.  Create the function, including specifications for the attributes ``body`` and ``arguments``.  
 
@@ -24,6 +28,8 @@ For instance, to create a variant of Sqrt, do the following steps:
 
     .. image:: images/before-decl-sec-move.png
         :align: center
+
+    |
 
 #.  A call to :aimms:func:`me::Move` to move the declaration section below the function looks as follows:
 
@@ -42,35 +48,34 @@ For instance, to create a variant of Sqrt, do the following steps:
 
     .. image:: images/after-decl-sec-move.png
         :align: center
-        
+
+    |
+
     .. caution:: The elements in :aimms:set:`AllIdentifiers` that used to reference the declaration section and the arguments, are no longer valid and should not be used after this statement.
 
 #.  Finish the creation by calling the AIMMS compiler using ``me::compile``, the runtime library in model explorer looks as follows:
 
     .. image:: images/after-me-compile.png
         :align: center
-        
+
+    |
+
     Note that the model explorer now shows the argument of the function.
 
 #.  Subsequently, we can use the ``APPLY`` operator to call the function created.
 
     .. code-block:: aimms
+        :linenos:
 
         p_res := apply( ep_sqrtFunction, p_inp );
 
-You can download AIMMS 4.79 example project :download:`here <model/rtlfnc.zip>`
 
-See also:
-----------
+.. seealso::
 
-#.  `Runtime Libraries and the Model Edit Functions <https://documentation.aimms.com/language-reference/advanced-language-components/model-structure-and-modules/runtime-libraries-and-the-model-edit-functions.html>`_
+    #.  `Runtime Libraries and the Model Edit Functions <https://documentation.aimms.com/language-reference/advanced-language-components/model-structure-and-modules/runtime-libraries-and-the-model-edit-functions.html>`_
 
-#.  Instead of using functions, use macros: :doc:`Use Formulas as Data <../131/131-Formulas-as-Data>`
+    #.  Instead of using functions, use macros: :doc:`Use Formulas as Data <../131/131-Formulas-as-Data>`
 
-    *   A call to a macro inside a constraint may involve variables.
+        *   A call to a macro inside a constraint may involve variables.
 
-    *   With functions, assignment statements, if-then-else, while loops, and for loops can be used.
-
-
-
-
+        *   With functions, assignment statements, if-then-else, while loops, and for loops can be used.

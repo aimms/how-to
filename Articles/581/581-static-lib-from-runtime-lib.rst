@@ -20,6 +20,19 @@ using it in another application.  In so doing, this article combines:
 
 *   How the put statement can be used to create a ``project.xml`` file.
 
+Please use the following project to follow this article:
+
+    :download:`Example Download <model/example.zip>` 
+
+Once expanded, this example contains the following folders:
+
+#.  ``data``: a SQLite database and ``.dsn`` file.
+
+#.  ``GenReadLib`` an AIMMS application that queries the database for structure in the ``data`` folder.
+
+#.  ``libs`` a folder in which the generated libraries are placed.
+
+#.  ``LeverageReadLib`` an AIMMS application that uses a generated library as one of its libraries.
 
 The Story
 -------------
@@ -50,15 +63,11 @@ A sample database table may look like:
 .. figure:: images/database-table-structure.png
     :align: center
 
+|
 
-
-Example generated code
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The generated code for that table alone would be the following module:
+To read this sample database, the code below is needed:
 
 .. code-block:: aimms 
-    :linenos:
 
     Module modReadTableTableAB {
         Prefix: thisTableAB;
@@ -98,24 +107,7 @@ The generated code for that table alone would be the following module:
     }
 
 
-The download
-^^^^^^^^^^^^^^
-
-:download:`Example download with AIMMS 4.92 apps <model/example.zip>` 
-
-Once expanded, this example contains the following folders:
-
-#.  ``data``: a SQLite database and ``.dsn`` file.
-
-#.  ``GenReadLib`` an AIMMS application that queries the database for structure in the ``data`` folder.
-
-#.  ``libs`` a folder in which the generated libraries are placed.
-
-#.  ``LeverageReadLib`` an AIMMS application that uses a generated library as one of its libraries.
-
-
-
-Generating the runtime library
+Generating the Runtime Library
 -----------------------------------
 
 Generating the runtime library uses:
@@ -131,16 +123,13 @@ Generating the runtime library uses:
 With that information available, generating the runtime library can be coded using `model editing <https://documentation.aimms.com/functionreference/model-handling/model-edit-functions/index.html>`_ procedures. 
 This is illustrated in the procedures in the section ``Generate Runtime Lib`` of the app ``GenReadLib``.
 
-More information about runtime libraries can be found at:
+.. seealso::
 
-*    `Runtime library reference <https://documentation.aimms.com/language-reference/advanced-language-components/model-structure-and-modules/runtime-libraries-and-the-model-edit-functions.html>`_
+    * `Runtime Library documentation <https://documentation.aimms.com/language-reference/advanced-language-components/model-structure-and-modules/runtime-libraries-and-the-model-edit-functions.html>`_
+    * `Model Editing procedures <https://documentation.aimms.com/functionreference/model-handling/model-edit-functions/index.html>`_ 
+    * `Articles on Runtime Libraries <https://how-to.aimms.com/C_Developer/Sub_Language/sub_libraries/index.html>`_
 
-*    `Model editing procedures <https://documentation.aimms.com/functionreference/model-handling/model-edit-functions/index.html>`_ 
-
-*    `How-to articles on (runtime) libraries <https://how-to.aimms.com/C_Developer/Sub_Language/sub_libraries/index.html>`_
-
-
-Differences between runtime libraries and static libraries
+Differences between Runtime Libraries and Static Libraries
 -----------------------------------------------------------
 
 To take advantage of the differences between runtime libraries and static libraries, code for the following is generated as well:
@@ -153,7 +142,7 @@ To take advantage of the differences between runtime libraries and static librar
     As they are not normally called from outside the library, they are put in  a separate section within the ``Private Section`` of the library.
 
 
-Persisting the library
+Persisting the Library
 --------------------------
 
 To persist the library, the following functions are used:
@@ -166,10 +155,10 @@ To persist the library, the following functions are used:
     to generate the file ``project.xml``.
 
 
-Using the library
+Using the Library
 -------------------
 
-*   In the leveraging app, ``AIMMS MEnu`` > ``File`` > ``Library Manager`` you can add the ``Existing Library``, by pointing to folder containing the library on your disk.  
+*   In the leveraging app, :menuselecion:`File > Library Manager` you can add the :menuselecion:`Existing Library`, by pointing to folder containing the library on your disk.  
     In the example, it is located in the ``libs`` folder next to the folders for the generation and leveraging apps. 
 
 *   Direct use by name: In the app ``LeverageReadLib``, the procedure ``MainExecution`` can directly reference an identifier in the generated static lib: ``drl::pr_readAll();``
