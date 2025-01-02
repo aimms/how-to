@@ -1,4 +1,4 @@
-Create a static AIMMS Library from a runtime library
+Create a Static AIMMS Library from a Runtime Library
 =====================================================
 
 As you may know, runtime libraries offer enormous flexibility.

@@ -104,7 +104,8 @@ The above procedure can now be called with the following example code:
 
     dialogmessage("Value = " + p_TargetValue) ;
 
-Keep in mind that the above code does not do any error checking. This means that you could try to assign the value of a string parameter to a numerical parameter, which would result in a runtime error. Other possibilities are that the body of the runtime procedure contains a syntax error, in which case the me::compile statement will result in an error. 
+Keep in mind that the above code does not do any error checking. This means that you could try to assign the value of a string parameter to a numerical parameter, which would result in a runtime error.
+Other possibilities are that the body of the runtime procedure contains a syntax error, in which case the ``me::compile`` statement will result in an error. 
 
 .. seealso::
     
