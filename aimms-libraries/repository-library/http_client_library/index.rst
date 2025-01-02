@@ -2,11 +2,14 @@ HTTP Client Library
 ======================
 
 .. meta::
-   :description: Collaborative Data Management
+   :description: The AIMMS HTTP Client Library enables seamless HTTP requests and communication with web services or REST APIs directly within AIMMS models, supporting various response formats like JSON and XML.
+   :keywords: AIMMS HTTP Client Library, AIMMS HTTP requests, AIMMS REST API integration, AIMMS web services, AIMMS HTTP communication, AIMMS file download, AIMMS HTTP headers, AIMMS Data Exchange Library, AIMMS JSON processing, AIMMS XML handling.
 
-The AIMMS HTTP Client Library allows AIMMS applications to communicate with web services and APIs over the HTTP protocol. 
+The **HTTP Client Library** allows AIMMS applications to communicate with web services and APIs over the HTTP protocol. 
 It enables the sending and receiving of data between AIMMS models and external web services, enhancing the capability to integrate real-time data and perform web-based interactions. 
 This library is useful for incorporating external data sources, automating data exchanges, and expanding the functionality of AIMMS applications through web connectivity.
+
+Here, you can find documentation about it:
 
 .. toctree::
    :maxdepth: 1

@@ -1,3 +1,4 @@
+:orphan:
 Forecasting Library
 ======================
 
@@ -6,8 +7,3 @@ Forecasting Library
 
 Nothing yet!
 
-.. seealso::
-   .. hlist::
-      :columns: 2
-      
-      * Forecasting Example
