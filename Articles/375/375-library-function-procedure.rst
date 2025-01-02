@@ -292,8 +292,8 @@ The use of procedures in expressions is not needed, as status information can be
 A good practice is to avoid the use of procedures in expressions; this permits the reader of a body of a procedure or function to easily distinguish between procedure calls and function calls; procedure calls are not part of an expression and avoid side effects altogether.
 
 .. seealso::
-    * :doc:`<../191/191-handle-errors-and-warnings>`
-    * :doc:`<../334/334-data-optimization-libraries>`
+    * :doc:`../191/191-handle-errors-and-warnings`
+    * :doc:`../334/334-data-optimization-libraries`
 
 
 
