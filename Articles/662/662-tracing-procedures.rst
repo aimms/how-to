@@ -1,7 +1,7 @@
 Tracing Procedures
 ==================
 
-This article is a follow up of :doc:`tracing<497-writing-to-session-log>`.
+This article is a follow up of :doc:`tracing<662-writing-to-session-log>`.
 Two procedures are discussed that show how to trace entering and leaving procedures, such that the reader knows:
 
 #.  When the procedure was entered
