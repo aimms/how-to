@@ -11,7 +11,7 @@ Schedule Regular Jobs
 
 Some applications involve solving a mathematical program regularly, for instance every night or every ten minutes. 
 
-There are two mechanisms available to achieve this.
+There are two mechanisms available to achieve this:
 
 #.  `Tasks v2 on AIMMS Cloud <https://documentation.aimms.com/cloud/tasks.html#schedule-task-s>`_ 
     explains clearly how to achieve regular execution easily.
@@ -21,6 +21,9 @@ There are two mechanisms available to achieve this.
 In the remainder of this article, we'll discuss how an AIMMS job can reschedule itself, as depicted in the next picture.
 
 .. image:: images/DelegationLevel.png
+    :align: center
+
+|
 
 Effectively, this realizes that the job at hand is solved regularly. As you can see from this image:
 
@@ -132,10 +135,11 @@ To operate, the example that can be downloaded :download:`here <downloads/JobRep
 #.  Go to job tab in the AIMMS PRO portal and watch new jobs being created, queued, running, and finished.
 
 .. image:: images/PROJobs.png
+    :align: center
 
 .. note::
 
-    * When you check the session.log files, you may encounter a line like:
+    * When you check the ``session.log`` files, you may encounter a line like:
 
         .. code-block:: none
 
@@ -187,3 +191,9 @@ To operate, the example that can be downloaded :download:`here <downloads/JobRep
             Parameter p_default;
             Parameter p_upper;
         }
+
+.. seealso::
+    * :doc:`80-receive-messages`
+    * `Tasks v2 on AIMMS Cloud <https://documentation.aimms.com/cloud/tasks.html#schedule-task-s>`_ 
+    * `APPLY <https://documentation.aimms.com/language-reference/procedural-language-components/procedures-and-functions/calls-to-procedures-and-functions.html#the-apply-operator>`_
+

@@ -7,7 +7,7 @@
 
 .. BEGIN CONTENT
 
-Overview: Email Client Library
+Using Email Client Library
 ==============================
 
 .. meta::
@@ -15,12 +15,14 @@ Overview: Email Client Library
    :keywords: email, e-mail, template
 
 
-An introduction to the Email Client library with an example project.
+An introduction to the Email Client Library, please use the following project to follow this article:  
+
+    :download:`EmailLibraryDemo.zip <downloads/EmailLibraryDemo.zip>`
 
 Overview
 --------
 
-The Email Client library provides you with an API to create and send emails from within your AIMMS project. The library does not require any external programs to be installed and can be used from both AIMMS Developer and AIMMS PRO. It is also available on AIMMS Cloud.
+The `Email Client Library <https://documentation.aimms.com/emailclient/index.html>`_ provides you with an API to create and send emails from within your AIMMS project. The library does not require any external programs to be installed and can be used from both AIMMS Developer and AIMMS PRO. It is also available on AIMMS Cloud.
 
 You can use this feature, for example, to send emails containing the results of your optimization model to other users in your organization.
 
@@ -32,10 +34,13 @@ Supported features:
 
 .. _ref-add-email-lib:
 
-Adding the library
+Adding the Library
 --------------------
 
-Add *EmailClient* to your project from the library repository using the *Library Manager*. For more details, see AIMMS Knowledge: :doc:`../84/84-using-libraries`.
+Add ``EmailClient`` to your project from the library repository using the :menuselection:`Library Manager`.
+
+.. seealso::
+    * :doc:`../84/84-using-libraries`.
 
 |add-email-client-lib|
 
@@ -47,18 +52,19 @@ Add *EmailClient* to your project from the library repository using the *Library
 
 .. _ref-create-email:
 
-Creating and sending the email
+Creating and Sending the Email
 -------------------------------
 You will need to declare string parameters for the library to store the message ID and any error messages. 
 
-::
+.. code-block:: aimms
 
     StringParameter messageID;
     StringParameter ErrorMessage;
 
 In a procedure, use the statements below to connect to an SMTP server, create a new email and set the sender and recipient information.
 
-::
+.. code-block:: aimms
+    :linenos:
 
     !Set the SMTP server
     email::SetServer("smtp.company.com", 25);
@@ -81,7 +87,8 @@ Specify an SMTP server which you are allowed to access (i.e., your corporate mai
 
 You can add multiple recipients to the same email by repeating the ``email::AddRecipientTo`` statement, or use ``email::AddRecipientCC`` or ``email::AddRecipientBCC`` to CC or BCC additional recipients. 
 
-See details in AIMMS Documentation: `Email Client API <https://documentation.aimms.com/emailclient/api.html>`_.
+.. seealso::
+    * `Email Client API <https://documentation.aimms.com/emailclient/api.html>`_
 
 .. End create email
 
@@ -92,7 +99,7 @@ Using Placeholders in an Email Message Template
 
 You can replace predefined strings in your template with data from AIMMS identifiers. These replaceable strings are called *Placeholders*. You need to declare a set whose elements are the placeholders that you want to replace and declare a parameter indexed over this set. The values from this indexed parameter will replace the placeholder strings in the email body. 
 
-::
+.. code-block:: aimms
 
     Set Placeholders {
         Index: i;
@@ -103,7 +110,10 @@ You can replace predefined strings in your template with data from AIMMS identif
         IndexDomain: i;
     }
 
-The function ``email::SetMessageFromFile`` creates the body of the email from the templates you specify and replaces the placeholders with the values specified in `PlaceholderValues`::
+The function ``email::SetMessageFromFile`` creates the body of the email from the templates you specify and replaces the placeholders with the values specified in ``PlaceholderValues``:
+
+.. code-block:: aimms
+    :linenos:
 
     ! Create the body of the email message from text and HTML templates and placeholder values
     email::SetMessageFromFile(messageId, "EmailTemplate.txt", "EmailTemplate.html", PlaceholderValues);
@@ -116,44 +126,31 @@ The function ``email::SetMessageFromFile`` creates the body of the email from th
 
 .. _ref-add-attachment:
 
-Adding images and attachments
+Adding Images and Attachments
 -----------------------------
 
-Add any images contained in the HTML body as related attachments::
+Add any images contained in the HTML body as related attachments:
+
+.. code-block:: aimms
+    :linenos:
 
     ! Add images contained in HTML body as related attachments
     email::AddRelatedAttachment(messageID, "EmailTemplate_files/image001.jpg", "image001.jpg");
     email::AddRelatedAttachment(messageID, "EmailTemplate_files/image002.png", "image002.png");
 
-To specify any other file attachments::
+To specify any other file attachments:
+
+.. code-block:: aimms
+    :linenos:
 
     ! Add a file attachment to the email message
     email::AddFileAttachment(messageID,"EmailTemplate_files/document.pdf");
 
 
-Read more about creating templates for your message in AIMMS Knowledge: :doc:`../111/111-creating-email-templates`.
-
-For a full list of functions available, read AIMMS Documentation: `Email Client API <https://documentation.aimms.com/emailclient/api.html>`_.
-
-.. End images and attachments
-
-Example
--------
-
-Download an example AIMMS project containing an email procedure:
-
-:download:`EmailLibraryDemo.zip <downloads/EmailLibraryDemo.zip>`
-
-Related topics
----------------
-
-*  AIMMS Knowledge: :doc:`../111/111-creating-email-templates`
-*  AIMMS Documentation: `Email Client Library <https://documentation.aimms.com/emailclient/index.html>`_ 
+.. seealso::
+    * :doc:`../111/111-creating-email-templates`
+    * `Email Client Library <https://documentation.aimms.com/emailclient/index.html>`_ 
+    * `Email Client API <https://documentation.aimms.com/emailclient/api.html>`_
+    * :doc:`../84/84-using-libraries`
 
 .. END CONTENT
-
-
-
-.. author: Jessica Valasek Estenssoro
-.. checked by: Mohan Chiriki
-.. updated: October 24, 2018

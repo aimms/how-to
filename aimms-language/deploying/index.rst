@@ -15,9 +15,9 @@ This section covers topics of app development in the AIMMS IDE. Here are support
    /Articles/331/331-responding-applications
    /Articles/33/33-pro-deploy-app
    /Articles/32/32-pro-develop-app
-   /Articles/80/80-receive-messages
    /Articles/19/19-remove-veil
    /Articles/80/80-schedule-jobs
+   /Articles/80/80-receive-messages
    /Articles/40/40-data-server-load-results
    /Articles/305/305-number-of-solves
    /Articles/35/35-web-ui-progress-window

@@ -8,11 +8,10 @@ Create Email Templates
    :keywords: email, e-mail, template, html
 
 
-
 The Email Client library supports the use of template files in HTML and TXT formats. You can set up templates with placeholders to be replaced by values from identifiers in your AIMMS project. 
 
 
-Creating the template
+Creating the Template
 ----------------------
 You can create a simple text template in any text editor. TXT templates may be used alone if no special formatting is needed.
 
@@ -37,19 +36,10 @@ To create a formatted HTML template, optionally with images, you can use a word 
 
         <img src="cid:image001.jpg">
 
-You are now ready to send an email using your template. For instructions, read AIMMS Knowledge: :doc:`../104/104-using-email-client-library`.
+You are now ready to send an email using your template.
 
-
-Related topics:
----------------
-
-*  AIMMS Knowledge: :doc:`../104/104-using-email-client-library`
-*  AIMMS Documentation: `Email Client Library <https://documentation.aimms.com/emailclient/index.html>`_ 
+.. seealso::
+    * :doc:`../104/104-using-email-client-library`
+    * `Email Client Library <https://documentation.aimms.com/emailclient/index.html>`_ 
 
 .. END CONTENT
-
-
-
-.. author: Jessica Valasek Estenssoro
-.. checked by: Mohan Chiriki
-.. updated: October 24, 2018
