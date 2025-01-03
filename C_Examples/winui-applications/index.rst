@@ -61,7 +61,7 @@ Mainly focus in model development in older AIMMS's versions.
    /Articles/459/459-ChemicalEngineering-chemicalequilibrium
    /Articles/455/455-Energy-oilpipelinedesign
    /Articles/460/460-Energy-waterdistribution
-   /Articles/510/Energy_modelling
+   /Articles/510/510-energy-modelling
    /Articles/456/456-Engineering-2dstrippacking
    /Articles/461/461-Engineering-goddardrocket
    /Articles/462/462-Engineering-hangingchain
