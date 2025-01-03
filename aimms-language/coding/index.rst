@@ -25,14 +25,14 @@ This section covers topics of app development in the AIMMS IDE. Here are support
    /Articles/170/170-memory-in-use
    /Articles/569/569-dumpfile-contents
    /Articles/569/569-dumpfile-send-in
-   /Articles/497/497-writing-to-session-log
-   /Articles/497/497-tracing-procedures
+   /Articles/662/662-writing-to-session-log
+   /Articles/662/662-tracing-procedures
    /Articles/292/292-identifying-error
    /Articles/265/265-settings-for-errors-and-warnings
    /Articles/329/329-more-logging
    /Articles/191/191-handle-errors-and-warnings
    /Articles/313/313-get-log-files
-   /Articles/497/497-configuring-logging-aimms-pro-on-prem-sessions
+   /Articles/662/662-configuring-logging-aimms-pro-on-prem-sessions
    /Articles/112/112-Integer-properties
    /Articles/12/12-generate-random-numbers
    /Articles/187/187-convert-string-to-number

@@ -26,6 +26,8 @@ Single Machine
    .. image:: images/grb_license.png
       :align: center
 
+   |
+
 #. In the :menuselection:`Solver Configuration` dialog box in AIMMS, click on :menuselection:`Add`` and select the ``dll`` for the appropriate Gurobi version (``libgrb**.dll``)
 
    .. image:: images/solver_config2.png

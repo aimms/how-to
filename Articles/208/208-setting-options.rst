@@ -30,10 +30,16 @@ Access the :menuselection:`Project Options` dialog from the AIMMS Menu under :me
 Initially it looks like this:
 
 .. image:: images/ProjectOptions.PNG
+    :align: center
+
+|
 
 When you select non-default options and, for instance, the :menuselection:`Appearance > Default UI` option, a help dialog appears:
 
 .. image:: images/OptionHelp.PNG
+    :align: center
+
+|
 
 The :menuselection:`Project Options` dialog prevents you from entering invalid values.
 It is a valuable tool for options that you frequently change from the default.
