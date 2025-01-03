@@ -11,7 +11,7 @@ AIMMS Language
    :description: AIMMS language is a specialized modeling language that enables users to create precise and data-driven optimization models for real-world decision-making.
 
 
-AIMMS language is a purpose-built modeling language designed to facilitate the creation of 
+AIMMS Language is a purpose-built modeling language designed to facilitate the creation of 
 complex mathematical optimization models within the AIMMS environment. 
 With a syntax that is both powerful and user-friendly, AIMMS language enables users to 
 define parameters, variables, constraints, and objective functions, representing real-world 

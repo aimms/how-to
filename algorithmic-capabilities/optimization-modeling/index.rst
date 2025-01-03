@@ -2,8 +2,14 @@ Optimization Modeling
 ==============================
 
 .. meta::
-   :description: Help and support with building models and developing apps in AIMMS IDE.
+   :description: Optimization Modeling in AIMMS creates mathematical models to maximize or minimize objectives under constraints, driving efficient solutions.
+   :keywords: AIMMS Optimization Modeling, mathematical modeling AIMMS, AIMMS problem-solving, AIMMS logistics optimization, AIMMS financial models, AIMMS manufacturing solutions, AIMMS structured modeling, constraint-based optimization AIMMS, AIMMS maximization models, AIMMS minimization models.
 
+**Optimization Modeling** in AIMMS provides a structured framework for creating mathematical models to maximize or minimize 
+objectives under given constraints. It is a cornerstone of AIMMS applications, enabling efficient problem-solving in fields like logistics, 
+finance, and manufacturing.
+
+Here, you can find documentation about it:
 
 .. toctree::
    :maxdepth: 1

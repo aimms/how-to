@@ -21,7 +21,6 @@ You can extend regular functionality and share modules among several projects. F
    /Articles/84/84-using-libraries
    /Articles/334/334-data-optimization-libraries
    repository-library/index
-   system-library/index   
    runtime-library/index
 
 

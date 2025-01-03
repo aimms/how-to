@@ -1,8 +1,5 @@
-Reading slices of data via ExternalBinding mapping element
-==========================================================
-
-:download:`AIMMS 4.91 project download <model/DexExternalBinding.zip>` 
-
+Reading Slices of Data via ``ExternalBinding`` Mapping Element
+====================================================================
 
 Data is sometimes provided in several, similarly structured, ``.json``  files; for instance as a result of multiple DEX Client requests.
 Each of these ``.json`` files provides a slice of the data to be worked on.
@@ -11,7 +8,11 @@ In this how-to, two ways are presented for handling the slices:
 
 #.  Doing it yourself, via additional AIMMS parameters.
 
-#.  Using the ``ExternalBinding`` element
+#.  Using the ``ExternalBinding`` element.
+
+Please use the following project to follow this article:
+
+    :download:`Example Download (AIMMS 4.91) <model/DexExternalBinding.zip>` 
 
 Story
 -----
@@ -20,14 +21,13 @@ We have three ``.json``, each describing some properties of a stream.
 These properties are named ``prp1``, ``prp2``, and ``prp3`` in the ``.json`` file.
 Their data is to be read in, into the AIMMS identifiers ``p_prop1(i_stream)``,  ``p_prop2(i_stream)``, and ``sp_prop3(i_stream)`` respectively.
 
-Solution by adding additional parameters
+Solution by Adding Additional Parameters
 -----------------------------------------
 
 Doing it yourself, three additional parameters are added: ``p_prop1_scalar``, ``p_prop2_scalar``, and ``sp_prop3_scalar``
 Then we can use the mapping file:
 
 .. code-block:: xml
-    :linenos:
 
     <AimmsJSONMapping>
         <ObjectMapping>
@@ -68,13 +68,12 @@ and the procedure:
         StringParameter sp_elemName;
     }
 
-Solution via the ExternalBinding element
-----------------------------------------
+Solution via the ``ExternalBinding`` Element
+-----------------------------------------------
 
 By establishing an external binding, we can directly store the data of the slice read in:
 
 .. code-block:: xml
-    :linenos:
 
     <AimmsJSONMapping>
         <ExternalBinding binds-to="i_stream" binding="ep_anotherStream"/>
@@ -115,7 +114,5 @@ by using the procedure:
 
 As you can see, there is no need anymore for the additional parameters: ``p_prop1_scalar``, ``p_prop2_scalar``, and ``sp_prop3_scalar``.
 
-Reference:
------------
-
-#.  `External bindings <https://documentation.aimms.com/dataexchange/mapping.html#external-bindings-in-mappings>`_
+.. seealso::
+    * `External bindings <https://documentation.aimms.com/dataexchange/mapping.html#external-bindings-in-mappings>`_
