@@ -208,7 +208,8 @@ AIMMS also makes it easy to design a data page for interacting with the optimisa
 .. image:: figures/opf_solution_page_webui.png
     :align: center
 
- 
+|
+
 .. rubric:: References
 
 
