@@ -35,7 +35,7 @@ A graphical representation of the various timescales of different power systems 
 
 .. _psp-timeline:
 
-.. figure:: figures/system_planning_timeline.png 
+.. figure:: images/system_planning_timeline.png 
    :align:  center
    
    Figure 1 - Timelines for various Power System Planning Problems
