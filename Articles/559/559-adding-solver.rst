@@ -8,7 +8,7 @@ This article will show how to add a solver that is not on the list of your curre
 
 Step 1
 ~~~~~~~~~
-Go to "Settings" and then "Solver Configuration".
+Go to :menuselection:`Settings > Solver Configuration`.
 
 .. image:: images/solver-config.png
     :align: center
@@ -38,12 +38,14 @@ You will see a list of solvers ``dll``. Select the needed one of find on your co
 
 Step 3
 ~~~~~~~~~
-Once the ``dll`` is selected, press 'OK'.
+Once the ``dll`` is selected, press :menuselection:`OK`.
 
 .. image:: images/selected-solver.png
     :align: center
 
-To activate the new solver version, double click on the 'X', it will become bold, this means that for this project, that will be the solver to be used on the selected type of solve. 
+|
+
+To activate the new solver version, double click on the ``X``, it will become bold, this means that for this project, that will be the solver to be used on the selected type of solve. 
 
 .. image:: images/added-new.png
     :align: center

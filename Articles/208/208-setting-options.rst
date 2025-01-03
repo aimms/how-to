@@ -8,7 +8,7 @@ Adjust Engine and Solver Settings
 AIMMS offers many options to customize the behavior of the engine and its solvers. 
 This article describes various ways to set these options. 
 
-Saving options
+Saving Options
 ----------------------
 
 When a project is saved, option settings are saved to the file ``MainProject/Settings/Options.txt``.
@@ -22,23 +22,23 @@ Lines starting with an ``*`` are comment.
 
 You can change these settings in a text editor, or an AIMMS dialog as described next.
 
-Project Options dialog
+Project Options Dialog
 --------------------------
 
-Access the *Project Options* dialog from the AIMMS Menu - *Settings > Project Options*.
+Access the :menuselection:`Project Options` dialog from the AIMMS Menu under :menuselection:`Settings > Project Options`.
 
 Initially it looks like this:
 
 .. image:: images/ProjectOptions.PNG
 
-When you select non-default options and, for instance, the *Appearance > Default UI* option, a help dialog appears:
+When you select non-default options and, for instance, the :menuselection:`Appearance > Default UI` option, a help dialog appears:
 
 .. image:: images/OptionHelp.PNG
 
-The *Project Options* dialog prevents you from entering invalid values.
+The :menuselection:`Project Options` dialog prevents you from entering invalid values.
 It is a valuable tool for options that you frequently change from the default.
 
-OPTION statement
+``OPTION`` Statement
 --------------------
 
 The option statement is a traditional way of specifying the values of options. 
@@ -50,10 +50,11 @@ An example is:
     
 Note that after executing this statement, the option setting may unexpectedly be saved to the file ``MainProject/Settings/Options.txt`` when you save the project.
 
-See also :doc:`procedural-language-components/execution-statements/the-option-and-property-statements`.
+.. seealso::
+    * :doc:`procedural-language-components/execution-statements/the-option-and-property-statements`
 
 
-:any:`OptionSetValue` and :any:`OptionSetString` procedures
+:any:`OptionSetValue` and :any:`OptionSetString` Procedures
 -----------------------------------------------------------
 
 A slightly more modern way of setting option values is using the procedures :any:`OptionSetValue` and :any:`OptionSetString`.
@@ -68,7 +69,7 @@ However, as with the option statement, you may unexpectedly save these settings 
 
 The procedures operating on options are documented in :doc:`system-interaction/option-manipulation/index`.
 
-Temporarily change option value
+Temporarily Change Option Value
 -------------------------------
 
 The ``block where`` statement changes the value of an option temporarily, changes are reverted when the engine encounters the ``endblock`` statement.
@@ -82,7 +83,8 @@ Following our example, the syntax is as follows:
 
 As the setting is reverted at the ``endblock statement``, you do not have to worry that the setting is saved unexpectedly.
 
-See also :ref:`block`.
+.. seealso::
+    * :ref:`block`
 
 
 

@@ -13,12 +13,14 @@ In this article, we'll see how to overrule the solvers that
 are available for your current project.
 
 You can change the default solver for each type of mathematical program via the
-solver configuration screen (accessible from the *Settings*
+solver configuration screen (accessible from the :menuselection:`Settings`
 menu). 
 You can temporarily overrule this default
 by modifying the :any:`CurrentSolver` element
 parameter or with a ``where`` clause with the solve statement.
-Read more details about how to do so in the article :doc:`../178/178-change-default-solver`. 
+
+.. seealso::
+    * :doc:`../178/178-change-default-solver`
 
 Solver Configuration File
 -----------------------------
@@ -37,7 +39,7 @@ An example of what it may contain is the following:
     CPLEX 12.4        /  libcpx124.dll          / 
     CPLEX 12.5        /  libcpx125.dll          /  LP MIP QP MIQP QCP MIQCP
 
-Any line starting with a ! is considered a comment line. The different
+Any line starting with a ``!`` is considered a comment line. The different
 columns give the name of the solver, the DLL to use, and for which type
 of mathematical programs this solver is the default solver. 
 If you save the above into a file named ``solvers.slv`` in your project directory, the
@@ -47,7 +49,7 @@ solvers in the solver configuration screen.
 Exporting from AIMMS
 -------------------------
 
-Alternatively, open the *solver configuration* screen and press the
+Alternatively, open the :menuselection:`Settings > Solver Configuration` screen and press the
 ``Export`` button to create a ``solvers.slv`` file in your current project
 directory. 
 A notification appears when the solver

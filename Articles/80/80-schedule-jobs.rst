@@ -137,6 +137,8 @@ To operate, the example that can be downloaded :download:`here <downloads/JobRep
 .. image:: images/PROJobs.png
     :align: center
 
+|
+
 .. note::
 
     * When you check the ``session.log`` files, you may encounter a line like:
