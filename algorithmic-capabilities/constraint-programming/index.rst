@@ -19,7 +19,5 @@ Here, you can find documentation about it:
    /Articles/138/138-ROGO
    /Articles/139/139-Multiple-Solutions
 
-
-    
-    
-    
+.. spelling:word-list::    
+   combinatorial

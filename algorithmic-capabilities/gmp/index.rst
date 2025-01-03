@@ -24,4 +24,6 @@ Here, you can find documentation about it:
    /Articles/193/193-check-if-variables-satisfy-constraints
    /Articles/261/261-solve-with-asynchronous-solver-sessions
     
-    
+
+.. spelling:word-list::    
+   scalable

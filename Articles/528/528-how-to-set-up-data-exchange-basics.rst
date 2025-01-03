@@ -64,17 +64,21 @@ In this example we needed to add the ``dex::Dataset``, ``dex::TableName`` and ``
 We were only able to do so by moving the identifiers (holding the same index) that are relevant for our JSON data file into a new declaration and assign the correct ``dex`` 
 annotations to this declaration. For the parameter identifiers we've added column-names. 
 
-.. image:: images/data-exchange-1.png
-   :scale: 70
-   :align: center
+.. figure:: images/data-exchange-1.png
+	:scale: 70
+	:align: center
 
 	The annotations on declaration-level
 
-.. image:: images/data-exchange-2.png
-   :scale: 70
-   :align: center
+|
+
+.. figure:: images/data-exchange-2.png
+	:scale: 70
+	:align: center
 
 	The annotations on identifier-level
+
+|
 
 After auto-generating the mappings by running the :any:`dex::GenerateDatasetMappings` procedure, we can find the mapping file for JSON sparse mapping. Without edits, it looks like this:
 
