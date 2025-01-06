@@ -9,7 +9,7 @@ Retrieve Solver Log Files in AIMMS Developer
 Solvers can share information about the solution process up to a very detailed level.
 To avoid overhead in generating information that is not inspected anyway, the AIMMS IDE defaults to not sharing any information.
 
-Get started with log files
+Get Started with Log Files
 ---------------------------
 
 The first option is to set the option ``solver_listing_messages`` to ``all``. 
@@ -26,7 +26,7 @@ To generate a log file, we used the :any:`/Articles/388/388-flow-shop` example w
       Does CBC requires the CBC specific option "status file"?
       How about other solver, is there a special additional setting needed as well?
     
-Additional information and example
+Additional Information and Example
 ----------------------------------
 
 For a MIP problem, a typical first setting to add is the option ``MIP display`` to ``Display each nth node``.
@@ -49,13 +49,13 @@ Last five lines:
     :lines: 90-94
     
 
-Overview of options to try out first for logging
+Overview of Options to Try out First for Logging
 ------------------------------------------------
 
 This section presents, based on problem type and solver, a list of first options to be set for more information. 
 This is not a list of options to improve performance, but a first step to obtain more information about the solution process so analysis of the solution process can be started.
     
-LP Problems solved using Barrier
+LP Problems Solved Using Barrier
 ++++++++++++++++++++++++++++++++
 
 +------------+------------------------------+-----------------------+
@@ -68,7 +68,7 @@ LP Problems solved using Barrier
 | CBC        | Status File                  | File                  |
 +------------+------------------------------+-----------------------+
 
-LP Problems solved using SIMPLEX
+LP Problems Solved Using SIMPLEX
 ++++++++++++++++++++++++++++++++
 
 +------------+------------------------------+-----------------------+
@@ -118,7 +118,7 @@ NLP Problems
 +------------+--------------------------------+-----------------------+
 
 
-Further reading
+Further Reading
 ---------------
 
 The interpretation of log files is discussed in:

@@ -1,5 +1,4 @@
-:orphan:
-Authorization Operations in PRO Storage
+Control Panel
 =========================================
 
 .. meta::
@@ -19,7 +18,7 @@ The app sources are available for download in the sections below:
 
 .. _323-control-panel:
 
-Control Panel
+PRO Storage
 -----------------
 
 .. topic:: Download
