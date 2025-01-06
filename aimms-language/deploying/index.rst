@@ -23,7 +23,7 @@ This section covers topics of app development in the AIMMS IDE. Here are support
    /Articles/35/35-web-ui-progress-window
    /Articles/155/155-Catering-unresponsive-server-unstable-connection
    /Articles/36/36-intermediate-solution
-   /Articles/571/571-publish-run-delete
+   /Articles/664/664-publish-run-delete
    /Articles/535/535-waiting-for-sub-jobs-to-complete
    /Articles/34/34-interrupt-server-session
    /Articles/310/310-investigate-behavior-pro-job

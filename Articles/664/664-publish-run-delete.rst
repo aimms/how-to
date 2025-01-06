@@ -1,9 +1,9 @@
-Publishing, Running and Deleting apps on the Cloud
+Publishing, Running and Deleting Apps on the Cloud
 ===================================================
 
 This article provides an example of Python code that can be used to publish a project, run a specific task on it and delete the published project.
 
-Use case?
+Use Case?
 --------------
 "When using a CI/CD pipeline" you may want to test the app as follows:
 

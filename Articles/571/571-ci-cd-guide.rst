@@ -18,7 +18,7 @@ Each pipeline can be setup in a way that better suits your companies needs, such
    * https://en.wikipedia.org/wiki/Continuous_delivery 
 
 
-Before you start
+Before you Start
 ----------------------------
 
 To create your CI/CD process, it is important that the project source code is kept in a repository that can be accessed by your pipeline.
@@ -100,13 +100,13 @@ Your pipeline can verify the log folder within the project to seek information f
     You can compare the execution steps that AIMMS takes in each case with this `how to article on initialization and termination <https://how-to.aimms.com/Articles/351/351-app-initialization-termination-with-libraries.html>`_ .
 
 
-CI - Acceptance testing
+CI - Acceptance Testing
 ----------------------------
 
 Acceptance testing can go beyond running unit tests and includes UI manipulation to test your WebUI application. This requires additional third-party software to which AIMMS does not provide any direct integration or support towards. There are many options available and a simple search for “Web application testing framework” can provide you with options.
 
 
-CI - Scenario testing 
+CI - Scenario Testing 
 ----------------------------
 
 The objective of scenario testing is to load the necessary input data (either a prepared case file or through an integration process), run this scenario, retrieve the results, and validate them. Given that these tests require more time, it is recommended to include them only in necessary steps of your CI/CD pipeline.
@@ -122,7 +122,7 @@ It may be wise to create broader criterion for success/failure in scenario testi
 Using a scenario test can also validate that there are no new bugs causing infeasibility and that the run time of the model has not grown excessively.
 
 
-CI - Integration testing 
+CI - Integration Testing 
 -------------------------------
 
 Integration testing involves validating that your application within the AIMMS Cloud environment is correctly integrated to other systems/solutions.
@@ -136,7 +136,7 @@ Some examples are
 * Validating that the AIMMS Cloud environment is able to publish and run a model:  Am I able to manage the AIMMS applications externally?
 
 
-CI - Testing within the cloud environment
+CI - Testing within the Cloud Environment
 ------------------------------------------------
 
 You may choose to conduct the above tests within the cloud environment. To do so, you will be required to publish the application on the cloud and run specific procedures.
@@ -158,7 +158,7 @@ Depending on how your pipeline is configured, releasing to production may requir
 
 Release and feature notes, as well as version number control (which can not repeat itself within the AIMMS Cloud environment) are also best practices for this.
 
-CD - Deployment on the cloud
+CD - Deployment on the Cloud
 ------------------------------
 
 Publishing and deployment of the application on the cloud can be achieved via the AIMMS PRO Rest API. Please follow the information on the `app management documentation <https://documentation.aimms.com/cloud/rest-api.html#managing-apps>`_ .
