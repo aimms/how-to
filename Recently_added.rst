@@ -11,7 +11,6 @@ Recently Added
 * :doc:`/Articles/591/591-hiding-widget-header`
 * :doc:`/Articles/336/336-using-annotations`
 * :doc:`/Articles/571/571-ci-cd-guide`
-* :doc:`/Articles/571/571-publish-run-delete`
 * :doc:`/Articles/572/572-progress-webui`
 * :doc:`/Articles/567/567-python-client`
 * :doc:`/Articles/567/567-aimms-service`
