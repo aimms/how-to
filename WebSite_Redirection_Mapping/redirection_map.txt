@@ -20,7 +20,6 @@ C_Language/121-set-index-element-parameter.rst	Articles/121/121-set-index-elemen
 C_Connectivity/122-AXLL-Library.rst	Articles/122/122-AXLL-Library.rst
 C_UI/CSS/123-WebUI-FORMS.rst	Articles/123/123-WebUI-FORMS.rst
 C_UI/123-WebUI-FORMS.rst	Articles/123/123-WebUI-FORMS.rst
-C_UI/124-tableau-integration.rst	Articles/124/124-tableau-integration.rst
 C_Language/125-execution-efficiency.rst	Articles/125/125-execution-efficiency.rst
 C_Solvers/126-TSP-Lazy-Constraints.rst	Articles/126/126-TSP-Lazy-Constraints.rst
 C_Solvers/127-Progress-Window.rst	Articles/127/127-Progress-Window.rst

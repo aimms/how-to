@@ -90,8 +90,4 @@ Depending on the nature of your PRO applications you need to take appropriate me
 
 There is obviously a trade-off between the level of resilience and time required to recover and costs. Each business will have to make its own trade-offs here.
 
-.. seealso::
-
-   * :doc:`../374/374-pro-backup-and-continuity`
-
 
