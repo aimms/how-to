@@ -2,7 +2,7 @@
    Please note that the documentation you are currently viewing is for an older version of our technology. 
    While it is still functional, we recommend upgrading to our latest and more efficient option to take advantage of all the improvements we've made.
 
-Overview: HTTP Client Library
+Using HTTP Client Library
 ===============================
 
 .. meta::
@@ -11,7 +11,7 @@ Overview: HTTP Client Library
 
 In this article you'll find an overview of the `HTTP Client Library <https://documentation.aimms.com/httpclient/index.html>`_ itself, plus a guide to existing How-To tutorials for using the HTTP Client Library. These articles cover some possible use cases for HTTP requests to give you guidance and inspiration for your own applications.
 
-Basic overview
+Basic Overview
 ------------------------------------------------------------------------------------------
 AIMMS provides multiple tools to connect your models with other applications. 
 
@@ -19,7 +19,7 @@ The HTTP Client Library provides built-in functionality to submit HTTP requests 
 
 HTTP requests are used to communicate directly with servers to call services or download online documents.
 
-Downloading a file from the web 
+Downloading a File from the Web 
 ------------------------------------------------------------------------------------------
 
 The most basic use of the HTTP Client Library is to download a file from the web using AIMMS.
@@ -68,7 +68,7 @@ IBM provides a variety of APIs, including AI and data science services.
 * **Speech To Text IBM API** : With this API, you'll be able to transform any audio file into a script text file. The process is described in :doc:`../300/300-ibm-api-speech-to-text`
 * **Image recognition API**  : Given an image file, this API is able to send back the result of a machine learning recognition algorithm. You can find a tutorial in :doc:`../301/301-Image-Recognition`
 
-Related processes
+Related Processes
 ------------------------------------------------------------------------------------------
 
 Using APIs sometimes requires the use of other supporting files and tools. We cover how to deal with some of the most common ones: XML, XSD, and AXM (a related, AIMMS-specific file); JSON files; and CURL.
@@ -92,7 +92,7 @@ The process to retrieve data from an XML file is explained in :doc:`../293/293-e
 
 You can also find a more complex mapping example in :doc:`../296/296-obtaining-geographic-data-through-the-google-api`.
 
-JSON files
+JSON Files
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Another popular format file for data transfer is JSON. 
@@ -100,22 +100,23 @@ You can use the `Data Exchange Library <https://documentation.aimms.com/dataexch
 
 IBM APIs use JSON files, so you can also find examples in :doc:`../300/300-ibm-api-speech-to-text` and :doc:`../301/301-Image-Recognition`.
 
-CURL requests
+CURL Requests
 ^^^^^^^^^^^^^^^^^^^^^^
 
 `CURL <https://en.wikipedia.org/wiki/CURL>`_ is a command-line tool which allows you to send HTTP requests easily. However, it requires a specific syntax that can't be used in AIMMS.
 In some documentation, examples of requests are given in CURL. You can find out how to use these examples in AIMMS in :doc:`../301/301-Image-Recognition`.
 
-Related topics
-------------------------------------------------------------------------------------------
-
-* **AIMMS** `HTTP library documentation <https://documentation.aimms.com/httpclient/index.html>`_
-* **AIMMS** `Data Exchange library documentation <https://documentation.aimms.com/dataexchange/index.html>`_
-* **AIMMS How-To**: :doc:`../294/294-Online-XML-HTTP-library`
-* **AIMMS How-To**: :doc:`../293/293-extracting-data-from-XML`
-* **AIMMS How-To**: :doc:`../298/298-use-flickr-api`
-* **AIMMS How-To**: :doc:`../296/296-obtaining-geographic-data-through-the-google-api`
-* **AIMMS How-To**: :doc:`../302/302-get-google-maps-coordinates`
-* **AIMMS How-To**: :doc:`../296/296-obtaining-geographic-data-through-the-google-api`
-* **AIMMS How-To**: :doc:`../300/300-ibm-api-speech-to-text`
+.. seealso::
+   .. hlist::
+      :columns: 2
+      
+      * `HTTP library documentation <https://documentation.aimms.com/httpclient/index.html>`_
+      * `Data Exchange library documentation <https://documentation.aimms.com/dataexchange/index.html>`_
+      * :doc:`../294/294-Online-XML-HTTP-library`
+      * :doc:`../293/293-extracting-data-from-XML`
+      * :doc:`../298/298-use-flickr-api`
+      * :doc:`../296/296-obtaining-geographic-data-through-the-google-api`
+      * :doc:`../302/302-get-google-maps-coordinates`
+      * :doc:`../296/296-obtaining-geographic-data-through-the-google-api`
+      * :doc:`../300/300-ibm-api-speech-to-text`
 

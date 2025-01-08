@@ -13,7 +13,7 @@ Extract Data from an XML File
 In this article, we will learn how to extract data from an XML file using the AIMMS XML schema mapping tool.
 
 
-File formats related to XML
+File Formats Related to XML
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * **XML** (EXtensible Markup Language) is a format optimized to transport data with a given hierarchical structure. It can be seen as a tree containing elements. Those elements can contain child elements, data, and parameters. Each parameter contains one piece of information about the element.
@@ -72,12 +72,12 @@ If you followed the procedure to :doc:`Extract an XML File from a Server <../294
 
 The procedure is as follows:  
 
-#. `Generating XSD file`_
-#. `Creating AIMMS objects`_
-#. `Generating the AXM file`_
-#. `Reading XML data`_
+#. `Generating XSD File`_
+#. `Creating AIMMS Objects`_
+#. `Generating the AXM File`_
+#. `Reading XML Data`_
 
-Generating XSD file
+Generating XSD File
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To properly use the XML schema mapping tool in AIMMS, you'll need an XSD file corresponding to your XML.
@@ -87,7 +87,7 @@ Here, we will use a generator from `FreeFormatter.com <https://www.freeformatter
 
 Once you've generated the XSD, save it in the root directory of your project.
 
-Creating AIMMS objects
+Creating AIMMS Objects
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Create the AIMMS objects to be linked with the XML contents. 
@@ -110,27 +110,31 @@ In this case, we will create the following:
     }
 
 
-Generating the AXM file
+Generating the AXM File
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-AIMMS is equipped with a tool called *XML schema mapping*. 
+AIMMS is equipped with a tool called :menuselection:`XML schema mapping...`. 
 
 Using this tool and an XSD file, you'll be able to generate your own mapping for your XML file and link your data with objects you create in AIMMS.
 
-#. Access the tool from the menu *Tools > XML schema mappings*. 
+#. Access the tool from the menu :menuselection:`Tools > XML schema mappings...`. 
 #. Select your XSD file. 
-#. If a dialog warns there is no AXM file, click *OK*.
+#. If a dialog warns there is no AXM file, click :menuselection:`OK`.
 
 .. image:: images/Calque.png
     :align: center
-    
+
+|
+
 Based on your XSD file, the XML schema mapping tool generates an AXM file of the same name in the root directory of your project  (``XYZ.xsd`` will generate ``XYZ.axm``).
 
 This window should now be open:
 
 .. figure:: images/schemaMapping_blank.png
     :align:  center
-    
+
+|
+
 The elements tree of your XML file is displayed on the left. 
 
 Data can be stored in an element, in child elements, or in the element's parameters.
@@ -140,6 +144,8 @@ Click on an element or a parameter folder in the elements tree to view a list of
 
 .. image:: images/AXMgeneratorBindsTo.png
     :align: center
+
+|
 
 * ``binds-to``: This attribute links an element to an index. The data of the element will belong to the chosen index domain. It also links the parent node from the bound element and any child attributes to the index, so their data can be used as parameters of the index based on their ``maps-to`` attribute.
 
@@ -153,7 +159,7 @@ First we need to set the element to bind to the index ``I_M`` of the ``S_Meal`` 
 
 Click on the attribute you want to change and enter the value you want to put in the text field. (You can use the wizard tool for auto-completion.)
 
-Click *Apply*. Because ``SP_Name`` is in the same branch as ``SP_Price``, ``SP_Description``, and ``P_Calories``, we have now access to their data to fill ``S_Meal`` parameters.
+Click :menuselection:`Apply`. Because ``SP_Name`` is in the same branch as ``SP_Price``, ``SP_Description``, and ``P_Calories``, we have now access to their data to fill ``S_Meal`` parameters.
 
 Repeat this process with the other elements and map them to their respective parameters using the ``maps-to`` attribute.
 
@@ -161,12 +167,14 @@ Our example has the following mapping:
 
 .. image:: images/Mapping_final.png
     :align: center
- 
+
+|
+
 .. note:: 
 
     If some objects from your XML aren't used (parameters or elements), set their ``read-filter`` to ``0`` to avoid error messages.
 
-Reading XML data
+Reading XML Data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Now we can read the data into AIMMS.
@@ -184,25 +192,22 @@ Congratulations, you should now have all your XML data accessible in AIMMS!
 
 .. image:: images/theOtherEndOfTheArticleAsWeKnowIt.png
     :align: center
-    
-Example project
+
+|
+
+Example Project
 ------------------
 
 You can download the example AIMMS project below: 
 
-* :download:`HttpFood.zip <download/HttpFood.zip>` 
+    :download:`HttpFood.zip <download/HttpFood.zip>` 
+   
+.. seealso::
 
-    
-Related topics
-------------------
-
-* **AIMMS How-To**: :doc:`../294/294-Online-XML-HTTP-library`
-
-* **AIMMS Documentation**: `Read and write XML <https://documentation.aimms.com/language-reference/data-communication-components/reading-and-writing-xml-data/index.html>`_
-
-* **W3Schools**: `What is XML <https://www.w3schools.com/xml/xml_whatis.asp>`_
-
-* **W3Schools**: `What is XSD <https://www.w3schools.com/xml/schema_intro.asp>`_
+    * :doc:`../294/294-Online-XML-HTTP-library`
+    * `Read and write XML <https://documentation.aimms.com/language-reference/data-communication-components/reading-and-writing-xml-data/index.html>`_
+    * `What is XML <https://www.w3schools.com/xml/xml_whatis.asp>`_
+    * `What is XSD <https://www.w3schools.com/xml/schema_intro.asp>`_
 
 
 
