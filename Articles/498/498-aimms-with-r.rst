@@ -10,7 +10,7 @@ Integrate AIMMS with R
    :description: Integrating (data science) models built in R with your AIMMS applications
    :keywords: r, integration, data science, machine learning, connectivity, tidyverse, rstats, sankey
 
-.. |sankeyHTML| replace:: :download:`View interactive version here.<sankey.html>`
+.. |sankeyHTML| replace:: :download:`View interactive version here. <images/sankey.html>`
 
 .. |blendingProblem| replace:: :doc:`Blending Problem <../454/454-ChemicalEngineering-blendingproblem>`
 
@@ -67,7 +67,7 @@ In addition to the prerequisites outlined in :ref:`scripting-tools`, you will ne
 #. The example project is developed using AIMMS version 4.76.8, so we recommend you use at least that version. `Download AIMMS Developer <https://www.aimms.com/support/downloads/#aimms-dev-download>`_. 
 #. AIMMS `HTTP Client Library <https://documentation.aimms.com/httpclient/index.html>`_: version 1.1.0.6 or above. 
 #. The R project in the example is developed in `R 4.0.3 <https://cran.r-project.org/bin/windows/base/>`_.
-#. ``renv`` package to install the dependencies captured in the ``renv.lock`` file. `Read more here<https://rstudio.github.io/renv/index.html>`_.
+#. ``renv`` package to install the dependencies captured in the ``renv.lock`` file. `Read more here <https://rstudio.github.io/renv/index.html>`_.
     
     .. code-block:: r
 
