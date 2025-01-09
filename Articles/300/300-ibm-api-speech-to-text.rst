@@ -19,10 +19,13 @@ IBM is known for their hardware and software, but they also provide a lot of API
 Their `IBM Cloud Docs: APIs <https://cloud.ibm.com/apidocs>`_ provides all the specifications for each API. 
 
 .. image:: images/apiinfo.png
+    :align: center
+
+|
 
 You may want to start with reading the `Creating Apps tutorial <https://cloud.ibm.com/docs/apps/tutorials?topic=creating-apps-tutorial-starterkit>`_.
 
-The HTTP request
+The HTTP Request
 ^^^^^^^^^^^^^^^^
 
 To use these APIs, you will need to formulate HTTP requests. The documentation provides you some request examples for each API.
@@ -34,6 +37,9 @@ Authentication
 To access these APIs, it's required to authenticate in the request.
 
 .. image:: images/authentication.png
+    :align: center
+
+|
 
 The system used is Identity and Access Management (`IAM <https://cloud.ibm.com/docs/services/watson?topic=watson-iam>`_) authentication, a token-based system. The authentication is then done through the ``Authentication`` request header using a token or an API key. 
 
@@ -43,7 +49,6 @@ Answers
 ^^^^^^^
 
 The result sent back from a IBM API is usually a JSON file.
-.. You'll need to convert this JSON file into an XML file to extract the data into AIMMS.
 Such a JSON file can be read in using the `Data Exchange Library <https://documentation.aimms.com/dataexchange/index.html>`_.
 
 Example
@@ -60,18 +65,18 @@ Prerequisites
 
 
 
-Example project
+Example Project
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can find the completed project example below. Note that you'll need to provide your own API key.
 
-* :download:`SpeechToText.zip <download/SpeechToText.zip>`
+    :download:`SpeechToText.zip <download/SpeechToText.zip>`
 
 You'll also need to download the audio file used in the example and unzip it at the root of your project folder.
 
-* :download:`Space_Shuttle_Enterprise.zip <download/Space Shuttle Enterprise.zip>` 
+    :download:`Space_Shuttle_Enterprise.zip <download/Space Shuttle Enterprise.zip>` 
 
-Speech-to-Text conversion code
+Speech-to-Text Conversion Code
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The final code is shown below:
@@ -107,7 +112,6 @@ The final code is shown below:
 We'll need to set the identifiers:
 
 .. code-block:: aimms
-    :linenos:
 
     Parameter P_responseCode;
     StringParameter SP_Coption {
@@ -128,7 +132,7 @@ We'll need to set the identifiers:
 
 In this article, we will analyze only selections of the code. You can read more generally about HTTP requests in AIMMS in :doc:`../294/294-Online-XML-HTTP-library`.
 
-Authentication header
+Authentication Header
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Following `Basic Access Authentication <https://en.wikipedia.org/wiki/Basic_access_authentication>`_, we need to set our ``Authentication`` header to ``basic username:password``. Here, the username is "apikey" and the password the key value. Both of these strings must be base64-encoded.
@@ -236,7 +240,6 @@ Here the transcript is mapped to the AIMMS string parameter ``sp_transcript`` on
 To read in this data, we use the following procedure:
 
 .. code-block:: aimms
-    :linenos:
 
     Procedure pr_ReadJSON {
         Body: {
@@ -254,15 +257,11 @@ To read in this data, we use the following procedure:
 Finally, we can select the one non-empty element from ``sp_transcript`` by a summation (adding strings is concatenation).
 
 .. code-block:: aimms
-    :linenos:
 
     StringParameter sp_FinalTranscript {
         Definition: sum( (i0,i1), sp_transcript(i0, i1) );
     }
 
-
-Related Topics
------------------------------------------------
-
-* **AIMMS How-To**: :doc:`../294/294-Online-XML-HTTP-library`
-* **AIMMS How-To**: :doc:`../301/301-Image-Recognition`
+.. seealso::
+    * :doc:`../294/294-Online-XML-HTTP-library`
+    * :doc:`../301/301-Image-Recognition`
