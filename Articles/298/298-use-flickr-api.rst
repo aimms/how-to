@@ -14,7 +14,7 @@ In this article, we'll learn how to use the Flickr REST API.
 
 The process to deal with a REST API in AIMMS is very similar, however you can find details of the differences in `AIMMS Documentation: HTTP Client Library <https://documentation.aimms.com/httpclient/index.html>`_. Here, we use a concrete example of this process to supplement the documentation.
 
-Use case
+Use Case
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This use case is inspired by an `idratherbewriting <https://idratherbewriting.com/learnapidoc/docapis_flickr_example.html>`_ tutorial.
