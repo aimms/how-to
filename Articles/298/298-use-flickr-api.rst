@@ -226,7 +226,7 @@ Finally, by using the ``READXML`` method, we can get the gallery ID we're search
     
 
 Getting Photo Information
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 We now want to create another procedure to get all the ``id`` information we need about the gallery photos.
 For that, we'll use the ``flickr.galleries.getPhotos`` method from the Flickr API. The code for this procedure is as follows:
@@ -366,7 +366,7 @@ Then execute:
 You should now have a set ``S_Photos`` containing photo titles of the gallery and having for parameters the ``id``, ``farm`` id, ``server`` id and ``secret`` of a photo.
 
 Getting the Photos
-^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 We know from the `Flickr API Documentation: URLs <https://www.flickr.com/services/api/misc.urls.html>`_ the format a photo URL must have. This URL is different from the one displayed on your browser when you select the photo. This isn't the URL of the page where we can find the photo but the URL of the photo itself.
 
