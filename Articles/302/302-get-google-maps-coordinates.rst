@@ -3,7 +3,7 @@
    While it is still functional, we recommend upgrading to our latest and more efficient option to take advantage of all the improvements we've made.
    See `DEX <https://documentation.aimms.com/dataexchange/index.html>`_.
 
-Retrieve Geographic coordinates with Google Maps API
+Retrieve Geographic Coordinates with Google Maps API
 =====================================================
 
 .. meta::
@@ -17,16 +17,18 @@ Prerequisites
 
 Before we begin, there are a couple things you'll need to have in place.
 
-* Install the HTTP library, please read `AIMMS Documentation: Adding the HTTP Client Library <https://documentation.aimms.com/httpclient/library.html#adding-the-http-client-library-to-your-model>`_.
+* Install the HTTP library, please read `Adding the HTTP Client Library <https://documentation.aimms.com/httpclient/library.html#adding-the-http-client-library-to-your-model>`_.
 
 * Get a Google API key. Get one from `Google Maps Platform: Get an API Key <https://developers.google.com/maps/documentation/geolocation/get-api-key>`_.
 
-Example project
+Example Project
 ------------------
 
-You can download the example AIMMS project here: :download:`Google API Example.zip <downloads/GoogleAPIExample.zip>` 
+You can download the example AIMMS project here: 
+   
+   :download:`Google API Example.zip <downloads/GoogleAPIExample.zip>` 
 
-Informations about the request
+Informations About the Request
 -----------------------------------------------
 Scrolling the `Google Maps API documentation <https://developers.google.com/maps/documentation/geocoding/intro>`_, we can learn precious information about how to formulate our request.
 The Authentication is made using an API key and the URL should take the following shape:
@@ -35,15 +37,20 @@ The Authentication is made using an API key and the URL should take the followin
 
     <p><style="background:gray"><font color="blue">https://maps.googleapis.com/maps/api/geocode/</font><font color="red">outputFormat</font><font color="blue">?</font><font color="red">parameters</font></style></p>
 
+|
+
 To provide output in a format compatible with AIMMS, we will specify XML rather than JSON in our request.
 We can also find the list of required parameters for the request:
 
 .. image:: images/reqparam.png
+   :align: center
+
+|
 
 Here, we will use the key and the address parameters.
 The `Google Maps API documentation <https://developers.google.com/maps/documentation/geocoding/intro>`_, lists several optional parameters to further specify your request.
 
-Creating the request
+Creating the Request
 -----------------------------------------------
 
 To create the request, the code is as follows:
@@ -69,9 +76,8 @@ To create the request, the code is as follows:
 You'll also need the following AIMMS identifiers:
 
 .. code-block:: aimms
-   :linenos:
-	
-	Parameter P_Lat;
+
+   Parameter P_Lat;
    Parameter P_Long;
    StringParameter SP_responseFile;
    Set S_reqpar {
@@ -88,17 +94,12 @@ You'll also need the following AIMMS identifiers:
    StringParameter SP_location;
    StringParameter SP_formattedparameters;
 
-
-
 .. note:: 
 
 	* Learn more about the basics of HTTP request in AIMMS in :doc:`../294/294-Online-XML-HTTP-library`.
 	* Learn more about HTTP requests for Google APIs in :doc:`../296/296-obtaining-geographic-data-through-the-google-api`.
 
-
-
-
-Retrieving and mapping XML data
+Retrieving and Mapping XML Data
 --------------------------------
 We want to know the location of the AIMMS office in Haarlem. After executing the request procedure, we get in the ``SP_responseFile`` direction the XML answer from the API.
 
@@ -110,9 +111,9 @@ For a tutorial about XML mapping, read :doc:`../293/293-extracting-data-from-XML
 
 We want to do the following mapping:
 
-* ``Geometry/location/lat`` **Maps-to** ``P_lat``
-* ``Geometry/location/lng`` **Maps-to** ``P_long``
-* put **every Read-filter attribute to 0** except for the objects used ``(lat,lng,geometry,location,result)``
+* ``Geometry/location/lat`` **maps-to** ``P_lat``
+* ``Geometry/location/lng`` **maps-to** ``P_long``
+* put **every read-filter attribute to 0** except for the objects used ``(lat,lng,geometry,location,result)``
 
 Then, by using the ``READXML`` method, we can extract the coordinates we want into AIMMS.
 
@@ -128,6 +129,9 @@ After completing these steps, you may expect that modifying the ``SP_location`` 
 But, if you change the value of ``SP_location`` to *Amsterdam*, you'll have the following error message after executing the complete procedure:
 
 .. image:: images/error.png
+   :align: center
+
+|
 
 The reason is that the Google API sends back an XML file that has a slightly different shape depending on the location you're asking for; some elements are added or deleted. This means that some elements of the XML file from the request are not in the XSD file, which causes an error.
 
@@ -137,6 +141,9 @@ Therefore we can only expand our current XSD file with the missing information a
 The error refers to a 'bound' element missing from our current XSD file. Let's check where it is.
 
 .. image:: images/comparison.png
+   :align: center
+
+|
 
 The ``bound`` is set after the ``viewport`` node in the Amsterdam XSD file, so let's copy/paste the block in the original XSD file.
 Then, again using the XML schema mapping tool to set the ``bound`` read-filter attribute to ``0`` and executing the procedure, we can get the proper coordinates.
@@ -145,9 +152,8 @@ We're providing an XSD file to get you started: :download:`googlecoord.zip <down
 
 However, this file may be incomplete, so be prepared to make your own additions to the XSD file while using this API.
 
-
-Related Topics
------------------------------------------------
-* **AIMMS How-To**: :doc:`../294/294-Online-XML-HTTP-library`
-* **AIMMS How-To**: :doc:`../293/293-extracting-data-from-XML`
-* **AIMMS How-To**: :doc:`../296/296-obtaining-geographic-data-through-the-google-api`
+.. seealso::
+  
+   * :doc:`../294/294-Online-XML-HTTP-library`
+   * :doc:`../293/293-extracting-data-from-XML`
+   * :doc:`../296/296-obtaining-geographic-data-through-the-google-api`
