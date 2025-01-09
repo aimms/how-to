@@ -36,7 +36,7 @@ An **HTTP request** is used to communicate with servers. The following informati
 
     * **Body (optional)** : Used to store data you want to send to the server, for example in a POST method request.
 
-Extracting the XML file from the server
+Extracting the XML File from the Server
 ---------------------------------------------
 At the end of this tutorial, we'll have the required XML file.
 
@@ -81,11 +81,11 @@ Installing the HTTP Library
 
 Our first step will be to install the HTTP library in AIMMS.
 
-#. From the menu, go to *File > Library Manager*
-#. Click *Add library from repository*
-#. Select *HTTPClient*.
+#. From the menu, go to :menuselection:`File > Library Manager`
+#. Click :menuselection:`Add library from repository`
+#. Select :menuselection:`HTTPClient`
 
-Creating the request
+Creating the Request
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Before we create our HTTP request, we will need some parameters to store information about the request.
@@ -108,14 +108,14 @@ Once these objects are created, we can start coding the following in a procedure
 The ``request_create`` function creates a request and gives it an identification number which is stored in ``SP_requestId``.
 Then, set the URL for the request using ``request_setURL`` and the request method to GET using ``request_setMethod``.
 
-Specifying headers
+Specifying Headers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you want to specify headers in your request, you can create a string parameter ``SP_HttpHeaders(`` indexed over ``web::httpHeader``.
+If you want to specify headers in your request, you can create a string parameter ``SP_HttpHeaders`` indexed over ``web::httpHeader``.
 
 .. code-block:: aimms
     
-    StringParameter SP_HttpHeaders( {
+    StringParameter SP_HttpHeaders {
         IndexDomain: web::httpHeader;
     }
 
@@ -157,7 +157,7 @@ Now that we have access to these headers, we need to change their values and set
 
 Here, we tell the server we only want XML files.
 
-Setting the SP_OutputFile
+Setting the ``SP_OutputFile``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: aimms
@@ -173,7 +173,7 @@ When you send a request to a server, it gives you back an answer containing a st
 
     Learn more about these status codes at `REST API Tutorial (external link) <https://www.restapitutorial.com/httpstatuscodes.html>`_.
 
-Invoking the request
+Invoking the Request
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 We're finally ready to send our request using the ``web::request_invoke`` procedure.
 
@@ -186,32 +186,25 @@ Congratulations, you should now have your XML file stored as ``output.xml`` in t
 
 If you now want to link the XML data with AIMMS, please follow the tutorial :doc:`../293/293-extracting-data-from-XML` .
 
-Example project
+Example Project
 ------------------
 
 You can download the example AIMMS project below: 
 
-* :download:`HttpFood.zip <download/HttpFood.zip>` 
+    :download:`HttpFood.zip <download/HttpFood.zip>` 
 
-* A variation, whereby the data from a JSON file is read to AIMMS identifiers: :download:`HttpFoodIntegrated.zip <download/HttpFoodIntegrated.zip>` 
-
-
-Related Topics
----------------
-* **AIMMS How-To**: :doc:`../293/293-extracting-data-from-XML`
-* **AIMMS Documentation**: `HTTP client library <https://documentation.aimms.com/httpclient/index.html>`_
-* **AIMMS Documentation**: `Add a library to your model <https://documentation.aimms.com/httpclient/library.html#adding-the-http-client-library-to-your-model>`_
-* **AIMMS Documentation**: `Data exchange library <https://documentation.aimms.com/dataexchange/index.html>`_
+A variation, whereby the data from a JSON file is read to AIMMS identifiers: 
+    
+    :download:`HttpFoodIntegrated.zip <download/HttpFoodIntegrated.zip>` 
 
 
-References
-------------------------------------
+.. seealso::
+    .. hlist::
+        :columns: 2
 
-* `TutsPlus, about HTTP <https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177>`_
-* `Mozilla, about HTTP Headers <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers>`_
-
-
-
-
-
-
+        * :doc:`../293/293-extracting-data-from-XML`
+        * `HTTP client library <https://documentation.aimms.com/httpclient/index.html>`_
+        * `Add a library to your model <https://documentation.aimms.com/httpclient/library.html#adding-the-http-client-library-to-your-model>`_
+        * `Data exchange library <https://documentation.aimms.com/dataexchange/index.html>`_
+        * `TutsPlus, about HTTP <https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177>`_
+        * `Mozilla, about HTTP Headers <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers>`_

@@ -2,7 +2,7 @@
    Please note that the documentation you are currently viewing is for an older version of our technology. 
    While it is still functional, we recommend upgrading to our latest and more efficient option to take advantage of all the improvements we've made.
    
-Integrate AIMMS with Models Built in Languages like Python or R
+Integrate AIMMS with Models Built in Languages Like Python or R
 ==================================================================================
 
 .. meta::
@@ -27,8 +27,10 @@ There are many libraries/packages available in both Python and R to deploy model
 
 A diagram of the architecture we will use in our examples is shown below. 
 
-.. image:: architecture.png
+.. image:: images/architecture.png
     :align: center
+
+|
 
 The different steps in this process are as below:
 
@@ -39,7 +41,6 @@ The different steps in this process are as below:
 #. (Optional) If there are numerous use cases, it could be helpful to maintain a library of functions in Python/R/AIMMS to facilitate the data transformations. 
 
 By following the above steps, you can have your Python/R model available as a local web service running on your computer. 
-.. There are many ways to deploy this to have global access, using Docker is one of them and will be discussed further below. 
 
 .. _scripting-tools:
 

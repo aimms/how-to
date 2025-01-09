@@ -35,7 +35,7 @@ Example Project
 
 You can download the example project for this tutorial from the link below:
 
-* :download:`Flickr_Project.zip <download/Flickr Project.zip>` 
+    :download:`Flickr_Project.zip <download/Flickr Project.zip>` 
 
 
 Required Information
@@ -70,6 +70,7 @@ The URL format is specified in the Flickr documentation:
 
     <font color="blue">https://farm</font><font color="red">{farm-id}</font><font color="blue">.staticflickr.com/</font><font color="red">{server_id}</font><font color="blue">/</font><font color="red">{id}</font><font color="blue">_</font><font color="red">{secret}</font><font color="blue">.jpg</font>
 
+|
 
 To get this information about particular photos, we can use the method `flickr.galleries.getPhotos <https://www.flickr.com/services/api/flickr.galleries.getPhotos.html>`_ to return the information required for creating the individual photo URLs.
 
@@ -120,6 +121,9 @@ Our goal is to use the ``flickr.urls.lookupGallery`` method from the API using a
 Let's check what the `Flickr documentation <https://www.flickr.com/services/api/flickr.urls.lookupGallery.html>`_ has to tell us about this method.
 
 .. image:: ./flickr/lookupGallery.png 
+    :align: center
+
+|
 
 The request requires two arguments, API key URL. The URL of the gallery is as follows: ``https://www.flickr.com/photos/flickr/galleries/72157647277042064/``
 
@@ -204,7 +208,7 @@ We should now have our XML file accessible at the root of the project, or wherev
 Extracting Data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For details of how to extract data from an XML file in AIMMS, check this step-by-step article: :doc:`../293/293-extracting-data-from-XML`
+For details of how to extract data from an XML file in AIMMS, check this step-by-step article: :doc:`../293/293-extracting-data-from-XML`.
 
 With this new XML file, we can now create an XSD file in order to use the XML schema mapping tool from AIMMS.
 
@@ -213,6 +217,9 @@ To generate this XSD file, you can use an online generator such as the one provi
 Now create a string parameter ``SP_GalleryID`` made for containing the gallery ID information and using the XML schema mapping tool, map it to the ``rsp/gallery/id`` element of the XML file (not the ``rsp/gallery/Gallery_id`` element).
 
 .. image:: flickr/mapping1.png
+    :align: center
+
+|
 
 .. Warning:: 
 
@@ -256,6 +263,9 @@ Set the HTTP Request
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. image:: flickr/GetPhotos.png
+    :align: center
+
+|
 
 This request takes the parameters ``api_key`` and ``gallery_id``, and we want from the answer the ``farm`` ID, the ``server ID``, the ``ID`` and the ``secret`` for each photo in the gallery.
 But before extracting these, we need to get the XML file containing this information from an HTTP request.
