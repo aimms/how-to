@@ -1,7 +1,6 @@
-.. image:: /Images/AIMMSLibraries.png
-   :scale: 120
+.. image:: /Images/AIMMS Libraries.png
+   :scale: 100
    :align: right
-   :alt: AIMMS Libraries
 
 AIMMS Libraries
 =================

@@ -1,7 +1,6 @@
-.. image:: /Images/AIMMSLanguage.png
-   :scale: 120
+.. image:: /Images/AIMMS Language.png
+   :scale: 100
    :align: right
-   :alt: AIMMS Licensing Help & Support
 
 AIMMS Language
 ========================

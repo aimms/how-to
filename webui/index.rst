@@ -1,8 +1,6 @@
-.. image:: /Images/browser-128.png
+.. image:: /images/WebUI.png
    :scale: 120
    :align: right
-   :alt: WebUI
-
 
 WebUI
 ======

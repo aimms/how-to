@@ -1,3 +1,7 @@
+.. image:: /Images/Toolkit.png
+   :scale: 100
+   :align: right
+
 Toolkit
 ===========
 

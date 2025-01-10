@@ -1,7 +1,6 @@
-.. image:: /Images/IntegrationsDataExchange.png
-   :scale: 120
+.. image:: /images/Integration.png
+   :scale: 100
    :align: right
-   :alt: Integrations and Data Exchange
 
 Integrations and Data Exchange
 ==============================

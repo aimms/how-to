@@ -1,7 +1,6 @@
-.. image:: /Images/AlgorithmicCapabilities.png
-   :scale: 120
+.. image:: /Images/AC.png
+   :scale: 100
    :align: right
-   :alt: Algorithmic Capabilities
 
 Algorithmic Capabilities
 ========================
