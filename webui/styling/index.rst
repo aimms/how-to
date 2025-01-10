@@ -23,4 +23,4 @@ Styling
    /Articles/303/303-add-icon-menu-bar
 
 
-.. Note:: CSS files to customize your WebUI projects are provided as-is and are not covered by our SLA policies. If you have any questions regarding this, we encourage you to post on `the AIMMS Community <https://community.aimms.com/>`_ 
+.. Note:: CSS files to customize your WebUI projects are provided as-is and are not covered by our SLA policies. If you have any questions regarding this, we encourage you to post on the `AIMMS Community <https://community.aimms.com/>`_. 
