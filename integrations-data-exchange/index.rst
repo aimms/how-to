@@ -1,5 +1,5 @@
 .. image:: /Images/Integration.png
-   :scale: 100
+   :scale: 140
    :align: right
 
 Integrations and Data Exchange
