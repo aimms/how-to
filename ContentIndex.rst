@@ -1,21 +1,3 @@
-.. image:: Images/rocket-32.png
-   :scale: 0
-
-.. image:: Images/school-supplies-32.png
-   :scale: 0
-
-.. image:: Images/time-machine-32.png
-   :scale: 0
-
-.. image:: Images/global-chain-32.png
-   :scale: 0
-
-.. image:: Images/web-design-32.png
-   :scale: 0
-
-.. image:: Images/network-care-32.png
-   :scale: 0
-
 .. raw:: html
     
     <h1 class="home_header">WELCOME TO HOW-TO</h1>
