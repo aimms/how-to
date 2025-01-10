@@ -1,4 +1,4 @@
-.. image:: images/AIMMS-Libraries.png
+.. image:: ../images/AIMMS-Libraries.png
    :scale: 100
    :align: right
 

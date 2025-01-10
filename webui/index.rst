@@ -1,4 +1,4 @@
-.. image:: images/WebUI.png
+.. image:: ../images/WebUI.png
    :scale: 100
    :align: right
 

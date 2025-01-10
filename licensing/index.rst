@@ -1,4 +1,4 @@
-.. image:: images/Licensing.png
+.. image:: ../images/Licensing.png
    :scale: 100
    :align: right
 
