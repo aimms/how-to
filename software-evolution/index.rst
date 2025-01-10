@@ -1,4 +1,4 @@
-.. image:: /images/Software Evolution.png
+.. image:: /images/Software-Evolution.png
    :scale: 100
    :align: right
 

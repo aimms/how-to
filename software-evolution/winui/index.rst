@@ -1,8 +1,3 @@
-.. image:: /Images/bricks-128.png
-   :scale: 120
-   :align: right
-   :alt: AIMMS WinUI Informations
-
 WinUI
 =====
 

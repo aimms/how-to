@@ -1,3 +1,7 @@
+.. image:: /images/Way-Around.png
+   :scale: 120
+   :align: right
+
 Getting Started with AIMMS
 ===========================
 

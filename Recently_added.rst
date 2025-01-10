@@ -1,6 +1,6 @@
-.. image:: Images/shooting-star-128.png
+.. image:: Images/New-AIMMS.png
    :align: right
-   :scale: 120
+   :scale: 100
 
 Recently Added
 ==============

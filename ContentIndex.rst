@@ -29,32 +29,26 @@
 
         <div class="boxes">
             <a class="box_home_page" href="C_Getting_Started/index.html">
-                <img alt="getting started" src="_images/rocket-32.png">
                 <h1>Getting Started</h1>
                 <div>Installing AIMMS, settings options, licensing help</div>
             </a>
             <a class="box_home_page" href="C_Developer/index.html">
-                <img alt="developer" src="_images/school-supplies-32.png">
                 <h1>AIMMS Developer</h1>
                 <div>Data connection, modeling, solvers, programming, error handling</div>
             </a>
             <a class="box_home_page" href="C_UI/index.html">
-                <img alt="applications" src="_images/web-design-32.png">
                 <h1>Application UI</h1>
                 <div>Creating and customizing a user interface for your apps</div>
             </a>
             <a class="box_home_page" href="C_Deployment/index.html">
-                <img alt="deployment" src="_images/network-care-32.png">
                 <h1>Deployment</h1>
                 <div>Distributing your apps with AIMMS PRO (on-premise or cloud-hosted)</div>
             </a>
             <a class="box_home_page" href="C_Evolution/index.html">
-                <img alt="evolution" src="_images/time-machine-32.png">
                 <h1>Software Evolution</h1>
                 <div>Implementing new AIMMS features, planning for deprecation</div>
             </a>
             <a class="box_home_page" href="https://scnavigator-manual.aimms.com/">
-                <img alt="navigator" src="_images/global-chain-32.png">
                 <h1>SC Navigator</h1>
                 <div>Help and documentation for the SC Navigator suite of apps</div>
             </a>
