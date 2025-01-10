@@ -4,8 +4,6 @@ Core
    :description: Help and support with styling AIMMS applications.
 
 
-This section contains tips for customizing the appearance of your AIMMS user interfaces.
-    
 .. toctree::
    :maxdepth: 1
     
@@ -18,4 +16,4 @@ This section contains tips for customizing the appearance of your AIMMS user int
    /Articles/578/578-uponchange-with-arguments
    
 
-.. Note:: CSS files to customize your WebUI projects are provided as-is and are not covered by our SLA policies. If you have any questions regarding this, we encourage you to post on `the AIMMS community <https://community.aimms.com/>`_ 
+.. Note:: CSS files to customize your WebUI projects are provided as-is and are not covered by our SLA policies. If you have any questions regarding this, we encourage you to post on `the AIMMS Community <https://community.aimms.com/>`_ 

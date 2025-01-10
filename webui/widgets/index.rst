@@ -4,8 +4,6 @@ Widgets
 .. meta::
    :description: Help and support building and using AIMMS applications.
 
-
-This section contains explanations of various UI features available when building AIMMS applications.
     
 .. toctree::
    :maxdepth: 1

@@ -10,7 +10,9 @@ AIMMS Libraries
 
 
 Libraries save time and provide valuable resources when developing apps. 
-You can extend regular functionality and share modules among several projects. Find help topics about the various types of libraries in AIMMS.
+You can extend regular functionality and share modules among several projects. 
+
+Find help topics about the various types of libraries in AIMMS:
 
 
 .. toctree::
