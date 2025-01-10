@@ -1,5 +1,5 @@
 .. image:: /Images/AIMMS-Libraries.png
-   :scale: 100
+   :scale: 130
    :align: right
 
 AIMMS Libraries

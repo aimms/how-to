@@ -1,5 +1,5 @@
 .. image:: images/Way-Around.png
-   :scale: 100
+   :scale: 130
    :align: right
 
 Getting Started with AIMMS

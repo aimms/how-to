@@ -1,5 +1,5 @@
 .. image:: /Images/AIMMS-IDE.png
-   :scale: 100
+   :scale: 130
    :align: right
 
 AIMMS IDE

@@ -1,5 +1,5 @@
 .. image:: /Images/Toolkit.png
-   :scale: 160
+   :scale: 130
    :align: right
 
 Toolkit

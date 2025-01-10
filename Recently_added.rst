@@ -1,6 +1,6 @@
 .. image:: /Images/New-AIMMS.png
    :align: right
-   :scale: 100
+   :scale: 130
 
 Recently Added
 ==============

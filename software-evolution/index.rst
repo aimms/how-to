@@ -1,5 +1,5 @@
 .. image:: /Images/Software-Evolution.png
-   :scale: 100
+   :scale: 130
    :align: right
 
 Software Evolution
