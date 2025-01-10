@@ -1,7 +1,6 @@
-.. image:: /Images/time-machine-128.png
-   :scale: 120
+.. image:: ../images/Software-Evolution.png
+   :scale: 100
    :align: right
-   :alt: AIMMS Deprecations Help & Support
 
 Software Evolution
 ==================

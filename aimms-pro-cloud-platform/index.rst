@@ -1,7 +1,6 @@
-.. image:: /Images/network-care-128.png
-   :scale: 120
+.. image:: ../images/AIMMS-PRO-Cloud-Platform.png
+   :scale: 100
    :align: right
-   :alt: AIMMS PRO and Cloud Platform
 
 AIMMS PRO & Cloud Platform
 =============================
