@@ -1,4 +1,4 @@
-.. image:: /Images/AIMMS-PRO-Cloud-Platform.png
+.. image:: images/AIMMS-PRO-Cloud-Platform.png
    :scale: 100
    :align: right
 

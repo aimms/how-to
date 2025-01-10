@@ -1,4 +1,4 @@
-.. image:: /Images/AIMMS-IDE.png
+.. image:: images/AIMMS-IDE.png
    :scale: 100
    :align: right
 

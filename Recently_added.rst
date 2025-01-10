@@ -1,4 +1,4 @@
-.. image:: Images/New-AIMMS.png
+.. image:: images/New-AIMMS.png
    :align: right
    :scale: 100
 

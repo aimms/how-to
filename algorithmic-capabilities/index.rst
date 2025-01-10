@@ -1,4 +1,4 @@
-.. image:: /Images/AC.png
+.. image:: images/AC.png
    :scale: 100
    :align: right
 

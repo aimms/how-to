@@ -1,4 +1,4 @@
-.. image:: /images/Integration.png
+.. image:: images/Integration.png
    :scale: 100
    :align: right
 

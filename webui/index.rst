@@ -1,5 +1,5 @@
-.. image:: /images/WebUI.png
-   :scale: 120
+.. image:: images/WebUI.png
+   :scale: 100
    :align: right
 
 WebUI

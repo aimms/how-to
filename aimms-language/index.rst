@@ -1,4 +1,4 @@
-.. image:: /Images/AIMMS-Language.png
+.. image:: images/AIMMS-Language.png
    :scale: 100
    :align: right
 
