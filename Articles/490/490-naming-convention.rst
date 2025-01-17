@@ -19,7 +19,7 @@ There are several use cases for developing with AIMMS:
 
 #.  The first use case of the AIMMS language is to formulate models for Decision Support applications. 
 
-#.  A second second use case of the AIMMS language is to create generic libraries, for instance the libraries as presented in the `AIMMS library repository <https://documentation.aimms.com/library-repository.html>`_.
+#.  A second second use case of the AIMMS language is to create generic libraries, for instance the libraries as presented in the `AIMMS Library Repository <https://documentation.aimms.com/library-repository.html>`_.
 
 The choices made in this article focus on the first purpose.
 
@@ -91,7 +91,7 @@ More modern approaches rely on the development environment to make such a distin
 These two modern approaches are supported by the AIMMS IDE.  
 However, AIMMS models are not only presented in the AIMMS IDE, they are also part of other documentation for instance these How-To articles, in educational material, and in technical reports about the applications.
 
-Note that the IDE approach and the prefixing approach to distinguish between parameters and variables do not exclude each other, they complement each other.
+Note that the AIMMS IDE approach and the prefixing approach to distinguish between parameters and variables do not exclude each other, they complement each other.
 
 Other naming conventions in practice
 """""""""""""""""""""""""""""""""""""""""

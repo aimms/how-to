@@ -63,7 +63,7 @@ In addition, a case is saved whereby the value of p_visits is set to 50. This ca
 Running the ``InitTerm`` app
 -----------------------------
 
-Opening the app in AIMMS developer, and pressing the ``Bye`` button in the opened WinUI page results in the following ``visit.txt`` file:
+Opening the app in AIMMS Developer, and pressing the ``Bye`` button in the opened WinUI page results in the following ``visit.txt`` file:
 
 .. code-block:: none
     :linenos:

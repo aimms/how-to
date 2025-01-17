@@ -26,7 +26,7 @@ all input parameters are over ``s_items`` set. And this set is defined by ``p_it
 		Definition: ElementRange(1, p_itemQuantity, prefix:"item-", fill:1);
 	}
 			
-``p_itemQuantity`` can be changed to any integer value from the example IDE, starting as 14 default. 
+``p_itemQuantity`` can be changed to any integer value from the example, starting as 14 default. 
 For this model, we would like to generate numbers for 3 parameters, so it would be from 3 generated values (for 1 item) to up to 42 values (for 14 items) or even more. 
 
 To populate this data, the procedure ``pr_randomizeData`` was created:

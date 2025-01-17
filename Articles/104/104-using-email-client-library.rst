@@ -37,7 +37,7 @@ Supported features:
 Adding the Library
 --------------------
 
-Add ``EmailClient`` to your project from the library repository using the :menuselection:`Library Manager`.
+Add ``EmailClient`` to your project from the AIMMS Library Repository using the :menuselection:`Library Manager`.
 
 .. seealso::
     * :doc:`../84/84-using-libraries`.
