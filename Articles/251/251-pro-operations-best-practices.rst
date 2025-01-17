@@ -60,7 +60,7 @@ For AIMMS PRO, we can identify two types of changes that require testing prior t
 
 #. New or updated AIMMS PRO applications; even though PRO enables instant global release of new or updated applications, one should test these thoroughly before the updated app is published. 
 
-#. Changes, updates, patches, etc. to the underlying software such as the AIMMS software, the operating system, virtualization software, etc. can cause disruptions to the proper functioning of the applications. So these changes need to be tested prior to applying them to the production environment.
+#. Changes, updates, patches, etc. to the AIMMS Optimization Tooling, the operating system, virtualization software, etc. can cause disruptions to the proper functioning of the applications. So these changes need to be tested prior to applying them to the production environment.
 
 Operating a Maintenance Window
 -------------------------------------------

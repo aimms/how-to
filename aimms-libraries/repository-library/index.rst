@@ -2,10 +2,10 @@ Repository Library
 ====================
 
 .. meta::
-   :description: The AIMMS Repository Library is a centralized platform that provides a collection of pre-built models, templates, and tools designed to enhance the use of AIMMS software. 
+   :description: The AIMMS Repository Library is a centralized platform that provides a collection of pre-built models, templates, and tools designed to enhance the use of AIMMS Optimization Tooling. 
 
 
-The **AIMMS Repository Library** is a centralized platform that provides a collection of pre-built models, templates, and tools designed to enhance the use of AIMMS software. 
+The **AIMMS Repository Library** is a centralized platform that provides a collection of pre-built models, templates, and tools designed to enhance the use of AIMMS Optimization Tooling. 
 It allows users to access, share, and reuse optimization models and components, fostering collaboration and efficiency. 
 This library helps users streamline their modeling processes, reducing development time and ensuring best practices in optimization and decision-making tasks.
 

@@ -163,7 +163,7 @@ html_theme_options = {
  #   'titles_only': False
     'doc_title' : 'How-To',
     'home_page_title': 'AIMMS How-To',
-    'home_page_description': "AIMMS How-To is a support knowledge base for everyone involved in projects that use AIMMS. You'll find help tutorials, best practices, and practical guidance for using AIMMS software.",
+    'home_page_description': "AIMMS How-To is a support knowledge base for everyone involved in projects that use AIMMS. You'll find help tutorials, best practices, and practical guidance for using AIMMS Optimization Tooling.",
     'display_community_embeddable' : Display_3rd_Party_Extensions,
     'google_tag_manager_id': 'GTM-5T37RFM',
     'generate_google_tag_manager' : Display_3rd_Party_Extensions,

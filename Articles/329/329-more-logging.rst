@@ -17,7 +17,7 @@ This zip file contains the ``LoggerConfig.xml`` file.
 
 .. note:: 
 
-    Security notice, see:  `Apache log4j vulnerability does not affect AIMMS software <https://community.aimms.com/aimms-pro-cloud-platform-43/apache-log4j-vulnerability-does-not-affect-aimms-software-1123>`_
+    Security notice, see:  `Apache log4j vulnerability does not affect AIMMS Optimization Tooling <https://community.aimms.com/aimms-pro-cloud-platform-43/apache-log4j-vulnerability-does-not-affect-aimms-software-1123>`_
 
 This article will:
 
@@ -196,7 +196,7 @@ Inspecting Logging Information
 
 .. note:: 
 
-    The logging is designed by developers of the AIMMS software for themselves - as aid in developing this software. This is why the interpretation of these log files may not be obvious. Therefore, definite interpretation should be left to those developers. You can request such analysis by sending in a request to support@aimms.com 
+    The logging is designed by developers of the AIMMS Optimization Tooling for themselves - as aid in developing an application. This is why the interpretation of these log files may not be obvious. Therefore, definite interpretation should be left to those developers. You can request such analysis by sending in a request to support@aimms.com 
     
     Most importantly, don't be unnecessarily alarmed: An error or warning message in the log file does NOT necessarily indicate a problem in the application. 
 
