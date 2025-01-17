@@ -1,4 +1,4 @@
-Best Practices for Operating AIMMS PRO
+Best Practices for Operating AIMMS Cloud
 ====================================================
 
 .. meta::
@@ -6,13 +6,13 @@ Best Practices for Operating AIMMS PRO
    :keywords: AIMMS PRO, backup, recovery
 
      
-As AIMMS applications move from desktops to PRO platforms and start to play a larger role for a larger number of users, it is important to adopt the best practices for operating server-based business applications.
+As AIMMS applications move from desktops to AIMMS Cloud and start to play a larger role for a larger number of users, it is important to adopt the best practices for operating server-based business applications.
 
-This article presents common best practices of application management as they apply to operating and maintaining AIMMS PRO platforms. These practices address how to deal with challenges like bugs, accidental project deletion, and hardware failures.
+This article presents common best practices of application management as they apply to operating and maintaining an AIMMS Cloud. These practices address how to deal with challenges like bugs, accidental project deletion, and hardware failures.
 
-AIMMS PRO platform facilitates rapid prototyping of optimization apps and maximum uptime. The two most likely uptime disruptions are software updates and critical issues such as hardware failures or accidental file deletion. 
+AIMMS Cloud facilitates rapid prototyping of optimization apps and maximum uptime. The two most likely uptime disruptions are software updates and critical issues such as hardware failures or accidental file deletion. 
 
-In the context of AIMMS PRO, software updates fall into two categories: 
+In the context of AIMMS Cloud, software updates fall into two categories: 
 
 #. underlying software updates  
 #. new or updated apps 

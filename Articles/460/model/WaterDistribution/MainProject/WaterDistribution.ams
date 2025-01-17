@@ -215,7 +215,7 @@ Model Water_Distribution {
             minimization problems containing binary variables (and not general integer
             variables).
             
-            The algorithm is written using the AIMMS language and uses GMP functionality.
+            The algorithm is written using the AIMMS Language and uses GMP functionality.
             The Branch-and-Bound algorithm starts with a presolve step. Nodes are selected
             by taking the node with the best objective. Branching variables are selected
             by taking the variable with the most fractional value.

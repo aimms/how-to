@@ -35,12 +35,12 @@ When using the service on ``localhost``, there is only one additional parameter 
 Using the Service on the AIMMS Cloud
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
-#.  ``cloud`` stored in ``cloud.txt``. This string parameter is a string which contains the name of an AIMMS cloud, for instance ``chriskuip.aimms.cloud``.
+#.  ``cloud`` stored in ``cloud.txt``. This string parameter is a string which contains the name of an AIMMS Cloud, for instance ``chriskuip.aimms.cloud``.
 
 #.  ``apiKey`` stored in ``apikey.txt``. This string parameter identifies and authorizes the user of the service.
     See `how to obtain an apiKey <https://documentation.aimms.com/cloud/rest-api.html#api-keys-and-scopes>`_.
 
-#.  ``app`` stored in ``app.txt``.  This string parameter contains the name of the app when published on an AIMMS cloud, here ``CountTheStars``.
+#.  ``app`` stored in ``app.txt``.  This string parameter contains the name of the app when published on an AIMMS Cloud, here ``CountTheStars``.
 
 #.  ``ver`` stored in ``ver.txt`` This string parameter contains the version of the app at hand, for instance ``1.0.1.0``,
 

@@ -68,4 +68,4 @@ You will need to set Gurobi as the solver to use before creating the *aimmspack*
 
    * :doc:`/Articles/178/178-change-default-solver`
    * :doc:`/Articles/208/208-setting-options`
-   * `Gurobi Support on AIMMS Cloud Platform <https://documentation.aimms.com/cloud/gurobi-support.html>`_
+   * `Gurobi Support on AIMMS Cloud <https://documentation.aimms.com/cloud/gurobi-support.html>`_

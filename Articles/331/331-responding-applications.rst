@@ -20,7 +20,7 @@ Assign two sessions for the application:
 
 *  **Solver session**: solves the Operations Research problem; may involve solving one or more mathematical programming problems.
 
-AIMMS PRO platform is designed so that these two sessions can communicate with each other.
+AIMMS Cloud is designed so that these two sessions can communicate with each other.
 
 To adapt an optimization application to become a responding optimization application requires several stages of development tasks:
 

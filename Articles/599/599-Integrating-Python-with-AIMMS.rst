@@ -358,7 +358,7 @@ Note that training takes place for every request made; there is no caching of th
 Deploying Python Services on AIMMS Cloud
 -----------------------------------------------------
 
-Deploying a Python app on AIMMS Cloud consists of copying it onto the AIMMS Cloud platform, and
+Deploying a Python app on AIMMS Cloud consists of copying it onto the AIMMS Cloud, and
 launching the application.
 
 In this article, the copying part is copying to AIMMS PRO Storage, using AIMMS PRO Storage functions such as:

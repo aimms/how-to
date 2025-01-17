@@ -1,7 +1,7 @@
 Download Server Session Log
 =============================
 
-This article explains how to obtain the session log file of a solver session ran on an AIMMS PRO on premise.
+This article explains how to obtain the session log file of a solver session ran on an AIMMS PRO On-Premise.
 
 .. note:: 
 
@@ -45,7 +45,7 @@ After publishing the application, you can in sequence:
 Explaning the Download Code
 --------------------------------
 
-AIMMS PRO on premise stores the session logs in the folder ``%AIMMSPRO_DATADIR%\Log\Sessions``.
+AIMMS PRO On-Premise stores the session logs in the folder ``%AIMMSPRO_DATADIR%\Log\Sessions``.
 The session names are part of the names of the log file. 
 
 Perhaps interesting is that using AIMMS PRO 2.34 and newer, session logs are named such that it is clear from the session name:

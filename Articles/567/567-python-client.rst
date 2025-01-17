@@ -45,7 +45,7 @@ The Python string variables used are:
 
 Remarks:
 
-#.  Line 1: The URL of the AIMMS cloud.
+#.  Line 1: The URL of the AIMMS Cloud.
 
 #.  Line 2: The fixed part of the path indicating the AIMMS PRO REST API is used.
 

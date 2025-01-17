@@ -59,7 +59,7 @@ Terminology
 
 #.  **Appender** There are four ``appenders`` available:
 
-    #.  to generate output for server sessions and WebUI data session on AIMMS PRO on Premise,
+    #.  to generate output for server sessions and WebUI data session on AIMMS PRO On-Premise,
 
     #.  to generate output to AIMMS Cloud,
     
@@ -86,7 +86,7 @@ We will cover their purpose below as well as if and how to modify them according
     #.  For logging of sessions on AIMMS Cloud -> ``stdout`` - this means that the cloud logs for a certain component will be increased (please note that cloud logs are accessible for AIMMS only, but you can request a copy - just send a request to support@aimms.com);
 
 
-    #.  For logging of sessions of AIMMS PRO on premise -> to the folder AimmsPRO/Log/Sessions (for a solver session or for a WebUI data session, not for a WinUI session);
+    #.  For logging of sessions of AIMMS PRO On-Premise -> to the folder AimmsPRO/Log/Sessions (for a solver session or for a WebUI data session, not for a WinUI session);
 
 
     #.  For logging of activities in AIMMS Developer there are two options:
@@ -168,7 +168,7 @@ For logging of WebUI, solver and rest sessions in AIMMS Cloud
 #.  Please provide the relevant information to the AIMMS team so they can access the logs for you.
 
 
-For logging of WinUI sessions in AIMMS Cloud or in AIMMS PRO on premise
+For logging of WinUI sessions in AIMMS Cloud or in AIMMS PRO On-Premise
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 

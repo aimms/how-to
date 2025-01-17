@@ -2,7 +2,7 @@ Create PRO User Groups
 ========================
 
 .. meta::
-   :description: Modeling for secure multi-user AIMMS Apps deployed on AIMMS PRO – Part 1: User Groups.
+   :description: Modeling for secure multi-user AIMMS Apps deployed on AIMMS Cloud.
    :keywords: secure, upload, download
 
 In this article we explore how you can authorize access to information within your AIMMS app by creating and managing user groups. 
@@ -16,7 +16,7 @@ In this article we explore how you can authorize access to information within yo
 
 |
 
-AIMMS PRO is a multi-user environment, designed to host several Apps used by several end-users. Information is shared by these users via these applications. Depending on the role of the app user in the organization, selected information may or may not be accessible. For instance, a planner may change the production plan, that plan can be inspected by management, but is not accessible to the HRM staff.
+AIMMS Cloud is a multi-user environment, designed to host several Apps used by several end-users. Information is shared by these users via these applications. Depending on the role of the app user in the organization, selected information may or may not be accessible. For instance, a planner may change the production plan, that plan can be inspected by management, but is not accessible to the HRM staff.
 
 Let us consider an example.
 
@@ -110,7 +110,7 @@ You can take a screenshot when asked for credentials on AIMMS PRO and then close
 
 .. seealso::
 
-    *  `AIMMS PRO <https://documentation.aimms.com/pro/index.html#pro-platform>`_
+    *  `AIMMS PRO On-Premise <https://documentation.aimms.com/pro/index.html#pro-platform>`_
 
 
 

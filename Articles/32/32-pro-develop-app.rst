@@ -78,7 +78,7 @@ This example uses a combination of both procedures mentioned.
 `Contract Allocation <https://how-to.aimms.com/Articles/383/383-contract-allocation.html>`_ 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Here is another way to delegate solves to the AIMMS PRO Cloud. 
+Here is another way to delegate solves to the AIMMS Cloud. 
 
 .. code-block:: aimms
    :linenos:

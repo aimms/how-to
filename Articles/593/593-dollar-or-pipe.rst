@@ -5,7 +5,7 @@ Dollar or Pipe Sign?
    :description: how to use the operator $ and the operator |.
    :keywords:  pipe, domain, dollar, condition
 
-In the AIMMS language there is a clear distinction on how to use the operator ``$`` and the operator ``|``. This article illustrates this difference.
+In the AIMMS Language there is a clear distinction on how to use the operator ``$`` and the operator ``|``. This article illustrates this difference.
 
 Dollar Sign
 ----------------

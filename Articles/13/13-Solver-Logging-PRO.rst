@@ -1,8 +1,8 @@
-Retrieve Solver Log Files in AIMMS PRO
+Retrieve Solver Log Files in AIMMS Cloud
 ==========================================
 
 .. meta::
-   :description: How to get log files from a particular solver in AIMMS PRO.
+   :description: How to get log files from a particular solver in AIMMS Cloud.
    :keywords: log, logfile, solver
 
 

@@ -1,7 +1,7 @@
-Configuring the logging of sessions ran on a AIMMS PRO on Premise
+Configuring the logging of sessions ran on a AIMMS PRO On-Premise
 ====================================================================
 
-This article contains an example of configuring the logging of an application that is published on an AIMMS PRO on Premise platform.
+This article contains an example of configuring the logging of an application that is published on an AIMMS PRO On-Premise.
 
 .. note:: 
 

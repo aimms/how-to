@@ -25,7 +25,7 @@ Selected aspects important to developing any service are:
     As a REST API service can be used by various separate clients, different software systems can be used to develop the various clients involved.
 
 #.  **Deployment**: Which computer hosts the service? Can it be run in parallel? Is the usage of the service secure?
-    The effort needed to answer such questions depend on the deployment platform used.
+    The effort required to answer such questions depends on whether the deployment is on AIMMS Cloud or AIMMS PRO On-Premise.
 
 Before we dive into the details of the above, let me introduce the background against which we illustrate the above.
 

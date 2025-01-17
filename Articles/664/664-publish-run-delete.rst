@@ -1,5 +1,5 @@
-Publishing, Running and Deleting Apps on the Cloud
-===================================================
+Publishing, Running and Deleting Apps on AIMMS Cloud
+=====================================================
 
 This article provides an example of Python code that can be used to publish a project, run a specific task on it and delete the published project.
 

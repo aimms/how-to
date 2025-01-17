@@ -1,5 +1,5 @@
-﻿Deploy an Application on AIMMS PRO 
-===================================
+﻿Deploy an Application on AIMMS Cloud
+====================================
 
 .. meta::
    :description: Basic procedure to publish and share an AIMMS application with AIMMS PRO.
@@ -9,7 +9,7 @@
 Introduction
 --------------
 
-When you want to share the AIMMS application you developed with your colleagues, they will need an AIMMS Developer system and license installed on their Windows PC to be able to use the application. The AIMMS PRO Platform enables you to share your AIMMS applications without your colleagues having AIMMS installed on their PC, and even let the end users access the application in their web browser, via AIMMS WebUI. 
+When you want to share the AIMMS application you developed with your colleagues, they will need an AIMMS Developer system and license installed on their Windows PC to be able to use the application. The AIMMS Cloud enables you to share your AIMMS applications without your colleagues having AIMMS installed on their PC, and even let the end users access the application in their web browser, via AIMMS WebUI. 
 
 Running Example
 ------------------
@@ -41,7 +41,7 @@ Basic Modeling of delegation
 
 A simple way to model delegation is by introducing a new procedure that just handles the delegation. In the remainder of this section, we'll handle the details of that.
 
-To publish an application on the AIMMS PRO platform, the procedure containing the Solve statement in the model needs to be modified first. In our example, the "Solve" button is linked to the procedure ``pr_DoSolve``.
+To publish an application on the AIMMS Cloud, the procedure containing the Solve statement in the model needs to be modified first. In our example, the "Solve" button is linked to the procedure ``pr_DoSolve``.
 
 Perform the following steps:
 

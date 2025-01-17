@@ -9,7 +9,7 @@ During the development of an application using CDM, the embedded CDM server is i
 
 .. note::
 
-    When publishing applications in an AIMMS cloud, you do not have to install a CDM service. The appropriate CDM service is started on demand, and stops itself after some idle time.
+    When publishing applications in an AIMMS Cloud, you do not have to install a CDM service. The appropriate CDM service is started on demand, and stops itself after some idle time.
 
 When testing or deploying an application with multiple collaborating users a CDM service needs to be installed that handles commits by storing the data and informing other users of these commits.
 The architecture that we want to achieve looks as follows:

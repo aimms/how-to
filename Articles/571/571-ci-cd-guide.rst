@@ -49,7 +49,7 @@ Linux example:
 More information can be found here at `AIMMS command line options <https://documentation.aimms.com/user-guide/miscellaneous/calling-aimms/aimms-command-line-options.html>`_ .
 
 
-In order to publish an application to the AIMMS PRO Cloud server, you must first generate an aimmspack file from your project. More information can be found at `publishing applications documentation <https://documentation.aimms.com/pro/appl-man.html#publishing-applications>`_ .
+In order to publish an application to the AIMMS Cloud, you must first generate an aimmspack file from your project. More information can be found at `publishing applications documentation <https://documentation.aimms.com/pro/appl-man.html#publishing-applications>`_ .
 
 .. note::
 

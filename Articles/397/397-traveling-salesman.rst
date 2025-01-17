@@ -438,7 +438,7 @@ Release Notes
 --------------------   
 
 `v1.1 <https://github.com/aimms/traveling-salesman/releases/tag/1.1>`_ (30/09/2024)
-   Now you can run all types of solve on PRO Portal. Correct driver is set when using the API on Cloud PRO Portal. 
+   Now you can run all types of solve on AIMMS Cloud. Correct driver is set when using the API on AIMMS Cloud. 
 
 `v1.0 <https://github.com/aimms/traveling-salesman/releases/tag/1.0>`_ (20/09/2024)
    First logged version with new WebUI library.

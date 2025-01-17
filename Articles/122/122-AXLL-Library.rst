@@ -8,7 +8,7 @@ Exchanging Data with Excel Files
    :keywords: excel, library, axll
 
 
-This is a follow up to :doc:`../85/85-using-axll-library`. The 'AIMMS Excel Library (AXLL)' lets you exchange data between AIMMS and Excel files (.xls and .xlsx) without having Excel installed on that computer. This is very useful when deploying applications using AIMMS PRO as it is typically installed on a terminal server where a copy of Microsoft Office is not available. 
+This is a follow up to :doc:`../85/85-using-axll-library`. The 'AIMMS Excel Library (AXLL)' lets you exchange data between AIMMS and Excel files (.xls and .xlsx) without having Excel installed on that computer. This is very useful when deploying applications using AIMMS Cloud as it is typically installed on a terminal server where a copy of Microsoft Office is not available. 
 
 In this article, we show you which functions available in ``axll::`` namespace to use depending on the format of the data in your Excel file. 
 

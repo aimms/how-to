@@ -112,7 +112,7 @@ Avoid Side Effects
 ^^^^^^^^^^^^^^^^^^
 
 A side effect is when during the computation of identifier ``A``, identifier ``B`` is modified as well.
-The AIMMS language limits side effects. Consider the following example:
+The AIMMS Language limits side effects. Consider the following example:
 
 .. code-block:: aimms
     :linenos:

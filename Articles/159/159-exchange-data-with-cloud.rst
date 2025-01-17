@@ -1,11 +1,11 @@
 .. meta::
-   :description: How to set up a framework for sending data via the AIMMS Cloud platform.
+   :description: How to set up a framework for sending data via the AIMMS Cloud.
    :keywords: cloud, exchange, api, configure, network
 
-Exchange Data with the AIMMS Cloud Platform
+Exchange Data with the AIMMS Cloud
 ===========================================
 
-This document aims to introduce you to the options for exchanging data with the `AIMMS Cloud Platform <https://documentation.aimms.com/cloud/>`_.
+This document aims to introduce you to the options for exchanging data with the `AIMMS Cloud <https://documentation.aimms.com/cloud/>`_.
 
 Using the Azure Data Lake Storage Gen2 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -27,11 +27,11 @@ You can now put in place the writes and reads to and from the application databa
 .. figure:: images/image2-cloud-app-db.png
    :align: center
 
-   Accessing the application database in the AIMMS Cloud Platform
+   Accessing the application database in the AIMMS Cloud
 
 
 All traffic takes place via a VPN tunnel that is initiated from the
-on-premise environment, so there is no need to permit incoming
+AIMMS PRO On-Premise environment, so there is no need to permit incoming
 connections with associated security risks. This VPN (Virtual Private
 Network) tunnel offers high information security because it creates a
 virtual private connection by encapsulating and encrypting all data
@@ -46,9 +46,9 @@ But in many cases we see this work well.
 
 Technically there currently are two options: with or without VPN. 
 
-For the VPN route, AIMMS needs to add a load balancer to the VPC on the AIMMS Cloud Platform. 
+For the VPN route, AIMMS needs to add a load balancer to the VPC on the AIMMS Cloud. 
 Your IT team then needs to complete the parametrization and VPN tunnel set-up, as described `here <https://documentation.aimms.com/cloud/db-config.html#requesting-a-vpn-connection>`__. 
-You can then configure your network access such that the AIMMS apps in the AIMMS Cloud Platform can directly access the required database on your premises, 
+You can then configure your network access such that the AIMMS apps in the AIMMS Cloud can directly access the required database on your premises, 
 in your data center or in the cloud. AIMMS database support functions in our modeling language can be found `here <https://documentation.aimms.com/functionreference/data-management/database-functions/>`__. 
 
 .. _figure-02-159:
@@ -59,7 +59,7 @@ in your data center or in the cloud. AIMMS database support functions in our mod
    Directly accessing a remote database from AIMMS apps
 
 
-The other route is without a VPN. This probably requires you to whitelist the IP-ranges of the AIMMS Cloud Platform in your firewalls. 
+The other route is without a VPN. This probably requires you to whitelist the IP-ranges of the AIMMS Cloud in your firewalls. 
 The AIMMS apps will issue commands to the remote database in the same way as when you are using a VPN connection to a remote database.
 
 .. seealso::
@@ -71,7 +71,7 @@ Via the AIMMS PRO Storage
 
 No need for any initial set-up or configuration. 
 In order to get data files from the on-premise systems to an AIMMS app
-running on the AIMMS Cloud Platform, the on-premise custom application
+running on the AIMMS Cloud, the on-premise custom application
 will need to upload the appropriate file(s) to the appropriate folder in
 the AIMMS PRO Storage. The developer of the AIMMS app will then use
 AIMMS functions to read these data files into the app.
@@ -114,8 +114,7 @@ Library to add a procedure to the app that writes data to this web
 services or retrieves data from that web service.
 
 For this option the information security measures are completely in the
-hands of the developers of the web service offered from the on-premise
-platform.
+hands of the developers of the web service offered from the AIMMS PRO On-Premise.
 
 Examples
 ^^^^^^^^^
@@ -127,11 +126,11 @@ a.	Every 5 minutes a web-service is called to retrieve the latest data which is 
 #.	An AIMMS application writes XML files to AIMMS PRO storage. An on-premise utility retrieves those files once every hour using the PRO API.
 
 
-More details on AIMMS Cloud Platform architecture
+More details on AIMMS Cloud architecture
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The following diagram depicts the part of the
-**AIMMS Cloud Platform** architecture relevant for exchanging data. The
+**AIMMS Cloud** architecture relevant for exchanging data. The
 application databases are placed in customer-specific VPCs that include
 gateways to receive incoming VPN connections.
 
@@ -140,7 +139,7 @@ gateways to receive incoming VPN connections.
 .. figure:: images/image6-more-details.png
    :align: center
    
-   Simplified diagram showing the relevant parts of the AIMMS Cloud Platform architecture
+   Simplified diagram showing the relevant parts of the AIMMS Cloud architecture
 
 
 
