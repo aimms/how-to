@@ -8,7 +8,7 @@ Data Integration with AIMMS Cloud Azure Data Lake Storage
 ===================================================================
 
 .. important::
-	- Minimum AIMMS PRO version: 2.50.1
+	- Minimum AIMMS Cloud version: 2.50.1
 	- Minimum AIMMS DEX version: 2.1.2.5
 
 Every AIMMS Cloud comes with an Azure Data Lake Gen2 storage account (ADLS). The Data Exchange Library (DEX) `provides functions to easily communicate with it <https://documentation.aimms.com/dataexchange/dls.html>`__, allowing you to import and export data onto/from the storage account. This route makes it easier to e.g. share exported data with external sources, or to import external data.

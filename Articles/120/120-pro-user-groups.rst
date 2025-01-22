@@ -23,13 +23,13 @@ Let us consider an example.
 Granting Access to Data with User Groups
 ---------------------------------------------
 
-Within the AIMMS PRO Portal, tab Users, the AIMMS PRO administrator can assign groups, as depicted in the picture below:
+Within the AIMMS PRO Portal, tab Users, the AIMMS Cloud administrator can assign groups, as depicted in the picture below:
 
 
 .. image:: images/Portal-with-groups.png
 
 
-This picture is taken from my AIMMS PRO test environment. Besides the predefined groups Admin, AimmsPublishers, AppPublishers, and Users, there are two organization specific groups added to this environment: Planners and Purchase. I have selected the group Planners and made Theo and myself users of that group. If I want to make Theo a member of Purchase as well, I just drag Theo’s icon to the Purchase group.
+This picture is taken from my AIMMS Cloud test environment. Besides the predefined groups Admin, AimmsPublishers, AppPublishers, and Users, there are two organization specific groups added to this environment: Planners and Purchase. I have selected the group Planners and made Theo and myself users of that group. If I want to make Theo a member of Purchase as well, I just drag Theo’s icon to the Purchase group.
 
 A first method with which you can determine who accesses certain kinds of information is by selecting users when an AIMMS App is published. At that time, the access rights can be assigned per environment, per group or per user as illustrated below:
 
@@ -44,7 +44,7 @@ Granting Access to Data within your App
 -----------------------------------------
 
 This brings us to a second method of granting access, which is within the application itself.
-The AIMMS PRO library allows an AIMMS App to identify the current user and identify the groups that user is in, namely via the procedure: ``pro::GetCurrentUserInfo``.
+The AIMMS PRO Library allows an AIMMS App to identify the current user and identify the groups that user is in, namely via the procedure: ``pro::GetCurrentUserInfo``.
 
 Let us continue our example. A planner may change the start and duration of production activities which are in the model represented by the parameters ``startProduction(a)`` and ``durationProduction(a)`` respectively.
 
@@ -79,7 +79,7 @@ Now we use this information to check whether the current user is a planner, and 
 
     if exists( pug | pro_cur_GroupName( pug ) = "Planners" ) then 
         ! The current APP user is a member of 
-        ! the AIMMS PRO user group Planners. 
+        ! the AIMMS Cloud user group Planners. 
         AllPublicIdentifiers += ! Make production plan data visible. 
            data { 'startProduction', 'durationProduction' } ; 
         CurrentInputs += ! Make production plan data modifiable. 
@@ -90,9 +90,9 @@ This example is rather specific for planners, but it is easy to generalize.
 
 After executing this code, only if the app user who is a member of the group Planners, he will see data in the widgets referencing ``'startProduction'``, and ``'durationProduction'.``
 
-Note that a user can be a member of multiple AIMMS PRO user groups; that is why the "+=" is used above – by executing code similar to the above for each potential user group the current app user belongs to, that user is granted data access to the union of identifiers that are specific to a user group.
+Note that a user can be a member of multiple AIMMS Cloud user groups; that is why the "+=" is used above – by executing code similar to the above for each potential user group the current app user belongs to, that user is granted data access to the union of identifiers that are specific to a user group.
 
-In this blog post we have considered restricting information to an AIMMS app user based on the roles assigned to that app user via the AIMMS PRO user groups. In the upcoming blog post in this series, we are going to discuss the building blocks for exchanging files between AIMMS PRO storage on the one hand and the storage system directly available to the app user.
+In this blog post we have considered restricting information to an AIMMS app user based on the roles assigned to that app user via the AIMMS Cloud user groups. In the upcoming blog post in this series, we are going to discuss the building blocks for exchanging files between AIMMS PRO Storage on the one hand and the storage system directly available to the app user.
 
 Sample App
 ----------
@@ -106,7 +106,7 @@ After starting, the opening screen looks like this:
 
 |
 
-You can take a screenshot when asked for credentials on AIMMS PRO and then close it. 
+You can take a screenshot when asked for credentials on AIMMS Cloud and then close it. 
 
 .. seealso::
 

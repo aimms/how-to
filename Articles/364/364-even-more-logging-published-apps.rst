@@ -28,4 +28,4 @@ To obtain more logging from a published WinUI application, the following steps a
 
     #.  ``C:\temp\aimms-log.xml``
 
-.. putting a loggerConfig file in an .aimmspack may conflict with settings from the log management system of AIMMS PRO.
+.. putting a loggerConfig file in an .aimmspack may conflict with settings from the log management system of AIMMS Cloud.

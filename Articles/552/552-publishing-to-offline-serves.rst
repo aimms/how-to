@@ -4,7 +4,7 @@ Publishing to Offline Servers
 The `AIMMS Repository Library <https://documentation.aimms.com/library-repository.html>`_ 
 places the library resources on the `url <https://library-repository.aimms.com/aimmslibs.all>`_.
 
-When the AIMMS PRO server does not have access to this url, then the repository libraries can be included
+When the AIMMS PRO On-Premise server does not have access to this url, then the repository libraries can be included
 in the .aimmspack by checking the ``_local_libs`` entry:
 
 .. image:: images/including-local-libs.png
@@ -12,7 +12,7 @@ in the .aimmspack by checking the ``_local_libs`` entry:
 
 |
 
-By putting these libraries in the ``.aimmspack``, the AIMMS PRO server no longer needs to download the AIMMS Libraries in the AIMMS repository them when the ``.aimmspack`` is published.
+By putting these libraries in the ``.aimmspack``, the AIMMS PRO On-Premise server no longer needs to download the AIMMS Libraries in the AIMMS repository them when the ``.aimmspack`` is published.
 
 .. spelling:word-list::
     url

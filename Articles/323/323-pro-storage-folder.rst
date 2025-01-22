@@ -5,16 +5,16 @@ Copy Folder Operations in PRO Storage
    :description: Utility apps for AIMMS PRO Storage, available for download including a brief user guide.
    :keywords: AIMMS PRO storage, deployment, utility
 
-This article provides for the source of four utility apps to operate on AIMMS PRO storage.
+This article provides for the source of four utility apps to operate on AIMMS PRO Storage.
 
-To access the apps, create an ``.aimmspack`` from these sources and publish them on your AIMMS PRO system.
+To access the apps, create an ``.aimmspack`` from these sources and publish them on your AIMMS Cloud.
 
 The app sources are available for download in the sections below:
 
 
 #. Copy a PRO Storage folder to a Windows folder on laptop/desktop: 323-copy-files-from-server_ 
 
-#. Copy files or folders to AIMMS PRO storage: 323-copy-files-to-server_ 
+#. Copy files or folders to AIMMS PRO Storage: 323-copy-files-to-server_ 
 
 .. _323-copy-files-from-server:
 

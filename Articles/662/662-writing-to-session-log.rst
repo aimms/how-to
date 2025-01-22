@@ -58,7 +58,7 @@ Implementation of the tracing procedure
 
 Remarks:
 
-#.  Line 4,5: Use the AIMMS PRO session log, if the application is published on AIMMS PRO.
+#.  Line 4,5: Use the AIMMS Cloud session log, if the application is published on AIMMS Cloud.
 
 #.  When the application is running via AIMMS Developer, a trace file is used. 
     The trace file is declared as follows. 

@@ -15,7 +15,7 @@ AIMMS PRO Storage is a disk area managed by AIMMS PRO On-Premise and AIMMS Cloud
 
 .. topic:: Terminology
 
-    Within AIMMS PRO Storage, folders are referred to as *buckets* and files are referred to as *objects*. When you look at the AIMMS PRO API, as presented in the AIMMS PRO library, you will see the terms buckets and objects. In this article, I will use the terms folders and files.
+    Within AIMMS PRO Storage, folders are referred to as *buckets* and files are referred to as *objects*. When you look at the AIMMS PRO API, as presented in the AIMMS PRO UI Library, you will see the terms buckets and objects. In this article, I will use the terms folders and files.
 
 AIMMS PRO Storage has the following folder structure, and it is best practice to follow it:
 
@@ -61,7 +61,7 @@ For WinUI apps you can exchange files with the functions ``pro::SaveFileToCentra
 
 This function will copy the file ``data.txt`` from the folder ``c:\inputs`` on the client Windows Desktop to the folder ``/PublicData/myapp/input`` in the AIMMS PRO Storage. 
 
-Note that ``Pro::SaveFileToCentralStorage`` requires the filename to be present in the second argument, and has a third optional argument to specify access rights for the file on the AIMMS PRO Storage system.  By default, a file inherits the access rights of the parent folder.
+Note that ``Pro::SaveFileToCentralStorage`` requires the filename to be present in the second argument, and has a third optional argument to specify access rights for the file on the AIMMS PRO Storage.  By default, a file inherits the access rights of the parent folder.
 
 It is a good practice to check if the file already exists in AIMMS PRO Storage, so that you can warn the end-user when a file is about to be overwritten. You can do this with a self-defined procedure ``proFileExists`` as follows:
 
@@ -119,7 +119,7 @@ In addition, it provides the `Download Widget <https://documentation.aimms.com/w
 
  .. seealso::
 
-    * :doc:`../120/120-pro-user-groups`: covers about AIMMS PRO User groups and how they can be used to authorize access to information within your AIMMS Apps. 
+    * :doc:`../120/120-pro-user-groups`
     * :doc:`../115/115-Securing-File-Access`: covers how to securely arrange file sharing.
     * `WebUI Library <https://documentation.aimms.com/webui/>`_
     * `AIMMS PRO On-Premise <https://documentation.aimms.com/pro/index.html#pro-platform>`_

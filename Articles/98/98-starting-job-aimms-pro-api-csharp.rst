@@ -1,4 +1,4 @@
-Start a Job via PRO API using C#
+Start a Job via AIMMS PRO API using C#
 ===================================================
 
 .. meta::
@@ -14,7 +14,7 @@ Prerequisites
 
 #. Get `AIMMS PRO API <https://documentation.aimms.com/pro/api.html>`_ via AIMMS PRO Portal
 
-   a. Log into AIMMS PRO
+   a. Log into AIMMS Cloud
 
    #. Go to :menuselection:`Help > Getting Started`
    
@@ -29,7 +29,7 @@ Running the Example
 #.  First publish the example application.
 
     You can find the example model in ``.\pro-api-complete\examples\AimmsModel\PROApiExampleApplication.aimms``.
-    Create an aimmspack, say ``PROApiExampleApplication.aimmspack``, and publish it on your AIMMS PRO system, for instance using the name ``PROApiExampleApplication`` and version ``1``. 
+    Create an aimmspack, say ``PROApiExampleApplication.aimmspack``, and publish it on your AIMMS Cloud, for instance using the name ``PROApiExampleApplication`` and version ``1``. 
 
     Adapt application details presented on lines 14 - 30.
     
@@ -42,7 +42,7 @@ Running the Example
             #. when connection not encrypted, start with ``ws``.
            
         
-        * Lines 32-34, ``PRO_ENVIRONMENT``, ``USERNAME``, and ``USER_PASSWORD`` should have been supplied by your AIMMS PRO administrator.
+        * Lines 32-34, ``PRO_ENVIRONMENT``, ``USERNAME``, and ``USER_PASSWORD`` should have been supplied by your AIMMS Cloud administrator.
         
         * Lines 38-39, ``PRO_APPLICATION_NAME``, ``PRO_APPLICATION_VERSION``, the name and version of the app as it is published.
 

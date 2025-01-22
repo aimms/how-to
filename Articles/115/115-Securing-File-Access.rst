@@ -34,7 +34,7 @@ An authorization string is a sequence of atomic authorization strings. An atomic
 
 * The %e is an element in the set ``guipro::PROEntity``, see above.
 
-For example, on my AIMMS PRO system the group 'planners' correspond to entity '1408', 
+For example, on my AIMMS Cloud the group 'planners' correspond to entity '1408', 
 and my friend Theo corresponds to entity '1792'. 
 Thus, to allow read/write access to Theo and read access to a planner for the file at hand, I use the following authorization string: ``"#4+1408" + "#6+1792"``. 
 To give Theo and the planners access to the ``data.txt`` input file, I should copy it as follows to AIMMS PRO Storage:
@@ -45,7 +45,7 @@ To give Theo and the planners access to the ``data.txt`` input file, I should co
 
 Note that when the third optional argument is not filled in, the file copied gets the access rights of the folder it is put in.
 
-In the AIMMS PRO UI library, there are also helper functions to parse and build authorization strings, 
+In the AIMMS PRO UI Library, there are also helper functions to parse and build authorization strings, 
 called ``DeconstructAuthorizationString`` and ``ConstructAuthorizationString`` respectively. 
 These two functions are easy to use front-ends for the above atomic operations.
 

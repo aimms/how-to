@@ -16,7 +16,7 @@ There are two mechanisms available to achieve this:
 #.  `Tasks v2 on AIMMS Cloud <https://documentation.aimms.com/cloud/tasks.html#schedule-task-s>`_ 
     explains clearly how to achieve regular execution easily.
 
-#.  AIMMS PRO jobs that reschedule themselves. This may be a bit tricky and warrants a detailed example.
+#.  AIMMS Cloud jobs that reschedule themselves. This may be a bit tricky and warrants a detailed example.
 
 In the remainder of this article, we'll discuss how an AIMMS job can reschedule itself, as depicted in the next picture.
 
@@ -27,7 +27,7 @@ In the remainder of this article, we'll discuss how an AIMMS job can reschedule 
 
 Effectively, this realizes that the job at hand is solved regularly. As you can see from this image:
 
-* The WebUI session you start via AIMMS PRO has an associated AIMMS data session. This data session has a ``pro::CurrentDelegationLevel()`` of 0; there is no delegation of work yet.
+* The WebUI session you start via AIMMS Cloud has an associated AIMMS data session. This data session has a ``pro::CurrentDelegationLevel()`` of 0; there is no delegation of work yet.
 
 * The AIMMS solver session started from this AIMMS Data Session has a ``pro::CurrentDelegationLevel()`` of 1; it is the consequence of one delegation.
 
@@ -126,13 +126,13 @@ Each portion of the procedure code is explained below:
 
 To operate, the example that can be downloaded :download:`here <downloads/JobRepetition.zip>`.
 
-#.  Create an .aimmspack, publish on your favorite AIMMS PRO system.
+#.  Create an .aimmspack, publish on your AIMMS Cloud.
 
 #.  Launch it and press the only button
 
 #.  Close the app. Yes, once the sequence of server sessions is started, the WebUI of the enclosed example is no longer of use - it can be closed.
 
-#.  Go to job tab in the AIMMS PRO portal and watch new jobs being created, queued, running, and finished.
+#.  Go to job tab in the AIMMS PRO Portal and watch new jobs being created, queued, running, and finished.
 
 .. image:: images/PROJobs.png
     :align: center

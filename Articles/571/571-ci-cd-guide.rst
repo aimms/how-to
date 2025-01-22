@@ -143,11 +143,11 @@ You may choose to conduct the above tests within the cloud environment. To do so
 
 The general steps required to achieve this is 
 
-* Publish the application using the AIMMS PRO Rest API to your QA/Test environment.  You can find some documentation `here <https://documentation.aimms.com/cloud/rest-api.html#managing-apps>`_ .
+* Publish the application using the AIMMS PRO REST API to your QA/Test environment.  You can find some documentation `here <https://documentation.aimms.com/cloud/rest-api.html#managing-apps>`_ .
 
 * Control which users can access this version via the Rest API
 
-* Run specific tests using the AIMMS PRO Rest API based on predefined tasks within your project. You will start the task via the Rest API during the pipeline. Here is the `documentation <https://documentation.aimms.com/cloud/tasks.html#running-tasks>`_ and a `general overview <https://how-to.aimms.com/Articles/561/561-openapi-overview.html>`_ .
+* Run specific tests using the AIMMS PRO REST API based on predefined tasks within your project. You will start the task via the Rest API during the pipeline. Here is the `documentation <https://documentation.aimms.com/cloud/tasks.html#running-tasks>`_ and a `general overview <https://how-to.aimms.com/Articles/561/561-openapi-overview.html>`_ .
 
 We recommend that you do not make the test versions of your application accessible to end-users until they have been validated in the acceptance tests. Hence you may want to delete versions used in tests like the above.
 
@@ -161,7 +161,7 @@ Release and feature notes, as well as version number control (which can not repe
 CD - Deployment on the Cloud
 ------------------------------
 
-Publishing and deployment of the application on the cloud can be achieved via the AIMMS PRO Rest API. Please follow the information on the `app management documentation <https://documentation.aimms.com/cloud/rest-api.html#managing-apps>`_ .
+Publishing and deployment of the application on the cloud can be achieved via the AIMMS PRO REST API. Please follow the information on the `app management documentation <https://documentation.aimms.com/cloud/rest-api.html#managing-apps>`_ .
 
 You can control which users can access to each application and version via the Rest API. 
 

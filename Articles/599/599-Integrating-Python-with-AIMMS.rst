@@ -370,7 +370,7 @@ In this article, the copying part is copying to AIMMS PRO Storage, using AIMMS P
 * ``pro::DeleteStorageFile``: Actual procedure that deletes (old) versions.
 
 
-Launching the Python app is achieved by the AIMMS PRO procedure ``pro::service::LaunchService`` as illustrated below:
+Launching the Python app is achieved by the AIMMS Cloud procedure ``pro::service::LaunchService`` as illustrated below:
 
 .. code-block:: aimms 
     :linenos:
@@ -381,7 +381,7 @@ Launching the Python app is achieved by the AIMMS PRO procedure ``pro::service::
 		imageName          :  "services/aimms-anaconda-service",   ! Image name
 		imageTag           :  "2023.07-1",                         ! Image version tag
 		listenPort         :  8000,                                ! Port used
-		storedApp          :  _sp_storedApp,                       ! AIMMS PRO storage location
+		storedApp          :  _sp_storedApp,                       ! AIMMS PRO Storage location
 		cmdLine            :  "python3 main.py"   );               ! Command line of app
 
 This starts the service and makes it accessible to the WebUI AIMMS app itself.

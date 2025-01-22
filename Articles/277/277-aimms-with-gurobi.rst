@@ -57,10 +57,10 @@ If you are running AIMMS on the same machine as Gurobi remote services, you will
 #. Set Gurobi as the default solver in the :menuselection:`Solver Configuration` dialog like in previous steps (see above).
 
 
-AIMMS PRO with Gurobi 
+AIMMS Cloud with Gurobi 
 ----------------------------------
 
-The instructions remain the same for AIMMS Developer and AIMMS PRO. Depending on whether AIMMS PRO server is a client to Gurobi server or they are on the same machine, create the appropriate license files and set the environment variables. 
+The instructions remain the same for AIMMS Developer and AIMMS Cloud. Depending on whether AIMMS Cloud is a client to Gurobi server or they are on the same machine, create the appropriate license files and set the environment variables. 
 
 You will need to set Gurobi as the solver to use before creating the *aimmspack* file and publish this with the appropriate license profile.
 

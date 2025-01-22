@@ -23,7 +23,7 @@ An AIMMS service can be hosted on:
 
 #.  **localhost**: A Windows machine with AIMMS Developer, or
 
-#.  **AIMMS Cloud**: An AIMMS cloud environment which includes a tailored AIMMS PRO.
+#.  **AIMMS Cloud**: An AIMMS cloud environment.
 
 The specifics of hosting your application in these two environments are provided in the two subsections below:
 

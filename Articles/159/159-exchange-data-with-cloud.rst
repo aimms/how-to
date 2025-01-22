@@ -123,7 +123,7 @@ Examples of how our customers have arranged their data exchange:
 a.	Every 5 minutes a web-service is called to retrieve the latest data which is then immediately processed by the AIMMS app.
 #.	From an on-premise database all new customer orders are written once a day to the cloud-based application database. 
 #.	User can hit a button in the AIMMS app that triggers a data import from an on-premise database containing the production planning so that they are working on the latest data.
-#.	An AIMMS application writes XML files to AIMMS PRO storage. An on-premise utility retrieves those files once every hour using the PRO API.
+#.	An AIMMS application writes XML files to AIMMS PRO Storage. An on-premise utility retrieves those files once every hour using the PRO API.
 
 
 More details on AIMMS Cloud architecture

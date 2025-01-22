@@ -95,7 +95,7 @@ A.  Blue, the client session:
 
             #.  Line 2: **requestDescription**: 
                 When multiple jobs are involved, it is worth paying attention to the job description.  
-                For starters, this makes identifying the job in the jobs tab of the AIMMS PRO portal easy.
+                For starters, this makes identifying the job in the jobs tab of the AIMMS PRO Portal easy.
 
             #.  Line 3: **waitForCompletion**: Not waiting for completion.  
                 This will allow the user to continue interacting with the application whilst the control session is working to obtain the desired results.
@@ -290,7 +290,7 @@ If no precautions are taken, these messages will be handled after the delegated 
 
 The intent of the app, however, is to let ``B. Control job`` collect results, perhaps do some processing of its own, then pass the results back to the client session.
 
-Luckily, the AIMMS PRO procedure ``pro::messaging::WaitForMessages`` permits to check and handle any message received.
+Luckily, the AIMMS Cloud procedure ``pro::messaging::WaitForMessages`` permits to check and handle any message received.
 An example is provided in the following:
 
 .. code-block:: aimms 
@@ -365,7 +365,7 @@ Resource considerations
 When multiple processes are actively executing at the same time on a single machine, it is important to avoid thread starvation.
 
 Please note that Both CPLEX and the AIMMS Execution engine may deploy multiple threads for efficient execution. 
-If there is also parallelization by doing multiple AIMMS PRO jobs simultaneously, thread starvation may occur. 
+If there is also parallelization by doing multiple AIMMS Cloud jobs simultaneously, thread starvation may occur. 
 When there is thread starvation, the overall performance is likely to be disappointing. 
 Both CPLEX and AIMMS provide option settings that limit the number of threads used:
 

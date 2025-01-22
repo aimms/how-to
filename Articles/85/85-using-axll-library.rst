@@ -15,7 +15,7 @@ AIMMS Excel Library - AXLL
 
 .. Overview
 
-The AimmsXLLibrary can communicate with Excel files in server environments where Excel is not installed. This is particularly useful when you deploy applications on AIMMS PRO which is typically installed on a machine with no Office / Excel instance. 
+The AimmsXLLibrary can communicate with Excel files in server environments where Excel is not installed. This is particularly useful when you deploy applications on AIMMS Cloud which is typically installed on a machine with no Office / Excel instance. 
 
 The workflow for integrating external Excel files with your AIMMS model is illustrated below. 
 

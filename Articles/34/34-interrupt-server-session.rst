@@ -18,7 +18,7 @@ Implementation
 
 .. image::  images/QueuesBetweenDataAndServerSession.png
 
-Interrupting the solver session is very direct and can be done by using the AIMMS PRO library procedure, ``pro::client::StopExecution`` which requires you to specify two input arguments.  
+Interrupting the solver session is very direct and can be done by using the AIMMS PRO Library procedure, ``pro::client::StopExecution`` which requires you to specify two input arguments.  
 
 #. ``queueID`` to which message queue is the server process listening? As we have only one solver session in our example, the current solver session queue can be obtained as a string parameter by using ``pro::session::CurrentSessionQueue()``.  
 

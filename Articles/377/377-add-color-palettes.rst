@@ -121,7 +121,7 @@ The :download:`genColorCSS application <model/genColorCSS.zip>` is a small app t
 .. note:: 
 
     Only AIMMS Developer works with dynamic collections of `.js` and `.css` files in the subfolder `resources` of `MainProject/WebUI`. 
-    Therefore `genColorCSS` does not work when published on AIMMS PRO.
+    Therefore `genColorCSS` does not work when published on AIMMS Cloud.
 
 
 Suggested Reading

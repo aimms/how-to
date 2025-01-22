@@ -13,7 +13,7 @@ Sharing is rewarding
     
 
 
-When you want to share results derived using an AIMMS decision support application, you may want to share these in a shared folder such as AIMMS PRO storage. This article discusses an example that shows 
+When you want to share results derived using an AIMMS decision support application, you may want to share these in a shared folder such as AIMMS PRO Storage. This article discusses an example that shows 
 
 * how to create the authorization string,
 
@@ -31,8 +31,8 @@ In this section we determine with whom we are sharing our files.
 .. code-block:: aimms
     :linenos:
 
-    ! Ensure all AIMMS PRO entities are known.
-    ! Examples of AIMMS PRO entities are the users and the groups.
+    ! Ensure all entities are known.
+    ! Examples of entities are the users and the groups.
     guipro::PopulateEntitySets( addUniversalSets:1 );
 
     ! Get the "users" group(s) and the "domain users" group(s) into an AIMMS set.
@@ -41,7 +41,7 @@ In this section we determine with whom we are sharing our files.
         ( StringToLower( guipro::PROEntityName( guipro::PRO_ENT ) ) = "users"        ) or 
         ( StringToLower( guipro::PROEntityName( guipro::PRO_ENT ) ) = "domain users" )    } ;
 
-* Line 3: This call to AIMMS PRO, via AIMMS PRO UI, is needed to retrieve the number / name / property list of all AIMMS PRO entities. AIMMS PRO entity is a group or an individual.
+* Line 3: This call to AIMMS Cloud, via AIMMS PRO UI, is needed to retrieve the number / name / property list of all AIMMS Cloud entities. AIMMS Cloud entity is a group or an individual.
 
 * Line 7 - 9: AIMMS set notation to find those groups that are called ``users`` or ``domain users``.
 

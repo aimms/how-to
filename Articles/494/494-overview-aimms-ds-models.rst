@@ -64,7 +64,7 @@ One way of such deployment is to containerize the API using Docker.
 A benefit of using docker is that once you have a Docker image, you can use it to run/deploy the API in multiple ways. 
 
 #. Run locally using Docker Desktop
-#. Deploy on-premise with `Kubernetes <https://www.docker.com/products/kubernetes>`_
+#. Deploy AIMMS PRO On-Premise with `Kubernetes <https://www.docker.com/products/kubernetes>`_
 #. Deploy on Microsoft Azure as an `App Service / Web App <https://docs.microsoft.com/en-us/azure/devops/pipelines/apps/cd/deploy-docker-webapp?view=azure-devops&tabs=python>`_
    or other cloud offerings like `AWS ECS <https://aws.amazon.com/getting-started/hands-on/deploy-docker-containers/>`_ and `Google Cloud <https://cloud.google.com/compute/docs/containers/deploying-containers>`_. 
 

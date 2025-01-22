@@ -7,7 +7,7 @@ Troubleshoot Unresponsive Applications
 
 .. index:: PRO, DelegateToServer, Error Handling
 
-Executing a ``pro::DelegateToServer`` from a WinUI AIMMS app launched from a distant AIMMS PRO server may fail due to various causes. 
+Executing a ``pro::DelegateToServer`` from a WinUI AIMMS app launched from a distant AIMMS Cloud may fail due to various causes. 
 In this article, we discuss one potential cause for an app not responding for more than a minute after the ``DelegateToServer`` call - an unstable internet connection. Wireless connections are more likely to be unstable compared to wired connections. 
 
 If this behavior is occurring frequently in your applications, you can use the Error Handling functionality offered in AIMMS to mitigate the situation.
@@ -24,7 +24,7 @@ The example app executes a procedure on the PRO Server upon pressing the button.
 
 #. The action associated with the button is executing the procedure ``pr_ButtonComputation``.
 
-#. This procedure will call another procedure ``pr_DelegateComputation`` that will handle the delegation to an AIMMS PRO server. This is the procedure with the ``pro::DelegateToServer`` call.
+#. This procedure will call another procedure ``pr_DelegateComputation`` that will handle the delegation to an AIMMS Cloud. This is the procedure with the ``pro::DelegateToServer`` call.
 
 #. Finally, the procedure that contains the actual computation ``pr_Computation`` is called. This is a very trivial procedure in this example but usually contains a ``solve`` statement. 
 

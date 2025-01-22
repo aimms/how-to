@@ -69,7 +69,7 @@ Like small data updates to the client session from the solver session are facili
 Further reading
 ---------------
 
-Information about `AIMMS PRO <https://documentation.aimms.com/pro/index.html>`_
+Information about `AIMMS Cloud <https://documentation.aimms.com/pro/index.html>`_
 
 
 

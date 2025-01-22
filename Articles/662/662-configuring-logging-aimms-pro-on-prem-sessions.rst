@@ -20,7 +20,7 @@ A transport problem with two bottling locations of fresh water and two distribut
 Packed
 -------
 
-In the .aimmspack, also a ``LoggerConfig.xml`` file is enclosed.  Some parts that are specific to logging for AIMMS PRO on Prem sessions are:
+In the .aimmspack, also a ``LoggerConfig.xml`` file is enclosed.  Some parts that are specific to logging for AIMMS PRO On-Premise sessions are:
 
 The appender used.
 
