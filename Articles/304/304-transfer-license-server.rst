@@ -1,11 +1,11 @@
-Migrate AIMMS PRO License Server
-==================================
+Migrate AIMMS Network License Server
+=====================================
 
 .. meta::
-   :description: How to migrate your PRO license server to another machine.
+   :description: How to migrate your AIMMS Network License Server to another machine.
    :keywords: PRO, license, server, migrate, move, transfer
 
-This article explains how to transfer AIMMS Licenses to a new server. For instructions to migrate your PRO server, please see :doc:`../308/308-migrate-pro-server-another-machine`.
+This article explains how to transfer the AIMMS Network License Server to a new server. For instructions to migrate your AIMMS PRO On-Premise server, please see :doc:`../308/308-migrate-pro-server-another-machine`.
 
 We will call these servers the original machine (**source host**) and the new machine (**target host**).
 
@@ -15,7 +15,7 @@ We do this in a few steps, detailed in the sections below:
 
 #. Deactivate the licenses on the original machine.
 
-#. Install the license server on the new machine.
+#. Install the Netwrork License Server on the new machine.
 
 #. Activate the licenses on the new machine.
 
@@ -33,13 +33,13 @@ An easy way is to create a screenshot of the license server like the one below.
 
 |
 
-For an AIMMS PRO server, you actually have three licenses:
+For AIMMS PRO On-Premise, you actually have three licenses:
 
-* **PROServer**: The license for the AIMMS PRO system itself, visualized by the portal.
+* **PROServer**: The license for the AIMMS PRO On-Premise system itself, visualized by the portal.
 
 * **PROSession**: The license to start solver sessions. This license limits the number of solver sessions that are handled in parallel.
 
-* **Client**: The license to start client sessions (seats). This license limits the number of users that can be logged on to the AIMMS PRO server at the same time.
+* **Client**: The license to start client sessions (seats). This license limits the number of users that can be logged on to the AIMMS PRO On-Premise server at the same time.
 
 
 Deactivating the Licenses on the Original Machine
