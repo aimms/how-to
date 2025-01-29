@@ -69,7 +69,7 @@ When you close the application tunnel will be also closed.
 We have further enhanced DB Tunnel app such that it can report errors when it can not start the tunnel. Example scenarios/error messages are:
 
 	* When the local port is already in use on the same machine by any other application. -- ``pro::tunnel::TunnelStart : while binding to tcp://localhost:3306``
-	* When AIMMS PRO User does not have access to the Tunnel. -- ``pro::tunnel::TunnelStart : Access denied``
+	* When the user does not have access to the Tunnel. -- ``pro::tunnel::TunnelStart : Access denied``
 	* When TunnelName is not found. -- ``pro::tunnel::TunnelStart : Tunnel not found``
 	
 .. image:: images/dbtunnel_error.png
