@@ -81,7 +81,7 @@ AIMMS Evolution related to TLS evolution is as follows:
 Upgrading to AIMMS PRO  On-Premise 2.37.2 or Later:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When AIMMS PRO is upgraded from before AIMMS PRO 2.37.2 to AIMMS PRO 2.37.2 or later; the PRO AppLauncher that supports TLS 1.3 also becomes available.
+When AIMMS PRO On-Premise is upgraded from before AIMMS PRO On-Premise 2.37.2 to AIMMS PRO On-Premise 2.37.2 or later; the PRO AppLauncher that supports TLS 1.3 also becomes available.
 For End-Users of WinUI applications to make use of this AppLauncher, they will need to 
 
 *   download (AIMMS PRO Portal > Help > Getting started > Button Download App Launcher) and 
@@ -103,6 +103,5 @@ it is best practice to proactively switch to AIMMS PRO On-Premise 2.37.2 (or lat
 
     * `AIMMS PRO On-Premise 2.37.2 release notes <https://documentation.aimms.com/pro-release-notes.html#aimms-pro-2-37-2-release>`_
     * `AIMMS Developer 4.76.4 release notes <https://documentation.aimms.com/release-notes.html#aimms-4-76-4-release-october-28-2020-build-4-76-4-11>`_
-    * `Wikipedia page on TLS <https://en.wikipedia.org/wiki/Transport_Layer_Security>`_
     * `TLS 1.3 Is Here to Stay <https://www.ssl.com/blogs/need-know-tls-1-3>`_
     * `TLS 1.3: Wikipedia <https://en.wikipedia.org/wiki/Transport_Layer_Security>`_
