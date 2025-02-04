@@ -21,7 +21,7 @@ This chapter is divided into three sections:
 
 
 Adding the library
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 To add and use this library to your project, first download the code and after, 
 follow these steps on `how to add an existing library to a project <https://how-to.aimms.com/Articles/84/84-using-libraries.html#add-aimms-libraries>`_.
