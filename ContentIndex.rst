@@ -24,7 +24,7 @@
             </a>
             <a class="box_home_page" href="C_Deployment/index.html">
                 <h1>Deployment</h1>
-                <div>Distributing your apps with AIMMS PRO On-Premise and AIMMS Cloud</div>
+                <div>Distributing your apps with AIMMS Cloud</div>
             </a>
             <a class="box_home_page" href="C_Evolution/index.html">
                 <h1>Software Evolution</h1>

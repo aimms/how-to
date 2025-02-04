@@ -19,7 +19,7 @@ Prerequisites
 
 #. Get `AIMMS PRO API <https://documentation.aimms.com/pro/api.html>`_ **via your AIMMS PRO Portal**.
 
-   a. Log into AIMMS Cloud
+   a. Log into AIMMS Cloud or AIMMS PRO On-Premise
 
    #. Go to :menuselection:`Help > Getting Started`
    
@@ -35,7 +35,7 @@ Running the Example
 #.  First publish the example application.
 
     You can find the example model in ``.\pro-api-complete\examples\AimmsModel\PROApiExampleApplication.aimms``.
-    Create an aimmspack, say ``PROApiExampleApplication.aimmspack`` and publish it on your AIMMS Cloud, for instance using the name ``PROApiExampleApplication`` and version ``1``. 
+    Create an aimmspack, say ``PROApiExampleApplication.aimmspack`` and publish it on your AIMMS Cloud or AIMMS PRO On-Premise, for instance using the name ``PROApiExampleApplication`` and version ``1``. 
 
 #.  Start the Java example by opening ``.\pro-api-complete\examples\java\pom.xml`` using IntelliJ IDEA.
 
@@ -62,7 +62,7 @@ Running the Example
             
             * when connection is not encrypted, start with ``ws``.
         
-        * Lines 32-34, ``DEFAULT_ENVIRONMENT``, ``DEFAULT_USERNAME``, and ``DEFAULT_PASSWORD`` should have been supplied by your AIMMS Cloud administrator.
+        * Lines 32-34, ``DEFAULT_ENVIRONMENT``, ``DEFAULT_USERNAME``, and ``DEFAULT_PASSWORD`` should have been supplied by your AIMMS Cloud or AIMMS PRO On-Premise administrator.
         
         * Lines 38-39, ``DEFAULT_APPLICATION_NAME``, ``DEFAULT_APPLICATION_VERSION``, the name and version of the app as it is published.
 
