@@ -85,10 +85,10 @@ There are ten stopwatches available.
 
 .. code-block:: aimms
 
-	Set s_stopwatches {
-		Index: i_stopwatch;
-		Definition: ElementRange(0,9,prefix:"stopwatch-");
-	}
+    Set s_stopwatches {
+        Index: i_stopwatch;
+        Definition: ElementRange(0,9,prefix:"stopwatch-");
+    }
 
 .. aimms:procedure:: pr_scheduleOver
 
@@ -96,9 +96,9 @@ This is a small frontend to :aimms:func:`ScheduleAt`, and accepts an elapsed tim
 
 .. code-block:: aimms
 
-	Procedure pr_scheduleOver {
-		Arguments: (p_noSeconds,ep_payLoad);
-	}
+    Procedure pr_scheduleOver {
+        Arguments: (p_noSeconds,ep_payLoad);
+    }
 
 .. aimms:function:: fnc_now
 
@@ -106,9 +106,9 @@ The current time, up to seconds precise, timezone UTC is often used to mark mome
 
 .. code-block:: aimms
 
-	Function fnc_now {
-		Range: string;
-	}
+    Function fnc_now {
+        Range: string;
+    }
 
 Basic Example
 ~~~~~~~~~~~~~~~ 
@@ -145,7 +145,7 @@ you can use another stopwatch; leading to the code:
 
    ! Reporting of the time spent on a specific task:
    sp_runTime := formatString("Execution of procedure pr_thisSpecificTask took %n seconds", 
-	   p_elapsedTimeSpecific );
+       p_elapsedTimeSpecific );
 
 Minimal Requirements
 ----------------------
@@ -169,11 +169,11 @@ Release Notes
 
 .. spelling:word-list::
 
-	ep
-	proc
-	frontend
-	func
-	scheduleOver
+    ep
+    proc
+    frontend
+    func
+    scheduleOver
 
 
 
