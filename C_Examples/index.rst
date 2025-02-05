@@ -13,7 +13,7 @@ Do you have thoughts or suggestions? Please find us in our `Community <https://c
    /Articles/545/545-summary-examples-features
    demo-applications/index
    functional-applications/index
-   winui-applications/index
+   other-applications/index
 
 Demo Applications
 --------------------

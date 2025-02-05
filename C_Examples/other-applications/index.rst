@@ -1,8 +1,9 @@
-WinUI Applications
+Other Applications
 ========================
 
-The application examples listed below illustrate the models described in the `AIMMS Optimization Modeling Book <https://documentation.aimms.com/_downloads/AIMMS_modeling.pdf>`_.
-Mainly focus in model development in older AIMMS's versions.
+The application examples listed below include the models described in the `AIMMS Optimization Modeling Book <https://documentation.aimms.com/_downloads/AIMMS_modeling.pdf>`_.
+These examples mainly focus on model development in older AIMMS's versions but these examples can also be used in the latest AIMMS version. Most examples use the WinUI or
+don't have an UI.
 
 .. toctree::
    :maxdepth: 1
@@ -102,4 +103,4 @@ Mainly focus in model development in older AIMMS's versions.
    /Articles/394/394-sudoku
    /Articles/395/395-traffic-equilibrium
    /Articles/396/396-transport-model
-
+   /Articles/662/662-cwl
