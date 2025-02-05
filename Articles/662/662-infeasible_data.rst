@@ -1,5 +1,5 @@
 
-Capacitated Warehouse Location
+Infeasible Data
 ==============================
 
 .. warning::
