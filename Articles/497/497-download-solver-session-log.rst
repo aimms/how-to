@@ -59,7 +59,7 @@ Perhaps interesting is that using AIMMS PRO 2.34 and newer, session logs are nam
 The above is sufficient to write code to copy the session log first in the project folder, and then to download it to you download folder. 
 This code detailed in the next section, and in the last section it is explained how to integrate in your own application. 
 
-.. tip:: As an admin you can trigger the elaborate naming of session log files by pressing the buttons ``Restore all to defaults`` and ``Save settings`` in the tab ``Configuration > Log Management`` of the AIMMS PRO portal.
+.. tip:: As an admin you can trigger the elaborate naming of session log files by pressing the buttons ``Restore all to defaults`` and ``Save settings`` in the tab ``Configuration > Log Management`` of the AIMMS Portal.
 
 
 As a first step, the complete filename of the session log is determined.

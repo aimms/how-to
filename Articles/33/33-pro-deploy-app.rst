@@ -117,7 +117,7 @@ When you open your AIMMS portal, you should see something like this, in particul
 
 .. note:: If you do not have the publish button, please contact your AIMMS PRO administrator and ask to become a member of the ``AppPublishers`` group.
    
-Pressing the publish button on the AIMMS PRO portal, you will be asked for the .aimmspack file.  After uploading this, you will get you to:
+Pressing the publish button on the AIMMS Portal, you will be asked for the .aimmspack file.  After uploading this, you will get you to:
 
 .. image:: images/PublicationFilledIn.PNG
    :scale: 50 %

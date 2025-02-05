@@ -133,7 +133,7 @@ Anyway, now that we have this log file open, we may want to search for other occ
 On the AIMMS PRO server, wait for a server license
 ---------------------------------------------------
 
-This is also known as wait time or queueing time. This can be obtained from the Jobs tab in the AIMMS PRO Portal as illustrated in the image below:
+This is also known as wait time or queueing time. This can be obtained from the Jobs tab in the AIMMS Portal as illustrated in the image below:
 
 .. image:: images/JobsTabForQueueing.png
     :align: center

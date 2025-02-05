@@ -84,7 +84,7 @@ Upgrading to AIMMS PRO  On-Premise 2.37.2 or Later:
 When AIMMS PRO On-Premise is upgraded from before AIMMS PRO On-Premise 2.37.2 to AIMMS PRO On-Premise 2.37.2 or later; the PRO AppLauncher that supports TLS 1.3 also becomes available.
 For End-Users of WinUI applications to make use of this AppLauncher, they will need to 
 
-*   download (AIMMS PRO Portal > Help > Getting started > Button Download App Launcher) and 
+*   download (AIMMS Portal > Help > Getting started > Button Download App Launcher) and 
 
 *   install it (by running the downloaded executable).
 

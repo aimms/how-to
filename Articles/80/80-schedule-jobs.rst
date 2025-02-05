@@ -132,7 +132,7 @@ To operate, the example that can be downloaded :download:`here <downloads/JobRep
 
 #.  Close the app. Yes, once the sequence of server sessions is started, the WebUI of the enclosed example is no longer of use - it can be closed.
 
-#.  Go to job tab in the AIMMS PRO Portal and watch new jobs being created, queued, running, and finished.
+#.  Go to job tab in the AIMMS Portal and watch new jobs being created, queued, running, and finished.
 
 .. image:: images/PROJobs.png
     :align: center

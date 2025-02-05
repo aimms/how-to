@@ -12,7 +12,7 @@ Prerequisites
 
     If you don't have Visual Studio installed, you may get it on Microsoft's website: `Install Visual Studio <https://visualstudio.microsoft.com/vs/express/>`_
 
-#. Get `AIMMS PRO API <https://documentation.aimms.com/pro/api.html>`_ via AIMMS PRO Portal
+#. Get `AIMMS PRO API <https://documentation.aimms.com/pro/api.html>`_ via AIMMS Portal
 
    a. Log into AIMMS Cloud or AIMMS PRO On-Premise
 

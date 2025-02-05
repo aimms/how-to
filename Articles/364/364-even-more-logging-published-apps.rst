@@ -20,7 +20,7 @@ To obtain more logging from a published WinUI application, the following steps a
     .. image:: images/WinUIAppCacheFolder.png
         :align: center
     
-#.  Run the application again by launching it from the AIMMS PRO Portal.
+#.  Run the application again by launching it from the AIMMS Portal.
 
 #.  After closing the application, the session log files are:
 

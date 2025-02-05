@@ -95,7 +95,7 @@ A.  Blue, the client session:
 
             #.  Line 2: **requestDescription**: 
                 When multiple jobs are involved, it is worth paying attention to the job description.  
-                For starters, this makes identifying the job in the jobs tab of the AIMMS PRO Portal easy.
+                For starters, this makes identifying the job in the jobs tab of the AIMMS Portal easy.
 
             #.  Line 3: **waitForCompletion**: Not waiting for completion.  
                 This will allow the user to continue interacting with the application whilst the control session is working to obtain the desired results.

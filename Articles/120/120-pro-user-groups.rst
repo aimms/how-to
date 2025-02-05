@@ -23,7 +23,7 @@ Let us consider an example.
 Granting Access to Data with User Groups
 ---------------------------------------------
 
-Within the AIMMS PRO Portal, tab Users, the AIMMS Cloud administrator can assign groups, as depicted in the picture below:
+Within the AIMMS Portal, tab Users, the AIMMS Cloud administrator can assign groups, as depicted in the picture below:
 
 
 .. image:: images/Portal-with-groups.png

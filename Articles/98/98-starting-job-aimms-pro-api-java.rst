@@ -17,7 +17,7 @@ Prerequisites
    More information about JDK can be found in Oracle's 
    documentation: `JDK Documentation <https://docs.oracle.com/en/java/javase/11/>`_
 
-#. Get `AIMMS PRO API <https://documentation.aimms.com/pro/api.html>`_ **via your AIMMS PRO Portal**.
+#. Get `AIMMS PRO API <https://documentation.aimms.com/pro/api.html>`_ **via your AIMMS Portal**.
 
    a. Log into AIMMS Cloud or AIMMS PRO On-Premise
 
