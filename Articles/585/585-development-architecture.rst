@@ -62,7 +62,7 @@ Therefor the service to solve an optimization problem is separated into the foll
 
 #.  **Retrieve:** Retrieve results.
 
-The server process that is initiated, monitored, and retrieved is called a task in AIMMS PRO REST API terminology.
+The server process that is initiated, monitored, and retrieved is called a task in AIMMS Rest API terminology.
 
 
 The URL Prefix

@@ -2,7 +2,7 @@ Develop an AIMMS Service
 ========================
 
 .. meta::
-   :description: Help and support to Develop, Test, and Deploy a Service by using the **tasks** methods of the AIMMS PRO REST API
+   :description: Help and support to Develop, Test, and Deploy a Service by using the **tasks** methods of the AIMMS Rest API
 
 These topics help you to 
 
@@ -12,7 +12,7 @@ These topics help you to
 
 * deploy 
 
-a service, by using the **tasks methods** of the `AIMMS PRO REST API <https://documentation.aimms.com/cloud/rest-api.html>`_.
+a service, by using the **tasks methods** of the `AIMMS Rest API <https://documentation.aimms.com/cloud/rest-api.html>`_.
 
 
 .. toctree::

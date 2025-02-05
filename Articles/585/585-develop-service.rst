@@ -82,9 +82,9 @@ Once a service is available it can be used. In this part, we present several cli
 References
 ------------
 
-#.  AIMMS PRO REST API method documentation:
+#.  AIMMS Rest API method documentation:
 
-    #. Obtain a .json file describing the `OpenAPI 3.0 specification of AIMMS PRO REST API <https://documentation.aimms.com/cloud/rest-api.html#aimms-pro-rest-api>`_ for your AIMMS Cloud environment.
+    #. Obtain a .json file describing the `OpenAPI 3.0 specification of AIMMS Rest API <https://documentation.aimms.com/cloud/rest-api.html#aimms-pro-rest-api>`_ for your AIMMS Cloud environment.
 
     #. Import that .json file using the online `Swagger Editor <https://editor-next.swagger.io/>`_
 

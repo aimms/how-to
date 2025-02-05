@@ -12,7 +12,7 @@ Preparation
 Excel comes with Visual Basic for Applications (VBA) permitting via the  
 ``WinHttp.WinHttpRequest.5.1`` library to leverage REST API services.
 
-Preparing to create a VBA Client of your own using AIMMS REST API Tasks, you will have to:
+Preparing to create a VBA Client of your own using AIMMS Rest API Tasks, you will have to:
 
 #.  Enable some libraries, via the Visual Basic Editor (``Alt + F11``), :menuselection:`Tools > References`, most importantly:
 

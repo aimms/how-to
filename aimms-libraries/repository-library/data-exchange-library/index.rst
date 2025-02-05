@@ -3,7 +3,7 @@ DataExchange Library (DEX)
 
 .. meta::
    :description: The Data Exchange Library (DEX) enables seamless integration of AIMMS models with various data formats (JSON, XML, CSV, Excel) and REST APIs for efficient data exchange.
-   :keywords: AIMMS Data Exchange Library, AIMMS DEX, AIMMS JSON integration, AIMMS XML data mapping, AIMMS CSV data import, AIMMS Excel data export, AIMMS REST API integration, AIMMS HTTP client, AIMMS data format mapping, AIMMS multi-dimensional data exchange.
+   :keywords: AIMMS Data Exchange Library, AIMMS DEX, AIMMS JSON integration, AIMMS XML data mapping, AIMMS CSV data import, AIMMS Excel data export, AIMMS Rest API integration, AIMMS HTTP client, AIMMS data format mapping, AIMMS multi-dimensional data exchange.
 
 The **DataExchange Library** (DEX) is a versatile tool that enables seamless integration between AIMMS models and various data formats 
 commonly used in REST APIs. It facilitates the mapping of multi-dimensional AIMMS data onto tree-based formats such as JSON, YAML, XML, 
