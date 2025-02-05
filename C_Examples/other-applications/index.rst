@@ -45,6 +45,7 @@ don't have an UI.
    /Articles/419/419-goal-programming
    /Articles/420/420-horizon
    /Articles/421/421-indexed-page
+   /Articles/662/662-infeasible_data
    /Articles/422/422-interrupt-aimms-externally
    /Articles/423/423-linked-objects
    /Articles/424/424-model-edit-api
@@ -103,4 +104,3 @@ don't have an UI.
    /Articles/394/394-sudoku
    /Articles/395/395-traffic-equilibrium
    /Articles/396/396-transport-model
-   /Articles/662/662-cwl
