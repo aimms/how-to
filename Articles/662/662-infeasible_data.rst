@@ -34,7 +34,7 @@ infeasible data. A text message will be displayed and several data cells will
 be colored. To color the cells, the webui::AnnotationsIdentifier attribute of
 the parameters Capacity, Demand and AllocationCost is used. The colors are
 specified in the file 'backgroundcolor.css' in the following subfolder:
-MainProject\WebUI\resources\css.
+MainProject\\WebUI\\resources\\css.
 
 Keywords:
 Capacitated warehouse location, WebUI, Infeasible data
