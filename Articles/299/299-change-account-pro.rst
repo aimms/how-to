@@ -1,7 +1,7 @@
-Change AIMMS PRO Service Account
+Change AIMMS PRO On-Premise Service Account
 =====================================================
 .. meta::
-   :description: How to change the account AIMMS PRO is running on.
+   :description: How to change the account AIMMS PRO On-Premise is running on.
    :keywords: PRO, account
 
 
@@ -17,7 +17,7 @@ This article explains the procedure to change the PRO account that runs the AIMM
 Overview
 --------------------
 
-AIMMS jobs are run on the PRO server with the name ``AimmsPROSession.exe``. 
+AIMMS jobs are run on the PRO On-Premise server with the name ``AimmsPROSession.exe``. 
 
 .. image:: images/AimmsPROSession1.png
     :align: center
@@ -38,7 +38,7 @@ To change the account for the service, you'll follow this process:
 
 We'll go step-by-step in more detail below.
 
-Stopping the Service in PRO
+Stopping the Service in AIMMS PRO On-Premise
 ---------------------------
 
 Before making changes to the service, it is a good idea to stop those services.
@@ -74,8 +74,8 @@ Changing the Service in Windows Services
     
 You can fill in another account, such as a service account. Find out more in `Microsoft Documentation: Service accounts <https://docs.microsoft.com/en-us/windows/security/identity-protection/access-control/service-accounts>`_.
 
-Restarting the Service in PRO
------------------------------
+Restarting the Service in PRO On-Premise
+-----------------------------------
 
 Log in again as an admin on the AIMMS PRO service and start the services again:
 
@@ -113,7 +113,7 @@ Test Project
 
 To test for yourself, you can use the simple WinUI model :download:`WaitABit.zip <model/WaitABit.zip>`. 
 
-After publishing and launching this app, just press the huge button to start an AIMMS job that waits for five minutes on the AIMMS PRO server.
+After publishing and launching this app, just press the huge button to start an AIMMS job that waits for five minutes on the AIMMS PRO On-Premise server.
 
 
 
