@@ -47,7 +47,7 @@ Capacitated warehouse location, WebUI, Infeasible data
 .. seealso::
    * Section `Explainability <https://documentation.aimms.com/language-reference/optimization-modeling-components/implementing-advanced-algorithms-for-mathematical-programs/managing-generated-mathematical-program-instances.html#explainability>`__
      in the Language Reference
-   * Procedure `GMP::Instance::GetInfeasibleData <https://https://documentation.aimms.com/functionreference/algorithmic-capabilities/the-gmp-library/gmp_instance-procedures-and-functions/gmp_instance_getinfeasibledata.html>`__
+   * Procedure `GMP::Instance::GetInfeasibleData <https://documentation.aimms.com/functionreference/algorithmic-capabilities/the-gmp-library/gmp_instance-procedures-and-functions/gmp_instance_getinfeasibledata.html>`__
      in the Function Reference
 
 .. below are spelling exceptions only for this document
