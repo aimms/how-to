@@ -2,7 +2,7 @@ Other Applications
 ========================
 
 The application examples listed below include the models described in the `AIMMS Optimization Modeling Book <https://documentation.aimms.com/_downloads/AIMMS_modeling.pdf>`_.
-These examples mainly focus on model development in older AIMMS's versions but these examples can also be used in the latest AIMMS version. Most examples use the WinUI or
+These examples mainly focus on model development in older AIMMS's versions but most examples can also be used with the latest AIMMS version. Most examples use the WinUI or
 don't have an UI.
 
 .. toctree::
