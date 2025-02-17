@@ -1,10 +1,13 @@
-Retrieve Solver Log Files in AIMMS Cloud
-==========================================
+Retrieve Solver Log Files in an AIMMS PRO On-Premise setup
+============================================================
 
 .. meta::
    :description: How to get log files from a particular solver in AIMMS Cloud.
    :keywords: log, logfile, solver
 
+.. note:: 
+
+    The solver session logs for AIMMS Cloud are not yet accessible to end users. They can be provided upon request to support@aimms.com 
 
 In :doc:`13-Solver-Logging-IDE`, we explain how to adapt the project such that solver log files are available for inspection. 
 A solver session runs somewhere on an AIMMS PRO server, and as a user, you do not have direct access to those files. 
