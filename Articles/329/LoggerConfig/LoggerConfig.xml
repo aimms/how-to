@@ -105,6 +105,9 @@
         <!--- The multi-threaded AIMMS Engine -->
         <level value="info"/>
     </logger>
+    <logger name="AIMMS.Generator" >
+        <level value="trace"/>
+    </logger>
     <logger name="AIMMS.gui" >
         <level value="warn"/>
     </logger>
