@@ -106,7 +106,7 @@
         <level value="info"/>
     </logger>
     <logger name="AIMMS.Generator" >
-        <level value="trace"/>
+        <level value="info"/>
     </logger>
     <logger name="AIMMS.gui" >
         <level value="warn"/>
