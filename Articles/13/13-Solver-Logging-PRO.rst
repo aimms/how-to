@@ -1,4 +1,4 @@
-Retrieve Solver Log Files in an AIMMS PRO On-Premise setup
+Retrieve Solver Log Files in an AIMMS PRO On-Premise Setup
 ============================================================
 
 .. meta::
