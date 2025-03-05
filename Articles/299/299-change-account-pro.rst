@@ -39,7 +39,7 @@ To change the account for the service, you'll follow this process:
 We'll go step-by-step in more detail below.
 
 Stopping the Service in AIMMS PRO On-Premise
----------------------------
+------------------------------------------------------
 
 Before making changes to the service, it is a good idea to stop those services.
 
@@ -75,7 +75,7 @@ Changing the Service in Windows Services
 You can fill in another account, such as a service account. Find out more in `Microsoft Documentation: Service accounts <https://docs.microsoft.com/en-us/windows/security/identity-protection/access-control/service-accounts>`_.
 
 Restarting the Service in PRO On-Premise
------------------------------------
+-----------------------------------------
 
 Log in again as an admin on the AIMMS PRO service and start the services again:
 
@@ -85,7 +85,7 @@ Log in again as an admin on the AIMMS PRO service and start the services again:
 |
 
 Verifying the Change in Windows Services
-----------------------------------------
+------------------------------------------
 
 Open up the Services app again.
 
