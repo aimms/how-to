@@ -25,7 +25,7 @@ Selected aspects important to developing any service are:
     As a REST API service can be used by various separate clients, different software systems can be used to develop the various clients involved.
 
 #.  **Deployment**: Which computer hosts the service? Can it be run in parallel? Is the usage of the service secure?
-    The effort needed to answer such questions depend on the deployment platform used.
+    The effort required to answer such questions depends on whether the deployment is on AIMMS Cloud or AIMMS PRO On-Premise.
 
 Before we dive into the details of the above, let me introduce the background against which we illustrate the above.
 
@@ -82,9 +82,9 @@ Once a service is available it can be used. In this part, we present several cli
 References
 ------------
 
-#.  AIMMS PRO REST API method documentation:
+#.  AIMMS Rest API method documentation:
 
-    #. Obtain a .json file describing the `OpenAPI 3.0 specification of AIMMS PRO REST API <https://documentation.aimms.com/cloud/rest-api.html#aimms-pro-rest-api>`_ for your AIMMS Cloud environment.
+    #. Obtain a .json file describing the `OpenAPI 3.0 specification of AIMMS Rest API <https://documentation.aimms.com/cloud/rest-api.html#aimms-pro-rest-api>`_ for your AIMMS Cloud environment.
 
     #. Import that .json file using the online `Swagger Editor <https://editor-next.swagger.io/>`_
 

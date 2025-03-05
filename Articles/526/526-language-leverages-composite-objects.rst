@@ -61,7 +61,7 @@ As the set ``s_arcIds`` is an ordinary set, we can use it everywhere an AIMMS se
         }
     }
 
-With these declarations, the existing AIMMS language can be used:
+With these declarations, the existing AIMMS Language can be used:
 
 .. code-block:: aimms
     :linenos:

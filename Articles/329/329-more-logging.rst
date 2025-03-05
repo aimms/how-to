@@ -17,7 +17,7 @@ This zip file contains the ``LoggerConfig.xml`` file.
 
 .. note:: 
 
-    Security notice, see:  `Apache log4j vulnerability does not affect AIMMS software <https://community.aimms.com/aimms-pro-cloud-platform-43/apache-log4j-vulnerability-does-not-affect-aimms-software-1123>`_
+    Security notice, see:  `Apache log4j vulnerability does not affect AIMMS Optimization Tooling <https://community.aimms.com/aimms-pro-cloud-platform-43/apache-log4j-vulnerability-does-not-affect-aimms-software-1123>`_
 
 This article will:
 
@@ -59,7 +59,7 @@ Terminology
 
 #.  **Appender** There are four ``appenders`` available:
 
-    #.  to generate output for server sessions and WebUI data session on AIMMS PRO on Premise,
+    #.  to generate output for server sessions and WebUI data session on AIMMS PRO On-Premise,
 
     #.  to generate output to AIMMS Cloud,
     
@@ -86,7 +86,7 @@ We will cover their purpose below as well as if and how to modify them according
     #.  For logging of sessions on AIMMS Cloud -> ``stdout`` - this means that the cloud logs for a certain component will be increased (please note that cloud logs are accessible for AIMMS only, but you can request a copy - just send a request to support@aimms.com);
 
 
-    #.  For logging of sessions of AIMMS PRO on premise -> to the folder AimmsPRO/Log/Sessions (for a solver session or for a WebUI data session, not for a WinUI session);
+    #.  For logging of sessions of AIMMS PRO On-Premise -> to the folder AimmsPRO/Log/Sessions (for a solver session or for a WebUI data session, not for a WinUI session);
 
 
     #.  For logging of activities in AIMMS Developer there are two options:
@@ -168,7 +168,7 @@ For logging of WebUI, solver and rest sessions in AIMMS Cloud
 #.  Please provide the relevant information to the AIMMS team so they can access the logs for you.
 
 
-For logging of WinUI sessions in AIMMS Cloud or in AIMMS PRO on premise
+For logging of WinUI sessions in AIMMS Cloud or in AIMMS PRO On-Premise
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
@@ -196,7 +196,7 @@ Inspecting Logging Information
 
 .. note:: 
 
-    The logging is designed by developers of the AIMMS software for themselves - as aid in developing this software. This is why the interpretation of these log files may not be obvious. Therefore, definite interpretation should be left to those developers. You can request such analysis by sending in a request to support@aimms.com 
+    The logging is designed by developers of the AIMMS Optimization Tooling for themselves - as aid in developing an application. This is why the interpretation of these log files may not be obvious. Therefore, definite interpretation should be left to those developers. You can request such analysis by sending in a request to support@aimms.com 
     
     Most importantly, don't be unnecessarily alarmed: An error or warning message in the log file does NOT necessarily indicate a problem in the application. 
 

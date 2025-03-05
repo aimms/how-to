@@ -23,7 +23,7 @@ An AIMMS service can be hosted on:
 
 #.  **localhost**: A Windows machine with AIMMS Developer, or
 
-#.  **AIMMS Cloud**: An AIMMS cloud environment which includes a tailored AIMMS PRO.
+#.  **AIMMS Cloud**: An AIMMS cloud environment.
 
 The specifics of hosting your application in these two environments are provided in the two subsections below:
 
@@ -62,7 +62,7 @@ Therefor the service to solve an optimization problem is separated into the foll
 
 #.  **Retrieve:** Retrieve results.
 
-The server process that is initiated, monitored, and retrieved is called a task in AIMMS PRO REST API terminology.
+The server process that is initiated, monitored, and retrieved is called a task in AIMMS Rest API terminology.
 
 
 The URL Prefix

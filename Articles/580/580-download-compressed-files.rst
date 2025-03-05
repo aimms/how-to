@@ -2,7 +2,7 @@ Zipping and Unzipping Files
 ====================================
 
 .. meta::
-   :description: How to zip, unzip using AIMMS Developer, AIMMS PRO and on AIMMS Cloud.
+   :description: How to zip, unzip using AIMMS Developer, AIMMS PRO On-Premise and on AIMMS Cloud.
    :keywords: zip, unzip, compress, expand, cloud
 
 Downloading and uploading a collection of files is achieved by first compressing into a single file, 

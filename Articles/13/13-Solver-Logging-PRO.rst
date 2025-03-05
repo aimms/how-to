@@ -1,10 +1,13 @@
-Retrieve Solver Log Files in AIMMS PRO
-==========================================
+Retrieve Solver Log Files in an AIMMS PRO On-Premise setup
+============================================================
 
 .. meta::
-   :description: How to get log files from a particular solver in AIMMS PRO.
+   :description: How to get log files from a particular solver in AIMMS Cloud.
    :keywords: log, logfile, solver
 
+.. note:: 
+
+    The solver session logs for AIMMS Cloud are not yet accessible to end users. They can be provided upon request to support@aimms.com 
 
 In :doc:`13-Solver-Logging-IDE`, we explain how to adapt the project such that solver log files are available for inspection. 
 A solver session runs somewhere on an AIMMS PRO server, and as a user, you do not have direct access to those files. 
@@ -31,7 +34,7 @@ Some progress information can be obtained via setting the option ``major_message
     09:21:47,138 0x7f55877fe700 [INFO] {AIMMS.gui.vm-prog} Calling CPLEX 12.8 to solve MIP FlowShopModel minimize TimeSpan.
     09:21:47,169 0x7f55877fe700 [INFO] {AIMMS.gui.vm-prog} There is 0 Kb in use by CPLEX 12.8.
         
-Alternatively, you can obtain this information via ``AIMMS.solver`` logger by setting the log option of ``AIMMS Sessions`` to ``Debug`` in the ``log management`` page of tab ``configuration`` of the AIMMS PRO portal. If this option is even set trace, you will also get the "reason to interrupt" of a solve statement. Beware; setting this option to trace typically leads to large amounts of trace - in addition, changing this option also leads to increased tracing for other applications.
+Alternatively, you can obtain this information via ``AIMMS.solver`` logger by setting the log option of ``AIMMS Sessions`` to ``Debug`` in the ``log management`` page of tab ``configuration`` of the AIMMS Portal. If this option is even set trace, you will also get the "reason to interrupt" of a solve statement. Beware; setting this option to trace typically leads to large amounts of trace - in addition, changing this option also leads to increased tracing for other applications.
 
 The solver used, determines the name of the solver log file. Now let's get that solver log file saved directly after a solve.        
 

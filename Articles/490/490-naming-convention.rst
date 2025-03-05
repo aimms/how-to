@@ -17,9 +17,9 @@ Nobody seriously disputes that having clear and descriptive identifier names hel
 
 There are several use cases for developing with AIMMS:
 
-#.  The first use case of the AIMMS language is to formulate models for Decision Support applications. 
+#.  The first use case of the AIMMS Language is to formulate models for Decision Support applications. 
 
-#.  A second second use case of the AIMMS language is to create generic libraries, for instance the libraries as presented in the `AIMMS library repository <https://documentation.aimms.com/library-repository.html>`_.
+#.  A second second use case of the AIMMS Language is to create generic libraries, for instance the libraries as presented in the `AIMMS Library Repository <https://documentation.aimms.com/library-repository.html>`_.
 
 The choices made in this article focus on the first purpose.
 
@@ -63,13 +63,13 @@ In other words, as a model builder, inspecting and analyzing a model, you will n
 #.  So-called knowns; values for these symbols are not determined by the solution algorithm but are directly, or indirectly, provided by an external source. 
     Such symbols are usually called 'data' or 'parameters' in the operations research literature. 
     In economic literature, these symbols correspond to so-called exogenous variables.
-    These knowns are called ``parameters`` in the AIMMS language.
+    These knowns are called ``parameters`` in the AIMMS Language.
 
 #.  So-called unknowns; values for these symbols are determined by the solution algorithm. 
     They typically correspond to the decisions made by the decision-maker.
     Such symbols are usually called decision variables in the operations research literature or variables for short.
     In economic literature, these correspond to so-called endogenous variables.
-    These unknowns are called ``variables`` in the AIMMS language.
+    These unknowns are called ``variables`` in the AIMMS Language.
 
 
 Distinguishing parameters and variables
@@ -91,7 +91,7 @@ More modern approaches rely on the development environment to make such a distin
 These two modern approaches are supported by the AIMMS IDE.  
 However, AIMMS models are not only presented in the AIMMS IDE, they are also part of other documentation for instance these How-To articles, in educational material, and in technical reports about the applications.
 
-Note that the IDE approach and the prefixing approach to distinguish between parameters and variables do not exclude each other, they complement each other.
+Note that the AIMMS IDE approach and the prefixing approach to distinguish between parameters and variables do not exclude each other, they complement each other.
 
 Other naming conventions in practice
 """""""""""""""""""""""""""""""""""""""""

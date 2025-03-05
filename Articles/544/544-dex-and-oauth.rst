@@ -8,7 +8,7 @@ Using OAuth2 for API Authorization with DEX
 =============================================
 
 .. important::
-	- Minimum AIMMS PRO version: 2.90
+	- Minimum AIMMS PRO On-Premise version: 2.90
 	- Minimum AIMMS WebUI version: 4.90
 	
 With the Data Exchange Library (DEX) you can use `the OAuth2 protocol <https://documentation.aimms.com/dataexchange/rest-client.html#using-oauth2-for-api-authorization>`__ for the authentication procedure of API's. On this how-to page you can find more details on how this type of authorization works and the flows that come with it. You can download the example project to replicate the examples described below.
@@ -50,7 +50,7 @@ This provides us with some details we will need for the flow to work (see right 
 
 |
 
-You can see in the section at the bottom left that we've added two redirect URI's; one for usage from the AIMMS Cloud (URI 1) and one for usage from a locally opened AIMMS PRO (URI 2), so the connection should work both from a local connection as well as from an AIMMS app uploaded to the cloud. 
+You can see in the section at the bottom left that we've added two redirect URI's; one for usage from the AIMMS Cloud (URI 1) and one for usage from a locally opened AIMMS (URI 2), so the connection should work both from a local connection as well as from an AIMMS app uploaded to the cloud. 
 
 If we take a look at the setup within AIMMS we see the following:
 

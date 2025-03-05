@@ -3,7 +3,7 @@ Number of running and pending solver sessions
 
 .. meta::
    :description: The number of pending and running jobs may influence the decision to add more jobs.
-   :keywords: deployment, AIMMS PRO, jobs, queue, queueing, solving
+   :keywords: deployment, AIMMS Cloud, jobs, queue, queueing, solving
 
 .. RetrieveSessionList
 .. ListActiveSessions
@@ -16,7 +16,7 @@ Number of running and pending solver sessions
 .. 
 
 
-When starting a new solver session it is useful to know whether there are other server sessions started on the same server. This article explains how to find out the number of sessions running at an AIMMS PRO server.
+When starting a new solver session it is useful to know whether there are other server sessions started on the same server. This article explains how to find out the number of sessions running at an AIMMS Cloud.
 
 
 Scope
@@ -24,9 +24,9 @@ Scope
 
 We will discuss two variations on the number of server sessions:
 
-#. The number of AIMMS PRO sessions actually running.
+#. The number of AIMMS Cloud sessions actually running.
 
-#. The number of AIMMS PRO active sessions, i.e., sessions not yet finished.
+#. The number of AIMMS Cloud active sessions, i.e., sessions not yet finished.
 
 Obtain number of sessions running
 -----------------------------------
@@ -117,7 +117,7 @@ You can download two example apps to try out the code yourself:
 
 * Show active jobs with :download:`CountRunningJobs <model/CountRunningJobs.zip>` 
 
-To experiment with these apps, you should download and publish them both on AIMMS PRO. 
+To experiment with these apps, you should download and publish them both on AIMMS Cloud. 
 Start both apps, and press the start button of both apps.
 
 You'll then see how ``CountRunningJobs`` monitors multiple jobs:

@@ -1,16 +1,16 @@
-Install the Network License on a Client Computer
-===================================================
+Install the AIMMS Network License on a Client Computer
+=======================================================
 .. meta::
-   :description: How to activate an AIMMS Network License with the Network License Server.
+   :description: How to activate an AIMMS Network License with the AIMMS Network License Server.
    :keywords: license, network, install, setup
 
 
-Installing the Network License Server
--------------------------------------
+Installing the AIMMS Network License Server
+--------------------------------------------
 
-A network license is administrated by the Network License Server on a server computer.
+A network license is administrated by the AIMMS Network License Server on a server computer.
 
-1. Download the Network License Server from `AIMMS Downloads <https://www.aimms.com/support/downloads/#aimms-other-download>`_.
+1. Download the AIMMS Network License Server from `AIMMS Downloads <https://www.aimms.com/support/downloads/#aimms-other-download>`_.
 
 2. Run the ``AimmsLicenseServer...msi`` installation file and follow the prompts in the Installation Wizard.
 
@@ -43,5 +43,5 @@ In case of any problems during installation, activation, or running AIMMS, pleas
 
    * :doc:`106-install-network-license`
    * :doc:`../304/304-transfer-license-server`
-   * `Network License Server Manual <https://download.aimms.com/aimms/download/data/LicenseServer/AIMMS_net.pdf>`_ 
+   * `AIMMS Network License Server <https://download.aimms.com/aimms/download/data/LicenseServer/AIMMS_net.pdf>`_ 
    * `License Server Installation and Configuration <https://documentation.aimms.com/pro/license-server.html>`_ 

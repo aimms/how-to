@@ -20,14 +20,14 @@ Assign two sessions for the application:
 
 *  **Solver session**: solves the Operations Research problem; may involve solving one or more mathematical programming problems.
 
-AIMMS PRO platform is designed so that these two sessions can communicate with each other.
+AIMMS Cloud is designed so that these two sessions can communicate with each other.
 
 To adapt an optimization application to become a responding optimization application requires several stages of development tasks:
 
 #.  Structure: Separate the search for an optimal solution as a separate solver session.
 
 #.  Development: Make sure that you can read the solution at your own convenience, 
-    and work on the application-independent from an AIMMS PRO system.
+    and work on the application-independent from an AIMMS Cloud.
     
 #.  Finishing: Add progress status messages, ensure
     that intermediate solutions are saved, and add a way to feed new data to the solver session.
@@ -41,18 +41,18 @@ The first step is that we are able to
 
 #.  adapt our application such that the data and solver session are separated,
 
-#.  connect to an AIMMS PRO system,
+#.  connect to an AIMMS Cloud,
 
-#.  publish our application on that AIMMS PRO system, and
+#.  publish our application on that AIMMS Cloud, and
 
 #.  test it by launching the application.
 
-This is described in detail at: :doc:`Deploy an Application on AIMMS PRO <../33/33-pro-deploy-app>` .
+This is described in detail at: :doc:`Deploy an Application on AIMMS Cloud <../33/33-pro-deploy-app>` .
 
 Delegate and develop
 --------------------
 
-The AIMMS IDE is used to develop applications, but the applications are deployed on AIMMS PRO. 
+The AIMMS IDE is used to develop applications, but the applications are deployed on AIMMS Cloud. 
 In the article :doc:`develop multi-platform applications<../32/32-pro-develop-app>` we describe how to model for the combination.
 
 Responding client side
@@ -81,7 +81,7 @@ Passing intermediate solutions
 ------------------------------
 
 Intermediate solutions found can be shared efficiently between the solver and data session using AIMMS cases. 
-These cases are stored using AIMMS PRO storage.
+These cases are stored using AIMMS PRO Storage.
 Further details are in :doc:`share intermediate solutions<../36/36-intermediate-solution>`
 
 Interrupting the solver session

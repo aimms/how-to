@@ -35,7 +35,7 @@ The username should match the user's Windows or Linux username.
 
 4. Go to :menuselection:`Maintenance > Maintenance mode` to exit :menuselection:`Maintenance mode`.
     
-Your new user(s) can now connect to the license server. When connected, their details will appear in the :menuselection:`Client` section of the Network License Manager.
+Your new user(s) can now connect to the license server. When connected, their details will appear in the :menuselection:`Client` section of the AIMMS Network License Manager.
 
     .. image:: images/client-section.png
         :align: center
@@ -45,6 +45,6 @@ Your new user(s) can now connect to the license server. When connected, their de
 
 .. seealso::
     
-    *  `Network License Server Manual <https://download.aimms.com/aimms/download/data/LicenseServer/AIMMS_net.pdf>`_ 
+    *  `AIMMS Network License Server <https://download.aimms.com/aimms/download/data/LicenseServer/AIMMS_net.pdf>`_ 
     *  `License Server Installation and Configuration <https://documentation.aimms.com/pro/license-server.html>`_ 
 

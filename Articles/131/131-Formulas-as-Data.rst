@@ -7,12 +7,12 @@
 
 
 
-A mathematical formula is considered data within an application when it is read in as a string during the application's runtime, and subsequently used in the construction of selected assignments and constraints. The concept "Formulas as Data" can be applied to several optimization apps, for instance those that deal with "Blending on Specification" and "Asset Management." In these types of applications, the benefit of the end-users is that they do not have to share these formulas with anyone else, including the developers of the apps. For such apps, good formulas are expensive to develop and having good formulas provides a competitive edge to these end-users. In AIMMS, formulas can be used in the following way:
+A mathematical formula is considered data within an application when it is read in as a string during the application's runtime, and subsequently used in the construction of selected assignments and constraints. The concept "Formulas as Data" can be applied to several optimization apps, for instance those that deal with "Blending on Specification" and "Asset Management." In these types of applications, the benefit of the end-users is that they do not have to share these formulas with anyone else, including the developers of the apps. For such apps, good formulas are expensive to develop and having good formulas provides a competitive edge to these end-users. In AIMMS Language, formulas can be used in the following way:
 
-* **String parameters** - a formula is a sequence of characters, and such sequences can be stored and manipulated via string parameters. Such manipulation is executed at AIMMS run time.
-* **Macros** - a formula is a mathematical expression and this expression is created during AIMMS compilation time.
+* **String parameters** - a formula is a sequence of characters, and such sequences can be stored and manipulated via string parameters. Such manipulation is executed at run time.
+* **Macros** - a formula is a mathematical expression and this expression is created during compilation time.
 
-The two identifier types, string parameter and macro, effective at different times as far as the AIMMS system is concerned, 
+The two identifier types, string parameter and macro, effective at different times, 
 need to be combined in order to support the concept "Formulas as Data." 
 
 This article highlights selected portions of an AIMMS application which creates a formula representing a one argument function, say ``f(x)``, at runtime. The application uses the formula in two ways:
@@ -107,7 +107,7 @@ we also need to create the constraint in that runtime library. This is done in t
     ok := me::SetAttribute(e_eqn, 'definition', "myFormula( boundedVariable ) = 0");
 
 Here ``boundedVariable`` is declared in the main model. 
-Because it is declared in the main model, we can refer to it in other portions of the model and on AIMMS pages. The enclosed AIMMS application starts with the following page:
+Because it is declared in the main model, we can refer to it in other portions of the model and on AIMMS WebUI pages. The enclosed AIMMS application starts with the following page:
 
 .. figure:: images/startUp.png
     :align: center
@@ -121,7 +121,7 @@ I invite you to play with this AIMMS application, changing the formula, argument
 Summary
 -------
 
-AIMMS combines three features: string parameters, macros, and Model Edit Functions to enable the concept of "Formulas as Data." A simple illustration of this powerful concept is provided by using the constructed formula in two manners: by approaching a function via the curve object and by solving a single equation model of the form ``f(x)=0``. 
+AIMMS Language combines three features: string parameters, macros, and Model Edit Functions to enable the concept of "Formulas as Data." A simple illustration of this powerful concept is provided by using the constructed formula in two manners: by approaching a function via the curve object and by solving a single equation model of the form ``f(x)=0``. 
 
 .. seealso::
 

@@ -24,7 +24,7 @@ This article assumes you are familiar with
 
 * Client-server architecture - see also: :doc:`AIMMS OpenAPI Overview<../561/561-openapi-overview>`
 
-* Using the AIMMS Cloud platform, including using applications and publishing applications - 
+* Using the AIMMS Cloud, including using applications and publishing applications - 
   see also: `AIMMS Cloud documentation <https://documentation.aimms.com/cloud/index.html>`_
 
 The application that is used to illustrate various concepts, is just counting the asterisks in a list of strings. 
@@ -239,7 +239,7 @@ For each service, we need to specify its:
 Summary
 --------
 
-Using the AIMMS language is a good way to define a service atop of a Decision Support application.
+Using the AIMMS Language is a good way to define a service atop of a Decision Support application.
 
 With the DataExchange library, defining the interface is essentially a matter of 
 

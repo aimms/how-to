@@ -8,7 +8,7 @@
 Introduction
 ------------
 
-While solving decision problems using the AIMMS WebUI and PRO platform, the browser window is made inactive by default to represent a solve process running in the background. The window is active again when the results from the solve session are available for the user. However, for longer running procedures - the user might want to start a background procedure and continue working on other parts of the application. 
+While solving decision problems using the AIMMS WebUI and AIMMS Cloud, the browser window is made inactive by default to represent a solve process running in the background. The window is active again when the results from the solve session are available for the user. However, for longer running procedures - the user might want to start a background procedure and continue working on other parts of the application. 
 
 This article explains the required steps to keep the AIMMS WebUI interactive while a solve session is going. 
 

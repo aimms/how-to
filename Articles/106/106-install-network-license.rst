@@ -1,16 +1,16 @@
-Install and Configure a Network License
-============================================
+Install and Configure a AIMMS Network License
+==============================================
 
 .. meta::
-   :description: How to set up an AIMMS Network License with the Network License Server.
+   :description: How to set up an AIMMS Network License with the AIMMS Network License Server.
    :keywords: license, network, install, setup
 
-Installing the Network License Server
--------------------------------------
+Installing the AIMMS Network License Server
+-------------------------------------------
 
-A network license is administrated by the Network License Server on a server computer.
+A network license is administrated by the AIMMS Network License Server on a server computer.
 
-1. Download the Network License Server from `AIMMS Downloads <https://www.aimms.com/support/downloads/#aimms-other-download>`_.
+1. Download the AIMMS Network License Server from `AIMMS Downloads <https://www.aimms.com/support/downloads/#aimms-other-download>`_.
 
 2. Run the ``AimmsLicenseServer...msi`` installation file and follow the prompts in the Installation Wizard.
 
@@ -61,7 +61,7 @@ A :menuselection:`No License` dialog appears.
 
     If you choose *Offline* communication, a request file is generated. You must go to `AIMMS Offline License Activation <https://www.aimms.com/support/licensing/processing-request-files/>`_ and submit the request file to complete activation.
 
-The license is now installed and appears in the Network License Manager.
+The license is now installed and appears in the AIMMS Network License Manager.
 
 .. image:: images/license-config-done.png
     :scale: 100 %
@@ -104,5 +104,5 @@ Users can access an AIMMS Network License while connected to the network from an
 
     * :doc:`../105/105-adding-named-user-licenses`
     * :doc:`../106/106-install-network-license-client`
-    * `Network License Server Manual <https://download.aimms.com/aimms/download/data/LicenseServer/AIMMS_net.pdf>`_ 
+    * `AIMMS Network License Server <https://download.aimms.com/aimms/download/data/LicenseServer/AIMMS_net.pdf>`_ 
     * `License Server Installation and Configuration <https://documentation.aimms.com/pro/license-server.html>`_ 

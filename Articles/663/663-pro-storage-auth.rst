@@ -5,9 +5,9 @@ Control Panel
    :description: Utility apps for AIMMS PRO Storage, available for download including a brief user guide.
    :keywords: AIMMS PRO storage, deployment, utility
 
-This article provides for the source of four utility apps to operate on AIMMS PRO storage.
+This article provides for the source of four utility apps to operate on AIMMS PRO Storage.
 
-To access the apps, create an ``.aimmspack`` from these sources and publish them on your AIMMS PRO system.
+To access the apps, create an ``.aimmspack`` from these sources and publish them on your AIMMS Cloud.
 
 The app sources are available for download in the sections below:
 
@@ -35,7 +35,7 @@ For individual files (objects) and folders (buckets) you can alter the authoriza
 * When you delete a folder (bucket), you delete all its files and subfolders.
 * If you change the authorization of a folder (bucket), you do not change the authorization of its files or subfolders.
 
-.. note:: The default setup is such that users that are not members of the group Admin, ordinary users for short, cannot read the folder ``/userdata``.  To provide them with this access, a user that is the admin, or a member of the group Admin, can provide Read access to all of the folder ``/userdata`` and of the direct sub folders corresponding to the environments. Note that the consequence of this action is that a user sees which other users are on the AIMMS PRO system.  This may, or may not, be a violation of the security protocols; and is therefore not provided by default.
+.. note:: The default setup is such that users that are not members of the group Admin, ordinary users for short, cannot read the folder ``/userdata``.  To provide them with this access, a user that is the admin, or a member of the group Admin, can provide Read access to all of the folder ``/userdata`` and of the direct sub folders corresponding to the environments. Note that the consequence of this action is that a user sees which other users are on the AIMMS Cloud.  This may, or may not, be a violation of the security protocols; and is therefore not provided by default.
 
 
 .. _323-alter-authorization:
@@ -43,7 +43,7 @@ For individual files (objects) and folders (buckets) you can alter the authoriza
 Alter Authorization
 -----------------------
 
-.. caution:: Please create an AIMMS PRO backup before you make any authorization changes, or ask your AIMMS PRO administrator to create one for you!
+.. caution:: Please create an AIMMS Cloud backup before you make any authorization changes, or ask your AIMMS Cloud administrator to create one for you!
 
 .. topic:: Download 
 

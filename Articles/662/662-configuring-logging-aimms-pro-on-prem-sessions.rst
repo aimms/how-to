@@ -1,7 +1,7 @@
-Configuring the logging of sessions ran on a AIMMS PRO on Premise
+Configuring the logging of sessions ran on a AIMMS PRO On-Premise
 ====================================================================
 
-This article contains an example of configuring the logging of an application that is published on an AIMMS PRO on Premise platform.
+This article contains an example of configuring the logging of an application that is published on an AIMMS PRO On-Premise.
 
 .. note:: 
 
@@ -20,7 +20,7 @@ A transport problem with two bottling locations of fresh water and two distribut
 Packed
 -------
 
-In the .aimmspack, also a ``LoggerConfig.xml`` file is enclosed.  Some parts that are specific to logging for AIMMS PRO on Prem sessions are:
+In the .aimmspack, also a ``LoggerConfig.xml`` file is enclosed.  Some parts that are specific to logging for AIMMS PRO On-Premise sessions are:
 
 The appender used.
 

@@ -101,8 +101,8 @@ A new Account SAS Token will be generated and will appear on the bottom.
 Minimal Requirements
 --------------------
 
-To work with this toolkit, you will need a PRO Cloud account with an Azure Data Lake Storage. 
-You can check if your Cloud account is equipped with a Data Lake by launching this app to your PRO Cloud and checking if 'Storage Account' has value. This can be found at the right bottom of any page. 
+To work with this toolkit, you will need a AIMMS Cloud account with an Azure Data Lake Storage. 
+You can check if your Cloud account is equipped with a Data Lake by launching this app to your AIMMS Cloud and checking if 'Storage Account' has value. This can be found at the right bottom of any page. 
 If you do not see a name here, please contact `AIMMS Support <support@aimms.com>`_.
 
 

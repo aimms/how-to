@@ -19,8 +19,10 @@ As you may know, the TLS protocol:
 
     *   the WSS protocol, to launch AIMMS WinUI apps.
 
-When a recent (TLS 1.2) is required or even the latest (TLS 1.3) is required, and an older AIMMS or an older AIMMS PRO is used 
-that does not support the required TLS version, the decision support application you've build using AIMMS will fail. 
+When a recent (TLS 1.2) is required or even the latest (TLS 1.3) is required, 
+and an older AIMMS Developer or an older AIMMS PRO On-Premise is used 
+that does not support the required TLS version, the decision support application
+you've build using AIMMS will fail. 
 
 This article is structured as follows:
 
@@ -33,12 +35,12 @@ This article is structured as follows:
 Symptoms
 --------
 
-There are two types of symptom when an older AIMMS or AIMMS PRO is used in conjunction with a recent or latest required TLS:
+There are two types of symptom when an older AIMMS Developer or AIMMS PRO On-Premise is used in conjunction with a recent or latest required TLS:
 
 WinUI
 ^^^^^^
 
-For AIMMS WinUI applications deployed on AIMMS PRO, you will get the following error message when launching the application:
+For AIMMS WinUI applications deployed on AIMMS PRO On-Premise, you will get the following error message when launching the application:
 
 .. image:: images/winui-launch-tls-protocol-mismatch.png
     :align: center
@@ -72,17 +74,17 @@ AIMMS Evolution related to TLS evolution is as follows:
     #.  The PRO AppLauncher, a separate component, supports TLS 1.0 and TLS 1.1 for all versions of AIMMS PRO.
         This component is needed to start WinUI applications.
 
-    #.  The other components of AIMMS PRO, support TLS 1.0, TLS 1.1, and TLS 1.2.
+    #.  The other components of AIMMS PRO On-Premise, support TLS 1.0, TLS 1.1, and TLS 1.2.
 
-    #.  Since AIMMS PRO 2.37.2, TLS 1.3 is supported for all components of AIMMS PRO.
+    #.  Since AIMMS PRO On-Premise 2.37.2, TLS 1.3 is supported for all components of AIMMS PRO.
 
-Upgrading to AIMMS PRO 2.37.2 or Later:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Upgrading to AIMMS PRO  On-Premise 2.37.2 or Later:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When AIMMS PRO is upgraded from before AIMMS PRO 2.37.2 to AIMMS PRO 2.37.2 or later; the PRO AppLauncher that supports TLS 1.3 also becomes available.
+When AIMMS PRO On-Premise is upgraded from before AIMMS PRO On-Premise 2.37.2 to AIMMS PRO On-Premise 2.37.2 or later; the PRO AppLauncher that supports TLS 1.3 also becomes available.
 For End-Users of WinUI applications to make use of this AppLauncher, they will need to 
 
-*   download (AIMMS PRO Portal > Help > Getting started > Button Download App Launcher) and 
+*   download (AIMMS Portal > Help > Getting started > Button Download App Launcher) and 
 
 *   install it (by running the downloaded executable).
 
@@ -93,14 +95,13 @@ Best Practice
 
 Regrettably, enforcing TLS 1.2 or TLS 1.3 is sometimes seen as a necessary part of an emergency response by an IT department to a security incident.
 To avoid being taken off guard by such an understandable response, 
-it is best practice to proactively switch to AIMMS PRO 2.37.2 (or later) and AIMMS 4.76.4 (or later).
+it is best practice to proactively switch to AIMMS PRO On-Premise 2.37.2 (or later) and AIMMS Developer 4.76.4 (or later).
 
 .. note:: The good news: when your application is deployed on AIMMS Cloud, TLS 1.3 is available!
 
 .. seealso::
 
-    * `AIMMS PRO 2.37.2 release notes <https://documentation.aimms.com/pro-release-notes.html#aimms-pro-2-37-2-release>`_
-    * `AIMMS 4.76.4 release notes <https://documentation.aimms.com/release-notes.html#aimms-4-76-4-release-october-28-2020-build-4-76-4-11>`_
-    * `Wikipedia page on TLS <https://en.wikipedia.org/wiki/Transport_Layer_Security>`_
+    * `AIMMS PRO On-Premise 2.37.2 release notes <https://documentation.aimms.com/pro-release-notes.html#aimms-pro-2-37-2-release>`_
+    * `AIMMS Developer 4.76.4 release notes <https://documentation.aimms.com/release-notes.html#aimms-4-76-4-release-october-28-2020-build-4-76-4-11>`_
     * `TLS 1.3 Is Here to Stay <https://www.ssl.com/blogs/need-know-tls-1-3>`_
     * `TLS 1.3: Wikipedia <https://en.wikipedia.org/wiki/Transport_Layer_Security>`_

@@ -22,7 +22,7 @@ An introduction to the Email Client Library, please use the following project to
 Overview
 --------
 
-The `Email Client Library <https://documentation.aimms.com/emailclient/index.html>`_ provides you with an API to create and send emails from within your AIMMS project. The library does not require any external programs to be installed and can be used from both AIMMS Developer and AIMMS PRO. It is also available on AIMMS Cloud.
+The `Email Client Library <https://documentation.aimms.com/emailclient/index.html>`_ provides you with an API to create and send emails from within your AIMMS project. The library does not require any external programs to be installed and can be used from both AIMMS Developer and AIMMS PRO On-Premise. It is also available on AIMMS Cloud.
 
 You can use this feature, for example, to send emails containing the results of your optimization model to other users in your organization.
 
@@ -37,7 +37,7 @@ Supported features:
 Adding the Library
 --------------------
 
-Add ``EmailClient`` to your project from the library repository using the :menuselection:`Library Manager`.
+Add ``EmailClient`` to your project from the AIMMS Library Repository using the :menuselection:`Library Manager`.
 
 .. seealso::
     * :doc:`../84/84-using-libraries`.

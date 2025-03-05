@@ -2,7 +2,7 @@ Hierarchical composite objects
 ========================================
 
 Can a component in a composite object be a composite object itself? 
-Is it possible to hierarchically construct composite objects and use the AIMMS language which is an algebraic language?
+Is it possible to hierarchically construct composite objects and use the AIMMS Language which is an algebraic language?
 
 The component based approach supports this by recursively enumerating all components in all declarations over the sets of composite objects. This article will not present a worked example as the details drag on and on.
 

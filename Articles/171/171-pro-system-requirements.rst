@@ -1,11 +1,11 @@
-Size AIMMS PRO Server Hardware
+Size AIMMS PRO On-Premise Hardware
 ==================================================
 
 .. meta::
    :description: Estimating equipment size for AIMMS PRO Server
    :keywords: AIMMS PRO, server, memory, requirements
 
-`The AIMMS PRO documentation <https://documentation.aimms.com/pro/system-requirements.html>`_ details the minimum system requirements for client-side and server-side machines used for AIMMS PRO. However, the memory and CPU requirements of the back-end server where all the solve procedures are executed is heavily dependent on the size of your AIMMS model(s).
+`The documentation <https://documentation.aimms.com/pro/system-requirements.html>`_ defines the minimum system requirements for client-side and server-side machines used for AIMMS PRO On-Premise. However, the memory and CPU requirements of the back-end server where all the solve procedures are executed is heavily dependent on the size of your AIMMS model(s).
 
 This article will help you determine the system requirements of the server-side machine.
 
@@ -33,7 +33,7 @@ The key components to consider for a WebUI application are
 #. **Maximum number of concurrent data sessions**
 #. **Maximum number of concurrent solver sessions** 
 
-The memory and CPU usage of a single data session multiplied by the maximum number of data sessions gives the peak resource requirement by the data sessions. Likewise for the solver sessions. In addition to the data and solver sessions, the AIMMS PRO Server installation has its own requirements of 3 GB memory and 1 core of CPU. 
+The memory and CPU usage of a single data session multiplied by the maximum number of data sessions gives the peak resource requirement by the data sessions. Likewise for the solver sessions. In addition to the data and solver sessions, the AIMMS PRO On-Premise installation has its own requirements of 3 GB memory and 1 core of CPU. 
 
 .. math::
 

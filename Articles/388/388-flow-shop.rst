@@ -31,4 +31,4 @@ In order to use this feature you will need to publish this application on your A
 The identifiers that need to be updated are: ``sp_AIMMSazureCloudName``, ``sp_apiKey``, ``sp_appName`` and ``sp_appVersion``. 
 
 Keywords:
-CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP, AIMMS PRO solver session, AIMMS Cloud task, Rest API
+CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP, AIMMS Cloud solver session, AIMMS Cloud task, Rest API

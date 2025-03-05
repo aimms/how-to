@@ -354,7 +354,7 @@ Here the utility procedure ``pr_handleResponsesFor`` is coded as follows:
 
 .. seealso::
 
-    * `AIMMS PRO REST API <https://documentation.aimms.com/cloud/rest-api.html#aimms-pro-rest-api>`_
+    * `AIMMS Rest API <https://documentation.aimms.com/cloud/rest-api.html#aimms-pro-rest-api>`_
 
 .. spelling:word-list::
 

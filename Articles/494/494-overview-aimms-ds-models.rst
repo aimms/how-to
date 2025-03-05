@@ -56,7 +56,7 @@ Deployment
 When creating an API using libraries like Flask or Plumber, the API will be running on your local machine and can be accessed at an address like - ``http://localhost:8000/``. 
 You can access this URL in your browser or in Postman, AIMMS or any other application acting as an API client.  
 
-If your AIMMS PRO server is also running on the same machine, the API can be still be accessed using the same URLs. However, it is very uncommon that a model developer is using a machine that hosts the AIMMS PRO server for development as well. 
+If you have an AIMMS PRO On-Premise running on the same machine, the API can still be accessed using the same URLs. However, it is very uncommon that a model developer uses a for development a machine that hosts the AIMMS PRO On-Premise as well. 
 In addition to that, this is **not a** viable option if your AIMMS app is published on AIMMS Cloud. 
 To make this possible, you will need to deploy the API as well so that is accessible through a global URL instead of just a local one. 
 
@@ -64,7 +64,7 @@ One way of such deployment is to containerize the API using Docker.
 A benefit of using docker is that once you have a Docker image, you can use it to run/deploy the API in multiple ways. 
 
 #. Run locally using Docker Desktop
-#. Deploy on-premise with `Kubernetes <https://www.docker.com/products/kubernetes>`_
+#. Deploy AIMMS PRO On-Premise with `Kubernetes <https://www.docker.com/products/kubernetes>`_
 #. Deploy on Microsoft Azure as an `App Service / Web App <https://docs.microsoft.com/en-us/azure/devops/pipelines/apps/cd/deploy-docker-webapp?view=azure-devops&tabs=python>`_
    or other cloud offerings like `AWS ECS <https://aws.amazon.com/getting-started/hands-on/deploy-docker-containers/>`_ and `Google Cloud <https://cloud.google.com/compute/docs/containers/deploying-containers>`_. 
 

@@ -182,7 +182,7 @@ When the ``app/main.py`` file is run in terminal, a warning is displayed.
 
 |
 
-The app server running on http://localhost:8000 or http://0.0.0.0/8000 is available on your local machine and to your AIMMS Developer instance but what about apps deployed to AIMMS PRO or AIMMS Cloud? 
+The app server running on http://localhost:8000 or http://0.0.0.0/8000 is available on your local machine and to your AIMMS Developer instance but what about apps deployed to AIMMS PRO On-Premise or AIMMS Cloud? 
 
 However, that is **not a viable option** if you are using AIMMS Cloud. 
 

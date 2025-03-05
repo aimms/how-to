@@ -20,7 +20,7 @@ To obtain more logging from a published WinUI application, the following steps a
     .. image:: images/WinUIAppCacheFolder.png
         :align: center
     
-#.  Run the application again by launching it from the AIMMS PRO Portal.
+#.  Run the application again by launching it from the AIMMS Portal.
 
 #.  After closing the application, the session log files are:
 
@@ -28,4 +28,4 @@ To obtain more logging from a published WinUI application, the following steps a
 
     #.  ``C:\temp\aimms-log.xml``
 
-.. putting a loggerConfig file in an .aimmspack may conflict with settings from the log management system of AIMMS PRO.
+.. putting a loggerConfig file in an .aimmspack may conflict with settings from the log management system of AIMMS Cloud.
