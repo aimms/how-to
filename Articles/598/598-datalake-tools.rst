@@ -109,6 +109,9 @@ If you do not see a name here, please contact `AIMMS Support <support@aimms.com>
 Release Notes
 --------------------
 
+`v1.5 <https://github.com/aimms/datalake-tools/releases/tag/1.4>`_ (06/03/2025)
+   Upgrading DEX library version.
+
 `v1.4 <https://github.com/aimms/datalake-tools/releases/tag/1.4>`_ (24/02/2025)
    Access Policies are now required to create an Container SAS Token. UI updated.
 
