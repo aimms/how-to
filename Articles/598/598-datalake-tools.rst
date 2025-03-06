@@ -5,10 +5,10 @@ DataLake Tools
    :keywords: datalake, azure, sas token, container, data integration, File System, file management
    :description: This article is for developers who want to integrate the Azure Data Lake Storage as part of their AIMMS account.
 
-.. image:: https://img.shields.io/badge/AIMMS_25.1-ZIP:_DataLake Tools-blue
+.. image:: https://img.shields.io/badge/AIMMS_25.2-ZIP:_DataLake Tools-blue
    :target: https://github.com/aimms/datalake-tools/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_25.1-Github:_DataLake Tools-blue
+.. image:: https://img.shields.io/badge/AIMMS_25.2-Github:_DataLake Tools-blue
    :target: https://github.com/aimms/datalake-tools
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
