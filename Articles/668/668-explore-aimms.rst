@@ -3,7 +3,7 @@ Explore AIMMS by Yourself, for Free
 ===================================
 
 Welcome to AIMMS! If you're curious about how AIMMS could benefit your project or team, you can try it out for free. 
-This guide will walk you through the steps. Please note, you'll need a Windows enviorement to get started.
+This guide will walk you through the steps. Please note, you'll need a Windows environment to get started.
 
 Step 1: Request a Free License
 --------------------------------------------
