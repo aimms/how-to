@@ -3,6 +3,24 @@ Zip Library
 
 .. See also git: https://gitlab.aimms.com/aimms/customer-support/toolkit/zip-library
 
+.. meta::
+   :description: How to measure efficiency of procedures with StopWatch function.
+   :keywords: efficient, time, execute, stopwatch, watch, clock
+
+.. image:: https://img.shields.io/badge/AIMMS_4.87-ZIP:_Stopwatch_Library-blue
+   :target: https://github.com/aimms/stopwatch-library/archive/refs/heads/main.zip
+
+.. image:: https://img.shields.io/badge/AIMMS_4.87-Github:_Stopwatch_Library-blue
+   :target: https://github.com/aimms/stopwatch-library
+
+.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
+   :target: https://community.aimms.com/aimms-developer-12/stopwatch-library-1426
+
+.. image:: images/chronometer-watch.png
+   :scale: 30
+   :align: right
+   :alt: Measure Execution Time
+
 Introduction
 -------------
 
@@ -20,7 +38,7 @@ This chapter is divided into three sections:
 #.  Example of Usage
 
 
-Adding the library
+Adding the Library
 ~~~~~~~~~~~~~~~~~~~~~~
 
 To add and use this library to your project, first download the code and after, 
@@ -30,9 +48,13 @@ Main Procedures
 ~~~~~~~~~~~~~~~~
 
 .. aimms:procedure:: zip::pr_zipFolderToFile(sp_folderName,sp_destinationFile)
+    
+    Parses :token:`mappingFile` to create a mapping called :token:`mappingName`. The function will return 1 on success, or 0 on failure.
+
+    :param mappingName: the name of the mapping to be created
+    :param mappingFile: the relative path to the mapping file to be parsed.
 
     *   ``sp_folderName`` The folder name to compress.
-
     *   ``sp_destinationFile`` The file name to store the archive into.
 
 .. aimms:procedure:: zip::pr_unzipFileToFolder(sp_fileName,sp_destinationFolderName)
@@ -40,6 +62,13 @@ Main Procedures
     *   ``sp_fileName`` The file that contains the archive.
 
     *   ``sp_destinationFolderName`` The folder to store the uncompressed contents.
+
+.. js:function::  dex::AddMapping(mappingName,mappingFile)
+
+    Parses :token:`mappingFile` to create a mapping called :token:`mappingName`. The function will return 1 on success, or 0 on failure.
+
+    :param mappingName: the name of the mapping to be created
+    :param mappingFile: the relative path to the mapping file to be parsed.
 
 Minimal Requirements
 ----------------------

@@ -47,7 +47,7 @@ Main Procedures
 
 .. aimms:procedure:: pr_start(ep_stopwatch)
 
-This procedure will start the timer(ep_stopwatch). 
+This procedure will start the timer. 
 Note that ``ep_stopwatch`` is optional, and usually not specified.
 
 .. code-block:: aimms
