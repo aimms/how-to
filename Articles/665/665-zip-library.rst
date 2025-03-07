@@ -16,7 +16,7 @@ Zip Library
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-developer-12/stopwatch-library-1426
 
-.. image:: images/chronometer-watch.png
+.. image:: images/zip-library.png
    :scale: 30
    :align: right
    :alt: Measure Execution Time
@@ -63,24 +63,20 @@ Main Procedures
 
     *   ``sp_destinationFolderName`` The folder to store the uncompressed contents.
 
-.. js:function::  dex::AddMapping(mappingName,mappingFile)
-
-    Parses :token:`mappingFile` to create a mapping called :token:`mappingName`. The function will return 1 on success, or 0 on failure.
-
-    :param mappingName: the name of the mapping to be created
-    :param mappingFile: the relative path to the mapping file to be parsed.
-
 Minimal Requirements
 ----------------------
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example on Windows.  
-
-To use the Linux version, you will need a License for using on Linux, or allowed to deploy on AIMMS Cloud.
+To use the Linux version, you will need an AIMMS License for using on Linux, or allowed to deploy on AIMMS Cloud.
 
 Release Notes
 --------------
 
-Earlier versions of these zip commands were available via :doc:`previous article<../580/580-download-compressed-files>`
+`v1.0 <https://github.com/aimms/stopwatch-library/releases/tag/1.3>`_ (07/03/2025)
+   Added ``fnc_now``, ``pr_scheduleOver``, and the stopwatch optional argument to ``pr_start``, and ``pr_elapsed``.
+
+
+Earlier versions of zip Library is available via :doc:`previous article<../580/580-download-compressed-files>`.
 
 
 .. spelling:word-list:: 
