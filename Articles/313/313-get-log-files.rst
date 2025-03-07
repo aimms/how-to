@@ -10,7 +10,7 @@ Sometimes the log files can answer **What happened?**
 
 .. note:: 
 
-    Security notice, see:  `Apache log4j vulnerability does not affect AIMMS software <https://community.aimms.com/aimms-pro-cloud-platform-43/apache-log4j-vulnerability-does-not-affect-aimms-software-1123>`_
+    Security notice, see:  `Apache log4j vulnerability does not affect AIMMS Optimization Tooling <https://community.aimms.com/aimms-pro-cloud-platform-43/apache-log4j-vulnerability-does-not-affect-aimms-software-1123>`_
 
 
 This article explains where you can find various log files in your project.

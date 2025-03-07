@@ -6,7 +6,7 @@ Develop Multi-Platform Applications
    :keywords: platform, pro
 
 
-After publishing an app on the AIMMS PRO server, it is common to continue development of that application for updates using the AIMMS IDE. 
+After publishing an app on the AIMMS PRO On-Premise or AIMMS Cloud, it is common to continue development of that application for updates using the AIMMS IDE. 
 When we test our app from within the AIMMS IDE, we get the following dialog:
 
 .. image:: images/useprosession.PNG
@@ -14,7 +14,7 @@ When we test our app from within the AIMMS IDE, we get the following dialog:
 
 |
 
-Clicking ``No`` avoids AIMMS PRO, but this soon becomes annoying. 
+Clicking ``No`` avoids AIMMS PRO On-Premise or AIMMS Cloud, but this soon becomes annoying. 
 To avoid this dialog, many developers use the function :any:`ProjectDeveloperMode`. 
 This function returns a 0 (false) or 1 (true) for the question - 
 "Is the current instance in developer mode (AIMMS IDE) or in end user mode?".
@@ -29,12 +29,12 @@ This function returns a 0 (false) or 1 (true) for the question -
       endif;
    endif;
 
-The disadvantage of using :any:`ProjectDeveloperMode` is that it disallows the combination of AIMMS PRO and the AIMMS IDE for `AIMMS PRO debugging <https://documentation.aimms.com/pro/debugging-pro.html>`_. 
-What we actually want, is to connect to AIMMS PRO, when a connection is available, and otherwise use our own machine to solve the mathematical program.
+The disadvantage of using :any:`ProjectDeveloperMode` is that it disallows the combination of AIMMS PRO On-Premise or AIMMS Cloud and the AIMMS IDE for `AIMMS Portal debugging <https://documentation.aimms.com/pro/debugging-pro.html>`_. 
+What we actually want, is to connect to AIMMS PRO On-Premise or AIMMS Cloud, when a connection is available, and otherwise use our own machine to solve the mathematical program.
  
-To check whether we are connected to an AIMMS PRO session or not, we use the function ``PRO::GetPROEndPoint()``. 
-The function ``PRO::GetPROEndPoint()`` returns the URL, or the 'end point', of the AIMMS PRO server the AIMMS instance is running on. 
-If the current AIMMS instance is not running on an AIMMS PRO server, an empty string is returned.
+To check whether we are connected to an AIMMS PRO On-Premise or AIMMS Cloud session or not, we use the function ``PRO::GetPROEndPoint()``. 
+The function ``PRO::GetPROEndPoint()`` returns the URL, or the 'end point', of the AIMMS PRO On-Premise or AIMMS Cloud the AIMMS instance is running on. 
+If the current AIMMS instance is not running on an AIMMS PRO On-Premise or AIMMS Cloud, an empty string is returned.
 
 .. code-block:: aimms
 
@@ -47,9 +47,9 @@ If the current AIMMS instance is not running on an AIMMS PRO server, an empty st
    endif;
 
         
-The ``pro::DelegateToServer`` statement is executed only if the current AIMMS instance is connected to an AIMMS PRO server. 
+The ``pro::DelegateToServer`` statement is executed only if the current AIMMS instance is connected to an AIMMS PRO On-Premise or AIMMS Cloud. 
 If not, it is skipped and the remaining procedure is executed in the AIMMS IDE. 
-This way, we avoid the annoying dialog mentioned above, but still enable `AIMMS PRO debugging <https://documentation.aimms.com/pro/debugging-pro.html>`_ when needed.
+This way, we avoid the annoying dialog mentioned above, but still enable `AIMMS Portal debugging <https://documentation.aimms.com/pro/debugging-pro.html>`_ when needed.
 
 Example
 --------
@@ -78,7 +78,7 @@ This example uses a combination of both procedures mentioned.
 `Contract Allocation <https://how-to.aimms.com/Articles/383/383-contract-allocation.html>`_ 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Here is another way to delegate solves to the AIMMS PRO Cloud. 
+Here is another way to delegate solves to the AIMMS Cloud. 
 
 .. code-block:: aimms
    :linenos:

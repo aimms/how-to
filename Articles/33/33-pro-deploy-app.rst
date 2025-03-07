@@ -1,5 +1,5 @@
-﻿Deploy an Application on AIMMS PRO 
-===================================
+﻿Deploy an Application on AIMMS Cloud
+====================================
 
 .. meta::
    :description: Basic procedure to publish and share an AIMMS application with AIMMS PRO.
@@ -9,7 +9,7 @@
 Introduction
 --------------
 
-When you want to share the AIMMS application you developed with your colleagues, they will need an AIMMS developer system and license installed on their Windows PC to be able to use the application. The AIMMS PRO Platform enables you to share your AIMMS applications without your colleagues having AIMMS installed on their PC, and even let the end users access the application in their web browser, via AIMMS WebUI. 
+When you want to share the AIMMS application you developed with your colleagues, they will need an AIMMS Developer and license installed on their Windows PC to be able to use the application. The AIMMS Cloud enables you to share your AIMMS applications without your colleagues having AIMMS installed on their PC, and even let the end users access the application in their web browser, via AIMMS WebUI. 
 
 Running Example
 ------------------
@@ -20,9 +20,9 @@ The example AIMMS project can be downloaded from :download:`1. Flow Shop – Web
 
 You can open this project in the AIMMS Development environment, open the WebUI, and enter the number of machines and jobs before pressing the "Start solving the problem" button. After some time, the solution is presented in a Gantt Chart.
 
-Note that to use this example, you'll need an AIMMS license with a MIP solver. When you want to create an application whereby each user does not need to have a separate license, but can use a license from a pool of licenses on a need be basis, you'll need to publish your application on AIMMS PRO.
+Note that to use this example, you'll need an AIMMS license with a MIP solver. When you want to create an application whereby each user does not need to have a separate license, but can use a license from a pool of licenses on a need be basis, you'll need to publish your application on AIMMS PRO On-Premise or AIMMS Cloud.
 
-When your application solves one or more mathematical programs, or contains some other long running search procedure, you will need to prepare your application for AIMMS PRO. The reason behind this is that the AIMMS session to support AIMMS can be separated from the AIMMS session that does the "heavy weight" computation. This separation of processes is illustrated below:
+When your application solves one or more mathematical programs, or contains some other long running search procedure, you will need to prepare your application for AIMMS PRO On-Premise or AIMMS Cloud. The reason behind this is that the AIMMS session to support AIMMS can be separated from the AIMMS session that does the "heavy weight" computation. This separation of processes is illustrated below:
 
 .. image:: images/AIMMS_PRO.png
 
@@ -41,7 +41,7 @@ Basic Modeling of delegation
 
 A simple way to model delegation is by introducing a new procedure that just handles the delegation. In the remainder of this section, we'll handle the details of that.
 
-To publish an application on the AIMMS PRO platform, the procedure containing the Solve statement in the model needs to be modified first. In our example, the "Solve" button is linked to the procedure ``pr_DoSolve``.
+To publish an application on the AIMMS Cloud, the procedure containing the Solve statement in the model needs to be modified first. In our example, the "Solve" button is linked to the procedure ``pr_DoSolve``.
 
 Perform the following steps:
 
@@ -56,7 +56,7 @@ Perform the following steps:
             then return 1;
         endif;
 
-    By including the above code at the top of a procedure, you are instructing AIMMS to delegate the execution of all the subsequent statements on the AIMMS PRO server. As you want to solve the math program on the PRO server, simply call the procedure ``pr_DoSOlve`` at the end of ``pr_Solve``.
+    By including the above code at the top of a procedure, you are instructing AIMMS to delegate the execution of all the subsequent statements on the AIMMS Portal. As you want to solve the math program on the AIMMS PRO On-Premise or AIMMS Cloud, simply call the procedure ``pr_DoSOlve`` at the end of ``pr_Solve``.
 
 #.  Link the primary action of the page in the WebUI to 
     the new procedure ``pr_Solve`` via the string parameter ``sp_PrimaryAction``.
@@ -91,7 +91,7 @@ Actual publishing on AIMMS PRO
 
 .. comment When we publish this application, we can indeed solve the problem on the PRO server. 
 
-The publication process consists of creating an artifact, the so-called *``.aimmspack``*, transferring this ``.aimmspack`` to AIMMS PRO, and configuring the access rights of the resulting app. Each of these steps is detailed below.
+The publication process consists of creating an artifact, the so-called *``.aimmspack``*, transferring this ``.aimmspack`` to AIMMS PRO On-Premise or AIMMS Cloud, and configuring the access rights of the resulting app. Each of these steps is detailed below.
 
 1. Creating an ``.aimmspack``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -107,17 +107,17 @@ enabling you to select a non-default encryption.  By clicking OK, you'll get a n
 
 Note, AIMMS will store the selection made in the project such that you do not have the make the same selection next time around. 
 
-2. Transferring an .aimmspack to AIMMS PRO
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2. Transferring an .aimmspack to AIMMS Portal
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When you open your AIMMS portal, you should see something like this, in particular the green "Publish App" button.
+When you open your AIMMS Portal, you should see something like this, in particular the green "Publish App" button.
 
 .. image:: images/EmptyPortal.PNG
    :scale: 50 %
 
-.. note:: If you do not have the publish button, please contact your AIMMS PRO administrator and ask to become a member of the ``AppPublishers`` group.
+.. note:: If you do not have the publish button, please contact your AIMMS Portal administrator and ask to become a member of the ``AppPublishers`` group.
    
-Pressing the publish button on the AIMMS PRO portal, you will be asked for the .aimmspack file.  After uploading this, you will get you to:
+Pressing the publish button on the AIMMS Portal, you will be asked for the .aimmspack file.  After uploading this, you will get you to:
 
 .. image:: images/PublicationFilledIn.PNG
    :scale: 50 %

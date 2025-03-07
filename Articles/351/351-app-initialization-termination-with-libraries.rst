@@ -63,7 +63,7 @@ In addition, a case is saved whereby the value of p_visits is set to 50. This ca
 Running the ``InitTerm`` app
 -----------------------------
 
-Opening the app in AIMMS developer, and pressing the ``Bye`` button in the opened WinUI page results in the following ``visit.txt`` file:
+Opening the app in AIMMS Developer, and pressing the ``Bye`` button in the opened WinUI page results in the following ``visit.txt`` file:
 
 .. code-block:: none
     :linenos:
@@ -155,7 +155,7 @@ The columns of the above table are:
 
 #.  AIMMS Developer: the actions taken by AIMMS Developer by opening and closing the ``InitTerm`` application.
 
-#.  WebUI: the actions taken by a WebUI application published on AIMMS PRO by opening and closing the ``InitTerm`` application.
+#.  WebUI: the actions taken by a WebUI application published on AIMMS Cloud by opening and closing the ``InitTerm`` application.
 
     .. tip:: Many users appreciate a quick start of an application as this will as this will put them at ease knowing that the system is up and running.
              In addition, they appreciate progress information during a long running data read procedure, perhaps via 
@@ -176,7 +176,7 @@ The columns of the above table are:
 
     .. tip:: It may be redundant to read in data in an initialization procedure of a solver session when that data is also provided in the input case.
 
-#.  WinUI: the actions taken by a WinUI application published on AIMMS PRO by opening and closing the ``InitTerm`` application.
+#.  WinUI: the actions taken by a WinUI application published on AIMMS Cloud by opening and closing the ``InitTerm`` application.
 
     .. note:: WinUI is not available in the community edition and it is on the `deprecate list <https://documentation.aimms.com/deprecation-table.html#deprecated-and-end-of-life>`_
 

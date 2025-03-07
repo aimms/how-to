@@ -2,7 +2,7 @@ Using AIMMS Services with a Python Application
 =================================================
 
 The power of AIMMS is to model and solve optimization problems.
-In a client-server architecture, on the AIMMS Cloud, this power is leveraged using AIMMS PRO REST API service.
+In a client-server architecture, on the AIMMS Cloud, this power is leveraged using AIMMS Rest API service.
 Solving optimization problems may require varying amounts of time, and 
 a client of an AIMMS Service needs to initiate, monitor, and retrieve results from such a service.
 

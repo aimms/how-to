@@ -77,7 +77,7 @@ Now we only to construct the set of output identifiers, i.e. those identifiers t
      
         sOutputIds := data { pGCJobStart, pGCJobDuration };
   
-Now we have constructed the sets of identifiers that need to be passed from the client session to the solver session (``sInputIds``) and the set of identifiers to be passed from the solver session to the client session (``sOutputIds``), we need to pass this information to AIMMS PRO, such that ``pro::DelegateToServer`` correctly handles this. For this purpose, AIMMS PRO declares the following sets: ``pro::ManagedSessionInputCaseIdentifierSet`` and ``pro::ManagedSessionOutputCaseIdentifierSet``.
+Now we have constructed the sets of identifiers that need to be passed from the client session to the solver session (``sInputIds``) and the set of identifiers to be passed from the solver session to the client session (``sOutputIds``), we need to pass this information to AIMMS Cloud, such that ``pro::DelegateToServer`` correctly handles this. For this purpose, AIMMS Cloud declares the following sets: ``pro::ManagedSessionInputCaseIdentifierSet`` and ``pro::ManagedSessionOutputCaseIdentifierSet``.
 
 #. The ``pro::ManagedSessionInputCaseIdentifierSet`` needs to be assigned **before** calling the procedure ``pro::DelegateToServer``, for instance as follows:
 
@@ -105,7 +105,7 @@ In this article, we've shown how to reduce the overhead of creating and communic
 Further Reading
 ----------------
 
-#. See also the section on input and output case definitions in `AIMMS PRO documentation <https://documentation.aimms.com/pro/appl-state.html#id1>`_
+#. See also the section on input and output case definitions in `AIMMS Cloud documentation <https://documentation.aimms.com/pro/appl-state.html#id1>`_
 
 #. The descriptions of the functions :any:`ReferencedIdentifiers` and :any:`SectionIdentifiers`.
 

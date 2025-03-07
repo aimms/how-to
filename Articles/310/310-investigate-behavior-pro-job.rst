@@ -1,21 +1,29 @@
-Investigate Behavior of AIMMS PRO Job
-==============================================
+Investigate Behavior of AIMMS PRO Server Session (Job)
+======================================================
 
 .. meta::
    :description: Checking execution time and troubleshooting AIMMS PRO jobs.
    :keywords: profiling, AIMMS PRO, deployment, execution time, case management
+   
+An `AIMMS PRO Server Session <https://documentation.aimms.com/pro/intro.html#running-apps-from-the-aimms-pro-portal>`_, AIMMS PRO job, or job for short, is the run of an AIMMS procedure on AIMMS PRO On-Premise or on AIMMS Cloud.
+Such an AIMMS procedure typically involves optimization, and a license to optimize is associated with such a job.
 
-An AIMMS PRO job may spend more time than the corresponding procedure on the client side. In this article we set out to answer the following questions:
+An AIMMS PRO job may spend more time than the corresponding procedure on the client side. 
+In this article we set out to answer the following questions:
 
-#.  How to reduce the execution time of an AIMMS PRO job?
+#.  How to reduce the execution time of an job?
 
-#.  How to find out what went wrong with an AIMMS PRO job?
+#.  How to find out what went wrong with an job?
 
 .. tip:: A first check is to search for ``: duration`` and for ``transmitted`` in the session log files; this may provide a clue quickly of where a bottleneck might be.
 
 To provide a structural answer for your application, we need to dive into the workings of the procedure ``PRO::DelegateToServer``.
 
-As the AIMMS PRO job realizing the delegated procedure runs **in a different process**, potentially on **a different host**, the necessary actions taken by ``PRO::DelegateToServer`` are illustrated in the picture below:
+The AIMMS PRO job realizing the delegated procedure runs **in a different process**, 
+potentially on **a different host**.
+This host is called the AIMMS PRO server below. 
+This server can be either an AIMMS PRO On-Premise, or an AIMMS Cloud.
+The necessary actions taken by ``PRO::DelegateToServer`` are illustrated in the picture below:
 
 .. image:: images/actions-delegate.png
     :align: center
@@ -52,7 +60,9 @@ Client side: Create a case file to be used as input
 
 The more information that is shared between the client session and the solver session, the longer it takes (creating, transmitting, reading). The information is shared in the form of a case file. The amount of information in this case file is determined by the set of identifiers and their cardinalities.
 
-The identifiers of the input case created by ``pro::DelegateToServer`` is defined by ``pro::ManagedSessionInputCaseIdentifierSet``, minus the identifiers in ``pro::ManagedSessionRemoveFromCaseIdentifierSet``. However, the delegated job may only require the data of a subset of the identifiers in ``pro::ManagedSessionInputCaseIdentifierSet``.  To measure how long it takes to create an input case, please execute the procedure ``SaveInputCase``, coded below, with the AIMMS profiler on:
+The identifiers of the input case created by ``pro::DelegateToServer`` is defined by ``pro::ManagedSessionInputCaseIdentifierSet``, minus the identifiers in ``pro::ManagedSessionRemoveFromCaseIdentifierSet``. 
+However, the delegated job may only require the data of a subset of the identifiers in ``pro::ManagedSessionInputCaseIdentifierSet``.  
+To measure how long it takes to create an input case, please execute the procedure ``SaveInputCase``, coded below, with the AIMMS profiler on:
 
 .. code-block:: aimms
     :linenos:
@@ -73,11 +83,15 @@ The identifiers of the input case created by ``pro::DelegateToServer`` is define
 
 Remarks about the above code:
 
-#. ``pro::ManagedSessionInputCaseIdentifierSet`` is initialized to :aimms:set:`AllIdentifiers`
+#.  ``pro::ManagedSessionInputCaseIdentifierSet`` is initialized to :aimms:set:`AllIdentifiers`
 
-#. ``pro::ManagedSessionRemoveFromCaseIdentifierSet`` is initialized to :any:`AllDefinedParameters`
+#.  ``pro::ManagedSessionRemoveFromCaseIdentifierSet`` is initialized to :any:`AllDefinedParameters`
 
-#. Thus, by default defined parameters are not transferred, but defined sets are. Evaluating the definitions of these sets may still take significant time. If so, the AIMMS profiler will identify the sets that take significant time. Some of these sets can be safely added to ``pro::ManagedSessionRemoveFromCaseIdentifierSet``. For instance, those with dimension 2 or higher, as illustrated by adding the following assignment to ``PostMainInitialization``:
+#.  Thus, by default defined parameters are not transferred, but defined sets are. 
+    Evaluating the definitions of these sets may still take significant time. 
+    If so, the AIMMS profiler will identify the sets that take significant time. 
+    Some of these sets can be safely added to ``pro::ManagedSessionRemoveFromCaseIdentifierSet``. 
+    For instance, those with dimension 2 or higher, as illustrated by adding the following assignment to ``PostMainInitialization``:
 
     .. code-block:: aimms
         :linenos:
@@ -87,14 +101,16 @@ Remarks about the above code:
                         IdentifierDimension(indexIdentifiers) >= 2 };
 
 
-#. Please see :doc:`reduce client server exchange<../582/582-reduce-client-server-exchange>` on tips for assigning ``pro::ManagedSessionInputCaseIdentifierSet`` to just those that are relevant for the job at hand.
+#.  Please see :doc:`reduce client server exchange<../582/582-reduce-client-server-exchange>` on tips for assigning ``pro::ManagedSessionInputCaseIdentifierSet`` to just those that are relevant for the job at hand.
 
 .. note:: *Software evolution*: ``pro::ManagedSessionRemoveFromCaseIdentifierSet`` is applied to reduce the set of identifiers transferred since AIMMS 4.59.2. 
 
 Copy the case file to the AIMMS PRO server
 ----------------------------------------------------------
 
-To transfer items, transfer speed and item size do matter. To reduce the item size is discussed in the previous section. The transfer speed depends on the connection and distance. Obviously, when the client and server sessions are executed on the same host or the hosts are in the same domain, the transfer speed is high. On the other hand, when these hosts are in different continents, then the transfer speed may very well be low. 
+To transfer items, transfer speed and item size do matter. 
+To reduce the item size is discussed in the previous section. The transfer speed depends on the connection and distance. 
+Obviously, when the client and server sessions are executed on the same host or the hosts are in the same domain, the transfer speed is high. On the other hand, when these hosts are in different continents, then the transfer speed may very well be low. 
 
 To investigate how much time is spent for the case transfer, we have to look in the session log file of the solver session. This file can be found in the AIMMS PRO data folder, by default ``C:\ProgramData\AimmsPRO``, subfolder ``Log\Sessions``. The name of this log file is a GUID with extension .log. On a test server, the file was named  ``D:\ProgramData\AimmsPRO\Log\Sessions\f9706ac8-841f-4b35-bc74-57863e82e630-1.log``
 
@@ -117,7 +133,7 @@ Anyway, now that we have this log file open, we may want to search for other occ
 On the AIMMS PRO server, wait for a server license
 ---------------------------------------------------
 
-This is also known as wait time or queueing time. This can be obtained from the Jobs tab in the AIMMS PRO Portal as illustrated in the image below:
+This is also known as wait time or queueing time. This can be obtained from the Jobs tab in the AIMMS Portal as illustrated in the image below:
 
 .. image:: images/JobsTabForQueueing.png
     :align: center

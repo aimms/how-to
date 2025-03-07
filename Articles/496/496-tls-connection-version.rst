@@ -29,18 +29,18 @@ Various versions of TLS, including the advantages of version 1.3, are further de
 Solution
 --------
 
-The component in AIMMS Developer and in AIMMS PRO that handles the transport layer security is upgraded by incorporating TLS 1.3. 
+The component in AIMMS Developer and in AIMMS PRO On-Premise that handles the transport layer security is upgraded by incorporating TLS 1.3. 
 To make use of this upgrade, you will need to take the following actions:
 
 #.  Switch to AIMMS Developer 4.76.4 or later, see `this AIMMS Developer release note <https://documentation.aimms.com/release-notes.html#aimms-4-76-4-release-october-28-2020-build-4-76-4-11>`_
 
-#.  When you publish your applications on AIMMS PRO, you will need AIMMS PRO version 2.36.2 or later, see `this AIMMS PRO release note <https://documentation.aimms.com/pro-release-notes.html#aimms-pro-2-36-2-release>`_
+#.  When you publish your applications on AIMMS PRO On-Premise, you will need AIMMS PRO On-Premise version 2.36.2 or later, see `this AIMMS PRO On-Premise release note <https://documentation.aimms.com/pro-release-notes.html#aimms-pro-2-36-2-release>`_
 
 
 Please Note
 -----------
 
-#.  Up till AIMMS Developer 4.76.3 and AIMMS PRO 2.36.1, TLS 1.2 was supported.  At the time of writing this article, TLS 1.2 is still
+#.  Up till AIMMS Developer 4.76.3 and AIMMS PRO On-Premise 2.36.1, TLS 1.2 was supported.  At the time of writing this article, TLS 1.2 is still
 
     #.  the most `widely used transport layer security protocol <https://www.sans.org/reading-room/whitepapers/vpns/paper/39715>`_
 
@@ -48,12 +48,12 @@ Please Note
 
     There is a clear trend of increasing adoption of TLS 1.3.
 
-#.  Servers securing their connection using TLS 1.2 are still supported by AIMMS PRO 2.36.2 and AIMMS Developer 4.76.4. 
+#.  Servers securing their connection using TLS 1.2 are still supported by AIMMS PRO On-Premise 2.36.2 and AIMMS Developer 4.76.4. 
     In short, when a client supports TLS 1.3, it also support TLS 1.2.
 
-#.  WinUI applications published on AIMMS PRO may also be affected by organizations enforcing TLS 1.2 or TLS 1.3, 
+#.  WinUI applications published on AIMMS PRO On-Premise may also be affected by organizations enforcing TLS 1.2 or TLS 1.3, 
     see :doc:`Evolution of AIMMS using Transport Layer Security<../520/520-evolution-of-transport-layer-security>`
 
 .. spelling:word-list::
 
-	tlsv
+    tlsv

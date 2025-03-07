@@ -23,7 +23,7 @@ These steps are detailed in the next sections. Please use the following project 
 Submit Task
 ------------
 
-According to the `AIMMS PRO REST API <https://documentation.aimms.com/cloud/rest-api.html#aimms-pro-rest-api>`_ , 
+According to the `AIMMS Rest API <https://documentation.aimms.com/cloud/rest-api.html#aimms-pro-rest-api>`_ , 
 a post to the service end point ``/tasks/{app}/{ver}/{service}`` is required. 
 Easily achieved using python as follows:
 
@@ -45,9 +45,9 @@ The Python string variables used are:
 
 Remarks:
 
-#.  Line 1: The URL of the AIMMS cloud.
+#.  Line 1: The URL of the AIMMS Cloud.
 
-#.  Line 2: The fixed part of the path indicating the AIMMS PRO REST API is used.
+#.  Line 2: The fixed part of the path indicating the AIMMS Rest API is used.
 
 #.  Line 3: The scope used.
 

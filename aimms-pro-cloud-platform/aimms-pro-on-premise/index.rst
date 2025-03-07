@@ -1,4 +1,4 @@
-AIMMS PRO OnPremise
+AIMMS PRO On-Premise
 =============================
 
 .. meta::

@@ -6,9 +6,9 @@ This trace is a:
 
 #.  File in the log folder, when the application is started via AIMMS Developer.
 
-#.  Part of the session log, when the application is published on AIMMS PRO on premise
+#.  Part of the session log, when the application is published on AIMMS PRO On-Premise
 
-#.  File copied to AIMMS PRO storage, when the application is published on AIMMS Cloud.
+#.  File copied to AIMMS PRO Storage, when the application is published on AIMMS Cloud.
 
 Running example
 ---------------
@@ -58,7 +58,7 @@ Implementation of the tracing procedure
 
 Remarks:
 
-#.  Line 4,5: Use the AIMMS PRO session log, if the application is published on AIMMS PRO.
+#.  Line 4,5: Use the AIMMS Cloud session log, if the application is published on AIMMS Cloud.
 
 #.  When the application is running via AIMMS Developer, a trace file is used. 
     The trace file is declared as follows. 

@@ -139,7 +139,7 @@ Using AOA and COA
 -----------------
 
 AOA and COA are not solvers but algorithms that are programmed in the
-AIMMS language using GMP functions. To use one of the algorithms you
+AIMMS Language using GMP functions. To use one of the algorithms you
 first have to install the system module ``GMPOuterApproximation``. The AOA
 algorithm is implemented in the ``AOA Basic Algorithm`` section of this
 module and the COA algorithm in the ``AOA Convex Algorithm`` section.

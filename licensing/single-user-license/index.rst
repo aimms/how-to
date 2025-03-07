@@ -2,12 +2,12 @@ Single-User License
 ========================
 
 .. meta::
-   :description: The Single-User License is designed for individuals who need AIMMS on a dedicated machine. This license is assigned to a specific user and is non-transferable. It allows full functionality of the AIMMS platform but is restricted to one device or user account. Ideal for personal use or small-scale projects, the single-user license ensures a straightforward, cost-effective option for individual users.
+   :description: The Single-User License is designed for individuals who need AIMMS on a dedicated machine. This license is assigned to a specific user and is non-transferable. It allows full functionality of the AIMMS Optimization Tooling but is restricted to one device or user account. Ideal for personal use or small-scale projects, the single-user license ensures a straightforward, cost-effective option for individual users.
 
 
 The **Single-User License** is designed for individuals who need AIMMS on a 
 dedicated machine. This license is assigned to a specific user and is non-transferable. 
-It allows full functionality of the AIMMS platform but is restricted to one device 
+It allows full functionality of the AIMMS Optimization Tooling but is restricted to one device 
 or user account. 
 Ideal for personal use or small-scale projects, the single-user license ensures 
 a straightforward, cost-effective option for individual users.

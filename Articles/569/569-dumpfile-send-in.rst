@@ -10,7 +10,7 @@ This may even force AIMMS Developer to close.
 Purpose
 -----------------------
 The purpose of a dump file is to identify the potential software glitch that caused the severe internal error. 
-The identification of a software glitch may ultimately lead to an improvement in the quality of the AIMMS software.
+The identification of a software glitch may ultimately lead to an improvement in the quality of the AIMMS Optimization Tooling.
 
 Contents
 -----------------------

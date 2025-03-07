@@ -36,7 +36,7 @@ The following three files are always created and are essential for opening an AI
       </Project>
 
 
-   In line 3, ``<ModelFileName>`` should match the ``.ams`` file name. Clicking the ``Demo.aimms`` file loads the corresponding ``Demo.ams`` file in the IDE as specified in the ``Project.xml`` file.
+   In line 3, ``<ModelFileName>`` should match the ``.ams`` file name. Clicking the ``Demo.aimms`` file loads the corresponding ``Demo.ams`` file in the AIMMS IDE as specified in the ``Project.xml`` file.
 
 If additional libraries are added to the project, they will appear as extra files and folders within the main project folder.
 

@@ -124,7 +124,7 @@ Model Main_BottledWaterTransportProblem {
 						! during PreMainTermination.
 						pr_logMsgTraceFile(sp_msg);
 					else
-						! Running as a published app on an AIMMS PRO on Premise platform.
+						! Running as a published app on an AIMMS PRO On-Premise.
 						! Writing directly in the session log.
 						pro::management::LocalLogInfo( sp_msg );
 					endif ;

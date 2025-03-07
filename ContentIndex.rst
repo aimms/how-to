@@ -7,7 +7,7 @@
     <div id="content_home_page">
 
         <p>AIMMS How-To is a knowledge base for everyone involved in projects that use AIMMS, including developers, network administrators, application end-users, and business process stakeholders.</p>
-        <p>You'll find tutorials, best practices, and practical guidance for using AIMMS software, including help topics in mathematical modeling, solvers, AIMMS language, and building applications in optimization and prescriptive analytics. You'll also find support for troubleshooting errors and handling deprecations.</p>
+        <p>You'll find tutorials, best practices, and practical guidance for using AIMMS Optimization Tooling, including help topics in mathematical modeling, solvers, AIMMS Language, and building applications in optimization and prescriptive analytics. You'll also find support for troubleshooting errors and handling deprecations.</p>
 
         <div class="boxes">
             <a class="box_home_page" href="C_Getting_Started/index.html">
@@ -24,7 +24,7 @@
             </a>
             <a class="box_home_page" href="C_Deployment/index.html">
                 <h1>Deployment</h1>
-                <div>Distributing your apps with AIMMS PRO (on-premise or cloud-hosted)</div>
+                <div>Distributing your apps with AIMMS Cloud</div>
             </a>
             <a class="box_home_page" href="C_Evolution/index.html">
                 <h1>Software Evolution</h1>

@@ -1,11 +1,9 @@
-:orphan:
 
-Capacitated Warehouse Location
+Infeasible Data
 ==============================
 
 .. warning::
-   This article references to technology that is not available yet in any released AIMMS version, and requires an early access version of AIMMS.
-   Please contact support@aimms.com for more information.
+   This example requires AIMMS 25.1 or higher.
 
 .. meta::
    :keywords: Capacitated warehouse location, WebUI, Infeasible data
@@ -30,15 +28,27 @@ parameter is not involved.
 You can also run this project using the WebUI by pressing 'WebUI' in the menu
 bar (after opening the AIMMS project). This will open a web page. Press the
 'Solve' button to solve the model (it calls the procedure MainExecution), and
-press the 'FindInexactData' button to call the FindInfData to find the
+press the 'FindInexactData' button to call the procedure FindInfData to find the
 infeasible data. A text message will be displayed and several data cells will
-be colored. To color the cells, the webui::AnnotationsIdentifier attribute of
-the parameters Capacity, Demand and AllocationCost is used. The colors are
-specified in the file 'backgroundcolor.css' in the following subfolder:
-MainProject\WebUI\resources\css.
+be colored. To color the cells, the
+`webui::AnnotationsIdentifier <https://documentation.aimms.com/webui/widget-options.html#webui-annotationsidentifier>`_
+attribute of the parameters Capacity, Demand and AllocationCost is used. The
+colors are specified in the file 'backgroundcolor.css' in the following subfolder:
+MainProject\\WebUI\\resources\\css.
+
+Please note that the `webui::ElementTextIdentifier <https://documentation.aimms.com/webui/multi-language.html#element-text>`_
+attribute of the set Locations translates the elements of this set in the WebUI.
+It is also used to translate the elements appearing in the HTML message.
+
 
 Keywords:
 Capacitated warehouse location, WebUI, Infeasible data
+
+.. seealso::
+   * Section `Explainability <https://documentation.aimms.com/language-reference/optimization-modeling-components/implementing-advanced-algorithms-for-mathematical-programs/managing-generated-mathematical-program-instances.html#explainability>`__
+     in the Language Reference
+   * Procedure `GMP::Instance::GetInfeasibleData <https://documentation.aimms.com/functionreference/algorithmic-capabilities/the-gmp-library/gmp_instance-procedures-and-functions/gmp_instance_getinfeasibledata.html>`__
+     in the Function Reference
 
 .. below are spelling exceptions only for this document
 
@@ -48,4 +58,6 @@ Capacitated warehouse location, WebUI, Infeasible data
     webui
     AnnotationsIdentifier
     webui::AnnotationsIdentifier
+    ElementTextIdentifier
+    webui::ElementTextIdentifier
     backgroundcolor

@@ -36,7 +36,7 @@ Changes made to this element parameter are not persistent, meaning you will loos
 
 .. warning::
     
-   The data of :any:`CurrentSolver` is not stored when saving a case. This might have an impact on your communication with the AIMMS PRO server.
+   The data of :any:`CurrentSolver` is not stored when saving a case. This might have an impact on your communication with AIMMS PRO On-Premise or AIMMS Cloud.
 
 To change the default solver for LP problems to GUROBI 8.0 for all subsequent solve statements, you can use the following code in a procedure::
 

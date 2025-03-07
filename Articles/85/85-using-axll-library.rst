@@ -15,13 +15,13 @@ AIMMS Excel Library - AXLL
 
 .. Overview
 
-The AimmsXLLibrary can communicate with Excel files in server environments where Excel is not installed. This is particularly useful when you deploy applications on AIMMS PRO which is typically installed on a machine with no Office / Excel instance. 
+The AimmsXLLibrary can communicate with Excel files in server environments where Excel is not installed. This is particularly useful when you deploy applications on AIMMS Cloud which is typically installed on a machine with no Office / Excel instance. 
 
 The workflow for integrating external Excel files with your AIMMS model is illustrated below. 
 
 |axll-workflow|
 
-The AimmsXLLibrary is a collection of functions to do this and more. It is part of the library repository and you can add it to your project from the library manager, as detailed in :doc:`../84/84-using-libraries`
+The AimmsXLLibrary is a collection of functions to do this and more. It is part of the AIMMS Library Repository and you can add it to your project from the library manager, as detailed in :doc:`../84/84-using-libraries`
 
 You can read/write data both in tabular (a list or composite table) or matrix formats. Matrix formats are particularly popular when solving network problems because you need the distances between each nodes in your network and this is typically represented in the form of a distance matrix. 
 

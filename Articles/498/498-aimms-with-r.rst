@@ -199,7 +199,7 @@ Deployment
 -------------
 
 Running the ``run_api.R`` script starts an API server on the local/development machine, on http://localhost:8000 or http://0.0.0.0/8000. 
-These URLs will not be accessible to apps published on AIMMS PRO or AIMMS Cloud. 
+These URLs will not be accessible to apps published on AIMMS PRO On-Premise or AIMMS Cloud. 
 
 `Hosting Plumber <https://www.rplumber.io/articles/hosting.html>`_ discusses some deployment options. 
 As we did with the Flask APIs in :doc:`How to connect AIMMS with Python <../487/487-aimms-with-python>`, we will use Docker to deploy the Plumber APIs as well.
