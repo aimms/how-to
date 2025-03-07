@@ -4,14 +4,14 @@ Zip Library
 .. See also git: https://gitlab.aimms.com/aimms/customer-support/toolkit/zip-library
 
 .. meta::
-   :description: How to measure efficiency of procedures with StopWatch function.
-   :keywords: efficient, time, execute, stopwatch, watch, clock
+   :description: This toolkit library is used to facilitate compressing folders to files and reverting.
+   :keywords: zip, unzip, compress, files, revert
 
-.. image:: https://img.shields.io/badge/AIMMS_4.87-ZIP:_Stopwatch_Library-blue
-   :target: https://github.com/aimms/stopwatch-library/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/AIMMS_24.6-ZIP:_Zip_Library-blue
+   :target: https://github.com/aimms/zip-library/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.87-Github:_Stopwatch_Library-blue
-   :target: https://github.com/aimms/stopwatch-library
+.. image:: https://img.shields.io/badge/AIMMS_24.6-Github:_Zip_Library-blue
+   :target: https://github.com/aimms/zip-library
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-developer-12/stopwatch-library-1426
@@ -19,7 +19,6 @@ Zip Library
 .. image:: images/zip-library.png
    :scale: 30
    :align: right
-   :alt: Measure Execution Time
 
 Introduction
 -------------
@@ -49,19 +48,13 @@ Main Procedures
 
 .. aimms:procedure:: zip::pr_zipFolderToFile(sp_folderName,sp_destinationFile)
     
-    Parses :token:`mappingFile` to create a mapping called :token:`mappingName`. The function will return 1 on success, or 0 on failure.
-
-    :param mappingName: the name of the mapping to be created
-    :param mappingFile: the relative path to the mapping file to be parsed.
-
-    *   ``sp_folderName`` The folder name to compress.
-    *   ``sp_destinationFile`` The file name to store the archive into.
+    :param sp_folderName: the folder name to compress.
+    :param sp_destinationFile: the file name to store the archive into.
 
 .. aimms:procedure:: zip::pr_unzipFileToFolder(sp_fileName,sp_destinationFolderName)
 
-    *   ``sp_fileName`` The file that contains the archive.
-
-    *   ``sp_destinationFolderName`` The folder to store the uncompressed contents.
+    :param sp_fileName: the file that contains the archive.
+    :param sp_destinationFolderName: the folder to store the uncompressed contents.
 
 Minimal Requirements
 ----------------------
@@ -72,9 +65,8 @@ To use the Linux version, you will need an AIMMS License for using on Linux, or 
 Release Notes
 --------------
 
-`v1.0 <https://github.com/aimms/stopwatch-library/releases/tag/1.3>`_ (07/03/2025)
-   Added ``fnc_now``, ``pr_scheduleOver``, and the stopwatch optional argument to ``pr_start``, and ``pr_elapsed``.
-
+`v1.0 <https://github.com/aimms/zip-library/releases/tag/1.0>`_ (07/03/2025)
+   First official release as a toolkit library.
 
 Earlier versions of zip Library is available via :doc:`previous article<../580/580-download-compressed-files>`.
 
