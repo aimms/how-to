@@ -11,5 +11,6 @@ Toolkit
 
    /Articles/551/551-comparing-profiler-runs
    /Articles/574/574-stopwatch-library
+   /Articles/665/665-zip-library
    /Articles/598/598-datalake-tools
    /Articles/663/663-pro-storage-auth
