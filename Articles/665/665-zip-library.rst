@@ -62,10 +62,10 @@ To use the Linux version, you will need an AIMMS License for using on Linux, or 
 Release Notes
 --------------
 
-`v1.0 <https://github.com/aimms/zip-library/releases/tag/1.0>`_ (07/03/2025)
+`v1.0 <https://github.com/aimms/zip-library/releases/tag/1.0>`_ (10/03/2025)
    First official release as a toolkit library.
 
-Earlier versions of zip Library is available via :doc:`previous article<../580/580-download-compressed-files>`.
+Earlier versions of Zip Library is available via :doc:`previous article<../580/580-download-compressed-files>`.
 
 
 .. spelling:word-list:: 
