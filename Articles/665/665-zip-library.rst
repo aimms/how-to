@@ -14,8 +14,8 @@ Zip Library
    :target: https://github.com/aimms/zip-library
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-developer-12/stopwatch-library-1426
-
+   :target: https://community.aimms.com/
+   
 .. image:: images/zip-library.png
    :scale: 30
    :align: right
@@ -31,10 +31,7 @@ Instructions
 This chapter is divided into three sections:
 
 #.  Adding the Library
-
 #.  Main Procedures
-
-#.  Example of Usage
 
 
 Adding the Library
@@ -73,8 +70,8 @@ Earlier versions of zip Library is available via :doc:`previous article<../580/5
 
 .. spelling:word-list:: 
 
-    proc
-    func
+   proc
+   func
 
 
 

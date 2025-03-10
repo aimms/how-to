@@ -34,7 +34,8 @@ This chapter is divided into three sections:
 
 #. Adding the Library
 #. Main Procedures
-#. Example of Usage
+#. Basic Example
+#. Extended Example
 
 Adding the Library
 ~~~~~~~~~~~~~~~~~~~~~~~
