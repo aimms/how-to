@@ -70,6 +70,7 @@ The buttons have the following actions:
 		* `Download widget <https://documentation.aimms.com/webui/download-widget.html>`_
 		* `dex::dls::DownloadFile <https://documentation.aimms.com/dataexchange/api.html#dex-dls-DownloadFile>`_ 
 		* `dex::dls::UploadFile <https://documentation.aimms.com/dataexchange/api.html#dex-dls-UploadFile>`_
+		* :doc:`<../665/665-zip-library>`
 
 .. spelling:word-list::
 
