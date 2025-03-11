@@ -39,7 +39,6 @@ Coding
    /Articles/119/119-Reproducible-Random-Sequence
    /Articles/121/121-set-index-element-parameter
    /Articles/116/116-Benders-CPLEX
-   /Articles/127/127-Progress-Window
    /Articles/525/525-finding-unused-identifiers
    /Articles/194/194-using-loopcount-instead-of-explicit-counting-parameter-in-loops
    /Articles/17/17-category-mapping

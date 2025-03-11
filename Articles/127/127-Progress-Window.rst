@@ -5,26 +5,21 @@
    :description: How to change the frequency of updates to the progress window.
    :keywords: progress, update, solve
 
-.. note::
+.. image:: images/pw1.png
+    :align: right
 
-	This article was originally posted to the AIMMS Tech Blog.
+The progress window in AIMMS, accessible via ``CTRL-P``, provides real-time updates during compilation, execution, and solving processes. 
+During tasks like solving MIP problems, AIMMS displays crucial information such as iteration and node counts, best bounds, and solutions within this window.
 
-.. sidebar:: Progress Window
+Historically, progress updates have been tied to the number of iterations used by the solver, with a default update frequency set to every 100 iterations. 
+However, frequent updates can impact performance negatively, while infrequent updates might make AIMMS appear unresponsive, as these moments are when the solver briefly returns control to AIMMS for updates, interrupts handling, etc.
 
-    .. image:: images/pw1.png
+Relying solely on iteration-based updates has drawbacks. The rate of iterations per second varies greatly depending on the problem, solver, and algorithm used. 
+While 100 iterations may suffice for smaller problems, larger ones may require more frequent updates. Additionally, certain solver phases, like preprocessing or calculating irreducible infeasible sets (IIS), 
+may not alter the iteration count, thus no updates occur during these critical steps. Furthermore, some solvers, such as BARON and CP Optimizer, base progress on nodes or branches rather than iterations.
 
+In AIMMS 4.6, progress updates will default to elapsed time instead of iterations. This change offers several advantages: it's universally supported by all solvers, 
+operates independently of specific problems or solvers, and ensures consistent updates throughout different solver phases. The new setting, ``Progress Time Interval``, will replace the older ``Progress Solution`` option, 
+which will be inactive by default but can still be used in conjunction with time-based updates.
 
-The progress window, which can be opened by pressing CTRL-P, allows you to monitor AIMMS during compilation, execution and solving. For example, while solving a MIP problem, AIMMS will display the number of iterations and nodes, the best bound and the best solution in the progress window. So far, progress updates during a solve have been based on the number of iterations used by the solver. By default, the progress window is updated every 100 iterations. This frequency is controlled by the general solvers option **Progress Solution**.
-
-If progress updates are done very frequently then it can have a negative influence on the performance. If progress updates are rare, it can take minutes before the progress window is updated again. As a side effect, AIMMS can become seemingly non-responsive, as progress updates are often the only times during a solve in which the solver will give the control back to AIMMS for a brief moment, such that AIMMS can update pages, check for interrupts, etc. (The control is also given back to AIMMS if a callback procedure is called, or during function or derivative evaluations while solving a nonlinear problem.)
-
-Basing progress updates on the number of **iterations** has some **drawbacks**. First, the number of iterations completed per second during a solve depends heavily on the problem, solver and algorithm used. Doing a progress update every 100 iterations may be fine for a small or medium sized problem but is likely not sufficient for a large problem. Second, during some steps of the solving process the number of iterations might not change. For example, during the preprocessing step or the calculation of an irreducible infeasible set (IIS). In that case we would not see any progress updates if we would base them only on iterations. Third, for some solvers it is not possible to base progress on the number of iterations. For example, BARON bases progress on the number of nodes, while CP Optimizer uses branches, choice points or failures instead of iterations.
-
-In AIMMS 4.6 progress updates will, by default, be based on elapsed **time**. The main advantages are that (1) it is supported by all solvers, (2) it can be used even if the iterations count is not changing during some phase of the solving process, and (3) it is problem and solver independent, meaning that you do not have to change any progress option setting if you build a new model or switch solvers. The new option will be named **Progress Time Interval**. The old Progress Solution option will still be available but it will become inactive by default. It will be possible to combine both options such that progress updates are based on time and iterations.
-
-Note that even after this change there is no guarantee that you will see progress updates regularly all the time. Doing progress window updates requires that the solver passes updates to AIMMS, which does not always happen.
-
-
-
-
-
+It's important to note that even with these improvements, the frequency of progress updates can vary based on when the solver communicates updates to AIMMS.
