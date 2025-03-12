@@ -16,7 +16,7 @@ Other symptoms of reaching the memory limits of your machine can be:
 * It takes a long time to load or save a case.
 * It takes a long time to open a page.
 * AIMMS is running very slow.
-* Your computer is thrashing (excessive swapping), which you can see at the Processes tab of your Task Manager.
+* Your computer is thrashing (excessive swapping), which you can see at the :menuselection:`Processes` tab of your :menuselection:`Task Manager`.
 
 Approaches
 ----------
@@ -35,8 +35,9 @@ The predeclared set :any:`AllGeneratedMathematicalPrograms` contains the names o
 .. code-block:: aimms
     :linenos:
 
-    p_MemInUseGMP := sum( indexGeneratedMathematicalPrograms, 
-        gmp::Instance::GetMemoryUsed( indexGeneratedMathematicalPrograms ) );
+    p_MemInUseGMP 
+    :=  sum(indexGeneratedMathematicalPrograms, 
+            gmp::Instance::GetMemoryUsed(indexGeneratedMathematicalPrograms)) ;
 
 You can use :any:`GMP::Instance::Delete` to delete generated mathematical programs as follows:
 
@@ -44,6 +45,7 @@ You can use :any:`GMP::Instance::Delete` to delete generated mathematical progra
     :linenos:
 
     ep_GMP := first(AllGeneratedMathematicalPrograms) ;
+
     while firstGMP <> '' do
             gmp::Instance::Delete(firstGMP) ;
             ep_GMP := first(AllGeneratedMathematicalPrograms) ;
@@ -51,7 +53,12 @@ You can use :any:`GMP::Instance::Delete` to delete generated mathematical progra
 
 Next, check the amount of memory in sets, parameters, variables and constraints. 
 
-You can use the diagnostic tool "Identifier Cardinalities" to obtain an overview. If you have a lot of inactive data, you can reduce memory by using the ``CleanUp`` statement. AIMMS creates permutations of the data of identifier on a need be basis. It may make sense to use a ``Rebuild`` statement to remove permutations that became obsolete. 
+You can use the diagnostic tool :menuselection:`Identifier Cardinalities` to obtain an 
+overview. If you have a lot of inactive data, you can reduce memory by 
+using the ``CleanUp`` statement. AIMMS creates permutations of the data of 
+identifier on a need be basis. 
+It may make sense to use a ``Rebuild`` statement to remove permutations that 
+became obsolete. 
 
 For those identifiers that use a lot of memory, decrease the memory usage:
 
@@ -62,4 +69,4 @@ For those identifiers that use a lot of memory, decrease the memory usage:
 
 Preventing Memory Problems
 ---------------------------
-Throughout model development, you can prevent memory problems by using the Identifier Cardinalities tool to check regularly for identifiers with many non-zeros.
+Throughout model development, you can prevent memory problems by using the :menuselection:`Identifier Cardinalities` tool to check regularly for identifiers with many non-zeros.
