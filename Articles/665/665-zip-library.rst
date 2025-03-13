@@ -14,7 +14,7 @@ Zip Library
    :target: https://github.com/aimms/zip-library
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/
+   :target: https://community.aimms.com/aimms-language-12/zip-lib-1835
    
 .. image:: images/zip-library.png
    :scale: 30
