@@ -91,3 +91,6 @@ Conclusion
 Integrating Git with AIMMS projects improves collaboration, tracking, and project management. 
 By using `SourceTree <https://www.sourcetreeapp.com/>`_, developers can manage AIMMS source files easily and benefit from a robust version control workflow.
 
+.. spelling:word-list:: 
+   
+   untracked
