@@ -57,5 +57,5 @@ And the method to use is simple:
    p_elapsedTime := stopwatch::fnc_elapsed();
 
 .. seealso:: 
-   * :doc:`development-support/profiler-and-debugger/index.html`
+   * :doc:`development-support/profiler-and-debugger/index`
    * :doc:`creating-and-managing-a-model/debugging-and-profiling-an-aimms-model/the-aimms-profiler`
