@@ -5,7 +5,7 @@
 .. FILES ATTACHED
 
 
-.. BEGIN CONTENT
+.. BEGIN CONTENT 
 
 Using Email Client Library
 ==============================
@@ -15,9 +15,14 @@ Using Email Client Library
    :keywords: email, e-mail, template
 
 
+.. note:: Since AIMMS 24, the Email Client Library is no longer supported.  See also `AIMMS Product Lifecycle <https://documentation.aimms.com/deprecation-table.html>`_
+
+
 An introduction to the Email Client Library, please use the following project to follow this article:  
 
     :download:`EmailLibraryDemo.zip <downloads/EmailLibraryDemo.zip>`
+
+
 
 Overview
 --------
