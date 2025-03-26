@@ -6,11 +6,6 @@ Remove Elements from a Set
   :keywords: AIMMS, set, empty statement, remove elements, clear values
 
 
-This article explains how the ``empty`` statement operates in AIMMS and its effect on different types of sets.
-
-Understanding the ``empty`` Statement
----------------------------------------
-
 The ``empty`` statement in AIMMS is used to clear the contents of a set or reset values of identifiers within a subset of predefined sets. 
 Its behavior depends on the type of set being emptied:
 
