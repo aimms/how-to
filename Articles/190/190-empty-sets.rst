@@ -37,7 +37,7 @@ You can verify this by opening the attribute window of these predefined sets.
 This means that the ``empty`` statement behaves differently for ``NormalSet`` and ``ActiveVariables``, as explained below:
 
 .. code-block:: aimms
-  :lineos:
+  :linenos:
 
   !This will remove all elements from the set NormalSet 
   empty NormalSet ; 
