@@ -25,9 +25,10 @@ Let's assume the following two identifiers:
 .. code-block:: aimms
 
   Set NormalSet;
-	Set ActiveVariables {
-		SubsetOf: AllVariables;
-	}
+
+  Set ActiveVariables {
+    SubsetOf: AllVariables;
+  }
 
 
 As you can see, it holds that ``ActiveVariables`` :math:`\subseteq` :aimms:set:`AllVariables` :math:`\subseteq` :aimms:set:`AllIdentifiers` because the predefined 
