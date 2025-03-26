@@ -52,8 +52,8 @@ This means that the ``empty`` statement behaves differently for ``NormalSet`` an
 Key Takeaways
 --------------
 
-- The empty statement removes elements from general sets but only clears values for subsets of predefined sets.
+- The ``empty`` statement removes elements from general sets but only clears values for subsets of predefined sets.
 
-- To fully remove elements from a subset of :aimms:set:AllIdentifiers, assign an empty set {} to it explicitly.
+- To fully remove elements from a subset of :aimms:set:`AllIdentifiers`, assign an empty set ``{}`` to it explicitly.
 
-- Use empty carefully when dealing with predefined sets to avoid unintended behavior.
+- Use ``empty`` carefully when dealing with predefined sets to avoid unintended behavior.
