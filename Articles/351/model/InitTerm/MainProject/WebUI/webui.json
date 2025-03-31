@@ -4,6 +4,27 @@
     "aimms.widget.type": {
       "literal": "application"
     },
+    "browser.language": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserLanguage"
+        ]
+      }
+    },
+    "browser.name": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browser.timezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
     "browsername": {
       "aimms": {
         "contents": [
@@ -22,30 +43,6 @@
       "aimms": {
         "contents": [
           "webui::IgnoreDST"
-        ]
-      }
-    },
-    "statusmessages": {
-      "aimms": {
-        "contents": [
-          "sp_statusBar"
-        ],
-        "slices": [
-          {
-            "identifier": "sp_statusBar",
-            "slice": [
-              {
-                "index": "webui::indexApplicationExtension",
-                "type": "free",
-                "value": "webui::indexApplicationExtension"
-              },
-              {
-                "index": "webui::indexStatusBarSpec",
-                "type": "free",
-                "value": "webui::indexStatusBarSpec"
-              }
-            ]
-          }
         ]
       }
     },
@@ -72,7 +69,29 @@
   },
   "pages/home": {
     "aimms.widget.type": {
-      "literal": "page"
+      "literal": "pagev2-grid"
+    },
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "Session info",
+          "gridArea": "area-a",
+          "dndId": "area-aSession info0"
+        },
+        {
+          "widgetUri": "solve",
+          "gridArea": "area-a",
+          "dndId": "area-asolve1"
+        },
+        {
+          "widgetUri": "xyo",
+          "gridArea": "area-a",
+          "dndId": "area-cxyo2"
+        }
+      ]
+    },
+    "layoutId": {
+      "literal": "Layout7"
     },
     "onload": {
       "aimms": {
@@ -95,13 +114,6 @@
           }
         },
         {
-          "uri": "visit",
-          "layoutInfo": {
-            "width": "2",
-            "height": "1"
-          }
-        },
-        {
           "uri": "solve",
           "layoutInfo": {
             "width": "2",
@@ -114,97 +126,8 @@
             "width": "2",
             "height": "1"
           }
-        },
-        {
-          "uri": "Bye",
-          "layoutInfo": {
-            "width": "2",
-            "height": "1"
-          }
         }
       ]
-    }
-  },
-  "widgets/Bye": {
-    "action": {
-      "literal": {
-        "type": "procedure",
-        "value": "pr_actionFinish"
-      }
-    },
-    "aimms.widget.type": {
-      "literal": "button"
-    },
-    "name": {
-      "literal": "Bye"
-    },
-    "title": {
-      "literal": "Bye"
-    },
-    "widget.visible": {
-      "literal": 0
-    }
-  },
-  "widgets/Session info": {
-    "aimms.widget.type": {
-      "literal": "scalar"
-    },
-    "contents": {
-      "aimms": {
-        "contents": [
-          "bp_isConnectedToPro",
-          "bp_isWorkerSession",
-          "sp_thisSession",
-          "p_visits"
-        ]
-      }
-    },
-    "contents.numdecimals": {
-      "literal": 0
-    },
-    "name": {
-      "literal": "Session info"
-    },
-    "title": {
-      "literal": "Session info"
-    }
-  },
-  "widgets/solve": {
-    "action": {
-      "literal": {
-        "type": "procedure",
-        "value": "pr_solve"
-      }
-    },
-    "aimms.widget.type": {
-      "literal": "button"
-    },
-    "name": {
-      "literal": "solve"
-    },
-    "title": {
-      "literal": "solve"
-    }
-  },
-  "widgets/visit": {
-    "aimms.widget.type": {
-      "literal": "scalar"
-    },
-    "compact": {
-      "literal": 1
-    },
-    "contents": {
-      "aimms": {
-        "contents": [
-          "p_visits"
-        ]
-      }
-    },
-    "contents.numdecimals": {
-      "literal": 0
-    },
-    "name": {
-      "literal": "visit"
     }
   },
   "widgets/xyo": {
@@ -225,6 +148,50 @@
     },
     "title": {
       "literal": "Variable values"
+    },
+    "views": {
+      "literal": {}
+    }
+  },
+  "widgets/Session info": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "p_visits"
+        ]
+      }
+    },
+    "contents.numdecimals": {
+      "literal": 0
+    },
+    "name": {
+      "literal": "Session info"
+    },
+    "title": {
+      "literal": "Session info"
+    },
+    "views": {
+      "literal": {}
+    }
+  },
+  "widgets/solve": {
+    "action": {
+      "literal": {
+        "type": "procedure",
+        "value": "pr_solve"
+      }
+    },
+    "aimms.widget.type": {
+      "literal": "button"
+    },
+    "name": {
+      "literal": "solve"
+    },
+    "title": {
+      "literal": "solve"
     }
   }
 }
