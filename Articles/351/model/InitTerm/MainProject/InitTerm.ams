@@ -1,7 +1,7 @@
 ## ams_version=1.0
 
 Model Main_InitTerm {
-	Section tiny_math_progr {
+	Section Tiny_Math_Program {
 		Variable x {
 			Range: nonnegative;
 		}
@@ -28,8 +28,22 @@ Model Main_InitTerm {
 			Variables: AllVariables;
 			Type: Automatic;
 		}
+		Procedure pr_solve {
+			Body: {
+				pr_visit;
+				
+				if pro::GetPROEndPoint() then
+					if pro::DelegateToServer( waitForCompletion  :  1, 
+							completionCallback :  'pro::session::LoadResultsCallBack' ) then  
+						return 1;
+					endif ;
+				endif ;
+				
+				solve mp ;
+			}
+		}
 	}
-	Section Visiting_order_logging {
+	Section Logging_Visits {
 		Parameter p_visits {
 			InitialData: 0;
 		}
@@ -44,22 +58,18 @@ Model Main_InitTerm {
 		Procedure pr_log {
 			Arguments: (sp_msg);
 			Body: {
-				if bp_isConnectedToPro then
-					if bp_isWorkerSession then
+				if  pro::GetPROEndPoint() then
+					if DirectoryExists( "MainProject/Webui" ) then
 						pro::management::LocalLogInfo(sp_msg);
 					else
-						if DirectoryExists( "MainProject/Webui" ) then
-							pro::management::LocalLogInfo(sp_msg);
-						else
-							if p_visits = 1 then
-								if fileExists( sp_visitFileName ) then
-									fileDelete( sp_visitFileName );
-								endif ;
+						if p_visits = 1 then
+							if fileExists( sp_visitFileName ) then
+								fileDelete( sp_visitFileName );
 							endif ;
-							put f_visit ;
-							put sp_msg, / ;
-							putclose ;
 						endif ;
+						put f_visit ;
+						put sp_msg, / ;
+						putclose ;
 					endif ;
 				else
 					if p_visits = 1 then
@@ -87,113 +97,25 @@ Model Main_InitTerm {
 			StringParameter sp_line;
 		}
 	}
-	Section Close_open_start_page_for_both_UI_builders {
-		Procedure pr_openPageWebUI {
-			Body: {
-				pr_visit();
-			}
-		}
-		Procedure pr_closePageWebUI {
-			Body: {
-				pr_visit();
-			}
-		}
-		Procedure pr_openPageWinUI {
-			Body: {
-				pr_visit();
-			}
-		}
-		Procedure pr_closePageWinUI {
-			Body: {
-				pr_visit();
-			}
-		}
-	}
 	Procedure pr_startup {
 		Body: {
 			pr_visit();
 		}
 	}
-	Procedure pr_actionFinish {
+	Procedure pr_openPageWebUI {
 		Body: {
 			pr_visit();
-			if pro::GetPROEndPoint() then
-				if DirectoryExists( "./MainProject/WebUI" ) then
-					pro::sessionmanager::FinishSession();
-				else
-					PageClose();
-					ExitAimms();
-				endif ;
-			else
-				PageClose();
-				ExitAimms();
-			endif ;
-			return 1 ;
 		}
 	}
-	Procedure pr_solve {
+	Procedure pr_closePageWebUI {
 		Body: {
-			if pro::GetPROEndPoint() then
-				if pro::DelegateToServer( waitForCompletion  :  1, 
-						completionCallback :  'pro::session::LoadResultsCallBack' ) then  
-					return 1;
-				endif ;
-			endif ;
-			
-			solve mp ;
-		}
-	}
-	DeclarationSection Session_type {
-		Parameter bp_isConnectedToPro;
-		Parameter bp_isWorkerSession;
-		StringParameter sp_thisSession;
-		StringParameter sp_statusBar {
-			IndexDomain: (webui::indexApplicationExtension,webui::indexStatusBarSpec);
-			Definition: {
-				{
-					('9', 'header'    ) : "",  
-					('9', 'icon'      ) : "aimms-exit",  
-					('9', 'color'     ) : "",  
-					('9', 'text'      ) : "Bye",  
-					('9', 'tooltip'   ) : "",  
-					('9', 'procedure' ) : "pr_goodBye",  
-					('9', 'state'     ) : "Active"
-				}
-			}
+			pr_visit();
 		}
 	}
 	Section Application_initialization_execution_and_termination {
 		Procedure MainInitialization {
 			Body: {
-				block ! loop over arguments to find the session id, connectedness to AIMMS PRO, and whether this is a solver session.
-					bp_nextArgIsSessionId := 0 ;
-					bp_isConnectedToPro := 0 ;
-					bp_isWorkerSession := 0 ;
-					sp_thisSession := "" ;
-					p_argno := 1 ;
-					repeat 
-						bp_argExists := SessionArgument( p_argno, sp_arg );
-						if not bp_argExists then
-							break ;
-						endif ;
-						if bp_nextArgIsSessionId then
-							sp_thisSession := sp_arg ;
-							break ;
-						elseif sp_arg = "_pro-session-id" then
-							bp_nextArgIsSessionId := 1 ;
-							bp_isWorkerSession := 1 ;
-							bp_isConnectedToPro := 1 ;
-						elseif sp_arg = "_pro-webui-session-id" then
-							bp_nextArgIsSessionId := 1 ;
-							bp_isConnectedToPro := 1 ;
-						endif ;
-						p_argno += 1 ;
-					endrepeat ;
-				endblock ; 
-				
-				!profilerStart();
-				
-				!pr_visit();
+				pr_visit;
 			}
 			Comment: "Add initialization statements here that do NOT require any library being initialized already.";
 			Parameter p_argno;
