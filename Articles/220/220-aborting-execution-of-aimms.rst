@@ -24,8 +24,11 @@ If the number of index combinations is very large (e.g., billions of possibiliti
 The ``CTRL + Shift + S`` shortcut cannot interrupt this process because it is a single assignment. However, the AIMMS Interrupt Tool can be used to halt execution in such cases.
 
 Key benefits of the AIMMS Interrupt Tool:
+
 - **Interrupts long-running statements** that the shortcut cannot.
+
 - **Prevents data loss** by allowing you to stop execution without closing AIMMS.
+
 - **Identifies slow-performing statements** in large projects.
 
 Using the AIMMS Interrupt Tool
@@ -43,6 +46,7 @@ Follow these steps to use the AIMMS Interrupt Tool:
 
 Best Practices & Considerations
 -------------------------------
+
 - After interrupting execution, **verify parameter integrity**. If an assignment statement was stopped midway, the affected parameter might contain incomplete or inconsistent data.
 - **Optimize large assignments** by breaking them into smaller chunks or using iterative processing techniques to minimize long execution times.
 - Use **profiling tools** within AIMMS to identify bottlenecks before execution gets stuck.
