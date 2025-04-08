@@ -7,13 +7,13 @@ Error: Handling SSL Errors in your AIMMS Project
 **Issue:** While you are opening your AIMMS project you may experience a crash which can manifest with a pop-up error message looking like one of these below:
 
 .. image:: images/SSL_error_1.png
-    :width: 300
+    :width: 450
     :align: center
 
 |
 
 .. image:: images/SSL_error_2.png
-    :width: 300
+    :width: 350
     :align: center
 
 |
