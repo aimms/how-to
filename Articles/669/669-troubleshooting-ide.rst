@@ -62,7 +62,7 @@ To activate and apply this, you can follow `these steps <https://support.microso
 Opening `Library Repository <https://library-repository.aimms.com>`_ like this, the local certificate will get downloaded automatically and then you should be able to open your AIMMS project.
 
 3. Transfer a certificate from a machine where you know that the project can be opened 
-Alternatively, you can transfer a certificate from a machine when you know that you still are able to reach the repository library from AIMMS. To make sure that this is the case, you can open AIMMS and just try andding any library, following `these steps <https://how-to.aimms.com/Articles/84/84-using-libraries.html#to-add-a-new-library>`_.
+Alternatively, you can transfer a certificate from a machine when you know that you still are able to reach the repository library from AIMMS. To make sure that this is the case, you can open AIMMS and just try andding any library, following `these guidelines <https://how-to.aimms.com/Articles/84/84-using-libraries.html#to-add-a-new-library>`_.
 If you succeed, this means that the relevant machine possesses the correct local certificate. 
 To figure out which certificate you need from that machine, you can go back to the logfile and look for details on the certificate that can not be validated. For example in the screenshot below you will see the following certificate details: 
 
@@ -118,17 +118,17 @@ You should be able to export the certificate like this:
 
 ...and import it onto the new machine like this:
 
-.. image:: images/cert_imp-1.png
+.. image:: images/cert-imp-1.png
     :align: center
 
 |
 
-.. image:: images/cert_imp-2.png
+.. image:: images/cert-imp-2.png
     :align: center
 
 |
 
-.. image:: images/cert_imp-3.png
+.. image:: images/cert-imp-3.png
     :align: center
 
 |
