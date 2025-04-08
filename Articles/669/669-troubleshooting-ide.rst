@@ -75,82 +75,65 @@ The current versions of MS Edge have the option to open Edge in Internet Explore
 To activate and apply this, you can follow `these steps <https://support.microsoft.com/en-us/microsoft-edge/internet-explorer-mode-in-microsoft-edge-6604162f-e38a-48b2-acd2-682dbac6f0de#:~:text=To%20turn%20on%20Internet%20Explorer,Restart%20Microsoft%20Edge.>`_.
 Opening `Library Repository <https://library-repository.aimms.com>`_ like this, the local certificate will get downloaded automatically and then you should be able to open your AIMMS project.
 
-3. Transfer a certificate from a machine where you know that the project can be opened 
+3. Transfer a certificate from a machine where you know that the project can be opened.
 Alternatively, you can transfer a certificate from a machine when you know that you still are able to reach the repository library from AIMMS. To make sure that this is the case, you can open AIMMS and just try andding any library, following `these guidelines <https://how-to.aimms.com/Articles/84/84-using-libraries.html#to-add-a-new-library>`_.
 If you succeed, this means that the relevant machine possesses the correct local certificate. 
-To figure out which certificate you need from that machine, you can go back to the logfile and look for details on the certificate that can not be validated. For example in the screenshot below you will see the following certificate details: 
+To figure out which certificate you need from that machine, you can go back to the log file and look for details on the certificate that can not be validated. For example in the screenshot below you will see the following certificate details: 
 
 .. image:: images/certificate_name.png
     :align: center
 
-Then you go to the machine that can connect to the Repository Library, open the Certificate Manager (in your Windows search menu, look for "certmgr") and navigate to Trusted Root Certification Authorities -> Certificates. 
-Then look for the certificate from the logs. In my case I find this one.
+Then, go to the machine that can connect to the Repository Library, open the Certificate Manager (in your Windows search menu, look for ``certmgr``) 
+and navigate to :menuselection:`Trusted Root Certification Authorities > Certificates`. 
+Then look for the certificate from the logs.
 
 .. image:: images/Starfield-root-certificate.png
     :align: center
 
 |
 
-You should be able to export the certificate like this: 
+.. dropdown:: Follow these steps to export the certificate:
 
-.. image:: images/cert_exp-1.png
-    :align: center
+    .. image:: images/cert_exp-1.png
+        :align: center
 
-|
+    .. image:: images/cert_exp-2.png
+        :align: center
 
-.. image:: images/cert_exp-2.png
-    :align: center
+    .. image:: images/cert_exp-3.png
+        :align: center
 
-|
+    .. image:: images/cert_exp-4.png
+        :align: center
 
-.. image:: images/cert_exp-3.png
-    :align: center
+    .. image:: images/cert_exp-5.png
+        :align: center
 
-|
+    .. image:: images/cert_exp-6.png
+        :align: center
 
-.. image:: images/cert_exp-4.png
-    :align: center
+    .. image:: images/cert_exp-7.png
+        :align: center
 
-|
+.. dropdown:: Once it is exported, use these steps to import it to the new machine:
 
-.. image:: images/cert_exp-5.png
-    :align: center
+    .. image:: images/cert-imp-1.png
+        :align: center
 
-|
+    .. image:: images/cert-imp-2.png
+        :align: center
 
-.. image:: images/cert_exp-6.png
-    :align: center
-
-|
-
-.. image:: images/cert_exp-7.png
-    :align: center
-
-|
-
-...and import it onto the new machine like this:
-
-.. image:: images/cert-imp-1.png
-    :align: center
-
-|
-
-.. image:: images/cert-imp-2.png
-    :align: center
-
-|
-
-.. image:: images/cert-imp-3.png
-    :align: center
-
-|
+    .. image:: images/cert-imp-3.png
+        :align: center
 
 .. topic:: If all the above does not work, is there a work-around? 
 
     There is a quick work-around for this problem, which bypasses the access to the Library Repository, but it will not help you if you need additional libraries in the future.
-    You can copy the libraries from a machine where you know that the project is successfully opening - you should navigate to %localappdata%\AIMMS\AutoLib onto that machine and copy the library folder, together with the library version subfolder to the machine where you are working.
+    You can copy the libraries from a machine where you know that the project is successfully opening - you should navigate to ``%localappdata%\AIMMS\AutoLib`` onto that machine and copy the library folder, together with the library version subfolder to the machine where you are working.
 
     Alternatively, if you do not have an access to a machine where the project can be opened, you can contact us at support@aimms.com, sharing the library version you need. This way we can share with you the relevant library.
+
+|
 
 .. spelling:word-list::
     aimms
