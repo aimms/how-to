@@ -7,13 +7,13 @@ Error: Handling SSL Errors in your AIMMS Project
 **Issue:** While you are opening your AIMMS project you may experience a crash which can manifest with a pop-up error message looking like one of these below:
 
 .. image:: images/SSL_error_1.png
-    :width: 100
+    :width: 300
     :align: center
 
 |
 
 .. image:: images/SSL_error_2.png
-    :width: 100
+    :width: 300
     :align: center
 
 |
@@ -26,6 +26,8 @@ To verify if you are using a repository library, you can open your ``.aimms`` fi
 
 .. image:: images/aimms_file.png
     :align: center
+
+|
 
 Normally, when you, as a modeler, add a repository library to your project, it will be downloaded to ``%localappdata%\AIMMS\AutoLib`` onto your machine, so that, when you open the project in the future, it is available locally. 
 However, when transferring projects between different machines, this initial download is skipped, so the download on each new machine is triggered when the project is being opened there for the first time.
@@ -82,6 +84,8 @@ To figure out which certificate you need from that machine, you can go back to t
 
 .. image:: images/certificate_name.png
     :align: center
+
+|
 
 Then, go to the machine that can connect to the Repository Library, open the Certificate Manager (in your Windows search menu, look for ``certmgr``) 
 and navigate to :menuselection:`Trusted Root Certification Authorities > Certificates`. 
