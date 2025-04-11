@@ -393,3 +393,5 @@ Release Notes
    coords
    haversine
    combinatorially
+   aimms
+   aimmscmd

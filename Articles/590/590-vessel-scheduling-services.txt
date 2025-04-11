@@ -76,7 +76,7 @@ Remarks:
 Whereby ``pr_initTask`` 
 
 The procedure ``pr_initTask`` is run when a task is started; it is intended to make the 
-"Business model" of the application stateless; such that tasks can be run indepedently from 
+"Business model" of the application stateless; such that tasks can be run independently from 
 each other.
 
 Here "Business model" refers to identifiers (sets, parameters, variables, and constraints) 

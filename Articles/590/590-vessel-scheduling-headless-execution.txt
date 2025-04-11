@@ -37,7 +37,7 @@ There is a clear ordering in this command line:
 #.  First, the options to ``AimmsCmd`` itself.  
     These options are optional, but a typical example is ``--run-only`` <run only procedure>.
 
-#.  Second, the name of the project.  This is mandartory and
+#.  Second, the name of the project.  This is mandatory and
 
 #.  Third, the arguments to the AIMMS project, which can be retrieved using `SessionArgument <https://documentation.aimms.com/functionreference/system-interaction/invoking-actions/sessionargument.html>`_
 
@@ -150,7 +150,7 @@ Remarks:
 
     *   ``--run-only dex::api::RESTServiceHandler`` to start the service, and 
     
-    *   the session arguments ``--dex::serviceTimeOut`` and ``30000`` the set thefault timeout to 30 seconds (as opposed to 5 minutes).
+    *   the session arguments ``--dex::serviceTimeOut`` and ``30000`` the set the default timeout to 30 seconds (as opposed to 5 minutes).
 
 
 
@@ -223,7 +223,7 @@ and execution of AIMMS needs to start in this folder.
 You can achieve this by adding ``/w model`` to your docker run command.
 
 When adding the project to the image, please copy the essential contents 
-of the project to the subfolder model in the aimms-eo folder (build context).
+of the project to the subfolder model in the ``aimms-eo`` folder (build context).
 
 Here the essential contents are the contents without folders such as ``backup`` and ``log``.
 
