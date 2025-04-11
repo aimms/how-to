@@ -92,6 +92,7 @@ the default mappings, which will not include JSON. To include JSON we need to up
 this is already created in the procedure ``pr_createJSONMappings``. 
 
 .. code-block:: aimms
+	
 	! will create all possible mappings
 	dex::DatasetGeneratorFilter(dex::gt, dex::mm, dex::amt) := 1;
 
