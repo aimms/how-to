@@ -72,7 +72,6 @@ that are relevant for our JSON data file into a new declaration and assign the c
 annotations to this declaration. For the parameter identifiers we've added column-names. 
 
 .. figure:: images/data-exchange-1.png
-	:scale: 70
 	:align: center
 
 	The annotations on declaration-level
@@ -80,7 +79,6 @@ annotations to this declaration. For the parameter identifiers we've added colum
 |
 
 .. figure:: images/data-exchange-2.png
-	:scale: 70
 	:align: center
 
 	The annotations on identifier-level
@@ -92,7 +90,7 @@ the default mappings, which will not include JSON. To include JSON we need to up
 this is already created in the procedure ``pr_createJSONMappings``. 
 
 .. code-block:: aimms
-	
+
 	! will create all possible mappings
 	dex::DatasetGeneratorFilter(dex::gt, dex::mm, dex::amt) := 1;
 
@@ -177,8 +175,9 @@ This is ready in ``pr_readJSONMapping``:
 If this procedure is run successfully you will see that the data from the data source is imported as specified in the mapping file:
 
 .. image:: images/data-exchange-4.png
-   :scale: 70
    :align: center
+
+|
 
 .. spelling:word-list::
 
