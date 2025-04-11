@@ -32,6 +32,8 @@ Constraints include ensuring each cargo is loaded inside the determined time win
 
 The objective is to minimize costs associated to combinations of cargoes and routes.
 
+
+
 .. mathematicalmodel_
 
 Mathematical Model
@@ -340,39 +342,11 @@ Below there are the css files you will find with comments on what they change.
          }
 
 
-As a service
---------------------------------
 
-In the above, the algorithm of this app is presented that generates a set of potential routes, and
-optimizes a mathematical program to find an optimal selection of those routes.
-
-A service can be defined around this algorithm facilitating its use 
-by other applications via REST API. 
-
-A service in an AIMMS model is easily defined by associating the name of a service 
-to an AIMMS procedure. More interestingly, is that there are several data formats 
-available for providing input (request body) and output (response body) to a request
-on such a service.
-
-In the following sections, we will detail:
-
-#.  Defining a service
-
-#.  Implementing a service whereby both the input and the output are:
-
-    #.  An Excel Workbook,
-
-    #.  A zipped collection of CSV files,
-
-    #.  A zipped collection of Parquet files, and
-
-    #.  A json file containing references to the actual input and output files.
-
-#.  Testing such a service using a Python script with the requests python library
-
-#.  Developing and testing such a service on AIMMS Cloud using the 
+.. include:: 590-vessel-scheduling-services.txt
 
 
+.. include:: 590-vessel-scheduling-headless-execution.txt
 
 Minimal Requirements
 ----------------------
@@ -391,6 +365,9 @@ PETROBRAS Ship Scheduling. Interfaces 44(6):555-566.
 #.  `Develop an AIMMS Service <https://how-to.aimms.com/C_Developer/Sub_Connectivity/sub_dataexchange/Sub_Develop_Service/index.html>`_
 
 #.  `A Python library to make it really easy to use AIMMS Cloud REST services <https://community.aimms.com/product-updates/a-python-library-to-make-it-really-easy-to-use-aimms-cloud-rest-services-1810>`_
+
+#.  `AIMMS command line options  <https://documentation.aimms.com/user-guide/miscellaneous/calling-aimms/aimms-command-line-options.html>`_ 
+
 
 Release Notes
 --------------------
