@@ -30,4 +30,5 @@ Here you will find articles related to AIMMS IDE usage and setup:
    /Articles/186/186-keyboard-shortcuts-for-aimms
    /Articles/45/45-share-project-files
    /Articles/145/145-import-export-section 
+   /Articles/669/669-troubleshooting-ide
     
