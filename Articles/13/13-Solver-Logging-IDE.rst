@@ -101,6 +101,8 @@ MIP Problems
 +------------+------------------------------+-----------------------+
 | CBC        | Status File                  | File                  |
 +------------+------------------------------+-----------------------+
+| COPT       | Output File                  | Yes                   |
++------------+------------------------------+-----------------------+
 
 .. note:: For ODH-CPLEX, setting the option ``MIP display`` requires setting the option ``Status display`` to ``Yes``.
 
