@@ -72,7 +72,7 @@ Procedure with No Arguments
 
 The procedure has no arguments, but it explicitly states that it changes some global identifiers 
 via the new attribute ``DefinesIdentifiers``.
-This is especially usefull if you have more than one parameter or set that are calculated in one procedure.
+This is especially useful if you have more than one parameter or set that are calculated in one procedure.
 
 .. code-block:: aimms
 
