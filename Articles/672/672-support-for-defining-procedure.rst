@@ -93,5 +93,8 @@ This is especially useful if you have more than one parameter or set that are ca
         Definition: pr_findMinMax;
     }
 
+You can download the project below to test the three examples demonstrated in this article:
+
+    :download:`Defining Procedures example <model/DefiningProcedures.zip>`
 
 .. spelling:word-list::
