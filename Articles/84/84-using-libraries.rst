@@ -41,6 +41,12 @@ Libraries have a bi-directional relationship with your project, unless encrypted
 
    For example, if you add the AXLL library which has a prefix ``axll``, you can invoke functions of this library in your code with ``axll::``. A drop-down list of available functions appears.
 
+.. important::
+
+   When working locally, you can use libraries located outside your project's main directory. 
+   However, once the application is deployed to the Cloud, it can only access files included in the ``.aimmspack``. 
+   For this reason, we strongly recommend placing any custom libraries inside your project folder to ensure everything 
+   functions correctly after deployment.
 
 Make a Library Read-Only 
 -------------------------

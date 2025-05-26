@@ -18,6 +18,7 @@ AIMMS Optimization Tooling has evolved over time, to match arising user needs an
    /Articles/46/46-change-aimms-version
    /Articles/109/109-deprecate-compound-sets-overview
    /Articles/109/109-convert-compound-sets
+   /Articles/672/672-support-for-defining-procedure
    /Articles/129/129-MSACCESS-32bit-64bit
    /Articles/295/295-convert-page-actions
    /Articles/295/295-convert-maps
