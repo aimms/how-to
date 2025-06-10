@@ -77,7 +77,8 @@ A bit more Information on SAS Tokens
 
 A full overview of the description of the parameters that are used in a SAS token can be `found on this page <https://learn.microsoft.com/en-us/rest/api/storageservices/create-account-sas#construct-an-account-sas-uri>`_. Each request could require its own SAS token as the values of the parameters might change, depending on the service you are using (listing a file system requires a different level of access than putting a file, for example) or even the type of SAS token you are creating. If you are going to use the Azure Data Lake Storage API we `recommend reading through the related documentation about SAS tokens <https://learn.microsoft.com/en-us/rest/api/storageservices/delegate-access-with-shared-access-signature>`_.
 
-The signature part of a SAS token is secured using the storage account key. If you don't know the value of this key and cannot use the `ADLS toolkit application <https://how-to.aimms.com/Articles/598/598-datalake-tools.html>`__ to create a SAS for you, you can `contact support <mailto:support@aimms.com>`__.
+The signature part of a SAS token is secured using the storage account key. 
+Example code is provided in the `ADLS toolkit application <https://how-to.aimms.com/Articles/598/598-datalake-tools.html>`__.
 
 Looking back to the example of getting the file systems, we are using the following parameter-value combinations:
  
