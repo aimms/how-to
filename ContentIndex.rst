@@ -8,29 +8,47 @@ and building applications in optimization and prescriptive analytics. You'll als
 
 .. grid:: 3
 
-    .. grid-item-card::  Getting Started
+    .. grid-item-card::  AIMMS Language
+        :img-top: images/AIMMS-Language.png
+        :link: https://how-to.aimms.com/aimms-language/index.html
+        :text-align: center
 
-        Installing AIMMS, settings options, licensing help
+        AIMMS Language makes it easy to build complex optimization models with clear syntax, supporting real-world, data-driven decision making.
 
-    .. grid-item-card::  AIMMS Developer
+    .. grid-item-card::  Algorithmic Capabilities
+        :img-top: images/AC.png
+        :link: https://how-to.aimms.com/algorithmic-capabilities/index.html
+        :text-align: center
 
-        Data connection, modeling, solvers, programming, error handling
+        Learn how to solve complex problems with AIMMS algorithmic optimization tools.
 
-    .. grid-item-card::  Application UI
+    .. grid-item-card::  AIMMS Cloud
+        :img-top: images/AIMMS-PRO-Cloud-Platform.png
+        :link: https://how-to.aimms.com/aimms-pro-cloud-platform/index.html
+        :text-align: center
 
-        Creating and customizing a user interface for your apps
+        Deploy AIMMS apps flexibly to suit your needs. This section offers setup guidance, best practices, and tips for secure, scalable delivery.
 
-    .. grid-item-card::  Deployment
+    .. grid-item-card::  WebUI
+        :img-top: images/WebUI.png
+        :link: https://how-to.aimms.com/webui/index.html
+        :text-align: center
 
-        Distributing your apps with AIMMS PRO (on-premise or cloud-hosted)
+        Build real-time dashboards easily for data and model insights across supply chain and logistics.
 
-    .. grid-item-card::  Software Evolution
+    .. grid-item-card::  Examples
+        :img-top: images/AIMMS-Libraries.png
+        :link: https://how-to.aimms.com/C_Examples/index.html
+        :text-align: center
 
-        Implementing new AIMMS features, planning for deprecation
+        This AIMMS open source gallery helps you learn, use, and build on shared projects to create your own solutions.    
 
-    .. grid-item-card::  SC Navigator
+    .. grid-item-card::  Toolkit
+        :img-top: images/Toolkit.png
+        :link: https://how-to.aimms.com/C_Toolkit/index.html
+        :text-align: center
 
-        Help and documentation for the SC Navigator suite of apps       
+        Open source toolkits to improve your AIMMS applications.
 
 .. raw:: html
     
