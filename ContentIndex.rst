@@ -1,3 +1,37 @@
+Welcome to How-To
+============================
+AIMMS How-To webiste is a knowledge base for everyone involved in projects that use AIMMS, including developers, network administrators, 
+application end-users, and business process stakeholders.
+
+You'll find tutorials, best practices, and practical guidance for using AIMMS Optimization Tooling, including help topics in mathematical modeling, solvers, AIMMS Language, 
+and building applications in optimization and prescriptive analytics. You'll also find support for troubleshooting errors and handling deprecations.
+
+.. grid:: 3
+
+    .. grid-item-card::  Getting Started
+
+        Installing AIMMS, settings options, licensing help
+
+    .. grid-item-card::  AIMMS Developer
+
+        Data connection, modeling, solvers, programming, error handling
+
+    .. grid-item-card::  Application UI
+
+        Creating and customizing a user interface for your apps
+
+    .. grid-item-card::  Deployment
+
+        Distributing your apps with AIMMS PRO (on-premise or cloud-hosted)
+
+    .. grid-item-card::  Software Evolution
+
+        Implementing new AIMMS features, planning for deprecation
+
+    .. grid-item-card::  SC Navigator
+
+        Help and documentation for the SC Navigator suite of apps       
+
 .. raw:: html
     
     <h1 class="home_header">WELCOME TO HOW-TO</h1>
