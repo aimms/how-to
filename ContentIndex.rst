@@ -1,6 +1,6 @@
 Welcome to How-To
 ============================
-AIMMS How-To webiste is a knowledge base for everyone involved in projects that use AIMMS, including developers, network administrators, 
+AIMMS How-To website is a knowledge base for everyone involved in projects that use AIMMS, including developers, network administrators, 
 application end-users, and business process stakeholders.
 
 You'll find tutorials, best practices, and practical guidance for using AIMMS Optimization Tooling, including help topics in mathematical modeling, solvers, AIMMS Language, 
