@@ -110,3 +110,7 @@ and building applications in optimization and prescriptive analytics. You'll als
     C_Toolkit/index
     Recently_added
 
+.. spelling:word-list::
+    
+    scalable
+    toolkits
