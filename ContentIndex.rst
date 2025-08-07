@@ -1,5 +1,12 @@
+
+.. raw:: html
+    
+    <br>
+    <h1 class="home_header">Welcome to How-To</h1>
+
 Welcome to How-To
 ============================
+
 AIMMS How-To website is a knowledge base for everyone involved in projects that use AIMMS, including developers, network administrators, 
 application end-users, and business process stakeholders.
 
