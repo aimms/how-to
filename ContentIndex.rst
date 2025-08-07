@@ -37,7 +37,6 @@ and building applications in optimization and prescriptive analytics. You'll als
         Build real-time dashboards easily for data and model insights across supply chain and logistics.
 
     .. grid-item-card::  Examples
-        :img-top: Images/AIMMS-Libraries.png
         :link: https://how-to.aimms.com/C_Examples/index.html
         :text-align: center
 
@@ -45,6 +44,7 @@ and building applications in optimization and prescriptive analytics. You'll als
 
     .. grid-item-card::  Toolkit
         :img-top: Images/Toolkit.png
+        :height: 20px
         :link: https://how-to.aimms.com/C_Toolkit/index.html
         :text-align: center
 
