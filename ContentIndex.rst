@@ -1,15 +1,34 @@
 .. raw:: html
 
     <br>
+
 	<h1 class="home_header">SC Navigator Documentation</h1>
 
-Welcome to How-To
-============================
+
 AIMMS How-To website is a knowledge base for everyone involved in projects that use AIMMS, including developers, network administrators, 
 application end-users, and business process stakeholders.
 
 You'll find tutorials, best practices, and practical guidance for using AIMMS Optimization Tooling, including help topics in mathematical modeling, solvers, AIMMS Language, 
 and building applications in optimization and prescriptive analytics. You'll also find support for troubleshooting errors and handling deprecations.
+
+.. toctree::
+    :maxdepth: 1
+    :titlesonly:
+    :hidden:
+
+    /Articles/363/363-getting-started-aimms
+    licensing/index
+    aimms-ide/index
+    aimms-language/index
+    algorithmic-capabilities/index 
+    aimms-libraries/index
+    aimms-pro-cloud-platform/index
+    integrations-data-exchange/index
+    webui/index
+    software-evolution/index
+    C_Examples/index
+    C_Toolkit/index
+    Recently_added
 
 .. grid:: 3
    :gutter: 4
@@ -97,24 +116,7 @@ and building applications in optimization and prescriptive analytics. You'll als
     
 -----------------------------------------------------------
 
-.. toctree::
-    :maxdepth: 1
-    :titlesonly:
-    :hidden:
 
-    /Articles/363/363-getting-started-aimms
-    licensing/index
-    aimms-ide/index
-    aimms-language/index
-    algorithmic-capabilities/index 
-    aimms-libraries/index
-    aimms-pro-cloud-platform/index
-    integrations-data-exchange/index
-    webui/index
-    software-evolution/index
-    C_Examples/index
-    C_Toolkit/index
-    Recently_added
 
 .. spelling:word-list::
     
