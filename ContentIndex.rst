@@ -1,7 +1,6 @@
 .. raw:: html
 
     <br>
-
 	<h1 class="home_header">SC Navigator Documentation</h1>
 
 
@@ -30,6 +29,7 @@ and building applications in optimization and prescriptive analytics. You'll als
     C_Toolkit/index
     Recently_added
 
+
 .. grid:: 3
    :gutter: 4
 
@@ -55,7 +55,7 @@ and building applications in optimization and prescriptive analytics. You'll als
         Deploy AIMMS apps flexibly to suit your needs. This section offers setup guidance, best practices, and tips for secure, scalable delivery.
 
     .. grid-item-card::  WebUI
-        :img-top: Images/WebUI-home.png
+        :img-top: Images/WebUI.png
         :link: https://how-to.aimms.com/webui/index.html
         :text-align: center
 
@@ -74,6 +74,7 @@ and building applications in optimization and prescriptive analytics. You'll als
         :text-align: center
 
         Open source toolkits to improve your AIMMS applications.
+
 
 .. raw:: html
     
