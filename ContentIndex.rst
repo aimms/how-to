@@ -7,6 +7,7 @@ You'll find tutorials, best practices, and practical guidance for using AIMMS Op
 and building applications in optimization and prescriptive analytics. You'll also find support for troubleshooting errors and handling deprecations.
 
 .. grid:: 3
+    :gutter: 4
 
     .. grid-item-card::  AIMMS Language
         :img-top: Images/AIMMS-Language.png
