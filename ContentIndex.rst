@@ -4,8 +4,6 @@
     <br>
     <h1 class="home_header">Welcome to How-To</h1>
 
-Welcome to How-To
-============================
 
 AIMMS How-To website is a knowledge base for everyone involved in projects that use AIMMS, including developers, network administrators, 
 application end-users, and business process stakeholders.
@@ -17,44 +15,38 @@ and building applications in optimization and prescriptive analytics. You'll als
     :gutter: 4
 
     .. grid-item-card::  AIMMS Language
-        :img-top: Images/AIMMS-Language.png
+        :img-top: Images/AIMMS-Language-home.png
         :link: https://how-to.aimms.com/aimms-language/index.html
-        :text-align: center
 
         AIMMS Language makes it easy to build complex optimization models with clear syntax, supporting real-world, data-driven decision making.
 
     .. grid-item-card::  Algorithmic Capabilities
-        :img-top: Images/AC.png
+        :img-top: Images/AC-home.png
         :link: https://how-to.aimms.com/algorithmic-capabilities/index.html
-        :text-align: center
 
         Learn how to solve complex problems with AIMMS algorithmic optimization tools.
 
     .. grid-item-card::  AIMMS Cloud
-        :img-top: Images/AIMMS-PRO-Cloud-Platform.png
+        :img-top: Images/AIMMS-PRO-Cloud-Platform-home.png
         :link: https://how-to.aimms.com/aimms-pro-cloud-platform/index.html
-        :text-align: center
 
         Deploy AIMMS apps flexibly to suit your needs. This section offers setup guidance, best practices, and tips for secure, scalable delivery.
 
     .. grid-item-card::  WebUI
         :img-top: Images/WebUI-home.png
         :link: https://how-to.aimms.com/webui/index.html
-        :text-align: center
 
         Build real-time dashboards easily for data and model insights across supply chain and logistics.
 
     .. grid-item-card::  Examples
-        :img-top: Images/AIMMS-Libraries.png
+        :img-top: Images/AIMMS-Libraries-home.png
         :link: https://how-to.aimms.com/C_Examples/index.html
-        :text-align: center
 
         This AIMMS open source gallery helps you learn, use, and build on shared projects to create your own solutions.    
 
     .. grid-item-card::  Toolkit
-        :img-top: Images/Toolkit.png
+        :img-top: Images/Toolkit-home.png
         :link: https://how-to.aimms.com/C_Toolkit/index.html
-        :text-align: center
 
         Open source toolkits to improve your AIMMS applications.
 
