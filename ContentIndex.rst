@@ -38,7 +38,7 @@ and building applications in optimization and prescriptive analytics. You'll als
         Deploy AIMMS apps flexibly to suit your needs. This section offers setup guidance, best practices, and tips for secure, scalable delivery.
 
     .. grid-item-card::  WebUI
-        :img-top: Images/WebUI.png
+        :img-top: Images/WebUI-home.png
         :link: https://how-to.aimms.com/webui/index.html
         :text-align: center
 
