@@ -1,0 +1,185 @@
+As a service
+--------------------------------
+
+In the above, the algorithm of this app is presented that generates a set of potential routes, and
+optimizes a mathematical program to find an optimal selection of those routes.
+
+A service can be defined around this algorithm facilitating its use 
+by other applications via REST API. 
+
+A service in an AIMMS model is easily defined by associating the name of a service 
+to an AIMMS procedure. More interestingly, is that there are several data formats 
+available for providing input (request body) and output (response body) to a request
+on such a service.
+
+In the following sections, we will detail:
+
+#.  Defining a service
+
+#.  Implementing a service 
+
+#.  Testing such a service using a Python script with the requests python library
+
+#.  Developing and testing such a service on AIMMS Cloud using the 
+
+Defining and implementing a a service
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+
+Coding the service
+"""""""""""""""""""""""""""" 
+
+A service is defined by naming it and associating it with a procedure.
+For instance in the following example code:
+
+.. code-block:: aimms 
+    :linenos:
+    :emphasize-lines: 1,7,8,21
+
+    rocedure pr_solveVesselSchedulingExcel {
+        Body: {
+            block
+            
+                pr_initTask();
+            
+                _sp_inp := dex::api::RequestAttribute( 'request-data-path'  ) ;
+                _sp_out := dex::api::RequestAttribute( 'response-data-path' ) ;
+            
+                pr_actuallySolveVesselSchedulingExcel( _sp_inp, _sp_out );
+            
+            onerror _ep_err do
+            
+                _sp_msg := errh::Message( _ep_err );
+                display _sp_msg ;
+            
+            endblock ;
+            
+            return 1 ;
+        }
+        dex::ServiceName: solveVesselSchedulingExcel;
+        StringParameter _sp_inp;
+        StringParameter _sp_out;
+        ElementParameter _ep_err {
+            Range: errh::PendingErrors;
+        }
+        StringParameter _sp_msg;
+    }
+
+Remarks:
+
+*   Line 1: The name of the procedure that will be executed when the service is called.
+
+*   Line 21: The name of the service, that will be available for execution.
+
+*   Lines 7,8: The filename of the request and response.
+
+
+Whereby ``pr_initTask`` 
+
+The procedure ``pr_initTask`` is run when a task is started; it is intended to make the 
+"Business model" of the application stateless; such that tasks can be run independently from 
+each other.
+
+Here "Business model" refers to identifiers (sets, parameters, variables, and constraints) 
+that represent objects in the reality being modeled.  
+This is contrasted with application management identifiers such as such as user filenames, 
+time of day, profiling information, and so forth.
+The sets and parameters in the libraries WebUI and PRO are all examples of management identifiers;
+and should not be altered by a procedure such as ``pr_initTask``.
+
+.. code-block:: aimms 
+    :linenos:
+
+    Procedure pr_initTask {
+        Body: {
+            ! Reset the Business model
+            empty s_cargoes, s_vessels, s_locations, s_calc_feasibleRoutes ;
+
+            ! Clean the generated mathematical programs.
+            _ep_gmp := first( AllGeneratedMathematicalPrograms );
+            while _ep_gmp do
+                gmp::Instance::Delete( _ep_gmp );
+            endwhile ;
+
+            ! Other cleanups
+            StringGarbageCollect();
+            CleanDependents();
+        }
+        ElementParameter _ep_gmp {
+            Range: AllGeneratedMathematicalPrograms;
+        }
+    }
+
+and ``pr_actuallySolveVesselSchedulingExcel``
+
+.. code-block:: aimms 
+    :linenos:
+    :emphasize-lines: 10,29
+
+    Procedure pr_actuallySolveVesselSchedulingExcel {
+        Arguments: (sp_inp,sp_out);
+        Body: {
+            dex::AddMapping(
+                mappingName : "ImportDataSet",
+                mappingFile : "Mappings/Generated/ImportDataSet-Excel.xml");
+            
+            p_vesselVelocity := 37.04 [km/hour];
+            
+            if dex::ReadFromFile(
+                dataFile    : sp_inp, 
+                mappingName : "Generated/ImportDataSet-Excel") then
+            
+                !Activate all master data
+                bp_activeCargoes(i_cargo):= 1;
+                bp_activeVessels(i_vessel) := 1;
+                bp_activeLocations(i_loc) := 1;
+            endif ;
+            
+            pr_calculateRoutesAndCost(ep_routeCalculationImplementation: ep_selectedRouteCalculationImplementation );
+            
+            solve mm::mp_vesselScheduling;
+            
+            !Post Execution
+            mm::pr_post_vesselResults();
+            mm::pr_post_cargoResults();
+            mm::pr_post_routeResults();
+            
+            dex::WriteToFile(
+                dataFile    :  sp_out, 
+                mappingName :  "Generated/ExportDataSet-Excel", 
+                pretty      :  1);
+        }
+        DeclarationSection Argument_declarations {
+            StringParameter sp_inp {
+                Property: Input;
+            }
+            StringParameter sp_out {
+                Property: Input;
+            }
+        }
+    }
+
+Remarks:
+
+*   Line 10-12: The request data is read in.
+
+*   Line 29-31: The response data is written out.
+
+Starting and stopping the service
+"""""""""""""""""""""""""""""""""""""" 
+
+When using the AIMMS IDE, you can manually start and stop the `service <https://documentation.aimms.com/dataexchange/rest-server.html#activating-the-rest-service>`_ using the procedures:
+
+*   https://documentation.aimms.com/dataexchange/api.html#dex-api-StartAPIService
+
+*   https://documentation.aimms.com/dataexchange/api.html#dex-api-StopAPIService
+
+When using AimmsCMD, or AIMMS inside a docker container, the service is better started using the procedure ``dex::api::RESTServiceHandler``.
+This will stop execution after timeout or after exceeding the maximum number of requests.  Fine control is provided via the parameters:
+
+*   ``dex::api::RESTServiceMaxRequests``
+
+*   ``dex::api::RestServiceMinTimeout``
+
+*   ``dex::api::RESTServiceTimeout``
+
+When using the AIMMS cloud, the service is automatically started when a task is posted; no need to manually start the service.

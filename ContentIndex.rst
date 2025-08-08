@@ -1,41 +1,56 @@
+
 .. raw:: html
     
-    <h1 class="home_header">WELCOME TO HOW-TO</h1>
-    
-.. raw:: html
-    
-    <div id="content_home_page">
+    <br>
+    <h1 class="home_header">Welcome to How-To</h1>
 
-        <p>AIMMS How-To is a knowledge base for everyone involved in projects that use AIMMS, including developers, network administrators, application end-users, and business process stakeholders.</p>
-        <p>You'll find tutorials, best practices, and practical guidance for using AIMMS Optimization Tooling, including help topics in mathematical modeling, solvers, AIMMS Language, and building applications in optimization and prescriptive analytics. You'll also find support for troubleshooting errors and handling deprecations.</p>
 
-        <div class="boxes">
-            <a class="box_home_page" href="C_Getting_Started/index.html">
-                <h1>Getting Started</h1>
-                <div>Installing AIMMS, settings options, licensing help</div>
-            </a>
-            <a class="box_home_page" href="C_Developer/index.html">
-                <h1>AIMMS Developer</h1>
-                <div>Data connection, modeling, solvers, programming, error handling</div>
-            </a>
-            <a class="box_home_page" href="C_UI/index.html">
-                <h1>Application UI</h1>
-                <div>Creating and customizing a user interface for your apps</div>
-            </a>
-            <a class="box_home_page" href="C_Deployment/index.html">
-                <h1>Deployment</h1>
-                <div>Distributing your apps with AIMMS Cloud</div>
-            </a>
-            <a class="box_home_page" href="C_Evolution/index.html">
-                <h1>Software Evolution</h1>
-                <div>Implementing new AIMMS features, planning for deprecation</div>
-            </a>
-            <a class="box_home_page" href="https://scnavigator-manual.aimms.com/">
-                <h1>SC Navigator</h1>
-                <div>Help and documentation for the SC Navigator suite of apps</div>
-            </a>
-        </div>
-    </div>
+AIMMS How-To website is a knowledge base for everyone involved in projects that use AIMMS, including developers, network administrators, 
+application end-users, and business process stakeholders.
+
+You'll find tutorials, best practices, and practical guidance for using AIMMS Optimization Tooling, including help topics in mathematical modeling, solvers, AIMMS Language, 
+and building applications in optimization and prescriptive analytics. You'll also find support for troubleshooting errors and handling deprecations.
+
+.. grid:: 3
+    :gutter: 4
+
+    .. grid-item-card::  AIMMS Language
+        :img-top: Images/AIMMS-Language-home.png
+        :link: https://how-to.aimms.com/aimms-language/index.html
+
+        Create complex optimization models easily with AIMMS Language using clear, intuitive syntax for real-world decision support.
+
+    .. grid-item-card::  Algorithmic Capabilities
+        :img-top: Images/AC-home.png
+        :link: https://how-to.aimms.com/algorithmic-capabilities/index.html
+
+        Solve complex optimization problems efficiently with AIMMS algorithmic tools, designed for speed, flexibility, and accuracy.
+
+    .. grid-item-card::  AIMMS Cloud
+        :img-top: Images/AIMMS-PRO-Cloud-Platform-home.png
+        :link: https://how-to.aimms.com/aimms-pro-cloud-platform/index.html
+
+        Deploy AIMMS apps flexibly with guidance, best practices, and tools to ensure secure, scalable, and efficient delivery.
+
+    .. grid-item-card::  WebUI
+        :img-top: Images/WebUI-home.png
+        :link: https://how-to.aimms.com/webui/index.html
+
+        Build interactive, real-time dashboards to explore data and model results, enabling clear insights across teams and industries.
+
+    .. grid-item-card::  Examples
+        :img-top: Images/AIMMS-Libraries-home.png
+        :link: https://how-to.aimms.com/C_Examples/index.html
+
+        Explore AIMMS open source projects you can learn from, use, and expand into your own solutions for faster development.    
+
+    .. grid-item-card::  Toolkit
+        :img-top: Images/Toolkit-home.png
+        :link: https://how-to.aimms.com/C_Toolkit/index.html
+
+        Use and customize open source toolkits to extend and enhance your AIMMS apps with reusable components and shared logic.
+
+
     
 -----------------------------------------------------------
 
@@ -58,3 +73,7 @@
     C_Toolkit/index
     Recently_added
 
+.. spelling:word-list::
+    
+    scalable
+    toolkits

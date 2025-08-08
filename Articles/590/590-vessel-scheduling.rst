@@ -32,6 +32,10 @@ Constraints include ensuring each cargo is loaded inside the determined time win
 
 The objective is to minimize costs associated to combinations of cargoes and routes.
 
+
+
+.. mathematicalmodel_
+
 Mathematical Model
 ------------------
 
@@ -85,6 +89,7 @@ exceed half a million.
 |     | :math:`\sum_{c} SC_{p,c} * S_{c}`                           | Total cost of cargos left to the spot market                                     |
 +-----+-------------------------------------------------------------+----------------------------------------------------------------------------------+
 
+.. language_
 
 Language 
 --------
@@ -104,73 +109,64 @@ Example
 
 A single vessel, ``vessel1``, located at Caracas, is to handle two cargos, labeled: ``a1`` and ``a2``.
 
-	#.	``a1`` load in Paramaribo, deliver in Sao Paolo
-	
-	#.  ``a2`` load in Montevideo, deliver in Rio de Janeiro.
+    #.  ``a1`` load in Paramaribo, deliver in Sao Paolo
+    
+    #.  ``a2`` load in Montevideo, deliver in Rio de Janeiro.
 
 Then there are five potential routes:
 
-	#.	``vessel1_a1_a2``: with actions:
+    #.  ``vessel1_a1_a2``: with actions:
 
-		#.	Sail to Caracas to Paramaribo
-		
-		#.  Load Cargo ``a1``
-		
-		#.  Sail to Sao Paolo
-		
-		#.  Deliver Cargo ``a1``
-		
-		#.  Sail to Montevideo
-		
-		#.  Load Cargo ``a2``
-		
-		#.  Sail to Rio de Janeiro
-		
-		#.  Deliver Cargo ``a2``
+        #.  Sail to Caracas to Paramaribo
+        
+        #.  Load Cargo ``a1``
+        
+        #.  Sail to Sao Paolo
+        
+        #.  Deliver Cargo ``a1``
+        
+        #.  Sail to Montevideo
+        
+        #.  Load Cargo ``a2``
+        
+        #.  Sail to Rio de Janeiro
+        
+        #.  Deliver Cargo ``a2``
 
-	#. 	``vessel1_a2_a1``: similar as ``vessel1_a1_a2``, just a different order of locations; 
-		and thus also different vessel sailing times and cargo pickup moments.
-	
-	#.  ``vessel1_a1``: ``vessel1`` only handles cargo ``a1``
+    #.  ``vessel1_a2_a1``: similar as ``vessel1_a1_a2``, just a different order of locations; 
+        and thus also different vessel sailing times and cargo pickup moments.
+    
+    #.  ``vessel1_a1``: ``vessel1`` only handles cargo ``a1``
 
-	#.  ``vessel1_a2``: ``vessel1`` only handles cargo ``a2``
+    #.  ``vessel1_a2``: ``vessel1`` only handles cargo ``a2``
 
-	#.  ``vessel1`` Remains at port Caracas
+    #.  ``vessel1`` Remains at port Caracas
 
 
 The route generation procedure is as follows:
 
 #.  For each vessel i, the idle route is generated: ``vessel<i>``.
     Together they initialize the set of just generated routes, ``JG``.
-	
+    
 #.  Move the set of just generated routes ``JG``, to the set of input routes ``IR``.
 
 #.  For each ``r`` in ``IR``, all cargos ``c`` are considered to be appended for a new route ``r'``.
     A route ``r' = r_c`` is accepted if: 
-	
-	* ``c`` is not a part of ``r``,
+    
+    * ``c`` is not a part of ``r``,
    
     * ``c`` is picked up in its time window, and
-	
-	* ``c`` is delivered before the end of the horizon.
-	
-	All routes ``r'`` just generated, form the new set of just generated routes ``JG``.
-	If the set ``JG`` is empty, stop, otherwise continue with step 2.
+    
+    * ``c`` is delivered before the end of the horizon.
+    
+    All routes ``r'`` just generated, form the new set of just generated routes ``JG``.
+    If the set ``JG`` is empty, stop, otherwise continue with step 2.
 
 Because a route ``r'`` ends later than route ``r``, this procedure is finite.
 
 In order to determine the cost of a route, careful administration of each leg needs to be done 
 (sailing to the loading location, perhaps waiting, sailing to the delivery location).
 
-Python Service
-^^^^^^^^^^^^^^
-
-This section is largely based on the how-to articles in `Develop an AIMMS Service <https://how-to.aimms.com/C_Developer/Sub_Connectivity/sub_dataexchange/Sub_Develop_Service/index.html>`_.
-Selected differences will be pointed out:
-
-**Produce Service:** The service is named ``solveVesselScheduling``, accepts an Excel workbook as input, and provides as response also an Excel workbook.
-
-**Consume Service:** Only a Python client is provided; and the requests call in that python app uses a ``files`` argument instead of a ``data`` argument.
 
 WebUI Features
 ---------------
@@ -265,7 +261,7 @@ Below there are the css files you will find with comments on what they change.
          .annotation-edit-element input.boolean-cell-editor-contents,
          .annotation-delete-element input.boolean-cell-editor-contents{
             visibility: hidden;
-            display: block;	
+            display: block; 
          }
 
          .annotation-edit-element {
@@ -345,11 +341,20 @@ Below there are the css files you will find with comments on what they change.
             color: #505767;
          }
 
+
+
+.. include:: 590-vessel-scheduling-services.txt
+
+
+.. include:: 590-vessel-scheduling-headless-execution.txt
+
 Minimal Requirements
 ----------------------
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example. 
 To run the Python client, you will need to have Python installed, for this example we used Python 3.11. 
+
+To deploy the application on AIMMS Cloud, a commercial license is needed.
 
 References
 -----------
@@ -357,20 +362,27 @@ References
 #.  Gustavo Diz, Luiz Felipe Scavarda, Roger Rocha, Silvio Hamacher (2014) Decision Support System for 
 PETROBRAS Ship Scheduling. Interfaces 44(6):555-566.
 
+#.  `Develop an AIMMS Service <https://how-to.aimms.com/C_Developer/Sub_Connectivity/sub_dataexchange/Sub_Develop_Service/index.html>`_
+
+#.  `A Python library to make it really easy to use AIMMS Cloud REST services <https://community.aimms.com/product-updates/a-python-library-to-make-it-really-easy-to-use-aimms-cloud-rest-services-1810>`_
+
+#.  `AIMMS command line options  <https://documentation.aimms.com/user-guide/miscellaneous/calling-aimms/aimms-command-line-options.html>`_ 
+
+
 Release Notes
 --------------------
 
 `v1.3 <https://github.com/aimms/vessel-scheduling/releases/tag/1.3>`_ (07/10/2024)
-	Fixing integration problems (import and export) when using the project on AIMMS PRO Portal.
+    Fixing integration problems (import and export) when using the project on AIMMS PRO Portal.
 
 `v1.2 <https://github.com/aimms/vessel-scheduling/releases/tag/1.2>`_ (23/09/2024)
-	Added support for AimmsCmd, the task output now has three sheets, and the python now reads from the data folder inside the AIMMS Project. 
+    Added support for AimmsCmd, the task output now has three sheets, and the python now reads from the data folder inside the AIMMS Project. 
 
 `v1.1 <https://github.com/aimms/vessel-scheduling/releases/tag/1.1>`_ (19/09/2024)
-	Performance of the route generation procedure was updated. Now you are able to solve using a Python call.
+    Performance of the route generation procedure was updated. Now you are able to solve using a Python call.
 
 `v1.0 <https://github.com/aimms/vessel-scheduling/releases/tag/1.0>`_ (15/08/2024)
-	First version of this application. 
+    First version of this application. 
 
 .. spelling:word-list::
 
@@ -381,3 +393,5 @@ Release Notes
    coords
    haversine
    combinatorially
+   aimms
+   aimmscmd
