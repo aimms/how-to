@@ -23,68 +23,70 @@ Prerequisites
 Integration Steps
 ------------------
 
-1. **Add the CDM Library:**
+Add the CDM Library
+^^^^^^^^^^^^^^^^^^^^
 
-    * Open your AIMMS project.
-    * Go to :menuselection:`File > Library Manager`.
-    * Select :menuselection:`Add Library from Repository`.
-    * Choose the latest version of ``AimmsCDM``.
+* Open your AIMMS project.
+* Go to :menuselection:`File > Library Manager`.
+* Select :menuselection:`Add Library from Repository`.
+* Choose the latest version of ``AimmsCDM``.
 
-    .. image:: images/image2.png
-        :align: center
+.. image:: images/image2.png
+    :align: center
 
-    |
+|
 
-    * Once you add the library, save your project.
+Once you add the library, save your project.
 
-2. **Annotate Data:**
+Annotate Data
+^^^^^^^^^^^^^^^^^^^^
 
-    The next step is to choose which data you would like to synchronize. 
-    Once you have managed to select the data you need to add annotation to which CDM category that data will belong. 
-    There are two level options, you can do it on a section level or parameter level.
+The next step is to choose which data you would like to synchronize. 
+Once you have managed to select the data you need to add annotation to which CDM category that data will belong. 
+There are two level options, you can do it on a section level or parameter level.
 
-    .. image:: images/image3.png
-        :align: center
+.. image:: images/image3.png
+    :align: center
 
-    |
+|
 
-    In this field you are free to write any category that you deem fit. 
-    If you add the CDM category on a section level, all the sets and parameters within that section will inherit that annotation (you do have the option to override the inherited value).
+In this field you are free to write any category that you deem fit. 
+If you add the CDM category on a section level, all the sets and parameters within that section will inherit that annotation (you do have the option to override the inherited value).
 
-3. **Create Initialization Script:**
+Create Initialization Script
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    * Create a new procedure and add the following code block.
+* Create a new procedure and add the following code block.
 
-    .. code-block:: aimms
+.. code-block:: aimms
 
-        cdm::ApplicationDatabase := "<Name of the MySQL Schema>";
-        cdm::DataSchemaVersion := "1"; 
+    cdm::ApplicationDatabase := "<Name of the MySQL Schema>";
+    cdm::DataSchemaVersion := "1"; 
 
-        if (ProjectDeveloperMode) then
-            cdm::UseEmbeddedServer := 1;
-        else
-            pro::Initialize();
-            cdm::CloudServiceName := "<You can name the service as you wish>";
-            cdm::DatabaseHost := "<Connection to the MySQL server>";
-            cdm::DatabaseUser := "<User that has full permissions to the Schema>";
-            cdm::DatabasePassword := "<Password>";
-            cdm::CallTimeout := 300000;
-            cdm::ServiceLogLevel := 'TRACE';
-        endif;
+    if (ProjectDeveloperMode) then
+        cdm::UseEmbeddedServer := 1;
+    else
+        pro::Initialize();
+        cdm::CloudServiceName := "<You can name the service as you wish>";
+        cdm::DatabaseHost := "<Connection to the MySQL server>";
+        cdm::DatabaseUser := "<User that has full permissions to the Schema>";
+        cdm::DatabasePassword := "<Password>";
+        cdm::CallTimeout := 300000;
+        cdm::ServiceLogLevel := 'TRACE';
+    endif;
 
-        cdm::ConnectToApplicationDB;
-        cdm::ListenToDataChanges := 1;
-        cdm::AutoCommitCategory(cdm::cat) := 1;
-        cdm::AutoPullCategory(cdm::cat) := 1;
-        cdm::StartListeningToDataChanges;
+    cdm::ConnectToApplicationDB;
+    cdm::ListenToDataChanges := 1;
+    cdm::AutoCommitCategory(cdm::cat) := 1;
+    cdm::AutoPullCategory(cdm::cat) := 1;
+    cdm::StartListeningToDataChanges;
 
-    .. important:: 
-        
-        This script handles the connection logic for both local (SQLite) and cloud (MySQL) environments.
+.. important:: 
     
-    * Once done, you need to add this procedure to your start up procedure in your project. 
-    * Save the project.
+    This script handles the connection logic for both local (SQLite) and cloud (MySQL) environments.
 
+* Once done, you need to add this procedure to your start up procedure in your project. 
+* Save the project.
 
 This is everything that you initially need to do to add CDM to your project. 
 If you close and re-open the project you will see in your ``Data`` folder that a local CDM database with extension ``aimmsdb`` is created.
