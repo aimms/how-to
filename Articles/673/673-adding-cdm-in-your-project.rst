@@ -105,7 +105,7 @@ When you are ready to publish your application to AIMMS PRO, the initialization 
 * The ``else`` block of the initialization script handles the connection to the MySQL database on your AIMMS Cloud account.
 * No changes are needed to the script; simply create your ``.aimmspack`` file and upload it to AIMMS Cloud.
 
-To access and view your live data in the MySQL database, refer to the official: :ref:`<Articles/596/596-mysql-db-cloud>`.
+To access and view your live data in the MySQL database, refer to the official: :doc:`../596/596-mysql-db-cloud`.
 
 .. spelling:word-list::
 
