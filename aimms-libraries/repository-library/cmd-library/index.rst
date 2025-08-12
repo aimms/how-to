@@ -1,4 +1,3 @@
-:orphan:
 Collaborative Data Management (CDM)
 =====================================
 
@@ -9,7 +8,9 @@ This section offers guidance on installing and using CDM.
 
 .. toctree::
    :maxdepth: 1
+   :titlesonly:
 
+   /Articles/673/673-adding-cdm-in-your-project
 
 
 

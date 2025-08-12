@@ -16,9 +16,11 @@ Here, you can find documentation about it:
    :titlesonly:
 
    aimmsxllibrary/index
+   cmd-library/index
    data-exchange-library/index
    email-client-library/index
    http_client_library/index
    unit-test-library/index
    webui-library/index
+   
    
