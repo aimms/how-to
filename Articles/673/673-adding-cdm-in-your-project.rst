@@ -85,3 +85,7 @@ The initialization script that you have used for CDM can handle connection to th
 To access the MySQL DB and see the data live you need to follow this process:
 
 `<https://how-to.aimms.com/Articles/596/596-mysql-db-cloud.html>`
+
+.. spelling:word-list::
+
+    aimmsdb
