@@ -51,7 +51,7 @@ Integration Steps
     In this field you are free to write any category that you deem fit. 
     If you add the CDM category on a section level, all the sets and parameters within that section will inherit that annotation (you do have the option to override the inherited value).
 
-3. **Create Initialization Script:
+3. **Create Initialization Script:**
 
     * Create a new procedure and add the following code block.
 
