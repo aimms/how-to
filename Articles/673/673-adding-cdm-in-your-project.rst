@@ -9,8 +9,9 @@ Configure your application to run it locally using SQLite
 Prerequisites
 -------------
 
-• You need to have a working project (you can use our :download:`Gantt Chart application <download/GanttChart.zip>`).
-• You need to download the :download:`CDM Config files <download/Config.zip>`.
+- You need to have a working project (you can use our :download:`Gantt Chart application <download/GanttChart.zip>`).
+- You need to download the :download:`CDM Config files <download/Config.zip>`.
+
 These files need to be put in a Config folder where your app is found (as shown below).
 
 .. image:: images/image1.png
