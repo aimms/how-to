@@ -38,7 +38,7 @@ Go to :menuselection:`Settings > Project Options` to set the following option:
 
 * Gurobi: :ref:`option-GUROBI-mip_start` to 'Yes'
 
-* COPT: :ref:`option-COPT-mip_start` to 'Use full solutions' or Use partial solutions
+* COPT: :ref:`option-COPT-mip_start` to 'Use full solutions' or 'Use partial solutions'
 
 * CBC: :ref:`option-CBC-mip_start` to 'On'
 
@@ -51,7 +51,7 @@ By enabling solver logging you can check whether the solver is accepting the MIP
 
 * COPT: :ref:`option-COPT-output_file` to 'Yes'
 
-If CPLEX accepts the MIP starts, it will show in its status file:
+If CPLEX accepts the MIP starts then it will show in its status file:
 
 .. code-block:: text
 
@@ -59,16 +59,23 @@ If CPLEX accepts the MIP starts, it will show in its status file:
     MIP start 'm1' defined initial solution with objective 21.0000.
 
 
-If Gurobi accepts the MIP starts, it will show in its log file:
+If Gurobi accepts the MIP starts then it will show in its log file:
 
 .. code-block:: text
 
     Loaded user MIP start with objective 21
 
-If COPT accepts the MIP starts, it will show in its log file:
+If COPT accepts the MIP starts then it will show in its log file:
 
 .. code-block:: text
 
     Loading 1 initial MIP solution
     Initial MIP solution # 1 with objective value 21 was accepted
 
+.. note::
+
+    CPLEX and Gurobi can use multiple MIP starts, see:
+
+    * CPLEX: :ref:`CPLEX_Multiple_MIP_Starts`
+
+    * Gurobi: :ref:`GUROBI_Multiple_MIP_Starts`
