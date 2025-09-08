@@ -72,7 +72,7 @@ If COPT accepts the MIP starts then it will show in its log file:
     Loading 1 initial MIP solution
     Initial MIP solution # 1 with objective value 21 was accepted
 
-**Note** CPLEX and Gurobi can use multiple MIP starts, see:
+**Note**: CPLEX and Gurobi can use multiple MIP starts, see:
 
 * CPLEX: :ref:`CPLEX_Multiple_MIP_Starts`
 
