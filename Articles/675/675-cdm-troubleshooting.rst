@@ -30,12 +30,12 @@ Issues with CDM Version Upgrades
     -   Many issues (e.g., element handling and checkout errors) were resolved in CDM 25.5.2.1 and 25.6.2.1.
     -   Always test against the most recent patch release of the target version.
 
-#. Ensure no legacy CDM services are active:
+#.  Ensure no legacy CDM services are active:
 
     -   CDM services from older application sessions may remain running up to 5 minutes after the last connected session ends.
     -   If multiple versions of the application are running with the same external service name, they may connect to an incompatible CDM service.
 
-#. Adapt the release process:
+#.  Adapt the release process:
 
     -   To avoid RPC mismatches, consider:
 
@@ -44,7 +44,8 @@ Issues with CDM Version Upgrades
 
     -   Plan for a short delay (~5 minutes) to guarantee that old services are no longer active.
 
-#. Verification:
+#.  Verification:
+
     -   Re-run the checkout or commit procedure after confirming only the new CDM service is active.
     -   If errors persist, test in a controlled local setup (SQLite/MySQL) to check whether the issue is environment-specific. 
 
