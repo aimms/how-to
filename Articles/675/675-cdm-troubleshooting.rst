@@ -11,6 +11,7 @@ Issues with CDM Version Upgrades
 -   Errors during checkout of snapshots, such as:
 
     .. code-block:: none 
+        
         packet buffer exhausted (8000, not continuing)
 
 -   Snapshot checkout failing on first attempt but succeeding on the second run.
