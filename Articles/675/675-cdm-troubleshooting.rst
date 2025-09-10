@@ -11,7 +11,7 @@ Issues with CDM Version Upgrades
 -   Errors during checkout of snapshots, such as:
 
     .. code-block:: none 
-        
+
         packet buffer exhausted (8000, not continuing)
 
 -   Snapshot checkout failing on first attempt but succeeding on the second run.
@@ -26,20 +26,25 @@ Issues with CDM Version Upgrades
 **Solution:** Please follow the steps below.
 
 #.  Upgrade to the latest CDM release:
+
     -   Many issues (e.g., element handling and checkout errors) were resolved in CDM 25.5.2.1 and 25.6.2.1.
     -   Always test against the most recent patch release of the target version.
 
 #. Ensure no legacy CDM services are active:
+
     -   CDM services from older application sessions may remain running up to 5 minutes after the last connected session ends.
     -   If multiple versions of the application are running with the same external service name, they may connect to an incompatible CDM service.
 
-#. Adapt the release process
+#. Adapt the release process:
+
     -   To avoid RPC mismatches, consider:
+
         -   Using a different CDM service name for the new release.
         -   Ensuring all older application sessions are terminated before deploying a new version.
+
     -   Plan for a short delay (~5 minutes) to guarantee that old services are no longer active.
 
-#. Verification
+#. Verification:
     -   Re-run the checkout or commit procedure after confirming only the new CDM service is active.
     -   If errors persist, test in a controlled local setup (SQLite/MySQL) to check whether the issue is environment-specific. 
 
