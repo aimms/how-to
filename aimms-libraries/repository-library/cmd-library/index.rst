@@ -11,6 +11,7 @@ This section offers guidance on installing and using CDM.
    :titlesonly:
 
    /Articles/673/673-adding-cdm-in-your-project
+   /Articles/675/675-cdm-troubleshooting
 
 
 
