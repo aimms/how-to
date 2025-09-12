@@ -348,4 +348,4 @@ Release Notes
 	First version of this application. 
 
 .. spelling:word-list::
-
+   geospatial
