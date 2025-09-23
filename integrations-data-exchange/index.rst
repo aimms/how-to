@@ -18,6 +18,7 @@ Integrations and Data Exchange
    aimms-cloud-adls/index
    aimms-storage/index
    databases/index
+   python-bridge/index
    rest-api/index
    other-connectors/index
 
