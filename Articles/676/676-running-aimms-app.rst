@@ -146,7 +146,7 @@ within your AIMMS model by calling the corresponding procedure.
 
     aimms_model.pr_GenRoutesSolve()
 
-This single line tells the AIMMS model to run its pr_GenRoutesSolve procedure, 
+This single line tells the AIMMS model to run its ``pr_GenRoutesSolve`` procedure, 
 which typically contains the solver calls and other logic.
 
 Step 3: Retrieving the Solution and Writing to Excel
@@ -212,3 +212,7 @@ References:
 
 * `PyPI aimmspy <https://pypi.org/project/aimmspy/>`_
 
+.. spelling:word-list::
+
+    aimmspy
+    orchestrator
