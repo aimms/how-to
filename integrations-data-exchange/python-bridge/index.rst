@@ -10,3 +10,4 @@ Python Bridge
    :titlesonly:
 
    /Articles/676/676-running-aimms-app
+   /Articles/676/676-leveraging-python-lib
