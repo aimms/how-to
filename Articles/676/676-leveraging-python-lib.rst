@@ -69,8 +69,8 @@ in the Vessel Scheduling application we are interested in the:
 * in the actual route, which is given in ``geometry.coordinates`` as a list of [lon, lat] tuples.
 
 
-Making Python libs available to AIMMS app
---------------------------------------------
+Making Python libraries available to AIMMS app
+-----------------------------------------------
 
 First, you'll need to ensure the necessary libraries are there:
 
@@ -201,3 +201,9 @@ References:
     uv
     aimmspy
     searoute
+    lon
+    lat
+    toml
+    haversine
+    dataframe
+    
