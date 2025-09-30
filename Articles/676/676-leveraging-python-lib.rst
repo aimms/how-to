@@ -42,35 +42,6 @@ The ``geojson`` object contains the useful data within its ``properties`` and ``
 
 *   ``geometry.coordinates``: The list of ``[lon, lat]`` coordinates that describe the route.
 
-.. After this call, route is of type ``<class 'geojson.feature.Feature'>`` and looks (somewhat pretty printed):
-.. .. code-block:: json
-..     :linenos:
-.. 
-..     {
-..         "geometry": {
-..             "coordinates": [
-..                 [ -43.9,      -1.4      ],
-..                 [ -48,        -1E-05    ],
-..                 [ -51.9,       5.4      ],
-..                 [ -56.4243,    8.2122   ],
-..                 [ -61,        11        ],
-..                 [ -61.8055,   10.6839   ],
-..                 [ -63.773623, 11.613686 ],
-..                 [ -65.62372,  12.487713 ],
-..                 [ -65.942,    12.5294   ],
-..                 [ -70,        13        ],
-..                 [ -75.25,     11.7      ]
-..             ],
-..             "type": "LineString"
-..         },
-..         "properties": {
-..             "duration_hours": 90.5268642136653,
-..             "length": 4023.738060569,
-..             "units": "km"
-..         },
-..         "type": "Feature"
-..     }
-
 in the Vessel Scheduling application we are interested in the: 
 
 *   distance, which is given by ``properties.length``, and
@@ -83,15 +54,6 @@ Integrating with AIMMS
 
 
 Required Libraries and Installation:
-
-.. First, you'll need to ensure the necessary libraries are there:
-.. * `pandas installation <https://pypi.org/project/pandas/>`_, and `pandas documentation <https://pandas.pydata.org/docs/>`_
-.. 
-.. * `aimmspy installation <https://pypi.org/project/aimmspy/>`_, and `aimmspy documentation <https://documentation.aimms.com/aimmspy/aimmspy.html>`_
-.. 
-.. * `searoute <https://pypi.org/project/searoute/>`_  
-.. Fortunately, these necessary libraries are loaded on demand, 
-.. based on the `toml <https://docs.astral.sh/uv/concepts/configuration-files/>`_ file:
 
 To utilize the searoute functionality, the necessary Python libraries must be available. 
 The ``pyproject.toml`` file ensures that the correct versions of the libraries are loaded automatically:
@@ -149,36 +111,6 @@ calculates the distances, and sends the results back via a pandas DataFrame.
 
         # Step 3: Pass the DataFrame back to the AIMMS model
         aimms_model.p_distance_searoute.assign(distance_df)
-
-
-..         location_overview_no_rows = len( df_location_overview )
-..         for from_pos in range(location_overview_no_rows):
-..             for to_pos in range(from_pos+1,location_overview_no_rows):
-..                 from_location_row = df_location_overview.iloc[from_pos]
-..                 to_location_row   = df_location_overview.iloc[  to_pos]
-..                 fromLoc =  from_location_row['i_loc']
-..                 fromLon =  from_location_row['p_longitude']
-..                 fromLat =  from_location_row['p_latitude']
-..                 toLoc   =  to_location_row['i_loc']
-..                 toLon   =  to_location_row['p_longitude']
-..                 toLat   =  to_location_row['p_latitude']
-..                 origin=[fromLon,fromLat]
-..                 destination=[toLon,toLat]
-..                 route = sr.searoute(origin,destination)
-..                 route_length = route.properties["length"]
-..                 route_tuple = (fromLoc, toLoc, route_length)
-..                 distance_mat_list.append( route_tuple )
-
-
-.. Remarks:
-.. 
-.. *   Line 4: Passing the GPS data of the locations from the AIMMS model 
-..     into the local dataframe ``df_location_overview`` of 
-..     the Python function ``searoute_distance_matrix``.
-.. 
-.. *   Line 18: The call to the Searoute library for computing the distance.
-.. 
-.. *   Line 25: Passing the computed matrix back to the AIMMS model.
 
 
 Efficiency consideration: 
