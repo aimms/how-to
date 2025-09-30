@@ -1,5 +1,5 @@
-Orchestrating an AIMMS App from Python
-============================================
+Orchestrating Vessel Scheduling AIMMS App from Python
+==========================================================
 
 This guide shows you how to use the AIMMS Python Bridge to control 
 an AIMMS application from a Python script. 
