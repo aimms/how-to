@@ -7,7 +7,7 @@ stages:
     - docker20
   before_script:
     - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
-  image: gitlab.aimms.com:5050/other/dockerdev/documentation:latest
+  image: ${DOCKER_ACCESS_URL}/other/dockerdev/documentation:latest
 
 linkcheck:
   <<: *run_on_dockerhost
