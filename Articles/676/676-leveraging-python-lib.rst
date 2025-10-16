@@ -1,4 +1,4 @@
-Orchestrating the ``searoute`` Python Library from AIMMS
+Orchestrating the ``searoute`` Python Library from AIMMS 
 ==============================================================================
 
 Python has a vast and growing ecosystem of libraries that can add 
@@ -10,7 +10,7 @@ The AIMMS Python-Bridge connects the two environments, providing a crucial two-w
 #.  An AIMMS application to use Python libraries.
 
 This article focuses on the second scenario, demonstrating how to use 
-the open-source ``searoute`` library to enhance a strategic maritime application.
+the open-source ``searoute`` library to enhance a strategic maritime application. 
 
 .. important:: 
 
