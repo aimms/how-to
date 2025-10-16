@@ -43,7 +43,12 @@ Go to :menuselection:`Settings > Project Options` to set the following option:
 * CBC: :ref:`option-CBC-mip_start` to 'On'
 
 By enabling solver logging you can check whether the solver is accepting the MIP start (except for CBC). To do so, set the Solvers General option
-:ref:`option-AIMMS-solver_listing_messages` to 'All' and the following solver option:
+
+* :ref:`option-AIMMS-solver_listing_messages` (for AIMMS Developer), or
+
+* :ref:`option-AIMMS-solver_window_messages` (for AIMMS Cloud)
+
+to 'All', and set the following solver option:
 
 * CPLEX: :ref:`option-CPLEX-mip_display` to 'Display each nth node'
 

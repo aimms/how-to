@@ -14,10 +14,12 @@ EV Charging Location
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
    :target: https://community.aimms.com/aimms-support-updates-67/ev-charging-location-example-1793
 
-.. image:: images/project-1920-high.gif
-    :align: center
-
-|   
+.. figure:: images/project-1920-high.gif
+   :align: center
+   
+   The AIMMS EV Charging Location example is an interactive application for solving a capacitated facility location problem (CFLP) 
+   to find optimal EV charging station placements. It uses widgets like maps, tables, sliders, and charts to visualize data, 
+   adjust parameters in real-time, and compare different scenarios, helping users understand optimization within a geospatial context.
 
 Story
 -----
@@ -346,4 +348,4 @@ Release Notes
 	First version of this application. 
 
 .. spelling:word-list::
-
+   geospatial
