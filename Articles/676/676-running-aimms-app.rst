@@ -6,7 +6,7 @@ an AIMMS application from a Python script.
 This approach is ideal for running an AIMMS model as a "headless" optimization service 
 within a larger data pipeline.
 
-Please use the `Vessel Scheduling <http://how-to-staging.platform.aimms.com/feature/fb-676-python-bridge-aimmspy/Articles/590/590-vessel-scheduling.html>`_ example to follow this article. 
+Please use the :doc:`Vessel Scheduling<../590/590-vessel-scheduling>` example to follow this article. 
 This example illustrates the process, which consists of the following steps:
 
 #.  Prepare the link between Python and the AIMMS app.
@@ -19,11 +19,9 @@ This example illustrates the process, which consists of the following steps:
 
 #.  Write the results back to Excel.
 
-To set up a minimal Python environment to execute this example; 
-some tips are presented in :doc:`../676/676-starting-with-python`.
+.. important:: 
 
-Preparation: Setting up the AIMMS Python-Bridge
-----------------------------------------------------------------
+    To set up a minimal Python environment to execute this example, please read this article: :doc:`../676/676-starting-with-python`.
 
 Step 1: Prepare Link Between Python and AIMMS 
 -----------------------------------------------
