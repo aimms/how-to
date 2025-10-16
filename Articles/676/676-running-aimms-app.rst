@@ -20,6 +20,9 @@ which consists of the following steps:
 
 #.  Write the results back to Excel.
 
+To set up a minimal Python environment to execute this example; 
+some tips are presented in :doc:`../676/676-starting-with-python`.
+
 Preparation: Setting up the AIMMS Python-Bridge
 ----------------------------------------------------------------
 

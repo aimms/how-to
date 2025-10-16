@@ -9,6 +9,9 @@ The AIMMS Python Bridge connects the two environments, providing a crucial two-w
 
 #.  An AIMMS application to use Python libraries.
 
+To set up a minimal Python environment to execute this example; 
+some tips are presented in :doc:`../676/676-starting-with-python`.
+
 This article focuses on the second scenario, demonstrating how to use 
 the open-source ``searoute`` library to enhance a strategic maritime application.
 
