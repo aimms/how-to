@@ -80,5 +80,5 @@ For your reference, here are the key packages used for both modes of the AIMMS P
 
     -   For a practical application of this setup, please refer to the :doc:`Vessel Scheduling<../590/590-vessel-scheduling>` example, 
         which demonstrates how to leverage this Python environment to interact with an AIMMS model effectively.
-    -   :doc:`<../676/676-running-aimms-app>`
-    -   :doc:`<../676/676-leveraging-python-lib>`
+    -   :doc:`../676/676-running-aimms-app`
+    -   :doc:`../676/676-leveraging-python-lib`
