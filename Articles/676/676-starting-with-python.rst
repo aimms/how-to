@@ -1,6 +1,10 @@
 Minimal Python Environment for the Vessel Scheduling Example
 ==============================================================
 
+.. meta::
+    :keywords: Python environment, virtual environment, pyenv, uv, aimmspy, dependency management, Vessel Scheduling, Python 3.13
+    :description: Guide to setting up a minimal, isolated Python 3.13 environment for AIMMS's Vessel Scheduling example. Uses 'pyenv' and the fast package manager 'uv' to manage dependencies like 'aimmspy' and 'pandas'.
+
 Introduction: Why Use a Virtual Environment?
 --------------------------------------------
 

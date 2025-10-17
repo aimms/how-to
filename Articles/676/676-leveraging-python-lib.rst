@@ -1,6 +1,10 @@
 Orchestrating the ``searoute`` Python Library from AIMMS 
 ==============================================================================
 
+.. meta::
+    :keywords: AIMMS, Python-Bridge, searoute, maritime, vessel scheduling, optimization, distance matrix, GeoJSON, data integration
+    :description: Learn to integrate the Python 'searoute' library with AIMMS via the Python-Bridge to calculate accurate maritime distances, improve optimization quality, and visualize realistic vessel routes on a map.
+
 Python has a vast and growing ecosystem of libraries that can add 
 valuable functionality to your Operations Research applications developed in AIMMS. 
 The AIMMS Python-Bridge connects the two environments, providing a crucial two-way link:

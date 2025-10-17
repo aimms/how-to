@@ -1,6 +1,10 @@
 Orchestrating Vessel Scheduling AIMMS App from Python
 ==========================================================
 
+.. meta::
+    :keywords: AIMMS, Python-Bridge, aimmspy, headless optimization, data pipeline, pandas, Vessel Scheduling, solver, data exchange
+    :description: A guide on orchestrating a headless AIMMS optimization application from a Python script using the AIMMS Python-Bridge. Learn to pass data, run the solver, and retrieve results for a data pipeline.
+
 This guide shows you how to use the AIMMS Python Bridge to control 
 an AIMMS application from a Python script. 
 This approach is ideal for running an AIMMS model as a "headless" optimization service 
