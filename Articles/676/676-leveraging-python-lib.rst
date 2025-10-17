@@ -231,15 +231,15 @@ for each of the routes in the optimal solution.
 
 .. seealso::
 
-    *   `uv <https://docs.astral.sh/uv/>`_
+    *   `uv <https://docs.astral.sh/uv/>`_ documentation.
 
-    *   `pandas <https://pandas.pydata.org/docs/>`_
+    *   `PyData pandas <https://pandas.pydata.org/docs/>`_.
 
-    *   `pyaimms <https://documentation.aimms.com/pyaimms/pyaimms.html>`_
+    *   `pyaimms <https://documentation.aimms.com/pyaimms/pyaimms.html>`_ documentation.
 
-    *   `aimmspy <https://documentation.aimms.com/aimmspy/aimmspy.html>`_
+    *   `aimmspy <https://documentation.aimms.com/aimmspy/aimmspy.html>`_ documentation.
 
-    *   `searoute <https://pypi.org/project/searoute/>`_
+    *   `PyPI searoute <https://pypi.org/project/searoute/>`_.
 
 
 .. spelling:word-list::

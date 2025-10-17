@@ -11,7 +11,7 @@ A **Virtual Environment** creates a self-contained space for your project. This 
 For the :doc:`Vessel Scheduling<../590/590-vessel-scheduling>` example, we need a specific **Python version (3.13)** and a 
 few key libraries to manage the data exchange with AIMMS.
 
-.. image:: images/virtual_environments_by_ChatGPT_Image_Oct_16_2025.png
+.. image:: images/python-environment.png
     :align: center
 
 |
@@ -80,5 +80,5 @@ For your reference, here are the key packages used for both modes of the AIMMS P
 
     -   For a practical application of this setup, please refer to the :doc:`Vessel Scheduling<../590/590-vessel-scheduling>` example, 
         which demonstrates how to leverage this Python environment to interact with an AIMMS model effectively.
-    -   :doc:`../676/676-running-aimms-app`
-    -   :doc:`../676/676-leveraging-python-lib`
+    -   :doc:`../676/676-running-aimms-app` article.
+    -   :doc:`../676/676-leveraging-python-lib` article.
