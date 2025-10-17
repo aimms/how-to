@@ -16,11 +16,9 @@ The AIMMS Python-Bridge connects the two environments, providing a crucial two-w
 This article focuses on the second scenario, demonstrating how to use 
 the open-source ``searoute`` library to enhance a strategic maritime application. 
 
-.. note:: 
+.. important:: 
 
-    To set up a minimal Python environment (using tools like ``pyenv`` and ``uv``) 
-    required to execute this example, 
-    please read: :doc:`../676/676-starting-with-python` article.
+    To set up a minimal Python environment to execute this example, please read this article: :doc:`../676/676-starting-with-python`.
 
 Exploring the ``searoute`` Library
 -------------------------------------
