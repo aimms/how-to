@@ -88,8 +88,8 @@ Remarks:
     ``AllIdentifiers`` provides full access.
 
 *   Line 13: ``data_type_preference`` specifies the default data structure for data exchange. 
-    We use PANDAS as it also provides seamless integration with Excel files. 
-    Python POLARS also provide seamless integration with Excel files and might have been used as well.
+    We use ``pandas`` as it also provides seamless integration with Excel files. 
+    Python ``polars`` also provide seamless integration with Excel files and might have been used as well.
 
 
 Step 2: Passing Input Data  
@@ -189,7 +189,7 @@ The ``rename`` function then prepares the data for export.
 
 And similarly for the vessel and route information.
 
-Finally, use the ``ExcelWriter`` from Pandas to save all your result ``DataFrames`` into a single Excel file, 
+Finally, use the ``ExcelWriter`` from ``pandas`` to save all your result ``DataFrames`` into a single Excel file, 
 with each ``DataFrame`` on its own sheet.
 
 .. code-block:: python

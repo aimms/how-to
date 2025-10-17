@@ -16,7 +16,7 @@ the open-source ``searoute`` library to enhance a strategic maritime application
 
     To set up a minimal Python environment (using tools like ``pyenv`` and ``uv``) 
     required to execute this example, 
-    please read this article: :doc:`../676/676-starting-with-python`.
+    please read: :doc:`../676/676-starting-with-python` article.
 
 Exploring the ``searoute`` Library
 -------------------------------------
@@ -129,7 +129,7 @@ calculates the distances, and sends the results back via a pandas ``DataFrame``.
         aimms_model.p_distance_searoute.assign(distance_df)
 
 
-.. note:: Efficiency Consideration 
+.. hint:: 
 
     Calculating routes can take some time. 
     To avoid unnecessary recalculations, the distance matrix is cached in a ``.parquet`` file within the AIMMS model.
@@ -216,10 +216,14 @@ Some images to illustrate:
 .. figure:: images/route-direct.png
     :align: center
 
+|
+
 Versus:
 
 .. figure:: images/route-from-searoute.png
     :align: center
+
+|
 
 The AIMMS procedure ``ui::pr_openPageSeaRouteMap`` concatenates the waypoints computed by the searoute library
 for each of the routes in the optimal solution.
