@@ -12,9 +12,11 @@ The AIMMS Python-Bridge connects the two environments, providing a crucial two-w
 This article focuses on the second scenario, demonstrating how to use 
 the open-source ``searoute`` library to enhance a strategic maritime application. 
 
-.. important:: 
+.. note:: 
 
-    To set up a minimal Python environment to execute this example, please read this article: :doc:`../676/676-starting-with-python`.
+    To set up a minimal Python environment (using tools like ``pyenv`` and ``uv``) 
+    required to execute this example, 
+    please read this article: :doc:`../676/676-starting-with-python`.
 
 Exploring the ``searoute`` Library
 -------------------------------------
@@ -40,49 +42,61 @@ A typical call in a Python script looks like:
     route = sr.searoute(origin,destination)
 
 
-The ``geojson`` object contains the useful data within its ``properties`` and ``geometry`` attributes:
+The ``geojson`` object contains the useful data within its ``properties`` and 
+``geometry`` attributes:
 
 *   ``properties.length``: the accurate distance in kilometers.
 
 *   ``geometry.coordinates``: the list of ``[lon, lat]`` coordinates that describe the route.
 
-In the :doc:`Vessel Scheduling<../590/590-vessel-scheduling>` application we are interested in the: 
+In the :doc:`Vessel Scheduling<../590/590-vessel-scheduling>` application we are 
+interested in the: 
 
 *   distance, which is given by ``properties.length``, and
 
-*   in the actual route, which is given in ``geometry.coordinates`` as a list of ``[lon, lat]`` tuples.
+*   in the actual route, which is given in ``geometry.coordinates`` as 
+    a list of ``[lon, lat]`` tuples.
 
 
 Integrating with AIMMS
 ---------------------------
 
-To utilize the ``searoute`` functionality, the necessary Python libraries must be available. 
-The ``pyproject.toml`` file ensures that the correct versions of the libraries are loaded automatically:
+To utilize the ``searoute`` functionality, requires two things: 
+the necessary Python packages, and 
+the AIMMS specific client library and initialization.
 
-.. code-block:: toml
-    :linenos:
+#.  Dependency specification.
 
-    [project]
-    name = "vessel_scheduling_with_sea_route"
-    version = "0.1.0"
-    description = "Use Python library Sea Route to compute usable sea routes for large vessels"
-    requires-python = "==3.13.*"
-    dependencies = [
-        "aimmspy",
-        "pandas>=2.3.2",
-        "searoute",
-    ]
+    The ``pyproject.toml`` file ensures that the correct versions of the libraries 
+    are loaded automatically:
 
-In addition, the AIMMS project requires the  
-`the pyaimms repository library <https://documentation.aimms.com/aimmspy/pyaimms/pyaimms.html>`_
-is essential as it is the Python client that allows your script to access and interact with the AIMMS model's data.
+    .. code-block:: toml
+        :linenos:
 
-To enable the AIMMS compiler to link and scan the Python code (in our case, ``leverage-sea-route.py``), 
-you use the ``py::run_python_script`` statement:
+        [project]
+        name = "vessel_scheduling_with_sea_route"
+        version = "0.1.0"
+        description = "Use Python library Sea Route to compute usable sea routes for large vessels"
+        requires-python = "==3.13.*"
+        dependencies = [
+            "aimmspy",
+            "pandas>=2.3.2",
+            "searoute",
+        ]
 
-.. code-block:: aimms
+#.  AIMMS Compiler Linkage.
 
-    py::run_python_script("leverage-sea-route.py");
+    In addition, the AIMMS project requires the  
+    `the pyaimms repository library <https://documentation.aimms.com/aimmspy/pyaimms/pyaimms.html>`_
+    is essential as it is the Python client that allows your script to access and 
+    interact with the AIMMS model's data.
+
+    To enable the AIMMS compiler to link and scan the Python code (in our case, 
+    ``leverage-sea-route.py``), you use the ``py::run_python_script`` statement:
+
+    .. code-block:: aimms
+
+        py::run_python_script("leverage-sea-route.py");
 
 Using ``searoute`` to Compute Distances
 -----------------------------------------
@@ -90,7 +104,8 @@ Using ``searoute`` to Compute Distances
 In the Vessel Scheduling example, 
 the difference between the geometric haversine distance and 
 the ``searoute`` distance can be significant. 
-For instance, the haversine distance between Caldera (Chile) and Bahia Blanca (Argentina) is 1520 km, 
+For instance, the haversine distance between Caldera (Chile) and 
+Bahia Blanca (Argentina) is 1520 km, 
 whereas ``searoute`` calculates a more realistic route of 5180 km.
 
 To compute an entire distance matrix, the Python script retrieves location data from AIMMS, 
@@ -122,18 +137,89 @@ calculates the distances, and sends the results back via a pandas ``DataFrame``.
 Visualizing Routes
 -----------------------------------------
 
+To obtain a path as a list of GPS locations between two harbors, a procedure
+with the following prototype:
+
+.. code-block:: aimms 
+    :linenos:
+
+    Procedure pr_getRoute {
+        Arguments: (ep_from,ep_to,
+                    p_routeLength,s_waypoints,p_latWP,p_lonWP);
+
+Here the input is ``ep_from`` and ``ep_to``, which are element parameters 
+with range the set of named locations ``s_locations``.
+
+Here the output is:
+
+*   ``p_routeLength`` The length of the route computed.
+
+*   ``s_waypoints``, ``p_latWP``, ``p_lonWP`` a row of unnamed GPS way points along 
+    which the vessels can sail. 
+
+This procedure is placed in a module, as it needs global parameters 
+to communicate with the Python procedure that calls the Python library searoute.
+
+To make the data communication a bit more flexible, the GPS locations of 
+the begin and end of route are put as input arguments, and the names 
+where to store the results are put as output arguments. The call is: 
+
+.. code-block:: aimms 
+    :linenos:
+
+    ! def searoute_route2(fromLat:float,fromLon:float,toLat:float,toLon:float,
+    !    indexName:str,latParName:str,lonParName:str,lenParName:str):
+    ! Five decimals delivers locations precise to roughly 1 meter. 
+    ! Should be sufficient for large vessels.
+    _sp_pyCall := formatString("searoute_route2(%12.5n,%12.5n,%12.5n,%12.5n,\"lpa::i_globWayPoint\",\"lpa::p_globLat\",\"lpa::p_globLon\",\"lpa::p_globRouteLength\")",
+        _p_fromLat, _p_fromLon, _p_toLat, _p_toLon );
+    py::run_python_statement(_sp_pyCall);
+
+The Python function ``searoute_route2`` calculates the route and uses two separate 
+``aimms_model.multi_assign`` calls to send the scalar distance and the list of 
+waypoints back to AIMMS.  The Python code:
+
+.. code-block:: python 
+    :linenos:
+
+    def searoute_route2(fromLat:float,fromLon:float,toLat:float,toLon:float,
+        indexName:str,latParName:str,lonParName:str,lenParName:str):
+        origin=[fromLon,fromLat]
+        destination=[toLon,toLat]
+        route = sr.searoute(origin,destination)
+
+        # Pass total travel length to AIMMS model
+        route_length = route.properties["length"]
+        route_length_df = pd.DataFrame({lenParName:[route_length]})
+        aimms_model.multi_assign(route_length_df,options={"return_type": DataReturnTypes.PANDAS})
+
+        # Pass Waypoints to AIMMS model
+        route_columns = [lonParName,latParName]
+        route_df = pd.DataFrame(route.geometry.coordinates,columns=route_columns)
+        route_len = len(route_df)
+        
+        # add column i_wayno
+        route_df[indexName]=route_df.index
+        # reorder columns, making i_wayno first.
+        route_columns=route_df.columns.tolist()
+        route_columns=route_columns[-1:]+route_columns[:-1]
+        route_df=route_df[route_columns]
+        # and copying data to AIMMS.
+        aimms_model.multi_assign(route_df,options={"return_type": DataReturnTypes.PANDAS})
+
+Once the waypoints for all legs of the optimal solution are computed and concatenated 
+using an AIMMS procedure (like ``ui::pr_openPageSeaRouteMap``), 
+the application can display a much more realistic route on a map, 
+offering better visual insights.
+Some images to illustrate:
+
 .. figure:: images/route-direct.png
     :align: center
 
-|
-
-By using the waypoints provided by ``searoute``, the application can display a much more realistic route on a map, 
-offering better visual insights than a simple line.
+Versus:
 
 .. figure:: images/route-from-searoute.png
     :align: center
-
-|
 
 The AIMMS procedure ``ui::pr_openPageSeaRouteMap`` concatenates the waypoints computed by the searoute library
 for each of the routes in the optimal solution.
