@@ -1,6 +1,10 @@
 Orchestrating Vessel Scheduling AIMMS App from Python
 ==========================================================
 
+.. meta::
+    :keywords: AIMMS, Python-Bridge, aimmspy, headless optimization, data pipeline, pandas, Vessel Scheduling, solver, data exchange
+    :description: A guide on orchestrating a headless AIMMS optimization application from a Python script using the AIMMS Python-Bridge. Learn to pass data, run the solver, and retrieve results for a data pipeline.
+
 This guide shows you how to use the AIMMS Python Bridge to control 
 an AIMMS application from a Python script. 
 This approach is ideal for running an AIMMS model as a "headless" optimization service 
@@ -88,8 +92,8 @@ Remarks:
     ``AllIdentifiers`` provides full access.
 
 *   Line 13: ``data_type_preference`` specifies the default data structure for data exchange. 
-    We use PANDAS as it also provides seamless integration with Excel files. 
-    Python POLARS also provide seamless integration with Excel files and might have been used as well.
+    We use ``pandas`` as it also provides seamless integration with Excel files. 
+    Python ``polars`` also provide seamless integration with Excel files and might have been used as well.
 
 
 Step 2: Passing Input Data  
@@ -189,7 +193,7 @@ The ``rename`` function then prepares the data for export.
 
 And similarly for the vessel and route information.
 
-Finally, use the ``ExcelWriter`` from Pandas to save all your result ``DataFrames`` into a single Excel file, 
+Finally, use the ``ExcelWriter`` from ``pandas`` to save all your result ``DataFrames`` into a single Excel file, 
 with each ``DataFrame`` on its own sheet.
 
 .. code-block:: python

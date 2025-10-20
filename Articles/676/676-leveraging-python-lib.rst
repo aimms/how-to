@@ -1,6 +1,10 @@
 Orchestrating the ``searoute`` Python Library from AIMMS 
 ==============================================================================
 
+.. meta::
+    :keywords: AIMMS, Python-Bridge, searoute, maritime, vessel scheduling, optimization, distance matrix, GeoJSON, data integration
+    :description: Learn to integrate the Python 'searoute' library with AIMMS via the Python-Bridge to calculate accurate maritime distances, improve optimization quality, and visualize realistic vessel routes on a map.
+
 Python has a vast and growing ecosystem of libraries that can add 
 valuable functionality to your Operations Research applications developed in AIMMS. 
 The AIMMS Python-Bridge connects the two environments, providing a crucial two-way link:
@@ -12,11 +16,9 @@ The AIMMS Python-Bridge connects the two environments, providing a crucial two-w
 This article focuses on the second scenario, demonstrating how to use 
 the open-source ``searoute`` library to enhance a strategic maritime application. 
 
-.. note:: 
+.. important:: 
 
-    To set up a minimal Python environment (using tools like ``pyenv`` and ``uv``) 
-    required to execute this example, 
-    please read this article: :doc:`../676/676-starting-with-python`.
+    To set up a minimal Python environment to execute this example, please read this article: :doc:`../676/676-starting-with-python`.
 
 Exploring the ``searoute`` Library
 -------------------------------------
@@ -129,7 +131,7 @@ calculates the distances, and sends the results back via a pandas ``DataFrame``.
         aimms_model.p_distance_searoute.assign(distance_df)
 
 
-.. note:: Efficiency Consideration 
+.. hint:: 
 
     Calculating routes can take some time. 
     To avoid unnecessary recalculations, the distance matrix is cached in a ``.parquet`` file within the AIMMS model.
@@ -216,10 +218,14 @@ Some images to illustrate:
 .. figure:: images/route-direct.png
     :align: center
 
+|
+
 Versus:
 
 .. figure:: images/route-from-searoute.png
     :align: center
+
+|
 
 The AIMMS procedure ``ui::pr_openPageSeaRouteMap`` concatenates the waypoints computed by the searoute library
 for each of the routes in the optimal solution.
@@ -227,15 +233,15 @@ for each of the routes in the optimal solution.
 
 .. seealso::
 
-    *   `uv <https://docs.astral.sh/uv/>`_
+    *   `uv <https://docs.astral.sh/uv/>`_ documentation.
 
-    *   `pandas <https://pandas.pydata.org/docs/>`_
+    *   `PyData pandas <https://pandas.pydata.org/docs/>`_.
 
-    *   `pyaimms <https://documentation.aimms.com/pyaimms/pyaimms.html>`_
+    *   `pyaimms <https://documentation.aimms.com/pyaimms/pyaimms.html>`_ documentation.
 
-    *   `aimmspy <https://documentation.aimms.com/aimmspy/aimmspy.html>`_
+    *   `aimmspy <https://documentation.aimms.com/aimmspy/aimmspy.html>`_ documentation.
 
-    *   `searoute <https://pypi.org/project/searoute/>`_
+    *   `PyPI searoute <https://pypi.org/project/searoute/>`_.
 
 
 .. spelling:word-list::
