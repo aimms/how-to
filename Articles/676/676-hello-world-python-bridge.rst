@@ -1,7 +1,7 @@
-Hello to the world of Python Bridge
+Hello to the World of Python-Bridge
 ==========================================
 
-This document provides a **Hello World** introduction to the AIMMS Python Bridge, 
+This document provides a **Hello World** introduction to the AIMMS Python-Bridge, 
 focusing on the core workflow where the Python application drives the communication.
 
 In this "Python-in-the-lead" approach, the Python script will:
@@ -18,22 +18,19 @@ Prerequisites and Setup
 To keep this tutorial simple and ensure reproducibility, 
 we focus on using a specific Python version within an isolated virtual environment.
 
-Tools installation
+Tools Installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you haven't already, please install the recommended dependency management tools:
 
-#.  **pyenv** (for managing Python versions):
-    - Linux/macOS: `pyenv <https://github.com/pyenv/pyenv>`_
-    - Windows: `pyenv-win <https://pypi.org/project/pyenv-win/>`_
+#.  ``pyenv`` (for managing Python versions): `pyenv <https://github.com/pyenv/pyenv>`_ (for Linux/macOS) or `pyenv-win <https://pypi.org/project/pyenv-win/>`_ (for Windows).
     
-#.  **uv** (for fast package and environment management):
-    - `uv Documentation <https://docs.astral.sh/uv/>`_
+#.  ``uv`` (for fast package and environment management): `uv <https://docs.astral.sh/uv/>`_.
 
-Prepare environment
+Prepare Environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Start a PowerShell or terminal, navigate to the directory containing the Python `main.py` file, and 
+Start a PowerShell or terminal, navigate to the directory containing the Python ``main.py`` file, and 
 execute the following commands:
 
 .. code-block:: bash
@@ -47,24 +44,24 @@ execute the following commands:
 
     
 Remarks:
+
 * Lines 1-2: Set Python **3.13** as the interpreter for the current directory.
-* Lines 3-4: Initialize the project and create a new virtual environment (`.\venv`).
+* Lines 3-4: Initialize the project and create a new virtual environment (``.\venv``).
 * Line 5: Activate the newly created virtual environment.
 
-Install dependencies
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
-
+Install Dependencies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
     uv pip install -r requirements.txt
 
-    Remarks:
 
-    *   By convention, ``requirements.txt`` enumerates the Python libraries necessary to 
-        install for the project at hand.
-        
-AIMMS model
+Remarks:
+
+* By convention, ``requirements.txt`` enumerates the Python libraries necessary to install for the project at hand.
+    
+AIMMS Model
 -----------------------
 
 The accompanying AIMMS model, ``hello.aimms``, is intentionally simple. It defines one input array (``p_A``) 
@@ -73,14 +70,18 @@ and calculates the scalar sum of its elements, storing the result in a parameter
 .. figure:: images/aimms-model-tree.png
     :align: center
 
+|
+
 AIMMS Model Explorer showing input parameter ``p_A`` and output parameter ``p_B``.
 
 .. figure:: images/aimms-main-execution.png
     :align: center
 
+|
+
 AIMMS procedure ``MainExecution`` containing a single assignment statement.
 
-PYTHON Script
+Python Script
 --------------------
 
 The Python script uses the ``aimmspy`` library to control the AIMMS session.
@@ -118,8 +119,8 @@ The Python script uses the ``aimmspy`` library to control the AIMMS session.
     hello_world_result = aimms_model.p_b.data()
     print(f"Hello world: sum is {hello_world_result}")
 
-Expected output
-^^^^^^^^^^^^^^^^^^^ 
+Expected Output
+^^^^^^^^^^^^^^^^^^^
 
 When the script is executed, the AIMMS session opens, data is exchanged, and 
 the result is returned to Python:
