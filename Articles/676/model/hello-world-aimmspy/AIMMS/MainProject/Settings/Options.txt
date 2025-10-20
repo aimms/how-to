@@ -1,0 +1,4 @@
+rounding_compatibility Aimms_3_7
+use_UTC_forCaseAndStartEndDate 1
+case_compatibility Aimms_4_80
+Default_UI 0
