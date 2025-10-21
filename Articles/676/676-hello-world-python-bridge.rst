@@ -18,6 +18,10 @@ Prerequisites and Setup
 To keep this tutorial simple and ensure reproducibility, 
 we focus on using a specific Python version within an isolated virtual environment.
 
+.. note::
+
+    This article uses a way of setting up your environment; there are other ways too - just not presented here.
+
 Tools installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -39,16 +43,19 @@ execute the following commands:
 .. code-block:: bash
     :linenos:
 
-    pyenv install 3.13
-    pyenv local 3.13
     uv init
     uv venv
-    .\venv\activate
+    pyenv install 3.13
+    pyenv local 3.13
+    .venv\Scripts\activate
 
     
 Remarks:
+
 * Lines 1-2: Set Python **3.13** as the interpreter for the current directory.
+
 * Lines 3-4: Initialize the project and create a new virtual environment (`.\venv`).
+
 * Line 5: Activate the newly created virtual environment.
 
 Install dependencies
@@ -120,6 +127,12 @@ The Python script uses the ``aimmspy`` library to control the AIMMS session.
 
 Expected output
 ^^^^^^^^^^^^^^^^^^^ 
+
+The script can now be executed using:
+
+.. code-block:: bash
+
+    uv run main.py
 
 When the script is executed, the AIMMS session opens, data is exchanged, and 
 the result is returned to Python:
