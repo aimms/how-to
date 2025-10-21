@@ -49,9 +49,10 @@ execute the following commands:
     
 Remarks:
 
-* Lines 1-2: Set Python **3.13** as the interpreter for the current directory.
+* Lines 1-2: Initialize the project and create a new virtual environment (``.\venv``).
 
-* Lines 3-4: Initialize the project and create a new virtual environment (``.\venv``).
+* Lines 3-4: Set Python **3.13** as the interpreter for the current directory.
+
 * Line 5: Activate the newly created virtual environment.
 
 Install Dependencies
