@@ -1,4 +1,4 @@
-User Management
+AIMMS Cloud
 =============================
 
 .. meta::

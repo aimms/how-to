@@ -20,7 +20,7 @@ scalable cloud-based deployment. Additionally, we share best practices for build
 .. toctree::
    :maxdepth: 1
 
-   user-management/index
+   aimms-cloud/index
    aimms-pro-on-premise/index
 
 
