@@ -13,7 +13,7 @@ Depending on an app user's role in the organization, specific information may or
 Let us consider an example of how to implement this role-based access control.
 
 Granting Access to Apps and Environments
----------------------------------------
+-----------------------------------------
 
 Within the AIMMS Cloud, the administrator manages environments and users under the **Users** tab. 
 
@@ -41,6 +41,7 @@ When an application is assigned to a user group, all users in that group can acc
 
 .. image:: images/app-permission.png
     :align: center
+
 |
 
 Granting Granular Data Access within the App
