@@ -16,7 +16,7 @@ Specifically, the Python script will manage the AIMMS application to:
 Please use the :download:`Hello World <model/hello-world-aimmspy.zip>`  project to follow this article.
 
 Prerequisites & Environment Setup
-=================================
+---------------------------------
 
 To ensure reproducibility and manage dependencies, this tutorial focuses on using a specific Python version within an isolated **virtual environment**.
 
@@ -25,7 +25,7 @@ To ensure reproducibility and manage dependencies, this tutorial focuses on usin
     This tutorial focuses on a specific environment setup for reproducibility. Other configurations are possible but are outside the scope of this article.
 
 Install Dependency Tools
-------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you haven't already, please install the recommended dependency management tools:
 
@@ -34,7 +34,7 @@ If you haven't already, please install the recommended dependency management too
 #.  ``uv`` (for fast package and environment management): `uv <https://docs.astral.sh/uv/>`_.
 
 Initialize the Environment
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Start a PowerShell or terminal, navigate to the directory containing the Python ``main.py`` file, and 
 execute the following commands:
@@ -60,7 +60,7 @@ Remarks:
     And, if you don't find the Python version you'd like to use, please run ``pyenv update`` and try again. 
 
 Install Dependencies
---------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
@@ -71,7 +71,7 @@ Remarks:
 * By convention, ``requirements.txt`` enumerates the Python libraries necessary to install for the project at hand.
     
 AIMMS Model
-===========
+---------------------------------
 
 The accompanying AIMMS model, ``hello.aimms``, is intentionally simple. It defines an input array (``p_A``) 
 and calculates the scalar sum of its elements, storing the result in an output parameter (``p_B``).
@@ -87,7 +87,7 @@ and calculates the scalar sum of its elements, storing the result in an output p
     AIMMS procedure ``MainExecution`` containing a single assignment statement.
 
 Python Script
-=============
+---------------------------------
 
 The Python script uses the ``aimmspy`` library to control the AIMMS session.
 
@@ -124,7 +124,7 @@ The Python script uses the ``aimmspy`` library to control the AIMMS session.
     print(f"Hello world: sum is {hello_world_result}")
 
 Expected Output
----------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The script can now be executed using:
 
