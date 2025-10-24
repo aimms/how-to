@@ -40,20 +40,28 @@ execute the following commands:
 .. code-block:: bash
     :linenos:
 
-    uv init
-    uv venv
     pyenv install 3.13
     pyenv local 3.13
+    uv init
+    uv venv
     .venv\Scripts\activate
 
     
 Remarks:
 
-* Lines 1-2: Initialize the project and create a new virtual environment (``.\venv``).
 
-* Lines 3-4: Set Python **3.13** as the interpreter for the current directory.
+* Lines 1-2: Set Python **3.13** as the interpreter for the current directory.
+
+* Lines 3-4: Initialize the project and create a new virtual environment (``.\venv``).
 
 * Line 5: Activate the newly created virtual environment.
+
+.. hint::
+
+    If you face an error while ``pyenv install 3.13``, use ``pyenv install --list`` to see all available python versions. 
+    And, if you don't find the Python version you'd like to use, please run ``pyenv update`` and try again. 
+
+
 
 Install Dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
