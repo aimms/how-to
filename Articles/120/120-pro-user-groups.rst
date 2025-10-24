@@ -48,7 +48,7 @@ Granting Granular Data Access within the App
 --------------------------------------------
 
 The second, more refined method is to implement role-based access **inside the AIMMS model**.
-The **AimmsPROLibrary** provides the procedure **``pro::GetCurrentUserInfo``** to identify the current user and the groups they belong to.
+The **AimmsPROLibrary** provides the procedure ``pro::GetCurrentUserInfo`` to identify the current user and the groups they belong to.
 
 Let's continue the example: a **Planner** needs the authority to change the production activities' start time and duration, represented by the parameters ``startProduction(a)`` and ``durationProduction(a)``.
 
