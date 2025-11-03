@@ -68,7 +68,7 @@ Remarks:
 Ensuring Statelessness with ``pr_initTask``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When an application runs as a service, it's crucial that each request (or "task") runs independently. The procedure ``pr_initTask``* is executed at the start of every task to enforce **statelessness** by resetting the model identifiers.
+When an application runs as a service, it's crucial that each request (or "task") runs independently. The procedure ``pr_initTask`` is executed at the start of every task to enforce **statelessness** by resetting the model identifiers.
 
 The term **"Data Model"** refers to the core AIMMS identifiers (sets, parameters, variables, and constraints) that represent the objects in the real-world problem being modeled (e.g., ``s_cargoes``, ``s_vessels``). 
 These must be cleared before a new task begins. In contrast, "application management identifiers" (e.g., WebUI and PRO library identifiers, logging paths) should be left untouched.
@@ -284,7 +284,7 @@ This automated management eliminates the need for manual service start/stop comm
 making the Cloud the preferred environment for production-scale service execution.
 
 .. spelling:word-list::
-    
+
     initTask
     frontends
     scalable

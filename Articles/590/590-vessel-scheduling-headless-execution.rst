@@ -255,3 +255,9 @@ When an AIMMS application is published to the AIMMS Cloud, headless execution an
 You do not need to explicitly start a service (as with Docker or locally). When a task is posted to the application endpoint, the AIMMS Cloud automatically provisions resources, starts the project, handles the task, and manages the execution lifecycle.
 
 More information on this streamlined approach can be found in the `AIMMS Cloud Tasks documentation <https://documentation.aimms.com/cloud/tasks.html>`_.
+
+.. spelling:word-list::
+    
+    initTask
+    frontends
+    scalable
