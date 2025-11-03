@@ -282,3 +282,9 @@ By posting your input data to this unique URL (as demonstrated in the Python cli
 
 This automated management eliminates the need for manual service start/stop commands or complex resource configuration, 
 making the Cloud the preferred environment for production-scale service execution.
+
+.. spelling:word-list::
+    
+    initTask
+    frontends
+    scalable
