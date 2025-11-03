@@ -104,68 +104,68 @@ During the mathematical optimization process, each cargo is then assigned to eit
 In this example, the vessel scheduling problem is solved by first generating the routes, followed by the mathematical optimization. 
 The majority of the time is spent on route generation.
 
-Example
-^^^^^^^^^
+.. topic:: Example
 
-A single vessel, ``vessel1``, located at Caracas, is to handle two cargos, labeled: ``a1`` and ``a2``.
+   A single vessel, ``vessel1``, located at Caracas, is to handle two cargos, labeled: ``a1`` and ``a2``.
 
-    #.  ``a1`` load in Paramaribo, deliver in Sao Paolo
-    
-    #.  ``a2`` load in Montevideo, deliver in Rio de Janeiro.
+      #.  ``a1`` load in Paramaribo, deliver in Sao Paolo
+      
+      #.  ``a2`` load in Montevideo, deliver in Rio de Janeiro.
 
-Then there are five potential routes:
+   Then there are five potential routes:
 
-    #.  ``vessel1_a1_a2``: with actions:
+      #.  ``vessel1_a1_a2``: with actions:
 
-        #.  Sail to Caracas to Paramaribo
-        
-        #.  Load Cargo ``a1``
-        
-        #.  Sail to Sao Paolo
-        
-        #.  Deliver Cargo ``a1``
-        
-        #.  Sail to Montevideo
-        
-        #.  Load Cargo ``a2``
-        
-        #.  Sail to Rio de Janeiro
-        
-        #.  Deliver Cargo ``a2``
+         #.  Sail to Caracas to Paramaribo
+         
+         #.  Load Cargo ``a1``
+         
+         #.  Sail to Sao Paolo
+         
+         #.  Deliver Cargo ``a1``
+         
+         #.  Sail to Montevideo
+         
+         #.  Load Cargo ``a2``
+         
+         #.  Sail to Rio de Janeiro
+         
+         #.  Deliver Cargo ``a2``
 
-    #.  ``vessel1_a2_a1``: similar as ``vessel1_a1_a2``, just a different order of locations; 
-        and thus also different vessel sailing times and cargo pickup moments.
-    
-    #.  ``vessel1_a1``: ``vessel1`` only handles cargo ``a1``
+      #.  ``vessel1_a2_a1``: similar as ``vessel1_a1_a2``, just a different order of locations; 
+         and thus also different vessel sailing times and cargo pickup moments.
+      
+      #.  ``vessel1_a1``: ``vessel1`` only handles cargo ``a1``
 
-    #.  ``vessel1_a2``: ``vessel1`` only handles cargo ``a2``
+      #.  ``vessel1_a2``: ``vessel1`` only handles cargo ``a2``
 
-    #.  ``vessel1`` Remains at port Caracas
+      #.  ``vessel1`` Remains at port Caracas
 
 
-The route generation procedure is as follows:
+   The route generation procedure is as follows:
 
-#.  For each vessel i, the idle route is generated: ``vessel<i>``.
-    Together they initialize the set of just generated routes, ``JG``.
-    
-#.  Move the set of just generated routes ``JG``, to the set of input routes ``IR``.
+   #.  For each vessel i, the idle route is generated: ``vessel<i>``.
+      Together they initialize the set of just generated routes, ``JG``.
+      
+   #.  Move the set of just generated routes ``JG``, to the set of input routes ``IR``.
 
-#.  For each ``r`` in ``IR``, all cargos ``c`` are considered to be appended for a new route ``r'``.
-    A route ``r' = r_c`` is accepted if: 
-    
-    * ``c`` is not a part of ``r``,
-   
-    * ``c`` is picked up in its time window, and
-    
-    * ``c`` is delivered before the end of the horizon.
-    
-    All routes ``r'`` just generated, form the new set of just generated routes ``JG``.
-    If the set ``JG`` is empty, stop, otherwise continue with step 2.
+   #.  For each ``r`` in ``IR``, all cargos ``c`` are considered to be appended for a new route ``r'``.
+      A route ``r' = r_c`` is accepted if: 
+      
+      * ``c`` is not a part of ``r``,
+      
+      * ``c`` is picked up in its time window, and
+      
+      * ``c`` is delivered before the end of the horizon.
+      
+      All routes ``r'`` just generated, form the new set of just generated routes ``JG``.
+      If the set ``JG`` is empty, stop, otherwise continue with step 2.
 
-Because a route ``r'`` ends later than route ``r``, this procedure is finite.
+   Because a route ``r'`` ends later than route ``r``, this procedure is finite.
 
-In order to determine the cost of a route, careful administration of each leg needs to be done 
-(sailing to the loading location, perhaps waiting, sailing to the delivery location).
+   In order to determine the cost of a route, careful administration of each leg needs to be done 
+   (sailing to the loading location, perhaps waiting, sailing to the delivery location).
+
 
 
 WebUI Features

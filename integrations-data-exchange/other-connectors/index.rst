@@ -15,7 +15,7 @@ Other Connectors
    /Articles/98/98-starting-job-aimms-pro-api-csharp
    /Articles/133/133-External-Functions-InputData
    /Articles/153/153-external-haversine
-
+   /Articles/590/590-vessel-scheduling-headless-execution
     
     
     

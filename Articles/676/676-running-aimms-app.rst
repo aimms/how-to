@@ -5,10 +5,8 @@ Orchestrating Vessel Scheduling AIMMS App from Python
     :keywords: AIMMS, Python-Bridge, aimmspy, headless optimization, data pipeline, pandas, Vessel Scheduling, solver, data exchange
     :description: A guide on orchestrating a headless AIMMS optimization application from a Python script using the AIMMS Python-Bridge. Learn to pass data, run the solver, and retrieve results for a data pipeline.
 
-This guide shows you how to use the AIMMS Python Bridge to control 
-an AIMMS application from a Python script. 
-This approach is ideal for running an AIMMS model as a "headless" optimization service 
-within a larger data pipeline.
+This guide shows you how to use the AIMMS Python-Bridge to control an AIMMS application from a Python script. 
+This approach is ideal for running an AIMMS model as a "headless" optimization service within a larger data pipeline.
 
 Please use the :doc:`Vessel Scheduling<../590/590-vessel-scheduling>` example to follow this article. 
 This example illustrates the process, which consists of the following steps:
@@ -23,11 +21,7 @@ This example illustrates the process, which consists of the following steps:
 
 #.  Write the results back to Excel.
 
-.. important:: 
-
-    To set up a minimal Python environment to execute this example, please read this article: :doc:`../676/676-starting-with-python`.
-
-Step 1: Prepare Link Between Python and AIMMS 
+Prepare Link Between Python and AIMMS 
 -----------------------------------------------
 
 First, ensure you have the ``aimmspy`` library installed. You can install it using pip:
@@ -96,7 +90,7 @@ Remarks:
     Python ``polars`` also provide seamless integration with Excel files and might have been used as well.
 
 
-Step 2: Passing Input Data  
+Passing Input Data  
 ------------------------------
 
 Importing Cargo Data
@@ -143,20 +137,21 @@ Remarks:
 Note that the data for locations and vessels are read in and passed to AIMMS similarly.
 
 
-Step 3: Running the Optimization Inside the AIMMS App
+Running the Optimization Inside the AIMMS App
 -------------------------------------------------------
 
 After loading all data (for cargo, locations, and vessels), you can execute the optimization logic 
 within your AIMMS model by calling the corresponding procedure.
 
 .. code-block:: python
+    :linenos:
 
     aimms_model.pr_GenRoutesSolve()
 
 This single line tells the AIMMS model to run its ``pr_GenRoutesSolve`` procedure, 
 which typically contains the solver calls and other logic.
 
-Step 4-5: Retrieving the Solution and Writing to Excel
+Retrieving the Solution and Writing to Excel
 --------------------------------------------------------
 
 Once the solver finishes, you can retrieve the results from the AIMMS model and 
