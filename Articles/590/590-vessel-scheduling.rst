@@ -5,10 +5,10 @@ Vessel Scheduling
    :keywords: Decision Support System, Route Optimization, Petrobras Ship Scheduling, Cost-efficient Cargo Delivery, Mathematical Optimization Model, Vessel Allocation Algorithm, WebUI and Python Integration
    :description: In this practical example, an efficient plan is developed for delivering large cargoes using oil tankers.
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Vessel_Scheduling-blue
+.. image:: https://img.shields.io/badge/AIMMS_25.7-ZIP:_Vessel_Scheduling-blue
    :target: https://github.com/aimms/vessel-scheduling/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Vessel_Scheduling-blue
+.. image:: https://img.shields.io/badge/AIMMS_25.7-Github:_Vessel_Scheduling-blue
    :target: https://github.com/aimms/vessel-scheduling
 
 .. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
@@ -341,6 +341,9 @@ To deploy the application on AIMMS Cloud, a commercial license is needed.
 
 Release Notes
 --------------------
+
+`v1.4 <https://github.com/aimms/vessel-scheduling/releases/tag/1.4>`_ (04/11/2025)
+    Added Python script to use searoute package for distance calculation instead of haversine formula.
 
 `v1.3 <https://github.com/aimms/vessel-scheduling/releases/tag/1.3>`_ (07/10/2024)
     Fixing integration problems (import and export) when using the project on AIMMS PRO Portal.

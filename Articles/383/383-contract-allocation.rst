@@ -324,8 +324,14 @@ Minimal Requirements
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
 
 
+.. seealso::
+   * :doc:`../545/545-summary-examples-features`
+   
 Release Notes
 --------------------   
+
+`v1.7 <https://github.com/aimms/contract-allocation/releases/tag/1.7>`_ (04/11/2025)
+   Adding Python-Bridge support to run the model headless using Python code.
 
 `v1.6 <https://github.com/aimms/contract-allocation/releases/tag/1.6>`_ (24/09/2024)
    Fixing integration problems (import and export) when using the project on AIMMS Portal.
@@ -348,8 +354,7 @@ Release Notes
 `v1.0 <https://github.com/aimms/contract-allocation/releases/tag/1.0>`_ (17/03/2023)
 	First logged version with the new workflow structure and colors. 
 
-.. seealso::
-   * :doc:`../545/545-summary-examples-features`
+
 
 .. spelling:word-list::
 
