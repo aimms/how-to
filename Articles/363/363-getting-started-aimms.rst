@@ -21,7 +21,8 @@ These are the indicated trails. Please let us know if you are missing something!
 
     - `Modeling with AIMMS I <https://aimms.getlearnworlds.com/course/modeling-with-aimms-i>`_
     - `Modeling with AIMMS II <https://aimms.getlearnworlds.com/course/modeling-with-aimms-ii>`_
-    - Modeling with AIMMS III - COMING SOON!
+    - `Modeling with AIMMS III <https://aimms.getlearnworlds.com/course/modeling-with-aimms-iii>`_
+    - Modeling with AIMMS IV - COMING SOON!
 
 .. card:: User Interface with AIMMS
 
