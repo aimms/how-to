@@ -104,69 +104,51 @@ During the mathematical optimization process, each cargo is then assigned to eit
 In this example, the vessel scheduling problem is solved by first generating the routes, followed by the mathematical optimization. 
 The majority of the time is spent on route generation.
 
-Example
-^^^^^^^^^
+.. topic:: Example
 
-A single vessel, ``vessel1``, located at Caracas, is to handle two cargos, labeled: ``a1`` and ``a2``.
+   A single vessel, ``vessel1``, located at Caracas, is to handle two cargos, labeled: ``a1`` and ``a2``.
 
-    #.  ``a1`` load in Paramaribo, deliver in Sao Paolo
-    
-    #.  ``a2`` load in Montevideo, deliver in Rio de Janeiro.
+      #. ``a1`` load in Paramaribo, deliver in Sao Paolo.
+      #. ``a2`` load in Montevideo, deliver in Rio de Janeiro.
 
-Then there are five potential routes:
+   Then there are five potential routes:
 
-    #.  ``vessel1_a1_a2``: with actions:
+      #. ``vessel1_a1_a2``: With actions:
 
-        #.  Sail to Caracas to Paramaribo
-        
-        #.  Load Cargo ``a1``
-        
-        #.  Sail to Sao Paolo
-        
-        #.  Deliver Cargo ``a1``
-        
-        #.  Sail to Montevideo
-        
-        #.  Load Cargo ``a2``
-        
-        #.  Sail to Rio de Janeiro
-        
-        #.  Deliver Cargo ``a2``
+         #. Sail to Caracas to Paramaribo.
+         #. Load Cargo ``a1``.
+         #. Sail to Sao Paolo.
+         #. Deliver Cargo ``a1``.
+         #. Sail to Montevideo.
+         #. Load Cargo ``a2``.
+         #. Sail to Rio de Janeiro.
+         #. Deliver Cargo ``a2``.
 
-    #.  ``vessel1_a2_a1``: similar as ``vessel1_a1_a2``, just a different order of locations; 
-        and thus also different vessel sailing times and cargo pickup moments.
-    
-    #.  ``vessel1_a1``: ``vessel1`` only handles cargo ``a1``
+      #. ``vessel1_a2_a1``: Similar as ``vessel1_a1_a2``, just a different order of locations; and thus also different vessel sailing times and cargo pickup moments.
+      #. ``vessel1_a1``: ``vessel1`` only handles cargo ``a1``.
+      #. ``vessel1_a2``: ``vessel1`` only handles cargo ``a2``.
+      #. ``vessel1``: Remains at port Caracas.
 
-    #.  ``vessel1_a2``: ``vessel1`` only handles cargo ``a2``
+   The route generation procedure is as follows:
 
-    #.  ``vessel1`` Remains at port Caracas
+   #. For each vessel i, the idle route is generated: ``vessel<i>``. Together they initialize the set of just generated routes, ``JG``.
+   #. Move the set of just generated routes ``JG``, to the set of input routes ``IR``.
+   #. For each ``r`` in ``IR``, all cargos ``c`` are considered to be appended for a new route ``r'``. A route ``r' = r_c`` is accepted if: 
+      
+      * ``c`` is not a part of ``r``,
+      * ``c`` is picked up in its time window, and
+      * ``c`` is delivered before the end of the horizon.
+      
+      All routes ``r'`` just generated, form the new set of just generated routes ``JG``.
+      If the set ``JG`` is empty, stop, otherwise continue with step 2.
+
+   Because a route ``r'`` ends later than route ``r``, this procedure is finite.
+
+   In order to determine the cost of a route, careful administration of each leg needs to be done 
+   (sailing to the loading location, perhaps waiting, sailing to the delivery location).
 
 
-The route generation procedure is as follows:
-
-#.  For each vessel i, the idle route is generated: ``vessel<i>``.
-    Together they initialize the set of just generated routes, ``JG``.
-    
-#.  Move the set of just generated routes ``JG``, to the set of input routes ``IR``.
-
-#.  For each ``r`` in ``IR``, all cargos ``c`` are considered to be appended for a new route ``r'``.
-    A route ``r' = r_c`` is accepted if: 
-    
-    * ``c`` is not a part of ``r``,
-   
-    * ``c`` is picked up in its time window, and
-    
-    * ``c`` is delivered before the end of the horizon.
-    
-    All routes ``r'`` just generated, form the new set of just generated routes ``JG``.
-    If the set ``JG`` is empty, stop, otherwise continue with step 2.
-
-Because a route ``r'`` ends later than route ``r``, this procedure is finite.
-
-In order to determine the cost of a route, careful administration of each leg needs to be done 
-(sailing to the loading location, perhaps waiting, sailing to the delivery location).
-
+|
 
 WebUI Features
 ---------------
@@ -341,13 +323,6 @@ Below there are the css files you will find with comments on what they change.
             color: #505767;
          }
 
-
-
-.. include:: 590-vessel-scheduling-services.txt
-
-
-.. include:: 590-vessel-scheduling-headless-execution.txt
-
 Minimal Requirements
 ----------------------
 
@@ -356,17 +331,12 @@ To run the Python client, you will need to have Python installed, for this examp
 
 To deploy the application on AIMMS Cloud, a commercial license is needed.
 
-References
------------
+.. seealso::
 
-#.  Gustavo Diz, Luiz Felipe Scavarda, Roger Rocha, Silvio Hamacher (2014) Decision Support System for 
-PETROBRAS Ship Scheduling. Interfaces 44(6):555-566.
-
-#.  `Develop an AIMMS Service <https://how-to.aimms.com/C_Developer/Sub_Connectivity/sub_dataexchange/Sub_Develop_Service/index.html>`_
-
-#.  `A Python library to make it really easy to use AIMMS Cloud REST services <https://community.aimms.com/product-updates/a-python-library-to-make-it-really-easy-to-use-aimms-cloud-rest-services-1810>`_
-
-#.  `AIMMS command line options  <https://documentation.aimms.com/user-guide/miscellaneous/calling-aimms/aimms-command-line-options.html>`_ 
+   #. Reference: Gustavo Diz, Luiz Felipe Scavarda, Roger Rocha, Silvio Hamacher (2014) Decision Support System for PETROBRAS Ship Scheduling. Interfaces 44(6):555-566.
+   #. `Develop an AIMMS Service <https://how-to.aimms.com/C_Developer/Sub_Connectivity/sub_dataexchange/Sub_Develop_Service/index.html>`_
+   #. `A Python library to make it really easy to use AIMMS Cloud REST services <https://community.aimms.com/product-updates/a-python-library-to-make-it-really-easy-to-use-aimms-cloud-rest-services-1810>`_
+   #. `AIMMS command line options  <https://documentation.aimms.com/user-guide/miscellaneous/calling-aimms/aimms-command-line-options.html>`_ 
 
 
 Release Notes
