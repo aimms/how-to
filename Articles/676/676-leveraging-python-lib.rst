@@ -13,9 +13,11 @@ The **AIMMS Python-Bridge** connects these two environments, providing a crucial
 #.  **Using Python libraries from an AIMMS application.**
 
 This article focuses on the second, more common scenario, demonstrating how to use
-the open-source ``searoute`` library to enhance a strategic maritime application.
+the open-source ``searoute`` library to enhance a strategic maritime application. 
 
----
+Please refer to the :doc:`Vessel Scheduling<../590/590-vessel-scheduling>` example
+to follow along with this article.
+
 
 Exploring the ``searoute`` Library
 -------------------------------------
@@ -50,8 +52,6 @@ In the :doc:`Vessel Scheduling<../590/590-vessel-scheduling>` application, we ar
 primarily interested in the distance (from ``properties.length``) and the actual
 route waypoints (from ``geometry.coordinates``).
 
----
-
 Integrating with AIMMS
 ---------------------------
 
@@ -81,7 +81,7 @@ specifying the necessary Python packages and establishing the AIMMS-specific lin
 
     The AIMMS project must link to the Python code containing the calls to ``searoute``.
     Crucially, the `pyaimms repository library <https://documentation.aimms.com/aimmspy/pyaimms/pyaimms.html>`_
-    is essential, as it provides the **Python client** allowing your script to access
+    is essential, as it provides the Python client allowing your script to access
     and interact with the AIMMS model's data.
 
     To enable the AIMMS compiler to link and scan the Python code (in this case,
@@ -90,10 +90,8 @@ specifying the necessary Python packages and establishing the AIMMS-specific lin
     .. code-block:: aimms
         :linenos:
 
-        ! run python script
+        ! Execute the specified Python script
         py::run_python_script("leverage-sea-route.py");
-
----
 
 Using ``searoute`` to Compute Distances
 -----------------------------------------
@@ -111,18 +109,23 @@ iterates through all pairs to calculate the routes, and then sends the results b
     :linenos:
 
     def searoute_distance_matrix():
+        """Calculates a distance matrix for all locations retrieved from AIMMS and assigns it back."""
+        
         # Step 1: Retrieve location data from the AIMMS model
+        # Gets location index ('i_loc'), latitude, and longitude for all known locations.
         df_location_overview = aimms_model.multi_data(["i_loc","p_latitude","p_longitude"])
         distance_mat_list = []
         
         # ... code for iterating through locations and calculating distances ...
-        
+
         # Step 2: Build a DataFrame with the calculated distances
+        # Structure columns to match the AIMMS 2D parameter: indices first, then the value.
         distance_columns = ['i_loc_from','i_loc_to','p_distance_searoute']
         distance_df = pd.DataFrame(distance_mat_list,columns=distance_columns)
 
         # Step 3: Pass the DataFrame back to the AIMMS model
-        aimms_model.p_distance_searoute.assign(distance_df)
+        # Assigns the distance matrix to the parameter 'p_distance_searoute'.
+        aimms_model.p_distance_searoute.assign(distance_df)        
 
 
 .. hint::
@@ -130,8 +133,6 @@ iterates through all pairs to calculate the routes, and then sends the results b
     Calculating many routes can be time-consuming. To prevent unnecessary recalculations
     during development or multiple runs, the distance matrix is often **cached** in a
     ``.parquet`` file within the AIMMS model's environment.
-
----
 
 Visualizing Routes
 -----------------------------------------
@@ -158,15 +159,18 @@ The actual call to the Python function ``searoute_route2`` is made using the ``p
 .. code-block:: aimms
     :linenos:
 
+    ! --- External Python Route Calculation ---
+    ! Prototype searoute_route2 (for reference)
     ! def searoute_route2(fromLat:float,fromLon:float,toLat:float,toLon:float,
     !     indexName:str,latParName:str,lonParName:str,lenParName:str):
-    
-    ! Five decimals delivers locations precise to roughly 1 meter. 
-    ! This is sufficient for large vessels.
+
+    ! Prepare Python call string, injecting coordinates and AIMMS output identifiers
+    ! Five decimals (%12.5n) provides a location precision of roughly 1 meter, sufficient for maritime routes.
     _sp_pyCall := formatString("searoute_route2(%12.5n,%12.5n,%12.5n,%12.5n,\"lpa::i_globWayPoint\",\"lpa::p_globLat\",\"lpa::p_globLon\",\"lpa::p_globRouteLength\")",
         _p_fromLat, _p_fromLon, _p_toLat, _p_toLon );
+    pr_scanPythonSource();        ! Ensure Python environment is ready
+    py::run_python_statement(_sp_pyCall); ! Execute the external route calculation
 
-    py::run_python_statement(_sp_pyCall);
 
 The Python function ``searoute_route2`` performs the route calculation 
 and uses two separate ``aimms_model.multi_assign`` calls to send the results back: the scalar distance and the list of waypoints.
@@ -174,30 +178,32 @@ and uses two separate ``aimms_model.multi_assign`` calls to send the results bac
 .. code-block:: python
     :linenos:
 
-    def searoute_route2(fromLat:float,fromLon:float,toLat:float,toLon:float,
-        indexName:str,latParName:str,lonParName:str,lenParName:str):
-        origin=[fromLon,fromLat]
-        destination=[toLon,toLat]
-        route = sr.searoute(origin,destination)
+    def searoute_route2(fromLat: float, fromLon: float, toLat: float, toLon: float,
+                        indexName: str, latParName: str, lonParName: str, lenParName: str):
+        """Calculates sea route and assigns results to dynamically named AIMMS parameters."""
 
-        # Pass total travel length to AIMMS model
+        origin = [fromLon, fromLat]
+        destination = [toLon, toLat]
+        route = sr.searoute(origin, destination)
+
+        # --- Assign Dynamic Length Parameter ---
         route_length = route.properties["length"]
-        route_length_df = pd.DataFrame({lenParName:[route_length]})
-        aimms_model.multi_assign(route_length_df,options={"return_type": DataReturnTypes.PANDAS})
+        route_length_df = pd.DataFrame({lenParName: [route_length]})
+        aimms_model.multi_assign(route_length_df, options={"return_type": DataReturnTypes.PANDAS})
 
-        # Pass Waypoints (lon, lat) to AIMMS model
-        route_columns = [lonParName,latParName]
-        route_df = pd.DataFrame(route.geometry.coordinates,columns=route_columns)
+        # --- Assign Dynamic Waypoint Parameters ---
+        route_columns = [lonParName, latParName]
+        route_df = pd.DataFrame(route.geometry.coordinates, columns=route_columns)
         
-        # Add index column for the unnamed set in AIMMS
-        route_df[indexName]=route_df.index
-        # Reorder columns to make the index the first column
-        route_columns=route_df.columns.tolist()
-        route_columns=route_columns[-1:]+route_columns[:-1]
-        route_df=route_df[route_columns]
+        # Add dynamic index column.
+        route_df[indexName] = route_df.index
         
-        # Copying the structured data to AIMMS
-        aimms_model.multi_assign(route_df,options={"return_type": DataReturnTypes.PANDAS})
+        # Reorder columns: Index column must be first.
+        route_columns = route_df.columns.tolist()
+        route_df = route_df[route_columns[-1:] + route_columns[:-1]]
+        
+        # Assign waypoints DataFrame to AIMMS.
+        aimms_model.multi_assign(route_df, options={"return_type": DataReturnTypes.PANDAS})
 
 Once the waypoints for all legs of the optimal solution are computed and concatenated
 using a utility AIMMS procedure (e.g., ``ui::pr_openPageSeaRouteMap``),
@@ -224,8 +230,6 @@ offering superior visual insights into the optimized schedule.
 
 The AIMMS procedure ``ui::pr_openPageSeaRouteMap`` concatenates the waypoints computed by the searoute library
 for each of the routes in the optimal solution.
-
----
 
 .. seealso::
 

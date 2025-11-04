@@ -146,7 +146,7 @@ The setup for a Docker image requires four core components:
 * Data (Input/Output & Logs): Typically handled by mounted volumes as data varies per run.
 
     * Input Data (e.g., CSV, Excel) is mapped to the ``/inputs`` volume.
-    * Output Data and **Logs** are mapped to the ``/outputs`` volume.
+    * Output Data and Logs are mapped to the ``/outputs`` volume.
     * Logging Note: If you include a custom ``LoggerConfig.xml``, ensure the file path redirects logs to the mounted volume, e.g., changing the file path value from ``log/aimms-log.txt`` to ``/outputs/aimms-log.txt``.
 
 Building the Image
@@ -198,7 +198,7 @@ This is analogous to Example 'a' for local execution, using mounted volumes for 
 
     pause
 
-**Example B: Executing an ``AimmsCmd`` Script**
+**Example B: Executing an AimmsCmd Script**
 
 To correctly apply I/O redirection *inside* the container (not on the host), the ``AimmsCmd`` call must be wrapped in a shell command (e.g., using ``/bin/bash -c``).
 

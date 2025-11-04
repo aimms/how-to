@@ -1,24 +1,20 @@
-Orchestrating Vessel Scheduling AIMMS App from Python
+Orchestrating Contract Allocation AIMMS App from Python
 ==========================================================
 
 .. meta::
-    :keywords: AIMMS, Python-Bridge, aimmspy, headless optimization, data pipeline, pandas, Vessel Scheduling, solver, data exchange
+    :keywords: AIMMS, Python-Bridge, aimmspy, headless optimization, data pipeline, pandas, Contract Allocation, solver, data exchange
     :description: A guide on orchestrating a headless AIMMS optimization application from a Python script using the AIMMS Python-Bridge. Learn to pass data, run the solver, and retrieve results for a data pipeline.
 
 This guide shows you how to use the AIMMS Python-Bridge to control an AIMMS application from a Python script. 
 This approach is ideal for running an AIMMS model as a "headless" optimization service within a larger data pipeline.
 
-Please use the :doc:`Vessel Scheduling<../590/590-vessel-scheduling>` example to follow this article. 
-This example illustrates the process, which consists of the following steps:
+Please refer to the :doc:`Contract Allocation<../383/383-contract-allocation>` example
+to follow along with this article. This article illustrates the process, which consists of the following steps:
 
 #.  Prepare the link between Python and the AIMMS app.
-
 #.  Pass data from Python to the AIMMS app.
-
 #.  Run the solver.
-
 #.  Retrieve the solution.
-
 #.  Write the results back to Excel.
 
 Prepare Link Between Python and AIMMS 
@@ -44,22 +40,24 @@ Next, initialize the ``Project`` and get a reference to your AIMMS model. This s
     :linenos:
     :emphasize-lines: 4,7,10,13
 
-    # Initialize the AIMMS project
+    # Initialize the AIMMS project connection.
     project = Project(
-        # path to the AIMMS Bin folder (on linux the Lib folder)
-        aimms_path=find_aimms_path("25.4"),
+        # Path to the AIMMS Bin folder (required for API connection).
+        aimms_path=find_aimms_path("25"),
 
-        # path to the AIMMS project file
-        aimms_project_file=os.path.join('..', 'AIMMSProject', 'VesselScheduling.aimms'),
+        # Path to the AIMMS project file to be opened.
+        aimms_project_file=os.path.join(projectroot, 'AIMMS-project', 'ContractAllocation.aimms'),
 
-        # the name of an aimms set containing identifiers. 
-        exposed_identifier_set_name="AllIdentifiers",  # Limit access to specific identifiers,
+        # The name of the AIMMS set containing all identifiers exposed to Python.
+        exposed_identifier_set_name="AllIdentifiers", 
 
-        # default data type when retrieving multi-dimensional data
+        # Default data type for multi-dimensional data retrieval (Pandas DataFrame is preferred).
         data_type_preference=DataReturnTypes.PANDAS,
         
-        # Fill license URL if needed.
+        # license_url: Fill license URL if using a network license.
     )
+
+    # Get a reference to the active AIMMS model instance for data transfer and execution.
     aimms_model : Model = project.get_model(__file__)
 
 Remarks:
@@ -73,10 +71,10 @@ Remarks:
     .. code-block:: none
 
         .
-        ├── AIMMSProject
+        ├── AIMMS-project
         │   ├── MainProject
         │   ├── ....
-        │   └── VesselScheduling.aimms
+        │   └── ContractAllocation.aimms
         │
         └── python-bridge
             ├── main.py
@@ -93,33 +91,28 @@ Remarks:
 Passing Input Data  
 ------------------------------
 
-Importing Cargo Data
+Importing Producers Data
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This example reads data from a sheet called ``CargoData`` and 
+This example reads data from a sheet called ``Producers`` and 
 renames the columns to match the corresponding AIMMS identifiers.
 
 .. code-block:: python
     :linenos:
     :emphasize-lines: 17
 
-    # Load data from the Excel workbook
-    datainput_pd_cargo=pd.read_excel(datainput,sheet_name='CargoData')
+    # 1. Load and Assign Producer Data (i_producer, capacities)
+    datainput_pd_producer = pd.read_excel(datainput, sheet_name='Producers')
 
-    # Rename the columns obtained from the Excel Sheet to 
-    # the corresponding names in the AIMMS model:
-    datainput_pd_cargo.rename(columns={
-        'Cargo'                : 'i_cargo',                 
-        'Loading Port'         : 'ep_loadingPortsCargo',    
-        'Delevering Port'      : 'ep_deliveringPortsCargo', 
-        'Spot Cost'            : 'p_spotCostVessel',        
-        'Minimum Loading Time' : 'ep_minTimeWindow',        
-        'Maximum Loading Time' : 'ep_maxTimeWindow',        
-        'Fixed Cost'           : 'p_cargoCost'              
+    # Rename columns to match exact AIMMS identifiers for seamless assignment.
+    datainput_pd_producer.rename(columns={         
+        'Producers'             : 'i_producer',                 
+        'Available Capacity'    : 'p_availableCapacity',            
+        'Minimal Delivery'      : 'p_minimalDelivery'
         }, inplace=True)
 
-    # Actually assign to AIMMS identifiers:
-    aimms_model.multi_assign(datainput_pd_cargo)
+    # Assign data to the corresponding AIMMS identifiers.
+    aimms_model.multi_assign(datainput_pd_producer)
 
 Remarks:
 
@@ -134,21 +127,23 @@ Remarks:
     the AIMMS model in a single, concise statement.
 
 
-Note that the data for locations and vessels are read in and passed to AIMMS similarly.
+Note that the data for the other sheets are read in and passed to AIMMS similarly.
 
 
 Running the Optimization Inside the AIMMS App
 -------------------------------------------------------
 
-After loading all data (for cargo, locations, and vessels), you can execute the optimization logic 
+After loading all data, you can execute the optimization logic 
 within your AIMMS model by calling the corresponding procedure.
 
 .. code-block:: python
     :linenos:
+    
+    # 4. Execute the AIMMS Optimization
+    # Calls the main procedure in AIMMS to solve the optimization problem.
+    aimms_model.MainExecution()
 
-    aimms_model.pr_GenRoutesSolve()
-
-This single line tells the AIMMS model to run its ``pr_GenRoutesSolve`` procedure, 
+This single line tells the AIMMS model to run its ``MainExecution`` procedure, 
 which typically contains the solver calls and other logic.
 
 Retrieving the Solution and Writing to Excel
@@ -157,8 +152,8 @@ Retrieving the Solution and Writing to Excel
 Once the solver finishes, you can retrieve the results from the AIMMS model and 
 write them to a new Excel workbook.
 
-Retrieving Cargo Data
-^^^^^^^^^^^^^^^^^^^^^^^^
+Retrieving Contract Allocation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``multi_data`` method retrieves data from multiple AIMMS identifiers at once. 
 
@@ -166,27 +161,20 @@ The ``multi_data`` method retrieves data from multiple AIMMS identifiers at once
     :linenos:
     :emphasize-lines: 3-5
 
-    # Retrieving the Cargo overview:
-    # Getting data from AIMMS model:
-    df_cargo_overview = aimms_model.multi_data(["i_act_cargo","mm::ep_calc_vesselOfCargo",
-        "mm::p_calc_totalCostPerCargo","mm::sp_calc_loadingTimePerCargo",
-        "mm::sp_calc_deleveringTimePerCargo"])
+    # Get the total contract fulfillment results.
+    df_contract_allocation = aimms_model.multi_data(["i_contractExport","p_totalGeneration"])
 
 The ``rename`` function then prepares the data for export.
 
 .. code-block:: python
     :linenos:
 
-    # Renaming columns Cargo overview for Excel Sheet:
-    df_cargo_overview.rename(columns={
-        'i_act_cargo'                        : 'Cargo',
-        'mm::ep_calc_vesselOfCargo'          : 'Vessel Used',
-        'mm::p_calc_totalCostPerCargo'       : 'Cargo Cost',
-        'mm::sp_calc_loadingTimePerCargo'    : 'Loading Time',
-        'mm::sp_calc_deleveringTimePerCargo' : 'Delivery Time'
-        },inplace=True)
+    # Rename columns for user-friendly export to Excel.
+    df_contract_allocation.rename(columns={
+        'i_contractExport'      : 'Contract',
+        'p_totalGeneration'     : 'Total Generation'
+        }, inplace=True)
 
-And similarly for the vessel and route information.
 
 Finally, use the ``ExcelWriter`` from ``pandas`` to save all your result ``DataFrames`` into a single Excel file, 
 with each ``DataFrame`` on its own sheet.
@@ -194,10 +182,10 @@ with each ``DataFrame`` on its own sheet.
 .. code-block:: python
     :linenos:
 
+    # Use ExcelWriter to write multiple DataFrames to separate sheets in a single file.
     with pd.ExcelWriter(excel_file_path, engine='openpyxl') as writer:
-        df_vessel_overview.to_excel(writer, sheet_name='Vessel Overview', index=False)
-        df_cargo_overview.to_excel( writer, sheet_name='Cargo Overview',  index=False)
-        df_route_overview.to_excel( writer, sheet_name='Route overview',  index=False)
+        df_producer_allocation.to_excel(writer, sheet_name='Allocation per Producer', index=False)
+        df_contract_allocation.to_excel(writer, sheet_name='Contract Allocation', index=False)
 
 
 .. seealso::

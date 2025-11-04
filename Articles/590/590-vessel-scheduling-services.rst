@@ -14,7 +14,7 @@ A service in an AIMMS model is defined simply by associating a service name with
 This article details the general process of service implementation in AIMMS:
 
 #. Defining and implementing the service procedure.
-#. Understanding the procedure's logic, focusing on achieving **statelessness** for reliable, concurrent execution.
+#. Understanding the procedure's logic, focusing on achieving statelessness for reliable, concurrent execution.
 #. Running and controlling the service in different environments (AIMMS IDE, ``AimmsCmd``, AIMMS Cloud).
 
 
@@ -68,7 +68,7 @@ Remarks:
 Ensuring Statelessness with ``pr_initTask``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When an application runs as a service, it's crucial that each request (or "task") runs independently. The procedure ``pr_initTask`` is executed at the start of every task to enforce **statelessness** by resetting the model identifiers.
+When an application runs as a service, it's crucial that each request (or "task") runs independently. The procedure ``pr_initTask`` is executed at the start of every task to enforce statelessness by resetting the model identifiers.
 
 The term **"Data Model"** refers to the core AIMMS identifiers (sets, parameters, variables, and constraints) that represent the objects in the real-world problem being modeled (e.g., ``s_cargoes``, ``s_vessels``). 
 These must be cleared before a new task begins. In contrast, "application management identifiers" (e.g., WebUI and PRO library identifiers, logging paths) should be left untouched.
@@ -158,7 +158,7 @@ Starting and Stopping the Service
 How you manage the service depends on the execution environment:
 
 .. list-table:: Service Management Across Environments
-   :widths: 20 45 35
+   :widths: 10 55 35
    :header-rows: 1
 
    * - Environment
@@ -167,7 +167,7 @@ How you manage the service depends on the execution environment:
    * - **AIMMS IDE**
      - Manually call ``dex::api::StartAPIService()`` and ``dex::api::StopAPIService()``.
      - For development and testing purposes.
-   * - **``AimmsCmd`` / Docker**
+   * - **AimmsCmd / Docker**
      - Use ``AimmsCmd --run-only dex::api::RESTServiceHandler ...``
      - Starts the service headless, providing fine control over resource management.
    * - **AIMMS Cloud**
@@ -263,7 +263,7 @@ Deployment
 Once your AIMMS project is complete, you deploy it using the AIMMS Developer environment by creating an end-user package (an ``.aimmspack`` file) and uploading it to the Cloud Portal.
 
 1.  Export: Use the AIMMS Developer menu (:menuselection:`File > Export End User Project...`) to create the ``.aimmspack`` file.
-2.  Publish: Log into the **AIMMS Cloud Portal**. In the Apps section, publish the new application version, providing the ``.aimmspack`` file.
+2.  Publish: Log into the AIMMS Cloud. In the Apps section, publish the new application version, providing the ``.aimmspack`` file.
 3.  Service Activation: Because the procedure ``pr_solveVesselSchedulingExcel`` has the ``dex::ServiceName`` attribute, the REST service is automatically exposed upon successful publication. The Cloud handles all necessary infrastructure setup, including load balancing and routing.
 
 Testing on the Cloud

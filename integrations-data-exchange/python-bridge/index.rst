@@ -10,6 +10,5 @@ Python-Bridge
    :titlesonly:
 
    /Articles/676/676-hello-world-python-bridge
-   /Articles/676/676-starting-with-python
    /Articles/676/676-running-aimms-app
    /Articles/676/676-leveraging-python-lib
