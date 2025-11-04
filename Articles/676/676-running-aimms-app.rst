@@ -99,7 +99,7 @@ renames the columns to match the corresponding AIMMS identifiers.
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 17
+    :emphasize-lines: 12
 
     # 1. Load and Assign Producer Data (i_producer, capacities)
     datainput_pd_producer = pd.read_excel(datainput, sheet_name='Producers')
@@ -159,7 +159,7 @@ The ``multi_data`` method retrieves data from multiple AIMMS identifiers at once
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 3-5
+    :emphasize-lines: 2
 
     # Get the total contract fulfillment results.
     df_contract_allocation = aimms_model.multi_data(["i_contractExport","p_totalGeneration"])
