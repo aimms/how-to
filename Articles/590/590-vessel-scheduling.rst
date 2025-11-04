@@ -343,7 +343,7 @@ Release Notes
 --------------------
 
 `v1.4 <https://github.com/aimms/vessel-scheduling/releases/tag/1.4>`_ (04/11/2025)
-    Added Python script to use searoute package for distance calculation instead of haversine formula.
+    Added Python script to use ``searoute`` package for distance calculation instead of haversine formula.
 
 `v1.3 <https://github.com/aimms/vessel-scheduling/releases/tag/1.3>`_ (07/10/2024)
     Fixing integration problems (import and export) when using the project on AIMMS PRO Portal.
