@@ -1,4 +1,4 @@
-Exposing the AIMMS Application as a REST Service
+Exposing the Vessel Scheduling as a REST Service
 ==================================================
 
 .. meta::

@@ -20,6 +20,7 @@ Integrations and Data Exchange
    databases/index
    python-bridge/index
    rest-api/index
+   headless-applications/index
    other-connectors/index
 
 
