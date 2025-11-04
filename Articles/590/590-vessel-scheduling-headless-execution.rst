@@ -5,12 +5,12 @@ Headless Execution with AIMMS Application
     :keywords: AIMMS, headless execution, AimmsCmd, Docker, REST service, automation, batch processing, SessionArgument, AIMMS Cloud
     :description: Comprehensive guide to setting up AIMMS headless execution using AimmsCmd on a local machine, within a Docker container, and via the automated AIMMS Cloud Tasks environment.
 
-**Headless execution** refers to running an application without a Graphical User Interface (GUI). 
+Headless execution refers to running an application without a Graphical User Interface (GUI). 
 This mode is essential for automation, batch processing, and deploying applications as services.
 
 Depending on your deployment environment, you can choose the best method for your AIMMS application:
 
-#. On a local machine (Windows/Linux) using ``AimmsCmd``.
+#. On a **local machine** (Windows/Linux) using ``AimmsCmd``.
 #. Inside a **Docker container** for portability and isolation.
 #. In the **AIMMS Cloud** for managed, scalable execution.
 
@@ -31,10 +31,10 @@ The ``AimmsCmd`` command line follows a specific structure:
 
 This structure maintains a clear order of arguments:
 
-1.  **AIMMS Command Options:** Optional, but critical for defining the execution. A common example is ``--run-only <procedure name>``.
-2.  **Project Name:** Mandatory (e.g., ``VesselScheduling.aimms``).
-3.  **Session Arguments:** Arguments passed to the AIMMS model, which are retrieved inside the application using the `SessionArgument <https://documentation.aimms.com/functionreference/system-interaction/invoking-actions/sessionargument.html>`_ function.
-4.  **Input/Output Redirection:** Used for sending commands to ``AimmsCmd`` and capturing logs.
+1.  AIMMS Command Options: Optional, but critical for defining the execution. A common example is ``--run-only <procedure name>``.
+2.  Project Name: Mandatory (e.g., ``VesselScheduling.aimms``).
+3.  Session Arguments: Arguments passed to the AIMMS model, which are retrieved inside the application using the `SessionArgument <https://documentation.aimms.com/functionreference/system-interaction/invoking-actions/sessionargument.html>`_ function.
+4.  Input/Output Redirection: Used for sending commands to ``AimmsCmd`` and capturing logs.
 
 **Example A: Single Run Procedure with Session Arguments**
 
@@ -65,7 +65,7 @@ Remarks:
 * Line 10: The procedure ``pr_solveModelSessionArguments`` handles the entire workflow (loading data, solving, saving results) using the two file paths provided as session arguments.
 * ``pushd`` / ``popd``: These commands ensure the AIMMS session's working directory is the project folder, simplifying file path management.
 
-**Example B: Using an ``AimmsCmd`` Script and File Redirection**
+**Example B: Using an AimmsCmd Script and File Redirection**
 
 This method uses file redirection (``<`` and ``>``) along with an ``AimmsCmd`` script (sometimes called a properties file) to control execution.
 
@@ -102,7 +102,7 @@ The input script ``single-run.properties`` contains a sequence of commands execu
 
 AIMMS can be run headless as a REST service using its built-in API handler. This makes the application available for remote, asynchronous calls.
 
-.. code-block:: none
+.. code-block:: bat
     :linenos:
 
     echo on
@@ -140,13 +140,14 @@ Preparing the Docker Image
 
 The setup for a Docker image requires four core components:
 
-* **AIMMS Executable/Installation:** Based on the official `aimms-eo <https://github.com/aimms/aimms-eo>`_ Docker image, which is parameterized for the AIMMS version and includes necessary software components.
-* **AIMMS License:** Must be accessible in the ``/data`` folder, usually via mounting or inclusion. For a network license, the ``license.cfg`` file contains the server information: ``1      network      <your license server>:3400``.
-* **AIMMS Application (Model):** Copied or mounted to the image's designated working folder, typically ``/model``. This folder is the standard location for the AIMMS project inside the Docker image and is set as the working directory using the Docker option ``-w /model``.
-* **Data (Input/Output & Logs):** Typically handled by mounted volumes as data varies per run.
-    * **Input Data** (e.g., CSV, Excel) is mapped to the ``/inputs`` volume.
-    * **Output Data** and **Logs** are mapped to the ``/outputs`` volume.
-    * **Logging Note:** If you include a custom ``LoggerConfig.xml``, ensure the file path redirects logs to the mounted volume, e.g., changing the file path value from ``log/aimms-log.txt`` to ``/outputs/aimms-log.txt``.
+* AIMMS Executable/Installation: Based on the official `aimms-eo <https://github.com/aimms/aimms-eo>`_ Docker image, which is parameterized for the AIMMS version and includes necessary software components.
+* AIMMS License: Must be accessible in the ``/data`` folder, usually via mounting or inclusion. For a network license, the ``license.cfg`` file contains the server information: ``1      network      <your license server>:3400``.
+* AIMMS Application (Model): Copied or mounted to the image's designated working folder, typically ``/model``. This folder is the standard location for the AIMMS project inside the Docker image and is set as the working directory using the Docker option ``-w /model``.
+* Data (Input/Output & Logs): Typically handled by mounted volumes as data varies per run.
+
+    * Input Data (e.g., CSV, Excel) is mapped to the ``/inputs`` volume.
+    * Output Data and **Logs** are mapped to the ``/outputs`` volume.
+    * Logging Note: If you include a custom ``LoggerConfig.xml``, ensure the file path redirects logs to the mounted volume, e.g., changing the file path value from ``log/aimms-log.txt`` to ``/outputs/aimms-log.txt``.
 
 Building the Image
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -178,11 +179,12 @@ Running AIMMS Inside the Image
 
 Assuming the license and model are baked into the image, and data is managed via mounted volumes, here are the three execution scenarios:
 
-**Example 1: Running a Single Procedure Directly**
+**Example A: Running a Single Procedure Directly**
 
 This is analogous to Example 'a' for local execution, using mounted volumes for data I/O.
 
 .. code-block:: bat
+    :linenos:
 
     echo on
 
@@ -196,11 +198,12 @@ This is analogous to Example 'a' for local execution, using mounted volumes for 
 
     pause
 
-**Example 2: Executing an ``AimmsCmd`` Script**
+**Example B: Executing an ``AimmsCmd`` Script**
 
 To correctly apply I/O redirection *inside* the container (not on the host), the ``AimmsCmd`` call must be wrapped in a shell command (e.g., using ``/bin/bash -c``).
 
 .. code-block:: bat
+    :linenos:
 
     echo on
 
@@ -224,11 +227,12 @@ Alternatively, you can place the wrapped command in a script file, like ``aimmsc
 Then run it from the host:
 ``docker run -i -v "%VS_INPUTS%:/inputs" -v "%VS_OUTPUTS%:/outputs" -w /model vesselscheduling:1.0.2.1 /bin/bash -c /model/aimmscmdrun.sh``
 
-**Example 3: Running as a REST Service**
+**Example C: Running as a REST Service**
 
 This starts the application as a long-running service inside the container, mapping the internal service port (default 12003) to a host port using the ``-p`` flag.
 
 .. code-block:: bat
+    :linenos:
 
     echo on
 
@@ -254,7 +258,9 @@ When an AIMMS application is published to the AIMMS Cloud, headless execution an
 
 You do not need to explicitly start a service (as with Docker or locally). When a task is posted to the application endpoint, the AIMMS Cloud automatically provisions resources, starts the project, handles the task, and manages the execution lifecycle.
 
-More information on this streamlined approach can be found in the `AIMMS Cloud Tasks documentation <https://documentation.aimms.com/cloud/tasks.html>`_.
+.. seealso::
+    
+    - `AIMMS Cloud Tasks documentation <https://documentation.aimms.com/cloud/tasks.html>`_.
 
 .. spelling:word-list::
     

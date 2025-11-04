@@ -114,7 +114,7 @@ The majority of the time is spent on route generation.
    Then there are five potential routes:
 
       #. ``vessel1_a1_a2``: With actions:
-      
+
          #. Sail to Caracas to Paramaribo.
          #. Load Cargo ``a1``.
          #. Sail to Sao Paolo.
@@ -148,6 +148,7 @@ The majority of the time is spent on route generation.
    (sailing to the loading location, perhaps waiting, sailing to the delivery location).
 
 
+|
 
 WebUI Features
 ---------------
@@ -330,17 +331,12 @@ To run the Python client, you will need to have Python installed, for this examp
 
 To deploy the application on AIMMS Cloud, a commercial license is needed.
 
-References
------------
+.. seealso::
 
-#.  Gustavo Diz, Luiz Felipe Scavarda, Roger Rocha, Silvio Hamacher (2014) Decision Support System for 
-PETROBRAS Ship Scheduling. Interfaces 44(6):555-566.
-
-#.  `Develop an AIMMS Service <https://how-to.aimms.com/C_Developer/Sub_Connectivity/sub_dataexchange/Sub_Develop_Service/index.html>`_
-
-#.  `A Python library to make it really easy to use AIMMS Cloud REST services <https://community.aimms.com/product-updates/a-python-library-to-make-it-really-easy-to-use-aimms-cloud-rest-services-1810>`_
-
-#.  `AIMMS command line options  <https://documentation.aimms.com/user-guide/miscellaneous/calling-aimms/aimms-command-line-options.html>`_ 
+   #. Reference: Gustavo Diz, Luiz Felipe Scavarda, Roger Rocha, Silvio Hamacher (2014) Decision Support System for PETROBRAS Ship Scheduling. Interfaces 44(6):555-566.
+   #. `Develop an AIMMS Service <https://how-to.aimms.com/C_Developer/Sub_Connectivity/sub_dataexchange/Sub_Develop_Service/index.html>`_
+   #. `A Python library to make it really easy to use AIMMS Cloud REST services <https://community.aimms.com/product-updates/a-python-library-to-make-it-really-easy-to-use-aimms-cloud-rest-services-1810>`_
+   #. `AIMMS command line options  <https://documentation.aimms.com/user-guide/miscellaneous/calling-aimms/aimms-command-line-options.html>`_ 
 
 
 Release Notes
