@@ -153,7 +153,7 @@ The majority of the time is spent on route generation.
 Orchestrating External Python Libraries from AIMMS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This aplication also leverages the rich Python ecosystem from within an AIMMS application via the **AIMMS Python-Bridge**. 
+This application also leverages the rich Python ecosystem from within an AIMMS application via the **AIMMS Python-Bridge**. 
 This capability significantly extends the model's functionality by integrating specialized third-party libraries. 
 
 This example focuses on using the ``searoute`` library.
