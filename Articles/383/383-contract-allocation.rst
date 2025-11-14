@@ -85,6 +85,9 @@ This AIMMS project illustrates the use of a semi-continuous variable. A semi-con
 Language 
 --------
 
+Integrating Data with DEX
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 In this example, there are two main ways to import data: by a custom Excel file, and by a pre-defined Excel which is currently on the project's main directory. 
 You can choose which one to use on any page trough the Page Action buttons.
 
@@ -179,6 +182,21 @@ For exporting the results Excel, we do something similar:
 
 .. seealso::
    To understand in depth check out `DEX documentation <https://documentation.aimms.com/dataexchange/index.html>`_.
+
+Headless Orchestration with Python-Bridge
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This application also leverages the **AIMMS Python-Bridge** which enables running this model as a headless optimization service within a larger data pipeline. 
+This approach allows Python scripts to fully orchestrate the optimization process by:
+
+- **Establishing a connection** using the ``aimmspy`` library.
+- **Passing input data** from Python (e.g., using **Pandas DataFrames**) to the AIMMS model using ``multi_assign``.
+- **Executing the solver** by calling the main AIMMS procedure (e.g., ``aimms_model.MainExecution()``).
+- **Retrieving the calculated results** back into Python using ``multi_data``.
+
+.. seealso::
+   
+   The complete guide, including installation and code examples, is available in the article: :doc:`Orchestrating Contract Allocation AIMMS App from Python <../680/680-running-aimms-app>`.
 
 WebUI Features
 --------------

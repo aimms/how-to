@@ -150,6 +150,33 @@ The majority of the time is spent on route generation.
 
 |
 
+Orchestrating External Python Libraries from AIMMS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This aplication also leverages the rich Python ecosystem from within an AIMMS application via the **AIMMS Python-Bridge**. 
+This capability significantly extends the model's functionality by integrating specialized third-party libraries. 
+
+This example focuses on using the ``searoute`` library.
+Instead of relying on fast but inaccurate geometric approximations (like Haversine distance), the Python library calculates **realistic maritime distances** and the actual GPS waypoints.
+
+The data exchange is robustly handled using the ``pandas`` library:
+
+1.  Python retrieves required data (e.g., harbor coordinates) from AIMMS into a DataFrame using ``aimms_model.multi_data()``.
+2.  Python processes the data (e.g., iterates through pairs to compute the full distance matrix).
+3.  Python sends the structured results (the computed distances and waypoints) back to AIMMS parameters using a DataFrame and the ``aimms_model.multi_assign()`` function.
+
+This seamless integration enhances optimization quality and enables superior visual insights by allowing the AIMMS WebUI to display the geographically accurate routes.
+
+.. image:: images/searoute-integration.png
+   :align: center
+
+|
+
+.. seealso::
+
+   The complete guide, including installation and code examples, is available in the article: :doc:`../676/676-leveraging-python-lib`.
+
+
 WebUI Features
 ---------------
 
