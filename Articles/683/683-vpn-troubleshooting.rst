@@ -72,7 +72,6 @@ Action/Resolution
 Problem 4: Intermittent VPN Connection Drops
 ----------------------------------------------
 
-
 Drops indicate configuration mismatches or underlying network instability.
 
 Possible Causes
