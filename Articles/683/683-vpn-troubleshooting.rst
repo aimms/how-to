@@ -2,9 +2,8 @@ VPN Troubleshooting Guide (Customer Side)
 ============================================
 
 .. meta::
-    :keywords: AIMMS, headless execution, AimmsCmd, Docker, REST service, automation, batch processing, SessionArgument, AIMMS Cloud
-    :description: Comprehensive guide to setting up AIMMS headless execution using AimmsCmd on a local machine, within a Docker container, and via the automated AIMMS Cloud Tasks environment.
-
+    :keywords: VPN, troubleshooting, Site-to-Site, Azure, IKE, IPsec, NAT, firewall, routing, lifetime, Virtual Network Gateway
+    :description: Guide for customers to diagnose and resolve common Site-to-Site VPN connectivity issues with Azure Virtual Network Gateway, categorized by IKE, IPsec, and post-tunnel failures.
 
 This troubleshooting guide is designed to help customers diagnose and resolve common issues when connecting to our 
 Azure Virtual Network Gateway via Site-to-Site VPN. 
