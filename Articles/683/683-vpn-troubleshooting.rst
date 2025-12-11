@@ -87,7 +87,7 @@ Action/Resolution
 * Check Stability: Investigate high packet loss or latency spikes toward the Azure VPN Gateway IP.
 * Check Device: Review CPU/memory utilization and performance logs on your on-premise VPN device.
 
-Problem: Tunnel is Up, but Traffic is Not Flowing
+Problem 5: Tunnel is Up, but Traffic is Not Flowing
 ------------------------------------------------------
 
 The security association is established, but data packets are blocked by routing or firewall rules.
