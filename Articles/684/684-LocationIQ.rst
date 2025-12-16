@@ -3,12 +3,39 @@ LocationIQ Integration with AIMMS
 
 :download:`AIMMS 25.9 project download <model/ht684LocationIQ.zip>` 
 
-The legacy AIMMS function GeoFindCoordinates is constrained by its reliance on Nominatim, 
+The legacy AIMMS function 
+`GeoFindCoordinates <https://documentation.aimms.com/functionreference/system-interaction/environment-functions/geofindcoordinates.html>`_ 
+is constrained by its reliance on Nominatim, 
 which enforces strict rate limits, typically permitting at most one GPS coordinate request per second. 
 This low limit can significantly impede performance for batch geocoding tasks.
 
-LocationIQ provides a robust, high-performance alternative, offering faster access and 
-significantly higher rate limits, 
+To implement this in AIMMS, we need an external service to translate addresses into coordinates. 
+While this article uses LocationIQ as a primary example, it is one of many available options.
+
+The choice of geocoding provider often depends on specific needs regarding data coverage, 
+pricing, or terms of service. For the purposes of this demonstration, 
+we utilize LocationIQ due to its ease of setup and robust documentation. 
+Users requiring different datasets or higher rate limits may consider various alternatives; 
+fortunately, since AIMMS handles HTTP requests generically, 
+the implementation steps remain largely the same regardless of the backend service chosen.
+
+.. note:: 
+
+    **Alternative Geocoding Providers**
+
+    While this guide uses LocationIQ, the following services offer similar REST API functionality 
+    that can be integrated with AIMMS:
+
+    *   `Google Maps Platform <https://mapsplatform.google.com>`_
+    *   `Mapbox <https://www.mapbox.com>`_ 
+    *   `OpenCage <https://opencagedata.com>`_
+    *   `Bing Maps <https://www.microsoft.com/maps>`_
+    *   `HERE Technologies <https://www.here.com>`_
+    *   `TomTom <https://developer.tomtom.com>`_
+    *   `Nominatim (OpenStreetMap) <https://nominatim.org>`_
+
+`LocationIQ <https://locationiq.com/>`_ provides a robust, high-performance alternative, 
+offering faster access and significantly higher rate limits, 
 even on its free tier, making it suitable for high-volume geocoding operations.
 
 Through AIMMS Dex (`Data Exchange Library <https://documentation.aimms.com/dataexchange/index.html>`_), 
@@ -16,6 +43,9 @@ the LocationIQ services are easily accessed and managed asynchronously.
 
 To integrate, you must first obtain an access key and then structure your AIMMS application 
 to construct the API URL, execute the HTTP request, and subsequently parse the JSON feedback.
+
+Geocoding service choice
+------------------------
 
 Interaction
 --------------
