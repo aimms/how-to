@@ -44,7 +44,7 @@ In the enclosed AIMMS App, open the page ``liq::accesskey``
     :align: center
 
 
-Get coords from an Address
+Get coordinates from an Address
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
 The Geocoding endpoint (/v1/search) is used to convert a human-readable address string into geographic coordinates 
@@ -62,7 +62,7 @@ Call service: Constructing the API Request
 The API call is constructed as a standard HTTP GET request. 
 The URL must contain the required parameters, including the Access Token, 
 the address query (q), and the desired format (format=json). 
-The parameter _sp_reg may be used to specify the regional endpoint (e.g., us1 or eu1).
+The parameter ``_sp_reg`` may be used to specify the regional endpoint (e.g., ``us1`` or ``eu1``).
 
 Create the URL according to LocationIQ documentation:
 
@@ -74,8 +74,8 @@ Create the URL according to LocationIQ documentation:
         formatString("key=%s&",sp_accessToken)+
         formatString("q=%s&format=json&",_sp_query);
 
-Make the call using dex::client::NewRequest. 
-he asynchronous nature of the call is managed by specifying a callback procedure (_ep_callback) 
+Make the call using `dex::client::NewRequest <https://documentation.aimms.com/dataexchange/api.html#dex-client-NewRequest>`_. 
+he asynchronous nature of the call is managed by specifying a callback procedure (``_ep_callback``) 
 that will process the response upon completion.
 
 A request tag is added, which allows the subsequent waiting mechanism 
@@ -102,8 +102,8 @@ Response file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
 The LocationIQ Geocoding API returns a JSON array containing one or more matching location objects. 
-Each object provides detailed information, including the calculated latitude (lat) and longitude (lon), 
-a bounding box, a human-readable display_name, and metadata like osm_id. 
+Each object provides detailed information, including the calculated latitude and longitude, 
+a bounding box, a human-readable ``display_name``, and metadata like ``osm_id``. 
 The response is saved to the specified responseFile.
 
 .. code-block:: json 
@@ -147,7 +147,7 @@ ObjectMapping: The objects within the array are mapped iteratively using the AIM
 
 place_id: The unique identifier for the location is stored in the AIMMS index ``liq::i_placeId``.
 
-lat and lon: The latitude and longitude values are stored in the AIMMS parameters ``liq::p_Latitude`` and ``liq::p_Longitude``, 
+``lat`` and ``lon``: The latitude and longitude values are stored in the AIMMS parameters ``liq::p_Latitude`` and ``liq::p_Longitude``, 
 indexed by both the request result (``liq::i_result``) and the place ID (``liq::i_placeId``).
 
 .. code-block:: xml 
@@ -173,7 +173,7 @@ It checks the HTTP status code to ensure the request was successful before proce
 *   If the ``statusCode`` is 200 (Success):
 
     * The `dex::ReadFromFile <https://documentation.aimms.com/dataexchange/api.html#dex-ReadFromFile>`_ 
-      function uses the defined mapping (getLocationJSON) to import the coordinates and identifiers into the AIMMS parameters.
+      function uses the defined mapping (``getLocationJSON``) to import the coordinates and identifiers into the AIMMS parameters.
     * The code then typically extracts the latitude and longitude from the first result 
       (``_ep_first_res``) in the returned list and assigns them to global scalar parameters 
       (``p_globLat``, ``p_globLon``) for immediate use.
@@ -257,3 +257,10 @@ to achieve higher rate limits and asynchronous processing.
 The guide covers obtaining an API access key, constructing RESTful GET requests, 
 mapping JSON responses to AIMMS identifiers, and implementing callback procedures to 
 handle both successful data retrieval and potential communication errors.
+
+.. spelling:word-list::
+    
+    geocoding
+    dex
+    responseFile
+    statusCode
