@@ -9,6 +9,7 @@ Rest API
    :maxdepth: 1
    :titlesonly:
 
+   /Articles/684/684-LocationIQ
    /Articles/599/599-Integrating-Python-with-AIMMS
    /Articles/544/544-dex-and-oauth
    /Articles/658/658-plet-introduction

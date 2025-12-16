@@ -1,0 +1,5 @@
+<AimmsJSONMapping>
+    <ObjectMapping>
+        <ValueMapping name="error" maps-to="liq::sp_locationIQ_error_message"/>
+    </ObjectMapping>
+</AimmsJSONMapping>
