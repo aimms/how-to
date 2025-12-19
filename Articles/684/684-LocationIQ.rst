@@ -1,14 +1,19 @@
 LocationIQ Integration with AIMMS
 =====================================
 
-.. admonition:: Test
+.. metadata::
+    :keywords: AIMMS, LocationIQ, Geocoding, REST API, DEX library, asynchronous, JSON mapping, HTTP GET, error handling, GPS coordinates
+    :description: Learn to integrate LocationIQ with AIMMS using the DEX library for high-performance, asynchronous geocoding, JSON data mapping, and robust error handling.
 
-    This article outlines the integration of the LocationIQ API within AIMMS to perform high-performance forward geocoding. 
-    It demonstrates how to replace the legacy GeoFindCoordinates function with AIMMS Data Exchange (DEX) to achieve higher rate limits and asynchronous processing. 
-    The guide covers obtaining an API access key, constructing RESTful GET requests, 
-    mapping JSON responses to AIMMS identifiers, and implementing callback procedures to handle both successful data retrieval and potential communication errors.
+.. admonition:: Summary
 
+    In this article, you will learn how to bypass the performance bottlenecks of legacy geocoding in AIMMS. By the end of this guide, you will be able to:
 
+    * Implement a High-Performance API: Transition from the rate-limited legacy ``GeoFindCoordinates`` function to the robust LocationIQ REST service.
+    * Leverage Asynchronous Processing: Use the AIMMS Data Exchange (DEX) library to perform geocoding requests without freezing the user interface.
+    * Master Data Transformation: Construct valid RESTful GET requests, define XML mappings to translate JSON responses into AIMMS identifiers, and implement callback procedures.
+    * Build Robust Error Handling: Detect and manage both network-level (CURL) and server-side API errors effectively.
+    
 The legacy AIMMS function `GeoFindCoordinates <https://documentation.aimms.com/functionreference/system-interaction/environment-functions/geofindcoordinates.html>`_ 
 is constrained by its reliance on Nominatim. Nominatim enforces strict rate limits, typically 
 permitting at most one GPS coordinate request per second, which can significantly impede performance 
