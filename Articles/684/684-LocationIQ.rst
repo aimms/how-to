@@ -1,116 +1,115 @@
 LocationIQ Integration with AIMMS
 =====================================
 
-:download:`AIMMS 25.9 project download <model/ht684LocationIQ.zip>` 
+.. admonition:: Test
 
-The legacy AIMMS function 
-`GeoFindCoordinates <https://documentation.aimms.com/functionreference/system-interaction/environment-functions/geofindcoordinates.html>`_ 
-is constrained by its reliance on Nominatim, 
-which enforces strict rate limits, typically permitting at most one GPS coordinate request per second. 
-This low limit can significantly impede performance for batch geocoding tasks.
+    This article outlines the integration of the LocationIQ API within AIMMS to perform high-performance forward geocoding. 
+    It demonstrates how to replace the legacy GeoFindCoordinates function with AIMMS Data Exchange (DEX) to achieve higher rate limits and asynchronous processing. 
+    The guide covers obtaining an API access key, constructing RESTful GET requests, 
+    mapping JSON responses to AIMMS identifiers, and implementing callback procedures to handle both successful data retrieval and potential communication errors.
 
-To implement this in AIMMS, we need an external service to translate addresses into coordinates. 
-While this article uses LocationIQ as a primary example, it is one of many available options.
+.. note::
+    :collapsible:
 
-The choice of geocoding provider often depends on specific needs regarding data coverage, 
-pricing, or terms of service. For the purposes of this demonstration, 
-we utilize LocationIQ due to its ease of setup and robust documentation. 
-Users requiring different datasets or higher rate limits may consider various alternatives; 
-fortunately, since AIMMS handles HTTP requests generically, 
-the implementation steps remain largely the same regardless of the backend service chosen.
+    This article outlines the integration of the LocationIQ API within AIMMS to perform high-performance forward geocoding. 
+    It demonstrates how to replace the legacy GeoFindCoordinates function with AIMMS Data Exchange (DEX) to achieve higher rate limits and asynchronous processing. 
+    The guide covers obtaining an API access key, constructing RESTful GET requests, 
+    mapping JSON responses to AIMMS identifiers, and implementing callback procedures to handle both successful data retrieval and potential communication errors.
 
-.. note:: 
+The legacy AIMMS function `GeoFindCoordinates <https://documentation.aimms.com/functionreference/system-interaction/environment-functions/geofindcoordinates.html>`_ 
+is constrained by its reliance on Nominatim. Nominatim enforces strict rate limits, typically 
+permitting at most one GPS coordinate request per second, which can significantly impede performance 
+for batch geocoding tasks.
 
-    **Alternative Geocoding Providers**
+To overcome these limitations, AIMMS applications can utilize external REST services. 
+While this article features LocationIQ as the primary example, the implementation logic 
+remains consistent across most modern geocoding providers.
 
-    While this guide uses LocationIQ, the following services offer similar REST API functionality 
-    that can be integrated with AIMMS:
+Please use this example to follow along this article:
+    
+    :download:`AIMMS 25.9 project download <model/ht684LocationIQ.zip>` 
 
-    *   `Google Maps Platform <https://mapsplatform.google.com>`_
-    *   `Mapbox <https://www.mapbox.com>`_ 
-    *   `OpenCage <https://opencagedata.com>`_
-    *   `Bing Maps <https://www.microsoft.com/maps>`_
-    *   `HERE Technologies <https://www.here.com>`_
-    *   `TomTom <https://developer.tomtom.com>`_
-    *   `Nominatim (OpenStreetMap) <https://nominatim.org>`_
+Geocoding Service Selection
+---------------------------
 
-`LocationIQ <https://locationiq.com/>`_ provides a robust, high-performance alternative, 
-offering faster access and significantly higher rate limits, 
-even on its free tier, making it suitable for high-volume geocoding operations.
+The choice of geocoding provider depends on data coverage requirements, pricing, and terms of service. 
+We utilize LocationIQ for this demonstration due to its ease of setup, robust documentation, 
+and generous free-tier rate limits.
 
-Through AIMMS Dex (`Data Exchange Library <https://documentation.aimms.com/dataexchange/index.html>`_), 
-the LocationIQ services are easily accessed and managed asynchronously.
+.. note::
 
-To integrate, you must first obtain an access key and then structure your AIMMS application 
-to construct the API URL, execute the HTTP request, and subsequently parse the JSON feedback.
+    Since AIMMS handles HTTP requests generically via the Data Exchange library, you can adapt 
+    this approach for other services:
 
-Geocoding service choice
-------------------------
+    * `Google Maps Platform <https://mapsplatform.google.com>`_
+    * `Mapbox <https://www.mapbox.com>`_ 
+    * `OpenCage <https://opencagedata.com>`_
+    * `Bing Maps <https://www.microsoft.com/maps>`_
+    * `HERE Technologies <https://www.here.com>`_
+    * `TomTom <https://developer.tomtom.com>`_
 
-Interaction
---------------
+By using the `AIMMS Data Exchange (DEX) Library <https://documentation.aimms.com/dataexchange/index.html>`_, these services are accessed asynchronously, 
+ensuring the user interface remains responsive during network operations.
 
-Obtaining Access Token
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+Prerequisites and Configuration
+-------------------------------
 
-Your Access Token is required for authentication with the LocationIQ API. 
-This token uniquely identifies your application and is used to monitor your usage limits
-and `obtained at <https://my.locationiq.com/dashboard#accesstoken>`_
+Obtaining an Access Token
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To authenticate with the LocationIQ API, you must obtain a unique Access Token. 
+This token identifies your application and monitors usage limits. You can generate one at the 
+`LocationIQ Dashboard <https://my.locationiq.com/dashboard#accesstoken>`_.
 
 .. image:: images/LocationIQ-dashboard.png
     :align: center
 
+|
 
-Specify Access Token
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+Specifying the Token in AIMMS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once you have your token, you must store it within your AIMMS application. 
-In the provided AIMMS App, the token is entered on the dedicated configuration page,
-which stores the value in the scalar parameter ``sp_accessToken``.
+Once obtained, the token must be stored within your AIMMS application. In the provided 
+example project, the token is entered on the configuration page and stored in the 
+scalar parameter ``sp_accessToken``.
 
-In the enclosed AIMMS App, open the page ``liq::accesskey``
+In the enclosed AIMMS App, navigate to the page: ``liq::accesskey``.
 
 .. image:: images/libLocationIQ-ask-accesskey.png
     :align: center
 
+|
 
-Get coordinates from an Address
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+Implementation Steps
+--------------------
 
-The Geocoding endpoint (/v1/search) is used to convert a human-readable address string into geographic coordinates 
-(Latitude and Longitude). This process is known as forward geocoding.
+The integration follows a three-step process: constructing the request, mapping the JSON response, 
+and handling the result via a callback.
+
+Constructing the API Request
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Geocoding endpoint (``/v1/search``) converts a human-readable address into geographic 
+coordinates (Latitude and Longitude). This process is known as forward geocoding.
 
 .. image:: images/ask-address-to-det-GPS-coords.png
     :align: center
 
-AIMMS Client definition
--------------------------
+|
 
-Call service: Constructing the API Request
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
-
-The API call is constructed as a standard HTTP GET request. 
-The URL must contain the required parameters, including the Access Token, 
-the address query (q), and the desired format (format=json). 
-The parameter ``_sp_reg`` may be used to specify the regional endpoint (e.g., ``us1`` or ``eu1``).
-
-Create the URL according to LocationIQ documentation:
+The API call is constructed as a standard HTTP GET request. The URL must include the Access Token, 
+the query string (``q``), and the output format (``format=json``).
 
 .. code-block:: aimms 
     :linenos:
 
     _sp_url := 
-        formatString("https://%s.locationiq.com/v1/search?" , _sp_reg)+
-        formatString("key=%s&",sp_accessToken)+
-        formatString("q=%s&format=json&",_sp_query);
+        formatString("https://%s.locationiq.com/v1/search?" , _sp_reg) +
+        formatString("key=%s&", sp_accessToken) +
+        formatString("q=%s&format=json&", _sp_query);
 
-Make the call using `dex::client::NewRequest <https://documentation.aimms.com/dataexchange/api.html#dex-client-NewRequest>`_. 
-he asynchronous nature of the call is managed by specifying a callback procedure (``_ep_callback``) 
-that will process the response upon completion.
-
-A request tag is added, which allows the subsequent waiting mechanism 
-to filter and only wait for events related to this specific request, 
-improving application responsiveness.
+The request is executed using ``dex::client::NewRequest``. We specify a response file 
+and an asynchronous callback (``_ep_callback``).
 
 .. code-block:: aimms 
     :linenos:
@@ -128,13 +127,10 @@ improving application responsiveness.
     dex::client::AddRequestTag(_sp_theRequest, _sp_theRequest);
     dex::client::PerformRequest(_sp_theRequest);
 
-Response file 
+The JSON Response Structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
-The LocationIQ Geocoding API returns a JSON array containing one or more matching location objects. 
-Each object provides detailed information, including the calculated latitude and longitude, 
-a bounding box, a human-readable ``display_name``, and metadata like ``osm_id``. 
-The response is saved to the specified responseFile.
+The API returns a JSON array. Each object in the array represents a matching location with its latitude and longitude.
 
 .. code-block:: json 
     :linenos:
@@ -162,23 +158,11 @@ The response is saved to the specified responseFile.
         { "...":"..." }
     ]
 
+Mapping JSON to AIMMS Identifiers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Mapping to read it back:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-There are two indices here, one for the list, and one to identify items themselves.
-
-The AimmsJSONMapping structure instructs the ``dex::ReadFromFile`` function on 
-how to convert the received JSON data into AIMMS identifiers.
-
-ArrayMapping: Specifies that the root element (the list [...]) is an array.
-
-ObjectMapping: The objects within the array are mapped iteratively using the AIMMS index ``liq::i_result``.
-
-place_id: The unique identifier for the location is stored in the AIMMS index ``liq::i_placeId``.
-
-``lat`` and ``lon``: The latitude and longitude values are stored in the AIMMS parameters ``liq::p_Latitude`` and ``liq::p_Longitude``, 
-indexed by both the request result (``liq::i_result``) and the place ID (``liq::i_placeId``).
+The AimmsJSONMapping instructs ``dex::ReadFromFile`` how to translate the JSON data. 
+The root array maps to the AIMMS index ``liq::i_result``, and specific values are bound to ``liq::i_placeId``, ``liq::p_Latitude``, and ``liq::p_Longitude``.
 
 .. code-block:: xml 
     :linenos:
@@ -193,26 +177,23 @@ indexed by both the request result (``liq::i_result``) and the place ID (``liq::
         </ArrayMapping>
     </AimmsJSONMapping>
 
-Callback
+The Callback Procedure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
-The callback procedure, specified via ``_ep_callback``, is automatically executed once 
-the HTTP request completes. 
-It checks the HTTP status code to ensure the request was successful before processing the data.
+The callback procedure, specified via ``_ep_callback``, is automatically executed once the HTTP request completes. 
+It acts as the "bridge" between the external JSON file and your AIMMS model logic.
 
-*   If the ``statusCode`` is 200 (Success):
+The logic follows these steps:
 
-    * The `dex::ReadFromFile <https://documentation.aimms.com/dataexchange/api.html#dex-ReadFromFile>`_ 
-      function uses the defined mapping (``getLocationJSON``) to import the coordinates and identifiers into the AIMMS parameters.
-    * The code then typically extracts the latitude and longitude from the first result 
-      (``_ep_first_res``) in the returned list and assigns them to global scalar parameters 
-      (``p_globLat``, ``p_globLon``) for immediate use.
+* Success Handling (Status ``200``):
+    * The `dex::ReadFromFile <https://documentation.aimms.com/dataexchange/api.html#dex-ReadFromFile>`_ function uses the defined mapping (``getLocationJSON``) to parse the response file and populate the indexed parameters ``p_latitude`` and ``p_longitude``.
+    * Since the API can return multiple matches, the code typically isolates the first result (the most relevant match).
+    * The coordinates from this first result are then assigned to global scalar parameters (``p_globLat``, ``p_globLon``) for immediate use in the model or on a map UI.
 
-*   If the statusCode indicates an error (e.g., 401 Unauthorized, 403 Forbidden/Rate Limited), 
-    an appropriate error handling section, not detailed here, should be executed to alert 
-    the user or log the issue.
+* Error Handling:
+    * If the statusCode indicates a failure (e.g., ``401`` for an invalid key or ``429`` for rate limiting), the execution jumps to an error handling routine to alert the user.
 
-The callback routine that captures and transforms the response.
+The following callback routine captures and transforms the response:
 
 .. code-block:: aimms 
     :linenos:
@@ -232,16 +213,10 @@ The callback routine that captures and transforms the response.
     else
         ! Error handling.
 
-Error handling
-^^^^^^^^^^^^^^^^^^^^^
+Error Handling
+--------------
 
-Especially with Client Server communication, errors may occur:
-
-*   Network connectivity issues
-*   Providing an illegal Access Token
-*   Asking location of an address that does not exist
-
-Code that handles such errors is provided below:
+When communicating with external APIs, it is essential to handle potential network issues or invalid queries.
 
 .. code-block:: aimms 
     :linenos:
@@ -273,20 +248,9 @@ Code that handles such errors is provided below:
 
 Remarks:
 
-*   Lines 3-5: When the statusCode is 0, the server isn't reached and CURL provides error details via `dex::client::GetErrorMessage <https://documentation.aimms.com/dataexchange/api.html#dex-client-GetErrorMessage>`_
-*   Lines 10-17: With a valid statusCode, the error message is read back from the server.  
-    The filename used for that is the same as for the requested response, but uses a different JSON.
-    All the information is put into the error message and returned.
+* Lines 3-5: Handles cases where the server cannot be reached (CURL errors).
 
-Summary
-----------
-
-This article outlines the integration of the LocationIQ API within AIMMS to perform high-performance forward geocoding. 
-It demonstrates how to replace the legacy GeoFindCoordinates function with AIMMS Data Exchange (DEX) 
-to achieve higher rate limits and asynchronous processing. 
-The guide covers obtaining an API access key, constructing RESTful GET requests, 
-mapping JSON responses to AIMMS identifiers, and implementing callback procedures to 
-handle both successful data retrieval and potential communication errors.
+* Lines 10-17: Handles server-side errors (e.g., ``401`` Unauthorized) by reading the error feedback from the JSON response.
 
 .. spelling:word-list::
     
@@ -294,3 +258,6 @@ handle both successful data retrieval and potential communication errors.
     dex
     responseFile
     statusCode
+    LocationIQ
+    integrations
+    scalable
