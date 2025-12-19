@@ -8,21 +8,6 @@ LocationIQ Integration with AIMMS
     The guide covers obtaining an API access key, constructing RESTful GET requests, 
     mapping JSON responses to AIMMS identifiers, and implementing callback procedures to handle both successful data retrieval and potential communication errors.
 
-.. quote::
-
-    "Not all those who wander are lost."  
-    ― J.R.R. Tolkien, The Fellowship of the Ring
-
-.. succinctly::
-
-    Geocoding is the process of converting human-readable addresses into geographic coordinates (latitude and longitude). 
-    This functionality is essential for applications involving mapping, location-based services, and spatial analysis.
-
-.. question:: Why Use LocationIQ with AIMMS?
-    :collapsible:
-
-    Test
-
 
 The legacy AIMMS function `GeoFindCoordinates <https://documentation.aimms.com/functionreference/system-interaction/environment-functions/geofindcoordinates.html>`_ 
 is constrained by its reliance on Nominatim. Nominatim enforces strict rate limits, typically 
