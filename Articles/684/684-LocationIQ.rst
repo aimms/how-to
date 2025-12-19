@@ -1,7 +1,7 @@
 LocationIQ Integration with AIMMS
 =====================================
 
-.. metadata::
+.. meta::
     :keywords: AIMMS, LocationIQ, Geocoding, REST API, DEX library, asynchronous, JSON mapping, HTTP GET, error handling, GPS coordinates
     :description: Learn to integrate LocationIQ with AIMMS using the DEX library for high-performance, asynchronous geocoding, JSON data mapping, and robust error handling.
 
