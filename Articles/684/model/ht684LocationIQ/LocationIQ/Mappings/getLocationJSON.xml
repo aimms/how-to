@@ -1,0 +1,9 @@
+<AimmsJSONMapping>
+	<ArrayMapping>
+		<ObjectMapping iterative-binds-to="liq::i_result">
+			<ValueMapping name="place_id" binds-to="liq::i_placeId"/>
+			<ValueMapping name="lat" maps-to="liq::p_Latitude(liq::i_result,liq::i_placeId)"/>
+			<ValueMapping name="lon" maps-to="liq::p_Longitude(liq::i_result,liq::i_placeId)"/>
+		</ObjectMapping>
+	</ArrayMapping>
+</AimmsJSONMapping>

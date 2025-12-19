@@ -12,5 +12,6 @@ Rest API
    /Articles/599/599-Integrating-Python-with-AIMMS
    /Articles/544/544-dex-and-oauth
    /Articles/658/658-plet-introduction
+   /Articles/684/684-LocationIQ
    develop-service/index
    open-api/index

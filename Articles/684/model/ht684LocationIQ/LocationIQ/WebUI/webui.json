@@ -1,0 +1,106 @@
+{
+  "application": {
+    "aimms.widget.type": {
+      "literal": "application"
+    },
+    "browser.language": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserLanguage"
+        ]
+      }
+    },
+    "browser.name": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browser.timezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
+    "ignoredst": {
+      "aimms": {
+        "contents": [
+          "webui::IgnoreDST"
+        ]
+      }
+    },
+    "pages": {
+      "literal": {
+        "name": "root",
+        "slug": "root",
+        "children": [
+          {
+            "name": "LocationIQ",
+            "slug": "liq::locationiq",
+            "children": [
+              {
+                "name": "accesskey",
+                "type": "pagev2-grid",
+                "slug": "liq::new_page",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "theme.classic": {
+      "literal": "NOT_ALLOWED"
+    },
+    "timezone": {
+      "aimms": {
+        "contents": [
+          "webui::DisplayTimeZone"
+        ]
+      }
+    }
+  },
+  "version": "4.67.0",
+  "pages/new_page": {
+    "bindings": {
+      "literal": [
+        {
+          "widgetUri": "liq::accesskeyscalar",
+          "gridArea": "area-a",
+          "dndId": "Unassigned widgetsliq::accesskeyscalar"
+        }
+      ]
+    },
+    "widgets": {
+      "literal": [
+        {
+          "uri": "liq::accesskeyscalar",
+          "layoutInfo": {
+            "width": "2",
+            "height": "1"
+          }
+        }
+      ]
+    }
+  },
+  "widgets/accesskeyscalar": {
+    "aimms.widget.type": {
+      "literal": "scalar"
+    },
+    "contents": {
+      "aimms": {
+        "contents": [
+          "liq::sp_accessToken"
+        ]
+      }
+    },
+    "name": {
+      "literal": "accesskeyscalar"
+    },
+    "views": {
+      "literal": {}
+    }
+  }
+}
