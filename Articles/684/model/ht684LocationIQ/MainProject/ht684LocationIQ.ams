@@ -10,7 +10,7 @@ Model Main_ht684LocationIQ {
 			BaseUnit: s;
 			Conversions: minute->s : #-># * 60;
 			Comment: {
-				"Expresses the value for the duration of periods.
+				"Expresses the value for the duration of periods."
 			}
 		}
 	}
