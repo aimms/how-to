@@ -7,6 +7,78 @@ LibraryModule LocationIQ {
 		Procedure pr_GeoFindCoordinates {
 			Arguments: (address,latitude,longitude);
 			Body: {
+				block
+					CurrentErrorMessage := "" ;
+					pr_workGeoFindCoordinates(address,latitude,longitude);
+				onerror _ep_err do
+					if CurrentErrorMessage then
+						CurrentErrorMessage += "\n" + errh::Message(_ep_err);
+					else
+						CurrentErrorMessage := errh::Message(_ep_err);
+					endif ;
+					errh::MarkAsHandled(_ep_err);
+				endblock ;
+			}
+			StringParameter address {
+				Property: Input;
+			}
+			Parameter latitude {
+				Property: Output;
+			}
+			Parameter longitude {
+				Property: Output;
+			}
+			ElementParameter _ep_err {
+				Range: errh::PendingErrors;
+			}
+		}
+		StringParameter sp_req_address;
+		ElementParameter _ep_statusCode {
+			Range: dex::HTTPStatusCodes;
+		}
+		Parameter p_globLat;
+		Parameter p_globLon;
+		Set s_results {
+			Index: i_result;
+		}
+		ElementParameter ep_cur_rid {
+			Range: s_results;
+		}
+		Set s_placeIds {
+			Index: i_placeId;
+		}
+		ElementParameter ep_cur_pid {
+			Range: s_placeIds;
+		}
+		Parameter p_latitude {
+			IndexDomain: (i_result, i_placeId);
+		}
+		Parameter p_longitude {
+			IndexDomain: (i_result, i_placeId);
+		}
+		ElementParameter _ep_first_res {
+			Range: s_results;
+		}
+		ElementParameter _ep_first_pid {
+			Range: s_placeIds;
+		}
+		StringParameter sp_locationIQ_error_message;
+		StringParameter sp_default_access_token {
+			Definition: "Please replace by your access token";
+		}
+		StringParameter sp_accessToken;
+		StringParameter sp_reg {
+			InitialData: {
+				"eu1"
+				
+				! Alternatives: eu1, us1.
+			}
+		}
+	}
+	Section Private_Section {
+		Procedure pr_workGeoFindCoordinates {
+			Arguments: (address,latitude,longitude);
+			Body: {
 				sp_req_address := address ; ! Used for error reporting.
 				
 				_s_ints := elementrange(1,1);
@@ -22,7 +94,7 @@ LibraryModule LocationIQ {
 					formatString("q=%s&format=json&",_sp_query);
 				
 				_sp_theRequest := "getLocation" ;
-				_ep_callback := 'liq::pr_GeoFindCoordinatesCallback';
+				_ep_callback := 'liq::pr_workGeoFindCoordinatesCallback';
 				dex::client::NewRequest(
 					theRequest    :  _sp_theRequest, 
 					url           :  _sp_url, 
@@ -67,7 +139,7 @@ LibraryModule LocationIQ {
 				Default: 'dex::client::EmptyCallback';
 			}
 		}
-		Procedure pr_GeoFindCoordinatesCallback {
+		Procedure pr_workGeoFindCoordinatesCallback {
 			Arguments: (theRequest,statusCode,errorCode);
 			Body: {
 				if statusCode = 200 then
@@ -125,49 +197,6 @@ LibraryModule LocationIQ {
 			StringParameter _sp_curl_message;
 			StringParameter _sp_server_message;
 		}
-		StringParameter sp_req_address;
-		ElementParameter _ep_statusCode {
-			Range: dex::HTTPStatusCodes;
-		}
-		Parameter p_globLat;
-		Parameter p_globLon;
-		Set s_results {
-			Index: i_result;
-		}
-		ElementParameter ep_cur_rid {
-			Range: s_results;
-		}
-		Set s_placeIds {
-			Index: i_placeId;
-		}
-		ElementParameter ep_cur_pid {
-			Range: s_placeIds;
-		}
-		Parameter p_latitude {
-			IndexDomain: (i_result, i_placeId);
-		}
-		Parameter p_longitude {
-			IndexDomain: (i_result, i_placeId);
-		}
-		ElementParameter _ep_first_res {
-			Range: s_results;
-		}
-		ElementParameter _ep_first_pid {
-			Range: s_placeIds;
-		}
-		StringParameter sp_locationIQ_error_message;
-	}
-	Section Private_Section {
-		StringParameter sp_accessToken {
-			InitialData: "Please replace by your access key";
-		}
-		StringParameter sp_reg {
-			Definition: {
-				"eu1"
-				
-				! Alternatives: eu1, us1.
-			}
-		}
 		Section Lib_start_stop {
 			StringParameter sp_libfolder;
 			Procedure LibraryInitialization {
@@ -175,24 +204,28 @@ LibraryModule LocationIQ {
 			}
 			Procedure PostLibraryInitialization {
 				Body: {
-					_sp_accessKeyFile := "..\\api-init\\LocationIQ.txt" ;
-					if FileExists( _sp_accessKeyFile ) then
-						read from file _sp_accessKeyFile ;
+					sp_accessToken := sp_default_access_token ;
+					_sp_access_token_file := "..\\api-init\\LocationIQ.txt" ;
+					if FileExists( _sp_access_token_file ) then
+						read from file _sp_access_token_file ;
 					endif ;
 					DirectoryOfLibraryProject(
 						libraryname   :  "LocationIQ", 
 						directoryname :  sp_libfolder);
-					display sp_libfolder ;
 					dex::ReadMappings(
 						startPath :  sp_libfolder, 
 						subFolder :  "", 
 						recursive :  1);
+					
+					webui::IdentifierElementText(IndexIdentifiers) :=$ data {
+						'liq::sp_accessToken' : "Your access token" 
+					} ;
 				}
 				Comment: {
 					"Add initialization statements here that require another library to be initialized already,
 					or add statements that require the Data Management module to be initialized."
 				}
-				StringParameter _sp_accessKeyFile;
+				StringParameter _sp_access_token_file;
 			}
 			Procedure PreLibraryTermination {
 				Body: {

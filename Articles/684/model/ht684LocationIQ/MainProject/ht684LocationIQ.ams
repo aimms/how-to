@@ -11,17 +11,11 @@ Model Main_ht684LocationIQ {
 			Conversions: minute->s : #-># * 60;
 			Comment: {
 				"Expresses the value for the duration of periods.
-				
-				The unit s has been added automatically because it is a required unit for AimmsWebUI.
-				
-				The unit minute has been added automatically because it is a required unit for AimmsWebUI."
 			}
 		}
 	}
 	StringParameter sp_address {
 		InitialData: {
-			!"Diakenhuisweg 29-35, 2033 AP Haarlem, The Netherlands"
-			!"De Waal, Texel"
 			"<Please replace by the address you want GPS coords of>"
 		}
 	}
@@ -29,6 +23,7 @@ Model Main_ht684LocationIQ {
 	Parameter p_adr_lat;
 	Parameter p_adr_lon;
 	StringParameter sp_message;
+	Parameter p_returnCode;
 	Section app_start_stop {
 		Procedure MainInitialization {
 			Body: {
@@ -39,6 +34,12 @@ Model Main_ht684LocationIQ {
 		Procedure PostMainInitialization {
 			Body: {
 				dex::ReadAllMappings();
+				webui::IdentifierElementText(IndexIdentifiers) :=$ data {
+					'sp_address' : "Address",
+					'p_adr_lat'  : "Latitude",
+					'p_adr_lon'  : "Longitude",
+					'sp_message' : "Error message"
+				} ;
 			}
 			Comment: {
 				"Add initialization statements here that require that the libraries are already initialized properly,
@@ -67,23 +68,66 @@ Model Main_ht684LocationIQ {
 			}
 		}
 	}
+	Section UI {
+		StringParameter sp_Workflow {
+			IndexDomain: (webui::indexWorkflowOrder,webui::indexWorkflowSpec);
+			Definition: {
+				{
+					( '1',  'title' ) : "Workflow"
+				}
+			}
+		}
+		StringParameter sp_workflowSteps {
+			IndexDomain: (webui::indexWorkflowOrder,webui::indexNoOfPages,webui::indexWorkflowPageSpec);
+			Definition: {
+				{
+					( '1', '1', 'displayText'       ) : "Welcome",
+					( '1', '1', 'icon'              ) : "aimms-home2",
+					( '1', '1', 'pageId'            ) : "home",
+					( '1', '1', 'tooltip'           ) : "Welcome",
+					( '1', '1', 'workflowPageState' ) : "Active",
+					( '1', '1', 'pageDataState'     ) : "",
+					( '1', '1', 'redirectPageId'    ) : "",
+				
+					( '1', '2', 'displayText'       ) : "Get Access Token", 
+					( '1', '2', 'icon'              ) : "aimms-lock5", 
+					( '1', '2', 'pageId'            ) : "liq::access_token", 
+					( '1', '2', 'tooltip'           ) : "Get your access key", 
+					( '1', '2', 'workflowPageState' ) : "Active",
+					( '1', '2', 'pageDataState'     ) : "", 
+					( '1', '2', 'redirectPageId'    ) : "home", 
+				
+					( '1', '3', 'displayText'       ) : "Get GPS Coords", 
+					( '1', '3', 'icon'              ) : "aimms-location", 
+					( '1', '3', 'pageId'            ) : "get_coords", 
+					( '1', '3', 'tooltip'           ) : "", 
+					( '1', '3', 'workflowPageState' ) : if liq::sp_default_access_token <> liq::sp_accessToken then "Active" else "Inactive" endif,  
+					( '1', '3', 'pageDataState'     ) : "", 
+					( '1', '3', 'redirectPageId'    ) : "home"
+				}
+			}
+		}
+		StringParameter sp_secondaryActionsGetCoordsPage {
+			IndexDomain: (webui::indexPageExtension,webui::indexPageActionSpec);
+			Definition: {
+				{
+					( '1', 'displaytext' ) : "Geocode",  
+					( '1', 'icon'        ) : "aimms-location2",  
+					( '1', 'procedure'   ) : "MainExecution",  
+					( '1', 'state'       ) : "Active"
+				}
+			}
+		}
+	}
 	Procedure MainExecution {
 		Body: {
-			sp_message := "ok" ;
-			block 
-				liq::pr_GeoFindCoordinates(
-					address   :  sp_address, 
-					latitude  :  p_adr_lat , 
-					longitude :  p_adr_lon);
-			onerror _ep_err do
-				sp_message := errh::Message(_ep_err);
-				errh::MarkAsHandled(_ep_err);
-			endblock ;
-			
-			display sp_address, p_adr_lat, p_adr_lon, sp_message ;
-		}
-		ElementParameter _ep_err {
-			Range: errh::PendingErrors;
+			CurrentErrorMessage := "" ;
+			p_returnCode := liq::pr_GeoFindCoordinates(
+						address   :  sp_address, 
+						latitude  :  p_adr_lat , 
+						longitude :  p_adr_lon);
+			sp_message :=  CurrentErrorMessage ;
+			display sp_address, p_adr_lat, p_adr_lon, p_returnCode, sp_message ;
 		}
 	}
 }

@@ -69,7 +69,7 @@ Once obtained, the token must be stored within your AIMMS application. In the pr
 example project, the token is entered on the configuration page and stored in the 
 scalar parameter ``sp_accessToken``.
 
-In the enclosed AIMMS App, navigate to the page: ``liq::accesskey``.
+In the enclosed AIMMS App, navigate to the page: ``liq::accesstoken``.
 
 .. image:: images/libLocationIQ-ask-accesskey.png
     :align: center
@@ -245,7 +245,6 @@ When communicating with external APIs, it is essential to handle potential netwo
 Remarks:
 
 * Lines 3-5: Handles cases where the server cannot be reached (CURL errors).
-
 * Lines 10-17: Handles server-side errors (e.g., ``401`` Unauthorized) by reading the error feedback from the JSON response.
 
 .. spelling:word-list::

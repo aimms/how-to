@@ -19,3 +19,4 @@ use_UTC_forCaseAndStartEndDate 1
 * Environment
 Project_Title "ht684LocationIQ"
 Default_UI 0
+Open_WebUI_on_Startup 1

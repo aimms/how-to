@@ -41,9 +41,9 @@
             "slug": "liq::locationiq",
             "children": [
               {
-                "name": "accesskey",
+                "name": "accesstoken",
                 "type": "pagev2-grid",
-                "slug": "liq::new_page",
+                "slug": "liq::access_token",
                 "children": []
               }
             ]
@@ -63,20 +63,26 @@
     }
   },
   "version": "4.67.0",
-  "pages/new_page": {
+  "pages/access_token": {
+    "aimms.widget.type": {
+      "literal": "pagev2-grid"
+    },
     "bindings": {
       "literal": [
         {
-          "widgetUri": "liq::accesskeyscalar",
+          "widgetUri": "liq::accesstokenscalar",
           "gridArea": "area-a",
-          "dndId": "Unassigned widgetsliq::accesskeyscalar"
+          "dndId": "Unassigned widgetsliq::accesstokenscalar"
         }
       ]
+    },
+    "layoutId": {
+      "literal": "Layout9"
     },
     "widgets": {
       "literal": [
         {
-          "uri": "liq::accesskeyscalar",
+          "uri": "liq::accesstokenscalar",
           "layoutInfo": {
             "width": "2",
             "height": "1"
@@ -85,7 +91,7 @@
       ]
     }
   },
-  "widgets/accesskeyscalar": {
+  "widgets/accesstokenscalar": {
     "aimms.widget.type": {
       "literal": "scalar"
     },
@@ -97,7 +103,7 @@
       }
     },
     "name": {
-      "literal": "accesskeyscalar"
+      "literal": "accesstokenscalar"
     },
     "views": {
       "literal": {}
