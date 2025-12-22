@@ -8,6 +8,7 @@ LibraryModule LocationIQ {
 			Arguments: (address,latitude,longitude);
 			Body: {
 				block
+					p_returnCode := 1;
 					CurrentErrorMessage := "" ;
 					pr_workGeoFindCoordinates(address,latitude,longitude);
 				onerror _ep_err do
@@ -16,8 +17,11 @@ LibraryModule LocationIQ {
 					else
 						CurrentErrorMessage := errh::Message(_ep_err);
 					endif ;
+					p_returnCode := 0;
 					errh::MarkAsHandled(_ep_err);
 				endblock ;
+				
+				return p_returnCode ;
 			}
 			StringParameter address {
 				Property: Input;
@@ -31,6 +35,7 @@ LibraryModule LocationIQ {
 			ElementParameter _ep_err {
 				Range: errh::PendingErrors;
 			}
+			Parameter p_returnCode;
 		}
 		StringParameter sp_req_address;
 		ElementParameter _ep_statusCode {
