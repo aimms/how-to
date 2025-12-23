@@ -1,16 +1,21 @@
 LocationIQ Integration with AIMMS
 =====================================
 
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/684-location-iq/archive/refs/heads/main.zip
+
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/684-location-iq
+
+.. image:: https://img.shields.io/badge/AIMMS-25.9-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+.. image:: https://img.shields.io/badge/WebUI-25.9.1.0-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+.. image:: https://img.shields.io/badge/AimmsDEX-25.10.1.2-white?style=for-the-badge&labelColor=009B00&color=00D400
+
 .. meta::
     :keywords: AIMMS, LocationIQ, Geocoding, REST API, DEX library, asynchronous, JSON mapping, HTTP GET, error handling, GPS coordinates
     :description: Learn to integrate LocationIQ with AIMMS using the DEX library for high-performance, asynchronous geocoding, JSON data mapping, and robust error handling.
-
-.. admonition:: Summary
-    
-    This article demonstrates how to replace the legacy ``GeoFindCoordinates`` function in AIMMS with a high-performance, 
-    asynchronous integration using the LocationIQ REST API and the AIMMS Data Exchange (DEX) library. 
-    The article covers how to configure API authentication, construct RESTful requests, map JSON responses to AIMMS identifiers, 
-    and implement robust callback procedures to handle both successful data retrieval and potential communication errors.
 
 The legacy AIMMS function `GeoFindCoordinates <https://documentation.aimms.com/functionreference/system-interaction/environment-functions/geofindcoordinates.html>`_ 
 is constrained by its reliance on Nominatim. Nominatim enforces strict rate limits, typically 
@@ -21,9 +26,7 @@ To overcome these limitations, AIMMS applications can utilize external REST serv
 While this article features LocationIQ as the primary example, the implementation logic 
 remains consistent across most modern geocoding providers.
 
-Please use this example to follow along this article:
-    
-    :download:`AIMMS 25.9 project download <model/ht684LocationIQ.zip>` 
+Please use download the example project to follow along this article.
 
 Geocoding Service Selection
 ---------------------------
