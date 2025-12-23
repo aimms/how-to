@@ -250,6 +250,16 @@ Remarks:
 * Lines 3-5: Handles cases where the server cannot be reached (CURL errors).
 * Lines 10-17: Handles server-side errors (e.g., ``401`` Unauthorized) by reading the error feedback from the JSON response.
 
+Conclusion
+----------
+
+This article outlines the integration of the LocationIQ API within AIMMS to perform high-performance forward geocoding. 
+It demonstrates how to replace the legacy ``GeoFindCoordinates`` function with AIMMS Data Exchange (DEX) 
+to achieve higher rate limits and asynchronous processing. 
+The guide covers obtaining an API access key, constructing RESTful ``GET`` requests, 
+mapping ``JSON`` responses to AIMMS identifiers, and implementing callback procedures to 
+handle both successful data retrieval and potential communication errors.
+
 .. spelling:word-list::
     
     geocoding
@@ -259,3 +269,4 @@ Remarks:
     LocationIQ
     integrations
     scalable
+    RESTful
