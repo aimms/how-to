@@ -1,11 +1,11 @@
-Hello to the World of Python-Bridge
-===================================
+Hello to the World of AIMMSPY from Python-Bridge
+=================================================
 
 .. meta::
     :keywords: AIMMS, Python-Bridge, aimmspy, Hello World, Python-in-the-lead, data exchange, pyenv, uv, virtual environment
-    :description: An introductory guide to the AIMMS Python-Bridge using a 'Hello World' example. Learn to open an AIMMS session, exchange data, and execute procedures from a Python script using 'aimmspy'.
+    :description: An introductory guide to using aimmspy from the AIMMS Python-Bridge using a 'Hello World' example. Learn to open an AIMMS session, exchange data, and execute procedures from a Python script using 'aimmspy'.
 
-This **Hello World** guide introduces the AIMMS Python-Bridge, focusing on the core "Python-in-the-lead" workflow.
+This **Hello World** guide introduces aimmspy from the AIMMS Python-Bridge, focusing on the core "Python-in-the-lead" workflow.
 
 Specifically, the Python script will manage the AIMMS application to:
 
@@ -62,13 +62,22 @@ Remarks:
 Install Dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+The documentation mentions that a ``pip install aimmspy`` is needed to use the ``aimmspy`` library.
+In Python applications, it is customary to enumerate such dependencies in a ``requirements.txt`` file.
+Here we use 
+
+.. code-block:: bash
+
+    aimmspy
+    pandas 
+
+as ``requirements.txt`` file; such that 
+
 .. code-block:: bash
 
     uv pip install -r requirements.txt
 
-Remarks:
-
-* By convention, ``requirements.txt`` enumerates the Python libraries necessary to install for the project at hand.
+will install the dependencies used.
     
 AIMMS Model
 ---------------------------------
@@ -140,3 +149,27 @@ the result is returned to Python:
 
     C:\Users\ChrisKuip\AppData\Local\AIMMS\IFA\Aimms\25.7.7.4-x64-VS2022\Bin --as-server "..\AIMMS\hello.aimms"
     Hello world: sum is 3.0
+    
+Summary
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You have now established a connection between a Python environment and an AIMMS model using aimmspy. 
+By following this "Hello World" workflow, you have successfully:
+
+* Established a communication channel from Python to a running AIMMS session.
+* Modified AIMMS model data from an external script.
+* Triggered AIMMS procedures to utilize its optimization and logic capabilities.
+
+With this foundation, you can now use Python as a driver to orchestrate your AIMMS models, 
+allowing you to incorporate powerful optimization solvers into your broader Python-based workflows and applications.
+
+As a next step, you may want to check out: 
+`Orchestrating Contract Allocation AIMMS App from Python <file:///C:/u/s/how-to/fb-679-make-it-aimmspy/_build/html/Articles/680/680-running-aimms-app.html>`_.
+
+References
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+*   `Python Bridge reference documentation <https://documentation.aimms.com/python-bridge/index.html>`_
+*   `Python package index for aimmspy <https://pypi.org/project/aimmspy/>`_
+*   `Python Bridge official getting started <https://documentation.aimms.com/aimmspy/getting-started.html>`_
+*   `Announcement of Python Bridge: connecting the worlds of Python and AIMMS <https://community.aimms.com/product-updates/python-bridge-connecting-the-worlds-of-python-and-aimms-1839>`_
