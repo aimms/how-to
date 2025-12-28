@@ -173,3 +173,8 @@ References
 *   `Python package index for aimmspy <https://pypi.org/project/aimmspy/>`_
 *   `Python Bridge official getting started <https://documentation.aimms.com/aimmspy/getting-started.html>`_
 *   `Announcement of Python Bridge: connecting the worlds of Python and AIMMS <https://community.aimms.com/product-updates/python-bridge-connecting-the-worlds-of-python-and-aimms-1839>`_
+
+.. spelling:word-list::
+
+    aimmspy
+    orchestrator
