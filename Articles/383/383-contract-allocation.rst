@@ -1,17 +1,21 @@
 Contract Allocation
 =========================
+
 .. meta::
    :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/contract-allocation/archive/refs/heads/main.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Contract_Alocation-blue
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/contract-allocation
 
-.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-webui-44/uptaded-contract-allocation-example-1253
+.. image:: https://img.shields.io/badge/AIMMS-25.9-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+.. image:: https://img.shields.io/badge/WebUI-25.9.1.0-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+.. image:: https://img.shields.io/badge/AimmsDEX-25.10.1.2-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 .. image:: images/project-1920-high.gif
     :align: center
@@ -221,7 +225,11 @@ The following WebUI features are used:
 
 - `Scalar Widget <https://documentation.aimms.com/webui/scalar-widget.html>`_ 
 
-- `CSS Annotations <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_
+- `Annotations <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_
+
+- Custom CSS
+
+- `Theming <https://documentation.aimms.com/webui/theming.html>`_
 
 
 UI Styling
@@ -240,53 +248,60 @@ Below there are the css files you will find with comments on what they change.
          ----------------------------------------------------------------------*/
          --primary: #3DDAB4;
          --primaryDark: #00B569;
+         --primaryDarker: #005331;
          --primary90Transparent: #3ddab33b;
+         --gray: #E8EAEC;
+         --grayDarker: #d6d9da;
 
-
+         /*---------------------------------------------------------------------
+               HEADER
+         ----------------------------------------------------------------------*/  
          --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/budgeting.png); /*app logo*/
          --spacing_app-logo_width: 45px;
          --color_border_app-header-divider: var(--primaryDark); /*line color after header*/
          --color_bg_app-canvas: url(/app-resources/resources/images/RightBackground.png) rgb(249, 249, 249) no-repeat left/contain; /*background color*/
          --border_widget-header: 1px solid var(--primaryDark); /*line color after widget header*/
 
+         /*---------------------------------------------------------------------
+               BUTTONS
+         ----------------------------------------------------------------------*/
          --color_bg_button_primary: var(--primaryDark);
-         --color_bg_button_primary_hover: var(--primary);
-         --color_text_edit-select-link: var(--primaryDark);
-         --color_text_edit-select-link_hover:  var(--primary);
+         --color_bg_button_primary_hover: var(--primaryDarker);
+         --border_button_secondary_hover: 1px solid var(--primaryDark);
+         --color_text_button_secondary_hover: white;
+         --color_bg_button_secondary_hover: var(--primaryDark);
+         --color_text_button_secondary: var(--primaryDark);
+         --border_button_secondary: 1px solid var(--primaryDark);  
+         --color_bg_icon_widget-header-actions_hover: var(--color_text_default);
+
+         /*---------------------------------------------------------------------
+               FONT COLOR
+         ----------------------------------------------------------------------*/ 
+         --color_text_edit-select-link: var(--primaryDarker);
+         --color_text_edit-select-link_hover: var(--primary);
+         --color_text_widget-header: var(--color_text_default); 
+         --color_text_default: #02140d;
+         --color_text_workflow_header: var(--color_text_default);
+         --color_text_high-contrast: var(--color_text_default);
 
          /*---------------------------------------------------------------------
                WORKFLOW
          ----------------------------------------------------------------------*/
-         /* Header text*/
-         --color_workflow-header: #505767;
-            
-         /* Step background and content (text, icon) colors for the 4 states*/
-         /*current + current with error*/
-         --color_bg_workflow_current: var(--primaryDark);
-         --color_workflow_current: var(--color_text_inverted);
-         --color_bg_workflow_error-current: #d1454b;
+         --color_bg_workflow : white; /*workflow background color*/
+         --color_bg_workflow_current : var(--primaryDark); /*workflow active step color*/
+         --color_border-divider_light: 0px var(--primaryDark); /*divider line color*/
+         --color_workflow-icon-border: var(--primaryDark); /*workflow icon border color*/
+         --color_bg_workflow-icon: var(--gray); /*workflow icon background color*/
+         --color_workflow_active: var(--color_text_default);
+         --color_workflow-item-divider: var(--grayDarker); /*color between steps*/
 
-         /*active*/
-         --color_bg_workflow_active: #e6edff;
-         --color_workflow_active: var(--primaryDark);
-         
-         /*inactive*/
-         --color_bg_workflow_inactive: #dde0e8;
-         --color_workflow_inactive: #b0b5c2;
-         
-         /*error*/
-         --color_bg_workflow_error: #f9e9e9;
-         --color_workflow_error: #d1454b;
-         
-         /* Child indentation, border colors */
-         --spacing_workflow-child-indent: 1rem;
-         --color_workflow-item-divider: var(--primaryDark);
-         
-         /* Icon background, border, for non-error state */
-         --color_bg_workflow-icon: #ffffff;
-         --color_workflow-icon-border: var(--primaryDark);
+         /*---------------------------------------------------------------------
+               SIDE PANEL
+         ----------------------------------------------------------------------*/
+         --color_bg_sidepanel-tab_active: var(--primaryDarker); /*side panel active tab background color*/
+         --color_bg_sidepanel-tab_hover: var(--primary90Transparent); /*side panel hover tab background color*/
+
          }
-
 
    .. tab-item:: annotation.css
 
@@ -335,6 +350,10 @@ Below there are the css files you will find with comments on what they change.
             text-align: center;
          }
 
+         .ql-snow a {
+            color: var(--primaryDark);
+         }
+
 
 Minimal Requirements
 --------------------   
@@ -344,9 +363,13 @@ Minimal Requirements
 
 .. seealso::
    * :doc:`../545/545-summary-examples-features`
+   * Contract Allocation `community post <https://community.aimms.com/aimms-webui-44/uptaded-contract-allocation-example-1253>`_.
    
 Release Notes
 --------------------   
+
+`v1.8 <https://github.com/aimms/contract-allocation/releases/tag/1.8>`_ (29/12/2025)
+   Updating AIMMS version to 25.9, WebUI to 25.9.1.0 and AimmsDEX to 25.10.1.2. Adding more comments to the procedures and identifiers.
 
 `v1.7 <https://github.com/aimms/contract-allocation/releases/tag/1.7>`_ (04/11/2025)
    Adding Python-Bridge support to run the model headless using Python code.
