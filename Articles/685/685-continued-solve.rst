@@ -9,7 +9,7 @@ GMP: Continued Solve
     :keywords: AIMMS, GMP, SOLVE, MIP
     :description: Introducing GMP and continued solve.
 
-:download:`AIMMS 25.9 project download <model/flowshop.zip>` 
+:download:`AIMMS 25.9 project download <model/FlowShop.zip>` 
 
 In complex Mixed-Integer Programming (MIP) applications, modelers often face a trade-off between solution quality and computational time. 
 While many data instances solve quickly, "tough" instances may fail to reach a desired optimality gap within a strict time limit.
