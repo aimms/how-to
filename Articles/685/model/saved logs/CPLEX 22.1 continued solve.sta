@@ -1,0 +1,164 @@
+
+Solve problem 'FlowShopModel' with 698 rows, 608 columns (256 binaries, 0 generals), and 12500 nonzeros.
+Version identifier: 22.1.0.0 | 2022-03-09 | 1a383f8ce
+CPXPARAM_Benders_Strategy                        -1
+CPXPARAM_MultiObjective_Display                  0
+CPXPARAM_MIP_Display                             3
+CPXPARAM_MIP_Strategy_CallbackReducedLP          0
+CPXPARAM_Barrier_Display                         0
+CPXPARAM_TimeLimit                               60
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   1e-13
+Legacy callback                                  i
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 1 columns.
+MIP Presolve modified 10656 coefficients.
+Reduced MIP has 698 rows, 607 columns, and 10438 nonzeros.
+Reduced MIP has 256 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.02 sec. (9.26 ticks)
+Found incumbent of value 2851.000000 after 0.03 sec. (12.02 ticks)
+Probing fixed 0 vars, tightened 528 bounds.
+Probing time = 0.00 sec. (9.88 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 698 rows, 607 columns, and 10438 nonzeros.
+Reduced MIP has 256 binaries, 34 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.02 sec. (9.69 ticks)
+Probing fixed 0 vars, tightened 308 bounds.
+Probing time = 0.00 sec. (8.48 ticks)
+Clique table members: 32.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 20 threads.
+Root relaxation solution time = 0.06 sec. (163.43 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                         2851.0000        0.0000           100.00%
+Found incumbent of value 2851.000000 after 0.11 sec. (206.90 ticks)
+      0     0      392.4464   166     2851.0000      392.4464     1789   86.23%
+      0     0      393.0739   168     2851.0000     Cuts: 117     2054   86.21%
+*     0+    0                          473.0000      393.0739            16.90%
+Found incumbent of value 473.000000 after 0.31 sec. (568.83 ticks)
+      0     0      393.2671   168      473.0000   LiftProj: 1     2127   16.82%
+Detecting symmetries...
+      0     2      393.2671   168      473.0000      393.4417     2127   16.82%
+Elapsed time = 0.66 sec. (1140.77 ticks, tree = 0.02 MB, solutions = 2)
+*   575+  229                          465.0000      396.4402            14.74%
+Found incumbent of value 465.000000 after 1.45 sec. (2089.00 ticks)
+    594   433      413.2850   101      465.0000      396.4402   136177   14.74%
+*  1055+  623                          461.0000      396.4402            14.00%
+Found incumbent of value 461.000000 after 1.77 sec. (2439.06 ticks)
+
+Performing restart 1
+
+Repeating presolve.
+Tried aggregator 2 times.
+MIP Presolve modified 492 coefficients.
+Aggregator did 2 substitutions.
+Reduced MIP has 696 rows, 605 columns, and 10008 nonzeros.
+Reduced MIP has 256 binaries, 33 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (20.10 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 696 rows, 605 columns, and 10008 nonzeros.
+Reduced MIP has 256 binaries, 33 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (10.12 ticks)
+Represolve time = 0.03 sec. (55.14 ticks)
+   4791     0      394.2140   168      455.0000      Cuts: 34   977793   10.73%
+   4791     0      394.3789   178      455.0000      Cuts: 24   977919   10.73%
+   4791     0      394.4225   182      455.0000   MIRcuts: 17   977993   10.73%
+   4791     0      394.4901   178      455.0000   MIRcuts: 12   978084   10.73%
+   4791     0      394.5017   178      455.0000    MIRcuts: 4   978129   10.73%
+   4791     0      394.5051   179      455.0000    MIRcuts: 2   978150   10.73%
+   4791     2      394.5051   179      455.0000      406.1858   978150   10.73%
+  19330 11866      429.0185    55      455.0000      411.1118  3426160    9.65%
+                                                   MIRcuts: 1                  
+  72456 39706      440.9265    78      443.0000      418.4668 12624815    5.54%
+
+Flow cuts applied:  1
+Mixed integer rounding cuts applied:  109
+Lift and project cuts applied:  3
+
+Root node processing (before b&c):
+  Real time             =    0.58 sec. (1116.88 ticks)
+Parallel b&c, 20 threads:
+  Real time             =   59.48 sec. (50991.87 ticks)
+  Sync time (average)   =   11.98 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =   60.06 sec. (52108.75 ticks)
+
+MIP - Time limit exceeded, integer feasible:  Objective = 4.4300000000e+02
+Current MIP best bound = 4.1848857094e+02 (gap = 5.53%)
+Solution time = 60.07 sec.  Iterations = 12870786  Nodes = 72463
+Deterministic time = 52108.76 ticks    (867.47 ticks/sec)
+
+
+Solve problem 'FlowShopModel' with 698 rows, 608 columns (256 binaries, 0 generals), and 12500 nonzeros.
+Version identifier: 22.1.0.0 | 2022-03-09 | 1a383f8ce
+CPXPARAM_Benders_Strategy                        -1
+CPXPARAM_MultiObjective_Display                  0
+CPXPARAM_MIP_Display                             3
+CPXPARAM_MIP_Strategy_CallbackReducedLP          0
+CPXPARAM_Barrier_Display                         0
+CPXPARAM_TimeLimit                               600
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0.040000000000000001
+Legacy callback                                  i
+  72555 40614      435.4499    46      443.0000      418.5652 12874098    5.52%
+  92336 51825      426.2051    67      443.0000      419.8146 16155699    5.23%
+  94694 54856      439.8922    46      443.0000      420.0448 17114751    5.18%
+ 113565 68355      434.6061    58      443.0000      421.5578 21850119    4.84%
+ 118675 70528      432.6392    41      443.0000      421.8975 22592924    4.76%
+ 124755 74081      439.1096    57      443.0000      422.0000 23822579    4.74%
+ 132059 78768      428.3025    97      443.0000      422.6434 25565462    4.60%
+                                                   MIRcuts: 9                  
+ 162589 98418      440.1591    62      443.0000      424.0096 32812946    4.29%
+
+Performing restart 2
+
+Repeating presolve.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 1 columns.
+Reduced MIP has 696 rows, 604 columns, and 9988 nonzeros.
+Reduced MIP has 255 binaries, 33 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (8.51 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 696 rows, 604 columns, and 9988 nonzeros.
+Reduced MIP has 255 binaries, 33 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (9.71 ticks)
+Represolve time = 0.14 sec. (97.98 ticks)
+ 180408     0      394.9744   186      443.0000      Cuts: 20 37668532    4.09%
+ 180408     0      395.0616   189      443.0000       Cuts: 7 37668601    4.09%
+ 180408     0      395.0832   185      443.0000       Cuts: 8 37668674    4.09%
+ 180408     0      395.0871   184      443.0000    MIRcuts: 3 37668692    4.09%
+ 180408     0      395.0880   184      443.0000    MIRcuts: 2 37668700    4.09%
+ 180408     0      395.0892   188      443.0000    MIRcuts: 2 37668714    4.09%
+ 180408     0      395.0899   184      443.0000    MIRcuts: 3 37668725    4.09%
+ 180408     0      395.0904   185      443.0000    MIRcuts: 3 37668729    4.09%
+ 180408     2      395.0904   185      443.0000      424.8982 37668729    4.09%
+ 185857  3992      437.8884   115      443.0000      424.8982 39065614    4.09%
+ 235514 39827      432.5228    60      443.0000      424.8982 50475133    4.09%
+                                                   MIRcuts: 5                  
+ 271060 62784      428.1397    81      443.0000      424.8982 57121412    4.09%
+                                                   MIRcuts: 1                  
+
+Flow cuts applied:  2
+Mixed integer rounding cuts applied:  200
+Lift and project cuts applied:  5
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.32 ticks)
+Parallel b&c, 20 threads:
+  Real time             =  428.02 sec. (288542.67 ticks)
+  Sync time (average)   =   59.37 sec.
+  Wait time (average)   =    0.03 sec.
+                          ------------
+Total (root+branch&cut) =  428.02 sec. (288542.98 ticks)
+
+MIP - Integer optimal, tolerance:  Objective = 4.4300000000e+02
+Current MIP best bound = 4.2528069447e+02 (gap = 4.00%)
+Solution time = 428.03 sec.  Iterations = 66264770  Nodes = 316892
+Deterministic time = 288542.99 ticks    (674.12 ticks/sec)
+

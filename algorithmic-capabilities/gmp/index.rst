@@ -16,6 +16,7 @@ Here, you can find documentation about it:
    :titlesonly:
    
    /Articles/147/147-GMP-Intro
+   /Articles/685/685-continued-solve
    /Articles/291/291-solve-to-gmp-with-callback
    /Articles/126/126-TSP-Lazy-Constraints
    /Articles/192/192-solve-minlp-with-outer-approximation

@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<References AIMMS_Version="25.9.2.6 (x64)">
+	<MainProject Path="MainProject" />
+</References>
