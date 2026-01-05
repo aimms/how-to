@@ -10,6 +10,7 @@ Coding
    :titlesonly:
 
    /Articles/257/257-run-batch-commands-in-aimms-command-line-tool
+   /Articles/690/690-count-elements
    /Articles/188/188-use-nbest-operator
    /Articles/114/114-execute
    /Articles/135/135-UTF8-Encoding
