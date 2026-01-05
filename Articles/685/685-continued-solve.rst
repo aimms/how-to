@@ -92,3 +92,9 @@ Using the GMP library to manage the solution process provides several advantages
 By implementing this pattern, you ensure that your optimization engine spends 
 its time searching for solutions rather than repeating work it has already performed.
 
+
+Acknowledgement
+---------------
+
+The author would like to acknowledge Marcel Hunting for pointing out the power of GMP, 
+namely to give the Modeler control over the solution process.
