@@ -1,47 +1,48 @@
-GMP: Continued Solve
-===========================
+Implementing Continued Solves
+===============================
 
-.. image:: images/gmp-reference-image.png
-    :align: center
-    :scale: 50 %
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/685-continued-solve/archive/refs/heads/main.zip
+
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/685-continued-solve
+
+.. image:: https://img.shields.io/badge/AIMMS-25.5-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 .. meta::
-    :keywords: AIMMS, GMP, SOLVE, MIP
-    :description: Introducing GMP and continued solve.
-
-:download:`AIMMS 25.9 project download <model/FlowShop.zip>` 
+    :keywords: AIMMS, GMP, Generated Mathematical Program, MIP, Continued Solve, solver status, optimality gap, CPLEX, Gurobi, optimization search
+    :description: Learn how to use the AIMMS GMP library to resume interrupted MIP solves. Preserve search progress, adjust tolerances, and reduce total solve time.
 
 In complex Mixed-Integer Programming (MIP) applications, modelers often face a trade-off between solution quality and computational time. 
 While many data instances solve quickly, "tough" instances may fail to reach a desired optimality gap within a strict time limit.
 
-Standard AIMMS solve statements regenerate the mathematical program and restart the solver search from scratch if called a second time. 
-**By utilizing the Generated Mathematical Program (GMP) library, you can take programmatic control over the solution process.**
+Standard AIMMS ``solve`` statements regenerate the mathematical program and restart the solver search from scratch if called a second time. 
+**By utilizing the Generated Mathematical Program (GMP) library, you can take programmatic control over the solution process.** 
 This allows you to resume an existing search with updated tolerances or limits, 
 preserving the progress made during the initial solve and reducing total execution time.
 
-This article shows how to continue a previously interrupted MIP solve in AIMMS by reusing the same Generated Mathematical Program (GMP) instance.
+This article demonstrates how to resume an interrupted MIP solve by reusing the existing Generated Mathematical Program (GMP) instance. Please download the example project to follow along this article.
 
 Prerequisites
 -------------
 
-*   A Mixed-Integer Mathematical Program
-*   A solver that supports continued search (e.g., CPLEX or Gurobi)
-*   Understanding of solver limits such as time limits and optimality gaps
+*   A Mixed-Integer Mathematical Program (MIP) formulated in AIMMS.
+*   A solver that supports continued search (e.g., CPLEX or Gurobi).
+*   Familiarity with solver limits (Time Limits and Optimality Gaps).
 
-Implementing Continued Solves with GMP
----------------------------------------
+The GMP Advantage
+------------------------------
 
-To continue a solve, you must shift from using the standard `solve statement <https://documentation.aimms.com/language-reference/optimization-modeling-components/solving-mathematical-programs/index.html>`_ to `advanced methods <https://documentation.aimms.com/language-reference/optimization-modeling-components/implementing-advanced-algorithms-for-mathematical-programs/index.html>`_ using the `GMP <https://documentation.aimms.com/functionreference/algorithmic-capabilities/the-gmp-library/index.html>`_ functions. 
-This approach decouples the model generation from the solution process, 
-allowing the solver to maintain its internal state (such as the branch-and-bound tree or best-known bounds) between calls.
+To continue a solve, you must shift from using the standard `solve statement <https://documentation.aimms.com/language-reference/optimization-modeling-components/solving-mathematical-programs/index.html>`_ 
+to `advanced methods <https://documentation.aimms.com/language-reference/optimization-modeling-components/implementing-advanced-algorithms-for-mathematical-programs/index.html>`_ 
+using the `GMP <https://documentation.aimms.com/functionreference/algorithmic-capabilities/the-gmp-library/index.html>`_ functions. 
 
-Example Workflow
------------------
+This approach decouples the model generation from the solution process. By keeping the generated instance in memory, the solver maintains its internal state—including the best-known bounds and the search tree—between successive calls.
 
-The following example demonstrates how to attempt a strict solve and, 
-upon reaching a time limit, relax the optimality tolerance and continue the search.
+Example Workflow: "Solve and Adjust"
+------------------------------------
 
-Codefragment:
+The following pattern demonstrates how to attempt a strict solve and, upon reaching a time limit, relax the optimality tolerance to find a "good enough" solution without starting over.
 
 .. code-block:: aimms 
     :linenos:
@@ -67,7 +68,8 @@ Codefragment:
         
     endif;
 
-Key Components
+Core Functions Explained
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 *   `GMP::Instance::Generate <https://documentation.aimms.com/functionreference/algorithmic-capabilities/the-gmp-library/gmp_instance-procedures-and-functions/gmp_instance_generate.html>`_ : Creates a memory-resident representation of your model. 
     Unlike a standard solve, this instance persists until it is explicitly deleted.
@@ -79,9 +81,8 @@ Key Components
     for solvers that support search continuation (such as CPLEX and Gurobi), 
     the second Solve call resumes the existing search and heuristic results.
 
-
-Summary
--------
+Conclusion  
+----------------
 
 Using the GMP library to manage the solution process provides several advantages over traditional modeling methods:
 
@@ -92,9 +93,7 @@ Using the GMP library to manage the solution process provides several advantages
 By implementing this pattern, you ensure that your optimization engine spends 
 its time searching for solutions rather than repeating work it has already performed.
 
+.. admonition:: Acknowledgements
 
-Acknowledgement
----------------
-
-The author would like to acknowledge Marcel Hunting for pointing out the power of GMP, 
-namely to give the Modeler control over the solution process.
+    The author would like to acknowledge Marcel Hunting for pointing out the power of GMP, 
+    namely to give the Modeler control over the solution process.
