@@ -1,6 +1,15 @@
 Hello to the World of AIMMSPY from Python-Bridge
 =================================================
 
+
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/679-hello-world-python-bridge/archive/refs/heads/main.zip
+
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/679-hello-world-python-bridge
+
+.. image:: https://img.shields.io/badge/AIMMS-25.5-white?style=for-the-badge&labelColor=009B00&color=00D400
+
 .. meta::
     :keywords: AIMMS, Python-Bridge, aimmspy, Hello World, Python-in-the-lead, data exchange, pyenv, uv, virtual environment
     :description: An introductory guide to using aimmspy from the AIMMS Python-Bridge using a 'Hello World' example. Learn to open an AIMMS session, exchange data, and execute procedures from a Python script using 'aimmspy'.
@@ -13,7 +22,7 @@ Specifically, the Python script will manage the AIMMS application to:
 * Exchange data (read and write) with the AIMMS model.
 * Execute AIMMS procedures.
 
-Please use the :download:`Hello World <model/hello-world-aimmspy.zip>`  project to follow this article.
+Please download the example project to follow along this article.
 
 Prerequisites & Environment Setup
 ---------------------------------
@@ -150,8 +159,8 @@ the result is returned to Python:
     C:\Users\ChrisKuip\AppData\Local\AIMMS\IFA\Aimms\25.7.7.4-x64-VS2022\Bin --as-server "..\AIMMS\hello.aimms"
     Hello world: sum is 3.0
     
-Summary
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Conclusion
+------------
 
 You have now established a connection between a Python environment and an AIMMS model using aimmspy. 
 By following this "Hello World" workflow, you have successfully:
@@ -163,16 +172,17 @@ By following this "Hello World" workflow, you have successfully:
 With this foundation, you can now use Python as a driver to orchestrate your AIMMS models, 
 allowing you to incorporate powerful optimization solvers into your broader Python-based workflows and applications.
 
-As a next step, you may want to check out: 
-`Orchestrating Contract Allocation AIMMS App from Python <file:///C:/u/s/how-to/fb-679-make-it-aimmspy/_build/html/Articles/680/680-running-aimms-app.html>`_.
+.. tip::
 
-References
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    As a next step, you may want to check out: 
+    `Orchestrating Contract Allocation AIMMS App from Python <file:///C:/u/s/how-to/fb-679-make-it-aimmspy/_build/html/Articles/680/680-running-aimms-app.html>`_.
 
-*   `Python Bridge reference documentation <https://documentation.aimms.com/python-bridge/index.html>`_
-*   `Python package index for aimmspy <https://pypi.org/project/aimmspy/>`_
-*   `Python Bridge official getting started <https://documentation.aimms.com/aimmspy/getting-started.html>`_
-*   `Announcement of Python Bridge: connecting the worlds of Python and AIMMS <https://community.aimms.com/product-updates/python-bridge-connecting-the-worlds-of-python-and-aimms-1839>`_
+.. seealso::
+
+    *   `Python Bridge reference documentation <https://documentation.aimms.com/python-bridge/index.html>`_
+    *   `Python package index for aimmspy <https://pypi.org/project/aimmspy/>`_
+    *   `Python Bridge official getting started <https://documentation.aimms.com/aimmspy/getting-started.html>`_
+    *   `Announcement of Python Bridge: connecting the worlds of Python and AIMMS <https://community.aimms.com/product-updates/python-bridge-connecting-the-worlds-of-python-and-aimms-1839>`_
 
 .. spelling:word-list::
 
