@@ -26,7 +26,7 @@ To overcome these limitations, AIMMS applications can utilize external REST serv
 While this article features LocationIQ as the primary example, the implementation logic 
 remains consistent across most modern geocoding providers.
 
-Please use download the example project to follow along this article.
+Please download the example project to follow along this article.
 
 Geocoding Service Selection
 ---------------------------
