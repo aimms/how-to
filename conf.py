@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# How to in AIMMS documentation build configuration file, created by
+# How to in AIMMS documentation build configuration file, created by 
 # sphinx-quickstart on Wed Dec 13 15:09:51 2017.
 #
 # This file is execfile()d with the current directory set to its
