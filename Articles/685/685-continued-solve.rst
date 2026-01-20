@@ -72,17 +72,27 @@ Core Functions Explained
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 *   `GMP::Instance::Generate <https://documentation.aimms.com/functionreference/algorithmic-capabilities/the-gmp-library/gmp_instance-procedures-and-functions/gmp_instance_generate.html>`_ : Creates a memory-resident representation of your model. 
-    Unlike a standard solve, this instance persists until it is explicitly deleted.
+    This instance persists until it is explicitly deleted.
+
 *   `GMP::Solution::GetSolverStatus <https://documentation.aimms.com/functionreference/algorithmic-capabilities/the-gmp-library/gmp_solution-procedures-and-functions/gmp_solution_getsolverstatus.html>`_ : Retrieves the status of the last solve attempt. 
-    A status of ``ResourceInterrupt`` typically indicates the time limit was reached before the gap was closed.
+
+    *   A status of ``NormalCompletion`` indicates that the solver finished normally.
+
+    *   A status of ``ResourceInterrupt`` indicates the time limit was reached before requirements are met, including a MIP GAP below tolerance. 
+
+    *   A status of ``UserInterrupt`` indicates that a callback interrupted execution.
+
+    `Enumerated solution states <https://documentation.aimms.com/language-reference/optimization-modeling-components/solving-mathematical-programs/suffices-and-callbacks.html#id4>`_
+
 *   `GMP::Instance::SetOptionValue <https://documentation.aimms.com/functionreference/algorithmic-capabilities/the-gmp-library/gmp_instance-procedures-and-functions/gmp_instance_setoptionvalue.html>`_: Modifies solver settings specifically for this generated instance. 
     These changes are applied directly to the solver's current environment.
-*   Continued Search: Because the ``myGMP`` object remains in memory, 
+
+*   Continued Search: Because the ``myGMP`` object remains in memory, and it is not re-generated, nor modified,
     for solvers that support search continuation (such as CPLEX and Gurobi), 
     the second Solve call resumes the existing search and heuristic results.
 
 Conclusion  
-----------------
+----------
 
 Using the GMP library to manage the solution process provides several advantages over traditional modeling methods:
 
@@ -93,7 +103,4 @@ Using the GMP library to manage the solution process provides several advantages
 By implementing this pattern, you ensure that your optimization engine spends 
 its time searching for solutions rather than repeating work it has already performed.
 
-.. admonition:: Acknowledgements
 
-    The author would like to acknowledge Marcel Hunting for pointing out the power of GMP, 
-    namely to give the Modeler control over the solution process.
