@@ -74,7 +74,7 @@ Core Functions Explained
 *   `GMP::Instance::Generate <https://documentation.aimms.com/functionreference/algorithmic-capabilities/the-gmp-library/gmp_instance-procedures-and-functions/gmp_instance_generate.html>`_ : Creates a memory-resident representation of your model. 
     This instance persists until it is explicitly deleted.
 
-*   `GMP::Solution::GetSolverStatus <https://documentation.aimms.com/functionreference/algorithmic-capabilities/the-gmp-library/gmp_solution-procedures-and-functions/gmp_solution_getsolverstatus.html>`_ : Retrieves the status of the last solve attempt. 
+*   `GMP::Solution::GetSolverStatus <https://documentation.aimms.com/functionreference/algorithmic-capabilities/the-gmp-library/gmp_solution-procedures-and-functions/gmp_solution_getsolverstatus.html>`_ : Retrieves the status of the last solve attempt.  Selected status values from table `Enumerated solution states <https://documentation.aimms.com/language-reference/optimization-modeling-components/solving-mathematical-programs/suffices-and-callbacks.html#id4>`_ are:
 
     *   A status of ``NormalCompletion`` indicates that the solver finished normally.
 
@@ -82,7 +82,7 @@ Core Functions Explained
 
     *   A status of ``UserInterrupt`` indicates that a callback interrupted execution.
 
-    `Enumerated solution states <https://documentation.aimms.com/language-reference/optimization-modeling-components/solving-mathematical-programs/suffices-and-callbacks.html#id4>`_
+    
 
 *   `GMP::Instance::SetOptionValue <https://documentation.aimms.com/functionreference/algorithmic-capabilities/the-gmp-library/gmp_instance-procedures-and-functions/gmp_instance_setoptionvalue.html>`_: Modifies solver settings specifically for this generated instance. 
     These changes are applied directly to the solver's current environment.
