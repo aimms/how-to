@@ -70,7 +70,7 @@ Model Main_Wonderful_WebUI_Widgets {
 					( '1', '1', 'tooltip'           ) : "Shows a text widget welcoming you to this app", 
 					( '1', '1', 'workflowPageState' ) : "Active", 
 					( '1', '1', 'pageDataState'     ) : "", 
-					( '1', '1', 'redirectPageId'    ) : "home", 
+					( '1', '1', 'redirectPageId'    ) : "", 
 				
 					( '1', '2', 'displayText'       ) : "Map", 
 					( '1', '2', 'icon'              ) : "aimms-earth", 

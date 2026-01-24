@@ -4,6 +4,27 @@
     "aimms.widget.type": {
       "literal": "application"
     },
+    "browser.language": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserLanguage"
+        ]
+      }
+    },
+    "browser.name": {
+      "aimms": {
+        "contents": [
+          "webui::ClientBrowserName"
+        ]
+      }
+    },
+    "browser.timezone": {
+      "aimms": {
+        "contents": [
+          "webui::BrowserTimeZone"
+        ]
+      }
+    },
     "browsername": {
       "aimms": {
         "contents": [
@@ -1162,6 +1183,9 @@
         ]
       }
     },
+    "data.labels.show": {
+      "literal": true
+    },
     "indices.__display_order__": {
       "literal": [
         "indices.0",
@@ -1184,6 +1208,9 @@
         "identifier": "ep_storeFocusItem"
       }
     },
+    "legend.show": {
+      "literal": true
+    },
     "name": {
       "literal": "bigcombi"
     },
@@ -1195,11 +1222,8 @@
         "slices": []
       }
     },
-    "toggleDataLabels": {
-      "literal": true
-    },
-    "toggleLegend": {
-      "literal": true
+    "views": {
+      "literal": {}
     },
     "widgetactions": {
       "aimms": {
@@ -1351,10 +1375,10 @@
     "title": {
       "literal": "Bob for a Job"
     },
-    "toggleDataLabels": {
+    "data.labels.show": {
       "literal": true
     },
-    "toggleLegend": {
+    "legend.show": {
       "literal": true
     },
     "widgetactions": {
@@ -1478,15 +1502,11 @@
         ]
       }
     },
-    "timezone": {
-      "aimms": {
-        "contents": [
-          "webui::DisplayTimeZone"
-        ]
-      }
-    },
     "title": {
       "literal": "Order production schedule"
+    },
+    "views": {
+      "literal": {}
     }
   },
   "widgets/InOut": {
@@ -1700,6 +1720,9 @@
         ],
         "slices": []
       }
+    },
+    "views": {
+      "literal": {}
     }
   },
   "widgets/mapDemo": {
@@ -1770,10 +1793,10 @@
       "literal": true
     },
     "center.latitude": {
-      "literal": 51.11731684874898
+      "literal": 52.47468175259191
     },
     "center.longitude": {
-      "literal": 8.349609375000002
+      "literal": 11.78866270155352
     },
     "contextmenu": {
       "aimms": {
@@ -1944,6 +1967,9 @@
         "slices": []
       }
     },
+    "views": {
+      "literal": {}
+    },
     "widgetactions": {
       "aimms": {
         "contents": [
@@ -1969,7 +1995,7 @@
       }
     },
     "zoom": {
-      "literal": 7
+      "literal": 5.6173478066382865
     }
   },
   "widgets/mapDemoScalars": {
@@ -2007,6 +2033,9 @@
     },
     "title": {
       "literal": "App settings"
+    },
+    "views": {
+      "literal": {}
     }
   },
   "widgets/mapExplain": {
@@ -2229,6 +2258,9 @@
     },
     "title": {
       "literal": "Order details"
+    },
+    "views": {
+      "literal": {}
     }
   },
   "widgets/scalar-size-location": {

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<References AIMMS_Version="4.84.4.4 (x64)">
+<References AIMMS_Version="25.9.6.1 (x64)">
 	<MainProject Path="MainProject" />
 	<Library System="true" Path="AimmsPro" />
-	<Library System="true" Path="AimmsWebUI" />
-	<RepositoryLibrary UUID="BDF54E1C-AF05-4D77-856C-F3C05F20FFB8" Name="DataExchange" Version="1.3.0.15" />
+	<RepositoryLibrary UUID="69378F70-E906-486F-8F2C-1D606AEB9669" Name="WebUI" Version="25.9.2.8" />
+	<RepositoryLibrary UUID="BDF54E1C-AF05-4D77-856C-F3C05F20FFB8" Name="AimmsDEX" Version="26.1.4.2" />
 </References>

@@ -19,7 +19,7 @@ Each example takes just a few minutes of your precious time
 to give you an impression on how an interactive optimization application 
 can support end-users, such as analysts or planners, in their activities.
 
-The ``Wonderful WebUI Widgets`` application requires at least AIMMS 4.84.
+The ``Wonderful WebUI Widgets`` application requires at least AIMMS 25.9
 As license, the `AIMMS Community Edition <https://licensing.cloud.aimms.com/license/community.htm>`_ suffices.
 
 
