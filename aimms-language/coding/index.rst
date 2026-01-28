@@ -62,4 +62,5 @@ Coding
    /Articles/526/526-reference-element-style
    /Articles/220/220-aborting-execution-of-aimms
    /Articles/614/614-simple-set-compound-set-relation
+   /Articles/694/694-sets-for-configuration
       
