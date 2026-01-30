@@ -1,25 +1,24 @@
 Sets for Configuration
 =======================
 
-Introduction
---------------
-
 Some sets in AIMMS are not data-driven, but represent configuration 
-choices or application logic switches—for example:
+choices or application logic switches, for example:
 
 *   steps/modes in a solution algorithm (e.g., warm start on/off, leasing allowed on/off),
-
 *   which dataset or view to present in the UI.
 
-If you hard-code element names like 'boat' throughout procedures and pages, renaming becomes tedious and causes noisy Git diffs across many files.
+If you hard-code element names like 'boat' throughout procedures and pages, 
+renaming becomes tedious and causes noisy Git diffs across many files.
 
-**Best practice: use element parameters as named constants**
+.. tip::
+
+    Consider using element parameters as named constants for configuration options.
 
 Represent each configuration option once as an element parameter constant, 
 and compare against that constant everywhere else. 
 Then renaming an option requires changing only a single definition.
 
-Example: transport mode
+Example: Transport Mode
 ---------------------------
 
 Using AIMMS' sets and element parameters, there is an easy way 
@@ -27,7 +26,10 @@ to enable changing the names of elements in sets for configuration.
 
 This is illustrated in the accompanying example.
 
-Step 1:  Declare the configuration set:
+Step 1 - Declare the Configuration Set:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+First, declare the set ``s_config`` that will hold the configuration options:
 
 .. code-block:: aimms 
     :linenos:
@@ -36,7 +38,10 @@ Step 1:  Declare the configuration set:
         Index: i_config;
     }
 
-Step 2: Declare the "named constants" for each option:
+Step 2 - Declare the "Named Constants" for Each Option:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Next, declare an element parameter for each configuration option:
 
 .. code-block:: aimms 
     :linenos:
@@ -50,7 +55,8 @@ Step 2: Declare the "named constants" for each option:
         Definition: 'boat';
     }
 
-Step 3: Define the set from the constants
+Step 3 - Define the Set from the Constants:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 And then add the following definition to ``s_config``:
 
@@ -66,9 +72,12 @@ Compile it all and show data of ``s_config``:
 .. image:: images/s_config.png
     :align: center
 
+|
+
+Step 4 - Create an Element Parameter to Hold the Choice:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Next, we are going to introduce the element parameter ``ep_transportVehicle``:
-
 
 .. code-block:: aimms 
     :linenos:
@@ -78,9 +87,9 @@ Next, we are going to introduce the element parameter ``ep_transportVehicle``:
         InitialData: '';
     }
 
-Remark:
+.. note::
 
-*   The initial data is assigned at the beginning; and ``''`` denotes the empty element.
+    The initial data is assigned at the beginning; and ``''`` denotes the empty element.
     This indicates that the transport vehicle is not selected.
 
 Such an element parameter will be used throughout the application, 
