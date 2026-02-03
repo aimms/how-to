@@ -228,15 +228,6 @@ Transferring the data from the AIMMS application to the SQLite database is done 
         }
     }
 
-References for Using ODBC
-""""""""""""""""""""""""""""""
-
-#.  `Link an SQLite Database to a Project <https://how-to.aimms.com/Articles/118/118-Connect-SQLite.html>`_
-
-#.  `SQLCreateConnectionString <https://documentation.aimms.com/functionreference/data-management/database-functions/sqlcreateconnectionstring.html>`_
-
-#.  Need to go deeper into DB connections? `This course <https://elearning.aimms.com/course/databases-data-connection>`_ is perfect for you!
-
 Annotations
 ~~~~~~~~~~~
 
@@ -406,6 +397,9 @@ Release Notes
     
 .. seealso::
     * :doc:`../118/118-Connect-SQLite`
+    * `SQLCreateConnectionString <https://documentation.aimms.com/functionreference/data-management/database-functions/sqlcreateconnectionstring.html>`_
+    * Need to go deeper into DB connections? `This course <https://elearning.aimms.com/course/databases-data-connection>`_ is perfect for you!
+
 
 .. spelling:word-list::
     theming
