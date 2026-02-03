@@ -5,14 +5,16 @@ EV Charging Location
    :keywords: EV charging station optimization, Particle Swarm Optimization, urban EV infrastructure, electric vehicle charging, AIMMS, WebUI, sustainable transportation, cost-effective charging, urban planning, EV infrastructure model
    :description: Optimize electric vehicle (EV) charging station placement and sizing with Particle Swarm Optimization to enhance accessibility, minimize costs, and support sustainable urban infrastructure.
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_EV_Charging_Locations-blue
-   :target: https://github.com/aimms/ev-charging-locations/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/ev-charging-locations/releases/latest/download/ev-charging-locations.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_EV_Charging_Locations-blue
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/ev-charging-locations
 
-.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-support-updates-67/ev-charging-location-example-1793
+.. image:: https://img.shields.io/badge/AIMMS-24.5-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+.. image:: https://img.shields.io/badge/WebUI-24.10.3.3-white?style=for-the-badge&labelColor=009B00&color=00D400
+ 
 
 .. figure:: images/project-1920-high.gif
    :align: center
@@ -344,7 +346,7 @@ Minimal Requirements
 Release Notes
 --------------------
 
-`v1.0 <https://github.com/aimms/ev-charging-locations/releases/tag/1.0>`_ (22/11/2024)
+`v1.0 <https://github.com/aimms/ev-charging-locations/releases/download/1.0/ev-charging-locations.zip>`_ (22/11/2024)
 	First version of this application. 
 
 .. spelling:word-list::
