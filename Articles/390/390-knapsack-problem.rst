@@ -4,15 +4,18 @@ Knapsack Problem
    :keywords: Knapsack, Knapsack, Integer Programming, Binary Integer Programming, Cover Inequalities, Network Object
    :description: This example introduces a knapsack problem.
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Knapsack-blue
-   :target: https://github.com/aimms/knapsack/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/knapsack/releases/latest/download/knapsack.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Knapsack-blue
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/knapsack
 
-.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-webui-44/updated-knapsack-problem-example-1319
-   
+.. image:: https://img.shields.io/badge/AIMMS-24.5-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+.. image:: https://img.shields.io/badge/WebUI-24.10.3.3-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+.. image:: https://img.shields.io/badge/AXLL-24.0.0.2-white?style=for-the-badge&labelColor=009B00&color=00D400
+ 
 .. image:: images/project-1920-high.gif
     :align: center
 
@@ -265,8 +268,8 @@ Minimal Requirements
 Release Notes
 --------------------   
 
-`v1.1 <https://github.com/aimms/knapsack/releases/tag/1.1>`_ (24/09/2024)
+`v1.1 <https://github.com/aimms/knapsack/releases/download/1.1/knapsack.zip>`_ (24/09/2024)
    Now you can run the different types of solve on PRO Portal.
 
-`v1.0 <https://github.com/aimms/knapsack/releases/tag/1.0>`_ (20/09/2024)
+`v1.0 <https://github.com/aimms/knapsack/releases/download/1.0/knapsack.zip>`_ (20/09/2024)
    First version.
