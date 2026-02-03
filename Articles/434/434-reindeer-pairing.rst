@@ -5,15 +5,16 @@ Reindeer Pairing
    :keywords: Stable marriage problem, network object, constraint programming, channel constraint, if-then constraint
    :description: This AIMMS project is an illustration of the stable marriage problem.
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Reindeer_Pairing-blue
-   :target: https://github.com/aimms/reindeer-pairing/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/reindeer-pairing/releases/latest/download/reindeer-pairing.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Reindeer_Pairing-blue
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/reindeer-pairing
 
-.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-webui-44/updated-reindeer-pairing-example-1370
+.. image:: https://img.shields.io/badge/AIMMS-24.5-white?style=for-the-badge&labelColor=009B00&color=00D400
 
+.. image:: https://img.shields.io/badge/WebUI-24.10.3.3-white?style=for-the-badge&labelColor=009B00&color=00D400
+ 
 .. image:: images/project-1920-high.gif
     :align: center
 
@@ -260,12 +261,12 @@ Below there are the ``css`` files you will find with comments on what they chang
 Minimal Requirements
 --------------------   
 
-`AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example.
+`AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient and `ODBC instalation <https://how-to.aimms.com/Articles/118/118-Connect-SQLite.html>`_ is necessary for working with this example.
 
 Release Notes
 --------------------   
 
-`v1.0 <https://github.com/aimms/reindeer-pairing/releases/tag/1.0>`_ (26/09/2024)
+`v1.0 <hhttps://github.com/aimms/reindeer-pairing/releases/download/1.0/reindeer-pairing.zip>`_ (26/09/2024)
 	First logged version. 
 
 .. spelling:word-list::
