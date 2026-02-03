@@ -5,15 +5,18 @@ Traveling Salesman
    :description: This example illustrates some of AIMMS control flow statements by means of the traveling salesman 2-opt heuristic.
    :keywords: Algorithm, 2-opt heuristic, traveling salesman problem, GMP, Lazy constraint callback, subtour elimination constraints.
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Traveling_Salesman-blue
-   :target: https://github.com/aimms/traveling-salesman/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/traveling-salesman/releases/latest/download/traveling-salesman.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Traveling_Salesman-blue
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/traveling-salesman
+   
+.. image:: https://img.shields.io/badge/AIMMS-25.9-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-webui-44/updated-traveling-salesman-example-1433
+.. image:: https://img.shields.io/badge/WebUI-25.9.2.8-white?style=for-the-badge&labelColor=009B00&color=00D400
 
+.. image:: https://img.shields.io/badge/DEX-26.1.2.1-white?style=for-the-badge&labelColor=009B00&color=00D400
+ 
 .. image:: images/project-1920-high.gif
     :align: center
 
@@ -415,32 +418,33 @@ Minimal Requirements
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient to run the Heuristics, call the Rest API and check the available scenarios. 
 However, to run the MIP problem, you will need to buy a Developer License (see `LP and MIP Solver Features <https://documentation.aimms.com/platform/solvers/solvers.html#lp-and-mip-solver-features>`_). 
 
-A SQLite is used, to integrate that, you will need "SQLite3 ODBC Driver". 
+A SQLite is used, to integrate that, you will need ``SQLite3 ODBC Driver``. 
 You will also need an API key from `PositionStack api <https://positionstack.com>`_. 
 To receive an free API key to test, please sign up to the `free plan <https://positionstack.com/signup>`_. 
 
 
-References
------------
+.. admonition:: References
 
-#.  `Haversine Theory <https://rosettacode.org/wiki/Haversine_formula>`_
+   #.  `Haversine Theory <https://rosettacode.org/wiki/Haversine_formula>`_
 
-#.  Generalization of TSP to `Vehicle Routing Problem <https://how-to.aimms.com/C_Developer/Sub_Mathematical_Modeling/Sub_VRP/index.html>`_
+   #.  Generalization of TSP to `Vehicle Routing Problem <https://how-to.aimms.com/C_Developer/Sub_Mathematical_Modeling/Sub_VRP/index.html>`_
 
-#.  `Solve with Lazy Constraints <https://how-to.aimms.com/Articles/126/126-TSP-Lazy-Constraints.html#solve-with-lazy-constraints>`_ - Marcel Hunting. 
+   #.  `Solve with Lazy Constraints <https://how-to.aimms.com/Articles/126/126-TSP-Lazy-Constraints.html#solve-with-lazy-constraints>`_ - Marcel Hunting. 
 
-#.  Applegate, D.L., R. E. Bixby, V. Chvátal, and W. J. Cook, The Traveling Salesman Problem: A Computational Study, Princeton University Press, Princeton, 2007
+   #.  Applegate, D.L., R. E. Bixby, V. Chvátal, and W. J. Cook, The Traveling Salesman Problem: A Computational Study, Princeton University Press, Princeton, 2007
 
-.. seealso:: Here you will find several euclidean TSP instances from TSPLIB at: http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/
+.. seealso:: 
+   
+   Here you will find several euclidean TSP instances from TSPLIB at: http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/
 
 
 Release Notes
 --------------------   
 
-`v1.1 <https://github.com/aimms/traveling-salesman/releases/tag/1.1>`_ (30/09/2024)
+`v1.1 <https://github.com/aimms/traveling-salesman/releases/download/1.1/traveling-salesman.zip>`_ (30/09/2024)
    Now you can run all types of solve on AIMMS Cloud. Correct driver is set when using the API on AIMMS Cloud. 
 
-`v1.0 <https://github.com/aimms/traveling-salesman/releases/tag/1.0>`_ (20/09/2024)
+`v1.0 <https://github.com/aimms/traveling-salesman/releases/download/1.0/traveling-salesman.zip>`_ (20/09/2024)
    First logged version with new WebUI library.
 
 .. spelling:word-list::
