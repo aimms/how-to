@@ -6,7 +6,7 @@ Contract Allocation
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
 .. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
-   :target: https://github.com/aimms/contract-allocation/archive/refs/heads/main.zip
+   :target: https://github.com/aimms/contract-allocation/releases/latest/download/contract-allocation.zip
 
 .. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/contract-allocation
@@ -368,34 +368,32 @@ Minimal Requirements
 Release Notes
 --------------------   
 
-`v1.8 <https://github.com/aimms/contract-allocation/releases/tag/1.8>`_ (29/12/2025)
+`v1.8 <https://github.com/aimms/contract-allocation/releases/download/1.8/contract-allocation.zip>`_ (29/12/2025)
    Updating AIMMS version to 25.9, WebUI to 25.9.1.0 and AimmsDEX to 25.10.1.2. Adding more comments to the procedures and identifiers.
 
-`v1.7 <https://github.com/aimms/contract-allocation/releases/tag/1.7>`_ (04/11/2025)
+`v1.7 <https://github.com/aimms/contract-allocation/releases/download/1.7/contract-allocation.zip>`_ (04/11/2025)
    Adding Python-Bridge support to run the model headless using Python code.
 
-`v1.6 <https://github.com/aimms/contract-allocation/releases/tag/1.6>`_ (24/09/2024)
+`v1.6 <https://github.com/aimms/contract-allocation/releases/download/1.6/contract-allocation.zip>`_ (24/09/2024)
    Fixing integration problems (import and export) when using the project on AIMMS Portal.
 
-`v1.5 <https://github.com/aimms/contract-allocation/releases/tag/1.5>`_ (20/09/2024)
+`v1.5 <https://github.com/aimms/contract-allocation/releases/download/1.5/contract-allocation.zip>`_ (20/09/2024)
    Upgrading AIMMS version and WebUI library version.
 
-`v1.4 <https://github.com/aimms/contract-allocation/releases/tag/1.4>`_ (27/02/2024)
+`v1.4 <https://github.com/aimms/contract-allocation/releases/download/1.4/contract-allocation.zip>`_ (27/02/2024)
    Upgrading AIMMS version, updating theme and fixing Default Data import.
 
-`v1.3 <https://github.com/aimms/contract-allocation/releases/tag/1.3>`_ (09/08/2023)
+`v1.3 <https://github.com/aimms/contract-allocation/releases/download/1.3/contract-allocation.zip>`_ (09/08/2023)
    Correcting download procedure, adding new options when importing data. 
 
-`v1.2 <https://github.com/aimms/contract-allocation/releases/tag/1.2>`_ (15/06/2023)
+`v1.2 <https://github.com/aimms/contract-allocation/releases/download/1.2/contract-allocation.zip>`_ (15/06/2023)
    Updated to 4.95 and added dependent styling using annotation on Results page. 
 
-`v1.1 <https://github.com/aimms/contract-allocation/releases/tag/1.1>`_ (15/05/2023)
+`v1.1 <https://github.com/aimms/contract-allocation/releases/download/1.1/contract-allocation.zip>`_ (15/05/2023)
    Updated to 4.94 and improved Input page for better UX flow. 
 
-`v1.0 <https://github.com/aimms/contract-allocation/releases/tag/1.0>`_ (17/03/2023)
+`v1.0 <https://github.com/aimms/contract-allocation/releases/download/1.0/contract-allocation.zip>`_ (17/03/2023)
 	First logged version with the new workflow structure and colors. 
-
-
 
 .. spelling:word-list::
 
