@@ -1,6 +1,20 @@
 Sets for Configuration
 =======================
 
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/694-sets-for-configuration/archive/refs/heads/main.zip
+
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/694-sets-for-configuration
+
+.. image:: https://img.shields.io/badge/AIMMS-25.9-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+.. image:: https://img.shields.io/badge/WebUI-25.9.2.8-white?style=for-the-badge&labelColor=009B00&color=00D400
+    
+.. meta::
+    :keywords: AIMMS, sets, configuration, element parameters, named constants, refactoring, best practices, application logic, maintenance
+    :description: Learn how to use element parameters as named constants in AIMMS to create refactor-safe configuration sets and avoid hard-coding element names.
+
 Some sets in AIMMS are not data-driven, but represent configuration 
 choices or application logic switches, for example:
 
