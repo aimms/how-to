@@ -5,14 +5,15 @@ Employee Scheduling
    :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
    :description: This AIMMS project illustrates the use of a semi-continuous variable.
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Employee_Scheduling-blue
-   :target: https://github.com/aimms/employee-scheduling/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/employee-scheduling/releases/latest/download/employee-scheduling.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Employee_Scheduling-blue
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/employee-scheduling
 
-.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-webui-44/updated-employee-scheduling-example-1291
+.. image:: https://img.shields.io/badge/AIMMS-24.5-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+.. image:: https://img.shields.io/badge/WebUI-24.10.3.3-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 .. image:: images/project-1920-high.gif
     :align: center
@@ -388,19 +389,19 @@ Minimal Requirements
 Release Notes
 --------------------   
 
-`v1.4 <https://github.com/aimms/employee-scheduling/releases/tag/1.4>`_ (30/09/2024)
+`v1.4 <https://github.com/aimms/employee-scheduling/releases/download/1.4/employee-scheduling.zip>`_ (30/09/2024)
     Updating the Case Manager procedures to work instead of Upload and Download Widget to ``webui::RequestFileDownload`` and ``webui::RequestFileUpload``.
 
-`v1.3 <https://github.com/aimms/employee-scheduling/releases/tag/1.3>`_ (20/09/2024)
+`v1.3 <https://github.com/aimms/employee-scheduling/releases/download/1.3/employee-scheduling.zip>`_ (20/09/2024)
     Upgrading AIMMS version and WebUI library version.
 
-`v1.2 <https://github.com/aimms/employee-scheduling/releases/tag/1.2>`_ (15/01/2024)
+`v1.2 <https://github.com/aimms/employee-scheduling/releases/download/1.2/employee-scheduling.zip>`_ (15/01/2024)
    Ready to solve mathematical problem on AIMMS Cloud. Centering all cells. 
 
-`v1.1 <https://github.com/aimms/employee-scheduling/releases/tag/1.1>`_ (25/07/2023)
+`v1.1 <https://github.com/aimms/employee-scheduling/releases/download/1.1/employee-scheduling.zip>`_ (25/07/2023)
    Save Case dialog is now Case Manager dialog, where you can save a copy of a scenario and also load it.
 
-`v1.0 <https://github.com/aimms/employee-scheduling/releases/tag/1.0>`_ (30/06/2023)
+`v1.0 <https://github.com/aimms/employee-scheduling/releases/download/1.0/employee-scheduling.zip>`_ (30/06/2023)
    Updated to 4.96 and using the new theming variables. 
     
 .. seealso::
