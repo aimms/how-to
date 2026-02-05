@@ -1,20 +1,18 @@
 Nice to meet you Python Bridge
 ==============================
 
-The Python bridge enables AIMMS applications to leverage the power of Python libraries.
+The Python bridge enables AIMMS applications to leverage the power of Python libraries seamlessly. 
+To integrate Python into your application, follow these steps to set up your environment and exchange data.
 
-There are, however, a few small steps needed to get you on your way.
-These steps are illustrated in this how-to.
+Example Scenario
+--------------------
 
-example
--------
-
-The example we're using is simple; given a square matrix, can we obtain the transpose via Python?
+Goal: Given a square matrix $P(i,j)$ in AIMMS, obtain the transpose $PT(j,i)$ using the Python Polars library.
 
 Step 1. Add the toml file
 --------------------------
 
-Under the hood, `uv <https://docs.astral.sh/uv/>`_ is to manage the use of Python and the virtual environment.
+AIMMS uses `uv <https://docs.astral.sh/uv/>`_ to manage Python versions and virtual environments automatically.
 
 A minimal ``pyproject.toml`` file is as follows:
 
@@ -32,57 +30,36 @@ A minimal ``pyproject.toml`` file is as follows:
     ]
     [tool.uv] 
     python-preference = "managed"
-    
-Action: ``uv add polars`` will add several libraries to the virtual environment, as can be seen from the following log.
+
+The ``pyproject.toml`` files registers the dependencies.
+
+For instance, to add the Python library ``Polars``, execute the command:
+
+.. code-block: bash
+    :linenos:
+
+    uv add polars
+
+This will create / update the virtual environment ``.venv``, and change the depencies list to:
 
 .. code-block:: none
     :linenos:
-    :emphasize-lines: 1,3
+    :emphasize-lines: 3
 
-    PS .... meetyou> uv add polars
-    Using CPython 3.13.5
-    Creating virtual environment at: .venv
-    Resolved 9 packages in 175ms
-    Installed 8 packages in 603ms
-     + aimmspy==25.2.1.12
-     + numpy==2.4.2
-     + pandas==3.0.0
-     + polars==1.30.0
-     + pyarrow==20.0.0
-     + python-dateutil==2.9.0.post0
-     + six==1.17.0
-     + tzdata==2025.3
-
-Besides creating and updating the virtual environment ``.venv``, uv adapted the ``pyproject.toml`` file to the following:
-
-.. code-block:: none
-    :linenos:
-    :emphasize-lines: 8
-
-    [project]
-    name = "nice-to-meet-you-transpose-matrix"
-    version = "0.1.0"
-    description = "Good to see you again (after aimmspy)"
-    requires-python = "==3.13.*"
     dependencies = [
         "aimmspy>=25.2.1.12",
-        "polars>=1.30.0",
+        "polars>=1.30.0"
     ]
-    [tool.uv] 
-    python-preference = "managed"
     
-uv added line 8: ``"polars>=1.30.0"``; indicating that this library should be loaded.
 
-Step 2. Add standard python code
----------------------------------
+Step 2. Define the Connection (singleton.py)
+-----------------------------------------------
 
-in ``singleton.py`` the relation between the AIMMS model and the Python code is stated.
-
-- singleton 
+This file defines how AIMMS and Python talk to each other.
 
 .. code-block:: Python
     :linenos:
-    :emphasize-lines: 1,2,9,10
+    :emphasize-lines: 9,10
 
     from aimmspy.project.project import Project, Model
     from aimmspy.model.enums.data_return_types import DataReturnTypes
@@ -100,16 +77,14 @@ in ``singleton.py`` the relation between the AIMMS model and the Python code is 
 
 Remarks:
 
-*   line 1,2: Import essentials from aimmspy.
-
 *   line 9: Permit the Python scripts to exchange data  with all identifiers declared in the AIMMS model.
 
 *   line 10: Indicate which Python library is used for exchanging data of multi-dimensional identifiers with the AIMMS model.
              Currently available are DICT, ARROW, PANDAS, and POLARS.
-             In this example, we choose ARROWS.
+             In this example, we choose POLARS.
 
-Step 3. Add specific Python code
------------------------------------
+Step 3. Write the Logic (transpose.py)
+---------------------------------------
 
 After all this generic setup; we move on to more specific parts of the example at hand.  
 How does the Python code to transpose look like?
@@ -143,24 +118,23 @@ Remarks:
 Step 4. Prepare AIMMS project
 -------------------------------------
  
-4a: Add pyaimms repository library
-Add repository library pyaimms
+Add the pyaimms repository library via the Library Manager in AIMMS Developer:
 
 .. image:: images/addrepolib.png
     :align: center
 
-Step 5. Make Python functions available to your AIMMS project.
---------------------------------------------------------------
+Step 5. Create the link from the AIMMS model to the Python function
+-------------------------------------------------------------------
 
 .. code-block:: Python
     :linenos:
 
     py::run_python_script("transpose.py");
 
-This will scan the Python script ``transpose.py``
+This will scan the Python script ``transpose.py`` make the function ``transpose_matrix`` available.
 
-Step 6. Code to execute a single Python call
--------------------------------------------------
+Step 6. Execute the Python function from within AIMMS model
+--------------------------------------------------------------
 
 .. code-block:: Python
     :linenos:
@@ -181,8 +155,21 @@ After running the workhorse from the WebUI:
 Summary
 ----------------
 
+In this how-to the following is covered:
+
+*   Manage dependencies with uv.
+
+*   Connect via aimmspy in a singleton pattern.
+
+*   Transfer data using DataFrames (Polars, Pandas, etc.).
+
+*   Call Python logic directly from AIMMS procedures.
+
 
 References
 -----------------
 
+*   :doc:`Hello to the World of AIMMSPY from Python-Bridge <../679/679-hello-world-python-bridge>`
+
+*   `PYAIMMS reference documentation <https://documentation.aimms.com/python-bridge/pyaimms/pyaimms.html>`_
 
