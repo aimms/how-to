@@ -179,3 +179,9 @@ References
 
 *   `PYAIMMS reference documentation <https://documentation.aimms.com/python-bridge/pyaimms/pyaimms.html>`_
 
+.. spelling:word-list::
+
+    aimmspy
+    pyaimms
+    toml
+    uv
