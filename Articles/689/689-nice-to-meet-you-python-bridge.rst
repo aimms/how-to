@@ -1,6 +1,11 @@
 Nice to meet you: PYAIMMS from the Python Bridge
 ================================================
 
+.. image:: images/pyaimmsviewbridge.png
+    :align: center
+    :scale: 50 %
+
+
 The Python bridge enables AIMMS applications to leverage the power of Python libraries seamlessly, 
 for example for advanced data manipulation, analytics, or machine-learning workflows that are not native to AIMMS.
 To integrate Python into your application, follow these steps to set up your environment and exchange data.
