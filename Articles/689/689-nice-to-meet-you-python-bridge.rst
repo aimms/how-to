@@ -42,7 +42,7 @@ A minimal ``pyproject.toml`` file is as follows:
     [tool.uv] 
     python-preference = "managed"
 
-Download here :download:`AIMMS 4.85 project download <model/pyproject.toml>`
+Download here :download:`sample pyproject.toml <model/pyproject.toml>`
 
 The ``pyproject.toml`` file registers the dependencies.
 
