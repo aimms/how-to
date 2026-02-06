@@ -6,8 +6,6 @@ Nice to meet you: PYAIMMS from the Python Bridge
     :scale: 50 %
 
 
-
-
 The Python bridge enables AIMMS applications to leverage the power of Python libraries seamlessly, 
 for example for advanced data manipulation, analytics, or machine-learning workflows that are not native to AIMMS.
 To integrate Python into your application, follow these steps to set up your environment and exchange data.
@@ -18,6 +16,13 @@ Example Scenario
 Goal: Given a square matrix :math:`P(i,j)` in AIMMS, obtain the transpose :math:`P^T(j,i)` using the Python Polars library.
 
 Download here :download:`AIMMS 25.9 project download <model/meetyou.zip>`
+
+Requirements
+---------------------
+
+* Python: Version 3.10 and onwards
+
+* AIMMS: Version 25.4 and onwards
 
 
 Step 1. Add the toml file
@@ -139,6 +144,8 @@ Add the pyaimms repository library via the Library Manager in AIMMS Developer:
     :align: center
 
 This makes the ``py::`` procedures available inside the AIMMS model.
+
+
 
 Step 5. Create the link from the AIMMS model to the Python function
 -------------------------------------------------------------------

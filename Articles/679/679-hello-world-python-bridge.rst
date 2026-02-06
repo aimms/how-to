@@ -145,6 +145,18 @@ The Python script uses the ``aimmspy`` library to control the AIMMS session.
     hello_world_result = aimms_model.p_b.data()
     print(f"Hello world: sum is {hello_world_result}")
 
+Remarks:
+
+*   Line 9: AIMMS 25.4 or newer is required for the AIMMS Python-Bridge.
+
+*   Line 15: Sample licensing URL:
+
+    .. code-block:: none
+
+        # url
+        license_url=R"wss://licensing.aimms.cloud/license-ws/license?profile=community&license=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+
 Expected Output
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
