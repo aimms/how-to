@@ -1,85 +1,101 @@
 Sailing Across the World
-=========================
+==========================
 
-A route across the world is made up of waypoints and legs between the waypoints.  
-These waypoints and legs are represented by nodes and arcs in the map widget.
+.. meta::
+   :keywords: AIMMS, WebUI, Map widget, maritime routing, longitude wraparound, visualization, vessel scheduling, waypoints, dynamic routing
+    :description: Learn to manage map 'seams' in AIMMS WebUI. This guide covers adapting waypoint longitudes and controlling arc visibility for seamless global routes.
 
-In this short article, a sailing route around the globe is shown using the 
-`AIMMS WebUI Map widget <https://documentation.aimms.com/webui/map-widget.html>`_
-The route taken is a given collection of waypoints, with latitudes and longitudes.
+A global maritime route consists of multiple waypoints (nodes) and legs (arcs). 
+When visualizing these routes in a map interface, handling the "seam" of the world map, where longitudes transition from 180° to -180°, is a common challenge.
 
-To view this route from any point across the equator, the map widget can be scrolled horizontally. 
+This article demonstrates how to create a seamless sailing route using the `AIMMS WebUI Map widget <https://documentation.aimms.com/webui/map-widget.html>`_, 
+ensuring that waypoints and connections remain visible and logically connected even as you scroll across the globe.
 
-Please open this :download:`AIMMS project <model/Sailing.zip>` and scroll horizontally to see the effect.
+Please refer to the :doc:`Vessel Scheduling example <../590/590-vessel-scheduling>` example to follow along with this article.
 
-The project opens with the following screenshot:
+Visualizing the Route
+---------------------
+
+To provide a continuous experience, the map widget allows horizontal scrolling across the equator. 
+Open Vessel Scheduling example, load the ``503-article`` case, and navigate to the "Visualizations" page.
+
+The initial view focuses on one side of the hemisphere:
 
 .. image:: images/route-0.png
-    :align: center
+   :align: center
+   :alt: Initial sailing route view
 
 |
 
-After scrolling roughly 180 degrees, focusing on the other side of the planet, the route looks as follows:
+After scrolling approximately 180 degrees to focus on the opposite side of the planet, the route dynamically adjusts to stay within the viewport:
 
 .. image:: images/route-180.png
-    :align: center
+   :align: center
+   :alt: Sailing route view after 180 degree scroll
 
 |
 
-Design
-------------
+Design Strategy
+---------------
 
-As the map widget is scrolled horizontally, the waypoints may fall off the map at one end.
-To make them appear at the other end, the longitude of waypoints are adapted, 
-such that they are always on the visible part of the map widget. 
-The longitudes of the visible part of the map widget are assumed to be in the range [center longitude - 180, center longitude + 180].
+As the user scrolls horizontally, waypoints might "fall off" one edge of the map. 
+To keep them visible, we must adapt their longitude values so they stay within the current viewing range: ``[center longitude - 180, center longitude + 180]``.
 
-As the longitudes of the waypoints are adapted, there are two waypoints near the left and right edge of the map widget. 
-As the route is circular, these two waypoints are connected.
-Conceptually, however, this connection is behind the map, and might as well not be shown.
-This is why the arcs presented are controlled by an adaptation of the legs given, 
-such that a leg from almost the left edge of the map widget to the right edge of the map widget is not shown. 
+However, adapting longitudes creates a secondary issue: since the route is circular, 
+a connection between a waypoint at the far left edge and one at the far right edge would result in a long, 
+distracting line stretching across the entire map. To prevent this, we implement logic to hide arcs that span too large a longitudinal distance (the "backside" of the map).
 
 Implementation
---------------------
+--------------
 
-To pass the perspective of the map widget to the model, the center of latitude and longitude is obtained as follows:
+To synchronize the model with the UI, we first capture the map's current perspective (center latitude and longitude):
 
 .. image:: images/specify-center.png
-    :align: center
+   :align: center
+   :alt: Specifying center coordinates in AIMMS
 
-Based on the given longitudes in ``p_lon``, the adapted longitudes can be defined as follows:
+Step 1 - Adapting Waypoint Longitudes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Based on the original coordinates in ``p_longitude``, we define ``p_def_adapLongitude`` to shift points by 360° whenever they fall outside the current viewport range.
 
 .. code-block:: aimms
     :linenos:
 
-    Parameter p_adaptedLon {
+    Parameter p_def_adapLongitude {
         IndexDomain: i_loc;
         Definition: {
-            if p_lon(i_loc) < ( p_centerLon - 180 ) then 
-                p_lon(i_loc) + 360
-            elseif p_lon(i_loc) > ( p_centerLon + 180 ) then
-                p_lon(i_loc) - 360
+            if p_longitude(i_loc) < ( p_centerLon - 180 ) then
+                p_longitude(i_loc) + 360
+            elseif p_longitude(i_loc) > ( p_centerLon + 180 ) then
+                p_longitude(i_loc) - 360
             else
-                p_lon(i_loc)
+                p_longitude(i_loc)
             endif
         }
     }
 
-In the above, if the given longitude is more than 180 away from the center, we correct (modulo 360).
-The longitude of the nodes in the map widget is now specified as ``p_adaptedLon``.
+In the Map widget, the longitude property for your nodes should now point to ``p_def_adapLongitude``.
 
-Once we have the adapted longitudes, we implement not to draw the arcs whereby the adapted longitudes are very apart as follows:
+Step 2 - Controlling Arc Visibility
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To avoid drawing "wrap-around" lines that shouldn't be visible, we filter the connections. If the distance between two adapted longitudes exceeds 250°, the arc is hidden.
 
 .. code-block:: aimms
     :linenos:
 
-    Parameter p_adaptedConnections {
-        IndexDomain: (i_locFrom,i_locTo);
+    Parameter p_def_adapVisibleArc {
+        IndexDomain: (i_loc_from, i_loc_to);
         Definition: {
-            p_connections(i_locFrom, i_locTo) $ 
-                (abs(p_adaptedLon(i_locFrom)-p_adaptedLon(i_locTo))<250)
+            p_def_visibleArc(i_loc_from, i_loc_to) $ 
+                (abs(p_def_adapLongitude(i_loc_from) - p_def_adapLongitude(i_loc_to)) < 250)
         }
     }
 
-The arcs in the map widget are now specified as ``p_adaptedConnections``.
+Finally, specify ``p_def_adapVisibleArc`` as the data source for the arcs in your Map widget.
+
+.. seealso::
+
+   - `AIMMS WebUI Map widget documentation <https://documentation.aimms.com/webui/map-widget.html>`_
+   - :doc:`Vessel Scheduling example <../590/590-vessel-scheduling>`
