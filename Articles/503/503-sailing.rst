@@ -52,7 +52,8 @@ To synchronize the model with the UI, we first capture the map's current perspec
 
 .. image:: images/specify-center.png
    :align: center
-   :alt: Specifying center coordinates in AIMMS
+
+|
 
 Step 1 - Adapting Waypoint Longitudes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
