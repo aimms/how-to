@@ -5,14 +5,19 @@ Vessel Scheduling
    :keywords: Decision Support System, Route Optimization, Petrobras Ship Scheduling, Cost-efficient Cargo Delivery, Mathematical Optimization Model, Vessel Allocation Algorithm, WebUI and Python Integration
    :description: In this practical example, an efficient plan is developed for delivering large cargoes using oil tankers.
 
-.. image:: https://img.shields.io/badge/AIMMS_25.7-ZIP:_Vessel_Scheduling-blue
-   :target: https://github.com/aimms/vessel-scheduling/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/vessel-scheduling/releases/latest/download/vessel-scheduling.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_25.7-Github:_Vessel_Scheduling-blue
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/vessel-scheduling
 
-.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-support-updates-67/vessel-scheduling-example-1773
+.. image:: https://img.shields.io/badge/AIMMS-25.9-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+.. image:: https://img.shields.io/badge/WebUI-25.9.3.4-white?style=for-the-badge&labelColor=009B00&color=00D400   
+
+.. image:: https://img.shields.io/badge/DEX-26.1.6.1-white?style=for-the-badge&labelColor=009B00&color=00D400   
+
+.. image:: https://img.shields.io/badge/pyaimms-25.3.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400   
 
 .. image:: images/project-1920-high.gif
    :align: center
@@ -337,17 +342,28 @@ Below there are the css files you will find with comments on what they change.
             color: inherit;
          }
 
+
          .aimms-widget[data-widget\.uri="scl_EditAddElements"] .awf-dock.top,
          .aimms-widget[data-widget\.uri="msl_selecRoutes"] .awf-dock.top,
-         .aimms-widget[data-widget\.uri="MappingCargoesWithCollors_1"] .awf-dock.top,
+         .aimms-widget[data-widget\.uri="msl_selecRoutes_1"] .awf-dock.top,
          .aimms-widget[data-widget\.uri="Vessel loading_1"] .awf-dock.top{
             display: none;
          }
 
          .status-message:hover,
          .status-message.clickable:hover .status-display-text { 
+            
             background-color: #ffcdcb2d;
             color: #505767;
+         }
+
+         .aimms-widget[data-widget\.uri="MappingCargoesWithCollors_2"] .leaflet-map-pane .arc:not(.annotation-midleg)  {
+            marker-end: none;
+         }
+
+         .veil-msg {
+            background-color: rgb(249, 249, 249);
+            color: var(--color_text_widget-header);
          }
 
 Minimal Requirements
@@ -369,19 +385,22 @@ To deploy the application on AIMMS Cloud, a commercial license is needed.
 Release Notes
 --------------------
 
-`v1.4 <https://github.com/aimms/vessel-scheduling/releases/tag/1.4>`_ (04/11/2025)
+`v1.5 <https://github.com/aimms/vessel-scheduling/releases/download/1.5/vessel-scheduling.zip>`_ (06/02/2026)
+    Adding support for horizontal scroll within Map Widget, read more in :doc:`../503/503-sailing`. 
+
+`v1.4 <https://github.com/aimms/vessel-scheduling/releases/download/1.4/vessel-scheduling.zip>`_ (04/11/2025)
     Added Python script to use ``searoute`` package for distance calculation instead of haversine formula.
 
-`v1.3 <https://github.com/aimms/vessel-scheduling/releases/tag/1.3>`_ (07/10/2024)
+`v1.3 <https://github.com/aimms/vessel-scheduling/releases/download/1.3/vessel-scheduling.zip>`_ (07/10/2024)
     Fixing integration problems (import and export) when using the project on AIMMS PRO Portal.
 
-`v1.2 <https://github.com/aimms/vessel-scheduling/releases/tag/1.2>`_ (23/09/2024)
-    Added support for AimmsCmd, the task output now has three sheets, and the python now reads from the data folder inside the AIMMS Project. 
+`v1.2 <https://github.com/aimms/vessel-scheduling/releases/download/1.2/vessel-scheduling.zip>`_ (23/09/2024)
+    Added support for ``AimmsCmd``, the task output now has three sheets, and the python now reads from the data folder inside the AIMMS project. 
 
-`v1.1 <https://github.com/aimms/vessel-scheduling/releases/tag/1.1>`_ (19/09/2024)
+`v1.1 <https://github.com/aimms/vessel-scheduling/releases/download/1.1/vessel-scheduling.zip>`_ (19/09/2024)
     Performance of the route generation procedure was updated. Now you are able to solve using a Python call.
 
-`v1.0 <https://github.com/aimms/vessel-scheduling/releases/tag/1.0>`_ (15/08/2024)
+`v1.0 <https://github.com/aimms/vessel-scheduling/releases/download/1.0/vessel-scheduling.zip>`_ (15/08/2024)
     First version of this application. 
 
 .. spelling:word-list::

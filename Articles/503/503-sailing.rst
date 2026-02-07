@@ -99,3 +99,7 @@ Finally, specify ``p_def_adapVisibleArc`` as the data source for the arcs in you
 
    - `AIMMS WebUI Map widget documentation <https://documentation.aimms.com/webui/map-widget.html>`_
    - :doc:`Vessel Scheduling example <../590/590-vessel-scheduling>`
+
+.. spelling:word-list::
+
+    waypoint
