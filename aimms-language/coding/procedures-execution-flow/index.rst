@@ -20,3 +20,8 @@ Procedures & Execution Flow
    /Articles/328/328-writing-reading-text-files
    /Articles/351/351-app-initialization-termination-with-libraries
    /Articles/236/236-get-name-of-current-case
+   /Articles/119/119-Reproducible-Random-Sequence
+   /Articles/194/194-using-loopcount-instead-of-explicit-counting-parameter-in-loops
+   /Articles/580/580-download-compressed-files
+   /Articles/362/362-multi-timezone
+
