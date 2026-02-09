@@ -1,5 +1,5 @@
-Hello to the World of AIMMSPY from Python-Bridge
-=================================================
+Hello to the World of ``aimmspy`` from Python-Bridge
+=====================================================
 
 
 .. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
@@ -14,11 +14,7 @@ Hello to the World of AIMMSPY from Python-Bridge
     :keywords: AIMMS, Python-Bridge, aimmspy, Hello World, Python-in-the-lead, data exchange, pyenv, uv, virtual environment
     :description: An introductory guide to using aimmspy from the AIMMS Python-Bridge using a 'Hello World' example. Learn to open an AIMMS session, exchange data, and execute procedures from a Python script using 'aimmspy'.
 
-.. image:: images/aimmspy.png
-    :align: center
-    :scale: 50 %
-
-This **Hello World** guide introduces aimmspy from the AIMMS Python-Bridge, focusing on the core "Python-in-the-lead" workflow.
+This Hello World guide introduces ``aimmspy`` from the AIMMS Python-Bridge, focusing on the core "Python-in-the-lead" workflow.
 
 Specifically, the Python script will manage the AIMMS application to:
 
@@ -95,7 +91,7 @@ will install the dependencies used.
 AIMMS Model
 ---------------------------------
 
-The accompanying AIMMS model, ``hello.aimms``, is intentionally simple. It defines an input array (``p_A``) 
+The accompanying AIMMS model, ``679-hello-world-aimmspy.aimms``, is intentionally simple. It defines an input array (``p_A``) 
 and calculates the scalar sum of its elements, storing the result in an output parameter (``p_B``).
 
 .. figure:: images/aimms-model-tree.png
@@ -128,7 +124,7 @@ The Python script uses the ``aimmspy`` library to control the AIMMS session.
 
         # Path to the AIMMS project file (relative to the script).
         #aimms_project_file=projectfile,
-        aimms_project_file = "..\\AIMMS\\hello.aimms", 
+        aimms_project_file = "..\\AIMMS\\679-hello-world-aimmspy.aimms", 
         
         # Optional: Add your licensing URL here.
     )
@@ -160,13 +156,13 @@ the result is returned to Python:
 .. code-block:: none
     :linenos:
 
-    C:\Users\ChrisKuip\AppData\Local\AIMMS\IFA\Aimms\25.7.7.4-x64-VS2022\Bin --as-server "..\AIMMS\hello.aimms"
+    C:\Users\ChrisKuip\AppData\Local\AIMMS\IFA\Aimms\25.7.7.4-x64-VS2022\Bin --as-server "..\AIMMS\679-hello-world-aimmspy.aimms"
     Hello world: sum is 3.0
     
 Conclusion
 ------------
 
-You have now established a connection between a Python environment and an AIMMS model using aimmspy. 
+You have now established a connection between a Python environment and an AIMMS model using ``aimmspy``. 
 By following this "Hello World" workflow, you have successfully:
 
 * Established a communication channel from Python to a running AIMMS session.
@@ -179,7 +175,7 @@ allowing you to incorporate powerful optimization solvers into your broader Pyth
 .. tip::
 
     As a next step, you may want to check out: 
-    `Orchestrating Contract Allocation AIMMS App from Python <file:///C:/u/s/how-to/fb-679-make-it-aimmspy/_build/html/Articles/680/680-running-aimms-app.html>`_.
+    `Orchestrating Contract Allocation AIMMS App from Python <https://how-to.aimms.com/Articles/680/680-running-aimms-app.html#>`_.
 
 .. seealso::
 
