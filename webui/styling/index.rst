@@ -7,8 +7,6 @@ Styling
 .. toctree::
    :maxdepth: 1
     
-   /Articles/531/531-working-with-wonderful-webui-widgets
-   /Articles/531/531-create-wonderful-webui-widgets
    /Articles/377/377-add-color-palettes
    /Articles/377/377-link-legend-colors
    /Articles/549/549-hiding-default-values
@@ -24,3 +22,7 @@ Styling
 
 
 .. Note:: CSS files to customize your WebUI projects are provided as-is and are not covered by our SLA policies. If you have any questions regarding this, we encourage you to post on the `AIMMS Community <https://community.aimms.com/>`_. 
+
+
+..   /Articles/531/531-working-with-wonderful-webui-widgets
+..   /Articles/531/531-create-wonderful-webui-widgets
