@@ -9,6 +9,6 @@ Python-Bridge
    :maxdepth: 1
    :titlesonly:
 
-   /Articles/679/679-hello-world-python-bridge
+   /Articles/679/679-hello-world-aimmspy
    /Articles/680/680-running-aimms-app
    /Articles/676/676-leveraging-python-lib
