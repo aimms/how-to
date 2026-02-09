@@ -15,3 +15,5 @@ Modeling
    /Articles/178/178-change-default-solver
    /Articles/175/175-select-variables-and-constraints-for-math-program
    /Articles/150/150-solve-in-loop
+   /Articles/116/116-Benders-CPLEX
+   /Articles/526/526-reference-element-style
