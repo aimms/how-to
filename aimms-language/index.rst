@@ -26,7 +26,10 @@ Here you will find articles related to AIMMS Language separated in Coding, Model
    :titlesonly:
 
    /Articles/151/151-version-control-aimmspack-backup
-   coding/index
+   identifiers-data-modeling/index
+   procedures-execution-flow/index
+   performance-memory/index
+   debugging-logging/index
    modeling/index
    deploying/index
     
