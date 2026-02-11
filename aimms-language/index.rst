@@ -19,7 +19,8 @@ linear to nonlinear programming—and allows users to transform intricate calcul
 data-driven insights, making it invaluable in fields like supply chain, logistics, 
 and production optimization.
 
-Here you will find articles related to AIMMS Language separated in Coding, Modeling and Deploying:
+Here you will find articles related to AIMMS Language separated in Identifiers & Data Modeling, 
+Procedures & Execution Flow, Performance & Memory, Debugging & Logging, Modeling and Deploying:
 
 .. toctree::
    :maxdepth: 1
