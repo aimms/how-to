@@ -20,10 +20,16 @@ import os
 import sys
 from sphinx.builders import html as builders
 from sphinx.util import logging
-#import pdb
-import sphinx_aimms_theme
 
-sys.path.insert(0, os.path.abspath('.'))
+python_home = os.path.dirname(sys.executable)
+local_packages = os.path.join(python_home, 'Lib', 'site-packages')
+
+if os.path.exists(local_packages):
+    sys.path.insert(0, local_packages)
+
+sys.path.insert(0, os.path.abspath("."))
+
+import sphinx_aimms_theme
 
 # -- General configuration ------------------------------------------------
 
@@ -38,7 +44,7 @@ extensions = ['sphinx.ext.doctest',
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
     'sphinx.ext.intersphinx',
-	  'sphinx.builders.linkcheck',
+    'sphinx.builders.linkcheck',
     'sphinx_aimms_theme',
     'sphinxcontrib.spelling',
     'sphinx_design']
