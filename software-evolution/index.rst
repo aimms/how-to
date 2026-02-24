@@ -24,7 +24,6 @@ AIMMS Optimization Tooling has evolved over time, to match arising user needs an
    /Articles/295/295-convert-maps
    /Articles/312/312-convert-gams-to-aimms
    /Articles/314/314-from-dat-to-data
-   /Articles/317/317-upgrade-your-aimms-pro
    /Articles/318/318-aimms-and-aimms-pro
    /Articles/319/319-character-set-evolution-aimms
    /Articles/333/333-update-webui-version
