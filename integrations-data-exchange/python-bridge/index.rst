@@ -10,6 +10,6 @@ Python-Bridge
    :titlesonly:
 
    /Articles/679/679-hello-world-aimmspy
-   /Articles/689/689-nice-to-meet-you-python-bridge
+   /Articles/689/689-nice-to-meet-you-pyaimms
    /Articles/680/680-running-aimms-app
    /Articles/676/676-leveraging-python-lib

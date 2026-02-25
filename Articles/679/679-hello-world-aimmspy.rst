@@ -6,7 +6,7 @@ Hello to the World of ``aimmspy`` from Python-Bridge
    :target: https://github.com/aimms/679-hello-world-python-bridge/archive/refs/heads/main.zip
 
 .. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
-   :target: https://github.com/aimms/679-hello-world-python-bridge
+   :target: https://github.com/aimms/679-hello-world-aimmspy
 
 .. image:: https://img.shields.io/badge/AIMMS-25.5-white?style=for-the-badge&labelColor=009B00&color=00D400
 

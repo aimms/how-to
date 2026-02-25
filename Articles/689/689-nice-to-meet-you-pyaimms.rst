@@ -1,4 +1,4 @@
-Nice to meet you: PYAIMMS from the Python Bridge
+Nice to meet you: PYAIMMS from Python Bridge
 ================================================
 
 .. image:: images/pyaimmsviewbridge.png
@@ -194,7 +194,7 @@ In this how-to the following is covered:
 References
 -----------------
 
-*   :doc:`Hello to the World of AIMMSPY from Python-Bridge <../679/679-hello-world-python-bridge>`
+*   :doc:`Hello to the World of AIMMSPY from Python-Bridge <../679/679-hello-world-aimmspy>`
 
 *   `PYAIMMS reference documentation <https://documentation.aimms.com/python-bridge/pyaimms/pyaimms.html>`_
 
