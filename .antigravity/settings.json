@@ -1,0 +1,8 @@
+{
+    "esbonio.sphinx.pythonCommand": [
+        "C:/Users/GabrielaServidone/.pyenv/pyenv-win/versions/3.11.9/python.exe"
+    ],
+    "esbonio.sphinx.confDir": "C:/Users/GabrielaServidone/Desktop/Gitlab/aimms-how-to",
+    "esbonio.server.enabled": true,
+    "esbonio.server.logLevel": "debug"
+}
