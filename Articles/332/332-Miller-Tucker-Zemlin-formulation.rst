@@ -49,7 +49,7 @@ The binary variable :math:`x_{ijk}` has a value of 1 if vehicle k drives from no
 
 .. math:: \qquad \qquad q_{i} \leq u_{i} \leq Q \qquad \forall i \in V \setminus \{1\} \qquad \qquad \qquad (2)
 
-If vehicle k drives from node :math:`i` to node :math:`j`, :math:`x_{ijk}` = 0 and constraint (1) can be rewritten to :math:`u_{j} \geq u_{i} + q_{j}`. This ensure that the value of :math:`u_{j}` is at least :math:`q_j` more than :math:`u_i`. So the value of :math:`u_j` is greater than the value of :math:`u_i`
+If vehicle k drives from node :math:`i` to node :math:`j`, :math:`x_{ijk}` = 1 and constraint (1) can be rewritten to :math:`u_{j} \geq u_{i} + q_{j}`. This ensure that the value of :math:`u_{j}` is at least :math:`q_j` more than :math:`u_i`. So the value of :math:`u_j` is greater than the value of :math:`u_i`
 
 If vehicle k does not drive from node :math:`i` to node :math:`j`, the constraint is still valid. Constraint (1) could then be rewritten to :math:`u_{j} - q_{j} \geq u_i - Q`. Constraint (2) states that :math:`q_j` is the lowest possible value of :math:`u_j` and :math:`Q` is the greatest possible 
 value of :math:`u_i`. So :math:`u_j-q_j` will at least be 0 and :math:`u_i-Q` will at most be 0. So :math:`u_j-q_j` is greater than or equal to :math:`u_i-Q`
