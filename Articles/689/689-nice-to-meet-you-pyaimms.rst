@@ -8,8 +8,10 @@ Nice to meet you: PYAIMMS from Python Bridge
 Download here :download:`AIMMS 25.9 project download <model/meetyou.zip>`
 
 The Python bridge allows AIMMS applications to call Python code and exchange data with Python libraries.
-This how-to demonstrates how to configure the bridge, manage dependencies, and transfer multi-dimensional identifiers between AIMMS and Python.
+This how-to demonstrates a clean integration pattern: how to configure the bridge, manage dependencies, and 
+exchange multi-dimensional identifiers between AIMMS and Python.
 The example uses a simple matrix transpose to illustrate the integration steps rather than the Python logic itself.
+
 
 The concept
 -------------
@@ -30,10 +32,13 @@ The concept
     
     #.  The value column is named after the identifier.
 
+
+
+
 Example: Demonstrating Data Exchange
 -------------------------------------------------- 
 
-Goal: Given a square matrix :math:`P(i,j)` in AIMMS, compute its transpose :math:`P^T(j,i)` using the Python Polars.
+Goal: Given a square matrix :math:`P(i,j)` in AIMMS, compute its transpose :math:`P^T(j,i)` using the Python library Polars.
 
 The matrix transpose is used only to illustrate how multi-dimensional data is transferred and manipulated in Python.
 
@@ -102,6 +107,18 @@ Placement
 
 Place this file in the project folder, next to the ``.aimms`` file.
 
+Regarding the Python Bridge, we will follow the project structure:
+
+.. code-block:: none
+
+    project/
+     ├─ meetyou.aimms
+     ├─ pyproject.toml
+     └─ PythonScripts/
+         ├─ pyaimms_bridge.py
+         └─ transpose.py
+
+
 Step 2. Define the Connection (pyaimms_bridge.py)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -128,7 +145,8 @@ Remarks:
 *   line 6: Specifies the data format used for multi-dimensional identifiers.
     Available options are DICT, ARROW, PANDAS, and POLARS. In this example, we choose POLARS.
 
-*   line 9: The file ``model_stub.pyi`` is the auto-generated bridge file.
+*   line 9: The Python bridge generates a typed stub file (``model_stub.pyi``).
+    The call ``get_model("model_stub.py")`` loads this stub for typed access.
 
     * This provides typed access to exposed identifiers.
     
@@ -176,6 +194,14 @@ Similarly, the output long-format DataFrame:
    1   1  11
    2   1  12
    ...
+
+The ``pyaimms_bridge`` module exposes the AIMMS model through the object ``aimms_model``.
+Through this object, Python can read and assign AIMMS identifiers such as parameters, sets, and variables.  Using:
+
+*   ``.data()`` to retrieve an AIMMS identifier as a DataFrame.
+
+*  ``.assign()`` to assign Python data back to an AIMMS identifier.
+
 
 Transposing a matrix corresponds to swapping the index columns ``i`` and ``j``.
 The Python implementation:
