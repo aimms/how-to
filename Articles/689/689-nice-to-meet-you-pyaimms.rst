@@ -5,30 +5,53 @@ Nice to meet you: PYAIMMS from Python Bridge
     :align: center
     :scale: 50 %
 
-
-The Python bridge enables AIMMS applications to leverage the power of Python libraries seamlessly, 
-for example for advanced data manipulation, analytics, or machine-learning workflows that are not native to AIMMS.
-To integrate Python into your application, follow these steps to set up your environment and exchange data.
-
-Example Scenario
---------------------
-
-Goal: Given a square matrix :math:`P(i,j)` in AIMMS, obtain the transpose :math:`P^T(j,i)` using the Python Polars library.
-
 Download here :download:`AIMMS 25.9 project download <model/meetyou.zip>`
+
+The Python bridge allows AIMMS applications to call Python code and exchange data with Python libraries.
+This how-to demonstrates how to configure the bridge, manage dependencies, and transfer multi-dimensional identifiers between AIMMS and Python.
+The example uses a simple matrix transpose to illustrate the integration steps rather than the Python logic itself.
+
+The concept
+-------------
+
+#.  Environment management
+
+    AIMMS uses ``uv`` to create and manage a project-specific Python environment automatically.
+
+#.  Connection layer
+
+    The ``aimmspy`` library provides a typed access to exposed AIMMS identifiers.
+
+#.  Data exchange model
+
+    Multi-dimensional identifiers are transferred as long-format DataFrames:
+    
+    #.  Each index becomes a column.
+    
+    #.  The value column is named after the identifier.
+
+Example: Demonstrating Data Exchange
+-------------------------------------------------- 
+
+Goal: Given a square matrix :math:`P(i,j)` in AIMMS, compute its transpose :math:`P^T(j,i)` using the Python Polars.
+
+The matrix transpose is used only to illustrate how multi-dimensional data is transferred and manipulated in Python.
+
 
 Requirements
 ---------------------
 
-* Python: Version 3.10 and onwards
+* Python 3.10 or later
 
-* AIMMS: Version 25.4 and onwards
+* AIMMS 25.4 or later
 
+Steps taken with the Python files
+----------------------------------
 
 Step 1. Add the toml file
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-AIMMS uses `uv <https://docs.astral.sh/uv/>`_ to manage Python versions and virtual environments automatically.
+`uv <https://docs.astral.sh/uv/>`_ manages the Python versions and virtual environments automatically.
 
 A minimal ``pyproject.toml`` file is as follows:
 
@@ -42,14 +65,14 @@ A minimal ``pyproject.toml`` file is as follows:
     description = "Good to see you again (after aimmspy)"
     requires-python = "==3.13.*"
     dependencies = [
-        "aimmspy>=25.2.1.12"
+        "aimmspy>=25.3.1.8"
     ]
     [tool.uv] 
-    python-preference = "managed"
+    python-preference = "only-managed"
 
 Download here :download:`sample pyproject.toml <model/pyproject.toml>`
 
-The ``pyproject.toml`` file registers the dependencies.
+The ``pyproject.toml`` file defines the dependencies.
 
 Remarks: 
 
@@ -62,26 +85,31 @@ For instance, to add the Python library ``Polars``, execute the command:
 
     uv add polars
 
-This will create / update the virtual environment ``.venv``, and change the dependencies list to:
+This creates or updates the ``.venv`` environment and adds the dependency:
 
 .. code-block:: none
     :linenos:
     :emphasize-lines: 3
 
     dependencies = [
-        "aimmspy>=25.2.1.12",
-        "polars>=1.30.0"
+        "aimmspy>=25.3.1.8",
+        "polars>=1.30"
     ]
     
 
-Step 2. Define the Connection (singleton.py)
------------------------------------------------
+Placement
+""""""""""""""
 
-This file defines how AIMMS and Python talk to each other.
+Place this file in the project folder, next to the ``.aimms`` file.
+
+Step 2. Define the Connection (pyaimms_bridge.py)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This file defines the Python–AIMMS connection.
 
 .. code-block:: Python
     :linenos:
-    :emphasize-lines: 5,6
+    :emphasize-lines: 5,6,9
 
     from aimmspy.project.project import Project, Model
     from aimmspy.model.enums.data_return_types import DataReturnTypes
@@ -91,26 +119,72 @@ This file defines how AIMMS and Python talk to each other.
         data_type_preference = DataReturnTypes.POLARS
     )
 
-    my_aimms : Model = project.get_model("model_stub.py")
+    aimms_model : Model = project.get_model("model_stub.py")
 
 Remarks:
 
-*   line 5: Allows Python scripts to exchange data with all identifiers declared in the AIMMS model.
+*   line 5: Exposes all identifiers in the AIMMS model to Python.
 
-*   line 6: Indicates which Python library is used for exchanging data of multi-dimensional identifiers with the AIMMS model.
-    Currently available are DICT, ARROW, PANDAS, and POLARS. In this example, we choose POLARS.
+*   line 6: Specifies the data format used for multi-dimensional identifiers.
+    Available options are DICT, ARROW, PANDAS, and POLARS. In this example, we choose POLARS.
+
+*   line 9: The file ``model_stub.pyi`` is the auto-generated bridge file.
+
+    * This provides typed access to exposed identifiers.
+    
+    * It is regenerated when the model changes.
+    
+    * It should not be edited manually.
+
+This example uses a singleton (pyaimms_bridge.py) to maintain a persistent connection during the session.
+
+Placement
+""""""""""""""
+
+Place this file in the ``PythonScripts`` subfolder.
 
 Step 3. Write the Logic (transpose.py)
----------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After all this generic setup; we move on to more specific parts of the example at hand.  
-How does the Python code to transpose look like?
+In AIMMS, a multi-dimensional parameter such as ``P(i,j)`` is defined over index domains ``i`` and ``j``, 
+which can be interpreted mathematically as row and column indices of a matrix.
+
+When transferred to Python via the bridge, the parameter is represented as a long-format DataFrame. 
+In this representation:
+
+*   Each AIMMS index becomes a column in the DataFrame.
+
+*   The parameter values appear in a column named after the identifier (e.g., ``P``).
+
+For example, ``P(i,j)`` is transferred as:
+
+.. code-block:: none
+
+   i   j  p
+   1   1  11
+   1   2  12
+   ...
+
+Thus, although ``i`` and ``j`` represent row and column indices conceptually, 
+they are both columns in the Python DataFrame representation.
+
+Similarly, the output long-format DataFrame:
+
+.. code-block:: none
+
+   i   j  pt
+   1   1  11
+   2   1  12
+   ...
+
+Transposing a matrix corresponds to swapping the index columns ``i`` and ``j``.
+The Python implementation:
 
 .. code-block:: Python
     :linenos:
     :emphasize-lines: 9,15
 
-    from singleton import my_aimms
+    from PythonScripts.pyaimms_bridge import aimms_model
 
     def transpose_matrix():
         """
@@ -118,60 +192,68 @@ How does the Python code to transpose look like?
         """
 
         # Get the DataFrame from AIMMS.
-        p_df = my_aimms.p.data()
+        p_df = aimms_model.p.data()
 
         # Swap index dimensions and rename the value column.
         pt_df = p_df.rename({'j': 'i', 'i': 'j', 'p': 'pt'})
 
         # Send data back to AIMMS.
-        my_aimms.pt.assign(pt_df)
+        aimms_model.pt.assign(pt_df)
 
 Remarks:
 
-*   Line 9: Copy the data from AIMMS parameter ``p`` into Python Polars DataFrame ``p_df``
+*   Line 9: Retrieves parameter ``p`` as a Polars DataFrame.
 
-*   Line 12: Because multi-dimensional AIMMS parameters are transferred as long-format DataFrames, 
-    transposing a matrix corresponds to swapping the index columns ``i`` and ``j``.
+*   Line 12: Swaps the index columns and renames the value column.
 
-*   Line 15: And copy the data from Polars DataFrame ``pt_df`` into the AIMMS parameter ``pt``
+*   Line 15: Assigns the result to parameter ``pt`` in AIMMS.
 
-Step 4. Prepare AIMMS project
--------------------------------------
+Placement
+""""""""""""""
+
+This file is placed in the sub-folder ``PythonScripts``.
+
+Steps taken in the AIMMS project
+---------------------------------------------------------------
+
+Step 1. Prepare AIMMS project
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  
 Add the pyaimms repository library via the Library Manager in AIMMS Developer:
 
 .. image:: images/addrepolib.png
     :align: center
 
-This makes the ``py::`` procedures available inside the AIMMS model.
+This makes the ``py::`` procedures available in the AIMMS model.
 
 
-
-Step 5. Create the link from the AIMMS model to the Python function
--------------------------------------------------------------------
+Step 2. Create the link from the AIMMS model to the Python function
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: Python
     :linenos:
 
-    py::run_python_script("transpose.py");
+    py::run_python_script("PythonScripts/transpose.py");
 
-This will scan the Python script ``transpose.py`` make the function ``transpose_matrix`` available.
+This command loads the Python module into the interpreter so its functions 
+can be executed from AIMMS via ``py::run_python_statement``.
 In the example project provided, this procedure is called during initialization.
 
-Step 6. Execute the Python function from within AIMMS model
---------------------------------------------------------------
+Step 3. Execute the Python function from within AIMMS model
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: Python
     :linenos:
 
     py::run_python_statement("transpose_matrix()");
-    
-This statement will execute the Python function ``transpose_matrix`` once.
 
-Step 7. Run a single Python procedure
--------------------------------------------------
+This executes the Python function ``transpose_matrix``.
+In the example project, this call is part of procedue ``pr_transpose``. 
 
-After running the workhorse from the WebUI:
+Step 4. Trigger the Python Procedure from the WebUI
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The procedure ``pr_transpose`` is activated by pressing the button ``♘`` in the WebUI:
 
 .. image:: images/transposeresult.png
     :align: center
@@ -180,7 +262,7 @@ After running the workhorse from the WebUI:
 Summary
 ----------------
 
-In this how-to the following is covered:
+This how-to covers: 
 
 *   Manage dependencies with uv.
 
