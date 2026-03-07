@@ -248,7 +248,7 @@ Step 3. Execute the Python function from within AIMMS model
     py::run_python_statement("transpose_matrix()");
 
 This executes the Python function ``transpose_matrix``.
-In the example project, this call is part of procedue ``pr_transpose``. 
+In the example project, this call is part of procedure ``pr_transpose``. 
 
 Step 4. Trigger the Python Procedure from the WebUI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
