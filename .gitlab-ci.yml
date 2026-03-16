@@ -64,3 +64,31 @@ az_deploy:
     - az storage copy -s '_build/html' --recursive --destination-container '$web' -- --overwrite=true --as-subdir=false
     - bash load_ssh_key_for_deploy.sh
     # - ssh support@data.aimms.com rm -f -r /home/aimms/www/how-to-staging/staging/
+
+upload_html_to_rfx_blob:
+  <<: *run_on_dockerhost
+  stage: deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: on_success
+    - when: never
+  script:
+    - sphinx-build -b html . _build/html
+    - mkdir -p _build/flat
+    - |
+      set -eo pipefail
+      find _build/html -name "*.html" -print0 | while IFS= read -r -d '' f; do
+        parent=$(basename "$(dirname "$f")")
+        filename=$(basename "$f")
+        if [ "$parent" = "html" ]; then
+          cp "$f" "_build/flat/$filename"
+        else
+          cp "$f" "_build/flat/${parent}-${filename}"
+        fi
+      done
+    - >
+      az storage blob sync
+      --connection-string "$RALFXPROJECT_CONNECTION_STRING"
+      --container rfx-aimms-howto
+      --source _build/flat
+      --delete-destination true
