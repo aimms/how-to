@@ -69,7 +69,7 @@ upload_html_to_rfx_blob:
   <<: *run_on_dockerhost
   stage: deploy
   rules:
-    - if: $CI_COMMIT_BRANCH == "master"
+    - if: $CI_COMMIT_BRANCH == "feature/upload-to-ralfxproject"
       when: on_success
     - when: never
   script:
