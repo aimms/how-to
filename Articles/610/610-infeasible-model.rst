@@ -4,6 +4,7 @@ Debug an Infeasible Model
 .. meta::
    :description: Describes five methods for diagnosing an infeasible AIMMS model: Math Program Inspector, Infeasibility Finder, constraint listing, excess variable analysis, and AIMMS Presolver.
    :keywords: infeasibility, Math Program Inspector, Infeasibility Finder, constraint listing, excess variables, AIMMS Presolver, CPLEX, GUROBI, listing file, debugging
+
 After executing a solve statement in your model, AIMMS returns with the message that your model is infeasible.
 
 There are several ways to find out why your model is infeasible. This article presents a few methods:
@@ -17,6 +18,7 @@ There are several ways to find out why your model is infeasible. This article pr
 
 Math Program Inspector
 --------------------------
+
 The Math Program Inspector contains a collection of tools that can help you to find the cause of errors in your linear model. 
 
 .. seealso::
