@@ -15,7 +15,7 @@ Contract Allocation
 
 .. image:: https://img.shields.io/badge/WebUI-25.9.1.0-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-.. image:: https://img.shields.io/badge/AimmsDEX-25.10.1.2-white?style=for-the-badge&labelColor=009B00&color=00D400
+.. image:: https://img.shields.io/badge/DEX-25.10.1.2-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 .. image:: images/project-1920-high.gif
     :align: center
@@ -367,6 +367,9 @@ Minimal Requirements
    
 Release Notes
 --------------------   
+
+`v1.9 <https://github.com/aimms/contract-allocation/releases/download/1.9/contract-allocation.zip>`_ (17/03/2026)
+   Commenting the project. 
 
 `v1.8 <https://github.com/aimms/contract-allocation/releases/download/1.8/contract-allocation.zip>`_ (29/12/2025)
    Updating AIMMS version to 25.9, WebUI to 25.9.1.0 and AimmsDEX to 25.10.1.2. Adding more comments to the procedures and identifiers.

@@ -11,11 +11,11 @@ Traveling Salesman
 .. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/traveling-salesman
    
-.. image:: https://img.shields.io/badge/AIMMS-25.9-white?style=for-the-badge&labelColor=009B00&color=00D400
+.. image:: https://img.shields.io/badge/AIMMS-26.1-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-.. image:: https://img.shields.io/badge/WebUI-25.9.2.8-white?style=for-the-badge&labelColor=009B00&color=00D400
+.. image:: https://img.shields.io/badge/WebUI-26.3.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-.. image:: https://img.shields.io/badge/DEX-26.1.2.1-white?style=for-the-badge&labelColor=009B00&color=00D400
+.. image:: https://img.shields.io/badge/DEX-26.1.8.1-white?style=for-the-badge&labelColor=009B00&color=00D400
  
 .. image:: images/project-1920-high.gif
     :align: center
@@ -440,6 +440,9 @@ To receive an free API key to test, please sign up to the `free plan <https://po
 
 Release Notes
 --------------------   
+
+`v1.2 <https://github.com/aimms/traveling-salesman/releases/download/1.2/traveling-salesman.zip>`_ (19/03/2026)
+   Updated to AIMMS 26.1, WebUI 26.3.1.1 and DEX 26.1.8.1. Commenting the project. 
 
 `v1.1 <https://github.com/aimms/traveling-salesman/releases/download/1.1/traveling-salesman.zip>`_ (30/09/2024)
    Now you can run all types of solve on AIMMS Cloud. Correct driver is set when using the API on AIMMS Cloud. 

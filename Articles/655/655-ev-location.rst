@@ -11,17 +11,15 @@ EV Charging Location
 .. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/ev-charging-locations
 
-.. image:: https://img.shields.io/badge/AIMMS-24.5-white?style=for-the-badge&labelColor=009B00&color=00D400
+.. image:: https://img.shields.io/badge/AIMMS-25.9-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-.. image:: https://img.shields.io/badge/WebUI-24.10.3.3-white?style=for-the-badge&labelColor=009B00&color=00D400
+.. image:: https://img.shields.io/badge/WebUI-24.12.4.2-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+.. image:: https://img.shields.io/badge/DEX-24.5.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400
  
 
 .. figure:: images/project-1920-high.gif
    :align: center
-   
-   The AIMMS EV Charging Location example is an interactive application for solving a capacitated facility location problem (CFLP) 
-   to find optimal EV charging station placements. It uses widgets like maps, tables, sliders, and charts to visualize data, 
-   adjust parameters in real-time, and compare different scenarios, helping users understand optimization within a geospatial context.
 
 Story
 -----
@@ -345,6 +343,9 @@ Minimal Requirements
 
 Release Notes
 --------------------
+
+`v1.1 <https://github.com/aimms/ev-charging-locations/releases/download/1.1/ev-charging-locations.zip>`_ (17/03/2026)
+	Commenting the project. 
 
 `v1.0 <https://github.com/aimms/ev-charging-locations/releases/download/1.0/ev-charging-locations.zip>`_ (22/11/2024)
 	First version of this application. 

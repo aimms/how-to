@@ -11,7 +11,7 @@ Employee Scheduling
 .. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/employee-scheduling
 
-.. image:: https://img.shields.io/badge/AIMMS-24.5-white?style=for-the-badge&labelColor=009B00&color=00D400
+.. image:: https://img.shields.io/badge/AIMMS-25.9-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 .. image:: https://img.shields.io/badge/WebUI-24.10.3.3-white?style=for-the-badge&labelColor=009B00&color=00D400
 
@@ -379,6 +379,9 @@ Minimal Requirements
 
 Release Notes
 --------------------   
+
+`v1.5 <https://github.com/aimms/employee-scheduling/releases/download/1.5/employee-scheduling.zip>`_ (17/03/2026)
+    Commenting the project. 
 
 `v1.4 <https://github.com/aimms/employee-scheduling/releases/download/1.4/employee-scheduling.zip>`_ (30/09/2024)
     Updating the Case Manager procedures to work instead of Upload and Download Widget to ``webui::RequestFileDownload`` and ``webui::RequestFileUpload``.

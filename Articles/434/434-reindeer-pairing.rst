@@ -11,7 +11,7 @@ Reindeer Pairing
 .. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/reindeer-pairing
 
-.. image:: https://img.shields.io/badge/AIMMS-24.5-white?style=for-the-badge&labelColor=009B00&color=00D400
+.. image:: https://img.shields.io/badge/AIMMS-25.9-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 .. image:: https://img.shields.io/badge/WebUI-24.10.3.3-white?style=for-the-badge&labelColor=009B00&color=00D400
  
@@ -265,6 +265,9 @@ Minimal Requirements
 
 Release Notes
 --------------------   
+
+`v1.1 <hhttps://github.com/aimms/reindeer-pairing/releases/download/1.1/reindeer-pairing.zip>`_ (17/03/2026)
+	Commenting the project. 
 
 `v1.0 <hhttps://github.com/aimms/reindeer-pairing/releases/download/1.0/reindeer-pairing.zip>`_ (26/09/2024)
 	First logged version. 

@@ -10,11 +10,11 @@ Knapsack Problem
 .. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/knapsack
 
-.. image:: https://img.shields.io/badge/AIMMS-24.5-white?style=for-the-badge&labelColor=009B00&color=00D400
+.. image:: https://img.shields.io/badge/AIMMS-25.9-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-.. image:: https://img.shields.io/badge/WebUI-24.10.3.3-white?style=for-the-badge&labelColor=009B00&color=00D400
+.. image:: https://img.shields.io/badge/WebUI-26.2.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-.. image:: https://img.shields.io/badge/AXLL-24.0.0.2-white?style=for-the-badge&labelColor=009B00&color=00D400
+.. image:: https://img.shields.io/badge/AXLL-25.1.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400
  
 .. image:: images/project-1920-high.gif
     :align: center
@@ -267,6 +267,9 @@ Minimal Requirements
 
 Release Notes
 --------------------   
+
+`v1.2 <https://github.com/aimms/knapsack/releases/download/1.2/knapsack.zip>`_ (17/03/2026)
+   Commenting the project. 
 
 `v1.1 <https://github.com/aimms/knapsack/releases/download/1.1/knapsack.zip>`_ (24/09/2024)
    Now you can run the different types of solve on PRO Portal.
