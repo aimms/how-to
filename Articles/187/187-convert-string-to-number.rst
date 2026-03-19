@@ -2,8 +2,8 @@ Convert String to Numerical Value
 =====================================
 
 .. meta::
-   :description: input string translated to numbers with specified handling for errors
-   :keywords: string, number, error handling
+   :description: Explains how to convert a string or element parameter to a numerical value in AIMMS using the Val function with proper error handling.
+   :keywords: Val function, string to number, type conversion, element parameter, error handling, Integers set, string parameter, intrinsic function
 
 This article explains how to convert a string representation of a number to a numerical value.
 

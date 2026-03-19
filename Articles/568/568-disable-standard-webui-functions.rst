@@ -1,6 +1,10 @@
 Disable Standard WebUI Functions
 ================================
 
+.. meta::
+   :description: Provides CSS snippets to hide standard WebUI widget header controls such as the filter button, search button, and download/upload menu items globally or per widget.
+   :keywords: CSS, WebUI, widget header, hide, filter, search button, download, upload, widget URI, widget type, stylesheet
+
 This is an overview of ``css`` code that allows you to hide standard features of WebUI, found in almost every widget header.
 
 Most of these either be hidden for the whole project (by using the examples directly) or you could target a specific widget/type, for which examples are shown below too.

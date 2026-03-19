@@ -1,7 +1,11 @@
 AIMMS IDE Troubleshooting
 ===========================================
 
-Error: Handling SSL Errors in your AIMMS Project 
+.. meta::
+   :description: Diagnoses and resolves SSL certificate verification failures when AIMMS connects to the Library Repository, with three solutions including Windows updates, IE mode in Edge, and certificate transfer.
+   :keywords: SSL error, certificate verify failed, library repository, RepositoryLibrary, AutoLib, SSLContext, certmgr, Windows certificate, HTTPS, AIMMS IDE
+
+Error: Handling SSL Errors in your AIMMS Project
 -------------------------------------------------
 
 **Issue:** While you are opening your AIMMS project you may experience a crash which can manifest with a pop-up error message looking like one of these below:

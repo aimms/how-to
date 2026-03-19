@@ -6,8 +6,8 @@ Flow Shop
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: CallBackNewIncumbent, MIP model, Gantt chart, AsynchronousExecute, GMP, Rest API, Endpoint
-   :description: The goal in this example is to find a schedule such that the time to process all the jobs on all the machines is as small as possible.
+   :description: Minimizes makespan for a flow shop scheduling problem using a MIP model with start-value initialization and parallel asynchronous solver sessions on multi-core machines.
+   :keywords: flow shop, makespan minimization, MIP model, GMP, AsynchronousExecute, CallBackNewIncumbent, Gantt chart, parallel solver sessions, Rest API
 
 
 Direct download AIMMS Project :download:`Flow Shop.zip <model/Flow Shop.zip>`

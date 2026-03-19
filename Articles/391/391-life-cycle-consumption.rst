@@ -6,8 +6,8 @@ Life Cycle Consumption
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Utility Function, Discount Factor, Present Value, Future Value, Nonlinear Programming, Nonlinear Solvers, Curve Object
-   :description: In this example a life-cycle consumption optimization problem has been modeled, including labor and assets.
+   :description: Optimizes lifetime consumption and labor decisions under exponential or square-root utility functions, with optional borrowing constraints modeled as nonlinear programs.
+   :keywords: life-cycle consumption, utility function, discount factor, present value, nonlinear programming, borrowing constraints, labor, assets, curve object
 
 Direct download AIMMS Project :download:`Life Cycle Consumption.zip <model/Life Cycle Consumption.zip>`
 

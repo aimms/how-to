@@ -1,8 +1,8 @@
 Selecting Pages for Workflow Panels 
 =======================================================
 .. meta::
-   :description: How to use element and string parameters to configure Workflows more smoothly.
-   :keywords: workflow, parameter, pageId, redirect, work flow, webui, ui
+   :description: Explains how to use element and string parameters together to configure Workflow Panel steps in AIMMS WebUI, reducing page ID entry errors.
+   :keywords: WebUI, workflow panel, element parameter, string parameter, pageId, indexWorkflowPageSpec, AllRegularPages, WebUI configuration
 
 .. important::
 

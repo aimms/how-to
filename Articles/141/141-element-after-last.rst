@@ -2,8 +2,8 @@
 ====================================
 
 .. meta::
-   :description: How to use lead and lag operations to create infinite sets.
-   :keywords: cycle, cyclic, empty, next, last
+   :description: Explains how AIMMS handles lead and lag operations on set indices, including behavior when referencing the element after the last in a finite set.
+   :keywords: lead operator, lag operator, cyclic set, empty element, index domain condition, stock balance constraint, set ordering, AIMMS language
 
       .. note::
 

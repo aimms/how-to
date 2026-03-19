@@ -1,7 +1,7 @@
 
 .. meta::
-   :description: How to use OAuth2 for API authorization in DEX.
-   :keywords: aimms, data, exchange, api, authorization, security, oauth
+   :description: Demonstrates how to implement OAuth2 Authorization Code and Client Credentials flows in AIMMS using the Data Exchange Library with Google and Azure APIs.
+   :keywords: OAuth2, Data Exchange Library, DEX, authorization code flow, client credentials flow, Google OpenID, Azure Active Directory, REST API, bearer token, dex::oauth
    
 
 Using OAuth2 for API Authorization with DEX

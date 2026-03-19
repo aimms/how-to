@@ -6,8 +6,8 @@ File Merge
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Linear Program, Network Program, Simplex Method, Column Generation, Mathematical Derivation, Customized Algorithm
-   :description: This problem deals with merging two statistical database files.
+   :keywords: File merge, network program, simplex method, column generation, reduced cost, statistical database, LP
+   :description: Solves statistical database file merging as a network LP using both the simplex method and a column-generation algorithmic approach that controls model size via reduced-cost evaluation.
 
 Direct download AIMMS Project :download:`File Merge.zip <model/File Merge.zip>`
 

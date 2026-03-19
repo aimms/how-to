@@ -2,8 +2,12 @@ Chemical Engineering: Blending problem
 =======================================
 
 .. warning::
-   This article references outdated technology and is provided for historical purposes only. 
+   This article references outdated technology and is provided for historical purposes only.
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
+.. meta::
+   :description: Minimizes the production cost of a metal alloy by blending available market alloys using a small LP model based on Dantzig's linear programming formulation.
+   :keywords: blending problem, LP, alloy, cost minimization, chemical engineering, linear programming
 
 Direct download AIMMS Project :download:`BlendingProblem.zip <model/BlendingProblem.zip>`
 

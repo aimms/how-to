@@ -2,8 +2,8 @@ Various (Integer) Linear Modeling Tricks
 ===========================================
 
 .. meta::
-   :description: Various resources about integer and linear modeling tricks for efficiency.
-   :keywords: resources, integer, linear, modeling, efficiency
+   :description: Provides references to resources on integer and linear programming modeling tricks including formulettes and AIMMS optimization modeling guides.
+   :keywords: integer programming, linear programming, modeling tricks, formulettes, MIP, LP, optimization modeling, binary variables, Big M, reformulation
 
 
 Modeling problems with an (integer) linear program sometimes requires some experience to recognize certain structures 

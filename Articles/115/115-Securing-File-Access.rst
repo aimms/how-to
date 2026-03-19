@@ -2,8 +2,8 @@ Secure File Access
 ====================
 
 .. meta::
-   :description: Modeling for secure apps deployed on AIMMS Cloud. Securing file access in AIMMS PRO Storage.
-   :keywords: secure, storage, access
+   :description: Explains how to set authorization strings to grant or deny file access per entity in AIMMS PRO Storage for secure AIMMS Cloud applications.
+   :keywords: PRO Storage, authorization string, file access, entity, user group, SaveFileToCentralStorage, AimmsPROLibrary, access control
 
 In this article, we will cover granting and denying access to files in AIMMS PRO Storage.
 

@@ -1,6 +1,10 @@
 Determine Data Ranges in Excel Files
 ================================================
 
+.. meta::
+   :description: Explains techniques for determining Excel data ranges dynamically in AIMMS using AXLL functions, named ranges, and sufficiently large range estimates.
+   :keywords: AXLL, Excel, data ranges, axll::LastUsedRowNumber, axll::LastUsedColumnNumber, axll::ColumnName, named ranges, axll::ReadSet, axll::ReadList, XLSProvider
+
 You can provide Excel cell ranges as input data to AIMMS AXLL functions. 
 Here we show how to adapt when the ranges are unknown, for example, when end users upload Excel files as input in the AIMMS app.
 

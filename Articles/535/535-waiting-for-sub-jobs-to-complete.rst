@@ -1,6 +1,10 @@
 Waiting for sub jobs to complete
 =================================
 
+.. meta::
+   :description: Shows how a control solver job submits multiple sub jobs using delegationOverride, waits for their completion via pro::messaging::WaitForMessages, and aggregates results before returning to the client.
+   :keywords: AIMMS PRO, solver session, sub jobs, DelegateToServer, delegationOverride, WaitForMessages, completion callback, nested jobs, parallelization
+
 Introduction
 --------------
 

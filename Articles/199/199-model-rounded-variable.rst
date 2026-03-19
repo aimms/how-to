@@ -1,8 +1,8 @@
 Model a Rounded Variable
 =======================================
 .. meta::
-   :description: How to model a variable as the closest integer to another variable or parameter.
-   :keywords: round, mixed, integer
+   :description: Demonstrates how to model a variable that must round to the nearest integer in a mixed integer program using auxiliary variables and constraints.
+   :keywords: rounding, integer variable, mixed integer programming, auxiliary variable, Round function, linearization, MIP modeling, Floor, Ceil
 
 There might be cases where you need to model a variable ``var1`` as the closest integer to another variable or parameter ``value``. Essentially, a constraint like
 

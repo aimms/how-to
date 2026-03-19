@@ -2,8 +2,8 @@ Create Responding Applications
 ===============================
 
 .. meta::
-   :description: Keeping your Decision Support application responding while letting it do long-running searches for the best solution.
-   :keywords: responding applications, interactive, Decision Support, AIMMS PRO
+   :description: Explains how to design a responding AIMMS application that keeps the user interface interactive during long-running optimization solver sessions on AIMMS Cloud.
+   :keywords: responding application, data session, solver session, AIMMS Cloud, DelegateToServer, veil, WebUI, progress information, PRO
 
 Applications for decision support have two characteristics:
 

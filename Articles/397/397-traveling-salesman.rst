@@ -2,8 +2,8 @@ Traveling Salesman
 ======================
 
 .. meta::
-   :description: Demonstrates heuristic and MIP solutions for the Traveling Salesman Problem using 2-opt optimization, lazy constraint callbacks, and DEX REST API integration.
-   :keywords: traveling salesman problem, 2-opt heuristic, GMP, lazy constraint callback, subtour elimination, REST API, DEX, Haversine, ScheduleAt, WebUI
+   :description: Solves the Traveling Salesman Problem using a 2-opt heuristic and a MIP model with lazy subtour elimination constraints, integrating geocoding via a REST API.
+   :keywords: traveling salesman problem, 2-opt heuristic, subtour elimination, lazy constraint callback, GMP, DEX, REST API, Haversine formula, ScheduleAt, MIP
 
 .. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/traveling-salesman/releases/latest/download/traveling-salesman.zip

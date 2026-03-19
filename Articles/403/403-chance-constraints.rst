@@ -6,8 +6,8 @@ Chance Constraints
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Portfolio Selection, Chance Constraints, Safe Approximation, Robust Optimization
-   :description: This example implements a portfolio selection model with uncertain investment returns, covering a single time period.
+   :description: Maximizes portfolio value-at-risk under uncertain asset returns using robust optimization safe approximations of chance constraints with Ball, Box, and Budgeted uncertainty sets.
+   :keywords: portfolio selection, chance constraints, robust optimization, safe approximation, value-at-risk, uncertainty set, Robust Counterpart, probability distribution
 
 Direct download AIMMS Project :download:`Chance Constraints.zip <model/Chance Constraints.zip>`
 

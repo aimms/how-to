@@ -1,7 +1,7 @@
 
 .. meta::
-   :description: How to set up data exchange within your AIMMS application.
-   :keywords: aimms, data, exchange, dex
+   :description: Explains how to write mapping files for JSON, XML, CSV, Excel, and Parquet formats in the Data Exchange Library, covering binds-to, maps-to, and format-specific root tags.
+   :keywords: Data Exchange Library, DEX, JSON mapping, XML mapping, CSV mapping, Excel mapping, Parquet, dex::ReadFromFile, dex::WriteToFile, mapping file
 
 Dealing with Different Data Types
 =============================================

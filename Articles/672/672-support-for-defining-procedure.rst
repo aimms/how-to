@@ -1,6 +1,10 @@
 Support for Defining Procedure in New Compiler
 ================================================
 
+.. meta::
+   :description: Explains the UsedInDefinition procedure property introduced in AIMMS 25.4 and demonstrates three patterns — function return, single output argument, and DefinesIdentifiers — for using procedures in parameter or set definitions.
+   :keywords: UsedInDefinition, DefinesIdentifiers, compiler, procedure, definition, parameter definition, AIMMS 25.4, new compiler, set definition
+
 Starting from AIMMS version 25.4, a new procedure property is available: ``UsedInDefinition``. This will be mandatory to allow a procedure to be used in the definition of a parameter or set.
 This property dictates that the statements in the body of the procedure are not allowed to make changes to any global identifier in the model, unless explicitly specified.
 

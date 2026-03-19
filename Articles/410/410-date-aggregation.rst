@@ -6,8 +6,8 @@ Date Aggregation
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: CreateTimeTable, TimeSlotCharacteristic, Aggregate
-   :description: An example that shows how the CreateTimeTable function can help in creating a dynamic time unit; days, weeks or months.
+   :description: Shows how CreateTimeTable builds a dynamic time unit aggregation switching between days, weeks, and months using TimeSlotCharacteristic for period grouping.
+   :keywords: CreateTimeTable, TimeSlotCharacteristic, date aggregation, dynamic time unit, calendar, weeks, months, time aggregation
 
 Direct download AIMMS Project :download:`Date Aggregation.zip <model/Date Aggregation.zip>`
 

@@ -1,6 +1,10 @@
 Implicit Dantzig-Fulkerson-Johnson Formulation
 ==============================================
 
+.. meta::
+   :description: Explains the Implicit Dantzig-Fulkerson-Johnson formulation in the AIMMS CVRP library, which uses lazy constraints to eliminate subtours dynamically during MIP search.
+   :keywords: CVRP, Implicit DFJ, lazy constraints, subtour elimination, MIP, vehicle routing, callback, integer programming
+
 The library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**) contains  different formulation options. 
 They have different methods of eliminating subtours. In this article the Implicit Dantzig-Fulkerson-Johnson formulation is discussed. 
 

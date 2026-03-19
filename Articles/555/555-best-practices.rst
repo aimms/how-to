@@ -1,6 +1,10 @@
 Best Practices in your Application
 ===================================
 
+.. meta::
+   :description: Covers WebUI UX best practices including happy path design, button positioning conventions, page structure, visual hierarchy, and page flow layout recommendations.
+   :keywords: WebUI, UX design, happy path, button positioning, page structure, visual hierarchy, homepage, user flow, page hierarchy
+
 Happy Path
 ---------------
 

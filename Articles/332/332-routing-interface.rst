@@ -5,6 +5,10 @@
 Capacitated Vehicle Routing Problem Library
 ===========================================
 
+.. meta::
+   :description: Explains how to use the AIMMS CVRP library to solve Capacitated Vehicle Routing Problems using four available subtour elimination formulations.
+   :keywords: CVRP library, vehicle routing, Dantzig-Fulkerson-Johnson, Miller-Tucker-Zemlin, time windows, AIMMS library, integer programming, depot
+
 There is a library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**). This article explains how to use that library in your own model. There are different ways to formulate a CVRP. In the CVRP library there are four options to choose from, which will be mentioned in this article. 
 
     :download:`AIMMS library download <model/CVRP library.zip>` 

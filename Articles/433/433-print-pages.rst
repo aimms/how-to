@@ -6,8 +6,8 @@ Print Pages
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Print page, print template, project user files
-   :description: In this example the use of print templates is illustrated.
+   :keywords: Print page, print template, split lines, composite table, postscript, paper report, project user files
+   :description: Illustrates creating paper reports in AIMMS using print templates and print pages, including multi-page table splitting with adjustable split lines and per-object print settings.
 
 Direct download AIMMS Project :download:`Print Pages.zip <model/Print Pages.zip>`
 

@@ -2,8 +2,8 @@ Write Selected Database Tables
 ==============================
 
 .. meta::
-   :description: Use existing AIMMS function to selectively write to database tables whose data has changed.
-   :keywords: database table, odbc, runtime library, model editing, AIMMS Language, execution efficiency
+   :description: Shows how to selectively write only changed database tables in AIMMS using DatachangeMonitor, ReferencedIdentifiers, and runtime libraries for improved efficiency.
+   :keywords: DatachangeMonitor, ReferencedIdentifiers, database table, runtime library, Model Edit Functions, execution efficiency, DataChangeMonitorHasChanged, ODBC
 
 
 

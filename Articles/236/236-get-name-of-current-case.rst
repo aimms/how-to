@@ -2,8 +2,8 @@ Get Name of an AIMMS Case
 ===============================
 
 .. meta::
-   :description: Using case-related AIMMS functions to call the name of a case.
-   :keywords: Case, compact storage, naming, data management
+   :description: Explains how to retrieve the name of the current or any AIMMS case using the CaseFileURL function and the AllCases predefined set.
+   :keywords: case management, CaseFileURL, AllCases, CurrentCase, data management, case name, case-related functions, element parameter
 
 This article explains how to get the name of the current case, or more generally, any case denoted by an element in the predefined set :any:`AllCases`. You can use the case-related AIMMS functions to achieve this.
 

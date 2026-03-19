@@ -1,6 +1,10 @@
 Reading Slices of Data via ``ExternalBinding`` Mapping Element
 ====================================================================
 
+.. meta::
+   :description: Demonstrates how to use the DEX ExternalBinding mapping element to read slices of JSON data directly into indexed AIMMS parameters, avoiding intermediate scalar variables.
+   :keywords: Data Exchange Library, DEX, ExternalBinding, JSON mapping, dex::ReadFromFile, sliced data, mapping file, SetElementAdd
+
 Data is sometimes provided in several, similarly structured, ``.json``  files; for instance as a result of multiple DEX Client requests.
 Each of these ``.json`` files provides a slice of the data to be worked on.
 

@@ -2,8 +2,8 @@ Best Practices for Operating AIMMS Cloud
 ====================================================
 
 .. meta::
-   :description: How to professionally operate your AIMMS PRO system.
-   :keywords: AIMMS PRO, backup, recovery
+   :description: Presents best practices for operating AIMMS Cloud including version control, test environments, maintenance windows, and disaster recovery strategies.
+   :keywords: AIMMS Cloud, AIMMS PRO, version control, Git, disaster recovery, test environment, maintenance window, backup, application deployment
 
      
 As AIMMS applications move from desktops to AIMMS Cloud and start to play a larger role for a larger number of users, it is important to adopt the best practices for operating server-based business applications.

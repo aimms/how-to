@@ -2,8 +2,8 @@ Use the Progress Window in WebUI
 ================================
 
 .. meta::
-   :description: How to track progress of a solve procedure in AIMMS WebUI.
-   :keywords: progress, solve, procedure
+   :description: Shows how to display solver progress information in AIMMS WebUI using time callbacks, DelegateToClient, and live PRO messages between sessions.
+   :keywords: WebUI, progress window, time callback, DelegateToClient, AIMMS PRO, solver session, MIP, gap, incumbent, PROMFLAG_LIVE
 
 Introduction
 ------------

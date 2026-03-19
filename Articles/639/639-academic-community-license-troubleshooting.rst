@@ -2,8 +2,8 @@ Academic and Community License Troubleshooting
 ###################################################
 
 .. meta::
-   :keywords: license, error, nodelock, activation, ip, subnet
-   :description: Resolving AIMMS license issues regarding personal nodelock, pending activation, and IP subnet.
+   :keywords: academic license, community license, nodelock, personal nodelock, IP subnet, pending activation, license URL, VPN, logon error
+   :description: Resolves common AIMMS academic and community license errors including wrong nodelock type, pending activation, IP subnet mismatch, and failed server logon.
 
 Error: This License Can Only Be Activated Using a Personal Nodelock
 --------------------------------------------------------------------

@@ -3,8 +3,8 @@
 Change Widget Styles with CSS
 ===================================
 .. meta::
-   :description: How to change colors with CSS in AIMMS WebUI widgets.
-   :keywords: css, widget, webui, color, line, chart
+   :description: Explains how to apply CSS selectors and annotations to style AIMMS WebUI line chart widgets, including identifier-level and element-level color customization.
+   :keywords: CSS, WebUI, line chart, styling, annotations, widget customization, stroke, fill, selector
    
 .. todo:: Clarify difference between AIMMS set elements and HTML elements.
 

@@ -1,6 +1,10 @@
 Lot Sizing: Single level small bucket with two items
 =====================================================
 
+.. meta::
+   :description: Solves a two-item single-level small bucket lot-sizing MIP problem where machine setup and capacity loss govern production decisions across planning periods.
+   :keywords: lot sizing, two items, MIP, small bucket, production planning, setup cost, Lotsizelib, vpm5
+
 .. warning::
    This article references outdated technology and is provided for historical purposes only. 
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.

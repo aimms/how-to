@@ -7,8 +7,8 @@ Align Objects in WinUI
 ========================
 
 .. meta::
-   :description: Taking care of alignment in your user interface.
-   :keywords: User Interface, Windows, alignment, align, winui
+   :description: Explains how to align, resize, and evenly space multiple page objects in a WinUI AIMMS application using the context menu alignment tools.
+   :keywords: WinUI, alignment, page objects, UI layout, align top, make same width, spread horizontally, developer mode, user interface design
 
 When creating a WinUI page for your AIMMS project you typically want to nicely align the page objects.
 

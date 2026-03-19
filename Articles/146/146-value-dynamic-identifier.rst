@@ -2,8 +2,8 @@ Retrieve Value of Dynamic Identifier
 ====================================
 
 .. meta::
-   :description: How to use Model Edit functions to retrieve the value of a dynamic identifier.
-   :keywords: model, edit, me
+   :description: Shows how to use AIMMS Model Edit Functions to dereference an element parameter pointing to AllIdentifiers and retrieve the value of the referenced identifier at runtime.
+   :keywords: Model Edit Functions, AllIdentifiers, element parameter, runtime library, me::CreateLibrary, apply statement, ScalarValue, dynamic identifier
 
 With the addition of :doc:`model-handling/model-edit-functions/index` (MEF), a lot of things that were previously impossible to do with AIMMS became possible.
 

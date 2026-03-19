@@ -1,6 +1,10 @@
 Configuring the logging of sessions ran on a AIMMS PRO On-Premise
 ====================================================================
 
+.. meta::
+   :description: Shows how to configure a LoggerConfig.xml file with a rolling file appender and procedure-tracing logger for AIMMS PRO On-Premise sessions, including a downloadable transport problem example.
+   :keywords: LoggerConfig.xml, log4j, rolling file appender, AIMMS PRO On-Premise, session log, procedure tracing, ISO8601, AIMMS.Trace.Procedure, logging configuration
+
 This article contains an example of configuring the logging of an application that is published on an AIMMS PRO On-Premise.
 
 .. note:: 

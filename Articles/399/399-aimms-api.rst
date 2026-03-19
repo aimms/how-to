@@ -6,8 +6,8 @@ AIMMS API
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: AIMMS API, external DLL
-   :description: This AIMMS project illustrates the basic use of the AIMMS API in an external DLL.
+   :description: Demonstrates calling the AIMMS API from an external C DLL to retrieve set and parameter data, writing TransportCost output to a definition file.
+   :keywords: AIMMS API, external DLL, C programming, libaimms, external procedure, data retrieval, TransportCost, programming interface
 
 Direct download AIMMS Project :download:`AIMMS API.zip <model/AIMMS API.zip>`
 

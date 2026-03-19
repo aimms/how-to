@@ -1,6 +1,10 @@
 Sudden Microsoft Access Reporting: "Make Sure this is a Valid Datasource"
 ==========================================================================
 
+.. meta::
+   :description: Diagnoses and resolves a Microsoft Access ODBC driver DLL initialization failure that causes "make sure this is a valid datasource" errors after a Windows update.
+   :keywords: Microsoft Access, ODBC, ACEODBC.DLL, driver error, datasource, DLL initialization, troubleshooting
+
 Symptom
 -----------
 

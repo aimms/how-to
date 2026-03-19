@@ -2,8 +2,8 @@ Write to a Database Efficiently
 =====================================
 
 .. meta::
-    :description: Methods of writing data to a database and schema.
-    :keywords: database, db, write, efficient, performance, foreign key, schema
+   :description: Explains how AIMMS selects a safe or efficient database write strategy based on foreign key metadata and how to configure this for optimal performance.
+   :keywords: database, write to table, foreign key, ODBC, database_foreign_key_handling, strategy, performance, schema design
 
 This article explores a heuristic for writing to databases safely and efficiently.
 

@@ -6,8 +6,8 @@ Economic Exchange Equilibrium
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Utility Function, Equilibrium, Duality, Nonlinear System
-   :description: This example models an economic exchange of a number of goods between a number of agents.
+   :description: Models general equilibrium for multi-agent goods exchange, computing consumption allocations, equilibrium prices, and marginal utility of wealth via a nonlinear system.
+   :keywords: economic exchange equilibrium, utility function, general equilibrium, duality, nonlinear system, endowment, elasticity of demand, price computation
 
 Direct download AIMMS Project :download:`Economic Exchange Equilibrium.zip <model/Economic Exchange Equilibrium.zip>`
 

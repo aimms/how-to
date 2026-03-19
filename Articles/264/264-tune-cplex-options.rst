@@ -2,8 +2,8 @@ Tune CPLEX Options from AIMMS
 ========================================
 
 .. meta::
-   :description: How to automatically tune CPLEX Options from within AIMMS.
-   :keywords: tune, CPLEX, Options, automatically
+   :description: Explains how to automatically tune CPLEX solver options in AIMMS using GMP tuning functions for single GMP instances or multiple MPS files.
+   :keywords: CPLEX, solver tuning, GMP::Tuning::TuneSingleGMP, GMP::Tuning::TuneMultipleMPS, solver options, MPS files, AllOptions, performance optimization
 
 
 The CPLEX solver has many options that influence the way CPLEX solves your model. For certain types of constraints and/or models, you can make an educated guess about which combination of options works best for your problem. However, sometimes you need more help.

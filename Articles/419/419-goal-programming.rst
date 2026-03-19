@@ -6,8 +6,8 @@ Goal Programming
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Goal Programming, Violation penalty
-   :description: This example illustrates how the goal programming can be easily implemented using the Violation Penalty of a mathematical program.
+   :keywords: Goal Programming, Violation Penalty, soft constraints, hard constraints, weighted deviation, mathematical program
+   :description: Illustrates how goal programming with weighted soft-constraint deviations is implemented using the Violation Penalty attribute of an AIMMS mathematical program.
 
 Direct download AIMMS Project :download:`Goal Programming.zip <model/Goal Programming.zip>`
 

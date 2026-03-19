@@ -2,8 +2,12 @@ Lot Sizing: Multi level bucket
 ================================
 
 .. warning::
-   This article references outdated technology and is provided for historical purposes only. 
+   This article references outdated technology and is provided for historical purposes only.
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
+.. meta::
+   :description: Solves a multi-item, multi-level lot-sizing MIP where production in a period incurs setup costs or capacity losses due to machine changeover or order placement.
+   :keywords: lot sizing, multi-level, MIP, production planning, setup cost, capacity, machine changeover
 
 Direct download AIMMS Project :download:`MultiLevelBucket.zip <model/MultiLevelBucket.zip>`
 

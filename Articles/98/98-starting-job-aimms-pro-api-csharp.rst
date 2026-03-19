@@ -2,8 +2,8 @@ Start a Job via AIMMS PRO API using C#
 ===================================================
 
 .. meta::
-    :description: Starting an AIMMS job via the AIMMS PRO API using C#.
-    :keywords: C#, pro api
+   :description: Shows how to configure and run a C# Visual Studio application that connects to AIMMS Cloud or PRO On-Premise via the PRO API to publish, schedule, and monitor AIMMS jobs.
+   :keywords: C#, Visual Studio, PRO API, AIMMS Cloud, wss endpoint, environment, job scheduling, aimmspack, PRO On-Premise
 
 Prerequisites
 --------------

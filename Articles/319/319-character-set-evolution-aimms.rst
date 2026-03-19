@@ -2,8 +2,8 @@ Using UNICODE in Maintained AIMMS Applications
 ==============================================
 
 .. meta::
-   :description: Converting one-byte per character AIMMS apps deploying UTF8 character sets, including Far East and Emojis.
-   :keywords: evolution, single byte character, two byte character, UNICODE, ASCII, encoding
+   :description: Explains the history of character set support in AIMMS and how to upgrade older ASCII-based applications to use UTF-8 and the full Unicode character set.
+   :keywords: Unicode, UTF-8, ASCII, encoding, character set, AIMMS 4, AllCharacterEncodings, code page, internationalization
 
 AIMMS 4 uses ``UTF8`` as default character set, where all `UNICODE characters <https://en.wikipedia.org/wiki/List_of_Unicode_characters>`_ are allowed. Some older AIMMS applications were developed based on ``ASCII``, and can be upgraded to use ``UTF8``, thus empowering users with texts using the ``UNICODE`` character set.
 

@@ -1,8 +1,8 @@
 Comparing Profiler Runs
 ========================
 .. meta::
-   :keywords: aws, azure, profiler
-   :description: This article is for modelers who want to compare profiler runs of deployed applications.
+   :description: Explains how to capture, download, and compare AIMMS profiler run results across environments such as AWS and Azure to locate performance regressions in deployed applications.
+   :keywords: profiler, performance analysis, profilerData, ProfilerStart, download widget, cloud provider comparison, runtime, debugging
 
 .. image:: https://img.shields.io/badge/AIMMS_4.88-ZIP:_ProfilerRunCompare-blue
    :target: https://github.com/aimms/profiler-run-compare/archive/refs/heads/main.zip

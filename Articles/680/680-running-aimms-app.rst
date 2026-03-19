@@ -2,8 +2,8 @@ Orchestrating Contract Allocation AIMMS App from Python
 ==========================================================
 
 .. meta::
-    :keywords: AIMMS, Python-Bridge, aimmspy, headless optimization, data pipeline, pandas, Contract Allocation, solver, data exchange
-    :description: A guide on orchestrating a headless AIMMS optimization application from a Python script using the AIMMS Python-Bridge. Learn to pass data, run the solver, and retrieve results for a data pipeline.
+   :keywords: aimmspy, Python-Bridge, headless optimization, pandas, Contract Allocation, multi_assign, multi_data, ExcelWriter, data pipeline, solver
+   :description: Shows how to orchestrate a headless AIMMS Contract Allocation optimization from Python using aimmspy — passing Excel input data, calling MainExecution, and writing results back to Excel.
 
 This guide shows you how to use the AIMMS Python-Bridge to control an AIMMS application from a Python script. 
 This approach is ideal for running an AIMMS model as a "headless" optimization service within a larger data pipeline.

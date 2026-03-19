@@ -2,8 +2,8 @@ Write and Read AIMMS Data in Text Format
 =======================================================
 
 .. meta::
-   :description: An easy and practical way of sharing persisting AIMMS data is via text files.
-   :keywords: write, read, persist, data, comparison
+   :description: Shows how to write and read AIMMS identifier data to and from text files for sharing and persisting data between applications in a human-readable format.
+   :keywords: write to file, read from file, text format, data exchange, backup mode, listing options, AllIdentifiers, CurrentInputs
 
 When two AIMMS apps communicate with each other using the same identifiers, you may want to use the text format.
 

@@ -7,8 +7,8 @@ Extract Data from an XML File
 ==============================
 
 .. meta::
-   :description: Using AIMMS XML schema mapping tool to extract data.
-   :keywords: xml, schema, xsd, axm
+   :description: Explains how to extract data from an XML file into AIMMS identifiers using the XML schema mapping tool, XSD, and AXM mapping files.
+   :keywords: XML, XSD, AXM, schema mapping, READXML, data extraction, binds-to, maps-to, data exchange
 
 In this article, we will learn how to extract data from an XML file using the AIMMS XML schema mapping tool.
 

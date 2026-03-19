@@ -2,8 +2,8 @@ Change the Default Solvers Used
 =============================================
 
 .. meta::
-   :description: How to change the default solver used for each type of mathematical program.
-   :keywords: mathematics, solver, mathematical program, CPLEX, GUROBI
+   :description: Explains how to change the default solver for mathematical programs in AIMMS using the Solver Configuration dialog or the CurrentSolver element parameter.
+   :keywords: solver configuration, default solver, CurrentSolver, CPLEX, Gurobi, LP, MIP, solve statement, where clause, AllSolvers
 
 Depending on which solvers are allowed by your AIMMS license, you might have multiple solvers capable of 
 solving a given type of mathematical program (e.g. LP, MIP). In this case, you can instruct AIMMS in 

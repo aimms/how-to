@@ -3,8 +3,8 @@ Start a Job via PRO API using Java
 
 
 .. meta::
-    :description: Starting an AIMMS job via the AIMMS Cloud API using C#.
-    :keywords: java, pro api
+   :description: Shows how to configure an IntelliJ IDEA Java project using the PRO API to connect to AIMMS Cloud, schedule and monitor jobs, retrieve results, and interact with running AIMMS procedures.
+   :keywords: Java, IntelliJ IDEA, PRO API, AIMMS Cloud, job scheduling, wss endpoint, notifyClientWithResults, notifyClientWithProgress, pom.xml, PRO On-Premise
 
 Prerequisites
 -------------

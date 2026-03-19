@@ -1,8 +1,8 @@
 ﻿Upgrade WebUI Page Actions
 =========================================
 .. meta::
-   :description: A brief guide to upgrading Page Actions in your WebUI app.
-   :keywords: deprecation, webui, page action, convert, upgrade, update
+   :description: Explains how to upgrade experimental Page Actions V1 to the official Page Actions V2 feature in AIMMS WebUI applications.
+   :keywords: WebUI, page actions, upgrade, deprecation, indexPageActionSpec, webui.json, string parameter, experimental features
 
 Overview
 ---------

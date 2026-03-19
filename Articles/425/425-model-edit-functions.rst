@@ -6,8 +6,8 @@ Model Edit Functions
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Model Edit Functions, me::, Runtime Libraries, Excel
-   :description: This example illustrates how you can use the Model Edit Functions to develop functionality that could not be developed in AIMMS without these functions. 
+   :keywords: Model Edit Functions, me::, Runtime Libraries, Excel, identifier creation, data assignment, runtime model
+   :description: Illustrates using AIMMS Model Edit Functions at runtime to empty identifier groups, transfer data between parameters of different dimensions, and read arbitrarily structured Excel tables.
 
 Direct download AIMMS Project :download:`Model Edit Functions.zip <model/Model Edit Functions.zip>`
 

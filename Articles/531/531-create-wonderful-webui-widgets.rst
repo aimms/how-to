@@ -3,6 +3,10 @@
 Create Wonderful WebUI Widgets
 ===============================
 
+.. meta::
+   :description: Details the implementation of map widget node icons, HTML tooltips, item context menus, Gantt chart data representation, and CSS annotations in the Wonderful WebUI Widgets app.
+   :keywords: WebUI, Map widget, Gantt chart, context menu, CSS annotation, HTML tooltip, combination chart, runtime library, workflow, item actions
+
 In case you have not yet tried the Wonderful WebUI Widgets app yourself, 
 you may want to scan :doc:`../531/531-working-with-wonderful-webui-widgets` first.
 

@@ -2,8 +2,8 @@ Install and Configure a AIMMS Network License
 ==============================================
 
 .. meta::
-   :description: How to set up an AIMMS Network License with the AIMMS Network License Server.
-   :keywords: license, network, install, setup
+   :description: Explains how to install and configure an AIMMS Network License Server, activate a license, and add registered users via the License Manager.
+   :keywords: network license, License Manager, activation code, nodelock, online activation, offline activation, maintenance mode, license configuration
 
 Installing the AIMMS Network License Server
 -------------------------------------------

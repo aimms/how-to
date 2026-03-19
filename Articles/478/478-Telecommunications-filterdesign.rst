@@ -27,6 +27,7 @@ Lobo, M.S., L. Vandenberghe, S. Boyd, H. Lebret, Applications of Second-order
 Cone Programming, Linear Algebra and its Applications 284(1-3) 1998, pp. 193-228
 
 .. meta::
-   :keywords: FIR, conic programming, second-order cone, SOCP.
+   :description: Designs a minimax dB linear phase low-pass FIR filter by transforming the frequency variable into discrete values, yielding a Second-Order Cone Programming problem solved by CPLEX or Gurobi.
+   :keywords: FIR, conic programming, second-order cone, SOCP, filter design, CPLEX, Gurobi, telecommunications
 
 

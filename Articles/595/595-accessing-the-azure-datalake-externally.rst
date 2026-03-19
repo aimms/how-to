@@ -1,6 +1,10 @@
 Accessing Azure Data Lake Storage Externally
 ================================================
 
+.. meta::
+   :description: Explains how to access the AIMMS Cloud Azure Data Lake Storage from external tools using SAS token authentication with the Azure Data Lake Gen2 and Blob REST APIs.
+   :keywords: Azure Data Lake Storage, ADLS, SAS token, Azure Blob REST API, external access, Postman, SHA256, Base64, dex::client::az::ExpiryDateFromNow, file system
+
 You can store structured and unstructured files on the **Azure Data Lake Storage Gen2 (ADLS)** that is, by default, part of your AIMMS Cloud account. On one hand this makes it easy to save the results from your optimization in a file and to expose that file through the ADLS so it can be picked up from an external location. It can also be used the other way around; to put files onto the ADLS that hold data that need to be used within your AIMMS model(s). 
 
 Either way you will want to access the ADLS without necessarily being logged in on the AIMMS Cloud, or because you want to automate a process where, for example, an API will take care of putting a file onto the storage. 

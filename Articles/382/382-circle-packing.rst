@@ -6,8 +6,8 @@ Circle Packing
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Circle Packing, Multistart Algorithm, Network Object
-   :description: In this AIMMS project different circle packing problems are solved.
+   :description: Solves three non-convex circle packing variants — equal circles in a square, equal circles in a circle, and non-uniform circles — using the multistart algorithm.
+   :keywords: circle packing, multistart algorithm, nonlinear programming, non-convex optimization, network object, maximize radius, minimize container
 
 Direct download link :download:`CirclePacking.zip <model/CirclePacking.zip>`
 

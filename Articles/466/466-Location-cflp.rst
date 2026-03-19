@@ -37,7 +37,8 @@ Note: The facility location problem is also known as the warehouse location
 problem
 
 .. meta::
-   :keywords: Benders Decomposition, GMP, Reading numbers from text file, Warehouse location
+   :keywords: Capacitated facility location, CFLP, Benders decomposition, GMP, warehouse location, MIP, text file input
+   :description: Solves the capacitated facility location problem to site facilities serving customers at minimum cost using Benders decomposition via the GMP library and OR-Library text-file data.
 
 .. spelling:word-list::
 

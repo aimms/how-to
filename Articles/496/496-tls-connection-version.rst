@@ -1,6 +1,10 @@
 Error Message "tlsv1 alert protocol version"
 ===========================================================
 
+.. meta::
+   :description: Explains the tlsv1 alert protocol version SSL error caused by a TLS version mismatch and resolves it by upgrading to AIMMS Developer 4.76.4 or AIMMS PRO On-Premise 2.36.2.
+   :keywords: TLS, SSL, tlsv1, protocol version, HTTPS, connection error, AIMMS PRO, AIMMS Developer, security
+
 Symptom
 --------
 

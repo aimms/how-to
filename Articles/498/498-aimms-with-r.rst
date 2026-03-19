@@ -7,8 +7,8 @@ Integrate AIMMS with R
 ============================================
 
 .. meta::
-   :description: Integrating (data science) models built in R with your AIMMS applications
-   :keywords: r, integration, data science, machine learning, connectivity, tidyverse, rstats, sankey
+   :description: Integrates an R Sankey diagram visualization into an AIMMS blending problem app by exposing an R Plumber REST API that returns PNG images, deployed via Docker.
+   :keywords: R, Plumber, Sankey diagram, networkD3, DataExchange, HTTP library, Docker, blending problem, visualization, integration
 
 .. |sankeyHTML| replace:: :download:`View interactive version here. <images/sankey.html>`
 

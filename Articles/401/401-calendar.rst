@@ -6,8 +6,8 @@ Calendar
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Calendar, DialogGetDate, TimeslotToString, TimeSlotToMoment, TimeslotCharacteristic
-   :description: This AIMMS project illustrates the basic use of calendars in AIMMS.
+   :description: Demonstrates AIMMS calendar declarations with various timeslot formats, date picker dialogs, TimeslotCharacteristic filtering, and TimeslotToMoment elapsed-time computation.
+   :keywords: calendar, DialogGetDate, TimeslotToString, TimeslotToMoment, TimeslotCharacteristic, timeslot format, date picker, time functions
 
 Direct download AIMMS Project :download:`Calendar.zip <model/Calendar.zip>`
 

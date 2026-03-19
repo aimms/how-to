@@ -6,8 +6,8 @@ Add a Custom Startup Image in WinUI
 =============================================================
 
 .. meta::
-   :description: How to include a custom loading screen for your AIMMS application.
-   :keywords: splash screen, load, startup, winui
+   :description: Explains how to add a custom startup splash screen to a WinUI AIMMS application by providing a BMP file named after the project file.
+   :keywords: splash screen, WinUI, startup image, BMP, custom branding, application deployment, aimms project file, loading screen
 
              
 When you deploy your application, AIMMS uses a standard splash screen at startup as shown below. You have the option to customize this startup image for WinUI apps. 

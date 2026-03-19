@@ -1,6 +1,10 @@
 Evolution of AIMMS using Transport Layer Security
 =====================================================
 
+.. meta::
+   :description: Documents the TLS version support history across AIMMS Developer and AIMMS PRO On-Premise releases and explains the upgrade steps required for TLS 1.3 compliance.
+   :keywords: TLS, Transport Layer Security, TLS 1.2, TLS 1.3, HTTPS, WSS, AIMMS PRO, AppLauncher, security, SSL
+
 To ensure data security, more and more organizations justifiably 
 require their applications to deploy recent or even latest security standards.
 Notably, nowadays for the Transport Layer Security protocol (TLS), the 

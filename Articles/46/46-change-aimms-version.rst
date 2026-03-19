@@ -1,8 +1,8 @@
 Update the Project's AIMMS Version
 ====================================
 .. meta::
-    :description: How to change the AIMMS version of a project.
-    :keywords: convert, adapt, update, webui, version, developer, release notes
+    :description: Explains how to identify a project's current AIMMS version from the .aimms file and upgrade it using the AIMMS Launcher to install and open the project under a new version.
+    :keywords: AIMMS version, AIMMS Launcher, .aimms file, Project.xml, upgrade, release notes, WebUI
 
 This article details how to change your project's AIMMS version. In the `Release Notes <https://documentation.aimms.com/release-notes.html>`_ section, 
 AIMMS provides details of each change made in each AIMMS version.

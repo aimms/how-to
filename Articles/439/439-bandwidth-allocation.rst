@@ -6,8 +6,8 @@ Bandwidth Allocation
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Binary programming model
-   :description: This example introduces a bandwidth allocation problem that is often encountered by the ever growing mobile communication systems.
+   :keywords: Bandwidth allocation, binary programming, interference minimization, mobile communications, point-to-point links, MIP
+   :description: Models bandwidth interval assignment for mobile point-to-point communication links as a binary program that minimizes total interference across the allocated bandwidth.
 
 Direct download AIMMS Project :download:`Bandwidth Allocation.zip <model/Bandwidth Allocation.zip>`
 
@@ -22,5 +22,4 @@ Detailed description about the model can be read in the Chapter 15 of the `AIMMS
 Keywords:
 Binary programming model
 
-.. meta::
-   :keywords: Binary programming model
+

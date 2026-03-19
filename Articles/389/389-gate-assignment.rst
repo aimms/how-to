@@ -6,8 +6,8 @@ Gate Assignment problem
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Mixed Integer Programming, Linear Programming, Column Generation, GMP, Gate Assignment
-   :description: In this example we will demonstrate how to formulate a set-covering model that is solved by using column generation within an AIMMS project.
+   :description: Formulates a robust airport gate assignment plan as a set-covering model solved with column generation and GMP functionality to handle flight schedule deviations.
+   :keywords: gate assignment, set-covering, column generation, GMP, Mixed Integer Programming, Linear Programming, robust planning, airport operations
 
 Direct download AIMMS Project :download:`Gate Assignment.zip <model/Gate Assignment.zip>`
 

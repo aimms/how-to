@@ -2,8 +2,8 @@ Remove Elements from a Set
 ==========================
 
 .. meta::
-  :description: Understanding the behavior of the empty statement in AIMMS.
-  :keywords: AIMMS, set, empty statement, remove elements, clear values
+  :description: Explains how the empty statement behaves differently for regular sets versus subsets of predefined sets such as AllIdentifiers in AIMMS.
+  :keywords: empty statement, set, AllIdentifiers, AllVariables, AllVariablesConstraints, remove elements, clear values, predefined sets, subset
 
 
 The ``empty`` statement in AIMMS is used to clear the contents of a set or reset values of identifiers within a subset of predefined sets. 

@@ -2,8 +2,8 @@ Retrieve Solver Log Files in AIMMS Developer
 ==============================================
 
 .. meta::
-   :description: How to get log files for a particular solver in AIMMS IDE.
-   :keywords: log, logfile, solver
+   :description: Shows how to configure solver log files in AIMMS Developer for LP, MIP, and NLP problems across solvers including CPLEX, Gurobi, CBC, and BARON.
+   :keywords: solver log, solver listing messages, CPLEX, Gurobi, CBC, BARON, CONOPT, MIP display, log file, AIMMS IDE
 
 
 Solvers can share information about the solution process up to a very detailed level.

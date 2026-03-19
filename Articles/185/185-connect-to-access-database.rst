@@ -6,8 +6,8 @@ Connection String for Access Database Files
 ============================================
 
 .. meta::
-   :description: How to connect to a MS Access database file via the ODBC connection string.
-   :keywords: MS ACCESS, ODBC, connection string
+   :description: Shows how to dynamically generate an ODBC connection string in AIMMS to connect to a Microsoft Access database file without using a DSN file.
+   :keywords: MS Access, ODBC, connection string, SQLCreateConnectionString, database, DSN, accdb, mdb, CloseDataSource
 
 AIMMS has the possibility to retrieve/store data from/into any ODBC datasource. You could provide a System/User/File DSN (in case of ODBC) pointing to the database as an input to AIMMS. You could also dynamically create a connection string instead of using a DSN file. 
 

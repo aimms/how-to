@@ -1,8 +1,8 @@
 Update WebUI to Newer AIMMS Version
 ====================================
 .. meta::
-    :description: How to adapt an older AIMMS project to changes in WebUI.
-    :keywords: convert, adapt, update, webui, version
+   :description: Explains how to adapt an existing AIMMS WebUI project to breaking changes introduced across multiple AIMMS versions from 4.17 to 4.72.
+   :keywords: WebUI, upgrade, version migration, Map V2, annotations, widget filtering, webui.json, identifier tailoring, page actions
 
 AIMMS WebUI has evolved over the years based on new insights and customer demands.
 As a result, UIs developed using older versions of AIMMS need to be adapted to work with modern versions of AIMMS. 

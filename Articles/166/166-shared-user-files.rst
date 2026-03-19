@@ -4,8 +4,8 @@ Sharing is rewarding
 ===========================
 
 .. meta::
-   :description: This article shows how to create an application whereby users of that application can share files with each other.
-   :keywords: cloud, sharing files, PRO storage, identify users
+   :description: Shows how to share files between AIMMS application users via PRO Storage by constructing authorization strings based on user group entities.
+   :keywords: PRO Storage, file sharing, authorization string, guipro::PopulateEntitySets, user group, SaveFileToCentralStorage, AIMMS Cloud, access control
 
 .. sidebar:: Sharing ideas
 

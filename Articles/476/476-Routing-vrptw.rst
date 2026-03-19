@@ -36,7 +36,8 @@ Studies, B.L. Golden and A.A. Assad (eds), Studies in Management Science and Sys
 vol. 16, 1988, pp. 65-84
 
 .. meta::
-   :keywords: Incumbent callback, network object
+   :description: Solves the Capacitated Vehicle Routing Problem with Time Windows using a MIP formulation where each customer must be served within its assigned delivery time window.
+   :keywords: VRPTW, Vehicle Routing, Time Windows, Incumbent callback, network object, MIP, Solomon instances, Desrochers
 
 .. spelling:word-list::
 

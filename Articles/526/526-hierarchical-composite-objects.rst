@@ -1,6 +1,10 @@
 Hierarchical composite objects
 ========================================
 
+.. meta::
+   :description: Extends composite object modeling to hierarchical structures by nesting node types within arc components using the reference element-based approach and element parameters.
+   :keywords: composite objects, hierarchical, reference element, element parameter, arc, node type, compound sets, time-space network, AIMMS language
+
 Can a component in a composite object be a composite object itself? 
 Is it possible to hierarchically construct composite objects and use the AIMMS Language which is an algebraic language?
 

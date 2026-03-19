@@ -2,8 +2,8 @@ VPN Troubleshooting Guide (Customer Side)
 ============================================
 
 .. meta::
-    :keywords: VPN, troubleshooting, Site-to-Site, Azure, IKE, IPsec, NAT, firewall, routing, lifetime, Virtual Network Gateway
-    :description: Guide for customers to diagnose and resolve common Site-to-Site VPN connectivity issues with Azure Virtual Network Gateway, categorized by IKE, IPsec, and post-tunnel failures.
+   :keywords: VPN, Site-to-Site, Azure Virtual Network Gateway, IKEv2, IPsec, NAT, PSK, firewall, asymmetric routing, subnet overlap
+   :description: Diagnoses six common Site-to-Site VPN failure categories — IKE Phase 1/2, subnet overlap, intermittent drops, blocked traffic, and partial reachability — with targeted resolutions for each.
 
 This troubleshooting guide is designed to help customers diagnose and resolve common issues when connecting to our 
 Azure Virtual Network Gateway via Site-to-Site VPN. 

@@ -1,8 +1,8 @@
 Change AIMMS PRO On-Premise Service Account
 =====================================================
 .. meta::
-   :description: How to change the account AIMMS PRO On-Premise is running on.
-   :keywords: PRO, account
+   :description: Explains how to change the Windows service account used by AIMMS PRO On-Premise so that AIMMS jobs run under a different user account.
+   :keywords: AIMMS PRO, service account, Windows Services, PRO On-Premise, SYSTEM account, job execution, Log On tab
 
 
 By running a process using a particular account, you can access resources particular to that account. AIMMS jobs are started on the PRO service using the same account that the PRO service is running on. To specify a different account for AIMMS jobs, we need to run the PRO service on the new account. 

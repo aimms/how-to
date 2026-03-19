@@ -6,8 +6,8 @@ Camping
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Constraint Programming, callback function
-   :description: In this AIMMS project, some aspects of Constraint Programming (CP) are illustrated.
+   :description: Maximizes tent placement on a grid campsite with tree obstacles using constraint programming CP functions and a new-incumbent callback for live visualization.
+   :keywords: constraint programming, CPOptimizer, cp::Count, cp::Sequence, element variable, callback function, incumbent callback, tent placement
 
 Direct download AIMMS Project :download:`Camping.zip <model/Camping.zip>`
 

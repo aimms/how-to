@@ -1,6 +1,10 @@
 Which ODBC Drivers
 ===================
 
+.. meta::
+   :description: Presents a small AIMMS app that lists all ODBC drivers installed on the current system, useful when the Windows ODBC control panel is inaccessible.
+   :keywords: ODBC, drivers, SQLNumberOfDrivers, SQLDriverName, database connection, AIMMS Cloud, connection string
+
 Before making a connection using ODBC to a database, it is important to know which ODBC drivers are installed on the systems that will be used for your application.
 
 As you know, using the ODBC Windows control panel app, you can get a list of ODBC drivers installed.

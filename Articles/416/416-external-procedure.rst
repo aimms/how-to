@@ -6,8 +6,8 @@ External Procedure
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: External procedure, DLL
-   :description: This model illustrates a very simple external procedure call, along with the C source of the external function called from within the model.
+   :description: Illustrates declaring and calling an external C DLL function from AIMMS that computes the average of a dense two-dimensional array passed as an argument.
+   :keywords: external procedure, DLL, C source, dense array, two-dimensional identifier, DLL export, AIMMS API, foreign function interface
 
 Direct download AIMMS Project :download:`External Procedure.zip <model/External Procedure.zip>`
 

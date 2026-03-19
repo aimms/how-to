@@ -1,6 +1,10 @@
 Development Architecture of an AIMMS Service
 ==============================================
 
+.. meta::
+   :description: Describes the client-server architecture for AIMMS REST task services, detailing URL patterns for submit, monitor, and retrieve operations on localhost and AIMMS Cloud.
+   :keywords: client-server architecture, REST API, AIMMS Cloud, localhost, task URL, submit, monitor, retrieve, dex::api::StartAPIService, url_prefix
+
 The development of an AIMMS service is based on the usual client-server architecture:
 
 .. image:: images/client-AIMMS-server.png

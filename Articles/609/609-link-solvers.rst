@@ -1,6 +1,10 @@
 How to Link a Solver to AIMMS
 =============================
 
+.. meta::
+   :description: Explains how to link externally licensed solvers — CPLEX, GUROBI, PATH, SNOPT, and MINOS — to AIMMS by registering their DLL files in Solver Configuration.
+   :keywords: solver, CPLEX, GUROBI, SNOPT, MINOS, PATH, Solver Configuration, DLL, link-only license, GRB_LICENSE_FILE
+
 If you have a license for a solver and your AIMMS license has the link to that solver (a so-called 'link-only' license), you can add that solver to your AIMMS. 
 
 Currently, AIMMS provides links to the following solvers:

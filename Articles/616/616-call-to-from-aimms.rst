@@ -1,5 +1,10 @@
 Linking to AIMMS
 ===================================
+
+.. meta::
+   :description: Summarizes the supported methods for calling AIMMS from external languages and for calling external components from AIMMS, covering AIMMS API, PRO API, .NET, Java, and C++ DLL integration.
+   :keywords: AIMMS API, PRO API, .NET, Java, C++ DLL, integration, external application, interoperability
+
 This article provides information on possible interaction of AIMMS with other applications.
 
 There are two possible situations:

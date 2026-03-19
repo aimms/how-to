@@ -27,5 +27,6 @@ The example demonstrates the basic algorithm as described in chapter
 'Advanced Methods for Nonlinear Programs' in the `Language Reference <https://documentation.aimms.com/aimms_ref.html>`_
 
 .. meta::
-   :keywords: Multistart, Starting point, GMP, 3D chart, Network object
+   :description: Demonstrates the AIMMS multistart algorithm for non-convex NLP problems, visualizing the heat map of the objective function and the impact of starting points step by step.
+   :keywords: Multistart, Starting point, GMP, 3D chart, Network object, NLP, non-convex
 

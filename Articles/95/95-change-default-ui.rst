@@ -7,8 +7,8 @@ Enable the Page Manager
 ==========================
 
 .. meta::
-   :description: How to enable *Page Manager* for WinUI in your AIMMS project.
-   :keywords: winui, page, manager
+   :description: Explains how to switch the default UI from WebUI to WinUI in Project Options to re-enable the Page Manager in AIMMS versions 4.40.1 and higher.
+   :keywords: WinUI, WebUI, Page Manager, Default UI, Project Options, AIMMS 4.40, Appearance, F9, legacy UI
 
 In AIMMS versions 4.40.1 and higher, WebUI is the default user interface. When creating a new project, AIMMS gives you the option to select a default UI and if WinUI is not selected, the *Page Manager* will not be available in your project. This article outlines how to re-enable the *Page Manager* in your AIMMS project. 
 

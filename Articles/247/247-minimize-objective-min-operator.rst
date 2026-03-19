@@ -3,8 +3,8 @@ Minimize Objective Containing a ``min`` Operator
 
 
 .. meta::
-   :description: Some modeling tricks using min operator
-   :keywords: Linear Programming, modeling, min, minimize
+   :description: Explains how to linearize a minimization objective containing a binary min or max operator in AIMMS using auxiliary variables and Big M constraints.
+   :keywords: min operator, max operator, linearization, Big M, binary variable, auxiliary variable, linear programming, MIP modeling, objective function
 
 
 This article explains how to minimize an objective which contains a binary ``min`` operator. 

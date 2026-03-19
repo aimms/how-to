@@ -1,6 +1,10 @@
 Adding an Icon on your Button
 =============================
 
+.. meta::
+   :description: Explains how to add an icon to a WebUI button widget globally or per widget using CSS pseudo-elements and the AIMMS icon font character codes.
+   :keywords: CSS, button widget, icon, aimms-icons, WebUI, widget URI, stylesheet, pseudo-element, font-family
+
 This article illustrates how to add an icon on a button widget while using an AIMMS WebUI application. This can be done to all buttons, or for an specific button widget. 
 Please use the `Demand Forecasting <https://how-to.aimms.com/Articles/550/550-demand-forecasting.html>`_ example to experiment with this feature.
 

@@ -1,6 +1,10 @@
 Sending a dump file?
 ============================
 
+.. meta::
+   :description: Guides users on when and how to send AIMMS dump files after a severe internal error, including what information to include and how AIMMS staff uses them.
+   :keywords: dump file, severe internal error, error reporting, AIMMS Developer, debugging, reproducible example, log folder, ErrorReports
+
 What?
 -----------------------
 A ``.dmp file``, pronounce as dump file, 

@@ -1,6 +1,10 @@
 Using AIMMS Services with a Python Application
 =================================================
 
+.. meta::
+   :description: Explains how a Python application initiates, monitors, and retrieves results from AIMMS REST task services running on localhost or the AIMMS Cloud.
+   :keywords: Python, REST API, AIMMS Cloud, task, requests library, polling, pro-api, task status, optimization service, JSON
+
 The power of AIMMS is to model and solve optimization problems.
 In a client-server architecture, on the AIMMS Cloud, this power is leveraged using AIMMS Rest API service.
 Solving optimization problems may require varying amounts of time, and 

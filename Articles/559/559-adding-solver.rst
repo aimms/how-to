@@ -1,6 +1,10 @@
 Adding a Solver
 ================
 
+.. meta::
+   :description: Explains how to add a solver DLL to an AIMMS project via Solver Configuration and activate it as the default solver for a given problem type.
+   :keywords: solver, Solver Configuration, DLL, CPLEX, GUROBI, solver version, AIMMS settings
+
 The list of solvers available are directly connected to the AIMMS version you are working on. 
 To check which AIMMS version started to use a new solver version, please use the `release notes <https://documentation.aimms.com/release-notes.html#aimms-release-notes>`_. 
 

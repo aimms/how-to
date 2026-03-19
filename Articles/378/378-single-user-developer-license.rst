@@ -2,8 +2,8 @@ Install Single-User License
 ============================================
 
 .. meta::
-   :description: This article explains how to install an AIMMS Developer license for a single user.
-   :keywords: license, activation, install, developer
+   :description: Walks through activating a single-user AIMMS Developer license using a license number, activation code, and personal nodelock protection.
+   :keywords: license installation, activation code, nodelock, single-user license, AIMMS developer, license configuration
 
 
 When you received a license number, activation code, and optionally license files; 

@@ -2,8 +2,8 @@ Install CDM Service
 ====================
 
 .. meta::
-   :description: This article explains how to install CDM service to allow multiple users to collaborate on a single AIMMS model.
-   :keywords: CDM, share, collaborate, version, test
+   :description: Explains how to install and configure the CDM service for collaborative AIMMS applications, including database linking and application connection setup.
+   :keywords: CDM, CDM service, collaboration, multi-user, SQLite, PostgreSQL, MySQL, SQL Server, CDMConfig.xml, cdm::ConnectToApplicationDB
 
 During the development of an application using CDM, the embedded CDM server is ideal, as mistakes and restarts are easily captured by manually switching and/or clearing the database that stores the CDM data.
 

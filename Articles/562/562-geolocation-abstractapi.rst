@@ -1,6 +1,10 @@
 Using an API with OpenAPI Spec
 ===============================
 
+.. meta::
+   :description: Explains how to initialize, call, and handle responses from an OpenAPI-generated AIMMS library using the AbstractAPI IP geolocation service as a concrete example.
+   :keywords: OpenAPI, AbstractAPI, geolocation, REST API, Data Exchange Library, DEX, response hook, API key, generated library, IP address
+
 An API with an OpenAPI 3.0 spec can be used to generate an AIMMS Library.
 This AIMMS Library can subsequently be used to ease interfacing the corresponding service significantly.
 

@@ -2,8 +2,8 @@ Monitor Identifiers for Changes
 ===================================
 
 .. meta::
-   :description: Tracking whether or not an identifier in a collection has changed.
-   :keywords: monitor, track, identifier, change
+   :description: Explains how to use the AIMMS data change monitor functions to detect when identifier values have been modified since the last check.
+   :keywords: DataChangeMonitorCreate, DataChangeMonitorHasChanged, DataChangeMonitorDelete, DataChangeMonitorReset, AllIdentifiers, monitoring, data tracking
 
     
 By default, AIMMS asks you whether you want to save changes to data when you close your project. This behavior depends on which data categories and case type are currently active.

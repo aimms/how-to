@@ -2,8 +2,8 @@
 ==========================
 
 .. meta::
-   :description: How to measure efficiency of procedures with StopWatch function.
-   :keywords: efficient, time, execute, stopwatch, watch, clock
+   :description: Shows how to measure the execution time of AIMMS code blocks using the Stopwatch Library as an alternative to the built-in AIMMS Profiler.
+   :keywords: Stopwatch Library, execution time, profiler, ProfilerStart, ProfilerCollectAllData, time functions, performance measurement, Traveling Salesman
 
 There are situations where you would like to know the duration of execution of an AIMMS code-block. 
 In AIMMS Developer, you can do this easily by using the built-in `Profiler <https://documentation.aimms.com/user-guide/creating-and-managing-a-model/debugging-and-profiling-an-aimms-model/the-aimms-profiler.html>`_, 

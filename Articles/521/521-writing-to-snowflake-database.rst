@@ -1,6 +1,10 @@
 Writing to a Snowflake Database
 ================================
 
+.. meta::
+   :description: Resolves the Snowflake ODBC "Streaming value for bind variable not supported" error by explicitly specifying VARCHAR column widths in the database schema.
+   :keywords: Snowflake, ODBC, VARCHAR, database, WRITE TO TABLE, SnowflakeDSIIDriver, column width, bind variable, cloud data warehouse
+
 .. Execution error while evaluating the assignment statement for "sp_connectionString" on line 1 in user-defined function section "PostMainInitialization". Error with SQLCreateConnectionString(ODBC, SnowflakeDSIIDriver, tna31667.snowflakecomputing.com, DEMO_DB, aimms): ODBC Driver 'SnowflakeDSIIDriver' is not installed on this system. For a list of available ODBC drivers, please refer to the AIMMS functions SQLNumberOfDrivers and SQLDriverName.
 
 `Snowflake <https://www.snowflake.com/>`_ is a modern cloud based data warehousing company, see `Wikipedia <https://en.wikipedia.org/wiki/Snowflake_Inc.>`_.

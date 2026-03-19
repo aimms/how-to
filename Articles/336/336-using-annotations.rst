@@ -2,8 +2,8 @@ Using Table Background Annotation
 ======================================
 
 .. meta::
-   :keywords: annotation, css, styling, table, widget, aimms, background, property
-   :description: This article illustrates how to use annotation feature to change the background color of a cell in the table widget. 
+   :description: Illustrates how to use the WebUI annotation feature with CSS to apply conditional background colors to table widget cells in an AIMMS application.
+   :keywords: WebUI, annotations, CSS, background color, table widget, AnnotationsIdentifier, data-dependent styling, string parameter
 
 
 As you already know, you can customize the appearance of widgets in AIMMS WebUI using CSS and `annotations <https://documentation.aimms.com/webui/css-styling.html#data-dependent-styling>`_ . Annotations can be used almost on all widgets in different CSS classes.

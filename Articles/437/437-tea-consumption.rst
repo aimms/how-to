@@ -6,8 +6,8 @@ Tea Consumption
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: 2D Chart, Pie Chart, Plot / Curve Chart, Reverse link, Spreadsheet Interface, Excel
-   :description: This demo shows some features of the AIMMS 2D chart object.
+   :keywords: 2D Chart, Pie Chart, Curve Chart, Reverse link, Spreadsheet Interface, Excel, units, element parameter
+   :description: Demonstrates AIMMS 2D chart features including unit-aware axes and chart-to-chart linking via a reverse link element parameter, with tea consumption data from 22 countries loaded from Excel.
 
 Direct download AIMMS Project :download:`Tea Consumption.zip <model/Tea Consumption.zip>`
 

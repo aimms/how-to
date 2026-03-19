@@ -2,8 +2,8 @@
 ============================
 
 .. meta::
-   :description: Selecting the best few elements from a set according to some criterion.
-   :keywords: NBest, sort, set, selecting
+   :description: Demonstrates how to use the NBest operator in AIMMS to select the top N elements from a set based on a sorting criterion.
+   :keywords: NBest operator, set operations, sorting, indexed subset, top-N selection, transportation problem, set expressions, first, last
 
 In addition to the ``first`` and ``last`` functions, which return first and last elements of a set, you can use the ``NBest`` operator to obtain the first :math:`n` elements of a set. This is based on criteria you provide to the ``NBest`` operator as an additional argument.
 

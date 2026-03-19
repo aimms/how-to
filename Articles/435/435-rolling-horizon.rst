@@ -6,8 +6,8 @@ Rolling Horizon
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Stock Model, Production Planning, Rolling Horizon, Calendar, Submodel
-   :description: This example illustrates the use of horizons and calendars. 
+   :keywords: Rolling Horizon, Calendar, production planning, stock model, submodel, time-based optimization
+   :description: Demonstrates solving a weekly chocolate-bar production and inventory model both as a full calendar model and as a sequence of smaller submodels using rolling horizon decomposition.
 
 Direct download AIMMS Project :download:`Rolling Horizon.zip <model/Rolling Horizon.zip>`
 

@@ -16,6 +16,10 @@
 Optimal Power Flow (OPF)
 =============================
 
+.. meta::
+   :description: Implements the Optimal Power Flow problem for the IEEE 14-bus system in AIMMS, minimizing total generation cost subject to nodal power balance and branch capacity constraints.
+   :keywords: Optimal Power Flow, OPF, power systems, IEEE 14-bus, NLP, generation cost, MATPOWER, branch model, bus voltage
+
 In this example, we will see how the problem of Optimal Power Flow (OPF) in a power system can be implemented and solved in AIMMS. In the following, we will first review the OPF problem, and then we will see its implementation in AIMMS.
 
 .. note:: For more information about the OPF problem modelling and data format used here, see authors' publication [#1]_ and/or MATPOWER's documentation [#2]_ as well as a basic introduction if needed [#3]_.

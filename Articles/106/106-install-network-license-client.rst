@@ -1,8 +1,8 @@
 Install the AIMMS Network License on a Client Computer
 =======================================================
 .. meta::
-   :description: How to activate an AIMMS Network License with the AIMMS Network License Server.
-   :keywords: license, network, install, setup
+   :description: Explains how to install and connect an AIMMS Network License on a client computer by pointing it to the AIMMS Network License Server on a LAN.
+   :keywords: network license, license client, AIMMS installation, license configuration, LAN, License Server, ODBC, IP address
 
 
 Installing the AIMMS Network License Server

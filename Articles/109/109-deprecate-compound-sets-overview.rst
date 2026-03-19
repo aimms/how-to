@@ -2,8 +2,8 @@ Overview: Deprecation of Compound Sets
 ========================================
 
 .. meta::
-   :description: An overview of the rationale and timeline for deprecating compound sets.
-   :keywords: compound, sets
+   :description: Explains the rationale, definition, and deprecation timeline for compound sets in AIMMS and the recommended replacement using set mappings.
+   :keywords: compound sets, deprecation, set mapping, relation, Cartesian product, WebUI, Datalink, CDM, AIMMS 4.56
 
    
 .. _Section-Announcement:

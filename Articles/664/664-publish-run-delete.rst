@@ -1,6 +1,10 @@
 Publishing, Running and Deleting Apps on AIMMS Cloud
 =====================================================
 
+.. meta::
+   :description: Provides a Python script using the AIMMS Cloud REST API to publish an aimmspack, run a named task procedure, poll for completion, retrieve the response, and delete the published application.
+   :keywords: AIMMS Cloud, REST API, Python, publish, CI/CD, aimmspack, task, polling, pro-api, API key
+
 This article provides an example of Python code that can be used to publish a project, run a specific task on it and delete the published project.
 
 Use Case?

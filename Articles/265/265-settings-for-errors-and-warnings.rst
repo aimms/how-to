@@ -2,8 +2,8 @@ Customize Settings for Errors and Warnings
 ===========================================
 
 .. meta::
-   :description: Managing various error settings.
-   :keywords: Error handling, option settings 
+   :description: Explains how to configure error and warning settings in AIMMS using project options, including Common Warning Default and Strict Warning Default values.
+   :keywords: error handling, warning settings, Project Options, Common Warning Default, Strict Warning Default, Warning Collect, deployment mode, option values
    
 
 This article explains how you can control errors and warnings within AIMMS. We'll include some useful tips to create better models.

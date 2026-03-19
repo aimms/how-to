@@ -6,8 +6,8 @@ Database Inspection
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Database, Datasource, GetDataSourceProperty, SQLNumberOfColumns, SQLNumberOfTables, SQLColumnData, SQLTableName, SQL Query, Mapping, Database Info
-	:description: In this example you can see how several database functions can be used.
+   :keywords: database inspection, GetDataSourceProperty, SQLNumberOfColumns, SQLNumberOfTables, SQLColumnData, SQLTableName, SQL query, ODBC, dynamic read, database introspection
+   :description: Demonstrates runtime database schema inspection using SQLNumberOfTables, SQLColumnData, and conditional WHERE-clause filtering to dynamically read table contents.
 
 Direct download AIMMS Project :download:`Database Inspection.zip <model/Database Inspection.zip>`
 

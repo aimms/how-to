@@ -6,8 +6,8 @@ Oil Well Drilling
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Model Edit Functions, Error Handling, source code generation
-   :description: This example illustrates the use of AIMMS Model Edit functions in combination with the Error Handling functionality. 
+   :keywords: Model Edit Functions, Error Handling, runtime formulation, stochastic decision, drill depth, expected profit
+   :description: Illustrates combining AIMMS Model Edit functions with Error Handling so end-users can enter proprietary cost and payoff formulas at runtime for an oil-well drilling decision model.
 
 Direct download AIMMS Project :download:`Oil Well Drilling.zip <model/Oil Well Drilling.zip>`
 

@@ -5,6 +5,10 @@
 More Logging of WinUI Published Applications
 ===================================================
 
+.. meta::
+   :description: Explains how to enable additional logging for published WinUI applications on AIMMS PRO using a LoggerConfig.xml configuration file.
+   :keywords: logging, WinUI, published application, LoggerConfig, AIMMS PRO, session log, debug, configuration
+
 To obtain more logging from a published WinUI application, the following steps are needed:
 
 #.  Run the application without logging, when this isn't done yet.

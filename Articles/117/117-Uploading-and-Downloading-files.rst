@@ -2,8 +2,8 @@ Upload and Download Files on AIMMS Cloud
 =========================================
 
 .. meta::
-   :description: Modeling for secure apps deployed on AIMMS Cloud. Uploading and Downloading files.
-   :keywords: secure, upload, download
+   :description: Explains how to upload and download files between AIMMS applications and AIMMS PRO Storage for both WinUI and WebUI deployments on AIMMS Cloud.
+   :keywords: PRO Storage, SaveFileToCentralStorage, RetrieveFileFromCentralStorage, WebUI, Upload Widget, Download Widget, WinUI, bucket
 
 This article explains how you can upload and download files to and from AIMMS PRO Storage. Please use the following project to follow this article:
 

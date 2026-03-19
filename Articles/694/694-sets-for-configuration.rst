@@ -12,8 +12,8 @@ Sets for Configuration
 .. image:: https://img.shields.io/badge/WebUI-25.9.2.8-white?style=for-the-badge&labelColor=009B00&color=00D400
     
 .. meta::
-    :keywords: AIMMS, sets, configuration, element parameters, named constants, refactoring, best practices, application logic, maintenance
-    :description: Learn how to use element parameters as named constants in AIMMS to create refactor-safe configuration sets and avoid hard-coding element names.
+   :keywords: configuration set, element parameters, named constants, refactoring, s_config, DefinesIdentifiers, application logic, best practices, Git diff, hard-coding
+   :description: Shows how to declare element parameters as named constants for AIMMS configuration sets so that renaming an option requires only one change instead of modifying procedures and pages throughout the project.
 
 Some sets in AIMMS are not data-driven, but represent configuration 
 choices or application logic switches, for example:

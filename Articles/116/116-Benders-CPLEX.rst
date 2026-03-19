@@ -2,8 +2,8 @@
 =============================================
 
 .. meta::
-   :description: How to solve mathematical programming problems with Benders decomposition algorithm in CPLEX 12.7.
-   :keywords: benders, cplex
+   :description: Explains how to apply Benders decomposition in CPLEX 12.7 for MIP and stochastic programming problems, including manual decomposition via GMP functions.
+   :keywords: Benders decomposition, CPLEX, MIP, stochastic programming, GMP, column decomposition, branch-and-cut, L-shaped method
 
 .. note::
 

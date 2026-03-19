@@ -14,6 +14,10 @@
 Unit Commitment
 ================
 
+.. meta::
+   :description: Presents the standard Unit Commitment problem formulation as a mixed integer linear program covering generator commitment, power balance, line limits, and ramping constraints.
+   :keywords: Unit Commitment, power systems, MIP, mixed integer programming, generator scheduling, ramp constraints, DC power flow, binary variables
+
 In this section, we give a standard formulation for the Unit Commitment problem. We normally solve this problem as a mixed integer linear programme. However it should be noted that there are nonlinearities in the objective function in form of the binary decision variables. 
 
 .. note:: You can use this formulation to formulate and solve your own example in AIMMS. We will publish an accompanying simple example based on this formulation soon. 

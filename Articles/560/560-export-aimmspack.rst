@@ -1,6 +1,10 @@
 Exporting aimmspack for WinUI or WebUI
 =========================================
 
+.. meta::
+   :description: Explains how to create separate aimmspack files for WinUI and WebUI applications by selecting or deselecting the WebUI folder during the export process.
+   :keywords: aimmspack, WinUI, WebUI, export, deployment, project export, AIMMS PRO
+
 This article has the goal of explaining how to differentiate the *aimmspack* creation for a WinUI and a WebUI application. 
 If you seek further understanding for the process itself, please check `this <https://how-to.aimms.com/Articles/33/33-pro-deploy-app.html#creating-an-aimmspack>`_ article out.
 

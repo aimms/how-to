@@ -1,6 +1,10 @@
 Publishing to Offline Servers
 ==============================
 
+.. meta::
+   :description: Explains how to bundle AIMMS Repository Libraries inside an aimmspack so that PRO On-Premise servers without internet access can publish and run applications.
+   :keywords: aimmspack, offline server, AIMMS PRO On-Premise, Library Repository, local libs, publishing, deployment
+
 The `AIMMS Repository Library <https://documentation.aimms.com/library-repository.html>`_ 
 places the library resources on the `url <https://library-repository.aimms.com/aimmslibs.all>`_.
 

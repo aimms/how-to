@@ -1,6 +1,10 @@
 Adding a Logo to an AIMMS WebUI App
 ====================================
 
+.. meta::
+   :description: Illustrates adding a custom logo to an AIMMS WebUI application header using CSS theming variables available in AIMMS 4.85 and newer.
+   :keywords: WebUI, logo, CSS, theming, app branding, icon.css, AIMMS 4.85, header, stylesheets
+
 This article illustrates adding a logo to an AIMMS WebUI application, using AIMMS 4.85 and newer. 
 Please use the `Employee Scheduling <https://how-to.aimms.com/Articles/387/387-employee-scheduling.html>`_ example to experiment with this feature.
 

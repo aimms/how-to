@@ -6,8 +6,8 @@ Railway Stock
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: XML, network object, colors, compound set, calendar, time, tabbed page
-   :description: This model illustrates the use of compound sets.
+   :description: Minimizes the number of trains required on the Amsterdam-Vlissingen line by modeling flow conservation at each station-time node using compound sets.
+   :keywords: railway stock, compound set, flow conservation, network model, calendar, timetable scheduling, network object, train scheduling
 
 Direct download AIMMS Project :download:`Railway Stock.zip <model/Railway Stock.zip>`
 

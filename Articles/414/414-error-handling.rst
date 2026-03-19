@@ -6,8 +6,8 @@ Error Handling
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Error Handling, Error Handler
-   :description: This example illustrates the use of the error handling functionality in AIMMS.
+   :description: Illustrates local and global AIMMS error handling, including catching file-read errors gracefully and using a reusable Error Handler library to email error reports to developers.
+   :keywords: error handling, local error handling, global error handling, error handler library, onerror, errh, execution errors, user-friendly errors, email error report
 
 Direct download AIMMS Project :download:`Error Handling.zip <model/Error Handling.zip>`
 

@@ -6,8 +6,8 @@ Farm Planning
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: LP, Linear Program, Measurement units, Sensitivity analysis, What-If analysis, WebUI
-   :description: This example introduces a simplified farm planning problem in a developing country.
+   :keywords: Farm planning, LP, crop selection, resource constraints, measurement units, sensitivity analysis, what-if analysis, WebUI
+   :description: Optimizes annual crop selection for a developing-country farmer under land, labor, and water constraints, demonstrating sensitivity analysis of parameter changes on the LP optimal value.
 
 Direct download AIMMS Project :download:`Farm Planning.zip <model/Farm Planning.zip>`
 

@@ -1,8 +1,8 @@
 Write Data to a Table
 ======================================
 .. meta::
-    :description: Methods of writing data to a table.
-    :keywords: database, db, write, efficient, performance, foreign key, schema
+   :description: Explains replace mode, dense mode, filtered selection, and insert mode tactics for writing AIMMS parameter data to a SQLite database table.
+   :keywords: database write, replace mode, dense mode, insert mode, filtering, SQLite, DatabaseTable, sparse execution, AIMMS language
 
 A database table may not always match the data in the related AIMMS model. In addition, we may want to write all possible elements explicitly, or just a predetermined selection of rows instead of just the non-zeros. Last but not least, from the context in the application, it may be clear that all of the data is changed, or just one or a few rows. 
 

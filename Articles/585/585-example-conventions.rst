@@ -1,6 +1,10 @@
 Conventions Used in the Examples Provided
 ==========================================
 
+.. meta::
+   :description: Describes the configuration file conventions used across the CountTheStars example clients to switch between localhost and AIMMS Cloud service endpoints.
+   :keywords: configuration, REST API, localhost, AIMMS Cloud, apiKey, service name, app version, CountTheStars, client conventions
+
 This article just enumerates some of the conventions used in the associated example apps.
 
 Steering the HTTP Request

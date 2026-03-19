@@ -2,8 +2,8 @@ Set Encoding Format
 ====================
 
 .. meta::
-   :description: How to configure character encoding in your project such as UTF8 and ASCII.
-   :keywords: encode, character, format, UTF, ASCII, unicode
+   :description: Explains how to configure character encoding in AIMMS using the encoding attribute of file identifiers and the FileRead function to support UTF-8, ASCII, and other formats.
+   :keywords: UTF-8, ASCII, encoding, Unicode, FileRead, code page, EBCDIC, character encoding, internationalization
 
 A text is a sequence of characters. A text file contains such a text whereby the characters are represented by numbers. The mapping between these characters in a text and these numbers in a file is called an encoding. Confusion arises when people or programs communicate using different encodings. 
 

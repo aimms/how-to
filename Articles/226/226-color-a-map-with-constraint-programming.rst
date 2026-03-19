@@ -2,8 +2,8 @@ Color a Map with Constraint Programming
 ==========================================
 
 .. meta::
-   :description: Using Constraint Programming in an exercise to color a map of the states of the USA.
-   :keywords: Constraint Programming, network, color, map
+   :description: Demonstrates how to solve the map coloring problem for US states using constraint programming in AIMMS with GIS visualization.
+   :keywords: constraint programming, map coloring, element variable, GIS, network object, graph coloring, USA states, WinUI, four-color theorem
 
 .. warning::
    This article references outdated technology and is provided for historical purposes only. 

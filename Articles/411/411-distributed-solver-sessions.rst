@@ -6,8 +6,8 @@ Distributed Solver Sessions
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Parallel Solver Session, Cutting Stock example, GMP, Indexed Page object, Progress Window, FileView, External Procedure
-   :description: This project illustrates AIMMS' capabilities for solving two or more optimization programs in parallel by using distributed solver sessions.
+   :description: Solves an extended cutting stock problem with multiple raw sizes in parallel using distributed GMP solver sessions and an adjusted column generation scheme.
+   :keywords: distributed solver sessions, parallel solving, cutting stock, column generation, GMP, indexed page object, progress window, multi-processor, external procedure
 
 Direct download AIMMS Project :download:`Distributed Solver Sessions.zip <model/Distributed Solver Sessions.zip>`
 

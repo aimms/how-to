@@ -7,8 +7,8 @@ Extract XML File from a Server with the HTTP Library
 =====================================================
 
 .. meta::
-   :description: Using the AIMMS HTTP library to extract an XML file.
-   :keywords: xml, http library
+   :description: Shows how to use the AIMMS HTTP Client Library to create a GET request and download an XML file from a remote server into a project.
+   :keywords: HTTP Client Library, GET request, XML, web::request_create, web::request_invoke, REST API, HTTP headers, data exchange
 
 
 In this article, we will create an HTTP request to extract a file from a server without an identification system using the AIMMS HTTP library.

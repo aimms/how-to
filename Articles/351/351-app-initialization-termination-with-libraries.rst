@@ -1,6 +1,10 @@
 Libraries Initialization and Termination
 ============================================
 
+.. meta::
+   :description: Explains the order of initialization and termination procedures in AIMMS applications, covering libraries, deployment modes, and best practices.
+   :keywords: initialization, termination, LibraryInitialization, PostMainInitialization, MainTermination, library order, deployment, AIMMS PRO, WebUI
+
 When an AIMMS application is launched, the initialization procedures are executed before all else. 
 Likewise, when the app is shut down the termination procedures are executed. 
 

@@ -2,8 +2,8 @@ Types of Set
 ======================== 
 
 .. meta::
-    :description: There are different types of set, each with its own use case.
-    :keyword: set, simple set, root set, relation, calendar.
+   :description: Describes the four AIMMS set types — root set, calendar, subset, and relation — with declaration syntax and examples for each, including a note on deprecated compound sets.
+   :keywords: set, root set, calendar, subset, relation, compound set, index, element parameter, tuple, TimeslotFormat
 
 A set is a collection of unique elements. In AIMMS, a set is finite. 
 When you declare a set in AIMMS, it is one of the following:

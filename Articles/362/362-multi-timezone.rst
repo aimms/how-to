@@ -2,8 +2,8 @@ Multi timezone applications
 ============================
 
 .. meta::
-   :description: Creating multi timezone applications illustrated and good practice motivated.
-   :keywords: timezone, operations research, date conversion, datetime, visualization
+   :description: Demonstrates building a multi-timezone rostering application covering UTC model conventions, ODBC and Excel data exchange, and WebUI timezone selector.
+   :keywords: timezone, UTC, Convention, TimeSlotToString, webui::DisplayTimeZone, AimmsXLLibrary, rostering, calendar, Gantt chart, daylight saving
 
 International organizations have offices around the world. 
 Staff from multiple offices may be cooperating to create operational plans.

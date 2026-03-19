@@ -6,8 +6,8 @@ Infeasible Data
    This example requires AIMMS 25.1 or higher.
 
 .. meta::
-   :keywords: Capacitated warehouse location, WebUI, Infeasible data
-   :description:    This project illustrates AIMMS' capabilities to find data causing an infeasibility in a mathematical model.
+   :keywords: infeasible data, GMP::Instance::GetInfeasibleData, capacitated warehouse location, SuspicionLevel, WebUI, AnnotationsIdentifier, ElementTextIdentifier, IIS, CSS annotations
+   :description: Demonstrates using GMP::Instance::GetInfeasibleData on an infeasible capacitated warehouse location model to identify and visually highlight infeasibility-causing parameters in WebUI.
 
 Direct download AIMMS Project :download:`CWL.zip <model/CWL.zip>`
 

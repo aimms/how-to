@@ -2,8 +2,8 @@ Check Computations with Units of Measurement
 =============================================
 
 .. meta::
-   :description: Formula checking using units of measurement is illustrated.
-   :keywords: Units of Measurement, formula consistency
+   :description: Illustrates how AIMMS uses units of measurement to automatically check formula consistency and detect dimensional errors in model equations.
+   :keywords: units of measurement, formula checking, Quantity, SI_Mass, SI_Volume, dimensional analysis, unit consistency, constraint, warning
 
 
 A classical method to check equations is to use units of measurement.

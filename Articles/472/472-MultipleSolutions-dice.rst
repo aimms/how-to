@@ -33,6 +33,7 @@ Bosch, R.A., Mindsharpener - Monochromatic Squares, OPTIMA Newsletter 71 (2004),
 Mathematical Optimization Society, pp. 6-7
 
 .. meta::
-   :keywords: Multiple solutions, Incumbent callback, Solution pool, GMP
+   :description: Demonstrates three approaches to extract multiple MIP solutions for the dice design problem: incumbent callback, solution pool, and iterative re-solve with forbidden solutions.
+   :keywords: Multiple solutions, Incumbent callback, Solution pool, GMP, MIP, CPLEX, Gurobi, ODH-CPLEX
 
 

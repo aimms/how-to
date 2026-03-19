@@ -2,8 +2,8 @@ Migrate AIMMS Network License Server
 =====================================
 
 .. meta::
-   :description: How to migrate your AIMMS Network License Server to another machine.
-   :keywords: PRO, license, server, migrate, move, transfer
+   :description: Explains how to transfer the AIMMS Network License Server to a new machine by deactivating, reinstalling, and reactivating licenses.
+   :keywords: AIMMS Network License Server, license migration, deactivate license, activate license, PRO On-Premise, machine nodelock, license manager
 
 This article explains how to transfer the AIMMS Network License Server to a new server. For instructions to migrate your AIMMS PRO On-Premise server, please see :doc:`../308/308-migrate-pro-server-another-machine`.
 

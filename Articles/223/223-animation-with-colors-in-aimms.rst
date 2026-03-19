@@ -1,10 +1,12 @@
 :orphan:
 
 
-Animation with colors in AIMMS 
+Animation with colors in AIMMS
 =====================================
 
-
+.. meta::
+   :description: Demonstrates how to create a color animation in AIMMS using UserColorAdd and UserColorDelete to programmatically cycle through a red-green color palette.
+   :keywords: UserColorAdd, UserColorDelete, animation, color palette, heat map, LoopCount, AllColors, RGB, WinUI, user colors
 
 In this Article, we will show how you can use the user color related
 functions UserColorAdd and UserColorDelete in AIMMS to create an

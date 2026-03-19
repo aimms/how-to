@@ -1,7 +1,11 @@
 The library AimmsPLET
 ======================
 
-:download:`AimmsPLET library download <model/AimmsPLET.zip>` 
+.. meta::
+   :description: Describes the AimmsPLET library functions for recording task start, finish, errors, and solver progress to a MySQL database from within an AIMMS service procedure.
+   :keywords: AimmsPLET, plet, pr_initTask, pr_finishTask, pr_log, pr_errorHandler, ODBC, MySQL, error handling, Stopwatch library
+
+:download:`AimmsPLET library download <model/AimmsPLET.zip>`
 
 
 The **AimmsPLET** library contains functions an AIMMS application with service for long running tasks

@@ -6,8 +6,8 @@ Car Selection
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Project User Files, Mixed Integer Programming model, MIP, Matching Problem, Network object, Nodes and arcs, Bitmap
-   :description: In this AIMMS project the use of pictures as nodes in a network is illustrated.
+   :description: Solves a people-to-cars matching problem as a MIP model and visualizes assignments using bitmap images as network object nodes.
+   :keywords: matching problem, Mixed Integer Programming, MIP, network object, project user files, bitmap, nodes and arcs, assignment problem
 
 Direct download AIMMS Project: :download:`Car Selection <model/CarSelection.zip>`
 

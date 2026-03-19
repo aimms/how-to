@@ -1,8 +1,8 @@
 Check Version Dependencies for AIMMS Developer and AIMMS PRO On-Premise
 =======================================================================
 .. meta::
-   :description: A reference of dependencies between the AIMMS IDE and AIMMS PRO.
-   :keywords: version, dependency, upgrade, PRO, IDE
+   :description: Provides a reference table of version dependencies between AIMMS Developer and AIMMS PRO On-Premise to ensure compatibility during upgrades.
+   :keywords: AIMMS PRO, version compatibility, AIMMS Developer, upgrade, dependency, PRO On-Premise, solver lease, deployment
 
 
 There is a dependency between AIMMS Developer versions and AIMMS PRO On-Premise versions. The version dependencies are minimal, but in some cases an upgrade of one product requires upgrade of the other.

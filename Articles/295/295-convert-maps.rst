@@ -1,8 +1,8 @@
 Upgrade Old WebUI Maps
 ========================
 .. meta::
-   :description: A brief guide to upgrading Maps in your WebUI app.
-   :keywords: deprecation, webui, map, widget, convert, upgrade, update
+   :description: Explains how to upgrade the deprecated Map V1 widget to the Map V2 widget in AIMMS WebUI applications for compatibility with newer AIMMS versions.
+   :keywords: WebUI, Map widget, Map V2, upgrade, deprecation, latitude, longitude, arc set, node set
 
 Overview 
 ---------

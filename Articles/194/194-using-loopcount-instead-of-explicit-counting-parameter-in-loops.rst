@@ -2,8 +2,8 @@ Simplifying Repetitive Loops in AIMMS
 ====================================================================
 
 .. meta::
-   :description: Repetition sometimes needed, iterative construct preferred, loop counts reduce need of coding.
-   :keywords: Iterative, repetition, loop count, sum, for, while, parameter
+   :description: Explains how to use the LoopCount operator in AIMMS to simplify repetitive loops without declaring an explicit counter parameter.
+   :keywords: LoopCount, while loop, for loop, repeat loop, iteration, loop string, nested loops, iterative execution, counter parameter
 
 There are cases where you want to execute some set of statements in an AIMMS procedure a couple of times. 
 If you want to execute the statements :math:`n` times, the trivial (but not very smart) way would be to just copy the statements :math:`n` times.

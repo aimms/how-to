@@ -1,6 +1,10 @@
 Testing the Library
 ===================
 
+.. meta::
+   :description: Compares the performance of three CVRP subtour elimination formulations (Explicit DFJ, Implicit DFJ, Miller-Tucker-Zemlin) across datasets of varying sizes.
+   :keywords: CVRP, subtour elimination, Dantzig-Fulkerson-Johnson, Miller-Tucker-Zemlin, vehicle routing, MIP, benchmark, formulation comparison
+
 The CVRP Library can solve Capacitated Vehicle Routing Problems (CVRP). There are four different options of formulations. One of them is called **Time Windows** and will naturally only be used for a CVRP with time windows. All the other formulations can be used for problems without time windows; the **Explicit Dantzig-Fulkerson-Johnson**, the **Implicit Dantzig-Fulkerson-Johnson** and the **Miller-Tucker-Zemlin** formulation. In this article these three formulations will be tested and compared. 
 
 

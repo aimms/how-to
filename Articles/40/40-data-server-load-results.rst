@@ -2,8 +2,8 @@ Load solver session Results Manually
 ========================================
 
 .. meta::
-   :description: How to load results of a solver session on demand in AIMMS PRO.
-   :keywords: server, session, results
+   :description: Explains how to manually trigger solver session result loading in AIMMS PRO using a custom completionCallback and a user-controlled RequestID.
+   :keywords: AIMMS PRO, solver session, DelegateToServer, completionCallback, RequestID, data session, load results, pro::session::LoadResultsCallBack
 
 If the ``waitForCompletion`` argument of ``pro::DelegateToServer`` is 0, both the data session and the solver session run in parallel. This allows the end user to browse and modify data while a delegated procedure is executed on the server side in the background. However, at the end of execution, the results are loaded back in to the data session without any warning. This unannounced loading of data does not provide the best user experience. This article presents the approach to manually control this data transfer between the data and server sessions. 
 

@@ -2,8 +2,8 @@ Send and Receive Messages
 ==============================
 
 .. meta::
-   :description: How to use queues to pass messages from the solver session to the data session.
-   :keywords:  queue, message
+   :description: Explains how to create an AIMMS PRO messaging queue in a WebUI data session and have multiple solver sessions post progress messages to it for real-time monitoring.
+   :keywords: PRO messaging, queue, pro::messaging::CreateQueue, AddQueueToConnection, solver session, data session, WebUI, AIMMS Cloud, inter-session communication
 
 .. https://gitlab.aimms.com/Chris/aimms-how-to/issues/80
 .. Nirvana project 0006

@@ -6,8 +6,8 @@ Integrate AIMMS with Python
 ============================================
 
 .. meta::
-   :description: Integrating (data science) models built in Python with your AIMMS applications
-   :keywords: python, integration, data science, machine learning, connectivity
+   :description: Integrates a scikit-learn KMeans clustering model with an AIMMS app via a Flask REST API, using the DataExchange library for JSON I/O and Docker for deployment.
+   :keywords: python, integration, data science, machine learning, KMeans, scikit-learn, Flask, Docker, DataExchange, HTTP library
 
 This article is part of a series of examples on how to connect AIMMS with models built in Python or R. 
 If you have not already, read :doc:`Connecting AIMMS with Data Science Models <../494/494-overview-aimms-ds-models>` before continuing. 

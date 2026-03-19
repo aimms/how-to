@@ -1,6 +1,10 @@
 Creating an AIMMS Server App
 =============================
 
+.. meta::
+   :description: Covers how to define, implement, unit test, and document REST task services in an AIMMS server application using the Data Exchange Library and dex::ServiceName.
+   :keywords: REST service, dex::ServiceName, Data Exchange Library, unit testing, aimmsunit, dex::api::StartAPIService, AIMMS Cloud, task, JSON, CSV, Parquet
+
 There are several advantages to setting up a client-server architecture:
 
 * Independent developments - clients can be developed independently from the server

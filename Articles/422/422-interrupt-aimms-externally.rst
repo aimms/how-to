@@ -6,8 +6,8 @@ Interrupt AIMMS Externally
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: AIMMS Component, AIMMSCOM
-   :description: How to interrupt an AIMMS session from outside AIMMS.
+   :keywords: AIMMSCOM, AIMMS API, external interrupt, programmatic control, session interruption
+   :description: Demonstrates how an external application can interrupt a running AIMMS or AIMMSCOM session without user-interface access using an interrupt executable.
 
 Direct download AIMMS Project :download:`Interrupt AIMMS Externally.zip <model/Interrupt AIMMS Externally.zip>`
 

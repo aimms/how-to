@@ -2,8 +2,8 @@ Get Log Files
 ========================================================================
 
 .. meta::
-   :description: This article explains where you can find various log files in your project.
-   :keywords: log, troubleshoot
+   :description: Explains where to find AIMMS log files for the IDE, deployed PRO applications, browser sessions, and the license server for troubleshooting purposes.
+   :keywords: log files, troubleshooting, AIMMS PRO, session log, browser console, license server, messages.log, aimms.err, log management
 
 Things don't always go according to plan. 
 Sometimes the log files can answer **What happened?** 

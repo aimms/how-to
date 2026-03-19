@@ -2,8 +2,8 @@
 ====================================================
 
 .. meta::
-   :description: Discussion of how AIMMS handles of subsets of integers in an expression.
-   :keywords: integer, set, subset, operator
+   :description: Explains how AIMMS resolves ambiguity between numeric and label behavior for subsets of integers using the Elements are Numeric and Elements are Labels properties.
+   :keywords: integer subset, element parameter, Elements are Numeric, Elements are Labels, lead operator, Val function, AIMMS compiler, language reference
 
 .. .. note::
 

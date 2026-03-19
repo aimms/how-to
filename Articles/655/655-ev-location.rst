@@ -2,8 +2,8 @@ EV Charging Location
 ====================
 
 .. meta::
-   :keywords: EV charging station optimization, Particle Swarm Optimization, urban EV infrastructure, electric vehicle charging, AIMMS, WebUI, sustainable transportation, cost-effective charging, urban planning, EV infrastructure model
-   :description: Optimize electric vehicle (EV) charging station placement and sizing with Particle Swarm Optimization to enhance accessibility, minimize costs, and support sustainable urban infrastructure.
+   :keywords: EV charging, Particle Swarm Optimization, Vulture algorithm, urban infrastructure, MOPTA competition, WebUI, DEX, station placement, non-convex optimization, cost minimization
+   :description: Applies a Particle Swarm Optimization (Vulture) algorithm to optimally place and size electric vehicle charging stations in urban areas, minimizing construction, maintenance, and driving costs.
 
 .. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/ev-charging-locations/releases/latest/download/ev-charging-locations.zip

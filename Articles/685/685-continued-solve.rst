@@ -10,8 +10,8 @@ Implementing Continued Solves
 .. image:: https://img.shields.io/badge/AIMMS-25.5-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 .. meta::
-    :keywords: AIMMS, GMP, Generated Mathematical Program, MIP, Continued Solve, solver status, optimality gap, CPLEX, Gurobi, optimization search
-    :description: Learn how to use the AIMMS GMP library to resume interrupted MIP solves. Preserve search progress, adjust tolerances, and reduce total solve time.
+   :keywords: GMP, continued solve, MIP, ResourceInterrupt, GMP::Instance::Generate, GMP::Instance::SetOptionValue, GMP::Solution::GetSolverStatus, CPLEX, Gurobi, optimality gap
+   :description: Demonstrates using GMP::Instance::Generate and GMP::Instance::Solve to resume an interrupted MIP search with relaxed tolerances, preserving branch-and-bound tree progress without regenerating the model.
 
 In complex Mixed-Integer Programming (MIP) applications, modelers often face a trade-off between solution quality and computational time. 
 While many data instances solve quickly, "tough" instances may fail to reach a desired optimality gap within a strict time limit.

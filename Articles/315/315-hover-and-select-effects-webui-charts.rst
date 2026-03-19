@@ -1,8 +1,8 @@
 Change Hover and Select Effects for WebUI Charts
 ===================================================
 .. meta::
-   :description: Use CSS to specify behavior for hover and select states on objects in WebUI.
-   :keywords: css, webui, map, chart, select, hover
+   :description: Explains how to use CSS to customize hover and selected state styles for chart and map widgets in AIMMS WebUI applications.
+   :keywords: WebUI, CSS, hover state, selected state, chart styling, annotations, map widget, bar chart, fill-opacity, stroke
 
 
 This article explains how to use CSS to customize the states of a chart or map widget on hover and on select.

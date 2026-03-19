@@ -32,4 +32,5 @@ for capacitated network design polyhedra, Networks 57(2) (2011), pp. 141-156.
 SNDlib: http://sndlib.zib.de/home.action
 
 .. meta::
-   :keywords: Benders Decomposition, GMP, XML
+   :description: Solves the capacitated network design problem as a hard MIP using Benders Decomposition to select minimum-cost edges satisfying commodity demand, with data loaded from XML files.
+   :keywords: Benders Decomposition, GMP, XML, capacitated network design, telecommunications, MIP, SNDlib

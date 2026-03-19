@@ -2,8 +2,8 @@
 ===============================
 
 .. meta::
-   :description: How to keep the AIMMS WebUI interactive while a solve process is running in the background.
-   :keywords: solve, webui, ui, veil
+   :description: Explains how to keep the AIMMS WebUI session active and interactive while a solve procedure runs in the background by removing the veil.
+   :keywords: WebUI, veil, DelegateToServer, waitForCompletion, AIMMS Cloud, background solve, solver session, interactive UI, flowshop
 
 Introduction
 ------------

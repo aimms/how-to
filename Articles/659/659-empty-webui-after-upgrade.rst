@@ -1,6 +1,10 @@
 Empty WebUI After Upgrade
 =========================
 
+.. meta::
+   :description: Explains why a WebUI appears empty after upgrading from AIMMS 4.59 or older directly to 4.68 or newer, and lists the intermediate migration steps required to retain the WebUI.
+   :keywords: WebUI upgrade, serialization, AIMMS 4.59, AIMMS 4.68, Map V2, UX theme, single file, migration, WebUI specification
+
 Symptom
 ----------
 

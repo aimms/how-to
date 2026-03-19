@@ -1,6 +1,10 @@
 How to create mappings for matrix-oriented data via name-binds-to
 ===================================================================
 
+.. meta::
+   :description: Explains how to use the name-binds-to and name-regex attributes in Data Exchange Library mapping files to handle matrix-oriented Excel data where column names map to set elements.
+   :keywords: Data Exchange Library, DEX, name-binds-to, name-regex, Excel mapping, matrix data, ColumnMapping, AimmsExcelMapping, diet problem
+
 Sometimes your data source consists of both column- and row-oriented data, showing data matrix-style. 
 For these setups you can still use a mapping file, using certain elements in your tags to guide the data to the correct identifier(s). 
 In this how-to, we’ll use an example to show you how to write the corresponding mapping files.

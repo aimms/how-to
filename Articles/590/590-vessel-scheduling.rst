@@ -2,8 +2,8 @@ Vessel Scheduling
 =========================
 
 .. meta::
-   :keywords: Decision Support System, Route Optimization, Petrobras Ship Scheduling, Cost-efficient Cargo Delivery, Mathematical Optimization Model, Vessel Allocation Algorithm, WebUI and Python Integration
-   :description: In this practical example, an efficient plan is developed for delivering large cargoes using oil tankers.
+   :description: Solves an oil tanker cargo scheduling problem by generating all feasible routes combinatorially and minimizing operational costs via MIP optimization with Python-computed sea distances.
+   :keywords: vessel scheduling, route generation, MIP, cargo allocation, Python Bridge, searoute, Data Exchange Library, Gantt Chart Widget, Map Widget, combinatorial optimization
 
 .. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/vessel-scheduling/releases/latest/download/vessel-scheduling.zip

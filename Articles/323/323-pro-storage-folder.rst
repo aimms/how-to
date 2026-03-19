@@ -2,8 +2,8 @@ Copy Folder Operations in PRO Storage
 =========================================
 
 .. meta::
-   :description: Utility apps for AIMMS PRO Storage, available for download including a brief user guide.
-   :keywords: AIMMS PRO storage, deployment, utility
+   :description: Provides downloadable WinUI utility apps for copying files and folders between AIMMS PRO Storage and a local Windows machine.
+   :keywords: AIMMS PRO Storage, file copy, WinUI, utility app, PRO deployment, cloud storage, folder operations, authorization
 
 This article provides for the source of four utility apps to operate on AIMMS PRO Storage.
 

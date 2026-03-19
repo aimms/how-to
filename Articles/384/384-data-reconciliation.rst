@@ -6,8 +6,8 @@ Data Reconciliation
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Template, NLP model, network object, selection object, table, composite table, assertion, indexed sets, model structure, page structure, quantities, units, XML
-   :description: This demo illustrates a complete AIMMS application for the data reconcilitation of chemical processes.
+   :description: Demonstrates correcting inconsistent chemical plant flow measurements to satisfy mass balance constraints using a nonlinear data reconciliation model.
+   :keywords: data reconciliation, NLP model, chemical process, mass balance, nonlinear programming, quantities, units, XML, network object, assertion
 
 
 Direct download AIMMS Project :download:`Data Reconciliation.zip <model/Data Reconciliation.zip>`

@@ -2,8 +2,8 @@
 ==========================
 
 .. meta::
-   :description: How to measure efficiency of procedures with StopWatch function.
-   :keywords: efficient, time, execute, stopwatch, watch, clock
+   :description: Introduces the AIMMS Stopwatch Library, which provides pr_start and fnc_elapsed procedures to measure execution time of code blocks with support for ten simultaneous stopwatches.
+   :keywords: Stopwatch Library, execution time, performance measurement, pr_start, fnc_elapsed, ScheduleAt, CurrentToString, StringToMoment, timing
 
 .. image:: https://img.shields.io/badge/AIMMS_4.87-ZIP:_Stopwatch_Library-blue
    :target: https://github.com/aimms/stopwatch-library/archive/refs/heads/main.zip

@@ -1,5 +1,10 @@
 Time Windows
 ============
+
+.. meta::
+   :description: Explains the Time Windows formulation for the VRPTW in the AIMMS CVRP library, where time window constraints inherently eliminate subtours without additional constraints.
+   :keywords: VRPTW, time windows, vehicle routing, subtour elimination, CVRP, service time, MIP, integer programming
+
 The library in AIMMS that solves a Capacitated Vehicle Routing Problem (CVRP) has four different formulation options. One of them is called Time Windows and is an extension of the CVRP. Every customer then has a different time frame in which the goods have to be deliverd. The constraints for this formulation automatically eliminate subtours. That is why is isn't nessecary to formulate any Subtour Elimination Constraints for a Vehicle Routing Problem with Time Windows (VRPTW). This article discusses the constraints for a VRPTW.
 
 .. image:: images/VRPTW.png

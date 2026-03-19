@@ -1,6 +1,10 @@
 Adding an Icon on your Menu Bar
 =================================
 
+.. meta::
+   :description: Illustrates how to add custom icons to the navigation menu bar of an AIMMS WebUI application using CSS stylesheets.
+   :keywords: WebUI, menu bar, CSS, icon, page-link, stylesheet, navigation, customization
+
 This article illustrates how to add an icon on the menu bar of your project while using an AIMMS WebUI application. 
 Please use the `Demand Forecasting <https://how-to.aimms.com/Articles/550/550-demand-forecasting.html>`_ example to experiment with this feature.
 

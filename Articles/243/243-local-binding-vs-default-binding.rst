@@ -2,8 +2,8 @@ Local Binding vs. Default Binding
 ====================================
 
 .. meta::
-   :description: A comparison of two kinds of index binding.
-   :keywords: index, binding, for statement, iterative operator
+   :description: Compares local binding and default binding for indices in AIMMS and explains how each affects element ordering functions such as ord.
+   :keywords: index binding, local binding, default binding, ord function, subset, RootSet, index ordering, for statement, iterative operator, AIMMS language
 
 .. image:: images/rootSetSubset.png
 

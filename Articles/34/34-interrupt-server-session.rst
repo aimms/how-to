@@ -2,8 +2,8 @@ Interrupt the solver session
 =============================
 
 .. meta::
-   :description: A method for stopping a solve process when "cancel" is not available.
-   :keywords: solve, cancel, interrupt, webui, veil
+   :description: Explains how to interrupt a running solver session in AIMMS Cloud from the data session using the PRO library StopExecution procedure.
+   :keywords: solver session, interrupt, StopExecution, AIMMS PRO, WebUI, veil, AIMMSAPI_INTERRUPT_SOLVE, data session, cancel
 
 .. index:: solver, CPLEX
 

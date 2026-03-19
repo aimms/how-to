@@ -1,8 +1,8 @@
 Transfer Single-User License to Other Machine
 ================================================
 .. meta::
-   :description: How to transfer an AIMMS license for use on a different computer.
-   :keywords: license, transfer, move, switch
+   :description: Explains how to deactivate an AIMMS developer license on one machine and activate it on another using the Personal Nodelock method.
+   :keywords: license transfer, developer license, Personal Nodelock, activation code, deactivation, license configuration, single-user license, AIMMS Tools
 
 An AIMMS Developer license can only be used on one machine at a time. 
 There may be situations where you need to use AIMMS on a different machine, either temporarily or permanently. 

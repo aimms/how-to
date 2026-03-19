@@ -6,8 +6,8 @@ Diet Problem
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Diet problem, Blending problem, Unit-valued parameter, Unit parameter, Quantity, Unit conversion, WebUI
-   :description: This example illustrates how data consistency can be ensured through measurement units.
+   :keywords: Diet problem, measurement units, unit convention, unit-valued parameter, quantity, unit conversion, WebUI, LP
+   :description: Formulates a minimum-cost daily diet LP using McDonald's menu data, demonstrating AIMMS measurement unit conventions that let users view and enter nutritional data in their preferred units.
 
 Direct download AIMMS 4.84 Project :download:`Diet Problem.zip <model/Diet Problem - AIMMS 4.84.zip>`
 

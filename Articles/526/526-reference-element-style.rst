@@ -1,6 +1,10 @@
 Modeling styles for using reference elements
 ==============================================================
 
+.. meta::
+   :description: Compares three reference element modeling styles for composite objects across clarity, flexibility, and execution efficiency, concluding that the multiple element parameter style performs best.
+   :keywords: composite objects, reference element, modeling style, element parameter, binary parameter, execution efficiency, stock balance, arc, AIMMS language
+
 This is a companion article to :doc:`../526/526-modeling-composite-objects`.
 That article and other companion articles show the advantages of the reference element approach.
 The modeling style used for the reference element approach in those articles is not the only possible modeling style for the reference element approach.

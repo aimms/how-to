@@ -6,8 +6,8 @@ Link an SQLite Database to a Project
 =========================================
 
 .. meta::
-   :description: Directions to link a project in AIMMS with an SQLite database in Windows 10.
-   :keywords: sql, sqlite, database, link, connect
+   :description: Shows how to install the SQLite ODBC driver and link an SQLite database to an AIMMS project using DSN files or connection strings.
+   :keywords: SQLite, ODBC driver, DSN file, connection string, SQLCreateConnectionString, database table, data source, AIMMS identifier
 
 
 Say you have a wonderful AIMMS application that needs to link a Database Table identifier |db| (an AIMMS identifier) to your amazing SQL database that is, however, an SQLite database. To be able to read it, AIMMS needs the appropriate driver. This article presents how to:

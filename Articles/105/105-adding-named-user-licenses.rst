@@ -2,8 +2,8 @@ Named Users in License Manager
 =====================================
 
 .. meta::
-   :description: How to register users to access the AIMMS license server.
-   :keywords: license, network, user, name, register
+   :description: Explains how to register named users in the AIMMS Network License Manager to grant access to a network license server.
+   :keywords: network license, License Manager, named users, registered users, AIMMS licensing, maintenance mode, Windows username
 
 Users can access an AIMMS Network License while connected to the network from any machine, 
 if they are logged in with credentials that are registered in the AIMMS Network License Manager as Registered Users. 

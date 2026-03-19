@@ -2,8 +2,8 @@ Save a Case from an AIMMS Procedure
 ====================================
 
 .. meta::
-   :description: How to programmatically save a case file from a procedure.
-   :keywords: case, procedure, CaseFind, CaseCreate, CaseSetCurrent
+   :description: Explains how to programmatically save an AIMMS case file from within a procedure using CaseFileSave for automated scenario management.
+   :keywords: case management, CaseFileSave, procedure, AllIdentifiers, scenario, data file, automation, case functions, DirectoryCreate
 
 It can be convenient to save a case from within a procedure. 
 

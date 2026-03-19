@@ -2,8 +2,8 @@ Use Alternative MIP Solutions with CPLEX Solution Pool
 ======================================================
 
 .. meta::
-   :description: Provide an equivalent AIMMS model to the AMPL model by Paul Rubin on K best solutions.
-   :keywords: solution pool, CPLEX, MIP, model
+   :description: Demonstrates how to retrieve alternative MIP solutions using the CPLEX solution pool feature and integer elimination rows in AIMMS.
+   :keywords: solution pool, CPLEX, MIP, GMP, K-best solutions, integer elimination, AddIntegerEliminationRows, knapsack, alternative solutions
 
 In his blog post `K-best Solutions <http://orinanobworld.blogspot.com/2012/04/k-best-solutions.html>`_, Paul Rubin provides some information on how 
 to obtain the **K-best** solutions for a MIP model. 

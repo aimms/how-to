@@ -6,8 +6,8 @@ Linked Objects
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Linking objects, network object
-   :description: This demo illustrates data objects in the graphical user interface can be linked together through the use scalar element parameters.
+   :keywords: Forward Link, element parameter, linked objects, network object, GUI synchronization, data slicing
+   :description: Illustrates how GUI data objects are linked via Forward Links on scalar element parameters so that selecting a value in one object automatically updates all dependent objects.
 
 Direct download AIMMS Project :download:`Linked Objects.zip <model/Linked Objects.zip>`
 

@@ -2,8 +2,8 @@ Headless Execution with AIMMS Application
 ============================================
 
 .. meta::
-    :keywords: AIMMS, headless execution, AimmsCmd, Docker, REST service, automation, batch processing, SessionArgument, AIMMS Cloud
-    :description: Comprehensive guide to setting up AIMMS headless execution using AimmsCmd on a local machine, within a Docker container, and via the automated AIMMS Cloud Tasks environment.
+   :keywords: AimmsCmd, headless execution, Docker, REST service, SessionArgument, aimms-eo, batch processing, dex::api::RESTServiceHandler, AIMMS Cloud Tasks, volume mount
+   :description: Covers running AIMMS headless via AimmsCmd on Windows, inside a Docker container with mounted volumes, and on AIMMS Cloud using automated task provisioning for the Vessel Scheduling example.
 
 Headless execution refers to running an application without a Graphical User Interface (GUI). 
 This mode is essential for automation, batch processing, and deploying applications as services.

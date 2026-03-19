@@ -1,5 +1,10 @@
 Explicit Dantzig-Fulkerson-Johnson Formulation
 ==============================================
+
+.. meta::
+   :description: Explains the Explicit Dantzig-Fulkerson-Johnson subtour elimination formulation used in the AIMMS CVRP library, including subset generation and constraint construction.
+   :keywords: CVRP, Dantzig-Fulkerson-Johnson, subtour elimination, MIP, binary variable, subset generation, vehicle routing, integer programming
+
 The library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**) contains  different formulation options. The formulations have different methods of eliminating subtours. In this article the Explicit Dantzig-Fulkerson-Johnson formulation is discussed. 
 This is an example of a subtour in a route for a CVRP:
 

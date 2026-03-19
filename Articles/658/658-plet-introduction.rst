@@ -1,6 +1,10 @@
 A Framework for Progress, Logging, and Error Handling of Tasks
 ===============================================================
 
+.. meta::
+   :description: Introduces a framework extending AIMMS services with structured progress logging, error tracking, and real-time task monitoring via a MySQL database and the pletR application.
+   :keywords: pletR, AimmsPLET, progress logging, error handling, long-running tasks, MySQL, task monitoring, structured logging, AIMMS service
+
 .. Asked Copilot to provide me with an introduction as follows:
 .. Hello, can you help me with the following?
 .. I would like to create an introduction to a framework, whereby 

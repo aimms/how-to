@@ -1,6 +1,10 @@
 Using Scalar Border Annotation
 ============================================================
 
+.. meta::
+   :description: Illustrates how to apply CSS border annotations to scalar widgets in WebUI to provide visual input validation feedback using green and red border styles.
+   :keywords: CSS, scalar widget, annotation, border, WebUI, string parameter, input validation, widget styling
+
 This article illustrates how to use the border annotation on a scalar widget while using an AIMMS WebUI application. This can be done to any scalar format: compact, multiline or simple/basic form.
 Please use the `Employee Scheduling <https://how-to.aimms.com/Articles/387/387-employee-scheduling.html>`_ example to experiment with this feature.
 

@@ -1,6 +1,10 @@
 Identifier Naming Convention
 =============================
 
+.. meta::
+   :description: Presents the AIMMS identifier naming convention used in How-To articles, covering type prefixes and camelCase base names to distinguish parameters, variables, sets, and procedures.
+   :keywords: naming convention, identifier, prefix, camelCase, parameter, variable, set, Hungarian notation, AIMMS language
+
 In this article, we present the identifier naming convention used in a growing portion of our How-To articles.
 It is presented as a motivated choice; we share the considerations that lead us to making this choice.
 Perhaps these considerations will help you to make an informed choice for the identifier naming convention you want to use (if any).

@@ -2,8 +2,8 @@
 ====================================
 
 .. meta::
-   :description: Basic procedure to publish and share an AIMMS application with AIMMS PRO.
-   :keywords: deploy, pro
+   :description: Explains how to prepare, publish, and configure access rights for an AIMMS application on AIMMS Cloud using DelegateToServer and the aimmspack format.
+   :keywords: AIMMS Cloud, deploy, DelegateToServer, aimmspack, publish, solver session, data session, WebUI, PRO On-Premise
 
 
 Introduction

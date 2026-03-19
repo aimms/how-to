@@ -2,8 +2,8 @@ Number of running and pending solver sessions
 =============================================
 
 .. meta::
-   :description: The number of pending and running jobs may influence the decision to add more jobs.
-   :keywords: deployment, AIMMS Cloud, jobs, queue, queueing, solving
+   :description: Shows how to query the number of running and active solver sessions on AIMMS Cloud using the PRO session manager API to inform job scheduling decisions.
+   :keywords: AIMMS Cloud, solver sessions, session manager, ListSessionSinceDate, job queue, PRO deployment, session status, parallel solving
 
 .. RetrieveSessionList
 .. ListActiveSessions

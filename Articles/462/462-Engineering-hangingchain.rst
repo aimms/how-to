@@ -2,8 +2,12 @@ Engineering: Hanging chain
 ==============================
 
 .. warning::
-   This article references outdated technology and is provided for historical purposes only. 
+   This article references outdated technology and is provided for historical purposes only.
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
+.. meta::
+   :description: Determines the equilibrium shape of a uniform-density chain suspended between two fixed points by minimizing total potential energy using a small NLP.
+   :keywords: hanging chain, catenary, NLP, potential energy minimization, uniform density, nonlinear programming
 
 Direct download AIMMS Project :download:`HangingChain.zip <model/HangingChain.zip>`
 

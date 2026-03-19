@@ -6,8 +6,8 @@ Using HTTP Client Library
 ===============================
 
 .. meta::
-   :description: An overview of the HTTP Client Library and a guide to a few use cases.
-   :keywords: http, client, library, requests, api
+   :description: Provides an overview of the AIMMS HTTP Client Library and links to tutorials covering REST API use cases including Google Maps, Flickr, and IBM APIs.
+   :keywords: HTTP Client Library, REST API, XML, JSON, AXM, XSD, CURL, Google Maps, Flickr, IBM API, web::request_create
 
 In this article you'll find an overview of the `HTTP Client Library <https://documentation.aimms.com/httpclient/index.html>`_ itself, plus a guide to existing How-To tutorials for using the HTTP Client Library. These articles cover some possible use cases for HTTP requests to give you guidance and inspiration for your own applications.
 

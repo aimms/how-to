@@ -2,8 +2,8 @@ Analyze Long Execution Time
 ======================================
 
 .. meta::
-    :description: There are several types, each with its own use.
-    :keyword: compound set, relation, set, database, calendar
+   :description: Explains how to identify and reduce long AIMMS execution times using the profiler, domain restrictions, sparse execution, and solver upgrades.
+   :keywords: profiler, execution time, sparse execution, domain restrictions, MIP, solver upgrade, Diagnostic Tools, performance
 
 You can find the origin of large execution times with :doc:`creating-and-managing-a-model/debugging-and-profiling-an-aimms-model/the-aimms-profiler`. 
 To decrease the execution time, you could use a faster solver, or handle the cause of the large execution time.

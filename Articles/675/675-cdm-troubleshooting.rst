@@ -1,6 +1,10 @@
 CDM Troubleshooting
 ==========================================================
 
+.. meta::
+   :description: Covers troubleshooting CDM version upgrade issues including set element handling failures, snapshot checkout errors, RPC format mismatches, and stale legacy service instances running concurrently.
+   :keywords: CDM, AimmsCDM, version upgrade, RPC format, snapshot checkout, legacy service, SQLite, MySQL, AIMMS PRO, packet buffer exhausted
+
 Issues with CDM Version Upgrades
 ---------------------------------------
 

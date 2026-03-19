@@ -2,7 +2,11 @@
 Storing Project in OneDrive
 ============================
 
-Symptom 
+.. meta::
+   :description: Explains how OneDrive's on-demand file sync causes AIMMS project write errors and how to fix it by disabling the "Save space and download files as you use them" setting.
+   :keywords: OneDrive, sync, webui.json, boost filesystem, file download on demand, AIMMS project, local copy, settings
+
+Symptom
 -----------
 
 The error message:

@@ -6,8 +6,8 @@ Stochastic Programming
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Stochastic Programming, Scenario Tree, Benders Decomposition, Network Object
-   :description: This example illustrates AIMMS capabilities for stochastic programming support.
+   :keywords: Stochastic Programming, Scenario Tree, Benders Decomposition, extensive form, descriptive sampling, GMP library, multi-stage, production planning
+   :description: Illustrates AIMMS stochastic programming by automatically generating a multi-stage scenario tree for a production-inventory model and solving it via standard solver or Benders decomposition.
 
 Direct download AIMMS Project :download:`Stochastic Programming.zip <model/Stochastic Programming.zip>`
 

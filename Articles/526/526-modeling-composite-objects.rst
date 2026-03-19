@@ -1,5 +1,9 @@
 Modeling composite objects
-================================================================== 
+==================================================================
+
+.. meta::
+   :description: Compares component-based and reference element-based approaches for modeling composite objects such as arcs in AIMMS, illustrating their use in variables, constraints, and objective functions.
+   :keywords: composite objects, reference element, component-based, arc, element parameter, time-space network, stock balance, MIP modeling, compound sets
 
 Many sets in AIMMS models refer to atomic objects; there is no further structure to the objects referenced.
 Examples are locations and period numbers.

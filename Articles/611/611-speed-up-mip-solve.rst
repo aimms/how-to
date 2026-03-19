@@ -1,6 +1,10 @@
 Speed Up MIP Solve
 ===================
 
+.. meta::
+   :description: Covers techniques to reduce MIP solve time, including solver selection, LP relaxation reformulation, variable priorities, and providing heuristic starting solutions.
+   :keywords: MIP, branch-and-bound, LP relaxation, CPLEX, Gurobi, CBC, COPT, solver options, MIP start, Big M, Barrier algorithm
+
 When you have a weak LP relaxation, or a hard LP problem that needs to be solved for your MIP problem, solving the problem can take a long time.
 
 There are several reasons why the MIP algorithm can take a long time. Some of them are:

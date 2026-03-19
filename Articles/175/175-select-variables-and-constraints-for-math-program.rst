@@ -2,8 +2,8 @@ Select Constraints and Variables for a Math Program Declaration
 =======================================================================
 
 .. meta::
-   :description: How to select specific variables and constraints for a mathematical program.
-   :keywords: variables, constraints, mathematical program, AllConstraints, AllVariables, sequential goal programming
+   :description: Demonstrates how to select specific variables and constraints for a mathematical program declaration and how to analyze infeasibility in AIMMS.
+   :keywords: mathematical program, AllConstraints, AllVariables, variable selection, constraint selection, infeasibility analysis, GMP, subset, goal programming
 
 In this article we will explore how you can control the constraints or variables used in a math program. Then we'll show an example of how to use this method to analyze infeasibility of a mathematical program. 
 

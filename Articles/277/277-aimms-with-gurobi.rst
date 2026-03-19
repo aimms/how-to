@@ -1,8 +1,8 @@
 Connect AIMMS with Gurobi
 ================================
 .. meta::
-   :keywords:
-   :description: How to use AIMMS with your On-Premise Gurobi Installation.
+   :description: Explains how to connect an on-premise Gurobi installation to AIMMS for use as a solver, covering single machine and compute server license types.
+   :keywords: Gurobi, on-premise, GRB_LICENSE_FILE, solver configuration, compute server, license file, AIMMS PRO, gurobi.lic, solver integration
 
 You can connect your on-premise `Gurobi <https://www.gurobi.com/>`_ installation to AIMMS and use Gurobi as the solver for your math programs. 
 

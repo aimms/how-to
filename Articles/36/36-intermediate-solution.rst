@@ -3,8 +3,8 @@ Show Intermediate Solutions
 ===============================
 
 .. meta::
-   :description: How to retrieve intermediate results from a solver session to the data session.
-   :keywords: intermediate, results, server, data, session
+   :description: Shows how to retrieve and display intermediate incumbent solutions from a solver session to a WebUI data session using PRO storage and case files.
+   :keywords: intermediate solution, incumbent callback, solver session, DelegateToClient, AIMMS PRO, case file, WebUI, CallbackNewIncumbent, MIP
 
 
 .. todo  Work the following comments.

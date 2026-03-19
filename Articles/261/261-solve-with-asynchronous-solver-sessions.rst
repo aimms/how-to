@@ -2,8 +2,8 @@ Solve in Parallel with Asynchronous Solver Sessions
 ==================================================================
 
 .. meta::
-   :description: How to solve mathematical programs in parallel using asynchronous solver sessions.
-   :keywords: asynchronous, solve, mathematical program, solver session, simultaneous
+   :description: Explains how to solve multiple mathematical programs simultaneously in AIMMS using asynchronous solver sessions for improved CPU utilization.
+   :keywords: asynchronous solver session, GMP, AsynchronousExecute, WaitForSingleCompletion, parallel solving, multi-core, CPLEX, Gurobi, GMP library
 
 
 In this article, we explain how to use the asynchronous solver sessions in AIMMS to solve multiple mathematical programs simultaneously, each using its own CPU core. 

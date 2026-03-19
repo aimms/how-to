@@ -6,8 +6,8 @@ Two Level Decision
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Environmental Economics, Stackelberg Games, Nonlinear Programming, NLP
-   :description: In this example there government policy makers influence the behavior of several companies by implementing tax and subsidy policies.
+   :keywords: Two-level decision, Stackelberg game, environmental economics, tax policy, subsidy, NLP, bilevel optimization, sensitivity analysis
+   :description: Solves a bilevel Stackelberg model where a government sets tax and subsidy levels and companies respond optimally, using NLP to find simultaneous equilibrium policy and company decisions.
 
 Direct download AIMMS Project :download:`Two Level Decision.zip <model/Two Level Decision.zip>`
 

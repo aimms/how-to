@@ -11,8 +11,8 @@ Using Email Client Library
 ==============================
 
 .. meta::
-   :description: An introduction to the Email Client library with an example project.
-   :keywords: email, e-mail, template
+   :description: Demonstrates how to send emails from AIMMS using the Email Client Library, including SMTP setup, HTML templates, placeholders, and file attachments.
+   :keywords: Email Client Library, SMTP, email template, placeholder, attachment, AIMMS library, string parameter, WebUI
 
 
 .. note:: Since AIMMS 24, the Email Client Library is no longer supported.  See also `AIMMS Product Lifecycle <https://documentation.aimms.com/deprecation-table.html>`_

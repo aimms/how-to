@@ -6,8 +6,8 @@ Media Selection
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Integer Program, Logical Constraint, Set Covering Problem, WebUI
-   :description: This example introduces a simplified media selection problem which is formulated as a binary programming model.  
+   :keywords: Media selection, set covering, binary programming, logical constraints, advertising campaign, integer program, WebUI
+   :description: Formulates an advertising media selection set-covering problem as a binary IP to find minimum-cost media combinations covering all target audiences, extended with logical constraints.
 
 Direct download AIMMS Project :download:`Media Selection.zip <model/Media Selection.zip>`
 

@@ -26,4 +26,5 @@ Note:
 Multiple threads for MIP problems are only supported by CPLEX and Gurobi
 
 .. meta::
-   :keywords: Parallel solver sessions, asynchronous, GMP, Threads
+   :description: Demonstrates running multiple FlowShop MIP instances in parallel using asynchronous GMP solver sessions with configurable per-session thread counts.
+   :keywords: Parallel solver sessions, asynchronous, GMP, Threads, FlowShop, CPLEX, Gurobi, MIP

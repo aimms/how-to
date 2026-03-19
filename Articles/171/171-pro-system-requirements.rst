@@ -2,8 +2,8 @@ Size AIMMS PRO On-Premise Hardware
 ==================================================
 
 .. meta::
-   :description: Estimating equipment size for AIMMS PRO Server
-   :keywords: AIMMS PRO, server, memory, requirements
+   :description: Explains how to estimate server hardware requirements for AIMMS PRO On-Premise based on concurrent sessions and memory usage.
+   :keywords: AIMMS PRO, server sizing, memory requirements, CPU requirements, data session, solver session, concurrent users, On-Premise, WebUI, hardware
 
 `The documentation <https://documentation.aimms.com/pro/system-requirements.html>`_ defines the minimum system requirements for client-side and server-side machines used for AIMMS PRO On-Premise. However, the memory and CPU requirements of the back-end server where all the solve procedures are executed is heavily dependent on the size of your AIMMS model(s).
 
