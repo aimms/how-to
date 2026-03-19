@@ -1,17 +1,21 @@
 Demand Forecasting
 ===================
+
 .. meta::
    :description: Demonstrates six forecasting algorithms — exponential smoothing, moving average, and linear regression — applied to cookie factory demand data using the AIMMS Forecasting Library.
    :keywords: Forecasting Library, exponential smoothing, moving average, linear regression, demand forecasting, WebUI, combination chart, workflow 
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Demand_Forecasting-blue
-   :target: https://github.com/aimms/demand-forecasting/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/demand-forecasting/releases/latest/download/demand-forecasting.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Demand_Forecasting-blue
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/demand-forecasting
+   
+.. image:: https://img.shields.io/badge/AIMMS-24.5-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-webui-44/new-demand-forecasting-example-1327
+.. image:: https://img.shields.io/badge/WebUI-24.10.3.3-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+.. image:: https://img.shields.io/badge/Forecasting-24.0.0.5-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 .. image:: images/project-1920-high.gif
     :align: center
@@ -332,6 +336,9 @@ Minimal Requirements
 
 Release Notes
 --------------------   
+
+`v1.1 <https://github.com/aimms/demand-forecasting/releases/tag/1.1>`_ (19/03/2026)
+   Commenting project. Adding license file. 
 
 `v1.0 <https://github.com/aimms/demand-forecasting/releases/tag/1.0>`_ (20/09/2024)
    First version.

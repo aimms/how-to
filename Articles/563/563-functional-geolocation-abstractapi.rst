@@ -5,17 +5,21 @@ Geolocation AbstractAPI
    :description: Demonstrates an IP geolocation AIMMS app that translates any IP address to geographic coordinates using the AbstractAPI OpenAPI-generated library.
    :keywords: OpenAPI, AbstractAPI, geolocation, IP address, REST API, Data Exchange Library, Map Widget, WebUI, API key, generated library
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Abstract_API-blue
-   :target: https://github.com/aimms/ip-twist/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/abstract-api/releases/latest/download/abstract-api.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Abstract_API-blue
-   :target: https://github.com/aimms/ip-twist
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/abstract-api
+   
+.. image:: https://img.shields.io/badge/AIMMS-24.5-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/math-or-optimization-modeling-39/using-an-api-with-openapi-specification-1368
+.. image:: https://img.shields.io/badge/WebUI-24.10.3.3-white?style=for-the-badge&labelColor=009B00&color=00D400
 
+.. image:: https://img.shields.io/badge/DEX-24.4.1.2-white?style=for-the-badge&labelColor=009B00&color=00D400
+ 
 .. image:: images/project-1920-high.gif
     :align: center
+
 
 |
 
@@ -181,6 +185,9 @@ However, you will need API key, to receive an free API key to test, please acces
 
 Release Notes
 --------------------
+
+`v1.1 <https://github.com/aimms/abstract-api/releases/tag/1.1>`_ (19/03/2026)
+	Commenting the project. 
 
 `v1.0 <https://github.com/aimms/abstract-api/releases/tag/1.0>`_ (24/09/2024)
 	First logged version of this application. 
