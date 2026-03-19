@@ -442,7 +442,7 @@ Release Notes
 --------------------   
 
 `v1.2 <https://github.com/aimms/traveling-salesman/releases/download/1.2/traveling-salesman.zip>`_ (19/03/2026)
-   Commenting the project. 
+   Updated to AIMMS 26.1, WebUI 26.3.1.1 and DEX 26.1.8.1. Commenting the project. 
 
 `v1.1 <https://github.com/aimms/traveling-salesman/releases/download/1.1/traveling-salesman.zip>`_ (30/09/2024)
    Now you can run all types of solve on AIMMS Cloud. Correct driver is set when using the API on AIMMS Cloud. 
