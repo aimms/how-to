@@ -1,7 +1,7 @@
 
 .. meta::
-   :description: How to use OAuth2 for API authorization in DEX.
-   :keywords: aimms, data, exchange, api, authorization, security, oauth
+   :description: Demonstrates how to create containers, upload files, and download files on Azure Data Lake Storage Gen2 from an AIMMS Cloud application using DEX-specific functions.
+   :keywords: Azure Data Lake Storage, ADLS, Data Exchange Library, DEX, dex::dls::UploadFile, dex::dls::DownloadFile, dex::dls::CreateFileSystem, AIMMS Cloud, data integration, parquet
    
 
 Data Integration with AIMMS Cloud Azure Data Lake Storage

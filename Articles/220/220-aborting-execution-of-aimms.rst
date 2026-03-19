@@ -2,8 +2,8 @@ Interrupting Execution During a Single Statement
 ================================================
 
 .. meta::
-   :description: How to interrupt a long-running assignment in AIMMS.
-   :keywords: interrupt, execution, long-running, AIMMS, performance, troubleshooting
+   :description: Explains how to use the AIMMS Interrupt Tool to halt long-running single-statement executions that cannot be stopped with the standard keyboard shortcut.
+   :keywords: AIMMS Interrupt Tool, interrupt execution, long-running statement, performance, troubleshooting, AimmsInterrupt.exe, system tray, profiling
 
 Introduction
 ----------------

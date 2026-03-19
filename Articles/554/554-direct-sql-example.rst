@@ -1,6 +1,10 @@
 How to Use Direct SQL Queries
 ===============================
 
+.. meta::
+   :description: Illustrates how to use the DirectSQL procedure with SQLite and ODBC to delete and insert records as an alternative to write-to-table statements.
+   :keywords: DirectSQL, ODBC, SQLite, SQL INSERT, SQLCreateConnectionString, FormatString, database, write to table
+
 Not all operations on ODBC databases can be done using the ``read from table`` and ``write to table`` statements.
 More flexibility is offered using the intrinsic procedure :aimms:procedure:`DirectSQL`. Please use the `Reindeer Pairing <https://how-to.aimms.com/Articles/434/434-reindeer-pairing.html>`_ example to experiment with this feature.
  

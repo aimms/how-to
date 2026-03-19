@@ -1,6 +1,10 @@
 Data for Optimization Libaries
 ==============================
 
+.. meta::
+   :description: Explains how to transfer data between a main AIMMS model and an optimization library using procedure arguments and element parameter mapping.
+   :keywords: AIMMS library, optimization, Transport Problem, element parameter, data transfer, AllVariables, AllConstraints, procedure arguments
+
 An AIMMS library can be reused in other projects. To solve an optimization problem in a library we're dealing with two abstraction mechanisms:
 
 * Procedures where sets transferred via the arguments have different meanings.

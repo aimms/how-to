@@ -2,8 +2,8 @@
 =================================================
 
 .. meta::
-   :description: A method for solving ROGO puzzles using constraint programming in AIMMS.
-   :keywords: ROGO, constraint
+   :description: Demonstrates how to solve ROGO path puzzles in AIMMS using constraint programming with table constraints, AllDifferent, and symmetry-breaking rules.
+   :keywords: ROGO puzzle, constraint programming, CP Optimizer, AllDifferent, table constraint, DFA, symmetry breaking, circular lag operator
 
 .. figure:: images/ROGO.logo_.png
     :align: center

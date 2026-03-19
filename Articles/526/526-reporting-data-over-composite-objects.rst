@@ -1,6 +1,10 @@
 Reporting data over composite objects
 ======================================
 
+.. meta::
+   :description: Compares tabular and list reporting of arc data for component-based and reference element-based composite object approaches, including element text annotations for descriptive arc names.
+   :keywords: composite objects, reporting, element text annotation, reference element, component-based, tabular display, arc names, WebUI, formatString
+
 This is a companion article to :doc:`../526/526-modeling-composite-objects`.
 
 In this article, a tabular and a composite table are presented based on data from both the component and reference element based approaches.

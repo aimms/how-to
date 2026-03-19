@@ -3,8 +3,8 @@ Reduce Exchange Between Client Session and Solver Session
 ==========================================================
 
 .. meta::
-   :description: How to reduce the overhead of creating and communicating cases between the client session and the solver session.
-   :keywords: client, server, session
+   :description: Explains how to use ReferencedIdentifiers and ManagedSessionInputCaseIdentifierSet to minimize the data transferred between client and solver sessions on AIMMS Cloud.
+   :keywords: client session, solver session, ReferencedIdentifiers, ManagedSessionInputCaseIdentifierSet, ManagedSessionOutputCaseIdentifierSet, pro::DelegateToServer, case transfer, performance
 
 As shown in :doc:`../33/33-pro-deploy-app`, part of the overhead in solving is creating a case and transferring it, once from the client session to the solver session and once back.
 Especially, for short solves, the overhead can be relatively large.

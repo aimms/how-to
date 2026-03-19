@@ -2,8 +2,8 @@ Installing AIMMS
 =================
 
 .. meta::
-   :description: Guide to installing AIMMS in a custom location and making it available for all users.
-   :keywords: AIMMS, installation, all users, disk drive, custom location
+   :description: Guides installing AIMMS to a non-default location or alternate drive using symbolic links and elevated administrator rights.
+   :keywords: AIMMS installation, custom location, symbolic link, mklink, AIMMS Launcher, license activation, all users, alternate drive
 
 Installing AIMMS Optimization Tooling is straightforward. Simply download your chosen version from the `AIMMS downloads page <https://www.aimms.com/support/downloads>`_ and run the installer, such as ``Aimms-24.5.8.5-x64-VS2017.exe``. This installs AIMMS in the default location: ``%localappdata%\Local\AIMMS\IFA\Aimms``.
 

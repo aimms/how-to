@@ -2,8 +2,8 @@ Employee Scheduling
 ==========================
 
 .. meta::
-   :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
-   :description: This AIMMS project illustrates the use of a semi-continuous variable.
+   :keywords: employee scheduling, assignment problem, MIP, Mixed Integer Programming, SQLite, WebUI, Gantt chart, combination chart, CSS annotations, ODBC
+   :description: Illustrates an optimal employee scheduling model for a restaurant chain, using MIP, SQLite database integration, and a WebUI with Gantt chart visualization.
 
 .. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/employee-scheduling/releases/latest/download/employee-scheduling.zip

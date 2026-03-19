@@ -6,8 +6,8 @@ Employee Training
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Linear Program, Integer Program, Control-State variables, Rounding Heuristic, Probabilistic Constraint, WebUI
-   :description: This example illustrates a personnel planning problem and its corresponding multi-period model.
+   :keywords: Personnel planning, multi-period LP, integer program, rounding heuristic, probabilistic constraint, control-state variables, WebUI
+   :description: Models a six-month airline flight-attendant hiring and training schedule as a multi-period LP/IP, comparing LP rounding heuristics against full integer programming with probabilistic demand constraints.
 
 Direct download AIMMS Project :download:`Employee Training.zip <model/Employee Training.zip>`
 

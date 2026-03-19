@@ -1,6 +1,10 @@
 Capacitated Vehicle Routing Problem formulation
 ===============================================
 
+.. meta::
+   :description: Describes the linear integer programming formulation of the Capacitated Vehicle Routing Problem used as the base model in the AIMMS CVRP library.
+   :keywords: CVRP, vehicle routing, integer programming, binary variable, capacity constraint, depot, subtour elimination, MIP formulation
+
 There is a library in AIMMS that solves a **Capacitated Vehicle Routing Problem** (**CVRP**). It contains different options of formulating the problem. The difference between these articles is how subtours are eliminated. The objective function and most of the constraints are the same for all four options and will be explained in this article.
 
 .. image:: images/CVRP.png

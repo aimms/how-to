@@ -9,8 +9,8 @@ AIMMS Excel Library - AXLL
 ==============================
 
 .. meta::
-   :description: How to import and export spreadsheet data using the AIMMS Excel Library.
-   :keywords: excel, spreadsheet, axll
+   :description: Covers reading and writing Excel data from AIMMS using the AimmsXLLibrary — including OpenWorkBook, ReadSet, ReadList, ReadTable, WriteCompositeTable, and WriteTable functions for serverless Excel access.
+   :keywords: AXLL, AimmsXLLibrary, Excel, OpenWorkBook, ReadList, ReadTable, WriteCompositeTable, WriteTable, spreadsheet, AIMMS Cloud
 
 
 .. Overview

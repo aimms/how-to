@@ -17,6 +17,10 @@
 Power Systems Planning - Methods and Applications
 ======================================================
 
+.. meta::
+   :description: Overviews short-term power systems planning methods, covering Unit Commitment and Optimal Power Flow problems formulated as MIP and LP models in AIMMS.
+   :keywords: power systems, Unit Commitment, Optimal Power Flow, OPF, energy modelling, MIP, LP, electricity grid, short-term planning
+
 .. warning::
    This article references outdated technology and is provided for historical purposes only. 
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.

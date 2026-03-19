@@ -2,8 +2,8 @@ Investigate Behavior of AIMMS PRO Server Session (Job)
 ======================================================
 
 .. meta::
-   :description: Checking execution time and troubleshooting AIMMS PRO jobs.
-   :keywords: profiling, AIMMS PRO, deployment, execution time, case management
+   :description: Explains how to investigate and reduce execution time of AIMMS PRO solver session jobs by analyzing case transfer, queueing, initialization, and solve steps.
+   :keywords: AIMMS PRO, solver session, profiling, DelegateToServer, case file, session log, execution time, troubleshooting, ManagedSessionInputCaseIdentifierSet
    
 An `AIMMS PRO Server Session <https://documentation.aimms.com/pro/intro.html#running-apps-from-the-aimms-pro-portal>`_, AIMMS PRO job, or job for short, is the run of an AIMMS procedure on AIMMS PRO On-Premise or on AIMMS Cloud.
 Such an AIMMS procedure typically involves optimization, and a license to optimize is associated with such a job.

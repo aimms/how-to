@@ -6,8 +6,8 @@ Data Feed
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: External Procedure, AIMMS API, table, Linear Program
-   :description: This project illustrates how an independent data feed can pass data to and/or run procedures within an AIMMS project. 
+   :description: Demonstrates running an independent data feed as a separate DLL thread that passes live supply and demand updates to an AIMMS transport model using the AIMMS API.
+   :keywords: data feed, external DLL, AIMMS API, multithreading, exclusive control, transport model, linear programming, external procedure, ADL
 
 Direct download AIMMS Project :download:`DataFeed.zip <model/DataFeed.zip>`
 

@@ -1,6 +1,10 @@
 Develop, Test, and Deploy an AIMMS Service
 ============================================
 
+.. meta::
+   :description: Introduces a series of articles on developing, testing, and deploying AIMMS REST task services, with Python and VBA clients for the CountTheStars example.
+   :keywords: REST service, AIMMS Cloud, deployment, Data Exchange Library, Python client, VBA client, task, unit testing, development architecture
+
 .. Should be introduction, and just provide overview.
 .. Should introduce two applications:
 .. 1. CountTheStars

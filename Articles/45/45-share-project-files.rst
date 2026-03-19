@@ -2,8 +2,8 @@ Sharing AIMMS Project Files
 ===========================
 
 .. meta::
-   :keywords: AIMMS, project sharing, folder structure, project files, AIMMS Support
-   :description: Guide to AIMMS project folder structure and sharing your project with other developers or AIMMS Support.
+   :keywords: project folder structure, .aimms file, .ams file, Project.xml, version control, project sharing, AIMMS Launcher
+   :description: Explains the structure of an AIMMS project folder, the roles of .aimms, .ams, and Project.xml files, and how to package and share the project as a ZIP archive.
 
 This article explains the structure of an AIMMS project folder and provides instructions for sharing your project files with others, such as developers or the AIMMS Support Team.
 

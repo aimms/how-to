@@ -1,6 +1,10 @@
 Refreshing an Image Widget Without Changing the File Name
 =========================================================
 
+.. meta::
+   :description: Explains how to force a WebUI Image widget to reload updated image content without renaming the file, using query parameters appended to the filename string.
+   :keywords: WebUI, Image widget, refresh, query parameter, string parameter, AIMMS 4.77, widget update, FormatString
+
 In versions earlier than 4.77, a widget on a page would be refreshed if new assignments or definition updates were applied to any of the identifiers used in the widget, *even if the actual values of those identifiers were not actually changed*. With the performance improvement from version 4.77, a widget will *only* be refreshed if the data of the identifiers in the widget *has actually changed*.
 
 This improvement will prevent many unnecessary refreshes of widgets directly showing the data of such identifiers. 

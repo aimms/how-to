@@ -6,8 +6,8 @@ Distributions
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Probability Distribution, Extreme Value Distribution Approximation, Distribution Operators, 2D Chart
-   :description: This example shows the four distributions with shape parameter and lower bound (only): Pareto, Lognormal, Weibull and Gamma Distribution.
+   :description: Visualizes Pareto, Lognormal, Weibull, and Gamma distributions using density, cumulative, and inverse cumulative operators, and fits shape parameters to an Extreme Value approximation.
+   :keywords: probability distribution, Pareto, Lognormal, Weibull, Gamma, extreme value approximation, distribution operators, skewness, kurtosis, 2D chart
 
 Direct download AIMMS Project :download:`Distributions.zip <model/Distributions.zip>`
 

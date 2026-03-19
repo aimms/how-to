@@ -2,8 +2,8 @@ Read Columns of Data from Excel
 ===================================
 
 .. meta::
-   :description: This article compares different methods of reading Excel data to AIMMS.
-   :keywords: Excel, AimmsXLLibrary, library, axll, xlsprovider, datalink
+   :description: Compares different methods for reading Excel data into AIMMS including the AXLL library and DataLink with XLSProvider.
+   :keywords: Excel, AXLL, AimmsXLLibrary, XLSProvider, DataLink, axll::ReadList, axll::ReadSet, named ranges, spreadsheet integration
 
 AIMMS provides various methods for reading Excel data. 
 

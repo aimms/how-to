@@ -1,8 +1,8 @@
 Generate Random Numbers
 ================================
 .. meta::
-	:description: How to generate a sequence of random numbers from scratch.
-	:keywords: random, multidimensional, uniform, distribution
+	:description: Shows how to populate multidimensional AIMMS parameters with random values using built-in distribution functions such as uniform and ceil.
+	:keywords: random numbers, uniform distribution, distribution functions, multidimensional parameter, ElementRange, knapsack, stochastic, data generation
 
 AIMMS has a number of distribution functions included, in order for you to be able to generate random numbers very efficiently. 
 This capability might be extremely useful when you want to quickly populate a multidimensional parameter. 

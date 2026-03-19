@@ -6,8 +6,8 @@ Performance Assessment
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Linear Program, What-If Analysis
-   :description: In this example the performance of a set of comparable organizations is determined, while introducing the concept of relative efficiency from organizational unit to another. 
+   :keywords: Data Envelopment Analysis, DEA, relative efficiency, decision-making unit, LP, what-if analysis, organizational benchmarking
+   :description: Applies Data Envelopment Analysis across 30 organizations with seven input-output categories, solving a collection of LPs to identify efficient DMUs and benchmark the rest.
 
 Direct download AIMMS Project :download:`Performance Assessment.zip <model/Performance Assessment.zip>`
 

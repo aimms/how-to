@@ -2,8 +2,8 @@ DataLake Tools
 =================
 
 .. meta::
-   :keywords: datalake, azure, sas token, container, data integration, File System, file management
-   :description: This article is for developers who want to integrate the Azure Data Lake Storage as part of their AIMMS account.
+   :description: Introduces the DataLake Tools AIMMS application for managing Azure Data Lake Storage file systems and generating Container and Account SAS tokens for external access.
+   :keywords: Azure Data Lake Storage, ADLS, SAS token, Container SAS Token, Account SAS Token, Data Exchange Library, file system management, AIMMS Cloud, data integration
 
 .. image:: https://img.shields.io/badge/AIMMS_25.2-ZIP:_DataLake Tools-blue
    :target: https://github.com/aimms/datalake-tools/archive/refs/heads/main.zip

@@ -6,8 +6,8 @@ Production Planning: Machine scheduling
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Gantt chart, MIP Gap, Callback procedures, GMP, Calendar
-   :description: This machine scheduling problem is formulated as a MIP problem.
+   :description: Solves a multi-machine scheduling MIP that assigns activities to machines minimizing makespan, displaying a live-updating Gantt chart and optimality gap progress.
+   :keywords: Gantt chart, MIP Gap, Callback procedures, GMP, Calendar, machine scheduling, makespan, MIP
 
 Direct download AIMMS Project :download:`MachineScheduling.zip <model/MachineScheduling.zip>`
 

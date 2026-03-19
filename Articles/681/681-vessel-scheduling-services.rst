@@ -2,8 +2,8 @@ Exposing the Vessel Scheduling as a REST Service
 ==================================================
 
 .. meta::
-    :keywords: AIMMS, REST API, service, statelessness, dex::ServiceName, AimmsCmd, AIMMS Cloud, PRO API, optimization, concurrent execution
-    :description: Guide on exposing an AIMMS optimization procedure as a REST service using the 'dex::ServiceName' property. Covers coding for statelessness, service management across environments, and client-side testing with Python.
+   :keywords: REST service, dex::ServiceName, dex::ReadFromFile, dex::WriteToFile, statelessness, pr_initTask, AimmsCmd, AIMMS Cloud, Python requests, task polling
+   :description: Explains how to expose an AIMMS vessel scheduling procedure as a REST service via dex::ServiceName, implement stateless task reset, manage service lifecycle, and test with a Python polling client.
 
 Many Operations Research applications employ complex, powerful algorithms that perform sequential tasks, such as generating candidate data, formulating a mathematical program, and finding an optimal solution.
 

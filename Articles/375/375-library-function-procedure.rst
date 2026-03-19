@@ -1,6 +1,10 @@
 Library of Functions and Procedures
 ===================================
 
+.. meta::
+   :description: Demonstrates best practices for creating reusable AIMMS libraries, covering library organization, function side effects, and procedure argument passing patterns.
+   :keywords: library, function, procedure, AIMMS, reuse, interface, public section, private section, argument passing, side effects
+
 Creating libraries to share/reuse functionality in multiple projects is a powerful feature of AIMMS. 
 In this article, we present some best practices and tips to create such libraries of functions and procedures.
 

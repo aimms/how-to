@@ -5,6 +5,10 @@
 Getting Started with AIMMS
 ===========================
 
+.. meta::
+   :description: Guides new users to AIMMS learning resources, including e-learning trails for modeling and user interface development, and an interactive game challenge.
+   :keywords: AIMMS, e-learning, getting started, modeling, WebUI, optimization, tutorial, game challenge, beginner
+
 New coding with AIMMS? We advice you to start by Modeling with AIMMS trail of courses and then to the User Interface with AIMMS trail. 
 If you are not a beginner, you may prefer to start with other courses, either way, all available courses are listed at the `AIMMS E-Learning Center <https://elearning.aimms.com/optimization-tooling-courses>`_. 
 Below you can also find a modeling challenge to test your knowledge! 

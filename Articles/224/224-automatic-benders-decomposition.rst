@@ -2,8 +2,8 @@ Automatic Benders’ Decomposition
 =================================
 
 .. meta::
-   :description: How to solve using Benders Decomposition directly supported by AIMMS.
-   :keywords: Benders Decomposition, MIP, GMP
+   :description: Explains how to apply automatic Benders decomposition in AIMMS using the GMPBendersDecomposition system module to solve complex MIP problems.
+   :keywords: Benders decomposition, GMPBendersDecomposition, MIP, GMP, master problem, subproblem, stochastic programming, classic approach, modern approach
 
 `Benders’ decomposition <https://en.wikipedia.org/wiki/Benders%27_decomposition>`_ is an approach to solve complicated mathematical programming problems by splitting them into two, and thereby simplifying the solution process by (repeatedly) solving one master problem and one subproblem. If the problem contains integer variables then typically they become part of the master problem while the continuous variables become part of the subproblem. The classic approach of the Benders’ decomposition algorithm solves an alternating sequence of master problems and subproblems. Benders’ decomposition is mostly used for solving difficult MIP problems and stochastic programming problems.
 

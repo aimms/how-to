@@ -1,6 +1,10 @@
 Integrate CDM Library to an AIMMS Application
 ==========================================================
 
+.. meta::
+   :description: Guides through adding the AimmsCDM library to an AIMMS project, annotating data with CDM categories, creating an initialization script for local SQLite and cloud MySQL, and publishing to AIMMS PRO.
+   :keywords: CDM, AimmsCDM, Collaborative Data Management, SQLite, MySQL, multi-user, scenario planning, cdm::ConnectToApplicationDB, AutoCommitCategory, AIMMS Cloud
+
 AIMMS Collaborative Data Management (CDM) provides the capability to turn any AIMMS project into a multi-user scenario planning application. It does so by backing the AIMMS app by a versioned application database managed by the AIMMS CDM component, which is able to capture any collection of data changes made by a user throughout the app into a single tractable transaction.
 
 Running it Locally using SQLite

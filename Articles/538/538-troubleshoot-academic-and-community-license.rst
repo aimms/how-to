@@ -2,6 +2,10 @@
 Academic and community licenses: No logon response from server
 ===========================================================================
 
+.. meta::
+   :description: Troubleshoots the "no logon response from server" error for AIMMS Academic and Community licenses, covering URL errors, expiry, and network issues.
+   :keywords: Academic license, Community license, license URL, AIMMS Launcher, web-socket, firewall, proxy, license expiry, troubleshooting
+
 Your situation
 -------------------------
 

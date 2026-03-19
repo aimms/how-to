@@ -2,8 +2,12 @@ Lot Sizing: Single level big bucket
 ====================================
 
 .. warning::
-   This article references outdated technology and is provided for historical purposes only. 
+   This article references outdated technology and is provided for historical purposes only.
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
+
+.. meta::
+   :description: Solves a single-level big-bucket lot-sizing MIP where each production period carries setup or changeover costs that reduce available capacity.
+   :keywords: lot sizing, single level, big bucket, MIP, production planning, setup cost, machine changeover
 
 Direct download AIMMS Project :download:`SingleLevelBigBucket.zip <model/SingleLevelBigBucket.zip>`
 

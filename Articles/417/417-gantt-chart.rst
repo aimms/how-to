@@ -6,8 +6,8 @@ Gantt Chart
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Gantt Chart, Overlapped Bars, Composite Table, Tooltips
-   :description: This AIMMS project illustrates the basic use of the Gantt chart object in AIMMS.
+   :description: Demonstrates Gantt chart task declarations, reference-date interpretation, vertical task movement via duplicated row indices, overlapping bar offsets, and composite table tooltips.
+   :keywords: Gantt chart, overlapping bars, vertical task movement, reference date, composite table, tooltips, row index, scheduling visualization
 
 Direct download AIMMS Project :download:`Gantt Chart.zip <model/Gantt Chart.zip>`
 

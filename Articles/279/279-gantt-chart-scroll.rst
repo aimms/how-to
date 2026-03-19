@@ -2,8 +2,8 @@ Zoom and Scroll in a Gantt Chart
 ====================================================
 
 .. meta::
-   :description: An AIMMS tip to create scroll and zoom functionality in a Gantt chart.
-   :keywords: Gantt chart, scroll, zoom, timebar
+   :description: Demonstrates how to implement scroll and zoom functionality for a Gantt chart in AIMMS WebUI using a timebar Gantt chart to control the viewport.
+   :keywords: Gantt chart, timebar, scroll, zoom, viewport, WebUI, MomentToString, CurrentToString, time-based scheduling, WebUI widget
 
 This article presents an elegant trick to use one Gantt Chart to control the scrolling and zooming of another Gantt Chart. The result is shown in the image below.
 

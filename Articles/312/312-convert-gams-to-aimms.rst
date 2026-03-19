@@ -1,8 +1,8 @@
 Convert a GAMS Model or AIMMS 3 Model to an AIMMS 4 Model
 ==============================================================
 .. meta::
-    :description: How to open and save a GAMS model as an AIMMS project.
-    :keywords: GAMS, AIMMS 3, convert
+   :description: Explains how to convert a GAMS model or AIMMS 3 project to a modern AIMMS 4 project using intermediate AIMMS version installers.
+   :keywords: GAMS, AIMMS 3, AIMMS 4, conversion, GMS file, AIM file, AMB file, model migration, data management
 
 You can convert GAMS files using an older version of AIMMS.
 

@@ -5,6 +5,10 @@
 Finding Unused Identifiers
 ============================
 
+.. meta::
+   :description: Presents a library that identifies obsolete AIMMS identifiers by checking their usage across the model, WinUI pages, and WebUI using ReferencedIdentifiers and text search.
+   :keywords: unused identifiers, ReferencedIdentifiers, PageGetUsedIdentifiers, WinUI, WebUI, model cleanup, AllIdentifiers, refIds library
+
 Applications that are around for a while clearly have value to the organization.
 However, some identifiers such as sets, parameters, variables, and procedures in that application may no longer be used, because:
 

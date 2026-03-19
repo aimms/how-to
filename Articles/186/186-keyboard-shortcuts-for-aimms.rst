@@ -1,6 +1,10 @@
 Keyboard Shortcuts
 ==================
 
+.. meta::
+   :description: Lists the keyboard shortcuts available in AIMMS for navigating the IDE, running procedures, debugging, and managing the model explorer.
+   :keywords: keyboard shortcuts, AIMMS IDE, hotkeys, debugger, Model Explorer, WinUI, developer mode, F-keys, Ctrl shortcuts, procedure execution
+
 Sometimes it is easier to work strictly with the keyboard than to switch to the mouse. There are a number of keyboard shortcuts available in AIMMS that allow for quick access to certain features within AIMMS.
 
 The table below provides a list of shortcuts provided by AIMMS.

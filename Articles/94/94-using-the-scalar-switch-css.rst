@@ -5,8 +5,8 @@ Display an On/Off Switch in Widgets
 ======================================
 
 .. meta::
-   :description: How to create an on/off toggle switch with CSS in AIMMS WebUI widgets.
-   :keywords: css, widget, webui, binary, switch, toggle, slider, selector
+   :description: Shows how to replace binary checkbox rendering with an on/off toggle switch in AIMMS WebUI scalar and table widgets by applying a downloadable CSS file and customizing color and alignment.
+   :keywords: CSS, toggle switch, binary, checkbox, WebUI, scalar widget, table widget, ASR, boolean, custom styling
 
 Identifiers with binary range are displayed as checkboxes in table and scalar widgets of AIMMS WebUI, by default. You can render on/off switches instead of checkboxes using CSS. 
 

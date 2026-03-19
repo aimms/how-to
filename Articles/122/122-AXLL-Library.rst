@@ -4,8 +4,8 @@ Exchanging Data with Excel Files
 ======================================
 
 .. meta::
-   :description: How to link spreadsheet data to an AIMMS project with the AIMMS Excel Library.
-   :keywords: excel, library, axll
+   :description: Shows how to read and write Excel data in AIMMS using the AXLL library functions ReadSet, ReadTable, and ReadList without requiring Excel to be installed.
+   :keywords: AXLL library, Excel, ReadSet, ReadTable, ReadList, OpenWorkBook, AIMMS Cloud, spreadsheet, data exchange
 
 
 This is a follow up to :doc:`../85/85-using-axll-library`. The 'AIMMS Excel Library (AXLL)' lets you exchange data between AIMMS and Excel files (.xls and .xlsx) without having Excel installed on that computer. This is very useful when deploying applications using AIMMS Cloud as it is typically installed on a terminal server where a copy of Microsoft Office is not available. 

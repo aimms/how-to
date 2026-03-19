@@ -2,8 +2,8 @@ Zipping and Unzipping Files
 ====================================
 
 .. meta::
-   :description: How to zip, unzip using AIMMS Developer, AIMMS PRO On-Premise and on AIMMS Cloud.
-   :keywords: zip, unzip, compress, expand, cloud
+   :description: Explains how to compress and expand file archives in AIMMS using the Execute procedure with PowerShell Compress-Archive on Windows and zip/unzip on Linux.
+   :keywords: zip, unzip, compress, Compress-Archive, Expand-Archive, PowerShell, Execute, Linux, AIMMS Cloud, file transfer
 
 Downloading and uploading a collection of files is achieved by first compressing into a single file, 
 called an archive, and then transferring the archive from one machine to the other.

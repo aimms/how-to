@@ -2,8 +2,8 @@
 ==================================================
 
 .. meta::
-   :description: How to encrypt your project in AIMMS 4 applications.
-   :keywords: encrypt, intellectual, property, IP
+   :description: Shows how to protect intellectual property in AIMMS 4 projects by creating encrypted Aimmspack files using standard, password, or key-based encryption.
+   :keywords: encryption, Aimmspack, intellectual property, key-based encryption, password protection, command line export, EndUserEncryption.xml, project security
 
 
 Encryption is typically used to protect the intellectual property (IP) in your AIMMS model and libraries. AIMMS also allows you to restrict access to your application. 

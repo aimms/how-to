@@ -6,8 +6,8 @@ Distribution Center Allocation
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Distribution Center Allocation, Center of Gravity, Minimize Expected Transportation Cost, Maximize Service Level, Excel, Spreadsheet, Network object, GIS, longitude, latitude, supply chain
-   :description: This example looks at some common ways to determine the location of distribution centers in a supply chain.
+   :description: Compares center-of-gravity, cost-minimization, and service-level approaches for locating distribution centers using GIS coordinates and OpenStreetMap visualization.
+   :keywords: distribution center allocation, center of gravity, transportation cost, service level, GIS, longitude, latitude, network object, supply chain, Excel
 
 Direct download AIMMS Project :download:`Distribution Center Allocation.zip <model/Distribution Center Allocation.zip>`
 

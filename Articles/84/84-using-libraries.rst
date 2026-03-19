@@ -2,8 +2,8 @@ Add AIMMS Libraries
 ====================
 
 .. meta::
-   :description: How to extend project functionality with libraries.
-   :keywords: library, system, repository, read-only
+   :description: Explains how to add new, existing, system, and repository libraries to an AIMMS project via the Library Manager, use library prefixes, and make a library read-only for distribution.
+   :keywords: Library Manager, repository library, system library, library prefix, read-only, aimmspack, AIMMS Cloud, AutoLib, collaborative development
 
 
 In the context of the AIMMS environment, a library is an AIMMS project that can be included in/added to other AIMMS projects.  

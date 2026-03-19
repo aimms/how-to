@@ -1,6 +1,10 @@
 Overview OpenAPI in AIMMS
 =========================
 
+.. meta::
+   :description: Provides an overview of how OpenAPI specifications are used in AIMMS to generate client libraries that simplify consuming and providing REST API services.
+   :keywords: OpenAPI, REST API, Data Exchange Library, DEX, OpenAPI client, client-server, API specification, Swagger, generated library
+
 Leveraging REST Services in an AIMMS application is significantly easier when an OpenAPI specification
 is provided for that service.   
 This article is the overview of a series of articles that illustrate how to leverage the power of OpenAPI 

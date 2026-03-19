@@ -1,6 +1,10 @@
 Using CI/CD with AIMMS
 ======================
 
+.. meta::
+   :description: Provides a platform-agnostic guide to setting up CI/CD pipelines for AIMMS projects, covering aimmspack creation, unit testing, scenario testing, and cloud deployment via REST API.
+   :keywords: CI/CD, continuous integration, continuous deployment, aimmspack, unit testing, AIMMS command line, REST API, AIMMS Cloud, pipeline, AimmsCmd
+
 Wouldn't you like a technology whereby you can develop your application and upon completing it, have an automated process that tests and realizes the deployment in a safe and guaranteed manner?
 
 What is CI/CD?

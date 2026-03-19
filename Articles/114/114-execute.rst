@@ -2,8 +2,8 @@
 ============================
 
 .. meta::
-   :description: How to run executable files from AIMMS using the Execute function.
-   :keywords: execute, exe
+   :description: Shows how to use the AIMMS Execute function to run external programs such as unzip utilities, Java JAR files, and Python scripts from within an AIMMS project.
+   :keywords: Execute function, external program, command line, Java, Python, JAR, FormatString, string parameter, executable
 
 
 AIMMS provides a good selection of functions, such as arithmetic functions, string manipulation functions, time functions, distribution functions, file functions, and more, for app developers to build prescriptive analytics applications.

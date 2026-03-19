@@ -5,8 +5,8 @@
 Retrieve Geographic Data with Google Maps API
 ===============================================
 .. meta::
-   :description: Using Google Maps API to return geographic data to an AIMMS project.
-   :keywords: google, 
+   :description: Shows how to use the Google Maps Distance Matrix API with the AIMMS HTTP Client Library to retrieve distances and travel times between locations.
+   :keywords: Google Maps API, Distance Matrix, HTTP Client Library, XML mapping, geographic data, REST API, web::query_format, AXM
 
 In this article, we will learn how to use the HTTP Library to obtain distance data from a Google Maps API. 
 

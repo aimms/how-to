@@ -1,6 +1,10 @@
 Dos and Don'ts
 ===============
 
+.. meta::
+   :description: Provides WebUI writing and navigation guidelines covering button text casing, action-oriented labels, menu organization, and page naming conventions.
+   :keywords: WebUI, UX writing, button text, sentence case, menu organization, page naming, wording, UI conventions
+
 Button Text
 ---------------
 

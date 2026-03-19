@@ -2,8 +2,8 @@ Localize Units of Measurement per User
 ========================================
 
 .. meta::
-   :description: Having units of measurement enables displaying data according to convention of end user
-   :keywords: Units of measurement, Imperial, Metric, scaling, displaying numbers
+   :description: Explains how to localize numeric data display per user in AIMMS by linking units of measurement to conventions for Imperial and Metric systems.
+   :keywords: units of measurement, convention, localization, Imperial, Metric, SI_Length, AllConventions, unit conversion, GUI, data display
 
 
 Optimization applications deal with numeric data. We find it easier to interpret when represented by

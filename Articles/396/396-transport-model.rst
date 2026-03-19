@@ -6,8 +6,8 @@ Transport Model
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Linear Programming, Network Object, Database Communication
-   :description: The basic example illustrates how to formulate and solve a mathematical program in AIMMS.
+   :description: Formulates a cost-minimizing depot-to-customer transportation LP and demonstrates ODBC database read/write, GUI expressions, and constraint slack modeling.
+   :keywords: transport model, linear programming, ODBC, database communication, network object, constraint slacks, expressions, supply chain
 
 Direct download AIMMS Project :download:`Transport Model.zip <model/Transport Model.zip>`
 

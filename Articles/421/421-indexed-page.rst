@@ -6,8 +6,8 @@ Indexed Page
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Indexed Page, Multiple cases
-   :description: How to use indexed page object to show the same page for several items in a set.
+   :keywords: Indexed Page, element parameter, multiple cases, set iteration, page object
+   :description: Demonstrates using an indexed page object to display the same page for each element in a set, driven by a scalar element parameter, including multi-case data views.
 
 Direct download AIMMS Project :download:`Indexed Page.zip <model/Indexed Page.zip>`
 

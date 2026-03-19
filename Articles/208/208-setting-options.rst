@@ -2,8 +2,8 @@ Adjust Engine and Solver Settings
 =================================
 
 .. meta::
-   :description: Comparing different ways to customize AIMMS engine and solver settings.
-   :keywords: 
+   :description: Compares different ways to set AIMMS engine and solver options including the Project Options dialog, OPTION statement, OptionSetValue, and block where.
+   :keywords: OPTION statement, OptionSetValue, OptionSetString, block where, Project Options, solver settings, Options.txt, MIP tolerance, engine configuration
 
 AIMMS offers many options to customize the behavior of the engine and its solvers. 
 This article describes various ways to set these options. 

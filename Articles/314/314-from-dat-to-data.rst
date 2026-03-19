@@ -1,8 +1,8 @@
 Convert Files from DAT to DATA
 ======================================
 .. meta::
-    :description: How to convert a data manager file to a case file.
-    :keywords: dat, data, data manager, case
+   :description: Explains the differences between DAT and DATA file formats in AIMMS and how to convert projects from the legacy data manager style to disk-based case files.
+   :keywords: DAT file, DATA file, data manager, case management, disk files and folders, CaseFileSave, CaseFileLoad, AIMMS 4, data management style
 
 
 Overview and Comparison of File Types

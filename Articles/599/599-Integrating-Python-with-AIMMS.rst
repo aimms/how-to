@@ -1,6 +1,10 @@
 Creating and Connecting Python Service to AIMMS
 =====================================================
 
+.. meta::
+   :description: Explains how to build a FastAPI/Uvicorn Python service, generate an OpenAPI AIMMS client library from it, and deploy the combo on AIMMS Cloud using pro::service::LaunchService.
+   :keywords: FastAPI, Uvicorn, Pydantic, OpenAPI, Python service, AIMMS Cloud, pro::service::LaunchService, dex::schema::GenerateClientFromOpenAPISpec, machine learning, REST API
+
 In today's data-driven world, integrating robust machine learning capabilities into optimization applications is becoming increasingly important.
 This article explores the seamless fusion of AIMMS with a Python service using FastAPI, Pydantic, and Uvicorn. 
 Learn how to leverage this integration by creating an OpenAPI AIMMS library, deploying it in AIMMS Developer, and utilizing the resulting application on the AIMMS Cloud.

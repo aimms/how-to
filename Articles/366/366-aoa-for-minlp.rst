@@ -1,6 +1,10 @@
 AIMMS Outer Approximation Algorithm for MINLP (using GMP functionality)
 ==========================================================================
 
+.. meta::
+   :description: Explains the GMP-based Outer Approximation algorithm for solving MINLP problems in AIMMS, including nonlinear presolver integration and multi-start combination.
+   :keywords: outer approximation, MINLP, GMP, AOA, nonlinear presolver, multi-start, CPLEX, CONOPT, mixed integer nonlinear programming, GMPOuterApproximation
+
 **Author:** Marcel Hunting. 
 
 This document describes how to use the GMP variant of the AIMMS Outer Approximation (AOA) algorithm for solving MINLP problems. 

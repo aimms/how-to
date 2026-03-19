@@ -2,8 +2,8 @@ Reindeer Pairing
 =================
 
 .. meta::
-   :keywords: Stable marriage problem, network object, constraint programming, channel constraint, if-then constraint
-   :description: This AIMMS project is an illustration of the stable marriage problem.
+   :keywords: Stable marriage problem, constraint programming, cp::Channel, if-then constraint, multiple solutions, DirectSQL, WebUI, GMP solution repository
+   :description: Solves the stable reindeer-pairing problem as a CP stable marriage model, enumerating up to 1000 stable matchings using cp::Channel constraints and the GMP solution repository.
 
 .. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/reindeer-pairing/releases/latest/download/reindeer-pairing.zip

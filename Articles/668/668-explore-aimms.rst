@@ -2,6 +2,10 @@
 Explore AIMMS by Yourself, for Free
 ===================================
 
+.. meta::
+   :description: Guides new users through obtaining a free Community License, building a first optimization application with the AIMMS IDE and WebUI, exploring advanced features, and publishing to AIMMS Cloud.
+   :keywords: Community License, AIMMS IDE, WebUI, e-learning, getting started, AIMMS Cloud, free license, optimization, trial account
+
 Welcome to AIMMS! If you're curious about how AIMMS could benefit your project or team, you can try it out for free. 
 This guide will walk you through the steps. Please note, you'll need a Windows environment to get started.
 

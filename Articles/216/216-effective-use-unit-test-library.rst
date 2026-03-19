@@ -1,6 +1,10 @@
 Test Driven Development using the AIMMSUnitTest Library
 ==========================================================================
 
+.. meta::
+   :description: Illustrates how to apply Test Driven Development in AIMMS using the AIMMSUnitTest library, including writing, running, and fixing unit tests.
+   :keywords: AIMMSUnitTest, unit testing, test driven development, aimmsunit::AssertTrue, aimmsunit::AssertThrow, TestSuite, TestRunner, test automation, TDD
+
 This article discusses some elements from the popular software methodology `Test Driven Development <https://en.wikipedia.org/wiki/Test-driven_development>`_ in relation to the AIMMS Library ``AIMMSUnitTest``.
 
 #.  Gather requirements from stakeholders

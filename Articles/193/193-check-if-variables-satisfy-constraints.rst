@@ -2,8 +2,8 @@ Check if Variable Values Satisfy Constraints
 ==============================================
 
 .. meta::
-   :description: Before solving a mathematical program, you can check whehter the current values satisfy some or all of the constraints.
-   :keywords: validation, initial value, checking mathematical programming instance
+   :description: Demonstrates how to check whether variable values satisfy all constraints in an AIMMS model using the GMP Solution Check function.
+   :keywords: GMP, Solution Check, feasibility, constraint validation, RetrieveFromModel, infeasibility, mathematical program, GMP library
 
 
 This article explains how to check whether a given combination of value assignments for the variables in your model satisfy all the constraints to produce a feasible solution. 

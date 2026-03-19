@@ -2,8 +2,8 @@
 =====================================
 
 .. meta::
-   :description: How to monitor and analyze your application for memory leaks
-   :keywords: card, memory, logging memory usage, memory leaks
+   :description: Explains how to log and analyze AIMMS application memory usage over repeated procedure executions to detect and diagnose memory leaks.
+   :keywords: memory leak, MemoryInUse, Card, garbage collection, REBUILD statement, memory monitoring, GMP, identifier cardinality
 
 
 :doc:`../170/170-memory-in-use` discusses the different tools available in AIMMS to investigate the memory usage. This article discusses an approach to log the memory used while executing a procedure to identify any possible memory leaks.

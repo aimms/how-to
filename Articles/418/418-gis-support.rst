@@ -6,8 +6,8 @@ GIS Support
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: GIS, Network Object, Bitmap, Arcs, Nodes
-   :description: This AIMMS project illustrates how to display map data obtained from a Geographical Information System (GIS) in AIMMS.
+   :keywords: GIS, WMS, WFS, OpenStreetMap, ESRI, GML, Network Object, Arcs, Nodes
+   :description: Demonstrates displaying GIS map layers from WMS, WFS, OpenStreetMap, and ESRI shape files as backgrounds in an AIMMS network object.
 
 Direct download AIMMS Project :download:`GIS Support.zip <model/GIS Support.zip>`
 

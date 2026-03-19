@@ -2,8 +2,8 @@ Adapt Solve Procedure with Callbacks for GMP
 ==========================================================
 
 .. meta::
-   :description: Converting SOLVE code to GMP code.
-   :keywords: solve, mathematical program, solver session, callback, GMP
+   :description: Demonstrates how to convert a SOLVE statement to GMP calls and adapt existing callbacks to the GMP solver session interface in AIMMS.
+   :keywords: GMP, solve statement, callback, solver session, AllGeneratedMathematicalPrograms, gmp::Instance, mathematical program, flow shop
 
 This article presents a general guide to converting from ``solve`` statements to using GMP, and how to adapt the existing callbacks and their activation.
 

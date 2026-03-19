@@ -2,8 +2,8 @@ Retrieve Solver Log Files in an AIMMS PRO On-Premise Setup
 ============================================================
 
 .. meta::
-   :description: How to get log files from a particular solver in AIMMS Cloud.
-   :keywords: log, logfile, solver
+   :description: Explains how to retrieve solver log files from an AIMMS PRO solver session by copying them to PRO Storage and downloading them to the user's device.
+   :keywords: solver log, PRO Storage, SaveFileToCentralStorage, Download Widget, solver session, AIMMS PRO, WebUI, RetrieveFileFromCentralStorage
 
 .. note:: 
 

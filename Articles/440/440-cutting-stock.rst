@@ -6,8 +6,8 @@ Cutting Stock
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Cutting Stock, Algorithmic approach, GMP, Callback function, Heuristic, Gantt Chart, AIMMS API 
-   :description:    This project illustrates AIMMS' capabilities to implement an algorithmic approach to find an optimal solution to a problem by repeatedly solving two optimization programs.
+   :keywords: Cutting Stock, column generation, GMP, LILE heuristic, branch-and-bound, Gantt Chart, AIMMS API, pattern generation
+   :description: Solves a 1D cutting stock problem using AIMMS column generation and LILE heuristic callback to iteratively generate and select roll-cutting patterns while minimizing raw material waste.
 
 Direct download AIMMS Project :download:`Cutting Stock.zip <model/Cutting Stock.zip>`
 

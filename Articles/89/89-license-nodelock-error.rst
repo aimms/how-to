@@ -2,8 +2,8 @@ Single-User License Troubleshooting
 =====================================
 
 .. meta::
-   :description: Resolving AIMMS license update issue regarding the nodelock file.
-   :keywords: license, error, nodelock, update, read
+   :description: Resolves the "nodelock file is read-only" error by clearing the read-only attribute in Windows, and walks through full deactivation and reactivation steps to reset a locked single-user license.
+   :keywords: nodelock, read-only, license update, deactivation, ProgramData, Licenses, Nodelocks, single-user license, license reset, Windows
 
 Error: Update failed - The nodelock file is read-only
 -----------------------------------------------------

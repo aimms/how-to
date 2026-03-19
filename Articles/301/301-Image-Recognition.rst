@@ -7,8 +7,8 @@ Use the IBM Image Recognition API
 ===================================
 
 .. meta::
-   :description: An overview of using IBM APIs with AIMMS in the context of image recognition.
-   :keywords: IBM, API, image, recognition, http
+   :description: Demonstrates how to use the IBM Visual Recognition API with the AIMMS HTTP Client Library to classify an image file using a POST request.
+   :keywords: IBM API, image recognition, Visual Recognition, HTTP Client Library, CURL, base64 authentication, JSON, POST request
 
 In this article, we will show how to use the Image Recognition API from IBM to identify an image.
 

@@ -1,6 +1,10 @@
 Nonlinear Presolve Algorithm in AIMMS
 ========================================
 
+.. meta::
+   :description: Describes the AIMMS nonlinear presolve algorithm, covering bound tightening using linear and nonlinear constraints, doubleton removal, and infeasibility detection.
+   :keywords: nonlinear presolve, bound tightening, NLP, MINLP, expression tree, doubleton, infeasibility analysis, feasibility-based bounds, CONOPT, BARON
+
 **Author:** Marcel Hunting. 
 
 This paper describes the AIMMS presolve algorithm for nonlinear problems. 

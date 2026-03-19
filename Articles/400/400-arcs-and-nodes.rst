@@ -6,8 +6,8 @@ Arcs and Nodes
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Network model, Network object, Node and Arc formulation, SetElementAdd function
-   :description: This example illustrates a simple network model with a GUI in which an end-user can graphically insert, delete and modify both nodes and arcs in the network.
+   :description: Illustrates interactive network editing with graphical arc and node insertion, comparing ARC/NODE language constructs against an equivalent LP formulation using element parameters for linked selection.
+   :keywords: network model, network object, ARC and NODE formulation, SetElementAdd, linear programming, element parameters, interactive GUI, coloring
 
 Direct download AIMMS Project :download:`Arcs and Nodes.zip <model/Arcs and Nodes.zip>`
 

@@ -6,8 +6,8 @@ Convert Audio File with IBM API
 ================================================
 
 .. meta::
-   :description: An overview of using IBM APIs with AIMMS in the context of converting audio files to text.
-   :keywords: IBM, API, audio, speech, text, http
+   :description: Shows how to use the IBM Speech-to-Text API with the AIMMS HTTP Client Library to convert an audio file into a text transcript via a POST request.
+   :keywords: IBM API, Speech-to-Text, HTTP Client Library, base64 authentication, JSON, Data Exchange Library, POST request, IAM
 
 This article contains an overview of IBM APIs, and a short example using the Speech-to-Text API.
 

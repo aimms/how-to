@@ -2,8 +2,8 @@ Hiding Default Values
 ======================
 
 .. meta::
-   :description: This article illustrates how to hide the default value using css.
-   :keywords:  default, hide
+   :description: Explains how to hide zero default values in WebUI table cells by applying a CSS color rule that matches the background, using the flag-default class.
+   :keywords: CSS, default values, WebUI, table widget, flag-default, stylesheet, cell styling, hide default
 
 This article illustrates how to hide the default value using ``css``.
 Please use the `Contract Allocation <https://how-to.aimms.com/Articles/383/383-contract-allocation.html>`_ example to experiment with this feature.

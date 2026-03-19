@@ -2,8 +2,8 @@ Create Local Solver Configuration
 ===============================================
 
 .. meta::
-   :description: Changing solver configuration per project
-   :keywords: Solver, configuration, Project
+   :description: Explains how to create a project-local solver configuration file in AIMMS to override global solver settings for a specific project.
+   :keywords: solver configuration, solvers.slv, local solver, CurrentSolver, project settings, solver version, Export, LP, MIP, CPLEX
 
 
 Normally, the list of solvers available via the solver configuration

@@ -2,8 +2,8 @@ Modifying Session Timeout Duration for WebUI Apps
 ==================================================
 
 .. meta::
-   :description: Extending the timeout timer for WebUI sessions
-   :keywords: idle, session, WebUI, timeout, extending, extend
+   :description: Explains how to extend the idle session timeout for AIMMS WebUI applications by configuring the webui-check-alive-settings.txt file.
+   :keywords: WebUI, session timeout, idle timeout, webui-check-alive-settings, data session, configuration, AIMMS Cloud
 
 WebUI sessions have a default timeout timer that will end an idle data session after 300 seconds (5 minutes) 
 with checks being made every 10 seconds.

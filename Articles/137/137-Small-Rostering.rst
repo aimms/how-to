@@ -2,8 +2,8 @@
 =========================
 
 .. meta::
-   :description: How to develop a shift scheduling application in AIMMS.
-   :keywords: employee, roster, schedule, shift, staff
+   :description: Demonstrates how to build a small nurse rostering application in AIMMS using constraint programming with shift constraints, free-time distribution, and symmetry reduction.
+   :keywords: rostering, shift scheduling, constraint programming, CP Optimizer, AllDifferent, Channel constraint, symmetry reduction, redundant constraints
 
 Solutions from rostering applications affect the daily life of the people rostered. Therefore, the application developers and planners iteratively improve the rostering applications and the quality of the solutions, often based on the feedback of those affected by the rosters created. The close link between the modeling language and GUI pages in AIMMS makes it easy to study the solutions and (re)formulate constraints.
 

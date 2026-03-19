@@ -1,6 +1,10 @@
 Python Client
 ================
 
+.. meta::
+   :description: Presents a Python client that submits, polls, and retrieves results from an AIMMS machine scheduling REST task service using the AIMMS Pro REST API.
+   :keywords: Python, REST API, AIMMS Cloud, task, polling, requests library, GUID, task status, machine scheduling, pro-api
+
 To create a service, it helps to have a client available that can test that service.
 
 In this article, a python client is presented to illustrate using 

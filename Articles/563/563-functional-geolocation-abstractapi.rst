@@ -2,8 +2,8 @@ Geolocation AbstractAPI
 ==============================
 
 .. meta::
-   :keywords: aimms, api, rest api, library, ip, openapi, abstractapi, geolocation
-   :description: Discover accurate IP geolocation with AbstractAPI: pinpoint any IP address worldwide!
+   :description: Demonstrates an IP geolocation AIMMS app that translates any IP address to geographic coordinates using the AbstractAPI OpenAPI-generated library.
+   :keywords: OpenAPI, AbstractAPI, geolocation, IP address, REST API, Data Exchange Library, Map Widget, WebUI, API key, generated library
 
 .. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Abstract_API-blue
    :target: https://github.com/aimms/ip-twist/archive/refs/heads/main.zip

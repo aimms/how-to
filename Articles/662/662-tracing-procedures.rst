@@ -1,6 +1,10 @@
 Tracing Procedures
 ==================
 
+.. meta::
+   :description: Shows how to instrument AIMMS procedures with pr_enter and pr_leave calls to log entry time, exit time, duration, and memory delta to the session log or a trace file.
+   :keywords: procedure tracing, pr_enter, pr_leave, CallerNode, MemoryInUse, CurrentToString, StringToMoment, session log, logging, AIMMS PRO
+
 This article is a follow up of :doc:`tracing<662-writing-to-session-log>`.
 Two procedures are discussed that show how to trace entering and leaving procedures, such that the reader knows:
 

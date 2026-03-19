@@ -2,8 +2,8 @@ Version Control in AIMMS Projects
 ======================================
 
 .. meta::
-   :description: Best practices for using version control in AIMMS projects.
-   :keywords: version control, AIMMS, git, VCS, source control, Sourcetree
+   :description: Explains best practices for integrating Git version control with AIMMS projects using SourceTree, including branching, committing, and backup strategies.
+   :keywords: version control, Git, SourceTree, gitignore, Aimmspack, branching, commit, VCS, AIMMS 4, text-based source
 
 Introduction
 ------------

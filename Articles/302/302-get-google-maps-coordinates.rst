@@ -7,8 +7,8 @@ Retrieve Geographic Coordinates with Google Maps API
 =====================================================
 
 .. meta::
-   :description: Using Google Maps API to return geographic coordinates to an AIMMS project.
-   :keywords: google, API, XSD
+   :description: Shows how to use the Google Maps Geocoding API with the AIMMS HTTP Client Library to retrieve latitude and longitude coordinates for a location.
+   :keywords: Google Maps API, Geocoding, HTTP Client Library, XSD, AXM, XML mapping, coordinates, READXML, REST API
 
 In this article, we will learn how to obtain coordinates using a HTTP request. We'll use the Geocoding API from Google Maps, which returns coordinates for a given location.
 

@@ -6,8 +6,8 @@ MPS Functions
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: MPS File, Tuning, MIP, Solving Options, Improving Solutions
-	:description: This example demonstrates the functions in AIMMS to solve and tune MPS files. 
+   :keywords: MPS File, GMP::Tuning, SolveSingleMPS, TuneMultipleMPS, CPLEX, GUROBI, solver options
+   :description: Demonstrates using GMP::Tuning::SolveSingleMPS and TuneMultipleMPS to solve and tune MIP models stored in MPS files with CPLEX, Gurobi, CBC, or XA.
 
 Direct download AIMMS Project :download:`MPS Functions.zip <model/MPS Functions.zip>`
 

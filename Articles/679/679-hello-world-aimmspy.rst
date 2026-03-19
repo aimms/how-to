@@ -11,8 +11,8 @@ Hello to the World of ``aimmspy`` from Python-Bridge
 .. image:: https://img.shields.io/badge/AIMMS-25.5-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 .. meta::
-    :keywords: AIMMS, Python-Bridge, aimmspy, Hello World, Python-in-the-lead, data exchange, pyenv, uv, virtual environment
-    :description: An introductory guide to using aimmspy from the AIMMS Python-Bridge using a 'Hello World' example. Learn to open an AIMMS session, exchange data, and execute procedures from a Python script using 'aimmspy'.
+   :keywords: aimmspy, Python-Bridge, Hello World, Python-in-the-lead, pyenv, uv, virtual environment, data exchange, AIMMS session, procedure execution
+   :description: Introduces the aimmspy Python-Bridge workflow by opening an AIMMS session from Python, assigning array data to a model parameter, executing MainExecution, and retrieving the scalar result.
 
 This Hello World guide introduces ``aimmspy`` from the AIMMS Python-Bridge, focusing on the core "Python-in-the-lead" workflow.
 

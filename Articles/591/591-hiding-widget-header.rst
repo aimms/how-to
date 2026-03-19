@@ -2,8 +2,8 @@ Hiding Widget Header
 =========================
 
 .. meta::
-   :description: how to hide widget header.
-   :keywords:  header, widget, hide, css, custom
+   :description: Explains how to hide the header of a specific WebUI widget by targeting its widget URI with a CSS display:none rule in the project stylesheet.
+   :keywords: CSS, widget header, hide, widget URI, WebUI, stylesheet, display none, Gantt Chart Widget
 
 This article illustrates how to hide the widget header using ``css``. Please use the `Employee Scheduling <https://how-to.aimms.com/Articles/387/387-employee-scheduling.html>`_ example to experiment with this feature.
 

@@ -6,8 +6,8 @@ Project Analysis
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Project Planning, Critical Path, Trade Off, Network Object, 2-D Chart
-   :description: The model describes a project planning problem where several activities need to be done in a certain order.
+   :description: Minimizes project completion cost by identifying which activities to crash on the critical path of an activity-on-node network within a given deadline.
+   :keywords: project planning, critical path, activity crashing, AON network, trade-off analysis, network object, 2D chart, precedence constraints
 
 Direct download AIMMS Project :download:`Project Analysis.zip <model/Project Analysis.zip>`
 

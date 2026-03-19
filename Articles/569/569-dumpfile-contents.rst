@@ -1,6 +1,10 @@
 What is a dump file?
 =================================
 
+.. meta::
+   :description: Explains the contents of AIMMS dump files generated on severe internal errors, including execution stacks, referenced data, and privacy implications.
+   :keywords: dump file, severe internal error, execution stack, WinDBG, crash analysis, AIMMS Developer, debugging, error reporting
+
 Upon a severe internal error, the running AIMMS executable will create a dump file.
 This is a dump file, **without heaps**, using `technology provided by Microsoft <https://learn.microsoft.com/en-us/visualstudio/debugger/using-dump-files?view=vs-2022>`_.
 

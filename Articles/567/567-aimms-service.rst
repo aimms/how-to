@@ -1,6 +1,10 @@
 Publishing an AIMMS Service
 =============================
 
+.. meta::
+   :description: Explains how to expose an AIMMS procedure as a REST task service using dex::ServiceName, handling request and response data paths, and deploying on AIMMS Cloud.
+   :keywords: REST service, dex::ServiceName, AIMMS Cloud, task, Data Exchange Library, request-data-path, response-data-path, deployment, aimmspack
+
 This article illustrates how to create a service from an AIMMS procedure. 
 It requires the following steps:
 

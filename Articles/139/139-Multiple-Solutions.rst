@@ -2,8 +2,8 @@
 =================================================
 
 .. meta::
-   :description: How to produce and retrieve multiple solutions in AIMMS.
-   :keywords: multiple, solution, solve
+   :description: Shows how to retrieve multiple feasible solutions from CP Optimizer and other solvers in AIMMS using the GMP solution repository and solution_storage_limit option.
+   :keywords: multiple solutions, CP Optimizer, solution pool, GMP solution repository, solution_storage_limit, CPLEX populate, BARON, incumbent callback
 
 
 Some of the solvers in AIMMS, including the CP Optimizer solver for Constraint Programming problems, support not only returning a single (optimal) solution, but also a pool of feasible solutions.

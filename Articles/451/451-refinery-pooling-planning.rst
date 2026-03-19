@@ -6,8 +6,8 @@ Refinery Pooling Planning
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Pooling, Global optimization, Nonlinear Programming, NLP, Pivot table, Network object
-   :description: This exampl eis a refinery-pooling problem, which illustrates the effect of selecting different initial values in supporting the solution finding process.
+   :keywords: Pooling problem, NLP, global optimization, BARON, initial values, local optima, pivot table, network object
+   :description: Maximizes refinery end-product sales by solving a nonlinear pooling model, demonstrating how different initial values yield distinct local optima and how BARON finds the global optimum.
 
 Direct download AIMMS Project :download:`Refinery Pooling Planning.zip <model/Refinery Pooling Planning.zip>`
 

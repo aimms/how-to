@@ -6,8 +6,8 @@ Sudoku
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Mixed Integer Programming, Mixed Integer Formulations, Multiple Solutions, GMP Functions, Pivot Table
-   :description: Besides regular MIP solve, this example also allows you to use some solvers, such as CPLEX and BARON, to find multiple solutions.
+   :description: Solves and generates Sudoku puzzles as a MIP model, supporting multiple solution enumeration via CPLEX and BARON using GMP functions and a uniqueness constraint.
+   :keywords: Sudoku, Mixed Integer Programming, multiple solutions, GMP functions, CPLEX, BARON, puzzle generation, uniqueness model, pivot table
 
 
 Direct download AIMMS Project :download:`Sudoku.zip <model/Sudoku.zip>`

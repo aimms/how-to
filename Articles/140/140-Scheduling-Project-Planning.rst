@@ -2,8 +2,8 @@
 ========================================
 
 .. meta::
-   :description: A construction scheduling example showing how to plan projects with AIMMS.
-   :keywords: scheduling, project, activities, resources
+   :description: Illustrates how to model a bridge construction project in AIMMS using Activity and Resource identifiers from the constraint programming component to minimize makespan.
+   :keywords: scheduling, Activity identifier, Resource identifier, CP Optimizer, constraint programming, makespan, sequential resource, parallel resource, EndBeforeBegin
 
 
 

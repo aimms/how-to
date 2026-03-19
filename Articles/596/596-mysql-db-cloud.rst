@@ -1,6 +1,10 @@
 Connecting to and using the AIMMS Cloud Database
 =================================================
 
+.. meta::
+   :description: Describes three options for connecting to the AIMMS Cloud MySQL database: SQLCreateConnectionString from within an app, the DB Tunnel app for local access, and VPN for external access.
+   :keywords: MySQL, AIMMS Cloud database, SQLCreateConnectionString, ODBC, DB Tunnel, VPN, Data Exchange Library, database connection, pro::tunnel
+
 This article describes several ways to connect to the AIMMS Cloud database. 
 The AIMMS Cloud database is a MySQL database and is an optional addition to the AIMMS Cloud, 
 intended for data storage and to interact with AIMMS applications uploaded to the same cloud. The link to the database always looks like this: 

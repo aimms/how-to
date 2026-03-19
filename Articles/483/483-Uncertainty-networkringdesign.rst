@@ -6,8 +6,8 @@ Uncertainty: Synchronous Optical Network Ring Design
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
+   :description: Minimizes SONET ring assignment costs under uncertain demand using a two-stage stochastic integer programming model solved with CPLEX Benders decomposition.
    :keywords: Synchronous Optical Network, SONET, ring assignment, stochastic programming, stochastic integer programming, uncertain data, Benders decomposition, networkobject
-   :description: In this problem we consider the assignment of rings to nodes in a network.
 
 Direct download AIMMS Project :download:`NetworkRingDesign.zip <model/NetworkRingDesign.zip>`
 

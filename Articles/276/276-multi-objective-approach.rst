@@ -2,8 +2,8 @@ Use a Multi-Objective Approach
 ========================================
 
 .. meta::
-   :description: Compare multi-objective approach to separately solving single objectives.
-   :keywords: multi objective, CPLEX
+   :description: Compares the CPLEX multi-objective solving approach against single-objective solves in AIMMS using a diet problem example.
+   :keywords: multi-objective, CPLEX, GMP::Column::SetAsMultiObjective, priority, relative tolerance, diet problem, MIP, GMP library, single objective
 
 In this article we will compare a multi-objective approach to separately solving single objectives.
 

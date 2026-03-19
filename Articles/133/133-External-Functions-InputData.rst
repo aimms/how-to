@@ -2,8 +2,8 @@ Exchange Data with External Source
 ========================================
 
 .. meta::
-   :description: How to link data from an external data source in AIMMS models.
-   :keywords: link, exchange, external, import, source
+   :description: Demonstrates how to create a C++ DLL with external functions and call them from AIMMS to read data from a proprietary plain-text format.
+   :keywords: external function, DLL, C++, ExternalFunction, BODYCALL attribute, constraint programming, CSPLIB, car sequencing, Visual Studio
 
 
 

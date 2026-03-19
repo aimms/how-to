@@ -2,8 +2,8 @@
 ==========================================
 
 .. meta::
-   :description: Getting started with Generated Mathematical Programs (GMP) in AIMMS.
-   :keywords: gmp, mathematic, program
+   :description: Introduces Generated Mathematical Programs (GMP) in AIMMS, showing how to transition from the solve statement to GMP functions for advanced control over the solver.
+   :keywords: GMP, Generated Mathematical Program, GMP::Instance::Generate, GMP::Instance::Solve, solver session, AllGeneratedMathematicalPrograms, mathematical program, AIMMS optimization
 
 
 In the simplest form solving a Mathematical Program identifier is done by using the intrinsic :ref:`solve statement <solve>` of AIMMS:

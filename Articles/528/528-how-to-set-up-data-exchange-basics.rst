@@ -1,6 +1,6 @@
 .. meta::
-   :description: How to set up data exchange within your AIMMS application.
-   :keywords: aimms, data, exchange
+   :description: Explains how to configure the Data Exchange Library to read JSON data into AIMMS identifiers using auto-generated mapping files and the dex::ReadFromFile function.
+   :keywords: Data Exchange Library, DEX, JSON, mapping file, dex::AddMapping, dex::ReadFromFile, dex::GenerateDatasetMappings, annotations, JSON mapping
 
 How to Integrate the Data Exchange Library
 ============================================

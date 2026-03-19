@@ -1,8 +1,8 @@
 Identify Differences
 =======================
 .. meta::
-   :description: A trick for how to troubleshoot data differences with an AIMMS procedure and diff tool.
-   :keywords: diff, difference, data, refactor
+   :description: Demonstrates how to identify data differences between two versions of an AIMMS model after refactoring using a tracing procedure and a diff tool.
+   :keywords: diff, data comparison, refactoring, AllUpdatableIdentifiers, tracing, WinMerge, troubleshooting, write to file
 
 In this article we'll identify the cause of data differences in a model after a refactorization. 
 

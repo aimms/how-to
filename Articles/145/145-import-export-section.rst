@@ -2,8 +2,8 @@ Export Code to Another Project
 ==================================
 
 .. meta::
-   :description: How to reuse parts of your code in another AIMMS model.
-   :keywords: import, export, link, share, reuse, re-use
+   :description: Explains how to export and import AIMMS model sections as AMS files to share and reuse identifiers across different AIMMS projects.
+   :keywords: import section, export section, AMS file, source file attribute, model explorer, code reuse, AIMMS module, identifier sharing
 
 When building AIMMS models, you may often find components you’d like to reuse in other projects. 
 For highly reusable components, consider creating an AIMMS library or module. Refer to :doc:`creating-and-managing-a-model/the-model-explorer/creating-and-managing-models` for more details.

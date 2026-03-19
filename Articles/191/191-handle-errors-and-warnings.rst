@@ -2,8 +2,8 @@ Handle errors and warnings
 ===========================
 
 .. meta::
-   :description: Error handling provides for a way of making your applications robust.
-   :keywords: Error handling, throwing exceptions, guarded code, happy flow
+   :description: Explains how to implement error handling in AIMMS using block-onerror constructs to catch runtime errors and display custom messages to users.
+   :keywords: error handling, onerror, errh module, MarkAsHandled, PendingErrors, block statement, runtime error, warning, exception handling
 
 Errors in AIMMS
 ------------------

@@ -2,8 +2,8 @@ Troubleshoot Unresponsive Applications
 ============================================================
 
 .. meta::
-   :description: The AIMMS Error handling permits explicit recoveries, controlled by the end user, of abnormal environment and system conditions.
-   :keywords: error handling, time out, timed out, solver session, AIMMS Deployment
+   :description: Shows how to use AIMMS error handling to let users retry a DelegateToServer call that fails due to an unstable internet connection or timeout.
+   :keywords: error handling, DelegateToServer, timeout, unstable connection, AIMMS Cloud, errh::MarkAsHandled, DialogAsk, WinUI, onerror block
 
 .. index:: PRO, DelegateToServer, Error Handling
 

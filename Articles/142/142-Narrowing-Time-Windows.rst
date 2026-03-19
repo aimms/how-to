@@ -2,8 +2,8 @@
 ===========================================
 
 .. meta::
-   :description: A scheduling example showing how to reduce the time window for smaller jobs.
-   :keywords: scheduling, job, activities, resources
+   :description: Illustrates how to model job scheduling with narrowing time windows and change-over times in AIMMS using Activity and sequential Resource identifiers.
+   :keywords: scheduling, Activity identifier, Resource identifier, time window, change-over time, CP Optimizer, Gantt chart, sequential resource, makespan
 
 
 The purpose of this example is to illustrate a few features of the AIMMS identifier types ACTIVITIES and RESOURCES.

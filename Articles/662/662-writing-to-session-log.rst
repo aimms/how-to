@@ -1,6 +1,10 @@
 In model tracing
 ==================
 
+.. meta::
+   :description: Shows how to implement a pr_logMsg procedure that writes trace messages to an AIMMS Developer file or the AIMMS PRO Cloud session log depending on the deployment environment.
+   :keywords: session log, pr_logMsg, pro::management::LocalLogInfo, trace file, AIMMS Developer, AIMMS Cloud, AIMMS PRO, logging, merge mode, file output
+
 In this article, we'll show some model code that explicitly writes to a trace.
 This trace is a:
 

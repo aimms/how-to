@@ -6,8 +6,8 @@ Change Views of 2D Charts in a WinUI Page
 ============================================
 
  .. meta::
-   :description: How to change the view for 2D charts as an end user.
-   :keywords: view, chart, user, scale, size, move
+   :description: Describes the mouse shortcuts available to end users for scaling, moving, zooming, rotating, and resetting 2D chart views in WinUI.
+   :keywords: WinUI, 2D chart, zoom, scale, move, rotate, reset, chart view, end user, mouse shortcut
 
 The end user of a WinUI app can change the view of 2D charts (e.g. scaling or moving). This article describes the view options and shortcuts available.
 

@@ -1,7 +1,7 @@
 
 .. meta::
-   :description: How to set up data exchange within your AIMMS application.
-   :keywords: aimms, data, exchange
+   :description: Explains how to retrieve remote files and process JSON data using the Data Exchange Library HTTP client, including memory stream and callback-based approaches.
+   :keywords: Data Exchange Library, DEX, HTTP client, dex::client::NewRequest, dex::ReadFromFile, memory stream, callback, JSON, REST API
 
 How to use the Data Exchange Library for extracting files and data 
 ====================================================================

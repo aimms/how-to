@@ -6,8 +6,8 @@ Extract Photos Using the Flickr API
 =====================================================
 
 .. meta::
-   :description: Using the Flickr API to obtain images.
-   :keywords: xml, http library, Flickr, images, API
+   :description: Demonstrates how to use the Flickr REST API with the AIMMS HTTP Client Library to retrieve gallery photos and download image files.
+   :keywords: Flickr API, HTTP Client Library, REST API, XML mapping, image download, READXML, web::request_invoke, gallery
 
 
 In this article, we'll learn how to use the Flickr REST API. 

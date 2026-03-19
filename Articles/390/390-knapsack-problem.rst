@@ -1,8 +1,8 @@
 Knapsack Problem
 ==================
 .. meta::
-   :keywords: Knapsack, Knapsack, Integer Programming, Binary Integer Programming, Cover Inequalities, Network Object
-   :description: This example introduces a knapsack problem.
+   :description: Maximizes knapsack value across classic, unbounded, and bounded integer variants by adjusting variable bounds, with AXLL-based Excel import and export.
+   :keywords: knapsack problem, integer programming, binary variables, bounded knapsack, unbounded knapsack, AXLL library, WebUI, combination chart, randomized data
 
 .. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/knapsack/releases/latest/download/knapsack.zip

@@ -2,8 +2,8 @@ Control Panel
 =========================================
 
 .. meta::
-   :description: Utility apps for AIMMS PRO Storage, available for download including a brief user guide.
-   :keywords: AIMMS PRO storage, deployment, utility
+   :description: Provides two downloadable WinUI utility apps — ControlPanel and AlterAuthorization — for managing file permissions and folder structures in AIMMS PRO Storage on AIMMS Cloud.
+   :keywords: AIMMS PRO Storage, ControlPanel, AlterAuthorization, bucket, authorization, WinUI, userdata, environment, AIMMS Cloud, file management
 
 This article provides for the source of four utility apps to operate on AIMMS PRO Storage.
 

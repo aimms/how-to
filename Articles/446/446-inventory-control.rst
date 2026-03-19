@@ -6,8 +6,8 @@ Inventory Control
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Linear Program, Stochastic Program, Multi-Stage, Control-State Variables, Mathematical Derivation
-   :description: This example emphasizes on a multi-period inventory control problem with uncertain demand.  
+   :keywords: Inventory control, stochastic programming, multi-stage, uncertain demand, scenario tree, beer production, control-state variables
+   :description: Models a multi-period beer-bottling inventory problem with uncertain demand as a multi-stage stochastic LP to minimize costs across a probability-weighted scenario tree.
 
 Direct download AIMMS Project :download:`Inventory Control.zip <model/Inventory Control.zip>`
 

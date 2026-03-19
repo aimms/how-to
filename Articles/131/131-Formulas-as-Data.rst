@@ -2,8 +2,8 @@
 ====================
 
 .. meta::
-   :description: How to enter formulas as data strings in AIMMS applications.
-   :keywords: formula, string, asset, blend
+   :description: Demonstrates how to implement formulas as data in AIMMS by combining string parameters, macros, and Model Edit Functions to build runtime mathematical expressions.
+   :keywords: formulas as data, Model Edit Functions, runtime library, macro, string parameter, blending, asset management, me::Create, apply statement
 
 
 

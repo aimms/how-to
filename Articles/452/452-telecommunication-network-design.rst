@@ -6,8 +6,8 @@ Telecommunication Network Design
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Linear Program, Network Object
-   :description: The objective of the model is to check the utilization of telecommunication network capacity.
+   :keywords: Telecommunication network, LP, multi-commodity flow, cable capacity, switch-station capacity, network object, routing
+   :description: Formulates and solves a telecom call-routing LP that routes all origin-destination calls through a network of cables and switch-stations while respecting capacity constraints.
 
 Direct download AIMMS Project :download:`Telecommunication Network Design.zip <model/Telecommunication Network Design.zip>`
 

@@ -2,8 +2,8 @@ Solve in a Loop
 ==================
 
 .. meta::
-   :description: How to solve several instances of Excel inputs at once using a loop.
-   :keywords: loop, solve, excel
+   :description: Shows how to iteratively solve multiple problem instances from Excel input files using a for loop in AIMMS, reading data and storing results in each iteration.
+   :keywords: solve loop, batch solve, Excel input, for loop, while loop, iterative solve, math program, AXLL library, case file
 
 This article provides an example of how to solve several instances of a problem at once, using a loop. 
 

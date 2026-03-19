@@ -2,8 +2,8 @@ Centering Cells in Table Widget
 ================================
 
 .. meta::
-   :description: how to center cell table widget.
-   :keywords:  center, table, widget, cell, css, custom
+   :description: Provides CSS snippets to center string parameters, numeric parameters, and element parameters in WebUI Table Widget cells using flag-string and flag-number selectors.
+   :keywords: CSS, table widget, center, text-align, flag-string, flag-number, cell-wrapper, WebUI, stylesheet
 
 This article illustrates how to center cells in Table Widget using ``css``. Please use the `Employee Scheduling <https://how-to.aimms.com/Articles/387/387-employee-scheduling.html>`_ example to experiment with this feature.
 

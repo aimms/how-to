@@ -2,8 +2,8 @@ Reduce Memory Usage
 ======================
 
 .. meta::
-    :description: Memory is a limited resource, care may be needed for large apps
-    :keyword: MemoryInUse, GetMemoryUsed, GMP, Solver Session, identifier, data
+   :description: Explains how to diagnose and reduce memory consumption in AIMMS by managing GMP instances, identifier cardinalities, domain restrictions, and NoSave properties.
+   :keywords: memory, GMP, MemoryInUse, GetMemoryUsed, CleanUp, Rebuild, Identifier Cardinalities, domain restrictions, NoSave, virtual memory
 
 AIMMS uses computer memory for several tasks, including storing generated mathematical programs and data in sets, parameters, variables and constraints.
 

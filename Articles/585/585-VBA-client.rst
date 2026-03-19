@@ -1,6 +1,10 @@
 Using AIMMS Services with a VBA Client
 ========================================
 
+.. meta::
+   :description: Demonstrates how to build an Excel VBA client that submits, monitors, and retrieves results from an AIMMS REST task service using the WinHTTP 5.1 library.
+   :keywords: VBA, Excel, WinHTTP, REST API, AIMMS Cloud, task, JSON, VBA-JSON, aimmscom, deprecation, optimization service
+
 AIMMS is an elaborate tool for modeling optimization problems.
 Excel is a popular tool to model business problems.  
 This article is about leveraging the power of AIMMS in EXCEL via HTTP requests.

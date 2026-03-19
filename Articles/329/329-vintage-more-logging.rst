@@ -4,8 +4,8 @@ Get More Log Information for AIMMS 4.79 and older
 ==================================================
 
 .. meta::
-   :description: This article explains how to increase the amount of log information.
-   :keywords: log, troubleshoot
+   :description: Explains how to enable increased AIMMS logging for versions 4.79 and older using a batch script and the LoggerConfig.xml command-line option.
+   :keywords: LoggerConfig.xml, logging, log4j, AIMMS 4.79, batch script, troubleshooting, logcfg, command line
 
 
 The article is a companion article to :doc:`Get more log information <../329/329-more-logging>`, and provides materials that should **only** be used for AIMMS 4.79 and older.

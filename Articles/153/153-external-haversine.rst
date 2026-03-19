@@ -2,8 +2,8 @@ Create an External Function with Visual Studio
 ================================================
 
 .. meta::
-   :description: Example using Haversine to create an external function with Microsoft Visual Studio.
-   :keywords: external, function, visual, studio, dll
+   :description: Demonstrates how to build a C++ DLL in Visual Studio implementing the Haversine formula and declare it as an external function in an AIMMS project.
+   :keywords: external function, DLL, Visual Studio, Haversine, C++, ExternalFunction, 32-bit, 64-bit, depends.exe, distance calculation
 
 .. .. image:: images/icons8-puzzle-512.png
 

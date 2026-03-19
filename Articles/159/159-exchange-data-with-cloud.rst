@@ -1,6 +1,6 @@
 .. meta::
-   :description: How to set up a framework for sending data via the AIMMS Cloud.
-   :keywords: cloud, exchange, api, configure, network
+   :description: Provides an overview of options for exchanging data with AIMMS Cloud, including Azure Data Lake, application database, VPN, PRO Storage, and REST web services.
+   :keywords: AIMMS Cloud, Azure Data Lake, application database, VPN, PRO Storage, REST API, HTTP Client Library, Data Exchange library, data integration
 
 Exchange Data with the AIMMS Cloud
 ===========================================

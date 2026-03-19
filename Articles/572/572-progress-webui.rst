@@ -1,6 +1,10 @@
 Showing Progress of Long Running Algorithms
 =============================================
 
+.. meta::
+   :description: Explains how to display real-time algorithm progress in WinUI using PageRefreshAll and in WebUI using ScheduleAt to break execution into scheduled iterations.
+   :keywords: progress, ScheduleAt, PageRefreshAll, WebUI, WinUI, long-running algorithm, DialogProgress, SetProgressMessage, iterative execution
+
 Most users can be re-assured that a long running algorithm is working by showing the progress that is being made.
 There are various ways of doing this. This article gives a brief overview and a detailed example of showing progress in data for the WebUI.
 

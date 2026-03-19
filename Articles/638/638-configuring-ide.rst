@@ -2,8 +2,8 @@ Configuring AIMMS IDE
 ==============================================================
 
 .. meta::
-   :description: How to enable line numbers and customize syntax highlighting in the AIMMS IDE Editor.
-   :keywords: Editor, line numbers, syntax highlighting, settings, display, customization
+   :description: Explains how to enable line numbers, navigate to specific lines with Ctrl+G, and customize syntax highlighting colors for identifiers and keywords in the AIMMS IDE Editor.
+   :keywords: IDE Editor, line numbers, syntax highlighting, Editor Settings, LineNumberMargin, Goto Line, style type, XML export, customization
 
 The AIMMS IDE Editor offers options for displaying line numbers and customizing syntax highlighting, 
 which can enhance code readability and ease of navigation. 

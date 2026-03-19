@@ -6,8 +6,8 @@ Multi Start
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Nonlinear Programming, NLP, Multistart Algorithm, GMP, Module
-   :description: This example illustrates how a multistart algorithm can improve the reliability of any local NLP solver, by calling it with many starting points.
+   :keywords: Nonlinear Programming, NLP, Multistart Algorithm, GMP, clustering, local optima, system module
+   :description: Illustrates how AIMMS multistart clustering algorithm improves NLP reliability by launching multiple starting points and grouping convergent searches to reduce redundant solves.
 
 Direct download AIMMS Project :download:`Multi Start.zip <model/Multi Start.zip>`
 

@@ -37,4 +37,5 @@ Nemhauser, G.L. and L.A. Wolsey, Integer and Combinatorial Optimization, Wiley,
 1999
 
 .. meta::
-   :keywords: Branch-and-Bound, generic algorithm, GMP, sections
+   :keywords: Water distribution network, MINLP, pipe diameter, Branch-and-Bound, GMP, generic algorithm, sections
+   :description: Designs a water distribution network by selecting optimal pipe diameters using a custom GMP-based branch-and-bound algorithm implemented as a reusable AIMMS Section.

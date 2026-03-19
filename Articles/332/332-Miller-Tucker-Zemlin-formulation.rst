@@ -1,5 +1,10 @@
 Miller-Tucker-Zemlin Formulation
 ================================
+
+.. meta::
+   :description: Explains the Miller-Tucker-Zemlin subtour elimination formulation in the AIMMS CVRP library using an auxiliary variable to enforce vehicle route ordering.
+   :keywords: CVRP, Miller-Tucker-Zemlin, MTZ, subtour elimination, auxiliary variable, vehicle routing, MIP, integer programming
+
 The :doc:`332-routing-interface` contains four different formulation options. Those formulations use different methods for eliminating subtours. In this article, the Miller-Tucker-Zemlin formulation is discussed. 
 Herein below an example of a subtour within a route for a CVRP:
 

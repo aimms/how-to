@@ -2,8 +2,8 @@ Dollar or Pipe Sign?
 =========================
 
 .. meta::
-   :description: how to use the operator $ and the operator |.
-   :keywords:  pipe, domain, dollar, condition
+   :description: Clarifies the distinct roles of the dollar-sign condition operator and the pipe-sign domain restriction operator in AIMMS, including the precedence change introduced in AIMMS 4.97.
+   :keywords: dollar operator, pipe operator, index domain, operator precedence, AIMMS 4.97, condition, iterative operator, for statement, language reference
 
 In the AIMMS Language there is a clear distinction on how to use the operator ``$`` and the operator ``|``. This article illustrates this difference.
 

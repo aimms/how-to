@@ -2,8 +2,8 @@
 =========================================
 
 .. meta::
-   :description: How to change the frequency of updates to the progress window.
-   :keywords: progress, update, solve
+   :description: Explains how to configure the AIMMS progress window update frequency using time-based intervals instead of iteration counts for more consistent solver feedback.
+   :keywords: progress window, solver progress, Progress Time Interval, MIP, iteration count, IIS, BARON, CP Optimizer, AIMMS options
 
 .. image:: images/pw1.png
     :align: right

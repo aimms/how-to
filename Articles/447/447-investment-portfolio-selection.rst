@@ -6,8 +6,8 @@ Investment Portfolio Selection
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Mathematical Derivation, Mathematical Reformulation, Parametric Curve, Bar Chart, Mixed-Integer Nonlinear Programming, MINLP, BARON, Knitro
-   :description: This example models how top management could spread an overall budget over several investment categories.
+   :keywords: Portfolio selection, MINLP, BARON, Knitro, hierarchical decision making, investment categories, parametric curve, bar chart
+   :description: Models two-phase hierarchical portfolio allocation where budget is spread over investment categories at the strategic level, with MINLP extensions for nonlinear cost budgets solved by BARON or Knitro.
 
 Direct download AIMMS Project :download:`Investment Portfolio Selection.zip <model/Investment Portfolio Selection.zip>`
 

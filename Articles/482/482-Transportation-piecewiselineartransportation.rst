@@ -34,5 +34,6 @@ piecewise linear transportation problem, European Journal of Operational
 Research 245(3), pp. 645-655 (2015)
 
 .. meta::
-   :keywords: Piecewise linear, special ordered set, SOS2, network object.
+   :description: Models a transportation problem with a piecewise linear cost function representing price discounts, formulated as a MIP using SOS2 special ordered sets.
+   :keywords: Piecewise linear, special ordered set, SOS2, network object, transportation, MIP, price discount
 

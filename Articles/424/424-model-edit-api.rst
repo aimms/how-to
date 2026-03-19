@@ -6,8 +6,8 @@ Model Edit API
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Model Edit functions, AIMMS API, using AIMMS externally, C++, integrating AIMMS, runtime libraries
-   :description: This example illustrates how the Model Edit functions can be used to build and solve an AIMMS transport model from within an external program, using the AIMMS API. 
+   :keywords: Model Edit functions, AIMMS API, C++, runtime libraries, transport model, external program
+   :description: Demonstrates building and solving an AIMMS transport model programmatically from a C++ executable using AIMMS API Model Edit functions and runtime library import.
 
 Direct download AIMMS Project :download:`Model Edit API.zip <model/Model Edit API.zip>`
 

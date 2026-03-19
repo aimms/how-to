@@ -2,8 +2,8 @@ Sailing Across the World
 ==========================
 
 .. meta::
-   :keywords: AIMMS, WebUI, Map widget, maritime routing, longitude wraparound, visualization, vessel scheduling, waypoints, dynamic routing
-    :description: Learn to manage map 'seams' in AIMMS WebUI. This guide covers adapting waypoint longitudes and controlling arc visibility for seamless global routes.
+   :description: Demonstrates how to handle longitude wraparound on the AIMMS WebUI Map widget for global maritime routes by adapting waypoint coordinates and hiding backside arcs.
+   :keywords: WebUI, Map widget, maritime routing, longitude wraparound, waypoints, arc visibility, vessel scheduling, global route, dynamic routing
 
 A global maritime route consists of multiple waypoints (nodes) and legs (arcs). 
 When visualizing these routes in a map interface, handling the "seam" of the world map, where longitudes transition from 180° to -180°, is a common challenge.

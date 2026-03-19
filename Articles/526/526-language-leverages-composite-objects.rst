@@ -1,6 +1,10 @@
 Deploying AIMMS set functionality to composite objects
 =================================================================
 
+.. meta::
+   :description: Demonstrates that the reference element-based approach for composite objects supports element parameters, iterative operators, indexed sets, and NBest, unlike the component-based approach.
+   :keywords: composite objects, reference element, set semantics, element parameter, indexed set, NBest, argMax, AIMMS language, time-space network
+
 This is a companion article to :doc:`../526/526-modeling-composite-objects`.
 
 AIMMS provides extensive functionality on sets and elements, including, among others:

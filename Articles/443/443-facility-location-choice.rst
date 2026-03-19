@@ -6,8 +6,8 @@ Facility Location Choice
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Distribution System Design, Integer Program, Mathematical Reformulation, Mathematical Derivation, Customized Algorithm, Benders decomposition, Auxiliary Model, Constraint Generation
-   :description: This example considers the problem of selecting distribution centers along with their associated customer zones.
+   :keywords: Facility location, distribution center, mixed-integer programming, Benders decomposition, constraint generation, auxiliary model, MILP
+   :description: Selects distribution center locations and assigns customer zones using MILP, then applies Benders decomposition to scale the approach to larger datasets.
 
 Direct download AIMMS Project :download:`Facility Location Choice.zip <model/Facility Location Choice.zip>`
 

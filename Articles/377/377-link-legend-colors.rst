@@ -1,6 +1,10 @@
 Consistent Data Coloring on an AIMMS WebUI Page
 ==================================================
 
+.. meta::
+   :description: Demonstrates how to achieve consistent data coloring across WebUI widgets using legend widgets, CSS annotations, and qualitative color palettes.
+   :keywords: WebUI, color palette, legend widget, CSS annotations, bar chart, Gantt chart, data visualization, consistent coloring
+
 .. Topsites:
 .. https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3 The classic site for creating color schemes.
 .. https://medialab.github.io/iwanthue/ Generates anything you want, but make sure you know what you want ;-)

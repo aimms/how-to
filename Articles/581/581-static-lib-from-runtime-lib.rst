@@ -1,6 +1,10 @@
 Create a Static AIMMS Library from a Runtime Library
 =====================================================
 
+.. meta::
+   :description: Demonstrates how to query a SQLite database schema, generate a runtime library using model editing functions, and persist it as a reusable static AIMMS library.
+   :keywords: runtime library, static library, model editing, SQLNumberOfTables, SQLColumnData, me::ExportNode, database schema, DEX, UUID, put statement
+
 As you may know, runtime libraries offer enormous flexibility.
 However, there are situations whereby the same runtime library is generated over and over again.
 In these situations it is more efficient to generate the runtime library once and persist it.

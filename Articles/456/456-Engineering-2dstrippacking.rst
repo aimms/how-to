@@ -30,4 +30,5 @@ Note:
 The general solvers option 'relative optimality tolerance' is set to 0.5
 
 .. meta::
-   :keywords: Search algorithm
+   :keywords: 2D strip packing, MIP, layout optimization, bin packing, search algorithm, spatial representation
+   :description: Packs a set of rectangular items into a fixed-width strip to minimize strip height using a hybrid spatial MIP formulation with a relative optimality tolerance of 0.5.

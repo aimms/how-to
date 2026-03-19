@@ -1,6 +1,10 @@
 Uponchange with Arguments
 =========================
 
+.. meta::
+   :description: Illustrates how to use the WebUI uponchange annotation with hasChanged and oldValue arguments to detect and report multi-cell edits and perform consistency checks.
+   :keywords: uponchange, WebUI, annotation, hasChanged, oldValue, block editing, consistency check, identifier property, FormatString
+
 This article illustrates how to use ``uponchange`` annotation with arguments. This can be beneficial when there are block-editing and consistency check per value. 
 
 Note that this is a WebUI feature only. Changes on WinUI or directly on the AIMMS IDE will not trigger the ``uponchange`` procedure.

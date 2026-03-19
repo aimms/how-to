@@ -2,8 +2,8 @@ Schedule Regular Jobs
 ======================
 
 .. meta::
-   :description: How to schedule an AIMMS procedure to run regularly.
-   :keywords: schedule, job, regular, repeat, recur
+   :description: Shows how to implement self-rescheduling AIMMS server sessions using pro::DelegateToServer with delegation levels and time increments to execute a payload procedure repeatedly on AIMMS Cloud.
+   :keywords: DelegateToServer, delegation level, scheduled job, self-rescheduling, AIMMS Cloud, Tasks v2, pro::CurrentDelegationLevel, MomentToString, APPLY operator, solver session
 
 .. https://gitlab.aimms.com/Chris/aimms-how-to/issues/80
 .. Nirvana project 0006

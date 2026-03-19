@@ -2,8 +2,8 @@ Migrate AIMMS PRO On-Premise Server to Another Machine
 ===============================================================
 
 .. meta::
-   :description: How to migrate your PRO server to another machine.
-   :keywords: PRO, Server, migrate, move, transfer
+   :description: Explains the step-by-step process to migrate an AIMMS PRO On-Premise server to a new machine including backup, installation, and configuration.
+   :keywords: AIMMS PRO, server migration, backup, PRO Configurator, restore, on-premise, deployment, configuration
 
 This article explains how to migrate your AIMMS PRO On-Premise server to a new machine. We will call these servers the original machine (source host) and the new machine (target host).
 

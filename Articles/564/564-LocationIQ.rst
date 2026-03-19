@@ -1,6 +1,10 @@
 Taking Multiple into Account Calling an OpenAPI REST API
 ============================================================
 
+.. meta::
+   :description: Demonstrates handling multiple servers, endpoints, response items, parallel requests, and rate limits when calling the LocationIQ REST API via an OpenAPI-generated AIMMS library.
+   :keywords: OpenAPI, LocationIQ, REST API, rate limiting, multiple requests, Data Exchange Library, DEX, geocoding, dex::client::WaitForResponses, response hook
+
 Calling a generated OpenAPI Library, the word "multiple" comes back in several ways:
 
 #.  The service can be provided by multiple servers, each one of them using a unique service URL.

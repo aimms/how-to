@@ -6,8 +6,8 @@ Integrate AIMMS with Models Built in Languages Like Python or R
 ==================================================================================
 
 .. meta::
-   :description: Integrating (data science) models built in Python with your AIMMS applications
-   :keywords: python, integration, data science, machine learning, connectivity
+   :description: Explains how to extend AIMMS apps with machine learning models built in Python or R by exposing them as REST APIs and calling them via the HTTP and DataExchange libraries.
+   :keywords: python, R, integration, data science, machine learning, REST API, HTTP library, DataExchange, Docker, Flask, Plumber
 
 The usage of both optimization and machine learning algorithms in decision support applications is growing steadily. One example is to use a forecasting model to predict the expected demand and provide that as an input to a MIP model. 
 Python and R are two of the most popular languages used in the data science community for developing algorithms like predictive models, clustering models etc. 

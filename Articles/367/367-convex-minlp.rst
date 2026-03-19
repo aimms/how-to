@@ -1,6 +1,10 @@
 Solving Convex MINLP Problems with AIMMS
 ==========================================
 
+.. meta::
+   :description: Benchmarks the AIMMS COA (Quesada-Grossmann) and AOA algorithms for convex MINLP, demonstrating the lazy constraint callback implementation and performance comparison.
+   :keywords: convex MINLP, outer approximation, COA, AOA, GMP, lazy constraint callback, CPLEX, Gurobi, branch-and-bound, GMPOuterApproximation
+
 **Author:** Marcel Hunting. 
 
 This document describes the Quesada and Grossman algorithm that is implemented in AIMMS to solve

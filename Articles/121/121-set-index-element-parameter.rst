@@ -2,8 +2,8 @@
 ====================================================
 
 .. meta::
-   :description: How to use sets, subsets, indices, element parameters in AIMMS models.
-   :keywords: set, subset, index, element, parameter
+   :description: Illustrates the use of sets, subsets, indices, and element parameters in AIMMS through a fantasy football modeling example.
+   :keywords: set, subset, index, element parameter, parameter mapping, AllDifferent, domain condition, AIMMS language reference, binary parameter
 
 
 .. note::

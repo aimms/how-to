@@ -1,6 +1,10 @@
 Reading Relations and Indexed Sets from Databases
 =================================================
 
+.. meta::
+   :description: Explains a workaround to read binary relations and indexed sets from database tables in AIMMS by using an SQL artificial column and a DatabaseProcedure with UseResultSet.
+   :keywords: database, relation, indexed set, DatabaseProcedure, SQL, binary parameter, ODBC, SQLite, READ FROM TABLE
+
 AIMMS does not support reading relations and indexed sets directly using the ``READ FROM TABLE`` statement.
 Therefore a table in a database such as
 

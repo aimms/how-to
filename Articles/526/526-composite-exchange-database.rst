@@ -1,5 +1,9 @@
-ODBC data exchange of composite objects 
+ODBC data exchange of composite objects
 ================================================================================
+
+.. meta::
+   :description: Compares ODBC database writing for composite arc objects using both the component-based and reference element-based approaches with SQLite database table mappings.
+   :keywords: composite objects, ODBC, database, reference element, component-based, DatabaseTable, SQLite, arc, element parameter
 
 This is a companion article to :doc:`../526/526-modeling-composite-objects`.
 

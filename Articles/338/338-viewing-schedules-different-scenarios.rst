@@ -1,6 +1,10 @@
 Comparing Schedules from Scenarios
 ===================================
 
+.. meta::
+   :description: Shows how to compare Gantt Chart schedules from multiple scenario case files side by side in an AIMMS WebUI application using case referencing and dot-notation.
+   :keywords: Gantt Chart, scenario comparison, case management, CurrentCaseSelection, dot-notation, WebUI, data manager, flow shop
+
 .. Purpose - view and study schedules from different scenarios.
 
 We want to compare schedules from different scenarios. We use a flowshop model example, which you can download from the link below.

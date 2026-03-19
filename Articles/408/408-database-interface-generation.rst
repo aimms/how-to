@@ -7,7 +7,7 @@ Database Interface Generation
 
 .. meta::
    :keywords: Database, Datasource, GetDataSourceProperty, SQLNumberOfColumns, SQLNumberOfTables, SQLColumnData, SQLTableName, Mapping, Database Info, Model Edit Functions
-	:description: This example shows you how the Model Edit functions can be used to generate a link to one or more database tables for your projects.
+   :description: Shows how to use Model Edit functions to automatically generate database table links and AIMMS identifier mappings from existing database schemas.
 
 Direct download AIMMS Project :download:`Database Interface Generation.zip <model/Database Interface Generation.zip>`
 
@@ -17,11 +17,8 @@ This example shows you how the Model Edit functions can be used to generate a li
 
 	- _Example Style Library
 	- Database Interface Generation
-	
+
 The example also offers you the possibility to export the generated interface as a ``.ams`` file. In that case, you can use this example to generate the database interface(s) for your own model(s).
-	
+
 Keywords:
 Database, Datasource, GetDataSourceProperty, SQLNumberOfColumns, SQLNumberOfTables, SQLColumnData, SQLTableName, Mapping, Database Info, Model Edit Functions
-
-.. meta::
-   :keywords: Database, Datasource, GetDataSourceProperty, SQLNumberOfColumns, SQLNumberOfTables, SQLColumnData, SQLTableName, Mapping, Database Info, Model Edit Functions

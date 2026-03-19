@@ -2,8 +2,8 @@ Model Variables with Limited Values
 =======================================
 
 .. meta::
-   :description: Linearizing trick to model x in S = limited set of values.
-   :keywords: algebraic modeling, constraints, linear, integer, discrete
+   :description: Demonstrates how to model a variable that can only take a limited discrete set of values using binary variables and equality constraints in AIMMS.
+   :keywords: discrete variable, binary variable, limited values, integer programming, linearization, MIP modeling, equality constraint, algebraic modeling
 
   
 

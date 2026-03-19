@@ -2,8 +2,8 @@ Identify Error
 ===================
 
 .. meta::
-   :description: A trick for how to troubleshoot errors occurring during definition evaluation.
-   :keywords: case, error, definition
+   :description: Shows how to identify which set or parameter definition causes an error during case creation or solver session delegation in AIMMS.
+   :keywords: error handling, definition evaluation, case file, errh, AllDefinedSets, AllDefinedParameters, troubleshooting, DelegateToServer
 
 When creating a case file, for instance during a ``pro::DelegateToServer``, errors may occur during the evaluation of the definitions.
 Here we show a little trick to identify the set or parameter that has the definition in which this error occurred.

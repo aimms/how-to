@@ -2,8 +2,8 @@ Model Category Mapping of Items
 ================================
 
 .. meta::
-   :description: How to model category mapping to define properties in AIMMS.
-   :keywords: category, map, mapping, lookup
+   :description: Illustrates how to model category-to-property mapping in AIMMS using element parameters and binary parameters as alternatives to Excel lookup functions.
+   :keywords: category mapping, element parameter, binary parameter, lookup, index domain, set, range attribute, definition attribute, AIMMS modeling
 
 
 Very often, you will find yourselves having to define a certain property for an item based on its category. 

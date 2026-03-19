@@ -28,5 +28,6 @@ programs featuring "on/off" constraints, Computational Optimization and
 Applications 52(2) (2012), pp. 537-558
 
 .. meta::
-   :keywords: Outer Approximation, GMP-AOA, convex, lazy constraint callback
+   :description: Solves the Delay-Constrained Routing Problem as a MINLP using the AIMMS Outer Approximation algorithm to minimize routing cost subject to per-service delay guarantees.
+   :keywords: Outer Approximation, GMP-AOA, convex, lazy constraint callback, MINLP, telecommunications, delay-constrained routing
 

@@ -2,8 +2,8 @@ Bias in AI
 =============
 
 .. meta::
-   :keywords: python, dex, openapi, docker, bias
-   :description: This examples connects AIMMS to Python. 
+   :keywords: Python, bias, machine learning, scikit-learn, logistic regression, WebUI, DEX, toxicity classification, CSS annotations, Docker
+   :description: Demonstrates connecting an AIMMS WebUI front-end to a Python scikit-learn logistic regression service to detect algorithmic bias in text toxicity classification.
 
 .. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Bias_in_AI-blue
    :target: https://github.com/aimms/bias-in-ai/archive/refs/heads/main.zip

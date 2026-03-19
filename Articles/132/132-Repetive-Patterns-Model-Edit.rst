@@ -2,8 +2,8 @@
 ===========================================
 
 .. meta::
-   :description: How to duplicate patterns with Model Query and Model Edit functions
-   :keywords: model, edit, query, structure, pattern
+   :description: Shows how to use AIMMS Model Query and Model Edit functions to automatically generate data duplication code for identifiers sharing a common index.
+   :keywords: Model Edit Functions, Model Query, runtime library, me::Create, DomainIndex, IdentifierDimension, apply statement, code generation, maintenance
 
  
 When constructing AIMMS models, we are usually able to handle repetition and structure by adding indexes. For instance, if we have built a model for the conversion process of a single machine, we do not have to duplicate the relevant model code when given an extra machine. 

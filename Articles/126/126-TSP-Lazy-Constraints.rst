@@ -2,8 +2,8 @@
 ==============================
 
 .. meta::
-   :description: An example solving a Traveling Salesman Problem using lazy constraints.
-   :keywords: lazy, constraints, salesman, tsp
+   :description: Demonstrates how to solve the Traveling Salesman Problem in AIMMS using lazy constraints and subtour elimination constraints with CPLEX and Gurobi.
+   :keywords: Traveling Salesman Problem, TSP, lazy constraints, subtour elimination, branch-and-cut, CPLEX, Gurobi, GMP, callback, MIP
 
 
 The famous **Travelling Salesman Problem** (TSP) deals with the following problem: given a list of cities and the distances between each pair of cities, a salesman has to find the shortest possible route to visit each city exactly once while returning to the origin city. One way to formulate the TSP is as follows:

@@ -2,8 +2,8 @@ Overview: Calendars in AIMMS
 ============================
 
 .. meta::
-    :description: Representation of time in AIMMS optimization models and linking to real-time.
-    :keywords: Calendar, second, minute, hour, day, week, month, year, granularity, localized format, time representation
+    :description: Explains how to declare and use calendars in AIMMS for time-based modeling, including database mapping, current time functions, and subset construction.
+    :keywords: Calendar, timeslot, SI_Time_Duration, CurrentToTimeSlot, CurrentToString, TimeslotCharacteristic, time-based modeling, database mapping, date format
 
 The word "programming" in Mathematical Programming is about creating a plan, typically a plan to be executed over some period in real-time. 
 This makes reference to real-time an essential ingredient for most decision support applications. 

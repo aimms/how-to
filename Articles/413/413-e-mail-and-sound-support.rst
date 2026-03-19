@@ -6,8 +6,8 @@ Email and Sound Support
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: email, Sound, External procedure
-   :description: This example illustrates two external DLLs that allow you to send email messages and play sounds from within your model.
+   :description: Demonstrates sending email via the Simple MAPI API and playing WAV sounds from AIMMS using two external C DLLs importable as model sections.
+   :keywords: email, MAPI, sound, WAV, external DLL, external procedure, Mapi32, PlaySound, Win32, C source
 
 Direct download AIMMS Project :download:`E-mail and Sound Support.zip <model/E-mail and Sound Support.zip>`
 

@@ -6,8 +6,8 @@ Uncertainty: Production Planning - Robust Optimization
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Uncertain data, robust optimization
-   :description: The goal is to find the production plan for two products that maximizes the profit of the company. 
+   :description: Maximizes profit for a two-drug production plan under uncertain active agent yields from raw materials using robust optimization techniques.
+   :keywords: Uncertain data, robust optimization, LP, production planning, uncertainty, Ben-Tal, Nemirovski
 
 Direct download AIMMS Project :download:`ProductionPlanningRO.zip <model/ProductionPlanningRO.zip>`
 

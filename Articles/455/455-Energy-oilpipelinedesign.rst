@@ -27,4 +27,5 @@ Brimberg, J., P. Hansen, K. Lih, N. Mladenovic and M. Breton, An Oil Pipeline De
 Problem, Operations Research 51(2) (2003), pp. 228-239
 
 .. meta::
-   :keywords: Network object
+   :keywords: Oil pipeline design, MIP, network design, pipe sizing, offshore platforms, cost minimization, network object
+   :description: Selects pipeline connections and pipe diameters to link offshore platforms and onshore wells to a port at minimum construction cost, formulated as a medium-scale MIP with a network object.

@@ -1,6 +1,10 @@
 Activating Licenses Offline
 ====================================
 
+.. meta::
+   :description: Walks through the three-step offline nodelock activation process: generating a license request file, obtaining a response file from the AIMMS website, and uploading it to complete activation.
+   :keywords: nodelock, offline activation, license, single user license, activation code, request file, response file, License Configuration
+
 When AIMMS cannot make a connection to the internet license server to activate a nodelock, you will get the option to activate a nodelock offline. 
 
 To complete offline nodelock activation, follow these steps:

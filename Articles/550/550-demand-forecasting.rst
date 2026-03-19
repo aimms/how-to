@@ -1,8 +1,8 @@
 Demand Forecasting
 ===================
 .. meta::
-   :keywords: aimms, forecast, demand, factory, library
-   :description: This example uses the forecasting library! 
+   :description: Demonstrates six forecasting algorithms — exponential smoothing, moving average, and linear regression — applied to cookie factory demand data using the AIMMS Forecasting Library.
+   :keywords: Forecasting Library, exponential smoothing, moving average, linear regression, demand forecasting, WebUI, combination chart, workflow 
 
 .. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Demand_Forecasting-blue
    :target: https://github.com/aimms/demand-forecasting/archive/refs/heads/main.zip

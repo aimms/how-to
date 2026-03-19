@@ -5,8 +5,8 @@ Communicate Data Changes in WebUI
 ====================================
 
 .. meta::
-   :description: How to communicate data changes from the data session to a running solver session in WebUI.
-   :keywords:  webui, data, server
+   :description: Explains how to send data from a WebUI data session to a running solver session using pro::DelegateToServer with the PROMFLAG_PRIORITY flag.
+   :keywords: WebUI, pro::DelegateToServer, PROMFLAG_PRIORITY, solver session, data session, AIMMS Cloud, Flowshop
 
 Introduction
 ------------

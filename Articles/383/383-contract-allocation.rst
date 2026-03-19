@@ -2,8 +2,8 @@ Contract Allocation
 =========================
 
 .. meta::
-   :keywords: Semi-continuous variables, Mixed Integer Programming model, MIP, combinationchart, table, colors, css
-   :description: This AIMMS project illustrates the use of a semi-continuous variable.
+   :description: Minimizes commodity delivery costs by allocating producer contracts using semi-continuous variables with minimum delivery thresholds and DEX-based Excel integration.
+   :keywords: semi-continuous variables, Mixed Integer Programming, MIP, contract allocation, DEX, data exchange, Python-Bridge, WebUI, combination chart
 
 .. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/contract-allocation/releases/latest/download/contract-allocation.zip

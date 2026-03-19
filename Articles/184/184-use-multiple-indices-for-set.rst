@@ -2,8 +2,8 @@ Multiple Indices for a Set
 ==========================
 
 .. meta::
-   :description: multiple indices can be associated with a single set
-   :keywords: set, index, alias
+   :description: Explains how to associate multiple indices with a single set in AIMMS to enable multi-dimensional parameter definitions over the same set.
+   :keywords: set, index, multiple indices, alias, index attribute, dimension, parameter, AIMMS model, index wizard
 
 This article explains how to use different indices to refer to the elements of a set.
 

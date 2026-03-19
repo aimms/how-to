@@ -14,8 +14,8 @@ LocationIQ Integration with AIMMS
 .. image:: https://img.shields.io/badge/AimmsDEX-26.1.7.1-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 .. meta::
-    :keywords: AIMMS, LocationIQ, Geocoding, REST API, DEX library, asynchronous, JSON mapping, HTTP GET, error handling, GPS coordinates
-    :description: Learn to integrate LocationIQ with AIMMS using the DEX library for high-performance, asynchronous geocoding, JSON data mapping, and robust error handling.
+   :keywords: LocationIQ, geocoding, DEX library, dex::client::NewRequest, AimmsJSONMapping, asynchronous HTTP, GPS coordinates, GeoFindCoordinates, forward geocoding, callback
+   :description: Integrates the LocationIQ geocoding REST API with AIMMS using the DEX library to perform asynchronous forward geocoding, map JSON responses to AIMMS identifiers, and handle HTTP error codes.
 
 The legacy AIMMS function `GeoFindCoordinates <https://documentation.aimms.com/functionreference/system-interaction/environment-functions/geofindcoordinates.html>`_ 
 is constrained by its reliance on Nominatim. Nominatim enforces strict rate limits, typically 

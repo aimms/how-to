@@ -6,8 +6,8 @@ Nested Solve
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Nested solve, Network Flow, GMP, cut, callback, CallbackAddCut, MIP, Document Viewer
-   :description: This example illustrates the nested solve that can be done in AIMMS using GMP callback.
+   :keywords: Nested solve, Network Flow, GMP, CallbackAddCut, branch-and-cut, simple dicut inequalities, CPLEX, MIP
+   :description: Demonstrates solving an uncapacitated fixed-charge network flow MIP by adding user-generated dicut cuts inside a CPLEX GMP callback via a nested recursive solve.
 
 Direct download AIMMS Project :download:`Nested Solve.zip <model/Nested Solve.zip>`
 

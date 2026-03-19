@@ -2,8 +2,8 @@ Investigate Memory in Use
 ============================
 
 .. meta::
-   :description: Techniques to investigate memory in use.
-   :keywords: memory, virtual memory, MemoryInUse, identifiers, mathematical programming instance
+   :description: Explains techniques and AIMMS tools for investigating memory usage in applications, including identifier cardinalities, GMP memory functions, and element space optimization.
+   :keywords: MemoryInUse, identifier cardinality, GMP::Instance::GetMemoryUsed, ActiveCard, IdentifierMemory, REBUILD statement, memory optimization, element space
 
 
 Analytic applications may involve a lot of data and subsequently a lot of computer memory. AIMMS hides the technicalities related to memory management from the model developer. These technicalities include, for instance, the allocation and deallocation of memory for individual data items. Still, the memory usage of applications created with AIMMS grows as the amount of data related to these applications grows. At some point during model development, the memory usage of your application becomes interesting. AIMMS offers tools to monitor and investigate the memory usage of your application. We will discuss a couple of the tools available in AIMMS to investigate memory usage. 

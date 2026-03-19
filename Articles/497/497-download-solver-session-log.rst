@@ -1,6 +1,10 @@
 Download Server Session Log
 =============================
 
+.. meta::
+   :description: Explains how to locate, copy, and download the solver session log file from AIMMS PRO On-Premise using session IDs and the WebUI download template.
+   :keywords: solver session log, AIMMS PRO, session ID, WebUI download, DirectoryGetFiles, FileCopy, debugging
+
 This article explains how to obtain the session log file of a solver session ran on an AIMMS PRO On-Premise.
 
 .. note:: 

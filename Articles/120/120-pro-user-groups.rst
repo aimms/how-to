@@ -2,8 +2,8 @@ Create PRO User Groups for Role-Based Access
 =============================================
 
 .. meta::
-    :description: Secure multi-user modeling for AIMMS Apps deployed on AIMMS Cloud using user groups for authorization.
-    :keywords: secure, upload, download, role-based access control, user groups, AIMMS Cloud
+    :description: Demonstrates how to implement role-based access control in AIMMS Cloud apps by creating user groups and restricting data visibility per group membership.
+    :keywords: user groups, role-based access control, AIMMS Cloud, AimmsPROLibrary, GetCurrentUserInfo, AllPublicIdentifiers, CurrentInputs, authorization
 
 In this article, we explore how you can authorize access to information within your AIMMS application by creating and managing **user groups**.
 

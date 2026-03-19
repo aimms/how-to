@@ -6,8 +6,8 @@ Power System Expansion
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Linear Program, Stochastic Program, Two-Stage, Control-State Variables, What-If Analysis, Benders Decomposition
-   :description: This example implements a power system expansion model with uncertain electricity demand, covering a single time period. 
+   :keywords: Power system expansion, stochastic programming, two-stage LP, what-if analysis, Benders decomposition, GMP library, scenario analysis
+   :description: Determines new power plant capacities under uncertain demand by comparing scenario what-if analysis with a two-stage stochastic program generated automatically from a deterministic LP via the GMP library.
 
 Direct download AIMMS Project :download:`Power System Expansion.zip <model/Power System Expansion.zip>`
 

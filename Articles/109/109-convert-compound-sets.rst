@@ -5,8 +5,8 @@ Prepare for the Deprecation of Compound Sets
 ==============================================
 
 .. meta::
-   :description: Procedure for adapting projects to remove compound sets.
-   :keywords: compound, set, convert, adapt, deprecate
+   :description: Describes a step-by-step procedure for converting compound sets to set mappings in AIMMS projects to comply with the deprecation of compound sets.
+   :keywords: compound sets, set mapping, deprecation, DeprecateCompoundSetUtilities, shadow case, atomic index, runtime library, set mapping relation
 
 
 .. _Section_Summary:

@@ -6,8 +6,8 @@ Power System Expansion RO
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Linear Program, Uncertainty, Robust Optimization, Non-adjustable and Adjustable Decisions, Linear Decision Rules
-   :description: This example implements a power system expansion model with uncertain electricity demand, covering a single time period.
+   :keywords: Robust Optimization, uncertainty set, box uncertainty, ellipsoidal uncertainty, linear decision rules, adjustable decisions, GMP library, power system
+   :description: Implements a power system expansion model with uncertain electricity demand using AIMMS Robust Optimization, comparing box, ellipsoidal, and polyhedral uncertainty sets with linear decision rules.
 
 
 Direct download AIMMS Project :download:`Power System Expansion RO.zip <model/Power System Expansion RO.zip>`

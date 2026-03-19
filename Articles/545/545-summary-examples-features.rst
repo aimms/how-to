@@ -2,8 +2,8 @@ Examples vs Features
 =========================
 
 .. meta::
-   :keywords: WebUI, features, Examples, Text Widget, Image Widget, Workflow, Table Widget, Combination Chart Widget, Page Actions, Side Panel, Scalar Widget, List Widget
-   :description: This page has a summary of the examples versus AIMMS features.
+   :description: Provides a cross-reference index mapping AIMMS WebUI widget types and libraries to the example projects that demonstrate each feature.
+   :keywords: WebUI, features, Text Widget, Image Widget, Workflow, Table Widget, Combination Chart Widget, Gantt Chart Widget, Data Exchange Library, Forecasting Library, CSS Annotations
 
 This page has a summary of the examples versus AIMMS features used in them.
 

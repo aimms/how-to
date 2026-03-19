@@ -2,8 +2,8 @@ Get More Log Information
 =========================
 
 .. meta::
-   :description: This article explains how to increase the amount of log information.
-   :keywords: log, troubleshoot
+   :description: Explains how to configure the LoggerConfig.xml file to increase AIMMS logging detail for IDE, AIMMS Cloud, and PRO On-Premise sessions.
+   :keywords: LoggerConfig.xml, logging, log4j, troubleshooting, AIMMS Cloud, PRO On-Premise, log level, appender, Log4View
 
 
 As a modeler, you can find :doc:`detailed logs <../313/313-get-log-files>` to analyze an issue before reporting it to `AIMMS User Support <https://www.aimms.com/support/>`_ or on the `AIMMS Community <https://community.aimms.com/>`_.

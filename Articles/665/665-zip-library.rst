@@ -4,8 +4,8 @@ Zip Library
 .. See also git: https://gitlab.aimms.com/aimms/customer-support/toolkit/zip-library
 
 .. meta::
-   :description: This toolkit library is used to facilitate compressing folders to files and reverting.
-   :keywords: zip, unzip, compress, files, revert
+   :description: Introduces the AIMMS Zip toolkit library with pr_zipFolderToFile and pr_unzipFileToFolder procedures for compressing and extracting folders on Windows and Linux including AIMMS Cloud.
+   :keywords: zip, unzip, compress, archive, pr_zipFolderToFile, pr_unzipFileToFolder, toolkit library, Linux, AIMMS Cloud, file management
 
 .. image:: https://img.shields.io/badge/AIMMS_24.6-ZIP:_Zip_Library-blue
    :target: https://github.com/aimms/zip-library/archive/refs/heads/main.zip

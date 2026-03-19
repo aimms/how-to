@@ -2,8 +2,8 @@
 =================================================
 
 .. meta::
-   :description: How create a reproducible random sequence in distribution functions.
-   :keywords: seed, random, distribution, uniform, binomial, normal
+   :description: Explains how to use the AIMMS seed option to produce reproducible random sequences from distribution functions such as uniform, binomial, and normal.
+   :keywords: seed option, random number, uniform distribution, reproducible, distribution function, debugging, random sequence, stochastic
 
 .. note::
 

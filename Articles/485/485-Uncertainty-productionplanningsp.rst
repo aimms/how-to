@@ -6,8 +6,8 @@ Uncertainty: Production Planning - Stochastic Programming
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: Uncertain data, stochastic programming, scenarios
-   :description: This example is to decide how much of each of the raw materials to purchase and stock for a refinery.
+   :description: Determines optimal raw material purchasing and stocking quantities for a refinery blending LP under uncertain future demand using stochastic programming with scenarios.
+   :keywords: Uncertain data, stochastic programming, scenarios, LP, refinery, blending, inventory, production planning
         
 Direct download AIMMS Project :download:`ProductionPlanningSP.zip <model/ProductionPlanningSP.zip>`
 

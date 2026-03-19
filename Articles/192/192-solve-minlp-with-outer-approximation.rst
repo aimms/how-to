@@ -2,8 +2,8 @@ Solve MINLP Problems with AOA
 ==============================
 
 .. meta::
-   :description: AOA is a good method to solve mixed integer nonlinear mathematical programming problems.
-   :keywords: AOA, nonlinear, mixed integer, mathematical programming, solving
+   :description: Explains how to use the AIMMS Outer Approximation Algorithm to solve mixed integer nonlinear programming problems via the GMP library.
+   :keywords: AOA, MINLP, GMP, outer approximation, GMPOuterApproximation, nonlinear presolver, multi-start, BARON, KNITRO, mixed integer nonlinear
 
 .. index:: AOA, MINLP, GMP
 

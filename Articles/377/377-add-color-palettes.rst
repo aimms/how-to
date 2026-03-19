@@ -1,6 +1,10 @@
 Add Qualitative Color Palettes
 ================================
 
+.. meta::
+   :description: Shows how to convert JSON color palettes to CSS rules for use in AIMMS WebUI applications, enabling qualitative data-dependent coloring of charts.
+   :keywords: color palette, CSS, WebUI, annotations, data visualization, bar chart, JSON, i-want-hue, styling
+
 A practical aspect of data visualization is the choice of colors for the 
 
 * bars in a bar chart, 

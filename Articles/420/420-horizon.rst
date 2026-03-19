@@ -6,8 +6,8 @@ Horizon
    It is not recommended to use this information as a primary source for current projects or documentation. Please refer to the latest documentation for up-to-date information.
 
 .. meta::
-   :keywords: LP model, Horizon, Composite table
-   :description: This AIMMS project illustrates the basic behavior of horizons in AIMMS.
+   :keywords: Horizon, past interval, planning interval, beyond interval, lag operator, lead operator, LP model, Composite table
+   :description: Illustrates how AIMMS horizons are structured into past, planning, and beyond sub-intervals and how lag/lead operators behave across those intervals.
 
 Direct download AIMMS Project :download:`Horizon.zip <model/Horizon.zip>`
 

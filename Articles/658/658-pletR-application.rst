@@ -1,7 +1,11 @@
 The AIMMS application pletR
 ============================
 
-:download:`AIMMS 24.5 project download <model/pletR.zip>` 
+.. meta::
+   :description: Describes the pletR AIMMS application that installs and manages the plet MySQL schema, displays task overviews, follows running tasks in real time, and exposes taskTail and taskLog REST services.
+   :keywords: pletR, plet database, MySQL, task overview, follow service, taskTail, taskLog, REST service, AIMMS 24.5, logging
+
+:download:`AIMMS 24.5 project download <model/pletR.zip>`
 
 The AIMMS 24.5 application pletR administers, reports on, and follows the MySQL database **plet**.
 

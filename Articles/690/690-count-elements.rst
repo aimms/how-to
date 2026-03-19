@@ -3,8 +3,8 @@ Counting Elements in a Set using AIMMS
 ================================================
 
 .. meta::
-    :keywords: AIMMS, set theory, cardinality, sum operator, count operator, Card function, data validation, set elements, mathematical modeling
-    :description: Learn how to count elements in an AIMMS set using the sum, count, and Card operators. Compare efficiency and readability for different modeling scenarios.
+   :keywords: count operator, sum operator, Card function, cardinality, set elements, data validation, conditional filter, AIMMS language, mathematical modeling
+   :description: Compares the sum, count, and Card operators for tallying AIMMS set elements, showing conditional filtering syntax and guidelines for choosing the most readable approach.
 
 In AIMMS, counting elements within a set is a fundamental operation used for data validation, 
 calculating averages, or defining constraints. While there are multiple ways to achieve this, 

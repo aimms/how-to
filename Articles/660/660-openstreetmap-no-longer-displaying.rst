@@ -1,6 +1,10 @@
 Openstreetmap Images Missing from Network Object
 =================================================
 
+.. meta::
+   :description: Explains why the OpenStreetMap background disappears in a WinUI network widget due to fair-use rate limits and describes alternative GIS tile services such as Bing and Mundialis.
+   :keywords: OpenStreetMap, WinUI, network widget, GIS, tile service, Bing Maps, Mundialis, API key, WMS, map background
+
 .. \\chrisk-pc\users\chris\OneDrive - AIMMS B.V\Bugs\From ChrisK-PC\OpenERP\761\DELTA Release v4.0.3 (Model in AIMMS 4.8).
 .. Contains example of existing (working).
 

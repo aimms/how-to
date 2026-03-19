@@ -10,6 +10,10 @@
 Working with Wonderful WebUI Widgets
 =======================================
 
+.. meta::
+   :description: Guides end users through an interactive AIMMS WebUI app featuring a network flow map, a Gantt chart scheduler, and a combination chart assignment problem with optimization.
+   :keywords: WebUI, Map widget, Gantt chart, combination chart, interactive optimization, workflow, item menu, tooltip, assignment problem, network flow
+
 Purpose
 -------
 

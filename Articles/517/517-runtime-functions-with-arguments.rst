@@ -1,6 +1,10 @@
 Runtime Functions with Arguments
 ==================================
 
+.. meta::
+   :description: Shows how to add local arguments to AIMMS runtime library functions by creating a global declaration section and moving it under the function using me::Move.
+   :keywords: runtime library, me::Move, model edit functions, AllIdentifiers, local identifiers, function arguments, APPLY operator, runtime compilation
+
 On the one hand AIMMS functions and procedures use local identifiers to hold the values of the arguments.
 
 On the other hand the model editor functions that form the basis of runtime libraries operate on elements of :aimms:set:`AllIdentifiers`; 

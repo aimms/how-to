@@ -2,8 +2,8 @@ Log CDM
 ===============
 
 .. meta::
-   :description: This article explains how to enable logging when using CDM service.
-   :keywords: CDM, log, client, server
+   :description: Explains how to enable and configure CDM logging for both the client and the server using log configuration files.
+   :keywords: CDM, logging, log4j, CDMLogConfig, CDMService, client logging, server logging, troubleshooting
  
    
 CDM logging can be turned on for both the client and the service.

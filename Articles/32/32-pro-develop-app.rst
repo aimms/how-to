@@ -2,8 +2,8 @@ Develop Multi-Platform Applications
 ====================================
 
 .. meta::
-   :description: Tips for developing flexible AIMMS applications for use on both AIMMS PRO and AIMMS IDE.
-   :keywords: platform, pro
+   :description: Explains how to develop AIMMS applications that work seamlessly on both the AIMMS IDE and AIMMS Cloud using PRO endpoint detection.
+   :keywords: AIMMS PRO, ProjectDeveloperMode, GetPROEndPoint, DelegateToServer, development, deployment, AIMMS Cloud, multi-platform
 
 
 After publishing an app on the AIMMS PRO On-Premise or AIMMS Cloud, it is common to continue development of that application for updates using the AIMMS IDE. 
