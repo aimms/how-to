@@ -2,17 +2,20 @@ Bias in AI
 =============
 
 .. meta::
-   :keywords: python, dex, openapi, docker, bias
-   :description: This examples connects AIMMS to Python. 
+   :description: Demonstrates algorithmic bias in AI by connecting an AIMMS WebUI front-end to a Python machine learning service for text toxicity classification.
+   :keywords: bias in AI, machine learning, Python integration, DEX, logistic regression, scikit-learn, toxicity classification, WebUI, CSS annotations
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-ZIP:_Bias_in_AI-blue
-   :target: https://github.com/aimms/bias-in-ai/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/bias-in-ai/releases/latest/download/bias-in-ai.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.5-Github:_Bias_in_AI-blue
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/bias-in-ai
+   
+.. image:: https://img.shields.io/badge/AIMMS-24.5-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-support-updates-67/bias-in-ai-example-1642
+.. image:: https://img.shields.io/badge/WebUI-24.11.2.3-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+.. image:: https://img.shields.io/badge/DEX-24.4.1.3-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 .. image:: images/project-1920-high.gif
     :align: center
@@ -203,6 +206,9 @@ However, you will need Python 3.11 installed. Pycharm is recommended but not req
 
 Release Notes
 --------------------
+
+`v1.2 <https://github.com/aimms/bias-in-ai/releases/tag/1.2>`_ (19/03/2026)
+    Commenting project. Adding license file. 
 
 `v1.1 <https://github.com/aimms/bias-in-ai/releases/tag/1.1>`_ (03/10/2024)
     Upgrading AIMMS version and WebUI library version.

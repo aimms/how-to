@@ -2,8 +2,8 @@ Traveling Salesman
 ======================
 
 .. meta::
-   :description: This example illustrates some of AIMMS control flow statements by means of the traveling salesman 2-opt heuristic.
-   :keywords: Algorithm, 2-opt heuristic, traveling salesman problem, GMP, Lazy constraint callback, subtour elimination constraints.
+   :description: Demonstrates heuristic and MIP solutions for the Traveling Salesman Problem using 2-opt optimization, lazy constraint callbacks, and DEX REST API integration.
+   :keywords: traveling salesman problem, 2-opt heuristic, GMP, lazy constraint callback, subtour elimination, REST API, DEX, Haversine, ScheduleAt, WebUI
 
 .. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/traveling-salesman/releases/latest/download/traveling-salesman.zip
