@@ -385,6 +385,9 @@ To deploy the application on AIMMS Cloud, a commercial license is needed.
 Release Notes
 --------------------
 
+`v1.6 <https://github.com/aimms/vessel-scheduling/releases/download/1.6/vessel-scheduling.zip>`_ (24/03/2026)
+   CICD with rst_id in variables.. Adding new CI/CD.. Commenting project.. Revise README for clarity and additional details.
+
 `v1.5 <https://github.com/aimms/vessel-scheduling/releases/download/1.5/vessel-scheduling.zip>`_ (06/02/2026)
     Adding support for horizontal scroll within Map Widget, read more in :doc:`../503/503-sailing`. 
 
