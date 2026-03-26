@@ -7,7 +7,7 @@ Implementing Continued Solves
 .. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/685-continued-solve
 
-.. image:: https://img.shields.io/badge/AIMMS-25.5-white?style=for-the-badge&labelColor=009B00&color=00D400
+.. image:: https://img.shields.io/badge/AIMMS-25.9-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 .. meta::
    :keywords: GMP, continued solve, MIP, ResourceInterrupt, GMP::Instance::Generate, GMP::Instance::SetOptionValue, GMP::Solution::GetSolverStatus, CPLEX, Gurobi, optimality gap
