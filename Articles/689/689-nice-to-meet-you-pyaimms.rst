@@ -1,6 +1,12 @@
 Nice to Meet You ``pyaimms`` from Python-Bridge
 ================================================
 
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/689-nice-to-meet-you-pyaimms/releases/latest/download/689-nice-to-meet-you-pyaimms.zip
+
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/689-nice-to-meet-you-pyaimms
+
 .. image:: https://img.shields.io/badge/AIMMS-26.1-white?style=for-the-badge&labelColor=009B00&color=00D400
 .. image:: https://img.shields.io/badge/WebUI-26.4.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400
 .. image:: https://img.shields.io/badge/pyaimms-26.1.2.1-white?style=for-the-badge&labelColor=009B00&color=00D400
