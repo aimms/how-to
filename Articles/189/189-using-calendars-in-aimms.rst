@@ -1,36 +1,37 @@
-Overview: Calendars in AIMMS
-============================
+Using Calendars in AIMMS
+========================
 
 .. meta::
     :description: Explains how to declare and use calendars in AIMMS for time-based modeling, including database mapping, current time functions, and subset construction.
     :keywords: Calendar, timeslot, SI_Time_Duration, CurrentToTimeSlot, CurrentToString, TimeslotCharacteristic, time-based modeling, database mapping, date format
 
-The word "programming" in Mathematical Programming is about creating a plan, typically a plan to be executed over some period in real-time. 
-This makes reference to real-time an essential ingredient for most decision support applications. 
-Calendars are used in AIMMS to reference to real-time. In this how-to article we will discuss:
+The word "programming" in Mathematical Programming refers to creating a plan — typically one executed over a real-time period.
+This makes real-time references an essential ingredient of most decision support applications.
+Calendars are the AIMMS mechanism for working with real time. This article covers:
 
 #.  How calendars are constructed flexibly
 
-#.  How calendars relate to the date/time fields in database tables
+#.  How calendars relate to date/time fields in database tables
 
-#.  How current time is mapped to elements in a calendar
+#.  How the current time is mapped to elements in a calendar
 
-#.  How information about calendars can be used to construct meaningful subsets such as the Sundays.
+#.  How calendar information can be used to construct meaningful subsets, such as all weekend days
 
-Construction of calendars
--------------------------
+Construction of Calendars
+--------------------------
 
-A calendar is an AIMMS set, a finite collection of elements. 
-The calendar elements, called timeslots, are descriptions of periods of equal length. 
-To describe such a calendar, the length of each timeslot, the begin, and end of the calendar need to be known. 
-The length is based on the unit of measurement available in the quantity ``SI_Time_Duration``. 
-Finally, the presentation of timeslots to users should follow the conventions of those users.
-As a running example, let's use:
+A calendar is an AIMMS set — a finite collection of elements.
+The elements of a calendar are called **timeslots**, and each timeslot represents a period of equal length.
+To define a calendar, you need to specify the timeslot length, the begin date, and the end date.
+The length is expressed using a unit from the quantity ``SI_Time_Duration``.
+The format used to present timeslots to users should follow their conventions.
+
+As a running example:
 
 .. code-block:: aimms
     :linenos:
 
-    DeclarationSection Calendar_Declaration {
+    Section Calendars {
         Quantity SI_Time_Duration {
             BaseUnit: s;
             Conversions: {
@@ -43,137 +44,138 @@ As a running example, let's use:
             }
             Comment: "Expresses the value for the duration of periods.";
         }
-        Parameter p_YearNumber {
-            InitialData: 2016;
+        Parameter p_def_yearNumber {
+            InitialData: 2026;
         }
-        StringParameter sp_CalBeg {
-            Definition: FormatString("%i-01-01", p_YearNumber);
+        StringParameter sp_calBeginDate {
+            Definition: FormatString("%i-01-01", p_def_yearNumber);
         }
-        StringParameter sp_CalEnd {
-            Definition: FormatString("%i-12-31", p_YearNumber);
-        }
-        StringParameter sp_TimeslotFormat {
-            InitialData: "%Am|AllAbbrMonths| %d, %c%y";
+        StringParameter sp_calEndDate {
+            Definition: FormatString("%i-12-31", p_def_yearNumber);
         }
         Calendar cal_daysInYear {
             Index: i_day;
             Parameter: ep_day;
             Unit: day;
-            BeginDate: sp_CalBeg;
-            EndDate: sp_CalEnd;
-            TimeslotFormat: sp_TimeslotFormat;
+            BeginDate: sp_calBeginDate;
+            EndDate: sp_calEndDate;
+            TimeslotFormat: "%c%y-%sm-%sd";
+        }
+        DeclarationSection Auxiliar_Sets {
+            Set s_weekendDays {
+                SubsetOf: cal_daysInYear;
+                Definition: {
+                    { i_day |
+                        TimeslotCharacteristic( i_day, 'weekday' ) = 6 or
+                        TimeslotCharacteristic( i_day, 'weekday' ) = 7 }
+                }
+            }
         }
     }
 
-Some remarks on the above:
+Some remarks on the declaration above:
 
-#.  Lines 2-13. To define the length of a timeslot, we need to use the quantity ``SI_Time_Duration``. 
-    In our example, we only use the conversion for ``day``.
+#.  Lines 2–13: The quantity ``SI_Time_Duration`` is required to define the timeslot length. In this example, only the ``day`` conversion is used.
 
-#.  Lines 14-16. This example shows all days in a particular year, so the year number is the actual input.
+#.  Lines 14–16: The example covers all days in a given year, so ``p_def_yearNumber`` is the only input needed.
 
-#.  Lines 17-19. The calendar begin date is captured by the string parameter ``sp_CalBeg``. 
-    It captures the first day of the year specified by the year number ``p_YearNumber``, so it is easily defined using :any:`FormatString`.
+#.  Lines 17–19: ``sp_calBeginDate`` defines the first day of the specified year using :any:`FormatString`.
 
-#.  Lines 20-22. The calendar end date is defined similarly via the string parameter ``sp_CalEnd``.
+#.  Lines 20–22: ``sp_calEndDate`` defines the last day of the year in the same way.
 
-#.  Lines 23-25. The timeslot format specifies how timeslots are formatted. 
-    A possible value for this format we use the standard AIMMS format for days; so a timeslot is formatted as ``2019-01-01``.
-    Clearly, this may not be the presentation of timeslots your users may be used to. 
-    Here we use "%Am|AllAbbrMonths| %d, %c%y", the format custom to people in the USA.
-    You can choose the format freely, as long as all timeslots are unique.
+#.  Lines 23–30: The calendar itself, using the ISO date format ``"%c%y-%sm-%sd"`` (e.g. ``2026-01-15``). You can choose any format, as long as all timeslots remain unique.
 
-#.  Lines 26-33 The calendar itself. Almost fully parametrized, using the definitions explained above, but still a daily calendar. 
-    The only part not parametrized is that it is by day, and not by some number of days, or by some unit of measurement. 
-    However, to change the granularity of a decision support application, changing it from day to month, or to hours, is quite rare.
+#.  Lines 31–39: The subset ``s_weekendDays`` is declared inside a ``DeclarationSection`` within the same section, grouping auxiliary sets alongside the calendar.
 
-:doc:`advanced-language-components/time-based-modeling/calendars` page provides further details on declaring Calendars.
+For further details on declaring calendars, see :doc:`advanced-language-components/time-based-modeling/calendars`.
 
-Relating calendars in AIMMS to date/time columns in databases
--------------------------------------------------------------
+Relating Calendars to Date/Time Columns in Databases
+------------------------------------------------------
 
-A key feature of Calendars in AIMMS is the natural mapping to date/time columns in a database.
-Consider the following simple database table:
+A key feature of calendars in AIMMS is the natural mapping to date/time columns in a database.
+In this example, the data source is a SQLite database. Consider the following table:
 
-.. image:: images/AccessDatabaseTable.png
+.. image:: images/SQLiteDatabaseTable.png
     :align: center
 
-with design view:
+|
 
-.. image:: images/AccessDatabaseDesignView.png
+with its design view:
+
+.. image:: images/SQLiteDatabaseDesignView.png
     :align: center
 
-Using the AIMMS mapping wizard, we can map the columns in the database table to the identifiers in AIMMS:
+|
+
+Using the AIMMS mapping wizard, the database columns can be mapped to AIMMS identifiers:
 
 .. image:: images/databaseWizard.png
     :align: center
 
-Reading the data and then displaying it in the WebUI results in:
+|
+
+Reading the data and displaying it in the WebUI produces:
 
 .. image:: images/deliveryDataWebUI.png
     :align: center
 
-As you can see, without any programming on dates, the format of the dates in the WebUI presentation changed.
-This is achieved because the calendar timeslots are mapped onto date/time fields in the database.
+|
 
-Using current time
+Without any manual date formatting code, the date format in the WebUI changes automatically.
+This happens because calendar timeslots are mapped directly onto date/time fields in the database.
+
+Using Current Time
 ------------------
 
 AIMMS provides two functions to obtain the current time: :any:`CurrentToString` and :any:`CurrentToTimeSlot`.
-The difference is that the one is resulting in a string, the other a timeslot. Both are useful for our running example.
+:any:`CurrentToString` returns a string, while :any:`CurrentToTimeSlot` returns a timeslot element. Both are useful in this context.
 
-Initializing the current year
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+Initializing the Current Year
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The function :any:`CurrentToString` returns the current date/time formatted according its argument. 
-So the current year can be initialized by the following statement:
+:any:`CurrentToString` returns the current date/time formatted according to its argument.
+The current year can be initialized with the following statement, placed in ``MainInitialization``:
 
 .. code-block:: aimms
 
-    p_YearNumber := val( CurrentToString("%c%y") );
+    p_def_yearNumber := val( CurrentToString("%c%y") );
 
-in the procedure ``MainInitialization``.
+Further information about :any:`CurrentToString` can be found in the AIMMS Function Reference.
 
-Further information about the function :any:`CurrentToString` can be found in AIMMS The Function Reference.
+Obtaining the Current Day as a Calendar Element
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Obtaining the current day as element in Calendar
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The function :any:`CurrentToTimeSlot` returns the timeslot in which we are "now" as illustrated in the next statement:
+:any:`CurrentToTimeSlot` returns the timeslot corresponding to the current moment. In ``MainExecution``:
 
 .. code-block:: aimms
 
     ep_day := CurrentToTimeSlot(Calendar : cal_daysInYear );
 
-Further information about the function :any:`CurrentToTimeSlot` can be found in AIMMS The Function Reference.
+Further information about :any:`CurrentToTimeSlot` can be found in the AIMMS Function Reference.
 
-Creating subsets of a calendar based on characteristics of the timeslot
-------------------------------------------------------------------------
+Creating Subsets Based on Timeslot Characteristics
+---------------------------------------------------
 
-To continue our running example, we want to construct a subset of all weekend days, say ``s_WeekendDays``, of calendar ``cal_daysInYear``.
-AIMMS views Saturday as day number 6 and Sunday as day number 7 in a week. Thus we can construct the set ``s_WeekendDays`` as follows:
+The subset ``s_weekendDays`` is a subset of ``cal_daysInYear`` containing all weekend days.
+In AIMMS, Saturday is day 6 and Sunday is day 7 of the week. The subset is defined as follows:
 
 .. code-block:: aimms
 
-    Set s_WeekendDays {
+    Set s_weekendDays {
         SubsetOf: cal_daysInYear;
         Definition: {
             { i_day |
-                TimeslotCharacteristic( i_day, 'weekday' ) = 6 or  
+                TimeslotCharacteristic( i_day, 'weekday' ) = 6 or
                 TimeslotCharacteristic( i_day, 'weekday' ) = 7 }
         }
     }
 
-Further information about the function :any:`TimeSlotCharacteristic` can be found in AIMMS The Function Reference.
+Further information about :any:`TimeSlotCharacteristic` can be found in the AIMMS Function Reference.
 
-The running example is contained in: :download:`AIMMS project download <model/CalendarDemo.zip>` 
+The running example is available for download: :download:`AIMMS project download <model/CalendarDemo.zip>`
 
+.. seealso::
 
-
-
-
-
-
-
-
-
+    * :doc:`../401/401-calendar` — Example project demonstrating calendar declarations, timeslot formats, and date picker dialogs in AIMMS.
+    * :doc:`../410/410-date-aggregation` — How to switch dynamically between day, week, and month aggregations using ``CreateTimeTable`` and ``TimeslotCharacteristic``.
+    * :doc:`../408/408-database-interface-generation` — Using Model Edit functions to automatically generate database table links and identifier mappings from existing database schemas.
