@@ -75,19 +75,17 @@ As a running example:
 
 Some remarks on the declaration above:
 
-#.  Lines 2–13: The quantity ``SI_Time_Duration`` is required to define the timeslot length. In this example, only the ``day`` conversion is used.
+#.  Lines 2–11: The quantity ``SI_Time_Duration`` is required to define the timeslot length. In this example, only the ``day`` conversion is used.
 
-#.  Lines 14–16: The example covers all days in a given year, so ``p_def_yearNumber`` is the only input needed.
+#.  Lines 13–15: The example covers all days in a given year, so ``p_def_yearNumber`` is the only input needed.
 
-#.  Lines 17–19: ``sp_calBeginDate`` defines the first day of the specified year using :any:`FormatString`.
+#.  Lines 16–18: ``sp_calBeginDate`` defines the first day of the specified year using :any:`FormatString`.
 
-#.  Lines 20–22: ``sp_calEndDate`` defines the last day of the year in the same way.
+#.  Lines 19–21: ``sp_calEndDate`` defines the last day of the year in the same way.
 
 #.  Lines 23–30: The calendar itself, using the ISO date format ``"%c%y-%sm-%sd"`` (e.g. ``2026-01-15``). You can choose any format, as long as all timeslots remain unique.
 
 #.  Lines 31–39: The subset ``s_weekendDays`` is declared inside a ``DeclarationSection`` within the same section, grouping auxiliary sets alongside the calendar.
-
-For further details on declaring calendars, see :doc:`advanced-language-components/time-based-modeling/calendars`.
 
 Relating Calendars to Date/Time Columns in Databases
 ------------------------------------------------------
@@ -120,9 +118,6 @@ Reading the data and displaying it in the WebUI produces:
     :align: center
 
 |
-
-Without any manual date formatting code, the date format in the WebUI changes automatically.
-This happens because calendar timeslots are mapped directly onto date/time fields in the database.
 
 Using Current Time
 ------------------
@@ -170,12 +165,8 @@ In AIMMS, Saturday is day 6 and Sunday is day 7 of the week. The subset is defin
         }
     }
 
-Further information about :any:`TimeSlotCharacteristic` can be found in the AIMMS Function Reference.
-
-The running example is available for download: :download:`AIMMS project download <model/CalendarDemo.zip>`
-
 .. seealso::
 
-    * :doc:`../401/401-calendar` — Example project demonstrating calendar declarations, timeslot formats, and date picker dialogs in AIMMS.
-    * :doc:`../410/410-date-aggregation` — How to switch dynamically between day, week, and month aggregations using ``CreateTimeTable`` and ``TimeslotCharacteristic``.
-    * :doc:`../408/408-database-interface-generation` — Using Model Edit functions to automatically generate database table links and identifier mappings from existing database schemas.
+    * :doc:`advanced-language-components/time-based-modeling/calendars`
+    * :any:`TimeSlotCharacteristic`
+    * :any:`CurrentToTimeSlot`
