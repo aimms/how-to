@@ -1,6 +1,0 @@
-[ODBC]
-DRIVER=Microsoft Access Driver (*.mdb, *.accdb)
-DBQ=.\data\CalendarDemo.accdb
-DriverId=25
-FIL=MS Access
-SafeTransactions=0
