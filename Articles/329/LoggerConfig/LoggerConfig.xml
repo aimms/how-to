@@ -68,7 +68,19 @@
     <logger name="AIMMS.Trace.Procedure">
         <!--- Tracing entering and leaving AIMMS Procedures.
               * Info: procedure calls outside a loop are logged.
-              * Trace: all procedure calls are logged.
+              * Debug, Trace: all procedure calls are logged.
+              
+              The logger AIMMS.Trace.Procedure traces procedure calls by logging "Starting Procedure ..." each time a procedure is invoked.
+              When the log level is set to INFO, this works fine for top-level procedure calls. 
+              But inside a FOR or WHILE loop, that same message could be emitted thousands of times — once per iteration — flooding the log with repetitive noise.
+              
+              So AIMMS applies a simple rule: at INFO level, procedure tracing is suppressed inside loops. 
+              When execution enters the outermost loop, it logs the one-time message 
+              "Continuing execution within a loop; turning procedure tracing off" to let you know tracing is being suppressed. 
+              Procedure calls inside the loop are then silently skipped in the log.
+              
+              If you set the level to DEBUG, procedure tracing is never suppressed — you get "Starting Procedure ..." 
+              on every call regardless of whether it's inside a loop. The one-time message also doesn't appear at DEBUG level, since there's nothing to suppress.
         -->
         <level value="info"/>
     </logger>
