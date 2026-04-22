@@ -1,6 +1,15 @@
 Using Calendars in AIMMS
 ========================
 
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/189-using-calendars-in-aimms/releases/latest/download/189-using-calendars-in-aimms.zip
+
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/189-using-calendars-in-aimms
+
+.. image:: https://img.shields.io/badge/AIMMS-26.1-white?style=for-the-badge&labelColor=009B00&color=00D400
+.. image:: https://img.shields.io/badge/WebUI-26.4.2.17-white?style=for-the-badge&labelColor=009B00&color=00D400
+
 .. meta::
     :description: Explains how to declare and use calendars in AIMMS for time-based modeling, including database mapping, current time functions, and subset construction.
     :keywords: Calendar, timeslot, SI_Time_Duration, CurrentToTimeSlot, CurrentToString, TimeslotCharacteristic, time-based modeling, database mapping, date format
