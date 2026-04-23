@@ -1,9 +1,12 @@
+:orphan:
+
 Creating and Connecting Python Service to AIMMS
 =====================================================
 
 .. meta::
    :description: Explains how to build a FastAPI/Uvicorn Python service, generate an OpenAPI AIMMS client library from it, and deploy the combo on AIMMS Cloud using pro::service::LaunchService.
    :keywords: FastAPI, Uvicorn, Pydantic, OpenAPI, Python service, AIMMS Cloud, pro::service::LaunchService, dex::schema::GenerateClientFromOpenAPISpec, machine learning, REST API
+   :robots: noindex, nofollow
 
 In today's data-driven world, integrating robust machine learning capabilities into optimization applications is becoming increasingly important.
 This article explores the seamless fusion of AIMMS with a Python service using FastAPI, Pydantic, and Uvicorn. 
@@ -256,7 +259,7 @@ passing the data to the OpenAPI and initiating the request, action 2, implemente
 
 Remarks:
 
-* In the code fragment above, lines 11 to 23 pass the data from the client to the OpenAPI library. This corresponds to action 1 in :numref:`figure-599-01`.
+* In the code fragment above, lines 11 to 23 pass the data from the client to the OpenAPI library. This corresponds to action 1 in :ref:`figure-599-01`.
 
 * On line 40, the call to the OpenAPI library is made to convert its data structures (action 2 in the image above) to the data structure format of the service, and to do make the Rest API call to the service.
 
@@ -316,7 +319,7 @@ for a successful call, verified by HTTP status code 200, is on line 13.
 Subsequently, lines 14, 15 are used for the communication to the end-user.
 The remainder of this procedure is to notify, handle errors, and track when needed.
 
-Regarding to :numref:`figure-599-01` : action 3 is taken care of by the ``callback`` procedure 
+Regarding to :ref:`figure-599-01` : action 3 is taken care of by the ``callback`` procedure 
 declared next to the ``apiCall`` procedure called at the end of ``pr_callBiasInAITuples``.
 Action 4, corresponds to the procedure ``pr_responseHookTuples`` just discussed.
 
