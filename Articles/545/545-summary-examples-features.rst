@@ -16,7 +16,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../563/563-functional-geolocation-abstractapi`
     * :doc:`../434/434-reindeer-pairing`
     * :doc:`../397/397-traveling-salesman`
-    * :doc:`../623/623-bias-in-ai`
+..    * :doc:`../623/623-bias-in-ai`
     * :doc:`../590/590-vessel-scheduling`
 
 .. dropdown:: Image Widget
@@ -28,7 +28,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../563/563-functional-geolocation-abstractapi`
     * :doc:`../434/434-reindeer-pairing`
     * :doc:`../397/397-traveling-salesman`
-    * :doc:`../623/623-bias-in-ai`
+..    * :doc:`../623/623-bias-in-ai`
     * :doc:`../590/590-vessel-scheduling`
 
 .. dropdown:: Workflow
@@ -40,7 +40,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../563/563-functional-geolocation-abstractapi`
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../434/434-reindeer-pairing`
-    * :doc:`../623/623-bias-in-ai`
+..     * :doc:`../623/623-bias-in-ai`
     * :doc:`../590/590-vessel-scheduling`
 
 .. dropdown:: Table Widget
@@ -50,7 +50,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../434/434-reindeer-pairing`
-    * :doc:`../623/623-bias-in-ai`
+..    * :doc:`../623/623-bias-in-ai`
     * :doc:`../590/590-vessel-scheduling`
 
 .. dropdown:: Combination Chart Widget
@@ -70,7 +70,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../563/563-functional-geolocation-abstractapi`
-    * :doc:`../623/623-bias-in-ai`
+..    * :doc:`../623/623-bias-in-ai`
     * :doc:`../590/590-vessel-scheduling`
 
 .. dropdown:: Side Panel
@@ -81,9 +81,9 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../590/590-vessel-scheduling`
 
-.. dropdown:: Treemap Widget
-
-    * :doc:`../623/623-bias-in-ai`
+.. .. dropdown:: Treemap Widget
+.. 
+..     * :doc:`../623/623-bias-in-ai`
 
 .. dropdown:: List Widget
     
@@ -108,7 +108,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../563/563-functional-geolocation-abstractapi`
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../434/434-reindeer-pairing`
-    * :doc:`../623/623-bias-in-ai`
+..    * :doc:`../623/623-bias-in-ai`
     * :doc:`../590/590-vessel-scheduling`
 
 .. dropdown:: Multiselect Widget
@@ -126,7 +126,7 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../550/550-demand-forecasting`
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../434/434-reindeer-pairing`
-    * :doc:`../623/623-bias-in-ai`
+..    * :doc:`../623/623-bias-in-ai`
     * :doc:`../590/590-vessel-scheduling`
 
 .. dropdown:: Dialog Page
@@ -171,7 +171,7 @@ This page has a summary of the examples versus AIMMS features used in them.
 
 .. dropdown:: Data Exchange (DEX) Library
     
-    * :doc:`../623/623-bias-in-ai`    
+..    * :doc:`../623/623-bias-in-ai`    
     * :doc:`../383/383-contract-allocation`
     * :doc:`../397/397-traveling-salesman`
     * :doc:`../590/590-vessel-scheduling`
@@ -222,14 +222,14 @@ This page has a summary of the examples versus AIMMS features used in them.
     * :doc:`../434/434-reindeer-pairing`
     * :doc:`../397/397-traveling-salesman`
 
-.. dropdown:: Python Connection
-    
-    * :doc:`../623/623-bias-in-ai`
+.. .. dropdown:: Python Connection
+..     
+..     * :doc:`../623/623-bias-in-ai`
 
 .. dropdown:: CSS Annotations
     
     * :doc:`../387/387-employee-scheduling`
-    * :doc:`../623/623-bias-in-ai` 
+..    * :doc:`../623/623-bias-in-ai` 
     * :doc:`../390/390-knapsack-problem`
     * :doc:`../383/383-contract-allocation`
     * :doc:`../397/397-traveling-salesman`

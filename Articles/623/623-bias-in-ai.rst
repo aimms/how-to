@@ -1,9 +1,12 @@
+:orphan:
+
 Bias in AI
 =============
 
 .. meta::
    :keywords: Python, bias, machine learning, scikit-learn, logistic regression, WebUI, DEX, toxicity classification, CSS annotations, Docker
    :description: Demonstrates connecting an AIMMS WebUI front-end to a Python scikit-learn logistic regression service to detect algorithmic bias in text toxicity classification.
+   :robots: noindex, nofollow
 
 .. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/bias-in-ai/releases/latest/download/bias-in-ai.zip
