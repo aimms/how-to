@@ -11,13 +11,13 @@ Vessel Scheduling
 .. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/vessel-scheduling
 
-.. image:: https://img.shields.io/badge/AIMMS-25.9-white?style=for-the-badge&labelColor=009B00&color=00D400
+.. image:: https://img.shields.io/badge/AIMMS-26.1-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-.. image:: https://img.shields.io/badge/WebUI-25.9.3.4-white?style=for-the-badge&labelColor=009B00&color=00D400   
+.. image:: https://img.shields.io/badge/WebUI-26.5.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400   
 
-.. image:: https://img.shields.io/badge/DEX-26.1.6.1-white?style=for-the-badge&labelColor=009B00&color=00D400   
 
-.. image:: https://img.shields.io/badge/pyaimms-25.3.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400   
+.. image:: https://img.shields.io/badge/pyaimms-26.1.3.1-white?style=for-the-badge&labelColor=009B00&color=00D400   
+.. image:: https://img.shields.io/badge/AimmsDEX-26.1.9.1-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 .. image:: images/project-1920-high.gif
    :align: center
