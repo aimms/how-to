@@ -12,10 +12,7 @@ Vessel Scheduling
    :target: https://github.com/aimms/vessel-scheduling
 
 .. image:: https://img.shields.io/badge/AIMMS-26.1-white?style=for-the-badge&labelColor=009B00&color=00D400
-
 .. image:: https://img.shields.io/badge/WebUI-26.5.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400   
-
-
 .. image:: https://img.shields.io/badge/pyaimms-26.1.3.1-white?style=for-the-badge&labelColor=009B00&color=00D400   
 .. image:: https://img.shields.io/badge/AimmsDEX-26.1.9.1-white?style=for-the-badge&labelColor=009B00&color=00D400
 
@@ -384,6 +381,9 @@ To deploy the application on AIMMS Cloud, a commercial license is needed.
 
 Release Notes
 --------------------
+
+`v1.7 <https://github.com/aimms/vessel-scheduling/releases/download/1.7/vessel-scheduling.zip>`_ (06/05/2026)
+    Updated for AIMMS 26.1 and updated all library versions. Functional in the AIMMS Cloud.
 
 `v1.6 <https://github.com/aimms/vessel-scheduling/releases/download/1.6/vessel-scheduling.zip>`_ (24/03/2026)
     Commenting project. Revise README for clarity and additional detail.
