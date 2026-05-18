@@ -14,6 +14,7 @@ Core
    /Articles/338/338-viewing-schedules-different-scenarios
    /Articles/568/568-disable-standard-webui-functions
    /Articles/578/578-uponchange-with-arguments
+   /Articles/708/708-decimal-thousand-separator
    
 
 .. Note:: CSS files to customize your WebUI projects are provided as-is and are not covered by our SLA policies. If you have any questions regarding this, we encourage you to post on the `AIMMS Community <https://community.aimms.com/>`_. 
