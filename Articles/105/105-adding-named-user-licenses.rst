@@ -31,7 +31,13 @@ An administrator can add new users by following the steps below.
 
 |
 
-The username should match the user's Windows or Linux username.
+Add the user in the format ``DOMAIN\Username`` (example: ``aimms\mickey``). The username should match the user's Windows or Linux username. To find the required values,
+open CMD and run:
+
+.. code-block:: bat
+
+    echo %USERDOMAIN%
+    echo %USERNAME%
 
 4. Go to :menuselection:`Maintenance > Maintenance mode` to exit :menuselection:`Maintenance mode`.
     
