@@ -6,6 +6,11 @@ stages:
   tags:
     - docker20
   image: "${DOCKER_ACCESS_URL}/other/dockerdev/documentation:latest"
+  before_script:
+    # The runner checks out the repo as a different user than the image runs as,
+    # so Git refuses to trust it ("detected dubious ownership"). This makes Sphinx
+    # unable to read per-page "last updated" dates. Trust the checkout directory.
+    - git config --global --add safe.directory "$CI_PROJECT_DIR"
 
 linkcheck:
   <<: *run_on_dockerhost
