@@ -18,7 +18,7 @@ EV Charging Location
 .. image:: https://img.shields.io/badge/DEX-24.5.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400
  
 
-.. figure:: images/project-1920-high.gif
+.. figure:: images/project-960-high.gif
    :align: center
 
 Story

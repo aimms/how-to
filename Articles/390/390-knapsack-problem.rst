@@ -16,7 +16,7 @@ Knapsack Problem
 
 .. image:: https://img.shields.io/badge/AXLL-25.1.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400
  
-.. image:: images/project-1920-high.gif
+.. image:: images/project-960-high.gif
     :align: center
 
 |
