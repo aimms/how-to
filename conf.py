@@ -290,7 +290,10 @@ else:
 html_baseurl = 'https://how-to.aimms.com/'
 
 # adding path to non-rst files that go to the build
-html_extra_path = ['robots.txt']
+# ContentIndex.html is a redirect stub for the old homepage filename, kept so
+# external links and search results pointing at /ContentIndex.html keep working
+# after ContentIndex.rst was renamed to index.rst. See the comment in that file.
+html_extra_path = ['robots.txt', 'ContentIndex.html']
 
 highlight_language = 'aimms'
 numfig = True
