@@ -80,7 +80,7 @@ spelling_filters = ['enchant.tokenize.URLFilter','sphinx_aimms_theme.AIMMSspelli
 source_suffix = '.rst'
 
 # The master toctree document.
-master_doc = 'ContentIndex'
+master_doc = 'index'
 
 title = 'AIMMS How-To'
 
