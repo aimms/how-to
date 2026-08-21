@@ -16,7 +16,7 @@ Vessel Scheduling
 .. image:: https://img.shields.io/badge/pyaimms-26.1.3.1-white?style=for-the-badge&labelColor=009B00&color=00D400   
 .. image:: https://img.shields.io/badge/AimmsDEX-26.1.9.1-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-.. image:: images/project-1920-high.gif
+.. image:: images/project-960-high.gif
    :align: center
 
 |
