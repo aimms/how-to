@@ -1,5 +1,6 @@
 stages:
   - test
+  - build
   - deploy
 
 .run_on_dockerhost: &run_on_dockerhost
@@ -12,18 +13,30 @@ stages:
     # unable to read per-page "last updated" dates. Trust the checkout directory.
     - git config --global --add safe.directory "$CI_PROJECT_DIR"
 
+# Two linkcheck runs, the same pair every AIMMS docs repo has: the gating one
+# checks only links internal to this project, the informational one also checks
+# external links and is allowed to fail. Splitting them is what keeps a rotted
+# or bot-blocked third-party URL from turning the pipeline red.
 linkcheck:
   <<: *run_on_dockerhost
   stage: test
+  variables:
+    SPHINX_IGNORE_EXTERNAL_LINKS: "true"
   script:
-    - python3 -msphinx -W --keep-going -b linkcheck . _build/linkcheck
+    - sphinx-build -W --keep-going -b linkcheck . _build/linkcheck
+
+linkcheck_external:
+  <<: *run_on_dockerhost
+  stage: test
+  script:
+    - sphinx-build -W --keep-going -b linkcheck . _build/linkcheck
   allow_failure: true
 
 spellcheck:
   <<: *run_on_dockerhost
   stage: test
   script:
-    - python3 -msphinx -W --keep-going -b spelling . _build/spelling
+    - sphinx-build -W --keep-going -b spelling . _build/spelling
 
 build:
   <<: *run_on_dockerhost
@@ -33,9 +46,9 @@ build:
 
 # Every branch gets its own parallel Pages deployment at:
 #   <CI_PAGES_URL>/<branch-slug>/
-build_and_staging:
+build_staging:
   <<: *run_on_dockerhost
-  stage: deploy
+  stage: build
   rules:
     - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != "master"
       when: on_success
@@ -52,7 +65,7 @@ build_and_staging:
     name: docs-staging/$CI_COMMIT_REF_SLUG
     url: $CI_PAGES_URL
   script:
-    - sphinx-build -M html . _build
+    - sphinx-build -b html . _build/html
     # Pages publishes the "public" directory at the repository root
     - rm -rf public
     - mv _build/html public
@@ -61,7 +74,7 @@ build_and_staging:
     paths:
       - public
 
-build_and_deploy:
+deploy:
   <<: *run_on_dockerhost
   stage: deploy
   rules:
