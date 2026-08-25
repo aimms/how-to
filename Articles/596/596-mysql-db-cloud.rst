@@ -81,7 +81,7 @@ We have further enhanced DB Tunnel app such that it can report errors when it ca
 
 |
 
-We recommend using an application like `MySQL Workbench <www.mysql.com/products/workbench>`_ to interact with the database once your connection is established. 
+We recommend using an application like `MySQL Workbench <https://www.mysql.com/products/workbench>`_ to interact with the database once your connection is established. 
 You can add a new connection there, filling out the highlighted details (port should be equal to what you have set in your DB Tunnel app):
 
 .. image:: images/workbench.png
