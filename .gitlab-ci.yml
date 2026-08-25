@@ -1,7 +1,7 @@
 stages:
-  - test
-  - build
-  - deploy
+  - doc_test
+  - doc_build
+  - doc_deploy
 
 .run_on_dockerhost: &run_on_dockerhost
   tags:
@@ -19,7 +19,7 @@ stages:
 # or bot-blocked third-party URL from turning the pipeline red.
 linkcheck:
   <<: *run_on_dockerhost
-  stage: test
+  stage: doc_test
   variables:
     SPHINX_IGNORE_EXTERNAL_LINKS: "true"
   script:
@@ -27,20 +27,20 @@ linkcheck:
 
 linkcheck_external:
   <<: *run_on_dockerhost
-  stage: test
+  stage: doc_test
   script:
     - sphinx-build -W --keep-going -b linkcheck . _build/linkcheck
   allow_failure: true
 
 spellcheck:
   <<: *run_on_dockerhost
-  stage: test
+  stage: doc_test
   script:
     - sphinx-build -W --keep-going -b spelling . _build/spelling
 
 build:
   <<: *run_on_dockerhost
-  stage: test
+  stage: doc_test
   script:
     - sphinx-build -W --keep-going -b html . _build/html
 
@@ -48,7 +48,7 @@ build:
 #   <CI_PAGES_URL>/<branch-slug>/
 build_staging:
   <<: *run_on_dockerhost
-  stage: build
+  stage: doc_build
   # Depend on the three gating checks by name rather than on the whole test
   # stage. Stage ordering alone would also make linkcheck_external a
   # prerequisite: it is allow_failure so it can never fail the pipeline, but the
@@ -56,11 +56,25 @@ build_staging:
   # by far the slowest job here. spellcheck is listed even where it is
   # allow_failure - a needed job that fails but is allowed to does not block.
   needs:
+    # artifacts: false on all three - this job rebuilds the HTML itself, so
+    # downloading build's output would only waste transfer and risk
+    # publishing stale pages, since sphinx-build does not delete output that
+    # no longer has a source.
     - job: build
+      artifacts: false
     - job: linkcheck
+      artifacts: false
     - job: spellcheck
+      artifacts: false
   rules:
-    - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != "master"
+    # Staging is for work in progress, so every branch gets its own Pages
+    # prefix - develop included. master and main are excluded: they publish
+    # through the production deploy jobs and must not also show up as a
+    # staging deployment. Requiring CI_COMMIT_BRANCH at all also keeps tag
+    # and merge-request pipelines out, since it is set only for branches.
+    - if: $CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "main"
+      when: never
+    - if: $CI_COMMIT_BRANCH
       when: on_success
     - when: never
   # The "pages" keyword - not the job name - is what makes this a Pages job
@@ -86,7 +100,7 @@ build_staging:
 
 deploy:
   <<: *run_on_dockerhost
-  stage: deploy
+  stage: doc_deploy
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
       when: on_success
@@ -99,7 +113,7 @@ deploy:
 
 az_deploy:
   <<: *run_on_dockerhost
-  stage: deploy
+  stage: doc_deploy
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
       when: on_success
@@ -112,7 +126,7 @@ az_deploy:
 
 upload_html_to_rfx_blob:
   <<: *run_on_dockerhost
-  stage: deploy
+  stage: doc_deploy
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
       when: on_success
