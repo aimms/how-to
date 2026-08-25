@@ -49,6 +49,16 @@ build:
 build_staging:
   <<: *run_on_dockerhost
   stage: build
+  # Depend on the three gating checks by name rather than on the whole test
+  # stage. Stage ordering alone would also make linkcheck_external a
+  # prerequisite: it is allow_failure so it can never fail the pipeline, but the
+  # stage would still wait for it to finish, and checking every external URL is
+  # by far the slowest job here. spellcheck is listed even where it is
+  # allow_failure - a needed job that fails but is allowed to does not block.
+  needs:
+    - job: build
+    - job: linkcheck
+    - job: spellcheck
   rules:
     - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != "master"
       when: on_success
