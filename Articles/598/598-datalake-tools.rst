@@ -6,7 +6,7 @@ DataLake Tools
    :keywords: Azure Data Lake Storage, ADLS, SAS token, Container SAS Token, Account SAS Token, Data Exchange Library, file system management, AIMMS Cloud, data integration
 
 .. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
-   :target: https://github.com/aimms/datalake-tools/releases/latest/download/contract-allocation.zip
+   :target: https://github.com/aimms/datalake-tools/releases/latest/download/datalake-tools.zip
 
 .. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/datalake-tools
@@ -15,8 +15,6 @@ DataLake Tools
 
 .. image:: https://img.shields.io/badge/WebUI-25.1.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-|
-   
 Introduction 
 -------------
 Every AIMMS Cloud account is by default equipped with an Azure Data Lake Storage Gen2 (ADLS). 

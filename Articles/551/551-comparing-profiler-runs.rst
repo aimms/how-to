@@ -5,7 +5,7 @@ Comparing Profiler Runs
    :keywords: profiler, performance analysis, profilerData, ProfilerStart, download widget, cloud provider comparison, runtime, debugging
 
 .. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
-   :target: https://github.com/aimms/profiler-run-compare/releases/latest/download/cprofiler-run-compare.zip
+   :target: https://github.com/aimms/profiler-run-compare/releases/latest/download/profiler-run-compare.zip
 
 .. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
       :target: https://github.com/aimms/profiler-run-compare
@@ -14,7 +14,6 @@ Comparing Profiler Runs
 
 .. image:: https://img.shields.io/badge/WebUI-yes-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-|
 
 Introduction
 -------------
