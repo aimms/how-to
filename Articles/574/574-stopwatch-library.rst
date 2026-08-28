@@ -5,19 +5,15 @@
    :description: Introduces the AIMMS Stopwatch Library, which provides pr_start and fnc_elapsed procedures to measure execution time of code blocks with support for ten simultaneous stopwatches.
    :keywords: Stopwatch Library, execution time, performance measurement, pr_start, fnc_elapsed, ScheduleAt, CurrentToString, StringToMoment, timing
 
-.. image:: https://img.shields.io/badge/AIMMS_4.87-ZIP:_Stopwatch_Library-blue
-   :target: https://github.com/aimms/stopwatch-library/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/stopwatch-library/releases/latest/download/cprofiler-run-compare.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.87-Github:_Stopwatch_Library-blue
-   :target: https://github.com/aimms/stopwatch-library
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+      :target: https://github.com/aimms/stopwatch-library
 
-.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-developer-12/stopwatch-library-1426
+.. image:: https://img.shields.io/badge/AIMMS-24.6-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-.. image:: images/chronometer-watch.png
-   :scale: 30
-   :align: right
-   :alt: Measure Execution Time
+|
 
 Introduction
 --------------

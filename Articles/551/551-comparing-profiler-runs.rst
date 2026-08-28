@@ -4,15 +4,17 @@ Comparing Profiler Runs
    :description: Explains how to capture, download, and compare AIMMS profiler run results across environments such as AWS and Azure to locate performance regressions in deployed applications.
    :keywords: profiler, performance analysis, profilerData, ProfilerStart, download widget, cloud provider comparison, runtime, debugging
 
-.. image:: https://img.shields.io/badge/AIMMS_4.88-ZIP:_ProfilerRunCompare-blue
-   :target: https://github.com/aimms/profiler-run-compare/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/profiler-run-compare/releases/latest/download/cprofiler-run-compare.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_4.88-Github:_ProfilerRunCompare-blue
-   :target: https://github.com/aimms/profiler-run-compare
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+      :target: https://github.com/aimms/profiler-run-compare
 
-.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-developer-12/profilerruncompare-app-1328
+.. image:: https://img.shields.io/badge/AIMMS-4.88-white?style=for-the-badge&labelColor=009B00&color=00D400
 
+.. image:: https://img.shields.io/badge/WebUI-yes-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+|
 
 Introduction
 -------------
@@ -84,6 +86,12 @@ Minimal Requirements
 --------------------   
 
 `AIMMS Community license <https://www.aimms.com/platform/aimms-community-edition/>`_ is sufficient for working with this example. 
+
+Release Notes
+--------------
+
+`v1.0 <https://github.com/aimms/profiler-run-compare/releases/tag/1.0>`_ (28/08/2026)
+   First official release in Github.
 
 .. spelling:word-list::
 
