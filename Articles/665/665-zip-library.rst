@@ -7,18 +7,13 @@ Zip Library
    :description: Introduces the AIMMS Zip toolkit library with pr_zipFolderToFile and pr_unzipFileToFolder procedures for compressing and extracting folders on Windows and Linux including AIMMS Cloud.
    :keywords: zip, unzip, compress, archive, pr_zipFolderToFile, pr_unzipFileToFolder, toolkit library, Linux, AIMMS Cloud, file management
 
-.. image:: https://img.shields.io/badge/AIMMS_24.6-ZIP:_Zip_Library-blue
-   :target: https://github.com/aimms/zip-library/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/zip-library/releases/latest/download/zip-library.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_24.6-Github:_Zip_Library-blue
-   :target: https://github.com/aimms/zip-library
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+      :target: https://github.com/aimms/zip-library
 
-.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-language-12/zip-lib-1835
-   
-.. image:: images/zip-library.png
-   :scale: 30
-   :align: right
+.. image:: https://img.shields.io/badge/AIMMS-24.6-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 Introduction
 -------------

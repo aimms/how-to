@@ -5,19 +5,15 @@ DataLake Tools
    :description: Introduces the DataLake Tools AIMMS application for managing Azure Data Lake Storage file systems and generating Container and Account SAS tokens for external access.
    :keywords: Azure Data Lake Storage, ADLS, SAS token, Container SAS Token, Account SAS Token, Data Exchange Library, file system management, AIMMS Cloud, data integration
 
-.. image:: https://img.shields.io/badge/AIMMS_25.2-ZIP:_DataLake Tools-blue
-   :target: https://github.com/aimms/datalake-tools/archive/refs/heads/main.zip
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/datalake-tools/releases/latest/download/datalake-tools.zip
 
-.. image:: https://img.shields.io/badge/AIMMS_25.2-Github:_DataLake Tools-blue
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
    :target: https://github.com/aimms/datalake-tools
 
-.. image:: https://img.shields.io/badge/AIMMS_Community-Forum-yellow
-   :target: https://community.aimms.com/aimms-pro-cloud-platform-43/datalake-tools-1520
+.. image:: https://img.shields.io/badge/AIMMS-25.2-white?style=for-the-badge&labelColor=009B00&color=00D400
 
-.. image:: images/data-lake.png
-   :scale: 30
-   :align: right
-   :alt: DataLake Tools
+.. image:: https://img.shields.io/badge/WebUI-25.1.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400
 
 Introduction 
 -------------
