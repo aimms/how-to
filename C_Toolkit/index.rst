@@ -14,3 +14,4 @@ Toolkit
    /Articles/665/665-zip-library
    /Articles/598/598-datalake-tools
    /Articles/663/663-pro-storage-auth
+   /Articles/587/587-pro-cloud-analytics
