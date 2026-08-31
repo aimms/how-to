@@ -15,6 +15,8 @@ PRO Cloud Analytics
 
 .. image:: https://img.shields.io/badge/WebUI-26.11.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400
 
+.. image:: https://img.shields.io/badge/AimmsDEX-26.2.2.1-white?style=for-the-badge&labelColor=009B00&color=00D400
+  
 Introduction
 -------------
 Every AIMMS Cloud account records what runs on it, and the portal lets you export two of those
