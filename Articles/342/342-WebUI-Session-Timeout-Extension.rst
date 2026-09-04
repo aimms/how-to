@@ -23,12 +23,3 @@ The timer is not the only way a session ends. To close one from the model:
 
 Note that after a logout a WebUI session stays active for a further five minutes before it is deactivated.
 
-What This Cannot Do
---------------------
-
-The check above is a browser-side activity check, and that is the only notion of "idle" AIMMS has. There is
-no mechanism for listing the currently connected users and programmatically disconnecting the least active
-one - to free a slot when a concurrent-user limit is reached, for instance.
-
-Where that behaviour is needed, it has to be covered by a work instruction for the people involved rather
-than by an automatic AIMMS mechanism.

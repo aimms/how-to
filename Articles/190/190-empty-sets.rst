@@ -121,7 +121,7 @@ surfaces later as data surviving a reset that should have removed it.
 
 .. seealso::
 
-  * :doc:`../924/924-reclaiming-memory-between-data-instances`
+  * :doc:`../713/713-reclaiming-memory-between-data-instances`
 
 Key Takeaways
 --------------

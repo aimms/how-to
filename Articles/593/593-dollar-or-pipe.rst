@@ -72,7 +72,7 @@ A Relevance Parameter Instead of Many Subsets
 ----------------------------------------------
 
 The pipe restriction is what makes a common modeling shortcut unnecessary. When a sum should only cover the
-entities relevant to each element of another set - only the companies serving this particular customer, say -
+entities relevant to each element of another set, for example, only the companies serving this particular customer,
 it is tempting to declare a named subset per customer. A single binary relevance parameter, used as the pipe
 restriction, scales far better:
 
