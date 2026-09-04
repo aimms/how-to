@@ -85,18 +85,7 @@ The problem can be solved by introducing a new parameter SumCondition(i,j,k) an
     SumCondition(i,j,k) := (ElementPara(i,j) = k);
     sum[(t,sc,i,j,k) | SumCondition(i,j,k), …];
 
-These are some general rules.
-
-4. Use indexed identifiers, not many scalar ones
--------------------------------------------------
-
-The advice above concerns execution time, but the same principle decides how fast a model *opens* at all.
-
-If an ``.ams`` file was produced or heavily edited outside the AIMMS interface - typically when it was generated from an MPS or LP file - it can end up as a **scalar model**: instead of one variable ``X(i)`` indexed over a set, the file declares ``n`` separate scalar identifiers ``x1``, ``x2``, ``x3``, and so on. Each of those is a symbolic identifier in its own right.
-
-AIMMS is not efficient at handling models with very large numbers of individual symbolic variables and constraints. A model built this way can take a very long time to open, or appear to hang altogether, and generating the mathematical program from it is slow for the same reason.
-
-The remedy is to express the same data with indexed identifiers - one variable ``X(i)`` over a set of size ``n``, rather than ``n`` scalar variables - which is both dramatically faster and the way models are built when constructed through the AIMMS interface.
+These are some general rules. 
 
 Improving skills
 ----------------

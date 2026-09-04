@@ -112,8 +112,8 @@ end user, drive the subset from a binary parameter over :aimms:set:`AllConstrain
       Definition : { IndexConstraints | p_selectConstraint(IndexConstraints) };
    }
 
-Expose ``p_selectConstraint`` on a WebUI page as a set of toggles - one per constraint you want the user to
-control - and the mathematical program's constraint set follows whatever they switch on, with no change to
+Expose ``p_selectConstraint`` on a WebUI page as a set of toggles (one per constraint you want the user to
+control) and the mathematical program's constraint set follows whatever they switch on, with no change to
 the model or to the mathematical program declaration.
 
 The same construction applied to :aimms:set:`AllVariables` toggles variables. Remember, per the section above,
