@@ -12,7 +12,7 @@ Its behavior depends on the type of set being emptied:
 * The set is not a subset of :aimms:set:`AllIdentifiers`: the empty statement will remove all elements from the given set.
 * The set is a subset of :aimms:set:`AllIdentifiers`: the empty statement will empty all the identifiers that are in the given subset.
 
-Clearing a Regular Set vs. a Subset of ``AllVariables ``
+Clearing a Regular Set vs. a Subset of ``AllVariables`` 
 ----------------------------------------------------------------
 
 Let's assume the following two identifiers:
