@@ -94,6 +94,32 @@ You can either manually select the constraints and variables to be included in t
 
 Using a definition makes it easy to scale the project ⁠— any new constraint or variable added inside ``Section_or_Declaration_to_Optimize`` is automatically added to the subset and used in generating the math program. You do not need to select variables with a definition in both the subsets.
 
+Letting end users toggle constraints from the UI
+-------------------------------------------------
+
+The section-based definition above is a development-time choice. To put the same selection in the hands of an
+end user, drive the subset from a binary parameter over :aimms:set:`AllConstraints` instead of from a section:
+
+.. code-block:: aimms
+
+   Parameter p_selectConstraint {
+      IndexDomain : IndexConstraints;
+      Range       : binary;
+   }
+
+   Set ModelConstraints {
+      SubsetOf   : AllConstraints;
+      Definition : { IndexConstraints | p_selectConstraint(IndexConstraints) };
+   }
+
+Expose ``p_selectConstraint`` on a WebUI page as a set of toggles - one per constraint you want the user to
+control - and the mathematical program's constraint set follows whatever they switch on, with no change to
+the model or to the mathematical program declaration.
+
+The same construction applied to :aimms:set:`AllVariables` toggles variables. Remember, per the section above,
+that a variable carrying a ``Definition`` also appears in :aimms:set:`AllConstraints`, so switching such a
+variable off may require toggling it in both places.
+
 Analyzing infeasibility of a mathematical program
 --------------------------------------------------
 

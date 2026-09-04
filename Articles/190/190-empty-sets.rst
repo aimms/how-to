@@ -79,3 +79,7 @@ Key Takeaways
 - A set with a ``Definition`` attribute cannot be emptied by any means; drop the definition if the set has to be procedurally editable.
 
 - Use ``empty`` carefully when dealing with predefined sets to avoid unintended behavior.
+
+.. spelling:word-list::
+
+  procedurally
