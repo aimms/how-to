@@ -12,7 +12,7 @@ Its behavior depends on the type of set being emptied:
 * The set is not a subset of :aimms:set:`AllIdentifiers`: the empty statement will remove all elements from the given set.
 * The set is a subset of :aimms:set:`AllIdentifiers`: the empty statement will empty all the identifiers that are in the given subset.
 
-Example: Clearing a Regular Set vs. a Subset of AllVariables 
+Clearing a Regular Set vs. a Subset of ``AllVariables ``
 ----------------------------------------------------------------
 
 Let's assume the following two identifiers:
@@ -52,6 +52,7 @@ There is a third case. If a set was declared with a ``Definition`` attribute, it
 that definition rather than stored as data the model owns, and neither form above applies:
 
 .. code-block:: aimms
+  :linenos:
 
   empty MySet ;
 
@@ -85,6 +86,11 @@ First capture the scope:
     Index    : i_sds;
   }
 
+Then:
+
+.. code-block:: aimms
+  :linenos:
+
   s_declaredSets := MySection * AllSets;
 
 :aimms:set:`AllSets` is the predeclared subset of :aimms:set:`AllIdentifiers` holding every declared set
@@ -103,6 +109,11 @@ Then filter out the exceptions:
     SubsetOf : s_declaredSets;
   }
 
+Then:
+
+.. code-block:: aimms
+  :linenos:
+
   s_setsToEmpty := s_declaredSets - { 's_keepThisOne' };
 
 The elements of :aimms:set:`AllIdentifiers` are the identifier names themselves, so a set difference
@@ -112,6 +123,7 @@ an identifier that exists, otherwise AIMMS rejects it at compile time.
 And clear them in one statement:
 
 .. code-block:: aimms
+  :linenos:
 
   empty s_setsToEmpty ;
 
