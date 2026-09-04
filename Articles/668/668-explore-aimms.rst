@@ -32,7 +32,7 @@ AIMMS offers a variety of tools and resources to help you take your application 
 Start by visiting our `Getting Started with AIMMS <https://how-to.aimms.com/Articles/363/363-getting-started-aimms.html>`_ page, where you'll find additional e-learning courses with in-depth guides on topics 
 such as data connectivity, optimization techniques, and UI customization. These resources will help you develop more complex applications tailored to your needs.  
 
-You can also explore our library of `examples <https://how-to.aimms.com/C_Examples/index.html>`_ and `how-to <https://how-to.aimms.com/ContentIndex.html>`_ guides, 
+You can also explore our library of `examples <https://how-to.aimms.com/C_Examples/index.html>`_ and `how-to <https://how-to.aimms.com/>`_ guides, 
 which demonstrate practical use cases and best practices. 
 These resources cover a wide range of topics, from integrating external data sources to using advanced solver configurations.  
 

@@ -44,5 +44,37 @@ In the example, we use a :any:`for` loop:
 
 In the attached example, go to section ``Iterative Solve`` to find the procedure ``pr_ExecuteBatch``. This procedure contains some additional error handling statements to ensure the proper working of this example.
 
+Running the Loop on PRO or Cloud
+---------------------------------
+
+``pro::DelegateToServer`` does not delegate a solve statement. It delegates the *entire procedure it sits in* -
+everything after the call, however many solves and post-processing steps, runs as one PRO job in the order
+written:
+
+.. code-block:: aimms
+
+   if not ProjectDeveloperMode() then
+      if pro::DelegateToServer( waitForCompletion       :  1,
+                                completionCallback      :  'pro::session::LoadResultsCallBack' )
+      then
+         return 1;
+      endif;
+   endif;
+
+   solve model1;
+   pr_postProcessing;
+   solve model2;
+
+Where the delegate block sits relative to the loop therefore decides how the work is distributed.
+
+Placing it **inside the per-instance procedure**, called from the ``for`` loop with ``waitForCompletion: 0``,
+makes each instance its own job, and all of them launch at once - the parallel case.
+
+Placing it **outside the loop**, wrapping the loop itself, makes the whole loop one delegated procedure, so
+the instances run one after another inside a single job.
+
+There is no third option. Delegating each instance as a separate job while forcing those jobs to run
+sequentially is not supported.
+
 
 

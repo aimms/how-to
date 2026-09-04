@@ -45,11 +45,37 @@ This means that the ``empty`` statement behaves differently for ``NormalSet`` an
   !This will actually remove all elements from the set ActiveVariables 
   ActiveVariables := {} ; 
  
+A Defined Set Cannot Be Emptied At All
+---------------------------------------
+
+There is a third case. If a set was declared with a ``Definition`` attribute, its contents are computed from
+that definition rather than stored as data the model owns, and neither form above applies:
+
+.. code-block:: aimms
+
+  empty MySet ;
+
+fails with
+
+.. code-block:: none
+
+  The defined domain set "MySet" cannot be emptied
+
+This is not a defect. A defined set is recomputed automatically whenever the identifiers its definition
+depends on change, so there is no independently stored content for a procedural statement to clear.
+
+If what you need is a set that can be reset and repopulated between runs - to keep elements from a previous
+execution out of the next one, for instance - declare it **without** a ``Definition`` attribute and populate
+it explicitly, with :any:`SetElementAdd` or an assignment. A set's contents can only be assigned or reset
+procedurally when it is not a defined set.
+
 Key Takeaways
 --------------
 
 - The ``empty`` statement removes elements from general sets but only clears values for subsets of predefined sets.
 
 - To fully remove elements from a subset of :aimms:set:`AllIdentifiers`, assign an empty set ``{}`` to it explicitly.
+
+- A set with a ``Definition`` attribute cannot be emptied by any means; drop the definition if the set has to be procedurally editable.
 
 - Use ``empty`` carefully when dealing with predefined sets to avoid unintended behavior.

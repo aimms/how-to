@@ -51,13 +51,13 @@ The operator ``|`` is used to restrict an index domain. An index domain can be s
    Index domain: (i,j) | restriction(i,j)
 
 *	In a ``for`` statement:
-   
+
 .. code-block:: aimms
    :linenos:
 
-   for (i,j) | restriction(i,j) do  
+   for (i,j) | restriction(i,j) do
       ! some code
-   endfor;      
+   endfor;
 
 *	In a constructed set expression:
 
@@ -67,6 +67,24 @@ The operator ``|`` is used to restrict an index domain. An index domain can be s
    MySet := { i | restriction(i) }
    ! or
    MyRelation := { (i,j) | restriction(i,j) }
+
+A Relevance Parameter Instead of Many Subsets
+----------------------------------------------
+
+The pipe restriction is what makes a common modeling shortcut unnecessary. When a sum should only cover the
+entities relevant to each element of another set - only the companies serving this particular customer, say -
+it is tempting to declare a named subset per customer. A single binary relevance parameter, used as the pipe
+restriction, scales far better:
+
+.. code-block:: aimms
+
+   sum( i_company | p_companyServesCustomer(i_company, i_customer), <expression> )
+
+``p_companyServesCustomer`` holds 1 for the valid combinations and 0 elsewhere, and the restriction keeps the
+sum to exactly those. No subset identifier per element of ``i_customer`` needs to be created or maintained.
+
+Note that ``in`` tests set membership only; it cannot test a parameter for being non-zero. The restriction
+above is the way to express this, not ``in`` with a parameter-based condition.
 
 
 Discussion

@@ -53,6 +53,22 @@ To share your project with other developers or AIMMS Support, compress the entir
 
       If your project imports data from external sources, like Excel files or databases, consider including a saved data case file. To save a data case, navigate to :menuselection:`Data > Save Case as`.
 
+Unpack Before Opening
+---------------------
+
+On the receiving end, extract the archive to a real folder before opening anything. Opening the ``.aimms``
+file by double-clicking it *inside* Windows Explorer's zip browser produces:
+
+.. code-block:: none
+
+   Main project is not an existing folder.
+
+Explorer's zip browsing makes every file in the archive look directly accessible, but on a double-click it
+silently unpacks only that single file to a temporary location and opens it from there. The ``MainProject``
+folder and the rest of the project are never unpacked, so when AIMMS looks for them they are not there.
+
+Extracting the whole archive first and opening the ``.aimms`` file from the extracted folder resolves it.
+
 .. seealso::
       
    * :doc:`../151/151-version-control-aimmspack-backup`
