@@ -177,3 +177,8 @@ Further Reading
 
 -  `Sensai Apps released in preview <https://community.aimms.com/product-updates/sensai-apps-released-in-preview-1995>`_
 -  `Sensai documentation <https://documentation.aimms.com/sensai/index.html>`_
+
+
+.. spelling:word-list::
+
+   walkthrough
