@@ -14,10 +14,12 @@ SENSAI is the AIMMS family of AI assistants. Each one works inside an optimizati
 
 This section documents SENSAI Apps, which adds an assistant to an AIMMS application you build yourself. The people who use the application ask questions about the plan in plain language, change input data, run the model, and have the results explained back to them. You decide what the assistant can see and what it may change, one identifier at a time; in a developer or editing session the assistant makes those changes to the model itself — you describe what you want and review what it did.
 
-Here you will find articles related to Sensai Apps setup and usage, starting with a first hands-on walkthrough:
+Here you will find articles related to Sensai Apps setup and usage, starting with a first hands-on walk through:
 
 .. toctree::
    :maxdepth: 1
    :titlesonly:
 
    /Articles/714/714-hello-world-sensai-apps
+
+
