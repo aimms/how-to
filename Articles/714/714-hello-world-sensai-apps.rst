@@ -5,7 +5,7 @@ Sensai Apps brings AI assistance directly into AIMMS Developer, built on top
 of AIMMS's established Operations Research platform. This article walks
 through a first hands-on session: connecting AIMMS Developer to Sensai,
 opening the Sensai chat in a new project, asking Sensai to create and apply
-a small skill, and reviewing exactly what it changed — including the skill
+a small skill, and reviewing exactly what it changed, including the skill
 definition it saved for reuse.
 
 This article covers:
@@ -20,62 +20,73 @@ Prerequisites
 -------------
 
 -  A license for AIMMS Developer version 26.4 or later.
--  Access to an AIMMS cloud with Sensai activated.
+-  Access to an AIMMS Cloud with Sensai activated.
 
 Preparing for Sensai Apps
 -------------------------
 
-Step 1: Open AIMMS Developer and choose Tools > Cloud Login.
+Step 1:
+~~~~~~~~~
+
+Open AIMMS Developer and choose :menuselection:`Tools > Cloud Login`.
 
 .. image:: images/image1.png
    :alt: Tools menu with Cloud Login highlighted
-   :width: 1.6in
+   :align: center
 
-Step 2: In the "Sign in to AIMMS Cloud" dialog, enter the cloud account
-you're allowed to use — in this example, ``chriskuip.aimms.cloud`` — and
-press Sign in. This opens a browser window to complete the sign-in; if the
-dialog briefly shows "Sign-in failed, please try again" as in the
-screenshot below, just retry — it typically succeeds on the next attempt.
+Step 2: 
+~~~~~~~~~
+
+In the :menuselection:`Sign in to AIMMS Cloud` dialog, enter the cloud account
+you're allowed to use, and press :menuselection:`Sign in`. 
+This opens a browser window to complete the sign-in; if the
+dialog briefly shows :menuselection:`Sign-in failed, please try again` as in the
+screenshot below, just retry. It typically succeeds on the next attempt.
 
 .. image:: images/image2.png
    :alt: Sign in to AIMMS Cloud dialog
-   :width: 2.4in
+   :align: center
 
-Step 3: Connect the device. In the browser, approve the request:
+Step 3: 
+~~~~~~~~~
+Connect the device. In the browser, approve the request:
 
 .. image:: images/image3.png
    :alt: Authorize device dialog in the browser
-   :width: 2.6in
+   :align: center
 
 Pressing Approve gives AIMMS Developer access:
 
 .. image:: images/image4.png
    :alt: Device authorized confirmation
-   :width: 2.6in
+   :align: center
 
-Step 4: Back in AIMMS Developer, the Tools menu now shows Cloud Logout
-instead of Cloud Login — confirming you're signed in.
+Step 4: 
+~~~~~~~~~
+
+Back in AIMMS Developer, the :menuselection:`Tools` menu now should show :menuselection:`Cloud Logout`
+instead of :menuselection:`Cloud Login`.
 
 Opening Sensai Apps in a New Project
 -------------------------------------
 
-With access to Sensai, you can open the Sensai chat via the Tools menu:
+With access to Sensai, you can open the Sensai chat via the :menuselection:`Tools` menu:
 
 .. image:: images/image5.png
    :alt: Tools menu with SENSAI chat highlighted
-   :width: 1.9in
+   :align: center
 
 In a new project, the opening window looks like this:
 
 .. image:: images/image6.png
    :alt: Welcome to SENSAI chat panel in a new project
-   :width: 3.4in
+   :align: center
 
 To get acquainted, you can ask Sensai a few questions, for example:
 
 .. image:: images/image7.png
    :alt: Example exchange asking Sensai about available skills and tools
-   :width: 4.6in
+   :align: center
 
 Specifying a Small Skill
 -------------------------
@@ -85,7 +96,7 @@ or test a particular feature. I like that example to be structured
 consistently from the start.
 
 That's why I group the initialization and termination procedures together,
-and extend the time-duration quantity with some commonly used time units —
+and extend the time-duration quantity with some commonly used time units,
 every time I start a new project. Instead of doing this by hand each time,
 I asked Sensai to turn it into a reusable skill:
 
@@ -109,41 +120,40 @@ Sensai immediately got to work:
 
 .. image:: images/image8.png
    :alt: Sensai chat showing the request and its plan
-   :width: 4.6in
+   :align: center
 
 Observing the Results
------------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
-...and quickly came back with results:
+Sensai quickly created the skill and applied it to the project, and quickly came back with results:
 
 .. image:: images/image9.png
    :alt: Sensai's summary of the changes it made, with a naming-convention note
-   :width: 4.6in
+   :align: center
 
-Sensai's response includes a proactive style note, boxed in blue above — I
-find that useful.
+Sensai's response includes a proactive style note, boxed in blue above. 
 
 The Model Explorer confirmed the new section and its procedures:
 
 .. image:: images/image10.png
    :alt: Model Explorer showing the app_start_stop section and its procedures
-   :width: 2.1in
+   :align: center
 
-And the SI_Time_Duration quantity showed the updated conversions:
+And the ``SI_Time_Duration`` quantity showed the updated conversions:
 
 .. image:: images/image11.png
    :alt: SI_Time_Duration quantity showing the updated conversions
-   :width: 4.5in
+   :align: center
 
 .. note::
 
-   The minute conversion wasn't part of the request — it was already present
+   The minute conversion wasn't part of the request. It was already present
    in ``SI_Time_Duration`` when the project was created (AIMMS PRO and AIMMS
    WebUI add it by default). Sensai only added the week, day, and hour
    conversions that were actually asked for.
 
 The Skill Definition
------------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 Sensai saved the skill for reuse in two places: as
 ``skills/initproject.skill.md`` in the project, and as a personal skill
@@ -172,11 +182,10 @@ small skill, and reviewed both the model changes and the skill definition
 it produced and saved for reuse. From here, try asking Sensai to turn one
 of your own recurring modeling steps into a skill.
 
-Further Reading
------------------
+.. seealso::
 
--  `Sensai Apps released in preview <https://community.aimms.com/product-updates/sensai-apps-released-in-preview-1995>`_
--  `Sensai documentation <https://documentation.aimms.com/sensai/index.html>`_
+   -  `Sensai Apps released in preview <https://community.aimms.com/product-updates/sensai-apps-released-in-preview-1995>`_
+   -  `Sensai documentation <https://documentation.aimms.com/sensai/index.html>`_
 
 
 .. spelling:word-list::
