@@ -27,7 +27,7 @@ and building applications in optimization and prescriptive analytics. You'll als
         Solve complex optimization problems efficiently with AIMMS algorithmic tools, designed for speed, flexibility, and accuracy.
 
     .. grid-item-card::  Sensai apps
-        :img-top: Images/Sensai-Apps.png
+        :img-top: Images/SENSAI.png
         :link: https://how-to.aimms.com/aimms-sensai/index.html
 
         Sensai Apps embeds an AI assistant in AIMMS applications, 

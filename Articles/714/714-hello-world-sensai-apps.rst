@@ -34,6 +34,8 @@ Open AIMMS Developer and choose :menuselection:`Tools > Cloud Login`.
    :alt: Tools menu with Cloud Login highlighted
    :align: center
 
+|
+
 Step 2: 
 ~~~~~~~~~
 
@@ -47,6 +49,8 @@ screenshot below, just retry. It typically succeeds on the next attempt.
    :alt: Sign in to AIMMS Cloud dialog
    :align: center
 
+|
+
 Step 3: 
 ~~~~~~~~~
 Connect the device. In the browser, approve the request:
@@ -55,11 +59,15 @@ Connect the device. In the browser, approve the request:
    :alt: Authorize device dialog in the browser
    :align: center
 
+|
+
 Pressing Approve gives AIMMS Developer access:
 
 .. image:: images/image4.png
    :alt: Device authorized confirmation
    :align: center
+
+|
 
 Step 4: 
 ~~~~~~~~~
@@ -76,17 +84,23 @@ With access to Sensai, you can open the Sensai chat via the :menuselection:`Tool
    :alt: Tools menu with SENSAI chat highlighted
    :align: center
 
+|
+
 In a new project, the opening window looks like this:
 
 .. image:: images/image6.png
    :alt: Welcome to SENSAI chat panel in a new project
    :align: center
 
+|
+
 To get acquainted, you can ask Sensai a few questions, for example:
 
 .. image:: images/image7.png
    :alt: Example exchange asking Sensai about available skills and tools
    :align: center
+
+|
 
 Specifying a Small Skill
 -------------------------
@@ -122,6 +136,8 @@ Sensai immediately got to work:
    :alt: Sensai chat showing the request and its plan
    :align: center
 
+|
+
 Observing the Results
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -131,6 +147,8 @@ Sensai quickly created the skill and applied it to the project, and quickly came
    :alt: Sensai's summary of the changes it made, with a naming-convention note
    :align: center
 
+|
+
 Sensai's response includes a proactive style note, boxed in blue above. 
 
 The Model Explorer confirmed the new section and its procedures:
@@ -139,11 +157,15 @@ The Model Explorer confirmed the new section and its procedures:
    :alt: Model Explorer showing the app_start_stop section and its procedures
    :align: center
 
+|
+
 And the ``SI_Time_Duration`` quantity showed the updated conversions:
 
 .. image:: images/image11.png
    :alt: SI_Time_Duration quantity showing the updated conversions
    :align: center
+
+|
 
 .. note::
 
