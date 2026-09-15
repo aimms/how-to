@@ -14,11 +14,10 @@ The structure of execution usually follows this format:
 #. Define the collection of inputs
 #. Process each input in a loop
 
-The example project and Excel input files can be downloaded from the links below. 
+The example project can be downloaded below. The Excel input files come with it, in the project's
+``data`` folder, so it runs as soon as you open it.
 
-:download:`AIMMS project download <downloads/MultiRunExcel.zip>` 
-
-:download:`Excel inputs download <downloads/ExcelInputs.zip>` 
+:download:`AIMMS project download <downloads/MultiRunExcel.zip>`
 
 Logic of the iterative operation
 -------------------------------------
@@ -29,121 +28,106 @@ When using a :any:`while` loop, you must initialize the iterator before the loop
 
 .. figure:: images/flow-logic.png
    :align: center
-   :scale: 60 %
 
    Logic of the iterative operation
 
 In the example, we use a :any:`for` loop:
 
 .. code-block:: aimms
+   :linenos:
 
-   for i_fn do
+   for i_fn do !loop operation described in the article
       sp_Workbook := sp_BatchExcelInputFolder + sp_InputFileNames(i_fn);
-      pr_ExecuteSingleRun(sp_Workbook);
-   endfor;
+
+      !read the workbook, solve, write the solution back
+      pr_ExecuteSingleRun( sp_Workbook );
+   endfor ;
 
 In the attached example, go to section ``Iterative Solve`` to find the procedure ``pr_ExecuteBatch``. This procedure contains some additional error handling statements to ensure the proper working of this example.
 
 Running the Loop on AIMMS Cloud
 ---------------------------------
 
-``pro::DelegateToServer`` does not delegate **only** a solve statement. Its unit of delegation is a
-**procedure**, and by default that is the procedure the call sits in. For example:
+``pro::DelegateToServer`` does not delegate a single solve statement. Its unit of delegation is a
+**procedure**, and by default that is the procedure the call sits in. That one fact decides how a batch
+loop behaves on the cloud.
+
+Delegating the Whole Loop
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Add the delegation as the first thing ``pr_ExecuteBatch`` does:
 
 .. code-block:: aimms
+   :linenos:
 
-   if not ProjectDeveloperMode() then
-      if pro::DelegateToServer(
-            waitForCompletion       :  1,
-            completionCallback      :  'pro::session::LoadResultsCallBack' )
-      then
-         return 1;
-      endif;
+   if pro::GetPROEndPoint() then
+       if pro::DelegateToServer(
+             waitForCompletion   :  1,
+             completionCallback  :  'pro::session::LoadResultsCallBack' )
+       then
+           return 1;
+       endif;
    endif;
 
-   solve model1;
-   pr_postProcessing;
-   solve model2;
+   ! the rest of pr_ExecuteBatch as it ships: fix the folder, list the
+   ! workbooks, then loop over them
 
-The server runs the whole procedure, so it runs ``model1``, then ``pr_postProcessing``, then ``model2``.
-With ``waitForCompletion: 1`` the client blocks until that finishes.
+That procedure then runs **twice**, and the value ``pro::DelegateToServer`` returns is what tells the two
+runs apart.
 
-Two lines in that fragment are easy to copy without knowing what they are for.
+On the client, the call on line 2 saves the current state of the application as a case, sends it to the
+Cloud together with the name of the procedure it sits in, and returns 1. The ``return 1`` on line 6
+then ends the client run, so nothing below it executes locally.
 
-``if not ProjectDeveloperMode()`` keeps the same procedure usable in both places. Locally there is no
-server to delegate to, so the guard skips the delegation and the body runs on the spot. Without it the
-procedure only works when published.
+On the Cloud, PRO loads that case and calls the same procedure again. This time ``pro::DelegateToServer``
+returns 0, the ``if`` is false, and execution simply falls through into the rest of the procedure: the
+folder, the list of workbooks, the loop, and every solve inside it.
 
-``return 1`` stops the client. The call returns as soon as the request has been queued, and the client
-still has the rest of the procedure ahead of it. Returning is what prevents the client from also running
-the solves locally, duplicating on your machine the work the server was just asked to do.
+That is why the call belongs at the top. Everything below it is what the Cloud will run.
 
-Where the Call Goes
-~~~~~~~~~~~~~~~~~~~~
+The two remaining arguments control what the client does while it waits. Line 3 makes it block until the
+Cloud has finished, and line 4 names the callback that loads the results back into the client session
+once it has.
 
-The placement of the call, not an argument, decides the shape of the run.
+Line 1 is a separate question: whether there is a PRO to delegate to at all. ``pro::GetPROEndPoint``
+returns the endpoint the session is connected to, so it is empty when the application runs standalone and
+the loop simply runs where it is. Use this rather than ``ProjectDeveloperMode``, which reports whether
+AIMMS is in developer mode and says nothing about PRO: an end user running a standalone application is not
+in developer mode either, and would take the delegation branch with no Cloud to delegate to.
 
-**Outside the loop**, wrapping the loop itself, makes the whole loop one delegated procedure. The
-instances run one after another inside a single job. This is the answer to "solve consecutively on the
-cloud", and it is what the AIMMS team recommends when the runs have to be ordered.
+The Cloud walks the loop itself: one workbook after another, each solve after the previous one has
+finished, all inside a single job. This is the answer to "solve consecutively on the cloud".
 
-**Inside the per-instance procedure**, called from the ``for`` loop with ``waitForCompletion: 0``,
-submits each instance as its own job. Note what this does and does not mean: the requests are *queued*,
-and the server executes each one when the resources it needs are free. How many actually run side by side
-is up to the server, not to your loop.
-
-If you need separate jobs *and* an order between them, that is what ``completionCallback`` is for: the
-callback fires when the server finishes a request, which is the point at which the next one can be
-submitted. It is more moving parts than a single delegated loop, so reach for it only when the jobs
-genuinely have to be separate.
-
-If the delegated unit should not be the enclosing procedure, name it with the ``procedureName`` argument,
-which accepts any procedure currently on the execution stack.
-
-One Input Case for Many Runs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-By default PRO saves the whole application state before every request. For a loop over scenarios that
-share their input data, that means saving the same state again for each one, which the AIMMS documentation
-describes as considerable overhead in both space and time.
-
-The ``inputCase`` argument avoids it. Pass one case reference to be used by every request and identify the
-individual scenario through the arguments of the delegated procedure call instead:
-
-.. code-block:: aimms
-
-   if pro::DelegateToServer(
-         inputCase          :  sp_sharedInputCase,
-         procedureName      :  'pr_runScenario',
-         waitForCompletion  :  0 )
-   then
-      return 1;
-   endif;
-
-It accepts either the URL of a case in PRO Central Storage or the id of an input case created by an
-earlier ``pro::DelegateToServer`` call.
-
-That split between data and arguments is not merely a preference. A delegated call travels as a PRO
-message, and the documentation is explicit that such a procedure should carry adjustment parameters
-rather than data, because **the cardinality of each argument has to stay below 1000 elements**. Exceeding
-it behaves differently depending on where you run:
-
-* on the AIMMS Cloud, AIMMS raises an error and the delegated procedure is aborted
-* on a PRO platform on premise, AIMMS writes a warning to the PRO log files and carries on
-
-The on-premise behaviour is the one to watch, since a loop can keep running while quietly logging that
-its arguments were too large. Pass a scenario identifier and let the case carry the data.
+**An AIMMS PRO solver session can handle 0, 1 or more solve statements.** There is no rule that a session
+corresponds to a solve, which is exactly why a whole loop fits comfortably inside one.
 
 .. note::
 
-   ``waitForCompletion: 1`` is convenient but it blocks on a queue. A request waits until the server has
-   resources for it, so a synchronous loop can spend most of its time waiting rather than solving. The
-   AIMMS documentation recommends redesigning around an asynchronous workflow when requests are numerous
-   or slow, which a batch loop usually is.
+   The attached project does not include the AIMMS PRO library, so the block above is what you add in
+   a project that does. Note also why the input folder is fixed to ``data`` inside the project rather than
+   chosen from disk: a delegated session receives the project, and therefore the workbooks, while a folder
+   picked on your own machine does not exist on the Cloud.
+
+Submitting Each Solve as Its Own Job
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The other shape is to delegate from inside ``pr_ExecuteSingleRun``, so each workbook is submitted
+separately. The requests are then queued independently, and the Cloud starts each one as the resources it
+needs become free.
+
+That is a reasonable thing to want, and it is not as simple as moving the call. Someone has to decide when
+all the sub jobs are done, collect what each produced, and report back to the client. Those intricacies are
+worked through in :doc:`../535/535-waiting-for-sub-jobs-to-complete`.
 
 .. seealso::
 
-   * `Advanced Usage of pro::DelegateToServer <https://documentation.aimms.com/pro/pro-delegate-adv.html>`__
-
-
-
+   * :doc:`../535/535-waiting-for-sub-jobs-to-complete`: the other shape of this problem, where one
+     control job submits sub jobs and has to wait for all of them before reporting back.
+   * :doc:`../261/261-solve-with-asynchronous-solver-sessions`: running several solves at the same time
+     inside a single session, rather than spreading them over Cloud jobs.
+   * :doc:`../310/310-investigate-behavior-pro-job`: where to look when a delegated job does not behave
+     the way it did locally.
+   * :doc:`../85/85-using-axll-library`: the AXLL library this example uses to read each workbook and
+     write the solution back.
+   * `Advanced Usage of pro::DelegateToServer <https://documentation.aimms.com/pro/pro-delegate-adv.html>`__:
+     the remaining arguments, including ``inputCase`` for a batch whose runs share their input data.

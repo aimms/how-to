@@ -26,6 +26,13 @@ and building applications in optimization and prescriptive analytics. You'll als
 
         Solve complex optimization problems efficiently with AIMMS algorithmic tools, designed for speed, flexibility, and accuracy.
 
+    .. grid-item-card::  Sensai
+        :img-top: Images/SENSAI-home.png
+        :link: https://how-to.aimms.com/aimms-sensai/index.html
+
+        Sensai Apps embeds an AI assistant in AIMMS applications, 
+        letting users query and improve models and get results in plain language.
+
     .. grid-item-card::  AIMMS Cloud
         :img-top: Images/AIMMS-PRO-Cloud-Platform-home.png
         :link: https://how-to.aimms.com/aimms-pro-cloud-platform/index.html
@@ -63,7 +70,8 @@ and building applications in optimization and prescriptive analytics. You'll als
     licensing/index
     aimms-ide/index
     aimms-language/index
-    algorithmic-capabilities/index 
+    algorithmic-capabilities/index
+    aimms-sensai/index
     aimms-libraries/index
     aimms-pro-cloud-platform/index
     integrations-data-exchange/index
