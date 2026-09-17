@@ -1,6 +1,16 @@
 Solve in a Loop
 ==================
 
+.. image:: https://img.shields.io/badge/Zip-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/150-solve-in-loop/archive/refs/heads/main.zip
+
+.. image:: https://img.shields.io/badge/Repository-white?style=for-the-badge&logo=github&labelColor=000081&color=1847c9
+   :target: https://github.com/aimms/150-solve-in-loop
+
+.. image:: https://img.shields.io/badge/AIMMS-26.4-white?style=for-the-badge&labelColor=009B00&color=00D400
+
+.. image:: https://img.shields.io/badge/AimmsXLLibrary-26.1.1.1-white?style=for-the-badge&labelColor=009B00&color=00D400
+    
 .. meta::
    :description: Shows how to iteratively solve multiple problem instances from Excel input files using a for loop in AIMMS, reading data and storing results in each iteration.
    :keywords: solve loop, batch solve, Excel input, for loop, while loop, iterative solve, math program, AXLL library, case file
@@ -14,15 +24,13 @@ The structure of execution usually follows this format:
 #. Define the collection of inputs
 #. Process each input in a loop
 
-The example project can be downloaded below. The Excel input files come with it, in the project's
-``data`` folder, so it runs as soon as you open it.
-
-:download:`AIMMS project download <downloads/MultiRunExcel.zip>`
+The example project is linked at the top of this article. The Excel input files come with it, in the
+project's ``data`` folder, so it runs as soon as you open it.
 
 Logic of the iterative operation
 -------------------------------------
 
-The flow of a procedure to solve a math program multiple times is shown on the right. These operations can be done using any iterative operator like :any:`for` or :any:`while`. The loop starts by selecting the first input file from the list of files to be iterated through. 
+The flow of a procedure to solve a math program multiple times is shown below. These operations can be done using any iterative operator like :any:`for` or :any:`while`. The loop starts by selecting the first input file from the list of files to be iterated through. 
 
 When using a :any:`while` loop, you must initialize the iterator before the loop block is written. This is not necessary when using a :any:`for` loop because it uses a set index in AIMMS.
 
@@ -43,7 +51,7 @@ In the example, we use a :any:`for` loop:
       pr_ExecuteSingleRun( sp_Workbook );
    endfor ;
 
-In the attached example, go to section ``Iterative Solve`` to find the procedure ``pr_ExecuteBatch``. This procedure contains some additional error handling statements to ensure the proper working of this example.
+In the example project, go to section ``Iterative Solve`` to find the procedure ``pr_ExecuteBatch``. This procedure contains some additional error handling statements to ensure the proper working of this example.
 
 Running the Loop on AIMMS Cloud
 ---------------------------------
@@ -103,7 +111,7 @@ corresponds to a solve, which is exactly why a whole loop fits comfortably insid
 
 .. note::
 
-   The attached project does not include the AIMMS PRO library, so the block above is what you add in
+   The example project does not include the AIMMS PRO library, so the block above is what you add in
    a project that does. Note also why the input folder is fixed to ``data`` inside the project rather than
    chosen from disk: a delegated session receives the project, and therefore the workbooks, while a folder
    picked on your own machine does not exist on the Cloud.
