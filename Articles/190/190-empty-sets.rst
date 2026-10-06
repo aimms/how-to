@@ -3,7 +3,7 @@ Remove Elements from a Set
 
 .. meta::
   :description: Explains how the empty statement behaves differently for regular sets versus subsets of predefined sets such as AllIdentifiers in AIMMS, why a defined set cannot be emptied at all, and how to clear every set in a section except a named few.
-  :keywords: empty statement, set, AllIdentifiers, AllSets, AllVariables, AllVariablesConstraints, remove elements, clear values, predefined sets, subset, defined set, section name, exclude by name
+  :keywords: empty statement, set, AllIdentifiers, AllSets, AllVariables, AllVariablesConstraints, remove elements, clear values, inactive data, empty set assignment, Cleanup, CleanDependents, predefined sets, subset, defined set, section name, exclude by name
 
 
 The ``empty`` statement in AIMMS is used to clear the contents of a set or reset values of identifiers within a subset of predefined sets. 
@@ -42,9 +42,58 @@ This means that the ``empty`` statement behaves differently for ``NormalSet`` an
   !After the empty statement, the set itself will still contain elements!
   empty ActiveVariables ;
   
-  !This will actually remove all elements from the set ActiveVariables 
-  ActiveVariables := {} ; 
- 
+  !This will actually remove all elements from the set ActiveVariables
+  ActiveVariables := {} ;
+
+``empty`` vs. ``:= {}`` on a Regular Set
+-----------------------------------------
+
+For a set that is not a subset of :aimms:set:`AllIdentifiers`, both ``empty s_A`` and ``s_A := {}`` leave
+the set without elements, but they do not treat the data defined over it the same way.
+
+Assume the following declarations, where ``p_B`` has data:
+
+.. code-block:: aimms
+
+  Set s_A {
+    Index : i_a;
+  }
+
+  Parameter p_B {
+    IndexDomain : i_a;
+  }
+
+After ``empty``, the data of ``p_B`` is gone:
+
+.. code-block:: aimms
+  :linenos:
+
+  empty s_A ;   ! s_A has no elements, and all data of p_B is removed
+
+After assigning the empty set, ``p_B`` only *looks* empty:
+
+.. code-block:: aimms
+  :linenos:
+
+  s_A := {} ;   ! s_A has no elements, and the data of p_B becomes inactive
+
+The values of ``p_B`` are still stored, but they are inactive: no element of ``s_A`` refers to them, so
+they do not show up in displays, pages or expressions. Restoring ``s_A`` to its previous contents makes
+the data of ``p_B`` visible again.
+
+Choose the form that matches your intent:
+
+* Use ``empty s_A`` when you want the set **and** everything defined over it cleared, for instance before
+  reading a new data instance.
+* Use ``s_A := {}`` when you want to hide the data temporarily and bring it back by restoring the
+  elements later. Keep in mind that inactive data still occupies memory until it is removed.
+
+If you decide later that the inactive data is no longer needed, remove it explicitly. ``Cleanup p_B ;``
+drops the inactive values from ``p_B`` alone, and ``CleanDependents s_A ;`` does the same across every
+identifier defined over ``s_A``. After either statement, restoring the elements of ``s_A`` no longer brings
+the old values back. See :doc:`../713/713-reclaiming-memory-between-data-instances` for how these
+statements compare and what they do to memory.
+
 A Defined Set Cannot Be Emptied At All
 ---------------------------------------
 
@@ -131,10 +180,6 @@ Naming the exceptions, rather than the sets to clear, is almost always the inten
 month is then cleared automatically. Listing the sets to clear does the opposite, and the omission
 surfaces later as data surviving a reset that should have removed it.
 
-.. seealso::
-
-  * :doc:`../713/713-reclaiming-memory-between-data-instances`
-
 Key Takeaways
 --------------
 
@@ -142,11 +187,21 @@ Key Takeaways
 
 - To fully remove elements from a subset of :aimms:set:`AllIdentifiers`, assign an empty set ``{}`` to it explicitly.
 
+- On a regular set, ``empty s_A`` also removes the data of identifiers defined over ``s_A``, while ``s_A := {}`` only makes that data inactive; restoring the elements makes it visible again.
+
 - A set with a ``Definition`` attribute cannot be emptied by any means; drop the definition if the set has to be procedurally editable.
 
 - To clear many sets at once, intersect a ``Section`` name with :aimms:set:`AllSets` and subtract the exceptions, then pass the result to ``empty``. Naming the exceptions keeps new sets covered automatically.
 
 - Use ``empty`` carefully when dealing with predefined sets to avoid unintended behavior.
+
+.. seealso::
+
+  * :doc:`../713/713-reclaiming-memory-between-data-instances`
+
+  * `AIMMS Documentation: Data Control <https://documentation.aimms.com/language-reference/data-communication-components/data-initialization-verification-and-control/data-control.html>`__
+
+  * `AIMMS Documentation: Set Declaration and Attributes <https://documentation.aimms.com/language-reference/non-procedural-language-components/set-declaration/set-declaration-and-attributes.html>`__
 
 .. spelling:word-list::
 
