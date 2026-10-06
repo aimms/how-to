@@ -3,7 +3,7 @@ Reclaim Memory Between Data Instances
 
 .. meta::
    :description: Empty, Cleanup, CleanDependents and Rebuild each do something precise and different; this explains which does what and gives the pattern for clearing all model data between scenarios while leaving the interface state intact.
-   :keywords: Empty, Cleanup, CleanDependents, Rebuild, GarbageCollectStrings, AllIdentifiers, inactive element, element space, memory management, scenario loop
+   :keywords: Empty, Cleanup, CleanDependents, Rebuild, GarbageCollectStrings, AllIdentifiers, inactive element, element space, memory management, scenario loop, MemoryInUse, IdentifierMemory, memory leak
 
 An application that loads and discards large data instances in sequence - running many scenarios in one session -
 needs to release the memory of one before reading the next. Four statements do related but distinctly different
@@ -81,9 +81,33 @@ Step 1 is the one most often missed. A generated mathematical program is not rea
 identifiers it was built from, so without deleting the instances a scenario loop accumulates one matrix per
 iteration.
 
+Checking for Memory Leaks
+--------------------------
+
+Two functions let you verify that the clearing actually works:
+
+* :aimms:func:`MemoryInUse` returns the amount of memory used by AIMMS.
+* :aimms:func:`IdentifierMemory` returns the memory in use for a single identifier.
+
+Record :aimms:func:`MemoryInUse` at the end of each iteration, after the instance has been cleared. Because
+cleared memory goes back to AIMMS's reserves and is reused, the value should level off after the first few
+iterations. If it keeps growing from one iteration to the next, memory is leaking.
+
+The leak can come from two places:
+
+* **The application itself**: some identifiers keep their data over iterations, for instance because they are
+  not in ``s_businessLogic`` and are therefore never emptied. Calling :aimms:func:`IdentifierMemory` on the
+  suspects, or checking their :any:`Card`, shows which of them keep growing.
+* **AIMMS itself**: if every identifier is cleared and memory still grows, the leak is inside AIMMS. That is a
+  bug, and should be reported to AIMMS Support together with a project that reproduces it.
+
+:doc:`../134/134-Monitoring-Memory-Use` shows a complete pattern for logging memory over repeated runs, and
+:doc:`../170/170-memory-in-use` covers the other tools for investigating memory use.
 
 .. seealso::
 
+   * :doc:`../170/170-memory-in-use`
+   * :doc:`../134/134-Monitoring-Memory-Use`
    * :doc:`../125/125-execution-efficiency`
    * :doc:`../612/612-reduce-memory-use`
 

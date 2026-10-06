@@ -23,3 +23,8 @@ The timer is not the only way a session ends. To close one from the model:
 
 Note that after a logout a WebUI session stays active for a further five minutes before it is deactivated.
 
+.. seealso::
+
+   * :doc:`../913/913-webui-session-termination`
+
+   * :doc:`../908/908-idle-monitor-webui-apps`

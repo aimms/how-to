@@ -2,8 +2,8 @@ Sharing AIMMS Project Files
 ===========================
 
 .. meta::
-   :keywords: project folder structure, .aimms file, .ams file, Project.xml, version control, project sharing, AIMMS Launcher
-   :description: Explains the structure of an AIMMS project folder, the roles of .aimms, .ams, and Project.xml files, and how to package and share the project as a ZIP archive.
+   :keywords: project folder structure, .aimms file, .ams file, Project.xml, version control, project sharing, AIMMS Launcher, AIMMS libraries, Library Manager, collaborative development
+   :description: Explains the structure of an AIMMS project folder, the roles of .aimms, .ams, and Project.xml files, how to package and share the project as a ZIP archive, and why libraries are the best way to share model code between developers and projects.
 
 This article explains the structure of an AIMMS project folder and provides instructions for sharing your project files with others, such as developers or the AIMMS Support Team.
 
@@ -53,6 +53,30 @@ To share your project with other developers or AIMMS Support, compress the entir
 
       If your project imports data from external sources, like Excel files or databases, consider including a saved data case file. To save a data case, navigate to :menuselection:`Data > Save Case as`.
 
+A ZIP archive is the right choice for a one-off copy, such as sending a project to AIMMS Support. It is not
+the best way to share work between developers on an ongoing basis.
+
+Share Parts of a Project with Libraries
+---------------------------------------
+
+The best way to share model code between projects, or between developers working on the same project, is
+to use AIMMS libraries.
+
+A library is itself an AIMMS project, kept in its own folder, that you add to other projects through
+:menuselection:`File > Library Manager`. Instead of copying files or sending the whole project around, you
+share the library folder:
+
+* **Reuse across projects**: functions, procedures and pages placed in a library can be added to any
+  project that needs them, and an update to the library reaches every project that uses it.
+* **Collaboration**: a large project can be split into several libraries, so that each developer works in
+  their own part of the model without editing the same files as everyone else.
+* **Clear interfaces**: a library has its own prefix and can expose only a public section, which keeps the
+  rest of its contents internal.
+
+Combined with a version control system, libraries are the recommended setup for team development. See
+:doc:`../84/84-using-libraries` for how to create and add libraries, and
+:doc:`../375/375-library-function-procedure` for how to organize one.
+
 Unpack Before Opening
 ---------------------
 
@@ -70,7 +94,9 @@ folder and the rest of the project are never unpacked, so when AIMMS looks for t
 Extracting the whole archive first and opening the ``.aimms`` file from the extracted folder resolves it.
 
 .. seealso::
-      
+
+   * :doc:`../84/84-using-libraries`
+   * :doc:`../375/375-library-function-procedure`
    * :doc:`../151/151-version-control-aimmspack-backup`
    * :doc:`../145/145-import-export-section`
    * :doc:`../95/95-change-default-ui`
