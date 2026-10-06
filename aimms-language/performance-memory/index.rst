@@ -16,4 +16,5 @@ Performance & Memory
    /Articles/134/134-Monitoring-Memory-Use
    /Articles/170/170-memory-in-use
    /Articles/613/613-improve-efficiency-and-performance
+   /Articles/713/713-reclaiming-memory-between-data-instances
       
