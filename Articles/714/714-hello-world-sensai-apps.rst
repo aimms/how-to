@@ -1,17 +1,17 @@
-Hello World of Sensai Apps
+Hello World of SENSAI Apps
 ===========================
 
-Sensai Apps brings AI assistance directly into AIMMS Developer, built on top
+SENSAI Apps brings AI assistance directly into AIMMS Developer, built on top
 of AIMMS's established Operations Research platform. This article walks
-through a first hands-on session: connecting AIMMS Developer to Sensai,
-opening the Sensai chat in a new project, asking Sensai to create and apply
+through a first hands-on session: connecting AIMMS Developer to SENSAI,
+opening the SENSAI chat in a new project, asking SENSAI to create and apply
 a small skill, and reviewing exactly what it changed, including the skill
 definition it saved for reuse.
 
 This article covers:
 
--  Preparing for Sensai Apps
--  Opening Sensai Apps in a new project
+-  Preparing for SENSAI Apps
+-  Opening SENSAI Apps in a new project
 -  Specifying a small skill
 -  Observing the results
 -  The skill definition
@@ -20,9 +20,9 @@ Prerequisites
 -------------
 
 -  A license for AIMMS Developer version 26.4 or later.
--  Access to an AIMMS Cloud with Sensai activated.
+-  Access to an AIMMS Cloud with SENSAI activated.
 
-Preparing for Sensai Apps
+Preparing for SENSAI Apps
 -------------------------
 
 Step 1:
@@ -75,10 +75,10 @@ Step 4:
 Back in AIMMS Developer, the :menuselection:`Tools` menu now should show :menuselection:`Cloud Logout`
 instead of :menuselection:`Cloud Login`.
 
-Opening Sensai Apps in a New Project
+Opening SENSAI Apps in a New Project
 -------------------------------------
 
-With access to Sensai, you can open the Sensai chat via the :menuselection:`Tools` menu:
+With access to SENSAI, you can open the SENSAI chat via the :menuselection:`Tools` menu:
 
 .. image:: images/image5.png
    :alt: Tools menu with SENSAI chat highlighted
@@ -94,10 +94,10 @@ In a new project, the opening window looks like this:
 
 |
 
-To get acquainted, you can ask Sensai a few questions, for example:
+To get acquainted, you can ask SENSAI a few questions, for example:
 
 .. image:: images/image7.png
-   :alt: Example exchange asking Sensai about available skills and tools
+   :alt: Example exchange asking SENSAI about available skills and tools
    :align: center
 
 |
@@ -112,7 +112,7 @@ consistently from the start.
 That's why I group the initialization and termination procedures together,
 and extend the time-duration quantity with some commonly used time units,
 every time I start a new project. Instead of doing this by hand each time,
-I asked Sensai to turn it into a reusable skill:
+I asked SENSAI to turn it into a reusable skill:
 
 .. code-block:: text
 
@@ -130,10 +130,10 @@ I asked Sensai to turn it into a reusable skill:
 
    Can you save this skill to the project folder?
 
-Sensai immediately got to work:
+SENSAI immediately got to work:
 
 .. image:: images/image8.png
-   :alt: Sensai chat showing the request and its plan
+   :alt: SENSAI chat showing the request and its plan
    :align: center
 
 |
@@ -141,15 +141,15 @@ Sensai immediately got to work:
 Observing the Results
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Sensai quickly created the skill and applied it to the project, and quickly came back with results:
+SENSAI quickly created the skill and applied it to the project, and quickly came back with results:
 
 .. image:: images/image9.png
-   :alt: Sensai's summary of the changes it made, with a naming-convention note
+   :alt: SENSAI's summary of the changes it made, with a naming-convention note
    :align: center
 
 |
 
-Sensai's response includes a proactive style note, boxed in blue above. 
+SENSAI's response includes a proactive style note, boxed in blue above. 
 
 The Model Explorer confirmed the new section and its procedures:
 
@@ -171,13 +171,13 @@ And the ``SI_Time_Duration`` quantity showed the updated conversions:
 
    The minute conversion wasn't part of the request. It was already present
    in ``SI_Time_Duration`` when the project was created (AIMMS PRO and AIMMS
-   WebUI add it by default). Sensai only added the week, day, and hour
+   WebUI add it by default). SENSAI only added the week, day, and hour
    conversions that were actually asked for.
 
 The Skill Definition
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Sensai saved the skill for reuse in two places: as
+SENSAI saved the skill for reuse in two places: as
 ``skills/initproject.skill.md`` in the project, and as a personal skill
 named ``initproject`` available in future chats. Here is what it saved:
 
@@ -198,16 +198,16 @@ named ``initproject`` available in future chats. Here is what it saved:
       and that `SI_Time_Duration` contains the expected conversions.
    6. Save the model if the user asks to persist the structural changes.
 
-In this Hello World walkthrough, we connected AIMMS Developer to Sensai,
-opened the Sensai chat in a new project, asked Sensai to create and apply a
+In this Hello World walkthrough, we connected AIMMS Developer to SENSAI,
+opened the SENSAI chat in a new project, asked SENSAI to create and apply a
 small skill, and reviewed both the model changes and the skill definition
-it produced and saved for reuse. From here, try asking Sensai to turn one
+it produced and saved for reuse. From here, try asking SENSAI to turn one
 of your own recurring modeling steps into a skill.
 
 .. seealso::
 
-   -  `Sensai Apps released in preview <https://community.aimms.com/product-updates/sensai-apps-released-in-preview-1995>`_
-   -  `Sensai documentation <https://documentation.aimms.com/sensai/index.html>`_
+   -  `SENSAI Apps released in preview <https://community.aimms.com/product-updates/sensai-apps-released-in-preview-1995>`_
+   -  `SENSAI documentation <https://documentation.aimms.com/sensai/index.html>`_
 
 
 .. spelling:word-list::
