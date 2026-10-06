@@ -27,7 +27,7 @@ The structure of execution usually follows this format:
 The example project is linked at the top of this article. The Excel input files come with it, in the
 project's ``data`` folder, so it runs as soon as you open it.
 
-Logic of the iterative operation
+Logic of the Iterative Operation
 -------------------------------------
 
 The flow of a procedure to solve a math program multiple times is shown below. These operations can be done using any iterative operator like :any:`for` or :any:`while`. The loop starts by selecting the first input file from the list of files to be iterated through. 
