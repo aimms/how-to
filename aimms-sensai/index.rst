@@ -2,7 +2,7 @@
    :scale: 130
    :align: right
 
-Sensai
+SENSAI
 ========================
 
 .. meta::
