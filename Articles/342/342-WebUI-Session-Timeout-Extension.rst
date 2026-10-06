@@ -25,6 +25,4 @@ Note that after a logout a WebUI session stays active for a further five minutes
 
 .. seealso::
 
-   * :doc:`../913/913-webui-session-termination`
-
-   * :doc:`../908/908-idle-monitor-webui-apps`
+   * :doc:`../351/351-app-initialization-termination-with-libraries`
