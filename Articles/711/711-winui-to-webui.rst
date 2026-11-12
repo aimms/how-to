@@ -103,8 +103,7 @@ Manual changes
 
 Some changes take human judgment, and are best made by hand, on a single page, in the WebUI editor or in the model. For example:
 
-* combining related values, such as a model status and an error measure, in one KPI widget,
-* moving buttons to the page actions menu, and
+* combining related values, such as a model status and an error measure, in one KPI widget, and
 * widening table columns, so that the headers are fully visible.
 
 Asking SENSAI for an improvement
@@ -171,7 +170,7 @@ The Data Reconciliation application shows the process on a single page, **Run re
    .. image:: images/711-example-4-tidy.png
       :align: center
 
-#. **After manual changes.** The model status and the observed error are combined in one KPI widget, the buttons are moved to the page actions menu, and the table columns are widened, so the headers are fully visible.
+#. **After the final changes.** SENSAI applied the skill ``buttons-to-secondary-action``, which moved the buttons to the page actions menu. By hand, the model status and the observed error are combined in one KPI widget, and the table columns are widened, so the headers are fully visible.
 
    .. image:: images/711-example-5-manual.png
       :align: center
