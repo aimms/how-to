@@ -282,6 +282,10 @@ Release Notes
    Latitude_center
    p_diagram_x
    p_diagram_y
+   rescaled
+   rescaling
+   repoint
+   repoints
    pr_getDim
    sp_id
    p_dim

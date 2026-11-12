@@ -164,3 +164,6 @@ Summary
    bmp
    png
    css
+   theming
+   stylesheet
+   submodule

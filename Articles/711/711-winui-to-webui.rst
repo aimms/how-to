@@ -14,7 +14,7 @@ Converting an application combines three things:
 
 * **Traditional programming.** The ``WinUI_to_WebUI`` converter does the bulk of the work. It converts every WinUI page automatically into a WebUI page, with the same widgets and the same layout.
 * **Artificial intelligence.** SENSAI, the AI built into AIMMS, handles the routine refinements, such as replacing the WinUI navigation by a workflow panel, and tidying up each page.
-* **Human judgement.** You, as the developer, keep the final say: you decide what looks right and what your users need.
+* **Human judgment.** You, as the developer, keep the final say: you decide what looks right and what your users need.
 
 This way, you can convert an existing WinUI application to WebUI quickly, without losing control over the result.
 
@@ -120,7 +120,7 @@ There are three ways to make a change. A manual change applies to a single page.
 Manual changes
 ~~~~~~~~~~~~~~
 
-Some changes take human judgement, and are best made by hand, on a single page, in the WebUI editor or in the model. For example:
+Some changes take human judgment, and are best made by hand, on a single page, in the WebUI editor or in the model. For example:
 
 * combining related values, such as a model status and an error measure, in one KPI widget,
 * moving buttons to the page actions menu, and
@@ -200,7 +200,7 @@ The result is a clean WebUI page that does the same as the original WinUI page.
 Summary
 -------
 
-To convert a WinUI application to WebUI, run the ``WinUI_to_WebUI`` converter once on the whole project, and then refine the result page by page. In each iteration, evaluate the pages, apply one change to a single page or a group of pages, by hand, with SENSAI, or with a SENSAI skill, and store the result. The converter does the bulk of the work, SENSAI handles the routine refinements, and you keep the final judgement.
+To convert a WinUI application to WebUI, run the ``WinUI_to_WebUI`` converter once on the whole project, and then refine the result page by page. In each iteration, evaluate the pages, apply one change to a single page or a group of pages, by hand, with SENSAI, or with a SENSAI skill, and store the result. The converter does the bulk of the work, SENSAI handles the routine refinements, and you keep the final judgment.
 
 .. seealso::
 
