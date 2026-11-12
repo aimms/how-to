@@ -249,6 +249,7 @@ Release Notes
 .. seealso::
 
    * :doc:`711-winui-to-webui`
+   * :doc:`711-tips-and-tricks-winui-to-webui`
 
 .. spelling:word-list::
 

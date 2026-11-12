@@ -205,6 +205,7 @@ To convert a WinUI application to WebUI, run the ``WinUI_to_WebUI`` converter on
 .. seealso::
 
    * :doc:`711-operating-winui-to-webui-converter`
+   * :doc:`711-tips-and-tricks-winui-to-webui`
    * :doc:`../714/714-hello-world-sensai-apps`
    * `SENSAI documentation <https://documentation.aimms.com/sensai/index.html>`_
 

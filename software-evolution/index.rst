@@ -35,6 +35,7 @@ AIMMS Optimization Tooling has evolved over time, to match arising user needs an
    /Articles/127/127-Progress-Window
    /Articles/711/711-winui-to-webui
    /Articles/711/711-operating-winui-to-webui-converter
+   /Articles/711/711-tips-and-tricks-winui-to-webui
    winui/index
 
 
