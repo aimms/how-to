@@ -31,7 +31,13 @@ Prerequisites
 
   The converter and SENSAI both modify files in the project folder, such as the model ``.ams`` files and ``webui.json``. Storing each step lets you compare a page before and after a change, and go back when a change does not work out. With git, each commit message documents what you changed, so you can easily find a version that worked, and see how you got there. Make sure the project files are really tracked: git does not store a folder listed in ``.gitignore``.
 
-.. TODO: Add the download link of the Data Reconciliation example, in its original WinUI version and its converted WebUI version.
+Downloads
+^^^^^^^^^^
+
+* Original App: :download:`AIMMS 26.8 WinUI Data Reconciliation <model/winui-data-reconciliation.zip>` 
+
+* Converted App: :download:`AIMMS 26.8 WebUI Data Reconciliation <model/webui-data-reconciliation.zip>` 
+
 
 The Conversion Process
 ----------------------
@@ -170,10 +176,16 @@ The Data Reconciliation application shows the process on a single page, **Run re
    .. image:: images/711-example-4-tidy.png
       :align: center
 
-#. **After the final changes.** SENSAI applied the skill ``buttons-to-secondary-action``, which moved the buttons to the page actions menu. By hand, the model status and the observed error are combined in one KPI widget, and the table columns are widened, so the headers are fully visible.
+#. **After tuning a page.** SENSAI applied the skill ``buttons-to-secondary-action``, which moved the buttons to the page actions menu. By hand, the model status and the observed error are combined in one KPI widget, and the table columns are widened, so the headers are fully visible.
 
    .. image:: images/711-example-5-manual.png
       :align: center
+
+#. **Finishing touch.** Use AIMMS WebUI theming `AIMMS WebUI theming - logo <https://documentation.aimms.com/webui/theming.html#a-special-case-the-application-logo>`_ to put some logo in the upper left. The change adds a small SVG logo, ``resources/images/app-logo.svg``, and a theme file, ``resources/css/logo-theme.css``, that sets ``--bg_app-logo`` (the image, its position and size) and ``--spacing_app-logo_width`` (the space reserved for it). Both live in the ``MainProject/WebUI`` folder, and you select the theme in the WebUI settings.
+
+   .. image:: images/711-example-6-finishing-touch.png
+      :align: center
+
 
 The result is a clean WebUI page that does the same as the original WinUI page.
 
