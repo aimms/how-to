@@ -24,7 +24,7 @@ Converting Dialogs That Wait for the User
 
 In WinUI, the dialog functions :aimms:func:`DialogAsk` and :aimms:func:`DialogMessage` are synchronous. The execution stops at the call, and continues after the user presses a button. The code after the call can use the answer, and all local variables of the procedure.
 
-In WebUI, the corresponding procedure ``webui::RequestPerformWebUIDialog`` returns immediately. The dialog is shown in the browser, but the procedure that called it just continues, and typically ends. Only when the user selects an action, AIMMS calls a second procedure, the *ondone* procedure, with the name of the selected action. See the `WebUI library <https://documentation.aimms.com/webui/library.html#requestperformwebuidialog>`_.
+In WebUI, the corresponding procedure ``webui::RequestPerformWebUIDialog`` returns immediately. The dialog is shown in the browser, but the procedure that called it just continues, and typically ends. Only when the user selects an action, AIMMS calls a second procedure, the *ondone* procedure, with the name of the selected action. See the `WebUI library <https://documentation.aimms.com/webui/library.html#requestperformwebuidialog>`__.
 
 .. image:: images/711-dialog-sync-vs-async.svg
    :align: center
@@ -137,7 +137,7 @@ To switch to notifications:
 Reporting Progress in WinUI and WebUI
 -------------------------------------
 
-Many WinUI applications report the progress of a long computation with :aimms:func:`DialogProgress`, which shows a progress window with a message and a percentage. In WebUI, the counterpart is ``webui::SetProgressMessage``, which shows a message while the WebUI waits for the computation. See the `WebUI library <https://documentation.aimms.com/webui/library.html>`_.
+Many WinUI applications report the progress of a long computation with :aimms:func:`DialogProgress`, which shows a progress window with a message and a percentage. In WebUI, the counterpart is ``webui::SetProgressMessage``, which shows a message while the WebUI waits for the computation. See the `WebUI library <https://documentation.aimms.com/webui/library.html>`__.
 
 When the model reports progress regularly, and you want to keep the WinUI version working during the conversion, use the small library ``libw2w``. Its procedure ``w2w::pr_DialogProgress`` has the same arguments as ``DialogProgress``:
 
