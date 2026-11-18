@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" font-family="Figtree, 'Segoe UI', Arial, sans-serif" font-weight="300" role="img" aria-labelledby="t d">
+  <title id="t">A dialog call in WinUI and in WebUI</title>
+  <desc id="d">In WinUI, DialogAsk waits for the user, and the code after the dialog follows in the same procedure. In WebUI, RequestPerformWebUIDialog returns immediately and the procedure ends. The code after the dialog moves to the ondone procedure, and the variables shared by both procedures are global.</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#050a3a"/>
+    </marker>
+  </defs>
+
+  <!-- panel titles -->
+  <text x="270" y="40" text-anchor="middle" font-size="22" font-weight="500" font-family="Lexend, 'Segoe UI', Arial, sans-serif" fill="#050a3a">WinUI: DialogAsk is synchronous</text>
+  <text x="755" y="40" text-anchor="middle" font-size="22" font-weight="500" font-family="Lexend, 'Segoe UI', Arial, sans-serif" fill="#050a3a">WebUI: the dialog call returns immediately</text>
+
+  <!-- ===== WinUI ===== -->
+  <rect x="20" y="64" width="500" height="516" rx="18" fill="#f4f5f7"/>
+  <text x="44" y="98" font-size="16" font-weight="500" font-family="Lexend, 'Segoe UI', Arial, sans-serif" fill="#050a3a">One procedure</text>
+
+  <rect x="110" y="120" width="320" height="64" rx="12" fill="#dee8f2"/>
+  <text x="270" y="147" text-anchor="middle" font-size="17" font-weight="500" font-family="Lexend, 'Segoe UI', Arial, sans-serif" fill="#050a3a">Code before the dialog</text>
+  <text x="270" y="168" text-anchor="middle" font-size="14" fill="#050a3a">uses local variables</text>
+
+  <line x1="270" y1="184" x2="270" y2="236" stroke="#050a3a" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <rect x="110" y="240" width="320" height="64" rx="12" fill="#f4f3d3" stroke="#1847c9" stroke-width="3"/>
+  <text x="270" y="267" text-anchor="middle" font-size="17" font-weight="500" font-family="Lexend, 'Segoe UI', Arial, sans-serif" fill="#050a3a">DialogAsk( ... )</text>
+  <text x="270" y="288" text-anchor="middle" font-size="14" fill="#050a3a">execution waits here</text>
+
+  <line x1="270" y1="304" x2="270" y2="356" stroke="#050a3a" stroke-width="2.5" marker-end="url(#arr)"/>
+  <text x="286" y="336" font-size="14" fill="#050a3a">the user presses a button</text>
+
+  <rect x="110" y="360" width="320" height="64" rx="12" fill="#dee8f2"/>
+  <text x="270" y="387" text-anchor="middle" font-size="17" font-weight="500" font-family="Lexend, 'Segoe UI', Arial, sans-serif" fill="#050a3a">Code after the dialog</text>
+  <text x="270" y="408" text-anchor="middle" font-size="14" fill="#050a3a">uses the answer and the locals</text>
+
+  <text x="44" y="480" font-size="15" fill="#050a3a">The call returns the number of the button.</text>
+  <text x="44" y="504" font-size="15" fill="#050a3a">The code continues with the same locals.</text>
+
+  <!-- ===== WebUI ===== -->
+  <rect x="560" y="64" width="620" height="516" rx="18" fill="#f4f5f7"/>
+
+  <!-- procedure A -->
+  <rect x="580" y="84" width="330" height="250" rx="14" fill="#fff" stroke="#050a3a" stroke-width="2"/>
+  <text x="598" y="112" font-size="16" font-weight="500" font-family="Lexend, 'Segoe UI', Arial, sans-serif" fill="#050a3a">Procedure that opens the dialog</text>
+
+  <rect x="600" y="128" width="290" height="56" rx="12" fill="#dee8f2"/>
+  <text x="745" y="153" text-anchor="middle" font-size="17" font-weight="500" font-family="Lexend, 'Segoe UI', Arial, sans-serif" fill="#050a3a">Code before the dialog</text>
+  <text x="745" y="172" text-anchor="middle" font-size="14" fill="#050a3a">sets the variables</text>
+
+  <line x1="745" y1="184" x2="745" y2="206" stroke="#050a3a" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <rect x="600" y="210" width="290" height="64" rx="12" fill="#f4f3d3" stroke="#1847c9" stroke-width="3"/>
+  <text x="745" y="236" text-anchor="middle" font-size="15" font-weight="500" font-family="Lexend, 'Segoe UI', Arial, sans-serif" fill="#050a3a">webui::RequestPerformWebUIDialog</text>
+  <text x="745" y="257" text-anchor="middle" font-size="14" fill="#050a3a">( ..., 'OnDone' ) returns at once</text>
+
+  <text x="745" y="308" text-anchor="middle" font-size="14" font-style="italic" fill="#050a3a">the procedure ends, the dialog stays open</text>
+
+  <!-- the user chooses -->
+  <line x1="745" y1="334" x2="745" y2="406" stroke="#050a3a" stroke-width="2.5" marker-end="url(#arr)"/>
+  <text x="760" y="358" font-size="14" fill="#050a3a">the user selects an action,</text>
+  <text x="760" y="376" font-size="14" fill="#050a3a">AIMMS then calls the</text>
+  <text x="760" y="394" font-size="14" fill="#050a3a">ondone procedure</text>
+
+  <!-- ondone procedure -->
+  <rect x="580" y="410" width="330" height="150" rx="14" fill="#fff" stroke="#050a3a" stroke-width="2"/>
+  <text x="598" y="438" font-size="16" font-weight="500" font-family="Lexend, 'Segoe UI', Arial, sans-serif" fill="#050a3a">OnDone( TheAction )</text>
+  <rect x="600" y="454" width="290" height="88" rx="12" fill="#dee8f2"/>
+  <text x="745" y="486" text-anchor="middle" font-size="17" font-weight="500" font-family="Lexend, 'Segoe UI', Arial, sans-serif" fill="#050a3a">Code after the dialog</text>
+  <text x="745" y="508" text-anchor="middle" font-size="14" fill="#050a3a">uses TheAction and</text>
+  <text x="745" y="526" text-anchor="middle" font-size="14" fill="#050a3a">the global variables</text>
+
+  <!-- globals -->
+  <rect x="950" y="104" width="214" height="440" rx="14" fill="#e3e8d6" stroke="#050a3a" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="1057" y="138" text-anchor="middle" font-size="16" font-weight="500" font-family="Lexend, 'Segoe UI', Arial, sans-serif" fill="#050a3a">Global variables</text>
+  <text x="1057" y="162" text-anchor="middle" font-size="14" fill="#050a3a">The locals of the</text>
+  <text x="1057" y="181" text-anchor="middle" font-size="14" fill="#050a3a">original procedure,</text>
+  <text x="1057" y="200" text-anchor="middle" font-size="14" fill="#050a3a">now declared in the</text>
+  <text x="1057" y="219" text-anchor="middle" font-size="14" fill="#050a3a">model, so both</text>
+  <text x="1057" y="238" text-anchor="middle" font-size="14" fill="#050a3a">procedures can use</text>
+  <text x="1057" y="257" text-anchor="middle" font-size="14" fill="#050a3a">them.</text>
+
+  <line x1="890" y1="156" x2="950" y2="156" stroke="#050a3a" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+  <line x1="890" y1="498" x2="950" y2="498" stroke="#050a3a" stroke-width="2" stroke-dasharray="5 4" marker-start="url(#arr)"/>
+  <line x1="1057" y1="270" x2="1057" y2="498" stroke="#050a3a" stroke-width="2" stroke-dasharray="5 4"/>
+  <text x="1070" y="390" font-size="14" fill="#050a3a">written</text>
+  <text x="1070" y="408" font-size="14" fill="#050a3a">before,</text>
+  <text x="1070" y="426" font-size="14" fill="#050a3a">read after</text>
+</svg>

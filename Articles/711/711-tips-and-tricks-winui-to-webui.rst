@@ -134,9 +134,91 @@ To switch to notifications:
 
 #. Add the notification library to the project.
 
-#. Replace the message dialogs that report findings by calls to ``nml::pr_addNotification``. Keep a dialog where the user must make a decision before the computation can continue.
+#. Replace the message dialogs that report findings by calls to ``nml::pr_addNotification``. Keep a dialog where the user must make a decision before the computation can continue. See :ref:`w2w-tips-dialogs` for how to convert such a dialog.
 
 #. Add a page with the notifications table, and make it easy to reach, for example as a step in the workflow panel.
+
+.. _w2w-tips-dialogs:
+
+Converting Dialogs That Wait for the User
+-----------------------------------------
+
+In WinUI, the dialog functions :aimms:func:`DialogAsk` and :aimms:func:`DialogMessage` are synchronous. The execution stops at the call, and continues after the user presses a button. The code after the call can use the answer, and all local variables of the procedure.
+
+In WebUI, the corresponding procedure ``webui::RequestPerformWebUIDialog`` returns immediately. The dialog is shown in the browser, but the procedure that called it just continues, and typically ends. Only when the user selects an action, AIMMS calls a second procedure, the *ondone* procedure, with the name of the selected action. See the `WebUI library <https://documentation.aimms.com/webui/library.html#requestperformwebuidialog>`_.
+
+.. image:: images/711-dialog-sync-vs-async.svg
+   :align: center
+   :width: 100%
+   :alt: In WinUI the code continues after the dialog in the same procedure. In WebUI the code after the dialog moves to an ondone procedure, and the shared variables become global.
+
+An example in WinUI. The local parameter ``p_count`` is used both before and after the dialog:
+
+.. code-block:: aimms
+
+   Procedure pr_deletePlants {
+       Body: {
+           p_count := Count( i_plant | bp_selected( i_plant ) ) ;
+
+           if DialogAsk(
+               formatString( "Delete %i plants?", p_count ),
+               "Delete", "Cancel", "Delete plants" ) = 1
+           then
+               pr_deleteSelectedPlants ;
+               sp_status := formatString( "%i plants deleted", p_count ) ;
+           endif ;
+       }
+   }
+
+The same function in WebUI. The code after the dialog moved to ``pr_deletePlantsDone``, and ``p_count`` became a global parameter:
+
+.. code-block:: aimms
+
+   Procedure pr_deletePlants {
+       Body: {
+           p_count := Count( i_plant | bp_selected( i_plant ) ) ;
+
+           webui::RequestPerformWebUIDialog(
+               title   : "Delete plants",
+               message : formatString( "Delete %i plants?", p_count ),
+               actions : s_deleteActions,   ! the set { Delete, Cancel }
+               onDone  : 'pr_deletePlantsDone' ) ;
+       }
+   }
+
+   Procedure pr_deletePlantsDone {
+       Arguments: (sp_action);
+       Body: {
+           if sp_action = "Delete" then
+               pr_deleteSelectedPlants ;
+               sp_status := formatString( "%i plants deleted", p_count ) ;
+           endif ;
+       }
+   }
+
+To convert a dialog call:
+
+#. Replace the call by ``webui::RequestPerformWebUIDialog``. The buttons become the elements of the ``actions`` set, in the order of the buttons.
+
+#. Create the ondone procedure, with one input string argument. Move all code after the dialog call to this procedure. Where the WinUI code tested the number of the button, test the name of the action instead.
+
+#. Make every local identifier that is used both before and after the dialog global, so the ondone procedure can read it. Declare it in the model, and give it a clear name, because it now lives as long as the application.
+
+#. Make sure the calling procedure does nothing after the dialog call that depends on the answer. This includes the code of the procedures that called it: when they continue right after the call, they continue before the user has answered.
+
+To only show a message, as with ``DialogMessage``, use a single action such as ``OK`` and pass an empty string as ondone procedure. No procedure is called then.
+
+A few things to look out for:
+
+* A dialog in a loop, or several dialogs in a row, becomes a chain of ondone procedures. The ondone procedure of the first dialog opens the second one, and so on.
+* Only one dialog can be open at a time. Before opening a dialog, check ``webui::IsWebUIDialogOpen``, or the number of waiting requests ``webui::RequestQueueSize``.
+* In WinUI, pressing Esc or closing the dialog counts as pressing the last button. Check what the WebUI dialog does in that case, and put the safe action, usually Cancel, last.
+
+This is a conversion that SENSAI can help with, but check the result: it must see which code depends on the answer. For example:
+
+.. code-block:: none
+
+   In procedure pr_deletePlants, replace the DialogAsk call by webui::RequestPerformWebUIDialog. Move the code after the call to a new ondone procedure with one string argument, and make the local identifiers that both parts use global.
 
 Summary
 -------
@@ -144,6 +226,7 @@ Summary
 * Rename the WinUI startup bitmap to stop the splash screen, and show the logo in the WebUI header with a theming stylesheet.
 * Use ``libw2w`` to report progress in both WinUI and WebUI with a single call.
 * Collect many messages as notifications in a table, instead of a series of dialogs.
+* Convert a dialog that waits for the user by moving the code after the dialog to an ondone procedure, and by making the shared local identifiers global.
 
 .. seealso::
 
@@ -167,3 +250,4 @@ Summary
    theming
    stylesheet
    submodule
+   ondone
