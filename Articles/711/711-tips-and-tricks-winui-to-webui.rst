@@ -3,7 +3,7 @@ Tips and Tricks Converting a WinUI Application to WebUI
 
 .. meta::
    :description: Tips for converting an AIMMS WinUI application to WebUI: convert dialogs that wait for the user, present many messages as structured notifications, report progress in both WinUI and WebUI, and remove the WinUI splash screen and add a logo to the WebUI.
-   :keywords: WinUI to WebUI, AIMMS WebUI, splash screen, startup bitmap, application logo, theming, progress message, DialogProgress, SetProgressMessage, notifications, libw2w
+   :keywords: WinUI to WebUI, AIMMS WebUI, splash screen, startup bitmap, application logo, theming, progress message, DialogProgress, SetProgressMessage, notifications, libUITools
 
 Introduction
 ------------
@@ -119,11 +119,11 @@ Many dialogs only inform the user, and do not ask for a decision. For those, use
 
 WinUI applications often report findings one by one, for example with a message dialog per problem found during a data check. With a few messages, that works. With many messages, the user clicks through a series of dialogs, and the information is gone once the dialog is closed.
 
-In that case, collect the messages in a list of notifications, and present that list on a page in the WebUI. A notification library does this. Instead of a dialog, the model calls one procedure per finding:
+In that case, collect the messages in a list of notifications, and present that list on a page in the WebUI. The library ``libUITools`` does this. Instead of a dialog, the model calls one procedure per finding:
 
 .. code-block:: aimms
 
-   nml::pr_addNotification(
+   uit::pr_addNotification(
        sp_message       : "Capacity of plant P1 is negative",
        ep_severity      : 'warning',
        bp_preventsSolve : 1,
@@ -139,13 +139,15 @@ Each notification has:
 
 The library shows the notifications in a table. The user can show all notifications or only the unhandled ones, mark a notification as handled, delete it, and open the related page directly from the table row.
 
-.. TODO: Add the download location of the notification manager library, and a screenshot of the notifications table.
+.. note::
+
+   The example project contains ``libUITools``: :download:`AIMMS 26.8 UIToolsTest project download <model/UIToolsTest.zip>`
 
 To switch to notifications:
 
-#. Add the notification library to the project.
+#. Add ``libUITools`` to the project.
 
-#. Replace the message dialogs that report findings by calls to ``nml::pr_addNotification``. Keep a dialog where the user must make a decision before the computation can continue. See :ref:`w2w-tips-dialogs` for how to convert such a dialog.
+#. Replace the message dialogs that report findings by calls to ``uit::pr_addNotification``. Keep a dialog where the user must make a decision before the computation can continue. See :ref:`w2w-tips-dialogs` for how to convert such a dialog.
 
 #. Add a page with the notifications table, and make it easy to reach, for example as a step in the workflow panel.
 
@@ -154,32 +156,32 @@ Reporting Progress in WinUI and WebUI
 
 Many WinUI applications report the progress of a long computation with :aimms:func:`DialogProgress`, which shows a progress window with a message and a percentage. In WebUI, the counterpart is ``webui::SetProgressMessage``, which shows a message while the WebUI waits for the computation. See the `WebUI library <https://documentation.aimms.com/webui/library.html>`__.
 
-When the model reports progress regularly, and you want to keep the WinUI version working during the conversion, use the small library ``libw2w``. Its procedure ``w2w::pr_DialogProgress`` has the same arguments as ``DialogProgress``:
+When the model reports progress regularly, and you want to keep the WinUI version working during the conversion, use the small library ``libUITools``. Its procedure ``uit::pr_DialogProgress`` has the same arguments as ``DialogProgress``:
 
 * In WinUI mode, it calls ``DialogProgress( message, percentage )``.
 * In WebUI mode, it calls ``webui::SetProgressMessage`` with the message, the percentage, and a bar of ten blocks, for example ``Solving 40% [████______]``.
 
-The library also provides the flags ``w2w::bp_useWebUI`` and ``w2w::bp_useWinUI``, which you can use for other code that differs between WinUI and WebUI.
+The library also provides the flags ``uit::bp_useWebUI`` and ``uit::bp_useWinUI``, which you can use for other code that differs between WinUI and WebUI.
 
-.. TODO: Add the download location of libw2w.
+.. note:: libUITools is part of the download of the example project of the previous section.
 
 To use the library:
 
-#. Add ``libw2w`` to the project, for example with :menuselection:`File > Library Manager`. When the project is in git, you can add the library as a git submodule, so updates of the library are easy to take over.
+#. Add ``libUITools`` to the project, for example with :menuselection:`File > Library Manager`. When the project is in git, you can add the library as a git submodule, so updates of the library are easy to take over.
 
-#. Replace each call ``DialogProgress(`` by ``w2w::pr_DialogProgress(``. This is a typical routine change to ask SENSAI for:
+#. Replace each call ``DialogProgress(`` by ``uit::pr_DialogProgress(``. This is a typical routine change to ask SENSAI for:
 
    .. code-block:: none
 
-      In all procedures of the model and its libraries, replace each call to DialogProgress by a call to w2w::pr_DialogProgress, with the same arguments.
+      In all procedures of the model and its libraries, replace each call to DialogProgress by a call to uit::pr_DialogProgress, with the same arguments.
 
-#. Set ``w2w::bp_useWebUI := 1`` when the application runs in the WebUI. The flag is 0 by default, so the application starts in WinUI mode. A suitable place is the procedure that runs when the WebUI loads its first page: in the WebUI, open the page settings of the home page, and set the procedure upon load, for example:
+#. Set ``uit::bp_useWebUI := 1`` when the application runs in the WebUI. The flag is 0 by default, so the application starts in WinUI mode. A suitable place is the procedure that runs when the WebUI loads its first page: in the WebUI, open the page settings of the home page, and set the procedure upon load, for example:
 
    .. code-block:: aimms
 
       Procedure pr_openHomePage {
           Body: {
-              w2w::bp_useWebUI := 1 ;
+              uit::bp_useWebUI := 1 ;
               webui::OpenPage( 'first_page' );
           }
       }
@@ -241,7 +243,7 @@ Summary
 
 * Convert a dialog that waits for the user by moving the code after the dialog to an ondone procedure, and by making the shared local identifiers global.
 * Collect many messages as notifications in a table, instead of a series of dialogs.
-* Use ``libw2w`` to report progress in both WinUI and WebUI with a single call.
+* Use ``libUITools`` to report progress in both WinUI and WebUI with a single call.
 * Rename the WinUI startup bitmap to stop the splash screen, and show the logo in the WebUI header with a theming stylesheet.
 
 .. seealso::
@@ -256,9 +258,7 @@ Summary
    WebUI
    webui
    aimms
-   libw2w
-   w2w
-   nml
+   libUITools
    SENSAI
    bmp
    png
