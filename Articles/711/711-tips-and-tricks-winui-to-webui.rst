@@ -10,7 +10,7 @@ Introduction
 
 The ``WinUI_to_WebUI`` converter converts the pages of a WinUI application, and SENSAI helps to refine them. See :doc:`711-winui-to-webui`. Some parts of a WinUI application are not pages, though: a splash screen, progress windows, and message dialogs. This article gives tips for these parts:
 
-* Converting dialogs that wait for the user.
+* Converting dialogs that wait for the user, and what to do when the dialogs form a workflow.
 * Presenting many messages as a structured list of notifications.
 * Reporting progress in both WinUI and WebUI.
 * Removing the WinUI splash screen, and adding a logo to the WebUI.
@@ -24,7 +24,9 @@ Converting Dialogs That Wait for the User
 
 In WinUI, the dialog functions :aimms:func:`DialogAsk` and :aimms:func:`DialogMessage` are synchronous. The execution stops at the call, and continues after the user presses a button. The code after the call can use the answer, and all local variables of the procedure.
 
-In WebUI, the corresponding procedure ``webui::RequestPerformWebUIDialog`` returns immediately. The dialog is shown in the browser, but the procedure that called it just continues, and typically ends. Only when the user selects an action, AIMMS calls a second procedure, the *ondone* procedure, with the name of the selected action. See the `WebUI library <https://documentation.aimms.com/webui/library.html#requestperformwebuidialog>`__.
+In WebUI, the corresponding procedure ``webui::RequestPerformWebUIDialog`` returns immediately. The dialog is shown in the browser, but the procedure that called it just continues, and typically ends. Only when the user selects an action, AIMMS calls a second procedure, the *ondone* procedure, with the name of the selected action as its argument. See the `WebUI library <https://documentation.aimms.com/webui/library.html#requestperformwebuidialog>`__.
+
+You can try the example in this project: :download:`AIMMS 26.8 project download <model/DialogWinUIWebUI.zip>` 
 
 .. image:: images/711-dialog-sync-vs-async.svg
    :align: center
@@ -93,14 +95,27 @@ A few things to look out for:
 * Only one dialog can be open at a time. Before opening a dialog, check ``webui::IsWebUIDialogOpen``, or the number of waiting requests ``webui::RequestQueueSize``.
 * In WinUI, pressing Esc or closing the dialog counts as pressing the last button. Check what the WebUI dialog does in that case, and put the safe action, usually Cancel, last.
 
-This is a conversion that SENSAI can help with, but check the result: it must see which code depends on the answer. For example:
 
-.. code-block:: none
+When a dialog is complicated
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   In procedure pr_deletePlants, replace the DialogAsk call by webui::RequestPerformWebUIDialog. Move the code after the call to a new ondone procedure with one string argument, and make the local identifiers that both parts use global.
+For a single dialog, the steps above are all you need. Some applications are more complicated: the user goes through several dialogs in a row, and the code decides from the data which of them to show. Converting such a chain into ondone procedures works, but the result is hard to read and to maintain. Two alternatives are often better:
+
+#. **Redesign the dialogs as a workflow.** When each dialog asks the user for a decision, or for input, that belongs to a step of the process, make that step a page in a workflow panel. The user then sees where they are in the process, and can go back. See `AIMMS Workflow Panel <https://documentation.aimms.com/webui/workflow-panels.html#workflow-panels>`__.
+
+#. **Replace informational dialogs by notifications.** Many dialogs do not ask for a decision at all. They only inform the user, for example:
+
+   * about exceptional input, such as data errors, or
+   * about exceptional output, such as an unexpected result of an optimization.
+
+   Present these as notifications, as described in the next section, and keep dialogs only for decisions.
+
+.. _w2w-tips-notifications:
 
 Presenting Many Messages as Notifications
 -----------------------------------------
+
+Many dialogs only inform the user, and do not ask for a decision. For those, use notifications instead of dialogs.
 
 WinUI applications often report findings one by one, for example with a message dialog per problem found during a data check. With a few messages, that works. With many messages, the user clicks through a series of dialogs, and the information is gone once the dialog is closed.
 
