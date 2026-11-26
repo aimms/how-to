@@ -2,43 +2,63 @@ Adding a Logo to an AIMMS WebUI App
 ====================================
 
 .. meta::
-   :description: Illustrates adding a custom logo to an AIMMS WebUI application header using CSS theming variables available in AIMMS 4.85 and newer.
-   :keywords: WebUI, logo, CSS, theming, app branding, icon.css, AIMMS 4.85, header, stylesheets
+   :description: Add a logo to the header of an AIMMS WebUI application with a theming stylesheet: place the image, set the CSS variables --bg_app-logo and --spacing_app-logo_width, and size the logo.
+   :keywords: WebUI, logo, CSS, theming, app branding, header, --bg_app-logo, --spacing_app-logo_width, app-resources, stylesheet
 
-This article illustrates adding a logo to an AIMMS WebUI application, using AIMMS 4.85 and newer. 
-Please use the `Employee Scheduling <https://how-to.aimms.com/Articles/387/387-employee-scheduling.html>`_ example to experiment with this feature.
+Introduction
+------------
 
-Example
---------
-
-To add a logo into your application as shown on the following image, you need to follow a few steps.
+The WebUI shows an application logo at the top left of the window, to the left of the application name, when you set it in a theming stylesheet. This article shows how. The feature is available in AIMMS 4.85 and newer.
 
 .. image:: images/logo-app.png
-    :align: center
+   :align: center
+   :alt: The header of a WebUI application with a logo to the left of the application name.
 
-Step 1
-~~~~~~~~~
-Add the logo as a ``png``. Prefer the selection of a already small sized image. 
-The image file ``schedule.png`` is placed in the folder ``./MainProject/WebUI/resources/images``, 
+|
 
-Step 2
-~~~~~~~~~
-Add a ``css`` file named ``icon.css`` in the folder ``./MainProject/WebUI/resources/stylesheets``.  
+The image above comes from the `Employee Scheduling <https://how-to.aimms.com/Articles/387/387-employee-scheduling.html>`_ example. You can use that example to try the steps below.
 
-This file has the following contents:
+Adding the logo
+---------------
 
-.. code-block:: css
-    :linenos:
+#. Put the logo image in the folder ``MainProject\WebUI\resources\images`` of your project, for example ``app-logo.svg``.
 
-    :root {
-        --bg_app-logo: 15px 50% / 30px 30px no-repeat url(/app-resources/resources/images/schedule.png);
-        --spacing_app-logo_width: 45px;
-    }
+#. Create a stylesheet in the folder ``MainProject\WebUI\resources\stylesheets``, for example ``theming.css``, with the following contents:
 
-Step 3
-~~~~~~~~~
+   .. code-block:: css
 
-Evaluate if your logo needs further size analysis. If so, check for further documentation about styling `here <https://documentation.aimms.com/webui/theming.html#a-special-case-the-application-logo>`_. 
+      /* Application logo in the header, left of the application name.
+         --bg_app-logo : <left offset> <vertical position> / <width> <height> no-repeat url(<image>)
+         --spacing_app-logo_width : the space reserved for the logo; without it, no logo is shown.
+         /app-resources/ maps to the MainProject/WebUI folder. */
+      :root {
+        --bg_app-logo: 8px 50% / 32px 32px no-repeat url(/app-resources/resources/images/app-logo.svg);
+        --spacing_app-logo_width: 48px;
+      }
 
-.. note::
-    When you want to achieve similar results using AIMMS 4.84 or older, please check out the now deprecated how-to article: :doc:`../518/518-add-logo-to-webui-app-481`
+#. Reload the WebUI.
+
+Sizing the logo
+---------------
+
+* **Reserve the space.** Without ``--spacing_app-logo_width``, no logo is shown. Make it at least the left offset plus the logo width, here 8 + 32 = 40 pixels. The example reserves 48 pixels, to leave a margin to the application name.
+* **Keep the aspect ratio** of the image. A square logo can be shown at 32 x 32 pixels. A wide logo of 435 x 96 pixels (ratio 4.53 : 1) is shown at 145 x 32 pixels, with ``--spacing_app-logo_width`` of at least 8 + 145 = 153 pixels.
+* **Keep it sharp.** An SVG image stays sharp at any size. For a PNG image, use two or three times the displayed size, so the logo stays sharp on high-resolution screens.
+* **Mind the header.** The height of the header limits the height of the logo.
+* **The path.** ``/app-resources/`` maps to the folder ``MainProject\WebUI``. That is why the path to the image contains ``resources/images``.
+
+For more options, see `A special case: the application logo <https://documentation.aimms.com/webui/theming.html#a-special-case-the-application-logo>`_ in the WebUI documentation.
+
+.. seealso::
+
+   * :doc:`../718/718-winui-to-webui`: when you convert a WinUI application, the logo of the WinUI splash screen moves to the WebUI header.
+   * :doc:`../518/518-add-logo-to-webui-app-481`, for AIMMS 4.84 and older (deprecated).
+
+.. spelling:word-list::
+
+   app
+   png
+   svg
+   css
+   theming
+   stylesheet

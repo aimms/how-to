@@ -18,9 +18,28 @@ Moving an existing application from WinUI to WebUI by hand means rebuilding ever
 
 The converter adds the identifiers the WebUI pages need to a generated module in the main model and in each library. It also writes a conversion log with warnings and the objects it could not convert, so you know what to finish by hand.
 
-This article is the operating guide for the converter. Running the converter is only the first step of a conversion. How to refine the result page by page, by hand and with SENSAI, is described in :doc:`711-winui-to-webui`.
+This article is the operating guide for the converter. Running the converter is only the first step of a conversion. How to refine the result page by page, by hand and with SENSAI, is described in :doc:`../718/718-winui-to-webui`.
 
-.. TODO: Add a short before and after screenshot of one converted page.
+.. grid:: 1 1 2 2
+   :gutter: 2
+
+   .. grid-item::
+
+      **Before:** the WinUI page.
+
+      .. image:: ../718/images/718-example-1-winui.png
+         :alt: A WinUI page of the Data Reconciliation application, with navigation buttons, settings, run buttons and a table.
+
+   .. grid-item::
+
+      **After:** the WebUI page written by the converter, with the same widgets and the same layout.
+
+      .. image:: ../718/images/718-example-2-converter.png
+         :alt: The same page in the WebUI after the conversion, with the same widgets and layout, and the page tree on the left.
+
+|
+
+The pages come from the Data Reconciliation example in :doc:`../718/718-winui-to-webui`.
 
 Instructions
 ------------
@@ -28,9 +47,11 @@ Instructions
 Setup
 ~~~~~
 
-#. Download the zip file from the `releases page <https://github.com/aimms/winui-to-webui/releases>`_ and unpack it.
+#. Download the zip file from the `releases page <https://github.com/aimms/winui-to-webui/releases>`_ and unpack it. It contains ``WinUI_to_WebUI.exe``, and the README and usage notes. Put the executable in a folder on your ``PATH``, or call it with its full path, for example ``C:\Tools\WinUI_to_WebUI.exe``.
 
-   .. TODO: Confirm the exact contents of the release zip and where to place WinUI_to_WebUI.exe.
+   .. note::
+
+      The executable is not signed. The first time you run it, Windows SmartScreen may warn about an unrecognized app. Select :menuselection:`More info > Run anyway` to continue.
 
 #. Make a backup of your project. The tool modifies files inside your project folder: it adds generated identifiers to your model and writes the WebUI output directly into the project. Commit the project to source control, or copy the whole folder, before you run it.
 
@@ -94,7 +115,27 @@ Review the changes in your source control diff, or compare against your backup.
 * ``MainProject\WebUI\webui.json`` holds the converted pages. Each library with pages gets an equivalent file.
 * ``<project>_conversion.md`` is the conversion log. It lists warnings, objects that were not converted, and the choices made per object.
 
-.. TODO: Add an excerpt of a real conversion log and explain how to read it.
+The conversion log is a to-do list for the finishing touch. It has one section per page, in the order of the page tree. Below each page, every object that needs your attention is a checklist item, with what was not converted and where it is. Mark an item done with ✅ when you have handled it, or declined with ✘. The last line counts the objects the converter ignored on purpose, such as lines and rectangles that only decorate WinUI pages.
+
+An excerpt of the log of the Data Reconciliation example:
+
+.. code-block:: md
+
+   ## 15 Page 'Data Reconciliation Application > Reconciliation > Run reconciliation model' with slug run_reconciliation_model
+
+   * [ ] The action GotoPage in action sequence is not yet converted to a corresponding action for WebUI
+         see also https://documentation.aimms.com/user-guide/aimms-ide/Aimms/Page%20Manager/Page%20Objects/Button/Actions/index.html
+         Location: on page 'Run reconciliation model' purpose button_action_sequence of 'MainProject'.
+
+   ...
+
+   During the conversion 0 lines, 171 rectangles, 38 navigation objects, and 0 Data Page buttons were ignored.
+
+To read it:
+
+* The heading gives the page number, its place in the page tree, and its WebUI slug, so you can open the page directly.
+* ``GotoPage`` actions are navigation. They are typically replaced by a workflow panel, for example with the :ref:`SENSAI workflow panel skill <w2w-skill-workflow-panel>`.
+* ``Location`` names the page, the kind of object, and the component (``MainProject`` or a library) it belongs to.
 
 Options
 ~~~~~~~
@@ -194,8 +235,8 @@ A page whose grid matches one of the standard WebUI layouts uses that standard l
 
 Sharing keeps ``webui.json`` smaller, but a layout edit on one page then shows up on every page that shares that layout.
 
-Repointing AllColors element parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Repointing ``AllColors`` element parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 WebUI cannot use the predeclared set ``AllColors`` as it is. Normally, the tool repoints the ``Range`` of an identifier ranged over ``AllColors`` to its own generated set ``giim::s_AllColors`` only when a converted widget uses that identifier for data coloring, so only with ``--colors``.
 
@@ -227,29 +268,35 @@ Errors
    * - ``Project folder '...' does not exist``
      - Internal error: the detected path no longer exists.
 
-.. TODO: Document building the tool from source (see building.md in the repository) if this article should cover it.
+Building from source
+~~~~~~~~~~~~~~~~~~~~
+
+The release contains a ready-made ``WinUI_to_WebUI.exe``. To build it yourself, for example to try a change, you need Windows, PowerShell and `uv <https://docs.astral.sh/uv/>`_. From the root of a clone of the repository, run:
+
+.. code-block:: none
+
+   .\scripts\clean_w2w.ps1
+   .\scripts\build_w2w.ps1
+
+The executable is written to ``dist\WinUI_to_WebUI.exe``. See `building.md <https://github.com/aimms/winui-to-webui/blob/main/building.md>`_ in the repository for the details, and for running the converter from source without building the executable.
 
 Minimal Requirements
 --------------------
 
-* AIMMS 26.8. The tool opens the project with the latest installed AIMMS 26.8.x. You can get a license from the `AIMMS Community <https://www.aimms.com/support/licensing/>`_.
+* Windows. ``WinUI_to_WebUI.exe`` is a Windows executable. It includes everything it needs, so you do not need to install Python.
+* AIMMS Developer 26.8, with a license on the same machine. The converter opens your project with AIMMS. It is tested with AIMMS 26.8.1.2. You can get a license from the `AIMMS licensing page <https://www.aimms.com/support/licensing/>`_.
 * The WebUI library. A project that already references WebUI keeps its own version. A project without WebUI gets the WebUI repository library 26.13.1 added.
-* ``WinUI_to_WebUI.exe``, from the release zip.
-* A WinUI project and a backup of it.
-
-.. TODO: Confirm the supported operating system. The usage notes mention Command Prompt and PowerShell only.
 
 Release Notes
 -------------
 
-* `Version history <https://github.com/aimms/winui-to-webui/releases>`_
-
-  .. TODO: Add the first release version number and date, and a one-line summary.
+`v1.0 <https://github.com/aimms/winui-to-webui/releases/tag/1.0>`_ (26/11/2026)
+   First release. Converts the WinUI pages, widgets and layouts of a project to WebUI, with the options ``--page``, ``--colors``, ``--network``, ``--diagram-spread``, ``--share-layouts`` and ``--newcolorset``.
 
 .. seealso::
 
-   * :doc:`711-winui-to-webui`
-   * :doc:`711-tips-and-tricks-winui-to-webui`
+   * :doc:`../718/718-winui-to-webui`
+   * :doc:`../717/717-ui-tools-library`
 
 .. spelling:word-list::
 
