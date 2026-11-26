@@ -33,7 +33,7 @@ AIMMS Optimization Tooling has evolved over time, to match arising user needs an
    /Articles/593/593-dollar-or-pipe
    /Articles/659/659-empty-webui-after-upgrade
    /Articles/127/127-Progress-Window
-   winui-to-webui/index
+   /Articles/718/718-winui-to-webui
    winui/index
 
 

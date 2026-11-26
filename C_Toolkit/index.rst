@@ -15,3 +15,5 @@ Toolkit
    /Articles/598/598-datalake-tools
    /Articles/663/663-pro-storage-auth
    /Articles/587/587-pro-cloud-analytics
+   /Articles/711/711-operating-winui-to-webui-converter
+   /Articles/717/717-ui-tools-library
