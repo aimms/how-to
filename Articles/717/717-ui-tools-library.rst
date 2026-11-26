@@ -151,9 +151,7 @@ Minimal Requirements
 Release Notes
 -------------
 
-.. TODO: Set the tag link and the date when the first release is published.
-
-`v1.0 <https://github.com/aimms/ui-tools-library/releases/tag/1.0>`_
+`v1.0 <https://github.com/aimms/ui-tools-library/releases/tag/1.0>`_ (26/11/2026)
    First release as a toolkit library: ``uit::pr_DialogProgress``, and the notification manager with ``uit::pr_addNotification`` and ``uit::pr_clearNotifications``.
 
 .. seealso::

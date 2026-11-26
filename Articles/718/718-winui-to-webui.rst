@@ -297,7 +297,7 @@ The Data Reconciliation application shows the process on a single page, **Run re
 
    |
 
-#. **Finishing touch.** A logo in the upper left, as described in :ref:`w2w-tips-logo`. The change adds a small SVG logo, ``resources/images/app-logo.svg``, and a theme file, ``resources/css/logo-theme.css``, that sets ``--bg_app-logo`` (the image, its position and size) and ``--spacing_app-logo_width`` (the space reserved for it). Both live in the ``MainProject/WebUI`` folder, and you select the theme in the WebUI settings.
+#. **Finishing touch.** A logo in the upper left, as described in :ref:`w2w-tips-logo`. The change adds a small SVG logo, ``resources/images/app-logo.svg``, and a theme file, ``resources/stylesheets/logo-theme.css``, that sets ``--bg_app-logo`` (the image, its position and size) and ``--spacing_app-logo_width`` (the space reserved for it). Both live in the ``MainProject/WebUI`` folder, and you select the theme in the WebUI settings.
 
    .. image:: images/718-example-6-finishing-touch.png
       :align: center
@@ -521,7 +521,7 @@ Step 2: Add the logo to the WebUI
 
 The WebUI shows an application logo at the top left of the window, to the left of the application name. You set it with two CSS variables in a theming stylesheet: ``--bg_app-logo`` for the image, its position and size, and ``--spacing_app-logo_width`` for the space reserved for it. See :doc:`../518/518-add-logo-to-webui-app` for the steps and for how to size the logo.
 
-The converted example application uses a square SVG logo, ``resources/images/app-logo.svg``, with the stylesheet ``resources/css/logo-theme.css``, both in the folder ``MainProject/WebUI``.
+The converted example application uses a square SVG logo, ``resources/images/app-logo.svg``, with the stylesheet ``resources/stylesheets/logo-theme.css``, both in the folder ``MainProject/WebUI``.
 
 Summary
 -------

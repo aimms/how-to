@@ -60,3 +60,5 @@ For more options, see `A special case: the application logo <https://documentati
    png
    svg
    css
+   theming
+   stylesheet
